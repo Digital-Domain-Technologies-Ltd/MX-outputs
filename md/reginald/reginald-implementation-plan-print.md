@@ -73,19 +73,19 @@ entry:
   content:
     raw: text                   # Original COG content
     frontmatter: object         # Parsed YAML metadata
-    body_hash: sha256           # Content integrity hash
+    bodyHash: sha256           # Content integrity hash
 
   trust:
-    compliance_level: 1-5       # REGINALD compliance tier
+    complianceLevel: 1-5       # REGINALD compliance tier
     signature: string           # Ed25519 signature
-    signed_at: timestamp
+    signedAt: timestamp
     signedBy: string           # Signing authority
     certificate: object         # Certificate of Genuineness
 
   metadata:
-    created_at: timestamp
-    updated_at: timestamp
-    publisher_id: uuid
+    createdAt: timestamp
+    updatedAt: timestamp
+    publisherId: uuid
     downloads: integer
     verified: boolean
 
@@ -124,7 +124,7 @@ entry:
   },
   "namespaces": ["cog-nova-mx", "acme-corp"],
   "stats": {
-    "total_cogs": 156,
+    "totalCogs": 156,
     "publishers": 23,
     "level_5": 12
   }
@@ -158,22 +158,22 @@ The signing engine validates COGs and applies cryptographic signatures.
 certificate:
   version: "1.0"
   cogId: "cog-nova-mx/pricing-validator@1.2.0"
-  content_hash: "sha256:abc123..."
+  contentHash: "sha256:abc123..."
 
   compliance:
     level: 4
-    checks_passed:
-      - frontmatter_valid
-      - schema_valid
-      - publisher_verified
-      - mx_audit_passed
-    checks_failed: []
+    checksPassed:
+      - frontmatterValid
+      - schemaValid
+      - publisherVerified
+      - mxAuditPassed
+    checksFailed: []
 
   signature:
     algorithm: "Ed25519"
-    public_key: "reginald-signing-key-2026"
+    publicKey: "reginald-signing-key-2026"
     signature: "base64:..."
-    signed_at: "2026-02-26T10:00:00Z"
+    signedAt: "2026-02-26T10:00:00Z"
 
   chain:
     issuer: "MX Reginald Ltd"
@@ -189,7 +189,7 @@ GET /api/v1/verify/{namespace}/{name}@{version}
 # Response
 {
   "verified": true,
-  "compliance_level": 4,
+  "complianceLevel": 4,
   "certificate": {...},
   "warnings": []
 }
@@ -228,7 +228,7 @@ GET /api/v1/verify/{namespace}/{name}@{version}
 
 /api/v1/search:
   GET:     Search COGs by query
-  params:  q, category, tags, compliance_min
+  params:  q, category, tags, complianceMin
 
 /api/v1/verify/{namespace}/{name}@{version}:
   GET:     Verify COG authenticity
@@ -382,23 +382,23 @@ services:
 ```yaml
 roles:
   anonymous:
-    - read_public_cogs
+    - readPublicCogs
     - search
     - verify
 
   publisher:
     - anonymous permissions
-    - submit_cogs
-    - manage_own_cogs
+    - submitCogs
+    - manageOwnCogs
 
   auditor:
     - publisher permissions
-    - certify_cogs (up to level 4)
+    - certifyCogs (up to level 4)
 
   authority:
     - all permissions
-    - sign_level_5
-    - manage_keys
+    - signLevel5
+    - manageKeys
 ```
 
 ### Threat Model
@@ -533,7 +533,7 @@ reginald publish ./my-cog.cog.md \
 # Submit via API
 POST /api/v1/cogs
 Content-Type: application/json
-Authorization: Bearer {api_key}
+Authorization: Bearer {apiKey}
 
 {
   "namespace": "my-company",
@@ -557,15 +557,15 @@ Authorization: Bearer {api_key}
     "level": 4,
     "name": "Certified",
     "checks": {
-      "frontmatter_valid": true,
-      "schema_valid": true,
-      "publisher_verified": true,
-      "mx_audit_passed": true
+      "frontmatterValid": true,
+      "schemaValid": true,
+      "publisherVerified": true,
+      "mxAuditPassed": true
     }
   },
   "certificate": {
     "signature": "base64:...",
-    "signed_at": "2026-02-26T10:00:00Z",
+    "signedAt": "2026-02-26T10:00:00Z",
     "signed_by": "reginald.allabout.network",
     "expires_at": "2027-02-26T10:00:00Z"
   },
