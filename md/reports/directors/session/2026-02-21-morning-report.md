@@ -263,7 +263,7 @@ Existing plan at `.claude/plans/glistening-finding-hickey.md` defined comprehens
 **Action-doc:** `hub-content/MX-Canon/MX-Cog-Registry/cogs/html-baseline-audit.cog.md` (387 lines)
 
 - Programmatic audit workflow
-- mx.runbook for AI agents
+- runbook (under mx:) for AI agents
 - Integration with step-commit
 - Automation specifications
 

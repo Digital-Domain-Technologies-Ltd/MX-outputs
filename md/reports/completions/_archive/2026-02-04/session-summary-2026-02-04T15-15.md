@@ -130,7 +130,7 @@ The session culminated three major feature implementations: (1) MX metadata vali
 
 3. **[packages/business/mx-sales-enablement/outreach/2026-02-04/arrivefirst-report.md](../../packages/business/mx-sales-enablement/outreach/2026-02-04/arrivefirst-report.md)** - Added MX metadata
    - related_files with repo-root-relative paths
-   - mx.purpose, audience, stability, runbook
+   - purpose, audience, stability, runbook
    - contextProvides array (8 items)
    - contextRequired array (3 items)
 
@@ -228,8 +228,8 @@ To https://github.com/Digital-Domain-Technologies-Ltd/MX-hub.git
 
 - Node.js script using js-yaml for YAML parsing
 - Validates YAML frontmatter structure and content
-- Checks required fields: mx.purpose, mx.audience, mx.stability, mx.runbook, mx.ai.contextProvides
-- Checks recommended fields: related_files, mx.ai.contextRequired
+- Checks required fields: purpose, audience, stability, runbook, ai.contextProvides (under mx:)
+- Checks recommended fields: related_files, ai.contextRequired (under mx:)
 - Validates repo-root-relative paths (no ../ navigation)
 - Generates markdown reports with YAML frontmatter
 - Saves timestamped reports to mx-outputs/md/reports/validation/

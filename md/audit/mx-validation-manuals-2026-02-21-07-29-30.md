@@ -279,11 +279,11 @@ All markdown files must include these fields in YAML frontmatter:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mx.purpose` | string | Brief description of file purpose |
-| `mx.audience` | string (human, machine, both) | Target audience |
-| `mx.stability` | string (experimental, unstable, stable, frozen) | Stability level |
-| `mx.runbook` | string | AI context injection instructions |
-| `mx.ai.contextProvides` | array | Context this file provides |
+| `purpose` | string | Brief description of file purpose |
+| `audience` | string (human, machine, both) | Target audience |
+| `stability` | string (experimental, unstable, stable, frozen) | Stability level |
+| `runbook` | string | AI context injection instructions |
+| `ai.contextProvides` | array | Context this file provides |
 
 ## Recommended Fields Reference
 
@@ -319,11 +319,11 @@ Replace relative paths with repo-root-relative paths:
 
 ```yaml
 # ❌ WRONG:
-related_files:
+refersTo:
   - ../../some-file.md
 
 # ✅ CORRECT:
-related_files:
+refersTo:
   - datalake/publications/mx-books/mx-appendices/some-file.md
 ```
 

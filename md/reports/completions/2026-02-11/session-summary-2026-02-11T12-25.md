@@ -25,7 +25,7 @@ Used `/interview-me` to clarify scope before execution:
 - **Policy fields → sop-***: All 13 policy field names renamed
 - **Identity fields → keep**: `ai-author`, `ai-content-disclosure`, `type: ai-agent`, `audience: ai-agents` preserved
 - **Tags/keywords → rename**: All `ai-` prefixed tag values renamed to `sop-`
-- **Migration path change**: `ai-instruction` now migrates to `sop-instruction` (flat field), replacing previously planned `mx.runbook` (nested namespace)
+- **Migration path change**: `ai-instruction` now migrates to `sop-instruction` (flat field), replacing previously planned `runbook` (under mx:)
 
 ### 2. Canonical Spec Update
 
@@ -37,7 +37,7 @@ Used `/interview-me` to clarify scope before execution:
 
 **File:** [base.md](../../.claude/mode-configs/base.md)
 
-- Migration section rewritten: now points to `sop-instruction` instead of `mx.runbook`
+- Migration section rewritten: now points to `sop-instruction` instead of `runbook`
 - 6 `ai-instruction` references updated throughout
 
 ### 4. Ecosystem-Wide Rename

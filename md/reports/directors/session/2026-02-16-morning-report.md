@@ -28,7 +28,7 @@ This insight drove a full integration across both books: 16 files updated with W
 
 ## What Was Built (Earlier This Morning)
 
-- **BDR 002 — deliverable rename** — second Business Decision Record. Companion to BDR 001. Documents the rationale for renaming `mx.createOutputPrompt` to `mx.deliverable`. All future cogs use the business term.
+- **BDR 002 — deliverable rename** — second Business Decision Record. Companion to BDR 001. Documents the rationale for renaming `createOutputPrompt` to `deliverable`. All future cogs use the business term.
 - **mx-agent-independence.cog.md** — foundational architectural principle. MX is agent-agnostic. The file is the interface.
 - **mx-show v3.2** — multi-window tree grouping, Electron apps resolve to real bundle names, ctrl-r refresh.
 
@@ -59,7 +59,7 @@ This insight drove a full integration across both books: 16 files updated with W
 - **Two-tier documentation approach** — public pages market the product; developer docs (post-launch) teach the pattern. View-source is no longer a tutorial.
 - **Product family trimmed for competitive safety** — Maxine, Reginald, MX OS, and The Gathering removed from the public landing page. Saved for Frankfurt reveal (12 May).
 - **Console self-report removed** — the pattern where cog pages announce themselves in browser DevTools was stripped from the public page. Will return in developer docs.
-- **mx.deliverable replaces mx.createOutputPrompt** (earlier) — permanent, ecosystem-wide. BDR 002 filed.
+- **deliverable replaces createOutputPrompt** (earlier) — permanent, ecosystem-wide. BDR 002 filed.
 - **Agent independence as architectural principle** (earlier) — MX does not integrate with agents. Agents integrate with files.
 - **"Machine" not "AI" in system prose** (earlier) — where MX documentation describes automated behaviour, it says "machine" not "AI."
 
@@ -89,7 +89,7 @@ Field names are user interface (from earlier). Your own landing page is user int
 2. **London CMS Experts — 26 Feb** — Boye & Company. First public audience. Lightning talk materials needed.
 3. **Chapter 00 rewrite with case studies** — week's priority for PayPal and Chris Bryce marketing
 4. **Deploy demo cogs to allabout.network** — restaurant, conference, product cogs need deploying for live QR scanning
-5. **Update cog spec for mx.deliverable** — cog-unified-spec.md still references `createOutputPrompt`
+5. **Update cog spec for deliverable** — cog-unified-spec.md still references `createOutputPrompt`
 6. **Send rewritten Dotfusion report to Chris Bryce** — partnership tone rewrite complete, awaiting send
 
 ---

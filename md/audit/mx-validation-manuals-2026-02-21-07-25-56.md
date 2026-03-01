@@ -96,379 +96,379 @@ mx:
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-build-tools.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-cog-id.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-cogify.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-deployment-helper.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-enhanced-audit.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-git-hooks.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-maxine-lives.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-metadata.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-multilingual-sitemap.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-multilingual-template.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-multilingual-validator.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-mx-nav-server.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-mx-pdf.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-parity-checker.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-parse-mxignore.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-path-validator.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-prompt-enhancer.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-repo-modes.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-spell-checker.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-submodule-health.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manual-team-onboarding.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/manuals-registry.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/mx-contacts-manual.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/mx-os-manual.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/mx-reginald-manual.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ### hub-content/MX-Canon/MX-Maxine-Lives/manuals/mx-show-manual.cog.md
 
 5 error(s):
 
-1. **[mx.purpose]** Missing required field: mx.purpose (Brief description of file purpose)
+1. **[purpose]** Missing required field: purpose (Brief description of file purpose)
 
-2. **[mx.audience]** Missing required field: mx.audience (Target audience)
+2. **[audience]** Missing required field: audience (Target audience)
 
-3. **[mx.stability]** Missing required field: mx.stability (Stability level)
+3. **[stability]** Missing required field: stability (Stability level)
 
-4. **[mx.runbook]** Missing required field: mx.runbook (AI context injection instructions)
+4. **[runbook]** Missing required field: runbook (AI context injection instructions)
 
-5. **[mx.ai.contextProvides]** Missing required field: mx.ai.contextProvides (Context this file provides)
+5. **[ai.contextProvides]** Missing required field: ai.contextProvides (Context this file provides)
 
 ## Warnings by File
 
@@ -707,11 +707,11 @@ All markdown files must include these fields in YAML frontmatter:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mx.purpose` | string | Brief description of file purpose |
-| `mx.audience` | string (human, machine, both) | Target audience |
-| `mx.stability` | string (experimental, unstable, stable, frozen) | Stability level |
-| `mx.runbook` | string | AI context injection instructions |
-| `mx.ai.contextProvides` | array | Context this file provides |
+| `purpose` | string | Brief description of file purpose |
+| `audience` | string (human, machine, both) | Target audience |
+| `stability` | string (experimental, unstable, stable, frozen) | Stability level |
+| `runbook` | string | AI context injection instructions |
+| `ai.contextProvides` | array | Context this file provides |
 
 ## Recommended Fields Reference
 
@@ -747,11 +747,11 @@ Replace relative paths with repo-root-relative paths:
 
 ```yaml
 # ❌ WRONG:
-related_files:
+refersTo:
   - ../../some-file.md
 
 # ✅ CORRECT:
-related_files:
+refersTo:
   - datalake/publications/mx-books/mx-appendices/some-file.md
 ```
 

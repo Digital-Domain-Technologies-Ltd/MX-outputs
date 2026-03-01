@@ -16,7 +16,7 @@ Building on this morning's work on system self-documentation and the naming prob
 
 Six documents landed in the ingest folder — Tom's human thinking folder, where raw ideas go before they become cogs. A sponsor-ready Maxine roadmap. An action plan through Frankfurt. A London lightning talk brief. A business leader comms plan. Brand guidelines. A domain portfolio. This is the founder doing what founders do before a launch window: getting every idea out of his head and onto the page.
 
-The other half was a language decision that touched every file in the ecosystem. BDR 001: rename `mx.promptingInstruction` to `mx.runbook`. The field appears in every cog — it is one of the most visible pieces of MX metadata. "PromptingInstruction" sounds like AI plumbing. Business audiences read it and disengage. "Runbook" is an operations term that IT teams, DevOps engineers, and business people already know. The rename ran across 185 files in the main repo and 19 files across three submodules. Thirteen files had their values rewritten too — generic AI jargon like "Context for AI agents parsing this content" became "Read and follow when processing this content." The decision is recorded as the first Business Decision Record.
+The other half was a language decision that touched every file in the ecosystem. BDR 001: rename `promptingInstruction` to `runbook`. The field appears in every cog — it is one of the most visible pieces of MX metadata. "PromptingInstruction" sounds like AI plumbing. Business audiences read it and disengage. "Runbook" is an operations term that IT teams, DevOps engineers, and business people already know. The rename ran across 185 files in the main repo and 19 files across three submodules. Thirteen files had their values rewritten too — generic AI jargon like "Context for AI agents parsing this content" became "Read and follow when processing this content." The decision is recorded as the first Business Decision Record.
 
 Ten commits. Over 200 files changed. The system speaks business now.
 
@@ -64,7 +64,7 @@ These are Tom's thinking. The ingest folder is where ideas live before they are 
 
 ## Decisions Made
 
-- **mx.runbook replaces mx.promptingInstruction** — permanent, ecosystem-wide. BDR 001 filed. All future cogs use `mx.runbook`. The cog spec needs a prose update to reflect the new field name.
+- **runbook replaces promptingInstruction** — permanent, ecosystem-wide. BDR 001 filed. All future cogs use `runbook` (under `mx:`). The cog spec needs a prose update to reflect the new field name.
 - **Convention deduplication** — SOUL.md trimmed from 167 lines of repository structure to a 4-line reference to UBERCOG.cog.md and the Convention Register. Structure lives in its canonical home now.
 - **mx: replaces cog: in HTML** — `<meta name="cog:name">` → `<meta name="mx:name">`. `<link rel="cog">` → `<link rel="mx">`. Backend accepts both during transition.
 - **@mx: replaces @mx-ai-* in JS/CSS** — `@mx-ai-contextProvides` → `@mx:context-provides`. Legacy patterns deprecated in FDR.
@@ -103,7 +103,7 @@ These are Tom's thinking. The ingest folder is where ideas live before they are 
 | `16c4841` | refactor: deduplicate convention/structure content across repo |
 | `4262597` | docs: changelog for convention deduplication |
 | `b1dff92` | feat: add changelog-trimmer cog with archive and step-commit integration |
-| `d2f890d` | refactor: rename mx.promptingInstruction to mx.runbook (BDR 001) |
+| `d2f890d` | refactor: rename promptingInstruction to runbook (BDR 001) |
 | `457844c` | refactor: standardize script metadata headers and rewrite mx-show |
 | `8a3ce2e` | feat: add manual cog files to Maxine brain |
 | `2056c60` | docs: add ingest documents for roadmap, action plan, and marketing |
