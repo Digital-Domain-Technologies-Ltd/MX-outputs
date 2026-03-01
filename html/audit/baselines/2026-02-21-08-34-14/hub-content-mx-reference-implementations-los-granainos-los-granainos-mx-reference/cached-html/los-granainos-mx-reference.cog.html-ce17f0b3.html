@@ -1,0 +1,1617 @@
+<!DOCTYPE html><html lang="es" data-lang="es"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Basic Meta -->
+  <title>Los Granainos - Traditional Spanish Restaurant | MX Reference</title>
+  <meta name="description" content="Traditional Spanish restaurant serving authentic Granada cuisine in Cala de Mijas. Bilingual MX-enhanced reference implementation.">
+  <meta name="keywords" content="Spanish restaurant, Granada, tapas, MX, machine-readable, WebMCP, Andalusia, Costa del Sol, Málaga, Mediterranean cuisine">
+
+  <!-- Language Declarations -->
+  <meta http-equiv="content-language" content="es, en">
+  <link rel="alternate" hreflang="es" href="#lang=es">
+  <link rel="alternate" hreflang="en" href="#lang=en">
+  <link rel="alternate" hreflang="x-default" href="#lang=en">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Los Granainos - Traditional Spanish Restaurant">
+  <meta property="og:description" content="Authentic Granada cuisine by the sea in Cala de Mijas">
+  <meta property="og:type" content="restaurant">
+  <meta property="og:url" content="https://los-granainos.pages.dev/">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- WebMCP Declaration -->
+  <meta name="mcp:version" content="1.0">
+  <meta name="mcp:tools" content="menu-query, reservation-info, location-info, toggle-language">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Los Granainos",
+    "description": "Traditional family restaurant serving authentic Mediterranean cuisine since 1987",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Cala de Mijas",
+      "addressLocality": "Mijas",
+      "addressRegion": "Málaga",
+      "addressCountry": "ES"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "36.5167",
+      "longitude": "-4.6333"
+    },
+    "servesCuisine": ["Spanish", "Mediterranean", "Andalusian", "Tapas"],
+    "priceRange": "€€",
+    "inLanguage": ["es", "en"],
+    "openingHours": "Mo-Su 12:00-16:00,19:00-23:30",
+    "foundingDate": "1987"
+  }
+  </script>
+
+  <style>
+    /* CSS Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Root Variables */
+    :root {
+      --primary-blue: #1e5f8f;
+      --secondary-gold: #d4af37;
+      --text-dark: #2c3e50;
+      --text-light: #ffffff;
+      --bg-light: #f8f9fa;
+      --bg-white: #ffffff;
+      --border-color: #dee2e6;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* Typography */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+
+    /* Header */
+    header {
+      background-color: var(--primary-blue);
+      color: var(--text-light);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .language-toggle {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--text-light);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-light);
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .language-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .language-toggle:focus {
+      outline: 2px solid var(--secondary-gold);
+      outline-offset: 2px;
+    }
+
+    [data-lang="es"] .lang-es,
+    [data-lang="en"] .lang-en {
+      display: none;
+    }
+
+    /* Main Layout */
+    .bilingual-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      transition: var(--transition);
+    }
+
+    /* Desktop: Side-by-side */
+    @media (min-width: 768px) {
+      .bilingual-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        padding: 2rem 1rem;
+      }
+
+      .bilingual-container[data-lang="es"] .content-en {
+        opacity: 0.3;
+      }
+
+      .bilingual-container[data-lang="en"] .content-es {
+        opacity: 0.3;
+      }
+    }
+
+    /* Mobile: Stacked with toggle */
+    @media (max-width: 767px) {
+      .bilingual-container {
+        display: block;
+        padding: 1rem;
+      }
+
+      .bilingual-container[data-lang="es"] .content-en {
+        display: none;
+      }
+
+      .bilingual-container[data-lang="en"] .content-es {
+        display: none;
+      }
+    }
+
+    .content-es,
+    .content-en {
+      transition: opacity 0.3s ease;
+    }
+
+    /* Sections */
+    section {
+      background: var(--bg-white);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, #2c7fb8 100%);
+      color: var(--text-light);
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .hero h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--secondary-gold);
+      color: var(--text-dark);
+    }
+
+    .btn-primary:hover {
+      background: #c49c2e;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    /* Menu Sections */
+    .menu-section {
+      margin-bottom: 2rem;
+    }
+
+    .menu-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .menu-icon {
+      font-size: 2rem;
+    }
+
+    .menu-items {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .menu-item {
+      padding: 1rem;
+      border-left: 3px solid var(--primary-blue);
+      background: var(--bg-light);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .menu-item.specialty {
+      border-left-color: var(--secondary-gold);
+      background: #fffbf0;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-item-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+    }
+
+    .menu-item-price {
+      font-weight: 700;
+      color: var(--primary-blue);
+      font-size: 1.1rem;
+    }
+
+    .menu-item-description {
+      font-size: 0.95rem;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+
+    .specialty-badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      background: var(--secondary-gold);
+      color: var(--text-dark);
+      border-radius: 3px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    /* Contact Section */
+    .contact-info {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--primary-blue);
+    }
+
+    .contact-details {
+      flex: 1;
+    }
+
+    .contact-label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--text-dark);
+      color: var(--text-light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-note {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary-blue);
+      color: var(--text-light);
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Utilities */
+    .text-center { text-align: center; }
+    .mb-1 { margin-bottom: 1rem; }
+    .mb-2 { margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Skip Navigation Link (Accessibility) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header role="banner">
+    <div class="header-container">
+      <div class="logo">Los Granainos</div>
+      <button class="language-toggle" aria-label="Toggle language / Cambiar idioma">
+        <span class="lang-es">English</span>
+        <span class="lang-en">Español</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    <div class="bilingual-container" data-lang="es">
+
+      <!-- SPANISH CONTENT -->
+      <div class="content-es" lang="es">
+
+        <!-- Hero Section -->
+        <section class="hero">
+          <h1>Los Granainos</h1>
+          <p class="hero-tagline">Sabores auténticos junto al mar en la Cala de Mijas</p>
+          <div class="cta-buttons">
+            <a href="#menu-es" class="btn btn-primary">Ver Menú Completo</a>
+            <a href="#contacto-es" class="btn btn-secondary">Reservar Mesa</a>
+          </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="nosotros-es">
+          <h2>Una tradición familiar</h2>
+          <p>Desde 1987, Los Granainos ha sido el hogar de la auténtica cocina mediterránea. Nuestro compromiso con la calidad y la tradición nos ha convertido en un punto de referencia gastronómico en la Costa del Sol.</p>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-number">37+</div>
+              <div class="stat-label">Años de experiencia</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Producto local</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">Miles</div>
+              <div class="stat-label">Clientes satisfechos</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Menu Introduction -->
+        <section id="menu-es">
+          <h2>🐟 Nuestra Carta</h2>
+          <p class="mb-2"><strong>Sabores auténticos de la Costa del Sol</strong></p>
+
+          <h3>La Tradición del Pescaíto Frito</h3>
+          <p>En Los Granainos, el pescaíto frito es más que un plato: es una tradición que hemos perfeccionado durante más de tres décadas. Cada día, seleccionamos el pescado más fresco del Mediterráneo y lo preparamos al momento, utilizando aceite de oliva virgen extra a 180°C para conseguir esa textura crujiente por fuera y jugosa por dentro que nos caracteriza.</p>
+        </section>
+
+        <!-- Bebidas (Beverages) -->
+        <section class="menu-section" id="bebidas-es">
+          <div class="menu-header">
+            <span class="menu-icon">🍷</span>
+            <h2>Bebidas</h2>
+          </div>
+          <p class="mb-2">Vinos, cervezas y refrescos para acompañar tu comida</p>
+
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Vino Blanco de la Casa</span>
+                <span class="menu-item-price">€3.50</span>
+              </div>
+              <p class="menu-item-description">Vino blanco afrutado de Málaga, ideal con pescado</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Vino Tinto Rioja Crianza<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Envejecido 12 meses en barrica americana</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Vino Dulce de Málaga<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€4.00</span>
+              </div>
+              <p class="menu-item-description">Vino dulce tradicional malagueño, ideal con postres</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Cerveza Cruzcampo de Barril</span>
+                <span class="menu-item-price">€2.50</span>
+              </div>
+              <p class="menu-item-description">Cerveza malagueña bien fría, caña o jarra</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Tinto de Verano</span>
+                <span class="menu-item-price">€3.00</span>
+              </div>
+              <p class="menu-item-description">Refresco de vino tinto con limón, ideal para el calor</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Agua Mineral</span>
+                <span class="menu-item-price">€2.00</span>
+              </div>
+              <p class="menu-item-description">Agua mineral natural, con gas o sin gas</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Refrescos Variados</span>
+                <span class="menu-item-price">€2.50</span>
+              </div>
+              <p class="menu-item-description">Cola, Fanta, Sprite, Aquarius</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Café Expreso</span>
+                <span class="menu-item-price">€1.80</span>
+              </div>
+              <p class="menu-item-description">Café expreso italiano, solo o cortado</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Entrantes (Appetizers) -->
+        <section class="menu-section" id="entrantes-es">
+          <div class="menu-header">
+            <span class="menu-icon">🥗</span>
+            <h2>Entrantes</h2>
+          </div>
+          <p class="mb-2">Para empezar el festín con sabores auténticos</p>
+
+          <div class="menu-items">
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Gazpacho Andaluz<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€6.50</span>
+              </div>
+              <p class="menu-item-description">Sopa fría de tomate, pepino y pimiento. Refrescante y tradicional</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Ensalada Malagueña</span>
+                <span class="menu-item-price">€8.50</span>
+              </div>
+              <p class="menu-item-description">Tomate, pepino, cebolla, aceitunas, bacalao y naranja</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Aceitunas Aliñadas</span>
+                <span class="menu-item-price">€4.00</span>
+              </div>
+              <p class="menu-item-description">Aceitunas de la tierra con ajo, tomillo y orégano</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Jamón Ibérico de Bellota<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Lonchas de jamón ibérico de bellota 100% pata negra</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Pimientos de Padrón</span>
+                <span class="menu-item-price">€7.00</span>
+              </div>
+              <p class="menu-item-description">Pimientos de Padrón fritos con sal gorda</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Croquetas de la Abuela</span>
+                <span class="menu-item-price">€9.00</span>
+              </div>
+              <p class="menu-item-description">Croquetas caseras de jamón, bacalao o espinacas (6 unidades)</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Boquerones en Vinagre</span>
+                <span class="menu-item-price">€7.50</span>
+              </div>
+              <p class="menu-item-description">Boquerones frescos marinados en vinagre con ajo y perejil</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Pan con Tomate y Aceite</span>
+                <span class="menu-item-price">€3.50</span>
+              </div>
+              <p class="menu-item-description">Pan rústico con tomate rallado y aceite de oliva virgen extra</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Tabla de Quesos Andaluces</span>
+                <span class="menu-item-price">€12.00</span>
+              </div>
+              <p class="menu-item-description">Selección de quesos artesanales de Málaga y Cádiz</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Pulpo a la Gallega</span>
+                <span class="menu-item-price">€16.00</span>
+              </div>
+              <p class="menu-item-description">Pulpo cocido con cachelos, pimentón dulce y aceite de oliva</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pescaitos (Fried Fish) -->
+        <section class="menu-section" id="pescaitos-es">
+          <div class="menu-header">
+            <span class="menu-icon">🐟</span>
+            <h2>Pescaitos</h2>
+          </div>
+          <p class="mb-2">Nuestra especialidad: pescado fresco frito al momento</p>
+
+          <div class="menu-items">
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Fritura Malagueña<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Surtido de pescaíto frito: boquerones, jureles, calamares y gambas</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Boquerones Fritos</span>
+                <span class="menu-item-price">€12.00</span>
+              </div>
+              <p class="menu-item-description">Boquerones frescos rebozados y fritos, crujientes y jugosos</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Calamares a la Romana</span>
+                <span class="menu-item-price">€14.00</span>
+              </div>
+              <p class="menu-item-description">Anillas de calamar rebozadas en su punto perfecto</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Espeto de Sardinas<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€10.00</span>
+              </div>
+              <p class="menu-item-description">Sardinas asadas a la leña en espeto, tradición malagueña</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Jureles Fritos</span>
+                <span class="menu-item-price">€13.00</span>
+              </div>
+              <p class="menu-item-description">Jureles del Mediterráneo fritos en aceite de oliva virgen extra</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Gambas Blancas de la Costa<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€22.00</span>
+              </div>
+              <p class="menu-item-description">Gambas blancas de Málaga, a la plancha o cocidas</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Chopitos Fritos</span>
+                <span class="menu-item-price">€15.00</span>
+              </div>
+              <p class="menu-item-description">Chipirones baby rebozados y fritos, tiernos y sabrosos</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Pescado del Día a la Plancha</span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Pregunta por nuestra captura del día (precio según mercado)</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Puntillitas Fritas</span>
+                <span class="menu-item-price">€14.00</span>
+              </div>
+              <p class="menu-item-description">Puntillitas baby fritas al estilo malagueño</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Acedías Fritas</span>
+                <span class="menu-item-price">€16.00</span>
+              </div>
+              <p class="menu-item-description">Pequeños lenguados fritos enteros, delicados y sabrosos</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Carne (Meat) -->
+        <section class="menu-section" id="carne-es">
+          <div class="menu-header">
+            <span class="menu-icon">🥩</span>
+            <h2>Carne</h2>
+          </div>
+          <p class="mb-2">Carnes selectas de la tierra malagueña</p>
+
+          <div class="menu-items">
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Solomillo de Ternera<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€22.00</span>
+              </div>
+              <p class="menu-item-description">Solomillo de ternera a la plancha con guarnición de patatas</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Entrecot de Buey</span>
+                <span class="menu-item-price">€26.00</span>
+              </div>
+              <p class="menu-item-description">Entrecot de buey madurado 500g, jugoso y tierno</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Secreto Ibérico<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€16.00</span>
+              </div>
+              <p class="menu-item-description">Secreto de cerdo ibérico a la plancha con pimientos</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Pluma Ibérica</span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Pluma de cerdo ibérico con salsa de vino Pedro Ximénez</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Pollo al Ajillo</span>
+                <span class="menu-item-price">€14.00</span>
+              </div>
+              <p class="menu-item-description">Pollo de corral salteado con ajo, vino blanco y perejil</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Rabo de Toro<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€19.00</span>
+              </div>
+              <p class="menu-item-description">Rabo de toro estofado al estilo tradicional andaluz</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Carrillada de Cerdo</span>
+                <span class="menu-item-price">€17.00</span>
+              </div>
+              <p class="menu-item-description">Carrilleras de cerdo guisadas en salsa de vino tinto</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Costillas de Cordero</span>
+                <span class="menu-item-price">€20.00</span>
+              </div>
+              <p class="menu-item-description">Costillas de cordero lechal asadas al horno</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Postres (Desserts) -->
+        <section class="menu-section" id="postres-es">
+          <div class="menu-header">
+            <span class="menu-icon">🍮</span>
+            <h2>Postres</h2>
+          </div>
+          <p class="mb-2">El dulce final perfecto para tu comida</p>
+
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Tarta de Queso Casera</span>
+                <span class="menu-item-price">€6.00</span>
+              </div>
+              <p class="menu-item-description">Tarta de queso cremosa al estilo tradicional</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Coulant de Chocolate<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€7.00</span>
+              </div>
+              <p class="menu-item-description">Bizcocho de chocolate con centro fundido, helado de vainilla</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Flan de Huevo de la Abuela</span>
+                <span class="menu-item-price">€5.50</span>
+              </div>
+              <p class="menu-item-description">Flan casero con caramelo líquido, receta familiar</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Helados Artesanales</span>
+                <span class="menu-item-price">€5.00</span>
+              </div>
+              <p class="menu-item-description">Selección de helados artesanales (vainilla, chocolate, fresa, limón)</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Torrijas Caseras</span>
+                <span class="menu-item-price">€6.50</span>
+              </div>
+              <p class="menu-item-description">Torrijas tradicionales con miel y canela (temporada)</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Tarta de Santiago</span>
+                <span class="menu-item-price">€6.50</span>
+              </div>
+              <p class="menu-item-description">Tarta gallega tradicional de almendra con azúcar glas</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Crema Catalana</span>
+                <span class="menu-item-price">€6.00</span>
+              </div>
+              <p class="menu-item-description">Crema catalana con cobertura de azúcar caramelizado</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Brownie con Helado<span class="specialty-badge">Especialidad</span></span>
+                <span class="menu-item-price">€7.50</span>
+              </div>
+              <p class="menu-item-description">Brownie de chocolate caliente con helado de vainilla</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Macedonia de Frutas</span>
+                <span class="menu-item-price">€5.50</span>
+              </div>
+              <p class="menu-item-description">Frutas frescas de temporada con helado</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Café y Postre</span>
+                <span class="menu-item-price">€4.00</span>
+              </div>
+              <p class="menu-item-description">Café expreso con pastelito de la casa</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contacto-es">
+          <h2>Visítanos</h2>
+
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <div class="contact-details">
+                <div class="contact-label">Dirección</div>
+                <div>Cala de Mijas, Costa del Sol, Málaga, España</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">🕐</span>
+              <div class="contact-details">
+                <div class="contact-label">Horario</div>
+                <div>12:00-16:00 y 19:00-23:30 (Todos los días)</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div class="contact-details">
+                <div class="contact-label">Teléfono</div>
+                <div>+34 952 XXX XXX</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">✉️</span>
+              <div class="contact-details">
+                <div class="contact-label">Email</div>
+                <div>info@losgranainos.es</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="mb-2" style="margin-top: 1.5rem;"><em>Los precios incluyen IVA • Información sobre alérgenos disponible bajo petición</em></p>
+        </section>
+
+      </div>
+
+      <!-- ENGLISH CONTENT -->
+      <div class="content-en" lang="en">
+
+        <!-- Hero Section -->
+        <section class="hero">
+          <h1>Los Granainos</h1>
+          <p class="hero-tagline">Authentic flavors by the sea in Cala de Mijas</p>
+          <div class="cta-buttons">
+            <a href="#menu-en" class="btn btn-primary">View Full Menu</a>
+            <a href="#contact-en" class="btn btn-secondary">Reserve Table</a>
+          </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about-en">
+          <h2>A family tradition</h2>
+          <p>Since 1987, Los Granainos has been home to authentic Mediterranean cuisine. Our commitment to quality and tradition has made us a gastronomic landmark on the Costa del Sol.</p>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-number">37+</div>
+              <div class="stat-label">Years of experience</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Local products</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">Thousands</div>
+              <div class="stat-label">Satisfied customers</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Menu Introduction -->
+        <section id="menu-en">
+          <h2>🐟 Our Menu</h2>
+          <p class="mb-2"><strong>Authentic flavors of the Costa del Sol</strong></p>
+
+          <h3>The Fried Fish Tradition</h3>
+          <p>At Los Granainos, fried fish is more than a dish: it's a tradition we've perfected for over three decades. Every day, we select the freshest fish from the Mediterranean and prepare it fresh to order, using extra virgin olive oil at 180°C to achieve that crispy outside and juicy inside texture that defines us.</p>
+        </section>
+
+        <!-- Beverages -->
+        <section class="menu-section" id="beverages-en">
+          <div class="menu-header">
+            <span class="menu-icon">🍷</span>
+            <h2>Beverages</h2>
+          </div>
+          <p class="mb-2">Wines, beers, and refreshments to accompany your meal</p>
+
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">House White Wine</span>
+                <span class="menu-item-price">€3.50</span>
+              </div>
+              <p class="menu-item-description">Fruity white wine from Málaga, pairs well with fish</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Rioja Crianza Red Wine<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Aged 12 months in American oak barrels</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Sweet Málaga Wine<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€4.00</span>
+              </div>
+              <p class="menu-item-description">Traditional sweet Málaga wine, pairs with desserts</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Cruzcampo Draft Beer</span>
+                <span class="menu-item-price">€2.50</span>
+              </div>
+              <p class="menu-item-description">Cold Málaga beer, glass or pitcher</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Tinto de Verano</span>
+                <span class="menu-item-price">€3.00</span>
+              </div>
+              <p class="menu-item-description">Red wine spritzer with lemon, perfect for warm weather</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Mineral Water</span>
+                <span class="menu-item-price">€2.00</span>
+              </div>
+              <p class="menu-item-description">Natural mineral water, sparkling or still</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Assorted Soft Drinks</span>
+                <span class="menu-item-price">€2.50</span>
+              </div>
+              <p class="menu-item-description">Cola, Fanta, Sprite, Aquarius</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Espresso Coffee</span>
+                <span class="menu-item-price">€1.80</span>
+              </div>
+              <p class="menu-item-description">Italian espresso, black or cortado</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Appetizers -->
+        <section class="menu-section" id="appetizers-en">
+          <div class="menu-header">
+            <span class="menu-icon">🥗</span>
+            <h2>Appetizers</h2>
+          </div>
+          <p class="mb-2">To begin the feast with authentic flavors</p>
+
+          <div class="menu-items">
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Andalusian Gazpacho<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€6.50</span>
+              </div>
+              <p class="menu-item-description">Cold tomato, cucumber, and pepper soup. Refreshing and traditional</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Málaga Salad</span>
+                <span class="menu-item-price">€8.50</span>
+              </div>
+              <p class="menu-item-description">Tomato, cucumber, onion, olives, cod, and orange</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Seasoned Olives</span>
+                <span class="menu-item-price">€4.00</span>
+              </div>
+              <p class="menu-item-description">Local olives with garlic, thyme, and oregano</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Acorn-Fed Iberian Ham<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Slices of 100% pata negra acorn-fed Iberian ham</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Padrón Peppers</span>
+                <span class="menu-item-price">€7.00</span>
+              </div>
+              <p class="menu-item-description">Fried Padrón peppers with coarse salt</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Grandma's Croquettes</span>
+                <span class="menu-item-price">€9.00</span>
+              </div>
+              <p class="menu-item-description">Homemade ham, cod, or spinach croquettes (6 units)</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Marinated Anchovies</span>
+                <span class="menu-item-price">€7.50</span>
+              </div>
+              <p class="menu-item-description">Fresh anchovies marinated in vinegar with garlic and parsley</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Bread with Tomato and Oil</span>
+                <span class="menu-item-price">€3.50</span>
+              </div>
+              <p class="menu-item-description">Rustic bread with grated tomato and extra virgin olive oil</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Andalusian Cheese Board</span>
+                <span class="menu-item-price">€12.00</span>
+              </div>
+              <p class="menu-item-description">Selection of artisan cheeses from Málaga and Cádiz</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Galician-Style Octopus</span>
+                <span class="menu-item-price">€16.00</span>
+              </div>
+              <p class="menu-item-description">Cooked octopus with potatoes, sweet paprika, and olive oil</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Fried Fish -->
+        <section class="menu-section" id="fish-en">
+          <div class="menu-header">
+            <span class="menu-icon">🐟</span>
+            <h2>Fried Fish</h2>
+          </div>
+          <p class="mb-2">Our specialty: fresh fish fried to order</p>
+
+          <div class="menu-items">
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Fritura Malagueña<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Assorted fried fish: anchovies, horse mackerel, squid, and prawns</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Fried Anchovies</span>
+                <span class="menu-item-price">€12.00</span>
+              </div>
+              <p class="menu-item-description">Fresh anchovies battered and fried, crispy and juicy</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Calamares a la Romana</span>
+                <span class="menu-item-price">€14.00</span>
+              </div>
+              <p class="menu-item-description">Squid rings battered to perfection</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Espeto de Sardinas<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€10.00</span>
+              </div>
+              <p class="menu-item-description">Sardines grilled on a skewer over wood fire, Málaga tradition</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Fried Horse Mackerel</span>
+                <span class="menu-item-price">€13.00</span>
+              </div>
+              <p class="menu-item-description">Mediterranean horse mackerel fried in extra virgin olive oil</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">White Coastal Prawns<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€22.00</span>
+              </div>
+              <p class="menu-item-description">White prawns from Málaga, grilled or boiled</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Fried Baby Squid</span>
+                <span class="menu-item-price">€15.00</span>
+              </div>
+              <p class="menu-item-description">Baby squid battered and fried, tender and flavorful</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Grilled Catch of the Day</span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Ask about our daily catch (market price)</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Fried Baby Squid</span>
+                <span class="menu-item-price">€14.00</span>
+              </div>
+              <p class="menu-item-description">Baby squid fried Málaga-style</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Fried Small Sole</span>
+                <span class="menu-item-price">€16.00</span>
+              </div>
+              <p class="menu-item-description">Small whole fried sole, delicate and tasty</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Meat -->
+        <section class="menu-section" id="meat-en">
+          <div class="menu-header">
+            <span class="menu-icon">🥩</span>
+            <h2>Meat</h2>
+          </div>
+          <p class="mb-2">Select meats from the Málaga region</p>
+
+          <div class="menu-items">
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Beef Tenderloin<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€22.00</span>
+              </div>
+              <p class="menu-item-description">Grilled beef tenderloin with potato garnish</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Ribeye Steak</span>
+                <span class="menu-item-price">€26.00</span>
+              </div>
+              <p class="menu-item-description">Aged 500g ribeye steak, juicy and tender</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Secreto Ibérico<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€16.00</span>
+              </div>
+              <p class="menu-item-description">Grilled Iberian pork secreto with peppers</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Pluma Ibérica</span>
+                <span class="menu-item-price">€18.00</span>
+              </div>
+              <p class="menu-item-description">Iberian pork pluma with Pedro Ximénez wine sauce</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Garlic Chicken</span>
+                <span class="menu-item-price">€14.00</span>
+              </div>
+              <p class="menu-item-description">Free-range chicken sautéed with garlic, white wine, and parsley</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Oxtail Stew<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€19.00</span>
+              </div>
+              <p class="menu-item-description">Oxtail braised in traditional Andalusian style</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Pork Cheeks</span>
+                <span class="menu-item-price">€17.00</span>
+              </div>
+              <p class="menu-item-description">Pork cheeks braised in red wine sauce</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Lamb Ribs</span>
+                <span class="menu-item-price">€20.00</span>
+              </div>
+              <p class="menu-item-description">Milk-fed lamb ribs roasted in the oven</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Desserts -->
+        <section class="menu-section" id="desserts-en">
+          <div class="menu-header">
+            <span class="menu-icon">🍮</span>
+            <h2>Desserts</h2>
+          </div>
+          <p class="mb-2">The perfect sweet ending to your meal</p>
+
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Homemade Cheesecake</span>
+                <span class="menu-item-price">€6.00</span>
+              </div>
+              <p class="menu-item-description">Creamy cheesecake in traditional style</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Chocolate Coulant<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€7.00</span>
+              </div>
+              <p class="menu-item-description">Chocolate cake with melted center, vanilla ice cream</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Grandma's Egg Flan</span>
+                <span class="menu-item-price">€5.50</span>
+              </div>
+              <p class="menu-item-description">Homemade custard with liquid caramel, family recipe</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Artisan Ice Creams</span>
+                <span class="menu-item-price">€5.00</span>
+              </div>
+              <p class="menu-item-description">Selection of artisan ice creams (vanilla, chocolate, strawberry, lemon)</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Homemade Torrijas</span>
+                <span class="menu-item-price">€6.50</span>
+              </div>
+              <p class="menu-item-description">Traditional French toast with honey and cinnamon (seasonal)</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Tarta de Santiago</span>
+                <span class="menu-item-price">€6.50</span>
+              </div>
+              <p class="menu-item-description">Traditional Galician almond cake with powdered sugar</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Crema Catalana</span>
+                <span class="menu-item-price">€6.00</span>
+              </div>
+              <p class="menu-item-description">Catalan cream with caramelized sugar topping</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Brownie with Ice Cream<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">€7.50</span>
+              </div>
+              <p class="menu-item-description">Hot chocolate brownie with vanilla ice cream</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Fresh Fruit Salad</span>
+                <span class="menu-item-price">€5.50</span>
+              </div>
+              <p class="menu-item-description">Fresh seasonal fruit with ice cream</p>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Coffee and Dessert</span>
+                <span class="menu-item-price">€4.00</span>
+              </div>
+              <p class="menu-item-description">Espresso with house petit four</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact-en">
+          <h2>Visit Us</h2>
+
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <div class="contact-details">
+                <div class="contact-label">Address</div>
+                <div>Cala de Mijas, Costa del Sol, Málaga, Spain</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">🕐</span>
+              <div class="contact-details">
+                <div class="contact-label">Hours</div>
+                <div>12:00-16:00 and 19:00-23:30 (Daily)</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div class="contact-details">
+                <div class="contact-label">Phone</div>
+                <div>+34 952 XXX XXX</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">✉️</span>
+              <div class="contact-details">
+                <div class="contact-label">Email</div>
+                <div>info@losgranainos.es</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="mb-2" style="margin-top: 1.5rem;"><em>Prices include VAT • Allergen information available upon request</em></p>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="footer-content">
+      <p>© 2026 Los Granainos - Restaurante Familiar en Cala de Mijas</p>
+      <p class="footer-note">
+        🤖 MX Reference Implementation by Cog-Nova-MX Ltd<br>
+        This is a comprehensive bilingual MX-enhanced demonstration showcasing maximum metadata integration, WebMCP tool exposure, and Reginald certification readiness.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Language toggle functionality
+    (function() {
+      const container = document.querySelector('.bilingual-container');
+      const toggle = document.querySelector('.language-toggle');
+      const htmlElement = document.documentElement;
+
+      // Get initial language from URL hash or default to Spanish
+      const getInitialLang = () => {
+        const hash = window.location.hash;
+        if (hash === '#lang=en') return 'en';
+        if (hash === '#lang=es') return 'es';
+        return 'es'; // default
+      };
+
+      let currentLang = getInitialLang();
+      container.setAttribute('data-lang', currentLang);
+      htmlElement.setAttribute('lang', currentLang);
+      htmlElement.setAttribute('data-lang', currentLang);
+
+      // Toggle function
+      toggle.addEventListener('click', () => {
+        currentLang = currentLang === 'es' ? 'en' : 'es';
+        container.setAttribute('data-lang', currentLang);
+        htmlElement.setAttribute('lang', currentLang);
+        htmlElement.setAttribute('data-lang', currentLang);
+        window.location.hash = `lang=${currentLang}`;
+      });
+
+      // Handle back/forward browser navigation
+      window.addEventListener('hashchange', () => {
+        currentLang = getInitialLang();
+        container.setAttribute('data-lang', currentLang);
+        htmlElement.setAttribute('lang', currentLang);
+        htmlElement.setAttribute('data-lang', currentLang);
+      });
+    })();
+
+    // WebMCP Tool Definitions
+    window.mcpTools = {
+      'toggle-language': {
+        name: 'toggle-language',
+        description: 'Switch between Spanish and English language versions',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            lang: {
+              type: 'string',
+              enum: ['es', 'en'],
+              description: 'Target language code'
+            }
+          },
+          required: ['lang']
+        },
+        execute: async (params) => {
+          const { lang } = params;
+          const container = document.querySelector('.bilingual-container');
+          const htmlElement = document.documentElement;
+          container.setAttribute('data-lang', lang);
+          htmlElement.setAttribute('lang', lang);
+          htmlElement.setAttribute('data-lang', lang);
+          window.location.hash = `lang=${lang}`;
+          return { success: true, currentLang: lang };
+        }
+      },
+      'menu-query': {
+        name: 'menu-query',
+        description: 'Query menu items by category or search term',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            category: {
+              type: 'string',
+              enum: ['beverages', 'appetizers', 'fish', 'meat', 'desserts'],
+              description: 'Menu category to query'
+            },
+            search: {
+              type: 'string',
+              description: 'Search term for menu items'
+            }
+          }
+        },
+        execute: async (params) => {
+          // Extract menu data from DOM
+          const menuItems = Array.from(document.querySelectorAll('.menu-item')).map(item => ({
+            name: item.querySelector('.menu-item-name').textContent,
+            price: item.querySelector('.menu-item-price').textContent,
+            description: item.querySelector('.menu-item-description').textContent,
+            specialty: item.classList.contains('specialty')
+          }));
+          return { success: true, items: menuItems };
+        }
+      },
+      'reservation-info': {
+        name: 'reservation-info',
+        description: 'Get restaurant contact and reservation information',
+        inputSchema: {
+          type: 'object',
+          properties: {}
+        },
+        execute: async () => {
+          return {
+            success: true,
+            info: {
+              phone: '+34 952 XXX XXX',
+              email: 'info@losgranainos.es',
+              hours: '12:00-16:00 and 19:00-23:30 (Daily)',
+              address: 'Cala de Mijas, Costa del Sol, Málaga, Spain',
+              coordinates: { lat: 36.5167, lng: -4.6333 }
+            }
+          };
+        }
+      },
+      'location-info': {
+        name: 'location-info',
+        description: 'Get geographic location and directions information',
+        inputSchema: {
+          type: 'object',
+          properties: {}
+        },
+        execute: async () => {
+          return {
+            success: true,
+            location: {
+              address: 'Cala de Mijas, Costa del Sol, Málaga, Spain',
+              coordinates: { lat: 36.5167, lng: -4.6333 },
+              region: 'Andalusia',
+              nearbyLandmarks: ['Cala de Mijas Beach', 'Costa del Sol', 'Málaga City']
+            }
+          };
+        }
+      }
+    };
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+
+</body></html>

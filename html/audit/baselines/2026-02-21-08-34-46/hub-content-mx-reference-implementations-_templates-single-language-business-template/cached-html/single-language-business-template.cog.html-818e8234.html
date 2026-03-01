@@ -1,0 +1,1021 @@
+<!DOCTYPE html><html lang="[language1]" data-lang="[language1]"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Basic Meta -->
+  <title>[Business Name] - [tagline-lang1] | MX Reference</title>
+  <meta name="description" content="[Business Name] - [description-text]. Single-language toggle MX-enhanced reference implementation.">
+  <meta name="keywords" content="[business-type], [location], MX, machine-readable, WebMCP, [cuisine-type]">
+
+  <!-- Language Declarations -->
+  <meta http-equiv="content-language" content="[language1], [language2]">
+  <link rel="alternate" hreflang="[language1]" href="https://[DOMAIN]/[language1]/[business-name].html">
+  <link rel="alternate" hreflang="[language2]" href="https://[DOMAIN]/[language2]/[business-name].html">
+  <link rel="alternate" hreflang="x-default" href="https://[DOMAIN]/[language1]/[business-name].html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="[Business Name] - [tagline-lang1]">
+  <meta property="og:description" content="[description-text]">
+  <meta property="og:type" content="[business-type]">
+  <meta property="og:url" content="[https://url.com]">
+  <meta property="og:locale" content="[language1]_[country-code]">
+  <meta property="og:locale:alternate" content="[language2]_[country-code]">
+
+  <!-- WebMCP Declaration -->
+  <meta name="mcp:version" content="1.0">
+  <meta name="mcp:tools" content="menu-query, reservation-info, location-info, toggle-language">
+
+  <!-- Schema.org JSON-LD -->
+  <!--
+    CUSTOMIZE THIS: Replace [SchemaType] with appropriate type:
+    - Restaurant (for restaurants, cafes, bistros)
+    - Hotel (for hotels, B&Bs, accommodations)
+    - LocalBusiness (for general local businesses)
+    - Store (for retail shops)
+    - See https://schema.org/ for full type list
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "[SchemaType]",
+    "name": "[Business Name]",
+    "description": "[description-text]",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "[street-address]",
+      "addressLocality": "[location]",
+      "addressRegion": "[region]",
+      "addressCountry": "[country-code]"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "[Latitude]",
+      "longitude": "[Longitude]"
+    },
+    "servesCuisine": ["[cuisine-type]"],
+    "priceRange": "€€",
+    "inLanguage": ["[language1]", "[language2]"],
+    "openingHours": "[opening-hours]",
+    "telephone": "[phone-number]",
+    "email": "[email-address]",
+    "url": "[https://url.com]"
+  }
+  </script>
+
+  <style>
+    /* CSS Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /*
+      ROOT VARIABLES - CUSTOMIZE YOUR COLORS HERE
+
+      Replace [primary-color] and [secondary-color] with your brand colors
+      Example: #1e5f8f for blue, #d4af37 for gold
+
+      Ensure sufficient contrast for accessibility (WCAG AA):
+      - Primary color should contrast with white text (4.5:1 minimum)
+      - Secondary color should contrast with dark text (4.5:1 minimum)
+      - Test at https://webaim.org/resources/contrastchecker/
+    */
+    :root {
+      --primary-blue: [primary-color];
+      --secondary-gold: [secondary-color];
+      --text-dark: #2c3e50;
+      --text-light: #ffffff;
+      --bg-light: #f8f9fa;
+      --bg-white: #ffffff;
+      --border-color: #dee2e6;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* Typography */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+
+    /* Header */
+    header {
+      background-color: var(--primary-blue);
+      color: var(--text-light);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    /*
+      LANGUAGE TOGGLE BUTTON
+
+      This button switches between languages. It shows the name of the
+      language you can switch TO (not the current language).
+
+      Customize:
+      - Change border color to match your brand
+      - Adjust padding for different button sizes
+      - Modify hover effect for your design
+    */
+    .language-toggle {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--text-light);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-light);
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .language-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .language-toggle:focus {
+      outline: 2px solid var(--secondary-gold);
+      outline-offset: 2px;
+    }
+
+    /* Hide inactive language label in toggle button */
+    [data-lang="[language1]"] .lang-[language1],
+    [data-lang="[language2]"] .lang-[language2] {
+      display: none;
+    }
+
+    /*
+      SINGLE-LANGUAGE TOGGLE LAYOUT
+
+      This is the key CSS for single-language display:
+      - Only ONE language is visible at a time (not side-by-side)
+      - Switching languages completely replaces content
+      - Fade transitions provide smooth visual feedback
+
+      Do NOT modify unless you understand the toggle mechanism
+    */
+    .bilingual-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    /* Single-language toggle: only one visible at a time */
+    .content-[language1],
+    .content-[language2] {
+      transition: opacity 0.3s ease;
+    }
+
+    /* Hide inactive language completely */
+    .bilingual-container[data-lang="[language1]"] .content-[language2] {
+      display: none;
+    }
+
+    .bilingual-container[data-lang="[language2]"] .content-[language1] {
+      display: none;
+    }
+
+    /* Fade transitions */
+    .fade-in {
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    .fade-out {
+      animation: fadeOut 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    /*
+      SECTIONS
+
+      Each section is a white card with shadow and rounded corners.
+      Customize spacing and styling to match your brand.
+    */
+    section {
+      background: var(--bg-white);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    /*
+      HERO SECTION
+
+      The top banner with your business name and main call-to-action.
+      Uses gradient background with your primary color.
+    */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, #2c7fb8 100%);
+      color: var(--text-light);
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .hero h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    /*
+      IMAGES
+
+      Replace image URLs with your own. Ensure:
+      - All images have descriptive alt text for accessibility
+      - Images are optimized for web (under 500KB each)
+      - Images are at least 1200px wide for desktop displays
+    */
+    .hero img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 2rem 0;
+      box-shadow: var(--shadow);
+    }
+
+    section img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 1rem 0;
+      box-shadow: var(--shadow);
+    }
+
+    /*
+      CALL-TO-ACTION BUTTONS
+
+      Primary button: Uses secondary color (accent)
+      Secondary button: Transparent with border
+    */
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--secondary-gold);
+      color: var(--text-dark);
+    }
+
+    .btn-primary:hover {
+      background: #c49c2e;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /*
+      STATS SECTION
+
+      Display key business statistics (years, achievements, etc.)
+      Grid layout adapts to screen size automatically
+    */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    /*
+      MENU/CATALOG SECTIONS
+
+      These sections display your products, services, or menu items.
+      Customize icons, layout, and styling to match your content.
+
+      .menu-section: Container for each category (appetizers, mains, etc.)
+      .menu-item: Individual item (product, dish, service)
+      .menu-item.specialty: Featured/highlighted item
+    */
+    .menu-section {
+      margin-bottom: 2rem;
+    }
+
+    .menu-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .menu-icon {
+      font-size: 2rem;
+    }
+
+    .menu-items {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .menu-item {
+      padding: 1rem;
+      border-left: 3px solid var(--primary-blue);
+      background: var(--bg-light);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .menu-item.specialty {
+      border-left-color: var(--secondary-gold);
+      background: #fffbf0;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-item-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+    }
+
+    .menu-item-price {
+      font-weight: 700;
+      color: var(--primary-blue);
+      font-size: 1.1rem;
+    }
+
+    .menu-item-description {
+      font-size: 0.95rem;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+
+    .specialty-badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      background: var(--secondary-gold);
+      color: var(--text-dark);
+      border-radius: 3px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    /*
+      CONTACT SECTION
+
+      Display address, phone, email, hours, etc.
+      Uses icons (emoji or image) for visual clarity
+    */
+    .contact-info {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--primary-blue);
+    }
+
+    .contact-details {
+      flex: 1;
+    }
+
+    .contact-label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--text-dark);
+      color: var(--text-light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-note {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /*
+      ACCESSIBILITY
+
+      Skip link allows keyboard users to jump to main content.
+      REQUIRED for WCAG 2.1 AA compliance - do not remove.
+    */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary-blue);
+      color: var(--text-light);
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Print Styles */
+    @media print {
+      header {
+        position: static;
+        box-shadow: none;
+      }
+
+      .language-toggle,
+      .skip-link {
+        display: none;
+      }
+
+      section {
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+
+      .hero {
+        background: none;
+        color: var(--text-dark);
+      }
+
+      .btn {
+        display: none;
+      }
+    }
+
+    /*
+      MOBILE RESPONSIVE
+
+      Adjusts layout for screens smaller than 768px.
+      Reduces font sizes, padding, and switches to vertical layouts.
+    */
+    @media (max-width: 767px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      h3 { font-size: 1.25rem; }
+
+      .hero {
+        padding: 2rem 1rem;
+      }
+
+      section {
+        padding: 1.5rem 1rem;
+      }
+
+      .menu-item-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Utilities */
+    .text-center { text-align: center; }
+    .mb-1 { margin-bottom: 1rem; }
+    .mb-2 { margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Skip Navigation Link (Accessibility) - REQUIRED -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header role="banner">
+    <div class="header-container">
+      <div class="logo">[Business Name]</div>
+      <!-- Language toggle button shows the language you can switch TO -->
+      <button class="language-toggle" aria-label="Toggle language / Cambiar idioma">
+        <span class="lang-[language1]">[Language2]</span>
+        <span class="lang-[language2]">[Language1]</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    <div class="bilingual-container" data-lang="[language1]">
+
+      <!--
+        ================================================================
+        LANGUAGE 1 CONTENT ([Language1])
+        ================================================================
+
+        Replace all content below with your business information in [Language1].
+        Keep the HTML structure intact - only change the text content.
+      -->
+      <div class="content-[language1]" lang="[language1]">
+
+        <!-- Hero Section -->
+        <section class="hero">
+          <h1>[Business Name]</h1>
+          <img src="[https://url.com/hero-image.jpg]" alt="[Business Name] hero image description">
+          <p class="hero-tagline">[tagline-lang1]</p>
+          <div class="cta-buttons">
+            <a href="#menu-[language1]" class="btn btn-primary">View Menu / Catalog</a>
+            <a href="#contact-[language1]" class="btn btn-secondary">Contact Us</a>
+          </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about-[language1]">
+          <h2>About Us</h2>
+          <img src="[https://url.com/about-image.jpg]" alt="[Business Name] interior/exterior description">
+          <p>[description-text]</p>
+
+          <!-- Stats Grid -->
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-number">[stat-number]</div>
+              <div class="stat-label">[stat-label]</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">[stat-number]</div>
+              <div class="stat-label">[stat-label]</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">[stat-number]</div>
+              <div class="stat-label">[stat-label]</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Menu/Catalog Introduction -->
+        <section id="menu-[language1]">
+          <h2>[menu-section-icon] Our Offerings</h2>
+          <p class="mb-2"><strong>[description-text]</strong></p>
+          <p>[description-text]</p>
+        </section>
+
+        <!--
+          MENU/CATALOG SECTIONS
+
+          Copy this section template for each category (appetizers, mains, products, services, etc.)
+          Replace:
+          - [menu-section-name]: Category name (e.g., "Appetizers", "Products")
+          - [menu-section-icon]: Emoji or icon (e.g., 🥗, 🛍️)
+          - [menu-item-name]: Item name
+          - [menu-item-price]: Price (or remove if not applicable)
+          - [menu-item-description]: Description
+
+          To mark an item as specialty/featured, add class="specialty" to .menu-item
+        -->
+        <section class="menu-section" id="section1-[language1]">
+          <div class="menu-header">
+            <span class="menu-icon">[menu-section-icon]</span>
+            <h2>[menu-section-name]</h2>
+          </div>
+          <p class="mb-2">[description-text]</p>
+
+          <div class="menu-items">
+            <!-- Standard item -->
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">[menu-item-name]</span>
+                <span class="menu-item-price">[price]</span>
+              </div>
+              <p class="menu-item-description">[menu-item-description]</p>
+            </div>
+
+            <!-- Specialty/Featured item -->
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">[menu-item-name]<span class="specialty-badge">Specialty</span></span>
+                <span class="menu-item-price">[price]</span>
+              </div>
+              <p class="menu-item-description">[menu-item-description]</p>
+            </div>
+
+            <!-- Add more items as needed -->
+          </div>
+        </section>
+
+        <!-- Duplicate above section for additional categories -->
+
+        <!-- Contact Section -->
+        <section id="contact-[language1]">
+          <h2>Visit Us / Contact Us</h2>
+
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <div class="contact-details">
+                <div class="contact-label">Address</div>
+                <div>[street-address], [location], [region], [country-name]</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">🕐</span>
+              <div class="contact-details">
+                <div class="contact-label">Hours</div>
+                <div>[opening-hours-display]</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div class="contact-details">
+                <div class="contact-label">Phone</div>
+                <div>[phone-number]</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">✉️</span>
+              <div class="contact-details">
+                <div class="contact-label">Email</div>
+                <div>[email-address]</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="mb-2" style="margin-top: 1.5rem;"><em>[Additional information or legal notices]</em></p>
+        </section>
+
+      </div>
+
+      <!--
+        ================================================================
+        LANGUAGE 2 CONTENT ([Language2])
+        ================================================================
+
+        Replace all content below with your business information in [Language2].
+        MUST mirror the structure of Language 1 content exactly.
+      -->
+      <div class="content-[language2]" lang="[language2]">
+
+        <!-- Hero Section -->
+        <section class="hero">
+          <h1>[Business Name]</h1>
+          <img src="[https://url.com/hero-image.jpg]" alt="[Business Name] hero image description in [language2]">
+          <p class="hero-tagline">[tagline-lang2]</p>
+          <div class="cta-buttons">
+            <a href="#menu-[language2]" class="btn btn-primary">View Menu / Catalog ([language2])</a>
+            <a href="#contact-[language2]" class="btn btn-secondary">Contact Us ([language2])</a>
+          </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about-[language2]">
+          <h2>About Us ([language2])</h2>
+          <img src="[https://url.com/about-image.jpg]" alt="[Business Name] interior/exterior description in [language2]">
+          <p>[description-text in language2]</p>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-number">[stat-number]</div>
+              <div class="stat-label">[stat-label in language2]</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">[stat-number]</div>
+              <div class="stat-label">[stat-label in language2]</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">[stat-number]</div>
+              <div class="stat-label">[stat-label in language2]</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Menu/Catalog Introduction -->
+        <section id="menu-[language2]">
+          <h2>[menu-section-icon] Our Offerings ([language2])</h2>
+          <p class="mb-2"><strong>[description-text in language2]</strong></p>
+          <p>[description-text in language2]</p>
+        </section>
+
+        <!-- Menu/Catalog Section (mirror Language 1 structure) -->
+        <section class="menu-section" id="section1-[language2]">
+          <div class="menu-header">
+            <span class="menu-icon">[menu-section-icon]</span>
+            <h2>[menu-section-name in language2]</h2>
+          </div>
+          <p class="mb-2">[description-text in language2]</p>
+
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="menu-item-header">
+                <span class="menu-item-name">[menu-item-name in language2]</span>
+                <span class="menu-item-price">[price]</span>
+              </div>
+              <p class="menu-item-description">[menu-item-description in language2]</p>
+            </div>
+
+            <div class="menu-item specialty">
+              <div class="menu-item-header">
+                <span class="menu-item-name">[menu-item-name in language2]<span class="specialty-badge">Specialty ([language2])</span></span>
+                <span class="menu-item-price">[price]</span>
+              </div>
+              <p class="menu-item-description">[menu-item-description in language2]</p>
+            </div>
+
+            <!-- Add more items as needed -->
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact-[language2]">
+          <h2>Visit Us / Contact Us ([language2])</h2>
+
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <div class="contact-details">
+                <div class="contact-label">Address ([language2])</div>
+                <div>[street-address], [location], [region], [country-name]</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">🕐</span>
+              <div class="contact-details">
+                <div class="contact-label">Hours ([language2])</div>
+                <div>[opening-hours-display in language2]</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div class="contact-details">
+                <div class="contact-label">Phone ([language2])</div>
+                <div>[phone-number]</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">✉️</span>
+              <div class="contact-details">
+                <div class="contact-label">Email ([language2])</div>
+                <div>[email-address]</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="mb-2" style="margin-top: 1.5rem;"><em>[Additional information or legal notices in language2]</em></p>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="footer-content">
+      <p>© [YYYY] [Business Name] - [business-type] in [location]</p>
+      <p class="footer-note">
+        🤖 MX Reference Implementation by Cog-Nova-MX Ltd<br>
+        This is a single-language toggle MX-enhanced demonstration showcasing instant language switching with smooth transitions, localStorage persistence, and complete metadata integration.
+      </p>
+    </div>
+  </footer>
+
+  <!--
+    ================================================================
+    JAVASCRIPT - LANGUAGE TOGGLE & WEBMCP
+    ================================================================
+
+    This JavaScript handles:
+    1. Path-based language switching (navigates to /[language1]/ or /[language2]/)
+    2. WebMCP tool exposure for AI agents
+    3. Smooth scrolling for anchor links
+
+    Language selection is determined by directory structure, not JavaScript.
+    Each language version is a separate file at /[language1]/page.html and /[language2]/page.html
+
+    CUSTOMIZE WebMCP tools (window.mcpTools object) to match your business needs.
+  -->
+  <script>
+    // Language toggle functionality (path-based routing)
+    // Note: Language is determined by directory (/[language1]/ or /[language2]/)
+    // The data-lang attribute is set on <html> element for each language version
+    (function() {
+      const toggle = document.querySelector('.language-toggle');
+
+      // Language toggle navigates to the other language version
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const currentLang = document.documentElement.getAttribute('data-lang');
+          const targetLang = currentLang === '[language1]' ? '[language2]' : '[language1]';
+          const currentPath = window.location.pathname;
+
+          // Replace /[language1]/ with /[language2]/ or vice versa in the URL
+          const newPath = currentPath.replace(/\/([a-z]{2})\//, `/${targetLang}/`);
+          window.location.href = newPath;
+        });
+      }
+    })();
+
+    //
+    // WEBMCP TOOL DEFINITIONS
+    //
+    // These tools allow AI agents to interact with your website programmatically.
+    // Customize the tools to expose your business data and functionality.
+    //
+    // Example tools:
+    // - toggle-language: Switch between languages
+    // - menu-query: Query menu/catalog items
+    // - reservation-info: Get contact and booking information
+    // - location-info: Get geographic location data
+    //
+    window.mcpTools = {
+      'toggle-language': {
+        name: 'toggle-language',
+        description: 'Switch between [Language1] and [Language2] language versions',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            lang: {
+              type: 'string',
+              enum: ['[language1]', '[language2]'],
+              description: 'Target language code'
+            }
+          },
+          required: ['lang']
+        },
+        execute: async (params) => {
+          const { lang } = params;
+          const currentPath = window.location.pathname;
+
+          // Navigate to the target language version (path-based)
+          const newPath = currentPath.replace(/\/([a-z]{2})\//, `/${lang}/`);
+          window.location.href = newPath;
+
+          return { success: true, targetLang: lang, targetUrl: newPath };
+        }
+      },
+      'menu-query': {
+        name: 'menu-query',
+        description: 'Query menu/catalog items by category or search term',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            category: {
+              type: 'string',
+              description: 'Category to query (customize with your categories)'
+            },
+            search: {
+              type: 'string',
+              description: 'Search term for items'
+            }
+          }
+        },
+        execute: async (params) => {
+          // Extract menu/catalog data from DOM
+          const menuItems = Array.from(document.querySelectorAll('.menu-item')).map(item => ({
+            name: item.querySelector('.menu-item-name').textContent,
+            price: item.querySelector('.menu-item-price')?.textContent || 'N/A',
+            description: item.querySelector('.menu-item-description').textContent,
+            specialty: item.classList.contains('specialty')
+          }));
+          return { success: true, items: menuItems };
+        }
+      },
+      'reservation-info': {
+        name: 'reservation-info',
+        description: 'Get business contact and reservation information',
+        inputSchema: {
+          type: 'object',
+          properties: {}
+        },
+        execute: async () => {
+          return {
+            success: true,
+            info: {
+              phone: '[phone-number]',
+              email: '[email-address]',
+              hours: '[opening-hours-display]',
+              address: '[street-address], [location], [region], [country-name]',
+              coordinates: { lat: [Latitude], lng: [Longitude] }
+            }
+          };
+        }
+      },
+      'location-info': {
+        name: 'location-info',
+        description: 'Get geographic location and directions information',
+        inputSchema: {
+          type: 'object',
+          properties: {}
+        },
+        execute: async () => {
+          return {
+            success: true,
+            location: {
+              address: '[street-address], [location], [region], [country-name]',
+              coordinates: { lat: [Latitude], lng: [Longitude] },
+              region: '[region]',
+              country: '[country-name]'
+            }
+          };
+        }
+      }
+    };
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+
+
+</body></html>

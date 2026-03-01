@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="es" data-lang="es"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Basic Meta -->
+  <title>[Business Name] - [Business Tagline] | MX Reference</title>
+  <meta name="description" content="[Business description]. Bilingual MX-enhanced reference implementation.">
+  <meta name="keywords" content="[business-type], [location], MX, machine-readable, WebMCP, [industry keywords]">
+
+  <!-- Language Declarations -->
+  <meta http-equiv="content-language" content="es, en">
+  <link rel="alternate" hreflang="es" href="https://[DOMAIN]/es/[business-name].html">
+  <link rel="alternate" hreflang="en" href="https://[DOMAIN]/en/[business-name].html">
+  <link rel="alternate" hreflang="x-default" href="https://[DOMAIN]/es/[business-name].html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="[Business Name] - [Business Tagline]">
+  <meta property="og:description" content="[Brief business description]">
+  <meta property="og:type" content="[business-type]">
+  <meta property="og:url" content="[https://business-url.com]">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- WebMCP Declaration -->
+  <meta name="mcp:version" content="1.0">
+  <meta name="mcp:tools" content="[tool1, tool2, tool3, toggle-language]">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "[SchemaType]",
+    "name": "[Business Name]",
+    "description": "[Business description]",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "[Street Address]",
+      "addressLocality": "[City]",
+      "addressRegion": "[Region]",
+      "addressCountry": "[Country Code]"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "[Latitude]",
+      "longitude": "[Longitude]"
+    },
+    "inLanguage": ["es", "en"]
+  }
+  </script>
+
+  <style>
+    /* CSS Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Root Variables - Customize for brand */
+    :root {
+      --primary-color: #1e5f8f;
+      --secondary-color: #d4af37;
+      --text-dark: #2c3e50;
+      --text-light: #ffffff;
+      --bg-light: #f8f9fa;
+      --bg-white: #ffffff;
+      --border-color: #dee2e6;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* Typography */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+
+    /* Header */
+    header {
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .language-toggle {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--text-light);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-light);
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .language-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .language-toggle:focus {
+      outline: 2px solid var(--secondary-color);
+      outline-offset: 2px;
+    }
+
+    [data-lang="es"] .lang-es,
+    [data-lang="en"] .lang-en {
+      display: none;
+    }
+
+    /* Main Layout */
+    .bilingual-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      transition: var(--transition);
+    }
+
+    /* Desktop: Side-by-side */
+    @media (min-width: 768px) {
+      .bilingual-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        padding: 2rem 1rem;
+      }
+
+      .bilingual-container[data-lang="es"] .content-en {
+        opacity: 0.3;
+      }
+
+      .bilingual-container[data-lang="en"] .content-es {
+        opacity: 0.3;
+      }
+    }
+
+    /* Mobile: Stacked with toggle */
+    @media (max-width: 767px) {
+      .bilingual-container {
+        display: block;
+        padding: 1rem;
+      }
+
+      .bilingual-container[data-lang="es"] .content-en {
+        display: none;
+      }
+
+      .bilingual-container[data-lang="en"] .content-es {
+        display: none;
+      }
+    }
+
+    .content-es,
+    .content-en {
+      transition: opacity 0.3s ease;
+    }
+
+    /* Sections */
+    section {
+      background: var(--bg-white);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #2c7fb8 100%);
+      color: var(--text-light);
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .hero h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--text-dark);
+      color: var(--text-light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-note {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary-color);
+      color: var(--text-light);
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip Navigation Link (Accessibility) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header role="banner">
+    <div class="header-container">
+      <div class="logo">[Business Name]</div>
+      <button class="language-toggle" aria-label="Toggle language / Cambiar idioma">
+        <span class="lang-es">English</span>
+        <span class="lang-en">Español</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    <div class="bilingual-container" data-lang="es">
+
+      <!-- SPANISH CONTENT -->
+      <div class="content-es" lang="es">
+
+        <!-- Hero Section -->
+        <section class="hero">
+          <h1>[Nombre del Negocio]</h1>
+          <p class="hero-tagline">[Eslogan en español]</p>
+        </section>
+
+        <!-- Add your Spanish content sections here -->
+
+      </div>
+
+      <!-- ENGLISH CONTENT -->
+      <div class="content-en" lang="en">
+
+        <!-- Hero Section -->
+        <section class="hero">
+          <h1>[Business Name]</h1>
+          <p class="hero-tagline">[English tagline]</p>
+        </section>
+
+        <!-- Add your English content sections here -->
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="footer-content">
+      <p>© 2026 [Business Name]</p>
+      <p class="footer-note">
+        🤖 MX Reference Implementation by Cog-Nova-MX Ltd<br>
+        This is a comprehensive bilingual MX-enhanced demonstration showcasing maximum metadata integration, WebMCP tool exposure, and Reginald certification readiness.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Language toggle functionality (path-based routing)
+    // Note: Language is determined by directory (/es/ or /en/)
+    // The data-lang attribute is set on <html> element when generating each version
+    (function() {
+      const toggle = document.querySelector('.language-toggle');
+
+      // Language toggle navigates to the other language version
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const currentLang = document.documentElement.getAttribute('data-lang');
+          const targetLang = currentLang === 'es' ? 'en' : 'es';
+          const currentPath = window.location.pathname;
+
+          // Replace /es/ with /en/ or vice versa in the URL
+          const newPath = currentPath.replace(/\/(es|en)\//, `/${targetLang}/`);
+          window.location.href = newPath;
+        });
+      }
+    })();
+
+    // WebMCP Tool Definitions - Customize for your business
+    window.mcpTools = {
+      'toggle-language': {
+        name: 'toggle-language',
+        description: 'Switch between Spanish and English language versions',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            lang: {
+              type: 'string',
+              enum: ['es', 'en'],
+              description: 'Target language code'
+            }
+          },
+          required: ['lang']
+        },
+        execute: async (params) => {
+          const { lang } = params;
+          const currentPath = window.location.pathname;
+
+          // Navigate to the target language version (path-based)
+          const newPath = currentPath.replace(/\/(es|en)\//, `/${lang}/`);
+          window.location.href = newPath;
+
+          return { success: true, targetLang: lang, targetUrl: newPath };
+        }
+      }
+      // Add more WebMCP tools here for your business use cases
+    };
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+
+
+</body></html>
