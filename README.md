@@ -19,7 +19,7 @@ Build artefacts, reports, and generated outputs organised by media type.
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 1 | PowerPoint — presentation source files |
-| **Total** | **208** | |
+| **Total** | **209** | |
 
 ---
 
@@ -148,7 +148,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (39 files)
+**session/** (40 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -180,6 +180,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-27-morning-report.md`](md/reports/directors/session/2026-02-27-morning-report.md)
 - [`2026-02-28-afternoon-report.md`](md/reports/directors/session/2026-02-28-afternoon-report.md)
 - [`2026-02-28-morning-report.md`](md/reports/directors/session/2026-02-28-morning-report.md)
+- [`2026-03-01-afternoon-directors-report.md`](md/reports/directors/session/2026-03-01-afternoon-directors-report.md)
 - [`2026-03-01-morning-report.md`](md/reports/directors/session/2026-03-01-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
@@ -321,4 +322,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-03-01 at 12:52*
+*Generated on 2026-03-02 at 16:23*
