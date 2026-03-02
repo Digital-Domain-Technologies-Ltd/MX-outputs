@@ -1,8 +1,8 @@
 ---
 title: "Book Consolidation — All Publications Moved to Datalake"
 created: "2026-02-13"
-session-start: "2026-02-13T14:00:00Z"
-session-end: "2026-02-13T15:57:00Z"
+sessionStart: "2026-02-13T14:00:00Z"
+sessionEnd: "2026-02-13T15:57:00Z"
 duration: "~2 hours"
 type: "refactoring"
 status: "completed"

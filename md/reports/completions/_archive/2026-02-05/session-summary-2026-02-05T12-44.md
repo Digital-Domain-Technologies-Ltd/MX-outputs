@@ -1,8 +1,8 @@
 ---
 title: "Chapter 00 Location Inquiry - File Location and Reference Mapping"
 created: "2026-02-05"
-session-start: "2026-02-05T12:40:00Z"
-session-end: "2026-02-05T12:44:19Z"
+sessionStart: "2026-02-05T12:40:00Z"
+sessionEnd: "2026-02-05T12:44:19Z"
 duration: "~4 minutes"
 type: "information-inquiry"
 status: "completed"

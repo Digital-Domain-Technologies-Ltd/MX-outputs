@@ -1,8 +1,8 @@
 ---
 title: "Rename 'The Bible' to 'The Codex' across entire repository"
 created: "2026-02-06"
-session-start: "2026-02-06T12:00:00Z"
-session-end: "2026-02-06T13:12:00Z"
+sessionStart: "2026-02-06T12:00:00Z"
+sessionEnd: "2026-02-06T13:12:00Z"
 duration: "~70 minutes"
 type: "refactoring"
 status: "completed"

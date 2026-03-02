@@ -1,8 +1,8 @@
 ---
 title: "Editorial Review Phase 1 Complete: MX-Bible & MX-Handbook Coordination"
 created: "2026-02-04"
-session-start: "2026-02-04T11:50:00Z"
-session-end: "2026-02-04T13:50:15Z"
+sessionStart: "2026-02-04T11:50:00Z"
+sessionEnd: "2026-02-04T13:50:15Z"
 duration: "~2 hours"
 type: "editorial-coordination"
 status: "completed"

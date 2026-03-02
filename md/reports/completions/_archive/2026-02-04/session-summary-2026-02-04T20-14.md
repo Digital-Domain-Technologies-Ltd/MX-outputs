@@ -1,8 +1,8 @@
 ---
 title: "MX Repository Navigator - Implementation and Documentation"
 created: "2026-02-04"
-session-start: "2026-02-04T19:45:00Z"
-session-end: "2026-02-04T20:14:35Z"
+sessionStart: "2026-02-04T19:45:00Z"
+sessionEnd: "2026-02-04T20:14:35Z"
 duration: "~30 minutes"
 type: "feature-implementation"
 status: "completed"

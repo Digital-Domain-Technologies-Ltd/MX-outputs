@@ -1,8 +1,8 @@
 ---
 title: "Maxine vision session — SOUL.md, API layer, boot system, co-directors report"
 created: "2026-02-11"
-session-start: "2026-02-11T12:25:00Z"
-session-end: "2026-02-11T12:50:00Z"
+sessionStart: "2026-02-11T12:25:00Z"
+sessionEnd: "2026-02-11T12:50:00Z"
 duration: "~3 hours (full day session, multiple segments)"
 type: "feature-implementation"
 status: "completed"

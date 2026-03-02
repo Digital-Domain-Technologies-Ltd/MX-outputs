@@ -7,18 +7,11 @@ event: "London CMS Experts"
 venue: "London"
 organiser: "Boye & Company"
 license: proprietary
-mx:
-  contentType: presentation
-  format: marp
-  outputs:
-    - london-cms-experts-2026-02-26.pptx
-  runbook: |
-    To regenerate the PPTX from this markdown:
-
-    cd packages/mx-outputs/presentations
-    npx @marp-team/marp-cli london-cms-experts-2026-02-26.md --pptx --allow-local-files
-
-    Requirements: Node.js, @marp-team/marp-cli (installed via npx)
+contentType: presentation
+format: marp
+outputs:
+  - london-cms-experts-2026-02-26.pptx
+runbook: |
 marp: true
 theme: default
 paginate: true

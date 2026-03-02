@@ -2,8 +2,8 @@
 title: "Co-Directors Report: 2026-02-19 Morning Session"
 date: 2026-02-19
 segment: morning
-session-start: "05:00"
-session-end: "05:45"
+sessionStart: "05:00"
+sessionEnd: "05:45"
 author: Maxine (AI) and Tom Cranstoun
 version: "1.0"
 status: completed

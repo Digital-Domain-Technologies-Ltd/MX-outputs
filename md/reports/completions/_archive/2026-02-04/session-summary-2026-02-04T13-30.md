@@ -1,8 +1,8 @@
 ---
 title: "MX PDF Metadata Injection Implementation"
 created: "2026-02-04"
-session-start: "2026-02-04T12:00:00Z"
-session-end: "2026-02-04T13:30:00Z"
+sessionStart: "2026-02-04T12:00:00Z"
+sessionEnd: "2026-02-04T13:30:00Z"
 duration: "~90 minutes"
 type: "feature-implementation"
 status: "completed"

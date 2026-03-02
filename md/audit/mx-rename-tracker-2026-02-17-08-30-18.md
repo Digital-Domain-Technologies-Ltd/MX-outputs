@@ -11,12 +11,8 @@ tags:
   - metadata
   - tracking
   - books
-mx:
-  contentType: rename-tracker
-  runbook: >-
-    This report tracks all field renames. Use it to update books, docs, and
-    tools when field names change. The old→new mapping is the authoritative
-    reference.
+contentType: rename-tracker
+runbook: >-
 ---
 
 # MX Field Rename Tracker

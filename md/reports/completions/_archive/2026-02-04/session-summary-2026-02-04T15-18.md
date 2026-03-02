@@ -1,8 +1,8 @@
 ---
 title: "PDF Generation: Arrive First Executive Sales Report"
 created: "2026-02-04"
-session-start: "2026-02-04T15:00:00Z"
-session-end: "2026-02-04T15:18:23Z"
+sessionStart: "2026-02-04T15:00:00Z"
+sessionEnd: "2026-02-04T15:18:23Z"
 duration: "~18 minutes"
 type: "document-generation"
 status: "completed"

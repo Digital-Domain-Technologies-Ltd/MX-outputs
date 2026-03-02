@@ -10,22 +10,16 @@ totalErrors: 136
 totalWarnings: 53
 durationSeconds: 0.01
 validationStatus: FAIL
-mx:
-  purpose: >-
-    MX metadata validation report documenting compliance status across markdown
-    files
-  audience: human
-  stability: stable
-  runbook: >-
-    This validation report shows MX metadata compliance issues. Use to identify
-    and fix metadata problems.
-  ai:
-    contextProvides:
-      - MX metadata validation results
-      - List of files with errors and warnings
-      - Required field compliance status
-      - Path format validation (repo-root-relative)
-      - MX principle violation details
+purpose: >-
+audience: human
+stability: stable
+runbook: >-
+contextProvides:
+  - MX metadata validation results
+  - List of files with errors and warnings
+  - Required field compliance status
+  - Path format validation (repo-root-relative)
+  - MX principle violation details
 ---
 
 # MX Metadata Validation Report
