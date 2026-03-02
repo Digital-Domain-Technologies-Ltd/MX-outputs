@@ -4,7 +4,7 @@ author: "Tom Cranstoun"
 date: "2026-02-26"
 description: "5-15 minute lightning talk introducing Machine Experience (MX) to Boye & Company CMS Experts audience"
 event: "London CMS Experts"
-venue: "London"
+location: "London"
 organiser: "Boye & Company"
 license: proprietary
 contentType: presentation
@@ -181,7 +181,7 @@ title: "London CMS Experts Lightning Talk"
 author: "Tom Cranstoun"
 date: "2026-02-26"
 event: "London CMS Experts"
-venue: "London"
+location: "London"
 organiser: "Boye & Company"
 mx:
   contentType: presentation
