@@ -4,7 +4,7 @@ created: "2026-02-13"
 version: "2.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Block Architecture, Messaging, Field Standardisation, Hook Enforcement

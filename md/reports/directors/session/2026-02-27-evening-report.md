@@ -5,7 +5,7 @@ segment: "evening"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Repository Flattened: Two Wrapper Directories Removed

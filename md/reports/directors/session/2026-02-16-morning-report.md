@@ -5,7 +5,7 @@ segment: "morning"
 version: "3.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Morning Session — 16 February 2026

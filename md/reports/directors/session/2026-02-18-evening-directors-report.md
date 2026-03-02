@@ -6,7 +6,7 @@ version: "2.0"
 modified: "2026-02-18"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Co-Directors Report — PDF Image Quality Crisis Resolved

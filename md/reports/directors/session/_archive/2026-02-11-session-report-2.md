@@ -4,7 +4,7 @@ created: "2026-02-11"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 session-type: quick
 ---
 

@@ -4,7 +4,7 @@ created: "2026-02-10"
 sessionStart: "2026-02-10T15:00:00Z"
 sessionEnd: "2026-02-10T17:49:00Z"
 duration: "~3 hours"
-type: "feature-implementation"
+contentType: "feature-implementation"
 status: "completed"
 ---
 

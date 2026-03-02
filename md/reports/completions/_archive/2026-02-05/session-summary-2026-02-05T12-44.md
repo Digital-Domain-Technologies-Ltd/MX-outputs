@@ -4,7 +4,7 @@ created: "2026-02-05"
 sessionStart: "2026-02-05T12:40:00Z"
 sessionEnd: "2026-02-05T12:44:19Z"
 duration: "~4 minutes"
-type: "information-inquiry"
+contentType: "information-inquiry"
 status: "completed"
 ---
 

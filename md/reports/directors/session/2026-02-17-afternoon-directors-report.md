@@ -6,7 +6,7 @@ version: "2.0"
 modified: "2026-02-17"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Co-Directors Report — LinkedIn Ad Fix + Repository Handover

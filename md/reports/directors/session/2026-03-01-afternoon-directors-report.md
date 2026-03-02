@@ -5,7 +5,7 @@ segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Mount Table Architecture: Git Repos as Trackable Filesystems
