@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — MX OS Foundations Complete"
 created: "2026-02-24"
-segment: "morning"
 version: "2.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "morning"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Co-Directors Report

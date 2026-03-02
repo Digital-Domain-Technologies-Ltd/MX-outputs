@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — MX-Gathering Standards Body Launch"
 created: "2026-02-23"
-segment: "evening"
 version: "1.2"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "evening"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Co-Directors Report

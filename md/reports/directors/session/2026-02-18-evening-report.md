@@ -1,12 +1,14 @@
 ---
 title: "Co-Directors Report: 2026-02-18 Evening Session"
-date: 2026-02-18
-segment: evening
-sessionStart: "19:00"
-sessionEnd: "19:50"
 author: Maxine (AI) and Tom Cranstoun
 version: "1.0"
-status: completed
+
+mx:
+  date: 2026-02-18
+  segment: evening
+  sessionStart: "19:00"
+  sessionEnd: "19:50"
+  status: completed
 ---
 
 # Co-Directors Report

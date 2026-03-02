@@ -1,10 +1,12 @@
 ---
 title: "Directors Report: Repository Structure Improvements"
-date: 2026-02-24
-session-type: restructure
 author: Claude Opus 4.5 (Maxine)
-co-author: Tom Cranstoun
-status: complete
+
+mx:
+  date: 2026-02-24
+  session-type: restructure
+  co-author: Tom Cranstoun
+  status: complete
 ---
 
 # Directors Report: Repository Structure Improvements

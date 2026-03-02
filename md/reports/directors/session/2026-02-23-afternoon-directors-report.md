@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — Reorganisation and Improvements at Scale"
 created: "2026-02-23"
-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "afternoon"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Co-Directors Report

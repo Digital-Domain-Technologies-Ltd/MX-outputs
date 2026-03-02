@@ -1,11 +1,13 @@
 ---
 title: "About Maxine — Server-Client Architecture Deliverable"
 created: "2026-02-13"
-sessionStart: "2026-02-13T12:15:00Z"
-sessionEnd: "2026-02-13T12:38:00Z"
-duration: "~25 minutes"
-contentType: "documentation"
-status: "completed"
+
+mx:
+  sessionStart: "2026-02-13T12:15:00Z"
+  sessionEnd: "2026-02-13T12:38:00Z"
+  duration: "~25 minutes"
+  contentType: "documentation"
+  status: "completed"
 ---
 
 # Session Summary: About Maxine Architecture Deliverable

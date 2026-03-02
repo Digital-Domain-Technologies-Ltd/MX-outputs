@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — Practising What We Preach"
 created: "2026-02-16"
-segment: "morning"
 version: "3.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "morning"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Morning Session — 16 February 2026

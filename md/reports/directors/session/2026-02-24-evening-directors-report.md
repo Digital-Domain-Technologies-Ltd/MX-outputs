@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — Repository Consolidation and System Simplification"
 created: "2026-02-24"
-segment: "evening"
 version: "3.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "evening"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Co-Directors Report

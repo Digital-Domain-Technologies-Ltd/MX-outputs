@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — The MX Web Architecture Lands"
 created: "2026-02-13"
-segment: "morning"
 version: "3.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "morning"
+  audience: stakeholders
+  confidential: true
 ---
 
 # The MX Web Architecture Lands

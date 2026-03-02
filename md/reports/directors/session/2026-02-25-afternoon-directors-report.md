@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — Lightning Talk Ready for London"
 created: "2026-02-25"
-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "afternoon"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Co-Directors Report

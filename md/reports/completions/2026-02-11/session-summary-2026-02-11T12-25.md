@@ -1,11 +1,13 @@
 ---
 title: "ai→sop field rename across entire MX ecosystem"
 created: "2026-02-11"
-sessionStart: "2026-02-11T10:00:00Z"
-sessionEnd: "2026-02-11T12:25:00Z"
-duration: "~2.5 hours"
-contentType: "refactoring"
-status: "completed"
+
+mx:
+  sessionStart: "2026-02-11T10:00:00Z"
+  sessionEnd: "2026-02-11T12:25:00Z"
+  duration: "~2.5 hours"
+  contentType: "refactoring"
+  status: "completed"
 ---
 
 # Session Summary: ai→sop Field Rename Across Entire MX Ecosystem

@@ -3,10 +3,12 @@ title: "REGINALD Implementation Plan"
 version: "1.0.0"
 created: 2026-02-26
 author: "Tom Cranstoun and Maxine"
-license: "proprietary"
 description: "Technical implementation roadmap for the REGINALD registry"
-status: draft
-confidential: true
+
+mx:
+  license: "proprietary"
+  status: draft
+  confidential: true
 ---
 
 # REGINALD Implementation Plan

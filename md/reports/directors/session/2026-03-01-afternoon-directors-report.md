@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — Mount Table Architecture: Git Repos as Trackable Filesystems"
 created: "2026-03-01"
-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "afternoon"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Mount Table Architecture: Git Repos as Trackable Filesystems

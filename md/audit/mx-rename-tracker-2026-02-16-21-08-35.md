@@ -4,15 +4,17 @@ description: Consolidated field rename log. 135 renames tracked across the MX ec
 author: mx-rename-tracker.js
 created: '2026-02-16'
 version: '1.0'
-status: active
-tags:
-  - rename
-  - fields
-  - metadata
-  - tracking
-  - books
-contentType: rename-tracker
-runbook: >-
+
+mx:
+  status: active
+  tags:
+    - rename
+    - fields
+    - metadata
+    - tracking
+    - books
+  contentType: rename-tracker
+  runbook: >-
 ---
 
 # MX Field Rename Tracker

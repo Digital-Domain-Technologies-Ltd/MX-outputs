@@ -1,25 +1,27 @@
 ---
 title: 'MX Metadata Validation Report: manuals'
-date: '2026-02-21'
-timestamp: '2026-02-21T07:29:30.752Z'
-validationTarget: hub-content/MX-Canon/MX-Maxine-Lives/manuals/
-filesChecked: 28
-filesValid: 27
-filesInvalid: 1
-totalErrors: 1
-totalWarnings: 28
-durationSeconds: 0.01
-validationStatus: FAIL
-purpose: >-
-audience: human
-stability: stable
-runbook: >-
-contextProvides:
-  - MX metadata validation results
-  - List of files with errors and warnings
-  - Required field compliance status
-  - Path format validation (repo-root-relative)
-  - MX principle violation details
+
+mx:
+  date: '2026-02-21'
+  timestamp: '2026-02-21T07:29:30.752Z'
+  validationTarget: hub-content/MX-Canon/MX-Maxine-Lives/manuals/
+  filesChecked: 28
+  filesValid: 27
+  filesInvalid: 1
+  totalErrors: 1
+  totalWarnings: 28
+  durationSeconds: 0.01
+  validationStatus: FAIL
+  purpose: >-
+  audience: human
+  stability: stable
+  runbook: >-
+  contextProvides:
+    - MX metadata validation results
+    - List of files with errors and warnings
+    - Required field compliance status
+    - Path format validation (repo-root-relative)
+    - MX principle violation details
 ---
 
 # MX Metadata Validation Report

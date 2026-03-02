@@ -5,9 +5,11 @@ author: Maxine and Tom Cranstoun
 created: 2026-02-21
 modified: 2026-02-21
 version: "1.0"
-status: active
-segment: morning
-date: 2026-02-21
+
+mx:
+  status: active
+  segment: morning
+  date: 2026-02-21
 ---
 
 # Co-Directors Report

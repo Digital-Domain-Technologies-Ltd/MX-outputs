@@ -1,11 +1,13 @@
 ---
 title: "SOP Reframing, Registry Snapshot, and Universal Cog Executor"
 created: "2026-02-11"
-sessionStart: "2026-02-11T07:00:00Z"
-sessionEnd: "2026-02-11T09:00:00Z"
-duration: "~2 hours"
-contentType: "feature-implementation"
-status: "completed"
+
+mx:
+  sessionStart: "2026-02-11T07:00:00Z"
+  sessionEnd: "2026-02-11T09:00:00Z"
+  duration: "~2 hours"
+  contentType: "feature-implementation"
+  status: "completed"
 ---
 
 # Session Summary: SOP Reframing, Registry Snapshot, and Universal Cog Executor

@@ -3,9 +3,11 @@ title: "REGINALD User Manual"
 version: "1.0.0"
 created: 2026-02-26
 author: "Tom Cranstoun and Maxine"
-license: "MIT"
 description: "Complete user guide for the REGINALD documentation registry"
-status: published
+
+mx:
+  license: "MIT"
+  status: published
 ---
 
 # REGINALD User Manual

@@ -1,12 +1,14 @@
 ---
 title: "Co-Directors Report — LinkedIn Ad Fix + Repository Handover"
 created: "2026-02-17"
-segment: "afternoon"
 version: "2.0"
 modified: "2026-02-17"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "afternoon"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Co-Directors Report — LinkedIn Ad Fix + Repository Handover

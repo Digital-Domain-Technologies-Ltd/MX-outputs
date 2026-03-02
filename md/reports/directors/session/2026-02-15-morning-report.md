@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — The System Learns to Explain Itself (and a Name Problem Surfaces)"
 created: "2026-02-15"
-segment: "morning"
 version: "1.1"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "morning"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Morning Session — 15 February 2026

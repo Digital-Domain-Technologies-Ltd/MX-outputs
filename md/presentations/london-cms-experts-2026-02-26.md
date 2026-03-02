@@ -1,53 +1,55 @@
 ---
 title: "London CMS Experts Lightning Talk"
 author: "Tom Cranstoun"
-date: "2026-02-26"
 description: "5-15 minute lightning talk introducing Machine Experience (MX) to Boye & Company CMS Experts audience"
-event: "London CMS Experts"
-location: "London"
-organiser: "Boye & Company"
-license: proprietary
-contentType: presentation
-format: marp
-outputs:
-  - london-cms-experts-2026-02-26.pptx
-runbook: |
-marp: true
-theme: default
-paginate: true
-backgroundColor: #1a1a2e
-color: #ffffff
-style: |
-  section {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  }
-  h1 {
-    color: #00d4aa;
-    font-size: 2.5em;
-  }
-  h2 {
-    color: #00d4aa;
-  }
-  strong {
-    color: #00d4aa;
-  }
-  em {
-    color: #888;
-  }
-  table {
-    font-size: 0.9em;
-  }
-  th {
-    background-color: #00d4aa;
-    color: #1a1a2e;
-  }
-  td {
-    background-color: #2a2a4e;
-    color: #ffffff;
-  }
-  a {
-    color: #00d4aa;
-  }
+
+mx:
+  date: "2026-02-26"
+  event: "London CMS Experts"
+  location: "London"
+  organiser: "Boye & Company"
+  license: proprietary
+  contentType: presentation
+  format: marp
+  outputs:
+    - london-cms-experts-2026-02-26.pptx
+  runbook: |
+  marp: true
+  theme: default
+  paginate: true
+  backgroundColor: #1a1a2e
+  color: #ffffff
+  style: |
+    section {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    h1 {
+      color: #00d4aa;
+      font-size: 2.5em;
+    }
+    h2 {
+      color: #00d4aa;
+    }
+    strong {
+      color: #00d4aa;
+    }
+    em {
+      color: #888;
+    }
+    table {
+      font-size: 0.9em;
+    }
+    th {
+      background-color: #00d4aa;
+      color: #1a1a2e;
+    }
+    td {
+      background-color: #2a2a4e;
+      color: #ffffff;
+    }
+    a {
+      color: #00d4aa;
+    }
 ---
 
 <!-- _class: lead -->

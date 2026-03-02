@@ -1,11 +1,13 @@
 ---
 title: "Co-Directors Report — The Thinking Folder, the Language Decision, and the Namespace Migration"
 created: "2026-02-15"
-segment: "evening"
 version: "1.2"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+
+mx:
+  segment: "evening"
+  audience: stakeholders
+  confidential: true
 ---
 
 # Evening Session — 15 February 2026
