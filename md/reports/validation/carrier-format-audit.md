@@ -26,10 +26,10 @@ mx:
 | Carrier | Total | Compliant | Partial | Missing | Generated | Score |
 |---------|-------|-----------|---------|---------|-----------|-------|
 | Shell (.sh) | 88 | 87 | 0 | 0 | 1 | 100% |
-| JavaScript (.js) | 174 | 168 | 0 | 6 | 0 | 97% |
-| HTML (.html) | 148 | 5 | 92 | 1 | 50 | 5% |
+| JavaScript (.js) | 174 | 172 | 0 | 2 | 0 | 99% |
+| HTML (.html) | 148 | 94 | 3 | 1 | 50 | 96% |
 | CSS (.css) | 62 | 14 | 0 | 2 | 46 | 88% |
-| **Total** | **472** | **274** | **92** | **9** | **97** | **73%** |
+| **Total** | **472** | **367** | **3** | **5** | **97** | **98%** |
 
 ---
 
@@ -37,16 +37,16 @@ mx:
 
 | Category | Total | Compliant | Partial | Missing |
 |----------|-------|-----------|---------|---------|
-| Source files | 345 | 245 | 91 | 9 |
+| Source files | 345 | 337 | 3 | 5 |
 | Test files | 21 | 21 | 0 | 0 |
-| Reference implementations | 9 | 8 | 1 | 0 |
+| Reference implementations | 9 | 9 | 0 | 0 |
 | Generated outputs | 97 | 0 | 0 | 15 |
 
 ---
 
 ## Compliance by Directory
 
-### datalake/ (93 files, 18% compliant)
+### datalake/ (93 files, 96% compliant)
 
 | File | Carrier | Category | Status | Layer 1 | Layer 2 | Notes |
 |------|---------|----------|--------|---------|---------|-------|
@@ -54,75 +54,75 @@ mx:
 | assets/presentations/maxine-vision-deck/maxine-slides.js | javascript | source | compliant | yes | yes |  |
 | assets/presentations/template/talk-adobe.js | javascript | source | compliant | yes | yes |  |
 | assets/presentations/template/talk-slides.js | javascript | source | compliant | yes | yes |  |
-| publications/mx-books/mx-appendices/web/appendix-a.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-b.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-c.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-d.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-e.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-f.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-g.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-h.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-i.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-j.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-k.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/appendix-l.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-appendices/web/appendix-a.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-b.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-c.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-d.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-e.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-f.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-g.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-h.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-i.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-index.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-j.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-k.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/appendix-l.html | html | source | compliant | yes | yes |  |
 | publications/mx-books/mx-appendices/web/appendix.css | css | source | compliant | yes | yes |  |
-| publications/mx-books/mx-appendices/web/back-cover.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-appendices/web/back-cover.html | html | source | compliant | yes | yes |  |
 | publications/mx-books/mx-appendices/web/book-product-page.css | css | source | compliant | yes | yes |  |
-| publications/mx-books/mx-appendices/web/book-product-page.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/book.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/faq.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-appendices/web/book-product-page.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/book.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/faq.html | html | source | compliant | yes | yes |  |
 | publications/mx-books/mx-appendices/web/for-reviewers.css | css | source | compliant | yes | yes |  |
-| publications/mx-books/mx-appendices/web/for-reviewers.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/news.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/404.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/about.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/article.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/author.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/blog-post.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/checkout.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/collection.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/consulting.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/contact.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-appendices/web/for-reviewers.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/index.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/news.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/404.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/about.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/article.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/author.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/blog-post.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/checkout.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/collection.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/consulting.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/contact.html | html | source | compliant | yes | yes |  |
 | publications/mx-books/mx-appendices/web/site/css/styles.css | css | source | compliant | yes | yes |  |
-| publications/mx-books/mx-appendices/web/site/event.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/faq.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-appendices/web/site/event.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/faq.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/index.html | html | source | compliant | yes | yes |  |
 | publications/mx-books/mx-appendices/web/site/js/common.js | javascript | source | compliant | yes | yes |  |
-| publications/mx-books/mx-appendices/web/site/login.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/portfolio.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/pricing.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/privacy.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/product.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/sales.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/search.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/team.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-appendices/web/site/testimonials.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-appendices/web/site/login.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/portfolio.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/pricing.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/privacy.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/product.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/sales.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/search.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/team.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-appendices/web/site/testimonials.html | html | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/agent-friendly-starter-kit/bad/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
 | publications/mx-books/mx-code-examples/agent-friendly-starter-kit/bad/script.js | javascript | source | missing | no | no | No structured metadata found |
 | publications/mx-books/mx-code-examples/agent-friendly-starter-kit/bad/style.css | css | source | missing | no | no | No structured metadata found |
-| publications/mx-books/mx-code-examples/agent-friendly-starter-kit/good/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-code-examples/agent-friendly-starter-kit/good/index.html | html | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/agent-friendly-starter-kit/good/style.css | css | source | missing | no | no | No structured metadata found |
-| publications/mx-books/mx-code-examples/examples/delegation-management-ui.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-code-examples/examples/delegation-management-ui.html | html | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/examples/eal-delegation-worker.js | javascript | source | compliant | yes | yes |  |
-| publications/mx-books/mx-code-examples/examples/html-examples/components/data-tables.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/components/dialog-modal.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/components/pricing-display.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/ecommerce/order-confirmation.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/ecommerce/product-page.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/ecommerce/shipping-options.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/ecommerce/shopping-cart.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/forms/disabled-button.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/forms/multi-step-wizard.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/forms/validation-form.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/navigation/breadcrumbs.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/navigation/filters.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/navigation/search-results.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/state/authentication.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/state/error-display.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-code-examples/examples/html-examples/state/loading-state.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-code-examples/examples/html-examples/components/data-tables.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/components/dialog-modal.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/components/pricing-display.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/ecommerce/order-confirmation.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/ecommerce/product-page.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/ecommerce/shipping-options.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/ecommerce/shopping-cart.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/forms/disabled-button.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/forms/multi-step-wizard.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/forms/validation-form.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/navigation/breadcrumbs.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/navigation/filters.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/navigation/search-results.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/state/authentication.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/state/error-display.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-code-examples/examples/html-examples/state/loading-state.html | html | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/examples/monitoring/analytics-tracking.js | javascript | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/examples/monitoring/server-log-analysis.sh | shell | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/examples/nextjs/dynamic-query-index.js | javascript | source | compliant | yes | yes |  |
@@ -130,21 +130,21 @@ mx:
 | publications/mx-books/mx-code-examples/examples/static-site/generate-index.js | javascript | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/examples/validation/verify-ai-production.js | javascript | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/examples/validation/verify-ai-simple.js | javascript | source | compliant | yes | yes |  |
-| publications/mx-books/mx-codex/web/appendix-a.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-b.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-c.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-d.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-e.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-f.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-g.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-h.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-i.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-j.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-k.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| publications/mx-books/mx-codex/web/appendix-l.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| publications/mx-books/mx-codex/web/appendix-a.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-b.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-c.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-d.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-e.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-f.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-g.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-h.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-i.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-index.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-j.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-k.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-codex/web/appendix-l.html | html | source | compliant | yes | yes |  |
 
-### mx-audit/ (80 files, 93% compliant)
+### mx-audit/ (80 files, 98% compliant)
 
 | File | Carrier | Category | Status | Layer 1 | Layer 2 | Notes |
 |------|---------|----------|--------|---------|---------|-------|
@@ -175,8 +175,8 @@ mx:
 | src/utils/mediaMetrics.js | javascript | source | compliant | yes | yes |  |
 | src/utils/metricsCommon.js | javascript | source | compliant | yes | yes |  |
 | src/utils/metricsUpdater.js | javascript | source | compliant | yes | yes |  |
-| src/utils/networkUtils.js | javascript | source | missing | no | no | Missing: @version or @author, @mx:* tags |
-| src/utils/pa11yRunner.js | javascript | source | missing | no | no | Missing: @version or @author, @mx:* tags |
+| src/utils/networkUtils.js | javascript | source | compliant | yes | yes |  |
+| src/utils/pa11yRunner.js | javascript | source | compliant | yes | yes |  |
 | src/utils/pageAnalyzer.js | javascript | source | compliant | yes | yes |  |
 | src/utils/pageAnalyzerHelpers.js | javascript | source | compliant | yes | yes |  |
 | src/utils/pageTypeDetector.js | javascript | source | compliant | yes | yes |  |
@@ -202,7 +202,7 @@ mx:
 | src/utils/schemaAnalysis.js | javascript | source | compliant | yes | yes |  |
 | src/utils/schemaValidator.js | javascript | source | compliant | yes | yes |  |
 | src/utils/schemaVersion.js | javascript | source | compliant | yes | yes |  |
-| src/utils/seoScoring.js | javascript | source | missing | no | no | Missing: @version or @author, @mx:* tags |
+| src/utils/seoScoring.js | javascript | source | compliant | yes | yes |  |
 | src/utils/setup.js | javascript | source | compliant | yes | yes |  |
 | src/utils/shutdownHandler.js | javascript | source | compliant | yes | yes |  |
 | src/utils/sitemap.js | javascript | source | compliant | yes | yes |  |
@@ -211,7 +211,7 @@ mx:
 | src/utils/technicalMetrics.js | javascript | source | compliant | yes | yes |  |
 | src/utils/technologyDetection.js | javascript | source | compliant | yes | yes |  |
 | src/utils/urlMetrics.js | javascript | source | compliant | yes | yes |  |
-| src/utils/urlProcessor.js | javascript | source | missing | no | no | Missing: @version or @author, @mx:* tags |
+| src/utils/urlProcessor.js | javascript | source | compliant | yes | yes |  |
 | src/utils/urlUtils.js | javascript | source | compliant | yes | yes |  |
 | test/formatUtils.test.js | javascript | test | compliant | yes | yes |  |
 | test/goldenMaster.test.js | javascript | test | compliant | yes | yes |  |
@@ -229,11 +229,11 @@ mx:
 | test/utils/robotsQuality.test.js | javascript | test | compliant | yes | yes |  |
 | test/utils/sitemap.test.js | javascript | test | compliant | yes | yes |  |
 
-### mx-canon/ (82 files, 70% compliant)
+### mx-canon/ (82 files, 100% compliant)
 
 | File | Carrier | Category | Status | Layer 1 | Layer 2 | Notes |
 |------|---------|----------|--------|---------|---------|-------|
-| _template/deliverables/landing-page.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| _template/deliverables/landing-page.html | html | source | compliant | yes | yes |  |
 | mx-maxine-lives/communications/blogs/html/allabout/about.claude.code.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/allabout/about.claude.sonnet.4.5.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/allabout/about.microsoft.copilot.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
@@ -288,8 +288,8 @@ mx:
 | mx-maxine-lives/tests/test-route-decorator.sh | shell | test | compliant | yes | yes |  |
 | mx-os/deliverables/mx-script-inspect.sh | shell | source | compliant | yes | yes |  |
 | mx-os/deliverables/mx-script-template.sh | shell | source | compliant | yes | yes |  |
-| mx-the-gathering/deliverables/allabout-the-gathering.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| mx-the-gathering/deliverables/landing-page.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| mx-the-gathering/deliverables/allabout-the-gathering.html | html | source | compliant | yes | yes |  |
+| mx-the-gathering/deliverables/landing-page.html | html | source | compliant | yes | yes |  |
 | mx-the-gathering/reference-implementations/los-granainos/audit/capture-site.js | javascript | reference | compliant | yes | yes |  |
 | mx-the-gathering/reference-implementations/los-granainos/los-granainos-mx-reference.cog.html | html | reference | compliant | yes | yes |  |
 | mx-the-gathering/reference-implementations/los-granainos/los-granainos-single-lang.cog.html | html | reference | compliant | yes | yes |  |
@@ -310,23 +310,23 @@ mx:
 | mx-the-gathering/reference-implementations/templates/audit-system/tutorial-audit/cached-css/returntotop.css-7de9e92f.css | css | generated | generated-needs-update | no | no | Generated file — requires generator update |
 | mx-the-gathering/reference-implementations/templates/audit-system/tutorial-audit/cached-css/styles.css-99f489f8.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-the-gathering/reference-implementations/templates/audit-system/tutorial-audit/cached-html/content-creator-guide-to-document-authoring-with-e-9cda3259.html | html | generated | generated-needs-update | no | no | Generated file — requires generator update |
-| mx-the-gathering/reference-implementations/templates/index-redirect-template.html | html | reference | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| mx-the-gathering/reference-implementations/templates/index-redirect-template.html | html | reference | compliant | yes | yes |  |
 | mx-the-gathering/reference-implementations/templates/n-lang-business-template.cog.html | html | reference | compliant | yes | yes |  |
-| mx-the-gathering/web/about.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| mx-the-gathering/web/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| mx-the-gathering/web/about.html | html | source | compliant | yes | yes |  |
+| mx-the-gathering/web/index.html | html | source | compliant | yes | yes |  |
 | mx-the-gathering/web/shared-gathering.css | css | source | compliant | yes | yes |  |
 
-### mx-crm/ (5 files, 20% compliant)
+### mx-crm/ (5 files, 100% compliant)
 
 | File | Carrier | Category | Status | Layer 1 | Layer 2 | Notes |
 |------|---------|----------|--------|---------|---------|-------|
-| dotfusion/data/about.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| dotfusion/data/about.html | html | source | compliant | yes | yes |  |
 | dotfusion/data/assets/css/styles.css | css | source | compliant | yes | yes |  |
-| dotfusion/data/contact.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| dotfusion/data/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
-| dotfusion/data/our-work.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| dotfusion/data/contact.html | html | source | compliant | yes | yes |  |
+| dotfusion/data/index.html | html | source | compliant | yes | yes |  |
+| dotfusion/data/our-work.html | html | source | compliant | yes | yes |  |
 
-### mx-maxine-app/ (28 files, 79% compliant)
+### mx-maxine-app/ (28 files, 96% compliant)
 
 | File | Carrier | Category | Status | Layer 1 | Layer 2 | Notes |
 |------|---------|----------|--------|---------|---------|-------|
@@ -337,15 +337,15 @@ mx:
 | backend/server.js | javascript | source | compliant | yes | yes |  |
 | backend/websocket.js | javascript | source | compliant | yes | yes |  |
 | dashboard/app.js | javascript | source | compliant | yes | yes |  |
-| dashboard/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| dashboard/index.html | html | source | compliant | yes | yes |  |
 | dashboard/style.css | css | source | compliant | yes | yes |  |
-| demo/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| demo/index.html | html | source | compliant | yes | yes |  |
 | demo/restaurant.html | html | source | compliant | yes | yes |  |
 | demo/server.js | javascript | source | compliant | yes | yes |  |
 | main.js | javascript | source | compliant | yes | yes |  |
 | preload.js | javascript | source | compliant | yes | yes |  |
 | pwa/app.js | javascript | source | compliant | yes | yes |  |
-| pwa/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| pwa/index.html | html | source | compliant | yes | yes |  |
 | pwa/jsQR.js | javascript | source | missing | no | no | No structured metadata found |
 | pwa/style.css | css | source | compliant | yes | yes |  |
 | pwa/sw.js | javascript | source | compliant | yes | yes |  |
@@ -354,9 +354,9 @@ mx:
 | src/css/dialogue.css | css | source | compliant | yes | yes |  |
 | src/css/mx-brand.css | css | source | compliant | yes | yes |  |
 | src/css/sidebar.css | css | source | compliant | yes | yes |  |
-| src/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| src/index.html | html | source | compliant | yes | yes |  |
 | src/js/app.js | javascript | source | compliant | yes | yes |  |
-| src/splash.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| src/splash.html | html | source | compliant | yes | yes |  |
 | test/joymaker.test.js | javascript | test | compliant | yes | yes |  |
 
 ### mx-outputs/ (35 files, 0% compliant)
@@ -424,7 +424,7 @@ mx:
 | scripts/validate-cog/check.sh | shell | source | compliant | yes | yes |  |
 | scripts/validate-cogs.js | javascript | source | compliant | yes | yes |  |
 
-### scripts/ (125 files, 98% compliant)
+### scripts/ (125 files, 99% compliant)
 
 | File | Carrier | Category | Status | Layer 1 | Layer 2 | Notes |
 |------|---------|----------|--------|---------|---------|-------|
@@ -509,7 +509,7 @@ mx:
 | mx-nav-server/lib/scanner.js | javascript | source | compliant | yes | yes |  |
 | mx-nav-server/lib/search.js | javascript | source | compliant | yes | yes |  |
 | mx-nav-server/public/app.js | javascript | source | compliant | yes | yes |  |
-| mx-nav-server/public/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| mx-nav-server/public/index.html | html | source | compliant | yes | yes |  |
 | mx-nav-server/server.js | javascript | source | compliant | yes | yes |  |
 | mx-pdf.sh | shell | source | compliant | yes | yes |  |
 | mx-rename-tracker.js | javascript | source | compliant | yes | yes |  |
@@ -532,7 +532,7 @@ mx:
 | qr-code-generator/lib/qr-engine.js | javascript | source | compliant | yes | yes |  |
 | qr-code-generator/lib/validator.js | javascript | source | compliant | yes | yes |  |
 | qr-code-generator/public/app.js | javascript | source | compliant | yes | yes |  |
-| qr-code-generator/public/index.html | html | source | partial | yes | no | Missing: <meta name="mx:*"> or <link rel="mx"> |
+| qr-code-generator/public/index.html | html | source | compliant | yes | yes |  |
 | qr-code-generator/public/style.css | css | source | compliant | yes | yes |  |
 | qr-code-generator/qr-generator.js | javascript | source | compliant | yes | yes |  |
 | qr-code-generator/server.js | javascript | source | compliant | yes | yes |  |
@@ -600,23 +600,19 @@ They require changes to the generator scripts, not manual edits.
 
 ### JavaScript (.js)
 
-- **168** fully compliant (Layer 1 + Layer 2)
+- **172** fully compliant (Layer 1 + Layer 2)
 - **0** partially compliant (native metadata but no MX identity)
-- **6** missing all metadata
+- **2** missing all metadata
 
 **Files missing all metadata:**
 
 - datalake/publications/mx-books/mx-code-examples/agent-friendly-starter-kit/bad/script.js
-- mx-audit/src/utils/networkUtils.js
-- mx-audit/src/utils/pa11yRunner.js
-- mx-audit/src/utils/seoScoring.js
-- mx-audit/src/utils/urlProcessor.js
 - mx-maxine-app/pwa/jsQR.js
 
 ### HTML (.html)
 
-- **5** fully compliant (Layer 1 + Layer 2)
-- **92** partially compliant (native metadata but no MX identity)
+- **94** fully compliant (Layer 1 + Layer 2)
+- **3** partially compliant (native metadata but no MX identity)
 - **1** missing all metadata
 
 **Files missing all metadata:**
@@ -642,7 +638,7 @@ They require changes to the generator scripts, not manual edits.
 
 High-value, hand-maintained files that should be exemplars of carrier format compliance.
 
-**8 files** need attention.
+**1 files** need attention.
 
 ### Priority 2 — Generator updates
 
@@ -650,7 +646,7 @@ High-value, hand-maintained files that should be exemplars of carrier format com
 
 ### Priority 3 — Submodule source files
 
-**16 files** in submodules need attention (requires separate commits).
+**3 files** in submodules need attention (requires separate commits).
 
 ### Priority 4 — Test and example files
 
