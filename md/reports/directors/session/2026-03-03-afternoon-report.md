@@ -1,6 +1,6 @@
 ---
 title: "Co-Directors Report — Cleaning the Last Fingerprints"
-description: "Afternoon session report. Four work streams: allaboutv2 carrier compliance (4%→99%), npm vulnerability elimination (0 vulnerabilities), field dictionary reference sweep (40+ files), and redirect file removal."
+description: "Afternoon session report. Five work streams: allaboutv2 carrier compliance (4%→99%), npm vulnerability elimination (0 vulnerabilities), field dictionary reference sweep (40+ files), redirect file removal, and REGINALD language redirect (Cloudflare Worker v1.2.0)."
 created: "2026-03-03"
 segment: "afternoon"
 version: "1.0"
@@ -17,11 +17,11 @@ confidentiality: "internal"
 
 ## Summary
 
-Building on this morning's infrastructure work, the afternoon was pure consolidation — extending compliance to the last excluded directory, eliminating every security vulnerability in the build pipeline, and tracking down every stale reference to a file that no longer exists.
+Building on this morning's infrastructure work, the afternoon was consolidation and then construction — extending compliance to the last excluded directory, eliminating every security vulnerability in the build pipeline, tracking down every stale reference to a file that no longer exists, and then building the first REGINALD edge feature.
 
 The morning created the SSOT and the carrier compliance tooling. The afternoon proved they work at scale: allaboutv2 went from 4% to 99% carrier compliance, npm audit reached zero vulnerabilities for the first time, and a redirect file that should never have existed was deleted along with every reference to its old location across 40 files.
 
-This is the kind of work that does not produce new features. It produces trust. Every path now resolves. Every dependency is clean. Every tool points to the right source.
+With the house clean, the Cloudflare Worker gained its first intelligence: server-side Accept-Language detection that redirects visitors to their preferred language before a single byte of HTML is served. The Salva demo is the first site registered. Any n-language site can now be added by editing a JSON config file — no worker redeployment needed.
 
 ---
 
@@ -29,15 +29,17 @@ This is the kind of work that does not produce new features. It produces trust. 
 
 | Metric | Value |
 |--------|-------|
-| Commits (afternoon) | 7 |
-| Unique files touched | 40 |
-| Lines added | 12,037 |
-| Lines removed | 2,554 |
+| Commits (afternoon) | 10 |
+| Unique files touched | 48 |
+| Lines added | 12,425 |
+| Lines removed | 2,563 |
 | npm vulnerabilities | 8 → 0 |
 | allaboutv2 carrier compliance | 4% → 99% |
 | Stale references fixed | 40+ across 30 files |
 | Redirect files removed | 1 |
 | Registry cogs | 160 → 159 (redirect removed) |
+| Cloudflare Worker version | 1.1.5 → 1.2.0 |
+| New tests (language redirect) | 27 (110 total) |
 
 ---
 
@@ -72,11 +74,27 @@ The morning created `mx-canon/ssot/fields.cog.md` and left a redirect at the old
 
 30 files in the main repo, 10 in allaboutv2. Registry regenerated: 159 cogs, 0 errors.
 
+### REGINALD Language Redirect — Cloudflare Worker v1.2.0 (commits 070bfad1, 050b4f35)
+
+The Cloudflare Worker that serves allabout.network gained its first REGINALD feature: server-side Accept-Language detection with automatic 302 redirect to the visitor's preferred language.
+
+**How it works:** A visitor requests `/mx/demo/salva/`. The worker reads their `Accept-Language` header (e.g., `es-MX,en;q=0.8`), cascades through regional → base → default matching, and redirects to `/mx/demo/salva/es/` before any HTML is served. No flash of wrong content. No client-side JavaScript dependency. No cookies (GDPR compliant).
+
+**Architecture decisions:**
+
+- **Integrated into existing worker** — not a separate worker. Single deployment, follows the two-file rule (all logic as pure exported functions, fully testable without Cloudflare runtime).
+- **Config-driven** — site language settings live in a static JSON file (`/reginald/api/v1/language-config.json`), cached at edge for 1 hour. Adding a new n-language site requires editing one JSON file — no worker redeployment.
+- **Non-critical** — if the config fetch fails, the worker falls through silently to normal request handling. Language redirect is additive, never blocking.
+
+**Four pure functions added:** `parseAcceptLanguage`, `detectLanguage`, `findLanguageSite`, `shouldLanguageRedirect`. 27 new tests, 110 total, lint clean.
+
+The Salva demo (Los Granainos restaurant, `/mx/demo/salva/`) is the first registered site. This is Phase 1 of the proposal at `mx-collaboration/proposals/reginald-language-redirect.md`. Phase 2 (hreflang injection at edge) remains.
+
 ---
 
 ## What Changed About Me
 
-Reginald indexes 160 cogs (down from 161 — the redirect file was removed from the registry). The recon script now reads the field dictionary from its SSOT location. NDR count adjusted after naming decision restructure.
+Reginald indexes 159 cogs (down from 161 — the redirect file was removed from the registry). The recon script now reads the field dictionary from its SSOT location. NDR count adjusted after naming decision restructure. The Cloudflare Worker is now v1.2.0, with language detection as the first REGINALD edge intelligence.
 
 ---
 
@@ -89,9 +107,18 @@ Reginald indexes 160 cogs (down from 161 — the redirect file was removed from 
 
 ---
 
+## Decisions Made (continued)
+
+1. **Language redirect in existing worker.** Not a separate worker. One deployment, one test suite, one version. The two-file rule applies: all logic is pure functions, testable without Cloudflare runtime.
+2. **Config-driven, not code-driven.** New n-language sites are added by editing `language-config.json`, not by modifying worker code. Decouples content from infrastructure.
+
+---
+
 ## Next Steps
 
-- Update CHANGELOG.md with afternoon work (npm fixes, allaboutv2 compliance, reference sweep)
+- Deploy Cloudflare Worker v1.2.0 to production (currently tested locally, not yet deployed)
+- Test language redirect live with Salva demo
+- Phase 2: hreflang injection at edge
 - Frankfurt CMS Summit preparation (70 days) — demo scripting against the now-stable infrastructure
 - Handbook publication (30 days) — manuscript references verified against SSOT
 - LinkedIn ad re-submission using messaging materials
@@ -109,6 +136,9 @@ Reginald indexes 160 cogs (down from 161 — the redirect file was removed from 
 | `d854c619` | Resolve all npm audit vulnerabilities — 0 vulnerabilities |
 | `cf6e77ba` | Update all field-dictionary references to SSOT path |
 | `d706c656` | Remove field-dictionary redirect, update all references to SSOT |
+| `a7548f1e` | Co-directors afternoon report, refresh self-knowledge |
+| `070bfad1` | REGINALD language redirect — Cloudflare Worker v1.2.0 |
+| `050b4f35` | Update CHANGELOG with afternoon session and language redirect |
 
 ---
 
