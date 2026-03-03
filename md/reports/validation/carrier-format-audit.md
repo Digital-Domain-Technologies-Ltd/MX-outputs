@@ -25,11 +25,11 @@ mx:
 
 | Carrier | Total | Compliant | Partial | Missing | Generated | Score |
 |---------|-------|-----------|---------|---------|-----------|-------|
-| Shell (.sh) | 88 | 87 | 0 | 0 | 1 | 100% |
-| JavaScript (.js) | 174 | 172 | 0 | 2 | 0 | 99% |
-| HTML (.html) | 148 | 94 | 3 | 1 | 50 | 96% |
-| CSS (.css) | 62 | 14 | 0 | 2 | 46 | 88% |
-| **Total** | **472** | **367** | **3** | **5** | **97** | **98%** |
+| Shell (.sh) | 90 | 89 | 0 | 0 | 1 | 100% |
+| JavaScript (.js) | 290 | 288 | 0 | 2 | 0 | 99% |
+| HTML (.html) | 377 | 321 | 3 | 3 | 50 | 98% |
+| CSS (.css) | 183 | 135 | 0 | 2 | 46 | 99% |
+| **Total** | **940** | **833** | **3** | **7** | **97** | **99%** |
 
 ---
 
@@ -37,14 +37,487 @@ mx:
 
 | Category | Total | Compliant | Partial | Missing |
 |----------|-------|-----------|---------|---------|
-| Source files | 345 | 337 | 3 | 5 |
-| Test files | 21 | 21 | 0 | 0 |
-| Reference implementations | 9 | 9 | 0 | 0 |
+| Source files | 798 | 788 | 3 | 7 |
+| Test files | 23 | 23 | 0 | 0 |
+| Reference implementations | 22 | 22 | 0 | 0 |
 | Generated outputs | 97 | 0 | 0 | 15 |
 
 ---
 
 ## Compliance by Directory
+
+### allaboutv2/ (468 files, 100% compliant)
+
+| File | Carrier | Category | Status | Layer 1 | Layer 2 | Notes |
+|------|---------|----------|--------|---------|---------|-------|
+| 404.html | html | source | compliant | yes | yes |  |
+| agentsetup.sh | shell | source | compliant | yes | yes |  |
+| assets/index-DMC9YjsP.css | css | source | compliant | yes | yes |  |
+| assets/index-UbQ-77Ai.js | javascript | source | compliant | yes | yes |  |
+| bio.html | html | source | compliant | yes | yes |  |
+| blocks/3dcube/3dcube.css | css | source | compliant | yes | yes |  |
+| blocks/3dcube/3dcube.js | javascript | source | compliant | yes | yes |  |
+| blocks/3dcube/test.html | html | source | compliant | yes | yes |  |
+| blocks/accordion/accordion.css | css | source | compliant | yes | yes |  |
+| blocks/accordion/accordion.js | javascript | source | compliant | yes | yes |  |
+| blocks/accordion/test.html | html | source | compliant | yes | yes |  |
+| blocks/bio/bio.css | css | source | compliant | yes | yes |  |
+| blocks/bio/bio.js | javascript | source | compliant | yes | yes |  |
+| blocks/bio/test.html | html | source | compliant | yes | yes |  |
+| blocks/bloglist/bloglist.css | css | source | compliant | yes | yes |  |
+| blocks/bloglist/bloglist.js | javascript | source | compliant | yes | yes |  |
+| blocks/bloglist/test.html | html | source | compliant | yes | yes |  |
+| blocks/blogroll/blogroll.css | css | source | compliant | yes | yes |  |
+| blocks/blogroll/blogroll.js | javascript | source | compliant | yes | yes |  |
+| blocks/blogroll/test.html | html | source | compliant | yes | yes |  |
+| blocks/cards/cards.css | css | source | compliant | yes | yes |  |
+| blocks/cards/cards.js | javascript | source | compliant | yes | yes |  |
+| blocks/cards/test.html | html | source | compliant | yes | yes |  |
+| blocks/centreblock/centreblock.css | css | source | compliant | yes | yes |  |
+| blocks/centreblock/centreblock.js | javascript | source | compliant | yes | yes |  |
+| blocks/centreblock/test.html | html | source | compliant | yes | yes |  |
+| blocks/code-expander/code-expander.css | css | source | compliant | yes | yes |  |
+| blocks/code-expander/code-expander.js | javascript | source | compliant | yes | yes |  |
+| blocks/code-expander/test.html | html | source | compliant | yes | yes |  |
+| blocks/columns/columns.css | css | source | compliant | yes | yes |  |
+| blocks/columns/columns.js | javascript | source | compliant | yes | yes |  |
+| blocks/columns/test.html | html | source | compliant | yes | yes |  |
+| blocks/comment/comment.css | css | source | compliant | yes | yes |  |
+| blocks/comment/comment.js | javascript | source | compliant | yes | yes |  |
+| blocks/comment/test.html | html | source | compliant | yes | yes |  |
+| blocks/counter/counter.css | css | source | compliant | yes | yes |  |
+| blocks/counter/counter.js | javascript | source | compliant | yes | yes |  |
+| blocks/counter/test.html | html | source | compliant | yes | yes |  |
+| blocks/dam/dam.css | css | source | compliant | yes | yes |  |
+| blocks/dam/dam.js | javascript | source | compliant | yes | yes |  |
+| blocks/dam/test.html | html | source | compliant | yes | yes |  |
+| blocks/dashboard/dashboard.css | css | source | compliant | yes | yes |  |
+| blocks/dashboard/dashboard.js | javascript | source | compliant | yes | yes |  |
+| blocks/dashboard/test.html | html | source | compliant | yes | yes |  |
+| blocks/dfs/dfs.css | css | source | compliant | yes | yes |  |
+| blocks/dfs/dfs.js | javascript | source | compliant | yes | yes |  |
+| blocks/dfs/test.html | html | source | compliant | yes | yes |  |
+| blocks/dps/dps.css | css | source | compliant | yes | yes |  |
+| blocks/dps/dps.js | javascript | source | compliant | yes | yes |  |
+| blocks/dps/test.html | html | source | compliant | yes | yes |  |
+| blocks/dynamic/dynamic.css | css | source | compliant | yes | yes |  |
+| blocks/dynamic/dynamic.js | javascript | source | compliant | yes | yes |  |
+| blocks/dynamic/test.html | html | source | compliant | yes | yes |  |
+| blocks/embed/embed.css | css | source | compliant | yes | yes |  |
+| blocks/embed/embed.js | javascript | source | compliant | yes | yes |  |
+| blocks/embed/test.html | html | source | compliant | yes | yes |  |
+| blocks/floating-alert/floating-alert.css | css | source | compliant | yes | yes |  |
+| blocks/floating-alert/floating-alert.js | javascript | source | compliant | yes | yes |  |
+| blocks/floating-alert/test.html | html | source | compliant | yes | yes |  |
+| blocks/footer/footer.css | css | source | compliant | yes | yes |  |
+| blocks/footer/footer.js | javascript | source | compliant | yes | yes |  |
+| blocks/footer/test.html | html | source | compliant | yes | yes |  |
+| blocks/fortunecookie/fortunecookie.css | css | source | compliant | yes | yes |  |
+| blocks/fortunecookie/fortunecookie.js | javascript | source | compliant | yes | yes |  |
+| blocks/fortunecookie/test.html | html | source | compliant | yes | yes |  |
+| blocks/fragment/fragment.css | css | source | compliant | yes | yes |  |
+| blocks/fragment/fragment.js | javascript | source | compliant | yes | yes |  |
+| blocks/fragment/test.html | html | source | compliant | yes | yes |  |
+| blocks/grid/grid.css | css | source | compliant | yes | yes |  |
+| blocks/grid/grid.js | javascript | source | compliant | yes | yes |  |
+| blocks/grid/test.html | html | source | compliant | yes | yes |  |
+| blocks/header/header.css | css | source | compliant | yes | yes |  |
+| blocks/header/header.js | javascript | source | compliant | yes | yes |  |
+| blocks/header/test.html | html | source | compliant | yes | yes |  |
+| blocks/helloworld/helloworld.css | css | source | compliant | yes | yes |  |
+| blocks/helloworld/helloworld.js | javascript | source | compliant | yes | yes |  |
+| blocks/helloworld/test.html | html | source | compliant | yes | yes |  |
+| blocks/hero/hero.css | css | source | compliant | yes | yes |  |
+| blocks/hero/hero.js | javascript | source | compliant | yes | yes |  |
+| blocks/hero/test.html | html | source | compliant | yes | yes |  |
+| blocks/index/index.css | css | source | compliant | yes | yes |  |
+| blocks/index/index.js | javascript | source | compliant | yes | yes |  |
+| blocks/index/test.html | html | source | compliant | yes | yes |  |
+| blocks/inline-svg/inline-svg.css | css | source | compliant | yes | yes |  |
+| blocks/inline-svg/inline-svg.js | javascript | source | compliant | yes | yes |  |
+| blocks/inline-svg/test.html | html | source | compliant | yes | yes |  |
+| blocks/ipynb-viewer/ipynb-viewer.css | css | source | compliant | yes | yes |  |
+| blocks/ipynb-viewer/ipynb-viewer.js | javascript | source | compliant | yes | yes |  |
+| blocks/ipynb-viewer/overlay/footer.js | javascript | source | compliant | yes | yes |  |
+| blocks/ipynb-viewer/overlay/navigation-state.js | javascript | source | compliant | yes | yes |  |
+| blocks/ipynb-viewer/overlay/renderers/markdown-renderer.js | javascript | source | compliant | yes | yes |  |
+| blocks/ipynb-viewer/overlay/renderers/notebook-renderer.js | javascript | source | compliant | yes | yes |  |
+| blocks/ipynb-viewer/overlay/toolbar.js | javascript | source | compliant | yes | yes |  |
+| blocks/ipynb-viewer/overlay/unified-overlay.js | javascript | source | compliant | yes | yes |  |
+| blocks/ipynb-viewer/test.html | html | source | compliant | yes | yes |  |
+| blocks/markdown/markdown.css | css | source | compliant | yes | yes |  |
+| blocks/markdown/markdown.js | javascript | source | compliant | yes | yes |  |
+| blocks/markdown/test.html | html | source | compliant | yes | yes |  |
+| blocks/modal/modal.css | css | source | compliant | yes | yes |  |
+| blocks/modal/modal.js | javascript | source | compliant | yes | yes |  |
+| blocks/modal/test.html | html | source | compliant | yes | yes |  |
+| blocks/overlay/overlay.css | css | source | compliant | yes | yes |  |
+| blocks/overlay/overlay.js | javascript | source | compliant | yes | yes |  |
+| blocks/overlay/test.html | html | source | compliant | yes | yes |  |
+| blocks/quote/quote.css | css | source | compliant | yes | yes |  |
+| blocks/quote/quote.js | javascript | source | compliant | yes | yes |  |
+| blocks/quote/test.html | html | source | compliant | yes | yes |  |
+| blocks/raw/raw.css | css | source | compliant | yes | yes |  |
+| blocks/raw/raw.js | javascript | source | compliant | yes | yes |  |
+| blocks/raw/test.html | html | source | compliant | yes | yes |  |
+| blocks/react-slide-builder/react-slide-builder.css | css | source | compliant | yes | yes |  |
+| blocks/react-slide-builder/react-slide-builder.js | javascript | source | compliant | yes | yes |  |
+| blocks/react-slide-builder/test.html | html | source | compliant | yes | yes |  |
+| blocks/remove-icon-styles/remove-icon-styles.css | css | source | compliant | yes | yes |  |
+| blocks/remove-icon-styles/remove-icon-styles.js | javascript | source | compliant | yes | yes |  |
+| blocks/remove-icon-styles/test.html | html | source | compliant | yes | yes |  |
+| blocks/returntotop/returntotop.css | css | source | compliant | yes | yes |  |
+| blocks/returntotop/returntotop.js | javascript | source | compliant | yes | yes |  |
+| blocks/returntotop/test.html | html | source | compliant | yes | yes |  |
+| blocks/search/search.css | css | source | compliant | yes | yes |  |
+| blocks/search/search.js | javascript | source | compliant | yes | yes |  |
+| blocks/search/test.html | html | source | compliant | yes | yes |  |
+| blocks/shoelace-card/shoelace-card.css | css | source | compliant | yes | yes |  |
+| blocks/shoelace-card/shoelace-card.js | javascript | source | compliant | yes | yes |  |
+| blocks/shoelace-card/test.html | html | source | compliant | yes | yes |  |
+| blocks/shoelace-card/test2.html | html | source | compliant | yes | yes |  |
+| blocks/shoelace/shoelace.css | css | source | compliant | yes | yes |  |
+| blocks/shoelace/shoelace.js | javascript | source | compliant | yes | yes |  |
+| blocks/shoelace/test.html | html | source | compliant | yes | yes |  |
+| blocks/showcaser/showcaser.css | css | source | compliant | yes | yes |  |
+| blocks/showcaser/showcaser.js | javascript | source | compliant | yes | yes |  |
+| blocks/showcaser/test.html | html | source | compliant | yes | yes |  |
+| blocks/slide-builder/slide-builder.css | css | source | compliant | yes | yes |  |
+| blocks/slide-builder/slide-builder.js | javascript | source | compliant | yes | yes |  |
+| blocks/slide-builder/test.html | html | source | compliant | yes | yes |  |
+| blocks/spectrum-card/spectrum-card.css | css | source | compliant | yes | yes |  |
+| blocks/spectrum-card/spectrum-card.js | javascript | source | compliant | yes | yes |  |
+| blocks/spectrum-card/test.html | html | source | compliant | yes | yes |  |
+| blocks/table/table.css | css | source | compliant | yes | yes |  |
+| blocks/table/table.js | javascript | source | compliant | yes | yes |  |
+| blocks/table/test.html | html | source | compliant | yes | yes |  |
+| blocks/tabs/tabs.css | css | source | compliant | yes | yes |  |
+| blocks/tabs/tabs.js | javascript | source | compliant | yes | yes |  |
+| blocks/tabs/test.html | html | source | compliant | yes | yes |  |
+| blocks/tags/tags.css | css | source | compliant | yes | yes |  |
+| blocks/tags/tags.js | javascript | source | compliant | yes | yes |  |
+| blocks/tags/test.html | html | source | compliant | yes | yes |  |
+| blocks/text/test.html | html | source | compliant | yes | yes |  |
+| blocks/text/text.css | css | source | compliant | yes | yes |  |
+| blocks/text/text.js | javascript | source | compliant | yes | yes |  |
+| blocks/video/test.html | html | source | compliant | yes | yes |  |
+| blocks/video/video.css | css | source | compliant | yes | yes |  |
+| blocks/video/video.js | javascript | source | compliant | yes | yes |  |
+| blocks/view-myblog/test.html | html | source | compliant | yes | yes |  |
+| blocks/view-myblog/view-myblog.css | css | source | compliant | yes | yes |  |
+| blocks/view-myblog/view-myblog.js | javascript | source | compliant | yes | yes |  |
+| blocks/vue-slide-builder/test.html | html | source | compliant | yes | yes |  |
+| blocks/vue-slide-builder/vue-slide-builder.css | css | source | compliant | yes | yes |  |
+| blocks/vue-slide-builder/vue-slide-builder.js | javascript | source | compliant | yes | yes |  |
+| blogs/mx/about.claude.code.html | html | source | compliant | yes | yes |  |
+| blogs/mx/about.claude.sonnet.4.5.html | html | source | compliant | yes | yes |  |
+| blogs/mx/about.microsoft.copilot.html | html | source | compliant | yes | yes |  |
+| blogs/mx/about.tom.cranstoun.html | html | source | compliant | yes | yes |  |
+| blogs/mx/ai-assistant-side-notices.html | html | source | compliant | yes | yes |  |
+| blogs/mx/claude-joins-mx-community.html | html | source | compliant | yes | yes |  |
+| blogs/mx/data-sovereignty.html | html | source | compliant | yes | yes |  |
+| blogs/mx/designing-workflows-for-humans-and-machines.css | css | source | compliant | yes | yes |  |
+| blogs/mx/designing-workflows-for-humans-and-machines.html | html | source | compliant | yes | yes |  |
+| blogs/mx/machine-experience-adding-metadata.html | html | source | compliant | yes | yes |  |
+| blogs/mx/mx-a-new-role.html | html | source | compliant | yes | yes |  |
+| blogs/mx/mx-contribution-guidelines.html | html | source | compliant | yes | yes |  |
+| blogs/mx/mx-manifesto.html | html | source | compliant | yes | yes |  |
+| blogs/mx/shared-mx.css | css | source | compliant | yes | yes |  |
+| blogs/mx/what-is-machine-experience.html | html | source | compliant | yes | yes |  |
+| build/spectrum-card/dist/spectrum-card.js | javascript | source | compliant | yes | yes |  |
+| build/spectrum-card/spectrum-card.js | javascript | source | compliant | yes | yes |  |
+| build/spectrum-card/test.html | html | source | compliant | yes | yes |  |
+| build/spectrum-card/vite.config.js | javascript | source | compliant | yes | yes |  |
+| cloudflare/files/cloudflare-worker.js | javascript | source | compliant | yes | yes |  |
+| cloudflare/files/cloudflare-worker.test.js | javascript | test | compliant | yes | yes |  |
+| cloudflare/files/test-local-html.js | javascript | source | compliant | yes | yes |  |
+| cloudflare/files/vitest.config.js | javascript | source | compliant | yes | yes |  |
+| cloudflare/test-rendered.html | html | source | compliant | yes | yes |  |
+| cloudflare/test.html | html | source | compliant | yes | yes |  |
+| config/config.js | javascript | source | compliant | yes | yes |  |
+| faq.css | css | source | compliant | yes | yes |  |
+| faq.html | html | source | compliant | yes | yes |  |
+| googleec3acd01d043bece.html | html | source | missing | no | no | No structured metadata found |
+| head.html | html | source | missing | no | no | No structured metadata found |
+| index.html | html | source | compliant | yes | yes |  |
+| insert-variables.sh | shell | source | compliant | yes | yes |  |
+| invisible-users/appendix-a.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-b.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-c.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-d.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-e.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-f.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-g.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-h.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-i.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-index.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-j.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-k.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix-l.html | html | source | compliant | yes | yes |  |
+| invisible-users/appendix.css | css | source | compliant | yes | yes |  |
+| invisible-users/back-cover.html | html | source | compliant | yes | yes |  |
+| invisible-users/book.html | html | source | compliant | yes | yes |  |
+| invisible-users/faq.html | html | source | compliant | yes | yes |  |
+| invisible-users/for-reviewers.css | css | source | compliant | yes | yes |  |
+| invisible-users/for-reviewers.html | html | source | compliant | yes | yes |  |
+| invisible-users/index.html | html | source | compliant | yes | yes |  |
+| invisible-users/news.html | html | source | compliant | yes | yes |  |
+| invisible-users/notebook.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/404.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/about.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/article.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/author.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/blog-post.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/checkout.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/collection.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/consulting.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/contact.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/css/styles.css | css | source | compliant | yes | yes |  |
+| invisible-users/site/event.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/faq.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/index.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/js/common.js | javascript | source | compliant | yes | yes |  |
+| invisible-users/site/login.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/portfolio.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/pricing.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/privacy.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/product.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/sales.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/search.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/team.html | html | source | compliant | yes | yes |  |
+| invisible-users/site/testimonials.html | html | source | compliant | yes | yes |  |
+| lottery.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/about.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/about.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/accessibility-ai-convergence.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/accessibility-ai-convergence.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/benefits-of-mx.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/benefits-of-mx.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/common-mistakes.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/common-mistakes.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/contact.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/contact.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/explicit-over-implicit.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/explicit-over-implicit.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/implementation-examples.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/implementation-examples.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/index.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/index.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/key-principles.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/key-principles.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/our-approach.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/our-approach.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/our-services.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/our-services.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/what-is-mx.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/what-is-mx.html | html | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/why-mx-matters.css | css | source | compliant | yes | yes |  |
+| mx/cog-nova-mx-website/why-mx-matters.html | html | source | compliant | yes | yes |  |
+| mx/coming-soon.css | css | source | compliant | yes | yes |  |
+| mx/coming-soon.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/about.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/about.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/accessibility-ai-convergence.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/accessibility-ai-convergence.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/benefits-of-mx.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/benefits-of-mx.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/common-mistakes.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/common-mistakes.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/contact.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/contact.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/explicit-over-implicit.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/explicit-over-implicit.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/implementation-examples.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/implementation-examples.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/index.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/index.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/key-principles.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/key-principles.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/our-approach.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/our-approach.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/our-services.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/our-services.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/what-is-mx.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/what-is-mx.html | html | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/why-mx-matters.css | css | source | compliant | yes | yes |  |
+| mx/demo/cog-nova-mx/why-mx-matters.html | html | source | compliant | yes | yes |  |
+| mx/demo/conference/assets/script.js | javascript | source | compliant | yes | yes |  |
+| mx/demo/conference/assets/style.css | css | source | compliant | yes | yes |  |
+| mx/demo/conference/de/index.cog.html | html | source | compliant | yes | yes |  |
+| mx/demo/conference/en/index.cog.html | html | source | compliant | yes | yes |  |
+| mx/demo/conference/index.html | html | source | compliant | yes | yes |  |
+| mx/demo/dotfusion/about.html | html | source | compliant | yes | yes |  |
+| mx/demo/dotfusion/assets/css/styles.css | css | source | compliant | yes | yes |  |
+| mx/demo/dotfusion/contact.html | html | source | compliant | yes | yes |  |
+| mx/demo/dotfusion/index.html | html | source | compliant | yes | yes |  |
+| mx/demo/dotfusion/our-work.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/about.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/assets/css/styles.css | css | source | compliant | yes | yes |  |
+| mx/demo/lpc/contact.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/index.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/reviews.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/services/business-stationery.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/services/design-branding.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/services/event-stationery.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/services/garment-printing.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/services/index.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/services/marketing-materials.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/services/online-merch-shops.html | html | source | compliant | yes | yes |  |
+| mx/demo/lpc/services/web-services.html | html | source | compliant | yes | yes |  |
+| mx/demo/media219/assets/css/styles.css | css | source | compliant | yes | yes |  |
+| mx/demo/media219/contact.html | html | source | compliant | yes | yes |  |
+| mx/demo/media219/index.html | html | source | compliant | yes | yes |  |
+| mx/demo/media219/work.html | html | source | compliant | yes | yes |  |
+| mx/demo/salva/assets/script.js | javascript | source | compliant | yes | yes |  |
+| mx/demo/salva/assets/style.css | css | source | compliant | yes | yes |  |
+| mx/demo/salva/en/index.cog.html | html | source | compliant | yes | yes |  |
+| mx/demo/salva/es/index.cog.html | html | source | compliant | yes | yes |  |
+| mx/demo/salva/index.html | html | source | compliant | yes | yes |  |
+| mx/mx-principles-menu.css | css | source | compliant | yes | yes |  |
+| mx/mx-principles-menu.html | html | source | compliant | yes | yes |  |
+| mx/possible-index.html | html | source | compliant | yes | yes |  |
+| mx/principles-changed-how-i-build.css | css | source | compliant | yes | yes |  |
+| mx/principles-changed-how-i-build.html | html | source | compliant | yes | yes |  |
+| navigator.html | html | source | compliant | yes | yes |  |
+| plusplus/block-party/dom-helpers.js | javascript | source | compliant | yes | yes |  |
+| plusplus/block-party/ffetch.js | javascript | source | compliant | yes | yes |  |
+| plusplus/plugins/experimentation/.eslintrc.js | javascript | source | compliant | yes | yes |  |
+| plusplus/plugins/experimentation/src/index.js | javascript | source | compliant | yes | yes |  |
+| plusplus/plugins/experimentation/src/preview.css | css | source | compliant | yes | yes |  |
+| plusplus/plugins/experimentation/src/preview.js | javascript | source | compliant | yes | yes |  |
+| plusplus/plugins/experimentation/src/ued.js | javascript | source | compliant | yes | yes |  |
+| plusplus/plugins/expressions/src/expressions.js | javascript | source | compliant | yes | yes |  |
+| plusplus/plugins/expressions/src/expressions.test.js | javascript | test | compliant | yes | yes |  |
+| plusplus/src/adobe-metadata.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/clientConfig.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/clientExpressions.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/debugPanel.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/externalImage.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/jsonHandler.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/reModelDom.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/accordion/accordion.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/accordion/accordion.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/bio/bio.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/bio/bio.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/carousel/carousel.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/carousel/carousel.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/centreblock/centreblock.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/centreblock/centreblock.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/comment/comment.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/comment/comment.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/dashboard/dashboard.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/dashboard/dashboard.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/dynamic/dynamic.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/dynamic/dynamic.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/embed/embed.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/embed/embed.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/fragment/fragment.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/fragment/fragment.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/index/index.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/index/index.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/modal/modal.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/modal/modal.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/quote/quote.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/quote/quote.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/returntotop/returntotop.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/returntotop/returntotop.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/search/search.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/search/search.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/table/table.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/table/table.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/tabs/tabs.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/tabs/tabs.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/tags/tags.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/tags/tags.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/text/text.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/text/text.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/video/video.css | css | source | compliant | yes | yes |  |
+| plusplus/src/samples/blocks/video/video.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/scripts/delayed.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/samples/scripts/scripts.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/siteConfig.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/test.js | javascript | source | compliant | yes | yes |  |
+| plusplus/src/variables.js | javascript | source | compliant | yes | yes |  |
+| reginald/index.html | html | source | compliant | yes | yes |  |
+| reginald/reginald-website-index.html | html | source | compliant | yes | yes |  |
+| scripts/aem.js | javascript | source | compliant | yes | yes |  |
+| scripts/delayed.js | javascript | source | compliant | yes | yes |  |
+| scripts/generate-invisible-users-sitemap.js | javascript | source | compliant | yes | yes |  |
+| scripts/homepage-tabs.js | javascript | source | compliant | yes | yes |  |
+| scripts/ipynb-helpers.js | javascript | source | compliant | yes | yes |  |
+| scripts/scripts.js | javascript | source | compliant | yes | yes |  |
+| scripts/sync-blog-content.js | javascript | source | compliant | yes | yes |  |
+| server.html | html | source | compliant | yes | yes |  |
+| server.js | javascript | source | compliant | yes | yes |  |
+| static/css/slide-builder-main.css | css | source | compliant | yes | yes |  |
+| static/js/slide-builder-main.js | javascript | source | compliant | yes | yes |  |
+| styles/fonts.css | css | source | compliant | yes | yes |  |
+| styles/homepage.css | css | source | compliant | yes | yes |  |
+| styles/lazy-styles.css | css | source | compliant | yes | yes |  |
+| styles/styles.css | css | source | compliant | yes | yes |  |
+| TEST-TWO.css | css | source | compliant | yes | yes |  |
+| TEST-TWO.html | html | source | compliant | yes | yes |  |
+| tools/sidekick/library.html | html | source | compliant | yes | yes |  |
+| vue-slides.html | html | source | compliant | yes | yes |  |
+| web/appendix-a.html | html | source | compliant | yes | yes |  |
+| web/appendix-b.html | html | source | compliant | yes | yes |  |
+| web/appendix-c.html | html | source | compliant | yes | yes |  |
+| web/appendix-d.html | html | source | compliant | yes | yes |  |
+| web/appendix-e.html | html | source | compliant | yes | yes |  |
+| web/appendix-f.html | html | source | compliant | yes | yes |  |
+| web/appendix-g.html | html | source | compliant | yes | yes |  |
+| web/appendix-h.html | html | source | compliant | yes | yes |  |
+| web/appendix-i.html | html | source | compliant | yes | yes |  |
+| web/appendix-index.html | html | source | compliant | yes | yes |  |
+| web/appendix-j.html | html | source | compliant | yes | yes |  |
+| web/appendix-k.html | html | source | compliant | yes | yes |  |
+| web/appendix-l.html | html | source | compliant | yes | yes |  |
+| web/appendix.css | css | source | compliant | yes | yes |  |
+| web/back-cover.html | html | source | compliant | yes | yes |  |
+| web/book-product-page.css | css | source | compliant | yes | yes |  |
+| web/book-product-page.html | html | source | compliant | yes | yes |  |
+| web/book.html | html | source | compliant | yes | yes |  |
+| web/faq.html | html | source | compliant | yes | yes |  |
+| web/for-reviewers.css | css | source | compliant | yes | yes |  |
+| web/for-reviewers.html | html | source | compliant | yes | yes |  |
+| web/index.html | html | source | compliant | yes | yes |  |
+| web/news.html | html | source | compliant | yes | yes |  |
+| web/reference-implementations/lpc/about.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/assets/css/styles.css | css | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/contact.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/index.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/reviews.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/services/business-stationery.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/services/design-branding.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/services/event-stationery.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/services/garment-printing.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/services/index.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/services/marketing-materials.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/services/online-merch-shops.html | html | reference | compliant | yes | yes |  |
+| web/reference-implementations/lpc/services/web-services.html | html | reference | compliant | yes | yes |  |
+| web/site/404.html | html | source | compliant | yes | yes |  |
+| web/site/about.html | html | source | compliant | yes | yes |  |
+| web/site/article.html | html | source | compliant | yes | yes |  |
+| web/site/author.html | html | source | compliant | yes | yes |  |
+| web/site/blog-post.html | html | source | compliant | yes | yes |  |
+| web/site/checkout.html | html | source | compliant | yes | yes |  |
+| web/site/collection.html | html | source | compliant | yes | yes |  |
+| web/site/consulting.html | html | source | compliant | yes | yes |  |
+| web/site/contact.html | html | source | compliant | yes | yes |  |
+| web/site/css/styles.css | css | source | compliant | yes | yes |  |
+| web/site/event.html | html | source | compliant | yes | yes |  |
+| web/site/faq.html | html | source | compliant | yes | yes |  |
+| web/site/index.html | html | source | compliant | yes | yes |  |
+| web/site/js/common.js | javascript | source | compliant | yes | yes |  |
+| web/site/login.html | html | source | compliant | yes | yes |  |
+| web/site/portfolio.html | html | source | compliant | yes | yes |  |
+| web/site/pricing.html | html | source | compliant | yes | yes |  |
+| web/site/privacy.html | html | source | compliant | yes | yes |  |
+| web/site/product.html | html | source | compliant | yes | yes |  |
+| web/site/sales.html | html | source | compliant | yes | yes |  |
+| web/site/search.html | html | source | compliant | yes | yes |  |
+| web/site/team.html | html | source | compliant | yes | yes |  |
+| web/site/testimonials.html | html | source | compliant | yes | yes |  |
 
 ### datalake/ (93 files, 96% compliant)
 
@@ -594,13 +1067,13 @@ They require changes to the generator scripts, not manual edits.
 
 ### Shell (.sh)
 
-- **87** fully compliant (Layer 1 + Layer 2)
+- **89** fully compliant (Layer 1 + Layer 2)
 - **0** partially compliant (native metadata but no MX identity)
 - **0** missing all metadata
 
 ### JavaScript (.js)
 
-- **172** fully compliant (Layer 1 + Layer 2)
+- **288** fully compliant (Layer 1 + Layer 2)
 - **0** partially compliant (native metadata but no MX identity)
 - **2** missing all metadata
 
@@ -611,17 +1084,19 @@ They require changes to the generator scripts, not manual edits.
 
 ### HTML (.html)
 
-- **94** fully compliant (Layer 1 + Layer 2)
+- **321** fully compliant (Layer 1 + Layer 2)
 - **3** partially compliant (native metadata but no MX identity)
-- **1** missing all metadata
+- **3** missing all metadata
 
 **Files missing all metadata:**
 
+- allaboutv2/googleec3acd01d043bece.html
+- allaboutv2/head.html
 - scripts/appendix-nav-header.html
 
 ### CSS (.css)
 
-- **14** fully compliant (Layer 1 + Layer 2)
+- **135** fully compliant (Layer 1 + Layer 2)
 - **0** partially compliant (native metadata but no MX identity)
 - **2** missing all metadata
 
