@@ -695,7 +695,7 @@ This validator checks compliance with the following MX principles:
 - **Principle 6: Size-Neutral Documentation** - Avoid hard-coded counts
 - **Principle 7: Executable Documentation** - Documents contain generation instructions
 
-**Reference:** [PRINCIPLES.md](PRINCIPLES.md)
+**Reference:** [principles.cog.md](principles.cog.md)
 
 ## Required Fields Reference
 

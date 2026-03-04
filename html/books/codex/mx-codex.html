@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -14934,27 +14934,21 @@ agents interact with your content, and make informed decisions about
 what to expose and what to protect.</p>
 <h2 id="advertising-your-api">Advertising Your API</h2>
 <p>If you have an API that’s better for agents than scraping your HTML,
-tell them about it.</p>
+tell them about it. Use <code>&lt;link rel="api"&gt;</code> to point
+agents at the API endpoint for the current page, and standard
+<code>&lt;link&gt;</code> elements for documentation and related
+resources.</p>
 <div class="sourceCode" id="cb103"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
 <span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Where the API lives --&gt;</span></span>
-<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-endpoint&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://api.example.com/v1&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;api&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;https://api.example.com/v1&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Documentation --&gt;</span></span>
-<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-docs&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://api.example.com/docs&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- This page&#39;s API equivalent --&gt;</span></span>
+<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;api&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/products/12345&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb103-7"><a href="#cb103-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Authentication method --&gt;</span></span>
-<span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-auth&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;oauth2&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-11"><a href="#cb103-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Rate limits --&gt;</span></span>
-<span id="cb103-12"><a href="#cb103-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-rate-limit&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;100/minute&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb103-13"><a href="#cb103-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-14"><a href="#cb103-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Pricing information --&gt;</span></span>
-<span id="cb103-15"><a href="#cb103-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-pricing&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://example.com/api-pricing&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb103-16"><a href="#cb103-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-17"><a href="#cb103-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- This page&#39;s API equivalent --&gt;</span></span>
-<span id="cb103-18"><a href="#cb103-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-resource&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;/products/12345&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb103-19"><a href="#cb103-19" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
+<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Documentation --&gt;</span></span>
+<span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;help&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;https://api.example.com/docs&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>An agent visiting
 <code>https://example.com/products/wireless-headphones</code> sees
 immediately that it can fetch structured data from
@@ -15308,9 +15302,10 @@ maturity:</p>
 <p><strong>Proposed Patterns</strong> (experimental,
 forward-compatible):</p>
 <ul>
-<li>ai-* meta tag namespace</li>
+<li>mx: carrier meta tags (mx:content-policy, mx:attribution)</li>
 <li>data-agent-visible attribute pattern</li>
-<li>Three-layer guidance system (llms.txt + meta + JSON-LD)</li>
+<li>Three-layer guidance system (llms.txt + MX carrier tags +
+JSON-LD)</li>
 </ul>
 <p><strong>Speculative</strong> (may emerge, may not):</p>
 <ul>
@@ -15368,19 +15363,19 @@ Convention:</p>
 preferred-access: api
 api-endpoint: https://api.example.com/v1
 rate-limit: 100/minute</code></pre>
-<p><strong>Layer 2 - Meta tags (page-specific)</strong> - Proposed
+<p><strong>Layer 2 - MX carrier tags (page-specific)</strong> - Proposed
 Pattern:</p>
-<p>Page-specific meta tags can override site-wide defaults from
-llms.txt. Whilst no formal standard yet exists for AI-specific meta
-tags, the pattern of using <code>&lt;meta name="ai-*"&gt;</code> follows
-the same convention as existing standards such as the robots meta
-tags.</p>
+<p>Page-specific MX carrier tags can override site-wide defaults from
+llms.txt. The <code>mx:</code> namespace provides two active carrier
+tags (<code>mx:content-policy</code> and <code>mx:attribution</code>),
+whilst <code>&lt;link rel="api"&gt;</code> handles API endpoint
+discovery.</p>
 <div class="sourceCode" id="cb108"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-endpoint&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;/api/v1/products/WH-1000&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-freshness&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;hourly&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
-<p><strong>Status:</strong> Proposed pattern, not yet standardised. Use
-where it makes semantic sense, but prioritise llms.txt and Schema.org
-JSON-LD for broader compatibility.</p>
+class="sourceCode html"><code class="sourceCode html"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;api&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/api/v1/products/WH-1000&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>Prioritise llms.txt and Schema.org JSON-LD for the broadest
+compatibility. MX carrier tags supplement these with page-level
+specificity.</p>
 <p><strong>Layer 3 - JSON-LD (actual content)</strong> - Established
 Standard:</p>
 <div class="sourceCode" id="cb109"><pre
@@ -15393,12 +15388,12 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb109-1"><a href
 <span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb109-8"><a href="#cb109-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>An agent visiting your page: (1) Checks llms.txt for site policy, (2)
-Reads meta tags for this specific page, (3) Fetches structured data, (4)
-Respects your rate limits and guidance.</p>
+Reads MX carrier tags and <code>&lt;link&gt;</code> elements for this
+specific page, (3) Fetches structured data, (4) Respects your rate
+limits and guidance.</p>
 <p><strong>Implementation status:</strong> Layer 1 (llms.txt) and Layer
-3 (JSON-LD) are currently deployed in production environments. Layer 2
-(meta tags) is a logical extension that may become standardised as the
-ecosystem matures.</p>
+3 (JSON-LD) are deployed in production environments. Layer 2 (MX carrier
+tags) supplements these with page-level specificity.</p>
 <h3 id="robots.txt-sitemap.xml-and-llms.txt">robots.txt, sitemap.xml,
 and llms.txt</h3>
 <p>These three files work together:</p>
@@ -16328,7 +16323,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb122-1"><a href
 <span id="cb122-32"><a href="#cb122-32" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
 <span id="cb122-33"><a href="#cb122-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb122-34"><a href="#cb122-34" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Experimental pattern: Hidden metadata for agents --&gt;</span></span>
-<span id="cb122-35"><a href="#cb122-35" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;agent-metadata&quot;</span><span class="ot"> data-agent-visible</span><span class="op">=</span><span class="st">&quot;true&quot;</span><span class="ot"> style</span><span class="op">=</span><span class="st">&quot;display: none;&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb122-35"><a href="#cb122-35" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;agent-metadata&quot;</span><span class="ot"> data-agent-visible</span><span class="op">=</span><span class="st">&quot;true&quot;</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;visually-hidden&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb122-36"><a href="#cb122-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Purchase Information<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb122-37"><a href="#cb122-37" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb122-38"><a href="#cb122-38" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Action:<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
@@ -17018,86 +17013,63 @@ AI agents can act on behalf of users with appropriate OAuth2 scopes:
 <h3 id="meta-tags-for-page-level-guidance">Meta Tags for Page-Level
 Guidance</h3>
 <p>While <code>llms.txt</code> provides site-wide defaults, meta tags
-give page-specific instructions.</p>
-<p><strong>Status: Proposed Pattern</strong> - No formal standard exists
-yet for AI-specific meta tags, but a logical pattern is emerging based
-on existing conventions (like robots, viewport, and theme-color meta
-tags). The examples below show a consistent approach that:</p>
+give page-specific instructions. The MX approach uses the
+<code>mx:</code> namespace for carrier meta tags, alongside standard
+HTML elements like <code>&lt;link&gt;</code> for API discovery.</p>
+<p>Two carrier tags are active:</p>
 <ul>
-<li>Uses the ai-* namespace to avoid conflicts</li>
-<li>Provides machine-readable guidance that supplements llms.txt</li>
-<li>Remains harmless if agents don’t recognise them</li>
+<li><code>mx:content-policy</code> — declares what extraction is
+permitted</li>
+<li><code>mx:attribution</code> — declares attribution requirements</li>
 </ul>
-<p>These patterns are proposed, not standardised. They work today
-because they’re simply metadata - they don’t break anything if ignored.
-Think of them as forward-compatible hints that may become standards as
-the ecosystem matures.</p>
-<p><strong>Examples of proposed meta tags:</strong></p>
+<p>For API endpoints, use <code>&lt;link rel="api"&gt;</code> rather
+than a meta tag. This follows the established HTML convention where
+<code>&lt;link&gt;</code> elements describe relationships between the
+current document and external resources.</p>
+<p>These patterns work because they are simply metadata — they do not
+break anything if ignored. Agents that recognise them gain clarity;
+agents that do not, carry on regardless.</p>
+<p><strong>Examples of MX carrier meta tags:</strong></p>
 <div class="sourceCode" id="cb134"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
 <span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Where the API equivalent of this page lives --&gt;</span></span>
-<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-endpoint&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://api.example.com/v1/products/12345&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;api&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;https://api.example.com/v1/products/12345&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb134-5"><a href="#cb134-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- API documentation --&gt;</span></span>
-<span id="cb134-6"><a href="#cb134-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-docs&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://developers.example.com/docs&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb134-5"><a href="#cb134-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- What extraction is permitted --&gt;</span></span>
+<span id="cb134-6"><a href="#cb134-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summaries-allowed, prices-allowed&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb134-7"><a href="#cb134-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb134-8"><a href="#cb134-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- How agents should access this content --&gt;</span></span>
-<span id="cb134-9"><a href="#cb134-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-preferred-access&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;api&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb134-10"><a href="#cb134-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb134-11"><a href="#cb134-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Rate limits for this resource --&gt;</span></span>
-<span id="cb134-12"><a href="#cb134-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-rate-limit&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;60/minute&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb134-13"><a href="#cb134-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb134-14"><a href="#cb134-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Identity delegation endpoint --&gt;</span></span>
-<span id="cb134-15"><a href="#cb134-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-identity-delegation&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;/api/auth/delegate&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb134-16"><a href="#cb134-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb134-17"><a href="#cb134-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- What extraction is permitted --&gt;</span></span>
-<span id="cb134-18"><a href="#cb134-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summaries-allowed, prices-allowed&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb134-19"><a href="#cb134-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb134-20"><a href="#cb134-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Structured data formats available --&gt;</span></span>
-<span id="cb134-21"><a href="#cb134-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-structured-data&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;json-ld, microdata&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb134-22"><a href="#cb134-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb134-23"><a href="#cb134-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- How often this content changes --&gt;</span></span>
-<span id="cb134-24"><a href="#cb134-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-freshness&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;daily&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb134-25"><a href="#cb134-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb134-26"><a href="#cb134-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Attribution requirement --&gt;</span></span>
-<span id="cb134-27"><a href="#cb134-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb134-28"><a href="#cb134-28" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
+<span id="cb134-8"><a href="#cb134-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Attribution requirement --&gt;</span></span>
+<span id="cb134-9"><a href="#cb134-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb134-10"><a href="#cb134-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Product Page Example:</strong></p>
 <div class="sourceCode" id="cb135"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
 <span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Wireless Headphones - Example Shop<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
 <span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-endpoint&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;/api/v1/products/WH-1000&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-preferred-access&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;api&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-structured-data&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;json-ld&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-freshness&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;hourly&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb135-8"><a href="#cb135-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb135-9"><a href="#cb135-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-identity-delegation&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;/api/auth/delegate&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb135-10"><a href="#cb135-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-11"><a href="#cb135-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">&quot;application/ld+json&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb135-12"><a href="#cb135-12" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb135-13"><a href="#cb135-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@context&quot;</span><span class="op">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="op">,</span></span>
-<span id="cb135-14"><a href="#cb135-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Product&quot;</span><span class="op">,</span></span>
-<span id="cb135-15"><a href="#cb135-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Wireless Headphones&quot;</span><span class="op">,</span></span>
-<span id="cb135-16"><a href="#cb135-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;sku&quot;</span><span class="op">:</span> <span class="st">&quot;WH-1000&quot;</span><span class="op">,</span></span>
-<span id="cb135-17"><a href="#cb135-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
-<span id="cb135-18"><a href="#cb135-18" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb135-19"><a href="#cb135-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
-<span id="cb135-20"><a href="#cb135-20" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;api&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/api/v1/products/WH-1000&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">&quot;application/ld+json&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb135-8"><a href="#cb135-8" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb135-9"><a href="#cb135-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@context&quot;</span><span class="op">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="op">,</span></span>
+<span id="cb135-10"><a href="#cb135-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Product&quot;</span><span class="op">,</span></span>
+<span id="cb135-11"><a href="#cb135-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Wireless Headphones&quot;</span><span class="op">,</span></span>
+<span id="cb135-12"><a href="#cb135-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;sku&quot;</span><span class="op">:</span> <span class="st">&quot;WH-1000&quot;</span><span class="op">,</span></span>
+<span id="cb135-13"><a href="#cb135-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb135-14"><a href="#cb135-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb135-15"><a href="#cb135-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb135-16"><a href="#cb135-16" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Article Page Example:</strong></p>
 <div class="sourceCode" id="cb136"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
 <span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Market Analysis: Q4 2025 - NewsDaily<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
 <span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-preferred-access&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;html&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb136-5"><a href="#cb136-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summary-only, max-words-150&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb136-6"><a href="#cb136-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb136-7"><a href="#cb136-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-freshness&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;static&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb136-8"><a href="#cb136-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-commercial-use&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;prohibited&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb136-9"><a href="#cb136-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-10"><a href="#cb136-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;alternate&quot;</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;application/json&quot;</span></span>
-<span id="cb136-11"><a href="#cb136-11" aria-hidden="true" tabindex="-1"></a><span class="ot">        href</span><span class="op">=</span><span class="st">&quot;/api/articles/market-analysis-q4-2025.json&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb136-12"><a href="#cb136-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
+<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summary-only, max-words-150&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb136-5"><a href="#cb136-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb136-6"><a href="#cb136-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-7"><a href="#cb136-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;alternate&quot;</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;application/json&quot;</span></span>
+<span id="cb136-8"><a href="#cb136-8" aria-hidden="true" tabindex="-1"></a><span class="ot">        href</span><span class="op">=</span><span class="st">&quot;/api/articles/market-analysis-q4-2025.json&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb136-9"><a href="#cb136-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
 <h3 id="combining-approaches">Combining Approaches</h3>
 <p>Use all three together for maximum clarity:</p>
 <ol type="1">
@@ -17128,33 +17100,32 @@ extraction: product-data-allowed</code></pre>
 <div class="sourceCode" id="cb139"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- /products/wireless-headphones.html --&gt;</span></span>
 <span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
-<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Page-specific overrides --&gt;</span></span>
-<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-endpoint&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;/api/v1/products/WH-1000&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-freshness&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;hourly&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-structured-data&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;json-ld&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb139-7"><a href="#cb139-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-8"><a href="#cb139-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Semantic content --&gt;</span></span>
-<span id="cb139-9"><a href="#cb139-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">&quot;application/ld+json&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb139-10"><a href="#cb139-10" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb139-11"><a href="#cb139-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@context&quot;</span><span class="op">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="op">,</span></span>
-<span id="cb139-12"><a href="#cb139-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Product&quot;</span><span class="op">,</span></span>
-<span id="cb139-13"><a href="#cb139-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Wireless Headphones&quot;</span><span class="op">,</span></span>
-<span id="cb139-14"><a href="#cb139-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;sku&quot;</span><span class="op">:</span> <span class="st">&quot;WH-1000&quot;</span><span class="op">,</span></span>
-<span id="cb139-15"><a href="#cb139-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;offers&quot;</span><span class="op">:</span> {</span>
-<span id="cb139-16"><a href="#cb139-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Offer&quot;</span><span class="op">,</span></span>
-<span id="cb139-17"><a href="#cb139-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;price&quot;</span><span class="op">:</span> <span class="st">&quot;149.99&quot;</span><span class="op">,</span></span>
-<span id="cb139-18"><a href="#cb139-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;priceCurrency&quot;</span><span class="op">:</span> <span class="st">&quot;GBP&quot;</span><span class="op">,</span></span>
-<span id="cb139-19"><a href="#cb139-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;availability&quot;</span><span class="op">:</span> <span class="st">&quot;InStock&quot;</span></span>
-<span id="cb139-20"><a href="#cb139-20" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb139-21"><a href="#cb139-21" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb139-22"><a href="#cb139-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
-<span id="cb139-23"><a href="#cb139-23" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Page-specific API endpoint --&gt;</span></span>
+<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;api&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/api/v1/products/WH-1000&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-7"><a href="#cb139-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Semantic content --&gt;</span></span>
+<span id="cb139-8"><a href="#cb139-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">&quot;application/ld+json&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb139-9"><a href="#cb139-9" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb139-10"><a href="#cb139-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@context&quot;</span><span class="op">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="op">,</span></span>
+<span id="cb139-11"><a href="#cb139-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Product&quot;</span><span class="op">,</span></span>
+<span id="cb139-12"><a href="#cb139-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Wireless Headphones&quot;</span><span class="op">,</span></span>
+<span id="cb139-13"><a href="#cb139-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;sku&quot;</span><span class="op">:</span> <span class="st">&quot;WH-1000&quot;</span><span class="op">,</span></span>
+<span id="cb139-14"><a href="#cb139-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;offers&quot;</span><span class="op">:</span> {</span>
+<span id="cb139-15"><a href="#cb139-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Offer&quot;</span><span class="op">,</span></span>
+<span id="cb139-16"><a href="#cb139-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;price&quot;</span><span class="op">:</span> <span class="st">&quot;149.99&quot;</span><span class="op">,</span></span>
+<span id="cb139-17"><a href="#cb139-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;priceCurrency&quot;</span><span class="op">:</span> <span class="st">&quot;GBP&quot;</span><span class="op">,</span></span>
+<span id="cb139-18"><a href="#cb139-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;availability&quot;</span><span class="op">:</span> <span class="st">&quot;InStock&quot;</span></span>
+<span id="cb139-19"><a href="#cb139-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb139-20"><a href="#cb139-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb139-21"><a href="#cb139-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb139-22"><a href="#cb139-22" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>An agent visiting this page:</p>
 <ol type="1">
 <li>Checks <code>llms.txt</code> first - learns the site has an API,
 allows product extraction</li>
-<li>Reads meta tags - discovers this specific product is at
-<code>/api/v1/products/WH-1000</code></li>
+<li>Reads <code>&lt;link rel="api"&gt;</code> - discovers this specific
+product is at <code>/api/v1/products/WH-1000</code></li>
 <li>Fetches JSON-LD or calls API - gets structured product data</li>
 <li>Respects rate limits and attribution requirements from
 <code>llms.txt</code></li>
@@ -17163,7 +17134,7 @@ allows product extraction</li>
 <p>For content creators worried about extraction (Chapter 5’s concerns),
 explicit policies help:</p>
 <div class="sourceCode" id="cb140"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;</span></span>
+class="sourceCode html"><code class="sourceCode html"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;</span></span>
 <span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="st">  summaries: allowed (max 100 words);</span></span>
 <span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="st">  quotes: allowed (max 50 words, with attribution);</span></span>
 <span id="cb140-4"><a href="#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="st">  full-text: prohibited;</span></span>
@@ -17171,17 +17142,11 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb140-1"><a href
 <span id="cb140-6"><a href="#cb140-6" aria-hidden="true" tabindex="-1"></a><span class="st">  commercial-use: prohibited without license</span></span>
 <span id="cb140-7"><a href="#cb140-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb140-8"><a href="#cb140-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb140-9"><a href="#cb140-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;</span></span>
+<span id="cb140-9"><a href="#cb140-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;</span></span>
 <span id="cb140-10"><a href="#cb140-10" aria-hidden="true" tabindex="-1"></a><span class="st">  required: true;</span></span>
 <span id="cb140-11"><a href="#cb140-11" aria-hidden="true" tabindex="-1"></a><span class="st">  format: &#39;Source: [site-name] - [article-title] ([url])&#39;;</span></span>
 <span id="cb140-12"><a href="#cb140-12" aria-hidden="true" tabindex="-1"></a><span class="st">  link-back: required</span></span>
-<span id="cb140-13"><a href="#cb140-13" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb140-14"><a href="#cb140-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb140-15"><a href="#cb140-15" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-licensing&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;</span></span>
-<span id="cb140-16"><a href="#cb140-16" aria-hidden="true" tabindex="-1"></a><span class="st">  personal-use: free;</span></span>
-<span id="cb140-17"><a href="#cb140-17" aria-hidden="true" tabindex="-1"></a><span class="st">  commercial-api: https://example.com/api-pricing;</span></span>
-<span id="cb140-18"><a href="#cb140-18" aria-hidden="true" tabindex="-1"></a><span class="st">  contact: licensing@example.com</span></span>
-<span id="cb140-19"><a href="#cb140-19" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<span id="cb140-13"><a href="#cb140-13" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>This connects to the legal framework from Chapter 7. By explicitly
 stating what’s permitted, you reduce ambiguity and establish
 expectations. An agent that violates explicitly stated policies has less
@@ -18563,7 +18528,7 @@ primary content</li>
 Agent-Readable Purchase Instructions</h3>
 <p>For e-commerce sites, tell agents exactly what to do:</p>
 <div class="sourceCode" id="cb183"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;agent-metadata&quot;</span><span class="ot"> data-agent-visible</span><span class="op">=</span><span class="st">&quot;true&quot;</span><span class="ot"> style</span><span class="op">=</span><span class="st">&quot;display: none;&quot;</span><span class="dt">&gt;</span></span>
+class="sourceCode html"><code class="sourceCode html"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;agent-metadata&quot;</span><span class="ot"> data-agent-visible</span><span class="op">=</span><span class="st">&quot;true&quot;</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;visually-hidden&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Purchase Information<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb183-3"><a href="#cb183-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb183-4"><a href="#cb183-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Action<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
@@ -18690,13 +18655,12 @@ preferred-access: api
 api-endpoint: https://api.techstore.com/v1
 rate-limit: 100/minute
 extraction: product-data-allowed</code></pre>
-<p><strong>Layer 2 - Meta tags (page-specific):</strong></p>
+<p><strong>Layer 2 - MX carrier tags (page-specific):</strong></p>
 <div class="sourceCode" id="cb186"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb186-1"><a href="#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
-<span id="cb186-2"><a href="#cb186-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-api-endpoint&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;/api/v1/products/WH-1000&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb186-3"><a href="#cb186-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-freshness&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;hourly&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb186-4"><a href="#cb186-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;sop-content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb186-5"><a href="#cb186-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
+<span id="cb186-2"><a href="#cb186-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;api&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/api/v1/products/WH-1000&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb186-3"><a href="#cb186-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb186-4"><a href="#cb186-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Layer 3 - JSON-LD (actual content):</strong></p>
 <div class="sourceCode" id="cb187"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb187-1"><a href="#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">&quot;application/ld+json&quot;</span><span class="dt">&gt;</span></span>
@@ -20819,7 +20783,7 @@ references.</p>
 <div class="sourceCode" id="cb225"><pre
 class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb225-1"><a href="#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb225-2"><a href="#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> product-widget-pro-001</span></span>
-<span id="cb225-3"><a href="#cb225-3" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> product_description</span></span>
+<span id="cb225-3"><a href="#cb225-3" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> productDescription</span></span>
 <span id="cb225-4"><a href="#cb225-4" aria-hidden="true" tabindex="-1"></a><span class="fu">intent</span><span class="kw">:</span><span class="at"> consideration</span></span>
 <span id="cb225-5"><a href="#cb225-5" aria-hidden="true" tabindex="-1"></a><span class="fu">topics</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">product:widget-pro</span><span class="kw">,</span><span class="at"> theme:technical</span><span class="kw">]</span></span>
 <span id="cb225-6"><a href="#cb225-6" aria-hidden="true" tabindex="-1"></a><span class="fu">audiences</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">b2b</span><span class="kw">,</span><span class="at"> installer</span><span class="kw">,</span><span class="at"> architect</span><span class="kw">]</span></span>
@@ -20830,15 +20794,15 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb225-1"><a href
 <span id="cb225-11"><a href="#cb225-11" aria-hidden="true" tabindex="-1"></a><span class="fu">validTo</span><span class="kw">:</span><span class="at"> 2026-12-31</span></span>
 <span id="cb225-12"><a href="#cb225-12" aria-hidden="true" tabindex="-1"></a><span class="fu">reviewCycle</span><span class="kw">:</span><span class="at"> P90D</span></span>
 <span id="cb225-13"><a href="#cb225-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb225-14"><a href="#cb225-14" aria-hidden="true" tabindex="-1"></a><span class="fu">provenance</span><span class="kw">:</span><span class="at"> in_house</span></span>
+<span id="cb225-14"><a href="#cb225-14" aria-hidden="true" tabindex="-1"></a><span class="fu">provenance</span><span class="kw">:</span><span class="at"> inHouse</span></span>
 <span id="cb225-15"><a href="#cb225-15" aria-hidden="true" tabindex="-1"></a><span class="fu">license</span><span class="kw">:</span><span class="at"> internal-only</span></span>
 <span id="cb225-16"><a href="#cb225-16" aria-hidden="true" tabindex="-1"></a><span class="fu">jurisdictions</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">UK</span><span class="kw">,</span><span class="at"> EU</span><span class="kw">]</span></span>
 <span id="cb225-17"><a href="#cb225-17" aria-hidden="true" tabindex="-1"></a><span class="fu">usageConstraints</span><span class="kw">:</span></span>
-<span id="cb225-18"><a href="#cb225-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> no_third_party_resale</span></span>
-<span id="cb225-19"><a href="#cb225-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">print_run_max</span><span class="kw">:</span><span class="at"> </span><span class="dv">50000</span></span>
+<span id="cb225-18"><a href="#cb225-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> noThirdPartyResale</span></span>
+<span id="cb225-19"><a href="#cb225-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">printRunMax</span><span class="kw">:</span><span class="at"> </span><span class="dv">50000</span></span>
 <span id="cb225-20"><a href="#cb225-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb225-21"><a href="#cb225-21" aria-hidden="true" tabindex="-1"></a><span class="fu">publication-status</span><span class="kw">:</span><span class="at"> published</span></span>
-<span id="cb225-22"><a href="#cb225-22" aria-hidden="true" tabindex="-1"></a><span class="fu">publication-date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2025-02-01&quot;</span></span>
+<span id="cb225-21"><a href="#cb225-21" aria-hidden="true" tabindex="-1"></a><span class="fu">publicationStatus</span><span class="kw">:</span><span class="at"> published</span></span>
+<span id="cb225-22"><a href="#cb225-22" aria-hidden="true" tabindex="-1"></a><span class="fu">publicationDate</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2025-02-01&quot;</span></span>
 <span id="cb225-23"><a href="#cb225-23" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb225-24"><a href="#cb225-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb225-25"><a href="#cb225-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Widget Pro - Technical Overview</span></span>
@@ -20854,7 +20818,7 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb225-1"><a href
 might ask:</p>
 <p><strong>For agents:</strong></p>
 <ul>
-<li>What is this? (<code>type: product_description</code>)</li>
+<li>What is this? (<code>type: productDescription</code>)</li>
 <li>Who is it for?
 (<code>audiences: [b2b, installer, architect]</code>)</li>
 <li>What’s the goal? (<code>intent: consideration</code>)</li>
@@ -20866,7 +20830,7 @@ might ask:</p>
 <li>Can we use this in Germany? (<code>jurisdictions: [UK, EU]</code> -
 yes)</li>
 <li>Can we include it in a 100,000-copy print run?
-(<code>print_run_max: 50000</code> - no)</li>
+(<code>printRunMax: 50000</code> - no)</li>
 <li>Is it still current? (<code>validTo: 2026-12-31</code> - check
 date)</li>
 </ul>
@@ -20909,7 +20873,7 @@ class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb226-1"
 <span id="cb226-4"><a href="#cb226-4" aria-hidden="true" tabindex="-1"></a><span class="an">intent:</span><span class="co"> consideration</span></span>
 <span id="cb226-5"><a href="#cb226-5" aria-hidden="true" tabindex="-1"></a><span class="an">topics:</span><span class="co"> [installation, technical]</span></span>
 <span id="cb226-6"><a href="#cb226-6" aria-hidden="true" tabindex="-1"></a><span class="an">status:</span><span class="co"> draft</span></span>
-<span id="cb226-7"><a href="#cb226-7" aria-hidden="true" tabindex="-1"></a><span class="an">draft-date:</span><span class="co"> &quot;2025-02-01&quot;</span></span>
+<span id="cb226-7"><a href="#cb226-7" aria-hidden="true" tabindex="-1"></a><span class="an">draftDate:</span><span class="co"> &quot;2025-02-01&quot;</span></span>
 <span id="cb226-8"><a href="#cb226-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb226-9"><a href="#cb226-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb226-10"><a href="#cb226-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># Installation Guide (Draft)</span></span>
@@ -20938,8 +20902,8 @@ labels, alt text</li>
 <pre><code>❌ Validation failed for article-installation-draft-001
 
 Required fields missing:
-  - valid_from (date)
-  - valid_to (date)
+  - validFrom (date)
+  - validTo (date)
   - jurisdictions (array)
 
 Accessibility issues:
@@ -21004,14 +20968,14 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb228-1"><a href
 <span id="cb228-12"><a href="#cb228-12" aria-hidden="true" tabindex="-1"></a><span class="co">validTo: 2026-01-01</span></span>
 <span id="cb228-13"><a href="#cb228-13" aria-hidden="true" tabindex="-1"></a><span class="co">reviewCycle: P365D</span></span>
 <span id="cb228-14"><a href="#cb228-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-15"><a href="#cb228-15" aria-hidden="true" tabindex="-1"></a><span class="co">provenance: in_house</span></span>
+<span id="cb228-15"><a href="#cb228-15" aria-hidden="true" tabindex="-1"></a><span class="co">provenance: inHouse</span></span>
 <span id="cb228-16"><a href="#cb228-16" aria-hidden="true" tabindex="-1"></a><span class="co">license: internal-only</span></span>
 <span id="cb228-17"><a href="#cb228-17" aria-hidden="true" tabindex="-1"></a><span class="co">jurisdictions: [UK, EU]</span></span>
 <span id="cb228-18"><a href="#cb228-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-19"><a href="#cb228-19" aria-hidden="true" tabindex="-1"></a><span class="co">publication-status: published</span></span>
-<span id="cb228-20"><a href="#cb228-20" aria-hidden="true" tabindex="-1"></a><span class="co">publication-date: &quot;2025-02-01&quot;</span></span>
-<span id="cb228-21"><a href="#cb228-21" aria-hidden="true" tabindex="-1"></a><span class="co">deployed-path: &quot;articles/installation/&quot;</span></span>
-<span id="cb228-22"><a href="#cb228-22" aria-hidden="true" tabindex="-1"></a><span class="co">demo-url: &quot;https://client.com/articles/installation/&quot;</span></span>
+<span id="cb228-19"><a href="#cb228-19" aria-hidden="true" tabindex="-1"></a><span class="co">publicationStatus: published</span></span>
+<span id="cb228-20"><a href="#cb228-20" aria-hidden="true" tabindex="-1"></a><span class="co">publicationDate: &quot;2025-02-01&quot;</span></span>
+<span id="cb228-21"><a href="#cb228-21" aria-hidden="true" tabindex="-1"></a><span class="co">deployedPath: &quot;articles/installation/&quot;</span></span>
+<span id="cb228-22"><a href="#cb228-22" aria-hidden="true" tabindex="-1"></a><span class="co">demoUrl: &quot;https://client.com/articles/installation/&quot;</span></span>
 <span id="cb228-23"><a href="#cb228-23" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb228-24"><a href="#cb228-24" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
 <span id="cb228-25"><a href="#cb228-25" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
@@ -21098,13 +21062,13 @@ together</li>
 <div class="sourceCode" id="cb230"><pre
 class="sourceCode json"><code class="sourceCode json"><span id="cb230-1"><a href="#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb230-2"><a href="#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;article&quot;</span><span class="fu">:</span> <span class="st">&quot;article-installation-widget-pro-001&quot;</span><span class="fu">,</span></span>
-<span id="cb230-3"><a href="#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;hero_image&quot;</span><span class="fu">:</span> <span class="st">&quot;image-widget-hero-web-001&quot;</span><span class="fu">,</span></span>
+<span id="cb230-3"><a href="#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;heroImage&quot;</span><span class="fu">:</span> <span class="st">&quot;image-widget-hero-web-001&quot;</span><span class="fu">,</span></span>
 <span id="cb230-4"><a href="#cb230-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;product&quot;</span><span class="fu">:</span> <span class="st">&quot;product-widget-pro&quot;</span><span class="fu">,</span></span>
 <span id="cb230-5"><a href="#cb230-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;reviews&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
 <span id="cb230-6"><a href="#cb230-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;review-installer-verified-774&quot;</span><span class="ot">,</span></span>
 <span id="cb230-7"><a href="#cb230-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;review-installer-verified-775&quot;</span></span>
 <span id="cb230-8"><a href="#cb230-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb230-9"><a href="#cb230-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;constraints_evaluated&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb230-9"><a href="#cb230-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;constraintsEvaluated&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
 <span id="cb230-10"><a href="#cb230-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
 <span id="cb230-11"><a href="#cb230-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;rule&quot;</span><span class="fu">:</span> <span class="st">&quot;print-licensing-check&quot;</span><span class="fu">,</span></span>
 <span id="cb230-12"><a href="#cb230-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;result&quot;</span><span class="fu">:</span> <span class="st">&quot;pass&quot;</span><span class="fu">,</span></span>
@@ -21131,32 +21095,32 @@ publishing encodes governance as rules that evaluate automatically.</p>
 <p>Rules are assets with their own metadata:</p>
 <div class="sourceCode" id="cb231"><pre
 class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb231-1"><a href="#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb231-2"><a href="#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rule_id</span><span class="kw">:</span><span class="at"> rule-print-licensing-check</span></span>
-<span id="cb231-3"><a href="#cb231-3" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> governance_rule</span></span>
+<span id="cb231-2"><a href="#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ruleId</span><span class="kw">:</span><span class="at"> rule-print-licensing-check</span></span>
+<span id="cb231-3"><a href="#cb231-3" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> governanceRule</span></span>
 <span id="cb231-4"><a href="#cb231-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span><span class="at"> channel</span></span>
 <span id="cb231-5"><a href="#cb231-5" aria-hidden="true" tabindex="-1"></a><span class="fu">priority</span><span class="kw">:</span><span class="at"> </span><span class="dv">100</span></span>
 <span id="cb231-6"><a href="#cb231-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb231-7"><a href="#cb231-7" aria-hidden="true" tabindex="-1"></a><span class="fu">when</span><span class="kw">:</span></span>
 <span id="cb231-8"><a href="#cb231-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">channel</span><span class="kw">:</span><span class="at"> print</span></span>
-<span id="cb231-9"><a href="#cb231-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">asset_type</span><span class="kw">:</span><span class="at"> image</span></span>
+<span id="cb231-9"><a href="#cb231-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">assetType</span><span class="kw">:</span><span class="at"> image</span></span>
 <span id="cb231-10"><a href="#cb231-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">license</span><span class="kw">:</span><span class="at"> rights-managed</span></span>
-<span id="cb231-11"><a href="#cb231-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">print_run_gt</span><span class="kw">:</span><span class="at"> </span><span class="dv">50000</span></span>
+<span id="cb231-11"><a href="#cb231-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">printRunGt</span><span class="kw">:</span><span class="at"> </span><span class="dv">50000</span></span>
 <span id="cb231-12"><a href="#cb231-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb231-13"><a href="#cb231-13" aria-hidden="true" tabindex="-1"></a><span class="fu">actions</span><span class="kw">:</span></span>
 <span id="cb231-14"><a href="#cb231-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">action</span><span class="kw">:</span><span class="at"> deny</span></span>
 <span id="cb231-15"><a href="#cb231-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">message</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Rights-managed images limited to 50,000 print run&quot;</span></span>
-<span id="cb231-16"><a href="#cb231-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">action</span><span class="kw">:</span><span class="at"> log_violation</span></span>
+<span id="cb231-16"><a href="#cb231-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">action</span><span class="kw">:</span><span class="at"> logViolation</span></span>
 <span id="cb231-17"><a href="#cb231-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">severity</span><span class="kw">:</span><span class="at"> error</span></span>
-<span id="cb231-18"><a href="#cb231-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">action</span><span class="kw">:</span><span class="at"> suggest_alternative</span></span>
+<span id="cb231-18"><a href="#cb231-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">action</span><span class="kw">:</span><span class="at"> suggestAlternative</span></span>
 <span id="cb231-19"><a href="#cb231-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">query</span><span class="kw">:</span></span>
-<span id="cb231-20"><a href="#cb231-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">asset_type</span><span class="kw">:</span><span class="at"> image</span></span>
+<span id="cb231-20"><a href="#cb231-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">assetType</span><span class="kw">:</span><span class="at"> image</span></span>
 <span id="cb231-21"><a href="#cb231-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">license</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;internal-only OR royalty-free&quot;</span></span>
 <span id="cb231-22"><a href="#cb231-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb231-23"><a href="#cb231-23" aria-hidden="true" tabindex="-1"></a><span class="fu">applies_to</span><span class="kw">:</span></span>
+<span id="cb231-23"><a href="#cb231-23" aria-hidden="true" tabindex="-1"></a><span class="fu">appliesTo</span><span class="kw">:</span></span>
 <span id="cb231-24"><a href="#cb231-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> all images with license=rights-managed</span></span>
 <span id="cb231-25"><a href="#cb231-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb231-26"><a href="#cb231-26" aria-hidden="true" tabindex="-1"></a><span class="fu">active_from</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2025-01-01&quot;</span></span>
-<span id="cb231-27"><a href="#cb231-27" aria-hidden="true" tabindex="-1"></a><span class="fu">active_until</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-12-31&quot;</span></span>
+<span id="cb231-26"><a href="#cb231-26" aria-hidden="true" tabindex="-1"></a><span class="fu">activeFrom</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2025-01-01&quot;</span></span>
+<span id="cb231-27"><a href="#cb231-27" aria-hidden="true" tabindex="-1"></a><span class="fu">activeUntil</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-12-31&quot;</span></span>
 <span id="cb231-28"><a href="#cb231-28" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>This rule prevents expensive licensing violations. When an agent or
 reconstruction engine tries to assemble a print piece, the rule
@@ -21208,35 +21172,35 @@ served from their infrastructure.</p>
 class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb232-1"><a href="#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb232-2"><a href="#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> review-facebook-import-001</span></span>
 <span id="cb232-3"><a href="#cb232-3" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> review</span></span>
-<span id="cb232-4"><a href="#cb232-4" aria-hidden="true" tabindex="-1"></a><span class="fu">provenance</span><span class="kw">:</span><span class="at"> user_generated</span></span>
-<span id="cb232-5"><a href="#cb232-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source_platform</span><span class="kw">:</span><span class="at"> facebook</span></span>
-<span id="cb232-6"><a href="#cb232-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source_url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://facebook.com/reviews/xyz&quot;</span></span>
-<span id="cb232-7"><a href="#cb232-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source_id</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fb-review-12345&quot;</span></span>
-<span id="cb232-8"><a href="#cb232-8" aria-hidden="true" tabindex="-1"></a><span class="fu">imported_date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2025-02-01&quot;</span></span>
+<span id="cb232-4"><a href="#cb232-4" aria-hidden="true" tabindex="-1"></a><span class="fu">provenance</span><span class="kw">:</span><span class="at"> userGenerated</span></span>
+<span id="cb232-5"><a href="#cb232-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sourcePlatform</span><span class="kw">:</span><span class="at"> facebook</span></span>
+<span id="cb232-6"><a href="#cb232-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sourceUrl</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://facebook.com/reviews/xyz&quot;</span></span>
+<span id="cb232-7"><a href="#cb232-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sourceId</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fb-review-12345&quot;</span></span>
+<span id="cb232-8"><a href="#cb232-8" aria-hidden="true" tabindex="-1"></a><span class="fu">importedDate</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2025-02-01&quot;</span></span>
 <span id="cb232-9"><a href="#cb232-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb232-10"><a href="#cb232-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Attribution chain (original source retains ownership)</span></span>
 <span id="cb232-11"><a href="#cb232-11" aria-hidden="true" tabindex="-1"></a><span class="fu">attribution</span><span class="kw">:</span></span>
-<span id="cb232-12"><a href="#cb232-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">original_author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Jane Smith&quot;</span></span>
-<span id="cb232-13"><a href="#cb232-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">original_platform</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Facebook&quot;</span></span>
-<span id="cb232-14"><a href="#cb232-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">original_url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://facebook.com/reviews/xyz&quot;</span></span>
+<span id="cb232-12"><a href="#cb232-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">originalAuthor</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Jane Smith&quot;</span></span>
+<span id="cb232-13"><a href="#cb232-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">originalPlatform</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Facebook&quot;</span></span>
+<span id="cb232-14"><a href="#cb232-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">originalUrl</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://facebook.com/reviews/xyz&quot;</span></span>
 <span id="cb232-15"><a href="#cb232-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">license</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;licensed copy with attribution&quot;</span></span>
 <span id="cb232-16"><a href="#cb232-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb232-17"><a href="#cb232-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Customer sovereignty metadata</span></span>
-<span id="cb232-18"><a href="#cb232-18" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_owned</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">           # Customer owns this copy</span></span>
-<span id="cb232-19"><a href="#cb232-19" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_repo</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;customer-org/content-repo&quot;</span></span>
-<span id="cb232-20"><a href="#cb232-20" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_can_edit</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co">       # Preserve review authenticity</span></span>
-<span id="cb232-21"><a href="#cb232-21" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_can_display</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">     # Can publish to their site</span></span>
-<span id="cb232-22"><a href="#cb232-22" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_can_export</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">      # Can move to different system</span></span>
-<span id="cb232-23"><a href="#cb232-23" aria-hidden="true" tabindex="-1"></a><span class="fu">vendor_access_revocable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">  # Customer can cut off MX anytime</span></span>
+<span id="cb232-18"><a href="#cb232-18" aria-hidden="true" tabindex="-1"></a><span class="fu">customerOwned</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">           # Customer owns this copy</span></span>
+<span id="cb232-19"><a href="#cb232-19" aria-hidden="true" tabindex="-1"></a><span class="fu">customerRepo</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;customer-org/content-repo&quot;</span></span>
+<span id="cb232-20"><a href="#cb232-20" aria-hidden="true" tabindex="-1"></a><span class="fu">customerCanEdit</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co">       # Preserve review authenticity</span></span>
+<span id="cb232-21"><a href="#cb232-21" aria-hidden="true" tabindex="-1"></a><span class="fu">customerCanDisplay</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">     # Can publish to their site</span></span>
+<span id="cb232-22"><a href="#cb232-22" aria-hidden="true" tabindex="-1"></a><span class="fu">customerCanExport</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">      # Can move to different system</span></span>
+<span id="cb232-23"><a href="#cb232-23" aria-hidden="true" tabindex="-1"></a><span class="fu">vendorAccessRevocable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">  # Customer can cut off MX anytime</span></span>
 <span id="cb232-24"><a href="#cb232-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb232-25"><a href="#cb232-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Original source ownership preserved</span></span>
-<span id="cb232-26"><a href="#cb232-26" aria-hidden="true" tabindex="-1"></a><span class="fu">source_ownership</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Facebook Inc.&quot;</span></span>
-<span id="cb232-27"><a href="#cb232-27" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_rights</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;licensed copy for display with attribution&quot;</span></span>
+<span id="cb232-26"><a href="#cb232-26" aria-hidden="true" tabindex="-1"></a><span class="fu">sourceOwnership</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Facebook Inc.&quot;</span></span>
+<span id="cb232-27"><a href="#cb232-27" aria-hidden="true" tabindex="-1"></a><span class="fu">customerRights</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;licensed copy for display with attribution&quot;</span></span>
 <span id="cb232-28"><a href="#cb232-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb232-29"><a href="#cb232-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Geographic and rights constraints</span></span>
 <span id="cb232-30"><a href="#cb232-30" aria-hidden="true" tabindex="-1"></a><span class="fu">jurisdictions</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">UK</span><span class="kw">,</span><span class="at"> EU</span><span class="kw">]</span></span>
-<span id="cb232-31"><a href="#cb232-31" aria-hidden="true" tabindex="-1"></a><span class="fu">storage_region</span><span class="kw">:</span><span class="at"> uk-south</span></span>
-<span id="cb232-32"><a href="#cb232-32" aria-hidden="true" tabindex="-1"></a><span class="fu">gdpr_compliant</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb232-31"><a href="#cb232-31" aria-hidden="true" tabindex="-1"></a><span class="fu">storageRegion</span><span class="kw">:</span><span class="at"> uk-south</span></span>
+<span id="cb232-32"><a href="#cb232-32" aria-hidden="true" tabindex="-1"></a><span class="fu">gdprCompliant</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb232-33"><a href="#cb232-33" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb232-34"><a href="#cb232-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb232-35"><a href="#cb232-35" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Brilliant service from Scott and Stuart. Used them for business cards</span></span>
@@ -21254,7 +21218,7 @@ copy with proper attribution, not transfer of rights</li>
 <li><strong>No vendor lock-in</strong> - Customer can revoke MX access;
 data remains in their repo</li>
 <li><strong>Review authenticity protected</strong> -
-<code>customer_can_edit: false</code> prevents tampering</li>
+<code>customerCanEdit: false</code> prevents tampering</li>
 </ol>
 <h3 id="why-this-matters-for-agents">Why This Matters for Agents</h3>
 <p>AI agents operating on behalf of users need content that’s cleared
@@ -21272,22 +21236,22 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb233-1"><a href
 <span id="cb233-6"><a href="#cb233-6" aria-hidden="true" tabindex="-1"></a><span class="fu">license</span><span class="kw">:</span><span class="at"> rights-managed</span></span>
 <span id="cb233-7"><a href="#cb233-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jurisdictions</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">UK</span><span class="kw">,</span><span class="at"> IE</span><span class="kw">]</span></span>
 <span id="cb233-8"><a href="#cb233-8" aria-hidden="true" tabindex="-1"></a><span class="fu">usageConstraints</span><span class="kw">:</span></span>
-<span id="cb233-9"><a href="#cb233-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> no_outdoor_advertising</span></span>
-<span id="cb233-10"><a href="#cb233-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> no_third_party_resale</span></span>
-<span id="cb233-11"><a href="#cb233-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">print_run_max</span><span class="kw">:</span><span class="at"> </span><span class="dv">50000</span></span>
-<span id="cb233-12"><a href="#cb233-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">attribution_required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb233-9"><a href="#cb233-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> noOutdoorAdvertising</span></span>
+<span id="cb233-10"><a href="#cb233-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> noThirdPartyResale</span></span>
+<span id="cb233-11"><a href="#cb233-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">printRunMax</span><span class="kw">:</span><span class="at"> </span><span class="dv">50000</span></span>
+<span id="cb233-12"><a href="#cb233-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">attributionRequired</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb233-13"><a href="#cb233-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb233-14"><a href="#cb233-14" aria-hidden="true" tabindex="-1"></a><span class="fu">attribution_text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Photo © Example Agency 2025. Used under license.&quot;</span></span>
+<span id="cb233-14"><a href="#cb233-14" aria-hidden="true" tabindex="-1"></a><span class="fu">attributionText</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Photo © Example Agency 2025. Used under license.&quot;</span></span>
 <span id="cb233-15"><a href="#cb233-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb233-16"><a href="#cb233-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Customer sovereignty</span></span>
-<span id="cb233-17"><a href="#cb233-17" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_owned</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb233-18"><a href="#cb233-18" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_repo</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;customer-org/assets&quot;</span></span>
-<span id="cb233-19"><a href="#cb233-19" aria-hidden="true" tabindex="-1"></a><span class="fu">vendor_access_revocable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb233-17"><a href="#cb233-17" aria-hidden="true" tabindex="-1"></a><span class="fu">customerOwned</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb233-18"><a href="#cb233-18" aria-hidden="true" tabindex="-1"></a><span class="fu">customerRepo</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;customer-org/assets&quot;</span></span>
+<span id="cb233-19"><a href="#cb233-19" aria-hidden="true" tabindex="-1"></a><span class="fu">vendorAccessRevocable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb233-20"><a href="#cb233-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb233-21"><a href="#cb233-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Geographic constraints</span></span>
-<span id="cb233-22"><a href="#cb233-22" aria-hidden="true" tabindex="-1"></a><span class="fu">storage_region</span><span class="kw">:</span><span class="at"> uk-south</span></span>
-<span id="cb233-23"><a href="#cb233-23" aria-hidden="true" tabindex="-1"></a><span class="fu">data_residency</span><span class="kw">:</span><span class="at"> UK</span></span>
-<span id="cb233-24"><a href="#cb233-24" aria-hidden="true" tabindex="-1"></a><span class="fu">gdpr_compliant</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb233-22"><a href="#cb233-22" aria-hidden="true" tabindex="-1"></a><span class="fu">storageRegion</span><span class="kw">:</span><span class="at"> uk-south</span></span>
+<span id="cb233-23"><a href="#cb233-23" aria-hidden="true" tabindex="-1"></a><span class="fu">dataResidency</span><span class="kw">:</span><span class="at"> UK</span></span>
+<span id="cb233-24"><a href="#cb233-24" aria-hidden="true" tabindex="-1"></a><span class="fu">gdprCompliant</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb233-25"><a href="#cb233-25" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>When an agent queries for content, the reconstruction engine checks
 these constraints automatically. This prevents:</p>
@@ -21311,52 +21275,52 @@ requirements for publication?”</p>
 <div class="sourceCode" id="cb234"><pre
 class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb234-1"><a href="#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb234-2"><a href="#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> sovereignty-bundle-uk-customer-owned</span></span>
-<span id="cb234-3"><a href="#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> sovereignty_bundle</span></span>
+<span id="cb234-3"><a href="#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> sovereigntyBundle</span></span>
 <span id="cb234-4"><a href="#cb234-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb234-5"><a href="#cb234-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Customer ownership requirements (checked during Zone 2 validation)</span></span>
-<span id="cb234-6"><a href="#cb234-6" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_owned</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">                    # Must be true to publish</span></span>
-<span id="cb234-7"><a href="#cb234-7" aria-hidden="true" tabindex="-1"></a><span class="fu">customer_repo</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;customer-org/content&quot;</span><span class="co">   # Destination repo</span></span>
-<span id="cb234-8"><a href="#cb234-8" aria-hidden="true" tabindex="-1"></a><span class="fu">vendor_access_revocable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">           # Customer can revoke MX access</span></span>
+<span id="cb234-6"><a href="#cb234-6" aria-hidden="true" tabindex="-1"></a><span class="fu">customerOwned</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">                    # Must be true to publish</span></span>
+<span id="cb234-7"><a href="#cb234-7" aria-hidden="true" tabindex="-1"></a><span class="fu">customerRepo</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;customer-org/content&quot;</span><span class="co">   # Destination repo</span></span>
+<span id="cb234-8"><a href="#cb234-8" aria-hidden="true" tabindex="-1"></a><span class="fu">vendorAccessRevocable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">           # Customer can revoke MX access</span></span>
 <span id="cb234-9"><a href="#cb234-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb234-10"><a href="#cb234-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Attribution requirements</span></span>
-<span id="cb234-11"><a href="#cb234-11" aria-hidden="true" tabindex="-1"></a><span class="fu">attribution_required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb234-12"><a href="#cb234-12" aria-hidden="true" tabindex="-1"></a><span class="fu">provenance_tracking</span><span class="kw">:</span><span class="at"> mandatory</span></span>
-<span id="cb234-13"><a href="#cb234-13" aria-hidden="true" tabindex="-1"></a><span class="fu">source_ownership_preserved</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb234-11"><a href="#cb234-11" aria-hidden="true" tabindex="-1"></a><span class="fu">attributionRequired</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb234-12"><a href="#cb234-12" aria-hidden="true" tabindex="-1"></a><span class="fu">provenanceTracking</span><span class="kw">:</span><span class="at"> mandatory</span></span>
+<span id="cb234-13"><a href="#cb234-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sourceOwnershipPreserved</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb234-14"><a href="#cb234-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb234-15"><a href="#cb234-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Geographic constraints</span></span>
 <span id="cb234-16"><a href="#cb234-16" aria-hidden="true" tabindex="-1"></a><span class="fu">jurisdictions</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">UK</span><span class="kw">]</span></span>
-<span id="cb234-17"><a href="#cb234-17" aria-hidden="true" tabindex="-1"></a><span class="fu">storage_region</span><span class="kw">:</span><span class="at"> uk-south</span></span>
-<span id="cb234-18"><a href="#cb234-18" aria-hidden="true" tabindex="-1"></a><span class="fu">data_residency</span><span class="kw">:</span><span class="at"> UK</span></span>
+<span id="cb234-17"><a href="#cb234-17" aria-hidden="true" tabindex="-1"></a><span class="fu">storageRegion</span><span class="kw">:</span><span class="at"> uk-south</span></span>
+<span id="cb234-18"><a href="#cb234-18" aria-hidden="true" tabindex="-1"></a><span class="fu">dataResidency</span><span class="kw">:</span><span class="at"> UK</span></span>
 <span id="cb234-19"><a href="#cb234-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb234-20"><a href="#cb234-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Default constraints for assets using this bundle</span></span>
-<span id="cb234-21"><a href="#cb234-21" aria-hidden="true" tabindex="-1"></a><span class="fu">default_license</span><span class="kw">:</span><span class="at"> internal-only</span></span>
-<span id="cb234-22"><a href="#cb234-22" aria-hidden="true" tabindex="-1"></a><span class="fu">default_usageConstraints</span><span class="kw">:</span></span>
-<span id="cb234-23"><a href="#cb234-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> no_third_party_resale</span></span>
-<span id="cb234-24"><a href="#cb234-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">attribution_required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb234-21"><a href="#cb234-21" aria-hidden="true" tabindex="-1"></a><span class="fu">defaultLicense</span><span class="kw">:</span><span class="at"> internal-only</span></span>
+<span id="cb234-22"><a href="#cb234-22" aria-hidden="true" tabindex="-1"></a><span class="fu">defaultUsageConstraints</span><span class="kw">:</span></span>
+<span id="cb234-23"><a href="#cb234-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> noThirdPartyResale</span></span>
+<span id="cb234-24"><a href="#cb234-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">attributionRequired</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb234-25"><a href="#cb234-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb234-26"><a href="#cb234-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Rules evaluated during Zone 2 validation</span></span>
-<span id="cb234-27"><a href="#cb234-27" aria-hidden="true" tabindex="-1"></a><span class="fu">enforced_rules</span><span class="kw">:</span></span>
+<span id="cb234-27"><a href="#cb234-27" aria-hidden="true" tabindex="-1"></a><span class="fu">enforcedRules</span><span class="kw">:</span></span>
 <span id="cb234-28"><a href="#cb234-28" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> rule-customer-ownership-check</span></span>
 <span id="cb234-29"><a href="#cb234-29" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> rule-attribution-validation</span></span>
 <span id="cb234-30"><a href="#cb234-30" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> rule-jurisdiction-validation</span></span>
 <span id="cb234-31"><a href="#cb234-31" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> rule-data-residency-uk</span></span>
 <span id="cb234-32"><a href="#cb234-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb234-33"><a href="#cb234-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Compliance flags</span></span>
-<span id="cb234-34"><a href="#cb234-34" aria-hidden="true" tabindex="-1"></a><span class="fu">gdpr_compliant</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb234-35"><a href="#cb234-35" aria-hidden="true" tabindex="-1"></a><span class="fu">brexit_compliant</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb234-34"><a href="#cb234-34" aria-hidden="true" tabindex="-1"></a><span class="fu">gdprCompliant</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb234-35"><a href="#cb234-35" aria-hidden="true" tabindex="-1"></a><span class="fu">brexitCompliant</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb234-36"><a href="#cb234-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb234-37"><a href="#cb234-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Enforcement configuration</span></span>
-<span id="cb234-38"><a href="#cb234-38" aria-hidden="true" tabindex="-1"></a><span class="fu">enforced_in_zone</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span><span class="co">                    # Validation gate</span></span>
-<span id="cb234-39"><a href="#cb234-39" aria-hidden="true" tabindex="-1"></a><span class="fu">blocks_publication_if_violated</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">   # Stops progression to Zone 3</span></span>
+<span id="cb234-38"><a href="#cb234-38" aria-hidden="true" tabindex="-1"></a><span class="fu">enforcedInZone</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span><span class="co">                    # Validation gate</span></span>
+<span id="cb234-39"><a href="#cb234-39" aria-hidden="true" tabindex="-1"></a><span class="fu">blocksPublicationIfViolated</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co">   # Stops progression to Zone 3</span></span>
 <span id="cb234-40"><a href="#cb234-40" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p><strong>How bundles work in the three-zone workflow:</strong></p>
 <ol type="1">
 <li><strong>Zone 1 (Draft)</strong> - Asset references bundle:
-<code>sovereignty_bundle: sovereignty-bundle-uk-customer-owned</code></li>
+<code>sovereigntyBundle: sovereignty-bundle-uk-customer-owned</code></li>
 <li><strong>Zone 2 (Validation)</strong> - Validation gate checks all
 bundle requirements:
 <ul>
-<li>Is <code>customer_owned: true</code>?</li>
+<li>Is <code>customerOwned: true</code>?</li>
 <li>Does attribution chain exist?</li>
 <li>Is storage region UK?</li>
 <li>Are all provenance fields complete?</li>
@@ -21388,22 +21352,22 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb235-1"><a href
 <span id="cb235-3"><a href="#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> article</span></span>
 <span id="cb235-4"><a href="#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">web</span><span class="kw">,</span><span class="at"> print</span><span class="kw">,</span><span class="at"> email</span><span class="kw">]</span></span>
 <span id="cb235-5"><a href="#cb235-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb235-6"><a href="#cb235-6" aria-hidden="true" tabindex="-1"></a><span class="fu">channel_variants</span><span class="kw">:</span></span>
+<span id="cb235-6"><a href="#cb235-6" aria-hidden="true" tabindex="-1"></a><span class="fu">channelVariants</span><span class="kw">:</span></span>
 <span id="cb235-7"><a href="#cb235-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web</span><span class="kw">:</span></span>
 <span id="cb235-8"><a href="#cb235-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb235-9"><a href="#cb235-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">includes</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">hero_image</span><span class="kw">,</span><span class="at"> full_text</span><span class="kw">,</span><span class="at"> reviews</span><span class="kw">,</span><span class="at"> related_products</span><span class="kw">]</span></span>
-<span id="cb235-10"><a href="#cb235-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">max_length</span><span class="kw">:</span><span class="at"> unlimited</span></span>
+<span id="cb235-9"><a href="#cb235-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">includes</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">heroImage</span><span class="kw">,</span><span class="at"> fullText</span><span class="kw">,</span><span class="at"> reviews</span><span class="kw">,</span><span class="at"> relatedProducts</span><span class="kw">]</span></span>
+<span id="cb235-10"><a href="#cb235-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">maxLength</span><span class="kw">:</span><span class="at"> unlimited</span></span>
 <span id="cb235-11"><a href="#cb235-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb235-12"><a href="#cb235-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">print</span><span class="kw">:</span></span>
 <span id="cb235-13"><a href="#cb235-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">format</span><span class="kw">:</span><span class="at"> pdf</span></span>
 <span id="cb235-14"><a href="#cb235-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">template</span><span class="kw">:</span><span class="at"> installation-guide-a5</span></span>
-<span id="cb235-15"><a href="#cb235-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">includes</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">hero_image_print</span><span class="kw">,</span><span class="at"> full_text</span><span class="kw">,</span><span class="at"> legal_notices</span><span class="kw">]</span></span>
-<span id="cb235-16"><a href="#cb235-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">max_length</span><span class="kw">:</span><span class="at"> 2000_words</span></span>
+<span id="cb235-15"><a href="#cb235-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">includes</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">heroImagePrint</span><span class="kw">,</span><span class="at"> fullText</span><span class="kw">,</span><span class="at"> legalNotices</span><span class="kw">]</span></span>
+<span id="cb235-16"><a href="#cb235-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">maxLength</span><span class="kw">:</span><span class="at"> 2000_words</span></span>
 <span id="cb235-17"><a href="#cb235-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb235-18"><a href="#cb235-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">email</span><span class="kw">:</span></span>
 <span id="cb235-19"><a href="#cb235-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">format</span><span class="kw">:</span><span class="at"> text</span></span>
-<span id="cb235-20"><a href="#cb235-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">includes</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">summary</span><span class="kw">,</span><span class="at"> cta_link</span><span class="kw">]</span></span>
-<span id="cb235-21"><a href="#cb235-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">max_length</span><span class="kw">:</span><span class="at"> 500_words</span></span>
+<span id="cb235-20"><a href="#cb235-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">includes</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">summary</span><span class="kw">,</span><span class="at"> ctaLink</span><span class="kw">]</span></span>
+<span id="cb235-21"><a href="#cb235-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">maxLength</span><span class="kw">:</span><span class="at"> 500_words</span></span>
 <span id="cb235-22"><a href="#cb235-22" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>When reconstructing for a specific channel, the engine:</p>
 <ol type="1">
@@ -21432,7 +21396,7 @@ class="sourceCode json"><code class="sourceCode json"><span id="cb237-1"><a href
 <span id="cb237-4"><a href="#cb237-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;format&quot;</span><span class="fu">:</span> <span class="st">&quot;html&quot;</span><span class="fu">,</span></span>
 <span id="cb237-5"><a href="#cb237-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;Widget Pro Installation Guide&quot;</span><span class="fu">,</span></span>
 <span id="cb237-6"><a href="#cb237-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="st">&quot;[Full HTML content]&quot;</span><span class="fu">,</span></span>
-<span id="cb237-7"><a href="#cb237-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;hero_image&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb237-7"><a href="#cb237-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;heroImage&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
 <span id="cb237-8"><a href="#cb237-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;image-widget-hero-web-001&quot;</span><span class="fu">,</span></span>
 <span id="cb237-9"><a href="#cb237-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://cdn.example.com/images/widget-hero.webp&quot;</span><span class="fu">,</span></span>
 <span id="cb237-10"><a href="#cb237-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;alt&quot;</span><span class="fu">:</span> <span class="st">&quot;Electrician installing Widget Pro in consumer unit&quot;</span><span class="fu">,</span></span>
@@ -21443,7 +21407,7 @@ class="sourceCode json"><code class="sourceCode json"><span id="cb237-1"><a href
 <span id="cb237-15"><a href="#cb237-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span><span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;review-774&quot;</span><span class="fu">,</span> <span class="dt">&quot;rating&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span> <span class="dt">&quot;text&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
 <span id="cb237-16"><a href="#cb237-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span><span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;review-775&quot;</span><span class="fu">,</span> <span class="dt">&quot;rating&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span> <span class="dt">&quot;text&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">}</span></span>
 <span id="cb237-17"><a href="#cb237-17" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb237-18"><a href="#cb237-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;related_products&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="er">...</span><span class="ot">]</span></span>
+<span id="cb237-18"><a href="#cb237-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;relatedProducts&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="er">...</span><span class="ot">]</span></span>
 <span id="cb237-19"><a href="#cb237-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
 <span id="cb237-20"><a href="#cb237-20" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p><strong>Print reconstruction query:</strong></p>
@@ -21452,7 +21416,7 @@ class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb23
 <span id="cb238-2"><a href="#cb238-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">article</span><span class="op">:</span> <span class="st">&quot;article-installation-widget-pro-001&quot;</span><span class="op">,</span></span>
 <span id="cb238-3"><a href="#cb238-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">channel</span><span class="op">:</span> <span class="st">&quot;print&quot;</span><span class="op">,</span></span>
 <span id="cb238-4"><a href="#cb238-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">jurisdiction</span><span class="op">:</span> <span class="st">&quot;UK&quot;</span><span class="op">,</span></span>
-<span id="cb238-5"><a href="#cb238-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">print_run</span><span class="op">:</span> <span class="dv">25000</span></span>
+<span id="cb238-5"><a href="#cb238-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">printRun</span><span class="op">:</span> <span class="dv">25000</span></span>
 <span id="cb238-6"><a href="#cb238-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p><strong>Result:</strong></p>
 <div class="sourceCode" id="cb239"><pre
@@ -21463,22 +21427,22 @@ class="sourceCode json"><code class="sourceCode json"><span id="cb239-1"><a href
 <span id="cb239-5"><a href="#cb239-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;installation-guide-a5&quot;</span><span class="fu">,</span></span>
 <span id="cb239-6"><a href="#cb239-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;Widget Pro Installation Guide&quot;</span><span class="fu">,</span></span>
 <span id="cb239-7"><a href="#cb239-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="st">&quot;[Formatted for print, max 2000 words]&quot;</span><span class="fu">,</span></span>
-<span id="cb239-8"><a href="#cb239-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;hero_image&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb239-8"><a href="#cb239-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;heroImage&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
 <span id="cb239-9"><a href="#cb239-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;image-widget-hero-print-001&quot;</span><span class="fu">,</span></span>
 <span id="cb239-10"><a href="#cb239-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://cdn.example.com/images/widget-hero-print.tiff&quot;</span><span class="fu">,</span></span>
 <span id="cb239-11"><a href="#cb239-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;alt&quot;</span><span class="fu">:</span> <span class="st">&quot;Electrician installing Widget Pro in consumer unit&quot;</span><span class="fu">,</span></span>
 <span id="cb239-12"><a href="#cb239-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;dpi&quot;</span><span class="fu">:</span> <span class="dv">300</span><span class="fu">,</span></span>
 <span id="cb239-13"><a href="#cb239-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;format&quot;</span><span class="fu">:</span> <span class="st">&quot;tiff&quot;</span><span class="fu">,</span></span>
-<span id="cb239-14"><a href="#cb239-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;color_space&quot;</span><span class="fu">:</span> <span class="st">&quot;CMYK&quot;</span></span>
+<span id="cb239-14"><a href="#cb239-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;colorSpace&quot;</span><span class="fu">:</span> <span class="st">&quot;CMYK&quot;</span></span>
 <span id="cb239-15"><a href="#cb239-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
-<span id="cb239-16"><a href="#cb239-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;legal_notices&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb239-16"><a href="#cb239-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;legalNotices&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
 <span id="cb239-17"><a href="#cb239-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;BS 7671:2018+A2:2022 compliance required&quot;</span><span class="ot">,</span></span>
 <span id="cb239-18"><a href="#cb239-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Part P certification mandatory&quot;</span></span>
 <span id="cb239-19"><a href="#cb239-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
 <span id="cb239-20"><a href="#cb239-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;reviews&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
-<span id="cb239-21"><a href="#cb239-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;constraints_evaluated&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb239-22"><a href="#cb239-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;print_run_check&quot;</span><span class="fu">:</span> <span class="st">&quot;pass&quot;</span><span class="fu">,</span></span>
-<span id="cb239-23"><a href="#cb239-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;licensing_check&quot;</span><span class="fu">:</span> <span class="st">&quot;pass&quot;</span></span>
+<span id="cb239-21"><a href="#cb239-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;constraintsEvaluated&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb239-22"><a href="#cb239-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;printRunCheck&quot;</span><span class="fu">:</span> <span class="st">&quot;pass&quot;</span><span class="fu">,</span></span>
+<span id="cb239-23"><a href="#cb239-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;licensingCheck&quot;</span><span class="fu">:</span> <span class="st">&quot;pass&quot;</span></span>
 <span id="cb239-24"><a href="#cb239-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
 <span id="cb239-25"><a href="#cb239-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
 <span id="cb239-26"><a href="#cb239-26" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
@@ -21785,9 +21749,9 @@ against governance rules. Zone 3 deploys the production-ready output.
 With WebMCP, Zone 3 doesn’t just serve a readable page — it serves a
 page whose capabilities are callable. A product page doesn’t just
 declare <code>intent: purchase</code> in its metadata; it registers an
-<code>add_to_cart</code> tool that agents can call directly. A booking
+<code>addToCart</code> tool that agents can call directly. A booking
 page doesn’t just declare <code>intent: reservation</code>; it registers
-a <code>check_availability</code> tool with typed parameters. The
+a <code>checkAvailability</code> tool with typed parameters. The
 metadata and the tools are two expressions of the same intent. The YAML
 says what the page wants to achieve. The WebMCP tools say how.</p>
 <p>MX metadata has been establishing this intent-first discipline since
@@ -23013,10 +22977,10 @@ Chapter 9 for competitive analysis with Universal Commerce Protocol
 <p><strong>ai-* meta tags</strong> Proposed naming convention for HTML
 meta tags that provide guidance to AI agents. Not yet standardised, but
 follows the pattern of existing meta tag conventions like robots and
-viewport. Examples include ai-api-endpoint, sop-freshness,
-sop-content-policy, and sop-attribution. These proposed patterns use the
-ai-* namespace to avoid conflicts with existing standards and remain
-harmless if agents don’t recognise them.</p>
+viewport. Examples include ai-api-endpoint, mx:content-policy, and
+mx:attribution. These proposed patterns use the mx: namespace to avoid
+conflicts with existing standards and remain harmless if agents don’t
+recognise them.</p>
 <p><strong>ai-agent-instructions</strong> Meta tag dynamically injected
 by JavaScript handshake scripts to provide session-specific guidance to
 browser-based AI agents. Typically contains instructions about

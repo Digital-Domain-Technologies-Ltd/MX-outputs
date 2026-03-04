@@ -48,11 +48,11 @@ The cog registry grew to 41 total. New additions:
 - **what-is-mx-environment** — explains $MX_HOME and machine context
 - **script-helper** — action-cog for inspecting scripts
 
-### PRINCIPLES.md and INSTALLME.md
+### principles.cog.md and INSTALLME.md
 
 Two new root-level documents:
 
-- `PRINCIPLES.md` — renamed from mx-principles.md (follows convention: root-level, uppercase)
+- `principles.cog.md` — renamed from mx-principles.md (follows convention: root-level, uppercase)
 - `INSTALLME.md` — machine-readable installation instructions so AI agents can set up the repo without guessing
 
 ### Reminders System
