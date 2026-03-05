@@ -1,25 +1,25 @@
 ---
-title: "Co-Directors Report — PDF Pipeline Matured: Illustrations, Dependencies, Zero Warnings"
-description: "Evening session report. Codex illustrations moved to canonical location, TeX Live dependencies resolved, deprecated pandoc flags replaced across the repo, and all book PDFs rebuilt with zero warnings."
+title: "Co-Directors Report — PDF Pipeline, tg.community Re-Audit, and Three Tooling Fixes"
+description: "Evening session report. PDF pipeline completed, tg.community audited 24 hours after initial assessment showing transformative improvements, and three bugs fixed in the audit tool."
 created: "2026-03-05"
 segment: "evening"
-version: "1.0"
+version: "2.0"
 author: "Tom Cranstoun and Maxine"
 audience: "stakeholders"
 confidentiality: "internal"
 ---
 
-# Co-Directors Report — PDF Pipeline Matured: Illustrations, Dependencies, Zero Warnings
+# Co-Directors Report — PDF Pipeline, tg.community Re-Audit, and Three Tooling Fixes
 
-**5 March 2026 — Evening**
+**5 March 2026 — Evening (update)**
 
 ---
 
 ## Summary
 
-The evening session resolved every outstanding issue in the book PDF pipeline. Sixteen Codex chapter illustrations that were missing from PDF output — because their SVGs sat outside the canonical asset directory — were moved to the correct location, where the automated illustration generator now picks them up without any special configuration. Missing LaTeX packages were installed. All deprecated pandoc flags were replaced with their pandoc 3.8 equivalents across every file in the repository that referenced them. Both books (MX Codex and MX Handbook) were rebuilt in all formats — A4, Kindle, and HTML — with zero warnings.
+The evening session had two phases. First, the book PDF pipeline was completed: illustrations moved, pandoc flags updated, LaTeX dependencies resolved, and both books rebuilt with zero warnings. Second, a full follow-up audit of tg.community was conducted — just 24 hours after the initial assessment. The results show that The Gathering's team responded to the March 4 audit with exceptional speed: security headers went from 20/100 to 100/100, all discovery files (robots.txt, sitemap.xml, llms.txt) went from 404 to 200, and Schema.org JSON-LD appeared on every page. AI agent suitability reached 100/100.
 
-The PDF pipeline is now clean. No manual workarounds, no deprecated flags, no missing assets.
+Three bugs in the audit tool were also identified and fixed during the process: a false positive in llms.txt detection, a macOS compatibility issue in the recon script, and duplicate URL processing during crawls.
 
 ---
 
@@ -27,11 +27,10 @@ The PDF pipeline is now clean. No manual workarounds, no deprecated flags, no mi
 
 | Metric | Value |
 |--------|-------|
-| Commits (today) | 2 (main) + 3 (submodules) |
-| Files changed (main commit) | 42 |
-| SVGs relocated | 16 |
-| Pandoc flag replacements | ~20 across 5 files |
-| Illustration conversions | 47 (31 existing + 16 new) |
+| Commits (evening) | 5 (main) + 3 (submodules) |
+| Files changed (uncommitted) | 8 (mx-audit: 5, recon script: 1, about.mx: 1) |
+| tg.community pages audited | 8 |
+| Audit tool bugs fixed | 3 |
 | Codex PDF size | 8.5 MB (A4), 8.2 MB (Kindle) |
 | Handbook PDF size | 3.1 MB (A4), 3.1 MB (Kindle) |
 | PDF warnings | 0 |
@@ -39,6 +38,22 @@ The PDF pipeline is now clean. No manual workarounds, no deprecated flags, no mi
 ---
 
 ## What Was Built
+
+### tg.community Follow-Up Audit Report
+
+A full 9-action audit pipeline was executed against tg.community with cache cleared, producing an executive report documenting transformative 24-hour improvements:
+
+| Metric | 4 March | 5 March | Change |
+|--------|---------|---------|--------|
+| Security Headers | 20/100 | 100/100 | +80 |
+| AI Agent Suitability (served HTML) | 92/100 | 100/100 | +8 |
+| SEO | 60/100 | 67/100 | +7 |
+| Accessibility (Pa11y WCAG2AA) | 100/100 | 100/100 | Maintained |
+| Performance | 85/100 | 85/100 | Maintained |
+
+**Report filed:** `mx-crm/outreach/2026-03-05/tg-community-report.md`
+
+The report acknowledges what The Gathering's team accomplished and shifts the engagement framing from foundation-building to refinement. The remaining opportunities are polish (meta descriptions, content freshness signals, llms.txt enhancements) rather than critical gaps.
 
 ### All Book PDFs Regenerated
 
@@ -49,53 +64,29 @@ Both the MX Codex and MX Handbook were rebuilt in every format:
 
 The Codex PDFs jumped from ~4 MB to ~8.5 MB because the 16 chapter illustrations are now included — they had been silently missing from every previous build.
 
-### tg.community Audit Report PDF
-
-The tg.community audit report from yesterday's session was rendered to PDF with professional table formatting using the newly installed LaTeX packages.
-
 ---
 
 ## What Changed
 
-### Illustrations Moved to Canonical Location
+### Three Audit Tool Bugs Fixed
 
-The 16 Codex chapter SVGs lived at `datalake/publications/mx-books/mx-codex/codex/illustrations/` — outside the canonical asset directory at `datalake/assets/images/svg/`. The illustration generator script walks the canonical directory recursively, so these SVGs were never converted. Every Codex PDF build produced 13 missing-image warnings.
+During the tg.community audit, three bugs surfaced and were fixed:
 
-The fix was architectural, not procedural:
+**1. llms.txt False Positive** — The LLM suitability report flagged "No llms.txt file detected" on every page despite the file existing at the site root (200, 698 bytes). Root cause: the feedback generator (`llmFeedback.js`) only checked for in-page HTML references (`<link>`, `<meta>`), not the site-level HTTP check that correctly detected the file. Fixed by passing `siteContext` through the feedback chain. Files: `llmFeedback.js`, `llmMetrics.js`, `llmReports.js`.
 
-1. `git mv` all 16 SVGs to `datalake/assets/images/svg/illustrations/`
-2. The generator script discovered them automatically (no script changes)
-3. PNGs appeared at `datalake/assets/images/bitmap/illustrations/`
-4. Pandoc's existing `--resource-path` already included `datalake/assets/images/bitmap`
+**2. Meta-Extract macOS Incompatibility** — The recon script's meta-extraction reported "(none)" for every field (title, description, Open Graph, language, headings). Root cause: `grep -P` (Perl regex) is a GNU grep feature unavailable on macOS BSD grep. All six calls silently failed, hidden by `2>/dev/null`. Fixed by replacing all `grep -oP` patterns with equivalent `perl -ne` one-liners. File: `scripts/mx-audit-recon.sh`.
 
-Zero chapter markdown changes. Zero script changes. Zero pandoc configuration changes. Only the file locations changed.
+**3. Duplicate URLs in Crawl** — The automated suite processed the homepage and /about twice each, producing duplicate CSV rows. Root cause: `processHtmlContent()` in `sitemap.js` added every `<a href>` without deduplication — pages with the same link in header and footer appeared twice. Fixed by adding `Set`-based deduplication with URL normalisation in both `sitemap.js` and `urlProcessor.js`.
 
-### Deprecated Pandoc Flags Replaced
+### PDF Pipeline Completed
 
-Pandoc 3.8 deprecated two flags used throughout the build system:
+The earlier phase of this session resolved every outstanding PDF pipeline issue (full details in v1.0 of this report):
 
-| Old | New |
-|-----|-----|
-| `--listings` | `--syntax-highlighting=idiomatic` |
-| `--highlight-style=<style>` | `--syntax-highlighting=<style>` |
-
-Updated in:
-
-- `package.json` — 4 npm scripts
-- `scripts/cogs/pdf-generator.cog.md` — 6 references
-- `scripts/generate-document-pdf.js` — 1 reference
-- `allaboutv2/reginald/cogs/cog-nova-mx/pdf-generator/content.md` — 8 references (published copy)
-- `mx-canon/mx-maxine-lives/routing-registry.json` — 4 cached commands
-
-Final grep confirmed zero references to the deprecated flags remain anywhere in the repository.
-
-### LaTeX Dependencies Installed
-
-TeX Live 2025 was missing `framed` and `needspace` packages, required for professional table formatting in PDFs. Installation required pointing `tlmgr` at the TeX Live 2025 historic archive (the live repository had moved to 2026).
-
-### Emoji Fix
-
-Chapter 14 contained `❌` which XeLaTeX cannot render. Replaced with `**Failed**` — maintaining meaning while ensuring LaTeX compatibility.
+- 16 Codex SVGs moved to canonical asset location (`datalake/assets/images/svg/illustrations/`)
+- Deprecated pandoc flags replaced across all files (`--listings` to `--syntax-highlighting=idiomatic`)
+- TeX Live 2025 `framed` and `needspace` packages installed
+- Chapter 14 emoji fix for LaTeX compatibility
+- Both books rebuilt in all formats with zero warnings
 
 ---
 
@@ -118,7 +109,7 @@ This reflects accumulated work across sessions since 3 March, not changes made t
 
 ## Next Steps
 
-- Present tg.community audit report to The Gathering's administration
+- Present tg.community follow-up audit report to The Gathering's administration
 - London CMS Experts contact follow-ups (this week)
 - LinkedIn ad re-submission (this week)
 - Frankfurt preparation — 68 days
@@ -129,8 +120,11 @@ This reflects accumulated work across sessions since 3 March, not changes made t
 
 | Hash | Theme |
 |------|-------|
-| `1a6b1360` | Move illustrations to canonical location, update pandoc flags, fix emoji |
-| `99d9b886` | Changelog update |
+| `457d0afe` | Style: fix markdown spacing in about.mx.cog.md |
+| `4bfe8002` | Changelog update — evening report, self-knowledge recon |
+| `f295c6a9` | Co-directors evening report — 5 March 2026 |
+| `99d9b886` | Changelog update — illustration move, pandoc flags, PDF rebuild |
+| `1a6b1360` | Move illustrations, update pandoc flags, fix emoji, rebuild PDFs |
 
 **Submodule commits:**
 
@@ -139,6 +133,18 @@ This reflects accumulated work across sessions since 3 March, not changes made t
 | mx-outputs | `bb4e905` | Regenerate all book PDFs and HTML |
 | allaboutv2 | `efc9696` | Update pandoc flags to non-deprecated syntax |
 | mx-crm | `9858786` | tg.community audit report PDF |
+
+**Uncommitted (this session):**
+
+| File | Change |
+|------|--------|
+| `mx-audit/src/reporters/llmFeedback.js` | llms.txt false positive fix |
+| `mx-audit/src/utils/llmMetrics.js` | Pass siteContext through facade |
+| `mx-audit/src/utils/reportUtils/llmReports.js` | Pass siteContext to feedback generator |
+| `mx-audit/src/utils/sitemap.js` | Deduplicate URLs in processHtmlContent |
+| `mx-audit/src/utils/urlProcessor.js` | Safety-net dedup in processUrlsConcurrently |
+| `scripts/mx-audit-recon.sh` | Replace grep -P with perl for macOS |
+| `mx-crm/outreach/2026-03-05/tg-community-report.md` | tg.community follow-up audit report |
 
 ---
 
