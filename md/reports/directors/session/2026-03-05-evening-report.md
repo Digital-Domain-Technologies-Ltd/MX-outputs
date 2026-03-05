@@ -1,25 +1,27 @@
 ---
-title: "Co-Directors Report — PDF Pipeline, tg.community Re-Audit, and Three Tooling Fixes"
-description: "Evening session report. PDF pipeline completed, tg.community audited 24 hours after initial assessment showing transformative improvements, and three bugs fixed in the audit tool."
+title: "Co-Directors Report — PDF Pipeline, tg.community Re-Audit, Tooling Fixes, and MX Journey Stage Assessment"
+description: "Evening session report. PDF pipeline completed, tg.community audited with transformative improvements, three audit bugs fixed, and MX Journey Stage assessment added to the audit tool — mapping findings to the 5-stage agent journey."
 created: "2026-03-05"
 segment: "evening"
-version: "2.0"
+version: "3.0"
 author: "Tom Cranstoun and Maxine"
 audience: "stakeholders"
 confidentiality: "internal"
 ---
 
-# Co-Directors Report — PDF Pipeline, tg.community Re-Audit, and Three Tooling Fixes
+# Co-Directors Report — PDF Pipeline, tg.community Re-Audit, Tooling Fixes, and MX Journey Stage Assessment
 
-**5 March 2026 — Evening (update)**
+**5 March 2026 — Evening (v3.0)**
 
 ---
 
 ## Summary
 
-The evening session had two phases. First, the book PDF pipeline was completed: illustrations moved, pandoc flags updated, LaTeX dependencies resolved, and both books rebuilt with zero warnings. Second, a full follow-up audit of tg.community was conducted — just 24 hours after the initial assessment. The results show that The Gathering's team responded to the March 4 audit with exceptional speed: security headers went from 20/100 to 100/100, all discovery files (robots.txt, sitemap.xml, llms.txt) went from 404 to 200, and Schema.org JSON-LD appeared on every page. AI agent suitability reached 100/100.
+The evening session had three phases. First, the book PDF pipeline was completed: illustrations moved, pandoc flags updated, LaTeX dependencies resolved, and both books rebuilt with zero warnings. Second, a full follow-up audit of tg.community was conducted — just 24 hours after the initial assessment. The results show that The Gathering's team responded to the March 4 audit with exceptional speed: security headers went from 20/100 to 100/100, all discovery files (robots.txt, sitemap.xml, llms.txt) went from 404 to 200, and Schema.org JSON-LD appeared on every page. AI agent suitability reached 100/100.
 
-Three bugs in the audit tool were also identified and fixed during the process: a false positive in llms.txt detection, a macOS compatibility issue in the recon script, and duplicate URL processing during crawls.
+Third, the MX Journey Stage assessment was added to the audit tool. This maps audit findings to the 5-stage MX agent journey (Discovery → Citation → Search & Compare → Price Understanding → Purchase Confidence), giving clients a clear answer to "Is this site MX compatible?" Schema.org scoring was graduated from binary to depth-based, OG/Twitter completeness checks were enhanced, and a new journey stage mapper was integrated into the full reporting pipeline. Verified against allabout.network: Stage 1 Pass (89/100), Stage 2 Partial (67/100), Stages 3–5 N/A (no commerce content).
+
+Three bugs in the audit tool were also identified and fixed during the tg.community audit: a false positive in llms.txt detection, a macOS compatibility issue in the recon script, and duplicate URL processing during crawls.
 
 ---
 
@@ -27,10 +29,14 @@ Three bugs in the audit tool were also identified and fixed during the process: 
 
 | Metric | Value |
 |--------|-------|
-| Commits (evening) | 5 (main) + 3 (submodules) |
-| Files changed (uncommitted) | 8 (mx-audit: 5, recon script: 1, about.mx: 1) |
+| Commits (evening) | 7 (main) + 3 (submodules) |
+| Files changed (uncommitted) | 10 (mx-audit: 9, mx-crm: 1) |
+| New modules created | 2 (journeyStageMapper.js, journeyStageReports.js) |
+| Existing modules enhanced | 7 |
 | tg.community pages audited | 8 |
 | Audit tool bugs fixed | 3 |
+| New CSV columns added | 5 |
+| New CSV report | mx_journey_stages.csv |
 | Codex PDF size | 8.5 MB (A4), 8.2 MB (Kindle) |
 | Handbook PDF size | 3.1 MB (A4), 3.1 MB (Kindle) |
 | PDF warnings | 0 |
@@ -54,6 +60,28 @@ A full 9-action audit pipeline was executed against tg.community with cache clea
 **Report filed:** `mx-crm/outreach/2026-03-05/tg-community-report.md`
 
 The report acknowledges what The Gathering's team accomplished and shifts the engagement framing from foundation-building to refinement. The remaining opportunities are polish (meta descriptions, content freshness signals, llms.txt enhancements) rather than critical gaps.
+
+### MX Journey Stage Assessment — Audit Tool Feature
+
+The audit tool now answers the question: "Is this site MX compatible?" Three enhancements were implemented in a single session:
+
+**1. Schema.org Depth Scoring** — Previously binary (present = 15 points, absent = 0). Now graduated: 5 points for presence, plus up to 5 for required property coverage, 3 for recommended property coverage, and 2 for zero validation issues. Total still 15 — backward-compatible. A site with Schema.org but missing `offers` on a Product type now scores measurably lower than one with complete properties.
+
+**2. OG/Twitter Completeness** — `og:image:alt` and `twitter:image:alt` are now checked (mandatory per the MX HTML Writing Guide SSOT). Deprecated `<meta name="keywords">` is flagged. Five new CSV columns added to `llm_general_suitability.csv`.
+
+**3. Journey Stage Mapper** — A new module (`journeyStageMapper.js`) maps existing audit metrics to the 5-stage MX agent journey:
+
+| Stage | What It Measures | allabout.network Result |
+|-------|-----------------|------------------------|
+| 1. Discovery | Semantic HTML, robots.txt, llms.txt, sitemap, crawlability | Pass (89/100) |
+| 2. Citation | Schema.org depth, OG completeness, heading hierarchy | Partial (67/100) |
+| 3. Search & Compare | Product/Service schema, pricing tables, data tables | N/A |
+| 4. Price Understanding | Offer schema, pricing in served HTML | N/A |
+| 5. Purchase Confidence | Form quality, autocomplete, validation state | N/A |
+
+Stages 3–5 return N/A for brochure/content sites with no commerce content — avoiding false alarms on sites where those stages are irrelevant.
+
+**Pipeline integration:** Journey stage CSV (`mx_journey_stages.csv`) is generated alongside existing reports. The executive summary includes a journey stage table. The CRM outreach template now has journey stage placeholders.
 
 ### All Book PDFs Regenerated
 
@@ -109,6 +137,8 @@ This reflects accumulated work across sessions since 3 March, not changes made t
 
 ## Next Steps
 
+- Commit and push MX Journey Stage feature (mx-audit: 9 files, mx-crm: 1 file)
+- Run journey stage assessment against tg.community as a second verification site
 - Present tg.community follow-up audit report to The Gathering's administration
 - London CMS Experts contact follow-ups (this week)
 - LinkedIn ad re-submission (this week)
@@ -120,6 +150,8 @@ This reflects accumulated work across sessions since 3 March, not changes made t
 
 | Hash | Theme |
 |------|-------|
+| `903b590b` | Changelog update — learnings, self-knowledge recon |
+| `7545855b` | Bug fixes + tg.community follow-up report + recon macOS fix |
 | `457d0afe` | Style: fix markdown spacing in about.mx.cog.md |
 | `4bfe8002` | Changelog update — evening report, self-knowledge recon |
 | `f295c6a9` | Co-directors evening report — 5 March 2026 |
@@ -138,13 +170,16 @@ This reflects accumulated work across sessions since 3 March, not changes made t
 
 | File | Change |
 |------|--------|
-| `mx-audit/src/reporters/llmFeedback.js` | llms.txt false positive fix |
-| `mx-audit/src/utils/llmMetrics.js` | Pass siteContext through facade |
-| `mx-audit/src/utils/reportUtils/llmReports.js` | Pass siteContext to feedback generator |
-| `mx-audit/src/utils/sitemap.js` | Deduplicate URLs in processHtmlContent |
-| `mx-audit/src/utils/urlProcessor.js` | Safety-net dedup in processUrlsConcurrently |
-| `scripts/mx-audit-recon.sh` | Replace grep -P with perl for macOS |
-| `mx-crm/outreach/2026-03-05/tg-community-report.md` | tg.community follow-up audit report |
+| `mx-audit/src/collectors/llmCollector.js` | Schema.org depth metrics + OG/Twitter alt detection |
+| `mx-audit/src/config/scoringWeights.js` | Graduated structured data scoring (15 → 5+5+3+2) |
+| `mx-audit/src/scorers/llmScorer.js` | Graduated scoring logic |
+| `mx-audit/src/reporters/llmFeedback.js` | llms.txt fix + OG alt + keywords feedback |
+| `mx-audit/src/utils/reportUtils/llmReports.js` | siteContext fix + 5 new CSV columns |
+| `mx-audit/src/utils/reportUtils/executiveSummary.js` | Journey stage section in executive summary |
+| `mx-audit/src/utils/reports.js` | Wire in journey stage CSV generation |
+| `mx-audit/src/utils/journeyStageMapper.js` | **New** — 5-stage journey mapping logic |
+| `mx-audit/src/utils/reportUtils/journeyStageReports.js` | **New** — CSV + markdown report output |
+| `mx-crm/outreach/templates/web-audit-suite-template.md` | Journey stage template placeholders |
 
 ---
 
