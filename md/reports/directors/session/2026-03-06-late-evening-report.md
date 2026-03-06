@@ -1,23 +1,23 @@
 ---
-title: "Co-Directors Report — Salva Demo Fixes, Cloudflare Worker Deployment"
-description: "Late-evening session report. Fixed Salva multilingual demo (language switching, data-lang, favicon), added 404 fallback to Cloudflare Worker, deployed worker via Wrangler CLI."
+title: "Co-Directors Report — Salva Demo Fixes, Content-Encoding Bug, Cloudflare Worker"
+description: "Late-evening session report. Fixed Salva multilingual demo, diagnosed and fixed critical content-encoding bug that broke all HTML on allabout.network, added 404 fallback, set up CLI cache purging."
 created: "2026-03-06"
 segment: "late-evening"
-version: "1.0"
+version: "2.0"
 author: "Tom Cranstoun and Maxine"
 audience: "stakeholders"
 confidentiality: "internal"
 ---
 
-# Co-Directors Report — Salva Demo Fixes & Cloudflare Worker
+# Co-Directors Report — Salva Demo Fixes, Content-Encoding Bug & Cloudflare Worker
 
-**6 March 2026 — Late Evening (v1.0)**
+**6 March 2026 — Late Evening (v2.0)**
 
 ---
 
 ## Summary
 
-Tom identified that the Salva restaurant multilingual demo (`allaboutv2/mx/demo/salva/`) was not functioning correctly. Through an interview-driven investigation, we found and fixed multiple issues: filename mismatches, a language-detection regex bug, duplicate language selectors, a `data-lang` attribute mismatch, and a missing favicon. We also added a 404 fallback feature to the Cloudflare Worker and deployed it live via the Wrangler CLI for the first time.
+Two major threads this evening. First, Tom identified issues with the Salva restaurant multilingual demo — we found and fixed five cascading bugs. Second, Tom reported that `https://allabout.network/mx/coming-soon.html` was returning empty pages. Investigation revealed a critical Cloudflare Worker bug affecting **all HTML pages on the entire site**: the worker was preserving Brotli compression headers after decompressing response bodies, causing clients to receive garbled or empty content. The fix was deployed live and verified working. We also set up CLI-based cache purging with API credentials stored in `.env`.
 
 ---
 
@@ -26,12 +26,14 @@ Tom identified that the Salva restaurant multilingual demo (`allaboutv2/mx/demo/
 | Metric | Value |
 |--------|-------|
 | Bugs fixed in Salva demo | 5 |
-| Cloudflare Worker features added | 1 |
-| Worker deployed to production | Yes (v1.2.0) |
+| Content-encoding bug (site-wide) | 1 critical fix |
+| Cloudflare Worker features added | 2 (404 fallback, encoding fix) |
+| Worker deployed to production | 3 times (v1.2.0) |
+| New unit tests added | 6 (116 total) |
 | CI fix (test-local-html.js) | 1 |
-| Files changed across allaboutv2 | 9 |
-| Commits (allaboutv2 submodule) | 8 |
-| Commits (main repo) | 8 |
+| Files changed across allaboutv2 | 11 |
+| Commits (allaboutv2 submodule) | 10 |
+| Commits (main repo) | 10 |
 
 ---
 
@@ -66,6 +68,59 @@ Tom identified that the Salva restaurant multilingual demo (`allaboutv2/mx/demo/
 **Problem:** No favicon configured for the demo.
 
 **Fix:** Created `assets/favicon.svg` (dark navy circle with coral "G" matching the site palette) and added `<link rel="icon">` to all three HTML files.
+
+---
+
+## Critical Fix — Content-Encoding Bug (All HTML Pages)
+
+### The Problem
+
+Tom reported that `https://allabout.network/mx/coming-soon.html` was not working. Investigation showed **every HTML page on the entire site** returned empty or garbled content — the homepage, bio page, all `/mx/` pages. CSS and JS files were unaffected.
+
+### Root Cause
+
+The Cloudflare Worker modifies HTML response bodies (injecting JSON-LD, speculation rules, removing comments). The processing flow was:
+
+1. Worker fetches from EDS origin → origin responds with Brotli-compressed HTML (`content-encoding: br`, `content-length: 3546`)
+2. `resp.text()` auto-decompresses → returns 15,647 chars of plain HTML
+3. Worker transforms the text and creates `new Response(htmlText, { headers: resp.headers })`
+4. **Bug:** `resp.headers` still contained `content-encoding: br` and `content-length: 3546` — now both wrong
+5. Cloudflare CDN serves a response claiming to be 3,546 bytes of Brotli, but the body is 15,647 bytes of plain text → clients receive nothing usable
+
+The `cacheEverything: true` setting compounded the problem by caching the broken responses.
+
+### The Fix
+
+Two changes to `cloudflare-worker.js`:
+
+1. **Strip stale headers:** `content-encoding` and `content-length` are deleted from the new Response headers after HTML processing
+2. **Request uncompressed from origin:** Added `Accept-Encoding: identity` to the origin request, eliminating the decompression mismatch entirely
+
+### Verification
+
+- Deployed worker three times (iterating on the fix)
+- Cache purged via API (first time using programmatic purge)
+- Confirmed: `cf-cache-status: MISS`, 15,436 bytes of valid HTML returned
+
+### Business Impact
+
+**This bug was breaking the entire allabout.network website for all visitors.** Every HTML page returned empty content. The root cause was subtle — the worker's test suite (110 tests) passed because tests mock responses without compression headers. The bug only manifested with real Brotli-compressed responses from the EDS origin.
+
+---
+
+## Cloudflare Cache Purge Setup
+
+Stored Cloudflare API token and Zone ID in `allaboutv2/.env` (gitignored). Cache can now be purged from the CLI:
+
+```bash
+source allaboutv2/.env && curl -X POST \
+  "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  --data '{"purge_everything":true}'
+```
+
+Previously required manual dashboard access. Token is scoped to cache purge only.
 
 ---
 
@@ -126,7 +181,10 @@ The Cloudflare Worker deployment via Wrangler CLI was a first. Previous deployme
 
 ## Next Steps
 
-- [ ] Run existing Cloudflare Worker tests to verify no regressions
+- [x] ~~Run existing Cloudflare Worker tests to verify no regressions~~ — 116/116 passing
 - [ ] Test Salva demo on `https://allabout.network/mx/demo/salva/` end-to-end
-- [ ] Update `cloudflare/cloudflare.md` to document the actual worker name (`cool-cell-c75e`) and wrangler deployment
-- [ ] Consider adding Cloudflare Worker tests for the 404 fallback
+- [x] ~~Update `cloudflare/cloudflare.md` to document the actual worker name~~ — done in earlier commit
+- [x] ~~Consider adding Cloudflare Worker tests for the 404 fallback~~ — 6 new tests added for content-encoding safety
+- [ ] Rotate the Cloudflare API token (exposed in conversation history during setup)
+- [ ] Add 404 fallback tests to the worker test suite
+- [ ] Monitor allabout.network HTML delivery over next 24 hours to confirm stability
