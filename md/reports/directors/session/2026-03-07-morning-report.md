@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Messaging File Consolidation"
 created: "2026-03-07"
 segment: "morning"
-version: "1.0"
+version: "1.1"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidentiality: internal
@@ -26,16 +26,21 @@ The consolidation matters for Frankfurt preparation: when the team shares materi
 - **Deleted:** `one-pager-investors.md` — redundant after merge
 - **Updated:** `mx-messaging-framework.md` Supporting Materials section now has proper file paths to all companion documents
 - **Updated:** Step-commit skill now includes submodule pointer sync check (from previous session, committed this morning)
+- **Fixed:** 6 cogs had broken `buildsOn: [mx-messaging]` references after the framework rename — all updated to `refersTo: [mx-messaging-framework]`
+- **Fixed:** UBERCOG.cog.md path references updated (2 locations)
+- **Fixed:** REMINDERS.md Quick Reference path corrected
+- **Regenerated:** Cog registry index — 5 broken-dependency validation errors resolved to 0
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits | 2 |
-| Files changed | 6 |
-| Lines added | 36 |
-| Lines removed | 116 |
-| Net reduction | 80 lines (less duplication) |
+| Commits | 4 |
+| Files changed | 15 |
+| Lines added | 53 |
+| Lines removed | 131 |
+| Net reduction | 78 lines (less duplication) |
+| Cog validation errors fixed | 5 → 0 |
 
 ## The Strategic Context
 
@@ -51,8 +56,8 @@ The consolidation principle: if two documents say the same thing to the same aud
 
 ## Next Steps
 
-- Fix stale MX Messaging path in REMINDERS.md Quick Reference table
 - Continue Frankfurt preparation (67 days)
+- CHANGELOG at 410 lines — consider trimming entries older than this week
 
 ## Commit Log
 
@@ -60,6 +65,8 @@ The consolidation principle: if two documents say the same thing to the same aud
 |------|-------------|
 | `724efb48` | refactor: consolidate messaging files — merge investor one-pager, move deliverables to ssot |
 | `9988fbf6` | docs: update cross-references after messaging file consolidation |
+| `944bf477` | chore: regenerate cog index after mx-messaging rename |
+| `a5bbebc4` | fix: update all mx-messaging references after rename to mx-messaging-framework |
 
 ---
 
