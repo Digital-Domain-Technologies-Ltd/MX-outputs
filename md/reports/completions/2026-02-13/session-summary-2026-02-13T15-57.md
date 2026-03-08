@@ -14,7 +14,7 @@ mx:
 
 ## Overview
 
-Consolidated all four MX publication repositories from git submodules into a single datalake location. Each was copied, sanitised (removed internal repo artifacts, renamed "MX-Bible" to "MX: The Codex", cleaned GitHub URLs), had its submodule removed, and its GitHub repo archived. The result is a clean, self-contained publications directory at `datalake/publications/mx-books/` with no external dependencies.
+Consolidated all four MX publication repositories from git submodules into a single datalake location. Each was copied, sanitised (removed internal repo artifacts, renamed "MX-Bible" to "MX: The Codex", cleaned GitHub URLs), had its submodule removed, and its GitHub repo archived. The result is a clean, self-contained publications directory at `datalake/manuscripts/mx-books/` with no external dependencies.
 
 This session continued from an earlier session that created the public Handbook edition, wrote morning report v3.0, and conducted the doc/block architecture interview.
 
@@ -22,19 +22,19 @@ This session continued from an earlier session that created the public Handbook 
 
 ### 1. Codex Sanitisation
 
-Copied `packages/mx-the-bible/` to `datalake/publications/mx-books/mx-codex/`. Removed internal artifacts (.git, .claude/, CLAUDE.md, CONTRIBUTING.md, todo.txt). Rewrote README.md as a clean public edition. Updated LICENSE to remove "CONFIDENTIAL" language. Fixed "MX Bible" references to "MX: The Codex" in chapter-00 YAML frontmatter and prose. Removed all Digital-Domain-Technologies-Ltd GitHub URLs from web/ HTML files and chapter-12. Reviewed Chapter 15 (Joymaker partnership) — kept as-is (vision content, not confidential business data).
+Copied `packages/mx-the-bible/` to `datalake/manuscripts/mx-books/mx-codex/`. Removed internal artifacts (.git, .claude/, CLAUDE.md, CONTRIBUTING.md, todo.txt). Rewrote README.md as a clean public edition. Updated LICENSE to remove "CONFIDENTIAL" language. Fixed "MX Bible" references to "MX: The Codex" in chapter-00 YAML frontmatter and prose. Removed all Digital-Domain-Technologies-Ltd GitHub URLs from web/ HTML files and chapter-12. Reviewed Chapter 15 (Joymaker partnership) — kept as-is (vision content, not confidential business data).
 
 ### 2. Appendices Sanitisation
 
-Copied `packages/mx-appendices/` to `datalake/publications/mx-books/mx-appendices/`. Removed .git. Bulk renamed "MX-Bible" to "MX: The Codex" across 54 files (markdown, HTML, txt). Replaced all Digital-Domain-Technologies-Ltd GitHub URLs with allabout.network or removed them. Rewrote README.md for public edition. Fixed remaining references: "The Bible" in for-reviewers.html, "MX: The Codex Bible" in appendix-m metadata table, product IDs (book-mx-bible → book-mx-codex) and filenames (mx-bible-sample → mx-codex-sample) in appendix-k.
+Copied `packages/mx-appendices/` to `datalake/manuscripts/mx-books/mx-appendices/`. Removed .git. Bulk renamed "MX-Bible" to "MX: The Codex" across 54 files (markdown, HTML, txt). Replaced all Digital-Domain-Technologies-Ltd GitHub URLs with allabout.network or removed them. Rewrote README.md for public edition. Fixed remaining references: "The Bible" in for-reviewers.html, "MX: The Codex Bible" in appendix-m metadata table, product IDs (book-mx-bible → book-mx-codex) and filenames (mx-bible-sample → mx-codex-sample) in appendix-k.
 
 ### 3. Handbook Relocation
 
-Moved existing `datalake/publications/mx-handbook/` into `datalake/publications/mx-books/mx-handbook/` (already sanitised in previous session).
+Moved existing `datalake/manuscripts/mx-handbook/` into `datalake/manuscripts/mx-books/mx-handbook/` (already sanitised in previous session).
 
 ### 4. Code Examples Migration
 
-Copied `packages/mx-code-examples/` to `datalake/publications/mx-books/mx-code-examples/`. Removed .git. Renamed "MX-Bible" to "MX: The Codex" across all files. Rewrote README.md for public edition.
+Copied `packages/mx-code-examples/` to `datalake/manuscripts/mx-books/mx-code-examples/`. Removed .git. Renamed "MX-Bible" to "MX: The Codex" across all files. Rewrote README.md for public edition.
 
 ### 5. Submodule Removal
 
@@ -56,7 +56,7 @@ Archived four GitHub repos (now read-only):
 
 ## Files Modified
 
-### New/Modified in datalake/publications/mx-books/
+### New/Modified in datalake/manuscripts/mx-books/
 
 1. **mx-codex/** — 82 files (manuscripts, illustrations, web appendices). Sanitised README, LICENSE, chapter-00.
 2. **mx-appendices/** — 71 files (19 appendices, web/ HTML pages, site/ demo pages). All "MX-Bible" renamed to "MX: The Codex". All GitHub URLs cleaned.
@@ -71,8 +71,8 @@ Archived four GitHub repos (now read-only):
 
 | Hash | Description |
 |------|-------------|
-| `831196b` | Consolidate all books into datalake/publications/mx-books/ (151 files) |
-| `3796f9c` | Move mx-code-examples into datalake/publications/mx-books/ (57 files) |
+| `831196b` | Consolidate all books into datalake/manuscripts/mx-books/ (151 files) |
+| `3796f9c` | Move mx-code-examples into datalake/manuscripts/mx-books/ (57 files) |
 
 Both pushed to remote.
 
@@ -111,7 +111,7 @@ After this session, 7 submodules remain:
 ## Final State
 
 ```
-datalake/publications/mx-books/
+datalake/manuscripts/mx-books/
 ├── mx-codex/          # The Codex (16 chapters, ~78K words)
 ├── mx-appendices/     # The Appendices (19 appendices, ~62K words)
 ├── mx-handbook/       # The Handbook (11 chapters, ~8K words)

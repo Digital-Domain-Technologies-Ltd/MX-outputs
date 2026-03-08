@@ -1079,7 +1079,7 @@ They require changes to the generator scripts, not manual edits.
 
 **Files missing all metadata:**
 
-- datalake/publications/mx-books/mx-code-examples/agent-friendly-starter-kit/bad/script.js
+- datalake/manuscripts/mx-books/mx-code-examples/agent-friendly-starter-kit/bad/script.js
 - mx-maxine-app/pwa/jsQR.js
 
 ### HTML (.html)
@@ -1102,8 +1102,8 @@ They require changes to the generator scripts, not manual edits.
 
 **Files missing all metadata:**
 
-- datalake/publications/mx-books/mx-code-examples/agent-friendly-starter-kit/bad/style.css
-- datalake/publications/mx-books/mx-code-examples/agent-friendly-starter-kit/good/style.css
+- datalake/manuscripts/mx-books/mx-code-examples/agent-friendly-starter-kit/bad/style.css
+- datalake/manuscripts/mx-books/mx-code-examples/agent-friendly-starter-kit/good/style.css
 
 ---
 

@@ -320,7 +320,7 @@ refersTo:
 
 # ✅ CORRECT:
 refersTo:
-  - datalake/publications/mx-books/mx-appendices/some-file.md
+  - datalake/manuscripts/mx-books/mx-appendices/some-file.md
 ```
 
 **Why:** Repo-root-relative paths work regardless of where files are moved within the repository.

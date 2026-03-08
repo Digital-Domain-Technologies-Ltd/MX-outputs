@@ -399,119 +399,119 @@ These old field names appear in published book content and need updating.
 
 **`organization`** → `org`
 
-- datalake/publications/mx-books/mx-appendices/appendix-d-ai-friendly-html-guide.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-m-index-of-metadata.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
-- datalake/publications/mx-books/mx-codex/codex/chapter-10-generative-engine-optimization.md (Codex chapter)
-- datalake/publications/mx-books/mx-codex/codex/chapter-11-designing-for-both.md (Codex chapter)
-- datalake/publications/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
-- datalake/publications/mx-books/mx-codex/codex/chapter-14-intent-driven-publishing.md (Codex chapter)
-- datalake/publications/mx-books/mx-handbook/chapters/chapter-05-metadata-that-works.md (Handbook chapter)
-- datalake/publications/mx-books/mx-handbook/chapters/chapter-06-navigation.md (Handbook chapter)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-d-ai-friendly-html-guide.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-m-index-of-metadata.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-10-generative-engine-optimization.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-11-designing-for-both.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-14-intent-driven-publishing.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-handbook/chapters/chapter-05-metadata-that-works.md (Handbook chapter)
+- datalake/manuscripts/mx-books/mx-handbook/chapters/chapter-06-navigation.md (Handbook chapter)
 
 **`sop-content-policy`** → `sopContentPolicy`
 
-- datalake/publications/mx-books/mx-appendices/appendix-d-ai-friendly-html-guide.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-f-implementation-roadmap.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-d-ai-friendly-html-guide.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-f-implementation-roadmap.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
 
 **`sop-freshness`** → `sopFreshness`
 
-- datalake/publications/mx-books/mx-appendices/appendix-d-ai-friendly-html-guide.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-codex/codex/chapter-11-designing-for-both.md (Codex chapter)
-- datalake/publications/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-d-ai-friendly-html-guide.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-11-designing-for-both.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
 
 **`sop-preferred-access`** → `sopPreferredAccess`
 
-- datalake/publications/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
 
 **`sop-structured-data`** → `sopStructuredData`
 
-- datalake/publications/mx-books/mx-appendices/appendix-f-implementation-roadmap.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-f-implementation-roadmap.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
 
 **`publication-date`** → `publicationDate`
 
-- datalake/publications/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
-- datalake/publications/mx-books/mx-codex/codex/chapter-14-intent-driven-publishing.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-14-intent-driven-publishing.md (Codex chapter)
 
 **`reading-time`** → `readingTime`
 
-- datalake/publications/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
 
 **`sop-attribution`** → `sopAttribution`
 
-- datalake/publications/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/publications/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
 
 **`document-type`** → `documentType`
 
-- datalake/publications/mx-books/mx-appendices/appendix-m-building-mx-os.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-m-building-mx-os.md (Appendix)
 
 **`content-state`** → `contentState`
 
-- datalake/publications/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
 
 **`content-filename`** → `contentFilename`
 
-- datalake/publications/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
 
 **`content-url`** → `contentUrl`
 
-- datalake/publications/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
 
 **`blog-state`** → `blogState`
 
-- datalake/publications/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
 
 **`blog-filename`** → `blogFilename`
 
-- datalake/publications/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
 
 **`blog-url`** → `blogUrl`
 
-- datalake/publications/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
 
 **`sop-contributions`** → `sopContributions`
 
-- datalake/publications/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
 
 **`sop-contribution-process`** → `sopContributionProcess`
 
-- datalake/publications/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
 
 **`community-authors`** → `communityAuthors`
 
-- datalake/publications/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
 
 **`open-source`** → `openSource`
 
-- datalake/publications/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
 
 **`evolving-document`** → `evolvingDocument`
 
-- datalake/publications/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
 
 **`version-controlled`** → `versionControlled`
 
-- datalake/publications/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
+- datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
 
 **`organisation`** → `org`
 
-- datalake/publications/mx-books/mx-codex/codex/chapter-10-generative-engine-optimization.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-10-generative-engine-optimization.md (Codex chapter)
 
 **`publication-status`** → `publicationStatus`
 
-- datalake/publications/mx-books/mx-codex/codex/chapter-14-intent-driven-publishing.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-codex/codex/chapter-14-intent-driven-publishing.md (Codex chapter)
 
 ### In Other Documents
 
