@@ -64,7 +64,7 @@ MX Handbook images were clipping in PDF output, making diagrams unreadable at an
 - Tool cascade with fallback chain (resilient)
 - Test suite enforcing correctness (regression-proof)
 - Three ADRs documenting architectural rationale (knowledge preserved)
-- Universal pattern for all MX publications (scales to Codex, blog, presentations)
+- Universal pattern for all MX publications (scales to Corpus, blog, presentations)
 
 ---
 
@@ -133,7 +133,7 @@ MX Handbook images were clipping in PDF output, making diagrams unreadable at an
 **Universal workflow established:**
 
 - Handbook (completed)
-- Codex (ready to apply)
+- Corpus (ready to apply)
 - Blog posts (ready to apply)
 - Presentations (ready to apply)
 - Any future publications (pattern established)
@@ -234,7 +234,7 @@ Status: Production-ready
 
 1. Run full illustration test suite: `npm run test:illustrations`
 2. Verify Handbook PDF one final time before distribution
-3. Update Codex with same workflow (1-2 hours)
+3. Update Corpus with same workflow (1-2 hours)
 
 **Optional:**
 
@@ -243,9 +243,9 @@ Status: Production-ready
 
 ### Strategic (Next Month)
 
-**Codex Publication:**
+**Corpus Publication:**
 
-- Apply same workflow to Codex diagrams
+- Apply same workflow to Corpus diagrams
 - Verify aspect ratio preservation
 - Generate both A4 and Kindle formats
 
@@ -288,7 +288,7 @@ Status: Production-ready
 
 - Handbook PDF is production-ready (images fixed, professional quality)
 - Workflow is automated and tested (won't break again)
-- Same pattern applies to Codex and future publications
+- Same pattern applies to Corpus and future publications
 - No external dependencies (runs on any developer's machine)
 
 **What you can do:**

@@ -281,10 +281,10 @@ These old field names appear in published book content and need updating.
 - datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
 - datalake/manuscripts/mx-books/mx-appendices/appendix-m-index-of-metadata.md (Appendix)
 - datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-10-generative-engine-optimization.md (Codex chapter)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-11-designing-for-both.md (Codex chapter)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-14-intent-driven-publishing.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-10-generative-engine-optimization.md (Corpus chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-11-designing-for-both.md (Corpus chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-12-technical-advice.md (Corpus chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-14-intent-driven-publishing.md (Corpus chapter)
 - datalake/manuscripts/mx-books/mx-handbook/chapters/chapter-05-metadata-that-works.md (Handbook chapter)
 - datalake/manuscripts/mx-books/mx-handbook/chapters/chapter-06-navigation.md (Handbook chapter)
 
@@ -294,31 +294,31 @@ These old field names appear in published book content and need updating.
 - datalake/manuscripts/mx-books/mx-appendices/appendix-f-implementation-roadmap.md (Appendix)
 - datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
 - datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-12-technical-advice.md (Corpus chapter)
 
 **`sop-freshness`** → `sopFreshness`
 
 - datalake/manuscripts/mx-books/mx-appendices/appendix-d-ai-friendly-html-guide.md (Appendix)
 - datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-11-designing-for-both.md (Codex chapter)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-11-designing-for-both.md (Corpus chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-12-technical-advice.md (Corpus chapter)
 
 **`sop-preferred-access`** → `sopPreferredAccess`
 
 - datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
 - datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md (Appendix)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-12-technical-advice.md (Corpus chapter)
 
 **`sop-structured-data`** → `sopStructuredData`
 
 - datalake/manuscripts/mx-books/mx-appendices/appendix-f-implementation-roadmap.md (Appendix)
 - datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-12-technical-advice.md (Corpus chapter)
 
 **`publication-date`** → `publicationDate`
 
 - datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md (Appendix)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-14-intent-driven-publishing.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-14-intent-driven-publishing.md (Corpus chapter)
 
 **`reading-time`** → `readingTime`
 
@@ -328,7 +328,7 @@ These old field names appear in published book content and need updating.
 **`sop-attribution`** → `sopAttribution`
 
 - datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md (Appendix)
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-12-technical-advice.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-12-technical-advice.md (Corpus chapter)
 
 **`document-type`** → `documentType`
 
@@ -384,7 +384,7 @@ These old field names appear in published book content and need updating.
 
 **`organisation`** → `org`
 
-- datalake/manuscripts/mx-books/mx-codex/codex/chapter-10-generative-engine-optimization.md (Codex chapter)
+- datalake/manuscripts/mx-books/mx-corpus/corpus/chapter-10-generative-engine-optimization.md (Corpus chapter)
 
 ### In Other Documents
 

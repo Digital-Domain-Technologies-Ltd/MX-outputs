@@ -17,7 +17,7 @@ confidentiality: "internal"
 
 ## Summary
 
-The morning was writing and housekeeping — six tasks from REMINDERS cleared in a single session. The most significant change was to Chapter 00 of the Codex, which had a structural weakness: it argued that MX applies beyond commerce but offered only commerce examples. The chapter now includes healthcare (NHS drug interaction hallucinations), education (school catchment boundaries published as images), and government (council planning applications) alongside the original commerce scenarios. The "Eight Reasons MX Pays for Itself" section was broadened to "Eight Reasons" with non-commerce proof points woven through every reason.
+The morning was writing and housekeeping — six tasks from REMINDERS cleared in a single session. The most significant change was to Chapter 00 of the Corpus, which had a structural weakness: it argued that MX applies beyond commerce but offered only commerce examples. The chapter now includes healthcare (NHS drug interaction hallucinations), education (school catchment boundaries published as images), and government (council planning applications) alongside the original commerce scenarios. The "Eight Reasons MX Pays for Itself" section was broadened to "Eight Reasons" with non-commerce proof points woven through every reason.
 
 Two cog reviews were completed — a stale tag removed from the publication workflow cog and the block-architecture-evolution naming section updated to reflect the resolved NDR #1 decision. The cog unified spec had a YAML example that violated its own two-zone model; that was fixed. The "Content That Manages Itself" blog post was deployed to allaboutv2. Appendix D was verified — the three HTML patterns were already documented. REMINDERS was refreshed with all eight completions marked and countdowns recalculated.
 
@@ -42,7 +42,7 @@ Two cog reviews were completed — a stale tag removed from the publication work
 
 ### Chapter 00 Rewrite — Non-Commerce Case Studies
 
-The anchor chapter of the Codex claimed MX applies everywhere but proved it only with commerce. Six edits added non-commerce proof points:
+The anchor chapter of the Corpus claimed MX applies everywhere but proved it only with commerce. Six edits added non-commerce proof points:
 
 - **Two new case studies** after the opening — NHS drug interaction hallucination (agent cannot distinguish which drug a contraindication refers to) and school catchment area misrepresentation (boundaries published as images, agent guesses from partial data)
 - **Eight Reasons broadened** — every reason now includes healthcare, education, or government examples alongside commerce. "Revenue at risk" became "Goal completion at risk". New examples: hospital formulary errors, university grade boundaries, council computational trust, charity Schema.org, government duty-of-care legal exposure

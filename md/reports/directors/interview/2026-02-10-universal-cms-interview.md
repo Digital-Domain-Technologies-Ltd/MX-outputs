@@ -14,7 +14,7 @@ mx:
 
 ## Summary
 
-Strategic interview session exploring the most provocative thesis in the MX portfolio: **the CMS is a transitional technology.** Tom articulated a five-generation evolution of content management — from static files through database CMS, headless, and composable, to cogs — arguing that each generation solved one problem and created the next, until cogs solve the last technology problem: the CMS itself. The thesis is honest, grounded in Tom's career arc from "The AEM Guy" to "The MX Guy," and deliberately confrontational for a CMS Summit audience. A new Codex chapter — "Content That Manages Itself" — will present this argument.
+Strategic interview session exploring the most provocative thesis in the MX portfolio: **the CMS is a transitional technology.** Tom articulated a five-generation evolution of content management — from static files through database CMS, headless, and composable, to cogs — arguing that each generation solved one problem and created the next, until cogs solve the last technology problem: the CMS itself. The thesis is honest, grounded in Tom's career arc from "The AEM Guy" to "The MX Guy," and deliberately confrontational for a CMS Summit audience. A new Corpus chapter — "Content That Manages Itself" — will present this argument.
 
 ## What Was Decided
 
@@ -90,7 +90,7 @@ Every function of the CMS has been absorbed by the cog ecosystem.
 
 ## Deliverable
 
-A new Codex chapter: **Chapter 16 — "Content That Manages Itself."** Its own chapter, not a section within Chapter 15. The thesis is too significant and too provocative for subordination.
+A new Corpus chapter: **Chapter 16 — "Content That Manages Itself."** Its own chapter, not a section within Chapter 15. The thesis is too significant and too provocative for subordination.
 
 ## The Saying
 

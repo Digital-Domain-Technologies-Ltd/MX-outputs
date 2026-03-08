@@ -17,7 +17,7 @@ confidentiality: "internal"
 
 ## Summary
 
-Building on yesterday evening's work adding the MX Journey Stage assessment to the audit tool, this morning completed the documentation and configurability layer. The 5-stage journey framework is now documented in both books (Codex Chapter 11 and Handbook Chapter 10), referenced in Appendix C as the 16th core report, and the thresholds are configurable via the standard options pipeline. A pre-existing bug in the executive summary generator was also identified and fixed.
+Building on yesterday evening's work adding the MX Journey Stage assessment to the audit tool, this morning completed the documentation and configurability layer. The 5-stage journey framework is now documented in both books (Corpus Chapter 11 and Handbook Chapter 10), referenced in Appendix C as the 16th core report, and the thresholds are configurable via the standard options pipeline. A pre-existing bug in the executive summary generator was also identified and fixed.
 
 The allabout.network verification audit now produces a complete executive summary with journey stage assessment, confirming end-to-end pipeline integrity.
 
@@ -27,7 +27,7 @@ The allabout.network verification audit now produces a complete executive summar
 
 | Metric | Value |
 |--------|-------|
-| Book files updated | 3 (Codex, Handbook, Appendix C) |
+| Book files updated | 3 (Corpus, Handbook, Appendix C) |
 | Audit tool files updated | 4 (defaults.js, reports.js, journeyStageReports.js, executiveSummary.js) |
 | Lines added to manuscripts | ~90 |
 | Bugs fixed | 1 (executive summary `.split('T')` syntax error) |
@@ -65,7 +65,7 @@ Stages 3–5 correctly return N/A for allabout.network as a content/brochure sit
 
 ### Manuscript Documentation (Phase B)
 
-**Codex Chapter 11** — Added "Measuring Journey Stage Readiness" section covering stage scoring methodology, thresholds and distribution (median-based with best/worst range), bottleneck identification (sequential — fix the earliest failing stage first), and MX compatibility criteria.
+**Corpus Chapter 11** — Added "Measuring Journey Stage Readiness" section covering stage scoring methodology, thresholds and distribution (median-based with best/worst range), bottleneck identification (sequential — fix the earliest failing stage first), and MX compatibility criteria.
 
 **Handbook Chapter 10** — Added journey stage metrics quick-reference table within the "Measuring success" section. Five stages with key questions and pass thresholds, plus explanation of bottleneck concept and distribution scoring.
 

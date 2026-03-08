@@ -34,11 +34,11 @@ PDF documents — books, manuals, presentations, blog exports.
 ### pdf/books/ (4 files)
 
 - [`chapter-00-what-are-ai-agents.pdf`](pdf/books/chapters/chapter-00-what-are-ai-agents.pdf)
-- [`mx-codex.pdf`](pdf/books/codex/mx-codex.pdf)
+- [`mx-corpus.pdf`](pdf/books/corpus/mx-corpus.pdf)
 - [`mx-handbook-kindle.pdf`](pdf/books/handbook/mx-handbook-kindle.pdf)
 - [`mx-handbook.pdf`](pdf/books/handbook/mx-handbook.pdf)
   - **chapters/** (1 files)
-  - **codex/** (1 files)
+  - **corpus/** (1 files)
   - **handbook/** (2 files)
 
 ### pdf/cogify/ (2 files)
@@ -299,9 +299,9 @@ HTML content with adjacent CSS, JS, and SVG assets.
 ### html/books/ (2 files)
 
 - [`chapter-00-what-are-ai-agents.html`](html/books/chapters/chapter-00-what-are-ai-agents.html)
-- [`mx-codex.html`](html/books/codex/mx-codex.html)
+- [`mx-corpus.html`](html/books/corpus/mx-corpus.html)
   - **chapters/** (1 files)
-  - **codex/** (1 files)
+  - **corpus/** (1 files)
   - **handbook/** (0 files)
 
 ---

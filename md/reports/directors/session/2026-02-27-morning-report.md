@@ -64,7 +64,7 @@ Each phase was a self-contained commit with full verification. All pre-commit ch
 ## Next Steps
 
 - Run `npm run test:illustrations` to verify image paths resolve after the restructure
-- Run a smoke test PDF build (`npm run pdf:codex-html`) to confirm the build pipeline works
+- Run a smoke test PDF build (`npm run pdf:corpus-html`) to confirm the build pipeline works
 - Address the pre-existing `mx-about-recon.sh` bug (`REPO_COUNT: unbound variable`)
 - Consider addressing the pre-existing stale `datalake/knowledge/` references in a future session
 

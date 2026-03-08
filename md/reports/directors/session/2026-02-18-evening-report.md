@@ -280,7 +280,7 @@ convert_svg() {
 ### 3. Universal Pattern
 
 - Works for all SVG files across all categories
-- Applies to Handbook, Codex, blog posts, presentations
+- Applies to Handbook, Corpus, blog posts, presentations
 - Platform-portable (macOS, Linux, Windows)
 - CI/CD ready (non-interactive, exit codes)
 
@@ -348,7 +348,7 @@ convert_svg() {
 
 1. **Regenerate all PNGs:** Run `npm run illustrations:generate` on clean checkout to ensure consistency
 2. **Run full test suite:** Execute `npm run test:illustrations` to validate entire workflow
-3. **Update Codex PDFs:** Apply same workflow to Codex publication
+3. **Update Corpus PDFs:** Apply same workflow to Corpus publication
 4. **CI/CD integration:** Add illustration tests to GitHub Actions workflow
 5. **Document installation:** Add tool installation instructions to main README
 

@@ -37,7 +37,7 @@ Three bugs in the audit tool were also identified and fixed during the tg.commun
 | Audit tool bugs fixed | 3 |
 | New CSV columns added | 5 |
 | New CSV report | mx_journey_stages.csv |
-| Codex PDF size | 8.5 MB (A4), 8.2 MB (Kindle) |
+| Corpus PDF size | 8.5 MB (A4), 8.2 MB (Kindle) |
 | Handbook PDF size | 3.1 MB (A4), 3.1 MB (Kindle) |
 | PDF warnings | 0 |
 
@@ -85,12 +85,12 @@ Stages 3–5 return N/A for brochure/content sites with no commerce content — 
 
 ### All Book PDFs Regenerated
 
-Both the MX Codex and MX Handbook were rebuilt in every format:
+Both the MX Corpus and MX Handbook were rebuilt in every format:
 
-- **MX Codex** — A4 PDF (8.5 MB), Kindle PDF (8.2 MB), HTML, 17 appendix HTML pages
+- **MX Corpus** — A4 PDF (8.5 MB), Kindle PDF (8.2 MB), HTML, 17 appendix HTML pages
 - **MX Handbook** — A4 PDF (3.1 MB), Kindle PDF (3.1 MB), HTML
 
-The Codex PDFs jumped from ~4 MB to ~8.5 MB because the 16 chapter illustrations are now included — they had been silently missing from every previous build.
+The Corpus PDFs jumped from ~4 MB to ~8.5 MB because the 16 chapter illustrations are now included — they had been silently missing from every previous build.
 
 ---
 
@@ -110,7 +110,7 @@ During the tg.community audit, three bugs surfaced and were fixed:
 
 The earlier phase of this session resolved every outstanding PDF pipeline issue (full details in v1.0 of this report):
 
-- 16 Codex SVGs moved to canonical asset location (`datalake/assets/images/svg/illustrations/`)
+- 16 Corpus SVGs moved to canonical asset location (`datalake/assets/images/svg/illustrations/`)
 - Deprecated pandoc flags replaced across all files (`--listings` to `--syntax-highlighting=idiomatic`)
 - TeX Live 2025 `framed` and `needspace` packages installed
 - Chapter 14 emoji fix for LaTeX compatibility

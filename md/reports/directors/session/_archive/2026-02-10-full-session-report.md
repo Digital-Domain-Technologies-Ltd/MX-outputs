@@ -25,7 +25,7 @@ Landmark session. Four structured interviews produced the most significant strat
 | Lines removed | 262 |
 | New documents created | 9 |
 | Co-directors reports | 4 (plus this one) |
-| New Codex chapters | 1 (Chapter 16) |
+| New Corpus chapters | 1 (Chapter 16) |
 | New Canon initiatives | 1 (MX-Vision) |
 
 ## What Was Built
