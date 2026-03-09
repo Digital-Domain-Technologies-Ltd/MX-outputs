@@ -14,12 +14,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 30 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 81 | Markdown — reports, audit results, presentations |
-| [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
+| [pdf/](pdf/) | 34 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 97 | Markdown — reports, audit results, presentations |
+| [html/](html/) | 94 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 1 | PowerPoint — presentation source files |
-| **Total** | **209** | |
+| **Total** | **230** | |
 
 ---
 
@@ -31,14 +31,16 @@ PDF documents — books, manuals, presentations, blog exports.
 
 - [`The-AI-Tipping-Point-CMS-Kickoff-2024.pdf`](pdf/blogs/The-AI-Tipping-Point-CMS-Kickoff-2024.pdf)
 
-### pdf/books/ (4 files)
+### pdf/books/ (6 files)
 
+- [`chapter-00-what-are-ai-agents.pdf`](pdf/books/chapter-00-what-are-ai-agents.pdf)
 - [`chapter-00-what-are-ai-agents.pdf`](pdf/books/chapters/chapter-00-what-are-ai-agents.pdf)
-- [`mx-corpus.pdf`](pdf/books/corpus/mx-corpus.pdf)
+- [`mx-codex-kindle.pdf`](pdf/books/codex/mx-codex-kindle.pdf)
+- [`mx-codex.pdf`](pdf/books/codex/mx-codex.pdf)
 - [`mx-handbook-kindle.pdf`](pdf/books/handbook/mx-handbook-kindle.pdf)
 - [`mx-handbook.pdf`](pdf/books/handbook/mx-handbook.pdf)
   - **chapters/** (1 files)
-  - **corpus/** (1 files)
+  - **codex/** (2 files)
   - **handbook/** (2 files)
 
 ### pdf/cogify/ (2 files)
@@ -105,7 +107,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`reginald-implementation-plan-print.md`](md/reginald/reginald-implementation-plan-print.md)
 - [`reginald-manual-print.md`](md/reginald/reginald-manual-print.md)
 
-### md/reports/ (67 files)
+### md/reports/ (83 files)
 
 #### md/reports/completions/ (20 files)
 
@@ -134,7 +136,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-02-13/** (2 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (47 files)
+#### md/reports/directors/ (62 files)
 
 **build/** (3 files)
 
@@ -148,7 +150,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (40 files)
+**session/** (55 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -182,6 +184,21 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-28-morning-report.md`](md/reports/directors/session/2026-02-28-morning-report.md)
 - [`2026-03-01-afternoon-directors-report.md`](md/reports/directors/session/2026-03-01-afternoon-directors-report.md)
 - [`2026-03-01-morning-report.md`](md/reports/directors/session/2026-03-01-morning-report.md)
+- [`2026-03-02-evening-report.md`](md/reports/directors/session/2026-03-02-evening-report.md)
+- [`2026-03-03-afternoon-report.md`](md/reports/directors/session/2026-03-03-afternoon-report.md)
+- [`2026-03-03-morning-report.md`](md/reports/directors/session/2026-03-03-morning-report.md)
+- [`2026-03-04-evening-report.md`](md/reports/directors/session/2026-03-04-evening-report.md)
+- [`2026-03-04-morning-report.md`](md/reports/directors/session/2026-03-04-morning-report.md)
+- [`2026-03-05-evening-report.md`](md/reports/directors/session/2026-03-05-evening-report.md)
+- [`2026-03-06-crm-update.md`](md/reports/directors/session/2026-03-06-crm-update.md)
+- [`2026-03-06-evening-report.md`](md/reports/directors/session/2026-03-06-evening-report.md)
+- [`2026-03-06-late-evening-report.md`](md/reports/directors/session/2026-03-06-late-evening-report.md)
+- [`2026-03-06-messaging-framework.md`](md/reports/directors/session/2026-03-06-messaging-framework.md)
+- [`2026-03-06-morning-report.md`](md/reports/directors/session/2026-03-06-morning-report.md)
+- [`2026-03-07-afternoon-report.md`](md/reports/directors/session/2026-03-07-afternoon-report.md)
+- [`2026-03-07-evening-report.md`](md/reports/directors/session/2026-03-07-evening-report.md)
+- [`2026-03-07-morning-report.md`](md/reports/directors/session/2026-03-07-morning-report.md)
+- [`2026-03-08-evening-report.md`](md/reports/directors/session/2026-03-08-evening-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -190,6 +207,10 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-11-session-report-5.md`](md/reports/directors/session/_archive/2026-02-11-session-report-5.md)
 - [`2026-02-11-session-report.md`](md/reports/directors/session/_archive/2026-02-11-session-report.md)
 - [`2026-02-13-session-report.md`](md/reports/directors/session/_archive/2026-02-13-session-report.md)
+
+#### md/reports/validation/ (1 files)
+
+- [`carrier-format-audit.md`](md/reports/validation/carrier-format-audit.md)
 
 ---
 
@@ -296,13 +317,14 @@ HTML content with adjacent CSS, JS, and SVG assets.
 - [`principles-changed-how-i-build.html`](html/blogs/mx/principles-changed-how-i-build.html)
   - **mx/** (5 files)
 
-### html/books/ (2 files)
+### html/books/ (3 files)
 
 - [`chapter-00-what-are-ai-agents.html`](html/books/chapters/chapter-00-what-are-ai-agents.html)
-- [`mx-corpus.html`](html/books/corpus/mx-corpus.html)
+- [`mx-codex.html`](html/books/codex/mx-codex.html)
+- [`mx-handbook.html`](html/books/handbook/mx-handbook.html)
   - **chapters/** (1 files)
-  - **corpus/** (1 files)
-  - **handbook/** (0 files)
+  - **codex/** (1 files)
+  - **handbook/** (1 files)
 
 ---
 
@@ -322,4 +344,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-03-02 at 16:23*
+*Generated on 2026-03-09 at 08:09*
