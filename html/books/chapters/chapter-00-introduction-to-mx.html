@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Tom Cranstoun" />
+  <meta name="description" content="Introduction to Machine Experience (MX) — the business case for why revenue is at risk when websites lack structured metadata, what AI agents are, and how MX prevents hallucination whilst enabling agents to complete desired actions" />
+  <title>Chapter 0: Introduction to MX</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Chapter 0: Introduction to MX</h1>
+<p class="subtitle">Understanding the machines reading your website</p>
+<p class="author">Tom Cranstoun</p>
+<p class="date">January 2026</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#chapter-0---introduction-to-mx"
+id="toc-chapter-0---introduction-to-mx">Chapter 0 - Introduction to
+MX</a>
+<ul>
+<li><a href="#revenue-you-cannot-see-leaving"
+id="toc-revenue-you-cannot-see-leaving">Revenue you cannot see
+leaving</a></li>
+<li><a href="#what-mx-ready-looks-like"
+id="toc-what-mx-ready-looks-like">What MX-ready looks like</a></li>
+<li><a href="#from-business-case-to-practice"
+id="toc-from-business-case-to-practice">From business case to
+practice</a></li>
+<li><a href="#when-machines-fail-people"
+id="toc-when-machines-fail-people">When machines fail people</a></li>
+<li><a href="#the-invisible-users" id="toc-the-invisible-users">The
+invisible users</a></li>
+<li><a href="#theyre-machines-not-magic"
+id="toc-theyre-machines-not-magic">They’re machines, not magic</a></li>
+<li><a href="#what-ai-agents-actually-are"
+id="toc-what-ai-agents-actually-are">What AI agents actually
+are</a></li>
+<li><a href="#machine-limitations-and-the-convergence-principle"
+id="toc-machine-limitations-and-the-convergence-principle">Machine
+limitations and the convergence principle</a></li>
+<li><a href="#ai-will-figure-it-out-fallacy"
+id="toc-ai-will-figure-it-out-fallacy">“AI will figure it out”
+fallacy</a></li>
+<li><a href="#solution---fix-the-source-not-the-model"
+id="toc-solution---fix-the-source-not-the-model">Solution - fix the
+source, not the model</a></li>
+<li><a href="#uxmx---a-new-discipline"
+id="toc-uxmx---a-new-discipline">UX/MX - a new discipline</a></li>
+<li><a href="#how-agents-access-websites---training-vs-inference"
+id="toc-how-agents-access-websites---training-vs-inference">How agents
+access websites - training vs inference</a></li>
+<li><a href="#stage-mx-journey" id="toc-stage-mx-journey">5-stage MX
+journey</a></li>
+<li><a href="#broader-context" id="toc-broader-context">Broader
+context</a></li>
+<li><a href="#implementation-support"
+id="toc-implementation-support">Implementation support</a></li>
+<li><a href="#the-gathering" id="toc-the-gathering">The
+Gathering</a></li>
+<li><a href="#two-halves-of-the-agentic-web"
+id="toc-two-halves-of-the-agentic-web">Two halves of the agentic
+web</a></li>
+<li><a href="#whats-next" id="toc-whats-next">What’s next</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="chapter-0---introduction-to-mx">Chapter 0 - Introduction to
+MX</h1>
+<p>Understanding the machines reading your website - and the revenue at
+stake.</p>
+<h2 id="revenue-you-cannot-see-leaving">Revenue you cannot see
+leaving</h2>
+<p>AI agents are mediating commerce right now. They compare your
+products, check your availability, and recommend you - or your
+competitors. The commercial question is straightforward: are they
+completing transactions on your site, or moving on to someone who made
+it easier?</p>
+<p>Adobe’s Holiday 2025 data makes the scale visible. AI referrals to
+retail sites surged by 700%. Travel referrals rose by 500%. Conversion
+rates from AI-referred visitors now lead human traffic by 30%, and those
+visitors spend 50% longer on sites. Agent-mediated commerce moved from
+experimental to revenue driver in a single quarter.</p>
+<p>In January 2026, three major platforms launched agent commerce
+systems within seven days: Amazon Alexa+ (5 January), Microsoft Copilot
+Checkout (8 January), and Google Universal Commerce Protocol (11
+January). What industry analysts predicted would take 12-24 months
+compressed to 6-9 months or less. Agent-mediated commerce is
+infrastructure, not experiment.</p>
+<p>The agents want to buy from you. The question is whether your website
+gives them what they need.</p>
+<h3 id="cost-of-getting-it-wrong">Cost of getting it wrong</h3>
+<p>A buyer finds the Kindle Scribe Colorsoft - £570, credit card in
+hand. The product page exists. The “Buy Now” button works. But the
+delivery estimate stretches to three months because the system has no
+machine-readable way to express regional availability or fulfilment
+options. His AI assistant can find the product, compare specs, and quote
+the price - but cannot complete the purchase. Amazon’s commerce
+infrastructure, built for human eyes, cannot take his money when a
+machine enters the picture. Revenue lost. Customer gone.</p>
+<p>On 18 January 2026, two trains collide near Adamuz, Spain. Forty-six
+people die. Within hours, pricing algorithms at airlines and bus
+companies detect a demand surge on the Madrid-Andalusia corridor. They
+raise prices by 200%. The algorithms work correctly - they see demand
+increase and supply constrain. Nobody designed them to distinguish a
+music festival from a national tragedy. Spain’s national ombudsman
+launches an investigation. The reputational damage costs these companies
+far more than the short-term revenue gained. A machine that raises
+prices during a disaster does not lose a customer. It creates an
+adversary.</p>
+<p>Both cases share a pattern: revenue lost, trust broken, and brand
+damaged - because machines lacked the structured context to act
+appropriately.</p>
+<p>These are commerce examples. The pattern extends far beyond
+sales.</p>
+<p>A patient asks an AI assistant about drug interactions before a
+hospital appointment. The NHS website lists contraindications in prose
+paragraphs, not structured data. The agent parses “should not be taken
+with” from one section and “may be taken with food” from another - but
+cannot reliably distinguish which drug each statement refers to because
+the HTML uses visual proximity rather than semantic association. The
+agent confidently tells the patient there are no interactions. The
+pharmacist catches the error at the dispensary. The patient is fine. But
+scale this to millions of daily health queries, and the law of large
+numbers guarantees that some agents will hallucinate drug safety
+information that nobody catches in time.</p>
+<p>A parent searches for school catchment areas using an AI agent. The
+local council’s website publishes boundary maps as images with no alt
+text and catchment rules in PDF documents that agents cannot parse. The
+agent guesses based on partial postcode data scraped from a planning
+application. The family moves house based on the agent’s recommendation.
+The child is refused a school place because the actual catchment
+boundary runs down the middle of their new street.</p>
+<p>Government services, healthcare, education, legal guidance - every
+domain where agents answer questions on behalf of humans faces the same
+structural problem. Commerce has the most visible revenue impact, but
+the consequences of unstructured content reach into every interaction
+where people trust machines to read websites accurately.</p>
+<h3 id="eight-reasons-mx-pays-for-itself">Eight reasons MX pays for
+itself</h3>
+<p>Machine Experience (MX) is the practice of adding metadata and
+instructions to your web assets so AI agents work with facts, not
+guesses. When agents guess, they hallucinate. When all context is
+explicitly present, they get it right. Here is why that matters -
+commercially and beyond.</p>
+<p>Every hallucination has a cost beyond the wrong answer. When an agent
+lacks structured context, it must reason through ambiguous content
+(burning inference compute, consuming energy, and increasing latency),
+only to produce a less accurate result. Multiply this across billions of
+daily agent queries and the waste becomes staggering: data centres
+spending processing power on guesswork that structured metadata would
+have eliminated. MX turns expensive inference into cheap lookup. The
+environmental and operational case is as compelling as the commercial
+one.</p>
+<ol type="1">
+<li><p>Goal completion is at risk. AI agents mediate a growing share of
+web interactions, not just commerce. Adobe’s Q4 2025 data shows a 700%
+surge in AI referrals to retail, with conversion rates 30% higher than
+human traffic. But agents also answer health questions, compare
+university courses, check government eligibility criteria, and verify
+legal requirements. When your site lacks MX structure, agents skip you
+in recommendations or, worse, hallucinate answers your site should have
+provided authoritatively. You see nothing in your analytics. The traffic
+simply never arrives. Sites that work reliably today become trusted
+sources agents return to repeatedly.</p></li>
+<li><p>Hallucination damages your brand. Machines cannot make things up
+when you have already written it down. But when you haven’t, they guess,
+and the customer blames you, not the AI. A hospital whose drug
+interaction page confuses agents bears the reputational consequence when
+patients receive incorrect guidance. A university whose entry
+requirements are misquoted by agents loses applicants who self-select
+out based on hallucinated grade boundaries. MX gives machines the truth.
+Without it, machines guess.</p></li>
+<li><p>Legal risk drops. MX patterns (semantic HTML, explicit state,
+structured data) simultaneously address AI agent compatibility and WCAG
+accessibility requirements. Both audiences need the same explicit
+structure. A single implementation reduces exposure to accessibility
+litigation, which can involve substantial legal costs and settlements,
+with thousands of cases filed annually in the US alone. For government
+and healthcare, the legal exposure extends to duty-of-care obligations
+when citizens rely on AI-mediated access to public services.</p></li>
+<li><p>First-mover trust compounds. Agents learn which sites work
+reliably. Early MX adopters build computational trust that accumulates
+over time. This applies to council websites as much as retailers: an
+agent that reliably extracts planning application status from one
+council will preferentially recommend that council’s site over others.
+Latecomers face an invisible disadvantage. Agents already have preferred
+recommendations, and there is no straightforward path to displace
+them.</p></li>
+<li><p>Structure prevents hallucination. Formal documents with metadata
+inheritance, operational runbooks, and defined scripts give agents
+verified facts rather than inferred guesses. The risk of hallucination
+drops when agents read instead of reason. A healthcare provider whose
+drug information uses Schema.org MedicalEntity markup gives agents
+facts. One whose information sits in unstructured prose invites agents
+to guess, and guessing about drug interactions has consequences that
+pricing errors do not.</p></li>
+<li><p>Training beats searching. LLMs trained on properly structured
+content develop a fuller understanding of your products, services, and
+information. Instead of searching and scraping at inference time (an
+expensive, unreliable process), models that ingested your structured
+metadata during training can cite you accurately from memory. This
+applies to any organisation that wants to be cited correctly: charities,
+research institutions, professional bodies, and public
+services.</p></li>
+<li><p>Documentation discipline drives accuracy. Agents working with
+properly-structured documentation are measurably more accurate than
+those parsing unstructured sites. Higher accuracy translates to higher
+recommendation probability. What you document once (product specs,
+pricing, policies, eligibility criteria, opening hours, catchment
+boundaries) serves every agent that reads it, permanently. The
+discipline of structured documentation reduces AI hallucination whilst
+improving human comprehension.</p></li>
+<li><p>Your strategic assets are trapped. You have built a solid review
+history on Amazon, genuine customers vouching for your products over
+several years. Migrate to a different commerce platform, and every one
+of those endorsements stays behind. You are effectively starting from
+scratch despite years of earned trust. The same lock-in affects every
+sector: a university’s course descriptions trapped in a proprietary CMS,
+a charity’s impact data locked in a donor platform, a council’s planning
+records in a legacy system that cannot export structured data. MX makes
+these assets portable and sovereign, readable by any agent regardless of
+platform. (This is the Entity Asset Layer, treated fully later in this
+chapter.)</p></li>
+</ol>
+<h3 id="real-world-roi---a-workflow-example">Real-world ROI - a workflow
+example</h3>
+<p>The economic case for MX becomes concrete when you examine
+implementation patterns. Consider adding a repository to a development
+monorepo, a multi-step task requiring git commands, metadata generation,
+and validation across multiple locations.</p>
+<p>Without MX, the task takes 50 minutes (30 minutes of git commands, 15
+minutes of documentation, 5 minutes of validation), is error-prone, and
+the knowledge stays trapped in one person’s head.</p>
+<p>With MX, the same task takes 5 minutes. A 30-second command, two
+minutes of interactive prompts, three minutes of automated execution.
+Error-free. The knowledge is codified in executable scripts and
+documentation that both humans and AI agents can read.</p>
+<p>The economics are simple: 10x time improvement, 100% error reduction.
+Initial codification costs about $0.50 in API calls. Future cost is zero
+because the script runs without AI. Break-even point is the second use.
+Everything after that is pure profit.</p>
+<p>This pattern repeats across every MX implementation. Whether you’re
+documenting products, structuring content, or creating operational
+procedures, the initial investment in explicit structure and metadata
+pays back immediately. The detailed case study appears later in this
+chapter (Section: MX in Practice).</p>
+<h3 id="what-this-book-offers">What this book offers</h3>
+<p>This book shows you how to implement MX - the practice that ensures
+AI agents can read your website, understand your content, and complete
+the actions that serve your goals. It covers:</p>
+<ul>
+<li>Why websites need optimisation for agents (and the consequences for
+any web goal, not just commerce)</li>
+<li>How to add metadata and instructions so AI agents work with facts,
+not guesses</li>
+<li>Which MX patterns prevent hallucination and enable goal
+completion</li>
+<li>How to implement these patterns practically across platforms</li>
+<li>How the Entity Asset Layer enables sovereign portability across
+platforms and agents</li>
+<li>What organisational roles and accountability structures MX
+requires</li>
+</ul>
+<p>MX applies to every web goal. Whether you sell products, inform
+patients, publish research, guide citizens through government services,
+recruit students, collect donations, or enable downloads, agents need
+explicit structure to complete those actions. A hospital needs agents to
+extract accurate drug information. A council needs agents to report
+correct planning application status. A university needs agents to cite
+accurate entry requirements. A charity needs agents to explain
+eligibility criteria for support services. The technical patterns are
+identical - semantic HTML, structured data, explicit state - regardless
+of whether the goal is a purchase or a public service inquiry.</p>
+<p>This book is part of a two-book ecosystem. MX: The Corpus is the
+definitive technical reference for architects, consultants, and
+practitioners implementing MX at scale. MX: The Handbook provides
+step-by-step platform-specific implementations for developers, UX
+designers, and content strategists. Both books share continuously
+updated appendices hosted at allabout.network.</p>
+<hr />
+<p>FINANCIAL SNAPSHOT FOR EXECUTIVES</p>
+<p>Adobe’s Q4 2025 data shows AI referrals to retail surging 700% and
+travel 500%. Without MX, agent-mediated traffic skips your site
+entirely, and you never see it leave.</p>
+<p>MX implementation costs vary by complexity, but the payback pattern
+is consistent: break-even at the second agent interaction. The $0.50
+codification example above is representative.</p>
+<p>Organisations implementing early gain computational trust that
+compounds. Late movers face higher catch-up costs and, in some cases,
+permanent disadvantage. Agent-mediated browsing is projected to become
+the dominant mode within two to three years.</p>
+<p>Your competitors’ agent traffic is growing. Adobe’s data confirms
+this. Agents learn which sites work reliably, and early movers build
+trust scores that latecomers cannot easily displace.</p>
+<p>The core proposition is simple: your business, readable by every
+machine on earth. MX gives you control over how machines read your
+content. You write the instructions. Machines follow them. No black
+box.</p>
+<p>Two questions for your next board meeting: ask your CTO whether you
+are implementing MX, and ask your CMO what percentage of your traffic is
+AI-mediated. The first determines readiness. The second determines
+urgency.</p>
+<hr />
+<p>For CxOs and decision-makers: you now understand the business case.
+People are not afraid of AI. They are afraid of AI they cannot control.
+MX gives them control. AI agents are mediating commerce today, and
+organisations without MX are losing agent-referred traffic invisibly.
+The following sections explain the technical reality for your architects
+and developers. If you need to delegate from here, the rest of this book
+covers financial justification, technical implementation, and
+organisational structure. “MX Requires Dedicated Roles” later in this
+chapter covers the organisational dimension.</p>
+<p>The window for first-mover advantage is measured in quarters, not
+years.</p>
+<h2 id="what-mx-ready-looks-like">What MX-ready looks like</h2>
+<p>Before explaining the technical detail, here is where this leads. An
+organisation that implements MX reaches a measurable destination:</p>
+<ul>
+<li>AI agents convert at rates matching or exceeding human visitors. The
+700% traffic surge becomes captured revenue, not invisible loss.</li>
+<li>Zero catastrophic errors in agent-mediated transactions. No £203,000
+bookings when someone wanted £2,030. No hallucinated drug interactions.
+No fabricated school catchment boundaries.</li>
+<li>Break-even at the second agent interaction. The initial codification
+investment (typically hours of structured metadata work) pays back
+immediately and permanently.</li>
+<li>Your strategic assets are sovereign. Reviews, product knowledge,
+customer data, and operational procedures are portable across any
+platform, readable by any agent, owned by you.</li>
+<li>You control what machines do with your content. You write the
+instructions, in plain, structured formats that machines follow. No
+inference. No guessing. No dependence on AI getting smarter.</li>
+<li>Every agent that visits learns your site works. Computational trust
+compounds. Agents preferentially return to sources that gave accurate
+results. Your competitors face catch-up costs that increase with every
+quarter they delay.</li>
+</ul>
+<p>These are not aspirational targets. They are measurable criteria you
+can verify against your own analytics. This chapter explains the
+obstacles standing between you and this destination, and introduces the
+practices that remove them.</p>
+<h2 id="from-business-case-to-practice">From business case to
+practice</h2>
+<p>The insight behind Machine Experience came from an unexpected
+direction. At CMS Kickoff 2024 in Florida, Nick Rudd compared AI agents
+to eight-year-olds searching for toys: simple, direct queries that
+ignore brand loyalty, complex navigation, and login walls. I published
+the observation in CMS Critic: the real value of AI is not in generating
+content but in consuming it.<a href="#fn1" class="footnote-ref"
+id="fnref1" role="doc-noteref"><sup>1</sup></a> Inspired by Steve Krug’s
+“Don’t Make Me Think,” the solution became clear: you cannot fix the
+million-plus models on Hugging Face, but you can fix what they read. The
+websites, not the AI, need improving.</p>
+<p>Machine Experience (MX) is the practice of adding metadata and
+instructions to internet assets so AI agents work with facts, not
+guesses. MX is not UX (visual design), not SEO (ranking signals), and
+not accessibility (WCAG), though the convergence is real: AI agents,
+search engines, and accessibility users all rely on explicit structure
+rather than visual design. One MX implementation serves all three
+audiences.</p>
+<h2 id="when-machines-fail-people">When machines fail people</h2>
+<p>The business impact described at the start of this chapter plays out
+in specific, traceable ways. Two real-world cases illustrate what these
+integration gaps look like in practice - one a commerce breakdown, the
+other an ethical catastrophe.</p>
+<h3 id="case-study---the-purchase-that-couldnt-happen">Case study - the
+purchase that couldn’t happen</h3>
+<p>A buyer decides to purchase a Kindle Scribe Colorsoft, the 11-inch
+colour e-ink device at £570. He has done the research, read the reviews,
+and settled on the product. Credit card ready. Amazon makes it
+surprisingly difficult to take his money.</p>
+<p>The device launches in the US on 10 December 2025. Amazon announces
+the UK and Germany will follow in “early 2026.” Months later, the UK
+listing on Amazon.co.uk still says “coming soon” with no date. The US
+product page exists, the “Buy Now” button works, but the delivery
+estimate to a UK address stretches between 24 March and 14 May. A
+motivated buyer willing to pay international shipping, and the best
+Amazon can offer is “sometime in the next three months, maybe.”</p>
+<p>He asks his AI assistant for help. It can find the product, compare
+the specs, and quote the price, but it cannot complete the purchase,
+check real-time stock across regions, or even email him the link. It has
+read access to his inbox but no send capability. Close, but not useful
+enough when it matters.</p>
+<p>This failure exposes four gaps that Machine Experience would
+close.</p>
+<p>First, product pages need machine-readable data. They would expose
+availability status, regional launch dates, and delivery estimates in
+structured formats. An AI assistant could then report: “The Kindle
+Scribe Colorsoft isn’t available in the UK yet. Amazon expects UK
+availability in March 2026. Shall I set a reminder or register your
+interest?”</p>
+<p>Second, cross-region awareness. When a UK customer views a US product
+that has a pending UK listing, the experience should acknowledge this,
+not buried in small print, but as a structured status field that both
+humans and machines can read.</p>
+<p>Third, purchase intent needs to become first-class data. “Notify me”
+buttons exist, but they are blunt instruments. An MX approach would let
+buyers express intent with context: this product, this configuration,
+this delivery address, this price ceiling. That intent becomes data the
+retailer can act on, prioritising stock allocation, offering pre-orders,
+or routing to the fastest fulfilment option.</p>
+<p>Fourth, transactions need to be AI-accessible. If a buyer asks an AI
+assistant to purchase something, the assistant should be able to check
+availability, compare delivery options across regions, and either
+complete the purchase or explain clearly why it cannot. This requires
+product and commerce APIs designed with machine users in mind, not
+screen-scraping a website built solely for human eyes.</p>
+<p>This is not really about a Kindle. It is about what happens when
+digital experiences are designed for one type of user. Amazon’s shopping
+experience works well for humans browsing a website. The moment another
+type of user enters (an AI assistant, a price comparison agent, an
+automated purchasing system), the experience collapses because none of
+the information is structured for machine consumption. MX does not
+replace human-centred design. It extends it. When product availability,
+pricing, delivery estimates, and purchase intent are expressed in
+formats that both humans and machines can read, the result is better for
+everyone. The human gets a clearer, faster experience. The machine can
+actually help. And the retailer captures demand it is currently
+losing.</p>
+<h3 id="case-study---when-algorithms-price-gouge-a-tragedy">Case study -
+when algorithms price-gouge a tragedy</h3>
+<p>On 18 January 2026, two high-speed trains collide near Adamuz in
+Córdoba, Spain. Forty-six people die. Two hundred and ninety-two are
+injured. High-speed rail services between Madrid and Andalusia are
+suspended for days.</p>
+<p>Within hours, pricing algorithms at airlines, car hire firms, and bus
+companies detect a surge in demand on the Madrid-Málaga and
+Madrid-Seville corridors. They do exactly what they are designed to do:
+they raise prices. Flight fares jump by 200%. Buses sell out. Car hire
+becomes the last resort for stranded travellers who have no other way to
+reach medical appointments, work commitments, or family.</p>
+<p>The uncomfortable truth: the algorithms work correctly. They see
+demand increase. They see supply constrain. They adjust prices upward.
+This is what dynamic pricing does. It is not a bug. It is the intended
+behaviour. The problem is that nobody designs them to recognise the
+difference between a music festival selling out and a national tragedy
+killing dozens of people.</p>
+<p>Spain’s national ombudsman launches an investigation. Iberia, to its
+credit, manually intervenes, capping fares at €99 and adding extra
+flights. Many other carriers do not. Their systems carry on optimising
+for yield while families scramble to get home.</p>
+<p>Three Machine Experience principles apply directly.</p>
+<p>The first principle is humans always in the loop. Dynamic pricing
+systems operate with minimal oversight. An MX-informed approach would
+require that crisis events trigger human review before price adjustments
+take effect. Not after passengers have already been charged three times
+the normal fare. Before.</p>
+<p>The second is designing for both humans and machines. The pricing
+algorithm sees numbers: demand up, supply down, price up. It does not
+see a train wreck. An MX approach would feed contextual signals into
+pricing systems: civil emergency declarations, transport network
+disruptions, news event classification. The machine needs to understand
+the situation, not just the spreadsheet.</p>
+<p>The third is considering the broader impact. MX asks us to consider
+the wider consequences of machine decisions, not just the immediate
+commercial outcome. A pricing system that extracts maximum revenue from
+people fleeing a disaster site is not serving anyone well. Not the
+travellers, not the brand, and not the transport network that depends on
+public trust.</p>
+<p>This is not a theoretical problem. It is a design problem with
+practical solutions. A pricing system informed by MX principles would
+monitor external signals (transport disruption feeds, civil protection
+alerts, news APIs) and apply constraints when crisis conditions are
+detected. Not necessarily a full price freeze, but a cap, a flag for
+human review, or a temporary shift to fixed pricing on affected routes.
+The data exists. Spain’s civil protection system issues alerts. Rail
+operators publish service suspensions. News organisations classify
+events. The missing piece is connecting these signals to the machines
+making pricing decisions, and giving those machines rules that reflect
+human values rather than pure demand curves.</p>
+<p>There is a business case here too. Spain’s ombudsman is investigating
+transport companies. Consumer association FACUA calls for legal reform.
+Passengers share screenshots of price surges on social media. The
+reputational damage from algorithmic price gouging during a national
+tragedy costs these companies far more than the short-term revenue
+gained. Trust, once broken during a crisis, takes years to rebuild. A
+machine that raises prices during a disaster does not just lose a
+customer. It creates an adversary.</p>
+<h3 id="pattern">Pattern</h3>
+<p>All cases - commerce, healthcare, education, government - reveal the
+same structural failure. Amazon’s commerce platform cannot express
+product information in machine-readable formats. Spain’s transport
+pricing systems cannot consume contextual signals that would prevent
+harm. The NHS website cannot associate drug interaction warnings with
+specific medications in a way agents can parse. The council cannot
+expose catchment boundaries as structured data. In each case, the
+machines do exactly what they are designed to do - and the design is
+insufficient because it accounts for only one type of user, one type of
+interaction, one set of inputs.</p>
+<p>When agents cannot complete your desired action - whether that is
+purchasing a product, checking drug interactions, finding the right
+school, informing readers of a product recall, or completing a contact
+form - they move to sources that provide explicit structure, or they
+hallucinate an answer from incomplete data. First-mover advantage exists
+across every sector. Sites that work early become trusted sources that
+agents return to repeatedly.</p>
+<h2 id="the-invisible-users">The invisible users</h2>
+<p>Now there’s a new class of user - the invisible users. They’re called
+“invisible” for two reasons: they’re invisible to site owners (blending
+into analytics, coming once and leaving) and the interface is invisible
+to them (they cannot see animations, colour, toast notifications, or
+loading spinners). These are AI agents visiting your website and
+performing actions without your awareness.</p>
+<p>Most companies don’t track AI bot traffic. Some prohibit AI bots
+entirely through robots.txt directives or block them using services like
+Cloudflare Identity checks. Modern AI browsers (ChatGPT, BrowserOps,
+Comet, Strawberry, Neo, DIA) do identify themselves as bots in their
+User-Agent strings, but these strings cannot be trusted - they’re
+trivially spoofed by any developer.</p>
+<p>The MX patterns required for these invisible users - explicit
+structure, semantic HTML, persistent state - also happen to benefit
+users with disabilities who rely on screen readers and keyboard
+navigation. However, this is a side effect of designing for machines,
+not the design driver. The case for action - whether measured in
+revenue, patient safety, citizen trust, or educational access - drives
+the technical requirements.</p>
+<p>Some agents operate as browser extensions running alongside human
+users. Others are Playwright-driven automation frameworks controlled by
+AI scripts. Some are AI browsers accessing sites directly. Site owners
+can no longer reliably distinguish between human visitors and AI agents.
+The traffic looks identical in analytics, but the visitor’s capabilities
+and limitations differ fundamentally.</p>
+<p>People are building agents that monitor Slack channels for commands,
+then execute web actions autonomously and report back. The shift from
+passive assistant to active agent is complete. Anthropic’s Claude
+Cowork, launched in January 2026, operates as a coworker rather than a
+tool, managing local file systems, orchestrating complex project
+workflows, and executing multi-step tasks through multi-agent
+architecture.<a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a> This is the agentic era: machines
+reading websites, comparing options, making recommendations, and
+completing actions on behalf of humans.</p>
+<p>These agents struggle with patterns that also confuse users with
+disabilities. They’re blind to visual cues like flashes of information.
+They struggle to differentiate between European, American, and British
+monetary formats. They don’t understand what spinners mean. When faced
+with five “Read More” buttons on a page, they can’t easily determine
+which relates to which content. They process form validation errors
+differently from humans - whilst humans iteratively fix issues one by
+one, AIs may simply abandon difficult websites.</p>
+<h2 id="theyre-machines-not-magic">They’re machines, not magic</h2>
+<p>When we talk about AI agents reading websites, we’re not talking
+about artificial general intelligence or sentient software. We’re
+talking about machines - software programs with specific technical
+capabilities and limitations - that process your website’s content on
+behalf of human users.</p>
+<p>These machines operate through statistical pattern-matching -
+next-token prediction using probability distributions calculated from
+training data. When agents process your website, they’re performing
+weighted averaging and probability calculations, not “understanding”
+content the way humans do. They guess the next most likely word based on
+patterns they’ve seen before.</p>
+<p>This statistical foundation explains both their capabilities and
+their failures:</p>
+<p>Agents hallucinate when they encounter incomplete context. They must
+“think,” generating confident answers by guessing based on statistical
+co-occurrence patterns. Without structured data (Schema.org, semantic
+HTML) providing complete context, they fabricate details that seem
+plausible but are wrong. These are the same errors that produce 0%
+correctness on mathematical reasoning tasks despite fluent explanations.
+MX is the act of adding metadata and instructions so AI doesn’t have to
+think. When all context is explicitly present, hallucination decreases
+dramatically.</p>
+<p>Linguistic bias compounds the problem. Current AI systems tokenize
+English more efficiently than compound languages like German and Dutch.
+This bias begins at the training data level: approximately 44% of Common
+Crawl (the public dataset powering most large language models) is
+English content, with no other language exceeding 6% representation. A
+German user must type “ultrathink” to get more processing power from the
+system, a word that isn’t even proper English but uses German-style
+compounding. The irony is complete: using a fake English word that
+mimics German grammar to command machines that don’t actually think.
+This linguistic inequity affects how agents process multilingual
+websites, giving English-language content structural advantages.</p>
+<p>Explicit structure matters because agents convert your HTML into
+mathematical representations through weighted averaging of co-occurrence
+patterns. <code>&lt;div class="button"&gt;</code> and
+<code>&lt;button&gt;</code> appear similar to humans but create
+different statistical signatures. Semantic HTML produces distinct
+patterns that agents process reliably, whilst visual-only distinctions
+disappear in the averaging process.<a href="#fn3" class="footnote-ref"
+id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>Calling them “machines” instead of “AI assistants” or “intelligent
+agents” counters dangerous anthropomorphisation. AI researchers
+deliberately anthropomorphise their creations - calling them
+“assistants,” “intelligent,” or claiming they “understand” - building
+artificial confidence in users. When users believe agents “understand”
+context or can “infer” meaning, they trust these systems beyond their
+actual capabilities.</p>
+<p>I want to be clear about my stance on AI: I’m not complaining about
+these systems or highlighting edge cases like “How many R’s in
+strawberry?” or users generating obvious junk. I genuinely praise AI for
+its remarkable ability to generate coherent text that people understand.
+The technology has achieved something extraordinary - statistical
+pattern-matching that produces human-readable responses across countless
+domains. My focus isn’t on what’s wrong with AI, but on what we can do
+to make it work better. When creators craft proper inputs (semantic
+HTML, structured metadata), provide quality training data, enable
+effective live searches, and implement appropriate guardrails, we get
+dramatically better results. Hallucinations decrease. Accuracy
+increases. Commerce transactions complete successfully. The solution
+isn’t to criticise AI systems - it’s to recognise that better-structured
+inputs produce better outputs for everyone: users, agents, and
+businesses alike.</p>
+<h2 id="what-ai-agents-actually-are">What AI agents actually are</h2>
+<p>AI agents come in five forms. You cannot detect which type is
+visiting. User-Agent strings are spoofable. Design for the most
+constrained agent, and you serve them all.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 16%" />
+<col style="width: 10%" />
+<col style="width: 13%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr>
+<th>Agent Type</th>
+<th>Examples</th>
+<th>Sees</th>
+<th>Misses</th>
+<th>Disability Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Server-side</strong></td>
+<td>ChatGPT, Claude</td>
+<td>Raw HTML, semantic structure, metadata</td>
+<td>JavaScript-rendered content, CSS layout, dynamic updates</td>
+<td>Blind user with basic screen reader — needs semantic HTML</td>
+</tr>
+<tr>
+<td><strong>In-browser</strong></td>
+<td>Copilot, extensions</td>
+<td>Full rendered DOM, dynamic content, interactive states</td>
+<td>Visual hierarchy, CSS styling, transient notifications</td>
+<td>Screen reader user with JS support — needs explicit state
+attributes</td>
+</tr>
+<tr>
+<td><strong>Browser automation</strong></td>
+<td>Perplexity, Playwright</td>
+<td>Everything above plus screenshots, visual layout</td>
+<td>Design intent, brand meaning, cultural context</td>
+<td>Sighted user with motor impairments — needs semantic structure for
+interaction</td>
+</tr>
+<tr>
+<td><strong>Local</strong></td>
+<td>Ollama, on-device LLMs</td>
+<td>Raw HTML (like server-side) with smaller context windows</td>
+<td>Everything server-side misses, plus content exceeding token
+budget</td>
+<td>User with cognitive disabilities — needs simple, clear
+structure</td>
+</tr>
+<tr>
+<td><strong>Agentic OS</strong></td>
+<td>Anthropic Cowork</td>
+<td>Aggregated information from multiple agent types</td>
+<td>Inconsistencies across interaction points</td>
+<td>Project manager coordinating diverse abilities — needs consistent
+patterns</td>
+</tr>
+</tbody>
+</table>
+<p>The disability equivalents are not analogies. These are literal
+technical limitations that parallel human disabilities, and the same
+accessibility patterns (semantic HTML, ARIA, structured data) address
+both.</p>
+<h2 id="machine-limitations-and-the-convergence-principle">Machine
+limitations and the convergence principle</h2>
+<p>AI agents have zero-tolerance technical constraints. Unlike humans
+who persist through ambiguity and find workarounds, agents fail silently
+and disappear from recommendations. These constraints parallel human
+disabilities, not as analogy, but as literal technical fact:</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 33%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>What Agents Need</th>
+<th>Accessibility Parallel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Blindness</strong> — cannot see CSS or visual layout</td>
+<td>Semantic HTML (<code>&lt;button&gt;</code>,
+<code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>)</td>
+<td>Screen readers need the same markup</td>
+</tr>
+<tr>
+<td><strong>Zero-tolerance parsing</strong> — cannot guess intent from
+appearance</td>
+<td>Explicit semantics (<code>&lt;button&gt;</code> not
+<code>&lt;div class="btn"&gt;</code>)</td>
+<td>Keyboard users need proper focus management</td>
+</tr>
+<tr>
+<td><strong>Limited context</strong> — token budget constraints on local
+agents</td>
+<td>Concise structure, clear heading hierarchy</td>
+<td>Users with cognitive disabilities need simplicity</td>
+</tr>
+<tr>
+<td><strong>No persistence</strong> — transient content vanishes before
+processing</td>
+<td>Persistent feedback (<code>role="alert"</code>, DOM-reflected
+state)</td>
+<td>Screen readers miss toast notifications too</td>
+</tr>
+<tr>
+<td><strong>State invisibility</strong> — cannot access JavaScript
+variables</td>
+<td>State in HTML attributes (<code>data-state</code>,
+<code>aria-invalid</code>)</td>
+<td>Keyboard users need visible focus indicators</td>
+</tr>
+</tbody>
+</table>
+<p>This convergence is not coincidental. Both groups (machines and users
+with disabilities) lack access to visual design cues. Both rely on
+semantic structure. The difference is tolerance: accessibility users can
+call customer service when a website fails them. Agents simply
+leave.</p>
+<p>The MX-first principle follows: design for machines with
+zero-tolerance requirements, and you automatically create structure that
+benefits accessibility users. One implementation serves both audiences,
+but the business case (agent commerce, conversions, revenue) drives the
+requirements. In practice, adopting these principles changes how you
+build everything: metadata-driven architecture, context declaration,
+executable documentation, and WCAG-informed design become inseparable
+from the work itself.<a href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a></p>
+<p>Component names must match use. Agents parse ARIA labels and semantic
+class names as definitive signals, not hints. A section labelled
+<code>aria-label="Author biography"</code> that actually contains a blog
+tagline causes catastrophic extraction failures. Unlike humans who infer
+meaning from context, agents treat labels as source of truth.</p>
+<h2 id="ai-will-figure-it-out-fallacy">“AI will figure it out”
+fallacy</h2>
+<p>You’ve seen the failures. You understand the constraints. At this
+point, a reasonable objection arises.</p>
+<p>The common objection: “AI is getting better all the time, why worry?
+It will work itself out.”</p>
+<p>The flaw in this argument is straightforward. Yes, AI models are
+improving, but they’re also multiplying at an accelerating rate. The
+diversity problem is getting worse, not better.</p>
+<h3 id="unknown-agent-problem">Unknown agent problem</h3>
+<p>Site owners have no idea which model is visiting their site. Is it a
+small LLM running on a mobile device (SMOL, edge models with 100-500M
+parameters)? Is it a frontier model (Claude Opus 4.5, GPT-4, Gemini
+Ultra)? Is it an in-browser extension with a local LLM prioritising
+privacy? Is it a custom-trained domain-specific agent?</p>
+<p>You cannot detect agent capabilities reliably. User-Agent strings are
+trivially spoofed. No standardised capability announcement exists. You
+cannot serve different HTML based on agent sophistication because you
+don’t know which agent is parsing your content.</p>
+<h3 id="diversity-explosion">Diversity explosion</h3>
+<p>Over 1 million models on Hugging Face (2026) with wildly different
+capabilities:</p>
+<p>The size distribution shows extreme diversity:</p>
+<ul>
+<li>Over 90% have fewer than 1 billion parameters</li>
+<li>The vast majority have fewer than 500 million parameters</li>
+<li>Roughly 70% have fewer than 200 million parameters</li>
+<li>Over 40% have fewer than 100 million parameters</li>
+</ul>
+<p>The growth trajectory tells its own story. The platform added 1
+million models in just 335 days (late 2024-2025), compared to 1,000+
+days for the first million. The wild west is getting wilder.</p>
+<h3 id="why-waiting-for-ai-to-improve-fails">Why “waiting for AI to
+improve” fails</h3>
+<p>First, there’s no standardisation. No central authority controls
+agent capabilities. No way to demand parsing standards when no
+imperative exists. Everyone does what they want, giving lip service to
+standards without enforcement.</p>
+<p>Second, the diversity paradox. Large frontier models are getting
+better at handling ambiguity. But small models (7B, 13B parameters)
+deployed on edge devices cannot handle the same complexity. And you
+don’t know which model is visiting your site. Optimising for “average”
+AI means failing for 40%+ of agents.</p>
+<p>Third, local and edge deployment. Browser extensions with local LLMs
+(privacy-focused users), mobile agents with smaller models (resource
+constraints), and custom domain-specific models (specialised
+capabilities) will never have the computational power of frontier
+models. These agents are proliferating, not disappearing.</p>
+<h3 id="only-solution---design-for-the-worst-agent">Only solution -
+design for the worst agent</h3>
+<p>Explicit structure and unambiguous MX patterns make you compatible
+with the worst agents, therefore compatible with all:</p>
+<ul>
+<li>Small 100M parameter model can parse Schema.org → Large models can
+too</li>
+<li>Local edge LLM can read semantic HTML → Cloud models can too</li>
+<li>Simple browser extension can understand explicit state →
+Sophisticated agents can too</li>
+</ul>
+<p>This isn’t “dumbing down.” It’s universal compatibility.</p>
+<p>The alternative (hoping AI improves) leaves you incompatible with
+40%+ of agents visiting your site right now. Design for the worst agent
+= compatible with all agents.</p>
+<h3
+id="strategic-redundancy---multiple-formats-for-unknown-capabilities">Strategic
+redundancy - multiple formats for unknown capabilities</h3>
+<p>Because you cannot detect which agent is visiting your site or what
+capabilities it possesses, MX principles require providing information
+redundantly across multiple formats. This isn’t bloat or inefficiency -
+it’s strategic redundancy that ensures the worst agent can extract
+critical information whilst better agents can use richer formats.</p>
+<p>The detection problem is unsolvable. User-Agent strings are trivially
+spoofed. No standardised capability announcement protocol exists. You
+cannot serve different HTML based on agent sophistication because you
+have no reliable way to identify agent capabilities. Therefore, you must
+assume the worst whilst providing for the best.</p>
+<p>Consider how MX redundancy works in practice. Pricing appears in
+visible text (“£2,030”), Schema.org JSON-LD structured data
+(<code>"price": "2030", "priceCurrency": "GBP"</code>), and HTML data
+attributes (<code>data-price="2030" data-currency="GBP"</code>). A basic
+text parser gets the visible price. A structured data parser gets
+machine-readable values. An HTML attribute parser gets explicit
+semantics. Information lives in multiple semantic layers
+simultaneously.</p>
+<p>State gets declared redundantly too. Checkout progress exists as
+visible text (“Step 2 of 4”), ARIA attributes
+(<code>aria-current="step"</code>), data attributes
+(<code>data-checkout-step="2" data-total-steps="4"</code>), and
+Schema.org BreadcrumbList. Screen readers announce current position.
+Simple parsers read data attributes. Sophisticated agents extract full
+navigation context from structured data.</p>
+<p>Metadata appears in multiple formats: OpenGraph tags for social
+platforms, Twitter Cards for Twitter-specific display, Schema.org
+JSON-LD for structured extraction, Dublin Core for academic contexts,
+and llms.txt for agent discovery. Each format serves different
+consumers, but all describe the same underlying content.</p>
+<p>Product information exists at multiple specificity levels. Product
+title in H1 heading, short description in meta description, detailed
+description in Schema.org Product type, specifications in structured
+data tables, and downloadable PDF datasheet. Basic agents extract the
+title. Advanced agents parse full specifications. Human users download
+detailed documentation.</p>
+<p>This redundancy serves a critical strategic purpose: you’re building
+for an unknown audience with unknown capabilities visiting at unknown
+times. A small mobile LLM with 100M parameters needs explicit text and
+simple structure. A frontier model with 200B+ parameters can extract
+from complex JSON-LD schemas. A browser extension agent reads data
+attributes. A CLI agent parses only served HTML. By providing
+information in multiple formats simultaneously, you ensure all agent
+types can extract what they need at the level they can process.</p>
+<p>The efficiency argument fails here. Some developers resist redundancy
+as “bloating” HTML. This misunderstands the problem. An extra 2KB of
+Schema.org JSON-LD that enables a £2,030 purchase to complete correctly
+(rather than failing or auto-booking for £203,000) isn’t bloat. It’s
+infrastructure. The redundancy pays for itself in the first successful
+agent-mediated transaction.</p>
+<p>Strategic redundancy is an MX principle, not a bug. When you don’t
+know which machine is reading your content or what capabilities it
+possesses, you provide information at multiple levels to ensure
+universal compatibility. This approach mirrors accessibility best
+practices - alt text AND visible captions AND ARIA labels - because both
+disciplines design for unknown capabilities.</p>
+<p>Waiting is not a strategy. The solution is to fix what agents
+read.</p>
+<h2 id="solution---fix-the-source-not-the-model">Solution - fix the
+source, not the model</h2>
+<p>The obstacles between you and that destination are clear: agents
+cannot see your CSS, cannot parse unstructured content, cannot complete
+checkout, and you cannot detect which agent is visiting. Each obstacle
+has a corresponding solution, and each solution removes the obstacle
+permanently.</p>
+<p>You cannot fix the million-plus models on Hugging Face, but you can
+fix the source - the internet itself, or at least your corner of it.
+Machine Experience (MX) is the practice of adding metadata and
+instructions to your web assets so AI agents don’t have to think. When
+agents must “think” (infer meaning from incomplete context), they
+hallucinate. When all context is explicitly present, they extract
+accurate information.</p>
+<p>MX is the practice; HTML is the delivery mechanism. This distinction
+matters. We’re not just making HTML adjustments. MX is the strategic
+discipline of ensuring complete context reaches AI agents. HTML is
+simply the universal format that makes this possible.</p>
+<h3 id="understanding-metadata">Understanding metadata</h3>
+<p>Before diving deeper into MX, let’s clarify what metadata actually
+is. Metadata is data about data - structured information that describes
+other information:</p>
+<ul>
+<li>HTML documents have <code>&lt;meta&gt;</code> tags (description,
+keywords, author)</li>
+<li>Markdown files can have YAML frontmatter (title, date, tags)</li>
+<li>JPEG images contain EXIF data (camera model, location,
+timestamp)</li>
+<li>Git commits have metadata (author, date, message, parent
+commits)</li>
+<li>Bash scripts have comments at the top (purpose, usage, author)</li>
+</ul>
+<p>Many people don’t realise these are all the same concept - structured
+information that describes the thing it’s attached to.</p>
+<p><strong>MX is metadata-agnostic.</strong> It relies on existing
+standards wherever possible, amplifying what the web already provides.
+Where gaps remain (lifecycle status, content governance, agentic access
+policy), MX adds its own light-touch conventions, particularly through
+YAML frontmatter and <code>.mx.yaml.md</code> sidecar files. The
+standards MX builds on include:</p>
+<ul>
+<li><strong>Schema.org / JSON-LD</strong> — structured data for
+products, organisations, events, reviews</li>
+<li><strong>RDFa</strong> — embedded semantic markup within HTML
+attributes</li>
+<li><strong>Open Graph / Twitter Cards</strong> — social sharing and
+preview metadata</li>
+<li><strong>Dublin Core</strong> — document-level descriptors (creator,
+subject, rights)</li>
+<li><strong>EXIF / IPTC / XMP</strong> — image and media metadata
+(camera, location, copyright)</li>
+<li><strong>YAML frontmatter</strong> — document properties in markdown
+and static-site generators</li>
+<li><strong>HTML <code>&lt;meta&gt;</code> tags</strong> — page-level
+description, author, viewport, robots directives</li>
+<li><strong><code>robots.txt</code> / <code>sitemap.xml</code></strong>
+— crawl directives and site structure</li>
+<li><strong><code>&lt;link rel&gt;</code> tags</strong> — canonical
+URLs, alternate languages, licensing</li>
+</ul>
+<p>Each of these standards solves a real problem, and each is already
+understood by some subset of agents and search engines. MX treats them
+all as tools in the same toolkit. The MX practitioner’s job is to ensure
+the right metadata reaches agents in the right format, not to replace
+what works, but to fill the gaps where existing standards leave context
+incomplete.</p>
+<p>The result is strategic redundancy: the same fact expressed through
+multiple standards so that agents of varying capability can each find
+what they need.</p>
+<p>MX’s principle is straightforward: use the appropriate metadata
+format for each context.</p>
+<ul>
+<li>For scripts: Comments with usage examples</li>
+<li>For markdown: YAML frontmatter with document properties</li>
+<li>For folders: <code>.mx.yaml.md</code> files with purpose and
+relationships</li>
+<li>For formats without metadata support (like <code>.exe</code>):
+Create a sidecar file (<code>.mx.report.exe.yaml</code>)</li>
+</ul>
+<p>The <code>.mx</code> prefix is consistent - all MX metadata files
+start with <code>.mx</code>, making them instantly recognizable as “meta
+meta” (metadata about the metadata system itself).</p>
+<p>As the case studies at the start of this chapter demonstrate, without
+proper metadata, machines cannot distinguish context from content. A
+pricing algorithm cannot tell a disaster from a demand spike, and an AI
+assistant cannot distinguish a product that is unavailable from one that
+simply lacks structured availability data. Proper microdata and metadata
+prevent these errors by providing complete context. However,
+retrofitting the entire internet isn’t feasible. The real value lies in
+going forward - properly structured pages help with live web search,
+improving goal completion (sales, contact forms, information retrieval)
+that might otherwise be missed.</p>
+<p>This isn’t a new concept. RDF (Resource Description Framework) was
+proposed many years ago, but nobody listened. Now there’s a commercial
+imperative driving adoption through Machine Experience requirements:
+when agents can’t complete your desired action (purchase, contact,
+inform), they move to competitors who provide explicit structure.</p>
+<p>One concern with current practices: the trend of converting web pages
+to markdown before sending them to AI agents. This process strips all
+metadata - pricing information, geographical context, document type
+indicators. It’s dangerous. Metadata preservation in agent-readable
+formats is essential for accurate information extraction and preventing
+hallucination.</p>
+<p>Each MX pattern removes a specific obstacle standing between agents
+and your content:</p>
+<ul>
+<li>Agents cannot see CSS layout → Use semantic HTML
+(<code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>,
+<code>&lt;article&gt;</code>, <code>&lt;button&gt;</code>)</li>
+<li>Agents hallucinate when context is missing → Provide structured data
+(Schema.org JSON-LD)</li>
+<li>Agents miss JavaScript state → Make state explicit
+(<code>data-state</code>, <code>aria-invalid</code>,
+<code>role="alert"</code>)</li>
+<li>Agents lose navigation in flat content → Use clear heading hierarchy
+(h1 → h2 → h3)</li>
+<li>Agents skip non-text content → Add text alternatives (alt text,
+aria-label)</li>
+</ul>
+<p>Remove these obstacles, and one MX implementation serves three
+audiences:</p>
+<ol type="1">
+<li>AI agents (ChatGPT, Copilot, Perplexity) - primary focus</li>
+<li>Search engines (Google, Bing) - side benefit</li>
+<li>Users with disabilities (screen readers, keyboard users) - side
+benefit</li>
+</ol>
+<h3 id="mx-in-the-content-pipeline">MX in the content pipeline</h3>
+<p>MX is often confused with adjacent disciplines in the content stack.
+MX is not a Content Management System (where content is created and
+stored), not a Content Delivery System (infrastructure for serving
+content), and not an ontology (semantic model of concepts and
+relationships). MX is the practice that ensures context gets through to
+the goal of the site. HTML, informed by MX, is the publication
+point.</p>
+<p>Consider the content pipeline: Content Operations builds semantic
+structure at the construction point, MX ensures that structure survives
+publication, and Content Delivery serves it to agents. Without MX,
+well-structured content with rich metadata in the CMS becomes stripped
+of metadata at delivery - agents cannot understand context.</p>
+<p>Content Operations is essential for AI at the construction point,
+where semantic structure is created from the start. But Content
+Operations alone is not enough. If the publication layer (MX) doesn’t
+preserve and expose this structure, agents at the delivery point never
+see it. MX is the bridge. What you build in Content Operations reaches
+agents only if MX preserves it during publication.</p>
+<p>In content delivery systems and CMS environments, an ontology is a
+semantic model that defines concepts and their relationships so content
+can be understood, linked, filtered, and delivered in a more intelligent
+and context-aware way. Ontologies differ from traditional CMS metadata
+(flat tags and categories) by modelling concepts with many-to-many
+relationships designed for machines to reason over. Ontology defines the
+semantic model at the construction point. MX ensures the semantic model
+reaches agents at the publication point. Without MX, beautiful ontology
+in the CMS is lost in publication - agents cannot use it.</p>
+<h4 id="mx-as-publication-point-governance">MX as publication point
+governance</h4>
+<p>MX operates at a specific stage in the content lifecycle:</p>
+<p>At the construction point, Content Operations teams create content
+with semantic structure, define taxonomies, build ontologies, and
+establish metadata schemas. This work happens in CMS platforms, content
+databases, and authoring tools.</p>
+<p>At the publication point, MX ensures the semantic structure built in
+Content Operations survives the publication process. HTML rendering
+preserves semantic elements (<code>&lt;main&gt;</code>,
+<code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code>), metadata
+schemas transform to Schema.org JSON-LD, state attributes become
+DOM-reflected, and ontology relationships become machine-readable
+links.</p>
+<p>At the delivery point, infrastructure serves the structured content
+to agents. CDNs, caching layers, and hosting platforms deliver the
+content MX has structured.</p>
+<p>Most organisations have sophisticated Content Operations and reliable
+Content Delivery. The gap is at publication, where CMS-rich metadata
+gets stripped during HTML rendering. MX closes this gap by governing
+what reaches the delivery point.</p>
+<p>MX is not a tool or platform. It is the practice, the governance
+layer, that ensures publication preserves structure. Implementation
+requires:</p>
+<ul>
+<li>Development standards (semantic HTML patterns)</li>
+<li>Template requirements (Schema.org integration)</li>
+<li>QA validation (agent compatibility testing)</li>
+<li>Organisational roles (MX specialists who bridge content and
+development)</li>
+</ul>
+<h4 id="mx-operating-system---metadata-everywhere">MX operating system -
+metadata everywhere</h4>
+<p>The core philosophy of MX is simple: place metadata everywhere. Every
+folder gets context, every document gets recovery information, every
+workflow gets executable instructions. The implementation uses
+<code>.mx.yaml.md</code> files, dot-prefixed to stay hidden from humans
+(<code>ls</code> shows only work files), but visible to machines
+(<code>ls -a</code>). The <code>.md</code> extension means humans who
+investigate get readable prose; machines get structured YAML in the same
+file. One file, two audiences.</p>
+<p>This extends beyond code repositories. MX practitioners add
+<code>.mx.yaml.md</code> files across their entire filesystem:
+<code>~/Documents/Projects/</code>, <code>~/Documents/Invoices/</code>,
+even <code>~/Downloads/</code>. Each file contains what exists, why, how
+it was created, and tentative prompts for regeneration. If a document
+gets lost, an AI agent can recreate it from the metadata alone. This
+transforms the operating system itself into an agentic platform, the MX
+OS.</p>
+<h4 id="mx-in-practice---a-real-workflow-case-study">MX in practice - a
+real workflow case study</h4>
+<p>Consider a concrete task: adding a new repository to a monorepo with
+full MX integration. Without metadata, an AI agent spends 50 minutes
+exploring randomly, inferring patterns, and missing steps. With MX
+metadata, the agent navigates directly to <code>.gitmodules</code>,
+<code>ONBOARDING.md</code>, <code>.mx.yaml.md</code> files, and the
+onboarding script, completing investigation in 5 minutes.</p>
+<p>The agent then executed an 8-step plan (validate, add submodule,
+initialise, onboard with MX metadata, validate, commit, push, verify) in
+5 minutes with zero errors. Rather than stopping at task completion, it
+codified the pattern: a bash script, a user guide, and preserved plan
+files. The next time this task is needed:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run repo:add <span class="op">&lt;</span>url<span class="op">&gt;</span></span></code></pre></div>
+<p>Answer two questions, confirm, done. No AI needed. The economics tell
+the story: $0.50 in initial API calls, $0.00 for every future use.
+Break-even point: second use.</p>
+<p>This demonstrates the core MX principles in action: explicit over
+implicit (structured plan replaces tribal knowledge), designing for
+multiple audiences (AI reads script structure, humans read
+documentation, automation reads exit codes), and progressive disclosure
+(simple command for common use, manual steps available when needed). The
+chapter itself demonstrates these principles. Its frontmatter IS
+metadata, making its provenance machine-readable.[^coauthor]</p>
+<h3 id="entity-asset-layer---your-strategic-asset-vault">Entity Asset
+Layer - your strategic asset vault</h3>
+<p>The obstacle of platform lock-in deserves its own solution.
+Understanding the content pipeline leads to an uncomfortable insight:
+the most valuable assets your organisation owns must remain sovereign
+and portable across any platform or AI agent. This is the Entity Asset
+Layer (EAL), a strategic evolution from simple identity verification to
+complete asset ownership.</p>
+<h4 id="shift-from-identity-to-assets">Shift from identity to
+assets</h4>
+<p>When AI agents interact with your organisation, they need more than
+identity verification (“Who you are”). They need access to your Entity
+Assets, the complete strategic capital that determines success or
+failure in agent-mediated interactions.</p>
+<p>The shift is from simple identity (“Who you are”) to what I call a
+Strategic Asset Vault (“What you own, how you operate, why you matter”).
+If identity is the <em>who</em>, the Entity Asset Layer is the <em>what,
+how, and why</em>.</p>
+<h4 id="asset-taxonomy-and-ai-agent-needs">Asset taxonomy and AI agent
+needs</h4>
+<p>Entity Assets can be categorised into four types, each serving
+specific purposes when AI agents visit your website:</p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr>
+<th>Category</th>
+<th>Examples</th>
+<th>Purpose in AI Interaction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identity Assets</strong></td>
+<td>Loyalty status, location preferences, currency settings, tax
+identification</td>
+<td>Establish “Who” is interacting</td>
+</tr>
+<tr>
+<td><strong>Reputation Assets</strong></td>
+<td>Verified reviews, trust scores, industry certifications, quality
+ratings</td>
+<td>Establish “Why” agents should trust this entity</td>
+</tr>
+<tr>
+<td><strong>Knowledge Assets</strong></td>
+<td>Ontologies, product specifications, brand logic, intellectual
+property</td>
+<td>Establish “What” you know or sell</td>
+</tr>
+<tr>
+<td><strong>Transactional Assets</strong></td>
+<td>Spending history, preference maps, past interactions, cart
+patterns</td>
+<td>Enable agent personalisation and prediction</td>
+</tr>
+</tbody>
+</table>
+<p>These assets are not metadata about products or services. They are
+your organisation’s strategic capital, and they must remain portable
+across platforms and readable by any AI agent.</p>
+<h4 id="sovereign-portability-as-competitive-advantage">Sovereign
+portability as competitive advantage</h4>
+<p>The central problem is platform lock-in. Consider what happens when
+you try to move.</p>
+<p>You have years of customer reviews on Amazon, hard-earned
+endorsements that drive purchasing decisions. Migrate to Shopify or a
+custom ecommerce platform, and none of them follow you. Your Reputation
+Assets are trapped.</p>
+<p>Your product ontology is defined in a proprietary CMS. Years of
+carefully structured product relationships and domain expertise cannot
+be exported. Switch platforms and you start from scratch. Your Knowledge
+Assets are lost.</p>
+<p>Customer loyalty status, purchase patterns, and wishlists exist only
+in your commerce platform’s database. When customers encounter your
+brand through a different channel, none of this context transfers. Your
+Identity and Transactional Assets are isolated.</p>
+<p>The strategic metaphor writes itself: you’ve put all your eggs
+(Entity Assets) in other people’s baskets (platforms). When you need to
+move, the eggs stay behind.</p>
+<p>The problem runs deeper than portability. Data sovereignty has two
+dimensions: jurisdiction (where data physically resides, which laws
+apply) and ownership (who controls access and export). Platform lock-in
+compromises both. Your customer data sits in a vendor’s data centre,
+subject to that jurisdiction’s regulations, not necessarily yours. Your
+export options depend on what the vendor chooses to offer. Price
+increases, feature removal, or acquisition by a competitor leave you
+with limited recourse when your assets are not portable. MX addresses
+both dimensions: structured, standard formats (Schema.org, JSON-LD,
+semantic HTML) make assets portable by design, and sovereign ownership
+means jurisdiction stays under your control.<a href="#fn5"
+class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<h4 id="platform-lock-in-problem">Platform lock-in problem</h4>
+<p>Current CMS and commerce platforms trap Entity Assets in proprietary
+formats:</p>
+<pre class="text"><code>CMS/Commerce Platform (proprietary database)
+    ↓
+Platform Renderer (strips metadata)
+    ↓
+HTML Output (unstructured, not portable)
+    ↓
+AI Agents (cannot extract Entity Assets)</code></pre>
+<p>The result: Entity Assets trapped in the platform, lost on migration,
+invisible to AI agents that don’t integrate directly with that specific
+platform.</p>
+<h4 id="eal-solution">EAL solution</h4>
+<p>The Entity Asset Layer inverts the architecture: sovereign, portable
+asset ownership:</p>
+<pre class="text"><code>Entity Asset Layer (sovereign database)
+    ↓  ↓  ↓
+CMS → Commerce → Marketing (platforms consume EAL)
+    ↓  ↓  ↓
+MX Publication Layer (preserves structure)
+    ↓  ↓  ↓
+HTML Output (Entity Assets as structured metadata)
+    ↓
+AI Agents (extract and trust Entity Assets)</code></pre>
+<p>The result: Entity Assets sovereign, portable across platforms,
+readable by all agents regardless of architecture.</p>
+<p>The architectural principle follows naturally. Platforms become “view
+layers” that render Entity Assets for specific channels (web, mobile,
+voice, agent), not the source of truth. You own the assets; platforms
+temporarily host the rendering.</p>
+<h4 id="mx-as-the-technical-enabler">MX as the technical enabler</h4>
+<p>Understanding how Entity Asset Layer (EAL) and Machine Experience
+(MX) work together reveals why MX patterns are strategically
+critical:</p>
+<p>MX is the practice that informs publication; EAL is the content. MX
+governs <em>how</em> data is published, whilst EAL governs <em>what</em>
+data is published. MX ensures agents can read the structure; EAL ensures
+the assets remain portable.</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 43%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>MX (Machine Experience)</th>
+<th>EAL (Entity Asset Layer)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Focus</strong></td>
+<td><em>How</em> data is published</td>
+<td><em>What</em> data is published</td>
+</tr>
+<tr>
+<td><strong>Role</strong></td>
+<td>Technical practice/discipline</td>
+<td>Strategic asset repository</td>
+</tr>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Agents can read structure</td>
+<td>Assets remain portable</td>
+</tr>
+<tr>
+<td><strong>Scope</strong></td>
+<td>Publication process</td>
+<td>Asset ownership</td>
+</tr>
+</tbody>
+</table>
+<p>In practice, the integration works across three points. Content
+Operations builds Entity Assets at the construction point, defining
+product ontologies, structuring review data with Schema.org, modelling
+customer relationships, and encoding brand logic as structured data. MX
+ensures Entity Assets survive publication at the publication point,
+preserving structured data during rendering, exposing metadata in HTML
+rather than stripping it, and making implicit context explicit. AI
+Agents then consume Entity Assets at the delivery point, extracting
+pricing, reviews, and specifications, building trust scores from
+reputation assets, and using knowledge assets to prevent
+hallucination.</p>
+<p>MX patterns (semantic HTML, Schema.org, explicit state, JSON-LD) are
+the technical implementation of EAL sovereignty. They are not separate
+initiatives. They are two aspects of the same strategic imperative.
+Without MX, Entity Assets stay trapped in platform-specific formats,
+lost during publication, invisible to agents, and platform lock-in
+becomes permanent. With MX, Entity Assets are published as portable HTML
+metadata, readable by any agent, sovereign to your organisation.</p>
+<h4 id="example---review-as-portable-entity-asset">Example - review as
+portable Entity Asset</h4>
+<p>Instead of reviews trapped in a platform database, Entity Assets are
+published as portable structured data:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@context&quot;</span><span class="fu">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Review&quot;</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@id&quot;</span><span class="fu">:</span> <span class="st">&quot;https://yoursite.com/reviews/abc123&quot;</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;itemReviewed&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Product&quot;</span><span class="fu">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@id&quot;</span><span class="fu">:</span> <span class="st">&quot;https://yoursite.com/products/xyz789&quot;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Person&quot;</span><span class="fu">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Jane Smith&quot;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;reviewRating&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Rating&quot;</span><span class="fu">,</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;ratingValue&quot;</span><span class="fu">:</span> <span class="st">&quot;5&quot;</span><span class="fu">,</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;bestRating&quot;</span><span class="fu">:</span> <span class="st">&quot;5&quot;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;reviewBody&quot;</span><span class="fu">:</span> <span class="st">&quot;Exceptional quality and service.&quot;</span><span class="fu">,</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;datePublished&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-01-15&quot;</span><span class="fu">,</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;publisher&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Organization&quot;</span><span class="fu">,</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Your Company&quot;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>This review is now a portable Entity Asset. It is certified by your
+organisation rather than the platform, readable by any AI agent in a
+platform-agnostic format, migratable to new platforms because JSON-LD
+exports and imports cleanly, and carries verifiable provenance linked to
+a verified customer identity.</p>
+<h4 id="strategic-timing-and-first-mover-advantage">Strategic timing and
+first-mover advantage</h4>
+<p>The agent commerce launches described at the start of this chapter
+create a first-mover dynamic for EAL. Sites that implement sovereign
+Entity Assets early gain “computational trust,” where agents
+preferentially recommend proven-successful entities, and that trust
+compounds over time. Early movers accumulate successful agent
+interactions before competitors even implement MX. Late movers must not
+only implement the patterns but outperform established competitors to
+displace learned preferences.</p>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr>
+<th>Implementation Timing</th>
+<th>Competitive Position</th>
+<th>Catch-Up Difficulty</th>
+<th>Cost Implications</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Early (2026)</td>
+<td>Substantial head start</td>
+<td>N/A (leader)</td>
+<td>Baseline investment</td>
+</tr>
+<tr>
+<td>Follower (2027)</td>
+<td>Behind early movers</td>
+<td>Moderate</td>
+<td>Moderately higher costs</td>
+</tr>
+<tr>
+<td>Late (2028+)</td>
+<td>Significant disadvantage</td>
+<td>High</td>
+<td>Substantially higher costs</td>
+</tr>
+</tbody>
+</table>
+<figure>
+<img src="chapter-00-first-mover-timeline.png"
+alt="First-Mover Advantage Timeline: Visual representation showing competitive positioning across three implementation windows (2026 Early, 2027 Follower, 2028+ Late) with colour-coded indicators for trust accumulation, catch-up difficulty, and cost implications." />
+<figcaption aria-hidden="true">First-Mover Advantage Timeline: Visual
+representation showing competitive positioning across three
+implementation windows (2026 Early, 2027 Follower, 2028+ Late) with
+colour-coded indicators for trust accumulation, catch-up difficulty, and
+cost implications.</figcaption>
+</figure>
+<h2 id="uxmx---a-new-discipline">UX/MX - a new discipline</h2>
+<p>Just as we have UX (User Experience), we need MX (Machine
+Experience). The central insight is that organisations should design for
+both humans and machines simultaneously with the same content - not
+create separate experiences.</p>
+<p>Adobe recently released an “LLMoptimizer” tool that detects whether a
+page is being browsed by an LLM or a human, then serves different
+versions accordingly. This is not the ideal approach. If you can make
+content better for LLMs, you’ll make it better for disabled people and
+for everyone else. The solution isn’t to serve different content but to
+fix the underlying web page.</p>
+<h3 id="mx-requires-dedicated-roles">MX requires dedicated roles</h3>
+<p>Just as quality needs dedicated QA engineers, Machine Experience
+needs dedicated roles. Organisational psychology research demonstrates a
+consistent principle: when responsibility is shared across everyone,
+accountability evaporates. This phenomenon, known as diffusion of
+responsibility, shows that as group size increases, individual
+accountability decreases. Studies document this pattern clearly: 85% of
+individuals respond to emergencies when alone, but only 31% respond when
+four other people are present.<a href="#fn6" class="footnote-ref"
+id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>The workplace manifestation is predictable. When “quality is
+everyone’s responsibility,” organisations may proclaim quality as a
+shared value but assign no one specific accountability for maintaining
+standards. When “everyone’s responsible,” accountability vanishes.
+Research across DevOps implementations confirms this pattern: whilst
+successful DevOps cultures spread quality awareness throughout teams,
+they simultaneously maintain dedicated QA engineers who focus
+specifically on defining quality standards, designing validation
+frameworks, and preventing defects before production deployment.<a
+href="#fn7" class="footnote-ref" id="fnref7"
+role="doc-noteref"><sup>7</sup></a></p>
+<p>MX follows the same organisational pattern. Whilst everyone should
+understand MX principles - just as everyone should understand security
+principles or accessibility guidelines - accountability must rest with
+specific roles. Without designated MX ownership, organisations default
+to reactive fixes rather than proactive design.</p>
+<p>Consider the alternative: in companies where accessibility is
+“everyone’s responsibility” without dedicated specialists, accessibility
+often becomes nobody’s priority until legal pressure forces attention.
+The 5% user base doesn’t generate enough urgency. Similarly, if MX
+becomes “everyone’s job,” it will vanish under pressure from visible
+users until AI-mediated commerce failures create business impact.</p>
+<p>Successful organisations structure MX accountability clearly:</p>
+<p>Dedicated MX specialists focus on defining agent-readability
+standards, auditing implementations, and preventing agent failures
+before deployment. They work alongside UX designers, frontend
+developers, and accessibility specialists, bringing specific expertise
+in semantic structure, metadata schemas, and agent behaviour
+patterns.</p>
+<p>Alongside these specialists, MX awareness needs to be distributed.
+Frontend developers, content creators, and UX designers understand MX
+principles as part of their core competencies, just as they understand
+responsive design or browser compatibility. They implement MX patterns
+in daily work but rely on specialists for complex decisions and
+validation.</p>
+<p>Executive accountability ties it together. Senior leadership assigns
+clear ownership for MX outcomes, provides resources for specialist
+roles, and tracks MX metrics alongside traditional performance
+indicators. Without executive commitment, MX specialists lack authority
+to influence architectural decisions.<a href="#fn8" class="footnote-ref"
+id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<h4 id="mx-organisational-models">MX organisational models</h4>
+<p>Successful MX implementation requires clear organisational ownership.
+Three common models emerge:</p>
+<p>The first model expands an existing accessibility team. Organisations
+with mature accessibility practices can expand existing roles. A senior
+accessibility specialist who understands semantic HTML already possesses
+foundational MX knowledge. Adding Schema.org expertise, agent behaviour
+patterns, and metadata validation creates an MX specialist without
+separate headcount. This model works because technical patterns overlap
+substantially. Both disciplines require semantic structure, explicit
+state, persistent feedback, and clear hierarchy.</p>
+<p>The second model creates a cross-functional MX practice. Larger
+organisations establish MX as a dedicated practice area reporting to
+CTO, CDO, or VP Engineering. The team includes:</p>
+<ul>
+<li>MX Architects: Define standards, audit implementations, prevent
+failures</li>
+<li>MX Engineers: Implement patterns in templates and publication
+layers</li>
+<li>MX Analysts: Measure agent compatibility, track conversion rates,
+identify gaps</li>
+</ul>
+<p>This model treats MX as infrastructure (similar to security or
+performance), requiring specialised expertise and executive
+accountability.</p>
+<p>The third model distributes MX ownership. Organisations embed MX
+responsibilities across existing roles:</p>
+<ul>
+<li>Frontend developers implement semantic patterns</li>
+<li>Content strategists define metadata requirements</li>
+<li>QA engineers validate agent compatibility</li>
+<li>Accessibility specialists advise on convergence patterns</li>
+</ul>
+<p>This model requires strong MX governance documentation and clear
+standards, as accountability is distributed rather than centralised.</p>
+<p>Model choice depends on organisational maturity, existing
+accessibility investment, and strategic importance of agent-mediated
+traffic. Organisations with 10%+ AI referral traffic typically adopt
+Model 2 (dedicated practice). Those just starting typically adopt Model
+3 (distributed) and migrate to Model 1 or 2 as agent traffic grows.</p>
+<p>The convergence between MX and accessibility creates practical
+advantages: organisations can expand existing accessibility roles rather
+than create entirely new teams. A senior accessibility specialist who
+understands semantic HTML already possesses foundational MX knowledge.
+Both disciplines require semantic structure, explicit state, persistent
+feedback, and clear hierarchy. The difference lies in application:
+accessibility focuses on user outcomes (can screen reader users
+navigate?), whilst MX focuses on machine outcomes (can agents extract
+pricing accurately?). Adding Schema.org expertise and agent behaviour
+patterns to an accessibility specialist’s skill set creates an MX
+practitioner without requiring separate headcount.</p>
+<p>The commercial urgency makes dedicated roles essential. First-mover
+advantage exists. Sites that work early become trusted sources that
+agents return to repeatedly. Organisations treating MX as “everyone’s
+responsibility” will fall behind competitors who assign clear
+accountability.</p>
+<p>I’ve developed an analyser that does for LLMs what tools like
+Screaming Frog does for SEO. It checks whether websites implement best
+practices for AI consumption:</p>
+<ul>
+<li>Are elements in the right order?</li>
+<li>Are there toast notifications or screen changes that LLMs won’t
+understand?</li>
+<li>Are there patterns that would confuse disabled users?</li>
+<li>and many more</li>
+</ul>
+<p>The tool audits websites, provides management reports with actionable
+information, and tracks progress over time, alerting organisations to
+any regressions.</p>
+<h2 id="how-agents-access-websites---training-vs-inference">How agents
+access websites - training vs inference</h2>
+<p>Before understanding the 5-stage journey agents take through your
+website, you must distinguish between two fundamentally different
+mechanisms of website access. These mechanisms operate on different
+timescales, use different technologies, and have different implications
+for Machine Experience implementation. Yet both benefit from the same
+underlying structural patterns.</p>
+<h3
+id="training-time-ingestion---historical-knowledge-building">Training-time
+ingestion - historical knowledge building</h3>
+<p>During model training, large language models ingest web content
+through datasets like Common Crawl - massive archives of crawled
+websites that form the knowledge base agents draw upon when answering
+queries. This ingestion happens months or years before agents interact
+with users, making it fundamentally historical rather than
+real-time.</p>
+<p>Common Crawl operates as a web archive service that periodically
+crawls public websites, respecting robots.txt directives and sitemap.xml
+files. The crawled content becomes part of training datasets that teach
+models about the structure, patterns, and information available on the
+web. When agents reference your product specifications or company
+information without visiting your live site, they’re drawing from this
+historical knowledge base acquired during training.</p>
+<p>This training-time access has specific characteristics. It’s
+indirect: your website doesn’t interact with the model; it interacts
+with crawlers that build datasets used later for training. It’s
+historical: the content the model learns from could be months or years
+old by the time users interact with the trained agent. It’s complete:
+crawlers attempt to index entire sites systematically, following
+sitemaps and link structures. And crucially, it respects robots.txt:
+ethical crawlers honour your access control directives.</p>
+<p>The linguistic bias mentioned earlier stems from this training phase.
+When approximately 44% of Common Crawl consists of English content
+whilst no other language exceeds 6%, this imbalance becomes permanently
+embedded in the model’s statistical patterns during training. The model
+doesn’t “learn” languages equally; it builds probability distributions
+weighted toward English-language patterns.</p>
+<h3
+id="inference-time-access---real-time-direct-interaction">Inference-time
+access - real-time direct interaction</h3>
+<p>During user queries, agents may directly access your website in real
+time. When someone asks ChatGPT “What laptops does Example Store
+currently offer?”, the agent might fetch your live website using browser
+automation, API calls, or direct HTTP requests. This is inference-time
+access - the agent retrieving current information whilst processing a
+specific user query.</p>
+<p>This direct access operates differently from training-time ingestion.
+It’s direct: the agent or its supporting infrastructure fetches your
+website whilst the user waits. It’s real-time: the content retrieved is
+your current live site, not a historical snapshot. It’s specific: the
+agent targets particular pages or information relevant to the user’s
+query rather than fully crawling your entire site. And critically, it
+may not respect robots.txt: agents executing user queries might access
+content regardless of crawl directives, treating robots.txt as guidance
+rather than absolute constraint.</p>
+<p>Browser automation agents (using frameworks like Playwright or
+Puppeteer) demonstrate inference-time access clearly. When users ask
+questions requiring current information, these agents launch headless
+browsers, navigate to relevant pages, execute JavaScript, wait for
+dynamic content to load, and extract the specific information needed to
+answer the query. This happens in seconds during the user’s
+conversation, not months earlier during model training.</p>
+<p>The distinction matters for authentication and authorisation. Content
+blocked by robots.txt won’t enter training datasets through Common
+Crawl, but inference-time agents actively executing user queries might
+access that content anyway. If your content truly must remain private,
+authentication mechanisms (login requirements, API keys, IP
+restrictions) provide reliable access control whilst robots.txt alone
+does not.</p>
+<h3 id="why-both-mechanisms-matter-for-machine-experience">Why both
+mechanisms matter for Machine Experience</h3>
+<p>Understanding this distinction changes how you implement Machine
+Experience patterns. Some patterns primarily serve training-time
+ingestion. Others primarily benefit inference-time access. The most
+effective patterns serve both mechanisms simultaneously.</p>
+<p>Sitemap.xml serves both mechanisms. During training, crawlers follow
+your sitemap to discover and index your content structure fully. During
+inference, agents might fetch your sitemap to understand your current
+site architecture before targeting specific pages. One file, two access
+mechanisms, both benefiting from clear hierarchical structure.</p>
+<p>Semantic HTML serves both mechanisms. Training datasets built from
+semantically marked-up content teach models better structural patterns
+than datasets built from visual-only HTML. At inference time, agents
+parsing your live site extract information more reliably when heading
+hierarchies, landmark roles, and semantic elements provide explicit
+structure. The same markup benefits both phases.</p>
+<p>Schema.org structured data serves both mechanisms particularly well.
+During training, JSON-LD blocks teach models about entity relationships,
+product attributes, and structured information patterns. At inference
+time, agents can directly parse JSON-LD to extract current pricing,
+availability, ratings, and specifications without needing to interpret
+prose descriptions. Training benefit and inference benefit from
+identical implementation.</p>
+<p>The llms.txt file has a structural problem that limits its reach. It
+is served as a text or markdown MIME type, not HTML. Common Crawl
+ingests HTML pages; it does not typically ingest non-HTML files. And
+llms.txt is rarely included in sitemap.xml. This means training-time
+crawlers may never discover it, so its content never enters model
+knowledge bases. At inference time, agents typically do not fetch
+llms.txt either; it is too broad and untargeted for specific user
+queries. An agent answering “What laptops does Example Store sell?” goes
+straight to product pages, not a site-level directory file. The result:
+llms.txt risks falling between both mechanisms, serving neither
+effectively. To close this gap today, publish the same content as an
+HTML page (for example, <code>/llms.html</code> or a rendered
+<code>/about/for-agents</code> page) and include that page in your
+sitemap. Training crawlers ingest the HTML version during their periodic
+crawl, and the structured guidance becomes part of the model’s knowledge
+about your site. The Gathering (the independent standards body that
+governs MX specifications) is proposing a new standard to address this
+critical lack, ensuring agent discovery files are properly ingested by
+both training and inference mechanisms.</p>
+<h3 id="training-vs-learning-vs-codification">Training vs learning vs
+codification</h3>
+<p>A common misconception: agents do not get “trained” when they visit
+your site. Their neural network weights are fixed. What actually happens
+involves three distinct layers:</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 33%" />
+<col style="width: 15%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What Happens</th>
+<th>Cost</th>
+<th>Persistence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Training</strong> (AI company’s work)</td>
+<td>Models learn general capabilities from datasets like Common Crawl —
+HTML syntax, Schema.org patterns, structured data extraction</td>
+<td>$50-100M per model (one-time)</td>
+<td>Permanent but historical</td>
+</tr>
+<tr>
+<td><strong>In-context learning</strong> (per session)</td>
+<td>Agent reads your HTML, understands your specific patterns, navigates
+your site</td>
+<td>$0.10-1.00 per session</td>
+<td><strong>Disappears when session ends</strong></td>
+</tr>
+<tr>
+<td><strong>Codification</strong> (what MX creates)</td>
+<td>Semantic HTML and Schema.org markup capture knowledge permanently in
+the page itself</td>
+<td>Time to implement (one-time)</td>
+<td><strong>Permanent and reusable</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Without MX, every agent must re-learn your site structure from
+scratch every session: re-read, re-discover navigation, extract
+information, then forget everything. With MX, the structure IS the
+captured knowledge. Agents spend zero time learning and 100% of their
+processing capacity extracting accurate information. Implement once,
+every agent benefits forever, saving compute and energy costs as
+well.</p>
+<p>The 5-stage journey described next spans both training-time ingestion
+(Discovery) and inference-time access (Citation, Search, Transaction,
+Return). The same MX patterns serve both mechanisms.</p>
+<h2 id="stage-mx-journey">5-stage MX journey</h2>
+<p>Your website has machine readers right now. People are asking ChatGPT
+about your products, using Copilot to compare your services, and running
+agents to check your availability. When agents successfully complete
+this journey, they build computational trust in your site. When they
+fail at any stage, they disappear from recommendations and never
+return.</p>
+<p>When AI agents interact with your website, they follow a predictable
+5-stage journey with specific technical requirements at each stage:</p>
+<figure>
+<img src="chapter-00-5-stage-mx-journey.svg"
+alt="The 5-Stage MX Journey — Discovery, Citation, Search and Compare, Price Understanding, Purchase Confidence" />
+<figcaption aria-hidden="true">The 5-Stage MX Journey — Discovery,
+Citation, Search and Compare, Price Understanding, Purchase
+Confidence</figcaption>
+</figure>
+<h3 id="stage-1---discovery">Stage 1 - discovery</h3>
+<p>The agent doesn’t know you exist. You’re not in its knowledge
+base.</p>
+<p>An important distinction: as explained in the previous section,
+discovery happens through two mechanisms. Training-time ingestion builds
+the historical knowledge base through datasets like Common Crawl, where
+agents learn about your site during model training months or years
+before user interactions. Inference-time access occurs when agents
+search for current information during user queries through direct site
+access and browser automation. Both mechanisms require the same MX
+patterns (sitemap.xml, semantic HTML, structured metadata), but
+understanding the distinction matters for security, authentication, and
+content freshness expectations.</p>
+<p>MX requires crawlable structure (robots.txt compliance for
+training-time crawlers, sitemap.xml for both mechanisms), semantic HTML
+markup that serves training datasets and live parsing, server-side
+rendering for JavaScript-heavy content, and quality content that search
+engines and agents can discover and rank. As a side benefit, these
+patterns also improve SEO (organic search traffic) and WCAG compliance
+(semantic structure).</p>
+<p>If you fail here, the agent recommends competitors and never mentions
+you. You don’t exist in their knowledge base (training failure) or they
+cannot find current information when users ask (inference failure).</p>
+<p><em>We implement MX patterns for agent discovery through both
+training and inference mechanisms. SEO improvement is an automatic
+outcome, not a separate task.</em></p>
+<h3 id="stage-2---citation-recommendation">Stage 2 - citation
+(recommendation)</h3>
+<p>The agent is aware of your site and can recommend it.</p>
+<p>MX requires fact-level clarity (each statistic, definition, concept
+needs standalone clarity), structured data (Schema.org JSON-LD) for AI
+platforms, and citation-worthy content architecture optimised for being
+featured in AI responses, not just found. These patterns also improve
+GEO (Generative Engine Optimization, citations in AI-generated
+responses), SEO (rich snippets), and WCAG compliance (clear content
+structure).</p>
+<p>If you fail here, the agent knows you exist but can’t confidently
+recommend you. It hallucinates details or skips your site entirely.</p>
+<p><em>We implement MX patterns for agent citations. GEO improvement is
+an automatic outcome, not a separate task.</em></p>
+<h3 id="stage-3---search-and-compare">Stage 3 - search and compare</h3>
+<p>The agent is building comparison lists, sorting by features,
+evaluating options.</p>
+<p>MX requires JSON-LD microdata at the pricing level, explicit
+comparison attributes (product features, specifications), and semantic
+HTML that agents can parse for feature extraction. These patterns also
+improve GEO (AI comparisons), SEO (structured data), and WCAG compliance
+(clear data presentation).</p>
+<p>If you fail here, the agent cannot understand what you offer or how
+you compare. It skips you in comparisons entirely.</p>
+<p><em>We implement MX patterns for agent comparison tasks. Structured
+data benefits multiple disciplines automatically.</em></p>
+<h3 id="stage-4---price-understanding">Stage 4 - price
+understanding</h3>
+<p>The agent needs exact pricing to make recommendations.</p>
+<p>MX requires Schema.org types (Product, Offer, PriceSpecification),
+unambiguous pricing structure with currency specification (ISO 4217
+codes), validation to prevent decimal formatting errors, and clear price
+markup that prevents magnitude misinterpretation. These patterns also
+improve SEO (product rich results), GEO (pricing citations), and WCAG
+compliance (clear pricing).</p>
+<p>If you fail here, agents misunderstand costs by orders of magnitude.
+Misinterpreting European decimal formatting (€2.030,00 vs £2,030) can
+produce 100x multiplication errors, or cross-region pricing confusion
+leaves buyers unable to determine actual delivered cost.</p>
+<p><em>We implement MX patterns for agent price parsing. Schema.org
+benefits multiple disciplines automatically.</em></p>
+<h3 id="stage-5---purchase-confidence">Stage 5 - purchase
+confidence</h3>
+<p>Can the agent complete checkout with confidence?</p>
+<p>MX requires no hidden state buried in JavaScript (state must be
+DOM-reflected), explicit form semantics (<code>&lt;button&gt;</code> not
+<code>&lt;div class="btn"&gt;</code>), persistent feedback (role=“alert”
+for important messages), data-state attributes for checkout progress
+tracking, and UCP (Universal Commerce Protocol) support for standardised
+commerce interactions. These patterns also improve WCAG (form
+accessibility) and user experience (faster checkouts for humans
+too).</p>
+<p>If you fail here, the entire commerce chain breaks. The agent cannot
+see what buttons do, cannot track checkout progress, and times out and
+abandons the cart.</p>
+<p><em>We implement MX patterns for agent checkout completion.
+Accessibility and UX improvements are automatic outcomes.</em></p>
+<h3 id="catastrophic-failure">Catastrophic failure</h3>
+<p>Miss any stage and the entire commerce chain breaks. Discovery
+requires semantic HTML. Citation requires structured data. Comparison
+requires JSON-LD. Price understanding requires Schema.org. Confidence
+requires explicit state. At every stage, your website’s structure
+determines success or failure.</p>
+<p>Sites that successfully complete the full journey gain computational
+trust - agents return for more purchases through learned behaviour.
+Sites that fail at any stage disappear from the agent’s map permanently.
+Unlike humans who persist through bad UX and can be won back with
+improvements, or a phone call to the support team, agents provide no
+analytics visibility and offer no second chance.</p>
+<h2 id="broader-context">Broader context</h2>
+<p>Whilst I’ve been doing this work, I’ve had Claude create blog posts
+and HTML web pages. I really do not need a CMS anymore. For Adobe and
+their Franklin/Edge Delivery Services world, the future is clear: the
+Content Hub becomes a data lake, and AI agents simply consume from that
+data lake.</p>
+<p>Matt Garrepy from CMS Critic acknowledged this trajectory in our
+recent conversation. Large enterprises will likely maintain systems for
+compliance, governance, and regulatory requirements in the near term,
+but downstream the CMS as we know it will transform fundamentally. The
+question becomes: is the CMS a destination, a proprietary dashboard you
+log into, or is it an invisible workflow embedded in the tools creators
+already use?<a href="#fn9" class="footnote-ref" id="fnref9"
+role="doc-noteref"><sup>9</sup></a></p>
+<p>I praised Pantheon’s approach of not requiring content creation
+inside the CMS. People use elegant, easy tools for content creation and
+publish directly from those tools. For twenty-five years, the industry
+built around structured authoring in centralised interfaces. That model
+is dissolving. Systems like Adobe Edge Delivery Services and Pantheon
+treat Google Docs and Excel as the primary interface, turning the CMS
+into a governance layer rather than a destination. AI agents accelerate
+this shift. When autonomous agents can generate and structure content on
+demand, the discrete CMS function disappears into the workflow
+itself.</p>
+<p>The implication for CMS vendors is stark: the CMS that serves
+machine-readable content survives. The one that does not gets bypassed.
+MX does not replace the CMS. It gives the CMS a new capability that
+keeps it relevant. Agents go through platforms that provide explicit
+structure, and around platforms that do not. CMS seems to mean Content
+Marketing Systems in the AI world. I’m not sure that’s what it always
+meant, but it does now.</p>
+<h2 id="implementation-support">Implementation support</h2>
+<p>The evidence that MX works is already visible. Adobe Experience
+Manager’s Generate Variations feature demonstrates MX principles in
+practice: design work that previously required 75 days was completed in
+5 days, producing 60+ variations with 30% higher click-through rates
+than manually created alternatives. The monorepo case study earlier in
+this chapter shows the same pattern: $0.50 in initial codification,
+break-even at the second use, zero errors after that. These are not
+hypothetical projections. They are measured outcomes from real
+implementations.</p>
+<p>If you need help implementing these patterns in your organisation,
+professional services demonstrate these approaches with four strategic
+outcomes:</p>
+<p>First, there’s first-mover computational trust. Sites implementing MX
+early build trust that agents learn and return to repeatedly. Latecomers
+face an invisible disadvantage in agent recommendations.</p>
+<p>Second, revenue recovery from AI-mediated commerce. The 700% surge in
+AI referrals represents traffic you’re either capturing or losing to
+competitors who provide explicit structure. You see nothing in your
+analytics when agents move on.</p>
+<p>Third, strategic asset portability. Implementation creates sovereign,
+platform-independent assets. Your reviews, product knowledge, and
+customer data become portable across any platform or AI agent, breaking
+vendor lock-in.</p>
+<p>Fourth, operational efficiency through deterministic outputs.
+Structured data and SOPs reduce inference costs at AI data centres by
+providing deterministic answers rather than forcing agents to reason
+through probabilistic patterns. When agents read facts instead of
+inferring meaning, hallucination drops whilst energy consumption
+decreases, operational savings that compound with each interaction.</p>
+<p>The Web Audit Suite offers professional website analysis for
+agent-readiness, identifying patterns that block AI agents and users
+with disabilities whilst providing priority-based recommendations.
+Implementation consulting helps teams apply these patterns to their
+specific platforms and architectures, whether working with custom
+applications, CMS platforms, or static site generators.</p>
+<p>These services apply the book’s patterns in practical client work.
+The same principles that improve discoverability by AI agents also
+improve search engine rankings and accessibility compliance - one
+implementation serves multiple audiences. For more information, contact
+<a href="mailto:tom.cranstoun@gmail.com"
+class="email">tom.cranstoun@gmail.com</a> or visit <a
+href="https://allabout.network"
+class="uri">https://allabout.network</a>.</p>
+<h2 id="the-gathering">The Gathering</h2>
+<p>MX relies on existing web standards wherever possible, but the gaps
+between those standards need governance. Who decides what metadata
+fields are required? How should agent discovery files work? What
+conventions ensure interoperability across platforms?</p>
+<p>The Gathering is an independent, community-governed standards body
+for Machine Experience. It develops open standards that enable content
+to be understood, interpreted, and processed more consistently by both
+people and AI systems. The standard is open. No fees. No gatekeeping.
+Anyone can read drafts and track progress.<a href="#fn10"
+class="footnote-ref" id="fnref10"
+role="doc-noteref"><sup>10</sup></a></p>
+<p>Standards move through a four-stage process: <strong>Propose</strong>
+(a contributor outlines the problem, defines scope and non-goals),
+<strong>Review</strong> (the community provides feedback, editors
+maintain consistency), <strong>Call for Consensus</strong> (a defined
+review window checks for unresolved objections), and
+<strong>Ratify</strong> (the draft is published as a versioned standard
+with full history preserved). All drafts, discussions, review notes, and
+decision records are hosted publicly on Stream, so participants can
+understand how each standard formed. Contributors include writers,
+editors, developers, content designers, and researchers, the
+practitioners who build the web agents consume.</p>
+<p>The Gathering addresses gaps that existing standards leave
+unresolved: defining what metadata is required, how access is
+controlled, how quality is measured, and how governance works. The
+llms.txt training-and-inference gap described earlier in this chapter is
+one example: a critical file format that falls between both access
+mechanisms because it is neither HTML (for training crawlers) nor
+targeted enough for inference-time queries. The Gathering is proposing a
+new standard to address this lack, ensuring agent discovery files are
+properly ingested by both mechanisms.</p>
+<p>The relationship is straightforward: MX is the practice. The
+Gathering is the governance. Like Linux running on POSIX, a
+community-owned standard, with products built on it.</p>
+<hr />
+<p><strong>Footnotes and references for this chapter are available
+online:</strong></p>
+<figure>
+<img src="chapter-00-footnotes-qr.svg" alt="Footnotes and references" />
+<figcaption aria-hidden="true">Footnotes and references</figcaption>
+</figure>
+<p><a
+href="https://allabout.network/mx/footnotes/shared-chapter-00.html"
+class="uri">https://allabout.network/mx/footnotes/shared-chapter-00.html</a></p>
+<hr />
+<hr />
+<h2 id="two-halves-of-the-agentic-web">Two halves of the agentic
+web</h2>
+<p>The industry is converging on two complementary standards for how
+agents interact with the web, and understanding both is essential.</p>
+<p>The first half is content understanding: making what’s on the page
+machine-readable. This is what MX provides. Structured metadata,
+semantic HTML, explicit context. The agent reads your content and knows
+what it means without guessing. MX has been solving this problem since
+2024, when we first published on AI-centric content systems, two years
+before the standards bodies caught up.</p>
+<p>The second half is action execution: giving agents structured ways to
+interact with page functionality. This is what WebMCP (Web Model Context
+Protocol) provides. Launched by Google and Microsoft in February 2026 as
+a W3C draft standard, WebMCP lets websites expose callable tools (search
+functions, booking forms, checkout flows) directly to agents through a
+browser API. Instead of an agent scraping DOM elements and guessing
+which button does what, a site can register a
+<code>searchProducts(query, filters)</code> tool that the agent calls
+directly and receives structured results.</p>
+<p>WebMCP solves a real problem. But it only solves half the problem. An
+agent calling <code>getDresses()</code> receives product data, but still
+has to reason about that data to decide which dresses are eco-friendly,
+which are appropriate for a wedding, which match the user’s preferences.
+That reasoning is expensive and unreliable when the data lacks
+structured metadata.</p>
+<p>With MX, the reasoning becomes lookup. Tags, categories, attributes,
+all explicit in the metadata. The agent doesn’t need to infer that a
+dish is gluten-free by parsing a description paragraph. The metadata
+says so.</p>
+<p>WebMCP gives agents hands. MX gives agents eyes. One lets them act.
+The other lets them understand. Together they form the companion web,
+the machine-readable layer alongside the human web. Neither works
+alone.</p>
+<h2 id="whats-next">What’s next</h2>
+<p>This chapter covered the business case, the technical reality, and
+the structural solution. You’ve seen what agents need, why they fail
+without it, and what MX implementation looks like in practice.</p>
+<p>The remaining chapters cover practical implementation:
+platform-specific patterns, organisational change management, and the
+technical architecture that makes your web presence agent-ready. The
+rest of this book shows you how to build it.</p>
+<hr />
+<p>Cog-Nova-MX Ltd — Making the web work for everyone and everything
+that uses it.</p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Tom Cranstoun, “A CMS Consultant’s Takeaways from CMS
+Kickoff 2024,” CMS Critic, February 2024. The article argued that AI’s
+real value lies in consuming content, not generating it, and proposed
+treating “Machine” as a fourth device type alongside mobile, tablet, and
+desktop.<br />
+<a
+href="https://cmscritic.com/a-cms-consultants-takeaways-from-cms-kickoff-2024"
+class="uri">https://cmscritic.com/a-cms-consultants-takeaways-from-cms-kickoff-2024</a><a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Anthropic launched Claude Cowork on 12 January 2026,
+marking a fundamental shift from chatbot to autonomous digital
+colleague. The system manages local file systems, orchestrates
+workflows, and executes complex tasks through multi-agent architecture.
+Initially available to Max subscribers, it expanded to Pro tier
+subscribers ($20/month) shortly after launch. See:<br />
+<a
+href="https://venturebeat.com/technology/anthropic-launches-cowork-a-claude-desktop-agent-that-works-in-your-files-no"
+class="uri">https://venturebeat.com/technology/anthropic-launches-cowork-a-claude-desktop-agent-that-works-in-your-files-no</a><br />
+<a
+href="https://markets.financialcontent.com/stocks/article/tokenring-2026-1-19-anthropic-unveils-claude-cowork-the-first-truly-autonomous-digital-colleague"
+class="uri">https://markets.financialcontent.com/stocks/article/tokenring-2026-1-19-anthropic-unveils-claude-cowork-the-first-truly-autonomous-digital-colleague</a><br />
+<a
+href="https://techcrunch.com/2026/01/12/anthropics-new-cowork-tool-offers-claude-code-without-the-code/"
+class="uri">https://techcrunch.com/2026/01/12/anthropics-new-cowork-tool-offers-claude-code-without-the-code/</a><a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>For deeper exploration of AI statistical foundations and
+linguistic bias, see my blog posts:<br />
+<a
+href="https://allabout.network/blogs/ddt/ai/the-stripped-down-truth-how-ai-actually-works-without-the-fancy-talk"
+class="uri">https://allabout.network/blogs/ddt/ai/the-stripped-down-truth-how-ai-actually-works-without-the-fancy-talk</a><br />
+<a
+href="https://allabout.network/blogs/ddt/ai/does-ai-mean-algorithmic-interpolation"
+class="uri">https://allabout.network/blogs/ddt/ai/does-ai-mean-algorithmic-interpolation</a><br />
+<a
+href="https://allabout.network/blogs/ddt/ai/the-digital-language-caste-system"
+class="uri">https://allabout.network/blogs/ddt/ai/the-digital-language-caste-system</a><br />
+<a
+href="https://allabout.network/blogs/ddt/ai/the-mathematical-heartbeat-of-ai"
+class="uri">https://allabout.network/blogs/ddt/ai/the-mathematical-heartbeat-of-ai</a><br />
+<a
+href="https://allabout.network/blogs/ddt/ai/the-tokenization-trap-how-ai-actually-processes-german"
+class="uri">https://allabout.network/blogs/ddt/ai/the-tokenization-trap-how-ai-actually-processes-german</a><br />
+<a
+href="https://allabout.network/blogs/ddt/ai/the-no-elephants-problem-why-ai-struggles-with-what-not-to-do"
+class="uri">https://allabout.network/blogs/ddt/ai/the-no-elephants-problem-why-ai-struggles-with-what-not-to-do</a><br />
+<a
+href="https://allabout.network/blogs/ddt/ai/when-a-five-year-old-beats-an-ai-at-its-own-game"
+class="uri">https://allabout.network/blogs/ddt/ai/when-a-five-year-old-beats-an-ai-at-its-own-game</a><br />
+<a
+href="https://allabout.network/blogs/ddt/ai/a-framework-for-evaluating-ai-confidence"
+class="uri">https://allabout.network/blogs/ddt/ai/a-framework-for-evaluating-ai-confidence</a><a
+href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>For a practitioner’s account of how these principles
+reshape day-to-day building practice.<br />
+<a
+href="https://allabout.network/mx/principles-changed-how-i-build.html"
+class="uri">https://allabout.network/mx/principles-changed-how-i-build.html</a><a
+href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>For a fuller treatment of data sovereignty’s two
+dimensions — jurisdictional control and ownership control — and how MX
+practices address both.<br />
+<a href="https://allabout.network/blogs/mx/data-sovereignty.html"
+class="uri">https://allabout.network/blogs/mx/data-sovereignty.html</a><a
+href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Diffusion of responsibility research demonstrates
+predictable patterns: individual action rates drop from 85% (alone) to
+62% (one other person) to 31% (four others). See:<br />
+<a href="https://www.simplypsychology.org/bystander-effect.html"
+class="uri">https://www.simplypsychology.org/bystander-effect.html</a><br />
+<a
+href="https://thedecisionlab.com/reference-guide/psychology/diffusion-of-responsibility"
+class="uri">https://thedecisionlab.com/reference-guide/psychology/diffusion-of-responsibility</a><a
+href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>DevOps implementations demonstrate the balance between
+shared responsibility and specialised roles. Whilst everyone takes
+responsibility for quality, dedicated QA engineers focus on defining
+standards, designing test frameworks, and preventing bugs. See:<br />
+<a href="https://www.qamadness.com/devops-and-the-role-of-qa/"
+class="uri">https://www.qamadness.com/devops-and-the-role-of-qa/</a><br />
+<a
+href="https://www.splunk.com/en_us/blog/learn/devops-roles-responsibilities.html"
+class="uri">https://www.splunk.com/en_us/blog/learn/devops-roles-responsibilities.html</a><a
+href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Research shows 82% of respondents have limited ability
+to hold others accountable, and only 14% of employees feel their
+performance is managed in ways that inspire responsibility. Clear
+ownership structures address this gap. See:<br />
+<a
+href="https://www.forrestadvisors.com/insights/organizational-design/accountability-organizational-design-fostering-responsibility/"
+class="uri">https://www.forrestadvisors.com/insights/organizational-design/accountability-organizational-design-fostering-responsibility/</a><br />
+<a
+href="https://medium.com/@csw11235/responsibility-accountability-and-ownership-da054169fcce"
+class="uri">https://medium.com/@csw11235/responsibility-accountability-and-ownership-da054169fcce</a><a
+href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>For the full argument that the CMS is shifting from
+destination to invisible workflow.<br />
+<a
+href="https://allabout.network/is-the-cms-a-destination-or-a-workflow"
+class="uri">https://allabout.network/is-the-cms-a-destination-or-a-workflow</a><a
+href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>The Gathering — open standards for Machine Experience.
+Community-governed, MIT licensed, practitioner-led.<br />
+<a href="https://tg.community"
+class="uri">https://tg.community</a><br />
+<a href="https://stream.tg.community"
+class="uri">https://stream.tg.community</a><br />
+<a href="https://tg.community/process"
+class="uri">https://tg.community/process</a><a href="#fnref10"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>
