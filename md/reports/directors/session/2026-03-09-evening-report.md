@@ -1,20 +1,20 @@
 ---
-title: "Co-Directors Report — Manuscript Quality Pass: Structure, Tone, and Deduplication"
+title: "Co-Directors Report — Manuscript Quality Pass: Structure, Tone, Deduplication, Footnotes, and Standards Argument"
 created: "2026-03-09"
 segment: "evening"
-version: "1.0"
+version: "2.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidentiality: internal
 ---
 
-# Co-Directors Report — Manuscript Quality Pass: Structure, Tone, and Deduplication
+# Co-Directors Report — Manuscript Quality Pass: Structure, Tone, Deduplication, Footnotes, and Standards Argument
 
 **9 March 2026 — Evening**
 
 ## Summary
 
-Building on the afternoon's introduction chapter PDF rebuild, the evening session was a sustained quality pass across both book manuscripts. Three distinct improvements were made: Chapter 00 was restructured into a two-part format with a clean executive exit point, absolutist claims about agent behaviour were hedged across nine manuscript files, and repeated statistics were deduplicated across eight files. The books now read with more authority — saying less, more precisely.
+Building on the afternoon's introduction chapter PDF rebuild, the evening session was a sustained quality pass across both book manuscripts. Five distinct improvements were made: Chapter 00 was restructured into a two-part format with a clean executive exit point, absolutist claims about agent behaviour were hedged across nine manuscript files, repeated statistics were deduplicated across eight files, seven footnotes with thirteen source URLs were added to verify all data claims in Chapter 00, and a standards argument (gallon/pint/fl oz ambiguity) was added to strengthen the case that explicit standards serve humans too — not just machines. The books now read with more authority — saying less, more precisely, and backing claims with sources.
 
 ## What Changed
 
@@ -30,6 +30,14 @@ A pass across nine manuscript files (Chapter 00, Corpus chapters 02, 04, 10-GEO,
 
 The Adobe Holiday 2025 statistics (700%, 500%, 30%), the "40% of deployed models" figure, and the £203,000 pricing error were being restated verbatim across multiple chapters. Chapter 00 is the shared introduction — readers encounter these numbers there first. Every subsequent mention now references Chapter 0 rather than restating the figures. The largest fix was in Handbook Chapter 03, which contained a near-verbatim copy of the entire "AI will figure it out" section from Chapter 00 — replaced with a concise summary. Chapter 00's platform launch count was also corrected from three to four (adding Anthropic Claude Cowork). The key phrase "your business, readable by every machine on earth" was bolded as a protected phrase.
 
+### Footnotes added for all data claims
+
+Seven footnotes with thirteen source URLs were added to Chapter 00, verifying every significant data claim. Sources include Adobe's Holiday 2025 shopping report (business.adobe.com), TechCrunch coverage of platform launches, Wikipedia and Euronews on the Adamuz train collision, Common Crawl's own statistics page, the W3C WebMCP draft specification, and Adobe's LLMoptimizer product page. The Hugging Face model growth claim was sourced to an AI World article confirming 1M to 2M models in 335 days.
+
+### Standards argument added (gallon/pint/fl oz)
+
+A new paragraph was added after the €2.030,00 pricing ambiguity example, arguing that the need for explicit standards is not unique to machines. US and Imperial gallons differ by 20%. US and British pints differ (473ml vs 568ml). Even the fluid ounce differs (29.6ml vs 28.4ml). The ISO system exists precisely because "everyone knows what a gallon means" was never true. MX applies the same principle to web content.
+
 ### Title page dates updated
 
 All book metadata configs (Corpus A4, Kindle, Chapter, Handbook) were updated from January 2026 to March 2026. PDFs and HTML regenerated.
@@ -38,10 +46,11 @@ All book metadata configs (Corpus A4, Kindle, Chapter, Handbook) were updated fr
 
 | Metric | Value |
 | ------ | ----- |
-| Commits this evening | 6 |
-| Files changed | 20+ (across 3 separate fixes) |
+| Commits this evening | 11 |
+| Files changed | 20+ (across 5 separate fixes) |
 | Net lines | -63 lines removed in deduplication pass alone |
 | Manuscripts touched | 12 unique files across Corpus and Handbook |
+| Footnotes added | 7 (with 13 source URLs) |
 
 ## Next Steps
 
@@ -59,3 +68,8 @@ All book metadata configs (Corpus A4, Kindle, Chapter, Handbook) were updated fr
 | `9ab2427e` | chore: update changelog — chapter-00 restructure, absolutist claims hedged |
 | `71dd8007` | fix: remove repeated statistics across manuscripts, reference chapter-00 instead |
 | `60dedf64` | chore: update changelog — repeated statistics deduplicated across manuscripts |
+| `7b8e7a96` | chore: update mx-outputs submodule with co-directors evening report |
+| `6cd5f733` | fix: add footnotes with sources for all unsourced data claims in chapter-00 |
+| `6a575a86` | chore: update changelog — chapter-00 footnotes added for all data claims |
+| `bc103d84` | fix: add gallon/pint standards argument to chapter-00 |
+| `6c3f1556` | chore: update changelog — gallon/pint standards argument added to chapter-00 |
