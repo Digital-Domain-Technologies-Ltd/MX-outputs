@@ -445,7 +445,7 @@ npm run audit:html:compare
 
 - MX: The Handbook — 2 Apr 2026
 - Frankfurt CMS Summit — 12 May 2026
-- MX: The Corpus — 1 Jul 2026
+- MX: The Protocols — 1 Jul 2026
 
 ---
 
@@ -613,9 +613,9 @@ Tom indicated "other priorities" for the rest of today. Based on REMINDERS.md, p
 
 - MX: The Handbook (2 Apr)
 - Frankfurt CMS Summit (12 May)
-- MX: The Corpus (1 Jul)
+- MX: The Protocols (1 Jul)
 
-**Post-Corpus:**
+**Post-Protocols:**
 
 - Maxine product launch planning
 

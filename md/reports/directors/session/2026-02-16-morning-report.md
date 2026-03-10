@@ -48,7 +48,7 @@ This insight drove a full integration across both books: 16 files updated with W
 
 - **11 files renamed** (earlier) — `createOutputPrompt` → `deliverable` across standards registries, bootloader config, reference docs, validator code, blog posts, and book appendix
 - **7 prose references updated** (earlier) — "prompting instructions" → "runbook" language; "AI reads" → "machine reads"
-- **16 book manuscript files updated with WebMCP positioning** — Corpus chapters 00, 03, 09, 11-15 + Glossary; Handbook chapters 02, 05, 07, 08, 10; Appendices J and L. Consistent "MX came first / hands vs eyes / companion web" narrative throughout
+- **16 book manuscript files updated with WebMCP positioning** — Protocols chapters 00, 03, 09, 11-15 + Glossary; Handbook chapters 02, 05, 07, 08, 10; Appendices J and L. Consistent "MX came first / hands vs eyes / companion web" narrative throughout
 - **allaboutv2 submodule** — coming-soon.html deleted, three new files (`.cog.html`, `.cog.md`, `.svg`) committed and pushed
 
 ---
@@ -103,7 +103,7 @@ Field names are user interface (from earlier). Your own landing page is user int
 | `929fc6f` | chore: capture accumulated changes — tool configs, session summaries, submodule pointers |
 | `4a5c5d5` | docs: morning co-directors report — language cleanup complete |
 | `1bf84b8` | plan: week 4 action plan — Boye prep, Dotfusion reconnect, Chapter 00, KDP |
-| `e3e3ab9` | docs: book manuscript updates — Corpus chapters, Handbook chapters, appendices |
+| `e3e3ab9` | docs: book manuscript updates — Protocols chapters, Handbook chapters, appendices |
 | `41a5887` | cog: coming-soon.html → coming-soon.cog.html + dev docs plan |
 | `a73e605` | chore: update changelog |
 | `eb69b75` | docs: morning co-directors report v2.0 — practising what we preach |

@@ -603,19 +603,19 @@ mx:
 | publications/mx-books/mx-code-examples/examples/static-site/generate-index.js | javascript | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/examples/validation/verify-ai-production.js | javascript | source | compliant | yes | yes |  |
 | publications/mx-books/mx-code-examples/examples/validation/verify-ai-simple.js | javascript | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-a.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-b.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-c.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-d.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-e.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-f.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-g.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-h.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-i.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-index.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-j.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-k.html | html | source | compliant | yes | yes |  |
-| publications/mx-books/mx-corpus/web/appendix-l.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-a.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-b.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-c.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-d.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-e.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-f.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-g.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-h.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-i.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-index.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-j.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-k.html | html | source | compliant | yes | yes |  |
+| publications/mx-books/mx-protocols/web/appendix-l.html | html | source | compliant | yes | yes |  |
 
 ### mx-audit/ (80 files, 98% compliant)
 
@@ -722,36 +722,36 @@ mx:
 | mx-maxine-lives/communications/blogs/html/allabout/mx-manifesto.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/allabout/shared-mx.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/allabout/what-is-machine-experience.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/about.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/about.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/accessibility-ai-convergence.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/accessibility-ai-convergence.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/benefits-of-mx.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/benefits-of-mx.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/common-mistakes.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/common-mistakes.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/contact.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/contact.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/content-that-manages-itself.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/content-that-manages-itself.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/explicit-over-implicit.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/explicit-over-implicit.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/implementation-examples.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/implementation-examples.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/index.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/index.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/key-principles.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/key-principles.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/our-approach.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/our-approach.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/our-services.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/our-services.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/principles-changed-how-i-build.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/principles-changed-how-i-build.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/what-is-mx.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/what-is-mx.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/why-mx-matters.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/corpus/why-mx-matters.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/about.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/about.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/accessibility-ai-convergence.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/accessibility-ai-convergence.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/benefits-of-mx.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/benefits-of-mx.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/common-mistakes.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/common-mistakes.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/contact.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/contact.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/content-that-manages-itself.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/content-that-manages-itself.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/explicit-over-implicit.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/explicit-over-implicit.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/implementation-examples.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/implementation-examples.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/index.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/index.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/key-principles.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/key-principles.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/our-approach.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/our-approach.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/our-services.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/our-services.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/principles-changed-how-i-build.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/principles-changed-how-i-build.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/what-is-mx.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/what-is-mx.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/why-mx-matters.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| mx-maxine-lives/communications/blogs/html/protocols/why-mx-matters.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/lifecycle/principles-changed-how-i-build.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/lifecycle/principles-changed-how-i-build.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/outputs/designing-workflows-for-humans-and-machines-from-a.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
@@ -869,7 +869,7 @@ mx:
 | html/blogs/mx/principles-changed-how-i-build.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | html/blogs/mx/principles-changed-how-i-build.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | html/books/chapters/chapter-00-what-are-ai-agents.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| html/books/corpus/mx-corpus.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
+| html/books/protocols/mx-protocols.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | scripts/generate-index.sh | shell | generated | generated-needs-update | no | no | Generated file — requires generator update |
 
 ### mx-reginald/ (20 files, 100% compliant)

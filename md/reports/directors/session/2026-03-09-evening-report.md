@@ -24,7 +24,7 @@ The shared introduction chapter was reorganised into two explicit parts. Part A 
 
 ### Absolutist agent behaviour claims hedged
 
-A pass across nine manuscript files (Chapter 00, Corpus chapters 02, 04, 10-GEO, executive summary, Handbook chapters 03, 04, 10, 11) changed behavioural predictions from absolute to hedged. "Agents skip you" became "agents may skip you". "Agents return to" became "agents are more likely to return to". Technical facts (agents cannot see CSS) were kept absolute. The distinction matters: we can state what machines cannot do, but predicting what they will do in response requires hedging.
+A pass across nine manuscript files (Chapter 00, Protocols chapters 02, 04, 10-GEO, executive summary, Handbook chapters 03, 04, 10, 11) changed behavioural predictions from absolute to hedged. "Agents skip you" became "agents may skip you". "Agents return to" became "agents are more likely to return to". Technical facts (agents cannot see CSS) were kept absolute. The distinction matters: we can state what machines cannot do, but predicting what they will do in response requires hedging.
 
 ### Repeated statistics deduplicated
 
@@ -40,7 +40,7 @@ A new paragraph was added after the €2.030,00 pricing ambiguity example, argui
 
 ### Title page dates updated
 
-All book metadata configs (Corpus A4, Kindle, Chapter, Handbook) were updated from January 2026 to March 2026. PDFs and HTML regenerated.
+All book metadata configs (Protocols A4, Kindle, Chapter, Handbook) were updated from January 2026 to March 2026. PDFs and HTML regenerated.
 
 ## By the Numbers
 
@@ -49,7 +49,7 @@ All book metadata configs (Corpus A4, Kindle, Chapter, Handbook) were updated fr
 | Commits this evening | 11 |
 | Files changed | 20+ (across 5 separate fixes) |
 | Net lines | -63 lines removed in deduplication pass alone |
-| Manuscripts touched | 12 unique files across Corpus and Handbook |
+| Manuscripts touched | 12 unique files across Protocols and Handbook |
 | Footnotes added | 7 (with 13 source URLs) |
 
 ## Next Steps

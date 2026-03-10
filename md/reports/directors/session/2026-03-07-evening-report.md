@@ -49,9 +49,9 @@ Updated `package.json` PDF build scripts to use `metadata-chapter.yaml` instead 
 
 | File | Change |
 |------|--------|
-| `datalake/assets/configs/books/corpus/metadata.yaml` | Added etoolbox, heading protection |
-| `datalake/assets/configs/books/corpus/metadata-kindle.yaml` | Added all missing packages and fixes |
-| `datalake/assets/configs/books/corpus/metadata-chapter.yaml` | Added etoolbox, heading protection |
+| `datalake/assets/configs/books/protocols/metadata.yaml` | Added etoolbox, heading protection |
+| `datalake/assets/configs/books/protocols/metadata-kindle.yaml` | Added all missing packages and fixes |
+| `datalake/assets/configs/books/protocols/metadata-chapter.yaml` | Added etoolbox, heading protection |
 | `datalake/assets/configs/books/handbook/metadata.yaml` | Added etoolbox, tabcolsep, arraystretch, heading protection |
 | `package.json` | Updated 3 PDF build scripts to use metadata-chapter.yaml |
 | `CHANGELOG.md` | Documented changes |

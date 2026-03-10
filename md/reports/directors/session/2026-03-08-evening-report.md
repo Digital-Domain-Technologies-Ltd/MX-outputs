@@ -14,7 +14,7 @@ confidentiality: internal
 
 ## Summary
 
-Major content and infrastructure session. Chapter 0 received substantial new material: the MX metadata-agnostic principle, The Gathering standards body, compute/energy waste framing, a 5-stage MX Journey SVG diagram, and a complete footnote rewrite. We built a dynamic footnote page generator (cog + script) that produces HTML footnote pages and QR code link cards from markdown footnotes — wired as a prerequisite in the PDF pipeline. The session also included the Codex→Corpus rename and publications→manuscripts folder rename completed earlier today.
+Major content and infrastructure session. Chapter 0 received substantial new material: the MX metadata-agnostic principle, The Gathering standards body, compute/energy waste framing, a 5-stage MX Journey SVG diagram, and a complete footnote rewrite. We built a dynamic footnote page generator (cog + script) that produces HTML footnote pages and QR code link cards from markdown footnotes — wired as a prerequisite in the PDF pipeline. The session also included the Codex→Protocols rename and publications→manuscripts folder rename completed earlier today.
 
 Tom's editorial direction drove the content: MX should be positioned as metadata-agnostic (building on existing standards, adding light-touch conventions where gaps remain), and the compute/energy cost of hallucinations should be front and centre as a business argument.
 
@@ -51,8 +51,8 @@ Colour-coded diagram showing Discovery → Citation → Search & Compare → Pri
 
 ### Chapter 0 content expansion
 
-- **MX metadata-agnostic principle** — MX builds on Schema.org, RDFa, JSON-LD, EXIF, Dublin Core, Open Graph, etc. It adds light-touch conventions (YAML frontmatter, `.mx.yaml.md` sidecars) only where standards leave gaps. Surfaced in Handbook ch-05, Corpus ch-10, ch-12.
-- **Compute/energy waste statement** — Hallucinations and infilling waste inference compute, energy, and latency. Added to chapter-00, Handbook ch-01, Corpus ch-01 with different phrasing in each.
+- **MX metadata-agnostic principle** — MX builds on Schema.org, RDFa, JSON-LD, EXIF, Dublin Core, Open Graph, etc. It adds light-touch conventions (YAML frontmatter, `.mx.yaml.md` sidecars) only where standards leave gaps. Surfaced in Handbook ch-05, Protocols ch-10, ch-12.
+- **Compute/energy waste statement** — Hallucinations and infilling waste inference compute, energy, and latency. Added to chapter-00, Handbook ch-01, Protocols ch-01 with different phrasing in each.
 - **The Gathering** — Explained the independent, community-governed standards body (tg.community) and its role proposing a new standard for the llms.txt gap.
 - **llms.txt corrected** — Not HTML MIME type, not in sitemap.xml, not used at inference time. Falls between both access mechanisms.
 - **Footnotes rewritten** — URLs as visible link text (not page titles), multi-URL on separate lines.
@@ -61,12 +61,12 @@ Colour-coded diagram showing Discovery → Citation → Search & Compare → Pri
 
 - **Tables:** Visible striped rows (`#EEF0F3`), distinct header row (`#D9DEE4`), `\small` font for better column fit, `\toprule` redefined for header coloring
 - **Widow/orphan controls:** Added `\displaywidowpenalty`, `\brokenpenalty`, `\predisplaypenalty`; increased heading needspace (sections 10, subsections 8, subsubsections 6)
-- Applied consistently to Corpus metadata.yaml, Handbook metadata.yaml, `mx-pdf.sh`, and pdf-generator.cog.md
+- Applied consistently to Protocols metadata.yaml, Handbook metadata.yaml, `mx-pdf.sh`, and pdf-generator.cog.md
 
 ### Repository rename (earlier today)
 
 - `datalake/publications/` → `datalake/manuscripts/`
-- MX Codex → MX Corpus (401 files across 5 repos)
+- MX Codex → MX Protocols (401 files across 5 repos)
 
 ## Decisions Made
 
@@ -78,7 +78,7 @@ Colour-coded diagram showing Discovery → Citation → Search & Compare → Pri
 
 - Generate PDFs to verify table and widow improvements visually
 - Add footnotes to remaining chapters as they are finalised
-- Run full Corpus and Handbook PDF builds to validate end-to-end pipeline
+- Run full Protocols and Handbook PDF builds to validate end-to-end pipeline
 
 ## Commit Log
 
@@ -86,9 +86,9 @@ Colour-coded diagram showing Discovery → Citation → Search & Compare → Pri
 | ---- | ----------- |
 | `4f858d60` | refactor: rename datalake/publications to datalake/manuscripts |
 | `b3872035` | chore: update changelog and fix stale CLAUDE.md reference |
-| `26b7964c` | refactor: rename Codex to Corpus throughout |
-| `98eaa2c2` | refactor: rename Codex to Corpus throughout the repo |
-| `43fd749c` | chore: update changelog — Codex to Corpus rename |
+| `26b7964c` | refactor: rename Codex to Protocols throughout |
+| `98eaa2c2` | refactor: rename Codex to Protocols throughout the repo |
+| `43fd749c` | chore: update changelog — Codex to Protocols rename |
 | `d6367f96` | feat: expand chapter-00 with metadata-agnostic principle, The Gathering, compute cost statement, 5-stage SVG, and footnote system |
 | `7d4c5e9d` | feat: add footnote page generator cog and script |
 | `a3268f23` | fix: improve PDF table formatting and widow/orphan controls |

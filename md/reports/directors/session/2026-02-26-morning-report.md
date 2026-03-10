@@ -121,9 +121,9 @@ This architecture reduces AI hallucination by replacing inference with lookup.
 | London CMS Experts | 26 Feb 2026 | Today — lightning talk ready |
 | MX Handbook | 2 Apr 2026 | On track |
 | CMS Summit Frankfurt | 12 May 2026 | Demo preparation underway |
-| MX Corpus | 1 Jul 2026 | REGINALD docs ready for inclusion |
+| MX Protocols | 1 Jul 2026 | REGINALD docs ready for inclusion |
 
-The REGINALD documentation is positioned for the July Corpus release, not the Frankfurt demo. Frankfurt will demonstrate live MX principles; the registry architecture documentation supports the book.
+The REGINALD documentation is positioned for the July Protocols release, not the Frankfurt demo. Frankfurt will demonstrate live MX principles; the registry architecture documentation supports the book.
 
 ---
 
@@ -154,7 +154,7 @@ adf3ff5 docs: update changelog for 2026-02-26
 1. **Today:** London CMS Experts lightning talk (presentation ready)
 2. **This week:** Review REGINALD implementation plan with Scott
 3. **Before Frankfurt:** Finalise demo site and live Maxine interaction
-4. **Before July:** Integrate REGINALD documentation into Corpus manuscript
+4. **Before July:** Integrate REGINALD documentation into Protocols manuscript
 5. **Future:** Add Ed25519 signing to enable compliance levels 3-5
 
 ---

@@ -63,5 +63,5 @@ This is MX OS eating its own cooking — making the repository itself machine-re
 ## Next Steps
 
 - Commit remaining mx-outputs README timestamp update and this session report
-- Verify workflow paths still function (`npm run pdf:corpus-html`, blog generation)
+- Verify workflow paths still function (`npm run pdf:protocols-html`, blog generation)
 - Update REMINDERS.md with workflow verification item (if not already present)

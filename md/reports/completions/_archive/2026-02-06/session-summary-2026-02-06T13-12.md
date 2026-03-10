@@ -1,5 +1,5 @@
 ---
-title: "Rename 'The Bible' to 'The Corpus' across entire repository"
+title: "Rename 'The Bible' to 'The Protocols' across entire repository"
 created: "2026-02-06"
 sessionStart: "2026-02-06T12:00:00Z"
 sessionEnd: "2026-02-06T13:12:00Z"
@@ -8,20 +8,20 @@ contentType: "refactoring"
 status: "completed"
 ---
 
-# Session Summary: Bible to Corpus Rename
+# Session Summary: Bible to Protocols Rename
 
 ## Overview
 
-Completed a repo-wide rename of all human-readable references from "The Bible" / "MX-Bible" to "The Corpus" / "MX-Corpus", reflecting the book's title evolution. This was a large-scale refactoring touching 146 files across the main repository, followed by two step-commit cycles to clean up markdown lint issues.
+Completed a repo-wide rename of all human-readable references from "The Bible" / "MX-Bible" to "The Protocols" / "MX-Protocols", reflecting the book's title evolution. This was a large-scale refactoring touching 146 files across the main repository, followed by two step-commit cycles to clean up markdown lint issues.
 
 The rename preserved all filesystem paths (`packages/mx-the-bible/`, `manuscripts/bible/`), npm script names (`pdf:bible-*`), historical CHANGELOG entries, and completion session logs. Submodule contents were not changed (require separate per-repo updates).
 
 ## What Was Accomplished
 
-### 1. Bible to Corpus Rename (commit `6db728b`)
+### 1. Bible to Protocols Rename (commit `6db728b`)
 
-- Renamed all human-readable "The Bible" / "MX-Bible" text to "The Corpus" / "MX-Corpus"
-- Renamed `outputs/bible/` directory to `outputs/corpus/` via `git mv` (26 files)
+- Renamed all human-readable "The Bible" / "MX-Bible" text to "The Protocols" / "MX-Protocols"
+- Renamed `outputs/bible/` directory to `outputs/protocols/` via `git mv` (26 files)
 - 128 files changed: 102 content edits + 26 directory renames
 - 376 insertions, 376 deletions
 - Used 5 parallel agents to process different file groups:
@@ -47,7 +47,7 @@ The rename preserved all filesystem paths (`packages/mx-the-bible/`, `manuscript
 
 ### 4. Changelog Updates (commits `38f0762`, `998db16`)
 
-- Documented Bible→Corpus rename with preservation notes
+- Documented Bible→Protocols rename with preservation notes
 - Documented both rounds of lint fixes
 
 ## Files Modified
@@ -62,7 +62,7 @@ Key file groups:
 - **`content-lifecycle/`:** 20 files across drafts, specifications, raw-ideas, ready-to-publish
 - **`scripts/`:** 12 files including QR code generator, appendix scripts, GENERATE-DOCUMENT-PDF-MANUAL.md
 - **`ingest/`:** 10 files (MX-Corporate suite + bigger-deas + new-plan)
-- **`outputs/`:** 26 files renamed (`bible/` → `corpus/`)
+- **`outputs/`:** 26 files renamed (`bible/` → `protocols/`)
 
 ## Testing and Verification
 
@@ -105,16 +105,16 @@ Split the ~115 main repo files across 5 agents working different file groups sim
 ## MX Principles Applied
 
 1. **Metadata on write** — CHANGELOG updated with precise change counts and preservation notes
-2. **Self-documenting** — Title lineage documented: "The Invisible Users" → "The Bible" → "The Corpus"
+2. **Self-documenting** — Title lineage documented: "The Invisible Users" → "The Bible" → "The Protocols"
 3. **Explicit over implicit** — Preserved paths are explicitly noted in CHANGELOG and MEMORY.md
 
 ## Commits (This Session)
 
 | Commit | Description |
 |--------|-------------|
-| `6db728b` | refactor: rename "The Bible" to "The Corpus" across entire repository |
+| `6db728b` | refactor: rename "The Bible" to "The Protocols" across entire repository |
 | `6e84e44` | fix: replace tilde code fences with 4-backtick fences for lint compliance |
-| `38f0762` | docs: update changelog with Bible→Corpus rename and lint fix |
+| `38f0762` | docs: update changelog with Bible→Protocols rename and lint fix |
 | `fa40d30` | fix: apply markdown lint auto-fixes across 18 files |
 | `998db16` | docs: update changelog with markdown lint auto-fixes |
 
@@ -129,12 +129,12 @@ All commits pushed to `origin/main`.
 ## Session Context
 
 **Previous work:** Datalake consolidation (190+ files moved), client outputs migration, MX-Corporate document creation
-**This session:** Book title rename (Bible→Corpus) + lint cleanup
+**This session:** Book title rename (Bible→Protocols) + lint cleanup
 **Status:** Complete. All changes committed and pushed.
 
 ## Success Metrics
 
-- ✓ All human-readable "Bible" references renamed to "Corpus"
+- ✓ All human-readable "Bible" references renamed to "Protocols"
 - ✓ All filesystem paths preserved
 - ✓ Markdown lint: 0 errors
 - ✓ All submodules clean

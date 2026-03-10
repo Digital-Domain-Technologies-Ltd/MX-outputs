@@ -14,7 +14,7 @@ confidentiality: internal
 
 ## Summary
 
-Building on this morning's messaging file consolidation, the afternoon was entirely about manuscript quality. Four separate editorial passes swept through both books: Chapter 0 messaging alignment, Carrie Hane's structural review, Shannon Mølhave's detailed Corpus review, and a full humanizer pass across the Handbook. The largest single change was splitting Chapter 0 — cutting it from 13,200 words to 6,000 and relocating the detail into seven Handbook chapters where it belongs.
+Building on this morning's messaging file consolidation, the afternoon was entirely about manuscript quality. Four separate editorial passes swept through both books: Chapter 0 messaging alignment, Carrie Hane's structural review, Shannon Mølhave's detailed Protocols review, and a full humanizer pass across the Handbook. The largest single change was splitting Chapter 0 — cutting it from 13,200 words to 6,000 and relocating the detail into seven Handbook chapters where it belongs.
 
 This is the first time both books have had professional external editorial feedback applied in the same session. The manuscripts are materially stronger for it.
 
@@ -37,7 +37,7 @@ This is the first time both books have had professional external editorial feedb
 - Made Entity Asset Layer definition self-contained
 - Reduced cross-chapter duplication (WebMCP, worst-agent principle, waiting-is-not-a-strategy)
 
-### Shannon Mølhave editorial (6 Corpus files, Preface–Ch 4)
+### Shannon Mølhave editorial (6 Protocols files, Preface–Ch 4)
 
 - Rewrote About the Author in first person
 - Q1-Q5 → #1-#5 in decision tree (avoids financial quarter confusion)
@@ -57,7 +57,7 @@ This is the first time both books have had professional external editorial feedb
 
 ### Build tooling
 
-- Added LaTeX packages to Corpus metadata (longtable, booktabs, colortbl, needspace)
+- Added LaTeX packages to Protocols metadata (longtable, booktabs, colortbl, needspace)
 - Created standalone chapter PDF build config (metadata-chapter.yaml)
 - Added 4 pull quotes to Ch 0 (Shannon's editorial candidates)
 
@@ -71,7 +71,7 @@ This is the first time both books have had professional external editorial feedb
 | Lines removed | 1,513 |
 | Net change | +125 lines |
 | Editorial reviews applied | 4 (messaging, Carrie Hane, Shannon Mølhave, humanizer) |
-| Corpus files edited | 6 |
+| Protocols files edited | 6 |
 | Handbook files edited | 12 |
 | New SVG diagrams | 4 |
 | Markdownlint errors | 0 |
@@ -87,7 +87,7 @@ This is the first time both books have had professional external editorial feedb
 
 - Continue Handbook publication preparation (27 days to 2 April)
 - Address deferred graphic/layout fixes before final PDF build
-- Consider applying humanizer to Corpus chapters (only Handbook done so far)
+- Consider applying humanizer to Protocols chapters (only Handbook done so far)
 - Frankfurt countdown: 67 days
 
 ## Commit Log
@@ -100,12 +100,12 @@ This is the first time both books have had professional external editorial feedb
 | `79dd5bc1` | Carrie Hane editorial fixes |
 | `9c3e3679` | changelog — Carrie Hane editorial |
 | `4eb4c7a6` | Ch 0 split — condense and relocate to Handbook |
-| `32285bbf` | Shannon Mølhave editorial fixes (Corpus Preface–Ch 4) |
+| `32285bbf` | Shannon Mølhave editorial fixes (Protocols Preface–Ch 4) |
 | `88aaae29` | changelog — Ch 0 split + Shannon editorial |
-| `b398e2b2` | Corpus LaTeX packages + Ch 0 pull quotes + PDFs |
+| `b398e2b2` | Protocols LaTeX packages + Ch 0 pull quotes + PDFs |
 | `cb5bc5d8` | Handbook humanizer — British English + AI pattern fixes |
 | `c7493065` | chapter metadata config + PDF build script |
-| `dfc683b4` | changelog — humanizer pass + Corpus build fixes |
+| `dfc683b4` | changelog — humanizer pass + Protocols build fixes |
 
 ---
 

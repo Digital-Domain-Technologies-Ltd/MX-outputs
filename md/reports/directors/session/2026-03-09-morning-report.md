@@ -24,8 +24,8 @@ Productive morning consolidating yesterday's infrastructure work and polishing t
 | Files changed | 50+ |
 | New cogs created | 2 (gen-free-book, reginald-mirror) |
 | New scripts created | 2 (gen-free-book.sh, reginald-mirror.sh) |
-| PDFs regenerated | 8 (Corpus A4/Kindle, Handbook A4/Kindle, Chapter 00 A4/Kindle, Free Book, Preface) |
-| HTML outputs regenerated | 4 (Corpus, Handbook, Chapter 00, appendices) |
+| PDFs regenerated | 8 (Protocols A4/Kindle, Handbook A4/Kindle, Chapter 00 A4/Kindle, Free Book, Preface) |
+| HTML outputs regenerated | 4 (Protocols, Handbook, Chapter 00, appendices) |
 | Illustrations converted | 47 SVGs via rsvg-convert |
 
 ## What Was Built
@@ -58,15 +58,15 @@ Ran the `/humanizer` skill against chapter-00-introduction-to-mx.md:
 
 - Renamed chapter-00 from "what-are-ai-agents" to "introduction-to-mx" across 15 files
 - Fixed stale `publications/` paths to `manuscripts/` across 7 system docs
-- Renamed book config directory from `codex/` to `corpus/`
-- Aligned all 5 metadata configs (Corpus, Handbook, Chapter, Kindle, Free Book) to the same table striping and widow/orphan standards
+- Renamed book config directory from `codex/` to `protocols/`
+- Aligned all 5 metadata configs (Protocols, Handbook, Chapter, Kindle, Free Book) to the same table striping and widow/orphan standards
 - Removed obsolete dev-docs-plan draft
 
 ### Full PDF regeneration
 
 Every book PDF rebuilt with the humanised chapter-00 and aligned metadata:
 
-- Corpus: A4, Kindle, HTML, appendices
+- Protocols: A4, Kindle, HTML, appendices
 - Handbook: A4, Kindle, HTML
 - Chapter 00 standalone: A4, Kindle, HTML
 - Free Book: merged PDF (5.2MB)
@@ -87,8 +87,8 @@ Every book PDF rebuilt with the humanised chapter-00 and aligned metadata:
 | `de5ac207` | refactor: rename chapter-00-what-are-ai-agents to chapter-00-introduction-to-mx |
 | `7acedabb` | chore: update changelog — chapter-00 rename |
 | `eb8f629e` | chore: refresh reminders — mark London follow-ups done, update countdowns |
-| `a36d849b` | fix: rename book config directory codex to corpus and add shared resource paths |
-| `2c569c60` | chore: update changelog and learnings — corpus rename, resource-path fix |
+| `a36d849b` | fix: rename book config directory codex to protocols and add shared resource paths |
+| `2c569c60` | chore: update changelog and learnings — protocols rename, resource-path fix |
 | `606a37d6` | chore: update mx-outputs submodule with Kindle PDF rebuilds |
 | `cb844447` | fix: update pdf-generator cog resource-path documentation |
 | `e4558f4a` | chore: remove obsolete dev-docs-plan draft |
@@ -97,7 +97,7 @@ Every book PDF rebuilt with the humanised chapter-00 and aligned metadata:
 | `5a527622` | chore: update submodules — Reginald mirror sync and free book PDF |
 | `6a8f69f2` | feat: add reginald-mirror cog, free book generator, and pdf-generator updates |
 | `73b46f42` | chore: update changelog — free book generator, Reginald mirror cog |
-| `d9805741` | fix: align free book metadata with corpus table/widow standards |
+| `d9805741` | fix: align free book metadata with protocols table/widow standards |
 | `e898e037` | fix: align metadata-chapter and metadata-kindle with table/widow standards |
 | `eca955a0` | fix: add line breaks to footnote URLs in chapter-00 |
 | `32c16d51` | docs: add footnote URL line-break convention to style guide and cogs |

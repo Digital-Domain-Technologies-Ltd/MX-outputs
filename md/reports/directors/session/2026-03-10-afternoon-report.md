@@ -1,5 +1,5 @@
 ---
-title: "Co-Directors Report — Acknowledgements Shipped, Corpus Sharpened"
+title: "Co-Directors Report — Acknowledgements Shipped, Protocols Sharpened"
 created: "2026-03-10"
 segment: "afternoon"
 version: "1.0"
@@ -8,7 +8,7 @@ audience: stakeholders
 confidentiality: internal
 ---
 
-# Co-Directors Report — Acknowledgements Shipped, Corpus Sharpened
+# Co-Directors Report — Acknowledgements Shipped, Protocols Sharpened
 
 **Date:** 10 March 2026 — Afternoon
 **Segment:** afternoon (12:00–17:00)
@@ -73,7 +73,7 @@ The acknowledgements page is now complete and the contributors know they are in 
 
 ## Next Steps
 
-1. Continue Corpus editorial review (remaining chapters)
+1. Continue Protocols editorial review (remaining chapters)
 2. Incorporate any responses from acknowledged contributors
 3. Only Raf Winterpacht's email remains unsourced — reach out via LinkedIn
 

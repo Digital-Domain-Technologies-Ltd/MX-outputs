@@ -43,7 +43,7 @@ A focused CRM maintenance session. One new contact added (Dogu Abaris), ten exis
 `contacts/dogu-abaris.md` created. Full Stack Developer at byDesign. Key context:
 
 - GoDaddy admin for The Gathering — strategic access
-- Book reviewer for the Corpus/Handbook
+- Book reviewer for the Protocols/Handbook
 - £5,000 payment agreed
 - Added to CONTACTS.md Digital/Design section alongside Carrie Hane
 

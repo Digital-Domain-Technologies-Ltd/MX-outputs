@@ -93,7 +93,7 @@ This morning we restructured the repository architecture to future-proof the bus
 **Content sections:**
 
 - About — Tom's background, the Tom+Maxine partnership
-- Books — MX Handbook and MX Corpus positioning
+- Books — MX Handbook and MX Protocols positioning
 - Consulting — web audit suite, implementation consulting, organizational transformation, content strategy
 - The Gathering — MX community positioning
 - Contact — email and website
@@ -229,7 +229,7 @@ The allabout.network landing page establishes Tom's thought leadership positioni
 
 - CMS Summit Frankfurt (12 May 2026)
 - MX Handbook launch (Q2 2026)
-- MX Corpus launch (Q3 2026)
+- MX Protocols launch (Q3 2026)
 
 This is the outbound marketing foundation for consulting leads and book sales.
 
@@ -283,7 +283,7 @@ All commits pushed to origin/main. Full history:
 **When:** Next session
 **What:** Test all automated workflows to ensure restructure didn't break anything:
 
-- PDF generation (`npm run generate:handbook`, `npm run generate:corpus`)
+- PDF generation (`npm run generate:handbook`, `npm run generate:protocols`)
 - Blog generation scripts
 - Illustration generation (`npm run test:illustrations`)
 - Cog validation (`npm run cog:validate`)

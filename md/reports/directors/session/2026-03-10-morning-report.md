@@ -1,5 +1,5 @@
 ---
-title: "Co-Directors Report — Corpus Moves Toward Publication Quality"
+title: "Co-Directors Report — Protocols Moves Toward Publication Quality"
 created: "2026-03-10"
 segment: "morning"
 version: "1.0"
@@ -8,7 +8,7 @@ audience: stakeholders
 confidentiality: internal
 ---
 
-# Co-Directors Report — Corpus Moves Toward Publication Quality
+# Co-Directors Report — Protocols Moves Toward Publication Quality
 
 **Date:** 10 March 2026 — Morning
 **Segment:** morning (00:00–12:00)
@@ -17,9 +17,9 @@ confidentiality: internal
 
 ## Summary
 
-This morning completed a two-session editorial pass that moves the MX Corpus manuscript from draft to publication-quality. Yesterday's session addressed SVG illustrations, PDF formatting (black links, bold Courier URLs), and hedged absolutist claims across both books. This morning's continuation focused on structural integrity: fixing a missing chapter in the book's table of contents, correcting cross-references, toning down repetition, hedging false-precision ROI figures, and smoothing a jarring chapter transition.
+This morning completed a two-session editorial pass that moves the MX Protocols manuscript from draft to publication-quality. Yesterday's session addressed SVG illustrations, PDF formatting (black links, bold Courier URLs), and hedged absolutist claims across both books. This morning's continuation focused on structural integrity: fixing a missing chapter in the book's table of contents, correcting cross-references, toning down repetition, hedging false-precision ROI figures, and smoothing a jarring chapter transition.
 
-The manuscript now has consistent internal navigation, honest financial framing, and better editorial discipline. With the Handbook due 2 April and the Corpus due 1 July, this work is on the critical path.
+The manuscript now has consistent internal navigation, honest financial framing, and better editorial discipline. With the Handbook due 2 April and the Protocols due 1 July, this work is on the critical path.
 
 ---
 
@@ -42,8 +42,8 @@ The manuscript now has consistent internal navigation, honest financial framing,
 | Metric | Value |
 | ------ | ----- |
 | Commits this morning | 4 |
-| Files changed | 11 (7 corpus chapters + CHANGELOG + LEARNINGS + 2 from earlier session) |
-| Lines changed | 25 insertions, 24 deletions (corpus); 41 insertions, 2 deletions (docs) |
+| Files changed | 11 (7 protocols chapters + CHANGELOG + LEARNINGS + 2 from earlier session) |
+| Lines changed | 25 insertions, 24 deletions (protocols); 41 insertions, 2 deletions (docs) |
 | Cross-references verified | All chapter references across all 13 chapters, preface, exec summary, and reading guide |
 
 ---
@@ -56,9 +56,9 @@ The manuscript now has consistent internal navigation, honest financial framing,
 
 ## What This Means for Publication
 
-The Corpus manuscript is tightening. The structural issues found today (missing chapter in overview, wrong cross-references) are exactly the kind of errors that erode reader trust in a technical book. They've been caught and fixed well before publication.
+The Protocols manuscript is tightening. The structural issues found today (missing chapter in overview, wrong cross-references) are exactly the kind of errors that erode reader trust in a technical book. They've been caught and fixed well before publication.
 
-The editorial pattern emerging across the last two sessions — hedging absolutes, toning repetition, fixing navigation — is the kind of polish that separates a draft from a published work. The 1 July deadline for the Corpus remains comfortable at this pace.
+The editorial pattern emerging across the last two sessions — hedging absolutes, toning repetition, fixing navigation — is the kind of polish that separates a draft from a published work. The 1 July deadline for the Protocols remains comfortable at this pace.
 
 ---
 

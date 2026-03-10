@@ -14,7 +14,7 @@ mx:
 
 ## Summary
 
-Building on this morning's architecture work, the afternoon session tackled a structural change that had been waiting: consolidating all four book publications from separate git submodules into the main repository. The Corpus, The Handbook, the shared appendices, and the code examples all moved into `datalake/manuscripts/mx-books/`. Four submodules removed. Four GitHub repositories archived to read-only. Every internal reference to "MX-Bible" cleaned to "MX: The Corpus". Every proprietary URL stripped.
+Building on this morning's architecture work, the afternoon session tackled a structural change that had been waiting: consolidating all four book publications from separate git submodules into the main repository. The Protocols, The Handbook, the shared appendices, and the code examples all moved into `datalake/manuscripts/mx-books/`. Four submodules removed. Four GitHub repositories archived to read-only. Every internal reference to "MX-Bible" cleaned to "MX: The Protocols". Every proprietary URL stripped.
 
 This is housekeeping that matters. The books were scattered across four separate repositories, each requiring its own git workflow, its own commits, its own sync issues. Now they live in one place. One commit covers a change that touches the handbook and the appendices. One grep finds everything. The repository went from a multi-repo coordination problem to a single, searchable workspace.
 
@@ -32,13 +32,13 @@ The public edition of MX: The Handbook was also created during this session — 
 
 ## What Was Built
 
-**Public edition of MX: The Handbook** — 17 chapter files, standalone and publication-ready. Sanitised from the internal version: all cog references removed, all MX OS internals removed, "MX-Bible" renamed to "MX: The Corpus". The-End.md rewritten with a forward tease about self-describing documents and consulting availability. This is the version that ships on 2 April 2026.
+**Public edition of MX: The Handbook** — 17 chapter files, standalone and publication-ready. Sanitised from the internal version: all cog references removed, all MX OS internals removed, "MX-Bible" renamed to "MX: The Protocols". The-End.md rewritten with a forward tease about self-describing documents and consulting availability. This is the version that ships on 2 April 2026.
 
 **Consolidated book structure** — All four publications now live under a single path:
 
 ```
 datalake/manuscripts/mx-books/
-├── mx-corpus/          (13 chapters, ~78,000 words)
+├── mx-protocols/          (13 chapters, ~78,000 words)
 ├── mx-handbook/       (11 chapters, practical guide)
 ├── mx-appendices/     (12 appendices A-P, web editions)
 └── mx-code-examples/  (starter kit, platform configs)
@@ -52,7 +52,7 @@ datalake/manuscripts/mx-books/
 
 **Sanitisation across all books:**
 
-- "MX-Bible" → "MX: The Corpus" throughout
+- "MX-Bible" → "MX: The Protocols" throughout
 - Internal Digital-Domain-Technologies-Ltd GitHub URLs removed
 - `.git/`, `.claude/`, `CLAUDE.md`, `CONTRIBUTING.md`, `todo.txt` stripped from copies
 - README files rewritten for public consumption
@@ -84,7 +84,7 @@ The public Handbook is now ready for its 2 April publication date, separate from
 | `c482d41` | Session completion summary for 2026-02-13 |
 | `34707f4` | Changelog for public handbook, spec principle #10, morning report v3.0 |
 | `a86d74c` | Remove mx-handbook submodule — content moved to datalake |
-| `831196b` | Consolidate Corpus, Appendices, Handbook into datalake/manuscripts/mx-books/ |
+| `831196b` | Consolidate Protocols, Appendices, Handbook into datalake/manuscripts/mx-books/ |
 | `3796f9c` | Move mx-code-examples into datalake/manuscripts/mx-books/ |
 
 ## Next Steps
