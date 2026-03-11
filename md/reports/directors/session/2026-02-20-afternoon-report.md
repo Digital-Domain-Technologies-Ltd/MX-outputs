@@ -541,7 +541,7 @@ npm run cogify:check            # Verify cache validity
 - Error handling in place (audit system fails gracefully)
 - Can update scripts rapidly (no customer deployments yet)
 
-**Action:** Run multi-site validation before declaring "battle-tested"
+**Action:** Run multi-site validation before declaring "proven"
 
 ---
 

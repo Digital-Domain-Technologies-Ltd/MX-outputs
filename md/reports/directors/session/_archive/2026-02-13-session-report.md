@@ -106,7 +106,7 @@ Built and installed real git hooks that mirror GitHub Actions:
 
 2. **Changelog blocker in non-interactive mode.** The changelog reminder prompted for input (`read -p "Update CHANGELOG?"`) with a default of "yes, block the push." In non-interactive mode (CI, Claude Code, piped commands), `read` gets empty input, which matched the default — blocking every automated push. Fixed: non-interactive mode now warns but continues, matching the pattern already used for the uncommitted changes check.
 
-Both bugs were caught, diagnosed, fixed, committed, and pushed in the same session. The hooks are now battle-tested. This is exactly how MX OS works: the system corrects itself because the instructions are the program and the agent is the runtime.
+Both bugs were caught, diagnosed, fixed, committed, and pushed in the same session. The hooks are now proven. This is exactly how MX OS works: the system corrects itself because the instructions are the program and the agent is the runtime.
 
 ### YAML Validation Fixes
 
