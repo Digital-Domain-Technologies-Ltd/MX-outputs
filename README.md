@@ -14,12 +14,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 34 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 97 | Markdown — reports, audit results, presentations |
-| [html/](html/) | 94 | HTML — blogs (with CSS/SVG), audit baselines |
+| [pdf/](pdf/) | 40 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 104 | Markdown — reports, audit results, presentations |
+| [html/](html/) | 96 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 1 | PowerPoint — presentation source files |
-| **Total** | **230** | |
+| **Total** | **245** | |
 
 ---
 
@@ -27,21 +27,21 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 PDF documents — books, manuals, presentations, blog exports.
 
-### pdf/blogs/ (1 files)
+### pdf/books/ (9 files)
 
-- [`The-AI-Tipping-Point-CMS-Kickoff-2024.pdf`](pdf/blogs/The-AI-Tipping-Point-CMS-Kickoff-2024.pdf)
-
-### pdf/books/ (6 files)
-
-- [`chapter-00-what-are-ai-agents.pdf`](pdf/books/chapter-00-what-are-ai-agents.pdf)
-- [`chapter-00-what-are-ai-agents.pdf`](pdf/books/chapters/chapter-00-what-are-ai-agents.pdf)
-- [`mx-codex-kindle.pdf`](pdf/books/codex/mx-codex-kindle.pdf)
-- [`mx-codex.pdf`](pdf/books/codex/mx-codex.pdf)
+- [`The-AI-Tipping-Point-CMS-Kickoff-2024.pdf`](pdf/books/chapters/The-AI-Tipping-Point-CMS-Kickoff-2024.pdf)
+- [`chapter-00-introduction-to-mx-kindle.pdf`](pdf/books/chapters/chapter-00-introduction-to-mx-kindle.pdf)
+- [`chapter-00-introduction-to-mx.pdf`](pdf/books/chapters/chapter-00-introduction-to-mx.pdf)
+- [`mx-introduction-chapter.pdf`](pdf/books/free-book/mx-introduction-chapter.pdf)
 - [`mx-handbook-kindle.pdf`](pdf/books/handbook/mx-handbook-kindle.pdf)
 - [`mx-handbook.pdf`](pdf/books/handbook/mx-handbook.pdf)
-  - **chapters/** (1 files)
-  - **codex/** (2 files)
+- [`mx-protocols-kindle.pdf`](pdf/books/protocols/mx-protocols-kindle.pdf)
+- [`mx-protocols-simple.pdf`](pdf/books/protocols/mx-protocols-simple.pdf)
+- [`mx-protocols.pdf`](pdf/books/protocols/mx-protocols.pdf)
+  - **chapters/** (3 files)
+  - **free-book/** (1 files)
   - **handbook/** (2 files)
+  - **protocols/** (3 files)
 
 ### pdf/cogify/ (2 files)
 
@@ -107,7 +107,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`reginald-implementation-plan-print.md`](md/reginald/reginald-implementation-plan-print.md)
 - [`reginald-manual-print.md`](md/reginald/reginald-manual-print.md)
 
-### md/reports/ (83 files)
+### md/reports/ (90 files)
 
 #### md/reports/completions/ (20 files)
 
@@ -136,7 +136,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-02-13/** (2 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (62 files)
+#### md/reports/directors/ (69 files)
 
 **build/** (3 files)
 
@@ -150,7 +150,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (55 files)
+**session/** (62 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -199,6 +199,13 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-03-07-evening-report.md`](md/reports/directors/session/2026-03-07-evening-report.md)
 - [`2026-03-07-morning-report.md`](md/reports/directors/session/2026-03-07-morning-report.md)
 - [`2026-03-08-evening-report.md`](md/reports/directors/session/2026-03-08-evening-report.md)
+- [`2026-03-09-afternoon-report.md`](md/reports/directors/session/2026-03-09-afternoon-report.md)
+- [`2026-03-09-evening-report.md`](md/reports/directors/session/2026-03-09-evening-report.md)
+- [`2026-03-09-morning-report.md`](md/reports/directors/session/2026-03-09-morning-report.md)
+- [`2026-03-10-afternoon-report.md`](md/reports/directors/session/2026-03-10-afternoon-report.md)
+- [`2026-03-10-evening-report.md`](md/reports/directors/session/2026-03-10-evening-report.md)
+- [`2026-03-10-morning-report.md`](md/reports/directors/session/2026-03-10-morning-report.md)
+- [`2026-03-11-morning-report.md`](md/reports/directors/session/2026-03-11-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -317,14 +324,17 @@ HTML content with adjacent CSS, JS, and SVG assets.
 - [`principles-changed-how-i-build.html`](html/blogs/mx/principles-changed-how-i-build.html)
   - **mx/** (5 files)
 
-### html/books/ (3 files)
+### html/books/ (5 files)
 
+- [`chapter-00-introduction-to-mx.html`](html/books/chapters/chapter-00-introduction-to-mx.html)
 - [`chapter-00-what-are-ai-agents.html`](html/books/chapters/chapter-00-what-are-ai-agents.html)
 - [`mx-codex.html`](html/books/codex/mx-codex.html)
 - [`mx-handbook.html`](html/books/handbook/mx-handbook.html)
-  - **chapters/** (1 files)
+- [`mx-protocols.html`](html/books/protocols/mx-protocols.html)
+  - **chapters/** (2 files)
   - **codex/** (1 files)
   - **handbook/** (1 files)
+  - **protocols/** (1 files)
 
 ---
 
@@ -344,4 +354,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-03-09 at 08:09*
+*Generated on 2026-03-11 at 15:25*
