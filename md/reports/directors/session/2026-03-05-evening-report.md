@@ -85,10 +85,10 @@ Stages 3–5 return N/A for brochure/content sites with no commerce content — 
 
 ### All Book PDFs Regenerated
 
-Both the MX Protocols and MX Handbook were rebuilt in every format:
+Both the MX Protocols and MX: The Handbook were rebuilt in every format:
 
 - **MX Protocols** — A4 PDF (8.5 MB), Kindle PDF (8.2 MB), HTML, 17 appendix HTML pages
-- **MX Handbook** — A4 PDF (3.1 MB), Kindle PDF (3.1 MB), HTML
+- **MX: The Handbook** — A4 PDF (3.1 MB), Kindle PDF (3.1 MB), HTML
 
 The Protocols PDFs jumped from ~4 MB to ~8.5 MB because the 16 chapter illustrations are now included — they had been silently missing from every previous build.
 

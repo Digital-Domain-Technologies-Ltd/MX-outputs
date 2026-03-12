@@ -119,7 +119,7 @@ This architecture reduces AI hallucination by replacing inference with lookup.
 | Milestone | Date | Status |
 |-----------|------|--------|
 | London CMS Experts | 26 Feb 2026 | Today — lightning talk ready |
-| MX Handbook | 2 Apr 2026 | On track |
+| MX: The Handbook | 2 Apr 2026 | On track |
 | CMS Summit Frankfurt | 12 May 2026 | Demo preparation underway |
 | MX Protocols | 1 Jul 2026 | REGINALD docs ready for inclusion |
 

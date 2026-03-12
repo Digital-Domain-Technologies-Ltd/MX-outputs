@@ -20,7 +20,7 @@ mx:
 
 ## Summary
 
-MX Handbook images were clipping in PDF output, making diagrams unreadable at any size. Root cause: macOS Quick Look (qlmanage) creates square thumbnails from landscape images, destroying aspect ratios. This caused LaTeX to scale incorrectly, resulting in content overflow.
+MX: The Handbook images were clipping in PDF output, making diagrams unreadable at any size. Root cause: macOS Quick Look (qlmanage) creates square thumbnails from landscape images, destroying aspect ratios. This caused LaTeX to scale incorrectly, resulting in content overflow.
 
 **Solution delivered:** Tool cascade prioritizing aspect-ratio-preserving tools (rsvg-convert → ImageMagick → qlmanage as last resort), comprehensive test suite, and three architectural decision records documenting the approach.
 

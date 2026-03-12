@@ -1,5 +1,5 @@
 ---
-title: "Editorial Review Phase 1 Complete: MX-Bible & MX-Handbook Coordination"
+title: "Editorial Review Phase 1 Complete: MX-Bible & MX: The Handbook Coordination"
 created: "2026-02-04"
 sessionStart: "2026-02-04T11:50:00Z"
 sessionEnd: "2026-02-04T13:50:15Z"
@@ -12,7 +12,7 @@ status: "completed"
 
 ## Overview
 
-Completed comprehensive editorial review of MX-Bible (~78,000 words, 15 chapters) and MX-Handbook (11 chapters) for Q1 2026 publication. Successfully executed Phase 1 (Critical Fixes) from editorial plan, resolving coordination gaps between both manuscripts. Key accomplishments: standardized agent type taxonomy across both books (from inconsistent 6-type and 5-type models to unified 5-type model), added 5 critical cross-references preventing reader confusion, created comprehensive 9-role reading guide for Handbook, and enhanced book relationship descriptions.
+Completed comprehensive editorial review of MX-Bible (~78,000 words, 15 chapters) and MX: The Handbook (11 chapters) for Q1 2026 publication. Successfully executed Phase 1 (Critical Fixes) from editorial plan, resolving coordination gaps between both manuscripts. Key accomplishments: standardized agent type taxonomy across both books (from inconsistent 6-type and 5-type models to unified 5-type model), added 5 critical cross-references preventing reader confusion, created comprehensive 9-role reading guide for Handbook, and enhanced book relationship descriptions.
 
 Both manuscripts assessed as publication-ready after Phase 1 completion: Bible at 90% (needs factual verification), Handbook at 85% (needs code example enhancement). Total Phase 1 effort: ~15 hours of focused editorial work completed in this session, establishing foundation for Q1 publication timeline.
 
@@ -25,7 +25,7 @@ Both manuscripts assessed as publication-ready after Phase 1 completion: Bible a
 **Method:** Launched 3 parallel Explore agents:
 
 - Agent 1: MX-Bible structure, technical accuracy, and flow
-- Agent 2: MX-Handbook code examples, practical applicability, and implementation guidance
+- Agent 2: MX: The Handbook code examples, practical applicability, and implementation guidance
 - Agent 3: Cross-reference analysis between both books
 
 **Key Findings:**
@@ -61,7 +61,7 @@ Both manuscripts assessed as publication-ready after Phase 1 completion: Bible a
 - Consolidated CLI + Local into "Local Agents" category
 - Renamed "Browser extensions" to "In-Browser Agents"
 - Added "Agentic Operating Systems" as fifth type (critical for 2026)
-- Added cross-reference note: "This taxonomy aligns with The MX Handbook for consistency"
+- Added cross-reference note: "This taxonomy aligns with MX: The Handbook for consistency"
 
 **Files modified:**
 
@@ -279,9 +279,9 @@ All YAML frontmatter includes:
 copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
 author: "Tom Cranstoun"
 created: "2026-02-04"
-description: "Role-based reading paths for The MX Handbook..."
+description: "Role-based reading paths for MX: The Handbook..."
 tags: [reading-guide, navigation, role-based-paths, implementation-focus]
-book: "MX-Handbook"
+book: "MX: The Handbook"
 chapter: 0
 ---
 ```
@@ -328,7 +328,7 @@ chapter: 0
 ## User Requirements Addressed
 
 **Original request:**
-> "Carefully review the MX-Bible (13 chapters, ~78,000 words) and MX-Handbook (11 chapters, implementation oriented) from these pages. Provide structured feedback focusing on: Technical accuracy, clarity, organization, applicability, audience suitability, redundancies, areas needing expansion. Conclude with editorial summary recommending priority fixes by mid-February to align with Q1 publication. Draft message to Tom highlighting feedback themes."
+> "Carefully review the MX-Bible (13 chapters, ~78,000 words) and MX: The Handbook (11 chapters, implementation oriented) from these pages. Provide structured feedback focusing on: Technical accuracy, clarity, organization, applicability, audience suitability, redundancies, areas needing expansion. Conclude with editorial summary recommending priority fixes by mid-February to align with Q1 publication. Draft message to Tom highlighting feedback themes."
 
 **Solution delivered:**
 

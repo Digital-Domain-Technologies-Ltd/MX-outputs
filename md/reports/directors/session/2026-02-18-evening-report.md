@@ -19,7 +19,7 @@ mx:
 
 **Mission:** Make SVG-to-PNG aspect ratio preservation inevitable across all MX publications.
 
-**Problem Solved:** MX Handbook PDF images were clipping because qlmanage (macOS Quick Look) creates square 2700×2700 thumbnails regardless of source aspect ratio, adding letterbox padding to landscape diagrams. This caused LaTeX to scale incorrectly, resulting in content overflow.
+**Problem Solved:** MX: The Handbook PDF images were clipping because qlmanage (macOS Quick Look) creates square 2700×2700 thumbnails regardless of source aspect ratio, adding letterbox padding to landscape diagrams. This caused LaTeX to scale incorrectly, resulting in content overflow.
 
 **Solution Delivered:** Tool cascade prioritizing aspect-ratio-preserving tools (rsvg-convert → ImageMagick → qlmanage as last resort), comprehensive test suite, three ADRs documenting architectural decisions, and universal workflow for all MX publications.
 
