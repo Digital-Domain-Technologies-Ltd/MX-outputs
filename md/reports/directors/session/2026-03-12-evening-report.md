@@ -1,14 +1,14 @@
 ---
-title: "Co-Directors Report — CogNovaMX: The Great Rename and Kindle Retirement"
+title: "Co-Directors Report — CogNovaMX Rename, Kindle Retirement, and Beyond the CMS Podcast"
 created: "2026-03-12"
 segment: "evening"
-version: "1.0"
+version: "2.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidentiality: internal
 ---
 
-# Co-Directors Report — CogNovaMX: The Great Rename and Kindle Retirement
+# Co-Directors Report — CogNovaMX Rename, Kindle Retirement, and Beyond the CMS Podcast
 
 **Date:** 12 March 2026 — Evening
 **Segment:** evening (17:00 onwards)
@@ -17,7 +17,7 @@ confidentiality: internal
 
 ## Summary
 
-Building on this afternoon's book tidy-up work, the evening session tackled two structural changes. First, the MX: The Handbook build was simplified — Kindle format was removed entirely and designed PDF covers were added to the A4 build. Second, and more significantly, the company name was standardised from "Cog-Nova-MX" to "CogNovaMX" across the entire repository ecosystem. Over 810 files were updated across five repositories, with directory renames to match. A final sweep caught one remaining old-format instance in Chapter 00 that had been missed by the bulk replacement.
+Building on this afternoon's book tidy-up work, the evening session tackled two structural changes and one significant commercial milestone. First, the MX: The Handbook build was simplified — Kindle format was removed entirely and designed PDF covers were added to the A4 build. Second, the company name was standardised from "Cog-Nova-MX" to "CogNovaMX" across the entire repository ecosystem (810+ files, five repositories). Third, Tom appeared on Chris Bryce's podcast "Beyond the CMS" (episode 40), where Chris committed on-air to using the MX audit as a fundamental part of Dotfusion's package for large organisations — upgrading the relationship from prospect to partner.
 
 ---
 
@@ -64,11 +64,33 @@ After the bulk rename, Tom spotted a surviving "Cog-Nova-MX Ltd" on line 814 of 
 
 ---
 
+### 4. Beyond the CMS — Podcast Episode 40
+
+Tom appeared as guest on Chris Bryce's podcast "Beyond the CMS" (episode 40). Topics covered: Machine Experience (MX), invisible users (AI agents), schema.org, data sovereignty, Enterprise Asset Layer (EAL), headless CMS barriers for agents.
+
+**Key outcome:** Chris committed on-air to using the MX audit as a fundamental part of Dotfusion's package for large organisations. This is the first formal commercial adoption of MX audit tooling.
+
+**CRM updated:**
+
+- Chris Bryce relationship upgraded from prospect to partner, priority raised to high
+- Podcast summary filed (`mx-crm/dotfusion/chris-bryce-podcast-2026-03-12.md`)
+- Interaction log, tasks, and contacts master list all updated
+- New action items tracked: receive podcast assets (next week), provide free Handbook chapter for listeners, follow up on white-label partnership
+
+**Tom also mentioned on the podcast:**
+
+- MX: The Handbook publishing 2 April
+- MX: The Protocols planned for July
+- MX audit tool offering a 10-page sample audit for organisations
+
+---
+
 ## Decisions Made
 
 - **Kindle format permanently retired** — A4 PDF is the sole output format for both books
 - **Letter format removed** — A4 only in `generate-document-pdf.js`
 - **CogNovaMX is the canonical spelling** — no hyphens, no spaces, everywhere
+- **Dotfusion adopts MX audit** — Chris Bryce committed to white-label MX audit as part of Dotfusion's enterprise package [by Chris]
 
 ---
 
@@ -76,6 +98,9 @@ After the bulk rename, Tom spotted a surviving "Cog-Nova-MX Ltd" on line 814 of 
 
 - Push main repo to remote (commits pending)
 - Visual review of regenerated Handbook PDF with new covers
+- Receive podcast assets from Chris Bryce (early next week)
+- Provide free chapter of MX: The Handbook for podcast listeners
+- Follow up on white-label audit partnership with Dotfusion
 - Continue book content work
 
 ---
@@ -89,6 +114,9 @@ After the bulk rename, Tom spotted a surviving "Cog-Nova-MX Ltd" on line 814 of 
 | 2caa524e | Rename Cog-Nova-MX to CogNovaMX across entire repository (251 files) |
 | 9bc2066c | Fix missed Cog-Nova-MX rename in chapter-00 and update submodules |
 | b3158887 | chore: update changelog — CogNovaMX rename and free book covers |
+| 4ef70099 | Update mx-outputs with co-directors evening report |
+| 64809ed0 | Remove step-commit command file — skill.json is sole authority |
+| d50c25c4 | Update chapter-00 (newpage, file system wording) and refresh about.mx.cog.md |
 
 ### Submodule Commits
 
