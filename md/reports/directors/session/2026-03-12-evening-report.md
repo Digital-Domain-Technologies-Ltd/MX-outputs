@@ -2,7 +2,7 @@
 title: "Co-Directors Report — CogNovaMX Rename, Kindle Retirement, and Beyond the CMS Podcast"
 created: "2026-03-12"
 segment: "evening"
-version: "2.0"
+version: "3.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidentiality: internal
@@ -49,18 +49,41 @@ Every instance of "Cog-Nova-MX" (capitalised) and "cog-nova-mx" (slug/directory)
 
 After the bulk rename, Tom spotted a surviving "Cog-Nova-MX Ltd" on line 814 of the shared introduction chapter. Fixed to "CogNovaMX Ltd".
 
+### 4. CI Failure Automation Pipeline
+
+Built a fully automated pipeline for catching GitHub Actions failures and feeding them back into Claude Code sessions:
+
+- **GitHub Actions workflow** (`notify-ci-failure.yml`): triggers when `Validate Cog Files` or `HTML Regression Check` fails, extracts failed job/step details, creates a `ci-failure` labelled issue with logs link and fix instructions. Deduplicates to avoid issue spam.
+- **Session-start hook** (`check-ci-failures.sh`): queries open `ci-failure` issues via `gh` CLI and alerts Claude Code at session start.
+- **Settings wired**: hook added to `settings.local.json` SessionStart hooks.
+- **Label created**: `ci-failure` label (red) added to GitHub repo.
+
+Flow: Push → CI fails → issue auto-created → next session → Claude Code alerted → fix and close.
+
+### 5. HTML Audit Script Modernisation (.js → .cjs)
+
+Renamed all HTML audit scripts from `.js` to `.cjs` to align with Node.js module conventions (these use `require()` and `module.exports`):
+
+- `audit-html-baseline.js` → `audit-html-baseline.cjs`
+- `audit-html-compare.js` → `audit-html-compare.cjs`
+- `audit-html-patterns.js` → `audit-html-patterns.cjs`
+- `html-audit-utils.js` → `html-audit-utils.cjs`
+
+Updated all references in `package.json` scripts, `scripts/ORGANIZATION.md`, cog files, and manuals.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Main repo commits | 5 |
+| Main repo commits | 10+ |
 | Submodule commits | 4 (allaboutv2, mx-crm, mx-collaboration, mx-outputs) |
-| Total files changed | 810+ |
-| Lines added (main) | +1,037 |
-| Lines removed (main) | −1,033 |
+| Total files changed | 820+ |
+| Lines added (main) | +1,050+ |
+| Lines removed (main) | −1,040+ |
 | Repositories touched | 5 |
+| New files created | 2 (workflow + hook) |
 
 ---
 
@@ -91,13 +114,16 @@ Tom appeared as guest on Chris Bryce's podcast "Beyond the CMS" (episode 40). To
 - **Letter format removed** — A4 only in `generate-document-pdf.js`
 - **CogNovaMX is the canonical spelling** — no hyphens, no spaces, everywhere
 - **Dotfusion adopts MX audit** — Chris Bryce committed to white-label MX audit as part of Dotfusion's enterprise package [by Chris]
+- **CI failure automation** — GitHub Actions failures now auto-create issues, Claude Code checks on session start
+- **Audit scripts use .cjs extension** — aligns with Node.js CommonJS convention
 
 ---
 
 ## Next Steps
 
-- Push main repo to remote (commits pending)
+- Push main repo to remote (commits pending — includes CI pipeline + .cjs renames)
 - Visual review of regenerated Handbook PDF with new covers
+- Verify CI failure workflow triggers correctly on next failure
 - Receive podcast assets from Chris Bryce (early next week)
 - Provide free chapter of MX: The Handbook for podcast listeners
 - Follow up on white-label audit partnership with Dotfusion
