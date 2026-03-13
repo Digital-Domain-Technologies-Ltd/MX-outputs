@@ -1,14 +1,14 @@
 ---
-title: "Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Homepage Fixes"
+title: "Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Illustrations"
 created: "2026-03-13"
 segment: "evening"
-version: "3.0"
+version: "4.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidentiality: internal
 ---
 
-# Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Homepage Fixes
+# Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Illustrations
 
 **Date:** 13 March 2026 — Evening
 
@@ -18,7 +18,7 @@ confidentiality: internal
 
 ## Summary
 
-A full production evening across three distinct phases. Phase 1 delivered a production-ready MX coming-soon landing page — zero Pa11y issues, full Schema.org compliance, and a live llms.txt. Phase 2 applied Tony Harley's editorial review to both book manuscripts: British English throughout, em-dash typography, figure/table numbering, and writing-style.md updated to v1.1. Phase 3 ran a live production audit of allabout.network, identified the gap between the local build and what is actually live, generated a full executive audit report, and applied accessibility and SEO fixes to the homepage and coming-soon.html.
+A full production evening across four phases. Phase 1 delivered a production-ready MX coming-soon landing page. Phase 2 applied Tony Harley's editorial review to both manuscripts. Phase 3 ran a live production audit and applied fixes. Phase 4 resolved the remaining three editorial items from the Harley review: opening argument structure, dynamic pricing passage clarity, and all missing illustrations — 19 created (6 handbook, 13 protocols) as SVG masters with PNG exports, completing the manuscript illustration set from zero.
 
 ---
 
@@ -100,7 +100,23 @@ The Web Audit Suite was run against the live URL `allabout.network/mx/coming-soo
 
 **Remaining items (not fixable from static HTML):** Blogroll images lack alt text at the EDS block level — must be addressed in source documents or block JavaScript.
 
-### 6. Memory Saved
+### 6. Tony Harley Editorial Items — All Resolved
+
+Three editorial items from the Harley review that required human judgement were resolved in a separate session.
+
+**Opening argument:** Chapter 11 (Business Imperative) now opens with a reassurance section — "Before we begin: this is not a rebuild" — before the commercial urgency section. Directly addresses reader resistance: MX is annotation, not construction.
+
+**Dynamic pricing passage:** The Adamuz train disaster case study in Chapter 11 was missing the practical bridge paragraph present in the shared chapter-00 version. Added: "This is not a theoretical problem. It is a design problem with practical solutions..." plus the full explanation of which external signals a pricing system could monitor. Also corrected "nobody designs them" → "not everyone designs them" (Iberia did manually intervene — the original wording was inaccurate).
+
+**Illustrations — all 19 created:** Both manuscripts had zero working illustration files. All were referenced in markdown but the files did not exist.
+
+- 6 handbook SVGs + 6 PNGs: `chapter-02-agent-html-reading`, `chapter-03-agent-decision-flow`, `chapter-04-content-hierarchy`, `chapter-06-agent-navigation-patterns`, `chapter-07-progressive-enhancement`, `chapter-10-implementation-roadmap`
+- 13 protocols SVGs + 13 PNGs in new `illustrations/` directory: chapters 2–14, executive summary
+- SVG masters created following the established visual style (Helvetica Neue, flat design, colour-coded panels: red/amber/green)
+- PNGs exported at 1600px wide via `rsvg-convert` for Pandoc/LaTeX compatibility
+- All markdown `![](...)` references verified pointing to `.png` files
+
+### 7. Memory Saved
 
 `memory/manuscript-formatting.md` created: permanent record of figure/table format standards, em-dash rule, British English substitutions, LaTeX footer values, and registry of existing numbered items in both books. `MEMORY.md` updated with pointer.
 
@@ -123,6 +139,8 @@ The Web Audit Suite was run against the live URL `allabout.network/mx/coming-soo
 | Homepage SEO score | 72/100 |
 | Homepage AI agent score | 100/100 |
 | index.html fixes applied | 8 (charset, lang, OG, Twitter, canonical, Schema.org, nav, lazy loading) |
+| SVG illustrations created | 19 |
+| PNG exports (1600px) | 19 |
 | Total lines changed | +2,483 / −2,347 |
 
 ---
@@ -135,7 +153,7 @@ The Web Audit Suite was run against the live URL `allabout.network/mx/coming-soo
 - Investigate FCP 3,099ms on homepage — font preload and blogroll lazy loading are likely causes
 - Add alt text to blogroll images at EDS block or source document level
 - Verify social card rendering via LinkedIn/Facebook debugger once deployed
-- Tony Harley editorial items still requiring human review: opening argument structure, dynamic pricing passage, illustration quality
+- All Tony Harley editorial items resolved ✓
 
 ---
 
@@ -145,7 +163,7 @@ The Web Audit Suite was run against the live URL `allabout.network/mx/coming-soo
 |------------|--------|
 | allaboutv2 | New coming-soon design, CSS externalised, all audit fixes, llms.txt updated; index.html accessibility + SEO fixes; coming-soon.html footer structure |
 | mx-crm | Audit reports: `coming-soon-report.md` (local pre-prod), `allabout-report.md` (live production) |
-| datalake | 55 manuscripts: British English + em-dash + figures/tables + Q1 date removal + LaTeX footer |
+| datalake | 55 manuscripts: British English + em-dash + figures/tables + Q1 date removal + LaTeX footer; chapter-11 text edits; 19 SVG + 19 PNG illustrations created |
 | mx-canon | writing-style.md v1.1: Section 3 dash rule, Section 9 Pattern 13, Section 13 new |
 | .claude | humanizer.json: Phase 1+2 updated with Section 13 structural checks |
 | mx-outputs | Evening report v3.0; README index updated |
