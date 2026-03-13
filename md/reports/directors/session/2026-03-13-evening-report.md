@@ -1,14 +1,14 @@
 ---
-title: "Co-Directors Report — MX Coming Soon Page + Book Editorial Amendments"
+title: "Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Homepage Fixes"
 created: "2026-03-13"
 segment: "evening"
-version: "2.0"
+version: "3.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidentiality: internal
 ---
 
-# Co-Directors Report — MX Coming Soon Page + Book Editorial Amendments
+# Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Homepage Fixes
 
 **Date:** 13 March 2026 — Evening
 
@@ -18,7 +18,7 @@ confidentiality: internal
 
 ## Summary
 
-A full production evening. The first part delivered a production-ready MX coming-soon landing page — zero Pa11y issues, full Schema.org compliance, social sharing images, and a live llms.txt. The second part applied Tony Harley's editorial review to both book manuscripts: British English throughout, correct em-dash typography, Q1 2026 date removal, figure and table numbering scheme applied consistently, and the LaTeX footer updated from Early Draft to Final Draft. Writing standards were codified into writing-style.md (v1.1) and the humanizer skill, so future work benefits from the same rules automatically.
+A full production evening across three distinct phases. Phase 1 delivered a production-ready MX coming-soon landing page — zero Pa11y issues, full Schema.org compliance, and a live llms.txt. Phase 2 applied Tony Harley's editorial review to both book manuscripts: British English throughout, em-dash typography, figure/table numbering, and writing-style.md updated to v1.1. Phase 3 ran a live production audit of allabout.network, identified the gap between the local build and what is actually live, generated a full executive audit report, and applied accessibility and SEO fixes to the homepage and coming-soon.html.
 
 ---
 
@@ -80,7 +80,27 @@ A chapter-prefixed numbering scheme was applied across both books:
 - Phase 2 em-dash detection corrected: flags overuse only, explicitly preserves correct single parenthetical uses; flags ` - ` in prose as a typographic bug
 - Phase 2 Step 4 (new): structural check for book manuscripts — figure captions must be below, table labels above, chapter-prefixed numbering, un-numbered items flagged
 
-### 5. Memory Saved
+### 5. Live Production Audit — allabout.network
+
+The Web Audit Suite was run against the live URL `allabout.network/mx/coming-soon.html`. Key findings documented in `mx-crm/outreach/2026-03-13/allabout-report.md`.
+
+**Production state confirmed:**
+
+- Homepage served HTML score: 100/100 (perfect AI agent compatibility)
+- Homepage SEO: 72/100 | Accessibility: 90/100
+- First Contentful Paint: 3,099ms (3× the "good" threshold — font loading and image weight)
+- All 14 homepage images missing alt text (EDS blogroll dynamic content)
+- llms.txt present but content describes DDT/AEM — not MX or CogNovaMX
+- coming-soon.html on production missing MX carrier metadata (present in local build — deployment gap, not authoring gap)
+
+**Fixes applied:**
+
+- `allaboutv2/index.html`: added `charset`, `lang="en-GB"`, canonical, complete Open Graph, Twitter Card, Schema.org (WebSite + Person JSON-LD), `<nav>` landmark for category tabs, `type="button"` on all category buttons, improved alt text and `loading="lazy"` on all 3 featured images
+- `allaboutv2/mx/coming-soon.html`: `<footer>` moved outside `<main>` (was incorrectly nested)
+
+**Remaining items (not fixable from static HTML):** Blogroll images lack alt text at the EDS block level — must be addressed in source documents or block JavaScript.
+
+### 6. Memory Saved
 
 `memory/manuscript-formatting.md` created: permanent record of figure/table format standards, em-dash rule, British English substitutions, LaTeX footer values, and registry of existing numbered items in both books. `MEMORY.md` updated with pointer.
 
@@ -99,17 +119,22 @@ A chapter-prefixed numbering scheme was applied across both books:
 | Pa11y WCAG AA issues | 0 |
 | Skill files updated | 2 (writing-style.md, humanizer.json) |
 | Memory files created/updated | 2 |
+| Production audit pages analyzed | 2 (homepage + llms.txt) |
+| Homepage SEO score | 72/100 |
+| Homepage AI agent score | 100/100 |
+| index.html fixes applied | 8 (charset, lang, OG, Twitter, canonical, Schema.org, nav, lazy loading) |
 | Total lines changed | +2,483 / −2,347 |
 
 ---
 
 ## Next Steps
 
-- Push datalake changes (manuscripts + config) and mx-canon changes as a single commit
-- Push .claude/skills humanizer.json change
+- Push all submodule and main repo commits to remote
+- Deploy local allaboutv2 build to production (coming-soon.html with MX metadata is ready)
+- Rewrite llms.txt to replace DDT/AEM content with MX/CogNovaMX content (draft in allabout-report.md Priority 1.2)
+- Investigate FCP 3,099ms on homepage — font preload and blogroll lazy loading are likely causes
+- Add alt text to blogroll images at EDS block or source document level
 - Verify social card rendering via LinkedIn/Facebook debugger once deployed
-- Consider adding `robots.txt` to allaboutv2 root for production
-- llms.txt DDT section needs version bump and date update (currently Nov 2025)
 - Tony Harley editorial items still requiring human review: opening argument structure, dynamic pricing passage, illustration quality
 
 ---
@@ -118,9 +143,9 @@ A chapter-prefixed numbering scheme was applied across both books:
 
 | Repository | Change |
 |------------|--------|
-| allaboutv2 | New coming-soon design, CSS externalised, all audit fixes, llms.txt updated |
-| mx-crm | Audit report: `outreach/2026-03-13/coming-soon-report.md` |
+| allaboutv2 | New coming-soon design, CSS externalised, all audit fixes, llms.txt updated; index.html accessibility + SEO fixes; coming-soon.html footer structure |
+| mx-crm | Audit reports: `coming-soon-report.md` (local pre-prod), `allabout-report.md` (live production) |
 | datalake | 55 manuscripts: British English + em-dash + figures/tables + Q1 date removal + LaTeX footer |
 | mx-canon | writing-style.md v1.1: Section 3 dash rule, Section 9 Pattern 13, Section 13 new |
 | .claude | humanizer.json: Phase 1+2 updated with Section 13 structural checks |
-| mx-outputs | README index updated |
+| mx-outputs | Evening report v3.0; README index updated |
