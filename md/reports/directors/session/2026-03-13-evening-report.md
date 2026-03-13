@@ -1,14 +1,14 @@
 ---
-title: "Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Illustrations"
+title: "Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Illustrations + PDFs"
 created: "2026-03-13"
 segment: "evening"
-version: "4.0"
+version: "5.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidentiality: internal
 ---
 
-# Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Illustrations
+# Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Illustrations + PDFs
 
 **Date:** 13 March 2026 — Evening
 
@@ -18,7 +18,7 @@ confidentiality: internal
 
 ## Summary
 
-A full production evening across four phases. Phase 1 delivered a production-ready MX coming-soon landing page. Phase 2 applied Tony Harley's editorial review to both manuscripts. Phase 3 ran a live production audit and applied fixes. Phase 4 resolved the remaining three editorial items from the Harley review: opening argument structure, dynamic pricing passage clarity, and all missing illustrations — 19 created (6 handbook, 13 protocols) as SVG masters with PNG exports, completing the manuscript illustration set from zero.
+A full production evening across five phases. Phase 1 delivered a production-ready MX coming-soon landing page. Phase 2 applied Tony Harley's editorial review to both manuscripts. Phase 3 ran a live production audit and applied fixes. Phase 4 resolved the remaining three editorial items from the Harley review: opening argument structure, dynamic pricing passage clarity, and all missing illustrations — 19 created (6 handbook, 13 protocols) as SVG masters with PNG exports, completing the manuscript illustration set from zero. Phase 5 extended the illustration pipeline to cover manuscript SVGs and produced both book PDFs — diagnosing and fixing a LaTeX compatibility issue with the `£` character in inline code along the way.
 
 ---
 
@@ -116,7 +116,32 @@ Three editorial items from the Harley review that required human judgement were 
 - PNGs exported at 1600px wide via `rsvg-convert` for Pandoc/LaTeX compatibility
 - All markdown `![](...)` references verified pointing to `.png` files
 
-### 7. Memory Saved
+### 8. Illustration Pipeline Extended — Manuscript SVGs
+
+`generate-illustrations.sh` extended from v2.0.0 to v3.0.0:
+
+- **Part 1** (existing): Asset SVGs in `datalake/assets/images/svg/` → PNGs at 2700px to `datalake/assets/images/bitmap/`
+- **Part 2** (new): Manuscript SVGs in `datalake/manuscripts/mx-books/` → PNGs at 1600px alongside SVG source files
+
+New `convert_manuscript_svg()` function uses the same rsvg-convert → ImageMagick → qlmanage cascade. Separate `MS_CONVERTED`/`MS_FAILED` counters reported in summary. Now processes 23 manuscript SVGs in a single command.
+
+### 9. Both Book PDFs Built
+
+Both manuscript PDFs generated successfully after diagnosing and fixing a build failure.
+
+**Root cause of failure:** The Protocols PDF build used `--syntax-highlighting=idiomatic`. This pandoc mode loads the `listings` package internally, which causes pandoc to render ALL inline code as `\lstinline`. The `listings` package cannot handle `£` and `—` characters in inline code, producing `! Undefined control sequence.` at line 25,925.
+
+**Fix applied (one commit):**
+
+- Removed `\usepackage{listings}` and `\lstset{...}` from `datalake/assets/configs/books/protocols/metadata.yaml` — the `fvextra` package already handles code line-breaking; `listings` was dead weight
+- Changed `--syntax-highlighting` from `idiomatic` to `pygments` in `package.json` (same as the Handbook — which has never had this issue)
+
+**Output:**
+
+- `mx-outputs/pdf/books/protocols/mx-protocols.pdf` — 6.9MB
+- `mx-outputs/pdf/books/handbook/mx-handbook.pdf` — 77MB (includes all 19 new illustrations at 1600px)
+
+### 10. Memory Saved
 
 `memory/manuscript-formatting.md` created: permanent record of figure/table format standards, em-dash rule, British English substitutions, LaTeX footer values, and registry of existing numbered items in both books. `MEMORY.md` updated with pointer.
 
@@ -141,6 +166,11 @@ Three editorial items from the Harley review that required human judgement were 
 | index.html fixes applied | 8 (charset, lang, OG, Twitter, canonical, Schema.org, nav, lazy loading) |
 | SVG illustrations created | 19 |
 | PNG exports (1600px) | 19 |
+| generate-illustrations.sh version | 3.0.0 |
+| Manuscript SVGs processed by script | 23 |
+| Asset SVGs processed by script | 53 |
+| PDFs built | 2 (Protocols 6.9MB, Handbook 77MB) |
+| PDF build bug diagnosed + fixed | 1 (listings/£ incompatibility) |
 | Total lines changed | +2,483 / −2,347 |
 
 ---
@@ -154,6 +184,7 @@ Three editorial items from the Harley review that required human judgement were 
 - Add alt text to blogroll images at EDS block or source document level
 - Verify social card rendering via LinkedIn/Facebook debugger once deployed
 - All Tony Harley editorial items resolved ✓
+- Both book PDFs built and current ✓
 
 ---
 
@@ -166,4 +197,7 @@ Three editorial items from the Harley review that required human judgement were 
 | datalake | 55 manuscripts: British English + em-dash + figures/tables + Q1 date removal + LaTeX footer; chapter-11 text edits; 19 SVG + 19 PNG illustrations created |
 | mx-canon | writing-style.md v1.1: Section 3 dash rule, Section 9 Pattern 13, Section 13 new |
 | .claude | humanizer.json: Phase 1+2 updated with Section 13 structural checks |
-| mx-outputs | Evening report v3.0; README index updated |
+| scripts | generate-illustrations.sh v3.0.0: Part 2 for manuscript SVGs |
+| datalake/assets/configs | protocols/metadata.yaml: removed listings package |
+| package.json | pdf:protocols-generate: idiomatic → pygments highlighting |
+| mx-outputs | Evening report v5.0; both book PDFs rebuilt |
