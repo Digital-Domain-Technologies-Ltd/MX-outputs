@@ -77,4 +77,6 @@ The LinkedIn messaging evolution in this session surfaced an important principle
 
 ## Commit Log
 
-*(to be filled after commit)*
+| Hash | Description |
+|------|-------------|
+| 3af7cc02 | Remove LinkedIn plan files + add Chapter 17 IA + update Glossary |
