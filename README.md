@@ -15,11 +15,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 40 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 105 | Markdown — reports, audit results, presentations |
+| [md/](md/) | 114 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 96 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
-| [pptx/](pptx/) | 1 | PowerPoint — presentation source files |
-| **Total** | **246** | |
+| [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
+| **Total** | **256** | |
 
 ---
 
@@ -27,21 +27,20 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 PDF documents — books, manuals, presentations, blog exports.
 
-### pdf/books/ (9 files)
+### pdf/books/ (8 files)
 
 - [`The-AI-Tipping-Point-CMS-Kickoff-2024.pdf`](pdf/books/chapters/The-AI-Tipping-Point-CMS-Kickoff-2024.pdf)
-- [`chapter-00-introduction-to-mx-kindle.pdf`](pdf/books/chapters/chapter-00-introduction-to-mx-kindle.pdf)
 - [`chapter-00-introduction-to-mx.pdf`](pdf/books/chapters/chapter-00-introduction-to-mx.pdf)
 - [`mx-introduction-chapter.pdf`](pdf/books/free-book/mx-introduction-chapter.pdf)
-- [`mx-handbook-kindle.pdf`](pdf/books/handbook/mx-handbook-kindle.pdf)
+- [`handbook-cover-back.pdf`](pdf/books/handbook/handbook-cover-back.pdf)
+- [`handbook-cover-front.pdf`](pdf/books/handbook/handbook-cover-front.pdf)
 - [`mx-handbook.pdf`](pdf/books/handbook/mx-handbook.pdf)
-- [`mx-protocols-kindle.pdf`](pdf/books/protocols/mx-protocols-kindle.pdf)
 - [`mx-protocols-simple.pdf`](pdf/books/protocols/mx-protocols-simple.pdf)
 - [`mx-protocols.pdf`](pdf/books/protocols/mx-protocols.pdf)
-  - **chapters/** (3 files)
+  - **chapters/** (2 files)
   - **free-book/** (1 files)
-  - **handbook/** (2 files)
-  - **protocols/** (3 files)
+  - **handbook/** (3 files)
+  - **protocols/** (2 files)
 
 ### pdf/cogify/ (2 files)
 
@@ -78,6 +77,10 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`reginald-manual.pdf`](pdf/reginald/reginald-manual.pdf)
   - **diagrams/** (18 files)
 
+### pdf/reports/ (1 files)
+
+- [`agentica-report.pdf`](pdf/reports/agentica-report.pdf)
+
 ---
 
 ## md/
@@ -107,7 +110,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`reginald-implementation-plan-print.md`](md/reginald/reginald-implementation-plan-print.md)
 - [`reginald-manual-print.md`](md/reginald/reginald-manual-print.md)
 
-### md/reports/ (90 files)
+### md/reports/ (100 files)
 
 #### md/reports/completions/ (20 files)
 
@@ -136,7 +139,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-02-13/** (2 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (70 files)
+#### md/reports/directors/ (79 files)
 
 **build/** (3 files)
 
@@ -150,7 +153,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (62 files)
+**session/** (72 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -205,11 +208,17 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-03-10-afternoon-report.md`](md/reports/directors/session/2026-03-10-afternoon-report.md)
 - [`2026-03-10-evening-report.md`](md/reports/directors/session/2026-03-10-evening-report.md)
 - [`2026-03-10-morning-report.md`](md/reports/directors/session/2026-03-10-morning-report.md)
-- [`2026-03-11-morning-report.md`](md/reports/directors/session/2026-03-11-morning-report.md)
 - [`2026-03-11-afternoon-report.md`](md/reports/directors/session/2026-03-11-afternoon-report.md)
+- [`2026-03-11-morning-report.md`](md/reports/directors/session/2026-03-11-morning-report.md)
 - [`2026-03-12-afternoon-report.md`](md/reports/directors/session/2026-03-12-afternoon-report.md)
 - [`2026-03-12-evening-report.md`](md/reports/directors/session/2026-03-12-evening-report.md)
 - [`2026-03-13-evening-report.md`](md/reports/directors/session/2026-03-13-evening-report.md)
+- [`2026-03-14-evening-report.md`](md/reports/directors/session/2026-03-14-evening-report.md)
+- [`2026-03-15-afternoon-report.md`](md/reports/directors/session/2026-03-15-afternoon-report.md)
+- [`2026-03-15-evening-report.md`](md/reports/directors/session/2026-03-15-evening-report.md)
+- [`2026-03-15-morning-report.md`](md/reports/directors/session/2026-03-15-morning-report.md)
+- [`2026-03-16-evening-report.md`](md/reports/directors/session/2026-03-16-evening-report.md)
+- [`2026-03-16-morning-report.md`](md/reports/directors/session/2026-03-16-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -354,8 +363,9 @@ Structured data — audit comparisons, machine-readable reports.
 
 PowerPoint presentation source files.
 
+- [`chris-bryce-livestream-2-2026-03-12.pptx`](pptx/presentations/chris-bryce-livestream-2-2026-03-12.pptx)
 - [`london-cms-experts-2026-02-26.pptx`](pptx/presentations/london-cms-experts-2026-02-26.pptx)
 
 ---
 
-*Generated on 2026-03-11 at 15:25*
+*Generated on 2026-03-16 at 21:39*
