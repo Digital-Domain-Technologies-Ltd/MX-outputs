@@ -3,63 +3,724 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>REGINALD — MX COG Registry</title>
-  <meta name="description" content="Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation. The global directory of machine-readable COG documents.">
+  <title>MX-Reginald — The Global Registry for Machine-Readable Documentation</title>
+  <meta name="description" content="MX-Reginald: Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation. When AI agents guess, people lose money. MX-Reginald makes verified answers globally available.">
   <meta name="author" content="CogNovaMX Ltd">
   <meta name="mx:status" content="active">
   <meta name="mx:contentType" content="registry">
+  <meta name="mx:audience" content="humans,ai-agents,developers">
   <link rel="canonical" href="https://reginald.allabout.network/">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #0a0a0a; color: #e0e0e0;
-      line-height: 1.6; padding: 2rem; max-width: 48rem; margin: 0 auto;
+      line-height: 1.7; font-size: 1rem;
     }
-    h1 { color: #00d4aa; font-size: 1.8rem; margin-bottom: 0.25rem; }
-    .subtitle { color: #888; font-size: 0.95rem; margin-bottom: 2rem; }
-    h2 { color: #fff; font-size: 1.1rem; margin: 1.5rem 0 0.75rem; border-bottom: 1px solid #222; padding-bottom: 0.25rem; }
+
+    /* --- Navigation --- */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #1a1a1a;
+      padding: 0.75rem 1.5rem;
+    }
+    nav .nav-inner {
+      max-width: 64rem; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.5rem;
+    }
+    nav .logo { color: #00d4aa; font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+    nav .nav-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    nav .nav-links a {
+      color: #888; text-decoration: none; font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:hover { color: #00d4aa; }
+
+    /* --- Layout --- */
+    .container { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 4rem 0; }
+    section + section { border-top: 1px solid #151515; }
+
+    /* --- Typography --- */
+    h1 { color: #00d4aa; font-size: 2.8rem; line-height: 1.2; margin-bottom: 0.5rem; }
+    h2 { color: #fff; font-size: 1.6rem; margin-bottom: 1.25rem; }
+    h3 { color: #00d4aa; font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
+    p { margin-bottom: 1rem; }
     a { color: #00d4aa; text-decoration: none; }
     a:hover { text-decoration: underline; }
+    strong { color: #fff; }
+
+    /* --- Hero --- */
+    .hero { padding: 5rem 0 4rem; text-align: center; border-bottom: none; }
+    .hero .subtitle {
+      color: #888; font-size: 1rem; margin-bottom: 1.5rem;
+      max-width: 40rem; margin-left: auto; margin-right: auto;
+    }
+    .hero .value-prop {
+      font-size: 1.2rem; color: #ccc; max-width: 44rem;
+      margin: 0 auto 2rem; line-height: 1.6;
+    }
+    .hero .cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-block; padding: 0.75rem 1.75rem;
+      border-radius: 30px; font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-primary { background: #00d4aa; color: #0a0a0a; }
+    .btn-primary:hover { background: #00e8bb; text-decoration: none; }
+    .btn-secondary { background: transparent; color: #00d4aa; border: 1px solid #00d4aa; }
+    .btn-secondary:hover { background: #00d4aa15; text-decoration: none; }
+
+    /* --- Cards / Grid --- */
+    .grid-2 {
+      display: grid; grid-template-columns: 1fr;
+      gap: 1.25rem; margin: 1.5rem 0;
+    }
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+    .card {
+      background: #111; border: 1px solid #1a1a1a;
+      border-radius: 8px; padding: 1.5rem;
+    }
+    .card h3 { margin-top: 0; }
+
+    /* --- Problem stories --- */
+    .story {
+      background: #111; border-left: 3px solid #ff6b6b;
+      padding: 1.25rem 1.5rem; margin: 1.25rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .story .amount { color: #ff6b6b; font-size: 1.4rem; font-weight: 700; }
+
+    /* --- Stat callout --- */
+    .stat-row {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+      justify-content: center; margin: 2rem 0;
+    }
+    .stat {
+      text-align: center; flex: 1; min-width: 140px;
+    }
+    .stat .number { color: #00d4aa; font-size: 2rem; font-weight: 700; display: block; }
+    .stat .label { color: #888; font-size: 0.85rem; }
+
+    /* --- Flow diagram --- */
+    .flow {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem; flex-wrap: wrap; margin: 2rem 0;
+      font-family: monospace; font-size: 0.9rem;
+    }
+    .flow-step {
+      background: #1a1a1a; border: 1px solid #333;
+      padding: 0.6rem 1rem; border-radius: 6px; text-align: center;
+    }
+    .flow-arrow { color: #00d4aa; font-size: 1.2rem; }
+
+    /* --- Tables --- */
+    table {
+      width: 100%; border-collapse: collapse;
+      margin: 1.25rem 0; font-size: 0.9rem;
+    }
+    th {
+      text-align: left; padding: 0.6rem 0.75rem;
+      border-bottom: 2px solid #00d4aa; color: #fff;
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    tr:hover td { background: #111; }
+
+    /* --- Code --- */
+    code {
+      background: #1a1a1a; padding: 0.15rem 0.4rem;
+      border-radius: 3px; font-size: 0.88rem;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    }
+    pre {
+      background: #111; border: 1px solid #1a1a1a;
+      border-radius: 8px; padding: 1.25rem; overflow-x: auto;
+      margin: 1rem 0; font-size: 0.85rem; line-height: 1.5;
+    }
+    pre code { background: none; padding: 0; }
+
+    /* --- Badges --- */
+    .badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      padding: 0.15rem 0.5rem; border-radius: 3px;
+      vertical-align: middle; margin-left: 0.4rem;
+    }
+    .badge-get { background: #00d4aa; color: #0a0a0a; }
+    .badge-post { background: #ffc107; color: #0a0a0a; }
+    .badge-free { background: #333; color: #00d4aa; }
+    .badge-auth { background: #333; color: #ffc107; }
+
+    /* --- Pricing cards --- */
+    .pricing-grid {
+      display: grid; grid-template-columns: 1fr;
+      gap: 1.25rem; margin: 2rem 0;
+    }
+    @media (min-width: 768px) {
+      .pricing-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .pricing-card {
+      background: #111; border: 1px solid #1a1a1a;
+      border-radius: 8px; padding: 1.5rem; text-align: center;
+    }
+    .pricing-card.featured {
+      border-color: #00d4aa; position: relative;
+    }
+    .pricing-card.featured::before {
+      content: 'Most Popular';
+      position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);
+      background: #00d4aa; color: #0a0a0a;
+      font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.75rem;
+      border-radius: 10px; text-transform: uppercase;
+    }
+    .pricing-card .tier { color: #888; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .pricing-card .price { color: #fff; font-size: 1.8rem; font-weight: 700; margin: 0.75rem 0 0.25rem; }
+    .pricing-card .price span { font-size: 0.9rem; color: #888; font-weight: 400; }
+    .pricing-card .features { list-style: none; text-align: left; margin: 1rem 0; font-size: 0.85rem; }
+    .pricing-card .features li { padding: 0.3rem 0; }
+    .pricing-card .features li::before { content: '\2713\0020'; color: #00d4aa; }
+    .pricing-card .btn { width: 100%; }
+
+    /* --- Endpoints list --- */
     .endpoints { list-style: none; }
-    .endpoints li { padding: 0.4rem 0; }
-    .endpoints code { background: #1a1a1a; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.9rem; }
-    .badge { display: inline-block; background: #00d4aa; color: #0a0a0a; font-size: 0.75rem; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 3px; margin-left: 0.5rem; vertical-align: middle; }
-    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #222; color: #666; font-size: 0.8rem; }
+    .endpoints li {
+      padding: 0.5rem 0; display: flex; align-items: center;
+      gap: 0.5rem; flex-wrap: wrap;
+    }
+    .endpoints .ep-path { font-family: monospace; font-size: 0.9rem; }
+    .endpoints .ep-desc { color: #888; font-size: 0.85rem; }
+
+    /* --- Steps --- */
+    .steps { counter-reset: step; list-style: none; }
+    .steps li {
+      counter-increment: step; padding: 1rem 0 1rem 3.5rem;
+      position: relative; border-left: 2px solid #1a1a1a;
+      margin-left: 1rem;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute; left: -1.1rem; top: 1rem;
+      width: 2rem; height: 2rem;
+      background: #00d4aa; color: #0a0a0a;
+      border-radius: 50%; text-align: center; line-height: 2rem;
+      font-weight: 700; font-size: 0.85rem;
+    }
+    .steps li:last-child { border-left-color: transparent; }
+
+    /* --- Comparison table --- */
+    .compare-old { color: #ff6b6b; }
+    .compare-new { color: #00d4aa; }
+
+    /* --- Callout --- */
+    .callout {
+      background: #0d1f1a; border: 1px solid #00d4aa33;
+      border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+    }
+
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 3rem 0; color: #666; font-size: 0.85rem;
+    }
+    footer a { color: #888; }
+    footer a:hover { color: #00d4aa; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+
+    /* --- Responsive --- */
+    @media (max-width: 767px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.3rem; }
+      section { padding: 2.5rem 0; }
+      .hero { padding: 3rem 0 2.5rem; }
+      nav .nav-links { gap: 0.75rem; }
+      .flow { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
+    }
   </style>
 </head>
 <body>
-  <h1>REGINALD</h1>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">MX-Reginald</a>
+    <div class="nav-links">
+      <a href="#problem">The Problem</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#cogs">COGs</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#api">API</a>
+      <a href="#get-started">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero container">
+  <h1>MX-Reginald</h1>
   <p class="subtitle">Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation</p>
+  <p class="value-prop"><strong>When AI agents guess, people lose money.</strong> MX-Reginald is the global registry where verified, machine-readable documentation lives and is queryable by any AI system worldwide.</p>
+  <div class="cta">
+    <a href="#get-started" class="btn btn-primary">Get Started</a>
+    <a href="#api" class="btn btn-secondary">View API</a>
+  </div>
+</section>
 
-  <p>REGINALD is a pure DNS-like resolver for machine-readable documentation. It maps COG identifiers to publisher-hosted content URLs. REGINALD does not host content — each publisher serves their own COGs.</p>
+<!-- The Problem -->
+<section id="problem">
+  <div class="container">
+    <h2>The Problem</h2>
+    <p>AI inference systems generate wrong answers to questions that already have documented answers. This happens because documentation was designed for humans reading web pages — not for machines parsing structured data.</p>
 
-  <h2>API Endpoints</h2>
-  <ul class="endpoints">
-    <li><code>GET</code> <a href="/index.json">/index.json</a> — Full registry index</li>
-    <li><code>GET</code> <a href="/api/v1/stats.json">/api/v1/stats.json</a> — Registry statistics</li>
-    <li><code>GET</code> <a href="/api/v1/publishers.json">/api/v1/publishers.json</a> — Registered publishers</li>
-    <li><code>GET</code> <a href="/api/v1/namespaces.json">/api/v1/namespaces.json</a> — Namespace directory</li>
-    <li><code>GET</code> <a href="/api/v1/namespaces/cognovamx/cogs.json">/api/v1/namespaces/{ns}/cogs.json</a> — COGs in a namespace</li>
-    <li><code>GET</code> <a href="/cogs/cognovamx/principles/latest.json">/cogs/{ns}/{name}/latest.json</a> — Pointer record (latest version)</li>
-    <li><code>GET</code> <a href="/api/v1/public-key.pem">/api/v1/public-key.pem</a> — Registry public key</li>
-    <li><code>GET</code> <a href="/llms.txt">/llms.txt</a> — AI-readable registry summary <span class="badge">LLM</span></li>
-  </ul>
+    <div class="story">
+      <p class="amount">The £200,000 pricing error</p>
+      <p>A river cruise priced at £2,030 was reported by an AI agent as £203,000. European number formatting, no Schema.org <code>PriceSpecification</code>, no structured price data. The couple never booked. The cruise company never knew why it lost the sale.</p>
+    </div>
 
-  <h2>Resolution Flow</h2>
-  <ol style="padding-left: 1.5rem;">
-    <li>Discover namespaces via <code>/api/v1/namespaces.json</code></li>
-    <li>List COGs in a namespace via <code>/api/v1/namespaces/{ns}/cogs.json</code></li>
-    <li>Fetch pointer record via <code>/cogs/{ns}/{name}/latest.json</code></li>
-    <li>Follow <code>canonical_url</code> to retrieve content from the publisher</li>
-    <li>Verify <code>content_hash</code> and certificates</li>
-  </ol>
+    <div class="story">
+      <p class="amount">The 40,000-token waste</p>
+      <p>A developer asked an AI coding assistant about a documented authentication command. The command existed. The AI denied it. The troubleshooting cascade consumed over 40,000 tokens across two AI systems. The correct answer required 200 tokens. A <strong>200x cost multiplier</strong> — on a single question.</p>
+    </div>
 
-  <h2>About</h2>
-  <p>REGINALD is operated by <a href="https://allabout.network">CogNovaMX Ltd</a> as part of the Machine Experience (MX) ecosystem. For publisher onboarding, see the <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/tree/main/mx-reginald">documentation</a>.</p>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="number">432 TWh</span>
+        <span class="label">Projected AI inference electricity by 2030</span>
+      </div>
+      <div class="stat">
+        <span class="number">9%</span>
+        <span class="label">Conservative hallucination rate</span>
+      </div>
+      <div class="stat">
+        <span class="number">$1B+</span>
+        <span class="label">Annual wasted inference cost</span>
+      </div>
+    </div>
 
-  <footer>
+    <p>MX-Reginald and COGs exist to eliminate this waste at the source. A single API call replaces the cycle of web search, page parsing, prose extraction, and speculative synthesis.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Without MX-Reginald</th>
+          <th>With MX-Reginald</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="compare-old">Web scraping (unreliable, expensive)</td><td class="compare-new">Structured registry (reliable, efficient)</td></tr>
+        <tr><td class="compare-old">No verification of source accuracy</td><td class="compare-new">Cryptographic signing (Ed25519)</td></tr>
+        <tr><td class="compare-old">No accountability for wrong information</td><td class="compare-new">Named maintainer + SLA + review cycle</td></tr>
+        <tr><td class="compare-old">Content goes stale silently</td><td class="compare-new">Expiry dates + update triggers</td></tr>
+        <tr><td class="compare-old">Each AI platform scrapes differently</td><td class="compare-new">One format, universal access</td></tr>
+        <tr><td class="compare-old">Inference from prose (error-prone)</td><td class="compare-new">Structured YAML frontmatter (precise)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how-it-works">
+  <div class="container">
+    <h2>How It Works</h2>
+    <p>MX-Reginald is <strong>DNS for machine-readable documentation</strong>. It maps COG identifiers to publisher-hosted content URLs. MX-Reginald does not host content — each publisher serves their own COGs from their own domain.</p>
+
+    <h3>Resolution Flow</h3>
+    <div class="flow">
+      <div class="flow-step">AI Agent queries<br><code>/api/v1/namespaces</code></div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">Discovers namespace<br><code>cognovamx</code></div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">Fetches pointer record<br><code>/cogs/{ns}/{name}/latest.json</code></div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">Follows <code>canonical_url</code><br>to publisher server</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">Verifies<br><code>content_hash</code></div>
+    </div>
+
+    <h3>Two-Layer Trust</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Publisher Signs Content</h3>
+        <p>The publisher cryptographically signs their COG, proving "I wrote this and it is current." The signature travels with the content.</p>
+      </div>
+      <div class="card">
+        <h3>Registry Signs Pointer</h3>
+        <p>MX-Reginald signs the pointer record with Ed25519, proving "this document was registered, validated, and conforms to specifications."</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Pure resolver, not a host.</strong> MX-Reginald resolves identifiers to URLs — it never stores or caches content. Publishers retain full control of their documentation and can update it at any time.
+    </div>
+  </div>
+</section>
+
+<!-- What Is a COG? -->
+<section id="cogs">
+  <div class="container">
+    <h2>What Is a COG?</h2>
+    <p>A COG is a markdown file with YAML frontmatter. No proprietary format. No binary encoding. No special tooling required. A <code>.cog.md</code> file that any text editor can open and any AI system can parse.</p>
+
+    <pre><code>---
+title: "Rancilio Silvia Pro X"
+description: "Dual-boiler espresso machine with PID temperature control"
+author: "Rancilio Group"
+version: "2.1"
+
+mx:
+  status: active
+  contentType: product
+  tags: [espresso, dual-boiler, pid]
+  maintainer: "product-team@rancilio.com"
+  reviewCycle: "quarterly"
+  expires: 2026-07-01
+---
+
+# Rancilio Silvia Pro X
+
+The Silvia Pro X is a dual-boiler espresso machine...</code></pre>
+
+    <p>The YAML frontmatter is for machines. The markdown body is for humans. Same file, both audiences served.</p>
+
+    <h3>The Dual Meaning</h3>
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>Full Name</th><th>What It Proves</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Certificate</strong></td><td>Certificate of Genuineness</td><td>"This document is real"</td></tr>
+        <tr><td><strong>Contract</strong></td><td>Contract of Governance</td><td>"Someone keeps this accurate"</td></tr>
+      </tbody>
+    </table>
+
+    <p>Every COG carries both layers. The Certificate tells an AI agent whether to trust the content. The Contract tells it who is responsible for keeping the content current — with a named maintainer, a review cycle, and an expiry date.</p>
+
+    <h3>Two Types</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Info-Doc</h3>
+        <p>A COG without an action block — documents, describes, certifies. The single source of truth for a product, API, or specification.</p>
+      </div>
+      <div class="card">
+        <h3>Action-Doc</h3>
+        <p>A COG with an action block — validates, generates, extracts, analyses. A Standard Operating Procedure that executes itself. The document is the programme.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section id="benefits">
+  <div class="container">
+    <h2>Benefits</h2>
+
+    <h3>For Publishers</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Correct AI Answers</h3>
+        <p>When a customer asks an AI agent about your product, the AI reads your COG and gives the right answer — your price, your features, your specifications. Not a hallucinated version scraped from an outdated blog post.</p>
+      </div>
+      <div class="card">
+        <h3>Reduced Support Costs</h3>
+        <p>Every AI hallucination about your product generates a support ticket. COGs eliminate the hallucination at the source.</p>
+      </div>
+      <div class="card">
+        <h3>E-Commerce Alignment</h3>
+        <p>Machines are dream customers. They convert at extraordinary rates, do not abandon carts, and require no retargeting. But only if they have correct product data.</p>
+      </div>
+      <div class="card">
+        <h3>Citation Advantage</h3>
+        <p>AI systems that learn to trust your COG as the authoritative source for your product create a durable competitive moat. Computational trust, once established, is difficult for competitors to displace.</p>
+      </div>
+    </div>
+
+    <h3>For AI Providers</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Cost Reduction</h3>
+        <p>The 40,000-token troubleshooting cascade becomes a 200-token correct answer. At scale, this is measured in millions of dollars annually.</p>
+      </div>
+      <div class="card">
+        <h3>Accuracy Improvement</h3>
+        <p>Verified answers from signed sources are qualitatively different from probabilistic inference. A measurable quality differentiator where accuracy is the primary competitive axis.</p>
+      </div>
+      <div class="card">
+        <h3>Sustainability</h3>
+        <p>MX-Reginald-addressable waste represents 15.6 TWh by 2030 — equivalent to removing 1.6 million cars from the road. Publishable data for ESG reporting.</p>
+      </div>
+      <div class="card">
+        <h3>Standards Influence</h3>
+        <p>Early engagement positions the provider to shape how machine-readable documentation standards develop. Analogous to early participation in Schema.org or OpenAPI.</p>
+      </div>
+    </div>
+
+    <h3>For Enterprises</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Internal AI Accuracy</h3>
+        <p>Private COGs ensure your internal AI tools give correct answers about your own systems. No more hallucinated API endpoints, no more fictional configuration options.</p>
+      </div>
+      <div class="card">
+        <h3>Governance &amp; Audit Trail</h3>
+        <p>Every COG has a named maintainer, a review cycle, and an expiry date. Cryptographic signing creates a verifiable chain of provenance — who published this, when, and has it been modified.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="container">
+    <h2>Pricing</h2>
+    <p>Per-namespace pricing — like domain registration. One namespace per publisher entity. Read-side API access is always free.</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="tier">Open</div>
+        <div class="price">Free</div>
+        <ul class="features">
+          <li>1 namespace</li>
+          <li>Public COGs</li>
+          <li>Basic resolution</li>
+          <li>Annual aliveness check</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#get-started" class="btn btn-secondary">Get Started</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="tier">Professional</div>
+        <div class="price">&pound;149<span>/year</span></div>
+        <ul class="features">
+          <li>Up to 3 namespaces</li>
+          <li>Everything in Open</li>
+          <li>Resolution analytics</li>
+          <li>Priority cache refresh</li>
+          <li>Email support</li>
+        </ul>
+        <a href="#get-started" class="btn btn-primary">Subscribe</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="tier">Business</div>
+        <div class="price">&pound;499<span>/year</span></div>
+        <ul class="features">
+          <li>Up to 10 namespaces</li>
+          <li>Everything in Professional</li>
+          <li>Private &amp; enterprise COGs</li>
+          <li>SLA (99.9% uptime)</li>
+          <li>Verification badge</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#get-started" class="btn btn-secondary">Subscribe</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="tier">Enterprise</div>
+        <div class="price">Custom</div>
+        <ul class="features">
+          <li>Unlimited namespaces</li>
+          <li>Everything in Business</li>
+          <li>Dedicated instance</li>
+          <li>Custom SLA</li>
+          <li>API rate guarantees</li>
+          <li>Account manager</li>
+        </ul>
+        <a href="mailto:tom.cranstoun@gmail.com" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Read-side is always free.</strong> Any AI agent can query the registry, resolve namespaces, fetch pointer records, and verify signatures — without authentication, without rate limits, without cost. Only publishers who register and maintain namespaces need a subscription.
+    </div>
+
+    <h3>API Rate Limits</h3>
+    <table>
+      <thead>
+        <tr><th>Tier</th><th>Rate Limit</th><th>Monthly Requests</th><th>Price</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Free</td><td>10/min</td><td>1,000</td><td>&pound;0</td></tr>
+        <tr><td>Basic</td><td>60/min</td><td>10,000</td><td>&pound;12.50/year</td></tr>
+        <tr><td>Professional</td><td>600/min</td><td>100,000</td><td>&pound;99/year</td></tr>
+        <tr><td>Enterprise</td><td>Unlimited</td><td>Custom</td><td>Custom</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- The Registry Today -->
+<section id="registry">
+  <div class="container">
+    <h2>The Registry Today</h2>
+
+    <div class="stat-row">
+      <div class="stat">
+        <span class="number">2</span>
+        <span class="label"><a href="/api/v1/publishers.json">Registered Publishers</a></span>
+      </div>
+      <div class="stat">
+        <span class="number">83</span>
+        <span class="label"><a href="/api/v1/stats.json">Public COGs</a></span>
+      </div>
+      <div class="stat">
+        <span class="number">13</span>
+        <span class="label">Core Audit Tools</span>
+      </div>
+      <div class="stat">
+        <span class="number">Ed25519</span>
+        <span class="label"><a href="/api/v1/public-key.pem">Signing Engine</a></span>
+      </div>
+    </div>
+
+    <h3>Core Audit Action-COGs</h3>
+    <p>MX-Reginald ships with action-docs that audit websites for machine-readability:</p>
+    <table>
+      <thead>
+        <tr><th>Action-COG</th><th>What It Checks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>a11y</code></td><td>Accessibility compliance (WCAG convergence with MX)</td></tr>
+        <tr><td><code>clarity</code></td><td>Documentation clarity and readability</td></tr>
+        <tr><td><code>link-checker</code></td><td>Broken links and redirect chains</td></tr>
+        <tr><td><code>llms-txt</code></td><td>Presence and validity of <code>llms.txt</code> files</td></tr>
+        <tr><td><code>metadata</code></td><td>Open Graph, Twitter Cards, meta tags</td></tr>
+        <tr><td><code>pricing</code></td><td>Structured pricing data (prevents the &pound;200k error)</td></tr>
+        <tr><td><code>readability</code></td><td>Plain language analysis</td></tr>
+        <tr><td><code>robots-txt</code></td><td>AI crawler stance and <code>robots.txt</code> configuration</td></tr>
+        <tr><td><code>schema</code></td><td>Schema.org JSON-LD validation</td></tr>
+        <tr><td><code>semantic-html</code></td><td>HTML structure and semantic element usage</td></tr>
+        <tr><td><code>sitemap</code></td><td>Sitemap completeness and validity</td></tr>
+        <tr><td><code>toast-detector</code></td><td>Ephemeral UI patterns invisible to machines</td></tr>
+        <tr><td><code>validate-cog</code></td><td>COG specification compliance</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Compliance Levels -->
+<section id="compliance">
+  <div class="container">
+    <h2>Five Compliance Levels</h2>
+    <p>Not every document needs the same verification. A company's internal wiki has different requirements than a pharmaceutical dosage reference.</p>
+    <table>
+      <thead>
+        <tr><th>Level</th><th>Name</th><th>Requirements</th><th>Use Case</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1 &mdash; Basic</strong></td><td>YAML present, publisher identified</td><td>Internal documentation</td><td>Quick-start adoption</td></tr>
+        <tr><td><strong>2 &mdash; Structured</strong></td><td>MX-compliant format, maintainer + contact</td><td>Public documentation</td><td>Professionalised content</td></tr>
+        <tr><td><strong>3 &mdash; Signed</strong></td><td>Cryptographically signed, review cycle + triggers</td><td><strong>MX-Reginald minimum</strong></td><td>Commercial documentation</td></tr>
+        <tr><td><strong>4 &mdash; Registered</strong></td><td>Signed + registered, full contract with SLA</td><td>Enterprise documentation</td><td>Regulated industries</td></tr>
+        <tr><td><strong>5 &mdash; Audited</strong></td><td>Signed + registered + third-party verified</td><td>Critical documentation</td><td>Healthcare, finance, legal</td></tr>
+      </tbody>
+    </table>
+    <p>Level 3 is the minimum for MX-Reginald registration — the point where AI systems can trust the content programmatically. Level 5 is for industries where a wrong answer does not just waste tokens — it harms people.</p>
+  </div>
+</section>
+
+<!-- API -->
+<section id="api">
+  <div class="container">
+    <h2>API</h2>
+    <p>Base URL: <code>https://reginald.allabout.network</code></p>
+
+    <h3>Read Endpoints <span class="badge badge-free">Public</span></h3>
+    <ul class="endpoints">
+      <li><span class="badge badge-get">GET</span> <a href="/index.json" class="ep-path">/index.json</a> <span class="ep-desc">Full registry index</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="/api/v1/stats.json" class="ep-path">/api/v1/stats.json</a> <span class="ep-desc">Registry statistics</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="/api/v1/publishers.json" class="ep-path">/api/v1/publishers.json</a> <span class="ep-desc">Registered publishers</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="/api/v1/namespaces.json" class="ep-path">/api/v1/namespaces.json</a> <span class="ep-desc">Namespace directory</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="/api/v1/namespaces/cognovamx/cogs.json" class="ep-path">/api/v1/namespaces/{ns}/cogs.json</a> <span class="ep-desc">COGs in a namespace</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="/cogs/cognovamx/principles/latest.json" class="ep-path">/cogs/{ns}/{name}/latest.json</a> <span class="ep-desc">Pointer record (latest version)</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="/api/v1/public-key.pem" class="ep-path">/api/v1/public-key.pem</a> <span class="ep-desc">Registry Ed25519 public key</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="/llms.txt" class="ep-path">/llms.txt</a> <span class="ep-desc">AI-readable registry summary</span></li>
+    </ul>
+
+    <h3>Write Endpoints <span class="badge badge-auth">Auth Required</span></h3>
+    <ul class="endpoints">
+      <li><span class="badge badge-post">POST</span> <code class="ep-path">/api/v1/subscribe</code> <span class="ep-desc">Create Stripe checkout session (new publishers)</span></li>
+      <li><span class="badge badge-post">POST</span> <code class="ep-path">/api/v1/register</code> <span class="ep-desc">Register or update a namespace (Bearer token)</span></li>
+      <li><span class="badge badge-get">GET</span> <code class="ep-path">/api/v1/publisher/status</code> <span class="ep-desc">Check subscription and listing status (Bearer token)</span></li>
+      <li><span class="badge badge-post">POST</span> <code class="ep-path">/api/v1/publisher/token/rotate</code> <span class="ep-desc">Generate new API token, revoke old (Bearer token)</span></li>
+    </ul>
+
+    <h3>Authentication</h3>
+    <p>Read endpoints require no authentication. Write endpoints require a Bearer token issued during subscription:</p>
+    <pre><code>Authorization: Bearer reg_your64hexcharshere...</code></pre>
+    <p>Tokens are generated at subscription time and can be rotated via the token rotation endpoint. Token format: <code>reg_</code> prefix + 64 hex characters.</p>
+  </div>
+</section>
+
+<!-- Get Started -->
+<section id="get-started">
+  <div class="container">
+    <h2>Get Started</h2>
+
+    <ol class="steps">
+      <li>
+        <h3>Choose Your Integration</h3>
+        <p><strong>WordPress:</strong> Install the MX Cogify plugin — it handles manifest generation, Schema.org, and MX-Reginald registration automatically.</p>
+        <p><strong>Adobe EDS:</strong> Copy the <code>mx-cogify</code> block into your project. Use the CLI tool for registration.</p>
+        <p><strong>Any Platform:</strong> Host a <code>.well-known/mx-cogs.json</code> manifest on your domain. MX-Reginald's verification pipeline crawls it.</p>
+      </li>
+      <li>
+        <h3>Subscribe</h3>
+        <p>Call <code>POST /api/v1/subscribe</code> with your namespace and email. Complete the Stripe checkout. Your API token is generated automatically.</p>
+        <pre><code>curl -X POST https://reginald.allabout.network/api/v1/subscribe \
+  -H "Content-Type: application/json" \
+  -d '{"namespace":"your-namespace","email":"you@example.com"}'</code></pre>
+      </li>
+      <li>
+        <h3>Register Your Namespace</h3>
+        <p>Use your API token to register. MX-Reginald validates your manifest, signs the pointer records, and makes your COGs queryable worldwide.</p>
+        <pre><code>curl -X POST https://reginald.allabout.network/api/v1/register \
+  -H "Authorization: Bearer reg_your_token..." \
+  -H "Content-Type: application/json" \
+  -d '{"namespace":"your-namespace","domain":"yoursite.com","manifest_url":"https://yoursite.com/.well-known/mx-cogs.json"}'</code></pre>
+      </li>
+      <li>
+        <h3>Verify</h3>
+        <p>Check your registration status and see your COGs in the registry.</p>
+        <pre><code>curl https://reginald.allabout.network/api/v1/publisher/status \
+  -H "Authorization: Bearer reg_your_token..."</code></pre>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <strong>Need help?</strong> See the <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/tree/main/mx-reginald/docs">full documentation</a> on GitHub, including the publisher guide, API reference, and getting started tutorial.
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://allabout.network">AllAbout.Network</a>
+      <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/tree/main/mx-reginald">GitHub</a>
+      <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/tree/main/mx-reginald/docs">Documentation</a>
+      <a href="/llms.txt">llms.txt</a>
+      <a href="/api/v1/public-key.pem">Public Key</a>
+      <a href="mailto:tom.cranstoun@gmail.com">Contact</a>
+    </div>
     <p>&copy; CogNovaMX Ltd — Making the web work for everyone and everything that uses it.</p>
-  </footer>
+  </div>
+</footer>
+
 </body>
 </html>
