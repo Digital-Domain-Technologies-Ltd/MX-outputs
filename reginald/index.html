@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REGINALD — MX COG Registry</title>
+  <meta name="description" content="Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation. The global directory of machine-readable COG documents.">
+  <meta name="author" content="CogNovaMX Ltd">
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="registry">
+  <link rel="canonical" href="https://reginald.allabout.network/">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a; color: #e0e0e0;
+      line-height: 1.6; padding: 2rem; max-width: 48rem; margin: 0 auto;
+    }
+    h1 { color: #00d4aa; font-size: 1.8rem; margin-bottom: 0.25rem; }
+    .subtitle { color: #888; font-size: 0.95rem; margin-bottom: 2rem; }
+    h2 { color: #fff; font-size: 1.1rem; margin: 1.5rem 0 0.75rem; border-bottom: 1px solid #222; padding-bottom: 0.25rem; }
+    a { color: #00d4aa; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .endpoints { list-style: none; }
+    .endpoints li { padding: 0.4rem 0; }
+    .endpoints code { background: #1a1a1a; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.9rem; }
+    .badge { display: inline-block; background: #00d4aa; color: #0a0a0a; font-size: 0.75rem; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 3px; margin-left: 0.5rem; vertical-align: middle; }
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #222; color: #666; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <h1>REGINALD</h1>
+  <p class="subtitle">Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation</p>
+
+  <p>REGINALD is a pure DNS-like resolver for machine-readable documentation. It maps COG identifiers to publisher-hosted content URLs. REGINALD does not host content — each publisher serves their own COGs.</p>
+
+  <h2>API Endpoints</h2>
+  <ul class="endpoints">
+    <li><code>GET</code> <a href="/index.json">/index.json</a> — Full registry index</li>
+    <li><code>GET</code> <a href="/api/v1/stats.json">/api/v1/stats.json</a> — Registry statistics</li>
+    <li><code>GET</code> <a href="/api/v1/publishers.json">/api/v1/publishers.json</a> — Registered publishers</li>
+    <li><code>GET</code> <a href="/api/v1/namespaces.json">/api/v1/namespaces.json</a> — Namespace directory</li>
+    <li><code>GET</code> <a href="/api/v1/namespaces/cognovamx/cogs.json">/api/v1/namespaces/{ns}/cogs.json</a> — COGs in a namespace</li>
+    <li><code>GET</code> <a href="/cogs/cognovamx/principles/latest.json">/cogs/{ns}/{name}/latest.json</a> — Pointer record (latest version)</li>
+    <li><code>GET</code> <a href="/api/v1/public-key.pem">/api/v1/public-key.pem</a> — Registry public key</li>
+    <li><code>GET</code> <a href="/llms.txt">/llms.txt</a> — AI-readable registry summary <span class="badge">LLM</span></li>
+  </ul>
+
+  <h2>Resolution Flow</h2>
+  <ol style="padding-left: 1.5rem;">
+    <li>Discover namespaces via <code>/api/v1/namespaces.json</code></li>
+    <li>List COGs in a namespace via <code>/api/v1/namespaces/{ns}/cogs.json</code></li>
+    <li>Fetch pointer record via <code>/cogs/{ns}/{name}/latest.json</code></li>
+    <li>Follow <code>canonical_url</code> to retrieve content from the publisher</li>
+    <li>Verify <code>content_hash</code> and certificates</li>
+  </ol>
+
+  <h2>About</h2>
+  <p>REGINALD is operated by <a href="https://allabout.network">CogNovaMX Ltd</a> as part of the Machine Experience (MX) ecosystem. For publisher onboarding, see the <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/tree/main/mx-reginald">documentation</a>.</p>
+
+  <footer>
+    <p>&copy; CogNovaMX Ltd — Making the web work for everyone and everything that uses it.</p>
+  </footer>
+</body>
+</html>
