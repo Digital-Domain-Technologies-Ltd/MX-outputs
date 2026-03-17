@@ -2,7 +2,7 @@
 title: "Co-Directors Report — MX-Reginald: From Stub to Storefront"
 created: "2026-03-17"
 segment: "evening"
-version: "1.0"
+version: "2.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidentiality: internal
@@ -37,19 +37,27 @@ The Cloudflare Worker subscription API was finalised with both cognovamx and age
 
 Six commits advancing the mx-plugin submodule: EDS block-based integration, Wix and Shopify platform integrations, universal/generic integration guide. REGINALD documentation updated with MX Cogify plugin references and registration webhook flow.
 
+### 4. Book PDF Pipeline Fixes (late evening)
+
+Footnote PDF line breaks restored across both books. Pandoc was collapsing multi-URL footnotes into single paragraphs because the source markdown lacked trailing backslashes. Created `scripts/fix-footnote-backslashes.cjs` — validates and auto-fixes footnotes, usable as a CI gate (`npm run footnotes:check`). Applied 39 fixes to chapter-00. Updated `generate-footnotes.sh` to strip backslashes for HTML output. Added action cog and npm scripts (`footnotes:check`, `footnotes:fix`, `footnotes:generate`).
+
+Fixed Protocols PDF build failure caused by missing cover image (`A4-Cover.png`). Wrapped `\includegraphics` in `\IfFileExists` guards so absent covers no longer block the build. The illustration generator then downloaded the actual cover.
+
+Created three chapter-18 illustrations (named `chapter-17-*` per existing convention): Three-Layer IA Framework pyramid, URL Depth discovery decay chart, and IA Audit Workflow (five-check sequence). SVGs in `datalake/assets/images/svg/illustrations/`, PNGs generated via `npm run illustrations:generate`. Both book PDFs and free book rebuilt cleanly with zero warnings.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits (evening) | 6 |
-| Files changed (committed) | 8 |
-| Lines added (committed) | +104 |
-| Lines removed (committed) | −12 |
-| Uncommitted files | 11 |
-| Uncommitted lines added | +286 |
-| Uncommitted lines removed | −101 |
+| Commits (evening) | 10 |
+| Files changed | 15+ |
+| New SVG illustrations | 3 |
+| Footnote fixes applied | 39 lines |
+| New scripts/cogs | 2 (fix-footnote-backslashes.cjs + .cog.md) |
+| New npm scripts | 3 (footnotes:check/fix/generate) |
+| PDFs rebuilt | 3 (Protocols, Handbook, free book) |
 | Website sections | 12 |
 | Repositories affected | 3 (main, mx-outputs, allaboutv2) |
 
@@ -81,5 +89,8 @@ Today's four sessions (morning, afternoon, evening, night) represent a single co
 | e48eb2a5 | Update mx-plugin: add Wix and Shopify integrations |
 | f9eb7fa0 | Update mx-plugin: add universal/generic integration |
 | 8744d6b9 | Update REGINALD docs: MX Cogify plugins + registration webhook |
-| (pending) | MX-Reginald subscription + auth system |
-| (pending) | MX-Reginald comprehensive website |
+| 153ced43 | MX-Reginald: subscription API + comprehensive website + monetisation |
+| 4110f850 | Update REMINDERS, chapter 00 footnotes, Andres meeting prep |
+| 0d55bf96 | Update REMINDERS: evening session log with deployment status |
+| cb432f30 | Update allaboutv2 and mx-outputs submodule pointers |
+| (pending) | Chapter-18 illustrations + PDF pipeline fixes |
