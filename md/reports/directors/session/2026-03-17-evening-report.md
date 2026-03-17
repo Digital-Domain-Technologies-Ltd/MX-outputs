@@ -2,7 +2,7 @@
 title: "Co-Directors Report — MX-Reginald: From Stub to Storefront"
 created: "2026-03-17"
 segment: "evening"
-version: "2.0"
+version: "3.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidentiality: internal
@@ -37,7 +37,11 @@ The Cloudflare Worker subscription API was finalised with both cognovamx and age
 
 Six commits advancing the mx-plugin submodule: EDS block-based integration, Wix and Shopify platform integrations, universal/generic integration guide. REGINALD documentation updated with MX Cogify plugin references and registration webhook flow.
 
-### 4. Book PDF Pipeline Fixes (late evening)
+### 4. REGINALD API Merged into allaboutv2 Worker (late evening)
+
+The standalone `mx-reginald/worker/` project was consolidated into the existing allaboutv2 Cloudflare Worker. 23 new source files in `allaboutv2/cloudflare/files/reginald/` — write-side routes (Stripe, auth, registration), resolution analytics (categoriseAgent + Analytics Engine), aliveness check engine (monthly cron, SHA-256 verification, auto-hide after 3 consecutive failures), publisher dashboard API (analytics, aliveness, COGs endpoints). Scheduled handlers for daily subscription expiry and monthly aliveness checks. Worker v1.4.0, 126 tests pass.
+
+### 5. Book PDF Pipeline Fixes (late evening)
 
 Footnote PDF line breaks restored across both books. Pandoc was collapsing multi-URL footnotes into single paragraphs because the source markdown lacked trailing backslashes. Created `scripts/fix-footnote-backslashes.cjs` — validates and auto-fixes footnotes, usable as a CI gate (`npm run footnotes:check`). Applied 39 fixes to chapter-00. Updated `generate-footnotes.sh` to strip backslashes for HTML output. Added action cog and npm scripts (`footnotes:check`, `footnotes:fix`, `footnotes:generate`).
 
@@ -72,10 +76,10 @@ Today's four sessions (morning, afternoon, evening, night) represent a single co
 ## Next Steps
 
 - Commit and push all changes (submodules first)
-- Deploy reginald-api Worker to production
-- Redeploy allabout Worker (remove reginald route conflict)
-- Set Stripe secrets and init production D1
-- Stripe Dashboard: create product, price, webhook endpoint
+- Complete deployment checklist (D1 schema/seed, Analytics Engine, Stripe Dashboard)
+- Set Stripe secrets via wrangler
+- Deploy Worker and verify production endpoints
+- Deliver production tokens to publishers
 
 ---
 
@@ -94,3 +98,4 @@ Today's four sessions (morning, afternoon, evening, night) represent a single co
 | 0d55bf96 | Update REMINDERS: evening session log with deployment status |
 | cb432f30 | Update allaboutv2 and mx-outputs submodule pointers |
 | (pending) | Chapter-18 illustrations + PDF pipeline fixes |
+| (pending) | REGINALD API merged into allaboutv2 Worker |
