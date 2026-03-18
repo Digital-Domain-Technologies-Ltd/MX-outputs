@@ -5,7 +5,7 @@ segment: "evening"
 version: "2.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Co-Directors Report — The MX Guy Identity Launched on LinkedIn

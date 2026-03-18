@@ -5,7 +5,7 @@ segment: "evening"
 version: "2.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Co-Directors Report — Manuscript Quality Pass: Structure, Tone, Deduplication, Footnotes, and Standards Argument

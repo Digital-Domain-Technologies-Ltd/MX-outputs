@@ -5,7 +5,7 @@ segment: "evening"
 version: "5.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Illustrations + PDFs

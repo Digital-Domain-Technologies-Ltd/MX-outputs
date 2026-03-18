@@ -5,7 +5,7 @@ segment: "morning"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Co-Directors Report — Protocols Moves Toward Publication Quality

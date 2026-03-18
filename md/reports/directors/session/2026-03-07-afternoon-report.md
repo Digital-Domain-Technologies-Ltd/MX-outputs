@@ -5,7 +5,7 @@ segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
-confidentiality: internal
+confidential: true
 ---
 
 # Co-Directors Report — Four Editorial Reviews and the Great Ch 0 Split

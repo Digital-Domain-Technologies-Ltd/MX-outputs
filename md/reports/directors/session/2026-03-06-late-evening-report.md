@@ -6,7 +6,7 @@ segment: "late-evening"
 version: "2.0"
 author: "Tom Cranstoun and Maxine"
 audience: "stakeholders"
-confidentiality: "internal"
+confidential: true
 ---
 
 # Co-Directors Report — Salva Demo Fixes, Content-Encoding Bug & Cloudflare Worker

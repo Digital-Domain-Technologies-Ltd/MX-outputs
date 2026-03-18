@@ -6,7 +6,7 @@ segment: "evening"
 version: "3.0"
 author: "Tom Cranstoun and Maxine"
 audience: "stakeholders"
-confidentiality: "internal"
+confidential: true
 ---
 
 # Co-Directors Report — PDF Pipeline, tg.community Re-Audit, Tooling Fixes, and MX Journey Stage Assessment
