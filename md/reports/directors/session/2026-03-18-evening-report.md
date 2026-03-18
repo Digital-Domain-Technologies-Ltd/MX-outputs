@@ -2,7 +2,7 @@
 title: "Co-Directors Report — BloomReach Meeting & Plugin Expansion"
 created: "2026-03-18"
 segment: "evening"
-version: "1.0"
+version: "2.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidential: true
@@ -40,9 +40,28 @@ Post-meeting outreach message created (`bloomreach-followup.md`) — references 
 ### 4. MX Plugin Expansion
 
 Plugin repository expanded from 5 to 7 CMS platforms:
-- **Drupal module** (`drupal/mx_cogify/`) — PHP module for Drupal 10/11
-- **Squarespace snippet** (`squarespace/mx-cogify.html`) — Code Injection script
+
+- **Drupal module** (`drupal/mx_cogify/`) — PHP module for Drupal 10/11, 9 files (info.yml, config schema, routing, permissions, settings form, hook-based meta injection, per-node overrides via Third Party Settings, Metatag conflict detection)
+- **Squarespace snippet** (`squarespace/mx-cogify.html`) — Code Injection script with Squarespace-specific `collection-type-*` body class detection
 - README updated with new platforms, directory tree, and tags
+
+### 5. Reginald Plugins Download Page
+
+New public page at `reginald.allabout.network/plugins.html` — non-technical download page for all 7 CMS plugins:
+
+- 7 plugin cards with step-by-step setup instructions for non-developers
+- Zip downloads for WordPress and Drupal (multi-file), direct file downloads for others
+- "What every plugin does" feature grid and FAQ section
+- Reginald index.html updated with link to plugins page
+
+### 6. No-Inline-CSS/JS Refactor
+
+Applied MX HTML coding principle (no inline CSS or JS) to Reginald pages:
+
+- Extracted `reginald/index.html` styles to `css/reginald.css`, script to `js/reginald.js`
+- Extracted `plugins.html` styles to `css/plugins.css`
+- Removed one remaining inline `style=` attribute
+- Rule saved to auto-memory for future sessions
 
 ---
 
@@ -50,9 +69,10 @@ Plugin repository expanded from 5 to 7 CMS platforms:
 
 | Metric | Value |
 |--------|-------|
-| Commits | 0 (pending step-commit) |
+| Commits (prior) | 2 (evening) |
 | Files changed (mx-crm) | 4 new (outreach/2026-03-18/) |
-| Files changed (mx-plugin) | 1 modified + new dirs |
+| Files changed (mx-plugin) | 13 new, 1 modified (Drupal + Squarespace) |
+| Files changed (allaboutv2) | 6 new, 1 modified (plugins page, external CSS/JS) |
 | CMS platforms covered | 7 (WordPress, Drupal, EDS, Shopify, Wix, Squarespace, generic) |
 
 ---
