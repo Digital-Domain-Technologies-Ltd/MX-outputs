@@ -1,14 +1,14 @@
 ---
-title: "Co-Directors Report — BloomReach Meeting, Plugin Expansion & Reginald Consolidation"
+title: "Co-Directors Report — BloomReach Meeting, Plugin Expansion & Reginald Infrastructure"
 created: "2026-03-18"
 segment: "evening"
-version: "3.0"
+version: "4.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidential: true
 ---
 
-# Co-Directors Report — BloomReach Meeting, Plugin Expansion & Reginald Consolidation
+# Co-Directors Report — BloomReach Meeting, Plugin Expansion & Reginald Infrastructure
 
 **Date:** 18 March 2026 — Evening
 **Segment:** evening (since 17:00)
@@ -17,7 +17,7 @@ confidential: true
 
 ## Summary
 
-First commercial CMS vendor meeting completed. Tom demonstrated the MX metadata standard to BloomReach (William), who confirmed the CMS plugin approach is viable for their platform. Two audit reports delivered (BloomReach: 41/100 AI suitability, Farnell: 35/100) with follow-up message drafted. Separately, the mx-plugin repository expanded to cover Drupal and Squarespace, bringing CMS coverage to seven platforms. Later in the evening, discovered the Reginald plugins page was returning 404 on the live site — root cause was a deployment gap where static files lived in `allaboutv2/reginald/` but the Worker serves from `mx-outputs/reginald/`. Consolidated all Reginald content to `mx-outputs/reginald/` as the single source of truth, removing all duplicates from `allaboutv2/reginald/`.
+First commercial CMS vendor meeting completed. Tom demonstrated the MX metadata standard to BloomReach (William), who confirmed the CMS plugin approach is viable for their platform. Two audit reports delivered (BloomReach: 41/100 AI suitability, Farnell: 35/100) with follow-up message drafted. Separately, the mx-plugin repository expanded to cover Drupal and Squarespace, bringing CMS coverage to seven platforms. Later in the evening, discovered the Reginald plugins page was returning 404 on the live site — root cause was a deployment gap where static files lived in `allaboutv2/reginald/` but the Worker serves from `mx-outputs/reginald/`. Consolidated all Reginald content to `mx-outputs/reginald/` as the single source of truth, removing all duplicates from `allaboutv2/reginald/`. Subsequently migrated the Reginald Worker from Cloudflare Pages to GitHub raw, eliminating the Pages dependency entirely and aligning with the same delivery pattern used by `content.allabout.network`.
 
 ---
 
@@ -64,7 +64,18 @@ Discovered `reginald.allabout.network/plugins.html` returning 404. Root cause: t
 - Updated reginald-mirror cog (source + published copies), CHANGELOG, and all JSON index files
 - Updated auto-memory with single-source rule to prevent recurrence
 
-### 7. No-Inline-CSS/JS Refactor
+### 8. Reginald Worker Migration to GitHub Raw
+
+Discovered that deploying `mx-outputs` via Cloudflare Pages was failing silently due to large PDFs (>25 MiB limit). Rather than work around Pages limitations, migrated the Reginald Worker to fetch read-side content directly from GitHub raw — the same pattern already used by `content.allabout.network`.
+
+- Updated `mx-reginald/worker/src/index.js` to proxy to `raw.githubusercontent.com` instead of `mx-outputs.pages.dev`
+- Added `MX_OUTPUTS_HOSTNAME` and `MX_OUTPUTS_REPO_PATH` env vars to `wrangler.toml`
+- Added comprehensive MIME type mapping (GitHub raw serves everything as `text/plain`)
+- Deployed Worker and verified all endpoints (HTML, CSS, JS, JSON, llms.txt)
+- Deleted the `mx-outputs` Cloudflare Pages project — no longer needed
+- Delivery is now: push to GitHub → live within 5 minutes (Cloudflare edge cache TTL)
+
+### 9. No-Inline-CSS/JS Refactor
 
 Applied MX HTML coding principle (no inline CSS or JS) to Reginald pages:
 
@@ -79,12 +90,14 @@ Applied MX HTML coding principle (no inline CSS or JS) to Reginald pages:
 
 | Metric | Value |
 |--------|-------|
-| Commits (prior) | 4 (evening) |
+| Commits (prior) | 6 (evening) |
 | Files changed (mx-crm) | 4 new (outreach/2026-03-18/) |
 | Files changed (mx-plugin) | 13 new, 1 modified (Drupal + Squarespace) |
 | Files changed (allaboutv2) | 105 removed, 3 modified (Reginald consolidation) |
 | Files changed (mx-outputs) | 12 new/modified (Reginald static files + cog updates) |
 | CMS platforms covered | 7 (WordPress, Drupal, EDS, Shopify, Wix, Squarespace, generic) |
+| Cloudflare Pages projects deleted | 1 (mx-outputs — replaced by GitHub raw) |
+| Files changed (mx-reginald) | 2 modified (Worker + wrangler.toml) |
 
 ---
 
@@ -111,4 +124,6 @@ BloomReach is the first CMS vendor to see the standard and confirm viability. Th
 | e964ecab | Update REMINDERS and CHANGELOG for 18 Mar evening session |
 | 15c71f54 | Update allaboutv2 and mx-outputs submodule pointers |
 | 79bb38e2 | Update CHANGELOG and REMINDERS: plugins page + no-inline refactor |
-| (pending) | Reginald content consolidation: single source in mx-outputs |
+| 854753e0 | Consolidate Reginald content to mx-outputs/reginald/ as single source |
+| 4767b8fa | Update REMINDERS: Reginald content consolidation |
+| (pending) | Reginald Worker migration: GitHub raw, delete Pages project |
