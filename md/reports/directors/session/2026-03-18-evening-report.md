@@ -1,14 +1,14 @@
 ---
-title: "Co-Directors Report — BloomReach Meeting & Plugin Expansion"
+title: "Co-Directors Report — BloomReach Meeting, Plugin Expansion & Reginald Consolidation"
 created: "2026-03-18"
 segment: "evening"
-version: "2.0"
+version: "3.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidential: true
 ---
 
-# Co-Directors Report — BloomReach Meeting & Plugin Expansion
+# Co-Directors Report — BloomReach Meeting, Plugin Expansion & Reginald Consolidation
 
 **Date:** 18 March 2026 — Evening
 **Segment:** evening (since 17:00)
@@ -17,7 +17,7 @@ confidential: true
 
 ## Summary
 
-First commercial CMS vendor meeting completed. Tom demonstrated the MX metadata standard to BloomReach (William), who confirmed the CMS plugin approach is viable for their platform. Two audit reports delivered (BloomReach: 41/100 AI suitability, Farnell: 35/100) with follow-up message drafted. Separately, the mx-plugin repository expanded to cover Drupal and Squarespace, bringing CMS coverage to seven platforms.
+First commercial CMS vendor meeting completed. Tom demonstrated the MX metadata standard to BloomReach (William), who confirmed the CMS plugin approach is viable for their platform. Two audit reports delivered (BloomReach: 41/100 AI suitability, Farnell: 35/100) with follow-up message drafted. Separately, the mx-plugin repository expanded to cover Drupal and Squarespace, bringing CMS coverage to seven platforms. Later in the evening, discovered the Reginald plugins page was returning 404 on the live site — root cause was a deployment gap where static files lived in `allaboutv2/reginald/` but the Worker serves from `mx-outputs/reginald/`. Consolidated all Reginald content to `mx-outputs/reginald/` as the single source of truth, removing all duplicates from `allaboutv2/reginald/`.
 
 ---
 
@@ -54,7 +54,17 @@ New public page at `reginald.allabout.network/plugins.html` — non-technical do
 - "What every plugin does" feature grid and FAQ section
 - Reginald index.html updated with link to plugins page
 
-### 6. No-Inline-CSS/JS Refactor
+### 6. Reginald Content Consolidation
+
+Discovered `reginald.allabout.network/plugins.html` returning 404. Root cause: the Reginald Worker proxies read requests to `mx-outputs.pages.dev/reginald/`, but static website files (HTML, CSS, JS, plugin downloads) only existed in `allaboutv2/reginald/`.
+
+- Copied all missing static files to `mx-outputs/reginald/` (plugins.html, CSS, JS, plugin downloads)
+- Removed all duplicate content from `allaboutv2/reginald/` via `git rm` — 105 files, ~9,700 lines removed
+- Left only a `.mx.yaml.md` pointer in `allaboutv2/reginald/` explaining the new location
+- Updated reginald-mirror cog (source + published copies), CHANGELOG, and all JSON index files
+- Updated auto-memory with single-source rule to prevent recurrence
+
+### 7. No-Inline-CSS/JS Refactor
 
 Applied MX HTML coding principle (no inline CSS or JS) to Reginald pages:
 
@@ -69,10 +79,11 @@ Applied MX HTML coding principle (no inline CSS or JS) to Reginald pages:
 
 | Metric | Value |
 |--------|-------|
-| Commits (prior) | 2 (evening) |
+| Commits (prior) | 4 (evening) |
 | Files changed (mx-crm) | 4 new (outreach/2026-03-18/) |
 | Files changed (mx-plugin) | 13 new, 1 modified (Drupal + Squarespace) |
-| Files changed (allaboutv2) | 6 new, 1 modified (plugins page, external CSS/JS) |
+| Files changed (allaboutv2) | 105 removed, 3 modified (Reginald consolidation) |
+| Files changed (mx-outputs) | 12 new/modified (Reginald static files + cog updates) |
 | CMS platforms covered | 7 (WordPress, Drupal, EDS, Shopify, Wix, Squarespace, generic) |
 
 ---
@@ -96,4 +107,8 @@ BloomReach is the first CMS vendor to see the standard and confirm viability. Th
 
 | Hash | Description |
 |------|-------------|
-| (pending) | BloomReach meeting materials, plugin expansion |
+| c231e548 | Update mx-crm, mx-outputs, mx-plugin: BloomReach meeting, evening report, plugin expansion |
+| e964ecab | Update REMINDERS and CHANGELOG for 18 Mar evening session |
+| 15c71f54 | Update allaboutv2 and mx-outputs submodule pointers |
+| 79bb38e2 | Update CHANGELOG and REMINDERS: plugins page + no-inline refactor |
+| (pending) | Reginald content consolidation: single source in mx-outputs |
