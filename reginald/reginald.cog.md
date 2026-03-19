@@ -62,9 +62,11 @@ REGINALD is a pure resolver, not a host. It resolves identifiers to URLs — it 
 
 ## What Is a COG?
 
-A COG is a markdown file with YAML frontmatter. No proprietary format. No binary encoding. No special tooling required. A `.cog.md` file that any text editor can open and any AI system can parse.
+A COG is any document that carries MX metadata — a Certificate of Genuineness and Contract of Governance. An HTML page with Schema.org JSON-LD and `<meta name="mx:*">` tags is a COG. A markdown file with YAML frontmatter is a COG. A JavaScript file with `@mx:*` JSDoc tags is a COG. The `.cog.md` extension is the human-readable naming convention for the markdown carrier format.
 
-The YAML frontmatter is for machines. The markdown body is for humans. Same file, both audiences served.
+### Carrier Formats
+
+Every file type carries MX metadata in its own native format. HTML pages use Schema.org JSON-LD (`<script type="application/ld+json">`) for structured data and `<meta name="mx:*">` tags for governance metadata. Markdown files use YAML frontmatter. JavaScript and CSS files carry metadata in JSDoc and block comments with `@mx:*` tags. Shell scripts use YAML blocks with `#` prefixes. The same trust and governance information travels in whichever format suits the content.
 
 ### The Dual Meaning
 

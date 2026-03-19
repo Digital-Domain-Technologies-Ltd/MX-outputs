@@ -73,8 +73,8 @@
         <tr><th>Level</th><th>Name</th><th>Key Requirement</th><th>Use Case</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>1</strong></td><td>Basic</td><td>YAML present, publisher identified</td><td>Internal documentation</td></tr>
-        <tr><td><strong>2</strong></td><td>Structured</td><td>MX-compliant format, maintainer + contact</td><td>Public documentation</td></tr>
+        <tr><td><strong>1</strong></td><td>Basic</td><td>MX metadata present, publisher identified</td><td>Internal documentation</td></tr>
+        <tr><td><strong>2</strong></td><td>Structured</td><td>Full MX fields, maintainer + contact</td><td>Public documentation</td></tr>
         <tr class="level-highlight"><td><strong>3</strong></td><td>Signed</td><td>Cryptographically signed, review cycle</td><td>Commercial documentation</td></tr>
         <tr><td><strong>4</strong></td><td>Registered</td><td>Signed + registered, full contract with SLA</td><td>Enterprise documentation</td></tr>
         <tr><td><strong>5</strong></td><td>Audited</td><td>Signed + registered + third-party verified</td><td>Critical documentation</td></tr>
@@ -93,24 +93,24 @@
       </div>
     </div>
     <div class="level-body">
-      <p>The entry point. A valid YAML frontmatter block with the publisher identified. This is the minimum structure that makes a document machine-parseable rather than just human-readable.</p>
+      <p>The entry point. MX metadata is present and the publisher is identified. This is the minimum structure that makes content machine-parseable rather than just human-readable. Any file type can qualify — markdown, HTML, JavaScript, CSS, or shell scripts — each using its own carrier format.</p>
 
       <h4>Requirements</h4>
       <ul class="level-reqs">
-        <li>Valid YAML frontmatter (<code>---</code> delimiters)</li>
-        <li><code>title</code> and <code>description</code> fields present</li>
+        <li>MX metadata present in the appropriate carrier format</li>
+        <li><code>title</code> (or equivalent) and <code>description</code> fields present</li>
         <li><code>author</code> field identifying the publisher</li>
-        <li>File extension: <code>.cog.md</code></li>
+        <li>Structured data parseable by machines without inference</li>
       </ul>
 
       <h4>What It Proves</h4>
-      <p>Someone has deliberately structured this document for machine consumption. It is not a random markdown file — it has identity.</p>
+      <p>Someone has deliberately structured this content for machine consumption. It is not a random file — it has identity.</p>
 
       <h4>Typical Use</h4>
-      <p>Internal wikis, team documentation, personal knowledge bases. Documents that need to be parseable by internal AI tools but do not require external trust verification.</p>
+      <p>Internal wikis, team documentation, product pages, personal knowledge bases. Content that needs to be parseable by internal AI tools but does not require external trust verification.</p>
 
       <div class="level-example">
-        <h4>Minimal Example</h4>
+        <h4>Markdown Example (.cog.md)</h4>
         <pre><code>---
 title: "Internal API Guide"
 description: "Authentication flows for the payments service"
@@ -121,6 +121,24 @@ version: "1.0"
 # Internal API Guide
 
 Content here...</code></pre>
+      </div>
+
+      <div class="level-example">
+        <h4>HTML Example</h4>
+        <pre><code>&lt;!-- Schema.org structured data --&gt;
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "Internal API Guide",
+  "description": "Authentication flows for the payments service",
+  "author": { "@type": "Organization", "name": "Engineering Team" }
+}
+&lt;/script&gt;
+
+&lt;!-- MX governance metadata --&gt;
+&lt;meta name="mx:status" content="active"&gt;
+&lt;meta name="mx:contentType" content="guide"&gt;</code></pre>
       </div>
     </div>
   </div>
@@ -140,20 +158,20 @@ Content here...</code></pre>
       <h4>Requirements</h4>
       <ul class="level-reqs">
         <li>Everything from Level 1</li>
-        <li>MX-compliant frontmatter format (two-zone model)</li>
-        <li><code>mx.status</code>, <code>mx.contentType</code>, <code>mx.tags</code> fields</li>
-        <li>Named <code>mx.maintainer</code> with contact information</li>
-        <li><code>created</code> and <code>modified</code> dates</li>
+        <li>Full MX metadata in the appropriate carrier format</li>
+        <li><code>mx:status</code>, <code>mx:contentType</code>, <code>mx:tags</code> fields</li>
+        <li>Named maintainer with contact information</li>
+        <li><code>created</code> and <code>modified</code> dates (or equivalent)</li>
       </ul>
 
       <h4>What It Proves</h4>
-      <p>This document has governance. A named person or team is responsible for its accuracy. An AI agent can assess not just the content, but who stands behind it.</p>
+      <p>This content has governance. A named person or team is responsible for its accuracy. An AI agent can assess not just the content, but who stands behind it.</p>
 
       <h4>Typical Use</h4>
-      <p>Public-facing documentation, product specifications, API references. Content that external parties will read and rely upon, but where cryptographic verification is not yet required.</p>
+      <p>Public-facing documentation, product pages, API references. Content that external parties will read and rely upon, but where cryptographic verification is not yet required.</p>
 
       <div class="level-example">
-        <h4>Example</h4>
+        <h4>Markdown Example (.cog.md)</h4>
         <pre><code>---
 title: "Product Specification"
 description: "Rancilio Silvia Pro X technical spec"
@@ -169,6 +187,30 @@ mx:
   maintainer: "product-team@rancilio.com"
   audience: [humans, machines]
 ---</code></pre>
+      </div>
+
+      <div class="level-example">
+        <h4>HTML Example</h4>
+        <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Rancilio Silvia Pro X",
+  "description": "Dual-boiler espresso machine with PID",
+  "brand": { "@type": "Brand", "name": "Rancilio" },
+  "offers": {
+    "@type": "Offer",
+    "price": "1299.00",
+    "priceCurrency": "GBP",
+    "availability": "https://schema.org/InStock"
+  }
+}
+&lt;/script&gt;
+&lt;meta name="mx:status" content="active"&gt;
+&lt;meta name="mx:contentType" content="product"&gt;
+&lt;meta name="mx:tags" content="espresso, dual-boiler, pid"&gt;
+&lt;meta name="mx:audience" content="humans,machines"&gt;
+&lt;meta name="mx:content-policy" content="extract-with-attribution"&gt;</code></pre>
       </div>
     </div>
   </div>

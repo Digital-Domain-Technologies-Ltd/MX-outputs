@@ -76,7 +76,7 @@
 <section>
   <div class="container">
     <h2>What Is a COG?</h2>
-    <p>A COG is a markdown file with YAML frontmatter. No proprietary format. No binary encoding. No special tooling required. A <code>.cog.md</code> file that any text editor can open and any AI system can parse.</p>
+    <p>A COG is any document that carries MX metadata — a Certificate of Genuineness and Contract of Governance. An HTML page with Schema.org JSON-LD and <code>&lt;meta name="mx:*"&gt;</code> tags is a COG. A markdown file with YAML frontmatter is a COG. A JavaScript file with <code>@mx:*</code> JSDoc tags is a COG. The <code>.cog.md</code> extension is the human-readable naming convention for the markdown carrier format.</p>
 
     <pre><code>---
 title: "Rancilio Silvia Pro X"
@@ -97,7 +97,47 @@ mx:
 
 The Silvia Pro X is a dual-boiler espresso machine...</code></pre>
 
-    <p>The YAML frontmatter is for machines. The markdown body is for humans. Same file, both audiences served.</p>
+    <p>In the markdown carrier, the YAML frontmatter is for machines and the markdown body is for humans — same file, both audiences served. But markdown is just one carrier format.</p>
+
+    <h3>Carrier Formats</h3>
+    <p><strong>Any file type can be a COG.</strong> The same trust and governance information travels in whichever carrier format suits the content:</p>
+
+    <table>
+      <thead>
+        <tr><th>File Type</th><th>How MX Metadata Is Carried</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>HTML</strong></td><td>Schema.org JSON-LD in <code>&lt;script type="application/ld+json"&gt;</code> plus <code>&lt;meta name="mx:*"&gt;</code> tags in <code>&lt;head&gt;</code></td></tr>
+        <tr><td><strong>Markdown</strong></td><td>YAML frontmatter (<code>---</code> delimiters) — the COG format</td></tr>
+        <tr><td><strong>JavaScript</strong></td><td>JSDoc comments with <code>@mx:*</code> tags</td></tr>
+        <tr><td><strong>CSS</strong></td><td>Block comments with <code>@mx:*</code> tags</td></tr>
+        <tr><td><strong>Shell scripts</strong></td><td><code># ---</code> YAML block with <code>#</code> prefix</td></tr>
+      </tbody>
+    </table>
+
+    <h4>HTML Example</h4>
+    <pre><code>&lt;!-- Schema.org for search engines and AI agents --&gt;
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Rancilio Silvia Pro X",
+  "description": "Dual-boiler espresso machine with PID",
+  "offers": {
+    "@type": "Offer",
+    "price": "1299.00",
+    "priceCurrency": "GBP"
+  }
+}
+&lt;/script&gt;
+
+&lt;!-- MX governance metadata --&gt;
+&lt;meta name="mx:status" content="active"&gt;
+&lt;meta name="mx:contentType" content="product"&gt;
+&lt;meta name="mx:tags" content="espresso, dual-boiler, pid"&gt;
+&lt;meta name="mx:content-policy" content="extract-with-attribution"&gt;</code></pre>
+
+    <p>HTML pages use established standards first — Schema.org JSON-LD for structured data, Open Graph for sharing, Dublin Core for provenance. MX adds governance metadata (<code>mx:status</code>, <code>mx:contentType</code>, <code>mx:content-policy</code>) where those standards leave gaps. MX never duplicates what Schema.org already covers.</p>
 
     <h3>The Dual Meaning</h3>
     <table>
