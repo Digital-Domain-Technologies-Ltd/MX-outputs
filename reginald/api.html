@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API Reference — REGINALD</title>
+  <meta name="description" content="REGINALD API reference. Public read endpoints for AI agents, authenticated write endpoints for publishers. Ed25519 signing, pointer records, namespace resolution.">
+  <meta name="author" content="CogNovaMX Ltd">
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="registry">
+  <meta name="mx:audience" content="humans,ai-agents,developers">
+  <link rel="canonical" href="https://reginald.allabout.network/api.html">
+  <link rel="stylesheet" href="css/reginald.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">REGINALD</a>
+    <span class="breadcrumb">/ API</span>
+    <div class="nav-links">
+      <a href="how-it-works.html">How It Works</a>
+      <a href="ai-readiness.html">AI Readiness</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="api.html" class="active">API</a>
+      <a href="get-started.html">Get Started</a>
+      <a href="plugins.html">Plugins</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header container">
+  <h1>API Reference</h1>
+  <p class="lead">Base URL: <code>https://reginald.allabout.network</code></p>
+</div>
+
+<!-- Read Endpoints -->
+<section>
+  <div class="container">
+    <h2>Read Endpoints <span class="badge badge-free">Public</span></h2>
+    <ul class="endpoints">
+      <li><span class="badge badge-get">GET</span> <a href="index.json" class="ep-path">/index.json</a> <span class="ep-desc">Full registry index</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="api/v1/stats.json" class="ep-path">/api/v1/stats.json</a> <span class="ep-desc">Registry statistics</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="api/v1/publishers.json" class="ep-path">/api/v1/publishers.json</a> <span class="ep-desc">Registered publishers</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="api/v1/namespaces.json" class="ep-path">/api/v1/namespaces.json</a> <span class="ep-desc">Namespace directory</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="api/v1/namespaces/cognovamx/cogs.json" class="ep-path">/api/v1/namespaces/{ns}/cogs.json</a> <span class="ep-desc">COGs in a namespace</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="cogs/cognovamx/principles/latest.json" class="ep-path">/cogs/{ns}/{name}/latest.json</a> <span class="ep-desc">Pointer record (latest version)</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="api/v1/public-key.pem" class="ep-path">/api/v1/public-key.pem</a> <span class="ep-desc">Registry Ed25519 public key</span></li>
+      <li><span class="badge badge-get">GET</span> <a href="llms.txt" class="ep-path">/llms.txt</a> <span class="ep-desc">AI-readable registry summary</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Write Endpoints -->
+<section>
+  <div class="container">
+    <h2>Write Endpoints <span class="badge badge-auth">Auth Required</span></h2>
+    <ul class="endpoints">
+      <li><span class="badge badge-post">POST</span> <code class="ep-path">/api/v1/subscribe</code> <span class="ep-desc">Create Stripe checkout session (new publishers)</span></li>
+      <li><span class="badge badge-post">POST</span> <code class="ep-path">/api/v1/register</code> <span class="ep-desc">Register or update a namespace (Bearer token)</span></li>
+      <li><span class="badge badge-get">GET</span> <code class="ep-path">/api/v1/publisher/status</code> <span class="ep-desc">Check subscription and listing status (Bearer token)</span></li>
+      <li><span class="badge badge-post">POST</span> <code class="ep-path">/api/v1/publisher/token/rotate</code> <span class="ep-desc">Generate new API token, revoke old (Bearer token)</span></li>
+    </ul>
+
+    <h3>Authentication</h3>
+    <p>Read endpoints require no authentication. Write endpoints require a Bearer token issued during subscription:</p>
+    <pre><code>Authorization: Bearer reg_your64hexcharshere...</code></pre>
+    <p>Tokens are generated at subscription time and can be rotated via the token rotation endpoint. Token format: <code>reg_</code> prefix + 64 hex characters.</p>
+  </div>
+</section>
+
+<!-- The Registry Today -->
+<section>
+  <div class="container">
+    <h2>The Registry Today</h2>
+
+    <div class="stat-row">
+      <div class="stat">
+        <span class="number" id="stat-total">—</span>
+        <span class="label"><a href="api/v1/publishers.json">Registered Publishers</a></span>
+      </div>
+      <div class="stat">
+        <span class="number" id="stat-action">—</span>
+        <span class="label"><a href="api/v1/stats.json">Public COGs</a></span>
+      </div>
+      <div class="stat">
+        <span class="number" id="stat-info">—</span>
+        <span class="label">Core Audit Tools</span>
+      </div>
+      <div class="stat">
+        <span class="number" id="stat-categories">Ed25519</span>
+        <span class="label"><a href="api/v1/public-key.pem">Signing Engine</a></span>
+      </div>
+    </div>
+
+    <h3>Core Audit Action-COGs</h3>
+    <p>REGINALD ships with action-docs that audit websites for machine-readability:</p>
+    <table>
+      <thead>
+        <tr><th>Action-COG</th><th>What It Checks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>a11y</code></td><td>Accessibility compliance (WCAG convergence with MX)</td></tr>
+        <tr><td><code>clarity</code></td><td>Documentation clarity and readability</td></tr>
+        <tr><td><code>link-checker</code></td><td>Broken links and redirect chains</td></tr>
+        <tr><td><code>llms-txt</code></td><td>Presence and validity of <code>llms.txt</code> files</td></tr>
+        <tr><td><code>metadata</code></td><td>Open Graph, Twitter Cards, meta tags</td></tr>
+        <tr><td><code>pricing</code></td><td>Structured pricing data (prevents the &pound;200k error)</td></tr>
+        <tr><td><code>readability</code></td><td>Plain language analysis</td></tr>
+        <tr><td><code>robots-txt</code></td><td>AI crawler stance and <code>robots.txt</code> configuration</td></tr>
+        <tr><td><code>schema</code></td><td>Schema.org JSON-LD validation</td></tr>
+        <tr><td><code>semantic-html</code></td><td>HTML structure and semantic element usage</td></tr>
+        <tr><td><code>sitemap</code></td><td>Sitemap completeness and validity</td></tr>
+        <tr><td><code>toast-detector</code></td><td>Ephemeral UI patterns invisible to machines</td></tr>
+        <tr><td><code>validate-cog</code></td><td>COG specification compliance</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- COG Browser -->
+<section>
+  <div class="container">
+    <h2>Browse the Registry</h2>
+
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Search COGs by name, description, or tag...">
+      <div class="filters">
+        <select id="filter-category" aria-label="Filter by category">
+          <option value="">All categories</option>
+        </select>
+        <select id="filter-type" aria-label="Filter by type">
+          <option value="">All types</option>
+          <option value="action-doc">Action-Doc</option>
+          <option value="info-doc">Info-Doc</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="cog-grid" class="cog-grid">
+      <div class="loading">Loading COGs...</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="get-started.html">Get Started</a>
+      <a href="plugins.html">Plugins</a>
+      <a href="https://allabout.network">AllAbout.Network</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="mailto:tom.cranstoun@gmail.com">Contact</a>
+    </div>
+    <p>&copy; CogNovaMX Ltd — Making the web work for everyone and everything that uses it.</p>
+  </div>
+</footer>
+
+<script src="js/reginald.js" defer></script>
+</body>
+</html>

@@ -14,7 +14,7 @@ let allCogs = [];
 
 async function loadCogs() {
   try {
-    const response = await fetch('/reginald/api/v1/cogs.json');
+    const response = await fetch('api/v1/namespaces/cognovamx/cogs.json');
     const data = await response.json();
     allCogs = data.cogs;
     updateStats(data);

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get Started — REGINALD</title>
+  <meta name="description" content="Get started with REGINALD in four steps: choose your integration, subscribe, register your namespace, and verify. Free plugins available for every major CMS.">
+  <meta name="author" content="CogNovaMX Ltd">
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="registry">
+  <meta name="mx:audience" content="humans,ai-agents,developers">
+  <link rel="canonical" href="https://reginald.allabout.network/get-started.html">
+  <link rel="stylesheet" href="css/reginald.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">REGINALD</a>
+    <span class="breadcrumb">/ Get Started</span>
+    <div class="nav-links">
+      <a href="how-it-works.html">How It Works</a>
+      <a href="ai-readiness.html">AI Readiness</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="api.html">API</a>
+      <a href="get-started.html" class="active">Get Started</a>
+      <a href="plugins.html">Plugins</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header container">
+  <h1>Get Started</h1>
+  <p class="lead">Four steps to make your documentation globally queryable by any AI system.</p>
+</div>
+
+<!-- Steps -->
+<section>
+  <div class="container">
+    <ol class="steps">
+      <li>
+        <h3>Choose Your Integration</h3>
+        <p><strong>WordPress:</strong> Install the <a href="plugins.html">MX Cogify plugin</a> — it handles manifest generation, Schema.org, and REGINALD registration automatically.</p>
+        <p><strong>Drupal, Shopify, Wix, Squarespace:</strong> Free plugins available for all major platforms. See the full <a href="plugins.html">plugins page</a>.</p>
+        <p><strong>Adobe EDS:</strong> Copy the <code>mx-cogify</code> block into your project. Use the CLI tool for registration.</p>
+        <p><strong>Any Platform:</strong> Host a <code>.well-known/mx-cogs.json</code> manifest on your domain. REGINALD's verification pipeline crawls it.</p>
+      </li>
+      <li>
+        <h3>Subscribe</h3>
+        <p>Call <code>POST /api/v1/subscribe</code> with your namespace and email. Complete the Stripe checkout. Your API token is generated automatically.</p>
+        <pre><code>curl -X POST https://reginald.allabout.network/api/v1/subscribe \
+  -H "Content-Type: application/json" \
+  -d '{"namespace":"your-namespace","email":"you@example.com"}'</code></pre>
+      </li>
+      <li>
+        <h3>Register Your Namespace</h3>
+        <p>Use your API token to register. REGINALD validates your manifest, signs the pointer records, and makes your COGs queryable worldwide.</p>
+        <pre><code>curl -X POST https://reginald.allabout.network/api/v1/register \
+  -H "Authorization: Bearer reg_your_token..." \
+  -H "Content-Type: application/json" \
+  -d '{"namespace":"your-namespace","domain":"yoursite.com","manifest_url":"https://yoursite.com/.well-known/mx-cogs.json"}'</code></pre>
+      </li>
+      <li>
+        <h3>Verify</h3>
+        <p>Check your registration status and see your COGs in the registry.</p>
+        <pre><code>curl https://reginald.allabout.network/api/v1/publisher/status \
+  -H "Authorization: Bearer reg_your_token..."</code></pre>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <strong>Need help?</strong> Contact <a href="mailto:tom.cranstoun@gmail.com">tom.cranstoun@gmail.com</a> for support, or see the full <a href="api.html">API reference</a>.
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="api.html">API Reference</a>
+      <a href="plugins.html">Plugins</a>
+      <a href="https://allabout.network">AllAbout.Network</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="mailto:tom.cranstoun@gmail.com">Contact</a>
+    </div>
+    <p>&copy; CogNovaMX Ltd — Making the web work for everyone and everything that uses it.</p>
+  </div>
+</footer>
+
+</body>
+</html>

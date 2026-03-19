@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How It Works — REGINALD</title>
+  <meta name="description" content="REGINALD is DNS for machine-readable documentation. It maps COG identifiers to publisher-hosted content URLs with two-layer cryptographic trust.">
+  <meta name="author" content="CogNovaMX Ltd">
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="registry">
+  <meta name="mx:audience" content="humans,ai-agents,developers">
+  <link rel="canonical" href="https://reginald.allabout.network/how-it-works.html">
+  <link rel="stylesheet" href="css/reginald.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">REGINALD</a>
+    <span class="breadcrumb">/ How It Works</span>
+    <div class="nav-links">
+      <a href="how-it-works.html" class="active">How It Works</a>
+      <a href="ai-readiness.html">AI Readiness</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="api.html">API</a>
+      <a href="get-started.html">Get Started</a>
+      <a href="plugins.html">Plugins</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header container">
+  <h1>How REGINALD Works</h1>
+  <p class="lead">DNS for machine-readable documentation. It maps COG identifiers to publisher-hosted content URLs. REGINALD does not host content — each publisher serves their own COGs from their own domain.</p>
+</div>
+
+<!-- Resolution Flow -->
+<section>
+  <div class="container">
+    <h2>Resolution Flow</h2>
+    <div class="flow">
+      <div class="flow-step">AI Agent queries<br><code>/api/v1/namespaces</code></div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">Discovers namespace<br><code>cognovamx</code></div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">Fetches pointer record<br><code>/cogs/{ns}/{name}/latest.json</code></div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">Follows <code>canonical_url</code><br>to publisher server</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">Verifies<br><code>content_hash</code></div>
+    </div>
+
+    <h2>Two-Layer Trust</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Publisher Signs Content</h3>
+        <p>The publisher cryptographically signs their COG, proving "I wrote this and it is current." The signature travels with the content.</p>
+      </div>
+      <div class="card">
+        <h3>Registry Signs Pointer</h3>
+        <p>REGINALD signs the pointer record with Ed25519, proving "this document was registered, validated, and conforms to specifications."</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Pure resolver, not a host.</strong> REGINALD resolves identifiers to URLs — it never stores or caches content. Publishers retain full control of their documentation and can update it at any time.
+    </div>
+  </div>
+</section>
+
+<!-- What Is a COG? -->
+<section>
+  <div class="container">
+    <h2>What Is a COG?</h2>
+    <p>A COG is a markdown file with YAML frontmatter. No proprietary format. No binary encoding. No special tooling required. A <code>.cog.md</code> file that any text editor can open and any AI system can parse.</p>
+
+    <pre><code>---
+title: "Rancilio Silvia Pro X"
+description: "Dual-boiler espresso machine with PID temperature control"
+author: "Rancilio Group"
+version: "2.1"
+
+mx:
+  status: active
+  contentType: product
+  tags: [espresso, dual-boiler, pid]
+  maintainer: "product-team@rancilio.com"
+  reviewCycle: "quarterly"
+  expires: 2026-07-01
+---
+
+# Rancilio Silvia Pro X
+
+The Silvia Pro X is a dual-boiler espresso machine...</code></pre>
+
+    <p>The YAML frontmatter is for machines. The markdown body is for humans. Same file, both audiences served.</p>
+
+    <h3>The Dual Meaning</h3>
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>Full Name</th><th>What It Proves</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Certificate</strong></td><td>Certificate of Genuineness</td><td>"This document is real"</td></tr>
+        <tr><td><strong>Contract</strong></td><td>Contract of Governance</td><td>"Someone keeps this accurate"</td></tr>
+      </tbody>
+    </table>
+
+    <p>Every COG carries both layers. The Certificate tells an AI agent whether to trust the content. The Contract tells it who is responsible for keeping the content current — with a named maintainer, a review cycle, and an expiry date.</p>
+
+    <h3>Two Types</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Info-Doc</h3>
+        <p>A COG without an action block — documents, describes, certifies. The single source of truth for a product, API, or specification.</p>
+      </div>
+      <div class="card">
+        <h3>Action-Doc</h3>
+        <p>A COG with an action block — validates, generates, extracts, analyses. A Standard Operating Procedure that executes itself. The document is the programme.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="plugins.html">Plugins</a>
+      <a href="https://allabout.network">AllAbout.Network</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="mailto:tom.cranstoun@gmail.com">Contact</a>
+    </div>
+    <p>&copy; CogNovaMX Ltd — Making the web work for everyone and everything that uses it.</p>
+  </div>
+</footer>
+
+</body>
+</html>
