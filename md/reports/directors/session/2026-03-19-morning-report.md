@@ -36,6 +36,7 @@ This also completed the earlier task of removing all pricing and timescales from
 ### 2. PDF Generation
 
 Generated PDFs from all four outreach files in `mx-crm/outreach/2026-03-18/`:
+
 - bloomreach-report.pdf (70K)
 - bloomreach-followup.pdf (27K)
 - farnell-report.pdf (80K)
@@ -44,6 +45,7 @@ Generated PDFs from all four outreach files in `mx-crm/outreach/2026-03-18/`:
 ### 3. BloomReach CRM Contacts
 
 Added two contacts following yesterday's vendor meeting:
+
 - **William Borgbarthet** (william.borgbarthet@bloomreach.com) — primary contact, high priority
 - **Stuart Rex** (stuart.rex@bloomreach.com) — secondary contact, medium priority
 
