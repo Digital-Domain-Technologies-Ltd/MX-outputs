@@ -123,7 +123,25 @@ Read endpoints require no authentication. Write endpoints require a Bearer token
 | 4 — Registered | Signed + registered, full contract with SLA | Enterprise documentation | Regulated industries |
 | 5 — Audited | Signed + registered + third-party verified | Critical documentation | Healthcare, finance, legal |
 
-Level 3 is the minimum for REGINALD registration. Level 5 is for industries where a wrong answer does not just waste tokens — it harms people.
+Level 3 is the minimum for REGINALD registration. Level 5 is for industries where a wrong answer does not just waste tokens — it harms people. Each level is cumulative — a document must satisfy all requirements from the levels below. The progression moves from parseable (Level 1) through governed (Level 2), trusted (Level 3), guaranteed (Level 4), to independently verified (Level 5).
+
+---
+
+## The 5-Stage AI Readiness Journey
+
+Every website must pass through five stages before an AI agent can complete a task on behalf of a user. Miss any stage and the entire chain breaks — the Catastrophic Failure Principle.
+
+| Stage | Name | Core Question | What Fails Without It |
+|-------|------|---------------|----------------------|
+| 1 | **Discovery** | Can they find you? | AI agent never reaches the site |
+| 2 | **Citation** | Can they quote you accurately? | Hallucinated facts replace real ones |
+| 3 | **Search & Compare** | Can they compare you fairly? | Products excluded from shortlists |
+| 4 | **Price Understanding** | Can they read your prices? | The £200,000 pricing error |
+| 5 | **Purchase Confidence** | Can they complete the transaction? | Cart abandonment by machine agents |
+
+**Catastrophic Failure Principle:** Each stage depends on the previous one. A site with perfect pricing data but no discoverability is invisible. A site that is discoverable but not citable gets misquoted. There is no shortcut — every stage must be addressed in sequence.
+
+**Convergence:** The same implementation that serves AI agents also serves search engines (SEO/GEO) and users with disabilities (WCAG accessibility). One set of changes, three audiences served. This is not coincidence — semantic HTML, structured data, and explicit state benefit every non-visual consumer of a web page.
 
 ---
 
