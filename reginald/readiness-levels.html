@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Readiness Levels — REGINALD</title>
-  <meta name="description" content="Five compliance levels for REGINALD registration. From basic YAML frontmatter to third-party audited documentation for regulated industries.">
+  <meta name="description" content="Six readiness levels (0-5) for REGINALD registration. From not ready to third-party verified — describing both what publishers provide and what AI agents can do.">
   <meta name="author" content="CogNovaMX Ltd">
   <meta property="og:title" content="Readiness Levels — REGINALD">
-  <meta property="og:description" content="Five compliance levels for REGINALD registration. From basic internal docs to audited documentation for healthcare, finance, and legal.">
+  <meta property="og:description" content="Six readiness levels (0-5) for REGINALD registration. From not ready to third-party verified, describing both what publishers provide and what AI agents can do.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://reginald.allabout.network/readiness-levels.html">
   <meta property="og:site_name" content="REGINALD">
@@ -21,7 +21,7 @@
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Readiness Levels",
-    "description": "Five compliance levels for REGINALD registration, from basic YAML frontmatter to third-party audited documentation.",
+    "description": "Six readiness levels (0-5) for REGINALD registration, from not ready to third-party verified.",
     "url": "https://reginald.allabout.network/readiness-levels.html",
     "isPartOf": {
       "@type": "WebApplication",
@@ -61,7 +61,7 @@
 <!-- Page Header -->
 <div class="page-header container">
   <h1>Readiness Levels</h1>
-  <p class="lead">Not every document needs the same verification. A company's internal wiki has different requirements than a pharmaceutical dosage reference. Five levels, from quick-start to fully audited.</p>
+  <p class="lead">Not every document needs the same verification. A company's internal wiki has different requirements than a pharmaceutical dosage reference. Six levels (0-5), from not ready to fully audited, describing both what the publisher provides and what AI agents can do.</p>
 </div>
 
 <div class="container">
@@ -71,18 +71,52 @@
     <h2>At a Glance</h2>
     <table>
       <thead>
-        <tr><th>Level</th><th>Name</th><th>Key Requirement</th><th>Use Case</th></tr>
+        <tr><th>Level</th><th>Name</th><th>Key Requirement</th><th>Use Case</th><th>Agent Outcome</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>1</strong></td><td>Basic</td><td>MX metadata present, publisher identified</td><td>Internal documentation</td></tr>
-        <tr><td><strong>2</strong></td><td>Structured</td><td>Full MX fields, maintainer + contact</td><td>Public documentation</td></tr>
-        <tr class="level-highlight"><td><strong>3</strong></td><td>Signed</td><td>Cryptographically signed, review cycle</td><td>Commercial documentation</td></tr>
-        <tr><td><strong>4</strong></td><td>Registered</td><td>Signed + registered, full contract with SLA</td><td>Enterprise documentation</td></tr>
-        <tr><td><strong>5</strong></td><td>Audited</td><td>Signed + registered + third-party verified</td><td>Critical documentation</td></tr>
+        <tr class="level-not-ready"><td><strong>0</strong></td><td>Not Ready</td><td>Auto-generated boilerplate, no deliberate MX intent</td><td>Default state</td><td>Agents guess, infer, hallucinate</td></tr>
+        <tr><td><strong>1</strong></td><td>Basic</td><td>Deliberate metadata, publisher identified</td><td>Internal documentation</td><td>Agents can parse and discover</td></tr>
+        <tr><td><strong>2</strong></td><td>Structured</td><td>Full MX fields, maintainer + contact</td><td>Public documentation</td><td>Agents can cite and attribute</td></tr>
+        <tr class="level-highlight"><td><strong>3</strong></td><td>Signed</td><td>Cryptographically signed, review cycle</td><td>Commercial documentation</td><td>Agents can compare and recommend</td></tr>
+        <tr><td><strong>4</strong></td><td>Registered</td><td>Signed + registered, full contract with SLA</td><td>Enterprise documentation</td><td>Agents can transact with confidence</td></tr>
+        <tr><td><strong>5</strong></td><td>Audited</td><td>Signed + registered + third-party verified</td><td>Critical documentation</td><td>Agents can guarantee accuracy</td></tr>
       </tbody>
     </table>
-    <p>Level 3 is the minimum for REGINALD registration. The progression is cumulative — each level includes everything from the level below.</p>
+    <p>Level 0 describes the default state before any deliberate MX work. Level 3 is the minimum for REGINALD registration. The progression is cumulative — each level includes everything from the level below.</p>
   </section>
+
+  <!-- Level 0 -->
+  <div class="level-card" data-level="0">
+    <div class="level-header">
+      <span class="level-number">0</span>
+      <div>
+        <h3>Not Ready</h3>
+        <p class="level-subtitle">Default state</p>
+      </div>
+    </div>
+    <div class="level-body">
+      <p>The baseline before any deliberate MX work. The site may have auto-generated meta tags from a CMS, boilerplate social sharing cards, or templated HTML. None of this was placed with deliberate machine readability in mind. An AI agent visiting this site must infer meaning from visual layout, guess at business identity, and hallucinate missing context.</p>
+
+      <h4>Characteristics</h4>
+      <ul class="level-reqs">
+        <li>Auto-generated <code>&lt;title&gt;</code> from CMS or template</li>
+        <li>No Schema.org JSON-LD</li>
+        <li>No llms.txt</li>
+        <li>No semantic HTML structure beyond CMS defaults</li>
+        <li>Meta description either missing or auto-generated</li>
+        <li>No MX governance metadata</li>
+      </ul>
+
+      <h4>What It Proves</h4>
+      <p>Nothing. This is the absence of deliberate MX. Most websites on the internet are at Level 0.</p>
+
+      <h4>Agent Outcome</h4>
+      <p>Agents must guess, infer, and hallucinate. They cannot reliably identify the publisher, extract structured facts, or verify any claims. Recommendations based on Level 0 content are unreliable.</p>
+
+      <h4>Typical State</h4>
+      <p>Any website that has not been deliberately structured for machine consumption. CMS-generated pages with default templates, marketing sites built for visual impact without metadata consideration, legacy sites with outdated HTML.</p>
+    </div>
+  </div>
 
   <!-- Level 1 -->
   <div class="level-card" data-level="1">
@@ -106,6 +140,9 @@
 
       <h4>What It Proves</h4>
       <p>Someone has deliberately structured this content for machine consumption. It is not a random file — it has identity.</p>
+
+      <h4>Agent Outcome</h4>
+      <p>Agents can parse and discover this content. They can find it, extract basic facts, and confirm the publisher's identity. Discovery-stage agent tasks succeed.</p>
 
       <h4>Typical Use</h4>
       <p>Internal wikis, team documentation, product pages, personal knowledge bases. Content that needs to be parseable by internal AI tools but does not require external trust verification.</p>
@@ -167,6 +204,9 @@ Content here...</code></pre>
 
       <h4>What It Proves</h4>
       <p>This content has governance. A named person or team is responsible for its accuracy. An AI agent can assess not just the content, but who stands behind it.</p>
+
+      <h4>Agent Outcome</h4>
+      <p>Agents can cite and attribute this content. They can reference it as a source, link to the named maintainer, and assess when it was last updated. Citation-stage agent tasks succeed.</p>
 
       <h4>Typical Use</h4>
       <p>Public-facing documentation, product pages, API references. Content that external parties will read and rely upon, but where cryptographic verification is not yet required.</p>
@@ -243,6 +283,9 @@ mx:
       <h4>Why This Is the Minimum</h4>
       <p>Without cryptographic signing, an AI agent cannot distinguish between genuine documentation and a modified copy. Without a review cycle, content decays silently. Level 3 is where <em>computational trust</em> begins — the point where an AI system can programmatically verify that content is authentic and maintained.</p>
 
+      <h4>Agent Outcome</h4>
+      <p>Agents can compare and recommend this content against alternatives. Cryptographic verification means agents can programmatically confirm authenticity before including it in comparisons. Search and compare agent tasks succeed.</p>
+
       <h4>Typical Use</h4>
       <p>Commercial product documentation, pricing data, technical specifications that customers and AI agents rely upon for purchasing decisions. The level where getting it wrong costs money.</p>
     </div>
@@ -271,6 +314,9 @@ mx:
 
       <h4>What It Proves</h4>
       <p>This publisher is committed to accuracy as a service. Not just "I wrote this" or "I will review this" — but "I guarantee this will be correct and available within defined parameters."</p>
+
+      <h4>Agent Outcome</h4>
+      <p>Agents can transact with confidence using this content. SLA guarantees, aliveness checks, and registry presence give agents the assurance needed for procurement and commerce workflows. Transaction-stage agent tasks succeed.</p>
 
       <h4>Typical Use</h4>
       <p>Enterprise documentation, regulated industry content, partner integrations. Organisations where downstream systems depend on the accuracy of this data and where SLA breaches have contractual consequences.</p>
@@ -303,6 +349,9 @@ mx:
       <h4>Why It Matters</h4>
       <p>Level 5 exists for industries where a wrong answer does not just waste tokens — it harms people. A misquoted drug dosage. A wrong financial disclosure. An incorrect legal precedent. These are domains where computational trust must be backed by human accountability.</p>
 
+      <h4>Agent Outcome</h4>
+      <p>Agents can guarantee accuracy of this content. Independent third-party verification means agents can make safety-critical recommendations backed by human accountability. Guarantee-stage agent tasks succeed.</p>
+
       <h4>Typical Use</h4>
       <p>Healthcare documentation, pharmaceutical data, financial disclosures, legal references. Content where regulatory compliance demands independent verification.</p>
     </div>
@@ -312,6 +361,8 @@ mx:
   <section class="level-progression">
     <h2>The Progression</h2>
     <div class="flow">
+      <div class="flow-step">Level 0<br><strong>Not Ready</strong></div>
+      <span class="flow-arrow">&rarr;</span>
       <div class="flow-step">Level 1<br><strong>Parseable</strong></div>
       <span class="flow-arrow">&rarr;</span>
       <div class="flow-step">Level 2<br><strong>Governed</strong></div>
@@ -322,7 +373,7 @@ mx:
       <span class="flow-arrow">&rarr;</span>
       <div class="flow-step">Level 5<br><strong>Verified</strong></div>
     </div>
-    <p>Each level is cumulative. You cannot skip levels — a document must satisfy all requirements from the levels below before qualifying for the next. This ensures that higher-trust documents always carry the full chain of provenance.</p>
+    <p>Most sites start at Level 0. Each level is cumulative. You cannot skip levels — a document must satisfy all requirements from the levels below before qualifying for the next. This ensures that higher-trust documents always carry the full chain of provenance.</p>
   </section>
 
   <!-- Choosing Your Level -->
@@ -333,6 +384,7 @@ mx:
         <tr><th>If Your Content Is</th><th>Start At</th><th>Why</th></tr>
       </thead>
       <tbody>
+        <tr class="level-not-ready"><td>No deliberate MX work done</td><td><strong>Level 0</strong></td><td>This is where most sites start — the audit shows what to do first</td></tr>
         <tr><td>Internal team documentation</td><td><strong>Level 1</strong></td><td>Machine-parseable is enough — trust is implicit within the organisation</td></tr>
         <tr><td>Public product pages or API docs</td><td><strong>Level 2</strong></td><td>External readers need to know who maintains this and when it was last updated</td></tr>
         <tr><td>Commercial product data, pricing</td><td><strong>Level 3</strong></td><td>AI agents making purchasing recommendations need cryptographic proof of authenticity</td></tr>
@@ -362,7 +414,7 @@ mx:
 
   <!-- CTA -->
   <div class="callout">
-    <strong>Start at Level 1 and grow.</strong> Install a free <a href="plugins.html">MX Cogify plugin</a> to reach Level 1 immediately. When you are ready for REGINALD registration, <a href="get-started.html">get started</a> with Level 3. For enterprise or regulated industries, <a href="mailto:tom.cranstoun@gmail.com">get in touch</a> to discuss Level 4 and Level 5 requirements.
+    <strong>Most sites start at Level 0.</strong> The <a href="audit.html">MX Readiness Audit</a> shows you exactly where you stand and what to do next. Install a free <a href="plugins.html">MX Cogify plugin</a> to reach Level 1 immediately. When you are ready for REGINALD registration, <a href="get-started.html">get started</a> with Level 3. For enterprise or regulated industries, <a href="mailto:tom.cranstoun@gmail.com">get in touch</a> to discuss Level 4 and Level 5 requirements.
   </div>
 
 </div>
