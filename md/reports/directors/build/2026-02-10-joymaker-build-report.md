@@ -1,4 +1,5 @@
 ---
+
 title: "Co-Directors Report — The Joymaker Build"
 created: "2026-02-10"
 version: "1.0"
@@ -7,8 +8,9 @@ author: Tom Cranstoun and Maxine
 mx:
   audience: stakeholders
   confidential: true
-  session-type: full
+  sessionType: full
 ---
+
 
 # Co-Directors Report — The Joymaker Build
 

@@ -1,11 +1,14 @@
 ---
+
 title: "Co-Directors Report — Maxine Vision and Product Infrastructure Complete"
 created: "2026-02-11"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Maxine Vision and Product Infrastructure Complete
 

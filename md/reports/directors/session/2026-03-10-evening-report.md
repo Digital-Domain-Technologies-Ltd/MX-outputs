@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — Currency Formatting Expansion, Timeless Prose"
 created: "2026-03-10"
-segment: "evening"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "evening"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — Currency Formatting Expansion, Timeless Prose
 

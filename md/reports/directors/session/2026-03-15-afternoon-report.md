@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — Manifesto Integration and Build Pipeline Updates"
 created: "2026-03-15"
-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "afternoon"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — Manifesto Integration and Build Pipeline Updates
 

@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — PDF Rebuilds and Publication Update"
 created: "2026-03-15"
-segment: "morning"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "morning"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — PDF Rebuilds and Publication Update
 

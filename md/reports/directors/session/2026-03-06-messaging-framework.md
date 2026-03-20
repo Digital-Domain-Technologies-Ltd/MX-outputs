@@ -1,13 +1,16 @@
 ---
+
 title: "Co-Directors Report — Messaging Framework v2.0"
 description: "Session report. Major revision of the MX Messaging Framework — external-ready, terminology aligned across repos, PDF generated, all submodules pushed."
 created: "2026-03-06"
-segment: "late-evening"
 version: "1.0"
 author: "Tom Cranstoun and Maxine"
-audience: "stakeholders"
-confidential: true
+mx:
+  segment: "late-evening"
+  audience: "stakeholders"
+  confidential: true
 ---
+
 
 # Co-Directors Report — Messaging Framework v2.0
 

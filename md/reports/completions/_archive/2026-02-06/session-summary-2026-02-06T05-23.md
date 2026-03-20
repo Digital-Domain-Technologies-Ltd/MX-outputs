@@ -1,12 +1,15 @@
 ---
+
 title: "Create and commit Cog-Nova-MX business plan document suite"
 created: "2026-02-06"
 sessionStart: "2026-02-06T02:30:00Z"
 sessionEnd: "2026-02-06T05:23:00Z"
 duration: "~3 hours (across two continuation sessions)"
-contentType: "documentation"
-status: "completed"
+mx:
+  contentType: "documentation"
+  status: "completed"
 ---
+
 
 # Session Summary: Cog-Nova-MX business plan document suite
 

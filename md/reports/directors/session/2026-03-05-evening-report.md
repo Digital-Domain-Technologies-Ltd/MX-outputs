@@ -1,13 +1,16 @@
 ---
+
 title: "Co-Directors Report — PDF Pipeline, tg.community Re-Audit, Tooling Fixes, and MX Journey Stage Assessment"
 description: "Evening session report. PDF pipeline completed, tg.community audited with transformative improvements, three audit bugs fixed, and MX Journey Stage assessment added to the audit tool — mapping findings to the 5-stage agent journey."
 created: "2026-03-05"
-segment: "evening"
 version: "3.0"
 author: "Tom Cranstoun and Maxine"
-audience: "stakeholders"
-confidential: true
+mx:
+  segment: "evening"
+  audience: "stakeholders"
+  confidential: true
 ---
+
 
 # Co-Directors Report — PDF Pipeline, tg.community Re-Audit, Tooling Fixes, and MX Journey Stage Assessment
 

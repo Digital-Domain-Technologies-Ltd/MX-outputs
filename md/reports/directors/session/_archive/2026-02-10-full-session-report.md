@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — 10 February 2026 (Full Session)"
 created: "2026-02-10"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
-session-type: full
+sessionType: full
+mx:
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — 10 February 2026
 

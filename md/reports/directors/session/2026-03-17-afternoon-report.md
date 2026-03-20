@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — REGINALD v3.1: Subdomain Architecture Live"
 created: "2026-03-17"
-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "afternoon"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — REGINALD v3.1: Subdomain Architecture Live
 

@@ -1,12 +1,15 @@
 ---
+
 title: "Rename 'The Bible' to 'The Protocols' across entire repository"
 created: "2026-02-06"
 sessionStart: "2026-02-06T12:00:00Z"
 sessionEnd: "2026-02-06T13:12:00Z"
 duration: "~70 minutes"
-contentType: "refactoring"
-status: "completed"
+mx:
+  contentType: "refactoring"
+  status: "completed"
 ---
+
 
 # Session Summary: Bible to Protocols Rename
 

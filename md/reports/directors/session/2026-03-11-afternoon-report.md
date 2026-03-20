@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — Grant Briefs, PDF Pipeline, Documentation Sweep"
 created: "2026-03-11"
-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "afternoon"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — Grant Briefs, PDF Pipeline, Documentation Sweep
 

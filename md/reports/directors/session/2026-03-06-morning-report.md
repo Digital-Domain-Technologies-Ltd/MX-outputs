@@ -1,13 +1,16 @@
 ---
+
 title: "Co-Directors Report — Journey Stage Documentation, Configurable Thresholds, and Executive Summary Fix"
 description: "Morning session report. Completed Phase B of the MX Journey Stage feature: book manuscript documentation, configurable thresholds, executive summary bug fix, and verification."
 created: "2026-03-06"
-segment: "morning"
 version: "1.0"
 author: "Tom Cranstoun and Maxine"
-audience: "stakeholders"
-confidential: true
+mx:
+  segment: "morning"
+  audience: "stakeholders"
+  confidential: true
 ---
+
 
 # Co-Directors Report — Journey Stage Documentation, Configurable Thresholds, and Executive Summary Fix
 

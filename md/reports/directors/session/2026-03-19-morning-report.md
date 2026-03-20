@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — Free Book TOC, Reginald Rework, Footnotes Appendices"
 created: "2026-03-19"
-segment: "morning"
 version: "2.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "morning"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — Free Book TOC, Reginald Rework, Footnotes Appendices
 

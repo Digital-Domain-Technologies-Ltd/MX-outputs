@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — CogNovaMX Rename, Kindle Retirement, and Beyond the CMS Podcast"
 created: "2026-03-12"
-segment: "evening"
 version: "3.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "evening"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — CogNovaMX Rename, Kindle Retirement, and Beyond the CMS Podcast
 

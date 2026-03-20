@@ -1,14 +1,17 @@
 ---
+
 title: "Co-Directors Report — The Day the Data Layer Grew Up"
 description: "Evening session report. Full-day arc: field dictionary v1.7 to v3.0, cog validator to zero errors, markdownlint root-cause fixed, and 1,420+ files restructured into a two-zone YAML model."
 created: "2026-03-02"
 modified: "2026-03-02"
-segment: "evening"
 version: "1.0"
 author: "Tom Cranstoun and Maxine"
-audience: "stakeholders"
-confidential: true
+mx:
+  segment: "evening"
+  audience: "stakeholders"
+  confidential: true
 ---
+
 
 # Co-Directors Report — The Day the Data Layer Grew Up
 

@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — BloomReach Meeting, Plugin Expansion & Reginald Infrastructure"
 created: "2026-03-18"
-segment: "evening"
 version: "4.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "evening"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — BloomReach Meeting, Plugin Expansion & Reginald Infrastructure
 

@@ -1,13 +1,15 @@
 ---
+
 title: "Directors Report: Repository Reset and Consolidation"
 author: Claude Opus 4.5 (Maxine)
 
 mx:
   date: 2026-02-24
-  session-type: maintenance
+  sessionType: maintenance
   co-author: Tom Cranstoun
   status: complete
 ---
+
 
 # Directors Report: Repository Reset and Consolidation
 

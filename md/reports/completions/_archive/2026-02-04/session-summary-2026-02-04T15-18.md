@@ -1,14 +1,17 @@
 ---
+
 title: "PDF Generation: Arrive First Executive Sales Report"
 created: "2026-02-04"
 sessionStart: "2026-02-04T15:00:00Z"
 sessionEnd: "2026-02-04T15:18:23Z"
 duration: "~18 minutes"
-contentType: "document-generation"
-status: "completed"
 skills-used: ["maxine", "mx-create-pdf"]
 tools-used: ["Bash", "Read", "Write", "Skill"]
+mx:
+  contentType: "document-generation"
+  status: "completed"
 ---
+
 
 # Session Summary: PDF Generation with Maxine Orchestration
 

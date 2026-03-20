@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — Four Editorial Reviews and the Great Ch 0 Split"
 created: "2026-03-07"
-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "afternoon"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — Four Editorial Reviews and the Great Ch 0 Split
 

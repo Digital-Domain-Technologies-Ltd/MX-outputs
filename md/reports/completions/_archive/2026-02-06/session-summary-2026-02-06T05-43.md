@@ -1,12 +1,15 @@
 ---
+
 title: "Manual installation of playground-sync MCP server and skill"
 created: "2026-02-06"
 sessionStart: "2026-02-06T05:37:00Z"
 sessionEnd: "2026-02-06T05:43:49Z"
 duration: "~7 minutes"
-contentType: "configuration"
-status: "completed"
+mx:
+  contentType: "configuration"
+  status: "completed"
 ---
+
 
 # Session Summary: Manual Installation of playground-sync
 

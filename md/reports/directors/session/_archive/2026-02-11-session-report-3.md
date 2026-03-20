@@ -1,11 +1,14 @@
 ---
+
 title: "Co-Directors Report — MX App Split View and README Rewrite"
 created: "2026-02-11"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # MX App Split View and README Rewrite
 

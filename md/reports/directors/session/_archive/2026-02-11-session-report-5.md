@@ -1,11 +1,14 @@
 ---
+
 title: "Co-Directors Report — Remote Command Bridge, Test Suite, and the Joymaker Progress Assessment"
 created: "2026-02-11"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Remote Command Bridge, Test Suite, and the Joymaker Progress Assessment
 

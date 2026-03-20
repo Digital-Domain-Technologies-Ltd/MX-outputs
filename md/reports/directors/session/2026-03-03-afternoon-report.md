@@ -1,13 +1,16 @@
 ---
+
 title: "Co-Directors Report — Cleaning the Last Fingerprints"
 description: "Afternoon session report. Five work streams: allaboutv2 carrier compliance (4%→99%), npm vulnerability elimination (0 vulnerabilities), field dictionary reference sweep (40+ files), redirect file removal, and REGINALD language redirect (Cloudflare Worker v1.2.0)."
 created: "2026-03-03"
-segment: "afternoon"
 version: "1.0"
 author: "Tom Cranstoun and Maxine"
-audience: "stakeholders"
-confidential: true
+mx:
+  segment: "afternoon"
+  audience: "stakeholders"
+  confidential: true
 ---
+
 
 # Co-Directors Report — Cleaning the Last Fingerprints
 

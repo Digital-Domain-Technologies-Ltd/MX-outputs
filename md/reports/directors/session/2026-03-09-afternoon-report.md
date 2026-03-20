@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — Free Book Renamed to Introduction Chapter"
 created: "2026-03-09"
-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "afternoon"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — Free Book Renamed to Introduction Chapter
 

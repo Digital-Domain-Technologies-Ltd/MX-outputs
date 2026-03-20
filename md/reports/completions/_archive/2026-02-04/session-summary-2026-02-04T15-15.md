@@ -1,12 +1,15 @@
 ---
+
 title: "MX Metadata Systems: Validation, Provenance, and Web Audit Analysis Implementation"
 created: "2026-02-04"
 sessionStart: "2026-02-04T14:35:00Z"
 sessionEnd: "2026-02-04T15:15:48Z"
 duration: "~40 minutes"
-contentType: "feature-implementation"
-status: "completed"
+mx:
+  contentType: "feature-implementation"
+  status: "completed"
 ---
+
 
 # Session Summary: MX Metadata Systems Implementation and Deployment
 

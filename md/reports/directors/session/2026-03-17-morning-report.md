@@ -1,12 +1,15 @@
 ---
+
 title: "Co-Directors Report — REGINALD v3: Pure Resolver and Visibility Classification"
 created: "2026-03-17"
-segment: "morning"
 version: "1.0"
 author: Tom Cranstoun and Maxine
-audience: stakeholders
-confidential: true
+mx:
+  segment: "morning"
+  audience: stakeholders
+  confidential: true
 ---
+
 
 # Co-Directors Report — REGINALD v3: Pure Resolver and Visibility Classification
 
