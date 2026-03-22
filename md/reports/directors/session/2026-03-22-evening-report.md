@@ -1,14 +1,14 @@
 ---
-title: "Co-Directors Report — Image Pipeline Consolidation and ASCII Diagram Conversion"
+title: "Co-Directors Report — Image Pipeline and Validator Hardening"
 created: "2026-03-22"
 segment: "evening"
-version: "1.0"
+version: "2.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidential: true
 ---
 
-# Co-Directors Report — Image Pipeline Consolidation and ASCII Diagram Conversion
+# Co-Directors Report — Image Pipeline and Validator Hardening
 
 **Date:** 22 March 2026 — Evening
 **Segment:** evening (17:00–)
@@ -17,7 +17,7 @@ confidential: true
 
 ## Summary
 
-Two complementary improvements to the book manuscripts. First, ASCII art diagrams in Protocols chapters 2, 4, and Appendix L were converted to professional SVG illustrations with proper funnel shapes, flow diagrams, and namespace trees — then rendered as PNGs and embedded with figure captions. Second, a systemic duplication problem was identified and resolved: SVG source files existed in both the asset library and alongside manuscripts. All 29 redundant SVGs were removed from manuscript folders, establishing `datalake/assets/images/svg/` as the single source of truth. Four SVGs that had no asset copy were recovered and properly filed.
+Two major quality improvements. First, ASCII diagrams in Protocols manuscripts were converted to professional SVG illustrations and the image pipeline was consolidated (29 redundant SVGs removed). Second, the cog validator was hardened: invalid field values and deprecated field usage now cause validation failure rather than silent warnings. All cog files were brought into compliance, and the field dictionary was cleaned up so deprecated field mappings live solely in the validation rules, not in the definitions file.
 
 ---
 
@@ -34,25 +34,40 @@ Replaced ASCII art code blocks with professional SVG illustrations matching the 
 - **Figure 4.3** — Competitive feedback loops (Hotel A positive vs Hotel B negative)
 - **Figure L.1** — MX namespace tree (mx.ai/mx.co/mx.ho hierarchy)
 
-Each diagram: SVG created, PNG generated at 1600px width, ASCII block replaced with image reference and descriptive figure caption. Figure 4.2 was redesigned after initial review to use proper funnel trapezoids with centred text.
-
 ### 2. Image Pipeline Consolidation
 
-Identified and resolved systemic SVG duplication across the repository:
+- **29 SVGs removed** from manuscript folders (redundant copies)
+- **4 SVGs recovered** from git that had no asset library copy
+- **Architecture established**: `assets/images/svg/` = master SVGs, manuscript folders = PNGs only
 
-- **29 SVGs removed** from manuscript folders (protocols illustrations, handbook chapters, appendices, shared)
-- **4 SVGs recovered** from git that had no asset library copy (`chapter-02-layout-vs-dom`, `chapter-10-org-models`, `chapter-00-org-models`, `chapter-00-5-stage-mx-journey`)
-- **Architecture established**: `assets/images/svg/` = master SVGs, `assets/images/bitmap/` = master PNGs, manuscript folders = PNGs only
+### 3. Validator Severity Hardening
 
-### 3. Existing SVG Fix
+Promoted two checks from warning to error in `cog-tools.js`:
 
-Fixed overlapping text in `chapter-04-content-hierarchy.svg` (handbook) — h2/h3 items in the agent-extracted outline section were sharing y-coordinates. Each now on its own line.
+- **invalid-value** — enum fields with values not in the allowed list now fail validation
+- **deprecated-field** — using deprecated field names now fails validation
 
-### 4. Manuscript Image Reference Fixes
+This means `npm run cog:validate` exits non-zero on these issues, preventing bad metadata from being committed.
 
-Two manuscripts referenced `.svg` instead of `.png` — corrected to point to bitmap versions:
-- `chapter-10-implementation.md` (Figure 10.2)
-- `chapter-00-introduction-to-mx.md` (MX Readiness Model)
+### 4. Cog File Compliance Fixes
+
+Fixed 6 cog files that failed after severity change:
+
+- Removed deprecated `name` field from 6 files (replaced with `title` where missing)
+- Changed invalid audience values `[ai-agents, developers]` to canonical `[agents, tech]` across 4 files
+- Fixed snapshot template audience in `cog-tools.js`
+
+### 5. Field Definition Cleanup
+
+- Corrected `inherits` status: canonical (not deprecated) — it declares file-level extension paths
+- Added missing deprecated mappings to `cog-field-rules.js`: `prose-source`/`proseSource` → `inherits`, `lastVerified` → `maintainedDate`, `verifiedBy` → `maintainedBy`
+- Removed all deprecated field references from `fields.cog.md` — deprecated mappings now live solely in `cog-field-rules.js`
+- Removed overlap resolution entries that existed only to document deprecated→canonical transitions
+- Removed "Replaces deprecated X" notes from individual field definitions
+
+### 6. Existing SVG Fix
+
+Fixed overlapping text in `chapter-04-content-hierarchy.svg` and corrected `.svg` → `.png` references in two manuscripts.
 
 ---
 
@@ -60,13 +75,14 @@ Two manuscripts referenced `.svg` instead of `.png` — corrected to point to bi
 
 | Metric | Value |
 |--------|-------|
-| Commits (prior) | 6 |
-| Files changed (uncommitted) | 36 |
-| Lines added | +69 |
-| Lines removed | −2,463 |
+| Commits | 8 |
+| Files changed (uncommitted) | 10 |
+| Lines added | +32 |
+| Lines removed | −48 |
 | SVGs created | 6 |
 | SVGs removed (redundant) | 29 |
-| SVGs recovered | 4 |
+| Cog files fixed | 6 |
+| Validation errors resolved | 19 |
 | Repositories | 1 |
 
 ---
@@ -82,6 +98,8 @@ Two manuscripts referenced `.svg` instead of `.png` — corrected to point to bi
 
 | Hash | Description |
 |------|-------------|
+| dd11666f | Update REMINDERS with image pipeline completion and refresh countdowns |
+| 6e8f4487 | Convert ASCII diagrams to SVG illustrations and consolidate image pipeline |
 | 909c41e6 | Merge pull request #3 — fix PDF base font |
 | cb1201b9 | Remove download-cover-images.cjs and all references |
 | 57e0295c | Remove Kindle format from PDF generation scripts |
