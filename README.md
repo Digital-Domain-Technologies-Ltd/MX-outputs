@@ -14,12 +14,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 40 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 114 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 41 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 133 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 96 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **256** | |
+| **Total** | **557** | |
 
 ---
 
@@ -110,9 +110,9 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`reginald-implementation-plan-print.md`](md/reginald/reginald-implementation-plan-print.md)
 - [`reginald-manual-print.md`](md/reginald/reginald-manual-print.md)
 
-### md/reports/ (100 files)
+### md/reports/ (119 files)
 
-#### md/reports/completions/ (20 files)
+#### md/reports/completions/ (25 files)
 
 - [`session-summary-2026-02-10T17-49.md`](md/reports/completions/2026-02-10/session-summary-2026-02-10T17-49.md)
 - [`session-summary-2026-02-11T09-00.md`](md/reports/completions/2026-02-11/session-summary-2026-02-11T09-00.md)
@@ -120,6 +120,11 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`session-summary-2026-02-11T12-50.md`](md/reports/completions/2026-02-11/session-summary-2026-02-11T12-50.md)
 - [`session-summary-2026-02-13T12-38.md`](md/reports/completions/2026-02-13/session-summary-2026-02-13T12-38.md)
 - [`session-summary-2026-02-13T15-57.md`](md/reports/completions/2026-02-13/session-summary-2026-02-13T15-57.md)
+- [`AUDIT-COMPLETION-CHECKLIST.md`](md/reports/completions/2026-03-19/AUDIT-COMPLETION-CHECKLIST.md)
+- [`COMPLETE-PROJECT-INDEX.md`](md/reports/completions/2026-03-19/COMPLETE-PROJECT-INDEX.md)
+- [`MX-AUDIT-V2-SUMMARY.md`](md/reports/completions/2026-03-19/MX-AUDIT-V2-SUMMARY.md)
+- [`MX-HUB-UPDATES-2026-03-19.md`](md/reports/completions/2026-03-19/MX-HUB-UPDATES-2026-03-19.md)
+- [`TEMPLATE-UPDATE-SUMMARY.md`](md/reports/completions/2026-03-19/TEMPLATE-UPDATE-SUMMARY.md)
 - [`README.md`](md/reports/completions/README.md)
 - [`README.md`](md/reports/completions/_archive/2026-02-04/README.md)
 - [`completion-system-creation.md`](md/reports/completions/_archive/2026-02-04/completion-system-creation.md)
@@ -137,9 +142,10 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-02-10/** (1 files)
   - **2026-02-11/** (3 files)
   - **2026-02-13/** (2 files)
+  - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (79 files)
+#### md/reports/directors/ (93 files)
 
 **build/** (3 files)
 
@@ -153,7 +159,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (72 files)
+**session/** (86 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -219,6 +225,20 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-03-15-morning-report.md`](md/reports/directors/session/2026-03-15-morning-report.md)
 - [`2026-03-16-evening-report.md`](md/reports/directors/session/2026-03-16-evening-report.md)
 - [`2026-03-16-morning-report.md`](md/reports/directors/session/2026-03-16-morning-report.md)
+- [`2026-03-17-afternoon-report.md`](md/reports/directors/session/2026-03-17-afternoon-report.md)
+- [`2026-03-17-evening-report.md`](md/reports/directors/session/2026-03-17-evening-report.md)
+- [`2026-03-17-morning-report.md`](md/reports/directors/session/2026-03-17-morning-report.md)
+- [`2026-03-18-evening-report.md`](md/reports/directors/session/2026-03-18-evening-report.md)
+- [`2026-03-18-morning-report.md`](md/reports/directors/session/2026-03-18-morning-report.md)
+- [`2026-03-19-afternoon-report.md`](md/reports/directors/session/2026-03-19-afternoon-report.md)
+- [`2026-03-19-morning-report.md`](md/reports/directors/session/2026-03-19-morning-report.md)
+- [`2026-03-19-session-report.md`](md/reports/directors/session/2026-03-19-session-report.md)
+- [`2026-03-20-afternoon-report.md`](md/reports/directors/session/2026-03-20-afternoon-report.md)
+- [`2026-03-20-evening-report.md`](md/reports/directors/session/2026-03-20-evening-report.md)
+- [`2026-03-20-morning-report.md`](md/reports/directors/session/2026-03-20-morning-report.md)
+- [`2026-03-22-evening-report.md`](md/reports/directors/session/2026-03-22-evening-report.md)
+- [`2026-03-23-afternoon-report.md`](md/reports/directors/session/2026-03-23-afternoon-report.md)
+- [`2026-03-23-morning-report.md`](md/reports/directors/session/2026-03-23-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -368,4 +388,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-03-16 at 21:39*
+*Generated on 2026-03-23 at 16:10*
