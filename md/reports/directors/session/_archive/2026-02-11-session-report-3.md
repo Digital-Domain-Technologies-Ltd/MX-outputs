@@ -35,11 +35,11 @@ Files changed: `mx-app/main.js`, `mx-app/preload.js`, `mx-app/src/js/app.js`
 
 ### README Rewrite
 
-The repository README was completely rewritten. The old version (389 lines) described the project as "The Invisible Users — Designing the Web for AI Agents and Everyone Else." The new version (239 lines) positions MX OS as the Machine Experience Operating System and leads with the value proposition: *"AI agents read documentation and get it wrong. MX OS fixes that."*
+The repository README was completely rewritten. The old version (389 lines) described the project as "MX: The Handbook — Designing the Web for AI Agents and Everyone Else." The new version (239 lines) positions MX OS as the Machine Experience Operating System and leads with the value proposition: *"AI agents read documentation and get it wrong. MX OS fixes that."*
 
 Key changes:
 
-- Title: "The Invisible Users" replaced with "MX Hub — The Machine Experience Operating System"
+- Title: "MX: The Handbook" replaced with "MX Hub — The Machine Experience Operating System"
 - Opening paragraph explains the problem MX OS solves, not what AI agents are
 - Repository structure table added for quick navigation
 - Concise and current — reflects the project as it stands today

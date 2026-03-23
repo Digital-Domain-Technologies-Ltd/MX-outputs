@@ -28,7 +28,7 @@ The public edition of MX: The Handbook was also created during this session — 
 | Files added | ~230 (book content consolidated into datalake/) |
 | Lines added | ~116,000 (existing content moved, not new writing) |
 | Submodules removed | 4 (mx-the-bible, mx-appendices, mx-handbook, mx-code-examples) |
-| GitHub repos archived | 4 (invisible-users-manuscript, invisible-users-appendices, MX-The-Handbook, invisible-users-code-examples) |
+| GitHub repos archived | 4 (mx-handbook-manuscript, mx-handbook-appendices, MX-The-Handbook, mx-handbook-code-examples) |
 
 ## What Was Built
 

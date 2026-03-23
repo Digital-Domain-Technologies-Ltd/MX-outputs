@@ -50,9 +50,9 @@ Deinited and removed four submodules:
 Archived four GitHub repos (now read-only):
 
 - `Digital-Domain-Technologies-Ltd/MX-The-Handbook`
-- `Digital-Domain-Technologies-Ltd/invisible-users-manuscript`
-- `Digital-Domain-Technologies-Ltd/invisible-users-appendices`
-- `Digital-Domain-Technologies-Ltd/invisible-users-code-examples`
+- `Digital-Domain-Technologies-Ltd/mx-handbook-manuscript`
+- `Digital-Domain-Technologies-Ltd/mx-handbook-appendices`
+- `Digital-Domain-Technologies-Ltd/mx-handbook-code-examples`
 
 ## Files Modified
 

@@ -108,7 +108,7 @@ Split the ~115 main repo files across 5 agents working different file groups sim
 ## MX Principles Applied
 
 1. **Metadata on write** — CHANGELOG updated with precise change counts and preservation notes
-2. **Self-documenting** — Title lineage documented: "The Invisible Users" → "The Bible" → "The Protocols"
+2. **Self-documenting** — Title lineage documented: "MX: The Handbook" → "The Bible" → "The Protocols"
 3. **Explicit over implicit** — Preserved paths are explicitly noted in CHANGELOG and MEMORY.md
 
 ## Commits (This Session)
@@ -126,7 +126,7 @@ All commits pushed to `origin/main`.
 ## Next Steps / Future Enhancements
 
 1. **Submodule updates** — `packages/*` submodules still contain "Bible" references; each requires a separate per-repo update
-2. **allabout.network book promo page** — Still references "The Invisible Users" (in `allaboutv2` submodule)
+2. **allabout.network book promo page** — Still references "MX: The Handbook" (in `allaboutv2` submodule)
 3. **Physical directory rename** — `packages/mx-the-bible/` remains as the submodule path; renaming requires `.gitmodules` update and submodule reconfiguration
 
 ## Session Context

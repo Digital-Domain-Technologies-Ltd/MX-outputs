@@ -174,7 +174,7 @@ User requests across both sessions:
 
 1. **Push to remote** - Branch is 1 commit ahead of origin/main. Push when ready
 2. **Book manuscript updates** - book-update-plan.md documents what needs updating in the Handbook and Protocols manuscripts (biography, published lineage, advisory board references, title corrections)
-3. **allabout.network update** - Book promo page still references "The Invisible Users" (noted in about-tom.md)
+3. **allabout.network update** - Book promo page still references "MX: The Handbook" (noted in about-tom.md)
 4. **Partnership outreach** - Use partnership-proposal-template-v1.md for cold outreach, boye-mentor-partnership-v1.md for Janus conversation
 5. **Funding outreach preparation** - funding-requirement-v1.md is ready but no external investor outreach has started yet
 
