@@ -57,7 +57,8 @@ The canonical specification was substantially rewritten. This is the document th
 
 The multi-audience messaging architecture is complete. Seven audiences, seven tailored messages, one consistent story.
 
-**The one sentence:** "Your business, readable by every machine on earth."
+**The one sentence:** "
+Your business, readable by every machine on Earth."
 
 **Product family naming finalized:** Cog-Nova-MX Ltd (company), MX Maxine (AI partner), MX Docs (the format — business-friendly name for cogs), MX OS (operating system), MX Reginald (global registry), The Gathering (independent standard).
 

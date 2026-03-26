@@ -31,7 +31,8 @@ A pass across nine manuscript files (Chapter 00, Protocols chapters 02, 04, 10-G
 
 ### Repeated statistics deduplicated
 
-The Adobe Holiday 2025 statistics (700%, 500%, 30%), the "40% of deployed models" figure, and the £203,000 pricing error were being restated verbatim across multiple chapters. Chapter 00 is the shared introduction — readers encounter these numbers there first. Every subsequent mention now references Chapter 0 rather than restating the figures. The largest fix was in Handbook Chapter 03, which contained a near-verbatim copy of the entire "AI will figure it out" section from Chapter 00 — replaced with a concise summary. Chapter 00's platform launch count was also corrected from three to four (adding Anthropic Claude Cowork). The key phrase "your business, readable by every machine on earth" was bolded as a protected phrase.
+The Adobe Holiday 2025 statistics (700%, 500%, 30%), the "40% of deployed models" figure, and the £203,000 pricing error were being restated verbatim across multiple chapters. Chapter 00 is the shared introduction — readers encounter these numbers there first. Every subsequent mention now references Chapter 0 rather than restating the figures. The largest fix was in Handbook Chapter 03, which contained a near-verbatim copy of the entire "AI will figure it out" section from Chapter 00 — replaced with a concise summary. Chapter 00's platform launch count was also corrected from three to four (adding Anthropic Claude Cowork). The key phrase "
+Your business, readable by every machine on Earth" was bolded as a protected phrase.
 
 ### Footnotes added for all data claims
 
