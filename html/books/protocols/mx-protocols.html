@@ -24383,6 +24383,127 @@ interpreter.</p>
 the MX ecosystem. Every action-doc is a cog. Not every cog is an
 action-doc. The presence of an <code>execute</code> block is the
 dividing line. Info-docs sit still. Action-docs turn.</p>
+<h3 id="cogs-and-skills">Cogs and Skills</h3>
+<p>A pattern emerges as organisations adopt AI agents: alongside the
+content that agents read, teams create instructions that tell agents how
+to behave. These instructions go by various names — skills, prompts,
+system instructions, playbooks, runbooks — but they share a common
+shape: structured guidance that activates in a specific agent context
+and shapes the agent’s decisions.</p>
+<p>This creates two categories of machine-readable document that are
+easily confused. Both are structured. Both carry metadata. Both guide
+automated systems. They serve fundamentally different architectural
+roles, and conflating them leads to fragile systems.</p>
+<p><strong>A cog is content.</strong> It describes itself — what it is,
+who wrote it, what it relates to, whether it is current, what audience
+it serves. The metadata is intrinsic to the document. Any machine, in
+any environment, at any time, can read the frontmatter and understand
+the document without reading the prose. A cog does not know which agent
+will read it, does not care which runtime processes it, and does not
+change its meaning based on context. The cog format is universal
+precisely because it makes no assumptions about the consumer.</p>
+<p><strong>A skill is an instruction.</strong> It tells a specific agent
+how to act in a specific context — what to check before modifying a
+database schema, what style conventions to follow when writing
+documentation, what sequence to use when deploying infrastructure. A
+skill activates when conditions are met: a keyword appears in a request,
+a file path matches a pattern, a content signature is detected. When
+activated, the skill injects contextual guidance into the agent’s
+decision-making process. Outside that agent runtime, the skill has no
+effect.</p>
+<p>The relationship is complementary, not competitive:</p>
+<ul>
+<li>A skill provides the <strong>trigger</strong> — “when the user
+mentions deployment, surface the deployment procedure and apply these
+guardrails.”</li>
+<li>A cog provides the <strong>content</strong> — the deployment
+procedure itself, with structured metadata, version tracking, an
+executable action block if appropriate, and (for public documentation)
+cryptographic attestation via Reginald.</li>
+</ul>
+<p>The skill ensures the agent finds the right cog at the right moment.
+The cog ensures the information is accurate, current, and
+machine-readable regardless of which agent reads it or how that agent
+was configured.</p>
+<table>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 21%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Cog</th>
+<th>Skill</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purpose</td>
+<td>Self-describing content</td>
+<td>Agent operational guidance</td>
+</tr>
+<tr>
+<td>Consumer</td>
+<td>Any machine, any environment</td>
+<td>A specific agent in a specific runtime</td>
+</tr>
+<tr>
+<td>Activation</td>
+<td>Pulled — an agent reads or queries for it</td>
+<td>Pushed — triggered by conditions in the agent’s context</td>
+</tr>
+<tr>
+<td>Lifecycle</td>
+<td>Versioned, registered, discoverable across systems</td>
+<td>Scoped to agent sessions and configurations</td>
+</tr>
+<tr>
+<td>Execution</td>
+<td>Action-docs are self-executing (embedded procedures)</td>
+<td>Skills never execute — they shape agent behaviour</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Declares relationships (<code>buildsOn</code>,
+<code>replaces</code>, <code>refersTo</code>)</td>
+<td>References cogs but carries no dependency model</td>
+</tr>
+<tr>
+<td>Portability</td>
+<td>Works across agents, runtimes, and organisations</td>
+<td>Tied to one agent platform’s conventions</td>
+</tr>
+</tbody>
+</table>
+<p>The architectural implication is clear: <strong>cogs are
+infrastructure; skills are configuration.</strong></p>
+<p>An organisation that writes excellent cogs — rich metadata, clear
+descriptions, well-maintained versions — produces content that works for
+every agent that encounters it. The content is durable. When a new AI
+provider emerges, the cogs still work. When the organisation switches
+agent platforms, the cogs still work. When a partner organisation’s
+agent queries Reginald and discovers the documentation, the cogs still
+work. The investment in structured content compounds over time.</p>
+<p>Skills, by contrast, are valuable but inherently coupled to a
+specific agent’s architecture. They optimise a workflow for a particular
+tool. When the tool changes — and tools change frequently — the skills
+must be rewritten. The investment in skills pays off immediately but
+does not transfer.</p>
+<p>This is not an argument against skills. Organisations need both. The
+argument is about sequencing: invest in cogs first. Structured,
+self-describing content is the foundation. Skills are the optimisation
+layer that makes specific agents more effective at finding and acting on
+that content. Build the foundation before optimising the surface.</p>
+<p>The parallel to web development is direct. A website with excellent
+semantic HTML, complete Schema.org markup, and clear metadata works for
+every search engine, every screen reader, every AI agent. A website that
+relies on platform-specific hacks to appear in one search engine’s
+results is fragile. The MX principle — design for both audiences —
+applies equally to documents: design content for every machine, then
+optimise the agent experience through skills where the workflow demands
+it.</p>
 <h3 id="security-and-runtime-constraints">Security and Runtime
 Constraints</h3>
 <p>An action-doc that can validate pricing data, install dependencies,
@@ -24690,6 +24811,79 @@ Reginald maps documents to trust. Anyone can publish a cog without
 registering it — and many should, for internal use. When documents need
 to be discovered and trusted by machines outside your organisation, the
 registry is where that trust is established.</p>
+<p>A closer parallel is npm — the package registry that transformed how
+developers share code. Every npm package carries a
+<code>package.json</code>: structured metadata declaring what the
+package does, who wrote it, what version it is, what it depends on, and
+what licence governs it. Before npm, developers copied library files
+between projects, guessed at versions, and hoped for compatibility. The
+registry changed that. A developer runs <code>npm install</code> and
+gets the right version of the right package with its dependencies
+resolved. The metadata does the work.</p>
+<p>Reginald does the same thing for machines reading content. A
+published cog carries structured metadata declaring what the document
+is, who published it, what version is current, and what it relates to.
+Before a registry, an AI agent crawls the web, finds fragments, and
+guesses at provenance and currency. With the registry, the agent queries
+Reginald and gets the authoritative version of the authoritative
+document with its trust chain verified. The metadata does the work.</p>
+<p>The structural parallels are precise:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr>
+<th>npm</th>
+<th>Reginald</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>package.json</code></td>
+<td>Cog frontmatter</td>
+</tr>
+<tr>
+<td>Package name and version</td>
+<td>Title, version, <code>replaces</code></td>
+</tr>
+<tr>
+<td><code>dependencies</code></td>
+<td><code>buildsOn</code>, <code>refersTo</code></td>
+</tr>
+<tr>
+<td>npm publish</td>
+<td>Cog registration + signing</td>
+</tr>
+<tr>
+<td>npm registry</td>
+<td>Reginald registry</td>
+</tr>
+<tr>
+<td><code>npm install</code> (resolved, verified)</td>
+<td>Agent query (resolved, attested)</td>
+</tr>
+<tr>
+<td>Scoped packages (<code>@org/pkg</code>)</td>
+<td>Namespaced cogs</td>
+</tr>
+<tr>
+<td>README.md</td>
+<td>Markdown body (human-readable)</td>
+</tr>
+</tbody>
+</table>
+<p>The difference is the consumer. npm serves developers building
+software. Reginald serves machines consuming content. The principle is
+identical: self-describing packages in a public registry, discoverable
+and verifiable by anyone, eliminate the guessing that unstructured
+distribution creates.</p>
+<p>This framing matters commercially. Every developer understands what
+npm did for code reuse. Reginald does the same thing for documentation,
+product information, policy documents, API references — any content that
+machines need to find, trust, and act on accurately. Published cogs are
+npm for machines.</p>
 <h2 id="the-broader-picture">The Broader Picture</h2>
 <p>Cogs and Reginald complete the MX architecture. The Handbook’s
 patterns make websites machine-readable at the page level. The cog
