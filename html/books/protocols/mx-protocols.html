@@ -636,8 +636,8 @@ id="toc-authentication-and-fraud">Authentication and Fraud</a></li>
 id="toc-algorithmic-accountability">Algorithmic Accountability</a></li>
 <li><a href="#cross-border-complexity"
 id="toc-cross-border-complexity">Cross-Border Complexity</a></li>
-<li><a href="#risk-categorization-framework"
-id="toc-risk-categorization-framework">Risk Categorization
+<li><a href="#risk-categorisation-framework"
+id="toc-risk-categorisation-framework">Risk Categorisation
 Framework</a></li>
 <li><a href="#what-sites-should-do" id="toc-what-sites-should-do">What
 Sites Should Do</a></li>
@@ -1091,8 +1091,8 @@ id="toc-chapter-19-cogs-and-reginald">Chapter 19 — Cogs and Reginald</a>
 Document Problem</a></li>
 <li><a href="#the-cog-format" id="toc-the-cog-format">The Cog
 Format</a></li>
-<li><a href="#info-docs-and-action-docs"
-id="toc-info-docs-and-action-docs">Info-Docs and Action-Docs</a></li>
+<li><a href="#info-cogs-and-action-cogs"
+id="toc-info-cogs-and-action-cogs">Info-Cogs and Action-Cogs</a></li>
 <li><a href="#reginald-the-registry"
 id="toc-reginald-the-registry">Reginald — The Registry</a></li>
 <li><a href="#where-cogs-live" id="toc-where-cogs-live">Where Cogs
@@ -1531,36 +1531,55 @@ reliably extract the price (is “2.030” two thousand and thirty euros, or
 two point zero three?), cannot determine which items are in stock, and
 cannot parse the specification tables because they use visual layout
 rather than semantic markup.</p>
-<p>The retailer adds Schema.org Product and Offer markup to their
-existing templates. Each product page now carries machine-readable
-pricing with ISO 4217 currency codes, explicit availability status, and
-structured specification data. The implementation takes their
-development team two days. The incremental cost is negligible — the same
-HTML serves both human and machine visitors.</p>
-<p>The result: machines can now accurately extract, compare, and
-recommend their products. Automated referral traffic begins appearing in
-analytics. Conversion rates from these referrals exceed human traffic,
-matching the industry pattern Adobe’s data confirms. The initial two-day
-investment pays back with the first machine-completed transaction.
-Everything after that is captured revenue that was previously invisible
-loss.</p>
+<p>The retailer begins with Schema.org Product and Offer markup,
+embedding JSON-LD structured data into their existing templates. Each
+product page now carries machine-readable pricing with ISO 4217 currency
+codes, explicit availability status, and structured specification data.
+But structured data alone is not MX — it is the foundation.</p>
+<p>The team then addresses their rendering pipeline. Product
+specifications that were previously assembled by client-side JavaScript
+are moved into the served HTML. A machine that fetches the page now
+receives complete content without executing scripts — critical, because
+most AI agents read raw HTML and never run JavaScript. Prices that were
+injected dynamically from API calls are rendered server-side into the
+DOM.</p>
+<p>Next, they add MX metadata — governance tags that declare content
+freshness, editorial policy, and machine-interaction permissions. These
+sit alongside the Schema.org markup, filling the gaps that established
+standards leave open: when was this content last verified? May a machine
+act on it? What confidence level should an agent assign to this
+data?</p>
+<p>Finally, they audit the micro-interactions that humans navigate by
+instinct but machines cannot perceive. The “Add to Basket” button that
+relied on a JavaScript click handler gets a semantic
+<code>&lt;button&gt;</code> element with explicit
+<code>aria-label</code> and visible state. The colour-swatch selector
+that used drag gestures exposes its options as structured
+<code>&lt;select&gt;</code> elements in the DOM. The checkout
+confirmation that flashed as a toast notification and vanished after
+three seconds is replaced with a persistent status element that any DOM
+reader can find. Each of these changes makes the same page work better
+for humans with accessibility needs <em>and</em> for every machine that
+visits.</p>
+<p>The full implementation takes their development team a week. The
+incremental cost remains modest — the same HTML serves both human and
+machine visitors, and every change also improves accessibility
+compliance and SEO performance.</p>
+<p>The result: machines can now accurately extract, compare, recommend,
+and transact with their products. Automated referral traffic begins
+appearing in analytics. Conversion rates from these referrals exceed
+human traffic, matching the industry pattern Adobe’s data confirms. The
+initial investment pays back with the first machine-completed
+transaction. Everything after that is captured revenue that was
+previously invisible loss.</p>
 <p>This pattern repeats across every MX implementation. Whether you are
 structuring product data, health information, educational content, or
 government services, the initial investment in explicit structure pays
 back immediately.</p>
-<p>But adding Schema.org markup is only the first step. Structured
-metadata solves what machines can <em>read</em> — it does not solve what
-they can <em>do</em>. The retailer’s product pages may now carry
-machine-readable prices, but if the checkout workflow stores progress in
-JavaScript session variables, hides discount codes in hidden form
-fields, or confirms purchases with toast notifications that vanish after
-three seconds, the machine still cannot complete the transaction. MX
-addresses the entire interaction surface, not just the metadata
-layer.</p>
-<p>Structured data is the starting point, not the finish line. MX
-extends to every interaction pattern on your site. A toast notification
-that confirms a purchase and fades after three seconds is invisible to a
-machine that reads the DOM on a half-second cycle. A slider that reveals
+<p>The retailer’s experience illustrates a pattern that holds across
+every domain. Structured data is the starting point, not the finish
+line. MX extends to the entire interaction surface — rendering,
+metadata, and every micro-interaction on the page. A slider that reveals
 product variants only when a human drags it hides those variants from
 every automated reader. A stepped checkout workflow that stores progress
 in JavaScript session variables creates a black box no software can
@@ -2434,9 +2453,13 @@ custom-trained domain-specific model?</p>
 <p>You cannot detect machine capabilities reliably. No standardised
 capability announcement exists, and User-Agent strings offer no help.
 You cannot serve different HTML based on sophistication because you
-don’t know which system is parsing your content.</p>
+don’t know which system is parsing your content, and google penalises
+sit that serves different content to different browsers.</p>
 <h4 id="diversity-explosion">Diversity explosion</h4>
-<p>Over 1 million models on Hugging Face with wildly different
+<p>Over 1 million models on Hugging Face<a href="#fn12"
+class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> —
+the open-source platform where researchers and companies publish machine
+learning models for anyone to download and run — with wildly different
 capabilities:</p>
 <p>The size distribution shows extreme diversity:</p>
 <ul>
@@ -2447,8 +2470,8 @@ capabilities:</p>
 </ul>
 <p>The growth trajectory tells its own story. The platform added 1
 million models in just 335 days, compared to 1,000+ days for the first
-million.<a href="#fn12" class="footnote-ref" id="fnref12"
-role="doc-noteref"><sup>12</sup></a> The wild west is getting
+million.<a href="#fn13" class="footnote-ref" id="fnref13"
+role="doc-noteref"><sup>13</sup></a> The wild west is getting
 wilder.</p>
 <h4 id="why-waiting-for-ai-to-improve-fails">Why “waiting for AI to
 improve” fails</h4>
@@ -2675,7 +2698,7 @@ Ambiguous decimal formatting produces the kind of pricing errors
 described earlier in this chapter, and cross-region pricing confusion
 leaves buyers unable to determine actual delivered cost. The improvement
 step: Schema.org Product/Offer/PriceSpecification, ISO 4217 currency
-codes, REGINALD registration.</p>
+codes, Reginald registration.</p>
 <p><em>We implement MX patterns for machine price parsing. Schema.org
 benefits multiple disciplines automatically.</em></p>
 <h4 id="level-5-purchase-confidence-audited">Level 5 — purchase
@@ -2855,8 +2878,8 @@ Content Delivery. The gap is at publication, where CMS-rich metadata
 gets stripped during HTML rendering. MX closes this gap by governing
 what reaches the delivery point. The implication for CMS vendors is
 stark: the CMS that serves machine-readable content survives. The one
-that does not gets bypassed.<a href="#fn13" class="footnote-ref"
-id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+that does not gets bypassed.<a href="#fn14" class="footnote-ref"
+id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
 <p>MX is not a tool or platform. It is the practice, the governance
 layer, that ensures publication preserves structure. And it extends
 beyond HTML publication. On file systems, <code>.mx.yaml.md</code>
@@ -2921,9 +2944,9 @@ multiple audiences (machines read script structure, humans read
 documentation, automation reads exit codes), and progressive disclosure
 (simple command for common use, manual steps available when needed). The
 chapter itself demonstrates these principles. Its frontmatter IS
-metadata, making its provenance machine-readable.<a href="#fn14"
-class="footnote-ref" id="fnref14"
-role="doc-noteref"><sup>14</sup></a></p>
+metadata, making its provenance machine-readable.<a href="#fn15"
+class="footnote-ref" id="fnref15"
+role="doc-noteref"><sup>15</sup></a></p>
 <h3 id="entity-asset-layer">Entity Asset Layer</h3>
 <p>The obstacles described above — platform lock-in, proprietary data
 formats, assets trapped in vendor databases — point to a deeper
@@ -2953,8 +2976,8 @@ semantic HTML, explicit context. The machine reads your content and
 knows what it means without guessing.</p>
 <p>The second half is action execution: giving machines structured ways
 to interact with page functionality. This is what WebMCP (Web Model
-Context Protocol) provides.<a href="#fn15" class="footnote-ref"
-id="fnref15" role="doc-noteref"><sup>15</sup></a> Launched by Google and
+Context Protocol) provides.<a href="#fn16" class="footnote-ref"
+id="fnref16" role="doc-noteref"><sup>16</sup></a> Launched by Google and
 Microsoft in February 2026 as a W3C draft standard, WebMCP lets websites
 expose callable tools (search functions, booking forms, checkout flows)
 directly through a browser API. Instead of scraping DOM elements and
@@ -2981,13 +3004,13 @@ alone.</p>
 Experience). The central insight is that organisations should design for
 both humans and machines simultaneously with the same content — not
 create separate experiences.</p>
-<p>Adobe recently released an “LLMoptimizer” tool that detects whether a
+<p>Adobe recently released an “LLMoptimiser” tool that detects whether a
 page is being browsed by an LLM or a human, then serves different
-versions accordingly.<a href="#fn16" class="footnote-ref" id="fnref16"
-role="doc-noteref"><sup>16</sup></a> This approach carries a fundamental
+versions accordingly.<a href="#fn17" class="footnote-ref" id="fnref17"
+role="doc-noteref"><sup>17</sup></a> This approach carries a fundamental
 risk. Google’s webmaster guidelines explicitly penalise cloaking —
-serving different content to bots than to human visitors.<a href="#fn17"
-class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> A
+serving different content to bots than to human visitors.<a href="#fn18"
+class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> A
 site that serves one page to Googlebot and another to users risks manual
 penalties and removal from search results. The same principle applies to
 machines: if you can make content better for machines, you make it
@@ -2997,14 +3020,14 @@ serve different content but to fix the underlying web page.</p>
 dedicated QA engineers. When MX is “everyone’s responsibility” without
 designated ownership, accountability evaporates — the same pattern
 observed in accessibility programmes and DevOps implementations.<a
-href="#fn18" class="footnote-ref" id="fnref18"
-role="doc-noteref"><sup>18</sup></a> Successful organisations assign
+href="#fn19" class="footnote-ref" id="fnref19"
+role="doc-noteref"><sup>19</sup></a> Successful organisations assign
 clear MX accountability: dedicated specialists who define
 machine-readability standards and audit implementations, distributed
 awareness across development and content teams, and executive ownership
 that provides resources and tracks MX metrics alongside traditional
-performance indicators.<a href="#fn19" class="footnote-ref" id="fnref19"
-role="doc-noteref"><sup>19</sup></a> The implementation chapters cover
+performance indicators.<a href="#fn20" class="footnote-ref" id="fnref20"
+role="doc-noteref"><sup>20</sup></a> The implementation chapters cover
 organisational models in detail.</p>
 <h3 id="the-gathering">The Gathering</h3>
 <p>MX relies on existing web standards wherever possible, but the gaps
@@ -3015,9 +3038,9 @@ conventions ensure interoperability across platforms?</p>
 for Machine Experience. It develops open standards that enable content
 to be understood, interpreted, and processed more consistently by both
 people and AI systems. The standard is open. No fees. No gatekeeping.
-Anyone can read drafts and track progress.<a href="#fn20"
-class="footnote-ref" id="fnref20"
-role="doc-noteref"><sup>20</sup></a></p>
+Anyone can read drafts and track progress.<a href="#fn21"
+class="footnote-ref" id="fnref21"
+role="doc-noteref"><sup>21</sup></a></p>
 <p>Standards move through a four-stage process: <strong>Propose</strong>
 (a contributor outlines the problem, defines scope and non-goals),
 <strong>Review</strong> (the community provides feedback, editors
@@ -3688,7 +3711,7 @@ particularly the HTML patterns in Appendix D, is practical and grounded
 in real-world scenarios. Developers will find actionable advice they can
 implement immediately.</p>
 <h3 id="forward-looking-context">Forward-Looking Context</h3>
-<p>The book uses narrative elements to contextualize its security
+<p>The book uses narrative elements to contextualise its security
 discussions. The analysis of session inheritance risks offers a
 pragmatic look at the challenges of authenticating machines, moving
 beyond theoretical concerns to discuss architectural implications.</p>
@@ -5720,8 +5743,8 @@ information” meant in machine-readable terms. The SaaS platform did not
 hide pricing capriciously — pricing governance was never established.
 These are not AI failures. They are data governance failures, and they
 were visible long before any machine visited the page. The AI project
-will lose to the data project.<a href="#fn21" class="footnote-ref"
-id="fnref21" role="doc-noteref"><sup>21</sup></a> Not immediately, but
+will lose to the data project.<a href="#fn22" class="footnote-ref"
+id="fnref22" role="doc-noteref"><sup>22</sup></a> Not immediately, but
 inevitably. Organisations that rush to AI deployment without
 establishing data standards lose more to these invisible failures than
 they gain from speed.</p>
@@ -7360,7 +7383,7 @@ class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb19-1">
 <span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>**Implementation Timeline:**</span>
 <span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Month 1: Priority 1 improvements</span>
 <span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Month 2-3: Priority 2 improvements</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Month 4-6: Measure and optimize</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Month 4-6: Measure and optimise</span>
 <span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Quarter 2+: Consider Priority 3</span>
 <span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>**Success Criteria:**</span>
@@ -7616,7 +7639,7 @@ extraction that threatens their revenue.</p>
 different business models require different approaches to machine
 optimisation. Chapter 10 explores Generative Engine Optimisation (GEO) —
 how to make your site discoverable to AI platforms — and importantly,
-when to emphasize discoverability versus when to protect content.
+when to emphasise discoverability versus when to protect content.
 Transaction-based businesses benefit from machine discovery. Ad-funded
 content creators face the extraction risk documented here. The strategic
 decision framework in Chapter 10 provides guidance for navigating this
@@ -9581,10 +9604,10 @@ compliance.</p>
 through automated agents on foreign platforms that access foreign sites.
 The enforcement mechanisms might not exist.</p>
 <hr />
-<h2 id="risk-categorization-framework">Risk Categorization
+<h2 id="risk-categorisation-framework">Risk Categorisation
 Framework</h2>
 <p>Before deciding on legal strategy, assess your exposure across four
-risk categories. This framework helps you prioritize legal review and
+risk categories. This framework helps you prioritise legal review and
 policy decisions.</p>
 <h3 id="legal-risk-matrix">Legal Risk Matrix</h3>
 <p>Evaluate each risk type by likelihood and potential impact for your
@@ -9767,7 +9790,7 @@ access?</li>
 <li>Should we geo-restrict automated access based on regulatory
 complexity?</li>
 </ul>
-<h3 id="risk-prioritization-by-business-type">Risk Prioritization by
+<h3 id="risk-prioritisation-by-business-type">Risk Prioritisation by
 Business Type</h3>
 <p><strong>Transaction-based businesses (e-commerce, booking,
 SaaS):</strong></p>
@@ -9926,7 +9949,7 @@ ToS, privacy)</li>
 allow automated access</li>
 <li>Monitor emerging case law and regulatory guidance</li>
 </ul>
-<p><strong>Risk categorization:</strong> Use framework on previous page
+<p><strong>Risk categorisation:</strong> Use framework on previous page
 to assess likelihood and impact of each legal risk type for your
 specific business model.</p>
 <p><strong>Key insight:</strong> Legal clarity will emerge over next 3-5
@@ -12390,7 +12413,7 @@ with display:none</h3>
 elements with <code>display: none</code> or positioning content
 off-screen to hide it from human visitors.</p>
 <p><strong>Why it fails:</strong> Google and other search engines may
-treat this as deceptive markup and penalize your site. The structured
+treat this as deceptive markup and penalise your site. The structured
 data should describe visible content, not add information that isn’t
 present on the page.</p>
 <p><strong>The fix:</strong> Ensure all structured data corresponds to
@@ -12554,7 +12577,7 @@ machines can distinguish it from the TV scripts and movie dialogue in
 their training data.</p>
 <p><strong>Broader implication:</strong> AI training datasets include
 subtitles from DVDs, Blu-rays, and online streams — extracted using
-specialized software and uploaded to repositories like
+specialised software and uploaded to repositories like
 OpenSubtitles.org. This means machines have seen millions of lines of
 fictional dialogue presented in text format, indistinguishable from
 professional content without explicit markup. Your responsibility is to
@@ -14195,7 +14218,7 @@ content model. Serve pre-rendered HTML instead of rebuilding your
 application architecture. Generate summaries automatically instead of
 training content teams to write better.</p>
 <p><strong>But technical solutions don’t compound the same way strategic
-ones do.</strong> Edge optimizations help machines see your content
+ones do.</strong> Edge optimisations help machines see your content
 better. Improving your actual content helps everyone who reads it, now
 and in the future, regardless of how they access it.</p>
 <h3 id="the-diagnostic-value">The Diagnostic Value</h3>
@@ -15852,7 +15875,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb102-1"><a href
 agents get real-time updates.</p>
 <h3 id="agent-type-distribution">Agent Type Distribution</h3>
 <p>Understanding which machines access which HTML state helps you
-prioritize:</p>
+prioritise:</p>
 <p><strong>Served HTML Access (Majority):</strong></p>
 <ul>
 <li>CLI agents (Claude Code, Cline, cursor)</li>
@@ -15866,8 +15889,8 @@ prioritize:</p>
 <li>Browser extension assistants (ChatGPT sidebar, Claude
 extension)</li>
 </ul>
-<p><strong>Implication:</strong> Optimizing served HTML provides
-complete coverage. Optimizing only rendered HTML excludes the majority
+<p><strong>Implication:</strong> Optimising served HTML provides
+complete coverage. Optimising only rendered HTML excludes the majority
 of machines.</p>
 <h3 id="testing-both-states">Testing Both States</h3>
 <p><strong>Test served HTML (what most agents see):</strong></p>
@@ -15928,7 +15951,7 @@ automated analysis of AI agent compatibility.</p>
 <li>SEO analysis: seo_report.csv, seo_scores.csv</li>
 <li>Performance: performance_analysis.csv</li>
 <li>Accessibility: accessibility_report.csv, wcag_report.md</li>
-<li>Content: content_quality.csv, image_optimization.csv,
+<li>Content: content_quality.csv, image_optimisation.csv,
 link_analysis.csv</li>
 <li>Security: security_report.csv</li>
 <li>LLM compatibility: llm_general_suitability.csv,
@@ -15945,7 +15968,7 @@ ai_files_summary.md</li>
 <h3 id="quick-start">Quick Start</h3>
 <div class="sourceCode" id="cb105"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install</span></span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone </span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone</span>
 <span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> mx-handbook/mx-audit</span>
 <span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install</span>
 <span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -15968,7 +15991,7 @@ agent compatibility:</p>
 higher)</li>
 <li><strong>rendered_score</strong>: Works for browser agents (weighted
 lower)</li>
-<li><strong>overall_score</strong>: Weighted average emphasizing served
+<li><strong>overall_score</strong>: Weighted average emphasising served
 HTML</li>
 </ul>
 <p><strong>Interpreting scores:</strong></p>
@@ -15988,10 +16011,10 @@ file:</p>
 <li>Sensitive path protection</li>
 <li>llms.txt references</li>
 </ul>
-<p>Use these scores to prioritize improvements. The remainder of this
+<p>Use these scores to prioritise improvements. The remainder of this
 chapter explains how to fix what the audit identifies.</p>
 <h3 id="performance-optimisation">Performance Optimisation</h3>
-<p>The Web Audit Suite includes production-tested optimizations that
+<p>The Web Audit Suite includes production-tested optimisations that
 reduce analysis time by 3-5x. For large sites with hundreds or thousands
 of pages, these features significantly improve practicality:</p>
 <p><strong>Browser pooling</strong> maintains reusable browser
@@ -18091,7 +18114,7 @@ codes</label></li>
 </ul>
 <h3 id="priority-4-advanced-features">Priority 4: Advanced Features</h3>
 <p><strong>Effort Level:</strong> Ongoing programme, not a one-time
-project. Requires dedicated resources, sustained organizational
+project. Requires dedicated resources, sustained organisational
 commitment, and strategic business alignment. Involves building new
 systems, establishing governance frameworks, and potentially partnering
 with external platforms. Plan for multi-phase delivery with measurable
@@ -19176,8 +19199,8 @@ system should reject it immediately — not pass it to the doctor for
 diagnosis. The same principle applies to machines: validate data at
 extraction, not at decision-making.</p>
 <p>This is why the data project must precede the AI project.<a
-href="#fn22" class="footnote-ref" id="fnref22"
-role="doc-noteref"><sup>22</sup></a> Organisations that deploy agents
+href="#fn23" class="footnote-ref" id="fnref23"
+role="doc-noteref"><sup>23</sup></a> Organisations that deploy agents
 without first establishing what valid data looks like — what ranges are
 reasonable, what formats are expected, what cross-references should hold
 — discover at month eighteen that their expensive AI investment is
@@ -19236,8 +19259,8 @@ agent increases the attack surface, the compliance exposure, and the
 potential for unaudited actions. The machines are not the problem. The
 absence of governance is.</p>
 <p>The open-source community has begun to address this gap. AgentLock,<a
-href="#fn23" class="footnote-ref" id="fnref23"
-role="doc-noteref"><sup>23</sup></a> an Apache 2.0-licensed
+href="#fn24" class="footnote-ref" id="fnref24"
+role="doc-noteref"><sup>24</sup></a> an Apache 2.0-licensed
 authorization framework, calls this the “Full Permission anti-pattern” —
 the fact that when language models generate tool calls, execution
 happens automatically without security validation. Traditional computing
@@ -20850,7 +20873,7 @@ standard before ecosystem fragmentation becomes permanent. Both
 protocols claim compatibility with shared infrastructure (Agent-to-Agent
 protocol, Agent Protocol 2, Model Context Protocol), suggesting
 technical convergence is possible.</p>
-<p><strong>Question:</strong> Will OpenAI/Stripe and Google prioritize
+<p><strong>Question:</strong> Will OpenAI/Stripe and Google prioritise
 ecosystem health over competitive positioning? We’ll know within 6
 months. Either convergence happens early, or we face years of protocol
 competition followed by eventual consolidation.</p>
@@ -20860,7 +20883,7 @@ open. They’re competing against two open protocols simultaneously, both
 backed by major technology companies and retail partnerships.</p>
 <p><strong>The network effect problem:</strong> Unless Microsoft’s
 machine traffic dramatically exceeds combined ACP/UCP traffic, merchants
-will prioritize the open protocols. Microsoft’s traffic can’t exceed
+will prioritise the open protocols. Microsoft’s traffic can’t exceed
 competitors when those competitors include Google’s search distribution
 and OpenAI’s ChatGPT user base.</p>
 <p><strong>Timeline prediction:</strong> 6-12 months before Microsoft
@@ -20963,7 +20986,7 @@ data from Chapter 10, and enable the explicit state indicators from
 Chapter 11. Everything connects.</p>
 <h2 id="the-core-problem-pages-vs-assets">The Core Problem: Pages vs
 Assets</h2>
-<p>Traditional CMS architecture organizes around pages:</p>
+<p>Traditional CMS architecture organises around pages:</p>
 <pre><code>Create page → Add properties → Insert content → Publish</code></pre>
 <p>This works when humans manage a single web channel. It breaks
 when:</p>
@@ -20979,7 +21002,7 @@ structure</li>
 <li><strong>Accessibility demands increase</strong> — ARIA labels and
 semantic HTML become afterthoughts rather than foundations</li>
 </ul>
-<p>Intent-driven publishing organizes around assets with explicit
+<p>Intent-driven publishing organises around assets with explicit
 metadata:</p>
 <pre><code>Define metadata → Validate constraints → Reconstruct for channel → Deploy</code></pre>
 <p>Each asset carries YAML frontmatter declaring what it is, who it’s
@@ -22505,9 +22528,9 @@ know everything it needs: what this is, when it changed, what dietary
 requirements it covers. A human can read the markdown and decide what to
 order. Same file. Two audiences. No special tools, no database, no
 API.</p>
-<p>There are two types. An <strong>info-doc</strong> is pure data and
+<p>There are two types. An <strong>info-cog</strong> is pure data and
 documentation — like the menu above. It describes something. An
-<strong>action-doc</strong> has an <code>execute</code> block that tells
+<strong>action-cog</strong> has an <code>execute</code> block that tells
 an AI agent what to do. The instructions are written in natural
 language. The AI agent reads them and carries them out. The instructions
 are the program. The agent is the runtime.</p>
@@ -22559,14 +22582,14 @@ environment.</p>
 <p>Every repository has its own boot sequence. CLAUDE.md acts as the
 bootloader — the first file any AI agent reads. It loads mode-specific
 configuration, initialises the environment, and routes the agent to the
-right context. From there, action-docs handle routing, execution, and
+right context. From there, action-cogs handle routing, execution, and
 communication between components.</p>
-<p>Working applications run as action-docs. A contact management system
+<p>Working applications run as action-cogs. A contact management system
 — MX-Contacts — was built in a single conversation. No code. No
 database. No server. Just cogs describing what needs to happen, and an
 AI agent carrying out the instructions. A reminders system manages
 persistent action items across sessions. The reminders file is itself an
-action-doc — the file that holds the data also holds the instructions
+action-cog — the file that holds the data also holds the instructions
 for managing the data.</p>
 <p>The tool builds the tool. The instructions write the instructions.
 The runtime documents the runtime. Every layer of the stack is built by
@@ -22728,7 +22751,7 @@ The AI is the brain.</p>
 <p>Pohl’s joymaker connected to central computers via radio. A cog
 connects to cloud AI services via the internet. Pohl’s joymaker used
 voice-activated AI that translated natural speech into computer
-commands. An action-doc with <code>runtime: runbook</code> does
+commands. An action-cog with <code>runtime: runbook</code> does
 precisely the same thing — the AI agent reads natural language
 instructions and executes them. The instructions are the program. The
 agent is the runtime.</p>
@@ -22764,7 +22787,7 @@ Pohl’s 1969 joymaker to their equivalents in MX OS.</em></p>
 </tr>
 <tr>
 <td>Voice-activated AI</td>
-<td>Action-doc <code>runtime: runbook</code></td>
+<td>Action-cog <code>runtime: runbook</code></td>
 </tr>
 <tr>
 <td>“Interests profile”</td>
@@ -22780,7 +22803,7 @@ Pohl’s 1969 joymaker to their equivalents in MX OS.</em></p>
 </tr>
 <tr>
 <td>Communication hub</td>
-<td>IPC between action-docs</td>
+<td>IPC between action-cogs</td>
 </tr>
 </tbody>
 </table>
@@ -22936,7 +22959,7 @@ and acts on it, that’s Pohl’s joymaker working — a thin client
 connecting to central intelligence, understanding context, acting on
 behalf of a human. When she reads my personal cogs and carries my
 context into every session, that’s the interests profile Pohl described.
-When she writes an action-doc that another machine will later execute,
+When she writes an action-cog that another machine will later execute,
 she’s building the infrastructure Pohl imagined but at a scale he never
 conceived.</p>
 <p>The joymaker in the novel served one person. Maxine serves the
@@ -23203,7 +23226,7 @@ devices through encrypted git — the same version control that manages
 code now manages your identity. Edit a cog on one Mac, see the Machine
 Experience update on another. The cogs follow you because they’re files,
 not database records. Portable. Versionable. Yours.</p>
-<p>Under the hood, the AI layer is cog-native. The action-doc IS the
+<p>Under the hood, the AI layer is cog-native. The action-cog IS the
 prompt. Any language model that can read natural language instructions
 can be the runtime. No middleware. No proprietary API wrapper. The
 standard makes the AI layer replaceable without changing the cog
@@ -23353,7 +23376,7 @@ itself.</p>
 <p>Delivery? The AI agent reads the cog and renders it through The
 Machine Experience. Any agent that can parse YAML and read markdown can
 deliver the content. No middleware. No proprietary renderer. The
-action-doc IS the prompt. The AI is the runtime.</p>
+action-cog IS the prompt. The AI is the runtime.</p>
 <p>Templating? There are no templates. The Machine Experience generates
 a personalised view from the cog data and the user’s personal cogs. The
 same cog produces a different experience for every user. The rendering
@@ -24351,13 +24374,13 @@ machine to identify which previous policy, determine whether this
 document is the most recent update, and decide whether “updates” means
 “replaces” or “supplements.” The metadata eliminates the ambiguity. The
 machine reads a fact instead of constructing an interpretation.</p>
-<h2 id="info-docs-and-action-docs">Info-Docs and Action-Docs</h2>
-<p>The cog format supports two modes. Information cogs (info-docs)
-describe, document, and explain. They are the data files of the MX
-ecosystem — structured content that any process can read.</p>
-<p>Action-docs are cogs that turn. They carry an <code>execute</code>
+<h2 id="info-cogs-and-action-cogs">Info-Cogs and Action-Cogs</h2>
+<p>The cog format supports two modes. Info-cogs describe, document, and
+explain. They are the data files of the MX ecosystem — structured
+content that any process can read.</p>
+<p>Action-cogs are cogs that turn. They carry an <code>execute</code>
 block that declares what the cog does, what runtime it requires, and how
-to invoke it. An action-doc is simultaneously its own documentation and
+to invoke it. An action-cog is simultaneously its own documentation and
 its own executable specification.</p>
 <div class="sourceCode" id="cb242"><pre
 class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb242-1"><a href="#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">execute</span><span class="kw">:</span></span>
@@ -24375,14 +24398,14 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb242-1"><a href
 <span id="cb242-13"><a href="#cb242-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> report</span></span>
 <span id="cb242-14"><a href="#cb242-14" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">type</span><span class="kw">:</span><span class="at"> markdown</span></span>
 <span id="cb242-15"><a href="#cb242-15" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">description</span><span class="kw">:</span><span class="at"> Validation findings</span></span></code></pre></div>
-<p>This is not a script. It is a declaration. The action-doc describes
+<p>This is not a script. It is a declaration. The action-cog describes
 what it does, what it needs, and what it produces. The runtime executes
 it. The document IS the program specification. The runtime IS the
 interpreter.</p>
-<p>This distinction — info-doc versus action-doc — is foundational to
-the MX ecosystem. Every action-doc is a cog. Not every cog is an
-action-doc. The presence of an <code>execute</code> block is the
-dividing line. Info-docs sit still. Action-docs turn.</p>
+<p>This distinction — info-cog versus action-cog — is foundational to
+the MX ecosystem. Every action-cog is a cog. Not every cog is an
+action-cog. The presence of an <code>execute</code> block is the
+dividing line. Info-cogs sit still. Action-cogs turn.</p>
 <h3 id="cogs-and-skills">Cogs and Skills</h3>
 <p>A pattern emerges as organisations adopt AI agents: alongside the
 content that agents read, teams create instructions that tell agents how
@@ -24461,7 +24484,7 @@ was configured.</p>
 </tr>
 <tr>
 <td>Execution</td>
-<td>Action-docs are self-executing (embedded procedures)</td>
+<td>Action-cogs are self-executing (embedded procedures)</td>
 <td>Skills never execute — they shape agent behaviour</td>
 </tr>
 <tr>
@@ -24506,11 +24529,11 @@ optimise the agent experience through skills where the workflow demands
 it.</p>
 <h3 id="security-and-runtime-constraints">Security and Runtime
 Constraints</h3>
-<p>An action-doc that can validate pricing data, install dependencies,
+<p>An action-cog that can validate pricing data, install dependencies,
 or access contacts databases requires more than trust and access
 control. It requires runtime constraints — explicit declarations of what
 the cog is permitted to do when it executes.</p>
-<p>Every action-doc carries a <code>riskLevel</code> classification in
+<p>Every action-cog carries a <code>riskLevel</code> classification in
 its frontmatter:</p>
 <ul>
 <li><strong>low</strong> — read-only, no side effects. Execute without
@@ -24528,7 +24551,7 @@ provenance quality — is this cog genuine? Risk measures execution danger
 — how much damage can it cause if it runs? A cog can be fully attested
 and registered (high trust) and still dangerous to execute (high risk).
 Both signals are needed.</p>
-<p>Action-docs with <code>riskLevel: high</code> or
+<p>Action-cogs with <code>riskLevel: high</code> or
 <code>critical</code> declare a <code>security</code> block:</p>
 <div class="sourceCode" id="cb243"><pre
 class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb243-1"><a href="#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">security</span><span class="kw">:</span></span>
@@ -24573,15 +24596,15 @@ to be built proves the point made throughout this book: the data project
 must precede the AI project. Governance declared at the tool level —
 before any agent runs — is the only governance that scales.</p>
 <p>The practical implications are significant. An organisation’s
-standard operating procedures can be written as action-docs. The
+standard operating procedures can be written as action-cogs. The
 procedure is simultaneously human-readable documentation (the markdown)
 and machine-executable specification (the execute block). When the
 procedure changes, the documentation changes with it — because they are
 the same file. The drift between “what the documentation says” and “what
 the system does” that plagues every large organisation is eliminated by
 architecture, not discipline.</p>
-<h3 id="the-core-action-docs">The Core Action-Docs</h3>
-<p>MX Reginald ships with core action-docs that audit websites for
+<h3 id="the-core-action-cogs">The Core Action-Cogs</h3>
+<p>MX Reginald ships with core action-cogs that audit websites for
 machine readiness. Each one validates a specific aspect of the MX
 patterns described in this book:</p>
 <ul>
@@ -24611,7 +24634,7 @@ analysis</li>
 <li><strong>Cog validation</strong> — specification conformance
 checking</li>
 </ul>
-<p>Each action-doc is self-describing. A machine that encounters one
+<p>Each action-cog is self-describing. A machine that encounters one
 knows what it does, how to run it, what inputs it needs, and what
 outputs it produces — all from the frontmatter. No external
 documentation required.</p>
@@ -25088,7 +25111,7 @@ Affects how AI agents can access and use personal information.</p>
 <p><strong>GEO (Generative Engine Optimisation)</strong> The practice of
 optimising websites to be cited by AI agents in their responses to user
 queries. Unlike traditional SEO (Search Engine Optimisation) which
-optimizes for clicks and page views, GEO optimizes for citations and
+optimises for clicks and page views, GEO optimises for citations and
 attribution. Key techniques include structured data (Schema.org),
 semantic HTML, llms.txt files, and clear content organisation. See
 Chapter 10 for detailed guidance on implementing GEO strategies.</p>
@@ -25236,7 +25259,7 @@ than just listing links. See Chapter 10 for analysis of GEO vs SEO
 convergence.</p>
 <p><strong>SKU (Stock Keeping Unit)</strong> An internal product code
 assigned by retailers to track inventory. Unlike GTIN or MPN which are
-standardized across retailers, each retailer creates its own SKUs.
+standardised across retailers, each retailer creates its own SKUs.
 Including SKU in Schema.org Product markup helps with inventory
 management but provides less value for cross-retailer product
 identification.</p>
@@ -26106,24 +26129,32 @@ reshape day-to-day building practice.<br />
 <a
 href="https://allabout.network/mx/principles-changed-how-i-build.html">https://allabout.network/mx/principles-changed-how-i-build.html</a><a
 href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn12"><p>Hugging Face model growth data: model tracking began in
+<li id="fn12"><p>Hugging Face is the largest open-source AI model
+repository and community platform. Founded in 2016, it hosts models,
+datasets, and inference tools that anyone can use. Its significance for
+MX is that it represents the long tail of AI capability — the majority
+of models hosted there are small, limited, and incapable of inferring
+meaning from poorly structured content.<br />
+<a href="https://huggingface.co">https://huggingface.co</a><a
+href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Hugging Face model growth data: model tracking began in
 March 2022. The first million models took over 1,000 days; the second
 million arrived just 335 days later. By August 2025, models added that
 year had already surpassed the entire 2024 total.<br />
 <a
 href="https://aiworld.eu/story/hugging-faces-two-million-models-and-counting">https://aiworld.eu/story/hugging-faces-two-million-models-and-counting</a><a
-href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn13"><p>For the full argument that the CMS is shifting from
+href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>For the full argument that the CMS is shifting from
 destination to invisible workflow.<br />
 <a
 href="https://allabout.network/is-the-cms-a-destination-or-a-workflow">https://allabout.network/is-the-cms-a-destination-or-a-workflow</a><a
-href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn14"><p>This chapter was co-authored with Claude (Anthropic).
+href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>This chapter was co-authored with Claude (Anthropic).
 The frontmatter metadata, the structured arguments, and the MX patterns
 described in the text are all implemented in the chapter itself — the
-medium demonstrates the message.<a href="#fnref14" class="footnote-back"
+medium demonstrates the message.<a href="#fnref15" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn15"><p>WebMCP (Web Model Context Protocol) — W3C Draft
+<li id="fn16"><p>WebMCP (Web Model Context Protocol) — W3C Draft
 Community Group Report, 10 February 2026. Created by engineers at Google
 and Microsoft under the W3C Web Machine Learning Community Group. Early
 preview in Chrome 146 Canary.<br />
@@ -26131,24 +26162,24 @@ preview in Chrome 146 Canary.<br />
 href="https://webmachinelearning.github.io/webmcp/">https://webmachinelearning.github.io/webmcp/</a><br />
 <a
 href="https://venturebeat.com/infrastructure/google-chrome-ships-webmcp-in-early-preview-turning-every-website-into-a">https://venturebeat.com/infrastructure/google-chrome-ships-webmcp-in-early-preview-turning-every-website-into-a</a><a
-href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn16"><p>Adobe LLM Optimizer — edge-based deployment that
+href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>Adobe LLM Optimiser — edge-based deployment that
 detects agentic traffic and serves AI-friendly content modifications at
 the CDN layer. Targets only agentic requests; does not affect human
 users or SEO bots.<br />
 <a
-href="https://business.adobe.com/products/llm-optimizer.html">https://business.adobe.com/products/llm-optimizer.html</a><br />
+href="https://business.adobe.com/products/llm-optimiser.html">https://business.adobe.com/products/llm-optimiser.html</a><br />
 <a
-href="https://business.adobe.com/blog/introducing-adobe-llm-optimizer">https://business.adobe.com/blog/introducing-adobe-llm-optimizer</a><a
-href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn17"><p>Google defines cloaking as “presenting different
+href="https://business.adobe.com/blog/introducing-adobe-llm-optimiser">https://business.adobe.com/blog/introducing-adobe-llm-optimiser</a><a
+href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>Google defines cloaking as “presenting different
 content to users than to search engines” and classifies it as a
 violation of spam policies. Sites caught cloaking face manual actions
 including removal from search results.<br />
 <a
 href="https://developers.google.com/search/docs/essentials/spam-policies#cloaking">https://developers.google.com/search/docs/essentials/spam-policies#cloaking</a><a
-href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn18"><p>DevOps implementations demonstrate the balance between
+href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>DevOps implementations demonstrate the balance between
 shared responsibility and specialised roles. Whilst everyone takes
 responsibility for quality, dedicated QA engineers focus on defining
 standards, designing test frameworks, and preventing bugs. See:<br />
@@ -26156,8 +26187,8 @@ standards, designing test frameworks, and preventing bugs. See:<br />
 href="https://www.qamadness.com/devops-and-the-role-of-qa/">https://www.qamadness.com/devops-and-the-role-of-qa/</a><br />
 <a
 href="https://www.splunk.com/en_us/blog/learn/devops-roles-responsibilities.html">https://www.splunk.com/en_us/blog/learn/devops-roles-responsibilities.html</a><a
-href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn19"><p>Research shows 82% of respondents have limited ability
+href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>Research shows 82% of respondents have limited ability
 to hold others accountable, and only 14% of employees feel their
 performance is managed in ways that inspire responsibility. Clear
 ownership structures address this gap. See:<br />
@@ -26167,21 +26198,14 @@ href="https://www.forrestadvisors.com/insights/organizational-design/accountabil
 href="https://medium.com/@csw11235/responsibility-accountability-and-ownership-da054169fcce">https://medium.com/<span
 class="citation"
 data-cites="csw11235/responsibility-accountability-and-ownership-da054169fcce">@csw11235/responsibility-accountability-and-ownership-da054169fcce</span></a><a
-href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn20"><p>The Gathering — open standards for Machine Experience.
+href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p>The Gathering — open standards for Machine Experience.
 Community-governed, MIT licensed, practitioner-led.<br />
 <a href="https://tg.community">https://tg.community</a><br />
 <a
 href="https://stream.tg.community">https://stream.tg.community</a><br />
 <a
 href="https://tg.community/process">https://tg.community/process</a><a
-href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn21"><p>Peter Zaffina, enterprise technology leader
-specialising in AI, data, and cloud transformation. The framing of the
-data project as prerequisite for the AI project draws on his argument
-that governance must precede deployment.<br />
-<a
-href="https://www.linkedin.com/in/peter-zaffina/">https://www.linkedin.com/in/peter-zaffina/</a><a
 href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn22"><p>Peter Zaffina, enterprise technology leader
 specialising in AI, data, and cloud transformation. The framing of the
@@ -26190,13 +26214,20 @@ that governance must precede deployment.<br />
 <a
 href="https://www.linkedin.com/in/peter-zaffina/">https://www.linkedin.com/in/peter-zaffina/</a><a
 href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn23"><p>AgentLock — open authorization standard for AI agents.
+<li id="fn23"><p>Peter Zaffina, enterprise technology leader
+specialising in AI, data, and cloud transformation. The framing of the
+data project as prerequisite for the AI project draws on his argument
+that governance must precede deployment.<br />
+<a
+href="https://www.linkedin.com/in/peter-zaffina/">https://www.linkedin.com/in/peter-zaffina/</a><a
+href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn24"><p>AgentLock — open authorization standard for AI agents.
 Addresses what the framework calls the “Full Permission anti-pattern”:
 AI agents operating without the security controls that traditional
 computing (Unix permissions, database GRANT/REVOKE, cloud IAM) has
 required for decades. Apache 2.0 licensed.<br />
 <a href="https://agentlock.dev/">https://agentlock.dev/</a><a
-href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+href="#fnref24" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 </body>
