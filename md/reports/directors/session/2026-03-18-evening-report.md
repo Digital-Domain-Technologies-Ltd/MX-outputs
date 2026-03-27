@@ -33,6 +33,7 @@ Demonstrated the full MX stack: YAML frontmatter, HTML meta tag generation, The 
 ### 2. Audit Reports Delivered
 
 Two executive audit reports prepared for delivery:
+
 - **BloomReach** (`bloomreach-report.md`): Performance 25/100, Accessibility 0/100, SEO 65/100, AI Suitability 41/100. 148 WCAG AA errors across 4 pages.
 - **Farnell** (`farnell-report.md`): Performance 50/100, Accessibility 0/100, SEO 63/100, AI Suitability 35/100. 171 WCAG AA errors across 2 pages. Included as real-world B2B example.
 

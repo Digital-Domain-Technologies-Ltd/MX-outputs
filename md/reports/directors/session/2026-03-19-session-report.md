@@ -42,12 +42,14 @@ Navigation across all pages already included "Levels" link from earlier in this 
 Systematic grep found and updated all instances of the narrow "COG = markdown file" definition across:
 
 **Manuscripts (4 files):**
+
 - `chapter-15-when-machines-remember.md`
 - `chapter-16-the-joymaker.md`
 - `chapter-17-content-that-manages-itself.md`
 - `appendix-m-building-mx-os.md`
 
 **Canon (10 files):**
+
 - `founding-charter.md`, `announcing-the-gathering.md`, `allabout-the-gathering.html`, `landing-page.html`
 - `cog-unified-spec.cog.md`
 - `introducing-mx-cogs.md`, `content-that-manages-itself-blog.md`, `content-that-manages-itself.html`
