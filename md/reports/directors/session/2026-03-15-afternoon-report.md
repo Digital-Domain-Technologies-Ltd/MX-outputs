@@ -49,7 +49,7 @@ Manifesto moved from `datalake/pipeline/drafts/ideas/` to `datalake/manuscripts/
 
 ### 5. Services Advert Fix
 
-Contact changed from `mx-printworks@cog-nova.mx` to `MX Printworks via info@surfprint.com`.
+Contact changed from `mx-printworks@cog-nova.mx` to `MX Printworks via mx-printworks@cognovamx.com`.
 
 ### 6. Free Book Deployment
 
