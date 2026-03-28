@@ -404,7 +404,7 @@ All commits pushed to origin/main. Full history:
 - ✅ HTML structure validated (all tags balanced)
 - ✅ Schema.org JSON-LD validated (valid syntax)
 - ✅ Accessibility verified (ARIA labels, semantic HTML)
-- ✅ Contact information verified (info@allabout.network)
+- ✅ Contact information verified (info@cognovamx.com)
 - ✅ Terminology consistent with MX standards
 
 ---

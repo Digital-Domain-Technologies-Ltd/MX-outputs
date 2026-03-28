@@ -110,7 +110,7 @@ LinkedIn's automated crawler detected three issues:
 - mailto (chosen — simple, zero setup, Tom's preference)
 - Netlify Forms (if using Netlify)
 
-**Selected:** mailto:info@allabout.network?subject=MX%20Early%20Access
+**Selected:** mailto:info@cognovamx.com?subject=MX%20Early%20Access
 
 **Rationale:** Immediate deployment, no signup required, acceptable for pre-launch waitlist.
 

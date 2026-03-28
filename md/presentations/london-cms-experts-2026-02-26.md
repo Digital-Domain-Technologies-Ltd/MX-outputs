@@ -198,4 +198,4 @@ mx:
 
 *Not for machines. Not for humans. **Design for both. Advance both.***
 
-**Tom Cranstoun** — info@allabout.network — allabout.network
+**Tom Cranstoun** — info@cognovamx.com — allabout.network

@@ -592,7 +592,7 @@ reginald index verify
 
 **Document Classification:** CONFIDENTIAL — MX Reginald Ltd Internal Use Only
 
-**Contact:** info@allabout.network
+**Contact:** info@cognovamx.com
 
 ---
 
