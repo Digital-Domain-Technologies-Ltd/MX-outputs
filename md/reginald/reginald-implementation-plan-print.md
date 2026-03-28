@@ -592,7 +592,7 @@ reginald index verify
 
 **Document Classification:** CONFIDENTIAL — MX Reginald Ltd Internal Use Only
 
-**Contact:** tom.cranstoun@gmail.com
+**Contact:** info@allabout.network
 
 ---
 

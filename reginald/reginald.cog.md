@@ -13,7 +13,7 @@ mx:
   tags: [reginald, registry, cogs, trust, verification, ai-agents, dns, resolution, machine-experience]
   audience: [humans, machines]
   license: proprietary
-  maintainer: "tom.cranstoun@gmail.com"
+  maintainer: "info@allabout.network"
   reviewCycle: quarterly
   expires: 2026-09-19
 ---
@@ -185,7 +185,7 @@ Core audit action-COGs ship with REGINALD, auditing websites for machine-readabi
 ## Contact
 
 - **Website:** [allabout.network](https://allabout.network)
-- **Email:** [tom.cranstoun@gmail.com](mailto:tom.cranstoun@gmail.com)
+- **Email:** [info@allabout.network](mailto:info@allabout.network)
 - **Registry:** [reginald.allabout.network](https://reginald.allabout.network)
 
 CogNovaMX Ltd — Making the web work for everyone and everything that uses it.

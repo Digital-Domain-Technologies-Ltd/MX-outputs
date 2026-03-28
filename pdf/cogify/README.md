@@ -243,7 +243,7 @@ This documentation is part of the Cog-Nova-MX system and is provided for authori
 **Cog-Nova-MX Ltd**
 
 - **Website:** allabout.network (publishing platform)
-- **Email:** tom.cranstoun@gmail.com
+- **Email:** info@allabout.network
 - **GitHub:** tomcranstoun
 
 ---
