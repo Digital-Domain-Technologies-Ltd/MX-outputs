@@ -23,7 +23,7 @@ Rebuilt the Wix-hosted book-sale website as a static site inside allaboutv2, app
 
 ### MX Bookshop (`allaboutv2/mx/bookshop/`)
 
-A complete book-sale website replacing the Wix-hosted version, now publishing to `allabout.network/mx/bookshop/`. Three books presented: MX: The Intro (free), MX: The Handbook, and MX: The Protocols.
+A complete book-sale website replacing the Wix-hosted version, now publishing to `mx.allabout.network/books/`. Three books presented: MX: The Intro (free), MX: The Handbook, and MX: The Protocols.
 
 **MX treatment applied:**
 

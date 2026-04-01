@@ -42,19 +42,19 @@ mx:
 | datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md | 404 | https://allabout.network/mx/online-material/appendices/appendix-h.html |
 | datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md | 404 | https://allabout.network/mx/online-material/appendices/appendix-i.html |
 | datalake/manuscripts/mx-books/mx-appendices/appendix-k-common-page-patterns.md | 404 | https://allabout.network/mx/online-material/appendices/appendix-j.html |
-| datalake/manuscripts/mx-books/mx-appendices/web/site/README.md | 404 | https://allabout.network/mx-handbook/web/site/ |
-| datalake/manuscripts/mx-books/mx-handbook/chapters/The-End.md | 404 | https://allabout.network/mx-handbook/web/ |
-| datalake/manuscripts/mx-books/mx-protocols/protocols/The-End.md | 404 | https://allabout.network/mx-handbook/web/ |
+| datalake/manuscripts/mx-books/mx-appendices/web/site/README.md | 404 | https://mx.allabout.network/books/web/site/ |
+| datalake/manuscripts/mx-books/mx-handbook/chapters/The-End.md | 404 | https://mx.allabout.network/books/web/ |
+| datalake/manuscripts/mx-books/mx-protocols/protocols/The-End.md | 404 | https://mx.allabout.network/books/web/ |
 | datalake/manuscripts/mx-books/mx-protocols/protocols/chapter-04-the-business-reality.md | 404 | https://allabout.network/mx/online-material/appendices/appendix-j.html |
 | datalake/manuscripts/mx-books/mx-protocols/protocols/chapter-10-generative-engine-optimization.md | 404 | https://allabout.network/docs/agent-patterns |
 | datalake/manuscripts/mx-books/mx-protocols/protocols/chapter-11-designing-for-both.md | 404 | https://allabout.network/mx/online-material/appendices/appendix-j.html |
 | datalake/manuscripts/mx-books/mx-protocols/protocols/chapter-12-technical-advice.md | 404 | https://allabout.network/mx/online-material/appendices/appendix-j.html |
-| datalake/manuscripts/mx-books/mx-protocols/protocols/protocols-plan.md | 404 | https://allabout.network/mx-handbook/web/ |
+| datalake/manuscripts/mx-books/mx-protocols/protocols/protocols-plan.md | 404 | https://mx.allabout.network/books/web/ |
 | datalake/manuscripts/mx-books/shared/footnotes-qr-page.md | 404 | https://allabout.network/mx/online-material/index.html |
 
 ## Timeouts
 
 | File | Status | URL |
 |------|--------|-----|
-| datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md | timeout | https://allabout.network/blogs/mx/[filename |
+| datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md | timeout | https://mx.allabout.network/blog/[filename |
 
