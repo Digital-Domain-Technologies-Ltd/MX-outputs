@@ -4536,8 +4536,8 @@ Product, Event, Article, Recipe, Movie, and on and on.</p>
 practice, ranked by frequency:</p>
 <p><strong>1. Organisation / LocalBusiness</strong> For company
 information, contact details, locations.</p>
-<p><strong>2. Article / BlogPosting / NewsArticle</strong><br />
-For content marketing, blogs, news sections.</p>
+<p><strong>2. Article / BlogPosting / NewsArticle</strong> For content
+marketing, blogs, news sections.</p>
 <p><strong>3. Product / Offer</strong> For e-commerce or any product
 pages.</p>
 <p><strong>4. FAQPage / Question / Answer</strong> For support content
@@ -4784,11 +4784,11 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb50-1"><a href=
 <span id="cb50-40"><a href="#cb50-40" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb50-41"><a href="#cb50-41" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>The <code>offers</code> section is critical. Notice:</p>
-<p><strong>price as a string:</strong> “599.00” not 599<br />
-<strong>priceCurrency:</strong> ISO 4217 code (GBP, USD, EUR)<br />
+<p><strong>price as a string:</strong> “599.00” not 599
+<strong>priceCurrency:</strong> ISO 4217 code (GBP, USD, EUR)
 <strong>availability:</strong> Use Schema.org URLs (InStock, OutOfStock,
-PreOrder, etc.)<br />
-<strong>priceValidUntil:</strong> When does this price expire?</p>
+PreOrder, etc.) <strong>priceValidUntil:</strong> When does this price
+expire?</p>
 <p>If you have multiple offers (different sizes, colours,
 configurations), use an array:</p>
 <div class="sourceCode" id="cb51"><pre
@@ -5007,7 +5007,7 @@ JSON-LD server-side on each request:</p>
 class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Express.js example</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>app<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;/products/:id&#39;</span><span class="op">,</span> <span class="kw">async</span> (req<span class="op">,</span> res) <span class="kw">=&gt;</span> {</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> product <span class="op">=</span> <span class="cf">await</span> <span class="fu">getProduct</span>(req<span class="op">.</span><span class="at">params</span><span class="op">.</span><span class="at">id</span>)<span class="op">;</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> schema <span class="op">=</span> {</span>
 <span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@context&quot;</span><span class="op">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="op">,</span></span>
 <span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Product&quot;</span><span class="op">,</span></span>
@@ -5016,25 +5016,25 @@ class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57
 <span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Offer&quot;</span><span class="op">,</span></span>
 <span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;price&quot;</span><span class="op">:</span> product<span class="op">.</span><span class="at">price</span><span class="op">.</span><span class="fu">toString</span>()<span class="op">,</span></span>
 <span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;priceCurrency&quot;</span><span class="op">:</span> <span class="st">&quot;GBP&quot;</span><span class="op">,</span></span>
-<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;availability&quot;</span><span class="op">:</span> product<span class="op">.</span><span class="at">inStock</span> </span>
-<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">?</span> <span class="st">&quot;https://schema.org/InStock&quot;</span> </span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;availability&quot;</span><span class="op">:</span> product<span class="op">.</span><span class="at">inStock</span></span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">?</span> <span class="st">&quot;https://schema.org/InStock&quot;</span></span>
 <span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span> <span class="st">&quot;https://schema.org/OutOfStock&quot;</span></span>
 <span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
-<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>  res<span class="op">.</span><span class="fu">render</span>(<span class="st">&#39;product&#39;</span><span class="op">,</span> { product<span class="op">,</span> schema })<span class="op">;</span></span>
 <span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
 <p>Choose based on your site architecture and update frequency.</p>
 <h2 id="validation-and-testing">Validation and testing</h2>
 <p>Don’t trust your Schema.org markup without validation. Use these
 tools:</p>
-<p><strong>Google’s Rich Results Test:</strong><br />
-<a href="https://search.google.com/test/rich-results"
+<p><strong>Google’s Rich Results Test:</strong> <a
+href="https://search.google.com/test/rich-results"
 class="uri">https://search.google.com/test/rich-results</a></p>
 <p>Paste your URL or HTML and see if Google can parse your structured
 data. Shows warnings and errors.</p>
-<p><strong>Schema.org Validator:</strong><br />
-<a href="https://validator.schema.org/"
+<p><strong>Schema.org Validator:</strong> <a
+href="https://validator.schema.org/"
 class="uri">https://validator.schema.org/</a></p>
 <p>More lenient than Google’s tool. Good for checking if your JSON-LD is
 valid Schema.org, even if it won’t trigger rich results.</p>
@@ -5075,8 +5075,7 @@ required properties</h3>
 <p>For Product schema, you need:</p>
 <ul>
 <li>name</li>
-<li>image<br />
-</li>
+<li>image</li>
 <li>offers (with price, priceCurrency, availability)</li>
 </ul>
 <p>Missing any of these and Google won’t show rich results. The
