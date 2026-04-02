@@ -1179,9 +1179,7 @@ the implementation chapters.</p>
 years.</p>
 <h3 id="what-the-books-offer">What the books offer</h3>
 <p>Two companion books — MX: The Protocols and MX: The Handbook — show
-you how to implement MX, the practice that ensures machines can read
-your website, understand your content, and complete the actions that
-serve your goals. Together they cover:</p>
+you how to implement MX. Together they cover:</p>
 <ul>
 <li>Why websites need optimisation for machines (and the consequences
 for any web goal, not just commerce)</li>
@@ -1197,21 +1195,19 @@ requires</li>
 </ul>
 <p>MX applies to every web goal. Whether you sell products, inform
 patients, publish research, guide citizens through government services,
-recruit students, collect donations, or enable downloads, machines need
-explicit structure to complete those actions. A hospital needs automated
-systems to extract accurate drug information. A council needs them to
-report correct planning application status. A university needs them to
-cite accurate entry requirements. A charity needs them to explain
-eligibility criteria for support services. The technical patterns are
-identical — semantic HTML, structured data, explicit state — regardless
-of whether the goal is a purchase or a public service inquiry.</p>
-<p>This introduction is published as a standalone primer and also
-appears as the opening chapter of both MX books. MX: The Protocols is
-the definitive technical reference for architects, consultants, and
+recruit students, or enable downloads, machines need explicit structure
+to complete those actions. A hospital needs automated systems to extract
+accurate drug information. A council needs them to report correct
+planning application status. A university needs them to cite accurate
+entry requirements. The technical patterns are identical — semantic
+HTML, structured data, explicit state — regardless of whether the goal
+is a purchase or a public service inquiry.</p>
+<p>This introduction appears as the opening chapter of both MX books.
+MX: The Protocols is the technical reference for architects and
 practitioners implementing MX at scale. MX: The Handbook provides
-step-by-step platform-specific implementations for developers, UX
-designers, and content strategists. Both books share continuously
-updated appendices hosted at allabout.network.</p>
+platform-specific implementations for developers, UX designers, and
+content strategists. Both books share continuously updated appendices at
+allabout.network.</p>
 <hr />
 <h1 id="part-b-the-technical-foundation">Part B — The Technical
 Foundation</h1>
@@ -1647,7 +1643,7 @@ implementation. They diverge in specific areas, though: machines need
 JSON-LD structured data (screen readers do not parse it). Screen readers
 need focus management and keyboard navigation (machines do not interact
 with focus). Both need semantic HTML, heading hierarchy, and persistent
-feedback. The convergence is practical, not absolute.</p>
+feedback. The convergence is practical, not absolute. </p>
 <h3 id="machine-limitations-and-the-convergence-principle">Machine
 limitations and the convergence principle</h3>
 <p>Machines have zero-tolerance technical constraints. Unlike humans who
@@ -2525,46 +2521,36 @@ fields are required? How should machine discovery files work? What
 conventions ensure interoperability across platforms?</p>
 <p>The Gathering is an independent, community-governed standards body
 for Machine Experience. It develops open standards that enable content
-to be understood, interpreted, and processed more consistently by both
-people and AI systems. The standard is open. No fees. No gatekeeping.
-Anyone can read drafts and track progress.<a href="#fn21"
-class="footnote-ref" id="fnref21"
+to be understood, interpreted, and processed consistently by both people
+and AI systems. No fees. No gatekeeping. Anyone can read drafts and
+track progress.<a href="#fn21" class="footnote-ref" id="fnref21"
 role="doc-noteref"><sup>21</sup></a></p>
 <p>Standards move through a four-stage process: <strong>Propose</strong>
-(a contributor outlines the problem, defines scope and non-goals),
-<strong>Review</strong> (the community provides feedback, editors
-maintain consistency), <strong>Call for Consensus</strong> (a defined
-review window checks for unresolved objections), and
-<strong>Ratify</strong> (the draft is published as a versioned standard
-with full history preserved). All drafts, discussions, review notes, and
-decision records are hosted publicly on Stream, so participants can
-understand how each standard formed. Contributors include writers,
-editors, developers, content designers, and researchers, the
+(outline the problem, define scope and non-goals),
+<strong>Review</strong> (community feedback, editorial consistency),
+<strong>Call for Consensus</strong> (review window for unresolved
+objections), and <strong>Ratify</strong> (published as a versioned
+standard with full history). All drafts, discussions, and decision
+records are hosted publicly on Stream. Contributors include writers,
+editors, developers, content designers, and researchers — the
 practitioners who build the web machines consume.</p>
 <p>The Gathering addresses gaps that existing standards leave
-unresolved: defining what metadata is required, how access is
-controlled, how quality is measured, and how governance works. The
-llms.txt training-and-inference gap described earlier in this chapter is
-one example: a critical file format that falls between both access
-mechanisms because it is neither HTML (for training crawlers) nor
-targeted enough for inference-time queries. The Gathering is proposing a
-new standard to address this lack, so that machine discovery files are
-properly ingested by both mechanisms.</p>
+unresolved: what metadata is required, how access is controlled, how
+quality is measured, and how governance works. The llms.txt
+training-and-inference gap described earlier in this chapter is one
+example: a file format that falls between both access mechanisms. The
+Gathering is proposing a new standard so that machine discovery files
+are properly ingested by both.</p>
 <p>The relationship is straightforward: MX is the practice. The
 Gathering is the governance. Like Linux running on POSIX, a
 community-owned standard, with products built on it.</p>
 <h3 id="whats-next">What’s next</h3>
 <p>This chapter covered the business case, the technical reality, and
-the structural solution. You’ve seen what machines need, why they fail
-without it, and what MX implementation looks like in practice.</p>
-<p>The remaining chapters cover practical implementation:
-platform-specific patterns, organisational change management (including
-the dedicated roles and accountability structures that MX requires), and
-the technical architecture that makes your web presence machine-ready.
-The rest of this book shows you how to build it.</p>
-<p>For professional website analysis, the MX Web Audit Suite assesses
-machine-readiness and provides priority-based recommendations. More
-information is available at <a
+the structural solution. The remaining chapters cover practical
+implementation: platform-specific patterns, organisational change
+management, and the technical architecture that makes your web presence
+machine-ready. For professional website analysis, the MX Web Audit Suite
+assesses machine-readiness at <a
 href="https://allabout.network">https://allabout.network</a>.</p>
 <h3 id="cogs-self-describing-documents">Cogs — self-describing
 documents</h3>
@@ -2572,35 +2558,28 @@ documents</h3>
 applies to any file. A cog is any file that carries structured MX
 metadata. The most common form is a markdown file with YAML frontmatter
 — structured metadata for machines at the top, human-readable content
-below. Cogs are not limited to markdown, though. An HTML page becomes a
-cog when it carries <code>&lt;meta name="mx:*"&gt;</code> tags. A
-JavaScript file becomes a cog when its JSDoc comments include
-<code>@mx:*</code> tags. A shell script becomes a cog when it carries MX
-metadata in commented YAML. A CSS file becomes a cog when its comment
-block includes <code>@mx:*</code> tags. The carrier format changes to
-match the file type. The principle stays the same: metadata that
-machines can parse without reading the content. No tooling required. No
-registration. No infrastructure beyond a text editor.</p>
+below. But cogs are not limited to markdown. An HTML page becomes a cog
+when it carries <code>&lt;meta name="mx:*"&gt;</code> tags. A JavaScript
+or CSS file becomes a cog when its comments include <code>@mx:*</code>
+tags. A shell script becomes a cog when it carries MX metadata in
+commented YAML. The carrier format changes to match the file type. The
+principle stays the same: metadata that machines can parse without
+reading the content. No tooling required. No registration. No
+infrastructure beyond a text editor.</p>
 <p>Cogs work wherever files work. A cog on your laptop is useful to your
 local AI tools. A cog on a company file server is useful to your whole
 team. A cog in a git repository is versioned, reviewed, and travels with
 the code. None of these need a registry, a server, or any external
 infrastructure. The format is governed by The Gathering as an open
-standard (MIT licensed), and it stands entirely on its own.</p>
-<p>When cogs need to cross organisational boundaries — when a publisher
-needs to prove a file is genuine, when machines outside your
-organisation need to discover your documentation, when living documents
-need version tracking — that is where Reginald comes in. Reginald is a
-public registry that adds discovery, cryptographic attestation, and
-currency tracking. Registration is optional. Most cogs will never need
-it. A cog on a file server is already doing its job. Reginald is there
-when trust and discoverability demand it.</p>
-<p>The cog format and the Reginald registry are covered in depth in the
-companion volumes.</p>
+standard (MIT licensed) and stands entirely on its own.</p>
+<p>When cogs need to cross organisational boundaries — proving
+authenticity, enabling external discovery, or tracking versions —
+Reginald provides a public registry with cryptographic attestation and
+currency tracking. Registration is optional. The cog format and registry
+are covered in the companion volumes.</p>
 <hr />
 <p>CogNovaMX Ltd — Making the web work for everyone and everything that
 uses it.</p>
-<hr />
 <h1 id="chapter-1-dont-make-ai-think">Chapter 1: Don’t Make AI
 Think</h1>
 <h2 id="a-visitor-youll-never-see">A visitor you’ll never see</h2>
