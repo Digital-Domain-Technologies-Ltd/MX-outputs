@@ -329,10 +329,10 @@ Remarks</a></li>
 </nav>
 <h1 id="foreword-the-overlooked-users">Foreword: The overlooked
 users</h1>
-<h2 id="janus-boye-host-cms-experts-group-founder-boye-co">Janus Boye —
-Host, CMS Experts Group &amp; Founder, Boye &amp; Co</h2>
-<p>A new type of user is emerging, and most organisations are not yet
-set up to recognise them.</p>
+<h2
+id="a-new-type-of-user-is-emerging-and-most-organisations-are-not-yet-set-up-to-recognise-them">A
+new type of user is emerging, and most organisations are not yet set up
+to recognise them</h2>
 <p>AI agents that search, evaluate, and make decisions on behalf of
 others are already changing how traffic arrives and how decisions are
 made. In many cases, they bypass the journeys we have spent years
@@ -412,6 +412,8 @@ who we design for, and how consistently we follow through.</p>
 One where the growing role of AI helps push the web towards being more
 inclusive, more open, and more usable for all the users we have too
 often overlooked.</p>
+<p><strong>Janus Boye - Host, CMSExperts Group &amp; Founder, Boye &amp;
+Co</strong></p>
 <h1 id="preface">Preface</h1>
 <p>I didn’t set out to write about AI agents. I set out to book a
 holiday.</p>
@@ -2759,6 +2761,14 @@ you never intended, and making decisions that affect your business.</p>
 pages — and why your beautiful design might be making you invisible.</p>
 <h1 id="chapter-2-how-ai-reads-vs.-how-humans-read">Chapter 2: How AI
 Reads (vs. How Humans Read)</h1>
+<blockquote>
+<p><strong>For detailed analysis:</strong> This chapter focuses on
+<em>how</em> machines parse HTML. For detailed examples of specific
+patterns that break for machines (toast notifications, pagination, SPAs,
+hidden pricing, validation failures), see <strong>MX: The
+Protocols</strong> — which provides extensive real-world failure case
+studies and business impact analysis.</p>
+</blockquote>
 <h2 id="the-human-reading-experience">The human reading experience</h2>
 <p>When you visit a website, you experience it all at once. Your eyes
 scan the page, picking up visual hierarchy from size, colour, and
@@ -2788,21 +2798,12 @@ billions of web pages</li>
 <p>Notice what’s missing? Everything visual. The AI doesn’t see your
 page. It reads your code.</p>
 <p>Let me show you the difference with a real example.</p>
-<blockquote>
-<p><strong>For detailed analysis:</strong> This chapter focuses on
-<em>how</em> machines parse HTML. For detailed examples of specific
-patterns that break for machines (toast notifications, pagination, SPAs,
-hidden pricing, validation failures), see <strong>MX: The
-Protocols</strong> — which provides extensive real-world failure case
-studies and business impact analysis.</p>
-</blockquote>
 <h2 id="example-the-hero-section">Example: The hero section</h2>
 <p>Here’s what a human sees when visiting a typical corporate
 homepage:</p>
-<p><strong>[Large background image of modern office]</strong><br />
-<strong>We Transform Businesses Through Innovation</strong><br />
-Strategic consulting for the digital age<br />
-[Learn More Button] [Contact Us Button]</p>
+<p><strong>[Large background image of modern office]</strong> <strong>We
+Transform Businesses Through Innovation</strong> Strategic consulting
+for the digital age [Learn More Button] [Contact Us Button]</p>
 <p>Clean. Professional. Clear hierarchy. The large heading obviously
 matters most, the subheading provides context, the buttons show
 available actions.</p>
@@ -2975,8 +2976,8 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb10-1"><a href=
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>A parser fetching raw HTML gets an empty div. The actual product
 details never appear unless the JavaScript executes. Many machines don’t
-execute JavaScript-they’re reading the source as delivered.</p>
-<p><strong>Visual hierarchy through styling:</strong></p>
+execute JavaScript-they’re reading the source as delivered.
+<strong>Visual hierarchy through styling:</strong></p>
 <div class="sourceCode" id="cb11"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> style</span><span class="op">=</span><span class="st">&quot;font-size: 48px&quot;</span><span class="dt">&gt;</span>Big Important Text<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> style</span><span class="op">=</span><span class="st">&quot;font-size: 12px&quot;</span><span class="dt">&gt;</span>Less important detail<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
@@ -3008,27 +3009,24 @@ approaches in use:</p>
 CSS. They’re looking at your source code directly. Search engine
 crawlers often work this way for initial discovery. Many LLM-based tools
 fetch raw HTML to save processing costs.</p>
-<p>What they see: Pure HTML structure<br />
-What they miss: Anything requiring JavaScript, CSS-based visual
-cues<br />
-Example: Early-stage web crawlers, some API-based tools</p>
+<p>What they see: Pure HTML structure What they miss: Anything requiring
+JavaScript, CSS-based visual cues Example: Early-stage web crawlers,
+some API-based tools</p>
 <p><strong>2. Browser-based agents (the executors)</strong></p>
 <p>These run full browsers-Chrome, Firefox, or headless versions. They
 execute JavaScript, load CSS, run animations. They can interact:
 clicking buttons, filling forms, scrolling pages. Some can even wait for
 content to load asynchronously.</p>
-<p>What they see: The rendered page, as a human would<br />
-What they miss: Nothing technical, but they still interpret via DOM, not
-visual perception<br />
-Example: Browser automation tools, some AI assistants with web
-interaction</p>
+<p>What they see: The rendered page, as a human would What they miss:
+Nothing technical, but they still interpret via DOM, not visual
+perception Example: Browser automation tools, some AI assistants with
+web interaction</p>
 <p><strong>3. Vision models (the screenshot readers)</strong></p>
 <p>These take screenshots of rendered pages and use computer vision to
 extract information. They can see visual hierarchy, notice that red
 warning text, understand layout through spatial relationships.</p>
-<p>What they see: The visual presentation<br />
-What they miss: Links (can see buttons but not href values), underlying
-structure, non-visual metadata<br />
+<p>What they see: The visual presentation What they miss: Links (can see
+buttons but not href values), underlying structure, non-visual metadata
 Example: frontier models with vision capabilities, multimodal AI
 systems</p>
 <h2 id="how-machines-access-your-content">How machines access your
@@ -3105,11 +3103,10 @@ Understanding and Purchase Confidence, browser-based agents and vision
 models need to parse dynamic content correctly.</p>
 <p>That sounds daunting, but there’s good news: proper semantic HTML
 serves all three types effectively.</p>
-<p>The raw parser gets clear structure from semantic elements.<br />
-The browser-based agent can execute your JavaScript but doesn’t depend
-on it for basic content.<br />
-The vision model sees proper visual hierarchy because you’ve styled
-semantic elements appropriately.</p>
+<p>The raw parser gets clear structure from semantic elements. The
+browser-based agent can execute your JavaScript but doesn’t depend on it
+for basic content. The vision model sees proper visual hierarchy because
+you’ve styled semantic elements appropriately.</p>
 <p>Here’s a real example from my documentation work with Adobe Edge
 Delivery Services. I needed documentation that both developers could
 read and AI could parse.</p>
@@ -3155,10 +3152,10 @@ visual patterns that guide the eye. AI benefits from semantic patterns
 that guide parsing. The solution is recognising that they’re implemented
 in different layers.</p>
 <p><strong>Visual layer (CSS):</strong> Create the F-pattern, guide the
-eye with colour and size, make buttons look clickable<br />
-<strong>Semantic layer (HTML):</strong> Create clear hierarchy with
-headings, mark up navigation as <code>nav</code>, identify main content
-with <code>main</code></p>
+eye with colour and size, make buttons look clickable <strong>Semantic
+layer (HTML):</strong> Create clear hierarchy with headings, mark up
+navigation as <code>nav</code>, identify main content with
+<code>main</code></p>
 <p>The two layers work together. Remove the CSS and the semantic layer
 still makes sense. That’s the test: does your content have meaning
 without styling?</p>
@@ -3186,14 +3183,6 @@ straightforward, but the “obvious” part works differently.</p>
 <p>Humans rely on visual cues and learned patterns. AI relies on
 explicit structure and semantic meaning. The good news? You can serve
 both with the same HTML if you follow a few guiding principles.</p>
-<blockquote>
-<p><strong>For theoretical foundation:</strong> These principles emerge
-from fundamental differences between human cognition and machine
-parsing. For detailed analysis of <em>why</em> this architectural
-conflict exists (progressive disclosure vs explicit state, spatial
-memory vs document order, time-based cues vs persistent signals), see
-<strong>MX: The Protocols</strong>.</p>
-</blockquote>
 <p>Here are the four principles that form the foundation of everything
 else in this book:</p>
 <ol type="1">
@@ -3445,8 +3434,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb24-1"><a href=
 <p>This microdata makes explicit promises:</p>
 <ul>
 <li>This is a local business</li>
-<li>The name is “Manchester Motors”<br />
-</li>
+<li>The name is “Manchester Motors”</li>
 <li>The address components are structured and labelled</li>
 <li>The phone and email are marked as contact information</li>
 <li>The description explains what the business does</li>
@@ -3491,8 +3479,7 @@ You don’t need them all. Focus on:</p>
 information</li>
 <li><strong>Product</strong>: For products you sell</li>
 <li><strong>Article</strong>: For blog posts and news</li>
-<li><strong>FAQPage</strong>: For FAQ sections<br />
-</li>
+<li><strong>FAQPage</strong>: For FAQ sections</li>
 <li><strong>HowTo</strong>: For step-by-step instructions (a Schema.org
 type that marks up procedural content — each step, tool, and supply — so
 machines can extract and present the full procedure without interpreting
@@ -3519,35 +3506,35 @@ patterns:</p>
 class="sourceCode html"><code class="sourceCode html"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">main</span><span class="dt">&gt;</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">article</span><span class="ot"> itemscope itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/Product&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="dt">&gt;</span>Professional Standing Desk<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;desk.jpg&quot;</span><span class="ot"> </span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;desk.jpg&quot;</span></span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="ot">         alt</span><span class="op">=</span><span class="st">&quot;White adjustable standing desk with</span></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="st">              electric height control showing</span></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="st">              desk raised to standing position&quot;</span></span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="ot">         itemprop</span><span class="op">=</span><span class="st">&quot;image&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;description&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>      Electric height-adjustable desk with memory presets, </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>      cable management, and whisper-quiet motor. </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>      Electric height-adjustable desk with memory presets,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>      cable management, and whisper-quiet motor.</span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>      Suitable for home offices and professional workspaces.</span>
 <span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Price<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
 <span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">data</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;price&quot;</span><span class="ot"> value</span><span class="op">=</span><span class="st">&quot;599&quot;</span><span class="dt">&gt;</span>£599<span class="dt">&lt;/</span><span class="kw">data</span><span class="dt">&gt;</span></span>
 <span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;priceCurrency&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;GBP&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Availability<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dd</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;availability&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://schema.org/InStock&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>        In Stock</span>
 <span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Dimensions<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;</span>120cm × 60cm (adjustable height 70cm - 120cm)<span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
 <span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
-<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;button&quot;</span></span>
 <span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a><span class="ot">            aria-label</span><span class="op">=</span><span class="st">&quot;Add Professional Standing Desk</span></span>
 <span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a><span class="st">                         to shopping cart&quot;</span><span class="dt">&gt;</span></span>
@@ -3604,7 +3591,7 @@ alt text.</p>
 class="sourceCode html"><code class="sourceCode html"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;product-001.jpg&quot;</span><span class="ot"> alt</span><span class="op">=</span><span class="st">&quot;product&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>Good alt text serves all audiences:</p>
 <div class="sourceCode" id="cb28"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;product-001.jpg&quot;</span><span class="ot"> </span></span>
+class="sourceCode html"><code class="sourceCode html"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;product-001.jpg&quot;</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ot">     alt</span><span class="op">=</span><span class="st">&quot;Standing desk raised to maximum height</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="st">          showing the motor housing and</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="st">          control panel&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
@@ -3640,10 +3627,9 @@ positioned differently.</p>
 <h2 id="when-principles-conflict-with-reality">When principles conflict
 with reality</h2>
 <p>I can hear the objections already:</p>
-<p>“Our design system uses div elements for everything.”<br />
-“We can’t change the HTML without breaking the CSS.”<br />
-“The framework we use generates the markup.”<br />
-“We don’t have budget to rebuild everything.”</p>
+<p>“Our design system uses div elements for everything.” “We can’t
+change the HTML without breaking the CSS.” “The framework we use
+generates the markup.” “We don’t have budget to rebuild everything.”</p>
 <p>All valid concerns. Here’s the thing: you don’t need perfection. You
 need improvement.</p>
 <p>Start with high-value pages:</p>
@@ -3700,6 +3686,14 @@ navigate and understand them. We’ll cover navigation patterns, article
 structure, product pages, and forms.</p>
 <p>Each pattern will show you the before (what doesn’t work) and after
 (what does), with real examples you can adapt to your own sites.</p>
+<blockquote>
+<p><strong>For theoretical foundation:</strong> These principles emerge
+from fundamental differences between human cognition and machine
+parsing. For detailed analysis of <em>why</em> this architectural
+conflict exists (progressive disclosure vs explicit state, spatial
+memory vs document order, time-based cues vs persistent signals), see
+<strong>MX: The Protocols</strong>.</p>
+</blockquote>
 <hr />
 <p><strong>Coming up in Chapter 4:</strong> Content architecture
 patterns for common page types-the building blocks of AI-readable
@@ -3787,7 +3781,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb30-1"><a href=
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;post-body&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;intro&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>      Choosing a content management system is one of the most important </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>      Choosing a content management system is one of the most important</span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>      decisions you&#39;ll make for your website...</span>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;section&quot;</span><span class="dt">&gt;</span></span>
@@ -3810,39 +3804,30 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb31-1"><a href=
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">header</span><span class="dt">&gt;</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;headline&quot;</span><span class="dt">&gt;</span>How to Choose the Right CMS<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>      By <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;author&quot;</span><span class="dt">&gt;</span>John Smith<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> | </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>      By <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;author&quot;</span><span class="dt">&gt;</span>John Smith<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> |</span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">time</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;datePublished&quot;</span><span class="ot"> datetime</span><span class="op">=</span><span class="st">&quot;2024-03-15&quot;</span><span class="dt">&gt;</span>15 March 2024<span class="dt">&lt;/</span><span class="kw">time</span><span class="dt">&gt;</span></span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;articleBody&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;lede&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>      Choosing a content management system is one of the most important </span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>      Choosing a content management system is one of the most important</span>
 <span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>      decisions you&#39;ll make for your website...</span>
 <span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Consider your requirements<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Start by listing what you actually need...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Content authoring needs<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
 <span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>How many people will create content?...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- More sections --&gt;</span></span>
 <span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Technical requirements<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
 <span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>What integrations do you need?...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Evaluate the options<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Once you know what you need...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Traditional CMS platforms<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>WordPress, Drupal, and similar systems...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Headless CMS solutions<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Modern headless systems like Contentful...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Making the decision<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>With your requirements clear and options evaluated...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span></code></pre></div>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Making the decision<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>With your requirements clear and options evaluated...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>What changed:</p>
 <p><strong>Document structure:</strong></p>
 <ul>
@@ -3903,7 +3888,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb32-1"><a href=
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;product-2.jpg&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;product-info&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;product-name&quot;</span><span class="dt">&gt;</span>Wireless Keyboard<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;product-price&quot;</span><span class="dt">&gt;</span>£79.99<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
@@ -3912,7 +3897,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb32-1"><a href=
 <span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;review-count&quot;</span><span class="dt">&gt;</span>127 reviews<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
 <span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;product-details&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;tab-content&quot;</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;specs&quot;</span><span class="ot"> style</span><span class="op">=</span><span class="st">&quot;display:none&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>      Battery life: 6 months</span>
@@ -3935,25 +3920,25 @@ might skip it)</li>
 class="sourceCode html"><code class="sourceCode html"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">main</span><span class="dt">&gt;</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">article</span><span class="ot"> itemscope itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/Product&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="dt">&gt;</span>Wireless Keyboard<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;product-images&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;image&quot;</span><span class="ot"> </span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="ot">           src</span><span class="op">=</span><span class="st">&quot;product-main.jpg&quot;</span><span class="ot"> </span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;image&quot;</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="ot">           src</span><span class="op">=</span><span class="st">&quot;product-main.jpg&quot;</span></span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="ot">           alt</span><span class="op">=</span><span class="st">&quot;Wireless keyboard with backlit keys in dark grey finish&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;product-1.jpg&quot;</span><span class="ot"> </span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;product-1.jpg&quot;</span></span>
 <span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="ot">           alt</span><span class="op">=</span><span class="st">&quot;Close-up view of keyboard keys showing backlighting&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;product-2.jpg&quot;</span><span class="ot"> </span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;product-2.jpg&quot;</span></span>
 <span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="ot">           alt</span><span class="op">=</span><span class="st">&quot;Side view showing keyboard profile and USB receiver&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="dt">&gt;</span></span>
 <span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Overview<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;description&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>        Professional wireless keyboard with LED backlighting, </span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>        six-month battery life, and Bluetooth 5.0 connectivity. </span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>        Professional wireless keyboard with LED backlighting,</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>        six-month battery life, and Bluetooth 5.0 connectivity.</span>
 <span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>        Features UK QWERTY layout with dedicated media keys.</span>
 <span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Price<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dd</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;offers&quot;</span><span class="ot"> itemscope itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/Offer&quot;</span><span class="dt">&gt;</span></span>
@@ -3962,7 +3947,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb33-1"><a href=
 <span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;availability&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;https://schema.org/InStock&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">span</span><span class="dt">&gt;</span>In Stock<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
 <span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Customer Rating<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dd</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;aggregateRating&quot;</span><span class="ot"> itemscope</span></span>
 <span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a><span class="ot">            itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/AggregateRating&quot;</span><span class="dt">&gt;</span></span>
@@ -3971,27 +3956,27 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb33-1"><a href=
 <span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
 <span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="dt">&gt;</span></span>
 <span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Technical Specifications<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Battery Life<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;</span>6 months (typical use)<span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Connectivity<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;</span>Bluetooth 5.0, 2.4GHz USB receiver included<span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Layout<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;</span>UK QWERTY with number pad<span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Dimensions<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;</span>440mm × 130mm × 25mm<span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Weight<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;</span>600g (without batteries)<span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
 <span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="dt">&gt;</span></span>
 <span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Purchase<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">form</span><span class="ot"> action</span><span class="op">=</span><span class="st">&quot;/cart/add&quot;</span><span class="ot"> method</span><span class="op">=</span><span class="st">&quot;post&quot;</span><span class="dt">&gt;</span></span>
@@ -4144,38 +4129,38 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb37-1"><a href=
 <div class="sourceCode" id="cb38"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> itemscope itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/FAQPage&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Frequently Asked Questions<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">article</span><span class="ot"> itemscope itemprop</span><span class="op">=</span><span class="st">&quot;mainEntity&quot;</span></span>
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="ot">           itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/Question&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="dt">&gt;</span>How long does delivery take?<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
 <span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> itemscope itemprop</span><span class="op">=</span><span class="st">&quot;acceptedAnswer&quot;</span></span>
 <span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="ot">         itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/Answer&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;text&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>        Standard delivery takes 3-5 business days. Express delivery </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>        Standard delivery takes 3-5 business days. Express delivery</span>
 <span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>        (next business day) is available for orders placed before 2pm.</span>
 <span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">article</span><span class="ot"> itemscope itemprop</span><span class="op">=</span><span class="st">&quot;mainEntity&quot;</span></span>
 <span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="ot">           itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/Question&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="dt">&gt;</span>What payment methods do you accept?<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
 <span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> itemscope itemprop</span><span class="op">=</span><span class="st">&quot;acceptedAnswer&quot;</span></span>
 <span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="ot">         itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/Answer&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;text&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>        We accept all major credit cards (Visa, Mastercard, American Express), </span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>        We accept all major credit cards (Visa, Mastercard, American Express),</span>
 <span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>        PayPal, and bank transfer for business accounts.</span>
 <span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">article</span><span class="ot"> itemscope itemprop</span><span class="op">=</span><span class="st">&quot;mainEntity&quot;</span></span>
 <span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a><span class="ot">           itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/Question&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="dt">&gt;</span>Can I return items?<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
 <span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> itemscope itemprop</span><span class="op">=</span><span class="st">&quot;acceptedAnswer&quot;</span></span>
 <span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a><span class="ot">         itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/Answer&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;text&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>        Yes, we offer a 30-day return policy. Items must be unused and in </span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>        Yes, we offer a 30-day return policy. Items must be unused and in</span>
 <span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>        original packaging. Contact our support team to arrange a return.</span>
 <span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
@@ -4235,7 +4220,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb39-1"><a href=
 <div class="sourceCode" id="cb40"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">main</span><span class="dt">&gt;</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Contact Us<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> itemscope itemtype</span><span class="op">=</span><span class="st">&quot;https://schema.org/LocalBusiness&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Our Office<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="dt">&gt;</span>Digital Domain Technologies Ltd<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
@@ -4246,25 +4231,25 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb40-1"><a href=
 <span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;postalCode&quot;</span><span class="dt">&gt;</span>M1 7ED<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
 <span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;addressCountry&quot;</span><span class="dt">&gt;</span>United Kingdom<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">address</span><span class="dt">&gt;</span></span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Phone<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;tel:+441611234567&quot;</span></span>
 <span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="ot">              itemprop</span><span class="op">=</span><span class="st">&quot;telephone&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>        0161 123 4567<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
-<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Email<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;mailto:info@digitaldomain.co.uk&quot;</span></span>
 <span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="ot">              itemprop</span><span class="op">=</span><span class="st">&quot;email&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>        info@digitaldomain.co.uk<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
-<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Business Hours<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
 <span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">dd</span><span class="ot"> itemprop</span><span class="op">=</span><span class="st">&quot;openingHours&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Mo-Fr 09:00-17:00&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>        Monday to Friday, 9am - 5pm</span>
 <span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
 <span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">section</span><span class="dt">&gt;</span></span>
 <span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Send us a message<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">form</span><span class="ot"> action</span><span class="op">=</span><span class="st">&quot;/contact/submit&quot;</span><span class="ot"> method</span><span class="op">=</span><span class="st">&quot;post&quot;</span><span class="dt">&gt;</span></span>
@@ -4272,27 +4257,27 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb40-1"><a href=
 <span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="dt">&gt;</span>Your Name<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
 <span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;text&quot;</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="ot"> required</span><span class="dt">&gt;</span></span>
 <span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">&quot;email&quot;</span><span class="dt">&gt;</span>Email Address<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
 <span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;email&quot;</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;email&quot;</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;email&quot;</span><span class="ot"> required</span><span class="dt">&gt;</span></span>
 <span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">&quot;phone&quot;</span><span class="dt">&gt;</span>Phone Number (optional)<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
 <span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;tel&quot;</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;phone&quot;</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;phone&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">&quot;subject&quot;</span><span class="dt">&gt;</span>Subject<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
 <span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;text&quot;</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;subject&quot;</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;subject&quot;</span><span class="ot"> required</span><span class="dt">&gt;</span></span>
 <span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">&quot;message&quot;</span><span class="dt">&gt;</span>Message<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
 <span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">textarea</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;message&quot;</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;message&quot;</span><span class="ot"> rows</span><span class="op">=</span><span class="st">&quot;6&quot;</span><span class="ot"> required</span><span class="dt">&gt;&lt;/</span><span class="kw">textarea</span><span class="dt">&gt;</span></span>
 <span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;submit&quot;</span><span class="dt">&gt;</span>Send Message<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
 <span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span>
 <span id="cb40-63"><a href="#cb40-63" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
@@ -5223,14 +5208,13 @@ metadata, but if AI can’t discover them or understand how they relate to
 each other, you never reach Level 2 (Structured), Level 3 (Attested), or
 any subsequent level. Discovery is the gatekeeper.</p>
 <p>AI discovers content through three main mechanisms:</p>
-<p><strong>1. Direct URL requests</strong><br />
-Someone asks: “What does the Digital Domain Technologies service page
-say about Edge Delivery?” The AI already knows the URL (perhaps from
-previous searches or a sitemap) and fetches that specific page.</p>
-<p><strong>2. Following links</strong><br />
-AI starts at your homepage (or a known page) and follows links to
-discover other content. This is how search engine crawlers work, and
-many machines use similar patterns.</p>
+<p><strong>1. Direct URL requests</strong> Someone asks: “What does the
+Digital Domain Technologies service page say about Edge Delivery?” The
+AI already knows the URL (perhaps from previous searches or a sitemap)
+and fetches that specific page.</p>
+<p><strong>2. Following links</strong> AI starts at your homepage (or a
+known page) and follows links to discover other content. This is how
+search engine crawlers work, and many machines use similar patterns.</p>
 <p><strong>3. Sitemaps</strong> Your sitemap.xml provides a structured
 list of URLs. AI can parse this to understand your site’s scope and
 priority pages.</p>
@@ -5275,10 +5259,9 @@ class="sourceCode xml"><code class="sourceCode xml"><span id="cb62-1"><a href="#
 <span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">url</span>&gt;</span>
 <span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">urlset</span>&gt;</span></code></pre></div>
 <p>The elements that matter:</p>
-<p><strong>loc</strong> — The full URL (required)<br />
+<p><strong>loc</strong> — The full URL (required)
 <strong>lastmod</strong> — When the page was last changed (ISO 8601
-date)<br />
-<strong>priority</strong> — Relative importance (0.0 to 1.0)<br />
+date) <strong>priority</strong> — Relative importance (0.0 to 1.0)
 <strong>changefreq</strong> — How often it changes (daily, weekly,
 monthly, yearly)</p>
 <p>Forget <code>changefreq</code>. Google ignores it, and it’s too hard
@@ -5294,7 +5277,7 @@ class="sourceCode xml"><code class="sourceCode xml"><span id="cb63-1"><a href="#
 <span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">lastmod</span>&gt;2024-03-20&lt;/<span class="kw">lastmod</span>&gt;</span>
 <span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">priority</span>&gt;1.0&lt;/<span class="kw">priority</span>&gt;</span>
 <span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">url</span>&gt;</span>
-<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Main sections --&gt;</span></span>
 <span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">url</span>&gt;</span>
 <span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">loc</span>&gt;https://www.example.com/services&lt;/<span class="kw">loc</span>&gt;</span>
@@ -5306,7 +5289,7 @@ class="sourceCode xml"><code class="sourceCode xml"><span id="cb63-1"><a href="#
 <span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">lastmod</span>&gt;2024-03-18&lt;/<span class="kw">lastmod</span>&gt;</span>
 <span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">priority</span>&gt;0.9&lt;/<span class="kw">priority</span>&gt;</span>
 <span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">url</span>&gt;</span>
-<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-22"><a href="#cb63-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Service pages --&gt;</span></span>
 <span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">url</span>&gt;</span>
 <span id="cb63-24"><a href="#cb63-24" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">loc</span>&gt;https://www.example.com/services/edge-delivery&lt;/<span class="kw">loc</span>&gt;</span>
@@ -5318,14 +5301,14 @@ class="sourceCode xml"><code class="sourceCode xml"><span id="cb63-1"><a href="#
 <span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">lastmod</span>&gt;2024-03-12&lt;/<span class="kw">lastmod</span>&gt;</span>
 <span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">priority</span>&gt;0.8&lt;/<span class="kw">priority</span>&gt;</span>
 <span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">url</span>&gt;</span>
-<span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-34"><a href="#cb63-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Blog posts --&gt;</span></span>
 <span id="cb63-35"><a href="#cb63-35" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">url</span>&gt;</span>
 <span id="cb63-36"><a href="#cb63-36" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">loc</span>&gt;https://www.example.com/blog/migrating-to-eds&lt;/<span class="kw">loc</span>&gt;</span>
 <span id="cb63-37"><a href="#cb63-37" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">lastmod</span>&gt;2024-03-20&lt;/<span class="kw">lastmod</span>&gt;</span>
 <span id="cb63-38"><a href="#cb63-38" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">priority</span>&gt;0.7&lt;/<span class="kw">priority</span>&gt;</span>
 <span id="cb63-39"><a href="#cb63-39" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">url</span>&gt;</span>
-<span id="cb63-40"><a href="#cb63-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb63-40"><a href="#cb63-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-41"><a href="#cb63-41" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Supporting pages --&gt;</span></span>
 <span id="cb63-42"><a href="#cb63-42" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">url</span>&gt;</span>
 <span id="cb63-43"><a href="#cb63-43" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">loc</span>&gt;https://www.example.com/about&lt;/<span class="kw">loc</span>&gt;</span>
@@ -5347,8 +5330,7 @@ class="sourceCode xml"><code class="sourceCode xml"><span id="cb63-1"><a href="#
 <li>Supporting pages: 0.5-0.6</li>
 </ul>
 <p>This tells AI which pages matter most when it’s deciding what to
-crawl or recommend.</p>
-<p><strong>Sitemap index for large sites:</strong></p>
+crawl or recommend. <strong>Sitemap index for large sites:</strong></p>
 <p>If you have hundreds or thousands of pages, split into multiple
 sitemaps:</p>
 <div class="sourceCode" id="cb64"><pre
@@ -5376,17 +5358,17 @@ class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb65
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>app<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;/sitemap.xml&#39;</span><span class="op">,</span> <span class="kw">async</span> (req<span class="op">,</span> res) <span class="kw">=&gt;</span> {</span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> pages <span class="op">=</span> <span class="cf">await</span> <span class="fu">getPages</span>()<span class="op">;</span></span>
 <span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> posts <span class="op">=</span> <span class="cf">await</span> <span class="fu">getBlogPosts</span>()<span class="op">;</span></span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> xml <span class="op">=</span> <span class="st">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><span class="sc">\n</span><span class="st">&#39;</span><span class="op">;</span></span>
 <span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  xml <span class="op">+=</span> <span class="st">&#39;&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;</span><span class="sc">\n</span><span class="st">&#39;</span><span class="op">;</span></span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Homepage</span></span>
 <span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>  xml <span class="op">+=</span> <span class="st">&#39;  &lt;url&gt;</span><span class="sc">\n</span><span class="st">&#39;</span><span class="op">;</span></span>
 <span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>  xml <span class="op">+=</span> <span class="vs">`    &lt;loc&gt;https://www.example.com/&lt;/loc&gt;</span><span class="sc">\n</span><span class="vs">`</span><span class="op">;</span></span>
 <span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a>  xml <span class="op">+=</span> <span class="vs">`    &lt;lastmod&gt;</span><span class="sc">${</span><span class="kw">new</span> <span class="bu">Date</span>()<span class="op">.</span><span class="fu">toISOString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;T&#39;</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="vs">&lt;/lastmod&gt;</span><span class="sc">\n</span><span class="vs">`</span><span class="op">;</span></span>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a>  xml <span class="op">+=</span> <span class="vs">`    &lt;priority&gt;1.0&lt;/priority&gt;</span><span class="sc">\n</span><span class="vs">`</span><span class="op">;</span></span>
 <span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a>  xml <span class="op">+=</span> <span class="st">&#39;  &lt;/url&gt;</span><span class="sc">\n</span><span class="st">&#39;</span><span class="op">;</span></span>
-<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Dynamic pages</span></span>
 <span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a>  pages<span class="op">.</span><span class="fu">forEach</span>(page <span class="kw">=&gt;</span> {</span>
 <span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a>    xml <span class="op">+=</span> <span class="st">&#39;  &lt;url&gt;</span><span class="sc">\n</span><span class="st">&#39;</span><span class="op">;</span></span>
@@ -5397,7 +5379,7 @@ class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb65
 <span id="cb65-23"><a href="#cb65-23" aria-hidden="true" tabindex="-1"></a>    xml <span class="op">+=</span> <span class="vs">`    &lt;priority&gt;</span><span class="sc">${</span>page<span class="op">.</span><span class="at">priority</span> <span class="op">||</span> <span class="fl">0.8</span><span class="sc">}</span><span class="vs">&lt;/priority&gt;</span><span class="sc">\n</span><span class="vs">`</span><span class="op">;</span></span>
 <span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a>    xml <span class="op">+=</span> <span class="st">&#39;  &lt;/url&gt;</span><span class="sc">\n</span><span class="st">&#39;</span><span class="op">;</span></span>
 <span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
-<span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-27"><a href="#cb65-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Blog posts</span></span>
 <span id="cb65-28"><a href="#cb65-28" aria-hidden="true" tabindex="-1"></a>  posts<span class="op">.</span><span class="fu">forEach</span>(post <span class="kw">=&gt;</span> {</span>
 <span id="cb65-29"><a href="#cb65-29" aria-hidden="true" tabindex="-1"></a>    xml <span class="op">+=</span> <span class="st">&#39;  &lt;url&gt;</span><span class="sc">\n</span><span class="st">&#39;</span><span class="op">;</span></span>
@@ -5408,9 +5390,9 @@ class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb65
 <span id="cb65-34"><a href="#cb65-34" aria-hidden="true" tabindex="-1"></a>    xml <span class="op">+=</span> <span class="vs">`    &lt;priority&gt;0.7&lt;/priority&gt;</span><span class="sc">\n</span><span class="vs">`</span><span class="op">;</span></span>
 <span id="cb65-35"><a href="#cb65-35" aria-hidden="true" tabindex="-1"></a>    xml <span class="op">+=</span> <span class="st">&#39;  &lt;/url&gt;</span><span class="sc">\n</span><span class="st">&#39;</span><span class="op">;</span></span>
 <span id="cb65-36"><a href="#cb65-36" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
-<span id="cb65-37"><a href="#cb65-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-37"><a href="#cb65-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-38"><a href="#cb65-38" aria-hidden="true" tabindex="-1"></a>  xml <span class="op">+=</span> <span class="st">&#39;&lt;/urlset&gt;&#39;</span><span class="op">;</span></span>
-<span id="cb65-39"><a href="#cb65-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-39"><a href="#cb65-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-40"><a href="#cb65-40" aria-hidden="true" tabindex="-1"></a>  res<span class="op">.</span><span class="fu">header</span>(<span class="st">&#39;Content-Type&#39;</span><span class="op">,</span> <span class="st">&#39;application/xml&#39;</span>)<span class="op">;</span></span>
 <span id="cb65-41"><a href="#cb65-41" aria-hidden="true" tabindex="-1"></a>  res<span class="op">.</span><span class="fu">send</span>(xml)<span class="op">;</span></span>
 <span id="cb65-42"><a href="#cb65-42" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
@@ -5423,12 +5405,12 @@ goes there and what to expect.</p>
 <p><strong>Bad link text:</strong></p>
 <div class="sourceCode" id="cb66"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  We offer Edge Delivery Services consulting. </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  We offer Edge Delivery Services consulting.</span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/services/eds&quot;</span><span class="dt">&gt;</span>Click here<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span> for more information.</span>
 <span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  Read our latest blog post </span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  Read our latest blog post</span>
 <span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/blog/migration-guide&quot;</span><span class="dt">&gt;</span>here<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>.</span>
 <span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a></span>
@@ -5446,12 +5428,12 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb66-1"><a href=
 <p><strong>Better link text:</strong></p>
 <div class="sourceCode" id="cb67"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  We offer Edge Delivery Services consulting. </span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  We offer Edge Delivery Services consulting.</span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/services/eds&quot;</span><span class="dt">&gt;</span>Learn about our EDS consulting services<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>.</span>
 <span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  Read our latest blog post: </span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  Read our latest blog post:</span>
 <span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/blog/migration-guide&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>    Migrating from AEM Classic to</span>
 <span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>    Edge Delivery Services<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>.</span>
@@ -5493,8 +5475,7 @@ list. Does each one make sense? Can you tell where it goes?</p>
 <p>The second list works without any surrounding context.</p>
 <h2 id="internal-linking-strategy">Internal linking strategy</h2>
 <p>Internal links serve two purposes for AI:</p>
-<p><strong>1. Discovery:</strong> AI finds new pages by following
-links<br />
+<p><strong>1. Discovery:</strong> AI finds new pages by following links
 <strong>2. Context:</strong> Links establish relationships between
 topics</p>
 <p>Your internal linking should create a semantic web that helps AI
@@ -5520,10 +5501,10 @@ and to related spokes.</p>
 class="sourceCode html"><code class="sourceCode html"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">main</span><span class="dt">&gt;</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Our Services<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>    We provide consultancy across Adobe Experience Manager and </span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>    We provide consultancy across Adobe Experience Manager and</span>
 <span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>    Edge Delivery Services implementations.</span>
 <span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">section</span><span class="dt">&gt;</span></span>
 <span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Edge Delivery Services<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
@@ -5531,7 +5512,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb69-1"><a href=
 <span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/services/edge-delivery&quot;</span><span class="dt">&gt;</span>Explore EDS consulting<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
 <span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">section</span><span class="dt">&gt;</span></span>
 <span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>AEM Consulting<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb69-18"><a href="#cb69-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
@@ -5539,7 +5520,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb69-1"><a href=
 <span id="cb69-20"><a href="#cb69-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/services/aem-consulting&quot;</span><span class="dt">&gt;</span>Learn about AEM consulting<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
 <span id="cb69-21"><a href="#cb69-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb69-22"><a href="#cb69-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb69-23"><a href="#cb69-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb69-23"><a href="#cb69-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-24"><a href="#cb69-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">section</span><span class="dt">&gt;</span></span>
 <span id="cb69-25"><a href="#cb69-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Training and Support<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb69-26"><a href="#cb69-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
@@ -5547,7 +5528,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb69-1"><a href=
 <span id="cb69-28"><a href="#cb69-28" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/services/training&quot;</span><span class="dt">&gt;</span>View training programmes<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
 <span id="cb69-29"><a href="#cb69-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb69-30"><a href="#cb69-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb69-31"><a href="#cb69-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb69-31"><a href="#cb69-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-32"><a href="#cb69-32" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">aside</span><span class="dt">&gt;</span></span>
 <span id="cb69-33"><a href="#cb69-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Related Resources<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb69-34"><a href="#cb69-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
@@ -5568,23 +5549,23 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb69-1"><a href=
 <div class="sourceCode" id="cb70"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">article</span><span class="dt">&gt;</span></span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Migrating from AEM Classic to Edge Delivery Services<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>    The migration process involves several stages. First, you&#39;ll need to </span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/guides/content-audit&quot;</span><span class="dt">&gt;</span>audit your existing content<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span> to </span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>    determine what can be migrated automatically versus what needs manual </span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>    The migration process involves several stages. First, you&#39;ll need to</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/guides/content-audit&quot;</span><span class="dt">&gt;</span>audit your existing content<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span> to</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>    determine what can be migrated automatically versus what needs manual</span>
 <span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>    restructuring.</span>
 <span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>    Once your content is organised, the next step is </span>
-<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/guides/block-development&quot;</span><span class="dt">&gt;</span>developing custom blocks<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span> for </span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>    Once your content is organised, the next step is</span>
+<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/guides/block-development&quot;</span><span class="dt">&gt;</span>developing custom blocks<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span> for</span>
 <span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a>    any unique functionality your site requires.</span>
 <span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb70-16"><a href="#cb70-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb70-16"><a href="#cb70-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-17"><a href="#cb70-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb70-18"><a href="#cb70-18" aria-hidden="true" tabindex="-1"></a>    Throughout this process, understanding </span>
-<span id="cb70-19"><a href="#cb70-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/guides/eds-architecture&quot;</span><span class="dt">&gt;</span>EDS architecture fundamentals<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span> </span>
+<span id="cb70-18"><a href="#cb70-18" aria-hidden="true" tabindex="-1"></a>    Throughout this process, understanding</span>
+<span id="cb70-19"><a href="#cb70-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/guides/eds-architecture&quot;</span><span class="dt">&gt;</span>EDS architecture fundamentals<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
 <span id="cb70-20"><a href="#cb70-20" aria-hidden="true" tabindex="-1"></a>    will help you make better decisions about implementation approach.</span>
 <span id="cb70-21"><a href="#cb70-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb70-22"><a href="#cb70-22" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span></code></pre></div>
@@ -5803,7 +5784,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb79-1"><a href=
 <span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/accessibility&quot;</span><span class="dt">&gt;</span>Accessibility Statement<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
 <span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
 <span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
-<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">nav</span><span class="ot"> aria-label</span><span class="op">=</span><span class="st">&quot;Legal information&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Company<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
@@ -5829,7 +5810,7 @@ important pages even if they’re not in main navigation.</p>
 class="sourceCode html"><code class="sourceCode html"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">article</span><span class="dt">&gt;</span></span>
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Migrating from AEM Classic to Edge Delivery Services<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
 <span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Article content --&gt;</span></span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">aside</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;related-content&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Related Guides<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
@@ -5978,13 +5959,10 @@ add service discoverability.</p>
 <p>Good navigation doesn’t just help AI find pages-it helps AI
 understand your business:</p>
 <p><strong>What you do:</strong> Clear service pages linked from main
-navigation<br />
-<strong>Your expertise:</strong> Case studies and guides showing
-depth<br />
-<strong>Your priorities:</strong> What you link to most
-prominently<br />
-<strong>Content relationships:</strong> How topics connect to each
-other</p>
+navigation <strong>Your expertise:</strong> Case studies and guides
+showing depth <strong>Your priorities:</strong> What you link to most
+prominently <strong>Content relationships:</strong> How topics connect
+to each other</p>
 <p>Poor navigation creates confusion:</p>
 <ul>
 <li>AI can’t determine what you specialise in</li>
