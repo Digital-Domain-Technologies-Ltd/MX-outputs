@@ -220,7 +220,6 @@ mx:
 | blogs/mx/designing-workflows-for-humans-and-machines.html | html | source | compliant | yes | yes |  |
 | blogs/mx/machine-experience-adding-metadata.html | html | source | compliant | yes | yes |  |
 | blogs/mx/mx-a-new-role.html | html | source | compliant | yes | yes |  |
-| blogs/mx/mx-contribution-guidelines.html | html | source | compliant | yes | yes |  |
 | blogs/mx/mx-manifesto.html | html | source | compliant | yes | yes |  |
 | blogs/mx/shared-mx.css | css | source | compliant | yes | yes |  |
 | blogs/mx/what-is-machine-experience.html | html | source | compliant | yes | yes |  |
@@ -707,21 +706,6 @@ mx:
 | File | Carrier | Category | Status | Layer 1 | Layer 2 | Notes |
 |------|---------|----------|--------|---------|---------|-------|
 | _template/deliverables/landing-page.html | html | source | compliant | yes | yes |  |
-| mx-maxine-lives/communications/blogs/html/allabout/about.claude.code.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/about.claude.sonnet.4.5.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/about.microsoft.copilot.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/about.tom.cranstoun.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/ai-assistant-side-notices.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/claude-joins-mx-community.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/data-sovereignty.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/designing-workflows-for-humans-and-machines.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/designing-workflows-for-humans-and-machines.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/machine-experience-adding-metadata.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/mx-a-new-role.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/mx-contribution-guidelines.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/mx-manifesto.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/shared-mx.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
-| mx-maxine-lives/communications/blogs/html/allabout/what-is-machine-experience.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/protocols/about.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/protocols/about.html | html | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
 | mx-maxine-lives/communications/blogs/html/protocols/accessibility-ai-convergence.css | css | generated | generated-has-metadata | yes | no | Generated file — requires generator update |
