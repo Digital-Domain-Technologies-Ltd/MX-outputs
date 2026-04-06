@@ -211,13 +211,19 @@
 
         <section class="section signup-section" id="buy" aria-label="Buy now">
             <h2 class="section-title">Get the book</h2>
-            <p class="signup-intro">ISBN: 978-1-067638-40-5 &middot; PDF &pound;25 &middot; Print &pound;35</p>
-            <p class="signup-intro">Secure download link delivered instantly. Valid for 4 downloads over 14 days.</p>
-            <!-- TODO: Replace href with Cognito Forms + Stripe checkout URL -->
-            <a href="#buy" class="cta-button cta-disabled" id="buy-now-btn" aria-disabled="true">
-                Coming Soon &mdash; from &pound;25
-            </a>
-            <p class="signup-secondary">Not ready? <a href="https://forms.gle/443wpx4th4ZzYPdA8" target="_blank" rel="noopener noreferrer">Join the waitlist</a> for launch-day notification.</p>
+            <p class="signup-intro">ISBN: 978-1-067638-40-5</p>
+            <p class="signup-intro">PDF: secure download link delivered instantly. Valid for 4 downloads over 14 days.</p>
+
+            <div class="buy-buttons">
+                <button type="button" class="cta-button cta-disabled" id="buy-pdf-btn" data-product="pdf" disabled aria-disabled="true">
+                    Buy PDF — £25
+                </button>
+                <button type="button" class="cta-button cta-secondary cta-disabled" id="buy-physical-btn" data-product="physical" disabled aria-disabled="true">
+                    Buy Physical — £35 +P&amp;P
+                </button>
+            </div>
+            <p id="buy-status" class="signup-secondary" aria-live="polite">Purchasing available soon</p>
+            <p class="signup-secondary">Questions? <a href="mailto:mx-printworks@cognovamx.com">mx-printworks@cognovamx.com</a></p>
         </section>
 
         <section class="section contact" aria-label="Contact">
@@ -255,5 +261,40 @@
   </footer>
 
     <script src="../js/app.js"></script>
+    <script>
+    (function () {
+      var CHECKOUT_API = 'https://reginald.allabout.network/api/v1/books/checkout';
+      var statusEl = document.getElementById('buy-status');
+
+      function handleBuy(product) {
+        statusEl.textContent = 'Redirecting to checkout\u2026';
+
+        fetch(CHECKOUT_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ product: product }),
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data.checkout_url) {
+              window.location.href = data.checkout_url;
+            } else {
+              statusEl.textContent = data.error || 'Something went wrong. Please try again.';
+            }
+          })
+          .catch(function () {
+            statusEl.textContent = 'Connection error. Please try again.';
+          });
+      }
+
+      document.getElementById('buy-pdf-btn').addEventListener('click', function () {
+        handleBuy('pdf');
+      });
+
+      document.getElementById('buy-physical-btn').addEventListener('click', function () {
+        handleBuy('physical');
+      });
+    })();
+    </script>
 </body>
 </html>
