@@ -93,6 +93,35 @@ a:focus-visible {
   color: var(--mx-gold);
 }
 
+/* WCAG 1.4.1: links inside prose must be distinguishable by more than colour.
+   Underline links inside paragraphs, list items, descriptions, table cells,
+   and blockquotes — but not navigation, buttons, hero/CTA, or footer brand. */
+main p a,
+main li a,
+main dd a,
+main blockquote a,
+main td a,
+main th a,
+.blog-page a:not(.btn):not([class*="cta"]),
+.section-inner p a,
+.section-inner li a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+main p a:hover,
+main li a:hover,
+main dd a:hover,
+main blockquote a:hover,
+main td a:hover,
+main th a:hover,
+.blog-page a:not(.btn):not([class*="cta"]):hover,
+.section-inner p a:hover,
+.section-inner li a:hover {
+  text-decoration-thickness: 2px;
+}
+
 a:focus-visible {
   outline: 2px solid var(--mx-gold);
   outline-offset: 2px;
