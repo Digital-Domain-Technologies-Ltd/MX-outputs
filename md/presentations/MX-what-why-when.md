@@ -1,8 +1,72 @@
 ---
+marp: true
+theme: default
+paginate: true
+backgroundColor: "#1a1a2e"
+color: "#ffffff"
 title: "London CMS Experts Lightning Talk"
 author: "Tom Cranstoun"
 description: "5-15 minute lightning talk introducing Machine Experience (MX) to Boye & Company CMS Experts audience"
-
+style: |
+  section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    padding: 60px 80px;
+  }
+  section.lead {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    text-align: left;
+    justify-content: center;
+  }
+  h1 {
+    color: #00d4aa;
+    font-size: 2.4em;
+    border-bottom: 2px solid #00d4aa;
+    padding-bottom: 0.2em;
+    margin-bottom: 0.6em;
+  }
+  h2 {
+    color: #00d4aa;
+  }
+  strong {
+    color: #00d4aa;
+  }
+  em {
+    color: #9a9ab8;
+  }
+  ul, ol {
+    line-height: 1.5;
+  }
+  table {
+    font-size: 0.9em;
+    border-collapse: collapse;
+  }
+  th {
+    background-color: #00d4aa;
+    color: #1a1a2e;
+  }
+  td {
+    background-color: #2a2a4e;
+    color: #ffffff;
+  }
+  a {
+    color: #00d4aa;
+  }
+  code {
+    background-color: #2a2a4e;
+    color: #00d4aa;
+  }
+  pre {
+    background-color: #0f0f1e;
+    color: #e0e0e0;
+    border-left: 4px solid #00d4aa;
+    padding: 16px;
+  }
+  section::after {
+    color: #00d4aa;
+  }
 mx:
   date: "2026-02-26"
   event: "London CMS Experts"
@@ -12,48 +76,11 @@ mx:
   contentType: presentation
   format: marp
   outputs:
-    - london-cms-experts-2026-02-26.pptx
-  runbook: |
-  marp: true
-  theme: default
-  paginate: true
-  backgroundColor: #1a1a2e
-  color: #ffffff
-  style: |
-    section {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    h1 {
-      color: #00d4aa;
-      font-size: 2.5em;
-    }
-    h2 {
-      color: #00d4aa;
-    }
-    strong {
-      color: #00d4aa;
-    }
-    em {
-      color: #888;
-    }
-    table {
-      font-size: 0.9em;
-    }
-    th {
-      background-color: #00d4aa;
-      color: #1a1a2e;
-    }
-    td {
-      background-color: #2a2a4e;
-      color: #ffffff;
-    }
-    a {
-      color: #00d4aa;
-    }
+    - MX-what-why-when.pptx
+    - MX-what-why-when.pdf
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #1a1a2e -->
 
 # My Journey to Machine Experience
 
@@ -67,7 +94,67 @@ Two years, two books, and one epiphany later — **I have one.**
 ---
 
 <!-- _class: lead -->
-<!-- _backgroundColor: #1a1a2e -->
+
+# Machines Are Changing How Content Is Consumed
+
+The internet is no longer read mostly by people.
+
+AI agents, assistants, and crawlers now sit between your content and your audience.
+
+**This is an opportunity, not a threat.**
+
+*The sites that welcome machines win the next decade.*
+
+---
+
+<!-- _class: lead -->
+
+# UX Was Yesterday — MX Is Today
+
+The transition from **user-based traffic** to **machine-based traffic** is well underway.
+
+- AI referrals are growing exponentially
+- Agents now buy, compare, and cite on behalf of users
+- Your next visitor is probably not human
+
+**We must give MX the same attention we give UX — and we must do it today.**
+
+*Machine Experience is not optional. It is the new front door.*
+
+---
+
+<!-- _class: lead -->
+
+# The Web Has Become Hostile — to Humans AND Machines
+
+What we built for "engagement" now blocks comprehension:
+
+- **GDPR consent walls** — block content before it loads
+- **Adverts and interstitials** — bury the real page
+- **Client-side rendering** — MACH alliance, Vue, React, Next.js — empty HTML on first paint
+- **Toasts and modals** — appear and vanish; no stable DOM
+- **Hidden steps** — multi-stage flows with no semantic markers
+- **Carousels** — content the agent never sees
+
+**Humans tolerate it. Machines cannot parse it.**
+
+*If a person struggles, an agent fails entirely.*
+
+---
+
+<!-- _class: lead -->
+
+# Fix It for Machines — You Fix It for Humans Too
+
+Every pattern that helps an AI agent also helps a person with disabilities.
+
+**WCAG and MX are in the same arena, complementing each other.**
+
+*Machines are the largest disabled audience on the web.*
+
+---
+
+<!-- _class: lead -->
 
 # The £2,030 That Became £203,000
 
@@ -173,8 +260,6 @@ MX tracks the **provenance** of every asset.
 **allabout.network** — Resources and examples
 
 ---
-
-<!-- _backgroundColor: #1a1a2e -->
 
 # This Talk Has MX Metadata
 
