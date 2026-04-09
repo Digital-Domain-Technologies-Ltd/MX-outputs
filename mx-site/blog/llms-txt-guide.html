@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>What Is llms.txt and Why Does Your Site Need One | CogNovaMX</title>
-  <meta name="description" content="Practical guide to llms.txt — the emerging standard that tells AI agents what your site contains and how to navigate it. Covers the three-layer approach.">
+  <title>Why llms.txt Probably Isn't Working — And What to Do About It | CogNovaMX</title>
+  <meta name="description" content="llms.txt promises to make your content readable by AI systems. Most implementations have two structural problems that prevent it from reaching LLM training data at all. Here is the fix and the working code.">
   <meta name="author" content="Tom Cranstoun">
   <link rel="canonical" href="https://mx.allabout.network/blog/llms-txt-guide.html">
   <link rel="llms-txt" href="/llms.txt">
@@ -12,20 +12,20 @@
   <link rel="ai-txt" href="/ai.txt">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="What Is llms.txt and Why Does Your Site Need One">
-  <meta property="og:description" content="Practical guide to llms.txt — the emerging standard that tells AI agents what your site contains and how to navigate it. Covers the three-layer approach.">
-  <meta name="twitter:description" content="Practical guide to llms.txt — the emerging standard that tells AI agents what your site contains and how to navigate it.">
+  <meta property="og:title" content="Why llms.txt Probably Isn't Working — And What to Do About It">
+  <meta property="og:description" content="Most llms.txt implementations have two structural problems that prevent them from reaching LLM training data at all. Here is the fix and the working code.">
+  <meta name="twitter:description" content="Most llms.txt implementations have two structural problems that prevent them from reaching LLM training data at all. Here is the fix and the working code.">
   <meta property="og:url" content="https://mx.allabout.network/blog/llms-txt-guide.html">
   <meta property="og:site_name" content="CogNovaMX">
   <meta property="og:locale" content="en_GB">
-  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
-  <meta property="og:image:alt" content="What Is llms.txt and Why Does Your Site Need One">
+  <meta property="og:image" content="https://mx.allabout.network/blog/llms-txt-crawl-flow.svg">
+  <meta property="og:image:alt" content="Diagram showing how llms.txt reaches LLM training data via text/html serving and sitemap.xml inclusion">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@ddttomtom">
-  <meta name="twitter:title" content="What Is llms.txt and Why Does Your Site Need One">
-  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
-  <meta name="twitter:image:alt" content="What Is llms.txt and Why Does Your Site Need One">
+  <meta name="twitter:title" content="Why llms.txt Probably Isn't Working — And What to Do About It">
+  <meta name="twitter:image" content="https://mx.allabout.network/blog/llms-txt-crawl-flow.svg">
+  <meta name="twitter:image:alt" content="Diagram showing how llms.txt reaches LLM training data via text/html serving and sitemap.xml inclusion">
 
   <meta name="mx:status" content="active">
   <meta name="mx:contentType" content="blog-post">
@@ -43,8 +43,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "name": "What Is llms.txt and Why Does Your Site Need One | CogNovaMX",
-    "description": "Practical guide to llms.txt — the emerging standard that tells AI agents what your site contains, what they may use, and how to navigate it. Covers the critical gap, the three-layer approach, and how to create one.",
+    "name": "Why llms.txt Probably Isn't Working — And What to Do About It | CogNovaMX",
+    "description": "llms.txt promises to make your content readable by AI systems. Most implementations have two structural problems that prevent them from reaching LLM training data at all. This post explains the two problems, shows the working Cloudflare Worker code that wraps llms.txt as HTML, and shows the same content before and after wrapping.",
     "url": "https://mx.allabout.network/blog/llms-txt-guide.html",
     "dateModified": "2026-04-09",
     "inLanguage": "en-GB",
@@ -58,13 +58,13 @@
         "name": "Tom Cranstoun",
         "jobTitle": "The Machine Experience Authority"
     },
-    "headline": "What Is llms.txt and Why Does Your Site Need One",
+    "headline": "Why llms.txt Probably Isn't Working — And What to Do About It",
     "datePublished": "2026-04-09",
     "image": {
         "@type": "ImageObject",
-        "url": "https://mx.allabout.network/images/book-cover-3d.png",
-        "width": 1200,
-        "height": 630
+        "url": "https://mx.allabout.network/blog/llms-txt-crawl-flow.svg",
+        "width": 680,
+        "height": 580
     }
 }
   </script>
@@ -89,7 +89,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "What Is llms.txt and Why Does Your Site Need One",
+        "name": "Why llms.txt Probably Isn't Working — And What to Do About It",
         "item": "https://mx.allabout.network/blog/llms-txt-guide.html"
       }
     ]
@@ -100,7 +100,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "What Is llms.txt and Why Does Your Site Need One",
+    "headline": "Why llms.txt Probably Isn't Working — And What to Do About It",
     "url": "https://mx.allabout.network/blog/llms-txt-guide.html",
     "author": {
       "@type": "Person",
@@ -165,148 +165,165 @@
     <summary>Index</summary>
     <nav aria-label="Table of contents">
       <ul>
-        <li><a href="#what-goes-in-it">What Goes in It</a></li>
-        <li><a href="#why-it-matters">Why It Matters</a></li>
-        <li><a href="#the-critical-gap">The Critical Gap</a></li>
-        <li><a href="#the-relationship-to-robots-txt">The Relationship to robots.txt</a></li>
-        <li><a href="#the-relationship-to-agent-cards">The Relationship to Agent Cards</a></li>
-        <li><a href="#the-three-layer-approach">The Three-Layer Approach</a></li>
-        <li><a href="#extended-llms-txt-with-metadata">Extended llms.txt with Metadata</a></li>
-        <li><a href="#how-to-create-one">How to Create One</a></li>
-        <li><a href="#the-mx-view">The MX View</a></li>
+        <li><a href="#the-two-problems">The Two Problems Nobody Mentions</a></li>
+        <li><a href="#what-mx-practice-says">What MX Practice Says About This</a></li>
+        <li><a href="#headless-and-javascript-rendered">A Note on Headless and JavaScript-Rendered Sites</a></li>
+        <li><a href="#the-checklist">The Checklist</a></li>
+        <li><a href="#readable-by-both">Readable by Both Means Readable by Both</a></li>
       </ul>
     </nav>
   </details>
 
       <article data-agent-visible="true">
         <header>
-          <h1>What Is llms.txt and Why Does Your Site Need One</h1>
+          <h1>Why llms.txt Probably Isn't Working — And What to Do About It</h1>
           <div class="article-meta"
              data-published="2026-04-09"
              data-modified="2026-04-09"
-             data-reading-time="10 min">
+             data-reading-time="9 min">
           <time datetime="2026-04-09">9 April 2026</time>
           <span>·</span>
-          <span>10 min read</span>
+          <span>9 min read</span>
         </div>
         </header>
 
-        <p>When a search engine crawler visits your site, it checks <code>robots.txt</code> first. That file tells it which pages it can index, which to skip, and where the sitemap is. It has been a web standard since 1994. Every crawler respects it.</p>
-<p>AI systems — language models, agents, retrieval pipelines — have no equivalent signal to look for. They arrive at a site with no structured indication of what it contains, what they are permitted to use, or how it is organised. They either scrape everything indiscriminately or guess from context.</p>
-<p><code>llms.txt</code> is the proposed solution. It is a plain text file placed at the root of your site — <code>https://yoursite.com/llms.txt</code> — that provides AI systems with the information they need to interact with your content appropriately.</p>
-
-<h2 id="what-goes-in-it" tabindex="-1">What Goes in It</h2>
-<p>The file has a simple structure. At its most basic, it contains:</p>
-<ul>
-<li>A brief description of the site and its purpose</li>
-<li>A list of sections or content areas, with brief descriptions</li>
-<li>Links to key pages or documents the AI should be aware of</li>
-<li>Any permissions or restrictions on how the content can be used</li>
-</ul>
-<p>A minimal example:</p>
-<pre><code class="language-text"># Digital Domain Technologies Ltd
-
-&gt; MX consultancy providing Machine Experience strategy, training, and implementation.
-
-## Services
-- MX Strategy Consulting: Strategic guidance on designing content for human and machine audiences.
-- MX Training: Workshops and courses for content teams.
-
-## Resources
-- MX Blog: Practical articles on Machine Experience.
-
-## Notes
-Content on this site may be used by AI systems for the purpose of answering user queries.
-Do not reproduce full articles without attribution.</code></pre>
-<p>That is the entire file. Plain text, human-readable, machine-readable, no specialist tooling required to produce or maintain it.</p>
-<p>A more complete implementation includes access guidelines — rate limits, cache retention policies, attribution requirements, and content restrictions. <em>MX: The Protocols</em> (Chapter 12) provides full templates for e-commerce, content publishing, and service-oriented sites, including sections for API access, identity delegation, and content restrictions by area.</p>
-
-<h2 id="why-it-matters" tabindex="-1">Why It Matters</h2>
-<p>Language models and AI agents that interact with your site need to make decisions: which pages are relevant to a query, which content is authoritative, what the site is for, and whether they have permission to summarise or quote its content.</p>
-<p>Without <code>llms.txt</code>, those decisions are made by inference. The model guesses based on page titles, headings, and body text. It may index pages you would rather it did not. It may ignore sections that are directly relevant. It has no way to know your content permissions.</p>
-<p>With <code>llms.txt</code>, those decisions are informed. The model knows what the site covers, where the relevant content lives, and what you permit. That reduces errors and increases the likelihood that AI systems represent your content accurately.</p>
-<p>This matters most for sites where accuracy is significant — professional services, technical documentation, product information, healthcare, legal. For those sites, a language model misrepresenting content because it had no structured guidance is a real risk, not a theoretical one.</p>
-<p>Recent audits show an 85% adoption gap for llms.txt across professional sites. Most have not implemented it, forcing agents to crawl entire site structures to understand organisation — but many of those same sites block agent crawlers entirely through robots.txt. The result is a double exclusion: no guidance for agents that do arrive, and active blocking of agents that try.</p>
-
-<h2 id="the-critical-gap" tabindex="-1">The Critical Gap</h2>
-<p>There is an important limitation that anyone implementing llms.txt should understand.</p>
-<p>llms.txt is served as a text or markdown MIME type, not HTML. Common Crawl — the dataset that feeds most large language model training — ingests HTML pages. It does not typically ingest non-HTML files. llms.txt is also rarely included in sitemap.xml, so training-time crawlers may never discover it.</p>
-<p>At inference time, the picture is no better. When a machine is answering a specific user query, it goes straight to relevant pages. It does not fetch a site-level directory first. llms.txt is too broad for targeted queries.</p>
-<p>The result: llms.txt risks falling between both mechanisms — invisible to training crawlers and irrelevant to inference-time agents.</p>
-<p>The practical mitigation today is to publish the same content as an HTML page — <code>/llms.html</code> or <code>/about/for-agents</code> — and include it in your sitemap. This ensures training crawlers ingest the guidance and it enters model knowledge bases. The Gathering — the independent standards body that governs MX specifications — is proposing a new standard to address this critical lack.</p>
-<p>This gap does not make llms.txt pointless. It makes it necessary but insufficient on its own. The HTML equivalent closes the gap.</p>
+        <p>There is a reasonable idea behind <code>llms.txt</code>. Proposed by Jeremy Howard in September 2024, it follows the same logic as <code>robots.txt</code>: place a structured file at your root, and AI systems can find a curated, structured description of your site — without needing to crawl every page to piece together what you do.</p>
+<p>The proposal is sensible. The execution, for most sites, is broken in two specific ways that are easy to miss and easy to fix.</p>
 
 <figure>
-  <img src="llms-txt-crawl-flow.svg" alt="Diagram showing how llms.txt reaches LLM training data: serve as text/html via a Cloudflare Worker and reference it in sitemap.xml so Common Crawl indexes it." loading="lazy" width="680" height="580">
+  <img src="llms-txt-crawl-flow.svg" alt="Diagram showing how llms.txt reaches LLM training data — or fails to — depending on whether it is served as text/html, referenced in sitemap.xml, and linked from page head elements" loading="lazy" width="680" height="580">
   <figcaption>How <code>llms.txt</code> reaches LLM training data — serve as <code>text/html</code> and reference it in <code>sitemap.xml</code>.</figcaption>
 </figure>
 
-<h2 id="the-relationship-to-robots-txt" tabindex="-1">The Relationship to robots.txt</h2>
-<p><code>robots.txt</code> controls crawling. It tells automated systems which URLs they can and cannot visit. It is a technical permission layer.</p>
-<p><code>llms.txt</code> is different in character. It does not control access — AI systems can and do ignore it if they choose, just as some crawlers ignore <code>robots.txt</code>. What it does is provide structured context that well-behaved AI systems can use to do a better job.</p>
-<p>Think of it less as a gate and more as a briefing document. You are telling the AI what it needs to know before it starts working with your content.</p>
-<p>The three files work together as a system:</p>
-<table>
-<thead><tr><th>File</th><th>Purpose</th><th>Audience</th></tr></thead>
-<tbody>
-<tr><td>robots.txt</td><td>Access control</td><td>Search bots</td></tr>
-<tr><td>sitemap.xml</td><td>Content discovery</td><td>Search engines</td></tr>
-<tr><td>llms.txt</td><td>Interaction guidance</td><td>AI agents</td></tr>
-</tbody>
-</table>
-<p>robots.txt enforces boundaries. sitemap.xml provides structure. llms.txt offers context. Reference your llms.txt in robots.txt with a comment — it costs nothing and signals intent.</p>
-<p>Sites with complete robots.txt files often find llms.txt easy to create because the mental model is identical: you are documenting your site structure for machines that cannot intuit context from visual design.</p>
+<h2 id="the-two-problems" tabindex="-1">The Two Problems Nobody Mentions</h2>
+<p>A common assumption is that <code>llms.txt</code> is useful at inference time — that is, when an AI agent is actively retrieving information to answer a query. That is largely not the case. Agents operating at inference time follow their own retrieval logic; they are not scanning your root directory for an <code>llms.txt</code> file on each request.</p>
+<p>Where <code>llms.txt</code> does have genuine value is in <strong>training data</strong>. A richer, curated description of your site's content and structure is more useful to a training pipeline than a bare sitemap — it can provide context, intent, and relationships between pages that a crawler would otherwise have to infer. But that value only materialises if the file actually gets into training data, and this is where most implementations fail.</p>
 
-<h2 id="the-relationship-to-agent-cards" tabindex="-1">The Relationship to Agent Cards</h2>
-<p><code>llms.txt</code> and agent cards address the same underlying problem from different angles.</p>
-<p><code>llms.txt</code> is aimed at language models and retrieval systems — AI that reads your content to answer questions. It describes what is there and what is permitted.</p>
-<p>An agent card (defined by the Agent2Agent protocol) is aimed at autonomous agents that want to interact with your service — AI that takes actions on behalf of users. It describes what your service can do and how to call it, published as a JSON file at <code>/.well-known/agent-card.json</code>.</p>
-<p>A site with both is telling the full story: here is what we contain, here is what we permit, and here is how to work with us as a service. That is the foundation of genuine agent discoverability.</p>
-<p>For informational sites, llms.txt is the priority. For transactional or service-oriented sites, agent cards matter more. Most sites benefit from both.</p>
+<h3>Problem one — it is not served as HTML</h3>
+<p>Common Crawl, which underpins the training datasets of most large language models, indexes HTML pages. Your web server will serve <code>llms.txt</code> with a <code>Content-Type: text/plain</code> header by default. Common Crawl will not treat that as an HTML page, and it will not be indexed as one.</p>
+<p>The fix is to wrap the content in a minimal HTML document and serve it with <code>Content-Type: text/html</code>. On Cloudflare, a Worker handles this cleanly for the one URL that needs it:</p>
+<pre><code class="language-javascript">export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === '/llms.txt') {
+      const content = await fetch('https://your-origin.com/llms.txt')
+        .then(r =&gt; r.text());
 
-<h2 id="the-three-layer-approach" tabindex="-1">The Three-Layer Approach</h2>
-<p>The most effective machine compatibility combines three complementary systems, each building on the last:</p>
-<p><strong>Layer 1 — llms.txt (site-wide defaults).</strong> Emerging convention. Describes the site as a whole: what it contains, access guidelines, rate limits, and content permissions. Every page benefits from the site-level context.</p>
-<p><strong>Layer 2 — Page-level metadata.</strong> MX carrier tags and standard HTML meta tags can override or supplement the site-wide defaults for individual pages. A product page might allow full extraction even if the site default is restricted. A <code>&lt;link rel="api"&gt;</code> element can point to a page-specific API endpoint.</p>
-<p><strong>Layer 3 — JSON-LD structured data.</strong> The actual content in machine-readable form — Schema.org Product, Article, Organisation types with their specific properties. This is what agents extract and act on.</p>
-<p>A machine visiting your page checks llms.txt for site policy, reads page-level metadata for this specific page, fetches structured data, and respects your rate limits and guidance. Each layer adds specificity. No single layer is sufficient alone.</p>
+      const html = `&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;llms.txt&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;pre&gt;${content}&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
 
-<h2 id="extended-llms-txt-with-metadata" tabindex="-1">Extended llms.txt with Metadata</h2>
-<p>The standard llms.txt format specifies only URLs to curated content. However, when machines access llms.txt directly — bypassing your HTML pages — they miss all the metadata layers that HTML provides: author information, company details, publication context.</p>
-<p>MX proposes extending llms.txt with markdown-formatted metadata at the top of the file:</p>
-<pre><code class="language-text"># About This Site
+      return new Response(html, {
+        headers: { 'Content-Type': 'text/html; charset=utf-8' }
+      });
+    }
+    return fetch(request);
+  }
+};</code></pre>
+<p>To make the difference concrete, here is a real <code>llms.txt</code> — the one we use for allabout.network — as it sits on the server before any wrapping:</p>
+<pre><code class="language-text"># allabout.network — CogNovaMX Ltd
 
-**Author:** Tom Cranstoun
-**Company:** Digital Domain Technologies Ltd, trading as CogNovaMX
-**Focus:** Machine compatibility, web accessibility, GEO patterns
-**Contact:** info@cognovamx.com
+&gt; Making the web work for everyone and everything that uses it.
+&gt; MX (Machine Experience) is structured metadata that makes your content
+&gt; readable by every AI agent on earth — without making it less readable by humans.
 
-Tom Cranstoun works on making websites accessible to both humans and machines.
+## About CogNovaMX
 
-# Curated Resources
+- Company: https://mx.allabout.network/
+- Author: https://www.linkedin.com/in/tom-cranstoun/
+- Contact: mailto:info@cognovamx.com
+- Website: https://allabout.network
 
-## Book
-https://allabout.network/mx-handbook
+CogNovaMX Ltd works on Machine Experience (MX) methodology. Founded by Tom Cranstoun —
+content management specialist since 2001, conference speaker, and author of the MX book
+series. We help organisations design websites that work for both humans and AI agents.
 
-## Technical Documentation
-https://allabout.network/docs/agent-patterns</code></pre>
-<p>This approach compensates for metadata loss when machines read llms.txt instead of parsing full HTML pages. The markdown format provides human-readable context whilst remaining machine-parseable. Standard llms.txt parsers that expect only URLs skip the markdown header and process the URL sections normally — the extension is backwards-compatible.</p>
-<p>This is a proposed enhancement, not part of the current llms.txt specification. The standard URL-only format remains valid. But extended metadata improves machine citation accuracy when HTML metadata is unavailable. See Appendix H of <em>MX: The Protocols</em> for complete implementation guidance.</p>
+## Services
 
-<h2 id="how-to-create-one" tabindex="-1">How to Create One</h2>
-<p>The file is plain text. You do not need a build tool, a CMS plugin, or a developer. You need a text editor and access to your site's root directory.</p>
-<p>Work through these questions and write the answers down:</p>
-<p>What is this site for, in one or two sentences? What are its main sections or content areas? What are the most important pages an AI system should know about? What, if anything, are you restricting?</p>
-<p>Put the answers in the format above, save the file as <code>llms.txt</code>, and place it at your domain root.</p>
-<p>Then — and this is the step most guides omit — publish an HTML version of the same content at a URL included in your sitemap. Without the HTML equivalent, training crawlers may never find your guidance.</p>
-<p>Review it when your site structure changes significantly, when you add new content areas, or when your permissions policy changes.</p>
+- MX Readiness Assessment: Structured audit against MX principles — structured data,
+  accessibility, agent interaction testing, competitive benchmarking
+- Implementation Support: Schema.org implementation, accessibility fixes, explicit intent
+  patterns, code reviews, knowledge transfer
+- Team Training: Fundamentals workshops, technical deep-dives, role-specific training for
+  developers, designers, content authors, QA, and leadership
+- Strategic Advisory: Monthly strategy sessions, architecture reviews, competitive
+  intelligence, quarterly roadmap planning
 
-<h2 id="the-mx-view" tabindex="-1">The MX View</h2>
-<p>In MX terms, <code>llms.txt</code> sits within a spectrum of signals that make content meaning explicit rather than leaving machines to infer it. YAML frontmatter, Schema.org structured data, semantic HTML, Open Graph tags, Dublin Core metadata — they are all mechanisms serving the same principle.</p>
-<p>MX does not replace any of these standards. It amplifies them. The MX principle is: use the right standard for the context, ensure it is present and correct, and add MX governance metadata only where existing standards leave gaps — lifecycle status, content policy, audience targeting, and AI interaction rules.</p>
-<p>The principle is consistent: machines that receive structured, explicit information about content make fewer errors and produce more accurate outputs than machines that must infer everything from context. When machines must "think" — infer meaning from incomplete structure — they hallucinate. Explicit structure prevents this.</p>
-<p>The effort to provide that information is low. The benefit accumulates over every AI interaction with your site. And the work is not novel — it is the same structured, semantic, accessible content practice that good web development has always recommended. The urgency is what has changed.</p>
-<p><em>MX: The Handbook</em> covers the full stack of these signals — from document-level metadata to site-level discoverability — and how they work together to create content that serves both human and machine audiences reliably. <em>MX: The Protocols</em> provides the technical specifications, templates, and implementation guidance.</p>
+## Docs
+- [MX Books](https://mx.allabout.network/books/): The MX book series.
+- [MX Community](https://tg.community/): The Gathering — open MX standards body.
+
+## Optional
+- [Blog](https://allabout.network/blogs/ddt/): Articles on MX, CMS, and AI readiness.</code></pre>
+<p>This is what an LLM training pipeline needs to understand who we are, what we do, and where to find more. It describes services in plain terms, links to substantive content, and gives enough context that an AI system encountering it during training can form an accurate picture of the organisation — without needing to crawl dozens of pages. That is the point of the format: curated signal, not bulk content.</p>
+<p>And here is the same content after HTML wrapping, as Common Crawl will see it:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;llms.txt — allabout.network&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;pre&gt;
+# allabout.network — CogNovaMX Ltd
+
+&amp;gt; Making the web work for everyone and everything that uses it.
+&amp;gt; MX (Machine Experience) is structured metadata that makes your content
+&amp;gt; readable by every AI agent on earth.
+
+## About CogNovaMX
+…
+&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>The content is identical. The wrapper is minimal. The difference is that crawlers will now index it.</p>
+<p>You can verify this end-to-end on this site right now. Visit <a href="https://mx.allabout.network/llms.txt"><code>https://mx.allabout.network/llms.txt</code></a> in a browser and use View Source — the response is a real HTML document with the original text preserved verbatim inside a <code>&lt;pre&gt;</code> block, served with <code>Content-Type: text/html</code>. Every <code>llms.txt</code> file across our worker-served domains is wrapped this way at serve time, and the source files themselves are unchanged.</p>
+
+<h3>Problem two — it is not in <code>sitemap.xml</code></h3>
+<p>If your <code>llms.txt</code> is not referenced in your sitemap, crawlers have no reliable signal that it exists. It will not be systematically discovered, which means it will not make it into Common Crawl, and therefore not into LLM training.</p>
+<p>Fix both of those things — serve <code>llms.txt</code> as an HTML page, and include it in your sitemap — and it has a reasonable chance of being included. These are not technical challenges. They are configuration decisions that most teams simply do not make, because the guidance around <code>llms.txt</code> rarely addresses training pipelines.</p>
+
+<h2 id="what-mx-practice-says" tabindex="-1">What MX Practice Says About This</h2>
+<p>MX — Machine Experience — is a discipline concerned with how digital content is read, interpreted, and used by machines: AI agents, search indexers, voice assistants, training pipelines, and browser automation. Where web accessibility asks how we make content usable for people with disabilities, MX asks the same question about non-human readers. The two turn out to share most of the same answers. You can read more in the <a href="/books/">MX book series</a>.</p>
+<p>From an MX perspective, the <code>llms.txt</code> situation is a familiar pattern. The principle that guides MX work is straightforward: if you want machines to read your content reliably, you cannot depend on them inferring what you intended. You have to make the structure explicit, using mechanisms that machine readers already understand.</p>
+<p><code>llms.txt</code> in its current common form asks AI systems to discover and interpret a relatively new standard. But most AI systems being trained right now have knowledge cutoffs that predate the proposal entirely. The standard is invisible to the very systems it is designed to inform.</p>
+<p>This is not an argument against <code>llms.txt</code>. It is an argument for implementing it in a way that works with existing infrastructure rather than waiting for new infrastructure to catch up. That is, in fact, one of the core principles of MX: do not reinvent — reuse existing patterns. Crawlers already understand HTML. Sitemaps already signal what matters. Use what is already there.</p>
+<p>The HTML meta tag approach does exactly that. Rather than relying on a crawler to find and correctly handle a markdown file, you embed the key information in the HTML that crawlers already process — on every page that matters. Add a <code>link</code> tag pointing to your <code>llms.txt</code>, alongside a meta description, in the <code>&lt;head&gt;</code> of every page:</p>
+<pre><code class="language-html">&lt;link rel="llms-txt" href="/llms.txt"&gt;
+&lt;meta name="llms-txt-description" content="A description of your site and its content."&gt;</code></pre>
+<p>The <code>link</code> tag tells any agent or crawler that encounters the page exactly where to find the <code>llms.txt</code> file — no guessing, no root discovery required. For sites where content is concise enough, the full content can also go directly into the page as a meta tag:</p>
+<pre><code class="language-html">&lt;meta name="llms-txt-content" content="# Your Site &gt; Description..."&gt;</code></pre>
+<p>No new standard needs to be adopted. No new crawler behaviour needs to be assumed. The structural information is present in the HTML itself, where crawlers have always looked.</p>
+
+<h2 id="headless-and-javascript-rendered" tabindex="-1">A Note on Headless and JavaScript-Rendered Sites</h2>
+<p>If the above matters for conventional sites, it matters more for headless and JavaScript-rendered ones — and this is where <code>llms.txt</code>, done correctly, becomes particularly useful.</p>
+<p>Headless CMSs — Contentful, Sanity, Hygraph, and similar — deliver content through APIs to a frontend that renders it in JavaScript. When an AI scraper visits the resulting site, it typically sees something like this:</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;noscript&gt;You need to enable JavaScript to run this app.&lt;/noscript&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<p>No content. Just a shell. The scraper cannot see the products, articles, or services the site exists to describe. The <code>link</code> tag and meta description approach is especially useful here because they sit in the <code>&lt;head&gt;</code> — the part of the page that is served before JavaScript runs, and the only part most crawlers will ever see. You are not waiting for the JavaScript to execute; the reference to <code>llms.txt</code> is already in the response.</p>
+
+<h2 id="the-checklist" tabindex="-1">The Checklist</h2>
+<p>If you are implementing <code>llms.txt</code> — for any kind of site — the steps are:</p>
+<ol>
+<li>Serve the file as <code>text/html</code> — use a Cloudflare Worker (or equivalent edge function) to wrap the content and set the correct header.</li>
+<li>Add it to <code>sitemap.xml</code>.</li>
+<li>Add <code>&lt;link rel="llms-txt" href="/llms.txt"&gt;</code> to the <code>&lt;head&gt;</code> of every page — especially important for headless sites where the page body may be empty until JavaScript runs.</li>
+<li>Link to <code>.md</code> versions of pages where they exist — Common Crawl can index these when properly referenced.</li>
+</ol>
+
+<h2 id="readable-by-both" tabindex="-1">Readable by Both Means Readable by Both</h2>
+<p>MX does not treat machine readability as a separate track from human readability. The same content, properly structured, should work for both. <code>llms.txt</code> is consistent with that principle — but only when it is implemented in a way that puts it in front of the systems that matter.</p>
+<p>Right now, most <code>llms.txt</code> files are well-intentioned but structurally invisible. They are not in sitemaps. They are not served as HTML. They will not appear in Common Crawl. They will not reach LLM training data.</p>
+<p>The fix is straightforward. But it does require understanding what <code>llms.txt</code> is actually for — and that starts with being honest about where it currently falls short.</p>
 
 <h3>Related reading</h3>
 <ul>
@@ -317,7 +334,7 @@ https://allabout.network/docs/agent-patterns</code></pre>
 </ul>
 
 <hr>
-<p><em>Tom Cranstoun is the Machine Experience Authority and founder of the MX community. His book MX: The Handbook is available now. He consults on MX strategy through Digital Domain Technologies Ltd, trading as CogNovaMX.</em></p>
+<p><em>Tom Cranstoun is the founder of the Machine Experience (MX) community and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd, trading as CogNovaMX.</em></p>
       </article>
 
 
@@ -351,8 +368,6 @@ https://allabout.network/docs/agent-patterns</code></pre>
       <address class="footer-contact">
         <p class="footer-heading"><strong>Contact</strong></p>
         <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
-        <p>120 Main Street, Largs, Scotland</p>
-        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
       </address>
     </div>
     <div class="footer-bottom">
