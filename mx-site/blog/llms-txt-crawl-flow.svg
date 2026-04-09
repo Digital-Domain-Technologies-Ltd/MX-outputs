@@ -9,59 +9,62 @@
 
   <style>
     text { font-family: sans-serif; fill: #1a1a1a; }
-    .th  { font-size: 14px; font-weight: 500; }
-    .ts  { font-size: 12px; font-weight: 400; fill: #555; }
-    .c-gray rect   { fill: #f1efe8; stroke: #5f5e5a; }
-    .c-gray text   { fill: #2c2c2a; }
-    .c-teal rect   { fill: #e1f5ee; stroke: #0f6e56; }
-    .c-teal text   { fill: #04342c; }
-    .c-purple rect { fill: #eeedfe; stroke: #534ab7; }
-    .c-purple text { fill: #26215c; }
-    .c-coral rect  { fill: #faece7; stroke: #993c1d; }
-    .c-coral text  { fill: #4a1b0c; }
-    .sep { stroke: #ccc; stroke-width: 0.5; stroke-dasharray: 4 4; }
-    .ok  { stroke: #1d9e75; }
-    .bad { stroke: #e24b4a; }
-    .ref { stroke: #888; stroke-dasharray: 4 3; }
+    .th  { font-size: 14px; font-weight: 600; }
+    .ts  { font-size: 12px; font-weight: 400; fill: #3a3a3a; }
+    .c-gray rect   { fill: #f1efe8; stroke: #4a4a48; stroke-width: 1; }
+    .c-gray text   { fill: #1a1a18; }
+    .c-teal rect   { fill: #d8f0e6; stroke: #0a5a47; stroke-width: 1; }
+    .c-teal text   { fill: #042820; }
+    .c-purple rect { fill: #e6e4fc; stroke: #3f3893; stroke-width: 1; }
+    .c-purple text { fill: #1c184a; }
+    .c-coral rect  { fill: #fae3da; stroke: #7a2e16; stroke-width: 1; }
+    .c-coral text  { fill: #3a1408; }
+    .sep { stroke: #8a8a8a; stroke-width: 0.75; stroke-dasharray: 4 4; }
+    .ok  { stroke: #0f7a59; }
+    .bad { stroke: #b82e2d; }
+    .ref { stroke: #5a5a5a; stroke-dasharray: 4 3; }
   </style>
 
+  <!-- Opaque background — guarantees WCAG contrast regardless of embedding context -->
+  <rect x="0" y="0" width="680" height="580" fill="#fafaf7" stroke="#d4d4d0" stroke-width="1" rx="6"/>
+
   <!-- Column headers -->
-  <text class="ts" x="140" y="28" text-anchor="middle">Your site</text>
-  <text class="ts" x="340" y="28" text-anchor="middle">Common Crawl</text>
-  <text class="ts" x="540" y="28" text-anchor="middle">LLM training</text>
+  <text class="th" x="140" y="28" text-anchor="middle">Your site</text>
+  <text class="th" x="340" y="28" text-anchor="middle">Common Crawl</text>
+  <text class="th" x="540" y="28" text-anchor="middle">LLM training</text>
 
   <line class="sep" x1="238" y1="36" x2="238" y2="545"/>
   <line class="sep" x1="438" y1="36" x2="438" y2="545"/>
 
   <!-- WITHOUT FIXES -->
-  <text class="ts" x="40" y="58" text-anchor="start" opacity="0.5">Without fixes</text>
+  <text class="th" x="40" y="58" text-anchor="start" fill="#7a2e16">Without fixes</text>
   <line class="sep" x1="40" y1="62" x2="638" y2="62"/>
 
   <g class="c-gray">
-    <rect x="46" y="74" width="188" height="54" rx="8" stroke-width="0.5"/>
+    <rect x="46" y="74" width="188" height="54" rx="8"/>
     <text class="th" x="140" y="97" text-anchor="middle" dominant-baseline="central">llms.txt</text>
     <text class="ts" x="140" y="116" text-anchor="middle" dominant-baseline="central">served as text/plain</text>
   </g>
-  <text x="264" y="106" text-anchor="middle" font-size="20" style="fill:#e24b4a">✕</text>
-  <g class="c-gray" opacity="0.4">
-    <rect x="278" y="74" width="124" height="54" rx="8" stroke-width="0.5"/>
+  <text x="264" y="106" text-anchor="middle" font-size="20" style="fill:#b82e2d">✕</text>
+  <g class="c-gray">
+    <rect x="278" y="74" width="124" height="54" rx="8" fill="#e8e6e0"/>
     <text class="ts" x="340" y="104" text-anchor="middle" dominant-baseline="central">not indexed</text>
   </g>
-  <line class="bad" x1="404" y1="101" x2="458" y2="101" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrow)" opacity="0.5"/>
-  <g class="c-gray" opacity="0.4">
-    <rect x="462" y="74" width="160" height="54" rx="8" stroke-width="0.5"/>
+  <line class="bad" x1="404" y1="101" x2="458" y2="101" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <g class="c-gray">
+    <rect x="462" y="74" width="160" height="54" rx="8" fill="#e8e6e0"/>
     <text class="ts" x="542" y="104" text-anchor="middle" dominant-baseline="central">never reaches training</text>
   </g>
 
   <g class="c-gray">
-    <rect x="46" y="142" width="188" height="38" rx="8" stroke-width="0.5"/>
+    <rect x="46" y="142" width="188" height="38" rx="8"/>
     <text class="ts" x="140" y="161" text-anchor="middle" dominant-baseline="central">not in sitemap.xml</text>
   </g>
-  <text x="264" y="165" text-anchor="middle" font-size="18" style="fill:#e24b4a">✕</text>
-  <text class="ts" x="340" y="165" text-anchor="middle" dominant-baseline="central" opacity="0.4">not discovered</text>
+  <text x="264" y="165" text-anchor="middle" font-size="18" style="fill:#b82e2d">✕</text>
+  <text class="ts" x="340" y="165" text-anchor="middle" dominant-baseline="central">not discovered</text>
 
   <!-- WITH FIXES -->
-  <text class="ts" x="40" y="224" text-anchor="start" opacity="0.7">With fixes</text>
+  <text class="th" x="40" y="224" text-anchor="start" fill="#0a5a47">With fixes</text>
   <line class="sep" x1="40" y1="228" x2="638" y2="228"/>
 
   <g class="c-teal">
@@ -90,7 +93,7 @@
 
   <!-- PAGE LINK TAG -->
   <line class="sep" x1="40" y1="382" x2="638" y2="382"/>
-  <text class="ts" x="40" y="398" text-anchor="start" opacity="0.7">Every page (especially headless)</text>
+  <text class="th" x="40" y="398" text-anchor="start" fill="#7a2e16">Every page (especially headless)</text>
 
   <g class="c-coral">
     <rect x="46" y="410" width="188" height="56" rx="8" stroke-width="0.5"/>
@@ -110,10 +113,10 @@
   <text class="ts" x="278" y="512" text-anchor="start">only content a crawler may see.</text>
 
   <!-- Legend -->
-  <line class="ok" x1="462" y1="430" x2="500" y2="430" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line class="ok" x1="462" y1="430" x2="500" y2="430" stroke-width="1.75" marker-end="url(#arrow)"/>
   <text class="ts" x="508" y="434">indexed / reaches training</text>
-  <line class="bad" x1="462" y1="456" x2="500" y2="456" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrow)" opacity="0.6"/>
+  <line class="bad" x1="462" y1="456" x2="500" y2="456" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
   <text class="ts" x="508" y="460">blocked / not discovered</text>
-  <line class="ref" x1="462" y1="482" x2="500" y2="482" stroke-width="1" marker-end="url(#arrow)"/>
+  <line class="ref" x1="462" y1="482" x2="500" y2="482" stroke-width="1.25" marker-end="url(#arrow)"/>
   <text class="ts" x="508" y="486">link reference</text>
 </svg>
