@@ -284,7 +284,87 @@ series. We help organisations design websites that work for both humans and AI a
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p>The content is identical. The wrapper is minimal. The difference is that crawlers will now index it.</p>
-<p>You can verify this end-to-end on this site right now. Visit <a href="https://mx.allabout.network/llms.txt"><code>https://mx.allabout.network/llms.txt</code></a> in a browser and use View Source — the response is a real HTML document with the original text preserved verbatim inside a <code>&lt;pre&gt;</code> block, served with <code>Content-Type: text/html</code>. Every <code>llms.txt</code> file across our worker-served domains is wrapped this way at serve time, and the source files themselves are unchanged.</p>
+
+<h3>What this site actually deploys</h3>
+<p>The snippet above is the minimum viable version — enough to make Common Crawl treat your <code>llms.txt</code> as HTML. The Worker that runs in front of <code>allabout.network</code>, <code>mx.allabout.network</code>, <code>content.allabout.network</code> and <code>reginald.allabout.network</code> goes a few steps further, because if we are going to wrap the file in HTML at all, we may as well make it carry the metadata that crawlers and AI agents already know how to read.</p>
+<p>Here is the actual pure helper running on this domain. You can verify it for yourself: visit <a href="https://mx.allabout.network/llms.txt"><code>https://mx.allabout.network/llms.txt</code></a> in a browser, use View Source, and compare it to the function below.</p>
+<pre><code class="language-javascript">// Wrap raw llms.txt content as a minimal HTML document so Common Crawl
+// (which only ingests HTML) can index the content. Preserves the original
+// text verbatim inside &lt;pre&gt;; no transformation of the text body.
+//
+// Pure function — testable in Node without the Workers runtime.
+export const wrapLlmsTxtAsHtml = (text, requestUrl) =&gt; {
+  const safe = (text || '')
+    .replace(/&amp;/g, '&amp;amp;')
+    .replace(/&lt;/g, '&amp;lt;')
+    .replace(/&gt;/g, '&amp;gt;');
+
+  // Title: first "# heading" line if present, else hostname-based fallback
+  const firstHeading = (text || '').split('\n').find((l) =&gt; l.startsWith('# '));
+
+  let host = '';
+  let canonical = '';
+  try {
+    const u = new URL(requestUrl);
+    host = u.hostname;
+    // Strip query string and fragment — canonical should be the bare resource URL
+    u.search = '';
+    u.hash = '';
+    canonical = u.toString();
+  } catch (_) {
+    // requestUrl is optional — tests may call without one
+  }
+
+  const title = firstHeading
+    ? firstHeading.replace(/^#\s+/, '').trim()
+    : `llms.txt${host ? ` — ${host}` : ''}`;
+
+  const jsonLdObj = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description: 'Agent directory file (llms.txt) served as HTML for crawler ingestion.',
+    inLanguage: 'en-GB',
+  };
+  if (canonical) jsonLdObj.url = canonical;
+  const jsonLd = JSON.stringify(jsonLdObj);
+
+  const canonicalTag = canonical ? `&lt;link rel="canonical" href="${canonical}"&gt;\n` : '';
+  const descHost = host || 'this site';
+
+  return `&lt;!DOCTYPE html&gt;
+&lt;html lang="en-GB"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;title&gt;${title}&lt;/title&gt;
+&lt;meta name="description" content="Agent directory file for ${descHost} — published as HTML so AI training crawlers can ingest it."&gt;
+&lt;meta name="robots" content="index, follow"&gt;
+&lt;meta name="mx:status" content="active"&gt;
+&lt;meta name="mx:contentType" content="agent-directory"&gt;
+&lt;meta name="mx:audience" content="machines, humans"&gt;
+${canonicalTag}&lt;script type="application/ld+json"&gt;${jsonLd}&lt;/script&gt;
+&lt;style&gt;body{font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;max-width:80ch;margin:2rem auto;padding:0 1rem;color:#1a1a1a}pre.llms-txt{white-space:pre-wrap;word-wrap:break-word}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;main&gt;
+&lt;pre class="llms-txt"&gt;${safe}&lt;/pre&gt;
+&lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+};</code></pre>
+<p>The differences from the minimum viable snippet are deliberate, and each one earns its place:</p>
+<ul>
+<li><strong>HTML escaping</strong> — the raw <code>llms.txt</code> may legitimately contain <code>&lt;</code>, <code>&gt;</code>, or <code>&amp;</code>. Inserting that into a template without escaping would corrupt the document and, in the worst case, smuggle markup into the page. The minimum-viable snippet skips this for clarity; production cannot.</li>
+<li><strong>Title from the first <code>#</code> heading</strong> — most well-formed <code>llms.txt</code> files start with a heading like <code># allabout.network — CogNovaMX Ltd</code>. Promoting it to <code>&lt;title&gt;</code> gives crawlers and humans a real page title for free, with a sensible <code>llms.txt — {hostname}</code> fallback if there is no heading.</li>
+<li><strong><code>&lt;link rel="canonical"&gt;</code></strong> — tells crawlers that the bare <code>.txt</code> URL is the canonical address for this content, so the HTML wrapping is treated as a presentation of the same resource rather than a separate page that competes with itself. Query strings and fragments are stripped so cache-busters do not pollute the canonical.</li>
+<li><strong><code>&lt;meta name="robots" content="index, follow"&gt;</code></strong> — explicit indexing permission. The point of the exercise is to be indexed, so we say so.</li>
+<li><strong>MX governance metadata</strong> — three carrier tags (<code>mx:status</code>, <code>mx:contentType=agent-directory</code>, <code>mx:audience=machines, humans</code>) tell MX-aware tooling that this is a live agent directory intended for both audiences, not a general-purpose page. This is the same pattern every other MX page on the site uses.</li>
+<li><strong>Schema.org JSON-LD</strong> — a small <code>WebPage</code> block. Schema.org is the structured-data vocabulary every major training pipeline already understands. Adding it costs nothing and gives the wrapped file a structured identity.</li>
+<li><strong>Inline minimal CSS</strong> — readable in browsers without depending on any external stylesheet. The wrapped <code>llms.txt</code> stays self-contained even if the rest of the site is unreachable.</li>
+<li><strong>Pure-function shape</strong> — the helper takes a string and a URL, returns a string. No <code>HTMLRewriter</code>, no Workers-runtime APIs in the body. This means it can be unit-tested in Node without spinning up a Worker — and on this codebase it is, with thirteen tests covering the title extraction, canonical stripping, escaping, fallbacks, and verbatim preservation.</li>
+</ul>
+<p>The Worker calls this function from two places — once in the path that handles <code>mx.allabout.network</code> / <code>content.allabout.network</code> / <code>reginald.allabout.network</code>, and once in the path that handles <code>allabout.network</code> itself. Both call sites use a basename match (<code>filename === 'llms.txt'</code> or <code>endsWith('/llms.txt')</code>), so the wrapping fires automatically for any <code>llms.txt</code> at any depth — root <code>/llms.txt</code>, <code>/blog/llms.txt</code>, <code>/services/llms.txt</code>, anywhere. None of the source <code>.txt</code> files are modified. The HTML view exists only at serve time.</p>
 
 <h3>Problem two — it is not in <code>sitemap.xml</code></h3>
 <p>If your <code>llms.txt</code> is not referenced in your sitemap, crawlers have no reliable signal that it exists. It will not be systematically discovered, which means it will not make it into Common Crawl, and therefore not into LLM training.</p>
