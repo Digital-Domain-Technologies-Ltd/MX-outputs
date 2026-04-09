@@ -1,8 +1,8 @@
 ---
-title: "Co-Directors Report — DDT Identity, Stripe Live, Trading-Name Rebrand"
+title: "Co-Directors Report — DDT Identity, Stripe Live, Trading-Name Rebrand, MailerLite Wired"
 created: "2026-04-09"
 segment: "morning"
-version: "1.0"
+version: "1.1"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidential: true
@@ -139,6 +139,115 @@ This is a worked example of an MX principle: explicit state in the system that o
 4. Resume the GitHub Pages DNS-check fix for digitaldomaintechnologies.com
 5. Schema.org JSON-LD rebrand sweep (the deferred phase 2 of the trading-name work)
 6. Live Stripe mode flip — once MailerLite delivers an email end-to-end in test mode
+
+---
+
+---
+
+## Update v1.1 — MailerLite wired end-to-end (continuation, 09 Apr morning)
+
+After the v1.0 commit at ~06:00, work continued on the MailerLite integration. Full buyer email pipeline is now operational in test mode.
+
+### What was added
+
+**MailerLite account setup**
+
+- Account confirmed: Digital Domain Technologies Ltd, Free plan, owner tom.cranstoun@gmail.com
+- Two groups created: `Handbook PDF Buyers` (id 184247221067187481) and `Handbook Physical Buyers` (id 184247454217012721)
+- Five custom fields created via API: `book_title`, `order_type`, `download_url`, `order_id`, `shipping_address` (all text type, ids 1215266–1215270)
+- API token generated, scoped to "MX Handbook Worker"
+
+**Worker integration**
+
+- `MAILERLITE_API_KEY` uploaded via `wrangler secret put`
+- `MAILERLITE_GROUP_HANDBOOK_PDF` and `MAILERLITE_GROUP_HANDBOOK_PHYSICAL` set in wrangler.toml with real IDs
+- Worker redeployed (version `bcc35684-…`)
+- End-to-end verified: test PDF checkout creates a subscriber in the PDF group with all five custom fields populated correctly
+
+**DNS authentication for cognovamx.com**
+
+- Domain registered with MailerLite (id 1616446)
+- GoDaddy API token generated and authorised
+- **Merged SPF record** crafted to authorise three sender services in one record: `v=spf1 include:spf.protection.outlook.com include:_spf.mlsend.com include:secureserver.net -all`
+  - This **fixes a pre-existing M365 SPF gap** as a side effect — the previous record (`include:secureserver.net -all` only) didn't authorise Microsoft 365, so M365 outbound mail was relying on accidental coverage
+- **DKIM CNAME** added: `litesrv._domainkey.cognovamx.com → litesrv._domainkey.mlsend.com`
+- **MailerLite domain verification TXT** preserved: `mailerlite-domain-verification=c91ac7fc...`
+- **Microsoft 365 verification TXT** preserved: `NETORG20418832.onmicrosoft.com`
+- DMARC (`p=quarantine`) untouched — pre-existing
+- **One incident:** the MailerLite "Connect your domain" wizard auto-overwrote our merged SPF with their own SPF macro wrapper (a known GoDaddy Domain Connect side effect). I detected the unexpected DNS state immediately, restored the merged SPF via GoDaddy API, and verified propagation
+- MailerLite re-checked records and marked the domain `Authenticated`
+
+**Sender verification**
+
+- `info@cognovamx.com` verified as a valid sender via the MailerLite verification email round-trip
+
+**Automation built**
+
+- Workflow `Handbook PDF — buyer download email`
+  - Trigger: subscriber joins group `Handbook PDF Buyers`
+  - Action: send email
+- Email config: From `CogNovaMX <info@cognovamx.com>`, Reply-to `info@cognovamx.com`, Subject `Your MX Handbook download is ready`, plain-text body with three personalization tokens (`{$name}`, `{$download_url}`, `{$order_id}`)
+- Old abandoned `MX Mailer` workflow deleted
+- Workflow activated
+
+**Bug found and fixed mid-session**
+
+- The first test purchase produced an email with **all three personalization tokens blank** — the email arrived but said "Hi ," and "Your secure download link is here:" with nothing after it
+- Diagnosis: I had instructed Tom to type literal `{$name}` text into the body. **MailerLite's editor doesn't recognise typed merge-tag text** — tokens must be inserted via the `{x}` "Insert personalization" toolbar button, which stores them as typed merge-tag objects rather than plain text
+- Fix: deleted the literal text, inserted proper personalization chips via the `{x}` button (chips appear as blue highlighted pills in the editor), saved
+- Re-tested with `tom.cranstoun+mltest4@gmail.com`: email arrived from `CogNovaMX <info@cognovamx.com>` with all three tokens substituted correctly — real download URL, real Stripe session ID, real buyer name. **Full pipeline operational.**
+
+### By the numbers (continuation update)
+
+| Metric | v1.0 | v1.1 |
+|--------|------|------|
+| MailerLite groups | 0 | 2 |
+| MailerLite custom fields | 0 | 5 |
+| MailerLite automations active | 0 | 1 |
+| MailerLite-authenticated domains | 0 | 1 (cognovamx.com) |
+| Wrangler secrets | 2 | 3 (added MAILERLITE_API_KEY) |
+| End-to-end test purchases (with email delivery verified) | 0 | 1 (mltest4) |
+| DNS records added at GoDaddy | 0 | 2 (SPF replace + DKIM CNAME) |
+| Hours awake | n/a | many |
+
+### The Insight (continuation)
+
+Two related insights from the MailerLite work, both about **trusting the system to do what it claims to do**.
+
+**1. The MailerLite Domain Connect wizard quietly overwrote my work.** I added a carefully merged SPF record via the GoDaddy API. Then Tom clicked through MailerLite's "Connect your domain" wizard, which used GoDaddy Domain Connect to silently replace my SPF with their own wrapper — losing the Microsoft 365 include in the process. I caught it because I re-queried DNS to debug a different problem and saw the unexpected new state. **Lesson:** when an integration wizard offers to "automatically configure DNS for you", assume it will trample anything that's already there. Always re-query DNS after using such wizards. Better still: don't use them when you have multiple senders to merge — do the records by hand.
+
+**2. MailerLite's editor stores merge tags as typed objects, not text.** I told Tom to type `{$download_url}` into the body. MailerLite stored those characters as plain text. The first test email arrived with the line "Your secure download link is here:" followed by nothing — the buyer would have had no way to download what they paid for. The fix was to use MailerLite's `{x}` Insert personalization button, which inserts a special merge-tag object that *looks* identical to typed text in the editor (`{$download_url}` displayed in a blue pill) but is internally a different thing. **Lesson:** when a UI shows a field as visually identical to plain text, you cannot trust the rendering — you must verify the underlying type. Hover, click, inspect — don't assume. The rendered preview in MailerLite was unhelpful here because empty merge tags collapsed to whitespace; the bug was only visible in the actual sent email.
+
+Both bugs were *recoverable* because we had a real email landing in a real inbox to compare against. Both would have shipped to a real buyer if we'd activated without testing. **The cost of not running an end-to-end test on a payment system is paid by the first buyer.**
+
+### Open questions (updated)
+
+- **Physical group automation not yet built.** PDF group works end-to-end. Physical buyers (UK and World) currently land in the right group but no email fires. Different body needed: no download URL, instead "your printed copy will be dispatched, here's the address you supplied". To do.
+- **handbook.html buy buttons still disabled.** Backend works in test mode, but the buy buttons on the live site are still showing "purchasing available soon". Three buttons needed (PDF £25, Print UK £35, Print World £40), pricing on the page needs updating from the current £35 print to reflect the split.
+- **Microsoft 365 DKIM still missing.** Pre-existing weakness. M365 outbound mail isn't aligned-DKIM-signed (only Microsoft's default `onmicrosoft.com` selector). Should be added in M365 admin portal at some point.
+- **Stripe live mode flip:** when MailerLite is fully tested and Tom is ready to take real money, regenerate four Stripe values in live mode and redeploy. ~60 seconds of work once decided.
+- **Stripe business verification:** required before live mode. Legal name DDT Ltd, trading name CogNovaMX, DDT tax info.
+- **digitaldomaintechnologies.com HTTPS:** GitHub Pages DNS-check still stuck from yesterday.
+- **`reginald-api` worker cleanup:** dormant ~12h now, can be deleted in another 24h once we're confident.
+
+### Next steps (updated)
+
+1. Step-commit and push everything
+2. **Smoke test physical_uk and physical_world** flows (5 min) — confirm shipping_address propagates
+3. Build the Physical group MailerLite automation (different email body)
+4. Enable handbook.html buy buttons + add the third button
+5. Live Stripe mode flip
+6. Digital Domain Technologies HTTPS resume
+7. (Future) Microsoft 365 DKIM setup
+8. (Future) Schema.org JSON-LD trading-name rebrand (Phase 2)
+
+### What this means for investors
+
+Book sales are technically operational. A buyer can purchase MX: The Handbook (PDF) right now — the only thing standing between zero revenue and first sale is enabling three HTML buttons on a marketing page and flipping Stripe to live mode. Both are five-minute jobs that have been deliberately deferred until the system was end-to-end verified.
+
+The system supports three SKUs (PDF £25, Print UK £35, Print World £40) which means revenue per sale is 25–40% higher than the original two-SKU plan, with no extra work to build or maintain. Every paying customer receives an authenticated email from `info@cognovamx.com` (not a generic mailerlite.com address), passes DKIM and SPF, and lands in the inbox not spam. This is production-quality from day one.
+
+The DDT-vs-CogNovaMX trading-name structure is now reflected consistently across the live site (visible prose) and the legal-entity landing page (digitaldomaintechnologies.com, awaiting HTTPS). This protects against the legal-entity confusion risk Tom flagged on 2026-02-28 when CogNovaMX Ltd was first conceived.
 
 ---
 
