@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Audit Pipeline Now Trustworthy, llms.txt Advice and Estate Aligned"
 created: "2026-04-10"
 segment: "morning"
-version: "1.0"
+version: "1.1"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
 confidential: true
@@ -74,7 +74,7 @@ The profile picture path (`images/avatars/tom-avatar.webp` → `../images/avatar
 | Commits (allaboutv2) | 3 |
 | Commits (mx-audit) | 3 |
 | Commits (mx-crm) | 1 |
-| Total commits | 28 |
+| Total commits | 32 |
 | Lines added (mx-audit) | +1,874 |
 | Lines added (mx-outputs) | +666 |
 | Lines added (allaboutv2) | +223 |
@@ -152,3 +152,17 @@ Both are trust signals. Clients reading the audit report can see the verificatio
 | mx-outputs | 4fc0804 | Evening directors report |
 | mx-outputs | d4831c0 | Directors report v1.1 + linter updates |
 | mx-crm | 0c4fa60 | Add llms.txt to dotfusion sitemap |
+| mx-audit | c52d0e4 | Baseline audit snapshot of llms-txt-guide (results-blog/) |
+| mx-outputs | aa87220 | Morning directors report 2026-04-10 |
+| MX-Hub | ce726d96 | Bump mx-outputs — morning directors report |
+| MX-Hub | 6ab18ce5 | Bump mx-audit — baseline audit snapshot |
+
+---
+
+## Continuation (10 April morning)
+
+Morning session: wrote the directors report (this document), committed
+the untracked `results-blog/` baseline audit snapshot to mx-audit,
+and pushed all repos clean. No code changes — documentation only.
+
+Total commits now: 32 (was 28 at session end).
