@@ -89,7 +89,19 @@
                 "price": "35.00",
                 "priceCurrency": "GBP",
                 "availability": "https://schema.org/InStock",
-                "name": "Print edition",
+                "name": "Print edition (UK)",
+                "url": "https://mx.allabout.network/books/handbook.html#buy",
+                "eligibleRegion": {
+                    "@type": "Country",
+                    "name": "GB"
+                }
+            },
+            {
+                "@type": "Offer",
+                "price": "40.00",
+                "priceCurrency": "GBP",
+                "availability": "https://schema.org/InStock",
+                "name": "Print edition (Worldwide)",
                 "url": "https://mx.allabout.network/books/handbook.html#buy"
             }
         ]
@@ -136,11 +148,33 @@
                 "price": "35.00",
                 "priceCurrency": "GBP",
                 "availability": "https://schema.org/InStock",
-                "name": "Print edition",
+                "name": "Print edition (UK)",
                 "url": "https://mx.allabout.network/books/handbook.html#buy",
+                "eligibleRegion": {
+                    "@type": "Country",
+                    "name": "GB"
+                },
                 "priceSpecification": {
                     "@type": "PriceSpecification",
                     "price": "35.00",
+                    "priceCurrency": "GBP",
+                    "valueAddedTaxIncluded": true
+                },
+                "seller": {
+                    "@type": "Organization",
+                    "name": "CogNovaMX Ltd"
+                }
+            },
+            {
+                "@type": "Offer",
+                "price": "40.00",
+                "priceCurrency": "GBP",
+                "availability": "https://schema.org/InStock",
+                "name": "Print edition (Worldwide)",
+                "url": "https://mx.allabout.network/books/handbook.html#buy",
+                "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "price": "40.00",
                     "priceCurrency": "GBP",
                     "valueAddedTaxIncluded": true
                 },
@@ -153,32 +187,86 @@
     }
     </script>
 
-    <!-- Top-level Offer Schema (PDF edition) for stage 4 detection -->
+    <!-- Top-level Offer Schemas for stage 4 (price understanding) detection -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Offer",
-        "name": "MX: The Handbook — PDF edition",
-        "url": "https://mx.allabout.network/books/handbook.html#buy",
-        "price": "25.00",
-        "priceCurrency": "GBP",
-        "availability": "https://schema.org/InStock",
-        "itemOffered": {
-            "@type": "Book",
-            "name": "MX: The Handbook",
-            "isbn": "9781067638405"
-        },
-        "seller": {
-            "@type": "Organization",
-            "name": "CogNovaMX Ltd"
-        },
-        "priceSpecification": {
-            "@type": "PriceSpecification",
+    [
+        {
+            "@context": "https://schema.org",
+            "@type": "Offer",
+            "name": "MX: The Handbook — PDF edition",
+            "url": "https://mx.allabout.network/books/handbook.html#buy",
             "price": "25.00",
             "priceCurrency": "GBP",
-            "valueAddedTaxIncluded": true
+            "availability": "https://schema.org/InStock",
+            "itemOffered": {
+                "@type": "Book",
+                "name": "MX: The Handbook",
+                "isbn": "9781067638405"
+            },
+            "seller": {
+                "@type": "Organization",
+                "name": "CogNovaMX Ltd"
+            },
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "25.00",
+                "priceCurrency": "GBP",
+                "valueAddedTaxIncluded": true
+            }
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "Offer",
+            "name": "MX: The Handbook — Print edition (UK)",
+            "url": "https://mx.allabout.network/books/handbook.html#buy",
+            "price": "35.00",
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock",
+            "eligibleRegion": {
+                "@type": "Country",
+                "name": "GB"
+            },
+            "itemOffered": {
+                "@type": "Book",
+                "name": "MX: The Handbook",
+                "isbn": "9781067638405"
+            },
+            "seller": {
+                "@type": "Organization",
+                "name": "CogNovaMX Ltd"
+            },
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "35.00",
+                "priceCurrency": "GBP",
+                "valueAddedTaxIncluded": true
+            }
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "Offer",
+            "name": "MX: The Handbook — Print edition (Worldwide)",
+            "url": "https://mx.allabout.network/books/handbook.html#buy",
+            "price": "40.00",
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock",
+            "itemOffered": {
+                "@type": "Book",
+                "name": "MX: The Handbook",
+                "isbn": "9781067638405"
+            },
+            "seller": {
+                "@type": "Organization",
+                "name": "CogNovaMX Ltd"
+            },
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "40.00",
+                "priceCurrency": "GBP",
+                "valueAddedTaxIncluded": true
+            }
         }
-    }
+    ]
     </script>
 
     <!-- BreadcrumbList Schema -->
@@ -288,8 +376,10 @@
                 <dd>Digital Domain Technologies Ltd, trading as CogNovaMX</dd>
                 <dt>PDF edition</dt>
                 <dd>£25 — instant download, 4 downloads over 14 days</dd>
-                <dt>Print edition</dt>
-                <dd>£35 plus postage and packing</dd>
+                <dt>Print edition (UK)</dt>
+                <dd>£35 — posted paperback, UK delivery</dd>
+                <dt>Print edition (Worldwide)</dt>
+                <dd>£40 — posted paperback, international delivery</dd>
                 <dt>Audience</dt>
                 <dd>Frontend developers, UX designers, technical leads, QA engineers, business leaders</dd>
             </dl>
@@ -317,7 +407,7 @@
         <section class="section" aria-label="Edition comparison">
             <h2 class="section-title">Editions</h2>
             <table class="edition-comparison">
-                <caption>PDF and Print editions of MX: The Handbook</caption>
+                <caption>PDF and Print editions of MX: The Handbook — UK and Worldwide shipping available</caption>
                 <thead>
                     <tr>
                         <th scope="col">Edition</th>
@@ -334,9 +424,15 @@
                         <td>Developers who want to copy-paste patterns</td>
                     </tr>
                     <tr>
-                        <th scope="row">Print</th>
-                        <td>£35 plus P&amp;P</td>
-                        <td>Posted paperback</td>
+                        <th scope="row">Print (UK)</th>
+                        <td>£35</td>
+                        <td>Posted paperback — UK delivery</td>
+                        <td>Reference on the desk, team libraries</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Print (Worldwide)</th>
+                        <td>£40</td>
+                        <td>Posted paperback — international delivery</td>
                         <td>Reference on the desk, team libraries</td>
                     </tr>
                 </tbody>
@@ -370,17 +466,20 @@
         <section class="section signup-section" id="buy" aria-label="Buy now">
             <h2 class="section-title">Get the book</h2>
             <p class="signup-intro">ISBN: 978-1-067638-40-5</p>
-            <p class="signup-intro">PDF: secure download link delivered instantly. Valid for 4 downloads over 14 days.</p>
+            <p class="signup-intro">PDF: secure download link delivered instantly. Valid for 4 downloads over 14 days. Print: posted paperback — £35 UK, £40 worldwide.</p>
 
             <div class="buy-buttons">
-                <button type="button" class="cta-button cta-disabled" id="buy-pdf-btn" data-product="pdf" disabled aria-disabled="true">
+                <button type="button" class="cta-button" id="buy-pdf-btn" data-product="pdf">
                     Buy PDF — £25
                 </button>
-                <button type="button" class="cta-button cta-secondary cta-disabled" id="buy-physical-btn" data-product="physical" disabled aria-disabled="true">
-                    Buy Physical — £35 +P&amp;P
+                <button type="button" class="cta-button cta-secondary" id="buy-physical-uk-btn" data-product="physical_uk">
+                    Buy Print (UK) — £35
+                </button>
+                <button type="button" class="cta-button cta-secondary" id="buy-physical-world-btn" data-product="physical_world">
+                    Buy Print (Worldwide) — £40
                 </button>
             </div>
-            <p id="buy-status" class="signup-secondary" aria-live="polite">Purchasing available soon</p>
+            <p id="buy-status" class="signup-secondary" aria-live="polite"></p>
             <p class="signup-secondary">Questions? <a href="mailto:mx-printworks@cognovamx.com">mx-printworks@cognovamx.com</a></p>
         </section>
 
@@ -449,8 +548,12 @@
         handleBuy('pdf');
       });
 
-      document.getElementById('buy-physical-btn').addEventListener('click', function () {
-        handleBuy('physical');
+      document.getElementById('buy-physical-uk-btn').addEventListener('click', function () {
+        handleBuy('physical_uk');
+      });
+
+      document.getElementById('buy-physical-world-btn').addEventListener('click', function () {
+        handleBuy('physical_world');
       });
     })();
     </script>
