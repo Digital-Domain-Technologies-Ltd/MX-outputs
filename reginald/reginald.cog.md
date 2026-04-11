@@ -1,5 +1,4 @@
 ---
-name: "reginald"
 title: "REGINALD — The Global COG Registry"
 description: "Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation. The DNS of machine-readable documentation."
 author: "Tom Cranstoun"
@@ -8,7 +7,6 @@ modified: 2026-03-19
 version: "1.0"
 
 mx:
-  type: info-doc
   status: active
   contentType: info-doc
   category: reginald
