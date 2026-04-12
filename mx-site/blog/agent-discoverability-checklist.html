@@ -47,7 +47,7 @@
     "name": "Agent Discoverability: What Your Site Is Missing | CogNovaMX",
     "description": "Diagnostic guide for website owners — the structured signals AI agents look for, what each gap costs, and what fixing it involves. Covers robots.txt, llms.txt, agent cards, semantic HTML, Schema.org, and WCAG.",
     "url": "https://mx.allabout.network/blog/agent-discoverability-checklist.html",
-    "dateModified": "2026-04-02",
+    "dateModified": "2026-04-12",
     "inLanguage": "en-GB",
     "publisher": {
         "@id": "https://mx.allabout.network/about/about.html#organization"
@@ -136,7 +136,7 @@
         "@id": "https://mx.allabout.network/about/about.html#organization"
     },
     "datePublished": "2026-04-02",
-    "dateModified": "2026-04-02",
+    "dateModified": "2026-04-12",
     "inLanguage": "en-GB",
     "mainEntityOfPage": {
         "@id": "https://mx.allabout.network/blog/agent-discoverability-checklist.html"
@@ -213,7 +213,13 @@
       <ul>
         <li><a href="#the-5-stage-agent-journey">The 5-Stage Agent Journey</a></li>
         <li><a href="#the-crawl-layer">The Crawl Layer</a></li>
-        <li><a href="#the-site-description-layer">The Site Description Layer</a></li>
+        <li><a href="#the-site-description-layer">The Site Description Layer</a>
+          <ul>
+            <li><a href="#problem-one">Problem one — not served as HTML</a></li>
+            <li><a href="#problem-two">Problem two — not in sitemap.xml</a></li>
+            <li><a href="#the-meta-tag-approach">The meta tag approach</a></li>
+          </ul>
+        </li>
         <li><a href="#the-service-description-layer">The Service Description Layer</a></li>
         <li><a href="#the-page-structure-layer">The Page Structure Layer</a></li>
         <li><a href="#the-structured-data-layer">The Structured Data Layer</a></li>
@@ -228,7 +234,7 @@
           <h1>Agent Discoverability: What Your Site Is Missing</h1>
           <div class="article-meta"
              data-published="2026-03-31"
-             data-modified="2026-03-31"
+             data-modified="2026-04-12"
              data-reading-time="12 min">
           <time datetime="2026-03-31">31 March 2026</time>
           <span>·</span>
@@ -262,8 +268,21 @@
 <p>An agent that is permitted to crawl your site still has no structured description of what it will find. <code>llms.txt</code> fills this gap — and 85% of sites have not implemented it.</p>
 <p>A site without <code>llms.txt</code> forces AI systems to infer its purpose, structure, and permissions from page content alone. That inference is imprecise. The model may mischaracterise the site's subject matter, miss important content areas, or apply default permissions that do not match your intent.</p>
 <p><code>llms.txt</code> is a plain text file at your domain root. It describes the site in terms an AI can use: what it is for, what its main sections contain, which pages are most relevant, and what you permit. It takes less than an hour to write for most sites and requires no technical infrastructure beyond the ability to place a file at your domain root.</p>
-<p>There is an important caveat. llms.txt is served as a text or markdown MIME type, not HTML. Training-time crawlers (Common Crawl and its derivatives) do not typically ingest non-HTML files. At inference time, agents go straight to relevant pages — they do not fetch a site-level directory first. To close this gap today, publish the same content as an HTML page (for example, <code>/llms.html</code> or <code>/about/for-agents</code>) and include it in your sitemap, so training crawlers ingest it and the guidance enters model knowledge bases.</p>
-<p>A site without one is leaving its AI representation to chance. A site with one — plus an HTML equivalent in the sitemap — is providing agents with a briefing document before they start working with the content. For a full guide, see <a href="llms-txt-guide.html">What Is llms.txt and Why Does Your Site Need One</a>.</p>
+<p>But most implementations are broken in two specific ways that are easy to miss and easy to fix.</p>
+
+<h3 id="problem-one" tabindex="-1">Problem one — it is not served as HTML</h3>
+<p>Common Crawl, which underpins the training datasets of most large language models, indexes HTML pages. Your web server will serve <code>llms.txt</code> with a <code>Content-Type: text/plain</code> header by default. Common Crawl will not treat that as an HTML page, and it will not be indexed as one. The fix is to wrap the content in a minimal HTML document and serve it with <code>Content-Type: text/html</code> — a Cloudflare Worker or equivalent edge function handles this cleanly for the one URL that needs it.</p>
+
+<h3 id="problem-two" tabindex="-1">Problem two — it is not in <code>sitemap.xml</code></h3>
+<p>If your <code>llms.txt</code> is not referenced in your sitemap, crawlers have no reliable signal that it exists. It will not be systematically discovered, which means it will not make it into Common Crawl, and therefore not into LLM training data.</p>
+
+<h3 id="the-meta-tag-approach" tabindex="-1">The meta tag approach</h3>
+<p>Beyond the file itself, add a <code>&lt;link&gt;</code> tag pointing to your <code>llms.txt</code> in the <code>&lt;head&gt;</code> of every page:</p>
+<pre><code class="language-html">&lt;link rel="llms-txt" href="/llms.txt"&gt;</code></pre>
+<p>This tells any agent or crawler that encounters the page exactly where to find the <code>llms.txt</code> file — no guessing, no root discovery required. No new standard needs to be adopted. No new crawler behaviour needs to be assumed. The structural information is present in the HTML itself, where crawlers have always looked.</p>
+<p>This is especially important for headless and JavaScript-rendered sites. When a headless CMS delivers content through APIs to a frontend that renders it in JavaScript, AI scrapers typically see an empty shell — no content, just a <code>&lt;div id="root"&gt;</code>. The <code>&lt;link&gt;</code> tag sits in the <code>&lt;head&gt;</code>, the part of the page served before JavaScript runs, and often the only part most crawlers will ever see.</p>
+
+<p>A site without <code>llms.txt</code> is leaving its AI representation to chance. A site with one — served as HTML and included in <code>sitemap.xml</code> — is providing agents with a briefing document before they start working with the content. For the full guide, including working Cloudflare Worker code, see <a href="llms-txt-guide.html">Why llms.txt Probably Isn't Working — And What to Do About It</a>.</p>
 
 <h2 id="the-service-description-layer" tabindex="-1">The Service Description Layer</h2>
 <p><code>llms.txt</code> describes content. An agent card describes a service.</p>
@@ -307,7 +326,7 @@
 
 <h3>Related reading</h3>
 <ul>
-<li><a href="llms-txt-guide.html">What Is llms.txt and Why Does Your Site Need One</a> — practical guide to the site description layer</li>
+<li><a href="llms-txt-guide.html">Why llms.txt Probably Isn't Working — And What to Do About It</a> — the two structural problems and working Cloudflare Worker code</li>
 <li><a href="what-is-machine-experience.html">What Is Machine Experience?</a> — the discipline behind these patterns</li>
 <li><a href="machine-experience-adding-metadata.html">Machine Experience: Adding Metadata</a> — the 5-stage agent journey in depth</li>
 <li><a href="mx-a-new-role.html">MX: A New Role</a> — served vs rendered HTML and audit data</li>
