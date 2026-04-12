@@ -243,7 +243,7 @@
         </header>
 
         <p>AI agents that act on behalf of users — finding services, comparing options, making recommendations, completing transactions — do not discover websites the way search engines do. They look for structured signals at specific locations. If those signals are absent, the site is functionally invisible to that class of agent, regardless of how good its content is.</p>
-<p>Most sites are missing most of these signals. Recent audits paint a stark picture: 70% of professional sites lack proper semantic HTML, 85% have no llms.txt file, 60% actively block major AI crawlers, and 55% have missing or partial Schema.org coverage. These are not budget-constrained sites. These patterns appear across organisations with sophisticated digital teams, substantial web budgets, and public commitments to digital excellence. The gap is not about resources. It is about awareness.</p>
+<p>Most sites are missing most of these signals. The pattern is consistent across organisations with sophisticated digital teams, substantial web budgets, and public commitments to digital excellence: missing semantic HTML, no llms.txt file, AI crawlers actively blocked in robots.txt, and incomplete Schema.org coverage. The gap is not about resources. It is about awareness.</p>
 <p>This post diagnoses what the signals are, what the absence of each one costs, and what fixing it involves.</p>
 
 <h2 id="the-5-stage-agent-journey" tabindex="-1">The 5-Stage Agent Journey</h2>
@@ -259,13 +259,13 @@
 
 <h2 id="the-crawl-layer" tabindex="-1">The Crawl Layer</h2>
 <p>Before any content is read, an agent checks whether it is permitted to read it. This is Stage 1 — Discovery — and it starts with <code>robots.txt</code>.</p>
-<p>Audits show 60% of professional sites block major AI agents. Sites routinely block GPTBot, ClaudeBot, Amazonbot, and other AI crawlers through robots.txt directives or services like Cloudflare. The irony is stark: organisations want AI-mediated recommendations but actively prevent agents from accessing the content they need to make those recommendations.</p>
+<p>A significant proportion of professional sites block major AI agents. Sites routinely block GPTBot, ClaudeBot, Amazonbot, and other AI crawlers through robots.txt directives or services like Cloudflare. The irony is stark: organisations want AI-mediated recommendations but actively prevent agents from accessing the content they need to make those recommendations.</p>
 <p>Many sites block AI crawlers without intending to — typically because they added broad disallow rules to block scrapers and those rules catch legitimate AI user-agent strings too. The result is a site that has actively told AI systems to stay away. If your robots.txt blocks AI crawlers, you are opting out of AI indexing entirely. Zero recommendations. Zero citations. Complete invisibility.</p>
 <p>Check your <code>robots.txt</code> and verify which user agents are disallowed. The worst-agent design principle applies here: you cannot detect which agent is visiting — User-Agent strings are spoofable. Design for the worst agent, and you are compatible with all agents.</p>
 <p>The inverse problem also exists: no <code>robots.txt</code> at all, which leaves AI systems with no guidance. A minimal <code>robots.txt</code> that explicitly permits reputable AI crawlers is a positive signal, not just the absence of a negative one.</p>
 
 <h2 id="the-site-description-layer" tabindex="-1">The Site Description Layer</h2>
-<p>An agent that is permitted to crawl your site still has no structured description of what it will find. <code>llms.txt</code> fills this gap — and 85% of sites have not implemented it.</p>
+<p>An agent that is permitted to crawl your site still has no structured description of what it will find. <code>llms.txt</code> fills this gap — and the vast majority of sites have not implemented it.</p>
 <p>A site without <code>llms.txt</code> forces AI systems to infer its purpose, structure, and permissions from page content alone. That inference is imprecise. The model may mischaracterise the site's subject matter, miss important content areas, or apply default permissions that do not match your intent.</p>
 <p><code>llms.txt</code> is a plain text file at your domain root. It describes the site in terms an AI can use: what it is for, what its main sections contain, which pages are most relevant, and what you permit. It takes less than an hour to write for most sites and requires no technical infrastructure beyond the ability to place a file at your domain root.</p>
 <p>But most implementations are broken in two specific ways that are easy to miss and easy to fix.</p>
@@ -292,7 +292,7 @@
 
 <h2 id="the-page-structure-layer" tabindex="-1">The Page Structure Layer</h2>
 <p>At the individual page level, agents extract meaning from HTML structure. They rely on semantic elements — <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code> — to understand what a page contains and how it is organised.</p>
-<p>70% of sites audited lack proper semantic HTML. Most use generic <code>&lt;div&gt;</code> containers with CSS classes for visual hierarchy. Agents parsing served HTML — the static HTML sent from your server before JavaScript executes — cannot distinguish navigation from content from sidebars. The structure that humans see visually does not exist in the HTML.</p>
+<p>Most sites lack proper semantic HTML. The majority use generic <code>&lt;div&gt;</code> containers with CSS classes for visual hierarchy. Agents parsing served HTML — the static HTML sent from your server before JavaScript executes — cannot distinguish navigation from content from sidebars. The structure that humans see visually does not exist in the HTML.</p>
 <p>This is the served HTML versus rendered HTML distinction. Many AI agents — server-side parsers like those behind ChatGPT and Claude — fetch your URL and process raw HTML without executing JavaScript. If your site requires JavaScript to display products, show prices, or render navigation, these agents see nothing. Your carefully crafted user experience is invisible to them.</p>
 <p>Even browser-based agents that execute JavaScript need semantic structure. They can see everything humans see, but they parse structure like server-side agents. Visual design cues — colour, spacing, animation — do not help agents understand content purpose.</p>
 <p>The practical rule: design for the worst-case agent (served HTML, no JavaScript), and you automatically support all agents.</p>
@@ -300,9 +300,9 @@
 
 <h2 id="the-structured-data-layer" tabindex="-1">The Structured Data Layer</h2>
 <p>Schema.org markup tells machines not just that something is content, but what kind of content it is. An <code>Article</code> is different from a <code>Product</code>, a <code>LocalBusiness</code>, an <code>Event</code>, or a <code>Service</code>. Each type carries specific properties that agents can read and act on.</p>
-<p>55% of sites audited have missing or partial Schema.org coverage. Structured data exists on some pages but not others. Product pages have pricing Schema.org, but comparison tables lack it. Event pages have dates but not registration URLs. The inconsistent implementation forces agents to guess which pages contain authoritative data.</p>
+<p>Most sites have missing or partial Schema.org coverage. Structured data exists on some pages but not others. Product pages have pricing Schema.org, but comparison tables lack it. Event pages have dates but not registration URLs. The inconsistent implementation forces agents to guess which pages contain authoritative data.</p>
 <p>A page with proper structured pricing metadata answers the question of what something costs in milliseconds at near-zero compute cost. A page without it forces every visiting machine to spend tokens figuring out the price, the currency, and the availability — and to risk getting it wrong. The Danube cruise error, where £2,030 became £203,000 because European decimal formatting was misinterpreted, is not a theoretical risk. It happened.</p>
-<p>The six Schema.org types that cover about 90% of what most sites need: Organisation/LocalBusiness, Article/BlogPosting, Product/Offer, FAQPage, HowTo, and WebPage/WebSite. Use JSON-LD — it separates structured data from your HTML, making it easier to maintain, simpler to implement, and more reliably parsed.</p>
+<p>The six Schema.org types that cover the majority of what most sites need: Organisation/LocalBusiness, Article/BlogPosting, Product/Offer, FAQPage, HowTo, and WebPage/WebSite. Use JSON-LD — it separates structured data from your HTML, making it easier to maintain, simpler to implement, and more reliably parsed.</p>
 <p>Common gaps to check: articles without <code>Article</code> markup, product pages without <code>Product</code> and <code>Offer</code> markup, contact pages without <code>LocalBusiness</code> or <code>Organization</code> markup, and FAQ content without <code>FAQPage</code> markup. Each gap is an opportunity for an agent to misunderstand what the page contains.</p>
 
 <h2 id="the-accessibility-layer" tabindex="-1">The Accessibility Layer</h2>
@@ -315,7 +315,7 @@
 <li><strong>WCAG 2.4.4</strong> (Link Purpose) — meaningful link text. "Click here" tells an agent nothing about destination.</li>
 <li><strong>WCAG 4.1.1</strong> (Parsing) — valid HTML. Malformed markup breaks machine parsers.</li>
 </ul>
-<p>75% of sites audited have explicit state missing — form validation errors display as visual colour changes, checkout progress shows via CSS-animated steppers, button states indicate loading with spinners. None of this state appears in HTML attributes where agents can read it. State exists visually but not semantically.</p>
+<p>Most sites have explicit state missing — form validation errors display as visual colour changes, checkout progress shows via CSS-animated steppers, button states indicate loading with spinners. None of this state appears in HTML attributes where agents can read it. State exists visually but not semantically.</p>
 <p>A WCAG audit of your site is simultaneously an MX audit. Errors in the accessibility report are errors in your machine experience. They are the same problems. One implementation serves both audiences.</p>
 
 <h2 id="what-this-means-in-practice" tabindex="-1">What This Means in Practice</h2>
