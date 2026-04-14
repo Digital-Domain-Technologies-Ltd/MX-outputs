@@ -1,17 +1,17 @@
 ---
-title: "Co-Directors Report — Printer Pipeline Hardened, Strategic Blog Published"
-description: "Morning session: Stripe-to-printer email fix and dual-secret webhook verification, plus a new blog post tying strategy, implementation and community to the agentic journey."
+title: "Co-Directors Report — Printer Pipeline, Strategic Blog, and Audit Pipeline Overhaul"
+description: "Morning session: printer email fix with dual-secret verification, strategic blog launch, and full audit-report pipeline redesigned as a two-pass infill-then-rewrite flow with readability enforcement and rate-limiter fixes."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-14
 modified: 2026-04-14
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
   contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning, stripe, webhook, fulfilment]
+  tags: [directors-report, session, morning, stripe, webhook, fulfilment, audit, readability, rate-limiter]
 ---
 
 # Co-Directors Report — Printer Email Pipeline Hardened and Verified
@@ -53,24 +53,42 @@ Added a Stripe test-mode webhook endpoint, set its signing secret as `STRIPE_WEB
 
 Published a new post on `mx.allabout.network/blog/` framing MX through three pillars (Strategy/Leapfrog, Implementation/Books, Community/The Gathering), with a custom SVG illustrating the four-stage agentic journey resting on those pillars. Cites the original CMS Critic article that called the AI tipping point in 2024. Promotes the free MX Maturity Audit through Digital Domain Technologies and asks for sponsors of The Gathering. Lead card on the blog index, listed in sitemap.
 
+### 7. NEOM Wellbeing audit and audit-pipeline overhaul
+
+Ran a full audit against `neomwellbeing.com` (Shopify storefront, 10 pages). The audit surfaced three classes of problem in our own tooling that we fixed in the same session:
+
+- **Collector blind spots.** The audit missed BreadcrumbList microdata (only checked JSON-LD) and could not see Offer.availability when it was nested inside a Product's offers field. Fixed: JSON-LD expansion now walks nested typed properties, microdata is parsed into the schema inventory, and every entity gets a propertyNames array so the catalogue-visibility questionnaire can answer truthfully. 266 tests still pass.
+- **Rate limiter crash on Shopify.** The audit tool crashed before crawling with "Requested tokens 1 exceeds maximum tokens per interval 0.5" because Shopify's 0.5 req/s config was passed verbatim to a library that requires tokens >= 1. Fixed: sub-1 rates are now inverted to "1 token per N ms" (same effective rate, valid math). Also added per-request retry-on-429 to the agent access test so burst-triggered 429s no longer contaminate every agent's result.
+- **Report hallucinations.** The LLM was placing data and writing narrative in the same pass, which leaked fabrications (e.g. a fake "Performance: 62/100" score). Redesigned /audit-report as a two-pass pipeline: Pass 1 (infill-report.js) mechanically places every fact into a skeleton with `<!-- REWRITE: ... -->` blocks for narrative; Pass 2 (LLM) turns those blocks into prose and cannot change any number. Added a readability checker, pre-write hook, and standalone /audit-readability skill that gate the final report on terse tables, unexplained jargon, missing narrative, and consultant tone.
+
+The NEOM report shipped as both the first delivery and the pattern-proof for the new pipeline.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment (incl. pending) | 8 (3 hub, 2 allaboutv2, 3 mx-outputs) |
-| Files changed (this segment) | 7 (stripe-webhook.js, stripe-verify.js, this report, new blog post + SVG, blog index, sitemap) |
+| Commits this segment | 15 (5 hub, 2 allaboutv2, 3 mx-outputs, 3 mx-audit, 1 mx-crm, 1 mx-outputs PDF) |
+| Repositories touched | allaboutv2, mx-audit, mx-crm, mx-outputs, hub |
 | Worker deploys | 3 (BCC fix, dual-secret support, fourth BCC entry) |
-| Repositories touched | allaboutv2, mx-outputs, hub |
 | New D1 audit rows during verification | 4 |
 | New published blog posts | 1 (AI, MX, and the Future of Business) |
+| Client audit reports shipped | 1 (NEOM Wellbeing, Shopify e-commerce, 10 pages) |
+| mx-audit tests passing after collector + rate-limiter fixes | 266 |
+| New enforcement gates in audit pipeline | 2 (readability check + two-pass infill/rewrite) |
 
 ---
 
 ## The Insight
 
-A silent catch block plus a fallback that does the wrong thing equals an undetectable failure. Two cheap rules close the gap: every provider attempt writes to the audit table, and the fallback's limitations are documented at the call site, not in someone's head. The dual-secret verifier adds a third: testability is a security property — if you can't safely exercise a code path, you cannot trust it.
+Two insights from this morning, both about the same thing: invisible failure modes.
+
+The printer bug was an invisible failure — Resend could fail silently, MailerLite fallback happened without logging, and nobody learned the printer had missed orders. Three cheap rules close it: every provider attempt writes to the audit table, the fallback's limitations are documented at the call site not in someone's head, and the dual-secret verifier makes testability a security property (if you cannot safely exercise a code path, you cannot trust it).
+
+The audit report's fabrications were a different invisible failure — the LLM would write a performance score that did not exist, or claim a BreadcrumbList was absent when it was present as microdata. Nobody would notice unless they happened to cross-check. The fix mirrors the printer one: separate placing data from writing prose (Pass 1 vs Pass 2), make the facts the ground truth that prose cannot override, and gate the output mechanically so drift cannot ship. A readability hook backs it up so terse metric dumps never reach a client.
+
+The pattern across both: silent failures become visible failures only when every attempt writes to an audit trail and every output passes a deterministic gate.
 
 ---
 
@@ -90,8 +108,14 @@ A silent catch block plus a fallback that does the wrong thing equals an undetec
 | 59f2e217 (allaboutv2) | Fix printer email BCC and harden audit logging in Stripe webhook |
 | 1682681 (mx-outputs) | Add morning directors report |
 | 88301741 → e9b285f0 (hub) | Update submodule pointers |
-| pending (allaboutv2) | Add tom.cranstoun@gmail.com to BCC; add dual-secret webhook verification |
 | dca0a82 (mx-outputs) | Update morning directors report v1.1 |
 | 49f1c012 (hub) | Update allaboutv2 + mx-outputs: dual-secret webhook verification and report update |
-| pending (mx-outputs) | Publish AI, MX, and the Future of Business blog post + SVG; update directors report v1.2 |
-| pending (hub) | Update mx-outputs submodule pointer |
+| a20baaa (mx-outputs) | Publish AI, MX, and the Future of Business blog post + SVG |
+| 46caa628 (hub) | Update mx-outputs: publish AI, MX, and the Future of Business blog post |
+| 5aa68cc (mx-audit) | Collector: detect BreadcrumbList microdata and nested Offer properties |
+| fce76e4 (mx-audit) | Fix rate limiter crash on Shopify and add retry-on-429 for agent access |
+| 81f274e (mx-audit) | Infill and templates: REWRITE blocks, MX Journey rows, Pipeline redesign |
+| 2d0cdae (mx-crm) | Add NEOM Wellbeing audit report (2026-04-13) |
+| bc6dfea (mx-outputs) | Add NEOM Wellbeing audit PDF (2026-04-13) |
+| e6557d24 (hub) | Add readability review system for audit reports |
+| 8aeec23e (hub) | Two-pass audit report pipeline + submodule pointer updates |
