@@ -14,12 +14,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 41 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 133 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 54 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 146 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 96 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
-| [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **557** | |
+| [pptx/](pptx/) | 1 | PowerPoint — presentation source files |
+| **Total** | **733** | |
 
 ---
 
@@ -31,9 +31,9 @@ PDF documents — books, manuals, presentations, blog exports.
 
 - [`The-AI-Tipping-Point-CMS-Kickoff-2024.pdf`](pdf/books/chapters/The-AI-Tipping-Point-CMS-Kickoff-2024.pdf)
 - [`chapter-00-introduction-to-mx.pdf`](pdf/books/chapters/chapter-00-introduction-to-mx.pdf)
-- [`mx-introduction-chapter.pdf`](pdf/books/free-book/mx-introduction-chapter.pdf)
-- [`handbook-cover-back.pdf`](pdf/books/handbook/handbook-cover-back.pdf)
-- [`handbook-cover-front.pdf`](pdf/books/handbook/handbook-cover-front.pdf)
+- [`mx-intro-back.pdf`](pdf/books/free-book/mx-intro-back.pdf)
+- [`mx-handbook-back.pdf`](pdf/books/handbook/mx-handbook-back.pdf)
+- [`mx-handbook-cover.pdf`](pdf/books/handbook/mx-handbook-cover.pdf)
 - [`mx-handbook.pdf`](pdf/books/handbook/mx-handbook.pdf)
 - [`mx-protocols-simple.pdf`](pdf/books/protocols/mx-protocols-simple.pdf)
 - [`mx-protocols.pdf`](pdf/books/protocols/mx-protocols.pdf)
@@ -47,13 +47,30 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
+### pdf/outreach/ (8 files)
+
+- [`wix-bookshop-report.pdf`](pdf/outreach/2026-04-01/wix-bookshop-report.pdf)
+- [`bobw-report.pdf`](pdf/outreach/2026-04-07/bobw-report.pdf)
+- [`freeths-report.pdf`](pdf/outreach/2026-04-07/freeths-report.pdf)
+- [`neom-wellbeing-report.pdf`](pdf/outreach/2026-04-07/neom-wellbeing-report.pdf)
+- [`mx-allabout-network-report.pdf`](pdf/outreach/2026-04-11/mx-allabout-network-report.pdf)
+- [`neomwellbeing-report.pdf`](pdf/outreach/2026-04-13/neomwellbeing-report.pdf)
+- [`mx-allabout-blog-report.pdf`](pdf/outreach/2026-04-14/mx-allabout-blog-report.pdf)
+- [`mx-allabout-report.pdf`](pdf/outreach/2026-04-14/mx-allabout-report.pdf)
+  - **2026-04-01/** (1 files)
+  - **2026-04-07/** (3 files)
+  - **2026-04-11/** (1 files)
+  - **2026-04-13/** (1 files)
+  - **2026-04-14/** (2 files)
+
 ### pdf/presentations/ (1 files)
 
-- [`london-cms-experts-2026-02-26.pdf`](pdf/presentations/london-cms-experts-2026-02-26.pdf)
+- [`MX-what-why-when.pdf`](pdf/presentations/MX-what-why-when.pdf)
 
-### pdf/reginald/ (22 files)
+### pdf/reginald/ (23 files)
 
 - [`cog-standalone-manual.pdf`](pdf/reginald/cog-standalone-manual.pdf)
+- [`5-stage-journey.svg`](pdf/reginald/diagrams/5-stage-journey.svg)
 - [`cdn-architecture.png`](pdf/reginald/diagrams/cdn-architecture.png)
 - [`cdn-architecture.svg`](pdf/reginald/diagrams/cdn-architecture.svg)
 - [`cog-anatomy.png`](pdf/reginald/diagrams/cog-anatomy.png)
@@ -75,11 +92,12 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`maxine-integration-guide.pdf`](pdf/reginald/maxine-integration-guide.pdf)
 - [`reginald-implementation-plan.pdf`](pdf/reginald/reginald-implementation-plan.pdf)
 - [`reginald-manual.pdf`](pdf/reginald/reginald-manual.pdf)
-  - **diagrams/** (18 files)
+  - **diagrams/** (19 files)
 
-### pdf/reports/ (1 files)
+### pdf/reports/ (2 files)
 
 - [`agentica-report.pdf`](pdf/reports/agentica-report.pdf)
+- [`paprikastudios-report.pdf`](pdf/reports/paprikastudios-report.pdf)
 
 ---
 
@@ -87,30 +105,11 @@ PDF documents — books, manuals, presentations, blog exports.
 
 Markdown documents — session reports, audit results, Reginald documentation.
 
-### md/audit/ (11 files)
-
-- [`comparison-2026-02-21-08-35-03.md`](md/audit/comparison-2026-02-21-08-35-03.md)
-- [`mx-audit-2026-02-16-20-25-58.md`](md/audit/mx-audit-2026-02-16-20-25-58.md)
-- [`mx-audit-2026-02-16-20-45-10.md`](md/audit/mx-audit-2026-02-16-20-45-10.md)
-- [`mx-audit-2026-02-17-08-24-53.md`](md/audit/mx-audit-2026-02-17-08-24-53.md)
-- [`mx-audit-2026-02-17-08-24-57.md`](md/audit/mx-audit-2026-02-17-08-24-57.md)
-- [`mx-rename-tracker-2026-02-16-21-08-35.md`](md/audit/mx-rename-tracker-2026-02-16-21-08-35.md)
-- [`mx-rename-tracker-2026-02-17-08-24-26.md`](md/audit/mx-rename-tracker-2026-02-17-08-24-26.md)
-- [`mx-rename-tracker-2026-02-17-08-24-39.md`](md/audit/mx-rename-tracker-2026-02-17-08-24-39.md)
-- [`mx-rename-tracker-2026-02-17-08-30-18.md`](md/audit/mx-rename-tracker-2026-02-17-08-30-18.md)
-- [`mx-validation-manuals-2026-02-21-07-25-56.md`](md/audit/mx-validation-manuals-2026-02-21-07-25-56.md)
-- [`mx-validation-manuals-2026-02-21-07-29-30.md`](md/audit/mx-validation-manuals-2026-02-21-07-29-30.md)
-
 ### md/presentations/ (1 files)
 
-- [`london-cms-experts-2026-02-26.md`](md/presentations/london-cms-experts-2026-02-26.md)
+- [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 
-### md/reginald/ (2 files)
-
-- [`reginald-implementation-plan-print.md`](md/reginald/reginald-implementation-plan-print.md)
-- [`reginald-manual-print.md`](md/reginald/reginald-manual-print.md)
-
-### md/reports/ (119 files)
+### md/reports/ (145 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -145,7 +144,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (93 files)
+#### md/reports/directors/ (117 files)
 
 **build/** (3 files)
 
@@ -159,7 +158,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (86 files)
+**session/** (110 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -238,7 +237,31 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-03-20-morning-report.md`](md/reports/directors/session/2026-03-20-morning-report.md)
 - [`2026-03-22-evening-report.md`](md/reports/directors/session/2026-03-22-evening-report.md)
 - [`2026-03-23-afternoon-report.md`](md/reports/directors/session/2026-03-23-afternoon-report.md)
+- [`2026-03-23-evening-report.md`](md/reports/directors/session/2026-03-23-evening-report.md)
 - [`2026-03-23-morning-report.md`](md/reports/directors/session/2026-03-23-morning-report.md)
+- [`2026-03-23-night-report.md`](md/reports/directors/session/2026-03-23-night-report.md)
+- [`2026-03-27-evening-report.md`](md/reports/directors/session/2026-03-27-evening-report.md)
+- [`2026-03-27-late-evening-report.md`](md/reports/directors/session/2026-03-27-late-evening-report.md)
+- [`2026-03-29-evening-report.md`](md/reports/directors/session/2026-03-29-evening-report.md)
+- [`2026-03-30-afternoon-report.md`](md/reports/directors/session/2026-03-30-afternoon-report.md)
+- [`2026-03-31-afternoon-report.md`](md/reports/directors/session/2026-03-31-afternoon-report.md)
+- [`2026-03-31-evening-report.md`](md/reports/directors/session/2026-03-31-evening-report.md)
+- [`2026-04-02-afternoon-report.md`](md/reports/directors/session/2026-04-02-afternoon-report.md)
+- [`2026-04-06-evening-report.md`](md/reports/directors/session/2026-04-06-evening-report.md)
+- [`2026-04-06-night-report.md`](md/reports/directors/session/2026-04-06-night-report.md)
+- [`2026-04-07-afternoon-report.md`](md/reports/directors/session/2026-04-07-afternoon-report.md)
+- [`2026-04-08-morning-report.md`](md/reports/directors/session/2026-04-08-morning-report.md)
+- [`2026-04-09-evening-report.md`](md/reports/directors/session/2026-04-09-evening-report.md)
+- [`2026-04-09-morning-report.md`](md/reports/directors/session/2026-04-09-morning-report.md)
+- [`2026-04-10-morning-report.md`](md/reports/directors/session/2026-04-10-morning-report.md)
+- [`2026-04-11-morning-report.md`](md/reports/directors/session/2026-04-11-morning-report.md)
+- [`2026-04-12-afternoon-report.md`](md/reports/directors/session/2026-04-12-afternoon-report.md)
+- [`2026-04-12-morning-report.md`](md/reports/directors/session/2026-04-12-morning-report.md)
+- [`2026-04-13-evening-report.md`](md/reports/directors/session/2026-04-13-evening-report.md)
+- [`2026-04-13-session-report.md`](md/reports/directors/session/2026-04-13-session-report.md)
+- [`2026-04-14-afternoon-report.md`](md/reports/directors/session/2026-04-14-afternoon-report.md)
+- [`2026-04-14-evening-report.md`](md/reports/directors/session/2026-04-14-evening-report.md)
+- [`2026-04-14-morning-report.md`](md/reports/directors/session/2026-04-14-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -248,9 +271,11 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-11-session-report.md`](md/reports/directors/session/_archive/2026-02-11-session-report.md)
 - [`2026-02-13-session-report.md`](md/reports/directors/session/_archive/2026-02-13-session-report.md)
 
-#### md/reports/validation/ (1 files)
+#### md/reports/validation/ (3 files)
 
 - [`carrier-format-audit.md`](md/reports/validation/carrier-format-audit.md)
+- [`manuscript-url-check.md`](md/reports/validation/manuscript-url-check.md)
+- [`pdf-layout-test-2026-04-01.md`](md/reports/validation/pdf-layout-test-2026-04-01.md)
 
 ---
 
@@ -383,9 +408,8 @@ Structured data — audit comparisons, machine-readable reports.
 
 PowerPoint presentation source files.
 
-- [`chris-bryce-livestream-2-2026-03-12.pptx`](pptx/presentations/chris-bryce-livestream-2-2026-03-12.pptx)
-- [`london-cms-experts-2026-02-26.pptx`](pptx/presentations/london-cms-experts-2026-02-26.pptx)
+- [`MX-what-why-when.pptx`](pptx/presentations/MX-what-why-when.pptx)
 
 ---
 
-*Generated on 2026-03-23 at 16:10*
+*Generated on 2026-04-14 at 17:33*
