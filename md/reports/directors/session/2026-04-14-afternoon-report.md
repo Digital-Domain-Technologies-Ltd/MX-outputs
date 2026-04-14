@@ -88,4 +88,8 @@ Same insight applied to the audit fix — the skill conflated two concerns (resu
 
 ## Commit Log
 
-*To be filled after Step 3 commit.*
+| Hash | Description |
+|------|-------------|
+| 5a12553 (mx-outputs) | Add afternoon directors report |
+| 1979bc25 (hub) | Separate audit results from cache in /audit-site skills |
+| b8ace032 (hub) | Refactor CLAUDE.md: extract reference sections to SSOT docs |
