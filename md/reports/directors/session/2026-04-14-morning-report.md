@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Printer Email Pipeline Hardened and Verified"
-description: "Morning session: Stripe-to-printer email investigation, BCC fix, dual-secret webhook verification, end-to-end test."
+title: "Co-Directors Report — Printer Pipeline Hardened, Strategic Blog Published"
+description: "Morning session: Stripe-to-printer email fix and dual-secret webhook verification, plus a new blog post tying strategy, implementation and community to the agentic journey."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-14
 modified: 2026-04-14
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -49,17 +49,22 @@ Added structured `[STRIPE-WEBHOOK]` console prefixes and three new D1 audit acti
 
 Added a Stripe test-mode webhook endpoint, set its signing secret as `STRIPE_WEBHOOK_SECRET_TEST` in the worker, and fired `stripe trigger checkout.session.completed` with `metadata.type=book_purchase`. The D1 audit row confirms Resend received the send with all four BCC addresses present. The fix is live and provably working.
 
+### 6. New strategic blog post — AI, MX, and the Future of Business
+
+Published a new post on `mx.allabout.network/blog/` framing MX through three pillars (Strategy/Leapfrog, Implementation/Books, Community/The Gathering), with a custom SVG illustrating the four-stage agentic journey resting on those pillars. Cites the original CMS Critic article that called the AI tipping point in 2024. Promotes the free MX Maturity Audit through Digital Domain Technologies and asks for sponsors of The Gathering. Lead card on the blog index, listed in sitemap.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment (incl. pending) | 6 (2 hub, 2 allaboutv2, 2 mx-outputs) |
-| Files changed (this segment) | 3 (stripe-webhook.js, stripe-verify.js, this report) |
+| Commits this segment (incl. pending) | 8 (3 hub, 2 allaboutv2, 3 mx-outputs) |
+| Files changed (this segment) | 7 (stripe-webhook.js, stripe-verify.js, this report, new blog post + SVG, blog index, sitemap) |
 | Worker deploys | 3 (BCC fix, dual-secret support, fourth BCC entry) |
 | Repositories touched | allaboutv2, mx-outputs, hub |
 | New D1 audit rows during verification | 4 |
+| New published blog posts | 1 (AI, MX, and the Future of Business) |
 
 ---
 
@@ -86,5 +91,7 @@ A silent catch block plus a fallback that does the wrong thing equals an undetec
 | 1682681 (mx-outputs) | Add morning directors report |
 | 88301741 → e9b285f0 (hub) | Update submodule pointers |
 | pending (allaboutv2) | Add tom.cranstoun@gmail.com to BCC; add dual-secret webhook verification |
-| pending (mx-outputs) | Update morning directors report v1.1 |
-| pending (hub) | Update submodule pointers |
+| dca0a82 (mx-outputs) | Update morning directors report v1.1 |
+| 49f1c012 (hub) | Update allaboutv2 + mx-outputs: dual-secret webhook verification and report update |
+| pending (mx-outputs) | Publish AI, MX, and the Future of Business blog post + SVG; update directors report v1.2 |
+| pending (hub) | Update mx-outputs submodule pointer |
