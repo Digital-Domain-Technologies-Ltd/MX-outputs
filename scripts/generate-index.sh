@@ -53,6 +53,10 @@ cat > "$OUTPUT" << 'HEADER'
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
+
+mx:
+  isGenerated: true
+  generatedBy: "mx-outputs/scripts/generate-index.sh"
 ---
 
 # MX Outputs

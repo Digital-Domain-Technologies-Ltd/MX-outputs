@@ -2,6 +2,10 @@
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
+
+mx:
+  isGenerated: true
+  generatedBy: "mx-outputs/scripts/generate-index.sh"
 ---
 
 # MX Outputs
@@ -414,4 +418,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-04-15 at 10:00*
+*Generated on 2026-04-15 at 10:24*

@@ -12,6 +12,9 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, morning, governance, ssot, field-dictionary]
+  isAiGenerated: true
+  generatedBy: "claude-opus-4-6"
+  reviewedBy: "Tom Cranstoun"
 ---
 
 # Co-Directors Report — Single-Source Discipline Restored on MX Field Definitions
