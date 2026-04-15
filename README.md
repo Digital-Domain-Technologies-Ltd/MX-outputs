@@ -18,12 +18,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 55 | PDFs — books, reports, manuals, presentations |
+| [pdf/](pdf/) | 53 | PDFs — books, reports, manuals, presentations |
 | [md/](md/) | 147 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 96 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 1 | PowerPoint — presentation source files |
-| **Total** | **735** | |
+| **Total** | **733** | |
 
 ---
 
@@ -51,7 +51,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (9 files)
+### pdf/outreach/ (7 files)
 
 - [`wix-bookshop-report.pdf`](pdf/outreach/2026-04-01/wix-bookshop-report.pdf)
 - [`bobw-report.pdf`](pdf/outreach/2026-04-07/bobw-report.pdf)
@@ -59,14 +59,12 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`neom-wellbeing-report.pdf`](pdf/outreach/2026-04-07/neom-wellbeing-report.pdf)
 - [`mx-allabout-network-report.pdf`](pdf/outreach/2026-04-11/mx-allabout-network-report.pdf)
 - [`neomwellbeing-report.pdf`](pdf/outreach/2026-04-13/neomwellbeing-report.pdf)
-- [`mx-allabout-blog-report.pdf`](pdf/outreach/2026-04-14/mx-allabout-blog-report.pdf)
 - [`mx-allabout-network-report.pdf`](pdf/outreach/2026-04-14/mx-allabout-network-report.pdf)
-- [`mx-allabout-report.pdf`](pdf/outreach/2026-04-14/mx-allabout-report.pdf)
   - **2026-04-01/** (1 files)
   - **2026-04-07/** (3 files)
   - **2026-04-11/** (1 files)
   - **2026-04-13/** (1 files)
-  - **2026-04-14/** (3 files)
+  - **2026-04-14/** (1 files)
 
 ### pdf/presentations/ (1 files)
 
@@ -418,4 +416,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-04-15 at 10:24*
+*Generated on 2026-04-15 at 11:24*
