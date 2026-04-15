@@ -7,7 +7,9 @@ modified: 2026-02-23
 version: "1.3"
 
 mx:
+  contentType: action-doc
   status: active
+  riskLevel: low
   license: proprietary
   category: manual
   tags:

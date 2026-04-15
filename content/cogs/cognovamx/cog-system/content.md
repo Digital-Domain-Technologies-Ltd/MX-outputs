@@ -6,6 +6,7 @@ modified: 2026-03-02
 version: "1.0"
 
 mx:
+  contentType: info-doc
   status: draft
   category: specification
   tags: [cog, system, specification, mx-reginald]
@@ -28,7 +29,7 @@ mx:
 
   publicationDate: "2026-02-08"
   expires: "2026-08-08"
-  lastVerified: "2026-02-08"
+  maintainedDate: "2026-02-08"
   signature: "unsigned"
   mxCompliance: "level-2"
   registry: "allabout.network"

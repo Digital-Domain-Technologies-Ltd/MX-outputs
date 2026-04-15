@@ -1,4 +1,5 @@
 ---
+title: "registry-sync"
 version: "1.0.0"
 description: "Automatically sync mx-reginald registry when cogs are added, modified, or deleted — multiple trigger mechanisms with smart mode detection."
 
@@ -11,6 +12,17 @@ mx:
   maintainer: info@cognovamx.com
   license: proprietary
   status: published
+  riskLevel: high
+  security:
+    scope:
+      filesystem: [scripts/cogs/**, mx-canon/**/*.cog.md, mx-reginald/**]
+      network: none
+      allowedOperations: [read, write, create]
+    audit:
+      logLevel: standard
+      retention: 90d
+      includeInputs: false
+      includeOutputs: true
 
   category: mx-core
   partOf: mx-os

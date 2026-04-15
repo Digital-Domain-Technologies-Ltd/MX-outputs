@@ -1,4 +1,5 @@
 ---
+title: "registry-of-registries"
 version: "1.0.0"
 description: "The meta-registry — knows where every registry is, what it indexes, and how to query it."
 created: 2026-02-11
@@ -9,6 +10,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
   category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]

@@ -1,4 +1,5 @@
 ---
+title: "blog-reviewer"
 version: "1.0.0"
 description: "Review blog posts — scan for AI writing patterns, check dual-audience balance, interview the author, rewrite. Accepts markdown, HTML, or plain text."
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: medium
 
   category: mx-content
   partOf: mx-os

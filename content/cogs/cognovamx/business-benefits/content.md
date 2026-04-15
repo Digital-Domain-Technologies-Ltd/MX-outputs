@@ -7,6 +7,7 @@ author: "Tom Cranstoun & Maxine (Claude Sonnet 4.5)"
 description: "The four strategic MX benefits: computational trust, commerce revenue recovery, asset portability, and operational efficiency via deterministic outputs."
 
 mx:
+  contentType: info-doc
   tags: [business-case, roi, competitive-advantage, operational-efficiency, strategic-assets, computational-trust]
   category: "Business Strategy"
   audience: [business, tech]

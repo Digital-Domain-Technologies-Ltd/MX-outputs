@@ -1,4 +1,5 @@
 ---
+title: "mx-concepts"
 version: "1.0.0"
 description: "A conceptual map of MX — every idea, how they connect, and where to go deeper. The newcomer's guide to Machine Experience."
 
@@ -8,6 +9,7 @@ modified: 2026-02-11
 author: Tom Cranstoun and Maxine
 
 mx:
+  contentType: info-doc
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
@@ -84,7 +86,7 @@ MX OS is an operating system where files are the platform. There is nothing to i
 
 ### Files Are the Platform
 
-No database. No application server. No deployment pipeline. Cogs are markdown files. Move them anywhere — USB stick, git repo, web server, pasted into a conversation. The file IS the program. The filesystem IS the platform.
+No database. No application server. No deployment pipeline. Cogs are files with MX metadata — markdown with YAML frontmatter, HTML with Schema.org and `<meta name="mx:*">` tags, any file carrying structured metadata in its native format. Move them anywhere — USB stick, git repo, web server, pasted into a conversation. The file IS the program. The filesystem IS the platform.
 
 ### Any AI Agent Is a Runtime
 

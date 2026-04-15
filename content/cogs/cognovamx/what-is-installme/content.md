@@ -1,4 +1,5 @@
 ---
+title: "what-is-installme"
 version: "1.0.0"
 description: "INSTALLME.md is a root-level cog convention that gives AI agents structured installation instructions — no hallucination, no guessing, no wasted compute."
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os

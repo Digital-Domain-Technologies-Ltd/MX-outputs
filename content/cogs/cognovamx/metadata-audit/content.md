@@ -1,4 +1,5 @@
 ---
+title: "metadata-audit"
 version: "1.0"
 description: "Audit all YAML frontmatter — compare against the field dictionary, detect deprecated fields, namespace errors, missing required fields, and mx: object sprawl."
 created: 2026-02-16
@@ -9,6 +10,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: medium
   category: mx-tools
   partOf: mx-os
   refersTo: [field-dictionary, cog-unified-spec, mx-metadata-conventions]

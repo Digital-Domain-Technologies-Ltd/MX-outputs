@@ -1,5 +1,5 @@
 ---
-name: shared-validation-policy
+title: "Shared Validation Policy"
 version: "1.0"
 description: "Shared validation policy for cog publication. Included by action-docs that validate cogs before registration."
 created: 2026-03-04
@@ -12,7 +12,7 @@ mx:
   category: mx-core
   partOf: mx-os
   tags: [validation, policy, shared, includes-example]
-  audience: [ai-agents, developers]
+  audience: [agents, tech]
   license: proprietary
   deliverable: "reusable validation rules for cog quality gates"
 ---

@@ -1,4 +1,5 @@
 ---
+title: "cog-snapshot"
 version: "1.0"
 description: Auto-generated registry snapshot — all cogs by type, status, newness, and dependency graph
 created: 2026-02-23
@@ -6,6 +7,7 @@ modified: 2026-02-23
 author: cog-tools
 
 mx:
+  contentType: info-doc
   status: active
   category: mx-core
   partOf: mx-os

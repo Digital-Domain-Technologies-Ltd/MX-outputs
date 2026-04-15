@@ -1,4 +1,5 @@
 ---
+title: "what-is-mx-os"
 version: "1.0"
 description: The Machine Experience Operating System. Documentation IS the system. Cogs are its programs. This action-doc explains MX OS and can bootstrap it.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os
@@ -132,7 +134,7 @@ Every concept in MX OS maps to something developers already know:
 | **Applications** | Action-docs — the applications of MX OS, with `execute` blocks and a `runtime:` declaration |
 | **Data files / configs** | Info-docs — information documents with structured metadata |
 | **Shebang line** (`#!/bin/bash`) | The `runtime:` field — tells the OS how to run this program |
-| **File format** | `.cog.md` — YAML frontmatter + markdown, universal across all cog types |
+| **File format** | Any file with MX metadata in its native carrier format (`.cog.md`, HTML meta tags, JSDoc, etc.) |
 | **System API / ABI** | The Gathering specification — defines how programs are structured |
 | **Package registry** (npm, apt) | REGINALD — where published programs are hosted and discovered |
 | **Code signing** | COG (Certificate of Genuineness) — trust layer proving a program is genuine |
@@ -150,7 +152,7 @@ MX OS has five layers, each building on the one below:
 
 ### 1. Cogs — The Programs
 
-The atomic unit. A `.cog.md` file with YAML frontmatter for machines and markdown for humans. Info-docs are data files — they document, describe, inform. Action-docs are the applications — they have an `execute` block and a `runtime:` field that tells MX OS how to run them.
+The atomic unit. Any file carrying structured MX metadata via its native carrier format — YAML frontmatter in markdown, `<meta name="mx:*">` tags in HTML, `@mx:*` JSDoc tags in JavaScript, comment blocks in CSS, YAML blocks in shell scripts. Info-docs are data files — they document, describe, inform. Action-docs are the applications — they have an `execute` block and a `runtime:` field that tells MX OS how to run them.
 
 The `runtime:` field is the shebang line of MX OS. Values: `bash`, `node`, `python`, `runbook`, `npm`. When `runtime: runbook`, the action-doc IS the instruction set and the AI agent IS the executor.
 
@@ -259,7 +261,7 @@ This means MX OS runs wherever an AI agent reads structured files. No installati
 
 ### Ubiquity
 
-A cog is a markdown file. It works on a USB stick, a laptop, a shared fileserver, a git repo, a web server, or pasted into a conversation. The visibility levels in the spec — local, private, shared, hosted — describe where the same file lives. Same format everywhere.
+A cog is any file carrying MX metadata in its native format. It works on a USB stick, a laptop, a shared fileserver, a git repo, a web server, or pasted into a conversation. The visibility levels in the spec — local, private, shared, hosted — describe where the same file lives. Same format everywhere.
 
 Every AI agent can read markdown. Every AI agent can parse YAML. MX OS does not need to be installed. It needs to be written. The format scales from one person's filesystem to the entire web because the format has no platform dependency. The files are the platform.
 

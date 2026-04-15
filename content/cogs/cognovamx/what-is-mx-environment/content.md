@@ -1,4 +1,5 @@
 ---
+title: "what-is-mx-environment"
 version: "1.0.0"
 description: MX OS lives on the machine, not in the repo. $MX_HOME is the machine-level context — the answer to the machine, the universe, and everything.
 
@@ -8,9 +9,11 @@ modified: 2026-02-10
 author: Tom Cranstoun and Maxine
 
 mx:
+  contentType: info-doc
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os

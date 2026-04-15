@@ -1,4 +1,5 @@
 ---
+title: "building-action-docs"
 version: "1.0"
 description: How to build action-docs — from description to working tool. Describe, create, test, wire. The pattern that turns natural language into MX OS applications.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os
@@ -152,6 +154,27 @@ The human invokes an action. The AI agent reads the action-doc, follows the usag
 Testing is immediate. There is no build step. There is no compilation. There is no deployment. The action-doc exists as a file. The AI agent reads it and executes.
 
 If the output is wrong, the human says so. The AI agent adjusts the action-doc. Test again. This cycle is measured in seconds, not hours.
+
+### Phase 2.5: Security Declaration
+
+Every action-doc SHOULD declare a `riskLevel` in its frontmatter. Action-docs that modify the filesystem, handle credentials, or access confidential data SHOULD also declare a `security` block with scope constraints, audit requirements, and data protection rules.
+
+```yaml
+riskLevel: high
+security:
+  scope:
+    filesystem: [mx-outputs/pdf/**]
+    network: none
+    allowedOperations: [read, write, create]
+  audit:
+    logLevel: standard
+    retention: 90d
+  allowedRoles: [admin, developer]
+```
+
+The `riskLevel` classifies the action-doc: `low` (read-only), `medium` (produces reports), `high` (modifies filesystem), or `critical` (confidential data). The `security` block declares what the action-doc is permitted to touch and who may execute it.
+
+This is not optional decoration. It is the governance layer that makes action-docs production-ready. An action-doc without a security declaration runs with full user privileges — the same "Full Permission anti-pattern" that AgentLock was built to address in the broader AI agent ecosystem.
 
 **Output Reporting Principle:** When an action-doc completes its work and creates any outputs (files, directories, etc.), it MUST report the full absolute path of every output created. This enables traceability and makes it easy to locate generated files.
 

@@ -1,5 +1,5 @@
 ---
-name: effective-doc-example
+title: "Effective Doc Resolution — Reference Implementation"
 version: "1.0"
 description: "Reference implementation showing how an effective doc is resolved from a source cog, uber doc SOPs, and included policies."
 created: 2026-03-04
@@ -12,7 +12,7 @@ mx:
   category: mx-core
   partOf: mx-os
   tags: [effective-doc, resolution, inheritance, sop, reference-implementation, example]
-  audience: [ai-agents, developers]
+  audience: [agents, tech]
   license: proprietary
   deliverable: "worked example of effective doc resolution chain"
 ---

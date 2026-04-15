@@ -1,14 +1,16 @@
 ---
+title: "reginald-mirror"
 version: "1.0.0"
-description: "Sync source cogs to the Reginald web mirror, keeping mx-outputs/reginald/ up to date with scripts/cogs/ and mx-canon/."
+description: "Sync source cogs to the Reginald web output, keeping mx-outputs/reginald/ up to date with scripts/cogs/ and mx-canon/."
 created: 2026-03-09
-modified: 2026-03-09
+modified: 2026-03-17
 author: Tom Cranstoun and Maxine
 
 mx:
   maintainer: info@cognovamx.com
   license: proprietary
   status: published
+  riskLevel: high
   category: mx-core
   partOf: mx-os
   refersTo: [registry-sync, cog-query]
@@ -116,7 +118,7 @@ mx:
 
 # Reginald Mirror Sync
 
-Keeps the Reginald web mirror at `mx-outputs/reginald/` synchronised with source cogs across the repository.
+Keeps the Reginald web output at `mx-outputs/reginald/` synchronised with source cogs across the repository.
 
 ## What This Does
 

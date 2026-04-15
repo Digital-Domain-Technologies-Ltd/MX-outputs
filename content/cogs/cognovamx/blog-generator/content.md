@@ -1,4 +1,5 @@
 ---
+title: "blog-generator"
 version: "1.0.0"
 description: "Generates, converts, and updates blog posts for allabout.network in both EDS markdown and MX HTML formats."
 
@@ -11,6 +12,17 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: high
+  security:
+    scope:
+      filesystem: [mx-outputs/mx-site/blog/**, allaboutv2/blogs/**]
+      network: none
+      allowedOperations: [read, write, create]
+    audit:
+      logLevel: standard
+      retention: 90d
+      includeInputs: true
+      includeOutputs: false
 
   category: mx-core
   partOf: mx-os
@@ -135,7 +147,7 @@ mx:
           - Separate major sections with --- (horizontal rules)
           - Tables use GFM syntax with :---- alignment markers
 
-          Reference: mx-outputs/mx-site/blog/content-that-manages-itself-blog.md
+          Reference: mx-outputs/mx-site/blog/content-that-manages-itself.html
 
           ## MX HTML Blog Generation
 

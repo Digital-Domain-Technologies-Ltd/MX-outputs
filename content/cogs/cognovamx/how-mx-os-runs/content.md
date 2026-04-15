@@ -1,4 +1,5 @@
 ---
+title: "how-mx-os-runs"
 version: "1.0"
 description: The MX OS runtime model. How an agent boots, discovers cogs, routes tasks, executes action-docs, and chains actions. The OS explained from the inside.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os
@@ -197,7 +199,20 @@ The agent matches the task against this metadata. "Write an outreach message" �
 
 ## Layer 4: Execution
 
-The agent finds the right cog. Now it executes.
+The agent finds the right cog. Now it executes — but not blindly.
+
+### Security Gate
+
+Before executing any action-doc, the agent reads the security metadata:
+
+1. **Check `riskLevel`** — low (proceed), medium (proceed with logging), high (confirm with user), critical (require explicit authorisation)
+2. **Check `allowedRoles`** — does the agent's role match the permitted roles?
+3. **Check `scope`** — are the filesystem paths, network access, and data boundaries acceptable for this environment?
+4. **Respect `audit`** — log according to the declared level and retention
+
+If a guardrail gate is declared (`access.gate`), execute the guardrail cog first. The guardrail decides whether execution proceeds.
+
+The security block is a declaration of intent — the cog states its boundaries. The agent (the reader) enforces them. An agent that does not understand the security block ignores it — this is reader agency. An agent that does understand it applies infrastructure-level checks before any action runs.
 
 ### For `runtime: runbook`
 

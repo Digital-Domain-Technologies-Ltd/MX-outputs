@@ -1,4 +1,5 @@
 ---
+title: "a11y"
 version: 0.1.0
 description: Accessibility audit — what breaks for AI breaks for humans
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  riskLevel: medium
 
   category: mx-core
   partOf: mx-core

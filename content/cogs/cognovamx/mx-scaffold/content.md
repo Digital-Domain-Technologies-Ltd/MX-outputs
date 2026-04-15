@@ -1,4 +1,5 @@
 ---
+title: "mx-scaffold"
 version: "1.0"
 description: Create new MX-OS shell scripts with correct structure, metadata, and alias registration. The canonical pattern for extending mx-os.
 created: 2026-02-25
@@ -9,6 +10,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: high
   category: mx-core
   partOf: mx-os
   refersTo: [script-helper, cog-unified-spec]

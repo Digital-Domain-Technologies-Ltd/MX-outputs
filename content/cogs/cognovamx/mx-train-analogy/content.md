@@ -1,4 +1,5 @@
 ---
+title: "mx-train-analogy"
 version: "1.0.0"
 description: "The railway analogy for MX OS. A physical metaphor that maps every MX concept to something everyone already understands."
 
@@ -8,6 +9,7 @@ modified: 2026-02-11
 author: Tom Cranstoun and Maxine
 
 mx:
+  contentType: info-doc
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published

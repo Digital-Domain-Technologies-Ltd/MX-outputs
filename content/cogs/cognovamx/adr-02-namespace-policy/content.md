@@ -7,8 +7,9 @@ author: The Gathering
 version: "1.0"
 
 mx:
+  contentType: info-doc
   status: active
-  decision-status: accepted
+  decisionStatus: accepted
   tags: [adr, namespace, standard, mx-namespace, governance, fields, vocabulary]
   partOf: mx-the-gathering
   category: standard

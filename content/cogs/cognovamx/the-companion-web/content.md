@@ -1,4 +1,5 @@
 ---
+title: "the-companion-web"
 version: "1.0"
 description: QR codes and metadata turn physical objects into entry points for humans and AI agents. Every object becomes self-describing. Extends to robotics.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: high
 
   category: mx-core
   partOf: mx-os

@@ -1,4 +1,5 @@
 ---
+title: "cog-publication-workflow"
 version: "1.0"
 description: "Cog publication workflow — author, validate, register, and publish a cog to the Reginald registry."
 created: 2026-03-03
@@ -9,6 +10,7 @@ mx:
   maintainer: info@cognovamx.com
   license: proprietary
   status: published
+  riskLevel: high
 
   category: mx-tools
   partOf: mx-os

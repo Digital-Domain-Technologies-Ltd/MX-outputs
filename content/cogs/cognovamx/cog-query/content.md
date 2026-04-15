@@ -1,4 +1,5 @@
 ---
+title: "cog-query"
 version: "2.1"
 description: Unified COG registry management — scan, list, show, find, filter, count, validate, graph, sync, and snapshot the cog registry
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: active
+  riskLevel: medium
 
   category: mx-core
   partOf: mx-os

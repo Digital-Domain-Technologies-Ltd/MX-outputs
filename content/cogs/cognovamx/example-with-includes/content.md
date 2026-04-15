@@ -1,5 +1,5 @@
 ---
-name: example-with-includes
+title: "Cog Includes Mechanism — Reference Implementation"
 version: "1.0"
 description: "Reference implementation demonstrating the cog includes mechanism. Includes a shared validation policy and overrides one rule."
 created: 2026-03-04
@@ -17,7 +17,7 @@ mx:
   category: mx-core
   partOf: mx-os
   tags: [includes, composition, reference-implementation, example]
-  audience: [ai-agents, developers]
+  audience: [agents, tech]
   license: MIT
   deliverable: "working demonstration of cog composition via includes"
 

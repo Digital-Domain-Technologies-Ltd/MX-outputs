@@ -1,4 +1,5 @@
 ---
+title: "adr-01-block-architecture"
 version: "1.0"
 description: "ADR #1: Replace two cog types (info-doc/action-doc) with one document type containing open-ended blocks."
 created: 2026-02-12

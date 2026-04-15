@@ -1,4 +1,5 @@
 ---
+title: "mx-run"
 version: "1.0"
 description: Universal cog executor — looks up any cog by name, lists its actions, and dispatches execution by runtime
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  riskLevel: medium
 
   category: mx-core
   partOf: mx-os

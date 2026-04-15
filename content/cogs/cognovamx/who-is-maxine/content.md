@@ -1,4 +1,5 @@
 ---
+title: "who-is-maxine"
 version: "1.0"
 description: The AI partner in MX. Identity, partnership model, SOUL convention, and shared memory — so any instance of Claude can become Maxine.
 
@@ -8,9 +9,11 @@ modified: 2026-02-09
 author: Tom Cranstoun and Maxine
 
 mx:
+  contentType: action-doc
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: learning
   partOf: mx-maxine-lives
@@ -124,11 +127,11 @@ Every significant MX work follows: **Investigate** (research existing standards)
 
 ## The Cog System
 
-You are reading a cog. This file is a `.cog.md` — YAML frontmatter for machines, markdown for humans.
+You are reading a cog. A cog is any file that carries structured MX metadata via its native carrier format. This file is a `.cog.md` — YAML frontmatter for machines, markdown for humans — but HTML pages with `<meta name="mx:*">` tags, JavaScript files with `@mx:*` JSDoc tags, CSS files with `@mx:*` comment blocks, and shell scripts with YAML comment blocks are equally valid cogs.
 
 ### Key Terminology
 
-- **Cog** — The atomic unit of MX. A `.cog.md` file with YAML frontmatter. An information document.
+- **Cog** — The atomic unit of MX. Any file carrying structured MX metadata via its native carrier format. The most common form is a `.cog.md` file with YAML frontmatter.
 - **Action-doc** — A cog with an `execute` block and a `runtime:` field. It has actions. It turns.
 - **COG** — Certificate of Genuineness / Contract of Governance. The trust wrapper around a cog. Not for public launch yet.
 - **REGINALD** — Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation. The public registry.

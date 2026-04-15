@@ -9,6 +9,7 @@ author: Tom Cranstoun and Maxine
 mx:
   category: validation
   status: active
+  riskLevel: medium
   tags: [html, audit, baseline, regression, testing, automation, validation, ci-cd]
   audience: [tech]
 

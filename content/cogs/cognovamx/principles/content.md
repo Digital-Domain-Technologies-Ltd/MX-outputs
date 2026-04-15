@@ -1,9 +1,8 @@
 ---
-name: principles
 title: "MX Principles"
-version: "3.0"
+version: "3.1"
 created: 2026-02-04
-modified: 2026-03-04
+modified: 2026-04-11
 author: Tom Cranstoun
 description: "The principles that govern how MX builds things — for humans and machines alike"
 
@@ -167,7 +166,21 @@ This principle applies to all cogs. Even specifications. Especially specificatio
 
 ---
 
-## 14. Any Document Can Be a Cog
+## 14. Root-Anchored Asset Paths
+
+A page must be understandable in isolation, regardless of the URL it is served from.
+
+When a custom 404 page, an error document, or a templated page is served at an unexpected path, relative asset references break. A stylesheet linked as `css/style.css` resolves correctly at `/` but resolves to `/blogs/css/style.css` when the same document is served at `/blogs/`. The page loads, the markup is correct, and the page is unreadable. Humans see an unstyled wall of text. Machines see broken images and missing stylesheets they cannot follow.
+
+The fix: anchor every in-page asset reference at the site root. Write `/css/style.css`, `/js/app.js`, `/images/logo.webp`. Never `css/style.css` or `../images/logo.webp`. This applies to `<link>`, `<script>`, `<img src>`, `<img srcset>`, `<source srcset>`, `<video>`, `<audio>`, and any other element that fetches a resource. Co-located demo bundles (a sample page beside its own `style.css`) are the only legitimate use of relative asset paths, and they should be self-contained directories with no references back to the parent site.
+
+The test: copy any HTML file to a different URL depth and load it. If anything visible breaks, the asset paths are not anchored. A page that depends on its URL to render is a page that fails the moment routing changes — and routing always changes.
+
+This principle is the in-page sibling of Principle 5 (Context-Preserving References). Principle 5 governs links between documents; this one governs the assets a single document needs to render itself.
+
+---
+
+## 15. Any Document Can Be a Cog
 
 Any document can become a cog. Add YAML frontmatter and it is machine-readable. That is the whole barrier to entry.
 

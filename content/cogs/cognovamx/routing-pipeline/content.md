@@ -1,4 +1,5 @@
 ---
+title: "routing-pipeline"
 version: "1.0.0"
 description: "Preprocess prompts with spell correction, route matching, and context injection. Reduce inference cost by directing Claude before it starts searching."
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os
@@ -86,7 +88,7 @@ mx:
       - name: sync
         description: Regenerate the routing registry from all ROUTING.cog.md files
         usage: |
-          Run `npm run route:sync` or execute `node scripts/route-sync.js` directly.
+          Run `npm run route:sync` or execute `node scripts/route-sync.cjs` directly.
 
           The script:
           1. Scans mx-canon for all ROUTING.cog.md files
@@ -134,7 +136,7 @@ A preprocessing pipeline that runs before Claude sees the prompt:
 |---|---|---|
 | This SOP | `scripts/cogs/routing-pipeline.cog.md` | The instruction |
 | Hook | `.claude/hooks/route-decorator.sh` | The runtime |
-| Sync script | `scripts/route-sync.js` | Registry generator |
+| Sync script | `scripts/route-sync.cjs` | Registry generator |
 | Registry | `mx-canon/mx-maxine-lives/routing-registry.json` | Auto-generated index |
 
 ## How It Works

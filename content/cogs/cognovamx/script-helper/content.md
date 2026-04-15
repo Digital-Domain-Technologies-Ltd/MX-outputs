@@ -1,4 +1,5 @@
 ---
+title: "script-helper"
 version: "1.0.0"
 description: Help AI agents create, amend, and inspect shell scripts with MX metadata — cut compute, not context.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: high
 
   category: mx-core
   partOf: mx-os

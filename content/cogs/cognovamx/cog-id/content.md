@@ -1,4 +1,5 @@
 ---
+title: "cog-id"
 version: "1.1.0"
 description: "Generate, register, and decode cog IDs — MD5 hashes tracing documents to their originating cog. The namespace-aware identity layer for MX OS."
 
@@ -13,6 +14,7 @@ mx:
 
   category: mx-core
   status: active
+  riskLevel: low
   partOf: mx-os
   buildsOn: [what-is-a-cog]
   tags: [cog-id, identity, hash, md5, obfuscation, namespace, x-mx-p-ref, registry, privacy]

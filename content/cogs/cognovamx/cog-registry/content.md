@@ -1,4 +1,5 @@
 ---
+title: "cog-registry"
 version: "1.0"
 description: The centralised index of all known cogs in the MX ecosystem. An action-doc that catalogues cogs — the index describing itself.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: high
 
   category: mx-core
   partOf: mx-os

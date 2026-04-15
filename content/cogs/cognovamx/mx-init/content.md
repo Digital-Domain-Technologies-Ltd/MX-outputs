@@ -1,4 +1,5 @@
 ---
+title: "mx-init"
 version: "1.0.0"
 description: "The action action-doc that initializes any repository with MX OS conventions — SOUL.md, CLAUDE.md, INSTALLME.md, frontmatter, directory structure."
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: high
 
   category: mx-core
   partOf: mx-os

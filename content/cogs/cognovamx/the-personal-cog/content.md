@@ -1,4 +1,5 @@
 ---
+title: "the-personal-cog"
 version: "2.0"
 description: Cogs describing YOU — accessibility needs, interests, health, skills. Lives on your phone. Your agent decides what to share, with whom, in context.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: high
 
   category: mx-core
   partOf: mx-os

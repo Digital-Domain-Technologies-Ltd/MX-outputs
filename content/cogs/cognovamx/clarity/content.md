@@ -1,4 +1,5 @@
 ---
+title: "clarity"
 version: 0.1.0
 description: Test documentation clarity - if AI struggles, humans probably do too
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  riskLevel: medium
 
   category: mx-core
   partOf: mx-core

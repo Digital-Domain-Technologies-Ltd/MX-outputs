@@ -1,4 +1,5 @@
 ---
+title: "block-architecture-evolution"
 version: "1.0"
 description: "How the cog format evolved from two document types to one document with blocks — the architectural journey, the design principles, and what it means for implementations."
 created: 2026-03-03
@@ -102,7 +103,7 @@ mx:
           - name: "The Gathering"
             version: "2.0-draft"
     - security:
-        signing: required
+        attestation: required
         execution: sandboxed
         trust-level: 3
     - provenance:

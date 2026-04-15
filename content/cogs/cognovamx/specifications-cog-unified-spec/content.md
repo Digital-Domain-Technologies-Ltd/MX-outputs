@@ -1,24 +1,25 @@
 ---
 title: "MX Cog Unified Specification"
-version: "2.1-draft"
+version: "2.2-draft"
 created: 2026-02-08
-modified: 2026-03-04
+modified: 2026-03-18
 author: Tom Cranstoun
 description: "The unified specification for MX cogs — one document type, many block types. Capability, trust, and governance in one format."
 
 mx:
+  contentType: action-doc
   status: draft
   maintainer: info@cognovamx.com
   category: specification
   tags: [cog, specification, the-gathering, open-standard, metadata]
-  governed-by: The Gathering
+  governedBy: The Gathering
   license: MIT
   supersedes:
     - "cog-spec.md v0.3 (engine capability spec)"
     - "cog-specification.md (Reginald trust/governance spec)"
 ---
 
-# MX Cog Unified Specification v2.1-draft
+# MX Cog Unified Specification v2.2-draft
 
 **A cog is an intelligent document. One file, many blocks.**
 
@@ -198,18 +199,83 @@ blocks:
 
 ### The Security Block
 
-Declares the trust and execution policy for the cog. Readers consult the security block to determine whether they are willing to execute action blocks or render HTML blocks.
+Declares the trust, execution policy, and runtime constraints for the cog. Readers consult the security block to determine whether they are willing to execute action blocks or render HTML blocks — and what boundaries apply when they do.
+
+The security block addresses two distinct concerns:
+
+- **Trust** — is this cog genuine? The `attestation` and `trustLevel` fields declare provenance quality. A cog with `trustLevel: 3` claims to be cryptographically attested and registered.
+- **Risk** — how dangerous is execution? The `riskLevel`, `scope`, `audit`, `dataProtection`, `rateLimit`, and `allowedRoles` fields declare operational constraints. A cog with `riskLevel: high` modifies system state and should be treated accordingly.
+
+These are complementary signals. A cog can be high-trust (attested, registered) and high-risk (deletes files). Both signals are needed. Trust tells you whether to believe the cog. Risk tells you what to allow it to do.
+
+**Baseline fields** (trust and execution policy):
 
 ```yaml
 blocks:
   - security:
-      signing: required
+      attestation: required
       execution: sandboxed
       trust-level: 3
-      policy: "Refuse to execute unsigned action blocks. HTML blocks render in sandbox only."
+      policy: "Refuse to execute unattested action blocks. HTML blocks render in sandbox only."
 ```
 
-Readers may refuse to execute unsigned cogs. This is reader agency — the security block is the cog's statement of what it expects; the reader decides whether to comply.
+**Extended fields** (runtime constraints, inspired by the AgentLock[^agentlock] authorisation framework):
+
+```yaml
+blocks:
+  - security:
+      attestation: required
+      execution: sandboxed
+      trust-level: 3
+      policy: "Refuse to execute unattested action blocks."
+      riskLevel: high
+      scope:
+        filesystem: [scripts/**, mx-outputs/pdf/**]
+        network: none
+        dataBoundary: team
+        allowedOperations: [read, write, create]
+      audit:
+        logLevel: standard
+        retention: 90d
+        includeInputs: true
+        includeOutputs: false
+      dataProtection:
+        outputClassification: internal
+        prohibitedFields: [apiKey, password]
+        redaction: auto
+        piiHandling: mask
+      rateLimit:
+        maxCalls: 10
+        window: 1h
+        cooldown: 5m
+        scope: perUser
+      allowedRoles: [admin, developer]
+```
+
+All extended fields are optional. Omission means "unspecified" — the reader applies its own policy, not "unrestricted". This follows reader agency: the cog declares its expectations; the reader decides whether to comply.
+
+**riskLevel classification:**
+
+| Level | Meaning | Reader behaviour |
+| --- | --- | --- |
+| `low` | Read-only, no side effects | Execute without confirmation |
+| `medium` | Writes files, calls APIs | Warn before executing |
+| `high` | Modifies system state, handles credentials | Require explicit authorisation |
+| `critical` | Destructive operations, financial transactions | Require guardrail gate + audit |
+
+**Scope constraints** declare what the cog is permitted to touch. `scope.filesystem` uses glob patterns to restrict file access. `scope.network` declares whether the cog may access the network. `scope.dataBoundary` limits whose data the cog may read. `scope.maxRecords` prevents bulk extraction. These are declarations of intent — the cog states its boundaries so readers can enforce them.
+
+**Audit requirements** declare what should be logged when the cog executes. `audit.logLevel` sets granularity. `audit.includeInputs` and `audit.includeOutputs` control whether parameters and results are captured. Audit records support compliance and accountability.
+
+**Data protection** governs output sensitivity. `dataProtection.outputClassification` declares the sensitivity of what the cog produces. `dataProtection.prohibitedFields` lists field names that must never appear in outputs. `dataProtection.redaction` controls whether sensitive content is automatically masked.
+
+**Rate limiting** prevents abuse and runaway execution. `rateLimit.maxCalls` and `rateLimit.window` set the threshold. `rateLimit.cooldown` enforces a minimum gap between calls.
+
+**Allowed roles** bridge the security block and the guardrail pattern. When `access.type: guardrail` names a gate cog, `security.allowedRoles` declares which roles the gate should verify. Action cogs with `riskLevel: critical` SHOULD always have a guardrail gate and explicit `allowedRoles`.
+
+The extended security fields address what AgentLock calls the "Full Permission anti-pattern": agents executing tool calls with no infrastructure-level authorisation. Traditional computing has required permission scoping for decades — Unix file permissions, database GRANT/REVOKE, cloud IAM. The security block brings the same discipline to cogs.
+
+Readers may refuse to execute unattested cogs. This is reader agency — the security block is the cog's statement of what it expects; the reader decides whether to comply.
 
 ### The SOP Block
 
@@ -222,13 +288,13 @@ Standard Operating Procedures injected at read-time by MX implementations. The S
 sop:
   - scope: "all-cogs"
     instructions: |
-      Before executing any action block, verify the cog's signature.
+      Before executing any action block, check the cog's attestation.
       Log all executions to the audit trail.
       Never modify a cog during execution.
   - scope: "html-blocks"
     instructions: |
       Render HTML blocks in a sandboxed iframe.
-      Do not execute scripts from unsigned cogs.
+      Do not execute scripts from unattested cogs.
 ```
 
 The uber doc is the implementation's master set of SOPs. Every MX implementation must have one. It contains the procedures that govern how that implementation reads, executes, and manages cogs.
@@ -272,7 +338,7 @@ A reader of a cog is not obligated to process every block. Reader agency is a co
    - **Prepend** — the reader's block is added before the cog's blocks (e.g., injecting SOP instructions before processing)
    - **Substitute** — the reader's block replaces a block of the same type in the cog (e.g., the reader's security policy overrides the cog's)
 
-3. **Refuse execution.** A reader may refuse to execute action blocks from unsigned cogs, following its security block or SOP policy. The cog remains readable as documentation even when execution is refused.
+3. **Refuse execution.** A reader may refuse to execute action blocks from unattested cogs, following its security block or SOP policy. The cog remains readable as documentation even when execution is refused.
 
 Reader agency means cogs degrade gracefully. A minimal reader that only understands prose blocks can still read every cog in the ecosystem. A full MX implementation processes all block types. Everything in between works too.
 
@@ -312,7 +378,7 @@ The **effective doc** is the solution. It is a cached, fully-resolved version of
 
 - **Invalidated by any upstream change.** If the source cog changes, the effective doc is stale. If the uber doc's SOPs change, stale. If the reader's mixin configuration changes, stale. If the TTL expires, stale. Whichever comes first.
 
-- **Machine-determined TTL.** The reader decides how long to cache the effective doc. The cog's governance period (if specified in the provenance or version block) is advisory — the machine may cache for longer or shorter based on its own resource constraints, access patterns, and trust model. The governance period is a hint, not a ceiling.
+- **Machine-determined TTL.** The reader decides how long to cache the effective doc. The cog's governance period (if specified in the provenance or version block) is advisory — the machine may cache for longer or shorter based on its own resource constraints, access patterns, and trust model. The governance period is a hint, not a ceiling. If the source cog declares `mx.cacheability`, the reader should respect it: `ephemeral` (no cache), `short-lived` (up to 1 hour), `medium` (up to 1 day), `long-lived` (up to 1 week), or `permanent` (until changed). Custom durations (e.g., `4h`, `30d`) are also valid. See the field dictionary for the full specification.
 
 **Implementation guidance:**
 
@@ -939,17 +1005,17 @@ title: "Client Pricing 2026"
 access:
   type: guardrail
   gate: team-auth
-  note: "Requires team-auth cog to verify credentials"
+  note: "Requires team-auth cog to check credentials"
 ---
 # [Content locked — guardrail required]
 ```
 
 **Trust and access are independent layers.** A cog can be:
 
-- **Genuine and public** — verified by COG, readable by anyone
-- **Genuine and locked** — verified by COG, but content requires authorisation
-- **Unverified and public** — no COG, but anyone can read it
-- **Unverified and locked** — no COG and content is gated
+- **Genuine and public** — provenanced by COG, readable by anyone
+- **Genuine and locked** — provenanced by COG, but content requires authorisation
+- **Unprovenanced and public** — no COG, but anyone can read it
+- **Unprovenanced and locked** — no COG and content is gated
 
 Both layers add value independently. Neither depends on the other.
 
@@ -959,7 +1025,7 @@ Both layers add value independently. Neither depends on the other.
 
 Every organisation has two kinds of operational document: reference material and procedures. The reference material tells you what's true. The procedures tell you what to do. Cogs are the machine-readable versions of both.
 
-**An info-doc is a single source of truth.** The verified, structured, authoritative answer to any question an AI agent asks. Product specifications, compliance certificates, pricing data, contact records, policy documents — anything an organisation needs to get right, every time, without ambiguity. An info-doc is that answer, structured so machines read it as accurately as humans do.
+**An info-doc is a single source of truth.** The provenanced, structured, authoritative answer to any question an AI agent asks. Product specifications, compliance certificates, pricing data, contact records, policy documents — anything an organisation needs to get right, every time, without ambiguity. An info-doc is that answer, structured so machines read it as accurately as humans do.
 
 **An action-doc is a Standard Operating Procedure that executes itself.** Every organisation runs on SOPs — the step-by-step instructions that ensure a task gets done the same way every time, by anyone, to the required standard. SOPs are how businesses achieve consistency, quality control, and safety.
 
@@ -972,9 +1038,9 @@ An action-doc is a machine-executable SOP. The same document that a human reads 
 | Consistency | Same cog, same steps, same result, every time |
 | Quality control | `invokes` chains and `checks` extensions — built-in validation |
 | Safety protocols | `access` object and guardrail pattern — controlled execution |
-| Version control | `version` field and lifecycle — draft through re-signed |
+| Version control | `version` field and lifecycle — draft through re-attested |
 | Accountability | Contract of Governance — named maintainer, review cycle, correction SLA |
-| Audit trail | Certificate of Genuineness — signed, timestamped, verifiable |
+| Audit trail | Certificate of Genuineness — attested, timestamped, provenance established |
 
 The difference between a traditional SOP and an action-doc is the difference between a recipe printed on paper and a recipe that cooks the meal. A traditional SOP lives in a binder, a wiki, or a PDF. Someone reads it. Someone follows it. Someone might skip a step. An action-doc lives in the system. The AI agent reads it and executes every step, every time. No steps skipped. No corners cut.
 
@@ -998,8 +1064,8 @@ cogType: "certificate-of-genuineness"
 
 publisher:
   name: "Publisher Name"
-  verified: true
-  signedBy: "email@example.com"
+  provenanced: true
+  attestedBy: "email@example.com"
 
 subject:
   name: "Subject Name"
@@ -1008,14 +1074,14 @@ subject:
 
 publicationDate: "2026-02-08T14:30:00Z"
 expires: "2026-08-08T14:30:00Z"
-lastVerified: "2026-02-08T14:30:00Z"
+maintainedDate: "2026-02-08T14:30:00Z"
 
-signature: "mx-sig-..."
+attestation: "mx-att-..."
 mxCompliance: "level-3"
 registry: "allabout.network"
 ```
 
-A cog without the Certificate is unverified. You do not know if it is genuine.
+A cog without the Certificate has no provenance. You do not know if it is genuine.
 
 ---
 
@@ -1040,7 +1106,7 @@ updateTriggers:
   - "security advisory"
   - "user-reported inaccuracy"
 
-accuracyCommitment: "verified against current production release"
+accuracyCommitment: "maintained against current production release"
 correctionSla: "48 hours from report to updated COG"
 
 usage:
@@ -1056,15 +1122,15 @@ A cog without the Contract is ungoverned. Nobody has promised to keep it accurat
 
 ## 11. Compliance Levels
 
-Not every cog needs the same verification. A developer's local filesystem cog has different requirements than a pharmaceutical dosage reference.
+Not every cog needs the same level of provenance. A developer's local filesystem cog has different requirements than a pharmaceutical dosage reference.
 
 | Level | Certificate requirement | Governance requirement | Use case |
 | --- | --- | --- | --- |
 | **1 — Basic** | YAML frontmatter present | Publisher identified | Internal documentation |
 | **2 — Structured** | MX-compliant format | Maintainer and contact provided | Public documentation |
-| **3 — Signed** | Cryptographically signed | Review cycle and update triggers defined | REGINALD minimum |
-| **4 — Registered** | Signed and registered in REGINALD | Full governance contract with SLA | Commercial documentation |
-| **5 — Audited** | Signed, registered, and independently verified | Governance audited by third party | Regulated industries |
+| **3 — Attested** | Cryptographically attested | Review cycle and update triggers defined | REGINALD minimum |
+| **4 — Registered** | Attested and registered in REGINALD | Full governance contract with SLA | Commercial documentation |
+| **5 — Audited** | Attested, registered, and independently provenanced | Governance audited by third party | Regulated industries |
 
 **Level 3** is the minimum for REGINALD registration — the point where AI systems can trust the content programmatically.
 
@@ -1089,21 +1155,90 @@ REGINALD is not the cog system. REGINALD is the public host within the cog syste
 
 ## 13. Lifecycle
 
+A cog is the digital twin of its content. It is born when the content is created, evolves when the content changes, and dies when the content ceases to exist. The cog does not merely describe the content — it IS the content's machine-readable identity. If the content disappears but the cog survives, the content can be recreated from the cog's metadata. If the cog disappears but the content survives, the content becomes invisible to machines.
+
+### 13.1 Lifecycle States
+
+Every cog passes through a subset of these states. The path depends on the cog type, but the states are universal.
+
 ```text
-DRAFT → SIGNED → REGISTERED → ACTIVE → REVIEW → UPDATED → RE-SIGNED
-                                 ↑                              │
-                                 └──────────────────────────────┘
+DRAFT → ACTIVE → PUBLISHED → SUPERSEDED → ARCHIVED
+  │        │         │             │
+  │        │         └→ REVIEW ──→┘
+  │        │                │
+  │        └→ DEPRECATED ──→┘
+  │
+  └→ (deleted — never existed)
 ```
+
+| State | Meaning | Typical duration |
+| --- | --- | --- |
+| **draft** | Content exists but is not yet trustworthy. May be incomplete, unreviewed, or unattested. | Hours to weeks |
+| **active** | Content is current and maintained. The default working state for most cogs. | Weeks to months |
+| **published** | Content has been formally released. For registered cogs, this means attested and queryable via REGINALD. | Months to years |
+| **review** | Content is approaching expiry, has been flagged by an aliveness check, or a trigger event has occurred. The maintainer must act. | Hours to days |
+| **deprecated** | Content is outdated but still accessible. A successor exists or is planned. Agents should prefer the successor. | Weeks to months |
+| **superseded** | A newer version of this cog has replaced it. The `supersededBy` field points to the replacement. | Permanent |
+| **archived** | Content is preserved for historical reference but is no longer maintained. Trust is zero. | Permanent |
+
+**Transitions:** A cog may move forward through the states, or skip states (a draft may go directly to published). A cog may move backward from `review` to `active` (re-maintained) or from `deprecated` to `active` (reinstated). A cog may never move backward from `archived` or `superseded` — those are terminal. Deletion removes the cog entirely; there is no "deleted" state.
+
+### 13.2 The Certificate Lifecycle
+
+For cogs registered in REGINALD, the lifecycle gains additional ceremony:
 
 | Stage | Certificate action | Contract action |
 | --- | --- | --- |
-| Draft | Content prepared, unsigned | Governance terms defined |
-| Signed | Signing engine validates and signs | Maintainer commits to governance terms |
-| Registered | Added to REGINALD registry | Governance terms indexed and enforceable |
-| Active | Queryable by AI systems | Maintenance schedule begins |
-| Review | Approaching expiry or trigger event | Maintainer reviews accuracy |
-| Updated | Content revised | Governance log updated |
-| Re-signed | New signature, new timestamp | Renewal of governance commitment |
+| draft | Content prepared, unattested | Governance terms defined |
+| active | Attestation engine validates and attests | Maintainer commits to governance terms |
+| published | Added to REGINALD registry, queryable by AI | Governance terms indexed and enforceable |
+| review | Approaching expiry or aliveness check failed | Maintainer reviews accuracy |
+| re-attested | New attestation, new timestamp, back to published | Renewal of governance commitment |
+| deprecated | Marked as outdated in registry | Governance obligations wind down |
+| archived | Removed from active registry, preserved in history | Governance record sealed |
+
+### 13.3 Versioning
+
+A cog's `version` field tracks its evolution. The rules are simple:
+
+- **Patch** (1.0 → 1.1): Content corrected or clarified. No structural change. The cog remains the same identity.
+- **Minor** (1.1 → 2.0): Content substantially revised. New sections, removed sections, changed meaning. The cog remains the same identity but agents should re-read it.
+- **New cog**: When the subject changes — when what the cog describes is fundamentally different — create a new cog with a new filename. The old cog's status becomes `superseded` with a `supersededBy` pointer.
+
+**The test:** If an agent cached the old version and used it to make a decision, would the new version change that decision? If yes, bump the version. If the new version describes a different thing entirely, it is a different cog.
+
+Versions live in frontmatter, never in filenames. The filename is the cog's stable identity. The version is the cog's age.
+
+### 13.4 Trust Decay
+
+Trust is not binary. A cog maintained yesterday is more trustworthy than one maintained last year. Three fields govern trust over time:
+
+| Field | Purpose | Agent behaviour |
+| --- | --- | --- |
+| `maintainedDate` | Date the content was last confirmed accurate | The older this date, the less an agent should rely on the cog without independent confirmation |
+| `cacheability` | How long an agent may cache before re-fetching | Ephemeral content (real-time prices) decays in seconds. Permanent content (specifications) decays over months. Default: medium (1 day) |
+| `expires` | Hard expiry date — after this, the cog is stale by definition | Agents must not use expired cogs for decisions. The cog enters `review` state automatically |
+
+**The trust formula** (advisory, not computed):
+
+- A cog with `maintainedDate` within its `cacheability` window is **fresh** — full trust.
+- A cog with `maintainedDate` beyond its `cacheability` window but before `expires` is **ageing** — use with caution, prefer re-confirmation.
+- A cog past its `expires` date is **stale** — do not trust. Treat as `review` state regardless of `status` field.
+- A cog with no `maintainedDate` and no `expires` relies solely on `cacheability` and the agent's own heuristics.
+
+**REGINALD aliveness checks** enforce trust mechanically: monthly confirmation of HTTP 200 response, content hash match, and response time. Three consecutive failures trigger auto-hide — the cog becomes invisible to resolution queries until the publisher fixes it. This is trust decay enforced by infrastructure.
+
+### 13.5 Type-Specific Overrides
+
+The universal lifecycle applies to all cogs. Specific types add or modify behaviour:
+
+**Info cogs** follow the base lifecycle without modification. Most info cogs spend their lives in `active` or `published`.
+
+**Action cogs** add execution safety. An action cog in `deprecated` state should warn before execution. An action cog in `archived` state must not execute. The `security` block (trust-level, attestation, execution policy) gates what happens at each state.
+
+**Routing cogs** are infrastructure. They should be `permanent` cacheability and rarely change state. A routing cog in `review` means agents may be navigating to the wrong places — this is urgent.
+
+**Certificate cogs** (Certificate of Genuineness) have the richest lifecycle because they carry cryptographic attestations. Every state transition requires re-attestation. The certificate lifecycle in Section 13.2 applies on top of the base lifecycle.
 
 ---
 
@@ -1123,10 +1258,10 @@ Cogs (info-docs and action-docs) belong to categories:
 
 ### A valid cog MUST
 
-- Have all required base fields in frontmatter (name, version, description, created, modified, author)
-- Have `name` matching the filename stem (e.g. `pricing.cog.md` has `name: pricing`)
+- Have all required base fields in frontmatter (title, version, description, created, modified, author)
 - Have valid ISO 8601 timestamps
 - Have valid semver version
+- Have a `status` field matching one of the lifecycle states (draft, active, published, review, deprecated, superseded, archived)
 
 ### A valid action-doc MUST additionally
 
@@ -1219,8 +1354,8 @@ cogType: "certificate-of-genuineness"
 
 publisher:
   name: "Anthropic"
-  verified: true
-  signedBy: "docs@anthropic.com"
+  provenanced: true
+  attestedBy: "docs@anthropic.com"
 
 subject:
   name: "Claude Code"
@@ -1229,7 +1364,7 @@ subject:
 
 publicationDate: "2026-02-08T14:30:00Z"
 expires: "2026-08-08T14:30:00Z"
-signature: "mx-sig-a7f3b2e1c4d8e9f2..."
+attestation: "mx-att-a7f3b2e1c4d8e9f2..."
 mxCompliance: "level-3"
 registry: "allabout.network"
 
@@ -1243,7 +1378,7 @@ updateTriggers:
   - "installation process change"
   - "user-reported inaccuracy"
 
-accuracyCommitment: "verified against current production release"
+accuracyCommitment: "maintained against current production release"
 correctionSla: "48 hours"
 
 usage:
@@ -1314,8 +1449,8 @@ MX OS is the MX Operating System — the principle that MX documentation IS the 
 | **File format** | `.cog.md` — YAML frontmatter + markdown, universal across all cog types |
 | **System API** | The Gathering specification — defines how programs are structured |
 | **Package registry** | REGINALD — where published programs are hosted and discovered |
-| **Code signing** | COG (Certificate of Genuineness) — trust layer proving a program is genuine |
-| **Permission levels** | Compliance levels 1–5 — from local unsigned to independently audited |
+| **Code attestation** | COG (Certificate of Genuineness) — trust layer proving a program is genuine |
+| **Permission levels** | Compliance levels 1–5 — from local unattested to independently audited |
 | **Network scope** | Visibility levels — local, private, shared, hosted |
 | **Filesystem metadata** | `.mx.yaml.md` files — folder-level context and inheritance |
 | **Identity / user profile** | SOUL.md — self-describing identity for a folder or project |
@@ -1369,12 +1504,12 @@ The Gathering standard applies to cogs. But the frontmatter conventions — cano
 | `created` | Yes | date | Creation date (ISO 8601) |
 | `modified` | Yes | date | Last modification date (ISO 8601) |
 | `version` | Recommended | semver | Document version |
-| `status` | Recommended | enum | `draft` / `active` / `stable` / `superseded` / `deprecated` / `archived` |
+| `status` | Recommended | enum | `draft` / `active` / `published` / `review` / `deprecated` / `superseded` / `archived` |
 | `audience` | Optional | identifier | Who this is for |
 | `purpose` | Optional | free text | Why this document exists |
 | `tags` | Optional | identifier[] | Discovery keywords |
 
-Non-cog documents use `title` where cogs use `name`. A cog's `name` is a machine identifier (kebab-case, matches filename). A document's `title` is human-readable.
+Both cog and non-cog documents use `title` for their human-readable name. The filename is the cog's stable machine identifier.
 
 ### When to Use Cog Format vs Document Format
 
@@ -1445,7 +1580,7 @@ For documents that have been replaced or are reference copies:
 
 **Field Dictionary:** The complete script metadata specification, including field definitions and parsing rules for all carrier formats, is in `fields.cog.md` Sections 12.6 and 13. This section provides the architectural overview.
 
-Cogs are markdown files with YAML frontmatter. Scripts are not markdown — but they still need machine-readable metadata. This section defines the standard for embedding cog-compatible metadata in shell scripts (and any `#`-comment language) using comment blocks.
+Cogs are documents carrying MX metadata — the canonical format is markdown with YAML frontmatter, but any file type can be a cog using its native carrier format. Scripts are not markdown — but they still need machine-readable metadata. This section defines the standard for embedding cog-compatible metadata in shell scripts (and any `#`-comment language) using comment blocks.
 
 ### Why Scripts Need Metadata
 
@@ -1492,7 +1627,7 @@ Script metadata uses `# ---` delimiters (matching YAML `---` convention) with `#
 | Field | Value Type | Description |
 | --- | --- | --- |
 | `category` | identifier | `mx-tools` / `mx-core` / `utility` / `integration` |
-| `status` | enum | `draft` / `active` / `deprecated` |
+| `status` | enum | `draft` / `active` / `deprecated` / `superseded` / `archived` |
 | `tags` | identifier[] | Searchable keywords |
 | `dependencies` | identifier[] | External tools required (e.g. `eza`, `git`, `node`) |
 | `builds-on` | identifier[] | MX cogs this script relates to |
@@ -1536,8 +1671,11 @@ For languages using other comment styles (`//`, `/* */`, `--`), the same fields 
 
 ---
 
-*MX Cog Unified Specification v2.1-draft — 15 February 2026*
+*MX Cog Unified Specification v2.2-draft — 18 March 2026*
 
 *Governed by The Gathering. MIT Licensed.*
 
 *"The standard belongs to the community."*
+
+[^agentlock]: AgentLock — open authorisation standard for AI agents. Addresses the "Full Permission anti-pattern" with declarative security metadata, scoped access control, single-use execution tokens, rate limiting, data redaction, and structured audit trails. Apache 2.0 licensed, framework-agnostic.\
+       [https://agentlock.dev/](https://agentlock.dev/)

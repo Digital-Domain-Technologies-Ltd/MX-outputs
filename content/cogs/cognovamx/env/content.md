@@ -12,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os
@@ -33,7 +34,7 @@ mx:
     base-url: https://allabout.network
     protocol: https
 
-  default-author:
+  defaultAuthor:
     name: Tom Cranstoun
     linkedin: https://www.linkedin.com/in/tom-cranstoun/
     email: info@cognovamx.com
@@ -48,8 +49,8 @@ mx:
 
   paths:
     eds-blog: mx-crm/content/
-    mx-blog: allaboutv2/blogs/mx/
-    mx-blog-css: allaboutv2/blogs/mx/shared-mx.css
+    mx-blog: mx-outputs/mx-site/blog/
+    mx-blog-css: mx-outputs/mx-site/css/mx-blog.css
     eds-blog-url: /blogs/ddt/
     mx-blog-url: /blogs/mx/
 
@@ -190,7 +191,7 @@ The YAML frontmatter contains all project-level configuration organised by secti
 | **site** | Hostname, base URL, protocol | `hostname: allabout.network` |
 | **default-author** | Default author identity | `name: Tom Cranstoun` |
 | **publisher** | Publishing entity | `name: AllAbout.Network` |
-| **paths** | File locations and URL patterns | `mx-blog: allaboutv2/blogs/mx/` |
+| **paths** | File locations and URL patterns | `mx-blog: mx-outputs/mx-site/blog/` |
 | **social** | Social media card defaults | `og-site-name: AllAbout.Network` |
 | **defaults** | Language, date formats, reading speed | `language: en-GB` |
 | **ai** | AI meta tag defaults | `content-policy: extract-with-attribution` |
@@ -204,7 +205,7 @@ The YAML frontmatter contains all project-level configuration organised by secti
 Do not write:
 
 ```
-Output path: allaboutv2/blogs/mx/{slug}.html
+Output path: mx-outputs/mx-site/blog/{slug}.html
 URL pattern: https://mx.allabout.network/blog/{slug}.html
 ```
 

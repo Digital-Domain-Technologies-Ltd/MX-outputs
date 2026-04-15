@@ -1,4 +1,5 @@
 ---
+title: "cogs-for-agent-developers"
 version: "1.0"
 description: How cogs complement AI agent frameworks. Agent skills extend one agent. Cogs make content readable by any agent. Different layers that work together.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: learning
   partOf: mx-the-gathering
@@ -157,8 +159,15 @@ The specification is at v1.0 draft. It defines:
 
 - Required and optional YAML fields
 - The action-doc execute schema
+- The security block — riskLevel classification, scope constraints, audit requirements, data protection, rate limiting, and role-based access
 - Interoperability requirements across agents
 - The `builds-on` graph for connecting cogs to each other
+
+### Security for Agent Developers
+
+Every action-doc declares a `riskLevel`: `low`, `medium`, `high`, or `critical`. Your agent framework should read this field before execution and apply appropriate safeguards — confirmation prompts for `high`, guardrail gates for `critical`.
+
+Action-docs with elevated risk also declare a `security` block with `scope` (filesystem paths, network access, data boundaries), `audit` (logging requirements), `dataProtection` (output sensitivity, redaction), `rateLimit` (invocation caps), and `allowedRoles` (who may execute). These are declarative metadata — your framework reads the constraints and enforces them at infrastructure level. The cog does not enforce its own security. The reader does.
 
 ---
 

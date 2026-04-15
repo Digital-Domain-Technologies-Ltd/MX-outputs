@@ -1,4 +1,5 @@
 ---
+title: "what-comes-next"
 version: "1.0"
 description: The current state of the MX ecosystem, priorities, action plan, and next steps. Any AI agent reading this knows exactly where we are and what to do next.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os

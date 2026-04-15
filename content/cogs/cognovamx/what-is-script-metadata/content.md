@@ -1,4 +1,5 @@
 ---
+title: "what-is-script-metadata"
 version: "1.0.0"
 description: Script metadata brings shell scripts into MX OS — comment-block frontmatter that makes every script machine-readable without changing how it runs.
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os

@@ -1,4 +1,5 @@
 ---
+title: "mx-phrasebook"
 version: "1.0.0"
 description: "The sayings that define MX OS culture. Every phrase earned its place by being built, not brainstormed."
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: mx-core
   partOf: mx-os

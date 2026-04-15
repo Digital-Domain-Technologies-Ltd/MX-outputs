@@ -1,4 +1,5 @@
 ---
+title: "sitemap"
 version: 0.1.0
 description: Analyze sitemaps and compare with llms.txt coverage
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  riskLevel: medium
 
   category: mx-core
   partOf: mx-core

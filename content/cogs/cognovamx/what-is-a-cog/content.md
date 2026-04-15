@@ -1,9 +1,10 @@
 ---
+title: "what-is-a-cog"
 version: "1.0"
 description: A cog that explains what cogs are. The format describing itself.
 
 created: 2026-02-09
-modified: 2026-02-09
+modified: 2026-03-22
 
 author: Tom Cranstoun
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: low
 
   category: learning
   partOf: mx-the-gathering
@@ -48,7 +50,7 @@ When AI agents cannot find a structured answer, they guess. They hallucinate. Th
 
 ## The Solution
 
-A cog is a markdown file with YAML frontmatter. The frontmatter is the metadata — structured, machine-readable, standardised. The markdown below is the documentation — written for humans, as clear and useful as any good README.
+A cog is any file that carries structured MX metadata. The most common form is a markdown file with YAML frontmatter — metadata for machines at the top, documentation for humans below.
 
 One file. Two audiences. No guessing.
 
@@ -70,15 +72,24 @@ Both are in the same file.
 
 That is a cog. You already know how to make one.
 
+But cogs are not limited to markdown. Every file type has a carrier format for MX metadata:
+
+- **HTML** — `<meta name="mx:status" content="published">` in the `<head>`
+- **JavaScript** — JSDoc comments with `@mx:status published`
+- **CSS** — comment blocks with `@mx:status published`
+- **Shell scripts** — YAML block in `#`-prefixed comments
+
+Place MX metadata in any of these carriers, and the file becomes a cog. The carrier changes to match the file format. The semantics stay the same. A deploy script with `@mx:status` in its header comments is as much a cog as this markdown file you are reading now.
+
 ---
 
-## What Makes It Different from a Normal Markdown File?
+## What Makes a Cog Different from a Normal File?
 
 Three things:
 
-1. **Standardised frontmatter.** Not just any YAML — a defined set of fields that any tool can expect to find. Name, version, description, author, tags, category. The [COG specification](cog-unified-spec.cog.md) defines the full schema.
+1. **Standardised metadata.** Not just any YAML or any comment block — a defined set of fields that any tool can expect to find. Name, version, description, author, tags, category. The [COG specification](cog-unified-spec.cog.md) defines the full schema, and it applies equally whether the carrier is YAML frontmatter, HTML meta tags, JSDoc comments, or shell comments.
 
-2. **Machine-readable by design.** The metadata is not buried in prose. It sits at the top in a format every programming language can parse. An AI agent reading this cog knows immediately: this is a learning document, written for content strategists, about the cog format itself.
+2. **Machine-readable by design.** The metadata is not buried in prose. It sits where the file format naturally puts metadata, in a format every programming language can parse. An AI agent reading this cog knows immediately: this is a learning document, written for content strategists, about the cog format itself.
 
 3. **Governed by an open standard.** The Gathering — an independent standards body — governs the cog metadata format. MIT licensed. No fees. No barriers. Anyone can implement it.
 
@@ -103,6 +114,48 @@ execute:
 
 Every action-doc is a cog. Not every cog is an action-doc. If it has an `execute` block, it turns.
 
+## The Security Block
+
+Action-docs declare what they are permitted to do through a security block. This addresses the same problem that traditional computing solved with file permissions, database GRANT/REVOKE, and cloud IAM: preventing software from operating without constraints.
+
+Every cog carries a `riskLevel` classification in its frontmatter:
+
+| Level | Meaning |
+| --- | --- |
+| `low` | Read-only, no side effects |
+| `medium` | Reads external data, produces reports |
+| `high` | Modifies filesystem, installs dependencies |
+| `critical` | Handles confidential data, destructive operations |
+
+Action-docs with `riskLevel: high` or `critical` declare explicit scope, audit, and data protection requirements:
+
+```yaml
+security:
+  scope:
+    filesystem: [mx-outputs/pdf/**]
+    network: none
+    allowedOperations: [read, write, create]
+  audit:
+    logLevel: standard
+    retention: 90d
+    includeInputs: true
+    includeOutputs: false
+  dataProtection:
+    outputClassification: internal
+    prohibitedFields: [apiKey, password]
+    piiHandling: mask
+  rateLimit:
+    maxCalls: 10
+    window: 1h
+  allowedRoles: [admin, developer]
+```
+
+These fields are declarations of intent — the cog states its boundaries so readers can enforce them. A reader that does not understand the security block ignores it (reader agency). A reader that does understand it can enforce infrastructure-level authorisation before any action executes.
+
+The security block is inspired by AgentLock, an open authorisation standard that addresses what it calls the "Full Permission anti-pattern": AI agents executing tool calls with no structured permission model.
+
+See the [full specification](cog-unified-spec.cog.md) for complete field definitions.
+
 ---
 
 ## Who Is This For?
@@ -119,15 +172,19 @@ Everyone who publishes content that AI agents will read. Which is everyone.
 
 ## How to Start
 
-1. Take any markdown file you already have
-2. Add YAML frontmatter with `name`, `version`, `description`, `author`, and `tags`
+1. Take any file you already have
+2. Add MX metadata using the carrier format for that file type — YAML frontmatter for markdown, `<meta name="mx:*">` tags for HTML, `@mx:*` JSDoc tags for JavaScript, `#`-prefixed YAML for shell scripts
 3. You have made a cog
 
-Any document can be a cog. The barrier to entry is three fields and two `---` lines. But metadata quality determines compute cost. A cog with rich metadata — clear description, tags, relationships, audience — lets an AI agent understand the document from the frontmatter alone. A cog with sparse metadata forces the agent to read the entire document to figure out what it is. Both work. One costs less.
+Any file can be a cog. For markdown, the barrier to entry is three fields and two `---` lines. For HTML, a single `<meta>` tag. For a shell script, a commented YAML block. But metadata quality determines compute cost. A cog with rich metadata — clear description, tags, relationships, audience — lets an AI agent understand the file from the metadata alone. A cog with sparse metadata forces the agent to read the entire file to figure out what it is. Both work. One costs less.
 
-Start simple. Improve over time. Every field you add is a question an AI agent does not have to answer by reading your prose.
+Cogs work wherever files work. On your laptop, on a company file server, in a git repository, in a CMS. No registry, no server, no external infrastructure needed. A cog on a shared drive is already useful to every machine that can read it.
 
-Read the [full specification](cog-unified-spec.cog.md) when you want to go deeper. But the format is intentionally simple. If you can write a README, you can write a cog.
+When cogs need to cross organisational boundaries — when you need to prove a file is genuine, when machines outside your organisation need to discover it, when living documents need version tracking — that is where Reginald comes in. Reginald is a public registry that adds discovery, cryptographic attestation, and currency tracking. But registration is optional. Most cogs will never need it. The format is the value.
+
+Start simple. Improve over time. Every field you add is a question an AI agent does not have to answer by reading your content.
+
+Read the [full specification](cog-unified-spec.cog.md) when you want to go deeper. But the format is intentionally simple. If you can write a README, you can write a cog. If you can write an HTML meta tag, you can write a cog. If you can write a comment, you can write a cog.
 
 ---
 

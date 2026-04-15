@@ -7,10 +7,11 @@ author: Tom Cranstoun
 description: "This is a reference copy. The canonical specification is governed by The Gathering and lives in mx-canon."
 
 mx:
+  contentType: info-doc
   status: draft
   category: specification
   tags: [cog, specification, reference-copy]
-  canonical-source: "mx-canon/mx-the-gathering/specifications/cog-unified-spec.cog.md"
+  canonicalSource: "mx-canon/mx-the-gathering/specifications/cog-unified-spec.cog.md"
 ---
 
 # MX Cog Unified Specification

@@ -1,4 +1,5 @@
 ---
+title: "readability"
 version: 0.1.0
 description: Plain language and reading level analysis
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  riskLevel: medium
 
   category: mx-core
   partOf: mx-core

@@ -1,4 +1,5 @@
 ---
+title: "ndr-02-camelcase-naming"
 version: "1.0"
 description: "NDR #2: All YAML frontmatter field names must use camelCase. Aligns with Schema.org and Dublin Core vocabulary conventions."
 created: 2026-02-16
@@ -6,6 +7,7 @@ modified: 2026-03-02
 author: Tom Cranstoun and Maxine
 
 mx:
+  contentType: info-doc
   status: accepted
   category: naming
   partOf: mx-the-gathering

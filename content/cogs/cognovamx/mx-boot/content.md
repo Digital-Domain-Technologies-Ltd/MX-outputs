@@ -1,4 +1,5 @@
 ---
+title: "mx-boot"
 version: "1.0.0"
 description: "MX OS bootstrapper — zero to operational. Checks prerequisites, installs dependencies. Entry points: INSTALLME (bare metal), npm run boot, /mx-boot."
 created: 2026-02-11
@@ -9,6 +10,17 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: high
+  security:
+    scope:
+      filesystem: [scripts/**, node_modules/**, .claude/**]
+      network: external
+      allowedOperations: [read, write, create, execute]
+    audit:
+      logLevel: standard
+      retention: 90d
+      includeInputs: true
+      includeOutputs: false
   category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]

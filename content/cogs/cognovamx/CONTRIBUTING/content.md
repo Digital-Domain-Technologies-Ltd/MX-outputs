@@ -1,4 +1,5 @@
 ---
+title: "CONTRIBUTING"
 version: "1.0"
 description: "Contribution guidelines for the block architecture. Open standard, backward compatible, no proprietary lock-in."
 created: 2026-02-12
@@ -6,13 +7,12 @@ modified: 2026-02-12
 author: Tom Cranstoun
 
 mx:
-  license: proprietary
+  inherits: CONTRIBUTING.md
+  license: proprietary # this cog file; contributions to the spec are MIT (see policy block)
   status: active
   category: governance
   partOf: mx-maxine-lives
   tags: [contributing, governance, the-gathering, open-standard]
-
-  inherits: CONTRIBUTING.md
 
   blocks:
     - prose:

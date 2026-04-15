@@ -1,4 +1,5 @@
 ---
+title: "LICENSE"
 version: "1.0"
 description: "MIT license for Maxine Lives specification work. Implementation licenses may differ."
 created: 2026-02-12

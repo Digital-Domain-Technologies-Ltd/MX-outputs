@@ -1,4 +1,5 @@
 ---
+title: "schema"
 version: 0.1.0
 description: Validate and generate Schema.org structured data markup
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  riskLevel: medium
 
   category: mx-core
   partOf: mx-core

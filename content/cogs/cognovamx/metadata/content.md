@@ -1,4 +1,5 @@
 ---
+title: "metadata"
 version: 0.1.0
 description: Extract and validate page metadata (Open Graph, Twitter Cards, meta tags)
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  riskLevel: medium
 
   category: mx-core
   partOf: mx-core

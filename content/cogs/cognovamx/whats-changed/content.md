@@ -1,4 +1,5 @@
 ---
+title: "whats-changed"
 version: "1.0.0"
 description: "Find what changed in the repo — list files by time period and type, extract metadata, show git status, surface gaps. The content audit tool."
 created: 2026-02-11
@@ -9,6 +10,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: medium
   category: mx-content
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]

@@ -12,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  riskLevel: high
 
   category: mx-core
   partOf: mx-os
@@ -45,7 +46,7 @@ mx:
           - Runs npm install, initialises submodules
           - Verifies all systems operational
 
-  mx-environment:
+  mxEnvironment:
     detection: "$MX_HOME"
     benefit: "Machine context available before installation"
     fallback: "Diagnose inline"
@@ -78,7 +79,7 @@ mx:
         why: "GitHub CLI for PR workflows"
 
   # Prerequisites for fresh Mac (nothing installed)
-  new-mac-prerequisites:
+  newMacPrerequisites:
     required:
       - name: xcode-cli
         check: "xcode-select -p"
@@ -108,7 +109,7 @@ mx:
         why: "PDF generation"
 
   # Installation steps for existing systems
-  install-steps:
+  installSteps:
     - step: 1
       name: "Clone with submodules"
       command: "git clone --recurse-submodules <repo-url>"
@@ -121,7 +122,7 @@ mx:
       command: "npm run cog:stats"
 
   # New Mac steps (uses embedded script)
-  new-mac-steps:
+  newMacSteps:
     - step: 1
       name: "Clone repository"
       command: "git clone --recurse-submodules https://github.com/tomcranstoun/MX-hub.git"

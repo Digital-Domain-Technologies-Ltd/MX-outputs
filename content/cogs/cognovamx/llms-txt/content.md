@@ -1,4 +1,5 @@
 ---
+title: "llms-txt"
 version: 0.1.0
 description: Generate and validate llms.txt files for Robot-First Web compliance
 
@@ -11,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  riskLevel: medium
 
   category: mx-core
   partOf: mx-core

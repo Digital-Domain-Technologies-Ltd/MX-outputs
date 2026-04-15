@@ -11,6 +11,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: active
+  riskLevel: low
 
   category: mx-tools
   partOf: mx-cog-registry
@@ -468,12 +469,22 @@ audience: tech|business|both|humans
 
 ```yaml
 mx:
+  riskLevel: low|medium|high|critical
   runtime: browser|node|runbook|shell
   runbook: |
     Usage instructions for action-docs
   deliverable:
     path: "output-filename"
     format: "output-format"
+  security:                        # For high/critical riskLevel
+    scope:
+      filesystem: [allowed/paths/**]
+      network: none|local|external
+      allowedOperations: [read, write, create]
+    audit:
+      logLevel: full|standard|minimal|none
+      retention: 90d
+    allowedRoles: [admin, developer]
 
 buildsOn: [dependency-cog-1, dependency-cog-2]
 partOf: parent-collection
