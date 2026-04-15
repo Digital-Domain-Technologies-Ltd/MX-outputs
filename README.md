@@ -14,12 +14,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 54 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 146 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 55 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 147 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 96 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 1 | PowerPoint — presentation source files |
-| **Total** | **733** | |
+| **Total** | **735** | |
 
 ---
 
@@ -47,7 +47,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (8 files)
+### pdf/outreach/ (9 files)
 
 - [`wix-bookshop-report.pdf`](pdf/outreach/2026-04-01/wix-bookshop-report.pdf)
 - [`bobw-report.pdf`](pdf/outreach/2026-04-07/bobw-report.pdf)
@@ -56,12 +56,13 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`mx-allabout-network-report.pdf`](pdf/outreach/2026-04-11/mx-allabout-network-report.pdf)
 - [`neomwellbeing-report.pdf`](pdf/outreach/2026-04-13/neomwellbeing-report.pdf)
 - [`mx-allabout-blog-report.pdf`](pdf/outreach/2026-04-14/mx-allabout-blog-report.pdf)
+- [`mx-allabout-network-report.pdf`](pdf/outreach/2026-04-14/mx-allabout-network-report.pdf)
 - [`mx-allabout-report.pdf`](pdf/outreach/2026-04-14/mx-allabout-report.pdf)
   - **2026-04-01/** (1 files)
   - **2026-04-07/** (3 files)
   - **2026-04-11/** (1 files)
   - **2026-04-13/** (1 files)
-  - **2026-04-14/** (2 files)
+  - **2026-04-14/** (3 files)
 
 ### pdf/presentations/ (1 files)
 
@@ -109,7 +110,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 
-### md/reports/ (145 files)
+### md/reports/ (146 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -144,7 +145,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (117 files)
+#### md/reports/directors/ (118 files)
 
 **build/** (3 files)
 
@@ -158,7 +159,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (110 files)
+**session/** (111 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -262,6 +263,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-04-14-afternoon-report.md`](md/reports/directors/session/2026-04-14-afternoon-report.md)
 - [`2026-04-14-evening-report.md`](md/reports/directors/session/2026-04-14-evening-report.md)
 - [`2026-04-14-morning-report.md`](md/reports/directors/session/2026-04-14-morning-report.md)
+- [`2026-04-15-morning-report.md`](md/reports/directors/session/2026-04-15-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -412,4 +414,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-04-14 at 17:33*
+*Generated on 2026-04-15 at 10:00*
