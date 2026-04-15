@@ -6,7 +6,6 @@ created: "2026-03-06"
 version: "1.0"
 author: "Tom Cranstoun and Maxine"
 mx:
-  segment: "crm-update"
   audience: "stakeholders"
   confidential: true
 ---
