@@ -4,7 +4,7 @@ description: "Evening session shipping a seven-step audit-tooling plan end-to-en
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-16
 modified: 2026-04-16
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -65,7 +65,7 @@ Regenerating the golden skeleton surfaced a real reproducibility bug: the `[ROBO
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment (both arcs) | 13 across 5 repos (9 audit arc + 4 MXS arc + 1 pending hub) |
+| Commits this segment (three arcs) | 22 across 5 repos (9 audit arc + 10 MXS arc + 3 deploy/hardening arc) |
 | Files changed | 33 (audit arc) + 47 (MXS arc hub commit) |
 | Lines added | +932 (audit arc) + 3161 (MXS arc, dominated by moved drafts) |
 | Lines removed | −118 (audit arc) + 3368 (MXS arc, dominated by removed private copies) |
@@ -113,10 +113,43 @@ Blog word count grew 16% (1643 → 1901) to carry the prose; every new section p
 
 ---
 
+## Late-Evening Addendum 2 — Deploy + Session-Close Hardening
+
+After the MXS public-mirror arc closed, a third arc ran: the blog went live, and the session-close machinery gained two new gates closing the class of bug that almost shipped tonight.
+
+### 10. Chapter 20 preview blog deployed
+
+The blog wasn't just committed -- it's now live at [mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html](https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html). Copying the generated HTML into `mx-outputs/mx-site/blog/` required retargeting canonical URL, og:url, JSON-LD `@id`, and publisher URL from the generator's default `allabout.network/blogs/mx/` path to the actual served path, plus swapping per-post CSS for the site-standard `mx-unified.css` + `mx-blog.css` pair. Source `.md` flipped `contentState: draft → published` with today's publicationDate. Cloudflare cache purged. Canon YAMLs, Service/Offer schema fixes on services + printworks, and the blog all verified 200 OK.
+
+### 11. Submodule-pointer drift closed off as a class of bug
+
+The session exposed a real failure mode in `/step-commit`: after Step 1 commits and pushes submodules, *later* steps (directors report edits to mx-outputs, session-docs-check regenerating the mx-outputs index, the compliance fixer) can add more submodule commits. Each one needs a corresponding hub pointer bump. Tonight the blog-publish commit pushed to mx-outputs without a hub bump, leaving the hub one commit behind its submodule -- a silent state that would have gone to Monday unnoticed.
+
+Two layers now enforce alignment:
+
+- **Step 9a in the step-commit skill** -- a mandatory pre-push gate that runs `git submodule status | grep -E "^\+"` and refuses to proceed until the output is empty. The skill narrative describes how to resolve either direction (A: bump the hub pointer; B: `git submodule update` if the local checkout is behind a newer upstream pointer).
+- **Gate 0 in `.claude/hooks/pre-push.sh`** -- git-native enforcement. Every `git push` on the hub now runs the same check and blocks with a directional fix procedure. Tested by checking out an older mx-outputs SHA: push correctly refused with the full diagnostic.
+
+Either layer alone would have caught tonight's drift. Both together means the hub cannot ship pointing at a stale submodule SHA again.
+
+### 12. .claude cleanup: skills + hooks aligned
+
+A full audit of hooks, slash commands, skills, and agents found two real issues. Both fixed in one commit.
+
+- **`skill-developer/SKILL.md` renamed to `skill.md`** -- the only skill in the repo with uppercase filename. Case-insensitive macOS tolerates the drift, a case-sensitive Linux CI wouldn't.
+- **Four orphan hooks retired** (`pre-tool-use.sh`, `post-tool-use.sh`, `completion-report-detector.sh`, `check-html-contrast.sh`) -- obsolete Claude Code hook API format (`$CLAUDE_TOOL_NAME` env vars, positional `$1 $2 $3` args; current API is stdin JSON), or brittle detection superseded by proper tooling (the HTML contrast regex would false-positive on any page with `color` + `background` on adjacent lines; WCAG belongs in the `audit-site` skill where Pa11y runs). Removed the dead `check-html-contrast` invocation from `pre-commit.sh`.
+- **`mx-concept-detector.sh` wired** on UserPromptSubmit alongside `route-decorator.sh`. Modern stdin-JSON format, pairs with the existing `mx-concept-interview` skill, low-noise (requires both an MX keyword and a semantic indicator like "I propose" or "new pattern").
+
+Hook scripts went 18 → 14. Every remaining script is either wired in `settings.local.json` (12 events) or installed as a git hook (pre-commit, pre-push).
+
+Two classes of silent drift closed in one evening: submodule pointers and hook orphans.
+
+---
+
 ## Next Steps
 
-1. **Deploy mx-outputs** — push `our-services.html`, `printworks.html`, the canon YAML mirror at `mx-site/canon/`, and the four-artefact blog update to the live mx.allabout.network site. Once deployed, the public canon URLs (mx.allabout.network/canon/*.yaml) referenced from Appendix U and the blog start resolving.
-2. **Re-audit mx.allabout.network** after deployment to confirm Schema Maturity promotes past Level 1. If confirmed, close REMINDERS #1 and #2.
+1. ~~**Deploy mx-outputs**~~ — shipped. Canon YAMLs resolve at `mx.allabout.network/canon/`, the Schema.org Service/Offer fixes serve on services/our-services.html + about/printworks.html, the blog is live.
+2. **Re-audit mx.allabout.network** to confirm Schema Maturity promotes past Level 1 now that the fixes are live. If confirmed, close REMINDERS #1 and #2.
 3. **Fix the `/tmp/robots.txt` handler** — move to `resultsDir` so the golden-master can exercise the [ROBOTS_TXT_CONTENT] placeholder reproducibly.
 4. **Register MXS-01..04 drafts via Stream UI** — the GitHub side is done (four RFC repos in TG-Community, source drafts at `ddttom/mx-shared-gathering`); Stream registration is the remaining manual step.
 5. **Send TG-Community review notes to Gathering admin** — `mx-canon/ssot/tg-community-review-notes.md` now references the public source-drafts URL; ready to send.
@@ -147,5 +180,26 @@ Blog word count grew 16% (1643 → 1901) to carry the prose; every new section p
 | 68a4c5b | mx-shared-gathering | Initial publication of the four MXS proposed drafts |
 | 9b67514 | mx-outputs | Publish canon YAML mirror + point blog at public MXS drafts |
 | e10dfcd | mx-outputs | Blog: expand "Where to look it up" to cover all four public artefacts |
+| a823a1e | mx-outputs | Evening report v1.1: add MXS public-mirror late-evening addendum |
+| 109ed56 | mx-outputs | Regenerate mx-outputs index after session close |
 | df386baa | hub | Publish MXS-01..04 proposed drafts publicly via mx-shared-gathering submodule |
-| (pending) | hub | Step-commit: four-artefact blog/appendix prose + session close |
+| 34b239d0 | hub | Blog + Appendix U: "Where to look it up" rewritten around four public artefacts |
+| dcee6198 | hub | Docs: CHANGELOG late-evening entry, UBERCOG submodule row, REMINDERS deploy note |
+| c1d8cc0d | hub | LEARNINGS: draft standards publish from author namespace, not governing-body namespace |
+| 8d662afd | hub | Bump mx-outputs: index regenerated at session close |
+
+### Deploy + Session-Close Hardening Arc
+
+| Hash | Repo | Description |
+|------|------|-------------|
+| 415bc19 | mx-outputs | Publish blog: "A Standard That Knows What It Isn't" (Chapter 20 preview) |
+| f922c65 | mx-outputs | Add recommended Offer/Service properties to close Level 1 stragglers |
+| 87d1aad0 | hub | Bump mx-outputs: publish Chapter 20 preview blog |
+| 2a436442 | hub | Rebase-merge of Chapter 20 blog publish |
+| 8a73cfe1 | hub | Bump allaboutv2: stop Cloudflare Worker from emitting synthetic Last-Modified |
+| 65f89365 | hub | Bump mx-outputs: close Level 1 stragglers on our-services + printworks |
+| 5a41738b | hub | step-commit: add Step 9a pre-push submodule-pointer gate |
+| 2b3c2274 | hub | Pre-push hook: add Gate 0 blocking submodule-pointer drift |
+| 5d28edd8 | hub | Clean up .claude: align skill-developer casing, retire 4 orphan hooks, wire mx-concept-detector |
+| (pending) | mx-outputs | Evening report v1.2: add Deploy + Session-Close Hardening addendum |
+| (pending) | hub | Step-commit: session close with mx-outputs pointer bump + docs updates |
