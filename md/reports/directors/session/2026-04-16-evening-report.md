@@ -1,17 +1,17 @@
 ---
-title: "Co-Directors Report — Audit Trustworthiness Pass"
-description: "Evening session shipping a seven-step audit-tooling plan end-to-end: new frontmatter gate, category-locked test fixtures, classifier diagnostic, schema gap closure, and handler extraction."
+title: "Co-Directors Report — Audit Trustworthiness Pass + MXS Public Mirror"
+description: "Evening session shipping a seven-step audit-tooling plan end-to-end plus a late-evening arc that published the four MXS proposed drafts at a public URL the Gathering community can read."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-16
 modified: 2026-04-16
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
   contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening, audit-trustworthiness]
+  tags: [directors-report, session, evening, audit-trustworthiness, mxs, the-gathering]
 ---
 
 # Co-Directors Report — Audit Trustworthiness Pass
@@ -65,11 +65,14 @@ Regenerating the golden skeleton surfaced a real reproducibility bug: the `[ROBO
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment | 4 (plus 2 pending in hub) |
-| Files changed | 33 |
-| Lines added | +932 |
-| Lines removed | −118 |
-| Repositories touched | 4 (mx-audit, mx-outputs, mx-crm, hub pending) |
+| Commits this segment (both arcs) | 13 across 5 repos (9 audit arc + 4 MXS arc + 1 pending hub) |
+| Files changed | 33 (audit arc) + 47 (MXS arc hub commit) |
+| Lines added | +932 (audit arc) + 3161 (MXS arc, dominated by moved drafts) |
+| Lines removed | −118 (audit arc) + 3368 (MXS arc, dominated by removed private copies) |
+| Repositories touched | 5 (mx-audit, mx-outputs, mx-crm, hub, new mx-shared-gathering) |
+| New public repos | 1 (ddttom/mx-shared-gathering) |
+| Public artefacts enumerated in blog + Appendix U | 4 (source drafts, canon YAMLs, Stream RFC repos, book) |
+| Appendices indexed (after coverage fix) | 21 (A through U) |
 | Tests added | 22 new passing tests (18 audit-gates + 4 field-gate) |
 | Tests total after session | 28 passing (infill-golden + audit-gates + contract-completeness) |
 | Handlers extracted | 5 (of 5 inline items targeted) |
@@ -86,22 +89,63 @@ The original plan interview identified an assumption baked into REMINDERS #1: th
 
 ---
 
+## Late-Evening Addendum — MXS Public-Mirror Arc
+
+The audit-trustworthiness pass closed early enough that a second arc ran end-to-end in the same evening: publishing the four MXS proposed drafts in a form the Gathering community can actually read, plus the supporting book and blog material that points at them.
+
+### 7. MXS-01..04 source drafts published publicly
+
+MX-hub is private, so the authored `.cog.md` copies of the four proposed standards had no public URL. A new repo — `ddttom/mx-shared-gathering` (MIT, public) — now holds those four drafts plus a README explaining the relationship with the Stream RFC-format repos that already live under `TG-Community/draft-cranstoun-mx-*`. The repo is mounted back inside mx-hub as a submodule at the root, so the private build keeps using the same content, the private copies under `mx-canon/mx-the-gathering/proposed-drafts/` are removed, and a stub README in that path redirects anyone landing on the old location.
+
+Every outward-facing reference — CLAUDE.md, REMINDERS.md, the two ADRs, the TG-Community review notes, Appendix M, Appendix T, Appendix U, and the Chapter 20 preview blog — now points at the public URL. The MXS-hub reminder flagging this gap turns from amber to green in this session.
+
+Decision called out during the work: the repo lives in `ddttom/`, not in TG-Community. The Gathering's role is to review and ratify; until ratification, these are Tom's submitted drafts, not their property. Publishing from his own account keeps provenance clear. The `TG-Community/draft-cranstoun-mx-*` RFC repos are a separate mechanism — Stream's submission format, hosted where Stream lives, not an ownership transfer.
+
+### 8. Appendix U added + appendices index coverage fix
+
+A new Appendix U — "A Standard That Knows What It Isn't" — went into *MX: The Protocols* as a short architecture companion to Chapter 20. Alongside that, the appendix index template in `scripts/generate-appendix-html.sh` was holding only A–L; the quick-nav strip, index markdown, and `llms.txt` template were stale for the M–U additions that had accumulated. The build now renders twenty-one appendices (A through U) with proper section groupings (Implementation Guides, Quick References, Case Studies, Reference and Cataloguing, Workflow and Comprehension, The Standards Family). All individual appendix HTMLs carry the full A–U quick-nav.
+
+### 9. Canon YAML public mirror + blog rewritten around four artefacts
+
+The three canonical YAML files (`fields-data.yaml`, `fields-data-carriers.yaml`, `cognovamx-fields.yaml`) now live at `mx-outputs/mx-site/canon/` and will be served at `mx.allabout.network/canon/` when mx-outputs deploys. The Chapter 20 preview blog — "A Standard That Knows What It Isn't" — was rewritten so its "Where to look it up" section explicitly enumerates and describes the four public artefacts: the source drafts (mx-shared-gathering), the machine-readable canon (the YAMLs), the Stream RFC drafts (four named TG-Community repos), and the book reference (Appendices M + U). Closing strap lists all the URLs for copy-paste. Appendix U got the same four-artefact section so the two stay parallel.
+
+Blog word count grew 16% (1643 → 1901) to carry the prose; every new section points at a specific public URL a reader can open today.
+
+---
+
 ## Next Steps
 
-1. **Deploy mx-outputs** — push `our-services.html` and `printworks.html` changes to the live mx.allabout.network site.
+1. **Deploy mx-outputs** — push `our-services.html`, `printworks.html`, the canon YAML mirror at `mx-site/canon/`, and the four-artefact blog update to the live mx.allabout.network site. Once deployed, the public canon URLs (mx.allabout.network/canon/*.yaml) referenced from Appendix U and the blog start resolving.
 2. **Re-audit mx.allabout.network** after deployment to confirm Schema Maturity promotes past Level 1. If confirmed, close REMINDERS #1 and #2.
 3. **Fix the `/tmp/robots.txt` handler** — move to `resultsDir` so the golden-master can exercise the [ROBOTS_TXT_CONTENT] placeholder reproducibly.
-4. **Optional**: the per-report frontmatter gate surfaced a shipped report with missing fields. A one-off sweep of `mx-crm/outreach/**/*report.md` through the gate would identify any other historical reports that would fail it today.
+4. **Register MXS-01..04 drafts via Stream UI** — the GitHub side is done (four RFC repos in TG-Community, source drafts at `ddttom/mx-shared-gathering`); Stream registration is the remaining manual step.
+5. **Send TG-Community review notes to Gathering admin** — `mx-canon/ssot/tg-community-review-notes.md` now references the public source-drafts URL; ready to send.
+6. **Optional**: the per-report frontmatter gate surfaced a shipped report with missing fields. A one-off sweep of `mx-crm/outreach/**/*report.md` through the gate would identify any other historical reports that would fail it today.
 
 ---
 
 ## Commit Log
 
+### Audit Trustworthiness Pass
+
 | Hash | Repo | Description |
 |------|------|-------------|
 | 1c2e7e0 | mx-audit | Audit report gates: template contracts, gate fixtures, maturity diagnostic |
 | ebf4778 | mx-audit | Extract inline row handlers into bin/tableHandlers/ |
+| 05cd18c | mx-audit | Rename audit-tool to auditTool in gate fixtures |
 | ac6e9d2 | mx-outputs | Close Service/Offer schema gap on services + printworks pages |
 | 08a2804 | mx-crm | Fix agentica report frontmatter: add modified + status fields |
-| (pending) | hub | Audit-report Step 12.4 gate + per-report frontmatter validator |
-| (pending) | hub | REMINDERS.md + CHANGELOG + LEARNINGS updates |
+| b17d3d67 | hub | Audit-report Step 12.4 gate + per-report frontmatter validator |
+| 614e7200 | hub | Docs: CHANGELOG evening entry, REMINDERS tidy, two learnings |
+| 3b0e8f95 | hub | UBERCOG: add validate-report-frontmatter to audit-gate command list |
+| 22e79c34 | hub | Bump mx-audit: fixture field-naming fix (auditTool) |
+
+### MXS Public-Mirror Arc
+
+| Hash | Repo | Description |
+|------|------|-------------|
+| 68a4c5b | mx-shared-gathering | Initial publication of the four MXS proposed drafts |
+| 9b67514 | mx-outputs | Publish canon YAML mirror + point blog at public MXS drafts |
+| e10dfcd | mx-outputs | Blog: expand "Where to look it up" to cover all four public artefacts |
+| df386baa | hub | Publish MXS-01..04 proposed drafts publicly via mx-shared-gathering submodule |
+| (pending) | hub | Step-commit: four-artefact blog/appendix prose + session close |
