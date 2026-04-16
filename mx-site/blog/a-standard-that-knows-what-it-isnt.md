@@ -6,10 +6,10 @@ created: "2026-04-16"
 modified: "2026-04-16"
 
 mx:
-  contentState: "draft"
+  contentState: "published"
   blogFilename: "a-standard-that-knows-what-it-isnt"
-  blogUrl: ""
-  publicationDate: ""
+  blogUrl: "https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html"
+  publicationDate: "2026-04-16"
   tags: [mx, standards, the-gathering, architecture, preview, protocols]
   runbook: "Preview blog post for chapter 20 of MX: The Protocols (publishes 1 July 2026). Explains the architecture of the proposed MX standards family and the 'defer to existing standards' principle that keeps the core small."
   generate:
