@@ -67,6 +67,8 @@ style: |
   section::after {
     color: #00d4aa;
   }
+created: '2026-03-01'
+
 mx:
   date: "2026-02-26"
   event: "London CMS Experts"

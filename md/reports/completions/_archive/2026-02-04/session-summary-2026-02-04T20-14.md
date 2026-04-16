@@ -5,6 +5,8 @@ created: "2026-02-04"
 sessionStart: "2026-02-04T19:45:00Z"
 sessionEnd: "2026-02-04T20:14:35Z"
 duration: "~30 minutes"
+author: Tom Cranstoun
+
 mx:
   contentType: "feature-implementation"
   status: "completed"

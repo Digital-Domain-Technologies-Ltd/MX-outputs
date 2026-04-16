@@ -5,6 +5,8 @@ created: "2026-02-06"
 sessionStart: "2026-02-06T05:37:00Z"
 sessionEnd: "2026-02-06T05:43:49Z"
 duration: "~7 minutes"
+author: Tom Cranstoun
+
 mx:
   contentType: "configuration"
   status: "completed"

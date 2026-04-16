@@ -2,6 +2,7 @@
 title: "About Maxine — Server-Client Architecture Deliverable"
 created: "2026-02-13"
 
+author: Tom Cranstoun
 mx:
   sessionStart: "2026-02-13T12:15:00Z"
   sessionEnd: "2026-02-13T12:38:00Z"

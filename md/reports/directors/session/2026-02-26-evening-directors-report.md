@@ -2,6 +2,7 @@
 title: "Co-Directors Report: Repository Reorganisation — Separation of Concerns"
 author: Maxine (Claude Opus 4.6)
 
+created: '2026-03-01'
 mx:
   date: 2026-02-26
   segment: evening

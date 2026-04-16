@@ -2,6 +2,7 @@
 title: "Co-Directors Report: REGINALD Documented and Deployed"
 author: Maxine (Claude Opus 4.5)
 
+created: '2026-03-01'
 mx:
   date: 2026-02-26
   segment: morning

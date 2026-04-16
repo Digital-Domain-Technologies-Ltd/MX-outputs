@@ -2,6 +2,7 @@
 title: "MX Joymaker — Splash Screen, Co-Directors Report, Submodule Cleanup"
 created: "2026-02-10"
 
+author: Tom Cranstoun
 mx:
   sessionStart: "2026-02-10T15:00:00Z"
   sessionEnd: "2026-02-10T17:49:00Z"

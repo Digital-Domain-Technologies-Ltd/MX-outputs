@@ -5,6 +5,8 @@ created: "2026-02-06"
 sessionStart: "2026-02-06T02:30:00Z"
 sessionEnd: "2026-02-06T05:23:00Z"
 duration: "~3 hours (across two continuation sessions)"
+author: Tom Cranstoun
+
 mx:
   contentType: "documentation"
   status: "completed"

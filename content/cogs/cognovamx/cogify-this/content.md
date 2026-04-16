@@ -7,6 +7,7 @@ modified: 2026-02-20
 
 author: CogNovaMX Ltd
 
+title: Cogify This
 mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary

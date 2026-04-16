@@ -7,6 +7,8 @@ sessionEnd: "2026-02-04T15:18:23Z"
 duration: "~18 minutes"
 skillsUsed: ["maxine", "mx-create-pdf"]
 toolsUsed: ["Bash", "Read", "Write", "Skill"]
+author: Tom Cranstoun
+
 mx:
   contentType: "document-generation"
   status: "completed"

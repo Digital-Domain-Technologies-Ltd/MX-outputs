@@ -5,6 +5,8 @@ created: "2026-02-04"
 sessionStart: "2026-02-04T11:50:00Z"
 sessionEnd: "2026-02-04T13:50:15Z"
 duration: "~2 hours"
+author: Tom Cranstoun
+
 mx:
   contentType: "editorial-coordination"
   status: "completed"

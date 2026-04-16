@@ -5,6 +5,8 @@ created: "2026-02-05"
 sessionStart: "2026-02-05T12:40:00Z"
 sessionEnd: "2026-02-05T12:44:19Z"
 duration: "~4 minutes"
+author: Tom Cranstoun
+
 mx:
   contentType: "information-inquiry"
   status: "completed"

@@ -3,6 +3,7 @@ title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
+created: '2026-03-01'
 mx:
   isGenerated: true
   generatedBy: "mx-outputs/scripts/generate-index.sh"

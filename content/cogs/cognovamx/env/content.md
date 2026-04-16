@@ -8,6 +8,7 @@ modified: 2026-02-11
 
 author: Tom Cranstoun and Maxine
 
+title: Project Environment
 mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary

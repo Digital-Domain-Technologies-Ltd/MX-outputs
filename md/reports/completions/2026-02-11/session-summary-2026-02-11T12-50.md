@@ -2,6 +2,7 @@
 title: "Maxine vision session — SOUL.md, API layer, boot system, co-directors report"
 created: "2026-02-11"
 
+author: Tom Cranstoun
 mx:
   sessionStart: "2026-02-11T12:25:00Z"
   sessionEnd: "2026-02-11T12:50:00Z"

@@ -2,6 +2,7 @@
 title: "SOP Reframing, Registry Snapshot, and Universal Cog Executor"
 created: "2026-02-11"
 
+author: Tom Cranstoun
 mx:
   sessionStart: "2026-02-11T07:00:00Z"
   sessionEnd: "2026-02-11T09:00:00Z"
