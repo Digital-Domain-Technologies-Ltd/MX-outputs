@@ -1,13 +1,13 @@
 ---
 title: "MX Core Metadata Standard"
-version: "1.0-draft"
+version: "1.1"
 created: 2026-04-02
-modified: 2026-04-02
+modified: 2026-04-16
 author: The Gathering
-description: "Formal specification of core MX metadata fields — the foundational vocabulary every MX-aware document must, should, or may declare."
+description: "Formal specification of core MX metadata fields — the foundational vocabulary every MX-aware document must, should, or may declare. Machine-readable form: mx-canon/ssot/fields-data.yaml (sanitised open-standard core, ~103 fields)."
 
 mx:
-  status: draft
+  status: active
   license: MIT
   category: standard
   partOf: mx-the-gathering
@@ -21,9 +21,9 @@ mx:
 
 # MX Core Metadata Standard
 
-**Version:** 1.0-draft
-**Status:** Draft
-**Date:** 2 April 2026
+**Version:** 1.1
+**Status:** Active
+**Date:** 16 April 2026
 **Governing body:** The Gathering
 **License:** MIT
 
@@ -37,6 +37,8 @@ The core vocabulary is organised into three groups: Zone 1 identity fields (top-
 
 This standard establishes the conformance level framework (Level 1, Level 2, Level 3) that all companion MX standards adopt by reference.
 
+**Machine-readable source.** The canonical field dictionary for this standard is [`mx-canon/ssot/fields-data.yaml`](../../../mx-canon/ssot/fields-data.yaml) — a sanitised core of ~103 fields covering identity, classification, relationships, lifecycle, machine-readability infrastructure, folder metadata, cog contract, and non-YAML markup carriers. Carrier-format schemas (code, database, media) live in the companion [`mx-canon/ssot/fields-data-carriers.yaml`](../../../mx-canon/ssot/fields-data-carriers.yaml) as specified in MXS-04. Vendor extensions (e.g. `cognovamx-fields.yaml`) are out of scope for this core standard.
+
 ---
 
 ## 2. Conformance
@@ -45,7 +47,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ### 2.1 Conformance levels
 
-This standard defines three conformance levels. All companion MX standards ([MX Extensions Standard](mxs-02-extensions.cog.md), [MX Provenance Standard](mxs-03-provenance.cog.md), [MX AI/Agent Policy Standard](mxs-04-ai-agent-policy.cog.md), [MX Profile-Specific Metadata Standard](mxs-05-profile-metadata.cog.md)) adopt these levels by reference.
+This standard defines three conformance levels. All companion MX standards ([MX Extensions Standard](mxs-02-extensions.cog.md), [MX Provenance Standard](mxs-03-provenance.cog.md), [MX AI/Agent Policy Standard](deferred/mxs-04-ai-agent-policy.cog.md) *(deferred)*, [MX Profile-Specific Metadata Standard](deferred/mxs-05-profile-metadata.cog.md) *(deferred)*) adopt these levels by reference.
 
 | Level | Name | Requirement | Description |
 |-------|------|-------------|-------------|
@@ -80,8 +82,8 @@ The following are defined in companion standards:
 |-------|----------|
 | Namespace policy, carrier formats, extension mechanisms | [MX Extensions Standard](mxs-02-extensions.cog.md) |
 | Trust, attribution, verification, decision records | [MX Provenance Standard](mxs-03-provenance.cog.md) |
-| AI governance, agent policies, training controls | [MX AI/Agent Policy Standard](mxs-04-ai-agent-policy.cog.md) |
-| Content-type-specific fields (code, media, database, etc.) | [MX Profile-Specific Metadata Standard](mxs-05-profile-metadata.cog.md) |
+| AI governance, agent policies, training controls | [MX AI/Agent Policy Standard](deferred/mxs-04-ai-agent-policy.cog.md) *(deferred)* |
+| Content-type-specific fields (code, media, database, etc.) | [MX Profile-Specific Metadata Standard](deferred/mxs-05-profile-metadata.cog.md) *(deferred)* |
 
 ### 3.3 Relationship to existing standards
 
@@ -119,7 +121,7 @@ title: "Document Title"
 description: "Brief summary for search and AI agents"
 author: "Author Name"
 created: 2026-04-02
-modified: 2026-04-02
+modified: 2026-04-16
 version: "1.0"
 ---
 ```
@@ -132,7 +134,7 @@ title: "Document Title"
 description: "Brief summary"
 author: "Author Name"
 created: 2026-04-02
-modified: 2026-04-02
+modified: 2026-04-16
 version: "1.0"
 
 mx:
@@ -260,7 +262,7 @@ created: 2026-04-02
 **Example:**
 
 ```yaml
-modified: 2026-04-02
+modified: 2026-04-16
 ```
 
 **Normative notes:**
@@ -674,7 +676,7 @@ mx:
 - File-type agnostic — the target can be `.md`, `.cog.md`, `.html`, `.json`, `.yaml`, or any other file type.
 - The inheriting file extends the target; it does not replace it.
 - The path MAY be relative or absolute.
-- For folder-level field inheritance, use `inheritable` on the parent folder instead (see [MX Profile-Specific Metadata Standard](mxs-05-profile-metadata.cog.md), folder profile).
+- For folder-level field inheritance, use `inheritable` on the parent folder instead (see [MX Profile-Specific Metadata Standard](deferred/mxs-05-profile-metadata.cog.md) *(deferred)*, folder profile).
 
 ---
 
@@ -1095,8 +1097,8 @@ These conformance levels apply only to cog documents (`.cog.md` files).
 - [ADR-02: Namespace Policy](../architecture-decisions/adr-02-namespace-policy.cog.md) — namespace governance
 - [MX Extensions Standard](mxs-02-extensions.cog.md) — namespace policy, carrier formats, extension mechanisms
 - [MX Provenance Standard](mxs-03-provenance.cog.md) — trust, attribution, verification
-- [MX AI/Agent Policy Standard](mxs-04-ai-agent-policy.cog.md) — AI governance and agent policies
-- [MX Profile-Specific Metadata Standard](mxs-05-profile-metadata.cog.md) — content-type-specific fields
+- [MX AI/Agent Policy Standard](deferred/mxs-04-ai-agent-policy.cog.md) *(deferred)* — AI governance and agent policies
+- [MX Profile-Specific Metadata Standard](deferred/mxs-05-profile-metadata.cog.md) *(deferred)* — content-type-specific fields
 
 ### 11.2 Informative references
 

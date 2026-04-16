@@ -1,13 +1,13 @@
 ---
 title: "MX Extensions Standard"
-version: "1.0-draft"
+version: "1.0"
 created: 2026-04-02
-modified: 2026-04-02
+modified: 2026-04-16
 author: The Gathering
 description: "Formal specification of the MX namespace policy, carrier format mappings, and extension mechanisms for non-standard metadata fields."
 
 mx:
-  status: draft
+  status: active
   license: MIT
   category: standard
   partOf: mx-the-gathering
@@ -21,9 +21,9 @@ mx:
 
 # MX Extensions Standard
 
-**Version:** 1.0-draft
-**Status:** Draft
-**Date:** 2 April 2026
+**Version:** 1.0
+**Status:** Active
+**Date:** 16 April 2026
 **Governing body:** The Gathering
 **License:** MIT
 
@@ -83,8 +83,8 @@ The following are defined in companion standards:
 |-------|----------|
 | Zone 1/Zone 2 core fields, conformance level framework | [MX Core Metadata Standard](mxs-01-core-metadata.cog.md) |
 | Trust, attribution, verification, decision records | [MX Provenance Standard](mxs-03-provenance.cog.md) |
-| AI governance, agent policies, training controls | [MX AI/Agent Policy Standard](mxs-04-ai-agent-policy.cog.md) |
-| Content-type-specific fields (code, media, database, etc.) | [MX Profile-Specific Metadata Standard](mxs-05-profile-metadata.cog.md) |
+| AI governance, agent policies, training controls | [MX AI/Agent Policy Standard](deferred/mxs-04-ai-agent-policy.cog.md) |
+| Content-type-specific fields (code, media, database, etc.) | [MX Profile-Specific Metadata Standard](deferred/mxs-05-profile-metadata.cog.md) |
 
 ### 3.3 Relationship to existing standards
 
@@ -263,7 +263,7 @@ title: "Document Title"
 description: "Brief summary"
 author: "Author Name"
 created: 2026-04-02
-modified: 2026-04-02
+modified: 2026-04-16
 version: "1.0"
 
 mx:
@@ -460,7 +460,7 @@ title: "Hero banner image"
 description: "Full-width hero image for the landing page"
 author: "Tom Cranstoun"
 created: 2026-04-02
-modified: 2026-04-02
+modified: 2026-04-16
 
 mx:
   status: active
@@ -493,7 +493,7 @@ title: "MX Hub"
 description: "Central hub for Machine Experience development"
 author: "Tom Cranstoun"
 created: 2026-01-15
-modified: 2026-04-02
+modified: 2026-04-16
 
 mx:
   status: active
@@ -1020,8 +1020,8 @@ An extension field MAY be promoted to a standard field through the following pro
 - [NDR-02: camelCase Naming](../naming-decisions/ndr-02-camelcase-naming.cog.md) — field naming convention
 - [NDR-03: Spelling Neutrality](../naming-decisions/ndr-03-spelling-neutrality.cog.md) — spelling-neutral vocabulary
 - [MX Provenance Standard](mxs-03-provenance.cog.md) — trust, attribution, verification
-- [MX AI/Agent Policy Standard](mxs-04-ai-agent-policy.cog.md) — AI governance and agent policies
-- [MX Profile-Specific Metadata Standard](mxs-05-profile-metadata.cog.md) — content-type-specific fields
+- [MX AI/Agent Policy Standard](deferred/mxs-04-ai-agent-policy.cog.md) — AI governance and agent policies
+- [MX Profile-Specific Metadata Standard](deferred/mxs-05-profile-metadata.cog.md) — content-type-specific fields
 
 ### 15.2 Informative references
 

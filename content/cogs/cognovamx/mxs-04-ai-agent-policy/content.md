@@ -2,12 +2,12 @@
 title: "MX AI/Agent Policy Standard"
 version: "1.0-draft"
 created: 2026-04-02
-modified: 2026-04-02
+modified: 2026-04-16
 author: The Gathering
-description: "Formal specification of MX AI and agent governance metadata — assistance policies, training controls, code/media/database AI fields, and inline annotations."
+description: "DEFERRED. The ai.* field namespace was moved to CogNovaMX vendor extensions (cognovamx-fields.yaml) on 2026-04-15 pending concrete adoption. See mx-canon/mx-maxine-lives/registers/ADR/ai-governance-namespace-proposal.cog.md for the current proposal status. This standard will be revised or withdrawn once adoption evidence exists."
 
 mx:
-  status: draft
+  status: deferred
   license: MIT
   category: standard
   partOf: mx-the-gathering
