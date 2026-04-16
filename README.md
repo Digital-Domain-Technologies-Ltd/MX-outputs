@@ -23,7 +23,7 @@ Build artefacts, reports, and generated outputs organised by media type.
 | [html/](html/) | 96 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 1 | PowerPoint — presentation source files |
-| **Total** | **775** | |
+| **Total** | **780** | |
 
 ---
 
@@ -112,9 +112,6 @@ PDF documents — books, manuals, presentations, blog exports.
 ## md/
 
 Markdown documents — session reports, audit results, Reginald documentation.
-
-### md/audit/ (0 files)
-
 
 ### md/presentations/ (1 files)
 
@@ -429,4 +426,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-04-16 at 21:27*
+*Generated on 2026-04-16 at 22:25*
