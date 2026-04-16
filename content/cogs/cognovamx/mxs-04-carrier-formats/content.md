@@ -1,13 +1,13 @@
 ---
 title: "MX Carrier Formats Standard"
-version: "1.0"
+version: "1.0-proposed"
 created: 2026-04-15
 modified: 2026-04-16
 author: The Gathering
 description: "Formal specification of MX metadata fields for code carrier formats. Companion to MXS-01 Core Metadata. Databases and media defer to existing standards (DCAT, CSVW, Schema.org, EXIF/XMP) rather than being redefined here."
 
 mx:
-  status: active
+  status: proposed
   license: MIT
   category: standard
   partOf: mx-the-gathering
@@ -21,8 +21,8 @@ mx:
 
 # MX Carrier Formats Standard
 
-**Version:** 1.0
-**Status:** Active
+**Version:** 1.0-proposed
+**Status:** Proposed (draft for Stream submission, awaiting community review)
 **Date:** 16 April 2026
 **Governing body:** The Gathering
 **License:** MIT

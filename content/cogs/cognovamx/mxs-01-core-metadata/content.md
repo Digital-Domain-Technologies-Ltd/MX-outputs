@@ -1,13 +1,13 @@
 ---
 title: "MX Core Metadata Standard"
-version: "1.1"
+version: "1.1-proposed"
 created: 2026-04-02
 modified: 2026-04-16
 author: The Gathering
 description: "Formal specification of core MX metadata fields — the foundational vocabulary every MX-aware document must, should, or may declare. Machine-readable form: mx-canon/ssot/fields-data.yaml (sanitised open-standard core, ~103 fields)."
 
 mx:
-  status: active
+  status: proposed
   license: MIT
   category: standard
   partOf: mx-the-gathering
@@ -21,8 +21,8 @@ mx:
 
 # MX Core Metadata Standard
 
-**Version:** 1.1
-**Status:** Active
+**Version:** 1.1-proposed
+**Status:** Proposed (draft for Stream submission, awaiting community review)
 **Date:** 16 April 2026
 **Governing body:** The Gathering
 **License:** MIT
@@ -57,9 +57,9 @@ This standard defines three conformance levels. All companion MX standards ([MX 
 
 A document claiming conformance at a given level MUST satisfy all requirements at that level and all lower levels. A document claiming "MX Standard" (Level 2) MUST also satisfy all "MX Core" (Level 1) requirements.
 
-### 2.2 Authoritative status
+### 2.2 Draft status
 
-This standard is an authoritative specification published by The Gathering. The field definitions, conformance requirements, and normative rules in this document are self-standing.
+This document is a proposed standard under draft by The Gathering. It is authored for submission to the Stream public review process and awaits community ratification. Until ratified, the field definitions, conformance requirements, and normative rules in this document are the working draft — stable enough to build against, expected to evolve through review.
 
 ---
 
