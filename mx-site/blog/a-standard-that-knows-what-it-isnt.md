@@ -12,6 +12,10 @@ mx:
   publicationDate: ""
   tags: [mx, standards, the-gathering, architecture, preview, protocols]
   runbook: "Preview blog post for chapter 20 of MX: The Protocols (publishes 1 July 2026). Explains the architecture of the proposed MX standards family and the 'defer to existing standards' principle that keeps the core small."
+  generate:
+    script: "scripts/generate-content-html.cjs"
+    format: "html"
+    instructions: "Generate semantic HTML with WCAG 2.1 AA compliance"
 ---
 
 # A Standard That Knows What It Isn't
@@ -44,13 +48,13 @@ That is the entire active family. Two earlier drafts were deferred. An AI/Agent 
 
 ## The three-file canon
 
-The proposed standards have a machine-readable form. It lives in three sibling YAML files.
+The proposed standards have a machine-readable form. It lives in three sibling YAML files, published at stable URLs so any implementer can fetch them directly.
 
-`fields-data.yaml` is the core — roughly 103 fields. Identity, classification, relationships, lifecycle, machine-readability infrastructure, folder metadata, cog contract, non-YAML markup carriers, Dublin Core and Schema.org pass-through fields. This is what MXS-01 specifies.
+[`fields-data.yaml`](https://mx.allabout.network/canon/fields-data.yaml) is the core — roughly 103 fields. Identity, classification, relationships, lifecycle, machine-readability infrastructure, folder metadata, cog contract, non-YAML markup carriers, Dublin Core and Schema.org pass-through fields. This is what MXS-01 specifies.
 
-`fields-data-carriers.yaml` is the carriers companion — roughly 40 fields. Code vocabulary only: function metadata, API surface, tests, inline annotations, dependency declarations. This is what MXS-04 specifies.
+[`fields-data-carriers.yaml`](https://mx.allabout.network/canon/fields-data-carriers.yaml) is the carriers companion — roughly 40 fields. Code vocabulary only: function metadata, API surface, tests, inline annotations, dependency declarations. This is what MXS-04 specifies.
 
-`cognovamx-fields.yaml` is a vendor extension example pack — roughly 309 fields carrying CogNovaMX-specific workflow vocabulary. It is not part of the standard. Other vendors author parallel files under the same three-tier pattern.
+[`cognovamx-fields.yaml`](https://mx.allabout.network/canon/cognovamx-fields.yaml) is a vendor extension example pack — roughly 309 fields carrying CogNovaMX-specific workflow vocabulary. It is not part of the standard. Other vendors author parallel files under the same three-tier pattern.
 
 Tooling loads all three and merges them into a unified view. A document that uses a standard field does not know which file the field came from. That is the point.
 
@@ -92,7 +96,7 @@ The complete catalogue of fields — definitions, types, validation values, prof
 
 Appendix M is the prose mirror of the machine-readable YAML. When the two disagree, the prose is wrong by definition — the YAML is the current draft source of truth, and a drift checker verifies alignment.
 
-For the standards themselves — the proposed MXS documents with their conformance-level specifications and formal RFC 2119 language — the drafts live in The Gathering's Stream process. Visit `tg.community` to see the current state, and `stream.tg.community` to participate in review.
+For the standards themselves — the proposed MXS documents with their conformance-level specifications and formal RFC 2119 language — the source drafts are published publicly at [github.com/ddttom/mx-shared-gathering](https://github.com/ddttom/mx-shared-gathering). The RFC-format copies submitted for Stream review live under [The Gathering's Stream platform](https://stream.tg.community); visit [tg.community](https://tg.community) to see the current state of community review.
 
 ## Chapter 20 goes further
 
@@ -106,4 +110,4 @@ And because The Gathering's process is open and requires no membership, if you h
 
 ---
 
-*MX: The Protocols publishes on 1 July 2026. Chapter 20 is "The Fields and the Standards." The proposed MX standards live at [tg.community](https://tg.community). The machine-readable canon is available at the [MX-hub GitHub repository](https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/tree/main/mx-canon/ssot). For a full reference, see Appendix M of The Protocols.*
+*MX: The Protocols publishes on 1 July 2026. Chapter 20 is "The Fields and the Standards." The proposed MX standards live at [tg.community](https://tg.community). The machine-readable canon is published at [mx.allabout.network/canon/](https://mx.allabout.network/canon/). For a full reference, see Appendix M of The Protocols; for the architecture summary in book form, see Appendix U.*

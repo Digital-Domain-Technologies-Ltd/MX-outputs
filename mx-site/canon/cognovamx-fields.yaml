@@ -1,0 +1,2228 @@
+title: CogNovaMX Field Extensions
+version: '1.0'
+created: '2026-04-15'
+modified: '2026-04-15'
+author: Tom Cranstoun
+description: >-
+  CogNovaMX vendor extensions to the MX open standard. Contains both x-mx- public extensions (openly published) and
+  x-mx-p- private extensions (CogNovaMX operational). Per the namespace policy, the prefix is the policy: no additional
+  visibility markers needed.
+mx:
+  status: active
+  license: proprietary
+  category: vendor-extensions
+  partOf: mx-cognovamx
+  tags:
+    - fields
+    - metadata
+    - extensions
+    - cognovamx
+    - vendor
+  audience:
+    - machines
+    - humans
+  contentType: field-dictionary
+  runbook: >-
+    CogNovaMX-owned field extensions. Public extensions (x-mx-) are openly published and safe to read. Private
+    extensions (x-mx-p-) are operational; values may be obfuscated. Do not move entries between tiers without ADR
+    approval.
+  vendor: CogNovaMX
+  namespace:
+    - x-mx-
+    - x-mx-p-
+  fields:
+    - name: x-mx-mount-type
+      type: string
+      definition: 'Mount type for submodule repositories. Values: personal, team, product, standard.'
+      example: personal
+      validValues:
+        - personal
+        - team
+        - product
+        - standard
+      notes: Categorises submodules in the hub mount table.
+      status: canonical
+      profile: x-mx-public
+      required: true
+      context: Used in .mx.yaml.md folder metadata for git submodules to categorise them in the hub mount table.
+    - name: x-mx-mount-swappable
+      type: string-or-boolean
+      definition: 'Whether this mount can be swapped for a different repository. Values: true, false, fork.'
+      example: true
+      validValues:
+        - true
+        - false
+        - fork
+      notes: Personal = swappable, product = not, standard = forkable.
+      status: canonical
+      profile: x-mx-public
+      required: true
+      context: >-
+        Personal mounts are swappable (each business mounts their own). Product mounts are not. Standard mounts are
+        forkable.
+    - name: x-mx-mount-upstream
+      type: string
+      definition: Upstream source for standard-type mounts. URL or description of where to pull updates from.
+      example: https://github.com/Digital-Domain-Technologies-Ltd/MX-Gathering
+      notes: Only for standard mount type.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: Only used for standard mount type. Points to The Gathering open standard or equivalent upstream.
+    - name: publishedTo
+      type: string
+      definition: >-
+        Downstream provenance — where this content is published. Can be a relative path within the repository or an
+        external URL. Used by the MX graph to build lineage edges tracing content from source to published destination.
+      example: https://allabout.network/blogs/mx/
+      notes: >-
+        Declared in the mx: block. Never inherited — always per-folder or per-cog. Value can be a path (internal) or URL
+        (external). The MX graph resolves these into publishedTo edges.
+      status: canonical
+      profile:
+        - folder
+        - cog
+      required: optional
+    - name: isGenerated
+      type: boolean
+      definition: >-
+        True if this content was produced by a deterministic script (not handwritten by a human and not produced by an
+        AI agent). Use when a build step, code generator, or index-generator wrote the file. Distinct from
+        isAiGenerated, which marks AI-agent output.
+      example: true
+      notes: >-
+        Declared in the mx: block. Default: false (human-authored). Generated files should also carry generatedBy (the
+        script path or name) when possible so readers can locate the generator. If both isGenerated and isAiGenerated
+        are true, the AI agent ran via a scripted wrapper.
+      status: canonical
+      profile:
+        - folder
+        - cog
+        - all
+      required: optional
+      default: false
+    - name: isAiGenerated
+      type: boolean
+      definition: >-
+        True if this content was produced by an AI agent (LLM or autonomous tool). Use when the file was written by
+        Claude, ChatGPT, or any automated reasoning system, whether under human review or not. Distinct from
+        isGenerated, which marks deterministic-script output.
+      example: true
+      notes: >-
+        Declared in the mx: block. Default: false (human-authored). AI-generated content should also carry generatedBy
+        (the agent or model identifier) and, when applicable, reviewedBy so readers can see whether a human vetted the
+        output. Never inherited — AI-generation status belongs to individual files.
+      status: canonical
+      profile:
+        - folder
+        - cog
+        - all
+      required: optional
+      default: false
+    - name: generatedBy
+      type: string
+      definition: >-
+        Identifier of the generator when isGenerated or isAiGenerated is true. For scripts: a relative path or script
+        name (e.g. 'scripts/generate-index.sh'). For AI agents: a model or agent identifier (e.g. 'claude-opus-4-6',
+        'claude-code'). Free text — tooling treats the value as an opaque label for now.
+      example: scripts/generate-index.sh
+      notes: Optional companion to isGenerated/isAiGenerated. Empty or absent when the content is human-authored.
+      status: canonical
+      profile:
+        - folder
+        - cog
+        - all
+      required: optional
+    - name: image
+      type: string
+      definition: >-
+        Primary illustrative image — relative repository path or external URL. Used as the social-share preview and the
+        lead visual.
+      example: /images/og-default.png
+      status: canonical
+      profile:
+        - book
+        - blog
+        - all
+      required: optional
+    - name: contentFilename
+      type: string
+      definition: >-
+        Canonical filename of the content artefact, distinct from the path the document is stored at. Used by content
+        cogs that may move.
+      example: content.md
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: lastUpdated
+      type: string
+      definition: >-
+        Last substantive update timestamp (ISO 8601 date). Companion to `modified` — `modified` reflects file mtime,
+        `lastUpdated` reflects when the content materially changed.
+      example: '2026-04-15'
+      status: canonical
+      profile:
+        - all
+      required: optional
+    - name: fullName
+      type: string
+      definition: Full personal or organisational name. Used in profile and contact documents.
+      example: Tom Cranstoun
+      status: canonical
+      profile:
+        - contact
+        - all
+      required: optional
+    - name: organisation
+      type: string
+      definition: Organisation name. British spelling preferred for prose; the field is spelling-neutral for matching.
+      example: CogNovaMX
+      notes: 'See also: company. organisation is for the entity, company for a contact''s employer.'
+      status: canonical
+      profile:
+        - contact
+        - all
+      required: optional
+    - name: website
+      type: string
+      definition: Primary website URL for the document subject (a person, organisation, or product).
+      example: https://allabout.network
+      status: canonical
+      profile:
+        - contact
+        - all
+      required: optional
+    - name: theme
+      type: string
+      definition: Presentation or page theme identifier. Picks visual styling at render time.
+      example: mx-light
+      status: canonical
+      profile:
+        - all
+      required: optional
+    - name: slides
+      type: array
+      definition: Ordered list of slide titles or paths in a presentation document.
+      example:
+        - intro
+        - field-catalogue
+        - drift-prevention
+        - next-steps
+      status: canonical
+      profile:
+        - all
+      required: optional
+    - name: agentAction
+      type: string
+      definition: Single-sentence instruction for an AI agent reading this document. What the agent should do or check.
+      example: Sync mx-reginald registry before publishing.
+      notes: Distinct from runbook (which is for humans + agents). Agent-only directive.
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: whenToRead
+      type: string
+      definition: >-
+        Short prose hint telling the reader (human or agent) the situation in which this document is the right one to
+        consult.
+      example: Read at session start, before touching any .cog.md file.
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: updateInstructions
+      type: string
+      definition: Runbook for keeping the document content fresh. When and how to update it.
+      example: Regenerate via npm run cog:sync after any cog frontmatter change.
+      status: canonical
+      profile:
+        - all
+      required: optional
+    - name: clientUrl
+      type: string
+      definition: URL of the client property being audited or reported on.
+      example: https://example.com
+      status: canonical
+      profile:
+        - audit
+        - contact
+        - all
+      required: optional
+    - name: clientSlug
+      type: string
+      definition: Short identifier for the client (kebab-case slug used in file paths and report IDs).
+      example: arrivefirst
+      status: canonical
+      profile:
+        - audit
+        - contact
+        - all
+      required: optional
+    - name: auditTool
+      type: string
+      definition: Name of the tool that produced the audit report.
+      example: mx-audit
+      status: canonical
+      profile: audit
+      required: optional
+    - name: auditDate
+      type: string
+      definition: Date of the audit run (ISO 8601 date).
+      example: '2026-04-15'
+      status: canonical
+      profile: audit
+      required: optional
+    - name: accessibilityScore
+      type: number
+      definition: Pa11y or equivalent accessibility score (0-100).
+      example: 92
+      status: canonical
+      profile: audit
+      required: optional
+    - name: totalIssues
+      type: number
+      definition: Total count of issues found in an audit report.
+      example: 47
+      status: canonical
+      profile: audit
+      required: optional
+    - name: imagesAnalyzed
+      type: number
+      definition: Number of images analysed during an audit run.
+      example: 128
+      status: canonical
+      profile: audit
+      required: optional
+    - name: bestPracticesScore
+      type: number
+      definition: Lighthouse or equivalent best-practices score (0-100).
+      example: 88
+      status: canonical
+      profile: audit
+      required: optional
+    - name: htmlValidation
+      type: string
+      definition: HTML validation result summary (passed, warnings, errors with counts).
+      example: passed
+      status: canonical
+      profile: audit
+      required: optional
+    - name: totalOpportunities
+      type: number
+      definition: Count of improvement opportunities surfaced by an audit run.
+      example: 12
+      status: canonical
+      profile: audit
+      required: optional
+    - name: nextAction
+      type: string
+      definition: Next concrete action this contact / opportunity / report needs.
+      example: Schedule follow-up call after their MX audit lands.
+      status: canonical
+      profile:
+        - contact
+        - audit
+        - all
+      required: optional
+    - name: engagementOptions
+      type: array
+      definition: List of possible engagement modes available with a contact (e.g. consulting, training, content, advisory).
+      example:
+        - consulting
+        - training
+        - advisory
+      status: canonical
+      profile: contact
+      required: optional
+    - name: registry
+      type: string
+      definition: Registry identifier this document belongs to (e.g. mx-reginald, content-registry).
+      example: mx-reginald
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: security
+      type: object-or-string
+      definition: >-
+        Security declaration for an action document. May be the string name of a security profile or an object with
+        attestation, execution, trustLevel, and policy fields.
+      example:
+        attestation: required
+        execution: sandboxed
+      notes: >-
+        When a string, references a named security profile. When an object, declares the security block inline. See
+        Appendix M for the security block fields.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: signature
+      type: string
+      definition: Cryptographic signature attesting the cog's authorship and integrity.
+      example: ed25519:0xabc123...
+      status: canonical
+      profile: cog
+      required: optional
+    - name: provenance
+      type: object-or-string
+      definition: >-
+        Origin and lineage block. May be the string of a single provenance source, or an object with origin,
+        derivedFrom, method, and date fields. See Appendix M for the provenance block fields.
+      example:
+        origin: https://example.com/source
+        method: Imported
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: definition
+      type: string
+      definition: >-
+        Concise definition of the term or concept this document is about. Used in glossary entries and concept
+        documents.
+      example: A self-contained unit of MX content with metadata, prose, and optional executable blocks.
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: affects
+      type: array
+      definition: List of file paths, modules, or systems this change or document affects.
+      example:
+        - scripts/mx-audit.js
+        - mx-canon/ssot/fields-data.yaml
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: action
+      type: string
+      definition: >-
+        Single-line description of the action this document performs or recommends. Companion to agentAction (for AI)
+        and runbook (for humans + AI).
+      example: Regenerate the registry.
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: note
+      type: string
+      definition: Free-text note attached to the document. Used for short editorial annotations.
+      example: Scheduled for review next week.
+      status: canonical
+      profile:
+        - all
+      required: optional
+    - name: thread
+      type: string
+      definition: Conversation or message thread identifier (e.g. Slack thread URL, email subject).
+      example: slack://team/C123/p456
+      status: canonical
+      profile:
+        - contact
+        - all
+      required: optional
+    - name: related
+      type: array
+      definition: List of related documents, contacts, or topics. Free-form references.
+      example:
+        - ./parent.md
+        - https://example.com
+      notes: When the relationship is structural (parent/child, builds-on), use the dedicated field instead.
+      status: canonical
+      profile:
+        - all
+      required: optional
+    - name: recipient
+      type: string-or-array
+      definition: Target audience or addressee of a message, report, or proposal.
+      example: Tom Cranstoun
+      status: canonical
+      profile:
+        - contact
+        - all
+      required: optional
+    - name: links
+      type: array
+      definition: List of URLs or paths the document links to.
+      example:
+        - https://allabout.network
+        - ./related.md
+      status: canonical
+      profile:
+        - all
+      required: optional
+    - name: includes
+      type: array
+      definition: >-
+        Cog composition — content reuse without duplication. Array of include declarations, each specifying a source cog
+        (relative path or reginald:<name>), optional block filter, and resolution mode (build or read). Included content
+        is merged into the cog; the including cog's own content overrides included content of the same type.
+      example:
+        - source: shared/validation-policy.cog.md
+          blocks:
+            - sop
+          resolution: build
+      notes: >-
+        Structural composition. Distinct from builds-on (soft recommendation) and requires (hard dependency). See
+        cog-unified-spec Section 3 for full specification including inline @include markers.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: deliverable
+      type: string-or-array
+      definition: >-
+        What this cog produces or delivers. Declares the tangible output — a report, a validated artefact, a trained
+        team, a published page. Particularly useful for action-docs where the deliverable is the reason the cog exists.
+      example: validated cog registered in REGINALD
+      notes: >-
+        Declares the output of a cog. For action-docs, describes what running the actions produces. For info-docs,
+        describes the knowledge or artefact the cog represents. Array form for cogs with multiple deliverables.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: semantic
+      type: string-or-object
+      definition: >-
+        Semantic quality level or detailed semantic metadata. Declares how well the cog uses semantic HTML and
+        structured data.
+      example: Schema.org JSON-LD
+      notes: 'Part of the quality triad: accessibility, semantic, convergence.'
+      status: canonical
+      profile: cog
+      required: optional
+    - name: mxCompliance
+      type: string-or-object
+      definition: MX compliance level or detailed compliance metadata for a published cog.
+      example: level-3
+      notes: Declares MX compliance tier. Used with publisher, accuracyCommitment, and reviewCycle.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: accuracyCommitment
+      type: string
+      definition: Publisher's commitment to content accuracy.
+      example: All factual claims verified against source documentation
+      notes: >-
+        Publisher-facing field. Part of the trust metadata group: mxCompliance, publisher, accuracyCommitment,
+        correctionSla, reviewCycle.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: reviewCycle
+      type: string
+      definition: How often this cog's content is reviewed for accuracy.
+      example: quarterly
+      notes: Part of the trust metadata group. Helps agents assess content freshness expectations.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: generate
+      type: object
+      definition: Generation instructions for AI agents. Describes how to regenerate this content if lost or outdated.
+      example:
+        prompt: Regenerate from source data
+        source: quarterly-report.csv
+      notes: Part of MX OS metadata. Enables content regeneration from metadata alone.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: source
+      type: string-or-array
+      definition: Origin source material or input files. References where the content was derived from.
+      example: brainstorm.md
+      notes: Content provenance. Distinct from provenance block type (which tracks lineage chain).
+      status: canonical
+      profile:
+        - cog
+        - report
+      required: optional
+    - name: project
+      type: object
+      definition: Project metadata object. Contains name, description, repository, documentation.
+      example:
+        name: MX Hub
+        repository: https://github.com/...
+      notes: Container for project-level metadata in root folder files.
+      status: canonical
+      profile: folder
+      required: optional
+    - name: context
+      type: object
+      definition: Domain context object. Contains domain, purpose, constraints.
+      example:
+        domain: machine-experience
+        purpose: specification
+      notes: Container for domain context in folder metadata.
+      status: canonical
+      profile: folder
+      required: optional
+    - name: stack
+      type: object
+      definition: Technical stack object. Contains language, runtime, version.
+      example:
+        language: javascript
+        runtime: node
+      notes: Container for technical stack information.
+      status: canonical
+      profile: folder
+      required: optional
+    - name: aiTraining
+      type: string
+      definition: 'AI training policy. Values: conditional, allowed, prohibited. Inheritable.'
+      example: conditional
+      validValues:
+        - conditional
+        - allowed
+        - prohibited
+      notes: Inheritable. When conditional, check aiTrainingConditions.
+      status: canonical
+      profile: folder
+    - name: aiTrainingConditions
+      type: array
+      definition: Conditions under which AI training is permitted. Array of strings describing exclusions or requirements.
+      example:
+        - exclude credentials
+        - exclude personal data
+      notes: Only relevant when aiTraining is conditional.
+      status: canonical
+      profile: folder
+    - name: aiSensitivePaths
+      type: array
+      definition: Glob patterns for paths that AI agents must not read or train on.
+      example:
+        - secrets/**
+        - .env
+        - credentials.*
+      notes: Glob patterns. Applied recursively within the folder.
+      status: canonical
+      profile: folder
+    - name: aiPermittedAreas
+      type: array
+      definition: Glob patterns for paths where AI generation is allowed.
+      example:
+        - docs/**
+        - src/public/**
+      notes: Glob patterns for explicitly allowed AI generation.
+      status: canonical
+      profile: folder
+    - name: aiProhibitedAreas
+      type: array
+      definition: Glob patterns for paths where AI generation is prohibited.
+      example:
+        - legal/**
+        - contracts/**
+      notes: Glob patterns for explicitly forbidden AI generation.
+      status: canonical
+      profile: folder
+    - name: aiGenerationAllowed
+      type: boolean
+      definition: Whether AI agents may generate new content. Inheritable.
+      default: true
+      example: false
+      notes: Inheritable. Only declare when prohibiting generation.
+      status: canonical
+      profile: folder
+    - name: aiGenerationReviewRequired
+      type: boolean
+      definition: Whether AI-generated content requires human review. Inheritable.
+      default: true
+      example: false
+      notes: Inheritable. Only declare when waiving the review requirement.
+      status: canonical
+      profile: folder
+    - name: wordCount
+      type: number
+      definition: Word count of the document content.
+      example: 3500
+      notes: Used for publication planning and progress tracking.
+      status: canonical
+      profile: book
+    - name: blogUrl
+      type: string
+      definition: Published URL of the blog post.
+      example: https://mx.allabout.network/blog/field-dictionary
+      notes: Published URL. Set after deployment.
+      status: canonical
+      profile: blog
+    - name: blogState
+      type: string
+      definition: 'Blog lifecycle state. Values: draft, review, published.'
+      example: published
+      validValues:
+        - draft
+        - review
+        - published
+      notes: Blog-specific lifecycle. Distinct from status (generic).
+      status: canonical
+      profile: blog
+    - name: agentType
+      type: string
+      definition: >-
+        Classification of the subject's agentic nature. Distinct from `contentType` (which describes the document) and
+        `role` (which describes functional hat-wearing).
+      example: ai-agent
+      validValues:
+        - ai-agent
+        - human
+        - organisation
+        - system
+      notes: >-
+        Use when the record describes an actor that can produce actions, send messages, or be the subject of
+        attribution.
+      status: canonical
+      profile:
+        - identity
+        - contact
+    - name: relationship
+      type: string
+      definition: Relationship type.
+      example: advisory-board
+      validValues:
+        - advisory-board
+        - investor
+        - partner
+        - prospect
+        - team
+        - advisor
+        - mentor
+        - family
+        - collaborator
+        - client
+        - contact
+        - professional
+        - business-partner
+        - peer
+        - personal-friend
+        - professional-friend
+        - personal-acquaintance
+      status: canonical
+      profile: contact
+    - name: role
+      type: string
+      definition: Job title or role.
+      example: CTO
+      status: canonical
+      profile: contact
+    - name: company
+      type: string
+      definition: Organisation name.
+      example: CogNovaMX Ltd
+      status: canonical
+      profile: contact
+    - name: nextAction
+      type: string
+      definition: Next action for this contact.
+      example: Follow up after Frankfurt CMS Summit
+      notes: Free-form text describing the next step.
+      status: canonical
+      profile: contact
+    - name: relatedFolders
+      type: array
+      definition: Related folders with path, relationship type, and description.
+      example:
+        - path: ../mx-audit
+          relationship: sibling
+      notes: Array of objects with path, relationship, and description.
+      status: canonical
+      profile: folder
+    - name: email
+      type: string
+      definition: Contact email address.
+      example: info@cognovamx.com
+      status: canonical
+      profile: contact
+    - name: phone
+      type: string
+      definition: Contact phone number.
+      example: +44 7700 900000
+      notes: Include international dialling code. Quote to prevent YAML number parsing.
+      status: canonical
+      profile: contact
+    - name: whatsapp
+      type: string
+      definition: WhatsApp contact number.
+      example: +44 7700 900000
+      notes: May differ from phone. Quote the value.
+      status: canonical
+      profile: contact
+    - name: linkedin
+      type: string
+      definition: LinkedIn profile URL.
+      example: https://linkedin.com/in/tomcranstoun
+      notes: Full URL to LinkedIn profile.
+      status: canonical
+      profile: contact
+    - name: nickname
+      type: string
+      definition: Informal name or abbreviation.
+      example: Max
+      notes: Informal name. Helps agents recognise conversational references.
+      status: canonical
+      profile: contact
+    - name: lastContact
+      type: string
+      definition: Date of last contact. ISO 8601 format (YYYY-MM-DD).
+      example: 2026-02-28T00:00:00.000Z
+      notes: ISO 8601. Updated after each interaction.
+      status: canonical
+      profile: contact
+    - name: twinOf
+      type: string
+      definition: Twin or paired contact reference.
+      example: maxine
+      notes: References a paired contact. Used for AI/human pairs.
+      status: canonical
+      profile: contact
+    - name: location
+      type: string
+      definition: Physical location, city, or venue. Used for contacts (city/address) and events (venue name or details).
+      example: London, UK
+      notes: Physical location for contacts or events.
+      status: canonical
+      profile:
+        - contact
+        - event
+    - name: messages
+      type: array
+      definition: Message history or communication templates.
+      example:
+        - date: 2026-02-28T00:00:00.000Z
+          platform: email
+          summary: Discussed roadmap
+      notes: Communication history and template storage.
+      status: canonical
+      profile: contact
+    - name: platform
+      type: string
+      definition: Communication platform for contact/outreach. For a target site's technology stack, use `techStack` instead.
+      example: email
+      validValues:
+        - email
+        - whatsapp
+        - linkedin
+        - slack
+        - x
+        - twitter
+        - phone
+        - sms
+        - in-person
+      notes: >-
+        Preferred communication platform. Lower-case. Use `techStack` (freetext) for a target site's technology stack —
+        they are different concepts.
+      status: canonical
+      profile: contact
+    - name: techStack
+      type: string-or-array
+      definition: >-
+        Technology stack of a target site or system. Freetext. Distinct from `platform` (which is a communication
+        channel).
+      example: React + IBM Carbon Design System
+      notes: >-
+        Use when documenting a target's tech (e.g. in an audit report). Do not conflate with `platform` — that's contact
+        channel, this is software/design stack.
+      status: canonical
+      profile:
+        - report
+        - audit
+    - name: reportType
+      type: string
+      definition: >-
+        Type of report. Values: session, completion, audit, directors, build, executive-sales-report,
+        technical-audit-report.
+      example: directors
+      validValues:
+        - session
+        - completion
+        - audit
+        - directors
+        - build
+        - executive-sales-report
+        - technical-audit-report
+        - partnership-capabilities-report
+        - web-audit
+        - internal-qa-audit
+      notes: Determines report template and output format.
+      status: canonical
+      profile: report
+    - name: reportId
+      type: string
+      definition: Unique report identifier.
+      example: RPT-2026-03-001
+      notes: Unique identifier for cross-referencing.
+      status: canonical
+      profile: report
+    - name: client
+      type: string
+      definition: Client name for audit or deliverable reports.
+      example: Acme Corp
+      notes: Client name for audit or deliverable reports.
+      status: canonical
+      profile: report
+    - name: sessionStart
+      type: string
+      definition: Session start timestamp. ISO 8601 format.
+      example: '2026-03-01T09:00:00Z'
+      notes: ISO 8601 datetime with timezone.
+      status: canonical
+      profile: report
+    - name: sessionEnd
+      type: string
+      definition: Session end timestamp. ISO 8601 format.
+      example: '2026-03-01T17:00:00Z'
+      notes: ISO 8601 datetime with timezone.
+      status: canonical
+      profile: report
+    - name: pagesAudited
+      type: number
+      definition: Number of pages audited in an audit.
+      example: 42
+      notes: 'Spelling-neutral (NDR #3).'
+      status: canonical
+      profile: audit
+    - name: performanceScore
+      type: number
+      definition: Performance score (0-100).
+      example: 85
+      notes: Score 0-100. Typically from Lighthouse.
+      status: canonical
+      profile: audit
+    - name: llmSuitabilityScore
+      type: number
+      definition: LLM suitability score (0-100).
+      example: 72
+      notes: Score 0-100. MX-specific metric for AI agent compatibility.
+      status: canonical
+      profile: audit
+    - name: seoScore
+      type: number
+      definition: SEO score (0-100).
+      example: 91
+      notes: Score 0-100.
+      status: canonical
+      profile: audit
+    - name: mxWatchesFiles
+      type: array
+      definition: >-
+        Array of file paths this document watches for changes. Used by MX OS to trigger re-evaluation when watched files
+        are modified.
+      example:
+        - ../README.md
+        - ../package.json
+      notes: MX OS monitors these and triggers re-evaluation when they change.
+      status: canonical
+      profile: folder
+    - name: expires
+      type: string
+      definition: Expiry date for time-sensitive cogs. ISO 8601 format (YYYY-MM-DD).
+      example: 2026-12-31T00:00:00.000Z
+      notes: ISO 8601. For time-sensitive content. Review or archive after this date.
+      status: canonical
+      profile: cog
+    - name: correctionSla
+      type: string
+      definition: SLA for correcting errors in the cog content.
+      example: 24 hours
+      notes: Sets expectations for error correction urgency.
+      status: canonical
+      profile: cog
+    - name: updateTriggers
+      type: array
+      definition: Conditions that trigger a cog update. Array of trigger descriptions.
+      example:
+        - specification-change
+        - new-field-added
+      notes: Events that should prompt a cog update.
+      status: canonical
+      profile: cog
+    - name: movedDate
+      type: string
+      definition: Date content was relocated. ISO 8601 format (YYYY-MM-DD).
+      example: 2026-02-28T00:00:00.000Z
+      notes: ISO 8601. When the content was relocated.
+      status: canonical
+      profile: migration
+    - name: event
+      type: string-or-object
+      definition: Event name or event details object.
+      example: CMS Summit Frankfurt 2026
+      notes: Can be a string or structured object with event details.
+      status: canonical
+      profile: event
+    - name: organiser
+      type: string
+      definition: Event organiser name or organisation.
+      example: Boye & Company
+      notes: British English spelling.
+      status: canonical
+      profile: event
+    - name: hours
+      type: string-or-object
+      definition: Operating hours or event schedule.
+      example: 09:00-17:00 CET
+      notes: Can be a string or structured object. Include timezone.
+      status: canonical
+      profile: event
+    - name: ai.contextRequired
+      type: array
+      definition: Files AI should read before editing this one.
+      example:
+        - src/types/user.ts
+        - src/config/schema.ts
+      notes: Prevents AI from making changes without understanding dependencies.
+      status: canonical
+      profile:
+        - code-file
+        - code-function
+        - code-class
+      required: false
+    - name: ai.contextProvides
+      type: array
+      definition: Concepts this file defines that other files depend on.
+      example:
+        - User type definitions
+        - Validation rules
+      status: canonical
+      profile: code-file
+      required: false
+    - name: ai.generationNotes
+      type: string
+      definition: Guidance for AI generating similar code.
+      example: Follow the repository's error handling pattern using Result types
+      status: canonical
+      profile:
+        - code-file
+        - code-function
+      required: false
+    - name: ai.reason
+      type: string
+      definition: Explanation for AI restrictions on this resource.
+      example: Handles authentication tokens — changes require security review
+      notes: Used with ai.editable, ai.doNotModify, ai.sensitive to explain WHY.
+      status: canonical
+      profile:
+        - code-file
+        - code-function
+        - code-class
+        - database
+      required: false
+    - name: ai.confidence
+      type: number
+      definition: Confidence in implementation correctness (0-1).
+      example: 0.9
+      notes: 0.9 = high confidence, 0.5 = uncertain, below 0.5 = needs review.
+      status: canonical
+      profile:
+        - code-function
+        - code-class
+      required: false
+    - name: ai.testCoverage
+      type: boolean
+      definition: Whether this function has test coverage.
+      example: true
+      status: canonical
+      profile: code-function
+      required: false
+    - name: ai.edgeCases
+      type: array
+      definition: Known edge cases and expected behaviour.
+      example:
+        - Empty cart returns 0
+        - Negative discounts are rejected
+      status: canonical
+      profile:
+        - code-function
+        - code-test
+      required: false
+    - name: ai.refactorNotes
+      type: string
+      definition: Guidance for refactoring this function.
+      example: Extract discount logic to separate module when discount types exceed 5
+      status: canonical
+      profile: code-function
+      required: false
+    - name: ai.doNotModify
+      type: boolean
+      definition: AI should not change this function.
+      example: true
+      status: canonical
+      profile:
+        - code-function
+        - code-class
+      required: false
+    - name: ai.sensitive
+      type: boolean
+      definition: Whether this class or resource handles sensitive data.
+      example: true
+      status: canonical
+      profile:
+        - code-class
+        - code-api
+      required: false
+    - name: ai.modificationImpact
+      type: string
+      definition: What might break if this class changes.
+      example: All authentication flows depend on this class
+      status: canonical
+      profile: code-class
+      required: false
+    - name: ai.replacementPermitted
+      type: boolean
+      definition: Whether AI may suggest replacing this dependency.
+      example: false
+      status: canonical
+      profile: code-dependency
+      required: false
+    - name: ai.upgradePermitted
+      type: boolean
+      definition: Whether AI may suggest upgrading this dependency.
+      example: true
+      status: canonical
+      profile: code-dependency
+      required: false
+    - name: ai.generationPermitted
+      type: boolean
+      definition: Whether AI may generate tests for this module.
+      example: true
+      status: canonical
+      profile: code-test
+      required: false
+    - name: ai.mustCover
+      type: array
+      definition: Scenarios that tests must cover.
+      example:
+        - empty input
+        - maximum values
+        - concurrent access
+      status: canonical
+      profile: code-test
+      required: false
+    - name: ai.doNotMock
+      type: array
+      definition: Dependencies that should not be mocked in tests.
+      example:
+        - database
+        - auth-service
+      status: canonical
+      profile: code-test
+      required: false
+    - name: ai.safeToCall
+      type: boolean
+      definition: Whether AI agents may call this API endpoint.
+      example: true
+      notes: false means AI should never invoke this endpoint autonomously.
+      status: canonical
+      profile:
+        - code-api
+        - database-query
+      required: false
+    - name: ai.testMode
+      type: string
+      definition: Test mode availability for API endpoint.
+      example: 'Use X-Test-Mode: true header'
+      status: canonical
+      profile: code-api
+      required: false
+    - name: ai.sensitiveRequestFields
+      type: array
+      definition: Request fields that contain sensitive data.
+      example:
+        - password
+        - creditCard
+      status: canonical
+      profile: code-api
+      required: false
+    - name: ai.sensitiveResponseFields
+      type: array
+      definition: Response fields that contain sensitive data.
+      example:
+        - ssn
+        - bankAccount
+      status: canonical
+      profile: code-api
+      required: false
+    - name: ai.sideEffects
+      type: array
+      definition: Side effects of calling this API endpoint.
+      example:
+        - Creates order record
+        - Sends confirmation email
+        - Charges payment method
+      status: canonical
+      profile:
+        - code-api
+        - database-procedure
+      required: false
+    - name: documentType
+      type: string
+      definition: >-
+        Document classification within MX. Distinct from contentType (which is the cog/folder format). Values describe
+        the document role: proposal, specification, manual, report, pitch, letter, interview, etc.
+      status: canonical
+      profile: extended
+    - name: structure
+      type: string
+      definition: Structural description of this cog. Enumerates the major sections or blocks the reader should expect.
+      status: canonical
+      profile: cog
+    - name: access
+      type: string
+      definition: 'Access level declaration. Values: public, internal, restricted, confidential.'
+      status: canonical
+      profile: cog
+    - name: block
+      type: string
+      definition: Block-type marker for inline content blocks within a cog.
+      status: canonical
+      profile: cog
+    - name: clientId
+      type: string
+      definition: Client identifier for audit/report infrastructure. Used in report file naming and cross-referencing.
+      status: canonical
+      profile: cog
+    - name: founders
+      type: string
+      definition: List of founding contributors or organisation founders.
+      status: canonical
+      profile: cog
+    - name: file
+      type: string
+      definition: Source file path reference. Points at the primary file this metadata describes.
+      status: canonical
+      profile: cog
+    - name: cogMetadata
+      type: string
+      definition: 'Cog operational metadata: cog metadata.'
+      status: canonical
+      profile: cog
+    - name: contentSummary
+      type: string
+      definition: 'Cog operational metadata: content summary.'
+      status: canonical
+      profile: cog
+    - name: regeneration
+      type: string
+      definition: 'Cog operational metadata: regeneration.'
+      status: canonical
+      profile: cog
+    - name: voice
+      type: string
+      definition: 'Cog operational metadata: voice.'
+      status: canonical
+      profile: cog
+    - name: disclosureLevel
+      type: string
+      definition: Information disclosure level for sensitive documents. Pre-NDA, post-NDA, public.
+      status: canonical
+      profile: cog
+    - name: cogReference
+      type: string
+      definition: 'Cog operational metadata: cog reference.'
+      status: canonical
+      profile: cog
+    - name: authorship
+      type: string
+      definition: 'Authorship classification. Values: solo, collaborative, generated, curated.'
+      status: canonical
+      profile: cog
+    - name: services
+      type: string
+      definition: 'Contact/identity metadata: services.'
+      status: canonical
+      profile: contact
+    - name: portfolio
+      type: string
+      definition: Portfolio reference. URL or path to a body of related work.
+      status: canonical
+      profile: contact
+    - name: expertise
+      type: string
+      definition: 'Contact/identity metadata: expertise.'
+      status: canonical
+      profile: contact
+    - name: visibility
+      type: string
+      definition: 'Content visibility classification. Values: public, internal, restricted, confidential.'
+      status: canonical
+      profile: contact
+    - name: discoverable
+      type: string
+      definition: 'Contact/identity metadata: discoverable.'
+      status: canonical
+      profile: contact
+    - name: citable
+      type: string
+      definition: 'Contact/identity metadata: citable.'
+      status: canonical
+      profile: contact
+    - name: governance
+      type: string
+      definition: 'Cog operational metadata: governance.'
+      status: canonical
+      profile: cog
+    - name: eventDate
+      type: string
+      definition: event date. ISO 8601 format.
+      status: canonical
+      profile: event
+    - name: estimatedPresentationTime
+      type: string
+      definition: Estimated duration of a presentation in minutes.
+      status: canonical
+      profile: event
+    - name: changes
+      type: string
+      definition: 'Event/presentation metadata: changes.'
+      status: canonical
+      profile: event
+    - name: coAuthor
+      type: string
+      definition: Co-author name or identifier.
+      status: canonical
+      profile: event
+    - name: focus
+      type: string
+      definition: 'Event/presentation metadata: focus.'
+      status: canonical
+      profile: event
+    - name: mxEnhancements
+      type: string
+      definition: 'Event/presentation metadata: mx enhancements.'
+      status: canonical
+      profile: event
+    - name: contentUrl
+      type: string
+      definition: 'Cog operational metadata: content url.'
+      status: canonical
+      profile: cog
+    - name: mxAgentAction
+      type: string
+      definition: 'Extended metadata field: mx agent action.'
+      status: canonical
+      profile: extended
+    - name: mxContext
+      type: string
+      definition: 'Extended metadata field: mx context.'
+      status: canonical
+      profile: extended
+    - name: mxPriority
+      type: string
+      definition: 'Extended metadata field: mx priority.'
+      status: canonical
+      profile: extended
+    - name: mxWhenToRead
+      type: string
+      definition: 'Extended metadata field: mx when to read.'
+      status: canonical
+      profile: extended
+    - name: mxKeySections
+      type: string-or-array
+      definition: mx key sections. String or array of values.
+      status: canonical
+      profile: extended
+    - name: lastModified
+      type: string
+      definition: 'Extended metadata field: last modified.'
+      status: canonical
+      profile: extended
+    - name: relatedCommands
+      type: string-or-array
+      definition: related commands. String or array of values.
+      status: canonical
+      profile: extended
+    - name: watchRegistry
+      type: string
+      definition: 'Extended metadata field: watch registry.'
+      status: canonical
+      profile: extended
+    - name: keySections
+      type: string-or-array
+      definition: key sections. String or array of values.
+      status: canonical
+      profile: extended
+    - name: watchesFiles
+      type: string-or-array
+      definition: watches files. String or array of values.
+      status: canonical
+      profile: extended
+    - name: sections
+      type: string
+      definition: 'Extended metadata field: sections.'
+      status: canonical
+      profile: extended
+    - name: trigger
+      type: string
+      definition: 'Extended metadata field: trigger.'
+      status: canonical
+      profile: extended
+    - name: lastSync
+      type: string
+      definition: 'Extended metadata field: last sync.'
+      status: canonical
+      profile: extended
+    - name: mxWatchRegistry
+      type: string
+      definition: 'Extended metadata field: mx watch registry.'
+      status: canonical
+      profile: extended
+    - name: skillName
+      type: string
+      definition: 'Extended metadata field: skill name.'
+      status: canonical
+      profile: extended
+    - name: skillVersion
+      type: string
+      definition: 'Extended metadata field: skill version.'
+      status: canonical
+      profile: extended
+    - name: relatedSkills
+      type: string
+      definition: 'Extended metadata field: related skills.'
+      status: canonical
+      profile: extended
+    - name: relatedDocuments
+      type: string
+      definition: 'Extended metadata field: related documents.'
+      status: canonical
+      profile: extended
+    - name: seeAlso
+      type: string
+      definition: 'Extended metadata field: see also.'
+      status: canonical
+      profile: extended
+    - name: companion
+      type: string
+      definition: Reference to a companion document or resource that should be read alongside this one.
+      status: canonical
+      profile: extended
+    - name: longdescription
+      type: string
+      definition: 'Extended metadata field: longdescription.'
+      status: canonical
+      profile: extended
+    - name: refersToExternal
+      type: string
+      definition: 'Extended metadata field: refers to external.'
+      status: canonical
+      profile: extended
+    - name: editor
+      type: string
+      definition: Editor name or identifier. Person responsible for editorial review.
+      status: canonical
+      profile: extended
+    - name: blogFilename
+      type: string
+      definition: 'Extended metadata field: blog filename.'
+      status: canonical
+      profile: extended
+    - name: readingTime
+      type: string
+      definition: 'Extended metadata field: reading time.'
+      status: canonical
+      profile: extended
+    - name: coOwnership
+      type: string
+      definition: 'Extended metadata field: co ownership.'
+      status: canonical
+      profile: extended
+    - name: state
+      type: string
+      definition: 'Extended metadata field: state.'
+      status: canonical
+      profile: extended
+    - name: insight
+      type: string
+      definition: 'Extended metadata field: insight.'
+      status: canonical
+      profile: extended
+    - name: template
+      type: string
+      definition: 'Extended metadata field: template.'
+      status: canonical
+      profile: extended
+    - name: deliverables
+      type: string
+      definition: List of deliverable outputs from this work item or project.
+      status: canonical
+      profile: cog
+    - name: concepts
+      type: string
+      definition: Key concepts this document covers. Array of concept names for discoverability.
+      status: canonical
+      profile: cog
+    - name: commands
+      type: string
+      definition: 'Cog operational metadata: commands.'
+      status: canonical
+      profile: cog
+    - name: generated
+      type: boolean
+      definition: Whether generated. Boolean flag.
+      status: canonical
+      profile: cog
+    - name: snapshot
+      type: string
+      definition: 'Cog operational metadata: snapshot.'
+      status: canonical
+      profile: cog
+    - name: lastmod
+      type: string
+      definition: 'Extended metadata field: lastmod.'
+      status: canonical
+      profile: extended
+    - name: keywords
+      type: string
+      definition: 'Extended metadata field: keywords.'
+      status: canonical
+      profile: extended
+    - name: canonical
+      type: string
+      definition: 'Extended metadata field: canonical.'
+      status: canonical
+      profile: extended
+    - name: aiContentPolicy
+      type: string
+      definition: 'Extended metadata field: ai content policy.'
+      status: canonical
+      profile: extended
+    - name: aiFreshness
+      type: string
+      definition: 'Extended metadata field: ai freshness.'
+      status: canonical
+      profile: extended
+    - name: aiAttribution
+      type: string
+      definition: 'Extended metadata field: ai attribution.'
+      status: canonical
+      profile: extended
+    - name: co
+      type: string
+      definition: 'Extended metadata field: co.'
+      status: canonical
+      profile: extended
+    - name: goal
+      type: string
+      definition: 'Extended metadata field: goal.'
+      status: canonical
+      profile: extended
+    - name: demo
+      type: string
+      definition: Demo or showcase reference. URL, path, or description of a demonstration for this content.
+      status: canonical
+      profile: extended
+    - name: archivedBy
+      type: string
+      definition: 'Extended metadata field: archived by.'
+      status: canonical
+      profile: extended
+    - name: weekBoundary
+      type: string
+      definition: 'Extended metadata field: week boundary.'
+      status: canonical
+      profile: extended
+    - name: styleRules
+      type: string
+      definition: 'Cog operational metadata: style rules.'
+      status: canonical
+      profile: cog
+    - name: urgency
+      type: string
+      definition: 'Cog operational metadata: urgency.'
+      status: canonical
+      profile: cog
+    - name: risk
+      type: string
+      definition: 'Cog operational metadata: risk.'
+      status: canonical
+      profile: cog
+    - name: sopContentPolicy
+      type: string
+      definition: 'Standard operating procedure: content policy. Defines the SOP aspect for this document or cog.'
+      status: canonical
+      profile: extended
+    - name: sopPreferredAccess
+      type: string
+      definition: 'Standard operating procedure: preferred access. Defines the SOP aspect for this document or cog.'
+      status: canonical
+      profile: extended
+    - name: sopStructuredData
+      type: string
+      definition: 'Standard operating procedure: structured data. Defines the SOP aspect for this document or cog.'
+      status: canonical
+      profile: extended
+    - name: siteName
+      type: string
+      definition: 'Extended metadata field: site name.'
+      status: canonical
+      profile: extended
+    - name: decisionStatus
+      type: string
+      definition: 'Cog operational metadata: decision status.'
+      status: canonical
+      profile: cog
+    - name: difficulty
+      type: string
+      definition: 'Extended metadata field: difficulty.'
+      status: canonical
+      profile: extended
+    - name: entityType
+      type: string
+      definition: 'Extended metadata field: entity type.'
+      status: canonical
+      profile: extended
+    - name: capabilities
+      type: string
+      definition: 'Extended metadata field: capabilities.'
+      status: canonical
+      profile: extended
+    - name: communityAuthors
+      type: string-or-array
+      definition: Array of community contributors to this document.
+      status: canonical
+      profile: extended
+    - name: contributions
+      type: string
+      definition: Array of contribution descriptions for this document.
+      status: canonical
+      profile: extended
+    - name: contributionProcess
+      type: string
+      definition: Description of the process for contributing to this document or project.
+      status: canonical
+      profile: extended
+    - name: openSource
+      type: string
+      definition: 'Extended metadata field: open source.'
+      status: canonical
+      profile: extended
+    - name: evolvingDocument
+      type: boolean
+      definition: Boolean. Whether this document is expected to change frequently.
+      status: canonical
+      profile: extended
+    - name: versionControlled
+      type: string
+      definition: 'Extended metadata field: version controlled.'
+      status: canonical
+      profile: extended
+    - name: principles
+      type: string
+      definition: 'Extended metadata field: principles.'
+      status: canonical
+      profile: extended
+    - name: canonicalUrl
+      type: string
+      definition: 'Extended metadata field: canonical url.'
+      status: canonical
+      profile: extended
+    - name: metadataPhilosophy
+      type: string
+      definition: 'Extended metadata field: metadata philosophy.'
+      status: canonical
+      profile: extended
+    - name: imagesAudited
+      type: number
+      definition: Count of images analysed during the audit.
+      status: canonical
+      profile: contact
+    - name: geoVisibilityScore
+      type: number
+      definition: >-
+        GEO (Generative Engine Optimisation) visibility score (0-100). Measures likelihood of content appearing in
+        AI-generated search results.
+      status: canonical
+      profile: extended
+    - name: geoCategoryMentions
+      type: string
+      definition: Count of category-level mentions in GEO analysis. How often the content is referenced by topic.
+      status: canonical
+      profile: extended
+    - name: geoCitationAccuracy
+      type: string
+      definition: GEO citation accuracy score (0-100). Whether AI-generated citations of this content are factually correct.
+      status: canonical
+      profile: extended
+    - name: geoCompetitorGap
+      type: string
+      definition: GEO competitor gap score. Measures the visibility difference between this content and competing sources.
+      status: canonical
+      profile: extended
+    - name: governedBy
+      type: string
+      definition: 'Cog operational metadata: governed by.'
+      status: canonical
+      profile: cog
+    - name: supersedes
+      type: string
+      definition: 'Cog operational metadata: supersedes.'
+      status: canonical
+      profile: cog
+    - name: pitchType
+      type: string
+      definition: 'Classification of the pitch approach. Values: investor, partner, client, advisory.'
+      status: canonical
+      profile: business
+    - name: presentationFor
+      type: string
+      definition: Target audience for a presentation or talk. Freetext.
+      status: canonical
+      profile: business
+    - name: pitchAsk
+      type: string
+      definition: The specific ask or call-to-action in a pitch deck or proposal.
+      status: canonical
+      profile: business
+    - name: valuation
+      type: string
+      definition: Company or product valuation figure. Used in investor pitch metadata.
+      status: canonical
+      profile: business
+    - name: marketSize
+      type: number
+      definition: Total addressable market size. Used in pitch/investor context.
+      status: canonical
+      profile: business
+    - name: arrProjection
+      type: string
+      definition: Annual Recurring Revenue projection. Financial metric for investor materials.
+      status: canonical
+      profile: business
+    - name: logo
+      type: string
+      definition: Logo URL or file path for an organisation or product.
+      status: canonical
+      profile: extended
+    - name: partnershipValue
+      type: string
+      definition: Estimated value of a partnership. Financial or strategic metric.
+      status: canonical
+      profile: contact
+    - name: canonicalSource
+      type: string
+      definition: 'Cog operational metadata: canonical source.'
+      status: canonical
+      profile: cog
+    - name: prerequisites
+      type: string
+      definition: 'Cog operational metadata: prerequisites.'
+      status: canonical
+      profile: cog
+    - name: installSteps
+      type: string-or-array
+      definition: install steps. String or array of values.
+      status: canonical
+      profile: cog
+    - name: verify
+      type: string
+      definition: 'Cog operational metadata: verify.'
+      status: canonical
+      profile: cog
+    - name: mxEnvironment
+      type: string
+      definition: 'Cog operational metadata: mx environment.'
+      status: canonical
+      profile: cog
+    - name: timestamp
+      type: string
+      definition: 'Contact/identity metadata: timestamp.'
+      status: canonical
+      profile: contact
+    - name: validationTarget
+      type: string
+      definition: 'Contact/identity metadata: validation target.'
+      status: canonical
+      profile: contact
+    - name: filesChecked
+      type: number
+      definition: Count of files. Integer.
+      status: canonical
+      profile: contact
+    - name: filesValid
+      type: number
+      definition: 'Contact/identity metadata: files valid.'
+      status: canonical
+      profile: contact
+    - name: filesInvalid
+      type: number
+      definition: 'Contact/identity metadata: files invalid.'
+      status: canonical
+      profile: contact
+    - name: totalErrors
+      type: string
+      definition: 'Contact/identity metadata: total errors.'
+      status: canonical
+      profile: contact
+    - name: totalWarnings
+      type: string
+      definition: 'Contact/identity metadata: total warnings.'
+      status: canonical
+      profile: contact
+    - name: durationSeconds
+      type: number
+      definition: Duration in seconds. Used for session reports and media.
+      status: canonical
+      profile: contact
+    - name: validationStatus
+      type: string
+      definition: 'Contact/identity metadata: validation status.'
+      status: canonical
+      profile: contact
+    - name: prospect
+      type: string
+      definition: CRM prospect stage classification. Tracks where a contact sits in the sales pipeline.
+      status: canonical
+      profile: report
+    - name: workEmail
+      type: string
+      definition: Professional email address. Distinct from personal email.
+      status: canonical
+      profile: contact
+    - name: contractEnd
+      type: string
+      definition: Contract end date. ISO 8601. CRM/contact metadata.
+      status: canonical
+      profile: contact
+    - name: github
+      type: string
+      definition: GitHub username or profile URL.
+      status: canonical
+      profile: contact
+    - name: twitter
+      type: string
+      definition: Twitter/X handle or profile URL.
+      status: canonical
+      profile: contact
+    - name: emoji
+      type: string
+      definition: Representative emoji for this identity or entity.
+      status: canonical
+      profile: contact
+    - name: amazon
+      type: string
+      definition: Amazon author page or product URL.
+      status: canonical
+      profile: contact
+    - name: paternity
+      type: string
+      definition: Family relationship classification. CRM/contact context.
+      status: canonical
+      profile: contact
+    - name: knownAs
+      type: string
+      definition: Informal name, nickname, or professional title (e.g. "The AEM Guy").
+      status: canonical
+      profile: contact
+    - name: site
+      type: string
+      definition: 'Report infrastructure metadata: site.'
+      status: canonical
+      profile: report
+    - name: business
+      type: string
+      definition: 'Report infrastructure metadata: business.'
+      status: canonical
+      profile: report
+    - name: overallScore
+      type: number
+      definition: Weighted aggregate of all individual audit scores. Summary metric for report headers.
+      status: canonical
+      profile: report
+    - name: securityScore
+      type: number
+      definition: Security posture score (0-100). Evaluates headers (CSP, HSTS, X-Frame-Options), mixed-content, and protocol.
+      status: canonical
+      profile: report
+    - name: totalPa11yIssues
+      type: string
+      definition: Count of Pa11y accessibility issues found across all audited pages.
+      status: canonical
+      profile: report
+    - name: metadataStackCompleteness
+      type: string
+      definition: Metadata stack completeness score (0-100). Measures how many MX-recommended metadata layers are present.
+      status: canonical
+      profile: report
+    - name: structuredDataQuality
+      type: string
+      definition: >-
+        Structured-data quality score (0-100). Measures Schema.org completeness, required-property coverage, and nesting
+        depth.
+      status: canonical
+      profile: report
+    - name: agentReadability
+      type: string
+      definition: Agent readability assessment. How easily an AI agent can parse and act on this content.
+      status: canonical
+      profile: report
+    - name: mxStackScore
+      type: number
+      definition: MX stack compliance score (0-100). Similar to metadataStackCompleteness but weighted by field importance.
+      status: canonical
+      profile: report
+    - name: pipelineSurvivabilityScore
+      type: number
+      definition: Pipeline survivability score (0-100). Numeric form of pipelineSurvivability.
+      status: canonical
+      profile: report
+    - name: agentReadabilityScore
+      type: number
+      definition: Agent readability score (0-100). Numeric form of agentReadability assessment.
+      status: canonical
+      profile: report
+    - name: mxStackCompleteness
+      type: string
+      definition: MX stack completeness percentage. Ratio of present-to-expected MX metadata fields.
+      status: canonical
+      profile: report
+    - name: pipelineSurvivability
+      type: string
+      definition: >-
+        Pipeline survivability assessment. Whether content survives transformation through AI pipelines without data
+        loss.
+      status: canonical
+      profile: report
+    - name: commerceVisibilityScore
+      type: number
+      definition: >-
+        Commerce visibility score (0-100). How well e-commerce content (products, offers, pricing) is surfaced to
+        shopping agents.
+      status: canonical
+      profile: report
+    - name: catalogueVisibilityAnswered
+      type: string
+      definition: Whether the audit addressed catalogue/product-listing visibility. Boolean flag.
+      status: canonical
+      profile: report
+    - name: templateSelection
+      type: string
+      definition: Template file used to generate this report. Path relative to mx-audit/templates/.
+      status: canonical
+      profile: report
+    - name: variables
+      type: string
+      definition: Template variables for report generation. Object of key-value pairs passed to the infill pipeline.
+      status: canonical
+      profile: report
+    - name: canonicalReference
+      type: string
+      definition: 'Contact/identity metadata: canonical reference.'
+      status: canonical
+      profile: contact
+    - name: opportunity
+      type: string
+      definition: 'Contact/identity metadata: opportunity.'
+      status: canonical
+      profile: contact
+    - name: existingConnection
+      type: string
+      definition: Description of pre-existing relationship with a contact or organisation.
+      status: canonical
+      profile: report
+    - name: topics
+      type: string
+      definition: 'Cog operational metadata: topics.'
+      status: canonical
+      profile: cog
+    - name: speakers
+      type: string
+      definition: 'Cog operational metadata: speakers.'
+      status: canonical
+      profile: cog
+    - name: networking
+      type: string
+      definition: 'Cog operational metadata: networking.'
+      status: canonical
+      profile: cog
+    - name: product
+      type: string
+      definition: 'Cog operational metadata: product.'
+      status: canonical
+      profile: cog
+    - name: features
+      type: string
+      definition: Feature list. Array of capability descriptions for a tool, product, or service.
+      status: canonical
+      profile: cog
+    - name: warranty
+      type: string
+      definition: 'Cog operational metadata: warranty.'
+      status: canonical
+      profile: cog
+    - name: maintenance
+      type: string
+      definition: 'Cog operational metadata: maintenance.'
+      status: canonical
+      profile: cog
+    - name: sustainability
+      type: string
+      definition: 'Cog operational metadata: sustainability.'
+      status: canonical
+      profile: cog
+    - name: dietary
+      type: string
+      definition: Dietary classification. Vegetarian, vegan, gluten-free, etc.
+      status: canonical
+      profile: cog
+    - name: specialities
+      type: string
+      definition: 'Cog operational metadata: specialities.'
+      status: canonical
+      profile: cog
+    - name: cuisine
+      type: string
+      definition: Cuisine type. Used for restaurant/venue metadata in demo content.
+      status: canonical
+      profile: cog
+    - name: dietaryOptions
+      type: string-or-array
+      definition: Array of dietary options available. Restaurant/venue metadata.
+      status: canonical
+      profile: cog
+    - name: priceRange
+      type: string
+      definition: 'Cog operational metadata: price range.'
+      status: canonical
+      profile: cog
+    - name: booking
+      type: string
+      definition: Booking or reservation reference. URL or identifier.
+      status: canonical
+      profile: cog
+    - name: newMacPrerequisites
+      type: string-or-array
+      definition: new mac prerequisites. String or array of values.
+      status: canonical
+      profile: cog
+    - name: newMacSteps
+      type: string-or-array
+      definition: new mac steps. String or array of values.
+      status: canonical
+      profile: cog
+    - name: certification
+      type: string
+      definition: 'Cog operational metadata: certification.'
+      status: canonical
+      profile: cog
+    - name: defaultAuthor
+      type: string
+      definition: 'Cog operational metadata: default author.'
+      status: canonical
+      profile: cog
+    - name: paths
+      type: string
+      definition: 'Cog operational metadata: paths.'
+      status: canonical
+      profile: cog
+    - name: social
+      type: string
+      definition: 'Cog operational metadata: social.'
+      status: canonical
+      profile: cog
+    - name: defaults
+      type: string
+      definition: 'Cog operational metadata: defaults.'
+      status: canonical
+      profile: cog
+    - name: interview
+      type: string
+      definition: 'Cog operational metadata: interview.'
+      status: canonical
+      profile: cog
+    - name: marp
+      type: string
+      definition: Marp presentation framework flag. Boolean or configuration object.
+      status: canonical
+      profile: event
+    - name: paginate
+      type: string
+      definition: 'Event/presentation metadata: paginate.'
+      status: canonical
+      profile: event
+    - name: backgroundColor
+      type: string
+      definition: Background colour for presentations or documents. Hex, RGB, or named.
+      status: canonical
+      profile: event
+    - name: color
+      type: string
+      definition: Primary brand colour. Hex, RGB, or named colour.
+      status: canonical
+      profile: event
+    - name: outputs
+      type: string
+      definition: 'Event/presentation metadata: outputs.'
+      status: canonical
+      profile: event
+    - name: skillsUsed
+      type: string
+      definition: Array of Claude Code skills invoked during a session. Used in session/completion reports.
+      status: canonical
+      profile: report
+    - name: toolsUsed
+      type: string
+      definition: Array of tools exercised during a session (e.g. Bash, Edit, Grep). Session metadata.
+      status: canonical
+      profile: report
+    - name: sessionType
+      type: string
+      definition: 'Session classification for directors reports. Values: morning, afternoon, evening, full-day.'
+      status: canonical
+      profile: report
+    - name: reviewedBy
+      type: string
+      definition: Name or identifier of the person who reviewed this document or report.
+      status: canonical
+      profile: report
+    - name: manuals
+      type: string
+      definition: 'Cog operational metadata: manuals.'
+      status: canonical
+      profile: cog
+    - name: sortOrder
+      type: string
+      definition: 'Cog operational metadata: sort order.'
+      status: canonical
+      profile: cog
+    - name: subSort
+      type: string
+      definition: 'Cog operational metadata: sub sort.'
+      status: canonical
+      profile: cog
+    - name: output
+      type: string
+      definition: 'Cog operational metadata: output.'
+      status: canonical
+      profile: cog
+    - name: mx.contact
+      type: string-or-object
+      definition: Nested contact reference inside mx block (email or object). Complements top-level contact field.
+      status: canonical
+      profile: contact
+    - name: mx.scope
+      type: string-or-object
+      definition: Scope declaration inside mx block. Used by routing and cog definitions to declare applicability.
+      status: canonical
+      profile: cog
+    - name: mx.cog
+      type: object
+      definition: Cog metadata block inside mx namespace. Contains cog-specific configuration.
+      status: canonical
+      profile: cog
+    - name: mx.attestation
+      type: object
+      definition: Attestation block inside mx namespace. Provenance, authorship, and verification claims.
+      status: canonical
+      profile: cog
+    - name: mx.routing
+      type: object
+      definition: Routing table inside mx namespace. Used by Reginald to direct requests to handlers.
+      status: canonical
+      profile: cog
+  profiles:
+    - name: book
+      description: Fields for book manuscript chapters.
+      required:
+        - book
+        - chapter
+        - wordCount
+        - copyright
+    - name: blog
+      description: Fields for blog posts.
+      required:
+        - publicationDate
+        - blogState
+      optional:
+        - blogUrl
+        - movedFrom
+        - movedDate
+    - name: contact
+      description: Fields for contact/person records.
+      required:
+        - relationship
+        - role
+        - company
+      optional:
+        - nextAction
+        - confidential
+        - messages
+        - email
+        - phone
+        - whatsapp
+        - linkedin
+        - nickname
+        - priority
+        - lastContact
+        - twinOf
+        - location
+        - platform
+        - name
+    - name: report
+      description: Fields for session reports, audit reports, and completion reports.
+      required:
+        - reportType
+      optional:
+        - reportId
+        - client
+        - sessionStart
+        - sessionEnd
+        - segment
+    - name: audit
+      description: Fields for MX web audit scoring and metrics.
+      optional:
+        - pagesAudited
+        - performanceScore
+        - llmSuitabilityScore
+        - seoScore
+    - name: event
+      description: Fields for events, locations, and presentations.
+      optional:
+        - event
+        - location
+        - organiser
+        - hours
+    - name: js
+      description: 'Fields for .cog.js files. Convention: @mx:field in JSDoc blocks.'
+      required:
+        - mx:name
+      recommended:
+        - mx:version
+        - mx:purpose
+      optional:
+        - mx:audience
+        - mx:stability
+        - mx:category
+        - mx:tags
+        - mx:builds-on
+        - mx:documented-in
+        - mx:context-provides
+    - name: css
+      description: 'Fields for .cog.css files. Convention: @mx:field in comment blocks.'
+      required:
+        - mx:name
+      recommended:
+        - mx:version
+        - mx:purpose
+      optional:
+        - mx:audience
+        - mx:stability
+        - mx:category
+        - mx:tags
+    - name: x-mx-public
+      description: 'MX-public extension fields. Prefix: x-mx-. Visible in published cogs. CogNovaMX vendor extensions.'
+      fields:
+        - x-mx-mount-type
+        - x-mx-mount-swappable
+        - x-mx-mount-upstream
+    - name: x-mx-private
+      description: 'MX-private extension fields. Obfuscated. Prefix: x-mx-p-. Field names are not listed publicly.'
+      fields: []
