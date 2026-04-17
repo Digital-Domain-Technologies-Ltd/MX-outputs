@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Self-Audit Day: allabout.network/mx Reaches 100/100"
 created: "2026-03-29"
-segment: "evening"
+x-mx-segment: "evening"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders

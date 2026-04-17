@@ -6,7 +6,7 @@ version: "1.0"
 created: '2026-03-01'
 mx:
   date: 2026-02-19
-  segment: morning
+  x-mx-segment: morning
   sessionStart: "05:00"
   sessionEnd: "05:45"
   status: completed

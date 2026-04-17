@@ -5,7 +5,7 @@ version: "2.0"
 author: Tom Cranstoun and Maxine
 
 mx:
-  segment: "morning"
+  x-mx-segment: "morning"
   audience: stakeholders
   confidential: true
 ---

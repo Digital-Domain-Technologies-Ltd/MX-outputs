@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — MX Bookshop: Wix to Static with Full MX Treatment"
 created: "2026-03-31"
-segment: "evening"
+x-mx-segment: "evening"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders

@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Audit Pipeline Now Trustworthy, llms.txt Advice and Estate Aligned"
 created: "2026-04-10"
-segment: "morning"
+x-mx-segment: "morning"
 version: "1.1"
 author: Tom Cranstoun and Maxine
 audience: stakeholders

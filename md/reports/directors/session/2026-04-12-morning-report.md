@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Frontmatter Validator: One Rules Engine for All Markdown"
 created: "2026-04-12"
-segment: "morning"
+x-mx-segment: "morning"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders

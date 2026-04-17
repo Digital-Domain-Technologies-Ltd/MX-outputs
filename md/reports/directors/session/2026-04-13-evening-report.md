@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Audit Pipeline Hardened, Registry at 179 Cogs"
 created: "2026-04-13"
-segment: "evening"
+x-mx-segment: "evening"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders

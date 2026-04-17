@@ -8,7 +8,7 @@ version: "2.0"
 mx:
   status: active
   contentType: release-notes
-  category: audit-suite
+  x-mx-category: audit-suite
 ---
 
 # Audit Template Update Summary — v2.0 Release

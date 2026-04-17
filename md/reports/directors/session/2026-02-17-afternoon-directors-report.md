@@ -6,7 +6,7 @@ modified: "2026-02-17"
 author: Tom Cranstoun and Maxine
 
 mx:
-  segment: "afternoon"
+  x-mx-segment: "afternoon"
   audience: stakeholders
   confidential: true
 ---

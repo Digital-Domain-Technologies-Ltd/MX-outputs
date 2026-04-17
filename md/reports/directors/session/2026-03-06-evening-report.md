@@ -6,7 +6,7 @@ created: "2026-03-06"
 version: "1.0"
 author: "Tom Cranstoun and Maxine"
 mx:
-  segment: "evening"
+  x-mx-segment: "evening"
   audience: "stakeholders"
   confidential: true
 ---

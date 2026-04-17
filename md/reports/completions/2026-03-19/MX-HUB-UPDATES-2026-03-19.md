@@ -9,7 +9,7 @@ version: "1.0"
 mx:
   status: active
   contentType: release-notes
-  category: audit-suite
+  x-mx-category: audit-suite
 ---
 
 # MX-Hub Updates: Templates v2.0 + mx-audit Integration

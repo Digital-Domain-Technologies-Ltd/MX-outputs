@@ -6,7 +6,7 @@ created: "2026-04-16"
 modified: "2026-04-16"
 
 mx:
-  contentState: "published"
+  x-mx-contentState: "published"
   blogFilename: "a-standard-that-knows-what-it-isnt"
   blogUrl: "https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html"
   publicationDate: "2026-04-16"

@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Remove Prices and Timescales from CogNovaMX Pages"
 created: "2026-03-31"
-segment: "afternoon"
+x-mx-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders

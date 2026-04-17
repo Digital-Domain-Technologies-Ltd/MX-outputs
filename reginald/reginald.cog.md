@@ -9,7 +9,7 @@ version: "1.0"
 mx:
   status: active
   contentType: info-doc
-  category: reginald
+  x-mx-category: reginald
   tags: [reginald, registry, cogs, trust, verification, ai-agents, dns, resolution, machine-experience]
   audience: [humans, machines]
   license: proprietary

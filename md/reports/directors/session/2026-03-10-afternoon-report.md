@@ -5,7 +5,7 @@ created: "2026-03-10"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 mx:
-  segment: "afternoon"
+  x-mx-segment: "afternoon"
   audience: stakeholders
   confidential: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Audit Pipeline Overhaul, Platform-Aware Sitemap Health, Report Infill"
 created: "2026-04-13"
-segment: "full-day"
+x-mx-segment: "full-day"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders

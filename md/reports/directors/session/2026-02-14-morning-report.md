@@ -6,7 +6,7 @@ author: Tom Cranstoun and Maxine
 created: '2026-03-01'
 mx:
   date: 2026-02-14
-  segment: morning
+  x-mx-segment: morning
   status: published
 ---
 

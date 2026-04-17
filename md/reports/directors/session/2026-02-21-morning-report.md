@@ -8,7 +8,7 @@ version: "1.0"
 
 mx:
   status: active
-  segment: morning
+  x-mx-segment: morning
   date: 2026-02-21
 ---
 

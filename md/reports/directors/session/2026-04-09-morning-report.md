@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — DDT Identity, Stripe Live, Trading-Name Rebrand, MailerLite Wired"
 created: "2026-04-09"
-segment: "morning"
+x-mx-segment: "morning"
 version: "1.1"
 author: Tom Cranstoun and Maxine
 audience: stakeholders

@@ -12,7 +12,7 @@ mx:
   reportType: directors
   audience: [business]
   confidential: true
-  segment: afternoon
+  x-mx-segment: afternoon
   tags: [directors-report, session, afternoon, tg-community, stream, standards]
 ---
 

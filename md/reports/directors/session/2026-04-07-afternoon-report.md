@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Bob W Audit, Template Stability Run"
 created: "2026-04-07"
-segment: "afternoon"
+x-mx-segment: "afternoon"
 version: "1.0"
 author: Tom Cranstoun and Maxine
 audience: stakeholders
