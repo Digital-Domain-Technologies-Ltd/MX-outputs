@@ -48,10 +48,16 @@ list_subdirs() {
 }
 
 # Generate the README
-cat > "$OUTPUT" << 'HEADER'
+# Unquoted heredoc so $(date) interpolates. MXS-01 Level 1 requires
+# title + author + created on every .md file; this index regenerates
+# every session, so created tracks regeneration date.
+TODAY=$(date +%Y-%m-%d)
+cat > "$OUTPUT" << HEADER
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
+created: "${TODAY}"
+modified: "${TODAY}"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
