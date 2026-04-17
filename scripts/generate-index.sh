@@ -8,32 +8,95 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT=$(pwd)
 
-OUTPUT="$ROOT/README.md"
+# Concurrency guard. Two instances racing on the same README.md produce a
+# corrupted file with duplicated top-level sections — one instance's `cat >`
+# truncate interleaves with another's `cat >>` appends. Symptom seen
+# 2026-04-17 when a backgrounded invocation lingered across a foreground
+# re-run, eventually growing README.md past 333,000 lines.
+#
+# mkdir is atomic on POSIX: the second caller's mkdir fails when the lock
+# dir already exists. flock is unavailable on macOS base install, so we
+# use mkdir here.
+LOCKDIR="$ROOT/.generate-index.lock"
+if ! mkdir "$LOCKDIR" 2>/dev/null; then
+  echo "generate-index.sh: another instance is running (lock held at $LOCKDIR)." >&2
+  echo "If you are sure no other instance is running, remove the lock dir and retry." >&2
+  exit 1
+fi
 
-# Count files by type
+# ---------------------------------------------------------------------------
+# Cache layer 1: early-exit mtime check.
+# If README.md exists and no indexed file is newer than it, the index is
+# already up to date. Skip the whole regen. This check is a single find
+# invocation with -newer — sub-10ms even on a large tree.
+# ---------------------------------------------------------------------------
+EXISTING="$ROOT/README.md"
+if [ -f "$EXISTING" ] && [ -z "${FORCE:-}" ]; then
+  # Look for any indexed file newer than the existing README. -quit on the
+  # first hit so we stop as soon as we know the answer.
+  NEWER=$(find pdf md html json pptx content reginald mx-site 2>/dev/null \
+    -type f \
+    -not -name '.DS_Store' -not -name '.git*' -not -name '.mx*' -not -name '.markdownlint*' \
+    -newer "$EXISTING" \
+    -print -quit 2>/dev/null || true)
+  if [ -z "$NEWER" ]; then
+    echo "README.md is up to date (nothing newer than it in the indexed tree). Use FORCE=1 to regenerate." >&2
+    rmdir "$LOCKDIR" 2>/dev/null || true
+    exit 0
+  fi
+fi
+
+# Atomic publish: write to a temp file, rename to README.md at the very
+# end. Ensures readers never see a partial or duplicated file, even if
+# the lock above is somehow bypassed (e.g. manual lock-dir deletion).
+OUTPUT="$ROOT/README.md.tmp"
+
+# Cleanup on any exit (success, failure, signal): remove the temp file
+# and release the lock. The trap guarantees the lock is released even if
+# the script exits abnormally.
+trap 'rm -f "$OUTPUT" "$ROOT/.generate-index-cache.tsv"; rmdir "$LOCKDIR" 2>/dev/null || true' EXIT
+
+# ---------------------------------------------------------------------------
+# Cache layer 2: single-pass directory walk.
+# Current state (pre-cache) called `find | wc | tr` in a subshell for every
+# directory we needed a count of — ~30 subprocess chains per run. Replaced
+# by one find that produces the full file list once, cached in memory via
+# a temp file that subsequent grep/wc calls scan.
+# ---------------------------------------------------------------------------
+CACHE="$ROOT/.generate-index-cache.tsv"
+find pdf md html json pptx content reginald mx-site 2>/dev/null \
+  -type f \
+  -not -name '.DS_Store' -not -name '.git*' -not -name '.mx*' -not -name '.markdownlint*' \
+  | sort > "$CACHE"
+
+# count_files — grep the cache rather than re-invoking find. Trailing-slash
+# convention prevents prefix collisions ("md/" would otherwise match
+# "mx-site/md..."). grep -c prints "0" on no match AND returns exit 1;
+# swallow that with `|| true` (do NOT add `|| echo 0` — that double-prints).
 count_files() {
-  local dir="$1"
-  if [ -d "$dir" ]; then
-    find "$dir" -type f -not -name '.DS_Store' -not -name '.git*' -not -name '.mx*' -not -name '.markdownlint*' | wc -l | tr -d ' '
+  local dir="${1%/}"
+  if [ -z "$dir" ] || [ "$dir" = "." ]; then
+    wc -l < "$CACHE" | tr -d ' '
   else
-    echo "0"
+    grep -c "^${dir}/" "$CACHE" 2>/dev/null || true
   fi
 }
 
-# List files in a directory with markdown links
+# list_files — same cache lookup; emit markdown bullets. grep returns 1
+# on no match; the while loop handles empty input fine, but `set -e`
+# would kill us on the bare grep. `|| true` on the whole pipeline.
 list_files() {
-  local dir="$1"
+  local dir="${1%/}"
   local indent="${2:-}"
-  if [ -d "$dir" ]; then
-    find "$dir" -type f -not -name '.DS_Store' -not -name '.git*' -not -name '.mx*' -not -name '.markdownlint*' | sort | while read -r f; do
-      local name
-      name=$(basename "$f")
-      echo "${indent}- [\`${name}\`](${f})"
-    done
-  fi
+  { grep "^${dir}/" "$CACHE" 2>/dev/null || true; } | while read -r f; do
+    local name
+    name=$(basename "$f")
+    echo "${indent}- [\`${name}\`](${f})"
+  done
 }
 
-# List subdirectories
+# list_subdirs — find is unavoidable here (it's asking about the dir tree
+# itself, not files), but the dir count is small and bounded.
 list_subdirs() {
   local dir="$1"
   if [ -d "$dir" ]; then
@@ -47,10 +110,13 @@ list_subdirs() {
   fi
 }
 
-# Generate the README
-# Unquoted heredoc so $(date) interpolates. MXS-01 Level 1 requires
-# title + author + created on every .md file; this index regenerates
-# every session, so created tracks regeneration date.
+# Generate the README. Write the YAML frontmatter with variable
+# interpolation (unquoted heredoc), then switch to a QUOTED heredoc for
+# the body so literal backticks and dollars do not trigger command
+# substitution. Previous version had an unescaped backticked path in the
+# body of an unquoted heredoc, which caused bash to recursively execute
+# generate-index.sh as a command-substitution inside its own heredoc —
+# producing thousands of stale processes (observed 2026-04-17).
 TODAY=$(date +%Y-%m-%d)
 cat > "$OUTPUT" << HEADER
 ---
@@ -64,6 +130,9 @@ mx:
   isGenerated: true
   generatedBy: "mx-outputs/scripts/generate-index.sh"
 ---
+HEADER
+
+cat >> "$OUTPUT" << 'HEADER'
 
 # MX Outputs
 
@@ -216,4 +285,11 @@ cat >> "$OUTPUT" << EOF
 *Generated on $(date '+%Y-%m-%d at %H:%M')*
 EOF
 
-echo "README.md generated: $(wc -l < "$OUTPUT") lines, ${TOTAL} files indexed"
+# Atomic publish. The temp file is now complete; rename it over README.md
+# in a single filesystem operation.
+LINES=$(wc -l < "$OUTPUT")
+mv -f "$OUTPUT" "$ROOT/README.md"
+# Prevent the EXIT trap from deleting the file we just published.
+trap 'rmdir "$LOCKDIR" 2>/dev/null || true' EXIT
+
+echo "README.md generated: ${LINES} lines, ${TOTAL} files indexed"
