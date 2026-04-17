@@ -216,3 +216,53 @@ All three share the same regex set for public-standards paths. If a fourth migra
 | 2adebee  | mx-outputs | Regenerate README after 2026-04-17 generator fix + content changes |
 | 7e93d9a  | mx-shared-gathering | Rename category to x-mx-category in MXS drafts' own frontmatter |
 | 2e8e36c  | mx-shared-gathering | Remove x-mx-category from MXS-01/02/03 frontmatter — no extensions in public standards |
+
+---
+
+## Late-morning addendum 2 — Audit findings shipped + durable enforcement scanners (12:00)
+
+After the canon-migration sweep, a third arc closed the loop on the mx.allabout.network audit by acting on every finding it produced and building the enforcement scaffolding so those classes of bug cannot silently return.
+
+### 5. All audit findings shipped on mx.allabout.network
+
+- **Priority 1 — A2A agent-card.json**: new `mx-site/.well-known/agent-card.json` declaring three skills (mx-audit, mx-strategy, mx-training) with the existing content policy. Closes the discovery-file set (robots.txt + sitemap + llms.txt + ai.txt + agent-card.json).
+- **Priority 2 — JSON-LD placement**: moved the Schema.org blocks from `<body>` to `<head>` on `about/index.html`, `books/introduction.html`, `books/handbook.html`, `books/protocols.html`, `services/index.html`. Script `/tmp/move-jsonld.py` did the mechanical relocation; `books/index.html` was already correct.
+- **Priority 3 — Schema enrichment**: nested `itemOffered.Book` entities on the three book pages now carry `publisher`, `datePublished`, `image`, `isbn` inherited from each page's top-level Book. Offer entities got `seller` + `itemCondition` + `url`. `aggregateRating` deliberately left off — fabricating ratings violates Schema.org norms.
+- **Optional — Referrer-Policy header**: added `strict-origin-when-cross-origin` to the allaboutv2 Cloudflare Worker alongside the existing security headers.
+- **Sitemap coverage**: added 7 orphan HTML pages to `mx-site/sitemap.xml` (`books/faq.html`, 4 appendix sub-pages, 2 blogs). Sitemap now matches the source tree one-for-one.
+
+### 6. Two enforcement scanners + mx-audit sitemap-discrepancy feature
+
+Three additions that lock the audit findings into place so they can't regress:
+
+- **`scripts/check-jsonld-in-head.js`** — filesystem HTML scanner that refuses any JSON-LD emitted inside `<body>`. Default scope covers every HTML output tree in the repo (mx-outputs/mx-site, reginald, md; allaboutv2/content). `--fix` flag relocates offending blocks in place. 77 HTML files scanned, all clean after this arc.
+- **`scripts/check-sitemap-coverage.js`** — filesystem HTML ↔ sitemap.xml coverage check. Catches the orphan class of bug the audit's sitemap-based crawler can't see (pages reachable only via excluded paths, for example). Hostname-gated to `allabout.network` and `cognovamx.com` plus subdomains — skips cleanly for any other site so we don't walk someone else's filesystem.
+- **mx-audit `generateMissingSitemapUrlsReport` wired + `generateSitemapDiscrepancyReport` added + `getOrphanSitemapUrls` added**: third "orphaned code that didn't run" bug in mx-audit this morning, plus a new reverse check for sitemap URLs the audit didn't reach. Combined sidecar `sitemap-discrepancy.json` now ships on every audit run.
+
+Both scanners are wired into `/step-commit` Step 8 as the first two gates before the existing cog/fields/compliance checks. The JSON-LD check is a hard block; the sitemap-coverage check is an "offer decision" gate (orphans often need per-file judgement).
+
+### 7. Skill and memory updates
+
+- **`/create-content`** skill — explicit JSON-LD-in-head rule at Step 8.5, noting the step-commit gate enforces it.
+- **`/audit-collect`** and **`/audit-report`** skills — document the new `missing_sitemap_urls.csv` and `sitemap-discrepancy.json` sidecars as canonical outputs; audit-report infill list now includes sitemap discrepancies.
+- **`/step-commit`** skill — Step 8 now runs five gates (was three); Decision-gate section documents block-vs-offer-decision semantics for each new gate; Related section lists the two new scripts.
+
+### Decisions Made (late-morning)
+
+- **Accept the +1 unknown / +1 naming compliance residual** from the deliberate `audit-tool:` kebab-case workaround in the published audit report. The fierce-critic script reads only kebab-case; canonical frontmatter uses `auditTool:`. We now carry both in that report. The durable fix (patch the critic) went on REMINDERS earlier today and was actioned by the canon-migration sweep (commit 97d8d40). This residual was accepted once, resolved structurally, and closed.
+- **Use filesystem scanning as the third-leg enforcement mechanism.** The audit's sitemap-based crawler can't see pages reachable only through excluded paths (books/faq.html was linked only from appendix pages we excluded). The filesystem scanner walks the source tree directly — different discovery model, complementary coverage. Both layers (crawl-based in audit, filesystem-based in step-commit) now catch discrepancies, and both feed the sitemap-discrepancy sidecar the audit-report renders.
+
+### The Insight (late-morning)
+
+Three different bugs this morning all had the same shape: a module exists and works correctly when called, but nothing ever calls it. `generateRobotsTxtAnalysis` was looking at the wrong key; `aiAttributionCollector.js` was never imported by the main pipeline; `generateMissingSitemapUrlsReport` was defined in `reportGenerators.js` but absent from `reports.js`. Same signature three times. The enforcement addition — a per-collector smoke test, or an "every exported function in reportGenerators.js must appear in reports.js" audit — would catch this class mechanically. Added as a REMINDER.
+
+---
+
+## Commit Log (addendum 2)
+
+| Hash | Repo | Description |
+|------|------|-------------|
+| c0708ba5 | allaboutv2 | Worker: add Referrer-Policy: strict-origin-when-cross-origin |
+| 42ea24a | mx-audit | Wire sitemap-discrepancy reports + add reverse orphan check |
+| c9f6107 | mx-crm | Orders dashboard: regenerate excluding Stripe test-mode sessions |
+| 8665d20 | mx-outputs | mx-site: fix all mx.allabout.network audit findings + add agent-card.json |
