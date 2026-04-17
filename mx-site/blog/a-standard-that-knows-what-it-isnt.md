@@ -50,11 +50,11 @@ That is the entire active family. Two earlier drafts were deferred. An AI/Agent 
 
 The proposed standards have a machine-readable form. It lives in three sibling YAML files, published at stable URLs so any implementer can fetch them directly.
 
-[`fields-data.yaml`](https://mx.allabout.network/canon/fields-data.yaml) is the core — roughly 103 fields. Identity, classification, relationships, lifecycle, machine-readability infrastructure, folder metadata, cog contract, non-YAML markup carriers, Dublin Core and Schema.org pass-through fields. This is what MXS-01 specifies.
+[`fields-data.yaml`](https://mx.allabout.network/canon/fields-data.yaml) is the core — 62 fields, each with a definitive one-sentence description. Identity, classification, relationships, lifecycle, folder metadata, Dublin Core and Schema.org pass-through fields, and the genuineness family (`proofOfAuthorship`, `integritySignature`, `provenancePedigree`) that anchors the trust lens. This is what MXS-01 specifies.
 
-[`fields-data-carriers.yaml`](https://mx.allabout.network/canon/fields-data-carriers.yaml) is the carriers companion — roughly 40 fields. Code vocabulary only: function metadata, API surface, tests, inline annotations, dependency declarations. This is what MXS-04 specifies.
+[`fields-data-carriers.yaml`](https://mx.allabout.network/canon/fields-data-carriers.yaml) is the carriers companion — 2 fields. Code-specific provenance only: `sourceRepo` and `derivedFromCommit`. What the code does (signatures, APIs, tests, type systems, inline annotations) is out of MX scope and defers to each language's own documentation convention (JSDoc, Python docstrings, Doxygen, rustdoc, godoc). This is what MXS-04 v1.1-proposed specifies.
 
-[`cognovamx-fields.yaml`](https://mx.allabout.network/canon/cognovamx-fields.yaml) is a vendor extension example pack — roughly 309 fields carrying CogNovaMX-specific workflow vocabulary. It is not part of the standard. Other vendors author parallel files under the same three-tier pattern.
+[`cognovamx-fields.yaml`](https://mx.allabout.network/canon/cognovamx-fields.yaml) is a vendor extension example pack — 206 fields carrying CogNovaMX-specific workflow vocabulary, each with a definitive description. It is not part of the standard. Other vendors author parallel files under the same three-tier pattern using their own `x-vendor-` prefix.
 
 Tooling loads all three and merges them into a unified view. A document that uses a standard field does not know which file the field came from. That is the point.
 
