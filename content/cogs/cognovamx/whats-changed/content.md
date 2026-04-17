@@ -10,8 +10,6 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  riskLevel: medium
-  category: mx-content
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]
   buildsOn: [what-is-a-cog, building-action-docs]

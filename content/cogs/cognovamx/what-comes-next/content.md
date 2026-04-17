@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  riskLevel: low
 
-  category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, cog-registry]
   buildsOn: [what-is-a-cog, who-is-maxine, what-is-mx-os, cog-registry, cogs-for-agent-developers]

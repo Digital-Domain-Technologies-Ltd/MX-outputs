@@ -1,23 +1,24 @@
 ---
-title: "ADR: Namespace Policy — Standard Fields and mx: Namespace"
-description: "ADR: The Gathering's namespace policy — standard fields (no prefix) and mx: namespace governance. Defines what belongs to the standard vs vendor extensions."
+title: 'ADR: Namespace Policy — Standard Fields and mx: Namespace'
+description: 'ADR: The Gathering''s namespace policy — standard fields (no prefix) and mx: namespace governance. Defines what
+  belongs to the standard vs vendor extensions.'
 created: 2026-02-17
 modified: 2026-02-17
 author: The Gathering
-version: "1.0"
-
+version: '1.0'
 mx:
   contentType: info-doc
   status: active
   decisionStatus: accepted
-  tags: [adr, namespace, standard, mx-namespace, governance, fields, vocabulary]
+  tags:
+  - adr
+  - namespace
+  - standard
+  - mx-namespace
+  - governance
+  - fields
+  - vocabulary
   partOf: mx-the-gathering
-  category: standard
-
-  context:
-    trigger: "Repository handover to The Gathering — need clear namespace governance policy that separates standard from vendor extensions."
-    date: 2026-02-17
-    session: "Gathering handover audit"
 ---
 
 # ADR: Namespace Policy — Standard Fields and mx: Namespace

@@ -10,7 +10,6 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  riskLevel: high
   security:
     scope:
       filesystem: [scripts/**, node_modules/**, .claude/**]
@@ -21,7 +20,6 @@ mx:
       retention: 90d
       includeInputs: true
       includeOutputs: false
-  category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]
   buildsOn: [what-is-a-cog, what-is-mx-os, how-mx-os-runs, what-is-mx-environment]

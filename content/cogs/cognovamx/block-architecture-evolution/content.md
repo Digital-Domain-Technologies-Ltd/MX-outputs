@@ -9,7 +9,6 @@ author: Tom Cranstoun and Maxine
 mx:
   license: proprietary
   status: draft
-  category: mx-core
   partOf: mx-the-gathering
   buildsOn: [cog-unified-spec, adr-01-block-architecture]
   refersTo: [ndr-01-block-naming, adr-02-namespace-policy]

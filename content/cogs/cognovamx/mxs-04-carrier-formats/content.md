@@ -9,7 +9,6 @@ description: "Formal specification of MX metadata fields for code carrier format
 mx:
   status: proposed
   license: MIT
-  category: standard
   partOf: mx-the-gathering
   contentType: specification
   buildsOn: [mxs-01-core-metadata, mxs-02-extensions]

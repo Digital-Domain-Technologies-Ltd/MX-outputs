@@ -8,7 +8,6 @@ version: "1.1"
 
 mx:
   status: active
-  category: onboarding
   contentType: guide
   tags: [onboarding, team, setup, mx-os, getting-started]
   audience: ["humans"]

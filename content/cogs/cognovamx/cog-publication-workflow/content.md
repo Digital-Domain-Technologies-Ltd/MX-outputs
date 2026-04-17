@@ -10,9 +10,7 @@ mx:
   maintainer: info@cognovamx.com
   license: proprietary
   status: published
-  riskLevel: high
 
-  category: mx-tools
   partOf: mx-os
   refersTo: [registry-sync, what-is-a-cog]
   buildsOn: [what-is-a-cog]

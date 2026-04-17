@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
-  riskLevel: medium
 
-  category: mx-core
   partOf: mx-core
   refersTo: [llms-txt, sitemap]
   tags: [robots-txt, crawlers, exclusion, seo, llms-txt]
@@ -90,8 +88,6 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec robots-txt"
-  convergence: true
-  accessibility: false
   semantic: true
 ---
 

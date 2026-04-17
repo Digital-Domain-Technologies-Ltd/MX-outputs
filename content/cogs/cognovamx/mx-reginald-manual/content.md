@@ -4,27 +4,20 @@ description: How to use the Machine eXperience Engine including cog listing, exe
 author: Tom Cranstoun and Maxine
 created: 2026-02-06
 modified: 2026-02-23
-version: "1.3"
-
+version: '1.3'
 mx:
   contentType: action-doc
   status: active
-  riskLevel: low
   license: proprietary
-  category: manual
   tags:
-    - manual
-    - reginald
-    - engine
-    - cog-query
+  - manual
+  - reginald
+  - engine
+  - cog-query
   partOf: mx-maxine-lives
   audience: humans
   stability: stable
-  runbook: "mx exec manual-mx-reginald"
-  contextProvides:
-    - How to use the Machine eXperience Engine including cog listing, execution, categories, and building guidance.
-    - Usage guide and workflow for mx reginald
-    - Troubleshooting and best practices
+  runbook: mx exec manual-mx-reginald
   refersTo: []
 ---
 

@@ -10,8 +10,6 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  riskLevel: high
-  category: mx-core
   partOf: mx-os
   refersTo: [script-helper, cog-unified-spec]
   buildsOn: [what-is-mx-os, script-helper]

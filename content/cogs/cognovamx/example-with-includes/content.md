@@ -14,7 +14,6 @@ includes:
 mx:
   status: active
   contentType: reference-implementation
-  category: mx-core
   partOf: mx-os
   tags: [includes, composition, reference-implementation, example]
   audience: [agents, tech]

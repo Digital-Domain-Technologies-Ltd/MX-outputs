@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  riskLevel: low
 
-  category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-contacts, mx-principles]
   buildsOn: [what-is-a-cog, what-is-mx-os, how-mx-os-runs]
@@ -81,8 +79,6 @@ mx:
   contentType: "action-doc"
   runbook: "mx exec building-action-docs"
   semantic: true
-  convergence: true
-  accessibility: true
 ---
 
 # Building Action-Cogs

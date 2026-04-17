@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
-  riskLevel: medium
 
-  category: mx-core
   partOf: mx-core
   refersTo: [a11y, metadata, schema]
   tags: [html, semantic, structure, accessibility, validation]
@@ -81,8 +79,6 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec semantic-html"
-  convergence: true
-  accessibility: true
   semantic: true
 ---
 

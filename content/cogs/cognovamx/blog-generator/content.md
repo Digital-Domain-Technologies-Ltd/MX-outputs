@@ -12,7 +12,6 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  riskLevel: high
   security:
     scope:
       filesystem: [mx-outputs/mx-site/blog/**, allaboutv2/blogs/**]
@@ -24,7 +23,6 @@ mx:
       includeInputs: true
       includeOutputs: false
 
-  category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, env]
   buildsOn: [what-is-a-cog, what-is-mx-os, env]

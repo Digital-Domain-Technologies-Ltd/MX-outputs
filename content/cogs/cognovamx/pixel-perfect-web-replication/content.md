@@ -7,9 +7,7 @@ modified: "2026-02-20"
 author: "CogNovaMX Ltd"
 
 mx:
-  category: mx-tools
   status: active
-  riskLevel: medium
   tags: [playwright, visual-capture, html-css-audit, dom-tree, computed-css, cascade-resolution, reference-implementation, pixel-perfect, automation, cogification, bilingual, single-language-toggle, offline-capable, validation-baseline]
   audience: [tech, business]
 

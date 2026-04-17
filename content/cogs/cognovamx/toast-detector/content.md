@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
-  riskLevel: medium
 
-  category: mx-core
   partOf: mx-core
   refersTo: [a11y, semantic-html]
   tags: [toast, notifications, ephemeral, accessibility, ux]
@@ -78,8 +76,6 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec toast-detector"
-  convergence: true
-  accessibility: true
   semantic: true
 ---
 

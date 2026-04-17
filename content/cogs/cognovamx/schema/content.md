@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
-  riskLevel: medium
 
-  category: mx-core
   partOf: mx-core
   refersTo: [metadata, pricing, semantic-html]
   tags: [schema.org, json-ld, structured-data, seo, accessibility]
@@ -68,8 +66,6 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec schema"
-  convergence: true
-  accessibility: true
   semantic: true
 ---
 

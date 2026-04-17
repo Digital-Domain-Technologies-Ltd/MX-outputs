@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
-  riskLevel: medium
 
-  category: mx-core
   partOf: mx-core
   refersTo: [readability, a11y]
   tags: [documentation, clarity, readability, accessibility, testing]
@@ -59,8 +57,6 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec clarity"
-  convergence: true
-  accessibility: true
   semantic: true
 ---
 

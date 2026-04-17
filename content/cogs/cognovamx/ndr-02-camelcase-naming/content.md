@@ -1,35 +1,32 @@
 ---
-title: "ndr-02-camelcase-naming"
-version: "1.0"
-description: "NDR #2: All YAML frontmatter field names must use camelCase. Aligns with Schema.org and Dublin Core vocabulary conventions."
+title: ndr-02-camelcase-naming
+version: '1.0'
+description: 'NDR #2: All YAML frontmatter field names must use camelCase. Aligns with Schema.org and Dublin Core vocabulary
+  conventions.'
 created: 2026-02-16
 modified: 2026-03-02
 author: Tom Cranstoun and Maxine
-
 mx:
   contentType: info-doc
   status: accepted
-  category: naming
   partOf: mx-the-gathering
-  tags: [ndr, naming, camelCase, fields, metadata, schema-org, dublin-core, standards]
+  tags:
+  - ndr
+  - naming
+  - camelCase
+  - fields
+  - metadata
+  - schema-org
+  - dublin-core
+  - standards
   audience: both
-
-  ndr:
-    number: 2
-    title: "Field Naming Convention — camelCase Everywhere"
-    status: accepted
-    date: 2026-02-16
-    rationale: "Web standards research confirms: vocabularies use camelCase (Schema.org, Dublin Core), markup uses hyphens (HTML data-*, CSS, HTTP headers). MX metadata is a vocabulary, not markup. camelCase aligns with the standards MX already references."
-    evidence: "HTML data-* attributes auto-convert to camelCase in the DOM API. Schema.org uses lowerCamelCase for all properties. Dublin Core changed from Title-Case to camelCase in 2000 to align with XML/RDF. YAML has no opinion — the convention comes from the consuming ecosystem."
-    enforcement: "mx-audit.js reports violations. mx-validator.js warns on new violations."
-
   affects:
-    - field-dictionary
-    - cog-unified-spec
-    - mx-metadata-conventions
-    - mx-attributes-registry
-
-  buildsOn: [what-is-a-cog]
+  - field-dictionary
+  - cog-unified-spec
+  - mx-metadata-conventions
+  - mx-attributes-registry
+  buildsOn:
+  - what-is-a-cog
 ---
 
 # NDR #2: camelCase Field Names

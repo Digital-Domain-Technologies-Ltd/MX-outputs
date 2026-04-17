@@ -13,9 +13,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: active
-  riskLevel: high
 
-  category: mx-tools
   partOf: mx-os
   refersTo: [generate-footnotes, pdf-generator]
   tags: [footnotes, formatting, pdf, manuscripts, validation]

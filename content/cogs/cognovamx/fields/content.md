@@ -9,7 +9,6 @@ modified: 2026-04-15
 mx:
   status: superseded
   license: proprietary
-  category: standard
   partOf: mx-ssot
   contentType: stub
   tags: [fields, metadata, yaml, frontmatter, dictionary, vocabulary, moved]

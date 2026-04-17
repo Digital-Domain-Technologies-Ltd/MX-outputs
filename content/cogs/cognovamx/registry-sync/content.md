@@ -12,7 +12,6 @@ mx:
   maintainer: info@cognovamx.com
   license: proprietary
   status: published
-  riskLevel: high
   security:
     scope:
       filesystem: [scripts/cogs/**, mx-canon/**/*.cog.md, mx-reginald/**]
@@ -24,7 +23,6 @@ mx:
       includeInputs: false
       includeOutputs: true
 
-  category: mx-core
   partOf: mx-os
   refersTo: [what-is-a-cog, what-is-mx-os]
   buildsOn: [what-is-a-cog]

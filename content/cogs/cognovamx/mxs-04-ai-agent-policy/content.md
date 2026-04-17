@@ -9,7 +9,6 @@ description: "DEFERRED. The ai.* field namespace was moved to CogNovaMX vendor e
 mx:
   status: deferred
   license: MIT
-  category: standard
   partOf: mx-the-gathering
   contentType: specification
   buildsOn: [cog-unified-spec, mxs-01-core-metadata]

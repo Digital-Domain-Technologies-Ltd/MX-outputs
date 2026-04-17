@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
-  riskLevel: medium
 
-  category: mx-core
   partOf: mx-core
   refersTo: [schema, semantic-html]
   tags: [metadata, opengraph, twitter-cards, seo, social]
@@ -85,8 +83,6 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec metadata"
-  convergence: true
-  accessibility: true
   semantic: true
 ---
 

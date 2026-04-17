@@ -9,7 +9,6 @@ author: "Tom Cranstoun and Maxine"
 mx:
   status: superseded
   contentType: stub
-  category: mx-core
   partOf: mx-os
   tags: [html, meta-tags, carrier-format, ai-metadata, moved]
   audience: [tech, agents]

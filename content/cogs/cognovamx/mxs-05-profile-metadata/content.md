@@ -9,7 +9,6 @@ description: "DEFERRED. After the 2026-04-15 canon split, this standard has almo
 mx:
   status: deferred
   license: MIT
-  category: standard
   partOf: mx-the-gathering
   contentType: specification
   buildsOn: [cog-unified-spec, mxs-01-core-metadata, mxs-02-extensions, mxs-03-provenance]

@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: active
-  riskLevel: medium
 
-  category: mx-core
   partOf: mx-os
   buildsOn: [what-is-a-cog, cog-registry]
   refersTo: [what-is-mx-os]

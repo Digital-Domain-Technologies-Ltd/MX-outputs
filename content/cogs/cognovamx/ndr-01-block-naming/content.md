@@ -1,36 +1,32 @@
 ---
-title: "ndr-01-block-naming"
-version: "1.0"
-description: "NDR #1: The word 'block' risks confusion with blockchain. Propose alternatives for advisory board review."
+title: ndr-01-block-naming
+version: '1.0'
+description: 'NDR #1: The word ''block'' risks confusion with blockchain. Propose alternatives for advisory board review.'
 created: 2026-02-13
 modified: 2026-03-02
 author: Tom Cranstoun and Maxine
-
 mx:
   contentType: info-doc
   status: proposed
-  category: naming
   partOf: mx-the-gathering
-  tags: [ndr, naming, blocks, terminology, advisory-board]
-  audience: [tech, business, business]
-
-  ndr:
-    number: 1
-    title: "Block Naming — Avoiding Blockchain Confusion"
-    status: proposed
-    date: 2026-02-13
-    old-name: "block"
-    new-name: "TBD — awaiting advisory board input"
-    rationale: "The word 'block' in 'block architecture', 'HTML block', 'prose block' etc. will be confused with blockchain by investors, business audiences, and the general public. The concepts are completely unrelated. We need a term that means 'discrete typed section within a cog' without triggering blockchain associations."
-    audience: "All — this term appears in specs, pitches, manuals, and the books"
-
+  tags:
+  - ndr
+  - naming
+  - blocks
+  - terminology
+  - advisory-board
+  audience:
+  - tech
+  - business
+  - business
   affects:
-    - cog-unified-spec
-    - block-architecture-decision
-    - mx-messaging-framework
-    - vision-statement
-
-  buildsOn: [adr-01-block-architecture, what-is-a-cog]
+  - cog-unified-spec
+  - block-architecture-decision
+  - mx-messaging-framework
+  - vision-statement
+  buildsOn:
+  - adr-01-block-architecture
+  - what-is-a-cog
 ---
 
 # Block Naming — Avoiding Blockchain Confusion

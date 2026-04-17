@@ -13,9 +13,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  riskLevel: low
 
-  category: learning
   partOf: mx-maxine-lives
   refersTo: [cog-unified-spec]
   buildsOn: [what-is-a-cog]

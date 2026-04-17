@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  riskLevel: low
 
-  category: learning
   partOf: mx-the-gathering
   refersTo: [cog-unified-spec]
   buildsOn: [what-is-a-cog, what-is-mx-os]

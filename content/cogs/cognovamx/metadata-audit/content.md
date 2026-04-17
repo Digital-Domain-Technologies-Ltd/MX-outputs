@@ -10,8 +10,6 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  riskLevel: medium
-  category: mx-tools
   partOf: mx-os
   refersTo: [field-dictionary, cog-unified-spec, mx-metadata-conventions]
   buildsOn: [what-is-a-cog]
@@ -52,8 +50,6 @@ mx:
             description: "Key metrics printed to terminal"
 
   semantic: true
-  convergence: true
-  accessibility: true
   contentType: action-doc
   runbook: "mx exec metadata-audit"
 ---

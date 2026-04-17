@@ -9,7 +9,6 @@ description: "The canonical YAML frontmatter template for Appendix K page patter
 mx:
   status: active
   license: MIT
-  category: template
   partOf: mx-the-gathering
   buildsOn: [fields]
   tags: [template, appendix-k, mx-pattern, yaml, frontmatter, page-pattern]

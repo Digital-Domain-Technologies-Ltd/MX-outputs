@@ -12,9 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
-  riskLevel: medium
 
-  category: mx-core
   partOf: mx-core
   refersTo: [schema]
   tags: [pricing, validation, range-check, formatting, trust]
@@ -63,8 +61,6 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec pricing"
-  convergence: true
-  accessibility: true
   semantic: true
 ---
 

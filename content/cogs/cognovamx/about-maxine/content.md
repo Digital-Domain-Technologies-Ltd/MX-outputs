@@ -8,7 +8,6 @@ version: "1.0"
 
 mx:
   status: published
-  category: deliverable
   contentType: info-doc
   tags: [maxine, architecture, server, client, electron, pwa, dashboard, websocket, api, ipc, distributed]
   audience: [tech, business]

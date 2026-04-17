@@ -9,7 +9,6 @@ author: "Tom Cranstoun and Maxine"
 mx:
   status: active
   contentType: policy
-  category: mx-core
   partOf: mx-os
   tags: [validation, policy, shared, includes-example]
   audience: [agents, tech]

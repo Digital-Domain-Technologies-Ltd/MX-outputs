@@ -1,85 +1,18 @@
 ---
-marp: true
-theme: default
-paginate: true
-backgroundColor: "#1a1a2e"
-color: "#ffffff"
-title: "London CMS Experts Lightning Talk"
-author: "Tom Cranstoun"
-description: "5-15 minute lightning talk introducing Machine Experience (MX) to Boye & Company CMS Experts audience"
-style: |
-  section {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #1a1a2e;
-    color: #ffffff;
-    padding: 60px 80px;
-  }
-  section.lead {
-    background-color: #1a1a2e;
-    color: #ffffff;
-    text-align: left;
-    justify-content: center;
-  }
-  h1 {
-    color: #00d4aa;
-    font-size: 2.4em;
-    border-bottom: 2px solid #00d4aa;
-    padding-bottom: 0.2em;
-    margin-bottom: 0.6em;
-  }
-  h2 {
-    color: #00d4aa;
-  }
-  strong {
-    color: #00d4aa;
-  }
-  em {
-    color: #9a9ab8;
-  }
-  ul, ol {
-    line-height: 1.5;
-  }
-  table {
-    font-size: 0.9em;
-    border-collapse: collapse;
-  }
-  th {
-    background-color: #00d4aa;
-    color: #1a1a2e;
-  }
-  td {
-    background-color: #2a2a4e;
-    color: #ffffff;
-  }
-  a {
-    color: #00d4aa;
-  }
-  code {
-    background-color: #2a2a4e;
-    color: #00d4aa;
-  }
-  pre {
-    background-color: #0f0f1e;
-    color: #e0e0e0;
-    border-left: 4px solid #00d4aa;
-    padding: 16px;
-  }
-  section::after {
-    color: #00d4aa;
-  }
+title: London CMS Experts Lightning Talk
+author: Tom Cranstoun
+description: 5-15 minute lightning talk introducing Machine Experience (MX) to Boye & Company CMS Experts audience
 created: '2026-03-01'
-
 mx:
-  date: "2026-02-26"
-  event: "London CMS Experts"
-  location: "London"
-  organiser: "Boye & Company"
+  date: '2026-02-26'
+  event: London CMS Experts
+  location: London
   license: proprietary
   contentType: presentation
   format: marp
   outputs:
-    - MX-what-why-when.pptx
-    - MX-what-why-when.pdf
+  - MX-what-why-when.pptx
+  - MX-what-why-when.pdf
 ---
 
 <!-- _class: lead -->
