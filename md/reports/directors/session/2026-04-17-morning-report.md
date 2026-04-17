@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — First full audit through the hardened pipeline + two mx-audit bugs fixed"
-description: "Morning segment: end-to-end mx.allabout.network audit delivered, two reproducible mx-audit bugs surfaced and fixed, skill-doc hygiene sweep"
+title: "Co-Directors Report — Hardened audit pipeline + canon-migration sweep to 0 violations"
+description: "Morning segment: end-to-end mx.allabout.network audit delivered, two reproducible mx-audit bugs fixed, skill-doc hygiene sweep, then the canon-migration sweep that drove compliance to 0 across all five categories with the scanner bug fixed and public-standards namespace rule mechanised."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-17
 modified: 2026-04-17
-version: "1.0"
+version: "2.0"
 
 mx:
   status: active
@@ -86,7 +86,72 @@ The broader principle — already in the memory as "mechanical enforcement beats
 
 - Publish `/.well-known/agent-card.json` on mx.allabout.network (Priority 1 from the audit, low effort, closes the discovery-file set).
 - Move JSON-LD to `<head>` on the eight flagged pages (`/about/`, `/books/`, `/books/introduction.html`, `/books/handbook.html`, `/books/protocols.html`, `/services/`, `/services/index.html`, `/about/index.html`) — low effort template edit.
-- Patch `scripts/audit-fierce-critic.js:145` to read `auditTool:` (camelCase canonical) so future audit reports don't need the kebab-case duplicate-key workaround.
+- ~~Patch `scripts/audit-fierce-critic.js:145` to read `auditTool:` (camelCase canonical)~~ — shipped in the late-morning arc; see "Canon-migration sweep" below.
+
+---
+
+## Late-morning addendum — Canon-migration sweep to zero violations (11:00)
+
+After the audit/mx-audit/skills-hygiene work closed, a second arc ran end-to-end that drove MX field compliance across the whole repo to zero violations in every category. The starting picture inherited ~1691 deprecated warnings from yesterday's canon cut; the ending picture is `0 unknown, 0 deprecated, 0 naming, 0 invalid-enum, 0 frontmatter-parse-error` across 2223 files, with MXS-01 Level 1 at 2054 / 2054.
+
+### 4. Auto-fixer rename pass
+
+Ran `scripts/fix-mx-compliance.js --apply` against the deprecations table to migrate every caller that still used a bare field name for something now in the vendor namespace. 615 edits across 364 hub files plus 1043 edits across 5 submodules (mx-collaboration, mx-audit, allaboutv2, mx-crm, mx-outputs). Every rename matched an entry recorded in the fields-data.yaml deprecations section; sibling-collision safety guards refused unsafe renames (where both old + new keys coexisted) and were reported as skip lines for manual merge.
+
+One scanner bug surfaced mid-apply: the compliance scanner emitted the literal string `"(removed, no replacement)"` as the replacement for cut fields that had no migration target. The auto-fixer then used that string as the new field name, which corrupted ~50 lines of mx-crm contact files. Reverted, fixed the scanner to emit `null` properly, re-applied cleanly. Documented in the commit message.
+
+### 5. Missing `url` standard field
+
+The rename pass consolidated three vendor fields (`website`, `canonical`, `canonicalUrl`) into `url` — but `url` was not actually in the standard vocabulary. The auto-fixer dutifully renamed callers, who then triggered unknown-field violations on the new name. Added `url` as a core-profile standard field with Schema.org url + Dublin Core identifier alignment. Dropped unknowns from 10 to 1.
+
+### 6. Delete deprecated fields
+
+Two scripts for the remaining 658 deprecated warnings: `scripts/delete-deprecated-fields.js` for single-line deletions, `scripts/delete-deprecated-blocks.py` for YAML-structural deletion of nested blocks. Each handles its own edge cases (line-index invalidation for overlapping violations, PyYAML round-trip reformatting, safety guards against deleting lines whose values span multiple lines). Net effect: 649 warnings cleared, 9 remaining after the first pass — all 9 in files where PyYAML's reformatted output tripped a different scanner bug.
+
+### 7. Scanner fix — list-item indentation
+
+The compliance scanner's YAML key walker had a one-character bug (`>=` where it should have been `>`) in the array-element pop condition. When a YAML list item sat at the same indent as its parent key — as in compact style, which PyYAML's default dump produces — the walker popped the parent off the indent stack, causing subsequent nested keys to resolve their parent path wrongly and get flagged as top-level unknowns. Fixed in one line. Retried the block-delete pass afterwards; 41 previously-false-flagged keys deleted cleanly, all 9 residuals cleared.
+
+### 8. Three pre-existing residuals closed
+
+- `mx-rankinize-user-manual.md` had a duplicate `refersTo:` mapping key. Merged the two lists.
+- `audit-fierce-critic.js` was grepping for `audit-tool:` (kebab-case) while canonical frontmatter is `auditTool:`. Patched to accept both forms (camelCase wins). The CRM report's duplicate `audit-tool:` key removed.
+- `mx-outputs/README.md` was missing the `created` field because the generator didn't emit it. Fixed the generator; README regenerated clean.
+
+### 9. Public-standards namespace rule — mechanised
+
+The auto-fixer's rename pass had renamed `category` → `x-mx-category` in MXS-01, MXS-02, MXS-03 frontmatter — mechanically correct per the deprecations table but semantically wrong: public standards documents MUST NOT carry vendor extension fields in their own frontmatter. They describe the namespace; they do not consume it. Reverted those three files, then updated all three field-migration tools with a path skip-list that excludes `mx-shared-gathering/`, `stream-drafts/draft-*.md`, `proposed-drafts/*.(cog.)md`, and `tg-community/*/draft-*.md`. Skip is path-based (whole-file), so MXS-02's body — which legitimately demonstrates `x-mx-mount-type` inside YAML fences to explain extension syntax — is preserved intact. New LEARNINGS entry captures the meta-principle: any document whose job is to DEFINE a namespace should be excluded from tooling that CONSUMES that namespace.
+
+---
+
+## Late-morning by the numbers
+
+| Metric | Value |
+|--------|-------|
+| Commits this session (late-morning arc only) | ~30 across hub + 5 submodules |
+| Files touched by auto-fixer | 364 hub + 283 submodules = 647 |
+| Files touched by delete passes | 232 hub + 152 submodules = 384 |
+| Field-migration edits (renames + deletes) | ~1,900 total |
+| Scanner bugs fixed | 2 (placeholder-as-replacement, list-item indent) |
+| Tools updated with skip-list | 3 (`fix-mx-compliance.js`, `delete-deprecated-fields.js`, `delete-deprecated-blocks.py`) |
+| New script added | `scripts/delete-deprecated-blocks.py` (YAML-structural deletion) |
+| New standard field added | `url` |
+| Deprecated-warnings reduction | 1691 → 0 (100%) |
+| MXS-01 Level 1 compliant files | 2052 → 2054 (100%) |
+
+## Late-morning insight
+
+Two bugs of the same shape in one morning: both the canon-migration tools and the audit collectors had examples where two code paths should have agreed on one artefact and didn't. The earlier morning's lesson was "if two functions handle the same artefact, they must share a source." This arc showed that the inverse also holds: if a tool operates on *every* document in the repo, it needs a way to say "but not these ones" — and that exclusion must be a hard guard in the tool, not a convention in prose. The LEARNINGS file picked up both rules today.
+
+## What changed in the tool layer
+
+Three migration tools now carry a path skip-list that future sessions cannot silently dismiss:
+
+1. `scripts/fix-mx-compliance.js` — auto-renamer
+2. `scripts/delete-deprecated-fields.js` — line-based deleter
+3. `scripts/delete-deprecated-blocks.py` — YAML-structural deleter
+
+All three share the same regex set for public-standards paths. If a fourth migration tool is added later, it picks up the same list by copy-paste from any of the three.
 
 ---
 
@@ -122,3 +187,32 @@ The broader principle — already in the memory as "mechanical enforcement beats
 | mx-crm | 51bc64f | Add mx.allabout.network audit: report + verification/fierce-critic/llm-judgment sidecars |
 | mx-outputs | 8566a6f | Add mx.allabout.network audit PDF (2026-04-17) |
 | mx-outputs | d0d08fe | Blog: update field counts to post-cut state (62 standard / 2 carriers / 206 vendor) |
+
+### Late-morning arc — Canon-migration sweep
+
+| Hash | Repo | Description |
+|------|------|-------------|
+| 243ad5e2 | hub | Auto-fix: migrate 615 deprecated field names across hub to x-mx-* prefix |
+| 7f90d5b3 | hub | Standard: add 'url' field to close the consolidation gap |
+| f8d4e09d | hub | Delete deprecated fields across hub + bump 4 submodule pointers |
+| df1a0c42 | hub | Scanner: fix list-item indentation handling + delete residual blocks |
+| 8ca968d6 | hub | Fix 3 pre-existing compliance residuals; bump 3 submodule pointers |
+| d1f3e624 | hub | Bump mx-shared-gathering: remove x-mx-category from MXS-01/02/03 frontmatter |
+| 044c6d96 | hub | Tooling: skip public standards paths; LEARNINGS entry on standards/namespace recursion |
+| d03e7e3f | hub | Bump mx-outputs: generate-index.sh emits created/modified for MXS-01 L1 |
+| 6cec70a  | mx-collaboration | Auto-fix: migrate 12 deprecated field names to x-mx-* vendor prefix |
+| 3cb4db9  | mx-audit | Auto-fix: migrate deprecated field names to x-mx-* vendor prefix |
+| 67685ee  | mx-audit | Delete deprecated fields (cuts + sibling collisions) per 2026-04-17 canon |
+| dbed47cd | allaboutv2 | Auto-fix: migrate deprecated field names to x-mx-* vendor prefix |
+| b0fc48ef | allaboutv2 | Delete deprecated fields (cuts + sibling collisions) per 2026-04-17 canon |
+| cb37329b | allaboutv2 | Delete residual deprecated blocks (now safe after scanner fix) |
+| bc7e9ad  | mx-crm | Auto-fix: migrate deprecated field names to x-mx-* vendor prefix |
+| 6b9bc3b  | mx-crm | Delete deprecated fields (cuts + sibling collisions) per 2026-04-17 canon |
+| 97d8d40  | mx-crm | Remove duplicate audit-tool kebab key from 2026-04-17 report |
+| f95bda5  | mx-outputs | generate-index.sh: emit created + modified frontmatter for MXS-01 Level 1 |
+| b4be3c6  | mx-outputs | Auto-fix: migrate deprecated field names to x-mx-* vendor prefix |
+| 2fe8fdd  | mx-outputs | Delete deprecated fields (cuts + sibling collisions) per 2026-04-17 canon |
+| b7ee479  | mx-outputs | Delete residual deprecated blocks (now safe after scanner fix) |
+| 2adebee  | mx-outputs | Regenerate README after 2026-04-17 generator fix + content changes |
+| 7e93d9a  | mx-shared-gathering | Rename category to x-mx-category in MXS drafts' own frontmatter |
+| 2e8e36c  | mx-shared-gathering | Remove x-mx-category from MXS-01/02/03 frontmatter — no extensions in public standards |
