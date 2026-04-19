@@ -40,35 +40,45 @@
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "A Standard That Knows What It Isn't",
-    "description": "A preview of Chapter 21 of MX: The Protocols — why the MX standard stays small, defers to DCAT, Schema.org, EXIF, and IETF, and why that restraint is the architecture, not a limitation.",
-    "datePublished": "2026-04-19",
-    "dateModified": "2026-04-19",
-    "author": {
-      "@type": "Person",
-      "name": "Tom Cranstoun",
-      "email": "tom@digitaldomaintechnologies.com",
-      "url": "https://www.linkedin.com/in/tom-cranstoun/",
-      "image": "https://allabout.network/media_126e99d56f06caf788bee715aff92281d2e31a206.png"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "CogNovaMX Ltd",
-      "url": "https://allabout.network"
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html"
-    },
-    "articleSection": "Machine Experience",
-    "keywords": ["machine-experience", "ai-agents"],
-    "wordCount": 1944,
-    "inLanguage": "en-GB"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "A Standard That Knows What It Isn't",
+      "description": "A preview of Chapter 21 of MX: The Protocols — why the MX standard stays small, defers to DCAT, Schema.org, EXIF, and IETF, and why that restraint is the architecture, not a limitation.",
+      "datePublished": "2026-04-19",
+      "dateModified": "2026-04-19",
+      "author": {
+        "@type": "Person",
+        "name": "Tom Cranstoun",
+        "email": "tom@digitaldomaintechnologies.com",
+        "url": "https://www.linkedin.com/in/tom-cranstoun/",
+        "image": "https://allabout.network/media_126e99d56f06caf788bee715aff92281d2e31a206.png"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "CogNovaMX Ltd",
+        "url": "https://allabout.network"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 1944,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    }
+  ]
+}
+</script>
 
   <link rel="stylesheet" href="a-standard-that-knows-what-it-isnt.css">
 </head>
@@ -203,7 +213,7 @@
 <h2 id="where-to-look-it-up" tabindex="-1">Where to look it up</h2>
 <p>Four public artefacts carry the material. Each has a distinct job and a different shape, and together they let a reader pick up the standard in whichever form suits them.</p>
 <p><strong>The source drafts</strong> — <a href="https://github.com/ddttom/mx-shared-gathering">github.com/ddttom/mx-shared-gathering</a>. This is the reading copy: the four <code>.cog.md</code> files that carry MXS-01…04 in their authored form, with YAML frontmatter, prose, and the cross-references Appendix U points at. Open the repo in a browser and you can read the four proposed standards end-to-end. If you want to cite a specific clause, link here. If you want to file an editorial issue against the source text, this is the tracker.</p>
-<p><strong>The machine-readable canon</strong> — <code>mx.allabout.network/canon/</code>. Three YAML files that are the actual source of truth behind the four drafts. <code>fields-data.yaml</code> carries the core vocabulary (MXS-01 + MXS-02 + MXS-03). <code>fields-data-carriers.yaml</code> carries the code-carrier vocabulary (MXS-04). <code>cognovamx-fields.yaml</code> is the CogNovaMX vendor extension example pack — not part of the standard, but useful as a reference for other vendors authoring their own <code>x-vendor-</code> files. Tooling that validates MX documents should fetch from here. When the YAML and the prose disagree, the YAML is authoritative by definition — a drift checker verifies alignment.</p>
+<p><strong>The machine-readable canon</strong> — <code>/canon/</code>. Three YAML files that are the actual source of truth behind the four drafts. <code>fields-data.yaml</code> carries the core vocabulary (MXS-01 + MXS-02 + MXS-03). <code>fields-data-carriers.yaml</code> carries the code-carrier vocabulary (MXS-04). <code>cognovamx-fields.yaml</code> is the CogNovaMX vendor extension example pack — not part of the standard, but useful as a reference for other vendors authoring their own <code>x-vendor-</code> files. Tooling that validates MX documents should fetch from here. When the YAML and the prose disagree, the YAML is authoritative by definition — a drift checker verifies alignment.</p>
 <p><strong>The Stream RFC drafts</strong> — one repo per standard under <a href="https://github.com/TG-Community">TG-Community</a>: <a href="https://github.com/TG-Community/draft-cranstoun-mx-core-metadata">draft-cranstoun-mx-core-metadata</a>, <a href="https://github.com/TG-Community/draft-cranstoun-mx-extensions">draft-cranstoun-mx-extensions</a>, <a href="https://github.com/TG-Community/draft-cranstoun-mx-provenance">draft-cranstoun-mx-provenance</a>, <a href="https://github.com/TG-Community/draft-cranstoun-mx-carrier-formats">draft-cranstoun-mx-carrier-formats</a>. Same content as the source drafts, converted into IETF RFC format for Stream’s review process — the frontmatter keys (<code>title</code>, <code>abbrev</code>, <code>docname</code>, <code>normative</code>, <code>informative</code>) and body delimiters (<code>--- abstract</code>, <code>--- middle</code>, <code>--- back</code>) that Stream expects. These are the versions the community reviews and ratifies through <a href="https://stream.tg.community">stream.tg.community</a>. They carry the formal RFC 2119 language (“MUST”, “SHOULD”, “MAY”) the conformance levels depend on.</p>
 <p><strong>The book</strong> — Appendix M of <em>MX: The Protocols</em> is the complete prose reference for every field the drafts cite: definitions, types, validation values, profile membership, usage examples, cross-references. Sections 22 through 27 cover the field dictionary, folder metadata, the book-manuscript template, the carrier format map, the HTML carrier writing guide, and the canon-layout explanation with the external-standards deferral table. Appendix U is the short architecture companion to Chapter 21 — the same “defer to existing standards” argument this blog previews, in a form the book can link to from any chapter that needs it.</p>
 <p>Four artefacts, one set of drafts. Source for reading, YAML for tooling, RFC for formal review, book for reference prose. Pick whichever entry point fits what you are trying to do — they all point at the same standard.</p>
@@ -213,7 +223,7 @@
 <p>If you are building content for machine consumption, the architecture in Chapter 21 is what you are building against. You can start today. The drafts are stable. The deferrals are real. The extensibility mechanism is published. The standard stays small because the discipline is tight.</p>
 <p>And because The Gathering’s process is open and requires no membership, if you have a view on how MX should evolve, Stream is how you contribute. The cog format you use in a year will reflect whoever engages between now and then — including, potentially, you.</p>
 <hr>
-<p><em>MX: The Protocols publishes on 1 July 2026. Chapter 21 is “The Fields and the Standards.” Source drafts: <a href="https://github.com/ddttom/mx-shared-gathering">github.com/ddttom/mx-shared-gathering</a>. Machine-readable canon: <code>mx.allabout.network/canon/</code>. Stream RFC drafts: <a href="https://github.com/TG-Community">github.com/TG-Community</a> (the four <code>draft-cranstoun-mx-*</code> repos). Community review: <a href="https://tg.community">tg.community</a> · <a href="https://stream.tg.community">stream.tg.community</a>. Book reference: Appendix M and Appendix U of <em>The Protocols</em>.</em></p>
+<p><em>MX: The Protocols publishes on 1 July 2026. Chapter 21 is “The Fields and the Standards.” Source drafts: <a href="https://github.com/ddttom/mx-shared-gathering">github.com/ddttom/mx-shared-gathering</a>. Machine-readable canon: <code>/canon/</code>. Stream RFC drafts: <a href="https://github.com/TG-Community">github.com/TG-Community</a> (the four <code>draft-cranstoun-mx-*</code> repos). Community review: <a href="https://tg.community">tg.community</a> · <a href="https://stream.tg.community">stream.tg.community</a>. Book reference: Appendix M and Appendix U of <em>The Protocols</em>.</em></p>
 
 
       <!-- Author Bio Link (added if author is Tom Cranstoun) -->
