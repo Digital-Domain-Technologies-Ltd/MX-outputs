@@ -1,9 +1,10 @@
 ---
 title: "A Standard That Knows What It Isn't"
-description: "A preview of Chapter 20 of MX: The Protocols — why the MX standard stays small, defers to DCAT, Schema.org, EXIF, and IETF, and why that restraint is the architecture, not a limitation."
+description: "A preview of Chapter 21 of MX: The Protocols — why the MX standard stays small, defers to DCAT, Schema.org, EXIF, and IETF, and why that restraint is the architecture, not a limitation."
 author: "Tom Cranstoun"
 created: "2026-04-16"
-modified: "2026-04-16"
+modified: "2026-04-19"
+content-state: "published"
 
 mx:
   x-mx-contentState: "published"
@@ -11,7 +12,7 @@ mx:
   blogUrl: "https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html"
   publicationDate: "2026-04-16"
   tags: [mx, standards, the-gathering, architecture, preview, protocols]
-  runbook: "Preview blog post for chapter 20 of MX: The Protocols (publishes 1 July 2026). Explains the architecture of the proposed MX standards family and the 'defer to existing standards' principle that keeps the core small."
+  runbook: "Preview blog post for chapter 21 of MX: The Protocols (publishes 1 July 2026). Explains the architecture of the proposed MX standards family and the 'defer to existing standards' principle that keeps the core small."
   generate:
     script: "scripts/generate-content-html.cjs"
     format: "html"
@@ -22,7 +23,7 @@ mx:
 
 Most metadata standards tell you what they cover. They publish a vocabulary, define every field, claim a scope, and ask implementers to adopt the whole surface. MX is different. MX is an open standard for Machine Experience, and the thing it is most careful about is what it does not define.
 
-This post previews Chapter 20 of *MX: The Protocols*, which publishes on 1 July 2026. The chapter names the field dictionary and the standards that govern it. This preview gives you the architecture in five minutes: why the standard is small, what it defers to, how it extends, and where the governance lives.
+This post previews Chapter 21 of *MX: The Protocols*, which publishes on 1 July 2026. The chapter names the field dictionary and the standards that govern it. This preview gives you the architecture in five minutes: why the standard is small, what it defers to, how it extends, and where the governance lives.
 
 ## The problem the architecture solves
 
@@ -100,20 +101,20 @@ Four public artefacts carry the material. Each has a distinct job and a differen
 
 **The Stream RFC drafts** — one repo per standard under [TG-Community](https://github.com/TG-Community): [draft-cranstoun-mx-core-metadata](https://github.com/TG-Community/draft-cranstoun-mx-core-metadata), [draft-cranstoun-mx-extensions](https://github.com/TG-Community/draft-cranstoun-mx-extensions), [draft-cranstoun-mx-provenance](https://github.com/TG-Community/draft-cranstoun-mx-provenance), [draft-cranstoun-mx-carrier-formats](https://github.com/TG-Community/draft-cranstoun-mx-carrier-formats). Same content as the source drafts, converted into IETF RFC format for Stream's review process — the frontmatter keys (`title`, `abbrev`, `docname`, `normative`, `informative`) and body delimiters (`--- abstract`, `--- middle`, `--- back`) that Stream expects. These are the versions the community reviews and ratifies through [stream.tg.community](https://stream.tg.community). They carry the formal RFC 2119 language ("MUST", "SHOULD", "MAY") the conformance levels depend on.
 
-**The book** — Appendix M of *MX: The Protocols* is the complete prose reference for every field the drafts cite: definitions, types, validation values, profile membership, usage examples, cross-references. Sections 22 through 27 cover the field dictionary, folder metadata, the book-manuscript template, the carrier format map, the HTML carrier writing guide, and the canon-layout explanation with the external-standards deferral table. Appendix U is the short architecture companion to Chapter 20 — the same "defer to existing standards" argument this blog previews, in a form the book can link to from any chapter that needs it.
+**The book** — Appendix M of *MX: The Protocols* is the complete prose reference for every field the drafts cite: definitions, types, validation values, profile membership, usage examples, cross-references. Sections 22 through 27 cover the field dictionary, folder metadata, the book-manuscript template, the carrier format map, the HTML carrier writing guide, and the canon-layout explanation with the external-standards deferral table. Appendix U is the short architecture companion to Chapter 21 — the same "defer to existing standards" argument this blog previews, in a form the book can link to from any chapter that needs it.
 
 Four artefacts, one set of drafts. Source for reading, YAML for tooling, RFC for formal review, book for reference prose. Pick whichever entry point fits what you are trying to do — they all point at the same standard.
 
-## Chapter 20 goes further
+## Chapter 21 goes further
 
-This preview hits the architecture and the rationale. Chapter 20 of *MX: The Protocols* goes further: it traces the full three-pass reading model a machine uses to comprehend a cog, walks through the economics of shared vocabulary, covers author-facing guidance (what to include at each conformance level), and explains how participation through The Gathering's Stream process actually works. The chapter reads as reference material — the authoritative place to send a reader who has understood the cog format from Chapter 19 and now needs to know what governs it.
+This preview hits the architecture and the rationale. Chapter 21 of *MX: The Protocols* goes further: it traces the full three-pass reading model a machine uses to comprehend a cog, walks through the economics of shared vocabulary, covers author-facing guidance (what to include at each conformance level), and explains how participation through The Gathering's Stream process actually works. The chapter reads as reference material — the authoritative place to send a reader who has understood the cog format from Chapter 20 and now needs to know what governs it.
 
-The book publishes on **1 July 2026**. The standards described in Chapter 20 will, by then, have been through several weeks of Stream review. Where a field has changed, the chapter will track it. Where a standard has been ratified, it will say so.
+The book publishes on **1 July 2026**. The standards described in Chapter 21 will, by then, have been through several weeks of Stream review. Where a field has changed, the chapter will track it. Where a standard has been ratified, it will say so.
 
-If you are building content for machine consumption, the architecture in Chapter 20 is what you are building against. You can start today. The drafts are stable. The deferrals are real. The extensibility mechanism is published. The standard stays small because the discipline is tight.
+If you are building content for machine consumption, the architecture in Chapter 21 is what you are building against. You can start today. The drafts are stable. The deferrals are real. The extensibility mechanism is published. The standard stays small because the discipline is tight.
 
 And because The Gathering's process is open and requires no membership, if you have a view on how MX should evolve, Stream is how you contribute. The cog format you use in a year will reflect whoever engages between now and then — including, potentially, you.
 
 ---
 
-*MX: The Protocols publishes on 1 July 2026. Chapter 20 is "The Fields and the Standards." Source drafts: [github.com/ddttom/mx-shared-gathering](https://github.com/ddttom/mx-shared-gathering). Machine-readable canon: [mx.allabout.network/canon/](https://mx.allabout.network/canon/). Stream RFC drafts: [github.com/TG-Community](https://github.com/TG-Community) (the four `draft-cranstoun-mx-*` repos). Community review: [tg.community](https://tg.community) · [stream.tg.community](https://stream.tg.community). Book reference: Appendix M and Appendix U of *The Protocols*.*
+*MX: The Protocols publishes on 1 July 2026. Chapter 21 is "The Fields and the Standards." Source drafts: [github.com/ddttom/mx-shared-gathering](https://github.com/ddttom/mx-shared-gathering). Machine-readable canon: [mx.allabout.network/canon/](https://mx.allabout.network/canon/). Stream RFC drafts: [github.com/TG-Community](https://github.com/TG-Community) (the four `draft-cranstoun-mx-*` repos). Community review: [tg.community](https://tg.community) · [stream.tg.community](https://stream.tg.community). Book reference: Appendix M and Appendix U of *The Protocols*.*
