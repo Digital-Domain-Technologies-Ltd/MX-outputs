@@ -4,7 +4,6 @@ description: "A preview of Chapter 21 of MX: The Protocols — why the MX standa
 author: "Tom Cranstoun"
 created: "2026-04-16"
 modified: "2026-04-19"
-content-state: "published"
 
 mx:
   x-mx-contentState: "published"

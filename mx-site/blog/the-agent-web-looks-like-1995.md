@@ -4,7 +4,6 @@ description: "Four agent protocols, four vendors, and the standards-community ga
 author: "The Gathering"
 created: "2026-04-19"
 modified: "2026-04-19"
-content-state: "draft"
 
 mx:
   x-mx-contentState: "draft"
