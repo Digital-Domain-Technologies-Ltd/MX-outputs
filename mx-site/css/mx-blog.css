@@ -1,28 +1,163 @@
 /**
- * MX Blog Stylesheet — mx.allabout.network
- * @description Dark-themed blog styles adapted from shared-mx.css.
- *              Preserves the author card, collapsible TOC, and article
- *              layout patterns, restyled to match the bookshop dark theme.
- * @version 1.0
- * @author Tom Cranstoun
- * @mx:status active
- * @mx:contentType stylesheet
+ * MX Blog Stylesheet — canonical, self-contained
+ *
+ * Single shared stylesheet for all posts in mx-outputs/mx-site/blog/.
+ * Light by default; dark on prefers-color-scheme: dark; high-contrast,
+ * reduced-motion, print and responsive variants included. Self-contained:
+ * does not depend on mx-unified.css being loaded (older posts may still
+ * load it for site-wide chrome, but this file alone is sufficient for
+ * blog content rendering).
+ *
+ * Two body wrappers are supported so both authoring patterns work:
+ *   .blog-content  — used by html-writer-generated posts (max-width 800px)
+ *   .blog-page     — used by older site-template posts (max-width 960px)
  */
 
-/* ══════════════════════════════════════════════
-   Blog-specific layout
-   ══════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════════
+   Theme variables
+   ════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Colours — light mode default */
+  --primary-bg: #ffffff;
+  --primary-text: #1a1a1a;
+  --secondary-text: #4a4a4a;
+  --heading-color: #2d3748;
+  --accent-color: #0066cc;
+  --accent-hover: #004499;
+  --border-color: #e1e4e8;
+  --code-bg: #f6f8fa;
+  --code-border: #e1e4e8;
+  --code-text: #1a1a1a;
+  --table-header-bg: #f7fafc;
+  --intro-bg: #f8f9fa;
+  --skip-link-bg: #000000;
+  --skip-link-text: #ffffff;
+  --back-to-top-text: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --shadow-color-strong: rgba(0, 0, 0, 0.2);
+
+  /* Typography */
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  /* Spacing */
+  --max-width: 800px;
+  --max-width-wide: 960px;
+  --spacing-unit: 1rem;
+
+  /* Type scale */
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 1.875rem;
+  --font-size-h3: 1.5rem;
+  --font-size-h4: 1.25rem;
+  --font-size-h5: 1.125rem;
+  --font-size-h6: 1rem;
+}
+
+/* Dark mode — kicks in when the OS asks for it */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-bg: #1a1a1a;
+    --primary-text: #e0e0e0;
+    --secondary-text: #b0b0b0;
+    --heading-color: #f5f5f5;
+    --accent-color: #d4af37;       /* MX gold */
+    --accent-hover: #e6c466;
+    --border-color: #404040;
+    --code-bg: #2a2a2a;
+    --code-border: #404040;
+    --code-text: #e0e0e0;
+    --table-header-bg: #2a2a2a;
+    --intro-bg: #2a2a2a;
+    --skip-link-bg: #ffffff;
+    --skip-link-text: #000000;
+    --back-to-top-text: #1a1a1a;   /* dark text on gold */
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --shadow-color-strong: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* High contrast — overrides both light and dark when the OS asks for it */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-text: #000000;
+    --secondary-text: #000000;
+    --heading-color: #000000;
+    --accent-color: #0000ff;
+    --accent-hover: #000080;
+    --border-color: #000000;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Reset and base
+   ════════════════════════════════════════════════════════════════ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--primary-text);
+  background-color: var(--primary-bg);
+  margin: 0;
+  /* No max-width on body itself — content wrappers (.blog-content / .blog-page) handle width. */
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Content wrappers
+   ════════════════════════════════════════════════════════════════ */
+
+.blog-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
 
 .blog-page {
-  max-width: 960px;
+  max-width: var(--max-width-wide);
   margin: 0 auto;
   padding: 6rem 2rem 2rem;
 }
 
-/* ── Blog Introduction / Author Card ── */
+/* ════════════════════════════════════════════════════════════════
+   Skip link (WCAG)
+   ════════════════════════════════════════════════════════════════ */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--skip-link-bg);
+  color: var(--skip-link-text);
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--skip-link-text);
+  outline-offset: 2px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Blog introduction / author card
+   ════════════════════════════════════════════════════════════════ */
+
 .blog-introduction {
-  background-color: var(--mx-surface);
-  border-left: 4px solid var(--mx-gold);
+  background-color: var(--intro-bg);
+  border-left: 4px solid var(--accent-color);
   padding: 1.5rem;
   margin-bottom: 2rem;
   border-radius: 4px;
@@ -44,7 +179,7 @@
 }
 
 .introduction-content a:focus {
-  outline: 2px solid var(--mx-gold);
+  outline: 2px solid var(--accent-color);
   outline-offset: 2px;
   border-radius: 50%;
 }
@@ -62,35 +197,38 @@
   font-size: 1.1rem;
   line-height: 1.5;
   margin-bottom: 0.5rem;
-  color: var(--mx-white);
+  color: var(--heading-color);
 }
 
 .author-name {
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--mx-text-muted);
+  color: var(--secondary-text);
 }
 
 .author-contact {
   font-size: 0.9rem;
-  color: var(--mx-text-muted);
+  color: var(--secondary-text);
   margin-top: 0.5rem;
 }
 
 .author-contact a {
-  color: var(--mx-blue-light);
+  color: var(--accent-color);
   text-decoration: none;
 }
 
 .author-contact a:hover {
   text-decoration: underline;
-  color: var(--mx-gold);
+  color: var(--accent-hover);
 }
 
-/* ── Table of Contents (Collapsible Index) ── */
+/* ════════════════════════════════════════════════════════════════
+   Table of Contents (collapsible index)
+   ════════════════════════════════════════════════════════════════ */
+
 .table-of-contents {
-  background-color: var(--mx-surface);
-  border: 1px solid var(--mx-border);
+  background-color: var(--intro-bg);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 1rem;
   margin-bottom: 2rem;
@@ -102,26 +240,26 @@
   cursor: pointer;
   padding: 0.5rem;
   list-style-position: outside;
-  color: var(--mx-gold);
+  color: var(--accent-color);
   -webkit-user-select: none;
   user-select: none;
 }
 
 .table-of-contents summary:focus {
-  outline: 2px solid var(--mx-gold);
+  outline: 2px solid var(--accent-color);
   outline-offset: 2px;
 }
 
 .table-of-contents summary:hover {
-  color: var(--mx-blue-light);
+  color: var(--accent-hover);
 }
 
 .table-of-contents summary::marker {
-  content: '▶ ';
+  content: '\25B6  ';
 }
 
 .table-of-contents[open] summary::marker {
-  content: '▼ ';
+  content: '\25BC  ';
 }
 
 .table-of-contents nav {
@@ -139,31 +277,35 @@
 }
 
 .table-of-contents a {
-  color: var(--mx-blue-light);
+  color: var(--accent-color);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .table-of-contents a:hover {
-  color: var(--mx-gold);
+  color: var(--accent-hover);
   text-decoration: underline;
 }
 
 .table-of-contents a:focus {
-  outline: 2px solid var(--mx-gold);
+  outline: 2px solid var(--accent-color);
   outline-offset: 2px;
+  text-decoration: underline;
 }
 
-/* ── Article Header ── */
+/* ════════════════════════════════════════════════════════════════
+   Article header and meta
+   ════════════════════════════════════════════════════════════════ */
+
 article header h1 {
-  font-size: 2.5rem;
+  font-size: var(--font-size-h1);
   line-height: 1.2;
   margin-bottom: 1rem;
-  color: var(--mx-white);
+  color: var(--heading-color);
 }
 
 .article-meta {
-  color: var(--mx-text-muted);
+  color: var(--secondary-text);
   font-size: 0.95rem;
   margin-bottom: 2rem;
   display: flex;
@@ -171,44 +313,47 @@ article header h1 {
   gap: 0.5rem;
 }
 
-/* ── Article Content Typography ── */
+/* ════════════════════════════════════════════════════════════════
+   Article body typography
+   ════════════════════════════════════════════════════════════════ */
+
 article h2 {
-  font-size: 1.875rem;
+  font-size: var(--font-size-h2);
   margin-top: 3rem;
   margin-bottom: 1rem;
-  color: var(--mx-white);
-  border-bottom: 2px solid var(--mx-border);
+  color: var(--heading-color);
+  border-bottom: 2px solid var(--border-color);
   padding-bottom: 0.5rem;
 }
 
 article h3 {
-  font-size: 1.5rem;
+  font-size: var(--font-size-h3);
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: var(--mx-white);
+  color: var(--heading-color);
 }
 
 article h4 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-h4);
   margin-top: 1.75rem;
   margin-bottom: 0.875rem;
-  color: var(--mx-white);
+  color: var(--heading-color);
   font-weight: 600;
 }
 
 article h5 {
-  font-size: 1.125rem;
+  font-size: var(--font-size-h5);
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
-  color: var(--mx-white);
+  color: var(--heading-color);
   font-weight: 600;
 }
 
 article h6 {
-  font-size: 1rem;
+  font-size: var(--font-size-h6);
   margin-top: 1.25rem;
   margin-bottom: 0.625rem;
-  color: var(--mx-white);
+  color: var(--heading-color);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -216,7 +361,7 @@ article h6 {
 
 article p {
   margin-bottom: 1.5rem;
-  color: var(--mx-text);
+  color: var(--primary-text);
 }
 
 article ul,
@@ -227,34 +372,62 @@ article ol {
 
 article li {
   margin-bottom: 0.5rem;
-  color: var(--mx-text);
+  color: var(--primary-text);
 }
 
-/* ── Code Blocks ── */
+/* ════════════════════════════════════════════════════════════════
+   Code
+   ════════════════════════════════════════════════════════════════ */
+
 pre {
-  background-color: var(--mx-blue-dark);
-  border: 1px solid var(--mx-border);
+  background-color: var(--code-bg);
+  border: 1px solid var(--code-border);
   border-radius: 4px;
   padding: 1rem;
   overflow-x: auto;
   margin-bottom: 1.5rem;
+  color: var(--code-text);
 }
 
 code {
-  font-family: var(--mx-font-mono);
+  font-family: var(--font-mono);
   font-size: 0.9em;
-  color: var(--mx-blue-light);
+  color: var(--code-text);
 }
 
 p code,
-li code {
-  background-color: var(--mx-blue-dark);
-  border: 1px solid var(--mx-border);
+li code,
+td code {
+  background-color: var(--code-bg);
+  border: 1px solid var(--code-border);
   border-radius: 3px;
   padding: 0.2em 0.4em;
 }
 
-/* ── Tables ── */
+/* ════════════════════════════════════════════════════════════════
+   Links
+   ════════════════════════════════════════════════════════════════ */
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--accent-hover);
+}
+
+a:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  text-decoration: underline;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Tables
+   ════════════════════════════════════════════════════════════════ */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -265,47 +438,73 @@ caption {
   font-weight: 600;
   text-align: left;
   margin-bottom: 0.5rem;
-  color: var(--mx-white);
+  color: var(--heading-color);
 }
 
 th,
 td {
-  border: 1px solid var(--mx-border);
+  border: 1px solid var(--border-color);
   padding: 0.75rem;
   text-align: left;
+  vertical-align: top;
 }
 
 th {
-  background-color: var(--mx-blue-dark);
+  background-color: var(--table-header-bg);
   font-weight: 600;
-  color: var(--mx-white);
+  color: var(--heading-color);
 }
 
-/* ── Images and Figures ── */
+/* Allow horizontal scroll for wide tables on narrow screens */
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.table-wrapper table {
+  margin-bottom: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Images and figures
+   ════════════════════════════════════════════════════════════════ */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 figure {
   margin: 2rem 0;
 }
 
 figcaption {
   font-size: 0.9rem;
-  color: var(--mx-text-muted);
+  color: var(--secondary-text);
   text-align: center;
   margin-top: 0.5rem;
   font-style: italic;
 }
 
-/* ── Horizontal Rules ── */
+/* ════════════════════════════════════════════════════════════════
+   Horizontal rules
+   ════════════════════════════════════════════════════════════════ */
+
 hr {
   border: none;
-  border-top: 1px solid var(--mx-border);
+  border-top: 1px solid var(--border-color);
   margin: 3rem 0;
 }
 
-/* ── Footnotes ── */
+/* ════════════════════════════════════════════════════════════════
+   Footnotes (basic + richer dl/dt/dd from older posts)
+   ════════════════════════════════════════════════════════════════ */
+
 .footnotes {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 2px solid var(--mx-border);
+  border-top: 2px solid var(--border-color);
   font-size: 0.95rem;
 }
 
@@ -345,9 +544,9 @@ hr {
 
 .footnotes dt {
   font-weight: 600;
-  color: var(--mx-gold);
+  color: var(--accent-color);
   margin-top: 1.25rem;
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.9rem;
 }
 
@@ -375,86 +574,109 @@ hr {
 sup a {
   text-decoration: none;
   font-weight: 600;
-  color: var(--mx-gold);
+  color: var(--accent-color);
 }
 
 sup a:hover {
   text-decoration: underline;
 }
 
-/* ── Author Bio Link ── */
-.author-bio-link {
+/* ════════════════════════════════════════════════════════════════
+   Author bio link / closing bio
+   ════════════════════════════════════════════════════════════════ */
+
+.author-bio-link,
+.author-bio {
   margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 2px solid var(--mx-border);
+  border-top: 2px solid var(--border-color);
+  font-size: 0.95rem;
+  color: var(--secondary-text);
+}
+
+.author-bio-link hr {
+  display: none;
 }
 
 .author-bio-link p {
   font-size: 0.95rem;
-  color: var(--mx-text-muted);
+  color: var(--secondary-text);
 }
 
-.author-bio-link a {
-  color: var(--mx-blue-light);
+.author-bio-link a,
+.author-bio a {
+  color: var(--accent-color);
+  text-decoration: none;
   font-weight: 600;
 }
 
-.author-bio-link a:hover {
+.author-bio-link a:hover,
+.author-bio a:hover {
   text-decoration: underline;
-  color: var(--mx-gold);
+  color: var(--accent-hover);
 }
 
-/* ── Back to Top Button ── */
+/* ════════════════════════════════════════════════════════════════
+   Floating Back-to-Top button
+   ════════════════════════════════════════════════════════════════ */
+
 .back-to-top {
   position: fixed;
   bottom: 2rem;
   left: 2rem;
-  background-color: var(--mx-gold);
-  color: var(--mx-blue-deep);
+  background-color: var(--accent-color);
+  color: var(--back-to-top-text);
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
   text-decoration: none;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px var(--shadow-color);
   transition: background-color 0.2s, transform 0.2s;
   z-index: 1000;
 }
 
 .back-to-top:hover {
-  background-color: #c49a3a;
+  background-color: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px var(--shadow-color-strong);
   text-decoration: none;
-  color: var(--mx-blue-deep);
+  color: var(--back-to-top-text);
 }
 
 .back-to-top:focus {
-  outline: 2px solid var(--mx-white);
+  outline: 2px solid var(--back-to-top-text);
   outline-offset: 2px;
 }
 
-/* ── Blog Footer ── */
+/* ════════════════════════════════════════════════════════════════
+   Footer
+   ════════════════════════════════════════════════════════════════ */
+
+footer,
 .blog-page footer {
   margin-top: 4rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--mx-border);
+  border-top: 1px solid var(--border-color);
   text-align: center;
-  color: var(--mx-text-muted);
+  color: var(--secondary-text);
   font-size: 0.9rem;
 }
 
-/* ── Cross-links Navigation ── */
+/* ════════════════════════════════════════════════════════════════
+   Cross-links navigation (used by older site posts)
+   ════════════════════════════════════════════════════════════════ */
+
 .cross-links {
   margin-top: 3rem;
   padding: 2rem;
-  background: var(--mx-surface);
+  background: var(--intro-bg);
   border-radius: 8px;
-  border: 1px solid var(--mx-border);
+  border: 1px solid var(--border-color);
 }
 
 .cross-links h2 {
   font-size: 1.25rem;
-  color: var(--mx-white);
+  color: var(--heading-color);
   margin-bottom: 1rem;
   border-bottom: none;
 }
@@ -468,20 +690,76 @@ sup a:hover {
 .cross-links-grid a {
   display: block;
   padding: 0.75rem 1rem;
-  background: var(--mx-blue-dark);
-  border: 1px solid var(--mx-border);
+  background: var(--code-bg);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
-  color: var(--mx-blue-light);
+  color: var(--accent-color);
   transition: background 0.2s, color 0.2s;
 }
 
 .cross-links-grid a:hover {
-  background: var(--mx-blue-mid);
-  color: var(--mx-gold);
+  background: var(--table-header-bg);
+  color: var(--accent-hover);
 }
 
-/* ── Responsive ── */
+/* ════════════════════════════════════════════════════════════════
+   Reduced motion (WCAG 2.3.3)
+   ════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Print
+   ════════════════════════════════════════════════════════════════ */
+
+@media print {
+  .skip-link,
+  .back-to-top,
+  .table-of-contents,
+  .cross-links {
+    display: none;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: var(--secondary-text);
+  }
+
+  .blog-content,
+  .blog-page {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  article h2 {
+    page-break-after: avoid;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--primary-text);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════════════════════════════ */
+
 @media (max-width: 768px) {
+  .blog-content {
+    padding: 1rem;
+  }
+
   .blog-page {
     padding: 5rem 1rem 1rem;
   }
@@ -500,30 +778,17 @@ sup a:hover {
     text-align: center;
   }
 
+  .author-bio-link,
+  .author-bio {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
   .back-to-top {
     bottom: 1rem;
     left: 1rem;
     padding: 0.75rem 1rem;
     min-width: 44px;
     min-height: 44px;
-  }
-}
-
-/* ── Print ── */
-@media print {
-  .skip-link,
-  .back-to-top,
-  .table-of-contents,
-  .cross-links {
-    display: none;
-  }
-
-  .blog-page {
-    max-width: 100%;
-    padding: 0;
-  }
-
-  article h2 {
-    page-break-after: avoid;
   }
 }
