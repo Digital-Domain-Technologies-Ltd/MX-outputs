@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Content-Signal awareness in audit"
-description: "Added contentsignals.org recognition to the audit pipeline as a positive, informational, non-scoring signal."
+title: "Co-Directors Report — Content-Signal awareness + mx-site blog reorg"
+description: "Added contentsignals.org recognition to the audit pipeline as a positive, informational, non-scoring signal, and reorganised mx-site blog into assets/ and profiles/ subfolders."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-21
 modified: 2026-04-21
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -60,9 +60,39 @@ The skill previously told the reporter to describe any non-standard directive as
 
 ---
 
+## What Was Done — Late Evening (mx-site blog reorganisation)
+
+### 5. Manifesto rewrite — remove repo framing, add founding sponsor
+
+`mx-manifesto.html` previously framed MX-Gathering as a GitHub repository — with "pull requests to MX repositories", a step-by-step PR/branch/TODO.txt workflow, and prose describing "This repository contains:…". The community is not a repository; that framing was a leaked implementation detail. The community-and-contribution sections now describe MX-Gathering as a collaborative space and list contribution channels via email. Digital Domain Technologies Ltd is added to the Current Sponsors section as founding sponsor, with a link to digitaldomaintechnologies.com.
+
+### 6. Blog SVG assets separated
+
+14 SVG files lived alongside HTML in `mx-site/blog/`. They now sit in `mx-site/blog/assets/`. Every `<img>`, `<object data=…>`, `og:image`, `twitter:image`, and Schema.org `image.url` reference across the blog HTML was updated to point at the new path. Moves done with `git mv` so history is preserved. As a side effect, four pre-existing broken links in `mx-a-new-role.html` and `machine-experience-adding-metadata.html` (which referenced short names without the article prefix) are now repaired.
+
+### 7. Profile pages moved to blog/profiles/
+
+The four `about.*.html` pages (Tom Cranstoun, Claude Code, Claude Sonnet 4.5, Microsoft Copilot) moved from `mx-site/blog/` to `mx-site/blog/profiles/` via `git mv`. Relative depth fixed inside each moved page (`../css/` → `../../css/`, same for `js/` and `images/`). Canonical, og:url, and twitter:url absolute URLs updated to `/blog/profiles/…`. 50 files across the site carried cross-references to these pages (Schema.org `@id` "#person" pointers from every blog post and service page, plus sitemap.xml entries in both the site root and the blog subfolder) — all rewritten in a batch sed pass and verified clean by grep.
+
+---
+
+## By the Numbers — Full Segment
+
+| Metric | Value |
+|--------|-------|
+| Commits | 2 (mx-audit content-signal + mx-outputs blog reorg) |
+| Files changed (mx-outputs) | 65 |
+| Lines added (mx-outputs) | +387 |
+| Lines removed (mx-outputs) | -402 |
+| SVGs relocated | 14 |
+| Profile pages relocated | 4 |
+| Cross-references rewritten | 50 files |
+
+---
+
 ## Next Steps
 
-- None flagged. Feature is complete and test-gated.
+- None flagged. Both features complete and verified.
 
 ---
 
@@ -71,3 +101,4 @@ The skill previously told the reporter to describe any non-standard directive as
 | Hash | Repo | Description |
 |------|------|-------------|
 | 07aef2b | mx-audit | Recognise Content-Signal (contentsignals.org) in robots.txt as informational signal |
+| 56faf0d | mx-outputs | mx-site: organise blog assets and profile pages (manifesto rewrite, SVG → assets/, about.* → profiles/) |
