@@ -4,7 +4,7 @@ description: "Full NEOM Wellbeing e-commerce audit shipped; audit toolkit upgrad
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-21
 modified: 2026-04-21
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -135,4 +135,11 @@ The most valuable change this session wasn't a feature — it was the politeness
 | `ed99db39` | allaboutv2 | Wrap llms-full.txt as HTML alongside llms.txt |
 | `af9b4aa` | mx-outputs | Blog: rename DITA post, fix page titles, register llms-full.txt |
 | `2562839` | mx-outputs | Add /llms-full.txt — full corpus for AI agents |
-| _pending_ | hub | scripts + hook + skills + manuscript + presentation + pointer bumps |
+| `4105399a` | hub | Adopt llms-full.txt convention across audit + protocols (skills, manuscript, fierce-critic Check I, blog-discovery hook, pointer bumps for allaboutv2 / mx-audit / mx-outputs) |
+| `57c248c`  | mx-outputs | Remove orphan blog md sources (HTML retained) |
+
+---
+
+## Evening Close (v1.2)
+
+The hub bundle that was pending at v1.1 is in: `4105399a` commits the audit-discovery and audit-site skill updates, the chapter-12 `llms-full.txt` subsection, the fierce-critic construction-path-leak check, the blog-discovery-sync hook wiring in `settings.local.json`, and the three submodule pointer bumps (allaboutv2 ed99db39, mx-audit f2a532e, mx-outputs 57c248c). An extra mx-outputs commit (`57c248c`) removed two orphan blog markdown sources whose HTML outputs remain published — housekeeping from the DITA/MX rename earlier in the day. Nothing new in terms of narrative; the morning's work is now fully shipped across hub and submodules.
