@@ -1,17 +1,17 @@
 ---
-title: "Co-Directors Report — Boye Profile, pdf:doc Hardened, Audit Pipeline Deepened, Egress Pre-Flight, Reattach Hardened, Malware Incident, Upgraded-Reginald Launch"
-description: "Built the Boye CMS Experts snapshot; fixed three silent pdf:doc pipeline failures; deepened the mx-audit pipeline with post-consent dialog capture, JSON-LD fact-stability drift detection, and a string of report-polish fixes; added a pre-flight egress probe so audits run behind a VPN/tracker-blocker no longer publish misleading 'site has 62 errors' findings; hardened the submodule reattach script to distinguish safe-discard from true orphan and to reconcile stale local clones; cleaned up 22 superseded outreach and demo artefacts left over from prior sessions. Later in the evening: detected and cleaned a persistent Node.js backdoor that had been resident for six weeks; created the Upgraded-Reginald private repo from the April bundle and mounted it read-only into MX-Hub with a new enforcement hook."
+title: "Co-Directors Report — Boye Profile, pdf:doc Hardened, Audit Pipeline Deepened, Egress Pre-Flight, Reattach Hardened, Malware Incident, Upgraded-Reginald Launch, DITA Podcast Deck Reframed"
+description: "Built the Boye CMS Experts snapshot; fixed three silent pdf:doc pipeline failures; deepened the mx-audit pipeline with post-consent dialog capture, JSON-LD fact-stability drift detection, and a string of report-polish fixes; added a pre-flight egress probe so audits run behind a VPN/tracker-blocker no longer publish misleading 'site has 62 errors' findings; hardened the submodule reattach script to distinguish safe-discard from true orphan and to reconcile stale local clones; cleaned up 22 superseded outreach and demo artefacts left over from prior sessions. Later in the evening: detected and cleaned a persistent Node.js backdoor that had been resident for six weeks; created the Upgraded-Reginald private repo from the April bundle and mounted it read-only into MX-Hub with a new enforcement hook. Late evening: reframed the DITA+MX podcast deck from 'versus' to 'closing the gaps at the publish transform' in response to the host's brief, adding a reltable-as-graph SVG to both the deck and the companion blog, and fixing a broken `mx marp-regen` dispatcher route while doing it."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-22
 modified: 2026-04-22
-version: "5.0"
+version: "6.0"
 
 mx:
   status: active
   contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening, security, upgraded-reginald]
+  tags: [directors-report, session, evening, security, upgraded-reginald, podcast, dita]
 ---
 
 # Co-Directors Report, Boye CMS Experts Profile, pdf:doc Pipeline Hardened, Egress Pre-Flight
@@ -210,3 +210,36 @@ Added `mx-upgraded-reginald/` submodule (hub commit `d4a79b1f`). The hub's pre-p
 | 5e14bd70 | hub | Bump mx-outputs to 577214c |
 | pending | mx-outputs | Directors report v5.0 addendum |
 | pending | hub | Read-only hook + CLAUDE/UBERCOG/README edits + mx-outputs pointer bump |
+
+---
+
+## v6.0 addendum — DITA+MX podcast deck reframed from versus to gap-closing
+
+Added ~21:00 after Sarah (podcast host for tomorrow's recording) sent a note rejecting the deck's framing.
+
+### 10. DITA+MX podcast deck rebuilt around the host's spine
+
+The brief from Sarah: *"I don't think the DITA versus MX framing quite works because MX is on the delivery side and DITA the backend. From my point of view, ensuring that DITA publication results in MX compatibility is a pretty straightforward publishing pipeline config issue. I'm more interested in looking at this as 'DITA gets you pretty close and now how do we close the gaps'."* The original deck was built around a "Same Discipline, New Reader" thesis with a "Five Divergences" spine at 22 minutes. Wrong for the conversation Sarah wants to host. She wants 15-20 minutes, audio-first, slides going into show notes.
+
+Rebuilt the deck end-to-end. New spine: "DITA → MX: Closing the Gaps at the Publish Transform." 15 slides, down from 20. Cuts: the standalone thesis slide, the side-by-side comparison table (doesn't work audio-first; the blog carries it), the "where we already agree" slide, the "what DITA confirms MX has" proof slide, the coexistence slide. Additions: a new Slide 3 "The Frame — Backend Meets Delivery" that plants Sarah's frame early; five Gap slides rewritten as publish-transform config moves (audience declared in rendered output, Schema.org + MX frontmatter at publish, reltable as a graph endpoint, persistent state in rendered HTML, single-source governance); a new closing slide "Not a Migration — a Transform-Config Change". The £203,000 Danube cruise emotional hook and the "What DITA Already Ships" respect slide stayed verbatim — both load-bearing for a DITA-literate audience.
+
+Presenter notes retimed to 15-18 minutes, renumbered for the new 15-slide sequence, and prefixed with a `## Discuss with Sarah before recording` block listing open items for tomorrow's pre-record walkthrough (length target, spine confirmation, £203K hook sensitivity, gap order, credit-slide negotiability, show-note shape, video option if it arrives). Added a new pushback answer covering "So MX is just a DITA-OT plugin?" The DITA glossary block for the host stayed untouched — Sarah values it.
+
+Tom then asked for more on Gap 3 (reltable as graph endpoint), specifically a diagram. Added a dedicated diagram slide right after it: three DITA topics (task → concept → reference) connected by typed directional edges (`requires`, `describes`), with the `GET /api/graph.json` endpoint shape shown alongside. Tom preferred SVG over ASCII. Built `datalake/assets/presentations/dita-and-mx-podcast-graph.svg` as the standalone asset, referenced from the deck with accessible alt-text, and inlined the same SVG into the DITA+MX comparison blog (`mx-outputs/mx-site/blog/dita-and-mx-a-comparison.html`) as a `<figure class="mx-diagram">` immediately after the "Relationship management" paragraph with `<title>`/`<desc>`/`<figcaption>`. Matching `.mx-diagram svg` rule added to `mx-blog.css` so the figure scales responsively without inline styles. Inline SVG rather than `<img src>` so agents read the structured markup directly — on-doctrine for an MX blog post.
+
+One obstacle during regeneration: `mx marp-regen <file>` failed with "Unknown command". The dispatcher (`scripts/bin/mx.sh`) routes `mx <cmd>` to `scripts/bin/mx.<cmd>.sh` shell scripts; no shim existed for marp-regen even though the cog at `scripts/cogs/marp-regen.cog.md` documented the command. Built `scripts/bin/mx.marp-regen.sh` as a shim that extracts the `@embedded:marp-regen-script` block from the cog and execs it with the passed args. The cog stays single-source; the shim fixes the routing. `mx marp-regen <file>` now works end-to-end. A broader adjacent bug — `mx run <cogname>` reports "No actions defined" for all cogs because `mx-run.js` reads `cogFull.execute.actions` but cogs carry it under `mx.x-mx-execute.actions` — identified but left for a separate pass.
+
+Side-fix: the deck's invitation slide pointed at `dita-vs-mx-a-comparison.html` (404) where the live blog is `dita-and-mx-a-comparison.html` (200). Verified both URLs via WebFetch; updated deck.
+
+### The iteration shape
+
+Same loop as the audit thread. Sarah's email arrived with a clear rejection and a clear new spine; the rewrite took about an hour of iteration, including two rounds of refinement Tom drove by reading the Gap 3 slide ("needs work, explain the graph") and then ("can we add a diagram on the next slide" → then "i prefer svg, we also need to update the matching html"). Every change landed in the concrete artefact being pointed at. Pre-record tomorrow covers the discuss-with-sarah block; the deck is ready to be shaped further from there.
+
+### Commit log (v6.0 addendum)
+
+| Hash | Repo | Description |
+|------|------|-------------|
+| 13009a8 | mx-outputs | Add reltable-graph SVG figure to DITA+MX blog; regen podcast deck pptx |
+| ff91b49 | mx-outputs | (obsoleted, rebased) |
+| pending | mx-outputs | Directors report v6.0 addendum — DITA podcast deck reframe |
+| pending | hub | DITA podcast deck reframe + graph SVG asset + mx.marp-regen dispatcher shim + mx-outputs pointer bump + directors v6.0 |
