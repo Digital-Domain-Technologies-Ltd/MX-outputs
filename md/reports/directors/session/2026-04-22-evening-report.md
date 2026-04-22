@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Boye Profile, pdf:doc Hardened, Audit Pipeline Deepened, Egress Pre-Flight"
-description: "Built the Boye CMS Experts snapshot; fixed three silent pdf:doc pipeline failures; deepened the mx-audit pipeline with post-consent dialog capture, JSON-LD fact-stability drift detection, and a string of report-polish fixes; added a pre-flight egress probe so audits run behind a VPN/tracker-blocker no longer publish misleading 'site has 62 errors' findings."
+title: "Co-Directors Report — Boye Profile, pdf:doc Hardened, Audit Pipeline Deepened, Egress Pre-Flight, Reattach Hardened"
+description: "Built the Boye CMS Experts snapshot; fixed three silent pdf:doc pipeline failures; deepened the mx-audit pipeline with post-consent dialog capture, JSON-LD fact-stability drift detection, and a string of report-polish fixes; added a pre-flight egress probe so audits run behind a VPN/tracker-blocker no longer publish misleading 'site has 62 errors' findings; hardened the submodule reattach script to distinguish safe-discard from true orphan and to reconcile stale local clones; cleaned up 22 superseded outreach and demo artefacts left over from prior sessions."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-22
 modified: 2026-04-22
-version: "3.0"
+version: "4.0"
 
 mx:
   status: active
@@ -59,6 +59,14 @@ Ran a regen of the neom-wellbeing.com audit report end-to-end and used the actua
 
 **Report polish** — a string of fixes driven by Tom's feedback on the PDF. Scores floored at 0 in `auditAverages.js` so reports can no longer say "-1/100". Console-errors table deduplicated by `(failingHost, errorCode)` with a 4-column layout capped at 10 distinct issues and a sidecar CSV carrying all raw samples. Double-lazy image-loading pattern gets a mechanical explanation block whenever detected. Crawl-delay findings re-framed as faint-praise ("polite signal, unlikely to be widely read, but mx-audit itself honours it") instead of "remove obsolete directive". The Executive Summary REWRITE block baked into infill-report.js was literally instructing the rewriter to use "I audited" / "I found" — fixed to use "we" and cited the fierce-critic gate that would otherwise catch it. Cross-Page Consistency column "Missing Pages" renamed to "Pages covered" so the header no longer contradicts the "20 of 20" value at 100% coverage.
 
+### 5. Reattach-submodules script hardened, working-tree cleanup
+
+The pre-push gate at the end of `/step-commit` flagged allaboutv2 as `+` ahead of the hub pointer. Investigation revealed `ed99db39` was the detached SHA, but it was already on `origin/main` — local main was simply 5 commits behind origin. The original `reattach-submodules.sh` reported "no orphan work" and reset to stale local main, leaving the working clone behind both origin AND the original detached SHA. Functionally safe (nothing was lost), but the script's silence about which case it was in masked the situation.
+
+Patched the script to distinguish four cases per submodule. `+ already-pushed safe to discard` (`merge-base --is-ancestor` shows the detached SHA on the remote tracking branch). `+ fast-forwarded N orphan commits` (the SHA was a straight descendant). `+ cherry-picked N orphan commits` (divergent path). `?  detached SHA not on origin and not ahead — manual review` (the rare case where the SHA may live on another branch or only in the reflog). After checkout, `rev-list --count` compares local default branch against `origin/main` — when behind, the script fast-forwards local main with a `(local main was N behind origin; fast-forwarded)` note; when diverged in both directions, it refuses to act and exits non-zero. GIT-README updated to enumerate the four cases so the script's output is interpretable from the docs.
+
+Cleaned up 22 superseded artefacts left over from prior sessions: 12 hub deletions (4 obsolete content-drafts in `docs/structure/content-drafts/`, 6 superseded MX audit notes in `mx-canon/mx-maxine-lives/management/audits/`, 2 entries from `mx-canon/mx-maxine-lives/plans/`), plus 4 deepersonalised demo files in mx-crm and 17 outreach PDFs/CSVs in mx-outputs covering 2026-04-01 through 2026-04-20 — replaced by the 2026-04-22 runs. The directors report's Next Steps had punted these to "next session"; resolved them in this session instead.
+
 ### 4. Audit pipeline egress pre-flight (VPN / tracker-blocker detection)
 
 Tom showed me a page from a regenerated neom-wellbeing PDF asking "I get these errors, are they real?" The Browser Console Errors section reported 62 `console.error`, 14 uncaught exceptions, 68 failed subresource requests, with a deduplicated table where every single distinct failure was `ERR_NAME_NOT_RESOLVED` against `monorail-edge.shopifysvc.com`, `p.typekit.net`, `try.abtasty.com`, `tag.rmp.rakuten.com`, `tag.wknd.ai`, `bat.bing.com`. He had been running with NordVPN active during the audit. NordVPN's Threat Protection NXDOMAINs trackers; Puppeteer faithfully recorded those failures as "site errors". The report's existing caveat ("a real shopper on an ordinary connection likely reaches them fine") was honest but soft — a client reading the headline number could conclude their site has 62 broken things. Tom's directive: "do not give misleading information."
@@ -77,10 +85,10 @@ The iteration shape was itself valuable. Every change was grounded in a specific
 
 | Metric | Value |
 |--------|-------|
-| Commits (evening) | 11 (hub ×7, mx-audit ×3, mx-crm, mx-outputs ×2) |
-| Files changed | ~22 across 4 repos |
-| Lines added | +1,400 |
-| Lines removed | −180 |
+| Commits (evening) | 17 (hub ×9, mx-audit ×3, mx-crm ×2, mx-outputs ×3) |
+| Files changed | ~46 across 4 repos |
+| Lines added | +1,440 |
+| Lines removed | −12,470 (cleanup of 22 superseded artefacts) |
 | Companies profiled (Boye thread) | 86 |
 | Customer pages fetched live (Boye thread) | 8 |
 | Pipeline fixes (pdf:doc) | 3 (pandoc flag, xurl guard, font-aware emoji) |
@@ -105,7 +113,7 @@ The egress thread sharpened that pattern further. The audit's existing caveat se
 
 ## Next Steps
 
-- The pre-existing dirty state in the working tree (mx-canon deletions, mx-audit/mx-crm/allaboutv2 internal changes) is from prior sessions and was deliberately left out of this commit. Tom should triage it next session: ship, refine, or discard.
+- The pre-existing dirty state in the working tree (mx-canon deletions, mx-crm and mx-outputs internal cleanup) was triaged in this segment — see Section 5. allaboutv2 detached HEAD turned out to be benign (already on origin); resolved by hardening `reattach-submodules.sh` rather than committing pointer changes.
 - Optional: extend the unicode-fallback filter's mapping table as new emoji turn up in MX docs. Current set: ✓ ✅ ❌ ⚠ 🔴 🟡 🔵 🟢 📚 🎲 🚫.
 - Optional: a similar font-aware refactor of the keep-together.lua filter so it falls back when `needspace` is not loaded (currently relies on the book-pipeline metadata.yaml to provide the package).
 - Next session (audit pipeline): raw JSON-LD value persistence in the main collector so the drift detector can report value flicker (price £30 → £35), not just structural drift. Today's structural-hash version is working baseline.
@@ -134,4 +142,13 @@ The egress thread sharpened that pattern further. The audit's existing caveat se
 | 5b5114c3 | hub | audit-collect Step 2.6 egress check: skill, gotcha, mx-audit bump |
 | 84403d72 | hub | LEARNINGS: pdf:doc pipeline failures from font/flag/package assumptions |
 | fa1fad6 | mx-audit | infill-report: prepend audit-environment caveat when egress probe degraded |
-| pending | hub | Bump mx-audit pointer to fa1fad6 + update evening report to v3.0 |
+| 9ec0d66 | mx-outputs | Directors report: 2026-04-22 evening v3.0 — egress pre-flight thread |
+| 05d3a89e | hub | Bump mx-audit (egress caveat) + mx-outputs (directors v3.0) |
+| b255ee68 | hub | Docs: CHANGELOG + REMINDERS for audit egress pre-flight |
+| 12751490 | hub | LEARNINGS: ground-truth probes carry verdict, not indicators |
+| afb43e56 | hub | UBERCOG: add check-egress.js to mx-audit/bin enumeration |
+| 185411a5 | hub | Compliance fix: rename archived-by/week-boundary to camelCase + trimmer source patch |
+| 97c33592 | hub | reattach-submodules: distinguish safe-discard from true orphan; warn on stale local main |
+| 0cfe6e5 | mx-crm | Cleanup: remove superseded deepersonalised demo report |
+| 28af3fd | mx-outputs | Cleanup: remove superseded outreach PDFs and CSVs (2026-04-01 through 2026-04-20) |
+| pending | hub | Cleanup deletions + new hook state file + mx-crm/mx-outputs pointer bumps + directors v4.0 |
