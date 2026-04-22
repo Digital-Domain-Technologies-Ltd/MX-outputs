@@ -466,6 +466,26 @@ main {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
+/* Idle float + shadow for book-series grid covers — motion-welcome only */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes bookCardFloat {
+    0%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    50% {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.5);
+    }
+  }
+  .book-card-image img {
+    animation: bookCardFloat 4s ease-in-out infinite;
+    will-change: transform, box-shadow;
+  }
+  .book-card:nth-child(2) .book-card-image img { animation-delay: 1.3s; }
+  .book-card:nth-child(3) .book-card-image img { animation-delay: 2.6s; }
+}
+
 .book-card h3 {
   font-size: 1.5rem;
   color: var(--mx-white);

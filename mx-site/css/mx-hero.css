@@ -171,6 +171,24 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
+/* Idle float + shadow for hero book cover — motion-welcome only */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes heroBookFloat {
+    0%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+  }
+  .hero-book-item img {
+    animation: heroBookFloat 4s ease-in-out infinite;
+    will-change: transform, box-shadow;
+  }
+}
+
 /* ── Acrostic hero text ── */
 .hero-acrostic {
   font-size: 0.85rem;
