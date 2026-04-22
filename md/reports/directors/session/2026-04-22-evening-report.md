@@ -4,7 +4,7 @@ description: "Built the Boye CMS Experts snapshot; fixed three silent pdf:doc pi
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-22
 modified: 2026-04-22
-version: "6.0"
+version: "7.0"
 
 mx:
   status: active
@@ -241,5 +241,54 @@ Same loop as the audit thread. Sarah's email arrived with a clear rejection and 
 |------|------|-------------|
 | 13009a8 | mx-outputs | Add reltable-graph SVG figure to DITA+MX blog; regen podcast deck pptx |
 | ff91b49 | mx-outputs | (obsoleted, rebased) |
-| pending | mx-outputs | Directors report v6.0 addendum — DITA podcast deck reframe |
-| pending | hub | DITA podcast deck reframe + graph SVG asset + mx.marp-regen dispatcher shim + mx-outputs pointer bump + directors v6.0 |
+| c19f2e16 | hub | marp-regen cog: fix runbook field to match dispatch path |
+| 90510e11 | hub | LEARNINGS: two rules from 2026-04-22 night DITA podcast session |
+| a7aa711b | hub | Docs: CHANGELOG + REMINDERS for DITA podcast deck reframe |
+| f29485b6 | hub | DITA+MX podcast deck reframed to closing-the-gaps; graph SVG; marp-regen dispatcher |
+| 0e48bd5b | hub | Bump mx-outputs: directors report v5.0/v6.0 + README regen |
+
+---
+
+## v7.0 addendum — Deck finalised, three patterns added to manuscript canon
+
+Added late night (post-22:00) as the recording prep session continued and extended into manuscript work.
+
+### 11. Podcast deck: six gaps completed, closing slide added
+
+The v6.0 deck had three open threads. Resolved all three.
+
+**Gap 3 corrected (three rounds).** The "reltable as graph endpoint" framing went through three wrong versions before landing correctly. First version invented a `/api/graph.json` consolidator endpoint — doesn't exist in MX canon. Second version misidentified MX Graph (the local cog-and-folder cataloguer in `mx-graph-system.md`) as the content-relationship graph — also wrong. Third version fabricated a `/graph.jsonld` file. The correct framing: each rendered HTML page embeds its own `<script type="application/ld+json">` block with an `@graph` array; the topic is one node, reltable row edges become typed predicates; agents walk `sitemap.xml`, fetch each page, union `@id`-linked nodes across fetches. No endpoint, no consolidator — the graph is distributed across the site. Rewrote the slide, the SVG, the presenter notes, and the blog to match. The SVG was rebuilt with a wider viewBox (960×480), a browser-chrome right panel showing the actual `@graph` JSON-LD, and three-panel pipeline layout (reltable left → DITA-OT+MX transform middle → rendered page head right).
+
+**Inline SVG infrastructure.** Marp's markdown parser silently breaks on `data:` URIs longer than ~5 KB. The SVG, base64-encoded, is ~12 KB. Switched from markdown `![alt](data:...)` to HTML `<img alt="..." src="data:...">` tag. Built a `PostToolUse` hook (`.claude/hooks/regen-svg-base64.sh`) that detects `<!-- inline-svg: NAME -->` markers in any markdown file, finds the matching SVG, base64-encodes it, and refreshes the `<img>` src in-place — both markdown and HTML forms. Added GATE 1.5 to `.claude/hooks/pre-commit.sh` to keep the base64 current at commit time. `marp-regen.cog.md` updated to apply `--allow-local-files` conditionally rather than unconditionally, eliminating the "Insecure local file accessing" warning.
+
+**Gap 4 expanded.** "Toasts" was the only hostile-UI example. Expanded to the full four-family taxonomy: tabs (active-tab-only DOM), reveals/accordions (collapsed at first render), hidden costs (fees revealed after hover/click/form step), toasts (fire-once, vanish). The "3am" phrasing ("An agent arriving at 3am...") was removed — unrealistic; replaced with "An agent fetching the rendered HTML cannot see a toast notification that has already fired and vanished."
+
+**Gap 6 added (locale-unambiguous values).** The £203,000 cruise-price example was correctly identified as a currency decimal-comma mixup (European `€2.030,00` misread as 2,030) — not a hidden-cost Gap 4 issue as an earlier draft implied. Built a new Gap 6 slide around the underlying pattern: `<data value="2030.00">€2.030,00</data>`, `<time datetime="2026-04-22">`, Schema.org `PriceSpecification`/`QuantitativeValue`. Presenter notes updated; the erroneous Gap 4 bridge removed.
+
+**Closing slide (Slide 16: "The Next Reader In The Chain").** Added before the invitation slide. Frames the argument as "your DITA source has the information — every output format has to carry it forward." HTML into the DOM and JSON-LD, PDF into XMP and structure tags, EPUB into the metadata spine, feeds into their schema. "MX is not an HTML feature — it is a delivery-layer requirement for every doctype the transform produces." Deck regenerated to PPTX and published to `mx-outputs/pptx/presentations/dita-and-mx-podcast.pptx` (3.88 MB, 17 slides).
+
+### 12. Three patterns written into the manuscript canon
+
+The deck work surfaced three patterns absent from the protocols and appendices. All three were added with DITA named as one source but not the only source. Hostile UI (already extensive in Ch.2, Ch.12, Appendix S) and single-source governance (Ch.15, Ch.20, Ch.21) were confirmed as already well-covered — not duplicated.
+
+**JSON-LD @graph per-page (added: Ch.12 Pattern 6 subsection, Appendix D Part 5, Appendix E JSON-LD section, Appendix K K.3).** Each rendered page embeds its own `@graph` fragment; agents walk `sitemap.xml`, union `@id`-linked nodes across fetches; no consolidator endpoint. DITA reltable rows named as one natural edge source. Graceful degradation: Schema.org-only agents read `@type`/`@id`; extended-namespace agents read typed predicates.
+
+**Locale-unambiguous values (added: Ch.12 Pattern 4 subsection, Appendix D Currency and Locale section, Appendix E HTML Patterns section).** `<data value="2030.00" data-currency="EUR">€2.030,00</data>` and `<time datetime="...">` patterns documented. Schema.org `PriceSpecification` for currency-safe JSON-LD pricing. Prevents the decimal-comma error class. DITA noted as one authoring environment where the transform decides rendering; MX pins the machine value alongside every locale display.
+
+**Carry-forward across output formats (added: Ch.12 Pattern 12, Ch.12 new table rows in blog).** PDF→XMP+Tagged PDF (ISO 32000), EPUB→OPF spine, JSON/Atom feeds→schema properties. DITA-OT named as one example of a transform that can emit all four from one source map. Closes: "MX is a delivery-layer requirement, not an HTML feature."
+
+### 13. Blog post updated
+
+Two new table rows ("Locale-formatted values", "Output format scope"), expanded "File format dependency" paragraph covering all four output formats with standards references (XMP, ISO 32000, OPF), new "Locale-unambiguous values" divergence paragraph with `€2.030,00` example. `dateModified` → 2026-04-22, wordCount → 1100, reading time → 6 min, keywords updated.
+
+### 14. allaboutv2 worker: text/markdown for agent Accept header
+
+Uncommitted worker change committed and pushed: when a client sends `Accept: text/markdown`, the worker short-circuits HTML transforms (JSON-LD injection, picture placeholders, metadata tweaks) and returns the origin HTML response with `Content-Type: text/html` so Cloudflare's native markdown converter can act on it. Scoped to `mx-site` and `content` subdomains, HTML paths only. Existing transforms are chrome that gets stripped on MD conversion — skipping them is correct.
+
+### Commit log (v7.0 addendum)
+
+| Hash | Repo | Description |
+|------|------|-------------|
+| 06f18f45 | allaboutv2 | Worker: serve text/markdown responses for agent Accept header requests |
+| d525e08 | mx-outputs | DITA+MX: blog updated with locale/carry-forward patterns; PPTX v17 with multi-doctype Slide 16 |
+| pending | hub | Manuscript canon: @graph, locale-unambiguous, carry-forward patterns + blog update + deck finalisation |
