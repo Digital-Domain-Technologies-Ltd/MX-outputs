@@ -1,17 +1,17 @@
 ---
-title: "Co-Directors Report — Boye Profile, pdf:doc Hardened, Audit Pipeline Deepened, Egress Pre-Flight, Reattach Hardened"
-description: "Built the Boye CMS Experts snapshot; fixed three silent pdf:doc pipeline failures; deepened the mx-audit pipeline with post-consent dialog capture, JSON-LD fact-stability drift detection, and a string of report-polish fixes; added a pre-flight egress probe so audits run behind a VPN/tracker-blocker no longer publish misleading 'site has 62 errors' findings; hardened the submodule reattach script to distinguish safe-discard from true orphan and to reconcile stale local clones; cleaned up 22 superseded outreach and demo artefacts left over from prior sessions."
+title: "Co-Directors Report — Boye Profile, pdf:doc Hardened, Audit Pipeline Deepened, Egress Pre-Flight, Reattach Hardened, Malware Incident, Upgraded-Reginald Launch"
+description: "Built the Boye CMS Experts snapshot; fixed three silent pdf:doc pipeline failures; deepened the mx-audit pipeline with post-consent dialog capture, JSON-LD fact-stability drift detection, and a string of report-polish fixes; added a pre-flight egress probe so audits run behind a VPN/tracker-blocker no longer publish misleading 'site has 62 errors' findings; hardened the submodule reattach script to distinguish safe-discard from true orphan and to reconcile stale local clones; cleaned up 22 superseded outreach and demo artefacts left over from prior sessions. Later in the evening: detected and cleaned a persistent Node.js backdoor that had been resident for six weeks; created the Upgraded-Reginald private repo from the April bundle and mounted it read-only into MX-Hub with a new enforcement hook."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-22
 modified: 2026-04-22
-version: "4.0"
+version: "5.0"
 
 mx:
   status: active
   contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
+  tags: [directors-report, session, evening, security, upgraded-reginald]
 ---
 
 # Co-Directors Report, Boye CMS Experts Profile, pdf:doc Pipeline Hardened, Egress Pre-Flight
@@ -152,3 +152,61 @@ The egress thread sharpened that pattern further. The audit's existing caveat se
 | 0cfe6e5 | mx-crm | Cleanup: remove superseded deepersonalised demo report |
 | 28af3fd | mx-outputs | Cleanup: remove superseded outreach PDFs and CSVs (2026-04-01 through 2026-04-20) |
 | pending | hub | Cleanup deletions + new hook state file + mx-crm/mx-outputs pointer bumps + directors v4.0 |
+
+---
+
+## v5.0 addendum — Malware incident and Upgraded-Reginald launch
+
+Added late evening (~19:00-20:00) as two further threads landed after v4.0 was written.
+
+### 6. Malware incident — containment and cleanup
+
+`gh repo create` failed with "can't assign requested address". Diagnosis found 15,486 sockets stuck in SYN_SENT, exhausting the entire ephemeral port range. Root cause was a single Node process:
+
+```
+~/.config/system/.data/.nodejs/node-v23.5.0-darwin-x64/bin/node -e eval(atob('<580KB base64>'))
+```
+
+Textbook indicators: hidden runtime path, base64-eval loader, launchd persistence via `~/Library/LaunchAgents/com.user.nodestart.plist` (596 KB — payload inlined), single-IP C2 on a Contabo VPS in Mauritius (`154.12.242.178:443`). Resident since 11 March 2026 — six weeks.
+
+Actions, in order: evidence preserved to `~/Desktop/malware-evidence-2026-04-22/` (plist + 185 MB runtime tree); `launchctl bootout` to stop persistence and terminate the process; plist and dropper directory deleted; verified 0 SYN_SENT sockets and outbound HTTPS restored. Secondary-persistence scan of system and user LaunchAgents, LaunchDaemons, crontab, and shell rc files surfaced nothing suspicious. One plist modified close to the infection window (`ai.openclaw.gateway.plist`, 13 Mar) was verified legitimate (Homebrew Node launching the real OpenClaw gateway on port 18789).
+
+Credential rotation from a clean device remains outstanding. Until that completes, anything authenticated from this workstation in the last six weeks should be treated as potentially exposed. The active GitHub token on this machine carries `repo + delete_repo + workflow + read:org + gist` scopes across both DDT orgs.
+
+### 7. Upgraded-Reginald repo created and populated
+
+Created `Digital-Domain-Technologies-Ltd/upgraded-reginald` (private) and populated it from the 625 KB April bundle (`~/Downloads/mx-bundle/`). Reorganised into a project layout rather than preserving the bundle's delivery numbering:
+
+```
+upgraded-reginald/
+  spec/cog-spec.v1.md              (v1.0 draft, 65 KB)
+  impl/js/   (53 unit tests, 81 conformance cases — extracted from tarball)
+  impl/rust/ (60 unit tests, feature-parity verification pipeline — extracted from tarball)
+  examples/  (5 worked example cogs)
+  blog/      (3 technical posts)
+  legal/     (NDA + contributor assignment)
+  events/frankfurt-2026-05/ (12 May CMS Summit kit)
+  + LICENSE, CHANGELOG, CONTRIBUTING, ROADMAP, README
+```
+
+Single import commit upstream (`c98d3f6 Initial import from mx-bundle`, 166 files), pushed. The four `cog-review-*.md` duplicates in the bundle's `02/` section were dropped — they already exist inside the extracted JS tarball.
+
+### 8. Mounted as read-only submodule in MX-Hub
+
+Added `mx-upgraded-reginald/` submodule (hub commit `d4a79b1f`). The hub's pre-push submodule-pointer gate caught three pre-existing drifted pointers (mx-audit, mx-crm, mx-outputs); bumped each in its own commit. `tg-community/stream-front-end` detached after `git submodule update`; recovered using the reset-to-origin procedure from memory (the orphan `Initial commit` locally was not on origin and the submodule is read-only, so preserving it would have left the hub pointing at a commit that only existed locally). All four commits now on origin/main.
+
+### 9. Read-only enforcement codified
+
+`CLAUDE.md` previously claimed "a PreToolUse hook enforces this" for `tg-community/`, but no such hook actually existed — the rule was doc-only. Wrote `.claude/hooks/pre-write-readonly.sh` covering both `tg-community/**` and `mx-upgraded-reginald/**`. Registered on `Write | Edit | NotebookEdit`. Hook handles absolute and relative paths, and both `file_path` and `notebook_path` inputs. Five dry-run cases pass. `CLAUDE.md`, `UBERCOG.cog.md`, and `README.md` updated to reflect the new read-only mount and to name the enforcing hook by path.
+
+### Commit log (v5.0 addendum)
+
+| Hash | Repo | Description |
+|------|------|-------------|
+| c98d3f6 | upgraded-reginald | Initial import from mx-bundle |
+| d4a79b1f | hub | Add mx-upgraded-reginald submodule |
+| bcef0b7a | hub | Bump mx-audit to a96f479 |
+| f941297e | hub | Bump mx-crm to 429cac4 |
+| 5e14bd70 | hub | Bump mx-outputs to 577214c |
+| pending | mx-outputs | Directors report v5.0 addendum |
+| pending | hub | Read-only hook + CLAUDE/UBERCOG/README edits + mx-outputs pointer bump |
