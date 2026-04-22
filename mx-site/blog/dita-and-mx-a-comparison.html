@@ -147,13 +147,13 @@
         </div>
       </header>
 
-      <p class="article-summary speakable">A side-by-side comparison of the Darwin Information Typing Architecture and Machine Experience. The two approaches agree on more than they disagree: both treat content as modular, both carry structural metadata through the lifecycle, both operate as architectures rather than as tools. Where they part company is the reader. DITA's primary reader is human. MX treats machines as first-class readers alongside humans — not as a downstream concern, but as a design constraint from the outset.</p>
+      <p class="article-summary speakable">A side-by-side comparison of the Darwin Information Typing Architecture and Machine Experience. The two approaches agree on more than they disagree: both treat content as modular, both carry structural metadata through the lifecycle, both operate as architectures rather than as tools. Where they part company is the reader. DITA's primary reader is human. MX treats machines as first-class readers alongside humans, not as a downstream concern, but as a design constraint from the outset.</p>
 
       <h2 id="what-they-are" tabindex="-1">What they are</h2>
 
       <p><strong>DITA</strong> (Darwin Information Typing Architecture) is an open standard that defines a set of document types for authoring and organising topic-oriented information, together with mechanisms for combining, extending and constraining those document types. Developed at IBM in the late 1990s and donated to OASIS, it is maintained by the OASIS DITA Technical Committee.</p>
 
-      <p><strong>MX</strong> (Machine Experience) is a discipline and methodology concerned with how digital environments are experienced by machines — agents, crawlers, AI systems — as well as humans. Where DITA focuses on human-readable documentation production, MX focuses on the structural and semantic conditions under which content is correctly interpreted by both humans and machines across any channel.</p>
+      <p><strong>MX</strong> (Machine Experience) is a discipline and methodology concerned with how digital environments are experienced by machines, agents, crawlers, AI systems, as well as humans. Where DITA focuses on human-readable documentation production, MX focuses on the structural and semantic conditions under which content is correctly interpreted by both humans and machines across any channel.</p>
 
       <h2 id="core-principles" tabindex="-1">Core principles</h2>
 
@@ -174,7 +174,7 @@
             <tr><th scope="row">Reuse mechanism</th><td>Conref, conkeyref, transclusion</td><td>Metadata-enriched content served to machines, clean content served to humans</td></tr>
             <tr><th scope="row">Extensibility</th><td>Specialisation and inheritance</td><td>Open standards via The Gathering; RFC-based</td></tr>
             <tr><th scope="row">Governing body</th><td>OASIS DITA Technical Committee</td><td>The Gathering (tg.community)</td></tr>
-            <tr><th scope="row">Inheritance</th><td>Yes — DTD / schema-based</td><td>Yes — content-type hierarchy declared in YAML frontmatter</td></tr>
+            <tr><th scope="row">Inheritance</th><td>Yes, DTD / schema-based</td><td>Yes, content-type hierarchy declared in YAML frontmatter</td></tr>
             <tr><th scope="row">Content types</th><td>Concept, task, reference, troubleshooting, glossary</td><td>Declared via <code>mx: content-type</code></td></tr>
             <tr><th scope="row">Audience declaration</th><td>Profiling attributes</td><td><code>mx: audience</code></td></tr>
             <tr><th scope="row">Graph and relationships</th><td>Relationship tables (reltables)</td><td>Machine-readable graph index across the content set</td></tr>
@@ -189,15 +189,15 @@
 
       <h2 id="where-they-diverge" tabindex="-1">Where they diverge</h2>
 
-      <p><strong>Scope of audience.</strong> DITA's primary reader is human. MX treats machines as first-class readers alongside humans — not as a downstream concern, but as a design constraint from the outset.</p>
+      <p><strong>Scope of audience.</strong> DITA's primary reader is human. MX treats machines as first-class readers alongside humans, not as a downstream concern, but as a design constraint from the outset.</p>
 
       <p><strong>File format dependency.</strong> DITA requires XML. MX is format-agnostic: a content unit can be Markdown, HTML, JSON, or any other file type. The MX metadata layer travels with the content regardless of format.</p>
 
-      <p><strong>Publication pipeline versus content posture.</strong> DITA is centred on the production pipeline: authors write topics, maps assemble them, processors publish outputs. MX is concerned with the ongoing posture of content in a live environment — how it behaves when encountered by AI agents, search systems or API consumers at any point, not only at publish time.</p>
+      <p><strong>Publication pipeline versus content posture.</strong> DITA is centred on the production pipeline: authors write topics, maps assemble them, processors publish outputs. MX is concerned with the ongoing posture of content in a live environment, how it behaves when encountered by AI agents, search systems or API consumers at any point, not only at publish time.</p>
 
       <p><strong>AI integration.</strong> DITA's modular content is compatible with AI delivery, but AI integration is incidental to DITA's design intent. MX places machine interpretation at the centre of the content model. The hostile-web framing and the five machine-reading contexts reflect a fundamentally different starting assumption.</p>
 
-      <p><strong>Relationship management.</strong> DITA uses relationship tables (reltables) — a map-level construct that defines links between topics without embedding those links in the topics themselves. MX implements the same concern through a machine-readable graph index maintained across the content set, providing a programmatic interface to relationships between content items. The graph index supersedes the reltable concept.</p>
+      <p><strong>Relationship management.</strong> DITA uses relationship tables (reltables), a map-level construct that defines links between topics without embedding those links in the topics themselves. MX implements the same concern through a machine-readable graph index maintained across the content set, providing a programmatic interface to relationships between content items. The graph index supersedes the reltable concept.</p>
 
       <p><strong>Governance model.</strong> OASIS maintains DITA through a formal Technical Committee process. The Gathering operates as an open standards body for MX with a lighter-weight RFC process, explicitly focused on emerging machine-interaction patterns.</p>
 
@@ -206,23 +206,23 @@
       <p>When DITA's features are examined against MX, most are already present or implemented in a more capable form:</p>
 
       <ul>
-        <li>Information typing — MX declares content types in YAML frontmatter.</li>
-        <li>Specialisation and inheritance — MX content-type hierarchy declared in frontmatter.</li>
-        <li>Audience profiling — <code>mx: audience</code>.</li>
-        <li>Relationship management — machine-readable graph index across the content set.</li>
+        <li>Information typing, MX declares content types in YAML frontmatter.</li>
+        <li>Specialisation and inheritance, MX content-type hierarchy declared in frontmatter.</li>
+        <li>Audience profiling, <code>mx: audience</code>.</li>
+        <li>Relationship management, machine-readable graph index across the content set.</li>
         <li>Canonical-identity declarations carried in frontmatter.</li>
-        <li>Metadata inheritance — map-level YAML propagation.</li>
+        <li>Metadata inheritance, map-level YAML propagation.</li>
       </ul>
 
       <h2 id="the-one-net-addition" tabindex="-1">The one net addition</h2>
 
       <p>The single DITA concept not yet formalised in MX at the time of this analysis:</p>
 
-      <p><strong>Single-source governance rule</strong> — a formal RFC through The Gathering stating that duplicate content is prohibited. Any content appearing in more than one context must reference a canonical source, never copy it. Without this as a stated principle, the content graph accumulates redundant nodes, canonical identity becomes ambiguous, and agent traversal results become unreliable. The rule has been accepted into the MX RFC pipeline.</p>
+      <p><strong>Single-source governance rule</strong>, a formal RFC through The Gathering stating that duplicate content is prohibited. Any content appearing in more than one context must reference a canonical source, never copy it. Without this as a stated principle, the content graph accumulates redundant nodes, canonical identity becomes ambiguous, and agent traversal results become unreliable. The rule has been accepted into the MX RFC pipeline.</p>
 
       <h2 id="when-to-use-which" tabindex="-1">When to use which</h2>
 
-      <p><strong>DITA</strong> is well-suited to large-scale technical documentation environments — software manuals, regulated industries such as medical, aerospace and financial, and organisations that need structured content reuse across print and digital channels with established toolchains. <strong>MX</strong> applies wherever content is authored for environments in which machine agents are active readers — AI-powered search, agentic workflows, LLM retrieval contexts, and any site or platform where structured machine interpretation matters at the point of content creation, not only at publication.</p>
+      <p><strong>DITA</strong> is well-suited to large-scale technical documentation environments, software manuals, regulated industries such as medical, aerospace and financial, and organisations that need structured content reuse across print and digital channels with established toolchains. <strong>MX</strong> applies wherever content is authored for environments in which machine agents are active readers, AI-powered search, agentic workflows, LLM retrieval contexts, and any site or platform where structured machine interpretation matters at the point of content creation, not only at publication.</p>
 
       <p>They are not mutually exclusive. A DITA-based content operation can adopt MX principles by enriching topics with machine-readable metadata, treating MX as a layer above the DITA architecture rather than a replacement for it.</p>
 
