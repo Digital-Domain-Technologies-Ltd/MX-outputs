@@ -4,7 +4,7 @@ description: "Published a press-release blog post announcing MX: The Handbook an
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-22
 modified: 2026-04-22
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -46,7 +46,11 @@ New directory `mx-outputs/mx-site/blog/drafts/` with a README documenting the ex
 - `scripts/generate-llms-full-txt.cjs`: `/blog/drafts/` added to `SKIP_DIRS`
 - `scripts/sync-blog-discovery.cjs`: reads blog dir flat (naturally ignores subdirs)
 
-### 3. Fix: sync-blog-discovery preserving subdir curations
+### 3. Visual anchor for the Five-Stage Machine Journey section
+
+Added `blog/assets/handbook-figure-03-1-agent-task-feasibility.svg` — copied from `datalake/assets/images/svg/figures/handbook/figure-03-1.svg` (the Handbook's own Chapter 3 decision tree for agent task-completion feasibility). Placed as a captioned `<figure>` directly above the Five-Stage list so the reader sees the decision logic — "Can I find the target? Can I identify the form? Do I have the required context?" — before reading the prose version. Re-using the book's own figure reinforces the "buy the book for the full treatment" message and avoids divergence between the post and the source.
+
+### 4. Fix: sync-blog-discovery preserving subdir curations
 
 Hub-side bug caught during the session. The reconciler treated any `/blog/*.html` URL as stale if it was not in the flat `blogFiles` set — which meant profile pages under `/blog/profiles/` (about.tom.cranstoun.html, about.claude.code.html, about.claude.sonnet.4.5.html, about.microsoft.copilot.html) were being stripped from the site-level sitemap every time the hook ran. Fixed by scoping the "stale removal" rule to top-level blog URLs only. Subdirectory URLs are now preserved regardless.
 
@@ -78,4 +82,10 @@ Hub-side bug caught during the session. The reconciler treated any `/blog/*.html
 | Hash | Repo | Description |
 |------|------|-------------|
 | 4813d5f | mx-outputs | Blog: add MX Handbook press-release post and private drafts area |
-| (pending) | hub | Scripts: drafts exclusion + fix sync-blog-discovery subdir stripping; mx-outputs pointer bump |
+| 713d326 | mx-outputs | Directors report: 2026-04-22 morning segment |
+| 6f86c66 | mx-outputs | README: regenerate index |
+| 4826522 | mx-outputs | Blog: add agent task-feasibility figure to MX Handbook press-release post |
+| c8709a98 | hub | Scripts: private drafts area under /blog/ and fix profile-sitemap stripping |
+| bfb40f48 | hub | Docs: changelog + reminders for press-release post and drafts area |
+| bcc237f7 | hub | Learnings: sitemap reconciler scope-match rule |
+| afb51e63 | hub | Bump mx-outputs: add agent task-feasibility figure to press-release post |
