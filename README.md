@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-04-22"
-modified: "2026-04-22"
+created: "2026-04-23"
+modified: "2026-04-23"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 68 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 161 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 75 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 162 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **799** | |
+| **Total** | **808** | |
 
 ---
 
@@ -62,7 +62,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (16 files)
+### pdf/outreach/ (23 files)
 
 - [`bobw-report.pdf`](pdf/outreach/2026-04-07/bobw-report.pdf)
 - [`freeths-report.pdf`](pdf/outreach/2026-04-07/freeths-report.pdf)
@@ -80,9 +80,17 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`neom-pages-audited.csv`](pdf/outreach/2026-04-22/neom-pages-audited.csv)
 - [`neom-report.pdf`](pdf/outreach/2026-04-22/neom-report.pdf)
 - [`neom-structured-data-findings.csv`](pdf/outreach/2026-04-22/neom-structured-data-findings.csv)
+- [`neomwellbeing-accessibility.csv`](pdf/outreach/2026-04-23/neomwellbeing-accessibility.csv)
+- [`neomwellbeing-image-optimisation.csv`](pdf/outreach/2026-04-23/neomwellbeing-image-optimisation.csv)
+- [`neomwellbeing-link-analysis.csv`](pdf/outreach/2026-04-23/neomwellbeing-link-analysis.csv)
+- [`neomwellbeing-marker-reachability.csv`](pdf/outreach/2026-04-23/neomwellbeing-marker-reachability.csv)
+- [`neomwellbeing-pages-audited.csv`](pdf/outreach/2026-04-23/neomwellbeing-pages-audited.csv)
+- [`neomwellbeing-report.pdf`](pdf/outreach/2026-04-23/neomwellbeing-report.pdf)
+- [`neomwellbeing-structured-data-findings.csv`](pdf/outreach/2026-04-23/neomwellbeing-structured-data-findings.csv)
   - **2026-04-07/** (2 files)
   - **2026-04-20/** (6 files)
   - **2026-04-22/** (8 files)
+  - **2026-04-23/** (7 files)
 
 ### pdf/reginald/ (23 files)
 
@@ -126,7 +134,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 
-### md/reports/ (160 files)
+### md/reports/ (161 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -161,7 +169,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (132 files)
+#### md/reports/directors/ (133 files)
 
 **build/** (3 files)
 
@@ -175,7 +183,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (125 files)
+**session/** (126 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -294,6 +302,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-04-22-afternoon-report.md`](md/reports/directors/session/2026-04-22-afternoon-report.md)
 - [`2026-04-22-evening-report.md`](md/reports/directors/session/2026-04-22-evening-report.md)
 - [`2026-04-22-morning-report.md`](md/reports/directors/session/2026-04-22-morning-report.md)
+- [`2026-04-23-afternoon-report.md`](md/reports/directors/session/2026-04-23-afternoon-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -439,4 +448,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-04-22 at 22:46*
+*Generated on 2026-04-23 at 13:29*
