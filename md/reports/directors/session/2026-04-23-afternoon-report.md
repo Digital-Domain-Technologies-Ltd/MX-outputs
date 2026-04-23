@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Markdown for Agents + Audit Workflow Overhaul"
-description: "Shipped Cloudflare Markdown for Agents; overhauled mx-audit workflow with 5 performance fixes; published two new blog posts."
+title: "Co-Directors Report — Markdown for Agents + Audit Workflow Overhaul + Detached HEAD Prevention"
+description: "Shipped Markdown for Agents; 5 audit workflow fixes; blog posts published; Gate 0 pre-commit hook and step-commit skill hardened against detached-HEAD submodules."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-23
 modified: 2026-04-23
-version: "2.0"
+version: "3.0"
 
 mx:
   status: active
@@ -14,7 +14,7 @@ mx:
   tags: [directors-report, session, afternoon]
 ---
 
-# Co-Directors Report — Markdown for Agents + Audit Workflow Overhaul
+# Co-Directors Report — Markdown for Agents + Audit Workflow Overhaul + Detached HEAD Prevention
 
 **Date:** 23 April 2026 — Afternoon
 **Segment:** afternoon (noon–17:00 BST)
@@ -23,7 +23,7 @@ mx:
 
 ## Summary
 
-The afternoon covered two substantial workstreams. We shipped Cloudflare's Markdown for Agents feature on `allabout.network` end-to-end. We then profiled the mx-audit workflow against a 10-page Shopify run, identified five performance bottlenecks, and fixed all of them — including a critical bug where Pa11y was launching a fresh Puppeteer browser for every URL despite a pool being in place (`.browser` vs `.instance` property mismatch). We also published two blog posts establishing the MX-Audit USP against self-referential agent-readiness tools, and added a vendor-protocol tagging system so Cloudflare and Google protocols are collected but never counted against site scores.
+The afternoon covered three workstreams. We shipped Cloudflare's Markdown for Agents feature on `allabout.network` end-to-end. We then profiled the mx-audit workflow against a 10-page Shopify run, identified five performance bottlenecks, and fixed all of them — including a critical bug where Pa11y was launching a fresh Puppeteer browser for every URL despite a pool being in place (`.browser` vs `.instance` property mismatch). We published two blog posts establishing the MX-Audit USP against self-referential agent-readiness tools, and added a vendor-protocol tagging system so Cloudflare and Google protocols are collected but never counted against site scores. In a third workstream we hardened the git workflow: a Gate 0 block was added to the pre-commit hook to detect submodules in detached HEAD state before any hub commit proceeds, and the step-commit skill's Step 1 recovery protocol was rewritten to eliminate the dangerous `reset --hard` pattern.
 
 ---
 
@@ -71,6 +71,13 @@ Cloudflare's isitagentready.com and Fern's afdocs both measure compliance with t
 
 Both `web-audit-suite-template.md` and `ecommerce-audit-template.md` now open with an `## About This Report` section covering: ten audit dimensions, the served-vs-rendered gap, human review plus accumulated learning, tg.community standards basis, and a note on llms.txt structural limitations.
 
+### 9. Detached HEAD Prevention (hub)
+
+Two mx-audit and mx-crm submodules ended up in detached HEAD during the audit-workflow overhaul — the hub pointer lagged behind main, causing commits on the orphaned SHA. Recovery required cherry-picking across template conflicts. To prevent recurrence:
+
+- **`.claude/hooks/pre-commit.sh` — Gate 0**: Scans all submodules before any other hook gate. For each, checks `git symbolic-ref HEAD`; if empty (detached), blocks the hub commit and prints a numbered 4-step recovery procedure (list orphans, checkout main, cherry-pick, retry).
+- **`.claude/skills/step-commit/skill.md` — Step 1**: Added a mandatory pre-flight HEAD-state audit command as the first action in Step 1, before any `git status`. Replaced the unsafe `reset --hard` recovery one-liner with the safe protocol: record orphaned SHAs first, checkout main, then cherry-pick in order.
+
 ### 8. Blog Posts Published
 
 - **agent-readiness-scores-compared.html**: Compares MX-Audit to isitagentready and afdocs; explains the self-referential scoring problem; establishes the USP (platform-agnostic, human in the loop, learns from experience).
@@ -83,14 +90,17 @@ Both `web-audit-suite-template.md` and `ecommerce-audit-template.md` now open wi
 
 | Metric | Value |
 |--------|-------|
-| Submodule commits | 5 (mx-audit: 1, mx-crm: 1, mx-outputs: 2) |
+| Submodule commits | 6 (mx-audit: 1, mx-crm: 1, mx-outputs: 3) |
+| Hub commits | 2 (code + gate hardening) |
 | mx-audit files changed | 9 |
-| Lines added | +1,459 |
+| Lines added | +1,504 |
 | Lines removed | -49,806 (NEOM cleanup + old PDFs) |
 | Repositories touched | 3 (mx-audit, mx-crm, mx-outputs) |
 | Live test assertions | 10/10 (Markdown for Agents probe) |
 | Audit workflow bottlenecks fixed | 5 |
 | Blog posts published | 3 (2 new, 1 updated) |
+| Pre-commit hook gates added | 1 (Gate 0 — detached HEAD detection) |
+| step-commit skill rules improved | 1 (safe recovery protocol) |
 
 ---
 
@@ -99,6 +109,8 @@ Both `web-audit-suite-template.md` and `ecommerce-audit-template.md` now open wi
 The Pa11y browser pool bug (`poolBrowser.browser` vs `poolBrowser.instance`) had been silently present since the pool was introduced. Every Pa11y run was launching a fresh Puppeteer instance despite the pool being in place. The bug was invisible because Pa11y silently falls back to launching its own browser when `browser: undefined` is passed. The fix is one character, but the root cause is worth noting: property-name mismatches between pool internals and callers are undetectable without type-checking.
 
 The vendor-protocol tagging work was triggered by a real-world observation: Cloudflare's isitagentready gave a Shopify site 33/100 while Fern's afdocs gave it 100/100. Both scores are correct according to their respective vendor's protocols. Neither is useful to the site owner without that context.
+
+The detached HEAD recovery was triggered by a hub pointer that lagged behind the submodule's `main`. Commits made on the detached SHA were orphaned. The lesson: always check `git symbolic-ref HEAD` before committing in a submodule. The Gate 0 hook makes this automatic at the hub level; the step-commit pre-flight check makes it explicit at the workflow level. The `reset --hard` in the old recovery one-liner would have destroyed those orphaned commits — the corrected protocol preserves them via cherry-pick.
 
 ---
 
@@ -121,3 +133,5 @@ The vendor-protocol tagging work was triggered by a real-world observation: Clou
 | `b066643a` | Delete stale NEOM audit files from all previous runs (mx-crm) |
 | `7fb2ef2e` | Publish two new blog posts; update agent-discoverability-checklist (mx-outputs) |
 | `6eccd5ae` | Delete stale NEOM audit PDF and CSV deliverables (mx-outputs) |
+| `079ea42` | Update markdown-trap post: expanded word count and new section; refresh blog index and llms-full.txt (mx-outputs) |
+| `2b1931fb` | Harden pre-commit hook and step-commit skill against detached-HEAD submodules (hub) |
