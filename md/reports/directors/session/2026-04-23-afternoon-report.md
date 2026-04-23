@@ -1,10 +1,10 @@
 ---
 title: "Co-Directors Report — Markdown for Agents + Audit Workflow Overhaul + Detached HEAD Prevention"
-description: "Shipped Markdown for Agents; 5 audit workflow fixes; blog posts published; Gate 0 pre-commit hook and step-commit skill hardened against detached-HEAD submodules."
+description: "Shipped Markdown for Agents; 5 audit workflow fixes; blog posts published; Gate 0 pre-commit hook hardened; Adobe LLM Optimizer critique and mx-audit detection added."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-23
 modified: 2026-04-23
-version: "3.0"
+version: "4.0"
 
 mx:
   status: active
@@ -81,8 +81,24 @@ Two mx-audit and mx-crm submodules ended up in detached HEAD during the audit-wo
 ### 8. Blog Posts Published
 
 - **agent-readiness-scores-compared.html**: Compares MX-Audit to isitagentready and afdocs; explains the self-referential scoring problem; establishes the USP (platform-agnostic, human in the loop, learns from experience).
-- **the-markdown-trap.html**: Published separately this session.
+- **the-markdown-trap.html**: Published and extended — see item 10.
 - **agent-discoverability-checklist.html**: Updated to v1.1 with new evaluation section.
+
+### 10. Adobe LLM Optimizer Critique (blog + manuscript)
+
+Research into Adobe's "Optimize at Edge" feature revealed the symmetric counterpart to Cloudflare's markdown stripping. Cloudflare removes what the publisher put there; Adobe injects what the publisher did not put there. Adobe intercepts AI agent requests by User-Agent at the CDN edge, routes them to `live.edgeoptimize.net`, and returns HTML augmented with AI-generated FAQs, summaries, and rewritten sections. Human visitors receive the original page unmodified. The `x-edgeoptimize-request-id` header confirms when the optimised path was taken.
+
+The critique focuses on three structural problems: (1) it is cloaking — AI agents and humans receive materially different content; (2) the injected content is not governed by the publisher's structured data (JSON-LD, robots directives, canonical URLs were authored for the original page); (3) the citation loop is circular — Adobe measures brand visibility by tracking citations of its own injected content.
+
+**Changes shipped:**
+
+- `the-markdown-trap.html`: new "The opposite failure" section added (1,453 words total, 8 min read)
+- `Chapter 22` of MX: The Protocols: new `## The Opposite Failure` section
+- `mx-audit/src/collectors/llmCollector.js`: `x-edgeoptimize-request-id`, `x-markdown-tokens`, and non-standard response headers captured in `analyzeAgentMetadata`; `analyzeContentNegotiation` extended to include markdown probe data
+- `mx-audit/src/utils/caching.js`: `fetchMarkdownProbe()` — single async GET with `Accept: text/markdown` header, reporting status, content-type, vendor headers, and body bytes
+- `mx-audit/src/utils/pageAnalyzer.js`: probe called on the primary URL only before `updateLLMMetrics`
+- `mx-audit/templates/web-audit-suite-template.md`: Markdown Content Negotiation and Non-Standard Response Headers subsections with conditional Cloudflare/Adobe prose
+- `.claude/skills/audit-access/skill.md`: Step 5.8 added
 
 ---
 
@@ -90,17 +106,18 @@ Two mx-audit and mx-crm submodules ended up in detached HEAD during the audit-wo
 
 | Metric | Value |
 |--------|-------|
-| Submodule commits | 6 (mx-audit: 1, mx-crm: 1, mx-outputs: 3) |
-| Hub commits | 2 (code + gate hardening) |
-| mx-audit files changed | 9 |
-| Lines added | +1,504 |
+| Submodule commits | 7 (mx-audit: 2, mx-crm: 1, mx-outputs: 4) |
+| Hub commits | 3 (code + gate hardening + Ch22/Adobe) |
+| mx-audit files changed | 13 |
+| Lines added | +1,655 |
 | Lines removed | -49,806 (NEOM cleanup + old PDFs) |
 | Repositories touched | 3 (mx-audit, mx-crm, mx-outputs) |
 | Live test assertions | 10/10 (Markdown for Agents probe) |
 | Audit workflow bottlenecks fixed | 5 |
-| Blog posts published | 3 (2 new, 1 updated) |
+| Blog posts published | 3 (2 new, 1 extended) |
 | Pre-commit hook gates added | 1 (Gate 0 — detached HEAD detection) |
 | step-commit skill rules improved | 1 (safe recovery protocol) |
+| New audit detection capabilities | 3 (markdown probe, x-edgeoptimize-request-id, non-standard headers) |
 
 ---
 
@@ -118,7 +135,8 @@ The detached HEAD recovery was triggered by a hub pointer that lagged behind the
 
 - Re-run NEOM audit with the 5 fixes in place to verify timing improvement.
 - Generate NEOM report and PDF using updated templates with preamble.
-- Monitor `x-markdown-tokens` header values in production.
+- Monitor `x-markdown-tokens` and `x-edgeoptimize-request-id` header values in production audits.
+- Run `/audit-access` on a site known to use Adobe LLM Optimizer to validate the detection path end-to-end.
 
 ---
 
@@ -135,3 +153,6 @@ The detached HEAD recovery was triggered by a hub pointer that lagged behind the
 | `6eccd5ae` | Delete stale NEOM audit PDF and CSV deliverables (mx-outputs) |
 | `079ea42` | Update markdown-trap post: expanded word count and new section; refresh blog index and llms-full.txt (mx-outputs) |
 | `2b1931fb` | Harden pre-commit hook and step-commit skill against detached-HEAD submodules (hub) |
+| `d4c7c92f` | Bump mx-outputs; add Chapter 22 opposite-failure section; update docs and learning (hub) |
+| `271f842` | Update afternoon report v3.0: add detached-HEAD prevention workstream (mx-outputs) |
+| `e502b44` | Add Adobe LLM Optimizer detection and markdown content negotiation probe (mx-audit) |
