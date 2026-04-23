@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 75 | PDFs — books, reports, manuals, presentations |
+| [pdf/](pdf/) | 60 | PDFs — books, reports, manuals, presentations |
 | [md/](md/) | 162 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **808** | |
+| **Total** | **794** | |
 
 ---
 
@@ -62,7 +62,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (23 files)
+### pdf/outreach/ (8 files)
 
 - [`bobw-report.pdf`](pdf/outreach/2026-04-07/bobw-report.pdf)
 - [`freeths-report.pdf`](pdf/outreach/2026-04-07/freeths-report.pdf)
@@ -72,25 +72,10 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`mx-allabout-network-marker-reachability.csv`](pdf/outreach/2026-04-20/mx-allabout-network-marker-reachability.csv)
 - [`mx-allabout-network-report.pdf`](pdf/outreach/2026-04-20/mx-allabout-network-report.pdf)
 - [`mx-allabout-network-structured-data-findings.csv`](pdf/outreach/2026-04-20/mx-allabout-network-structured-data-findings.csv)
-- [`neom-accessibility.csv`](pdf/outreach/2026-04-22/neom-accessibility.csv)
-- [`neom-console-errors.csv`](pdf/outreach/2026-04-22/neom-console-errors.csv)
-- [`neom-image-optimisation.csv`](pdf/outreach/2026-04-22/neom-image-optimisation.csv)
-- [`neom-link-analysis.csv`](pdf/outreach/2026-04-22/neom-link-analysis.csv)
-- [`neom-marker-reachability.csv`](pdf/outreach/2026-04-22/neom-marker-reachability.csv)
-- [`neom-pages-audited.csv`](pdf/outreach/2026-04-22/neom-pages-audited.csv)
-- [`neom-report.pdf`](pdf/outreach/2026-04-22/neom-report.pdf)
-- [`neom-structured-data-findings.csv`](pdf/outreach/2026-04-22/neom-structured-data-findings.csv)
-- [`neomwellbeing-accessibility.csv`](pdf/outreach/2026-04-23/neomwellbeing-accessibility.csv)
-- [`neomwellbeing-image-optimisation.csv`](pdf/outreach/2026-04-23/neomwellbeing-image-optimisation.csv)
-- [`neomwellbeing-link-analysis.csv`](pdf/outreach/2026-04-23/neomwellbeing-link-analysis.csv)
-- [`neomwellbeing-marker-reachability.csv`](pdf/outreach/2026-04-23/neomwellbeing-marker-reachability.csv)
-- [`neomwellbeing-pages-audited.csv`](pdf/outreach/2026-04-23/neomwellbeing-pages-audited.csv)
-- [`neomwellbeing-report.pdf`](pdf/outreach/2026-04-23/neomwellbeing-report.pdf)
-- [`neomwellbeing-structured-data-findings.csv`](pdf/outreach/2026-04-23/neomwellbeing-structured-data-findings.csv)
   - **2026-04-07/** (2 files)
   - **2026-04-20/** (6 files)
-  - **2026-04-22/** (8 files)
-  - **2026-04-23/** (7 files)
+  - **2026-04-22/** (0 files)
+  - **2026-04-23/** (0 files)
 
 ### pdf/reginald/ (23 files)
 
@@ -448,4 +433,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-04-23 at 13:29*
+*Generated on 2026-04-23 at 14:28*
