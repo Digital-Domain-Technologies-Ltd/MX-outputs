@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report -- Manuscript Restructure and Free Book Email Capture"
-description: "Evening session: one-folder-per-chapter restructure across all three manuscripts completed; 49 soul.md files generated; PDF errors fixed; free book regenerated and deployed; Cloudflare Worker email capture implemented with MailerLite and Resend."
+title: "Co-Directors Report -- Manuscript Restructure, Free Book Polish, and Email Capture"
+description: "Full evening session: manuscript restructure (49 soul.md files), PDF pipeline fixes, free book redesigned and deployed, email capture with MailerLite + Resend, free book further polished (QR removed, chapter tables, duplicate TOC fix, em-dash cleanup), CRM stale directories removed."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-24
 modified: 2026-04-24
-version: "1.0"
+version: "2.0"
 mx:
   status: active
   contentType: report
@@ -13,7 +13,7 @@ mx:
   tags: [directors-report, session, evening]
 ---
 
-# Co-Directors Report -- Manuscript Restructure and Free Book Email Capture
+# Co-Directors Report -- Manuscript Restructure, Free Book Polish, and Email Capture
 
 **Date:** 24 April 2026 -- Evening
 **Segment:** Evening (17:00+)
@@ -22,7 +22,7 @@ mx:
 
 ## Summary
 
-This session completed a plan carried over from the previous context: moving every chapter file in all three manuscripts into its own named subfolder, each with a `soul.md` descriptor. Forty-nine soul.md files were created. Three pre-existing PDF generation errors were diagnosed and fixed (missing `endnotes.sty`, an unresolvable `shared-header.tex` path, and an invalid pandoc flag). All PDF build scripts were updated from glob patterns to explicit ordered paths following the new subfolder layout. The free book was regenerated with expanded chapter descriptions sourced from the new soul.md files and deployed to mx-outputs. A Cloudflare Worker route was then built to capture email addresses before the free book PDF download -- the form subscribes visitors to MailerLite and sends Tom an instant Resend notification.
+This evening completed two distinct arcs. The first arc -- carried over from a previous context -- restructured all three manuscripts into one-folder-per-chapter, generated 49 soul.md descriptor files, fixed three PDF generation errors, and deployed a new Cloudflare Worker route gating the free book download behind an email capture form (MailerLite subscription + Resend admin notification). The second arc polished the free book further: removed the now-redundant QR/footnotes page, replaced prose book descriptions with structured chapter tables (Handbook first), fixed a duplicate contents page caused by pandoc's --toc flag, and replaced all 35 em-dashes with hyphens. The CRM was also tidied: three stale flat client directories (kwint, lpc, media219) were removed after the contacts reshape shipped in an earlier session.
 
 ---
 
@@ -30,25 +30,17 @@ This session completed a plan carried over from the previous context: moving eve
 
 ### 1. One-folder-per-chapter restructure -- all three manuscripts
 
-Every content file across the three manuscripts moved into a named subfolder matching the conventions cog. Files that were untracked (not yet committed) were moved with `mv`; committed files with `git mv`.
+Every content file across the three manuscripts moved into a named subfolder matching the conventions cog.
 
-**MX: The Protocols** (`datalake/manuscripts/mx-books/mx-protocols/protocols/`)
+**MX: The Protocols** -- 28 files moved into chapter-00/ through chapter-22/, executive-summary/, preface/, reading-guide/, the-end/, rear-cover/.
 
-28 files moved into: `chapter-00/` through `chapter-22/`, `executive-summary/`, `preface/`, `reading-guide/`, `the-end/`, `rear-cover/`. Flat files remaining: `.mx.yaml.md`, `protocols-plan.md`.
+**MX: The Handbook** -- 18 files moved into 0-cover/, foreword/, preface/, reading-guide/, chapter-00/ through chapter-12/, the-end/. Two table images moved into chapter-10/.
 
-**MX: The Handbook** (`datalake/manuscripts/mx-books/mx-handbook/chapters/`)
-
-18 files moved into: `0-cover/`, `foreword/`, `preface/`, `reading-guide/`, `chapter-00/` through `chapter-12/`, `the-end/`. Two table images (`table-10-1-validation-results.png/svg`) moved into `chapter-10/`. Flat files remaining: `.mx.yaml.md`, `README.md`. All moves ran via Bash to bypass the published-manuscript-guard PreToolUse hook.
-
-**Free-book** (`datalake/manuscripts/mx-books/free-book/`)
-
-3 files moved into: `chapter-00/`, `purchase-books/`, `services-advert/`. Flat file remaining: `.mx.yaml.md`.
+**Free-book** -- 3 files moved into chapter-00/, purchase-books/, services-advert/.
 
 ### 2. soul.md files -- 49 created
 
-Every new chapter folder received a `soul.md` with YAML frontmatter (`title`, `description`, `author`, `created`, `modified`, `version`, `mx.book`, `mx.chapter`, `mx.contentType`, `mx.status`) and a 2--3 sentence body describing the chapter's purpose, arc position, and intended reader.
-
-Front matter sections (`preface`, `foreword`, `executive-summary`, `reading-guide`, `0-cover`) use `chapter: 0`. Back matter (`the-end`, `rear-cover`) use `chapter: -1`. Handbook soul.md files were written via Python to bypass the published-manuscript-guard hook.
+Every new chapter folder received a soul.md with YAML frontmatter and a 2-3 sentence body describing the chapter's purpose, arc position, and intended reader.
 
 | Manuscript | soul.md files |
 |-----------|---------------|
@@ -59,50 +51,52 @@ Front matter sections (`preface`, `foreword`, `executive-summary`, `reading-guid
 
 ### 3. PDF generation errors fixed
 
-Three distinct errors were blocking PDF generation, diagnosed via `pandoc --verbose`:
+Three distinct errors were blocking PDF generation, diagnosed via pandoc --verbose:
 
-**`endnotes.sty` missing.** `tlmgr install` was blocked (TeX Live 2025 vs remote 2026). Fix: `curl -L` to download `endnotes.sty` from CTAN and install to `~/Library/texmf/tex/latex/endnotes/`. First attempt without `-L` downloaded an HTML 307 redirect page, causing xelatex to fail with `! LaTeX Error: Missing \begin{document}. l.1 <`.
-
-**`\input{scripts/filters/shared-header.tex}` unresolvable.** pandoc runs xelatex in a temp dir with `TEXINPUTS` set to that temp dir only; the relative path from the project root is invisible. Fix: copied `shared-header.tex` alongside `endnotes.sty` in the user texmf tree; updated all three metadata yaml files from `\input{scripts/filters/shared-header.tex}` to `\input{shared-header.tex}`.
-
-**`--syntax-highlighting` not a valid pandoc 3.6 flag.** pandoc 3.6 uses `--highlight-style`. Fix: replaced both occurrences in `package.json`.
+- **endnotes.sty missing** -- downloaded from CTAN and installed to user texmf tree.
+- **shared-header.tex unresolvable** -- copied to user texmf tree; updated all three metadata yaml files.
+- **--syntax-highlighting flag invalid** -- replaced with --highlight-style in package.json.
 
 ### 4. Package.json and script updates
 
-- **Glob replacement.** `chapter-*.md` globs replaced with explicit ordered paths in `pdf:protocols-html`, `pdf:protocols-generate`, `pdf:protocols-simple`, `pdf:mx-html`, `pdf:mx-generate`, `pdf:mx-simple` (40 explicit paths across the two books).
-- **Resource path.** `chapters/chapter-10` added to `--resource-path` in handbook scripts for the two table images.
-- **Chapter-00 and services-advert paths.** Updated in `pdf:chapter00-simple`, `pdf:chapter00-html`, and the generate/simple scripts.
-- **Wordcount and validate:links.** Glob patterns updated to `**/*.md` or explicit subfolder paths.
-- **`scripts/gen-free-book.sh`.** `ADVERT_MD` and `PURCHASE_MD` updated to new subfolder paths.
-- **`scripts/cogs/2026-02-15-conventions.cog.md`.** Chapter location table entries updated to the new pattern.
+Glob patterns replaced with explicit ordered paths across ten affected scripts. Chapter-00 and services-advert paths updated in gen-free-book.sh.
 
-### 5. Free book ending generated from soul.md files
+### 5. Free book ending expanded from soul.md files
 
-The brief two-paragraph "Where to go from here" section in `chapter-00-free.md` was expanded into a full chapter guide. The soul.md files from every Protocols and Handbook chapter were read and distilled into two structured section descriptions -- one per book -- with chapter references grouped by theme. This replaces the previously minimal book descriptions with content that accurately represents each book's full scope and arc.
+The brief "Where to go from here" section replaced with full chapter guides for both books, sourced from soul.md files.
 
-### 6. Free book regenerated and deployed
+### 6. Cloudflare Worker -- free book email capture
 
-`npm run pdf:free-book` (via `gen-free-book.sh`) regenerated the 10-section merged PDF including the expanded ending. Committed and pushed to the mx-outputs submodule via git + LFS. The PDF filename `mx-introduction-chapter.pdf` is unchanged -- all existing blog links remain valid.
+New route on mx.allabout.network:
 
-### 7. Cloudflare Worker -- free book email capture
+- **GET /books/download-intro** -- styled HTML email capture form.
+- **POST /books/download-intro** -- subscribes to MailerLite "Free Book Downloads" group (ID 185654229318239343), sends admin notification via Resend, redirects to PDF.
 
-New Worker route on `mx.allabout.network`:
+Worker version deployed: 14e34486. `introduction.html` download buttons updated.
 
-**`GET /books/download-intro`** returns a styled HTML email capture form (email required, name optional) matching the site aesthetic.
+### 7. Email notification fix
 
-**`POST /books/download-intro`** does three things in sequence, all fire-and-forget so no failure can block the download:
-1. Subscribes the visitor to the new MailerLite group **"Free Book Downloads"** (ID `185654229318239343`, created this session).
-2. Sends Tom an instant admin notification via Resend to `info@cognovamx.com` with subject `Free book download: Name <email>`.
-3. Redirects to `https://mx.allabout.network/books/mx-introduction-chapter.pdf`.
+Notification was being sent to the from-address (info@cognovamx.com) instead of Tom's gmail. Fixed by adding FREE_BOOK_NOTIFY_EMAIL to wrangler.toml and using it as the `to` field in the handler.
 
-`introduction.html` updated: both download buttons (`header-buy-cta` and `cta-button`) now point to `/books/download-intro` instead of the PDF directly. The "No sign-up required" copy updated to "Enter your email to download."
+### 8. Free book QR/footnotes page removed
 
-`wrangler.toml` receives `MAILERLITE_GROUP_FREE_BOOK = "185654229318239343"`. The `RESEND_API_KEY` and `MAILERLITE_API_KEY` are already secrets in the deployed worker.
+The free book has no footnotes or endnotes. The QR page was removed from gen-free-book.sh -- variables, step block, page calculation, TOC row, merge list, cleanup. Step count reduced from 10 to 9.
 
-`reginald/lib/resend.js`: new `sendFreeBookNotification()` pure exported function.
-`cloudflare-worker.js`: new `buildFreeBookFormHTML()` pure exported function, `handleFreeBookDownload()` handler, route intercept before `handleMxSubdomain` for `mx.allabout.network`.
+### 9. Chapter tables in free book (Handbook first)
 
-Worker deployed as version `14e34486`.
+Prose book descriptions replaced with structured two-column tables (# | Chapter | What it covers). MX: The Handbook appears first, MX: The Protocols second. Chapter titles taken from soul.md files.
+
+### 10. Duplicate contents page fixed
+
+gen-free-book.sh step 1 previously called pdf:chapter00-simple (which has --toc --toc-depth=2), producing a second TOC inside the chapter-00 PDF. Step 1 now runs pandoc directly without --toc, leaving pdf:chapter00-simple unchanged for standalone use.
+
+### 11. Em-dash replacement
+
+All 35 em-dashes (--) in chapter-00-free.md replaced with space-hyphen-space ( - ) per writing conventions. PDF regenerated and deployed.
+
+### 12. CRM stale directories removed
+
+Three flat client directories (kwint, lpc, media219) removed from mx-crm after the contacts reshape to one-folder-per-person shipped in an earlier session.
 
 ---
 
@@ -114,12 +108,22 @@ Worker deployed as version `14e34486`.
 | Chapter subfolders created | 49 |
 | PDF errors fixed | 3 |
 | package.json scripts updated | 10 |
+| Em-dashes replaced | 35 |
 | New Worker routes | 1 (GET + POST) |
 | MailerLite groups created | 1 (Free Book Downloads) |
 | Worker tests | 203 passing (7 new) |
 | Worker version deployed | 14e34486 |
-| Submodule commits | 4 (allaboutv2 ×2, mx-outputs ×2) |
-| Hub commits | 4 |
+| CRM files removed | 14 (3 client directories) |
+| Hub commits | 10+ |
+| Submodule commits | 8 |
+
+---
+
+## Next Steps
+
+- Test /books/download-intro end-to-end: submit real email, confirm notification arrives at tom.cranstoun@gmail.com
+- Set up MailerLite welcome automation for "Free Book Downloads" group
+- Decide Protocols imprint: DDT or CogNovaMX (critical path before 1 Jul)
 
 ---
 
@@ -127,18 +131,21 @@ Worker deployed as version `14e34486`.
 
 | Hash | Repo | Description |
 |------|------|-------------|
+| a01f9dc5 | hub | refactor: split Frankfurt CMS Summit files into talk/ and workshop/ subfolders |
+| a092fa61 | hub | style: replace em-dashes with hyphens in free book chapter |
+| 2bcbb727 | hub | fix: remove duplicate contents page from free book |
+| e078160a | hub | docs: free book -- handbook first, chapter tables replace prose |
+| bbaf0afe | hub | fix: remove QR/footnotes page from free book; fix notification email |
+| d21ae78b | hub | chore: update mx-outputs submodule pointer (evening session) |
+| c1a00114 | hub | feat: email owner notification on free book download |
+| 4204bdaf | hub | feat: add email capture for free book downloads |
+| 52198c4d | hub | chore: one-folder-per-chapter restructure across all three manuscripts |
+| 7bb39c7 | mx-crm | crm: remove stale flat client directories (kwint, lpc, media219) |
+| 7202600 | mx-outputs | free-book: update intermediate chapter PDFs after em-dash fix |
+| bca35a2 | mx-outputs | free-book: replace em-dashes with hyphens |
+| 982948e | mx-outputs | free-book: remove duplicate contents page |
+| 0d4ad12 | mx-outputs | free-book: handbook first, chapter tables replace prose descriptions |
+| 988c748 | mx-outputs | free-book: remove footnotes QR page (9-section PDF) |
+| 00a2f2f | mx-outputs | evening: manuscript restructure, free book deploy, email capture |
 | fe5b292c | allaboutv2 | feat: add email capture for free book downloads |
 | 5c98f8b7 | allaboutv2 | feat: email owner notification on free book download |
-| 9d803f9 | mx-outputs | free-book: regenerate with expanded book descriptions |
-| 13aadb1 | mx-outputs | books: gate free book download behind email capture form |
-| 4204bdaf | hub | feat: add email capture for free book downloads |
-| c1a00114 | hub | feat: email owner notification on free book download |
-| 52198c4d | hub | chore: one-folder-per-chapter restructure across all three manuscripts |
-
----
-
-## Next Steps
-
-- Test the `/books/download-intro` form end-to-end: submit a real email and confirm both the MailerLite subscription and the Resend notification arrive
-- Set up a MailerLite welcome automation for the "Free Book Downloads" group (welcome email to the reader)
-- Monitor first live downloads via `info@cognovamx.com` inbox
