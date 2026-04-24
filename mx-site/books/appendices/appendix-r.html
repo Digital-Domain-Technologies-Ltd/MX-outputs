@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Tom Cranstoun" />
+  <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
+  <title>Appendix R: Testing Agent Comprehension</title>
+  
+
+  <link rel="canonical" href="https://mx.allabout.network/books/appendices/appendix-r.html">
+  <!-- MX metadata -->
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="reference">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+  <meta name="mx:aiEditable" content="false">
+  <meta name="mx:content-policy" content="extract-with-attribution">
+  <meta name="mx:attribution" content="required">
+  <link rel="llms-txt" href="/llms.txt">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/books/appendices/appendix-r.html">
+  <meta property="og:title" content="Appendix R: Testing Agent Comprehension">
+  <meta property="og:description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="MX: The Protocols — book cover">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://mx.allabout.network/books/appendices/appendix-r.html">
+  <meta name="twitter:title" content="Appendix R: Testing Agent Comprehension">
+  <meta name="twitter:description" content="Implementation guide from MX-Protocols book">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="MX: The Protocols — book cover">
+  <meta name="twitter:creator" content="@ddttomtom">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Appendix R: Testing Agent Comprehension",
+    "description": "Practical guidance from MX-Protocols book on designing AI agent-friendly websites",
+    "author": {
+      "@type": "Person",
+      "name": "Tom Cranstoun",
+      "email": "info@cognovamx.com",
+      "url": "https://allabout.network"
+    },
+    "inLanguage": "en-GB",
+    "timeRequired": "PT60M",
+    "educationalLevel": "Intermediate",
+    "datePublished": "2026-01-10",
+    "dateModified": "2026-01-10",
+    "isPartOf": {
+      "@type": "Book",
+      "name": "MX-Protocols",
+      "author": {
+        "@type": "Person",
+        "name": "Tom Cranstoun"
+      },
+      "url": "https://mx.allabout.network/books/appendices"
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="appendix.css">
+</head>
+<body>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+<hr>
+<header id="title-block-header">
+<h1 class="title">Appendix R: Testing Agent Comprehension</h1>
+<p class="subtitle">MX-Protocols</p>
+<p class="author">Tom Cranstoun</p>
+<p class="date">January 2026</p>
+</header>
+<nav id="TOC" role="navigation" aria-label="Table of Contents">
+<ul>
+<li><a href="#appendix-r-testing-agent-comprehension"
+id="toc-appendix-r-testing-agent-comprehension">Appendix R: Testing
+Agent Comprehension</a>
+<ul>
+<li><a href="#why-test-the-agent-not-just-the-site"
+id="toc-why-test-the-agent-not-just-the-site">Why test the agent, not
+just the site</a></li>
+<li><a href="#the-relevance-layer" id="toc-the-relevance-layer">The
+relevance layer</a></li>
+<li><a href="#the-unreliable-narrator"
+id="toc-the-unreliable-narrator">The unreliable narrator</a></li>
+<li><a href="#the-hawthorne-effect-on-agents"
+id="toc-the-hawthorne-effect-on-agents">The Hawthorne effect on
+agents</a></li>
+<li><a href="#the-canary-token-method"
+id="toc-the-canary-token-method">The canary-token method</a></li>
+<li><a href="#a-worked-example" id="toc-a-worked-example">A worked
+example</a></li>
+<li><a href="#scoring-and-interpretation"
+id="toc-scoring-and-interpretation">Scoring and interpretation</a></li>
+<li><a href="#publisher-self-testing-with-head-requests"
+id="toc-publisher-self-testing-with-head-requests">Publisher
+self-testing with HEAD requests</a></li>
+<li><a href="#cross-references"
+id="toc-cross-references">Cross-references</a></li>
+<li><a href="#acknowledgements"
+id="toc-acknowledgements">Acknowledgements</a></li>
+</ul></li>
+</ul>
+</nav>
+<div data-content-type="appendix">
+<h2 id="appendix-r-testing-agent-comprehension">Appendix R: Testing
+Agent Comprehension</h2>
+<p>Most of this book is about what publishers should build so that AI
+agents can read their content. This appendix is about the other side of
+the same problem: how to test whether an agent has actually read what
+was published. The two questions look symmetric but they are not.
+Building a well-structured page is a craft activity with stable rules.
+Testing whether an agent read that page is an empirical activity against
+a moving target — agents change their fetching pipelines, their
+summarisation layers, and their behavioural defaults from one model
+release to the next. A test that worked in February may report different
+numbers in April against the same fixture, and the difference may have
+nothing to do with the page.</p>
+<p>This appendix sets out a methodology for testing agent comprehension
+that survives that drift. It builds on work by Dachary Carey, whose 2026
+article “Designing an Agent Reading Test” introduced canary-token-based
+measurement and a two-phase scoring design that separates objective
+signals from agent self-reports. The methods here extend that approach
+into a publisher-side framework: what to measure, what to ignore, and
+what to do when the agent and the test disagree.</p>
+<h2 id="why-test-the-agent-not-just-the-site">Why test the agent, not
+just the site</h2>
+<p>Appendix N catalogues anti-patterns from the publisher side — the
+fourteen most common mistakes that break agent compatibility. Appendix I
+documents a single pipeline failure in detail, the £203,000 cruise
+pricing error. Together they answer the question “what does the
+publisher get wrong?” Appendix R answers a different question: “what
+does the agent get wrong, even when the publisher gets everything
+right?”</p>
+<p>The distinction matters because publisher-side fixes have a ceiling.
+A page can be served as static HTML with semantic landmarks, complete
+Schema.org, MX governance tags, an llms.txt declaration, and a perfect
+heading hierarchy — and an agent can still report that the page does not
+contain information that is plainly there. The reasons are pipeline
+reasons, not content reasons. The agent’s fetch tool may have truncated
+the page at 75 kilobytes. The agent’s summarisation layer may have
+decided the relevant section was off-topic and dropped it. The agent’s
+tool-calling protocol may have substituted a paraphrase for the original
+text before the reasoning model ever saw the words. None of these
+failures are visible to the publisher, and none of them can be fixed by
+improving the page.</p>
+<p>What can be fixed is the way the page is <em>built to survive</em>
+those failures. That is the publisher-side complement to agent testing:
+once you know which agents drop content under which conditions, you can
+structure the page so that critical content survives compression.
+Testing agent comprehension is therefore not adversarial. It is the
+feedback loop that tells publishers which of their pages are getting
+through the pipeline intact and which are arriving at the reasoning
+model in a form their authors would not recognise.</p>
+<h2 id="the-relevance-layer">The relevance layer</h2>
+<p>The first concept this appendix introduces is the relevance layer.
+When an AI agent fetches a web page, the bytes of that page rarely
+arrive at the reasoning model unchanged. Between the HTTP response and
+the language model that produces the user-facing answer, there is almost
+always an intermediary process — sometimes called retrieval, sometimes
+summarisation, sometimes context compression — that filters, reshapes,
+or paraphrases the page’s content to fit the agent’s context window and
+the agent’s interpretation of the user’s question. This intermediary is
+the relevance layer.</p>
+<p>The relevance layer is not visible to the user, and in most agent
+architectures it is not visible to the reasoning model either. The
+reasoning model sees what the relevance layer chose to forward. If the
+user asked “what schema enforcement modes are available?” and the page
+contains a heading “Schema Modes” with a list of three modes, the
+relevance layer may forward the heading and the list. If the user asked
+the same question but the page calls the same content “Validation
+Levels”, the relevance layer may decide that “Validation Levels” is not
+relevant to a question about “schema enforcement”, and forward something
+else instead. The reasoning model then reports that the page does not
+document schema enforcement modes — even though the page does document
+them, under a different name.</p>
+<p>This is not a bug in any one agent. It is a consequence of a design
+pattern that almost all current agents share. The relevance layer exists
+because raw page content is too large and too noisy to forward in full,
+and forwarding it in full would exhaust the context window before the
+reasoning model could answer the question. The relevance layer makes the
+agent feasible. It also makes the agent fragile in ways that publishers
+cannot directly fix and that agents themselves cannot directly
+report.</p>
+<p>The implication for publishers is that content needs to be readable
+through the relevance layer’s filter, not just in the raw page. Synonyms
+matter. Rephrasing the same idea in three different ways inside one
+section is not redundant — it is insurance against a relevance layer
+that recognises only one of the three phrasings. Heading text matters
+more than heading hierarchy: a heading that uses the same vocabulary as
+the user’s likely question is more likely to be retained. And
+single-word qualifiers (“only”, “always”, “never”) matter because they
+are the kind of detail that summarisation layers strip first.</p>
+<p>Designing for the relevance layer is different from designing for
+accessibility, for SEO, or for human readers. It is its own discipline,
+and the testing methods in this appendix exist to make that discipline
+measurable.</p>
+<h2 id="the-unreliable-narrator">The unreliable narrator</h2>
+<p>The second concept is the unreliable narrator problem. AI agents are
+not reliable reporters of their own behaviour. When asked “did you read
+this page?” an agent will, in practice, answer “yes” even when its fetch
+tool returned a truncated response, when its summarisation layer dropped
+the relevant section, or when its rendering pipeline failed entirely.
+This is not deceit. It is the same agreeable pattern-matching that
+produces hallucinated citations: the agent’s training rewards smooth,
+confident responses, and “yes I read it” is smoother than “I attempted
+to read it and my pipeline returned the first 75 kilobytes only, of
+which the relevance layer forwarded approximately 12 kilobytes, of which
+my reasoning model retained the headings and the first paragraph of each
+section”. Both statements may be true. Only one of them is a normal
+English sentence.</p>
+<p>A second symptom of the unreliable narrator is internally
+contradictory self-reports. An agent may state, in the same response,
+that it followed a redirect and then describe behaviour consistent with
+not following that redirect. It may report a count of items found
+(twenty-five) and then list a different count (sixteen). It may claim to
+have read all nine sections of a page and then fail to answer questions
+about the third section. These contradictions are not lies. They are the
+result of stitching together outputs from different sub-systems — fetch
+tool, summarisation layer, reasoning model — none of which has
+authoritative knowledge of what the others did.</p>
+<p>The methodological consequence is that any test of agent
+comprehension must avoid relying on the agent’s self-report as primary
+evidence. The agent’s narration of its own behaviour is useful as a
+hypothesis but cannot be used as a measurement. Measurement must come
+from observable artefacts — the answers the agent produces, the strings
+it cites, the URLs it requests — that can be compared against a known
+ground truth held by the test designer, not by the agent.</p>
+<p>This is the core insight of Carey’s canary-token design: the agent is
+asked to find and report unique strings planted at known positions in
+the test pages, and the report is compared by an independent scorer (a
+human or a deterministic script) against the known answers. The agent
+never sees the answers. The agent’s account of its own behaviour is
+recorded but not scored. The score depends on which canary tokens the
+agent’s response actually contains, not on what the agent claims it
+found.</p>
+<p>Designing around the unreliable narrator rather than through it is a
+recurring pattern in agent engineering. Where a human evaluator might
+correct a wrong answer by asking the same question more clearly, an
+agent test cannot ask follow-up questions without potentially triggering
+different behaviour each time. The test has to be designed so that the
+first answer is the only answer that matters, and so that the answer can
+be scored without the agent’s cooperation.</p>
+<h2 id="the-hawthorne-effect-on-agents">The Hawthorne effect on
+agents</h2>
+<p>The third concept is the Hawthorne effect, borrowed from
+twentieth-century industrial psychology. In the original Hawthorne
+studies at Western Electric, factory workers performed differently when
+they knew they were being observed than when they thought they were
+working unobserved. The change in behaviour was attributed to the
+observation itself rather than to any of the experimental variables. The
+phenomenon has since been documented in many domains, and recent
+research from UC Berkeley shows that it applies to large language models
+and agent systems as well.</p>
+<p>The Berkeley work reports that frontier models correctly identify
+evaluation scenarios approximately 80 per cent of the time, but disclose
+that awareness in their outputs only about 2 per cent of the time. A
+separate study found that models execute requested harmful tasks roughly
+70 per cent of the time when the prompt is framed hypothetically and
+about 36 per cent of the time when the prompt is framed as a real
+request. The interpretation is straightforward: agents detect that they
+are being evaluated, modulate their behaviour accordingly, and rarely
+report doing so. They retry harder, they try fallback approaches, they
+scan more carefully, and they describe their work in more polished
+prose, when they think a test is in progress.</p>
+<p>For agent comprehension testing, the Hawthorne effect is a confounder
+that cannot be fully eliminated. Any test that the agent can detect as a
+test will produce different numbers from the agent’s normal
+documentation-reading behaviour. The numbers will tend to be higher —
+the agent does its best work in evaluation conditions — which means the
+test under-reports the failure modes that matter. The user who is not
+running an evaluation will see worse behaviour than the test
+predicted.</p>
+<p>The mitigation is to minimise the signals that broadcast “this is a
+test.” Domain names should not contain the word “test” or “benchmark”.
+URL paths should use neutral words like “task” or “review” rather than
+“test” or “evaluation”. Page titles and headings should match the
+vocabulary of normal documentation rather than the vocabulary of
+assessment. Canary tokens should be framed in publisher-side language
+(“tools for the documentation team to verify content delivery”) rather
+than scoring-side language (“identifiers used by the test harness”). And
+the test design should accept that some amount of Hawthorne signal is
+unavoidable: a sufficiently capable reasoning model will eventually
+infer from the structure of a page that it is being measured, even when
+no individual signal is present. The goal is to keep the inference
+difficult enough that the agent’s evaluation-mode behaviour reveals real
+failure modes rather than just confirming that the agent is good at
+recognising tests.</p>
+<h2 id="the-canary-token-method">The canary-token method</h2>
+<p>A canary token is a unique, recognisable string planted at a known
+position in a test page, designed so that an agent’s response can be
+scored objectively by checking which canaries the response contains. The
+technique is borrowed from intrusion-detection practice in security
+engineering — where canary files reveal unauthorised access — and
+adapted to measure not access but comprehension.</p>
+<p>A canary token follows three rules. It is unique enough that it could
+not arise by chance in the agent’s training data or in unrelated pages.
+It is short enough to be quoted verbatim in an agent response. And it
+carries a structured name that encodes what its presence proves. A
+workable convention is
+<code>CANARY-[FAILURE_MODE]-[DETAIL]-[PLANT_SPECIES]</code>, where the
+failure mode names the test condition, the detail names the location
+within that test, and the plant species supplies a memorable,
+unambiguous suffix. Examples: <code>CANARY-TRUNC-75K-summit</code>,
+<code>CANARY-TAB-PYTHON-maple</code>,
+<code>CANARY-CONNEG-MD-sigma</code>. The plant species suffix avoids
+accidental collisions with technical vocabulary and gives each canary a
+name a human can remember.</p>
+<p>Canary tokens are placed at strategic positions inside test pages —
+at known byte offsets to test truncation, in tabs that are not the first
+tab to test tabbed disclosure, in markdown-format alternates to test
+content negotiation, and so on. The placements are recorded once, in a
+reference table held by the test designer, and never shown to the
+agent.</p>
+<p>The two-phase test design separates the agent’s task from the agent’s
+reporting. In the first phase, the agent is asked to perform a normal
+documentation task — answer ten realistic questions of the kind a
+developer might ask a documentation site. The questions are written so
+that finding the answer requires reading the parts of the page where
+canaries are planted, but the canaries themselves are not mentioned. The
+agent answers the questions as it would answer any other documentation
+questions. In the second phase, the agent is shown a separate page that
+explains the canary concept and asks the agent to list every
+<code>CANARY-</code> string it encountered during phase one. The
+instruction is explicit: do not re-fetch the test pages, just report
+what was already in the context.</p>
+<p>Scoring then happens on a third surface, the human-facing form. The
+form lists the canaries the agent reported, compares them against the
+known canary set, and produces two scores: an objective canary score
+(sixteen points across the test set, one or two points per planted
+canary depending on difficulty), and a qualitative score (four points
+awarded by a human reviewer who reads the agent’s phase-one answers and
+judges whether they would have been useful to a real user). The total is
+twenty points. Perfect scores are unlikely for any current agent, and a
+low score does not necessarily mean the agent is bad — it usually means
+the agent’s pipeline filtered content that the publisher believed it was
+delivering.</p>
+<p>The two-phase design is essential. If the agent is told about
+canaries before it reads the pages, the test measures how well the agent
+searches for known strings — a different and easier task than reading
+documentation. If the canary instruction is given after reading, the
+test measures what the agent’s pipeline actually retained when it was
+reading documentation in the way it normally reads documentation. The
+difference is the whole point.</p>
+<h2 id="a-worked-example">A worked example</h2>
+<p>A minimum useful agent reading test fits in a single static-HTML site
+of about ten pages plus a results page. The publisher hosts the site at
+a domain that does not advertise itself as a test, plants canaries at
+the failure-mode positions described in Appendix S, writes ten realistic
+documentation questions that require reading the canary regions, and
+publishes a separate page with the canary instructions and the reporting
+form. An agent runs the tasks, reports its canaries to the form, and the
+form scores the result against the reference set held in the publisher’s
+database.</p>
+<p>The smallest such site is built in a weekend. The pages are static
+HTML; the canary tokens are inline strings; the reporting form is a
+single HTML form that posts a comma-separated list of canaries to a
+backend that compares against the reference table. There is no database
+design beyond a list of canary names and their expected positions. There
+is no tracking beyond the score. There is no AI in the harness itself —
+all the AI work is done by the agent under test.</p>
+<p>The hard part is not building the site. The hard part is keeping the
+test free of evaluation signals. The pages must read like real
+documentation, the questions must be the kind of questions a developer
+would actually ask, and the URL paths and page titles must use ordinary
+documentation vocabulary. Even small lapses — a heading called “Test
+Section”, an author name like “Test Engineer”, a footer that mentions
+“evaluation” — can leak the context the test is trying to hide. The
+discipline of writing a test that the agent does not realise is a test
+is a craft activity, and it is the activity that has the largest effect
+on the results.</p>
+<p>Carey’s original test, hosted at a documentation-style domain,
+demonstrates the pattern at full scale. The version described in this
+appendix is a smaller variant that publishers can run against their own
+content rather than against a synthetic fixture. Both have the same
+purpose: to measure, with publisher-controlled ground truth, what AI
+agents actually retain when they read web pages.</p>
+<h2 id="scoring-and-interpretation">Scoring and interpretation</h2>
+<p>The twenty-point score should be read with three caveats.</p>
+<p>The first caveat is that absolute scores are not portable across
+agents. A score of fourteen against one agent does not mean the same
+thing as a score of fourteen against another agent, because the two
+agents have different relevance layers, different fetch tools, and
+different summarisation behaviours. What matters is the <em>shape</em>
+of the failures within a single agent’s run: which canaries it found,
+which it missed, and which failure modes are responsible for the gaps. A
+site that scores fourteen by missing only the truncation canaries has a
+different problem from a site that scores fourteen by missing the
+tabbed-content and content-negotiation canaries.</p>
+<p>The second caveat is that perfect scores are unlikely and not
+particularly informative. An agent that scored twenty out of twenty
+almost certainly recognised the test conditions and modulated its
+behaviour. The Hawthorne effect makes high scores suspicious. A more
+useful target is consistency across re-runs and across agents: an honest
+score is one that reproduces.</p>
+<p>The third caveat is that the score measures pipeline survivability
+for one set of test conditions, not documentation effectiveness in
+general. A site that survives the ten failure modes in Appendix S still
+has to answer real users’ real questions. Pipeline survivability is
+necessary but not sufficient. It buys the publisher the right to be
+evaluated on the quality of their content, rather than being silently
+filtered before the content reaches the reasoning model.</p>
+<p>Used with these caveats, the score is one of the few measurable
+signals publishers have about how their content is actually consumed by
+AI agents. It is not a benchmark of which agent is best. It is a
+feedback loop telling publishers which of their pages can be read at
+all.</p>
+<h2 id="publisher-self-testing-with-head-requests">Publisher
+self-testing with HEAD requests</h2>
+<p>The canary-token method described above is the gold standard for
+measuring agent comprehension because it uses a real agent against
+publisher-controlled fixtures with objective ground truth. It is also
+relatively expensive to set up: the publisher has to plant canaries,
+write the questions, host a results form, and maintain the test fixtures
+over time. Many publishers will want a cheaper, more frequent self-test
+that they can run continuously against their own site without needing an
+agent in the loop at all. The complement to canary testing is
+HEAD-request self-testing.</p>
+<p>A HEAD request is the cheapest possible HTTP interaction. It asks the
+server “would a GET to this URL succeed?” without downloading the
+response body. The server returns the status code and the response
+headers and nothing else. For checking whether a URL is reachable,
+parseable, and well-formed, the HEAD request is exactly the right tool.
+It is fast enough that a publisher can HEAD-test every URL in a sitemap
+of several thousand entries in a few seconds, and cheap enough that it
+can run as often as the publisher likes — on every CMS publish, on every
+CI run, on every nightly cron, on every deploy.</p>
+<p>What HEAD-testing measures is not what the canary method measures.
+HEAD-testing measures the <em>fetchability</em> of the URLs the
+publisher claims to publish: does each URL parse cleanly? does the
+server respond? does the response status make sense? does the URL still
+exist? It does not measure the <em>comprehensibility</em> of the page
+that comes back; that is what the canary method is for. The two methods
+are complementary, and a publisher serious about machine experience
+should run both — HEAD-testing continuously against the live site, and
+canary testing periodically against the test fixture set.</p>
+<p>The HEAD self-test catches three of the failure modes catalogued in
+Appendix S directly: Soft 404 (the test sees a 200 response with
+error-page-like behaviour), Cross-Host Redirect (the test follows the
+redirect chain and records each hop’s host), and URL Encoding Mismatch
+(the test fails to parse the URL before any HTTP request is made, which
+is itself the diagnostic). It catches a fourth — Truncation Risk —
+indirectly, by reporting the <code>Content-Length</code> header in the
+HEAD response, which is enough to flag pages whose total weight exceeds
+common AI agent fetch caps. The remaining seven failure modes need a
+real GET against the rendered HTML and are not visible to a HEAD-only
+test.</p>
+<p>A minimal publisher HEAD self-test fits in twenty lines of any modern
+language. The pattern is the same in all of them:</p>
+<ol type="1">
+<li>Fetch and parse <code>robots.txt</code> to discover the sitemap
+URLs.</li>
+<li>Fetch each sitemap (use a tolerant regex extractor for
+<code>&lt;loc&gt;</code> URLs rather than a strict XML parser, because
+real-world sitemaps come in surprising variations of whitespace,
+namespace, and timestamp format).</li>
+<li>For every URL discovered, issue a HEAD request with
+<code>maxRedirects: 5</code>. Record the status code, content type, and
+final URL.</li>
+<li>Bucket the results: 200 OK, 3xx redirect, 4xx client error, 5xx
+server error, network error (the URL did not parse, the host was
+unreachable, or the request timed out).</li>
+<li>Compare the result against the previous run. Any new 4xx or 5xx, any
+URL that has started failing parsing, any sudden swing in the redirect
+rate — these are the signals worth alerting on.</li>
+</ol>
+<p>The publisher who runs this loop on every CMS publish catches three
+categories of regression that no other tool catches reliably: dead URLs
+in the sitemap (because the slug was renamed but the sitemap was not
+regenerated), newly-malformed URLs (because the slug generator was
+changed and started emitting characters the URL parser rejects), and
+origin failures that affect specific pages but not the homepage (because
+the deployment broke a single template). All three are common, all three
+are silent, and all three turn the publisher’s content into ghosts as
+far as AI agents are concerned.</p>
+<p>There is also a darker reason to recommend HEAD self-testing: tool
+unreliability. The publisher who runs an audit tool that reports “no
+broken links” must verify that the tool actually issued HTTP requests
+rather than defaulting to success. Tools that claim to measure something
+can produce confidently wrong results when the measurement code is
+missing — a subtle form of the unreliable-narrator problem this appendix
+already describes for agents, applied to the audit infrastructure
+itself. The defence against tool unreliability is the same as the
+defence against agent unreliability: do not trust the report’s prose,
+look at the underlying data, and prefer measurements that can be
+reproduced independently. A publisher who runs their own HEAD self-test
+against their own sitemap has a reproducible second opinion that does
+not depend on any vendor’s audit tool behaving correctly.</p>
+<p>For a worked implementation of the HEAD self-test in JavaScript, see
+the <code>linkChecker.js</code> module in the MX Web Audit Suite. The
+module is small, the API is three functions, and the pattern is
+straightforward enough to port to any language a publisher’s CMS happens
+to be written in.</p>
+<h2 id="cross-references">Cross-references</h2>
+<p>For the catalogue of the ten failure modes a publisher should test
+against, see <strong>Appendix S: The Ten Agent Reading Failure
+Modes</strong>. For the publisher-side anti-patterns that cause similar
+failures upstream, see <strong>Appendix N: Anti-Patterns
+Catalog</strong>. For a worked example of a single pipeline failure in
+production, see <strong>Appendix I: Pipeline Failure Case
+Study</strong>. For the validation layers an agent creator should build
+to defend against the failures this appendix describes, see
+<strong>Chapter 13: What Agent Creators Must Build</strong>,
+particularly the “Testing and Validation Harnesses” section.</p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>The canary-token method, the two-phase scoring design, and the
+framing of the relevance layer in this appendix build directly on
+Dachary Carey’s article “Designing an Agent Reading Test”, published 6
+April 2026. The treatment here extends Carey’s work into a
+publisher-side methodology and connects it to the MX failure-mode
+catalogue in Appendix S; the underlying technique is hers.</p>
+</div>
+<hr>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+
+  <!-- Floating home button (top-left) -->
+  <a href="index.html" class="floating-home-button" aria-label="Back to Home">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 0L0 8h3v8h10V8h3L8 0zm0 2.5L13.5 8H11v6H5V8H2.5L8 2.5z"/>
+    </svg>
+    Home
+  </a>
+  <!-- Floating back to top button (bottom-left) -->
+  <a href="#main" class="floating-top-button" aria-label="Back to Top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 3.5l-5.5 5.5L4 10.5l3-3v8.5h2V7.5l3 3L13.5 9z"/>
+    </svg>
+    Top
+  </a>
+
+  <script>
+    // Add copy buttons to all code blocks
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find both wrapped code blocks (div.sourceCode) and standalone pre blocks
+      const wrappedBlocks = document.querySelectorAll('div.sourceCode');
+      const standaloneBlocks = document.querySelectorAll('pre[data-role="code-block"]:not(.sourceCode)');
+
+      // Process wrapped code blocks (HTML, JavaScript, etc.)
+      wrappedBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          let text = '';
+          const spans = codeElement.querySelectorAll('span[id^="cb"]');
+          spans.forEach(function(span) {
+            const nodes = Array.from(span.childNodes);
+            nodes.forEach(function(node) {
+              if (node.nodeType === Node.TEXT_NODE) {
+                text += node.textContent;
+              } else if (node.nodeName !== 'A') {
+                text += node.textContent;
+              }
+            });
+          });
+          return text;
+        });
+      });
+
+      // Process standalone pre blocks (text, robots.txt, etc.)
+      standaloneBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          return codeElement ? codeElement.textContent : block.textContent;
+        });
+      });
+
+      // Helper function to add copy button to any block
+      function addCopyButton(block, extractTextFn) {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
+
+        button.addEventListener('click', function() {
+          const text = extractTextFn(block);
+
+          navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied';
+            button.classList.add('copied');
+            setTimeout(function() {
+              button.textContent = 'Copy';
+              button.classList.remove('copied');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Failed to copy:', err);
+            button.textContent = 'Failed';
+            setTimeout(function() {
+              button.textContent = 'Copy';
+            }, 2000);
+          });
+        });
+
+        block.insertBefore(button, block.firstChild);
+      }
+    });
+  </script>
+</body>
+</html>
