@@ -4,7 +4,7 @@ description: "Afternoon session: Leica Microsystems audit completed end-to-end; 
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-24
 modified: 2026-04-24
-version: "1.1"
+version: "2.0"
 mx:
   status: active
   contentType: report
@@ -84,6 +84,24 @@ The rolling contractor agreement for byDesign developer work was corrected on tw
 
 During the contacts-reshape push, Gate 0 blocked the hub push because three submodules (allaboutv2, mx-audit, mx-outputs) were on detached HEAD. Inspection showed each detached SHA was already an ancestor of `origin/main` -- no orphan commits -- so `scripts/reattach-submodules.sh` reattached all three cleanly, fast-forwarding local `main` branches to `origin/main`. The hub pointer for mx-crm itself also needed attention at start of session: a three-way divergence (detached HEAD past local main, origin/main past detached HEAD) was resolved by checkout + ff-only merge with the working diff preserved. No commits lost across any repo.
 
+### 9. LEARNINGS.md restructuring -- hooks, skills, and full triage
+
+Two-phase documentation maintenance session spanning skills, hooks, and all SSOT gotcha docs:
+
+**Phase A -- hook fix and skill restructuring:**
+
+- `pre-write-frontmatter.sh` argv offset bug fixed -- hook was reading `process.argv[1]` (empty string under `--input-type=module`) instead of `process.argv[2]`. Write validation was silently checking the existing file on disk rather than the incoming content.
+- html-writer skill: `## Site-chrome contract` section added -- the CSS/chrome contract for `mx-outputs/mx-site/blog/` is now a discoverable H2 with an explicit scaffold-verification step.
+- skill-developer SKILL.md: "Write blocked by PreToolUse hook -- use Edit" added to Authoring Gotchas.
+- markdown-standards.md: MD052 placeholder suppression rule added.
+- 7 rules migrated to SSOT gotcha docs: shell-gotchas (Marp silent render, SYN_SENT exhaustion, hash-multiset diff), audit-gotchas (Puppeteer consent suppression), pdf-gotchas (Lua fontspec crash guard), GIT-README (large file buffer, checkout-before-commit, reset--hard danger).
+
+**Phase B -- full LEARNINGS triage (48 -> 22 rules):**
+
+- 11 stale rules deleted -- already in target docs verbatim.
+- 15 rules migrated to 6 target docs: pdf-gotchas, audit-gotchas (5 entries including served-vs-rendered metric, schema.org whitelist, claim-present position), shell-gotchas (3 entries), GIT-README (.gitkeep rule), skill-developer (retire-parallel-dir and retire-broad-name checks), audit-report skill (new Authoring Gotchas section with 3 entries).
+- 22 rules retained; buffer is back to a manageable rolling window.
+
 ---
 
 ## By the Numbers
@@ -91,9 +109,11 @@ During the contacts-reshape push, Gate 0 blocked the hub push because three subm
 | Metric | Value |
 |--------|-------|
 | Submodule commits | 7 |
-| Hub commits | 6 |
+| Hub commits | 7 |
 | Repositories touched | 4 (hub, mx-audit, mx-crm, mx-outputs) |
-| Hub files changed | ~15 |
+| Hub files changed | ~25 |
+| LEARNINGS rules before | 48 |
+| LEARNINGS rules after | 22 |
 | mx-crm files changed | 31 (24 renames, 2 merges, 2 creates, 3 edits) |
 | Contacts reshaped | 30 (24 flat -> folder, 2 merged, 4 already folders, contractor agreement relocated) |
 | Audit report size | 58K (markdown), 160K (PDF) |
@@ -120,6 +140,7 @@ During the contacts-reshape push, Gate 0 blocked the hub push because three subm
 | c4fb5c6f | hub | Docs: update CHANGELOG, LEARNINGS, REMINDERS for 2026-04-24 session |
 | 1fdd62e3 | hub | Fix helper guide frontmatter: camelCase field names, valid audience enum, remove deprecated updateInstructions |
 | 80b1e3e8 | hub | crm: follow contacts-folder reshape in docs and registry |
+| (pending) | hub | Skills/hooks restructuring and LEARNINGS.md triage (48 -> 22 rules) |
 
 ---
 
