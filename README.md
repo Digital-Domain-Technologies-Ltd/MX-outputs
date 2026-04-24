@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 73 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 163 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 84 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 164 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
-| [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **823** | |
+| [pptx/](pptx/) | 3 | PowerPoint — presentation source files |
+| **Total** | **836** | |
 
 ---
 
@@ -62,7 +62,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (21 files)
+### pdf/outreach/ (32 files)
 
 - [`bobw-report.pdf`](pdf/outreach/2026-04-07/bobw-report.pdf)
 - [`freeths-report.pdf`](pdf/outreach/2026-04-07/freeths-report.pdf)
@@ -85,8 +85,20 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`neomwellbeing-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-04-23/neomwellbeing-pipeline-truncation-risk-pages.csv)
 - [`neomwellbeing-report.pdf`](pdf/outreach/2026-04-23/neomwellbeing-report.pdf)
 - [`neomwellbeing-structured-data-findings.csv`](pdf/outreach/2026-04-23/neomwellbeing-structured-data-findings.csv)
+- [`leica-microsystems-accessibility.csv`](pdf/outreach/2026-04-24/leica-microsystems-accessibility.csv)
+- [`leica-microsystems-image-optimisation.csv`](pdf/outreach/2026-04-24/leica-microsystems-image-optimisation.csv)
+- [`leica-microsystems-link-analysis.csv`](pdf/outreach/2026-04-24/leica-microsystems-link-analysis.csv)
+- [`leica-microsystems-marker-reachability.csv`](pdf/outreach/2026-04-24/leica-microsystems-marker-reachability.csv)
+- [`leica-microsystems-pa11y-findings.csv`](pdf/outreach/2026-04-24/leica-microsystems-pa11y-findings.csv)
+- [`leica-microsystems-pages-audited.csv`](pdf/outreach/2026-04-24/leica-microsystems-pages-audited.csv)
+- [`leica-microsystems-pipeline-delayed-content-start-pages.csv`](pdf/outreach/2026-04-24/leica-microsystems-pipeline-delayed-content-start-pages.csv)
+- [`leica-microsystems-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-04-24/leica-microsystems-pipeline-inline-tag-bloat-pages.csv)
+- [`leica-microsystems-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-04-24/leica-microsystems-pipeline-truncation-risk-pages.csv)
+- [`leica-microsystems-report.pdf`](pdf/outreach/2026-04-24/leica-microsystems-report.pdf)
+- [`leica-microsystems-structured-data-findings.csv`](pdf/outreach/2026-04-24/leica-microsystems-structured-data-findings.csv)
   - **2026-04-07/** (2 files)
   - **2026-04-23/** (19 files)
+  - **2026-04-24/** (11 files)
 
 ### pdf/reginald/ (23 files)
 
@@ -130,7 +142,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 
-### md/reports/ (162 files)
+### md/reports/ (163 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -165,7 +177,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (134 files)
+#### md/reports/directors/ (135 files)
 
 **build/** (3 files)
 
@@ -179,7 +191,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (127 files)
+**session/** (128 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -300,6 +312,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-04-22-morning-report.md`](md/reports/directors/session/2026-04-22-morning-report.md)
 - [`2026-04-23-afternoon-report.md`](md/reports/directors/session/2026-04-23-afternoon-report.md)
 - [`2026-04-23-evening-report.md`](md/reports/directors/session/2026-04-23-evening-report.md)
+- [`2026-04-24-afternoon-report.md`](md/reports/directors/session/2026-04-24-afternoon-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -442,7 +455,8 @@ PowerPoint presentation source files.
 
 - [`MX-what-why-when.pptx`](pptx/presentations/MX-what-why-when.pptx)
 - [`dita-and-mx-podcast.pptx`](pptx/presentations/dita-and-mx-podcast.pptx)
+- [`frankfurt-cms-summit-demo.pptx`](pptx/presentations/frankfurt-cms-summit-demo.pptx)
 
 ---
 
-*Generated on 2026-04-24 at 10:26*
+*Generated on 2026-04-24 at 14:49*
