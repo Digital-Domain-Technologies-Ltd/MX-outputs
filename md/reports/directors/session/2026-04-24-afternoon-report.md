@@ -4,7 +4,7 @@ description: "Afternoon session: Leica Microsystems audit completed end-to-end; 
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-24
 modified: 2026-04-24
-version: "2.0"
+version: "3.0"
 mx:
   status: active
   contentType: report
@@ -102,6 +102,12 @@ Two-phase documentation maintenance session spanning skills, hooks, and all SSOT
 - 15 rules migrated to 6 target docs: pdf-gotchas, audit-gotchas (5 entries including served-vs-rendered metric, schema.org whitelist, claim-present position), shell-gotchas (3 entries), GIT-README (.gitkeep rule), skill-developer (retire-parallel-dir and retire-broad-name checks), audit-report skill (new Authoring Gotchas section with 3 entries).
 - 22 rules retained; buffer is back to a manageable rolling window.
 
+**Phase C -- second triage pass (22 -> 0 rules):**
+
+- 17 further rules migrated: audit-gotchas (9 -- Pa11y pool shape, orphaned exports, cache baseline, cold-start, Anthropic API format.name, aggregator fields, site-wide @id, auto-mode mtime, two-code-paths); web-gotchas (3 -- Stripe duplicate webhooks, sitemap reconciler scope, Cloudflare Markdown-for-Agents); shell-gotchas (2 -- YAML rewriter safety guards, load-bearing frontmatter parser); skill-developer Authoring Gotchas (1 -- never claim hook enforcement without the hook); audit-report Authoring Gotchas (1 -- point-in-time artefact); vendor-extensions-policy (1 -- standards must not consume their own namespace).
+- CLAUDE.md Read-only section updated with SKIP_DIRS lockstep pointer.
+- Final 3 rules with no migration target deleted; LEARNINGS.md is now empty (template placeholder only).
+
 ---
 
 ## By the Numbers
@@ -113,7 +119,7 @@ Two-phase documentation maintenance session spanning skills, hooks, and all SSOT
 | Repositories touched | 4 (hub, mx-audit, mx-crm, mx-outputs) |
 | Hub files changed | ~25 |
 | LEARNINGS rules before | 48 |
-| LEARNINGS rules after | 22 |
+| LEARNINGS rules after | 0 (buffer empty) |
 | mx-crm files changed | 31 (24 renames, 2 merges, 2 creates, 3 edits) |
 | Contacts reshaped | 30 (24 flat -> folder, 2 merged, 4 already folders, contractor agreement relocated) |
 | Audit report size | 58K (markdown), 160K (PDF) |
@@ -140,7 +146,10 @@ Two-phase documentation maintenance session spanning skills, hooks, and all SSOT
 | c4fb5c6f | hub | Docs: update CHANGELOG, LEARNINGS, REMINDERS for 2026-04-24 session |
 | 1fdd62e3 | hub | Fix helper guide frontmatter: camelCase field names, valid audience enum, remove deprecated updateInstructions |
 | 80b1e3e8 | hub | crm: follow contacts-folder reshape in docs and registry |
-| (pending) | hub | Skills/hooks restructuring and LEARNINGS.md triage (48 -> 22 rules) |
+| 29abf630 | hub | Skills/hooks restructuring and LEARNINGS.md triage (48 -> 22 rules) |
+| 49e7b34c | hub | Docs: add CHANGELOG entry for skills/hooks restructuring and LEARNINGS triage |
+| 6cfbe0a7 | hub | LEARNINGS: migrate 17 more rules to SSOT docs (22 -> 3) |
+| 33d8bf9e | hub | LEARNINGS: clear remaining 3 rules -- buffer now empty |
 
 ---
 
