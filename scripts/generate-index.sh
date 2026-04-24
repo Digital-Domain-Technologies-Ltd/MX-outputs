@@ -2,6 +2,20 @@
 # generate-index.sh — Auto-generate README.md index for mx-outputs
 # Run from the mx-outputs root directory
 # Usage: ./scripts/generate-index.sh
+# ---
+# title: "generate-index — Auto-generate README.md index for mx-outputs"
+# version: "1.1"
+# created: 2026-02-02
+# modified: 2026-04-24
+# author: Tom Cranstoun
+# description: "Single-pass directory walker that builds a navigable README.md index of all mx-outputs build artefacts"
+# category: mx-output
+# status: active
+# tags: [index, readme, outputs, generator]
+# dependencies: []
+# builds-on: []
+# partOf: mx-outputs
+# ---
 
 set -euo pipefail
 

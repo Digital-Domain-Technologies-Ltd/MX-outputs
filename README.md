@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-04-23"
-modified: "2026-04-23"
+created: "2026-04-24"
+modified: "2026-04-24"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 67 | PDFs — books, reports, manuals, presentations |
+| [pdf/](pdf/) | 73 | PDFs — books, reports, manuals, presentations |
 | [md/](md/) | 163 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **802** | |
+| **Total** | **823** | |
 
 ---
 
@@ -62,11 +62,17 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (15 files)
+### pdf/outreach/ (21 files)
 
 - [`bobw-report.pdf`](pdf/outreach/2026-04-07/bobw-report.pdf)
 - [`freeths-report.pdf`](pdf/outreach/2026-04-07/freeths-report.pdf)
-- [`NeomWellBeing-report.zip`](pdf/outreach/2026-04-23/NeomWellBeing-report.zip)
+- [`dotfusion-accessibility.csv`](pdf/outreach/2026-04-23/dotfusion-accessibility.csv)
+- [`dotfusion-image-optimisation.csv`](pdf/outreach/2026-04-23/dotfusion-image-optimisation.csv)
+- [`dotfusion-link-analysis.csv`](pdf/outreach/2026-04-23/dotfusion-link-analysis.csv)
+- [`dotfusion-marker-reachability.csv`](pdf/outreach/2026-04-23/dotfusion-marker-reachability.csv)
+- [`dotfusion-pa11y-findings.csv`](pdf/outreach/2026-04-23/dotfusion-pa11y-findings.csv)
+- [`dotfusion-report.pdf`](pdf/outreach/2026-04-23/dotfusion-report.pdf)
+- [`dotfusion-structured-data-findings.csv`](pdf/outreach/2026-04-23/dotfusion-structured-data-findings.csv)
 - [`neomwellbeing-accessibility.csv`](pdf/outreach/2026-04-23/neomwellbeing-accessibility.csv)
 - [`neomwellbeing-console-errors.csv`](pdf/outreach/2026-04-23/neomwellbeing-console-errors.csv)
 - [`neomwellbeing-image-optimisation.csv`](pdf/outreach/2026-04-23/neomwellbeing-image-optimisation.csv)
@@ -80,7 +86,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`neomwellbeing-report.pdf`](pdf/outreach/2026-04-23/neomwellbeing-report.pdf)
 - [`neomwellbeing-structured-data-findings.csv`](pdf/outreach/2026-04-23/neomwellbeing-structured-data-findings.csv)
   - **2026-04-07/** (2 files)
-  - **2026-04-23/** (13 files)
+  - **2026-04-23/** (19 files)
 
 ### pdf/reginald/ (23 files)
 
@@ -439,4 +445,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-04-23 at 21:10*
+*Generated on 2026-04-24 at 10:26*
