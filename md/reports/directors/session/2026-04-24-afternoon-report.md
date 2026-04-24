@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report -- Leica Audit Delivered, Frankfurt Materials Finalized"
-description: "Afternoon session: Leica Microsystems audit completed end-to-end; Frankfurt CMS Summit slides and helper guide updated; audit pipeline hardened."
+title: "Co-Directors Report -- Leica Audit, Frankfurt Materials, Contacts Reshape"
+description: "Afternoon session: Leica Microsystems audit completed end-to-end; Frankfurt CMS Summit slides and helper guide updated; audit pipeline hardened; mx-crm contacts unified to one-folder-per-person shape; contractor agreement updated."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-24
 modified: 2026-04-24
-version: "1.0"
+version: "1.1"
 mx:
   status: active
   contentType: report
@@ -13,16 +13,16 @@ mx:
   tags: [directors-report, session, afternoon]
 ---
 
-# Co-Directors Report -- Leica Audit Delivered, Frankfurt Materials Finalized
+# Co-Directors Report -- Leica Audit, Frankfurt Materials, Contacts Reshape
 
 **Date:** 24 April 2026 -- Afternoon
-**Segment:** Afternoon (noon -- 14:00)
+**Segment:** Afternoon (noon -- 14:45)
 
 ---
 
 ## Summary
 
-The Leica Microsystems audit pipeline ran to completion today -- collect, scores, discovery, report, PDF -- producing a client-ready audit report and supporting files committed to mx-crm and mx-outputs. Frankfurt CMS Summit presentation materials were aligned to the confirmed audit data: slides updated with speaker notes and timing, helper guide extended with a five-act stage cue sheet. Three audit pipeline improvements landed: a cleaner nav-pages caption, conditional stripping of the JSON-LD drift section when absent, and a TYPO3 platform fingerprint for the rate limiter. The fierce-critic and LLM judgment gates were tightened to reduce false positives in rounds 2 and 3.
+The Leica Microsystems audit pipeline ran to completion today -- collect, scores, discovery, report, PDF -- producing a client-ready audit report and supporting files committed to mx-crm and mx-outputs. Frankfurt CMS Summit presentation materials were aligned to the confirmed audit data: slides updated with speaker notes and timing, helper guide extended with a five-act stage cue sheet. Three audit pipeline improvements landed: a cleaner nav-pages caption, conditional stripping of the JSON-LD drift section when absent, and a TYPO3 platform fingerprint for the rate limiter. The fierce-critic and LLM judgment gates were tightened to reduce false positives in rounds 2 and 3. Later in the session, `mx-crm/contacts/` was unified so every contact has the same shape (one folder per person, `{slug}.cog.md` inside), three stale detached-HEAD submodules were reattached, and the Yunus Doğu contractor agreement was corrected (name and 18 February 2026 start date) and re-rendered to PDF.
 
 ---
 
@@ -68,19 +68,37 @@ Added to CHECK 2 "Do NOT flag": standard comparative/descriptive phrases about m
 
 Added to CHECK 4 "Do NOT flag": binary findings verified on every audited page, already-scoped observations, absence findings, unanimous-evidence findings. General guidance added: raise the bar to what a professional editor reviewing 100 similar reports would flag.
 
+### 6. mx-crm contacts -- unified shape
+
+Every contact in `mx-crm/contacts/` now follows the same pattern: one folder per person, containing `{slug}.cog.md` plus any related docs. Previously most contacts were flat `.md` files while a few were folders with `.cog.md` plus message files -- the directory was a mess to scan, and scripts had to special-case both shapes.
+
+Concrete moves (30 files changed in mx-crm): 24 flat contact files renamed via `git mv` into `{slug}/{slug}.cog.md` folders; `scott-mcgregor.md` (WhatsApp history) and `scott-mcgregor/scott-mcgregor.cog.md` (LPC business briefing) merged into one consolidated record; `david-strachan.md` merged with the meeting-notes PDF content into a single `.cog.md`; `contractor-agreement-dogu-abaris.md` relocated into `dogu-abaris/` as `contractor-agreement.md`. Guides (`contacts-soul.md`, `how-i-work.md`) kept at the contacts root since they are not contacts.
+
+Hub follow-up commit `80b1e3e8` updated two references (`targets.md`, `mx-canon/ssot/COGNOVAMX-EXTENSIONS.md`), one skill description (`.claude/skills/mx-contacts/skill.md`), and re-synced the cog registry (`npm run cog:sync` -> 208 cogs).
+
+### 7. Contractor agreement -- Yunus Doğu, 18 February start
+
+The rolling contractor agreement for byDesign developer work was corrected on two points: contractor name changed from "Doğu Abaris" to "Yunus Doğu" (8 occurrences across frontmatter, prose, and signature block), and the contract start date changed from 22 March 2026 to 18 February 2026 (3 occurrences). Clause 3.1 was reworded to note that the client company (The Gathering Administration Ltd, incorporated 5 March 2026) assumes the pre-existing rights and obligations on incorporation -- the working relationship predates the company. PDF regenerated to `mx-outputs/pdf/dogu-abaris-contractor-agreement.pdf` (48K).
+
+### 8. Submodule hygiene -- three detached HEADs recovered
+
+During the contacts-reshape push, Gate 0 blocked the hub push because three submodules (allaboutv2, mx-audit, mx-outputs) were on detached HEAD. Inspection showed each detached SHA was already an ancestor of `origin/main` -- no orphan commits -- so `scripts/reattach-submodules.sh` reattached all three cleanly, fast-forwarding local `main` branches to `origin/main`. The hub pointer for mx-crm itself also needed attention at start of session: a three-way divergence (detached HEAD past local main, origin/main past detached HEAD) was resolved by checkout + ff-only merge with the working diff preserved. No commits lost across any repo.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Submodule commits | 4 |
-| Repositories touched | 3 (mx-audit, mx-crm, mx-outputs) |
-| Hub files changed | ~10 |
-| Lines added (hub) | +170 |
-| Lines removed (hub) | -50 |
+| Submodule commits | 7 |
+| Hub commits | 6 |
+| Repositories touched | 4 (hub, mx-audit, mx-crm, mx-outputs) |
+| Hub files changed | ~15 |
+| mx-crm files changed | 31 (24 renames, 2 merges, 2 creates, 3 edits) |
+| Contacts reshaped | 30 (24 flat -> folder, 2 merged, 4 already folders, contractor agreement relocated) |
 | Audit report size | 58K (markdown), 160K (PDF) |
 | Frankfurt PPTX | 57K |
+| Contractor PDF | 48K |
 
 ---
 
@@ -91,13 +109,24 @@ Added to CHECK 4 "Do NOT flag": binary findings verified on every audited page, 
 | 0dff7de | mx-audit | Add TYPO3 platform fingerprint and rate limits |
 | ef1da3c | mx-audit | infill-report: clean NAV_PAGES_NOTE caption and strip JSONLD_DRIFT section when absent |
 | c454feb | mx-crm | Add Leica Microsystems audit report and support files (2026-04-24) |
+| 4bf5d8a | mx-crm | contacts: unify shape -- one folder per contact with {slug}.cog.md |
+| 9dd0854 | mx-crm | contractor-agreement: rename to Yunus Dogu, set start date 18 Feb 2026 |
 | 9a03466 | mx-outputs | Add Leica audit PDF, Frankfurt PPTX, and update index (2026-04-24) |
+| d816aa0 | mx-outputs | Add afternoon directors report: Leica audit delivered, Frankfurt materials finalized |
+| 5752f40 | mx-outputs | Add Yunus Dogu contractor agreement PDF (18 Feb 2026 start) |
+| bc84fb9b | hub | Audit pipeline: fierce-critic platform-engine check, LLM judgment rubric tightening, submodule bumps |
+| 9bbb7f3c | hub | Frankfurt CMS Summit: add stage cue sheet, speaker notes with timing, remove internal footnote slide |
+| 1f495370 | hub | Misc: appendix CSS, audit-html-compare, mx.note, tests, package-lock |
+| c4fb5c6f | hub | Docs: update CHANGELOG, LEARNINGS, REMINDERS for 2026-04-24 session |
+| 1fdd62e3 | hub | Fix helper guide frontmatter: camelCase field names, valid audience enum, remove deprecated updateInstructions |
+| 80b1e3e8 | hub | crm: follow contacts-folder reshape in docs and registry |
 
 ---
 
 ## Next Steps
 
-- Commit hub changes (scripts, skills, presentations, guides)
 - Frankfurt: deliver briefing to TYPO3 helpers at least one week before the event
 - Consider offering the Leica report as a public example audit on allabout.network
 - LLM judgment: monitor next two audit runs to confirm round-cap frequency has dropped
+- Send Yunus Doğu the regenerated contractor agreement PDF for signature
+- Watch mx-crm contact scripts (write-to, mx-contacts) for any remaining assumptions about flat-file contacts
