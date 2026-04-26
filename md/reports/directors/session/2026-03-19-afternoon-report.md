@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Unified Readiness Model and Root Cleanup"
 created: 2026-03-19
 version: "2.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: afternoon

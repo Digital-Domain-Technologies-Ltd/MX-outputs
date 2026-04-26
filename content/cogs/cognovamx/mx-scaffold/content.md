@@ -4,7 +4,7 @@ version: "1.0"
 description: Create new MX-OS shell scripts with correct structure, metadata, and alias registration. The canonical pattern for extending mx-os.
 created: 2026-02-25
 modified: 2026-03-03
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

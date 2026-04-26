@@ -4,7 +4,7 @@ version: "1.0.0"
 description: "The meta-registry — knows where every registry is, what it indexes, and how to query it."
 created: 2026-02-11
 modified: 2026-03-03
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

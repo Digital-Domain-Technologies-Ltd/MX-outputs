@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — MX Handbook Press Release and Private Drafts Area"
 description: "Published a press-release blog post announcing MX: The Handbook and added a robots-disallowed drafts folder under /blog/ to support unlisted work-in-progress."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-22
 modified: 2026-04-22
 version: "1.1"

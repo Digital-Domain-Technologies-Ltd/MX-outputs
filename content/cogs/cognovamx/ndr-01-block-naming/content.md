@@ -4,7 +4,7 @@ version: '1.0'
 description: 'NDR #1: The word ''block'' risks confusion with blockchain. Propose alternatives for advisory board review.'
 created: 2026-02-13
 modified: 2026-03-02
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   contentType: info-doc
   status: proposed

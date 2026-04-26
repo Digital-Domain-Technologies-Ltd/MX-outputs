@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report -- Manuscript Restructure, Free Book Polish, and Email Capture"
 description: "Full evening session: manuscript restructure (49 soul.md files), PDF pipeline fixes, free book redesigned and deployed, email capture with MailerLite + Resend, free book further polished (QR removed, chapter tables, duplicate TOC fix, em-dash cleanup), CRM stale directories removed."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-24
 modified: 2026-04-24
 version: "2.0"

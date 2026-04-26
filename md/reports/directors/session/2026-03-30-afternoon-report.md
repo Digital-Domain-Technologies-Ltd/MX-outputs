@@ -3,7 +3,7 @@ title: "Co-Directors Report — Printworks Audit: Clean Sheet, Then Fix the Two 
 created: "2026-03-30"
 x-mx-segment: "afternoon"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

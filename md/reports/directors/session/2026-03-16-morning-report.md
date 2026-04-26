@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Handbook PDF Rebuild + Reginald Explainer"
 created: "2026-03-16"
 version: "2.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "morning"
   audience: stakeholders

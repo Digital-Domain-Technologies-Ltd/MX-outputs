@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Site-Chrome Alignment, Em-Dash Policy, Submodule-Rebase Hardening"
 description: "Aligned the press-release post with CogNovaMX site chrome, banned em-dashes in authored HTML and swept 301 occurrences across every blog post, and closed a silent-data-loss bug in the hub-rebase-with-submodule-pointer-conflict workflow."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-22
 modified: 2026-04-22
 version: "1.0"

@@ -1,6 +1,6 @@
 ---
 description: "Session report — AgentLock-inspired security extensions: documentation propagation"
-author: Maxine
+author: Tom Cranstoun
 created: 2026-03-23
 modified: 2026-03-23
 version: "1.0"

@@ -4,7 +4,7 @@ title: "Co-Directors Report — CRM Update, Mar 6 2026"
 description: "Session report covering CRM maintenance: new contact Dogu Abaris, ten contact file updates, interactions log extended, and step-commit workflow with merge conflict resolution."
 created: "2026-03-06"
 version: "1.0"
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 mx:
   audience: "stakeholders"
   confidential: true

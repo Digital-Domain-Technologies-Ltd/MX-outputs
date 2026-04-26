@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Terminology Migration: Provenance, Maintained, Attested"
 created: "2026-03-20"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "morning"
   audience: stakeholders

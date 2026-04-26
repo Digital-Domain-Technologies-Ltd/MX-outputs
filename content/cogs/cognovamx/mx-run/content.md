@@ -6,7 +6,7 @@ description: Universal cog executor — looks up any cog by name, lists its acti
 created: 2026-02-11
 modified: 2026-02-11
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

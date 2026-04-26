@@ -4,7 +4,7 @@ version: "1.0"
 description: "Shared validation policy for cog publication. Included by action-docs that validate cogs before registration."
 created: 2026-03-04
 modified: 2026-03-04
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 
 mx:
   status: active

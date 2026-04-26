@@ -6,7 +6,7 @@ description: The current state of the MX ecosystem, priorities, action plan, and
 created: 2026-02-09
 modified: 2026-02-09
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

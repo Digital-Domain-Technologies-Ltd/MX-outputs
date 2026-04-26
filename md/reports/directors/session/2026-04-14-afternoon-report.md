@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Audit Pipeline Hardening, CLAUDE.md Refactor, and First mx.allabout.network Audit"
 description: "Afternoon session: audit results-vs-cache fix, CLAUDE.md slim, and first full audit of mx.allabout.network with templates restored to warm opportunity framing."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-14
 modified: 2026-04-14
 version: "1.2"

@@ -3,7 +3,7 @@
 title: "Co-Directors Report — MX Coming Soon Page, Editorial Amendments, Live Production Audit + Illustrations + PDFs"
 created: "2026-03-13"
 version: "5.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "evening"
   audience: stakeholders

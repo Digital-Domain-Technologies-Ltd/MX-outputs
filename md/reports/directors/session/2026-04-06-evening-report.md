@@ -3,7 +3,7 @@ title: "Co-Directors Report — Day-End Wrap: Audit, Compliance, and Site Qualit
 created: "2026-04-06"
 x-mx-segment: "evening"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

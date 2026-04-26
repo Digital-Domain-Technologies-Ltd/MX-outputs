@@ -4,7 +4,7 @@ version: '1.0'
 description: 'NDR #3: Prefer spelling-neutral field names. Where US/UK spelling differs, use an abbreviation or neutral synonym.'
 created: 2026-02-16
 modified: 2026-03-02
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   contentType: info-doc
   status: accepted

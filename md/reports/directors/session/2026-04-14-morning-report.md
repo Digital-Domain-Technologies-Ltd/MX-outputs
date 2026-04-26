@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Printer Pipeline, Strategic Blog, Audit Pipeline, and Skill System Modernised"
 description: "Morning session: printer email fix with dual-secret verification, strategic blog launch, audit-report pipeline redesigned as two-pass infill-then-rewrite, NEOM Wellbeing audit shipped, blog post audit findings applied, header CTA buttons added, and the Claude Code skill system migrated from legacy JSON to modern folder format with route-sync repaired."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-14
 modified: 2026-04-14
 version: "1.4"

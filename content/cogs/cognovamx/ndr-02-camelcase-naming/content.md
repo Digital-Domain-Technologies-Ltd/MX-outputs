@@ -5,7 +5,7 @@ description: 'NDR #2: All YAML frontmatter field names must use camelCase. Align
   conventions.'
 created: 2026-02-16
 modified: 2026-03-02
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   contentType: info-doc
   status: accepted

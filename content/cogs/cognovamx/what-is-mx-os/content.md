@@ -6,7 +6,7 @@ description: The Machine Experience Operating System. Documentation IS the syste
 created: 2026-02-09
 modified: 2026-02-09
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

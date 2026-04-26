@@ -1,6 +1,6 @@
 ---
 title: "Co-Directors Report: REGINALD Documented and Deployed"
-author: Maxine (Claude Opus 4.5)
+author: Tom Cranstoun
 
 created: '2026-03-01'
 mx:

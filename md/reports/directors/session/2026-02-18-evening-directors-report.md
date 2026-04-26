@@ -3,7 +3,7 @@ title: "Co-Directors Report — PDF Image Quality Crisis Resolved"
 created: "2026-02-18"
 version: "2.0"
 modified: "2026-02-18"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "evening"

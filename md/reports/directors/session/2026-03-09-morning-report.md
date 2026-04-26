@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Infrastructure Cleanup, Humanisation Pass, and Full PDF Rebuild"
 created: "2026-03-09"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "morning"
   audience: stakeholders

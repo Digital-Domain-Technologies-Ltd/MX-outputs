@@ -4,7 +4,7 @@ version: "1.0"
 description: "How the cog format evolved from two document types to one document with blocks — the architectural journey, the design principles, and what it means for implementations."
 created: 2026-03-03
 modified: 2026-03-04
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   license: proprietary

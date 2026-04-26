@@ -2,7 +2,7 @@
 title: "Co-Directors Report — The Great Book Consolidation"
 created: "2026-02-13"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "afternoon"

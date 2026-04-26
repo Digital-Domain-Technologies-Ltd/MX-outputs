@@ -3,7 +3,7 @@ title: "Co-Directors Report — Book Purchase System: Stripe + MailerLite + R2"
 created: "2026-04-06"
 x-mx-segment: "night"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

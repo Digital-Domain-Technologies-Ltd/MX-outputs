@@ -3,7 +3,7 @@ title: "Co-Directors Report — A2A Agent Cards, Full Audit, Wikidata Level 4"
 created: "2026-04-12"
 x-mx-segment: "afternoon"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

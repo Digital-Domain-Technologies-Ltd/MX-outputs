@@ -4,7 +4,7 @@ title: "Co-Directors Report — Broadening the Case"
 description: "Morning session report. Six writing tasks completed: Chapter 00 rewrite with non-commerce case studies, two cog reviews, cog spec two-zone fix, blog deployment, Appendix D verification. REMINDERS refreshed."
 created: "2026-03-04"
 version: "1.0"
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 mx:
   x-mx-segment: "morning"
   audience: "stakeholders"

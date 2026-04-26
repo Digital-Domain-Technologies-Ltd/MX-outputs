@@ -4,7 +4,7 @@ description: "MX namespace policy: standard fields (no prefix), mx: namespace (T
 version: "1.0"
 created: 2026-03-01
 modified: 2026-03-01
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   status: active

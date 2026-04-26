@@ -4,7 +4,7 @@ version: "1.0"
 description: "Reference implementation demonstrating the cog includes mechanism. Includes a shared validation policy and overrides one rule."
 created: 2026-03-04
 modified: 2026-03-04
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 
 includes:
   - source: shared-validation-policy.cog.md

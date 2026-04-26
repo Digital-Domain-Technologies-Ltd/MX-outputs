@@ -1,6 +1,6 @@
 ---
 title: "Co-Directors Report: Repository Reorganisation — Separation of Concerns"
-author: Maxine (Claude Opus 4.6)
+author: Tom Cranstoun
 
 created: '2026-03-01'
 mx:

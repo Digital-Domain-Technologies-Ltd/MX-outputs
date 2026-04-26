@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Repository Flattened: Two Wrapper Directories Removed"
 created: "2026-02-27"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "evening"

@@ -2,7 +2,7 @@
 
 title: "Completion Report: Web Audit Suite Development"
 description: "Report on the development of the Web Audit Suite for Cog-Nova-MX sales enablement and Arrive First audit"
-author: Maxine
+author: Tom Cranstoun
 created: 2026-02-04
 modified: 2026-02-09
 version: "1.0"

@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Knowledge architecture + audit infill hardening"
 description: "Evening segment: LEARNINGS.md redistributed into four new gotcha SSOTs, then the web-audit infill pipeline was hardened against silent skeleton-fill gaps with a full safety-net test suite."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-14
 modified: 2026-04-14
 version: "2.0"

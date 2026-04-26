@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Book Tidy-Up: Titles, Scope, Typography, and Print Quality"
 created: "2026-03-12"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "afternoon"
   audience: stakeholders

@@ -2,7 +2,7 @@
 title: "Co-Directors Report — N-Language Architecture for Cogify Templates"
 created: "2026-02-22"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "morning"

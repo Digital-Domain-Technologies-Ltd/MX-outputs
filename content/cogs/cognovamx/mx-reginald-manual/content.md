@@ -1,7 +1,7 @@
 ---
 title: MX Reginald — Manual
 description: How to use the Machine eXperience Engine including cog listing, execution, categories, and building guidance.
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 created: 2026-02-06
 modified: 2026-02-23
 version: '1.3'

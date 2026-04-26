@@ -4,7 +4,7 @@ title: "Co-Directors Report — From Infrastructure to Arsenal"
 description: "Morning session report. Three work streams: carrier format compliance (98%), complete messaging framework (9 deliverables for 7 audiences), and SSOT consolidation (single field dictionary, 4 redundant files removed)."
 created: "2026-03-03"
 version: "1.0"
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 mx:
   x-mx-segment: "morning"
   audience: "stakeholders"

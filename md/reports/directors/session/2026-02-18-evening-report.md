@@ -1,6 +1,6 @@
 ---
 title: "Co-Directors Report: 2026-02-18 Evening Session"
-author: Maxine (AI) and Tom Cranstoun
+author: Tom Cranstoun
 version: "1.0"
 
 created: '2026-03-01'

@@ -2,7 +2,7 @@
 title: "Co-Directors Report — MX OS Toolkit Enters Version Control"
 created: "2026-02-25"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "morning"

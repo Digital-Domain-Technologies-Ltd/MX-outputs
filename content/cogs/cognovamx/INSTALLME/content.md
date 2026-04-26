@@ -4,7 +4,7 @@ version: '2.1'
 description: Self-contained action cog for installing MX OS. Contains both instructions and executable script.
 created: 2026-02-10
 modified: 2026-02-24
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary

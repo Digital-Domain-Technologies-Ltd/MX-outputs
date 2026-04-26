@@ -6,7 +6,7 @@ description: "The railway analogy for MX OS. A physical metaphor that maps every
 created: 2026-02-11
 modified: 2026-02-11
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   contentType: info-doc

@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Audit Trustworthiness Pass + MXS Public Mirror"
 description: "Evening session shipping a seven-step audit-tooling plan end-to-end plus a late-evening arc that published the four MXS proposed drafts at a public URL the Gathering community can read."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-16
 modified: 2026-04-16
 version: "1.2"

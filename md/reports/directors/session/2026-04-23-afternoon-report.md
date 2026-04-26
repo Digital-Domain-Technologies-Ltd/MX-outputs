@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Markdown for Agents + Audit Workflow Overhaul + Detached HEAD Prevention"
 description: "Shipped Markdown for Agents; 5 audit workflow fixes; blog posts published; Gate 0 pre-commit hook hardened; Adobe LLM Optimizer critique and mx-audit detection added."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-23
 modified: 2026-04-23
 version: "4.0"

@@ -3,7 +3,7 @@ title: "Co-Directors Report — Frontmatter Validator: One Rules Engine for All 
 created: "2026-04-12"
 x-mx-segment: "morning"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

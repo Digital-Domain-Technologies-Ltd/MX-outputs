@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Submodule Cleanup and Book PDF Generation"
 created: "2026-03-20"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "afternoon"
   audience: stakeholders

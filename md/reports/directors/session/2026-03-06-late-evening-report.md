@@ -4,7 +4,7 @@ title: "Co-Directors Report — Salva Demo Fixes, Content-Encoding Bug, Cloudfla
 description: "Late-evening session report. Fixed Salva multilingual demo, diagnosed and fixed critical content-encoding bug that broke all HTML on allabout.network, added 404 fallback, set up CLI cache purging."
 created: "2026-03-06"
 version: "2.0"
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 mx:
   x-mx-segment: "late-evening"
   audience: "stakeholders"

@@ -3,7 +3,7 @@ title: "Co-Directors Report — Pre-Publication Standards Enforcement"
 created: "2026-03-27"
 x-mx-segment: "evening"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

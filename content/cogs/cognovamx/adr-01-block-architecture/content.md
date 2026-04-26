@@ -4,7 +4,7 @@ version: '1.0'
 description: 'ADR #1: Replace two cog types (info-doc/action-doc) with one document type containing open-ended blocks.'
 created: 2026-02-12
 modified: 2026-02-13
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   license: proprietary
   status: accepted

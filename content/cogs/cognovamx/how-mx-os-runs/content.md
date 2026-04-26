@@ -6,7 +6,7 @@ description: The MX OS runtime model. How an agent boots, discovers cogs, routes
 created: 2026-02-09
 modified: 2026-02-10
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

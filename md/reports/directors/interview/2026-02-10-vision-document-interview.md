@@ -3,7 +3,7 @@
 title: "Co-Directors Report — 10 February 2026 (Session 4: MX Vision 2026)"
 created: "2026-02-10"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   audience: stakeholders

@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Session Report — 19 Mar 2026 (Afternoon)"
 description: "Reginald website: CSP fix, carrier format content, COG definition correction across entire codebase"
-author: "Maxine"
+author: "Tom Cranstoun"
 created: 2026-03-19
 modified: 2026-03-19
 version: "1.0"

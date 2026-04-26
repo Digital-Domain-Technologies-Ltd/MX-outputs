@@ -6,7 +6,7 @@ description: "The sayings that define MX OS culture. Every phrase earned its pla
 created: 2026-02-10
 modified: 2026-02-11
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

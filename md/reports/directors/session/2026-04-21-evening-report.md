@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Content-Signal awareness + mx-site blog reorg"
 description: "Added contentsignals.org recognition to the audit pipeline as a positive, informational, non-scoring signal, and reorganised mx-site blog into assets/ and profiles/ subfolders."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-21
 modified: 2026-04-21
 version: "1.1"

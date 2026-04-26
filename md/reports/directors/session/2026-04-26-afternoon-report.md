@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report -- US Letter Free Book Format Added"
 description: "Free book generator extended to produce A4, A5, and US Letter PDFs in a single run."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-26
 modified: 2026-04-26
 version: "1.0"

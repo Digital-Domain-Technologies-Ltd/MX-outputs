@@ -4,7 +4,7 @@ description: Project-level environment configuration. The MX equivalent of .env 
   never hardcode.
 created: 2026-02-11
 modified: 2026-02-11
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 title: Project Environment
 mx:
   maintainer: mx.machine.experience@gmail.com

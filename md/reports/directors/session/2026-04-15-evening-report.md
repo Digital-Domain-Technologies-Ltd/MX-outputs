@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Evening: MX one-pager, field scripts, audit-tool hardening + NEOM regen"
 description: "Evening segment — two-column MX one-pager, field-audit scripts, three collector fixes, three gate skills, and an end-to-end NEOM regeneration that proved the whole pipeline clean."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-15
 modified: 2026-04-15
 version: "2.0"

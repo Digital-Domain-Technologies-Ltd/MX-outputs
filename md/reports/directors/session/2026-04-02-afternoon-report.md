@@ -3,7 +3,7 @@ title: "Co-Directors Report — PDF Orphan/Widow Heading Fix"
 created: "2026-04-02"
 x-mx-segment: "afternoon"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

@@ -4,7 +4,7 @@ title: "Co-Directors Report — Audit Pipeline End-to-End and Standards Sweep"
 description: "Evening session report. Full tg.community audit using the MX audit cog, Pa11y dependency fix, viewport meta SSOT update, and 372-file standards sweep across all repositories."
 created: "2026-03-04"
 version: "1.0"
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 mx:
   x-mx-segment: "evening"
   audience: "stakeholders"

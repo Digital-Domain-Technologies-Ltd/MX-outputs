@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report -- TG-Community integration and Stream format decision"
 description: "Afternoon session: mounted The Gathering's community repos, reviewed platform state, identified dogfooding gap, wrote discussion doc for admin"
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-16
 modified: 2026-04-16
 version: "1.0"

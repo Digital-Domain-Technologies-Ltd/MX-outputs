@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Repository Restructure for Future-Proofing"
 created: "2026-02-19"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "morning"

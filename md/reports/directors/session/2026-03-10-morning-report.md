@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Protocols Moves Toward Publication Quality"
 created: "2026-03-10"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "morning"
   audience: stakeholders

@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Audit Pipeline Performance Hardening"
 description: "Afternoon session: Pa11y cache short-circuit, in-process HEAD memoization, unified shared HEAD cache, throttle-on-cache-hit, and the root-cause fix for cache wiping."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-15
 modified: 2026-04-15
 version: "1.0"

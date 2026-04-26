@@ -6,7 +6,7 @@ description: Generate and validate llms.txt files for Robot-First Web compliance
 created: 2026-02-06
 modified: 2026-02-06
 
-author: Maxine (MX - Machine eXperience Engine)
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

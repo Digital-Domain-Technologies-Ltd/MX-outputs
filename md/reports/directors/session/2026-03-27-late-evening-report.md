@@ -3,7 +3,7 @@ title: "Co-Directors Report — Endnotes and PDF Typography"
 created: "2026-03-27"
 x-mx-segment: "late-evening"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

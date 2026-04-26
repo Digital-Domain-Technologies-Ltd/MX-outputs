@@ -6,7 +6,7 @@ description: "Generate, register, and decode cog IDs — MD5 hashes tracing docu
 created: 2026-02-14
 modified: 2026-02-14
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

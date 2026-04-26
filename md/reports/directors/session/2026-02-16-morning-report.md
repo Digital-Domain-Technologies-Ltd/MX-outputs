@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Practising What We Preach"
 created: "2026-02-16"
 version: "3.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "morning"

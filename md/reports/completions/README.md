@@ -1,7 +1,7 @@
 ---
 title: "Completion Reports and Session Summaries System"
 description: "Automated system for capturing session completion reports and session summaries with structured documentation"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 created: 2026-02-04
 modified: 2026-02-09
 version: "1.0"

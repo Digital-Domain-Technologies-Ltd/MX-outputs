@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — 2026-02-21 Morning"
 description: "Session report covering partnership reporting framework, CRM submodule conversion, and HTML baseline audit system implementation."
-author: Maxine and Tom Cranstoun
+author: Tom Cranstoun
 created: 2026-02-21
 modified: 2026-02-21
 version: "1.0"

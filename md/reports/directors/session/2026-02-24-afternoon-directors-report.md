@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Repository Simplification"
 created: "2026-02-24"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "afternoon"

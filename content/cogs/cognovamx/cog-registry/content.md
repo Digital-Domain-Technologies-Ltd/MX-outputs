@@ -6,7 +6,7 @@ description: The centralised index of all known cogs in the MX ecosystem. An act
 created: 2026-02-09
 modified: 2026-02-10
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

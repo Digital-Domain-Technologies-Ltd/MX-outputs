@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Memory & Content Consolidation"
 created: "2026-02-24"
 version: "2.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: morning

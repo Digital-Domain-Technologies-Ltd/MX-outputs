@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Company Rename: Cog-Nova-MX Ltd"
 created: "2026-02-28"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "afternoon"

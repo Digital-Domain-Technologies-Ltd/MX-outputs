@@ -4,7 +4,7 @@ version: "2.0"
 description: "Stub. MX HTML carrier writing guide lives in Appendix M §26."
 created: 2026-03-04
 modified: 2026-04-15
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 
 mx:
   status: superseded

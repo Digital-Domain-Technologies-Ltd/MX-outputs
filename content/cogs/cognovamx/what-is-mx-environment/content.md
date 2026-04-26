@@ -6,7 +6,7 @@ description: MX OS lives on the machine, not in the repo. $MX_HOME is the machin
 created: 2026-02-10
 modified: 2026-02-10
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   contentType: info-doc

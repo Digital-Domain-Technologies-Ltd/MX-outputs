@@ -6,7 +6,7 @@ description: How cogs complement AI agent frameworks. Agent skills extend one ag
 created: 2026-02-09
 modified: 2026-02-09
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

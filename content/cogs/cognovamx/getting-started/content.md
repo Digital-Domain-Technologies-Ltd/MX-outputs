@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with MX OS"
 description: "Complete onboarding guide for new CogNovaMX team members — from fresh Mac to full immersion"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 created: 2026-02-24
 modified: 2026-02-24
 version: "1.1"

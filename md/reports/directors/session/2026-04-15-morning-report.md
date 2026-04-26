@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — MX Field Discipline End to End"
 description: "Morning session: field-SSOT consolidation, drift-prevention infrastructure, per-file compliance scanner, two cleanup passes, and a hard gate that catches field drift before any push."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-15
 modified: 2026-04-15
 version: "2.0"

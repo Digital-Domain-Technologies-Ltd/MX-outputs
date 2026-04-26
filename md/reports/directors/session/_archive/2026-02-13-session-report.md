@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Block Architecture, Messaging, Field Standardisation, Hook Enforcement"
 created: "2026-02-13"
 version: "2.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   audience: stakeholders
   confidential: true

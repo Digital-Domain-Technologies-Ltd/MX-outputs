@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Messaging File Consolidation"
 created: "2026-03-07"
 version: "1.1"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "morning"
   audience: stakeholders

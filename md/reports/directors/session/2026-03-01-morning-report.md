@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Clean Slate: History Reset and Infrastructure Hardening"
 created: "2026-03-01"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "morning"

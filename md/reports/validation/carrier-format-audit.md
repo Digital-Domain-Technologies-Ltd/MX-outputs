@@ -1,7 +1,7 @@
 ---
 title: "Carrier Format Compliance Audit"
 description: "Audit of HTML, JS, CSS, and shell script files against field-dictionary v4.0 Sections 12.1-12.9"
-author: "Maxine (automated)"
+author: "Tom Cranstoun"
 created: 2026-03-03
 modified: 2026-03-03
 version: "1.0"

@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Shared Blog CSS Architecture + DITA-vs-MX Positioning"
 description: "Blog styling consolidated into one canonical stylesheet; new DITA-vs-MX comparison post published; html-writer skill gains a timelessness rule."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-20
 modified: 2026-04-20
 version: "1.0"

@@ -6,7 +6,7 @@ description: "Automatically sync mx-reginald registry when cogs are added, modif
 created: 2026-02-17
 modified: 2026-02-17
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: info@cognovamx.com

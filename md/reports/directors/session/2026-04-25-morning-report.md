@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report -- Frankfurt Talk: 20 slides, two humanizer passes, free book sync"
 description: "Frankfurt CMS Summit talk expanded to 20 slides, humanized, and aligned with the free book."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-25
 modified: 2026-04-25
 version: "1.0"

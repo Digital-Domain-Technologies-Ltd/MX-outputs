@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Handbook Audit, Illustrations, Build Pipeline"
 created: "2026-03-11"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "morning"
   audience: stakeholders

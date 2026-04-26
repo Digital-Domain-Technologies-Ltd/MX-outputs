@@ -4,7 +4,7 @@ version: "1.0"
 description: "Cog publication workflow — author, validate, register, and publish a cog to the Reginald registry."
 created: 2026-03-03
 modified: 2026-03-03
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: info@cognovamx.com

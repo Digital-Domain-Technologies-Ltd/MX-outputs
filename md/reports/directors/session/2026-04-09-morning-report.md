@@ -3,7 +3,7 @@ title: "Co-Directors Report — DDT Identity, Stripe Live, Trading-Name Rebrand,
 created: "2026-04-09"
 x-mx-segment: "morning"
 version: "1.1"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

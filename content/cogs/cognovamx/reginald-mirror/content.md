@@ -4,7 +4,7 @@ version: "1.0.0"
 description: "Sync source cogs to the Reginald web output, keeping mx-outputs/reginald/ up to date with scripts/cogs/ and mx-canon/."
 created: 2026-03-09
 modified: 2026-03-17
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: info@cognovamx.com

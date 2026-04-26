@@ -1,7 +1,7 @@
 ---
 title: "MX Metadata Conventions — Embrace and Extend"
 description: "How MX metadata works across every file type. The implementation rules for native metadata, block mapping, namespace extension, and Reginald serving."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-02-15
 modified: 2026-02-15
 version: "1.0"

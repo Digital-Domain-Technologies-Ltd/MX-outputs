@@ -1,7 +1,7 @@
 ---
 title: "About Maxine — The Server-Client Architecture"
 description: "How Maxine works: one server, three surfaces, three protocols. The definitive architectural overview of the distributed AI partner."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-02-13
 modified: 2026-02-13
 version: "1.0"

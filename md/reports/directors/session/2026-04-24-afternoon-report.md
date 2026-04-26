@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report -- Leica Audit, Frankfurt Materials, Contacts Reshape"
 description: "Afternoon session: Leica Microsystems audit completed end-to-end; Frankfurt CMS Summit slides and helper guide updated; audit pipeline hardened; mx-crm contacts unified to one-folder-per-person shape; contractor agreement updated."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-24
 modified: 2026-04-24
 version: "3.0"

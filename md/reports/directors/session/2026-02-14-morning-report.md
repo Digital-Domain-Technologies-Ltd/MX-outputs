@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — 14 February 2026 (Morning)"
 description: "Morning session: partnership outreach tooling, operational maturity milestones, and the system learning to talk to partners."
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 created: '2026-03-01'
 mx:

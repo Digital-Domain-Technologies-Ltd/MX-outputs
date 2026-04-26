@@ -2,7 +2,7 @@
 title: "Co-Directors Report — mx-outputs Type-First Restructure"
 created: "2026-02-28"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "morning"

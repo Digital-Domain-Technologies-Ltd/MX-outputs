@@ -6,7 +6,7 @@ description: Find ephemeral UI patterns that AI and screen readers miss
 created: 2026-02-06
 modified: 2026-02-06
 
-author: Maxine (MX - Machine eXperience Engine)
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

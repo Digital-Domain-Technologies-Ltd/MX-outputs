@@ -4,7 +4,7 @@ version: "1.0"
 description: "Reference implementation showing how an effective doc is resolved from a source cog, uber doc SOPs, and included policies."
 created: 2026-03-04
 modified: 2026-03-04
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 
 mx:
   status: active

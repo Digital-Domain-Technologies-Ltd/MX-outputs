@@ -3,7 +3,7 @@ title: "Co-Directors Report — Asset Path Anchoring: One Bug Becomes a Principl
 created: "2026-04-11"
 x-mx-segment: "morning"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

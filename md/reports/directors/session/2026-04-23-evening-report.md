@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — NEOM Wellbeing Report + Pa11y Recurring Pattern Detector"
 description: "Completed NEOM Wellbeing ecommerce audit Pass 2 rewrite; built pa11y recurring pattern detector with adjusted accessibility scoring; updated audit toolchain and skills."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-23
 modified: 2026-04-23
 version: "1.0"

@@ -3,7 +3,7 @@ title: "Co-Directors Report — MX Bookshop: Wix to Static with Full MX Treatmen
 created: "2026-03-31"
 x-mx-segment: "evening"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

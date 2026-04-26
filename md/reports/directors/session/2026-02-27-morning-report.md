@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Datalake Restructured Into 5 Purpose-Based Categories"
 created: "2026-02-27"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "morning"

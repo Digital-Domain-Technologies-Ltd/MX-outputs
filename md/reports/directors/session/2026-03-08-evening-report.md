@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Chapter 0 Expansion, Footnote System, and PDF Typography"
 created: "2026-03-08"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "evening"
   audience: stakeholders

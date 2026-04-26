@@ -4,7 +4,7 @@ version: "1.0.0"
 description: "MX OS bootstrapper — zero to operational. Checks prerequisites, installs dependencies. Entry points: INSTALLME (bare metal), npm run boot, /mx-boot."
 created: 2026-02-11
 modified: 2026-03-03
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

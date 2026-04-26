@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Manuscript Quality Pass: Structure, Tone, Deduplication, Footnotes, and Standards Argument"
 created: "2026-03-09"
 version: "2.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "evening"
   audience: stakeholders

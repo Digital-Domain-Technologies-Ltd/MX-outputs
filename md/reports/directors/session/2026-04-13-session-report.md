@@ -3,7 +3,7 @@ title: "Co-Directors Report — Audit Pipeline Overhaul, Platform-Aware Sitemap 
 created: "2026-04-13"
 x-mx-segment: "full-day"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

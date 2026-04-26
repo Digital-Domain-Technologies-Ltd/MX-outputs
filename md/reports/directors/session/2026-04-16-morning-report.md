@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report -- Morning: TG-Community integration, marker reachability pipeline, audit performance"
 description: "Morning segment -- TG-Community submodule integration, then wired the 9-marker served-vs-rendered reachability matrix into the full audit pipeline, and optimised performance achieving a 93% speedup on warm-cache reruns."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-16
 modified: 2026-04-16
 version: "2.0"

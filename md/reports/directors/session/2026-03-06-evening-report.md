@@ -4,7 +4,7 @@ title: "Co-Directors Report — SSOT Consolidation: Pitches, Business Case, Spec
 description: "Evening session report. Major structural consolidation — 59 documents moved from scattered locations into mx-canon/ssot/, organised by topic. All references updated across the repo."
 created: "2026-03-06"
 version: "1.0"
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 mx:
   x-mx-segment: "evening"
   audience: "stakeholders"

@@ -5,7 +5,7 @@ description: Action-doc for establishing HTML baselines and detecting regression
 version: '1.0'
 created: 2026-02-21
 modified: 2026-02-21
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   status: active
   tags:

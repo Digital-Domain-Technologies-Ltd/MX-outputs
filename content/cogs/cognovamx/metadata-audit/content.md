@@ -4,7 +4,7 @@ version: "1.0"
 description: "Audit all YAML frontmatter — compare against the field dictionary, detect deprecated fields, namespace errors, missing required fields, and mx: object sprawl."
 created: 2026-02-16
 modified: 2026-02-16
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

@@ -3,7 +3,7 @@
 title: "Co-Directors Report — MX-Reginald: From Stub to Storefront"
 created: "2026-03-17"
 version: "3.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "evening"
   audience: stakeholders

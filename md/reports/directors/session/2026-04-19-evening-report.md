@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Agent-protocols chapter + blog toolchain consolidation"
 description: "New MX Protocols chapter on MCP/UCP/A2A/WebMCP, LinkedIn post for The Gathering, HTML-writer skill replacing fragmented blog tooling, full content restoration of an abbreviated blog post."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-19
 modified: 2026-04-19
 version: "1.0"

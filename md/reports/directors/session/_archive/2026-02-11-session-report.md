@@ -3,7 +3,7 @@
 title: "Co-Directors Report — 11 February 2026"
 created: "2026-02-11"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 sessionType: quick
 mx:
   audience: stakeholders

@@ -6,7 +6,7 @@ description: The AI partner in MX. Identity, partnership model, SOUL convention,
 created: 2026-02-09
 modified: 2026-02-09
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   contentType: action-doc

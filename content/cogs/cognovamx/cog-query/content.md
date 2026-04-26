@@ -6,7 +6,7 @@ description: Unified COG registry management — scan, list, show, find, filter,
 created: 2026-02-09
 modified: 2026-02-23
 
-author: Maxine (MX - Machine eXperience Engine)
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

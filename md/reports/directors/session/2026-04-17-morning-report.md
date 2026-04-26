@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — Hardened audit pipeline + canon-migration sweep to 0 violations"
 description: "Morning segment: end-to-end mx.allabout.network audit delivered, two reproducible mx-audit bugs fixed, skill-doc hygiene sweep, then the canon-migration sweep that drove compliance to 0 across all five categories with the scanner bug fixed and public-standards namespace rule mechanised."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-17
 modified: 2026-04-17
 version: "2.0"

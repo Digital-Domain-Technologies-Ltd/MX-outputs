@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report -- Business Plans Consolidated and Compliance Cleaned"
 description: "Twenty-two scattered business plans consolidated into seven authoritative documents; field-compliance scan brought to zero across all categories via dictionary extension and dead-metadata cleanup."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-26
 modified: 2026-04-26
 version: "1.1"

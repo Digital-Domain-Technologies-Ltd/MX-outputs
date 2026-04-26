@@ -6,7 +6,7 @@ description: Validate links — critical for llms.txt and documentation
 created: 2026-02-06
 modified: 2026-02-06
 
-author: Maxine (MX - Machine eXperience Engine)
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

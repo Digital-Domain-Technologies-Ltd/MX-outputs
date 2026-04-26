@@ -6,7 +6,7 @@ description: "A conceptual map of MX — every idea, how they connect, and where
 created: 2026-02-11
 modified: 2026-02-11
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   contentType: info-doc

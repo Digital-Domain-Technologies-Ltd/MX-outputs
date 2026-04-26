@@ -6,7 +6,7 @@ description: How to build action-docs — from description to working tool. Desc
 created: 2026-02-09
 modified: 2026-02-09
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

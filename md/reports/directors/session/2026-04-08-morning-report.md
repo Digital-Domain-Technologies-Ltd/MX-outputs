@@ -3,7 +3,7 @@ title: "Co-Directors Report — IDHL Prep + Book Sales Worker Port"
 created: "2026-04-08"
 x-mx-segment: "morning"
 version: "1.1"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

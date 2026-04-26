@@ -6,7 +6,7 @@ description: "Comprehensive web audit — crawl pages, analyse accessibility, pe
 created: 2026-02-14
 modified: 2026-02-14
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

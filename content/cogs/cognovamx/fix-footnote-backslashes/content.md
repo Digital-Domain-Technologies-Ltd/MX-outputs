@@ -6,7 +6,7 @@ description: Validate and fix trailing backslashes in manuscript footnotes for P
 created: 2026-03-17
 modified: 2026-03-17
 
-author: Maxine (MX - Machine eXperience Engine)
+author: Tom Cranstoun
 
 mx:
   contentType: action-doc

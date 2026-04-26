@@ -2,7 +2,7 @@
 title: "Co-Directors Report — Registry Automation + Reusable Illustrations"
 created: "2026-02-17"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "morning"

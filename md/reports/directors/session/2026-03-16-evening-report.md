@@ -3,7 +3,7 @@
 title: "Co-Directors Report — Chapter 15 + Agentica Onboarding + Reginald Compliance Engine"
 created: "2026-03-16"
 version: "3.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 mx:
   x-mx-segment: "evening"
   audience: stakeholders

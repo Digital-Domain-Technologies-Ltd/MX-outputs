@@ -3,7 +3,7 @@ title: "Co-Directors Report — Manuscript Quality Pass"
 created: "2026-03-23"
 x-mx-segment: "morning"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

@@ -6,7 +6,7 @@ description: Cogs describing YOU — accessibility needs, interests, health, ski
 created: 2026-02-09
 modified: 2026-02-10
 
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   maintainer: mx.machine.experience@gmail.com

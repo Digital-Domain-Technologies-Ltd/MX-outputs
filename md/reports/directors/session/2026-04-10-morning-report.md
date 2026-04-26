@@ -3,7 +3,7 @@ title: "Co-Directors Report — Audit Pipeline Now Trustworthy, llms.txt Advice 
 created: "2026-04-10"
 x-mx-segment: "morning"
 version: "1.1"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 audience: stakeholders
 confidential: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — NEOM audit, audit-toolkit politeness, llms-full.txt discovery"
 description: "Full NEOM Wellbeing e-commerce audit shipped; audit toolkit upgraded with per-host layout, two new collectors, and polite-crawling discipline. Second session block adopted the llms-full.txt convention end-to-end (script, Cloudflare worker, hook, manuscript, audit-site)."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-21
 modified: 2026-04-21
 version: "1.2"

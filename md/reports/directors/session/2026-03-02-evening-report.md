@@ -5,7 +5,7 @@ description: "Evening session report. Full-day arc: field dictionary v1.7 to v3.
 created: "2026-03-02"
 modified: "2026-03-02"
 version: "1.0"
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 mx:
   x-mx-segment: "evening"
   audience: "stakeholders"

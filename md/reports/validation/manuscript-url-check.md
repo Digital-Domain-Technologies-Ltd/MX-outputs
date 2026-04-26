@@ -1,7 +1,7 @@
 ---
 title: "Manuscript URL Validation Report"
 description: "Automated check of all URLs in manuscript markdown files"
-author: "Maxine (automated)"
+author: "Tom Cranstoun"
 created: 2026-03-31
 modified: 2026-03-31
 version: "1.0"

@@ -2,7 +2,7 @@
 title: "Co-Directors Report — The System Learns to Explain Itself (and a Name Problem Surfaces)"
 created: "2026-02-15"
 version: "1.1"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   x-mx-segment: "morning"

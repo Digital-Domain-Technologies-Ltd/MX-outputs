@@ -3,7 +3,7 @@ title: "MX Business Benefits — Four Strategic Outcomes"
 created: "2026-02-17"
 modified: 2026-03-02
 version: "1.0"
-author: "Tom Cranstoun & Maxine (Claude Sonnet 4.5)"
+author: "Tom Cranstoun"
 description: "The four strategic MX benefits: computational trust, commerce revenue recovery, asset portability, and operational efficiency via deterministic outputs."
 
 mx:
