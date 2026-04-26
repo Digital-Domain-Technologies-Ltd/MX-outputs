@@ -124,4 +124,4 @@ A document that admits its own contradictions is more useful than two documents 
 | Hash | Repository | Description |
 |------|------------|-------------|
 | cef5c9f | mx-crm | Remove scattered business plans and pitches |
-| (pending) | hub | Consolidate scattered business plans into mx-maxine-lives/businesses |
+| 54aa7c7 | hub | Consolidate scattered business plans into mx-maxine-lives/businesses |
