@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report -- Business Plans Consolidated Into the Brain"
-description: "Twenty-two scattered business plans, sponsorship pitches, and investor decks consolidated into seven authoritative documents in the gestalt's institutional memory."
+title: "Co-Directors Report -- Business Plans Consolidated and Compliance Cleaned"
+description: "Twenty-two scattered business plans consolidated into seven authoritative documents; field-compliance scan brought to zero across all categories via dictionary extension and dead-metadata cleanup."
 author: "Tom Cranstoun and Maxine"
 created: 2026-04-26
 modified: 2026-04-26
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -60,13 +60,27 @@ Twenty-one in the hub plus one in the mx-crm submodule. The deleted set includes
 
 Step 1 of step-commit found two submodules in detached HEAD: mx-crm (at the hub's stale pointer, behind origin/main by two commits) and mx-outputs (at origin/main but local main was three commits behind). Both recovered cleanly via `checkout main` and (for mx-outputs) a fast-forward merge. No orphan commits were lost. The recovery is documented here because the pattern recurs and is worth flagging.
 
+### 6. Compliance gate cleanup (post-consolidation)
+
+After the consolidation push, the per-file MX field compliance scan flagged 8 pre-existing files with violations. Two follow-on sub-sessions resolved the residual:
+
+**Deprecated-field fix (3 workshop docs).** The `mx.updateInstructions` field on `workshop-browser-setup.md`, `workshop-content-plan.md`, and `workshop-facilitator-notes.md` was deprecated in the field dictionary with `runbook` as the recommended replacement. The auto-fixer skipped them because no rename target was machine-readable, so the rename was applied manually: the multi-key `updateInstructions:` block was collapsed into a single multi-line `runbook:` string preserving source, method, style-rules, structure, and content-source information. Same pass also fixed invalid-enum violations: `audience: maintainers` → `contributors`, `audience: collaborators` → `community`. After the fix: deprecated 3→0, invalid-enum 4→0.
+
+**Unknown-field residual (5 files across 3 repos).** Three classes of issue, three resolutions:
+
+- **`reportMx:` block** in two mx-audit templates and two mx-crm outreach reports was dead metadata (no script consumed it). Stripped the block, lifted the useful `generate:` sub-block into the existing `mx:` block where `mx.generate` is a recognised dictionary field.
+- **`mx.documentTitle`, `mx.documentDescription`, `mx.documentAuthor`** in the visa reference letter were undocumented vendor fields. Renamed to `x-mx-` prefixed vendor extensions and added to `cognovamx-fields.yaml` so the document-class structure (where formal title differs from file title) is preserved and discoverable.
+- **`pagestyle`, `classoption`** in the visa letter are pandoc/LaTeX passthrough variables that pandoc reads by exact name; they cannot be renamed. Added to `cognovamx-fields.yaml` as top-level pandoc-passthrough fields with notes explaining why renaming would break the generator.
+
+After the fix: unknown 9→0, total compliance gate clean across all five categories (`unknown`, `deprecated`, `naming`, `invalid-enum`, `frontmatter-parse-error` all zero).
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits | 1 (mx-crm) + 1 (hub, pending Step 3) |
+| Commits | 11 (5 hub consolidation + 4 hub compliance + 1 mx-audit + 1 mx-crm follow-on; plus the 3 mx-outputs commits already counted) |
 | Files created (hub) | 7 |
 | Files deleted (hub) | 21 |
 | Files deleted (mx-crm) | 10 |
@@ -74,10 +88,12 @@ Step 1 of step-commit found two submodules in detached HEAD: mx-crm (at the hub'
 | Lines removed (hub, deletions) | 6,496 |
 | Lines removed (mx-crm) | 2,423 |
 | Net hub line change | -5,352 |
-| Repositories | 2 (hub, mx-crm) |
+| Repositories | 4 (hub, mx-crm, mx-audit, mx-outputs) |
 | Source documents consolidated | 22 |
 | Output documents created | 7 |
 | Compression ratio | 22:7 (~3:1) |
+| Compliance violations resolved | 16 (3 deprecated + 4 invalid-enum + 9 unknown) |
+| Compliance categories now clean | 5 of 5 |
 
 ---
 
@@ -124,4 +140,17 @@ A document that admits its own contradictions is more useful than two documents 
 | Hash | Repository | Description |
 |------|------------|-------------|
 | cef5c9f | mx-crm | Remove scattered business plans and pitches |
+| 8167d2e | mx-outputs | Add evening directors report: business plans consolidated |
+| aeb21c4 | mx-outputs | Backfill hub commit hash in evening directors report |
+| 5b1ff24 | mx-outputs | Regen README index: add evening directors report entry |
 | 54aa7c7 | hub | Consolidate scattered business plans into mx-maxine-lives/businesses |
+| 0134adf | hub | Document business plan consolidation in CHANGELOG, UBERCOG, REMINDERS |
+| 340b695 | hub | Add LEARNINGS rule: mx.audience is enum-constrained |
+| b371550 | hub | Add REMINDERS item: resolve updateInstructions deprecated-field residual |
+| ce5f671 | hub | Bump mx-outputs: regen README index for evening directors report |
+| 7ff2255 | hub | Replace deprecated updateInstructions with runbook in workshop docs |
+| 14ba3aa | hub | Update REMINDERS: deprecated-field fix done, only unknown-field residual remains |
+| 9a5f5d0 | mx-audit | Strip dead reportMx block from audit templates |
+| caaf6d4 | mx-crm | Resolve unknown-field violations in visa letter and outreach reports |
+| a54c99d | hub | Resolve unknown-field residual: extend dictionary + cleanup |
+| 31ae92d | hub | Remove resolved unknown-field REMINDERS item |
