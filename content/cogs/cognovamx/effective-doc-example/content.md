@@ -38,7 +38,7 @@ version: "1.0"
 description: "Cog publication workflow — author, validate, register, and publish."
 created: 2026-03-03
 modified: 2026-03-03
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 
 includes:
   - source: mx-canon/mx-the-gathering/reference-implementations/shared-validation-policy.cog.md
