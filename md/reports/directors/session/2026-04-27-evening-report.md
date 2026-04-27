@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — cogHeader Field, MXS-06, cog-spec v1.2"
-description: "Added a queryable frontmatter equivalent of the cog magic-header comment, drafted MXS-06 to define it, bumped the cog spec to v1.2, and wired validators to enforce equivalence."
+title: "Co-Directors Report — cogHeader Field, MXS-06, cog-spec v1.2; Dogu Contract"
+description: "Added cogHeader field, MXS-06, cog-spec v1.2, and wired validators. Also updated Dogu contractor agreement with correct address in the parties section and regenerated the PDF."
 author: "Tom Cranstoun"
 created: 2026-04-27
 modified: 2026-04-27
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -14,7 +14,7 @@ mx:
   tags: [directors-report, session, evening]
 ---
 
-# Co-Directors Report — cogHeader Field, MXS-06, cog-spec v1.2
+# Co-Directors Report — cogHeader Field, MXS-06, cog-spec v1.2; Dogu Contract
 
 **Date:** 27 April 2026 — Evening
 **Segment:** Evening (third session — follows afternoon SEO recovery)
@@ -41,6 +41,10 @@ The canonical spec at `mx-outputs/mx-site/drafts/cog-spec.v1.md` was bumped to v
 
 Two new lint codes shipped: `mx-cog-header-shape` (cogHeader must be an object with version + spec, URL-shaped values) and `mx-cog-header-magic-mismatch` (when both forms are present and disagree). The frontmatter parser was updated to skip a leading magic-header comment line so cogs that begin with one parse cleanly, and top-level nested objects are now overlaid via js-yaml without disturbing the existing `mx:` flattening contract. End-to-end tests against three sample cogs (good, mismatch, malformed) confirmed every rule fires correctly.
 
+### 5. Dogu contractor agreement — address update and PDF
+
+The contractor agreement for Yunus Dogu (`mx-crm/contacts/dogu-abaris/contractor-agreement.md`) identified the contractor by name only in the opening parties section. UK contract practice requires the contractor's full address in the "Between" block alongside the client's registered office. The address, phone, and email already appeared correctly in the Signatures section; they have now been added to the parties section as well (Birčaninova 12 / 9, 11000 Belgrade, Serbia). The PDF at `mx-outputs/pdf/dogu-abaris-contractor-agreement.pdf` was regenerated.
+
 ### 4. mx-upgraded-reginald state hygiene
 
 Reginald's working tree carried two pending changes: deletions of `spec/cog-spec.v1.md` and `impl/js/spec/cog-spec.v1.md` (the spec moved to mx-site/drafts in a prior session) and removal of the `example.org` magic-header placeholders from the example cogs. Both were committed and pushed; the canonical spec relocation is now reflected in the reginald repo as well. The validation skip-list re-includes reginald — its cogs are authored to cog-spec strict minimum (title + description) and would otherwise fail MX-Hub's stricter required-field rules; the file-write enforcement removal stands separately.
@@ -51,11 +55,11 @@ Reginald's working tree carried two pending changes: deletions of `spec/cog-spec
 
 | Metric | Value |
 |--------|-------|
-| Commits (this segment) | 5 |
-| Files changed | 17 |
-| Lines added | +1,464 |
-| Lines removed | −1,675 |
-| Repositories | 4 (hub + mx-shared-gathering + mx-outputs + mx-upgraded-reginald) |
+| Commits (this segment) | 7 |
+| Files changed | 19 |
+| Lines added | +1,466 |
+| Lines removed | −1,676 |
+| Repositories | 5 (hub + mx-crm + mx-outputs + mx-shared-gathering + mx-upgraded-reginald) |
 | New shared standards | 1 (MXS-06) |
 | New canon fields | 1 (cogHeader) |
 | New validator lint codes | 2 |
@@ -100,3 +104,5 @@ The custom YAML parser inside `frontmatter-validator.js` had quietly committed t
 | 79f04a7 | mx-upgraded-reginald | Remove example.org magic-header placeholders from examples |
 | 8df3b88b | hub | Add cogHeader frontmatter field; new MXS-06; cog-spec v1.2 |
 | 513db831 | hub | Bump submodule pointers: allaboutv2, mx-audit, mx-crm, mx-upgraded-reginald |
+| e22f376 | mx-crm | Add Dogu address to parties section of contractor agreement |
+| 1c37b8b | mx-outputs | Add Dogu contractor agreement PDF |
