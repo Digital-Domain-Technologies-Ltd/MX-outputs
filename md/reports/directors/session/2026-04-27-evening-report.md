@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — cogHeader Field, MXS-06, cog-spec v1.2; Dogu Contract"
-description: "Added cogHeader field, MXS-06, cog-spec v1.2, and wired validators. Also updated Dogu contractor agreement with correct address in the parties section and regenerated the PDF."
+title: "Co-Directors Report — cogHeader Field, MXS-06, cog-spec v1.2; Dogu Contract; Blog Site-Chrome Consolidation"
+description: "Added cogHeader field, MXS-06, cog-spec v1.2, wired validators, updated Dogu contractor agreement, and consolidated the entire mx-site blog: new post-conclusion block, modern site-chrome on legacy posts, footer links to TG Community + absolute Books URL, and a new published blog post on AI agent contracts."
 author: "Tom Cranstoun"
 created: 2026-04-27
 modified: 2026-04-27
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -49,20 +49,30 @@ The contractor agreement for Yunus Dogu (`mx-crm/contacts/dogu-abaris/contractor
 
 Reginald's working tree carried two pending changes: deletions of `spec/cog-spec.v1.md` and `impl/js/spec/cog-spec.v1.md` (the spec moved to mx-site/drafts in a prior session) and removal of the `example.org` magic-header placeholders from the example cogs. Both were committed and pushed; the canonical spec relocation is now reflected in the reginald repo as well. The validation skip-list re-includes reginald — its cogs are authored to cog-spec strict minimum (title + description) and would otherwise fail MX-Hub's stricter required-field rules; the file-write enforcement removal stands separately.
 
+### 6. Blog: site-chrome consolidation + new post
+
+The third evening sub-session published a new blog post ("Why your AI agent gives you a different answer every time" — 1,190 words) and used it as the trigger to fix three accumulated visual problems across the entire blog:
+
+- **Triple-stack at the bottom of every post.** The author markdown often ended with an italic Tom-Cranstoun bio paragraph. The generator then auto-injected an `<aside class="author-bio-link">` with the same information rephrased. The template then rendered a standalone `<section class="section-cta">` with onward links. Three competing blocks separated by horizontal rules, no visual hierarchy. Replaced with one `<aside class="post-conclusion">`: card layout with author block on the left (avatar + name + bio) and CTA block on the right (prompt + three onward links). Stacks to single column under 720px. Generator emits it natively; 22 existing posts migrated by a one-shot script; the canonical blog template at `mx-canon/ssot/templates/blog-post.html` updated in lockstep.
+- **Footer drift.** The footer's "Books" link was relative (`/books/`) and TG Community was missing. Updated to absolute `https://mx.allabout.network/books/` and added `https://tg.community` (with `rel="noopener"`). All 24 posts plus both templates carry the new footer.
+- **Four legacy posts off the site-chrome contract entirely.** `a-standard-that-knows-what-it-isnt`, `dita-and-mx-a-comparison`, `the-agent-web-looks-like-1995`, and `the-markdown-trap` predated the modern template — they linked only `mx-blog.css` (no `mx-unified.css`), had no `<header class="site-header">`, used an external avatar URL, had a floating "Back to Top" button, and used a minimal `<footer><p>©…</p></footer>`. A migration script brought them up to the contract: site-header inserted, unified.css added, avatar localised, back-to-top removed, full site-footer with TG Community + Books links, app.js loaded.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits (this segment) | 7 |
-| Files changed | 19 |
-| Lines added | +1,466 |
-| Lines removed | −1,676 |
+| Commits (this segment) | 8 |
+| Files changed | 43 |
+| Lines added | +2,545 |
+| Lines removed | −1,961 |
 | Repositories | 5 (hub + mx-crm + mx-outputs + mx-shared-gathering + mx-upgraded-reginald) |
 | New shared standards | 1 (MXS-06) |
 | New canon fields | 1 (cogHeader) |
 | New validator lint codes | 2 |
+| New blog posts published | 1 |
+| Blog posts site-chrome migrated | 24 (entire blog) |
 
 ---
 
@@ -106,3 +116,4 @@ The custom YAML parser inside `frontmatter-validator.js` had quietly committed t
 | 513db831 | hub | Bump submodule pointers: allaboutv2, mx-audit, mx-crm, mx-upgraded-reginald |
 | e22f376 | mx-crm | Add Dogu address to parties section of contractor agreement |
 | 1c37b8b | mx-outputs | Add Dogu contractor agreement PDF |
+| ba7d1a8 | mx-outputs | Publish post + consolidate site chrome and post-end block across all blog posts |
