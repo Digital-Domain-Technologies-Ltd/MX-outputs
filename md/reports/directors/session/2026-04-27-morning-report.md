@@ -114,6 +114,11 @@ The discipline shows in the asymmetry: ~1,000 lines of dead infrastructure out, 
 
 ## Commit Log
 
-| Hash | Description |
-|------|-------------|
-| _pending_ | Hub commit recording the drain — assigned on commit (this segment produced one hub commit; no submodule commits) |
+| Repo | Hash | Description |
+|------|------|-------------|
+| mx-outputs | `94a3954` | Add morning directors report and canonical session-report template |
+| hub | `62c6bed2` | Drain mx-collaboration submodule into MX-Hub; add canonical templates |
+| hub | `1f048b00` | REMINDERS: track scripts/mx-validator.js ESM/CJS mismatch bug |
+| hub | `8109fca7` | Remove mx-collaboration references from UBERCOG and README |
+| mx-outputs | `793ec95` | Regenerate index after morning directors report + template land |
+| hub | `4e7e3c6b` | Bump mx-outputs: regenerate index after morning report + template |
