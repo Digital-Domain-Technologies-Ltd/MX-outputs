@@ -9,6 +9,7 @@ author: cog-tools
 mx:
   contentType: info-doc
   status: active
+  x-mx-category: mx-core
   partOf: mx-os
   tags: [registry, snapshot, index, auto-generated]
   audience: [tech, agents]

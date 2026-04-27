@@ -10,6 +10,8 @@ mx:
   maintainer: info@cognovamx.com
   license: proprietary
   status: published
+  x-mx-riskLevel: high
+  x-mx-category: mx-core
   partOf: mx-os
   refersTo: [registry-sync, cog-query]
   buildsOn: [what-is-a-cog, registry-sync]
@@ -18,7 +20,7 @@ mx:
   readingLevel: intermediate
   contentType: action-doc
   runbook: "mx exec reginald-mirror"
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx reginald-mirror
     policy: |

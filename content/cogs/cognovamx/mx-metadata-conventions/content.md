@@ -8,6 +8,7 @@ version: "1.0"
 
 mx:
   status: active
+  x-mx-category: deliverable
   contentType: info-doc
   tags: [metadata, conventions, html, javascript, css, file-types, embrace-extend, blocks, namespace]
   audience: [tech, business]

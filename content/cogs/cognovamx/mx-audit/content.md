@@ -12,7 +12,9 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: medium
 
+  x-mx-category: mx-sales
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]
   buildsOn: [what-is-a-cog, building-action-docs]
@@ -21,7 +23,7 @@ mx:
   audience: agents
   readingLevel: advanced
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx audit
     actions:
@@ -117,7 +119,7 @@ mx:
 
           5. Wait for completion (2-5 minutes typical)
 
-          6. Verify results in mx-audit/results/:
+          6. Verify results in mx-audit/results/<hostname>/ (the audit derives hostname from the -s URL):
              - results.json — complete analysis data
              - executive_summary.md — overall scores
              - accessibility_report.csv — WCAG compliance (Pa11y)
@@ -162,7 +164,7 @@ mx:
           and hallucinates tag absence. Use curl to fetch raw HTML, then Read + analyse directly.
 
           1. Extract homepage URL:
-             - Read mx-audit/results/results.json
+             - Read mx-audit/results/<hostname>/results.json (derive hostname from the audited URL)
              - Use the first URL from results
              - OR extract base domain from sitemap URL if provided
 
@@ -525,9 +527,11 @@ mx:
           - PDF generated: [pdf-path] (or "failed — regenerate with /mx-create-pdf")
           - Key findings: Performance, Accessibility (issues count), SEO, AI Agent Suitability
           - Engagement options: price range
-          - Full audit results: mx-audit/results/
+          - Full audit results: mx-audit/results/<hostname>/
 
   semantic: true
+  x-mx-convergence: true
+  x-mx-accessibility: true
   runbook: "mx exec mx-audit"
 ---
 
@@ -589,7 +593,7 @@ The MX Web Audit Suite (`mx-audit/`) crawls the target site and produces CSV and
 npm run audit:start -- -s https://example.com -c 9 --no-recursive
 ```
 
-**Result files:** `mx-audit/results/`
+**Result files:** `mx-audit/results/<hostname>/` (one directory per audited site)
 
 | File | What it measures |
 | --- | --- |

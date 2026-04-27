@@ -9,6 +9,7 @@ description: "The principles that govern how MX builds things — for humans and
 mx:
   status: active
   contentType: info-doc
+  x-mx-category: mx-core
   tags: [principles, design, writing, metadata, accessibility, mx-os, standards-hierarchy]
   partOf: mx-ssot
   audience: [humans, machines]

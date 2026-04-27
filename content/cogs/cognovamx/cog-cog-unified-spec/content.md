@@ -9,6 +9,7 @@ description: "This is a reference copy. The canonical specification is governed 
 mx:
   contentType: info-doc
   status: draft
+  x-mx-category: specification
   tags: [cog, specification, reference-copy]
   canonicalSource: "mx-canon/mx-the-gathering/specifications/cog-unified-spec.cog.md"
 ---

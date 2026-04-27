@@ -12,7 +12,9 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: medium
 
+  x-mx-category: mx-content
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]
   buildsOn: [what-is-a-cog, building-action-docs]
@@ -23,7 +25,7 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec blog-reviewer"
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx blog review
     actions:
@@ -47,7 +49,7 @@ mx:
         usage: |
           1. Search the current repository for blog-like files:
              - Look in: mx-outputs/mx-site/blog/
-             - File patterns: *.md with content-state in frontmatter, *.html with article or blog in filename
+             - File patterns: *.md with mx.x-mx-contentState in frontmatter, *.html with article or blog in filename
              - Also check for files with contentType: "blog-post" in YAML frontmatter
 
           2. For each candidate, extract:

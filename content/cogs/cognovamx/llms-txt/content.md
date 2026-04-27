@@ -12,12 +12,14 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  x-mx-riskLevel: medium
 
+  x-mx-category: mx-core
   partOf: mx-core
   refersTo: [robots-txt, sitemap, link-checker]
   tags: [llms-txt, robot-first, validation, generation]
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx cog llms-txt
     actions:
@@ -53,6 +55,8 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec llms-txt"
+  x-mx-convergence: true
+  x-mx-accessibility: true
   semantic: true
 ---
 

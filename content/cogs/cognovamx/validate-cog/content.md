@@ -12,12 +12,14 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  x-mx-riskLevel: medium
 
+  x-mx-category: mx-core
   partOf: mx-core
   refersTo: [cog-spec]
   tags: [validation, cog, spec, meta]
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx cog validate-cog
     actions:
@@ -66,6 +68,8 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec validate-cog"
+  x-mx-convergence: true
+  x-mx-accessibility: true
   semantic: true
 ---
 

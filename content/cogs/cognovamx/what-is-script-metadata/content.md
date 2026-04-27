@@ -12,7 +12,9 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: low
 
+  x-mx-category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]
   buildsOn: [what-is-a-cog, what-is-mx-os, who-is-maxine, script-helper]
@@ -23,7 +25,7 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec what-is-script-metadata"
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx cog script-metadata
     actions:

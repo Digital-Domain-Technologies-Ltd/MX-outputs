@@ -10,6 +10,8 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: medium
+  x-mx-category: mx-tools
   partOf: mx-os
   refersTo: [field-dictionary, cog-unified-spec, mx-metadata-conventions]
   buildsOn: [what-is-a-cog]
@@ -17,7 +19,7 @@ mx:
   audience: both
   readingLevel: intermediate
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: npm run audit:metadata
     actions:
@@ -50,6 +52,8 @@ mx:
             description: "Key metrics printed to terminal"
 
   semantic: true
+  x-mx-convergence: true
+  x-mx-accessibility: true
   contentType: action-doc
   runbook: "mx exec metadata-audit"
 ---

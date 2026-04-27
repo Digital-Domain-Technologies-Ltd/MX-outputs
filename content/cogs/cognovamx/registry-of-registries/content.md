@@ -10,13 +10,15 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: low
+  x-mx-category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]
   buildsOn: [what-is-a-cog, building-action-docs]
   tags: [registry, meta-registry, catalog, index, inventory, governance, audit, self-maintaining]
   audience: agents
   readingLevel: advanced
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx registries
     actions:

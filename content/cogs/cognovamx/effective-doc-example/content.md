@@ -9,6 +9,7 @@ author: "Tom Cranstoun"
 mx:
   status: active
   contentType: reference-implementation
+  x-mx-category: mx-core
   partOf: mx-os
   tags: [effective-doc, resolution, inheritance, sop, reference-implementation, example]
   audience: [agents, tech]

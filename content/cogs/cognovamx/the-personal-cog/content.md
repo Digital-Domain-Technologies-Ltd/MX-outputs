@@ -12,7 +12,9 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: high
 
+  x-mx-category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, cog-registry]
   buildsOn: [what-is-a-cog, what-is-mx-os, access-and-guardrails, the-companion-web]
@@ -23,7 +25,7 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec the-personal-cog"
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx cog personal
     actions:

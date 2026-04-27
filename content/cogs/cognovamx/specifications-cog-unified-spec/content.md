@@ -10,6 +10,7 @@ mx:
   contentType: action-doc
   status: draft
   maintainer: info@cognovamx.com
+  x-mx-category: specification
   tags: [cog, specification, the-gathering, open-standard, metadata]
   governedBy: The Gathering
   license: MIT

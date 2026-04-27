@@ -12,7 +12,9 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
 
+  x-mx-category: mx-core
   status: active
+  x-mx-riskLevel: low
   partOf: mx-os
   buildsOn: [what-is-a-cog]
   tags: [cog-id, identity, hash, md5, obfuscation, namespace, x-mx-p-ref, registry, privacy]
@@ -22,7 +24,7 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec cog-id"
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx cog-id
     actions:

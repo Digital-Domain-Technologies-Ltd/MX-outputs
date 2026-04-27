@@ -12,7 +12,9 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: high
 
+  x-mx-category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]
   buildsOn: [what-is-a-cog, what-is-mx-os, what-is-mx-environment, what-is-installme]
@@ -23,7 +25,7 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec mx-init"
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx init
     actions:

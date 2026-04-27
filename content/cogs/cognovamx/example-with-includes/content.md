@@ -14,13 +14,14 @@ includes:
 mx:
   status: active
   contentType: reference-implementation
+  x-mx-category: mx-core
   partOf: mx-os
   tags: [includes, composition, reference-implementation, example]
   audience: [agents, tech]
   license: MIT
   deliverable: "working demonstration of cog composition via includes"
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx example-with-includes
     policy: |

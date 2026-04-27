@@ -19,6 +19,7 @@ mx:
   - fields
   - vocabulary
   partOf: mx-the-gathering
+  x-mx-category: standard
 ---
 
 # ADR: Namespace Policy — Standard Fields and mx: Namespace

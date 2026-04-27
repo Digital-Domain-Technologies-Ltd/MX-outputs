@@ -8,11 +8,14 @@ title: What is a COG?
 mx:
   contentType: info-doc
   status: draft
+  x-mx-category: specification
   tags:
   - cog
   - system
   - specification
   - mx-reginald
+  x-mx-cogId: cog-mx-reginald-cog-system-20260208
+  x-mx-cogType: certificate-of-genuineness
   license: MIT
   publisher:
     verified: false
@@ -20,6 +23,7 @@ mx:
     contact: info@cognovamx.com
   publicationDate: '2026-02-08'
   expires: '2026-08-08'
+  modified: '2026-02-08'
   signature: unsigned
   mxCompliance: level-2
   registry: allabout.network

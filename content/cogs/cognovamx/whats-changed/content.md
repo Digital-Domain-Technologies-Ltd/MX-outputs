@@ -10,13 +10,15 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: medium
+  x-mx-category: mx-content
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]
   buildsOn: [what-is-a-cog, building-action-docs]
   tags: [audit, content, files, metadata, git, dashboard, activity, changed, inventory]
   audience: agents
   readingLevel: advanced
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx whats-changed
     actions:
@@ -55,9 +57,9 @@ mx:
                 - Clean (committed, no changes) → mark as COMMITTED
              c. **Frontmatter extraction** (for files that support it — md, yaml, yml, cog.md):
                 - Parse YAML frontmatter between --- markers
-                - Extract: title (or name), content-state (or status), author, date, version
+                - Extract: title (or name), mx.x-mx-contentState (or status), author, date, version
                 - If no frontmatter: mark as "no frontmatter"
-             d. **For HTML files**: extract <title> tag content and content-state meta tag if present
+             d. **For HTML files**: extract <title> tag content and mx.x-mx-contentState meta tag if present
           4. Present results as a table sorted by modification date (newest first):
              | Status | Type | Title | State | Path | Modified |
              |--------|------|-------|-------|------|----------|
@@ -154,7 +156,7 @@ mx:
              - Has title: yes/no
              - Has author: yes/no
              - Has date: yes/no
-             - Has status/content-state: yes/no
+             - Has status/mx.x-mx-contentState: yes/no
              - Has description: yes/no
              - Has keywords/tags: yes/no
              - Quality score: N/7 fields present
@@ -217,7 +219,7 @@ mx:
                - author
                - date (or created/modified)
                - description
-               - status (or content-state)
+               - status (or mx.x-mx-contentState)
              - Score: count of present fields out of 5
           3. Filter to files with gaps (score < 5 or no frontmatter at all)
           4. Present as a table sorted by score (worst first):

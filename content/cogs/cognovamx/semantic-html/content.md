@@ -12,12 +12,14 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  x-mx-riskLevel: medium
 
+  x-mx-category: mx-core
   partOf: mx-core
   refersTo: [a11y, metadata, schema]
   tags: [html, semantic, structure, accessibility, validation]
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx cog semantic-html
     actions:
@@ -79,6 +81,8 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec semantic-html"
+  x-mx-convergence: true
+  x-mx-accessibility: true
   semantic: true
 ---
 

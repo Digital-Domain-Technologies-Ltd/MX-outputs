@@ -9,6 +9,7 @@ description: "How MX metadata aligns with Schema.org, Dublin Core, and Open Grap
 mx:
   status: active
   license: proprietary
+  x-mx-category: standard
   partOf: mx-the-gathering
   buildsOn: [fields]
   tags: [standards, alignment, schema-org, dublin-core, open-graph, governance, naming-conventions]

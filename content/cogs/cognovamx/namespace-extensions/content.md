@@ -8,6 +8,7 @@ author: Tom Cranstoun
 
 mx:
   status: active
+  x-mx-category: standard
   partOf: mx-the-gathering
   buildsOn: [fields, adr-02-namespace-policy, vendor-extensions-policy]
   tags: [namespace, extensions, vendor, x-mx, metadata, policy, standard]

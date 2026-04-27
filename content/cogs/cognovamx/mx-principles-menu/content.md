@@ -7,11 +7,14 @@ version: '1.0'
 title: MX Principles Menu
 mx:
   status: draft
+  x-mx-category: landing-page
   tags:
   - mx
   - principles
   - navigation
   - landing
+  x-mx-cogId: cog-mx-landing-principles-menu-20260222
+  x-mx-cogType: certificate-of-genuineness
   license: MIT
   publisher:
     verified: false
@@ -19,6 +22,7 @@ mx:
     contact: info@cognovamx.com
   publicationDate: '2026-02-22'
   expires: '2026-08-22'
+  modified: '2026-02-22'
   signature: unsigned
   mxCompliance: level-2
   registry: allabout.network

@@ -10,7 +10,9 @@ mx:
   maintainer: info@cognovamx.com
   license: proprietary
   status: published
+  x-mx-riskLevel: high
 
+  x-mx-category: mx-tools
   partOf: mx-os
   refersTo: [registry-sync, what-is-a-cog]
   buildsOn: [what-is-a-cog]
@@ -19,7 +21,7 @@ mx:
 
   audience: both
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx cog-publication-workflow
     policy: |

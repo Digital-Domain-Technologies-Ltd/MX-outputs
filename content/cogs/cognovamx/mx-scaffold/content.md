@@ -10,13 +10,15 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: high
+  x-mx-category: mx-core
   partOf: mx-os
   refersTo: [script-helper, cog-unified-spec]
   buildsOn: [what-is-mx-os, script-helper]
   tags: [scaffold, template, generator, create, mx-os, shell, bash]
   audience: tech
   readingLevel: advanced
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx exec mx-scaffold
     actions:

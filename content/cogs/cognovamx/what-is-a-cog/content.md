@@ -12,7 +12,9 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: low
 
+  x-mx-category: learning
   partOf: mx-the-gathering
   refersTo: [cog-unified-spec, mx-principles]
   tags: [cog, introduction, metadata, standard, the-gathering]

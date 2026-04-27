@@ -9,6 +9,7 @@ description: "The four strategic MX benefits: computational trust, commerce reve
 mx:
   contentType: info-doc
   tags: [business-case, roi, competitive-advantage, operational-efficiency, strategic-assets, computational-trust]
+  x-mx-category: "Business Strategy"
   audience: [business, tech]
   status: "active"
   refersTo:

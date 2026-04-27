@@ -12,7 +12,9 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  x-mx-riskLevel: medium
 
+  x-mx-category: mx-core
   partOf: mx-os
   buildsOn: [what-is-a-cog, cog-query, cog-registry]
   refersTo: [what-is-mx-os, how-mx-os-runs]
@@ -20,7 +22,7 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec mx-run"
-  execute:
+  x-mx-execute:
     runtime: node
     command: node mx-reginald/scripts/mx-run.js
     actions:

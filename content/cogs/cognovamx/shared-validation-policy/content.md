@@ -9,6 +9,7 @@ author: "Tom Cranstoun"
 mx:
   status: active
   contentType: policy
+  x-mx-category: mx-core
   partOf: mx-os
   tags: [validation, policy, shared, includes-example]
   audience: [agents, tech]

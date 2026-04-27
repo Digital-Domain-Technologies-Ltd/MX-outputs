@@ -9,6 +9,7 @@ author: "Tom Cranstoun"
 mx:
   status: superseded
   contentType: stub
+  x-mx-category: mx-core
   partOf: mx-os
   tags: [html, meta-tags, carrier-format, ai-metadata, moved]
   audience: [tech, agents]

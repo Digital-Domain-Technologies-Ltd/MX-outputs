@@ -12,12 +12,14 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  x-mx-riskLevel: medium
 
+  x-mx-category: mx-core
   partOf: mx-core
   refersTo: [metadata, pricing, semantic-html]
   tags: [schema.org, json-ld, structured-data, seo, accessibility]
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx cog schema
     actions:
@@ -66,6 +68,8 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec schema"
+  x-mx-convergence: true
+  x-mx-accessibility: true
   semantic: true
 ---
 

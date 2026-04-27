@@ -10,6 +10,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: high
   security:
     scope:
       filesystem: [scripts/**, node_modules/**, .claude/**]
@@ -20,13 +21,14 @@ mx:
       retention: 90d
       includeInputs: true
       includeOutputs: false
+  x-mx-category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-principles]
   buildsOn: [what-is-a-cog, what-is-mx-os, how-mx-os-runs, what-is-mx-environment]
   tags: [boot, bootstrap, install, preflight, init, session, zero-to-operational, entry-point, mx-os]
   audience: both
   readingLevel: advanced
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx boot
     actions:

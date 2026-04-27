@@ -12,12 +12,14 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: draft
+  x-mx-riskLevel: medium
 
+  x-mx-category: mx-core
   partOf: mx-core
   refersTo: [clarity, a11y]
   tags: [readability, plain-language, content, accessibility, clarity]
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx cog readability
     actions:
@@ -88,6 +90,8 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec readability"
+  x-mx-convergence: true
+  x-mx-accessibility: true
   semantic: true
 ---
 

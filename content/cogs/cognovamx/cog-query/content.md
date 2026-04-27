@@ -12,7 +12,9 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: active
+  x-mx-riskLevel: medium
 
+  x-mx-category: mx-core
   partOf: mx-os
   buildsOn: [what-is-a-cog, cog-registry]
   refersTo: [what-is-mx-os]
@@ -20,7 +22,7 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec cog-query"
-  execute:
+  x-mx-execute:
     runtime: node
     command: node scripts/cog-tools.js
     actions:

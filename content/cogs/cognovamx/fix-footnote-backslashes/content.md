@@ -13,12 +13,14 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: active
+  x-mx-riskLevel: high
 
+  x-mx-category: mx-tools
   partOf: mx-os
   refersTo: [generate-footnotes, pdf-generator]
   tags: [footnotes, formatting, pdf, manuscripts, validation]
 
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx exec fix-footnote-backslashes
     actions:

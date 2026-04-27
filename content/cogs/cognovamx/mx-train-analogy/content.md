@@ -14,6 +14,7 @@ mx:
   license: proprietary
   status: published
 
+  x-mx-category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, mx-phrasebook, mx-principles]
   buildsOn: [what-is-mx-os, mx-phrasebook]

@@ -12,6 +12,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
+  x-mx-riskLevel: high
   security:
     scope:
       filesystem: [mx-outputs/mx-site/blog/**, allaboutv2/blogs/**]
@@ -23,6 +24,7 @@ mx:
       includeInputs: true
       includeOutputs: false
 
+  x-mx-category: mx-core
   partOf: mx-os
   refersTo: [cog-unified-spec, env]
   buildsOn: [what-is-a-cog, what-is-mx-os, env]
@@ -33,7 +35,7 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec blog-generator"
-  execute:
+  x-mx-execute:
     runtime: runbook
     command: mx blog
     policy: |
@@ -234,7 +236,11 @@ mx:
               "articleSection": "Machine Experience",
               "keywords": [{keywords-as-json-array}],
               "wordCount": {word-count},
-              "inLanguage": "en-GB"
+              "inLanguage": "en-GB",
+              "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": ["article > header h1", "article > h2:first-of-type + p"]
+              }
             }
             </script>
 
