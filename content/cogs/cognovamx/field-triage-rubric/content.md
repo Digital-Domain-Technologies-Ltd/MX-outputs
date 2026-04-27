@@ -32,7 +32,7 @@ mx:
 
 MX describes documents. Every field in the canon must describe the document itself, not the document's subject matter. This rubric captures that test in a form a human or a script can apply without guessing, so the cull of Appendix M and the long-term discipline of "what belongs in MX" rest on a single written rule instead of case-by-case judgement.
 
-This rubric is load-bearing. It is referenced by the three canon YAML files (`fields-data.yaml`, `fields-data-carriers.yaml`, `cognovamx-fields.yaml`), by Appendix M prose, by the triage script, and by the MX Extensions note when a vendor proposes a new `x-vendor-` field.
+This rubric is load-bearing. It is referenced by the four canon YAML files (`fields-data.yaml`, `fields-data-cogs.yaml`, `fields-data-carriers.yaml`, `cognovamx-fields.yaml`), by Appendix M prose, by the triage script, and by the MX Extensions note when a vendor proposes a new `x-vendor-` field.
 
 ---
 
@@ -153,7 +153,7 @@ These resolve the recurring grey zones so the same question is not re-litigated 
 | `validatesAgainst` | **IN — standard** | Describes the document's claimed conformance (trust). Universal. Imported from cog-spec v1.0; canon adopts camelCase per NDR-2026-02-16. |
 | `contractFields` / `metadataFields` | **IN — standard (new, signing)** | Describe which parts of the document are contract-bearing (covered by signature) versus mutable. Universal trust primitive. Foundation for the MX Contract Fingerprinting and Signing note. Imported from cog-spec v1.0 where they appeared as `x-mx-contract-fields` / `x-mx-metadata-fields`; promoted to first-class in MX canon — signing is a universal concern, not vendor-specific. |
 | `x-mx-thresholds`, `x-mx-approvers`, `x-mx-approvalProcedure`, `x-mx-reviewProcedure`, `x-mx-targetEnvironment` | **IN — vendor** | Workflow contract extensions for cogs that declare an executable approval/review procedure. Pass Rule 1 (describe the contract this document carries) and Rule 2 (operational governance). Vendor tier because shapes are organisation-specific even when the field names are shared; defined in the MX Extensions note's Workflow Contract Extensions section. |
-| `cogHeader` | **IN — standard** | Trust + lifecycle lens; describes the document's spec/runtime conformance claim. Frontmatter equivalent of the cog magic-header HTML comment defined in cog-spec v1.2 §2.5. Universal cog primitive, no vendor scope. Defined in the MX Cog Identification note. |
+| `cogHeader` | **IN — cogs** | Trust + lifecycle lens; describes the document's spec/runtime conformance claim. Frontmatter equivalent of the cog magic-header HTML comment defined in cog-spec v1.2 §2.5. Universal cog primitive, no vendor scope. Defined in the MX Cogs note; lives in `fields-data-cogs.yaml`. |
 
 ### Worked example: integrating a kebab-case external spec
 
@@ -197,5 +197,5 @@ Changes to this rubric are amendments to the MX Extensions note, governed by The
 - [cognovamx-fields.yaml](cognovamx-fields.yaml) — the CogNovaMX vendor extension example pack
 - [Appendix M](../../datalake/manuscripts/mx-books/mx-appendices/appendix-m-index-of-metadata.md) — prose mirror of the canon
 - [Appendix U](../../datalake/manuscripts/mx-books/mx-appendices/appendix-u-a-standard-that-knows-what-it-isnt.md) — the architectural rationale for defer-to-existing-standards
-- [MX draft notes](https://github.com/ddttom/mx-shared-gathering) — Core Metadata, Extensions, Provenance, Carrier Formats, Contract Fingerprinting, Cog Identification — the drafts this rubric is the scope test for
+- [MX draft notes](https://github.com/ddttom/mx-shared-gathering) — Core Metadata, Cogs, Extensions, Provenance, Carrier Formats, Contract Fingerprinting and Signing — the drafts this rubric is the scope test for
 - [principles.cog.md](principles.cog.md) — core MX principles this rubric descends from
