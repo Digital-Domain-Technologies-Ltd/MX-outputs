@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--
+  MX-SITE BLOG POST TEMPLATE
+  ==========================
+  Use this file as the starting point for every new post in mx-outputs/mx-site/blog/.
+  Replace every {{PLACEHOLDER}} with the post's actual values, then DELETE this
+  comment block before publishing. Drafts go in blog/drafts/; promote up one
+  level when ready to publish.
+
+  Required substitutions (search-and-replace these tokens):
+
+    {{TITLE}}                 e.g. Cogs and DMOZ — Two Ways to Organise the Web
+    {{TITLE_SHORT}}           e.g. Cogs and DMOZ (used in og:title, twitter:title)
+    {{DESCRIPTION}}           One- to two-sentence meta description, max ~160 chars
+    {{SLUG}}                  url-safe filename without .html, e.g. cogs-vs-dmoz
+    {{KEYWORDS}}              comma-separated, e.g. cogs, DMOZ, attestation, MX
+    {{ARTICLE_SECTION}}       e.g. Machine Experience
+    {{WORD_COUNT}}            integer, the prose body word count
+    {{DATE_PUBLISHED}}        YYYY-MM-DD
+    {{DATE_MODIFIED}}         YYYY-MM-DD
+    {{HUMAN_DATE}}            e.g. 27 April 2026
+    {{READING_TIME}}          e.g. 6 min
+    {{INTRO_HOOK}}            single-sentence article hook in the introduction aside
+    {{TOC_LIST}}              <li><a href="#anchor">Heading</a></li> entries, one per ## heading
+    {{ARTICLE_BODY}}          the prose, in <h2>/<h3>/<p>/<ul>/<ol> HTML — see body conventions below
+
+  Body conventions:
+  - Each ## heading becomes <h2 id="anchor" tabindex="-1">Heading</h2>
+  - The id MUST match the {{TOC_LIST}} anchor.
+  - Use British English in prose. Code/JSON/metadata follow the international
+    standards already in canon (Schema.org property casing, SPDX licence ids).
+  - Do NOT use em-dashes (literal — or &mdash;) in authored prose. Use spaced
+    hyphens, commas, colons, or rephrase. (See feedback_no_html_entities_for_dashes.)
+  - Reading time: rough rule of 200 wpm. e.g. 1500 words ≈ 8 min.
+
+  Schema.org JSON-LD:
+  - The block below is the canonical 4-graph: BlogPosting + BreadcrumbList +
+    Article + WebPage. Update url, headline, datePublished, dateModified,
+    keywords, articleSection, wordCount, name in every node.
+  - Author and publisher use @id refs to existing canonical entities; do NOT
+    redefine inline. The Person schema for Tom lives in profiles/about.tom.cranstoun.html.
+
+  After authoring:
+  - Run an MX audit on the file before promoting from drafts/ to blog/.
+  - Run scripts/sync-blog-discovery.cjs (or equivalent) to refresh
+    sitemap.xml + llms.txt + my-blog.json after promotion.
+-->
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}} | CogNovaMX</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="author" content="Tom Cranstoun">
+  <link rel="canonical" href="https://mx.allabout.network/blog/{{SLUG}}.html">
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="ai-txt" href="/ai.txt">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{TITLE_SHORT}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:url" content="https://mx.allabout.network/blog/{{SLUG}}.html">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="{{TITLE_SHORT}}">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ddttomtom">
+  <meta name="twitter:title" content="{{TITLE_SHORT}}">
+  <meta name="twitter:description" content="{{DESCRIPTION}}">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="{{TITLE_SHORT}}">
+
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a1628">
+
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "article > header h1",
+          "article > h2:first-of-type + p",
+          "article > section p:first-of-type"
+        ]
+      },
+      "@id": "https://mx.allabout.network/blog/{{SLUG}}.html#blogposting",
+      "name": "{{TITLE}} | CogNovaMX",
+      "description": "{{DESCRIPTION}}",
+      "url": "https://mx.allabout.network/blog/{{SLUG}}.html",
+      "dateModified": "{{DATE_MODIFIED}}",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/about/about.html#organization"
+      },
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "headline": "{{TITLE}}",
+      "datePublished": "{{DATE_PUBLISHED}}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mx.allabout.network/images/book-cover-3d.png",
+        "width": 1200,
+        "height": 630
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/{{SLUG}}.html"
+      },
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      },
+      "keywords": "{{KEYWORDS}}",
+      "articleSection": "{{ARTICLE_SECTION}}",
+      "wordCount": {{WORD_COUNT}},
+      "about": {
+        "@id": "https://mx.allabout.network/about/about.html#organization"
+      },
+      "mentions": [
+        {
+          "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+        },
+        {
+          "@id": "https://mx.allabout.network/about/about.html#organization"
+        }
+      ],
+      "subjectOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://mx.allabout.network/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://mx.allabout.network/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{TITLE}}",
+          "item": "https://mx.allabout.network/blog/{{SLUG}}.html"
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://mx.allabout.network/blog/{{SLUG}}.html#article",
+      "headline": "{{TITLE}}",
+      "url": "https://mx.allabout.network/blog/{{SLUG}}.html",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mx.allabout.network/images/avatars/tom-avatar.webp",
+        "width": 80,
+        "height": 80
+      },
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "publisher": {
+        "@id": "https://mx.allabout.network/about/about.html#organization"
+      },
+      "datePublished": "{{DATE_PUBLISHED}}",
+      "dateModified": "{{DATE_MODIFIED}}",
+      "inLanguage": "en-GB",
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/{{SLUG}}.html"
+      },
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      },
+      "keywords": "{{KEYWORDS}}",
+      "articleSection": "{{ARTICLE_SECTION}}",
+      "wordCount": {{WORD_COUNT}},
+      "about": {
+        "@id": "https://mx.allabout.network/about/about.html#organization"
+      },
+      "mentions": [
+        {
+          "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+        },
+        {
+          "@id": "https://mx.allabout.network/about/about.html#organization"
+        }
+      ],
+      "subjectOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/{{SLUG}}.html",
+      "name": "{{TITLE}} | CogNovaMX",
+      "url": "https://mx.allabout.network/blog/{{SLUG}}.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="blog-page" aria-label="overview">
+
+      <aside class="blog-introduction"
+         aria-label="Blog introduction"
+         data-component="blog-header">
+    <div class="introduction-content">
+      <a href="profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+        <img src="../images/avatars/tom-avatar.webp"
+             alt="Tom Cranstoun profile picture"
+             class="author-image"
+             width="80"
+             height="80" loading="lazy">
+      </a>
+      <div class="introduction-text">
+        <div class="introduction-message">{{INTRO_HOOK}}</div>
+        <div class="author-name">Author: <strong>Tom Cranstoun</strong></div>
+      </div>
+    </div>
+  </aside>
+
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+    <summary>Index</summary>
+    <nav aria-label="Table of contents">
+      <ul>
+        {{TOC_LIST}}
+      </ul>
+    </nav>
+  </details>
+
+      <article data-agent-visible="true">
+        <header>
+          <h1>{{TITLE}}</h1>
+          <div class="article-meta"
+             data-published="{{DATE_PUBLISHED}}"
+             data-modified="{{DATE_MODIFIED}}"
+             data-reading-time="{{READING_TIME}}">
+          <time datetime="{{DATE_PUBLISHED}}">{{HUMAN_DATE}}</time>
+          <span>·</span>
+          <span>{{READING_TIME}} read</span>
+        </div>
+        </header>
+
+        {{ARTICLE_BODY}}
+
+      <!-- Author Bio Link -->
+      <aside class="author-bio-link" aria-label="About the author">
+        <hr>
+        <p><strong>About the author:</strong> <a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a> has been building content systems since 1977, specializing in Adobe Experience Manager, Edge Delivery Services, and Machine Experience (MX) strategic advisory.</p>
+      </aside>
+      </article>
+
+
+    </div>
+
+    <section class="section section-cta" aria-label="Get in touch">
+      <div class="section-inner">
+        <p>Want to learn more about Machine Experience? <a href="/books/">Explore our books</a>, <a href="/learn/">learn the fundamentals</a>, or <a href="/about/contact.html">get in touch</a>.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <a href="#main" class="back-to-top" aria-label="Back to top">Back to Top</a>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
