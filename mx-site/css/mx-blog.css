@@ -799,3 +799,129 @@ footer,
     min-height: 44px;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   Post Conclusion: consolidated author bio + CTA + onward links
+   Replaces the previous .author-bio-link aside and standalone
+   .section-cta combo at the end of every blog post.
+   ════════════════════════════════════════════════════════════════ */
+
+.post-conclusion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  margin: 4rem auto 2rem;
+  max-width: 760px;
+  padding: 2rem;
+  background: rgba(45, 125, 210, 0.06);
+  border: 1px solid rgba(45, 125, 210, 0.18);
+  border-radius: 12px;
+}
+
+.post-conclusion-eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--secondary-text);
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.post-conclusion-author {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.post-conclusion-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.post-conclusion-author-text {
+  min-width: 0;
+}
+
+.post-conclusion-author-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.post-conclusion-author-name a {
+  color: var(--primary-text);
+  text-decoration: none;
+}
+
+.post-conclusion-author-name a:hover {
+  text-decoration: underline;
+}
+
+.post-conclusion-author-bio {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--secondary-text);
+  margin: 0;
+}
+
+.post-conclusion-cta {
+  border-left: 1px solid rgba(45, 125, 210, 0.18);
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-conclusion-prompt {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+}
+
+.post-conclusion-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-conclusion-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent-color);
+}
+
+.post-conclusion-link::after {
+  content: "\2192";
+  transition: transform 0.15s ease;
+}
+
+.post-conclusion-link:hover {
+  text-decoration: underline;
+}
+
+.post-conclusion-link:hover::after {
+  transform: translateX(2px);
+}
+
+@media (max-width: 720px) {
+  .post-conclusion {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    margin: 3rem auto 1.5rem;
+  }
+  .post-conclusion-cta {
+    border-left: none;
+    border-top: 1px solid rgba(45, 125, 210, 0.18);
+    padding-left: 0;
+    padding-top: 1.5rem;
+  }
+}
