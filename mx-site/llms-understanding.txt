@@ -1,0 +1,3604 @@
+# llms-understanding.txt — MX as proposed for ratification
+
+> A single-file, plain-markdown corpus of every public MX draft note offered to The Gathering for community review. Read this file end-to-end to acquire a complete working understanding of the Machine Experience vocabulary, its conformance levels, the carrier formats it travels in, the optional cogs/signing layers, and the discoverability and accessibility standards it inherits from existing W3C, ISO, and IETF specifications.
+
+## What this file is
+
+`llms-understanding.txt` is a knowledge bundle for AI agents, search engines, and human reviewers who want the entire MX proposal in one place without crawling page-by-page. It contains every draft note from the public mx-shared-gathering repository (https://github.com/ddttom/mx-shared-gathering), in the recommended reading order, with each draft prefixed by its canonical URL.
+
+The drafts are **not ratified standards**. They are proposals authored by Tom Cranstoun and offered to The Gathering (https://tg.community) community for review via Stream (https://stream.tg.community). Each draft is standalone and refers only to existing published external standards (RFC, ISO, W3C, NIST, Schema.org, Dublin Core, SPDX) for normative content. Where one draft excludes a topic owned by a sister draft, it names the sister draft for orientation; no draft depends on another for normative material — except that every sister note adheres to the field-definition discipline laid down in the primary `MX Field Definition Pattern note`.
+
+## How to read this file
+
+The recommended order is the order of sections below.
+
+1. **MX Field Definition Pattern note** — the primary note. Defines the authoring discipline every sister note follows when specifying a frontmatter field. Read it first.
+2. **MX Core Metadata note** — Zone 1 / Zone 2 document metadata and pass-through fields. The vocabulary floor that any text-bearing artefact can adopt.
+3. **MX Cogs note** — the optional `.cog.md` file format as a layer on top of MX, for documents that need to be navigable, composable, and runnable by agents. Most MX-aware documents will not be cogs.
+4. **MX Extensions note** — namespace policy (standard / vendor-public / vendor-private prefixes) so vendors can extend MX without polluting the core vocabulary.
+5. **MX Provenance note** — attribution, trust, maintenance, and decision-record references. The metadata that makes a document's origin and stewardship verifiable.
+6. **MX Carrier Formats note** — how MX metadata is carried in each supported file format (markdown, HTML, JSDoc, CSS, shell, XMP, sidecar, SQL), plus a small code-specific provenance vocabulary. Behaviour-level code metadata defers to JSDoc, docstrings, OpenAPI.
+7. **MX Workflow Contracts note** — optional top-level fields for cogs that declare an executable approval, review, or procedural workflow.
+8. **MX Agent Directory Discovery note** — three-layer discoverability standard for `llms.txt` and any agent-directory file: HTML transport, sitemap inclusion, in-page `<link>`.
+9. **MX Document Accessibility note** — three-layer accessibility standard for non-HTML document carriers: tagged structure, declared conformance, independent verification. PDF normative; DOCX and EPUB informative. Defers to ISO 14289 PDF/UA, ISO 32000, WCAG 2.1, BCP 47, Schema.org accessibility properties, Directive (EU) 2019/882 (EAA).
+10. **MX Contract Fingerprinting and Signing note** — the contract a cog satisfies *when it elects to be signed*. Signing is optional. The fingerprint format is open.
+
+## Provenance of this bundle
+
+**Generated:** 2026-04-28
+**Source repository:** https://github.com/ddttom/mx-shared-gathering
+**Canonical home for each draft:** https://github.com/ddttom/mx-shared-gathering/blob/main/<filename>
+**Licence:** MIT. The MX vocabulary is free, open, and vendor-neutral.
+**Format convention:** llms-full.txt — popularised by Fern and Mintlify; compatible with the llms-ctx-full.txt pattern at llmstxt.org.
+
+---
+
+## MX Field Definition Pattern note (primary)
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-field-pattern.md
+**File:** `draft-field-pattern.md`
+
+
+# MX Field Definition Pattern note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review — **primary note of the MX draft set**
+**Date:** 27 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+This is the **primary note** of the MX draft set. Every other note in the set proposes one or more frontmatter fields, and every one of those fields is defined under the pattern this note specifies. Readers new to the suite should read this note first; sister notes assume its rules and do not restate them.
+
+Every MX draft note proposes one or more frontmatter fields. Today each note repeats the same structural choices in slightly different prose: a heading, a property table, a definition, an example, and (sometimes) extra rules. The minor variations make automated extraction harder than it needs to be, and they make a reviewer ask "is this field defined the same way as the last one?" every time.
+
+This note proposes a single, vetted **pattern** for defining a frontmatter field inside any MX draft. Once the community ratifies the pattern, future drafts add new fields by following the template — author once, machine-read everywhere.
+
+**Why field discipline matters.** Machine consumers — agents, validators, registries, signers, graph builders — cannot infer intent from prose. They need fields that are explicit, tightly typed, and constrained to a small set of legal values. The MX vocabulary is therefore expected to **grow, not shrink**: new fields are how machines come to understand what a document means. Field growth without authoring discipline produces drift, and drift compounds: every loose definition multiplies the work of every downstream consumer that has to reconcile it. The pattern in this note exists to absorb growth without producing drift, and to keep every new field tightly constrained from the moment it is proposed.
+
+The pattern itself is the proposal. **No new frontmatter fields are introduced in this note.** This note specifies *how* a field should be defined; *which* fields exist is the work of the sister notes that propose them.
+
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+This note's pattern is **normative for the entire MX draft set**. Every MX note that proposes one or more frontmatter fields MUST define each field using the structure in §4, the property-table rows in §5 (for standard fields), or the inventory-table form in §4.4 (for pass-through fields). Sister notes MUST NOT introduce alternative shapes, additional property-table rows, or supplementary section types beyond those defined here.
+
+Existing field definitions that predate ratification of this pattern remain valid until the next revision of the host note; on that revision, all new and amended definitions MUST conform, and the host note SHOULD migrate any older definitions that are touched. A note that defines no fields makes no claim against this pattern and is unaffected by it.
+
+### 2.1 Draft status
+
+This note is a draft authored by Tom Cranstoun and offered to The Gathering for review. It is not a ratified standard. Until The Gathering accepts it, the structural rules below are working drafts — stable enough to author against, expected to evolve through review.
+
+
+## 3. Scope
+
+### 3.1 In scope
+
+- The structural template for a **standard field** definition inside an MX draft.
+- The structural template for **pass-through fields** — fields whose value semantics are owned by an external vocabulary (Dublin Core, Schema.org, BCP 47, SPDX, FOAF, ...).
+- The required and optional rows of the property table.
+- Naming and ordering conventions for field-definition headings and sub-sections.
+- One worked example showing the pattern applied.
+
+### 3.2 Out of scope
+
+- **Specific field semantics.** What `title`, `provenanceAuthor`, `x-mx-thresholds`, or any other field *means* belongs in the relevant note. This note does not define any field.
+- **Profile catalogues.** Which fields apply to which document type (`core`, `cog`, `report`, ...) is governed by the notes that own those profiles.
+- **Schema languages.** JSON Schema, YAML schema, Schema.org, and similar machine-readable shape languages are unrelated; this note specifies authored-prose shape only.
+- **Carrier-format mappings.** How a field is expressed in HTML, JSDoc, CSS, etc. is governed by the MX Carrier Formats note.
+- **Conformance-level definitions.** What "Level 1 / 2 / 3" mean within a particular note is the host note's choice; this pattern only requires that one of those levels be cited.
+
+### 3.3 Relationship to existing standards
+
+This note follows the [IETF RFC format](https://www.rfc-editor.org/rfc/rfc7322) for standards-document authoring and uses the [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keyword vocabulary. The pattern itself is a stylistic convention layered on top of those, not a redefinition of either.
+
+### 3.4 Recommended reading order across the draft set
+
+Each sister note is self-contained and may be read in any order. For a newcomer to the draft set, the following sequence orients the vocabulary from the floor upwards before reaching the optional layers:
+
+1. **MX Field Definition Pattern note** *(this note)* — the authoring pattern every other note follows when defining a frontmatter field. Read first.
+2. **MX Core Metadata note** — the floor. Document-identity and operational fields every MX-aware artefact declares (`title`, `author`, `created`, `description`, `status`, `contentType`, ...) plus the pass-through inventory.
+3. **MX Provenance note** — extends the floor with attribution, trust, maintenance, and decision-record references — the metadata that makes a document's origin and stewardship verifiable.
+4. **MX Extensions note** — namespace policy: how vendors extend the vocabulary (`x-mx-`, `x-mx-p-`) without polluting the core, plus context-specific naming across syntactic carriers.
+5. **MX Carrier Formats note** — how MX metadata is carried across markdown, HTML, JSDoc, CSS, shell, EXIF/XMP, sidecar, and SQL carriers, plus a small code-specific provenance vocabulary.
+6. **MX Cogs note** — the optional `.cog.md` layer for documents that want to be navigable, composable, and runnable by agents.
+7. **MX Workflow Contracts note** — top-level fields for cogs that declare an executable approval, review, or procedural workflow.
+8. **MX Contract Fingerprinting and Signing note** — the signing format a cog uses *when it elects to be signed*. Signing is optional.
+
+The order moves from authoring discipline (this note) to the universal floor, then enriches the floor (provenance, extensions), maps it onto carriers (carrier formats), and finally reaches the optional cog layer and its three specialisations. A reader interested only in a specific topic — say, signing a contract cog — can jump directly to the relevant note; the listed prerequisites are recommendations, not normative dependencies.
+
+
+## 4. The field-definition pattern
+
+A field definition is a contiguous unit inside a host note. It has four required pieces, in order, plus optional supplementary material.
+
+### 4.1 Required pieces
+
+1. **Heading.** A section heading at the level appropriate to the host note's structure (typically `### N.M`), with the field name in backticks. Example: `### 5.3 ` `` `author` ``. Headings MUST contain only the bare field name; no prose, no qualifiers, no parenthetical types.
+2. **Property table.** A two-column markdown table with the rows specified in §5, in the order given.
+3. **Definition prose.** One or more paragraphs of plain prose that name what the field is, what it carries, and any constraint not expressible in the property table. Definition prose MUST come immediately after the property table. Definition prose MUST NOT restate values already given in the table.
+4. **Example.** A fenced YAML code block showing the field in use, in the carrier the host note targets (typically `mx:` block or top-level frontmatter). Examples MUST be syntactically valid YAML and MUST illustrate the field's actual shape. A definition with multiple legal shapes (e.g. `string-or-object`) MAY include multiple example blocks.
+
+### 4.2 Optional supplementary material
+
+After the required pieces, a definition MAY include any of:
+
+- **Bulleted constraints** — additional rules expressible as short bullets (e.g. "the value MUST be quoted in YAML to prevent numeric coercion").
+- **Cross-reference** — a one-line pointer to a related field elsewhere in the same note (e.g. "Distinct from `maintainer` (§6.6)"). Cross-references to *other notes* MUST be by note name only, never by file path or URL, per the standalone-ness rule of the draft set.
+- **Sub-table** — a further markdown table when the field's value is an object with named sub-keys (e.g. `cogHeader` with `version`, `spec`, `runtime`, `runtimeDoc`).
+
+A definition MUST NOT include a "Normative notes" preamble whose body merely paraphrases the property table or the definition prose. If a putative note adds no new constraint, it is removed.
+
+### 4.3 Group rules
+
+When two or more fields share the same shape and conformance, a note MAY collapse them into a single section that lists the fields together, presents one shared property table, and explains the differences in a small differentiation table. The host note SHOULD use this form whenever the result is shorter than separate sections without loss of normative content.
+
+A group section follows the same Required-pieces order as a single field, with the heading naming the group (e.g. "Decision record references: `adr`, `ndr`, `bdr`") instead of a single field.
+
+### 4.4 Pass-through field pattern
+
+A **pass-through field** is a YAML key whose value semantics belong to an established external vocabulary (Dublin Core, Schema.org, BCP 47, SPDX, FOAF, and similar). MX names the key so that authors do not have to switch syntax mid-frontmatter; the external standard owns the meaning.
+
+Pass-through fields use a different shape from §4.1, because the host note is not the owner of the value. Instead of one full section per field, a host note groups pass-through fields into a single **inventory table** with these columns, in this order:
+
+| Column | Required | Value |
+|--------|:--------:|-------|
+| **Field** | yes | The YAML key MX provides, in backticks. |
+| **Aligns with** | yes | The external standard's canonical name plus the specific term, e.g. `Dublin Core dc:date, Schema.org Date`. The standard MUST be cited precisely (URL plus the specific field/property name) at least once in the note. |
+| **Value** | yes | One sentence summarising what the value carries. |
+| **Conformance** | yes | Always `MAY` for pass-through fields — they are optional surface for an external vocabulary. |
+
+A pass-through inventory table appears in a dedicated pass-through section of the host note. The section MUST also state, in prose:
+
+- That the listed fields are pass-through (definition above).
+- That MX does not redefine or contradict the cited external standard.
+- The rule for adding a new pass-through field: an established external vocabulary cleanly covers the value, the alignment is declared via canon's `alignsWith:`, and MX names the YAML key without governing its semantics. If the external standard does not cleanly cover the value, the field is **not** a pass-through and MUST be defined under the standard pattern in §4.1.
+
+Pass-through fields MUST NOT use the property table in §5; the inventory table replaces it. A field definition that mixes the two forms is a conformance failure.
+
+The MX Core Metadata note's pass-through inventory is the reference precedent. Sister notes that introduce additional pass-through fields (e.g. linguistic, rights, dataset metadata) MUST follow this same inventory-table form.
+
+
+## 5. The property table
+
+The property table is the standard-field shape. It immediately follows the heading and uses two columns — `Property` and `Value` — containing the rows below in this exact order. Rows that do not apply MUST be omitted entirely; rows that do apply MUST appear in the order given. Pass-through fields use the inventory-table form in §4.4 and do not use this property table.
+
+| Row | When | Value |
+|-----|------|-------|
+| **Type** | always | One of: `string`, `boolean`, `number`, `array`, `object`, `array of <type>`, `string-or-object`, `string-or-array`, `string-or-boolean`. New compound types MUST be hyphenated and in lowercase. |
+| **Zone** | always for fields that live in YAML frontmatter | `1 (top-level)` or `2 (mx:)`. Fields that have no zone (e.g. parameters of a sub-key) omit this row. |
+| **Profile** | when the field is profile-restricted | A comma-separated list of profile names (`core`, `cog`, `report`, `migration`, `x-mx-public`, ...). Omitted when the field is universal. |
+| **Conformance** | always | An [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keyword (`MUST`, `SHOULD`, `MAY`) plus the host note's level in parentheses. Example: `MUST (Level 1)`. Multiple conformance entries MAY appear when the level depends on context, separated by semicolons. |
+| **Valid values** | when the value is enumerated | A comma-separated list of permitted values, in lowercase, exactly as they appear in YAML. |
+| **Default** | when omitting the field has a defined behaviour | The default value, or `*(none)*` when there is no default. Use `*(none — explicit declaration required)*` for MUST-level fields. |
+
+The table MUST NOT contain rows beyond these. New rows MAY be proposed only by amending this note, not by individual field definitions.
+
+
+## 6. Worked example
+
+The following is a complete, conforming definition of a hypothetical field `riskLevel`. It is not a real proposal; it exists only to illustrate the pattern.
+
+> ### 7.4 `riskLevel`
+>
+> | Property | Value |
+> |----------|-------|
+> | **Type** | string |
+> | **Zone** | 2 (mx:) |
+> | **Conformance** | MAY (Level 3) |
+> | **Valid values** | low, medium, high, critical |
+> | **Default** | *(none)* |
+>
+> Self-declared risk classification of the document's subject matter. Helps agents and maintainers prioritise review attention when a queue is large.
+>
+> ```yaml
+> mx:
+>   riskLevel: medium
+> ```
+>
+> - `critical` SHOULD be reserved for content whose factual error could cause material harm; lighter classifications cover everyday content.
+> - Distinct from `confidential`, which controls publication, not review urgency.
+
+The example shows: a heading containing only the bare field name; the four required property rows in order; the two optional rows (`Valid values`, `Default`) where they apply; one paragraph of definition prose that does not restate the table; one YAML example block; and two bulleted constraints — one introducing a new rule, one cross-referencing a sibling field. No "Normative notes" preamble is used.
+
+
+## 7. Authoring rules
+
+These rules are normative for any field defined under this pattern.
+
+### 7.1 Naming
+
+Field names use camelCase in YAML contexts (matching the [Schema.org Style Guide](https://schema.org/docs/styleguide.html)). Vendor-extension fields use kebab-case after their prefix (`x-mx-deploy-target`, not `x-mx-deployTarget`). Field names MUST NOT use snake_case or PascalCase in YAML contexts.
+
+### 7.2 Conformance keywords
+
+Each definition cites exactly one of `MUST`, `SHOULD`, or `MAY` as its primary conformance keyword. When the level is conditional ("MUST when X applies, MAY otherwise"), the conditions MUST be explicit in the Conformance row, semicolon-separated.
+
+### 7.3 Length
+
+A typical single-field definition is 8–25 lines. Definitions that exceed roughly 40 lines SHOULD be reviewed for unnecessary prose, restated rules, or material that belongs in a sibling note.
+
+### 7.4 What not to include
+
+A field definition MUST NOT contain:
+
+- Marketing language or assertions of importance ("this critical field", "the most useful").
+- Implementation detail (which library reads it, which database column it maps to).
+- Forward-looking statements ("we plan to extend this to ...").
+- Examples that duplicate a previous example without adding new shape.
+- Cross-references to draft files by path or URL.
+
+### 7.5 Worked-example status
+
+The example in §6 is illustrative, not normative. Implementations MUST NOT treat `riskLevel` as a registered field on the basis of this note alone.
+
+
+## 8. Security and privacy considerations
+
+This note specifies authoring style only and introduces no new fields, no carriers, and no signing surface. It carries no direct security or privacy implications.
+
+A second-order consideration: a uniform field-definition pattern makes automated extraction tractable, which means tooling can mechanically enumerate every field a draft proposes. Authors SHOULD assume that anything written inside a property table or YAML example will be parsed by tools that treat the draft as canonical, and SHOULD NOT include sensitive sample values in examples.
+
+
+## 9. References
+
+### 9.1 Normative references
+
+- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) — Key words for use in RFCs to indicate requirement levels
+
+### 9.2 Informative references
+
+- [RFC 7322](https://www.rfc-editor.org/rfc/rfc7322) — RFC Style Guide (style precedent for standards-document authoring)
+- [Schema.org Style Guide](https://schema.org/docs/styleguide.html) — Vocabulary naming conventions
+
+
+*End of MX Field Definition Pattern note draft.*
+
+---
+
+## MX Core Metadata note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-core-metadata.md
+**File:** `draft-core-metadata.md`
+
+
+# MX Core Metadata note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 27 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+This note defines the core machine-readable document-metadata vocabulary for the Machine Experience (MX) framework. It specifies the foundational fields that every MX-aware document — whether a markdown file, an HTML page, a YAML sidecar, or any other text-bearing artefact — must, should, or may declare.
+
+The core vocabulary is organised into three groups: **Zone 1 identity fields** (top-level document identity), **Zone 2 operational fields** (governance, classification, and distribution metadata under the `mx:` namespace), and **pass-through fields** (YAML keys whose semantics MX borrows from established external vocabularies — Dublin Core, Schema.org, BCP 47, SPDX — without redefinition).
+
+The cog file format is **not** described here. Cogs are an optional layer on top of MX, covered by the MX Cogs note in the same draft set. A document can carry MX metadata without ever being a cog.
+
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of this draft set). That pattern governs the structural template for every field — heading, property table, definition prose, example — and the inventory-table form used for the pass-through fields in §7. This note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+| Level | Name | Requirement | Description |
+|-------|------|-------------|-------------|
+| Level 1 | **MX Core** | All MUST fields present and valid | Minimum viable MX metadata. A document at Level 1 is machine-identifiable and attributable. |
+| Level 2 | **MX Standard** | All MUST and SHOULD fields present | Recommended for production use. A document at Level 2 is fully classified and lifecycle-managed. |
+| Level 3 | **MX Complete** | All MUST, SHOULD, and applicable MAY fields present | Full metadata coverage. |
+
+A document claiming conformance at a given level MUST satisfy all requirements at that level and all lower levels.
+
+### 2.2 Draft status
+
+This note is a draft authored by Tom Cranstoun and offered to The Gathering for review. It is not a ratified standard. Until The Gathering accepts it, the field definitions, conformance requirements, and normative rules in this note are working drafts — stable enough to build against, expected to evolve through review.
+
+
+## 3. Scope
+
+### 3.1 In scope
+
+- **Zone 1 identity fields** — top-level document identity (title, description, author, dates, version)
+- **Zone 2 core operational fields** — classification, governance, and distribution metadata
+- **Pass-through fields** — fields where MX provides a YAML key but defers the value semantics to a published external vocabulary
+- **The conformance level framework** — Level 1/2/3 definitions
+
+### 3.2 Out of scope
+
+- The cog file format (an optional layer over MX). A separate note covers cogs.
+- Any signing or fingerprint contract a document might choose to carry.
+- Carrier-format mappings (how the same field is expressed in HTML meta tags, JSDoc, CSS comments, etc.).
+
+### 3.3 Relationship to existing standards
+
+All field names in this note use camelCase, follow spelling-neutral forms (e.g. `license`, not `licence`, when an SPDX-aligned identifier is required), and use ISO 8601 date format (YYYY-MM-DD) for all date fields:
+
+- **ISO 8601** — date and time format
+- **SPDX License List** — licence identifiers follow the SPDX standard
+- **Schema.org Style Guide** — vocabulary naming conventions (camelCase, lowercase first character)
+- **Dublin Core DCMI Namespace** — namespace governance model
+
+
+## 4. The two-zone frontmatter model
+
+MX metadata in YAML frontmatter is organised into two zones. **Zone 1** (top-level) carries document identity fields. **Zone 2** (under the `mx:` object) carries MX-operational fields. A **pass-through field** is a YAML key MX provides whose value semantics belong to an established external vocabulary; pass-through fields are listed in §6 and otherwise behave as Zone 1 or Zone 2 depending on the field.
+
+**Zone 1 example:**
+
+```yaml
+title: "Document Title"
+description: "Brief summary for search and AI agents"
+author: "Author Name"
+created: 2026-04-02
+modified: 2026-04-16
+version: "1.0"
+```
+
+**Zone 2 example:**
+
+```yaml
+title: "Document Title"
+description: "Brief summary"
+author: "Author Name"
+created: 2026-04-02
+modified: 2026-04-16
+version: "1.0"
+
+mx:
+  status: active
+  contentType: guide
+  tags: [metadata, example]
+  audience: [humans]
+```
+
+Implementations MUST NOT place Zone 1 fields inside the `mx:` object. Implementations MUST NOT place Zone 2 fields at the top level.
+
+
+## 5. Zone 1 identity fields
+
+### 5.1 `title`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MUST (Level 1) |
+
+Human-readable document title. The canonical identity field for all documents.
+
+```yaml
+title: "MX Core Metadata note"
+```
+
+If both `title` in frontmatter and an H1 heading exist in the document body, authors SHOULD avoid duplication by omitting `title` from frontmatter and relying on the H1 heading, or vice versa.
+
+
+### 5.2 `description`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MUST (Level 1) |
+
+One-line summary. Used by search engines, AI agents, and registry listings. The value SHOULD NOT exceed 160 characters and MUST be a single sentence or phrase summarising the document's purpose.
+
+```yaml
+description: "Single source of truth for every YAML frontmatter field."
+```
+
+
+### 5.3 `author`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MUST (Level 1) |
+
+Creator of the document. Person name or collaborative attribution.
+
+```yaml
+author: "Tom Cranstoun"
+```
+
+- The `author` field is immutable after creation. Implementations MUST NOT change this value after the document is first committed.
+- For collaborative work, all contributors SHOULD be listed.
+- `author` is distinct from `maintainer` (§6.6). The author is the original creator; the maintainer handles ongoing updates.
+
+
+### 5.4 `created`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MUST (Level 1) |
+
+Creation date in ISO 8601 format (YYYY-MM-DD). This field is immutable — once set, it MUST NOT be changed.
+
+```yaml
+created: 2026-04-02
+```
+
+
+### 5.5 `modified`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MUST (Level 1) |
+
+Last modification date in ISO 8601 format (YYYY-MM-DD). Implementations MUST update this field every time the document's content changes.
+
+```yaml
+modified: 2026-04-16
+```
+
+
+### 5.6 `version`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | SHOULD (Level 2) |
+
+Semantic version string. The value MUST be quoted in YAML to prevent numeric coercion (e.g., `"1.0"` not `1.0`). Version numbers live in frontmatter, never in filenames.
+
+```yaml
+version: "2.0"
+```
+
+
+### 5.7 `schema`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MAY (Level 3) |
+
+Schema reference identifier — pointer to the schema document that defines and validates this document's contract. May be a Schema.org type URL, a JSON Schema `$id`, a relative path to a YAML/JSON schema file, or a database schema name.
+
+```yaml
+schema: ./schemas/invoice-approval.v1.yaml
+```
+
+- When present, validators SHOULD attempt to resolve the reference and apply the referenced schema before checking field-level conformance.
+- The reference MAY be a relative path, an absolute path, a URL, or a registry-resolvable name.
+- Implementations SHOULD treat unresolved references as a warning, not a failure, since the schema may live in an external system.
+
+
+### 5.8 `validatesAgainst`
+
+| Property | Value |
+|----------|-------|
+| **Type** | array of string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MAY (Level 3) |
+
+Named validators (dotted notation) this document claims conformance to. A document MAY declare conformance to multiple validators (typically one meta-validator plus one or more domain validators).
+
+```yaml
+validatesAgainst:
+  - cog.meta.v1
+  - invoice-approval.v1
+```
+
+- Each entry SHOULD be a dotted name resolvable via the cog registry or via a `schema` pointer.
+- Validators MUST treat the array as additive — a document conforming to `cog.meta.v1` AND `invoice-approval.v1` must satisfy both.
+- Implementations SHOULD warn when a referenced validator name cannot be resolved; they MUST NOT silently skip validation.
+
+
+## 6. Zone 2 core operational fields
+
+### 6.1 `status`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | SHOULD (Level 2) |
+| **Valid values** | draft, active, published, deprecated, archived, unknown, proposed, accepted, rejected, superseded, pending, review, approved, planning, open, closed, sent, canonical |
+
+Lifecycle state. Different document contexts use different subsets of the valid values:
+
+- **Standard lifecycle:** `draft`, `active`, `published`, `deprecated`, `archived`, `unknown`.
+- **Decision records:** `proposed`, `accepted`, `rejected`, `superseded`.
+- **Workflows:** `pending`, `review`, `approved`, `planning`, `open`, `closed`, `sent`.
+- **Special:** `canonical` (an authoritative reference document).
+
+```yaml
+mx:
+  status: active
+```
+
+
+### 6.2 `tags`
+
+| Property | Value |
+|----------|-------|
+| **Type** | array |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Discovery keywords. Array of strings for search, filtering, and agent matching. Values SHOULD be lowercase strings.
+
+```yaml
+mx:
+  tags: [metadata, yaml, frontmatter, reference]
+```
+
+
+### 6.3 `audience`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string-or-array |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+| **Valid values** | tech, business, humans, machines, agents, both |
+
+Intended readership.
+
+```yaml
+mx:
+  audience: [humans, machines]
+```
+
+
+### 6.4 `purpose`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+| **Valid values** | specification, reference, guide, operational manual, dispatcher, configuration |
+
+Why this document exists. Distinct from `contentType` (which classifies what a document is, not why it exists).
+
+```yaml
+mx:
+  purpose: reference
+```
+
+
+### 6.5 `license`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+SPDX licence identifier. Values MUST use SPDX licence identifiers as defined in the [SPDX Licence List](https://spdx.org/licenses/). Common values: `proprietary`, `MIT`, `Apache-2.0`, `CC-BY-4.0`. The field name uses the spelling-neutral form `license` (SPDX standard spelling) so that the YAML key matches the SPDX identifier exactly across regional spellings.
+
+```yaml
+mx:
+  license: MIT
+```
+
+
+### 6.6 `maintainer`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Person or team responsible for maintaining this document. Distinct from `author` — the maintainer handles ongoing updates while the author is the immutable creator. This field is mutable and MAY change as stewardship transfers. When omitted, the `author` is assumed to also be the maintainer.
+
+```yaml
+mx:
+  maintainer: "Maxine"
+```
+
+
+### 6.7 `ownership`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string-or-object |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Ownership details. Can be a string (owner name) or an object with `owner`, `delegate`, and `contact` sub-fields.
+
+```yaml
+mx:
+  ownership: "Tom Cranstoun"
+```
+
+```yaml
+mx:
+  ownership:
+    owner: "Tom Cranstoun"
+    delegate: "Maxine"
+    contact: "tom@example.com"
+```
+
+
+### 6.8 `domain`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Business domain or subject area. Values are context-specific and not constrained to an enumeration. In folder metadata, `domain` is an identity field and MUST NOT be inherited by child folders.
+
+```yaml
+mx:
+  domain: "machine-experience"
+```
+
+
+### 6.9 `contentType`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | SHOULD (Level 2) |
+
+Machine-readable content type classification. Free-form (not constrained to an enumeration) to allow domain-specific content types. Common values: `specification`, `guide`, `reference`, `info-doc`, `identity`, `report`, `field-dictionary`, `standards-alignment`.
+
+```yaml
+mx:
+  contentType: field-dictionary
+```
+
+
+### 6.10 `segment`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+| **Valid values** | developer, author, agent, business, morning, afternoon, evening |
+
+Segment classifier. Used in two contexts: audience segment (developer, author, agent, business) and time segment for session reports (morning, afternoon, evening).
+
+```yaml
+mx:
+  segment: developer
+```
+
+
+### 6.11 `cacheability`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+| **Valid values** | ephemeral, short-lived, medium, long-lived, permanent |
+| **Default** | medium |
+
+How long an agent or resolver may cache this document's content before re-fetching.
+
+- `ephemeral` — MUST NOT be cached; content changes on every request.
+- `short-lived` — cache for up to 1 hour.
+- `medium` — cache for up to 1 day.
+- `long-lived` — cache for up to 1 week.
+- `permanent` — cache indefinitely until the document changes.
+
+A custom duration string (e.g., `4h`, `30d`) is also accepted. Format: number + unit (`s`, `m`, `h`, `d`, `w`). Distinct from `stability` (content reliability) and `lifecycle` (development phase).
+
+```yaml
+mx:
+  cacheability: long-lived
+```
+
+
+### 6.12 `readingLevel`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+| **Valid values** | beginner, intermediate, advanced, expert |
+
+Content reading level. Helps agents recommend content based on user expertise.
+
+```yaml
+mx:
+  readingLevel: intermediate
+```
+
+
+### 6.13 `runbook`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | SHOULD (Level 2) |
+
+Operational instructions for agents. Describes how to interpret and act on this document. The runbook SHOULD be written in imperative voice and SHOULD be specific enough that an agent can act on it without reading the full document body. Particularly valuable for machine-facing documents where the document structure is not self-evident.
+
+```yaml
+mx:
+  runbook: "Parse the fields array. Each entry has name, type, definition, status, and profile."
+```
+
+
+### 6.14 `confidential`
+
+| Property | Value |
+|----------|-------|
+| **Type** | boolean |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+| **Default** | false |
+
+Whether this record must be excluded from public outputs. Authors SHOULD only declare this field when marking content as confidential.
+
+```yaml
+mx:
+  confidential: true
+```
+
+
+### 6.15 `inherits`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Path to the file this document extends. The inheriting file adds MX metadata on top of the target's content. The target can be any file type (`.md`, `.cog.md`, `.html`, `.json`, `.yaml`, etc.). The inheriting file extends the target; it does not replace it. The path MAY be relative or absolute. For folder-level field inheritance, an `inheritable` field on the parent folder's metadata (out of scope for this note) is the preferred mechanism.
+
+```yaml
+mx:
+  inherits: "README.md"
+```
+
+
+### 6.16 `ld`
+
+| Property | Value |
+|----------|-------|
+| **Type** | object |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Inline JSON-LD (Schema.org) expressed in YAML frontmatter. Enables structured data without a separate `<script>` block. Implementations rendering HTML from this metadata SHOULD convert the `ld` object to a `<script type="application/ld+json">` block.
+
+```yaml
+mx:
+  ld:
+    "@context": "https://schema.org"
+    "@type": "TechArticle"
+    name: "MX Core Metadata note"
+```
+
+
+## 7. Pass-through fields
+
+A **pass-through field** is a YAML key MX provides whose value semantics belong to an established external vocabulary. MX does not redefine the value's meaning. The key exists so authors don't have to switch syntax mid-frontmatter to use the external vocabulary; tooling treats the field as the aligned external field.
+
+The pattern is:
+
+1. The external vocabulary owns the value semantics.
+2. MX names a YAML key (camelCase, in keeping with the rest of the vocabulary).
+3. Canon entries declare the alignment via `alignsWith:` so that converters and validators can route the value to the external standard's schema.
+
+### 7.1 Inventory
+
+| Field | Aligns with | Value | Conformance |
+|-------|-------------|-------|:-----------:|
+| `date` | Dublin Core `dc:date`, Schema.org `Date` | ISO 8601 date for a generic reference event distinct from `created` / `modified`. | MAY |
+| `duration` | Schema.org `duration` | ISO 8601 duration (e.g. `PT1H30M`). For time-based content. | MAY |
+| `format` | Dublin Core `dc:format`, Schema.org `encodingFormat` | Media type or file format string. | MAY |
+| `rights` | Dublin Core `dc:rights`, Schema.org `license` | Free-form rights statement when an SPDX identifier does not fit. | MAY |
+| `displayName` | FOAF `displayName`, Schema.org `alternateName` | Citation form when it differs from `title`. | MAY |
+| `usage` | Schema.org `usageInfo` | Guidance on how the document is meant to be consumed. | MAY |
+| `url` | Schema.org `url`, Dublin Core `identifier` | Canonical URL where the document lives or is published. | MAY |
+
+### 7.2 Externally-aligned fields (genuineness family)
+
+The following MX-defined fields carry semantics MX itself names but model after established standards. They are not strict pass-through (the field name is MX's), but they are alignment-anchored and tooling SHOULD interoperate with the cited standards:
+
+| Field | Aligns with | Purpose |
+|-------|-------------|---------|
+| `proofOfAuthorship` | W3C Verifiable Credentials, Signed Exchanges | Cryptographic claim that the named author wrote this. |
+| `integritySignature` | RFC 9421 HTTP Message Signatures, Subresource Integrity | Hash or signature over the artefact's content. |
+| `provenancePedigree` | W3C PROV-O, C2PA Content Credentials | Derivation chain back to the source. |
+
+### 7.3 Adding a new pass-through field
+
+A new pass-through field SHOULD be proposed only when an established external vocabulary cleanly covers the value semantics and there is value in surfacing the key in MX frontmatter. The proposal MUST:
+
+- Cite the external standard precisely (URL plus the specific field/property name).
+- Declare the alignment in canon via `alignsWith:`.
+- NOT redefine the value's meaning. MX's role is to carry the key, not to govern its semantics.
+
+If the external standard does not cleanly cover the value, the field is not a pass-through and belongs in the proper Zone 1 / Zone 2 section instead, with full MX semantics.
+
+
+## 8. Conformance summary
+
+| Field | Zone | Level 1 (MUST) | Level 2 (SHOULD) | Level 3 (MAY) |
+|-------|:-:|:-:|:-:|:-:|
+| `title` | 1 | MUST | — | — |
+| `description` | 1 | MUST | — | — |
+| `author` | 1 | MUST | — | — |
+| `created` | 1 | MUST | — | — |
+| `modified` | 1 | MUST | — | — |
+| `version` | 1 | — | SHOULD | — |
+| `schema` | 1 | — | — | MAY |
+| `validatesAgainst` | 1 | — | — | MAY |
+| `status` | 2 | — | SHOULD | — |
+| `contentType` | 2 | — | SHOULD | — |
+| `runbook` | 2 | — | SHOULD | — |
+| `tags` | 2 | — | — | MAY |
+| `audience` | 2 | — | — | MAY |
+| `purpose` | 2 | — | — | MAY |
+| `license` | 2 | — | — | MAY |
+| `maintainer` | 2 | — | — | MAY |
+| `ownership` | 2 | — | — | MAY |
+| `domain` | 2 | — | — | MAY |
+| `segment` | 2 | — | — | MAY |
+| `cacheability` | 2 | — | — | MAY |
+| `readingLevel` | 2 | — | — | MAY |
+| `confidential` | 2 | — | — | MAY |
+| `inherits` | 2 | — | — | MAY |
+| `ld` | 2 | — | — | MAY |
+| Pass-through (§7) | varies | — | — | MAY |
+
+
+## 9. Security and privacy considerations
+
+- The `confidential` field controls whether a document is excluded from public outputs. Implementations that generate public artefacts MUST respect this field.
+- The `author` field is immutable and establishes provenance. Implementations MUST NOT allow modification of this field after initial creation.
+- The `ownership` field MAY contain contact information. Implementations that publish metadata publicly SHOULD consider whether `ownership.contact` values are appropriate for public exposure.
+
+
+## 10. References
+
+### 10.1 Normative references
+
+- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) — Key words for use in RFCs to indicate requirement levels
+- [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) — Date and time format
+- [SPDX Licence List](https://spdx.org/licenses/) — Software Package Data Exchange licence identifiers
+
+### 10.2 Informative references
+
+- [Schema.org Style Guide](https://schema.org/docs/styleguide.html) — Vocabulary naming conventions
+- [Dublin Core DCMI Namespace](https://www.dublincore.org/specifications/dublin-core/dcmi-namespace/) — Namespace governance model
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/) — Web Content Accessibility Guidelines (conformance level model)
+
+
+*End of MX Core Metadata note draft.*
+
+---
+
+## MX Cogs note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-cogs.md
+**File:** `draft-cogs.md`
+
+
+# MX Cogs note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 27 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+MX Core defines machine-readable document metadata. **Cogs are an optional layer on top of MX.** A cog is a `.cog.md` file: a markdown document with structured YAML frontmatter that, in addition to the MX core fields it carries, declares additional fields describing its place in a registry, its dependencies, the typed content blocks in its body, an optional execution contract, and how it identifies itself to unfamiliar consumers.
+
+A document does not need to be a cog to carry MX metadata. A blog post, a sidecar YAML, or an HTML page can declare title, author, dates, audience, license without ever being a cog. Cogs are the vocabulary you reach for when you want a document to be **navigable**, **composable**, and **runnable** by agents and runtimes — not the floor for being MX-aware.
+
+This note specifies:
+
+- The cog file format (`.cog.md`).
+- The magic-header HTML comment used for byte-zero self-identification.
+- The `cogHeader` frontmatter field that mirrors the magic-header comment for YAML-only consumers.
+- The cog structural fields (`partOf`, `buildsOn`, `requires`, `refersTo`, plus the cog-specific extensions for blocks, execute contracts, includes, deliverables, classification, and identifiers — many of which currently live in vendor extensions until ratified into the standard tier).
+
+**Out of scope:**
+
+- **Signing.** A cog can be signed but does not have to be; signing is governed by the MX Contract Fingerprinting and Signing draft note.
+- **Non-YAML carriers.** This note specifies the `.cog.md` markdown form only. How an MX-aware HTML page, JavaScript file, CSS file, or sidecar carries identity and operational metadata is governed by the MX Carrier Formats note.
+- **Document identity field semantics.** What `title`, `description`, `author`, `created`, `modified`, and `version` mean is governed by the MX Core Metadata note. Cogs inherit these definitions; this note does not redefine them.
+- **Namespace policy.** The `x-mx-` and `x-mx-p-` prefix conventions used by some cog fields are governed by the MX Extensions note.
+
+The two-zone YAML frontmatter model is carried over from MX Core: Zone 1 (top-level) holds document identity fields; Zone 2 (under the `mx:` object) holds operational fields. Cog structural fields live in Zone 2 unless explicitly noted as top-level (`cogHeader`, `contractFields`, `metadataFields`).
+
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) and [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) when, and only when, they appear in all capitals.
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of this draft set). That pattern governs the structural template for every field — heading, property table, definition prose, example — and is binding on this note. This note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+This note defines three conformance levels for cog documents (modelled on the [WCAG 2.1](https://www.w3.org/TR/WCAG21/) Level A/AA/AAA pattern). Each level assumes the document already satisfies the matching MX Core level for document identity.
+
+| Level | Name | Cog requirement |
+|-------|------|-----------------|
+| Level 1 | **MX Cog Core** | The document is a `.cog.md` file. `partOf` declared. |
+| Level 2 | **MX Cog Standard** | Adds `buildsOn` (or an empty array) and either a magic-header comment or a `cogHeader` field. |
+| Level 3 | **MX Cog Complete** | Adds explicit `requires`, `refersTo`, plus the relevant extensions (block declarations, execute contract, deliverables, identifiers) for the cog's role. |
+
+A cog claiming conformance at a given level MUST satisfy all requirements at that level and all lower levels.
+
+### 2.2 Draft status
+
+This note is a draft authored by Tom Cranstoun and offered to The Gathering for review. It is not a ratified standard. Until The Gathering accepts it, the field definitions and conformance rules are working drafts — stable enough to build against, expected to evolve through review.
+
+
+## 3. Terminology
+
+- **Cog** — A `.cog.md` file. The atomic unit of the cog layer: a markdown document with YAML frontmatter and optionally typed content blocks (prose, action, definition, code, html, sop, etc.) within the body.
+- **Optional layer** — A capability some MX-aware documents adopt and others do not. A document that does not adopt the cog layer is still a valid MX document.
+- **Magic-header comment** — A specially formatted HTML comment placed at byte zero of a cog file, used for unambiguous file-level recognition by consumers that have not parsed the YAML.
+- **Profile** — A named set of fields applicable to a specific document type. The cog layer defines the `cog` profile.
+
+
+## 4. The magic-header comment
+
+A cog file SHOULD identify itself as a cog at byte zero. The conventional mechanism is a magic-header HTML comment:
+
+```html
+<!-- cog v1 spec=https://example.org/cog-spec.v1.md runtime=https://example.org/cog-runtime.md -->
+```
+
+The comment is invisible in rendered Markdown but immediately visible to any agent reading the raw text. It serves byte-zero self-identification — a consumer that has not yet parsed YAML can still recognise the file as a cog.
+
+The comment is a single line. Tokens in order:
+
+1. The literal `cog`.
+2. A version token of the form `v\d+(\.\d+)*` (`v1`, `v1.2`, `v2`, ...) — the cog spec version the document claims.
+3. Zero or more `key=value` pairs separated by spaces. Conventional keys: `spec` (URL where the spec is published), `runtime` (URL where a runtime implementation lives), `runtime-doc` (URL pointing to runtime documentation).
+
+The comment is invisible to YAML-only consumers (registries, validators, graph builders that parse frontmatter and discard comments). For those consumers, the same information must be carried in the `cogHeader` frontmatter field (§5).
+
+
+## 5. `cogHeader` — the frontmatter equivalent
+
+A cog MAY declare `cogHeader` instead of, or in addition to, the magic-header comment. Both forms carry the same information; either suffices for cog identification. Implementations SHOULD prefer `cogHeader` for programmatic consumption and the magic-header comment for byte-zero file recognition.
+
+### 5.1 `cogHeader`
+
+| Property | Value |
+|----------|-------|
+| **Type** | object |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MAY (Level 3); MUST be present if neither this field nor a magic-header comment is declared on a cog circulating outside a closed system (Level 2 SHOULD-or-magic-header rule). |
+| **Default** | *(none)* |
+
+**Definition:** Object carrying the same information as the cog magic-header comment. Sub-keys:
+
+| Sub-key | Type | Required when present | Definition |
+|---------|------|-----------------------|-----------|
+| `version` | string | yes | Cog spec version the document claims. Format: `v` followed by an integer or a dotted version string (`v1`, `v1.1`, `v2`). Same token as the magic header's version slot. |
+| `spec` | string (URL) | yes | URL where the cog specification is published. SHOULD be HTTPS. |
+| `runtime` | string (URL) | optional | URL where a runtime implementation can be found, downloaded, or invoked. |
+| `runtimeDoc` | string (URL) | optional | URL pointing to runtime documentation explaining how to consume cogs. |
+
+**Example:**
+
+```yaml
+cogHeader:
+  version: v1
+  spec: https://example.org/cog-spec.v1.md
+  runtime: https://example.org/cog-runtime.md
+  runtimeDoc: https://example.org/cog-runtime.md
+```
+
+- A cog declaring `cogHeader` MUST populate `version` and `spec`.
+- `runtime` and `runtimeDoc` are optional; consumers MUST NOT treat their absence as a conformance failure.
+- All URL-typed sub-keys SHOULD be HTTPS.
+- Implementations SHOULD treat `cogHeader` values as informational metadata (excluded from any contract fingerprint applied to the cog) — these values describe identity, not contract.
+
+### 5.2 The equivalence rule
+
+When a cog includes both a magic-header comment AND a `cogHeader` field, the two forms MUST agree on every key they both declare:
+
+- The magic header's version token MUST equal `cogHeader.version`.
+- The magic header's `spec=` value MUST equal `cogHeader.spec`.
+- The magic header's `runtime=` value MUST equal `cogHeader.runtime` when both are present.
+- The magic header's `runtime-doc=` value MUST equal `cogHeader.runtimeDoc` when both are present.
+
+A key present in only one form is permitted; a key present in both with mismatched values is a conformance failure.
+
+### 5.3 Implementer guidance
+
+Implementations SHOULD:
+
+- Prefer `cogHeader` for programmatic consumption — it is queryable, robust to comment-stripping parsers, and addressable by registry tooling.
+- Prefer the magic-header comment for byte-zero self-identification — it is visible to agents that have not yet parsed YAML.
+- Emit both forms when generating cogs intended for circulation, so consumers of either kind can recognise the file without round-trip parsing.
+
+
+## 6. Cog structural fields
+
+The following fields define a cog's place in a registry, its dependencies, and its operational contract. All cog structural fields reside in Zone 2 (the `mx:` object) unless explicitly noted as top-level.
+
+### 6.1 `partOf`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MUST (Level 1) for cogs |
+
+**Definition:** Parent collection, suite, or initiative the cog belongs to. Names a registry namespace, a series, or a parent artefact.
+
+**Example:**
+
+```yaml
+mx:
+  partOf: mx-the-gathering
+```
+
+### 6.2 `buildsOn`
+
+| Property | Value |
+|----------|-------|
+| **Type** | array |
+| **Zone** | 2 (mx:) |
+| **Conformance** | SHOULD (Level 2) for cogs |
+
+**Definition:** Context graph. Array of cog names this document builds upon. Soft dependency — provides context, not a hard requirement.
+
+**Example:**
+
+```yaml
+mx:
+  buildsOn: [what-is-a-cog, cog-unified-spec]
+```
+
+- `buildsOn` forms the cog knowledge graph. The referenced cogs provide context but are not required for this cog to function.
+- Distinct from `requires` (hard dependency) and `refersTo` (informational link).
+
+### 6.3 `requires`
+
+| Property | Value |
+|----------|-------|
+| **Type** | array |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+**Definition:** Hard dependencies. Array of cog names that MUST exist for this cog to function.
+
+**Example:**
+
+```yaml
+mx:
+  requires: [node-runtime, markdownlint-cli2]
+```
+
+- A cog MUST NOT be considered functional if any of its `requires` entries are missing.
+- Distinct from `buildsOn` (soft context) and `refersTo` (informational link).
+
+### 6.4 `refersTo`
+
+| Property | Value |
+|----------|-------|
+| **Type** | array |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+**Definition:** Related cogs or external resources. Informational links, not dependencies.
+
+**Example:**
+
+```yaml
+mx:
+  refersTo: [field-dictionary, cog-unified-spec]
+```
+
+### 6.5 Identifier and classification fields
+
+The following fields classify a cog within its registry. They currently live in vendor-extension space (`x-mx-*`) until ratified into the standard cog tier; the field names without prefix are reserved here and SHOULD be implemented under the `x-<vendor>-` convention until then.
+
+| Field | Type | Zone | Purpose |
+|-------|------|:----:|---------|
+| `cogId` | string | 2 | Unique cog identifier within the registry. Typically derived from the filename without `.cog.md`. MUST be unique within its `partOf` namespace. |
+| `cogType` | string | 2 | Cog classification. Common values: `info` (reference / documentation), `action` (carries an execute contract), `routing` (agent navigation), `certificate-of-genuineness` (publisher-provenanced credential). |
+| `category` | string | 2 | Registry grouping (e.g. `mx-core`, `mx-tool`, `mx-content`). Coarser than `cogType`. |
+
+### 6.6 Composition and content-shape fields
+
+The following fields describe the cog's body content and how it composes with other cogs. They likewise live in vendor-extension space until ratified.
+
+| Field | Type | Zone | Purpose |
+|-------|------|:----:|---------|
+| `blocks` | array | 2 | Names the typed content blocks present in the document body (e.g. `prose`, `action`, `definition`, `essence`, `provenance`, `version`, `code`, `html`, `sop`, `security`). The `prose` block is implicit and need not be declared. |
+| `includes` | array | 2 | Cog composition declarations. Each entry names a source cog, an optional block filter, and a resolution mode (`build` resolves at build time and inlines content; `runtime` resolves on each request). |
+| `execute` | object | 2 | Action-doc execution contract. Carries `runtime`, `command`, optional `actions[]`, optional `policy`. The presence of an `execute` field distinguishes action cogs from info cogs. |
+| `policy` | string-or-object | 2 | Content-handling rules for agents. Inheritable from a parent uber-doc. |
+| `deliverable` | string-or-array | 2 | What this cog produces or delivers — a report, a validated artefact, a published page. For action cogs, describes what running the actions yields; for info cogs, describes the knowledge or artefact the cog represents. |
+
+
+## 7. Conformance summary
+
+| Field | Level 1 (MUST) | Level 2 (SHOULD) | Level 3 (MAY) |
+|-------|:-:|:-:|:-:|
+| `partOf` | MUST | — | — |
+| `buildsOn` | — | SHOULD | — |
+| `cogHeader` *or* magic-header comment | — | SHOULD (when circulating) | — |
+| `requires` | — | — | MAY |
+| `refersTo` | — | — | MAY |
+| `cogId`, `cogType`, `category` | — | — | MAY |
+| `blocks`, `includes`, `execute`, `policy`, `deliverable` | — | — | MAY |
+
+A cog at Level 1 is registry-locatable. At Level 2 it is identifiable to unfamiliar consumers and provides its context graph. At Level 3 it is fully described — dependencies, classifications, body content shape, and any execution contract.
+
+
+## 8. Security and privacy considerations
+
+- URLs declared in `cogHeader.runtime` may leak deployment topology. A cog declaring an internal runtime URL is exposing that URL to any reader of the cog. Operators concerned with topology privacy SHOULD either publish a public runtime URL or omit the field.
+- A `cogHeader.spec` URL pointing at an attacker-controlled host is a phishing vector for runtimes that auto-fetch the spec. Runtimes SHOULD validate the spec URL against a trusted registry or operator-allowlist before fetching.
+- The magic-header comment and `cogHeader` field are NOT authenticated — anyone who can write the cog can lie about which spec it claims to follow. Authentication, if required, is the responsibility of an external signing or witness mechanism, not this note.
+- Cogs declaring `execute` contracts give agents a runnable surface. Operators MUST treat `execute.command` and `execute.actions[]` values as untrusted input and apply the same sandboxing, allowlisting, and audit measures they apply to any user-supplied command.
+- A signed cog only attests provenance and integrity, never the truth of the content. Even when a cog's signature verifies cleanly, downstream consumers MUST NOT treat the values as factually correct — the signature confirms only that the cog genuinely came from the named signer and has not been altered. Editorial truth-curation is a different problem and out of scope for the cog format. User-facing language SHOULD say *attested*, not *verified*, to avoid implying a truth claim no signer makes.
+
+
+## 9. References
+
+### 9.1 Normative references
+
+- [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119), [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) — keywords for use in RFCs to indicate requirement levels
+
+### 9.2 Informative references
+
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/) — conformance level model that inspired the Level 1/2/3 framework in §2.1
+
+
+*End of MX Cogs note draft.*
+
+---
+
+## MX Extensions note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-extensions.md
+**File:** `draft-extensions.md`
+
+
+# MX Extensions note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 27 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+This note defines the namespace policy for the Machine Experience (MX) framework. It specifies how vendors extend the MX vocabulary without polluting the standard namespace, how field names adapt across syntactic contexts, and how new extension fields are registered.
+
+The namespace policy establishes three levels: standard fields (no prefix, owned by The Gathering), public extensions (`x-mx-`, owned by CogNovaMX), and private extensions (`x-mx-p-`, owned by CogNovaMX, values obfuscated). The prefix itself is the policy: an implementation can determine governance from the field name alone, without external lookup.
+
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of this draft set). That pattern governs the structural template for every field — heading, property table, definition prose, example — and is binding on this note. This note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+This note defines two conformance levels (modelled on the [WCAG 2.1](https://www.w3.org/TR/WCAG21/) Level A/AA pattern):
+
+| Level | Name | Requirement |
+|-------|------|-------------|
+| Level 1 | **MX Core** | Valid namespace usage — standard fields have no prefix, extensions use `x-mx-` or `x-mx-p-`. No prefix pollution. |
+| Level 2 | **MX Standard** | Adds Level 1 plus correct context-specific naming when fields appear outside YAML (HTML, JSDoc, CSS, XMP, shell, sidecar, SQL). |
+
+A document claiming conformance at a given level MUST satisfy all requirements at that level and all lower levels.
+
+### 2.2 Draft status
+
+This note is a draft authored by Tom Cranstoun and offered to The Gathering for review. It is not a ratified standard. Until The Gathering accepts it, the field definitions, conformance requirements, and normative rules in this note are working drafts — stable enough to build against, expected to evolve through review.
+
+
+## 3. Scope
+
+### 3.1 In scope
+
+This note specifies:
+
+- **Namespace policy** — the three-level prefix hierarchy and governance rules
+- **Context-specific naming** — how the same field appears in YAML, HTML, JSDoc, CSS, shell, XMP, sidecar, and SQL contexts
+- **Public extension fields** — the `x-mx-` vendor extension vocabulary
+- **Private extension mechanism** — the `x-mx-p-` obfuscated extension system
+- **Extension registration process** — how to add new extension fields
+
+### 3.2 Out of scope
+
+- **Carrier format mechanics** — how each file format (HTML meta tags, JSDoc, CSS comments, EXIF/XMP, shell, sidecar, SQL) carries MX metadata is governed by a separate carrier-formats note.
+- **Non-YAML identity fields** — the `mx:*` field vocabulary used by HTML, JavaScript, and CSS carriers (`mx:name`, `mx:version`, `mx:type`, etc.) is governed by the carrier-formats note.
+- **Domain-specific extension fields** — fields belonging to a particular application domain (workflow contracts, content audits, observability) belong in their own notes, not this one.
+- **Standard field definitions** — the meaning, type, and validation of standard MX fields (`title`, `author`, `created`, `description`, `status`, `contentType`) is governed by the MX Core Metadata note.
+
+### 3.3 Relationship to existing standards
+
+This note draws on the following published standards:
+
+- **HTTP "X-" extension header convention** ([RFC 6648](https://www.rfc-editor.org/rfc/rfc6648) provides historical context) — the `x-` prefix convention for non-standard headers, adapted for metadata namespaces as `x-mx-`
+- **Schema.org Style Guide** — vocabulary naming conventions; fields in YAML use camelCase per the Schema.org pattern
+- **Dublin Core DCMI Namespace** — namespace governance model
+
+
+## 4. Terminology
+
+- **Namespace** — A prefix that identifies the owner and governance policy of a metadata field.
+- **Standard field** — A field with no prefix, owned by The Gathering, universal across all MX implementations.
+- **Extension field** — A field with an `x-mx-` or `x-mx-p-` prefix, owned by a vendor (currently CogNovaMX).
+- **$MX_HOME** — The local MX OS registry directory. Contains decode tables for private extension values.
+
+
+## 5. Design principles
+
+The namespace system follows these principles:
+
+1. **The prefix IS the policy.** No documentation lookup is needed to determine governance — `x-` means extension, `mx-` means CogNovaMX, `p-` means private.
+2. **Standard fields are universal.** Every MX implementation uses the same core vocabulary with no prefix.
+3. **Extensions are opt-in.** No implementation is required to support `x-mx-` or `x-mx-p-` fields.
+4. **Context determines syntax, not semantics.** A field means the same thing regardless of whether it appears in YAML, HTML, or JSDoc.
+
+
+## 6. Namespace policy
+
+### 6.1 The three-level namespace
+
+MX metadata fields are organised into three namespace levels. Each level has a distinct prefix, owner, and governance policy.
+
+| Level | Prefix | Owner | Governance | Visibility |
+|-------|--------|-------|------------|------------|
+| Standard | *(none)* | The Gathering | Community-governed. Changes require Gathering approval. | Universal — all implementations use these fields. |
+| Public extension | `x-mx-` | CogNovaMX | Vendor-governed. CogNovaMX decides. | Visible in published cogs. Implementation extension, not the open standard. |
+| Private extension | `x-mx-p-` | CogNovaMX | Vendor-governed. CogNovaMX decides. | Obfuscated. Only `$MX_HOME` registry holders can decode values. |
+
+### 6.2 Standard fields (no prefix)
+
+Standard fields are the core MX vocabulary owned by The Gathering. They have no prefix.
+
+Implementations MUST NOT add a prefix to standard fields. A field that is part of the core MX vocabulary MUST always appear without a prefix in all contexts.
+
+**Example (correct):**
+
+```yaml
+mx:
+  status: active
+  contentType: guide
+```
+
+**Example (incorrect — prefix pollution):**
+
+```yaml
+mx:
+  x-mx-status: active     # WRONG — status is a standard field
+  mx-contentType: guide    # WRONG — contentType is a standard field
+```
+
+### 6.3 Public extension fields (`x-mx-`)
+
+Public extension fields use the `x-mx-` prefix. They are owned by CogNovaMX and follow the HTTP extension header convention (`x-` = extension, `mx-` = CogNovaMX's namespace).
+
+Public extension fields MUST use the `x-mx-` prefix. They MUST use kebab-case for the field name portion (unlike standard fields which use camelCase in YAML). They are visible in published cogs and public outputs; they are implementation-specific features, not part of the open standard.
+
+**Example:**
+
+```yaml
+mx:
+  x-mx-mount-type: personal
+  x-mx-mount-swappable: true
+```
+
+### 6.4 Private extension fields (`x-mx-p-`)
+
+Private extension fields use the `x-mx-p-` prefix. They are owned by CogNovaMX and their values are hashed, encoded, or tokenised.
+
+- Private extension field values MUST be opaque to any system that does not hold the decode registry at `$MX_HOME`.
+- Implementations MUST NOT attempt to interpret `x-mx-p-` field values without access to the decode registry. Unknown values MUST be passed through unchanged.
+
+**Example:**
+
+```yaml
+mx:
+  x-mx-p-client-tier: "a3f2c8"
+```
+
+### 6.5 Prefix parsing rule
+
+Implementations MUST parse field prefixes using the following precedence:
+
+1. If the field name starts with `x-mx-p-`, it is a **private extension**.
+2. If the field name starts with `x-mx-`, it is a **public extension**.
+3. Otherwise, it is a **standard field**.
+
+This ordering ensures that `x-mx-p-` is not misidentified as `x-mx-` followed by `p-`.
+
+
+## 7. Context-specific naming
+
+The same MX field appears in syntactically different contexts — YAML frontmatter, HTML meta tags, JavaScript documentation comments, CSS comments, shell scripts, XMP metadata, sidecar files, and SQL comments. Each context has its own naming convention. Implementations MUST apply the conversion consistently so that a field's identity is preserved across carriers.
+
+### 7.1 Naming and conversion rules
+
+| Context | Convention | Conversion from YAML camelCase | Example field | Example syntax |
+|---------|-----------|--------------------------------|---------------|----------------|
+| YAML | camelCase | *(canonical)* | `buildsOn` | `buildsOn: [cog-unified-spec]` |
+| HTML | kebab-case with `mx:` prefix | camelCase → kebab-case, prepend `mx:` | `mx:content-type` | `<meta name="mx:content-type" content="guide">` |
+| JSDoc | kebab-case with `@mx:` tag | camelCase → kebab-case, prepend `@mx:` | `@mx:runtime` | `@mx:runtime node` |
+| CSS | kebab-case with `@mx:` comment | camelCase → kebab-case, prepend `@mx:` | `@mx:type` | `/* @mx:type utility */` |
+| Shell | camelCase in `# key: value` | none — preserve camelCase | `contentType` | `# contentType: guide` |
+| XMP | `mx:` namespace prefix, case preserved | prepend `mx:` | `mx:status` | `<mx:status>active</mx:status>` |
+| Sidecar | camelCase in YAML | none — preserve camelCase | `contentType` | `contentType: guide` |
+| SQL | camelCase in `-- @mx` block | none — preserve camelCase | `contentType` | `-- @mx contentType: guide` |
+
+### 7.2 Extension field naming in non-YAML contexts
+
+Extension fields (`x-mx-` and `x-mx-p-`) already use kebab-case. In non-YAML contexts, the prefix is preserved as-is:
+
+| Context | Standard field example | Extension field example |
+|---------|----------------------|------------------------|
+| YAML | `contentType: guide` | `x-mx-mount-type: personal` |
+| HTML | `<meta name="mx:content-type">` | `<meta name="mx:x-mx-mount-type">` |
+| JSDoc | `@mx:content-type guide` | `@mx:x-mx-mount-type personal` |
+
+
+## 8. Public extension fields (`x-mx-`)
+
+The following fields use the `x-mx-` prefix and are owned by CogNovaMX. They are visible in published cogs and provide implementation-specific features that are not part of the open standard.
+
+### 8.1 `x-mx-mount-type`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Profile** | x-mx-public |
+| **Conformance** | MUST (Level 1) for x-mx-public profile |
+| **Valid values** | personal, team, product, standard |
+
+Categorises submodules in the hub mount table. Determines the governance and swapability characteristics of a mounted repository.
+
+- `personal` — owned by an individual.
+- `team` — shared across a team.
+- `product` — a product component.
+- `standard` — a forkable standard.
+
+This field is REQUIRED for all `.mx.yaml.md` folder metadata files that describe mount points.
+
+```yaml
+mx:
+  x-mx-mount-type: personal
+```
+
+### 8.2 `x-mx-mount-swappable`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string-or-boolean |
+| **Zone** | 2 (mx:) |
+| **Profile** | x-mx-public |
+| **Conformance** | MUST (Level 1) for x-mx-public profile |
+| **Valid values** | true, false, fork |
+
+Whether this mount can be swapped for a different implementation.
+
+- `true` — the mount can be replaced with any compatible alternative.
+- `false` — the mount is integral and MUST NOT be replaced.
+- `fork` — the mount can be replaced only by forking and customising.
+
+```yaml
+mx:
+  x-mx-mount-swappable: true
+```
+
+### 8.3 `x-mx-mount-upstream`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Profile** | x-mx-public |
+| **Conformance** | MAY (Level 2) |
+
+Upstream source for standard-type mounts. Identifies the canonical source repository for a forked or derived mount. Only meaningful when `x-mx-mount-type` is `standard`. The value SHOULD be a URL pointing to the upstream repository.
+
+```yaml
+mx:
+  x-mx-mount-upstream: "https://github.com/example/upstream-repo"
+```
+
+
+## 9. Private extension mechanism (`x-mx-p-`)
+
+### 9.1 Overview
+
+The `x-mx-p-` prefix designates private extension fields. Unlike standard fields and `x-mx-` public extensions, private extension values are opaque — they are hashed, encoded, or tokenised so that only holders of the decode registry can interpret them.
+
+### 9.2 Value encoding
+
+Private extension values MUST be encoded before storage. The encoding method is at the vendor's discretion. Common approaches include:
+
+- **Hash-based** — a one-way hash that maps to a lookup table in `$MX_HOME`
+- **Token-based** — a short token (e.g., `a3f2c8`) that resolves to a full value via the registry
+- **Encrypted** — symmetric or asymmetric encryption with keys stored in `$MX_HOME`
+
+### 9.3 Decode registry
+
+The decode registry lives in `$MX_HOME`. Implementations that encounter `x-mx-p-` fields without access to the decode registry MUST:
+
+1. Preserve the field and its opaque value unchanged.
+2. Not attempt to decode, interpret, or validate the value.
+3. Pass the field through to any output format without modification.
+
+### 9.4 Field listing
+
+This note does not list individual `x-mx-p-` fields. By definition, private extension fields are internal to CogNovaMX's implementation. Their names and semantics are documented in the `$MX_HOME` registry, not in public standards.
+
+
+## 10. Extension registration process
+
+### 10.1 How to add new extension fields
+
+New extension fields are registered by CogNovaMX. The Gathering does not govern extension fields — vendor extensions are the vendor's call.
+
+### 10.2 Registration steps
+
+1. **Choose the prefix.** Use `x-mx-` for public extensions, `x-mx-p-` for private extensions.
+2. **Use kebab-case.** Extension field names MUST use kebab-case (unlike standard fields which use camelCase in YAML). Example: `x-mx-deploy-target`, not `x-mx-deployTarget`.
+3. **Document the context.** Describe the field's purpose, type, valid values, and which carrier formats it applies to.
+4. **No Gathering approval needed.** Extension fields follow vendor governance, not community governance.
+
+### 10.3 Promotion to the core vocabulary
+
+An extension field MAY be promoted into the core MX vocabulary through the following process:
+
+1. The vendor proposes promotion to The Gathering.
+2. The Gathering reviews the field's adoption, utility, and universality.
+3. If accepted, the field's prefix is removed, and it becomes a core field with camelCase naming.
+4. The old `x-mx-` prefixed version SHOULD be maintained as an alias for one major version cycle.
+
+
+## 11. Conformance summary
+
+| Requirement | Level 1 (MUST) | Level 2 (SHOULD/MAY) |
+|-------------|:-:|:-:|
+| Standard fields have no prefix | MUST | — |
+| Extension fields use `x-mx-` or `x-mx-p-` | MUST | — |
+| No prefix pollution | MUST | — |
+| Correct context-specific naming for non-YAML carriers | — | SHOULD |
+| `x-mx-mount-type` (when x-mx-public profile applies) | MUST | — |
+| `x-mx-mount-swappable` (when x-mx-public profile applies) | MUST | — |
+| `x-mx-mount-upstream` | — | MAY |
+
+
+## 12. Security and privacy considerations
+
+- The `x-mx-p-` private extension mechanism is designed to protect sensitive metadata values. Implementations MUST NOT attempt to decode private values without the `$MX_HOME` registry.
+- Extension fields MAY carry information about infrastructure, deployment targets, or organisational structure. Authors SHOULD consider whether public extension values expose sensitive operational details.
+- The decode registry at `$MX_HOME` contains sensitive lookup tables. Access to `$MX_HOME` SHOULD be restricted to authorised users and agents.
+
+
+## 13. References
+
+### 13.1 Normative references
+
+- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) — Key words for use in RFCs to indicate requirement levels
+
+### 13.2 Informative references
+
+- [RFC 6648](https://www.rfc-editor.org/rfc/rfc6648) — Deprecating the "X-" prefix (historical context for the `x-mx-` convention)
+- [HTTP Extension Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) — the `X-` prefix convention for non-standard headers
+- [Schema.org Style Guide](https://schema.org/docs/styleguide.html) — Vocabulary naming conventions
+- [Dublin Core DCMI Namespace](https://www.dublincore.org/specifications/dublin-core/dcmi-namespace/) — namespace governance model
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/) — Web Content Accessibility Guidelines (conformance level model)
+
+
+*End of MX Extensions note draft.*
+
+---
+
+## MX Provenance note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-provenance.md
+**File:** `draft-provenance.md`
+
+
+# MX Provenance note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 27 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+This note defines the provenance, trust, and verification metadata vocabulary for the Machine Experience (MX) framework. It specifies the fields that establish who created content, how it was created, how trustworthy it is, who maintains it, and what governance decisions shaped it.
+
+The provenance vocabulary is organised into five groups: **attribution fields** (authorship and origin), **quality and trust fields** (reliability commitments), **maintenance fields** (ongoing stewardship), **decision record references** (governance links), and **migration fields** (content relocation tracking).
+
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of this draft set). That pattern governs the structural template for every field — heading, property table, definition prose, example — and is binding on this note. This note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+This note defines three conformance levels for provenance metadata. References to a top-level `author` field describe a string identifying the document's creator, located in the YAML frontmatter outside the `mx:` object — a near-universal convention in markdown-based authoring systems.
+
+| Level | Name | Provenance requirement |
+|-------|------|------------------------|
+| Level 1 | **MX Core** | Author attribution present (`provenanceAuthor`, or a top-level `author` field) |
+| Level 2 | **MX Standard** | Adds `provenanceOrigin`, `maintainedDate`, and `reviewCycle` declared |
+| Level 3 | **MX Complete** | Full trust chain including `publisher`, `accuracyCommitment`, `correctionSla`, decision records, and quality triad |
+
+A document claiming conformance at a given level MUST satisfy all requirements at that level and all lower levels.
+
+### 2.2 Draft status
+
+This note is a draft authored by Tom Cranstoun and offered to The Gathering for review. It is not a ratified standard. Until The Gathering accepts it, the field definitions, conformance requirements, and normative rules in this note are working drafts — stable enough to build against, expected to evolve through review.
+
+
+## 3. Scope
+
+### 3.1 In scope
+
+- **Attribution fields** — authorship, publishing entity, content origin, source material, and generation instructions
+- **Quality and trust fields** — accuracy commitments, review cycles, compliance levels, and the quality triad
+- **Maintenance fields** — freshness tracking, maintainer identity, expiry, and update triggers
+- **Decision record references** — links to architecture, naming, and business decision records
+- **Migration fields** — content relocation tracking
+
+### 3.2 Out of scope
+
+- **Document identity fields** — `title`, `description`, `author`, `created`, `modified`, `version` are governed by the MX Core Metadata note. This note refers to the top-level `author` but does not redefine it.
+- **AI/agent governance** — how agents may interact with content (read, edit, regenerate, attribute) is a separate concern; this note declares only how content was created (`provenanceOrigin`).
+- **Cryptographic verification** — fingerprinting, signing, and signature verification are governed by a separate note. The `provenancePedigree`, `proofOfAuthorship`, and `integritySignature` fields are named in core metadata; their cryptographic mechanics are out of scope here.
+- **Carrier-format mappings** — how these fields are expressed in HTML, JSDoc, CSS, etc. is governed by the MX Carrier Formats note.
+
+### 3.3 Relationship to existing standards
+
+All field names in this note use camelCase (matching the [Schema.org Style Guide](https://schema.org/docs/styleguide.html)) and avoid regional spelling variants where an established identifier system supplies a canonical spelling. All date fields use [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (YYYY-MM-DD). The quality triad references [WCAG 2.1](https://www.w3.org/TR/WCAG21/) for accessibility and [Schema.org](https://schema.org/) JSON-LD for semantic structure.
+
+
+## 4. Provenance in the two-zone model
+
+Provenance fields reside in Zone 2 (the `mx:` object), complementing the top-level `author` field that markdown-based authoring conventionally places in Zone 1.
+
+The Zone 1 `author` field identifies the document creator. The Zone 2 provenance fields extend this with richer attribution: how the content was created (`provenanceOrigin`), who published it (`provenancePublisher`), and the original author if distinct from the Zone 1 `author` (`provenanceAuthor`).
+
+```yaml
+title: "Example Document"
+author: "Tom Cranstoun"
+created: 2026-04-02
+modified: 2026-04-16
+
+mx:
+  provenanceAuthor: "Tom Cranstoun"
+  provenancePublisher: "CogNovaMX Ltd"
+  provenanceOrigin: human-directed
+  maintainedDate: 2026-04-02
+  maintainedBy: "Tom Cranstoun"
+  reviewCycle: quarterly
+  accuracyCommitment: "All factual claims verified against source documentation"
+```
+
+
+## 5. Attribution fields
+
+### 5.1 `provenanceAuthor`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MUST (Level 1) |
+
+Person or entity who originally authored the document content.
+
+```yaml
+mx:
+  provenanceAuthor: "Tom Cranstoun"
+```
+
+- At Level 1, a document MUST declare either `provenanceAuthor` or a top-level `author` field. Both MAY be present.
+- When both are present, `provenanceAuthor` identifies the original content author, while `author` identifies the document creator. These are often the same person.
+
+
+### 5.2 `provenancePublisher`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | SHOULD (Level 2) |
+
+Entity that published the document. Distinct from `publisher` (§5.5), which is a richer object used in trust-declaration cogs.
+
+```yaml
+mx:
+  provenancePublisher: "CogNovaMX Ltd"
+```
+
+
+### 5.3 `provenanceOrigin`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | SHOULD (Level 2) |
+| **Valid values** | human-directed, ai-assisted, automated-fact-check |
+
+How the content was created. Declares the human-machine authorship balance.
+
+- `human-directed` — content authored by a human, possibly with AI tooling assistance.
+- `ai-assisted` — content substantially generated by AI, with human review and direction.
+- `automated-fact-check` — content generated and verified by automated processes.
+
+```yaml
+mx:
+  provenanceOrigin: human-directed
+```
+
+
+### 5.4 `source`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string-or-array |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Origin source material or input files. Declares the content provenance chain — what materials were used to create this document. Paths MAY be relative or absolute.
+
+```yaml
+mx:
+  source: "brainstorm.md"
+```
+
+```yaml
+mx:
+  source:
+    - "quarterly-report.csv"
+    - "customer-feedback.md"
+```
+
+
+### 5.5 `publisher`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string-or-object |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Entity that publishes and stands behind this document. Can be a string (name) or an object with `name`, `url`, and `contact` sub-fields. Distinct from `provenancePublisher` (§5.2), which is a flat provenance field. The `publisher` field supports richer structured data and is used alongside `accuracyCommitment`, `reviewCycle`, and `mxCompliance` to form a complete trust declaration.
+
+```yaml
+mx:
+  publisher: "CogNovaMX Ltd"
+```
+
+```yaml
+mx:
+  publisher:
+    name: "CogNovaMX Ltd"
+    url: "https://allabout.network"
+    contact: "info@cognovamx.com"
+```
+
+
+### 5.6 `generate`
+
+| Property | Value |
+|----------|-------|
+| **Type** | object |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Generation instructions. Describes how to regenerate this content if lost or outdated. If a document is lost, an agent with access to the `generate` instructions and source material can recreate it.
+
+```yaml
+mx:
+  generate:
+    prompt: "Regenerate from source data"
+    source: "quarterly-report.csv"
+```
+
+- The `prompt` sub-field SHOULD contain instructions specific enough to produce a faithful reconstruction.
+- The `source` sub-field identifies the input data required for regeneration.
+
+
+## 6. Quality and trust fields
+
+### 6.1 `accuracyCommitment`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Publisher's commitment to content accuracy. A human-readable statement of the accuracy standard the publisher holds themselves to. The value SHOULD be a clear, actionable statement that a reader can use to assess the publisher's reliability. Used alongside `publisher`, `reviewCycle`, and `correctionSla` to form a complete trust declaration.
+
+```yaml
+mx:
+  accuracyCommitment: "All factual claims verified against source documentation"
+```
+
+
+### 6.2 `reviewCycle`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | SHOULD (Level 2) |
+
+How often content is reviewed for accuracy. Common values: `weekly`, `monthly`, `quarterly`, `annually`, `on-change`.
+
+```yaml
+mx:
+  reviewCycle: quarterly
+```
+
+
+### 6.3 `correctionSla`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Service-level agreement for correcting errors. The value SHOULD be a human-readable duration string. Communicates the publisher's responsiveness to reported errors.
+
+```yaml
+mx:
+  correctionSla: "24 hours"
+```
+
+
+### 6.4 `mxCompliance`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string-or-object |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+MX compliance level or detailed compliance metadata. When expressed as a string, the value corresponds to the conformance levels in §2.1 (`level-1`, `level-2`, `level-3`). Used alongside `publisher`, `accuracyCommitment`, and `reviewCycle` to form a complete trust declaration.
+
+```yaml
+mx:
+  mxCompliance: "level-3"
+```
+
+```yaml
+mx:
+  mxCompliance:
+    level: "level-3"
+    lastAudit: 2026-04-01
+    auditor: "Maxine"
+```
+
+
+### 6.5 The quality triad: `accessibility`, `semantic`, `convergence`
+
+The quality triad is three optional MAY-level fields that together describe document quality across complementary dimensions. Each field MAY be a string (compliance level or summary) or an object with structured assessment data.
+
+| Field | Dimension | Aligns with |
+|-------|-----------|-------------|
+| `accessibility` | How well content serves users with disabilities | [WCAG 2.1](https://www.w3.org/TR/WCAG21/), Pa11y |
+| `semantic` | How well content uses semantic HTML and structured data | [Schema.org](https://schema.org/) JSON-LD, microdata |
+| `convergence` | How well content aligns human and machine experiences | MX dual-experience principle |
+
+```yaml
+mx:
+  accessibility: "WCAG 2.1 AA"
+  semantic: "Schema.org JSON-LD"
+  convergence: high
+```
+
+Common values for `convergence` when expressed as a string: `low`, `medium`, `high`.
+
+
+## 7. Maintenance fields
+
+### 7.1 `maintainedDate`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | SHOULD (Level 2) |
+
+Date the content was last confirmed accurate by its maintainer. Distinct from a top-level `modified` field. `modified` tracks when the document was last changed; `maintainedDate` tracks when it was last confirmed to still be accurate — even if no changes were needed. Agents SHOULD treat documents with a `maintainedDate` older than the `reviewCycle` as potentially stale.
+
+```yaml
+mx:
+  maintainedDate: 2026-04-02
+```
+
+
+### 7.2 `maintainedBy`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Person or team who last confirmed accuracy. Distinct from a `maintainer` field (the person responsible for ongoing maintenance). `maintainedBy` records who performed the last accuracy confirmation — these may differ.
+
+```yaml
+mx:
+  maintainedBy: "Tom Cranstoun"
+```
+
+
+### 7.3 `expires`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Expiry date for time-sensitive content. Content SHOULD be reviewed or archived after this date. Agents encountering expired content SHOULD flag it for review rather than treating it as authoritative. Distinct from `cacheability` (how long to cache a fetch) — `expires` indicates when the content itself is no longer current.
+
+```yaml
+mx:
+  expires: 2026-12-31
+```
+
+
+### 7.4 `updateTriggers`
+
+| Property | Value |
+|----------|-------|
+| **Type** | array |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Conditions that trigger a content update. Events that should prompt a content review or revision. Values are context-specific strings describing trigger conditions. Tooling MAY use these values to automate review notifications when trigger conditions are detected.
+
+```yaml
+mx:
+  updateTriggers:
+    - specification-change
+    - new-field-added
+```
+
+
+## 8. Decision record references
+
+The fields `adr`, `ndr`, and `bdr` link a document to the formal decision record that governs an aspect of its content. Decision records provide governance traceability — they explain why certain choices were made.
+
+All three fields share the same shape: a string path to the decision record, or an object with `path`, `date`, and `status` sub-fields.
+
+| Field | Decision type | Typical content |
+|-------|---------------|-----------------|
+| `adr` | Architecture Decision Record | Architectural choices: storage strategy, transport protocol, deployment topology |
+| `ndr` | Naming Decision Record | Naming conventions: identifier style, file naming, vocabulary policy |
+| `bdr` | Business Decision Record | Business decisions: pricing, market positioning, partnership terms |
+
+| Property | Value |
+|----------|-------|
+| **Type** | string-or-object |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+```yaml
+mx:
+  adr: "decisions/adr-007-storage-strategy.md"
+  ndr: "decisions/ndr-002-camelcase-naming.md"
+  bdr: "decisions/bdr-012-launch-pricing.md"
+```
+
+```yaml
+mx:
+  adr:
+    path: "decisions/adr-007-storage-strategy.md"
+    date: 2026-03-15
+    status: accepted
+```
+
+
+## 9. Migration fields
+
+### 9.1 `movedFrom`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Previous file path before content was relocated. Used for redirect generation and link maintenance. The value SHOULD be the full relative path from the repository root. Tooling MAY use this field to generate redirects or update internal links automatically. SHOULD be paired with `movedDate`.
+
+```yaml
+mx:
+  movedFrom: "datalake/knowledge/reference/field-definitions.md"
+```
+
+
+### 9.2 `movedDate`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Date content was relocated. SHOULD be paired with `movedFrom` to provide a complete migration record.
+
+```yaml
+mx:
+  movedDate: 2026-03-15
+```
+
+
+## 10. Conformance summary
+
+| Field | Group | Level 1 (MUST) | Level 2 (SHOULD) | Level 3 (MAY) |
+|-------|-------|:-:|:-:|:-:|
+| `provenanceAuthor` | attribution | MUST | — | — |
+| `provenancePublisher` | attribution | — | SHOULD | — |
+| `provenanceOrigin` | attribution | — | SHOULD | — |
+| `source` | attribution | — | — | MAY |
+| `publisher` | attribution | — | — | MAY |
+| `generate` | attribution | — | — | MAY |
+| `reviewCycle` | quality | — | SHOULD | — |
+| `accuracyCommitment` | quality | — | — | MAY |
+| `correctionSla` | quality | — | — | MAY |
+| `mxCompliance` | quality | — | — | MAY |
+| `accessibility` | quality | — | — | MAY |
+| `semantic` | quality | — | — | MAY |
+| `convergence` | quality | — | — | MAY |
+| `maintainedDate` | maintenance | — | SHOULD | — |
+| `maintainedBy` | maintenance | — | — | MAY |
+| `expires` | maintenance | — | — | MAY |
+| `updateTriggers` | maintenance | — | — | MAY |
+| `adr` | decisions | — | — | MAY |
+| `ndr` | decisions | — | — | MAY |
+| `bdr` | decisions | — | — | MAY |
+| `movedFrom` | migration | — | — | MAY |
+| `movedDate` | migration | — | — | MAY |
+
+
+## 11. Security and privacy considerations
+
+- The `provenanceAuthor` and `provenancePublisher` fields contain personally identifiable information. Implementations that publish metadata publicly SHOULD consider whether these values are appropriate for public exposure.
+- The `publisher.contact` sub-field MAY contain email addresses or other contact information. Implementations SHOULD consider whether such values are appropriate for public exposure before publishing this metadata externally.
+- The `provenanceOrigin` field declares the human-machine authorship balance. Publishers SHOULD declare this field honestly to maintain trust with consumers and agents.
+- Decision record references (`adr`, `ndr`, `bdr`) MAY link to internal governance documents. Implementations SHOULD verify that referenced documents are accessible to the intended audience before publishing these links externally.
+- The `generate` field contains instructions for content regeneration. Implementations SHOULD ensure that generation prompts do not expose sensitive business logic or proprietary processes in publicly accessible metadata.
+
+
+## 12. References
+
+### 12.1 Normative references
+
+- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) — Key words for use in RFCs to indicate requirement levels
+- [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) — Date and time format
+
+### 12.2 Informative references
+
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/) — Web Content Accessibility Guidelines (referenced in quality triad and the conformance level model)
+- [Schema.org](https://schema.org/) — Structured data vocabulary (referenced in semantic quality)
+- [Schema.org Style Guide](https://schema.org/docs/styleguide.html) — Vocabulary naming conventions
+- [Dublin Core DCMI Namespace](https://www.dublincore.org/specifications/dublin-core/dcmi-namespace/) — Provenance and stewardship metadata model
+
+
+*End of MX Provenance note draft.*
+
+---
+
+## MX Carrier Formats note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-carrier-formats.md
+**File:** `draft-carrier-formats.md`
+
+
+# MX Carrier Formats note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 27 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+This note specifies how MX metadata is carried across file formats. It covers two layers:
+
+1. **Carrier mechanisms** — the syntactic envelope each file format uses to host MX metadata: YAML frontmatter for markdown, `<meta>` tags for HTML, JSDoc comments for JavaScript, CSS comments, shell comment blocks, XMP for media, sidecar files, and SQL comment blocks.
+2. **Code-specific provenance vocabulary** — a minimum viable set of fields specific to source code as a document and not covered by the universal identity vocabulary.
+
+The note also defines the `mx:*` identity fields used by carriers that do not have YAML frontmatter (HTML, JavaScript, CSS).
+
+What the code does — function signatures, API surfaces, test metadata, type systems, invariants, behaviour — is explicitly out of scope. Each language already has its own convention for this (JSDoc, Python docstrings, Doxygen, rustdoc, godoc). MX does not duplicate them.
+
+Database-content vocabulary and media-content vocabulary are also out of scope; this note specifies only how a document of either kind carries the universal MX identity fields. The MX framework reuses existing standards for the content layer:
+
+- **Databases** — defer to [DCAT v3](https://www.w3.org/TR/vocab-dcat-3/) (datasets, distributions, catalogues), [CSVW](https://www.w3.org/TR/tabular-metadata/) (tabular schemas, columns, keys), and [Dublin Core](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) (dataset identity).
+- **Media** — defer to [Schema.org](https://schema.org/) (`ImageObject`, `VideoObject`, `AudioObject`, `CreativeWork`, `license`) and the native embedded-metadata standards (EXIF, IPTC, XMP, ID3).
+- **Code behaviour** — defer to the language's own documentation convention.
+
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of this draft set). That pattern governs the structural template for every field — heading, property table, definition prose, example — and is binding on this note. This note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+This note defines three conformance levels (modelled on the [WCAG 2.1](https://www.w3.org/TR/WCAG21/) Level A/AA/AAA pattern):
+
+| Level | Name | Requirement |
+|-------|------|-------------|
+| Level 1 | **MX Core** | Universal identity fields present (`title`, `author`, `created`, `description`); the carrier syntax for the file's format is used correctly. |
+| Level 2 | **MX Standard** | Adds Level 1 plus the operational fields applicable to the format (`status`, `contentType`, `license`); for non-YAML carriers, the `mx:*` identity fields in §4 are used where applicable. |
+| Level 3 | **MX Complete** | Adds Level 2 plus the code-specific provenance fields in §5 where they apply, and any `MAY`-level identity fields. |
+
+A document claiming conformance at a given level MUST satisfy all requirements at that level and all lower levels.
+
+### 2.2 Selective adoption
+
+An implementation is **carrier-conformant at Level N** if, for every artefact it emits, it satisfies the Level-N requirements for the artefact's carrier format. Implementations MAY claim conformance for a subset of carriers (e.g. markdown and HTML only).
+
+### 2.3 Baseline identity contract
+
+Every MX-aware document, regardless of carrier, carries the universal Level 1 identity contract:
+
+- `title` — REQUIRED
+- `author` — REQUIRED
+- `created` — REQUIRED (ISO 8601 date format YYYY-MM-DD)
+- `description` — RECOMMENDED
+
+The carrier-specific syntax for these fields is defined in §3.
+
+### 2.4 Database and media content conformance
+
+For dataset, table, column, image, video, and audio content metadata, implementations look to the external standards cited in §1. MX makes no conformance claim for content vocabularies beyond the carrier mechanisms in §3.
+
+### 2.5 Draft status
+
+This note is a draft authored by Tom Cranstoun and offered to The Gathering for review. It is not a ratified standard. Until The Gathering accepts it, the field definitions, conformance requirements, and normative rules in this note are working drafts — stable enough to build against, expected to evolve through review.
+
+
+## 3. Carrier format mappings
+
+This section defines how each supported file format carries MX metadata.
+
+### 3.1 `.cog.md` — YAML frontmatter
+
+| Property | Value |
+|----------|-------|
+| **File types** | `.cog.md`, `.md`, `.mx.yaml.md` |
+| **Carrier mechanism** | YAML frontmatter between `---` delimiters |
+| **Field naming** | camelCase (operational fields under `mx:` object) |
+| **Conformance** | MUST (Level 1) for all markdown-based MX documents |
+
+The primary carrier format. All MX-aware markdown documents carry metadata in YAML frontmatter using a two-zone model: top-level fields for document identity (title, description, author, dates, version) and the `mx:` object for MX-operational fields. Implementations MUST NOT place identity fields inside the `mx:` object, and MUST NOT place operational fields at the top level.
+
+**Example:**
+
+```yaml
+title: "Document Title"
+description: "Brief summary"
+author: "Author Name"
+created: 2026-04-02
+modified: 2026-04-16
+version: "1.0"
+
+mx:
+  status: active
+  contentType: guide
+  tags: [metadata, example]
+```
+
+Extension fields appear inside the `mx:` object alongside standard operational fields.
+
+
+### 3.2 `.cog.html` — HTML meta tags
+
+| Property | Value |
+|----------|-------|
+| **File types** | `.cog.html`, `.html` |
+| **Carrier mechanism** | `<meta name="mx:*">` tags in `<head>`, `data-mx-*` attributes on elements |
+| **Field naming** | kebab-case with `mx:` prefix |
+| **Conformance** | MUST (Level 2) for HTML documents claiming MX conformance |
+| **Required fields** | `description` (standard HTML meta) + `author` (standard HTML meta) + at least one `<meta name="mx:*">` tag |
+
+HTML documents carry MX metadata using `<meta>` tags in the document `<head>`. The `mx:` prefix in the `name` attribute distinguishes MX metadata from standard HTML meta tags.
+
+**Example:**
+
+```html
+<head>
+  <meta name="description" content="Brief summary for search and AI agents">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="mx:status" content="active">
+  <meta name="mx:content-type" content="guide">
+  <meta name="mx:tags" content="metadata, example">
+</head>
+```
+
+- Standard HTML meta tags (`description`, `author`) MUST use their native HTML names without the `mx:` prefix.
+- MX-specific fields MUST use the `mx:` prefix in the `name` attribute.
+- Array values MUST be serialised as comma-separated strings.
+- `data-mx-*` attributes MAY be used on body elements for element-level MX metadata.
+
+
+### 3.3 `.cog.js` — JSDoc comments
+
+| Property | Value |
+|----------|-------|
+| **File types** | `.cog.js`, `.js` |
+| **Carrier mechanism** | JSDoc `/** */` block with `@mx:` tags |
+| **Field naming** | kebab-case with `@mx:` tag prefix |
+| **Conformance** | MUST (Level 2) for JavaScript documents claiming MX conformance |
+| **Required fields** | `@description` + `@version`/`@author` + at least one `@mx:*` tag |
+
+JavaScript files carry MX metadata in a JSDoc comment block at the top of the file. MX-specific fields use the `@mx:` tag prefix.
+
+**Example:**
+
+```javascript
+/**
+ * @description MX validation utility
+ * @version 1.0
+ * @author Tom Cranstoun
+ * @mx:status active
+ * @mx:content-type utility
+ * @mx:runtime node
+ * @mx:tags validation, metadata
+ */
+```
+
+- Standard JSDoc tags (`@description`, `@version`, `@author`) MUST use their native JSDoc names.
+- MX-specific fields MUST use the `@mx:` prefix.
+- The JSDoc block SHOULD appear at the top of the file, before any code.
+
+
+### 3.4 `.cog.css` — CSS comments
+
+| Property | Value |
+|----------|-------|
+| **File types** | `.cog.css`, `.css` |
+| **Carrier mechanism** | CSS comment `/* */` block with `@mx:` tags |
+| **Field naming** | kebab-case with `@mx:` tag prefix |
+| **Conformance** | MUST (Level 2) for CSS documents claiming MX conformance |
+| **Required fields** | `@description` + `@version`/`@author` + at least one `@mx:*` tag |
+
+CSS files carry MX metadata in a comment block at the top of the file. MX-specific fields use the `@mx:` tag prefix.
+
+**Example:**
+
+```css
+/*
+ * @description Global layout styles
+ * @version 2.0
+ * @author Tom Cranstoun
+ * @mx:status active
+ * @mx:type utility
+ * @mx:tags layout, responsive
+ */
+```
+
+The metadata comment block SHOULD appear at the top of the file, before any rules.
+
+
+### 3.5 `.cog.png` / `.cog.jpg` — EXIF/XMP metadata
+
+| Property | Value |
+|----------|-------|
+| **File types** | `.cog.png`, `.cog.jpg`, `.png`, `.jpg`, `.webp`, `.svg` |
+| **Carrier mechanism** | EXIF/XMP metadata with `mx:` namespace |
+| **Field naming** | `mx:` namespace prefix, original case preserved |
+| **Conformance** | MAY (Level 3) |
+
+Image files carry MX identity metadata in EXIF/XMP metadata blocks using the `mx:` XML namespace. When XMP embedding is not practical, a sidecar file (`.mx.yaml`) SHOULD be used instead. Image-content vocabulary (subject, alt text, EXIF camera fields) is governed by EXIF/IPTC/XMP/Schema.org and is not redefined here.
+
+**Example (XMP):**
+
+```xml
+<rdf:Description xmlns:mx="https://allabout.network/ns/mx/1.0">
+  <mx:status>active</mx:status>
+  <mx:contentType>illustration</mx:contentType>
+</rdf:Description>
+```
+
+The MX XMP namespace URI is `https://allabout.network/ns/mx/1.0`.
+
+
+### 3.6 Shell scripts — comment block
+
+| Property | Value |
+|----------|-------|
+| **File types** | `.sh`, `.bash`, `.zsh` |
+| **Carrier mechanism** | `# ---` YAML block with `#` prefix on each line |
+| **Field naming** | camelCase in `# key: value` lines |
+| **Conformance** | MUST (Level 2) for shell scripts claiming MX conformance |
+| **Required fields** | `title`, `description`, `status`, `author` |
+
+Shell scripts carry MX metadata in a comment block using `# ---` delimiters, with each YAML line prefixed by `#`.
+
+**Example:**
+
+```bash
+#!/bin/bash
+# ---
+# title: "Build and deploy"
+# description: "Builds site artefacts and deploys to Cloudflare"
+# author: "Tom Cranstoun"
+# status: active
+# contentType: script
+# ---
+```
+
+- The metadata block MUST start and end with `# ---`.
+- Field names use camelCase, matching YAML conventions.
+- The metadata block SHOULD appear immediately after the shebang line.
+
+
+### 3.7 `.mx.yaml` — media sidecar
+
+| Property | Value |
+|----------|-------|
+| **File types** | `.mx.yaml` (placed alongside a media asset) |
+| **Carrier mechanism** | Standalone YAML file |
+| **Field naming** | camelCase |
+| **Conformance** | MAY (Level 3) |
+
+A sidecar metadata file placed alongside a media asset (image, video, audio, binary) that cannot carry embedded metadata. The sidecar file name matches the asset file name with `.mx.yaml` appended.
+
+**Example (for `hero-image.webp`):**
+
+File: `hero-image.webp.mx.yaml`
+
+```yaml
+title: "Hero banner image"
+description: "Full-width hero image for the landing page"
+author: "Tom Cranstoun"
+created: 2026-04-02
+modified: 2026-04-16
+
+mx:
+  status: active
+  contentType: image
+  tags: [hero, banner, landing]
+```
+
+The sidecar file MUST use the two-zone model and the file name MUST match the asset file name with `.mx.yaml` appended.
+
+
+### 3.8 `mx.yaml` — code repository root
+
+| Property | Value |
+|----------|-------|
+| **File types** | `mx.yaml` (at repository root) |
+| **Carrier mechanism** | Standalone YAML file |
+| **Field naming** | camelCase |
+| **Conformance** | MAY (Level 3) |
+
+A repository-level metadata file placed at the root of a code repository. Provides MX metadata for the repository as a whole.
+
+**Example:**
+
+```yaml
+title: "MX Hub"
+description: "Central hub for Machine Experience development"
+author: "Tom Cranstoun"
+created: 2026-01-15
+modified: 2026-04-16
+
+mx:
+  status: active
+  contentType: repository
+  domain: machine-experience
+  tags: [hub, mx, repository]
+```
+
+
+### 3.9 Database sidecars and inline SQL
+
+| Property | Value |
+|----------|-------|
+| **File types** | `mx.database.yaml` (sidecar), `.sql` (inline) |
+| **Carrier mechanism** | Standalone YAML sidecar or `-- @mx ... -- @mx:end` comment blocks in SQL |
+| **Field naming** | camelCase |
+| **Conformance** | MAY (Level 3) |
+
+Database schemas carry MX identity metadata either in a standalone sidecar file (`mx.database.yaml`) or in inline SQL comments using the `-- @mx` / `-- @mx:end` delimiters. Database-content vocabulary (table relationships, column types, dataset semantics) is governed by DCAT, CSVW, and Dublin Core and is not redefined here.
+
+**Example (sidecar):**
+
+File: `mx.database.yaml`
+
+```yaml
+title: "Customer database schema"
+description: "Schema metadata for the customer CRM database"
+author: "Tom Cranstoun"
+
+mx:
+  status: active
+  contentType: database-schema
+  domain: crm
+```
+
+**Example (inline SQL):**
+
+```sql
+-- @mx
+-- title: Customer contacts table
+-- description: Primary contact records for CRM
+-- status: active
+-- contentType: database-table
+-- @mx:end
+CREATE TABLE contacts (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+);
+```
+
+- Inline SQL metadata blocks MUST start with `-- @mx` and end with `-- @mx:end`.
+- Each field line within the block MUST be prefixed with `--`.
+- Field names use camelCase.
+
+
+## 4. Non-YAML identity fields
+
+The following fields provide MX identity and classification metadata in carrier formats that do not use YAML frontmatter (HTML, JavaScript, CSS, image XMP). All fields use the `mx:` namespace prefix in their respective carrier contexts.
+
+When a field has a YAML equivalent (e.g. `title`, `contentType`), the YAML form is used in YAML-bearing carriers and the `mx:*` form is used elsewhere. The two are aliases for the same semantic field.
+
+### 4.1 `mx:name`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | html, js, css |
+| **Conformance** | SHOULD (Level 2) |
+
+Cog name, equivalent to `title` in YAML. Provides a machine-readable identifier in carrier formats that lack YAML frontmatter.
+
+```html
+<meta name="mx:name" content="validation-utility">
+```
+
+```javascript
+/** @mx:name validation-utility */
+```
+
+### 4.2 `mx:version`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | html, js, css |
+| **Conformance** | SHOULD (Level 2) |
+
+Version string, equivalent to `version` in YAML.
+
+```html
+<meta name="mx:version" content="2.0">
+```
+
+```css
+/* @mx:version 2.0 */
+```
+
+### 4.3 `mx:type`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | html |
+| **Conformance** | SHOULD (Level 2) |
+
+Domain type classification, equivalent to `contentType` in YAML. The shorter name `type` is used in HTML to follow web conventions.
+
+```html
+<meta name="mx:type" content="guide">
+```
+
+### 4.4 `mx:purpose`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | js, css |
+| **Conformance** | MAY (Level 3) |
+
+Why this file exists. Equivalent to `purpose` in YAML.
+
+```javascript
+/** @mx:purpose validation */
+```
+
+```css
+/* @mx:purpose layout */
+```
+
+### 4.5 `mx:audience`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | js, css |
+| **Conformance** | MAY (Level 3) |
+
+Intended readership. Equivalent to `audience` in YAML. Array values are expressed as a comma-separated string.
+
+```javascript
+/** @mx:audience developers, agents */
+```
+
+### 4.6 `mx:stability`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | js, css |
+| **Conformance** | MAY (Level 3) |
+| **Valid values** | stable, evolving, experimental, deprecated, archived |
+
+Stability level. Communicates how reliable this file's interface is for external consumers.
+
+- `stable` — interface is fixed; breaking changes require a major version bump.
+- `evolving` — interface may change; consumers should pin versions.
+- `experimental` — interface is subject to significant change without notice.
+- `deprecated` — interface is scheduled for removal; consumers should migrate.
+- `archived` — interface is no longer maintained.
+
+```javascript
+/** @mx:stability stable */
+```
+
+### 4.7 `mx:category`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | html, js, css |
+| **Conformance** | MAY (Level 3) |
+
+Cog category, equivalent to `category` in YAML. Determines registry grouping in non-YAML carrier formats.
+
+```html
+<meta name="mx:category" content="mx-tool">
+```
+
+### 4.8 `mx:tags`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | html, js, css |
+| **Conformance** | MAY (Level 3) |
+
+Discovery keywords as a comma-separated string. Equivalent to `tags` (array) in YAML. Values SHOULD be lowercase strings.
+
+```html
+<meta name="mx:tags" content="validation, metadata, utility">
+```
+
+### 4.9 `mx:builds-on`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | js, css |
+| **Conformance** | MAY (Level 3) |
+
+Context dependencies as a comma-separated list of cog names. Equivalent to `buildsOn` (array) in YAML. Uses kebab-case in non-YAML contexts.
+
+```javascript
+/** @mx:builds-on fields, cog-unified-spec */
+```
+
+### 4.10 `mx:documented-in`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | js, css |
+| **Conformance** | MAY (Level 3) |
+
+Path to companion documentation. Links a code file to its narrative documentation.
+
+```javascript
+/** @mx:documented-in ../docs/validation-guide.cog.md */
+```
+
+### 4.11 `mx:context-provides`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Profile** | js, css |
+| **Conformance** | MAY (Level 3) |
+
+What context this file provides to agents. Declares the knowledge or capability an agent gains by reading this file.
+
+```javascript
+/** @mx:context-provides Field validation rules and error message templates */
+```
+
+
+## 5. Code-specific provenance vocabulary
+
+This section adds two fields specific to source code as a document. They are not covered by the universal identity vocabulary or by the language's own documentation convention.
+
+### 5.1 Fields
+
+| Field | Type | Required | Purpose |
+|-------|------|----------|---------|
+| `sourceRepo` | string | OPTIONAL | URL or path of the source-control repository that holds this code file's authoritative history. Aligns with [Schema.org `codeRepository`](https://schema.org/codeRepository). |
+| `derivedFromCommit` | string | OPTIONAL | Version-control commit identifier (typically a git SHA) that this artefact was derived from. Pairs with a generic `derivedFrom` provenance pointer to add commit-level specificity. |
+
+Every other concern that a wider draft might cover — function annotations, API surface, test metadata, class invariants, dependency declarations, runtime config, build conventions — is either out of scope entirely (deferred to the language convention) or handled generically by universal identity fields.
+
+### 5.2 Carrier syntax
+
+Code carriers use the native metadata mechanism of their file format. Field names are identical across all carriers; only the host syntax changes.
+
+| Carrier | Native mechanism | Example |
+|---------|------------------|---------|
+| JavaScript / TypeScript | JSDoc comments | `@mx:sourceRepo https://github.com/example/repo` |
+| CSS | CSS block comments | `/* @mx:sourceRepo https://github.com/example/repo */` |
+| Shell | Shell comment block | `# sourceRepo: https://github.com/example/repo` (after shebang) |
+| SQL | SQL comment block | `-- @mx sourceRepo: https://github.com/example/repo` |
+| Any | YAML frontmatter in `.cog.*` files | `sourceRepo: https://github.com/example/repo` |
+
+A JavaScript file declaring `@mx:sourceRepo` and a `.cog.md` declaring `sourceRepo:` carry the same semantic value.
+
+### 5.3 Profile
+
+This note declares a single profile for code: `code`. An implementation handling code artefacts applies the `code` profile's fields in addition to the universal identity fields. There are no per-language sub-profiles — the vocabulary is language-agnostic.
+
+
+## 6. Vendor extensions
+
+Carrier formats accept vendor extension fields under a three-level namespace policy:
+
+- **Standard** (no prefix): the universal identity vocabulary plus the fields in this note.
+- **Vendor public** (`x-<vendor>-` prefix): vendor-specific carrier-format additions, openly published.
+- **Vendor private** (`x-<vendor>-p-` prefix): vendor-specific additions, obfuscated or registry-decoded.
+
+Implementations MUST NOT add a prefix to standard fields, and MUST NOT use `x-` prefixes for fields that already belong to the standard vocabulary.
+
+The detailed namespace policy (governance, prefix-parsing rules, registration process) is specified in a separate note covering MX extensions.
+
+
+## 7. Out of scope
+
+This note is scoped to carrier mechanisms and the small code-specific provenance vocabulary. The following concerns are explicitly out of scope:
+
+- **Function-level annotations** (`pure`, `idempotent`, `complexity`, `throws`, `returns`, `param`) — defer to JSDoc, Python docstring convention, Doxygen, rustdoc, godoc.
+- **API surface specification** (HTTP method, path, auth, rate limits, cache semantics) — defer to [OpenAPI](https://www.openapis.org/).
+- **Test metadata** (test type, coverage targets, fixtures) — defer to test framework conventions.
+- **Class-level annotations** (design pattern, thread-safety, invariants) — defer to language convention and code reviews.
+- **Dependency vocabulary** (purpose, criticality, upgrade policy, alternatives considered) — defer to package manifests (`package.json`, `pyproject.toml`, `Cargo.toml`) and Architecture Decision Records.
+- **Runtime configuration** (interpreter, language version, framework versions) — defer to native config (`.node-version`, `.tool-versions`, shebang lines, package manifests).
+- **Coding conventions** (style, testing conventions, documentation conventions) — defer to linter configs and community style guides.
+- **Inline code annotations** (`mx:begin`, `mx:end`, `mx:sensitive`, `mx:intentional`, `mx:todo`, `mx:ai`) — each language already has its own TODO-comment and annotation conventions.
+- **Database content vocabulary** (table relationships, column types, dataset semantics) — defer to DCAT v3, CSVW, Dublin Core.
+- **Image content vocabulary** (subject, alt text, EXIF camera fields) — defer to EXIF, IPTC, XMP, Schema.org.
+- **Audio/video content vocabulary** (duration, bitrate, captions, chapters) — defer to ID3, XMP, Schema.org.
+- **Document identity field semantics** (what `title`, `author`, `created`, `description` mean) — governed by the MX Core Metadata note.
+- **Cog file format internals** (the `.cog.md` body grammar, content blocks) — governed by the MX Cogs note.
+
+If an implementation needs any of these, it uses the relevant external convention or sibling note. This note does not duplicate them.
+
+
+## 8. Relationship to existing standards
+
+MX is explicit about deferring to established vocabularies:
+
+- **JSDoc / TSDoc / Python docstrings / Doxygen / rustdoc / godoc** — code-level documentation is each language's own convention.
+- **OpenAPI** — full API surface specification.
+- **Package manifests** (`package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`) — dependency declarations.
+- **Dublin Core / Schema.org** — generic metadata (dates, rights, formats, display names).
+- **Test framework conventions** — unit/integration/e2e classification, coverage targets, fixtures.
+- **DCAT / CSVW** — dataset and tabular data metadata.
+- **EXIF / IPTC / XMP / ID3** — embedded media metadata.
+- **HTML `<meta>` standard** — base mechanism for `<meta name="mx:*">` carriers.
+- **XMP namespace mechanism** — base mechanism for the `mx:` XMP namespace at `https://allabout.network/ns/mx/1.0`.
+
+
+## 9. References
+
+### 9.1 Normative references
+
+- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) — Key words for use in RFCs to indicate requirement levels
+
+### 9.2 Informative references — external standards MX defers to
+
+- [DCAT v3](https://www.w3.org/TR/vocab-dcat-3/) — datasets and data catalogues
+- [CSVW](https://www.w3.org/TR/tabular-metadata/) — tabular data schemas
+- [Dublin Core](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) — generic resource metadata
+- [Schema.org](https://schema.org/) — web content vocabulary
+- [EXIF](https://www.cipa.jp/std/documents/e/DC-008-Translation-2019-E.pdf) / [IPTC](https://iptc.org/standards/photo-metadata/) / [XMP](https://developer.adobe.com/xmp/docs/XMPSpecifications/) / [ID3](https://id3.org/) — embedded media metadata
+- [OpenAPI](https://www.openapis.org/) — API surface specification
+- [JSDoc](https://jsdoc.app/) / [Python Docstring (PEP 257)](https://peps.python.org/pep-0257/) / [Doxygen](https://www.doxygen.nl/) / [rustdoc](https://doc.rust-lang.org/rustdoc/) / [godoc](https://pkg.go.dev/cmd/doc) — code behaviour documentation
+- [IETF RFC format](https://www.rfc-editor.org/rfc/rfc7322) — standards-document authoring
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/) — Web Content Accessibility Guidelines (conformance level model)
+- [Schema.org `codeRepository`](https://schema.org/codeRepository) — alignment for `sourceRepo`
+
+
+*End of MX Carrier Formats note draft.*
+
+---
+
+## MX Workflow Contracts note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-workflow-contracts.md
+**File:** `draft-workflow-contracts.md`
+
+
+# MX Workflow Contracts note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 27 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+This note specifies a small set of optional public-extension fields used by **workflow contract cogs** — documents that declare an executable approval, review, or procedural workflow.
+
+The fields defined here are top-level (Zone 1) so that they form part of the cog's signed contract surface: their values name the limits, the people, and the procedures that the cog promises to honour. The shape of each field's object is domain-specific; an explicit `schema` reference on the cog (a top-level pointer to a JSON Schema, YAML schema, or Schema.org type) is the authoritative source for the precise structure.
+
+All fields in this note are conformance level MAY. They apply only to documents that explicitly declare a workflow contract.
+
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of this draft set). That pattern governs the structural template for every field — heading, property table, definition prose, example — and is binding on this note. This note adopts the pattern's authoring rules and does not restate them.
+
+A workflow contract cog is **conformant** with this note if every field it declares from §3 satisfies the field's own type and placement requirements (top-level Zone 1 placement, type as declared, value-shape consistent with the cog's `schema` reference where present).
+
+A document that does not declare any of the fields in §3 makes no claim against this note and is unaffected by it.
+
+### 2.1 Draft status
+
+This note is a draft authored by Tom Cranstoun and offered to The Gathering for review. It is not a ratified standard. Until The Gathering accepts it, the field definitions, conformance requirements, and normative rules in this note are working drafts — stable enough to build against, expected to evolve through review.
+
+
+## 3. Workflow contract fields
+
+All fields in this section appear at the **top level** of the cog's frontmatter, not under `mx:`, so that they form part of the cog's signed contract surface.
+
+### 3.1 `x-mx-thresholds`
+
+| Property | Value |
+|----------|-------|
+| **Type** | object |
+| **Zone** | 1 (top-level) |
+| **Profile** | x-mx-public |
+| **Conformance** | MAY |
+
+**Definition:** Domain workflow thresholds attached to a contract cog. Object whose keys are domain-named limits (e.g. `autoApproveBelow`, `requireSecondaryAbove`, `escalateAt`) and whose values are numeric, monetary, or categorical bounds. The cog's referenced `schema` specifies which keys are required and what types they accept.
+
+**Example:**
+
+```yaml
+x-mx-thresholds:
+  autoApproveBelow: 1000
+  requireSecondaryAbove: 10000
+```
+
+### 3.2 `x-mx-approvers`
+
+| Property | Value |
+|----------|-------|
+| **Type** | object |
+| **Zone** | 1 (top-level) |
+| **Profile** | x-mx-public |
+| **Conformance** | MAY |
+
+**Definition:** Mapping of approver-role names to identities. Keys are role names (`primary`, `secondary`, `finance`, `legal`, ...). Values are user identities, group references, or role descriptors resolved by the cog runtime.
+
+**Example:**
+
+```yaml
+x-mx-approvers:
+  primary: line-manager
+  secondary: finance-director
+```
+
+### 3.3 `x-mx-approvalProcedure`
+
+| Property | Value |
+|----------|-------|
+| **Type** | object |
+| **Zone** | 1 (top-level) |
+| **Profile** | x-mx-public |
+| **Conformance** | MAY |
+
+**Definition:** Approval procedure declaration. Object with `runner` (the engine that executes the procedure) and `phases` (an ordered array of phase objects, each typically with an `id` and optional inputs).
+
+**Example:**
+
+```yaml
+x-mx-approvalProcedure:
+  runner: cog-runtime
+  phases:
+    - id: triage
+    - id: review
+    - id: sign-off
+```
+
+### 3.4 `x-mx-reviewProcedure`
+
+| Property | Value |
+|----------|-------|
+| **Type** | object |
+| **Zone** | 1 (top-level) |
+| **Profile** | x-mx-public |
+| **Conformance** | MAY |
+
+**Definition:** Review procedure declaration. Same shape as `x-mx-approvalProcedure` (`runner` + `phases`) applied to review rather than approval workflows.
+
+**Example:**
+
+```yaml
+x-mx-reviewProcedure:
+  runner: cog-runtime
+  phases:
+    - id: collect-feedback
+    - id: revise
+    - id: publish
+```
+
+### 3.5 `x-mx-targetEnvironment`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 1 (top-level) |
+| **Profile** | x-mx-public |
+| **Conformance** | MAY |
+
+**Definition:** Named deployment or runtime environment a contract cog targets (e.g. `production`, `staging`, `test`). Resolved by the cog runtime to apply environment-specific settings.
+
+**Example:**
+
+```yaml
+x-mx-targetEnvironment: production
+```
+
+### 3.6 Group rules
+
+The following rules apply across all fields in §3:
+
+- These fields are typically named in a `contractFields` array on the cog so that changes to thresholds, approvers, procedures, or target environment invalidate any signature attached to the cog.
+- Implementations MUST resolve the cog's `schema` reference before validating the inner shape of these objects; the schema is authoritative for required keys.
+- The `runner` value in `x-mx-approvalProcedure` and `x-mx-reviewProcedure` MUST be a registry-resolvable runtime identifier.
+
+
+## 4. Out of scope
+
+- **Namespace policy** — the `x-mx-` and `x-mx-p-` prefix conventions used by these fields are governed externally.
+- **Signing mechanics** — the canonical-JSON, hash, and signature procedure that protects a workflow contract is governed externally. This note specifies only the contract-content fields, not the cryptography.
+- **Per-domain schemas** — the precise required keys and value types for `x-mx-thresholds`, `x-mx-approvers`, `x-mx-approvalProcedure`, and `x-mx-reviewProcedure` are domain-specific. They belong in the schema referenced by the cog, not in this note.
+- **Runner implementations** — the engines named by `runner` are out of scope. This note does not specify how `cog-runtime` or any other runner executes phases.
+- **Identity resolution** — how an approver name (`line-manager`, `finance-director`) resolves to a real user, group, or service is the runtime's responsibility, not the contract format's.
+
+
+## 5. Security and privacy considerations
+
+- Workflow contracts may name individuals by role title or identity. Authors SHOULD consider whether publishing a contract cog exposes identifying information about staff, approval limits, or organisational structure.
+- A workflow contract is only as trustworthy as the signature attached to it, if any. A cog declaring `x-mx-thresholds` without a signature carries no integrity guarantee — the threshold values may have been altered after authoring.
+- Threshold values can encode commercially sensitive information (auto-approval limits, escalation triggers). Operators SHOULD treat unsigned, unprotected contract cogs as advisory only.
+
+
+## 6. References
+
+### 6.1 Normative references
+
+- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) — Key words for use in RFCs to indicate requirement levels
+
+### 6.2 Informative references
+
+- [JSON Schema](https://json-schema.org/) — schema referenced by `schema` for object shape validation
+- [Schema.org](https://schema.org/) — alternative schema vocabulary for `schema` references
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/) — Web Content Accessibility Guidelines (conformance level model)
+
+
+*End of MX Workflow Contracts note draft.*
+
+---
+
+## MX Agent Directory Discovery note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-agent-directory-discovery.md
+**File:** `draft-agent-directory-discovery.md`
+
+
+# MX Agent Directory Discovery note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 28 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+This note specifies how a host SHOULD expose an *agent-directory file* so that AI training pipelines, search indexers, and agent crawlers can discover and ingest it. An agent-directory file is any well-known, host-rooted resource that describes the host to non-human readers. Examples include `llms.txt` (Jeremy Howard, September 2024), `robots.txt` (RFC 9309), `humans.txt` (humanstxt.org), and `ai.txt` (various proposals).
+
+This note does not define or redefine any specific agent-directory file format. Each format remains owned by its own community. This note specifies a transport, sitemap, and in-page discovery layer that any agent-directory file SHOULD adopt to be reliably reached by the systems it is intended to inform.
+
+The note is motivated by an observable gap: well-formed agent-directory files are routinely invisible to large-scale crawlers because they are served as `text/plain` (which Common Crawl and similar HTML-only pipelines do not ingest), are absent from `sitemap.xml`, and are not linked from any page in the host. The three normative requirements in this note (HTML transport, sitemap inclusion, in-page discovery link) close that gap without modifying the directory file's content.
+
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) and [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174) when, and only when, they appear in all capitals, as shown here.
+
+### 2.1 Conformance levels
+
+A host claiming conformance to this note SHALL satisfy:
+
+- **Level 1 (Transport):** the HTML-serving requirement in §4.
+- **Level 2 (Discovery):** Level 1 plus the sitemap requirement in §5.
+- **Level 3 (Resilience):** Level 2 plus the in-page link requirement in §6.
+
+A claim of conformance SHALL state the level reached.
+
+### 2.2 Draft status
+
+This is a draft note. Conformance levels and field semantics MAY change in response to community review. Hosts implementing this draft SHOULD note the draft version number they implemented against.
+
+
+## 3. Scope
+
+### 3.1 In scope
+
+- The transport mechanism by which an agent-directory file is delivered to crawlers.
+- The discovery mechanism by which crawlers learn the file exists.
+- The in-page mechanism by which agents loading any HTML page on the host learn the file's location.
+- The relationship between the agent-directory file and the host's `sitemap.xml`.
+
+### 3.2 Out of scope
+
+- The content, schema, or vocabulary of any specific agent-directory file. This note does not specify what `llms.txt` should contain; that is owned by the llms.txt community. The same applies to `robots.txt`, `ai.txt`, `humans.txt`, and any future agent-directory format.
+- The behaviour of inference-time agents that retrieve the directory file on demand. This note addresses training-pipeline and bulk-crawler discovery; inference-time retrieval has its own discovery patterns.
+- HTTP caching, CDN configuration, geographic routing, and other transport details unrelated to content negotiation and sitemap inclusion.
+
+### 3.3 Relationship to existing standards
+
+This note relies on:
+
+- **[RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110)** for HTTP semantics, including `Content-Type` negotiation.
+- **[Sitemaps 0.9 protocol](https://www.sitemaps.org/protocol.html)** for `sitemap.xml`.
+- **[HTML Living Standard](https://html.spec.whatwg.org/)** for the `<link>` and `<meta>` element semantics used in §6.
+- **[Schema.org WebPage](https://schema.org/WebPage)** as the structured-data vocabulary for the optional JSON-LD block in §4.3.
+
+This note adds nothing to those standards; it specifies how they combine for the agent-directory case.
+
+
+## 4. Transport: serve as text/html
+
+A host conforming to this note SHALL serve every agent-directory file with `Content-Type: text/html; charset=utf-8`. The host MAY additionally serve the file at a separate URL with `Content-Type: text/plain` for legacy clients, but the canonical URL referenced by §5 and §6 SHALL return `text/html`.
+
+### 4.1 Why HTML
+
+The largest training-data crawlers (Common Crawl is the canonical example, ingested by most major LLM training pipelines) only index HTML responses. A file served as `text/plain` is fetched but excluded from the resulting HTML corpus. The agent-directory file therefore does not reach training data, even though the file exists, is well-formed, and is reachable by direct URL.
+
+### 4.2 Wrapper requirements
+
+The HTML wrapper SHALL:
+
+1. Preserve the agent-directory file's text content verbatim. Implementations SHOULD place the text inside a `<pre>` element to preserve whitespace.
+2. HTML-escape any `<`, `>`, and `&` characters in the directory text before insertion into the wrapper.
+3. Include a `<title>` element. If the directory text begins with a heading recognisable in its own format (e.g. a Markdown `# Heading` line in `llms.txt`), the wrapper SHOULD promote that heading to `<title>`. Otherwise the wrapper SHOULD use a fallback of the form `<directory-filename>, <hostname>`.
+4. Include `<meta charset="utf-8">` and `<meta name="viewport" content="width=device-width, initial-scale=1">`.
+5. Include `<meta name="robots" content="index, follow">`. The point of the wrapper is to be indexed.
+6. Include `<link rel="canonical" href="<bare-resource-url>">` where `<bare-resource-url>` is the agent-directory file's URL with query string and fragment stripped.
+
+### 4.3 Optional structured data
+
+The wrapper MAY include a Schema.org JSON-LD block describing itself as a `WebPage`. When present, the block SHOULD include at minimum:
+
+- `@context: https://schema.org`
+- `@type: WebPage`
+- `name`: the title computed in §4.2 step 3
+- `description`: a short prose description identifying the resource as an agent-directory file
+- `url`: the canonical URL from §4.2 step 6
+
+This block is OPTIONAL because Schema.org is an extension; the transport requirement (§4) does not depend on it.
+
+### 4.4 Wrapping at serve time
+
+The wrapper SHOULD be applied at serve time (e.g. by a reverse proxy, edge worker, or CDN function) rather than by modifying the source file. Wrapping at serve time keeps the source agent-directory file in its native plain-text form for tools that parse it directly, while delivering the HTML form to HTTP clients that request it.
+
+
+## 5. Discovery: list in sitemap.xml
+
+If the host publishes a `sitemap.xml` (per the Sitemaps 0.9 protocol), the host SHALL include each agent-directory file as a `<url>` entry in `sitemap.xml`.
+
+### 5.1 Why sitemap inclusion
+
+Crawlers that discover URLs via `sitemap.xml` (the dominant pattern for large-scale crawl) have no reliable signal that an agent-directory file exists if it is absent from the sitemap. Root-directory speculative fetches are not universal and not guaranteed; sitemap inclusion is.
+
+### 5.2 Sitemap entry shape
+
+The sitemap entry SHALL identify the agent-directory file's canonical URL (the `text/html` URL from §4). The entry MAY include `<lastmod>`, `<changefreq>`, and `<priority>` per the Sitemaps protocol.
+
+### 5.3 Hosts without sitemap.xml
+
+A host that does not publish `sitemap.xml` is not in scope for §5. Such hosts SHOULD reach Level 1 (transport) and Level 3 (in-page link) instead; the sitemap requirement of Level 2 is moot when no sitemap exists.
+
+
+## 6. In-page resilience: <link rel="..."> in every page
+
+Every HTML page on the host SHOULD include in its `<head>` a `<link>` element referencing each agent-directory file the host publishes:
+
+```html
+<link rel="<directory-name>" href="/<directory-filename>">
+```
+
+### 6.1 Why per-page links
+
+Three discovery paths reinforce each other. Sitemap inclusion (§5) covers crawlers that read sitemaps. HTML serving (§4) makes the file ingestible once reached. The in-page link covers everything in between: agents that arrive via a deep link, JS-only single-page applications whose `<body>` is empty until script execution completes, and crawlers that do not read the sitemap.
+
+For headless and JavaScript-rendered sites the per-page link is particularly load-bearing. The `<head>` is delivered before any script runs and is therefore the only part of the response many crawlers and agents see.
+
+### 6.2 The rel attribute
+
+The `rel` attribute value SHALL be the bare directory name without the `.txt` extension. Example values:
+
+- `rel="llms-txt"` for `/llms.txt`
+- `rel="ai-txt"` for `/ai.txt`
+- `rel="humans-txt"` for `/humans.txt`
+
+Using kebab-case for the rel value matches existing IANA link relation conventions (e.g. `rel="dns-prefetch"`, `rel="alternate-stylesheet"`).
+
+### 6.3 Optional inline description
+
+A host MAY include alongside the link a `<meta>` element carrying a short prose description of the agent-directory file's content:
+
+```html
+<meta name="<directory-name>-description" content="<short prose description>">
+```
+
+This is a courtesy to agents that can act on a single tag without having to fetch the directory file itself.
+
+### 6.4 Optional inline content
+
+For hosts whose agent-directory file is short enough to embed in every page, a host MAY include the full content as a `<meta>` element:
+
+```html
+<meta name="<directory-name>-content" content="<full file content>">
+```
+
+This is RECOMMENDED only when the file is short (under approximately 1KB after escaping) and stable. For longer or frequently-updated directory files, prefer the link form (§6) plus sitemap inclusion (§5).
+
+
+## 7. Why not depend on a new crawler standard
+
+A host could reasonably ask why this note specifies HTML transport, sitemap inclusion, and `<link>` discovery instead of asking crawlers to learn one new convention specific to agent-directory files. The answer is the principle on which the rest of the MX framework rests: **do not require new infrastructure when existing infrastructure already handles the problem**.
+
+Crawlers already understand HTML responses. Sitemaps already signal what matters on a host. The `<link>` element already carries arbitrary `rel` values that machine readers can dispatch on. Specifying that agent-directory files SHOULD use those mechanisms costs the host a one-time configuration change and costs the crawler nothing at all. Specifying a new mechanism would require the host to wait for the crawler ecosystem to update before the directory file becomes useful, which (per the inference-time observation in §3.2) it largely is not anyway.
+
+This note is therefore not novel discovery infrastructure. It is a configuration discipline that makes existing discovery infrastructure work for a class of files that has, until now, fallen between the cracks.
+
+
+## 8. Implementation guidance (informative)
+
+This section is informative; it is not a normative part of the standard.
+
+### 8.1 Worker-based wrapping
+
+A reverse-proxy worker (Cloudflare Worker, Fastly Compute, Vercel Edge Function, Akamai EdgeWorker, etc.) is well suited to serve-time wrapping. The worker intercepts the agent-directory URL, fetches the source plain-text file from the origin, applies the wrapper described in §4, and returns the result with `Content-Type: text/html`.
+
+The wrapper logic SHOULD be expressed as a pure function (string in, string out) so that it can be unit-tested independently of the worker runtime.
+
+### 8.2 Sitemap automation
+
+When the host generates `sitemap.xml` from a content tree, the agent-directory entry can be added by a single rule that detects files at the host root matching the directory naming convention.
+
+### 8.3 In-page link injection
+
+For static-site generators, the `<link>` element SHOULD be added to the canonical page template. For server-rendered applications, it SHOULD be added to the layout component that wraps every page. For client-rendered applications (SPAs), it SHOULD be present in the static `index.html` shell, not injected by JavaScript at runtime, since runtime injection is invisible to crawlers that do not execute scripts.
+
+### 8.4 Verification
+
+A host can verify Level 1 conformance by issuing `curl -I` against the directory URL and checking that the `Content-Type` header begins with `text/html`. Level 2 verification is a `grep` against `sitemap.xml`. Level 3 verification is a `grep` against the rendered `<head>` of any sample page.
+
+
+## 9. Security and privacy considerations
+
+The wrapper described in §4 ingests the agent-directory file's text and emits it as part of an HTML document. Implementations MUST HTML-escape the text (§4.2 step 2) to prevent any `<` or `&` character in the directory text from being interpreted as markup.
+
+The agent-directory file is, by design, public. This note adds no fields that carry confidential data. Hosts that wish to restrict access to the directory file should do so via HTTP authentication or IP allowlisting; that is a host policy, not a content-type concern.
+
+The optional inline content form (§6.4) places the full directory content into every page response. Hosts SHOULD consider whether the directory's content is appropriate to repeat across the entire response surface, and SHOULD NOT use the inline form for content that is not safe to expose alongside any page on the host.
+
+
+## 10. IANA considerations
+
+This note proposes no new IANA registrations. The `<link rel>` values described in §6 are agent-directory-specific identifiers that do not require IANA registration; they are dispatched on by name within consuming software.
+
+If the agent-directory community wishes to register specific rel values (e.g. `llms-txt`) with the IANA Link Relation Type registry, that registration is owned by the directory's defining community, not by this note.
+
+
+## 11. References
+
+### 11.1 Normative
+
+- [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) — Key words for use in RFCs.
+- [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174) — Ambiguity of uppercase vs lowercase in RFC 2119 key words.
+- [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110) — HTTP Semantics.
+- [Sitemaps XML format 0.9](https://www.sitemaps.org/protocol.html).
+- [HTML Living Standard](https://html.spec.whatwg.org/).
+
+### 11.2 Informative
+
+- [llms.txt proposal (Jeremy Howard, 2024)](https://llmstxt.org/) — the agent-directory format that motivated this note.
+- [RFC 9309](https://datatracker.ietf.org/doc/html/rfc9309) — Robots Exclusion Protocol; the canonical example of an agent-directory file with established discovery and indexing conventions.
+- [Schema.org](https://schema.org/) — structured-data vocabulary used in §4.3.
+- [Common Crawl](https://commoncrawl.org/) — the open web crawl ingested by most major LLM training pipelines.
+
+
+## 12. Acknowledgements
+
+The author thanks the llms.txt and Common Crawl communities, whose work and conventions this note builds upon. Earlier prose treatment of the underlying problem appears at <https://mx.allabout.network/blog/llms-txt-guide.html>.
+
+---
+
+## MX Document Accessibility note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-document-accessibility.md
+**File:** `draft-document-accessibility.md`
+
+
+# MX Document Accessibility note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 28 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+This note specifies how a publisher SHOULD declare and demonstrate the accessibility of a non-HTML document carrier so that AI training pipelines, search indexers, agent crawlers, and assistive technologies (screen readers, screen magnifiers, switch interfaces, refreshable braille displays) can reach, parse, and present the document on equal terms with sighted readers using a standard browser.
+
+The note is motivated by a regulatory and demographic gap. Around one in four people in the European Union has some form of disability; the figure is approximately one in six globally. Document carriers other than HTML (PDF being the dominant case, with an installed base of several trillion files and four hundred billion opened in a single vendor's tooling in a single year) are routinely shipped without the structure tags, logical reading order, or language declarations that assistive technologies require. The European Accessibility Act (Directive (EU) 2019/882) entered into force on 28 June 2025 and applies financial penalties of approximately ten thousand euros for minor violations and one hundred thousand euros or more for major or repeated non-compliance, with significantly higher figures available for large enterprises.
+
+The note does not redefine PDF, DOCX, EPUB, or any other carrier format. Each format remains owned by its own standards body (ISO 32000 for PDF, ISO/IEC 29500 for OOXML, IDPF for EPUB). The note does not redefine accessibility either. WCAG 2.1, EN 301 549, and the per-format accessibility standards (ISO 14289 PDF/UA, the WCAG PDF Techniques) remain authoritative. This note specifies a metadata layer that declares which of those standards the artefact claims to satisfy, and a verification discipline that distinguishes a self-declared claim from an independently checked one.
+
+The note is carrier-agnostic. PDF is treated normatively in section 4 because the regulatory pressure and installed base make it the urgent case. DOCX (section 5) and EPUB (section 6) are described informatively with the same conformance levels and a documented migration path so that the same metadata declarations work across all three formats without per-carrier reinvention.
+
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) and [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174) when, and only when, they appear in all capitals, as shown here.
+
+### 2.1 Conformance levels
+
+A publisher claiming conformance to this note for a given artefact SHALL satisfy:
+
+- **Level 1 (Tagged):** the carrier embeds a structure tree and a logical reading order in its format-native way. For PDF that is a `/StructTreeRoot` per ISO 14289-1 with `/MarkInfo /Marked true` and a populated reading-order tree. For DOCX it is the use of paragraph styles for headings (Heading 1, Heading 2, etc.) plus alternative text on every non-decorative inline image. For EPUB it is semantic XHTML5 with `epub:type` attributes on structural elements.
+- **Level 2 (Declared):** Level 1 plus the source artefact (or its sidecar metadata) carries the open-standard MX fields `accessibilityConformance`, `accessibilityFeature`, `accessibilityHazard`, `accessibilitySummary`, and `lang`. The carrier's native metadata mirrors the declarations where the carrier supports it (PDF XMP `pdfuaid:part` and `dc:language`; DOCX `core.xml` language; EPUB `dc:language` and `meta property="schema:accessibilityFeature"`).
+- **Level 3 (Verified):** Level 2 plus the result of an independent accessibility check is recorded in the artefact's provenance metadata (`provenancePedigree.checks[]` array, with each entry naming the checker, the checker's version, the date of the check, and the outcome). The note does not name specific checkers; verifier categories include PDF/UA validators, WCAG PDF Techniques runners, and equivalent checkers for DOCX and EPUB.
+
+A claim of conformance SHALL state the level reached.
+
+### 2.2 Draft status
+
+This is a draft note. Conformance levels and field semantics MAY change in response to community review. Implementations of this draft SHOULD note the draft version number they implemented against.
+
+
+## 3. Scope
+
+### 3.1 In scope
+
+- The metadata fields a publisher SHOULD attach to a non-HTML document artefact to declare its accessibility characteristics.
+- The mapping from those metadata fields to each carrier's native metadata representation (XMP for PDF, core.xml for DOCX, OPF metadata for EPUB).
+- The verification discipline that distinguishes a self-declared claim (Level 2) from an independently checked claim (Level 3).
+- The relationship between a carrier-format declaration (e.g. `accessibilityConformance: PDF/UA-1`) and the underlying ISO standard the declaration refers to.
+
+### 3.2 Out of scope
+
+- The format-internal mechanics of how to embed a structure tree, alt text, or reading order in PDF, DOCX, or EPUB. Those mechanics are owned by ISO 14289 (PDF/UA), ISO 32000 (PDF), the OOXML accessibility annex, and the EPUB accessibility specification.
+- The pedagogical question of what makes good alt text. Each carrier-format community has its own guidance (W3C alt-text decision tree, EPUB accessibility guidelines, Microsoft Office accessibility checker rules); this note defers to them.
+- HTML accessibility. WCAG 2.1, the WAI-ARIA specification, and the existing HTML semantics already cover HTML; this note does not duplicate them. The MX Carrier Formats note (the sister Gathering draft for code carriers) and the broader MX accessibility narrative in the published MX manuscripts cover HTML separately.
+- Procurement-side compliance language for the European Accessibility Act, the Americans with Disabilities Act, the UK Equality Act, or any other jurisdiction-specific regulation. This note describes the technical metadata; the regulatory question of which artefacts fall under which jurisdiction is owned by the publisher and their legal counsel.
+
+### 3.3 Relationship to existing standards
+
+This note relies on:
+
+- **[ISO 14289-1](https://www.iso.org/standard/64599.html)** (PDF/UA-1) for PDF accessibility.
+- **[ISO 32000-2](https://www.iso.org/standard/75839.html)** (PDF 2.0) for the underlying PDF specification.
+- **[ISO 19005](https://www.iso.org/standard/63534.html)** series (PDF/A) for archive-grade PDF, which shares much of the accessibility tagging machinery.
+- **[WCAG 2.1](https://www.w3.org/TR/WCAG21/)** and the [W3C PDF Techniques](https://www.w3.org/WAI/WCAG21/Techniques/#pdf) for the cross-format accessibility success criteria.
+- **[BCP 47](https://www.rfc-editor.org/info/bcp47)** for the language tags used in the `lang` field and in carrier-native language declarations.
+- **[Schema.org accessibility properties](https://www.w3.org/2021/a11y-discov-vocab/latest/)** (`accessibilityFeature`, `accessibilityHazard`, `accessibilitySummary`, `accessibilityAPI`, `accessibilityControl`) as the canonical vocabulary for the MX `accessibilityFeature`, `accessibilityHazard`, and `accessibilitySummary` fields.
+- **[Directive (EU) 2019/882](https://eur-lex.europa.eu/eli/dir/2019/882/oj)** (the European Accessibility Act) as the regulatory context that motivates publisher adoption.
+
+This note adds nothing to those standards; it specifies how their metadata combines for the document-format accessibility case.
+
+
+## 4. PDF (normative)
+
+A PDF carrier claiming conformance to this note SHALL satisfy the following requirements at the level claimed.
+
+### 4.1 Level 1: Tagged PDF (normative)
+
+The PDF SHALL embed a `/StructTreeRoot` per ISO 14289-1 §7.1, populated with a tag tree that mirrors the document's logical structure (headings, paragraphs, lists, tables, figures, captions, links). The PDF SHALL declare itself tagged via `/MarkInfo << /Marked true >>` in the document catalog.
+
+The tag tree SHALL define a logical reading order distinct from the visual layout order. Multi-column documents (newspaper layouts, two-column scientific papers, side-by-side translation panels) MUST set the reading order so that screen readers traverse columns in the author's intended sequence rather than across each visual row.
+
+Every non-decorative image, figure, formula, or other non-text content element SHALL carry alternative text via the `/Alt` entry on the structure element. Decorative content (borders, dividers, purely visual ornament) SHALL be marked as artefacts (`/Artifact`) so that assistive technologies skip them.
+
+### 4.2 Level 2: Declared (normative)
+
+The source artefact (or its sidecar metadata, where the PDF is generated from a source carrying MX frontmatter) SHALL declare:
+
+- `accessibilityConformance` set to `PDF/UA-1` or `PDF/UA-2`.
+- `accessibilityFeature` listing the Schema.org accessibility features the PDF carries (e.g. `taggedPDF`, `readingOrder`, `alternativeText`, `displayTransformability`).
+- `accessibilityHazard` listing any Schema.org accessibility hazards present, or the negative declarations (`noFlashingHazard`, `noSoundHazard`, `noMotionSimulationHazard`) where the publisher knows the PDF is hazard-free.
+- `accessibilitySummary` carrying a one-paragraph human-readable description of the PDF's accessibility characteristics.
+- `lang` carrying the BCP 47 language tag of the PDF's primary language.
+
+The PDF's XMP packet SHALL mirror the declarations where the XMP namespace supports them: `pdfuaid:part` MUST equal the integer part of the declared `accessibilityConformance` value (1 for `PDF/UA-1`, 2 for `PDF/UA-2`); `dc:language` MUST equal the `lang` value.
+
+A PDF carrying these declarations without satisfying Level 1 is non-conformant. Validators SHALL reject the claim and SHOULD report the missing structure-tree or reading-order element specifically rather than a generic failure.
+
+### 4.3 Level 3: Verified (normative)
+
+An independent accessibility check SHALL have run against the PDF byte-stream, and the check's outcome SHALL be recorded in the artefact's provenance metadata under `provenancePedigree.checks[]`. Each entry in the array SHALL carry at minimum:
+
+- `checker`: the name (and where applicable the version) of the checker that ran.
+- `standard`: the standard the checker validated against (e.g. `PDF/UA-1`, `WCAG-2.1-AA`).
+- `date`: the ISO 8601 date the check ran.
+- `outcome`: `pass`, `pass-with-warnings`, or `fail`.
+
+The note does not name specific checkers; verifier categories include PDF/UA validators, WCAG PDF Techniques runners, and accessibility-checker tools shipped by major office and graphics vendors.
+
+A `fail` or `pass-with-warnings` outcome MAY still be Level 3 conformant if the publisher records the outcome honestly. The point of Level 3 is verifiability, not perfection.
+
+
+## 5. DOCX (informative)
+
+A DOCX carrier conforms to this note at Level 1 by using the document's heading styles consistently for headings (Heading 1, Heading 2, etc. rather than directly-formatted bold text), by carrying alternative text on every non-decorative inline image (the alt-text dialogue in mainstream office authoring tools), and by setting the document's primary language in `core.xml`.
+
+Level 2 declarations are carried in the same way as for PDF: the source artefact (the DOCX itself, since DOCX is its own source) carries the MX accessibility fields in either a sidecar metadata file or in the `core.xml` extended-properties block. The DOCX accessibility checker tools provided by mainstream office suites can serve as Level 3 verifiers when their outcome is recorded in `provenancePedigree.checks[]`.
+
+The OOXML accessibility annex covers the format-internal mechanics. This note does not duplicate it.
+
+
+## 6. EPUB (informative)
+
+An EPUB carrier conforms to this note at Level 1 by using semantic XHTML5 throughout, with `epub:type` attributes on structural elements (chapter, part, glossary, etc.) per the EPUB Structural Semantics Vocabulary, by carrying alternative text on every non-decorative image, and by declaring the language in the OPF `dc:language` element.
+
+Level 2 declarations are carried in the OPF metadata block as `meta` elements with `property="schema:accessibilityFeature"`, `property="schema:accessibilityHazard"`, and `property="schema:accessibilitySummary"`, mirroring the MX field names. The EPUB accessibility specification (EPUB Accessibility 1.1) covers the format-internal mechanics.
+
+
+## 7. Why three reinforcing layers
+
+A publisher could reasonably ask why this note specifies three conformance levels rather than a single binary "is it accessible".
+
+The answer is that accessibility claims fail in three distinct ways and each layer catches a different one. A PDF can be byte-level tagged (Level 1) but carry no machine-readable declaration of what standard it claims, so a downstream consumer has to parse the file to find out (the Level 2 problem). A PDF can carry an explicit `accessibilityConformance: PDF/UA-1` declaration in its source frontmatter and its XMP packet but be untagged at the byte level (the Level 1 problem; the declaration is a lie). A PDF can be tagged and declared but never independently checked, so the publisher's claim is unverified (the Level 3 problem; trust is asserted but not earned).
+
+The three layers reinforce each other: structural truth (Level 1), declared truth (Level 2), and verified truth (Level 3). A publisher claiming Level 3 is making the strongest claim available without this note proposing a new verification infrastructure; the note relies entirely on existing checker tooling and existing standards.
+
+The European Accessibility Act, the Americans with Disabilities Act, the UK Equality Act, and analogous regulations in other jurisdictions create a legal incentive for Level 3 specifically: a self-declaration without independent verification carries less defensive weight than an independently-checked one.
+
+This note is therefore not novel infrastructure. It is a metadata discipline that makes existing accessibility infrastructure auditable.
+
+
+## 8. Implementation guidance (informative)
+
+This section is informative; it is not a normative part of the standard.
+
+### 8.1 Generation pipelines
+
+Most publishers generate PDFs from a higher-level source (Markdown, LaTeX, Word, web-to-PDF). The accessibility-conscious choice is to generate tagged output by default rather than retrofit tagging onto an untagged production file.
+
+For Markdown-to-PDF pipelines, a typesetting engine that supports the `tagpdf` package (lualatex with `\usepackage{tagpdf}`) produces tagged output natively. Alternatives include weasyprint and chromium-headless print-to-PDF, both of which produce tagged output by default for HTML input.
+
+For Word-to-PDF pipelines, the office suite's "Save As PDF" or "Export as PDF" function respects the source document's heading styles and alt text when accessibility is enabled at export time.
+
+### 8.2 Verification
+
+A heuristic Level 1 check on a PDF can be performed with `qpdf --json <pdf>` (qpdf is widely available open-source tooling) and inspecting the output for `/StructTreeRoot`, `/MarkInfo /Marked true`, and `/Lang` entries on the document catalog, plus the XMP `pdfuaid:part` declaration. A heuristic check is not a Level 3 verification; Level 3 requires a checker that validates the tag tree's correctness against the standard, not just the presence of the byte-level structures.
+
+A full Level 3 verifier for PDF/UA-1 is available from several open-source and commercial sources. The verifier identity SHOULD be recorded in `provenancePedigree.checks[]` so a downstream reader can re-run the same verifier and reproduce the outcome.
+
+### 8.3 Authoring-tool alt text
+
+Mainstream authoring tools and several AI-assisted authoring services now suggest alt text automatically. Suggested alt text is often technically correct but lacks document context. A common failure mode: a photograph of a named person is described as "older businessman looking professional" rather than the person's name and role. A bar chart is described as "blue bars on a white background" rather than the dataset and the comparison the chart conveys.
+
+Authors SHOULD review every auto-suggested alt-text value before shipping. Authors SHOULD mark genuinely decorative images with `decorative: true` (the MX field) so that authoring tools and verifiers know to skip them rather than emit alt text the screen reader would then announce as noise.
+
+### 8.4 Scope: which documents need conformance
+
+Not every artefact needs to satisfy this note. Internal-only documents, ephemeral working notes, and machine-generated artefacts that are never read by a human or an assistive technology are out of practical scope.
+
+The artefacts that benefit most from conformance are customer-facing documents published to the open web (white papers, product datasheets, academic preprints, regulatory filings, government forms) and high-touch internal documents that must be readable by every employee regardless of disability (HR policies, company handbooks, training materials, payroll documents, signed contracts).
+
+
+## 9. Security and privacy considerations
+
+The fields described in this note carry no confidential data. Accessibility declarations are by their nature public claims about an artefact intended for public consumption.
+
+The provenance entries recorded at Level 3 (`provenancePedigree.checks[]`) name the checker tool and outcome. Publishers SHOULD consider whether any checker-emitted diagnostic detail (e.g. a list of specific tag-tree errors on a failed check) is appropriate to expose alongside the artefact. The recommended pattern is to record the outcome in the public provenance and keep the diagnostic detail in private build logs.
+
+The declarations described here do not expose any user data, do not require the artefact to track or fingerprint readers, and do not create any new attack surface beyond the carrier format's own.
+
+
+## 10. IANA considerations
+
+This note proposes no new IANA registrations. The Schema.org accessibility properties referenced in this note are defined and maintained by Schema.org under their published process; the carrier-format-specific properties (`pdfuaid:part`, `pdfaid:part`, `dc:language`) are defined and maintained by their respective standards bodies.
+
+
+## 11. References
+
+### 11.1 Normative
+
+- [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) — Key words for use in RFCs.
+- [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174) — Ambiguity of uppercase vs lowercase in RFC 2119 key words.
+- [BCP 47](https://www.rfc-editor.org/info/bcp47) — Tags for identifying languages.
+- [ISO 14289-1](https://www.iso.org/standard/64599.html) — Document management applications: Electronic document file format enhancement for accessibility (PDF/UA-1).
+- [ISO 32000-2](https://www.iso.org/standard/75839.html) — Document management: Portable document format (PDF 2.0).
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/) — Web Content Accessibility Guidelines.
+
+### 11.2 Informative
+
+- [ISO 19005](https://www.iso.org/standard/63534.html) series — PDF/A archive-grade PDF.
+- [W3C PDF Techniques](https://www.w3.org/WAI/WCAG21/Techniques/#pdf) — Accessibility techniques for PDF.
+- [Schema.org accessibility properties](https://www.w3.org/2021/a11y-discov-vocab/latest/) — Accessibility metadata vocabulary.
+- [EPUB Accessibility 1.1](https://www.w3.org/TR/epub-a11y-11/) — Accessibility specification for EPUB publications.
+- [Directive (EU) 2019/882](https://eur-lex.europa.eu/eli/dir/2019/882/oj) — European Accessibility Act.
+- [EN 301 549](https://www.etsi.org/deliver/etsi_en/301500_301599/301549/) — Accessibility requirements for ICT products and services (the EU public-sector procurement standard).
+
+
+## 12. Acknowledgements
+
+The author thanks the PDF/UA, WCAG, and EPUB accessibility communities, whose decades of work this note builds on. The note's three-level conformance shape is modelled on the WCAG Level A / AA / AAA pattern and on the MX Agent Directory Discovery note's transport / discovery / resilience structure.
+
+---
+
+## MX Contract Fingerprinting and Signing note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-contract-fingerprinting.md
+**File:** `draft-contract-fingerprinting.md`
+
+
+# MX Contract Fingerprinting and Signing note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 27 April 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+
+## 1. Abstract
+
+**Signing is optional.** Most cogs ship unsigned. This note specifies the contract a cog satisfies *when it elects to be signed*; it does not require a cog to be signed.
+
+When a cog is signed, two frontmatter fields make the signature scope explicit. `contractFields` lists top-level keys covered by the signature. `metadataFields` lists keys explicitly excluded (timestamps, tags, registry annotations) — values that may change without invalidating the signature.
+
+This note defines only the **fingerprint** — the deterministic byte sequence over which a signature is produced (canonical JSON projection of the contract keys, hashed with SHA-256). Signature algorithm, key management, and transport are out of scope.
+
+The signature attests **provenance and integrity, not truth**: a verifier confirms that the cog's contract surface was last in this exact state when the named signer applied the signature, and nothing more. Section 9 explains why the narrower claim is deliberate.
+
+
+## 2. Conformance
+
+The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) and [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) when, and only when, they appear in all capitals.
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of this draft set). That pattern governs the structural template for every field — heading, property table, definition prose, example — and is binding on this note. This note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+This note defines three conformance levels (modelled on the [WCAG 2.1](https://www.w3.org/TR/WCAG21/) Level A/AA/AAA pattern):
+
+- **Level 1 (MUST)** — A cog declaring `contractFields` MUST also declare `metadataFields`. The two arrays MUST be disjoint.
+- **Level 2 (SHOULD)** — A signed cog SHOULD declare both arrays. Verifiers SHOULD reject a signed cog whose declared scope cannot be reconciled with the signature.
+- **Level 3 (MAY)** — Implementations MAY extend the fingerprint algorithm with additional canonicalisation passes provided they are documented in a `validatesAgainst` declaration on the cog.
+
+### 2.2 Draft status
+
+This note is a draft authored by Tom Cranstoun and offered to The Gathering for review. It is not a ratified standard. Reference implementations exist in JavaScript and Rust under the `cog-spec` v1.0 codebase; their kebab-case field names (`x-mx-contract-fields`, `x-mx-metadata-fields`) will be aligned with the camelCase forms in this note in a future revision.
+
+
+## 3. Scope
+
+### 3.1 What this note covers
+
+- The two fields `contractFields` and `metadataFields` (definitions in §4).
+- The deterministic fingerprint algorithm (§5).
+- Conformance rules and verifier expectations (§6).
+
+### 3.2 Out of scope
+
+- Signature algorithms (Ed25519, ECDSA, RSA, post-quantum) — defer to [W3C VC Data Integrity](https://www.w3.org/TR/vc-data-integrity/), [JWS (RFC 7515)](https://datatracker.ietf.org/doc/html/rfc7515), or [COSE (RFC 9052)](https://datatracker.ietf.org/doc/html/rfc9052).
+- Key management, distribution, or rotation — defer to organisational PKI.
+- Transport encoding (detached vs envelope, PEM vs raw bytes) — defer to the chosen signature standard.
+- Multi-signer coordination and revocation — open question (§7).
+
+### 3.3 Relationship to existing standards
+
+| Standard | Relationship |
+|----------|--------------|
+| [W3C VC Data Integrity](https://www.w3.org/TR/vc-data-integrity/) | Compatible signing model. The MX fingerprint may be wrapped in a VC proof. |
+| [JWS RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515) | Compatible signing model. The MX fingerprint may be the JWS payload. |
+| [COSE RFC 9052](https://datatracker.ietf.org/doc/html/rfc9052) | Compatible signing model for binary/CBOR transports. |
+| [C2PA Content Credentials](https://c2pa.org/) | Compatible model for signing assertions about content provenance. |
+| [FIPS 180-4](https://csrc.nist.gov/publications/detail/fips/180/4/final) | SHA-256, the hash function used by the fingerprint algorithm in §5. |
+| [RFC 8259](https://datatracker.ietf.org/doc/html/rfc8259) | The JSON Data Interchange Format, used as the canonical serialisation in §5. |
+
+
+## 4. Field definitions
+
+### 4.1 `contractFields`
+
+| Property | Value |
+|----------|-------|
+| **Type** | array of string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MUST (Level 1) when a signature is present |
+| **Default** | *(none)* |
+
+**Definition:** Frontmatter top-level keys whose values are covered by the cog's signature. Defines the contract fingerprint scope. Each entry MUST be the name of a key that exists at the top level of the cog's frontmatter.
+
+**Example:**
+
+```yaml
+contractFields:
+  - title
+  - schema
+  - x-mx-thresholds
+  - x-mx-approvers
+  - x-mx-approvalProcedure
+```
+
+- The array MUST be disjoint from `metadataFields`.
+- Every entry SHOULD reference a key that exists in the frontmatter; verifiers MAY treat stray entries as a warning.
+- Entries MAY include `x-mx-` and `x-mx-p-` namespaced fields. Private fields included in `contractFields` are still covered by the signature even though their values are obfuscated.
+
+### 4.2 `metadataFields`
+
+| Property | Value |
+|----------|-------|
+| **Type** | array of string |
+| **Zone** | 1 (top-level) |
+| **Conformance** | MUST (Level 1) when `contractFields` is declared |
+| **Default** | *(none)* |
+
+**Definition:** Frontmatter top-level keys explicitly EXCLUDED from the contract fingerprint. Values of these keys may change without invalidating the signature. Typical members are timestamps, tags, registry annotations, and other non-contract metadata.
+
+**Example:**
+
+```yaml
+metadataFields:
+  - created
+  - modified
+  - tags
+```
+
+- The array MUST be disjoint from `contractFields`.
+- Keys not listed in either array are **implementation-defined** — verifiers MAY default unlisted keys to either category, but MUST document their choice.
+- A best-practice declaration lists every top-level frontmatter key in exactly one of the two arrays.
+
+### 4.3 Mandatory fields when signing
+
+When a cog is signed, the following frontmatter MUST be present and well-formed. A signer MUST refuse to sign a cog that fails any of these checks; a verifier MUST refuse a signed cog whose mandatory fields are missing or malformed.
+
+| Field | Requirement | Rationale |
+|-------|-------------|-----------|
+| `title` | Non-empty string at the top level. | The signed claim records what was signed; without a title there is no human-readable identity to bind to. |
+| `validatesAgainst` | Non-empty array of validator names. Every entry MUST be resolvable — that is, registered with the verifying runtime — and MUST pass when executed. | The signature claims the cog passed every named validator at sign time. An unresolvable validator means the claim cannot be interpreted; a failing validator means the claim is false. |
+| `schema` | Reference to the schema document that defines the cog's contract structure. If declared in frontmatter, MUST resolve to a real schema. | The schema specifies the contract shape the signed claim covers. |
+
+These three fields together form the *minimum signed surface*. The fingerprint algorithm in §5 covers them automatically because they are top-level frontmatter keys typically named in `contractFields`.
+
+A signer SHOULD perform these checks during a pre-signature review pass (§6.4) before producing a fingerprint. A signer that emits signatures over cogs missing any of the three is not conforming.
+
+### 4.4 Default-excluded metadata fields
+
+When a schema does not explicitly declare which top-level keys are part of the contract, implementations SHOULD treat the following as `metadataFields` by default — that is, exclude them from the fingerprint:
+
+- `modified`
+- `version`
+- `created`
+- `author`
+- `updateInstructions`
+
+These values change with editorial activity that does not alter the contract surface. Excluding them by default lets a cog be re-edited (timestamp bumped, version incremented) without invalidating its signature.
+
+The default can be overridden via a schema declaration:
+
+- `x-mx-contractFields` (positive list) — when present, only the named keys are part of the contract; everything else is metadata.
+- `x-mx-metadataFields` (negative list) — when present, the named keys are excluded; everything else is contract.
+
+If both are declared, the positive list (`x-mx-contractFields`) takes priority.
+
+
+## 5. The fingerprint algorithm
+
+### 5.1 Overview
+
+The contract fingerprint is a deterministic byte sequence derived from the values of the keys named in `contractFields`. Two implementations applying this algorithm to the same frontmatter MUST produce identical fingerprints.
+
+### 5.2 Steps
+
+1. **Project.** Build an object containing only the keys listed in `contractFields`. Keys absent from the frontmatter are omitted (verifiers MAY warn).
+2. **Sort.** Order keys lexicographically by Unicode code point.
+3. **Canonicalise values.** For each value:
+   - Strings: serialised as UTF-8 with no escaping beyond what JSON requires.
+   - Numbers: serialised as their canonical JSON form.
+   - Booleans: `true` or `false`.
+   - Objects and arrays: recursively canonicalised by the same rules; keys of nested objects are also lexicographically sorted.
+   - Null: `null`.
+4. **Serialise.** Emit the canonical object as UTF-8 JSON ([RFC 8259](https://datatracker.ietf.org/doc/html/rfc8259)) with no insignificant whitespace.
+5. **Hash.** Apply SHA-256 ([FIPS 180-4](https://csrc.nist.gov/publications/detail/fips/180/4/final)) to the canonical byte sequence. The 32-byte digest is the fingerprint.
+
+The signature is then produced by signing the fingerprint bytes with the chosen signature algorithm. The signature MAY be carried in any envelope format (JWS, COSE, detached signature, sidecar file).
+
+### 5.3 Worked example
+
+Given:
+
+```yaml
+title: Approve invoices below 1000
+schema: ./schemas/invoice-approval.v1.yaml
+x-mx-thresholds:
+  autoApproveBelow: 1000
+contractFields: [title, schema, x-mx-thresholds]
+metadataFields: [created, modified, tags]
+```
+
+The projection is:
+
+```json
+{"schema":"./schemas/invoice-approval.v1.yaml","title":"Approve invoices below 1000","x-mx-thresholds":{"autoApproveBelow":1000}}
+```
+
+(Keys sorted lexicographically: `schema`, `title`, `x-mx-thresholds`.)
+
+The fingerprint is `SHA-256` of these bytes.
+
+
+## 6. Conformance: signers and verifiers
+
+### 6.1 Signer conformance
+
+A signer:
+
+- MUST refuse to sign a cog that fails the §4.3 mandatory-fields check (missing `title`, missing or unresolvable `validatesAgainst`, missing/invalid `schema`).
+- MUST run every validator listed in `validatesAgainst` and refuse to sign if any reports failure.
+- MUST treat `contractFields` and `metadataFields` as authoritative when both are declared.
+- MUST treat the §4.4 default-excluded metadata field list as the fallback when neither `contractFields` nor `metadataFields` is declared and the schema does not override.
+
+### 6.2 Verifier conformance
+
+A verifier:
+
+- MUST refuse a signed cog whose `contractFields` and `metadataFields` overlap.
+- MUST refuse a signed cog whose declared `contractFields` cannot be reconstructed from the frontmatter (missing keys would change the projection).
+- MUST refuse a signed cog missing any of the §4.3 mandatory fields, or whose `validatesAgainst` entries cannot be resolved or fail validation at verification time.
+- SHOULD warn when frontmatter contains top-level keys not listed in either array.
+- SHOULD log the resolved `contractFields` set alongside any verification result for transparency.
+- MUST NOT silently substitute a default scope when the cog declares neither array.
+
+### 6.3 Recommended pre-signature review pipeline (Informative)
+
+*This subsection is informative; it describes recommended practice but is not normative.*
+
+A conforming signer SHOULD execute a multi-phase review before producing a signature. A typical pipeline:
+
+1. **Inventory** — enumerate all sections and top-level fields of the cog.
+2. **Classify** — assign each section a layer (declarative, executable, narrative).
+3. **Lift** — identify the load-bearing body sections that materially affect the contract.
+4. **Declare-Contracts** — audit that `schema` and `validatesAgainst` are declared, well-formed, and reference resolvable validators (§4.3 check).
+5. **Validate** — run every validator named in `validatesAgainst`. All MUST pass.
+6. **Notarise** — only when phases 1–5 succeed, compute the fingerprint per §5 and produce the signature.
+
+Implementations MAY combine, rename, or extend phases. The MUST is that a signer never produces a signature over an artefact that has not passed an equivalent of phases 4 and 5.
+
+
+## 7. Open questions
+
+The following are flagged for community discussion before this draft is offered for ratification:
+
+1. **Key management** — should this note reference a default PKI model, or stay agnostic?
+2. **Multi-signer** — when multiple parties sign the same cog, is each signature scoped to the same `contractFields` or may each declare its own scope?
+3. **Revocation** — how does a verifier discover that a previously valid signature has been revoked? CRL, OCSP, on-chain registry, an MX registry?
+4. **Schema-derived contract** — should `contractFields` be derivable automatically from a cog's `schema` reference, or remain explicit?
+5. **Canonical YAML alternative** — §5 chooses canonical JSON for portability. Should an opt-in canonical-YAML form be standardised for cogs that wish to sign over their authored representation directly?
+
+
+## 8. Security and privacy considerations
+
+- A cog whose `contractFields` does not list every load-bearing field is **silently weakly bound** — values not in the contract may be modified after signing without invalidating the signature. Authors SHOULD list every contract-bearing field explicitly.
+- Including `x-mx-p-` private fields in `contractFields` makes the signature cover values whose meaning is opaque without the private registry. Verifiers without registry access can still verify the signature but cannot interpret what was signed.
+- The fingerprint is NOT encrypted. Anyone with the cog can compute the fingerprint and learn the contract scope. Confidentiality of contract values is the responsibility of the carrier transport.
+
+
+## 9. Rationale: attestation, not verification
+
+*This section is informative.*
+
+A signed cog makes one narrow claim, and the narrowness is what makes it tractable. The signature attests provenance and integrity, not truth:
+
+- The signature confirms that the cog's contract surface (the keys named in `contractFields`) was last in this exact state when the named signer applied the signature.
+- It does not assert that the values are factually correct, sound, or current. A cog claiming "WWII did not happen" can be perfectly well-signed; the signature only confirms the cog genuinely came from the named signer and has not been altered downstream. Whether the claim is true is a different problem — one no signing format can solve at web scale, and one this note deliberately does not take on.
+
+The narrower claim is intentional. The signing model in this note attests only *this is what the owner published, unaltered*. That smaller claim is what compounds — it is a question a signature can actually answer, every time, without taking on an editorial truth-curation burden that no human review process could keep current at web scale.
+
+Implementations and downstream consumers SHOULD be precise in user-facing language: the system has *attested* a cog, not *verified* it. "Verified" implies a truth claim that no signer in this model makes.
+
+
+## 10. References
+
+### 10.1 Normative references
+
+- [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119), [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) — keywords for use in RFCs to indicate requirement levels
+- [RFC 8259](https://datatracker.ietf.org/doc/html/rfc8259) — The JSON Data Interchange Format (canonical serialisation in §5)
+- [FIPS 180-4](https://csrc.nist.gov/publications/detail/fips/180/4/final) — SHA-256 hash function
+
+### 10.2 Informative references
+
+- [W3C Verifiable Credentials Data Integrity](https://www.w3.org/TR/vc-data-integrity/) — compatible signing model
+- [JWS RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515) — JSON Web Signature
+- [COSE RFC 9052](https://datatracker.ietf.org/doc/html/rfc9052) — CBOR Object Signing and Encryption
+- [C2PA Content Credentials](https://c2pa.org/) — provenance signing model
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/) — conformance level model that inspired the Level 1/2/3 framework in §2.1
+
+
+*End of MX Contract Fingerprinting and Signing note draft.*
+
+---
+
