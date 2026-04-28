@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — cogHeader Field, MXS-06, cog-spec v1.2; Dogu Contract; Blog Site-Chrome Consolidation"
-description: "Added cogHeader field, MXS-06, cog-spec v1.2, wired validators, updated Dogu contractor agreement, and consolidated the entire mx-site blog: new post-conclusion block, modern site-chrome on legacy posts, footer links to TG Community + absolute Books URL, and a new published blog post on AI agent contracts."
+title: "Co-Directors Report — cogHeader; Dogu Contract; Blog Site-Chrome; Canon Decontamination; Agent-Directory Discovery Note; Reginald Signing Engine"
+description: "Eight-thread session: cogHeader field + MXS-06 + cog-spec v1.2; Dogu contractor agreement; entire mx-site blog consolidated; canon decontaminated (107 vendor entries moved out of Gathering core, runbook extended, compliance driven to zero across 2,219 files); new MX Agent Directory Discovery draft note; mx-shared-gathering canonical template added; mx-reginald signing engine + conformance suite landed; mx-upgraded-reginald submodule removed."
 author: "Tom Cranstoun"
 created: 2026-04-27
-modified: 2026-04-27
-version: "1.2"
+modified: 2026-04-28
+version: "1.3"
 
 mx:
   status: active
@@ -57,22 +57,56 @@ The third evening sub-session published a new blog post ("Why your AI agent give
 - **Footer drift.** The footer's "Books" link was relative (`/books/`) and TG Community was missing. Updated to absolute `https://mx.allabout.network/books/` and added `https://tg.community` (with `rel="noopener"`). All 24 posts plus both templates carry the new footer.
 - **Four legacy posts off the site-chrome contract entirely.** `a-standard-that-knows-what-it-isnt`, `dita-and-mx-a-comparison`, `the-agent-web-looks-like-1995`, and `the-markdown-trap` predated the modern template — they linked only `mx-blog.css` (no `mx-unified.css`), had no `<header class="site-header">`, used an external avatar URL, had a floating "Back to Top" button, and used a minimal `<footer><p>©…</p></footer>`. A migration script brought them up to the contract: site-header inserted, unified.css added, avatar localised, back-to-top removed, full site-footer with TG Community + Books links, app.js loaded.
 
+### 7. Canon decontamination (Gathering / vendor split) and runbook extension
+
+The Gathering's open-standard dictionary (`mx-canon/ssot/fields-data.yaml`) had been carrying 107 deprecated-field entries that were CogNovaMX vendor lifecycle decisions, not Gathering vocabulary evolution: notes like "CUT (vendor phase 2a)" or "Moved to CogNovaMX vendor extension" sat inside the open standard alongside genuine Gathering renames. Another implementer might legitimately keep using `domain`, `priority`, `category`, etc. The Gathering should be silent on those.
+
+A line-based migration script split the deprecations array: 82 genuine Gathering renames stayed in `fields-data.yaml`; the 107 vendor entries moved to a new `mx.deprecations:` block inside `cognovamx-fields.yaml`. The `updateInstructions` deprecation gained `replacement: runbook` (it had previously been blind to the auto-fixer for lack of a replacement key), and the `runbook` field definition was extended to accept either the bare string form or a structured object with `prose`, `source`, `method`, `styleRules`, `structure`, `contentSource` sub-keys (absorbing everything `updateInstructions` used to carry). The auto-fixer then mechanically renamed `updateInstructions:` to `runbook:` across nine `mx-reginald` files, preserving the nested-object form verbatim because the extended definition now permits it.
+
+A follow-on dictionary pass extended the `audience` enum with `collaborators`, `implementers`, `reviewers`, `maintainers`; added `targetsSpecVersion`, `readiness`, `operatesOn`, `troubleshooting` to `fields-data-cogs.yaml` (Gathering cog-format infrastructure); and added eight CogNovaMX workflow vocabulary fields (`steps`, `targetEnvironment`, `approvalProcedure`, `approvers`, `requiredFields`, `thresholds`, `classificationRules`, `reviewProcedure`) to `cognovamx-fields.yaml`. After the dictionary work plus matching source-file rewrites in `mx-outputs/mx-site/drafts/cog-spec.v1.md` and `cog-runtime.md` (status `draft-review-ready` → `proposed`; bad audience values cleaned), the per-file MX compliance scan returned **zero violations across all 2,219 scanned files** for the first time in the project's history. All four hard gates (jsonld-in-head, sitemap-coverage, cog:validate, fields-drift) clean.
+
+A pre-existing `mx-upgraded-reginald` submodule deletion was confirmed and committed as part of this thread; the cog-spec v1.0 reference implementation has been ported into `mx-reginald/scripts/signing/` and disconnected, with upstream work continuing in the upgraded-reginald GitHub repo directly. CLAUDE.md already documents the disconnection.
+
+### 8. MX Agent Directory Discovery draft note + canonical template
+
+A new eighth sister draft landed in `mx-shared-gathering/`: [`draft-agent-directory-discovery.md`](https://github.com/ddttom/mx-shared-gathering/blob/main/draft-agent-directory-discovery.md) (`docname: draft-cranstoun-mx-agent-directory-discovery`). The note is vendor-neutral and addresses the discoverability gap described in the published blog post on `llms.txt`: well-formed agent-directory files are routinely invisible to large-scale crawlers because they are served as `text/plain` (not ingested by Common Crawl), absent from `sitemap.xml`, and not linked from any page on the host. The note specifies three conformance levels — Level 1 Transport (HTML serving with the canonical-link / robots-meta / optional Schema.org wrapper), Level 2 Discovery (sitemap inclusion), Level 3 Resilience (`<link rel="<directory-name>">` in every page `<head>` so headless and JavaScript-rendered sites stay discoverable). The note does not redefine `llms.txt` or any other directory format; it specifies the transport / discovery / resilience layer that any agent-directory file SHOULD adopt. Refers only to actually-published external standards (RFC 2119, 8174, 9110, 9309, Sitemaps 0.9, HTML Living Standard, Schema.org). The `mx-shared-gathering` README index updated; the `/mx-gathering-conformance` check passes on all eight sister drafts.
+
+Alongside the note, a canonical template was added to the hub at [`mx-canon/ssot/templates/mx-shared-gathering-draft.md`](mx-canon/ssot/templates/mx-shared-gathering-draft.md). The template encodes the kramdown-rfc YAML frontmatter shape, the 12-section RFC structure, and the authoring rules every existing draft follows. The template body lives inside a fenced markdown block so the hub's MX validator can pass on the file's own MX frontmatter while the placeholder kramdown-rfc block stays preserved verbatim. Future drafts MUST start from this template; the rule was saved to auto-memory.
+
+### 9. mx-reginald signing engine, conformance suite, examples
+
+Substantial in-progress build of the mx-reginald implementation landed alongside the canon work. New surface area inside `mx-reginald/`:
+
+- `scripts/signing/`: canonical, cog-parser, fingerprint, registry, remedies, review-{phases,rewrite,runner}, validators/, witness-engine modules. attest-engine and cli updated.
+- `scripts/sign-published.js`: top-level sign-published entry point.
+- `schemas/cog-schema.meta.v1.yaml` plus `schemas/examples/`: cog schema and worked examples.
+- `examples/{cog-review-procedure, invoice-approval, publishing-blog-post, simplest, staging-deployment}.cog.md`: workflow-pattern example cogs exercising approval, review, deployment and publishing flows. The frontmatter on each uses the new nested-runbook shape (the form the canon now permits).
+- `docs/spec-archive/`: archived spec materials (CHANGELOG, CONTRIBUTING, ROADMAP-v1.1) carried forward from earlier reginald iterations.
+- `blog/`: getting-started, cog-review-procedure, why-ai-agents-need-contracts-not-instructions narrative drafts.
+- `tests/`: integration-suite and witness-engine tests, plus a conformance suite with witness fixtures `witnesses-001` through `witnesses-017`.
+- `witnesses/`: README and one seeded fixture.
+- `style-rules/`: shared style-rules YAML.
+
+Index regenerated; publisher-manifest schema updated.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits (this segment) | 8 |
-| Files changed | 43 |
-| Lines added | +2,545 |
-| Lines removed | −1,961 |
-| Repositories | 5 (hub + mx-crm + mx-outputs + mx-shared-gathering + mx-upgraded-reginald) |
-| New shared standards | 1 (MXS-06) |
-| New canon fields | 1 (cogHeader) |
+| Commits (this segment, all repos) | 22 |
+| Files changed | ~200 |
+| Lines added | ~+12,000 |
+| Lines removed | ~−3,500 |
+| Repositories | 4 (hub + mx-crm + mx-outputs + mx-shared-gathering); mx-upgraded-reginald removed |
+| New shared standards | 2 (MXS-06; MX Agent Directory Discovery draft v1.0) |
+| New canon fields | Many (cogHeader, docname, keyword, consensus, targetsSpecVersion, readiness, operatesOn, troubleshooting, steps, targetEnvironment, approvalProcedure, approvers, requiredFields, thresholds, classificationRules, reviewProcedure) |
 | New validator lint codes | 2 |
 | New blog posts published | 1 |
 | Blog posts site-chrome migrated | 24 (entire blog) |
+| Canon dictionary entries moved (Gathering → vendor) | 107 |
+| MX field compliance (all categories) | 0 violations across 2,219 files |
 
 ---
 
@@ -117,3 +151,19 @@ The custom YAML parser inside `frontmatter-validator.js` had quietly committed t
 | e22f376 | mx-crm | Add Dogu address to parties section of contractor agreement |
 | 1c37b8b | mx-outputs | Add Dogu contractor agreement PDF |
 | ba7d1a8 | mx-outputs | Publish post + consolidate site chrome and post-end block across all blog posts |
+| 2e81718 | mx-outputs | Update evening report (v1.2): add blog site-chrome consolidation |
+| dab7722 | mx-outputs | Regenerate index: 835 files (new blog post + report update) |
+| d480b9c | mx-outputs | Drafts: status proposed, audience to enum; site sitemap + cog content refresh |
+| ce64918 | mx-shared-gathering | Add MX Agent Directory Discovery note (v1.0) |
+| aeec5c4b | hub | Consolidate blog post-end block; bump mx-outputs |
+| cfb63b48 | hub | Changelog: blog site-chrome consolidation + new post |
+| 065cfa0c | hub | Learnings: full-page screenshots beat local file content as evidence |
+| d38345b6 | hub | fields-data v6.3: add IETF kramdown-rfc passthrough fields |
+| a37da3c5 | hub | Remove mx-upgraded-reginald submodule |
+| e70964d1 | hub | Bump mx-outputs: directors report v1.2 + README index regen |
+| 62e1c506 | hub | Decontaminate canon: move CogNovaMX vendor deprecations out of Gathering core; extend runbook |
+| 955b73da | hub | Canon: extend audience enum, add cog vocabulary fields, drive compliance to zero |
+| 8adb81d6 | hub | Templates: add mx-shared-gathering-draft.md scaffold + index entry |
+| 56c5c2cb | hub | mx-reginald: signing engine, conformance suite, examples, blog drafts |
+| 8ee8b8b5 | hub | Hub: scripts + settings + submodule pointer bumps |
+| d250cc1d | hub | examples/invoice-approval: trim trailing blank lines (lint) |
