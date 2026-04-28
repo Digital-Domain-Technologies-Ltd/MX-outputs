@@ -4,7 +4,7 @@
 REGINALD is a pure DNS-like resolver for machine-readable documentation. It maps
 COG identifiers to publisher-hosted content URLs. REGINALD does NOT host content
 — each publisher serves their own COGs. AI agents query REGINALD to discover and
-check content provenance, then fetch directly from the publisher.
+check witness provenance, then fetch directly from the publisher.
 
 ## How Resolution Works
 REGINALD maps COG identifiers (namespace/name) to publisher-hosted content URLs.
@@ -13,23 +13,26 @@ Content lives on publisher servers, not on REGINALD.
 Resolution flow:
 1. GET /api/v1/namespaces.json — discover registered namespaces
 2. GET /api/v1/namespaces/{ns}/cogs.json — list COGs in a namespace
-3. GET /cogs/{ns}/{name}/latest.json — get pointer record
+3. GET /cogs/{ns}/{name}/latest.json — get pointer record (carries witness pointer)
 4. Fetch canonical_url — retrieve content from publisher's server
-5. Verify content_hash and certificates
+5. Verify the witness via the publisher's public key (5-step algorithm, cog-spec v1.0 §7)
 
 ## API Endpoints
 - GET /api/v1/namespaces.json - Registered namespaces (discovery)
 - GET /api/v1/namespaces/{ns}/cogs.json - COGs in a namespace
 - GET /api/v1/stats.json - Registry statistics
 - GET /api/v1/publishers.json - Publisher details
-- GET /api/v1/public-key.pem - Ed25519 registry attestation key
-- GET /cogs/{namespace}/{name}/latest.json - Pointer record + certificates
+- GET /api/v1/public-key.pem - Ed25519 registry public key
+- GET /cogs/{namespace}/{name}/latest.json - Pointer record (carries witness pointer)
 
-## Two-Layer Trust
-- Publisher attests content (proves "I wrote this")
-- REGINALD attests the pointer record (proves "this is registered and provenanced")
-- Check publisher_certificate with the publisher's key (from publishers.json)
-- Check registry_certificate with REGINALD's key (from public-key.pem)
+## Trust model
+- Witness records (cog-spec v1.0 §6.2) are produced at publish time and signed
+  with the publisher's Ed25519 key over an RFC 8785 canonical claim.
+- Verification is done client-side via the 5-step algorithm: structural check,
+  contract fingerprint match, validator re-execution, outcome comparison,
+  signature verification.
+- Body drift is permitted by design — the warrant covers the contract, not
+  the narrative.
 
 ## Publisher Discovery
 Publishers host .well-known/mx-cogs.json on their domain for REGINALD to
@@ -38,19 +41,19 @@ crawl, or submit COGs directly to the registry.
 ## Response Format (latest.json)
 - resolve_mode: "pointer" (always — REGINALD is a resolver, not a host)
 - canonical_url: Publisher's authoritative content URL
-- content_hash: sha256 integrity hash
-- registry_certificate: REGINALD's Ed25519 attestation
+- path: Repository-relative path of the source cog
+- witness: { id, signedAt, publicKeyId, signatureAlgorithm } — when signed
 - publisher: { namespace, name, domain }
 
 ## Current Registry
 - Publishers: 2
 - Namespaces: 2
-- Total COGs: 86
-- Attested COGs: 79 (Ed25519, provenance established)
+- Total COGs: 87
+- No witnesses present yet (run: npm run reginald:sign-published)
 
 ## Contact
 - Website: https://allabout.network
 - Email: tom.cranstoun@gmail.com
 - Registry: https://reginald.allabout.network/
 
-Generated: 2026-04-27T12:18:10.216Z
+Generated: 2026-04-27T18:55:16.033Z

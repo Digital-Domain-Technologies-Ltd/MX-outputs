@@ -173,7 +173,7 @@ From the skeleton alone, an AI agent knows: this script wraps eza, it has seven 
 - **The inspection tool.** `mx.inspect.sh` extracts comments and structural skeleton from any shell script. It lives in Canon (`mx-canon/mx-os/deliverables/`) and in `scripts/bin/` for daily use. It is tested and working.
 - **The script-helper action-doc.** A `runtime: runbook` cog in the registry with four actions: inspect, create, amend, add-metadata. It teaches AI agents the three-tier read strategy. Published and registered.
 - **The mx-scaffold action-cog.** The canonical workflow for creating new mx.* scripts — reads the template from Canon, substitutes placeholders, writes the script to `$MX_BIN_DIR`, and registers the alias. See `scripts/cogs/mx-scaffold.cog.md`.
-- **The canonical template.** `mx-canon/mx-os/deliverables/mx-script-template.sh` is the single source of truth for new script structure.
+- **The canonical template.** `mx-canon/ssot/templates/mx-script.sh` is the single source of truth for new script structure.
 - **All mx.\* scripts have full metadata.** Every script in `scripts/bin/` carries the complete `# ---` metadata block. The migration from `~/bin/` is complete — scripts are now under version control in MX-hub.
 - **mx.health.sh validates metadata.** The health checker automatically validates metadata, aliases, permissions, colour module sourcing, help flags, and exit codes for every mx.* script.
 

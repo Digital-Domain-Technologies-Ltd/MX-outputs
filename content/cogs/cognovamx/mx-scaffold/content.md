@@ -27,7 +27,7 @@ mx:
         usage: >
           To create a new mx.* script:
           1. Ask the human for: script name (e.g. "myutil"), one-line description, category (mx-core/mx-dev/mx-network/mx-ai/mx-utils), tags, dependencies
-          2. Read the canonical template: mx-canon/mx-os/deliverables/mx-script-template.sh
+          2. Read the canonical template: mx-canon/ssot/templates/mx-script.sh
           3. Substitute all {{PLACEHOLDER}} markers with the provided values:
              - {{TITLE}} → "mx.<name> — <description>" (e.g. "mx.myutil — Short description")
              - {{TODAY}} → current date in YYYY-MM-DD format
@@ -102,7 +102,7 @@ mx:
           7. The header pattern: decorative box with script name
           8. Where scripts live: scripts/bin/ (under version control in MX-hub)
           9. Where aliases live: ~/.zsh/config/aliases.zsh using $MX_BIN_DIR
-          10. Reference the template: mx-canon/mx-os/deliverables/mx-script-template.sh
+          10. Reference the template: mx-canon/ssot/templates/mx-script.sh
   mx:
     contentType: "action-doc"
     runbook: "mx exec mx-scaffold"
@@ -134,7 +134,7 @@ As of 2026-02-25 there are 33 active mx.* scripts covering: status, git, find, k
 The single source of truth for new script structure:
 
 ```
-mx-canon/mx-os/deliverables/mx-script-template.sh
+mx-canon/ssot/templates/mx-script.sh
 ```
 
 This template uses `{{PLACEHOLDER}}` markers. The `mx.scaffold.sh` script reads this file and substitutes values via `sed`. AI agents creating scripts should do the same.

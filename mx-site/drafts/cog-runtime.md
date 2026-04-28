@@ -3,7 +3,7 @@ title: "Cog Runtime"
 description: "What a cog runtime is, what it does, and how to obtain one. Companion to cog-spec.v1."
 author: Tom Cranstoun
 version: "1.0"
-status: "draft-review-ready"
+status: "proposed"
 created: 2026-04-27
 modified: 2026-04-27
 date: 2026-04-27

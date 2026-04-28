@@ -89,7 +89,7 @@ SOUL.md is not documentation about the folder. It IS the folder's identity. Ever
 - The root `SOUL.md` defines who Maxine is and the partnership model
 - `mx-canon/mx-the-gathering/SOUL.md` defines The Gathering as independent, problem-first, practical — and constrains deliverables to use no company names
 - `mx-reginald/SOUL.md` defines the product voice as direct, technical but accessible, problem-first
-- `mx-canon/_template/SOUL.md` defines the meta-template that generates other SOUL.md files
+- `mx-canon/ssot/templates/canon-cog/SOUL.md` defines the meta-template that generates other SOUL.md files
 
 ### The Interview Pattern
 

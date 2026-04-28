@@ -668,7 +668,7 @@ For comprehensive tone guidance, examples, and language transformation tables, s
   - Writing checklist and anti-patterns
   - Examples gallery: Dotfusion, ArriveFirst, Boye & Co reports
 
-- **Template:** [`mx-canon/mx-the-gathering/reference-implementations/templates/partnership-report-template.md`](../../../mx-reference-implementations/_templates/partnership-report-template.md)
+- **Template:** [`mx-canon/ssot/templates/partnership-report.md`](../../../mx-reference-implementations/_templates/partnership-report-template.md)
   - Complete structure with YAML frontmatter
   - Example text for every section
   - Engagement options framework

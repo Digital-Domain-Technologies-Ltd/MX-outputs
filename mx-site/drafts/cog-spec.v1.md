@@ -2,9 +2,9 @@
 title: "Cog Specification"
 description: "The cog file format, artefact model, and verification algorithm."
 version: "1.2"
-status: "draft-review-ready"
+status: "proposed"
 date: 2026-04-27
-audience: ["implementers", "reviewers", "standards body"]
+audience: ["implementers", "reviewers", "community"]
 readiness:
   sufficientFor: ["independent-implementation", "alignment-testing", "community-review"]
   notYetSufficientFor: ["certified-conformance", "production-deployment-without-second-impl"]
@@ -523,15 +523,27 @@ A witness is a JSON object with the following shape:
     "contractFingerprint": "<hex digest>",
     "signedAt": "<RFC 3339 timestamp, see section 6.5>"
   },
-  "signature": "<hex digest of canonicalised claim>",
-  "witnessId": "<slug>-<first 12 chars of signature>",
+  "signature": "<encoded signature over the canonicalised claim>",
+  "signatureAlgorithm": "<algorithm identifier; see section 6.6>",
+  "publicKeyId": "<key identifier when signatureAlgorithm requires keys>",
+  "witnessId": "<slug>-<first 12 chars of SHA-256(signature)>",
   "metadata": {
-    "bodyFingerprint": "<hex digest>"
+    "bodyFingerprint": "<hex digest>",
+    "cogPath": "<repository-relative path; OPTIONAL>"
   }
 }
 ```
 
 The structural distinction between `claim` and `metadata` is normative. The `claim` contains everything covered by the signature. The `metadata` contains information recorded for diagnostic purposes but explicitly NOT covered by the signature.
+
+The `signatureAlgorithm` field is REQUIRED so that verifiers know how to interpret `signature`. Implementations MUST NOT assume a default. Defined values:
+
+- `SHA256` — `signature` is the hex-encoded SHA-256 digest of the canonicalised claim. Provides content-addressing without cryptographic provenance. The reference implementation in `mx-upgraded-reginald` uses this value.
+- `Ed25519` — `signature` is the base64-encoded Ed25519 signature over the canonicalised claim bytes. Provides cryptographic provenance; verification requires the corresponding public key. `mx-reginald` uses this value in production.
+
+When `signatureAlgorithm` is `Ed25519` (or any other public-key primitive), `publicKeyId` MUST be present and identify the signing key. When the algorithm has no key concept (e.g. `SHA256`), `publicKeyId` MAY be omitted.
+
+The `metadata.cogPath` field, when present, is the repository-relative path of the cog at signing time. It is informational only; verifiers MAY use it to locate the cog file but MUST NOT depend on it for correctness.
 
 ### 6.3 Contract fingerprint
 
@@ -615,7 +627,7 @@ To produce a witness for a cog and a set of validator results:
 
    The `signedAt` timestamp MUST be in RFC 3339 form using UTC, with the literal `Z` suffix (not a numeric offset) and millisecond precision: `YYYY-MM-DDTHH:MM:SS.sssZ`. For example: `2026-04-21T15:30:00.123Z`. Implementations whose timestamp APIs produce different precision (microsecond, nanosecond, second) MUST round or pad to milliseconds before constructing the claim. This precision was chosen to match JavaScript's `Date.toISOString()` output and Python's `datetime.isoformat(timespec='milliseconds')`; both languages produce the canonical form natively.
 4. Compute the signature as the hex-encoded digest of the canonical JSON serialisation of the claim.
-5. Compute the witness ID as the title slug followed by the first twelve characters of the signature, joined by a hyphen. The title slug is computed by:
+5. Compute the witness ID as the title slug followed by a hyphen and the first twelve hex characters of `SHA-256(signature)`. (When `signatureAlgorithm` is `SHA256`, the signature is itself a hex digest and the first twelve characters of the signature are equivalent. When `signatureAlgorithm` is `Ed25519`, the signature is base64-encoded; the witness ID hashes the base64 string before slicing so the slug-suffix derivation is uniform across algorithms.) The title slug is computed by:
 
    a. Apply Unicode NFKD normalisation to the title.
    b. Strip combining diacritical marks (Unicode category Mn).
@@ -624,16 +636,18 @@ To produce a witness for a cog and a set of validator results:
    e. Strip leading and trailing `-`.
    f. Truncate to a maximum of 60 characters; if truncation occurs at a position immediately preceded by `-`, also strip that trailing `-`.
    g. If the resulting slug is empty, use the literal string `untitled`.
-6. Construct the witness object with the claim, the signature, the witness ID, and a metadata object containing the body fingerprint.
+6. Construct the witness object with the claim, the signature, `signatureAlgorithm`, `publicKeyId` (when applicable), the witness ID, and a metadata object containing the body fingerprint (and optionally `cogPath`).
 
 ### 6.6 Cryptographic primitive
 
-This specification does not mandate a specific signing primitive. Implementations:
+This specification does not mandate a single signing primitive. Implementations declare their choice in the witness's `signatureAlgorithm` field (see section 6.2). Two values are defined here; others MAY be added by future revisions.
 
-- MAY use SHA-256 for both fingerprints and the signature, in which case the witness is a content-addressed record without cryptographic provenance.
-- SHOULD use a public-key signature primitive (such as Ed25519) for the signature when cryptographic provenance is required, with the contract fingerprint and body fingerprint computed using a cryptographic hash function (such as SHA-256).
+- `SHA256` — the signature is the hex-encoded SHA-256 digest of the canonicalised claim. The witness is a content-addressed record without cryptographic provenance. Useful for cross-implementation conformance testing because two implementations with identical canonicalisation produce byte-identical signatures.
+- `Ed25519` — the signature is the base64-encoded Ed25519 signature over the canonicalised claim bytes, computed under [RFC 8032](https://datatracker.ietf.org/doc/html/rfc8032). The witness carries `publicKeyId` so verifiers can locate the corresponding public key. This is the production-grade option and the value used by `mx-reginald`.
 
-When a public-key signature is used, the witness MAY carry an additional `publicKey` field at the top level identifying the signer.
+Verifiers MUST inspect `signatureAlgorithm` and reject witnesses with unrecognised values. Verifiers MUST NOT default to a particular algorithm when the field is absent; the field is REQUIRED in every conforming witness.
+
+When the algorithm requires a public key (e.g. `Ed25519`), the verifier obtains the key by `publicKeyId` from a trust source it controls. The witness format does not prescribe how keys are distributed; publisher manifests, key registries, DNS records, and out-of-band channels are all permissible.
 
 ## 7. Verification algorithm
 
@@ -641,7 +655,9 @@ To verify a witness against a candidate cog:
 
 ### 7.0 Structural validation
 
-Confirm the witness has the structure mandated in section 6.2. The witness MUST be an object containing `claim`, `signature`, `witnessId`, and `metadata` fields, where `claim` is an object, `signature` is a string, and `metadata` is an object. A witness missing any of these fields, or with fields of the wrong type, is malformed and MUST be rejected with a structured invalid result naming the missing or malformed fields. Verification MUST NOT proceed past this step on a malformed witness; in particular, implementations MUST NOT use null-coalescing or optional-chaining defaults to silently treat absent fields as benign.
+Confirm the witness has the structure mandated in section 6.2. The witness MUST be an object containing `claim`, `signature`, `signatureAlgorithm`, `witnessId`, and `metadata` fields, where `claim` is an object, `signature` is a string, `signatureAlgorithm` is a string, and `metadata` is an object. When `signatureAlgorithm` requires a key, `publicKeyId` MUST also be present and a string. A witness missing any of these fields, or with fields of the wrong type, is malformed and MUST be rejected with a structured invalid result naming the missing or malformed fields. Verification MUST NOT proceed past this step on a malformed witness; in particular, implementations MUST NOT use null-coalescing or optional-chaining defaults to silently treat absent fields as benign.
+
+Verifiers MUST also reject any witness whose `signatureAlgorithm` they do not implement, returning a structured invalid result identifying the unsupported algorithm.
 
 This step exists because a verifier that defensively reads `witness.metadata?.bodyFingerprint` (returning undefined for absent metadata) and proceeds with verification will accept a structurally-malformed witness as valid — the body drift check becomes a no-op on undefined and the rest of the algorithm continues. The structural validation MUST happen first, and MUST refuse to proceed.
 
