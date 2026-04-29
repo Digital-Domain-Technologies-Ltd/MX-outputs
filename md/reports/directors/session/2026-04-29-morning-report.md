@@ -50,11 +50,11 @@ One post (`dita-and-mx-a-comparison.html`) had a duplicate inline `<p class="aut
 
 | Metric | Value |
 |--------|-------|
-| Commits (mx-outputs) | 2 |
-| Hub commit | _pending_ (Step 3) |
-| Files changed | 28 |
-| Lines added | +724 |
-| Lines removed | -50 |
+| Commits (mx-outputs) | 5 |
+| Hub commits | 1 |
+| Files changed | 29 |
+| Lines added | +815 |
+| Lines removed | -51 |
 | Repositories | 1 submodule (mx-outputs) + hub |
 | Blog posts bio-fixed | 23 |
 | New draft posts | 2 (HTML + MD each) |
