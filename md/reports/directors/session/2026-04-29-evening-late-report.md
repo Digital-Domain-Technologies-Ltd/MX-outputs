@@ -4,7 +4,7 @@ description: "Div Soup analyzer ships, fixes flow back into source; tagpdf 0.99y
 author: "Tom Cranstoun"
 created: 2026-04-29
 modified: 2026-04-29
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -155,3 +155,29 @@ After v1.1 closed, the evening pivoted from LaTeX tagpdf debugging to a Chrome-b
 | d182263 | mx-crm | Prune all out-of-date outreach archives |
 | 021054b | mx-outputs | PDF corpus: regen via Chrome engine for ISO 14289-1 Level 1+2 |
 | (hub)  | hub | gen-free-book.sh chrome branch, gen-book-chrome.sh, book manifests, check/fix-pdfs-tagged scripts, test:pdf-eaa fixture suite, audit-pdf-access regex fix |
+
+---
+
+## Addendum (v1.3, 21:30)
+
+After v1.2 closed, the EAA story got its narrative layer: a public-facing blog post, a manuscript chapter extension, and a cookbook recipe. One small enum gap also got closed.
+
+**1. Blog post draft published into the pipeline.** `mx-outputs/mx-site/blog/drafts/tagged-pdfs-are-mx.html` (1450 words, noindex draft). Argument arc: MX is not just HTML; what a tagged PDF actually is; the convergence between human accessibility and machine readability; the cost of an untagged PDF (hallucination, energy, downstream propagation); the carrier discipline beyond PDF (DOCX, EPUB, audio, CSV); what publishers should do; CogNovaMX follows the standard. The CogNovaMX-stance section is the eat-our-own-dog-food note: every public PDF on mx.allabout.network meets ISO 14289-1, the deploy gate enforces it, the same audit pipeline we sell to clients runs on us first.
+
+**2. MX: The Protocols, Chapter 22, new section "The Carrier Argument Generalises Beyond HTML".** Extends the markdown-trap argument to every non-HTML carrier. Frames the untagged-PDF problem as the same shape of failure as the markdown-default agent: efficiency optimised against the wrong cost function. Explicit treatment of PDF (with EAA framing), DOCX, EPUB, audio, CSV. Closing paragraph names the publisher (CogNovaMX) and what we hold ourselves to. Chapter bumped to v1.2.
+
+**3. Appendix A, Recipe 14 — Tagged PDFs for Human and Machine Readers.** Three-layer conformance model (Tagged / Declared / Verified), pipeline recipe (Chrome `--export-tagged-pdf` and LaTeX paths, Level 2 XMP injection, pre-deploy gate), generalisation across other carriers, why-it-fits-MX framing. Fits naturally between Recipe 13 (HTML validation) and the cross-references appendix close.
+
+**4. Enum closure: `community-owned-governance-standard` added to `x-mx-cogType`.** The compliance scan flagged one unknown-enum violation in `allaboutv2/cogs/mx-reginald/cog-system.cog.md`. Decision: extend the enum rather than rename the value. The new enum member is documented as "a cog whose definition is owned and stewarded by an open community (no single vendor authority), serving as a published governance reference for that community." Three sources of truth updated: `mx-canon/ssot/cognovamx-fields.yaml` (validValues), `mx-canon/ssot/fields-data.yaml` (companion prose), `mx-shared-gathering/draft-cogs.md` (the public Gathering proposal table). Compliance scan now reports **0 violations across 2095 files**, down from 1.
+
+### Why It Matters (v1.3)
+
+The technical work in v1.1 and v1.2 made the EAA pipeline work. v1.3 made the pipeline a story we can tell. The blog post is the public artefact for marketing; the chapter section is the manuscript artefact that sells the discipline; the cookbook recipe is the operational artefact that gives implementers something concrete to copy. All three end with the same point: the publisher behind the argument holds itself to the standard. That parity matters more than any individual compliance check.
+
+### Commit Log (v1.3)
+
+| Hash | Repository | Description |
+|------|------------|-------------|
+| 4fd0792 | mx-outputs | Blog draft: Tagged PDFs Are MX (EAA + carriers + CogNovaMX stance) |
+| 1ac7564 | mx-shared-gathering | draft-cogs: add community-owned-governance-standard to cogType enum |
+| (hub)   | hub | Chapter 22 "Carrier Argument Generalises", Appendix A Recipe 14, cognovamx-fields.yaml + fields-data.yaml enum extension |
