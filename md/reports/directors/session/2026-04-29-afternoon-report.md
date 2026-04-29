@@ -4,7 +4,7 @@ description: "Two new sidecar scripts, four code/template bugs fixed, full self-
 author: "Tom Cranstoun"
 created: 2026-04-29
 modified: 2026-04-29
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -83,6 +83,18 @@ The audit report we generated against `mx.allabout.network` is itself a tagged P
 
 ---
 
+## Added this update (v1.2) — Humanize all 22 blog posts
+
+All 22 blog posts in `mx-outputs/mx-site/blog/` have been humanized — AI writing patterns identified and removed from article prose throughout. The work was driven by the `/humanizer` skill (based on Wikipedia's "Signs of AI writing" guide) and a detailed plan that classified patterns by priority.
+
+Patterns removed across the corpus: bold inline-header vertical lists (`**Label:** prose` items in `<li>` and `<p>` elements), boldface overuse on every key phrase, AI vocabulary (`crucial`, `pivotal`, `landscape`, `fundamental`, `inherently`, `underscore`, `showcase`, `testament`, `foster`, `vibrant`), undue significance language ("represents a pivotal moment", "marks a shift"), unanchored statistics presented as universal fact, em-dash abuse, and generic upbeat conclusions. Standalone emphasis sentences converted to plain prose. Numbered lists with bold item labels converted to plain text with em-dashes.
+
+Preserved throughout: proper nouns, book titles, technical terms being introduced (Served HTML, Rendered HTML, MX-first principle), blockquoted content, genuinely instructional numbered checklists (Getting Started, What's Next, Try It Yourself, Lessons for Humans sections), CTA/sales blocks at article ends, HTML structure, schema JSON-LD, author bios, and navigation boilerplate.
+
+Net result: 19 blog HTML files edited, 20 files changed total including `llms-full.txt` regenerated to reflect updated content. 808 insertions, 1028 deletions — the posts are measurably leaner. The writing now reads as human-authored rather than machine-polished.
+
+---
+
 ## Added this update (v1.1) — Div Soup check across served and rendered
 
 The audit suite now detects "div soup" — pages where every container is a bare `<div>` with no role, no ARIA landmark, no class hint about purpose, and no first-generation semantic descendant. AI agents and assistive technology fall back to brittle positional heuristics on those pages; the cost is fragility every time the source pipeline regenerates the layout.
@@ -115,3 +127,4 @@ Smoke-tested against three fixtures (synthetic 5-deep nested soup → score 15 h
 | 72975e77 | hub | Fix qpdf v2 resolver in audit-pdf-access; bump audit-report skill |
 | 83bd6e69 | hub | Docs: CHANGELOG v1.47, LEARNINGS, REMINDERS for afternoon close-out |
 | ea6a1b8 | mx-audit | Add Div Soup check across served and rendered HTML |
+| 2bfc94d | mx-outputs | Humanize all 22 blog posts: strip AI writing patterns |
