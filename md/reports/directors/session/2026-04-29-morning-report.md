@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Infrastructure Hardening, Hook Registration, Hero Layout Fix, Adobe Blog Rewrite"
-description: "CSS layout widened; hero whitespace fixed; all hooks registered; tg-community refresh automated; Adobe blog section rewritten to name hostile web and governance contract."
+title: "Co-Directors Report — Infrastructure Hardening, Hook Registration, Hero Layout Fix, Adobe Blog Rewrite, PDF EAA Audit Service"
+description: "CSS layout widened; hero whitespace fixed; all hooks registered; tg-community refresh automated; Adobe blog section rewritten; new PDF EAA compliance audit service line shipped end-to-end (collector, sidecar, report section, marketing)."
 author: "Tom Cranstoun"
 created: 2026-04-29
 modified: 2026-04-29
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -106,12 +106,31 @@ The hook registration is the highest-value item: 19 safety gates (readonly enfor
 
 The "What changes for an author" section of `adobe-just-bought-the-dashboard.html` was rewritten and retitled. The original section minimised the work required and missed both the hostile-web dynamic and the governance contract argument. The rewrite names the operational hostility (Cloudflare edge blocks, Markdown proxies stripping governance, answer engines dropping attribution), frames MX governance fields explicitly as contract terms rather than markup ornaments, and widens the audience from "authors" to "anyone, or anything, that publishes" — covering product pages, pricing tables, policy documents, and API specs alongside editorial content.
 
+### Added this update (v1.4) — PDF EAA Compliance Audit service line
+
+A new sellable service line shipped end-to-end in one session, closing the audit-tooling gap noted in the prior EAA inspection (audit reports cited WCAG 2.1 / PDF/UA but never named Directive 2019/882).
+
+**What landed:**
+
+- `scripts/audit-pdf-access.cjs` was extended with `--single` (one PDF, path or URL, downloads via curl) and `--eaa-summary` (Level 1 Tagged / Level 2 Declared / Level 3 Verified verdict plus EAA exposure rating per PDF). qpdf JSON v2 schema support added for qpdf 11+.
+- A new batch runner `scripts/audit-pdf-eaa-batch.cjs` accepts URL lists as `.csv` (with `url` column), `.txt` (one per line), or stdin; auto-detects format; produces a combined JSON array of EAA summaries.
+- `mx-audit/src/collectors/llmCollector.js` now persists the full PDF URL list per page (`pdfUrls[]` with url, linkText, hasHtmlAlternative). Previously only summary counts survived the crawl.
+- `mx-audit/src/utils/reports.js` gains `generatePdfInventoryReport`, which emits a deduped `pdfs.csv` sidecar (round-trip compatible with the batch runner).
+- The audit report template gains a "PDF Documents — EAA Compliance Snapshot" section: full inventory table, sample analysis of the first PDF, and a Phase-2 future-work pitch citing Directive (EU) 2019/882 explicitly. Graceful zero-PDF and qpdf-missing branches included.
+- The `audit-report` skill gains a Step 10.9 that captures `pdf_sample.json` from the first `pdfs.csv` row before infill, so the rewrite pass has the EAA summary available.
+- Marketing surfaces aligned: `mx-outputs/mx-site/services/our-services.html` Section 6 gains "Free PDF compliance snapshot" (bundled with every readiness assessment) and "Full estate audit" engagement models. The source MD `12-our-services.md` mirrors the change.
+- DDT business plan §1a gains a "Lead funnel" paragraph: every web audit becomes a qualified PDF-remediation lead at zero marginal cost. Partner strategy extends the accessibility-specialist line to mention the snapshot as a no-discovery-phase handoff for co-delivery partners.
+
+**Why it matters.** Until today, the audit pipeline could discover PDFs but could not say anything specific about them, and the marketing copy invoked the EAA without the tool backing the claim. The snapshot section makes that claim concrete in every report and converts every audit run into a qualified lead for the Year-1 PDF remediation service line targeted at 3-5 enterprises and £30k-£100k.
+
 ---
 
 ## Commit Log
 
 | Hash | Repository | Description |
 |------|-----------|-------------|
+| 392de23 | mx-audit | Add PDF inventory sidecar and EAA Snapshot section |
+| 9c1ba75 | mx-outputs | our-services: bundle Free PDF compliance snapshot, add Full estate audit |
 | 149e9bf | mx-outputs | Rewrite Adobe blog section: widen scope to all publishers, name hostile web |
 | ab2fe98 | mx-outputs | Fix author bio across all blog posts: Handbook now published |
 | ae8486b | mx-outputs | Add new-web blog post drafts: investor and government versions |
