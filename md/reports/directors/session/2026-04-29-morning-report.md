@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Infrastructure Hardening, Hook Registration, Hero Layout Fix"
-description: "CSS layout widened further; hero whitespace eliminated; all Claude Code hooks registered; tg-community refresh automated; manuscripts cleaned up."
+title: "Co-Directors Report — Infrastructure Hardening, Hook Registration, Hero Layout Fix, Adobe Blog Rewrite"
+description: "CSS layout widened; hero whitespace fixed; all hooks registered; tg-community refresh automated; Adobe blog section rewritten to name hostile web and governance contract."
 author: "Tom Cranstoun"
 created: 2026-04-29
 modified: 2026-04-29
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -102,12 +102,17 @@ The hook registration is the highest-value item: 19 safety gates (readonly enfor
 - Review and approve both blog drafts before promoting to `blog/` for publication
 - Run sitemap update after promotion
 
+### Added this update (v1.3)
+
+The "What changes for an author" section of `adobe-just-bought-the-dashboard.html` was rewritten and retitled. The original section minimised the work required and missed both the hostile-web dynamic and the governance contract argument. The rewrite names the operational hostility (Cloudflare edge blocks, Markdown proxies stripping governance, answer engines dropping attribution), frames MX governance fields explicitly as contract terms rather than markup ornaments, and widens the audience from "authors" to "anyone, or anything, that publishes" — covering product pages, pricing tables, policy documents, and API specs alongside editorial content.
+
 ---
 
 ## Commit Log
 
 | Hash | Repository | Description |
 |------|-----------|-------------|
+| 149e9bf | mx-outputs | Rewrite Adobe blog section: widen scope to all publishers, name hostile web |
 | ab2fe98 | mx-outputs | Fix author bio across all blog posts: Handbook now published |
 | ae8486b | mx-outputs | Add new-web blog post drafts: investor and government versions |
 | 096be29 | mx-outputs | Add co-directors morning report 2026-04-29 |
