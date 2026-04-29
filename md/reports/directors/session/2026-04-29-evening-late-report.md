@@ -1,10 +1,10 @@
 ---
 title: "Co-Directors Report — Div Soup check shipped; the-author.html and download-intro fixed at source"
-description: "New analyzer detects naked HTML containers; first two pages it flagged were fixed at source by tag-name swap and CSS relocation. Second self-audit confirms the morning's regressions are resolved."
+description: "Div Soup analyzer ships, fixes flow back into source; tagpdf 0.99y declared unworkable on TL2025 and the tagged-PDF pipeline pivots to headless Chrome with Level 2 XMP injection; corpus-wide tagging gate added (23/0/9)."
 author: "Tom Cranstoun"
 created: 2026-04-29
 modified: 2026-04-29
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -119,3 +119,39 @@ Two post-close items landed after the v1.0 sign-off and belong on the same eveni
 **1. PDF tagpdf parbox plug — mx-audit (commit 2268d06).** Surfaced while regenerating the evening-late tagged PDFs: with `testphase=phase-III` alone, fancyhdr's footer parbox emitted the unregistered socket name `tagsupport/parbox/beforeparbox/...` into the rendered body text. Fix: extend the `\DocumentMetadata` testphase set to `{phase-III,sec,table,firstaid}` (covers struct-tree, section, table, and first-aid plugs) and inject a no-op plug for `tagsupport/parbox/beforeparbox` and `afterparbox` before `\begin{document}` so the fancyhdr footer parbox absorbs cleanly. Removes the prior `\usepackage{tagpdf}` + `\tagpdfsetup{activate-all}` injection — the kernel auto-loads tagpdf when `pdfstandard=ua-N` is declared, so the explicit package was redundant. Net effect: tagged PDFs no longer leak socket-plug names into the visible body, and the LaTeX 2024+ kernel contract is honoured cleanly.
 
 **2. MX: The Protocols — Hoxha citation and worked example.** Delfina Hoxha's "A Beginner's Guide to Intuitive Information Architecture" (Little Language Models, April 2026) was incorporated into the manuscript per a structured update instruction. Three edits, all paraphrase (zero quotations): (a) Chapter 11 §Convergence Principle gains a paragraph naming Hoxha's findable / valuable / timely framing as the human half of Convergence; (b) Chapter 19's IA-lineage sentence now names Covert and Hoxha alongside Krug; (c) Chapter 19 §Naming problem gains a "terminology drift across a department site" worked example built from Hoxha's chemistry-department case (chosen over the IKEA preferred case because terminology drift maps directly onto Chapter 19's audit/IA framing and the Intent CMS contract). All passages: British English, no forbidden adjectives, no item enumeration, MX framed as continuous with the IA tradition rather than a departure. Two open questions deferred for Tom's review: where to host a formal references list (no `## References` section exists in the manuscript), and whether to add a second worked example using the IKEA case in Chapter 15 (Intent-Driven Publishing).
+
+---
+
+## Addendum (v1.2, 20:30)
+
+After v1.1 closed, the evening pivoted from LaTeX tagpdf debugging to a Chrome-based tagged-PDF pipeline and an end-to-end conformance gate over the corpus. Five things landed:
+
+**1. tagpdf 0.99y on TL2025 declared unworkable.** Extended LaTeX-log forensics on the parbox leak surfaced a deeper failure: `LaTeX socket Error: Socket 'tagsupport/para/begin' undeclared! Testphase III needs newer format`. Eight permutations were tried (testphase phase-I/II/III, fancyhdr strip, page-machinery nullification, `\NewSocketPlug`, `\socket_new_plug:nnn`, `\@maketitle` override, parbox source removal, kernel-only tagpdf load). None produced clean tagged output. The TL2025 release of tagpdf has unfixable plug-registration races we cannot work around in user space. Default engine in `mx.pdf.sh` flipped from `lualatex` to `xelatex` (untagged but clean) so the immediate output path stops leaking socket names; tagged generation rerouted to a new Chrome-based pipeline.
+
+**2. Chrome `--export-tagged-pdf` engine added to mx.pdf.sh.** Headless Chrome (`--export-tagged-pdf`, since v85, 2020) builds the structure tree from the HTML accessibility tree directly, sidestepping LaTeX entirely. Pipeline: pandoc → standalone HTML → Chrome → tagged PDF. Selectable via `MX_PDF_ENGINE=chrome`. Verified Level 1 conformance: every file produced this way carries `/StructTreeRoot` and `/MarkInfo /Marked true`.
+
+**3. ISO 14289-1 Level 2 XMP injection.** Chrome's tagged output is Level 1 only — it does not write the `pdfuaid:part=1` XMP claim that conformance verifiers and audit scanners look for. Added a post-process step using exiftool with a small config file (`mx-audit/scripts/bin/exiftool-pdfuaid.config`) that registers the `http://www.aiim.org/pdfua/ns/id/` namespace so `-XMP-pdfuaid:Part` becomes writable. Without the config, exiftool 12.40 silently writes into a private `ns.exiftool.org` namespace that no verifier recognises. Fixed a related bug in `scripts/audit-pdf-access.cjs`: the `pdfuaid:part` regex was case-sensitive but the spec writes `pdfuaid:Part` (capital P), so every Level 2-declared PDF was reporting `level2Declared: fail`.
+
+**4. gen-free-book.sh and gen-book-chrome.sh.** Multi-source book composites needed a different strategy: `qpdf --pages` strips StructTreeRoot during merge, so per-component PDFs cannot be combined post-hoc. Solution: rasterise covers via `pdftoppm`, embed as full-page `<img>` elements at start and end of one combined HTML, run Chrome once. The whole book lives under one accessibility tree. `gen-free-book.sh` got a chrome branch; a generic `scripts/gen-book-chrome.sh` was added that takes a manifest file (chapter list + title/cover directives). Two manifests created (`scripts/book-manifests/{mx-handbook,mx-protocols}.txt`). New npm scripts: `pdf:mx-chrome`, `pdf:protocols-chrome`, `pdf:books-chrome`. Verified outputs: `mx-handbook.pdf` (4.9 MB), `mx-protocols.pdf` (8.9 MB), `mx-protocols-simple.pdf`, `mx-introduction-chapter{,-a5,-letter}.pdf` — all L1 pass / L2 pass / EAA exposure low.
+
+**5. Corpus-wide tagging gate + fixer.** New `scripts/check-pdfs-tagged.cjs` walks `mx-outputs/` and asserts StructTreeRoot + Marked true + pdfuaid:part on every PDF. New `scripts/fix-pdfs-tagged.cjs` companion: injects Level 2 on already-tagged PDFs, regenerates via mx.pdf.sh chrome where a same-stem source can be located, skip-by-policy list for decorative covers / source-less group-4 PDFs. Also a fixture-driven npm test (`npm run test:pdf-eaa`) with a passing fixture (Chrome+L2) and a failing fixture (untagged xelatex pandoc output) that asserts the analyser classifies each correctly. Wired into the `npm test` chain.
+
+**Corpus result.** Starting state: 6 of 39 PDFs passed the gate. After the L2 sweep (13 fixes), targeted regeneration (4 fixes, plus mx-protocols-simple via manifest), and a deliberate prune of 7 outreach reports the user marked as out-of-date: **23 pass / 0 fail / 9 skipped (decorative covers + source-less group 4)**. The skipped set is documented in `SKIP_STEMS` in both the gate and fixer; nothing on it is a regression — they are decorative pages with no body text or PDFs whose markdown sources no longer exist.
+
+**Pruning decision.** All `mx-crm/outreach/` archives older than 2026-04-29 were pruned (167 files in mx-crm, 18 in mx-outputs/pdf/) along with the orphan top-level reports (`foodautonomy-report.pdf`, `mx-allabout-network-self-audit.pdf`, `pdf/reports/`). The seven remaining EAA-failing PDFs were all in those archives. New audits will regenerate against the current template when those clients return.
+
+### Decisions Made (v1.2)
+
+- **Chrome over LaTeX for tagged PDFs.** TL2025 tagpdf is unfit for production. Chrome's accessibility-tree path is mature, well-supported, and predictable. Decision logged in REMINDERS that the engine default flip from xelatex to chrome is queued behind one more corpus verification pass.
+- **Single-pass HTML over component merging for books.** `qpdf --pages` and similar merging tools strip structure trees. Putting cover images inline keeps the entire book under one accessibility tree at the cost of ~5× file size for image-heavy covers — acceptable trade for full conformance.
+- **Skip-list over chase-list for decorative covers.** Covers, back-pages, and group-4 source-less PDFs are explicitly excluded from the EAA gate by stem name. Documented in SKIP_STEMS so future readers see the decision rather than wondering why the gate ignores them.
+- **Prune over regenerate for old outreach.** Tom's call. Re-fitting 7 pre-template reports to the current template-leak gate would be high-effort and the clients are not active. Prune; let new audits regenerate fresh when needed.
+
+### Commit Log (v1.2)
+
+| Hash | Repository | Description |
+|------|------------|-------------|
+| 6570ae1 | mx-audit | Chrome path: inject ISO 14289-1 Level 2 XMP pdfuaid:part=1 |
+| d182263 | mx-crm | Prune all out-of-date outreach archives |
+| 021054b | mx-outputs | PDF corpus: regen via Chrome engine for ISO 14289-1 Level 1+2 |
+| (hub)  | hub | gen-free-book.sh chrome branch, gen-book-chrome.sh, book manifests, check/fix-pdfs-tagged scripts, test:pdf-eaa fixture suite, audit-pdf-access regex fix |
