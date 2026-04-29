@@ -4,7 +4,7 @@ description: "Two new sidecar scripts, four code/template bugs fixed, full self-
 author: "Tom Cranstoun"
 created: 2026-04-29
 modified: 2026-04-29
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -83,6 +83,16 @@ The audit report we generated against `mx.allabout.network` is itself a tagged P
 
 ---
 
+## Added this update (v1.1) — Div Soup check across served and rendered
+
+The audit suite now detects "div soup" — pages where every container is a bare `<div>` with no role, no ARIA landmark, no class hint about purpose, and no first-generation semantic descendant. AI agents and assistive technology fall back to brittle positional heuristics on those pages; the cost is fragility every time the source pipeline regenerates the layout.
+
+The check runs on both served and rendered HTML so the report distinguishes publisher-controlled source from JavaScript-framework-introduced render output. A new `analyzeDivSoup()` method in the LLM collector returns total / bare div counts, the worst nesting depth, a 0-100 score, a low / medium / high band, and the top-5 offending CSS selectors. The web-audit-suite template gains a `SECTION:DIV_SOUP` block with a two-row table; the rewrite block mandates the verbatim phrase "this is hard for machines to understand" when either row scores below 75. The infill resolver picks the worst-scoring page per source rather than averaging — average masks outliers, worst-page surfaces the agent-hostile case directly.
+
+Smoke-tested against three fixtures (synthetic 5-deep nested soup → score 15 high; pure semantic page → score 100 low; live `mx.allabout.network` cached pages → 75-100 low band). The site is genuinely well-structured and the test confirms it.
+
+---
+
 ## Next Steps
 
 - Add `--paper a5|letter` flag to `mx.pdf.sh` and regenerate the A5 / Letter variants of `mx-introduction-chapter.pdf` as tagged.
@@ -102,5 +112,6 @@ The audit report we generated against `mx.allabout.network` is itself a tagged P
 | c0491d0 | mx-outputs | Self-audit report PDF: mx.allabout.network, 2026-04-29 |
 | 03630fa | mx-crm | outreach: mx.allabout.network self-audit, 2026-04-29 |
 | 16ed2ce | mx-crm | Add IDHL two-pathway proposal outline (working draft) |
-| _pending_ | hub | Hub code commit (qpdf v2 resolver + audit-report skill + canon edits) |
-| _pending_ | hub | Hub docs commit (CHANGELOG + LEARNINGS + submodule pointer bumps) |
+| 72975e77 | hub | Fix qpdf v2 resolver in audit-pdf-access; bump audit-report skill |
+| 83bd6e69 | hub | Docs: CHANGELOG v1.47, LEARNINGS, REMINDERS for afternoon close-out |
+| ea6a1b8 | mx-audit | Add Div Soup check across served and rendered HTML |
