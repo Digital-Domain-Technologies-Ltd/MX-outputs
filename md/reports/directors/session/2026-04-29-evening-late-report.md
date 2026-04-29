@@ -4,7 +4,7 @@ description: "New analyzer detects naked HTML containers; first two pages it fla
 author: "Tom Cranstoun"
 created: 2026-04-29
 modified: 2026-04-29
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -108,3 +108,14 @@ The download-intro fix is governance-relevant rather than technical. The Cloudfl
 | 24ccdad | mx-outputs | Fix div soup on /books/the-author.html + add download-intro CSS |
 | 2795066 | mx-outputs | Self-audit pm report PDF: mx.allabout.network re-audit, 2026-04-29 |
 | 97af199 | mx-crm | outreach: mx.allabout.network pm re-audit, 2026-04-29 |
+| 2268d06 | mx-audit | PDF tagpdf: testphase=phase-III,sec,table,firstaid + parbox plug |
+
+---
+
+## Addendum (v1.1, 18:15)
+
+Two post-close items landed after the v1.0 sign-off and belong on the same evening-late record rather than a fresh segment:
+
+**1. PDF tagpdf parbox plug — mx-audit (commit 2268d06).** Surfaced while regenerating the evening-late tagged PDFs: with `testphase=phase-III` alone, fancyhdr's footer parbox emitted the unregistered socket name `tagsupport/parbox/beforeparbox/...` into the rendered body text. Fix: extend the `\DocumentMetadata` testphase set to `{phase-III,sec,table,firstaid}` (covers struct-tree, section, table, and first-aid plugs) and inject a no-op plug for `tagsupport/parbox/beforeparbox` and `afterparbox` before `\begin{document}` so the fancyhdr footer parbox absorbs cleanly. Removes the prior `\usepackage{tagpdf}` + `\tagpdfsetup{activate-all}` injection — the kernel auto-loads tagpdf when `pdfstandard=ua-N` is declared, so the explicit package was redundant. Net effect: tagged PDFs no longer leak socket-plug names into the visible body, and the LaTeX 2024+ kernel contract is honoured cleanly.
+
+**2. MX: The Protocols — Hoxha citation and worked example.** Delfina Hoxha's "A Beginner's Guide to Intuitive Information Architecture" (Little Language Models, April 2026) was incorporated into the manuscript per a structured update instruction. Three edits, all paraphrase (zero quotations): (a) Chapter 11 §Convergence Principle gains a paragraph naming Hoxha's findable / valuable / timely framing as the human half of Convergence; (b) Chapter 19's IA-lineage sentence now names Covert and Hoxha alongside Krug; (c) Chapter 19 §Naming problem gains a "terminology drift across a department site" worked example built from Hoxha's chemistry-department case (chosen over the IKEA preferred case because terminology drift maps directly onto Chapter 19's audit/IA framing and the Intent CMS contract). All passages: British English, no forbidden adjectives, no item enumeration, MX framed as continuous with the IA tradition rather than a departure. Two open questions deferred for Tom's review: where to host a formal references list (no `## References` section exists in the manuscript), and whether to add a second worked example using the IKEA case in Chapter 15 (Intent-Driven Publishing).
