@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Infrastructure Hardening, Hook Registration, Hero Layout Fix, Adobe Blog Rewrite, PDF EAA Audit Service"
-description: "CSS layout widened; hero whitespace fixed; all hooks registered; tg-community refresh automated; Adobe blog section rewritten; new PDF EAA compliance audit service line shipped end-to-end (collector, sidecar, report section, marketing)."
+title: "Co-Directors Report — Infrastructure Hardening, Hook Registration, Hero Layout Fix, Adobe Blog Rewrite, PDF EAA Audit Service, Blog Quality Controls"
+description: "CSS layout widened; hero whitespace fixed; all hooks registered; tg-community refresh automated; Adobe blog section rewritten; PDF EAA compliance audit service line shipped; CMO removed from blog; humanizer pass made mandatory in html-writer."
 author: "Tom Cranstoun"
 created: 2026-04-29
 modified: 2026-04-29
-version: "1.4"
+version: "1.5"
 
 mx:
   status: active
@@ -123,12 +123,28 @@ A new sellable service line shipped end-to-end in one session, closing the audit
 
 **Why it matters.** Until today, the audit pipeline could discover PDFs but could not say anything specific about them, and the marketing copy invoked the EAA without the tool backing the claim. The snapshot section makes that claim concrete in every report and converts every audit run into a qualified lead for the Year-1 PDF remediation service line targeted at 3-5 enterprises and £30k-£100k.
 
+### Added this update (v1.5) — Blog quality controls
+
+Three blog quality improvements landed in quick succession after the PDF service work.
+
+**CMO removed from blog copy.** "CMO" appeared six times across `adobe-just-bought-the-dashboard.html` — meta description, OG, Twitter, JSON-LD, body paragraph, closing paragraph — and once in `blog/index.html`. All instances replaced with "people". The post argues that AI visibility is everyone's problem, not a job-title problem; the terminology now matches the argument.
+
+**Humanizer pass added to html-writer skill.** The `/humanizer` pattern checklist is now a mandatory sub-step of the html-writer polish workflow. The first version scanned only `<article>` content. After review, scope was extended to the entire HTML file: meta description, OG/Twitter descriptions, JSON-LD description, `<title>`, all heading text, alt text, CTA copy, and author bio. The quick-scan command was simplified to strip all tags from the full file rather than extracting a range. Every AI vocabulary match must be fixed before the post can ship.
+
+**Adobe blog humanized.** Running the new pass against the existing post found five issues: three em dashes in the article body, a timelessness violation ("more than the previous version of this section claimed"), and a duplicate "the preamble is now redundant" sentence appearing in both the penultimate and final paragraphs. All five fixed.
+
 ---
 
 ## Commit Log
 
 | Hash | Repository | Description |
 |------|-----------|-------------|
+| fd19af30 | hub | html-writer: extend humanizer pass to full file scope |
+| 6435e72a | hub | html-writer: add mandatory humanizer pass to polish workflow |
+| eb61d8b0 | hub | Bump mx-outputs: humanize Adobe blog post |
+| 102ddf80 | hub | Bump mx-outputs: replace CMO with people in Adobe blog |
+| ee3e41e | mx-outputs | Humanize Adobe blog: remove em dashes, fix timelessness, deduplicate preamble |
+| 059e838 | mx-outputs | Replace CMO with people in Adobe blog post and index |
 | 392de23 | mx-audit | Add PDF inventory sidecar and EAA Snapshot section |
 | 9c1ba75 | mx-outputs | our-services: bundle Free PDF compliance snapshot, add Full estate audit |
 | 149e9bf | mx-outputs | Rewrite Adobe blog section: widen scope to all publishers, name hostile web |
