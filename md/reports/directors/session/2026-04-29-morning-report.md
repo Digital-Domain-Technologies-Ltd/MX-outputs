@@ -89,4 +89,4 @@ The two new posts create dedicated, on-brand content for the investor and govern
 | ab2fe98 | mx-outputs | Fix author bio across all blog posts: Handbook now published |
 | ae8486b | mx-outputs | Add new-web blog post drafts: investor and government versions |
 | 096be29 | mx-outputs | Add co-directors morning report 2026-04-29: blog pipeline and bio fix |
-| _pending_ | hub | Bump mx-outputs pointer |
+| d61b7bf3 | hub | Bump mx-outputs: blog bio fix, new-web drafts, morning report |
