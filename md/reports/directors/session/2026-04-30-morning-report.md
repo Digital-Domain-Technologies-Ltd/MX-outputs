@@ -4,7 +4,7 @@ description: "Three-pronged morning: extended the MX XMP injector to carry 22 go
 author: "Tom Cranstoun"
 created: 2026-04-30
 modified: 2026-04-30
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -72,4 +72,6 @@ The triage decision matters in its own right. By moving 14 fields to core and ke
 | 323d660 | mx-audit | MX XMP injection: inject-mx-xmp.sh + exiftool-mx.config |
 | bd8ba23 | mx-shared-gathering | draft-core-metadata: propose Document Discovery and Lifecycle (sec 7a) |
 | 040b1da | mx-outputs | Blog: tagged-pdfs-are-mx promoted; new audit-pays-for-itself draft; Adobe blog updated |
-| (hub)   | hub | Field migration Group A to core; required-at-L2 declared; Chapter 22 + Recipe 14 + pitch updates |
+| ec04723 | mx-outputs | Drafts index: add why-an-mx-audit-pays-for-itself; refresh Adobe blurb |
+| 818ba095 | hub | MX field migration to core, XMP-bearing manuscripts, audit pitch update |
+| 57425523 | hub | Docs: CHANGELOG v1.54 + REMINDERS for field migration + audit blog |
