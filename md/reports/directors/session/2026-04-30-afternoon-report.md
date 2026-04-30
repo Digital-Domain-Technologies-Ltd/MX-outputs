@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Audit pipeline coordinator + 3 robustness gates ship"
-description: "Afternoon: coordinator script, gate robustness, pipeline logging improvements, v1/v2 comparison, and 7 structured logging additions to the human-in-the-loop audit log."
+title: "Co-Directors Report — Audit pipeline coordinator + Dotfusion re-engagement + canon tier updates"
+description: "Afternoon: audit pipeline coordinator, robustness gates, logging improvements, plus a second tranche covering the Chris Bryce / Dotfusion re-engagement set, the agent-proliferation blog post, and Gathering / DDT canon tier-pricing updates."
 author: "Tom Cranstoun"
 created: 2026-04-30
 modified: 2026-04-30
-version: "2.0"
+version: "2.1"
 
 mx:
   status: active
@@ -109,6 +109,30 @@ The pre-flight findings JSON solves a problem that wasn't obvious until the bare
 - Wire `generate-preflight-findings.js` into the `/audit-scores` skill so Phase 2 starts from the JSON rather than navigating raw CSVs directly
 - Add `--gates` invocation to the `/audit-report` skill documentation so the gates mode is the default finishing step
 - Review the baremetal-vc-report-v2-audit-log.csv as a worked example of the new log schema — use it to refine decision types further if needed
+
+---
+
+## Tranche Two — late afternoon
+
+### 6. Gathering and DDT canon: tier prices, audit-days allowance, day rate, training menu
+
+The IDHL proposal Tom drafted in chat surfaced terms that are now the operational position, so the canon caught up. The Gathering business plan and sponsorship pitch carry Community £10k / Standard £15k / Founding £25k, twelve-month annual-in-advance, with a two-audit-days-per-month allowance at the Standard and Founding tiers (24 audits per year, half-day each, five-page sample, no rollover). Frankfurt-stage naming is now open to all tiers signed before 12 May, not just Founding. The DDT business plan §1 declares the £1,200/day advisory rate (Leeds in the rate, travel at cost agreed in advance) and §6 replaces the generic format-band table with the five-format training menu (Awareness / Targeted in-depth / Senior outline / Delivery in-depth / Client discovery), priced per session.
+
+### 7. Chris Bryce / Dotfusion re-engagement set (held)
+
+The dotfusion.com audit was re-run as a 10-page sample, surfacing the lift since February (accessibility 2 to 58, AI suitability 55 to 100 with no SSR gap). Two-step Option-C email sequence drafted: Email 1 sends the audit with one specific hook (the llms.txt transport gap and the bounded Schema.org Service/Offer fix); Email 2 lands the Gathering founding-partner ask before the 12 May Frankfurt deadline, only if Chris engages with Email 1. The full set is held until 1 May for Tom's release decision; the CRM cog frontmatter records the hold state explicitly and a 🔴 reminder names the timing rule.
+
+### 8. Manuscripts and one-pagers: agent-proliferation message
+
+Appendix A (Implementation Cookbook) gained a folder-level metadata recipe (`.mx.yaml.md`). Chapter 14 of MX: The Protocols gained a new section on agent proliferation and the MX OS. Both public one-pagers (business-leaders and technologists) carry the agent-proliferation talking point. A new `expl-reginald.md` standalone investor explainer landed at the repo root, structured Part A (what exists today) / Part B (what the investment buys), designed to flex across angel / seed / strategic profiles.
+
+### 9. Blog: Many Agents, One Metadata Layer
+
+New post at `mx-outputs/mx-site/blog/many-agents-one-metadata-layer.html` with the same agent-proliferation argument. AWS Quick, Cowork, OpenClaw, Cursor, Copilot — every new platform rebuilds the same context-discovery layer, and the fix is MX metadata at file and folder boundaries. Index, sitemap, and llms-full updated.
+
+### 10. CRM update: Chris Bryce relationship history
+
+The `chris-bryce.cog.md` contact cog gained the full origin-and-arc context (Boye CMS Experts intro April 2024, Doctorow enshittification follow-up, June 2025 podcast invite, Handbook acknowledgement and complimentary copy April 2026), the read-on-the-relationship notes, the live commercial conversation summary (fees discussed, Gathering sponsorship under consideration, Audit Reporter briefed including hallucination-resolved disclosure), and the Gathering sponsorship close as a tracked open item. The cog was then rolled back to its on-hold state when Tom decided to hold the re-engagement set overnight.
 
 ---
 
