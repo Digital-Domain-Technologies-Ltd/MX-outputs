@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — MX governance metadata reaches the PDF; field migration to core; audit-as-service blog post"
-description: "Three-pronged morning: extended the MX XMP injector to carry 22 governance fields end to end into tagged PDFs; migrated 14 of those fields from vendor extensions to the open core dictionary with four declared MUST at Level 2; and shipped a sales-facing blog post justifying the audit service."
+title: "Co-Directors Report — MX governance metadata in PDF; field migration to core; baremetal.vc audit delivered; pipeline hardened"
+description: "Morning: XMP injection, field migration to core, audit blog. Late morning: full baremetal.vc client audit (6 gates passing, PDF delivered), plus 5 audit pipeline improvements closing gate-bypass failure modes identified during the run."
 author: "Tom Cranstoun"
 created: 2026-04-30
 modified: 2026-04-30
-version: "1.4"
+version: "1.5"
 
 mx:
   status: active
@@ -14,14 +14,16 @@ mx:
   tags: [directors-report, session, morning]
 ---
 
-# Co-Directors Report — MX governance metadata reaches the PDF; field migration to core; audit-as-service blog post
+# Co-Directors Report — MX governance metadata in PDF; field migration to core; baremetal.vc audit delivered; pipeline hardened
 
 **Date:** 30 April 2026 — Morning
 **Segment:** morning (since midnight)
 
 ## Summary
 
-The morning extended yesterday's EAA pipeline from "tagged PDFs with a Level 2 conformance claim" to "tagged PDFs that carry the full MX governance metadata layer". A new helper script parses the source markdown's YAML frontmatter and writes 22 distinct mx-prefixed XMP properties (status, summary, canonical URL, conforms-to, training-data policy, and the rest) into the produced PDF in the registered `https://schemas.cognovamx.com/mx/1.0/` namespace, alongside the Level 2 `pdfuaid:Part=1` claim. After the technical work shipped, fourteen of those fields migrated from `cognovamx-fields.yaml` into `fields-data.yaml` core tier per a triage decision (Group A vs Group B), with four declared MUST at Level 2 of the core profile: canonicalUrl, summary, conformsTo, trainingDataPolicy. A new section was added to `mx-shared-gathering/draft-core-metadata.md` as the formal Gathering proposal. The sales-facing layer landed alongside: a 1850-word draft blog post arguing the audit service pays for itself across three vectors (inference cost, hallucination reduction, regulatory exposure), and the existing Adobe-just-bought-the-dashboard draft gained an EAA section tying the acquisition signal to the regulatory tailwind.
+The morning extended yesterday's EAA pipeline from "tagged PDFs with a Level 2 conformance claim" to "tagged PDFs that carry the full MX governance metadata layer". A new helper script parses the source markdown's YAML frontmatter and writes 22 distinct mx-prefixed XMP properties into the produced PDF, alongside the Level 2 `pdfuaid:Part=1` claim. After the technical work shipped, fourteen fields migrated from `cognovamx-fields.yaml` into `fields-data.yaml` core tier, with four declared MUST at Level 2. The sales-facing layer landed alongside: a 1850-word draft blog post arguing the audit service pays for itself across three vectors (inference cost, hallucination reduction, regulatory exposure).
+
+In the late morning, the full web audit for Bare Metal Ventures (baremetal.vc) was delivered end to end: data collection, scoring, discovery, access testing, two-pass report generation, all six quality gates passing, and the client PDF generated. The audit run surfaced five pipeline failure modes (fabricated performance score, missing placeholder-fill logging, platform-capability claim assertions, template voice drift, single-page site warning) which were all fixed in the same session.
 
 ## What Was Done
 
@@ -40,6 +42,14 @@ A new section 7a "Document discovery and lifecycle" went into `mx-shared-gatheri
 ### 4. Sales-facing blog work
 
 The tagged-pdfs-are-mx draft was promoted from drafts to live blog/, with `<meta name="robots">` flipped to `index,follow` and the sitemap.xml regenerated via `scripts/sync-blog-discovery.cjs`. A new draft, `why-an-mx-audit-pays-for-itself.html` (1850 words, eight sections, noindex pending review), positions the audit as the entry point to MX discipline with three payback vectors: reduced inference cost across every machine read, reduced hallucination because agents are no longer reconstructing from incomplete source, reduced regulatory exposure under the EAA enforcement window. The Adobe-just-bought-the-dashboard draft gained a new section tying the acquisition signal to the EAA regulatory tailwind, framing the audit work as the bridge between the boardroom message and the legal department message.
+
+### 5. baremetal.vc client audit delivered
+
+The full Web Audit Suite pipeline ran against Bare Metal Ventures (baremetal.vc), a Webflow-hosted VC site. Two pages audited (homepage + anchor fragment — the site uses Webflow anchor navigation rather than separate HTML pages). Key scores: Accessibility 15/100 (34 Pa11y violations, all template-level), SEO 54/100, AI Suitability 81/100 (no served/rendered gap), Discovery Readiness 10/100, Structured Data 0/100. All 8 AI agent user-agents returned HTTP 200. The two-pass infill + rewrite pipeline ran to completion; all six quality gates (readability hook, deterministic verifier, fierce critic, LLM judgment × 3 rounds, template-leak gate) passed. Client PDF generated at 66KB.
+
+### 6. Audit pipeline hardened
+
+Five failure modes surfaced by the baremetal.vc run were fixed in the same session. (1) `[PERF_SCORE]` was computed from a fabricated formula (`100 - loadMs/100`) producing a score not grounded in any audit CSV; replaced with a band-mapped representative value. (2) Phase 5 placeholder fill was never logged; infill-report.js now appends one CSV row per placeholder to the audit-log file. (3) The readability hook now has a static grep for platform-capability assertions (e.g. "Webflow can generate a sitemap") that assert CMS internals not observed in HTTP responses. (4) A voice declaration was added to the template instruction block to prevent LLM rewrite drift between third-person and second-person within a single report. (5) infill-report.js now emits a stderr warning when fewer than 3 HTML pages are audited, flagging likely anchor-navigation sites before report generation. Cache TTL also increased from 24h to 10 days.
 
 ## Why It Matters
 
@@ -64,6 +74,7 @@ The triage decision matters in its own right. By moving 14 fields to core and ke
 - Extend `cog:validate` and `check-mx-compliance.js` to honour the `requiredAtLevel2` construct so the four MUST-at-L2 fields actually gate.
 - Deduplicate the pre-existing `expires` and `supersedes` entries in `cognovamx-fields.yaml` against the new core entries.
 - Wire `npm run check:pdfs:tagged` into the deploy gate so the corpus tagging gate cannot regress.
+- Send baremetal.vc report to client contact.
 
 ## Commit Log
 
@@ -79,3 +90,7 @@ The triage decision matters in its own right. By moving 14 fields to core and ke
 | bf3c112 | allaboutv2 | ddt-site: link audit blog + humanizer pass |
 | 818ba095 | hub | MX field migration to core, XMP-bearing manuscripts, audit pitch update |
 | 57425523 | hub | Docs: CHANGELOG v1.54 + REMINDERS for field migration + audit blog |
+| 6defe16 | mx-audit | Pipeline improvements: PERF_SCORE guard, placeholder logging, min-page warning, stale TTL 10d |
+| 495236d | mx-crm | baremetal.vc audit: full report, gates, and audit log |
+| ca9bda6 | mx-outputs | baremetal.vc: PDF report and sidecars (2026-04-30) |
+| _pending_ | hub | Hub commit: submodule pointers + check-report-readability.js platform-claims gate |
