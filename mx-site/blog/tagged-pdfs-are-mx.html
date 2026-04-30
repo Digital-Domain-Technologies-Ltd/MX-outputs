@@ -27,16 +27,16 @@
   <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
   <meta name="twitter:image:alt" content="Tagged PDFs Are MX">
 
-  <meta name="mx:status" content="draft">
+  <meta name="mx:status" content="active">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
   <meta name="mx:aiAssistance" content="welcome">
 
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0a1628">
 
-  <link rel="stylesheet" href="../../css/mx-unified.css">
-  <link rel="stylesheet" href="../../css/mx-blog.css">
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
 
   <script type="application/ld+json">
 {
@@ -125,7 +125,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
-        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+        <img src="../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
       <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
@@ -144,8 +144,8 @@
 
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content">
-          <a href="../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp" alt="Tom Cranstoun profile picture" class="author-image" width="80" height="80" loading="lazy">
+          <a href="profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.webp" alt="Tom Cranstoun profile picture" class="author-image" width="80" height="80" loading="lazy">
           </a>
           <div class="introduction-text">
             <div class="introduction-message">An accessible PDF and a machine-readable PDF are the same artefact. The European Accessibility Act mandates the structure that machines have always needed.</div>
@@ -166,6 +166,7 @@
             <li><a href="#beyond-pdf">Beyond PDF: every carrier needs a structure tree</a></li>
             <li><a href="#what-to-do">What publishers should do</a></li>
             <li><a href="#cognovamx-stance">CogNovaMX follows the standard</a></li>
+            <li><a href="#metadata-layer">What else lives in the metadata</a></li>
             <li><a href="#conclusion">Conclusion</a></li>
           </ul>
         </nav>
@@ -224,6 +225,16 @@
         <p>This is not advice given from a distance. CogNovaMX, trading name of Digital Domain Technologies Ltd, publishes its own books, white papers, and audit reports to the ISO 14289-1 (PDF/UA) baseline. Every public PDF on <a href="https://mx.allabout.network/">mx.allabout.network</a> carries a structure tree, marked content, declared reading order, alternative text on figures, and a Level 2 <code>pdfuaid:part</code> XMP claim in its metadata packet. The publishing pipeline runs an automated tagging gate before deploy, so an untagged PDF cannot reach the public corpus by accident.</p>
         <p>Compliance with the European Accessibility Act is the floor we hold ourselves to before we recommend it to clients. The same audit suite that we sell to organisations we run on our own site, every release, on every PDF we ship.</p>
 
+        <h2 id="metadata-layer" tabindex="-1">What else lives in the metadata: provenance, lifecycle, agent affordances</h2>
+        <p>The Level 2 conformance claim and the structure tree are the load-bearing pieces of EAA compliance. The XMP packet that carries the conformance claim has room for considerably more, and an agent that has just opened a PDF is asking more questions than "is this tagged".</p>
+        <p>The questions sort into four groups.</p>
+        <p><strong>Identity and provenance.</strong> Where did this PDF come from, and is the version I have the current one? A canonical URL declared in the XMP tells an agent receiving the artefact via email or Slack where the official copy lives. A source repository and commit SHA tell it the precise build the document was produced from. Supersedes and superseded-by links carry the version chain so an agent reading a year-old contract can follow the pointer to its replacement before quoting from it. Cryptographic signing, the work the Reginald project does, closes the spoofing problem on top.</p>
+        <p><strong>Recency and lifecycle.</strong> Is this still the truth? An expiry date marks content whose validity ends on a known date: pricing PDFs, SLAs, compliance reports, time-bound regulatory text. A review-by date is softer; it says the document is scheduled for editorial review, not retirement. A correction-SLA tells the consumer how fast errors will be fixed when found. An agent indexing a corpus can prune stale content from its working set with one comparison rather than a content read.</p>
+        <p><strong>Action affordances.</strong> What may I do with this, and what should I do next? A machine-readable license URI lets an agent decide reuse without parsing prose. Reuse-terms expand on the licence to cover edge cases the licence text does not address: training-data inclusion, summarisation, derivative work. Agent-instructions carries an explicit message to AI consumers ("cite as X", "summarise but link back", "do not reproduce verbatim"). Related-docs gives the agent a curated reading list to fetch for context. For documents describing a service or dataset, an API endpoint or data endpoint sends the agent to the operational entry point rather than leaving it to re-derive the URL from prose.</p>
+        <p><strong>Semantics and structure.</strong> What is this about, in machine-resolvable terms? A summary is a one-to-two-sentence machine-summary that lets an agent decide if the artefact is relevant before reading the body. Topic identifiers, given as Wikidata QIDs or Schema.org Concept URLs, lift "tags" from free text to a stable, queryable taxonomy. Named-entity identifiers (Wikidata for people and organisations, ORCID for authors, domain names for organisations) let a corpus indexer build an entity graph from metadata alone, without entity extraction. A speakable summary is the voice-friendly version of the summary, suitable for an assistant to read aloud when the user asks "what is this about". Conforms-to lists the standards the document declares conformance to (PDF/UA-1, EAA, WCAG 2.1, MX Core Level 3) so the agent can read one field and know which contracts the artefact claims.</p>
+        <p>And a fifth group, often overlooked: <strong>negative space</strong>. What should an agent <em>not</em> do with this artefact? A training-data policy is the embedded equivalent of the robots.txt training-corpus directive, surviving copy and syndication. A no-LLM-reprocess flag asks consumers to quote rather than rewrite, the right setting for legal text and official records. A do-not-index flag is the embedded analogue of robots.txt noindex, useful for documents that are technically reachable but should not appear in public search.</p>
+        <p>None of these need to be invented. Most have analogues in Dublin Core, Schema.org, and the IETF metadata vocabularies. The contribution MX makes is consolidating them into one namespace that agents read once and rendering them in the carrier-native idiom every time the document is emitted, so they survive the copying and reformatting that normally strips them away. The XMP packet of a tagged PDF is one rendering. Page-level <code>&lt;meta name="mx:..."&gt;</code> tags are another. JSON-LD on the canonical URL is a third. Each rendering carries the same governance signals; together they make the document legible to the next agent that has to act on it.</p>
+
         <h2 id="conclusion" tabindex="-1">Conclusion</h2>
         <p>MX has been described, fairly, as the practice of treating machines as a first-class audience for structured HTML. The description is correct as far as it goes. It is also smaller than the practice itself.</p>
         <p>The web has always been a multi-carrier medium. People download contracts as PDFs, datasets as CSVs, podcasts as MP3s, slide decks as DOCX, code as Markdown. Each carrier has its own native structure idiom. Each idiom either declares meaning or hides it. Where the meaning is declared, machines do less work, hallucinate less often, and consume less energy. Where it is hidden, every read pays the cost again.</p>
@@ -234,10 +245,10 @@
 
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
-            <p class="post-conclusion-author-name"><a href="../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
             <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
@@ -260,7 +271,7 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
         <p>Making the web work for everyone and everything that uses it.</p>
       </div>
       <nav class="footer-links" aria-label="Site links">
@@ -285,6 +296,6 @@
     </div>
   </footer>
 
-  <script src="../../js/app.js"></script>
+  <script src="../js/app.js"></script>
 </body>
 </html>
