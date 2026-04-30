@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 83 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 179 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 93 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 180 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **849** | |
+| **Total** | **862** | |
 
 ---
 
@@ -62,7 +62,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (34 files)
+### pdf/outreach/ (44 files)
 
 - [`dotfusion-accessibility.csv`](pdf/outreach/2026-04-23/dotfusion-accessibility.csv)
 - [`dotfusion-image-optimisation.csv`](pdf/outreach/2026-04-23/dotfusion-image-optimisation.csv)
@@ -97,10 +97,20 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`baremetal-vc-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-audit-log.csv)
 - [`baremetal-vc-pages-audited.csv`](pdf/outreach/2026-04-30/baremetal-vc-pages-audited.csv)
 - [`baremetal-vc-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-04-30/baremetal-vc-pipeline-inline-tag-bloat-pages.csv)
+- [`baremetal-vc-report-v2-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-report-v2-audit-log.csv)
+- [`baremetal-vc-report-v2-llm-rounds.json`](pdf/outreach/2026-04-30/baremetal-vc-report-v2-llm-rounds.json)
+- [`baremetal-vc-report-v2.pdf`](pdf/outreach/2026-04-30/baremetal-vc-report-v2.pdf)
+- [`baremetal-vc-report-v3-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-report-v3-audit-log.csv)
+- [`baremetal-vc-report-v3-llm-rounds.json`](pdf/outreach/2026-04-30/baremetal-vc-report-v3-llm-rounds.json)
+- [`baremetal-vc-report-v3.pdf`](pdf/outreach/2026-04-30/baremetal-vc-report-v3.pdf)
 - [`baremetal-vc-report.pdf`](pdf/outreach/2026-04-30/baremetal-vc-report.pdf)
+- [`dotfusion-pages-audited.csv`](pdf/outreach/2026-04-30/dotfusion-pages-audited.csv)
+- [`dotfusion-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-04-30/dotfusion-pipeline-truncation-risk-pages.csv)
+- [`dotfusion-report.pdf`](pdf/outreach/2026-04-30/dotfusion-report.pdf)
+- [`dotfusion-structured-data-findings.csv`](pdf/outreach/2026-04-30/dotfusion-structured-data-findings.csv)
   - **2026-04-23/** (19 files)
   - **2026-04-24/** (11 files)
-  - **2026-04-30/** (4 files)
+  - **2026-04-30/** (14 files)
 
 ### pdf/reginald/ (23 files)
 
@@ -139,7 +149,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 
-### md/reports/ (178 files)
+### md/reports/ (179 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -174,7 +184,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (150 files)
+#### md/reports/directors/ (151 files)
 
 **build/** (3 files)
 
@@ -188,7 +198,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (143 files)
+**session/** (144 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -323,6 +333,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-04-29-evening-report.md`](md/reports/directors/session/2026-04-29-evening-report.md)
 - [`2026-04-29-morning-report.md`](md/reports/directors/session/2026-04-29-morning-report.md)
 - [`2026-04-30-afternoon-report.md`](md/reports/directors/session/2026-04-30-afternoon-report.md)
+- [`2026-04-30-evening-report.md`](md/reports/directors/session/2026-04-30-evening-report.md)
 - [`2026-04-30-morning-report.md`](md/reports/directors/session/2026-04-30-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
@@ -470,4 +481,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-04-30 at 13:52*
+*Generated on 2026-04-30 at 17:06*
