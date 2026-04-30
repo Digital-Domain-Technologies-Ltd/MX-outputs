@@ -93,4 +93,4 @@ The triage decision matters in its own right. By moving 14 fields to core and ke
 | 6defe16 | mx-audit | Pipeline improvements: PERF_SCORE guard, placeholder logging, min-page warning, stale TTL 10d |
 | 495236d | mx-crm | baremetal.vc audit: full report, gates, and audit log |
 | ca9bda6 | mx-outputs | baremetal.vc: PDF report and sidecars (2026-04-30) |
-| _pending_ | hub | Hub commit: submodule pointers + check-report-readability.js platform-claims gate |
+| 28177438 | hub | Hub commit: submodule pointers + check-report-readability.js platform-claims gate |
