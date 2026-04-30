@@ -1,10 +1,10 @@
 ---
 title: "Co-Directors Report — Audit pipeline coordinator + 3 robustness gates ship"
-description: "Afternoon: coordinator script automates the full mechanical audit pipeline; three new gate scripts close the weakest links in the LLM phases; all shipped and tested against baremetal.vc."
+description: "Afternoon: coordinator script, gate robustness, pipeline logging improvements, v1/v2 comparison, and 7 structured logging additions to the human-in-the-loop audit log."
 author: "Tom Cranstoun"
 created: 2026-04-30
 modified: 2026-04-30
-version: "1.0"
+version: "2.0"
 
 mx:
   status: active
@@ -14,7 +14,7 @@ mx:
   tags: [directors-report, session, afternoon]
 ---
 
-# Co-Directors Report — Audit pipeline coordinator + 3 robustness gates ship
+# Co-Directors Report — Audit pipeline coordinator, v2 baremetal.vc report, and logging improvements
 
 **Date:** 30 April 2026 — Afternoon
 **Segment:** afternoon (since noon)
@@ -23,7 +23,7 @@ mx:
 
 ## Summary
 
-The afternoon converted the audit pipeline from a manually-driven sequence of skill invocations into a two-command workflow: `audit-pipeline.js <url>` runs everything mechanical, prints instructions for the LLM phases, then `audit-pipeline.js --gates <report.md>` runs all six quality gates and generates the PDF. Three new scripts close the weakest links identified in the morning's retrospective — placeholder drift, voice drift, and unchecked American English — so the LLM phases now have automated backstops rather than relying on reviewer attention. All changes verified against the baremetal.vc report without regressions.
+The afternoon delivered three tranches of work. First: the audit pipeline coordinator and three robustness gate scripts shipped, converting the audit workflow into a two-command sequence with automated backstops for placeholder drift, voice drift, and tone conformance. Second: baremetal.vc was audited end-to-end with the new pipeline — the v2 report cleared all six gates and a v1/v2 comparison confirmed score reproducibility across six of seven dimensions. A suite of targeted pipeline improvements followed: the 3-round LLM judgment auto-cap, structured absence findings generation, an 8-agent access test (adding CCBot and Google-Extended), and critical bug fixes. Third: seven structured logging improvements were added to `audit-pipeline.js` so the human-in-the-loop CSV now captures gate failure details, verifier claim counts, EAA level and engine, LLM round markers, absence findings, placeholder fill ratios, and phase start/end timestamps.
 
 ---
 
@@ -47,26 +47,53 @@ Three scripts, each with an authoritative copy in `mx-audit/scripts/` and a dele
 
 Earlier in the afternoon: TOC page numbers now appear in every generated PDF (Puppeteer two-pass approach), tables render with alternating row shading, and the served/rendered gap checker was converted from CommonJS to ESM to resolve a `require is not defined` runtime error in the mx-audit package. Schema maturity Level 0 ("Clean slate") added to both the e-commerce and DOM analysis templates so the schema maturity table is complete for sites with no structured data.
 
+### 4. baremetal.vc v2 audit + pipeline improvements
+
+The new coordinator was used to run the full baremetal.vc audit end-to-end. The v2 report cleared all six gates after a focused iteration cycle that exposed several pipeline gaps:
+
+- **`clientSlug` regex bug**: `/-report\.md$/` stripped the wrong suffix on versioned filenames (`-report-v2.md`), causing gate scripts to look for results in `baremetal.vc.report.v2.md/` rather than `baremetal.vc/`. Fixed to `/-report(-v\d+)?\.md$/`.
+- **PDF naming bug**: `reportPath` + `.md.pdf` double extension. Fixed to `reportStem + .pdf`.
+- **LLM judgment over-firing**: 6 rounds in block mode vs. 0 findings in warn mode. Added `--warn-llm` flag then an auto round-counter that degrades to warn after 3 rounds, persisted to `${reportStem}-llm-rounds.json`.
+- **Tone gate allow-list gap**: `"broken internal links"` was blocked because the allow-list only matched `"broken links"`, not compound forms with an adjective in between. Fixed with `/broken\s+\w+\s+links/i`.
+- **Structured absence findings**: `generate-preflight-findings.js` now deterministically derives Priority 4 findings (schema absence, llms.txt 404, sitemap 404, security gaps, OG incomplete) from audit data and includes them in `preflight-findings.json` — eliminating per-run manual synthesis.
+- **8-agent test**: `agent-access-test.js` expanded from 6 to 8 agents (CCBot and Google-Extended added), with dynamic count in messages.
+
+V1/v2 comparison confirmed: six of seven dimensions bit-for-bit identical across runs. Performance differed only due to VPN routing variance; both Excellent band.
+
+### 5. Seven audit log improvements
+
+`audit-pipeline.js` received seven structured additions to the human-in-the-loop CSV:
+
+1. **Gate failure details**: All gates now run with `{ capture: true }` and re-echo output. Failure rationale includes violation counts and category names from sidecar JSON.
+2. **Verifier claim counts**: Pass rationale now includes `numeric=N url=N html=N passed=N skipped=N total=N`.
+3. **`absence_finding` rows**: One row per deterministic Priority 4 finding read from `preflight-findings.json` after the preflight step.
+4. **`llm_round` row**: Written before each LLM judgment invocation with round number and threshold.
+5. **EAA level + engine + size**: PDF gate captures and parses mx.pdf.sh output; pass rationale includes `engine=chrome EAA Level 2 size=NNK`.
+6. **`placeholder_fill` ratio**: After Gate 2 passes, reads the verification sidecar and logs deterministic vs. synthesised claim counts.
+7. **`phase_start` / `phase_end` markers**: Added at entry and all exit points for both gates mode and collect mode.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits (hub, afternoon) | 6 |
-| Commits (submodules, afternoon) | 2 (mx-audit e08f6b8, mx-crm 69a9c60) |
-| Files changed | 15 |
-| Lines added | +893 |
-| Lines removed | -15 |
-| New scripts | 4 (audit-pipeline.js, generate-preflight-findings.js, check-template-coverage.js hub stub, check-report-tone.js hub stub) |
+| Commits (hub, afternoon) | 9 (incl. pending) |
+| Commits (submodules, afternoon) | 3 (mx-audit 48cd7f1, mx-crm 72e2f8f + 69a9c60) |
+| Files changed | 29 |
+| Lines added | ~1,050 |
+| Lines removed | ~39 |
+| New scripts | 4 (audit-pipeline.js, generate-preflight-findings.js, check-template-coverage.js stub, check-report-tone.js stub) |
 | New npm scripts | 5 (audit:pipeline, audit:gates, audit:preflight, audit:tone, audit:coverage) |
 | Gates in pipeline | 6 (was 4) |
+| Audit log decision types | 8 (incl. 3 new: absence_finding, llm_round, phase_start/end) |
+| Bug fixes | 4 (clientSlug regex, PDF naming, tone allow-list, LLM over-fire) |
 
 ---
 
 ## Why It Matters
 
-The audit pipeline is now reproducible by design, not by discipline. Before this afternoon, each audit run depended on the operator remembering to invoke six separate skill phases in order, with no automated check that placeholders were filled or that prose tone was consistent. That is the primary reason early audits required multiple gate-failure cycles. The coordinator collapses the mechanical work into two commands, and the three new backstop scripts catch the most common LLM-phase errors before they reach the client report. The second and third client audits will run faster and produce higher-quality first drafts.
+The audit pipeline is now reproducible by design, not by discipline. Before this afternoon, each audit run depended on the operator remembering to invoke six separate skill phases in order, with no automated check that placeholders were filled or that prose tone was consistent. The coordinator collapses the mechanical work into two commands, and the gate backstops catch the most common LLM-phase errors before they reach the client report. The seven logging improvements mean every future audit run produces a machine-readable decision trail — gate outcomes, round counts, claim distributions, absence signals — without extra operator effort. That log is the foundation for retrospective quality analysis and eventually for automatic pipeline self-tuning.
 
 ---
 
@@ -78,9 +105,10 @@ The pre-flight findings JSON solves a problem that wasn't obvious until the bare
 
 ## Next Steps
 
-- Run the second client audit using the coordinator to validate the two-command workflow end to end
+- Run the next client audit using the coordinator to validate the improved two-command workflow end to end
 - Wire `generate-preflight-findings.js` into the `/audit-scores` skill so Phase 2 starts from the JSON rather than navigating raw CSVs directly
 - Add `--gates` invocation to the `/audit-report` skill documentation so the gates mode is the default finishing step
+- Review the baremetal-vc-report-v2-audit-log.csv as a worked example of the new log schema — use it to refine decision types further if needed
 
 ---
 
@@ -88,11 +116,19 @@ The pre-flight findings JSON solves a problem that wasn't obvious until the bare
 
 | Hash | Repository | Description |
 |------|------------|-------------|
+| *(pending)* | MX-hub | Audit log: 7 structured logging improvements to audit-pipeline.js |
+| `3807402d` | MX-hub | Pipeline improvements: LLM 3-round auto-cap, absence findings, 8-agent test |
+| `52f2ec78` | MX-hub | Fix audit-pipeline.js: --warn-llm flag, clientSlug v-suffix, PDF naming |
+| `93f9806b` | MX-hub | Docs: CHANGELOG v1.56 + REMINDERS + LEARNINGS + UBERCOG for pipeline |
+| `dbb52cd0` | MX-hub | Bump mx-crm + mx-outputs: baremetal.vc gate outputs, afternoon directors report |
 | `6e79029f` | MX-hub | Audit pipeline robustness: preflight-findings, template-coverage, tone gate |
 | `2c6664ad` | MX-hub | Add audit-pipeline.js: mechanical coordinator for full audit pipeline |
 | `b6e8657e` | MX-hub | Bump mx-audit: Level 0 in all templates, gap script ESM fix |
 | `d8755210` | MX-hub | Bump mx-audit + mx-outputs: TOC page numbers, professional CSS, Schema Level 0 |
 | `48149ef7` | MX-hub | Bump mx-audit + mx-outputs: CSS injection fix + baremetal.vc PDF regen |
 | `8c8919c3` | MX-hub | Bump mx-outputs: baremetal.vc PDF regen |
+| `48cd7f1` | mx-audit | Improve agent-access-test, tone gate, and LLM withdrawal patterns |
+| `375c962` | mx-audit | Fix: add 'no gap detected' to LLM judgment withdrawal patterns |
 | `e08f6b8` | mx-audit | Add check-template-coverage.js and check-report-tone.js gate scripts |
+| `72e2f8f` | mx-crm | Add baremetal.vc audit report v2 (pipeline-driven) + gate sidecars |
 | `69a9c60` | mx-crm | baremetal.vc: update gate outputs and audit log from pipeline run |
