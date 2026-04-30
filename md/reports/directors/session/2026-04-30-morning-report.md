@@ -4,7 +4,7 @@ description: "Three-pronged morning: extended the MX XMP injector to carry 22 go
 author: "Tom Cranstoun"
 created: 2026-04-30
 modified: 2026-04-30
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -75,5 +75,7 @@ The triage decision matters in its own right. By moving 14 fields to core and ke
 | ec04723 | mx-outputs | Drafts index: add why-an-mx-audit-pays-for-itself; refresh Adobe blurb |
 | 9e7c346 | mx-outputs | Audit blog draft: humanize per writing-style guide |
 | a0d8c6b | mx-outputs | Blog: promote why-an-mx-audit-pays-for-itself from drafts to live |
+| 6c5feec | mx-outputs | mx-site: link audit blog from home + services + about + blog index |
+| bf3c112 | allaboutv2 | ddt-site: link audit blog + humanizer pass |
 | 818ba095 | hub | MX field migration to core, XMP-bearing manuscripts, audit pitch update |
 | 57425523 | hub | Docs: CHANGELOG v1.54 + REMINDERS for field migration + audit blog |
