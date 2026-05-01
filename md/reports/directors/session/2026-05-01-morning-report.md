@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Spell-check infrastructure and 'What I Do' blog publish"
-description: "Published the 'What I Do' positioning blog and turned the morning's spell-check learnings into permanent repo infrastructure: aspell installed by default, wordlist sweep automation, dual-dialect policy documented across canon."
+title: "Co-Directors Report — Spell-check infrastructure, blog publish, and audit pipeline upgrade"
+description: "Published the 'What I Do' positioning blog, built spell-check infrastructure, and significantly upgraded the mx-audit pipeline: fierce-critic now runs an LLM second pass, output_config replaced with tool use, Pass 2 rewrite script externalised, and all documentation propagated."
 author: "Tom Cranstoun"
 created: 2026-05-01
 modified: 2026-05-01
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -14,7 +14,7 @@ mx:
   tags: [directors-report, session, morning]
 ---
 
-# Co-Directors Report — Spell-check infrastructure and 'What I Do' blog publish
+# Co-Directors Report — Spell-check infrastructure, blog publish, and audit pipeline upgrade
 
 **Date:** 1 May 2026 — Morning
 **Segment:** morning (since midnight)
@@ -52,7 +52,31 @@ The wordlist sweep surfaced three title-case typos in figure captions that had b
 
 These are exactly the failures the new sweep script is designed to catch.
 
-### 4. Dual-dialect spell-check policy documented across canon
+### 4. mx-audit pipeline: fierce-critic LLM pass + tool-use structured output
+
+The audit report gate chain now has a materially stronger quality check before PDFs ship.
+
+**Fierce-critic two-pass architecture (`scripts/audit-fierce-critic.js`):**
+
+The fierce-critic previously ran regex-only checks (leaked boilerplate, uncited industry claims, image/Pa11y contradictions, scope overreach, overpromise). It now also runs an LLM second pass (claude-sonnet-4-6, tool use) that catches four categories the regex cannot detect: subtle failure framing ("struggles to", "falls short of"), hollow recommendations (category named without a mechanism), voice drift (passive-academic constructions, loss of consultant voice), and fabricated specificity (industry statistics or effort estimates not in the audit data). LLM findings are tagged `source: 'llm'` in the sidecar; `regexFindingCount` and `llmFindingCount` are reported separately. Requires `ANTHROPIC_API_KEY`.
+
+**LLM judgment — proper tool use (`scripts/audit-llm-judgment.js`):**
+
+The `output_config` parameter had been silently ignored by the Anthropic SDK (it is not part of the stable `messages.create` interface). Structured output was working only because the prompt said "return JSON" — not because the SDK enforced the schema. Replaced with proper tool use: `tools` array + `tool_choice: { type: 'tool', name: 'report_findings' }`. Parsing now reads `response.content.find(b => b.type === 'tool_use').input`, which is guaranteed-structured.
+
+**Pass 2 rewrite script externalised (`scripts/rewrite-report.js`):**
+
+The rewrite prompt and MODE 1/MODE 2 logic now live in a dedicated script rather than inline skill instructions. MODE 1 replaces prose blocks; MODE 2 rewrites a named table column while leaving all other columns unchanged. AI vocabulary ban list added; max_tokens raised from 600 to 1000.
+
+**PRD and architecture documentation updated:**
+
+`prd.md` (new file in mx-audit): full product requirements document covering the five-phase pipeline, two-pass design, gate chain, template selection logic, collector interface, and data outputs. `mx-audit-architecture.cog.md` updated to match all pipeline changes.
+
+**Documentation propagated to all skill and manual files:**
+
+`audit-report/skill.md`, `audit-site/skill.md`, `regen-report/skill.md`, `manual-web-audit-suite.cog.md`, `audit-gotchas.md` — all updated to document the two-pass fierce-critic, tool-use fix, and MODE 1/MODE 2 rewrite.
+
+### 5. Dual-dialect spell-check policy documented across canon
 
 Codified the rule that both American (organize, color, optimization) and British (organise, colour, optimisation) spellings pass — only typos are flagged, dialect is a separate writing-style review. Documented in:
 
@@ -67,17 +91,17 @@ Codified the rule that both American (organize, color, optimization) and British
 
 | Metric | Value |
 |--------|-------|
-| Commits (this segment, mx-outputs only at time of writing) | 1 |
-| Files changed (mx-outputs commit) | 7 |
-| Lines added (mx-outputs commit) | +415 |
-| Lines removed (mx-outputs commit) | −12 |
-| Repositories touched | 2 (hub, mx-outputs) |
-| Hub files staged for commit | 9 (1 new, 8 modified) |
+| Repositories touched | 4 (hub, mx-audit, mx-crm, mx-outputs) |
+| mx-audit files changed | 34 (2788 insertions, 497 deletions) |
+| New scripts/collectors | 5 (rewrite-report.js, accessibilityCollector.js, linkCollector.js, securityCollector.js, prd.md) |
+| Gate improvement | fierce-critic adds LLM second pass; LLM judgment switches to tool use |
+| Hub skill/doc files updated | 5 (audit-report, audit-site, regen-report skills; manual; audit-gotchas) |
+| Baremetal.vc audit deliverables committed | v5–v9 reports + PDFs (mx-crm + mx-outputs) |
 | Wordlist growth | 230 → 501 (+271 entries) |
-| Real typos caught and fixed | 3 (in 2 posts that had been live since January) |
+| Real typos caught and fixed | 3 (in 2 posts live since January) |
 | New blog posts published | 1 |
 | New npm scripts | 3 (spell:check, spell:sweep, spell:sweep:apply) |
-| Canon files updated to document the dual-dialect policy | 4 (CLAUDE, UBERCOG, README, getting-started) |
+| Canon files updated for dual-dialect policy | 4 (CLAUDE, UBERCOG, README, getting-started) |
 
 ---
 
@@ -121,3 +145,6 @@ The fix is to make the diagnostic correct, not to lower the bar.
 | `mx-outputs 101a9d8` | Publish 'What I Do' blog post; fix three figure-caption typos |
 | `mx-outputs ad5032c` | Directors report: 2026-05-01 morning - spell-check infra + 'What I Do' publish |
 | `hub 2ae06e3d` | Add aspell to setup; new spell:sweep; wordlist 230→501; dual-dialect policy |
+| `mx-audit 1836f41` | Pipeline improvements: fierce-critic LLM pass, tool-use output, collector refactor, PRD, rewrite script |
+| `mx-crm 126c5c9` | Add baremetal.vc audit deliverables (v4-v9) and 2026-05-01 log |
+| `mx-outputs 1b2e6f3` | Add baremetal.vc PDF deliverables v5-v9 |
