@@ -34,11 +34,13 @@ The audit pipeline has reached production-ready quality. Two further rounds of t
 The afternoon's work shipped a fierce-critic convergence cap and the llmstxt framing correction. Two further commits this evening extended the guard set:
 
 **`6f74d82` — Scope, fabricated stats, voice, PERF_SCORE formula:**
+
 - Scope guards added to Working Well and Findings Intro sections to prevent the LLM from asserting "site-wide" conclusions from a sample audit.
 - PERF_SCORE formula corrected so the performance score is derived from audited data, not a hardcoded formula the LLM was applying inconsistently.
 - Voice and framing corrections to the llms.txt recommendation paragraph in both templates.
 
 **`e1983b3` — Pa11y grounding and scope constraints:**
+
 - WCAG rewrite blocks now inject the actual Pa11y findings from the audit into the template instruction, so the LLM rewrites from named WCAG criteria and real selectors rather than inventing typical accessibility findings.
 - SCOPE guards added to robots.txt and sitemap sections to prevent comparisons to "typical" or "industry standard" configurations.
 - JSON-LD stability facts injected into the ecommerce drift rewrite block with an explicit "SCOPE: this covers the audited URLs only — do NOT say site-wide" constraint.
@@ -124,4 +126,4 @@ The audit pipeline can now be run against client sites with confidence that the 
 | `mx-crm d249cb6` | Add 2026-05-01 baremetal-vc v13/v14 and mx-allabout audit outputs |
 | `mx-outputs ce9bba3` | Add baremetal v11 PDF and sidecars (npm pipeline run) |
 | `mx-outputs 0a21920` | Update llms.txt featured articles and add 2026-05-01 audit outputs |
-| `hub _pending_` | Step-commit: bump submodules + audit-pipeline.js infill diagnostics |
+| `hub f400a8ce` | Bump submodules: evening pipeline guards, v13/v14 runs, self-audit, llms.txt update |
