@@ -119,4 +119,5 @@ The fix is to make the diagnostic correct, not to lower the bar.
 | Hash | Description |
 |------|-------------|
 | `mx-outputs 101a9d8` | Publish 'What I Do' blog post; fix three figure-caption typos |
-| `hub _pending_` | Add aspell to setup; npm spell:sweep; wordlist 230→501; dual-dialect policy documented |
+| `mx-outputs ad5032c` | Directors report: 2026-05-01 morning - spell-check infra + 'What I Do' publish |
+| `hub 2ae06e3d` | Add aspell to setup; new spell:sweep; wordlist 230→501; dual-dialect policy |
