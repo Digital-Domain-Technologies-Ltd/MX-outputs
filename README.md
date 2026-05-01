@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 93 | PDFs — books, reports, manuals, presentations |
+| [pdf/](pdf/) | 120 | PDFs — books, reports, manuals, presentations |
 | [md/](md/) | 181 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **864** | |
+| **Total** | **891** | |
 
 ---
 
@@ -62,7 +62,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (44 files)
+### pdf/outreach/ (71 files)
 
 - [`dotfusion-accessibility.csv`](pdf/outreach/2026-04-23/dotfusion-accessibility.csv)
 - [`dotfusion-image-optimisation.csv`](pdf/outreach/2026-04-23/dotfusion-image-optimisation.csv)
@@ -104,13 +104,40 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`baremetal-vc-report-v3-llm-rounds.json`](pdf/outreach/2026-04-30/baremetal-vc-report-v3-llm-rounds.json)
 - [`baremetal-vc-report-v3.pdf`](pdf/outreach/2026-04-30/baremetal-vc-report-v3.pdf)
 - [`baremetal-vc-report.pdf`](pdf/outreach/2026-04-30/baremetal-vc-report.pdf)
+- [`baremetal-vc-v5-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v5-audit-log.csv)
+- [`baremetal-vc-v5-pages-audited.csv`](pdf/outreach/2026-04-30/baremetal-vc-v5-pages-audited.csv)
+- [`baremetal-vc-v5-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-04-30/baremetal-vc-v5-pipeline-inline-tag-bloat-pages.csv)
+- [`baremetal-vc-v5-report-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v5-report-audit-log.csv)
+- [`baremetal-vc-v5-report-llm-rounds.json`](pdf/outreach/2026-04-30/baremetal-vc-v5-report-llm-rounds.json)
+- [`baremetal-vc-v5-report.pdf`](pdf/outreach/2026-04-30/baremetal-vc-v5-report.pdf)
+- [`baremetal-vc-v6-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v6-audit-log.csv)
+- [`baremetal-vc-v6-pages-audited.csv`](pdf/outreach/2026-04-30/baremetal-vc-v6-pages-audited.csv)
+- [`baremetal-vc-v6-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-04-30/baremetal-vc-v6-pipeline-inline-tag-bloat-pages.csv)
+- [`baremetal-vc-v6-report-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v6-report-audit-log.csv)
+- [`baremetal-vc-v6-report-llm-rounds.json`](pdf/outreach/2026-04-30/baremetal-vc-v6-report-llm-rounds.json)
+- [`baremetal-vc-v6-report.pdf`](pdf/outreach/2026-04-30/baremetal-vc-v6-report.pdf)
+- [`baremetal-vc-v7-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v7-audit-log.csv)
+- [`baremetal-vc-v7-pages-audited.csv`](pdf/outreach/2026-04-30/baremetal-vc-v7-pages-audited.csv)
+- [`baremetal-vc-v7-report-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v7-report-audit-log.csv)
+- [`baremetal-vc-v7-report-llm-rounds.json`](pdf/outreach/2026-04-30/baremetal-vc-v7-report-llm-rounds.json)
+- [`baremetal-vc-v7-report.pdf`](pdf/outreach/2026-04-30/baremetal-vc-v7-report.pdf)
+- [`baremetal-vc-v8-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v8-audit-log.csv)
+- [`baremetal-vc-v8-pages-audited.csv`](pdf/outreach/2026-04-30/baremetal-vc-v8-pages-audited.csv)
+- [`baremetal-vc-v8-report-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v8-report-audit-log.csv)
+- [`baremetal-vc-v8-report-llm-rounds.json`](pdf/outreach/2026-04-30/baremetal-vc-v8-report-llm-rounds.json)
+- [`baremetal-vc-v8-report.pdf`](pdf/outreach/2026-04-30/baremetal-vc-v8-report.pdf)
+- [`baremetal-vc-v9-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v9-audit-log.csv)
+- [`baremetal-vc-v9-pages-audited.csv`](pdf/outreach/2026-04-30/baremetal-vc-v9-pages-audited.csv)
+- [`baremetal-vc-v9-report-audit-log.csv`](pdf/outreach/2026-04-30/baremetal-vc-v9-report-audit-log.csv)
+- [`baremetal-vc-v9-report-llm-rounds.json`](pdf/outreach/2026-04-30/baremetal-vc-v9-report-llm-rounds.json)
+- [`baremetal-vc-v9-report.pdf`](pdf/outreach/2026-04-30/baremetal-vc-v9-report.pdf)
 - [`dotfusion-pages-audited.csv`](pdf/outreach/2026-04-30/dotfusion-pages-audited.csv)
 - [`dotfusion-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-04-30/dotfusion-pipeline-truncation-risk-pages.csv)
 - [`dotfusion-report.pdf`](pdf/outreach/2026-04-30/dotfusion-report.pdf)
 - [`dotfusion-structured-data-findings.csv`](pdf/outreach/2026-04-30/dotfusion-structured-data-findings.csv)
   - **2026-04-23/** (19 files)
   - **2026-04-24/** (11 files)
-  - **2026-04-30/** (14 files)
+  - **2026-04-30/** (41 files)
 
 ### pdf/reginald/ (23 files)
 
@@ -482,4 +509,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-01 at 11:20*
+*Generated on 2026-05-01 at 11:59*
