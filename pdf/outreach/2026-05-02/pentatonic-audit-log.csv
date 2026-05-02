@@ -1,0 +1,285 @@
+timestamp,phase,step,decision_type,decision,rationale,data_source,confidence,outcome
+2026-05-02T13:29:15.852Z,collect,start,phase_start,collect phase started,url=https://pentatonic.com pages=5 client=pentatonic date=2026-05-02,audit-pipeline.js,high,n-a
+2026-05-02T13:29:15.852Z,collect,0,sitemap_discovery,audit-pipeline.js collect invoked,url=https://pentatonic.com pages=5 forceFresh=false client=pentatonic date=2026-05-02,audit-pipeline.js,high,n-a
+2026-05-02T13:29:15.856Z,collect,1,anomaly,check-egress.js invoked,url=https://pentatonic.com,check-egress.js,high,n-a
+2026-05-02T13:29:16.066Z,collect,1,anomaly,Egress clean,No VPN or DNS filter detected,check-egress.js,high,pass
+2026-05-02T13:29:16.066Z,collect,2,sitemap_discovery,check-wellknown.js invoked,url=https://pentatonic.com,check-wellknown.js,high,n-a
+2026-05-02T13:29:16.515Z,collect,2,sitemap_discovery,Well-known probe passed,Exit 0,check-wellknown.js,high,pass
+2026-05-02T13:29:16.515Z,collect,3,anomaly,Results dir cleared: mx-audit/results/pentatonic.com,"Fresh run — stale CSVs removed, cache preserved",audit-pipeline.js,high,pass
+2026-05-02T13:29:16.965Z,collect,4,sitemap_discovery,Sitemap: https://pentatonic.com/sitemap.xml,Responded HTTP 200 to HEAD request,https://pentatonic.com/sitemap.xml,high,pass
+2026-05-02T13:29:16.965Z,collect,5,sitemap_discovery,mx-audit/index.js invoked,entry=https://pentatonic.com/sitemap.xml pages=5 forceFresh=false,mx-audit/index.js,high,n-a
+2026-05-02T13:32:11.941Z,collect,5,score_summary,Crawler complete,Exit 0,mx-audit/results/pentatonic.com,high,pass
+2026-05-02T13:32:11.941Z,collect,6,anomaly,error-page-test.js invoked,url=https://pentatonic.com,error-page-test.js,high,n-a
+2026-05-02T13:32:12.178Z,collect,6,anomaly,Error page test passed,Exit 0,error-page-test.js,high,pass
+2026-05-02T13:32:12.178Z,collect,7,agent_access,agent-access-test.js invoked,url=https://pentatonic.com out=/Users/tomcranstoun/Documents/MX-hub/mx-audit/results/pentatonic.com,agent-access-test.js,high,n-a
+2026-05-02T13:32:12.472Z,collect,7,agent_access,Agent access test complete,Exit 0 — agent-access.json written to /Users/tomcranstoun/Documents/MX-hub/mx-audit/results/pentatonic.com,agent-access-test.js,high,pass
+2026-05-02T13:32:12.472Z,collect,8,score_summary,check-served-rendered-gap.js invoked,resultsDir=/Users/tomcranstoun/Documents/MX-hub/mx-audit/results/pentatonic.com,check-served-rendered-gap.js,high,n-a
+2026-05-02T13:32:12.547Z,collect,8,score_summary,No significant served/rendered gap,All AI suitability dimensions within 5-point threshold,mx-audit/results/pentatonic.com/audit_averages.json,high,pass
+2026-05-02T13:32:12.547Z,collect,9,score_summary,generate-preflight-findings.js invoked,resultsDir=/Users/tomcranstoun/Documents/MX-hub/mx-audit/results/pentatonic.com out=/Users/tomcranstoun/Documents/MX-hub/mx-audit/results/pentatonic.com/preflight-findings.json,generate-preflight-findings.js,high,n-a
+2026-05-02T13:32:12.615Z,collect,9,score_summary,Preflight findings written,"Pre-digested scores, findings, schema maturity, journey, agent access — ready for LLM phases",mx-audit/results/pentatonic.com/preflight-findings.json,high,pass
+2026-05-02T13:32:12.615Z,collect,9,absence_finding,Schema.org coverage is partial — Decoration (SDQ 67/100),Agents can partially parse structured facts but key properties may be missing,mx-audit/results/pentatonic.com/preflight-findings.json,high,warn
+2026-05-02T13:32:12.615Z,collect,9,absence_finding,No llms.txt published,Agents have no machine-curated index of site content or declared access policy,mx-audit/results/pentatonic.com/preflight-findings.json,high,warn
+2026-05-02T13:32:12.615Z,collect,9,absence_finding,No sitemap.xml,Crawlers rely on link discovery only; unlisted pages may not be indexed,mx-audit/results/pentatonic.com/preflight-findings.json,high,warn
+2026-05-02T13:32:12.615Z,collect,9,absence_finding,"Security headers absent: CSP, X-Frame-Options",Missing security headers increase exposure to content injection and clickjacking,mx-audit/results/pentatonic.com/preflight-findings.json,high,warn
+2026-05-02T13:32:12.615Z,collect,10,score_summary,Collect phase complete,All automated steps finished including preflight-findings.json,audit-pipeline.js,high,pass
+2026-05-02T13:32:12.615Z,collect,end,phase_end,collect phase ended — SUCCESS,All automated collection steps complete; LLM phases ready to start,audit-pipeline.js,high,pass
+2026-05-02T13:36:30.958Z,report,start,phase_start,report phase started,hostname=pentatonic.com client=pentatonic date=2026-05-02 model=claude-sonnet-4-6,audit-pipeline.js,high,n-a
+2026-05-02T13:36:30.958Z,report,0,template_selection,Template: web-audit-suite-template.md,Generic template — no commerce anchor,/Users/tomcranstoun/Documents/MX-hub/mx-audit/results/pentatonic.com/seo_scores.csv,high,pass
+2026-05-02T13:36:30.960Z,report,1,placeholder_fill,infill-report.js invoked,template=web-audit-suite-template.md results=/Users/tomcranstoun/Documents/MX-hub/mx-audit/results/pentatonic.com out=/Users/tomcranstoun/Documents/MX-hub/mx-crm/outreach/2026-05-02/.infilled/pentatonic.md,infill-report.js,high,n-a
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AGENT_NAME","csv-lookup","Tom Cranstoun",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AGENT_COMPANY","csv-lookup","CogNovaMX Ltd",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AGENT_EMAIL","csv-lookup","info@cognovamx.com",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AGENT_WEBSITE","csv-lookup","https://allabout.network",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AGENT_LEGAL","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CLIENT_NAME","csv-lookup","Pentatonic",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CLIENT_SHORT_NAME","csv-lookup","pentatonic",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CLIENT_SLUG","csv-lookup","pentatonic",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CLIENT_URL","csv-lookup","https://pentatonic.com",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CLIENT_HOSTNAME","csv-lookup","pentatonic.com",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"TARGET_URL","csv-lookup","https://pentatonic.com",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DATE","csv-lookup","2 May 2026",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DATE_YYYY_MM_DD","csv-lookup","2026-05-02",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"YEAR","csv-lookup","2026",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"YYYYMMDD","csv-lookup","20260502",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"NUMBER_OF_PAGES_AUDITED","csv-lookup","5",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"NUMBER_OF_PAGES_AUDITED_LABEL","csv-lookup","5 pages",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"NAV_PAGES","csv-lookup","1",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CONTENT_PAGES","csv-lookup","4",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SEO_SCORE","csv-lookup","77",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SEO_CONTENT_SCORE","csv-lookup","76",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"NAV_PAGES_NOTE","csv-lookup","The page marked (nav) is navigational — it routes visitors t",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"URL_DEDUP_NOTE","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"URL_CANONICAL_VARIANTS_FINDING","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"A11Y_SCORE","csv-lookup","66",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"NUMBER_OF_ISSUES","csv-lookup","34",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"A11Y_TOTAL_ISSUES","csv-lookup","34",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"A11Y_TOTAL_CRITICAL","csv-lookup","34",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WCAG_RECURRING_PATTERNS","csv-lookup"," Of these, 5 (15%) trace to 1 recurring template-level patte",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"A11Y_ADJUSTED_SCORE","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PERFORMANCE_SCORE","csv-lookup","1510",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PERF_SCORE","csv-lookup","70",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLM_SCORE","csv-lookup","31",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLM_RENDERED_SCORE","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLM_GAP","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MSC_SCORE","csv-lookup","51",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_SCORE","csv-lookup","67",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DR_SCORE","csv-lookup","40",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"HQ_SCORE","csv-lookup","27",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SR_SCORE","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AR_SCORE","csv-lookup","76",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PS_SCORE","csv-lookup","67",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BCR_SCORE","csv-lookup","11",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_SERVED_SCORE","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_SERVED_BAND","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_SERVED_BARE","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_SERVED_TOTAL","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_SERVED_RATIO","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_SERVED_DEPTH","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_SERVED_TOP","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_RENDERED_SCORE","csv-lookup","20",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_RENDERED_BAND","csv-lookup","high",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_RENDERED_BARE","csv-lookup","152",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_RENDERED_TOTAL","csv-lookup","230",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_RENDERED_RATIO","csv-lookup","66",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_RENDERED_DEPTH","csv-lookup","13",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DIV_SOUP_RENDERED_TOP","csv-lookup","`div` (109), `div.ssr-variant.hidden-gxr14p` (38), `div.ssr-",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SEO_BAND","csv-lookup","Excellent",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SEO_GRADE","csv-lookup","A",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"A11Y_BAND","csv-lookup","Good",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"A11Y_GRADE","csv-lookup","B",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"A11Y_ADJUSTED_BAND","csv-lookup","Needs Improvement",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"A11Y_ADJUSTED_GRADE","csv-lookup","D",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLM_SERVED_BAND","csv-lookup","Could Be Better",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLM_SERVED_GRADE","csv-lookup","C",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLM_RENDERED_BAND","csv-lookup","N/A",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLM_RENDERED_GRADE","csv-lookup","-",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MSC_BAND","csv-lookup","Good",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MSC_GRADE","csv-lookup","B",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_BAND","csv-lookup","Good",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_GRADE","csv-lookup","B",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DR_BAND","csv-lookup","Could Be Better",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DR_GRADE","csv-lookup","C",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"HQ_BAND","csv-lookup","Could Be Better",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"HQ_GRADE","csv-lookup","C",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AR_BAND","csv-lookup","Excellent",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AR_GRADE","csv-lookup","A",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PS_BAND","csv-lookup","Good",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PS_GRADE","csv-lookup","B",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PERF_BAND","csv-lookup","Excellent",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PERF_GRADE","csv-lookup","A",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"COMMERCE_BAND","csv-lookup","Needs Improvement",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"COMMERCE_GRADE","csv-lookup","D",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BAR_SEO","csv-lookup","`###################------`",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BAR_A11Y","csv-lookup","`#################--------`",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BAR_LLM","csv-lookup","`########-----------------` **(!)**",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BAR_MSC","csv-lookup","`#############------------`",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BAR_PS","csv-lookup","`#################--------`",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BAR_AR","csv-lookup","`###################------`",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BAR_PERF","csv-lookup","`#######################--`",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"GAP_CALLOUT_TEXT","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"GAP_SSR_TEXT","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_PRESENCE_EARNED","csv-lookup","10",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_REQUIRED_EARNED","csv-lookup","25",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_RECOMMENDED_EARNED","csv-lookup","10",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_RICHNESS_EARNED","csv-lookup","5",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_CROSS_REF_EARNED","csv-lookup","3",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_LINKED_DATA_EARNED","csv-lookup","4",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SDQ_VOCABULARY_EARNED","csv-lookup","10",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_MATURITY_LEVEL","csv-lookup","1",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_MATURITY_NAME","csv-lookup","Decoration",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_MATURITY_NEXT_LINE","csv-lookup","**To reach the next level:** Fill in the required and recomm",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_L_0","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_R_0","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_L_1","csv-lookup","**→**",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_R_1","csv-lookup","**←**",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_L_2","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_R_2","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_L_3","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_R_3","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_L_4","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SCHEMA_LVL_ARROW_R_4","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_READINESS_LEVEL","csv-lookup","1",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_READINESS_NAME","csv-lookup","Basic",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_READINESS_NEXT_LINE","csv-lookup","**To reach the next level:** Add full MX fields and governan",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_L_0","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_R_0","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_L_1","csv-lookup","**→**",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_R_1","csv-lookup","**←**",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_L_2","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_R_2","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_L_3","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_R_3","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_L_4","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_R_4","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_L_5","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MX_LVL_ARROW_R_5","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"COMMERCE_SCORE","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"COMMERCE_VISIBILITY_SCORE","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BAR_COMMERCE","csv-lookup","`-------------------------` **(!)**",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CATALOGUE_ANSWERABLE","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CATALOGUE_PARTIAL","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CONSIST_%","csv-lookup","87",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PLATFORM_NAME","csv-lookup","Ghost",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PLATFORM_KEY","csv-lookup","ghost",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PLATFORM_METHODOLOGY_SENTENCE","csv-lookup","The main audit uses Ghost-specific rate limits from our plat",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_FOUND","csv-lookup","true",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_HAS_NON_STANDARD","csv-lookup","false",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_PERMISSIVE","csv-lookup","true",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"STRUCTURED_DATA_FINDINGS_COUNT","csv-lookup","25",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"RENDERING_SCORES_TABLE","csv-lookup","| Dimension | Score | Band |↵|-----------|-------|------|↵| ",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"STRUCTURED_DATA_FINDINGS_TABLE","csv-lookup","The full per-entity list is in the sidecar CSV delivered wit",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"STRUCTURED_DATA_FINDINGS_SIDECAR","csv-lookup","pentatonic-structured-data-findings.csv",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PAGES_AUDITED_TABLE","csv-lookup","| Page | Type | SEO | A11y | Issues |↵|------|------|-----|-",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BROKEN_LINKS_TABLE","csv-lookup","| Source | Target | Status |↵|--------|--------|--------|↵| ",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BROKEN_LINKS_COUNT","csv-lookup","61",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AGENT_ACCESS_TABLE","csv-lookup","| AI Agent | User-Agent | Status | Result |↵|----------|----",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AGENT_ACCESS_SUMMARY","csv-lookup","All 8 agents can access the site.",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ERROR_PAGE_TABLE","csv-lookup","| Check | Result |↵|-------|--------|↵| HTTP status code | 4",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_CRAWL_DELAY_FACT","csv-lookup","No Crawl-delay directive detected, or detected but not appli",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AVG_LOAD_MS","csv-lookup","1510",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CART_LOAD_MS","csv-lookup","Not measured",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CART_VS_AVG_RATIO","csv-lookup","Not measured",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CHECKOUT_FIELD_COUNT","csv-lookup","Not measured",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CHECKOUT_STANDARD_NAMED","csv-lookup","Not measured",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CHECKOUT_AUTOCOMPLETE_COUNT","csv-lookup","Not measured",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLMS_TXT_PRESENT","csv-lookup","Yes",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLMS_TXT_LISTS_CATEGORIES","csv-lookup","No — file absent",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLMS_TXT_REFS_SITEMAP","csv-lookup","No — file absent",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PRODUCT_COVERAGE_PCT","csv-lookup","n/a (no product pages in audited set)",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"OFFER_COVERAGE_PCT","csv-lookup","n/a (no product pages in audited set)",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BREADCRUMB_COVERAGE_PCT","csv-lookup","n/a (no product pages in audited set)",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"JOURNEY_STAGE_REACHED","csv-lookup","Unknown",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"JOURNEY_STAGE_GAP","csv-lookup","Stage 1 Discovery (Partial)",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"HTTPS_COVERAGE_PCT","csv-lookup","100%",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"HSTS_COVERAGE_PCT","csv-lookup","100%",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CSP_COVERAGE_PCT","csv-lookup","0%",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PRODUCT_ALT_MISSING_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PRODUCT_FEED_DETECTED_YN","csv-lookup","Not measured",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PRODUCT_FEED_TYPE","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"VENDOR_PROTOCOL_SIGNALS","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"JSONLD_DRIFT_STATUS","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"JSONLD_DRIFT_DETAIL","csv-lookup","",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"TOTAL_IMAGES","csv-lookup","172",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WEBP_COUNT","csv-lookup","44",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SVG_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PNG_COUNT","csv-lookup","124",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"JPEG_COUNT","csv-lookup","4",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ALT_COUNT","csv-lookup","106",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ALT_PCT","csv-lookup","61.6",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ALT_MISSING_COUNT","csv-lookup","66",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ALT_DECORATIVE_COUNT","csv-lookup","4",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LAZY_COUNT","csv-lookup","4",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"EAGER_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LOADING_UNSET_COUNT","csv-lookup","168",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"JS_LAZY_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DOUBLE_LAZY_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"DOUBLE_LAZY_EXPLANATION","csv-lookup","↵> **Double-lazy loading pattern not detected** — no image i",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"JOURNEY_STAGES_PASS_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"JOURNEY_STAGES_TOTAL","csv-lookup","2",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"JOURNEY_STAGES_NA_LIST","csv-lookup","Search & Compare, Price Understanding, Purchase Confidence",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PS_FAILING_MODES_LIST","csv-lookup","Truncation Risk, Boilerplate Burial, Content Negotiation, In",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PS_TOP_FAILING_MODE","csv-lookup","Truncation Risk",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PS_TOP_FAILING_COUNT","csv-lookup","5",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PAGES_AUDITED","csv-lookup","5",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_TXT_STATUS","csv-lookup","found",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_TXT_SITEMAP_COUNT","csv-lookup","2",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_TXT_DISALLOW_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_CONTENT_SIGNALS_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_CONTENT_SIGNALS_STATUS","csv-lookup","absent (consider adding — see contentsignals.org)",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_GRADE","csv-lookup","Missing",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_URL_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_HAS_LASTMOD","csv-lookup","No",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_HAS_CHANGEFREQ","csv-lookup","No",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_HAS_PRIORITY","csv-lookup","No",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_LOC_ASSESSMENT","not-found","—",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_LASTMOD_ASSESSMENT","csv-lookup","Absent",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_CHANGEFREQ_ASSESSMENT","csv-lookup","Missing",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_PRIORITY_ASSESSMENT","csv-lookup","Absent",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLMS_TXT_HAS_DESCRIPTION","csv-lookup","Yes",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLMS_TXT_HAS_INVENTORY","csv-lookup","No",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLMS_TXT_HAS_POLICY","csv-lookup","No",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ELEVATOR_PITCH","csv-lookup","<!-- REWRITE:↵Write 2-3 paragraphs opening the Executive Sum",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"CLIENT_CONTEXT","csv-lookup","<!-- REWRITE:↵Write 1-2 sentences describing the client and ",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WORKING_WELL_INTRO","csv-lookup","<!-- REWRITE:↵Write 1-2 sentences introducing the ""What is W",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"FINDINGS_INTRO","csv-lookup","<!-- REWRITE:↵Write 1-2 sentences introducing the At a Glanc",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"HUMAN_EXPERIENCE_INTRO","csv-lookup","<!-- REWRITE:↵Write 1 sentence introducing the Human Experie",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"MACHINE_EXPERIENCE_INTRO","csv-lookup","<!-- REWRITE:↵Write 1 sentence introducing the Machine Exper",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WW_SEO_HIGHLIGHT","csv-lookup","Excellent — titles, meta descriptions, canonical URLs in pla",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WW_SECURITY_HIGHLIGHT","csv-lookup","HTTPS, HSTS, X-Content-Type-Options — 2 headers absent",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WW_SCHEMA_HIGHLIGHT","csv-lookup","Good — JSON-LD on every page with valid Schema.org vocabular",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WW_HEADING_HIGHLIGHT","csv-lookup","Could Be Better — single H1 per page, no level jumps, Lighth",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WW_CONSISTENCY_HIGHLIGHT","csv-lookup","87% — same metadata patterns across every page",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WW_AGENT_HIGHLIGHT","csv-lookup","every tested AI user-agent receives HTTP 200",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WW_PERF_HIGHLIGHT","csv-lookup","Excellent — 1510ms average load time",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"WW_DISCOVERY_HIGHLIGHT","csv-lookup","Could Be Better — robots.txt + sitemap discoverable, llms.tx",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PRIMARY_FINDING_TITLE","csv-lookup","Catalogue Visibility — 0/100",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PIPELINE_NARRATIVE","csv-lookup","<!-- REWRITE:↵Write a 2-3 sentence narrative summarising whi",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"PRICE_PARITY_TABLE","csv-lookup","| Check | Result | Notes |↵|-------|--------|-------|↵| Orga",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"ROBOTS_STATUS","csv-lookup","Present (22 directives)",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"SITEMAP_STATUS","csv-lookup","Absent",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLMS_TXT_STATUS","csv-lookup","Absent (HTTP 404)",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"LLMS_FULL_TXT_STATUS","csv-lookup","Absent (HTTP 404)",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"AGENT_CARD_STATUS","csv-lookup","Absent (HTTP 404)",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"VOCABULARY_FINDINGS_COUNT","csv-lookup","0",high,pass
+2026-05-02T13:36:31Z,report,5-infill,placeholder_fill,"BRAND","csv-lookup","Pentatonic",high,pass
+2026-05-02T13:36:31.248Z,report,1,placeholder_fill,Infill complete,Exit 0 — skeleton at mx-crm/outreach/2026-05-02/.infilled/pentatonic.md,infill-report.js,high,pass
+2026-05-02T13:36:31.248Z,report,2,placeholder_fill,rewrite-report.js invoked,infilled=mx-crm/outreach/2026-05-02/.infilled/pentatonic.md out=mx-crm/outreach/2026-05-02/pentatonic-report.md model=claude-sonnet-4-6,rewrite-report.js,high,n-a
+2026-05-02T13:36:39.915Z,report,rewrite-1,placeholder_fill,REWRITE block 1/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:36:41.593Z,report,rewrite-2,placeholder_fill,REWRITE block 2/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:36:45.003Z,report,rewrite-3,placeholder_fill,REWRITE block 3/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:36:49.352Z,report,rewrite-4,placeholder_fill,REWRITE block 4/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:36:52.778Z,report,rewrite-5,placeholder_fill,REWRITE block 5/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:12.271Z,report,rewrite-6,placeholder_fill,REWRITE block 6/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:18.593Z,report,rewrite-7,placeholder_fill,REWRITE block 7/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:21.876Z,report,rewrite-8,placeholder_fill,REWRITE block 8/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:24.066Z,report,rewrite-9,placeholder_fill,REWRITE block 9/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:27.249Z,report,rewrite-10,placeholder_fill,REWRITE block 10/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:30.343Z,report,rewrite-11,placeholder_fill,REWRITE block 11/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:31.464Z,report,rewrite-12,placeholder_fill,REWRITE block 12/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:36.881Z,report,rewrite-13,placeholder_fill,REWRITE block 13/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:41.685Z,report,rewrite-14,placeholder_fill,REWRITE block 14/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:45.494Z,report,rewrite-15,placeholder_fill,REWRITE block 15/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:49.920Z,report,rewrite-16,placeholder_fill,REWRITE block 16/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:56.938Z,report,rewrite-17,placeholder_fill,REWRITE block 17/17 replaced via API,model=claude-sonnet-4-6 status=ok,rewrite-report.js,high,pass
+2026-05-02T13:37:56.944Z,report,2,placeholder_fill,Rewrite complete,Exit 0 — final report at mx-crm/outreach/2026-05-02/pentatonic-report.md,rewrite-report.js,high,pass
+2026-05-02T13:37:56.944Z,report,end,phase_end,report phase ended,infill=ok rewrite=ok,audit-pipeline.js,high,pass
