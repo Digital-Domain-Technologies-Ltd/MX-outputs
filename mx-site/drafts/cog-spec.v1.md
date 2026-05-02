@@ -287,6 +287,7 @@ A cog without these fields is a valid cog but cannot be notarised. Notarisation 
 A cog MAY also declare:
 
 - `cogHeader` — an object carrying the spec version and the spec/runtime/runtimeDoc URLs. This is the frontmatter equivalent of the magic-header comment defined in section 2.5; the equivalence rule (mismatched values are a conformance failure) is specified in [MXS-06](https://mx.allabout.network/drafts/mxs-06-cog-identification.cog.md). `cogHeader` SHOULD be a member of `metadataFields` (excluded from the contract fingerprint) — its values describe the cog's identity, not its contract.
+- `produces` — an object declaring the typed shape of a successful execution output. Sub-keys are `shape` (a schema reference resolved per section 4.3), `format` (a MIME type or named format identifier), and `example` (an illustrative value). `produces` is informational unless a runtime chooses to validate the output against `produces.shape` post-execution; runtimes that validate MUST treat a shape mismatch as an unmodelled failure (see section 4.5). A cog with no `execute` block and no procedure-declaring field SHOULD NOT declare `produces`. Distinct from `schema` (input contract for the document itself); `produces` is the contract for what comes out, not what goes in.
 
 ### 4.3 Schema reference resolution
 
@@ -365,6 +366,14 @@ troubleshooting:
 Each `condition-slug` is a kebab-case identifier matching `^[a-z][a-z0-9-]*$`. Each `remedy` is a dotted identifier matching the validator name regex (section 4.2), resolvable in the runtime registry as a remedy function.
 
 The `troubleshooting` value, if present, MUST be an array. Each entry MUST be an object containing both fields. Cogs that declare troubleshooting blocks SHOULD include `cogs.validators.troubleshootingFormat` in `validatesAgainst` to enforce these constraints; runtimes MAY apply this validator unconditionally.
+
+A cog MAY also declare `defaultRemedy`, a sibling field naming the remedy a runtime SHOULD invoke when a failure arises that does not match any entry in `troubleshooting`:
+
+```yaml
+defaultRemedy: <dotted-name>
+```
+
+The value MUST match the validator name regex defined in section 4.2 and is resolved through the same runtime registry as `troubleshooting[].remedy`. `defaultRemedy` removes the runtime's need to guess a safe behaviour for unmodelled conditions; it pairs with `troubleshooting` (named conditions catalogued explicitly, everything else routed through the default). A cog declaring `defaultRemedy` without `troubleshooting` is valid but unusual and asserts a single fallback for every failure mode.
 
 ### 4.6 Update instructions
 
