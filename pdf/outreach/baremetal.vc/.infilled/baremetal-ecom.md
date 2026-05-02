@@ -15,7 +15,7 @@ mx:
   generate:
     script: "scripts/bin/mx.pdf.sh"
     format: "pdf"
-    output: "mx-outputs/pdf/outreach/2026-05-01/-report.pdf"
+    output: "mx-outputs/pdf/outreach/2026-05-02/-report.pdf"
     description: "Generate PDF audit report for "
 ---
 
@@ -23,8 +23,8 @@ mx:
 
 **Prepared by:** Tom Cranstoun | CogNovaMX Ltd\
 **Contact:** <info@cognovamx.com> | <https://allabout.network>\
-**Date:** 1 May 2026\
-**Report ID:** -ECOM-AUDIT-20260501
+**Date:** 2 May 2026\
+**Report ID:** -ECOM-AUDIT-20260502
 
 ---
 
@@ -64,7 +64,7 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -109,7 +109,7 @@ Facts (do not change any number, percentage, URL, page count, or name):
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -145,7 +145,7 @@ Facts (do not change any number, percentage, URL, page count, or name):
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -238,7 +238,7 @@ We tested how the site would perform if a shopping agent received these queries 
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -287,7 +287,7 @@ Facts (do not change any number, percentage, URL, page count, or name):
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -380,7 +380,7 @@ Pa11y findings for this audit (use ONLY these for specific recommendations):
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -414,7 +414,7 @@ Read `robots_txt_analysis.json` → `hasContentSignals` field.
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -445,7 +445,7 @@ Facts:
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -512,7 +512,7 @@ No non-standard response headers were recorded in this audit.
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -543,7 +543,7 @@ Facts:
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -573,7 +573,7 @@ Facts: No Crawl-delay directive detected, or detected but not applicable to mx-a
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -598,7 +598,7 @@ Facts:
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -649,7 +649,7 @@ Facts:
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -741,7 +741,7 @@ The MX Journey maps the five stages a shopping agent follows when interacting wi
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -780,7 +780,7 @@ Pipeline Survivability runs eleven reading-resilience checks on every page. Each
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -813,7 +813,7 @@ The Div Soup check runs on both served and rendered HTML so the report can tell 
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -852,7 +852,7 @@ Facts (do not change any number, percentage, URL, or selector):
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -881,7 +881,7 @@ Facts:
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -954,7 +954,7 @@ Three things are driving this:
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -1021,7 +1021,7 @@ We recorded every internal link discovered on every audited page, [N] in total. 
 AUDIT CONTEXT (applies to this block):
 - Site: baremetal.vc
 - Pages audited: 1
-- Date: 2026-05-01
+- Date: 2026-05-02
 - Scores: SEO 54/100 | Accessibility 15/100 | Discovery Readiness 10/100 | Structured Data 0/100
 - Scope: 1 page audited — write "on the audited page", NEVER "site-wide" or "across all pages"
 - Voice: write as "we" throughout — never "the page", "the site found", or "the audit detected"
@@ -1103,7 +1103,7 @@ Every book appendix this report cites, plus the book itself. On-screen readers c
 
 ---
 
-**Date:** 1 May 2026\
+**Date:** 2 May 2026\
 (c) 2026 CogNovaMX Ltd . All rights reserved.
 
 *This is a sample run. Contact CogNovaMX Ltd for a full-scope audit and continuing oversight plans.*
