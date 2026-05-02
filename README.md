@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-05-01"
-modified: "2026-05-01"
+created: "2026-05-02"
+modified: "2026-05-02"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 139 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 183 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 240 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 184 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **912** | |
+| **Total** | **1014** | |
 
 ---
 
@@ -62,7 +62,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (90 files)
+### pdf/outreach/ (191 files)
 
 - [`dotfusion-accessibility.csv`](pdf/outreach/2026-04-23/dotfusion-accessibility.csv)
 - [`dotfusion-image-optimisation.csv`](pdf/outreach/2026-04-23/dotfusion-image-optimisation.csv)
@@ -150,6 +150,107 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`mx-allabout-report-audit-log.csv`](pdf/outreach/2026-05-01/mx-allabout-report-audit-log.csv)
 - [`mx-allabout-report-llm-rounds.json`](pdf/outreach/2026-05-01/mx-allabout-report-llm-rounds.json)
 - [`mx-allabout-report.pdf`](pdf/outreach/2026-05-01/mx-allabout-report.pdf)
+- [`axiom-partners-audit-log.csv`](pdf/outreach/2026-05-02/axiom-partners-audit-log.csv)
+- [`axiom-partners-pages-audited.csv`](pdf/outreach/2026-05-02/axiom-partners-pages-audited.csv)
+- [`axiom-partners-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/axiom-partners-pipeline-inline-tag-bloat-pages.csv)
+- [`axiom-partners-report-audit-log.csv`](pdf/outreach/2026-05-02/axiom-partners-report-audit-log.csv)
+- [`axiom-partners-report-llm-rounds.json`](pdf/outreach/2026-05-02/axiom-partners-report-llm-rounds.json)
+- [`axiom-partners-report.pdf`](pdf/outreach/2026-05-02/axiom-partners-report.pdf)
+- [`baremetal-portfolio-report.pdf`](pdf/outreach/2026-05-02/baremetal-portfolio-report.pdf)
+- [`brave-capital-audit-log.csv`](pdf/outreach/2026-05-02/brave-capital-audit-log.csv)
+- [`brave-capital-pages-audited.csv`](pdf/outreach/2026-05-02/brave-capital-pages-audited.csv)
+- [`brave-capital-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/brave-capital-pipeline-inline-tag-bloat-pages.csv)
+- [`brave-capital-report-audit-log.csv`](pdf/outreach/2026-05-02/brave-capital-report-audit-log.csv)
+- [`brave-capital-report-llm-rounds.json`](pdf/outreach/2026-05-02/brave-capital-report-llm-rounds.json)
+- [`brave-capital-report.pdf`](pdf/outreach/2026-05-02/brave-capital-report.pdf)
+- [`crucible-capital-audit-log.csv`](pdf/outreach/2026-05-02/crucible-capital-audit-log.csv)
+- [`crucible-capital-pages-audited.csv`](pdf/outreach/2026-05-02/crucible-capital-pages-audited.csv)
+- [`crucible-capital-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/crucible-capital-pipeline-inline-tag-bloat-pages.csv)
+- [`crucible-capital-report-audit-log.csv`](pdf/outreach/2026-05-02/crucible-capital-report-audit-log.csv)
+- [`crucible-capital-report-llm-rounds.json`](pdf/outreach/2026-05-02/crucible-capital-report-llm-rounds.json)
+- [`crucible-capital-report.pdf`](pdf/outreach/2026-05-02/crucible-capital-report.pdf)
+- [`danger-devices-audit-log.csv`](pdf/outreach/2026-05-02/danger-devices-audit-log.csv)
+- [`danger-devices-pages-audited.csv`](pdf/outreach/2026-05-02/danger-devices-pages-audited.csv)
+- [`danger-devices-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/danger-devices-pipeline-inline-tag-bloat-pages.csv)
+- [`danger-devices-report-audit-log.csv`](pdf/outreach/2026-05-02/danger-devices-report-audit-log.csv)
+- [`danger-devices-report-llm-rounds.json`](pdf/outreach/2026-05-02/danger-devices-report-llm-rounds.json)
+- [`danger-devices-report.pdf`](pdf/outreach/2026-05-02/danger-devices-report.pdf)
+- [`dreambig-semi-audit-log.csv`](pdf/outreach/2026-05-02/dreambig-semi-audit-log.csv)
+- [`dreambig-semi-pages-audited.csv`](pdf/outreach/2026-05-02/dreambig-semi-pages-audited.csv)
+- [`dreambig-semi-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/dreambig-semi-pipeline-inline-tag-bloat-pages.csv)
+- [`dreambig-semi-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-05-02/dreambig-semi-pipeline-truncation-risk-pages.csv)
+- [`dreambig-semi-report-audit-log.csv`](pdf/outreach/2026-05-02/dreambig-semi-report-audit-log.csv)
+- [`dreambig-semi-report-llm-rounds.json`](pdf/outreach/2026-05-02/dreambig-semi-report-llm-rounds.json)
+- [`dreambig-semi-report.pdf`](pdf/outreach/2026-05-02/dreambig-semi-report.pdf)
+- [`dreambig-semi-structured-data-findings.csv`](pdf/outreach/2026-05-02/dreambig-semi-structured-data-findings.csv)
+- [`evantic-capital-audit-log.csv`](pdf/outreach/2026-05-02/evantic-capital-audit-log.csv)
+- [`evantic-capital-pages-audited.csv`](pdf/outreach/2026-05-02/evantic-capital-pages-audited.csv)
+- [`evantic-capital-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/evantic-capital-pipeline-inline-tag-bloat-pages.csv)
+- [`evantic-capital-report-audit-log.csv`](pdf/outreach/2026-05-02/evantic-capital-report-audit-log.csv)
+- [`evantic-capital-report-llm-rounds.json`](pdf/outreach/2026-05-02/evantic-capital-report-llm-rounds.json)
+- [`evantic-capital-report.pdf`](pdf/outreach/2026-05-02/evantic-capital-report.pdf)
+- [`exo-imaging-audit-log.csv`](pdf/outreach/2026-05-02/exo-imaging-audit-log.csv)
+- [`exo-imaging-pages-audited.csv`](pdf/outreach/2026-05-02/exo-imaging-pages-audited.csv)
+- [`exo-imaging-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/exo-imaging-pipeline-inline-tag-bloat-pages.csv)
+- [`exo-imaging-pipeline-spa-shell-pages.csv`](pdf/outreach/2026-05-02/exo-imaging-pipeline-spa-shell-pages.csv)
+- [`exo-imaging-report-audit-log.csv`](pdf/outreach/2026-05-02/exo-imaging-report-audit-log.csv)
+- [`exo-imaging-report-llm-rounds.json`](pdf/outreach/2026-05-02/exo-imaging-report-llm-rounds.json)
+- [`exo-imaging-report.pdf`](pdf/outreach/2026-05-02/exo-imaging-report.pdf)
+- [`exo-imaging-structured-data-findings.csv`](pdf/outreach/2026-05-02/exo-imaging-structured-data-findings.csv)
+- [`fluidstack-audit-log.csv`](pdf/outreach/2026-05-02/fluidstack-audit-log.csv)
+- [`fluidstack-pages-audited.csv`](pdf/outreach/2026-05-02/fluidstack-pages-audited.csv)
+- [`fluidstack-pipeline-boilerplate-burial-pages.csv`](pdf/outreach/2026-05-02/fluidstack-pipeline-boilerplate-burial-pages.csv)
+- [`fluidstack-pipeline-http-content-negotiation-(vary)-pages.csv`](pdf/outreach/2026-05-02/fluidstack-pipeline-http-content-negotiation-(vary)-pages.csv)
+- [`fluidstack-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/fluidstack-pipeline-inline-tag-bloat-pages.csv)
+- [`fluidstack-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-05-02/fluidstack-pipeline-truncation-risk-pages.csv)
+- [`fluidstack-report-audit-log.csv`](pdf/outreach/2026-05-02/fluidstack-report-audit-log.csv)
+- [`fluidstack-report-llm-rounds.json`](pdf/outreach/2026-05-02/fluidstack-report-llm-rounds.json)
+- [`fluidstack-report.pdf`](pdf/outreach/2026-05-02/fluidstack-report.pdf)
+- [`meetkai-audit-log.csv`](pdf/outreach/2026-05-02/meetkai-audit-log.csv)
+- [`meetkai-pages-audited.csv`](pdf/outreach/2026-05-02/meetkai-pages-audited.csv)
+- [`meetkai-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/meetkai-pipeline-inline-tag-bloat-pages.csv)
+- [`meetkai-report-audit-log.csv`](pdf/outreach/2026-05-02/meetkai-report-audit-log.csv)
+- [`meetkai-report-llm-rounds.json`](pdf/outreach/2026-05-02/meetkai-report-llm-rounds.json)
+- [`meetkai-report.pdf`](pdf/outreach/2026-05-02/meetkai-report.pdf)
+- [`mx-allabout-network-audit-log.csv`](pdf/outreach/2026-05-02/mx-allabout-network-audit-log.csv)
+- [`mx-allabout-network-pages-audited.csv`](pdf/outreach/2026-05-02/mx-allabout-network-pages-audited.csv)
+- [`mx-allabout-network-report-audit-log.csv`](pdf/outreach/2026-05-02/mx-allabout-network-report-audit-log.csv)
+- [`mx-allabout-network-report-llm-rounds.json`](pdf/outreach/2026-05-02/mx-allabout-network-report-llm-rounds.json)
+- [`mx-allabout-network-report.pdf`](pdf/outreach/2026-05-02/mx-allabout-network-report.pdf)
+- [`oxide-computer-audit-log.csv`](pdf/outreach/2026-05-02/oxide-computer-audit-log.csv)
+- [`oxide-computer-pages-audited.csv`](pdf/outreach/2026-05-02/oxide-computer-pages-audited.csv)
+- [`oxide-computer-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/oxide-computer-pipeline-inline-tag-bloat-pages.csv)
+- [`oxide-computer-report-audit-log.csv`](pdf/outreach/2026-05-02/oxide-computer-report-audit-log.csv)
+- [`oxide-computer-report-llm-rounds.json`](pdf/outreach/2026-05-02/oxide-computer-report-llm-rounds.json)
+- [`oxide-computer-report.pdf`](pdf/outreach/2026-05-02/oxide-computer-report.pdf)
+- [`pentatonic-audit-log.csv`](pdf/outreach/2026-05-02/pentatonic-audit-log.csv)
+- [`pentatonic-pages-audited.csv`](pdf/outreach/2026-05-02/pentatonic-pages-audited.csv)
+- [`pentatonic-pipeline-boilerplate-burial-pages.csv`](pdf/outreach/2026-05-02/pentatonic-pipeline-boilerplate-burial-pages.csv)
+- [`pentatonic-pipeline-http-content-negotiation-(vary)-pages.csv`](pdf/outreach/2026-05-02/pentatonic-pipeline-http-content-negotiation-(vary)-pages.csv)
+- [`pentatonic-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/pentatonic-pipeline-inline-tag-bloat-pages.csv)
+- [`pentatonic-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-05-02/pentatonic-pipeline-truncation-risk-pages.csv)
+- [`pentatonic-report-audit-log.csv`](pdf/outreach/2026-05-02/pentatonic-report-audit-log.csv)
+- [`pentatonic-report-llm-rounds.json`](pdf/outreach/2026-05-02/pentatonic-report-llm-rounds.json)
+- [`pentatonic-report.pdf`](pdf/outreach/2026-05-02/pentatonic-report.pdf)
+- [`pentatonic-structured-data-findings.csv`](pdf/outreach/2026-05-02/pentatonic-structured-data-findings.csv)
+- [`rivan-audit-log.csv`](pdf/outreach/2026-05-02/rivan-audit-log.csv)
+- [`rivan-pages-audited.csv`](pdf/outreach/2026-05-02/rivan-pages-audited.csv)
+- [`rivan-pipeline-http-content-negotiation-(vary)-pages.csv`](pdf/outreach/2026-05-02/rivan-pipeline-http-content-negotiation-(vary)-pages.csv)
+- [`rivan-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/rivan-pipeline-inline-tag-bloat-pages.csv)
+- [`rivan-report-audit-log.csv`](pdf/outreach/2026-05-02/rivan-report-audit-log.csv)
+- [`rivan-report-llm-rounds.json`](pdf/outreach/2026-05-02/rivan-report-llm-rounds.json)
+- [`rivan-report.pdf`](pdf/outreach/2026-05-02/rivan-report.pdf)
+- [`roam-robotics-audit-log.csv`](pdf/outreach/2026-05-02/roam-robotics-audit-log.csv)
+- [`roam-robotics-pages-audited.csv`](pdf/outreach/2026-05-02/roam-robotics-pages-audited.csv)
+- [`roam-robotics-report-audit-log.csv`](pdf/outreach/2026-05-02/roam-robotics-report-audit-log.csv)
+- [`roam-robotics-report-llm-rounds.json`](pdf/outreach/2026-05-02/roam-robotics-report-llm-rounds.json)
+- [`roam-robotics-report.pdf`](pdf/outreach/2026-05-02/roam-robotics-report.pdf)
+- [`steel-atlas-audit-log.csv`](pdf/outreach/2026-05-02/steel-atlas-audit-log.csv)
+- [`steel-atlas-pages-audited.csv`](pdf/outreach/2026-05-02/steel-atlas-pages-audited.csv)
+- [`steel-atlas-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-02/steel-atlas-pipeline-inline-tag-bloat-pages.csv)
+- [`steel-atlas-report-audit-log.csv`](pdf/outreach/2026-05-02/steel-atlas-report-audit-log.csv)
+- [`steel-atlas-report-llm-rounds.json`](pdf/outreach/2026-05-02/steel-atlas-report-llm-rounds.json)
+- [`steel-atlas-report.pdf`](pdf/outreach/2026-05-02/steel-atlas-report.pdf)
 - [`baremetal-ecom-verification.json`](pdf/outreach/baremetal.vc/.infilled/baremetal-ecom-verification.json)
 - [`baremetal-ecom.md`](pdf/outreach/baremetal.vc/.infilled/baremetal-ecom.md)
 - [`baremetal-ecom-pages-audited.csv`](pdf/outreach/baremetal.vc/baremetal-ecom-pages-audited.csv)
@@ -158,6 +259,7 @@ PDF documents — books, manuals, presentations, blog exports.
   - **2026-04-24/** (11 files)
   - **2026-04-30/** (41 files)
   - **2026-05-01/** (15 files)
+  - **2026-05-02/** (101 files)
   - **baremetal.vc/** (4 files)
 
 ### pdf/reginald/ (23 files)
@@ -197,7 +299,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 
-### md/reports/ (182 files)
+### md/reports/ (183 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -232,7 +334,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (154 files)
+#### md/reports/directors/ (155 files)
 
 **build/** (3 files)
 
@@ -246,7 +348,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (147 files)
+**session/** (148 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -386,6 +488,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-05-01-afternoon-report.md`](md/reports/directors/session/2026-05-01-afternoon-report.md)
 - [`2026-05-01-evening-report.md`](md/reports/directors/session/2026-05-01-evening-report.md)
 - [`2026-05-01-morning-report.md`](md/reports/directors/session/2026-05-01-morning-report.md)
+- [`2026-05-02-evening-report.md`](md/reports/directors/session/2026-05-02-evening-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -532,4 +635,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-01 at 22:37*
+*Generated on 2026-05-02 at 17:23*
