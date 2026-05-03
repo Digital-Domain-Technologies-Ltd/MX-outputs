@@ -7,6 +7,7 @@ modified: 2026-03-17
 author: Tom Cranstoun
 
 mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/reginald-mirror/content.md
   maintainer: info@cognovamx.com
   license: proprietary
   status: published
@@ -33,7 +34,6 @@ mx:
         description: "Full mirror sync — update registry index then regenerate Reginald mirror."
         usage: |
           ## SYNC — Full Mirror Pipeline
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/reginald-mirror/content.md
 
           Runs the complete sync pipeline to bring the Reginald web mirror
           up to date with all source cogs.
