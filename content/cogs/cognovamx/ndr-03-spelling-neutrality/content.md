@@ -13,6 +13,7 @@ mx:
   partOf: mx-the-gathering
   tags: [ndr, naming, spelling, neutral, abbreviation, standards, org, license]
   audience: both
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/ndr-03-spelling-neutrality/content.md
 
   x-mx-ndr:
     number: 3

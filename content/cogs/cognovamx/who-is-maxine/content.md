@@ -14,6 +14,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/who-is-maxine/content.md
 
   x-mx-category: learning
   partOf: mx-maxine-lives

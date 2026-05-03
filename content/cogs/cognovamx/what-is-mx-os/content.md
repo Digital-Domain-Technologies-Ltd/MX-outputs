@@ -13,6 +13,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/what-is-mx-os/content.md
 
   x-mx-category: mx-core
   partOf: mx-os

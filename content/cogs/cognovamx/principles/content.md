@@ -14,6 +14,7 @@ mx:
   partOf: mx-ssot
   audience: [humans, machines]
   license: proprietary
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/principles/content.md
 ---
 
 # MX Principles

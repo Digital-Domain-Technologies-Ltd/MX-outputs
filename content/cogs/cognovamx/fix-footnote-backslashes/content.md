@@ -14,6 +14,7 @@ mx:
   license: proprietary
   status: active
   x-mx-riskLevel: high
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/fix-footnote-backslashes/content.md
 
   x-mx-category: mx-tools
   partOf: mx-os

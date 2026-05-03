@@ -21,6 +21,7 @@ mx:
   maintainer: "info@cognovamx.com"
   reviewCycle: quarterly
   expires: 2026-09-19
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/reginald/reginald.cog.md
 ---
 
 # REGINALD

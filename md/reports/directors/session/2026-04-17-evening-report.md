@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening, audit-pipeline, mx-audit, mx.allabout.network]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-17-evening-report.md
 ---
 
 # Co-Directors Report — Audit-pipeline post-mortem, sidecar design, and vocab-drift eliminated

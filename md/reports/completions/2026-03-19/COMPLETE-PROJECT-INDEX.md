@@ -7,6 +7,7 @@ version: "1.0"
 
 mx:
   status: active
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-03-19/COMPLETE-PROJECT-INDEX.md
 ---
 
 # Complete Project Index: Templates v2.0 + mx-audit Integration

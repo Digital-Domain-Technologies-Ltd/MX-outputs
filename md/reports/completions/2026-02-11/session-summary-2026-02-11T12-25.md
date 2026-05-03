@@ -9,6 +9,7 @@ mx:
   duration: "~2.5 hours"
   contentType: "refactoring"
   status: "completed"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-11/session-summary-2026-02-11T12-25.md
 ---
 
 # Session Summary: ai→sop Field Rename Across Entire MX Ecosystem

@@ -33,6 +33,7 @@ mx:
         description: "Full mirror sync — update registry index then regenerate Reginald mirror."
         usage: |
           ## SYNC — Full Mirror Pipeline
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/reginald-mirror/content.md
 
           Runs the complete sync pipeline to bring the Reginald web mirror
           up to date with all source cogs.

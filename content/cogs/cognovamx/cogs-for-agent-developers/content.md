@@ -13,6 +13,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cogs-for-agent-developers/content.md
 
   x-mx-category: learning
   partOf: mx-the-gathering

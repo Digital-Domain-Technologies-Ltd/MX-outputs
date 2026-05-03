@@ -15,6 +15,7 @@ mx:
   buildsOn: [what-is-a-cog, fields]
   partOf: mx-maxine-lives
   runbook: "This document defines how MX metadata works in every file type. Read this before adding metadata to non-markdown files. The Gathering spec defines the principles; this document defines the rules."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-metadata-conventions/content.md
 ---
 
 # MX Metadata Conventions — Embrace and Extend

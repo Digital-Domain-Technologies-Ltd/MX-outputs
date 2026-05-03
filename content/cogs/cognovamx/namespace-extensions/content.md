@@ -13,6 +13,7 @@ mx:
   buildsOn: [fields, adr-02-namespace-policy, vendor-extensions-policy]
   tags: [namespace, extensions, vendor, x-mx, metadata, policy, standard]
   audience: [humans, machines]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/namespace-extensions/content.md
 
   contentType: reference
   runbook: "This cog explains how MX metadata namespaces work. Use it to understand which fields belong to the standard, which are vendor extensions, and how to create new extensions. The prefix on a field name tells you everything: no prefix = standard, mx: = standard extension, x-mx- = vendor public, x-mx-p- = vendor private."

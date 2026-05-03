@@ -23,6 +23,7 @@ mx:
   refersTo:
     - "mx-canon/mx-the-gathering/reference-implementations/_tools/generate-multilingual.js"
     - "mx-canon/mx-the-gathering/reference-implementations/_tools/README.cog.md"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/manual-multilingual/content.md
 ---
 
 # Multilingual Template Generator

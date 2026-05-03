@@ -8,6 +8,7 @@ mx:
   sessionType: restructure
   co-author: Tom Cranstoun
   status: complete
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/build/2026-02-24-repository-restructure.md
 ---
 
 

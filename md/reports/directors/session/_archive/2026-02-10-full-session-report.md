@@ -8,6 +8,7 @@ sessionType: full
 mx:
   audience: stakeholders
   confidential: true
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/_archive/2026-02-10-full-session-report.md
 ---
 
 

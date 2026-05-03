@@ -12,6 +12,7 @@ mx:
   contentType: guide
   tags: [onboarding, team, setup, mx-os, getting-started]
   audience: ["humans"]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/getting-started/content.md
 ---
 
 # Getting Started with MX OS

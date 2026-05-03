@@ -107,6 +107,7 @@ mx:
     contentType: "action-doc"
     runbook: "mx exec mx-scaffold"
     semantic: true
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-scaffold/content.md
 ---
 
 # MX Scaffold

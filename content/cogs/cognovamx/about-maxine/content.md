@@ -15,6 +15,7 @@ mx:
   buildsOn: [maxine-vision, uber-maxine-plan]
   partOf: mx-maxine-lives
   runbook: "This document explains how Maxine's server-client architecture works. Read this to understand the relationship between the embedded server, the three client surfaces, and the communication protocols that connect them."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/about-maxine/content.md
 ---
 
 # About Maxine — The Server-Client Architecture

@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, morning]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-01-morning-report.md
 ---
 
 # Co-Directors Report — Spell-check infrastructure, blog publish, and audit pipeline upgrade

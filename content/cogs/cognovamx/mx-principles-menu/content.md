@@ -47,6 +47,7 @@ mx:
   - humans
   - machines
   runbook: ''
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-principles-menu/content.md
 ---
 
 # MX Principles Menu

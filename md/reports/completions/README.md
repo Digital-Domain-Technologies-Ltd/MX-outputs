@@ -8,6 +8,7 @@ version: "1.0"
 
 mx:
   status: active
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/README.md
 ---
 
 # Completion Reports & Session Summaries System

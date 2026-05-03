@@ -16,6 +16,7 @@ mx:
     - mx-messaging-framework
   partOf: "MX OS"
   runbook: |
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/business-benefits/content.md
 ---
 
 # MX Business Benefits — Four Strategic Outcomes

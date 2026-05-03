@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-23-evening-report.md
 ---
 
 # Co-Directors Report — NEOM Wellbeing Report + Pa11y Recurring Pattern Detector

@@ -24,6 +24,7 @@ mx:
     not re-litigated each time a new field is proposed.
   copyright: "Copyright (c) 2026 Tom Cranstoun. All rights reserved."
   license: "MIT for the rule text itself; MX canon content governed by The Gathering."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/field-triage-rubric/content.md
 ---
 
 # MX Field Triage Rubric

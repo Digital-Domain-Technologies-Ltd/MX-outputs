@@ -6,6 +6,9 @@ version: "1.0"
 author: Tom Cranstoun
 audience: stakeholders
 confidential: true
+
+mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-30-afternoon-report.md
 ---
 
 # Printworks Audit: Clean Sheet, Then Fix the Two Gaps

@@ -9,6 +9,7 @@ mx:
   audience: stakeholders
   confidential: true
   sessionType: full
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/build/2026-02-10-joymaker-build-report.md
 ---
 
 

@@ -17,6 +17,7 @@ mx:
   replacedBy:
     prose: datalake/manuscripts/mx-books/mx-appendices/appendix-m-index-of-metadata.md
   runbook: "Stub. HTML meta tag stack, MX carrier tags, and the what-NOT-to-include list are in Appendix M §26 — HTML Carrier Writing Guide."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-html-writing-guide/content.md
 ---
 
 # MX HTML Writing Guide — Moved to Appendix M

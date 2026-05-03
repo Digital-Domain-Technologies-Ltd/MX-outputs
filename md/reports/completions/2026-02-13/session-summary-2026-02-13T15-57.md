@@ -9,6 +9,7 @@ mx:
   duration: "~2 hours"
   contentType: "refactoring"
   status: "completed"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-13/session-summary-2026-02-13T15-57.md
 ---
 
 # Session Summary: Book Consolidation — All Publications Moved to Datalake

@@ -16,6 +16,7 @@ mx:
   tags: [blocks, architecture, evolution, specification, history, design]
   audience: [humans, agents]
   contentType: specification
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/block-architecture-evolution/content.md
 ---
 
 # Block Architecture Evolution

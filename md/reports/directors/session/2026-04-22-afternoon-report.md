@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, afternoon]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-22-afternoon-report.md
 ---
 
 # Co-Directors Report, Site-Chrome Alignment, Em-Dash Policy, Submodule-Rebase Hardening

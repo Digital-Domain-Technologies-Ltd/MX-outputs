@@ -11,6 +11,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, afternoon]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-24-afternoon-report.md
 ---
 
 # Co-Directors Report -- Leica Audit, Frankfurt Materials, Contacts Reshape

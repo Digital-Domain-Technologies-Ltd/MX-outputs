@@ -13,6 +13,7 @@ mx:
   license: proprietary
   status: active
   x-mx-riskLevel: low
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cogify-this/content.md
 
   x-mx-category: mx-tools
   partOf: mx-cog-registry

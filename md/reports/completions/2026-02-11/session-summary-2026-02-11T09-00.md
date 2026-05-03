@@ -9,6 +9,7 @@ mx:
   duration: "~2 hours"
   contentType: "feature-implementation"
   status: "completed"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-11/session-summary-2026-02-11T09-00.md
 ---
 
 # Session Summary: SOP Reframing, Registry Snapshot, and Universal Cog Executor

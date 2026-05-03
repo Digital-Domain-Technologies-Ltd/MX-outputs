@@ -8,6 +8,7 @@ mx:
   x-mx-segment: "afternoon"
   audience: stakeholders
   confidential: true
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-01-afternoon-directors-report.md
 ---
 
 # Mount Table Architecture: Git Repos as Trackable Filesystems

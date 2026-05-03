@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, morning, repo-hygiene, governance]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-27-morning-report.md
 ---
 
 # Co-Directors Report — mx-collaboration drain and submodule retirement

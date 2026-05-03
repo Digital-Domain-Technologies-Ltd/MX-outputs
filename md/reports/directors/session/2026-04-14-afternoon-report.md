@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, afternoon, audit, documentation, governance]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-14-afternoon-report.md
 ---
 
 # Co-Directors Report — Audit Pipeline Hardening and CLAUDE.md Refactor

@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-02-evening-report.md
 ---
 
 # Co-Directors Report — Global Accessibility Framing + Baremetal Audit Suite

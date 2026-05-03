@@ -13,6 +13,9 @@ cogHeader:
   spec: https://mx.allabout.network/drafts/cog-spec.v1.md
   runtime: https://mx.allabout.network/drafts/cog-runtime.md
   runtimeDoc: https://mx.allabout.network/drafts/cog-runtime.md
+
+mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/drafts/cog-spec.v1.md
 ---
 
 # Cog Specification

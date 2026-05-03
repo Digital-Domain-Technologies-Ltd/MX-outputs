@@ -256,6 +256,7 @@ mx:
     semantic: true
     convergence: true
     accessibility: true
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/whats-changed/content.md
 ---
 
 # What's Changed

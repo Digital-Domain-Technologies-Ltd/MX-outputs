@@ -18,6 +18,7 @@ mx:
     prose: datalake/manuscripts/mx-books/mx-appendices/appendix-m-index-of-metadata.md
     data: mx-canon/ssot/fields-data.yaml
   runbook: "This file is a stub. The machine-readable dictionary is at mx-canon/ssot/fields-data.yaml. The human-readable definitions are in Appendix M — Index of Metadata (§22 Field Catalogue, §23 Folder Metadata, §25 Carrier Formats, §26 HTML Carrier). Do not add content here."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/fields/content.md
 ---
 
 # MX Field Dictionary — Moved to Appendix M

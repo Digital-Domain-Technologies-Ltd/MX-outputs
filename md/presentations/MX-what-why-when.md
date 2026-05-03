@@ -13,6 +13,7 @@ mx:
   outputs:
   - MX-what-why-when.pptx
   - MX-what-why-when.pdf
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/presentations/MX-what-why-when.md
 ---
 
 <!-- _class: lead -->

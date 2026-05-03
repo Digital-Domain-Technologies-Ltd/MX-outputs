@@ -15,6 +15,7 @@ mx:
   audience: [agents, tech]
   license: proprietary
   deliverable: "reusable validation rules for cog quality gates"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/shared-validation-policy/content.md
 ---
 
 # Shared Validation Policy

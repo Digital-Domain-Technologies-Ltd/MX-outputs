@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, morning, stripe, webhook, fulfilment, audit, readability, rate-limiter, skills, route-sync]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-14-morning-report.md
 ---
 
 # Co-Directors Report — Printer Email Pipeline Hardened and Verified

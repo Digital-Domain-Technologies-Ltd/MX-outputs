@@ -12,6 +12,7 @@ mx:
   x-mx-riskLevel: medium
   tags: [playwright, visual-capture, html-css-audit, dom-tree, computed-css, cascade-resolution, reference-implementation, pixel-perfect, automation, cogification, bilingual, single-language-toggle, offline-capable, validation-baseline]
   audience: [tech, business]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/pixel-perfect-web-replication/content.md
 
   buildsOn: [cogify-this, what-is-a-cog]
 

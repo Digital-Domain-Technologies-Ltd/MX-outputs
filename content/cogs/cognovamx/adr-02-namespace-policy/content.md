@@ -20,6 +20,7 @@ mx:
   - vocabulary
   partOf: mx-the-gathering
   x-mx-category: standard
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/adr-02-namespace-policy/content.md
 ---
 
 # ADR: Namespace Policy — Standard Fields and mx: Namespace

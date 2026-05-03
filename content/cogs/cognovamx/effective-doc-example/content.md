@@ -15,6 +15,7 @@ mx:
   audience: [agents, tech]
   license: proprietary
   deliverable: "worked example of effective doc resolution chain"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/effective-doc-example/content.md
 ---
 
 # Effective Doc Resolution — Reference Implementation

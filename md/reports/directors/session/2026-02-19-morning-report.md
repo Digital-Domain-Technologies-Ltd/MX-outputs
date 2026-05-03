@@ -10,6 +10,7 @@ mx:
   sessionStart: "05:00"
   sessionEnd: "05:45"
   status: completed
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-19-morning-report.md
 ---
 
 # Co-Directors Report

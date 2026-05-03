@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-01-evening-report.md
 ---
 
 # Co-Directors Report — Audit pipeline production-ready: v13/v14 runs and self-audit delivered

@@ -16,6 +16,7 @@ mx:
   audience: [humans, machines]
   cacheability: permanent
   runbook: "Deferred draft. Read the banner and §2 Recommendation only. The original body specifying profile-specific fields for book, blog, contact, folder, report, audit, event, routing, script, code-*, media-*, and database-* was written before the 2026-04-15 canon split. That split moved most of those profiles out of Gathering scope. The Gathering admin team should formally withdraw this note."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/draft-profile-metadata/content.md
 ---
 
 # MX Profile Metadata note (DEFERRED)

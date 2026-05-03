@@ -8,6 +8,7 @@ mx:
   x-mx-segment: "morning"
   audience: stakeholders
   confidential: true
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-07-morning-report.md
 ---
 
 

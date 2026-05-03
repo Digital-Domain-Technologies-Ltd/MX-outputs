@@ -11,6 +11,7 @@ author: Tom Cranstoun
 mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-id/content.md
 
   x-mx-category: mx-core
   status: active

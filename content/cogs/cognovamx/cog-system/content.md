@@ -44,6 +44,7 @@ mx:
     caching: permitted for 24 hours
     redistribution: with attribution to MX Reginald Ltd
     commercialUse: permitted
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-system/content.md
 ---
 
 # What is a COG?

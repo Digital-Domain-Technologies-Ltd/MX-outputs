@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening, security, upgraded-reginald, podcast, dita]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-22-evening-report.md
 ---
 
 # Co-Directors Report, Boye CMS Experts Profile, pdf:doc Pipeline Hardened, Egress Pre-Flight

@@ -26,6 +26,7 @@ mx:
     - Usage guide and workflow for mx reginald
     - Troubleshooting and best practices
   refersTo: []
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-reginald-manual/content.md
 ---
 
 # MX Manual

@@ -9,6 +9,7 @@ mx:
   duration: "~3 hours"
   contentType: "feature-implementation"
   status: "completed"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-10/session-summary-2026-02-10T17-49.md
 ---
 
 # Session Summary: MX Joymaker Splash Screen, Co-Directors Report, Submodule Cleanup

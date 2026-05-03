@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening, consolidation, business-plans]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-26-evening-report.md
 ---
 
 # Co-Directors Report -- Business Plans Consolidated Into the Brain

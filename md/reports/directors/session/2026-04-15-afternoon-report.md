@@ -15,6 +15,7 @@ mx:
   isAiGenerated: true
   generatedBy: "claude-opus-4-6"
   reviewedBy: "Tom Cranstoun"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-15-afternoon-report.md
 ---
 
 # Co-Directors Report — Audit Pipeline Performance Hardening

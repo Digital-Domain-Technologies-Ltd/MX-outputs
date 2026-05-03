@@ -173,6 +173,7 @@ mx:
     semantic: true
     convergence: true
     accessibility: true
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/registry-of-registries/content.md
 ---
 
 # The Registry of Registries

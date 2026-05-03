@@ -21,6 +21,7 @@ mx:
     context: "The cog specification had two types: info-doc and action-doc. This was the wrong cut."
     decision: "Replace two cog types with one document type containing open-ended blocks."
     consequences: "Replaces cog-unified-spec v1.0. Affects books, pitches, and The Gathering's standard."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/adr-01-block-architecture/content.md
 
   buildsOn: [what-is-a-cog, what-is-mx-os]
 

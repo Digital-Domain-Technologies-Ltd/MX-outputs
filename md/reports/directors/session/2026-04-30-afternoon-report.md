@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, afternoon]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-30-afternoon-report.md
 ---
 
 # Co-Directors Report — Audit pipeline coordinator, v2 baremetal.vc report, and logging improvements

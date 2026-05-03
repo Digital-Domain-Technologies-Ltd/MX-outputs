@@ -13,6 +13,7 @@ mx:
   partOf: mx-the-gathering
   tags: [ndr, naming, camelCase, fields, metadata, schema-org, dublin-core, standards]
   audience: both
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/ndr-02-camelcase-naming/content.md
 
   x-mx-ndr:
     number: 2

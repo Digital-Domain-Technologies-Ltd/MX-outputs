@@ -8,6 +8,7 @@ mx:
   x-mx-segment: "morning"
   audience: stakeholders
   confidential: true
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-27-morning-report.md
 ---
 
 # Datalake Restructured Into 5 Purpose-Based Categories

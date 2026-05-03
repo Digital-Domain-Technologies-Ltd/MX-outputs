@@ -14,6 +14,7 @@ mx:
   confidential: true
   x-mx-segment: afternoon
   tags: [directors-report, session, afternoon, tg-community, stream, standards]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-16-afternoon-report.md
 ---
 
 # Co-Directors Report -- TG-Community Integration

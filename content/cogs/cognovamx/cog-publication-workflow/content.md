@@ -11,6 +11,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: high
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-publication-workflow/content.md
 
   x-mx-category: mx-tools
   partOf: mx-os

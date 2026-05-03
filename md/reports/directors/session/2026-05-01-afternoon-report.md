@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, afternoon]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-01-afternoon-report.md
 ---
 
 # Co-Directors Report — Baremetal v10 audit delivered + fierce-critic run limiter

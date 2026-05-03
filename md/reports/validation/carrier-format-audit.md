@@ -11,6 +11,7 @@ mx:
   contentType: report
   reportType: audit
   tags: [carrier-format, compliance, metadata, audit]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/validation/carrier-format-audit.md
 ---
 
 # Carrier Format Compliance Audit

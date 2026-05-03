@@ -10,6 +10,7 @@ mx:
   status: active
   contentType: release-notes
   x-mx-category: audit-suite
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-03-19/MX-HUB-UPDATES-2026-03-19.md
 ---
 
 # MX-Hub Updates: Templates v2.0 + mx-audit Integration

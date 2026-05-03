@@ -14,6 +14,7 @@ mx:
   buildsOn: [fields]
   tags: [standards, alignment, schema-org, dublin-core, open-graph, governance, naming-conventions]
   audience: [humans, machines]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-standards-alignment/content.md
 
   contentType: standards-alignment
   runbook: "This document explains how MX follows existing web metadata standards. Read it when implementing validators, designing new fields, or explaining MX's design decisions. The governance section clarifies namespace ownership. The naming-conventions section explains context-dependent rules. The standards-precedents section provides citations."

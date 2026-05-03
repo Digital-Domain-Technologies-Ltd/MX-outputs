@@ -10,6 +10,7 @@ mx:
   status: active
   x-mx-segment: morning
   date: 2026-02-21
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-21-morning-report.md
 ---
 
 # Co-Directors Report

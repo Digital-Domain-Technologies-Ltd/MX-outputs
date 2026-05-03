@@ -17,6 +17,7 @@ mx:
   supersedes:
     - "cog-spec.md v0.3 (engine capability spec)"
     - "cog-specification.md (Reginald trust/governance spec)"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/specifications-cog-unified-spec/content.md
 ---
 
 # MX Cog Unified Specification v2.2-draft

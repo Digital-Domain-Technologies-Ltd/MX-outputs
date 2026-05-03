@@ -46,6 +46,7 @@ mx:
     version: '1.0'
     contentModel:
       description: 'Header content is authored as a fragment in /nav.
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/header/content.md
 
         The block loads this fragment and transforms it into
 

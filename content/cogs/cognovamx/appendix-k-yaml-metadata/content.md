@@ -14,6 +14,7 @@ mx:
   buildsOn: [fields]
   tags: [template, appendix-k, mx-pattern, yaml, frontmatter, page-pattern]
   audience: [machines, humans]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/appendix-k-yaml-metadata/content.md
 
   contentType: template
   runbook: "Copy the YAML template below into a new .cog.md file. Fill in every field. Validate against datalake/knowledge/reference/schemas/mx-page-pattern.json."

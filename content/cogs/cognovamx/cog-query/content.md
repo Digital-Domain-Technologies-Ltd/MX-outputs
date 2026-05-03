@@ -13,6 +13,7 @@ mx:
   license: proprietary
   status: active
   x-mx-riskLevel: medium
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-query/content.md
 
   x-mx-category: mx-core
   partOf: mx-os

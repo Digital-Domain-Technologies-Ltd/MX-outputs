@@ -10,6 +10,7 @@ mx:
   status: active
   contentType: report
   tags: [session-report, reginald, cog-definition, csp, carrier-formats]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-19-session-report.md
 ---
 
 # Co-Directors Session Report — 19 Mar 2026 (Afternoon)

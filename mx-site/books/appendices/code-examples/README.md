@@ -8,6 +8,7 @@ version: "1.0"
 
 mx:
   status: draft
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/books/appendices/code-examples/README.md
 ---
 
 # AI-Native Website Code Examples

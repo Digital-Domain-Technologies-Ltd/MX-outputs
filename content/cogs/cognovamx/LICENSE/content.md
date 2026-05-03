@@ -12,6 +12,7 @@ mx:
   x-mx-category: governance
   partOf: mx-maxine-lives
   tags: [license, mit, open-source, the-gathering]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/LICENSE/content.md
 
   inherits: LICENSE
 

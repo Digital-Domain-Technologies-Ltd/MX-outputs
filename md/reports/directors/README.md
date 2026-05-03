@@ -4,6 +4,9 @@ version: "1.0"
 created: 2026-02-10
 modified: 2026-02-10
 author: Tom Cranstoun
+
+mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/README.md
 ---
 
 # Co-Directors Reports

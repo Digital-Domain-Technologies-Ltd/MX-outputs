@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening, knowledge-architecture, web-audit, testing]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-14-evening-report.md
 ---
 
 # Co-Directors Report — Knowledge architecture + audit infill hardening

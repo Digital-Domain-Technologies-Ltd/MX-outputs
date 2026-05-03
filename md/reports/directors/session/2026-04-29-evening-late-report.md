@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening-late]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-29-evening-late-report.md
 ---
 
 # Co-Directors Report — Div Soup check shipped; the-author.html and download-intro fixed at source

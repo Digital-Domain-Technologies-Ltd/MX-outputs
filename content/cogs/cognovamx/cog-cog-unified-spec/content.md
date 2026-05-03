@@ -12,6 +12,7 @@ mx:
   x-mx-category: specification
   tags: [cog, specification, reference-copy]
   canonicalSource: "mx-canon/mx-the-gathering/specifications/cog-unified-spec.cog.md"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-cog-unified-spec/content.md
 ---
 
 # MX Cog Unified Specification

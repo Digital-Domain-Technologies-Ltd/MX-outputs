@@ -23,6 +23,7 @@ mx:
   audience: [humans, machines, agents]
   cacheability: permanent
   runbook: "Read after cog-spec.v1.md. This document explains what a cog runtime does at runtime — parsing, validation, contract fingerprinting, witness signing, witness verification, and procedure execution — and how an agent or implementer obtains a working runtime. The reference implementations are catalogued in section 4."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/drafts/cog-runtime.md
 ---
 
 # Cog Runtime

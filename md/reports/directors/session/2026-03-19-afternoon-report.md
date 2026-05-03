@@ -12,6 +12,7 @@ mx:
   status: active
   contentType: report
   tags: [session-report, readiness-model, manuscripts, templates, cleanup]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-19-afternoon-report.md
 ---
 
 

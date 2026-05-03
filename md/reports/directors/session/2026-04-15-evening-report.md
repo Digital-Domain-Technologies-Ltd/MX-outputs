@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening, audit-tool, mx-audit]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-15-evening-report.md
 ---
 
 # Co-Directors Report — Evening: MX one-pager, field scripts, audit-tool hardening + NEOM regen

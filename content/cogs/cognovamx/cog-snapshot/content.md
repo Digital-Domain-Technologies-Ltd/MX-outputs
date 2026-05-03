@@ -14,6 +14,7 @@ mx:
   tags: [registry, snapshot, index, auto-generated]
   audience: [tech, agents]
   readingLevel: advanced
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-snapshot/content.md
 ---
 
 # Cog Registry Snapshot

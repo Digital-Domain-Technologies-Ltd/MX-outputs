@@ -18,6 +18,7 @@ mx:
   tags: [audit, metadata, standards, compliance, field-dictionary, namespace, deprecated-fields, frontmatter, yaml]
   audience: both
   readingLevel: intermediate
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/metadata-audit/content.md
 
   x-mx-execute:
     runtime: runbook

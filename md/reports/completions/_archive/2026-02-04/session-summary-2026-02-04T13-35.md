@@ -10,6 +10,7 @@ author: Tom Cranstoun
 mx:
   contentType: "feature-implementation"
   status: "completed"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-04/session-summary-2026-02-04T13-35.md
 ---
 
 

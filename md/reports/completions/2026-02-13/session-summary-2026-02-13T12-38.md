@@ -9,6 +9,7 @@ mx:
   duration: "~25 minutes"
   contentType: "documentation"
   status: "completed"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-13/session-summary-2026-02-13T12-38.md
 ---
 
 # Session Summary: About Maxine Architecture Deliverable

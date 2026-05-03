@@ -8,6 +8,7 @@ mx:
   date: 2026-02-14
   x-mx-segment: morning
   status: published
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-14-morning-report.md
 ---
 
 # Morning Session — 14 February 2026

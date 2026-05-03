@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, evening]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-27-evening-report.md
 ---
 
 # Co-Directors Report — cogHeader Field, MXS-06, cog-spec v1.2; Dogu Contract

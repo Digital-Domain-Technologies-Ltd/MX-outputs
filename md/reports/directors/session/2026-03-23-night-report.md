@@ -10,6 +10,7 @@ mx:
   status: published
   contentType: report
   tags: [session-report, security, agentlock, cog-specification, documentation]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-23-night-report.md
 ---
 
 # Co-Directors Report — 23 March 2026 (Night Session)

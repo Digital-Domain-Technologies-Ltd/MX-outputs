@@ -13,6 +13,7 @@ mx:
   x-mx-category: governance
   partOf: mx-maxine-lives
   tags: [contributing, governance, the-gathering, open-standard]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/CONTRIBUTING/content.md
 
   x-mx-blocks:
     - prose:

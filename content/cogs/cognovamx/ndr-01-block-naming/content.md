@@ -13,6 +13,7 @@ mx:
   partOf: mx-the-gathering
   tags: [ndr, naming, blocks, terminology, advisory-board]
   audience: [tech, business, business]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/ndr-01-block-naming/content.md
 
   x-mx-ndr:
     number: 1

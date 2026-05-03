@@ -20,6 +20,7 @@ mx:
   audience: [agents, tech]
   license: MIT
   deliverable: "working demonstration of cog composition via includes"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/example-with-includes/content.md
 
   x-mx-execute:
     runtime: runbook

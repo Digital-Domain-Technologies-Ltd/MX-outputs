@@ -7,6 +7,7 @@ mx:
   status: active
   contentType: report
   tags: [pdf, testing, validation, layout]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/validation/pdf-layout-test-2026-04-01.md
 ---
 
 # PDF Layout Test Report

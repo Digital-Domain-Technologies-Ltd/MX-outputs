@@ -10,6 +10,7 @@ mx:
   status: active
   contentType: report
   tags: [validation, urls, manuscripts]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/validation/manuscript-url-check.md
 ---
 
 # Manuscript URL Validation Report

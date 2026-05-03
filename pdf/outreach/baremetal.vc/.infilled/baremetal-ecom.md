@@ -17,6 +17,7 @@ mx:
     format: "pdf"
     output: "mx-outputs/pdf/outreach/2026-05-02/-report.pdf"
     description: "Generate PDF audit report for "
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/pdf/outreach/baremetal.vc/.infilled/baremetal-ecom.md
 ---
 
 # : E-commerce Audit & Shopping Agent Readiness

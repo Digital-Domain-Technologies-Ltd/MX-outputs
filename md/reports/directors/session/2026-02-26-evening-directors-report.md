@@ -7,6 +7,7 @@ mx:
   date: 2026-02-26
   x-mx-segment: evening
   status: final
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-26-evening-directors-report.md
 ---
 
 # Co-Directors Report: Repository Reorganisation — Separation of Concerns

@@ -4,6 +4,9 @@ description: "Public mirror of the three-file MX canon: standard fields, carrier
 author: "Tom Cranstoun"
 created: "2026-04-16"
 modified: "2026-04-16"
+
+mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/canon/README.md
 ---
 
 # MX Canon — Public Mirror

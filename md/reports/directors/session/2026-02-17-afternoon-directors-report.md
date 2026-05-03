@@ -9,6 +9,7 @@ mx:
   x-mx-segment: "afternoon"
   audience: stakeholders
   confidential: true
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-17-afternoon-directors-report.md
 ---
 
 # Co-Directors Report — LinkedIn Ad Fix + Repository Handover

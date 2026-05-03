@@ -8,6 +8,7 @@ description: "Navigable index of all build artefacts, reports, and generated out
 mx:
   isGenerated: true
   generatedBy: "mx-outputs/scripts/generate-index.sh"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/README.md
 ---
 
 # MX Outputs

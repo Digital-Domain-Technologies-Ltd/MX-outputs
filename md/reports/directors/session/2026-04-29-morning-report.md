@@ -12,6 +12,7 @@ mx:
   audience: [business]
   confidential: true
   tags: [directors-report, session, morning]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-29-morning-report.md
 ---
 
 # Co-Directors Report — Infrastructure Hardening, Hook Registration, Hero Layout Fix

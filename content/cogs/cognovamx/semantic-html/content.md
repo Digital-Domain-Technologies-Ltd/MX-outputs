@@ -13,6 +13,7 @@ mx:
   license: proprietary
   status: draft
   x-mx-riskLevel: medium
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/semantic-html/content.md
 
   x-mx-category: mx-core
   partOf: mx-core

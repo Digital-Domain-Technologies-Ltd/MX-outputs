@@ -12,6 +12,7 @@ mx:
   x-mx-riskLevel: medium
   tags: [html, audit, baseline, regression, testing, automation, validation, ci-cd]
   audience: [tech]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/html-baseline-audit/content.md
 
   partOf: mx-cog-registry
 

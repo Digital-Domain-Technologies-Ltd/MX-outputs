@@ -16,6 +16,7 @@ mx:
   audience: [humans, machines]
   cacheability: permanent
   runbook: "This is the MX AI/Agent Policy note — a deferred draft authored by Tom Cranstoun. It defines AI/agent governance fields. Use the conformance tables to determine which AI fields are required at each level. Core governance fields (Sections 5-6) apply to all documents. Context-specific fields (Sections 7-10) apply only to their designated profiles. This note stands alone; it does not depend on any other draft."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/draft-ai-agent-policy/content.md
 ---
 
 # MX AI/Agent Policy note

@@ -6,6 +6,9 @@ version: "1.0"
 author: Tom Cranstoun
 audience: stakeholders
 confidential: true
+
+mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-02-afternoon-report.md
 ---
 
 # PDF Orphan/Widow Heading Fix

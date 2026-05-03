@@ -8,6 +8,7 @@ mx:
   x-mx-segment: "evening"
   audience: stakeholders
   confidential: true
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-15-evening-report.md
 ---
 
 # Evening Session — 15 February 2026

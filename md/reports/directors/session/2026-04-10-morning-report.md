@@ -6,6 +6,9 @@ version: "1.1"
 author: Tom Cranstoun
 audience: stakeholders
 confidential: true
+
+mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-10-morning-report.md
 ---
 
 # Co-Directors Report — Audit Pipeline Now Trustworthy, llms.txt Advice and Estate Aligned

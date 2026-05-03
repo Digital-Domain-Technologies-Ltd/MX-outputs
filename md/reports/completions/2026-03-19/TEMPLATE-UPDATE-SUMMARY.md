@@ -9,6 +9,7 @@ mx:
   status: active
   contentType: release-notes
   x-mx-category: audit-suite
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-03-19/TEMPLATE-UPDATE-SUMMARY.md
 ---
 
 # Audit Template Update Summary — v2.0 Release
