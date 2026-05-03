@@ -39,7 +39,7 @@
   <meta name="twitter:creator" content="@ddttomtom">
 
   <!-- Additional SEO -->
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="index, follow">
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
   {
@@ -763,6 +763,34 @@ an action-doc.</td>
 <code>intermediate</code>, <code>advanced</code>,
 <code>expert</code>.</td>
 </tr>
+<tr>
+<td><code>produces</code></td>
+<td>object</td>
+<td>optional</td>
+<td>Output contract for an action cog. Sub-keys: <code>shape</code>
+(pointer to a JSON or YAML schema), <code>format</code> (MIME type or
+named format), <code>example</code> (illustrative output). Distinct from
+<code>deliverable</code> (semantic description) and from
+<code>schema</code> (input contract for the document itself).</td>
+</tr>
+<tr>
+<td><code>troubleshooting</code></td>
+<td>array</td>
+<td>optional</td>
+<td>Failure-mode catalogue. Each entry pairs a <code>condition</code>
+(kebab-case slug) with a <code>remedy</code> (dotted-name identifier
+resolvable in the runtime registry).</td>
+</tr>
+<tr>
+<td><code>defaultRemedy</code></td>
+<td>string</td>
+<td>optional</td>
+<td>Catch-all remedy invoked when a failure does not match any
+<code>troubleshooting</code> entry. Same dotted-name syntax as
+<code>troubleshooting[].remedy</code>. Pairs with
+<code>troubleshooting</code>: catalogued conditions handled by name,
+everything else by default.</td>
+</tr>
 </tbody>
 </table>
 <h3 id="block-types">Block Types</h3>
@@ -1284,8 +1312,9 @@ dictionary (<code>mx-canon/ssot/fields.cog.md</code>, Sections
 all field definitions</li>
 <li><strong>Cog specification:</strong>
 <code>mx-canon/mx-the-gathering/specifications/cog-unified-spec.cog.md</code></li>
-<li><strong>Proposed standards:</strong> MXS-01 through MXS-04, public
-at <a
+<li><strong>MX draft notes:</strong> Core Metadata, Extensions,
+Provenance, Carrier Formats, Contract Fingerprinting, Cog Identification
+— public at <a
 href="https://github.com/ddttom/mx-shared-gathering">ddttom/mx-shared-gathering</a></li>
 <li><strong>MX OS manual:</strong> Appendix M: Building MX OS</li>
 <li><strong>Metadata index:</strong> Appendix M: Index of Metadata

@@ -39,7 +39,7 @@
   <meta name="twitter:creator" content="@ddttomtom">
 
   <!-- Additional SEO -->
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="index, follow">
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
   {
@@ -153,6 +153,9 @@ Tags</a></li>
 <li><a href="#recipe-13-html-validation-and-common-pitfalls"
 id="toc-recipe-13-html-validation-and-common-pitfalls">Recipe 13: HTML
 Validation and Common Pitfalls</a></li>
+<li><a href="#recipe-14-tagged-pdfs-for-human-and-machine-readers"
+id="toc-recipe-14-tagged-pdfs-for-human-and-machine-readers">Recipe 14:
+Tagged PDFs for Human and Machine Readers</a></li>
 <li><a href="#cross-references"
 id="toc-cross-references">Cross-References</a></li>
 </ul></li>
@@ -1209,6 +1212,238 @@ validator</label></li>
 <p><strong>See also:</strong> Appendix D (AI-Friendly HTML Guide, Part
 9: Testing and Validation) for thorough validation guidance and common
 pitfalls.</p>
+<hr />
+<h2 id="recipe-14-tagged-pdfs-for-human-and-machine-readers">Recipe 14:
+Tagged PDFs for Human and Machine Readers</h2>
+<h3 id="the-problem">The Problem</h3>
+<p>Most PDFs published on the web are untagged. To a screen-reader user,
+an untagged PDF is unreadable beyond its plain text stream. To an AI
+agent, an untagged PDF is a wall of positioned glyphs that requires
+expensive vision-based reconstruction to navigate. The same structural
+omission breaks both audiences.</p>
+<p>ISO 14289-1 (PDF/UA) has become the de facto international baseline
+for accessible PDFs, mandated through different legal instruments across
+major markets: the European Accessibility Act (Directive (EU) 2019/882,
+in force across the EU since 28 June 2025); Section 508 of the US
+Rehabilitation Act as applied to federal agencies and recipients of
+federal funding; the UK Public Sector Bodies Accessibility Regulations
+2018; and obligations flowing from national disability discrimination
+legislation in Australia and Canada. Wherever the legal obligation
+originates, the mandate exists for human disability accommodation. The
+artefact the law produces — a structure tree of headings, paragraphs,
+lists, tables, figures, captions, and reading order — is exactly what an
+AI agent needs to read the document without inference.</p>
+<p>Two consequences of an untagged PDF:</p>
+<ul>
+<li><strong>Hallucination.</strong> An agent that has reconstructed a
+table by vision will quote made-up numbers. An agent that has
+interleaved footnotes with body text will attribute body claims to
+footnote authors. The errors look identical to correct readings until
+the user goes back to the source.</li>
+<li><strong>Energy and inference cost.</strong> Vision-based
+reconstruction runs full frame analysis over every page; tagged
+ingestion is a structured tree walk. The compute differential is one to
+two orders of magnitude per document. Across an industry of trillions of
+agent reads per year, the compounded cost is significant.</li>
+</ul>
+<h3 id="the-pattern">The Pattern</h3>
+<p>Generate every public-facing PDF through a pipeline that produces an
+ISO 14289-1 conformant tagged PDF. Three layers of conformance must be
+satisfied:</p>
+<ul>
+<li><strong>Level 1 — Tagged.</strong> The PDF carries a
+<code>/StructTreeRoot</code> referencing a tree of structure elements,
+plus a <code>/MarkInfo</code> dictionary with <code>/Marked true</code>.
+Every glyph in the visible page belongs to a node in the tree.</li>
+<li><strong>Level 2 — Declared.</strong> The PDF’s XMP metadata packet
+carries a <code>pdfuaid:part</code> claim (typically <code>1</code>),
+declaring the conformance level so verifiers and audit tools can
+identify it without parsing the structure tree.</li>
+<li><strong>Level 3 — Verified.</strong> An independent check (an
+automated audit, a human verifier, or both) records that the PDF
+actually meets the standard rather than only claiming to.</li>
+</ul>
+<p>Render is for one audience. Meaning is a separate layer. The
+structure tree is the meaning layer for PDF.</p>
+<h3 id="recipe">Recipe</h3>
+<p>A pipeline that produces tagged PDFs from authored content:</p>
+<ol type="1">
+<li><p><strong>Author content in HTML or markdown.</strong> Investments
+in HTML semantic correctness flow directly into the PDF output. Use
+proper heading hierarchy, list elements, table headers, figure captions,
+alt text, and declared language.</p></li>
+<li><p><strong>Render to a tagged PDF engine.</strong> Two
+production-tested options:</p>
+<ul>
+<li><strong>Headless Chrome <code>--export-tagged-pdf</code>
+(recommended for HTML/markdown sources).</strong> Chrome reads the HTML
+accessibility tree and emits a PDF whose structure tree is built from
+it. Cross-platform, no LaTeX dependency, available since Chrome 85
+(2020).</li>
+<li><strong>A LaTeX engine with <code>pdfmanagement-testphase</code> and
+<code>tagpdf</code> (for typographically-demanding
+manuscripts).</strong> Declare
+<code>\DocumentMetadata{pdfstandard=ua-1, testphase={phase-III, sec, table, firstaid}}</code>
+at the top of the source. The kernel auto-loads tagpdf when the standard
+is declared.</li>
+</ul></li>
+<li><p><strong>Inject the Level 2 XMP claim.</strong> The structure tree
+alone is not enough — verifiers also key on the
+<code>pdfuaid:part</code> XMP property. Post-process with a tool that
+registers the <code>http://www.aiim.org/pdfua/ns/id/</code> namespace
+and writes the claim. Without the namespace registration, the write may
+silently land in a private namespace that no verifier
+recognises.</p></li>
+<li><p><strong>Verify before publish.</strong> A pre-deploy check that
+walks every PDF in the publish directory and asserts (a)
+<code>/StructTreeRoot</code> is present, (b)
+<code>/MarkInfo /Marked true</code>, (c) the XMP packet contains
+<code>pdfuaid:part</code>. Block the deploy on any failure. Catching the
+omission at publish costs seconds; catching it after publication costs
+every machine read of the document for the rest of its life.</p></li>
+<li><p><strong>Make the rule a publishing requirement, not a publishing
+afterthought.</strong> The same audit that gates the deploy should run
+as part of the build, and the build should fail when an authored source
+produces an untagged output. The cost of the gate is negligible. The
+cost of letting an untagged PDF reach the public corpus accrues on every
+read of it forever after.</p></li>
+</ol>
+<h3 id="the-broader-metadata-layer">The Broader Metadata Layer</h3>
+<p>The Level 2 conformance claim and the structure tree are the
+load-bearing pieces of EAA compliance. The XMP packet that carries the
+conformance claim has room for considerably more, and an agent that has
+just opened a PDF is asking more questions than “is this tagged”. The
+same fields belong in the source markdown’s YAML frontmatter and ride
+through to the PDF’s XMP packet via the same injection step.</p>
+<p>Five groups of fields are useful here. The implementation in this
+cookbook recommends declaring them all in YAML frontmatter and injecting
+them via an exiftool config that registers an <code>mx</code> namespace
+at <code>https://schemas.cognovamx.com/mx/1.0/</code>.</p>
+<p><strong>Identity and provenance.</strong> <code>canonicalUrl</code>
+(where the official copy lives), <code>sourceRepo</code> and
+<code>commitSha</code> (precise build identification),
+<code>supersedes</code> and <code>supersededBy</code> (version
+chain).</p>
+<p><strong>Recency and lifecycle.</strong> <code>created</code>,
+<code>modified</code>, <code>expires</code> (content-validity end date),
+<code>reviewBy</code> (next scheduled editorial review),
+<code>correctionSla</code> (declared response time for errors).</p>
+<p><strong>Action affordances.</strong> <code>license</code>
+(machine-readable licence URI), <code>reuseTerms</code> (edge cases the
+licence does not address), <code>agentInstructions</code> (explicit
+message to AI consumers), <code>relatedDocs</code> (curated surrounding
+context), <code>apiEndpoint</code> and <code>dataEndpoint</code> (for
+documents describing services or datasets), <code>supportContact</code>
+(machine-readable follow-up address).</p>
+<p><strong>Semantics and structure.</strong> <code>summary</code>
+(one-to-two-sentence machine-summary), <code>topic</code>
+(controlled-vocabulary identifiers, Wikidata QIDs preferred),
+<code>entities</code> (named-entity identifiers), <code>speakable</code>
+(voice-friendly read-aloud summary), <code>conformsTo</code> (list of
+standards the document claims conformance to).</p>
+<p><strong>Negative space.</strong> <code>trainingDataPolicy</code>
+(training-corpus inclusion stance), <code>noLLMReprocess</code> (request
+quotation rather than rewriting), <code>doNotIndex</code> (suppress
+public indexing).</p>
+<p>None of these fields need to be invented. Most have analogues in
+Dublin Core, Schema.org, IPTC, or IETF metadata vocabularies. The
+contribution MX makes is consolidating them into one namespace and
+rendering them in every carrier the document is emitted in, so they
+survive copying and reformatting.</p>
+<h3 id="the-discipline">The Discipline</h3>
+<p>The pattern generalises beyond PDF. Every non-HTML carrier has the
+same structure decision and an analogous standard:</p>
+<ul>
+<li><strong>DOCX:</strong> preserve OOXML styles (paragraph styles,
+heading outline levels, table row/cell roles); do not flatten to direct
+formatting on export.</li>
+<li><strong>EPUB:</strong> ship a navigation document declaring reading
+order; meet EPUB Accessibility 1.1 the same way the HTML pages would
+meet WCAG 2.1.</li>
+<li><strong>Audio and video:</strong> publish transcripts and WebVTT
+cues with declared roles for speakers, sounds, and chapter boundaries.
+The transcript is the structural carrier.</li>
+<li><strong>CSV datasets:</strong> publish a CSVW JSON-LD descriptor
+declaring column types, units, primary keys, and relationships.</li>
+</ul>
+<p>In every case the discipline is the same: declare meaning in the
+format’s native idiom, every time the file is emitted. Render is for one
+audience. Meaning is for everyone.</p>
+<h3 id="folder-level-metadata-.mx.yaml.md">Folder-Level Metadata:
+<code>.mx.yaml.md</code></h3>
+<p>One layer up from the file is the folder. A directory containing
+forty PDFs and ten markdown files is, to an agent, a wall of forty-plus
+context-discovery jobs. The agent that figures out the folder is a
+quarterly-report archive on the third PDF has wasted the cost of two
+PDFs to reach that conclusion. The agent that follows behind, working
+for a different platform, will repeat the same wasted reads.</p>
+<p>The convention this cookbook adopts (and the MX project practises
+across its own published source tree) is the folder-level
+<code>.mx.yaml.md</code> file. One file per folder, modelled on the same
+shape as <code>README.md</code> but machine-first by default: YAML
+frontmatter as the load-bearing structure, markdown narrative as the
+human accompaniment.</p>
+<p><strong>Recipe shape:</strong></p>
+<div class="sourceCode" id="cb20" data-role="code-container"><pre
+class="sourceCode markdown"><code class="sourceCode markdown" data-role="code-content"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Quarterly investor reports&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> &quot;Q1-Q4 PDF reports plus accompanying CSV data, organised by year.&quot;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="an">mx:</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">  status: active</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">  contentType: archive</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">  audience: [humans, machines]</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">  inherits: ../investor-relations/.mx.yaml.md</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">  maintainedBy: investor-relations-team</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">  conformsTo:</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">    - https://www.iso.org/standard/64599.html</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">    - https://mx.allabout.network/specs/mx-core-level-2</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Quarterly investor reports</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>This directory holds the year-by-year archive of CogNovaMX investor reports.</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>Each year contains four PDFs (one per quarter) and a CSV of the financials</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>that drove the report. The PDFs are tagged to ISO 14289-1; the CSVs carry</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>CSVW descriptors. Older years are preserved unchanged for citation; the</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>current year is updated quarterly.</span></code></pre></div>
+<p><strong>Rules:</strong></p>
+<ul>
+<li>One <code>.mx.yaml.md</code> per folder of any meaningful size.
+Folders with one or two transient files do not need it; folders that an
+agent might land on as a unit do.</li>
+<li>Inheritance via <code>mx.inherits</code> so child folders adopt
+their parent’s defaults without restating them. The parent’s audience,
+license, content-policy, and conformance claims flow through unless the
+child overrides.</li>
+<li>Generator and validator already live in the MX project at
+<code>scripts/mx/</code>. The validator runs on commit. New folders
+created without a <code>.mx.yaml.md</code> are flagged by the gate.</li>
+<li>The narrative section is for humans first; an agent that reaches the
+file reads the YAML and uses the prose as supplementary context.</li>
+</ul>
+<p>The combination, MX metadata in every carrier plus
+<code>.mx.yaml.md</code> at every folder boundary, is the substrate that
+lets every agent platform (AWS Quick, Cowork, OpenClaw, Claude, Gemini,
+Copilot, the long tail of vertical specialists) read the published
+corpus correctly without each platform reinventing context discovery
+from scratch.</p>
+<h3 id="why-this-fits-mx">Why this fits MX</h3>
+<p>The convergence is not coincidence. Treating “what does this content
+mean” as a separate question from “how does this content render” is the
+same move that drives semantic HTML, structured data, and accessibility
+metadata. Once that move is made, the same answer to the meaning
+question serves every consumer that needs an answer to the meaning
+question: people who cannot see the rendering, people on small screens,
+people in noisy environments, agents reading the document
+programmatically, search engines indexing the content, downstream
+pipelines extracting facts. Compliance with the disability law is
+compliance with the machine experience. The work to satisfy the human
+auditor is the same work that satisfies the agent reading the document
+next year.</p>
+<p><strong>See also:</strong> Chapter 22 (The Carrier Argument
+Generalises Beyond HTML), Appendix C (Web Audit Suite Guide) for
+tagged-PDF audit tooling, Appendix L (Proposed AI Metadata Patterns) for
+the related governance metadata layer.</p>
 <hr />
 <h2 id="cross-references">Cross-References</h2>
 <p><strong>For full context and business implications:</strong></p>

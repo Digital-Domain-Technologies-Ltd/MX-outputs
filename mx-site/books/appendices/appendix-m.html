@@ -39,7 +39,7 @@
   <meta name="twitter:creator" content="@ddttomtom">
 
   <!-- Additional SEO -->
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="index, follow">
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
   {
@@ -190,8 +190,8 @@ Guide</a></li>
 HTML Writing Guide</a></li>
 <li><a href="#appendix-navigation" id="toc-appendix-navigation">Appendix
 Navigation</a></li>
-<li><a href="#canon-layout-three-file-split"
-id="toc-canon-layout-three-file-split">27. Canon Layout — Three-File
+<li><a href="#canon-layout-four-file-split"
+id="toc-canon-layout-four-file-split">27. Canon Layout — Four-File
 Split</a></li>
 </ul></li>
 </ul>
@@ -2749,8 +2749,22 @@ files, each definitive after the 2026-04-17 scope tightening:</p>
 <ul>
 <li><a
 href="../../../../mx-canon/ssot/fields-data.yaml"><code>mx-canon/ssot/fields-data.yaml</code></a>
-— The Gathering’s open standard core (<strong>62 fields</strong>, each
-with a definitive one-sentence description).</li>
+— The Gathering’s open standard core. Carries the identity vocabulary,
+the genuineness family (<code>proofOfAuthorship</code>,
+<code>integritySignature</code>, <code>provenancePedigree</code>), the
+IETF kramdown-rfc pass-through fields (<code>docname</code>,
+<code>keyword</code>, <code>consensus</code>), the Schema.org / Dublin
+Core pass-through fields (<code>date</code>, <code>duration</code>,
+<code>format</code>, <code>rights</code>, <code>displayName</code>,
+<code>usage</code>, <code>lang</code>), the MX Document Accessibility
+vocabulary (<code>accessibilityConformance</code>,
+<code>accessibilityFeature</code>, <code>accessibilityHazard</code>,
+<code>accessibilitySummary</code>, <code>taggedPdf</code>,
+<code>pdfUaPart</code>, <code>pdfAPart</code>, <code>decorative</code>,
+<code>altText</code>), and the cog-format infrastructure
+(<code>cogHeader</code>, <code>targetsSpecVersion</code>,
+<code>readiness</code>, <code>operatesOn</code>,
+<code>troubleshooting</code>).</li>
 <li><a
 href="../../../../mx-canon/ssot/fields-data-carriers.yaml"><code>mx-canon/ssot/fields-data-carriers.yaml</code></a>
 — code-carrier provenance companion (<strong>2 fields</strong>:
@@ -2759,9 +2773,8 @@ DOES defers to language conventions (JSDoc, Python docstrings, Doxygen,
 rustdoc).</li>
 <li><a
 href="../../../../mx-canon/ssot/cognovamx-fields.yaml"><code>mx-canon/ssot/cognovamx-fields.yaml</code></a>
-— CogNovaMX vendor extensions (<strong>206 fields</strong>,
-<code>x-mx-</code> public and <code>x-mx-p-</code> private). Not part of
-The Gathering standard.</li>
+— CogNovaMX vendor extensions (<code>x-mx-</code> public and
+<code>x-mx-p-</code> private). Not part of The Gathering standard.</li>
 </ul>
 <p><strong>What changed on 2026-04-17.</strong> An interview on MX
 intent established the scope rule: every field must describe the
@@ -2898,11 +2911,11 @@ definition, one source of truth for the entire ecosystem.</p>
 <h3 id="what-this-dictionary-does">1. What this dictionary does</h3>
 <p>The MX ecosystem has two complementary authorities. The
 <strong>cog-unified-spec</strong> defines structure — blocks,
-inheritance, reader behaviour, the architecture of a cog file. This
-dictionary defines <strong>vocabulary</strong> — what each field means,
-which fields are required for which document types, how metadata is
-carried across file formats, and what to do when two fields seem to mean
-the same thing.</p>
+inheritance, reader behaviour, the architecture of a cog (Community
+Owned Governance Standard) file. This dictionary defines
+<strong>vocabulary</strong> — what each field means, which fields are
+required for which document types, how metadata is carried across file
+formats, and what to do when two fields seem to mean the same thing.</p>
 <p>The spec says <em>how</em> cogs are built. The dictionary says
 <em>what goes inside them</em>, regardless of which carrier format
 delivers the metadata.</p>
@@ -3294,7 +3307,7 @@ know what’s inside.</p>
 class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Standard (The Gathering) — every implementation uses these</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> mx-audit</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;1.1.0&quot;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> Tom Cranstoun and Maxine</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> Tom Cranstoun</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">## MX-public extension — visible, non-standard</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">x-mx-pipeline-stage</span><span class="kw">:</span><span class="at"> report-generation</span></span>
@@ -3502,8 +3515,8 @@ before the 2026-04-17 triage. The <code>ai.*</code> namespace is now
 parked pending W3C/NIST/IEEE convergence; those fields are removed from
 the standard. Implementations that still need folder-level AI-policy
 governance carry it through their vendor extension
-(<code>x-mx-*</code>), which is never inherited — per-folder per
-MXS-02.</p>
+(<code>x-mx-*</code>), which is never inherited — per-folder per the
+Extensions note’s namespace policy.</p>
 <h4 id="vendor-extension-fields-never-inherited">Vendor extension fields
 (never inherited)</h4>
 <p>Fields prefixed with <code>x-mx-</code> are per-folder and never
@@ -4083,9 +4096,9 @@ MX operational metadata only.</p>
 standard XMP rights fields — not an MX-specific rights vocabulary.</p>
 <div class="sourceCode" id="cb25" data-role="code-container"><pre
 class="sourceCode xml"><code class="sourceCode xml" data-role="code-content"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- XMP metadata in image file. Native XMP rights fields remain; mx: adds operational. --&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">rdf:Description</span><span class="ot"> xmlns:mx=</span><span class="st">&quot;https://mx.community/ns/1.0/&quot;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ot">                 xmlns:xmpRights=</span><span class="st">&quot;http://ns.adobe.com/xap/1.0/rights/&quot;</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ot">                 xmlns:dc=</span><span class="st">&quot;http://purl.org/dc/elements/1.1/&quot;</span>&gt;</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">rdf:Description</span> <span class="ot">xmlns:mx=</span><span class="st">&quot;https://mx.community/ns/1.0/&quot;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                 <span class="ot">xmlns:xmpRights=</span><span class="st">&quot;http://ns.adobe.com/xap/1.0/rights/&quot;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                 <span class="ot">xmlns:dc=</span><span class="st">&quot;http://purl.org/dc/elements/1.1/&quot;</span>&gt;</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">mx:contentType</span>&gt;photograph&lt;/<span class="kw">mx:contentType</span>&gt;</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">mx:status</span>&gt;active&lt;/<span class="kw">mx:status</span>&gt;</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">mx:audience</span>&gt;humans&lt;/<span class="kw">mx:audience</span>&gt;</span>
@@ -5812,7 +5825,7 @@ over dependencies.</p>
 
 *Required and optional fields for book chapters and manuscript pages.*
 
-*Source: formerly `mx-canon/ssot/writing-guides/yaml-frontmatter-template.md` (retained as a stub).*
+*Source: formerly `mx-canon/ssot/templates/frontmatter-yaml-guide.md` (retained as a stub).*
 
 
 ## YAML Frontmatter Template for Book Manuscripts
@@ -6045,8 +6058,8 @@ class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><
 <ul>
 <li><a href="writing-style.md">Writing Style Guide</a> (“Writing Style
 Guide for MX Books” at <a
-href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/docs/for-ai/writing-style.md"
-class="uri">https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/docs/for-ai/writing-style.md</a>)
+href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-canon/ssot/writing-guides/writing-style.md"
+class="uri">https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-canon/ssot/writing-guides/writing-style.md</a>)
 - Complete writing guidelines</li>
 <li><a href="../../../CLAUDE.md">CLAUDE.md</a> (“CLAUDE.md - AI
 Assistant Project Guide” at <a
@@ -6911,26 +6924,28 @@ practical guide and MX specifications.</p>
 elements across 21 categories (expanded from 20 with notation convention
 documentation).</p>
 <hr />
-<h2 id="canon-layout-three-file-split">27. Canon Layout — Three-File
+<h2 id="canon-layout-four-file-split">27. Canon Layout — Four-File
 Split</h2>
-<p><em>The machine-readable MX field dictionary is split into three
+<p><em>The machine-readable MX field dictionary is split into four
 sibling files in <code>mx-canon/ssot/</code>. This section explains what
 each file owns, why the split exists, and how tooling merges
 them.</em></p>
-<h3 id="why-three-files">Why three files</h3>
-<p>Publishing a single monolithic dictionary conflated three different
+<h3 id="why-four-files">Why four files</h3>
+<p>Publishing a single monolithic dictionary conflated four different
 contracts. A reader of The Gathering’s open standard had to wade through
-CogNovaMX-specific audit scoring, CRM pipeline fields, and aspirational
-AI-policy vocabulary to find the core identity primitives. The split
-separates concerns along the three-tier namespace policy already
-articulated in the two ADRs (standard, <code>x-mx-</code> public,
-<code>x-mx-p-</code> private):</p>
+CogNovaMX-specific audit scoring, CRM pipeline fields, aspirational
+AI-policy vocabulary, and cog-specific structural fields to find the
+core document-identity primitives. The split separates concerns:</p>
 <ul>
-<li><strong>Standard core</strong> — owned by The Gathering; what any MX
-implementation needs.</li>
+<li><strong>Standard core (document metadata)</strong> — owned by The
+Gathering; what any MX-aware document needs (identity, classification,
+relationships, pass-through fields).</li>
+<li><strong>Cog layer</strong> — owned by The Gathering; the optional
+vocabulary a <code>.cog.md</code> file declares to be navigable,
+composable, and runnable. Documents that are not cogs do not need any of
+this.</li>
 <li><strong>Carriers companion</strong> — owned by The Gathering; adds
-code/database/media vocabulary that implementations opt into when they
-handle non-text content.</li>
+code-carrier provenance vocabulary.</li>
 <li><strong>CogNovaMX extensions</strong> — owned by CogNovaMX; vendor
 fields (both openly published and private-operational).</li>
 </ul>
@@ -6955,39 +6970,51 @@ fields (both openly published and private-operational).</li>
 <td><a
 href="../../../../mx-canon/ssot/fields-data.yaml"><code>mx-canon/ssot/fields-data.yaml</code></a></td>
 <td>The Gathering</td>
-<td>~103</td>
-<td>Open standard core — identity, classification, relationships,
-lifecycle, machine-readability infrastructure, folder metadata, cog
-contract, non-YAML markup carriers (<code>mx:*</code>,
+<td>core</td>
+<td>Open standard core — document identity, classification,
+relationships, lifecycle, machine-readability infrastructure, folder
+metadata, non-YAML markup carriers (<code>mx:*</code>,
 <code>mx-*</code>), Dublin Core / Schema.org pass-through fields
 (<code>date</code>, <code>duration</code>, <code>format</code>,
-<code>rights</code>, <code>displayName</code>, <code>schema</code>,
-<code>usage</code>, <code>classification</code>), namespacePolicy,
-deprecations, validationPolicy, blockTypes, carrierFormats.</td>
+<code>rights</code>, <code>displayName</code>, <code>usage</code>,
+<code>url</code>), namespacePolicy, deprecations, validationPolicy,
+blockTypes, carrierFormats. <strong>No cog content.</strong></td>
+</tr>
+<tr>
+<td><a
+href="../../../../mx-canon/ssot/fields-data-cogs.yaml"><code>mx-canon/ssot/fields-data-cogs.yaml</code></a></td>
+<td>The Gathering</td>
+<td>cog layer</td>
+<td>Cog-specific structural fields (<code>partOf</code>,
+<code>buildsOn</code>, <code>requires</code>, <code>refersTo</code>,
+<code>cogHeader</code>) plus the cog profile composition. Cogs are an
+OPTIONAL layer over MX; documents that are not cogs do not declare any
+of these.</td>
 </tr>
 <tr>
 <td><a
 href="../../../../mx-canon/ssot/fields-data-carriers.yaml"><code>mx-canon/ssot/fields-data-carriers.yaml</code></a></td>
 <td>The Gathering</td>
-<td>~40</td>
-<td>Carrier-format companion — code only (function, class, API, test,
-inline, dependency, repository, script). <strong>Databases defer to DCAT
-and CSVW. Media defers to Schema.org, EXIF, IPTC, and XMP.</strong> MX
-does not duplicate standards that already cover these carriers.</td>
+<td>carriers</td>
+<td>Carrier-format companion — code-only provenance
+(<code>sourceRepo</code>, <code>derivedFromCommit</code>).
+<strong>Databases defer to DCAT and CSVW. Media defers to Schema.org,
+EXIF, IPTC, and XMP.</strong> MX does not duplicate standards that
+already cover these carriers.</td>
 </tr>
 <tr>
 <td><a
 href="../../../../mx-canon/ssot/cognovamx-fields.yaml"><code>mx-canon/ssot/cognovamx-fields.yaml</code></a></td>
 <td>CogNovaMX</td>
-<td>~309</td>
+<td>vendor</td>
 <td>Vendor extensions — <code>x-mx-</code> public (hub-mount pattern,
-etc.) and <code>x-mx-p-</code> private (CRM pipeline, audit
-infrastructure, scoring, directors’ reports, book pipeline, Reginald
-routing, the <code>ai.*</code> aspirational namespace).</td>
+workflow contract extensions, etc.) and <code>x-mx-p-</code> private
+(CRM pipeline, audit infrastructure, scoring, directors’ reports, book
+pipeline, Reginald routing, the <code>ai.*</code> aspirational
+namespace).</td>
 </tr>
 </tbody>
 </table>
-<p>Total: ~452 canonical entries.</p>
 <h3 id="external-standards-mx-defers-to">External standards MX defers
 to</h3>
 <p>The MX framework reuses existing web standards wherever they cover
@@ -7065,7 +7092,7 @@ uses those vocabularies directly. MX adds only the governance layer
 those standards omit (AI-agent policy, cog routing, provenance
 attribution).</p>
 <h3 id="tooling-the-merged-view">Tooling: the merged view</h3>
-<p>All compliance and reporting scripts load the three files through <a
+<p>All compliance and reporting scripts load the four files through <a
 href="../../../../scripts/lib/load-canon.js"><code>scripts/lib/load-canon.js</code></a>
 and merge <code>mx.fields[]</code>, <code>mx.deprecations[]</code>, and
 <code>mx.profiles</code> into a single view. The governance sections
@@ -7097,25 +7124,48 @@ file, not the prefix (for now)</h3>
 <p>The namespace policy specifies that CogNovaMX public extensions carry
 the <code>x-mx-</code> prefix on the field name itself and private
 extensions carry <code>x-mx-p-</code>. Those prefixes remain the rule
-for any NEW field added going forward. For the 2026-04-15 split,
-existing fields kept their bare names across all three files — the
-destination file is the tier marker. This avoided a forced rename of
-~2000 content references in live documents. A future migration can apply
-the prefix convention retroactively if desired.</p>
+for any NEW field added going forward. For the 2026-04-15 split (and the
+2026-04-27 cogs separation), existing fields kept their bare names
+across all four files — the destination file is the tier marker. This
+avoided a forced rename of ~2000 content references in live documents. A
+future migration can apply the prefix convention retroactively if
+desired.</p>
 <h3 id="publishing-path">Publishing path</h3>
-<p>The Gathering publishes only <code>fields-data.yaml</code> and
+<p>The Gathering publishes <code>fields-data.yaml</code>,
+<code>fields-data-cogs.yaml</code>, and
 <code>fields-data-carriers.yaml</code>.
 <code>cognovamx-fields.yaml</code> stays in-repo as an example extension
 pack; other vendors would author their own parallel files
 (<code>x-mx-&lt;vendor&gt;-fields.yaml</code>) under the same pattern.
-The public MXS proposal drafts (at <a
+The MX draft notes (at <a
 href="https://github.com/ddttom/mx-shared-gathering">ddttom/mx-shared-gathering</a>)
-reference the two standard files:</p>
+reference the standard files:</p>
 <ul>
-<li><strong>MXS-01 Core Metadata</strong> →
-<code>fields-data.yaml</code></li>
-<li><strong>MXS-04 Carrier Formats</strong> (new) →
+<li><strong>MX Core Metadata note</strong> →
+<code>fields-data.yaml</code> (document metadata + the pass-through
+fields section)</li>
+<li><strong>MX Cogs note</strong> → <code>fields-data-cogs.yaml</code>
+(the <code>.cog.md</code> file format as an optional layer;
+<code>partOf</code>, <code>buildsOn</code>, <code>requires</code>,
+<code>refersTo</code>, <code>cogHeader</code>)</li>
+<li><strong>MX Extensions note</strong> → governs the <code>x-mx-</code>
+namespace and defines Workflow Contract Extensions:
+<code>x-mx-thresholds</code>, <code>x-mx-approvers</code>,
+<code>x-mx-approvalProcedure</code>, <code>x-mx-reviewProcedure</code>,
+<code>x-mx-targetEnvironment</code> — Zone 1 top-level fields used by
+workflow contract cogs</li>
+<li><strong>MX Carrier Formats note</strong> →
 <code>fields-data-carriers.yaml</code></li>
+<li><strong>MX Contract Fingerprinting and Signing note</strong> →
+defines <code>contractFields</code> and <code>metadataFields</code> as
+first-class top-level fields. <strong>Signing is optional</strong>; when
+used, mandatory fields are <code>title</code>,
+<code>validatesAgainst</code> (with resolvable validators), and
+<code>schema</code>. Reginald (DDT proprietary) is one implementation of
+the open format; reference implementations also live in <a
+href="../../../../mx-upgraded-reginald/">mx-upgraded-reginald</a>
+(cog-spec v1.0 uses kebab-case; MX canon adopts camelCase per <a
+href="../../../../mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md">NDR-2026-02-16</a>).</li>
 </ul>
 <h3 id="adding-a-new-field-which-file">Adding a new field — which
 file?</h3>
@@ -7141,8 +7191,15 @@ core with an <code>alignsWith:</code> pointer (see existing
 <tbody>
 <tr>
 <td>A universal identity, classification, relationship, or
-machine-readability primitive that any MX system would use</td>
-<td><code>fields-data.yaml</code> (standard core)</td>
+machine-readability primitive that any MX-aware document would use</td>
+<td><code>fields-data.yaml</code> (standard core, document
+metadata)</td>
+</tr>
+<tr>
+<td>Specific to the cog file format (registry classification,
+dependencies, body-block declarations, execute contract,
+identification)</td>
+<td><code>fields-data-cogs.yaml</code> (cog layer)</td>
 </tr>
 <tr>
 <td>A code-annotation primitive for functions, classes, APIs, tests,
