@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Skills frontmatter alignment with the Claude Skills spec"
-description: "Aligned every Claude Code surface file in the hub with Anthropic's Skills spec; tightened the cog opening header rule into a two-way pre-write gate."
+title: "Co-Directors Report — Skills frontmatter alignment plus terminology-registry wiring and CLAUDE.md trim"
+description: "Aligned the Claude Code surface with Anthropic's Skills spec earlier in the segment; this update adds two follow-on changes: a vocabulary registry pointer wired into four operational surfaces, and a CLAUDE.md trim that brings the always-on rules file back to its stated contract."
 author: "Tom Cranstoun"
 created: 2026-05-04
 modified: 2026-05-04
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -50,17 +50,33 @@ Every `.claude/skills/*/skill.md` (61 files) was rewritten so the YAML frontmatt
 
 CLAUDE.md, LEARNINGS.md (new dated rule at the top of the active buffer), the `cog-author` skill, the `how-to-write-a-cog.cog.md` action cog (Step 2's explanation paragraph), and `mx-watch-index.md` were all updated so that wherever the cog opening header is described, the description matches the new two-way enforcement. The auto-memory entry that previously framed the header as a universal rule was rewritten to make the `.cog.md`-only scope explicit.
 
+### 6. Terminology registry wired into the operational surfaces
+
+The unified terminology pointer at `datalake/registries/vocabulary.md` (with its machine-readable companion `vocabulary.json`) was already the canonical entry point to the published Glossary plus the conversational Working Vocabulary, but the surfaces that need to consult it on every turn did not know it existed. Four files were updated in lockstep so the next session opens with a working route to the registry:
+
+- **CLAUDE.md** — new row in the Reference table; the existing "Cross-project terminology" rule now points at the registry instead of restating the term list inline.
+- **UBERCOG.cog.md** — new "I need to check a term, glossary, or shorthand vocabulary" routing block, placed above the spell-check block since the two are related.
+- **`/html-writer` skill** — new "Terminology" sub-section in the polish pass, just before "Voice and timelessness", so blog prose stays consistent with the published Glossary.
+- **`/cog-author` skill** — new row in the Files table pointing cog authors at the registry when naming, describing, or tagging a cog.
+
+### 7. CLAUDE.md trim back to "rules that apply on every turn"
+
+CLAUDE.md was 231 lines / 18.2 KB at the start of this update. The file states its own contract on line 5: it should hold only the rules that apply on every turn; everything else is linked. Several sections had drifted away from that contract — they carried implementation detail, code fences, or routing lists that already lived on linked SSOT pages. The trim: 231 lines / 18.2 KB → 182 lines / 13.1 KB, a 28% reduction in both line count and bytes. No policy was lost; every cut redirects to the existing SSOT page that already carries the detail.
+
+Specifically, the rule statements stayed and the supporting prose was the cut. The `pwd`-checks code fence moved to `GIT-README.md` (already linked); the cog-spec v1.0 historical paragraph in "Read-only directories" was deleted (project history, not an always-on rule); the MX-definition-lockstep five-bullet pipeline collapsed to two lines pointing at `definitions-index.md` and the three skills that orchestrate the round-trip; the canonicalUri implementation detail collapsed to the rule plus the hook that enforces it; the spell-check policy collapsed to the one-line policy with the commands referenced via UBERCOG. Two reference-table rows that had grown into paragraphs (MX field catalogue and The Gathering draft notes) are short again. The "COG System" subsection and the "Standards Hierarchy" subsection were folded into the Reference table and the Writing Style block respectively, removing two whole headings.
+
 ---
 
 ## By the Numbers
 
+This is the morning-segment cumulative tally, covering both the earlier skills-frontmatter work and the two follow-on updates above.
+
 | Metric | Value |
 |--------|-------|
-| Commits | 0 (hub commit lands at Step 3 of /step-commit) |
-| Files changed | 72 |
-| Lines added | +201 |
-| Lines removed | −577 |
-| Net delta | −376 lines (almost entirely redundant frontmatter) |
+| Commits | 0 still pending at Step 3 of /step-commit |
+| Files changed (this update only) | 4 (CLAUDE.md, UBERCOG.cog.md, two skills) |
+| Files changed (earlier in segment) | 72 |
+| CLAUDE.md size | 231 → 182 lines, 18.2 KB → 13.1 KB (−28%) |
 | Skill files normalised | 61 |
 | Validators tightened | 2 (frontmatter-validator, mx-validator) |
 | Hooks tightened | 1 (pre-write-cog-opening, now two-way) |
@@ -72,11 +88,15 @@ CLAUDE.md, LEARNINGS.md (new dated rule at the top of the active buffer), the `c
 
 This was hygiene work, but with two business consequences worth naming. First, every skill description that Claude Code reads at session start now matches the spec Anthropic publishes — which means when the Skills feature evolves (signed skills, marketplace listings, sharing across surfaces), the hub's skill library is portable without remediation. Second, the two-way pre-write gate closes the regression vector that produced this whole cleanup: an agent can no longer paste the cog briefing comment into a non-cog file by accident, no matter how often the convention is forgotten.
 
+The terminology-registry wiring and the CLAUDE.md trim are smaller in scope but compound for the same reason — the cost of an always-on file is paid on every prompt. Trimming CLAUDE.md from 18.2 KB to 13.1 KB without losing any policy makes every future session cheaper and quicker to load, while the new vocabulary-registry pointers mean the next agent can route to the canonical Glossary without scanning the manuscripts to find it.
+
 ---
 
 ## The Insight
 
 The original rule asked every "authored briefing file" — cogs, skills, commands — to carry the cog opening header. The intent was good (any first-time reader gets oriented). The cost was that we treated the Claude Code surface as if it were a sub-dialect of the MX canon, when it is not. Anthropic publishes a spec; we should obey it on those files and reserve the cog dialect for files we own. The fix isn't fewer rules — it's a rule whose scope matches the file extension. `.cog.md` carries the header, `.md` does not, and the hook enforces both directions.
+
+The CLAUDE.md trim makes the same point in a different register. A file that says "I contain only the rules that apply on every turn" must actually contain only those rules. The discipline is to refer rather than to restate, even when restating feels more helpful in the moment — the linked page is one click away, and every line that earns its place by being pointed-to rather than copied keeps the always-on file honest about its scope.
 
 ---
 
@@ -85,12 +105,14 @@ The original rule asked every "authored briefing file" — cogs, skills, command
 - The COG opening header is `.cog.md`-only. Plain `.md` files (skills, commands, READMEs, reports, manuscripts) must not carry it. Enforced both ways.
 - `.claude/` is foreign territory to the MX validators. The frontmatter validator and mx-validator both skip it; the cog-opening hook skips it; CLAUDE.md says so.
 - `.claude/cogs/*.cog.md` is no longer a valid shape — those files are renamed to plain `.md` (only one existed: `mx-compliance.cog.md`). The `.cog.md` extension is reserved for cogs in the MX canon, not Claude Code surface files that happen to look cog-shaped.
+- The terminology-registry pointer at `datalake/registries/vocabulary.md` is now wired into CLAUDE.md, UBERCOG, and the two cog/blog-authoring skills. Future references should link to the registry rather than restating the term list inline.
+- A separate "MX Bible → MX: The Protocols" rename sweep is sitting in the working tree across the hub and three submodules. It pre-dates this session and was deferred per directors call — it is not part of this commit and will be reviewed and committed separately.
 
 ---
 
 ## Next Steps
 
-- None this segment. The cleanup is complete and self-enforcing — the new two-way gate prevents the regression from recurring.
+- The deferred "MX Bible → MX: The Protocols" rename sweep needs a review pass before it lands. Some of the rewrites are mechanical and uncontroversial; a few read awkwardly ("EDS.md is Your Bible" → "EDS.md is Your Protocols", "MX Bible author" → "MX: The Protocols author") and may want a hand-edit before committing.
 
 ---
 
@@ -98,9 +120,10 @@ The original rule asked every "authored briefing file" — cogs, skills, command
 
 | Hash | Description |
 |------|-------------|
-| _pending_ | Strip MX cog frontmatter from Claude Code surface; add two-way cog-opening gate |
+| *pending* | Strip MX cog frontmatter from Claude Code surface; add two-way cog-opening gate |
+| *pending* | Wire vocabulary registry pointer into CLAUDE.md, UBERCOG, html-writer, cog-author; trim CLAUDE.md to its always-on contract |
 
 <!--
-  Hub commit lands at Step 3 of /step-commit; replace `_pending_` with the
-  real hash after the commit, or re-run the table refresh.
+  Hub commits land at Step 3 of /step-commit; replace `*pending*` with the
+  real hashes after the commits, or re-run the table refresh.
 -->
