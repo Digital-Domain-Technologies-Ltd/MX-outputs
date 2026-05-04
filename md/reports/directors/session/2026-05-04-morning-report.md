@@ -120,10 +120,8 @@ The CLAUDE.md trim makes the same point in a different register. A file that say
 
 | Hash | Description |
 |------|-------------|
-| *pending* | Strip MX cog frontmatter from Claude Code surface; add two-way cog-opening gate |
-| *pending* | Wire vocabulary registry pointer into CLAUDE.md, UBERCOG, html-writer, cog-author; trim CLAUDE.md to its always-on contract |
-
-<!--
-  Hub commits land at Step 3 of /step-commit; replace `*pending*` with the
-  real hashes after the commits, or re-run the table refresh.
--->
+| `e22917af` | Strip MX cog frontmatter from Claude Code surface; add two-way cog-opening gate (hub) |
+| `ae6d9c50` | CHANGELOG v1.70: Claude Code surface alignment with Anthropic Skills spec (hub) |
+| `598c6146` | Bump mx-outputs: regenerate README index for 2026-05-04 morning report (hub) |
+| `8b105505` | Wire vocabulary registry pointer into operational surfaces; trim CLAUDE.md (hub) |
+| `bacf509`  | Co-directors morning report v1.1 (mx-outputs) |
