@@ -359,8 +359,8 @@ class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><
 </ul>
 <p><strong>File Location:</strong></p>
 <ul>
-<li><code>outputs/bible/blogs/mx/[filename].html</code> (and associated
-assets)</li>
+<li><code>outputs/protocols/blogs/mx/[filename].html</code> (and
+associated assets)</li>
 </ul>
 <p><strong>Required Metadata (HTML):</strong></p>
 <div class="sourceCode" id="cb5" data-role="code-container"><pre
@@ -401,7 +401,7 @@ deployment</li>
 </ul>
 <p><strong>File Location:</strong></p>
 <ul>
-<li><code>outputs/bible/blogs/mx/[filename].html</code> (same as
+<li><code>outputs/protocols/blogs/mx/[filename].html</code> (same as
 in-review)</li>
 <li>Also deployed to web server at
 <code>https://mx.allabout.network/blog/[filename].html</code></li>
@@ -431,7 +431,7 @@ class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><
 </ul>
 <p><strong>File Location:</strong></p>
 <ul>
-<li><code>outputs/bible/blogs/mx/[filename].html</code> (same
+<li><code>outputs/protocols/blogs/mx/[filename].html</code> (same
 location)</li>
 </ul>
 <p><strong>Required Metadata:</strong></p>
@@ -455,7 +455,7 @@ consistency:</p>
 <li><p>Run generation script:
 <code>node scripts/generate-content-html.cjs [markdown-file]</code></p></li>
 <li><p>Script generates HTML, CSS, SVG files in
-<code>outputs/bible/blogs/mx/</code></p></li>
+<code>outputs/protocols/blogs/mx/</code></p></li>
 <li><p>Update markdown frontmatter:</p>
 <div class="sourceCode" id="cb10" data-role="code-container"><pre
 class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">blog-state</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;in-review&quot;</span></span></code></pre></div></li>
@@ -473,7 +473,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <p><strong>Trigger:</strong> Content approval and web deployment</p>
 <p><strong>Process:</strong></p>
 <ol type="1">
-<li><p>Verify HTML in <code>outputs/bible/blogs/mx/</code> is
+<li><p>Verify HTML in <code>outputs/protocols/blogs/mx/</code> is
 approved</p></li>
 <li><p>Deploy HTML, CSS, SVG to web server</p></li>
 <li><p>Update markdown frontmatter:</p>
@@ -527,7 +527,7 @@ directory boundaries:</p>
     ├── contrasts/                    # Draft series: contrasts
     └── joiners/                      # Draft series: joiners
 
-outputs/bible/blogs/mx/              # Generated content (in-review or published)
+outputs/protocols/blogs/mx/              # Generated content (in-review or published)
 ├── *.html                           # Blog post HTML
 ├── *.css                            # Blog-specific styles (WCAG 2.1 AA)
 └── *.svg                            # Diagrams and social cards</code></pre>
@@ -554,7 +554,7 @@ level, no deep nesting</p>
 <p><strong>Predictable names:</strong> Given a blog filename, you know
 exactly what files exist</p>
 <p><strong>Symlink convenience:</strong> Root-level symlink
-<code>blogs/ → outputs/bible/blogs/</code> provides shorter access
+<code>blogs/ → outputs/protocols/blogs/</code> provides shorter access
 path</p>
 <h2 id="generation-workflow">Generation Workflow</h2>
 <h3 id="script-generate-content-html.cjs">Script:
@@ -575,7 +575,7 @@ class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><
 <li>CSS file with WCAG 2.1 AA compliant styles</li>
 <li>SVG social media card (1200×630px)</li>
 <li>Extracted SVG diagrams with semantic filenames</li>
-<li>All files placed in <code>outputs/bible/blogs/mx/</code></li>
+<li>All files placed in <code>outputs/protocols/blogs/mx/</code></li>
 </ul>
 <h3 id="generation-process-steps">Generation Process Steps</h3>
 <h4 id="parse-markdown-frontmatter">1. Parse Markdown Frontmatter</h4>
@@ -668,7 +668,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>      svgFilename <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>baseFilename<span class="sc">}</span><span class="vs">-</span><span class="sc">${</span>svgId<span class="sc">}</span><span class="vs">.svg`</span><span class="op">;</span></span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span><span class="fu">writeFileSync</span>(<span class="vs">`outputs/bible/blogs/mx/</span><span class="sc">${</span>svgFilename<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> svgContent)<span class="op">;</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span><span class="fu">writeFileSync</span>(<span class="vs">`outputs/protocols/blogs/mx/</span><span class="sc">${</span>svgFilename<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> svgContent)<span class="op">;</span></span>
 <span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Replace inline SVG with img reference</span></span>
 <span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">$</span>(elem)<span class="op">.</span><span class="fu">replaceWith</span>(<span class="vs">`&lt;img src=&quot;</span><span class="sc">${</span>svgFilename<span class="sc">}</span><span class="vs">&quot; alt=&quot;[descriptive alt text]&quot;&gt;`</span>)<span class="op">;</span></span>
@@ -702,7 +702,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/text&gt;</span></span>
 <span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/svg&gt;`</span><span class="op">;</span></span>
 <span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  fs<span class="op">.</span><span class="fu">writeFileSync</span>(<span class="vs">`outputs/bible/blogs/mx/</span><span class="sc">${</span>filename<span class="sc">}</span><span class="vs">-social.svg`</span><span class="op">,</span> svg)<span class="op">;</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  fs<span class="op">.</span><span class="fu">writeFileSync</span>(<span class="vs">`outputs/protocols/blogs/mx/</span><span class="sc">${</span>filename<span class="sc">}</span><span class="vs">-social.svg`</span><span class="op">,</span> svg)<span class="op">;</span></span>
 <span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <h4 id="generate-css-with-wcag-2.1-aa-compliance">6. Generate CSS with
 WCAG 2.1 AA Compliance</h4>
@@ -814,7 +814,7 @@ class="sourceCode markdown"><code class="sourceCode markdown" data-role="code-co
 <span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Content continues...</span><span class="co">]</span></span></code></pre></div>
 <p><strong>Generated files:</strong></p>
-<pre class="text" data-role="code-block" data-language="text"><code>outputs/bible/blogs/mx/
+<pre class="text" data-role="code-block" data-language="text"><code>outputs/protocols/blogs/mx/
 ├── machine-experience-adding-metadata.html
 ├── machine-experience-adding-metadata.css
 └── machine-experience-adding-metadata-social.svg</code></pre>
@@ -1280,7 +1280,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <p>After HTML generation, validate compliance:</p>
 <h4 id="html-validation">1. HTML Validation</h4>
 <div class="sourceCode" id="cb53" data-role="code-container"><pre
-class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> html-validate outputs/bible/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>.html</span></code></pre></div>
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> html-validate outputs/protocols/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>.html</span></code></pre></div>
 <p>Fix all errors before proceeding. Common issues:</p>
 <ul>
 <li>Unclosed tags</li>
@@ -1291,7 +1291,7 @@ class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><
 </ul>
 <h4 id="svgxml-validation">2. SVG/XML Validation</h4>
 <div class="sourceCode" id="cb54" data-role="code-container"><pre
-class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> svg <span class="kw">in</span> outputs/bible/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>-<span class="pp">*</span>.svg<span class="kw">;</span> <span class="cf">do</span></span>
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> svg <span class="kw">in</span> outputs/protocols/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>-<span class="pp">*</span>.svg<span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">xmllint</span> <span class="at">--noout</span> <span class="st">&quot;</span><span class="va">$svg</span><span class="st">&quot;</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;✗ </span><span class="va">$svg</span><span class="st"> has XML errors&quot;</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
 <p>Fix XML entity errors:</p>
@@ -1304,10 +1304,10 @@ class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><
 <p>Use automated tools to catch common issues:</p>
 <div class="sourceCode" id="cb55" data-role="code-container"><pre
 class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pa11y scan</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> pa11y outputs/bible/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>.html</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> pa11y outputs/protocols/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>.html</span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lighthouse accessibility audit</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> lighthouse outputs/bible/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>.html <span class="at">--only-categories</span><span class="op">=</span>accessibility</span></code></pre></div>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> lighthouse outputs/protocols/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>.html <span class="at">--only-categories</span><span class="op">=</span>accessibility</span></code></pre></div>
 <p>Address all errors and warnings. Common findings:</p>
 <ul>
 <li>Missing alt text on images</li>
@@ -1347,7 +1347,8 @@ file-based interfaces:</p>
 </ul>
 <p><strong>Custom publishing pipelines:</strong></p>
 <ul>
-<li>Read generated HTML from <code>outputs/bible/blogs/mx/</code></li>
+<li>Read generated HTML from
+<code>outputs/protocols/blogs/mx/</code></li>
 <li>Parse meta tags for deployment routing</li>
 <li>Respect blog-state for workflow gates</li>
 </ul>

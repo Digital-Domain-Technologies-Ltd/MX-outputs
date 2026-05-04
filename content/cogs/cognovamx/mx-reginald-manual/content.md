@@ -20,7 +20,7 @@ mx:
   partOf: mx-maxine-lives
   audience: humans
   stability: stable
-  runbook: "mx exec manual-mx-reginald"
+  runbook: "mx exec mx-reginald-manual"
   x-mx-contextProvides:
     - How to use the Machine eXperience Engine including cog listing, execution, categories, and building guidance.
     - Usage guide and workflow for mx reginald
