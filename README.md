@@ -33,6 +33,21 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 PDF documents — books, manuals, presentations, blog exports.
 
+### pdf/ root (12 files)
+
+- [`acknowledge.pdf`](pdf/acknowledge.pdf)
+- [`chapter-00-introduction-to-mx.pdf`](pdf/chapter-00-introduction-to-mx.pdf)
+- [`cms-experts-company-values.pdf`](pdf/cms-experts-company-values.pdf)
+- [`dogu-abaris-contractor-agreement.pdf`](pdf/dogu-abaris-contractor-agreement.pdf)
+- [`dogu-abaris-visa-reference-letter.pdf`](pdf/dogu-abaris-visa-reference-letter.pdf)
+- [`gathering-grant.pdf`](pdf/gathering-grant.pdf)
+- [`machine-experience-one-pager.pdf`](pdf/machine-experience-one-pager.pdf)
+- [`mx-manifesto.pdf`](pdf/mx-manifesto.pdf)
+- [`mx-messaging-framework.pdf`](pdf/mx-messaging-framework.pdf)
+- [`reginald-grant.pdf`](pdf/reginald-grant.pdf)
+- [`SOUL.pdf`](pdf/SOUL.pdf)
+- [`the-gathering-blog.pdf`](pdf/the-gathering-blog.pdf)
+
 ### pdf/assets/ (5 files)
 
 - [`appendix-m.png`](pdf/assets/qr/appendix-m.png)
