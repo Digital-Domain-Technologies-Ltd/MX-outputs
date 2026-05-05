@@ -20,33 +20,18 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 240 | PDFs — books, reports, manuals, presentations |
+| [pdf/](pdf/) | 241 | PDFs — books, reports, manuals, presentations |
 | [md/](md/) | 191 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 2 | PowerPoint — presentation source files |
-| **Total** | **1032** | |
+| **Total** | **1033** | |
 
 ---
 
 ## pdf/
 
 PDF documents — books, manuals, presentations, blog exports.
-
-### pdf/ root (12 files)
-
-- [`acknowledge.pdf`](pdf/acknowledge.pdf)
-- [`chapter-00-introduction-to-mx.pdf`](pdf/chapter-00-introduction-to-mx.pdf)
-- [`cms-experts-company-values.pdf`](pdf/cms-experts-company-values.pdf)
-- [`dogu-abaris-contractor-agreement.pdf`](pdf/dogu-abaris-contractor-agreement.pdf)
-- [`dogu-abaris-visa-reference-letter.pdf`](pdf/dogu-abaris-visa-reference-letter.pdf)
-- [`gathering-grant.pdf`](pdf/gathering-grant.pdf)
-- [`machine-experience-one-pager.pdf`](pdf/machine-experience-one-pager.pdf)
-- [`mx-manifesto.pdf`](pdf/mx-manifesto.pdf)
-- [`mx-messaging-framework.pdf`](pdf/mx-messaging-framework.pdf)
-- [`reginald-grant.pdf`](pdf/reginald-grant.pdf)
-- [`SOUL.pdf`](pdf/SOUL.pdf)
-- [`the-gathering-blog.pdf`](pdf/the-gathering-blog.pdf)
 
 ### pdf/assets/ (5 files)
 
@@ -657,4 +642,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-05 at 13:47*
+*Generated on 2026-05-05 at 16:23*
