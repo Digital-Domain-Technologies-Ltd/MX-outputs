@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter, free-book refresh"
-description: "Hardened cog enforcement, shipped end-to-end audit pipeline, defaulted PDF engine to Chrome for EAA compliance, generated visa reference letter for Yunus Doğu, and refreshed the free-book introduction with current site statistics."
+title: "Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter, free-book refresh, field consolidation"
+description: "Hardened cog enforcement, shipped end-to-end audit pipeline, defaulted PDF engine to Chrome for EAA compliance, generated visa reference letter for Yunus Doğu, refreshed the free-book introduction, and consolidated the MX field vocabulary across the gathering drafts."
 author: "Tom Cranstoun"
 created: 2026-05-05
 modified: 2026-05-05
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -18,7 +18,7 @@ mx:
 # Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter
 
 **Date:** 5 May 2026 — Afternoon/Evening
-**Segment:** afternoon (updated with evening work, further updated with late-evening free-book work)
+**Segment:** afternoon (updated with evening work, further updated with late-evening free-book work, and again with late-afternoon field-consolidation work)
 
 ---
 
@@ -69,6 +69,24 @@ Read all 108 HTML pages in mx-outputs/mx-site to identify statistics and framing
 
 All additions were humanized (removed AI-isms: weak existential openers, negative parallelisms, bureaucratic phrasing, rule-of-three lists). `soul.md` description updated to reflect the expanded case count. PDFs rebuilt in all three formats (A4, A5, Letter) via the Chrome tagged-PDF engine: `/StructTreeRoot` and `pdfuaid:Part=1` confirmed present.
 
+### 10. Field consolidation across the mx-shared-gathering drafts
+
+Investigated all 138 fields formally defined across the ten gathering-draft notes by priority (core-metadata is the foundational floor; later drafts extend it). Three exact-name duplicates and one consolidate-able near-match cluster surfaced. All consolidations propagated through every consumer surface in lockstep.
+
+**Quality triad merged.** Three top-level provenance fields (`accessibility`, `semantic`, `convergence`) collapsed into a single `quality:` object with three sub-keys. Twenty-seven cogs migrated from bare keys to the new shape via a Python helper. The cognovamx-fields canon entry restructured from a flat `semantic` field to a `quality` object. The grouping reflects that the three are complementary facets of a shared theme, and namespacing as `quality.accessibility` sharpens the boundary with the document-accessibility note's detailed conformance vocabulary.
+
+**`expires` deduplicated.** The field was defined in both core-metadata (ISO-8601 content-validity date) and provenance (relocation/expiry). Per the priority rule (core wins on collisions), the provenance definition was reduced to a one-paragraph cross-reference; the canon authority is now unambiguous.
+
+**Carrier kebab fields renamed to camelCase.** Three carrier-format fields violated NDR-02: `mx:builds-on` → `mx:buildsOn`, `mx:documented-in` → `mx:documentedIn`, `mx:context-provides` → `mx:contextProvides`. Renames landed across the gathering draft, the canon SSOT (`fields-data.yaml`, `cognovamx-fields.yaml`), the public website mirrors, the sister mx-metadata-conventions docs (in both maxine-lives and mx-outputs), the public corpus, three production JS files (`scripts/lint-md-all.js`, `parse-mxignore.js`, `qr-code-generator/qr-generator.js`), and the stream-drafts mirror. The conversion-rule prose in the stream-drafts extension note ("convert camelCase to kebab-case") was wrong and was rewritten.
+
+**Boundary documentation added.** Two prose additions name the distinctions that consolidation could re-blur: a six-row identity-field-boundaries table in `draft-provenance.md` §5.0 (covering `author`, `provenanceAuthor`, `maintainer`, `maintainedBy`, `publisher`, `provenancePublisher`), and a one-paragraph cross-reference in `draft-document-accessibility.md` §3.3 distinguishing `quality.accessibility` (high-level signal) from the detailed `accessibilityConformance` / `accessibilityFeature` / `accessibilityHazard` / `accessibilitySummary` vocabulary.
+
+**`llms-understanding.txt` reordered.** A side discovery during the priority-ordering analysis: the public corpus listed Cogs at position 3, but per the field-pattern note's own §3.4 reading order, Cogs is a Layer-3 specialization that should appear after Provenance, Extensions, and Carrier Formats. Both the TOC and the body sections were reordered (3604-line file; 10 sections physically reassembled via Python). Cogs now sits at position 6, Contract Fingerprinting at 8.
+
+**`cog.html` field-naming convention added.** The public-facing cog explainer now carries a paragraph stating that all MX field names use camelCase per NDR-02, in every carrier and namespace; carrier syntax determines how a value is encoded, not how a name is spelled.
+
+**Verification.** `npm run fields:gate` clean (0 errors); `cog-tools validate` clean (0 errors, no actionType regressions); 9 remaining kebab references are all intentional historical records (`field-cull-log.md`, the historical session report, the rubric script) or migration-from notes that name the OLD form so readers can recognize and migrate it. The canon's `deprecations:` block stays empty per the standing rule — the migration was structural, not flat-key, so the existing deprecations machinery wasn't needed.
+
 ### 8. Three real bugs found and fixed along the way
 
 While testing the wrapper end-to-end three previously-silent bugs surfaced and were fixed: `mx-audit/bin/infill-report.js` block (R) referenced an undefined `reportPath` (corrected to in-scope `outPath`); `mx-audit/templates/web-audit-suite-template.contract.json` was missing five placeholders (`OTHER_WELLKNOWN_TABLE` plus the four `LLM_ATTRIBUTION_*`) which aborted the deterministic infill with a contract error; and `mx.pdf.sh`'s `pandoc --resource-path` did not include `mx-outputs/pdf/assets/` or `mx-audit/assets/`, so audit reports referencing `assets/qr/appendix-r.png` died at the xelatex stage with a missing-image error that the script's `|| true` swallowed, leaving a partial corrupt PDF that then failed the EAA gate downstream. Resource-path now includes both asset roots and `\graphicspath` in the LaTeX header mirrors the same set.
@@ -89,6 +107,10 @@ While testing the wrapper end-to-end three previously-silent bugs surfaced and w
 | PDF engine default | xelatex → Chrome (EAA Level 1 + Level 2 for all future PDFs) |
 | New MX extension fields | 1 (`x-mx-generateTableOfContents`) — cognovamx-fields.yaml v6.7 |
 | Visa letter PDF | 219 KB, 4pp, EAA-tagged, signed-ready |
+| Field consolidation: drafts touched | 4 (provenance, carrier-formats, document-accessibility, cogs) |
+| Field consolidation: cogs migrated | 27 (quality triad re-shape) |
+| Field consolidation: total replacements | 45 across 8 files (canon SSOT + public mirrors + corpus + sister docs) |
+| Fields formally enumerated across drafts | 138 (priority-ordered, dependency-graphed) |
 
 ---
 
@@ -133,3 +155,6 @@ The `x-mx-execute:` YAML block declares what an action cog does; the `@embedded:
 | `bf21a4fd` (hub) | cognovamx-fields.yaml v6.7; submodule pointer bumps for mx-audit, mx-crm, mx-outputs |
 | `137805b` (mx-outputs) | Rebuild free-book PDFs: fresh stats, e-commerce scenario, support-cost multiplier |
 | _pending_ (hub) | Free-book chapter-00 + soul.md refresh; mx-outputs pointer bump |
+| `25e2a21` (mx-shared-gathering) | Field consolidation: quality triad, expires dedup, carrier camelCase, identity-trio boundaries, accessibility cross-ref |
+| `b0bb44d` (mx-outputs) | Propagate consolidation to public website + corpus + canon mirrors; cog.html field-name convention paragraph |
+| _pending_ (hub) | Field consolidation in canon SSOT (fields-data.yaml, fields-data-cogs.yaml, cognovamx-fields.yaml); Appendix M; quality merge across 27 cogs; submodule pointer bumps |
