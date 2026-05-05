@@ -3,7 +3,7 @@ title: "mx-boot"
 version: "1.0.0"
 description: "MX OS bootstrapper — zero to operational. Checks prerequisites, installs dependencies. Entry points: INSTALLME (bare metal), npm run boot, /mx-boot."
 created: 2026-02-11
-modified: 2026-03-03
+modified: 2026-05-05
 author: Tom Cranstoun
 
 mx:
@@ -353,9 +353,12 @@ mx:
   mx:
     contentType: "action-doc"
     runbook: "mx exec mx-boot"
-    semantic: true
-    convergence: true
-    accessibility: true
+    quality:
+      semantic: true
+      convergence: true
+
+      accessibility: true
+
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-boot/content.md
 ---
 

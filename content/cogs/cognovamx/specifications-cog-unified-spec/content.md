@@ -2,7 +2,7 @@
 title: "MX Cog Unified Specification"
 version: "2.2-draft"
 created: 2026-02-08
-modified: 2026-03-18
+modified: 2026-05-05
 author: Tom Cranstoun
 description: "The unified specification for MX cogs — one document type, many block types. Capability, trust, and governance in one format."
 
@@ -914,9 +914,10 @@ Declare alignment with MX principles:
 
 ```yaml
 mx:
-  convergence: true    # Benefits both humans and machines
-  accessibility: true  # Improves accessibility
-  semantic: true       # Uses or promotes semantic structures
+  quality:
+    convergence: true    # Benefits both humans and machines
+    accessibility: true  # Improves accessibility
+    semantic: true       # Uses or promotes semantic structures
 ```
 
 If an action-doc does not align with MX principles, it should explain why in the documentation.
@@ -924,9 +925,7 @@ If an action-doc does not align with MX principles, it should explain why in the
 ### Requires Object
 
 ```yaml
-requires:
-  bins: [curl, jq]           # Required CLI tools
-  cogs: [schema]             # Required other cogs
+dependencies: []
 ```
 
 ### Relationship Fields

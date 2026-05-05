@@ -3,7 +3,7 @@ version: "1.5.0"
 description: Convert existing content into MX-enhanced format with comprehensive metadata, accessibility, and WebMCP integration
 
 created: 2026-02-20
-modified: 2026-02-20
+modified: 2026-05-05
 
 author: CogNovaMX Ltd
 
@@ -139,7 +139,9 @@ mx:
           yaml: "valid",
           html: "valid",
           schema: "valid",
-          accessibility: "AA compliant",
+          quality:
+            accessibility: "AA compliant",
+
           webmcp: "compliant",
           warnings: []
         }
@@ -206,7 +208,9 @@ mx:
       functionality: "Enhanced with WebMCP"
 
     quality:
-      accessibility: "WCAG 2.1 AA minimum"
+      quality:
+        accessibility: "WCAG 2.1 AA minimum"
+
       validation: "W3C compliant"
       metadata: "Comprehensive"
       documentation: "Self-describing"

@@ -4,7 +4,7 @@ version: "1.2.0"
 description: "Comprehensive web audit — crawl pages, analyse accessibility, performance, SEO, and AI agent suitability, then generate a partnership-ready executive report."
 
 created: 2026-02-14
-modified: 2026-02-14
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -530,7 +530,9 @@ mx:
           - Engagement options: price range
           - Full audit results: mx-audit/results/<hostname>/
 
-  semantic: true
+  quality:
+    semantic: true
+
   x-mx-convergence: true
   x-mx-accessibility: true
   runbook: "mx exec mx-audit"

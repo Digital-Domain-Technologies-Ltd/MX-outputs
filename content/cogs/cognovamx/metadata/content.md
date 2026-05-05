@@ -4,7 +4,7 @@ version: 0.1.0
 description: Extract and validate page metadata (Open Graph, Twitter Cards, meta tags)
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -80,15 +80,16 @@ mx:
             type: array
             description: Recommended improvements
 
-  requires:
-    bins: []
-    cogs: [schema]
-
+  dependencies:
+    - name: schema
+      kind: cog
   contentType: "action-doc"
   runbook: "mx exec metadata"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # metadata

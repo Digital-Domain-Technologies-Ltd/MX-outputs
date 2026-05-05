@@ -4,7 +4,7 @@ version: 0.1.0
 description: Test documentation clarity - if AI struggles, humans probably do too
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -54,15 +54,14 @@ mx:
             type: object
             description: Clarity improvement/regression analysis
 
-  requires:
-    bins: []
-    cogs: []
-
+  dependencies: []
   contentType: "action-doc"
   runbook: "mx exec clarity"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # clarity

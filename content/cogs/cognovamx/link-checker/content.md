@@ -4,7 +4,7 @@ version: 0.1.0
 description: Validate links — critical for llms.txt and documentation
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -86,15 +86,14 @@ mx:
             type: object
             description: External link validation results
 
-  requires:
-    bins: []
-    cogs: []
-
+  dependencies: []
   contentType: "action-doc"
   runbook: "mx exec link-checker"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # link-checker

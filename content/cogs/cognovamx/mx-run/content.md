@@ -65,9 +65,11 @@ mx:
             type: string
             description: Output from the executed action
 
-  requires:
-    bins: [node]
-    packages: [js-yaml]
+  dependencies:
+    - name: node
+      kind: runtime
+    - name: js-yaml
+      kind: package
 ---
 
 # MX Run

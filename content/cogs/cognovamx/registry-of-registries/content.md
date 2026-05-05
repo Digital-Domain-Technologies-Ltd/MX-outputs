@@ -3,7 +3,7 @@ title: "registry-of-registries"
 version: "1.0.0"
 description: "The meta-registry — knows where every registry is, what it indexes, and how to query it."
 created: 2026-02-11
-modified: 2026-03-03
+modified: 2026-05-05
 author: Tom Cranstoun
 
 mx:
@@ -170,9 +170,12 @@ mx:
             description: "Overview of all registries with health status"
     contentType: "action-doc"
     runbook: "mx exec registry-of-registries"
-    semantic: true
-    convergence: true
-    accessibility: true
+    quality:
+      semantic: true
+      convergence: true
+
+      accessibility: true
+
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/registry-of-registries/content.md
 ---
 

@@ -4,7 +4,7 @@ version: 0.1.0
 description: Find ephemeral UI patterns that AI and screen readers miss
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -73,15 +73,16 @@ mx:
             type: object
             description: Accessibility audit of notification patterns
 
-  requires:
-    bins: []
-    cogs: [a11y]
-
+  dependencies:
+    - name: a11y
+      kind: cog
   contentType: "action-doc"
   runbook: "mx exec toast-detector"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # toast-detector

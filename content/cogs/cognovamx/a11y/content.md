@@ -4,7 +4,7 @@ version: 0.1.0
 description: Accessibility audit — what breaks for AI breaks for humans
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -72,15 +72,16 @@ mx:
             type: object
             description: Side-by-side comparison of a11y and MX issues
 
-  requires:
-    bins: []
-    cogs: [semantic-html]
-
+  dependencies:
+    - name: semantic-html
+      kind: cog
   contentType: "action-doc"
   runbook: "mx exec a11y"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # a11y

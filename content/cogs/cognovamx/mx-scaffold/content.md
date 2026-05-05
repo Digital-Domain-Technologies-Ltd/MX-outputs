@@ -3,7 +3,7 @@ title: "mx-scaffold"
 version: "1.0"
 description: Create new MX-OS shell scripts with correct structure, metadata, and alias registration. The canonical pattern for extending mx-os.
 created: 2026-02-25
-modified: 2026-03-03
+modified: 2026-05-05
 author: Tom Cranstoun
 
 mx:
@@ -106,7 +106,9 @@ mx:
   mx:
     contentType: "action-doc"
     runbook: "mx exec mx-scaffold"
-    semantic: true
+    quality:
+      semantic: true
+
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-scaffold/content.md
 ---
 

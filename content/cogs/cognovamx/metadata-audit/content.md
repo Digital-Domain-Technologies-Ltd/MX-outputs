@@ -3,7 +3,7 @@ title: "metadata-audit"
 version: "1.0"
 description: "Audit all YAML frontmatter — compare against the field dictionary, detect deprecated fields, namespace errors, missing required fields, and mx: object sprawl."
 created: 2026-02-16
-modified: 2026-02-16
+modified: 2026-05-05
 author: Tom Cranstoun
 
 mx:
@@ -52,7 +52,9 @@ mx:
             type: string
             description: "Key metrics printed to terminal"
 
-  semantic: true
+  quality:
+    semantic: true
+
   x-mx-convergence: true
   x-mx-accessibility: true
   contentType: action-doc

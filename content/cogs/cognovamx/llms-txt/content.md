@@ -4,7 +4,7 @@ version: 0.1.0
 description: Generate and validate llms.txt files for Robot-First Web compliance
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -50,15 +50,14 @@ mx:
             type: object
             description: Validation results with errors/warnings
 
-  requires:
-    bins: []
-    cogs: []
-
+  dependencies: []
   contentType: "action-doc"
   runbook: "mx exec llms-txt"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # llms-txt

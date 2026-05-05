@@ -4,7 +4,7 @@ version: 0.1.0
 description: Plain language and reading level analysis
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -85,15 +85,16 @@ mx:
             type: object
             description: Side-by-side readability comparison
 
-  requires:
-    bins: []
-    cogs: [clarity]
-
+  dependencies:
+    - name: clarity
+      kind: cog
   contentType: "action-doc"
   runbook: "mx exec readability"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # readability

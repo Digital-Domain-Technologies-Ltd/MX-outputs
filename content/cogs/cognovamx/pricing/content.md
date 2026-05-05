@@ -4,7 +4,7 @@ version: 0.1.0
 description: Validate pricing data to catch range errors and formatting issues
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -58,15 +58,16 @@ mx:
             type: array
             description: Array of detected prices with context
 
-  requires:
-    bins: []
-    cogs: [schema]
-
+  dependencies:
+    - name: schema
+      kind: cog
   contentType: "action-doc"
   runbook: "mx exec pricing"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # pricing

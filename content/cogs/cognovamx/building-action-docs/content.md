@@ -4,7 +4,7 @@ version: "1.0"
 description: How to build action-docs — from description to working tool. Describe, create, test, wire. The pattern that turns natural language into MX OS applications.
 
 created: 2026-02-09
-modified: 2026-02-09
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -81,7 +81,9 @@ mx:
 
   contentType: "action-doc"
   runbook: "mx exec building-action-docs"
-  semantic: true
+  quality:
+    semantic: true
+
   x-mx-convergence: true
   x-mx-accessibility: true
 ---

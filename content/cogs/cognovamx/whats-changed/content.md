@@ -3,7 +3,7 @@ title: "whats-changed"
 version: "1.0.0"
 description: "Find what changed in the repo — list files by time period and type, extract metadata, show git status, surface gaps. The content audit tool."
 created: 2026-02-11
-modified: 2026-03-03
+modified: 2026-05-05
 author: Tom Cranstoun
 
 mx:
@@ -253,9 +253,12 @@ mx:
   mx:
     contentType: "action-doc"
     runbook: "mx exec whats-changed"
-    semantic: true
-    convergence: true
-    accessibility: true
+    quality:
+      semantic: true
+      convergence: true
+
+      accessibility: true
+
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/whats-changed/content.md
 ---
 

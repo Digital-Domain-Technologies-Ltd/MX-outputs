@@ -4,7 +4,7 @@ version: 0.1.0
 description: Analyze robots.txt — understand the old exclusion model
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -85,15 +85,16 @@ mx:
             type: object
             description: AI crawler policies (GPTBot, Claude, Bard, etc.)
 
-  requires:
-    bins: []
-    cogs: [llms-txt]
-
+  dependencies:
+    - name: llms-txt
+      kind: cog
   contentType: "action-doc"
   runbook: "mx exec robots-txt"
   x-mx-convergence: true
   x-mx-accessibility: false
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # robots-txt

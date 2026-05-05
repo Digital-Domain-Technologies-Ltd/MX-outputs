@@ -86,9 +86,9 @@ mx:
         description: Generate cog-snapshot.cog.md + index.json
         usage: node scripts/cog-tools.js snapshot [--json]
 
-  requires:
-    bins: [node]
-    packages: []
+  dependencies:
+    - name: node
+      kind: runtime
 ---
 
 # COG Tools

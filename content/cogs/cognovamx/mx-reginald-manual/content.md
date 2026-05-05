@@ -3,7 +3,7 @@ title: MX Reginald — Manual
 description: How to use the Machine eXperience Engine including cog listing, execution, categories, and building guidance.
 author: Tom Cranstoun
 created: 2026-02-06
-modified: 2026-02-23
+modified: 2026-05-05
 version: "1.3"
 
 mx:
@@ -244,9 +244,10 @@ Cogs declare their alignment with MX principles:
 
 ```yaml
 mx:
-  convergence: true    # Benefits humans and machines
-  accessibility: true  # Improves accessibility
-  semantic: true       # Uses semantic structures
+  quality:
+    convergence: true    # Benefits humans and machines
+    accessibility: true  # Improves accessibility
+    semantic: true       # Uses semantic structures
 ```
 
 ---

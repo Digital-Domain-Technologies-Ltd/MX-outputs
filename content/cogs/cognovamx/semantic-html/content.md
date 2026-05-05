@@ -4,7 +4,7 @@ version: 0.1.0
 description: Validate HTML semantics — structure precedes presentation
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -76,15 +76,14 @@ mx:
             type: array
             description: List of suggested improvements
 
-  requires:
-    bins: []
-    cogs: []
-
+  dependencies: []
   contentType: "action-doc"
   runbook: "mx exec semantic-html"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # semantic-html

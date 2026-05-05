@@ -4,7 +4,7 @@ version: 0.1.0
 description: Analyze sitemaps and compare with llms.txt coverage
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -76,15 +76,18 @@ mx:
             type: object
             description: Last modified dates and update patterns
 
-  requires:
-    bins: []
-    cogs: [llms-txt, robots-txt]
-
+  dependencies:
+    - name: llms-txt
+      kind: cog
+    - name: robots-txt
+      kind: cog
   contentType: "action-doc"
   runbook: "mx exec sitemap"
   x-mx-convergence: true
   x-mx-accessibility: false
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # sitemap

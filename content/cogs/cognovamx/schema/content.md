@@ -4,7 +4,7 @@ version: 0.1.0
 description: Validate and generate Schema.org structured data markup
 
 created: 2026-02-06
-modified: 2026-02-06
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -63,15 +63,14 @@ mx:
             type: array
             description: Recommended schema types and properties
 
-  requires:
-    bins: []
-    cogs: []
-
+  dependencies: []
   contentType: "action-doc"
   runbook: "mx exec schema"
   x-mx-convergence: true
   x-mx-accessibility: true
-  semantic: true
+  quality:
+    semantic: true
+
 ---
 
 # schema
