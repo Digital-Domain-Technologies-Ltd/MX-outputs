@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter"
-description: "Hardened cog enforcement, shipped end-to-end audit pipeline, defaulted PDF engine to Chrome for EAA compliance, generated visa reference letter for Yunus Doğu."
+title: "Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter, free-book refresh"
+description: "Hardened cog enforcement, shipped end-to-end audit pipeline, defaulted PDF engine to Chrome for EAA compliance, generated visa reference letter for Yunus Doğu, and refreshed the free-book introduction with current site statistics."
 author: "Tom Cranstoun"
 created: 2026-05-05
 modified: 2026-05-05
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -18,7 +18,7 @@ mx:
 # Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter
 
 **Date:** 5 May 2026 — Afternoon/Evening
-**Segment:** afternoon (updated with evening work)
+**Segment:** afternoon (updated with evening work, further updated with late-evening free-book work)
 
 ---
 
@@ -58,6 +58,17 @@ Letters, briefs, and formal correspondence do not want a table of contents. Adde
 
 Generated a 4-page EAA-compliant PDF visa reference letter for Yunus Doğu's UK Global Talent visa application (Tech Nation digital technology route), written by Tom as Director of The Gathering Administration Ltd and founder of CogNovaMX. Layout work during the session: letterhead logo moved from LaTeX `\hfill` commands (which Chrome ignores) to an HTML `<div class="letterhead-logo">` with right-alignment CSS; address and contact blocks given pandoc hard line breaks (`\` trailing) so each line renders as a distinct `<br>` rather than concatenating; post-signature contact block trimmed to name and titles only (no repeated address); author credentials Contact line trimmed (registered office removed); date set to 5 May 2026. PDF output: `mx-outputs/pdf/dogu-abaris-visa-reference-letter.pdf` (219 KB, 4pp, Chrome-tagged).
 
+### 9. Free-book introduction refreshed from live site content
+
+Read all 108 HTML pages in mx-outputs/mx-site to identify statistics and framings present on the live site but absent from the free-book PDF. Introduced four targeted additions to `chapter-00-free.md` (v2.2 → v2.3):
+
+- **40% agent-mediated purchases** (Feb 2026, growing 5–10%/month) — sourced from `why-mx-matters.html`, inserted after the platform-launches paragraph.
+- **Support-cost multiplier** — agents that misread pages confidently relay wrong information to users, generating "your AI said..." support tickets. Added as a standalone paragraph in the "Why this matters to you" section.
+- **E-commerce Site A / Site B scenario** — condensed from the shopping-agent test on the site: one site hides prices behind buttons, the other uses Schema.org `Offer` markup; the structured site gets the sale, the other is never considered.
+- **Measurable ROI outcomes** — 3–5x agent recommendations, 25–40% ticket reduction, 20–35% shorter B2B sales cycles — inserted into "What MX-ready looks like."
+
+All additions were humanized (removed AI-isms: weak existential openers, negative parallelisms, bureaucratic phrasing, rule-of-three lists). `soul.md` description updated to reflect the expanded case count. PDFs rebuilt in all three formats (A4, A5, Letter) via the Chrome tagged-PDF engine: `/StructTreeRoot` and `pdfuaid:Part=1` confirmed present.
+
 ### 8. Three real bugs found and fixed along the way
 
 While testing the wrapper end-to-end three previously-silent bugs surfaced and were fixed: `mx-audit/bin/infill-report.js` block (R) referenced an undefined `reportPath` (corrected to in-scope `outPath`); `mx-audit/templates/web-audit-suite-template.contract.json` was missing five placeholders (`OTHER_WELLKNOWN_TABLE` plus the four `LLM_ATTRIBUTION_*`) which aborted the deterministic infill with a contract error; and `mx.pdf.sh`'s `pandoc --resource-path` did not include `mx-outputs/pdf/assets/` or `mx-audit/assets/`, so audit reports referencing `assets/qr/appendix-r.png` died at the xelatex stage with a missing-image error that the script's `|| true` swallowed, leaving a partial corrupt PDF that then failed the EAA gate downstream. Resource-path now includes both asset roots and `\graphicspath` in the LaTeX header mirrors the same set.
@@ -68,9 +79,9 @@ While testing the wrapper end-to-end three previously-silent bugs surfaced and w
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment | 6 (1 hub + submodules) |
+| Commits this segment | 7 (1 hub + submodules) |
 | Repositories touched | 4 (hub + mx-audit + mx-crm + mx-outputs) |
-| Hub files modified | 27+ (cog updates + mx-canon field dictionary) |
+| Hub files modified | 29+ (cog updates + mx-canon field dictionary + free-book edits) |
 | Bugs fixed | 5 (hook drop, missing embedded script, infill `reportPath`, contract gap, asset-path silent failure) |
 | Audit pipeline phases now scripted end-to-end | 3 of 3 (was 1 — Phase 1 only) |
 | New cog wrapper flags | 8 (`--phase1-only`, `--no-gates`, `--warn-fierce`, `--warn-llm`, `--strict-fierce`, `--gates`, `--report`, `-h`) |
@@ -119,4 +130,6 @@ The `x-mx-execute:` YAML block declares what an action cog does; the `@embedded:
 | `d4d4d64` (mx-crm) | Clear stale 2026-05-04 mx.allabout.network audit artefacts |
 | `b6e8abd` (mx-crm) | dogu-abaris: x-mx-generateTableOfContents:false; letterhead line breaks; HTML logo; trimmed contact info; date 5 May 2026 |
 | `5f66f24` (mx-outputs) | Add dogu-abaris visa reference letter PDF (EAA-compliant, Chrome, 4pp) |
-| _pending_ (hub) | cognovamx-fields.yaml v6.7; submodule pointer bumps for mx-audit, mx-crm, mx-outputs |
+| `bf21a4fd` (hub) | cognovamx-fields.yaml v6.7; submodule pointer bumps for mx-audit, mx-crm, mx-outputs |
+| `137805b` (mx-outputs) | Rebuild free-book PDFs: fresh stats, e-commerce scenario, support-cost multiplier |
+| _pending_ (hub) | Free-book chapter-00 + soul.md refresh; mx-outputs pointer bump |
