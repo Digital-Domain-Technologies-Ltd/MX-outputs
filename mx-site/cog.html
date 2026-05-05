@@ -43,7 +43,7 @@
   "url": "https://mx.allabout.network/cog.html",
   "inLanguage": "en-GB",
   "datePublished": "2026-05-02",
-  "dateModified": "2026-05-06",
+  "dateModified": "2026-05-08",
   "author": {
     "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
   },
@@ -121,6 +121,8 @@
           <li><strong>Do not guess.</strong> If a field is absent or unclear, treat it as absent. Do not infer values that are not stated.</li>
           <li><strong>Do not invent.</strong> If you need a field the COG does not have, ask, or stop. Do not fabricate data to keep going.</li>
         </ul>
+
+        <p><strong>Field-name convention.</strong> All MX field names use camelCase, in every carrier and in every namespace. <code>buildsOn</code>, <code>contentType</code>, <code>actionType</code>, <code>publishedDate</code>. The same name is spelled the same way in YAML, in HTML <code>&lt;meta&gt;</code> tags, in JSDoc <code>@mx:</code> tags, in shell sidecars, in XMP. Carrier syntax determines how the value is encoded; it does not change the name. Hyphenated forms (<code>builds-on</code>) and snake-cased forms (<code>builds_on</code>) are not part of the MX vocabulary.</p>
       </div>
     </section>
 
@@ -158,6 +160,20 @@
         <p>A skill is a runtime-specific instruction. Its job is to recognise when the user wants to invoke a COG, and to dispatch the request. Skills route. COGs do.</p>
 
         <p>When a skill and a COG share a name, the COG is authoritative. The skill exists to wire the chat surface to the COG, not to duplicate its work. Edits to the work itself happen in the COG; the skill stays a thin pointer.</p>
+      </div>
+    </section>
+
+    <section class="section section-mid" aria-label="How a COG declares its dependencies">
+      <div class="section-inner" role="presentation">
+        <h2 class="section-title">How a COG declares its dependencies</h2>
+
+        <p>A COG names what it depends upon in a single field, <strong><code>dependencies</code></strong>, declared inside the <code>mx:</code> block. The field is an array of objects. Each entry has <code>name</code> (required) plus optional <code>version</code> (a constraint such as a SemVer range), <code>reason</code> (a one-sentence explanation), and <code>kind</code>.</p>
+
+        <p>The <code>kind</code> sub-key takes one of four values: <code>cog</code> (another COG resolvable in the registry), <code>runtime</code> (a CLI or interpreter such as <code>node</code> or <code>bash</code>), <code>package</code> (an npm or other package-manager dependency), or <code>external</code> (a service or data source). The recommended kind is <code>cog</code>; runtime, package, and external dependencies usually belong in their proper carrier (<code>package.json</code>, the COG's runbook, or an external manifest), with the non-cog kinds reserved for cases where inline declaration in the COG is genuinely the right home.</p>
+
+        <p>A COG declaring no dependencies may omit the field or write <code>dependencies: []</code>; both are conformant. A COG MUST NOT be considered functional if any of its declared dependencies are missing or unresolvable.</p>
+
+        <p>Three related fields express weaker relationships and remain string-or-array of COG identifiers: <code>partOf</code> (the parent collection or registry), <code>buildsOn</code> (cogs the reader should already understand; soft prerequisite), and <code>refersTo</code> (cited or cross-referenced cogs; informational link, not a dependency).</p>
       </div>
     </section>
 

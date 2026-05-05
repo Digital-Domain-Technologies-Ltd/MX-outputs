@@ -99,7 +99,7 @@ JavaScript files carry metadata in JSDoc comment blocks. MX adds `@mx:` tags alo
  * @mx:audience developers, ai-agents
  * @mx:category mx-core
  * @mx:stability stable
- * @mx:builds-on pricing, schema
+ * @mx:buildsOn pricing, schema
  * @mx:tags pricing, validation, accuracy
  *
  * @param {string} url - The URL to validate
@@ -122,11 +122,11 @@ export function validatePricing(url) {
 | `@see`, `@link` | builds-on / refersTo equivalent |
 | Function bodies | code (implicit) |
 
-**Canonical tag format:** `@mx:field-name` (kebab-case after `@mx:`). The `@mx-ai-*` pattern found in older files is deprecated — migrate to `@mx:*`.
+**Canonical tag format:** `@mx:fieldName` (camelCase after `@mx:`, per NDR-02). The `@mx-ai-*` pattern found in older files is deprecated — migrate to `@mx:*`.
 
 **Required `@mx:` tags:** `@mx:name`
 **Recommended:** `@mx:version`, `@mx:purpose`
-**Optional:** `@mx:audience`, `@mx:stability`, `@mx:category`, `@mx:tags`, `@mx:builds-on`, `@mx:documented-in`, `@mx:context-provides`
+**Optional:** `@mx:audience`, `@mx:stability`, `@mx:category`, `@mx:tags`, `@mx:buildsOn`, `@mx:documentedIn`, `@mx:contextProvides`
 
 ---
 
@@ -270,7 +270,7 @@ A cog's security or policy block may override this default. Confidential metadat
 
 ### When to use mx:*
 
-Use the `mx:` namespace for CogNovaMX product-specific metadata — fields that are meaningful within MX OS, Maxine, and Reginald. Examples: `mx:purpose`, `mx:audience`, `mx:stability`, `mx:context-provides`.
+Use the `mx:` namespace for CogNovaMX product-specific metadata — fields that are meaningful within MX OS, Maxine, and Reginald. Examples: `mx:purpose`, `mx:audience`, `mx:stability`, `mx:contextProvides`.
 
 ### When to use a vendor namespace
 
@@ -304,11 +304,11 @@ The `@mx-ai-*` pattern is deprecated. If encountered in any file, migrate to the
 | --- | --- |
 | `@mx-ai-assistance` | (remove — MX metadata implies AI-readability) |
 | `@mx-ai-editable` | (remove — not a metadata concern) |
-| `@mx-ai-contextProvides` | `@mx:context-provides` |
+| `@mx-ai-contextProvides` | `@mx:contextProvides` |
 
-### context_provides vs context-provides
+### context_provides / context-provides → contextProvides
 
-Existing files use `@mx:context_provides` (underscore). The canonical form is `@mx:context-provides` (kebab-case, per MX convention). Migrate on next edit.
+Older files use `@mx:context_provides` (underscore) or `@mx:context-provides` (kebab-case). The canonical form is `@mx:contextProvides` (camelCase, per NDR-02). Migrate on next edit.
 
 ### cog:* HTML namespace
 
