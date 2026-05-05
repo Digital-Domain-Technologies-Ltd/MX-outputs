@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Cog enforcement, end-to-end audit wrapper, audit-PDF typography"
-description: "Made the cog enforcer trustworthy, turned the mx-audit cog into a one-command pipeline, and fixed the audit-PDF layout."
+title: "Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter"
+description: "Hardened cog enforcement, shipped end-to-end audit pipeline, defaulted PDF engine to Chrome for EAA compliance, generated visa reference letter for Yunus Doğu."
 author: "Tom Cranstoun"
 created: 2026-05-05
 modified: 2026-05-05
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -15,16 +15,16 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-05-afternoon-report.md
 ---
 
-# Co-Directors Report — Cog enforcement, end-to-end audit wrapper, audit-PDF typography
+# Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter
 
-**Date:** 5 May 2026 — Afternoon
-**Segment:** afternoon (since noon)
+**Date:** 5 May 2026 — Afternoon/Evening
+**Segment:** afternoon (updated with evening work)
 
 ---
 
 ## Summary
 
-The afternoon closed three gaps that all bit a real audit run earlier in the day: the cog enforcement hook silently dropped its directive on long cog bodies, the mx-audit cog had no executable script behind its declared runbook, and the audit PDF rendered with wide margins and clipped table text. All three are now fixed end-to-end and verified against the same mx.allabout.network audit that surfaced them.
+The afternoon closed three gaps that all bit a real audit run earlier in the day: the cog enforcement hook silently dropped its directive on long cog bodies, the mx-audit cog had no executable script behind its declared runbook, and the audit PDF rendered with wide margins and clipped table text. All three are now fixed end-to-end. The evening added EAA-compliant PDF output by default and produced the Yunus Doğu UK Global Talent visa reference letter as a signed-ready PDF.
 
 ---
 
@@ -46,7 +46,19 @@ The hole that produced gap (2) was traced back to `how-to-write-a-cog.cog.md`, w
 
 A real PDF surfaced two complaints: 1-inch margins wasted page width, and the rightmost column in the Resilience Check table truncated long words mid-phrase ("ratio:" rendered as "ra…"). Three fixes in `mx-audit/scripts/bin/mx.pdf.sh` and `mx-audit/scripts/filters/shared-header.tex`: margins reduced to 12 mm sides (15 mm/18 mm vertical) reclaiming about 27 mm of textwidth on A4; longtable column-width minimum floor lifted from 5% to 7% so short headers like "Status" and "Pages" stop starving the data column; tabcolsep tightened from 5pt to 3pt; and inside `longtable`/`tabular`, `emergencystretch=12em` plus `tolerance=9999` plus low hyphenation penalties so narrow `p{}` columns split long words gracefully rather than clip them. Verified by regenerating the 2026-05-02 mx.allabout.network PDF — every table cell now renders complete sentences.
 
-### 5. Three real bugs found and fixed along the way
+### 5. PDF engine defaulted to Chrome — EAA compliance for all future PDFs
+
+`mx.pdf.sh` previously defaulted to xelatex, which produces untagged PDFs (no `/StructTreeRoot`). This fails EAA Level 1. The default is now `chrome` (`MX_PDF_ENGINE:-chrome`), which uses headless Chrome's `--export-tagged-pdf` flag to produce a PDF with a structure tree built from the HTML accessibility tree, passing EAA Level 1 (ISO 14289-1 Tagged) and Level 2 (pdfuaid:Part=1 XMP) without any document-author intervention. xelatex remains available via `MX_PDF_ENGINE=xelatex` for typeset manuscripts where accessibility metadata is acceptable to defer.
+
+### 6. `x-mx-generateTableOfContents` — new MX extension field
+
+Letters, briefs, and formal correspondence do not want a table of contents. Added `x-mx-generateTableOfContents` (boolean, default true when absent) to the CogNovaMX extension field dictionary (`cognovamx-fields.yaml` v6.6→v6.7). When set to `false` inside a document's `mx:` block, `mx.pdf.sh` suppresses the pandoc `--toc` flag in both Chrome and xelatex paths. The `extract_metadata` regex was also fixed to handle indented fields (inside a `mx:` block) by changing `^${field}:` to `^\s*${field}:`.
+
+### 7. Visa reference letter for Yunus Doğu — signed-ready PDF
+
+Generated a 4-page EAA-compliant PDF visa reference letter for Yunus Doğu's UK Global Talent visa application (Tech Nation digital technology route), written by Tom as Director of The Gathering Administration Ltd and founder of CogNovaMX. Layout work during the session: letterhead logo moved from LaTeX `\hfill` commands (which Chrome ignores) to an HTML `<div class="letterhead-logo">` with right-alignment CSS; address and contact blocks given pandoc hard line breaks (`\` trailing) so each line renders as a distinct `<br>` rather than concatenating; post-signature contact block trimmed to name and titles only (no repeated address); author credentials Contact line trimmed (registered office removed); date set to 5 May 2026. PDF output: `mx-outputs/pdf/dogu-abaris-visa-reference-letter.pdf` (219 KB, 4pp, Chrome-tagged).
+
+### 8. Three real bugs found and fixed along the way
 
 While testing the wrapper end-to-end three previously-silent bugs surfaced and were fixed: `mx-audit/bin/infill-report.js` block (R) referenced an undefined `reportPath` (corrected to in-scope `outPath`); `mx-audit/templates/web-audit-suite-template.contract.json` was missing five placeholders (`OTHER_WELLKNOWN_TABLE` plus the four `LLM_ATTRIBUTION_*`) which aborted the deterministic infill with a contract error; and `mx.pdf.sh`'s `pandoc --resource-path` did not include `mx-outputs/pdf/assets/` or `mx-audit/assets/`, so audit reports referencing `assets/qr/appendix-r.png` died at the xelatex stage with a missing-image error that the script's `|| true` swallowed, leaving a partial corrupt PDF that then failed the EAA gate downstream. Resource-path now includes both asset roots and `\graphicspath` in the LaTeX header mirrors the same set.
 
@@ -56,13 +68,16 @@ While testing the wrapper end-to-end three previously-silent bugs surfaced and w
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment | 4 (1 hub + 3 submodules) |
+| Commits this segment | 6 (1 hub + submodules) |
 | Repositories touched | 4 (hub + mx-audit + mx-crm + mx-outputs) |
-| Hub files modified | 27 (mostly cog updates landing in parallel) |
+| Hub files modified | 27+ (cog updates + mx-canon field dictionary) |
 | Bugs fixed | 5 (hook drop, missing embedded script, infill `reportPath`, contract gap, asset-path silent failure) |
 | Audit pipeline phases now scripted end-to-end | 3 of 3 (was 1 — Phase 1 only) |
 | New cog wrapper flags | 8 (`--phase1-only`, `--no-gates`, `--warn-fierce`, `--warn-llm`, `--strict-fierce`, `--gates`, `--report`, `-h`) |
 | PDF margin reduction | 25.4 mm → 12 mm per side (≈ 27 mm reclaimed textwidth on A4) |
+| PDF engine default | xelatex → Chrome (EAA Level 1 + Level 2 for all future PDFs) |
+| New MX extension fields | 1 (`x-mx-generateTableOfContents`) — cognovamx-fields.yaml v6.7 |
+| Visa letter PDF | 219 KB, 4pp, EAA-tagged, signed-ready |
 
 ---
 
@@ -98,7 +113,10 @@ The `x-mx-execute:` YAML block declares what an action cog does; the `@embedded:
 
 | Hash | Description |
 |------|-------------|
-| _pending_ (hub) | Cog enforcer hardening; mx-audit cog wrapper + embedded script; how-to-write-a-cog Step 9b; submodule pointer bumps |
+| `4094c38c` (hub) | Cog enforcer hardening; mx-audit cog wrapper + embedded script; how-to-write-a-cog Step 9b; submodule pointer bumps |
 | `a4f0eca` (mx-audit) | Audit pipeline: end-to-end wrapper, PDF typography, infill bug, contract gaps |
+| `3ac8b54` (mx-audit) | PDF: default engine → Chrome (EAA); conditional TOC; indented-field metadata extraction; letterhead-logo CSS |
 | `d4d4d64` (mx-crm) | Clear stale 2026-05-04 mx.allabout.network audit artefacts |
-| `c20f33d` (mx-outputs) | Site + reports: cog.html skill/COG explainer, regen 05-02 PDF, drop stale 05-04 |
+| `b6e8abd` (mx-crm) | dogu-abaris: x-mx-generateTableOfContents:false; letterhead line breaks; HTML logo; trimmed contact info; date 5 May 2026 |
+| `5f66f24` (mx-outputs) | Add dogu-abaris visa reference letter PDF (EAA-compliant, Chrome, 4pp) |
+| _pending_ (hub) | cognovamx-fields.yaml v6.7; submodule pointer bumps for mx-audit, mx-crm, mx-outputs |
