@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter, free-book refresh, field consolidation"
-description: "Hardened cog enforcement, shipped end-to-end audit pipeline, defaulted PDF engine to Chrome for EAA compliance, generated visa reference letter for Yunus Doğu, refreshed the free-book introduction, and consolidated the MX field vocabulary across the gathering drafts."
+title: "Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter, free-book refresh, field consolidation, free-book PDF overhaul"
+description: "Hardened cog enforcement, shipped end-to-end audit pipeline, defaulted PDF engine to Chrome for EAA compliance, generated visa reference letter for Yunus Doğu, refreshed the free-book introduction, consolidated the MX field vocabulary, and overhauled the free-book PDF with TOC dot leaders, section page breaks, and table layout fixes."
 author: "Tom Cranstoun"
 created: 2026-05-05
 modified: 2026-05-05
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -18,7 +18,7 @@ mx:
 # Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter
 
 **Date:** 5 May 2026 — Afternoon/Evening
-**Segment:** afternoon (updated with evening work, further updated with late-evening free-book work, and again with late-afternoon field-consolidation work)
+**Segment:** afternoon (updated with evening work, further updated with late-evening free-book work, and again with late-afternoon field-consolidation work, and evening free-book PDF overhaul)
 
 ---
 
@@ -142,6 +142,24 @@ The `x-mx-execute:` YAML block declares what an action cog does; the `@embedded:
 
 ---
 
+### 11. Free-book PDF overhaul — TOC, page breaks, table layout
+
+The Chrome-engine free-book PDF had three presentation problems visible on opening: no proper table of contents (the `--toc` pandoc flag placed a bare `<nav>` before the cover), no consistent section page breaks, and a 22-row Protocols chapter table that spanned pages and was unreadable on A5.
+
+**Manifesto source cleanup.** The `machine-experience-manifesto.md` source contained HTML `<aside>` elements carrying editorial side-notes. These were stripped and the manifesto was regenerated from the article content in `mx-site/blog/mx-manifesto.html`, producing a clean prose document without embedded annotations. Version bumped v2.0 → v2.1.
+
+**Footnote removal.** Four inline footnote markers (`[^adobe-holiday]`, `[^platform-launches]`, `[^agent-mediated]`, `[^adamuz]`) and their definitions were removed from `chapter-00-free.md` (v2.3). The Chrome engine cannot render LaTeX footnotes; they were appearing as visible `[^...]` text. CSS suppression was insufficient because the markers were in the source.
+
+**Kickoff images recovered.** The CMS Kickoff section embeds screenshots from `datalake/manuscripts/mx-books/free-book/chapter-00/images/`. Chrome headless cannot resolve relative file paths from a pandoc-generated HTML at a different working directory. Fixed by adding `--embed-resources` to the pandoc command, which bakes all images as base64 data URLs before Chrome sees the file. Image size increased from 4.9 MB to 9.4 MB — acceptable for a sampler PDF.
+
+**TOC with dot leaders and real page numbers.** The manual HTML TOC uses `display: table` layout with `radial-gradient` dot leaders (more reliable than `border-bottom` on empty flex children in Chrome headless print mode). Page numbers are extracted by a two-pass Chrome build: pass 1 renders the full PDF; pdftotext extracts page positions using content-unique strings (not section titles, which appear in both the TOC and the content and caused false matches); pass 2 substitutes the real numbers into the HTML before the final Chrome render. Page numbers: MX Introduction 2, Purchase the Books 11, AI Tipping Point 12, Manifesto 19, Work with Author 29.
+
+**Section page breaks.** Every `h2` now forces `page-break-before: always` in the print CSS, giving each major section a clean start. The spurious blank page from a `\newpage` marker on line 20 of `chapter-00-free.md` (after the YAML frontmatter closing `---`) was removed.
+
+**Table fixes.** The 22-row Protocols chapter table was split into two 11-row tables, each fitting a single A5 page. All tables: font reduced to 9pt, `tr { page-break-inside: avoid }` prevents rows splitting mid-row, alternating-row background (striping) added for readability. The existing `table { page-break-inside: avoid }` rule signals intent for shorter tables.
+
+---
+
 ## Commit Log
 
 | Hash | Description |
@@ -157,4 +175,6 @@ The `x-mx-execute:` YAML block declares what an action cog does; the `@embedded:
 | _pending_ (hub) | Free-book chapter-00 + soul.md refresh; mx-outputs pointer bump |
 | `25e2a21` (mx-shared-gathering) | Field consolidation: quality triad, expires dedup, carrier camelCase, identity-trio boundaries, accessibility cross-ref |
 | `b0bb44d` (mx-outputs) | Propagate consolidation to public website + corpus + canon mirrors; cog.html field-name convention paragraph |
-| _pending_ (hub) | Field consolidation in canon SSOT (fields-data.yaml, fields-data-cogs.yaml, cognovamx-fields.yaml); Appendix M; quality merge across 27 cogs; submodule pointer bumps |
+| `6659fdae` (hub) | Field consolidation in canon SSOT; Appendix M; quality merge across 27 cogs; CHANGELOG, LEARNINGS, REMINDERS, gen-free-book cog v2.1; submodule pointer bumps |
+| `88f8d51` (mx-outputs) | Update free-book PDFs: TOC dot leaders, split Protocols table, section page breaks (A4, A5, Letter) |
+| _pending_ (hub) | Free-book PDF overhaul: gen-free-book.sh TOC/breaks/tables; chapter-00-free.md footnote removal, \newpage fix, Protocols table split; manifesto v2.1; submodule pointer bumps |
