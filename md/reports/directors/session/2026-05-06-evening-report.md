@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — HTML Pitch Deck from Claude Design"
-description: "Implemented the MX Bare Metal Ventures HTML pitch deck from a Claude Design handoff bundle, and updated the PPTX/markdown pitch to v2.2."
+title: "Co-Directors Report — Pitch Deck and Reginald Manuscript Uplift"
+description: "Implemented the BMV HTML pitch deck, published the web-is-just-the-start blog post, and surfaced Reginald as an equal pillar to MX across the free-book and Protocols manuscripts."
 author: "Tom Cranstoun"
 created: 2026-05-06
 modified: 2026-05-06
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -15,7 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-06-evening-report.md
 ---
 
-# Co-Directors Report — HTML Pitch Deck from Claude Design
+# Co-Directors Report — Pitch Deck and Reginald Manuscript Uplift
 
 **Date:** 6 May 2026 — Evening
 **Segment:** Evening (since 5pm)
@@ -24,7 +24,7 @@ mx:
 
 ## Summary
 
-This session implemented the MX pitch deck for Bare Metal Ventures in HTML from a Claude Design handoff bundle (14 slides, cream/ink/signal-red, custom deck-stage web component), updated the PPTX to v2.2, and published a new blog post — "The web is just the start" — covering what AI agents need from documents beyond good web UX. The session also read the Reginald.pptx investor deck for context, updated the MX Gathering Notes draft guide from ten to eleven notes (adding the new MX scope note on MX vs GEO), and updated the drafts index.
+This session implemented the MX pitch deck for Bare Metal Ventures in HTML from a Claude Design handoff bundle (14 slides, cream/ink/signal-red, custom deck-stage web component), updated the PPTX to v2.2, and published a new blog post — "The web is just the start" — covering what AI agents need from documents beyond good web UX. The session also updated the MX Gathering Notes draft guide (eleventh note: MX vs GEO scope), updated the drafts index, and then undertook a manuscript uplift: Reginald is now positioned as an equal pillar to MX across the free-book introduction, the Protocols introduction chapter, orientation chapter, Chapter 20, and two appendices (U and J). Wrong chapter-number references in Appendix U were also corrected.
 
 ---
 
@@ -48,6 +48,22 @@ A new blog post was written and published to `mx-outputs/mx-site/blog/web-is-jus
 
 The `mx-gathering-notes-guide.html` draft was updated to reflect the eleventh MX draft note — `draft-mx-not-geo.md` — added to the mx-shared-gathering repo on 6 May 2026. The note defines MX scope vs GEO/AEO. The guide's TOC, reading order, intro, and body all updated; "ten" references changed to "eleven" throughout. The drafts index received a new card for `what-a-newborn-llm-wants-from-a-cog.html`. Both files also received compliance fixes: keywords meta removed, button type added, em-dash fixed, canonical/OG/Twitter/JSON-LD added to the gathering notes guide.
 
+### 5. Reginald Manuscript Uplift
+
+The free-book chapter (`chapter-00-free.md`) and five Protocols files were updated to surface Reginald as an equal pillar to MX — not a final-chapter appendage. The new framing, seeded in the free-book first and then propagated into the Protocols manuscripts: "MX and Reginald are the two pillars. MX makes content machine-readable. Reginald makes it machine-trustworthy."
+
+**Free-book (`chapter-00-free.md` v2.4):** New section "The trust layer: Reginald" inserted between "What MX-ready looks like" and "Where to go from here", picking up Stage 5 (Confidence) from the machine journey table. Covers the authenticity crisis, the human/AI/machine attestation point, Reginald's narrow claim ("this is what the owner published, unaltered"), and the two-pillar closing statement. Handbook and Protocols chapter table introductions updated to flag both pillars.
+
+**Protocols Chapter 00 (`chapter-00-protocols.md`):** New two-pillar paragraph inserted after the MX/GEO distinction; cogs section upgraded from "Registration is optional" to equal-pillar language with human/AI/machine attestation.
+
+**Protocols Chapter 01 (`chapter-01-what-you-will-learn.md` v1.1):** Two-pillar sentence added to Introduction; new paragraph covering Chapters 14–22 added to the chapter guide (chapter guide previously stopped at 13); "Understand the trust layer" bullet added to "What You'll Be Able to Do".
+
+**Protocols Chapter 20 (`chapter-20-cogs-and-reginald.md` v1.2):** Opening paragraph strengthened from "Reginald does it for trust and discovery" to the explicit two-pillar statement with human/AI/machine attestation.
+
+**Appendix U:** Stale chapter numbers corrected (line 29: "Chapter 19" → "Chapter 20"; line 113: "Chapter 20 — The Fields and the Standards" → "Chapter 21"); Reginald reframed from "one implementation of this open format" to "the machine-trustworthiness pillar"; narrow attestation section expanded to name the four attestation answers.
+
+**Appendix J:** Two wrong "Protocols Chapter 12" references corrected to "Protocols Chapter 20"; MCP adoption statistic reframed to validate both pillars.
+
 ---
 
 ## By the Numbers
@@ -56,20 +72,23 @@ The `mx-gathering-notes-guide.html` draft was updated to reflect the eleventh MX
 |--------|-------|
 | Commits (mx-outputs) | 4 |
 | Commits (hub) | pending |
-| Files changed | ~15 |
-| Lines added | +4,724 |
-| Lines removed | −183 |
+| Files changed | ~21 |
+| Lines added | +4,770 |
+| Lines removed | −204 |
 | Repositories | 2 |
 | New HTML deck slides | 14 |
 | New PPTX files | 1 (Reginald.pptx) |
 | New blog posts published | 1 (web-is-just-the-start) |
 | Draft posts updated | 2 (index, mx-gathering-notes-guide) |
+| Manuscript files updated | 6 (free-book ch00, Protocols ch00/ch01/ch20, appendix-j, appendix-u) |
 
 ---
 
 ## Why It Matters
 
-The HTML pitch deck is the primary investor-facing artefact for the Bare Metal Ventures meeting. Having it live in the repo — versioned, printable to PDF via browser, and presentable from any browser without dependencies — means it travels with the project and cannot be lost in email threads or Canva exports. The design was iterated in Claude Design and imported via the handoff API, establishing a repeatable workflow for future decks.
+The HTML pitch deck is the primary investor-facing artefact for the Bare Metal Ventures meeting. Having it live in the repo — versioned, printable to PDF via browser, and presentable from any browser without dependencies — means it travels with the project and cannot be lost in email threads or Canva exports.
+
+The manuscript uplift matters because the free-book is the primary top-of-funnel document for MX. Until this session it introduced Reginald only as a chapter listing entry at Chapter 12 / Chapter 20. Readers encountering MX for the first time had no reason to understand that Reginald is equal in importance — not a tool bolted onto the web layer, but the provenance layer for every document any machine might encounter. The two-pillar framing ("MX makes content machine-readable; Reginald makes it machine-trustworthy") is now in the introduction, in the Protocols orientation chapter, and in Chapter 20's opening. The wrong chapter-number references in Appendix U (which would have sent readers to the wrong chapter) are also fixed.
 
 ---
 
@@ -88,6 +107,8 @@ The HTML pitch deck is the primary investor-facing artefact for the Bare Metal V
 - Consider whether the HTML deck should be served at a URL (e.g. via Cloudflare Pages or a signed link for the meeting)
 - Promote `what-a-newborn-llm-wants-from-a-cog.html` from draft to published (companion post to the web-is-just-the-start post)
 - Update the mx-shared-gathering README to list draft-mx-not-geo.md in the table
+- Rebuild free-book PDF to pick up the new Reginald section
+- Propagate the two-pillar framing to remaining Protocols chapters (medium-priority: ch13, ch14, ch19, ch22)
 
 ---
 
@@ -104,4 +125,7 @@ The HTML pitch deck is the primary investor-facing artefact for the Bare Metal V
 | 2a828c41 | hub | Rewrite BMV pitch brief to v2.2; add businesses/me/ with personal assets |
 | e804b969 | hub | Commit session docs: CHANGELOG v1.83, LEARNINGS Design API rule, REMINDERS BMV deck item |
 | f3aa5fcd | hub | Bump mx-outputs: blog post, drafts updates, evening report v1.1 |
-| _pending_ | hub | Commit session docs: CHANGELOG v1.84, LEARNINGS draft-link + rm rules, REMINDERS |
+| 6cba2c9d | hub | Commit session docs: CHANGELOG v1.84, LEARNINGS draft-link + rm rules, REMINDERS two new items |
+| _pending_ | mx-outputs | Update evening report to v1.2: Reginald manuscript uplift |
+| _pending_ | hub | Reginald two-pillar messaging: free-book, Protocols ch00/01/20, appendix-j, appendix-u |
+| _pending_ | hub | Session docs: CHANGELOG v1.85, REMINDERS update |
