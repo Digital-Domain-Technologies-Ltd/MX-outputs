@@ -103,4 +103,5 @@ The HTML pitch deck is the primary investor-facing artefact for the Bare Metal V
 | c00e4bac | hub | Update generate-pptx.mjs: improved layout and slide generation |
 | 2a828c41 | hub | Rewrite BMV pitch brief to v2.2; add businesses/me/ with personal assets |
 | e804b969 | hub | Commit session docs: CHANGELOG v1.83, LEARNINGS Design API rule, REMINDERS BMV deck item |
-| _pending_ | hub | Bump mx-outputs: blog post, drafts updates, gathering guide 11th note |
+| f3aa5fcd | hub | Bump mx-outputs: blog post, drafts updates, evening report v1.1 |
+| _pending_ | hub | Commit session docs: CHANGELOG v1.84, LEARNINGS draft-link + rm rules, REMINDERS |
