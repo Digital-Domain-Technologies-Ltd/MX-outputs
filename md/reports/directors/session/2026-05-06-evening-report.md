@@ -85,4 +85,6 @@ The HTML pitch deck is the primary investor-facing artefact for the Bare Metal V
 |------|------|-------------|
 | 6c7f461 | mx-outputs | Add HTML pitch deck: MX Pitch for Bare Metal Ventures (14 slides) |
 | 2c10792 | mx-outputs | Update BMV pitch deck to v2.2; add Reginald.pptx; update MX-what-why-when |
-| _pending_ | hub | Hub commit (pointer bump + hub-level changes) |
+| 951884d6 | hub | Bump mx-outputs: HTML pitch deck, BMV v2.2, Reginald.pptx, evening report |
+| c00e4bac | hub | Update generate-pptx.mjs: improved layout and slide generation |
+| 2a828c41 | hub | Rewrite BMV pitch brief to v2.2; add businesses/me/ with personal assets |
