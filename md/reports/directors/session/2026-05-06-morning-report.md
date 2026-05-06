@@ -108,4 +108,5 @@ The audit template estate scope note is particularly significant: it makes every
 | f401e69 | mx-audit | Corrected Core Thesis sweep and estate scope note |
 | 1d76117a | allaboutv2 | Corrected Core Thesis sweep: machines, not AI agents |
 | 659c52a | mx-outputs | Corrected Core Thesis sweep across site HTML; add new presentations |
-| _pending_ | hub | Hub manuscript and pointer updates |
+| 5d539a9 | mx-outputs | Add 2026-05-06 morning co-directors report |
+| 8b5d6f40 | hub | Corrected Core Thesis sweep: manuscripts, HTML, submodule pointers; add BMV pitch and mx-not-geo cog |
