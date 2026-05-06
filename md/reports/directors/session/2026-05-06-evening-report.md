@@ -4,7 +4,7 @@ description: "Implemented the MX Bare Metal Ventures HTML pitch deck from a Clau
 author: "Tom Cranstoun"
 created: 2026-05-06
 modified: 2026-05-06
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -24,7 +24,7 @@ mx:
 
 ## Summary
 
-This session implemented the MX pitch deck for Bare Metal Ventures in HTML from a Claude Design handoff bundle. The deck is 14 slides, editorial design (cream/ink/signal-red), built on a custom `<deck-stage>` web component with keyboard navigation, auto-scaling, and print-to-PDF. It lands in `mx-outputs/html/presentations/` as the canonical pitch artefact ahead of the Bare Metal Ventures meeting. The PPTX/markdown version was simultaneously updated to v2.2, aligning with the HTML deck's language and slide structure.
+This session implemented the MX pitch deck for Bare Metal Ventures in HTML from a Claude Design handoff bundle (14 slides, cream/ink/signal-red, custom deck-stage web component), updated the PPTX to v2.2, and published a new blog post — "The web is just the start" — covering what AI agents need from documents beyond good web UX. The session also read the Reginald.pptx investor deck for context, updated the MX Gathering Notes draft guide from ten to eleven notes (adding the new MX scope note on MX vs GEO), and updated the drafts index.
 
 ---
 
@@ -38,7 +38,15 @@ Fetched a Claude Design handoff bundle via the Reginald API endpoint. The bundle
 
 ### 2. BMV Pitch Deck v2.2 (PPTX)
 
-The PPTX markdown and generated PPTX were updated to v2.2, renaming "MX OS" to "MX" throughout and rewriting slide copy to match the HTML design language. A new `Reginald.pptx` deck was added for the REGINALD registry. The `MX-what-why-when.md` lightning talk presentation was also updated.
+The PPTX markdown and generated PPTX were updated to v2.2, renaming "MX OS" to "MX" throughout and rewriting slide copy to match the HTML design language. A new `Reginald.pptx` deck was added for the REGINALD registry. The `MX-what-why-when.md` lightning talk presentation was also updated. The Reginald.pptx was also read from Downloads to extract the slide content for use as context when writing the blog post.
+
+### 3. Blog Post: "The web is just the start"
+
+A new blog post was written and published to `mx-outputs/mx-site/blog/web-is-just-the-start.html`. The post argues that Google's web.dev AI agent UX guide is a useful signal but the challenge is at the document level — not just websites. Contracts, policies, specs, and handbooks are now consumed by AI agents, and none of them answer the ten questions a machine needs from a document. The post introduces COGs (Community Owned Governance Systems) as the infrastructure for documents that declare identity, state, provenance, conformance, permissions, and safe failure mode. The post was written as a draft, reviewed (incorporating the ten wants from the "What a Newborn LLM Wants From a COG" post), and promoted to published in the same session. Key editorial decision: remove any cross-reference to other draft posts to avoid dead links if promotion is not simultaneous.
+
+### 4. Drafts and Gathering Notes Updates
+
+The `mx-gathering-notes-guide.html` draft was updated to reflect the eleventh MX draft note — `draft-mx-not-geo.md` — added to the mx-shared-gathering repo on 6 May 2026. The note defines MX scope vs GEO/AEO. The guide's TOC, reading order, intro, and body all updated; "ten" references changed to "eleven" throughout. The drafts index received a new card for `what-a-newborn-llm-wants-from-a-cog.html`. Both files also received compliance fixes: keywords meta removed, button type added, em-dash fixed, canonical/OG/Twitter/JSON-LD added to the gathering notes guide.
 
 ---
 
@@ -46,14 +54,16 @@ The PPTX markdown and generated PPTX were updated to v2.2, renaming "MX OS" to "
 
 | Metric | Value |
 |--------|-------|
-| Commits (mx-outputs) | 2 |
+| Commits (mx-outputs) | 4 |
 | Commits (hub) | pending |
-| Files changed | ~10 |
-| Lines added | +4,118 |
-| Lines removed | −130 |
+| Files changed | ~15 |
+| Lines added | +4,724 |
+| Lines removed | −183 |
 | Repositories | 2 |
 | New HTML deck slides | 14 |
 | New PPTX files | 1 (Reginald.pptx) |
+| New blog posts published | 1 (web-is-just-the-start) |
+| Draft posts updated | 2 (index, mx-gathering-notes-guide) |
 
 ---
 
@@ -74,8 +84,10 @@ The HTML pitch deck is the primary investor-facing artefact for the Bare Metal V
 
 ## Next Steps
 
-- Open the deck in a browser and verify it renders, navigates, and prints to PDF correctly
+- Verify the HTML pitch deck in a browser: all 14 slides render, keyboard navigation works, print-to-PDF produces clean output
 - Consider whether the HTML deck should be served at a URL (e.g. via Cloudflare Pages or a signed link for the meeting)
+- Promote `what-a-newborn-llm-wants-from-a-cog.html` from draft to published (companion post to the web-is-just-the-start post)
+- Update the mx-shared-gathering README to list draft-mx-not-geo.md in the table
 
 ---
 
@@ -85,6 +97,10 @@ The HTML pitch deck is the primary investor-facing artefact for the Bare Metal V
 |------|------|-------------|
 | 6c7f461 | mx-outputs | Add HTML pitch deck: MX Pitch for Bare Metal Ventures (14 slides) |
 | 2c10792 | mx-outputs | Update BMV pitch deck to v2.2; add Reginald.pptx; update MX-what-why-when |
+| 4961dd5 | mx-outputs | Publish web-is-just-the-start blog post; update blog index and sitemaps |
+| 94d123b | mx-outputs | Update drafts: add newborn-LLM card, update gathering guide for 11th draft |
 | 951884d6 | hub | Bump mx-outputs: HTML pitch deck, BMV v2.2, Reginald.pptx, evening report |
 | c00e4bac | hub | Update generate-pptx.mjs: improved layout and slide generation |
 | 2a828c41 | hub | Rewrite BMV pitch brief to v2.2; add businesses/me/ with personal assets |
+| e804b969 | hub | Commit session docs: CHANGELOG v1.83, LEARNINGS Design API rule, REMINDERS BMV deck item |
+| _pending_ | hub | Bump mx-outputs: blog post, drafts updates, gathering guide 11th note |
