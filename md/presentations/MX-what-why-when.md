@@ -35,11 +35,11 @@ Two years, two books, and one epiphany later — **I have one.**
 
 The internet is no longer read mostly by people.
 
-AI agents, assistants, and crawlers now sit between your content and your audience.
+Machines — AI agents, assistants, autonomous systems, industrial controllers, robots, and crawlers — now sit between your content and your audience.
 
 **This is an opportunity, not a threat.**
 
-*The sites that welcome machines win the next decade.*
+*The systems that welcome machines win the next decade.*
 
 ---
 
@@ -50,7 +50,7 @@ AI agents, assistants, and crawlers now sit between your content and your audien
 The transition from **user-based traffic** to **machine-based traffic** is well underway.
 
 - AI referrals are growing exponentially
-- Agents now buy, compare, and cite on behalf of users
+- Machines now buy, compare, cite, and act on behalf of users
 - Your next visitor is probably not human
 
 **We must give MX the same attention we give UX — and we must do it today.**
@@ -82,11 +82,11 @@ What we built for "engagement" now blocks comprehension:
 
 # Fix It for Machines — You Fix It for Humans Too
 
-Every pattern that helps an AI agent also helps a person with disabilities.
+Every pattern that helps a machine also helps a person with disabilities.
 
 **WCAG and MX are in the same arena, complementing each other.**
 
-*Machines are the largest disabled audience on the web.*
+*Machines are the largest underserved audience on the web.*
 
 ---
 
@@ -146,7 +146,7 @@ Steve Krug's UX principle — applied to AI.
 
 - You already control the HTML output
 - Schema.org JSON-LD, semantic HTML, explicit state
-- The CMS becomes the **AI-readiness layer**
+- The CMS becomes the **machine-readability layer**
 
 *This is infrastructure work, not content work.*
 *One-time implementation, ongoing benefit.*
