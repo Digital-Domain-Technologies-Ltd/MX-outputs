@@ -1,19 +1,35 @@
 ---
 title: London CMS Experts Lightning Talk
+description: 15 minute lightning talk introducing Machine Experience (MX) to Boye & Company CMS Experts audience
 author: Tom Cranstoun
-description: 5-15 minute lightning talk introducing Machine Experience (MX) to Boye & Company CMS Experts audience
 created: '2026-03-01'
+version: "1.0"
 mx:
+  status: active
+  contentType: presentation
+  format: marp
+  audience: [humans, machines]
+  tags: [machine-experience, mx, presentation, cms, provenance, attribution, standards]
   date: '2026-02-26'
   event: London CMS Experts
   location: London
   license: proprietary
-  contentType: presentation
-  format: marp
+  maintainer: Tom Cranstoun
+  publisher: CogNovaMX Ltd
+  rights: "© 2026 Tom Cranstoun. All rights reserved."
+  provenanceAuthor: Tom Cranstoun
+  provenancePublisher: CogNovaMX Ltd
+  provenanceOrigin: human-directed
+  conformsTo:
+    - https://schema.org/PresentationDigitalDocument
+    - https://dublincore.org/specifications/dublin-core/dcmi-terms/
+    - https://mx.allabout.network/specs/mx-core-level-1
+  schema: PresentationDigitalDocument
   outputs:
   - MX-what-why-when.pptx
   - MX-what-why-when.pdf
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/presentations/MX-what-why-when.md
+  runbook: "A Marp presentation for conference talks. Render with create-slides skill to produce pptx and pdf outputs in mx-outputs/."
 ---
 
 <!-- _class: lead -->
@@ -202,17 +218,17 @@ MX tracks the **provenance** of every asset.
 ```yaml
 title: "London CMS Experts Lightning Talk"
 author: "Tom Cranstoun"
-date: "2026-02-26"
-event: "London CMS Experts"
-location: "London"
-organiser: "Boye & Company"
+created: "2026-03-01"
+modified: "2026-03-01"
+version: "1.0"
 mx:
   contentType: presentation
-  format: marp
-  provenance:
-    created: "2026-02-26"
-    source: "MX-Hub repository"
-    licence: proprietary
+  provenanceAuthor: "Tom Cranstoun"
+  provenancePublisher: "CogNovaMX Ltd"
+  provenanceOrigin: human-directed
+  rights: "© 2026 Tom Cranstoun. All rights reserved."
+  conformsTo:
+    - https://schema.org/PresentationDigitalDocument
 ```
 
 *This slide deck practises what it preaches.*
