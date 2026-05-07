@@ -90,7 +90,7 @@ mx:
     legalEntity: "Digital Domain Technologies Ltd"
     brand: "CogNovaMX"
 
-  domain: "machine-experience"
+  x-mx-domain: "machine-experience"
   readingLevel: advanced
 
   runbook: >

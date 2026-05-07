@@ -147,7 +147,7 @@ mx:
     brand: "CogNovaMX"
 
   # Subject area (§6.8)
-  domain: "machine-experience"
+  x-mx-domain: "machine-experience"
 
   # Reading level (§6.12)
   readingLevel: advanced
