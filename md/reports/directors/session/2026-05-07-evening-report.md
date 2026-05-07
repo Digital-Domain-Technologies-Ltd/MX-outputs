@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Review-fix round across the gathering drafts, canon catch-up, validator hardening"
-description: "Seven gathering drafts revised through a structured review, canon brought into lockstep, validator promoted to fail on real date errors, conformance gate clean for the first time."
+title: "Co-Directors Report — Review-fix round across the gathering drafts, canon catch-up, validator hardening, plus canonical-line lock-in"
+description: "Seven gathering drafts revised through a structured review, canon brought into lockstep, validator promoted to fail on real date errors, conformance gate clean for the first time. Late-evening addendum: an examples-first canonical line locked in across investor and public surfaces after a live mishearing of 'documents' as 'Word documents'."
 author: "Tom Cranstoun"
 created: 2026-05-07
 modified: 2026-05-07
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -74,6 +74,28 @@ A parallel context (claude.ai web) carries three external cogs (`mx-machine-read
 
 Seven cover-note packages prepared at `mx-canon/mx-the-gathering/packages/`, each carrying the round's question set. Submissions registry initialised with seven rows in `state: drafted`. Filing on Stream targeted for next week per Tom's direction; the registry will be updated with thread URLs as those land.
 
+### 7. Canonical line lock-in (investor language fix)
+
+In a live investor conversation earlier in the evening, "Make your documents readable by machines" was misheard as "Make your *Word* documents readable by machines" — narrowing the scope of MX from any published asset to office files. The investor only recovered the breadth after Tom enumerated examples (video streams, MP3, PDF, JPG). The misread is a leading indicator: if it bit on a pitch, it bites on the book opening, the homepage, and every public surface that frames "what MX is for".
+
+The fix is an examples-first canonical line that pre-empts the misread: **"Make anything you publish — a video, a podcast, a PDF, an image, a web page — readable by machines."** The shape was chosen by interview (singular prose form, examples first, scope-bounded by "anything you publish" so the claim doesn't over-promise "everything on the internet"). HTML surfaces use a no-em-dash variant per the project rule: *"Videos, podcasts, PDFs, images, web pages: make anything you publish readable by machines."*
+
+The line was locked in `mx-canon/ssot/principles.cog.md` (v3.3 → v3.4) as the second paragraph of the opening, in bold so other surfaces can quote it. Then swept across the live MX surfaces:
+
+- `messaging-ideas.md`: added as the lead "Hooks worth keeping" entry; added a do-not-do entry recording the mishearing as the reason.
+- `mx-shared-gathering/README.md`: added as a one-line preamble before the operational text.
+- `mx-site/index.html`: 7 surfaces updated (meta description, og, twitter, JSON-LD, h1 sr-only, hero subtitle, body intro).
+- `mx-site/learn/index.html`, `learn/mx-principles.html`, `books/index.html`, `about/printworks.html`: hero / subtitle / intro paragraphs.
+- 24 published blog posts + 4 blog drafts: bulk-replaced introduction-message paragraph via perl in-place edit (clean swap; same templated string everywhere).
+- `scripts/generate-llms-understanding.mjs`: added "What MX is for" preamble line; bundle regenerated.
+- `mx-site/llms-full.txt`: regenerated to pull in cleaned source HTML.
+
+Free book Chapter 0 and Protocols Chapter 0 were assessed and left untouched: they already lead with concrete examples ("contracts, manufacturing specifications, government archives, medical protocols, scientific papers") whenever they say "document" — they're self-correcting in long-form prose. The misread was a verbal/slide problem; the canonical line addresses it where it bit.
+
+### 8. Codex staging directory cleanup
+
+Sweeping for over-narrow "documents" framing surfaced `mx-canon/mx-maxine-lives/communications/blogs/html/codex/` — a 32-file, 468K staging directory of older HTML blog posts with a stale `CogNovaMX Ltd` author attribution. Two `.mx.yaml.md` files declared `derivedFrom:` pointers to it, but the live blog at `mx.allabout.network/blog/` is now served from `mx-outputs/mx-site/blog/` (a different submodule mount). The codex was upstream lineage source for content that no longer exists in the deployed path. Deleted via `git rm -r`; the two `derivedFrom:` references were removed from `allaboutv2/blogs/mx/.mx.yaml.md` and `mx-outputs/html/blogs/.mx.yaml.md` so nothing dangles.
+
 ---
 
 ## By the Numbers
@@ -92,6 +114,10 @@ Seven cover-note packages prepared at `mx-canon/mx-the-gathering/packages/`, eac
 | Date-format real errors found and fixed | 22 |
 | Cover-note packages prepared | 7 |
 | Files in `state: drafted` in submissions registry | 7 |
+| Public surfaces touched by canonical-line sweep | 35 |
+| Blog posts bulk-replaced (published + drafts) | 28 |
+| Codex staging files deleted | 32 |
+| Stale `derivedFrom:` pointers cleaned | 2 |
 
 ---
 
@@ -103,12 +129,15 @@ This was governance and hygiene work, but with material business signal:
 - **Canon-draft lockstep restored.** The validator passes, the dictionary matches the drafts, the deprecation policy is documented and tested. New authors (and new sessions of new authors) inherit the consistent state rather than the drift.
 - **The validator is honest now.** 387 false positives cleared, 22 real failures fixed. A future session will see the gate as a reliable signal again rather than ignoring 400+ warnings.
 - **Cross-context bridge documented.** Tom is running parallel Claude contexts. The TODO file + reminder line means the next session in either context can pick up the migration thread without reconstructing it from chat.
+- **The investor pitch now leads correctly.** The canonical line locks the breadth of MX in plain English at every public touchpoint. Frankfurt slides, the free book's hero, the homepage, and the Gathering README all carry the same examples-first framing — so the next investor or sponsor reading any one of them forms the right mental model the first time.
 
 ---
 
 ## The Insight
 
 The review's findings clustered around one underlying problem: the drafts were authored from the perspective of "if you author a field, here is its shape" — but never walked the perspective of an author starting from scratch ("what is the minimum frontmatter to be Level 1?") or a consumer ("I am a tool encountering this file — what do I do, in what order?"). The C1 fix (Author quickstart and Consumer checklist appendices on every note) is the smallest change with the largest readability impact. Spec ratification cycles often forget the consumer journey because spec authors are deep enough in the material to skip it. The review caught it because the reviewer was using the spec to do real work.
+
+A second insight from the late-evening session: a noun's *register* matters more than its definition. "Document" in the spec context is correctly broad — markdown, HTML, PDF, YAML sidecar, JSON feed. The spec defines it that way and the prose proves it. But to a listener who has never read the spec, "document" picks up its everyday register first — which is "the file open in Microsoft Word right now". The fix is not to redefine "document"; it is to pre-empt the everyday register by leading with examples that can't be misread. Examples-first beats noun-first whenever the noun is loaded.
 
 ---
 
@@ -119,6 +148,8 @@ The review's findings clustered around one underlying problem: the drafts were a
 - **Stewardship as a single object** (D6) — Tom picked nesting over four parallel top-level fields; cleaner top-level YAML.
 - **Temporal stance as a new sister note** (D7) — reusable across regulatory, contractual, and pricing documents.
 - **Canon catches up to drafts during the migration window, not after ratification** (Tom's direction) — keeps the canon honest and the validator green; ratification re-affirms rather than introduces.
+- **Examples-first canonical line locked across all public surfaces** (after the investor mishearing) — examples lead, "anything you publish" bounds scope, no jargon, no "everything on the internet" over-promise. HTML uses a no-em-dash variant per the project rule.
+- **Codex staging directory deleted** — the upstream lineage source for an obsolete deployment path. `derivedFrom` references cleaned in both downstream `.mx.yaml.md` files; lineage history lives in git.
 
 ---
 
@@ -132,6 +163,8 @@ The review's findings clustered around one underlying problem: the drafts were a
 ## What Changed About Me
 
 When the user names a precondition ("don't submit yet, on hold"), record it in the registry's state machine rather than only in chat. The submissions registry's `state: drafted` is where "tracked but not filed" lives durably — the chat conversation is ephemeral. Same lesson on cross-context work: TODO file + reminder line beats trying to remember which session has which thread of work.
+
+A late-evening lesson: when the user reports a misreading from a real audience, sweep widely, not narrowly. The first instinct on hearing "the investor heard 'Word docs'" is to fix the slide that bit. The right response is to recognise the misread is structural — the same noun is doing the same misleading work everywhere "what is MX" is framed. The fix is one canonical line locked at the source (`principles.cog.md`) and applied to every public surface that frames MX, in one pass, not waiting to discover the same problem on the next surface.
 
 ---
 
@@ -175,3 +208,9 @@ The MX standard now has its first complete consumer-grade revision round behind 
 | `f93dccf` (mx-crm) | Add Level 1 identity floor to two CRM docs |
 | `_pending_` | Hub: canonicalize Reginald → REGINALD across mx-maxine-lives + ssot |
 | `_pending_` | Hub: bump mx-outputs to 33ba7f9 (broken-dependency fix + report) |
+| `171da60` (mx-shared-gathering) | Add canonical 'what MX is for' preamble line to README |
+| `762d9125` (allaboutv2) | Remove derivedFrom for deleted codex source |
+| `b896911` (mx-outputs) | mx-machine-readiness paper canonical move; sitemap blog index added |
+| `6e18f5f` (mx-outputs) | Replace 'documents readable by machines' framing with examples-first canonical line |
+| `_pending_` | Hub: principles.cog.md v3.4 + messaging-ideas.md canonical-line lock-in |
+| `_pending_` | Hub: delete codex staging directory (32 files) and bump submodule pointers |
