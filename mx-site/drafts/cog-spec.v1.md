@@ -1,4 +1,6 @@
 ---
+author: Tom Cranstoun
+created: 2026-04-27
 title: "Cog Specification"
 description: "The cog file format, artefact model, and verification algorithm."
 version: "1.2"
