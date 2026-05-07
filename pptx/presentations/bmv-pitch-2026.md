@@ -2,8 +2,8 @@
 title: "MX — Bare Metal Ventures Pitch"
 author: "Tom Cranstoun"
 created: "2026-05-06"
-modified: "2026-05-06"
-version: "2.2"
+modified: "2026-05-07"
+version: "2.3"
 status: active
 description: "12-slide investor pitch deck for Bare Metal Ventures meeting with Michelle Tang."
 mx:
@@ -30,7 +30,7 @@ A universal document runtime. Built on open standards. Operational at alpha.
 
 ## Slide 2: The Problem
 
-**Machines cannot reliably act on documents designed for human eyes.**
+**Machines cannot reliably act on the things you publish — videos, podcasts, PDFs, images, web pages — when they are designed for human eyes alone.**
 
 Every enterprise AI deployment hits the same four failures:
 
@@ -60,9 +60,9 @@ This is not a web problem. It's a document problem. Contracts, policies, manufac
 
 ## Slide 4: What MX Is
 
-**A framework for designing documents that both humans and machines can use.**
+**Make anything you publish — a video, a podcast, a PDF, an image, a web page — readable by machines.**
 
-Three components:
+MX is the framework that makes that work for both humans and machines. Three components:
 
 - **COGs** — portable, self-describing documents. Structured metadata, human-readable content. The artefact.
 - **REGINALD** — Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation. Tells machines where COGs live and attests their integrity.
@@ -86,13 +86,15 @@ Document → registered COG → REGINALD index → agent reads attested metadata
 - Unsigned COGs are still registered and discoverable
 - Signed COGs carry cryptographic provenance for those who need it
 
+**MX is the DNA a file carries when it leaves any pool.** A memory-pool architecture (LLM-wiki, vector store, knowledge base) organises knowledge inside one system; MX governs what survives extraction. Complementary, not competing.
+
 *Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
 
 ---
 
 ## Slide 6: Where MX Sits in the Bare Metal Stack
 
-**Bare Metal owns the physical stack. MX is the missing logical layer for documents.**
+**Bare Metal owns the physical stack. MX is the missing logical layer for what enterprises publish.**
 
 | Layer | Component |
 |---|---|
@@ -223,7 +225,7 @@ Use of funds:
 
 ## Slide 13: Connect
 
-**The machine layer for meaning — for all documents, everywhere, for all machines.**
+**The machine layer for meaning — for everything you publish, everywhere, for every machine that reads it.**
 
 - **Registry:** reginald.allabout.network
 - **Standards:** tg.community
