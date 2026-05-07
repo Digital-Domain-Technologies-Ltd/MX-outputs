@@ -194,4 +194,4 @@ Core audit action-COGs ship with REGINALD, auditing websites for machine-readabi
 - **Email:** [info@cognovamx.com](mailto:info@cognovamx.com)
 - **Registry:** [reginald.allabout.network](https://reginald.allabout.network)
 
-CogNovaMX Ltd — Making the web work for everyone and everything that uses it.
+CogNovaMX Ltd — Making the web — and everything you publish beyond it — work for everyone and everything that uses it.

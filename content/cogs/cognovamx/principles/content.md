@@ -21,7 +21,7 @@ mx:
 
 These are the rules we build by. Not guidelines. Not suggestions. Principles — the things that stay true even when everything else changes.
 
-MX is the practice of making the web work for everyone and everything that uses it. Humans and machines, reading the same content, understanding it equally. These principles define how we get there.
+MX is the practice of making the web — and everything you publish beyond it — work for everyone and everything that uses it. Humans and machines, reading the same content, understanding it equally. These principles define how we get there.
 
 They apply to every cog, every document, every script, every piece of work that carries the MX name.
 

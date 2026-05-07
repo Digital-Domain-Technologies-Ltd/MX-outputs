@@ -538,7 +538,7 @@ Four pieces, each with one job. Standards are defined in one place. Authenticati
 - **REGINALD** — proprietary CogNovaMX product. The verification shepherd. Implements authentication standards; does not define them. Deploys as managed, private or air-gapped.
 - **CogNovaMX** — trading name of Digital Domain Technologies Ltd. Publishes the MX book series and offers commercial services: readiness assessment, strategic planning, signing, hosting, implementation, training. Web: <https://mx.allabout.network>. Contact: <info@CogNovaMX.com>.
 
-> Making the web work for everyone and everything that uses it.
+> Making the web — and everything you publish beyond it — work for everyone and everything that uses it.
 
 ## Closing.
 

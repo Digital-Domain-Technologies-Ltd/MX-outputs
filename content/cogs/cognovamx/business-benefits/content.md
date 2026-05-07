@@ -511,4 +511,4 @@ These four benefits are not separate initiatives. One MX implementation delivers
 
 ---
 
-**🎯 CogNovaMX Ltd — Making the web work for everyone and everything that uses it.**
+**🎯 CogNovaMX Ltd — Making the web — and everything you publish beyond it — work for everyone and everything that uses it.**

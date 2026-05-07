@@ -3,9 +3,9 @@ title: "MX — Bare Metal Ventures Pitch"
 author: "Tom Cranstoun"
 created: "2026-05-06"
 modified: "2026-05-07"
-version: "2.3"
+version: "2.4"
 status: active
-description: "12-slide investor pitch deck for Bare Metal Ventures meeting with Michelle Tang."
+description: "15-slide investor pitch deck for Bare Metal Ventures meeting with Michelle Tang."
 mx:
   contentType: business-doc
   audience: [investors]
@@ -74,7 +74,22 @@ Built on Markdown, YAML, and HTML. Nothing proprietary. Nothing to install. Noth
 
 ---
 
-## Slide 5: How It Works
+## Slide 5: What MX Is Not
+
+**Four collapses MX is not. Each rebuttal is one sentence.**
+
+- **Not SEO or GEO.** SEO got you found. GEO gets you understood. MX gets you used.
+- **Not JSON-LD or schema.org.** JSON-LD describes entities on a web page. MX describes the file in every carrier (HTML, PDF, DOCX, EPUB, MP4, audio, CSV, Markdown) and binds it to a registry that attests origin and integrity.
+- **Not the Google web.dev agent guide (1 May 2026).** Google covered the rendered HTML page — semantic elements, stable layouts, the accessibility tree. MX picks up where Google stops: provenance, authentication, rights, lifecycle, off-web carriers.
+- **Not memory-pool architecture (LLM-wiki, vector store, knowledge base, sovereign runtime).** A pool organises knowledge inside one system. MeetKai keeps the model sovereign; MX keeps the file's DNA intact when it leaves.
+
+MX is a superset. Whatever you have already done in SEO, GEO, JSON-LD, or accessibility still counts — MX makes it travel, makes it verifiable, makes it complete.
+
+*Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
+
+---
+
+## Slide 6: How It Works
 
 **This isn't metadata that describes. It's metadata that executes.**
 
@@ -82,9 +97,9 @@ Document → registered COG → REGINALD index → agent reads attested metadata
 
 - REGINALD works the way DNS works for domains — points to where the COG lives, attests it hasn't been altered
 - It does not hold the COG — the publisher does
-- Signing is optional, layered on top like DNSSEC
-- Unsigned COGs are still registered and discoverable
-- Signed COGs carry cryptographic provenance for those who need it
+- The Gathering ratifies the contract fingerprinting note that defines how a COG is canonicalised, hashed, and signed
+- Signing is optional, layered on top like DNSSEC; unsigned COGs are still registered and discoverable
+- Signed COGs carry cryptographic provenance for those who need it; the attestation is narrow: this is what the owner published, unaltered — origin and integrity, never editorial truth
 
 **MX is the DNA a file carries when it leaves any pool.** A memory-pool architecture (LLM-wiki, vector store, knowledge base) organises knowledge inside one system; MX governs what survives extraction. Complementary, not competing.
 
@@ -92,7 +107,21 @@ Document → registered COG → REGINALD index → agent reads attested metadata
 
 ---
 
-## Slide 6: Where MX Sits in the Bare Metal Stack
+## Slide 7: What MX Delivers
+
+**Three concrete benefits. One mechanism: attestation.**
+
+- **Fewer hallucinations.** Agents that read attested documents hallucinate less — they have verified facts to cite rather than inferences to make.
+- **Lower token consumption and energy draw.** Fewer inference steps per file, multiplied across every agent that reads every file.
+- **Regulatory positioning.** EU AI Act, European Accessibility Act, digital-records legislation across multiple jurisdictions converge on provenance requirements. Attestation shifts from competitive advantage to regulatory expectation.
+
+Each benefit compounds across every agent, every read, every file. The mechanism is the same in every case.
+
+*Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
+
+---
+
+## Slide 8: Where MX Sits in the Bare Metal Stack
 
 **Bare Metal owns the physical stack. MX is the missing logical layer for what enterprises publish.**
 
@@ -110,7 +139,7 @@ Document → registered COG → REGINALD index → agent reads attested metadata
 
 ---
 
-## Slide 7: Why Now
+## Slide 9: Why Now
 
 **Standards that win at this velocity are already published, governed, and operational when the wave arrives. MX is.**
 
@@ -126,25 +155,22 @@ Adobe Holiday 2025: 700% growth in AI-referred retail traffic. AI-referred users
 
 ---
 
-## Slide 8: Traction
+## Slide 10: Traction
 
 **Not a prototype — a functioning ecosystem with growing institutional validation.**
 
-- **MX: The Handbook** — published April 2026, 320 pages
-- **MX: The Protocols** — publishes 1 July 2026, pre-orders open, 800 pages
-- **REGINALD alpha** — 89 COGs, 2 test publishers, Ed25519 attestation live
-- **Web Audit Suite** — Leica Microsystems audit, 14,264 URLs across 10 locales
+- **Books shipping** — Handbook published April 2026 (320 pages); Protocols pre-orders open for 1 July 2026 (800 pages)
+- **REGINALD alpha live** — 89 COGs, 2 test publishers, Ed25519 attestation; Leica Microsystems audit, 14,264 URLs across 10 locales
 - **The Gathering Administration LTD** — incorporated as an independent standards body
-- **CMS Summit Frankfurt** — presenting this month to 200 platform practitioners; second-day workshop confirmed
-- **IDHL** — sponsorship confirmed; team training programme agreed, July 2026
-- **Mozilla Fest Barcelona** — The Gathering invited, October 2026; Mozilla in conversation as potential sponsor
-- **Pipeline sponsors** — Germany and Canada in active discussion
+- **CMS Summit Frankfurt this month** — presenting to 200 platform practitioners; second-day workshop confirmed
+- **IDHL sponsorship confirmed** — team training programme agreed, July 2026
+- **Mozilla Fest Barcelona invited (October 2026)** — Mozilla in conversation as sponsor; Germany and Canada in active discussion
 
 *Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
 
 ---
 
-## Slide 9: Competitive Position
+## Slide 11: Competitive Position
 
 **Every competitor raised on an agent-OS narrative. None is document-native. The moat is architecture.**
 
@@ -166,7 +192,7 @@ Positioning (2×2): Open standards vs proprietary · Executable runtime vs queri
 
 ---
 
-## Slide 10: Local Reginald Machine
+## Slide 12: Local REGINALD Machine
 
 **Subtitle:** REGINALD for organisations that won't put their documents on the internet. £25,000 per server per year.
 
@@ -184,7 +210,7 @@ Positioning (2×2): Open standards vs proprietary · Executable runtime vs queri
 
 ---
 
-## Slide 11: Founder Contribution
+## Slide 13: Founder Contribution
 
 **Subtitle:** We've invested significantly in proving the core concepts before seeking outside capital.
 
@@ -203,27 +229,25 @@ Positioning (2×2): Open standards vs proprietary · Executable runtime vs queri
 
 ---
 
-## Slide 12: The Ask
+## Slide 14: The Ask
 
 **Pre-Series A infrastructure round. Comfortable with a range; lead investor to shape the structure.**
 
-Investable entity: CogNovaMX Ltd — incorporated, 100% founder-owned.
+Investable entity: CogNovaMX Ltd — incorporated, 100% founder-owned. CogNovaMX is the trading name of Digital Domain Technologies Ltd.
 
 Use of funds:
 
-- Three hires: senior engineer (REGINALD production), second engineer (tooling and integrations), partnership lead
-- Local Reginald Machine — on-prem enterprise licensing (primary revenue)
-- REGINALD SaaS hardening to production scale
-- Marketing and go-to-market
-- Agency certification programme · The Gathering operational support · Reserve
+- Three hires — senior engineer (REGINALD production), second engineer (tooling and integrations), partnership lead
+- Local REGINALD Machine — on-prem enterprise licensing (primary revenue); REGINALD SaaS hardening to production scale
+- Marketing and go-to-market; agency certification programme; The Gathering operational support; reserve
 
-**The milestone:** 500+ paying publishers. Local Reginald Machine in 10+ regulated-sector enterprises. Network effects compound. Valuation shifts from services multiples (2–5×) to platform multiples (50–100×).
+**The milestone:** 500+ paying publishers; Local REGINALD Machine in 10+ regulated-sector enterprises; valuation shifts from services multiples (2–5×) to platform multiples (50–100×).
 
 *Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
 
 ---
 
-## Slide 13: Connect
+## Slide 15: Connect
 
 **The machine layer for meaning — for everything you publish, everywhere, for every machine that reads it.**
 
