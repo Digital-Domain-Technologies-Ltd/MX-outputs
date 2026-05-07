@@ -221,8 +221,7 @@ mx:
 
   # ── Cog structural fields (Note 3 §6) ──
   partOf: mx-position-papers
-  buildsOn:
-    - mx-handbook
+  buildsOn: []
   dependencies:
     - name: tg-note-1-field-pattern
       kind: external
