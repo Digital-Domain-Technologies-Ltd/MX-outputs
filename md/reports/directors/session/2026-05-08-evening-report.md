@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus"
-description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files."
+title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed on mx-site home"
+description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing."
 author: "Tom Cranstoun"
 created: 2026-05-08
 modified: 2026-05-08
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -23,6 +23,8 @@ mx:
 ---
 
 ## Summary
+
+**v1.3 addition:** A short late-evening session landed Tom's elevator pitch as a new strategic-framing section on the mx-site landing page, between the existing introduction and Training. The section carries the four-part framing (MX is the contract, The Gathering sets the standards, REGINALD does the signing, CogNovaMX operates the service), the Schema.org / FAQ-deprecation proof point, and the agentic-web economic case (cogs replace expensive inference with cheap execution). The pitch was simultaneously saved to long-term memory as the canonical opening for any outward-facing prose, indexed under a new "Pitch / Framing" section in `MEMORY.md`. Two commits: the mx-outputs HTML edit and a pending hub pointer bump.
 
 **v1.2 addition:** A second late-evening run codified three writing-style rules in `mx-canon/ssot/writing-guides/writing-style.md` and swept the public HTML corpus to enforce each one. The rules close loopholes that had been bending mx-site prose into AI-cliché patterns: (1) neutral English in public HTML so the split US / UK readership is not distracted by spelling divergence; (2) em-dash anti-evasion that bans the "split a thought into a long sentence and a short follow-on sentence" workaround; (3) negation-pivot ban that catches the multi-sentence cousin of "It's not just X, it's Y". Three corpus sweeps applied the rules: the neutral-English sweep touched 88 files; the em-dash sweep removed 1,924 of 1,938 occurrences across 94 files; the spaced-hyphen sweep removed 355 of 432 across 49 files. The Featured section on the blog index also expanded from one card to a balanced three-card pattern (infrastructure, provenance, metadata interoperability), each pinned post still appears in its date slot in the chronological grid.
 
@@ -102,6 +104,10 @@ The wider em-dash sweep then ran across the whole mx-site corpus: 1,924 of 1,938
 
 A follow-on sweep applied the same logic to spaced hyphens used as dashes: 355 of 432 hits across 49 files removed; the 77 that remain are all inside Pandoc-syntax-highlighted code blocks (comment lines, CLI-output samples) where the hyphen is part of the code being shown. Together with the em-dash sweep, every dash-equivalent connective in mx-site prose now uses comma / semicolon / colon / rephrase, and pipe ` | ` for title-pattern visual separators.
 
+### 14. Elevator Pitch on the mx-site Landing Page
+
+A new section, "A provenance layer for machines", was added to `mx-outputs/mx-site/index.html` between the existing introduction and the Training offerings. The section carries Tom's canonical four-part framing (MX = the contract; The Gathering = the standards body; REGINALD = the signing service; CogNovaMX = the operating service), the Schema.org / FAQ-rich-results-deprecation as the in-miniature proof point that "what something is" without "whether to believe it" gets gamed, and the agentic-web economic case where cogs replace expensive inference with cheap execution. The `dateModified` in the WebSite JSON-LD was bumped from 2026-04-02 to 2026-05-08. The same pitch text was saved to long-term memory as `project_elevator_pitch.md` and indexed in `MEMORY.md` under a new "Pitch / Framing" section, so future sessions open outward-facing prose with this framing by default. Pitch text is neutral English, REGINALD all-caps, no em-dashes — house style was already compatible.
+
 ---
 
 ## By the Numbers
@@ -111,6 +117,8 @@ A follow-on sweep applied the same logic to spaced hyphens used as dashes: 355 o
 | Commits (v1.0 evening) | 9 |
 | Commits (v1.1 late evening) | 2 (mx-crm + hub) |
 | Commits (v1.2 corpus-sweep run) | 22 (hub + mx-outputs) |
+| Commits (v1.3 elevator pitch) | 2 (hub + mx-outputs) |
+| Memory entries added (v1.3) | 1 (project_elevator_pitch.md) |
 | Hook bugs fixed | 2 |
 | Audit pages | 5 |
 | Repositories touched | 3 (hub, mx-crm, mx-outputs) |
@@ -176,4 +184,8 @@ A follow-on sweep applied the same logic to spaced hyphens used as dashes: 355 o
 | 0459c497 | Bump mx-outputs: spaced-hyphen sweep across mx-site |
 | 53c4366 | (mx-outputs) Sweep spaced hyphens used as dashes in mx-site public HTML |
 | 98257f7 | (mx-outputs) Add ~$* lock-file pattern to gitignore (Office/Keynote) |
-| *pending* | Hub: bump mx-outputs for gitignore + this report v1.2 |
+| 915ca68d | Bump mx-outputs: gitignore Office lock-files; evening report v1.2 |
+| 82f33022 | CHANGELOG v1.94: writing-style codification + three corpus sweeps |
+| 6466406c | LEARNINGS v4.9: corpus-sweep over-application + inline-list mistake |
+| 8f3d59c | (mx-outputs) Add elevator-pitch section to mx-site landing page |
+| *pending* | Hub: bump mx-outputs for elevator pitch + this report v1.3 |
