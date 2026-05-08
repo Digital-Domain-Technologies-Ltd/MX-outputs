@@ -178,7 +178,7 @@
 
 <p>The page was <code>https://mx.allabout.network/books/handbook.html</code>, the landing page for MX: The Handbook. I requested it first as a browser would, then with <code>Accept: text/markdown</code> as an AI agent might if it defaulted to Markdown for all requests. The HTML response was 32,236 bytes. The Markdown response was 21,890 bytes. That is 32% smaller, not 80%, though the exact figure varies by page composition.</p>
 
-<p>The question is not the size. The question is what the 10,346 bytes contained.</p>
+<p>The size is not the issue; the contents of the missing 10,346 bytes are.</p>
 
 <h2 id="what-disappeared" tabindex="-1">What disappeared</h2>
 
@@ -202,7 +202,7 @@
 
 <p>The 32% reduction sounds compelling. It looks less compelling when you examine what was removed. Those 10,346 bytes were almost entirely structured metadata: governance tags, Open Graph declarations, discovery links, semantic structure, machine-readable dates. The prose — the words a human reads — was almost fully preserved.</p>
 
-<p>An agent optimizing for token efficiency by requesting Markdown has made a trade: slightly fewer tokens on the payload, in exchange for losing the metadata that tells it what kind of resource this is, what it may do with the content, how to attribute it, and where to go next. This is not efficiency. It is discarding the instrument panel to reduce the weight of the aircraft.</p>
+<p>An agent optimizing for token efficiency by requesting Markdown has made a trade: slightly fewer tokens on the payload, in exchange for losing the metadata that tells it what kind of resource this is, what it may do with the content, how to attribute it, and where to go next. This trade discards the instrument panel to reduce the weight of the aircraft, rather than achieving any genuine efficiency.</p>
 
 <p>The efficiency argument applies cleanly to a different category of content: plain text documents where the content is the message. A <code>llms.txt</code> file, a plain article with no governance metadata, a README. For these, Markdown is often the right format. The content has no structured metadata layer to lose. The prose is what the agent came for, and Markdown delivers prose efficiently.</p>
 
@@ -222,7 +222,7 @@
 
 <p>The Cloudflare mechanism strips content from what AI agents receive. A different class of tooling runs in the opposite direction.</p>
 
-<p>Adobe LLM Optimizer's "Optimize at Edge" feature detects AI agent User-Agents at the CDN edge and routes those requests to a separate optimization backend. What comes back is not the original page. It is the original page plus AI-generated FAQs, page-level summaries, and rewritten sections produced by Adobe's backend — none of which was written by the publishing organization. Human visitors continue to receive the original unmodified content. The response header <code>x-edgeoptimize-request-id</code> confirms when the optimized version was applied.</p>
+<p>Adobe LLM Optimizer's "Optimize at Edge" feature detects AI agent User-Agents at the CDN edge and routes those requests to a separate optimization backend. What comes back is the original page plus AI-generated FAQs, page-level summaries, and rewritten sections produced by Adobe's backend, none of which was written by the publishing organization. Human visitors continue to receive the original unmodified content. The response header <code>x-edgeoptimize-request-id</code> confirms when the optimized version was applied.</p>
 
 <p>This is cloaking. The AI agent is reading a version of the page that no human at the publishing organization authored or approved. The structured data on the original page — the JSON-LD declarations, the robots directives, the canonical URL — was written for the original content. It does not cover injected FAQs generated automatically by a third-party backend. An AI agent reading the augmented page has no way to distinguish which content is original and which is synthetic, and the page's machine-readable signals offer no guidance on the injected material.</p>
 

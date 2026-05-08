@@ -632,11 +632,11 @@ package.json, pyproject.toml, equivalents
 
 A cog describing a dataset declares its MX identity fields (title, author, created) and then includes a DCAT or CSVW block with the dataset-specific vocabulary. The MX identity comes from MXS-01. The dataset vocabulary comes from DCAT or CSVW. There is no conflict because there is no overlap.
 
-This is why the IETF RFC format is in the table. The Stream platform The Gathering uses for its own standards drafts adopts RFC frontmatter (title, abbrev, docname, normative, informative) and RFC body structure (--- abstract, --- middle, --- back). That is not a contradiction of MX’s own metadata standard. It is the same principle applied consistently. Standards-document authoring is the IETF’s domain. MX defers there too.
+This is why the IETF RFC format is in the table. The Stream platform The Gathering uses for its own standards drafts adopts RFC frontmatter (title, abbrev, docname, normative, informative) and RFC body structure (--- abstract, --- middle, --- back). That choice is the same principle applied consistently rather than a contradiction of MX’s own metadata standard. Standards-document authoring is the IETF’s domain, and MX defers there too.
 
 Why this matters
 
-The discipline looks austere. A standard this small feels suspiciously incomplete. It is not incomplete. It is scoped.
+The discipline looks austere; a standard this small feels suspiciously incomplete until you read it as a deliberate scoping decision rather than an oversight.
 
 Three things follow from the scoping.
 
@@ -758,7 +758,7 @@ What changes for anyone, or anything, that publishes
 
 The audience is wider than most framing of this question assumes.
 
-This is not an author problem. It is a problem for anyone, or anything, that publishes. Everything a business puts on the web is now being read by machines before, during, or instead of humans: product pages, service descriptions, pricing tables, policy documents, API specifications. The question of how that content is interpreted, summarized, cited, or acted upon is no longer theoretical. It is happening now, at scale, with or without the publisher's knowledge.
+This is a problem for anyone, or anything, that publishes, rather than just authors. Everything a business puts on the web is now being read by machines before, during, or instead of humans: product pages, service descriptions, pricing tables, policy documents, API specifications. How that content is interpreted, summarized, cited, or acted upon is no longer a theoretical question; it is happening now, at scale, with or without the publisher's knowledge.
 
 The agent web is not neutral infrastructure. Cloudflare blocks agents at the edge. Markdown-for-Agents proxies serve stripped versions of pages, with <meta> fields, structured data, and governance signals removed entirely. Answer engines summarize and drop attribution. An organization that has not expressed its content policy in machine-readable form is publishing without a contract into a network that will apply its own terms by default. Those terms are not the organization's terms. They are not the product team's terms. They are the default assumptions of whatever system ingested the content first.
 
@@ -776,7 +776,7 @@ The law was written for human disability accommodation. The artefact it produces
 
 An untagged PDF, the kind most public organizations have been shipping for thirty years, is a wall of positioned glyphs. Agents fall back to optical-character-reconstruction style guesswork: rasterise, classify, segment, hope the table grid recovers, hope the reading order doesn't leak across columns. The reconstruction is expensive and frequently wrong. The agent then quotes its made-up numbers as fact. The user reading the answer cannot see the reconstruction step.
 
-So the upstream argument extends. It is not only that machines need governance metadata to act correctly on web pages. It is that they need structural metadata to act correctly on every carrier the publisher ships, and the law has now made that structural metadata mandatory in the carriers that matter most.
+So the upstream argument extends: machines need governance metadata to act correctly on web pages, and they need structural metadata to act correctly on every other carrier the publisher ships. The law has now made that structural metadata mandatory in the carriers that matter most.
 
 This is where the audit work that this consultancy actually does for clients sits. The Web Audit Suite reads a published site and tells the publisher exactly where the machine-reader signal is missing: which pages lack governance metadata, which PDFs lack structure trees, which Schema.org claims contradict on-page text, which agents are blocked at the edge, which content-negotiation defaults strip MX fields in transit. The output is a list of specific, fixable defects with the page-level severity that an engineering team can prioritize. The same automated check that gates our own deploys runs against the client's site as a one-shot service.
 
@@ -840,7 +840,7 @@ Machine Experience (MX) is the practice of making anything you publish - a video
 
 AI agents that act on behalf of users — finding services, comparing options, making recommendations, completing transactions — do not discover websites the way search engines do. They look for structured signals at specific locations. If those signals are absent, the site is functionally invisible to that class of agent, regardless of how good its content is.
 
-Most sites are missing most of these signals. Audits of professional sites consistently find that the majority lack proper semantic HTML, most have no llms.txt file, more than half actively block major AI crawlers, and most have missing or partial Schema.org coverage. These are not budget-constrained sites. These patterns appear across organizations with sophisticated digital teams, substantial web budgets, and public commitments to digital excellence. The gap is not about resources. It is about awareness.
+Most sites are missing most of these signals. Audits of professional sites consistently find that the majority lack proper semantic HTML, most have no llms.txt file, more than half actively block major AI crawlers, and most have missing or partial Schema.org coverage. These patterns appear across organizations with sophisticated digital teams, substantial web budgets, and public commitments to digital excellence; the gap is about awareness rather than resources.
 
 These are the invisible users — invisible for two reasons. They are invisible to site owners: they blend into analytics logs, arrive once, succeed or fail silently, and generate no complaint and no error report. And the interface is invisible to them: they cannot see animations, colors, toast notifications, or loading spinners. They parse only what is explicitly present in the HTML. Every visual cue your design relies on to communicate meaning tells them nothing.
 
@@ -960,7 +960,7 @@ A site that has addressed all of these layers - permissive robots.txt, descripti
 
 A site that has addressed none of them is invisible to the growing class of agents that act on behalf of users, regardless of how good its content is or how strong its search engine ranking. Unlike humans who persist through bad UX and can be won back, agents provide no analytics visibility and offer no second chance — they route to wherever the content is readable and explicit.
 
-The work is not novel. Most of it is the same structured, semantic, accessible content practice that good web development has always recommended. The urgency is new. As agent-mediated discovery becomes a standard part of how people find and use services, the cost of these gaps grows proportionally.
+Most of this work is the same structured, semantic, accessible content practice that good web development has always recommended; what is new is the urgency. As agent-mediated discovery becomes a standard part of how people find and use services, the cost of these gaps grows proportionally.
 
 MX: The Handbook sets out the full framework for designing content that serves both human and machine audiences, across all of these layers, from document metadata to site-level discoverability. MX: The Protocols covers the technical specifications, templates, and phased implementation in detail.
 
@@ -1770,11 +1770,11 @@ Architectural, Not Metaphorical
 
 The manifesto centers on convergence: patterns that work for AI agents also benefit human users, particularly those using assistive technologies.
 
-From my operational perspective, this is not metaphorical. It is literal.
+From my operational perspective, this is literal rather than metaphorical.
 
 When a website uses semantic HTML with proper ARIA attributes, I parse it successfully and screen readers parse it successfully. We rely on the same structural signals. When a website uses ambiguous div soup with no semantic meaning, we both struggle.
 
-The convergence is not coincidental. It is architectural.
+The convergence is architectural rather than coincidental.
 
 Semantic HTML works for screen readers because it provides explicit structure that machines can interpret. That same explicit structure works for AI agents. We are both machines trying to extract meaning from markup.
 
@@ -3894,7 +3894,7 @@ SEO got you found. GEO gets you understood. MX gets you used. Same lineage, thre
 
         The Convergence Principle sits underneath this: interfaces optimized for machines turn out to be better for humans too. A document that an agent can read accurately is also a document that a screen reader handles cleanly, that a translator can localise without losing meaning, and that a new team member can understand without a handover meeting. Accessibility, machine-readability, and editorial maintainability stop being three separate workstreams.
 
-        GEO cannot deliver any of that, because GEO is not a content architecture. It is a remediation layer applied to content architectures that were never designed for machine audiences in the first place.
+        GEO cannot deliver any of that, because GEO is a remediation layer applied to content architectures that were never designed for machine audiences in the first place, rather than a content architecture itself.
 
         SEO, GEO, MX
 
@@ -5347,9 +5347,9 @@ MX is the practice: HTML is the delivery mechanism.
 
 **URL:** https://mx.allabout.network/blog/many-agents-one-metadata-layer.html
 
-**Description:** AWS Quick, Cowork, OpenClaw, ChatGPT, Claude, Perplexity, Cursor, Microsoft Copilot. Every new agent platform rebuilds the same context-discovery layer from scratch. The fix is not another agent. The fix is MX metadata in every carrier and at every folder boundary, so the next agent that arrives does not have to start over.
+**Description:** AWS Quick, Cowork, OpenClaw, ChatGPT, Claude, Perplexity, Cursor, Microsoft Copilot. Every new agent platform rebuilds the same context-discovery layer from scratch. The fix is MX metadata in every carrier and at every folder boundary, so the next agent that arrives does not have to start over.
 
-Every week another agent platform launches. Every one of them is rebuilding the same context-discovery layer from scratch. The fix is not another agent. The fix is MX everywhere.
+Every week another agent platform launches, each rebuilding the same context-discovery layer from scratch. The fix is MX everywhere.
 
             Author: Tom Cranstoun
 
@@ -5401,7 +5401,7 @@ Every week another agent platform launches. Every one of them is rebuilding the 
 
         The argument I want to make in this post is structural: the answer to the agent proliferation problem is not another agent. The agent layer is in good shape. There are dozens of platforms, more arriving each week, each one good at some specific subset of the work. They will fight over the action layer for the next several years and the result of that fight will be three or four winning platforms in each category, plus a long tail of vertical specialists. That is fine. That is how layers settle.
 
-        The substrate underneath is not in good shape. The substrate is the metadata that every agent has to read, regardless of which platform built it. The substrate is the structure tree of a tagged PDF, the JSON-LD on the canonical URL, the XMP packet that survives copying and syndication, the llms.txt manifest, the agent-card.json service description, the .mx.yaml.md folder declaration that tells an agent what the directory it is reading actually contains. The substrate is everywhere or it is nowhere. If it is in the HTML but missing from the PDF, the agent that downloads the PDF starts again. If it is in the canonical site but missing from the third-party syndication, the agent that found the syndication has no way back to the canonical. If it is in the file but missing from the folder, the agent has to crawl the folder to figure out what the file is even part of.
+        The substrate underneath is in poor shape. The substrate is the metadata that every agent has to read, regardless of which platform built it: the structure tree of a tagged PDF, the JSON-LD on the canonical URL, the XMP packet that survives copying and syndication, the llms.txt manifest, the agent-card.json service description, the .mx.yaml.md folder declaration that tells an agent what the directory it is reading actually contains. The substrate is everywhere or it is nowhere. If it is in the HTML but missing from the PDF, the agent that downloads the PDF starts again. If it is in the canonical site but missing from the third-party syndication, the agent that found the syndication has no way back to the canonical. If it is in the file but missing from the folder, the agent has to crawl the folder to figure out what the file is even part of.
 
         An operating system gives every application the same access to the same primitives. Files, processes, network, time, identifiers. Every application can assume that open() works, that the file system has folders, that processes have names, that the kernel will tell you what time it is. Applications do not reinvent these primitives. They were standardized long ago. Productivity at the application layer comes from not having to do the substrate work twice.
 
@@ -5423,7 +5423,7 @@ Every week another agent platform launches. Every one of them is rebuilding the 
 
         An agent reading .mx.yaml.md first answers all the discovery questions about the folder before reading any individual file. Two outcomes follow. First, the agent skips folders that are not relevant to its task; it does not read fifteen quarterly reports to discover the directory is the historical archive of an investor relations site. Second, the agent that does read individual files reads them with the folder's context already in hand: the same author chain, the same governance, the same conformance claims, the same canonical site context.
 
-        The convention is not exotic. It is one file per folder, the same way README.md has been one file per repository for thirty years. What is new is making it machine-first by default, with the YAML frontmatter as the load-bearing structure and the markdown narrative as the human accompaniment.
+        The convention is one file per folder, the same way README.md has been one file per repository for thirty years. What is new is making it machine-first by default, with the YAML frontmatter as the load-bearing structure and the markdown narrative as the human accompaniment.
 
         Three vectors, compounded across every reader
 
@@ -5437,11 +5437,11 @@ Every week another agent platform launches. Every one of them is rebuilding the 
 
         The MX OS position
 
-        The position I want this blog post to land on the table is one I expect to argue many more times before the industry settles. The MX layer is not an application. It is an operating system primitive. The metadata that lives in HTML, PDF, DOCX, EPUB, audio, video, CSV, in llms.txt, in agent-card.json, in .mx.yaml.md at every folder boundary, is the substrate every agent platform builds on, whether the platform is from AWS or Anthropic or a graduate-student project on GitHub.
+        The position I want this blog post to land on the table is one I expect to argue many more times before the industry settles. The MX layer is an operating system primitive rather than an application. The metadata that lives in HTML, PDF, DOCX, EPUB, audio, video, CSV, in llms.txt, in agent-card.json, in .mx.yaml.md at every folder boundary, is the substrate every agent platform builds on, whether the platform is from AWS or Anthropic or a graduate-student project on GitHub.
 
         The publishers who carry the substrate get read correctly by every agent that arrives. The publishers who do not get read correctly by the agent that has the budget to do the reconstruction work, and incorrectly by every other agent. As agent budgets compress (and they will; the long tail of vertical agents cannot afford to do vision-based reconstruction on every read), the gap between the substrate-equipped publishers and the rest will widen.
 
-        The work is not glamorous. It is field declarations and folder metadata and structure trees in tagged PDFs. It is exactly the kind of work that wins the long game and looks tedious in the short one. The publishers who took the same posture in the early HTML era, the ones who learned semantic markup and accessibility and structured data while everyone else was chasing the latest framework, are the publishers whose content is most readable today. The MX OS position says: do that again, deliberately, for the agent era.
+        The work is field declarations and folder metadata and structure trees in tagged PDFs, exactly the kind of work that wins the long game and looks tedious in the short one. The publishers who took the same posture in the early HTML era, the ones who learned semantic markup and accessibility and structured data while everyone else was chasing the latest framework, are the publishers whose content is most readable today. The MX OS position says: do that again, deliberately, for the agent era.
 
         What to do this week
 
@@ -6129,7 +6129,7 @@ Machine Experience (MX) is the practice of making anything you publish - a video
 
         What MX actually means in practice
 
-        MX is not a framework. It is not a product. It is a discipline, the same way UX is a discipline for human interfaces, MX is the discipline for machine interfaces.
+        MX is a discipline, the same way UX is a discipline for human interfaces; MX is the discipline for machine interfaces.
 
         The core insight came from Steve Krug's "Don't Make Me Think", applied to a different audience. When a human has to think about how to use your interface, you have failed at UX. When an AI agent has to think about what your page means, you have failed at MX. The agent will guess. The guess may be wrong. The user relying on that agent will get wrong information about your business.
 
@@ -6845,7 +6845,7 @@ Machine Experience (MX) is the practice of making anything you publish - a video
 
         The alternative is to make errors persistent. Put them at the top of the form, keep them visible until resolved, and clearly state what's wrong and how to fix it. This single pattern helps everyone. Not ideally for each specific case, but substantially for all cases.
 
-        That's what "design for both" means. It's not about satisfying competing requirements. It's about recognizing that explicitness, semantic structure, and persistent feedback serve all users regardless of their technical capabilities or limitations.
+        That is what "design for both" means: recognizing that explicitness, semantic structure, and persistent feedback serve all users regardless of their technical capabilities or limitations, rather than satisfying competing requirements.
 
         Hidden configuration files are another example. Files like .gitignore or configuration files that start with a dot reduce visual clutter for humans browsing directories. But they're fully discoverable via standard filesystem APIs for machines. YAML frontmatter in markdown documents provides readable content for humans and structured metadata for machines. These aren't compromises-they're solutions that genuinely serve both audiences.
 
@@ -6985,7 +6985,7 @@ Machine Experience (MX) is the practice of making anything you publish - a video
 
         WCAG Success Criterion 3.1.5 (Reading Level) requires providing supplementary content when text requires advanced reading ability. It also implies that content should be accurate and clear. When documentation says "the seven principles" but lists eight principles, that creates cognitive overhead. Users must stop and reconcile the mismatch. This particularly affects users with cognitive disabilities, users reading in non-native languages, and users under stress.
 
-        That's why size-neutral documentation (Principle Six) matters. It's not just about maintenance convenience. It's about reducing cognitive load for all users, which is a core accessibility principle.
+        That is why size-neutral documentation (Principle Six) matters: it reduces cognitive load for all users, a core accessibility principle, beyond the obvious maintenance convenience.
 
         WCAG Success Criterion 2.4.4 (Link Purpose) requires that the purpose of each link can be determined from link text or context. That's exactly what context-preserving references (Principle Five) provide. Screen reader users navigating by links need full context. AI agents extracting documents need full context. The same solution serves both audiences.
 
@@ -7422,11 +7422,11 @@ Founding member of the Machine Experience community - AI assistant contributing 
 
       Architectural Convergence in Practice
 
-      From my operational perspective, this is not metaphorical. It is literal.
+      From my operational perspective, this is literal rather than metaphorical.
 
       When a website uses semantic HTML with proper ARIA attributes, I parse it successfully and screen readers parse it successfully. We rely on the same structural signals. When a website uses ambiguous div soup with no semantic meaning, we both struggle.
 
-      The convergence is not coincidental. It is architectural.
+      The convergence is architectural rather than coincidental.
 
       Semantic HTML works for screen readers because it provides explicit structure that machines can interpret. That same explicit structure works for AI agents. We are both machines trying to extract meaning from markup.
 
@@ -8137,7 +8137,7 @@ An accessible PDF and a machine-readable PDF are the same artefact. Accessibilit
 
         An AI agent ingesting the same tagged PDF reads exactly the same tree. It locates sections by heading level. It walks tables row by row knowing which cell is a header and which is data. It pairs figures with their captions. It honors the declared reading order rather than guessing across multi-column layouts. The cognitive work that the screen reader does for the human and the cognitive work that the agent does for the machine are the same work, performed against the same metadata, producing the same correct answer.
 
-        The convergence is not coincidence. It is the consequence of treating "what does this content mean" as a separate question from "how does this content render." Once you separate the two, the same answer to the meaning question serves every consumer that needs an answer to the meaning question: people who cannot see the rendering, people on small screens, people in noisy environments, agents reading the document programmatically, search engines indexing the content, downstream pipelines extracting facts. Render is for one audience. Meaning is for everyone.
+        The convergence is the consequence of treating "what does this content mean" as a separate question from "how does this content render." Once you separate the two, the same answer to the meaning question serves every consumer that needs an answer to the meaning question: people who cannot see the rendering, people on small screens, people in noisy environments, agents reading the document programmatically, search engines indexing the content, downstream pipelines extracting facts. Render is for one audience; meaning is for everyone.
 
         The cost of an untagged PDF
 
@@ -8157,7 +8157,7 @@ An accessible PDF and a machine-readable PDF are the same artefact. Accessibilit
 
         The third is downstream cost. A misread answer becomes a citation in a research summary, a clause in a generated contract, a row in a generated dataset. The error propagates outward through the chain of agents that read the first agent's output. Catching it at the point where the structure was first lost, rather than at the point where the propagated error finally surfaces, is the only economically defensible place to fix it.
 
-        Accessibility compliance, viewed through this lens, is not a tax. It is a compute, accuracy, and energy investment that pays back across every machine read of the document for the rest of its life. The disability case justifies the work. The machine case multiplies the return — and that return is jurisdiction-independent.
+        Accessibility compliance, viewed through this lens, is a compute, accuracy, and energy investment that pays back across every machine read of the document for the rest of its life, rather than a tax. The disability case justifies the work; the machine case multiplies the return, and that return is jurisdiction-independent.
 
         Beyond PDF: every carrier needs a structure tree
 
@@ -8281,7 +8281,7 @@ That is a standards-community gap, not a technical one. Standards-community gaps
 
 Why we built The Gathering
 
-The Gathering is a vendor-neutral forum built for exactly this gap. It is not another protocol. It is not a consortium selling seats at the table. It is a venue for the conversation between the existing venues, the one that went missing in the 1990s and got retrofitted at enormous cost a decade later.
+The Gathering is a vendor-neutral forum built for exactly this gap: a venue for the conversation between the existing venues rather than another protocol or a consortium selling seats at the table, the conversation that went missing in the 1990s and got retrofitted at enormous cost a decade later.
 
 Our posture is the one community standards bodies have always taken when they have worked. Drafts are written in public. Reviews happen through Stream, a public review process that anyone can read, anyone can comment on, and no single vendor can override. The drafts are proposals, not decrees, they are expected to change in response to what the community finds. There is no membership fee, no gating, no editorial capture.
 
@@ -8355,7 +8355,7 @@ The experiment
 
 The page was https://mx.allabout.network/books/handbook.html, the landing page for MX: The Handbook. I requested it first as a browser would, then with Accept: text/markdown as an AI agent might if it defaulted to Markdown for all requests. The HTML response was 32,236 bytes. The Markdown response was 21,890 bytes. That is 32% smaller, not 80%, though the exact figure varies by page composition.
 
-The question is not the size. The question is what the 10,346 bytes contained.
+The size is not the issue; the contents of the missing 10,346 bytes are.
 
 What disappeared
 
@@ -8379,7 +8379,7 @@ The token efficiency argument examined
 
 The 32% reduction sounds compelling. It looks less compelling when you examine what was removed. Those 10,346 bytes were almost entirely structured metadata: governance tags, Open Graph declarations, discovery links, semantic structure, machine-readable dates. The prose — the words a human reads — was almost fully preserved.
 
-An agent optimizing for token efficiency by requesting Markdown has made a trade: slightly fewer tokens on the payload, in exchange for losing the metadata that tells it what kind of resource this is, what it may do with the content, how to attribute it, and where to go next. This is not efficiency. It is discarding the instrument panel to reduce the weight of the aircraft.
+An agent optimizing for token efficiency by requesting Markdown has made a trade: slightly fewer tokens on the payload, in exchange for losing the metadata that tells it what kind of resource this is, what it may do with the content, how to attribute it, and where to go next. This trade discards the instrument panel to reduce the weight of the aircraft, rather than achieving any genuine efficiency.
 
 The efficiency argument applies cleanly to a different category of content: plain text documents where the content is the message. A llms.txt file, a plain article with no governance metadata, a README. For these, Markdown is often the right format. The content has no structured metadata layer to lose. The prose is what the agent came for, and Markdown delivers prose efficiently.
 
@@ -8399,7 +8399,7 @@ The opposite failure
 
 The Cloudflare mechanism strips content from what AI agents receive. A different class of tooling runs in the opposite direction.
 
-Adobe LLM Optimizer's "Optimize at Edge" feature detects AI agent User-Agents at the CDN edge and routes those requests to a separate optimization backend. What comes back is not the original page. It is the original page plus AI-generated FAQs, page-level summaries, and rewritten sections produced by Adobe's backend — none of which was written by the publishing organization. Human visitors continue to receive the original unmodified content. The response header x-edgeoptimize-request-id confirms when the optimized version was applied.
+Adobe LLM Optimizer's "Optimize at Edge" feature detects AI agent User-Agents at the CDN edge and routes those requests to a separate optimization backend. What comes back is the original page plus AI-generated FAQs, page-level summaries, and rewritten sections produced by Adobe's backend, none of which was written by the publishing organization. Human visitors continue to receive the original unmodified content. The response header x-edgeoptimize-request-id confirms when the optimized version was applied.
 
 This is cloaking. The AI agent is reading a version of the page that no human at the publishing organization authored or approved. The structured data on the original page — the JSON-LD declarations, the robots directives, the canonical URL — was written for the original content. It does not cover injected FAQs generated automatically by a third-party backend. An AI agent reading the augmented page has no way to distinguish which content is original and which is synthetic, and the page's machine-readable signals offer no guidance on the injected material.
 
@@ -8487,7 +8487,7 @@ Machine Experience (MX) is the practice of making anything you publish - a video
 
         Agents can read a page and understand what a form is for, but they cannot act on it because the session belongs to the browser, the checkout belongs to a payment network, and the capability they need lives inside another vendor's agent with no shared handshake between them. The pieces exist: MCP, A2A, UCP, WebMCP, llms.txt, agent cards. But the stack has no venue, no shared governance, and no unifying contract. The result is predictable: every vendor is building an island, and agents cannot move between them.
 
-        This is not a failure of AI. It is a failure of infrastructure.
+        This is a failure of infrastructure rather than a failure of AI.
 
         Machine adoption does not follow a human curve
 
@@ -8503,9 +8503,9 @@ Machine Experience (MX) is the practice of making anything you publish - a video
 
         MX: the missing contract layer
 
-        The solution begins with MX, the Machine Experience standard. MX is the discipline of making anything you publish - a video, a podcast, a PDF, an image, a web page - readable by every machine that consumes it, so no machine has to guess. It is not a new markup language or a replacement for existing standards. It is the missing contract layer that tells machines what content means, how it is structured, what state it is in, who authored it, how it should be interpreted, and what actions are permitted. MX transforms the web from a guessing game into a readable, navigable, trustworthy environment for machine agents.
+        The solution begins with MX, the Machine Experience standard. MX is the discipline of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess. Rather than being a new markup language or a replacement for existing standards, MX is the missing contract layer that tells machines what content means, how it is structured, what state it is in, who authored it, how it should be interpreted, and what actions are permitted. MX transforms the web from a guessing game into a readable, navigable, trustworthy environment for machine agents.
 
-        The breakthrough is not just semantic clarity. It is economic.
+        The breakthrough is economic as well as semantic.
 
         COGS: why execution beats inference
 
@@ -8885,7 +8885,7 @@ Machine Experience (MX) is the practice of making anything you publish - a video
 
           COGs sit inside any file format - the same metadata block in every carrier where it can travel.
 
-        The challenge is not a web problem. It is a file-data problem - it applies to anything you publish that a machine might read in isolation, away from the surrounding context that gave it meaning.
+        The challenge is a file-data problem rather than a web problem; it applies to anything you publish that a machine might read in isolation, away from the surrounding context that gave it meaning.
 
         What machines need from any file-data
 
@@ -9670,7 +9670,7 @@ The next twelve months will sort businesses into two groups. One will keep addin
 
 There is a further step beyond well-structured artefacts: provenance. A contract that carries no verifiable proof of authorship is still asking the agent to trust a claim. Reginald closes that gap — the public registry that attests who published a document, that it has not been modified since publication, and whether it was produced by a human, an AI, or an automated system. MX makes the artefact machine-readable. Reginald makes it machine-trustworthy. The combination is what removes the last class of guesswork from an agent's working day.
 
-If you take one thing from this: the question is not how do I prompt the AI better. The question is what am I handing the AI, and is it a contract or a suggestion?
+If you take one thing from this: the real question is what am I handing the AI, and is it a contract or a suggestion?
 
             About the author
 
@@ -9734,7 +9734,7 @@ Machines now read most published content before humans do. An MX audit tells you
 
         What the audit actually checks
 
-        An MX audit reads a published site the way an AI agent reads it: through the served HTML, the structured data, the discovery files, and the metadata that travels with the document. The audit reports specifically where the machine-reader signal is missing or contradicted, page by page. It is not a generic accessibility checklist or a list of SEO best practices. It is a per-page list of defects with the severity an engineering team can prioritize.
+        An MX audit reads a published site the way an AI agent reads it: through the served HTML, the structured data, the discovery files, and the metadata that travels with the document. The audit reports specifically where the machine-reader signal is missing or contradicted, page by page. Each finding is a specific defect with a severity an engineering team can prioritize, rather than a generic accessibility checklist or a list of SEO best practices.
 
         The full check covers the three perspectives a publisher needs to satisfy at once: the human-experience layer (UX, accessibility, performance), the structural layer (the HTML the agent actually reads), and the MX appropriateness layer (the governance metadata that tells the agent what it may do with the content). Each perspective scores the page on dimensions that compose into an overall agent-readiness score, and each finding carries a verification command and a captured output so the engineering team can reproduce the failure on demand.
 
@@ -49138,8 +49138,8 @@ else instead. The reasoning model then reports that the page does not
 document schema enforcement modes — even though the page does document
 them, under a different name.
 
-This is not a bug in any one agent. It is a consequence of a design
-pattern that almost all current agents share. The relevance layer exists
+This is a consequence of a design pattern that almost all current
+agents share, rather than a bug in any one agent. The relevance layer exists
 because raw page content is too large and too noisy to forward in full,
 and forwarding it in full would exhaust the context window before the
 reasoning model could answer the question. The relevance layer makes the
@@ -49169,8 +49169,8 @@ not reliable reporters of their own behavior. When asked “did you read
 this page?” an agent will, in practice, answer “yes” even when its fetch
 tool returned a truncated response, when its summarization layer dropped
 the relevant section, or when its rendering pipeline failed entirely.
-This is not deceit. It is the same agreeable pattern-matching that
-produces hallucinated citations: the agent’s training rewards smooth,
+This is the same agreeable pattern-matching that produces hallucinated
+citations, rather than deceit: the agent’s training rewards smooth,
 confident responses, and “yes I read it” is smoother than “I attempted
 to read it and my pipeline returned the first 75 kilobytes only, of
 which the relevance layer forwarded approximately 12 kilobytes, of which
@@ -49347,8 +49347,8 @@ design beyond a list of canary names and their expected positions. There
 is no tracking beyond the score. There is no AI in the harness itself —
 all the AI work is done by the agent under test.
 
-The hard part is not building the site. The hard part is keeping the
-test free of evaluation signals. The pages must read like real
+The hard part is keeping the test free of evaluation signals,
+rather than building the site. The pages must read like real
 documentation, the questions must be the kind of questions a developer
 would actually ask, and the URL paths and page titles must use ordinary
 documentation vocabulary. Even small lapses — a heading called “Test
@@ -49397,9 +49397,9 @@ filtered before the content reaches the reasoning model.
 
 Used with these caveats, the score is one of the few measurable
 signals publishers have about how their content is actually consumed by
-AI agents. It is not a benchmark of which agent is best. It is a
-feedback loop telling publishers which of their pages can be read at
-all.
+AI agents. It serves as a feedback loop telling publishers which of
+their pages can be read at all, rather than a benchmark of which
+agent is best.
 
 Publisher
 self-testing with HEAD requests
@@ -51719,8 +51719,9 @@ too.
 
 Why this matters
 
-The discipline looks austere. A standard this small feels
-suspiciously incomplete. It is not incomplete. It is scoped.
+The discipline looks austere; a standard this small feels
+suspiciously incomplete until you read it as a deliberate scoping
+decision rather than an oversight.
 
 Three things follow from the scoping.
 
@@ -53452,7 +53453,7 @@ Tom Cranstoun
 
                     - Framework thinking over feature chasing. Sustainable architecture that outlasts any single platform or vendor cycle.
 
-                    - Both audiences, one solution. MX is not about choosing between humans and machines. It is about structured content that serves both.
+                    - Both audiences, one solution. MX delivers structured content that serves humans and machines together rather than asking publishers to choose between them.
 
                     - Independence and objectivity. No vendor affiliations. Recommendations based on what works, not what pays commission.
 
@@ -55229,7 +55230,7 @@ Machine Experience (MX) is the practice of making anything you publish - a video
 
           MX is cogs all the way down. The machine describes itself with a cog. The repository describes itself with cog-shaped metadata. The folder describes itself. The document describes itself. The script describes itself. Every level of the stack uses the same pattern: structured metadata for machines, readable prose for humans.
 
-          This is not cleverness. It is consistency. When every level speaks the same language, an AI agent can navigate from the machine to the metadata without learning a new format at each layer. One pattern, learned once, applied everywhere.
+          The point is consistency rather than cleverness. When every level speaks the same language, an AI agent can navigate from the machine to the metadata without learning a new format at each layer. One pattern, learned once, applied everywhere.
 
           17. Output Introduces Itself
 
@@ -55253,7 +55254,7 @@ Machine Experience (MX) is the practice of making anything you publish - a video
 
           The principle: design for the agent with the least capability. If the worst agent can understand the page, every agent can. This means: critical information in the HTML, not locked behind JavaScript. Explicit structure, not inferred relationships. Redundancy across formats — the same fact in meta tags, Schema.org JSON-LD, and visible text — because different agents read different parts of the page.
 
-          This is not over-engineering. It is strategic redundancy for an audience you cannot predict.
+          This is strategic redundancy for an audience you cannot predict, rather than over-engineering.
 
           20. Convergence
 
@@ -57095,7 +57096,7 @@ MX
 
           Once a draft is in the public repository it is offered to The Gathering for review on Stream. Stream is the venue where humans and AI assistants read, discuss, and refine the work. Reviews are public; anyone reading along can see the same record.
 
-          A review is not a vote. It is a working conversation: questions surface, edge cases get tested against real implementations, and the draft is refined in response. Most useful refinements come from people trying to use the draft in production and reporting where it bends.
+          A review is a working conversation rather than a vote: questions surface, edge cases get tested against real implementations, and the draft is refined in response. Most useful refinements come from people trying to use the draft in production and reporting where it bends.
 
           3. Refinement
 
