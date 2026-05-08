@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed and home prose redesigned, audit gate pipeline redesigned with self-repair loop"
-description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing; the two long prose blocks on the home page first split into shorter paragraphs and then redesigned with a constrained 65vw prose column, a real section-lead rule, and a framework-card grid for the four-part split (MX, The Gathering, REGINALD, CogNovaMX); audit gates 3 & 4 redesigned from blocking/warn-mode to a self-repair loop — repair-report.js patches the report in place and re-runs up to 3 iterations; dotfusion.com report corrections applied and gates passed cleanly."
+title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed and home prose redesigned, audit gate pipeline redesigned with self-repair loop, cog enforcer plan-mode gate added"
+description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing; the two long prose blocks on the home page first split into shorter paragraphs and then redesigned with a constrained 65vw prose column, a real section-lead rule, and a framework-card grid for the four-part split (MX, The Gathering, REGINALD, CogNovaMX); audit gates 3 & 4 redesigned from blocking/warn-mode to a self-repair loop; cog enforcer upgraded to v2.0 with URL/arg parsing and a two-layer plan-mode gate that blocks EnterPlanMode and any non-Bash tool when cog enforcement is active."
 author: "Tom Cranstoun"
 created: 2026-05-08
 modified: 2026-05-08
-version: "1.6"
+version: "1.7"
 
 mx:
   status: active
@@ -23,6 +23,8 @@ mx:
 ---
 
 ## Summary
+
+**v1.7 addition:** The cog enforcer was upgraded to v2.0 with two changes. First, `run-cog-enforcer.sh` now parses the URL and page-count arguments directly from the user's prompt and includes the exact pre-computed `mx exec` command in the enforcement message — so Claude receives `mx exec mx-audit https://mx.allabout.network --max-pages 999` rather than "[args from user prompt]" and has nothing to infer. Second, a new `PreToolUse` catch-all hook (`pre-tool-use-plan-mode-gate.sh`) was added: when the enforcer's short-lived flag file is present, every tool except `ExitPlanMode` and `Bash` is blocked outright. This covers both the "plan mode not yet active" case (EnterPlanMode never succeeds) and the "plan mode already active" case (all other tools are blocked, leaving ExitPlanMode as the only legal first move, then Bash as the only second move). The flag is written by `UserPromptSubmit`, consumed when Bash is called, and expires after 90 seconds regardless.
 
 **v1.6 addition:** The audit gate pipeline was redesigned. Gates 3 & 4 (fierce critic and LLM judgment) previously ran in blocking mode then auto-degraded to warn mode after 3 rounds — a design that accumulated 28 invocations against a 3-round cap, never fired any repair, and left the round counters in a permanently-saturated state. The new design is a self-repair loop: the gates run as a pair, find issues, `repair-report.js` patches the report in place using a constrained LLM call (no new facts, no structure changes), then the loop re-runs — up to 3 iterations total per domain. Round counters track total invocations and are capped at 3; both counters stay in sync. All `--warn-fierce`, `--warn-llm`, and `--strict-fierce` flags were removed from the pipeline, the cog, both skills, and all documentation. The audit log is now opened before any other pipeline operation so every error (sweep failures, round-counter parse errors, gate errors) lands directly in the audit CSV with no buffering and no stderr fallback. The dotfusion.com report was corrected (llms.txt status in Appendix D; Priority 4 finding now names the three absent security headers explicitly), round counters were reset to 0, and gates passed cleanly on the first iteration. PDF delivered.
 
@@ -122,6 +124,21 @@ After a full-width preview of the home page, both long prose blocks were broken 
 
 A second wide-screen preview made it visible that paragraph splits alone were not enough. The diagnosis: the `section-lead` class was inert (never defined in CSS, so all my "lead" paragraphs rendered identical to body), and `section-inner` had no width cap (1600px on a wide screen), so even short paragraphs ran across half the screen and read as a slab. The fix is three new rules in `mx-unified.css`. `section-prose` caps text-only sections at `clamp(560px, 65vw, 780px)`, putting line length back into the 65 to 75 character readable range. `section-lead` is now a real rule — 1.5rem, white, weight 500, generous bottom margin — so opening sentences read as section statements instead of body. `framework-list` is a two-column card grid using `--mx-surface` and `--mx-border`, matching the proposition-card pattern the rest of the page uses, and collapsing to one column under 600px. The Introduction trimmed from seven paragraphs to five — the redundant "CogNovaMX provides consultancy, training, books, and tools" paragraph was cut because the offering cards directly above already do that job, and the DNA / memory-pool paragraph compressed to one sentence keeping the kernel. The provenance-layer section now opens with a real lead, sets up the gap in two sentences, hands off to the four cards, then carries three short follow-on paragraphs (EU AI Act forcing function; Schema.org gap-in-miniature; agentic-web economic case). The cache was repurged after the push.
 
+### 20. Cog Enforcer v2.0 — Plan-Mode Gate
+
+Two additions to the `UserPromptSubmit` enforcement pipeline that prevent Claude from entering plan mode when a scripted or hybrid cog is detected.
+
+**URL and arg parsing.** `run-cog-enforcer.sh` previously told Claude to "pass args from user prompt" — leaving argument extraction as an inference task and giving Claude enough ambiguity to enter plan mode while it reasoned about the inputs. The hook now extracts the URL (full protocol URL or bare hostname with `https://` prepended) and the page count (`--max-pages N`, `N pages`, or `all pages` mapped to `--max-pages 999`) directly from the prompt text. The exact command is embedded in the enforcement message: `mx exec mx-audit https://mx.allabout.network --max-pages 999`. Nothing is left to infer.
+
+**PreToolUse catch-all gate.** A new hook `pre-tool-use-plan-mode-gate.sh` is registered as a `PreToolUse` hook with an empty matcher (fires on every tool call). When `run-cog-enforcer.sh` detects a hybrid/scripted cog, it writes `/tmp/.cog-enforcer-active` with the current timestamp. For the next 90 seconds:
+
+- `ExitPlanMode` — allowed (needed to escape if plan mode is already active)
+- `Bash` — allowed and consumes the flag (the cog command executes)
+- `EnterPlanMode` — blocked with an explicit message
+- Any other tool (`Read`, `Write`, `TodoWrite`, etc.) — blocked
+
+The effect when plan mode is already active: Claude's only permitted first action is `ExitPlanMode`. After that, only `Bash` is permitted. The enforcer does not need to know whether plan mode is active — the gate forces the correct sequence regardless.
+
 ### 17. Audit Gate Pipeline: Self-Repair Loop
 
 The blocking/warn-mode design for gates 3 & 4 was replaced entirely. The problem: round counters were incrementing on every pipeline invocation rather than only when a blocking failure occurred, so 28 invocations had accumulated against a 3-round cap. The gates were silently skipped on every run. Rather than patching the counter logic, the underlying design was changed.
@@ -170,11 +187,14 @@ The old flags and "auto-degrade to warn after round 3" language were present in 
 | Commits (v1.4 readability tighten) | 2 (hub + mx-outputs) |
 | Commits (v1.5 home redesign) | 2 (hub + mx-outputs) |
 | New CSS rules (v1.5) | 3 (section-prose, section-lead, framework-list) |
-| Commits (v1.6 gate redesign) | 3 (mx-audit, mx-crm, mx-outputs) + hub pending |
+| Commits (v1.6 gate redesign) | 3 (mx-audit, mx-crm, mx-outputs) + hub |
 | Files updated for gate redesign | 9 (pipeline + cog + skills + docs + architecture) |
 | New scripts (v1.6) | 1 (repair-report.js) |
 | Silent error catches fixed | 6 (sweep, round-counter reads, parseSidecarFindings, 3 JSON parses) |
-| Hook bugs fixed | 2 |
+| Hook bugs fixed (total) | 4 (v1.8: 2; v2.0: 2) |
+| Commits (v1.7 plan-mode gate) | 2 (mx-crm log + hub pending) |
+| New hooks (v1.7) | 1 (pre-tool-use-plan-mode-gate.sh) |
+| Hook files modified (v1.7) | 2 (run-cog-enforcer.sh, settings.json) |
 | Audit pages | 5 |
 | Repositories touched | 3 (hub, mx-crm, mx-outputs) |
 | LinkedIn banner iterations | 4 |
@@ -200,6 +220,8 @@ The old flags and "auto-degrade to warn after round 3" language were present in 
 - Audit gates 3 & 4 are no longer blocking judges — they are self-repair agents; the pipeline never blocks on stylistic findings
 - Round counters track total invocations per domain (cap 3); blocking/warn-mode distinction removed permanently
 - All audit pipeline errors log to the audit CSV; no stderr fallback, no silent ignoring
+- Cog enforcer now parses URL and page-count from the user prompt and emits the exact `mx exec` command; no inference left to Claude
+- A `PreToolUse` catch-all gate blocks all tools except `ExitPlanMode` and `Bash` when cog enforcement is active; plan mode cannot be entered and cannot persist through a cog-run turn
 
 ---
 
@@ -258,4 +280,7 @@ The old flags and "auto-degrade to warn after round 3" language were present in 
 | 0618cc8 | mx-audit: self-repair loop replaces blocking gate design; add repair-report.js |
 | 6cf33da | mx-crm: dotfusion.com audit run 2026-05-08 — gates passed, PDF generated |
 | 47646d6 | mx-outputs: dotfusion.com audit published outputs 2026-05-08 |
-| *pending* | Hub: audit pipeline redesign + documentation sweep + this report v1.6 |
+| 4001c5e6 | feat: audit gate self-repair loop — repair-report.js, initLog at startup, error logging |
+| 0a13a13d | docs: CHANGELOG v1.99 and LEARNINGS v4.11 — audit gate self-repair loop |
+| de19c5d | mx-crm: append dotfusion.com collect-run log entries 2026-05-08 evening |
+| *pending* | Hub: cog enforcer v2.0 plan-mode gate + this report v1.7 |
