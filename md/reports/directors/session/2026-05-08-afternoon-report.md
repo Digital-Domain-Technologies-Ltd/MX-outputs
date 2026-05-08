@@ -4,7 +4,7 @@ description: "Afternoon segment: drafted and pushed the open compliance-claims s
 author: "Tom Cranstoun"
 created: 2026-05-08
 modified: 2026-05-08
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
