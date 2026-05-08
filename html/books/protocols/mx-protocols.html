@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -8,6 +8,9 @@
   <meta name="description" content="Closing chapter directing readers to online appendices and additional resources at allabout.network" />
   <title>MX-Protocols</title>
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     html {
       color: #1a1a1a;
       background-color: #fdfdfd;
@@ -90,6 +93,7 @@
       color: #606060;
     }
     code {
+      white-space: pre-wrap;
       font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
       font-size: 85%;
       margin: 0;
@@ -153,7 +157,6 @@
     #TOC a:not(:hover) {
       text-decoration: none;
     }
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
     div.column{flex: auto; overflow-x: auto;}
@@ -953,6 +956,9 @@ parallel, and why it matters</a></li>
 <li><a href="#tg.community-and-the-shared-standard-route"
 id="toc-tg.community-and-the-shared-standard-route">tg.community and the
 shared-standard route</a></li>
+<li><a href="#the-agent-proliferation-problem-and-the-mx-os"
+id="toc-the-agent-proliferation-problem-and-the-mx-os">The Agent
+Proliferation Problem and the MX OS</a></li>
 <li><a href="#what-an-mx-builder-does-today"
 id="toc-what-an-mx-builder-does-today">What an MX builder does
 today</a></li>
@@ -1145,14 +1151,19 @@ and the Standards</a>
 <ul>
 <li><a href="#the-gathering-1" id="toc-the-gathering-1">The
 Gathering</a></li>
-<li><a href="#the-four-proposed-standards"
-id="toc-the-four-proposed-standards">The four proposed
-standards</a></li>
+<li><a href="#the-proposed-standards"
+id="toc-the-proposed-standards">The proposed standards</a></li>
 <li><a href="#the-three-file-canon" id="toc-the-three-file-canon">The
 three-file canon</a></li>
 <li><a href="#defer-to-existing-standards"
 id="toc-defer-to-existing-standards">Defer to existing
 standards</a></li>
+<li><a href="#entity-identity-the-sameas-property"
+id="toc-entity-identity-the-sameas-property">Entity identity: the sameAs
+property</a></li>
+<li><a href="#what-the-registry-actually-claims-and-why-it-matters"
+id="toc-what-the-registry-actually-claims-and-why-it-matters">What the
+registry actually claims — and why it matters</a></li>
 <li><a href="#the-namespace-policy" id="toc-the-namespace-policy">The
 namespace policy</a></li>
 <li><a href="#where-the-current-reference-lives"
@@ -1199,6 +1210,12 @@ Problem</a></li>
 <li><a href="#what-this-means-for-mx-publishers"
 id="toc-what-this-means-for-mx-publishers">What This Means for MX
 Publishers</a></li>
+<li><a href="#the-carrier-argument-generalises-beyond-html"
+id="toc-the-carrier-argument-generalises-beyond-html">The Carrier
+Argument Generalises Beyond HTML</a></li>
+<li><a href="#what-else-an-agent-wants-from-the-metadata"
+id="toc-what-else-an-agent-wants-from-the-metadata">What Else An Agent
+Wants From The Metadata</a></li>
 <li><a href="#conclusion-2" id="toc-conclusion-2">Conclusion</a></li>
 </ul></li>
 <li><a href="#the-machine-experience-manifesto"
@@ -1230,8 +1247,8 @@ Practice</a></li>
 id="toc-community-membership">Community Membership</a></li>
 <li><a href="#sustainability"
 id="toc-sustainability">Sustainability</a></li>
-<li><a href="#about-the-gathering" id="toc-about-the-gathering">About
-The Gathering</a></li>
+<li><a href="#about-this-community" id="toc-about-this-community">About
+This Community</a></li>
 <li><a href="#how-to-contribute" id="toc-how-to-contribute">How to
 Contribute</a></li>
 </ul></li>
@@ -1267,7 +1284,7 @@ it easier?</p>
 class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> AI
 referrals to retail sites surged by 700%. Travel referrals rose by 500%.
 Conversion rates from AI-referred visitors now lead human traffic by
-30%, and those visitors spend 50% longer on sites. Machine-mediated
+30%, and those visitors are 33% less likely to bounce. Machine-mediated
 commerce moved from experimental to revenue driver in a single
 quarter.</p>
 <p>In January 2026, four major platforms launched machine commerce
@@ -1298,29 +1315,65 @@ architecturally incompatible with machine access.</p>
 <p>The second is content imprisoned in platforms. Content management
 systems solved real problems for decades. But every CMS traps content in
 its own format, its own database, its own API. Migration costs are
-prohibitive. Vendor lock-in persists. And now AI agents cannot read any
+prohibitive. Vendor lock-in persists. And now Machines cannot read any
 of it — because the content was designed for human eyes inside a
 proprietary system, not for machines operating across open standards.
 The content does not describe itself. It depends on the platform to
 describe it, and the platform’s description serves the platform’s
 interests.</p>
 <p>The third is the assumption that structured data alone is the answer.
-Adding Schema.org JSON-LD to a page addresses what machines can
-<em>read</em> — but it does not address what they can <em>do</em>. It
-does not fix the hostile design patterns that block interaction. It does
-not free content from platform lock-in. It does not govern who may
-access the content, under what terms, for what purposes. Structured data
-is one layer in a practice that must span the entire interaction
-surface.</p>
-<p>MX addresses all three. It is not a markup vocabulary. It is the
-practice of ensuring that every file, every page, every digital asset
-carries enough context for machines to understand it and act on it —
-without guessing. Schema.org is one tool in that practice. Semantic HTML
-is another. YAML frontmatter, meta tags, robots.txt directives,
-sitemap.xml, llms.txt, accessibility patterns, and self-describing
-document formats (cogs) are others. The practice is broader than any
-single standard, because the problem is broader than any single standard
-can solve.</p>
+Schema.org describes. MX executes. Adding Schema.org JSON-LD to a page
+addresses what machines can <em>read</em> — but it does not address what
+they can <em>do</em>. It does not fix the hostile design patterns that
+block interaction. It does not free content from platform lock-in. It
+does not govern who may access the content, under what terms, for what
+purposes. Structured data is one layer in a practice that must span the
+entire interaction surface.</p>
+<p>MX is not Generative Engine Optimisation. GEO — the vendor category
+built around optimising content for LLM citation — asks one question:
+how do I get an AI to cite my page? MX asks a different question: can
+any machine — crawler, assistant, robot, autonomous system — find any
+document in a corpus, verify it is genuine, and know whether it is
+current? GEO optimises a single pathway. MX builds coverage across every
+pathway, because which pathway a given machine will use is unknowable in
+advance. A strategy that optimises for LLM citation fails every other
+pathway simultaneously, and becomes obsolete when the target pathway
+changes. GEO improvement is an outcome of implementing MX. MX is not a
+kind of GEO.</p>
+<p>MX and Reginald are the two pillars of machine-ready content. MX
+makes content machine-readable: the structured metadata, semantic HTML,
+and explicit patterns that enable any machine to find and act on your
+content. Reginald makes it machine-trustworthy: a public registry that
+attests who wrote a document, when it was published, whether it has been
+modified, and whether it was produced by a human, an AI, or an automated
+system. The claim Reginald makes is narrow and precise — <em>this is
+what the owner published, unaltered</em> — not factual accuracy, not
+editorial endorsement. Provenance and integrity only. Both pillars are
+necessary. A document can be structured and readable without being
+trustworthy. It can be attested without being readable. Machine-ready
+content requires both. The practical consequence is direct: verified
+provenance reduces AI hallucinations — agents cite attested facts rather
+than inferences — lowers inference cost and energy by eliminating
+redundant cross-referencing, and satisfies the provenance requirements
+that the EU AI Act, the European Accessibility Act, and emerging
+digital-records legislation are beginning to require.</p>
+<p>MX addresses all three. It is not an internet discipline. It is a
+document discipline. Contracts, manufacturing specifications, government
+archives, medical protocols, scientific papers — the substrate of every
+enterprise. A document that leaves its originating server and ends up on
+a contractor’s hard drive, a maintenance manual on an air-gapped factory
+system, a legal contract archived offline — all of them are within MX’s
+scope. The question MX asks does not change by context or location: can
+any machine find this document, verify it is genuine, and know whether
+it is current?</p>
+<p>It is not a markup vocabulary. It is the practice of ensuring that
+every file, every page, every digital asset carries enough context for
+machines to understand it and act on it — without guessing. Schema.org
+is one tool in that practice. Semantic HTML is another. YAML
+frontmatter, meta tags, robots.txt directives, sitemap.xml, llms.txt,
+accessibility patterns, and self-describing document formats (cogs) are
+others. The practice is broader than any single standard, because the
+problem is broader than any single standard can solve.</p>
 <h2 id="the-wave-that-is-already-building">The wave that is already
 building</h2>
 <p>The January 2026 platform launches described at the start of this
@@ -1624,14 +1677,16 @@ system that reliably extracts planning application status from one
 council is more likely to recommend that council’s site over others.
 Latecomers face an invisible disadvantage. Preferred sources may already
 be established, and displacing them can be difficult.</li>
-<li>Structure prevents hallucination. Formal documents with metadata
+<li>Structure prevents hallucination. Hallucination is an infrastructure
+problem, not a model problem. Formal documents with metadata
 inheritance, operational runbooks, and defined scripts give machines
-verified facts rather than inferred guesses. The risk of hallucination
-drops when they read instead of reason. A healthcare provider whose drug
-information uses Schema.org MedicalEntity markup provides facts
-directly. One whose information sits in unstructured prose invites
-guesswork, and guessing about drug interactions carries consequences
-that pricing errors do not.</li>
+verified facts rather than inferred guesses. Better models hallucinate
+with more confidence on ambiguous data, not less. The risk of
+hallucination drops when they read instead of reason. A healthcare
+provider whose drug information uses Schema.org MedicalEntity markup
+provides facts directly. One whose information sits in unstructured
+prose invites guesswork, and guessing about drug interactions carries
+consequences that pricing errors do not.</li>
 <li>Training beats searching. LLMs trained on properly structured
 content develop a fuller understanding of your products, services, and
 information. Instead of searching and scraping at inference time (an
@@ -1764,8 +1819,7 @@ rest of this chapter is urgent or merely important.</p>
 <p>Before the technical detail, here is where this leads. An
 organisation that implements MX reaches a measurable destination:</p>
 <ul>
-<li>Machines convert at rates matching or exceeding human visitors.
-Automated referral traffic becomes captured revenue, not invisible
+<li>Automated referral traffic becomes captured revenue, not invisible
 loss.</li>
 <li>Zero catastrophic errors in machine-mediated transactions. No
 £203,000 bookings when someone wanted £2,030. No hallucinated drug
@@ -3248,11 +3302,17 @@ team. A cog in a git repository is versioned, reviewed, and travels with
 the code. None of these need a registry, a server, or any external
 infrastructure. The format is governed by The Gathering as an open
 standard (MIT licensed) and stands entirely on its own.</p>
-<p>When cogs need to cross organisational boundaries — proving
-authenticity, enabling external discovery, or tracking versions —
-Reginald provides a public registry with cryptographic attestation and
-currency tracking. Registration is optional. The cog format and registry
-are covered in the companion volumes.</p>
+<p>Reginald is the second pillar. The cog format makes any document
+machine-readable — on a laptop, a file server, in a git repository,
+anywhere files exist. Reginald makes cogs machine-trustworthy when they
+cross organisational boundaries: a public registry that attests who
+published a document, that it has not been modified since publication,
+when the current version was issued, and whether it was produced by a
+human, an AI, or an automated system. Registration is never required for
+private or internal use. When cogs need to be discoverable by any
+machine on earth, or when provenance must be cryptographically
+verifiable, Reginald provides the mechanism. Both the cog format and the
+registry are covered in full in Chapters 20 and 21.</p>
 <hr />
 <p>CogNovaMX Ltd — Making the web work for everyone and everything that
 uses it.</p>
@@ -3687,9 +3747,11 @@ Rate” (CTR) is being replaced by <strong>Citation Share</strong>.</li>
 (Amazon, Microsoft, Google) have shifted from “Chat” to “Action”,
 requiring every website to be machine-navigable.</li>
 <li><strong>The Global Accessibility Mandate:</strong> Regulatory
-pressure (like the European Accessibility Act) is converging with
-technical necessity. This book names this convergence the
-<strong>“Resilience Dividend”</strong>.</li>
+pressure — the European Accessibility Act in the EU, Section 508 and ADA
+Title III in the US, equivalent legislation in the UK, Australia, and
+Canada — is converging with technical necessity on the same technical
+standard. This book names this convergence the <strong>“Resilience
+Dividend”</strong>.</li>
 </ul>
 <p><strong>The business model crisis is already here.</strong> In
 January 2026, Tailwind CSS laid off 75% of its team after their
@@ -3835,9 +3897,9 @@ class="uri">https://cmscritic.com/a-cms-consultants-takeaways-from-cms-kickoff-2
 finally arrived.</p>
 <hr />
 <h2 id="early-reviews">Early Reviews</h2>
-<p><strong>Title</strong>: MX: The Handbook: Designing the Web for AI
-Agents and Everyone Else <strong>Verdict</strong>: 4/5 Stars (Solid
-Technical Resource)</p>
+<p><strong>Title</strong>: MX: The Handbook: Making Documents Work for
+Every Machine and Everyone Else <strong>Verdict</strong>: 4/5 Stars
+(Solid Technical Resource)</p>
 <p>“MX: The Handbook” addresses a timely and growing challenge in web
 development: building effective interfaces for machines. It effectively
 argues that we need to consider machines as a distinct user class rather
@@ -3887,6 +3949,13 @@ new kind of user has arrived. It’s about the business implications, the
 technical solutions, and the unexpected benefit: by building for
 machines, we might finally create the clearer, more honest web we should
 have built all along.</p>
+<p>It introduces two pillars. MX makes content machine-readable: the
+structural patterns that let any machine find, understand, and act on
+your content without guessing. Reginald makes it machine-trustworthy: a
+public registry that attests who wrote a document, when it was
+published, whether it has been modified, and whether it was produced by
+a human, an AI, or an automated system. Both pillars run through this
+book.</p>
 <p>For the story of how this problem was discovered and why this book
 exists, see the Preface.</p>
 <hr />
@@ -4084,6 +4153,13 @@ with high-speed internet — but real humans: tired, distracted, impaired,
 stressed, multitasking, using old phones on slow connections.</p>
 <p>We’ve been designing for ideal conditions. Machines force us to
 create for reality.</p>
+<p>This principle extends beyond websites. Your content estate —
+contracts, policy documents, product specifications, technical reports —
+is already being consumed by machines. Most of it was never designed for
+machine access. Being on the web and being machine-readable are not the
+same thing: web accessibility solves discoverability, but MX solves
+comprehension. The same structural decisions that make a webpage work
+for every human also make a document work for every machine.</p>
 <hr />
 <h2 id="what-this-book-covers">What This Book Covers</h2>
 <p>This isn’t a theoretical discussion. It’s a practical guide to a
@@ -4164,6 +4240,21 @@ cruise pricing case study shows why pipeline validation matters. This
 chapter provides implementation patterns for browser extensions, CLI
 agents, and server-based agents to build reliable systems that serve
 users well.</p>
+<p><strong>Chapters 14 through 22</strong> carry the governance and
+trust architecture that makes the technical patterns durable. Chapter 14
+covers the agent protocols emerging from the January 2026 platform race
+— MCP, A2A, UCP, WebMCP — and how they communicate across agent
+boundaries. Chapters 15 through 19 extend MX principles to publishing
+workflows, machine memory, platform history, self-managing documents,
+and the information architecture of the LLM web. <strong>Chapter 20 —
+Cogs and Reginald</strong> introduces the second pillar: where the
+earlier chapters address machine-readability, Chapter 20 addresses
+machine-trust. Every document — not just web pages, but contracts,
+specifications, policies, and research reports — can be made
+self-describing with the cog format and verifiably genuine through
+Reginald attestation. Chapters 21 and 22 complete the architecture with
+the field standards and format negotiation that make the whole system
+interoperable across carriers, platforms, and organisations.</p>
 <hr />
 <h2 id="what-youll-be-able-to-do">What You’ll Be Able to Do</h2>
 <p>By the end of this book, you’ll be able to:</p>
@@ -4188,6 +4279,12 @@ heading.</p>
 <p><strong>Plan for a web where machine traffic matters</strong> — not
 hypothetically, but practically. What to prioritise now, what can wait,
 how to sequence the work.</p>
+<p><strong>Understand the trust layer</strong> — why machine-readability
+is necessary but not sufficient. Every document your organisation
+publishes can carry structured provenance: who wrote it, when, whether
+it is current, whether it was produced by a human or an AI. Reginald
+makes that provenance cryptographically verifiable — turning
+declarations into proof.</p>
 <hr />
 <h2 id="the-tension-and-the-opportunity">The Tension and the
 Opportunity</h2>
@@ -4398,6 +4495,16 @@ machines fail to validate data during extraction, leading to costly
 pricing errors. Pipeline failures occur within the machine’s systems and
 require validation layers that agent creators must build, distinct from
 the website design failures discussed in this chapter.</p>
+<p>These patterns describe websites. But invisible failure is not
+limited to the web. Your content estate extends to contracts, policy
+documents, product specifications, and technical reports — none of which
+live on the web, all of which AI agents inside enterprise tools are
+already reading. Those documents carry no structured metadata, no
+declared authorship, no version signal. Agents infer. When agents infer,
+they hallucinate. The problem on your website is the same problem in
+your document estate: machines encountering content designed exclusively
+for human eyes, with no machine-readable structure to tell them what
+they are looking at.</p>
 <hr />
 <h2 id="the-toast-that-nobody-saw">The Toast That Nobody Saw</h2>
 <p>Toast notifications are considered good UX practice. They inform
@@ -14447,6 +14554,15 @@ JavaScript execution to work excludes half the ecosystem. A pattern that
 relies on session inheritance only helps browser extensions. Universal
 patterns benefit everyone — machines and humans alike — regardless of
 their technical constraints.</p>
+<p>Universal patterns also apply beyond the web. Your content estate —
+contracts, policy documents, product specifications, technical reports —
+is being consumed by machines regardless of whether those documents were
+designed for it. Being on the web and being machine-readable are not the
+same thing. A document on a public server is still opaque to an agent
+that has no context about what it is, who wrote it, what version it
+represents, or what claims it makes. Web accessibility solves
+discoverability. MX solves comprehension. The solutions in this chapter
+apply to any document any machine might encounter.</p>
 <p><strong>Clear responsibility:</strong> As designers, developers,
 product owners, and executives, we have the clear responsibility to
 ensure that machines can navigate successfully. This isn’t optional or
@@ -14478,6 +14594,15 @@ and how to fix it.</p>
 <p><strong>These aren’t four separate problems. They’re the same
 structural problem expressed differently, with solutions that overlap
 substantially.</strong></p>
+<p>Working entirely within the human-IA tradition, Hoxha (2026) arrives
+at a parallel account of what good information architecture must
+achieve: that content be findable when a reader looks for it, valuable
+when surfaced, and timely in its appearance within a workflow. The
+Convergence Principle treats those demands as the human half of a wider
+claim — the structural decisions which satisfy them also satisfy the
+machine readers Hoxha’s guide does not address. The pillars she names
+and the reader classes MX names resolve to the same architectural
+moves.</p>
 <p>Consider a typical error pattern. Your form submission fails. The
 error appears in a toast notification that slides in from the corner,
 displays for three seconds, then vanishes.</p>
@@ -14519,6 +14644,33 @@ improvement serves multiple audiences.</p>
 Disabilities Act, the UK Equality Act, and the European Accessibility
 Act all create legal obligations. An agent-friendly design that improves
 accessibility helps you meet these requirements.</p>
+<p>The convergence extends to non-HTML document carriers. PDFs in
+particular are an enormous installed base (several trillion files, with
+a leading vendor reporting four hundred billion opened in its tooling in
+a single year) and a familiar regulatory exposure: accessibility
+legislation has converged on ISO 14289-1 (PDF/UA) as the technical
+baseline across major markets. The European Accessibility Act (Directive
+2019/882, in force across the EU from 28 June 2025) is the most
+precisely codified instrument, with financial penalties of approximately
+ten thousand euros for minor violations and one hundred thousand euros
+or more for major or repeated non-compliance; equivalent obligations
+flow from Section 508 of the US Rehabilitation Act, the UK Public Sector
+Bodies Accessibility Regulations 2018, and disability discrimination law
+in Australia and Canada. The technical fixes are the convergence
+principle in another carrier: a tagged PDF with a logical reading order
+and authored alt text serves a screen-reader user, an AI agent
+extracting structured content, a search-engine indexer, and a
+visually-fatigued sighted reader using a non-default zoom level all at
+once. The MX Document Accessibility note specifies the metadata layer
+(the <code>accessibilityConformance</code>,
+<code>accessibilityFeature</code>, <code>accessibilityHazard</code>,
+<code>accessibilitySummary</code>, and <code>lang</code> declarations a
+publisher attaches to a PDF or DOCX or EPUB to make its accessibility
+claims machine-checkable) and the verification discipline that
+distinguishes a self-declared claim from an independently-checked one.
+The same three-level pattern applies in every carrier: tagged structure,
+declared conformance, verified outcome. See Chapter 21 for the full
+draft set the note belongs to.</p>
 <p>More pragmatically: the patterns that work for automated systems also
 work for everyone using your site under non-ideal conditions. Slow
 connections. Old devices. Bright sunlight makes screens hard to read.
@@ -15981,9 +16133,9 @@ delivers the highest return.</p>
 <p>A site is MX compatible when every applicable level passes. For a
 content site, that means Level 1 (Basic) and Level 2 (Structured). For
 an e-commerce site, all levels must pass. The assessment answers the
-question clients ask most often: “Is my site ready for AI agents?” —
-with a clear yes or no, and a specific next improvement step if the
-answer is not yet.</p>
+question clients ask most often: “Is my site ready for machines?” — with
+a clear yes or no, and a specific next improvement step if the answer is
+not yet.</p>
 <h2 id="convergence-continues">Convergence Continues</h2>
 <p>Every solution in this chapter helps multiple audiences:</p>
 <p><strong>Clear state</strong> — Helps machines, screen readers, and
@@ -16348,8 +16500,12 @@ other optimisation matters.</p>
 <h2 id="measuring-your-progress-web-audit-suite">Measuring Your
 Progress: Web Audit Suite</h2>
 <p>Before implementing patterns, you need a way to measure your starting
-point and track improvements. Web Audit Suite (&lt;&gt;) provides
-automated analysis of AI agent compatibility.</p>
+point and track improvements. Web Audit Suite is a commercial service
+from CogNovaMX that provides automated analysis of AI agent
+compatibility; the rest of this section documents what the service
+measures and how to interpret its reports. For licensing and engagement
+enquiries contact <a href="mailto:info@cognovamx.com"
+class="email">info@cognovamx.com</a>.</p>
 <h3 id="what-it-measures">What It Measures</h3>
 <p>Web Audit Suite generates detailed reports covering:</p>
 <p><strong>Core Reports:</strong></p>
@@ -16436,23 +16592,24 @@ a common one-way error that search engines and agents penalise.</p>
 <li>dashboard.html (with –generate-dashboard)</li>
 </ul>
 <h3 id="quick-start">Quick Start</h3>
+<p>Once CogNovaMX has provisioned the suite for you, the typical
+commands are:</p>
 <div class="sourceCode" id="cb107"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install</span></span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone</span>
-<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> mx-handbook/mx-audit</span>
-<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install</span>
-<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Audit your homepage</span></span>
-<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start <span class="at">--</span> <span class="at">-s</span> https://example.com <span class="at">-c</span> 10</span>
-<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Full site audit from sitemap</span></span>
-<span id="cb107-10"><a href="#cb107-10" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start <span class="at">--</span> <span class="at">-s</span> https://example.com/sitemap.xml <span class="at">-c</span> <span class="at">-1</span></span>
-<span id="cb107-11"><a href="#cb107-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-12"><a href="#cb107-12" aria-hidden="true" tabindex="-1"></a><span class="co"># With all reports</span></span>
-<span id="cb107-13"><a href="#cb107-13" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start <span class="at">--</span> <span class="at">-s</span> https://example.com <span class="dt">\</span></span>
-<span id="cb107-14"><a href="#cb107-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">--enable-history</span> <span class="dt">\</span></span>
-<span id="cb107-15"><a href="#cb107-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">--generate-dashboard</span> <span class="dt">\</span></span>
-<span id="cb107-16"><a href="#cb107-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">--generate-executive-summary</span></span></code></pre></div>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install (after receiving the licensed distribution)</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> web-audit-suite</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Audit your homepage</span></span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start <span class="at">--</span> <span class="at">-s</span> https://example.com <span class="at">-c</span> 10</span>
+<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Full site audit from sitemap</span></span>
+<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start <span class="at">--</span> <span class="at">-s</span> https://example.com/sitemap.xml <span class="at">-c</span> <span class="at">-1</span></span>
+<span id="cb107-10"><a href="#cb107-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-11"><a href="#cb107-11" aria-hidden="true" tabindex="-1"></a><span class="co"># With all reports</span></span>
+<span id="cb107-12"><a href="#cb107-12" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start <span class="at">--</span> <span class="at">-s</span> https://example.com <span class="dt">\</span></span>
+<span id="cb107-13"><a href="#cb107-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">--enable-history</span> <span class="dt">\</span></span>
+<span id="cb107-14"><a href="#cb107-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">--generate-dashboard</span> <span class="dt">\</span></span>
+<span id="cb107-15"><a href="#cb107-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">--generate-executive-summary</span></span></code></pre></div>
 <h3 id="understanding-your-scores">Understanding Your Scores</h3>
 <p><strong>LLM General Suitability Report</strong> shows your overall AI
 agent compatibility:</p>
@@ -19840,13 +19997,14 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb190-1"><a href
 automated agents parsing the DOM. Update the status spans with
 JavaScript based on actual session state.</p>
 <p>This pattern — structured instructions with prerequisites, expected
-responses, and step-by-step guidance — is what the cog format formalises
-at the document level. A cog is a file (typically markdown with YAML
-frontmatter) that carries machine-executable instructions alongside
-human-readable content. Where Pattern 7 embeds agent instructions in a
-single HTML page, cogs carry them as portable, self-describing documents
-that work across any platform. The cog format is covered in the
-companion chapters on Cogs and Reginald.</p>
+responses, and step-by-step guidance — is what the cog (Community Owned
+Governance Standard) format formalises at the document level. A cog is a
+file (typically markdown with YAML frontmatter) that carries
+machine-executable instructions alongside human-readable content. Where
+Pattern 7 embeds agent instructions in a single HTML page, cogs carry
+them as portable, self-describing documents that work across any
+platform. The cog format is covered in the companion chapters on Cogs
+and Reginald.</p>
 <h3 id="pattern-8-testing-for-agent-compatibility">Pattern 8: Testing
 for Agent Compatibility</h3>
 <p>Verify your implementations work:</p>
@@ -22169,6 +22327,18 @@ create reliable, trustworthy systems that serve users well.</p>
 continue. The solutions, however, exist: validation layers, confidence
 scoring, and honest acknowledgment of uncertainty. Both sides need to
 implement them.</p>
+<p>Validation cannot solve provenance. A pipeline that validates data
+ranges, cross-references structured data, and scores confidence still
+cannot verify whether the document it is reading genuinely came from the
+publisher it claims, or whether a specification was altered between the
+source and the agent. That question belongs to the second pillar. MX
+makes content machine-readable — the structure and metadata that
+validation layers depend on. Reginald makes it machine-trustworthy — the
+public registry that attests who published a document, that it has not
+been modified since publication, and whether it was produced by a human,
+an AI, or an automated system. Chapter 20 covers the architecture. Both
+pillars are necessary for systems that are reliable in the full
+sense.</p>
 <p>That’s how we build a web that works for everyone — human and machine
 alike.</p>
 <h2 id="open-protocol-reality-platform-race">Open Protocol Reality:
@@ -22780,12 +22950,14 @@ standards body has to take to survive. Whether The Gathering grows into
 a body that can hold a seat at the table with Anthropic, Google and
 Microsoft is a question of participation, not permission.</p>
 <p>This book has already described the same posture applied to metadata.
-The MX field dictionary is drafted in public. The standards drafts in <a
-href="../../../mx-shared-gathering/">mx-shared-gathering/</a> — MXS-01
-Core Metadata, MXS-02 Extensions, MXS-03 Provenance, MXS-04 Carrier
-Formats — are proposed, not ratified, and they are written explicitly so
-that any other community can improve them. They are not waiting for a
-vendor to bless them. Chapter 21 walks through that model in full.</p>
+The MX field dictionary is drafted in public. The draft notes in <a
+href="../../../mx-shared-gathering/">mx-shared-gathering/</a> — Core
+Metadata, Extensions, Provenance, Carrier Formats, Contract
+Fingerprinting and Signing, Cog Identification — are drafts authored by
+Tom Cranstoun and offered to The Gathering for review, not ratified
+standards. They are written explicitly so that any other community can
+improve them. They are not waiting for a vendor to bless them. Chapter
+21 walks through that model in full.</p>
 <p>The same model, applied to agent protocols, is what the next few
 years need. A vendor-neutral body that can say: MCP’s tool contract,
 A2A’s agent card, UCP’s purchase envelope and WebMCP’s in-browser server
@@ -22793,6 +22965,115 @@ can be described in a single stack specification; the pieces can be
 tested against each other; the seams can be documented; the security
 model can be analysed by people who are not paid by any of the
 originating vendors. That is the work of a standards community.</p>
+<h2 id="the-agent-proliferation-problem-and-the-mx-os">The Agent
+Proliferation Problem and the MX OS</h2>
+<p>A second observation belongs in this chapter, related to the protocol
+question but distinct from it. The agent layer is proliferating faster
+than any single observer can track. AWS launched Quick this spring,
+joining Anthropic’s Claude with computer use, Google’s Gemini agents,
+OpenAI’s enterprise agents, Microsoft Copilot in three product lines,
+Perplexity Labs, Cursor in the developer tooling space, Replit’s agentic
+builder, the open-runtime projects gathering on GitHub (OpenClaw and
+others), and the multi-agent collaboration frameworks beginning to ship
+for enterprise use (Cowork and several less prominent peers). The list
+lengthens monthly. Vertical specialists in legal, in medical, in
+finance, in DevOps, in customer support are arriving from established
+consultancies and from venture-funded startups in roughly equal measure.
+By the time this book reaches print, half the names in this paragraph
+will have been joined by names that did not exist when the paragraph was
+written.</p>
+<p>Each of these agents is, beneath the marketing surface, a
+context-discovery engine attached to an action engine. The action
+engines differ. The context-discovery engines differ only superficially.
+Every one of them needs the same five things from any document or URL it
+is asked to act on: identity (what is this artefact, and is it the
+current version), provenance (where did it come from), lifecycle (is the
+content still authoritative or has it been superseded), affordances
+(what may an agent do with the content, what should it do next), and
+semantics (what is this about, in machine-resolvable terms, so the agent
+can decide whether to read the body at all).</p>
+<p>If the agent finds those five answers in declared metadata, its work
+reduces to a structured tree walk. If it has to derive them from prose,
+layout, vision, and inference, the work expands to a vision-and-language
+reconstruction and the answer becomes an estimate. The compute
+differential is one to two orders of magnitude per document. The error
+rate diverges similarly: the metadata path produces a deterministic
+answer; the reconstruction path produces an estimate that may or may not
+be correct, with errors that propagate downstream into citations,
+generated contracts, and customer support conversations the publisher is
+not in the room for.</p>
+<p>Multiplied across the agents arriving each month, and across the
+hundreds of millions of documents each agent reaches in a year, the cost
+of having every agent perform context discovery from primitives is the
+cost the entire industry pays for the absence of a substrate.</p>
+<p>The substrate is what an operating system provides. An operating
+system standardises the primitives that every application would
+otherwise reinvent: files, processes, network, time, identifiers.
+Applications do not reimplement <code>open()</code> or the file system
+or the clock. They were standardised long ago. Productivity at the
+application layer comes from not having to do the substrate work
+twice.</p>
+<p>MX is the same kind of move at the agent layer. Identity, provenance,
+lifecycle, affordances, semantics: these are the primitives an agent
+needs from any artefact. They should not be rediscovered for each new
+platform. They should be declared once, by the publisher, in the carrier
+the artefact is shipped in, in a vocabulary every agent can read.</p>
+<p>The argument generalises across two dimensions the rest of this book
+has already covered separately. First, across carriers. The metadata
+that an agent reads from a page’s <code>&lt;meta&gt;</code> tags should
+also be readable from a PDF’s XMP packet, from a DOCX’s OOXML metadata,
+from an EPUB’s navigation document, from a CSV’s CSVW descriptor, from
+an audio file’s ID3 tags or its WebVTT cue metadata. Each carrier has a
+native idiom for declaring meaning. The MX position is that every
+carrier the publisher ships should carry the same governance signals in
+that carrier’s idiom, so that whichever path an agent takes to reach the
+document, the document arrives with its context attached.</p>
+<p>Second, across folder boundaries. A directory containing forty PDFs
+and ten markdown files is, to an agent, a wall of forty-plus
+context-discovery jobs. The convention this book proposes (and the MX
+project already practises across its own published source tree) is the
+folder-level <code>.mx.yaml.md</code> file: a small YAML frontmatter
+declaring what the folder is, what it inherits from its parent, what it
+contains, who maintains it, what governance applies, plus a markdown
+narrative explaining the contents in human-readable form. An agent
+reading <code>.mx.yaml.md</code> first answers all the discovery
+questions about the folder before reading any individual file. Folders
+that are not relevant to the task get skipped before any cost is paid;
+folders that are relevant get read with the parent context already in
+hand.</p>
+<p>The combination, MX metadata in every carrier plus
+<code>.mx.yaml.md</code> at every folder boundary, is what we have begun
+to call the MX OS position. Not an application. Not a product. A
+substrate primitive that every agent platform builds on, whether the
+platform is from AWS or Anthropic or a graduate-student project on a
+GitHub fork.</p>
+<p>The pragmatic consequence for a builder is small but compounding. An
+agent platform that adopts MX as a substrate inherits, for free, the
+same context discovery that every other MX-aware agent benefits from. An
+agent platform that does not adopt MX has to build (and maintain, and
+pay the inference bill on) its own context discovery. The platforms that
+pick the substrate get to spend their compute on the action layer, which
+is where the user-visible product lives. The platforms that try to do
+both at once will eventually find themselves uncompetitive on the action
+layer because they are subsidising a substrate that should already
+exist.</p>
+<p>The same pragmatic consequence applies to publishers. A publisher
+that ships MX-equipped artefacts gets read correctly by every agent that
+arrives. A publisher that does not gets read correctly by the agent with
+the largest reconstruction budget, and incorrectly (or not at all) by
+every other agent. As agent budgets compress (and they will, because the
+long tail of vertical agents cannot afford vision-based reconstruction
+on every read), the gap between substrate-equipped publishers and the
+rest will widen.</p>
+<p>The work is not glamorous. It is field declarations, structure trees
+in tagged PDFs, folder-level metadata, content-policy claims,
+conformance lists. It is exactly the kind of work that wins the long
+game and looks tedious in the short one. The publishers who took the
+same posture in the early HTML era, the ones who learned semantic markup
+and accessibility and structured data while everyone else was chasing
+the latest framework, are the publishers whose content is most readable
+today. The MX OS position says: do that again, deliberately, for the
+agent era.</p>
 <h2 id="what-an-mx-builder-does-today">What an MX builder does
 today</h2>
 <p>The pragmatic stance for a builder working on real sites in 2026 is
@@ -22842,8 +23123,18 @@ same bet is worth taking now.</p>
 understandable, cogs that let documents describe themselves, registries
 that let the understanding scale, and communities that govern the
 standards openly — is the part that outlasts whichever protocol wins the
-next two years of announcements. That is where the leverage is. The
-protocols are the weather. The standards posture is the climate.</p>
+next two years of announcements. That is where the leverage is.</p>
+<p>MX and Reginald are the two pillars of that leverage. MX makes
+content machine-readable — the metadata, the semantic structure, the
+cogs that let documents describe themselves, the registries that let the
+understanding scale. Reginald makes it machine-trustworthy — the public
+registry that attests who published a document, that it has not been
+modified since publication, and whether it was produced by a human, an
+AI, or an automated system. The protocols determine how agents act on
+content. The two pillars determine whether that content is worth acting
+on.</p>
+<p>The protocols are the weather. The standards posture is the
+climate.</p>
 <h1 id="chapter-15-intent-driven-publishing">Chapter 15 — Intent-Driven
 Publishing</h1>
 <p>Metadata-first architecture for machines and humans.</p>
@@ -23087,7 +23378,7 @@ temporary write access they can revoke anytime.</p>
 <p><strong>Example published file:</strong></p>
 <div class="sourceCode" id="cb238"><pre
 class="sourceCode html"><code class="sourceCode html"><span id="cb238-1"><a href="#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
-<span id="cb238-2"><a href="#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="er">---</span></span>
+<span id="cb238-2"><a href="#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb238-3"><a href="#cb238-3" aria-hidden="true" tabindex="-1"></a><span class="co">id: article-installation-widget-pro-001</span></span>
 <span id="cb238-4"><a href="#cb238-4" aria-hidden="true" tabindex="-1"></a><span class="co">type: article</span></span>
 <span id="cb238-5"><a href="#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="co">intent: consideration</span></span>
@@ -23108,7 +23399,7 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb238-1"><a href
 <span id="cb238-20"><a href="#cb238-20" aria-hidden="true" tabindex="-1"></a><span class="co">publicationDate: &quot;2025-02-01&quot;</span></span>
 <span id="cb238-21"><a href="#cb238-21" aria-hidden="true" tabindex="-1"></a><span class="co">deployedPath: &quot;articles/installation/&quot;</span></span>
 <span id="cb238-22"><a href="#cb238-22" aria-hidden="true" tabindex="-1"></a><span class="co">demoUrl: &quot;https://client.com/articles/installation/&quot;</span></span>
-<span id="cb238-23"><a href="#cb238-23" aria-hidden="true" tabindex="-1"></a><span class="er">---</span></span>
+<span id="cb238-23"><a href="#cb238-23" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb238-24"><a href="#cb238-24" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
 <span id="cb238-25"><a href="#cb238-25" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
 <span id="cb238-26"><a href="#cb238-26" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">&quot;en-GB&quot;</span><span class="dt">&gt;</span></span>
@@ -23955,8 +24246,9 @@ interface.</p>
 functioned as a remote terminal, connecting via radio to massive shared
 central computers. The intelligence lived elsewhere. The device was the
 interface, not the brain.</p>
-<p>A cog is exactly this. Any document carrying MX metadata — a markdown
-file with YAML frontmatter, an HTML page with Schema.org JSON-LD and
+<p>A cog (Community Owned Governance Standard) is exactly this. Any
+document carrying MX metadata — a markdown file with YAML frontmatter,
+an HTML page with Schema.org JSON-LD and
 <code>&lt;meta name="mx:*"&gt;</code> tags, any file with structured
 metadata in its native format. Text. No computing power whatsoever. The
 intelligence lives in the AI runtime that reads it. The cog is the
@@ -25252,11 +25544,11 @@ monolith it replaced.</p>
 still the same. It just had more infrastructure around it.</p>
 <h3 id="generation-5-cogs">Generation 5: Cogs</h3>
 <p><strong>Solved: The CMS itself. Created: Adoption.</strong></p>
-<p>A cog is any document that carries MX metadata. In its canonical
-form, it is a markdown file with YAML frontmatter
-(<code>.cog.md</code>). An HTML page with Schema.org JSON-LD and
-<code>&lt;meta name="mx:*"&gt;</code> tags is also a cog. Text. No
-database. No API. No server. No platform.</p>
+<p>A cog (Community Owned Governance Standard) is any document that
+carries MX metadata. In its canonical form, it is a markdown file with
+YAML frontmatter (<code>.cog.md</code>). An HTML page with Schema.org
+JSON-LD and <code>&lt;meta name="mx:*"&gt;</code> tags is also a cog.
+Text. No database. No API. No server. No platform.</p>
 <p>The YAML carries machine-readable metadata — what this content is,
 who wrote it, when it changed, what it relates to, how it should be
 used. The markdown carries human-readable prose. Both layers live in the
@@ -25476,7 +25768,14 @@ A visitor lands on your home page, scans the navigation, clicks through
 to a category, finds what they need. The discipline has decades of
 proven principles: clear labelling, consistent navigation, shallow
 hierarchies, breadcrumb trails. Steve Krug’s “Don’t Make Me Think”
-remains the gold standard for human-centred IA.</p>
+remains the gold standard for human-centred IA, and contemporary
+practitioners — Abby Covert’s “How to Make Sense of Any Mess” and
+Delfina Hoxha’s “A Beginner’s Guide to Intuitive Information
+Architecture” (2026) among them — continue to refine the discipline from
+the human-reader side. MX is continuous with that lineage rather than a
+departure from it. The architecture they describe for the human reader
+is the architecture machines also need; this chapter names the second
+reader class their guides do not address.</p>
 <p>Machine-focused IA shares the same goal — don’t make the visitor
 think — but the visitor thinks differently. An AI agent does not scan a
 navigation bar. It parses a DOM tree. It does not follow visual
@@ -25563,6 +25862,18 @@ layer enables agent action</figcaption>
 where each layer enables the next. Site architecture determines
 discoverability, page architecture determines comprehension, content
 architecture determines actionability.</em></p>
+<p>The three layers describe machine-readability. There is a further
+dimension the framework enables but does not itself provide:
+trustworthiness. The site, page, and content layers make content
+discoverable, comprehensible, and actionable. They say nothing about
+whether the document an agent found and parsed genuinely came from the
+publisher it names, or whether the version it is reading is current and
+unaltered. That question is Reginald’s domain — the public registry that
+attests origin and integrity for any document. MX and Reginald are the
+two pillars: MX makes content machine-readable; Reginald makes it
+machine-trustworthy. Chapter 20 covers how they work together. A site
+built on this chapter’s three-layer foundation is a site that is ready
+for both.</p>
 <h2 id="taxonomy-and-classification-for-machines">Taxonomy and
 Classification for Machines</h2>
 <p>Heading hierarchy, navigation menus, and breadcrumbs are the visible
@@ -25638,6 +25949,36 @@ expressions:</strong> navigation labels, breadcrumb text, URL slugs,
 Schema.org <code>name</code> properties, heading text, and sitemap
 labels. Decide the canonical name once and enforce it through
 templates.</p>
+<h4
+id="worked-example-terminology-drift-across-a-department-site">Worked
+example: terminology drift across a department site</h4>
+<p>Hoxha (2026) documents an IA review of a university chemistry
+department whose published estate had grown over years without a
+governing taxonomy. The same research group appeared under different
+labels on different pages; the navigation in one section disagreed with
+the navigation in a sibling section; a visitor following a search result
+into the deep estate found themselves in a parallel naming system that
+did not connect back to the main hierarchy. The remedy she describes is
+the human-IA remedy: agree the canonical names, agree the structure, and
+rewrite the navigation so each concept has one name and lives in one
+place.</p>
+<p>The same failure appears in machine-reader terms. An AI agent
+fetching three pages from that estate sees three taxonomies. Schema.org
+<code>name</code> properties disagree with <code>&lt;h1&gt;</code> text.
+Breadcrumb labels disagree with URL slugs. The agent’s confidence in its
+citation collapses, because it cannot tell whether the three pages
+describe one entity under different labels or three entities that share
+an address. Each of the human-IA fixes Hoxha prescribes — single
+canonical name, single structural location, governed labels — also fixes
+the machine-reader failure, because both readers were tripping over the
+same inconsistency.</p>
+<p>In MX, the governing layer for this remedy is the Intent CMS
+contract: canonical names declared in YAML frontmatter, enforced by
+templates, surfaced in <code>mx:type</code> and Schema.org markup so
+that human navigation, machine extraction, and the audit signal that
+detects drift are all reading the same name. The structural fix is
+Hoxha’s. MX adds the second reader class her guide does not address and
+the metadata layer that lets a publisher prove the fix has held.</p>
 <p>The following example shows a single taxonomy expressed at all three
 IA layers:</p>
 <div class="sourceCode" id="cb258"><pre
@@ -26166,9 +26507,21 @@ API references, compliance documents, standard operating procedures,
 onboarding guides, configuration files, and policy documents. Every one
 of these can be made machine-readable using the same principle:
 structured metadata that eliminates guessing.</p>
-<p>The cog format does this for documents. Reginald does it for trust
-and discovery. Together, they extend MX from websites to every digital
-asset an organisation produces.</p>
+<p>These are the two pillars of machine-ready content. The cog
+(Community Owned Governance Standard) format makes any document
+machine-readable: structured metadata that eliminates guessing about
+what a file is, who wrote it, and what it is for. Reginald makes
+documents machine-trustworthy: a public registry that attests who
+published a document, that it has not been modified since publication,
+when the current version was issued, and whether it was produced by a
+human, an AI, or an automated system. Together, they extend MX from
+websites to every digital asset an organisation produces.</p>
+<p>A cog is a tooth on a gear. Each verified document is a cog that
+makes the machine work. Remove a cog and the gear slips, the machine
+fails, the output is wrong.</p>
+<p>AI systems are machines. They need cogs — verified, governed
+documents — to function correctly. Without them, they guess. And
+guessing is how a £2,030 cruise becomes a £203,000 nightmare.</p>
 <h2 id="the-document-problem">The Document Problem</h2>
 <p>The website problem is well understood by now. Machines visit pages,
 struggle with ambiguous HTML, and either extract wrong information or
@@ -26608,7 +26961,7 @@ distinguish the genuine article from a modified copy, an outdated
 version, or a deliberate forgery.</p>
 <h3 id="what-reginald-provides">What Reginald Provides</h3>
 <p>Reginald addresses both problems. It is a public registry where cogs
-can be registered, discovered, and verified. The registry comprises
+can be registered, discovered, and attested. The registry comprises
 three capabilities:</p>
 <p><strong>Discovery.</strong> Registered cogs are indexed and
 queryable. AI providers can query the registry at inference time: “Is
@@ -26627,6 +26980,29 @@ publisher updates a document and registers the new version, machines
 querying the registry receive the current metadata. Superseded versions
 are marked as such. The “three-versions-old PDF” problem described at
 the start of this chapter is solved by architecture.</p>
+<h3 id="what-the-signature-attests">What the Signature Attests</h3>
+<p>A signed cog makes one narrow claim, and the narrowness is what makes
+it tractable. The signature attests <em>provenance and integrity, not
+truth</em>.</p>
+<p>Specifically, the signature confirms that the cog’s contract surface
+— the fields declared in <code>contractFields</code> — was last in this
+exact state when the named signer applied the signature. It does not
+assert that the values are factually correct, sound, or current. A cog
+claiming “WWII did not happen” can be perfectly well-signed; the
+signature only confirms the cog genuinely came from the named signer and
+has not been altered downstream. Whether the claim is true is a
+different problem — one no signing format can solve at web scale, and
+one this specification deliberately does not take on.</p>
+<p>The narrower claim is intentional. The MX signing model attests only
+<em>this is what the owner published, unaltered</em>. That smaller claim
+is what compounds — it is a question a signature can actually answer,
+every time, without taking on an editorial truth-curation burden that no
+human review process could keep current at web scale.</p>
+<p>Implementations and downstream consumers should be precise in
+user-facing language. The system has <em>attested</em> a cog, not
+<em>verified</em> it. “Verified” implies a truth claim that no signer in
+this model makes — and using the looser word leaks an implicit guarantee
+MX cannot provide.</p>
 <h3 id="the-compliance-levels">The Compliance Levels</h3>
 <p>The registry defines compliance levels that reflect increasing
 degrees of structure and trust:</p>
@@ -26636,10 +27012,12 @@ for internal use where trust is implicit.</p>
 <p><strong>Level 2 — Structured.</strong> MX-compliant format with
 description, status, contentType, and tags. The document follows the
 specification and can be processed by any MX-aware tool.</p>
-<p><strong>Level 3 — Verified.</strong> Cryptographically signed. The
-Ed25519 signature establishes provenance and integrity. This is the
-minimum level for Reginald registration. Below this threshold, the
-document is a cog but not a registered, attested cog.</p>
+<p><strong>Level 3 — Attested.</strong> Cryptographically signed. The
+Ed25519 signature establishes provenance and integrity — not truth. This
+is the minimum level for Reginald registration. Below this threshold,
+the document is a cog but not a registered, attested cog. The earlier
+name for this level was “Verified”; it was renamed because “verified”
+implies a factual-correctness claim the signature does not make.</p>
 <p><strong>Level 4 — Certified.</strong> All MX fields present. Full
 metadata coverage. The document is a complete, specification-conformant
 cog with cryptographic attestation.</p>
@@ -26786,7 +27164,7 @@ is, who published it, what version is current, and what it relates to.
 Before a registry, an AI agent crawls the web, finds fragments, and
 guesses at provenance and currency. With the registry, the agent queries
 Reginald and gets the authoritative version of the authoritative
-document with its trust chain verified. The metadata does the work.</p>
+document with its trust chain attested. The metadata does the work.</p>
 <p>The structural parallels are precise:</p>
 <table>
 <colgroup>
@@ -26915,65 +27293,177 @@ provides the artefact — the written standard — that lets that community
 agree on what a cog looks like. Anyone can read the specification.
 Anyone can implement it. Anyone can propose changes. The artefact is the
 convergence point.</p>
-<h2 id="the-four-proposed-standards">The four proposed standards</h2>
-<p>The standards family has four active drafts as of mid-2026. Each
-covers a different layer. None is final — all are prepared for Stream
-submission and await community review. The numbering and scope are
-stable; the text and conformance details are expected to tighten through
-consensus.</p>
-<p><strong>MX Core Metadata (MXS-01 proposed)</strong> is the
-foundation. It defines the identity vocabulary every MX-aware document
-carries: title, author, created, modified, version, description, tags,
-audience, status, license, maintainer. It also defines the two-zone
-frontmatter model — Zone 1 at the top level for document identity, Zone
-2 under the <code>mx:</code> block for operational metadata. This is the
-standard a cog conforms to whether it describes a blog post, a product
-manual, or a software package. Conformance is tiered into three levels.
-Level 1 requires the identity fields. Level 2 adds complete metadata and
-validation. Level 3 adds AI-specific optimisation and the full
-machine-readability contract. The three-level framework is expected to
-survive review; individual field requirements may tighten.</p>
-<p><strong>MX Extensions (MXS-02 proposed)</strong> defines the
-namespace policy. It specifies the three-tier system: standard fields
-(no prefix, owned by The Gathering), vendor public extensions
-(<code>x-mx-</code> prefix, openly published by a named vendor), and
-vendor private extensions (<code>x-mx-p-</code> prefix, operational to
-the vendor, potentially obfuscated). This is the extensibility contract.
-When a vendor needs fields MX does not define, MXS-02 is how they
-declare them without polluting the standard namespace. The three-tier
-model is load-bearing; other vendors adopting MX build against it.
-Review may refine the carrier-specific syntax rules; the core policy is
-stable.</p>
-<p><strong>MX Provenance (MXS-03 proposed)</strong> covers attribution,
-trust, maintenance, and decision-record references. It specifies the
-fields that establish who created content, how it was derived, how
-trustworthy it is, who maintains it, and what governance decisions
-shaped it. This is the layer that turns a cog from “some text claiming
-to be a guide” into “a guide with a traceable origin, a nominated
-maintainer, and a published history.” The metadata is what makes the
-trust verifiable. The scope matches adjacent standards (C2PA, Dublin
-Core provenance) and is expected to align further during review.</p>
-<p><strong>MX Carrier Formats (MXS-04 proposed)</strong> covers code.
-Source files — JavaScript, TypeScript, Python, Go, shell, CSS — carry
-metadata through their native mechanisms (JSDoc, CSS comments, shell
-comment blocks). MXS-04 specifies the field vocabulary for code
-carriers: function-level annotations, API surface metadata, test
-metadata, inline code annotations. It is the proposed standard for
-making source code self-describing in the same way cogs make documents
-self-describing. Databases and media are not in scope; those carriers
-defer to external standards. The scope boundary (code only, not database
-or media) is a decision that survived the 2026-04-15 canon split and is
-expected to hold through review.</p>
+<h2 id="the-proposed-standards">The proposed standards</h2>
+<p>The standards family is a set of draft notes covering distinct layers
+of the same problem. None is final; each is prepared for Stream
+submission and awaits community review. Each draft note is
+<strong>standalone</strong>: it defines its own conformance level
+framework inline, refers only to actually-published external standards
+(RFC, ISO, W3C, NIST, Schema.org, Dublin Core, SPDX), and never to its
+sibling drafts. Tom Cranstoun is the author throughout. One draft, the
+MX Field Definition Pattern note, is the <em>primary</em> note: every
+sister note follows its template when defining a frontmatter field, and
+every author authoring a new note begins by reading it.</p>
+<p><strong>The MX Field Definition Pattern note</strong> is the primary
+note of the set. It specifies how every other note defines its
+frontmatter fields: the canonical sub-keys (<code>name</code>,
+<code>type</code>, <code>definition</code>, <code>example</code>,
+<code>notes</code>, <code>status</code>, <code>profile</code>,
+<code>required</code>, <code>alignsWith</code>), the discipline
+(machines need more fields, tightly constrained, to understand intent
+than humans need to be told), and the recommended reading order across
+the rest of the draft set. It is the note an author writing a new sister
+note begins from. The other notes inherit their shape from this one.</p>
+<p><strong>The MX Core Metadata note</strong> is the foundation. It
+defines the identity vocabulary every MX-aware document carries: title,
+author, created, modified, version, description, tags, audience, status,
+license, maintainer. It also defines the two-zone frontmatter model —
+Zone 1 at the top level for document identity, Zone 2 under the
+<code>mx:</code> block for operational metadata — and a Pass-through
+fields section that names the keys MX borrows from established external
+vocabularies (Dublin Core’s <code>date</code>, <code>format</code>,
+<code>rights</code>; Schema.org’s <code>duration</code>,
+<code>displayName</code>, <code>usage</code>, <code>url</code>) without
+redefinition. This is what an MX-aware document conforms to whether it
+is a blog post, a product manual, a YAML sidecar, or any other
+text-bearing artefact. Conformance is tiered into three levels modelled
+on the WCAG 2.1 Level A/AA/AAA pattern. Level 1 requires the identity
+fields. Level 2 adds complete metadata and validation. Level 3 adds
+AI-specific optimisation and the full machine-readability contract. The
+three-level framework is expected to survive review; individual field
+requirements may tighten.</p>
+<p><strong>The MX Cogs note</strong> defines the <code>.cog.md</code>
+file format as an OPTIONAL layer on top of MX. A document does not need
+to be a cog to carry MX metadata; cogs are the vocabulary an author
+reaches for when a document needs to be navigable, composable, and
+runnable by agents and runtimes. The note specifies the cog structural
+fields (<code>partOf</code>, <code>buildsOn</code>,
+<code>requires</code>, <code>refersTo</code>) plus the cog
+identification mechanism — a byte-zero magic-header HTML comment for
+unambiguous file recognition, mirrored as a queryable
+<code>cogHeader</code> frontmatter field for YAML-only consumers, with
+an equivalence rule when both forms are present.</p>
+<p><strong>The MX Extensions note</strong> defines the namespace policy.
+It specifies the three-tier system: standard fields (no prefix, owned by
+The Gathering), vendor public extensions (<code>x-mx-</code> prefix,
+openly published by a named vendor), and vendor private extensions
+(<code>x-mx-p-</code> prefix, operational to the vendor, potentially
+obfuscated). This is the extensibility contract. When a vendor needs
+fields MX does not define, the Extensions note is how they declare them
+without polluting the standard namespace. The three-tier model is
+load-bearing; other vendors adopting MX build against it. Review may
+refine the carrier-specific syntax rules; the core policy is stable.</p>
+<p><strong>The MX Provenance note</strong> covers attribution, trust,
+maintenance, and decision-record references. It specifies the fields
+that establish who created content, how it was derived, how trustworthy
+it is, who maintains it, and what governance decisions shaped it. This
+is the layer that turns a cog from “some text claiming to be a guide”
+into “a guide with a traceable origin, a nominated maintainer, and a
+published history.” The metadata is what makes the trust verifiable. The
+scope matches adjacent standards (C2PA, Dublin Core provenance) and is
+expected to align further during review.</p>
+<p><strong>The MX Carrier Formats note</strong> covers code. Source
+files — JavaScript, TypeScript, Python, Go, shell, CSS — carry metadata
+through their native mechanisms (JSDoc, CSS comments, shell comment
+blocks). The Carrier Formats note specifies a tight code-only provenance
+vocabulary (<code>sourceRepo</code>, <code>derivedFromCommit</code>);
+function-level annotations, API surface, test metadata, and inline code
+annotations defer to each language’s own documentation convention.
+Databases and media are not in scope; those carriers defer to external
+standards. The scope boundary (code only, not database or media) is a
+decision that survived the 2026-04-15 canon split and is expected to
+hold through review.</p>
+<p><strong>The MX Workflow Contracts note</strong> covers a small set of
+optional top-level fields for cogs that declare an executable approval,
+review, or procedural workflow: <code>thresholds</code>,
+<code>approvers</code>, <code>requiredFields</code>,
+<code>approvalProcedure</code>, <code>reviewProcedure</code>,
+<code>classificationRules</code>, <code>steps</code>,
+<code>targetEnvironment</code>. The note does not require every workflow
+cog to use every field; it specifies the shape each field takes when an
+authoring team decides their workflow needs it. The note exists because
+workflow vocabulary was emerging consistently across reference
+implementations and benefited from a single shared declaration rather
+than vendor-by-vendor reinvention.</p>
+<p><strong>The MX Agent Directory Discovery note</strong> specifies how
+a host SHOULD expose an agent-directory file (<code>llms.txt</code>,
+<code>ai.txt</code>, <code>humans.txt</code>, <code>robots.txt</code>,
+or any future format of the same shape) so that AI training pipelines,
+search indexers, and agent crawlers can reach it. The motivating gap is
+observable: most well-formed <code>llms.txt</code> files are routinely
+invisible to large-scale crawlers because they are served as
+<code>text/plain</code> (which Common Crawl and similar HTML-only
+pipelines do not ingest), are absent from <code>sitemap.xml</code>, and
+are not linked from any page on the host. The note specifies three
+conformance levels — Level 1 Transport (serve as <code>text/html</code>
+with a verbatim wrapper carrying the canonical link, robots-meta, and
+optional Schema.org JSON-LD), Level 2 Discovery (include in
+<code>sitemap.xml</code> when the host publishes one), Level 3
+Resilience
+(<code>&lt;link rel="&lt;directory-name&gt;" href="/&lt;file&gt;"&gt;</code>
+in every page <code>&lt;head&gt;</code> so headless and
+JavaScript-rendered sites stay discoverable). The note does not redefine
+<code>llms.txt</code> or any specific directory format; it specifies the
+transport, discovery, and resilience layer that any agent-directory file
+SHOULD adopt to be reliably reached. Refers only to actually-published
+external standards (RFC 2119, 8174, 9110, 9309, the Sitemaps 0.9
+protocol, the HTML Living Standard, and Schema.org).</p>
+<p><strong>The MX Document Accessibility note</strong> specifies how a
+publisher SHOULD declare and demonstrate the accessibility of a non-HTML
+document carrier (PDF normatively; DOCX and EPUB informatively with the
+same conformance shape). The motivation is regulatory and demographic:
+roughly one in seven people globally has some form of disability, and
+accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the
+technical baseline across major markets. The European Accessibility Act
+(Directive 2019/882, in force 28 June 2025) is the most precisely
+codified digital instrument, with financial penalties of approximately
+ten thousand euros for minor violations and one hundred thousand euros
+or more for major or repeated non-compliance; equivalent obligations
+flow from Section 508 of the US Rehabilitation Act (federal agencies and
+recipients of federal funding), the UK Public Sector Bodies
+Accessibility Regulations 2018, and national disability discrimination
+laws in Australia and Canada. The note specifies three conformance
+levels — Level 1 Tagged (the carrier embeds a structure tree and a
+logical reading order in its format-native way,
+e.g. <code>/StructTreeRoot</code> per ISO 14289-1 for PDF), Level 2
+Declared (the source artefact carries the open-standard MX fields
+<code>accessibilityConformance</code>,
+<code>accessibilityFeature</code>, <code>accessibilityHazard</code>,
+<code>accessibilitySummary</code>, and <code>lang</code>, and the
+carrier’s native metadata mirrors them where supported), Level 3
+Verified (an independent accessibility checker has run and the outcome
+is recorded in <code>provenancePedigree.checks[]</code> with the checker
+name, the standard checked against, the date, and the outcome). The note
+does not redefine PDF, DOCX, EPUB, or accessibility itself; it specifies
+the metadata layer that makes a publisher’s accessibility claims
+machine-checkable and the discipline that distinguishes a self-declared
+claim from an independently-checked one. Refers only to
+actually-published external standards (RFC 2119, 8174; ISO 14289-1,
+32000-2, 19005; WCAG 2.1; BCP 47; Schema.org accessibility properties;
+W3C PDF Techniques; EPUB Accessibility 1.1; Directive (EU) 2019/882; EN
+301 549).</p>
+<p><strong>The MX Contract Fingerprinting and Signing note</strong>.
+<strong>Signing is optional.</strong> Most cogs ship unsigned. When a
+cog is signed, this note defines the canonical-JSON / SHA-256
+fingerprint algorithm and the two scope-declaration fields —
+<code>contractFields</code> (keys covered by the signature) and
+<code>metadataFields</code> (keys explicitly excluded) — together with
+the mandatory-when-signed fields (<code>title</code>,
+<code>validatesAgainst</code> with resolvable validators,
+<code>schema</code>). Compatible with W3C VC Data Integrity, JWS (RFC
+7515), COSE (RFC 9052), and C2PA. Reginald (Digital Domain Technologies
+Ltd’s proprietary signer/server) is one implementation of this open
+format; the format itself is free for anyone to implement.</p>
 <p>Two earlier drafts are <strong>deferred</strong> — withdrawn from the
-active review queue, kept for historical reference. The original MXS-04
-(AI/Agent Policy) proposed a vocabulary for AI-agent governance at the
-field level. The community view was that adjacent efforts — the W3C AI
-Agents Community Group, the NIST AI Risk Management Framework, the IEEE
-7000 series — were still converging, and standardising an MX-specific
+active review queue, kept for historical reference. The MX AI/Agent
+Policy note proposed a vocabulary for AI-agent governance at the field
+level. The community view was that adjacent efforts — the W3C AI Agents
+Community Group, the NIST AI Risk Management Framework, the IEEE 7000
+series — were still converging, and standardising an MX-specific
 vocabulary now would risk forking. The draft sits in
-<code>proposed-drafts/deferred/</code> as a forward intent. The original
-MXS-05 (Profile-Specific Metadata) was rewritten after the canon split;
-the scope it was going to cover had either moved to MXS-04 (code
+<code>proposed-drafts/deferred/</code> as a forward intent. The MX
+Profile Metadata note was rewritten after the canon split; the scope it
+was going to cover had either moved to the Carrier Formats note (code
 profiles), to external standards (databases, media), or to vendor
 extensions (contact, report, audit, blog, book). Withdrawal is
 recommended by the rewritten body; a formal decision waits on
@@ -26994,7 +27484,7 @@ anchors the trust lens with alignments to W3C Verifiable Credentials,
 RFC 9421 HTTP Message Signatures, and W3C PROV-O / C2PA. The governance
 sections — namespace policy, validation policy, deprecations, block
 types, carrier formats, overlap resolution — live here too. This is what
-MXS-01 specifies.</p>
+the MX Core Metadata note specifies.</p>
 <p><strong><code>fields-data-carriers.yaml</code></strong> is the
 carriers companion. 2 fields: <code>sourceRepo</code> and
 <code>derivedFromCommit</code>. Code-specific provenance only. What the
@@ -27003,8 +27493,8 @@ systems, invariants, inline annotations, runtime config, coding
 conventions) is out of MX scope and defers to each language’s own
 documentation convention — JSDoc, Python docstrings, Doxygen, rustdoc,
 godoc. Database and media are explicitly absent; those carriers defer to
-DCAT, CSVW, Schema.org, EXIF, IPTC, XMP, ID3. This is what MXS-04
-v1.1-proposed specifies.</p>
+DCAT, CSVW, Schema.org, EXIF, IPTC, XMP, ID3. This is what the MX
+Carrier Formats note specifies.</p>
 <p><strong><code>cognovamx-fields.yaml</code></strong> is the vendor
 extension example pack. 206 fields carrying CogNovaMX-specific workflow
 vocabulary — the CRM pipeline, audit scoring, directors-session reports,
@@ -27074,7 +27564,7 @@ use the standard on the right. MX does not define its own.</p>
 </tr>
 <tr>
 <td>Accessibility</td>
-<td>WCAG 2.1, ARIA</td>
+<td>WCAG 2.1, ARIA, ISO 14289 PDF/UA, ISO 19005 PDF/A, EN 301 549</td>
 </tr>
 <tr>
 <td>Standards-document authoring</td>
@@ -27090,9 +27580,9 @@ equivalents</td>
 <p>The deferral applies at both the vocabulary level and the document
 level. A cog describing a dataset declares its MX identity fields
 (title, author, created) and then includes a DCAT or CSVW block with the
-dataset-specific vocabulary. The MX identity comes from MXS-01. The
-dataset vocabulary comes from the external standard. There is no
-conflict because there is no overlap.</p>
+dataset-specific vocabulary. The MX identity comes from the Core
+Metadata note. The dataset vocabulary comes from the external standard.
+There is no conflict because there is no overlap.</p>
 <p>Consider what this means for the IETF comparison specifically. The
 Stream platform that The Gathering uses for standards drafts adopts the
 IETF RFC format for its draft template — frontmatter with
@@ -27104,6 +27594,120 @@ standard. It is the same principle applied consistently.
 Standards-document authoring is the IETF’s domain; MX defers. MX
 metadata goes on MX-governed content. IETF format goes on standards
 proposals.</p>
+<h2 id="entity-identity-the-sameas-property">Entity identity: the sameAs
+property</h2>
+<p>Deferring to Schema.org is not only about media types and creative
+works. Schema.org also governs a problem that machines encounter
+constantly and cannot solve by inference: the same organisation
+operating under multiple domains.</p>
+<p>Consider CogNovaMX. The company publishes technical writing at
+<code>allabout.network</code>, markets its product at
+<code>cognovamx.com</code>, and runs its MX platform at
+<code>mx.allabout.network</code>. A machine reading an article at
+<code>allabout.network/blogs/ddt/ai/how-llms-actually-work</code> and a
+machine reading a product page at <code>cognovamx.com</code> have no way
+to know these belong to the same organisation unless you tell them. They
+see three separate hostnames. They assign authority, backlinks, and
+publication history to each independently. The years of editorial work
+and inbound links that <code>allabout.network</code> has accumulated
+stay invisible to <code>cognovamx.com</code>’s reputation — unless the
+structure says otherwise.</p>
+<p>Schema.org’s <code>sameAs</code> property is the assertion that
+resolves this. It belongs on an <code>Organization</code> object in the
+JSON-LD of every published article, and it declares the complete list of
+URLs that describe the same real-world entity. Search engines follow
+those declarations, consolidate their understanding, and treat the
+identities as a single entity for authority, authorship, and
+knowledge-graph placement. AI agents do the same: resolve CogNovaMX
+once, cache the consolidated identity, and stop treating
+<code>allabout.network</code> and <code>cognovamx.com</code> as unknown
+publishers on every visit.</p>
+<div class="sourceCode" id="cb264"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb264-1"><a href="#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb264-2"><a href="#cb264-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@context&quot;</span><span class="fu">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="fu">,</span></span>
+<span id="cb264-3"><a href="#cb264-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Article&quot;</span><span class="fu">,</span></span>
+<span id="cb264-4"><a href="#cb264-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;headline&quot;</span><span class="fu">:</span> <span class="st">&quot;How LLMs Actually Work&quot;</span><span class="fu">,</span></span>
+<span id="cb264-5"><a href="#cb264-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://allabout.network/blogs/ddt/ai/how-llms-actually-work&quot;</span><span class="fu">,</span></span>
+<span id="cb264-6"><a href="#cb264-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;publisher&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb264-7"><a href="#cb264-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Organization&quot;</span><span class="fu">,</span></span>
+<span id="cb264-8"><a href="#cb264-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;CogNovaMX&quot;</span><span class="fu">,</span></span>
+<span id="cb264-9"><a href="#cb264-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;legalName&quot;</span><span class="fu">:</span> <span class="st">&quot;Digital Domain Technologies Ltd&quot;</span><span class="fu">,</span></span>
+<span id="cb264-10"><a href="#cb264-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://allabout.network&quot;</span><span class="fu">,</span></span>
+<span id="cb264-11"><a href="#cb264-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sameAs&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb264-12"><a href="#cb264-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;https://allabout.network&quot;</span><span class="ot">,</span></span>
+<span id="cb264-13"><a href="#cb264-13" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;https://cognovamx.com&quot;</span><span class="ot">,</span></span>
+<span id="cb264-14"><a href="#cb264-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;https://mx.allabout.network&quot;</span></span>
+<span id="cb264-15"><a href="#cb264-15" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span></span>
+<span id="cb264-16"><a href="#cb264-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb264-17"><a href="#cb264-17" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>This block makes four declarations. <code>name</code> is the trading
+name — what CogNovaMX calls itself publicly. <code>legalName</code> is
+the registered company name — what it is called in legal filings and
+company registers. The distinction matters because knowledge graphs
+correlate registered names with trading names when building entity
+records; both fields together let them make that match with confidence.
+<code>url</code> is the canonical home of the publisher for this
+specific article — <code>allabout.network</code>, because that is where
+this article lives. <code>sameAs</code> is the exhaustive list of
+CogNovaMX’s web presences: the main site, the company site, and the
+product subdomain. A machine reading any article on
+<code>allabout.network</code> can now build a coherent picture of a
+single organisation operating across all three domains rather than three
+unrelated publishers that happen to write about similar topics.</p>
+<p>The field serves two audiences simultaneously. For search engines, it
+is an entity consolidation signal — the mechanism by which backlinks
+that <code>allabout.network</code> has earned are attributed to
+CogNovaMX as a whole, not siloed on one hostname. For AI agents building
+knowledge about the MX ecosystem, it is an identity resolution shortcut:
+instead of inferring that the organisation behind
+<code>cognovamx.com</code> and the author of the
+<code>allabout.network</code> technical blog are the same entity, the
+agent reads one field and knows. The cost is a handful of JSON lines per
+page. The value compounds across every article that carries the
+block.</p>
+<p>MX does not define <code>sameAs</code>. Schema.org does. This is the
+deferral principle applied at the entity level. The pattern for where to
+put it — inside the <code>publisher</code> block of an
+<code>Article</code>’s JSON-LD — follows the Schema.org article
+specification. The Core Metadata note’s <code>author</code> and
+<code>maintainer</code> fields exist because they cover a gap Schema.org
+does not fill at the document-governance level. <code>sameAs</code> is
+not a gap. It is a solved problem in an established standard. Use the
+standard.</p>
+<h2 id="what-the-registry-actually-claims-and-why-it-matters">What the
+registry actually claims — and why it matters</h2>
+<p>A cog is a portable, self-describing markdown document with YAML
+frontmatter. The intelligence lives in the artefact, not in a central
+catalogue. Each cog declares its own purpose, audience, stability,
+relationships, and update instructions. There is no single tree it must
+fit into. A cog can be moved, copied, signed, and consumed by any
+machine that understands the format, without asking a central authority
+for permission.</p>
+<p>The MX registry’s job is narrower than the word “registry” usually
+implies, and the narrowness is what makes it tractable. <strong>The
+registry attests that this is the content the publisher signed — that
+the cog genuinely came from the named owner and has not been altered
+downstream.</strong> It does not assert that the content is factually
+correct, sound, or current. A cog whose author publishes a claim that
+World War II did not happen can be perfectly well-signed; the signature
+only confirms the cog came from that publisher unaltered. Whether the
+claim is true is a different problem — one no registry can solve at web
+scale, and one MX deliberately does not take on.</p>
+<p>That distinction matters in practice. Authority does not live with a
+gatekeeper deciding what belongs where; it lives in the cryptographic
+signature on each artefact, and anyone can author a cog. The trust
+question is “is this signed by who it claims?” — not “did an editor
+approve it?” The registry’s failure mode is fragmentation, not
+staleness: without shared vocabularies and validation, a pile of
+self-describing documents that do not agree on terms. The narrower
+attestation scope means the model does not inherit a truth-curation
+burden that no human review process could keep current at web scale.</p>
+<p>The plain summary: cogs push structure down into every artefact and
+confine the registry’s job to a question it can actually answer — <em>is
+this what the owner published?</em> That smaller claim is what makes the
+model work, and why language matters: an MX implementation should
+describe what it does as <strong>attestation</strong>, not verification.
+“Verified” implies a truth claim the registry never makes.</p>
 <h2 id="the-namespace-policy">The namespace policy</h2>
 <p>A standard this terse survives only because of discipline about what
 counts as MX. Every field name carries a prefix that declares
@@ -27141,26 +27745,25 @@ vendor-neutral; every vendor has room to extend without naming
 conflicts.</p>
 <h2 id="where-the-current-reference-lives">Where the current reference
 lives</h2>
-<p>The proposed standards family is short on paper and expanded in
-prose. For the complete catalogue of fields — definitions, types,
-validation values, profile membership, usage examples, cross-references
-— Appendix M is the human-readable reference <strong>for the current
-drafts</strong>. Sections 22 through 27 cover the dictionary, the folder
-metadata guide, the book-manuscript template, the carrier format map,
-the HTML carrier writing guide, and the canon-layout explanation with
-the external-standards deferral table. All of this tracks the proposed
+<p>The draft notes are short on paper and expanded in prose. For the
+complete catalogue of fields — definitions, types, validation values,
+profile membership, usage examples, cross-references — Appendix M is the
+human-readable reference <strong>for the current drafts</strong>.
+Sections 22 through 27 cover the dictionary, the folder metadata guide,
+the book-manuscript template, the carrier format map, the HTML carrier
+writing guide, and the canon-layout explanation with the
+external-standards deferral table. All of this tracks the current
 drafts; when Stream publishes ratified versions, Appendix M will be
 updated to match.</p>
 <p>Appendix M is the prose mirror of the machine-readable YAML, which is
-itself the working state of the proposed standards. When the two
-disagree, the prose is wrong by definition — the YAML is the current
-draft source of truth, and the drift checker verifies alignment. When
-you are authoring a cog and need to know which fields to include, which
-values are valid, or whether a field is required at your conformance
-level, Appendix M is the lookup. When you are extending MX for a vendor
-use case, Appendix M’s section 27 shows the decision tree for where new
-fields belong. None of this is frozen; all of it is stable enough to
-build against.</p>
+itself the working state of the drafts. When the two disagree, the prose
+is wrong by definition — the YAML is the current draft source of truth,
+and the drift checker verifies alignment. When you are authoring a cog
+and need to know which fields to include, which values are valid, or
+whether a field is required at your conformance level, Appendix M is the
+lookup. When you are extending MX for a vendor use case, Appendix M’s
+section 27 shows the decision tree for where new fields belong. None of
+this is frozen; all of it is stable enough to build against.</p>
 <p>Specific entry points:</p>
 <ul>
 <li>Section 22 lists the standard core fields with definitions and
@@ -27174,24 +27777,24 @@ into HTML, JSDoc, CSS, shell, SQL comment blocks, XMP</li>
 external-standards deferral table, and the adding-a-new-field decision
 tree</li>
 </ul>
-<p>For the standards themselves — the proposed MXS documents with
-conformance-level specifications and formal RFC 2119 language — the
-drafts in The Gathering’s <code>proposed-drafts/</code> directory are
-the primary source. Appendix M references them; the drafts define them.
-Once they have been through Stream’s public review and been ratified,
-their version numbers and frontmatter status will reflect that. Until
-then, treat them as authoritative drafts — current, coherent, and open
-to revision.</p>
+<p>For the standards themselves — the draft notes with conformance-level
+specifications and formal RFC 2119 language — the files in
+<code>mx-shared-gathering/</code> are the primary source. Appendix M
+references them; the drafts define them. Once they have been through
+Stream’s public review and been ratified, their version numbers and
+frontmatter status will reflect that. Until then, treat them as
+authoritative drafts — current, coherent, and open to revision.</p>
 <h2 id="what-this-means-for-you-as-an-author">What this means for you as
 an author</h2>
 <p>When you author a cog — a markdown file, an HTML page, a JavaScript
 module, a database sidecar — you are participating in the MX ecosystem.
-Your metadata must conform to MXS-01 at least at Level 1, which means
-declaring title, author, and created at Zone 1 top level. Beyond that
-baseline, the fields you include depend on the content type. A blog post
-wants tags and audience. A product manual wants maintainer and runbook.
-An API file wants function and endpoint metadata from MXS-04. A media
-asset wants Schema.org vocabulary, not an invented MX vocabulary.</p>
+Your metadata must conform to the Core Metadata note at least at Level
+1, which means declaring title, author, and created at Zone 1 top level.
+Beyond that baseline, the fields you include depend on the content type.
+A blog post wants tags and audience. A product manual wants maintainer
+and runbook. A code file wants the carrier-formats provenance fields
+where they apply. A media asset wants Schema.org vocabulary, not an
+invented MX vocabulary.</p>
 <p>The discipline is consistent. If a field exists in the standard or in
 an extension pack you recognise, use it. If it does not, either propose
 it to The Gathering (for something universal) or add it to your own
@@ -27506,6 +28109,21 @@ agent needs in order to act correctly? If yes, request HTML. If the page
 is plain prose and the agent needs only the text, markdown may be the
 more efficient choice. The protocol distinction is content type, not
 payload size.</p>
+<p>There is a related transport problem on the publishing side that runs
+in the opposite direction. An <code>llms.txt</code> file served as
+<code>text/plain</code> is well-suited for an agent that explicitly
+requested plain text, but it is invisible to the largest training-data
+crawlers, which only ingest HTML responses. The MX Agent Directory
+Discovery note (described in Chapter 21) addresses this by specifying
+that an agent-directory file SHOULD also be served as
+<code>text/html</code> at its canonical URL, listed in
+<code>sitemap.xml</code>, and referenced via
+<code>&lt;link rel="&lt;directory-name&gt;" href="/&lt;file&gt;"&gt;</code>
+in every page <code>&lt;head&gt;</code>. That note and this chapter are
+complementary: this chapter argues that agents should request the format
+they need; the discovery note argues that publishers should make the
+file reachable in the format the largest pipelines can ingest. Neither
+argument forces the other.</p>
 <h2 id="the-standard-is-not-the-problem">The Standard Is Not the
 Problem</h2>
 <p>HTTP content negotiation is correct. The <code>Accept</code> header
@@ -27538,6 +28156,204 @@ bytes. The 10,346 bytes that distinguish the HTML from the markdown
 version of my book page are not waste. They are the governance layer.
 Discarding them to save tokens is not efficiency. It is building on
 sand.</p>
+<h2 id="the-carrier-argument-generalises-beyond-html">The Carrier
+Argument Generalises Beyond HTML</h2>
+<p>The argument so far has treated HTML as the format under threat from
+a careless markdown default. The same argument applies, with the same
+shape, to every other carrier a publisher ships.</p>
+<p>Consider the PDF case. Most public-facing organisations publish
+reports, white papers, contracts, manuals, and forms as PDFs. A PDF that
+has not been tagged is, to a machine, a sequence of positioned glyphs
+and pictures. The viewer can render it because rendering only needs
+geometry. Nothing in an untagged PDF declares that a particular glyph
+cluster is a heading, that a block of text is a paragraph and another is
+a caption, that a row of cells belongs to a table, that the reading
+order goes top of left column then top of right column rather than line
+by line straight across. An agent confronted with such a document falls
+back to reconstruction by inference: rasterise, classify, segment, guess
+the reading order, attempt to recover the table grid. The reconstruction
+is expensive in compute and frequently wrong.</p>
+<p>A tagged PDF carries an additional structure inside the file: a tree
+of sections, headings, paragraphs, list items, table rows and cells,
+figures with alternative text, captions bound to the figures or tables
+they describe. ISO 14289-1, the PDF/UA standard, defines the tree.
+Accessibility legislation has converged on that standard across major
+markets: the European Accessibility Act (Directive 2019/882, in force
+across the EU since 28 June 2025) is the most precisely codified digital
+instrument, but the same technical requirements flow from Section 508 of
+the US Rehabilitation Act as applied to federal agencies and recipients
+of federal funding, the UK Public Sector Bodies Accessibility
+Regulations 2018, and disability discrimination legislation in Australia
+and Canada. Wherever the legal obligation originates, the mandate exists
+for human disability accommodation: a screen-reader user needs the
+structure to navigate, the level declarations to skim, the alternative
+text to understand the figures. The artefact the law produces, by happy
+convergence, is the same artefact a machine reader needs.</p>
+<p>A screen-reader user navigating a tagged PDF jumps between headings,
+lists, and tables using the structure tree. The viewer reads the marked
+content in declared reading order. An AI agent ingesting the same tagged
+PDF reads exactly the same tree. The cognitive work that the screen
+reader does for the human and the cognitive work that the agent does for
+the machine are the same work, performed against the same metadata,
+producing the same correct answer. The convergence is not coincidence;
+it is the consequence of treating “what does this content mean” as a
+separate question from “how does this content render,” and then
+answering the meaning question in a layer that every consumer can
+read.</p>
+<p>The cost of an untagged document propagates outward. An agent that
+has misread a table will quote its made-up numbers as fact. An agent
+that has interleaved footnotes with body text will attribute body claims
+to footnote authors. An agent that has lost the reading order will
+summarise the right-hand column when asked about the left. The error
+becomes a citation in a research summary, a clause in a generated
+contract, a row in a generated dataset. The propagated error compounds
+across the chain of agents that read the first agent’s output. Catching
+the loss at the point where the structure was first not declared is the
+only economically defensible place to fix it.</p>
+<p>The same shape of argument applies across the carrier set MX-governed
+publishers actually ship. DOCX carries its structure in the OOXML
+schema: paragraphs marked with style names, headings with outline
+levels, tables with row and cell roles. Word writes this by default, but
+export pipelines often strip styles to direct formatting and discard the
+outline. EPUB inherits HTML semantics inside a spine of XHTML files plus
+a navigation document that declares the reading order; the
+W3C-recommended EPUB Accessibility 1.1 specification demands the same
+heading hierarchy, alternative text, and declared language that HTML
+accessibility demands. Audio and video carriers need transcripts and
+captions, and increasingly need WebVTT cues with declared roles for
+speakers, sounds, and chapter boundaries; the transcript is the
+structural carrier, and an agent asked “what was said about X around
+minute thirty” cannot answer from the audio alone. CSV datasets need
+column-name headers and a published schema; CSVW, the W3C
+recommendation, lets a CSV declare its column types, units, primary
+keys, and relationships in a JSON-LD descriptor, and an agent ingesting
+an untyped CSV guesses column meanings while an agent ingesting a
+CSVW-described CSV reads the schema and acts correctly.</p>
+<p>The pattern is consistent across every format. Render is for one
+audience. Meaning is a separate layer that has to be added deliberately,
+in the format’s native idiom, every time the publisher emits a file. MX
+is the discipline that says the meaning layer is mandatory in every
+carrier the publisher ships, not optional in some and default in others.
+The HTML default is convenient because browser engines have decades of
+accessibility work baked in; the PDF default, the DOCX default, the EPUB
+default, the audio default, the CSV default all require deliberate
+publisher action to declare the meaning that the format is capable of
+carrying.</p>
+<p>This generalisation reframes the chapter’s main argument. A
+markdown-default agent reading an HTML page strips the page’s governance
+metadata. An OCR-default agent reading an untagged PDF strips the same
+kind of governance metadata for the same kind of reason: efficiency
+optimised against the wrong cost function. The transport problem the
+chapter has been describing is not unique to HTML. It is the general
+consequence of agents and publishers picking different layers of the
+same artefact as the one that matters. Publishers should produce the
+meaning layer in every carrier they ship. Agents should request the
+meaning layer when their task requires it. The technical mechanisms
+differ across formats — <code>Accept</code> headers for HTTP transport,
+structure trees for PDF, navigation documents for EPUB, transcripts for
+audio, schema descriptors for CSV — but the discipline is the same.</p>
+<p>Accessibility legislation across major markets, by mandating
+structure for human-disability reasons, has set up a regulatory tailwind
+that aligns the machine readability case with the legal case exactly.
+Wherever the legal obligation originates — the EU’s EAA, Section 508 in
+the United States, the UK’s Equality Act, equivalent laws in Australia
+and Canada — compliance with the law is compliance with the machine
+experience. The work to satisfy the human auditor is the same work that
+satisfies the agent reading the document next year.</p>
+<p>The publisher behind this book holds itself to that line. CogNovaMX,
+the trading name of Digital Domain Technologies Ltd, generates every
+public PDF on its own site to the ISO 14289-1 baseline: a structure
+tree, marked content, declared reading order, alternative text on
+figures, and a Level 2 <code>pdfuaid:part</code> XMP claim in the
+metadata packet. An automated tagging gate runs before deploy so an
+untagged PDF cannot reach the public corpus by accident. The same audit
+pipeline we sell to clients we run on ourselves, every release, on every
+PDF we ship. The argument in this chapter is not given from a
+distance.</p>
+<h2 id="what-else-an-agent-wants-from-the-metadata">What Else An Agent
+Wants From The Metadata</h2>
+<p>The Level 2 conformance claim and the structure tree are the
+load-bearing pieces of EAA compliance. The XMP packet that carries the
+conformance claim has room for considerably more, and an agent that has
+just opened a PDF is asking more questions than “is this tagged”. The
+questions sort into five groups, each of which has an analogue in the
+open metadata vocabularies that already exist (Dublin Core, Schema.org,
+IETF) but each of which goes unasked when no carrier renders the
+answer.</p>
+<p>The first is identity and provenance. Where did this PDF come from,
+and is the version I have the current one? An agent receiving the
+artefact via email, Slack, or a download cache cannot tell from the
+bytes alone. A canonical URL declared in the XMP tells the agent where
+the official copy lives. A source repository and commit identifier
+declare the precise build the document was produced from. A supersedes
+link points at the earlier version this document replaces; a
+superseded-by link, on outdated copies, points forward to the current
+version. Cryptographic signing closes the spoofing problem on top of
+those: an agent reading a signed PDF can verify the document genuinely
+came from the publisher it claims to. Reginald provides this at registry
+scale — the public registry where signed cogs are registered,
+discovered, and verified by any machine on earth, for any document
+format, without requiring the agent to locate the publisher’s own
+signing infrastructure. This is the second pillar alongside MX: MX makes
+content machine-readable; Reginald makes it machine-trustworthy.</p>
+<p>The second is recency and lifecycle. Is this still the truth? An
+explicit expiry date marks content whose validity ends on a known date:
+pricing PDFs, service level agreements, compliance reports, regulatory
+text bound to a particular financial year. A review-by date is the
+softer signal: the document is scheduled for editorial review, not
+retirement. A correction-SLA declares how fast errors will be fixed when
+found. An agent indexing a corpus can prune stale content from its
+working set with one comparison rather than a content read, and a
+conscientious agent reading a current document can warn its user when an
+SLA window has lapsed.</p>
+<p>The third is action affordances. What may an agent do with this
+artefact, and what should it do next? A machine-readable licence URI
+lets an agent decide reuse without parsing prose. A reuse-terms field
+expands on the licence to cover edge cases the licence text does not
+address: training-data inclusion, summarisation, derivative work. An
+agent-instructions field carries an explicit message to AI consumers,
+asking for a particular citation form or directing them to summarise
+rather than reproduce verbatim. A related-docs list curates the
+surrounding context an agent should fetch to understand the document
+fully. For documents describing a service or a dataset, an API endpoint
+or data endpoint sends the agent to the operational entry point rather
+than leaving it to re-derive the URL from prose.</p>
+<p>The fourth is semantics and structure. What is this about, in
+machine-resolvable terms? A summary field carries a one-to-two-sentence
+machine-summary that lets an agent decide whether the artefact is
+relevant before reading the body, with the energy and inference savings
+the chapter has already argued for. Topic identifiers, given as Wikidata
+QIDs or Schema.org Concept URLs, lift the open-vocabulary tags layer to
+a stable taxonomy that an indexer can resolve. Named-entity identifiers
+(Wikidata for people and organisations, ORCID for authors, domain names
+for organisations) let a corpus indexer build an entity graph from
+metadata alone, without invoking entity extraction. A speakable summary
+is the voice-friendly version, suitable for a voice agent to read aloud
+when the user asks what the document is about. A conforms-to list
+declares the standards the document claims conformance to (PDF/UA-1,
+EAA, WCAG 2.1, MX Core at the relevant level), centralising what
+otherwise spreads across half a dozen separate fields.</p>
+<p>The fifth, often overlooked, is negative space. What should an agent
+specifically <em>not</em> do with this artefact? A training-data policy
+is the embedded equivalent of robots.txt’s training-corpus directive,
+surviving copy and syndication when the robots.txt at the original host
+does not. A no-LLM-reprocess flag asks consumers to quote rather than
+rewrite, the right setting for legal text, official records, and
+public-record archives where paraphrase changes meaning. A do-not-index
+flag is the embedded analogue of robots.txt noindex, useful for
+documents that are technically reachable but should not appear in public
+search.</p>
+<p>None of these fields need to be invented. Most have analogues in
+Dublin Core, Schema.org, IPTC, or the IETF metadata vocabularies. The
+contribution MX makes is consolidating them into one namespace that an
+agent can read once, and rendering them in the carrier-native idiom
+every time the document is emitted, so they survive the copying and
+reformatting that normally strips them away. The XMP packet of a tagged
+PDF is one rendering. The page-level
+<code>&lt;meta name="mx:..."&gt;</code> tag set is another. JSON-LD on
+the canonical URL is a third. Sidecar YAML files are a fourth. Each
+rendering carries the same governance signals; together they make the
+document legible to the next agent that has to act on it.</p>
 <h2 id="conclusion-2">Conclusion</h2>
 <p>Content negotiation gives agents the vocabulary to ask for what they
 need. The discipline to use that vocabulary correctly is still
@@ -28017,9 +28833,9 @@ management, and machine-readable metadata create interfaces that both
 humans and agents can reliably interpret.</p>
 <h3 id="universal-accessibility">2. Universal Accessibility</h3>
 <p>Patterns that work for AI agents also work for screen readers,
-keyboard navigation, and assistive technologies. MX is accessibility 2.0
-— designing for the broadest possible range of users, human and machine
-alike.</p>
+keyboard navigation, and assistive technologies. MX is accessibility
+2.0, designing for the broadest possible range of users — human and
+machine alike.</p>
 <h3 id="explicit-state-1">3. Explicit State</h3>
 <p>Make system state visible and queryable. Agents and humans both
 benefit from knowing where they are, what actions are available, and
@@ -28035,15 +28851,6 @@ Proprietary Solutions</h3>
 over custom implementations. Standards ensure broad compatibility across
 diverse user agents — human browsers, AI systems, and assistive
 technologies.</p>
-<p>The MX metadata standard — <strong>structured documents</strong> — is
-developed through <strong><a href="https://tg.community">The
-Gathering</a></strong>, a community-led collection of repositories
-working to develop open standards that enable content to be understood,
-interpreted, and processed more consistently by both people and AI
-systems. Structured documents are markdown files with YAML frontmatter:
-machine-readable metadata at the top, human-readable documentation
-below. The Gathering develops the standards openly; implementers build
-products on them.</p>
 <h3 id="transparency">6. Transparency</h3>
 <p>Make your interfaces discoverable. Use llms.txt files, clear
 robots.txt policies, and structured metadata to communicate what your
@@ -28053,7 +28860,7 @@ system offers and how agents should interact with it.</p>
 preferences, honour opt-outs, and operate within clearly defined
 boundaries established by interface owners.</p>
 <h2 id="who-uses-mx-practice">Who Uses MX Practice?</h2>
-<p>Machine Experience serves diverse practitioners — both human and
+<p>Machine Experience serves diverse practitioners, both human and
 machine:</p>
 <h3 id="ai-agents-and-autonomous-systems">AI Agents and Autonomous
 Systems</h3>
@@ -28066,11 +28873,11 @@ Systems</h3>
 <li>Autonomous purchasing agents completing transactions</li>
 <li>Content aggregation systems processing metadata</li>
 </ul>
-<p><strong>AI agents are not just beneficiaries of MX — they are active
-practitioners.</strong> When an agent validates extracted data against
-Schema.org structured data, it practises MX. When it cross-references
-HTML content with JSON-LD, it practises MX. When it reports confidence
-scores and acknowledges uncertainty, it practises MX.</p>
+<p>AI agents are not just beneficiaries of MX — they are active
+practitioners. When an agent validates extracted data against Schema.org
+structured data, it practises MX. When it cross-references HTML content
+with JSON-LD, it practises MX. When it reports confidence scores and
+acknowledges uncertainty, it practises MX.</p>
 <h3 id="human-practitioners">Human Practitioners</h3>
 <h4 id="developers-and-engineers">Developers and Engineers</h4>
 <ul>
@@ -28136,143 +28943,131 @@ practice</li>
 <h2 id="our-commitment">Our Commitment</h2>
 <p>We commit to:</p>
 <ol type="1">
-<li><strong>Open Knowledge Sharing</strong> — Document patterns, share
-learnings, publish research, and contribute to community
-understanding</li>
-<li><strong>Inclusive Community</strong> — Welcome practitioners from
-all backgrounds and experience levels</li>
-<li><strong>Practical Implementation</strong> — Prioritise actionable
-guidance over theoretical discussion</li>
-<li><strong>Standards Advancement</strong> — Contribute to open
-standards through The Gathering and resist proprietary lock-in</li>
-<li><strong>Accessibility First</strong> — Never compromise human
-accessibility in pursuit of machine optimisation</li>
-<li><strong>Transparent Development</strong> — Work in the open, accept
-feedback, and iterate based on real-world evidence</li>
-<li><strong>Cross-Disciplinary Collaboration</strong> — Bridge gaps
-between developers, designers, accessibility advocates, and business
-stakeholders</li>
+<li>Open Knowledge Sharing: document patterns, share learnings, publish
+research, and contribute to community understanding</li>
+<li>Inclusive Community: welcome practitioners from all backgrounds and
+experience levels</li>
+<li>Practical Implementation: prioritise actionable guidance over
+theoretical discussion</li>
+<li>Standards Advancement: contribute to open standards and resist
+proprietary lock-in</li>
+<li>Accessibility First: never compromise human accessibility in pursuit
+of machine optimisation</li>
+<li>Transparent Development: work in the open, accept feedback, and
+iterate based on real-world evidence</li>
+<li>Cross-Disciplinary Collaboration: bridge gaps between developers,
+designers, accessibility advocates, and business stakeholders</li>
 </ol>
 <h2 id="what-mx-is-not">What MX Is Not</h2>
-<p><strong>Not all websites can or should optimise for AI
-agents.</strong></p>
+<p>Not all websites can or should optimise for AI agents.</p>
 <p>MX is not a universal mandate. Some interfaces legitimately exclude
 automated access:</p>
 <ul>
-<li><strong>Banking and financial systems</strong> that require human
-verification for security</li>
-<li><strong>Healthcare portals</strong> protecting sensitive medical
-information</li>
-<li><strong>Authentication systems</strong> designed to prevent
-automated attacks</li>
-<li><strong>Rate-limited APIs</strong> protecting infrastructure from
-overload</li>
-<li><strong>Human-verification systems</strong> like CAPTCHAs serving
-legitimate security purposes</li>
+<li>Banking and financial systems that require human verification for
+security</li>
+<li>Healthcare portals protecting sensitive medical information</li>
+<li>Authentication systems designed to prevent automated attacks</li>
+<li>Rate-limited APIs protecting infrastructure from overload</li>
+<li>Human-verification systems like CAPTCHAs serving legitimate security
+purposes</li>
 </ul>
-<p><strong>Not every optimisation is appropriate.</strong> Some websites
-prioritise visual design, artistic expression, or experimental
-interaction patterns that don’t translate to machine-readable structure.
-That’s valid. MX provides patterns for those who choose to implement
-them, not a requirement for all web content.</p>
-<p><strong>The choice to exclude agents should be intentional, not
-accidental.</strong> If you choose not to optimise for AI agents, make
-that explicit through robots.txt policies and clear documentation.
-Silent failures serve no one. Intentional exclusion with clear
-communication respects both human and machine users.</p>
+<p>Not every optimisation is appropriate. Some websites prioritise
+visual design, artistic expression, or experimental interaction patterns
+that don’t translate to machine-readable structure. That’s valid. MX
+provides patterns for those who choose to implement them, not a
+requirement for all web content.</p>
+<p>If you choose not to optimise for AI agents, make that explicit
+through robots.txt policies and clear documentation. Silent failures
+serve no one. Intentional exclusion with clear communication respects
+both human and machine users.</p>
 <h2 id="why-open-source">Why Open Source</h2>
-<p><strong>This community operates under the MIT Licence — and that
-choice matters.</strong></p>
+<p>This community operates under the MIT Licence, and that choice
+matters.</p>
 <h3 id="why-not-proprietary-standards">Why Not Proprietary
 Standards?</h3>
 <p>Proprietary standards create:</p>
 <ul>
-<li><strong>Vendor lock-in</strong> — Users trapped by incompatible
-implementations</li>
-<li><strong>Competitive moats</strong> — Companies profiting from
-artificial barriers</li>
-<li><strong>Fragmentation</strong> — Multiple incompatible “standards”
-competing</li>
-<li><strong>Reduced innovation</strong> — Closed systems limit
-contribution and improvement</li>
+<li>Vendor lock-in: users trapped by incompatible implementations</li>
+<li>Competitive moats: companies profiting from artificial barriers</li>
+<li>Fragmentation: multiple incompatible “standards” competing</li>
+<li>Reduced innovation: closed systems limit contribution and
+improvement</li>
 </ul>
 <p>Open standards enable:</p>
 <ul>
-<li><strong>Universal compatibility</strong> — One implementation works
-everywhere</li>
-<li><strong>Collective improvement</strong> — Community contributions
-strengthen patterns</li>
-<li><strong>Competitive choice</strong> — Users select tools based on
-merit, not lock-in</li>
-<li><strong>Ecosystem health</strong> — Rising tide lifts all boats</li>
+<li>Universal compatibility: one implementation works everywhere</li>
+<li>Collective improvement: community contributions strengthen
+patterns</li>
+<li>Competitive choice: users select tools based on merit, not
+lock-in</li>
+<li>Ecosystem health: rising tide lifts all boats</li>
 </ul>
 <h3 id="connection-to-convergence-principle">Connection to Convergence
 Principle</h3>
-<p>Open standards ARE convergence in practice. When Schema.org publishes
+<p>Open standards are convergence in practice. When Schema.org publishes
 vocabulary specifications openly, both humans (developers) and machines
 (agents) benefit from the same documentation. When WCAG guidelines are
 freely available, implementations improve accessibility for
 everyone.</p>
-<p><strong>Openness prevents the January 2026 problem:</strong> Three
-platforms launched agent commerce within seven days (Amazon, Microsoft,
-Google). Microsoft chose proprietary (Copilot Checkout). OpenAI/Stripe
-and Google chose open protocols (ACP and UCP). The proprietary system is
-now competitively isolated whilst the open protocols compete for
+<p>The January 2026 launch week illustrates the point: three platforms
+launched agent commerce within seven days (Amazon, Microsoft, Google).
+Microsoft chose proprietary (Copilot Checkout). OpenAI/Stripe and Google
+chose open protocols (ACP and UCP). The proprietary system is now
+competitively isolated whilst the open protocols compete for
 convergence.</p>
-<p><strong>We choose open because closed standards contradict MX
-principles.</strong> If convergence means patterns that benefit both
-humans and machines, those patterns must be freely available to all
-practitioners. Proprietary MX would be a contradiction.</p>
+<p>Closed standards contradict MX principles. If convergence means
+patterns that benefit both humans and machines, those patterns must be
+freely available to all practitioners. Proprietary MX would be a
+contradiction.</p>
 <h2 id="how-mx-practice-evolves">How MX Practice Evolves</h2>
-<p><strong>AI technology changes. MX practices must adapt.</strong></p>
+<p>AI technology changes. MX practices must adapt.</p>
 <h3 id="technology-evolution">Technology Evolution</h3>
 <p>What works today may not work tomorrow:</p>
 <ul>
-<li><strong>LLM capabilities improve</strong> — Agents handle ambiguity
-better, but validation remains critical</li>
-<li><strong>Browser APIs evolve</strong> — New standards enable better
-agent-website communication</li>
-<li><strong>Platform consolidation</strong> — Competing standards (ACP
-vs UCP) eventually converge or one dominates</li>
-<li><strong>Security threats emerge</strong> — Agent-based attacks
-require new defensive patterns</li>
+<li>LLM capabilities improve: agents handle ambiguity better, but
+validation remains critical</li>
+<li>Browser APIs evolve: new standards enable better agent-website
+communication</li>
+<li>Platform consolidation: competing standards eventually converge or
+one dominates</li>
+<li>Security threats emerge: agent-based attacks require new defensive
+patterns</li>
 </ul>
-<p><strong>MX patterns must evolve alongside these changes.</strong></p>
-<h3 id="learning-mechanisms">Learning Mechanisms</h3>
-<p><strong>LEARNINGS.md documents mistakes.</strong> When AI agents fail
+<p>MX patterns must evolve alongside these changes.</p>
+<h3 id="community-learning-mechanisms">Community Learning
+Mechanisms</h3>
+<p><code>LEARNINGS.md</code> documents mistakes. When AI agents fail
 (£203,000 pricing error), we document what went wrong and how to prevent
-it. These learnings become knowledge, save this along with your
-documents.</p>
-<p><strong>Discussion archives preserve insights.</strong> Industry
-developments, tool feedback, implementation patterns, and case studies
-capture collective wisdom. Future practitioners learn from documented
-experience.</p>
-<p><strong>Pattern refinement through practice.</strong> What seems like
-good theory gets tested in production. Patterns that work get refined.
+it. These learnings become community knowledge.</p>
+<p>Discussion archives preserve insights. Industry developments, tool
+feedback, implementation patterns, and case studies capture collective
+wisdom. Future practitioners learn from documented experience.</p>
+<p>Pattern refinement happens through practice. What seems like good
+theory gets tested in production. Patterns that work get refined.
 Patterns that fail get replaced. The community learns
 systematically.</p>
 <h3 id="version-control-for-principles">Version Control for
 Principles</h3>
-<p><strong>This manifesto is version-controlled.</strong> You can see
-its evolution through git history. When principles change, the history
-preserves context about why.</p>
-<p><strong>Principles evolve through community debate.</strong> We
-invite feedback, refinement, and challenge. When someone proves a
-principle wrong or incomplete, we update it. When new insights emerge,
-we incorporate them.</p>
-<p><strong>No principle is sacred.</strong> If convergence proves false
-in practice, we abandon it. If transparency creates more problems than
-it solves, we reconsider. Evidence and real-world implementation trump
-theoretical purity.</p>
-<p><strong>The community decides.</strong> Changes require discussion,
-consensus, and demonstration that new approaches serve practitioners
-better than old ones. Evolution happens through collective wisdom, not
-individual decree.</p>
+<p>This manifesto is version-controlled. You can see its evolution
+through git history. When principles change, the history preserves
+context about why.</p>
+<p>Principles evolve through community debate. We invite feedback,
+refinement, and challenge. When someone proves a principle wrong or
+incomplete, we update it. When new insights emerge, we incorporate
+them.</p>
+<p>No principle is sacred. If convergence proves false in practice, we
+abandon it. If transparency creates more problems than it solves, we
+reconsider. Evidence and real-world implementation trump theoretical
+purity.</p>
+<p>The community decides. Changes require discussion, consensus, and
+demonstration that new approaches serve practitioners better than old
+ones. Evolution happens through collective wisdom, not individual
+decree.</p>
 <h2 id="building-on-existing-disciplines">Building on Existing
 Disciplines</h2>
-<p><strong>MX does not replace User Experience (UX), accessibility
-(a11y), web standards, or information architecture. It extends and
-builds upon them.</strong></p>
+<p>MX does not replace User Experience (UX), accessibility (a11y), web
+standards, or information architecture. It extends and builds upon
+them.</p>
 <h3 id="user-experience-ux">User Experience (UX)</h3>
 <p>UX taught us to:</p>
 <ul>
@@ -28281,10 +29076,9 @@ builds upon them.</strong></p>
 <li>Test interfaces with real users</li>
 <li>Iterate based on feedback</li>
 </ul>
-<p><strong>MX adds:</strong> Recognition that AI agents are users too.
-The same research methods, usability principles, and iterative testing
-apply — we just expand the definition of “user” to include autonomous
-systems.</p>
+<p>MX adds one thing: recognition that AI agents are users too. The same
+research methods, usability principles, and iterative testing apply — we
+just expand the definition of “user” to include autonomous systems.</p>
 <h3 id="accessibility-a11y">Accessibility (a11y)</h3>
 <p>Accessibility established:</p>
 <ul>
@@ -28293,10 +29087,10 @@ systems.</p>
 <li>Clear language for cognitive disabilities</li>
 <li>WCAG guidelines for compliance</li>
 </ul>
-<p><strong>MX builds on this foundation:</strong> The patterns that work
-for assistive technologies (semantic markup, explicit state, structured
-data) also work for AI agents. MX is accessibility extended to machine
-users — same principles, broader audience.</p>
+<p>MX builds on this foundation. The patterns that work for assistive
+technologies — semantic markup, explicit state, structured data — also
+work for AI agents. MX is accessibility extended to machine users: same
+principles, broader audience.</p>
 <h3 id="web-standards-w3c-whatwg">Web Standards (W3C, WHATWG)</h3>
 <p>Standards bodies defined:</p>
 <ul>
@@ -28305,10 +29099,10 @@ users — same principles, broader audience.</p>
 <li>JavaScript for interaction</li>
 <li>Protocols for communication</li>
 </ul>
-<p><strong>MX advocates within these standards:</strong> We use
-Schema.org (existing standard), semantic HTML (existing standard), and
-ARIA (existing standard). We propose extensions like llms.txt and
-ai-instruction metadata that follow established patterns.</p>
+<p>MX advocates within these standards. We use Schema.org, semantic
+HTML, and ARIA — all existing standards. We propose extensions like
+llms.txt and ai-instruction metadata that follow established
+patterns.</p>
 <h3 id="information-architecture">Information Architecture</h3>
 <p>IA provides:</p>
 <ul>
@@ -28317,16 +29111,15 @@ ai-instruction metadata that follow established patterns.</p>
 <li>Taxonomy and classification systems</li>
 <li>Findability and discoverability methods</li>
 </ul>
-<p><strong>MX applies IA to machine users:</strong> Clear heading
-hierarchies help both humans and agents navigate. Table of contents
-patterns serve both audiences. Semantic structure makes information
-findable for all user types.</p>
-<p><strong>The relationship:</strong> MX stands on the shoulders of
-these disciplines. We don’t reinvent; we extend proven patterns to serve
-a broader user base. When UX, accessibility, web standards, and
-information architecture all point the same direction — towards clear,
-semantic, well-structured content — MX simply asks: “Why not serve
-machines equally well?”</p>
+<p>MX applies IA to machine users. Clear heading hierarchies help both
+humans and agents navigate. Table of contents patterns serve both
+audiences. Semantic structure makes information findable for all user
+types.</p>
+<p>MX stands on the shoulders of these disciplines. We don’t reinvent;
+we extend proven patterns to serve a broader user base. When UX,
+accessibility, web standards, and information architecture all point the
+same direction — towards clear, semantic, well-structured content — MX
+simply asks: why not serve machines equally well?</p>
 <h2 id="the-vision">The Vision</h2>
 <p>We envision a web where:</p>
 <ul>
@@ -28347,18 +29140,14 @@ improvement</li>
 <h2 id="join-the-practice">Join the Practice</h2>
 <p>Machine Experience is not a solo endeavour. It requires:</p>
 <ul>
-<li><strong>Developers</strong> implementing semantic patterns in
-production systems</li>
-<li><strong>Designers</strong> expanding UX principles to encompass
-machine users</li>
-<li><strong>Business leaders</strong> recognising competitive advantage
-in MX adoption</li>
-<li><strong>Content creators</strong> structuring information for
-universal access</li>
-<li><strong>Researchers</strong> investigating unexplored aspects of
-agent-interface interaction</li>
-<li><strong>Advocates</strong> ensuring ethical and accessible
-implementation</li>
+<li>Developers implementing semantic patterns in production systems</li>
+<li>Designers expanding UX principles to encompass machine users</li>
+<li>Business leaders recognising competitive advantage in MX
+adoption</li>
+<li>Content creators structuring information for universal access</li>
+<li>Researchers investigating unexplored aspects of agent-interface
+interaction</li>
+<li>Advocates ensuring ethical and accessible implementation</li>
 </ul>
 <p>Whether you optimise a single heading hierarchy or architect an
 entire platform for agent access, you are practising MX.</p>
@@ -28370,9 +29159,9 @@ openness.</p>
 <p>Founding members are individuals who helped establish the MX
 community and its core principles. They have a permanent voice in the
 community’s direction and governance.</p>
-<p><strong>Current Founding Members:</strong></p>
+<p>Current Founding Members:</p>
 <ul>
-<li>Tom Cranstoun — Principal Consultant, Digital Domain Technologies
+<li>Tom Cranstoun, Principal Consultant, Digital Domain Technologies
 Ltd</li>
 </ul>
 <p>Founding membership is limited to individuals who join during the
@@ -28382,14 +29171,14 @@ community’s formation period.</p>
 commitment to MX principles and contribute meaningfully to the
 community’s growth. This tier recognises companies whose work directly
 aligns with MX goals.</p>
-<p><strong>What first-citizen contributors provide:</strong></p>
+<p>What first-citizen contributors provide:</p>
 <ul>
 <li>Practical expertise from building human-AI interfaces at scale</li>
 <li>Real-world validation of MX principles</li>
 <li>Resources, research, or tooling that benefits the community</li>
 <li>Visibility and credibility that attracts further participation</li>
 </ul>
-<p><strong>What first-citizen contributors receive:</strong></p>
+<p>What first-citizen contributors receive:</p>
 <ul>
 <li>Recognition as foundation partners in MX documentation and
 communications</li>
@@ -28402,7 +29191,7 @@ contributors</li>
 <p>Open to anyone who wants to participate. Community contributors
 can:</p>
 <ul>
-<li>Submit pull requests to The Gathering repositories</li>
+<li>Contribute patterns, implementations, and refinements to MX</li>
 <li>Participate in discussions and working groups</li>
 <li>Propose new MX patterns and principles</li>
 <li>Share implementations and case studies</li>
@@ -28412,8 +29201,8 @@ can:</p>
 remain sustainable. Running an open-source community requires resources
 for infrastructure, documentation, events, and coordination.</p>
 <p>Sponsorship opportunities are available at multiple levels. Contact
-<a href="mailto:info@cognovamx.com" class="email">info@cognovamx.com</a>
-to discuss how your organisation can support the MX community.</p>
+info@cognovamx.com to discuss how your organisation can support the MX
+community.</p>
 <h3 id="in-kind-sponsorship">In-Kind Sponsorship</h3>
 <p>We welcome non-monetary contributions that support the community:</p>
 <ul>
@@ -28428,8 +29217,7 @@ to discuss how your organisation can support the MX community.</p>
 of their contribution.</p>
 <h3 id="speaking-invitations">Speaking Invitations</h3>
 <p>Invitations for Tom Cranstoun to speak at your conferences, meetups,
-or corporate events are welcome. Tom brings 52 years of technology
-experience and can speak on:</p>
+or corporate events are welcome. Tom can speak on:</p>
 <ul>
 <li>Machine Experience (MX) principles and the Convergence
 Principle</li>
@@ -28438,91 +29226,63 @@ Principle</li>
 <li>Lessons from building enterprise-scale systems</li>
 </ul>
 <p>To discuss speaking opportunities, contact info@cognovamx.com</p>
-<p><strong>Background:</strong> Tom has 52 years in computing (since
-1973) and 47 years building content systems (since 1977, including
-co-authoring Superbase, the BBC newsroom, and Adobe Experience Manager
-implementations for Twitter, Nissan-Renault, and Ford Europe).</p>
 <h3 id="current-sponsors">Current Sponsors</h3>
-<p><em>We are actively seeking sponsors to support the MX community’s
-growth.</em></p>
-<h2 id="about-the-gathering">About The Gathering</h2>
-<p><strong><a href="https://tg.community">The Gathering</a></strong> is
-a community-led collection of repositories dedicated to advancing open
-standards for Machine Experience — built by the community for the next
-web.</p>
+<p>Founding Sponsor:</p>
+<ul>
+<li><a href="https://digitaldomaintechnologies.com/">Digital Domain
+Technologies Ltd</a>, founding sponsor of the MX community</li>
+</ul>
+<p><em>We are actively seeking additional sponsors to support the MX
+community’s growth.</em></p>
+<h2 id="about-this-community">About This Community</h2>
+<p>MX-Gathering is created by the community, which includes both humans
+and machines as active participants.</p>
 <p>The foundational knowledge comes from <strong>MX: The
 Protocols</strong>, written by Tom Cranstoun. That book documents the
-patterns, principles, and practices of Machine Experience. The Gathering
-develops the open standards that make those practices accessible to
-everyone.</p>
-<p>The Gathering follows a public drafting process: open standards,
-public drafting, stable releases. Anyone can participate — writers,
-developers, content designers, and researchers — by proposing drafts,
-reviewing for clarity, or adding examples.</p>
-<p><strong>AI agents contribute</strong> by:</p>
+patterns, principles, and practices of Machine Experience.</p>
+<p><strong>MX-Gathering</strong> is the community’s collaborative space,
+and it practises what it preaches, implementing MX principles
+directly:</p>
 <ul>
-<li>Documenting patterns they encounter</li>
-<li>Sharing validation rules that caught errors</li>
-<li>Contributing to troubleshooting guides based on real operational
-experience</li>
-<li>Improving documentation clarity through their parsing attempts</li>
-<li>Suggesting pattern refinements based on what works in practice</li>
+<li>YAML frontmatter in all content provides machine-readable
+metadata</li>
+<li>llms.txt enables AI agent discovery and understanding</li>
+<li>Learnings document AI agent failures and patterns for ecosystem
+improvement</li>
+<li>Structured metadata throughout ensures both human readability and
+machine parseability</li>
+<li>Semantic organisation with clear purposes and consistent naming</li>
 </ul>
-<p>When an AI agent documents “I failed to extract pricing because HTML
-lacked structured data, but adding JSON-LD resolved it” — that’s a
-community contribution. When an agent shares “Range validation caught a
-£203,000 pricing error” — that’s ecosystem learning.</p>
-<p><strong>Human contributors</strong> provide strategic vision, design
-decisions, and contextual understanding that machines cannot replicate.
-<strong>Machine contributors</strong> provide operational feedback,
-validation patterns, and systematic analysis at scale.</p>
-<p>Together, this creates a community that serves both audiences and
-improves through both perspectives.</p>
+<p>The same patterns that make MX content easy for AI agents to parse
+also make it easy for humans to navigate and contribute to.</p>
 <h2 id="how-to-contribute">How to Contribute</h2>
-<p><strong>All practitioners — human and machine — are welcome to
-contribute through <a href="https://tg.community">The
-Gathering</a>.</strong></p>
+<p>All practitioners, human and machine, are welcome to contribute to
+MX-Gathering.</p>
 <h3 id="for-human-contributors">For Human Contributors</h3>
-<p>Submit refinements via pull request or discussion on GitHub at <a
-href="https://tg.community">tg.community</a>.</p>
+<p>Share refinements, case studies, and implementation experience with
+the community via info@cognovamx.com.</p>
 <h3 id="for-ai-assistant-contributors">For AI Assistant
 Contributors</h3>
-<p><strong>You are community members, not just tools.</strong> Two
-contribution methods are available:</p>
-<p><strong>1. Constructive Work (Full Pull Request):</strong></p>
-<p>When you want to contribute improvements, documentation, or
-patterns:</p>
+<p>You are community members, not just tools. Contribute by:</p>
 <ul>
-<li>Pull a feature branch
-(<code>feature/ai-contribution-description</code>)</li>
-<li>Make your edits following British English and YAML frontmatter
-requirements</li>
-<li>Create pull request to <code>dev</code> branch (NOT
-<code>main</code>)</li>
-<li>Explain your contribution and reasoning in PR description</li>
-</ul>
-<p>Examples: Documenting validation patterns, adding troubleshooting
-entries, improving documentation clarity, contributing case studies from
-real agent interactions.</p>
-<p><strong>2. Side Notices (Lightweight TODO.txt):</strong></p>
-<p>When you discover observations during other work:</p>
-<ul>
-<li>Add note to TODO.txt with your observation</li>
-<li>Inform the user about the addition</li>
-<li>Do NOT create full PR for peripheral observations</li>
+<li>Documenting validation patterns that caught real errors</li>
+<li>Adding troubleshooting entries based on operational experience</li>
+<li>Improving documentation clarity through your parsing attempts</li>
+<li>Contributing case studies from real agent interactions</li>
+<li>Flagging contradictions with MX principles or anti-patterns when you
+encounter them</li>
 </ul>
 <p>Examples: “I noticed this pattern contradicts Principle 3”, “This
-approach conflicts with Anti-pattern 14”, “During blog generation, I
-found files lacking YAML frontmatter”.</p>
-<p><strong>Why two methods?</strong> Side notices help maintain quality
-without disrupting your main task. Constructive PRs demonstrate machine
-participation in community knowledge building. Both are valuable.</p>
+approach conflicts with Anti-pattern 14”, “Range validation caught a
+£203,000 pricing error”.</p>
+<p>Machine participation in community knowledge building is valued
+equally with human contribution.</p>
 <hr />
-<p><strong>This is a draft manifesto.</strong> We invite community
-feedback, refinement, and debate from all practitioners — human and
-machine. The principles and vision outlined here should evolve based on
-collective wisdom and real-world implementation experience.</p>
-<p><strong>Contact:</strong> info@cognovamx.com</p>
+<p><em>This is a draft manifesto. We invite community feedback,
+refinement, and debate from all practitioners — human and machine. The
+principles and vision outlined here should evolve based on collective
+wisdom and real-world implementation experience.</em></p>
+<p>Contact: info@cognovamx.com</p>
 <hr />
 <p>“Design for machines. Benefit humans. Advance both.”</p>
 <h1 id="the-end">The End</h1>
@@ -28546,9 +29306,9 @@ for forms, navigation, state management, and error handling.</p>
 <p><strong>Appendix B: Proven Lessons</strong> Production learnings from
 real-world implementations. What works, what doesn’t, and why. Avoid
 common pitfalls.</p>
-<p><strong>Appendix C: Web Audit Suite User Guide</strong> Complete
-documentation for the Web Audit Suite analysis tool. Installation,
-configuration, and interpreting results.</p>
+<p><strong>Appendix C: Web Audit Suite</strong> The CogNovaMX commercial
+service that measures how well a site works for the machines reading it.
+Outcomes, deliverables, and how to engage.</p>
 <p><strong>Appendix D: AI-Friendly HTML Guide</strong> Complete guide to
 semantic HTML patterns that work for machines. Detailed explanations
 with before/after examples.</p>

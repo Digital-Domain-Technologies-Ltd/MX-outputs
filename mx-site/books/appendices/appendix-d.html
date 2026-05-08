@@ -1884,6 +1884,190 @@ Disallow: /admin/
 # See /llms.txt for interaction policies
 
 Sitemap: https://example.com/sitemap.xml</code></pre>
+<h3
+id="beyond-robots.txt-sitemap.xml-and-llms.txt-the-wider-.well-known-surface">Beyond
+robots.txt, sitemap.xml, and llms.txt — the wider /.well-known/
+surface</h3>
+<p>Robots, sitemap, and llms.txt are the most-talked-about discovery
+files, but they sit inside a much larger family. The IETF reserved
+<code>/.well-known/</code> for site-wide metadata in RFC 8615, and the
+IANA Well-Known URIs registry now lists dozens of standardised paths
+covering identity, authentication, certificates, federation, mobile app
+linking, calendar/contact discovery, IoT device provisioning,
+accessibility, and AI agent integration. Most sites implement a handful
+and silently ignore the rest. An AI agent or service-discovery client
+can probe the registry’s full set looking for whichever signal matches
+its job.</p>
+<p>The most commonly observed paths in the wild:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 35%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr>
+<th>Path</th>
+<th>Purpose</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/.well-known/security.txt</code></td>
+<td>Security contact for vulnerability disclosure</td>
+<td>RFC 9116</td>
+</tr>
+<tr>
+<td><code>/.well-known/change-password</code></td>
+<td>Standardised password-change URL for password managers</td>
+<td>RFC 9018</td>
+</tr>
+<tr>
+<td><code>/.well-known/agent-card.json</code></td>
+<td>A2A protocol — service capabilities, endpoint, auth</td>
+<td>A2A spec</td>
+</tr>
+<tr>
+<td><code>/.well-known/did.json</code></td>
+<td>W3C DID Web — decentralised identity</td>
+<td>W3C DID-Core</td>
+</tr>
+<tr>
+<td><code>/.well-known/openid-configuration</code></td>
+<td>OIDC discovery</td>
+<td>OpenID Connect</td>
+</tr>
+<tr>
+<td><code>/.well-known/oauth-authorization-server</code></td>
+<td>OAuth 2.0 authorisation server metadata</td>
+<td>RFC 8414</td>
+</tr>
+<tr>
+<td><code>/.well-known/oauth-protected-resource</code></td>
+<td>OAuth 2.0 protected resource metadata</td>
+<td>RFC 9728</td>
+</tr>
+<tr>
+<td><code>/.well-known/jwks.json</code></td>
+<td>JSON Web Key Set — JWT signing keys</td>
+<td>RFC 7517</td>
+</tr>
+<tr>
+<td><code>/.well-known/api-catalog</code></td>
+<td>API metadata catalogue</td>
+<td>RFC 9727</td>
+</tr>
+<tr>
+<td><code>/.well-known/caldav</code> and
+<code>/.well-known/carddav</code></td>
+<td>Calendar and contact service discovery</td>
+<td>RFC 6764</td>
+</tr>
+<tr>
+<td><code>/.well-known/acme-challenge/</code></td>
+<td>Let’s Encrypt / ACME certificate validation (transient)</td>
+<td>RFC 8555</td>
+</tr>
+<tr>
+<td><code>/.well-known/mta-sts.txt</code></td>
+<td>SMTP MTA-STS policy</td>
+<td>RFC 8461</td>
+</tr>
+<tr>
+<td><code>/.well-known/host-meta</code> and
+<code>host-meta.json</code></td>
+<td>Federation / WebFinger base</td>
+<td>RFC 6415</td>
+</tr>
+<tr>
+<td><code>/.well-known/webfinger</code></td>
+<td>WebFinger service discovery</td>
+<td>RFC 7033</td>
+</tr>
+<tr>
+<td><code>/.well-known/matrix/client</code> and
+<code>/server</code></td>
+<td>Matrix federation discovery</td>
+<td>Matrix spec</td>
+</tr>
+<tr>
+<td><code>/.well-known/nodeinfo</code></td>
+<td>ActivityPub / fediverse instance metadata</td>
+<td>NodeInfo spec</td>
+</tr>
+<tr>
+<td><code>/.well-known/assetlinks.json</code></td>
+<td>Android Digital Asset Links</td>
+<td>Google spec</td>
+</tr>
+<tr>
+<td><code>/.well-known/apple-app-site-association</code></td>
+<td>iOS Universal Links</td>
+<td>Apple spec</td>
+</tr>
+<tr>
+<td><code>/.well-known/passkey-endpoints</code></td>
+<td>FIDO passkey configuration</td>
+<td>FIDO Alliance</td>
+</tr>
+<tr>
+<td><code>/.well-known/openpgpkey/policy</code></td>
+<td>OpenPGP Web Key Directory policy</td>
+<td>OpenPGP WKD</td>
+</tr>
+<tr>
+<td><code>/.well-known/dnt</code> and
+<code>/.well-known/dnt-policy.txt</code></td>
+<td>Do Not Track exception API and policy</td>
+<td>EFF DNT</td>
+</tr>
+<tr>
+<td><code>/.well-known/gpc.json</code></td>
+<td>Global Privacy Control signal</td>
+<td>W3C draft</td>
+</tr>
+<tr>
+<td><code>/.well-known/brski</code></td>
+<td>BRSKI bootstrapping for secure key infrastructure</td>
+<td>RFC 8995</td>
+</tr>
+<tr>
+<td><code>/.well-known/cmp</code></td>
+<td>Certificate Management Protocol</td>
+<td>RFC 9483</td>
+</tr>
+<tr>
+<td><code>/.well-known/coap</code></td>
+<td>CoAP discovery</td>
+<td>RFC 7252</td>
+</tr>
+<tr>
+<td><code>/.well-known/core</code></td>
+<td>CoRE link-format discovery</td>
+<td>RFC 6690</td>
+</tr>
+<tr>
+<td><code>/.well-known/atproto-did</code></td>
+<td>AT Protocol / Bluesky identity</td>
+<td>AT Protocol</td>
+</tr>
+</tbody>
+</table>
+<p>Implementation rule of thumb: <strong>add the paths that match the
+systems you actually want to integrate with</strong>. A static
+publishing site might only need <code>security.txt</code>, a
+<code>did.json</code> if it claims a verifiable identity, an
+<code>agent-card.json</code> if it offers any service to AI agents, and
+a manifest file if it doubles as a PWA. A SaaS product behind OAuth
+might add <code>openid-configuration</code>,
+<code>oauth-authorization-server</code>, and <code>jwks.json</code>. A
+federated server adds the federation paths. An IoT device provisioning
+service adds the BRSKI / CMP / CoAP / CoRE family.</p>
+<p>For the authoritative catalogue, see the <a
+href="https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml">IANA
+Well-Known URIs registry</a>. Each entry links to the defining RFC or
+specification.</p>
 <h3 id="three-layer-approach">Three-Layer Approach</h3>
 <p>Use all three together for maximum clarity:</p>
 <p><strong>Layer 1 - llms.txt (site-wide defaults)</strong> - Emerging

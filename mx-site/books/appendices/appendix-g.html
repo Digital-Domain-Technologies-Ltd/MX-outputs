@@ -834,6 +834,37 @@ href="https://globalprivacycontrol.github.io/gpc-spec/"
 class="uri">https://globalprivacycontrol.github.io/gpc-spec/</a></li>
 <li>Privacy signal for user preferences</li>
 </ul>
+<h3 id="iana-well-known-uris-registry">IANA Well-Known URIs
+Registry</h3>
+<p>The authoritative list of standardised <code>/.well-known/</code>
+paths. Reserved by RFC 8615 for site-wide metadata that user agents,
+crawlers, and protocols can reliably discover. Every path under
+<code>/.well-known/</code> should be registered with IANA to avoid
+collisions.</p>
+<ul>
+<li>Registry: <a
+href="https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml"
+class="uri">https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml</a></li>
+<li>Defining RFC: <a
+href="https://datatracker.ietf.org/doc/html/rfc8615">RFC 8615 —
+“Well-Known Uniform Resource Identifiers (URIs)”</a></li>
+</ul>
+<p><strong>Why it matters for MX:</strong> AI agents and
+service-discovery clients probe <code>/.well-known/</code> looking for
+signals that declare what a site can do beyond rendering pages —
+identity (<code>did.json</code>,
+<code>oauth-authorization-server</code>, <code>jwks.json</code>), agent
+integration (<code>agent-card.json</code>,
+<code>mcp-server-card.json</code>, <code>agents.json</code>), federation
+(<code>webfinger</code>, <code>nodeinfo</code>,
+<code>matrix/client</code>), accessibility and policy
+(<code>security.txt</code>, <code>gpc.json</code>), mobile linking
+(<code>assetlinks.json</code>, <code>apple-app-site-association</code>),
+and IoT provisioning (<code>brski</code>, <code>cmp</code>,
+<code>coap</code>, <code>core</code>). The registry is the canonical
+place to look up any path’s defining specification before implementing
+it. Appendix D’s “Beyond robots.txt, sitemap.xml, and llms.txt” section
+lists the most commonly observed paths with one-line summaries.</p>
 <hr />
 <h2 id="tools-for-implementation">Tools for Implementation</h2>
 <h3 id="version-control">Version Control</h3>

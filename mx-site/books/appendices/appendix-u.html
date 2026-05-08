@@ -152,7 +152,7 @@ YAML frontmatter at the top: Zone 1 is the identity every MX-aware
 document carries (title, author, created, description), and Zone 2 (the
 <code>mx:</code> block) is the operational metadata a machine actually
 reads to decide what to do.</p>
-<p>That is all this appendix needs to say about cogs. Chapter 19 of
+<p>That is all this appendix needs to say about cogs. Chapter 20 of
 <em>MX: The Protocols</em> — “Cogs and Reginald” — covers cogs in depth:
 the reader behaviour, the block structure, how Reginald registers them,
 how inheritance works, what the carrier formats look like. Read that
@@ -242,8 +242,9 @@ the mandatory-when-signed fields (<code>title</code>,
 <code>validatesAgainst</code> with resolvable validators,
 <code>schema</code>). Compatible with W3C VC Data Integrity, JWS (RFC
 7515), COSE (RFC 9052), and C2PA. Reginald (Digital Domain Technologies
-Ltd’s proprietary signer/server) is one implementation of this open
-format.</p>
+Ltd’s implementation) is the machine-trustworthiness pillar that builds
+on this standard: the public registry where signed cogs are registered,
+discovered, and verified by any machine on earth.</p>
 <p>That is the active family. Two earlier drafts are deferred. An
 AI/Agent Policy note was shelved because adjacent efforts at W3C, NIST,
 and IEEE are still converging, and standardising an MX-specific AI
@@ -376,13 +377,17 @@ participation, consensus ratification, no membership — only works when
 the specification is small enough that the community can hold it in its
 collective head.</p>
 <p><strong>Narrow attestation, not editorial truth.</strong> When a cog
-is signed and a registry attests it, the attestation says one thing
-only: <em>this is the content the publisher signed; the cog genuinely
-came from that owner and has not been altered downstream</em>. It does
-not say the content is factually correct. MX deliberately confines the
-registry’s job to a question it can actually answer — <em>is this what
-the owner published?</em> — and uses the word <em>attest</em> rather
-than <em>verify</em> to make the smaller scope explicit. Chapter 21 of
+is signed and Reginald attests it, the attestation answers four
+questions: who published this document, has it been modified since
+publication, when was the current version issued, and — where declared
+by the publisher — whether it was produced by a human, an AI, or an
+automated system. The attestation says one thing only: <em>this is the
+content the publisher signed; the cog genuinely came from that owner and
+has not been altered downstream</em>. It does not say the content is
+factually correct. MX deliberately confines the registry’s job to a
+question it can actually answer — <em>is this what the owner
+published?</em> — and uses the word <em>attest</em> rather than
+<em>verify</em> to make the smaller scope explicit. Chapter 21 of
 <em>MX: The Protocols</em> covers the contrast in detail.</p>
 <h2 id="where-to-look-it-up">Where to look it up</h2>
 <p>Four public artefacts carry the material. Each has a distinct job and
@@ -433,7 +438,7 @@ validation values, profile membership, usage examples, cross-references.
 Sections 22 through 27 cover the field dictionary, folder metadata, the
 book-manuscript template, the carrier format map, the HTML carrier
 writing guide, and the canon-layout explanation with the
-external-standards deferral table. Chapter 20 — “The Fields and the
+external-standards deferral table. Chapter 21 — “The Fields and the
 Standards” — is the full narrative counterpart to this architecture
 summary.</p>
 <p>Four artefacts, one set of drafts. Source for reading, YAML for

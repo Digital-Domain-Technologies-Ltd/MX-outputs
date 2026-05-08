@@ -163,7 +163,18 @@ semantic HTML, ARIA usage — what assistive technologies and machine
 readers both depend on.</li>
 <li><strong>Discovery surface.</strong> Sitemap completeness, robots.txt
 correctness, llms.txt presence, in-page link discoverability, canonical
-declarations.</li>
+declarations. The probe extends beyond the well-known trio: every entry
+in the IANA Well-Known URIs registry that a machine reader might check
+is probed — agent-card.json (A2A protocol), did.json (W3C decentralised
+identity), oauth-authorization-server / oauth-protected-resource /
+jwks.json (identity and signing), caldav / carddav (calendar and contact
+discovery), mta-sts.txt (mail transport security), the IoT and
+device-provisioning family (brski / cmp / coap / core), and others.
+Where a JSON discovery file is present, the audit parses its body and
+reports the structured contents in the report tables rather than
+presenting an unhelpful “yes / unknown / unknown” row. Where a path is
+absent the report stays silent — only the IANA registry pointer is
+surfaced so the reader knows where to look up the full catalogue.</li>
 <li><strong>Provenance and trust signals.</strong> Whether the page
 declares who published it, when, under what licence, and how a reader
 can verify those claims.</li>
