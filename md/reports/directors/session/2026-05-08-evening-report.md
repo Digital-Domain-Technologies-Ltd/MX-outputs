@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed on mx-site home"
-description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing."
+title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed on mx-site home and the home text blocks made scannable"
+description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing; the two long prose blocks on the home page broken into shorter paragraphs and a real bulleted list for the four-part split, every word preserved."
 author: "Tom Cranstoun"
 created: 2026-05-08
 modified: 2026-05-08
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -23,6 +23,8 @@ mx:
 ---
 
 ## Summary
+
+**v1.4 addition:** A short follow-on edit broke the two long prose blocks at the top of the mx-site home page into shorter, scannable paragraphs. The Introduction's first paragraph (eight sentences in one block) was split at four natural breaks and the opening sentence was lifted to a section-lead. The new "A provenance layer for machines" pitch section had its four-part split (MX, The Gathering, REGINALD, CogNovaMX) pulled out of inline prose into a real bulleted list, with the EU AI Act forcing-function sentence as a separate short paragraph. Every word of the original prose is preserved; only paragraph boundaries and one list element changed. This is a readability tighten on the page Tom landed earlier this segment, made after seeing it in a browser at full width.
 
 **v1.3 addition:** A short late-evening session landed Tom's elevator pitch as a new strategic-framing section on the mx-site landing page, between the existing introduction and Training. The section carries the four-part framing (MX is the contract, The Gathering sets the standards, REGINALD does the signing, CogNovaMX operates the service), the Schema.org / FAQ-deprecation proof point, and the agentic-web economic case (cogs replace expensive inference with cheap execution). The pitch was simultaneously saved to long-term memory as the canonical opening for any outward-facing prose, indexed under a new "Pitch / Framing" section in `MEMORY.md`. Two commits: the mx-outputs HTML edit and a pending hub pointer bump.
 
@@ -108,6 +110,10 @@ A follow-on sweep applied the same logic to spaced hyphens used as dashes: 355 o
 
 A new section, "A provenance layer for machines", was added to `mx-outputs/mx-site/index.html` between the existing introduction and the Training offerings. The section carries Tom's canonical four-part framing (MX = the contract; The Gathering = the standards body; REGINALD = the signing service; CogNovaMX = the operating service), the Schema.org / FAQ-rich-results-deprecation as the in-miniature proof point that "what something is" without "whether to believe it" gets gamed, and the agentic-web economic case where cogs replace expensive inference with cheap execution. The `dateModified` in the WebSite JSON-LD was bumped from 2026-04-02 to 2026-05-08. The same pitch text was saved to long-term memory as `project_elevator_pitch.md` and indexed in `MEMORY.md` under a new "Pitch / Framing" section, so future sessions open outward-facing prose with this framing by default. Pitch text is neutral English, REGINALD all-caps, no em-dashes — house style was already compatible.
 
+### 15. Home-Page Readability Tighten
+
+After a full-width preview of the home page, both long prose blocks were broken into shorter, scannable paragraphs. The Introduction's opening paragraph (eight sentences) split into four paragraphs at the natural breaks (definition; machine-universe scope; content-estate scope; what CogNovaMX provides), and the opening sentence took the `section-lead` class so it carries visual weight. The provenance-layer section's four-part split was pulled out of one inline sentence into a real `<ul>` so the framing becomes glanceable, with the EU-AI-Act forcing-function clause hived off as its own short paragraph for the same reason. Every word of the original prose is preserved; only paragraph boundaries and one list element changed. The HTML was re-validated against the JSON-LD-in-head and HTML-hygiene gates and the page parsed clean; the cache was repurged after the push.
+
 ---
 
 ## By the Numbers
@@ -119,6 +125,7 @@ A new section, "A provenance layer for machines", was added to `mx-outputs/mx-si
 | Commits (v1.2 corpus-sweep run) | 22 (hub + mx-outputs) |
 | Commits (v1.3 elevator pitch) | 2 (hub + mx-outputs) |
 | Memory entries added (v1.3) | 1 (project_elevator_pitch.md) |
+| Commits (v1.4 readability tighten) | 2 (hub + mx-outputs) |
 | Hook bugs fixed | 2 |
 | Audit pages | 5 |
 | Repositories touched | 3 (hub, mx-crm, mx-outputs) |
@@ -188,4 +195,8 @@ A new section, "A provenance layer for machines", was added to `mx-outputs/mx-si
 | 82f33022 | CHANGELOG v1.94: writing-style codification + three corpus sweeps |
 | 6466406c | LEARNINGS v4.9: corpus-sweep over-application + inline-list mistake |
 | 8f3d59c | (mx-outputs) Add elevator-pitch section to mx-site landing page |
-| *pending* | Hub: bump mx-outputs for elevator pitch + this report v1.3 |
+| c8f6303 | (mx-outputs) Evening report v1.3: elevator pitch landed on mx-site home + saved to memory |
+| 3d1a4618 | Bump mx-outputs: elevator pitch on mx-site landing page; evening report v1.3 |
+| e32e35b5 | CHANGELOG v1.95: elevator pitch on mx-site landing page + saved to memory |
+| 1959ca1 | (mx-outputs) Improve readability of mx-site landing-page text blocks |
+| *pending* | Hub: bump mx-outputs for readability tighten + this report v1.4 |
