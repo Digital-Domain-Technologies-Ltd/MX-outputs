@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed on mx-site home and the home text blocks made scannable"
-description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing; the two long prose blocks on the home page broken into shorter paragraphs and a real bulleted list for the four-part split, every word preserved."
+title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed and home prose redesigned"
+description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing; the two long prose blocks on the home page first split into shorter paragraphs and then redesigned with a constrained 65vw prose column, a real section-lead rule, and a framework-card grid for the four-part split (MX, The Gathering, REGINALD, CogNovaMX)."
 author: "Tom Cranstoun"
 created: 2026-05-08
 modified: 2026-05-08
-version: "1.4"
+version: "1.5"
 
 mx:
   status: active
@@ -23,6 +23,8 @@ mx:
 ---
 
 ## Summary
+
+**v1.5 addition:** A second readability pass redesigned the two long prose sections on the mx-site home rather than just re-paragraphing them. Diagnosis after a wide-screen preview: `section-lead` was an inert class (never defined in CSS, so my "leads" rendered as plain body), and `section-inner` had no width cap, so prose ran the full 1600px max-width and read as a wall. The fix lands in `mx-unified.css` as three new rules — `section-prose` caps prose at 65vw / 780px; `section-lead` is now a real 1.5rem white block-level statement; `framework-list` is a 2-column card grid using the existing surface and border tokens, matching the page's visual language. The Introduction was trimmed from seven paragraphs to five (the redundant "CogNovaMX provides X" beat is removed because the offering cards sit directly above; the DNA / memory-pool metaphor compresses to one sentence keeping the kernel). The provenance-layer section now opens with a real lead, sets up the gap, and hands off to a four-card grid (MX, The Gathering, REGINALD, CogNovaMX). EU AI Act becomes its own short paragraph; the Schema.org and agentic-web beats stay as paragraphs but now sit in the constrained column with proper rhythm.
 
 **v1.4 addition:** A short follow-on edit broke the two long prose blocks at the top of the mx-site home page into shorter, scannable paragraphs. The Introduction's first paragraph (eight sentences in one block) was split at four natural breaks and the opening sentence was lifted to a section-lead. The new "A provenance layer for machines" pitch section had its four-part split (MX, The Gathering, REGINALD, CogNovaMX) pulled out of inline prose into a real bulleted list, with the EU AI Act forcing-function sentence as a separate short paragraph. Every word of the original prose is preserved; only paragraph boundaries and one list element changed. This is a readability tighten on the page Tom landed earlier this segment, made after seeing it in a browser at full width.
 
@@ -114,6 +116,10 @@ A new section, "A provenance layer for machines", was added to `mx-outputs/mx-si
 
 After a full-width preview of the home page, both long prose blocks were broken into shorter, scannable paragraphs. The Introduction's opening paragraph (eight sentences) split into four paragraphs at the natural breaks (definition; machine-universe scope; content-estate scope; what CogNovaMX provides), and the opening sentence took the `section-lead` class so it carries visual weight. The provenance-layer section's four-part split was pulled out of one inline sentence into a real `<ul>` so the framing becomes glanceable, with the EU-AI-Act forcing-function clause hived off as its own short paragraph for the same reason. Every word of the original prose is preserved; only paragraph boundaries and one list element changed. The HTML was re-validated against the JSON-LD-in-head and HTML-hygiene gates and the page parsed clean; the cache was repurged after the push.
 
+### 16. Home-Page Redesign: typography, line length, framework cards
+
+A second wide-screen preview made it visible that paragraph splits alone were not enough. The diagnosis: the `section-lead` class was inert (never defined in CSS, so all my "lead" paragraphs rendered identical to body), and `section-inner` had no width cap (1600px on a wide screen), so even short paragraphs ran across half the screen and read as a slab. The fix is three new rules in `mx-unified.css`. `section-prose` caps text-only sections at `clamp(560px, 65vw, 780px)`, putting line length back into the 65 to 75 character readable range. `section-lead` is now a real rule — 1.5rem, white, weight 500, generous bottom margin — so opening sentences read as section statements instead of body. `framework-list` is a two-column card grid using `--mx-surface` and `--mx-border`, matching the proposition-card pattern the rest of the page uses, and collapsing to one column under 600px. The Introduction trimmed from seven paragraphs to five — the redundant "CogNovaMX provides consultancy, training, books, and tools" paragraph was cut because the offering cards directly above already do that job, and the DNA / memory-pool paragraph compressed to one sentence keeping the kernel. The provenance-layer section now opens with a real lead, sets up the gap in two sentences, hands off to the four cards, then carries three short follow-on paragraphs (EU AI Act forcing function; Schema.org gap-in-miniature; agentic-web economic case). The cache was repurged after the push.
+
 ---
 
 ## By the Numbers
@@ -126,6 +132,8 @@ After a full-width preview of the home page, both long prose blocks were broken 
 | Commits (v1.3 elevator pitch) | 2 (hub + mx-outputs) |
 | Memory entries added (v1.3) | 1 (project_elevator_pitch.md) |
 | Commits (v1.4 readability tighten) | 2 (hub + mx-outputs) |
+| Commits (v1.5 home redesign) | 2 (hub + mx-outputs) |
+| New CSS rules (v1.5) | 3 (section-prose, section-lead, framework-list) |
 | Hook bugs fixed | 2 |
 | Audit pages | 5 |
 | Repositories touched | 3 (hub, mx-crm, mx-outputs) |
@@ -199,4 +207,8 @@ After a full-width preview of the home page, both long prose blocks were broken 
 | 3d1a4618 | Bump mx-outputs: elevator pitch on mx-site landing page; evening report v1.3 |
 | e32e35b5 | CHANGELOG v1.95: elevator pitch on mx-site landing page + saved to memory |
 | 1959ca1 | (mx-outputs) Improve readability of mx-site landing-page text blocks |
-| *pending* | Hub: bump mx-outputs for readability tighten + this report v1.4 |
+| d156218 | (mx-outputs) Evening report v1.4: home-page readability tighten |
+| 26686369 | Bump mx-outputs: home-page readability tighten; evening report v1.4 |
+| 62ec26c6 | CHANGELOG v1.96: home-page readability tighten |
+| 526fabe | (mx-outputs) Redesign mx-site home prose sections: typography, line length, framework cards |
+| *pending* | Hub: bump mx-outputs for home redesign + this report v1.5 |
