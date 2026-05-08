@@ -6,7 +6,7 @@ version: "1.0"
 author: Tom Cranstoun
 
 mx:
-  audience: stakeholders
+  audience: business
   confidential: true
   sessionType: full
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/interview/2026-02-10-universal-cms-interview.md

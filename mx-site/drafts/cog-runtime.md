@@ -7,7 +7,7 @@ status: "proposed"
 created: 2026-04-27
 modified: 2026-04-27
 date: 2026-04-27
-audience: ["implementers", "agents", "reviewers"]
+audience: ["tech", "agents", "humans"]
 inherits: cog-spec.v1.md
 cogHeader:
   version: v1

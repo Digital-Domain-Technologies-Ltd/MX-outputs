@@ -6,7 +6,7 @@ version: "1.0"
 author: Tom Cranstoun
 mx:
   x-mx-segment: "evening"
-  audience: stakeholders
+  audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-10-evening-report.md
 ---

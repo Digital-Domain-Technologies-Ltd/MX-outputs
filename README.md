@@ -21,11 +21,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 241 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 197 | Markdown — reports, audit results, presentations |
+| [md/](md/) | 203 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
-| [pptx/](pptx/) | 6 | PowerPoint — presentation source files |
-| **Total** | **1052** | |
+| [pptx/](pptx/) | 16 | PowerPoint — presentation source files |
+| **Total** | **1069** | |
 
 ---
 
@@ -295,12 +295,20 @@ PDF documents — books, manuals, presentations, blog exports.
 
 Markdown documents — session reports, audit results, Reginald documentation.
 
+### md/migrations/ (5 files)
+
+- [`2026-05-differentiation-briefing.cog.md`](md/migrations/2026-05-differentiation-briefing.cog.md)
+- [`2026-05-corpus-inventory.md`](md/migrations/staging/2026-05-corpus-inventory.md)
+- [`2026-05-deck-inventory.md`](md/migrations/staging/2026-05-deck-inventory.md)
+- [`2026-05-google-webdev-notes.md`](md/migrations/staging/2026-05-google-webdev-notes.md)
+- [`2026-05-mx-voice-notes.md`](md/migrations/staging/2026-05-mx-voice-notes.md)
+
 ### md/presentations/ (2 files)
 
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (195 files)
+### md/reports/ (196 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -335,7 +343,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (167 files)
+#### md/reports/directors/ (168 files)
 
 **build/** (3 files)
 
@@ -349,7 +357,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (160 files)
+**session/** (161 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -501,6 +509,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-05-06-evening-report.md`](md/reports/directors/session/2026-05-06-evening-report.md)
 - [`2026-05-06-morning-report.md`](md/reports/directors/session/2026-05-06-morning-report.md)
 - [`2026-05-07-evening-report.md`](md/reports/directors/session/2026-05-07-evening-report.md)
+- [`2026-05-08-afternoon-report.md`](md/reports/directors/session/2026-05-08-afternoon-report.md)
 - [`2026-05-08-morning-report.md`](md/reports/directors/session/2026-05-08-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
@@ -649,12 +658,22 @@ Structured data — audit comparisons, machine-readable reports.
 PowerPoint presentation source files.
 
 - [`MX-what-why-when.pptx`](pptx/presentations/MX-what-why-when.pptx)
-- [`Reginald.pptx`](pptx/presentations/Reginald.pptx)
 - [`The Web Has a New Audience - MX and The Gathering.pptx`](pptx/presentations/The Web Has a New Audience - MX and The Gathering.pptx)
+- [`Reginald.pptx`](pptx/presentations/archive/Reginald.pptx)
+- [`bmv-pitch-2026.pptx`](pptx/presentations/archive/bmv-pitch-2026.pptx)
+- [`image1.png`](pptx/presentations/assets/image1.png)
+- [`image2.png`](pptx/presentations/assets/image2.png)
+- [`image3.png`](pptx/presentations/assets/image3.png)
+- [`image4.png`](pptx/presentations/assets/image4.png)
+- [`image5.png`](pptx/presentations/assets/image5.png)
+- [`image6.png`](pptx/presentations/assets/image6.png)
 - [`bmv-pitch-2026.md`](pptx/presentations/bmv-pitch-2026.md)
-- [`bmv-pitch-2026.pptx`](pptx/presentations/bmv-pitch-2026.pptx)
+- [`design_master.pptx`](pptx/presentations/design_master.pptx)
 - [`frankfurt-cms-summit-talk.pptx`](pptx/presentations/frankfurt-cms-summit-talk.pptx)
+- [`frankfurt-design.pptx`](pptx/presentations/frankfurt-design.pptx)
+- [`frankfurt-talk.pptx`](pptx/presentations/frankfurt-talk.pptx)
+- [`mx-investor-deck.pptx`](pptx/presentations/mx-investor-deck.pptx)
 
 ---
 
-*Generated on 2026-05-08 at 10:47*
+*Generated on 2026-05-08 at 13:00*

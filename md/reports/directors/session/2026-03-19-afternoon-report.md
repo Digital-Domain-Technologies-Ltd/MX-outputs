@@ -7,7 +7,7 @@ author: Tom Cranstoun
 
 mx:
   x-mx-segment: afternoon
-  audience: stakeholders
+  audience: business
   confidential: true
   status: active
   contentType: report
