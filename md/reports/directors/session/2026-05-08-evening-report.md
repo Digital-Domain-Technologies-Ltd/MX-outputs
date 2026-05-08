@@ -117,4 +117,4 @@ Fresh 5-page audit of <https://dotfusion.com> run via the fixed cog pipeline. Re
 | 7b1d0b43 | Bump mx-outputs: promote newborn-LLM-COG post with full canonical head block |
 | a203e6f0 | Publish blog post: Schema.org and the missing provenance layer; add deprecations to wordlist |
 | bd960ae | mx-crm: dotfusion.com audit 2026-05-08 (5 pages): report and sidecar files |
-| (pending) | hub: fix cog enforcer v1.8; add mx exec dispatcher |
+| b10da8af | hub: fix cog enforcer v1.8; add mx exec dispatcher |
