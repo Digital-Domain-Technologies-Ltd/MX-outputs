@@ -5,7 +5,7 @@ created: "2026-02-11"
 version: "1.0"
 author: Tom Cranstoun
 mx:
-  audience: stakeholders
+  audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/_archive/2026-02-11-session-report-3.md
 ---

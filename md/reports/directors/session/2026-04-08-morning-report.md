@@ -4,7 +4,7 @@ created: "2026-04-08"
 x-mx-segment: "morning"
 version: "1.1"
 author: Tom Cranstoun
-audience: stakeholders
+audience: business
 confidential: true
 
 mx:

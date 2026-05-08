@@ -4,7 +4,7 @@ created: "2026-04-13"
 x-mx-segment: "full-day"
 version: "1.0"
 author: Tom Cranstoun
-audience: stakeholders
+audience: business
 confidential: true
 
 mx:

@@ -8,7 +8,7 @@ status: active
 description: "15-slide investor pitch deck for Bare Metal Ventures meeting with Michelle Tang."
 mx:
   contentType: business-doc
-  audience: [investors]
+  audience: [business]
   confidential: true
   tags: [investor, pitch, bare-metal-ventures, slides, pptx-source]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/pptx/presentations/bmv-pitch-2026.md

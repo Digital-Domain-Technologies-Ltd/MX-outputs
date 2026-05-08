@@ -3,11 +3,11 @@ title: "BMV differentiation pass — supporting-corpus inventory"
 description: "Inventory of every supporting surface that needs to stay in step with the canonical BMV deck on the four 'I already know this' objections (SEO/GEO, JSON-LD/schema.org, why-not-Google, MeetKai) and the 'MX is the DNA of the file' framing that supersedes the legacy 'MX pool' shorthand."
 author: Tom Cranstoun
 date: 2026-05-07
-status: research-note
+status: draft
 mx:
   canonicalUri: https://mx.allabout.network/research/2026-05-corpus-inventory.html
   contentType: research-note
-  audience: internal
+  audience: business
 ---
 
 # BMV differentiation pass — supporting-corpus inventory

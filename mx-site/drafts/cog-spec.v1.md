@@ -6,7 +6,7 @@ description: "The cog file format, artefact model, and verification algorithm."
 version: "1.2"
 status: "proposed"
 date: 2026-04-27
-audience: ["implementers", "reviewers", "community"]
+audience: ["tech", "humans"]
 readiness:
   sufficientFor: ["independent-implementation", "alignment-testing", "community-review"]
   notYetSufficientFor: ["certified-conformance", "production-deployment-without-second-impl"]

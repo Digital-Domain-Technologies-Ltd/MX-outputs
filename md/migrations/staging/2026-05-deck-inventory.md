@@ -6,7 +6,7 @@ created: 2026-05-07
 modified: 2026-05-07
 mx:
   contentType: migration-note
-  audience: [maxine, tom]
+  audience: [humans]
   status: draft
   tags: [bmv, investor, deck, differentiation, frankfurt, inventory, staging]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/migrations/staging/2026-05-deck-inventory.md
