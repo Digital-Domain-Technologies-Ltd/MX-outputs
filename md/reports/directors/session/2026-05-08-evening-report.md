@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed and home prose redesigned"
-description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing; the two long prose blocks on the home page first split into shorter paragraphs and then redesigned with a constrained 65vw prose column, a real section-lead rule, and a framework-card grid for the four-part split (MX, The Gathering, REGINALD, CogNovaMX)."
+title: "Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed and home prose redesigned, audit gate pipeline redesigned with self-repair loop"
+description: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing; the two long prose blocks on the home page first split into shorter paragraphs and then redesigned with a constrained 65vw prose column, a real section-lead rule, and a framework-card grid for the four-part split (MX, The Gathering, REGINALD, CogNovaMX); audit gates 3 & 4 redesigned from blocking/warn-mode to a self-repair loop — repair-report.js patches the report in place and re-runs up to 3 iterations; dotfusion.com report corrections applied and gates passed cleanly."
 author: "Tom Cranstoun"
 created: 2026-05-08
 modified: 2026-05-08
-version: "1.5"
+version: "1.6"
 
 mx:
   status: active
@@ -15,7 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-08-evening-report.md
 ---
 
-# Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, dotfusion.com re-audited
+# Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, dotfusion.com re-audited, audit gate pipeline redesigned
 
 **Date:** 8 May 2026 — Evening
 **Segment:** Evening (since 5pm)
@@ -23,6 +23,8 @@ mx:
 ---
 
 ## Summary
+
+**v1.6 addition:** The audit gate pipeline was redesigned. Gates 3 & 4 (fierce critic and LLM judgment) previously ran in blocking mode then auto-degraded to warn mode after 3 rounds — a design that accumulated 28 invocations against a 3-round cap, never fired any repair, and left the round counters in a permanently-saturated state. The new design is a self-repair loop: the gates run as a pair, find issues, `repair-report.js` patches the report in place using a constrained LLM call (no new facts, no structure changes), then the loop re-runs — up to 3 iterations total per domain. Round counters track total invocations and are capped at 3; both counters stay in sync. All `--warn-fierce`, `--warn-llm`, and `--strict-fierce` flags were removed from the pipeline, the cog, both skills, and all documentation. The audit log is now opened before any other pipeline operation so every error (sweep failures, round-counter parse errors, gate errors) lands directly in the audit CSV with no buffering and no stderr fallback. The dotfusion.com report was corrected (llms.txt status in Appendix D; Priority 4 finding now names the three absent security headers explicitly), round counters were reset to 0, and gates passed cleanly on the first iteration. PDF delivered.
 
 **v1.5 addition:** A second readability pass redesigned the two long prose sections on the mx-site home rather than just re-paragraphing them. Diagnosis after a wide-screen preview: `section-lead` was an inert class (never defined in CSS, so my "leads" rendered as plain body), and `section-inner` had no width cap, so prose ran the full 1600px max-width and read as a wall. The fix lands in `mx-unified.css` as three new rules — `section-prose` caps prose at 65vw / 780px; `section-lead` is now a real 1.5rem white block-level statement; `framework-list` is a 2-column card grid using the existing surface and border tokens, matching the page's visual language. The Introduction was trimmed from seven paragraphs to five (the redundant "CogNovaMX provides X" beat is removed because the offering cards sit directly above; the DNA / memory-pool metaphor compresses to one sentence keeping the kernel). The provenance-layer section now opens with a real lead, sets up the gap, and hands off to a four-card grid (MX, The Gathering, REGINALD, CogNovaMX). EU AI Act becomes its own short paragraph; the Schema.org and agentic-web beats stay as paragraphs but now sit in the constrained column with proper rhythm.
 
@@ -120,6 +122,40 @@ After a full-width preview of the home page, both long prose blocks were broken 
 
 A second wide-screen preview made it visible that paragraph splits alone were not enough. The diagnosis: the `section-lead` class was inert (never defined in CSS, so all my "lead" paragraphs rendered identical to body), and `section-inner` had no width cap (1600px on a wide screen), so even short paragraphs ran across half the screen and read as a slab. The fix is three new rules in `mx-unified.css`. `section-prose` caps text-only sections at `clamp(560px, 65vw, 780px)`, putting line length back into the 65 to 75 character readable range. `section-lead` is now a real rule — 1.5rem, white, weight 500, generous bottom margin — so opening sentences read as section statements instead of body. `framework-list` is a two-column card grid using `--mx-surface` and `--mx-border`, matching the proposition-card pattern the rest of the page uses, and collapsing to one column under 600px. The Introduction trimmed from seven paragraphs to five — the redundant "CogNovaMX provides consultancy, training, books, and tools" paragraph was cut because the offering cards directly above already do that job, and the DNA / memory-pool paragraph compressed to one sentence keeping the kernel. The provenance-layer section now opens with a real lead, sets up the gap in two sentences, hands off to the four cards, then carries three short follow-on paragraphs (EU AI Act forcing function; Schema.org gap-in-miniature; agentic-web economic case). The cache was repurged after the push.
 
+### 17. Audit Gate Pipeline: Self-Repair Loop
+
+The blocking/warn-mode design for gates 3 & 4 was replaced entirely. The problem: round counters were incrementing on every pipeline invocation rather than only when a blocking failure occurred, so 28 invocations had accumulated against a 3-round cap. The gates were silently skipped on every run. Rather than patching the counter logic, the underlying design was changed.
+
+The new design treats gates 3 & 4 as a paired self-repair loop:
+
+1. Fierce critic gate runs (threshold: warn) — issues logged to a findings sidecar
+2. If issues found: `repair-report.js` calls Claude with the full report and all findings, applies the minimum necessary prose edits, writes the result back in place, sets `repaired = true`
+3. LLM judgment gate runs (threshold: warn) — issues logged
+4. If issues found: `repair-report.js` repairs again
+5. Round counter increments once for the iteration
+6. If nothing was repaired in this iteration: break early
+7. After 3 total iterations across all runs for this domain: skip and log
+
+`repair-report.js` is a new script with a strict prompt: do not change any numbers, scores, URLs, headings, section order, or table structure. A safety check aborts if the output is less than 80% of the original length (catches runaway truncation). Both round-counter files are updated together at the end of the loop so they stay in sync.
+
+### 18. Audit Pipeline: initLog at Startup, All Errors to Audit Log
+
+`initLog(logPath)` was moved to immediately after the log path is calculated — before `sweepOriginCaches`, before round-counter reads, before any other operation. Every `catch { /* ignore */ }` block in the pipeline was replaced with a `logEntry` call so errors are visible in the audit CSV. The prior design required a buffer because the log wasn't open yet when round-counter reads ran; the buffer is now gone. `sweepOriginCaches` corrupt-file catches, `parseSidecarFindings` parse errors, verification JSON parse failures, and platform.json parse failures all now write a `warn`-level entry to the audit log.
+
+### 19. Documentation: Removed --warn-fierce / --warn-llm / --strict-fierce
+
+The old flags and "auto-degrade to warn after round 3" language were present in nine files. All were updated to describe the self-repair loop instead:
+
+- `scripts/audit-pipeline.js` — flags and auto-warn logic removed
+- `scripts/cogs/mx-audit.cog.md` — gate table and step 9 instruction updated
+- `.claude/skills/audit-site/skill.md` — gate degradation section replaced
+- `.claude/skills/audit-report/skill.md` — convergence cap section replaced
+- `.claude/skills/regen-report/skill.md` — step 5 updated
+- `mx-audit/README.md` — gate 6 description updated
+- `mx-audit/mx-audit-architecture.cog.md` — gate table and LLM judgment paragraph
+- `mx-audit/prd.md` — gate table row and round-cap paragraph
+- `datalake/knowledge/system/audit-gotchas.md` — entry rewritten
+
 ---
 
 ## By the Numbers
@@ -134,6 +170,10 @@ A second wide-screen preview made it visible that paragraph splits alone were no
 | Commits (v1.4 readability tighten) | 2 (hub + mx-outputs) |
 | Commits (v1.5 home redesign) | 2 (hub + mx-outputs) |
 | New CSS rules (v1.5) | 3 (section-prose, section-lead, framework-list) |
+| Commits (v1.6 gate redesign) | 3 (mx-audit, mx-crm, mx-outputs) + hub pending |
+| Files updated for gate redesign | 9 (pipeline + cog + skills + docs + architecture) |
+| New scripts (v1.6) | 1 (repair-report.js) |
+| Silent error catches fixed | 6 (sweep, round-counter reads, parseSidecarFindings, 3 JSON parses) |
 | Hook bugs fixed | 2 |
 | Audit pages | 5 |
 | Repositories touched | 3 (hub, mx-crm, mx-outputs) |
@@ -157,6 +197,9 @@ A second wide-screen preview made it visible that paragraph splits alone were no
 - mx-site public HTML uses neutral English in prose; British English remains the default for manuscripts, reports, plans, internal docs, and Gathering drafts
 - The em-dash rule for public HTML now bans the spaced-hyphen substitute and the short-follow-on-sentence workaround; substitutes are comma, semicolon, colon, or rephrase, in that order
 - The negation-pivot pattern ("It is not X. It is Y." in any inflection) is now in §6 Forbidden Constructs, applies across all surfaces
+- Audit gates 3 & 4 are no longer blocking judges — they are self-repair agents; the pipeline never blocks on stylistic findings
+- Round counters track total invocations per domain (cap 3); blocking/warn-mode distinction removed permanently
+- All audit pipeline errors log to the audit CSV; no stderr fallback, no silent ignoring
 
 ---
 
@@ -211,4 +254,8 @@ A second wide-screen preview made it visible that paragraph splits alone were no
 | 26686369 | Bump mx-outputs: home-page readability tighten; evening report v1.4 |
 | 62ec26c6 | CHANGELOG v1.96: home-page readability tighten |
 | 526fabe | (mx-outputs) Redesign mx-site home prose sections: typography, line length, framework cards |
-| *pending* | Hub: bump mx-outputs for home redesign + this report v1.5 |
+| cfe5081f | Hub: bump mx-outputs for home redesign + this report v1.5 |
+| 0618cc8 | mx-audit: self-repair loop replaces blocking gate design; add repair-report.js |
+| 6cf33da | mx-crm: dotfusion.com audit run 2026-05-08 — gates passed, PDF generated |
+| 47646d6 | mx-outputs: dotfusion.com audit published outputs 2026-05-08 |
+| *pending* | Hub: audit pipeline redesign + documentation sweep + this report v1.6 |
