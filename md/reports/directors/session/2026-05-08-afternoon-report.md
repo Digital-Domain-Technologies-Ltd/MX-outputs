@@ -50,20 +50,30 @@ Drafted [agency-pilot-brief.md](mx-canon/mx-maxine-lives/businesses/ddt-cognovam
 
 Drafted [compliance-claims-plan.md](mx-canon/mx-maxine-lives/businesses/ddt-cognovamx/compliance-claims-plan.md): the resumption sequence (Stream submission, ratification, steward outreach, agency pilot, auditor validation), a record of decisions made this session that should not be relitigated, and the explicit rule that no outward-facing step starts before the Gathering has ratified the standard. Added a single REMINDERS.md item pointing at the plan so the rule is visible at the start of every future session.
 
+### 6. Markdown-to-PPTX deck-builder pipeline (engine + two production decks)
+
+Built a generic markdown-to-PowerPoint engine that decouples content from visual brand. `bmv-pitch-2026.md` (BMV investor deck) and `talk-deck.md` (Frankfurt CMS Summit talk) now both render through the same engine. Three components: a CLI engine ([`scripts/build-deck.py`](scripts/build-deck.py)), per-deck layout modules declaring slot maps and adapters ([`scripts/lib/pitch_layouts.py`](scripts/lib/pitch_layouts.py) and [`scripts/lib/frankfurt_layouts.py`](scripts/lib/frankfurt_layouts.py)), and hand-designed PowerPoint templates that supply the visual brand. The .md is the canonical content master; per-slide `<!-- layout: NAME -->` HTML-comment hints select the layout; the engine clones the named source slide, applies the slot writes, and saves. Three modes: build (`--md` given), extract (reverse-engineer a stub .md from an existing .pptx), and pick (interactive template chooser when neither is provided). Image hints via standard markdown `![slot](path)` syntax with two slot-spec forms: replace-existing-Picture or add-at-position. The engine preserves slide relationships through the clone (images, hyperlinks, charts, OLE objects all travel correctly). The runbook lives at [`scripts/cogs/deck-builder.cog.md`](scripts/cogs/deck-builder.cog.md) typed `action.scripted` with the `@embedded:build` artefact. Frankfurt build verified end-to-end through the pipeline; original Marp output retained as backup.
+
+### 7. Differentiation pass ripple to mx-site, Protocols, and free-book
+
+The four-objections differentiation work that started with the BMV deck was rippled to the supporting corpus. Published a new blog post — [What Google's web.dev agent guidance does not touch](mx-outputs/mx-site/blog/what-googles-web-dev-agent-guidance-does-not-touch.html) — promoting the staging research note to the public site. Added a JSON-LD/Schema.org boundary paragraph to five mx-site core surfaces (`learn/what-is-mx.html`, `learn/key-principles.html`, `learn/why-mx-matters.html`, `learn/benefits.html`, and `mx-site/index.html`); `mx-principles.html` already had the canonical "MX never duplicates Schema.org" line. Tightened three Protocols chapters: chapter-10 (the SEO/GEO/MX three-beat verbatim), chapter-14 (the Google web.dev (1 May 2026) boundary paragraph in the Agent Protocols introduction), and chapter-22 (the JSON-LD/Schema.org relationship and "MX never duplicates" boundary). Voice consistency check across deck / REGINALD landing / Protocols chapter-00 confirmed all three speak in the same calm, structural voice on the attestation-scope and two-pillar arguments.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits, hub | 7 |
+| Commits, hub (afternoon total) | 14 (7 from compliance-claims phase + 7 from deck-builder & ripple phase) |
 | Commits, mx-shared-gathering | 3 |
-| Commits, mx-outputs (Tom WIP committed in step-commit) | 4 |
-| Files added | 9 (gathering note, fingerprinting update, two vocabularies + index, accreditation programme + annex, agency pilot brief, Protocols chapter 23 + soul, plan) |
-| Lines added (afternoon, hub) | ~1,100 |
+| Commits, mx-outputs | 5 |
+| Files added | 13 (gathering note, fingerprinting update, two vocabularies + index, accreditation programme + annex, agency pilot brief, Protocols chapter 23 + soul, plan, build-deck engine, two layouts modules, deck-builder cog, Frankfurt design template, Google web.dev blog post) |
+| Lines added (afternoon, hub) | ~4,400 |
 | Repositories | 3 |
-| Conformance checks passed | gathering-conformance on both updated drafts; cog:validate on the new business-side files |
+| Conformance checks passed | gathering-conformance on both updated drafts; cog:validate on the new business-side files; cog:sync clean (216 cogs) |
 | YAML errors fixed | 1 (mx-canon/ssot/fields-data.yaml line 942 — was blocking the canon loader) |
+| Decks rendered through the pipeline | 2 (BMV pitch, Frankfurt talk) |
+| Pipeline modes | 3 (build, extract, interactive pick) |
 
 ---
 
@@ -126,4 +136,11 @@ The compliance-verification thesis (regulatory positioning is one of the three c
 | 2dcfcbf | (mx-outputs) BMV pitch deck: file-data reframe and per-slide layout hints |
 | 39151ea | (mx-outputs) BMV deck differentiation Phase 1 briefing |
 | bab6af3 | (mx-outputs) mx-site: Google web.dev blog post and learn-page refresh |
-| _pending_ | Hub: manuscript edits, deck-builder scripts, mx-outputs pointer bump, this report |
+| 57877cd6 | Protocols manuscripts: tighten boundaries against adjacent standards |
+| e12fca38 | Frankfurt talk-deck: per-slide layout hints for the deck-builder engine |
+| 4099bb36 | Frankfurt deck-builder: markdown-to-PPTX engine, layouts, and cog runbook |
+| c9632377 | ADR stream-draft-format-decision: fix audience enum |
+| 4af89974 | Bump mx-outputs: presentations refresh + BMV deck reframe + Google web.dev blog post + afternoon directors report |
+| 53c51dcc | CHANGELOG v1.90: afternoon entry for compliance-claims standard, two seeded vocabularies, accreditation programme, and ratification gate |
+| 7e759d3b | LEARNINGS v4.4: audience enum narrowed; actionType scripted vs sop discipline |
+| _pending_ | Hub: deck-builder cog typology fix (action.scripted alignment), cog registry resync (216 cogs), this report update |
