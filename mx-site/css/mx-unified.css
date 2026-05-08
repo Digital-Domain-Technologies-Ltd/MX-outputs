@@ -344,6 +344,82 @@ a:focus-visible {
   line-height: 1.8;
 }
 
+/* ── Prose columns ──
+ * Constrain text-only sections to a readable line length.
+ * Without this, paragraphs run the full 1600px max-width on wide screens
+ * and read as a wall.
+ */
+.section-inner.section-prose {
+  max-width: clamp(560px, 65vw, 780px);
+}
+
+.section-prose p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  color: var(--mx-text);
+}
+
+.section-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.section-prose .section-title {
+  text-align: left;
+  margin-bottom: 1.25rem;
+}
+
+/* Lead paragraph — opening statement of a prose section */
+.section-lead {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--mx-white);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .section-lead {
+    font-size: 1.25rem;
+  }
+}
+
+/* Framework list — visual cards for short labelled list items
+ * (e.g. the four-part MX / Gathering / REGINALD / CogNovaMX split).
+ */
+.framework-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.framework-list li {
+  background: var(--mx-surface);
+  border: 1px solid var(--mx-border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.0625rem;
+  color: var(--mx-text);
+  line-height: 1.5;
+}
+
+.framework-list li strong {
+  display: block;
+  color: var(--mx-white);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .framework-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── Content container ── */
 main {
   max-width: var(--mx-max-width);
