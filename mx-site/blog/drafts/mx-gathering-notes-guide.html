@@ -129,7 +129,7 @@
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
           <div class="introduction-text" role="presentation">
-            <p class="introduction-message">Machine Experience (MX) is the practice of making anything you publish - a video, a podcast, a PDF, an image, a web page - readable by every machine that consumes it, so no machine has to guess.</p>
+            <p class="introduction-message">Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.</p>
             <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
           </div>
         </div>
@@ -180,7 +180,7 @@
 
         <p>This post is for the internal team only. It is not public and will not be indexed. It exists to give you the context you need before I submit these notes to The Gathering for community review.</p>
 
-        <p>There are now eleven notes. The eleventh - the MX Scope Note - was added on 6 May 2026 and defines the boundary between MX and GEO/AEO. Read it if you are speaking to anyone in marketing or attending the Frankfurt summit.</p>
+        <p>There are now eleven notes. The eleventh, the MX Scope Note, was added on 6 May 2026 and defines the boundary between MX and GEO/AEO. Read it if you are speaking to anyone in marketing or attending the Frankfurt summit.</p>
 
         <p>I want you to read the notes, ask questions, and tell me if anything is unclear or wrong before they go out. That is the whole point of this document.</p>
 
@@ -200,7 +200,7 @@
 
         <ol>
           <li>Start with <strong>Field Definition Pattern</strong> - it sets the structural rules that every other note follows when defining a field. If you skip this one, the others will feel arbitrary.</li>
-          <li>Read <strong>Core Metadata</strong> next - this is the vocabulary floor. Everything else is optional layering on top of it.</li>
+          <li>Read <strong>Core Metadata</strong> next, this is the vocabulary floor. Everything else is optional layering on top of it.</li>
           <li>After those two, read the remaining notes in any order that interests you. If you work with code, Carrier Formats and Cogs are probably most relevant. If you work with content governance, Provenance and Workflow Contracts. If you deal with accessibility or compliance, Document Accessibility. If you are speaking to stakeholders or positioning MX against GEO/AEO, read the Scope Note (note 11) first.</li>
         </ol>
 
@@ -216,13 +216,13 @@
 
         <h3 id="note-2-core-metadata">2. Core Metadata</h3>
 
-        <p>Defines the vocabulary floor for any text-bearing document - markdown, HTML, YAML sidecar, or similar. Zone 1 covers identity fields at the top level (title, author, date, language). Zone 2 covers operational fields in the <code>mx:</code> namespace (status, content type, audience, tags). Three conformance levels: MX Core, MX Standard, MX Complete.</p>
+        <p>Defines the vocabulary floor for any text-bearing document, markdown, HTML, YAML sidecar, or similar. Zone 1 covers identity fields at the top level (title, author, date, language). Zone 2 covers operational fields in the <code>mx:</code> namespace (status, content type, audience, tags). Three conformance levels: MX Core, MX Standard, MX Complete.</p>
 
         <p><a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-core-metadata.md" rel="noopener">Read draft-core-metadata.md on GitHub</a></p>
 
         <h3 id="note-3-cogs">3. Cogs</h3>
 
-        <p>An optional layer on top of Core Metadata. A cog is a <code>.cog.md</code> file with structured YAML frontmatter that makes a document navigable, composable, and runnable by agents. Defines relationship fields (<code>partOf</code>, <code>buildsOn</code>, <code>requires</code>, <code>refersTo</code>) and the magic-header HTML comment format. Documents do not need to be cogs to carry MX metadata - cogs are for the subset of documents that need to be agent-executable.</p>
+        <p>An optional layer on top of Core Metadata. A cog is a <code>.cog.md</code> file with structured YAML frontmatter that makes a document navigable, composable, and runnable by agents. Defines relationship fields (<code>partOf</code>, <code>buildsOn</code>, <code>requires</code>, <code>refersTo</code>) and the magic-header HTML comment format. Documents do not need to be cogs to carry MX metadata, cogs are for the subset of documents that need to be agent-executable.</p>
 
         <p><a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-cogs.md" rel="noopener">Read draft-cogs.md on GitHub</a></p>
 
@@ -240,19 +240,19 @@
 
         <h3 id="note-6-carrier-formats">6. Carrier Formats</h3>
 
-        <p>How MX metadata travels across file formats. Each format has a different mechanism: YAML frontmatter for markdown, <code>&lt;meta&gt;</code> tags for HTML, JSDoc comments for JavaScript, block comments for CSS, shell script header comments, XMP sidecar files, and so on. The note also defines code-specific provenance vocabulary. Deliberately out of scope: function signatures, API surfaces, and test metadata - those belong to JSDoc, docstrings, and OpenAPI.</p>
+        <p>How MX metadata travels across file formats. Each format has a different mechanism: YAML frontmatter for markdown, <code>&lt;meta&gt;</code> tags for HTML, JSDoc comments for JavaScript, block comments for CSS, shell script header comments, XMP sidecar files, and so on. The note also defines code-specific provenance vocabulary. Deliberately out of scope: function signatures, API surfaces, and test metadata, those belong to JSDoc, docstrings, and OpenAPI.</p>
 
         <p><a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-carrier-formats.md" rel="noopener">Read draft-carrier-formats.md on GitHub</a></p>
 
         <h3 id="note-7-workflow-contracts">7. Workflow Contracts</h3>
 
-        <p>Optional fields for cogs that declare an executable workflow - an approval process, a review chain, or a procedural sequence. Defines fields for thresholds, approvers, target environment, and procedures. All fields are conformance level MAY; this note only applies to documents that explicitly declare themselves as workflow contracts.</p>
+        <p>Optional fields for cogs that declare an executable workflow, an approval process, a review chain, or a procedural sequence. Defines fields for thresholds, approvers, target environment, and procedures. All fields are conformance level MAY; this note only applies to documents that explicitly declare themselves as workflow contracts.</p>
 
         <p><a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-workflow-contracts.md" rel="noopener">Read draft-workflow-contracts.md on GitHub</a></p>
 
         <h3 id="note-8-contract-fingerprinting">8. Contract Fingerprinting and Signing</h3>
 
-        <p>Specifies how a cog can be signed to attest provenance and integrity. Defines two fields: <code>contractFields</code> (the top-level keys covered by the signature) and <code>metadataFields</code> (excluded keys). The fingerprint is a deterministic canonical JSON projection hashed with SHA-256. Signing is optional - it attests that a document has not been altered, not that its contents are true.</p>
+        <p>Specifies how a cog can be signed to attest provenance and integrity. Defines two fields: <code>contractFields</code> (the top-level keys covered by the signature) and <code>metadataFields</code> (excluded keys). The fingerprint is a deterministic canonical JSON projection hashed with SHA-256. Signing is optional, it attests that a document has not been altered, not that its contents are true.</p>
 
         <p><a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-contract-fingerprinting.md" rel="noopener">Read draft-contract-fingerprinting.md on GitHub</a></p>
 
@@ -264,13 +264,13 @@
 
         <h3 id="note-10-document-accessibility">10. Document Accessibility</h3>
 
-        <p>How publishers declare and demonstrate accessibility of non-HTML document carriers - primarily PDF, with DOCX and EPUB informative - so AI systems, search engines, and assistive technology can reach them on equal terms. Motivated by the EU Accessibility Act and regulatory gaps not covered by existing HTML-focused standards. References ISO 14289 (PDF/UA), ISO 32000, WCAG 2.1, and EN 301 549.</p>
+        <p>How publishers declare and demonstrate accessibility of non-HTML document carriers, primarily PDF, with DOCX and EPUB informative, so AI systems, search engines, and assistive technology can reach them on equal terms. Motivated by the EU Accessibility Act and regulatory gaps not covered by existing HTML-focused standards. References ISO 14289 (PDF/UA), ISO 32000, WCAG 2.1, and EN 301 549.</p>
 
         <p><a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-document-accessibility.md" rel="noopener">Read draft-document-accessibility.md on GitHub</a></p>
 
         <h3 id="note-11-mx-scope-note">11. MX Scope Note: MX vs GEO</h3>
 
-        <p>Defines the scope of MX in relation to Generative Engine Optimization (GEO) and AI Engine Optimization (AEO). The central claim: MX asks whether any machine can find any document in a corpus, verify it is genuine, and know whether it is current - regardless of which machine, which format, or which access pathway. GEO asks how to increase the probability that a specific class of LLM-powered system cites a specific web page. These are different questions with different answers.</p>
+        <p>Defines the scope of MX in relation to Generative Engine Optimization (GEO) and AI Engine Optimization (AEO). The central claim: MX asks whether any machine can find any document in a corpus, verify it is genuine, and know whether it is current, regardless of which machine, which format, or which access pathway. GEO asks how to increase the probability that a specific class of LLM-powered system cites a specific web page. These are different questions with different answers.</p>
 
         <p>The note also covers: why GEO's causal claims about LLM citation do not hold up (transformers process tokens, not structured tags); the standalone machine readability principle (a document must be interpretable in isolation, without access to its originating website); and the role of Reginald as an active queryable registry rather than a passive markup layer.</p>
 
@@ -285,7 +285,7 @@
         <ul>
           <li>Does not make sense or needs a clearer explanation</li>
           <li>Contradicts something we already do in practice</li>
-          <li>Is missing - a use case or field that should be there but is not</li>
+          <li>Is missing, a use case or field that should be there but is not</li>
           <li>You think will be questioned by the community when it goes for review</li>
         </ul>
 

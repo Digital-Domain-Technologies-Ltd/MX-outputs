@@ -131,7 +131,7 @@
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
           <div class="introduction-text" role="presentation">
-            <p class="introduction-message">Machine Experience (MX) is the practice of making anything you publish - a video, a podcast, a PDF, an image, a web page - readable by every machine that consumes it, so no machine has to guess.</p>
+            <p class="introduction-message">Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.</p>
             <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
           </div>
         </div>
@@ -169,18 +169,18 @@
         </header>
 
 
-<p>A documentation site owner ran two agent-readiness checks in the same week. Cloudflare’s <a href="http://isitagentready.com">isitagentready.com</a> gave her site 33 out of 100. Fern’s Agent Score - powered by the Agent-Friendly Documentation Spec - gave it 100 out of 100. Nothing had changed between the two tests.</p>
+<p>A documentation site owner ran two agent-readiness checks in the same week. Cloudflare’s <a href="http://isitagentready.com">isitagentready.com</a> gave her site 33 out of 100. Fern’s Agent Score, powered by the Agent-Friendly Documentation Spec, gave it 100 out of 100. Nothing had changed between the two tests.</p>
 <p>She was not the victim of a fluke or a bug. Both scores were, in their own terms, accurate. What they measured were two different things, neither of which was “is your site actually useful to AI agents”.</p>
 <p>This post explains why the divergence happened, what it means for anyone trying to make their site more agent-readable, and what a different kind of audit looks like.</p>
 <h2 id="the-structural-problem-with-vendor-led-scoring" tabindex="-1">The structural problem with vendor-led scoring</h2>
 <p>Both tools were built by companies with strong commercial interests in a particular version of the agent-web future.</p>
-<p>Cloudflare built isitagentready to assess whether a site implements the discovery infrastructure that Cloudflare’s tooling reads - <code>.well-known/mcp-server-card.json</code>, <code>.well-known/api-catalog.json</code>, and similar endpoints. If your site implements Cloudflare’s preferred protocols, it scores well. If it does not, it does not. The tool is genuinely useful for understanding how a Cloudflare-centric agent pipeline sees your infrastructure. It is less useful for understanding how most agents see your content.</p>
-<p>Fern built the Agent-Friendly Documentation Spec, and then built afdocs to measure compliance with it. The spec is thoughtfully designed for developer documentation. A site that follows it scores 100. A site on a different platform, or one that follows different conventions that serve agents equally well, may score much lower - not because it is worse for agents, but because it does not implement the specific choices Fern made when writing the spec.</p>
+<p>Cloudflare built isitagentready to assess whether a site implements the discovery infrastructure that Cloudflare’s tooling reads, <code>.well-known/mcp-server-card.json</code>, <code>.well-known/api-catalog.json</code>, and similar endpoints. If your site implements Cloudflare’s preferred protocols, it scores well. If it does not, it does not. The tool is genuinely useful for understanding how a Cloudflare-centric agent pipeline sees your infrastructure. It is less useful for understanding how most agents see your content.</p>
+<p>Fern built the Agent-Friendly Documentation Spec, and then built afdocs to measure compliance with it. The spec is thoughtfully designed for developer documentation. A site that follows it scores 100. A site on a different platform, or one that follows different conventions that serve agents equally well, may score much lower, not because it is worse for agents, but because it does not implement the specific choices Fern made when writing the spec.</p>
 <p>The documentation site that scored 33 and 100 was not broken. She had no Cloudflare infrastructure and no Fern stack. Her content was well-structured and her served HTML was clean. Neither score captured that.</p>
 <h2 id="what-server-logs-actually-show" tabindex="-1">What server logs actually show</h2>
 <p>Credit where it is due: the data point at the center of this section comes from Dachary Carey’s <a href="https://dacharycarey.com/2026/04/18/what-agent-score-can-tell-you/">analysis of agent-readiness scoring tools</a>, published in April 2026. Carey checked server logs for requests to the <code>.well-known</code> endpoints that isitagentready measures. Despite receiving substantial agent traffic, zero requests came in to those endpoints from coding agents.</p>
 <p>The protocols are real. The endpoints exist. Agents just do not read them at scale yet. Acting on an isitagentready score by rushing to implement Cloudflare-specific infrastructure is, right now, optimizing for a tool’s preferences rather than for agent behavior.</p>
-<p>This may change. Standards that begin as vendor proposals can ratify and achieve broad adoption - that is how much of the web was built. But “may become standard” is not the same as “is standard”. Investing in vendor-specific infrastructure before the foundational layers are solid is working in the wrong order.</p>
+<p>This may change. Standards that begin as vendor proposals can ratify and achieve broad adoption, that is how much of the web was built. But “may become standard” is not the same as “is standard”. Investing in vendor-specific infrastructure before the foundational layers are solid is working in the wrong order.</p>
 <h2 id="what-matters-more-than-vendor-scores" tabindex="-1">What matters more than vendor scores</h2>
 <p>Before any <code>.well-known</code> endpoint matters, agents need to be able to read your site. That requires:</p>
 <ul>
@@ -257,7 +257,7 @@
 <p>But neither should drive investment decisions on its own. A score of 33 from a tool that measures Cloudflare-specific infrastructure is not a mandate to build Cloudflare-specific infrastructure. A score of 100 from a spec-compliance tool is not a guarantee that agents can successfully use your site.</p>
 <p>The question to ask is simpler: can an agent fetch my served HTML, parse its structure, find what it needs in <a href="http://Schema.org">Schema.org</a> markup, and discover more of my site through a well-formed llms.txt and robots.txt? Those answers do not require a vendor-specific score. They require an audit.</p>
 <hr>
-<p><em>The Web Audit Suite is the tool behind MX-Audit reports. It measures the metadata stack - semantic HTML, discovery files, <a href="http://Schema.org">Schema.org</a> coverage, WCAG patterns, and MX governance - and surfaces what agents can and cannot access. <a href="https://mx.allabout.network/contact.html">Get in touch</a> if you would like an audit of your site.</em></p>
+<p><em>The Web Audit Suite is the tool behind MX-Audit reports. It measures the metadata stack, semantic HTML, discovery files, <a href="http://Schema.org">Schema.org</a> coverage, WCAG patterns, and MX governance, and surfaces what agents can and cannot access. <a href="https://mx.allabout.network/contact.html">Get in touch</a> if you would like an audit of your site.</em></p>
       </article>
 
       <!-- Post Conclusion: author + CTA + onward links -->

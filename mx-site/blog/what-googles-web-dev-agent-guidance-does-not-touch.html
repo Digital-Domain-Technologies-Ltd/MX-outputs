@@ -130,7 +130,7 @@
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
           <div class="introduction-text" role="presentation">
-            <p class="introduction-message">Machine Experience (MX) is the practice of making anything you publish - a video, a podcast, a PDF, an image, a web page - readable by every machine that consumes it, so no machine has to guess.</p>
+            <p class="introduction-message">Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.</p>
             <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
           </div>
         </div>
@@ -168,7 +168,7 @@
 
         <p>On 1 May 2026 Google's developer platform published a guide titled <em>Build agent-friendly websites</em>, at <a href="https://web.dev/articles/ai-agent-site-ux" rel="noopener">web.dev/articles/ai-agent-site-ux</a>. The article asks developers to think about how AI agents experience their pages, and gives eight specific things to do. The advice is sound. It is also a useful signal about where the conversation is moving: agent-readiness is now a mainstream developer concern, not a niche held by accessibility specialists or structured-data engineers.</p>
 
-        <p>What the guide is, and what it is not, are both worth being precise about. It tells developers how to make a rendered HTML page legible to an agent that arrives at the URL. It does not tell publishers how to make the underlying file - the contract, the policy, the recorded talk, the dataset, the manuscript - legible to any agent that reads it without ever touching the page. That is a different problem, with a different scope, and Google's guide does not pretend otherwise.</p>
+        <p>What the guide is, and what it is not, are both worth being precise about. It tells developers how to make a rendered HTML page legible to an agent that arrives at the URL. It does not tell publishers how to make the underlying file, the contract, the policy, the recorded talk, the dataset, the manuscript, legible to any agent that reads it without ever touching the page. That is a different problem, with a different scope, and Google's guide does not pretend otherwise.</p>
 
         <p>This post is a careful read of what the guide includes, what it deliberately leaves out, and where Machine Experience (MX) picks up the work the guide does not address.</p>
 
@@ -176,17 +176,17 @@
 
         <p>The guide is organized under three section headings: <em>How agents view your site</em>, <em>Build agent-friendly websites</em>, and <em>Next steps</em>. The concrete recommendations are eight specific properties of the rendered HTML page:</p>
         <ol>
-          <li>Every necessary action - human or agent - is reflected in the interface.</li>
+          <li>Every necessary action, human or agent, is reflected in the interface.</li>
           <li>Page layout is stable, so an agent that takes screenshots is not confused by buttons that move between product categories.</li>
           <li>No ghost elements or transparent overlays that hide interactive elements.</li>
-          <li>Actionable elements use semantic HTML - prefer <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> over modified <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>.</li>
+          <li>Actionable elements use semantic HTML, prefer <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> over modified <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>.</li>
           <li>Where semantic HTML is not possible, supply <code>role</code> and <code>tabindex</code>.</li>
           <li>Set <code>cursor: pointer</code> in CSS as an actionability signal.</li>
           <li>Add <code>for</code> on <code>&lt;label&gt;</code> tags to bind them to inputs.</li>
           <li>Interactive elements have a visible area larger than 8 square pixels, so they are not filtered out by visual analysis.</li>
         </ol>
 
-        <p>Every item is a property of the rendered page: the DOM, the accessibility tree, the CSS, the choice of semantic element, the visual stability of the layout. The guide assumes the agent is looking at a page through a browser-like interface - either via the DOM or via screenshots - and tells the developer how to make that page legible.</p>
+        <p>Every item is a property of the rendered page: the DOM, the accessibility tree, the CSS, the choice of semantic element, the visual stability of the layout. The guide assumes the agent is looking at a page through a browser-like interface, either via the DOM or via screenshots, and tells the developer how to make that page legible.</p>
 
         <h2 id="googles-own-equivalence" tabindex="-1">Google's own equivalence</h2>
 
@@ -207,20 +207,20 @@
           <li><strong>Authentication and attestation.</strong> No mention of cryptographic signing of content, of integrity signatures, of publisher identity attached to the asset itself.</li>
           <li><strong>Rights and licensing.</strong> No license metadata. No usage permissions for AI training or inference. No SPDX, no Creative Commons vocabulary, no rights expression.</li>
           <li><strong>Lifecycle.</strong> No versioning, no supersession, no retraction, no deprecation. An agent has no way to know that a previously authoritative document has been replaced.</li>
-          <li><strong>Off-web carriers.</strong> The guidance is HTML-only. It says nothing about PDF, DOCX, EPUB, MP4, audio files, CSV, ICS feeds, RSS, or Markdown - the formats in which most enterprise, government, and scholarly content actually lives.</li>
+          <li><strong>Off-web carriers.</strong> The guidance is HTML-only. It says nothing about PDF, DOCX, EPUB, MP4, audio files, CSV, ICS feeds, RSS, or Markdown, the formats in which most enterprise, government, and scholarly content actually lives.</li>
         </ul>
 
         <p>This is the MX scope. MX picks up exactly where the guide stops.</p>
 
         <h2 id="google-covered-the-page" tabindex="-1">Google covered the page. MX covers the file.</h2>
 
-        <p>That is the framing in one line. Google's 1 May 2026 web.dev guidance is accessibility hygiene for the rendered HTML page - semantic elements, the accessibility tree, stable layouts. MX adds what the page cannot carry on its own: <strong>provenance</strong>, <strong>authentication</strong>, <strong>rights</strong>, <strong>lifecycle</strong>, and the <strong>off-web carriers</strong> (PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, Markdown) where most of the world's content actually lives.</p>
+        <p>That is the framing in one line. Google's 1 May 2026 web.dev guidance is accessibility hygiene for the rendered HTML page, semantic elements, the accessibility tree, stable layouts. MX adds what the page cannot carry on its own: <strong>provenance</strong>, <strong>authentication</strong>, <strong>rights</strong>, <strong>lifecycle</strong>, and the <strong>off-web carriers</strong> (PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, Markdown) where most of the world's content actually lives.</p>
 
         <p>MX is not a competitor to Google's guidance, and the guidance is not a competitor to MX. They share an audience, they share a goal, and they sit at different layers of the same stack. A site that follows the web.dev guide and carries MX declarations is doing both jobs. A site that does only one is doing half.</p>
 
         <h2 id="what-this-means" tabindex="-1">What this means for your content</h2>
 
-        <p>If your job is web - design, development, performance - the web.dev guide is essential reading. Implement what it says. The eight recommendations are real work and real wins.</p>
+        <p>If your job is web, design, development, performance, the web.dev guide is essential reading. Implement what it says. The eight recommendations are real work and real wins.</p>
 
         <p>After that, ask the harder question: what happens when an agent reads your content where the page is not present? The contract attached to a procurement portal email. The policy file lifted into a regulatory submission. The training video extracted from your course library. The dataset published once and indexed forever. Each of those is a file an agent will read in isolation, away from the page that gave it context.</p>
 
