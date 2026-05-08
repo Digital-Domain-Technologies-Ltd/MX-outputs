@@ -19,39 +19,42 @@ mx:
 ---
 
 ## Slide 1: Headline
+<!-- layout: cover -->
 
 **MX: The machine layer for meaning.**
 
-A universal document runtime. Built on open standards. Operational at alpha.
+A universal file runtime. Built on open standards. Operational at alpha.
 
 *Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
 
 ---
 
 ## Slide 2: The Problem
+<!-- layout: problem-cards -->
 
 **Machines cannot reliably act on the things you publish — videos, podcasts, PDFs, images, web pages — when they are designed for human eyes alone.**
 
 Every enterprise AI deployment hits the same four failures:
 
 - **Wasted inference** — agents recompute meaning that should already be explicit
-- **Energy cost** — ambiguous documents become a compute problem at scale
+- **Energy cost** — ambiguous files become a compute problem at scale
 - **Hallucinations** — agents guess when source material is ambiguous (an infrastructure problem, not a model problem)
-- **No provenance** — no way to verify a document's origin or whether it has been altered
+- **No provenance** — no way to verify a file's origin or whether it has been altered
 
-This is not a web problem. It's a document problem. Contracts, policies, manufacturing specs, government archives, scientific papers — the substrate of every enterprise.
+This is not a web problem. It's a file problem. Contracts, policies, manufacturing specs, government archives, scientific papers — the substrate of every enterprise.
 
 *Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
 
 ---
 
 ## Slide 3: The Insight
+<!-- layout: insight-rows -->
 
 **47 years in content systems. The work is the moat.**
 
 - Led the world's largest enterprise content programmes — Nissan-Renault (200+ websites, 30 languages), the BBC, Ford, McLaren
 - At EE: 8,000 pages across three brand CMSs in 24 days · £450,000 saved
-- Published the diagnosis in 2024: documents lack machine-native structure, state, intent, and provenance
+- Published the diagnosis in 2024: files lack machine-native structure, state, intent, and provenance
 - Every enterprise solves that from scratch — MX is the infrastructure layer so no one has to solve it again
 
 *Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
@@ -59,12 +62,17 @@ This is not a web problem. It's a document problem. Contracts, policies, manufac
 ---
 
 ## Slide 4: What MX Is
+<!-- layout: 3-card-grid -->
 
 **Make anything you publish — a video, a podcast, a PDF, an image, a web page — readable by machines.**
 
+![card-1-icon](assets/image1.png)
+![card-2-icon](assets/image2.png)
+![card-3-icon](assets/image3.png)
+
 MX is the framework that makes that work for both humans and machines. Three components:
 
-- **COGs** — portable, self-describing documents. Structured metadata, human-readable content. The artefact.
+- **COGs** — portable, self-describing files. Structured metadata, human-readable content. The artefact.
 - **REGINALD** — Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation. Tells machines where COGs live and attests their integrity.
 - **The Gathering** — independent standards body. Structurally separate from any commercial entity.
 
@@ -75,6 +83,7 @@ Built on Markdown, YAML, and HTML. Nothing proprietary. Nothing to install. Noth
 ---
 
 ## Slide 5: What MX Is Not
+<!-- layout: 5-row-keyword-grid -->
 
 **Four collapses MX is not. Each rebuttal is one sentence.**
 
@@ -90,10 +99,11 @@ MX is a superset. Whatever you have already done in SEO, GEO, JSON-LD, or access
 ---
 
 ## Slide 6: How It Works
+<!-- layout: 3-column-flow -->
 
 **This isn't metadata that describes. It's metadata that executes.**
 
-Document → registered COG → REGINALD index → agent reads attested metadata → executes safely.
+File → registered COG → REGINALD index → agent reads attested metadata → executes safely.
 
 - REGINALD works the way DNS works for domains — points to where the COG lives, attests it hasn't been altered
 - It does not hold the COG — the publisher does
@@ -108,10 +118,11 @@ Document → registered COG → REGINALD index → agent reads attested metadata
 ---
 
 ## Slide 7: What MX Delivers
+<!-- layout: what-mx-delivers -->
 
 **Three concrete benefits. One mechanism: attestation.**
 
-- **Fewer hallucinations.** Agents that read attested documents hallucinate less — they have verified facts to cite rather than inferences to make.
+- **Fewer hallucinations.** Agents that read attested files hallucinate less — they have verified facts to cite rather than inferences to make.
 - **Lower token consumption and energy draw.** Fewer inference steps per file, multiplied across every agent that reads every file.
 - **Regulatory positioning.** EU AI Act, European Accessibility Act, digital-records legislation across multiple jurisdictions converge on provenance requirements. Attestation shifts from competitive advantage to regulatory expectation.
 
@@ -122,6 +133,7 @@ Each benefit compounds across every agent, every read, every file. The mechanism
 ---
 
 ## Slide 8: Where MX Sits in the Bare Metal Stack
+<!-- layout: stack-table -->
 
 **Bare Metal owns the physical stack. MX is the missing logical layer for what enterprises publish.**
 
@@ -132,7 +144,7 @@ Each benefit compounds across every agent, every read, every file. The mechanism
 | Rack hardware + OS | Oxide |
 | Heterogeneous orchestration | Callosum |
 | Sovereign AI runtime | MeetKai |
-| **Document-native machine runtime** | **MX** |
+| **File-native machine runtime** | **MX** |
 | Applications, agents, robots | Everything above |
 
 *Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
@@ -140,6 +152,7 @@ Each benefit compounds across every agent, every read, every file. The mechanism
 ---
 
 ## Slide 9: Why Now
+<!-- layout: why-now-cards -->
 
 **Standards that win at this velocity are already published, governed, and operational when the wave arrives. MX is.**
 
@@ -156,6 +169,7 @@ Adobe Holiday 2025: 700% growth in AI-referred retail traffic. AI-referred users
 ---
 
 ## Slide 10: Traction
+<!-- layout: traction-cards -->
 
 **Not a prototype — a functioning ecosystem with growing institutional validation.**
 
@@ -163,16 +177,16 @@ Adobe Holiday 2025: 700% growth in AI-referred retail traffic. AI-referred users
 - **REGINALD alpha live** — 89 COGs, 2 test publishers, Ed25519 attestation; Leica Microsystems audit, 14,264 URLs across 10 locales
 - **The Gathering Administration LTD** — incorporated as an independent standards body
 - **CMS Summit Frankfurt this month** — presenting to 200 platform practitioners; second-day workshop confirmed
-- **IDHL sponsorship confirmed** — team training programme agreed, July 2026
-- **Mozilla Fest Barcelona invited (October 2026)** — Mozilla in conversation as sponsor; Germany and Canada in active discussion
+- **Sponsors and speaking** — IDHL sponsorship confirmed (team training July 2026); Mozilla Fest Barcelona invited for October 2026 with Mozilla in conversation as sponsor; Germany and Canada in active discussion
 
 *Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
 
 ---
 
 ## Slide 11: Competitive Position
+<!-- layout: competitive-position -->
 
-**Every competitor raised on an agent-OS narrative. None is document-native. The moat is architecture.**
+**Every competitor raised on an agent-OS narrative. None is file-native. The moat is architecture.**
 
 Positioning (2×2): Open standards vs proprietary · Executable runtime vs queried data
 
@@ -180,7 +194,7 @@ Positioning (2×2): Open standards vs proprietary · Executable runtime vs queri
 - Bottom-right (open + queried): GitBook, AGENTS.md, llms.txt
 - Bottom-left (proprietary + queried): Contentful, Notion, Adobe AEM, Sitecore, Letta
 
-| Company | Funding | Document-native | Open standards | Executable |
+| Company | Funding | File-native | Open standards | Executable |
 |---|---|---|---|---|
 | /dev/agents | $56M @ $500M | No | No | No |
 | Letta | $10M @ $70M | Partial | Partial | No |
@@ -193,8 +207,9 @@ Positioning (2×2): Open standards vs proprietary · Executable runtime vs queri
 ---
 
 ## Slide 12: Local REGINALD Machine
+<!-- layout: pricing-table -->
 
-**Subtitle:** REGINALD for organisations that won't put their documents on the internet. £25,000 per server per year.
+**Subtitle:** REGINALD for organisations that won't put their files on the internet. £25,000 per server per year.
 
 | Organisation | Servers | ACV |
 |---|---|---|
@@ -211,6 +226,7 @@ Positioning (2×2): Open standards vs proprietary · Executable runtime vs queri
 ---
 
 ## Slide 13: Founder Contribution
+<!-- layout: founder-contribution -->
 
 **Subtitle:** We've invested significantly in proving the core concepts before seeking outside capital.
 
@@ -220,9 +236,7 @@ Positioning (2×2): Open standards vs proprietary · Executable runtime vs queri
 | Conference travel and registration | £8,000–£15,000 |
 | Foregone consultancy income | £130,000–£264,000 |
 | Below-market time on framework, books, standards | £100,000–£200,000 |
-| Conference appearances (2.5 years) | £30,000 |
-| Podcast appearances (2.5 years) | £15,000 |
-| Community engagement (2.5 years) | £15,000 |
+| Conferences · podcasts · community (2.5y) | £60,000 |
 | **Total documented founder contribution** | **£358,000–£599,000** |
 
 *Footer: Tom Cranstoun | info@cognovamx.com | https://allabout.network*
@@ -230,6 +244,7 @@ Positioning (2×2): Open standards vs proprietary · Executable runtime vs queri
 ---
 
 ## Slide 14: The Ask
+<!-- layout: the-ask -->
 
 **Pre-Series A infrastructure round. Comfortable with a range; lead investor to shape the structure.**
 
@@ -248,6 +263,7 @@ Use of funds:
 ---
 
 ## Slide 15: Connect
+<!-- layout: connect -->
 
 **The machine layer for meaning — for everything you publish, everywhere, for every machine that reads it.**
 
