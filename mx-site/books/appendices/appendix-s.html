@@ -138,7 +138,7 @@ Content Ratio</a></li>
 Bloat</a></li>
 <li><a href="#head-weight" id="toc-head-weight">14. Head Weight</a></li>
 <li><a href="#how-to-use-this-catalogue"
-id="toc-how-to-use-this-catalogue">How to use this catalogue</a></li>
+id="toc-how-to-use-this-catalog">How to use this catalog</a></li>
 <li><a href="#acknowledgements"
 id="toc-acknowledgements">Acknowledgements</a></li>
 </ul></li>
@@ -147,11 +147,11 @@ id="toc-acknowledgements">Acknowledgements</a></li>
 <div data-content-type="appendix">
 <h2 id="appendix-s-the-fourteen-agent-reading-failure-modes">Appendix S:
 The Fourteen Agent Reading Failure Modes</h2>
-<p>This appendix is a reference catalogue. Each entry describes one way
+<p>This appendix is a reference catalog. Each entry describes one way
 an AI agent’s pipeline can silently fail to read web content correctly —
 that is, fail in a way that the publisher cannot see, the agent does not
 report, and the user discovers only when an answer turns out to be
-wrong. The catalogue is paired with <strong>Appendix N: Anti-Patterns
+wrong. The catalog is paired with <strong>Appendix N: Anti-Patterns
 Catalog</strong>, which describes failures originating on the publisher
 side. Where Appendix N asks “what does the publisher get wrong?”,
 Appendix S asks “what does the agent’s pipeline get wrong, even when the
@@ -159,12 +159,12 @@ publisher is doing the right things?”</p>
 <p>The methodology for detecting these failure modes against a real
 agent — using canary tokens, two-phase scoring, and publisher-controlled
 fixtures — is set out in <strong>Appendix R: Testing Agent
-Comprehension</strong>. This appendix is the catalogue Appendix R refers
+Comprehension</strong>. This appendix is the catalog Appendix R refers
 to. Each entry follows the same template: the failure mode’s name, the
 symptom an agent reports (or fails to report), why agents fail on it,
-how a publisher can detect it from served HTML or HTTP behaviour, and
+how a publisher can detect it from served HTML or HTTP behavior, and
 how to fix or mitigate it on the publisher side.</p>
-<p>The original catalogue described ten failure modes. The eleventh —
+<p>The original catalog described ten failure modes. The eleventh —
 URL Encoding Mismatch — was added after a production audit found that
 twelve URLs in a major brand’s sitemap were silently unfetchable to
 every standards-compliant AI agent because the URL slugs contained raw
@@ -172,10 +172,10 @@ non-ASCII characters that the JavaScript <code>URL</code> constructor
 (and equivalent libraries in every other language) reject as invalid
 before any HTTP request can be made. The pages existed and served
 correctly when fetched with a properly-encoded URL; the sitemap simply
-did not encode them. New failure modes will be added to this catalogue
+did not encode them. New failure modes will be added to this catalog
 as they are validated against more than one publisher and more than one
 agent.</p>
-<p>The order of the catalogue runs from the most pipeline-destructive
+<p>The order of the catalog runs from the most pipeline-destructive
 failures (truncation, SPA shell) to the more contained ones (generic
 headings, URL encoding). The order is not a priority ranking — every
 publisher should test against all of them — but it is a useful order to
@@ -203,7 +203,7 @@ a large total size with a late content-start position.</p>
 the document. Reduce non-content bytes — collapse inline style blocks,
 move scripts to the end, eliminate boilerplate. Where a long page is
 unavoidable, split it into shorter pages linked from a parent page, and
-make the parent page summarise the most important points so that an
+make the parent page summarize the most important points so that an
 agent that fetches only the parent has the gist. For very long reference
 pages, publish a short companion summary at a separate URL and link to
 it from the long page; agents that hit the cap on the long page can be
@@ -431,7 +431,7 @@ about Azure. The agent has read all three sections but cannot tell them
 apart.</p>
 <p><strong>Why agents fail.</strong> When sections share generic heading
 text — “Step 1”, “Step 2”, “Configuration”, “Installation”, “Overview” —
-the relevance layer cannot distinguish them. The summarisation pass
+the relevance layer cannot distinguish them. The summarization pass
 strips away the surrounding context (the parent heading that said “AWS”,
 “GCP”, “Azure”) and forwards the generic heading and its content. The
 reasoning model sees three “Step 1” sections and conflates them. Even
@@ -449,7 +449,7 @@ parents, which is the strongest signal that conflation is likely.</p>
 self-qualifying. Instead of <code>Step 1</code> under
 <code>AWS Setup</code>, write
 <code>AWS Step 1: Create an S3 Bucket</code>. The repetition is not
-redundant — it survives the summarisation pass. Where the page documents
+redundant — it survives the summarization pass. Where the page documents
 the same procedure for multiple platforms, give each platform its own
 page rather than nesting them as siblings under a generic parent. The
 agent can then reach each platform’s procedure through a clean,
@@ -460,7 +460,7 @@ entirely from the page’s navigation, breadcrumbs, or boilerplate. The
 actual content of the page is technically present, but it begins so far
 into the document that agents working from the first chunk of the
 response never reach it.</p>
-<p><strong>Why agents fail.</strong> When a relevance layer summarises a
+<p><strong>Why agents fail.</strong> When a relevance layer summarizes a
 page, it weights early content more heavily than late content. Pages
 that open with extensive navigation, breadcrumbs, taxonomy widgets,
 search bars, advertising slots, and category headers push the actual
@@ -560,7 +560,7 @@ skipping the substance. The agent appears to have read the page but what
 it surfaces is chrome.</p>
 <p><strong>Why agents fail.</strong> The served HTML carries so much
 overhead — scripts, styles, images, SVG, meta blocks — that the
-prose-to-overhead ratio falls below 30%. Agents that summarise under
+prose-to-overhead ratio falls below 30%. Agents that summarize under
 context-window pressure weight all bytes equally; when 70% of the bytes
 are overhead, 70% of the summary becomes overhead. The page is not
 truncated, not SPA-shelled, not tab-hidden — it is simply byte-dominated
@@ -573,14 +573,14 @@ body text only — remove <code>&lt;head&gt;</code>,
 <code>&lt;source&gt;</code>, <code>&lt;svg&gt;</code>, and all
 <code>style=""</code> attributes — and compute the remaining bytes as a
 ratio of the full served document. Pages where the ratio is below 30%
-are at risk. Threshold was chosen to match observed behaviour: below 30%
+are at risk. Threshold was chosen to match observed behavior: below 30%
 the summary begins drifting toward chrome; above 30% the summary is
 reliably about the content.</p>
 <p><strong>Publisher-side fix.</strong> Externalise inline
 <code>&lt;style&gt;</code> blocks to linked stylesheets, externalise
 inline executable <code>&lt;script&gt;</code> blocks to linked JS files
 (JSON-LD and importmap blocks stay inline — they are data, not
-behaviour), trim redundant <code>&lt;meta&gt;</code> and
+behavior), trim redundant <code>&lt;meta&gt;</code> and
 <code>&lt;link&gt;</code> tags, and eliminate SVG sprites that duplicate
 rendered content. The goal is not aesthetic minification; it is giving
 the prose a fighting share of the byte budget.</p>
@@ -651,24 +651,24 @@ CSS/JS, externalise (fixes Inline Tag Bloat simultaneously). If the body
 is the problem — short article, heavy JSON-LD — either accept the head
 weight (legitimate trade-off for entity-rich content) or expand the body
 with actual content.</p>
-<h2 id="how-to-use-this-catalogue">How to use this catalogue</h2>
+<h2 id="how-to-use-this-catalog">How to use this catalog</h2>
 <p>A publisher can use this appendix in three ways. The first is as an
 audit checklist: walk through all fourteen failure modes when evaluating
 a site, either manually or by running the MX Web Audit Suite, and
 address any that fire. The second is as a debugging reference: when an
 AI agent reports incorrect or missing content, find the failure mode
 that matches the symptom and apply the fix. The third is as a design
-rubric for new content: review the catalogue before publishing a new
+rubric for new content: review the catalog before publishing a new
 page, and structure the page so that none of the failure modes
 apply.</p>
-<p>The catalogue is not exhaustive. Pipeline failures evolve as agent
+<p>The catalog is not exhaustive. Pipeline failures evolve as agent
 architectures change, and new failure modes will emerge as new fetch
-tools, summarisation techniques, and tool-calling protocols are
-deployed. The modes catalogued here are the ones currently observed
+tools, summarization techniques, and tool-calling protocols are
+deployed. The modes cataloged here are the ones currently observed
 across multiple agents and multiple sites; new entries will be added as
 they are validated against more than one agent and more than one
 publisher. The eleventh mode, URL Encoding Mismatch, was added to the
-catalogue after a production audit found twelve unfetchable sitemap URLs
+catalog after a production audit found twelve unfetchable sitemap URLs
 at a major brand and traced every one to the same root cause; the
 failure mode had been theoretically obvious but had not been observed at
 scale until the audit tooling started doing real HEAD requests rather
@@ -678,7 +678,7 @@ measurable form, see <strong>Appendix R: Testing Agent
 Comprehension</strong>. For the publisher-side anti-patterns that create
 similar failures upstream, see <strong>Appendix N: Anti-Patterns
 Catalog</strong>. For the validation layers an agent creator should
-build to defend against the failures catalogued here, see
+build to defend against the failures cataloged here, see
 <strong>Chapter 13: What Agent Creators Must Build</strong>,
 particularly the section on testing and validation harnesses.</p>
 <h2 id="acknowledgements">Acknowledgements</h2>
@@ -686,7 +686,7 @@ particularly the section on testing and validation harnesses.</p>
 Dachary Carey’s article “Designing an Agent Reading Test”, published 6
 April 2026, which named the conditions and demonstrated each one against
 current agents using publisher-controlled test fixtures. The treatment
-here adapts Carey’s catalogue into a publisher-side reference and
+here adapts Carey’s catalog into a publisher-side reference and
 connects each entry to a corresponding audit metric in the MX Web Audit
 Suite. The original observations of those ten modes are hers; the
 adaptation, the audit metrics, and the cross-references are mine.</p>
@@ -696,7 +696,7 @@ link and sitemap health checking, ran against a major brand’s marketing
 site, and found twelve URLs in the brand’s sitemap that no
 standards-compliant AI agent could fetch. The root cause was the same in
 every case — raw non-ASCII characters in the URL slug — and the pattern
-was distinctive enough to warrant its own entry in the catalogue. The
+was distinctive enough to warrant its own entry in the catalog. The
 discovery confirmed something Carey’s original article warns about
 explicitly: failure modes that are theoretically obvious can remain
 invisible until tooling stops defaulting to success.</p>
@@ -706,10 +706,10 @@ production observation of the MX self-audits on mx.allabout.network.
 Body Content Ratio surfaced when pages with rich Schema.org entity
 graphs scored well on every other dimension yet produced summaries
 dominated by navigation. Inline Tag Bloat surfaced when the
-agent-reading failure-mode analyser initially counted JSON-LD blocks as
+agent-reading failure-mode analyzer initially counted JSON-LD blocks as
 executable JavaScript (50/50 pages flagged on mx.allabout.network before
 the regex was corrected to exclude <code>application/ld+json</code>);
-the fixed analyser then surfaced two genuine inline blocks that were
+the fixed analyzer then surfaced two genuine inline blocks that were
 externalised and pushed scores into the Excellent band. Head Weight
 pairs with Boilerplate Burial as a composable ratio — one measures
 chrome inside the body, the other measures pre-body byte weight — so a

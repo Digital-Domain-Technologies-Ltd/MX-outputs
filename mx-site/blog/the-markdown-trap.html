@@ -170,7 +170,7 @@
         </div>
       </header>
 
-<p>In February 2026, Cloudflare shipped a feature called Markdown for Agents. The pitch is token efficiency: convert HTML to Markdown at the CDN edge so AI agents receive smaller payloads. Cloudflare cites approximately 80% token reduction. The logic is seductive, and for a certain class of content it is correct. For another class — the structured, governed web content that organisations are actively building for the machine-readable future — it is exactly backwards.</p>
+<p>In February 2026, Cloudflare shipped a feature called Markdown for Agents. The pitch is token efficiency: convert HTML to Markdown at the CDN edge so AI agents receive smaller payloads. Cloudflare cites approximately 80% token reduction. The logic is seductive, and for a certain class of content it is correct. For another class — the structured, governed web content that organizations are actively building for the machine-readable future — it is exactly backwards.</p>
 
 <p>I fetched a single page twice to see what the difference actually looks like.</p>
 
@@ -202,7 +202,7 @@
 
 <p>The 32% reduction sounds compelling. It looks less compelling when you examine what was removed. Those 10,346 bytes were almost entirely structured metadata: governance tags, Open Graph declarations, discovery links, semantic structure, machine-readable dates. The prose — the words a human reads — was almost fully preserved.</p>
 
-<p>An agent optimising for token efficiency by requesting Markdown has made a trade: slightly fewer tokens on the payload, in exchange for losing the metadata that tells it what kind of resource this is, what it may do with the content, how to attribute it, and where to go next. This is not efficiency. It is discarding the instrument panel to reduce the weight of the aircraft.</p>
+<p>An agent optimizing for token efficiency by requesting Markdown has made a trade: slightly fewer tokens on the payload, in exchange for losing the metadata that tells it what kind of resource this is, what it may do with the content, how to attribute it, and where to go next. This is not efficiency. It is discarding the instrument panel to reduce the weight of the aircraft.</p>
 
 <p>The efficiency argument applies cleanly to a different category of content: plain text documents where the content is the message. A <code>llms.txt</code> file, a plain article with no governance metadata, a README. For these, Markdown is often the right format. The content has no structured metadata layer to lose. The prose is what the agent came for, and Markdown delivers prose efficiently.</p>
 
@@ -216,17 +216,17 @@
 
 <p>The MX governance framework places machine-readable policy onto web pages specifically so that agents can read that policy and act accordingly. An agent framework that systematically strips those signals by requesting Markdown has undermined the entire governance layer without knowing it did so. The page author worked to specify what agents may do. The agent framework worked to read pages efficiently. Both worked correctly within their own logic. The combination produced a silent failure.</p>
 
-<p>Silent failures are the hardest kind to fix, because no alarm sounds. The governance layer is absent, but the content appears to have been delivered. The attribution requirement is there in the HTML, visible to anyone who views the page source, honoured by agents that request HTML — and invisible to agents that request Markdown.</p>
+<p>Silent failures are the hardest kind to fix, because no alarm sounds. The governance layer is absent, but the content appears to have been delivered. The attribution requirement is there in the HTML, visible to anyone who views the page source, honored by agents that request HTML — and invisible to agents that request Markdown.</p>
 
 <h2 id="the-opposite-failure" tabindex="-1">The opposite failure</h2>
 
 <p>The Cloudflare mechanism strips content from what AI agents receive. A different class of tooling runs in the opposite direction.</p>
 
-<p>Adobe LLM Optimizer's "Optimize at Edge" feature detects AI agent User-Agents at the CDN edge and routes those requests to a separate optimisation backend. What comes back is not the original page. It is the original page plus AI-generated FAQs, page-level summaries, and rewritten sections produced by Adobe's backend — none of which was written by the publishing organisation. Human visitors continue to receive the original unmodified content. The response header <code>x-edgeoptimize-request-id</code> confirms when the optimised version was applied.</p>
+<p>Adobe LLM Optimizer's "Optimize at Edge" feature detects AI agent User-Agents at the CDN edge and routes those requests to a separate optimization backend. What comes back is not the original page. It is the original page plus AI-generated FAQs, page-level summaries, and rewritten sections produced by Adobe's backend — none of which was written by the publishing organization. Human visitors continue to receive the original unmodified content. The response header <code>x-edgeoptimize-request-id</code> confirms when the optimized version was applied.</p>
 
-<p>This is cloaking. The AI agent is reading a version of the page that no human at the publishing organisation authored or approved. The structured data on the original page — the JSON-LD declarations, the robots directives, the canonical URL — was written for the original content. It does not cover injected FAQs generated automatically by a third-party backend. An AI agent reading the augmented page has no way to distinguish which content is original and which is synthetic, and the page's machine-readable signals offer no guidance on the injected material.</p>
+<p>This is cloaking. The AI agent is reading a version of the page that no human at the publishing organization authored or approved. The structured data on the original page — the JSON-LD declarations, the robots directives, the canonical URL — was written for the original content. It does not cover injected FAQs generated automatically by a third-party backend. An AI agent reading the augmented page has no way to distinguish which content is original and which is synthetic, and the page's machine-readable signals offer no guidance on the injected material.</p>
 
-<p>The citation loop this creates is worth examining. Adobe measures brand visibility by tracking how often AI systems cite pages that have been through its optimiser. When an AI system cites an injected FAQ as if it were original content from the publisher, that registers as a successful outcome. The publisher is measured as visible for claims Adobe's backend generated. Whether those claims are accurate, authorised, or consistent with the rest of the site's content is outside the measurement.</p>
+<p>The citation loop this creates is worth examining. Adobe measures brand visibility by tracking how often AI systems cite pages that have been through its optimiser. When an AI system cites an injected FAQ as if it were original content from the publisher, that registers as a successful outcome. The publisher is measured as visible for claims Adobe's backend generated. Whether those claims are accurate, authorized, or consistent with the rest of the site's content is outside the measurement.</p>
 
 <p>The structural problem is symmetric. Cloudflare removes what the publisher put there. Adobe adds what the publisher did not put there. In both cases, the AI agent reads a version of the page that differs from what the publisher authored, and the publisher's structured signals do not accurately describe what the agent received.</p>
 
@@ -258,12 +258,12 @@
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organization sits on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>

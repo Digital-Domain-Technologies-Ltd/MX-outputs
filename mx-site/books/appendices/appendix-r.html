@@ -147,7 +147,7 @@ was published. The two questions look symmetric but they are not.
 Building a well-structured page is a craft activity with stable rules.
 Testing whether an agent read that page is an empirical activity against
 a moving target — agents change their fetching pipelines, their
-summarisation layers, and their behavioural defaults from one model
+summarization layers, and their behavioral defaults from one model
 release to the next. A test that worked in February may report different
 numbers in April against the same fixture, and the difference may have
 nothing to do with the page.</p>
@@ -160,7 +160,7 @@ into a publisher-side framework: what to measure, what to ignore, and
 what to do when the agent and the test disagree.</p>
 <h2 id="why-test-the-agent-not-just-the-site">Why test the agent, not
 just the site</h2>
-<p>Appendix N catalogues anti-patterns from the publisher side — the
+<p>Appendix N catalogs anti-patterns from the publisher side — the
 fourteen most common mistakes that break agent compatibility. Appendix I
 documents a single pipeline failure in detail, the £203,000 cruise
 pricing error. Together they answer the question “what does the
@@ -173,7 +173,7 @@ Schema.org, MX governance tags, an llms.txt declaration, and a perfect
 heading hierarchy — and an agent can still report that the page does not
 contain information that is plainly there. The reasons are pipeline
 reasons, not content reasons. The agent’s fetch tool may have truncated
-the page at 75 kilobytes. The agent’s summarisation layer may have
+the page at 75 kilobytes. The agent’s summarization layer may have
 decided the relevant section was off-topic and dropped it. The agent’s
 tool-calling protocol may have substituted a paraphrase for the original
 text before the reasoning model ever saw the words. None of these
@@ -186,14 +186,14 @@ structure the page so that critical content survives compression.
 Testing agent comprehension is therefore not adversarial. It is the
 feedback loop that tells publishers which of their pages are getting
 through the pipeline intact and which are arriving at the reasoning
-model in a form their authors would not recognise.</p>
+model in a form their authors would not recognize.</p>
 <h2 id="the-relevance-layer">The relevance layer</h2>
 <p>The first concept this appendix introduces is the relevance layer.
 When an AI agent fetches a web page, the bytes of that page rarely
 arrive at the reasoning model unchanged. Between the HTTP response and
 the language model that produces the user-facing answer, there is almost
 always an intermediary process — sometimes called retrieval, sometimes
-summarisation, sometimes context compression — that filters, reshapes,
+summarization, sometimes context compression — that filters, reshapes,
 or paraphrases the page’s content to fit the agent’s context window and
 the agent’s interpretation of the user’s question. This intermediary is
 the relevance layer.</p>
@@ -221,20 +221,20 @@ report.</p>
 through the relevance layer’s filter, not just in the raw page. Synonyms
 matter. Rephrasing the same idea in three different ways inside one
 section is not redundant — it is insurance against a relevance layer
-that recognises only one of the three phrasings. Heading text matters
+that recognizes only one of the three phrasings. Heading text matters
 more than heading hierarchy: a heading that uses the same vocabulary as
 the user’s likely question is more likely to be retained. And
 single-word qualifiers (“only”, “always”, “never”) matter because they
-are the kind of detail that summarisation layers strip first.</p>
+are the kind of detail that summarization layers strip first.</p>
 <p>Designing for the relevance layer is different from designing for
 accessibility, for SEO, or for human readers. It is its own discipline,
 and the testing methods in this appendix exist to make that discipline
 measurable.</p>
 <h2 id="the-unreliable-narrator">The unreliable narrator</h2>
 <p>The second concept is the unreliable narrator problem. AI agents are
-not reliable reporters of their own behaviour. When asked “did you read
+not reliable reporters of their own behavior. When asked “did you read
 this page?” an agent will, in practice, answer “yes” even when its fetch
-tool returned a truncated response, when its summarisation layer dropped
+tool returned a truncated response, when its summarization layer dropped
 the relevant section, or when its rendering pipeline failed entirely.
 This is not deceit. It is the same agreeable pattern-matching that
 produces hallucinated citations: the agent’s training rewards smooth,
@@ -246,17 +246,17 @@ section”. Both statements may be true. Only one of them is a normal
 English sentence.</p>
 <p>A second symptom of the unreliable narrator is internally
 contradictory self-reports. An agent may state, in the same response,
-that it followed a redirect and then describe behaviour consistent with
+that it followed a redirect and then describe behavior consistent with
 not following that redirect. It may report a count of items found
 (twenty-five) and then list a different count (sixteen). It may claim to
 have read all nine sections of a page and then fail to answer questions
 about the third section. These contradictions are not lies. They are the
 result of stitching together outputs from different sub-systems — fetch
-tool, summarisation layer, reasoning model — none of which has
+tool, summarization layer, reasoning model — none of which has
 authoritative knowledge of what the others did.</p>
 <p>The methodological consequence is that any test of agent
 comprehension must avoid relying on the agent’s self-report as primary
-evidence. The agent’s narration of its own behaviour is useful as a
+evidence. The agent’s narration of its own behavior is useful as a
 hypothesis but cannot be used as a measurement. Measurement must come
 from observable artefacts — the answers the agent produces, the strings
 it cites, the URLs it requests — that can be compared against a known
@@ -265,7 +265,7 @@ ground truth held by the test designer, not by the agent.</p>
 asked to find and report unique strings planted at known positions in
 the test pages, and the report is compared by an independent scorer (a
 human or a deterministic script) against the known answers. The agent
-never sees the answers. The agent’s account of its own behaviour is
+never sees the answers. The agent’s account of its own behavior is
 recorded but not scored. The score depends on which canary tokens the
 agent’s response actually contains, not on what the agent claims it
 found.</p>
@@ -273,7 +273,7 @@ found.</p>
 recurring pattern in agent engineering. Where a human evaluator might
 correct a wrong answer by asking the same question more clearly, an
 agent test cannot ask follow-up questions without potentially triggering
-different behaviour each time. The test has to be designed so that the
+different behavior each time. The test has to be designed so that the
 first answer is the only answer that matters, and so that the answer can
 be scored without the agent’s cooperation.</p>
 <h2 id="the-hawthorne-effect-on-agents">The Hawthorne effect on
@@ -282,7 +282,7 @@ agents</h2>
 twentieth-century industrial psychology. In the original Hawthorne
 studies at Western Electric, factory workers performed differently when
 they knew they were being observed than when they thought they were
-working unobserved. The change in behaviour was attributed to the
+working unobserved. The change in behavior was attributed to the
 observation itself rather than to any of the experimental variables. The
 phenomenon has since been documented in many domains, and recent
 research from UC Berkeley shows that it applies to large language models
@@ -294,17 +294,17 @@ separate study found that models execute requested harmful tasks roughly
 70 per cent of the time when the prompt is framed hypothetically and
 about 36 per cent of the time when the prompt is framed as a real
 request. The interpretation is straightforward: agents detect that they
-are being evaluated, modulate their behaviour accordingly, and rarely
+are being evaluated, modulate their behavior accordingly, and rarely
 report doing so. They retry harder, they try fallback approaches, they
 scan more carefully, and they describe their work in more polished
 prose, when they think a test is in progress.</p>
 <p>For agent comprehension testing, the Hawthorne effect is a confounder
 that cannot be fully eliminated. Any test that the agent can detect as a
 test will produce different numbers from the agent’s normal
-documentation-reading behaviour. The numbers will tend to be higher —
+documentation-reading behavior. The numbers will tend to be higher —
 the agent does its best work in evaluation conditions — which means the
 test under-reports the failure modes that matter. The user who is not
-running an evaluation will see worse behaviour than the test
+running an evaluation will see worse behavior than the test
 predicted.</p>
 <p>The mitigation is to minimise the signals that broadcast “this is a
 test.” Domain names should not contain the word “test” or “benchmark”.
@@ -318,11 +318,11 @@ the test design should accept that some amount of Hawthorne signal is
 unavoidable: a sufficiently capable reasoning model will eventually
 infer from the structure of a page that it is being measured, even when
 no individual signal is present. The goal is to keep the inference
-difficult enough that the agent’s evaluation-mode behaviour reveals real
+difficult enough that the agent’s evaluation-mode behavior reveals real
 failure modes rather than just confirming that the agent is good at
-recognising tests.</p>
+recognizing tests.</p>
 <h2 id="the-canary-token-method">The canary-token method</h2>
-<p>A canary token is a unique, recognisable string planted at a known
+<p>A canary token is a unique, recognizable string planted at a known
 position in a test page, designed so that an agent’s response can be
 scored objectively by checking which canaries the response contains. The
 technique is borrowed from intrusion-detection practice in security
@@ -401,7 +401,7 @@ would actually ask, and the URL paths and page titles must use ordinary
 documentation vocabulary. Even small lapses — a heading called “Test
 Section”, an author name like “Test Engineer”, a footer that mentions
 “evaluation” — can leak the context the test is trying to hide. The
-discipline of writing a test that the agent does not realise is a test
+discipline of writing a test that the agent does not realize is a test
 is a craft activity, and it is the activity that has the largest effect
 on the results.</p>
 <p>Carey’s original test, hosted at a documentation-style domain,
@@ -416,7 +416,7 @@ agents actually retain when they read web pages.</p>
 agents. A score of fourteen against one agent does not mean the same
 thing as a score of fourteen against another agent, because the two
 agents have different relevance layers, different fetch tools, and
-different summarisation behaviours. What matters is the <em>shape</em>
+different summarization behaviors. What matters is the <em>shape</em>
 of the failures within a single agent’s run: which canaries it found,
 which it missed, and which failure modes are responsible for the gaps. A
 site that scores fourteen by missing only the truncation canaries has a
@@ -424,8 +424,8 @@ different problem from a site that scores fourteen by missing the
 tabbed-content and content-negotiation canaries.</p>
 <p>The second caveat is that perfect scores are unlikely and not
 particularly informative. An agent that scored twenty out of twenty
-almost certainly recognised the test conditions and modulated its
-behaviour. The Hawthorne effect makes high scores suspicious. A more
+almost certainly recognized the test conditions and modulated its
+behavior. The Hawthorne effect makes high scores suspicious. A more
 useful target is consistency across re-runs and across agents: an honest
 score is one that reproduces.</p>
 <p>The third caveat is that the score measures pipeline survivability
@@ -469,9 +469,9 @@ that comes back; that is what the canary method is for. The two methods
 are complementary, and a publisher serious about machine experience
 should run both — HEAD-testing continuously against the live site, and
 canary testing periodically against the test fixture set.</p>
-<p>The HEAD self-test catches three of the failure modes catalogued in
+<p>The HEAD self-test catches three of the failure modes cataloged in
 Appendix S directly: Soft 404 (the test sees a 200 response with
-error-page-like behaviour), Cross-Host Redirect (the test follows the
+error-page-like behavior), Cross-Host Redirect (the test follows the
 redirect chain and records each hop’s host), and URL Encoding Mismatch
 (the test fails to parse the URL before any HTTP request is made, which
 is itself the diagnostic). It catches a fourth — Truncation Risk —
@@ -515,8 +515,8 @@ rather than defaulting to success. Tools that claim to measure something
 can produce confidently wrong results when the measurement code is
 missing — a subtle form of the unreliable-narrator problem this appendix
 already describes for agents, applied to the audit infrastructure
-itself. The defence against tool unreliability is the same as the
-defence against agent unreliability: do not trust the report’s prose,
+itself. The defense against tool unreliability is the same as the
+defense against agent unreliability: do not trust the report’s prose,
 look at the underlying data, and prefer measurements that can be
 reproduced independently. A publisher who runs their own HEAD self-test
 against their own sitemap has a reproducible second opinion that does
@@ -527,7 +527,7 @@ module is small, the API is three functions, and the pattern is
 straightforward enough to port to any language a publisher’s CMS happens
 to be written in.</p>
 <h2 id="cross-references">Cross-references</h2>
-<p>For the catalogue of the ten failure modes a publisher should test
+<p>For the catalog of the ten failure modes a publisher should test
 against, see <strong>Appendix S: The Ten Agent Reading Failure
 Modes</strong>. For the publisher-side anti-patterns that cause similar
 failures upstream, see <strong>Appendix N: Anti-Patterns
@@ -543,7 +543,7 @@ framing of the relevance layer in this appendix build directly on
 Dachary Carey’s article “Designing an Agent Reading Test”, published 6
 April 2026. The treatment here extends Carey’s work into a
 publisher-side methodology and connects it to the MX failure-mode
-catalogue in Appendix S; the underlying technique is hers.</p>
+catalog in Appendix S; the underlying technique is hers.</p>
 </div>
 <hr>
 <nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
