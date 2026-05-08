@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MX Brand Guide — CogNovaMX</title>
+<style>
+  /* ─── Design tokens ────────────────────────────────── */
+  :root {
+    --mx-blue-deep:   #0a1628;
+    --mx-blue-dark:   #0d2137;
+    --mx-blue-mid:    #1a3a5c;
+    --mx-blue-accent: #2070c0;
+    --mx-blue-light:  #5ba4e6;
+    --mx-gold:        #d4a843;
+    --mx-gold-hover:  #c49a3a;
+    --mx-green:       #2ecc71;
+    --mx-green-hover: #27ae60;
+    --mx-orange:      #c95000;
+    --mx-orange-hover:#a84200;
+    --mx-white:       #ffffff;
+    --mx-off-white:   #f0f4f8;
+    --mx-text:        #e8edf2;
+    --mx-text-muted:  #8a9bb5;
+    --mx-surface:     rgba(26, 58, 92, 0.3);
+    --mx-surface-strong: rgba(26, 58, 92, 0.5);
+    --mx-border:      rgba(45, 125, 210, 0.15);
+    --mx-border-strong: rgba(45, 125, 210, 0.25);
+    --mx-font:        'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --mx-mono:        'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    --mx-max:         clamp(800px, 92vw, 1280px);
+    --mx-radius-sm:   4px;
+    --mx-radius-md:   8px;
+    --mx-radius-lg:   12px;
+  }
+
+  /* ─── Reset & base ─────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--mx-font);
+    background: var(--mx-blue-deep);
+    color: var(--mx-text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Layout ────────────────────────────────────────── */
+  .wrap { max-width: var(--mx-max); margin: 0 auto; padding: 0 2rem; }
+
+  section { padding: 4rem 0; border-bottom: 1px solid var(--mx-border); }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mx-blue-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--mx-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-desc {
+    color: var(--mx-text-muted);
+    font-size: 0.9375rem;
+    margin-bottom: 3rem;
+    max-width: 56ch;
+  }
+
+  /* ─── Cover ─────────────────────────────────────────── */
+  .cover {
+    padding: 6rem 0 5rem;
+    border-bottom: 1px solid var(--mx-border);
+  }
+
+  .hero-mark {
+    display: inline-flex;
+    align-items: stretch;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-mark-box {
+    width: 80px; height: 80px;
+    background: #000;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+  }
+
+  .hero-mark-badge {
+    height: 80px;
+    background: #fff;
+    display: flex; align-items: center;
+    padding: 0 1.25rem;
+    font-size: 13px; font-weight: 700;
+    color: #000;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-left: -1px;
+    white-space: nowrap;
+  }
+
+  .cover-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--mx-white);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .cover-sub {
+    font-size: 1.0625rem;
+    color: var(--mx-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .cover-meta {
+    font-size: 0.8125rem;
+    color: var(--mx-text-muted);
+    margin-top: 2rem;
+    display: flex; gap: 2rem; flex-wrap: wrap;
+  }
+
+  .cover-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+  /* ─── Colour swatches ───────────────────────────────── */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 1rem;
+  }
+
+  .swatch {
+    border-radius: var(--mx-radius-md);
+    overflow: hidden;
+    border: 1px solid var(--mx-border);
+  }
+
+  .swatch-chip {
+    height: 80px;
+  }
+
+  .swatch-info {
+    padding: 0.75rem 1rem;
+    background: var(--mx-surface);
+  }
+
+  .swatch-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--mx-white);
+    margin-bottom: 0.2rem;
+  }
+
+  .swatch-hex {
+    font-family: var(--mx-mono);
+    font-size: 0.75rem;
+    color: var(--mx-text-muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .swatch-use {
+    font-size: 0.6875rem;
+    color: var(--mx-text-muted);
+    line-height: 1.4;
+  }
+
+  .swatch-group-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mx-text-muted);
+    margin: 2rem 0 0.75rem;
+  }
+
+  /* ─── Typography ────────────────────────────────────── */
+  .type-stack { display: flex; flex-direction: column; gap: 2.5rem; }
+
+  .type-row {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 2rem;
+    align-items: baseline;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--mx-border);
+  }
+
+  .type-row:last-child { border-bottom: none; }
+
+  .type-meta { flex-shrink: 0; }
+
+  .type-role {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mx-blue-light);
+    margin-bottom: 0.3rem;
+  }
+
+  .type-spec {
+    font-family: var(--mx-mono);
+    font-size: 0.6875rem;
+    color: var(--mx-text-muted);
+    line-height: 1.6;
+  }
+
+  .type-sample-h1-hero {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 400;
+    letter-spacing: -0.06em;
+    line-height: 0.93;
+    color: var(--mx-white);
+  }
+
+  .type-sample-h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--mx-white);
+  }
+
+  .type-sample-h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--mx-white);
+  }
+
+  .type-sample-h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--mx-white);
+  }
+
+  .type-sample-h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--mx-white);
+  }
+
+  .type-sample-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--mx-text);
+  }
+
+  .type-sample-nav {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--mx-text);
+  }
+
+  .type-sample-muted {
+    font-size: 0.9375rem;
+    color: var(--mx-text-muted);
+    line-height: 1.6;
+  }
+
+  .type-sample-mono {
+    font-family: var(--mx-mono);
+    font-size: 0.875rem;
+    color: var(--mx-blue-light);
+    background: rgba(26, 58, 92, 0.4);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  /* ─── Spacing tokens ────────────────────────────────── */
+  .spacing-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .spacing-row {
+    display: grid;
+    grid-template-columns: 8rem 80px 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .spacing-label {
+    font-family: var(--mx-mono);
+    font-size: 0.75rem;
+    color: var(--mx-text-muted);
+  }
+
+  .spacing-bar-wrap {
+    display: flex; align-items: center;
+  }
+
+  .spacing-bar {
+    height: 20px;
+    background: var(--mx-blue-accent);
+    border-radius: 2px;
+    opacity: 0.7;
+  }
+
+  .spacing-use {
+    font-size: 0.8125rem;
+    color: var(--mx-text-muted);
+  }
+
+  /* ─── Buttons ───────────────────────────────────────── */
+  .btn-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--mx-radius-sm);
+    font-family: var(--mx-font);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary   { background: var(--mx-blue-accent); color: #fff; }
+  .btn-secondary { background: transparent; border: 2px solid var(--mx-blue-accent); color: var(--mx-text); }
+  .btn-gold      { background: var(--mx-gold); color: var(--mx-blue-deep); }
+  .btn-free      { background: var(--mx-green); color: var(--mx-blue-deep); }
+  .btn-orange    { background: var(--mx-orange); color: #fff; font-size: 0.9rem; padding: 0.5rem 1.1rem; box-shadow: 0 2px 10px rgba(201,80,0,0.45); }
+  .btn-ghost     { background: transparent; border: 2px solid var(--mx-gold); color: var(--mx-gold); }
+
+  .btn-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .btn-spec-card {
+    background: var(--mx-surface);
+    border: 1px solid var(--mx-border);
+    border-radius: var(--mx-radius-md);
+    padding: 1.25rem;
+  }
+
+  .btn-spec-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--mx-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .btn-spec-detail {
+    font-family: var(--mx-mono);
+    font-size: 0.6875rem;
+    color: var(--mx-text-muted);
+    line-height: 1.7;
+  }
+
+  /* ─── Components ─────────────────────────────────────── */
+  .card-demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--mx-surface);
+    border: 1px solid var(--mx-border);
+    border-radius: var(--mx-radius-md);
+    padding: 2rem;
+    transition: all 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: var(--mx-blue-accent);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--mx-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-body {
+    font-size: 0.9375rem;
+    color: var(--mx-text-muted);
+    line-height: 1.6;
+  }
+
+  .card-book {
+    background: rgba(26, 58, 92, 0.25);
+    border: 1px solid var(--mx-border);
+    border-radius: var(--mx-radius-lg);
+    padding: 1.75rem;
+    transition: all 0.2s ease;
+  }
+
+  .card-book:hover {
+    border-color: var(--mx-blue-accent);
+    transform: translateY(-4px);
+  }
+
+  .card-hero-offer {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--mx-radius-md);
+    padding: 1.25rem 1.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .card-hero-offer:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  /* ─── Navigation demo ───────────────────────────────── */
+  .nav-demo {
+    background: rgba(10, 22, 40, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--mx-border);
+    border-radius: var(--mx-radius-md);
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-demo-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-demo-links a {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--mx-text);
+    text-decoration: none;
+  }
+
+  .nav-demo-links a.active {
+    color: var(--mx-gold);
+    border-bottom: 2px solid var(--mx-gold);
+    padding-bottom: 2px;
+  }
+
+  /* ─── Voice section ─────────────────────────────────── */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 640px) { .voice-grid { grid-template-columns: 1fr; } }
+
+  .voice-card {
+    background: var(--mx-surface);
+    border: 1px solid var(--mx-border);
+    border-radius: var(--mx-radius-md);
+    padding: 1.75rem;
+  }
+
+  .voice-card.do { border-left: 3px solid var(--mx-green); }
+  .voice-card.dont { border-left: 3px solid #e74c3c; }
+
+  .voice-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .voice-card.do .voice-label { color: var(--mx-green); }
+  .voice-card.dont .voice-label { color: #e74c3c; }
+
+  .voice-item {
+    font-size: 0.9375rem;
+    color: var(--mx-text);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--mx-border);
+    line-height: 1.5;
+  }
+
+  .voice-item:last-child { border-bottom: none; }
+
+  /* ─── Logo section ──────────────────────────────────── */
+  .logo-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .logo-example {
+    background: var(--mx-surface);
+    border: 1px solid var(--mx-border);
+    border-radius: var(--mx-radius-md);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 200px;
+  }
+
+  .logo-example-dark { background: #000; }
+  .logo-example-light { background: #f0f4f8; }
+
+  .logo-example-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mx-text-muted);
+    margin-top: 0.5rem;
+  }
+
+  /* ─── Utility ───────────────────────────────────────── */
+  .tag {
+    display: inline-block;
+    background: rgba(32, 112, 192, 0.2);
+    border: 1px solid rgba(32, 112, 192, 0.3);
+    color: var(--mx-blue-light);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--mx-border);
+    margin: 2rem 0;
+  }
+
+  code {
+    font-family: var(--mx-mono);
+    font-size: 0.8125rem;
+    background: rgba(26, 58, 92, 0.5);
+    color: var(--mx-blue-light);
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: var(--mx-surface-strong);
+    color: var(--mx-text-muted);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--mx-border-strong);
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--mx-border);
+    color: var(--mx-text);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  td:first-child { color: var(--mx-white); font-weight: 500; }
+
+  td code { font-size: 0.75rem; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     COVER
+══════════════════════════════════════════ -->
+<section class="cover">
+  <div class="wrap">
+    <div class="hero-mark">
+      <div class="hero-mark-box">MX</div>
+      <div class="hero-mark-badge">Machine Experience</div>
+    </div>
+
+    <h1 class="cover-title">Brand Guide</h1>
+    <p class="cover-sub">Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+    <p class="cover-sub" style="color: var(--mx-text-muted); font-size: 0.9375rem; margin-top: 0.5rem;">
+      Colour, typography, spacing, components, and voice — derived from the live mx-site.
+    </p>
+
+    <div class="cover-meta">
+      <span><span style="color: var(--mx-gold);">▸</span> Version 1.0</span>
+      <span><span style="color: var(--mx-gold);">▸</span> 2026-05-08</span>
+      <span><span style="color: var(--mx-gold);">▸</span> mx.allabout.network</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     1. COLOUR
+══════════════════════════════════════════ -->
+<section id="colour">
+  <div class="wrap">
+    <p class="section-label">01 — Colour</p>
+    <h2 class="section-title">Colour palette</h2>
+    <p class="section-desc">A dark-first system built on deep navy blues, with gold as the premium accent and green/orange for action differentiation.</p>
+
+    <p class="swatch-group-title">Core blues</p>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#0a1628;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Blue Deep</div>
+          <div class="swatch-hex">#0a1628 · --mx-blue-deep</div>
+          <div class="swatch-use">Primary page background</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#0d2137;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Blue Dark</div>
+          <div class="swatch-hex">#0d2137 · --mx-blue-dark</div>
+          <div class="swatch-use">Dark section backgrounds</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#1a3a5c;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Blue Mid</div>
+          <div class="swatch-hex">#1a3a5c · --mx-blue-mid</div>
+          <div class="swatch-use">Surface/card tints</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#2070c0;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Blue Accent</div>
+          <div class="swatch-hex">#2070c0 · --mx-blue-accent</div>
+          <div class="swatch-use">Primary buttons, borders, interactive</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#5ba4e6;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Blue Light</div>
+          <div class="swatch-hex">#5ba4e6 · --mx-blue-light</div>
+          <div class="swatch-use">Links, highlights, section labels</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="swatch-group-title">Accent colours</p>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#d4a843;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gold</div>
+          <div class="swatch-hex">#d4a843 · --mx-gold</div>
+          <div class="swatch-use">Premium CTAs, nav active state, hover accents</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#c49a3a;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gold Hover</div>
+          <div class="swatch-hex">#c49a3a</div>
+          <div class="swatch-use">Gold button hover state</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#2ecc71;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Green</div>
+          <div class="swatch-hex">#2ecc71 · --mx-green</div>
+          <div class="swatch-use">Free-tier CTA buttons</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#c95000;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Orange</div>
+          <div class="swatch-hex">#c95000 · --mx-orange</div>
+          <div class="swatch-use">Header "Get Free Intro" CTA</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="swatch-group-title">Text &amp; surfaces</p>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#ffffff;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">White</div>
+          <div class="swatch-hex">#ffffff · --mx-white</div>
+          <div class="swatch-use">Headings, emphasis, icons</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#e8edf2; border-top: 1px solid #1a3a5c;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Text</div>
+          <div class="swatch-hex">#e8edf2 · --mx-text</div>
+          <div class="swatch-use">Primary body copy</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#8a9bb5;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Text Muted</div>
+          <div class="swatch-hex">#8a9bb5 · --mx-text-muted</div>
+          <div class="swatch-use">Secondary text, metadata, labels</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:rgba(26,58,92,0.3); border-top: 1px solid #1a3a5c;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface</div>
+          <div class="swatch-hex">rgba(26,58,92,0.3)</div>
+          <div class="swatch-use">Card, proposition backgrounds</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="swatch-group-title">Semantic colour roles</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Background</td><td><code>#0a1628</code></td><td>All pages — dark-first, non-negotiable</td></tr>
+        <tr><td>Primary action</td><td><code>#2070c0</code> blue</td><td>Default buttons, interactive focus</td></tr>
+        <tr><td>Premium action</td><td><code>#d4a843</code> gold</td><td>Paid/premium CTAs, nav active</td></tr>
+        <tr><td>Free action</td><td><code>#2ecc71</code> green</td><td>Free-tier CTA only</td></tr>
+        <tr><td>Urgent CTA</td><td><code>#c95000</code> orange</td><td>Header "Get Free Intro" only</td></tr>
+        <tr><td>Error / danger</td><td><code>#e74c3c</code></td><td>Validation states (not in primary palette)</td></tr>
+        <tr><td>Border default</td><td><code>rgba(45,125,210,0.15)</code></td><td>Cards, dividers, separators</td></tr>
+        <tr><td>Border strong</td><td><code>rgba(45,125,210,0.25)</code></td><td>Emphasis borders, section edges</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     2. TYPOGRAPHY
+══════════════════════════════════════════ -->
+<section id="typography">
+  <div class="wrap">
+    <p class="section-label">02 — Typography</p>
+    <h2 class="section-title">Type system</h2>
+    <p class="section-desc">System-native sans-serif throughout. No web fonts — no render blocking, no layout shift. Monospace for code and tokens.</p>
+
+    <div style="background: var(--mx-surface); border: 1px solid var(--mx-border); border-radius: var(--mx-radius-md); padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <div>
+        <div class="swatch-use" style="margin-bottom: 0.35rem;">Body / Heading font</div>
+        <div class="swatch-name" style="color: var(--mx-white); font-size: 0.9375rem;">'Segoe UI', 'Helvetica Neue', Arial, sans-serif</div>
+        <div class="swatch-hex" style="margin-top: 0.25rem;">CSS variable: <code>--mx-font</code></div>
+      </div>
+      <div>
+        <div class="swatch-use" style="margin-bottom: 0.35rem;">Monospace font</div>
+        <div class="swatch-name" style="color: var(--mx-white); font-size: 0.9375rem;">'SFMono-Regular', Consolas, 'Liberation Mono', Menlo</div>
+        <div class="swatch-hex" style="margin-top: 0.25rem;">CSS variable: <code>--mx-mono</code></div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Hero H1</div>
+          <div class="type-spec">
+            size: clamp(3rem, 8vw, 6.7rem)<br>
+            weight: 400<br>
+            tracking: -0.06em<br>
+            line-height: 0.93
+          </div>
+        </div>
+        <div class="type-sample-h1-hero">The Web</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Page H1</div>
+          <div class="type-spec">
+            size: clamp(2rem, 5vw, 3.5rem)<br>
+            weight: 700<br>
+            line-height: 1.15
+          </div>
+        </div>
+        <div class="type-sample-h1">Machine Experience</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Section H2</div>
+          <div class="type-spec">
+            size: 2.25rem<br>
+            weight: 700<br>
+            line-height: 1.25
+          </div>
+        </div>
+        <div class="type-sample-h2">What MX does</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Card H3</div>
+          <div class="type-spec">
+            size: 1.5rem<br>
+            weight: 700
+          </div>
+        </div>
+        <div class="type-sample-h3">Structure for machines</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Sub-heading H4</div>
+          <div class="type-spec">
+            size: 1.25rem<br>
+            weight: 600
+          </div>
+        </div>
+        <div class="type-sample-h4">Explicit for everyone</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Body</div>
+          <div class="type-spec">
+            size: 1rem<br>
+            weight: 400<br>
+            line-height: 1.7<br>
+            color: --mx-text
+          </div>
+        </div>
+        <div class="type-sample-body">MX adds the explicit metadata layer that lets any system — search engines, AI agents, accessibility tools, aggregators — understand what you publish. Not a plugin. Not a platform. A standard.</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Muted / Secondary</div>
+          <div class="type-spec">
+            size: 0.9375rem<br>
+            color: --mx-text-muted<br>
+            line-height: 1.6
+          </div>
+        </div>
+        <div class="type-sample-muted">Used for captions, sub-descriptions, metadata labels, and supporting copy that should recede behind primary content.</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Nav / Label</div>
+          <div class="type-spec">
+            size: 0.875rem<br>
+            weight: 600<br>
+            tracking: 0.05em<br>
+            uppercase
+          </div>
+        </div>
+        <div class="type-sample-nav">About &nbsp;·&nbsp; Learn &nbsp;·&nbsp; Books &nbsp;·&nbsp; Blog</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Monospace</div>
+          <div class="type-spec">
+            family: --mx-mono<br>
+            size: 0.875rem<br>
+            color: --mx-blue-light
+          </div>
+        </div>
+        <div>
+          <span class="type-sample-mono">--mx-blue-deep: #0a1628</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     3. SPACING & LAYOUT
+══════════════════════════════════════════ -->
+<section id="spacing">
+  <div class="wrap">
+    <p class="section-label">03 — Spacing &amp; Layout</p>
+    <h2 class="section-title">Spacing &amp; layout tokens</h2>
+    <p class="section-desc">1rem base unit. Fluid max-width via <code>clamp()</code>. Consistent section padding at 4–5rem on desktop, reduced on mobile.</p>
+
+    <div class="spacing-grid" style="margin-bottom: 3rem;">
+      <div class="spacing-row">
+        <span class="spacing-label">0.5rem / 8px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div>
+        <span class="spacing-use">Inline padding, icon gaps</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">1rem / 16px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div>
+        <span class="spacing-use">Button gap, small grid gaps</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">1.5rem / 24px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div>
+        <span class="spacing-use">Mobile grid gaps</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">2rem / 32px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div>
+        <span class="spacing-use">Card padding, grid gaps</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">2.5rem / 40px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:40px;"></div></div>
+        <span class="spacing-use">Book grid gaps</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">3rem / 48px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:48px;"></div></div>
+        <span class="spacing-use">Footer column gaps, mobile section padding</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">4rem / 64px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div></div>
+        <span class="spacing-use">Two-column layout gaps, standard section padding</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">5rem / 80px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:80px;"></div></div>
+        <span class="spacing-use">Primary section vertical padding</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">8rem / 128px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:128px;"></div></div>
+        <span class="spacing-use">Full-hero top padding</span>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>--mx-max-width</td>
+          <td><code>clamp(800px, 92vw, 1600px)</code></td>
+          <td>Primary content container — all pages</td>
+        </tr>
+        <tr>
+          <td>--mx-section-padding</td>
+          <td><code>5rem 2rem</code> desktop / <code>3rem 1.25rem</code> mobile</td>
+          <td>All full-width sections</td>
+        </tr>
+        <tr>
+          <td>--mx-radius-sm</td>
+          <td><code>4px</code></td>
+          <td>Buttons, nav CTA</td>
+        </tr>
+        <tr>
+          <td>--mx-radius-md</td>
+          <td><code>8px</code></td>
+          <td>Proposition cards, hero offers, gold CTAs</td>
+        </tr>
+        <tr>
+          <td>--mx-radius-lg</td>
+          <td><code>12px</code></td>
+          <td>Book cards</td>
+        </tr>
+        <tr>
+          <td>Grid — responsive</td>
+          <td><code>repeat(auto-fit, minmax(min(300px,100%),1fr))</code></td>
+          <td>Proposition card grid</td>
+        </tr>
+        <tr>
+          <td>Footer grid</td>
+          <td><code>2fr 1fr 1fr</code></td>
+          <td>Brand + two link columns</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="divider"></div>
+
+    <p class="swatch-group-title">Responsive breakpoints</p>
+    <table>
+      <thead>
+        <tr><th>Breakpoint</th><th>Width</th><th>Key changes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Desktop</td><td>1024px+</td><td>Two-column layouts, full hero 90vh, wide max-width</td></tr>
+        <tr><td>Tablet</td><td>768px–1023px</td><td>Single-column, hamburger nav, reduced hero height</td></tr>
+        <tr><td>Mobile</td><td>&lt; 768px</td><td>Full single-column, 60px MX badge, compact hero padding</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     4. LOGO & WORDMARK
+══════════════════════════════════════════ -->
+<section id="logo">
+  <div class="wrap">
+    <p class="section-label">04 — Logo &amp; Wordmark</p>
+    <h2 class="section-title">Logo &amp; brand mark</h2>
+    <p class="section-desc">Two assets: the <code>logo.webp</code> wordmark for the header, and the MX hero mark (black square + white badge) for hero sections and standalone use.</p>
+
+    <div class="logo-examples">
+
+      <div class="logo-example" style="background: var(--mx-blue-deep);">
+        <div class="hero-mark">
+          <div class="hero-mark-box">MX</div>
+          <div class="hero-mark-badge">Machine Experience</div>
+        </div>
+        <div class="logo-example-label" style="color: var(--mx-text-muted);">Hero mark — on dark</div>
+      </div>
+
+      <div class="logo-example logo-example-dark">
+        <div class="hero-mark">
+          <div class="hero-mark-box">MX</div>
+          <div class="hero-mark-badge">Machine Experience</div>
+        </div>
+        <div class="logo-example-label" style="color: #888;">Hero mark — on black</div>
+      </div>
+
+      <div class="logo-example logo-example-light">
+        <div style="display: flex; align-items: stretch;">
+          <div style="width:70px;height:70px;background:#000;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;letter-spacing:-0.04em;">MX</div>
+          <div style="height:70px;background:#fff;display:flex;align-items:center;padding:0 1rem;font-size:11px;font-weight:700;color:#000;letter-spacing:0.1em;text-transform:uppercase;margin-left:-1px;border:1px solid #ccc;">Machine Experience</div>
+        </div>
+        <div class="logo-example-label" style="color: #888; margin-top: 0.5rem;">Hero mark — on light</div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="swatch-group-title">Hero mark specifications</p>
+    <table>
+      <thead>
+        <tr><th>Element</th><th>Property</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>MX box</td><td>Size</td><td>90 × 90px (desktop) / 60 × 60px (mobile)</td></tr>
+        <tr><td>MX box</td><td>Background</td><td><code>#000000</code></td></tr>
+        <tr><td>MX text</td><td>Font / size / weight</td><td>Segoe UI, 32px, 700</td></tr>
+        <tr><td>MX text</td><td>Letter-spacing</td><td><code>-0.04em</code></td></tr>
+        <tr><td>Badge</td><td>Background</td><td><code>#ffffff</code></td></tr>
+        <tr><td>Badge text</td><td>Content</td><td>MACHINE EXPERIENCE</td></tr>
+        <tr><td>Badge text</td><td>Font / size / weight</td><td>Segoe UI, 15px, 700</td></tr>
+        <tr><td>Badge text</td><td>Letter-spacing / case</td><td>0.1em / uppercase</td></tr>
+        <tr><td>Wordmark img</td><td>Asset</td><td>/images/logo.webp (2x: logo@2x.webp)</td></tr>
+        <tr><td>Wordmark img</td><td>Dimensions (header)</td><td>221 × 40px</td></tr>
+        <tr><td>Wordmark alt</td><td>Alt text</td><td>"CogNovaMX — Machine Experience"</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     5. NAVIGATION
+══════════════════════════════════════════ -->
+<section id="navigation">
+  <div class="wrap">
+    <p class="section-label">05 — Navigation</p>
+    <h2 class="section-title">Navigation</h2>
+    <p class="section-desc">Fixed header with blurred dark background. Nav links are small-caps with gold underline for the active page.</p>
+
+    <div class="nav-demo">
+      <div class="hero-mark" style="margin-bottom:0; transform: scale(0.55); transform-origin: left center; height: 44px; overflow: hidden;">
+        <div class="hero-mark-box" style="width:80px;height:80px;font-size:28px;">MX</div>
+        <div class="hero-mark-badge" style="height:80px;font-size:13px;">Machine Experience</div>
+      </div>
+      <ul class="nav-demo-links">
+        <li><a href="#" class="active">About</a></li>
+        <li><a href="#">Learn</a></li>
+        <li><a href="#">Books</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Reginald</a></li>
+      </ul>
+      <button class="btn btn-orange" style="font-size:0.85rem;padding:0.45rem 1rem;">Get the Free Intro</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>State</th><th>Colour</th><th>Additional</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Default link</td><td><code>#e8edf2</code></td><td>0.875rem, 600 weight, uppercase, 0.05em tracking</td></tr>
+        <tr><td>Hover</td><td><code>#d4a843</code> gold</td><td>transition: all 0.2s ease</td></tr>
+        <tr><td>Active / current</td><td><code>#d4a843</code> gold</td><td>2px solid gold underline</td></tr>
+        <tr><td>Header bg</td><td><code>rgba(10,22,40,0.95)</code></td><td>backdrop-filter: blur(10px)</td></tr>
+        <tr><td>Header border</td><td><code>rgba(45,125,210,0.15)</code></td><td>1px solid bottom</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     6. BUTTONS
+══════════════════════════════════════════ -->
+<section id="buttons">
+  <div class="wrap">
+    <p class="section-label">06 — Buttons &amp; CTAs</p>
+    <h2 class="section-title">Button system</h2>
+    <p class="section-desc">Four semantic button types. Colour carries meaning — do not swap gold for blue in a free-tier context or orange for gold in a premium context.</p>
+
+    <div class="btn-grid">
+      <button class="btn btn-primary">Primary blue</button>
+      <button class="btn btn-secondary">Secondary outline</button>
+      <button class="btn btn-gold">Gold — premium</button>
+      <button class="btn btn-free">Green — free tier</button>
+      <button class="btn btn-orange">Get the Free Intro</button>
+      <button class="btn btn-ghost">Ghost gold</button>
+    </div>
+
+    <div class="btn-specs">
+
+      <div class="btn-spec-card">
+        <div class="btn-spec-name">Primary (.btn-primary)</div>
+        <div class="btn-spec-detail">
+          bg: #2070c0<br>
+          color: #fff<br>
+          padding: 0.875rem 2rem<br>
+          radius: 4px<br>
+          font: 0.9375rem / 600 / +0.03em<br>
+          hover bg: #5ba4e6<br>
+          hover: translateY(-1px)
+        </div>
+      </div>
+
+      <div class="btn-spec-card">
+        <div class="btn-spec-name">Secondary (.btn-secondary)</div>
+        <div class="btn-spec-detail">
+          bg: transparent<br>
+          border: 2px solid #2070c0<br>
+          color: #e8edf2<br>
+          padding: 0.875rem 2rem<br>
+          hover bg: #2070c0<br>
+          hover color: #fff
+        </div>
+      </div>
+
+      <div class="btn-spec-card">
+        <div class="btn-spec-name">Gold (.btn-gold / .cta-button)</div>
+        <div class="btn-spec-detail">
+          bg: #d4a843<br>
+          color: #0a1628<br>
+          radius: 4px (btn-gold) / 8px (cta-button)<br>
+          font: 700<br>
+          hover bg: #c49a3a / #e0b84e<br>
+          hover: translateY(-1px/-2px)
+        </div>
+      </div>
+
+      <div class="btn-spec-card">
+        <div class="btn-spec-name">Free (.btn-free)</div>
+        <div class="btn-spec-detail">
+          bg: #2ecc71<br>
+          color: #0a1628<br>
+          hover bg: #27ae60<br>
+          hover: translateY(-1px)<br>
+          use: free-tier offers only
+        </div>
+      </div>
+
+      <div class="btn-spec-card">
+        <div class="btn-spec-name">Orange (header CTA only)</div>
+        <div class="btn-spec-detail">
+          bg: #c95000<br>
+          color: #fff<br>
+          padding: 0.5rem 1.1rem<br>
+          font: 0.9rem / 700<br>
+          shadow: 0 2px 10px rgba(201,80,0,0.45)<br>
+          hover bg: #a84200
+        </div>
+      </div>
+
+      <div class="btn-spec-card">
+        <div class="btn-spec-name">All buttons — universal</div>
+        <div class="btn-spec-detail">
+          display: inline-flex<br>
+          align-items: center<br>
+          gap: 0.5rem<br>
+          transition: all 0.2s ease<br>
+          focus: 2px solid gold, offset 2px
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     7. COMPONENTS
+══════════════════════════════════════════ -->
+<section id="components">
+  <div class="wrap">
+    <p class="section-label">07 — Components</p>
+    <h2 class="section-title">Core components</h2>
+    <p class="section-desc">Cards share the same surface-and-border language. Hover always lifts the card and brightens the border to <code>--mx-blue-accent</code>.</p>
+
+    <p class="swatch-group-title">Proposition card (.proposition-card)</p>
+    <div class="card-demo-grid" style="margin-bottom: 2.5rem;">
+      <div class="card">
+        <div class="card-icon">⬡</div>
+        <div class="card-title">Structured metadata</div>
+        <div class="card-body">MX adds the machine-readable layer that tells every system what your content is, who made it, and how to use it.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">◈</div>
+        <div class="card-title">Provenance by design</div>
+        <div class="card-body">Every field carries source information. An AI agent doesn't guess — it reads the explicit answer you wrote.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">◻</div>
+        <div class="card-title">Standards-first</div>
+        <div class="card-body">Built on Schema.org, Dublin Core, DCAT v3, and WCAG. MX never duplicates what open standards already cover.</div>
+      </div>
+    </div>
+
+    <p class="swatch-group-title">Book card (.book-card)</p>
+    <div class="card-demo-grid" style="margin-bottom: 2.5rem; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+      <div class="card-book">
+        <div style="height:6px;background:linear-gradient(90deg,#2070c0,#5ba4e6);border-radius:3px;margin-bottom:1.25rem;"></div>
+        <div class="card-title" style="font-size:1rem;margin-bottom:0.4rem;">MX: The Intro</div>
+        <div class="card-body" style="font-size:0.875rem;margin-bottom:1rem;">Free entry point. The problem, the method, and the first steps.</div>
+        <button class="btn btn-free" style="font-size:0.8125rem;padding:0.5rem 1rem;">Free download</button>
+      </div>
+      <div class="card-book">
+        <div style="height:6px;background:linear-gradient(90deg,#d4a843,#e0b84e);border-radius:3px;margin-bottom:1.25rem;"></div>
+        <div class="card-title" style="font-size:1rem;margin-bottom:0.4rem;">MX: The Handbook</div>
+        <div class="card-body" style="font-size:0.875rem;margin-bottom:1rem;">Complete implementation guide. Every field, every format, every system.</div>
+        <button class="btn btn-gold" style="font-size:0.8125rem;padding:0.5rem 1rem;">Buy — £25</button>
+      </div>
+      <div class="card-book">
+        <div style="height:6px;background:linear-gradient(90deg,#5ba4e6,#2070c0);border-radius:3px;margin-bottom:1.25rem;"></div>
+        <div class="card-title" style="font-size:1rem;margin-bottom:0.4rem;">MX: The Protocols</div>
+        <div class="card-body" style="font-size:0.875rem;margin-bottom:1rem;">Technical specification for institutions, auditors, and builders. Publishes 1 July 2026.</div>
+        <button class="btn btn-primary" style="font-size:0.8125rem;padding:0.5rem 1rem;">Buy — £250</button>
+      </div>
+    </div>
+
+    <p class="swatch-group-title">Hero offer card (.hero-offer)</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2.5rem;">
+      <div class="card-hero-offer">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mx-text-muted);margin-bottom:0.35rem;">Consultancy</div>
+        <div style="font-size:0.9375rem;color:var(--mx-white);">Structured audits and implementation support</div>
+      </div>
+      <div class="card-hero-offer">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mx-text-muted);margin-bottom:0.35rem;">Training</div>
+        <div style="font-size:0.9375rem;color:var(--mx-white);">Workshops and team certification</div>
+      </div>
+      <div class="card-hero-offer">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mx-text-muted);margin-bottom:0.35rem;">Books</div>
+        <div style="font-size:0.9375rem;color:var(--mx-white);">The Intro, Handbook, and Protocols</div>
+      </div>
+      <div class="card-hero-offer">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mx-text-muted);margin-bottom:0.35rem;">Tools</div>
+        <div style="font-size:0.9375rem;color:var(--mx-white);">Reginald registry. Web audit suite.</div>
+      </div>
+    </div>
+
+    <p class="swatch-group-title">Tag / badge</p>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+      <span class="tag">Machine Readable</span>
+      <span class="tag">Open Standard</span>
+      <span class="tag">Schema.org</span>
+      <span class="tag">WCAG 2.1</span>
+      <span class="tag">Dublin Core</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="swatch-group-title">Section backgrounds</p>
+    <table>
+      <thead>
+        <tr><th>Class</th><th>Colour</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>.section-deep</td><td><code>#0a1628</code></td><td>Primary, default page background</td></tr>
+        <tr><td>.section-dark</td><td><code>#0d2137</code></td><td>Alternating dark sections</td></tr>
+        <tr><td>.section-mid</td><td><code>linear-gradient(180deg, #0d2137 0%, #0a1628 100%)</code></td><td>Transition sections</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     8. BRAND VOICE
+══════════════════════════════════════════ -->
+<section id="voice">
+  <div class="wrap">
+    <p class="section-label">08 — Voice &amp; Messaging</p>
+    <h2 class="section-title">Brand voice</h2>
+    <p class="section-desc">British English in narrative prose. International/neutral English in field names, code, JSON, and metadata. Professional tone — no superlatives, no hype.</p>
+
+    <div style="background: var(--mx-surface); border: 1px solid var(--mx-border); border-left: 3px solid var(--mx-gold); border-radius: var(--mx-radius-md); padding: 1.75rem; margin-bottom: 2.5rem;">
+      <div class="swatch-use" style="margin-bottom: 0.75rem;">Mission statement</div>
+      <blockquote style="font-size: 1.125rem; color: var(--mx-white); line-height: 1.6; font-style: normal;">
+        "Making the web — and everything you publish beyond it — work for everyone and everything that uses it."
+      </blockquote>
+    </div>
+
+    <p class="swatch-group-title">Core phrases (use verbatim)</p>
+    <table style="margin-bottom: 2.5rem;">
+      <thead>
+        <tr><th>Phrase</th><th>Context</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Machine Experience</td><td>Discipline name — always capitalised, never abbreviated to "MX" in first use</td></tr>
+        <tr><td>Structure for machines. Explicit for everyone.</td><td>Hero/acrostic copy — the MX = Machine Experience visual pun</td></tr>
+        <tr><td>Make anything you publish readable by machines.</td><td>Value proposition — scope is all formats, not just web pages</td></tr>
+        <tr><td>MX: The Intro / MX: The Handbook / MX: The Protocols</td><td>Book series — always in this exact form with colon</td></tr>
+        <tr><td>Consultancy, training, books, and tools</td><td>Four-pillar offering — use in that order</td></tr>
+        <tr><td>CogNovaMX — Machine Experience</td><td>Logo alt text — verbatim</td></tr>
+      </tbody>
+    </table>
+
+    <div class="voice-grid">
+      <div class="voice-card do">
+        <div class="voice-label">Do</div>
+        <div class="voice-item">British English in narrative prose: organise, colour, recognised, programme</div>
+        <div class="voice-item">First-person voice: "MX adds…", "The Gathering defines…"</div>
+        <div class="voice-item">Short declarative sentences. One idea per sentence.</div>
+        <div class="voice-item">Timeless present tense in manuscripts — no "new in this version"</div>
+        <div class="voice-item">Answer-first structure: conclusion before explanation</div>
+        <div class="voice-item">Neutral English in field names, JSON, code: license, color, organization</div>
+      </div>
+      <div class="voice-card dont">
+        <div class="voice-label">Don't</div>
+        <div class="voice-item">Superlatives or hype: "revolutionary", "game-changing", "world-class"</div>
+        <div class="voice-item">Hard-coded counts: "all 10 submodules" → "all submodules"</div>
+        <div class="voice-item">Publication dates in manuscript body: "this update includes…"</div>
+        <div class="voice-item">Passive voice when active is available</div>
+        <div class="voice-item">Naming MX as a tool or plugin — it is a standard</div>
+        <div class="voice-item">Claiming MX duplicates Schema.org, Dublin Core, or WCAG</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="swatch-group-title">Entity names (legal &amp; trading)</p>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Type</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Digital Domain Technologies Ltd</td><td>Legal entity</td><td>Contracts, tax, Stripe, book imprint (DDT Ltd)</td></tr>
+        <tr><td>CogNovaMX</td><td>Trading name</td><td>Brand-facing: website, marketing, social</td></tr>
+        <tr><td>Yothes Ltd</td><td>Holding company</td><td>Not yet active — not used in public-facing material</td></tr>
+        <tr><td>The Gathering</td><td>Community / open standard</td><td>Always capitalised, no "the" in running text</td></tr>
+        <tr><td>MX</td><td>Abbreviation for Machine Experience</td><td>After first use — never standalone without context on first mention</td></tr>
+        <tr><td>REGINALD</td><td>Registry product</td><td>All-caps — it is a proper name/acronym, not a common noun</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     9. FILE REFERENCE
+══════════════════════════════════════════ -->
+<section id="files">
+  <div class="wrap">
+    <p class="section-label">09 — Source files</p>
+    <h2 class="section-title">CSS file reference</h2>
+    <p class="section-desc">All CSS is in <code>mx-outputs/mx-site/css/</code>. The design tokens defined in this guide live primarily in <code>mx-unified.css</code>.</p>
+
+    <table>
+      <thead>
+        <tr><th>File</th><th>Lines</th><th>Scope</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>mx-unified.css</code></td><td>835</td><td>Design tokens, layout system, nav, cards, buttons, footer — primary source of truth</td></tr>
+        <tr><td><code>mx-hero.css</code></td><td>416</td><td>Hero sections, hero mark, book-card animations, full-width hero variants</td></tr>
+        <tr><td><code>mx-blog.css</code></td><td>944</td><td>Blog &amp; article: light-mode default, dark-mode variant, reading typography</td></tr>
+        <tr><td><code>mx-faq.css</code></td><td>—</td><td>FAQ pages (light mode primary, separate colour system)</td></tr>
+        <tr><td><code>mx-appendix.css</code></td><td>441</td><td>Appendix content — uses indigo/blue palette variant, not the main navy system</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider"></div>
+
+    <p class="swatch-group-title">Brand assets</p>
+    <table>
+      <thead>
+        <tr><th>Asset</th><th>Path</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Wordmark (webp)</td><td><code>mx-outputs/mx-site/images/logo.webp</code></td><td>Header: 221×40px. Footer: 160×29px. 2x: logo@2x.webp</td></tr>
+        <tr><td>LinkedIn banner</td><td><code>mx-outputs/brand/linkedin-banner-the-gathering.png</code></td><td>1584×396px — The Gathering / MX, dark navy, 2026-05-08</td></tr>
+        <tr><td>QR codes</td><td><code>mx-outputs/pdf/assets/qr/</code></td><td>Pre-generated PNGs for Further Reading sections in PDFs</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer style="padding: 3rem 0; border-top: 1px solid var(--mx-border); margin-top: 1rem;">
+  <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <div style="font-size: 0.8125rem; color: var(--mx-text-muted);">
+      MX Brand Guide · Digital Domain Technologies Ltd, trading as CogNovaMX · 2026
+    </div>
+    <div style="font-size: 0.8125rem; color: var(--mx-text-muted);">
+      Derived from <code>mx-outputs/mx-site/css/mx-unified.css</code> · Version 1.0 · 2026-05-08
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
