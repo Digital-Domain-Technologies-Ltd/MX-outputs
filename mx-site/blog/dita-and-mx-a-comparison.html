@@ -197,7 +197,7 @@
             <tr><th scope="row">Audience declaration</th><td>Profiling attributes</td><td><code>mx: audience</code></td></tr>
             <tr><th scope="row">Graph and relationships</th><td>Relationship tables (reltables)</td><td>JSON-LD <code>@graph</code> blocks emitted per rendered page</td></tr>
             <tr><th scope="row">Locale-formatted values</th><td>Authors write prose; transform decides rendering</td><td>Machine-readable value pinned to every locale-formatted display (<code>&lt;data&gt;</code>, <code>&lt;time&gt;</code>, <code>PriceSpecification</code>)</td></tr>
-            <tr><th scope="row">Output format scope</th><td>HTML, PDF, and other formats via DITA-OT plugins</td><td>Metadata carry-forward required for every output doctype — HTML, PDF (XMP), EPUB (OPF spine), feeds (schema properties)</td></tr>
+            <tr><th scope="row">Output format scope</th><td>HTML, PDF, and other formats via DITA-OT plugins</td><td>Metadata carry-forward required for every output doctype, HTML, PDF (XMP), EPUB (OPF spine), feeds (schema properties)</td></tr>
             <tr><th scope="row">Target users</th><td>Technical writers, publishers</td><td>Content strategists, developers, AI system designers</td></tr>
           </tbody>
         </table>
@@ -209,11 +209,11 @@
 
       <h2 id="where-they-diverge" tabindex="-1">Where they diverge</h2>
 
-      <p>Scope of audience differs. DITA's primary reader is human. MX treats machines as first-class readers alongside humans — not as a downstream concern, but as a design constraint from the outset.</p>
+      <p>Scope of audience differs. DITA's primary reader is human. MX treats machines as first-class readers alongside humans, not as a downstream concern, but as a design constraint from the outset.</p>
 
-      <p>File format is another dividing line. DITA requires XML. MX is format-agnostic: a content unit can be Markdown, HTML, JSON, or any other file type. The MX metadata layer travels with the content regardless of format — and across every output format the transform produces. HTML carries metadata in JSON-LD blocks; PDF carries it in XMP and structure tags (Tagged PDF, ISO 32000); EPUB carries it in the OPF metadata spine; feeds carry it in typed schema properties. MX is a delivery-layer requirement for every output doctype, not an HTML-only concern.</p>
+      <p>File format is another dividing line. DITA requires XML. MX is format-agnostic: a content unit can be Markdown, HTML, JSON, or any other file type. The MX metadata layer travels with the content regardless of format, and across every output format the transform produces. HTML carries metadata in JSON-LD blocks; PDF carries it in XMP and structure tags (Tagged PDF, ISO 32000); EPUB carries it in the OPF metadata spine; feeds carry it in typed schema properties. MX is a delivery-layer requirement for every output doctype, not an HTML-only concern.</p>
 
-      <p>The two systems also differ on publication pipeline versus content posture. DITA is centered on the production pipeline: authors write topics, maps assemble them, processors publish outputs. MX is concerned with the ongoing posture of content in a live environment — how it behaves when encountered by AI agents, search systems or API consumers at any point, not only at publish time.</p>
+      <p>The two systems also differ on publication pipeline versus content posture. DITA is centered on the production pipeline: authors write topics, maps assemble them, processors publish outputs. MX is concerned with the ongoing posture of content in a live environment, how it behaves when encountered by AI agents, search systems or API consumers at any point, not only at publish time.</p>
 
       <p>AI integration reflects a deeper difference in design intent. DITA's modular content is compatible with AI delivery, but AI integration is incidental to DITA's purpose. MX places machine interpretation at the center of the content model. The hostile-web framing and the five machine-reading contexts reflect a fundamentally different starting assumption.</p>
 
@@ -222,7 +222,7 @@
       <figure class="mx-diagram" aria-labelledby="graph-figure-caption">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="graph-figure-title graph-figure-desc" font-family="Georgia, 'Times New Roman', serif">
           <title id="graph-figure-title">DITA reltable emitted as JSON-LD @graph in each rendered HTML page</title>
-          <desc id="graph-figure-desc">Left: a DITA reltable inside map.ditamap declares typed relationships — the task "Configure X" requires the concept "Install X", which describes the reference "X: Field Ref". Middle: a DITA-OT build with an added MX transform step. Right: one of the rendered HTML pages (for "Install X") showing a script type equals application/ld+json block inside its head. The JSON-LD contains an @graph array with this topic as a node (id, type, MX audience and state) plus typed predicate edges (mx colon requiredBy pointing to the task, mx colon describes pointing to the reference). Each rendered page carries its own @graph fragment; agents walk the site's sitemap, fetch each page, extract the JSON-LD, and union @id links across fetches.</desc>
+          <desc id="graph-figure-desc">Left: a DITA reltable inside map.ditamap declares typed relationships, the task "Configure X" requires the concept "Install X", which describes the reference "X: Field Ref". Middle: a DITA-OT build with an added MX transform step. Right: one of the rendered HTML pages (for "Install X") showing a script type equals application/ld+json block inside its head. The JSON-LD contains an @graph array with this topic as a node (id, type, MX audience and state) plus typed predicate edges (mx colon requiredBy pointing to the task, mx colon describes pointing to the reference). Each rendered page carries its own @graph fragment; agents walk the site's sitemap, fetch each page, extract the JSON-LD, and union @id links across fetches.</desc>
           <defs>
             <marker id="graph-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
@@ -293,10 +293,10 @@
             <text x="720" y="452" text-anchor="middle" font-size="11" font-style="italic" fill="#888">… one of N rendered topic pages, each carrying its own @graph fragment.</text>
           </g>
         </svg>
-        <figcaption id="graph-figure-caption">The reltable is already an edge list. DITA-OT, with an MX transform step added, emits each topic's outgoing typed edges as JSON-LD predicates inside a <code>&lt;script type="application/ld+json"&gt;</code> block in the page's <code>&lt;head&gt;</code>. An agent walks the sitemap, fetches each page, and unions the <code>@graph</code> fragments — no bespoke endpoint required.</figcaption>
+        <figcaption id="graph-figure-caption">The reltable is already an edge list. DITA-OT, with an MX transform step added, emits each topic's outgoing typed edges as JSON-LD predicates inside a <code>&lt;script type="application/ld+json"&gt;</code> block in the page's <code>&lt;head&gt;</code>. An agent walks the sitemap, fetches each page, and unions the <code>@graph</code> fragments, no bespoke endpoint required.</figcaption>
       </figure>
 
-      <p>Locale-unambiguous values are handled differently. DITA authors write prose; the transform decides how numbers, currencies and dates render. MX requires the machine-readable form to travel alongside every locale-formatted display. The HTML5 <code>&lt;data&gt;</code> element pins a locale-free numeric value to a localised display string; <code>&lt;time datetime&gt;</code> carries the ISO 8601 date beside the prose form; Schema.org <code>PriceSpecification</code> carries the currency-safe numeric value in JSON-LD. A European decimal-comma number such as <code>€2.030,00</code> — two thousand and thirty euros — is misread as 2.030 by any machine expecting a decimal point. Publishing the unambiguous value alongside the localised display eliminates that class of error.</p>
+      <p>Locale-unambiguous values are handled differently. DITA authors write prose; the transform decides how numbers, currencies and dates render. MX requires the machine-readable form to travel alongside every locale-formatted display. The HTML5 <code>&lt;data&gt;</code> element pins a locale-free numeric value to a localised display string; <code>&lt;time datetime&gt;</code> carries the ISO 8601 date beside the prose form; Schema.org <code>PriceSpecification</code> carries the currency-safe numeric value in JSON-LD. A European decimal-comma number such as <code>€2.030,00</code>, two thousand and thirty euros, is misread as 2.030 by any machine expecting a decimal point. Publishing the unambiguous value alongside the localised display eliminates that class of error.</p>
 
       <p>Governance models also differ. OASIS maintains DITA through a formal Technical Committee process. The Gathering operates as an open standards body for MX with a lighter-weight RFC process, explicitly focused on emerging machine-interaction patterns.</p>
 
@@ -317,7 +317,7 @@
 
       <p>The single DITA concept not yet formalized in MX at the time of this analysis:</p>
 
-      <p>The single-source governance rule is a principle I am proposing for The Gathering: duplicate content is prohibited. Any content appearing in more than one context must reference a canonical source, never copy it. Without this as a stated principle, redundant nodes accumulate, canonical identity becomes ambiguous, and agent traversal results become unreliable. The rule is not yet a formal RFC — it is an intent-to-propose, credited to DITA's long-standing discipline.</p>
+      <p>The single-source governance rule is a principle I am proposing for The Gathering: duplicate content is prohibited. Any content appearing in more than one context must reference a canonical source, never copy it. Without this as a stated principle, redundant nodes accumulate, canonical identity becomes ambiguous, and agent traversal results become unreliable. The rule is not yet a formal RFC, it is an intent-to-propose, credited to DITA's long-standing discipline.</p>
 
       <h2 id="when-to-use-which" tabindex="-1">When to use which</h2>
 

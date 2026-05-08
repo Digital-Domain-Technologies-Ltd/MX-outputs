@@ -25,7 +25,7 @@
   <meta property="og:title" content="Appendix A: Implementation Cookbook">
   <meta property="og:description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites">
   <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
-  <meta property="og:image:alt" content="MX: The Protocols — book cover">
+  <meta property="og:image:alt" content="MX: The Protocols | book cover">
   <meta property="og:site_name" content="CogNovaMX">
   <meta property="og:locale" content="en_GB">
 
@@ -35,10 +35,10 @@
   <meta name="twitter:title" content="Appendix A: Implementation Cookbook">
   <meta name="twitter:description" content="Implementation guide from MX-Protocols book">
   <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
-  <meta name="twitter:image:alt" content="MX: The Protocols — book cover">
+  <meta name="twitter:image:alt" content="MX: The Protocols | book cover">
   <meta name="twitter:creator" content="@ddttomtom">
 
-  <!-- Additional SEO — appendices are companion content to the books, not standalone destinations: noindex, nofollow per memory rule project_appendices_noindex.md -->
+  <!-- Additional SEO, appendices are companion content to the books, not standalone destinations: noindex, nofollow per memory rule project_appendices_noindex.md -->
   <meta name="robots" content="noindex, nofollow">
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
@@ -1230,8 +1230,8 @@ federal funding; the UK Public Sector Bodies Accessibility Regulations
 2018; and obligations flowing from national disability discrimination
 legislation in Australia and Canada. Wherever the legal obligation
 originates, the mandate exists for human disability accommodation. The
-artefact the law produces — a structure tree of headings, paragraphs,
-lists, tables, figures, captions, and reading order — is exactly what an
+artefact the law produces, a structure tree of headings, paragraphs,
+lists, tables, figures, captions, and reading order, is exactly what an
 AI agent needs to read the document without inference.</p>
 <p>Two consequences of an untagged PDF:</p>
 <ul>
@@ -1251,15 +1251,15 @@ agent reads per year, the compounded cost is significant.</li>
 ISO 14289-1 conformant tagged PDF. Three layers of conformance must be
 satisfied:</p>
 <ul>
-<li><strong>Level 1 — Tagged.</strong> The PDF carries a
+<li><strong>Level 1, Tagged.</strong> The PDF carries a
 <code>/StructTreeRoot</code> referencing a tree of structure elements,
 plus a <code>/MarkInfo</code> dictionary with <code>/Marked true</code>.
 Every glyph in the visible page belongs to a node in the tree.</li>
-<li><strong>Level 2 — Declared.</strong> The PDF’s XMP metadata packet
+<li><strong>Level 2, Declared.</strong> The PDF’s XMP metadata packet
 carries a <code>pdfuaid:part</code> claim (typically <code>1</code>),
 declaring the conformance level so verifiers and audit tools can
 identify it without parsing the structure tree.</li>
-<li><strong>Level 3 — Verified.</strong> An independent check (an
+<li><strong>Level 3, Verified.</strong> An independent check (an
 automated audit, a human verifier, or both) records that the PDF
 actually meets the standard rather than only claiming to.</li>
 </ul>
@@ -1288,7 +1288,7 @@ at the top of the source. The kernel auto-loads tagpdf when the standard
 is declared.</li>
 </ul></li>
 <li><p><strong>Inject the Level 2 XMP claim.</strong> The structure tree
-alone is not enough — verifiers also key on the
+alone is not enough, verifiers also key on the
 <code>pdfuaid:part</code> XMP property. Post-process with a tool that
 registers the <code>http://www.aiim.org/pdfua/ns/id/</code> namespace
 and writes the claim. Without the namespace registration, the write may

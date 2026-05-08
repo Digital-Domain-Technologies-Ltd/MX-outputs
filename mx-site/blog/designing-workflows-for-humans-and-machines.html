@@ -273,11 +273,11 @@ https://github.com/digital-domain-technologies/MX-Audit
 </code></pre>
 <p>Maxine is a Claude Code skill that acts as an intelligent chief of staff. It follows a 5-phase workflow:</p>
 <ol>
-<li>Intent Analysis — understand what you’re asking for</li>
-<li>Investigation — search the codebase for patterns and documentation</li>
-<li>Context Gathering — understand repository state and recent work</li>
-<li>Analysis Report — present findings and wait for approval</li>
-<li>Action — execute the plan (only after approval)</li>
+<li>Intent Analysis, understand what you’re asking for</li>
+<li>Investigation, search the codebase for patterns and documentation</li>
+<li>Context Gathering, understand repository state and recent work</li>
+<li>Analysis Report, present findings and wait for approval</li>
+<li>Action, execute the plan (only after approval)</li>
 </ol>
 <h3 id="what-maxine-discovered" tabindex="-1">What Maxine Discovered</h3>
 <p>Maxine investigated the codebase and found the following. Current state:</p>
@@ -321,14 +321,14 @@ https://github.com/digital-domain-technologies/MX-Audit
 <h2 id="phase-2-executing-the-plan" tabindex="-1">Phase 2: Executing the Plan</h2>
 <p>The plan had 8 steps:</p>
 <ol>
-<li>Verify clean working directory — ensure no uncommitted changes</li>
-<li>Add git submodule — <code>git submodule add &lt;url&gt; packages/mx-audit</code></li>
-<li>Initialize submodule — <code>git submodule update --init --recursive</code></li>
-<li>Run MX onboarding — <code>npm run mx:onboard packages/mx-audit</code></li>
-<li>Review generated files — check .mx.yaml.md, hooks, documentation</li>
-<li>Validate setup — run <code>npm run mx:validate</code> inside submodule</li>
-<li>Commit to main repo — commit .gitmodules and submodule pointer</li>
-<li>Handle submodule commits — commit MX metadata inside submodule</li>
+<li>Verify clean working directory, ensure no uncommitted changes</li>
+<li>Add git submodule, <code>git submodule add &lt;url&gt; packages/mx-audit</code></li>
+<li>Initialize submodule, <code>git submodule update --init --recursive</code></li>
+<li>Run MX onboarding, <code>npm run mx:onboard packages/mx-audit</code></li>
+<li>Review generated files, check .mx.yaml.md, hooks, documentation</li>
+<li>Validate setup, run <code>npm run mx:validate</code> inside submodule</li>
+<li>Commit to main repo, commit .gitmodules and submodule pointer</li>
+<li>Handle submodule commits, commit MX metadata inside submodule</li>
 </ol>
 <p>Claude executed each step with todo tracking:</p>
 <pre><code class="language-bash"># Step 2: Add Git Submodule
@@ -453,7 +453,7 @@ npm run mx:onboard packages/mx-audit
 <h2 id="why-this-matters-mx-principles-in-practice" tabindex="-1">Why This Matters: MX Principles in Practice</h2>
 <p>Before diving into the principles, there’s something important to understand: none of this happened by accident.</p>
 <p>Tom designed MX with a specific philosophy: place metadata everywhere. First, though, what does that mean?</p>
-<p>Metadata is data about data — information that describes other information:</p>
+<p>Metadata is data about data, information that describes other information:</p>
 <ul>
 <li>HTML documents have <code>&lt;meta&gt;</code> tags (description, keywords, author)</li>
 <li>Markdown files can have YAML frontmatter (title, date, tags)</li>
@@ -461,7 +461,7 @@ npm run mx:onboard packages/mx-audit
 <li>Git commits have metadata (author, date, message, parent commits)</li>
 <li>Bash scripts have comments at the top (purpose, usage, author)</li>
 </ul>
-<p>Many people don’t realize these are all the same concept — structured information that describes the thing it’s attached to.</p>
+<p>Many people don’t realize these are all the same concept, structured information that describes the thing it’s attached to.</p>
 <p>MX’s principle: use the appropriate metadata format for each context.</p>
 <ul>
 <li>For scripts: Comments with usage examples</li>
@@ -469,7 +469,7 @@ npm run mx:onboard packages/mx-audit
 <li>For folders: <code>.mx.yaml.md</code> files with purpose and relationships</li>
 <li>For formats without metadata support (like <code>.exe</code>): Create a sidecar file (<code>.mx.report.exe.yaml</code>)</li>
 </ul>
-<p>The <code>.mx</code> prefix is consistent — all MX metadata files start with <code>.mx</code>, making them instantly recognizable.</p>
+<p>The <code>.mx</code> prefix is consistent, all MX metadata files start with <code>.mx</code>, making them instantly recognizable.</p>
 <hr>
 <h3 id=”the-major-principle-metadata-everywhere” tabindex=”-1”>The major principle: metadata everywhere</h3>
 <p>This is the core philosophy of MX: place metadata everywhere.</p>
@@ -506,27 +506,27 @@ npm run mx:onboard packages/mx-audit
 <li><code>~/Downloads/.mx.yaml.md</code> - Download folder purpose and cleanup rules</li>
 <li>Every folder on his Mac has context for AI agents</li>
 </ul>
-<p>This isn’t a documentation system. It’s an agentic operating system — the MX OS.</p>
+<p>This isn’t a documentation system. It’s an agentic operating system, the MX OS.</p>
 <p>The metadata includes enough information to recreate documents:</p>
 <p>Each <code>.mx.yaml.md</code> file contains:</p>
 <ul>
-<li>The what — content description and structure</li>
-<li>The how — process and methodology used</li>
-<li>The when — creation date, updates, timeline</li>
-<li>The purpose — why this exists, what problem it solves</li>
-<li>Tentative prompts — commands for generation: “use npm pdf to generate a pdf”</li>
+<li>The what, content description and structure</li>
+<li>The how, process and methodology used</li>
+<li>The when, creation date, updates, timeline</li>
+<li>The purpose, why this exists, what problem it solves</li>
+<li>Tentative prompts, commands for generation: “use npm pdf to generate a pdf”</li>
 </ul>
-<p>If a document gets lost or corrupted, an AI agent can recreate it from the metadata alone — it’s a recovery system. The metadata is executable knowledge that can regenerate the work.</p>
+<p>If a document gets lost or corrupted, an AI agent can recreate it from the metadata alone, it’s a recovery system. The metadata is executable knowledge that can regenerate the work.</p>
 <h3 id="the-commands-human-control-machine-knowledge" tabindex="-1">The commands</h3>
 <p>Two commands bring the MX OS to life.</p>
-<p><code>/maxine</code> — the intelligent assistant:</p>
+<p><code>/maxine</code>, the intelligent assistant:</p>
 <ul>
 <li>Investigates the codebase</li>
 <li>Analyzes context and patterns</li>
 <li>Recommends actions with rationale</li>
 <li>Executes with approval</li>
 </ul>
-<p><code>/exec [docname]</code> — execute document workflow:</p>
+<p><code>/exec [docname]</code>, execute document workflow:</p>
 <ul>
 <li>Reads the <code>.mx.yaml.md</code> metadata for the document</li>
 <li>Understands what it is, how it was created, what it needs</li>
@@ -604,10 +604,10 @@ npm run mx:onboard packages/name
 <p>The script isn’t “AI-generated code” in the sense of magic. It’s documented expertise captured in executable form.</p>
 <h3 id="what-makes-this-sustainable" tabindex="-1">What Makes This Sustainable</h3>
 <ol>
-<li>The script matches the documentation — same steps, same order, same validation</li>
-<li>The documentation matches the code — examples come from actual execution</li>
-<li>The code matches the pattern — follows existing conventions in scripts/mx/</li>
-<li>All three are committed to git — version controlled, reviewable, maintainable</li>
+<li>The script matches the documentation, same steps, same order, same validation</li>
+<li>The documentation matches the code, examples come from actual execution</li>
+<li>The code matches the pattern, follows existing conventions in scripts/mx/</li>
+<li>All three are committed to git, version controlled, reviewable, maintainable</li>
 </ol>
 <p>When the workflow changes (and it will), I can:</p>
 <ul>
@@ -650,9 +650,9 @@ npm run mx:onboard packages/name
 <h3 id="section-4-one-source-of-truth-multiple-presentations" tabindex="-1">4. One Source of Truth, Multiple Presentations</h3>
 <p>The workflow exists in three forms:</p>
 <ol>
-<li>Executable script — for automation</li>
-<li>User documentation — for learning</li>
-<li>Plan files — for AI context</li>
+<li>Executable script, for automation</li>
+<li>User documentation, for learning</li>
+<li>Plan files, for AI context</li>
 </ol>
 <p>But it’s the same workflow. Update one, update all three.</p>
 <p>This is how you keep systems in sync across AI and human understanding.</p>
@@ -693,17 +693,17 @@ npm run mx:onboard packages/name
 <h2 id="the-broader-pattern" tabindex="-1">The Broader Pattern</h2>
 <p>This same pattern applies to many AI-assisted tasks:</p>
 <ol>
-<li>Use AI to investigate and understand — what’s the current pattern?</li>
-<li>Use AI to execute correctly — prove the pattern works</li>
-<li>Capture the pattern in code — make it repeatable</li>
-<li>Document for both audiences — humans and AI can use it</li>
+<li>Use AI to investigate and understand, what’s the current pattern?</li>
+<li>Use AI to execute correctly, prove the pattern works</li>
+<li>Capture the pattern in code, make it repeatable</li>
+<li>Document for both audiences, humans and AI can use it</li>
 </ol>
 <p>Examples where this would work:</p>
 <ul>
-<li>Deploying a website — AI figures out the steps, creates deploy script</li>
-<li>Running database migrations — AI understands the sequence, automates it</li>
-<li>Generating reports — AI analyzes the pattern, creates report generator</li>
-<li>Onboarding new developers — AI documents the process, creates automation</li>
+<li>Deploying a website, AI figures out the steps, creates deploy script</li>
+<li>Running database migrations, AI understands the sequence, automates it</li>
+<li>Generating reports, AI analyzes the pattern, creates report generator</li>
+<li>Onboarding new developers, AI documents the process, creates automation</li>
 </ul>
 <p>The principle: don’t just complete the task. Teach the system how to complete the task.</p>
 <h2 id="what-we-built" tabindex="-1">What We Built</h2>
@@ -750,9 +750,9 @@ npm run mx:onboard packages/name
 <li>Next steps guidance</li>
 </ul>
 <h3 id="for-both" tabindex="-1">For Both</h3>
-<p>Documentation matches execution — same steps, same order</p>
-<p>Code matches documentation — examples come from real use</p>
-<p>Both match reality — verified by successful execution</p>
+<p>Documentation matches execution, same steps, same order</p>
+<p>Code matches documentation, examples come from real use</p>
+<p>Both match reality, verified by successful execution</p>
 <h2 id="training-vs-learning-vs-codification" tabindex="-1">Training vs. Learning vs. Codification</h2>
 <p>Before we conclude, let’s clarify what actually happened here - because it’s not what most people think.</p>
 <h3 id="what-didnt-happen-training" tabindex="-1">What Didn’t Happen: Training</h3>

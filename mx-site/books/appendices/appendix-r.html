@@ -25,7 +25,7 @@
   <meta property="og:title" content="Appendix R: Testing Agent Comprehension">
   <meta property="og:description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites">
   <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
-  <meta property="og:image:alt" content="MX: The Protocols — book cover">
+  <meta property="og:image:alt" content="MX: The Protocols | book cover">
   <meta property="og:site_name" content="CogNovaMX">
   <meta property="og:locale" content="en_GB">
 
@@ -35,10 +35,10 @@
   <meta name="twitter:title" content="Appendix R: Testing Agent Comprehension">
   <meta name="twitter:description" content="Implementation guide from MX-Protocols book">
   <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
-  <meta name="twitter:image:alt" content="MX: The Protocols — book cover">
+  <meta name="twitter:image:alt" content="MX: The Protocols | book cover">
   <meta name="twitter:creator" content="@ddttomtom">
 
-  <!-- Additional SEO — appendices are companion content to the books, not standalone destinations: noindex, nofollow per memory rule project_appendices_noindex.md -->
+  <!-- Additional SEO, appendices are companion content to the books, not standalone destinations: noindex, nofollow per memory rule project_appendices_noindex.md -->
   <meta name="robots" content="noindex, nofollow">
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
@@ -146,7 +146,7 @@ the same problem: how to test whether an agent has actually read what
 was published. The two questions look symmetric but they are not.
 Building a well-structured page is a craft activity with stable rules.
 Testing whether an agent read that page is an empirical activity against
-a moving target — agents change their fetching pipelines, their
+a moving target, agents change their fetching pipelines, their
 summarization layers, and their behavioral defaults from one model
 release to the next. A test that worked in February may report different
 numbers in April against the same fixture, and the difference may have
@@ -160,7 +160,7 @@ into a publisher-side framework: what to measure, what to ignore, and
 what to do when the agent and the test disagree.</p>
 <h2 id="why-test-the-agent-not-just-the-site">Why test the agent, not
 just the site</h2>
-<p>Appendix N catalogs anti-patterns from the publisher side — the
+<p>Appendix N catalogs anti-patterns from the publisher side, the
 fourteen most common mistakes that break agent compatibility. Appendix I
 documents a single pipeline failure in detail, the £203,000 cruise
 pricing error. Together they answer the question “what does the
@@ -170,7 +170,7 @@ right?”</p>
 <p>The distinction matters because publisher-side fixes have a ceiling.
 A page can be served as static HTML with semantic landmarks, complete
 Schema.org, MX governance tags, an llms.txt declaration, and a perfect
-heading hierarchy — and an agent can still report that the page does not
+heading hierarchy, and an agent can still report that the page does not
 contain information that is plainly there. The reasons are pipeline
 reasons, not content reasons. The agent’s fetch tool may have truncated
 the page at 75 kilobytes. The agent’s summarization layer may have
@@ -192,8 +192,8 @@ model in a form their authors would not recognize.</p>
 When an AI agent fetches a web page, the bytes of that page rarely
 arrive at the reasoning model unchanged. Between the HTTP response and
 the language model that produces the user-facing answer, there is almost
-always an intermediary process — sometimes called retrieval, sometimes
-summarization, sometimes context compression — that filters, reshapes,
+always an intermediary process, sometimes called retrieval, sometimes
+summarization, sometimes context compression, that filters, reshapes,
 or paraphrases the page’s content to fit the agent’s context window and
 the agent’s interpretation of the user’s question. This intermediary is
 the relevance layer.</p>
@@ -207,7 +207,7 @@ the same question but the page calls the same content “Validation
 Levels”, the relevance layer may decide that “Validation Levels” is not
 relevant to a question about “schema enforcement”, and forward something
 else instead. The reasoning model then reports that the page does not
-document schema enforcement modes — even though the page does document
+document schema enforcement modes, even though the page does document
 them, under a different name.</p>
 <p>This is a consequence of a design pattern that almost all current
 agents share, rather than a bug in any one agent. The relevance layer exists
@@ -220,7 +220,7 @@ report.</p>
 <p>The implication for publishers is that content needs to be readable
 through the relevance layer’s filter, not just in the raw page. Synonyms
 matter. Rephrasing the same idea in three different ways inside one
-section is not redundant — it is insurance against a relevance layer
+section is not redundant, it is insurance against a relevance layer
 that recognizes only one of the three phrasings. Heading text matters
 more than heading hierarchy: a heading that uses the same vocabulary as
 the user’s likely question is more likely to be retained. And
@@ -251,15 +251,15 @@ not following that redirect. It may report a count of items found
 (twenty-five) and then list a different count (sixteen). It may claim to
 have read all nine sections of a page and then fail to answer questions
 about the third section. These contradictions are not lies. They are the
-result of stitching together outputs from different sub-systems — fetch
-tool, summarization layer, reasoning model — none of which has
+result of stitching together outputs from different sub-systems, fetch
+tool, summarization layer, reasoning model, none of which has
 authoritative knowledge of what the others did.</p>
 <p>The methodological consequence is that any test of agent
 comprehension must avoid relying on the agent’s self-report as primary
 evidence. The agent’s narration of its own behavior is useful as a
 hypothesis but cannot be used as a measurement. Measurement must come
-from observable artefacts — the answers the agent produces, the strings
-it cites, the URLs it requests — that can be compared against a known
+from observable artefacts, the answers the agent produces, the strings
+it cites, the URLs it requests, that can be compared against a known
 ground truth held by the test designer, not by the agent.</p>
 <p>This is the core insight of Carey’s canary-token design: the agent is
 asked to find and report unique strings planted at known positions in
@@ -301,8 +301,7 @@ prose, when they think a test is in progress.</p>
 <p>For agent comprehension testing, the Hawthorne effect is a confounder
 that cannot be fully eliminated. Any test that the agent can detect as a
 test will produce different numbers from the agent’s normal
-documentation-reading behavior. The numbers will tend to be higher —
-the agent does its best work in evaluation conditions — which means the
+documentation-reading behavior. The numbers will tend to be higher, the agent does its best work in evaluation conditions, which means the
 test under-reports the failure modes that matter. The user who is not
 running an evaluation will see worse behavior than the test
 predicted.</p>
@@ -326,7 +325,7 @@ recognizing tests.</p>
 position in a test page, designed so that an agent’s response can be
 scored objectively by checking which canaries the response contains. The
 technique is borrowed from intrusion-detection practice in security
-engineering — where canary files reveal unauthorised access — and
+engineering, where canary files reveal unauthorised access, and
 adapted to measure not access but comprehension.</p>
 <p>A canary token follows three rules. It is unique enough that it could
 not arise by chance in the agent’s training data or in unrelated pages.
@@ -341,15 +340,14 @@ unambiguous suffix. Examples: <code>CANARY-TRUNC-75K-summit</code>,
 <code>CANARY-CONNEG-MD-sigma</code>. The plant species suffix avoids
 accidental collisions with technical vocabulary and gives each canary a
 name a human can remember.</p>
-<p>Canary tokens are placed at strategic positions inside test pages —
-at known byte offsets to test truncation, in tabs that are not the first
+<p>Canary tokens are placed at strategic positions inside test pages, at known byte offsets to test truncation, in tabs that are not the first
 tab to test tabbed disclosure, in markdown-format alternates to test
 content negotiation, and so on. The placements are recorded once, in a
 reference table held by the test designer, and never shown to the
 agent.</p>
 <p>The two-phase test design separates the agent’s task from the agent’s
 reporting. In the first phase, the agent is asked to perform a normal
-documentation task — answer ten realistic questions of the kind a
+documentation task, answer ten realistic questions of the kind a
 developer might ask a documentation site. The questions are written so
 that finding the answer requires reading the parts of the page where
 canaries are planted, but the canaries themselves are not mentioned. The
@@ -367,12 +365,12 @@ canary depending on difficulty), and a qualitative score (four points
 awarded by a human reviewer who reads the agent’s phase-one answers and
 judges whether they would have been useful to a real user). The total is
 twenty points. Perfect scores are unlikely for any current agent, and a
-low score does not necessarily mean the agent is bad — it usually means
+low score does not necessarily mean the agent is bad, it usually means
 the agent’s pipeline filtered content that the publisher believed it was
 delivering.</p>
 <p>The two-phase design is essential. If the agent is told about
 canaries before it reads the pages, the test measures how well the agent
-searches for known strings — a different and easier task than reading
+searches for known strings, a different and easier task than reading
 documentation. If the canary instruction is given after reading, the
 test measures what the agent’s pipeline actually retained when it was
 reading documentation in the way it normally reads documentation. The
@@ -392,15 +390,14 @@ HTML; the canary tokens are inline strings; the reporting form is a
 single HTML form that posts a comma-separated list of canaries to a
 backend that compares against the reference table. There is no database
 design beyond a list of canary names and their expected positions. There
-is no tracking beyond the score. There is no AI in the harness itself —
-all the AI work is done by the agent under test.</p>
+is no tracking beyond the score. There is no AI in the harness itself, all the AI work is done by the agent under test.</p>
 <p>The hard part is keeping the test free of evaluation signals,
 rather than building the site. The pages must read like real
 documentation, the questions must be the kind of questions a developer
 would actually ask, and the URL paths and page titles must use ordinary
-documentation vocabulary. Even small lapses — a heading called “Test
+documentation vocabulary. Even small lapses, a heading called “Test
 Section”, an author name like “Test Engineer”, a footer that mentions
-“evaluation” — can leak the context the test is trying to hide. The
+“evaluation”, can leak the context the test is trying to hide. The
 discipline of writing a test that the agent does not realize is a test
 is a craft activity, and it is the activity that has the largest effect
 on the results.</p>
@@ -458,7 +455,7 @@ headers and nothing else. For checking whether a URL is reachable,
 parseable, and well-formed, the HEAD request is exactly the right tool.
 It is fast enough that a publisher can HEAD-test every URL in a sitemap
 of several thousand entries in a few seconds, and cheap enough that it
-can run as often as the publisher likes — on every CMS publish, on every
+can run as often as the publisher likes, on every CMS publish, on every
 CI run, on every nightly cron, on every deploy.</p>
 <p>What HEAD-testing measures is not what the canary method measures.
 HEAD-testing measures the <em>fetchability</em> of the URLs the
@@ -467,15 +464,14 @@ server respond? does the response status make sense? does the URL still
 exist? It does not measure the <em>comprehensibility</em> of the page
 that comes back; that is what the canary method is for. The two methods
 are complementary, and a publisher serious about machine experience
-should run both — HEAD-testing continuously against the live site, and
+should run both, HEAD-testing continuously against the live site, and
 canary testing periodically against the test fixture set.</p>
 <p>The HEAD self-test catches three of the failure modes cataloged in
 Appendix S directly: Soft 404 (the test sees a 200 response with
 error-page-like behavior), Cross-Host Redirect (the test follows the
 redirect chain and records each hop’s host), and URL Encoding Mismatch
 (the test fails to parse the URL before any HTTP request is made, which
-is itself the diagnostic). It catches a fourth — Truncation Risk —
-indirectly, by reporting the <code>Content-Length</code> header in the
+is itself the diagnostic). It catches a fourth, Truncation Risk, indirectly, by reporting the <code>Content-Length</code> header in the
 HEAD response, which is enough to flag pages whose total weight exceeds
 common AI agent fetch caps. The remaining seven failure modes need a
 real GET against the rendered HTML and are not visible to a HEAD-only
@@ -497,7 +493,7 @@ server error, network error (the URL did not parse, the host was
 unreachable, or the request timed out).</li>
 <li>Compare the result against the previous run. Any new 4xx or 5xx, any
 URL that has started failing parsing, any sudden swing in the redirect
-rate — these are the signals worth alerting on.</li>
+rate, these are the signals worth alerting on.</li>
 </ol>
 <p>The publisher who runs this loop on every CMS publish catches three
 categories of regression that no other tool catches reliably: dead URLs
@@ -513,7 +509,7 @@ unreliability. The publisher who runs an audit tool that reports “no
 broken links” must verify that the tool actually issued HTTP requests
 rather than defaulting to success. Tools that claim to measure something
 can produce confidently wrong results when the measurement code is
-missing — a subtle form of the unreliable-narrator problem this appendix
+missing, a subtle form of the unreliable-narrator problem this appendix
 already describes for agents, applied to the audit infrastructure
 itself. The defense against tool unreliability is the same as the
 defense against agent unreliability: do not trust the report’s prose,

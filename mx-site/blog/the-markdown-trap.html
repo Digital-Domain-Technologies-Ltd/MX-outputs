@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
-  <meta name="description" content="I fetched a governed web page twice — once as HTML, once as Markdown — and documented exactly what disappeared. The 10,346-byte difference was almost entirely structured metadata: governance signals, discovery links, and the content policy agents need to act correctly.">
+  <meta name="description" content="I fetched a governed web page twice, once as HTML, once as Markdown, and documented exactly what disappeared. The 10,346-byte difference was almost entirely structured metadata: governance signals, discovery links, and the content policy agents need to act correctly.">
   <link rel="canonical" href="https://mx.allabout.network/blog/the-markdown-trap.html">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://mx.allabout.network/blog/the-markdown-trap.html">
   <meta property="og:title" content="The Markdown Trap: What AI Agents Lose When They Ask for the Wrong Format">
-  <meta property="og:description" content="I fetched a governed web page twice — once as HTML, once as Markdown — and documented exactly what disappeared. The 10,346-byte difference was almost entirely structured metadata: governance signals, discovery links, and the content policy agents need to act correctly.">
+  <meta property="og:description" content="I fetched a governed web page twice, once as HTML, once as Markdown, and documented exactly what disappeared. The 10,346-byte difference was almost entirely structured metadata: governance signals, discovery links, and the content policy agents need to act correctly.">
   <meta property="og:image" content="https://mx.allabout.network/blog/assets/the-markdown-trap-social.svg">
   <meta property="og:image:alt" content="The Markdown Trap: What AI Agents Lose When They Ask for the Wrong Format">
   <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Markdown Trap: What AI Agents Lose When They Ask for the Wrong Format">
-  <meta name="twitter:description" content="I fetched a governed web page twice — once as HTML, once as Markdown — and documented exactly what disappeared. The 10,346-byte difference was almost entirely structured metadata: governance signals, discovery links, and the content policy agents need to act correctly.">
+  <meta name="twitter:description" content="I fetched a governed web page twice, once as HTML, once as Markdown, and documented exactly what disappeared. The 10,346-byte difference was almost entirely structured metadata: governance signals, discovery links, and the content policy agents need to act correctly.">
   <meta name="twitter:image" content="https://mx.allabout.network/blog/assets/the-markdown-trap-social.svg">
   <meta name="twitter:image:alt" content="The Markdown Trap: What AI Agents Lose When They Ask for the Wrong Format">
   <meta name="twitter:site" content="@ddttomtom">
@@ -52,7 +52,7 @@
       "@type": "BlogPosting",
       "name": "The Markdown Trap: What AI Agents Lose When They Ask for the Wrong Format",
       "headline": "The Markdown Trap: What AI Agents Lose When They Ask for the Wrong Format",
-      "description": "I fetched a governed web page twice — once as HTML, once as Markdown — and documented exactly what disappeared. The 10,346-byte difference was almost entirely structured metadata: governance signals, discovery links, and the content policy agents need to act correctly.",
+      "description": "I fetched a governed web page twice, once as HTML, once as Markdown, and documented exactly what disappeared. The 10,346-byte difference was almost entirely structured metadata: governance signals, discovery links, and the content policy agents need to act correctly.",
       "datePublished": "2026-04-23",
       "dateModified": "2026-04-23",
       "author": {
@@ -170,7 +170,7 @@
         </div>
       </header>
 
-<p>In February 2026, Cloudflare shipped a feature called Markdown for Agents. The pitch is token efficiency: convert HTML to Markdown at the CDN edge so AI agents receive smaller payloads. Cloudflare cites approximately 80% token reduction. The logic is seductive, and for a certain class of content it is correct. For another class — the structured, governed web content that organizations are actively building for the machine-readable future — it is exactly backwards.</p>
+<p>In February 2026, Cloudflare shipped a feature called Markdown for Agents. The pitch is token efficiency: convert HTML to Markdown at the CDN edge so AI agents receive smaller payloads. Cloudflare cites approximately 80% token reduction. The logic is seductive, and for a certain class of content it is correct. For another class, the structured, governed web content that organizations are actively building for the machine-readable future, it is exactly backwards.</p>
 
 <p>I fetched a single page twice to see what the difference actually looks like.</p>
 
@@ -194,19 +194,19 @@
 
 <p>Machine-readable temporal data: the HTML uses <code>&lt;time datetime="2026-04"&gt;April 2026&lt;/time&gt;</code>. The Markdown renders this as the plain text "April 2026". The ISO 8601 date is gone. An agent comparing publication dates or sorting by recency is now working from human-formatted text rather than a parseable timestamp.</p>
 
-<p>Language and direction: <code>lang="en-GB"</code> and <code>dir="ltr"</code> establish the content's language and text direction at the document level. An agent performing translation, locale-aware ranking, or language detection loses this signal and must infer language from the prose — a solvable problem, but an unnecessary one when the answer was there.</p>
+<p>Language and direction: <code>lang="en-GB"</code> and <code>dir="ltr"</code> establish the content's language and text direction at the document level. An agent performing translation, locale-aware ranking, or language detection loses this signal and must infer language from the prose, a solvable problem, but an unnecessary one when the answer was there.</p>
 
 <p>The footer: the copyright statement is completely absent from the Markdown output. For a page carrying attribution requirements, this is not a minor omission.</p>
 
 <h2 id="the-token-efficiency-argument-examined" tabindex="-1">The token efficiency argument examined</h2>
 
-<p>The 32% reduction sounds compelling. It looks less compelling when you examine what was removed. Those 10,346 bytes were almost entirely structured metadata: governance tags, Open Graph declarations, discovery links, semantic structure, machine-readable dates. The prose — the words a human reads — was almost fully preserved.</p>
+<p>The 32% reduction sounds compelling. It looks less compelling when you examine what was removed. Those 10,346 bytes were almost entirely structured metadata: governance tags, Open Graph declarations, discovery links, semantic structure, machine-readable dates. The prose, the words a human reads, was almost fully preserved.</p>
 
 <p>An agent optimizing for token efficiency by requesting Markdown has made a trade: slightly fewer tokens on the payload, in exchange for losing the metadata that tells it what kind of resource this is, what it may do with the content, how to attribute it, and where to go next. This trade discards the instrument panel to reduce the weight of the aircraft, rather than achieving any genuine efficiency.</p>
 
 <p>The efficiency argument applies cleanly to a different category of content: plain text documents where the content is the message. A <code>llms.txt</code> file, a plain article with no governance metadata, a README. For these, Markdown is often the right format. The content has no structured metadata layer to lose. The prose is what the agent came for, and Markdown delivers prose efficiently.</p>
 
-<p>The category error is applying a single efficiency heuristic to all content types — including requests for pages where the metadata is not ancillary to the content but is the point of the page.</p>
+<p>The category error is applying a single efficiency heuristic to all content types, including requests for pages where the metadata is not ancillary to the content but is the point of the page.</p>
 
 <h2 id="the-silent-failure-mode" tabindex="-1">The silent failure mode</h2>
 
@@ -216,7 +216,7 @@
 
 <p>The MX governance framework places machine-readable policy onto web pages specifically so that agents can read that policy and act accordingly. An agent framework that systematically strips those signals by requesting Markdown has undermined the entire governance layer without knowing it did so. The page author worked to specify what agents may do. The agent framework worked to read pages efficiently. Both worked correctly within their own logic. The combination produced a silent failure.</p>
 
-<p>Silent failures are the hardest kind to fix, because no alarm sounds. The governance layer is absent, but the content appears to have been delivered. The attribution requirement is there in the HTML, visible to anyone who views the page source, honored by agents that request HTML — and invisible to agents that request Markdown.</p>
+<p>Silent failures are the hardest kind to fix, because no alarm sounds. The governance layer is absent, but the content appears to have been delivered. The attribution requirement is there in the HTML, visible to anyone who views the page source, honored by agents that request HTML, and invisible to agents that request Markdown.</p>
 
 <h2 id="the-opposite-failure" tabindex="-1">The opposite failure</h2>
 
@@ -224,7 +224,7 @@
 
 <p>Adobe LLM Optimizer's "Optimize at Edge" feature detects AI agent User-Agents at the CDN edge and routes those requests to a separate optimization backend. What comes back is the original page plus AI-generated FAQs, page-level summaries, and rewritten sections produced by Adobe's backend, none of which was written by the publishing organization. Human visitors continue to receive the original unmodified content. The response header <code>x-edgeoptimize-request-id</code> confirms when the optimized version was applied.</p>
 
-<p>This is cloaking. The AI agent is reading a version of the page that no human at the publishing organization authored or approved. The structured data on the original page — the JSON-LD declarations, the robots directives, the canonical URL — was written for the original content. It does not cover injected FAQs generated automatically by a third-party backend. An AI agent reading the augmented page has no way to distinguish which content is original and which is synthetic, and the page's machine-readable signals offer no guidance on the injected material.</p>
+<p>This is cloaking. The AI agent is reading a version of the page that no human at the publishing organization authored or approved. The structured data on the original page, the JSON-LD declarations, the robots directives, the canonical URL, was written for the original content. It does not cover injected FAQs generated automatically by a third-party backend. An AI agent reading the augmented page has no way to distinguish which content is original and which is synthetic, and the page's machine-readable signals offer no guidance on the injected material.</p>
 
 <p>The citation loop this creates is worth examining. Adobe measures brand visibility by tracking how often AI systems cite pages that have been through its optimiser. When an AI system cites an injected FAQ as if it were original content from the publisher, that registers as a successful outcome. The publisher is measured as visible for claims Adobe's backend generated. Whether those claims are accurate, authorized, or consistent with the rest of the site's content is outside the measurement.</p>
 
@@ -232,11 +232,11 @@
 
 <h2 id="what-publishers-and-agent-developers-should-do" tabindex="-1">What publishers and agent developers should do</h2>
 
-<p>Publishers running MX-governed pages should configure their CDN to serve HTML for those pages regardless of the <code>Accept</code> header. Cloudflare's configuration supports URL pattern rules. A publisher can write a rule that excludes specific URL patterns from Markdown conversion — book pages, product pages, pages carrying <code>mx:content-policy</code> headers. The rule is narrow. The service continues to operate for pages where it adds genuine value. The governed pages are served as HTML and their metadata survives the journey to the agent.</p>
+<p>Publishers running MX-governed pages should configure their CDN to serve HTML for those pages regardless of the <code>Accept</code> header. Cloudflare's configuration supports URL pattern rules. A publisher can write a rule that excludes specific URL patterns from Markdown conversion, book pages, product pages, pages carrying <code>mx:content-policy</code> headers. The rule is narrow. The service continues to operate for pages where it adds genuine value. The governed pages are served as HTML and their metadata survives the journey to the agent.</p>
 
 <p>Agent developers should treat <code>Accept: text/markdown</code> as a task-scoped decision, not a default. The right default for any request where governance metadata, discovery links, or structured data might be present is <code>Accept: text/html</code>. The agent can then parse the HTML, extract the JSON-LD, read the <code>&lt;meta&gt;</code> tags, follow the discovery links, and process the governance signals. Markdown can be requested explicitly when the task context makes clear that prose alone is sufficient.</p>
 
-<p>An agent that reads HTML and processes its metadata correctly is doing less work overall, because it is not subsequently discovering — through attribution complaints, failed discovery chains, or missing locale signals — that it read the page without the information it needed. The cost of reading HTML is lower than the cost of recovering from having read Markdown when HTML was required.</p>
+<p>An agent that reads HTML and processes its metadata correctly is doing less work overall, because it is not subsequently discovering, through attribution complaints, failed discovery chains, or missing locale signals, that it read the page without the information it needed. The cost of reading HTML is lower than the cost of recovering from having read Markdown when HTML was required.</p>
 
 <h2 id="the-standard-is-not-the-problem" tabindex="-1">The standard is not the problem</h2>
 
