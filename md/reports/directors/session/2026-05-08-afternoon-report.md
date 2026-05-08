@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Compliance-claims standard, two seeded vocabularies, accreditation programme, and the ratification gate"
-description: "Afternoon segment: drafted and pushed the open compliance-claims standard, two seeded predicate vocabularies (WCAG 2.2 and EU AI Act Article 13), the CogNovaMX accreditation programme with Annex A independence rules, an agency pilot brief, a Protocols companion chapter, and a working plan that locks the ratification gate before any outward-facing step."
+title: "Co-Directors Report — Compliance-claims standard, two seeded vocabularies, accreditation programme, ratification gate, and mx-audit pipeline hardening"
+description: "Afternoon segment: compliance-claims standard, two seeded predicate vocabularies, accreditation programme, deck-builder pipeline (v1.1); mx-audit standalone client script, developer verifier cog, and full pipeline quality gate fixes including SITEMAP discovery, At-a-Glance truncation, and ecommerce contract sync (v1.2)."
 author: "Tom Cranstoun"
 created: 2026-05-08
 modified: 2026-05-08
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -15,7 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-08-afternoon-report.md
 ---
 
-# Co-Directors Report — Compliance-claims standard, two seeded vocabularies, accreditation programme, and the ratification gate
+# Co-Directors Report — Compliance-claims standard, two seeded vocabularies, accreditation programme, ratification gate, and mx-audit pipeline hardening
 
 **Date:** 8 May 2026 — Afternoon
 **Segment:** afternoon (since noon)
@@ -24,7 +24,9 @@ mx:
 
 ## Summary
 
-The afternoon turned a one-conversation outline of "MX + REGINALD compliance verification" into a full first-pass implementation: an open Gathering standard, two seeded predicate vocabularies (WCAG 2.2 and EU AI Act Article 13), a commercial accreditation programme with formal independence rules, an agency pilot brief, a Protocols companion chapter, and a working plan that explicitly locks the ratification gate. Twelve commits across the hub and two submodules; the Phase 2 stress test (AI Act vocabulary) confirmed the open standard generalises across regulatory regimes without modification. The session ends with a clean state for the compliance-claims work and a hard rule recorded in REMINDERS: nothing reaches outward until The Gathering ratifies.
+**v1.2 addition:** A second session hardened the mx-audit pipeline end-to-end. Five root-cause bugs that had surfaced in the dotfusion.com report (truncated Priority sections, SITEMAP_* placeholders unfilled, tone-gate false positives, template leak, and verifier missing a JSON sidecar) were diagnosed and fixed at source. The standalone client script was built and smoke-tested. A developer verifier cog was created so these bugs can never silently regress. The ecommerce template contract gap found during the verifier run was fixed immediately.
+
+**v1.1 summary (compliance-claims):** The afternoon turned a one-conversation outline of "MX + REGINALD compliance verification" into a full first-pass implementation: an open Gathering standard, two seeded predicate vocabularies (WCAG 2.2 and EU AI Act Article 13), a commercial accreditation programme with formal independence rules, an agency pilot brief, a Protocols companion chapter, and a working plan that explicitly locks the ratification gate. Twelve commits across the hub and two submodules; the Phase 2 stress test (AI Act vocabulary) confirmed the open standard generalises across regulatory regimes without modification. The session ends with a clean state for the compliance-claims work and a hard rule recorded in REMINDERS: nothing reaches outward until The Gathering ratifies.
 
 ---
 
@@ -60,6 +62,39 @@ The four-objections differentiation work that started with the BMV deck was ripp
 
 ---
 
+### 8. mx-audit pipeline hardening and standalone client script (v1.2 additions)
+
+**Root-cause fixes from the dotfusion.com audit run:**
+
+Five bugs surfaced in the dotfusion.com report; all five were fixed at source.
+
+1. **SITEMAP_* placeholders unfilled** — `discover-urls.js` was only called from the interactive `/audit-collect` skill. Added as step 5a in `scripts/audit-pipeline.js` so every automated run grades the sitemap and writes `discovery.json` automatically. Nine `SITEMAP_*` placeholders now fill on every report.
+
+2. **Verifier failed on a count that was correct** — `discovery.json` contained the `urlCount: 145` that matched the report's "145 pages" claim, but `verify-audit-report.js` only scanned a fixed list of JSON sidecars that did not include `discovery.json`. Added to the list.
+
+3. **Tone gate false positives** — `api-catalog` (IANA-registered RFC 9727 identifier) and CSS `color` properties in table-cell code previews were being flagged as American English. Added three regex patterns to `AMERICAN_ALLOWLIST`.
+
+4. **Priority sections truncated at Priority 1** — `rewrite-report.js` was using `max_tokens: 1000` globally. The At-a-Glance block generates a full findings table plus one Priority section per row; 1000 tokens was insufficient. The block now receives `max_tokens: 4000` via a per-block detection (`instruction.includes('Render the at-a-glance findings table')`).
+
+5. **LLM judgment only checking top priorities** — RUBRIC CHECK 1 said "check the priorities" without specifying "EVERY numbered priority". Expanded to "Check EVERY numbered priority (Priority 1 through N, not just the top two or three)".
+
+**Fierce-critic rubric hardening:** Added security-header carve-out (named headers such as CSP, X-Frame-Options, HSTS are never hollow recommendations) and a SPECIFICITY TEST guard to prevent data-anchored recommendations from being flagged as hollow.
+
+**Template and contract sync fixes:**
+
+- `web-audit-suite-template`: replaced the brittle inline `[IF any No: "[HEADER] should be added to prevent [ATTACK_TYPE]"]` conditional with a single `[SECURITY_NARRATIVE]` placeholder filled by `infill-report.js`; removed dead `ATTACK_TYPE` and `HEADER` contract entries.
+- `ecommerce-audit-template.contract.json`: added `OTHER_WELLKNOWN_TABLE` (was present in the template body, absent from the contract — would cause CONTRACT ERROR at infill time).
+
+**Standalone client script (`mx-audit/standalone.js`):**
+
+Clients can now unzip the `mx-audit/` directory, run `npm install`, add their Anthropic API key to `.env`, and run the full audit pipeline with `npm run audit -- https://example.com`. The standalone script is a complete functional copy of `scripts/audit-pipeline.js` with all hub-relative paths (`HUB_ROOT`) rewritten to `AUDIT_ROOT` and output directories mapped to `./reports/` and `./results/`. Added `dotenv` dependency, `.env.example`, updated `.gitignore`, and copied the four gate scripts that previously only lived in the hub.
+
+**Developer verifier cog (`scripts/cogs/mx-audit-dev-verify.cog.md`):**
+
+An SOP action-cog with five verification actions: `template-contract-sync`, `contract-handler-sync`, `prompt-quality-review`, `gate-chain-check`, and `full-verify`. Running `full-verify` immediately found the ecommerce contract gap, which was fixed in the same session. The cog documents the five known-bug classes it guards against so regression is caught during developer review rather than discovered in a client report.
+
+---
+
 ## By the Numbers
 
 | Metric | Value |
@@ -74,6 +109,11 @@ The four-objections differentiation work that started with the BMV deck was ripp
 | YAML errors fixed | 1 (mx-canon/ssot/fields-data.yaml line 942 — was blocking the canon loader) |
 | Decks rendered through the pipeline | 2 (BMV pitch, Frankfurt talk) |
 | Pipeline modes | 3 (build, extract, interactive pick) |
+| Pipeline bugs fixed at source (v1.2) | 5 (SITEMAP discovery, verifier sidecar, tone false positives, At-a-Glance truncation, LLM priority coverage) |
+| Contract errors fixed (v1.2) | 2 (ecommerce OTHER_WELLKNOWN_TABLE missing; web ATTACK_TYPE/HEADER dead entries removed) |
+| New files: standalone + cog (v1.2) | 2 (mx-audit/standalone.js, scripts/cogs/mx-audit-dev-verify.cog.md) |
+| mx-audit commits (v1.2) | 2 (a01a1c8, a7dc5f1) |
+| Client reports completed (v1.2) | 1 (dotfusion.com — all 6 gates pass, EAA Level 2 PDF 1.1 MB) |
 
 ---
 
@@ -119,6 +159,8 @@ The compliance-verification thesis (regulatory positioning is one of the three c
 - Tom focuses on Frankfurt (12 May 2026) and the Protocols release (1 July 2026). Compliance-claims work is on hold.
 - When Tom returns, resume at step 1 of [compliance-claims-plan.md §6](mx-canon/mx-maxine-lives/businesses/ddt-cognovamx/compliance-claims-plan.md) — Stream submission via `/mx-gathering-submit`.
 - The four candidate stewards named in each seeded vocabulary (IAAP, WebAIM, ACT-Rules CG; AI Office, OECD, Partnership on AI, emerging consortium) are listed for future-session reference; outreach is gated on ratification.
+- Run end-to-end test of `mx-audit/standalone.js` from a clean directory against a real URL to confirm the full collect + report + PDF path works without the hub.
+- Run `full-verify` via the new `mx-audit-dev-verify` cog before the next template or contract edit to confirm the clean baseline holds.
 
 ---
 
@@ -143,4 +185,9 @@ The compliance-verification thesis (regulatory positioning is one of the three c
 | 4af89974 | Bump mx-outputs: presentations refresh + BMV deck reframe + Google web.dev blog post + afternoon directors report |
 | 53c51dcc | CHANGELOG v1.90: afternoon entry for compliance-claims standard, two seeded vocabularies, accreditation programme, and ratification gate |
 | 7e759d3b | LEARNINGS v4.4: audience enum narrowed; actionType scripted vs sop discipline |
-| _pending_ | Hub: deck-builder cog typology fix (action.scripted alignment), cog registry resync (216 cogs), this report update |
+| *pending* | Hub: deck-builder cog typology fix (action.scripted alignment), cog registry resync (216 cogs), this report update |
+| a01a1c8 | (mx-audit) Fix pipeline quality gates, prompt guards, and template/contract sync |
+| a7dc5f1 | (mx-audit) Add standalone client script for distribution without MX-hub |
+| 7f5e824 | (mx-crm) Add dotfusion.com audit report (2026-05-08) |
+| 7ad659e | (mx-outputs) Add dotfusion.com audit PDF (2026-05-08) |
+| *pending* | Hub: audit-pipeline step 5a (discover-urls), mx-audit-dev-verify cog, this report |
