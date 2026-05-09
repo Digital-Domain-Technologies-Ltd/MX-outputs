@@ -4,7 +4,7 @@ description: "Maxine's operating model upgraded so single-facet prompts now gene
 author: "Tom Cranstoun"
 created: 2026-05-09
 modified: 2026-05-09
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -115,4 +115,7 @@ Tonight's audit surfaced that saved memory had been growing along a single axis 
 | MX-hub | `18be947c` | Bump mx-outputs: regenerate README index for 2026-05-09 outputs |
 | MX-hub | `1cf535b2` | docs: add intent-cms-prd.cog.md to mx-canon/mx-os |
 | mx-outputs | `8a47eb1` | Publish CMS Vocabulary War blog post; regenerate llms files for 2026-05-09 |
-| MX-hub | `_pending_` | Cross-facet synthesis behaviour and four-facet operating map; writing-style banned-words extension |
+| mx-outputs | `2500d17` | Backfill blog index and llms-full.txt for cms-vocabulary-war post |
+| mx-outputs | `60f2e09` | Add evening directors report 2026-05-09 |
+| MX-hub | `495b08ff` | Extend writing-style banned-words list with three feedback rules |
+| MX-hub | `91f705d7` | Cross-facet synthesis as default behaviour; bump mx-outputs |
