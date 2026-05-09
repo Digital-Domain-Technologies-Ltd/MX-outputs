@@ -155,7 +155,7 @@ mx:
           Output path: mx-outputs/mx-site/blog/{slug}.html
           URL pattern: https://mx.allabout.network/blog/{slug}.html
           Social card: mx-outputs/mx-site/blog/{slug}-social.svg
-          Publish to host: npm run blog:publish -- {slug}
+          Publish to host: cp mx-outputs/mx-site/blog/{slug}.html allaboutv2/blogs/mx/  (plus matching {slug}-social.svg if any)
 
           The MX HTML template has 16 sections. Generate all of them:
 
@@ -420,7 +420,7 @@ mx:
           6. Calculate word count and reading time
           7. Generate the social card SVG
           8. Save to mx-outputs/mx-site/blog/{slug}.html
-          9. Tell the user: run `npm run blog:publish -- {slug}` to deploy to allaboutv2
+          9. Tell the user: copy the file manually with `cp mx-outputs/mx-site/blog/{slug}.html allaboutv2/blogs/mx/` (plus any matching `{slug}-social.svg`), then commit `allaboutv2`, push, and bump the hub pointer. There is no bulk-publish script.
 
           ## MX to EDS Conversion
 
@@ -532,7 +532,7 @@ Both formats have rigid templates. Getting them wrong means broken rendering, mi
 |--------|----------|---------|
 | Format | Markdown with EDS tables | Semantic HTML |
 | Location | `mx-outputs/mx-site/blog/` | `mx-outputs/mx-site/blog/` |
-| Deployment | EDS auto-deploys | `allaboutv2/blogs/mx/` (via `npm run blog:publish`) |
+| Deployment | EDS auto-deploys | `allaboutv2/blogs/mx/` (manual `cp` per slug; no script) |
 | URL | `/blogs/ddt/{slug}` | `/blogs/mx/{slug}.html` |
 | Styling | EDS stylesheet (automatic) | `shared-mx.css` (linked) |
 | Metadata | Bottom metadata table | Head meta tags + JSON-LD |
@@ -553,13 +553,15 @@ Draft (md)  →  QA (html in brain)  →  Published (allaboutv2)
    brain/md/       brain/html/allabout/     allaboutv2/blogs/mx/
 ```
 
-Three stages, three scripts, zero inference tax:
+Two scripts and one manual copy, zero inference tax:
 
 | Command | What it does |
 |---------|-------------|
 | `npm run blog:status` | Show what's in each stage |
 | `npm run blog:qa` | Validate HTML, check md→html coverage |
-| `npm run blog:publish` | Copy approved HTML from brain to allaboutv2 |
+| `cp mx-outputs/mx-site/blog/<slug>.html allaboutv2/blogs/mx/` | Publish one approved post (manual, per slug) |
+
+Publishing is a deliberate per-slug `cp`: copy the HTML, plus `<slug>-social.svg` and `<slug>.svg` if they exist. Then commit `allaboutv2`, push, and bump the hub pointer. The bulk `blog-publish.sh` was removed in May 2026 after one accidental run shipped a 34-post backlog.
 
 The brain holds the full archive. allaboutv2 receives only the published output.
 
@@ -610,10 +612,10 @@ When asked to "write a blog post", "create a blog", or "generate a post for alla
 4. Generate the file into the brain, resolving all values from env.cog.md
 5. If the user wants both formats, run **convert** on the result
 6. Run `npm run blog:qa` to validate the HTML
-7. If the post is ready to publish, run `npm run blog:publish` to deploy to allaboutv2
+7. If the post is ready to publish, copy it manually: `cp mx-outputs/mx-site/blog/<slug>.html allaboutv2/blogs/mx/` (plus matching `-social.svg` if any). Then commit `allaboutv2`, push, and bump the hub pointer.
 8. Run `npm run blog:status` to confirm the pipeline state
 
-The templates in the actions section are complete. Follow them exactly. The scripted pipeline handles all file operations — no inference needed for moving files between stages.
+The templates in the actions section are complete. Follow them exactly. Publishing is a deliberate per-slug `cp` — there is no bulk-publish script.
 
 ---
 
