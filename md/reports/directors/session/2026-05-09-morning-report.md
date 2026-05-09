@@ -4,7 +4,7 @@ description: "Fierce-critic LLM pass upgraded with AI artifact detection, final 
 author: "Tom Cranstoun"
 created: 2026-05-09
 modified: 2026-05-09
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -70,7 +70,26 @@ All four LLM-calling scripts converted from `messages.create` to `messages.strea
 
 Prevents the Anthropic SDK 10-minute connection-timeout failure (`"Streaming is required for operations that may take longer than 10 minutes"`) that fires when large report text is sent as user content.
 
-### 5. Documentation
+### 5. Soft-404 Detection Overhaul
+
+After delivering the dotfusion.com report, review of the audit output revealed the soft-404 analysis was incorrectly labelling error pages as "the site homepage." Root cause: the original detector compared each probed page's body MD5 against the zebedee fingerprint and fell back to "homepage" when it didn't match. Next.js injects `__NEXT_DATA__` with the URL path slug into every page body, making every soft-404 body unique even though they render identically.
+
+Three targeted fixes to `check-wellknown.js` (CACHE_VERSION bumped to 4):
+
+- **`extractVisibleText(html)`** — new helper strips `<script>`, `<style>`, `<noscript>`, comments, and all tags, then collapses whitespace. Produces human-readable text identical across all Next.js path variants of the same error template.
+- **`messageMd5`** — MD5 of the visible text. Stable across 40 different URLs that show the same error page. `messageMatchesFingerprint: true` fires when a probed page's messageMd5 matches the zebedee error page's messageHash.
+- **`softFourOhFourType`** — new summary field: `"error-page"` | `"homepage"` | `"mixed"` | null. Drives the soft404Note in `infill-report.js` so the report now correctly says "custom error page" instead of "homepage" for sites like dotfusion.com.
+- **`error-page-test.js`** — `bodyMd5`, `messageMd5`, `messageSnippet` added to the zebedee analysis result.
+
+Second classification bug caught and fixed: the quality string "same error page template as /zebedee.html (URL slug differs in embedded JS)" was not matched by the `hasErrorPageType` pattern, causing the type to fall through to `"homepage"`. Fixed by adding the new quality string to the pattern.
+
+### 6. PDF Corruption Fix — LLM Preamble in Repair Output
+
+The dotfusion.com PDF was corrupt: the Table of Contents appeared at page 14 instead of near page 2. Root cause: `repair-report.js` and `repair-report-final.js` only stripped markdown code fences when the API response *started* with the fence. Claude sometimes outputs reasoning prose before the fence (7 lines of "I'll work through each finding..." + the report wrapped in ` ```markdown`). The `startsWith` check missed this, so the preamble was saved into the `.md` file and pandoc rendered the reasoning as paragraphs and the real report as a code block — all headings invisible to TOC generation.
+
+Fix: replaced `startsWith` with `indexOf` in both scripts. Now searches for the first ` ```markdown\n` fence anywhere in the output, extracts from there, and strips the trailing ` ``` `. The corrupt report.md was corrected and the PDF regenerated; `inject-toc-pages.js` confirmed 30 TOC entries correctly placed.
+
+### 7. Documentation
 
 Updated six docs to reflect the above: CHANGELOG, LEARNINGS (two new rules), `mx-audit/README.md`, `mx-audit-architecture.cog.md`, `manual-web-audit-suite.cog.md`, `audit-gotchas.md`.
 
@@ -82,10 +101,12 @@ Updated six docs to reflect the above: CHANGELOG, LEARNINGS (two new rules), `mx
 |--------|-------|
 | Pages audited (dotfusion.com) | 5 |
 | Gate findings resolved by final repair | 7 (5 fierce-critic + 2 llm-judgment) |
-| Scripts modified | 4 (fierce-critic, llm-judgment, repair-report, pipeline) |
+| Scripts modified (quality gates) | 4 (fierce-critic, llm-judgment, repair-report, pipeline) |
 | New scripts | 1 (repair-report-final.js) |
+| Scripts modified (soft-404) | 3 (check-wellknown.js, error-page-test.js, infill-report.js) |
+| Scripts fixed (PDF corruption) | 2 (repair-report.js, repair-report-final.js) |
 | Docs updated | 6 |
-| Submodule commits | 3 (mx-audit, mx-crm, mx-outputs) |
+| Submodule commits | 6 (mx-audit x2, mx-crm x2, mx-outputs x2) |
 
 ---
 
@@ -101,6 +122,7 @@ Updated six docs to reflect the above: CHANGELOG, LEARNINGS (two new rules), `mx
 
 - [ ] Inspect `mx-outputs/pptx/presentations/mx-investor-deck.pptx` — file shrank unexpectedly; confirm whether it needs restoring from a previous commit
 - [ ] Re-run dotfusion.com gates only (`mx exec mx-audit --gates`) to verify the improved fierce-critic prompt reduces the false-positive hollow-recommendation count
+- [ ] Verify dotfusion.com PDF TOC placement is correct (confirm index appears near page 2, not page 14)
 
 ---
 
@@ -111,4 +133,10 @@ Updated six docs to reflect the above: CHANGELOG, LEARNINGS (two new rules), `mx
 | mx-audit | `8c3f78d` | feat: fierce-critic Area 5 + final repair pass + streaming for all LLM calls |
 | mx-crm | `8e54d10` | audit: dotfusion.com audit 2026-05-08 — final repaired report and PDF |
 | mx-outputs | `efda0d3` | audit: dotfusion.com 2026-05-08 — PDF and sidecars from final repair |
-| MX-hub | pending Step 3 | docs + pipeline wire-in + CHANGELOG/LEARNINGS |
+| MX-hub | `4566313a` | fix: soft-404 detection — MD5 body hash, error-page vs homepage, CACHE_VERSION 3 |
+| MX-hub | `d80689b6` | feat: wellknown CACHE_VERSION 4 — messageMd5 visible-text fingerprint |
+| MX-hub | `ca9bc566` | docs: soft-404 detection overhaul — CHANGELOG, audit-gotchas, architecture cog |
+| MX-hub | `6f517188` | fix: bump mx-audit pointer — softFourOhFourType classification fix |
+| mx-audit | `6e7b7ed` | fix: strip LLM reasoning preamble before code fence in repair scripts |
+| mx-crm | `dbdfc32` | feat: dotfusion.com audit 2026-05-09 with soft-404 messageMd5 fix |
+| mx-outputs | `958844f` | feat: dotfusion.com audit PDF and sidecars 2026-05-09 |
