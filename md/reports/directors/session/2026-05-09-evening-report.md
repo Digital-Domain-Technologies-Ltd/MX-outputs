@@ -60,18 +60,38 @@ Three new rules merged into the writing-style guide (`mx-canon/ssot/writing-guid
 
 Each rule mirrors a feedback memory entry saved earlier this week; the writing-style guide is now the single canonical reference rather than a duplicate surface.
 
+### 5. Post-publication tightening pass (v1.2 addition)
+
+After the CMS Vocabulary War post landed, Tom ran a final voice-and-style pass that surfaced more AI-register tells the writing-style guide had not yet captured. Each correction became both a fix to the post and a new banned-word entry in the canonical guide:
+
+- **AI-tell metaphors broadened** — added "the room" (audience metaphor), "the spine" (common-structure metaphor), "put the cape on", "wearing X branding for the analyst call".
+- **Abstract category nouns** — Tom rejected "primitive" then "unit" as the noun for "what an agent runs against". The post was rewritten to drop the abstract noun entirely and use verb-object phrasing throughout. Both words now banned in the guide.
+- **Dev-jargon shorthand band** — added "delta / diff", "the substrate", "the surface area", "the contract" (as API jargon, with a carve-out for MX's "content contract" sense), "the shape of X". Each one had been used unconsciously in the draft and had to be removed.
+- **Stock dev-blog framing** — "on Monday / Monday questions / Monday morning" added; "What to ask your CMS vendor on Monday" became simply "What to ask your CMS vendor".
+- **Headings starting with 'The...'** — Section 6 rule applied retroactively; two H2s in the post rewritten ("The real question:..." → "What does an agent actually run against?", "The architecture answer: cog files" → "Cog files"). Colons in headings also stripped per Section 3.
+- **Public-HTML neutral English** — three British-spelling residues caught and rephrased ("honour them" → "apply them", "flavours" → "forms", "labelled" → "called").
+- **New closing section** — "Three ways forward" added: hire CogNovaMX (audits, advisory, training), join The Gathering (open community of editors, contributors, content authors, accessibility specialists, AI engineers), or read the three books (free intro, Handbook, Protocols publishing July 2026).
+
+The pass surfaced a structural finding: the writing-style guide is most useful when it is updated reactively as register-tells are caught, rather than guessed at speculatively. Each rule landed in the guide had a specific failed-draft incident behind it.
+
+### 6. Blog-index Featured-vs-Blog-listing dedup rule
+
+A separate rule now applies to `mx-site/blog/index.html`: every post lives in exactly one card grid, either Featured or Blog-listing, never both. Three existing dupes (the-new-web-agentic-era-infrastructure, schema-org-and-the-missing-provenance-layer, many-agents-one-metadata-layer) were removed from the Blog-listing area now that they sit in Featured. The CMS Vocabulary War post was added to Featured (top, newest) and not duplicated in Blog-listing. Saved as `feedback_blog_index_no_featured_dup.md`.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| New saved-memory rule | 1 (cross-facet synthesis) |
+| New saved-memory rules | 3 (cross-facet synthesis, AI-tell phrasings expanded, blog-index dedup) |
 | Saved-memory entries deleted | 1 (subsumed) |
 | Saved-memory entries audited | 47 |
 | Hub files modified | 2 (businesses/README.md, writing-style.md) |
-| Submodule commits | 1 (mx-outputs: 8a47eb1) |
+| Writing-style banned entries added across the day | 11 (3 in v1.1 plus 8 added in the post-publication pass) |
+| Submodule commits | 5 (mx-outputs: 8a47eb1, 2500d17, 60f2e09, 61d93ca, 36e6b2c) |
 | Blog posts published | 1 (CMS Vocabulary War) |
+| Featured-vs-Blog-listing dupes cleaned | 3 |
 | Repositories touched | 2 (MX-hub, mx-outputs) |
 
 ---
@@ -119,3 +139,7 @@ Tonight's audit surfaced that saved memory had been growing along a single axis 
 | mx-outputs | `60f2e09` | Add evening directors report 2026-05-09 |
 | MX-hub | `495b08ff` | Extend writing-style banned-words list with three feedback rules |
 | MX-hub | `91f705d7` | Cross-facet synthesis as default behaviour; bump mx-outputs |
+| MX-hub | `d5487d3c` | Bump mx-outputs: evening report v1.1 with final commit hashes |
+| MX-hub | `30852c81` | docs: CHANGELOG — cross-facet synthesis and writing-style extension |
+| mx-outputs | `61d93ca` | Dedup featured posts from blog-listing area |
+| mx-outputs | `36e6b2c` | Bump mx-outputs README index for dedup commit |
