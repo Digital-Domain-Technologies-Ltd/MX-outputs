@@ -15,7 +15,7 @@ mx:
   x-mx-riskLevel: high
   security:
     scope:
-      filesystem: [mx-outputs/mx-site/blog/**, allaboutv2/blogs/**]
+      filesystem: [mx-outputs/mx-site/blog/**, mx-outputs/mx-site/blog/drafts/**, allaboutv2/blogs/ddt/**]
       network: none
       allowedOperations: [read, write, create]
     audit:
@@ -155,7 +155,7 @@ mx:
           Output path: mx-outputs/mx-site/blog/{slug}.html
           URL pattern: https://mx.allabout.network/blog/{slug}.html
           Social card: mx-outputs/mx-site/blog/{slug}-social.svg
-          Publish to host: cp mx-outputs/mx-site/blog/{slug}.html allaboutv2/blogs/mx/  (plus matching {slug}-social.svg if any)
+          Publish: git -C mx-outputs mv mx-site/blog/drafts/{slug}.html mx-site/blog/{slug}.html  (plus matching {slug}-social.svg and {slug}.svg if any)
 
           The MX HTML template has 16 sections. Generate all of them:
 
@@ -420,7 +420,7 @@ mx:
           6. Calculate word count and reading time
           7. Generate the social card SVG
           8. Save to mx-outputs/mx-site/blog/{slug}.html
-          9. Tell the user: copy the file manually with `cp mx-outputs/mx-site/blog/{slug}.html allaboutv2/blogs/mx/` (plus any matching `{slug}-social.svg`), then commit `allaboutv2`, push, and bump the hub pointer. There is no bulk-publish script.
+          9. Tell the user: when ready to publish, promote with `git -C mx-outputs mv mx-site/blog/drafts/{slug}.html mx-site/blog/{slug}.html` (plus any matching `{slug}-social.svg` and `{slug}.svg`). Then update `drafts/index.html` (remove draft card), `blog/index.html` (add published card), `blog/sitemap.xml`, and `llms.txt` if curated. Flip metadata: `robots: noindex,nofollow → index,follow`, `mx:status: draft → published`. Fix relative paths: `../../` → `../`, `../profiles/` → `profiles/`. Commit `mx-outputs`, push, bump hub pointer. No deploy mirror.
 
           ## MX to EDS Conversion
 
@@ -532,7 +532,7 @@ Both formats have rigid templates. Getting them wrong means broken rendering, mi
 |--------|----------|---------|
 | Format | Markdown with EDS tables | Semantic HTML |
 | Location | `mx-outputs/mx-site/blog/` | `mx-outputs/mx-site/blog/` |
-| Deployment | EDS auto-deploys | `allaboutv2/blogs/mx/` (manual `cp` per slug; no script) |
+| Deployment | EDS auto-deploys | In-tree: drafts at `mx-outputs/mx-site/blog/drafts/`, published at `mx-outputs/mx-site/blog/`. Promote via `git mv` from drafts/ to blog/. |
 | URL | `/blogs/ddt/{slug}` | `/blogs/mx/{slug}.html` |
 | Styling | EDS stylesheet (automatic) | `shared-mx.css` (linked) |
 | Metadata | Bottom metadata table | Head meta tags + JSON-LD |
@@ -549,21 +549,21 @@ Both formats share the same voice: first-person, conversational, British English
 ## The Pipeline
 
 ```
-Draft (md)  →  QA (html in brain)  →  Published (allaboutv2)
-   brain/md/       brain/html/allabout/     allaboutv2/blogs/mx/
+Draft  →  Published
+mx-outputs/mx-site/blog/drafts/<slug>.html  →  mx-outputs/mx-site/blog/<slug>.html
 ```
 
-Two scripts and one manual copy, zero inference tax:
+mx-site blog posts live in exactly one tree:
 
 | Command | What it does |
 |---------|-------------|
 | `npm run blog:status` | Show what's in each stage |
 | `npm run blog:qa` | Validate HTML, check md→html coverage |
-| `cp mx-outputs/mx-site/blog/<slug>.html allaboutv2/blogs/mx/` | Publish one approved post (manual, per slug) |
+| `git -C mx-outputs mv mx-site/blog/drafts/<slug>.html mx-site/blog/<slug>.html` | Promote one draft (plus matching SVGs) |
 
-Publishing is a deliberate per-slug `cp`: copy the HTML, plus `<slug>-social.svg` and `<slug>.svg` if they exist. Then commit `allaboutv2`, push, and bump the hub pointer. The bulk `blog-publish.sh` was removed in May 2026 after one accidental run shipped a 34-post backlog.
+Publishing is a deliberate `git mv`: move the HTML, plus `<slug>-social.svg` and `<slug>.svg` if they exist, from `drafts/` to the parent `blog/`. Then update `drafts/index.html` (remove draft card), `blog/index.html` (add published card to Featured or Blog-listing — never both), `blog/sitemap.xml`, and `llms.txt` if curated. Flip three metadata fields in the moved file (robots, mx:status, asset paths). Commit `mx-outputs`, push, bump the hub pointer.
 
-The brain holds the full archive. allaboutv2 receives only the published output.
+There is no deploy mirror.
 
 ---
 
@@ -612,7 +612,7 @@ When asked to "write a blog post", "create a blog", or "generate a post for alla
 4. Generate the file into the brain, resolving all values from env.cog.md
 5. If the user wants both formats, run **convert** on the result
 6. Run `npm run blog:qa` to validate the HTML
-7. If the post is ready to publish, copy it manually: `cp mx-outputs/mx-site/blog/<slug>.html allaboutv2/blogs/mx/` (plus matching `-social.svg` if any). Then commit `allaboutv2`, push, and bump the hub pointer.
+7. If the post is ready to publish, promote it with `git -C mx-outputs mv mx-site/blog/drafts/<slug>.html mx-site/blog/<slug>.html` (plus matching `-social.svg` and `.svg` if any). Update `drafts/index.html`, `blog/index.html`, `blog/sitemap.xml`, and `llms.txt` if curated. Flip robots, mx:status, and asset paths. Commit `mx-outputs`, push, bump the hub pointer.
 8. Run `npm run blog:status` to confirm the pipeline state
 
 The templates in the actions section are complete. Follow them exactly. Publishing is a deliberate per-slug `cp` — there is no bulk-publish script.
