@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-05-08"
-modified: "2026-05-08"
+created: "2026-05-09"
+modified: "2026-05-09"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 250 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 204 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 252 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 205 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 16 | PowerPoint — presentation source files |
-| **Total** | **1081** | |
+| **Total** | **1084** | |
 
 ---
 
@@ -62,7 +62,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (200 files)
+### pdf/outreach/ (202 files)
 
 - [`dotfusion-accessibility.csv`](pdf/outreach/2026-04-23/dotfusion-accessibility.csv)
 - [`dotfusion-image-optimisation.csv`](pdf/outreach/2026-04-23/dotfusion-image-optimisation.csv)
@@ -253,11 +253,13 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`steel-atlas-report.pdf`](pdf/outreach/2026-05-02/steel-atlas-report.pdf)
 - [`dotfusion-com-audit-log.csv`](pdf/outreach/2026-05-08/dotfusion-com-audit-log.csv)
 - [`dotfusion-com-pages-audited.csv`](pdf/outreach/2026-05-08/dotfusion-com-pages-audited.csv)
+- [`dotfusion-com-pipeline-spa-shell-pages.csv`](pdf/outreach/2026-05-08/dotfusion-com-pipeline-spa-shell-pages.csv)
 - [`dotfusion-com-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-05-08/dotfusion-com-pipeline-truncation-risk-pages.csv)
 - [`dotfusion-com-report-audit-log.csv`](pdf/outreach/2026-05-08/dotfusion-com-report-audit-log.csv)
 - [`dotfusion-com-report-fierce-rounds.json`](pdf/outreach/2026-05-08/dotfusion-com-report-fierce-rounds.json)
 - [`dotfusion-com-report-llm-rounds.json`](pdf/outreach/2026-05-08/dotfusion-com-report-llm-rounds.json)
 - [`dotfusion-com-report-rewrite-guard.json`](pdf/outreach/2026-05-08/dotfusion-com-report-rewrite-guard.json)
+- [`dotfusion-com-report-wellknown-detail.json`](pdf/outreach/2026-05-08/dotfusion-com-report-wellknown-detail.json)
 - [`dotfusion-com-report.pdf`](pdf/outreach/2026-05-08/dotfusion-com-report.pdf)
 - [`dotfusion-com-structured-data-findings.csv`](pdf/outreach/2026-05-08/dotfusion-com-structured-data-findings.csv)
 - [`baremetal-ecom-verification.json`](pdf/outreach/baremetal.vc/.infilled/baremetal-ecom-verification.json)
@@ -269,7 +271,7 @@ PDF documents — books, manuals, presentations, blog exports.
   - **2026-04-30/** (41 files)
   - **2026-05-01/** (15 files)
   - **2026-05-02/** (101 files)
-  - **2026-05-08/** (9 files)
+  - **2026-05-08/** (11 files)
   - **baremetal.vc/** (4 files)
 
 ### pdf/reginald/ (23 files)
@@ -318,7 +320,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (197 files)
+### md/reports/ (198 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -353,7 +355,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (169 files)
+#### md/reports/directors/ (170 files)
 
 **build/** (3 files)
 
@@ -367,7 +369,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (162 files)
+**session/** (163 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -522,6 +524,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-05-08-afternoon-report.md`](md/reports/directors/session/2026-05-08-afternoon-report.md)
 - [`2026-05-08-evening-report.md`](md/reports/directors/session/2026-05-08-evening-report.md)
 - [`2026-05-08-morning-report.md`](md/reports/directors/session/2026-05-08-morning-report.md)
+- [`2026-05-09-morning-report.md`](md/reports/directors/session/2026-05-09-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -687,4 +690,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-08 at 18:10*
+*Generated on 2026-05-09 at 08:12*
