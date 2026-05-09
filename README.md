@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 252 | PDFs — books, reports, manuals, presentations |
+| [pdf/](pdf/) | 262 | PDFs — books, reports, manuals, presentations |
 | [md/](md/) | 205 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 16 | PowerPoint — presentation source files |
-| **Total** | **1084** | |
+| **Total** | **1094** | |
 
 ---
 
@@ -62,7 +62,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (202 files)
+### pdf/outreach/ (212 files)
 
 - [`dotfusion-accessibility.csv`](pdf/outreach/2026-04-23/dotfusion-accessibility.csv)
 - [`dotfusion-image-optimisation.csv`](pdf/outreach/2026-04-23/dotfusion-image-optimisation.csv)
@@ -262,6 +262,16 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`dotfusion-com-report-wellknown-detail.json`](pdf/outreach/2026-05-08/dotfusion-com-report-wellknown-detail.json)
 - [`dotfusion-com-report.pdf`](pdf/outreach/2026-05-08/dotfusion-com-report.pdf)
 - [`dotfusion-com-structured-data-findings.csv`](pdf/outreach/2026-05-08/dotfusion-com-structured-data-findings.csv)
+- [`dotfusion-com-audit-log.csv`](pdf/outreach/2026-05-09/dotfusion-com-audit-log.csv)
+- [`dotfusion-com-pages-audited.csv`](pdf/outreach/2026-05-09/dotfusion-com-pages-audited.csv)
+- [`dotfusion-com-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-05-09/dotfusion-com-pipeline-truncation-risk-pages.csv)
+- [`dotfusion-com-report-audit-log.csv`](pdf/outreach/2026-05-09/dotfusion-com-report-audit-log.csv)
+- [`dotfusion-com-report-fierce-rounds.json`](pdf/outreach/2026-05-09/dotfusion-com-report-fierce-rounds.json)
+- [`dotfusion-com-report-llm-rounds.json`](pdf/outreach/2026-05-09/dotfusion-com-report-llm-rounds.json)
+- [`dotfusion-com-report-rewrite-guard.json`](pdf/outreach/2026-05-09/dotfusion-com-report-rewrite-guard.json)
+- [`dotfusion-com-report-wellknown-detail.json`](pdf/outreach/2026-05-09/dotfusion-com-report-wellknown-detail.json)
+- [`dotfusion-com-report.pdf`](pdf/outreach/2026-05-09/dotfusion-com-report.pdf)
+- [`dotfusion-com-structured-data-findings.csv`](pdf/outreach/2026-05-09/dotfusion-com-structured-data-findings.csv)
 - [`baremetal-ecom-verification.json`](pdf/outreach/baremetal.vc/.infilled/baremetal-ecom-verification.json)
 - [`baremetal-ecom.md`](pdf/outreach/baremetal.vc/.infilled/baremetal-ecom.md)
 - [`baremetal-ecom-pages-audited.csv`](pdf/outreach/baremetal.vc/baremetal-ecom-pages-audited.csv)
@@ -272,6 +282,7 @@ PDF documents — books, manuals, presentations, blog exports.
   - **2026-05-01/** (15 files)
   - **2026-05-02/** (101 files)
   - **2026-05-08/** (11 files)
+  - **2026-05-09/** (10 files)
   - **baremetal.vc/** (4 files)
 
 ### pdf/reginald/ (23 files)
@@ -690,4 +701,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-09 at 08:12*
+*Generated on 2026-05-09 at 11:10*
