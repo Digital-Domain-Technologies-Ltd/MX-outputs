@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "semantic-html"
 version: 0.1.0
 description: Validate HTML semantics — structure precedes presentation
 
 created: 2026-02-06
-modified: 2026-05-05
+modified: 2026-05-07
 
 author: Tom Cranstoun
 
@@ -13,72 +18,17 @@ mx:
   license: proprietary
   status: draft
   x-mx-riskLevel: medium
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/semantic-html/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/semantic-html.cog.md
 
   x-mx-category: mx-core
   partOf: mx-core
   refersTo: [a11y, metadata, schema]
   tags: [html, semantic, structure, accessibility, validation]
 
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog semantic-html
-    actions:
-      - name: validate
-        description: Validate semantic HTML structure
-        usage: mx cog semantic-html validate <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to validate
-        outputs:
-          - name: report
-            type: object
-            description: Validation results with semantic score and issues
-
-      - name: outline
-        description: Generate document outline from headings
-        usage: mx cog semantic-html outline <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to analyze
-        outputs:
-          - name: outline
-            type: object
-            description: Hierarchical document outline
-
-      - name: landmarks
-        description: Extract ARIA landmarks and HTML5 sections
-        usage: mx cog semantic-html landmarks <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to analyze
-        outputs:
-          - name: landmarks
-            type: array
-            description: List of landmarks with roles and labels
-
-      - name: suggest
-        description: Suggest semantic improvements
-        usage: mx cog semantic-html suggest <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to analyze
-        outputs:
-          - name: suggestions
-            type: array
-            description: List of suggested improvements
 
   dependencies: []
-  contentType: "action-doc"
-  runbook: "mx exec semantic-html"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
   x-mx-convergence: true
   x-mx-accessibility: true
   quality:

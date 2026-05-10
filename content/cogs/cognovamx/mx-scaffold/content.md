@@ -1,9 +1,14 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-scaffold"
 version: "1.0"
 description: Create new MX-OS shell scripts with correct structure, metadata, and alias registration. The canonical pattern for extending mx-os.
 created: 2026-02-25
-modified: 2026-05-05
+modified: 2026-05-07
 author: Tom Cranstoun
 
 mx:
@@ -109,7 +114,7 @@ mx:
     quality:
       semantic: true
 
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-scaffold/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/mx-scaffold.cog.md
 ---
 
 # MX Scaffold

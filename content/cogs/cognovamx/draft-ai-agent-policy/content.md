@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX AI/Agent Policy note"
 version: "1.0-draft"
 created: 2026-04-02
@@ -16,7 +21,7 @@ mx:
   audience: [humans, machines]
   cacheability: permanent
   runbook: "This is the MX AI/Agent Policy note — a deferred draft authored by Tom Cranstoun. It defines AI/agent governance fields. Use the conformance tables to determine which AI fields are required at each level. Core governance fields (Sections 5-6) apply to all documents. Context-specific fields (Sections 7-10) apply only to their designated profiles. This note stands alone; it does not depend on any other draft."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/draft-ai-agent-policy/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/proposed-drafts/deferred/draft-ai-agent-policy.cog.md
 ---
 
 # MX AI/Agent Policy note

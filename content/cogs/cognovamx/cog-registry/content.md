@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "cog-registry"
 version: "1.0"
 description: The centralised index of all known cogs in the MX ecosystem. An action-doc that catalogues cogs — the index describing itself.
 
 created: 2026-02-09
-modified: 2026-02-10
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: high
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-registry/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/cog-registry.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -24,66 +29,8 @@ mx:
   audience: agents
   readingLevel: advanced
 
-  contentType: "action-doc"
-  runbook: "mx exec cog-registry"
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog registry
-    actions:
-      - name: list
-        description: List all registered cogs with their name, description, status, and builds-on references
-        usage: Read the registry section below and present all cogs in a table or structured format
-        inputs:
-          - name: filter
-            type: string
-            required: false
-            description: Filter by category, tag, status, or audience (e.g. "category:learning" or "tag:mx-os")
-        outputs:
-          - name: cogs
-            type: array
-            description: Array of cog entries matching the filter
-
-      - name: search
-        description: Find a cog by name, tag, or description keyword
-        usage: Search the registry for cogs matching the query
-        inputs:
-          - name: query
-            type: string
-            required: true
-            description: Search term (matched against name, description, and tags)
-        outputs:
-          - name: results
-            type: array
-            description: Matching cog entries
-
-      - name: graph
-        description: Show the builds-on graph for all registered cogs
-        usage: Read all builds-on references and display the full context graph
-        outputs:
-          - name: graph
-            type: object
-            description: The complete builds-on graph with all nodes and edges
-
-      - name: validate
-        description: Check all registered cogs for spec compliance and broken references
-        usage: Read each cog file in cogs/ and verify frontmatter against cog-unified-spec
-        outputs:
-          - name: report
-            type: object
-            description: Validation report with errors, warnings, and recommendations
-
-      - name: register
-        description: Add a new cog to the registry
-        usage: Provide the cog file path and the agent will read its frontmatter, validate it, and add it to the registry
-        inputs:
-          - name: cog-path
-            type: string
-            required: true
-            description: Path to the cog file to register
-        outputs:
-          - name: entry
-            type: object
-            description: The new registry entry created
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # MX Cog Registry

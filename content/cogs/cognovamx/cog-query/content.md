@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "cog-query"
 version: "2.1"
 description: Unified COG registry management — scan, list, show, find, filter, count, validate, graph, sync, and snapshot the cog registry
 
 created: 2026-02-09
-modified: 2026-02-23
+modified: 2026-05-06
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: active
   x-mx-riskLevel: medium
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-query/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/cog-query.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -22,6 +27,7 @@ mx:
   tags: [registry, query, index, scan, tools, validation, graph]
 
   contentType: "action-doc"
+  actionType: hybrid
   runbook: "mx exec cog-query"
   x-mx-execute:
     runtime: node
@@ -86,10 +92,18 @@ mx:
         description: Generate cog-snapshot.cog.md + index.json
         usage: node scripts/cog-tools.js snapshot [--json]
 
-  dependencies:
-    - name: node
-      kind: runtime
+  dependencies: []
 ---
+
+```bash @embedded:cog-query-script
+#!/bin/bash
+# Thin wrapper around scripts/cog-tools.js — the canonical implementation.
+# All subcommands (scan, list, show, find, filter, count, validate, graph,
+# sync, export) and flags pass through unchanged.
+set -euo pipefail
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+exec node "$REPO_ROOT/scripts/cog-tools.js" "$@"
+```
 
 # COG Tools
 

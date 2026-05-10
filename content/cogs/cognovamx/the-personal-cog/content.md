@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "the-personal-cog"
 version: "2.0"
 description: Cogs describing YOU — accessibility needs, interests, health, skills. Lives on your phone. Your agent decides what to share, with whom, in context.
 
 created: 2026-02-09
-modified: 2026-02-10
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: high
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/the-personal-cog/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/the-personal-cog.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -24,45 +29,8 @@ mx:
   audience: tech
   readingLevel: advanced
 
-  contentType: "action-doc"
-  runbook: "mx exec the-personal-cog"
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog personal
-    actions:
-      - name: explain
-        description: Present the personal cog concept to any audience
-        usage: Read this cog and explain the collection model, the agent-as-guardrail privacy model, and how personal cogs interact with the companion web
-        outputs:
-          - name: explanation
-            type: string
-            description: Clear explanation of the personal cog
-
-      - name: match
-        description: Describe how a personal cog collection meets a companion web page
-        usage: Given a user's personal cogs and a companion-web-enabled page, explain what happens — what gets shared, what gets matched, what actions become possible
-        inputs:
-          - name: scenario
-            type: string
-            required: true
-            description: The scenario to walk through (e.g. restaurant, concert, medical, workplace)
-        outputs:
-          - name: walkthrough
-            type: string
-            description: Step-by-step walkthrough of how personal cogs and companion web cogs interact
-
-      - name: share
-        description: Describe the contextual sharing model for a given situation
-        usage: Given a context (restaurant, hospital, venue), explain which personal cogs would be shared and why, using the agent-as-guardrail model
-        inputs:
-          - name: context
-            type: string
-            required: true
-            description: The situation or venue type
-        outputs:
-          - name: sharing-plan
-            type: object
-            description: Which personal cogs are shared, which are withheld, and why
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # The Personal Cog
@@ -71,7 +39,7 @@ The companion web makes the world machine-readable. Every QR code, every landing
 
 But there is another side. The world describes itself to you — and you describe yourself to the world. That is the personal cog.
 
-A personal cog is a collection of cogs that describe you. Not a profile page. Not a cookie. Not a data silo owned by a platform. A collection of structured, portable, user-owned documents that your AI agent carries on your behalf and shares when appropriate.
+A personal cog (Community Owned Governance Standard) is a collection of cogs that describe you. Not a profile page. Not a cookie. Not a data silo owned by a platform. A collection of structured, portable, user-owned documents that your AI agent carries on your behalf and shares when appropriate.
 
 **The companion web is the world speaking cog. The personal cog is you speaking cog. When both sides speak the same language, everything works.**
 

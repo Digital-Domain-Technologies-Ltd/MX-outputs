@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Principles"
-version: "3.1"
+version: "3.5"
 created: 2026-02-04
-modified: 2026-04-11
+modified: 2026-05-07
 author: Tom Cranstoun
-description: "The principles that govern how MX builds things — for humans and machines alike"
+description: "The principles that govern how MX builds things — for humans and every machine that reads what you publish"
 
 mx:
   status: active
@@ -14,16 +19,18 @@ mx:
   partOf: mx-ssot
   audience: [humans, machines]
   license: proprietary
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/principles/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/ssot/principles.cog.md
 ---
 
 # MX Principles
 
 These are the rules we build by. Not guidelines. Not suggestions. Principles — the things that stay true even when everything else changes.
 
-MX is the practice of making the web — and everything you publish beyond it — work for everyone and everything that uses it. Humans and machines, reading the same content, understanding it equally. These principles define how we get there.
+**Make anything you publish — a video, a podcast, a PDF, an image, a web page — readable by machines.** That is what MX is for. Not just the web. Every machine that reads what humans publish — AI agents, robots, autonomous vehicles, industrial control systems, IoT devices, medical instruments, manufacturing pipelines, scientific instruments, and future machine classes not yet invented — reaches for the same files a human reaches for. MX is the machine layer: the runtime that makes those files executable by any of them.
 
-They apply to every cog, every document, every script, every piece of work that carries the MX name.
+This is not an AI layer. Not a web layer. Not a content layer. The machine layer. The things humans publish — every video, every podcast, every PDF, every image, every web page — are the universal substrate of human knowledge. Machines are becoming the universal consumers of that knowledge. These principles govern how we make that work.
+
+They apply to every cog, every file, every script, every piece of work that carries the MX name.
 
 ---
 
@@ -43,7 +50,7 @@ YAML frontmatter in markdown passes the test. Mermaid diagrams fail it — they 
 
 Every piece of content should carry structured metadata that tells machines what it is, who it is for, and how it relates to everything else.
 
-MX uses four layers: repository level (`.mx.yaml` at root), directory level (per-package metadata), file level (YAML frontmatter), and code level (`@mx:` annotations). Each layer adds context. Together they create a self-describing system where an AI agent can navigate as intelligently as a human.
+MX uses four layers: repository level (`.mx.yaml` at root), directory level (per-package metadata), file level (YAML frontmatter), and code level (`@mx:` annotations). Each layer adds context. Together they create a self-describing system where any machine — from a frontier language model to an industrial controller — can navigate as intelligently as a human.
 
 The minimum: every file should declare its `purpose`, `audience`, and `stability`. Everything else builds from there.
 
@@ -53,7 +60,7 @@ The minimum: every file should declare its `purpose`, `audience`, and `stability
 
 Files should say what context they provide and what context they need.
 
-An AI agent encounters a file. Without context declaration, it has to guess what to read first. With `ai.contextProvides` and `ai.contextRequired` fields, the agent knows exactly what this file offers and what it needs to read before it can work effectively.
+Any machine encounters a file. Without context declaration, it has to guess what to read first. With `ai.contextProvides` and `ai.contextRequired` fields, the machine knows exactly what this file offers and what it needs to read before it can work effectively.
 
 This creates a self-documenting dependency graph. No more "just ask Tom how this connects to that." The connections are in the metadata.
 
@@ -61,7 +68,7 @@ This creates a self-documenting dependency graph. No more "just ask Tom how this
 
 ## 4. Universal Accessibility
 
-Content must work for every type of AI agent — CLI tools that cannot run JavaScript, browser agents, server-based processors, IDE integrations with limited context windows.
+Content must work for every machine that consumes it — AI agents, robots, autonomous vehicles, industrial control systems, medical devices, IoT sensors, manufacturing pipelines, scientific instruments. The machine consuming your document may be a CLI tool with no JavaScript, a browser agent, a server-side processor, an on-device model with fewer than 100 million parameters, a real-time industrial controller that cannot tolerate ambiguity, or a future machine class that does not yet exist.
 
 The implication: plain text over proprietary formats. Markdown over Word. YAML over binary config. ASCII diagrams over rendered graphics. Semantic HTML with Schema.org structured data. Explicit relationships over implicit ones.
 
@@ -197,7 +204,7 @@ The rule: start with basic frontmatter — you have a cog. Then improve the meta
 
 Never invent when you can adopt. Every new convention is cognitive overload for humans — and we design for both.
 
-Everything that benefits SEO, GEO (Generative Engine Optimisation), accessibility, and usability also benefits MX. These disciplines share a common goal: making web content explicit, structured, and unambiguous. MX builds on their foundations. Established web standards — HTML semantics, WCAG, Schema.org, Open Graph, Dublin Core, `robots.txt`, `sitemap.xml` — come first. MX adds governance and lifecycle metadata where those standards leave gaps. MX never duplicates or replaces what existing standards already provide. A well-built MX page is also a well-built SEO page, a well-built accessible page, and a well-built GEO page. The standards reinforce each other.
+Everything that benefits SEO, accessibility, and usability also benefits MX. These disciplines share a common goal: making web content explicit, structured, and unambiguous. MX builds on their foundations. Established web standards — HTML semantics, WCAG, Schema.org, Open Graph, Dublin Core, `robots.txt`, `sitemap.xml` — come first. MX adds governance and lifecycle metadata where those standards leave gaps. MX never duplicates or replaces what existing standards already provide. A well-built MX page is also a well-built SEO page and a well-built accessible page — providing the explicit structure any system needs, without making promises about any specific system's output. The standards reinforce each other.
 
 MX OS uses standards humans already know: Markdown, YAML, HTML meta tags, QR codes, git, OAuth, MIT licence. But this principle goes beyond technical formats. It means following human conventions too. `README.md`, `CONTRIBUTING.md`, `LICENSE`, and `CHANGELOG.md` live at the repo root because that is where humans expect to find them. Convention says where things belong.
 
@@ -217,7 +224,7 @@ The machine describes itself with a cog (`$MX_HOME/mx-os-environment.cog.md`). T
 
 Every level of the stack uses the same pattern: structured metadata for machines, readable prose for humans. Same format. Same principle. No special cases. The thing that contains cogs is itself a cog. The environment that hosts the registry is itself registered.
 
-This is not cleverness. It is consistency. When every level speaks the same language, an AI agent can navigate from the machine to the metadata without learning a new format at each layer. One pattern, learned once, applied everywhere. Turtles — cogs — all the way down.
+This is not cleverness. It is consistency. When every level speaks the same language, any machine — AI agent, robot, industrial controller, or system not yet built — can navigate from the environment to the metadata without learning a new format at each layer. One pattern, learned once, applied everywhere. Turtles — cogs — all the way down.
 
 Don't panic. Read `$MX_HOME`.
 
@@ -243,17 +250,41 @@ MX does not replace existing metadata conventions. It reads what is already ther
 
 Every file type has its own conventions. JavaScript has JSDoc. HTML has meta tags. CSS has comments at the top. These conventions have been around for decades. They work. MX does not replace them.
 
-What MX adds is governance: `@mx:name`, `@mx:purpose`, `@mx:status`, `@mx:contentType`. The file can now introduce itself to any AI agent, any registry, any machine that needs to understand what it is. The pre-existing metadata IS the content. MX adds the identity.
+What MX adds is governance: `@mx:name`, `@mx:purpose`, `@mx:status`, `@mx:contentType`. The file can now introduce itself to any machine that needs to understand what it is — AI agent, robot, industrial controller, registry, or system not yet built. The pre-existing metadata IS the content. MX adds the identity.
 
 The pattern is two steps: **embrace** what the file already says — JSDoc `@description` is the prose block, Schema.org JSON-LD is the definition block, EXIF data is the provenance block. Then **extend** with MX governance fields. Never duplicate. Never wrap. The result: a file that works exactly as before for tools that do not understand MX, and is fully machine-readable for tools that do.
 
 ---
 
-## Design for the Worst Agent
+## Documents Are Self-Sufficient
 
-You cannot detect which AI agent is visiting. User-Agent strings are spoofable. The agent might be a server-side model with no JavaScript execution. It might be a local model with fewer than 100 million parameters and a tiny context window. It might be a browser extension with full DOM access but no ability to follow links.
+A document removed from its originating website must remain interpretable by any machine that encounters it.
 
-The principle: design for the agent with the least capability. If the worst agent can understand the page, every agent can. This means: critical information in the HTML, not locked behind JavaScript. Explicit structure, not inferred relationships. Redundancy across formats — the same fact in meta tags, Schema.org JSON-LD, and visible text — because different agents read different parts of the page.
+PDFs are downloaded and forwarded. Cogs are extracted and used as context. Contracts are archived. White papers circulate for years. In every case, the machine reading the document may have no access to the originating site and no way to verify origin, version, or currency without the document providing that information itself.
+
+Every important document carries: what it is; who wrote it; when; whether it is the current version; where the master copy lives; and who attested to its integrity. This is what `canonicalUri`, `provenanceAuthor`, `modified`, and cryptographic signing are for — not web optimisation, but standalone machine readability.
+
+The test: extract the document from its website entirely. Can a machine determine what it is, trust it, and find the current version? If not, the document is not MX-compliant regardless of how well its parent web page is structured.
+
+---
+
+## Trust Is Structural
+
+Machine-readability and machine-trustworthiness are separate properties. A document can be perfectly structured, fully indexed, and semantically rich — and still give an agent no basis to trust it. Who wrote this? Has it been altered in transit? Is this version current? Was it produced by a human, an AI, or an automated system?
+
+The answer cannot come from the content itself. Self-attested provenance proves nothing. The answer comes from REGINALD: the public registry where documents are registered, cryptographically signed, and made verifiable by any machine on earth. The attestation is narrow and precise: *this is what the owner published, unaltered* — not factual correctness, not editorial quality. Origin and integrity only.
+
+The practical effect compounds. Agents that read attested documents hallucinate less — they have verified facts to cite rather than inferences to make. Fewer inference steps means lower token consumption and lower energy draw. And as the EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions converge on provenance requirements, attestation shifts from competitive advantage to regulatory expectation.
+
+MX makes content machine-readable. REGINALD makes it machine-trustworthy. Both properties are required for machine-ready content. Building one without the other is building half the system.
+
+---
+
+## Design for the Worst Machine
+
+You cannot detect which machine is consuming your document. User-Agent strings are spoofable. The machine might be a server-side model with no JavaScript execution. It might be a local model with fewer than 100 million parameters and a tiny context window. It might be a browser extension with full DOM access but no ability to follow links. It might be an industrial controller that needs the answer in a single structured field. It might be a robot reading a maintenance manual on a warehouse floor.
+
+The principle: design for the machine with the least capability. If the worst machine can understand the document, every machine can. This means: critical information explicit in the markup, not locked behind JavaScript. Explicit structure, not inferred relationships. Redundancy across formats — the same fact in meta tags, Schema.org JSON-LD, and visible text — because different machines read different parts of the document.
 
 This is not over-engineering. It is strategic redundancy for an audience you cannot predict.
 
@@ -265,9 +296,11 @@ Patterns that work for one audience consistently work for all.
 
 Semantic HTML helps screen readers AND AI agents. Clear heading hierarchy helps keyboard navigation AND automated parsing. Schema.org structured data helps search engines AND language models. Accessible form labels help disabled users AND browser automation agents. Good SEO helps human searchers AND AI citation systems.
 
+The same convergence holds across every machine class. A robot reading a maintenance manual, an autonomous vehicle parsing a safety procedure, an industrial system consuming a manufacturing spec, a medical device processing a clinical protocol — all benefit from the same explicit structure. MX does not optimise for one machine class. It makes anything you publish — a video, a podcast, a PDF, an image, a web page — readable by any machine that will ever consume it, including classes not yet invented.
+
 This convergence is not coincidental. It reflects a shared underlying truth: explicit, structured, unambiguous content is universally comprehensible. When you optimise for accessibility, you get machine readability as a side effect. When you optimise for MX, you get accessibility as a side effect.
 
-The principle: never treat SEO, accessibility, usability, and MX as separate workstreams. They are the same workstream viewed from different angles. A well-built MX page passes WCAG, ranks well in search, works for AI agents, and is easy for humans to use — all at once.
+The principle: never treat SEO, accessibility, usability, and MX as separate workstreams. They are the same workstream viewed from different angles. A well-built MX document passes WCAG, ranks well in search, works for every machine class, and is easy for humans to use — all at once.
 
 ---
 

@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Standards Alignment"
 version: "1.0"
 created: 2026-02-17
@@ -14,7 +19,7 @@ mx:
   buildsOn: [fields]
   tags: [standards, alignment, schema-org, dublin-core, open-graph, governance, naming-conventions]
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-standards-alignment/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/specifications/mx-standards-alignment.cog.md
 
   contentType: standards-alignment
   runbook: "This document explains how MX follows existing web metadata standards. Read it when implementing validators, designing new fields, or explaining MX's design decisions. The governance section clarifies namespace ownership. The naming-conventions section explains context-dependent rules. The standards-precedents section provides citations."
@@ -179,7 +184,7 @@ This principle governs every decision in this document. When Schema.org uses cam
 
 ### What CogNovaMX owns
 
-CogNovaMX owns the **implementation** (MX OS, MX Maxine, MX Reginald), not the **standard**. This follows the Linux model:
+CogNovaMX owns the **implementation** (MX OS, MX Maxine, MX REGINALD), not the **standard**. This follows the Linux model:
 
 - POSIX = open standard (like The Gathering's cog spec)
 - Linux = implementation (like MX OS)
@@ -187,7 +192,7 @@ CogNovaMX owns the **implementation** (MX OS, MX Maxine, MX Reginald), not the *
 
 When CogNovaMX needs product-specific fields that don't belong in the standard, it uses `x-mx-` (public) or `x-mx-p-` (private). Examples:
 
-- `x-mx-deployment-id` — Reginald-specific
+- `x-mx-deployment-id` — REGINALD-specific
 - `x-mx-p-abc` — Private field, name obfuscated
 
 ---

@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-run"
 version: "1.0"
 description: Universal cog executor — looks up any cog by name, lists its actions, and dispatches execution by runtime
 
 created: 2026-02-11
-modified: 2026-02-11
+modified: 2026-05-06
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: draft
   x-mx-riskLevel: medium
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-run/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/mx-run.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -22,6 +27,7 @@ mx:
   tags: [executor, runtime, dispatcher, cli, cog, mx-os]
 
   contentType: "action-doc"
+  actionType: scripted
   runbook: "mx exec mx-run"
   x-mx-execute:
     runtime: node
@@ -65,12 +71,17 @@ mx:
             type: string
             description: Output from the executed action
 
-  dependencies:
-    - name: node
-      kind: runtime
-    - name: js-yaml
-      kind: package
+  dependencies: []
 ---
+
+```bash @embedded:mx-run-script
+#!/bin/bash
+# Thin wrapper around mx-reginald/scripts/mx-run.js — the canonical implementation.
+# All cog names, action names, and flags pass through unchanged.
+set -euo pipefail
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+exec node "$REPO_ROOT/mx-reginald/scripts/mx-run.js" "$@"
+```
 
 # MX Run
 

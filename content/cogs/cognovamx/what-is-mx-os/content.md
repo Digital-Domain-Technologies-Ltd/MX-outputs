@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "what-is-mx-os"
 version: "1.0"
 description: The Machine Experience Operating System. Documentation IS the system. Cogs are its programs. This action-doc explains MX OS and can bootstrap it.
 
 created: 2026-02-09
-modified: 2026-02-09
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/what-is-mx-os/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/what-is-mx-os.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -24,78 +29,15 @@ mx:
   audience: tech
   readingLevel: advanced
 
-  contentType: "action-doc"
-  runbook: "mx exec what-is-mx-os"
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog mx-os
-    actions:
-      - name: explain
-        description: Explain MX OS to the reader using the OS analogy table
-        usage: Read this cog and present the MX OS concept, mapping every component to a traditional OS equivalent
-        inputs:
-          - name: audience
-            type: string
-            required: false
-            description: Target audience — developers, content-strategists, or executives (defaults to developers)
-        outputs:
-          - name: explanation
-            type: string
-            description: Clear explanation of MX OS tailored to the audience
-
-      - name: bootstrap
-        description: Set up a folder as an MX OS environment with SOUL.md and initial cog structure
-        usage: Create SOUL.md, deliverables/ folder, and an initial cog in the target directory
-        inputs:
-          - name: directory
-            type: string
-            required: true
-            description: The directory to bootstrap as an MX OS folder
-          - name: initiative-name
-            type: string
-            required: true
-            description: The name of the initiative (used in SOUL.md and folder structure)
-        outputs:
-          - name: files-created
-            type: array
-            description: List of files created during bootstrap
-
-      - name: audit
-        description: Check an existing folder for MX OS compliance — SOULs, cog frontmatter, builds-on graph integrity
-        usage: Scan the target directory and report what is missing or inconsistent
-        inputs:
-          - name: directory
-            type: string
-            required: true
-            description: The directory to audit
-          - name: depth
-            type: string
-            required: false
-            description: Audit depth — shallow (this folder only) or deep (recursive). Defaults to shallow
-        outputs:
-          - name: report
-            type: object
-            description: Audit report with missing SOULs, invalid frontmatter, broken builds-on references, and recommendations
-
-      - name: graph
-        description: Walk the builds-on graph starting from a cog and show the context chain
-        usage: Starting from the named cog, follow all builds-on references recursively and display the graph
-        inputs:
-          - name: cog-name
-            type: string
-            required: true
-            description: The cog to start from (e.g. what-is-mx-os)
-        outputs:
-          - name: graph
-            type: object
-            description: The builds-on graph showing all nodes and edges
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # What Is MX OS?
 
 You are inside it.
 
-If you are reading this cog — parsing its frontmatter, following its `builds-on` references, understanding its structure — then MX OS is already working. The documentation is not describing a system. The documentation IS the system.
+If you are reading this cog (Community Owned Governance Standard) — parsing its frontmatter, following its `builds-on` references, understanding its structure — then MX OS is already working. The documentation is not describing a system. The documentation IS the system.
 
 ---
 

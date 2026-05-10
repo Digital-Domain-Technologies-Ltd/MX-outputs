@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX OS Installation"
 version: "2.1"
 description: "Self-contained action cog for installing MX OS. Contains both instructions and executable script."
 
 created: 2026-02-10
-modified: 2026-02-24
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: high
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/INSTALLME/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/INSTALLME.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -25,6 +30,7 @@ mx:
   readingLevel: advanced
 
   contentType: "action-doc"
+  actionType: hybrid
   runbook: "mx exec installme"
   # Block architecture - describes what this cog contains
   x-mx-blocks:
@@ -108,6 +114,10 @@ mx:
         check: "pandoc --version"
         install: "brew install pandoc"
         why: "PDF generation"
+      - name: aspell
+        check: "aspell --version"
+        install: "brew install aspell"
+        why: "Spell-check for blog HTML and markdown (uses mx-canon/mx-maxine-lives/.aspell-mx.pws)"
 
   # Installation steps for existing systems
   installSteps:

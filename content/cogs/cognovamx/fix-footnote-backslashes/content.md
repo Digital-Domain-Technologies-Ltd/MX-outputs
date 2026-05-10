@@ -1,20 +1,26 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "fix-footnote-backslashes"
 version: 0.1.0
 description: Validate and fix trailing backslashes in manuscript footnotes for PDF line breaks
 
 created: 2026-03-17
-modified: 2026-03-17
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
 mx:
   contentType: action-doc
+  actionType: scripted
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: active
   x-mx-riskLevel: high
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/fix-footnote-backslashes/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/fix-footnote-backslashes.cog.md
 
   x-mx-category: mx-tools
   partOf: mx-os
@@ -38,6 +44,20 @@ mx:
         usage: node scripts/fix-footnote-backslashes.cjs
   runbook: "mx exec fix-footnote-backslashes"
 ---
+
+```bash @embedded:fix-footnote-backslashes
+#!/bin/bash
+# Wrap scripts/fix-footnote-backslashes.cjs — adds trailing backslashes to multi-URL footnotes so pandoc renders each URL on its own line.
+set -euo pipefail
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  cat <<'HELP'
+Usage: mx exec fix-footnote-backslashes <markdown-file> [...]
+  Scans manuscript files for footnote definitions and adds trailing backslashes where missing.
+HELP
+  exit 0
+fi
+exec node scripts/fix-footnote-backslashes.cjs "$@"
+```
 
 # Fix Footnote Backslashes
 

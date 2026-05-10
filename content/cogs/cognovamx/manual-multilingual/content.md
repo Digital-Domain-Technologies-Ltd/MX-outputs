@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "Multilingual Template Generator Manual"
 description: "Converts a single HTML template into language-specific versions with proper lang attributes, hreflang tags, and root redirect for multilingual sites."
 author: Tom Cranstoun
@@ -23,7 +28,7 @@ mx:
   refersTo:
     - "mx-canon/mx-the-gathering/reference-implementations/_tools/generate-multilingual.js"
     - "mx-canon/mx-the-gathering/reference-implementations/_tools/README.cog.md"
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/manual-multilingual/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/ssot/templates/manual-multilingual.cog.md
 ---
 
 # Multilingual Template Generator

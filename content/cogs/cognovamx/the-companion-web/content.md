@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "the-companion-web"
 version: "1.0"
 description: QR codes and metadata turn physical objects into entry points for humans and AI agents. Every object becomes self-describing. Extends to robotics.
 
 created: 2026-02-09
-modified: 2026-02-09
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: high
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/the-companion-web/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/the-companion-web.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -24,45 +29,8 @@ mx:
   audience: tech
   readingLevel: advanced
 
-  contentType: "action-doc"
-  runbook: "mx exec the-companion-web"
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog companion-web
-    actions:
-      - name: explain
-        description: Present the companion web concept to any audience
-        usage: Read this cog and explain the layered model, the QR code pattern, and how humans and agents read the same content together
-        outputs:
-          - name: explanation
-            type: string
-            description: Clear explanation of the companion web
-
-      - name: embed
-        description: Generate the HTML metadata snippet for a cog
-        usage: Read a cog's frontmatter and generate the minimal HTML head metadata that makes a landing page companion-web compatible
-        inputs:
-          - name: cog-name
-            type: string
-            required: true
-            description: Name of the cog to generate HTML metadata for
-        outputs:
-          - name: html-snippet
-            type: string
-            description: HTML meta tags and link element for embedding in a landing page
-
-      - name: audit
-        description: Check a URL or HTML page for companion web compatibility
-        usage: Fetch or read the page, check for cog metadata in the HTML head, report whether an agent can read it
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL or file path of the page to audit
-        outputs:
-          - name: audit-report
-            type: object
-            description: Whether the page has cog metadata, what an agent can extract, and what is missing
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # The Companion Web
@@ -71,7 +39,7 @@ Every poster has a QR code. Every device has a QR code. Every product, every men
 
 Right now, those QR codes point to web pages built for humans. The AI agent sees HTML. It can parse it — badly. It guesses at structure. It hallucinates context. It wastes tokens figuring out what the thing is.
 
-The companion web fixes this. Same QR code. Same URL. Same landing page. But now the page has a second layer — cog metadata embedded in the HTML head, with a link to the full cog. The human reads the page. The AI agent reads the metadata. Both get what they need from the same address.
+The companion web fixes this. Same QR code. Same URL. Same landing page. But now the page has a second layer — cog (Community Owned Governance Standard) metadata embedded in the HTML head, with a link to the full cog. The human reads the page. The AI agent reads the metadata. Both get what they need from the same address.
 
 **The companion web is the machine-readable layer that reads alongside the human web. Same content. Two audiences. One URL.**
 

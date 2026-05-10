@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "About Maxine — The Server-Client Architecture"
 description: "How Maxine works: one server, three surfaces, three protocols. The definitive architectural overview of the distributed AI partner."
 author: "Tom Cranstoun"
@@ -12,10 +17,10 @@ mx:
   contentType: info-doc
   tags: [maxine, architecture, server, client, electron, pwa, dashboard, websocket, api, ipc, distributed]
   audience: [tech, business]
-  buildsOn: [maxine-vision, uber-maxine-plan]
+  buildsOn: [vision, uber-plan]
   partOf: mx-maxine-lives
   runbook: "This document explains how Maxine's server-client architecture works. Read this to understand the relationship between the embedded server, the three client surfaces, and the communication protocols that connect them."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/about-maxine/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-maxine-lives/about-maxine.cog.md
 ---
 
 # About Maxine — The Server-Client Architecture

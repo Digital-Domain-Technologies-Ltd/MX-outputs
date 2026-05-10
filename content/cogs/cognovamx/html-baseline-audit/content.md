@@ -1,9 +1,14 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: HTML Baseline Audit & Regression Detection
 description: Action-doc for establishing HTML baselines and detecting regressions across all .cog.html files. Automates visual, structural, style, and metadata comparison.
 version: "1.0"
 created: 2026-02-21
-modified: 2026-02-21
+modified: 2026-05-05
 author: Tom Cranstoun
 
 mx:
@@ -12,13 +17,13 @@ mx:
   x-mx-riskLevel: medium
   tags: [html, audit, baseline, regression, testing, automation, validation, ci-cd]
   audience: [tech]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/html-baseline-audit/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/html-baseline-audit.cog.md
 
   partOf: mx-cog-registry
 
   buildsOn: [manual-html-baseline-audit, manual-enhanced-audit]
 
-  contentType: action-doc
+  contentType: info-doc
   runbook: |
   action:
     establish-baseline:

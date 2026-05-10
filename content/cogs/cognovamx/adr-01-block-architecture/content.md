@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "adr-01-block-architecture"
 version: "1.0"
 description: "ADR #1: Replace two cog types (info-doc/action-doc) with one document type containing open-ended blocks."
@@ -21,7 +26,7 @@ mx:
     context: "The cog specification had two types: info-doc and action-doc. This was the wrong cut."
     decision: "Replace two cog types with one document type containing open-ended blocks."
     consequences: "Replaces cog-unified-spec v1.0. Affects books, pitches, and The Gathering's standard."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/adr-01-block-architecture/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/architecture-decisions/adr-01-block-architecture.cog.md
 
   buildsOn: [what-is-a-cog, what-is-mx-os]
 
@@ -133,7 +138,7 @@ The server never sees personal data. Personalisation happens locally.
 
 `.cog.html` + `.cog.js` + `.cog.css` = a complete web application. With WebMCP (W3C draft, 2026), HTML blocks expose callable tools for AI agents.
 
-### Reginald = npm for the Cog Web
+### REGINALD = npm for the Cog Web
 
 Package registry. Signed, authenticated, or open. CDN layer serves essence, executes CDN blocks, or sends the full cog. Implementations send cog headers for content negotiation.
 
@@ -169,7 +174,7 @@ MX is the process of honouring all existing and future standards. RDF, JSON-LD, 
 | Markdown only (`.cog.md`) | Any file format (`.cog.html`, `.cog.js`, `.cog.css`, `.cog.png`) |
 | Wrapper/sidecar metadata | Native metadata (EXIF, meta tags, YAML, comments) |
 | Document describes an app | Document IS the app |
-| Reginald is a registry | Reginald is npm for the cog web |
+| REGINALD is a registry | REGINALD is npm for the cog web |
 | Companion web alongside pages | The page itself is a cog |
 
 ---

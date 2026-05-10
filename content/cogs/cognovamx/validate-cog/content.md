@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "validate-cog"
 version: 0.1.0
 description: Validate cogs against the MX Cog Specification
 
 created: 2026-02-06
-modified: 2026-05-05
+modified: 2026-05-07
 
 author: Tom Cranstoun
 
@@ -13,59 +18,17 @@ mx:
   license: proprietary
   status: draft
   x-mx-riskLevel: medium
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/validate-cog/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/validate-cog.cog.md
 
   x-mx-category: mx-core
   partOf: mx-core
   refersTo: [cog-spec]
   tags: [validation, cog, spec, meta]
 
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog validate-cog
-    actions:
-      - name: check
-        description: Validate a cog file against the spec
-        usage: mx cog validate-cog check <path>
-        inputs:
-          - name: path
-            type: string
-            required: true
-            description: Path to cog .md file
-        outputs:
-          - name: report
-            type: object
-            description: Validation results with errors/warnings
-
-      - name: all
-        description: Validate all cogs in a directory
-        usage: "mx cog validate-cog all <dir>"
-        inputs:
-          - name: dir
-            type: string
-            required: false
-            description: "Directory to scan (default: MX/cogs)"
-        outputs:
-          - name: report
-            type: object
-            description: Summary of all validations
-
-      - name: fix
-        description: Auto-fix common issues
-        usage: mx cog validate-cog fix <path>
-        inputs:
-          - name: path
-            type: string
-            required: true
-            description: Path to cog .md file
-        outputs:
-          - name: changes
-            type: array
-            description: List of fixes applied
 
   dependencies: []
-  contentType: "action-doc"
-  runbook: "mx exec validate-cog"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
   x-mx-convergence: true
   x-mx-accessibility: true
   quality:
@@ -75,7 +38,7 @@ mx:
 
 # validate-cog
 
-Validate cogs against the MX Cog Specification.
+Validate cogs (Community Owned Governance Standards) against the MX Cog Specification.
 
 ## Purpose
 

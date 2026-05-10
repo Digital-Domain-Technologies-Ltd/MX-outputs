@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "a11y"
 version: 0.1.0
 description: Accessibility audit — what breaks for AI breaks for humans
 
 created: 2026-02-06
-modified: 2026-05-05
+modified: 2026-05-07
 
 author: Tom Cranstoun
 
@@ -13,70 +18,19 @@ mx:
   license: proprietary
   status: draft
   x-mx-riskLevel: medium
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/a11y/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/a11y.cog.md
 
   x-mx-category: mx-core
   partOf: mx-core
   refersTo: [semantic-html, toast-detector, clarity]
   tags: [accessibility, wcag, aria, convergence, audit]
 
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog a11y
-    actions:
-      - name: audit
-        description: Run full accessibility audit on a URL
-        usage: mx cog a11y audit <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to audit
-          - name: level
-            type: string
-            required: false
-            description: WCAG level (A, AA, AAA)
-            default: AA
-        outputs:
-          - name: report
-            type: object
-            description: Audit results with violations, warnings, passes
-
-      - name: check
-        description: Quick check for specific issues
-        usage: mx cog a11y check <url> --issue <type>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to check
-          - name: issue
-            type: string
-            required: true
-            description: Issue type (images, forms, headings, contrast, aria)
-        outputs:
-          - name: issues
-            type: array
-            description: List of found issues
-
-      - name: compare
-        description: Compare accessibility with machine-readability
-        usage: mx cog a11y compare <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to analyze
-        outputs:
-          - name: convergence
-            type: object
-            description: Side-by-side comparison of a11y and MX issues
 
   dependencies:
     - name: semantic-html
       kind: cog
-  contentType: "action-doc"
-  runbook: "mx exec a11y"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
   x-mx-convergence: true
   x-mx-accessibility: true
   quality:

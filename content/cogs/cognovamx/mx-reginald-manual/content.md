@@ -1,13 +1,18 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: MX Reginald — Manual
 description: How to use the Machine eXperience Engine including cog listing, execution, categories, and building guidance.
 author: Tom Cranstoun
 created: 2026-02-06
-modified: 2026-05-05
+modified: 2026-05-07
 version: "1.3"
 
 mx:
-  contentType: action-doc
+  contentType: info-doc
   status: active
   x-mx-riskLevel: low
   license: proprietary
@@ -20,13 +25,13 @@ mx:
   partOf: mx-maxine-lives
   audience: humans
   stability: stable
-  runbook: "mx exec mx-reginald-manual"
+  runbook: "Reference manual for the MX Reginald engine. Read for orientation, not execution."
   x-mx-contextProvides:
     - How to use the Machine eXperience Engine including cog listing, execution, categories, and building guidance.
     - Usage guide and workflow for mx reginald
     - Troubleshooting and best practices
   refersTo: []
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-reginald-manual/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/mx-reginald-manual.cog.md
 ---
 
 # MX Manual

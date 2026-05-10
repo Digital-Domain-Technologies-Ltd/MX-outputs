@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "block-architecture-evolution"
 version: "1.0"
 description: "How the cog format evolved from two document types to one document with blocks — the architectural journey, the design principles, and what it means for implementations."
@@ -16,7 +21,7 @@ mx:
   tags: [blocks, architecture, evolution, specification, history, design]
   audience: [humans, agents]
   contentType: specification
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/block-architecture-evolution/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/specifications/block-architecture-evolution.cog.md
 ---
 
 # Block Architecture Evolution
@@ -167,7 +172,7 @@ The server never sees personal data. Personalisation happens locally. Privacy by
 | Markdown only (`.cog.md`) | Any file format (`.cog.html`, `.cog.js`, `.cog.css`, `.cog.png`) |
 | Wrapper/sidecar metadata | Native metadata (EXIF, meta tags, YAML, comments) |
 | Document describes an app | Document IS the app |
-| Reginald is a registry | Reginald is npm for the cog web |
+| REGINALD is a registry | REGINALD is npm for the cog web |
 | Companion web alongside pages | The page itself is a cog |
 | Fixed categories | Open-ended block types |
 | Server-side personalisation | Client-side layered mixin model |

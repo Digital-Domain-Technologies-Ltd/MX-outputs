@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "Namespace Extensions — How to Extend MX Metadata"
 description: "MX namespace policy: standard fields (no prefix), mx: namespace (The Gathering), vendor extensions (x-mx-, x-mx-p-). The prefix is the policy."
 version: "1.0"
@@ -13,7 +18,7 @@ mx:
   buildsOn: [fields, adr-02-namespace-policy, vendor-extensions-policy]
   tags: [namespace, extensions, vendor, x-mx, metadata, policy, standard]
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/namespace-extensions/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/namespace-extensions.cog.md
 
   contentType: reference
   runbook: "This cog explains how MX metadata namespaces work. Use it to understand which fields belong to the standard, which are vendor extensions, and how to create new extensions. The prefix on a field name tells you everything: no prefix = standard, mx: = standard extension, x-mx- = vendor public, x-mx-p- = vendor private."

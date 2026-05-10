@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Profile Metadata note (DEFERRED)"
 version: "1.0-draft-superseded"
 created: 2026-04-02
@@ -16,7 +21,7 @@ mx:
   audience: [humans, machines]
   cacheability: permanent
   runbook: "Deferred draft. Read the banner and §2 Recommendation only. The original body specifying profile-specific fields for book, blog, contact, folder, report, audit, event, routing, script, code-*, media-*, and database-* was written before the 2026-04-15 canon split. That split moved most of those profiles out of Gathering scope. The Gathering admin team should formally withdraw this note."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/draft-profile-metadata/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/proposed-drafts/deferred/draft-profile-metadata.cog.md
 ---
 
 # MX Profile Metadata note (DEFERRED)

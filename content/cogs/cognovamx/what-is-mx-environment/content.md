@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "what-is-mx-environment"
 version: "1.0.0"
 description: MX OS lives on the machine, not in the repo. $MX_HOME is the machine-level context — the answer to the machine, the universe, and everything.
@@ -14,7 +19,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/what-is-mx-environment/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/what-is-mx-environment.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os

@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Field Dictionary — Moved to Appendix M"
 description: "Stub. The MX field dictionary now lives in Appendix M (prose) and fields-data.yaml (machine-readable)."
 author: "Tom Cranstoun"
@@ -18,7 +23,7 @@ mx:
     prose: datalake/manuscripts/mx-books/mx-appendices/appendix-m-index-of-metadata.md
     data: mx-canon/ssot/fields-data.yaml
   runbook: "This file is a stub. The machine-readable dictionary is at mx-canon/ssot/fields-data.yaml. The human-readable definitions are in Appendix M — Index of Metadata (§22 Field Catalogue, §23 Folder Metadata, §25 Carrier Formats, §26 HTML Carrier). Do not add content here."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/fields/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/ssot/fields.cog.md
 ---
 
 # MX Field Dictionary — Moved to Appendix M

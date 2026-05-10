@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "what-is-installme"
 version: "1.0.0"
 description: "INSTALLME.md is a root-level cog convention that gives AI agents structured installation instructions — no hallucination, no guessing, no wasted compute."
 
 created: 2026-02-10
-modified: 2026-02-10
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/what-is-installme/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/what-is-installme.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -24,8 +29,8 @@ mx:
   audience: both
   readingLevel: beginner
 
-  contentType: "action-doc"
-  runbook: "mx exec what-is-installme"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # INSTALLME.md — The Convention

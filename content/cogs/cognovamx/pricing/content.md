@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "pricing"
 version: 0.1.0
 description: Validate pricing data to catch range errors and formatting issues
 
 created: 2026-02-06
-modified: 2026-05-05
+modified: 2026-05-07
 
 author: Tom Cranstoun
 
@@ -13,56 +18,19 @@ mx:
   license: proprietary
   status: draft
   x-mx-riskLevel: medium
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/pricing/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/pricing.cog.md
 
   x-mx-category: mx-core
   partOf: mx-core
   refersTo: [schema]
   tags: [pricing, validation, range-check, formatting, trust]
 
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog pricing
-    actions:
-      - name: validate
-        description: Validate pricing data for range errors and formatting issues
-        usage: mx cog pricing validate <url|file>
-        inputs:
-          - name: source
-            type: string
-            required: true
-            description: URL or file containing pricing
-          - name: currency
-            type: string
-            required: false
-            description: Expected currency (GBP, USD, EUR)
-          - name: range
-            type: object
-            required: false
-            description: Expected price range {min, max}
-        outputs:
-          - name: report
-            type: object
-            description: Validation results with detected prices, anomalies, warnings
-
-      - name: extract
-        description: Extract pricing data from a page
-        usage: mx cog pricing extract <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to extract pricing from
-        outputs:
-          - name: prices
-            type: array
-            description: Array of detected prices with context
 
   dependencies:
     - name: schema
       kind: cog
-  contentType: "action-doc"
-  runbook: "mx exec pricing"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
   x-mx-convergence: true
   x-mx-accessibility: true
   quality:

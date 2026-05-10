@@ -1,9 +1,14 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "metadata-audit"
 version: "1.0"
 description: "Audit all YAML frontmatter — compare against the field dictionary, detect deprecated fields, namespace errors, missing required fields, and mx: object sprawl."
 created: 2026-02-16
-modified: 2026-05-05
+modified: 2026-05-07
 author: Tom Cranstoun
 
 mx:
@@ -18,7 +23,7 @@ mx:
   tags: [audit, metadata, standards, compliance, field-dictionary, namespace, deprecated-fields, frontmatter, yaml]
   audience: both
   readingLevel: intermediate
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/metadata-audit/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/metadata-audit.cog.md
 
   x-mx-execute:
     runtime: runbook
@@ -58,8 +63,23 @@ mx:
   x-mx-convergence: true
   x-mx-accessibility: true
   contentType: action-doc
+  actionType: hybrid
   runbook: "mx exec metadata-audit"
 ---
+
+```bash @embedded:metadata-audit
+#!/bin/bash
+# Wrap scripts/cog-tools.js validate — audit YAML frontmatter across every cog in the repo.
+set -euo pipefail
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  cat <<'HELP'
+Usage: mx exec metadata-audit [--strict] [--json]
+  Runs cog-tools.js validate over every *.cog.md. Reports missing required fields, deprecated fields, broken references, and the cog-typing/embedded-script completeness rules.
+HELP
+  exit 0
+fi
+exec node scripts/cog-tools.js validate "$@"
+```
 
 # Metadata Audit
 

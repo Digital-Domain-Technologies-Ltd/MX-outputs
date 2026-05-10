@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "ndr-01-block-naming"
 version: "1.0"
 description: "NDR #1: The word 'block' risks confusion with blockchain. Propose alternatives for advisory board review."
@@ -13,7 +18,7 @@ mx:
   partOf: mx-the-gathering
   tags: [ndr, naming, blocks, terminology, advisory-board]
   audience: [tech, business, business]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/ndr-01-block-naming/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/naming-decisions/ndr-01-block-naming.cog.md
 
   x-mx-ndr:
     number: 1

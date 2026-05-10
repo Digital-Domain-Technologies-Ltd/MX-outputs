@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "what-is-a-cog"
 version: "1.0"
 description: A cog that explains what cogs are. The format describing itself.
 
 created: 2026-02-09
-modified: 2026-03-22
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/what-is-a-cog/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/what-is-a-cog.cog.md
 
   x-mx-category: learning
   partOf: mx-the-gathering
@@ -23,15 +28,15 @@ mx:
   audience: tech
   readingLevel: beginner
 
-  contentType: "action-doc"
-  runbook: "mx exec what-is-a-cog"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # What Is a Cog?
 
 You are reading one.
 
-This file is a cog. Everything above the `---` line is structured metadata — YAML frontmatter that any AI agent, search engine, or tool can parse without guessing. Everything below is human-readable documentation. Same file. Both audiences.
+This file is a cog (Community Owned Governance Standard). Everything above the `---` line is structured metadata — YAML frontmatter that any AI agent, search engine, or tool can parse without guessing. Everything below is human-readable documentation. Same file. Both audiences.
 
 A cog is a README with superpowers.
 

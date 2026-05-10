@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-concepts"
 version: "1.0.0"
 description: "A conceptual map of MX — every idea, how they connect, and where to go deeper. The newcomer's guide to Machine Experience."
@@ -13,7 +18,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-concepts/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-os/mx-concepts.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -236,7 +241,7 @@ Key principle: discovery is always public. Frontmatter is always readable. Conte
 
 ## Layer 9 — The Ecosystem
 
-### Reginald
+### REGINALD
 
 The package registry for MX OS. Named after the butler — he knows where everything is. Contains the core tool action-docs: accessibility auditing, readability scoring, metadata validation, link checking, schema validation, and more.
 
@@ -285,7 +290,7 @@ Every MX concept maps to something developers already know:
 | Programs | Action-docs |
 | Data files | Info-docs |
 | Shebang line | `runtime:` field |
-| Package registry | Reginald |
+| Package registry | REGINALD |
 | Code signing | COG |
 | Filesystem metadata | SOUL.md |
 | Dependency graph | `builds-on` |

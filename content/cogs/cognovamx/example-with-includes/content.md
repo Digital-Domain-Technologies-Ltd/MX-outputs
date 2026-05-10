@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "Cog Includes Mechanism — Reference Implementation"
 version: "1.0"
 description: "Reference implementation demonstrating the cog includes mechanism. Includes a shared validation policy and overrides one rule."
@@ -20,7 +25,7 @@ mx:
   audience: [agents, tech]
   license: MIT
   deliverable: "working demonstration of cog composition via includes"
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/example-with-includes/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/reference-implementations/example-with-includes.cog.md
 
   x-mx-execute:
     runtime: runbook

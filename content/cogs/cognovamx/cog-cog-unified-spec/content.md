@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Cog Unified Specification — Reference Copy"
 version: "1.0-draft"
 created: 2026-02-08
@@ -12,7 +17,7 @@ mx:
   x-mx-category: specification
   tags: [cog, specification, reference-copy]
   canonicalSource: "mx-canon/mx-the-gathering/specifications/cog-unified-spec.cog.md"
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-cog-unified-spec/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/ssot/specifications/cog/cog-unified-spec.cog.md
 ---
 
 # MX Cog Unified Specification
@@ -23,7 +28,7 @@ mx:
 
 The cog specification is governed by **The Gathering** — an independent, open standards body focused on metadata that helps machines understand documents. The specification is MIT licensed.
 
-MX Reginald is an **implementer** of the standard, not its owner. The Gathering governs the spec; implementers build products on it.
+MX REGINALD is an **implementer** of the standard, not its owner. The Gathering governs the spec; implementers build products on it.
 
 ---
 

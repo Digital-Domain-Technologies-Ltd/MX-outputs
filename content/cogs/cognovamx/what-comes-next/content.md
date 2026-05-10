@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "what-comes-next"
 version: "1.0"
 description: The current state of the MX ecosystem, priorities, action plan, and next steps. Any AI agent reading this knows exactly where we are and what to do next.
 
 created: 2026-02-09
-modified: 2026-02-09
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/what-comes-next/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/what-comes-next.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -24,51 +29,15 @@ mx:
   audience: agents
   readingLevel: advanced
 
-  contentType: "action-doc"
-  runbook: "mx exec what-comes-next"
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog next
-    actions:
-      - name: brief
-        description: Present the current state, priorities, and recommended next action
-        usage: Read this cog and present a concise summary of where we are and what to do next
-        outputs:
-          - name: briefing
-            type: string
-            description: Current state summary and recommended next action
-
-      - name: status
-        description: Report what is done, what is in progress, and what is pending
-        usage: Read the action plan below and report status of each item
-        outputs:
-          - name: report
-            type: object
-            description: Status of all action items
-
-      - name: update
-        description: Update this cog after completing work — mark items done, add new items, adjust priorities
-        usage: After completing an action item, edit this cog to reflect the new state
-        inputs:
-          - name: completed
-            type: string
-            required: true
-            description: Which action item was completed
-          - name: notes
-            type: string
-            required: false
-            description: Any notes or discoveries from completing the work
-        outputs:
-          - name: updated-cog
-            type: string
-            description: Confirmation that the cog has been updated
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # What Comes Next
 
 This is the shared plan. If you are an AI agent working with Tom on MX, read this before doing anything else. It tells you where we are, what matters, and what to do next.
 
-This cog builds on all five founding cogs. Read them first if you need context. But if time is short, this document is self-contained enough to act on.
+This cog (Community Owned Governance Standard) builds on all five founding cogs. Read them first if you need context. But if time is short, this document is self-contained enough to act on.
 
 ---
 

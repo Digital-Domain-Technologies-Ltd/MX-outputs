@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "Shared Validation Policy"
 version: "1.0"
 description: "Shared validation policy for cog publication. Included by action-docs that validate cogs before registration."
@@ -15,7 +20,7 @@ mx:
   audience: [agents, tech]
   license: proprietary
   deliverable: "reusable validation rules for cog quality gates"
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/shared-validation-policy/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/reference-implementations/shared-validation-policy.cog.md
 ---
 
 # Shared Validation Policy

@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-train-analogy"
 version: "1.0.0"
 description: "The railway analogy for MX OS. A physical metaphor that maps every MX concept to something everyone already understands."
@@ -13,7 +18,7 @@ mx:
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-train-analogy/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-os/mx-train-analogy.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os

@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-init"
 version: "1.0.0"
 description: "The action action-doc that initializes any repository with MX OS conventions — SOUL.md, CLAUDE.md, INSTALLME.md, frontmatter, directory structure."
 
 created: 2026-02-10
-modified: 2026-02-10
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: high
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-init/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/mx-init.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -24,222 +29,8 @@ mx:
   audience: agents
   readingLevel: advanced
 
-  contentType: "action-doc"
-  runbook: "mx exec mx-init"
-  x-mx-execute:
-    runtime: runbook
-    command: mx init
-    actions:
-      - name: audit
-        description: Assess a repository's current MX readiness before making changes
-        usage: |
-          1. Check for existing MX files:
-             - SOUL.md — identity document
-             - CLAUDE.md — AI agent guidance
-             - INSTALLME.md — machine-readable install instructions
-             - CHANGELOG.md — change history
-             - CONTRIBUTING.md — contribution workflow
-             - .gitignore — standard exclusions
-
-          2. Check directory structure:
-             - Does the repo have a clear folder structure?
-             - Are there files with spaces or special characters in names?
-
-          3. Check frontmatter:
-             - For each .md file, check if it has YAML frontmatter (--- delimiters)
-             - Report: files WITH frontmatter and files WITHOUT
-
-          4. Check file naming:
-             - Are filenames kebab-case?
-             - Are there spaces, uppercase, or special characters?
-
-          5. Present audit summary:
-             - MX Files: [present] / [missing]
-             - Frontmatter: [count with] / [count without]
-             - Naming: [compliant count] / [non-compliant count]
-             - Overall: READY / PARTIAL / NOT INITIALIZED
-             - Recommendations: list what needs to be done
-        inputs:
-          - name: repo-path
-            type: string
-            required: false
-            description: "Path to repository root (defaults to current directory)"
-        outputs:
-          - name: audit-report
-            type: object
-            description: "MX readiness assessment with per-file status"
-
-      - name: init
-        description: Initialize a repository with full MX OS conventions
-        usage: |
-          1. Run the audit action first to understand current state.
-
-          2. Create SOUL.md if missing:
-             - Ask the user: What is this repository? What is its purpose?
-             - Write SOUL.md with sections: What This Is, Voice, Scope, Constraints
-             - Voice should match the repo's purpose (practical for tools, editorial for content, systematic for infrastructure)
-             - End with an appropriate MX saying from the phrasebook
-
-          3. Create or update CLAUDE.md if missing or placeholder:
-             - Include: First Steps (read SOUL.md, read CONTRIBUTING.md)
-             - Include: Repository Purpose (from SOUL.md)
-             - Include: Directory structure diagram
-             - Include: MX Conventions (frontmatter requirements, file naming, workflow)
-             - Include: For AI Agents section (check pwd, follow conventions, add frontmatter)
-             - If the repo has coding standards or architecture notes, absorb them into CLAUDE.md
-
-          4. Create INSTALLME.md if missing:
-             - Detect prerequisites by scanning package.json, Makefile, Dockerfile, etc.
-             - List required tools with check commands and minimum versions
-             - List install steps in order
-             - Add verify section with test commands
-             - Add mx-environment detection block
-
-          5. Create CHANGELOG.md if missing:
-             - Add frontmatter (title, description, author, dates, version, status)
-             - Add initial entry documenting the MX init
-
-          6. Create .gitignore if missing:
-             - Standard exclusions: node_modules/, .env, .DS_Store, *.log, dist/, build/
-             - Add IDE exclusions: .idea/, .vscode/, *.swp
-
-          7. Create directory structure if needed:
-             - For collaboration repos: incoming/, proposals/, accepted/, published/, chats/
-             - For code repos: src/, tests/, docs/
-             - Add .gitkeep to empty directories
-
-          8. Rename files if needed:
-             - Convert filenames with spaces to kebab-case
-             - Remove special characters (!, @, #)
-             - Use git mv for tracked files to preserve history
-             - Update any internal links that reference old filenames
-
-          9. Audit frontmatter on all .md files:
-             - For each file without frontmatter, add:
-               title, description, author, created, modified, version, status
-             - For files being migrated, add source: field for provenance
-             - Use ISO date format (YYYY-MM-DD)
-
-          10. Present summary:
-              - Files created: [list]
-              - Files renamed: [list with old → new]
-              - Frontmatter added: [count]
-              - Directories created: [list]
-              - Ready for commit: yes/no
-
-          Rules:
-          - Never delete existing content — only add, rename, or restructure
-          - Preserve git history — use git mv for renames
-          - Ask before making destructive changes
-          - If a file already has frontmatter, validate it but do not overwrite
-          - All dates in ISO format (YYYY-MM-DD)
-        inputs:
-          - name: repo-path
-            type: string
-            required: false
-            description: "Path to repository root (defaults to current directory)"
-          - name: repo-type
-            type: string
-            required: false
-            description: "Type of repo: collaboration, code, documentation, mixed (defaults to auto-detect)"
-        outputs:
-          - name: init-report
-            type: object
-            description: "Summary of all changes made during initialization"
-
-      - name: migrate
-        description: Copy and triage content from one repo into an MX-initialized repo
-        usage: |
-          1. Scan the source directory for all .md files.
-
-          2. For each file:
-             - Read the content
-             - Assess maturity: raw (incoming), structured (proposals), or meta (skip)
-             - Meta files to skip: CLAUDE.md, CHANGELOG.md, README.md, markdown-lint guides
-
-          3. Rename to kebab-case:
-             - Remove special characters (!, @, #, etc.)
-             - Replace spaces with hyphens
-             - Convert to lowercase
-             - Example: "! More book.md" → "more-book.md"
-             - Example: "Vibe coding backend.md" → "vibe-coding-backend.md"
-
-          4. Add or update frontmatter:
-             - Ensure title, description, author, created, modified, version, status
-             - Add source: field with the original file path
-             - Set status to "draft" for incoming, "proposal" for proposals
-
-          5. Copy to destination:
-             - Raw/brainstorm files → incoming/
-             - Structured/actionable files → proposals/
-             - Present triage decisions to user for confirmation
-
-          6. Update CHANGELOG.md in the destination repo with migration details.
-
-          7. Present summary:
-             - Files migrated: [count]
-             - To incoming/: [count and list]
-             - To proposals/: [count and list]
-             - Skipped: [count and list with reasons]
-             - Renamed: [list with old → new]
-        inputs:
-          - name: source-path
-            type: string
-            required: true
-            description: "Path to the source directory containing files to migrate"
-          - name: dest-path
-            type: string
-            required: false
-            description: "Path to the destination MX repo (defaults to current directory)"
-        outputs:
-          - name: migration-report
-            type: object
-            description: "Summary of migrated files with source → destination mapping"
-
-      - name: verify
-        description: Verify an MX-initialized repo meets all conventions
-        usage: |
-          1. Check required files exist:
-             - SOUL.md (REQUIRED)
-             - CLAUDE.md (REQUIRED)
-             - INSTALLME.md (RECOMMENDED)
-             - CHANGELOG.md (RECOMMENDED)
-             - .gitignore (REQUIRED)
-
-          2. Check all .md files have YAML frontmatter:
-             - Minimum fields: title, description, author, created, modified, version, status
-             - Report any files missing frontmatter or missing required fields
-
-          3. Check file naming conventions:
-             - All files should be kebab-case
-             - No spaces or special characters
-             - Report violations
-
-          4. Check SOUL.md quality:
-             - Has sections: What This Is, Voice, Scope, Constraints
-             - Ends with an MX saying
-
-          5. Check CLAUDE.md quality:
-             - References SOUL.md in first steps
-             - Includes directory structure
-             - Includes For AI Agents section
-
-          6. Present verification:
-             - Required files: [pass/fail count]
-             - Frontmatter: [pass/fail count]
-             - Naming: [pass/fail count]
-             - SOUL.md: COMPLETE / PARTIAL / MISSING
-             - CLAUDE.md: COMPLETE / PARTIAL / MISSING
-             - Overall: PASS / NEEDS ATTENTION / FAIL
-        inputs:
-          - name: repo-path
-            type: string
-            required: false
-            description: "Path to repository to verify (defaults to current directory)"
-        outputs:
-          - name: verification
-            type: object
-            description: "Full verification results with per-check pass/fail"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # MX Init

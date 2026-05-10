@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-phrasebook"
 version: "1.0.0"
 description: "The sayings that define MX OS culture. Every phrase earned its place by being built, not brainstormed."
 
 created: 2026-02-10
-modified: 2026-02-11
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-phrasebook/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/mx-phrasebook.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -24,40 +29,15 @@ mx:
   audience: both
   readingLevel: beginner
 
-  contentType: "action-doc"
-  runbook: "mx exec mx-phrasebook"
-  x-mx-execute:
-    runtime: runbook
-    command: mx phrasebook
-    actions:
-      - name: list
-        description: List all MX sayings with context and usage
-        usage: Read the phrasebook below. Present each saying with its context, where it originated, and where it is used. This is the reference — do not paraphrase or invent new sayings.
-        inputs: []
-        outputs:
-          - name: phrasebook
-            type: array
-            description: All MX sayings with metadata
-
-      - name: find
-        description: Find the right saying for a context
-        usage: Given a context (e.g. "agent is lost", "installation", "canon conflict"), return the most appropriate saying from the phrasebook. Only return sayings that exist in this cog — never invent new ones.
-        inputs:
-          - name: context
-            type: string
-            required: true
-            description: The situation or context to find a saying for
-        outputs:
-          - name: saying
-            type: object
-            description: The matching saying with full context
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # The MX Phrasebook
 
 Every system has a language. Not just its technical vocabulary — its sayings, its refrains, the phrases people reach for when explaining what it does and why it matters.
 
-MX OS has accumulated these organically. None were brainstormed in a naming workshop. They emerged from building — from writing cogs, deploying SOULs, creating conventions, and solving real problems. Each phrase earned its place by being useful in the moment it was needed.
+MX OS has accumulated these organically. None were brainstormed in a naming workshop. They emerged from building — from writing cogs (Community Owned Governance Standards), deploying SOULs, creating conventions, and solving real problems. Each phrase earned its place by being useful in the moment it was needed.
 
 This is the canonical phrasebook. If Maxine or any AI agent uses an MX saying, it should come from here. If a saying is not in this file, it is not official.
 

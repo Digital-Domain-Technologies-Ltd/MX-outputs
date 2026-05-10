@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "metadata"
 version: 0.1.0
 description: Extract and validate page metadata (Open Graph, Twitter Cards, meta tags)
 
 created: 2026-02-06
-modified: 2026-05-05
+modified: 2026-05-07
 
 author: Tom Cranstoun
 
@@ -13,78 +18,19 @@ mx:
   license: proprietary
   status: draft
   x-mx-riskLevel: medium
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/metadata/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/metadata.cog.md
 
   x-mx-category: mx-core
   partOf: mx-core
   refersTo: [schema, semantic-html]
   tags: [metadata, opengraph, twitter-cards, seo, social]
 
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog metadata
-    actions:
-      - name: extract
-        description: Extract all metadata from a page
-        usage: mx cog metadata extract <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to extract metadata from
-        outputs:
-          - name: metadata
-            type: object
-            description: All extracted metadata organized by type
-
-      - name: validate
-        description: Validate metadata completeness
-        usage: mx cog metadata validate <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to validate
-        outputs:
-          - name: validation
-            type: object
-            description: Validation results with missing/invalid fields
-
-      - name: preview
-        description: Preview how page appears in social shares
-        usage: mx cog metadata preview <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to preview
-          - name: platform
-            type: string
-            required: false
-            description: Platform (twitter, facebook, linkedin, slack)
-        outputs:
-          - name: previews
-            type: object
-            description: Rendered preview data for each platform
-
-      - name: suggest
-        description: Suggest metadata improvements
-        usage: mx cog metadata suggest <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to analyze
-        outputs:
-          - name: suggestions
-            type: array
-            description: Recommended improvements
 
   dependencies:
     - name: schema
       kind: cog
-  contentType: "action-doc"
-  runbook: "mx exec metadata"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
   x-mx-convergence: true
   x-mx-accessibility: true
   quality:

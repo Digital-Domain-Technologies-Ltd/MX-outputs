@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "building-action-docs"
 version: "1.0"
 description: How to build action-docs — from description to working tool. Describe, create, test, wire. The pattern that turns natural language into MX OS applications.
 
 created: 2026-02-09
-modified: 2026-05-05
+modified: 2026-05-07
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/building-action-docs/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/building-action-docs.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -24,63 +29,9 @@ mx:
   audience: tech
   readingLevel: advanced
 
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog build
-    actions:
-      - name: explain
-        description: Present the operational action-doc development lifecycle
-        usage: Read this cog and explain the four-phase lifecycle (describe, create, test, wire) with the MX-Contacts worked example
-        outputs:
-          - name: explanation
-            type: string
-            description: Clear explanation of how to build operational action-docs
 
-      - name: scaffold
-        description: Create a new operational action-doc with entry point wiring
-        usage: >
-          Given a domain name (e.g. "finances", "content", "outreach"):
-          1. Create an action-doc file with YAML frontmatter matching the cog-unified-spec
-          2. Include an execute block with runtime: runbook
-          3. Add standard actions: list, report, priorities, next, dashboard
-          4. Add domain-specific actions based on the human's description
-          5. Create the entry point configuration for the host platform
-          6. Register the entry point in the boot sequence
-          7. Return the file paths created
-        inputs:
-          - name: domain
-            type: string
-            required: true
-            description: The domain this action-doc manages (e.g. "contacts", "finances", "content")
-          - name: description
-            type: string
-            required: true
-            description: Natural language description of what the action-doc should do
-        outputs:
-          - name: files-created
-            type: array
-            description: Paths to all files created (action-doc, entry point config, skill file)
-
-      - name: wire
-        description: Add entry point and boot registration for an existing action-doc
-        usage: >
-          Given a path to an existing action-doc:
-          1. Read the action-doc to understand its actions
-          2. Create the entry point configuration for the host platform
-          3. Register the entry point in the boot sequence
-          4. Return the wiring summary
-        inputs:
-          - name: cog-path
-            type: string
-            required: true
-            description: Path to the action-doc to wire up
-        outputs:
-          - name: wiring-report
-            type: string
-            description: Summary of entry point and boot registration created
-
-  contentType: "action-doc"
-  runbook: "mx exec building-action-docs"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
   quality:
     semantic: true
 
@@ -88,7 +39,7 @@ mx:
   x-mx-accessibility: true
 ---
 
-# Building Action-Cogs
+# Building Action-Cogs (Community Owned Governance Standards)
 
 How to go from "I need a tool for X" to a working, discoverable, invocable action-doc. The complete development lifecycle.
 

@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "registry-sync"
 version: "1.0.0"
 description: "Automatically sync mx-reginald registry when cogs are added, modified, or deleted — multiple trigger mechanisms with smart mode detection."
 
 created: 2026-02-17
-modified: 2026-02-17
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -23,7 +28,7 @@ mx:
       retention: 90d
       includeInputs: false
       includeOutputs: true
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/registry-sync/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/registry-sync.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -445,8 +450,23 @@ mx:
             description: "List of validation errors if any"
 
   contentType: action-doc
+  actionType: hybrid
   runbook: "mx exec registry-sync"
 ---
+
+```bash @embedded:registry-sync
+#!/bin/bash
+# Wrap scripts/cog-tools.js sync — refresh mx-reginald/index.json from current cog files.
+set -euo pipefail
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  cat <<'HELP'
+Usage: mx exec registry-sync
+  Scans every *.cog.md and rewrites mx-reginald/index.json to match.
+HELP
+  exit 0
+fi
+exec node scripts/cog-tools.js sync "$@"
+```
 
 # Registry Sync
 

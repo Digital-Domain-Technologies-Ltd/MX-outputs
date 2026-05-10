@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "cogs-for-agent-developers"
 version: "1.0"
 description: How cogs complement AI agent frameworks. Agent skills extend one agent. Cogs make content readable by any agent. Different layers that work together.
 
 created: 2026-02-09
-modified: 2026-02-09
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
@@ -13,7 +18,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cogs-for-agent-developers/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/cogs-for-agent-developers.cog.md
 
   x-mx-category: learning
   partOf: mx-the-gathering
@@ -24,8 +29,8 @@ mx:
   audience: tech
   readingLevel: advanced
 
-  contentType: "action-doc"
-  runbook: "mx exec cogs-for-agent-developers"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
 # Cogs for Agent Developers
@@ -50,7 +55,7 @@ The problem is not your agent. The problem is not your skill. The problem is the
 
 **Agent skills extend one agent.** An OpenClaw skill, a LangChain tool, a CrewAI task — these teach a specific agent how to do a specific thing. They are execution logic. They are valuable.
 
-**Cogs make content readable by any agent.** A cog is a markdown file with YAML frontmatter that tells any agent — OpenClaw, Claude, Gemini, GPT, whatever comes next — what a document IS before it tries to read what it SAYS.
+**Cogs (Community Owned Governance Standards) make content readable by any agent.** A cog is a markdown file with YAML frontmatter that tells any agent — OpenClaw, Claude, Gemini, GPT, whatever comes next — what a document IS before it tries to read what it SAYS.
 
 These are different layers. They work together.
 

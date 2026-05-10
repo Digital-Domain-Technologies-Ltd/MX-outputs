@@ -1,6 +1,11 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Metadata Conventions — Embrace and Extend"
-description: "How MX metadata works across every file type. The implementation rules for native metadata, block mapping, namespace extension, and Reginald serving."
+description: "How MX metadata works across every file type. The implementation rules for native metadata, block mapping, namespace extension, and REGINALD serving."
 author: "Tom Cranstoun"
 created: 2026-02-15
 modified: 2026-02-15
@@ -15,7 +20,7 @@ mx:
   buildsOn: [what-is-a-cog, fields]
   partOf: mx-maxine-lives
   runbook: "This document defines how MX metadata works in every file type. Read this before adding metadata to non-markdown files. The Gathering spec defines the principles; this document defines the rules."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-metadata-conventions/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-maxine-lives/mx-metadata-conventions.cog.md
 ---
 
 # MX Metadata Conventions — Embrace and Extend
@@ -122,7 +127,7 @@ export function validatePricing(url) {
 | `@see`, `@link` | builds-on / refersTo equivalent |
 | Function bodies | code (implicit) |
 
-**Canonical tag format:** `@mx:fieldName` (camelCase after `@mx:`, per NDR-02). The `@mx-ai-*` pattern found in older files is deprecated — migrate to `@mx:*`.
+**Canonical tag format:** `@mx:field-name` (kebab-case after `@mx:`). The `@mx-ai-*` pattern found in older files is deprecated — migrate to `@mx:*`.
 
 **Required `@mx:` tags:** `@mx:name`
 **Recommended:** `@mx:version`, `@mx:purpose`
@@ -253,9 +258,9 @@ This is a future convention. The principle is documented here; the detailed XMP 
 
 ---
 
-## Reginald Serving Behaviour
+## REGINALD Serving Behaviour
 
-When Reginald serves a `.cog.html` file, it content-negotiates:
+When REGINALD serves a `.cog.html` file, it content-negotiates:
 
 - **MX-aware client** (`Accept: application/mx+json` or similar): receives parsed metadata with block boundaries and types. The client can address individual blocks by type.
 - **Standard browser** (`Accept: text/html`): receives the HTML page as-is. All MX metadata is inert — browsers ignore unknown `<meta>` names, `data-mx-*` attributes are spec-compliant HTML5, and comments are invisible.
@@ -270,13 +275,13 @@ A cog's security or policy block may override this default. Confidential metadat
 
 ### When to use mx:*
 
-Use the `mx:` namespace for CogNovaMX product-specific metadata — fields that are meaningful within MX OS, Maxine, and Reginald. Examples: `mx:purpose`, `mx:audience`, `mx:stability`, `mx:contextProvides`.
+Use the `mx:` namespace for CogNovaMX product-specific metadata — fields that are meaningful within MX OS, Maxine, and REGINALD. Examples: `mx:purpose`, `mx:audience`, `mx:stability`, `mx:contextProvides`.
 
 ### When to use a vendor namespace
 
 If you are a CMS vendor, platform provider, or tool maker adding metadata to cogs, register your own namespace prefix. Examples: `adobe:template`, `contentful:space`, `shopify:collection`. Your namespace is yours. MX does not police it.
 
-Register your prefix in Reginald to avoid collisions. The Gathering defines the `prefix:field` pattern. What goes in your prefix is your business.
+Register your prefix in REGINALD to avoid collisions. The Gathering defines the `prefix:field` pattern. What goes in your prefix is your business.
 
 ### When to propose a new standard field
 

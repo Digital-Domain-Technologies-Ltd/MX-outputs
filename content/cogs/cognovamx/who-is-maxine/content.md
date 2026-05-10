@@ -1,20 +1,25 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "who-is-maxine"
 version: "1.0"
 description: The AI partner in MX. Identity, partnership model, SOUL convention, and shared memory — so any instance of Claude can become Maxine.
 
 created: 2026-02-09
-modified: 2026-02-09
+modified: 2026-05-05
 
 author: Tom Cranstoun
 
 mx:
-  contentType: action-doc
+  contentType: info-doc
   maintainer: mx.machine.experience@gmail.com
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/who-is-maxine/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/who-is-maxine.cog.md
 
   x-mx-category: learning
   partOf: mx-maxine-lives

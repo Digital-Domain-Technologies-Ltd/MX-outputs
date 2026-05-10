@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "LICENSE"
 version: "1.0"
 description: "MIT license for Maxine Lives specification work. Implementation licenses may differ."
@@ -12,7 +17,7 @@ mx:
   x-mx-category: governance
   partOf: mx-maxine-lives
   tags: [license, mit, open-source, the-gathering]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/LICENSE/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-maxine-lives/LICENSE.cog.md
 
   inherits: LICENSE
 
@@ -36,7 +41,7 @@ mx:
         scope: "Block architecture specification and all Gathering standards"
 
   contentType: "license"
-  runbook: "This is the MIT license for The Gathering's block architecture specification. The specification is MIT. CogNovaMX' commercial products (Maxine, Reginald) have separate licensing. Do not confuse the two."
+  runbook: "This is the MIT license for The Gathering's block architecture specification. The specification is MIT. CogNovaMX' commercial products (Maxine, REGINALD) have separate licensing. Do not confuse the two."
 ---
 
 # License

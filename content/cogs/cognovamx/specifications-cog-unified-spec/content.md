@@ -1,13 +1,18 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Cog Unified Specification"
 version: "2.2-draft"
 created: 2026-02-08
-modified: 2026-05-05
+modified: 2026-05-07
 author: Tom Cranstoun
 description: "The unified specification for MX cogs — one document type, many block types. Capability, trust, and governance in one format."
 
 mx:
-  contentType: action-doc
+  contentType: info-doc
   status: draft
   maintainer: info@cognovamx.com
   x-mx-category: specification
@@ -16,8 +21,8 @@ mx:
   license: MIT
   supersedes:
     - "cog-spec.md v0.3 (engine capability spec)"
-    - "cog-specification.md (Reginald trust/governance spec)"
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/specifications-cog-unified-spec/content.md
+    - "cog-specification.md (REGINALD trust/governance spec)"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/specifications/cog-unified-spec.cog.md
 ---
 
 # MX Cog Unified Specification v2.2-draft
@@ -360,7 +365,7 @@ The uber doc is also the natural place to document effective doc policy — cach
 
 Reading a cog in a full MX implementation is expensive. The reader must:
 
-1. Load the source cog from wherever it lives (local, Reginald, network)
+1. Load the source cog from wherever it lives (local, REGINALD, network)
 2. Merge the uber doc's SOP blocks into the cog
 3. Apply the reader's mixin configuration (prepend, substitute)
 4. Evaluate the definition block hierarchy (document-level defaults, per-block overrides)
@@ -375,7 +380,7 @@ The **effective doc** is the solution. It is a cached, fully-resolved version of
 
 - **Reader-specific.** Each reader's effective doc is different, because each reader brings its own uber doc, mixins, and SOP policy. Two implementations reading the same source cog produce two different effective docs.
 
-- **Locally cached.** The effective doc lives in the reader's local cache only. It is never published, never shared, never uploaded to Reginald. It is a private artefact of the reader's processing.
+- **Locally cached.** The effective doc lives in the reader's local cache only. It is never published, never shared, never uploaded to REGINALD. It is a private artefact of the reader's processing.
 
 - **Invalidated by any upstream change.** If the source cog changes, the effective doc is stale. If the uber doc's SOPs change, stale. If the reader's mixin configuration changes, stale. If the TTL expires, stale. Whichever comes first.
 
@@ -831,13 +836,13 @@ An action-doc may combine runtimes. For example, an action-doc with `runtime: ba
 
 An action-doc can embed executable scripts directly in the markdown body using the `@embedded:` marker. This is an alternative or complement to the `execute` object in YAML frontmatter.
 
-```markdown
+````markdown
 ```bash @embedded:script-id
 #!/bin/bash
 # Script content here
 echo "Hello from embedded script"
-```                                     (close the fence)
 ```
+````
 
 **Marker format:** The `@embedded:` marker appears on the same line as the opening code fence, followed by a script identifier. The identifier is used to reference the script for extraction and execution.
 

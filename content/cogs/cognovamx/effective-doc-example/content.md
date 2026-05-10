@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "Effective Doc Resolution — Reference Implementation"
 version: "1.0"
 description: "Reference implementation showing how an effective doc is resolved from a source cog, uber doc SOPs, and included policies."
@@ -15,7 +20,7 @@ mx:
   audience: [agents, tech]
   license: proprietary
   deliverable: "worked example of effective doc resolution chain"
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/effective-doc-example/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/reference-implementations/effective-doc-example.cog.md
 ---
 
 # Effective Doc Resolution — Reference Implementation

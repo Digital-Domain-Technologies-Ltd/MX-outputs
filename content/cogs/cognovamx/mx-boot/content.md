@@ -1,9 +1,14 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-boot"
 version: "1.0.0"
 description: "MX OS bootstrapper — zero to operational. Checks prerequisites, installs dependencies. Entry points: INSTALLME (bare metal), npm run boot, /mx-boot."
 created: 2026-02-11
-modified: 2026-05-05
+modified: 2026-05-07
 author: Tom Cranstoun
 
 mx:
@@ -356,10 +361,9 @@ mx:
     quality:
       semantic: true
       convergence: true
-
       accessibility: true
 
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-boot/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/mx-boot.cog.md
 ---
 
 # MX OS Boot

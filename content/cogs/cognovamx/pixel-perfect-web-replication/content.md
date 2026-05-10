@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "Pixel-Perfect Web Replication Workflow"
 description: "Create pixel-perfect MX-enhanced reference implementations from existing websites using HTML/CSS audit, Playwright capture, and automated validation."
 version: "2.0.0"
@@ -12,7 +17,7 @@ mx:
   x-mx-riskLevel: medium
   tags: [playwright, visual-capture, html-css-audit, dom-tree, computed-css, cascade-resolution, reference-implementation, pixel-perfect, automation, cogification, bilingual, single-language-toggle, offline-capable, validation-baseline]
   audience: [tech, business]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/pixel-perfect-web-replication/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/pixel-perfect-web-replication.cog.md
 
   buildsOn: [cogify-this, what-is-a-cog]
 

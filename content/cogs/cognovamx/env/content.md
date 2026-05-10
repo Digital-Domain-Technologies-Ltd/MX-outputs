@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 
 version: "1.0.0"
 description: "Project-level environment configuration. The MX equivalent of .env — one place for values that other cogs reference, never hardcode."
@@ -14,7 +19,7 @@ mx:
   license: proprietary
   status: published
   x-mx-riskLevel: low
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/env/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/env.cog.md
 
   x-mx-category: mx-core
   partOf: mx-os
@@ -113,7 +118,7 @@ mx:
 
              | File | Line | Hardcoded Value | Should Reference |
              |------|------|-----------------|------------------|
-             | blog-generator.cog.md | 142 | allabout.network | site.hostname |
+             | blog-post.cog.md | 142 | allabout.network | site.hostname |
              | data-sovereignty.html | 24 | https://mx.allabout.network/blog/ | site.base-url + paths.mx-blog-url |
 
           5. Summary: "{count} hardcoded references found across {file-count} files"
@@ -170,7 +175,7 @@ mx:
 
 # Project Environment
 
-The MX equivalent of `.env`. One cog at the repo root. Every configurable value lives here. Other cogs reference it — they never hardcode.
+The MX equivalent of `.env`. One cog (Community Owned Governance Standard) at the repo root. Every configurable value lives here. Other cogs reference it — they never hardcode.
 
 ---
 
@@ -224,7 +229,7 @@ The MX HTML blog generator should read values from env.cog.md at generation time
 
 **For published content:**
 
-Published blog posts, live HTML, and committed markdown may contain resolved values. These are snapshots. When the hostname changes, re-generate affected files using the blog-generator cog (which reads from env.cog.md) rather than find-and-replace.
+Published blog posts, live HTML, and committed markdown may contain resolved values. These are snapshots. When the hostname changes, re-generate affected files using the blog-post cog (which reads from env.cog.md) rather than find-and-replace.
 
 ---
 
@@ -242,7 +247,7 @@ Published blog posts, live HTML, and committed markdown may contain resolved val
 
 1. Edit the YAML frontmatter in this file (e.g., change `hostname: allabout.network` to `hostname: mx.technology`)
 2. Run `mx env validate` to see what is affected
-3. Re-generate affected content using the appropriate action-docs (blog-generator, etc.)
+3. Re-generate affected content using the appropriate action-docs (blog-post, etc.)
 4. Run `mx env propagate --dry-run` to check template files
 5. Run `mx env propagate` to update templates (with confirmation)
 

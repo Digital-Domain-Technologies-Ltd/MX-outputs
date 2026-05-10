@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "Getting Started with MX OS"
 description: "Complete onboarding guide for new CogNovaMX team members — from fresh Mac to full immersion"
 author: Tom Cranstoun
@@ -12,7 +17,7 @@ mx:
   contentType: guide
   tags: [onboarding, team, setup, mx-os, getting-started]
   audience: ["humans"]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/getting-started/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/getting-started.cog.md
 ---
 
 # Getting Started with MX OS
@@ -234,6 +239,18 @@ Claude Code has specialised skills. Try:
 /review-docs    # Review documents against style guide
 ```
 
+### 4a. Spell-check (aspell + the MX wordlist)
+
+Setup installs `aspell`. The project wordlist lives at `mx-canon/mx-maxine-lives/.aspell-mx.pws` and is tracked in this repo, so it is on disk after the initial clone. Spell-check is dual-dictionary (US + GB): a word is only flagged if BOTH dictionaries reject it AND the wordlist does not list it.
+
+```bash
+npm run spell:check                  # check a markdown file (scripts/mx-spell.sh)
+npm run spell:sweep                  # preview wordlist additions from blog HTML
+npm run spell:sweep:apply            # write additions to .aspell-mx.pws
+```
+
+Run the sweep after publishing new blog posts. It strips `<script>`, `<style>`, `<code>`, and `<pre>` blocks before scanning so JSON-LD field names and inline code do not leak as false positives. Anything still flagged after a sweep is a real prose typo and worth fixing.
+
 ### 5. Read the Canon
 
 The authoritative MX content lives in `mx-canon/`:
@@ -266,7 +283,7 @@ The authoritative MX content lives in `mx-canon/`:
 |-------|----------|
 | MX Philosophy | `datalake/manuscripts/mx-books/mx-protocols/` (Chapter 0 is the anchor) |
 | Cog Format | `mx-canon/mx-the-gathering/` (open standard specs) |
-| Maxine App | `mx-maxine-app/README.md` and `uber-maxine-plan.cog.md` |
+| Maxine App | `mx-maxine-app/README.md` and `mx-canon/mx-maxine-lives/businesses/maxine/uber-plan.cog.md` |
 | Decision Boundaries | `mx-canon/mx-maxine-lives/MAXINE-DECISIONS.md` |
 
 ### Ask Maxine

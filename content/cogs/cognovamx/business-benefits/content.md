@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Business Benefits — Four Strategic Outcomes"
 created: "2026-02-17"
 modified: 2026-03-02
@@ -16,7 +21,7 @@ mx:
     - mx-messaging-framework
   partOf: "MX OS"
   runbook: |
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/business-benefits/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-os/business-benefits.cog.md
 ---
 
 # MX Business Benefits — Four Strategic Outcomes

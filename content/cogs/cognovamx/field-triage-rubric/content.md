@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Field Triage Rubric"
 description: "The rule every candidate field must pass to appear in the MX canon. Resolves the describes-the-document test, the three-lens test, and the code-provenance exception, with worked examples for the common grey zones."
 author: "Tom Cranstoun"
@@ -24,7 +29,7 @@ mx:
     not re-litigated each time a new field is proposed.
   copyright: "Copyright (c) 2026 Tom Cranstoun. All rights reserved."
   license: "MIT for the rule text itself; MX canon content governed by The Gathering."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/field-triage-rubric/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/ssot/field-triage-rubric.cog.md
 ---
 
 # MX Field Triage Rubric

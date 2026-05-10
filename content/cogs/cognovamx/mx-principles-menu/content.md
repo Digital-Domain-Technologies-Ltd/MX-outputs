@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 description: Navigation page linking to core MX principles and concepts
 author: Tom Cranstoun
 created: 2026-02-22
@@ -47,7 +52,7 @@ mx:
   - humans
   - machines
   runbook: ''
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/mx-principles-menu/content.md
+  canonicalUri: https://raw.githubusercontent.com/ddttom/allaboutv2/main/cogs/mx-landing/mx-principles-menu.cog.md
 ---
 
 # MX Principles Menu

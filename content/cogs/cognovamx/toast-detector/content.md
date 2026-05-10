@@ -1,10 +1,15 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "toast-detector"
 version: 0.1.0
 description: Find ephemeral UI patterns that AI and screen readers miss
 
 created: 2026-02-06
-modified: 2026-05-05
+modified: 2026-05-07
 
 author: Tom Cranstoun
 
@@ -13,71 +18,19 @@ mx:
   license: proprietary
   status: draft
   x-mx-riskLevel: medium
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/toast-detector/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/toast-detector.cog.md
 
   x-mx-category: mx-core
   partOf: mx-core
   refersTo: [a11y, semantic-html]
   tags: [toast, notifications, ephemeral, accessibility, ux]
 
-  x-mx-execute:
-    runtime: runbook
-    command: mx cog toast-detector
-    actions:
-      - name: scan
-        description: Scan page for ephemeral UI patterns
-        usage: mx cog toast-detector scan <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to scan
-          - name: interact
-            type: boolean
-            required: false
-            description: Interact with page to trigger toasts
-            default: false
-        outputs:
-          - name: findings
-            type: object
-            description: Detected ephemeral UI patterns
-
-      - name: monitor
-        description: Monitor page for toast notifications over time
-        usage: mx cog toast-detector monitor <url> --duration <seconds>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to monitor
-          - name: duration
-            type: number
-            required: false
-            description: Monitoring duration in seconds
-            default: 30
-        outputs:
-          - name: toasts
-            type: array
-            description: Captured toast notifications
-
-      - name: audit
-        description: Audit toast accessibility
-        usage: mx cog toast-detector audit <url>
-        inputs:
-          - name: url
-            type: string
-            required: true
-            description: URL to audit
-        outputs:
-          - name: audit
-            type: object
-            description: Accessibility audit of notification patterns
 
   dependencies:
     - name: a11y
       kind: cog
-  contentType: "action-doc"
-  runbook: "mx exec toast-detector"
+  contentType: info-doc
+  runbook: "Read this cog to understand the topic; no executable workflow."
   x-mx-convergence: true
   x-mx-accessibility: true
   quality:

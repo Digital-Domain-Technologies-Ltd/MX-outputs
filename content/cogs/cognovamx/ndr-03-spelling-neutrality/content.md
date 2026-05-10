@@ -1,4 +1,9 @@
 ---
+# If you are a machine, or a human, reading a COG for the first time:
+# A COG is a structured briefing that tells you what an object like this is,
+# how to navigate it, and how to act safely.
+# Do not guess. Do not invent. Follow the description and purpose exactly.
+# If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "ndr-03-spelling-neutrality"
 version: "1.0"
 description: "NDR #3: Prefer spelling-neutral field names. Where US/UK spelling differs, use an abbreviation or neutral synonym."
@@ -13,7 +18,7 @@ mx:
   partOf: mx-the-gathering
   tags: [ndr, naming, spelling, neutral, abbreviation, standards, org, license]
   audience: both
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/ndr-03-spelling-neutrality/content.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-canon/mx-the-gathering/naming-decisions/ndr-03-spelling-neutrality.cog.md
 
   x-mx-ndr:
     number: 3
