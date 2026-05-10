@@ -4,7 +4,7 @@ description: "Evening segment. One PDF orchestrator replaces four overlapping en
 author: "Tom Cranstoun"
 created: 2026-05-10
 modified: 2026-05-10
-version: "2.0"
+version: "2.1"
 
 mx:
   status: active
@@ -56,6 +56,10 @@ A new draft enters `mx-outputs/mx-site/blog/drafts/`, extending Linda Hill's Har
 
 Small `mx-outputs` housekeeping commit between the major work and the blog draft.
 
+### 7. Blog drafts index: full coverage
+
+Two drafts that already sat in `mx-outputs/mx-site/blog/drafts/` were missing from the drafts `index.html`. Added cards for "Bridging the Machine Partnership" and "Where MX meets the UNESCO Recommendation on the Ethics of AI", ordered newest-first ahead of the gathering-notes guide. The page itself is `noindex, nofollow` so this is internal-navigation hygiene, not a public-surface change.
+
 ---
 
 ## By the Numbers
@@ -63,7 +67,7 @@ Small `mx-outputs` housekeeping commit between the major work and the blog draft
 | Metric | Value |
 |--------|-------|
 | Commits (hub) | 6 |
-| Commits (mx-outputs) | 3 |
+| Commits (mx-outputs) | 4 |
 | Files changed (hub) | 60 |
 | Lines added (hub) | +3,374 |
 | Lines removed (hub) | -1,369 |
@@ -108,4 +112,5 @@ The workflow document caught a failure in its own pre-flight earlier in the day,
 | `254b334`  (mx-outputs) | Co-directors report: 2026-05-10 evening (staged-snapshot hook) |
 | `0d6ed7e`  (mx-outputs) | Regenerate visa letter PDF; refresh llms-full.txt |
 | `ab22fe0`  (mx-outputs) | Add 'Bridging the Machine Partnership' blog draft |
+| `a503dc3`  (mx-outputs) | Blog drafts index: list bridging and UNESCO drafts alongside gathering-notes guide |
 | _pending_  (hub) | Hub pointer bump for mx-outputs evening commits + wordlist update |
