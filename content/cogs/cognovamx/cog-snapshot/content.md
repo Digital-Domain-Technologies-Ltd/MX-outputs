@@ -1,17 +1,22 @@
 ---
-name: cog-snapshot
+title: cog-snapshot
 version: "1.0"
 description: Auto-generated registry snapshot — all cogs by type, status, newness, and dependency graph
 created: 2026-05-10
-modified: 2026-05-10
+modified: 2026-05-12
 author: cog-tools
 status: active
-category: mx-core
 partOf: mx-os
 tags: [registry, snapshot, index, auto-generated]
 audience: [tech, agents]
-reading-level: technical
+readingLevel: technical
 purpose: Machine-readable snapshot of the entire cog registry, grouped by type, status, newness, and dependency graph
+
+mx:
+  contentType: info-doc
+  status: active
+  x-mx-category: mx-core
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/content/cogs/cognovamx/cog-snapshot/content.md
 ---
 
 # Cog Registry Snapshot
