@@ -261,7 +261,7 @@ Together they provide the foundation for the COG format and everything in the RE
 |---|---|
 | First COG created (this document) | 8 February 2026 |
 | MX: The Handbook publishes | 2 April 2026 |
-| REGINALD general availability, CMS Summit Frankfurt | 12 May 2026 |
+| REGINALD general availability, CMS Summit Frankfurt ✅ | 12 May 2026 |
 | MX: The Protocols publishes | 1 July 2026 |
 
 ---

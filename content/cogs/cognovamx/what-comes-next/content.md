@@ -225,7 +225,7 @@ Each stage builds on the last. Script informs the HTML page. HTML page informs t
 | **Now** | The Gathering at v1.0-draft | Can share spec with trusted reviewers |
 | **Feb–Mar 2026** | Call for founding members | Need social proof before this goes wide |
 | **2 Apr 2026** | Handbook publication | The Gathering introduced in the practitioner guide |
-| **12 May 2026** | CMS Summit Frankfurt | First public presentation to the CMS community |
+| **12 May 2026** | CMS Summit Frankfurt ✅ | First public presentation to the CMS community |
 | **H2 2026** | First community review cycle | Spec v1.1 with community input |
 
 ---

@@ -183,7 +183,7 @@ MX is the process of honouring all existing and future standards. RDF, JSON-LD, 
 
 - **Replaces** cog-unified-spec v1.0
 - **Affects** The Handbook (2 Apr) and The Protocols (1 Jul)
-- **Affects** investor pitch and Frankfurt demo
+- **Affects** investor pitch and conference demos
 - **Affects** The Gathering's standard
 - **Requires** new specification, evolution document, messaging updates, first `.cog.html` example
 

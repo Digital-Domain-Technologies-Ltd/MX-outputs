@@ -411,7 +411,7 @@ For team members wanting deeper understanding of the architecture.
 - **Co-founders**: Tom Cranstoun + Scott McGregor
 - **Parent**: MX Holdings (Tom 70%, Scott 25%, Staff 5%)
 - **Grant target**: £250k-£1.1M from Scottish Government
-- **Key dates**: Handbook 2 Apr, CMS Summit Frankfurt 12 May, Protocols 1 Jul 2026
+- **Key dates**: Handbook 2 Apr, Protocols 1 Jul 2026
 
 ---
 

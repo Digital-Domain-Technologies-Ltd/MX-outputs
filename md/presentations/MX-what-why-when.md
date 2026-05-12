@@ -204,7 +204,7 @@ MX tracks the **provenance** of every asset.
 **MX: The Handbook** — 2 April 2026
 *Practical implementation guide*
 
-**CMS Summit Frankfurt** — 12 May 2026
+**CMS Summit Frankfurt** — 12 May 2026 (concluded)
 *Deep dive session*
 
 **The Gathering** — MX practitioner community

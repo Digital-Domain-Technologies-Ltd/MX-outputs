@@ -181,7 +181,7 @@ The MX equivalent of `.env`. One cog (Community Owned Governance Standard) at th
 
 ## Why This Exists
 
-The hostname `allabout.network` appears in hundreds of files across this codebase. It is hardcoded in HTML templates, action-doc runbooks, build scripts, metadata tables, and JSON-LD blocks. When the hostname changes — and it will, before Frankfurt — every one of those references needs updating.
+The hostname `allabout.network` appears in hundreds of files across this codebase. It is hardcoded in HTML templates, action-doc runbooks, build scripts, metadata tables, and JSON-LD blocks. When the hostname changes, every one of those references needs updating.
 
 This is the `.env` problem. The solution is the same: centralise the values, reference them from one place.
 
