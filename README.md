@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-05-11"
-modified: "2026-05-11"
+created: "2026-05-12"
+modified: "2026-05-12"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -24,8 +24,8 @@ Build artefacts, reports, and generated outputs organised by media type.
 | [md/](md/) | 211 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
-| [pptx/](pptx/) | 18 | PowerPoint — presentation source files |
-| **Total** | **1133** | |
+| [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
+| **Total** | **1128** | |
 
 ---
 
@@ -688,9 +688,9 @@ Structured data — audit comparisons, machine-readable reports.
 
 PowerPoint presentation source files.
 
-- [`Frankfurt.pptx`](pptx/presentations/Frankfurt.pptx)
-- [`MX-what-why-when.pptx`](pptx/presentations/MX-what-why-when.pptx)
 - [`The Web Has a New Audience - MX and The Gathering.pptx`](pptx/presentations/The Web Has a New Audience - MX and The Gathering.pptx)
+- [`Frankfurt.pptx`](pptx/presentations/archive/Frankfurt.pptx)
+- [`MX-what-why-when.pptx`](pptx/presentations/archive/MX-what-why-when.pptx)
 - [`Reginald.pptx`](pptx/presentations/archive/Reginald.pptx)
 - [`bmv-pitch-2026.pptx`](pptx/presentations/archive/bmv-pitch-2026.pptx)
 - [`image1.png`](pptx/presentations/assets/image1.png)
@@ -701,12 +701,8 @@ PowerPoint presentation source files.
 - [`image6.png`](pptx/presentations/assets/image6.png)
 - [`bmv-pitch-2026.md`](pptx/presentations/bmv-pitch-2026.md)
 - [`design_master.pptx`](pptx/presentations/design_master.pptx)
-- [`frankfurt-cms-summit-talk.pptx`](pptx/presentations/frankfurt-cms-summit-talk.pptx)
-- [`frankfurt-design.pptx`](pptx/presentations/frankfurt-design.pptx)
-- [`frankfurt-talk.pptx`](pptx/presentations/frankfurt-talk.pptx)
 - [`mx-investor-deck.pptx`](pptx/presentations/mx-investor-deck.pptx)
-- [`~$Frankfurt.pptx`](pptx/presentations/~$Frankfurt.pptx)
 
 ---
 
-*Generated on 2026-05-11 at 23:44*
+*Generated on 2026-05-12 at 22:14*
