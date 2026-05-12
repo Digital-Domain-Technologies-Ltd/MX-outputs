@@ -4122,6 +4122,12 @@ Blog
 
             30 April 2026
 
+            Claude Code Skills Are Static Snapshots, Not Dynamic Subroutines
+
+            A Claude Code skill captures its source at creation time. It does not re-read on each invocation. Knowing this prevents shipping outdated automation.
+
+            12 May 2026
+
             The Web Is Just the Start: What AI Agents Actually Need From Your Documents
 
             Google's AI agent UX guide is a useful signal. But the challenge runs deeper than websites. COGs give any document the ten declarations a machine needs: identity, structure, state, provenance, permissions, and how to fail safely.
@@ -8188,6 +8194,210 @@ Every Schema.org specification tells a machine what something is. None of them t
           Continue the conversation
 
           Want to talk through how provenance and attestation apply to your content operation?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
+## Claude Code Skills Are Static Snapshots, Not Dynamic Subroutines | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/skills-static-not-subroutines.html
+
+**Description:** A Claude Code skill captures its source at creation time. It does not re-read on each invocation. Knowing this prevents shipping outdated automation.
+
+A skill that captured its source in January can confidently tell you in May to do something the source no longer asks for. Treating skills like subroutines is the trap.
+
+            Author: Tom Cranstoun
+
+        Index
+
+            - The static-snapshot model
+
+            - Why this matters
+
+            - Implications for skill maintenance
+
+            - Practices that age well
+
+            - When static behaviour is the right answer
+
+            - Conclusion
+
+          Claude Code Skills Are Static Snapshots, Not Dynamic Subroutines
+
+            12 May 2026
+            &middot;
+            Tom Cranstoun
+            &middot;
+            4 min read
+
+Claude Code skills are static snapshots, not dynamic subroutines. Understanding this architectural principle matters when you build skills that need to stay current. It is the difference between a skill that ages well and one that quietly produces wrong output six months later.
+
+The static-snapshot model
+
+When a Claude Code skill is created, here is what actually happens:
+
+  - The skill author reads the authoritative source at creation time.
+
+  - Patterns are extracted from that source.
+
+  - Instructions are hard-coded into the skill file (.claude/skills/*/skill.md).
+
+  - The skill is locked into time: it captures the source's state at the moment it was written.
+
+If the authoritative source changes after the skill is created, the skill does not know about it. The skill continues executing with its original instructions, unaware that the underlying patterns or requirements have moved on.
+
+Why this matters
+
+Example: the /create-blog skill
+
+Consider a skill that generates blog posts following a specific HTML template:
+
+# /create-blog skill (created January 2026)
+
+When generating blog HTML:
+1. Use semantic HTML5 structure
+2. Include Schema.org JSON-LD with `@type: "BlogPosting"`
+3. Add WCAG 2.1 AA contrast ratios
+4. Generate SVG social media cards
+
+If the blog template file changes in March to require new metadata fields or a different Schema.org type, the skill still uses the January instructions. It does not re-read the template file on each invocation. It uses the hard-coded instructions written into it at creation time.
+
+The subroutine misconception
+
+In traditional programming, a subroutine might look like this:
+
+function generateBlog() {
+  const template = readFile('blog-template.html'); // re-reads EVERY time
+  const requirements = parseTemplate(template);
+  return applyRequirements(requirements);
+}
+
+Claude Code skills do not work this way. They are more like:
+
+// Created once at skill creation time
+const SKILL_INSTRUCTIONS = `
+  Use these requirements from blog-template.html (snapshot from Jan 2026):
+  - Semantic HTML5 structure
+  - Schema.org BlogPosting
+  - WCAG 2.1 AA contrast
+`;
+
+function createBlogSkill() {
+  return SKILL_INSTRUCTIONS; // same instructions every time
+}
+
+Implications for skill maintenance
+
+1. Skills require manual updates
+
+When authoritative sources change, skills must be manually regenerated:
+
+  - Re-read the updated source.
+
+  - Extract new patterns.
+
+  - Update the skill file with current instructions.
+
+  - Test to confirm compatibility.
+
+2. Skills can become outdated
+
+A skill written in January 2026 may be obsolete by June 2026 if:
+
+  - The authoritative source adds new requirements.
+
+  - Practice moves on (for instance, new WCAG guidelines).
+
+  - Templates change structure.
+
+  - APIs introduce new fields.
+
+3. Documentation drift
+
+The worst scenario: the skill's instructions contradict the current authoritative source. A user who follows the skill's guidance ships output that violates current standards, and the skill is the one telling them everything is fine.
+
+Practices that age well
+
+Include version references
+
+Record when the skill was written and which version of the source it captured:
+
+# /audit-site skill
+
+Created: 2026-01-15
+Source: docs/architecture/audit-workflow.md (v2.3.0)
+Last verified: 2026-01-15
+
+Embed source content where you can
+
+Instead of saying "follow the patterns in X document", include the actual patterns in the skill:
+
+Fragile:
+
+  "Follow the HTML validation rules in appendix-d-ai-friendly-html-guide.txt."
+
+Robust:
+
+  "Validate HTML using these rules: 1. All images must have alt text. 2. Form inputs must have associated labels. 3. Links must have descriptive text..."
+
+The embedded version is older the moment the source changes, but at least the skill is honest about what it is doing and the diff is visible. A pointer to a moving target hides the drift.
+
+Audit skills on a schedule
+
+Treat skills like any other code asset:
+
+  - Review quarterly for accuracy.
+
+  - Compare against the current authoritative source.
+
+  - Update when discrepancies show up.
+
+  - Record changes in a skill changelog.
+
+When static behaviour is the right answer
+
+Static snapshots are not always a limitation. They give you stability:
+
+  - Consistent behaviour across skill invocations.
+
+  - No surprise changes from external source updates.
+
+  - Predictable output for testing and validation.
+
+  - Version control of the skill's logic.
+
+For workflows where stability matters most (regulatory compliance, reproducible builds, audit trails), the static behaviour is the feature, not the bug. The trade-off is manual maintenance effort.
+
+Conclusion
+
+Claude Code skills are useful automation, but they are static snapshots, not dynamic subroutines. When writing one:
+
+  - Accept that you are capturing a moment in time.
+
+  - Record the source version and the creation date.
+
+  - Embed the authoritative content directly when you can.
+
+  - Plan for regular skill maintenance.
+
+  - Test skills against current sources on a schedule.
+
+Skills are locked into time at creation. Recognising the constraint is what stops a skill from quietly producing wrong output long after the source it was written from has moved on.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Works on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through how your team writes skills that stay current with the standards they cite?
 
             - Get in touch
 
