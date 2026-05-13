@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Evening 13 May 2026: Frankfurt write-up lands, regulatory framing tightened"
-description: "Evening segment publishes the CMS Summit 26 write-up, adds the geo-and-mx positioning paper, lands a slowest-page audit probe, and revises the regulatory paragraph to remove any implied compliance grant."
+title: "Co-Directors Report — Evening 13 May 2026: Frankfurt write-up lands, regulatory framing tightened, provenance gap named"
+description: "Evening segment publishes the CMS Summit 26 write-up, adds the geo-and-mx positioning paper, lands a slowest-page audit probe, revises the regulatory paragraph to remove any implied compliance grant, and names the provenance gap as the structural reason ranking systems keep withdrawing rich-result rewards."
 author: "Tom Cranstoun"
 created: 2026-05-13
 modified: 2026-05-13
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -46,26 +46,32 @@ The audit collector now folds three cache-busted GETs per slowest and median URL
 
 The new geo-and-mx paper had its frontmatter normalised to the canonical MX schema after Maxine drafted it with the older layout. A LEARNINGS entry captures the spelling-sweep failure mode where `spell:sweep:apply` blindly absorbed entity-stripping artefacts.
 
+### 5. Provenance-gap post + canon lockstep
+
+A second blog post landed at the close of the segment: "The provenance gap, and why Google keeps closing it the hard way." The argument: SEO, GEO and AEO each describe a page but do not validate it, FAQ schema was deprecated because publishers gamed it, and the same dynamic will work through every high-value schema type as the weight on structured data grows. The post names the readiness ladder — Discovery, then Citation readiness — as the concrete MX answer. The same framing was propagated into the canon in the same segment: free-book chapter-00 (v2.7) gained a provenance-gap paragraph after the GEO contrast, and Protocols chapter-10 (v1.1) gained a full "The Provenance Gap" section between Death of the Click and the Markdown Converter Problem. Index card and sitemap entry for the post are wired up on mx-site.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits (hub) | 6 |
-| Commits (mx-outputs) | 5 |
-| Files changed (hub) | 20 |
-| Lines added (hub) | +368 |
+| Commits (hub) | 6 + 1 pending |
+| Commits (mx-outputs) | 6 |
+| Files changed (hub) | 20 + 2 manuscripts |
+| Lines added (hub) | +368 + new manuscript paragraphs |
 | Lines removed (hub) | −492 |
 | Repositories touched | 2 (hub, mx-outputs) |
 | New canonical files | 1 (`mx-canon/ssot/papers/geo-and-mx.md`) |
+| New blog posts | 2 (CMS Summit write-up; the-provenance-gap) |
+| Manuscripts updated | 2 (free-book ch00 v2.7; Protocols ch10 v1.1) |
 | Stale drafts removed | 1 (`why-llms-dont-execute-javascript.md`) |
 
 ---
 
 ## Why It Matters
 
-Two strands converge in this segment. The Frankfurt write-up is the first long-form public artefact that names MX, REGINALD, and the Gathering together as a single proposition, with the geo-and-mx paper carrying the technical argument underneath. The regulatory revision then locks down the compliance language so anyone forwarding the post to legal or audit colleagues reads the same disclaimer twice — once in the prose, once in the underlying paper. The audit-pipeline probe is unrelated but useful: every audit deliverable from now on carries verifiable server-response evidence, which strengthens the "we measure, we don't estimate" stance for client engagements.
+Three strands converge in this segment. The Frankfurt write-up is the first long-form public artefact that names MX, REGINALD, and the Gathering together as a single proposition, with the geo-and-mx paper carrying the technical argument underneath. The regulatory revision then locks down the compliance language so anyone forwarding the post to legal or audit colleagues reads the same disclaimer twice — once in the prose, once in the underlying paper. The provenance-gap post that closed the segment gives the SEO/GEO/AEO conversation a single, memorable label for the structural problem ranking systems keep withdrawing rich-result rewards to manage; the same framing is now in two manuscripts so the next reader who picks up either book hits the argument in the same shape. The audit-pipeline probe is unrelated but useful: every audit deliverable from now on carries verifiable server-response evidence, which strengthens the "we measure, we don't estimate" stance for client engagements.
 
 ---
 
@@ -97,4 +103,6 @@ Two strands converge in this segment. The Frankfurt write-up is the first long-f
 | c5df1f1d (hub) | CHANGELOG 2026-05-13 evening: broaden header + add blog publish, paper, wordlist, draft removal entries |
 | 0c2113bb (hub) | Publish CMS Summit 26 write-up + geo-and-mx positioning paper |
 | fcb893ce (hub) | Audit pipeline: slowest-page re-probe at collect step 8a |
+| 57bb133 (mx-outputs) | Publish blog post: the provenance gap, and why Google keeps closing it the hard way |
+| _pending_ (hub) | Manuscripts: free-book v2.7 and Protocols ch10 v1.1 absorb provenance-gap framing |
 | _pending_ (hub) | Bump mx-outputs + add evening directors report |
