@@ -124,7 +124,7 @@ File → registered COG → REGINALD index → agent reads attested metadata →
 
 - **Fewer hallucinations.** Agents that read attested files hallucinate less — they have verified facts to cite rather than inferences to make.
 - **Lower token consumption and energy draw.** Fewer inference steps per file, multiplied across every agent that reads every file.
-- **Regulatory positioning.** EU AI Act, European Accessibility Act, digital-records legislation across multiple jurisdictions converge on provenance requirements. Attestation shifts from competitive advantage to regulatory expectation.
+- **Regulatory positioning.** EU AI Act, European Accessibility Act, digital-records legislation across multiple jurisdictions impose documentation, logging, and verifiability obligations on the organisations they cover. Compliance is the organisation's legal duty; attestation is the layer that makes the required documentation verifiable on request.
 
 Each benefit compounds across every agent, every read, every file. The mechanism is the same in every case.
 

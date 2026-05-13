@@ -91,7 +91,7 @@ The canonical voice lives on the REGINALD landing page (`https://mx.allabout.net
 
 1. *"Agents that read attested documents hallucinate less, because they have verified facts to cite rather than inferences to make."*
 2. *"Fewer inference steps means lower token consumption and lower energy draw."*
-3. *"EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions converge on provenance requirements; attestation shifts from competitive advantage to regulatory expectation."*
+3. *"EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions place documentation, logging, and verifiability obligations on the organisations they cover. MX and REGINALD do not grant compliance with any of these regulations — that remains a legal duty of the organisation. What they do is make the documentation the organisation must produce structured, machine-readable, tamper-evident, and verifiable on request."*
 
 **Contract fingerprinting.** *"The Gathering ratifies the Machine Experience standard, including the contract fingerprinting note that defines how a document is canonicalised, hashed, and signed."* (REGINALD landing.) Pair with *"Bumping the version is a substantive editorial act; re-version means re-sign."* (Meta-cog.)
 

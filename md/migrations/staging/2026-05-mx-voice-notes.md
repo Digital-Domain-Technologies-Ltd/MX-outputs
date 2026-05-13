@@ -25,7 +25,7 @@ This note is a working reference, not a publication. Quotes are reproduced verba
   - "The attestation is narrow and precise: this is what the owner published, unaltered. Origin and integrity only, not factual correctness, not editorial quality."
   - "Agents that read attested documents hallucinate less, because they have verified facts to cite rather than inferences to make."
   - "Fewer inference steps means lower token consumption and lower energy draw."
-  - "EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions converge on provenance requirements, attestation shifts from competitive advantage to regulatory expectation."
+  - "EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions place documentation, logging, and verifiability obligations on the organisations they cover. MX and REGINALD do not grant compliance with any of these regulations; that remains a legal duty of the organisation. What they do is make the documentation the organisation must produce structured, machine-readable, tamper-evident, and verifiable on request."
   - "The Gathering ratifies the Machine Experience standard, including the contract fingerprinting note that defines how a document is canonicalised, hashed, and signed."
 - **Backronym.** Not present on this page. The page describes REGINALD by function, not by acronym expansion.
 - **DNA / pool framing.** Not present on this page.
@@ -157,7 +157,7 @@ This page returned the highest density of competitive language and is the strong
   - Attestation: "They can be notarised through Reginald ... so that downstream consumers ... can verify they are genuine, unaltered, and authored by who they claim to be."
   - Hallucination chain: "An agent that reads a Reginald-registered document hallucinates less — it has verified origin and version to cite rather than gaps to fill."
   - Token chain: "Fewer inference steps means lower token consumption and lower energy draw across AI infrastructure."
-  - Regulatory chain: "the requirement to demonstrate the provenance of content that AI acted on" and "attestation shifts from competitive advantage to regulatory expectation."
+  - Regulatory chain: "the requirement on organisations to demonstrate the provenance of content that AI acted on" — MX and Reginald do not grant compliance; they make the documentation the organisation must produce structured, machine-readable, tamper-evident, and verifiable on request.
   - DNA framing: "MX is the DNA a file carries when it leaves any pool, so each of those reading contexts gets the same answer."
   - Building analogy: GEO is surface treatment; "MX is that specification for content."
 
@@ -232,8 +232,8 @@ These are the lines the deck and the manuscripts should lift verbatim where the 
    - "Fewer inference steps means lower token consumption and lower energy draw." [REGINALD landing]
    - "Fewer inference steps means lower token consumption and lower energy draw across AI infrastructure." [GEO blog]
 3. Regulatory positioning:
-   - "EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions converge on provenance requirements, attestation shifts from competitive advantage to regulatory expectation." [REGINALD landing]
-   - "the requirement to demonstrate the provenance of content that AI acted on" / "attestation shifts from competitive advantage to regulatory expectation." [GEO blog]
+   - "EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions place documentation, logging, and verifiability obligations on the organisations they cover. MX and REGINALD do not grant compliance with any of these regulations; that remains a legal duty of the organisation. What they do is make the documentation the organisation must produce structured, machine-readable, tamper-evident, and verifiable on request." [REGINALD landing]
+   - "the requirement on organisations to demonstrate the provenance of content that AI acted on; attestation is the layer that makes the required documentation verifiable, not a compliance grant in itself." [GEO blog]
 
 ### Contract fingerprinting
 
