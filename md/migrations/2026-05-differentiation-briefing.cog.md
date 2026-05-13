@@ -5,12 +5,13 @@
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "BMV deck differentiation pass — Phase 1 briefing"
-description: "Synthesis of the four Phase 1 staging notes for the May 2026 BMV investor-deck differentiation pass. The single document that drives the Phase 2 interview and the Phase 3 deck-and-corpus update."
+description: "Synthesis of the four Phase 1 staging notes for the May 2026 BMV investor-deck differentiation pass. Drives Phase 2 interview and Phase 3 deck update."
 author: "Tom Cranstoun"
 created: 2026-05-07
 modified: 2026-05-07
 version: "1.0"
 mx:
+  x-mx-category: mx-content
   status: active
   contentType: migration-note
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/migrations/2026-05-differentiation-briefing.cog.md

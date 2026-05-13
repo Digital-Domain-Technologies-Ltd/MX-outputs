@@ -42,7 +42,7 @@
 
 # ── ZONE 1 · Identity (Note 2 §5) ────────────────────────────
 title: "Everyone is looking inward — A position paper on MX & REGINALD"
-description: "Argues that the AI-readiness consensus is inward-facing and misses the outward question MX exists to answer: how is our organisation being read, retrieved and represented by machines we will never meet?"
+description: "Argues the AI-readiness consensus is inward-facing and misses the outward question: how is our organisation being read by machines we will never meet?"
 
 # D6 · originator is the immutable Zone 1 creator. author is
 # retained as an alias for one major version per the U3
@@ -101,6 +101,7 @@ metadataFields:
 
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
 mx:
+  x-mx-category: mx-content
   # Lifecycle (§6.1)
   status: published
 

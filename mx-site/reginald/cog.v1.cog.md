@@ -72,6 +72,7 @@ metadataFields:
 
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
 mx:
+  x-mx-category: mx-core
   status: draft
   contentType: specification
   audience: [humans, machines, agents]

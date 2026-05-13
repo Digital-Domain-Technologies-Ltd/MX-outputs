@@ -18,7 +18,7 @@
 
 # ── ZONE 1 · Identity (Note 2 §5) ────────────────────────────
 title: "Reading the position-paper cog — a worked example of MX cog construction"
-description: "A worked example explaining the cog-construction choices in mx-machine-readiness.cog.md, mapped to The Gathering's draft notes (Field Pattern, Core Metadata, Cogs, Extensions, Contract Fingerprinting)."
+description: "Worked example explaining the cog-construction choices in mx-machine-readiness.cog.md, mapped to The Gathering draft notes."
 
 # D6 · originator is the immutable Zone 1 creator. author is
 # retained as an alias for one major version per the U3
@@ -65,6 +65,7 @@ metadataFields:
 
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
 mx:
+  x-mx-category: mx-content
   status: published
   contentType: meta-cog
   audience: [humans, machines]
