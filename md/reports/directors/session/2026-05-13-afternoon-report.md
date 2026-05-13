@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Cog hygiene sweep and REMINDERS pruning"
-description: "Cleared all but one cog:validate warning across 27 files; pruned 10 stale REMINDERS items (Stream filing, four completed outreach threads, two BMV-dependent follow-ons)."
+title: "Co-Directors Report — Cog hygiene, slowest-page probe, and CMS Summit write-up"
+description: "Cleared cog:validate backlog, pruned ten REMINDERS items, shipped a slowest-page re-probe into the audit pipeline, and published the CMS Summit 26 Frankfurt write-up to the blog."
 author: "Tom Cranstoun"
 created: 2026-05-13
 modified: 2026-05-13
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -15,7 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-13-afternoon-report.md
 ---
 
-# Co-Directors Report — Cog hygiene sweep and REMINDERS pruning
+# Co-Directors Report — Cog hygiene, slowest-page probe, and CMS Summit write-up
 
 **Date:** 13 May 2026 — Afternoon
 **Segment:** afternoon (since noon)
@@ -24,7 +24,7 @@ mx:
 
 ## Summary
 
-Two threads, both housekeeping. First: cleared the cog-validator backlog from 52 warnings plus 21 info notes to one deliberate exception. Second: pruned ten stale REMINDERS items as the standards-drafting flow and four live outreach threads closed.
+Four threads. First: cleared the cog-validator backlog from 52 warnings plus 21 info notes to one deliberate exception. Second: pruned ten stale REMINDERS items as the standards-drafting flow and four live outreach threads closed. Third: extended the audit pipeline with a cache-busted slowest-page re-probe so origin response stability gets a real verdict in every report. Fourth: published the CMS Summit 26 Frankfurt write-up to mx-site, with a self-contained MX-vs-GEO side note.
 
 ---
 
@@ -50,6 +50,14 @@ Two were BMV-dependent prerequisites (HTML pitch-deck verification and pitch-dec
 
 The high-priority REMINDERS landscape is now: one urgent (business plans review, 17 days old), three orange (GA4 property, REGINALD publisher list, DDT DNS validation). The outreach-pending bucket is empty.
 
+### 3. Slowest-page re-probe in the audit pipeline
+
+New `mx-audit/bin/slowest-page-probe.js` runs during collect step 8a. It re-fetches the slowest URL from the crawl plus a median-load URL, three cache-busted samples each, and writes `slowest-page-perf.json` into `mx-audit/results/<host>/`. The infill-report consumer reads that sidecar to populate a new family of `[SLOWEST_PAGE_*]` placeholders, giving every report a verdict on origin response stability that the crawler's single-shot timing cannot deliver on its own. When the sidecar is absent (older runs, probe skipped), the placeholders collapse to a single graceful sentence rather than leaving raw tokens in the report. PRD, architecture cog, and both audit templates updated to reference the new sidecar.
+
+### 4. CMS Summit 26 Frankfurt write-up
+
+Published [cms-summit-26-frankfurt-write-up.html](https://mx.allabout.network/blog/cms-summit-26-frankfurt-write-up.html). A speaker's-eye conference write-up: thanks to Janus Boye and Matt Garrepy, every speaker named and credited by what they actually said, and a self-contained MX-versus-GEO side note positioned to answer the question several talks raised without naming. Card added to the top of the Blog-listing grid on the index. Blog sitemap, root sitemap, and llms-full.txt regenerated. Forty-three new proper nouns (speaker names, venue, vendor names) added to the project wordlist; three tokenisation artefacts from HTML-entity stripping removed.
+
 ---
 
 ## By the Numbers
@@ -57,21 +65,22 @@ The high-priority REMINDERS landscape is now: one urgent (business plans review,
 | Metric | Value |
 |--------|-------|
 | Commits (mx-crm) | 1 |
-| Commits (mx-audit) | 1 |
-| Commits (mx-outputs) | 1 |
-| Commits (mx-reginald) | 1 |
-| Commits (hub) | 1 published + 2 pending |
+| Commits (mx-audit) | 2 |
+| Commits (mx-outputs) | 3 |
+| Commits (mx-reginald) | 2 |
+| Commits (hub) | 5 published + this evening's bump pending |
 | Cog files touched | 36 |
 | cog:validate warnings | 52 to 1 |
 | cog:validate info | 21 to 0 |
 | REMINDERS items removed | 10 |
+| Blog posts published | 1 (CMS Summit 26 write-up, ~2,200 words) |
 | Repos touched | 5 |
 
 ---
 
 ## The Insight
 
-The cog-validator tail had grown because nobody was watching it. Forty-nine of the warnings were one missing top-level field per CRM contact cog, repeated across the contact directory. The fix took one Python script and a categorical decision (`mx-contact` is the right `x-mx-category` for every contact). The cost of the cleanup was small; the cost of the noise was that anyone running `cog:validate` learned to skim past warnings as background hum. Periodic zero-out matters for the same reason a clean error log matters: it restores the signal value of the next warning that shows up.
+Two themes collided this afternoon. The cog-validator cleanup restored signal value to a noisy gate. The slowest-page probe added signal to the audit report where there was previously a black hole around the difference between "the crawler measured a slow page once" and "the origin is consistently slow." Both moves cost roughly the same effort and produce the same kind of value: a reader can trust the system because the dial is calibrated, not because the dial has been hidden. The CMS Summit write-up rides on top of that calibration discipline — naming GEO and MX precisely matters for the same reason naming a `cog:validate` warning matters: vague signals erode trust, precise ones build it.
 
 ---
 
@@ -79,6 +88,7 @@ The cog-validator tail had grown because nobody was watching it. Forty-nine of t
 
 - The 🔴 business plans review (since 26 April) is now the standout overdue item.
 - Consider folding `cog:validate` warning-count into the pre-commit hook so the tail cannot grow silently again.
+- Verify the CMS Summit 26 post renders correctly on live mx.allabout.network after Cloudflare purge.
 
 ---
 
@@ -88,7 +98,14 @@ The cog-validator tail had grown because nobody was watching it. Forty-nine of t
 |------|-------------|
 | 21c0635 (mx-crm) | Backfill contact-cog frontmatter: version + x-mx-category + tags |
 | 88f8d93 (mx-audit) | Tighten architecture-cog description below the 160-char cap |
+| 10e635a (mx-audit) | Add slowest-page re-probe + report placeholders |
 | 873019c (mx-outputs) | Cog hygiene: backfill x-mx-category and trim long descriptions |
+| 82cced8 (mx-outputs) | Publish CMS Summit 26 Frankfurt write-up |
+| cd604ad (mx-outputs) | Add Tom photo to REGINALD profile assets |
 | 0d74adc (mx-reginald) | Regenerate cog registry index after cog-hygiene sweep |
+| ef82f29 (mx-reginald) | Regenerate registry index |
 | 95a6c01a (hub) | Cog hygiene sweep: clear all cog:validate warnings except one exception |
-| _pending_ (hub) | REMINDERS pruning: 10 items removed; bump mx-reginald pointer |
+| 1ca2b4da (hub) | REMINDERS pruning sweep; bump mx-outputs + mx-reginald |
+| fc1ab828 (hub) | CHANGELOG 2026-05-13 afternoon: cog hygiene sweep + REMINDERS pruning |
+| 5da24cc4 (hub) | Bump mx-outputs: regenerate README index for afternoon report |
+| _pending_ (hub) | Publish CMS Summit 26 write-up: bump submodules, audit-pipeline edits, wordlist |
