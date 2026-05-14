@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Provenance-gap detector: deterministic + LLM in the audit pipeline"
-description: "Reified the the-provenance-gap blog argument into a testable audit step: deterministic collector, LLM companion, gate, and template integration. New paid-service hook for full-site qualitative review."
+title: "Co-Directors Report — Provenance-gap detector + first neomwellbeing run + handbook first-edition freeze"
+description: "Three afternoon streams: shipped the provenance-gap detector into the audit pipeline; ran it against neomwellbeing.com (first paid-pipeline customer dry-run); froze the first-edition handbook PDF and re-uploaded it to Cloudflare R2 via a corrected wrangler script."
 author: "Tom Cranstoun"
 created: 2026-05-14
 modified: 2026-05-14
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -107,7 +107,41 @@ The audit product gains a billable upgrade path. The free audit always reports o
 
 ## Commit Log
 
-| Hash | Description |
-|------|-------------|
-| 4262327 | Provenance-gap detection: deterministic collector, LLM companion, gate, template integration (mx-audit) |
-| _pending_ | Hub: bump mx-audit pointer, wire audit-pipeline.js Step 8b/8c/Gate 0p, update audit-collect skill |
+| Hash | Repo | Description |
+|------|------|-------------|
+| 4262327 | mx-audit | Provenance-gap detection: deterministic collector, LLM companion, gate, template integration |
+| 304bc130 | hub | Wire provenance-gap detection into the audit pipeline (Step 8b/8c, Gate 0p, mx-audit pointer) |
+| c9cd5372 | hub | Docs: changelog + REMINDERS for provenance-gap detector |
+| 2210474 | mx-crm | Outreach 2026-05-14: neomwellbeing.com audit run |
+| 7f83f03 | mx-outputs | Outreach 2026-05-14: neomwellbeing.com audit PDF and supporting CSV/JSON |
+| 281c08c | mx-outputs | Handbook PDF: rename to MX-The-Handbook.pdf and freeze first-edition master |
+| _pending_ | hub | Handbook first-edition freeze + dual-edition prepare-ack + handbook-v2 manuscript + corrected wrangler uploads + submodule pointer bumps |
+
+---
+
+## Update — Late Afternoon
+
+Two more streams landed after the initial report:
+
+### 1. Provenance-gap pipeline's first real customer run: neomwellbeing.com
+
+The collector + LLM companion that shipped earlier ran against the first 2026-05 outreach target. Output landed in `mx-crm/outreach/2026-05-14/` (CSVs, audit log, fierce-critic + LLM judgment JSON, full report markdown) and `mx-outputs/pdf/outreach/2026-05-14/` (the matching PDF render). This is the first time the new "Provenance Gap" report section has appeared in a deliverable destined for a real prospect — the dry-run that confirms the qualitative-pass / paid-service framing reads as intended outside the test harness. Findings to be reviewed offline before any outbound send.
+
+### 2. Handbook first-edition freeze + Cloudflare R2 upload correction
+
+The customer-facing handbook PDF that R2 was serving had been the wrong file: the script `pdf:mx-upload` was uploading the latest local build, which would let any future rebuild silently overwrite the published first edition. Three corrections, in order:
+
+1. **Frozen master** — copied the first-edition PDF (now named `MX-The-Handbook.pdf`) into a new `mx-outputs/pdf/books/handbook/master/` folder. No build script writes to `master/`, so future second-edition builds cannot clobber it.
+2. **Upload script repoint** — `pdf:mx-upload` in `package.json` now reads from `master/MX-The-Handbook.pdf`, uploads to the same R2 key (`mx-books/handbook/mx-handbook.pdf`) so the customer download URL is unchanged.
+3. **Missing `--remote` flag** — wrangler 4.x changed the default for `r2 object put`: without `--remote`, uploads go to a local simulator, not the production bucket. The script was silently uploading to the local sim. Fixed across all three book-upload scripts (handbook, protocols, intro) and verified each push with `Resource location: remote` in the wrangler output. The first-edition master is now live on Cloudflare R2.
+
+Separately, set up the second-edition workstream: copied the published handbook manuscript to `datalake/manuscripts/mx-books/mx-handbook-v2/` (read-write, sibling to the published `mx-handbook/`), parameterised `scripts/prepare-ack.sh` with an optional `BOOK` argument that emits a dual-edition copyright block ("First Edition: 2 April 2026 / Second Edition: under construction") when called with `BOOK=handbook`. The placeholder is dormant — no caller passes `handbook` yet — and the wiring (chapter paths in `pdf:mx-html`/`pdf:mx-generate`/`pdf:mx-simple`, canonicalUri sweep across `mx-handbook-v2/`, output path) is captured as a single REMINDERS item for when the second-edition build is ready.
+
+### Decisions added
+
+- **First-edition handbook is immutable** — frozen at `mx-outputs/pdf/books/handbook/master/MX-The-Handbook.pdf` and is the only file the upload script touches. Future second-edition builds will land at a different output path.
+- **Wrangler R2 uploads always pass `--remote`** — all three book-upload scripts updated.
+
+### What This Means for Investors
+
+The audit pipeline that shipped this afternoon ran against its first real prospect within the hour. The provenance-gap section in the neomwellbeing.com PDF is the first instance of the "free audit + commissioned full-site review" upsell pattern landing in a deliverable. Separately, the customer-facing handbook download is now demonstrably the right file (the first edition we sell), not whatever build happened to be local — a small correction with outsized importance because it had been silently broken: wrangler was uploading to a local simulator, not Cloudflare, so any earlier `npm run pdf:mx-upload` since the wrangler-4 upgrade had had no effect on production at all.
