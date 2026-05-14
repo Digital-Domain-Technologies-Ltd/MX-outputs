@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 288 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 216 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 290 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 217 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1163** | |
+| **Total** | **1167** | |
 
 ---
 
@@ -63,7 +63,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (237 files)
+### pdf/outreach/ (238 files)
 
 - [`dotfusion-accessibility.csv`](pdf/outreach/2026-04-23/dotfusion-accessibility.csv)
 - [`dotfusion-image-optimisation.csv`](pdf/outreach/2026-04-23/dotfusion-image-optimisation.csv)
@@ -287,6 +287,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`neomwellbeing-report.pdf`](pdf/outreach/2026-05-13/neomwellbeing-report.pdf)
 - [`neomwellbeing-structured-data-findings.csv`](pdf/outreach/2026-05-13/neomwellbeing-structured-data-findings.csv)
 - [`neomwellbeing-com-audit-log.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-audit-log.csv)
+- [`neomwellbeing-com-inline-code-duplicates.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-inline-code-duplicates.csv)
 - [`neomwellbeing-com-pages-audited.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-pages-audited.csv)
 - [`neomwellbeing-com-pipeline-http-content-negotiation-(vary)-pages.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-pipeline-http-content-negotiation-(vary)-pages.csv)
 - [`neomwellbeing-com-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-pipeline-inline-tag-bloat-pages.csv)
@@ -310,7 +311,7 @@ PDF documents — books, manuals, presentations, blog exports.
   - **2026-05-08/** (11 files)
   - **2026-05-09/** (10 files)
   - **2026-05-13/** (13 files)
-  - **2026-05-14/** (12 files)
+  - **2026-05-14/** (13 files)
   - **baremetal.vc/** (4 files)
 
 ### pdf/reginald/ (23 files)
@@ -359,7 +360,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (209 files)
+### md/reports/ (210 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -394,7 +395,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (181 files)
+#### md/reports/directors/ (182 files)
 
 **build/** (3 files)
 
@@ -408,7 +409,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (174 files)
+**session/** (175 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -574,6 +575,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-05-13-evening-report.md`](md/reports/directors/session/2026-05-13-evening-report.md)
 - [`2026-05-13-morning-report.md`](md/reports/directors/session/2026-05-13-morning-report.md)
 - [`2026-05-14-afternoon-report.md`](md/reports/directors/session/2026-05-14-afternoon-report.md)
+- [`2026-05-14-evening-report.md`](md/reports/directors/session/2026-05-14-evening-report.md)
 - [`2026-05-14-morning-report.md`](md/reports/directors/session/2026-05-14-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
@@ -738,4 +740,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-14 at 17:06*
+*Generated on 2026-05-14 at 21:54*
