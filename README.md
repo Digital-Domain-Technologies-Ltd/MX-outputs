@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-05-13"
-modified: "2026-05-13"
+created: "2026-05-14"
+modified: "2026-05-14"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 262 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 214 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 288 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 216 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1135** | |
+| **Total** | **1163** | |
 
 ---
 
@@ -42,19 +42,20 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`llms-txt-guide.png`](pdf/assets/qr/llms-txt-guide.png)
   - **qr/** (5 files)
 
-### pdf/books/ (8 files)
+### pdf/books/ (9 files)
 
 - [`The-AI-Tipping-Point-CMS-Kickoff-2024.pdf`](pdf/books/chapters/The-AI-Tipping-Point-CMS-Kickoff-2024.pdf)
 - [`chapter-00-introduction-to-mx.pdf`](pdf/books/chapters/chapter-00-introduction-to-mx.pdf)
 - [`mx-intro-back.pdf`](pdf/books/free-book/mx-intro-back.pdf)
+- [`MX-The-Handbook.pdf`](pdf/books/handbook/MX-The-Handbook.pdf)
+- [`MX-The-Handbook.pdf`](pdf/books/handbook/master/MX-The-Handbook.pdf)
 - [`mx-handbook-back.pdf`](pdf/books/handbook/mx-handbook-back.pdf)
 - [`mx-handbook-cover.pdf`](pdf/books/handbook/mx-handbook-cover.pdf)
-- [`mx-handbook.pdf`](pdf/books/handbook/mx-handbook.pdf)
 - [`mx-protocols-simple.pdf`](pdf/books/protocols/mx-protocols-simple.pdf)
 - [`mx-protocols.pdf`](pdf/books/protocols/mx-protocols.pdf)
   - **chapters/** (2 files)
   - **free-book/** (1 files)
-  - **handbook/** (3 files)
+  - **handbook/** (4 files)
   - **protocols/** (2 files)
 
 ### pdf/cogify/ (2 files)
@@ -62,7 +63,7 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`MX-Cogify-System-Complete-Documentation-v2.0.pdf`](pdf/cogify/MX-Cogify-System-Complete-Documentation-v2.0.pdf)
 - [`README.md`](pdf/cogify/README.md)
 
-### pdf/outreach/ (212 files)
+### pdf/outreach/ (237 files)
 
 - [`dotfusion-accessibility.csv`](pdf/outreach/2026-04-23/dotfusion-accessibility.csv)
 - [`dotfusion-image-optimisation.csv`](pdf/outreach/2026-04-23/dotfusion-image-optimisation.csv)
@@ -272,6 +273,31 @@ PDF documents — books, manuals, presentations, blog exports.
 - [`dotfusion-com-report-wellknown-detail.json`](pdf/outreach/2026-05-09/dotfusion-com-report-wellknown-detail.json)
 - [`dotfusion-com-report.pdf`](pdf/outreach/2026-05-09/dotfusion-com-report.pdf)
 - [`dotfusion-com-structured-data-findings.csv`](pdf/outreach/2026-05-09/dotfusion-com-structured-data-findings.csv)
+- [`neomwellbeing-audit-log.csv`](pdf/outreach/2026-05-13/neomwellbeing-audit-log.csv)
+- [`neomwellbeing-com-audit-log.csv`](pdf/outreach/2026-05-13/neomwellbeing-com-audit-log.csv)
+- [`neomwellbeing-pages-audited.csv`](pdf/outreach/2026-05-13/neomwellbeing-pages-audited.csv)
+- [`neomwellbeing-pipeline-http-content-negotiation-(vary)-pages.csv`](pdf/outreach/2026-05-13/neomwellbeing-pipeline-http-content-negotiation-(vary)-pages.csv)
+- [`neomwellbeing-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-13/neomwellbeing-pipeline-inline-tag-bloat-pages.csv)
+- [`neomwellbeing-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-05-13/neomwellbeing-pipeline-truncation-risk-pages.csv)
+- [`neomwellbeing-report-audit-log.csv`](pdf/outreach/2026-05-13/neomwellbeing-report-audit-log.csv)
+- [`neomwellbeing-report-fierce-rounds.json`](pdf/outreach/2026-05-13/neomwellbeing-report-fierce-rounds.json)
+- [`neomwellbeing-report-llm-rounds.json`](pdf/outreach/2026-05-13/neomwellbeing-report-llm-rounds.json)
+- [`neomwellbeing-report-rewrite-guard.json`](pdf/outreach/2026-05-13/neomwellbeing-report-rewrite-guard.json)
+- [`neomwellbeing-report-wellknown-detail.json`](pdf/outreach/2026-05-13/neomwellbeing-report-wellknown-detail.json)
+- [`neomwellbeing-report.pdf`](pdf/outreach/2026-05-13/neomwellbeing-report.pdf)
+- [`neomwellbeing-structured-data-findings.csv`](pdf/outreach/2026-05-13/neomwellbeing-structured-data-findings.csv)
+- [`neomwellbeing-com-audit-log.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-audit-log.csv)
+- [`neomwellbeing-com-pages-audited.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-pages-audited.csv)
+- [`neomwellbeing-com-pipeline-http-content-negotiation-(vary)-pages.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-pipeline-http-content-negotiation-(vary)-pages.csv)
+- [`neomwellbeing-com-pipeline-inline-tag-bloat-pages.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-pipeline-inline-tag-bloat-pages.csv)
+- [`neomwellbeing-com-pipeline-truncation-risk-pages.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-pipeline-truncation-risk-pages.csv)
+- [`neomwellbeing-com-report-audit-log.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-report-audit-log.csv)
+- [`neomwellbeing-com-report-fierce-rounds.json`](pdf/outreach/2026-05-14/neomwellbeing-com-report-fierce-rounds.json)
+- [`neomwellbeing-com-report-llm-rounds.json`](pdf/outreach/2026-05-14/neomwellbeing-com-report-llm-rounds.json)
+- [`neomwellbeing-com-report-rewrite-guard.json`](pdf/outreach/2026-05-14/neomwellbeing-com-report-rewrite-guard.json)
+- [`neomwellbeing-com-report-wellknown-detail.json`](pdf/outreach/2026-05-14/neomwellbeing-com-report-wellknown-detail.json)
+- [`neomwellbeing-com-report.pdf`](pdf/outreach/2026-05-14/neomwellbeing-com-report.pdf)
+- [`neomwellbeing-com-structured-data-findings.csv`](pdf/outreach/2026-05-14/neomwellbeing-com-structured-data-findings.csv)
 - [`baremetal-ecom-verification.json`](pdf/outreach/baremetal.vc/.infilled/baremetal-ecom-verification.json)
 - [`baremetal-ecom.md`](pdf/outreach/baremetal.vc/.infilled/baremetal-ecom.md)
 - [`baremetal-ecom-pages-audited.csv`](pdf/outreach/baremetal.vc/baremetal-ecom-pages-audited.csv)
@@ -283,6 +309,8 @@ PDF documents — books, manuals, presentations, blog exports.
   - **2026-05-02/** (101 files)
   - **2026-05-08/** (11 files)
   - **2026-05-09/** (10 files)
+  - **2026-05-13/** (13 files)
+  - **2026-05-14/** (12 files)
   - **baremetal.vc/** (4 files)
 
 ### pdf/reginald/ (23 files)
@@ -331,7 +359,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (207 files)
+### md/reports/ (209 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -366,7 +394,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (179 files)
+#### md/reports/directors/ (181 files)
 
 **build/** (3 files)
 
@@ -380,7 +408,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (172 files)
+**session/** (174 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -545,6 +573,8 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-05-13-afternoon-report.md`](md/reports/directors/session/2026-05-13-afternoon-report.md)
 - [`2026-05-13-evening-report.md`](md/reports/directors/session/2026-05-13-evening-report.md)
 - [`2026-05-13-morning-report.md`](md/reports/directors/session/2026-05-13-morning-report.md)
+- [`2026-05-14-afternoon-report.md`](md/reports/directors/session/2026-05-14-afternoon-report.md)
+- [`2026-05-14-morning-report.md`](md/reports/directors/session/2026-05-14-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -708,4 +738,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-13 at 18:00*
+*Generated on 2026-05-14 at 17:06*
