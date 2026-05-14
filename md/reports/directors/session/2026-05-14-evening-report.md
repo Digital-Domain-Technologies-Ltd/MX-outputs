@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Audit pipeline upstream fixes: source-side guards + two-view performance + readability refactors"
-description: "Evening session hardened the audit pipeline at source. Operator-dialogue refusals, banned-verdict words, and contradictory placeholder values now retry-then-substitute before reaching the gates. Server Response Stability switched to a two-view verdict (cold-cache first-visit + warmed returning-visitor) that surfaces a 4087 ms cold-origin cost the older single-median view was hiding. PDFs gained page numbers; large robots.txt and inline-duplicates tables now sidecar properly."
+title: "Co-Directors Report — Audit pipeline upstream fixes + late-evening partnership notes + blog publish"
+description: "Evening session hardened the audit pipeline at source (operator-dialogue refusals, banned-verdict words, two-view performance verdict, PDF page numbers, sidecar names). Late evening landed the annotated Salva partnership meeting record into mx-crm with explainer blocks decorating each topic, published a new mx-site blog post on the GA4 'AI Assistant' traffic channel, and produced a tagged PDF of the meeting notes."
 author: "Tom Cranstoun"
 created: 2026-05-14
 modified: 2026-05-14
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -119,11 +119,34 @@ Every audit run is now cheaper and more reliable. The repair-final LLM pass — 
 
 ---
 
+## Late Evening Addendum (v1.1)
+
+After the audit pipeline session closed, three further pieces of work shipped:
+
+### 8. Salva partnership meeting notes landed in CRM
+
+The 14 May Tom-Salva conversation on the proposed Reginald partnership (four-way founder split with Salva, Scott McGregor, Doğu Abaris) was recorded into `mx-crm/tom-salva-meeting-notes-14-5-2026.md` as MX-compliant `meeting-notes` content. The original Zoom-Docs note structure is preserved verbatim; each topic carries an "Explainer" block giving the context an external reader needs — what a cog actually is, why metadata-on-document beats JSON-LD, the five-stage adoption ladder (personal wiki → public service), Reginald's L1-L5 compliance levels from Protocols Ch20, the DNS/HTTPS trust-layer analogy, the real risk ranking (complexity compounds, the others don't), and the unspoken partnership-formation risk that the Malaga meeting must address in writing. The file is intended as a brief for incoming partners and prospective investors. Frontmatter carries `audience: [humans, business]` (enum-valid) with a free-form `intendedReaders` field for the descriptive list. Tagged PDF generated to `mx-outputs/pdf/`.
+
+### 9. Blog post: "AI assistants are now a traffic channel"
+
+Published `mx-site/blog/ai-assistants-are-a-traffic-channel.html` and promoted it to the Featured grid (demoting "Many Agents, One Metadata Layer" into the main listing). GA4's surfacing of an AI Assistant channel alongside Organic Search, Social, Email, Direct and Paid is the dashboard catching up to a discipline that already had a name (MX); the post argues the dashboard category gives the work a place to land. Sitemap, blog sitemap, llms.txt and llms-full.txt updated in lockstep.
+
+### 10. Tagged PDF for the meeting notes
+
+`mx-outputs/pdf/tom-salva-meeting-notes-14-5-2026.pdf` generated via the unified `mx.pdf.sh` orchestrator using `info-doc` doctype. ISO 14289-1 Level 2 conformance (tagged, pdfuaid:Part=1 declared), 361 KB.
+
+---
+
 ## Commit Log
 
 | Hash | Repo | Description |
 |------|------|-------------|
 | 8ac344d | mx-audit | Audit pipeline upstream fixes: refusals, banned verdicts, two-view perf |
 | 76b6987 | mx-crm | Refresh neomwellbeing.com audit deliverables with two-view perf + sidecars |
+| 4c83525 | mx-crm | Add Salva partnership meeting notes 2026-05-14 |
 | 8aa8916 | mx-outputs | Refresh neomwellbeing.com PDF + sidecars (two-view perf, page numbers) |
-| _pending_ | hub | Audit pipeline upstream fixes + neomwellbeing artefact refresh + docs |
+| a01f25f | mx-outputs | Directors report: 2026-05-14 evening v1.0 |
+| 72ec709 | mx-outputs | Publish blog post: AI assistants are now a traffic channel |
+| d9a6275 | mx-outputs | Add PDF for Salva partnership meeting notes 2026-05-14 |
+| ba6170b | mx-reginald | Regenerate cog registry index timestamp |
+| _pending_ | hub | Audit pipeline upstream fixes + neomwellbeing artefact refresh + meeting notes + blog publish |
