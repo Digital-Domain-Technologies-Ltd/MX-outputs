@@ -24,7 +24,7 @@ mx:
 
 ## Summary
 
-The rule that governs how MX uses AI agents stopped being a working preference and became canonical. Today it ships, in the same words, across seven surfaces: the Protocols manuscript chapter on Reginald, the MX principles cog, the mx-audit and mx-reginald READMEs, the audit cog and audit-site skill, and a public blog post. Alongside that, the Stage 1 Reginald MVP PRD for Salva is in mx-crm, ready for him to fork from, and the audit pipeline's scoring methodology is now a single source of truth with a lockstep test that fails any drift.
+The rule that governs how MX uses AI agents stopped being a working preference and became canonical. Today it ships, in the same words, across nineteen surfaces: the Protocols manuscript chapter on Reginald, the MX principles cog, the Maxine uber-plan, the Reginald TODO invariant, the mx-audit and mx-reginald READMEs (and SOUL, explainer, reginald.md), the audit cog and audit-site skill, the seven DDT/CogNovaMX business documents (accreditation-programme, agency-pilot-brief, attestation-explainer, business-plan, faq, one-pager, pitch-deck), and a public blog post. Alongside that, the Stage 1 Reginald MVP PRD for Salva is in mx-crm, ready for him to fork from, and the audit pipeline's scoring methodology is now a single source of truth with a lockstep test that fails any drift.
 
 ---
 
@@ -55,13 +55,13 @@ The buildable specification agreed with Salva at the 14 May meeting is now in mx
 | Lines added | +1,318 |
 | Lines removed | -71 |
 | Repositories | 5 |
-| Surfaces carrying the new rule | 7 |
+| Surfaces carrying the new rule | 19 |
 
 ---
 
 ## Why It Matters
 
-Spreading the same rule across seven surfaces is governance work, not feature work, and the value is visible only when the rule is challenged. The next time someone (human or agent) proposes adding a model call inside the verification path, the answer is no, and the no can be cited from the manuscript, the principles cog, the audit cog, the skill, the READMEs, and the public blog. The cost of saying yes in a moment of expedience drops; the cost of saying no later, when an integrator has built on the expedient yes, drops further. Canonical text in many places is what makes a rule expensive to break.
+Spreading the same rule across nineteen surfaces is governance work, not feature work, and the value is visible only when the rule is challenged. The next time someone (human or agent) proposes adding a model call inside the verification path, the answer is no, and the no can be cited from the manuscript, the principles cog, the audit cog, the skill, the READMEs, and the public blog. The cost of saying yes in a moment of expedience drops; the cost of saying no later, when an integrator has built on the expedient yes, drops further. Canonical text in many places is what makes a rule expensive to break.
 
 ---
 
