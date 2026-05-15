@@ -1,0 +1,51 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-15/neomwellbeing.com/neomwellbeing-com-report.md",
+  "timestamp": "2026-05-15T19:49:47.717Z",
+  "model": "claude-sonnet-4-6",
+  "runCount": 1,
+  "findingCount": 5,
+  "regexFindingCount": 0,
+  "llmFindingCount": 5,
+  "findings": [
+    {
+      "category": "subtle-failure-framing",
+      "message": "\"struggles to locate and contextualise\" is subtle failure framing — implying the machines actively fail at a task rather than neutrally stating that signals are absent.",
+      "context": "Machine Experience section of Balanced Scorecard: '...yet Discovery Readiness at 25/100 and Metadata Stack Completeness at 51/100 mean those same machines will struggle to locate and contextualise Neomwellbeing's pages reliably before they even begin reading them.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The recommendation to \"Audit and extend the metadata stack — including Open Graph, canonical, and any agent-oriented metadata signals\" names broad domain categories without anchoring to a specific gap found in this audit. The prose does not identify which Open Graph tags are missing, which canonical signals are incomplete, or what 'agent-oriented metadata signals' refers to concretely. Although the priority block contains score values (25/100, 51/100, 72/100), these scores describe the problem dimension rather than anchor the specific remediation action. The remediation sentence itself is pure domain framing with no data anchor.",
+      "context": "Priority 10: Discovery Readiness 25/100 — 'Audit and extend the metadata stack — including Open Graph, canonical, and any agent-oriented metadata signals — to bring Metadata Stack Completeness closer to full coverage. Machines use this metadata to assess page authority and topic; gaps reduce the confidence with which they assign citations or surface content in generated responses.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "\"Investigate the sources of load-time cost across the audited pages — common contributors include render-blocking resources, large asset payloads, and slow server response — and prioritise reductions that move the largest individual contributors\" is a generic, universally applicable recommendation. The report itself explicitly acknowledges it lacks asset-level data to name specific targets. This makes the recommendation copy-paste boilerplate that could appear in any web audit for any site, with no data anchor from this audit's findings.",
+      "context": "Priority 9: Performance — 'Investigate the sources of load-time cost across the audited pages — common contributors include render-blocking resources, large asset payloads, and slow server response — and prioritise reductions that move the largest individual contributors. This report does not have asset-level data for the audited set, so a dedicated performance audit would identify the specific targets.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The narrative states the report does not have asset-level data, yet the Inline Code Duplicates section and the Appendix C image analysis contain concrete inline CSS/JS sizes and counts. More critically, the Server Response Stability section reports specific cache-busted probe times (859ms, 1361ms, 225ms, 1241ms, 1412ms, 262ms) that do not appear in any preceding facts table or score block in the report, and are introduced without attribution to any audit data source. These figures appear to be injected as narrative specifics without a corresponding facts table entry.",
+      "context": "Server Response Stability section: 'Three cache-busted re-probes that followed returned 859ms, 1361ms, 225ms, giving a returning-visitor median of 859 ms' and 'Three cache-busted re-probes that followed returned 1241ms, 1412ms, 262ms, giving a returning-visitor median of 1241 ms'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "subtle-failure-framing",
+      "message": "\"leaves machines without the fuller context needed to index and represent the brand accurately\" carries passive-aggressive condemning framing — the phrase \"fuller context needed\" implies the current state is insufficient and inaccurate representation is occurring. This goes beyond neutral opportunity framing into implicit condemnation of the current llms.txt state.",
+      "context": "Discovery Files — llms.txt section: '...however, the file currently lacks both a page inventory and a content policy, leaving machines without the fuller context needed to index and represent the brand accurately across the audited set.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    }
+  ]
+}

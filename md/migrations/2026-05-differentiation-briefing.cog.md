@@ -143,6 +143,8 @@ The full phrase *"Registry for Genuine Information, Notarised Authentication, an
 
 The deck must not introduce a backronym the public site does not yet carry. Two paths: (a) push the backronym onto the REGINALD landing page first, then lift it into the deck; (b) keep the deck on the existing three-component description.
 
+**Resolved (2026-05-15): path (a).** The full phrase has been promoted to the REGINALD landing page as a visible letter-block under the intro paragraph, lifted into the page meta description, OpenGraph and Twitter card descriptions, and the JSON-LD `CollectionPage.description` and `alternateName`. The deck may now lift the backronym verbatim; the canonical surface carries it first.
+
 ## 6. Manuscript scope
 
 | Manuscript | Status per CLAUDE.md | What this pass can do |
@@ -157,7 +159,7 @@ The deck must not introduce a backronym the public site does not yet carry. Two 
 
 These are the calls the briefing cannot make on its own. The interview's job is to close them.
 
-1. **The REGINALD backronym.** Confirmed not on any canonical source. Two paths: (a) introduce on the deck and push to the landing page in the same pass so they stay in step; (b) keep the deck on the three-component R/N/L description and defer the backronym for now. *Recommendation: (b) is the safer move; the deck and the canonical surface stay in step from day one.*
+1. **The REGINALD backronym.** *Resolved (2026-05-15): path (a).* The full phrase "Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation" has been promoted onto the REGINALD landing page as a visible letter-block, with the meta description, OpenGraph, Twitter, and JSON-LD descriptions updated in step. The deck may now lift the backronym verbatim.
 2. **The MeetKai partnership claim.** Lives only on the deck today. Should the pass push the partnership-shape claim onto a canonical page (position paper or REGINALD landing) so the deck and the public surface agree?
 3. **`Reginald.pptx` reconciliation.** Polished investor render but content-stale and misleadingly named. Three options: (a) treat as a derivative, re-render after canonical update, rename to `mx-investor-deck.pptx`; (b) promote its visual polish back into the canonical render path; (c) leave as-is and rely on `bmv-pitch-2026.pptx` for the BMV meeting.
 4. **The Frankfurt deck.** Source Marp markdown not in this repo. In scope to update for 12 May (locate the Marp source first), or out of scope for this pass?

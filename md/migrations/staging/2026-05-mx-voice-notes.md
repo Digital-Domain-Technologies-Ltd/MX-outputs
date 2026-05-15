@@ -248,7 +248,7 @@ These are the lines the deck and the manuscripts should lift verbatim where the 
   - **R:** "A public record of what was published, by whom, and when."
   - **N:** "Each cog carries a cryptographic signature using established standards. Tampering is detectable. Authorship is not deniable. Time of publication is provable."
   - **L:** "The signature is paired with discoverable metadata: purpose, audience, refers-to, update rules."
-- The deck and manuscripts should treat the backronym as currently being held inside the project and not yet promoted to the canonical voice surface. Either (a) introduce the backronym in the deck and immediately push it onto the landing page so the voice and the deck stay in step, or (b) describe REGINALD by the three-component pattern above for now.
+- **Resolved (2026-05-15): the backronym is now on the canonical voice surface.** The full phrase has been promoted to the REGINALD landing page as a visible letter-block under the intro paragraph and lifted into the page meta description, OpenGraph and Twitter card descriptions, and JSON-LD `CollectionPage.description` and `alternateName`. Deck and manuscripts may lift the backronym verbatim.
 
 ### MX vs SEO / GEO / JSON-LD / Google / MeetKai
 
@@ -281,7 +281,7 @@ These are the lines the deck and the manuscripts should lift verbatim where the 
 
 These are the places where the canonical voice has drifted, has not yet been written, or returned only summary text from the public fetch. The deck pass and the manuscript pass should land each item before they go to print.
 
-1. **REGINALD backronym not on the canonical surface.** The full phrase "Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation" does not appear on the REGINALD landing page or on any of the nine canonical sources fetched. The position paper describes REGINALD by three functional components (R, N, L) without spelling out a phrase. The deck must not introduce a backronym that the public site does not yet carry. Either (a) push the full backronym onto the REGINALD landing page first, then lift it into the deck, or (b) keep the deck on the existing three-component description.
+1. **REGINALD backronym promoted to the canonical surface (resolved 2026-05-15).** The full phrase "Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation" now lives on the REGINALD landing page as a visible letter-block, with the meta description, OpenGraph, Twitter, and JSON-LD descriptions updated in step. The deck and manuscripts may lift the backronym verbatim; the canonical surface carries it first. The position paper's three-component R/N/L expansion remains available as a complementary, deeper read.
 
 2. **Brand casing inconsistency.** REGINALD is brand-style all-caps on the landing page and on the deck rule. "Reginald" (mixed case) appears in the GEO blog and in the canon files. The MEMORY rule is clear (`REGINALD` in public prose, mixed case allowed in canon). The deck must use REGINALD throughout. The blog corpus is partially still on mixed case; not the deck's job to fix, but worth flagging for a future blog sweep.
 
