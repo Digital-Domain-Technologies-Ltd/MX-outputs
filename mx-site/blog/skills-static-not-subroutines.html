@@ -48,7 +48,7 @@
       "description": "A Claude Code skill captures its source at creation time. It does not re-read on each invocation. Knowing this prevents shipping outdated automation.",
       "url": "https://mx.allabout.network/blog/skills-static-not-subroutines.html",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
+      "dateModified": "2026-05-15",
       "inLanguage": "en-GB",
       "publisher": {
         "@id": "https://mx.allabout.network/about/about.html#organization"
@@ -71,7 +71,7 @@
       },
       "keywords": "Claude Code, skills, automation, agent tooling, skill maintenance, Machine Experience",
       "articleSection": "Machine Experience",
-      "wordCount": 780
+      "wordCount": 1000
     },
     {
       "@type": "BreadcrumbList",
@@ -160,6 +160,7 @@
             <li><a href="#why-this-matters">Why this matters</a></li>
             <li><a href="#implications">Implications for skill maintenance</a></li>
             <li><a href="#best-practices">Practices that age well</a></li>
+            <li><a href="#agent-to-script">From observed agent to deterministic script</a></li>
             <li><a href="#when-beneficial">When static behaviour is the right answer</a></li>
             <li><a href="#conclusion">Conclusion</a></li>
           </ul>
@@ -171,13 +172,13 @@
           <h1>Claude Code Skills Are Static Snapshots, Not Dynamic Subroutines</h1>
           <div class="article-meta"
              data-published="2026-05-12"
-             data-modified="2026-05-12"
-             data-reading-time="4 min">
+             data-modified="2026-05-15"
+             data-reading-time="5 min">
             <time datetime="2026-05-12">12 May 2026</time>
             <span>&middot;</span>
             <span>Tom Cranstoun</span>
             <span>&middot;</span>
-            <span>4 min read</span>
+            <span>5 min read</span>
           </div>
         </header>
 
@@ -308,6 +309,16 @@ Last verified: 2026-01-15
   <li>Update when discrepancies show up.</li>
   <li>Record changes in a skill changelog.</li>
 </ul>
+
+<h2 id="agent-to-script" tabindex="-1">From observed agent to deterministic script</h2>
+
+<p>The same logic that makes a static snapshot a virtue points at a practice for getting there. When a task is new and the right shape is not yet clear, I run an agent on it. The agent is observed, every step is logged, every input and output is instrumented. After a handful of runs, the steady-state shows itself: the parts the agent does the same way every time, and the parts where it drifts.</p>
+
+<p>That steady-state is what becomes the deterministic script. Anything the agent did twice the same way is now code; anything that drifted gets a named decision, not a silent re-run. The skill that ships is the script, not the agent loop, and that is what gives downstream consumers the static snapshot they can rely on.</p>
+
+<p>One detail matters: a small LLM judgement pass at the very end is acceptable when a genuinely qualitative verdict is needed, for example, "is this report readable" or "does this prose match the house voice". That pass is bounded, single-shot, and clearly separated from the deterministic core. The bulk of the work is reproducible bytes; the judgement pass is the only part the model is responsible for, and its scope is named in the skill so a reader can see exactly where determinism ends.</p>
+
+<p>This is how a skill earns the right to be a static snapshot. The agent did the exploration once, the script encodes what the agent learned, and the only live model call is the one part that resists encoding.</p>
 
 <h2 id="when-beneficial" tabindex="-1">When static behaviour is the right answer</h2>
 
