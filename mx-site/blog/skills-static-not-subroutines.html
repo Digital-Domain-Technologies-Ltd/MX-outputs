@@ -71,7 +71,7 @@
       },
       "keywords": "Claude Code, skills, automation, agent tooling, skill maintenance, Machine Experience",
       "articleSection": "Machine Experience",
-      "wordCount": 1000
+      "wordCount": 1300
     },
     {
       "@type": "BreadcrumbList",
@@ -182,7 +182,7 @@
           </div>
         </header>
 
-<p><strong>Claude Code skills are static snapshots, not dynamic subroutines.</strong> Understanding this architectural principle matters when you build skills that need to stay current. It is the difference between a skill that ages well and one that quietly produces wrong output six months later.</p>
+<p><strong>Claude Code skills are static snapshots, not dynamic subroutines.</strong> Understanding this architectural principle matters when you build skills that need to stay current, and it matters at least as much when the model underneath them is upgraded or the system prompt that runs every session is revised. The skill is the part that stays put. It is the difference between a skill that ages well and one that quietly produces wrong output six months later, and it is also the contract that stops an upstream model release from silently re-shaping your workflow.</p>
 
 <h2 id="static-snapshot-model" tabindex="-1">The static-snapshot model</h2>
 
@@ -333,6 +333,14 @@ Last verified: 2026-01-15
 
 <p>For workflows where stability matters most (regulatory compliance, reproducible builds, audit trails), the static behaviour is the feature, not the bug. The trade-off is manual maintenance effort.</p>
 
+<h3 id="model-and-system-prompt-churn">Insulation from model and system-prompt churn</h3>
+
+<p>The same principle cuts in the other direction. The model and its system prompt can shift underneath the user, and a static skill is the part that does not move. When the underlying model is upgraded, or when the system prompt that runs every Claude Code session is revised, every skill the user has written continues to execute its captured instructions. The work invested in writing the skill is not silently re-interpreted by a model whose defaults have moved on.</p>
+
+<p>In the AI and LLM race this matters more than it sounds, because the cadence is high. Anthropic shipped Claude Opus 4.7 on 16 April 2026, less than a month before this post was written, and a public diff of its system prompt against Opus 4.6 shows real behaviour changes: the model is less inclined to push for another turn when a user signals they are done, it now prefers calling an available tool to resolve ambiguity rather than asking the user to look something up, and the naming for the platform itself was tidied up. None of those changes are wrong; all of them are improvements; every one of them is the kind of upstream shift that would re-shape ad-hoc behaviour for any workflow that relied on the model's defaults rather than its own captured instructions.</p>
+
+<p>A skill whose instructions are written down is insulated from that drift, for better or worse. The skill does the same thing on 4.7 that it did on 4.6, and the user decides when to adopt the new behaviour by editing the skill, not by living with a silent change. Model and system-prompt revisions of this size are a normal part of the cadence, not an exception. The skill is the contract between the user and the model. When the model changes underneath, the contract is still legible, and the diff between the old behaviour and the new behaviour is something the user can read on a date of their choosing.</p>
+
 <h2 id="conclusion" tabindex="-1">Conclusion</h2>
 
 <p>Claude Code skills are useful automation, but they are <strong>static snapshots, not dynamic subroutines</strong>. When writing one:</p>
@@ -345,7 +353,7 @@ Last verified: 2026-01-15
   <li>Test skills against current sources on a schedule.</li>
 </ol>
 
-<p>Skills are locked into time at creation. Recognising the constraint is what stops a skill from quietly producing wrong output long after the source it was written from has moved on.</p>
+<p>Skills are locked into time at creation. Recognising the constraint is what stops a skill from quietly producing wrong output long after the source it was written from has moved on, and it is also what keeps the user's work intact when the model or its system prompt is revised underneath. In a race where model releases land every few weeks, that insulation is the point.</p>
 
       </article>
 
