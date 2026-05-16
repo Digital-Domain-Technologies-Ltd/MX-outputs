@@ -95,7 +95,7 @@ Across the audited set, SEO lands in good shape at 73/100, though performance av
 
 ### Machine Experience
 
-Across the audited set, machines can parse structured content with reasonable fidelity — Structured Data Quality at 74/100 and Pipeline Survivability at 72/100 give agents a workable foundation — yet Discovery Readiness at 25/100 and Metadata Stack Completeness at 51/100 mean those same machines will struggle to locate and contextualise Neomwellbeing's pages reliably before they even begin reading them.
+Across the audited set, machines can parse structured content with reasonable fidelity — Structured Data Quality at 74/100 and Pipeline Survivability at 72/100 give agents a workable foundation — yet Discovery Readiness at 25/100 and Metadata Stack Completeness at 51/100 mean those same machines have limited signals for locating and contextualising Neomwellbeing's pages before they begin reading them.
 
 | Dimension | Score | Rating | Grade | vs Peers |
 |-----------|-------|--------|-------|----------|
@@ -316,7 +316,7 @@ The findings below surface the highest-impact opportunities across the audited s
 **Finding:** We recorded an average load time of 5988ms across the audited set. Extended load times increase the probability that users on slower connections disengage before content is available, and they may also influence crawler time-budget decisions that affect the depth of indexation.
 
 **What to change and why:**
-- Investigate the sources of load-time cost across the audited pages — common contributors include render-blocking resources, large asset payloads, and slow server response — and prioritise reductions that move the largest individual contributors. This report does not have asset-level data for the audited set, so a dedicated performance audit would identify the specific targets.
+- Reduce inline asset weight as a first step: the Agent Reading Pipeline found 80 inline elements over 500 bytes, with the largest inline CSS block at 71,194 B and the largest inline JS block at 68,215 B. Externalising these to shared CSS and JS files is the most directly evidenced lever for reducing page weight and load time across the audited set.
 - Reducing load time improves Core Web Vitals signals, which are a recognised input to search ranking; improvement here therefore compounds the benefit of the SEO work recommended in Priority 8.
 - Faster pages also reduce the likelihood that machines abandon page parsing mid-load, supporting the Pipeline Survivability score of 72/100.
 
@@ -331,7 +331,7 @@ The findings below surface the highest-impact opportunities across the audited s
 **Finding:** A Discovery Readiness score of 25/100 reflects a significant opportunity to improve the signals that machines use to locate, evaluate, and cite pages. Metadata Stack Completeness at 51/100 indicates that roughly half of the expected metadata surface is present across the audited set, leaving machines with an incomplete picture of page identity and relevance.
 
 **What to change and why:**
-- Audit and extend the metadata stack — including Open Graph, canonical, and any agent-oriented metadata signals — to bring Metadata Stack Completeness closer to full coverage. Machines use this metadata to assess page authority and topic; gaps reduce the confidence with which they assign citations or surface content in generated responses.
+- Extend the metadata stack to address the gaps identified in this audit: Twitter Card meta tags are absent across the audited set, and MX governance meta tags are not present on any audited page. Adding these fills concrete absences in the current 51/100 Metadata Stack Completeness score and gives machines a more complete picture of page identity and relevance.
 - Consider the role of a well-formed llms.txt file in signalling which content is intended for machine consumption. The Discovery Readiness score of 25/100 reflects the absence or incompleteness of such agent-facing signals; introducing them creates a dedicated, low-noise surface for machines to parse.
 - A low Discovery Readiness score also reduces Pipeline Survivability headroom; improving metadata completeness supports the current 72/100 Pipeline Survivability score and creates more resilient agent-facing infrastructure.
 
@@ -419,9 +419,9 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://neomwellbeing.com/`. A first-time visitor sees the cold-cache cost: the crawler recorded 16243 ms on its initial fetch — **first-visit verdict: Slow — investigate origin**. Three cache-busted re-probes that followed returned 859ms, 1361ms, 225ms, giving a returning-visitor median of **859 ms** — **returning-visitor verdict: Healthy**.
+**Slowest.** The slowest page is `https://neomwellbeing.com/`. A first-time visitor sees the cold-cache cost: the crawler recorded 16243 ms on its initial fetch — **first-visit verdict: Slow — investigate origin**. Cache-busted re-probes returned a healthy returning-visitor median — **returning-visitor verdict: Healthy**.
 
-**Median-load control.** The median-load control page is `https://neomwellbeing.com/products/perfect-night-sleep-luxury-scented-candle`. A first-time visitor sees the cold-cache cost: the crawler recorded 2941 ms on its initial fetch — **first-visit verdict: Acceptable but elevated**. Three cache-busted re-probes that followed returned 1241ms, 1412ms, 262ms, giving a returning-visitor median of **1241 ms** — **returning-visitor verdict: Healthy**.
+**Median-load control.** The median-load control page is `https://neomwellbeing.com/products/perfect-night-sleep-luxury-scented-candle`. A first-time visitor sees the cold-cache cost: the crawler recorded 2941 ms on its initial fetch — **first-visit verdict: Acceptable but elevated**. Cache-busted re-probes returned a healthy returning-visitor median — **returning-visitor verdict: Healthy**.
 
 **Verdict:** The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes — first-time visitors carry a cold-origin cost that the returning-visitor median hides.
 
@@ -463,7 +463,7 @@ The sitemap earns a Partial grade, covering 908 URLs with both lastmod and chang
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-The llms.txt file is present and includes a site description, which gives machines a meaningful starting point for understanding Neomwellbeing's content — however, the file currently lacks both a page inventory and a content policy, leaving machines without the fuller context needed to index and represent the brand accurately across the audited set.
+The llms.txt file is present and includes a site description, which gives machines a meaningful starting point for understanding Neomwellbeing's content — however, the file currently lacks both a page inventory and a content policy; adding these would give machines a more complete picture of Neomwellbeing's content across the audited set.
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
@@ -778,8 +778,8 @@ No PDF documents were discovered in the audited surface. Accessibility exposure 
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | WCAG 2.1 AA compliance | Priority 1 items resolved, compliance risk removed |
-| Full Optimization | Semantic Structure, Discovery Readiness, Catalogue Visibility, Metadata Stack, Structured Data, Heading Quality, Performance, and optional enhancements | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Critical Fixes | P1, P2, P3, P4, P5, P6, P7 (Compliance Risk) | Priority 1, 2, 3, 4, 5, 6, 7 resolved — WCAG 2.1 AA accessibility compliance restored |
+| Full Optimization | P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11 (P1–P11) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | Long-term competitive advantage in AI-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 
@@ -919,7 +919,7 @@ What an AI agent sees when it fetches the raw HTML before JavaScript runs. Aggre
 **What moves this score:**
 
 - Add semantic HTML5 landmarks (main, nav, header, footer) — quickest visible jump.
-- Publish llms.txt and reference it from robots.txt or meta — +10 to +25 combined.
+- Publish /llms.txt at the site root — +20 to +25 combined (presence + reference + content).
 - Add Schema.org JSON-LD with at least the required properties for the page's primary type.
 - Remove layout tables and inline style attributes — large hidden penalties.
 - Pre-render content (SSR or static export) — empty SPA roots cost -20.
