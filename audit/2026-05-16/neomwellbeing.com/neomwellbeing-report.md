@@ -38,11 +38,11 @@ mx:
 
 ## About This Report
 
-This report covers 5 pages audited across neomwellbeing.com's site using the Web Audit Suite. Each page is analysed across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.
+We audited 5 pages across neomwellbeing.com's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.
 
-Every page is fetched twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
+We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
-Automated findings are reviewed by a human consultant before the report is finalised. The automated pass identifies what is present or absent; the human review reads that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable. Patterns that appear repeatedly across sites on the same platform get noted as platform characteristics rather than site-specific gaps. When new agent behaviours emerge, the audit updates what it looks for.
+We then review automated findings by hand before finalising this report. The automated pass identifies what is present or absent; we read that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable. Patterns we see repeatedly across sites on the same platform we note as platform characteristics rather than site-specific gaps. When new agent behaviours emerge, we update what we look for.
 
 The scoring criteria follow published MX standards and proposed specifications maintained at [`https://tg.community`](https://tg.community). Where established external standards apply: WCAG 2.1, Schema.org, RFC 9309, W3C: those take precedence. The MX framework addresses governance and machine experience metadata in the areas those standards do not cover.
 
@@ -54,7 +54,7 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 
 Two structural problems limit its practical reach. The first is content type: the llmstxt.org specification defines `text/plain` as the content type for llms.txt files. Our recommendation diverges from the specification: we recommend serving llms.txt as `text/html`, wrapping the raw text in a minimal HTML document with the content inside a `<pre>` block and returning `Content-Type: text/html` from the server or CDN edge. The second problem is discovery: without a sitemap entry, crawlers have no reliable signal the file exists.
 
-The Discovery Files section records llms.txt presence, transport type, and sitemap registration. Where it is absent, the report notes the gap and the effort required to address it.
+The Discovery Files section records llms.txt presence, transport type, and sitemap registration. Where it is absent, we note the gap and the effort required to address it.
 
 ---
 
@@ -62,19 +62,19 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 | | Score | |
 |:---|---:|:---|
-| Performance | **35**/100 | `#########----------------` **(!)** |
-| Accessibility | **18**/100 | `#####--------------------` **(!)** |
-| SEO | **73**/100 | `##################-------` |
-| Machine Suitability | **25**/100 | `######-------------------` **(!)** |
-| MX Stack | **51**/100 | `#############------------` |
-| Agent Readability | **65**/100 | `################---------` |
-| Pipeline Survivability | **72**/100 | `##################-------` |
+| Performance | **35**/100 | `######------------` **(!)** |
+| Accessibility | **18**/100 | `###---------------` **(!)** |
+| SEO | **73**/100 | `#############-----` |
+| Machine Suitability | **25**/100 | `#####-------------` **(!)** |
+| MX Stack | **51**/100 | `#########---------` |
+| Agent Readability | **65**/100 | `############------` |
+| Pipeline Survivability | **72**/100 | `#############-----` |
 
-Neomwellbeing has built something worth visiting. Across the audited set, the brand communicates clearly, the content is purposeful, and the SEO foundations are solid at 73/100, a "Good" band score that reflects genuine care given to titles, structure, and discoverability through conventional search. Visitors arriving from search engines find a coherent experience, and the groundwork for broader reach is already in place.
+Neomwellbeing presents a well-considered destination for wellness seekers. Across the audited set, the brand communicates with clarity and warmth, and the product content is substantive enough to support genuine purchase decisions. SEO foundations are solid at 73/100, meaning the pages we reviewed are well-positioned to attract and hold human visitors who arrive through search.
 
-Before turning to the machine-readiness opportunity, we want to name accessibility as a Priority 1 compliance item. We recorded 96 critical WCAG AA issues across the audited set, and while that number is large, the shape of the problem is more tractable than it first appears: 80 of those issues trace back to 22 recurring template patterns, which means a single theme-level edit per pattern resolves every instance it generates. Structured Data Quality sits at 74/100, a Level 2 "Good schema" result, which is a genuine asset. The headline opportunity, however, is Discovery Readiness and AI Suitability, both of which score 25/100, placing the site at MX Readiness Level 1. Machines, whether search crawlers, AI assistants, or other automated readers, are touching neomwellbeing.com today, and at that score they are seeing far less of what the brand offers than human visitors are.
+Before turning to the machine-experience opportunity, we want to name accessibility as a Priority 1 compliance item. We recorded 96 critical WCAG AA issues across the audited set, and that number, while large, carries a constructive note: 80 of those issues trace to 22 recurring template patterns, meaning a single theme-level edit per pattern resolves all instances at once. The groundwork for a faster-than-expected remediation is already there. The headline opportunity, once accessibility is on a remediation path, is machine readiness. Discovery Readiness and AI Suitability both sit at 25/100, placing Neomwellbeing at MX Readiness Level 1. Machines reading the audited pages today see a substantially thinner version of the brand than a human visitor does, and closing that distance is the lever most likely to extend Neomwellbeing's reach into agent-mediated search and AI-driven recommendations.
 
-The Catalogue Visibility score of 45/100 tells a related story: the product range is not yet fully legible to machines in the structured, parseable form they prefer. Schema.org JSON-LD is the highest-leverage asset available here, because every machine can read it regardless of how the page is rendered, and the site's existing Level 2 schema maturity means the foundation to build from is already present across the audited set. Closing the gap between what human visitors experience and what machines can read is the clearest path to extending the SEO progress already made.
+The Schema Maturity picture is more encouraging, sitting at Level 2 (74/100), with a meaningful set of structured-data types already in place across the audited set. That foundation matters because Schema.org JSON-LD is readable by machines regardless of how a page is ultimately rendered, making it the highest-leverage asset available for closing the machine-readiness distance quickly and reliably.
 
 > 
 
@@ -84,27 +84,25 @@ The Catalogue Visibility score of 45/100 tells a related story: the product rang
 
 ### Human Experience
 
-Across the audited set, SEO holds at a solid 73/100 while accessibility, at 18/100 with 96 detected issues, represents the most significant opportunity to improve the experience for human visitors.
+Across the audited set, SEO sits at a solid 73/100 while Accessibility at 18/100, with 96 issues identified across 5 pages, represents the clearest opportunity to improve the experience for human visitors.
 
-| Dimension | Rating | Grade | vs Peers |
-|-----------|--------|-------|----------|
-| UX / Navigation | Excellent | A |: |
-| Performance | Could Be Better | C | seeding (n=1) |
-| Accessibility (WCAG) | Needs Improvement | D | seeding (n=1) |
-| Trust and Credibility | Excellent | A |: |
+| Dimension | Rating | Grade |
+|-----------|--------|-------|
+| UX / Navigation | Excellent | A |
+| Performance | Could Be Better | C |
+| Accessibility (WCAG) | Needs Improvement | D |
+| Trust and Credibility | Excellent | A |
 
 ### Machine Experience
 
-Across the audited set, we found that machines can parse structured data with reasonable confidence (74/100) and survive the content pipeline at 72/100, though their ability to discover and contextualise the content is constrained by Discovery Readiness of 25/100 and a Metadata Stack Completeness of 51/100.
+Across the audited set, machines can parse structured product and organisational data with reasonable confidence (Structured Data Quality 74/100) and carry content through processing pipelines at a moderate rate (Pipeline Survivability 72/100), though their ability to discover and index those pages remains constrained (Discovery Readiness 25/100, Metadata Stack Completeness 51/100).
 
-| Dimension | Score | Rating | Grade | vs Peers |
-|-----------|-------|--------|-------|----------|
-| Discovery Readiness | 25/100 | Needs Improvement | D | seeding (n=1) |
-| Structured Data Quality | 74/100 | Good | B | seeding (n=1) |
-| MX Stack Completeness | 51/100 | Could Be Better | C | seeding (n=1) |
-| Pipeline Survivability | 72/100 | Excellent | A | seeding (n=1) |
-
-*Peer-comparison dataset `2026-05-15.4`. Sample size n=1, still seeding. The "vs Peers" column will populate as fresh audits land.*
+| Dimension | Score | Rating | Grade |
+|-----------|-------|--------|-------|
+| Discovery Readiness | 25/100 | Needs Improvement | D |
+| Structured Data Quality | 74/100 | Good | B |
+| MX Stack Completeness | 51/100 | Could Be Better | C |
+| Pipeline Survivability | 72/100 | Excellent | A |
 
 ---
 
@@ -143,7 +141,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-The five audited pages reveal a solid foundation to build from, with consistent SEO performance at 73/100, full security-header coverage across every audited URL, and Structured Data Quality at 74/100. That degree of consistency, 100% across the audited set, tells us the groundwork for meaningful, scalable improvements is already in place.
+Across the audited set, we found a solid foundation of technical strengths that the improvements ahead are designed to build on. Consistent security headers, a Structured Data Quality score of 74/100, and a 100% consistency rating across the audited pages give machines and human visitors alike a reliable base to work from.
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
@@ -169,168 +167,173 @@ The five audited pages reveal a solid foundation to build from, with consistent 
 
 ### At a Glance
 
-The findings below are prioritised by impact, with discovery and visibility gaps leading because machines that cannot reliably reach and parse the audited pages are not in a position to benefit from the stronger signals further down the stack. Structured Data Quality sits at 74/100, while Catalogue Visibility, Metadata Stack Completeness, and Discovery Readiness at 45/100, 51/100, and 25/100 respectively point to clear opportunities to strengthen the foundations that serve both search crawlers and AI systems.
+The findings below are prioritised by impact across the audited set, with discovery and visibility opportunities leading because gaps at that layer constrain everything downstream. Structured Data Quality sits at 74/100, Catalogue Visibility at 45/100, Metadata Stack Completeness at 51/100, and Discovery Readiness at 25/100.
 
 ## At-a-Glance Findings
 
 | # | Finding | Bucket | Priority | Effort | Impact |
 |---|---------|--------|----------|--------|--------|
-| 1 | Duplicate ID attributes: `#quantity` (11 instances, 4 pages) and `#mini-cart` (4 instances, 4 pages) — WCAG 4.1.1 | Compliance Risk | High | Medium | Assistive technology users may miss interactive elements or receive incorrect announcements |
-| 2 | Forms without submit buttons on 4 pages — WCAG 3.2.2 | Compliance Risk | High | Medium | Keyboard-only users risk being unable to submit forms |
-| 3 | Empty heading tags on 4 pages — WCAG 1.3.1 | Compliance Risk | High | Low | Screen reader users may encounter confusing or meaningless navigation landmarks |
-| 4 | Semantic structure: 573 bare divs out of 867 total elements, rendered score 20/100 | Compliance Risk | High | High | Assistive technology users and machines are less likely to interpret content hierarchy correctly |
-| 5 | Served HTML Discovery Readiness: 25/100 (Needs Improvement) | Cross-cutting | High | Medium | Machines risk missing page content before JavaScript execution |
-| 6 | Metadata Stack Completeness: 51/100 (Could Be Better) | Cross-cutting | Medium | Low | Machines may miss key descriptive signals, reducing indexing confidence |
-| 7 | Average page load time: 5,988ms | Cross-cutting | Medium | High | Users on slower connections risk abandonment; machines may time out before full content is available |
-| 8 | Heading quality: 61/100 | Cross-cutting | Medium | Low | Machines and screen reader users may find content structure less navigable |
-| 9 | Pipeline Survivability: 72/100 | AI Opportunity | Medium | Medium | Machines are less likely to extract and relay complete content in agent pipelines |
+| 1 | Duplicate ID attributes (#quantity, #mini-cart) violate WCAG 4.1.1 — 15 instances across 4 pages | Compliance Risk | High | Medium | Assistive tech users may mis-navigate or receive incorrect announcements |
+| 2 | Forms missing submit buttons violate WCAG 3.2.2 — 8 instances across 4 pages | Compliance Risk | High | Medium | Keyboard-only users risk being unable to submit forms |
+| 3 | Empty heading tags violate WCAG 1.3.1 — 4 instances across 4 pages | Compliance Risk | High | Low | Screen reader users may receive confusing or redundant navigation cues |
+| 4 | Semantic structure score 20/100 — 573 bare divs out of 867 total elements | Compliance Risk | High | High | Screen reader and assistive tech users are less likely to navigate content accurately |
+| 5 | Slow average load time — 5,988ms average across the audited set | Cross-cutting | High | Medium | All users and machines may abandon or deprioritise pages before content loads |
+| 6 | SEO score 73/100 — Heading quality at 61/100 | Cross-cutting | Medium | Low | Search crawlers are less likely to correctly rank and index page content |
+| 7 | Discovery Readiness 25/100 — Served HTML at 25/100 | AI Opportunity | High | Medium | Machines risk missing content that is not available in served HTML |
+| 8 | Metadata Stack Completeness 51/100 — incomplete metadata across the audited set | AI Opportunity | Medium | Medium | Machines are less likely to correctly attribute or surface pages in agent answers |
+| 9 | Pipeline Survivability 72/100 — partial agent-pipeline readiness | AI Opportunity | Medium | Low | Machines may reduce confidence in page content during discovery and citation |
 
 ---
 
-**Priority 1: Duplicate ID Attributes — WCAG 4.1.1**
+**Priority 1: Duplicate ID Attributes (#quantity, #mini-cart), WCAG 4.1.1**
 
 **Bucket:** Compliance Risk
 
-**Finding:** We identified 11 instances of the duplicate ID `#quantity` across 4 pages and 4 instances of the duplicate ID `#mini-cart` across 4 pages. Duplicate IDs violate WCAG 4.1.1 (Parsing), which requires that elements have unique identifiers so assistive technologies can resolve them unambiguously.
+**Finding:** We identified 11 instances of the duplicate ID value "quantity" across 4 pages and 4 instances of the duplicate ID value "mini-cart" across 4 pages. WCAG 4.1.1 requires that all ID attribute values on a page are unique; duplicate IDs cause assistive technologies to behave unpredictably because they cannot reliably resolve which element is being referenced.
 
 **What to change and why:**
 
-- Ensure every instance of the `#quantity` element carries a unique ID per page. When the same ID appears multiple times, screen readers and assistive tools bind only to the first matching element, meaning subsequent instances may be invisible or misread to affected users. Resolving this moves the WCAG 4.1.1 criterion from a fail to a pass.
-- Ensure every instance of the `#mini-cart` element carries a unique ID per page, for the same reason. Because 80% of the 96 accessibility issues we found trace to 22 template-level patterns, a single theme-level change here is likely to resolve all 4 instances at once rather than requiring page-by-page edits.
+- Ensure every instance of the "quantity" ID is unique across the audited set. When the same ID appears on multiple elements, screen readers and other assistive technologies may announce the wrong element or skip subsequent instances entirely, directly affecting WCAG 4.1.1 conformance.
+- Ensure every instance of the "mini-cart" ID is unique across the audited set. Duplicate IDs in interactive cart regions are particularly disruptive because they sit in high-traffic user flows; resolving them reduces assistive-tech confusion and improves WCAG 4.1.1 compliance.
+- Because 80% of the 96 accessibility issues we found trace to 22 recurring template-level patterns, addressing these duplicate IDs at the template level will resolve all instances across the audited set in a single edit rather than requiring page-by-page remediation.
 
 **Effort:** Medium
 
 ---
 
-**Priority 2: Forms Without Submit Buttons — WCAG 3.2.2**
+**Priority 2: Forms Missing Submit Buttons, WCAG 3.2.2**
 
 **Bucket:** Compliance Risk
 
-**Finding:** We identified 4 instances across 4 pages where forms contain no submit button. This violates WCAG 3.2.2 (On Input), which requires that forms are operable by keyboard without relying on implicit submission behaviour. Two distinct selectors are affected: the header section form and the predictive search form.
+**Finding:** We identified 8 instances across 4 pages where forms do not contain a submit button, affecting both the header region (selector: `#shopify-section-header`) and a predictive search region (selector: `html > body > div:nth-child(5) > div:nth-child(3) > predicti…`). WCAG 3.2.2 requires that forms can be submitted without requiring a pointer device; the absence of a valid submit button prevents keyboard-only users from completing form interactions.
 
 **What to change and why:**
 
-- Add an explicit submit control to the form associated with the header section (`#shopify-section-header`). Without one, keyboard-only users have no reliable mechanism to submit the form, which can exclude them entirely from search and navigation features. Passing WCAG 3.2.2 here directly reduces legal exposure and broadens usability.
-- Add an explicit submit control to the predictive search form (`html > body > div:nth-child(5) > div:nth-child(3) > predicti…`). This form pattern recurs across 4 pages; because the majority of accessibility issues trace to template-level patterns, a single template fix is likely to resolve all affected instances simultaneously.
+- Add a valid submit button to the header form region. Without one, keyboard-only users cannot trigger the form's intended action, which constitutes a WCAG 3.2.2 violation and excludes a measurable segment of the user base from core site functionality.
+- Add a valid submit button to the predictive search form region. Predictive search is a navigational aid; keyboard users who rely on it to find products are at risk of reaching a dead end if no submit mechanism is available without a pointer device.
+- As with Priority 1, these patterns recur across 4 pages and are template-level issues; a single theme-level fix resolves all instances across the audited set.
 
 **Effort:** Medium
 
 ---
 
-**Priority 3: Empty Heading Tags — WCAG 1.3.1**
+**Priority 3: Empty Heading Tags, WCAG 1.3.1**
 
 **Bucket:** Compliance Risk
 
-**Finding:** We identified 4 instances across 4 pages where heading tags contain no text content, traced to the selector `#shopify-section-sections--25230890140031__redirection_popup…`. This violates WCAG 1.3.1 (Info and Relationships), which requires that structural markup reflects genuine content relationships.
+**Finding:** We identified 4 instances across 4 pages where heading tags contain no text content (selector: `#shopify-section-sections--25230890140031__redirection_popup…`). WCAG 1.3.1 requires that information conveyed through visual presentation is also available to programmatic determination; empty heading tags create ghost entries in the document outline that screen readers announce without meaningful content.
 
 **What to change and why:**
 
-- Remove or replace the empty heading tags in the redirection popup section. Empty headings create ghost entries in the screen reader document outline, which can confuse users navigating by heading structure and cause them to land on an apparently empty region. Removing them resolves the WCAG 1.3.1 violation and tidies the heading hierarchy for all users.
-- Verify that any visual spacing or layout currently achieved through these empty heading tags is reproduced through styling rather than structural markup. This ensures the fix does not introduce visual regressions while closing the accessibility gap.
+- Remove or replace empty heading tags in the redirection popup section. When a screen reader encounters an empty heading, it announces a heading level with no label, which can disorient users navigating by heading structure and constitutes a WCAG 1.3.1 violation.
+- If the markup is present for styling purposes only, the element should be changed to a non-heading element so that the document outline remains accurate. This resolves the WCAG 1.3.1 violation and ensures the heading hierarchy is meaningful for assistive technology users.
 
 **Effort:** Low
 
 ---
 
-**Priority 4: Semantic Structure — 573 Bare Divs out of 867 Total Elements, Rendered Score 20/100**
+**Priority 4: Semantic Structure 20/100 (573 Bare Divs out of 867 Total Elements)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** Across the audited set, 573 of 867 total elements are bare divs with no semantic role, yielding a rendered semantic structure score of 20/100. This level of "div soup" means that both assistive technology users and machines encounter a flat, undifferentiated content hierarchy rather than a meaningful document structure.
+**Finding:** We recorded a semantic structure score of 20/100 across the audited set. Of 867 total elements, 573 are bare divs, meaning page structure across the audited set carries no semantic role for the majority of elements. Screen readers and assistive technologies depend on semantic elements to build an accurate document model; when content is wrapped primarily in divs, users navigating by landmark, role, or element type are less likely to locate sections accurately.
 
 **What to change and why:**
 
-- Audit the template markup to identify where semantic elements (such as navigation, main, article, section, header, and footer landmarks) can replace presentational divs. Screen readers rely on these landmarks to allow users to skip to relevant regions; without them, keyboard and screen reader users must traverse the entire page linearly. Improving semantic coverage directly supports WCAG 1.3.1 and improves the heading quality score of 61/100.
-- Prioritise the highest-traffic templates first, since the 22 recurring template-level patterns we identified account for 80% of the accessibility issues across the audited set. Addressing landmark structure at the template level will produce the broadest coverage per unit of effort.
-- Review the redirection popup and cart components specifically, as these are already implicated in other accessibility findings and are likely contributors to the low semantic score.
+- Replace structural divs with appropriate semantic elements where those elements reflect the content's actual role (for example, navigation regions, main content areas, article or section containers). Semantic elements communicate meaning to assistive technologies directly through the document structure, improving WCAG 1.3.1 compliance and the accuracy of the accessibility tree.
+- Audit landmark regions across the audited set to ensure users navigating by landmark can reach all major content areas. Where landmarks are absent, assistive technology users may find large portions of each audited page effectively invisible to their navigation mode.
+- Improving semantic structure also benefits machines. Search crawlers and AI-driven indexers use document structure to infer content hierarchy; a higher proportion of semantic elements increases the likelihood that machines accurately interpret page content, which is relevant to the Discovery Readiness score of 25/100.
 
 **Effort:** High
 
 ---
 
-**Priority 5: Served HTML Discovery Readiness — 25/100 (Needs Improvement)**
+**Priority 5: Average Load Time 5,988ms**
 
 **Bucket:** Cross-cutting
 
-**Finding:** We recorded a Served HTML Discovery Readiness score of 25/100 across the audited set. This score reflects how much structured, meaningful content is present in the raw HTML before any client-side processing occurs. Machines that index or parse pages at the served-HTML stage risk missing the majority of content.
+**Finding:** We measured an average load time of 5,988ms across the audited set. Extended load times affect all users by increasing the likelihood of abandonment before content is interactive, and they affect machines because crawlers and pipeline agents operating under time or resource constraints are less likely to fully process pages that respond slowly.
 
 **What to change and why:**
 
-- Review which content is present in served HTML versus content that depends on later rendering. A score of 25/100 indicates that machines fetching the raw response are less likely to encounter the full text, metadata, and structured signals needed for confident indexing or agent extraction. Improving served-HTML content completeness directly benefits both search crawlers and AI pipelines.
-- Ensure that critical metadata, product information, and navigational content are available in the initial HTML response. This is a foundations fix that improves every other lens: SEO (currently 73/100), Discovery Readiness, and pipeline survivability all benefit when served content is richer.
+- Investigate and reduce the sources of load-time delay across the audited set. Pages that load slowly are less likely to be fully crawled in a single pass, which compounds the Discovery Readiness score of 25/100 by reducing the proportion of content machines can retrieve.
+- Prioritise load-time improvements on pages that carry the richest structured data, given that the Structured Data Quality score of 74/100 represents Neomwellbeing's strongest machine-facing signal; slow delivery risks that signal going unread by time-constrained machines.
+- Improved load times contribute directly to SEO performance. The current SEO score of 73/100 has room to grow, and performance is a well-documented input into search-ranking signals.
 
 **Effort:** Medium
 
 ---
 
-**Priority 6: Metadata Stack Completeness — 51/100 (Could Be Better)**
+**Priority 6: SEO 73/100, Heading Quality 61/100**
 
 **Bucket:** Cross-cutting
 
-**Finding:** Across the audited set, the Metadata Stack Completeness score is 51/100. Incomplete metadata reduces the confidence with which machines can classify, summarise, and surface content in search results and agent responses.
+**Finding:** We recorded an SEO score of 73/100 across the audited set. Within that, heading quality sits at 61/100; the 4 empty heading tag instances identified across 4 pages (Priority 3) contribute directly to that shortfall by introducing unlabelled entries into the document outline that search crawlers cannot interpret as meaningful topic signals.
 
 **What to change and why:**
 
-- Audit which metadata fields are absent or incomplete across the audited set and prioritise populating them at the template level. The Cross-Page Consistency audit found Open Graph tags recorded as N/A across the audited set, indicating that `og:description` and `og:image` are among the unpopulated fields; completing these directly supports the SEO score (currently 73/100) and reduces the likelihood that machines will generate inaccurate or sparse descriptions when summarising pages.
-- Ensure that Open Graph fields — including `og:description` and `og:image` — are consistently populated, as these signals are used both by social platforms and by machines when constructing page previews and answer content.
+- Review heading hierarchies across the audited set to ensure headings accurately reflect the content structure of each page. Search crawlers use heading order and content to infer topic relevance; the 4 empty heading tag instances recorded across 4 pages introduce unlabelled document-outline entries that carry no topic signal and are the primary contributor to the 61/100 heading quality score.
+- Resolving the empty heading tags identified in Priority 3 will also improve heading quality as a by-product, meaning the work across Priority 3 and Priority 6 is partially overlapping and can be scoped together efficiently.
 
 **Effort:** Low
 
 ---
 
-**Priority 7: Average Page Load Time — 5,988ms**
-
-**Bucket:** Cross-cutting
-
-**Finding:** We measured an average page load time of 5,988ms across the audited set. Load time at this level creates a meaningful risk of user abandonment and may also affect the completeness of content available to machines that impose fetch timeouts.
-
-**What to change and why:**
-
-- Investigate the primary contributors to the 5,988ms average load time. Common candidates include unoptimised assets, render-blocking resources, and third-party scripts, though the specific causes should be confirmed through profiling rather than assumed. Reducing load time improves the experience for all users and reduces the risk that machines time out before the full page is available.
-- Treat load time improvements as a prerequisite for meaningful gains in Pipeline Survivability (currently 72/100) and Discovery Readiness (currently 25/100), since both scores are affected by how quickly and completely a page can be fetched and parsed.
-
-**Effort:** High
-
----
-
-**Priority 8: Heading Quality — 61/100**
-
-**Bucket:** Cross-cutting
-
-**Finding:** Across the audited set, the heading quality score is 61/100. A score in this range indicates that heading structure is present but inconsistent, reducing navigability for both screen reader users and machines attempting to parse content hierarchy.
-
-**What to change and why:**
-
-- Review heading levels across audited page templates to ensure a logical, non-skipping hierarchy is maintained throughout each page. Machines use heading structure as a primary signal for understanding content sections; a heading quality score of 61/100 means they are less likely to extract the correct hierarchy and may generate incomplete or misordered summaries.
-- This work can be combined with the semantic structure remediation in Priority 4, since both issues trace to template-level markup patterns and a coordinated fix will be more efficient than addressing them separately.
-
-**Effort:** Low
-
----
-
-**Priority 9: Pipeline Survivability — 72/100**
+**Priority 7: Discovery Readiness 25/100, Served HTML 25/100**
 
 **Bucket:** AI Opportunity
 
-**Finding:** Across the audited set, Pipeline Survivability sits at 72/100. This score reflects how reliably machines can extract, interpret, and relay content through automated pipelines. At 72/100, there is meaningful room to improve the confidence with which AI agents can use this content in answers and citations.
+**Finding:** We recorded a Discovery Readiness score of 25/100 and a Served HTML score of 25/100 across the audited set. Machines that retrieve pages at the network level rather than executing client-side rendering are less likely to encounter the full content of these pages, reducing the proportion of text, links, and structured signals available for indexing or citation.
 
 **What to change and why:**
 
-- Address the Metadata Stack Completeness gap (currently 51/100, Priority 6) as a direct input to pipeline survivability. Machines are less likely to include content in agent answers when descriptive metadata is sparse, because they have fewer signals to assess relevance and authority.
-- Improve the Served HTML Discovery Readiness score (currently 25/100, Priority 5) to ensure machines encounter complete content at fetch time. Pipeline survivability depends on content being accessible at the earliest stage of machine interaction; gains here propagate through to citation eligibility and answer inclusion.
-- Review the structured data implementation (currently scoring 74/100) to confirm that schema markup is consistently applied and accurate across the audited set. Structured data at 74/100 is already in the Good band, and incremental improvements here increase the precision with which machines can classify and cite content.
+- Investigate the gap between served and rendered content across the audited set. When meaningful content is absent from served HTML, machines relying on that layer risk missing product descriptions, navigation signals, and structured data that would otherwise improve citation eligibility.
+- Consider whether critical content, including content that supports the Structured Data Quality score of 74/100, is present in served HTML. Structured data that is only present after rendering may go unread by machines that do not execute JavaScript, reducing the return on investment of the schema already present.
+- Review whether an llms.txt file is in place. A well-formed llms.txt provides machines with a direct declaration of key content surfaces across the audited set, which partially compensates for low served-HTML coverage by giving agent pipelines an explicit index of where to look.
 
 **Effort:** Medium
 
+---
+
+**Priority 8: Metadata Stack Completeness 51/100**
+
+**Bucket:** AI Opportunity
+
+**Finding:** We recorded a Metadata Stack Completeness score of 51/100 across the audited set, indicating that roughly half of the expected metadata signals are absent or incomplete. Machines constructing knowledge about a page rely on metadata to determine authorship, topic, canonical identity, and freshness; gaps in the metadata stack reduce the confidence with which machines attribute or surface content in agent answers.
+
+**What to change and why:**
+
+- Across the 5 audited pages, two field groups are absent entirely: MX governance tags (`mx-status`, `mx-content-type`) and Twitter Card tags, both recorded as "Not present" in the Marker Reachability table. Populating these fields on each page would directly raise the MX Stack Completeness score from its current 51/100 by filling the governance and social metadata layers that currently contribute nothing to the score.
+- Ensure that Open Graph fields are consistently populated across the audited set. The Marker Reachability table confirms Open Graph tags are present but recorded as "N/A" for coverage in the Cross-Page Consistency table, indicating the fields exist without confirmed uniform population; completing them on every audited page gives machines a corroborated social-metadata signal alongside the canonical URL already in place.
+- Cross-reference the metadata stack against the existing schema types already present across the audited set. Where schema and metadata signals are aligned, machines gain a stronger, corroborated signal; where they diverge, machines may reduce confidence in both.
+
+**Effort:** Medium
+
+---
+
+**Priority 9: Pipeline Survivability 72/100**
+
+**Bucket:** AI Opportunity
+
+**Finding:** We recorded a Pipeline Survivability score of 72/100 across the audited set. This score reflects the degree to which content can pass intact through machine-driven discovery and processing pipelines; a score below the top band indicates opportunities to strengthen the signals machines use to retrieve, parse, and cite content.
+
+**What to change and why:**
+
+- Review the components contributing to the 72/100 score in the context of the Discovery Readiness score of 25/100. Low discovery readiness is likely the dominant drag on pipeline survivability; improvements to served HTML coverage (Priority 7) are likely to move this score upward as a by-product.
+- Confirm that security headers, which we recorded at 5/5 on every audited URL, are consistently maintained. Strong security headers contribute to machine trust signals, and this is one of the stronger foundations already in place across the audited set.
+- Align the metadata stack (Priority 8) with the existing structured data to present machines with a coherent, cross-validated set of signals. Coherent signals across layers reduce the risk that machines deprioritise or partially ignore page content during pipeline processing.
+
+**Effort:** Low
+
 ### Optional Enhancements
 
-These are not issues but areas where additional metadata or patterns would strengthen the site's machine readiness.
+These are not issues but areas where additional metadata or patterns would strengthen machine readiness across Neomwellbeing.
 
-- **Organization with `sameAs`**: adding an Organization entity with `sameAs` links pointing to Neomwellbeing's verified profiles on Wikidata, LinkedIn, or equivalent authority sources gives machines a reliable disambiguation anchor, reducing the risk that the brand is conflated with unrelated entities in agent knowledge graphs.
+- **sameAs links on Organization**: adding `sameAs` properties to the Organization entity, pointing to verified third-party profiles such as Wikidata or LinkedIn, gives machines an unambiguous identity anchor that lets them confidently attribute brand mentions across the web to Neomwellbeing.
 
-- **Product with `AggregateRating`**: once Product entities are in place across the audited set, attaching `AggregateRating` markup allows machines to surface star ratings and review counts directly in answer surfaces and shopping-adjacent agent responses, strengthening purchase-signal visibility without additional page content.
+- **potentialAction on Organization**: attaching a `potentialAction` entry to the Organization entity advertises the brand's contact or search capabilities directly to machines, increasing the likelihood that agent-driven interfaces surface Neomwellbeing as an actionable result rather than a passive reference.
 
-- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt: declaring these directives communicates Neomwellbeing's content-use policy explicitly to machines, giving the brand a clear, auditable position on how its material may be ingested or cited by AI systems.
+- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt to declare content-use policy for AI agents.
 
 ---
 
@@ -373,13 +376,9 @@ This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate
 | Check | Result |
 |-------|--------|
 | HTTP status code | 404 (correct) |
-| Custom error page | Not recorded |
 | Semantic HTML (`<main>`, `<nav>`, `<h1>`) | Yes |
 | `<meta name="robots" content="noindex">` | Yes |
-| Navigation back to valid content | Not recorded |
-| Internal navigation links | Not recorded |
 | MX governance tags | Not present |
-| Schema.org JSON-LD | Not recorded |
 
 ---
 
@@ -416,7 +415,7 @@ Disallow: /2825683008/orders
 
 *Showing the first 10 lines of `robots.txt`; the full 164-line file is preserved alongside this report as `neomwellbeing-robots-txt.txt`.*
 
-The robots.txt file is present and announces three sitemap references, giving machines a clear starting point for crawl planning. However, with 146 disallow paths declared, a substantial portion of the site's URL space is actively restricted from automated access, which warrants a careful review to confirm those exclusions are intentional across the audited set.
+The robots.txt file is present and references three sitemaps, giving machines a clear set of starting points for discovery. It carries 146 disallow paths, meaning a substantial portion of the crawlable address space is explicitly restricted from machine access.
 
 ### sitemap.xml
 
@@ -427,17 +426,17 @@ The robots.txt file is present and announces three sitemap references, giving ma
 | `<changefreq>` | Yes | Appropriate values |
 | `<priority>` | No | Absent |
 
-**Sitemap grade:** Complete
+**Sitemap grade:** Partial
 
-The sitemap carries a Partial grade, listing 908 URLs with lastmod and changefreq values present, yet the absence of priority attributes leaves machines without the relative weighting signals that help them allocate crawl attention across the sitemap.
+The sitemap earns a Partial grade, covering 908 URLs with lastmod and changefreq values present on every entry, yet the absence of priority attributes leaves machines without the relative crawl-weighting signals that would otherwise help them allocate attention across the catalogue.
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-The llms.txt file is present and carries a site description, which gives machines a starting point for understanding the brand. However, we found no page inventory and no content policy within the file, and we recommend extending it to include both so that machines can navigate the content set and understand any usage constraints.
+The llms.txt file is present and carries a site description, which gives machines an initial orientation to Neomwellbeing's purpose. We recommend extending it to include a page inventory and a content policy, so machines can index the full scope of the audited set and understand how content may be used.
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-A request to neomwellbeing.com/llms-full.txt returns a 404, confirming the file is absent. For a content-heavy site with 908 pages in the sitemap, we recommend adding an llms-full.txt so that machines can access consolidated, well-structured content without crawling individual pages.
+Neomwellbeing.com does not currently serve an llms-full.txt file; a request to the expected path returns a 404, and the file is absent from both the sitemap and the homepage head. For a content-heavy catalogue of 908 pages, adding an llms-full.txt would give machines a single, structured surface from which to draw accurate product and brand information without crawling individual pages.
 
 ### agent-card.json (A2A)
 
@@ -445,9 +444,7 @@ No agent-card.json found at `/.well-known/agent-card.json` (HTTP 404). The A2A (
 
 ### Other discovery files detected
 
-| Path | Purpose | Quality |
-|------|---------|---------|
-| *(5 paths — see sidecar)* | Various | — |
+5 additional registered `/.well-known/` paths were probed; none returned a recognisable discovery file. The per-path breakdown is preserved alongside this report as a sidecar JSON.
 
 *Reference: the [IANA Well-Known URIs registry](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) lists the full set of registered `/.well-known/` paths and their RFCs. If a path on that registry would be useful here, consider implementing it.*
 
@@ -487,7 +484,7 @@ The Structured Data Quality score is composed of seven measurable signals. This 
 
 ## Structured Data Findings
 
-The audit identified 28 specific Schema.org property gaps. Each row names a single missing property on a single entity with a short note on why it matters to machines.
+We identified 28 specific Schema.org property gaps. Each row names a single missing property on a single entity with a short note on why it matters to machines.
 
 The full per-entity list is delivered alongside this report as a sidecar CSV: [`neomwellbeing-structured-data-findings.csv`](neomwellbeing-structured-data-findings.csv). The 28 rows describe individual Schema.org property gaps on specific entities; most of them share a small number of underlying patterns, shown below ranked by instance count.
 
@@ -499,6 +496,7 @@ The full per-entity list is delivered alongside this report as a sidecar CSV: [`
 | Offer | recommended | seller | 3 | 3 | Offer has no seller attribution |
 | Offer | recommended | itemCondition | 3 | 3 | Offer has no new/used condition declared |
 | Offer | recommended | url | 3 | 3 | Offer has no purchase URL; agents cannot deep-link to checkout |
+| Product | recommended | aggregateRating | 3 | 3 | Product has no rating signal for ranking |
 | jsonLd | location | byteOffset | 1 | 1 | jsonLd is present in served HTML but starts at byte 851218 — past the 250 KB agent-truncation threshold. Agents with a 250 KB fetch window will not reach it. |
 | jsonLd | location | byteOffset | 1 | 1 | jsonLd is present in served HTML but starts at byte 473016 — past the 250 KB agent-truncation threshold. Agents with a 250 KB fetch window will not reach it. |
 | microdata | location | byteOffset | 1 | 1 | microdata is present in served HTML but starts at byte 344071 — past the 250 KB agent-truncation threshold. Agents with a 250 KB fetch window will not reach it. |
@@ -517,17 +515,9 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 ## Provenance Gap
 
-**What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organization: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside the page itself. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
+**What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organization: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside that page itself. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (the page advertises a ranked list whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. A clean run shows a single em-dash row and the "no blockers" verdict.
-
-### Per-page findings
-
-| Page | Listicle | Year-swap | First-party superlative | Third-party citations | Provenance metadata |
-|------|----------|-----------|--------------------------|------------------------|----------------------|
-| — | — | — | — | — | — |
-
-A self-promotional listicle is a page whose `<title>` or `<h1>` advertises a ranked list and whose position-one entry resolves to the publisher's own host or brand. A year-swap refresh is a page whose title year is two or more years ahead of its JSON-LD `dateModified`. The citation column counts outbound links to hosts other than the audited site; pages with body content over 400 words and zero third-party citations carry no verifiable references.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 ### Templated clusters
 
@@ -592,7 +582,7 @@ The MX Journey maps the five stages a machine follows when interacting with a we
 | 4 | Price Understanding | Pass | 100 | Pricing visible |
 | 5 | Purchase Confidence | N/A | -- | No transaction forms detected |
 
-The audited set is Partially Compatible: three of four applicable MX Journey stages pass, and Purchase Confidence is N/A for this site type.
+The audited pages are Partially Compatible with the MX Journey; Purchase Confidence is N/A for this site type.
 
 ---
 
@@ -600,9 +590,9 @@ The audited set is Partially Compatible: three of four applicable MX Journey sta
 
 ## Agent Reading Pipeline
 
-Scoring a machine's metadata is not the same as scoring whether the machine can read the page at all. Pipeline Survivability runs eleven reading-resilience checks on every audited page. Each one asks whether the page survives a known agent-reading risk: truncation by the agent's fetch tool, summarisation by the relevance layer, JavaScript-only content, tab disclosure, soft 404s, broken code fences, content negotiation drift, cross-host redirects, generic headings, content that begins too far into the document, or overhead-heavy pages where scripts, styles, and images outweigh actual content.
+Scoring a machine's metadata is not the same as scoring whether the machine can read each audited page at all. Pipeline Survivability runs eleven reading-resilience checks on every audited page. Each one asks whether each audited page survives a known agent-reading risk: truncation by an agent's fetch tool, summarisation by the relevance layer, JavaScript-only content, tab disclosure, soft 404s, broken code fences, content negotiation drift, cross-host redirects, generic headings, content that begins too far into the document, or overhead-heavy pages where scripts, styles, and images outweigh actual content.
 
-Every check runs on every audited page. The aggregate score weights truncation resilience, SPA resilience, and proper 404 signalling most heavily: these three determine whether the page is reachable to the agent at all. Boilerplate burial, tabbed disclosure, and delayed content start carry medium weight. The remaining checks contribute to the score but any single one slipping is less critical on its own.
+Every check runs on every audited page. The aggregate score weights truncation resilience, SPA resilience, and proper 404 signalling most heavily: these three determine whether each audited page is reachable to an agent at all. Boilerplate burial, tabbed disclosure, and delayed content start carry medium weight. The remaining checks contribute to the score but any single one slipping is less critical on its own.
 
 | Resilience Check | Status | Pages | What It Means | Data |
 | ---------------- | ------ | ----- | ------------- | ---- |
@@ -622,7 +612,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 
 **Pipeline Survivability score:** 72/100
 
-Across the audited set, four resilience checks warrant attention: Truncation Risk, SPA Shell, Content Negotiation, and Inline Tag Bloat, each of which can reduce how reliably machines extract and process the page content they encounter. When content is cut short or delivered in a form machines cannot cleanly parse, the practical consequence is that key information may never reach the systems responsible for indexing, summarising, or citing the brand. Addressing Truncation Risk is the highest-leverage starting point, given that it appeared on all four audited pages, and resolving it would immediately improve how much usable content machines are able to carry forward from each request.
+Across the audited set, we identified four resilience checks that present opportunities to strengthen how machines read and retain the pages: Truncation Risk, SPA Shell, Content Negotiation, and Inline Tag Bloat. Truncation Risk stands out as the most pervasive, appearing on all four audited pages, which means machines processing these pages may cut off content before reaching key product or brand information. Resolving Truncation Risk across the audited set would have the largest single effect on pipeline survivability, since content that machines cannot fully ingest is content that cannot inform answers, citations, or structured outputs.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -638,7 +628,7 @@ The Div Soup check runs against the rendered HTML on every page. Score 100 is a 
 |--------|-------|------|-----------|----------------|--------------------|-------------------|
 | Rendered HTML | 20/100 | high | 573 | 66% | 9 | `div.star-container.yotpo-sr-star-full` (317), `div.flex.flex-col` (243), `div.flex.flex-row` (213), `div` (150), `div.star-container` (150) |
 
-Across the audited set, we found that 573 of 867 rendered elements are bare divs (66%), meaning machines lose structural context and fall back on positional inference to determine meaning. The pattern here is surface-wide rather than deeply nested: a bare-div ratio of 66% with a deepest chain of 9 points to a component framework relying heavily on utility classes such as flex containers and untyped wrappers, rather than semantic tags, to express layout and hierarchy. The cheapest first move is to wrap the obvious landmarks (header, nav, main, footer, aside) and assign meaningful class names to the remaining generic containers, which would reduce the bare-div ratio without requiring any restructuring of the existing layout.
+Across the audited set, we recorded a bare-div ratio of 573 of 867 elements (66%) on the rendered surface, meaning machines lose structural context and fall back on positional inference to determine meaning. The combination of a high bare ratio with a deepest chain of only 9 suggests this is a surface-wide pattern rather than a deep structural tangle; the top selectors point toward a utility-class framework (flex columns, flex rows) and a third-party reviews widget (the star-container clusters), both of which emit generic divs rather than typed landmarks. The most cost-effective first move is to wrap the obvious page landmarks in their appropriate semantic elements and assign meaningful class names to the remaining containers, which would reduce the bare-div ratio without requiring any restructuring of the visual layout.
 
 ---
 
@@ -675,17 +665,8 @@ HTTPS: 7/7 | HSTS: 7/7 | CSP: 7/7 | X-Frame-Options: 7/7 | X-Content-Type-Option
 | Pattern | Coverage | Pages missing it |
 |---------|----------|------------------|
 | Schema.org JSON-LD | 100% | — |
-| MX governance tags | N/A | — |
-| Open Graph tags | N/A | — |
-| Twitter Card tags | N/A | — |
-| Skip link | N/A | — |
-| llms-txt link tag | N/A | — |
 | Canonical URL | 100% | — |
-| Exactly 1 H1 | N/A | — |
-| Code examples present | N/A | — |
 | Self-contained sections | 100% | — |
-| Error/troubleshooting docs | N/A | — |
-| Lighthouse heading compliance | N/A | — |
 
 **Overall Consistency:** 100%
 
@@ -727,7 +708,7 @@ The audited set shows consistent metadata patterns across pages, with no organis
 
 ## PDF Documents: Accessibility and Machine Readability
 
-Accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the shared technical baseline across the EU (EAA, Directive (EU) 2019/882, in force 28 June 2025), the US, the UK, Australia, and Canada; the EAA is the most precisely codified instance, but the convergence is global. In parallel, an untagged PDF is invisible to machines in precisely the same way that unsemantic HTML is: without a proper structure tree, search crawlers, AI systems, and automated pipelines cannot extract text, entities, or structure, making the machine-readability case as compelling as the legal one.
+Accessibility legislation across major markets, from the European Accessibility Act (Directive (EU) 2019/882, in force 28 June 2025) to Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada, has converged on ISO 14289-1 (PDF/UA) as the shared technical baseline, making structured tagging a legal expectation in every major jurisdiction we serve. The same structural tagging that satisfies those legal requirements also makes a PDF readable to machines: search crawlers, AI systems, and automated pipelines cannot extract text, entities, or structure from an untagged or image-based PDF, whereas a properly tagged document with a complete structure tree is as transparent to machines as well-formed semantic HTML.
 
 No PDF documents were discovered in the audited surface. Accessibility exposure on the document carrier: **low within the pages crawled**.
 
@@ -747,7 +728,7 @@ No PDF documents were discovered in the audited surface. Accessibility exposure 
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | P1, P2, P3, P4, P5 (Compliance Risk + Discovery) | Priority 1, 2, 3, 4, 5 resolved — WCAG 2.1 AA accessibility compliance restored and Discovery Readiness addressed |
+| Critical Fixes | P1, P2, P3, P4 (Compliance Risk) | Priority 1, 2, 3, 4 resolved — WCAG 2.1 AA accessibility compliance restored |
 | Full Optimisation | P1, P2, P3, P4, P5, P6, P7, P8, P9 (P1–P9) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | Long-term competitive advantage in AI-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
@@ -756,11 +737,11 @@ No PDF documents were discovered in the audited surface. Accessibility exposure 
 
 ## Summary of Findings
 
-Across the audited set, https://neomwellbeing.com performs with the most confidence in Structured Data, scoring 74/100, which gives machines a solid foundation for interpreting the content they encounter. SEO follows at 73/100, meaning human visitors are reasonably well served, yet Discovery Readiness at 25/100 points to a meaningful opportunity to improve how machines find, index, and surface that content in the first place. We invite the team at https://neomwellbeing.com to explore the findings below and identify where a focused programme of improvements would deliver the greatest return.
+Across the audited set, https://neomwellbeing.com shows its strongest footing in Structured Data, scoring 74/100, with a well-populated schema layer that gives machines a reliable structured signal for products, ratings, and breadcrumbs. The sharpest opportunities lie in Discovery Readiness at 25/100 and Accessibility at 18/100, where gains in crawlability, metadata, and inclusive design would extend Neomwellbeing's reach to both machines and the full range of human visitors. We welcome the chance to walk the team through the detailed findings and a prioritised path forward.
 
 ### Audit Scores
 
-The site serves an empty HTML shell to server-side agents. The "Rendering" column shows whether each score was measured from the served HTML (what agents actually get) or the rendered HTML (what agents would get with SSR).
+Neomwellbeing serves an empty HTML shell to server-side agents. The "Rendering" column shows whether each score was measured from the served HTML (what agents actually get) or the rendered HTML (what agents would get with SSR).
 
 | Dimension | Score | Rendering | Notes |
 |-----------|-------|-----------|-------|
@@ -778,7 +759,7 @@ The site serves an empty HTML shell to server-side agents. The "Rendering" colum
 | Pipeline Survivability | 72/100 | Rendered |  |
 | Cross-Page Consistency | 100% | Rendered |  |
 
-Server-side agents see only the served HTML. The AI Suitability score reflects their experience. All other scores reflect what the site achieves after JavaScript renders.
+Server-side agents see only the served HTML. The AI Suitability score reflects their experience. All other scores reflect what Neomwellbeing achieves after JavaScript renders.
 
 ---
 
@@ -798,7 +779,7 @@ The page marked (nav) is navigational: it routes visitors to content rather than
 
 ## Appendix B: Link Inventory
 
-We recorded every internal link found on every audited page: [N] links in total. Link status was not probed; for a dedicated broken-link audit, run a rate-limited crawler on the link set at a time that suits the site.
+We recorded every internal link found on every audited page: 733 links in total. Link status was not probed; for a dedicated broken-link audit, run a rate-limited crawler on the link set at a time that suits the site.
 
 | Link class                      | Count |
 | ------------------------------- | ----: |
@@ -811,11 +792,11 @@ We recorded every internal link found on every audited page: [N] links in total.
 
 ## Appendix C: Image Optimisation
 
-Across the audited set, we catalogued 670 images in total. The format distribution skews heavily toward JPEG, with 377 instances, alongside 97 SVGs and 24 PNGs. WebP is absent from the audited pages entirely, which represents a meaningful optimisation opportunity given the format's compression characteristics. Alt-text coverage stands at 490 images, or 73.1%, leaving 180 images without descriptive text. For a site in the wellbeing space, where imagery carries significant communicative weight, closing that gap matters both for users relying on assistive technology and for machines parsing page content without visual context.
+Across the audited set we catalogued 670 images in total. The format split breaks down as 377 JPEG, 97 SVG, and 24 PNG; we recorded zero WebP images across the audited pages. Alt-text coverage stands at 490 images carrying descriptive text, or 73.1% of the total, which leaves 180 images without alt text. Those 180 represent both a WCAG accessibility gap and a signal-loss issue for machines that rely on alt attributes to understand visual content.
 
-On loading strategy, the picture is mixed. A total of 363 images carry the `loading="lazy"` attribute and one carries `loading="eager"`, but 306 images have no loading attribute set at all. It is worth being precise here: no attribute is not equivalent to eager loading. When the attribute is absent, the browser applies its own heuristics to decide when to fetch the image, and those heuristics vary by browser and viewport context. That unpredictability is distinct from the deliberate control you get by setting the attribute explicitly, and the 306 unattributed images represent an opportunity to bring that behaviour under conscious control.
+On loading strategy, the picture is mixed. Of the 670 images, 363 carry `loading="lazy"`, and just 1 carries `loading="eager"`. The more significant figure is 306 images with no loading attribute at all. It is worth being precise here: no attribute is not the same as eager loading. When the attribute is absent, the browser applies its own heuristic, which varies by viewport position, connection type, and browser version. That unpredictability is distinct from the deliberate, consistent behaviour you get from either explicit value. We would recommend auditing those 306 to determine which should be lazy and which should be eager, then setting the attribute explicitly on each.
 
-We also detected 265 instances of a JS Lazy Pattern across the audited set, where images are loaded via JavaScript rather than native browser mechanics. Layered on top of that, 137 images exhibit what we call a Double Lazy condition, where both the JS Lazy Pattern and `loading="lazy"` are applied to the same image simultaneously. This creates a conflict: the browser and the JavaScript library are each waiting for the other to act, which can delay image rendering rather than improve it.
+We also detected 265 instances of the JS Lazy Pattern across the audited set, and 137 images that qualify as Double Lazy. The JS Lazy Pattern refers to images whose source is deferred via JavaScript rather than the native loading attribute; machines that do not execute JavaScript will not see these images at all, which affects both crawl coverage and accessibility tooling. Double Lazy compounds the issue further: these are images flagged as both `loading="lazy"` and subject to JS-based deferral simultaneously, meaning they may never load in environments where scripting is restricted or slow.
 
 > **Double-lazy loading pattern detected on 137 image(s).** These images carry BOTH the native HTML attribute `loading="lazy"` AND a JavaScript lazyload pattern (a placeholder `data:image/gif` in `src`, the real URL in `data-src`, and a `lazyload` class). The image cannot render until:
 >

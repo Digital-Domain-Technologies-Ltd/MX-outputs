@@ -1,48 +1,48 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-16/neomwellbeing.com/neomwellbeing-report.md",
-  "timestamp": "2026-05-16T08:25:02.937Z",
+  "timestamp": "2026-05-16T14:47:55.691Z",
   "model": "claude-sonnet-4-6",
-  "runCount": 2,
+  "runCount": 1,
   "findingCount": 5,
   "regexFindingCount": 0,
   "llmFindingCount": 5,
   "findings": [
     {
+      "category": "hollow-recommendation",
+      "message": "Priority 8 recommendation to 'audit the metadata present on each of the 5 audited pages and identify which expected fields are absent' names neither the specific missing fields nor the specific pages where they are absent. The follow-on bullet to 'ensure that Open Graph and any other social or agent-facing metadata fields are consistently populated' adds a domain name (Open Graph) but no data anchor — no field name, no page URL, no count of missing fields drawn from the audit. The entire priority block contains only the aggregate score (51/100) as a data anchor; no specific missing field is identified. A recommendation to populate 'Open Graph and any other social or agent-facing metadata fields' could be pasted verbatim into any web audit for any site.",
+      "context": "**Priority 8: Metadata Stack Completeness 51/100** [...] Audit the metadata present on each of the 5 audited pages and identify which expected fields are absent [...] Ensure that Open Graph and any other social or agent-facing metadata fields are consistently populated across the audited set.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
       "category": "subtle-failure-framing",
-      "message": "\"leaves something to be desired\" equivalent phrasing: \"could be improved significantly\" is listed as a banned pattern. Here the phrase \"represents the most significant opportunity to improve\" is borderline but acceptable; however, \"is far from optimal\" equivalent language appears in the sitemap section where the report states \"The sitemap carries a Partial grade\" immediately after labelling it \"Complete\" in the attribute table above — the internal contradiction frames the sitemap as deficient through inconsistent labelling rather than neutral factual description. This is not a banned-word violation but a subtle failure-framing technique where a contradictory grade quietly condemns the implementation.",
-      "context": "Sitemap section: attribute table says 'Sitemap grade: Complete' but the following prose paragraph opens 'The sitemap carries a Partial grade' — the contradiction implicitly frames the sitemap as worse than it is without stating a neutral fact.",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "hollow-recommendation",
-      "message": "Priority 5 recommendation block contains no data anchor that anchors the specific remediation action. The two action bullets say 'Review which content is present in served HTML versus content that depends on later rendering' and 'Ensure that critical metadata, product information, and navigational content are available in the initial HTML response.' The score 25/100 is mentioned and cross-references to SEO 73/100 and Pipeline Survivability appear, but the actual remediation instruction — what specifically to move to served HTML, which template, which component — is pure domain framing. The recommendation could be copy-pasted unchanged into any Shopify audit for any site.",
-      "context": "Priority 5: Served HTML Discovery Readiness — 25/100 (Needs Improvement). The two 'What to change and why' bullets name only the domain ('served HTML', 'critical metadata, product information, and navigational content') without identifying a specific element, component, template name, or CSS selector from the audit findings.",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "hollow-recommendation",
-      "message": "The 'Next Steps / Recommended Actions' item 2 reads: 'Review Priority 2-3 findings: Discovery Readiness improvements and metadata tuning that compound over time.' This names only a domain category ('Discovery Readiness improvements and metadata tuning') with no specific action, element, or data anchor. It references priority numbers but does not name any concrete mechanism or finding. It could appear unchanged in any web audit report.",
-      "context": "Next Steps section, item 2: 'Review Priority 2-3 findings: Discovery Readiness improvements and metadata tuning that compound over time.'",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "exaggeration",
-      "message": "American English spelling in narrative prose: 'optimize' / 'optimization' appears multiple times in body prose (e.g. 'imageOptimization', 'titleOptimization', 'metaDescriptionOptimization' in the scoring methodology tables — these are vocabulary/field names and should be exempt; however, 'Image Optimisation' in the body prose uses the UK form correctly). More clearly: Appendix C narrative prose uses 'optimization' in the phrase 'a meaningful optimisation opportunity' — UK form, correct — but the appendix heading itself reads 'Image Optimisation' (UK). The scoring methodology section uses 'titleOptimization', 'metaDescriptionOptimization', 'imageOptimization', 'urlStructure' as field names (exempt as vocabulary). No clear US-form drift in narrative prose is confirmed after close reading. Withdrawing this finding as borderline.",
-      "context": "Withdrawing — on close reading, US-form spellings in the report body are confined to schema/field-name vocabulary contexts which are explicitly exempted by the style rules.",
+      "message": "'Leaves something to be desired' equivalent: the phrase 'the heading structure across the audited set is inconsistent or incomplete in ways that reduce the clarity of the content hierarchy for search crawlers' is passive-aggressive softening that condemns without naming a specific deficiency. It conveys that the headings fall short of an implied standard without stating what is actually wrong, which is the functional equivalent of 'could be improved significantly'.",
+      "context": "**Priority 6: SEO 73/100 — Heading Quality 61/100** [...] heading quality sits at 61/100, indicating that the heading structure across the audited set is inconsistent or incomplete in ways that reduce the clarity of the content hierarchy for search crawlers.",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "fabricated-specificity",
-      "message": "The Pipeline Survivability section and the Agent Reading Pipeline table reference '13 weighted binary issue-mode checks' and the Appendix E scoring methodology table lists 13 inputs for Pipeline Survivability, but the Agent Reading Pipeline results table in the body of the report lists only 12 named checks (Truncation Risk, SPA Shell, Soft 404, Boilerplate Burial, Tabbed Disclosure, Delayed Content Start, Broken Code Fences, HTTP Content Negotiation, Cross-Host Redirect, Generic Headings, Body Content Ratio, Inline Tag Bloat). The introductory prose for that section lists 11 checks ('eleven reading-resilience checks'). The methodology appendix also calls the reference 'Appendix S: The Eleven Agent Reading Resilience Checks.' The count '13' in Appendix E is inconsistent with '11' stated in two other places in the same report and with the 12 rows actually shown in the results table. This internal numeric inconsistency introduces a fabricated or erroneous specificity: one of the three figures must be wrong and none can be verified against the audit data as presented.",
-      "context": "Agent Reading Pipeline intro: 'eleven reading-resilience checks'. Appendix E Pipeline Survivability table: 13 named inputs. Agent Reading Pipeline results table: 12 rows. Further Reading section references 'Appendix S: The Eleven Agent Reading Resilience Checks'. The three counts (11, 12, 13) are mutually inconsistent.",
+      "message": "The Error Page Test table contains two cells with bracketed placeholder text that were never resolved with real audit data: 'Custom error page: [Yes: branded page with navigation / No: generic server error]' and 'Navigation back to valid content: [Yes: home link, sitemap / No]' and 'Internal navigation links: [N: links to same-site pages / None: no links to valid content]'. These are unfilled template slots — the square-bracket alternatives were options for the report generator to choose between, not client-facing prose. A client reading this table sees the internal template machinery rather than a completed audit result.",
+      "context": "## Error Page Test [...] | Custom error page | [Yes: branded page with navigation / No: generic server error] | [...] | Navigation back to valid content | [Yes: home link, sitemap / No] | [...] | Internal navigation links | [N: links to same-site pages / None: no links to valid content] |",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The Appendix B Link Inventory states 'We recorded every internal link found on every audited page: [N] links in total.' The placeholder '[N]' was never substituted with the actual count from the audit data. The table immediately below supplies the per-class breakdown (733 same-host internal links, etc.), so the total is derivable, but the unreplaced '[N]' token is a leaked template placeholder visible to the client.",
+      "context": "## Appendix B: Link Inventory\n\nWe recorded every internal link found on every audited page: [N] links in total.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "American English spelling 'Optimization' appears in the 'Full Optimization' phase label inside the Next Steps table. The report otherwise uses British forms throughout (e.g. 'optimisation' in the scoring methodology section and 'organise' equivalents elsewhere). This is a US/UK register inconsistency within the same document.",
+      "context": "## Next Steps [...] | Full Optimization | P1, P2, P3, P4, P5, P6, P7, P8, P9 (P1–P9) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |",
       "severity": "fail",
       "source": "llm",
       "line": null

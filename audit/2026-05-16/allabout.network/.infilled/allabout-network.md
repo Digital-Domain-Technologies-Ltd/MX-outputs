@@ -1,44 +1,44 @@
 ---
-title: "Neomwellbeing: Website Analysis & Machine Readiness"
+title: "Allabout: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
 created: "2026-05-16"
 modified: "2026-05-16"
-client: "Neomwellbeing"
-clientSlug: "neomwellbeing"
-clientUrl: "https://neomwellbeing.com"
-reportId: "neomwellbeing-WEB-AUDIT-20260516"
+client: "Allabout"
+clientSlug: "allabout-network"
+clientUrl: "https://allabout.network"
+reportId: "allabout-network-WEB-AUDIT-20260516"
 reportType: "executive-sales-report"
 auditTool: "web-audit-suite"
 auditDate: "2026-05-16"
-description: "Executive audit report analysing accessibility, performance, SEO, structured data, and AI agent compatibility for Neomwellbeing"
+description: "Executive audit report analysing accessibility, performance, SEO, structured data, and AI agent compatibility for Allabout"
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
-performanceScore: 35
-accessibilityScore: 18
-seoScore: 73
-llmSuitabilityScore: 25
-totalIssues: 96
-pagesAudited: 5
+performanceScore: 97
+accessibilityScore: 69
+seoScore: 77
+llmSuitabilityScore: 98
+totalIssues: 106
+pagesAudited: 7
 version: "1.0"
 confidential: true
 mx:
   status: active
   contentType: audit-report
   audience: [humans, machines]
-  runbook: "Executive audit report for Neomwellbeing. Focus on the highest-leverage MX opportunities surfaced by the audit."
+  runbook: "Executive audit report for Allabout. Focus on the highest-leverage MX opportunities surfaced by the audit."
 ---
 
-# Neomwellbeing: Website Analysis & Machine Readiness
+# Allabout: Website Analysis & Machine Readiness
 
 **Prepared by:** Tom Cranstoun | CogNovaMX Ltd\
 **Contact:** <info@cognovamx.com> | <https://allabout.network>\
 **Date:** 16 May 2026\
-**Report ID:** neomwellbeing-WEB-AUDIT-20260516
+**Report ID:** allabout-network-WEB-AUDIT-20260516
 
 ---
 
 ## About This Report
 
-We audited 5 pages across neomwellbeing.com's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.
+We audited 7 pages across allabout.network's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.
 
 We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
@@ -62,22 +62,22 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 | | Score | |
 |:---|---:|:---|
-| Performance | **35**/100 | `#########----------------` **(!)** |
-| Accessibility | **18**/100 | `#####--------------------` **(!)** |
-| SEO | **73**/100 | `##################-------` |
-| Machine Suitability | **25**/100 | `######-------------------` **(!)** |
-| MX Stack | **51**/100 | `#############------------` |
-| Agent Readability | **65**/100 | `################---------` |
-| Pipeline Survivability | **72**/100 | `##################-------` |
+| Performance | **97**/100 | `#################-` |
+| Accessibility | **69**/100 | `############------` |
+| SEO | **77**/100 | `##############----` |
+| Machine Suitability | **98**/100 | `##################` |
+| MX Stack | **52**/100 | `#########---------` |
+| Agent Readability | **60**/100 | `###########-------` |
+| Pipeline Survivability | **98**/100 | `##################` |
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -86,25 +86,26 @@ PATTERN (follow strictly):
 - Paragraph 1: Affirm what the site does well for HUMAN visitors. Reference specific design, content, or brand strengths. Lead with the human. Use the "Strongest human-experience dimension" fact as the anchor ("SEO foundations are solid", "performance is excellent"). Do NOT anchor on machine-experience dimensions (AI Suitability, Discovery Readiness, Structured Data Quality) — those belong in Paragraph 2.
 - Paragraph 2: Introduce the machine-experience OPPORTUNITY. Frame it as the next natural step, not a failing. Use the phrase "the headline opportunity is..." or "the opportunity we want to draw attention to is..." Cite the specific machine dimension that most moves the needle. If there are WCAG AA issues, name accessibility as a Priority 1 compliance item here, before the MX opportunity.
 - Optional Paragraph 3: If there is a served-vs-rendered gap or a platform constraint, name it — and note that Schema.org JSON-LD is the highest-leverage asset that every agent can read regardless of rendering.
-SCOPE: 5 pages were audited. Scope all claims to "the audited set" — do not say "site-wide" unless cross-page consistency is explicitly confirmed in the facts.
-ACCESSIBILITY NOTE: There are 96 WCAG AA issues. If Accessibility is not grade A, do NOT call it the "strongest" dimension in Paragraph 1. Acknowledge the accessibility opportunity in Paragraph 2 as a Priority 1 compliance item before the MX opportunity.
+SCOPE: 7 pages were audited. Scope all claims to "the audited set" — do not say "site-wide" unless cross-page consistency is explicitly confirmed in the facts.
+ACCESSIBILITY NOTE: There are 106 WCAG AA issues. If Accessibility is not grade A, do NOT call it the "strongest" dimension in Paragraph 1. Acknowledge the accessibility opportunity in Paragraph 2 as a Priority 1 compliance item before the MX opportunity.
 BANNED WORDS: "failing", "failure", "gap" (as verdict), "weakness", "broken", "poor", "deficient", "inadequate", "lacking" (as verdict), "site-wide" (unless facts explicitly confirm multi-page consistency).
 PREFERRED WORDS: "opportunity", "headline opportunity", "next step", "room to strengthen", "foundation", "the chance to", "solid", "the groundwork is there".
 TONE: "You did good for humans — now build for machines." Never condescending. Never a list of failings. Every metric is framed as a relative position that a concrete improvement can lift.
 VOICE: First-person plural ("we audited", "we found", "we recommend"). NEVER use singular "I" — the consultancy speaks as a team.
 
 Facts (do not change any number, percentage, URL, page count, or name):
-- Platform: Shopify
-- Pages audited: 5
-- SEO: 73/100 (Good)
-- Accessibility: 96 critical WCAG AA issues — 80 of these trace to 22 recurring template patterns (single theme edit per pattern fixes all instances)
-- AI Suitability (served): 25/100
-- Structured Data Quality: 74/100
-- Discovery Readiness: 25/100
-- Catalogue Visibility: 45/100
+- Platform: Cloudflare Pages
+- Pages audited: 7
+- SEO: 77/100 (Excellent)
+- Accessibility: 106 critical WCAG AA issues — 4 of these trace to 2 recurring template patterns (single theme edit per pattern fixes all instances)
+- AI Suitability (served): 98/100
+- Structured Data Quality: 47/100
+- Discovery Readiness: 30/100
+- Catalogue Visibility: 0/100
 - MX Readiness Level: 1 (Basic)
-- Schema Maturity: Level 2 (Good schema)
-- Lowest machine-readiness score: 25/100
+- Schema Maturity: Level 1 (Decoration)
+- Strongest human-experience dimension: performance
+- Lowest machine-readiness score: 0/100
 -->
 
 > 
@@ -117,12 +118,12 @@ Facts (do not change any number, percentage, URL, page count, or name):
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -135,30 +136,30 @@ SCOPE: These scores cover the audited pages only — do NOT write "site-wide".
 TONE: Factual, warm, peer-to-peer.
 
 Facts (do not change any number, percentage, URL, page count, or name):
-- Pages audited: 5
-- Performance: 5988ms avg (Could Be Better)
-- Accessibility: 18/100 (Needs Improvement)
-- SEO: 73/100 (Good)
-- Accessibility issues: 96 (80 trace to 22 template patterns)
+- Pages audited: 7
+- Performance: 402ms avg (Excellent)
+- Accessibility: 69/100 (Good)
+- SEO: 77/100 (Excellent)
+- Accessibility issues: 106 (4 trace to 2 template patterns)
 -->
 
-| Dimension | Rating | Grade | vs Peers |
-|-----------|--------|-------|----------|
-| UX / Navigation | Excellent | A |: |
-| Performance | Could Be Better | C | seeding (n=1) |
-| Accessibility (WCAG) | Needs Improvement | D | seeding (n=1) |
-| Trust and Credibility | Excellent | A |: |
+| Dimension | Rating | Grade |
+|-----------|--------|-------|
+| UX / Navigation | Excellent | A |
+| Performance | Excellent | A |
+| Accessibility (WCAG) | Needs Improvement | D |
+| Trust and Credibility | Excellent | A |
 
 ### Machine Experience
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -171,21 +172,19 @@ SCOPE: These scores cover the audited pages only — do NOT write "site-wide".
 TONE: Factual, warm, peer-to-peer.
 
 Facts (do not change any number, percentage, URL, page count, or name):
-- Pages audited: 5
-- Discovery Readiness: 25/100
-- Structured Data Quality: 74/100
-- Metadata Stack Completeness: 51/100
-- Pipeline Survivability: 72/100
+- Pages audited: 7
+- Discovery Readiness: 30/100
+- Structured Data Quality: 47/100
+- Metadata Stack Completeness: 52/100
+- Pipeline Survivability: 98/100
 -->
 
-| Dimension | Score | Rating | Grade | vs Peers |
-|-----------|-------|--------|-------|----------|
-| Discovery Readiness | 25/100 | Needs Improvement | D | seeding (n=1) |
-| Structured Data Quality | 74/100 | Good | B | seeding (n=1) |
-| MX Stack Completeness | 51/100 | Could Be Better | C | seeding (n=1) |
-| Pipeline Survivability | 72/100 | Excellent | A | seeding (n=1) |
-
-*Peer-comparison dataset `2026-05-15.4`. Sample size n=1, still seeding. The "vs Peers" column will populate as fresh audits land.*
+| Dimension | Score | Rating | Grade |
+|-----------|-------|--------|-------|
+| Discovery Readiness | 30/100 | Could Be Better | C |
+| Structured Data Quality | 47/100 | Could Be Better | C |
+| MX Stack Completeness | 52/100 | Good | B |
+| Pipeline Survivability | 98/100 | Excellent | A |
 
 ---
 
@@ -214,7 +213,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 **Current Level:** 1: Basic
 
-**Evidence:** MSC 51/100 | SDQ 74/100 | Discovery 25/100 | Consistency 100%
+**Evidence:** MSC 52/100 | SDQ 47/100 | Discovery 30/100 | Consistency 53%
 
 **To reach the next level:** Add full MX fields and governance metadata. Raise MSC above 60 and DR above 40.
 
@@ -226,12 +225,12 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -244,32 +243,29 @@ SCOPE: Affirm only what the audited pages show — do NOT write "site-wide".
 TONE: Warm, confident, peer-to-peer. The reader should feel recognised for what they have built.
 
 Facts (do not change any number, percentage, URL, page count, or name):
-- Pages audited: 5
-- SEO (all pages): 73/100
-- SEO (content pages only): 73/100
-- Accessibility: 18/100, 96 issues — 80 of these trace to 22 template-level patterns
-- Security headers: 5/5 on every one of the 7 audited URLs
-- Structured Data Quality: 74/100
-- Consistency: 100%
+- Pages audited: 7
+- SEO (all pages): 77/100
+- SEO (content pages only): 76/100
+- Accessibility: 69/100, 106 issues — 4 of these trace to 2 template-level patterns
+- Security headers: 4/5 present (HTTPS, HSTS, X-Frame-Options, X-Content-Type-Options); 0 of 7 audited URLs carry all five
+- Structured Data Quality: 47/100
+- Consistency: 53%
 -->
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
-| Performance | Could Be Better | Could Be Better — 5988ms average load time |
-| SEO (content pages) | 73 | Good — titles, meta descriptions, canonical URLs in place |
-| Security | 5/5 | HTTPS, HSTS, CSP, X-Frame-Options, X-Content-Type-Options on every audited URL |
-| Structured Data | 74 | Good — JSON-LD on every page with valid Schema.org vocabulary |
-| Heading Quality | 61 | Good — single H1 per page, no level jumps, Lighthouse-compliant |
-| Consistency | 100% | 100% — same metadata patterns across every page |
+| Performance | Excellent | Excellent — 402ms average load time |
+| SEO (content pages) | 76 | Excellent — titles, meta descriptions, canonical URLs in place |
+| Security | 4/5 | HTTPS, HSTS, X-Frame-Options, X-Content-Type-Options — 1 header absent |
+| Structured Data | 47 | Could Be Better — JSON-LD on every page with valid Schema.org vocabulary |
+| Heading Quality | 78 | Excellent — single H1 per page, no level jumps, Lighthouse-compliant |
+| Consistency | 53% | 53% — same metadata patterns across every page |
 | Agent access | 6/6 | every tested AI user-agent receives HTTP 200 |
 
 **Positive patterns observed:**
 
-- Security headers are in place on every page: HTTPS, HSTS, Content-Security-Policy, X-Frame-Options, and X-Content-Type-Options on 7 of 7 audited pages.
-- Commerce schema is present on every product page: 3 of 3 product pages carry both Product and Offer entities.
 - All 8 tested AI agents can fetch the site: ClaudeBot (Anthropic), GPTBot (OpenAI), ChatGPT-User (OpenAI), PerplexityBot, GoogleOther (Google AI), Google-Extended, CCBot (Common Crawl), Plain request (no UA) all return HTTP 200 at inference time.
-- Cross-page consistency is complete: every audited page carries the same metadata pattern, confirming uniform implementation across the 5-page audit set.
-- JSON-LD is present in the served HTML of every page: every agent that fetches the raw HTML gets the structured data.
+- Body content ratio averages 67%: pages are content-heavy, not overhead-heavy, which helps agents reach real prose inside a cheap fetch.
 
 ---
 
@@ -279,12 +275,12 @@ Facts (do not change any number, percentage, URL, page count, or name):
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -296,21 +292,21 @@ BANNED: "issues", "problems", "failings", "deficiencies" as headline framing. Th
 PREFERRED: "opportunities", "areas to strengthen", "findings", "prioritised by impact".
 
 Facts (do not change any number, percentage, URL, page count, or name):
-- Pages audited: 5
-- Structured Data Quality: 74/100
-- Catalogue Visibility: 45/100
-- Metadata Stack Completeness: 51/100
-- Discovery Readiness: 25/100
+- Pages audited: 7
+- Structured Data Quality: 47/100
+- Catalogue Visibility: 0/100
+- Metadata Stack Completeness: 52/100
+- Discovery Readiness: 30/100
 -->
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -330,43 +326,43 @@ If the audit produced no findings, write "The audit produced no priority finding
 
 Sort the at-a-glance table by bucket in the order: `Compliance Risk` first (legal exposure leads), then `Cross-cutting` (foundations), then `AI Opportunity` (growth). Within each bucket, sort by Priority (High > Medium > Low).
 
-After the at-a-glance table, render one Priority N: <Title> block per row in the table. Each Priority block has exactly four labelled fields: **Bucket**, **Finding**, **What to change and why**, **Effort**. The Bucket value matches the table row. The "What to change and why" field is 2-4 bulleted concrete fixes, each with the WHY (which metric moves, which agent behaviour unlocks, which Core Web Vital improves, which WCAG criterion is addressed): developers know HTML; what they need from this report is the reasoning behind the fix.
+After the at-a-glance table, render one Priority N: <Title> block per row in the table. Title format: `**Priority N: <Title>**` on a single line, with the title using only commas, colons, or parentheses. Never use an em-dash in the title; the em-dash separator `Title — WCAG X.Y.Z` is a tone violation. When citing a WCAG criterion or numeric anchor in the title, use a comma or parenthesis: `Duplicate ID Attributes, WCAG 4.1.1` or `Semantic Structure 20/100 (573 Bare Divs out of 867 Total Elements)`. Each Priority block has exactly four labelled fields: **Bucket**, **Finding**, **What to change and why**, **Effort**. The Bucket value matches the table row. The "What to change and why" field is 2-4 bulleted concrete fixes, each with the WHY (which metric moves, which agent behaviour unlocks, which Core Web Vital improves, which WCAG criterion is addressed): developers know HTML; what they need from this report is the reasoning behind the fix.
 
-For any WCAG/accessibility Priority block: use ONLY the Pa11y findings listed in  Of these, 80 (80%) trace to 22 recurring template-level patterns — a single theme edit per pattern resolves all instances site-wide.
+For any WCAG/accessibility Priority block: use ONLY the Pa11y findings listed in  Of these, 4 (4%) trace to 2 recurring template-level patterns — a single theme edit per pattern resolves all instances site-wide.
 
 Pa11y findings for this audit (use ONLY these for specific recommendations):
-- **WCAG 4.1.1** — Duplicate id attribute value "quantity" found on the web page. | selector: `#quantity` | 11 instances on 4 pages | affects: all assistive tech users
-- **WCAG 4.1.1** — Duplicate id attribute value "mini-cart" found on the web page. | selector: `#mini-cart` | 4 instances on 4 pages | affects: all assistive tech users
-- **WCAG 3.2.2** — This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid. | selector: `#shopify-section-header > div:nth-child(1) > div:nth-child(1…` | 4 instances on 4 pages | affects: all users
-- **WCAG 3.2.2** — This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid. | selector: `html > body > div:nth-child(5) > div:nth-child(3) > predicti…` | 4 instances on 4 pages | affects: all users
-- **WCAG 1.3.1** — Heading tag found with no content. Text that is not intended as a heading should not be marked up with heading tags. | selector: `#shopify-section-sections--25230890140031__redirection_popup…` | 4 instances on 4 pages | affects: screen reader users below for specific recommendations. Name each finding by its WCAG criterion number and selector. Do NOT invent findings (e.g. keyboard-navigation or focus-order issues) not listed in the Pa11y data below.
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.46:1. Recommendation:  change text colour to #004fc2. | selector: `html > body > main > div:nth-child(2) > div > div > div > p:…` | 2 instances on 2 pages | affects: low-vision users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.46:1. Recommendation:  change text colour to #004fc2. | selector: `html > body > main > div:nth-child(2) > div > div > div > p:…` | 2 instances on 2 pages | affects: low-vision users
+- **WCAG 1.3.1** — Heading tag found with no content. Text that is not intended as a heading should not be marked up with heading tags. | selector: `html > body > main > div:nth-child(1) > div > h2:nth-child(5…` | 1 instance on 1 page | affects: screen reader users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.19:1. Recommendation:  change text colour to #101010. | selector: `html > body > main > div:nth-child(1) > div:nth-child(4) > d…` | 1 instance on 1 page | affects: low-vision users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.29:1. Recommendation:  change background to #3177c9. | selector: `html > body > main > div:nth-child(1) > div:nth-child(4) > d…` | 1 instance on 1 page | affects: low-vision users below for specific recommendations. Name each finding by its WCAG criterion number and selector. Do NOT invent findings (e.g. keyboard-navigation or focus-order issues) not listed in the Pa11y data below.
 
-Div Soup (Semantic Structure): rendered score 20/100, band high. When the rendered score is below 70, include this as a numbered Priority row. The finding title should name the score and ratio (available from 573 bare divs out of 867 total). Do NOT include it when the score is 70 or above.
+Div Soup (Semantic Structure): rendered score 40/100, band high. When the rendered score is below 70, include this as a numbered Priority row. The finding title should name the score and ratio (available from 12 bare divs out of 18 total). Do NOT include it when the score is 70 or above.
 
 Separate Priority blocks with `---`.
 
 Pa11y data for this audit:
- Of these, 80 (80%) trace to 22 recurring template-level patterns — a single theme edit per pattern resolves all instances site-wide.
+ Of these, 4 (4%) trace to 2 recurring template-level patterns — a single theme edit per pattern resolves all instances site-wide.
 
 Pa11y findings for this audit (use ONLY these for specific recommendations):
-- **WCAG 4.1.1** — Duplicate id attribute value "quantity" found on the web page. | selector: `#quantity` | 11 instances on 4 pages | affects: all assistive tech users
-- **WCAG 4.1.1** — Duplicate id attribute value "mini-cart" found on the web page. | selector: `#mini-cart` | 4 instances on 4 pages | affects: all assistive tech users
-- **WCAG 3.2.2** — This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid. | selector: `#shopify-section-header > div:nth-child(1) > div:nth-child(1…` | 4 instances on 4 pages | affects: all users
-- **WCAG 3.2.2** — This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid. | selector: `html > body > div:nth-child(5) > div:nth-child(3) > predicti…` | 4 instances on 4 pages | affects: all users
-- **WCAG 1.3.1** — Heading tag found with no content. Text that is not intended as a heading should not be marked up with heading tags. | selector: `#shopify-section-sections--25230890140031__redirection_popup…` | 4 instances on 4 pages | affects: screen reader users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.46:1. Recommendation:  change text colour to #004fc2. | selector: `html > body > main > div:nth-child(2) > div > div > div > p:…` | 2 instances on 2 pages | affects: low-vision users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.46:1. Recommendation:  change text colour to #004fc2. | selector: `html > body > main > div:nth-child(2) > div > div > div > p:…` | 2 instances on 2 pages | affects: low-vision users
+- **WCAG 1.3.1** — Heading tag found with no content. Text that is not intended as a heading should not be marked up with heading tags. | selector: `html > body > main > div:nth-child(1) > div > h2:nth-child(5…` | 1 instance on 1 page | affects: screen reader users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.19:1. Recommendation:  change text colour to #101010. | selector: `html > body > main > div:nth-child(1) > div:nth-child(4) > d…` | 1 instance on 1 page | affects: low-vision users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.29:1. Recommendation:  change background to #3177c9. | selector: `html > body > main > div:nth-child(1) > div:nth-child(4) > d…` | 1 instance on 1 page | affects: low-vision users
 
 Facts (do not change any number, percentage, URL, page count, or name):
-- Pages audited: 5 — scope all Priority descriptions to "the audited page" (singular) or "the audited set" (plural); do NOT say "site-wide" or "across the site"
-- Discovery Readiness: 25/100 (Needs Improvement)
-- Structured Data Quality: 74/100 (Good)
-- Metadata Stack Completeness: 51/100 (Could Be Better)
-- Accessibility: 18/100 (Needs Improvement) — 96 issues — 80 trace to 22 template pattern(s)
-- SEO: 73/100 (Good)
-- Security headers: 5/5 on every one of the 7 audited URLs
-- Heading quality: 61/100
-- Pipeline Survivability: 72/100
-- Served HTML: 25/100, Rendered HTML: n/a/100
-- Performance: 5988ms average load time
+- Pages audited: 7 — scope all Priority descriptions to "the audited page" (singular) or "the audited set" (plural); do NOT say "site-wide" or "across the site"
+- Discovery Readiness: 30/100 (Could Be Better)
+- Structured Data Quality: 47/100 (Could Be Better)
+- Metadata Stack Completeness: 52/100 (Good)
+- Accessibility: 69/100 (Good) — 106 issues — 4 trace to 2 template pattern(s)
+- SEO: 77/100 (Excellent)
+- Security headers: 4/5 present (HTTPS, HSTS, X-Frame-Options, X-Content-Type-Options); 0 of 7 audited URLs carry all five
+- Heading quality: 78/100
+- Pipeline Survivability: 98/100
+- Served HTML: 98/100, Rendered HTML: n/a/100
+- Performance: 402ms average load time
 
 PRIORITY-BLOCK CONTRACT — non-negotiable for Gate 0e (section completeness):
 - After the at-a-glance table, render one block per row.
@@ -382,12 +378,12 @@ These are not issues but areas where additional metadata or patterns would stren
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -433,10 +429,10 @@ This test fetches the homepage using the User-Agent strings of known AI agents t
 
 | Check | Result |
 |-------|--------|
-| URL probed | https://neomwellbeing.com |
+| URL probed | https://allabout.network |
 | HTTP status | 200 |
-| Content-Type returned | text/html; charset=utf-8 |
-| Markdown served | No — server returned HTML regardless of Accept header |
+| Content-Type returned | text/markdown; charset=utf-8 |
+| Markdown served | Yes — server responded with text/markdown |
 
 ### Non-Standard Response Headers
 
@@ -451,13 +447,13 @@ This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate
 | Check | Result |
 |-------|--------|
 | HTTP status code | 404 (correct) |
-| Custom error page | [Yes: branded page with navigation / No: generic server error] |
-| Semantic HTML (`<main>`, `<nav>`, `<h1>`) | Yes |
-| `<meta name="robots" content="noindex">` | Yes |
-| Navigation back to valid content | [Yes: home link, sitemap / No] |
-| Internal navigation links | [N: links to same-site pages / None: no links to valid content] |
-| MX governance tags | Not present |
-| Schema.org JSON-LD | [Absent (correct) / Present (incorrect: should not claim valid page)] |
+| Custom error page | Yes, branded page with navigation |
+| Semantic HTML (`<main>`, `<nav>`, `<h1>`) | No |
+| `<meta name="robots" content="noindex">` | No |
+| Navigation back to valid content | Yes, home link and internal navigation present |
+| Internal navigation links | 1 links to same-site pages |
+| MX governance tags | Not assessed in this audit |
+| Schema.org JSON-LD | Not assessed in this audit |
 
 ---
 
@@ -467,11 +463,11 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://neomwellbeing.com/`. A first-time visitor sees the cold-cache cost: the crawler recorded 16243 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three cache-busted re-probes that followed returned 438ms, 324ms, 535ms, giving a returning-visitor median of **438 ms**. **Returning-visitor verdict: Healthy**.
+**Slowest.** The slowest page is `https://allabout.network/blogs/ddt/ai-generated-code`. A first-time visitor sees the cold-cache cost: the crawler recorded 473 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 569ms, 62ms, 947ms, giving a returning-visitor median of **569 ms**. **Returning-visitor verdict: Healthy**.
 
-**Median-load control.** The median-load control page is `https://neomwellbeing.com/products/perfect-night-sleep-luxury-scented-candle`. A first-time visitor sees the cold-cache cost: the crawler recorded 2941 ms on its initial fetch. **First-visit verdict: Acceptable but elevated**. Three cache-busted re-probes that followed returned 217ms, 262ms, 253ms, giving a returning-visitor median of **253 ms**. **Returning-visitor verdict: Healthy**.
+**Median-load control.** The median-load control page is `https://allabout.network/blogs/adobe-franklin-revolutionizing-content-management`. A first-time visitor sees the cold-cache cost: the crawler recorded 404 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 131ms, 72ms, 65ms, giving a returning-visitor median of **72 ms**. **Returning-visitor verdict: Healthy**.
 
-**Verdict:** The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides.
+**Verdict:** Server response time is within healthy bounds on the slowest page and a median-load page, for both first-visit and returning-visitor requests.
 
 ---
 
@@ -482,26 +478,25 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 ```text
 User-agent: *
 Allow: /
-Disallow: /a/downloads/-/*
-Disallow: /admin
-Disallow: /cart
-Disallow: /orders
-Disallow: /checkouts/
-Disallow: /checkout
-Disallow: /2825683008/checkouts
-Disallow: /2825683008/orders
+Disallow: /drafts/
+Disallow: /demo/
+
+Sitemap: https://allabout.network/mx-sitemap.xml
+Sitemap: https://allabout.network/eds-sitemap.xml
+Sitemap: https://mx.allabout.network/blog/sitemap.xml
+Sitemap: https://mx.allabout.network/sitemap.xml
 ```
 
-*Showing the first 10 lines of `robots.txt`; the full 164-line file is preserved alongside this report as `neomwellbeing-robots-txt.txt`.*
+*The full `robots.txt` (9 lines) is preserved alongside this report as `allabout-network-robots-txt.txt`.*
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -511,29 +506,29 @@ SCOPE: Assess only this site's robots.txt. Do NOT compare to "typical" sites or 
 
 Facts:
 - robots.txt status: found
-- Sitemap references: 3
-- Disallow paths: 146
+- Sitemap references: 4
+- Disallow paths: 2
 -->
 
 ### sitemap.xml
 
 | Attribute | Present | Assessment |
 |-----------|---------|------------|
-| `<loc>` URLs | 908 entries | Fewer than crawl found |
+| `<loc>` URLs | 485 entries | Fewer than crawl found |
 | `<lastmod>` | Yes | Varied dates |
 | `<changefreq>` | Yes | Appropriate values |
-| `<priority>` | No | Absent |
+| `<priority>` | Yes | Differentiated values |
 
 **Sitemap grade:** Partial
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -543,22 +538,22 @@ SCOPE: Assess only this site's sitemap. Do NOT compare to "typical" or "industry
 
 Facts:
 - Grade: Partial
-- URL count: 908
+- URL count: 485
 - Has lastmod: Yes
 - Has changefreq: Yes
-- Has priority: No
+- Has priority: Yes
 -->
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -567,8 +562,8 @@ Write 1-2 sentences assessing the llms.txt. Describe the structure (site descrip
 TRANSPORT: If recommending text/html content-type for the file, frame it as "our recommendation diverges from the llmstxt.org specification: we recommend text/html": do NOT say it is industry standard, best practice, or established fact.
 
 Facts:
-- llms.txt present: Yes
-- Has description: Yes
+- llms.txt present: No
+- Has description: No
 - Has page inventory: No
 - Has content policy: No
 -->
@@ -577,12 +572,12 @@ Facts:
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -605,9 +600,7 @@ No agent-card.json found at `/.well-known/agent-card.json` (HTTP 404). The A2A (
 
 ### Other discovery files detected
 
-| Path | Purpose | Quality |
-|------|---------|---------|
-| *(5 paths — see sidecar)* | Various | — |
+No additional registered `/.well-known/` or root discovery files were detected on this site beyond the ones reported in their own sections above.
 
 *Reference: the [IANA Well-Known URIs registry](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) lists the full set of registered `/.well-known/` paths and their RFCs. If a path on that registry would be useful here, consider implementing it.*
 
@@ -615,17 +608,17 @@ No agent-card.json found at `/.well-known/agent-card.json` (HTTP 404). The A2A (
 
 | Schema Type | Pages | Required % | Recommended % | Notes |
 |-------------|-------|-----------|--------------|-------|
-| Organization | 4 | 100% | 100% | PostalAddress |
-| Product | 3 | 100% | 60% | AggregateRating, Offer, Brand |
-| Offer | 3 | 100% | 63% | Organization |
-| ListItem | 3 | 100% | 100% | — |
-| PostalAddress | 4 | 100% | 100% | — |
-| AggregateRating | 3 | 100% | 100% | — |
-| Brand | 3 | 100% | 100% | — |
-| BreadcrumbList | 3 | 100% | 100% | — |
+| Organization | 6 | 71% | 100% | Person |
+| Person | 5 | 100% | 100% | — |
+| ProfessionalService | 1 | 100% | 100% | Organization |
+| Article | 4 | 67% | 59% | Person, ImageObject, Organization |
+| ImageObject | 3 | 100% | 100% | — |
+| Book | 1 | 67% | 25% | Person, Organization |
+| WebPage | 1 | 100% | 100% | WebSite, Organization |
+| WebSite | 1 | 100% | 0% | — |
 
-**Structured Data Quality:** 74/100\
-**Coverage:** 4 pages with JSON-LD out of 4 total (100%)\
+**Structured Data Quality:** 47/100\
+**Coverage:** 6 pages with JSON-LD out of 7 total (86%)\
 **Unique types:** 8
 
 ### SDQ Score Breakdown
@@ -634,35 +627,35 @@ The Structured Data Quality score is composed of seven measurable signals. This 
 
 | Component | Earned | Max | Meaning |
 |-----------|--------|-----|---------|
-| Presence | 10 | 10 | schema.org JSON-LD exists on the page |
-| Required property coverage | 25 | 25 | Worst-case across all entities (one broken entity is not hidden by good ones) |
-| Recommended property coverage | 14 | 15 | Average across entities |
+| Presence | 9 | 10 | schema.org JSON-LD exists on the page |
+| Required property coverage | 2 | 25 | Worst-case across all entities (one broken entity is not hidden by good ones) |
+| Recommended property coverage | 12 | 15 | Average across entities |
 | Entity richness | 5 | 15 | Average property count per entity (3-5 = 5pt, 6-9 = 10pt, 10+ = 15pt) |
-| Cross-entity references | 8 | 15 | Nested @type values + @id linking |
-| Linked-data signals | 3 | 10 | sameAs, mainEntityOfPage, isPartOf, about, mentions, etc. (capped at 10) |
-| Vocabulary validity | 10 | 10 | Every @type exists in the Schema.org whitelist |
-| **Total** | **74** | **100** | |
+| Cross-entity references | 5 | 15 | Nested @type values + @id linking |
+| Linked-data signals | 5 | 10 | sameAs, mainEntityOfPage, isPartOf, about, mentions, etc. (capped at 10) |
+| Vocabulary validity | 9 | 10 | Every @type exists in the Schema.org whitelist |
+| **Total** | **47** | **100** | |
 
 ---
 
 ## Structured Data Findings
 
-We identified 28 specific Schema.org property gaps. Each row names a single missing property on a single entity with a short note on why it matters to machines.
+We identified 22 specific Schema.org property gaps. Each row names a single missing property on a single entity with a short note on why it matters to machines.
 
-The full per-entity list is delivered alongside this report as a sidecar CSV: [`neomwellbeing-structured-data-findings.csv`](neomwellbeing-structured-data-findings.csv). The 28 rows describe individual Schema.org property gaps on specific entities; most of them share a small number of underlying patterns, shown below ranked by instance count.
+The full per-entity list is delivered alongside this report as a sidecar CSV: [`allabout-network-structured-data-findings.csv`](allabout-network-structured-data-findings.csv). The 22 rows describe individual Schema.org property gaps on specific entities; most of them share a small number of underlying patterns, shown below ranked by instance count.
 
 | Type | Severity | Property | Instances | Pages | Why it matters |
 |------|----------|----------|----------:|------:|----------------|
-| Product | recommended | description | 3 | 3 | Product has no description; AI shopping agents have nothing to summarise |
-| Product | recommended | sku | 3 | 3 | Product cannot be uniquely identified across catalogues |
-| Product | recommended | brand | 3 | 3 | Product brand attribution missing |
-| Offer | recommended | seller | 3 | 3 | Offer has no seller attribution |
-| Offer | recommended | itemCondition | 3 | 3 | Offer has no new/used condition declared |
-| Offer | recommended | url | 3 | 3 | Offer has no purchase URL; agents cannot deep-link to checkout |
-| Product | recommended | aggregateRating | 3 | 3 | Product has no rating signal for ranking |
-| jsonLd | location | byteOffset | 1 | 1 | jsonLd is present in served HTML but starts at byte 851218 — past the 250 KB agent-truncation threshold. Agents with a 250 KB fetch window will not reach it. |
-| jsonLd | location | byteOffset | 1 | 1 | jsonLd is present in served HTML but starts at byte 473016 — past the 250 KB agent-truncation threshold. Agents with a 250 KB fetch window will not reach it. |
-| microdata | location | byteOffset | 1 | 1 | microdata is present in served HTML but starts at byte 344071 — past the 250 KB agent-truncation threshold. Agents with a 250 KB fetch window will not reach it. |
+| Organization | required | name | 5 | 5 | Organization entity has no name — entire entity is meaningless |
+| Article | required | datePublished | 4 | 4 | AI agents cannot date the article; freshness signals lost |
+| Article | recommended | dateModified | 4 | 4 | Crawlers cannot tell when the article was last updated; freshness signals stale |
+| WebSite | recommended | image | 1 | 1 | Site has no logo / hero image declared in structured data |
+| WebSite | recommended | datePublished | 1 | 1 | No site-level publish date for crawler context |
+| WebSite | recommended | author | 1 | 1 | Site has no top-level author/owner declared |
+| WebSite | recommended | publisher | 1 | 1 | Site has no top-level publisher declared |
+| Book | required | bookFormat | 1 | 1 | Book has no format (ebook, hardcover, paperback) |
+| Book | recommended | datePublished | 1 | 1 | Book has no publication date |
+| Book | recommended | image | 1 | 1 | Book has no cover image |
 
 Each summary row covers multiple per-entity rows in the sidecar; the grouped view is for reading at a glance, the sidecar is for processing.
 
@@ -680,15 +673,7 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organization: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside the page itself. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (the page advertises a ranked list whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. A clean run shows a single em-dash row and the "no blockers" verdict.
-
-### Per-page findings
-
-| Page | Listicle | Year-swap | First-party superlative | Third-party citations | Provenance metadata |
-|------|----------|-----------|--------------------------|------------------------|----------------------|
-| — | — | — | — | — | — |
-
-A self-promotional listicle is a page whose `<title>` or `<h1>` advertises a ranked list and whose position-one entry resolves to the publisher's own host or brand. A year-swap refresh is a page whose title year is two or more years ahead of its JSON-LD `dateModified`. The citation column counts outbound links to hosts other than the audited site; pages with body content over 400 words and zero third-party citations carry no verifiable references.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 ### Templated clusters
 
@@ -708,17 +693,17 @@ Any page contributing to a blocker above is capped at **Discoverable** readiness
 
 | Marker   | In served | In rendered | In head | Reachable <250KB | Injected by JS |
 |----------|-----------|-------------|---------|------------------|----------------|
-| JSON-LD structured data | Yes | Yes | No | No | No |
-| Microdata (itemscope) | Yes | Yes | Body | No | No |
+| JSON-LD structured data | Yes | Yes | Yes | Yes | Yes |
+| Microdata (itemscope) | Not present | Not present | n/a | n/a | n/a |
 | Open Graph meta tags | Yes | Yes | Yes | Yes | No |
-| Twitter Card meta tags | Not present | Not present | n/a | n/a | n/a |
-| MX governance meta tags | Not present | Not present | n/a | n/a | n/a |
+| Twitter Card meta tags | Yes | Yes | Yes | Yes | No |
+| MX governance meta tags | Yes | Yes | Yes | Yes | No |
 | Canonical URL | Yes | Yes | Yes | Yes | No |
-| Discovery links (llms-txt, sitemap) | Not present | Not present | n/a | n/a | n/a |
-| Language declaration (html lang) | Yes | Yes | Yes | Yes | No |
+| Discovery links (llms-txt, sitemap) | Yes | Yes | Yes | Yes | No |
+| Language declaration (html lang) | Yes | Yes | Yes | Yes | Yes |
 | Skip link (accessibility) | Yes | Yes | Body | Yes | No |
 
-All detected markers are present in the served HTML. Server-side and browser-based agents see the same signals.
+One or more markers appear only in the rendered DOM: they are invisible to server-side AI agents (ChatGPT, Claude, Perplexity). Move these markers into the served HTML to ensure universal agent visibility.
 
 ---
 
@@ -729,13 +714,13 @@ Schema.org implementations fall into five maturity tiers. The transitions are no
 |  | Level | Name | What it looks like | Typical SDQ |  |
 |---|-------|------|---------------------|------------|---|
 |  | 0 | Clean slate | No Schema.org markup present. Every addition is net new capability: the full maturity curve is open. | 0-29 |  |
-|  | 1 | Decoration | Typed blocks with sparse properties, no nesting, no cross-references. Schema is treated as boilerplate. | 30-50 |  |
-| **→** | 2 | Good schema | Full required and recommended properties, nested types where appropriate, valid vocabulary. No cross-entity wiring. | 75-90 | **←** |
+| **→** | 1 | Decoration | Typed blocks with sparse properties, no nesting, no cross-references. Schema is treated as boilerplate. | 30-50 | **←** |
+|  | 2 | Good schema | Full required and recommended properties, nested types where appropriate, valid vocabulary. No cross-entity wiring. | 75-90 |  |
 |  | 3 | Real graph | Level 2 + @id cross-references between entities + linked-data signals (sameAs, mainEntityOfPage, isPartOf). | 90-95 |  |
 |  | 4 | Verified linked data | Level 3 + external identifiers (Wikidata QIDs, ISNIs, ORCIDs) + provenance metadata. | 95-100 |  |
 
-**Current level:** 2: Good schema\
-**To reach the next level:** To reach Level 3: wrap the JSON-LD blocks in a single @graph document; sameAs links on Person / Organization; mainEntityOfPage on the primary entity; isPartOf linking the page entity to the site entity. Cross-link Organization, PostalAddress via @id rather than inlining them repeatedly.
+**Current level:** 1: Decoration\
+**To reach the next level:** Fill in the required and recommended Schema.org properties for each typed block (see structured_data_findings.csv for the specific gaps). Connect related entities inline or via @id references to canonical entities defined elsewhere on the site. Ensure every @type value is a valid Schema.org type.
 
 This is a structural classification, not a numeric score. A page can have a high SDQ score from rich properties without being graph-linked. The maturity level shows whether the schema is decoration, well-formed data, a real graph, or anchored in the linked-data web.
 
@@ -747,27 +732,87 @@ The MX Journey maps the five stages a machine follows when interacting with a we
 
 | Stage | Name | Status | Score | Key Metric |
 |-------|------|--------|-------|------------|
-| 1 | Discovery | Pass | 89 | Crawlable with semantic HTML |
-| 2 | Citation | Partial | 50 | Schema.org: Organization, PostalAddress (100% required properties) |
-| 3 | Search & Compare | Pass | 70 | Commerce schema with 1 supporting patterns |
-| 4 | Price Understanding | Pass | 100 | Pricing visible |
+| 1 | Discovery | Partial | 78 | Crawlable with semantic HTML |
+| 2 | Citation | Partial | 50 | Schema.org: Article, Person, ImageObject (67% required properties) |
+| 3 | Search & Compare | Pass | 60 | Commerce schema with 0 supporting patterns |
+| 4 | Price Understanding | Pass | 67 | Pricing visible but no Offer schema for agent parsing |
 | 5 | Purchase Confidence | N/A | -- | No transaction forms detected |
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
 State the overall MX Journey verdict as one short sentence. Options: "MX Compatible" (all 5 stages pass), "Partially Compatible" (some stages pass, some fail), "Not Compatible" (most stages fail). If a stage is N/A for this site type (e.g. Purchase Confidence on a content-only site), say so explicitly: "MX Compatible for this site type; Purchase Confidence is N/A".
 
-Facts from mx_journey_stages.csv: 3 of 4 stages pass; Purchase Confidence are N/A.
+Facts from mx_journey_stages.csv: 2 of 4 stages pass; Purchase Confidence are N/A.
 -->
+
+---
+
+## AI Attribution
+
+When a human clicks a link from ChatGPT, Perplexity, Gemini, Copilot, or Claude to your site, the browser does not record which AI sent them. Your server sees a visit with no "came from" field, and your analytics counts it as if the user typed the URL directly. A higher-converting channel quietly hides inside direct traffic.
+
+This is not a configuration mistake on your end: the information is stripped before your server ever sees the request. In-app browsers on iOS and Android do the same thing, and any AI surface that makes a server-side fetch on the user's behalf carries no browser context at all. The only place to recover the attribution is at the edge, by capturing and classifying the request before it reaches your analytics tag.
+
+<!-- REWRITE:
+AUDIT CONTEXT (applies to this block):
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
+- Date: 2026-05-16
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
+- Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
+- Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
+
+Write 1-2 short sentences stating what this means for https://allabout.network specifically. State whether the site currently has an edge capture pattern (yes/no) and what the consequence is (AI visits are or are not being separated from organic direct traffic). Use plain language: avoid the phrases "referrer", "Referrer-Policy", "same-origin", "cross-origin" in the customer-facing sentence; use "the browser does not tell your server which AI sent them" or similar.
+
+Facts:
+- Site: https://allabout.network
+- Edge capture worker in place: [EDGE_CAPTURE_ACTIVE yes/no]
+-->
+
+### Live capture (last 30 days)
+
+| Metric | Count |
+|--------|-------|
+| AI crawler hits (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …) | 12408 |
+| AI referral hits (human visits from chat surfaces) | 5 |
+| Total AI-attributable visits | 12413 |
+
+**Top referring AI surfaces:**
+
+| Agent | Event Type | Hits |
+|-------|-----------|------|
+| chatgpt | crawler | 10369 |
+| amazonbot | crawler | 531 |
+| claude | crawler | 451 |
+| perplexity | crawler | 350 |
+| bytespider | crawler | 337 |
+| meta-ai | crawler | 301 |
+| you | crawler | 28 |
+| gemini | crawler | 27 |
+| mistral | crawler | 10 |
+| applebot | crawler | 2 |
+
+### The 6-step playbook
+
+1. **Set up custom regex channel groups in GA4.** Catches AI referrers that would otherwise land in direct. Match source/medium against `chat.openai.com`, `chatgpt.com`, `perplexity.ai`, `gemini.google.com`, `copilot.microsoft.com`, `claude.ai`. Takes about 30 minutes.
+2. **Monitor direct traffic to deep pages.** True type-in traffic lands on the homepage. Direct traffic to deep interior pages is almost always misattributed AI-referred traffic with stripped referrers.
+3. **Track AI share of voice.** How often your brand is mentioned as an answer, before anyone clicks. This is the only metric that captures AI attribution at the recommendation layer, not the click layer.
+4. **Get third-party validation on sites AI actually cites.** AI models weight citations to high-authority third-party sources. Presence on those sources is a leading indicator of AI recommendation volume.
+5. **Structure data so AI models parse you as an entity.** Schema.org Organization + Product + Offer, explicit entity relationships, consistent naming across pages. AI models recommend entities, not page collections.
+6. **Capture the first-mover baseline now.** Traditional search volume is shifting into AI surfaces. Brands instrumenting capture now build the historical baseline everyone else will wish they had.
+
+> **Recommendation for Allabout:** adopt an edge-capture pattern. Any runtime that sits in front of the origin and can write to a small datastore works: Cloudflare Workers + D1, Fastly Compute + KV, Vercel Edge Middleware + a serverless DB, AWS Lambda@Edge + DynamoDB, or a lightweight server-side middleware on the origin itself. The shape is the same in each: a User-Agent classifier, a surface classifier, a small insert, and a non-blocking write that does not add latency to the user response. The full pattern is around 100 lines in any of these runtimes and backfills data from deploy day forward.
 
 ---
 
@@ -781,41 +826,41 @@ Every check runs on every audited page. The aggregate score weights truncation r
 
 | Resilience Check | Status | Pages | What It Means | Data |
 | ---------------- | ------ | ----- | ------------- | ---- |
-| Truncation Risk | Fail | 4/4 | 4 page(s) exceed the 250 KB threshold. Agents with limited fetch windows may stop reading before reaching the main content. | Largest page: 843 KB. Threshold: 250 KB. See neomwellbeing-pipeline-truncation-risk-pages.csv (4 pages). |
-| SPA Shell | Fail | 1/4 | Content requires JavaScript to appear. Server-side agents (ChatGPT, Claude, Perplexity) see an empty shell when they fetch these pages. | Max gap score: 25. 0 means served and rendered match. Page: https://neomwellbeing.com/ |
-| Soft 404 | Pass | 4/4 | Missing pages return a proper HTTP 404 status. No pages misleadingly return 200 for non-existent URLs. | 0 soft-404 page(s) detected. |
-| Boilerplate Burial | Pass | 4/4 | Navigation and chrome do not dominate the page; main content is reachable without wading through overhead. | Highest boilerplate-to-content ratio: 0.45. Threshold: < 10 (and < 80 KB of inline head bytes). |
-| Tabbed Disclosure | Pass | 4/4 | No content is hidden behind JavaScript tabs. All content is directly reachable in the served HTML. | 3 page(s) with tab widgets. |
-| Delayed Content Start | Pass | 4/4 | Main content begins early in the document. Agents that truncate fetches reach the lead paragraphs easily. | Content starts at up to 14% of the document on some pages. |
-| Broken Code Fences | Pass | 4/4 | All fenced code blocks are properly balanced. No parser-confusion risk for agents reading prose that contains code examples. | 0 page(s) with unbalanced fenced code blocks. |
-| HTTP Content Negotiation (Vary) | Fail | 4/4 | The server advertises content negotiation via Vary: Accept. Agents that ask for a different Accept header may receive different content than the browser version. | 4 page(s) advertise format negotiation. See neomwellbeing-pipeline-http-content-negotiation-(vary)-pages.csv (4 pages). |
-| Cross-Host Redirect | Pass | 4/4 | No cross-domain redirects. Agents follow internal redirects without host-boundary issues. | 0 page(s) cross origin during redirect. |
-| Generic Headings | Pass | 4/4 | Every heading carries specific content; no page is dominated by generic labels like "Overview" or "Introduction". | Worst case: 0% generic headings. |
-| Body Content Ratio | Pass | 4/4 | Actual prose content averages 45% of served bytes — well above the 30% threshold. Pages are content-heavy, not overhead-heavy. | Average: 45%. Threshold: 30%. |
-| Inline Tag Bloat | Fail | 4/4 | 4 page(s) carry inline `<style>` or executable `<script>` blocks over 500 bytes. Externalising these to separate .css/.js files lets agents skip them during cheap fetches. | 80 element(s) > 500 bytes. Largest inline CSS: 71194 B. Largest inline JS: 68215 B. See neomwellbeing-pipeline-inline-tag-bloat-pages.csv (4 pages). |
-| Head Weight | Pass | 4/4 | Head bytes are a small fraction of each page. Agents reach body content quickly. | Max ratio: 0.14. Average: 0.12. Threshold: 0.50. |
+| Truncation Risk | Pass | 7/7 | Every page is well under the 250 KB threshold at which some server-side agents stop reading. The largest page is 28 KB. | Largest page: 28 KB. Threshold: 250 KB. |
+| SPA Shell | Fail | 1/7 | Content requires JavaScript to appear. Server-side agents (ChatGPT, Claude, Perplexity) see an empty shell when they fetch these pages. | Max gap score: 65. 0 means served and rendered match. Page: https://allabout.network/blogs/ddt/aem-development-with-ai |
+| Soft 404 | Pass | 7/7 | Missing pages return a proper HTTP 404 status. No pages misleadingly return 200 for non-existent URLs. | 0 soft-404 page(s) detected. |
+| Boilerplate Burial | Pass | 7/7 | Navigation and chrome do not dominate the page; main content is reachable without wading through overhead. | Highest boilerplate-to-content ratio: 0.56. Threshold: < 10 (and < 80 KB of inline head bytes). |
+| Tabbed Disclosure | Pass | 7/7 | No content is hidden behind JavaScript tabs. All content is directly reachable in the served HTML. | 0 page(s) with tab widgets. |
+| Delayed Content Start | Pass | N/M | Main content begins early in the document. Agents that truncate fetches reach the lead paragraphs easily. | Content starts at up to 0% of the document on some pages. |
+| Broken Code Fences | Pass | 7/7 | All fenced code blocks are properly balanced. No parser-confusion risk for agents reading prose that contains code examples. | 0 page(s) with unbalanced fenced code blocks. |
+| HTTP Content Negotiation (Vary) | Pass | 7/7 | The server returns a single content type per URL. No Vary-on-Accept ambiguity that could confuse agents. | 0 page(s) advertise format negotiation. |
+| Cross-Host Redirect | Pass | 7/7 | No cross-domain redirects. Agents follow internal redirects without host-boundary issues. | 1 page(s) cross origin during redirect. |
+| Generic Headings | Pass | 7/7 | Every heading carries specific content; no page is dominated by generic labels like "Overview" or "Introduction". | Worst case: 0% generic headings. |
+| Body Content Ratio | Pass | N/M | Actual prose content averages 67% of served bytes — well above the 30% threshold. Pages are content-heavy, not overhead-heavy. | Average: 67%. Threshold: 30%. |
+| Inline Tag Bloat | Pass | 7/7 | No `<style>` or `<script>` block exceeds the 500-byte threshold on any page. Head stays lean for agents that read head-first. | 0 element(s) > 500 bytes. Largest inline CSS: 0 B. Largest inline JS: 173 B. |
+| Head Weight | Pass | N/M | Head bytes are a small fraction of each page. Agents reach body content quickly. | Max ratio: 0.00. Average: 0.00. Threshold: 0.50. |
 
-**Pipeline Survivability score:** 72/100
+**Pipeline Survivability score:** 98/100
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
 Write a 2-3 sentence narrative naming which resilience checks need attention on this site, what the practical consequence is for machines reading it, and which fix would have the largest effect. Use plain language: no raw metric numbers without explanation. Frame the remaining work as opportunities to strengthen, not as failings.
 
 Facts (derived from pipeline_survivability.csv):
-- Pages audited: 4
-- Pipeline Survivability score: 72
-- Checks flagged on any page: Truncation Risk, SPA Shell, Content Negotiation, Inline Tag Bloat
-- Check with the most pages flagged: Truncation Risk
-- Pages affected by that check: 4 of 4
+- Pages audited: 7
+- Pipeline Survivability score: 98
+- Checks flagged on any page: SPA Shell
+- Check with the most pages flagged: SPA Shell
+- Pages affected by that check: 1 of 7
 -->
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
@@ -830,16 +875,16 @@ The Div Soup check runs against the rendered HTML on every page. Score 100 is a 
 
 | Source | Score | Band | Bare divs | Bare div ratio | Deepest bare chain | Top bare selectors |
 |--------|-------|------|-----------|----------------|--------------------|-------------------|
-| Rendered HTML | 20/100 | high | 573 | 66% | 9 | `div.star-container.yotpo-sr-star-full` (317), `div.flex.flex-col` (243), `div.flex.flex-row` (213), `div` (150), `div.star-container` (150) |
+| Rendered HTML | 40/100 | high | 12 | 67% | 4 | `div` (14), `div.section` (3), `div.section.bio-container` (3), `div.bio-wrapper` (3), `div.bio.block` (3) |
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -851,10 +896,10 @@ If either row scores below 75, write 2-3 sentences:
 - Sentence 3: name the cheapest first move: usually wrapping the obvious landmarks (header, nav, main, footer, aside) and giving the rest meaningful class names so the bare-div ratio drops without restructuring the layout.
 
 Facts (do not change any number, percentage, URL, or selector):
-- Rendered score: 20, band high
-- Bare divs (rendered): 573 of 867 (66%)
-- Deepest bare chain (rendered): 9
-- Top bare selectors (rendered): `div.star-container.yotpo-sr-star-full` (317), `div.flex.flex-col` (243), `div.flex.flex-row` (213), `div` (150), `div.star-container` (150)
+- Rendered score: 40, band high
+- Bare divs (rendered): 12 of 18 (67%)
+- Deepest bare chain (rendered): 4
+- Top bare selectors (rendered): `div` (14), `div.section` (3), `div.section.bio-container` (3), `div.bio-wrapper` (3), `div.bio.block` (3)
 -->
 
 ---
@@ -865,25 +910,25 @@ Facts (do not change any number, percentage, URL, or selector):
 |--------|--------|---------|
 | HTTPS | Yes | Encrypted transport |
 | HSTS | Yes | Forces HTTPS, prevents downgrade attacks |
-| Content-Security-Policy | Yes | Prevents XSS and injection attacks |
+| Content-Security-Policy | No | Prevents XSS and injection attacks |
 | X-Frame-Options | Yes | Prevents clickjacking |
 | X-Content-Type-Options | Yes | Prevents MIME-type sniffing |
 
-All five standard security headers are present on every audited response. This is the expected baseline for any production website.
+One of the five standard security headers is absent across every audited response: Content-Security-Policy (CSP). Adding these at the origin-server or CDN edge closes the corresponding attack surfaces without touching application code.
 
-**Coverage:** 7 of 7 audited URLs carry all five headers.
+**Coverage:** 0 of 7 audited URLs carry all five headers; see the Security Headers appendix for the full exception list.
 
 | Page | HTTPS | HSTS | CSP | X-Frame | X-Content-Type |
 |------|-------|------|-----|---------|----------------|
-| /llms.txt | Yes | Yes | Yes | Yes | Yes |
-| /llms-full.txt | Yes | Yes | Yes | Yes | Yes |
-| /agents.md | Yes | Yes | Yes | Yes | Yes |
-| / | Yes | Yes | Yes | Yes | Yes |
-| /products/complete-bliss-standard-scented-candle | Yes | Yes | Yes | Yes | Yes |
-| /products/perfect-night-sleep-luxury-scented-candle | Yes | Yes | Yes | Yes | Yes |
-| /products/perfect-nights-sleep-standard-scented-candle | Yes | Yes | Yes | Yes | Yes |
+| / | Yes | Yes | No | Yes | Yes |
+| /blogs/adobe-franklin-revolutionizing-content-management | Yes | Yes | No | Yes | Yes |
+| /blogs/ddt/a-guide-to-ai-optimization-an-update | Yes | Yes | No | Yes | Yes |
+| /blogs/ddt/a-managers-guide-to-document-authoring-with-edge-delivery-services | Yes | Yes | No | Yes | Yes |
+| /blogs/ddt/adobe-eds-revolutionizing-content-management | Yes | Yes | No | Yes | Yes |
+| /blogs/ddt/aem-development-with-ai | Yes | Yes | No | Yes | Yes |
+| /blogs/ddt/ai-generated-code | Yes | Yes | No | Yes | Yes |
 
-HTTPS: 7/7 | HSTS: 7/7 | CSP: 7/7 | X-Frame-Options: 7/7 | X-Content-Type-Options: 7/7
+HTTPS: 7/7 | HSTS: 7/7 | CSP: 0/7 | X-Frame-Options: 7/7 | X-Content-Type-Options: 7/7
 
 ---
 
@@ -891,31 +936,31 @@ HTTPS: 7/7 | HSTS: 7/7 | CSP: 7/7 | X-Frame-Options: 7/7 | X-Content-Type-Option
 
 | Pattern | Coverage | Pages missing it |
 |---------|----------|------------------|
-| Schema.org JSON-LD | 100% | — |
-| MX governance tags | N/A | — |
-| Open Graph tags | N/A | — |
-| Twitter Card tags | N/A | — |
-| Skip link | N/A | — |
-| llms-txt link tag | N/A | — |
+| Schema.org JSON-LD | 86% | `/blogs/adobe-franklin-revolutionizing-content-management` |
+| MX governance tags | 14% | 6 |
+| Open Graph tags | 14% | 6 |
+| Twitter Card tags | 100% | — |
+| Skip link | 14% | 6 |
+| llms-txt link tag | 14% | 6 |
 | Canonical URL | 100% | — |
-| Exactly 1 H1 | N/A | — |
-| Code examples present | N/A | — |
+| Exactly 1 H1 | 43% | 4 |
+| Code examples present | 43% | 4 |
 | Self-contained sections | 100% | — |
-| Error/troubleshooting docs | N/A | — |
-| Lighthouse heading compliance | N/A | — |
+| Error/troubleshooting docs | 29% | 5 |
+| Lighthouse heading compliance | 43% | 4 |
 
-**Overall Consistency:** 100%
+**Overall Consistency:** 53%
 
 ## Content Consistency
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -930,8 +975,8 @@ ABSOLUTELY FORBIDDEN in this block (and every block): "I cannot", "I will not", 
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| Organisation name parity | Pass | Organisation name appears consistently across all 4 audited pages |
-| Canonical URL duplicates | Pass | No duplicate canonical URLs detected across the 4-page audited set |
+| Organisation name parity | Pass | Organisation name appears consistently across all 7 audited pages |
+| Canonical URL duplicates | Pass | No duplicate canonical URLs detected across the 7-page audited set |
 | Meta description length | Pass | Meta descriptions present on all pages; none flagged for length violations |
 | Cross-page entity spread (same entity on multiple pages) | Pass | Schema.org entities reference consistent identifiers across the audited set |
 
@@ -939,22 +984,13 @@ ABSOLUTELY FORBIDDEN in this block (and every block): "I cannot", "I will not", 
 
 ## Inline Code Duplicates
 
-165 identical inline fragment(s) were found repeated across multiple pages, totalling 366 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
+1 identical inline fragment(s) were found repeated across multiple pages, totalling 1 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
 
 | Type | Bytes | Pages | Preview |
 |------|-------|-------|---------|
-| css | 1260 | 6 | .upsell-blocks {     margin-top: 1.5rem;   }      .upsell-ca |
-| css | 358 | 6 | .yotpo-verified-image-icon{display:flex;flex-direction:colum |
-| css | 288 | 6 | .yotpo-star-rating{display:flex;align-items:center}.yotpo-st |
-| css | 107 | 6 | .yotpo-pagination-icon{fill:var(--text-color)}.yotpo-paginat |
-| css | 99 | 6 | .yotpo-star-distribution-ph{display:flex;flex-direction:colu |
-| css | 77 | 6 | .disabled,.yotpo-pagination-icon{fill:var(--text-color)}.dis |
-| css | 4683 | 4 | #NavImageimage_BaUPxm1 .nav-block-image {       aspect-ratio |
-| js | 4588 | 4 | {       "assets": {         "themeCssFile": null,         "l |
-| css | 3932 | 4 | .yotpo-reviews-star-ratings-widget { display: flex;   a:empt |
-| js | 3908 | 4 | class PredictiveSearchMobile extends HTMLElement {         c |
+| js | 169 | 7 | {     "prerender": [{ "where": { "href_matches": "/*" }, "ea |
 
-*Showing the top 10 of 165 duplicate fragments by occurrence count. The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `neomwellbeing-inline-code-duplicates.csv`.*
+*The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `allabout-network-inline-code-duplicates.csv`.*
 
 **Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
@@ -964,12 +1000,12 @@ ABSOLUTELY FORBIDDEN in this block (and every block): "I cannot", "I will not", 
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -989,7 +1025,7 @@ No PDF documents were discovered in the audited surface. Accessibility exposure 
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: address the 96 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
+1. **Address Priority 1 findings**: address the 106 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
 2. **Review Priority 2-3 findings**: Discovery Readiness improvements and metadata tuning that compound over time
 3. **Consider optional enhancements**: optional patterns that give a first-mover advantage in AI search
 
@@ -998,7 +1034,7 @@ No PDF documents were discovered in the audited surface. Accessibility exposure 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
 | Critical Fixes | WCAG 2.1 AA compliance | Priority 1 items resolved, compliance risk removed |
-| Full Optimization | Semantic Structure, Discovery Readiness, Catalogue Visibility, Metadata Stack, Structured Data, Heading Quality, Performance, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Full Optimization | Catalogue Visibility, Discovery Readiness, Semantic Structure, Structured Data, Metadata Stack, Security headers, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | Long-term competitive advantage in AI-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 
@@ -1008,45 +1044,41 @@ No PDF documents were discovered in the audited surface. Accessibility exposure 
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
-Write 2–3 sentences summarising the audit findings for Neomwellbeing (https://neomwellbeing.com). IMPORTANT: Always refer to the site by its domain (https://neomwellbeing.com), never by the consultancy name.
-The highest-scoring dimension is Structured Data at 74/100 — open with this as a strength.
+Write 2–3 sentences summarising the audit findings for Allabout (https://allabout.network). IMPORTANT: Always refer to the site by its domain (https://allabout.network), never by the consultancy name.
+The highest-scoring dimension is SEO at 77/100 — open with this as a strength.
 CRITICAL RULE: Open with the dimension that scored HIGHEST on the scorecard as a genuine STRENGTH. "Leads" means highest score, not highest priority finding. A dimension scoring 10/100 is never "the strongest" — it is an opportunity. High priority ≠ high score; do not confuse the two.
 Then name 1–2 lowest-scoring dimensions as the key OPPORTUNITIES. Close with an invitation to act.
-SCOPE: 5 pages were audited. Scope claims to "the audited set" — do not say "site-wide" unless consistency was explicitly confirmed.
-Scores: AI Suitability: —/100; Accessibility: —/100; SEO: 73/100; Structured Data: 74/100; Discovery Readiness: 25/100.
+SCOPE: 7 pages were audited. Scope claims to "the audited set" — do not say "site-wide" unless consistency was explicitly confirmed.
+Scores: AI Suitability: —/100; Accessibility: —/100; SEO: 77/100; Structured Data: 47/100; Discovery Readiness: 30/100.
 Human visitors: served well. Machine opportunity: structured data, discovery, metadata.
 -->
 
 ### Audit Scores
 
-The site serves an empty HTML shell to server-side agents. The "Rendering" column shows whether each score was measured from the served HTML (what agents actually get) or the rendered HTML (what agents would get with SSR).
-
-| Dimension | Score | Rendering | Notes |
-|-----------|-------|-----------|-------|
-| AI Agent Suitability | 25/100 | Served | Empty shell — no content without JS |
-| Accessibility | 18/100 | Rendered | Pa11y runs in a browser |
-| SEO (all pages) | 73/100 | Rendered | Google renders JS; server-side agents do not |
-| SEO (content pages) | 73/100 | Rendered |  |
-| MX Stack Completeness | 51/100 | Rendered |  |
-| Structured Data Quality | 74/100 | Rendered | JSON-LD in served head — valid for all agents |
-| Commerce Visibility | 45/100 | Rendered |  |
-| Discovery Readiness | 25/100 | Mixed | robots.txt/sitemap independent of rendering |
-| Heading Quality | 61/100 | Rendered |  |
-| Semantic Ratio | 7% | Rendered |  |
-| Agent Readability | 65/100 | Rendered |  |
-| Pipeline Survivability | 72/100 | Rendered |  |
-| Cross-Page Consistency | 100% | Rendered |  |
-
-Server-side agents see only the served HTML. The AI Suitability score reflects their experience. All other scores reflect what the site achieves after JavaScript renders.
+| Dimension | Score | Band |
+|-----------|-------|------|
+| AI Agent Suitability | 98/100 | Excellent |
+| Accessibility | 69/100 | Needs Improvement |
+| SEO (all pages) | 77/100 | Excellent |
+| SEO (content pages) | 76/100 | Excellent |
+| MX Stack Completeness | 52/100 | Good |
+| Structured Data Quality | 47/100 | Could Be Better |
+| Commerce Visibility | 0/100 | Needs Improvement |
+| Discovery Readiness | 30/100 | Could Be Better |
+| Heading Quality | 78/100 | Excellent |
+| Semantic Ratio | 33% | Could Be Better |
+| Agent Readability | 60/100 | Good |
+| Pipeline Survivability | 98/100 | Excellent |
+| Cross-Page Consistency | 53% | Good |
 
 ---
 
@@ -1054,13 +1086,15 @@ Server-side agents see only the served HTML. The AI Suitability score reflects t
 
 | Page | SEO | A11y | Back | Served | Rendered |
 |------|-----|------|------|--------|----------|
-| /agents.md | 35 | 80 | — | 58 | 58 |
-| / (nav) | 74 | 0 | 100 | 0 | -16 |
-| /products/complete-bliss-standard-scented-candle | 90 | 0 | 100 | 0 | 0 |
-| /products/perfect-night-sleep-luxury-scented-candle | 88 | 0 | 100 | 0 | 0 |
-| /products/perfect-nights-sleep-standard-scented-candle | 79 | 0 | 100 | 0 | 0 |
+| / (nav) | 86 | 100 | 95 | 100 | 100 |
+| /blogs/adobe-franklin-revolutionizing-content-management | 70 | 100 | 55 | 92 | 92 |
+| /blogs/ddt/a-guide-to-ai-optimization-an-update | 73 | 90 | 85 | 100 | 100 |
+| /blogs/ddt/a-managers-guide-to-document-authoring-with-edge-delivery-services | 73 | 80 | 95 | 100 | 100 |
+| /blogs/ddt/adobe-eds-revolutionizing-content-management | 67 | 100 | 85 | 98 | 98 |
+| /blogs/ddt/aem-development-with-ai | 99 | 0 | 85 | 94 | 94 |
+| /blogs/ddt/ai-generated-code | 74 | 0 | 85 | 100 | 100 |
 
-The page marked (nav) is navigational: it routes visitors to content rather than containing it, and is excluded from the SEO content average. Content-pages SEO average: 73/100.
+The page marked (nav) is navigational: it routes visitors to content rather than containing it, and is excluded from the SEO content average. Content-pages SEO average: 76/100.
 
 ---
 
@@ -1070,7 +1104,7 @@ We recorded every internal link found on every audited page: [N] links in total.
 
 | Link class                      | Count |
 | ------------------------------- | ----: |
-| Same-host internal links        | 733   |
+| Same-host internal links        | 37    |
 | External links                  | 0     |
 | Anchor-only (`#fragment`) links | 0     |
 | mailto / tel links              | 0     |
@@ -1081,12 +1115,12 @@ We recorded every internal link found on every audited page: [N] links in total.
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
-- Site: Neomwellbeing (neomwellbeing.com)
-- Pages audited: 5 of 908 in sitemap — sample run
+- Site: Allabout (allabout.network)
+- Pages audited: 7 of 485 in sitemap — sample run
 - Date: 2026-05-16
-- Scores: SEO 73/100 | Accessibility 18/100 | Discovery Readiness 25/100 | Structured Data 74/100
-- Scope: 5 pages audited — write "across the audited set", NEVER "site-wide"
-- Schema types already present (do NOT recommend adding these): Organization (7), Product (6), Offer (6), ListItem (6), PostalAddress (4), AggregateRating (3), Brand (3), BreadcrumbList (3)
+- Scores: SEO 77/100 | Accessibility 69/100 | Discovery Readiness 30/100 | Structured Data 47/100
+- Scope: 7 pages audited — write "across the audited set", NEVER "site-wide"
+- Schema types already present (do NOT recommend adding these): Organization (17), Person (7), ProfessionalService (4), Article (4), ImageObject (3), Book (2), WebPage (1), WebSite (1)
 - Voice: write as "we" throughout (e.g. "we identified", "we recorded"); avoid "the page", "the site found", or "the audit detected"
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
@@ -1102,29 +1136,21 @@ PATTERN:
 TONE: Factual, warm, peer-to-peer. The reader is a developer: assume knowledge of image formats and loading attributes; explain only the less-common things (JS Lazy Pattern, Double Lazy).
 
 Facts (do not change any number, percentage, URL, or count):
-- Total images: 670
+- Total images: 27
 - WebP: 0
-- SVG: 97
-- PNG: 24
-- JPEG: 377
-- With alt text: 490 (73.1%)
-- Missing alt text: 180
-- loading="lazy": 363
-- loading="eager": 1
-- no loading attribute: 306
-- JS Lazy Pattern instances: 265
-- Double Lazy instances: 137
+- SVG: 0
+- PNG: 23
+- JPEG: 4
+- With alt text: 10 (37.0%)
+- Missing alt text: 17
+- loading="lazy": 22
+- loading="eager": 5
+- no loading attribute: 0
+- JS Lazy Pattern instances: 0
+- Double Lazy instances: 0
 -->
 
-> **Double-lazy loading pattern detected on 137 image(s).** These images carry BOTH the native HTML attribute `loading="lazy"` AND a JavaScript lazyload pattern (a placeholder `data:image/gif` in `src`, the real URL in `data-src`, and a `lazyload` class). The image cannot render until:
->
-> 1. The lazyload JavaScript library loads and parses.
-> 2. The script scans the DOM and swaps `data-src` → `src` on images entering the viewport.
-> 3. The browser then honours `loading="lazy"` on the newly-swapped `src`, which may defer the fetch further.
->
-> **Why this matters for above-the-fold imagery** (hero banners, logos, navigation thumbnails): the hero never renders during the initial HTML parse because the real URL is not in the document yet. Core Web Vitals (LCP) and human perception of speed both pay the cost. AI agents that fetch static HTML without running JavaScript see only the placeholder `data:image/gif` and miss the image entirely.
->
-> **Recommended remediation:** for above-the-fold images, put the real URL in `src`, use `loading="eager"` and `fetchpriority="high"`, and remove the lazyload class. For below-the-fold images, keep one strategy — either native `loading="lazy"` (simpler, widely supported) or the JavaScript lazyload library, not both.
+> **Double-lazy loading pattern not detected** — no image in the audited set carries both native `loading="lazy"` and a JavaScript lazyload placeholder at the same time.
 
 ---
 
@@ -1136,11 +1162,11 @@ Pa11y is an open-source automated accessibility testing tool that checks web pag
 
 **MX-specific metrics:** Metadata Stack Completeness (MSC) measures all 7 metadata layers. Structured Data Quality (SDQ) scores JSON-LD entity richness. Discovery Readiness scores the robots.txt + sitemap + llms.txt + agent-card.json quartet. Cross-Page Consistency flags pages that deviate from site-wide patterns. Site Profile JSON enables cross-audit comparison. **Pipeline Survivability** runs eleven reading-resilience checks: truncation resilience, SPA shell resilience, soft-404 signalling, boilerplate balance, tabbed-disclosure avoidance, code-fence integrity, single-content-type negotiation, same-host redirects, heading specificity, early content start, and inline-tag bloat control. See **[MX: The Protocols Appendix S](https://mx.allabout.network/books/appendices/appendix-s.html)** for the full taxonomy and **[Appendix R](https://mx.allabout.network/books/appendices/appendix-r.html)** for the testing methodology.
 
-**Platform detection:** The audit fingerprints the hosting platform from HTTP response headers and HTML signatures. Detected platform: **Shopify**. The main audit uses Shopify-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
+**Platform detection:** The audit fingerprints the hosting platform from HTTP response headers and HTML signatures. Detected platform: **Cloudflare Pages**. The main audit uses Cloudflare Pages-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
 
 **Link inventory:** Every internal link discovered on every audited page is recorded with its URL, anchor text, and link type. The audit does not probe link status: a dedicated, rate-limited broken-link crawler handles that separately and avoids hammering the origin. Appendix B is a link inventory, not a broken-link list.
 
-**Scope:** 5 pages analysed | Platform: Shopify | Analysis method: Hybrid (automated + manual verification) | robots.txt: Found
+**Scope:** 7 pages analysed | Platform: Cloudflare Pages | Analysis method: Hybrid (automated + manual verification) | robots.txt: Found
 
 ---
 
