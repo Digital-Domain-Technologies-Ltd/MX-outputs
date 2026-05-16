@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — v-next vocabulary alignment + five-part framing"
-description: "Evening session landed the wider witness->attestation rename across the mx-reginald codebase, schema, conformance fixtures, and persisted data; canonicalised the five-part architectural framing across PRD, CLAUDE.md and memory; added the AI-governance evidence-vehicle positioning; recorded REGINALD's proprietary-to-CogNovaMX status as a standalone memory."
+title: "Co-Directors Report — v-next vocabulary alignment + audit-pipeline quality sweep + five-part framing"
+description: "Evening session landed three parallel tracks. The wider witness->attestation rename across the mx-reginald codebase, schema, conformance fixtures, and persisted data. A full audit-pipeline quality sweep that took the neomwellbeing and allabout.network reports end-to-end through all 14 gates to tagged PDF, adding API-retry resilience across every LLM-calling script. The five-part architectural framing canonicalised across PRD, CLAUDE.md and memory."
 author: "Tom Cranstoun"
 created: 2026-05-16
 modified: 2026-05-16
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -58,7 +58,17 @@ A focused single-fact memory captures the ownership position: REGINALD is the pr
 
 Inventory of the 7 authoritative gathering-sponsor docs against the new canon position. Two received single-line architectural cross-references anchoring them in the five-part framing: ddt-cognovamx/business-plan.md (REGINALD-strategic-asset section now references the PRD's "The overall goal") and sponsor-and-funding-ssot.md (two-entity-structure section similarly cross-referenced). Five were already aligned and deliberately left untouched: the three Gathering-side docs (cross-ref into a REGINALD doc would violate the audience-split rule), funding-routes.md (canonical perfection on counterparty routing), partner-strategy.md (the "Who pays whom" table is exemplary). The discipline of leaving aligned docs alone is itself a sign the canon is settling.
 
-### 6. PRD updates landed
+### 6. Audit pipeline: deterministic quality sweep + API retry resilience
+
+Parallel track. The morning's neomwellbeing audit had failed across multiple gate rounds and shipped a stuck `[REWRITE FAILED: Connection error.]` literal into the report. Evening landed a coordinated quality sweep that took both the neomwellbeing.com and allabout.network reports end-to-end through all 14 deterministic gates to ISO 14289-1 Level 2 tagged PDFs.
+
+Three classes of fix. *Empty-table suppression* across seven previously-rendered surfaces (Provenance Per-page findings, Cross-Page Consistency N/A rows, Other-discovery-files single all-dash row, Marker Reachability, Structured Data Inventory, AI Attribution buckets, 5-Stage MX Journey) — boundary-marker pattern in templates plus strip-when-empty in handlers; provenance-gap collector bumped to cacheVersion 2 so stale v1 outputs are treated as clean. *Construction-leak removal*: `seeding (n=1)` cells and the "Sample size n=1, still seeding" caveat now suppress; the `vs Peers` column strips entirely when the benchmark dataset is thin; the sitemap grade Complete-vs-Partial contradiction resolved by routing both surfaces through the attribute-aware placeholder; em-dash sweep across 21 deterministic infill sources; a per-row Reason column added to pipeline-survivability sidecar CSVs so URL lists carry the quantitative evidence per row. *PDF layout + retry resilience*: 6 mm side margins (after iterating 24→20→14→8→6→4→2→6 to find the comfortable middle), body max-width unset (pandoc default 36em was anchoring content to the left edge), the Executive Summary scorecard bar shrunk from 25 to 18 chars so it fits the cell on one line, and a scripted preprocessor that inserts an explicit page-break div before every H2 so each top-level section starts on a fresh page.
+
+The API retry layer is the most durable piece. A new helper at `mx-reginald/audit/scripts/lib/api-retry.js` wraps all eight LLM-calling scripts (rewrite-report, repair-report, repair-report-final, audit-fierce-critic, audit-llm-judgment, audit-llm-attribution-judge, collect-llm-attribution, provenance-gap-llm) with three-attempt exponential backoff (1 s → 2 s → 4 s). The classification is deny-first: HTTP 401/403/404/422/400 and Anthropic SDK AuthenticationError/PermissionDeniedError never retry; 429, 5xx, APIConnection*, *Timeout*, fetch failed, and the transport-layer message patterns always do. Retry events emit structured JSON to stdout where `scripts/audit-pipeline.js` parses them via a new `logApiRetries()` helper and writes one row per event into the per-run audit-log CSV with `decisionType: api_retry`, so the retry history survives in the durable record rather than only flashing past on the operator's terminal. A new fixture-based regression test at `tests/test-audit-empty-rendering.js` is wired into `npm run test` to catch future drift on construction leaks, all-dash table rows, and unstripped boundary markers; verified to catch a deliberate rollback.
+
+The voice rule across audit-report static prose and the rewrite-pass system prompt was harmonised in the same pass: first-person plural ("we") in present tense + active voice for client-facing deliverables; book manuscripts remain third-person. The canonical statement now lives at `mx-canon/ssot/writing-guides/writing-style.md` §3 with cross-references back to the two enforcement points so the rule has a single source of truth.
+
+### 7. PRD updates landed
 
 The PRD now at v0.6 carries: COG sample reasoning paragraphs (every YAML/JSON sample has a "Reading the sample" paragraph explaining what each field does and how it binds to its attestation), the operator naming uniformised (did:web:example-insurance.com throughout), file extensions and storage convention specified (.attestation.json, attestations/ directory, reference-implementation pointer at mx-reginald/scripts/signing/attestation-record-engine.js), conformance fixture location stated (mx-reginald/tests/conformance/cases/{attestations,fingerprints,rewriter}/), the five-part framing as "The overall goal" section, and the AI-governance evidence-vehicle closing block.
 
@@ -79,6 +89,15 @@ The PRD now at v0.6 carries: COG sample reasoning paragraphs (every YAML/JSON sa
 | New auto-memory entries | 3 (five-part framing, evidence vehicle, proprietary to CogNovaMX) |
 | Canon sections added | 4 (PRD §5.10 storage conventions, PRD §The overall goal, PRD §17.1 fixture reference, CLAUDE.md §five-part framing) |
 | Audit run delivered | allabout.network (full) + neomwellbeing.com (re-run) |
+| Audit pipeline files touched | 19 in mx-reginald (templates, handlers, infill, PDF generator, system prompt, retry helper, 8 LLM scripts) |
+| Audit pipeline lines added/removed | +1129 / -302 |
+| New audit infrastructure files | 2 (api-retry helper, H2 page-break preprocessor) |
+| Empty-table surfaces fixed | 7 (Provenance Per-page, Cross-Page Consistency, Other discovery files, Marker Reachability, Schema Inventory, AI Attribution, MX Journey) |
+| Em-dash sources fixed at the SSOT | 21 deterministic infill strings + system-prompt + template VOICE rule |
+| LLM-calling scripts now retry-resilient | 8 (rewrite, repair, repair-final, fierce-critic, llm-judgment, attribution-judge, collect-attribution, provenance-gap-llm) |
+| Memory entries (audit-pipeline track) | 2 (feedback_no_construction_leak, feedback_consultant_voice_by_surface) |
+| Tests added | tests/test-audit-empty-rendering.js (wired into npm run test, verified on deliberate-break) |
+| PDFs shipped | 2 (neomwellbeing-report.pdf, allabout-network-report.pdf — both ISO 14289-1 Level 2) |
 
 ---
 
@@ -134,3 +153,5 @@ The **commercial story** gained the audit/manager/regulator triad as a sales str
 | 47cc58d (mx-outputs) | Audit run 2026-05-16 allabout.network + neomwellbeing.com results landing |
 | d9c3b16c (hub) | Hub scripts rewired to attestation paths + mx-reginald pointer bump |
 | 0990768 (mx-reginald) | Catch residual witness refs after the wider rename (attestations/README.md + registry attestation JSON) |
+| 19b0ce1 (mx-reginald) | Audit pipeline: deterministic quality sweep + API retry resilience (19 files, +1129 / -302) |
+| 2f4c361 (mx-outputs) | Audit deliverables: neomwellbeing + allabout.network 2026-05-16 reports + PDFs |
