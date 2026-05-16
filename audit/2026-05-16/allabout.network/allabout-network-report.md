@@ -216,11 +216,11 @@ The findings below are prioritised by impact, with discovery and catalogue visib
 
 **Bucket:** Compliance Risk
 
-**Finding:** We recorded a semantic structure score of 40/100 across the audited set, with 12 bare divs out of 18 total elements. At that ratio, the majority of the layout relies on non-semantic containers that carry no role or meaning to machines or assistive technologies.
+**Finding:** We recorded a semantic structure score of 40/100 across the audited set, with 12 bare divs out of 18 total elements. At that ratio, the majority of the layout relies on non-semantic containers that provide reduced structural signal for machines and assistive technologies.
 
 **What to change and why:**
 
-- Replace bare div containers that serve a clear structural purpose (navigation, main content, article, aside, footer) with the corresponding semantic HTML5 elements; this gives assistive technologies an accurate document outline without requiring any visual change to the page.
+- Replace bare div containers that serve a clear structural purpose (navigation, main content, article, aside, footer) with the corresponding semantic HTML5 elements; this gives assistive technologies an accurate document outline without requiring any visual change to each audited page.
 - Where a div wraps a self-contained unit of content, consider whether a sectioning element better describes the content's role; correct sectioning improves how machines parse and attribute content to the right entity, which in turn supports the Structured Data Quality score (currently 47/100).
 - Prioritise the template-level containers first, as changes there propagate across every page that inherits the same structure, giving the highest return per edit across the audited set.
 
@@ -236,9 +236,9 @@ The findings below are prioritised by impact, with discovery and catalogue visib
 
 **What to change and why:**
 
-- Review canonical tag coverage across the audited set; the Cross-Page Consistency table shows canonical URLs present on 100% of audited pages, but absent or inconsistent canonical declarations on any pages outside that set reduce a machine's confidence about which URL represents authoritative content, and the Discovery Readiness score of 30/100 warrants confirming that coverage holds across the full sitemap.
+- Review canonical tag coverage across the audited set; the Cross-Page Consistency table shows canonical URLs present on 100% of audited pages, but absent or inconsistent canonical declarations on any pages outside that set reduce a machine's confidence about which URL represents authoritative content, and the Discovery Readiness score of 30/100 warrants confirming that coverage holds across the audited pages.
 - Confirm that the sitemap (485 URLs declared) accurately reflects the pages machines should index, and that each audited URL is included and carries a correctly formatted lastmod value; machines use these signals to prioritise re-crawl scheduling.
-- Evaluate robots.txt directives to ensure no crawlable paths across the audited set are inadvertently blocked; a Discovery Readiness score of 30/100 warrants checking whether crawl directives are narrower than intended.
+- Evaluate robots.txt directives to confirm that the two declared disallow paths (`/drafts/` and `/demo/`) do not inadvertently exclude crawlable content across the audited set; a Discovery Readiness score of 30/100 warrants verifying that these are the only paths restricted and that no audited URLs fall within them.
 - Consider adding an llms.txt file at the root to declare content endpoints explicitly for machine pipelines; our recommendation diverges from the llmstxt.org specification in that we recommend serving it as text/html rather than plain text, to ensure broad compatibility across agent and browser clients.
 
 **Effort:** Medium
@@ -279,9 +279,9 @@ The findings below are prioritised by impact, with discovery and catalogue visib
 
 These are not issues but areas where additional metadata or patterns would strengthen Allabout's machine readiness.
 
-- **sameAs links on Person and Organization entities**: connecting each Person and Organization node to its corresponding Wikidata, LinkedIn, or ORCID record gives machines an unambiguous identity anchor, enabling them to reconcile the site's contributors and the business itself with external knowledge graphs.
+- **sameAs links on Person and Organization entities**: we recommend connecting each Person and Organization node to its corresponding Wikidata, LinkedIn, or ORCID record to give machines an unambiguous identity anchor, enabling them to reconcile Allabout's contributors and the business itself with external knowledge graphs.
 
-- **AggregateRating on Book entities**: the two Book entries in the structured data inventory are natural candidates for aggregated review signals; adding AggregateRating to those nodes makes the titles eligible for rich results and increases the confidence with which machines can surface them in recommendation contexts.
+- **AggregateRating on Book entities**: we find that the two Book entries in the structured data inventory are natural candidates for aggregated review signals; adding AggregateRating to those nodes makes the titles eligible for rich results and increases the confidence with which machines can surface them in recommendation contexts.
 
 - **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt to declare content-use policy for AI agents.
 
@@ -443,7 +443,7 @@ The full per-entity list is delivered alongside this report as a sidecar CSV: [`
 
 | Type | Severity | Property | Instances | Pages | Why it matters |
 |------|----------|----------|----------:|------:|----------------|
-| Organization | required | name | 5 | 5 | Organization entity has no name — entire entity is meaningless across the 5 audited pages where this gap was recorded |
+| Organization | required | name | 5 | 5 | Organization entity cannot be resolved on the 5 audited pages where this gap was recorded |
 | Article | required | datePublished | 4 | 4 | AI agents cannot date the article; freshness signals lost |
 | Article | recommended | dateModified | 4 | 4 | Crawlers cannot tell when the article was last updated; freshness signals stale |
 | WebSite | recommended | image | 1 | 1 | Site has no logo / hero image declared in structured data |
@@ -549,7 +549,7 @@ We did not surface data sufficient to assess edge capture status across the audi
 
 ### The 6-step playbook
 
-1. **Set up custom regex channel groups in GA4.** Catches AI referrers that would otherwise land in direct. Match source/medium against `chat.openai.com`, `chatgpt.com`, `perplexity.ai`, `gemini.google.com`, `copilot.microsoft.com`, `claude.ai`. Takes about 30 minutes.
+1. **Set up custom regex channel groups in GA4.** Catches AI referrers that would otherwise land in direct. Match source/medium against `chat.openai.com`, `chatgpt.com`, `perplexity.ai`, `gemini.google.com`, `copilot.microsoft.com`, `claude.ai`.
 2. **Monitor direct traffic to deep pages.** True type-in traffic lands on the homepage. Direct traffic to deep interior pages is almost always misattributed AI-referred traffic with stripped referrers.
 3. **Track AI share of voice.** How often your brand is mentioned as an answer, before anyone clicks. This is the only metric that captures AI attribution at the recommendation layer, not the click layer.
 4. **Get third-party validation on sites AI actually cites.** AI models weight citations to high-authority third-party sources. Presence on those sources is a leading indicator of AI recommendation volume.
@@ -694,7 +694,7 @@ No PDF documents were discovered in the audited surface. Accessibility exposure 
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: address the 106 WCAG 2.1 AA accessibility issues identified by resolving the two recurring template-level contrast patterns described in Priority 1 — two targeted theme-level edits resolve all four recorded instances across the audited set
+1. **Address Priority 1 findings**: address the 106 WCAG 2.1 AA accessibility issues identified by resolving the two recurring template-level contrast patterns described in Priority 1; two targeted theme-level edits resolve all four recorded instances across the audited set
 2. **Review Priority 4-5 findings**: Discovery Readiness improvements and metadata tuning that compound over time
 3. **Review Priority 6 findings**: add the missing Content-Security-Policy header at the CDN or server layer so that all 7 audited URLs carry the full set of five security headers
 
@@ -704,7 +704,7 @@ No PDF documents were discovered in the audited surface. Accessibility exposure 
 |-------|-------|---------|
 | Critical Fixes | P1, P2, P3 (Compliance Risk) | Priority 1, 2, 3 resolved — WCAG 2.1 AA accessibility compliance restored |
 | Full Optimisation | P1, P2, P3, P4, P5, P6 (P1–P6) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
-| Ongoing Monitoring | Continuous monitoring and quarterly audits | Long-term competitive advantage in AI-mediated discovery |
+| Ongoing Monitoring | Continuous monitoring and quarterly audits | Sustained agent visibility and up-to-date signal accuracy across the audited set |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 
 ---

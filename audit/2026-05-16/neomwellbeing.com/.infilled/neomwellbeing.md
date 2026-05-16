@@ -42,7 +42,7 @@ We audited 5 pages across neomwellbeing.com's site using the Web Audit Suite. We
 
 We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
-We then review automated findings by hand before finalising the report. The automated pass identifies what is present or absent; we read that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable. Patterns we see repeatedly across sites on the same platform we note as platform characteristics rather than site-specific gaps. When new agent behaviours emerge, we update what the audit looks for.
+We then review automated findings by hand before finalising this report. The automated pass identifies what is present or absent; we read that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable. Patterns we see repeatedly across sites on the same platform we note as platform characteristics rather than site-specific gaps. When new agent behaviours emerge, we update what we look for.
 
 The scoring criteria follow published MX standards and proposed specifications maintained at [`https://tg.community`](https://tg.community). Where established external standards apply: WCAG 2.1, Schema.org, RFC 9309, W3C: those take precedence. The MX framework addresses governance and machine experience metadata in the areas those standards do not cover.
 
@@ -54,7 +54,7 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 
 Two structural problems limit its practical reach. The first is content type: the llmstxt.org specification defines `text/plain` as the content type for llms.txt files. Our recommendation diverges from the specification: we recommend serving llms.txt as `text/html`, wrapping the raw text in a minimal HTML document with the content inside a `<pre>` block and returning `Content-Type: text/html` from the server or CDN edge. The second problem is discovery: without a sitemap entry, crawlers have no reliable signal the file exists.
 
-The Discovery Files section records llms.txt presence, transport type, and sitemap registration. Where it is absent, the report notes the gap and the effort required to address it.
+The Discovery Files section records llms.txt presence, transport type, and sitemap registration. Where it is absent, we note the gap and the effort required to address it.
 
 ---
 
@@ -62,13 +62,13 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 | | Score | |
 |:---|---:|:---|
-| Performance | **35**/100 | `#########----------------` **(!)** |
-| Accessibility | **18**/100 | `#####--------------------` **(!)** |
-| SEO | **73**/100 | `##################-------` |
-| Machine Suitability | **25**/100 | `######-------------------` **(!)** |
-| MX Stack | **51**/100 | `#############------------` |
-| Agent Readability | **65**/100 | `################---------` |
-| Pipeline Survivability | **72**/100 | `##################-------` |
+| Performance | **35**/100 | `######------------` **(!)** |
+| Accessibility | **18**/100 | `###---------------` **(!)** |
+| SEO | **73**/100 | `#############-----` |
+| Machine Suitability | **25**/100 | `#####-------------` **(!)** |
+| MX Stack | **51**/100 | `#########---------` |
+| Agent Readability | **65**/100 | `############------` |
+| Pipeline Survivability | **72**/100 | `#############-----` |
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
@@ -142,12 +142,12 @@ Facts (do not change any number, percentage, URL, page count, or name):
 - Accessibility issues: 96 (80 trace to 22 template patterns)
 -->
 
-| Dimension | Rating | Grade | vs Peers |
-|-----------|--------|-------|----------|
-| UX / Navigation | Excellent | A |: |
-| Performance | Could Be Better | C | seeding (n=1) |
-| Accessibility (WCAG) | Needs Improvement | D | seeding (n=1) |
-| Trust and Credibility | Excellent | A |: |
+| Dimension | Rating | Grade |
+|-----------|--------|-------|
+| UX / Navigation | Excellent | A |
+| Performance | Could Be Better | C |
+| Accessibility (WCAG) | Needs Improvement | D |
+| Trust and Credibility | Excellent | A |
 
 ### Machine Experience
 
@@ -178,14 +178,12 @@ Facts (do not change any number, percentage, URL, page count, or name):
 - Pipeline Survivability: 72/100
 -->
 
-| Dimension | Score | Rating | Grade | vs Peers |
-|-----------|-------|--------|-------|----------|
-| Discovery Readiness | 25/100 | Needs Improvement | D | seeding (n=1) |
-| Structured Data Quality | 74/100 | Good | B | seeding (n=1) |
-| MX Stack Completeness | 51/100 | Could Be Better | C | seeding (n=1) |
-| Pipeline Survivability | 72/100 | Excellent | A | seeding (n=1) |
-
-*Peer-comparison dataset `2026-05-15.4`. Sample size n=1, still seeding. The "vs Peers" column will populate as fresh audits land.*
+| Dimension | Score | Rating | Grade |
+|-----------|-------|--------|-------|
+| Discovery Readiness | 25/100 | Needs Improvement | D |
+| Structured Data Quality | 74/100 | Good | B |
+| MX Stack Completeness | 51/100 | Could Be Better | C |
+| Pipeline Survivability | 72/100 | Excellent | A |
 
 ---
 
@@ -330,7 +328,7 @@ If the audit produced no findings, write "The audit produced no priority finding
 
 Sort the at-a-glance table by bucket in the order: `Compliance Risk` first (legal exposure leads), then `Cross-cutting` (foundations), then `AI Opportunity` (growth). Within each bucket, sort by Priority (High > Medium > Low).
 
-After the at-a-glance table, render one Priority N: <Title> block per row in the table. Each Priority block has exactly four labelled fields: **Bucket**, **Finding**, **What to change and why**, **Effort**. The Bucket value matches the table row. The "What to change and why" field is 2-4 bulleted concrete fixes, each with the WHY (which metric moves, which agent behaviour unlocks, which Core Web Vital improves, which WCAG criterion is addressed): developers know HTML; what they need from this report is the reasoning behind the fix.
+After the at-a-glance table, render one Priority N: <Title> block per row in the table. Title format: `**Priority N: <Title>**` on a single line, with the title using only commas, colons, or parentheses. Never use an em-dash in the title; the em-dash separator `Title — WCAG X.Y.Z` is a tone violation. When citing a WCAG criterion or numeric anchor in the title, use a comma or parenthesis: `Duplicate ID Attributes, WCAG 4.1.1` or `Semantic Structure 20/100 (573 Bare Divs out of 867 Total Elements)`. Each Priority block has exactly four labelled fields: **Bucket**, **Finding**, **What to change and why**, **Effort**. The Bucket value matches the table row. The "What to change and why" field is 2-4 bulleted concrete fixes, each with the WHY (which metric moves, which agent behaviour unlocks, which Core Web Vital improves, which WCAG criterion is addressed): developers know HTML; what they need from this report is the reasoning behind the fix.
 
 For any WCAG/accessibility Priority block: use ONLY the Pa11y findings listed in  Of these, 80 (80%) trace to 22 recurring template-level patterns — a single theme edit per pattern resolves all instances site-wide.
 
@@ -451,13 +449,13 @@ This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate
 | Check | Result |
 |-------|--------|
 | HTTP status code | 404 (correct) |
-| Custom error page | [Yes: branded page with navigation / No: generic server error] |
+| Custom error page | Yes, branded page with navigation |
 | Semantic HTML (`<main>`, `<nav>`, `<h1>`) | Yes |
-| `<meta name="robots" content="noindex">` | Yes |
-| Navigation back to valid content | [Yes: home link, sitemap / No] |
-| Internal navigation links | [N: links to same-site pages / None: no links to valid content] |
-| MX governance tags | Not present |
-| Schema.org JSON-LD | [Absent (correct) / Present (incorrect: should not claim valid page)] |
+| `<meta name="robots" content="noindex">` | No |
+| Navigation back to valid content | Yes, home link and internal navigation present |
+| Internal navigation links | 178 links to same-site pages |
+| MX governance tags | Not assessed in this audit |
+| Schema.org JSON-LD | Not assessed in this audit |
 
 ---
 
@@ -605,9 +603,7 @@ No agent-card.json found at `/.well-known/agent-card.json` (HTTP 404). The A2A (
 
 ### Other discovery files detected
 
-| Path | Purpose | Quality |
-|------|---------|---------|
-| *(5 paths — see sidecar)* | Various | — |
+5 additional registered `/.well-known/` paths were probed; none returned a recognisable discovery file. The per-path breakdown is preserved alongside this report as a sidecar JSON.
 
 *Reference: the [IANA Well-Known URIs registry](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) lists the full set of registered `/.well-known/` paths and their RFCs. If a path on that registry would be useful here, consider implementing it.*
 
@@ -680,15 +676,7 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organization: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside the page itself. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (the page advertises a ranked list whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. A clean run shows a single em-dash row and the "no blockers" verdict.
-
-### Per-page findings
-
-| Page | Listicle | Year-swap | First-party superlative | Third-party citations | Provenance metadata |
-|------|----------|-----------|--------------------------|------------------------|----------------------|
-| — | — | — | — | — | — |
-
-A self-promotional listicle is a page whose `<title>` or `<h1>` advertises a ranked list and whose position-one entry resolves to the publisher's own host or brand. A year-swap refresh is a page whose title year is two or more years ahead of its JSON-LD `dateModified`. The citation column counts outbound links to hosts other than the audited site; pages with body content over 400 words and zero third-party citations carry no verifiable references.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 ### Templated clusters
 
