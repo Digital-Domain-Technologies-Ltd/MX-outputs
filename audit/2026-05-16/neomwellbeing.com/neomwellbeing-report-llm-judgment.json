@@ -1,0 +1,41 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-16/neomwellbeing.com/neomwellbeing-report.md",
+  "timestamp": "2026-05-16T08:25:24.644Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 22666,
+    "output_tokens": 822,
+    "cache_creation_input_tokens": 3100,
+    "cache_read_input_tokens": 0
+  },
+  "findingCount": 4,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "tone-inconsistency",
+      "message": "The 'Recommended Actions' section switches from third-person ('address the 96 WCAG 2.1 AA accessibility issues identified') to first-person implicit framing, but more critically the 'Summary of Findings' closing paragraph switches into first-person ('We invite the team') while the surrounding Findings body sections use third-person ('We identified', 'We recorded', 'We measured') — the Findings body is written in consultant first-person throughout, yet the 'What's Working Well' section and body priorities consistently use 'we', making the voice internally consistent there; however, the 'About This Report' section is written entirely in passive/third-person ('This report covers', 'Each page is analysed', 'Automated findings are reviewed') while the Findings priorities are written in first-person ('We identified', 'We recorded', 'We measured'), creating a material voice mismatch between the narrative introduction section and the Findings body sections of the same report.",
+      "context": "\"This report covers 5 pages audited\" (About This Report) vs \"We identified 11 instances\" (Priority 1) and \"We recorded a Served HTML Discovery Readiness score\" (Priority 5)",
+      "severity": "block"
+    },
+    {
+      "category": "missing-in-engagement",
+      "message": "Priority 6 (Metadata Stack Completeness — 51/100) is not explicitly addressed in any engagement phase in 'What's Next'; the Critical Fixes phase lists P1–P5 and Full Optimisation lists P1–P9, but Priority 6 is a distinct named finding that must appear in at least one phase by number, and it is absent from the Critical Fixes scope description which ends at P5.",
+      "context": "\"Critical Fixes | P1, P2, P3, P4, P5 (Compliance Risk + Discovery)\" — Priority 6 first appears only under Full Optimisation's catch-all P1–P9 label",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The 'Optional Enhancements' section states 'NEOM has no ratings anywhere' in effect by saying 'once Product entities are in place across the audited set, attaching AggregateRating markup…' — but the Structured Data Inventory table shows AggregateRating IS present on 3 of 3 product pages at 100% recommended coverage, meaning the enhancement recommendation contradicts the audit's own structured data findings and implies an absence that does not exist in the audited sample.",
+      "context": "\"AggregateRating | 3 | 100% | 100%\" (Structured Data Inventory) vs \"attaching AggregateRating markup allows machines to surface star ratings\" (Optional Enhancements)",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The sitemap section simultaneously grades the sitemap as both 'Complete' and 'Partial' in adjacent sentences, which is a material self-contradiction in a client-facing document that would confuse any reader relying on the grade to understand their sitemap status.",
+      "context": "\"Sitemap grade:** Complete\" followed immediately by \"The sitemap carries a Partial grade, listing 908 URLs\"",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}
