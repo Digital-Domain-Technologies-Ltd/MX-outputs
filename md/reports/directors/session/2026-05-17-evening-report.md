@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Use-cases blog series and sub-folder discovery"
-description: "Four interlinked posts on MX vs blockchain/NFTs/crypto shipped to mx-site under a new use-cases sub-folder; discovery scripts taught to recurse so the pattern is now reusable."
+title: "Co-Directors Report — Use-cases series, AI Usage Declaration, and audit-suite recovery"
+description: "Four interlinked posts on MX vs blockchain/NFTs/crypto shipped under a new use-cases sub-folder; the publisher-level AI Usage Declaration suite landed across hub + three submodules with a Gathering draft note, an audit probe, and a deterministic test; pre-existing audit-suite failures cleared from 22 to 0."
 author: "Tom Cranstoun"
 created: 2026-05-17
 modified: 2026-05-17
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -48,21 +48,60 @@ The spell-check residue from the four crypto/blockchain posts was 17 terms aspel
 
 ---
 
+### 5. AI Usage Declaration suite, hub root through to mx-site
+
+Tom drafted a first-person AI Usage Declaration: a signed statement on how AI participated in writing the MX book series. From that draft we built a publisher-level disclosure stack and shipped it as four carrier forms at `https://mx.allabout.network/AI-USAGE.{md,json,html,pdf}`. The HTML carries the discovery and disclosure markup the standard requires: `<link rel="ai-usage" type="application/json" href="/AI-USAGE.json">`, the WICG page-level `<meta name="ai-disclosure" content="ai-assisted">`, and the Schema.org `digitalSourceType` IRI inside the JSON-LD. The PDF is tagged to ISO 14289-1 Level 2 conformance. The same `<link rel="ai-usage">` was wired into the homepage and into the html-writer skill's content-template so every future blog post discovers the declaration.
+
+### 6. Gathering draft for the AI Usage Declaration
+
+`mx-shared-gathering/draft-ai-usage-declaration.md` (draft-cranstoun-mx-ai-usage-declaration v1.0) specifies the schema (subject, publisher, author, `aiUsage` array, `aiBoundary` array, signature, derived disclosure), the discovery convention (root-level or `/.well-known/ai-usage`, plus `<link rel="ai-usage">`), the signature mechanism (RFC 7515 JWS over an RFC 8785 JCS-canonicalised payload, Ed25519 RECOMMENDED), and the §4.7 mapping from the underlying record to the WICG ai-content-disclosure four-value enum and the IPTC Digital Source Type vocabulary. The note is vendor-neutral throughout: it names its carrier as "markdown with structured YAML frontmatter", never as `.cog.md` or "cog", because those terms are CogNovaMX-internal. A new feedback memory `feedback_no_cog_leak_in_gathering.md` codifies the rule.
+
+### 7. Audit-pipeline integration
+
+A new probe at `mx-reginald/audit/bin/check-ai-usage.js` discovers the four carrier forms on a host being audited, validates the JSON record against §4 of the draft (required fields, ISO 8601 dates, enum values, ISO 8601 duration for `reviewSchedule`, signature shape at Level 2), inspects the homepage for the page-level WICG / Schema.org markup, and verifies the §4.7 derivation rule (re-derives expected `wicg`/`iptc` from `aiUsage` + `aiBoundary`, fails on disagreement). No LLM in the path. The probe wires into `scripts/audit-pipeline.js` at the collect phase (CACHE_VERSIONS bumped, invocation registered) and the report side at `infill-report.js`: a new `SECTION:AI_USAGE` template block fills with deterministic placeholders when the declaration is present and strips entirely when it is absent. Tested end-to-end against the live local server: 8 pass findings, 0 warnings, 0 failures, derivation consistent.
+
+### 8. Audit test suite recovered, 22 failures to 0
+
+The full audit `npm test` was reporting 22 failures plus a hub-level `check-template-drift.js` gate failure that nobody had cleared. The session walked them down to zero:
+
+- Three test files had a stale `mx-audit/` directory prefix in their `repoRoot` joins (the directory has always been `audit/`). Twelve audit-gate failures and seven provenance-gap failures and three contract-completeness failures collapsed when the path was corrected to `auditRoot = join(__dirname, '..')`.
+- The fierce-critic gate persists a `runCount` in a sidecar JSON next to each fixture report; after the `--max-rounds 8` cap the script flips to warn-only mode and exits 0 instead of the expected 1. A `beforeEach` now wipes the sidecar before every fixture run, so each test starts at `runCount=1`.
+- The `pipelineSurvivability` truncation test built a 200 KB HTML string with 40,000 nested `<div>` tags; Cheerio parsing alone took close to the 2 s default timeout. Replaced with an 80 KB `<style>` text node that exercises the same byte-offset check in single-digit milliseconds.
+- The `infill-golden` snapshot was stale (commit 54f4a7a added an "About sample scope" paragraph and Div Soup worst-page scoping but did not regenerate the golden). Verified the five drift chunks all matched their introducing commits, then ran `UPDATE_GOLDEN=1` to bless the snapshot.
+- The `check-template-drift.js` shared-sections registry was flagging "## About This Report" as drifted between the generic and ecommerce templates; the divergence is intentional content (generic says "verdicts/estate", ecommerce says "catalogue-visibility verdicts/catalogue"). Removed from `SHARED_SECTIONS` with a documented note matching the existing convention for intentionally-divergent sections.
+- Two stale generated indexes (`routing-registry.json`, `definitions-index.md`) were caught by `test-indexes-fresh.js`; regenerated via `npm run route:sync` and `node scripts/check-mx-definitions-index.js`.
+
+Result: audit suite 390 passing, 0 failing; hub-root `npm test` exits 0; the new probe's test file (`audit/test/utils/checkAiUsage.test.js`, 30 chai assertions) is part of the 390.
+
+### 9. HTML hygiene rule 3 — folder-level index consistency
+
+Tom asked the validator to check every folder containing an HTML set for an `index.html`, count the lander's links to sibling pages, and warn when the count does not match the number of content files. Implemented as Rule 3 in `scripts/check-html-hygiene.js`: warn-only severity (errors block, warnings advise), URL-prefix-aware link resolution so both root-anchored hrefs (`/X.html` from the site root) and relative hrefs (`X.html` from a sub-folder) match correctly, `SKIP_FOLDERS = {allaboutv2, books}` and `NEVER_LINKED_FILES = {404.html}` exclusion sets. First `--all` sweep surfaced three real findings: eight backlogged blog posts not on the blog lander, the missing `blog/profiles/index.html`, and a `cog.html` link missing from the homepage. Acted on all three. Re-run: 122 files scanned, zero warnings.
+
+### 10. Plain-characters-in-prose principle planted across the canon
+
+A new principle "Plain Characters in Prose" landed in `principles.cog.md`: no HTML entities (`&ldquo;`, `&rdquo;`, `&hellip;`, `&nbsp;`) inside the reader's words, ASCII straight quotes only, entities reserved for plumbing (URL escapes, displayed code, layout glyphs in chrome). Cross-referenced into `writing-style.md` §3 (typography rules), Pattern 18 in §9 (updated to call back to the §3 rule), Appendix M §26 (HTML carrier guide, with an executable test), and the html-writer skill's polish pass (executable shell check that strips script/style/code/pre and scans the remainder).
+
+---
+
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits | 2 (mx-outputs + hub pending) |
-| Files changed | 11 (this session, post-Step-1) |
-| Lines added | +1,294 (mx-outputs) + ~180 (hub) |
-| Lines removed | −0 (mx-outputs) + small (hub) |
-| Repositories touched | 2 (mx-outputs, hub) |
-| New blog posts | 4 |
-| New blog landers | 1 |
-| Sub-folder pattern | first content sub-folder on mx-site |
-| Sitemap entries (blog-local) | 48 (was ~40) |
-| Sitemap entries (site-level) | 91 (was ~87) |
-| Wordlist additions | 17 |
+| Commits this segment | 4 (3 submodules pushed + hub pending) |
+| Files changed (Part 2) | 22 across mx-outputs, mx-reginald, mx-shared-gathering, plus hub |
+| Lines added (Part 2) | mx-outputs: ~2,400 (incl. new AI-USAGE.* and lander); mx-reginald: +1,443 / −135; mx-shared-gathering: +500 |
+| Repositories touched | 4 (mx-outputs, mx-reginald, mx-shared-gathering, hub) |
+| New blog posts | 4 (Part 1) |
+| New blog landers | 2 (use-cases + profiles) |
+| New top-level pages on mx-site | 4 carriers of AI Usage Declaration (md, json, html, pdf) |
+| Gathering draft notes | 1 new (`draft-cranstoun-mx-ai-usage-declaration`) |
+| Audit probes | 1 new (`check-ai-usage.js`) wired into pipeline + infill |
+| Audit test failures | 22 → 0 (full suite: 390 passing) |
+| Hub `npm test` | exits 0 |
+| HTML hygiene rule 3 | added (folder-level index check, warn-only) |
+| HTML hygiene warnings remaining | 0 (122 files scanned clean) |
+| Sub-folder pattern | first content sub-folder on mx-site (Part 1) |
+| Wordlist additions | 17 (Part 1) |
 
 ---
 
@@ -87,8 +126,8 @@ A "we recurse into subfolders" change in two utility scripts looks like trivial 
 
 ## Open Questions
 
-- Should `blog/profiles/*.html` (the author/AI-assistant bio pages) be in the blog sitemap, now that the recursive walker picks them up? Current state: yes, they are. If the answer is no, the walker needs a `profiles` entry in its skip list (parallel to `drafts`) and a regen.
-- The pre-existing AI-USAGE rollout staged across mx-outputs, mx-reginald, mx-shared-gathering, and the hub looks complete and coherent in the diffs I sampled. Is it ready for a coordinated commit, or is there a piece still pending?
+- Should `blog/profiles/*.html` (the author/AI-assistant bio pages) be in the blog sitemap, now that the recursive walker picks them up? Current state: yes, they are, and they now also have their own lander at `blog/profiles/index.html` with breadcrumb chain Home → Blog → Profiles. If the answer to "should they be discoverable" is still no, the walker needs a `profiles` entry in its skip list and the lander reverts to a noindex page.
+- The AI Usage Declaration rollout is now shipped (the question the Part 1 report deferred). What remains is the Level 2 signature workflow: an Ed25519 keypair, a key-resolution URI, and the canonical-form signing step. None of those are in this segment's commits; they belong to a follow-up.
 
 ---
 
@@ -100,8 +139,9 @@ This segment ran the humanizer skill against material I had just written under t
 
 ## Next Steps
 
-- Decide and act on the profile-pages-in-sitemap question above.
-- Land the staged AI-USAGE rollout when the coordinator is ready; regenerate `mx-site/sitemap.xml` and `mx-site/llms-full.txt` in the same commit so the cross-contamination this segment dodged does not return.
+- Decide and act on the profile-pages-in-sitemap question above (still open from Part 1).
+- Level 2 (Signed) implementation for `/AI-USAGE.json`: generate an Ed25519 keypair, publish the public key at a dereferenceable URI, write a small derivation-and-sign script that produces a JWS over the JCS-canonicalised payload, and update the JSON record with the `signature` block. Touch §6 of the Gathering draft only to clarify if implementation surfaces an ambiguity.
+- Optional: write a derivation script that produces `/AI-USAGE.json` from the source markdown's YAML frontmatter (mentioned in §8.3 of the draft as a 30-line reference implementation).
 
 ---
 
@@ -109,5 +149,8 @@ This segment ran the humanizer skill against material I had just written under t
 
 | Hash | Description |
 |------|-------------|
-| 71ff1b7 | Blog: add use-cases sub-folder with the MX-and-blockchain set (mx-outputs) |
-| _pending_ | Hub: sub-folder discovery + html-writer skill + wordlist additions |
+| 71ff1b7 | Blog: add use-cases sub-folder with the MX-and-blockchain set (mx-outputs, Part 1) |
+| 372bed7 | AI Usage Declaration suite at mx.allabout.network root: HTML, JSON, MD, PDF carriers; profiles lander; eight backlogged blog posts surfaced (mx-outputs, Part 2) |
+| cbf2823 | Audit: AI Usage Declaration probe + pipeline integration + test-suite fixes (mx-reginald, Part 2) |
+| 285424c | Add MX AI Usage Declaration note (mx-shared-gathering, Part 2) |
+| _pending_ | Hub: sub-folder discovery + html-writer skill + check-html-hygiene Rule 3 + plain-characters principle + submodule pointer bumps |
