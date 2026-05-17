@@ -21,11 +21,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 52 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 223 | Markdown — reports, audit results, presentations |
+| [md/](md/) | 224 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **936** | |
+| **Total** | **945** | |
 
 ---
 
@@ -109,7 +109,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (216 files)
+### md/reports/ (217 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -144,7 +144,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (188 files)
+#### md/reports/directors/ (189 files)
 
 **build/** (3 files)
 
@@ -158,7 +158,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (181 files)
+**session/** (182 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -331,6 +331,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-05-16-afternoon-report.md`](md/reports/directors/session/2026-05-16-afternoon-report.md)
 - [`2026-05-16-evening-report.md`](md/reports/directors/session/2026-05-16-evening-report.md)
 - [`2026-05-16-morning-report.md`](md/reports/directors/session/2026-05-16-morning-report.md)
+- [`2026-05-17-evening-report.md`](md/reports/directors/session/2026-05-17-evening-report.md)
 - [`2026-05-17-morning-report.md`](md/reports/directors/session/2026-05-17-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
@@ -495,4 +496,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-17 at 03:36*
+*Generated on 2026-05-17 at 19:06*
