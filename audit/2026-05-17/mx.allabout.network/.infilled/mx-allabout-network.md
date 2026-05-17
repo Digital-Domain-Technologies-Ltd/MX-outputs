@@ -1191,9 +1191,37 @@ DO_NOT:
 - Reduce this to a legal compliance note. Both concerns are real and independent.
 -->
 
-We linked no PDFs from the 95-page sample we crawled. This is a statement about what we sampled, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, or are hosted on third-party domains.
+1 PDF document(s) were identified by the audit: those linked from the crawled pages combined with those declared in the sitemap. PDFs whose only source is the sitemap are marked as such in the inventory. Accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the technical baseline across major markets: the EAA (Directive (EU) 2019/882, in force 28 June 2025) in the EU, Section 508 in the US, UK PSBAR 2018, and equivalent laws in Australia and Canada all treat public-facing PDFs as regulated digital services for in-scope businesses. The MX Document Accessibility note specifies a three-layer conformance contract: **Tagged** (Level 1, ISO 14289-1 PDF/UA), **Declared** (Level 2, XMP `pdfuaid:part`), **Verified** (Level 3, recorded check).
 
-**Contact us for a wider PDF audit.** If you publish datasheets, white papers, investor documents, product manuals, accessibility statements, annual reports, or any other public-facing documents that were not reached by this sample, a focused PDF audit walks the full estate, checks every document against the ISO 14289-1 (PDF/UA) baseline (Tagged, Declared, Verified), and produces a per-document verdict you can act on. The audit you are reading covers HTML structure, structured data, and machine-readability across the crawled pages; the document layer is a separate engagement we run on request.
+**Scope note:** this inventory covers PDFs reachable from the crawled pages plus any `.pdf` URLs the sitemap declares. PDFs behind login forms, linked only from uncrawled pages, stored in unlinked directories that are kept out of the sitemap, or hosted on third-party domains still fall outside the crawl boundary. A wider-scope engagement is needed for a complete picture of accessibility exposure across the full document estate.
+
+### Inventory
+
+| URL | Source page | Has HTML alternative |
+|-----|-------------|----------------------|
+
+### Sample analysis: first PDF
+
+We sampled the first PDF in the inventory with the heuristic checker. Findings:
+
+| Layer | Status | What this means |
+|-------|--------|-----------------|
+| Level 1: Tagged (ISO 14289-1) | **pass** | Structure tree + `/Marked true` declaration |
+| Level 2: Declared (XMP `pdfuaid:part`) | pass | Public conformance claim in the document metadata |
+| Level 3: Verified (independent check) | n/a: out of scope of this snapshot | Vendor or in-house validator run, recorded in `provenancePedigree.checks[]` |
+
+**Accessibility exposure on this sample: low.** 
+
+### Future work: full PDF accessibility engagement
+
+This is a one-PDF sample. The full PDF Accessibility Audit service runs the same checker over every document in the inventory and adds:
+
+- per-document Level 1 / Level 2 / Level 3 reports with remediation guidance
+- structural fixes (alt-text, reading order, tag tree) where the source pipeline supports them
+- `provenancePedigree.checks[]` entries to record outcomes in the document metadata
+- a regression-safe re-check schedule so each new release stays within the accessibility compliance boundary
+
+Enforcement penalties vary by jurisdiction and enterprise size: the EAA (Directive (EU) 2019/882) carries fines ranging from low four-figure to six-figure euro sums depending on severity, and Section 508 and ADA Title III carry litigation exposure in the US market. The structural issues above are the cheapest layer to fix; most disappear at PDF generation time once the source pipeline is configured to emit tagged PDFs.
 
 ---
 
