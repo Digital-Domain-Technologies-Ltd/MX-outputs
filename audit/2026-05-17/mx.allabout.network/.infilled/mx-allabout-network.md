@@ -16,7 +16,7 @@ performanceScore: 97
 accessibilityScore: 99
 seoScore: 91
 llmSuitabilityScore: 97
-totalIssues: 14
+totalIssues: 4
 pagesAudited: 95
 version: "1.0"
 confidential: true
@@ -89,7 +89,7 @@ PATTERN (follow strictly):
 - Paragraph 2: Introduce the machine-experience OPPORTUNITY. Frame it as the next natural step, not a failing. Use the phrase "the headline opportunity is..." or "the opportunity we want to draw attention to is..." Cite the specific machine dimension that most moves the needle. If there are WCAG AA issues, name accessibility as a Priority 1 compliance item here, before the MX opportunity.
 - Optional Paragraph 3: If there is a served-vs-rendered gap or a platform constraint, name it — and note that Schema.org JSON-LD is the highest-leverage asset that every agent can read regardless of rendering.
 SCOPE: 95 pages were audited. Scope all claims to "the audited set" — do not say "site-wide" unless cross-page consistency is explicitly confirmed in the facts.
-ACCESSIBILITY NOTE: There are 14 WCAG AA issues. If Accessibility is not grade A, do NOT call it the "strongest" dimension in Paragraph 1. Acknowledge the accessibility opportunity in Paragraph 2 as a Priority 1 compliance item before the MX opportunity.
+ACCESSIBILITY NOTE: There are 4 WCAG AA issues. If Accessibility is not grade A, do NOT call it the "strongest" dimension in Paragraph 1. Acknowledge the accessibility opportunity in Paragraph 2 as a Priority 1 compliance item before the MX opportunity.
 BANNED WORDS: "failing", "failure", "gap" (as verdict), "weakness", "broken", "poor", "deficient", "inadequate", "lacking" (as verdict), "site-wide" (unless facts explicitly confirm multi-page consistency).
 PREFERRED WORDS: "opportunity", "headline opportunity", "next step", "room to strengthen", "foundation", "the chance to", "solid", "the groundwork is there".
 TONE: "You did good for humans — now build for machines." Never condescending. Never a list of failings. Every metric is framed as a relative position that a concrete improvement can lift.
@@ -99,7 +99,7 @@ Facts (do not change any number, percentage, URL, page count, or name):
 - Platform: GitHub Pages
 - Pages audited: 95
 - SEO: 91/100 (Excellent)
-- Accessibility: 14 critical WCAG AA issues
+- Accessibility: 4 critical WCAG AA issues
 - AI Suitability (served): 97/100
 - Structured Data Quality: 93/100
 - Discovery Readiness: 93/100
@@ -142,7 +142,7 @@ Facts (do not change any number, percentage, URL, page count, or name):
 - Performance: 273ms avg (Excellent)
 - Accessibility: 99/100 (Excellent)
 - SEO: 91/100 (Excellent)
-- Accessibility issues: 14
+- Accessibility issues: 4
 -->
 
 | Dimension | Rating | Grade |
@@ -248,7 +248,7 @@ Facts (do not change any number, percentage, URL, page count, or name):
 - Pages audited: 95
 - SEO (all pages): 91/100
 - SEO (content pages only): 91/100
-- Accessibility: 99/100, 14 issues
+- Accessibility: 99/100, 4 issues
 - Security headers: 5/5 present (HTTPS, HSTS, CSP, X-Frame-Options, X-Content-Type-Options); 97 of 98 audited URLs carry all five
 - Structured Data Quality: 93/100
 - Consistency: 99%
@@ -338,10 +338,10 @@ FACTS:
 - Pa11y data for this audit: 
 
 Pa11y findings for this audit (use ONLY these for specific recommendations):
-- **WCAG 2.4.2** — A title should be provided for the document, using a non-empty title element in the head section. | selector: `html > head` | 5 instances on 5 pages | affects: screen reader users
-- **WCAG 3.1.1** — The html element should have a lang or xml:lang attribute which describes the language of the document. | selector: `html` | 5 instances on 5 pages | affects: screen reader users
 - **WCAG 2.4.1** — This link points to a named anchor "organisational-implementation" within the document, but no anchor exists with that name. | selector: `#index > nav > ul > li:nth-child(11) > a` | 1 instance on 1 page | affects: sighted keyboard users
 - **WCAG 2.4.1** — This link points to a named anchor "where-mx-fits-in-your-organisation" within the document, but no anchor exists with that name. | selector: `#index > nav > ul > li:nth-child(8) > a` | 1 instance on 1 page | affects: sighted keyboard users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
 - **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
 - Div Soup rendered score: 43/100, band high
 - Div Soup bare divs: 95 of 153 (figures from the WORST page only)
@@ -356,10 +356,10 @@ DO_NOT:
 - Invent Pa11y findings (e.g. keyboard-navigation or focus-order issues) not listed in 
 
 Pa11y findings for this audit (use ONLY these for specific recommendations):
-- **WCAG 2.4.2** — A title should be provided for the document, using a non-empty title element in the head section. | selector: `html > head` | 5 instances on 5 pages | affects: screen reader users
-- **WCAG 3.1.1** — The html element should have a lang or xml:lang attribute which describes the language of the document. | selector: `html` | 5 instances on 5 pages | affects: screen reader users
 - **WCAG 2.4.1** — This link points to a named anchor "organisational-implementation" within the document, but no anchor exists with that name. | selector: `#index > nav > ul > li:nth-child(11) > a` | 1 instance on 1 page | affects: sighted keyboard users
 - **WCAG 2.4.1** — This link points to a named anchor "where-mx-fits-in-your-organisation" within the document, but no anchor exists with that name. | selector: `#index > nav > ul > li:nth-child(8) > a` | 1 instance on 1 page | affects: sighted keyboard users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
+- **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
 - **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users above.
 - Include Div Soup as a Priority row when the rendered score is 70 or above.
 
@@ -368,7 +368,7 @@ FACTS (do not change any number, percentage, URL, page count, or name):
 - Discovery Readiness: 93/100 (Excellent)
 - Structured Data Quality: 93/100 (Excellent)
 - Metadata Stack Completeness: 96/100 (Excellent)
-- Accessibility: 99/100 (Excellent) — 14 issues
+- Accessibility: 99/100 (Excellent) — 4 issues
 - SEO: 91/100 (Excellent)
 - Security headers: 5/5 present (HTTPS, HSTS, CSP, X-Frame-Options, X-Content-Type-Options); 97 of 98 audited URLs carry all five
 - Heading quality: 96/100
@@ -386,7 +386,7 @@ PRIORITY-BLOCK CONTRACT — non-negotiable for Gate 0e (section completeness):
 
 ### Optional Enhancements
 
-These are not issues but areas where additional metadata or patterns would strengthen the site's machine readiness.
+These are not issues but areas where additional metadata or patterns would strengthen this site's machine readiness.
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
@@ -402,7 +402,7 @@ AUDIT CONTEXT (applies to this block):
 WRITE:
 List 2-3 optional enhancement bullets. Each bullet is a concrete Schema.org / MX pattern that would strengthen this site's AI-agent readiness but is not a blocking issue. Examples that frequently apply: `sameAs` links to ORCID / Wikidata / LinkedIn on Person and Organization entities; `AggregateRating` on product / book / service entities that already carry Review entries; `SpeakableSpecification` CSS selectors on article-type pages for voice surfaces; `breadcrumb` on deep pages that currently rely on URL path only; `potentialAction` on Organization to advertise contact capabilities.
 
-Choose bullets that are (a) achievable in low effort and (b) actually applicable based on the site's current structured data inventory.
+Choose bullets that are (a) achievable in low effort and (b) actually applicable based on this site's current structured data inventory.
 
 Format each bullet as:
 - **<pattern-name>**: <1 sentence describing what it unlocks for agents and where on the site it would go>
@@ -426,7 +426,7 @@ FACTS (do not change any number, percentage, URL, page count, or name):
 
 ## AI Agent Access Test
 
-This test fetches the homepage using the User-Agent strings of known AI agents to verify whether the site is accessible at inference time.
+This test fetches the homepage using the User-Agent strings of known AI agents to verify whether this site is accessible at inference time.
 
 | AI Agent | User-Agent | Status | Result |
 |----------|-----------|--------|--------|
@@ -458,7 +458,7 @@ No non-standard response headers were recorded in this audit.
 
 ## Error Page Test
 
-This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate how the site handles errors for both human visitors and machines.
+This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate how this site handles errors for both human visitors and machines.
 
 | Check | Result |
 |-------|--------|
@@ -738,7 +738,7 @@ We identified 12 specific Schema.org property gaps. Each row names a single miss
 
 ## Provenance Gap
 
-**What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organization: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside the page itself. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
+**What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organization: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
 **What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
@@ -894,9 +894,9 @@ DO_NOT:
 
 ## Agent Reading Pipeline
 
-Scoring a machine's metadata is not the same as scoring whether the machine can read the page at all. Pipeline Survivability runs eleven reading-resilience checks on every audited page. Each one asks whether the page survives a known agent-reading risk: truncation by the agent's fetch tool, summarisation by the relevance layer, JavaScript-only content, tab disclosure, soft 404s, broken code fences, content negotiation drift, cross-host redirects, generic headings, content that begins too far into the document, or overhead-heavy pages where scripts, styles, and images outweigh actual content.
+Scoring a machine's metadata is not the same as scoring whether a machine can read each page at all. Pipeline Survivability runs eleven reading-resilience checks on every audited page. Each one asks whether a page survives a known agent-reading risk: truncation by the agent's fetch tool, summarisation by the relevance layer, JavaScript-only content, tab disclosure, soft 404s, broken code fences, content negotiation drift, cross-host redirects, generic headings, content that begins too far into the document, or overhead-heavy pages where scripts, styles, and images outweigh actual content.
 
-Every check runs on every audited page. The aggregate score weights truncation resilience, SPA resilience, and proper 404 signalling most heavily: these three determine whether the page is reachable to the agent at all. Boilerplate burial, tabbed disclosure, and delayed content start carry medium weight. The remaining checks contribute to the score but any single one slipping is less critical on its own.
+Every check runs on every audited page. The aggregate score weights truncation resilience, SPA resilience, and proper 404 signalling most heavily: these three determine whether each page is reachable to the agent at all. Boilerplate burial, tabbed disclosure, and delayed content start carry medium weight. The remaining checks contribute to the score but any single one slipping is less critical on its own.
 
 | Resilience Check | Status | Pages | What It Means | Data |
 | ---------------- | ------ | ----- | ------------- | ---- |
@@ -948,7 +948,7 @@ For the methodology behind this section, the relevance layer concept, and the ca
 
 ## Div Soup: naked containers without semantic mapping
 
-When every container is a `<div>` with no role, no ARIA landmark, and no class name that describes what it is, machines lose structural context and fall back on positional inference ("the third div from the top is probably navigation") to determine meaning. The visual layout still works for sighted users; the structural information that machines need to index, cite, and represent the page is gone.
+When every container is a `<div>` with no role, no ARIA landmark, and no class name that describes what it is, machines lose structural context and fall back on positional inference ("the third div from the top is probably navigation") to determine meaning. The visual layout still works for sighted users; the structural information that machines need to index, cite, and represent each page is gone.
 
 We run the Div Soup check on both served and rendered HTML so we can tell whether the soup is in the source the publisher controls or something the JavaScript framework introduces at render time. Score 100 is a page with no naked divs; score 0 is the worst case (every container is a bare nested div).
 
@@ -1199,6 +1199,7 @@ DO_NOT:
 
 | URL | Source page | Has HTML alternative |
 |-----|-------------|----------------------|
+| https://mx.allabout.network/books/mx-introduction-chapter.pdf | https://mx.allabout.network/books/training-vs-inference.html | No |
 
 ### Sample analysis: first PDF
 
@@ -1229,7 +1230,7 @@ Enforcement penalties vary by jurisdiction and enterprise size: the EAA (Directi
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: address the 14 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
+1. **Address Priority 1 findings**: address the 4 WCAG 2.1 AA accessibility issues identified (compliance gap)
 2. **Review Priority 2-3 findings**: metadata and schema improvements that compound over time
 3. **Consider optional enhancements**: optional patterns that give a first-mover advantage in AI search
 
