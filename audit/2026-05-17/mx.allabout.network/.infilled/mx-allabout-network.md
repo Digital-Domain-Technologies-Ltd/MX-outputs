@@ -330,7 +330,7 @@ Sort the at-a-glance table by bucket in the order: `Compliance Risk` first (lega
 
 After the at-a-glance table, render one Priority N: <Title> block per row in the table. Title format: `**Priority N: <Title>**` on a single line, with the title using only commas, colons, or parentheses. When citing a WCAG criterion or numeric anchor in the title, use a comma or parenthesis: `Duplicate ID Attributes, WCAG 4.1.1` or `Semantic Structure 20/100 (573 Bare Divs out of 867 Total Elements)`. Each Priority block has exactly four labelled fields: **Bucket**, **Finding**, **What to change and why**, **Effort**. The Bucket value matches the table row. The "What to change and why" field is 2-4 bulleted concrete fixes, each with the WHY (which metric moves, which agent behaviour unlocks, which Core Web Vital improves, which WCAG criterion is addressed): developers know HTML; what they need from this report is the reasoning behind the fix.
 
-Div Soup (Semantic Structure): rendered score 43/100, band high. When the rendered score is below 70, include this as a numbered Priority row. The finding title should name the score and ratio (available from 95 bare divs out of 153 total).
+Div Soup (Semantic Structure): rendered score 43/100, band high. When the rendered score is below 70, include this as a numbered Priority row. The figures 95 bare divs out of 153 total describe the WORST-CASE page in the audited set (https://mx.allabout.network/reginald/mx-machine-readiness.html), not a site-wide average. The finding title and the Finding paragraph must scope to that worst page; do NOT present these numbers as if they hold across every audited page. The title should include the rendered score, the worst-page URL, and the bare-divs-of-total figure (for example, a title naming the score, the page path, and the figure such as "95 of 153 bare divs"). In the Finding paragraph, name the worst page URL explicitly and note that the figures cited come from it specifically; if the band still applies because most pages share the template, say so.
 
 Separate Priority blocks with `---`.
 
@@ -344,7 +344,9 @@ Pa11y findings for this audit (use ONLY these for specific recommendations):
 - **WCAG 2.4.1** — This link points to a named anchor "where-mx-fits-in-your-organisation" within the document, but no anchor exists with that name. | selector: `#index > nav > ul > li:nth-child(8) > a` | 1 instance on 1 page | affects: sighted keyboard users
 - **WCAG 1.4.3** — This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
 - Div Soup rendered score: 43/100, band high
-- Div Soup bare divs: 95 of 153
+- Div Soup bare divs: 95 of 153 (figures from the WORST page only)
+- Div Soup worst page URL: https://mx.allabout.network/reginald/mx-machine-readiness.html
+- Div Soup audited page count: 98
 
 DO_NOT:
 - Use H1 (# heading) — the document already has a title H1; use ## or lower if any heading is needed.
@@ -973,15 +975,20 @@ If either row scores below 75, write 2-3 sentences:
 - Sentence 2: identify whether the soup is structural (deep chains) or surface-wide (high bare ratio with shallow chains), and what each pattern indicates about the source pipeline (drag-and-drop builders, untyped component frameworks, late-stage JS injection).
 - Sentence 3: name the cheapest first move: usually wrapping the obvious landmarks (header, nav, main, footer, aside) and giving the rest meaningful class names so the bare-div ratio drops without restructuring the layout.
 
-FACTS:
-- Rendered score: 43, band high
+FACTS (figures describe the WORST-CASE page in the audited set, not a site-wide average):
+- Rendered score: 43, band high (worst page: https://mx.allabout.network/reginald/mx-machine-readiness.html)
 - Bare divs (rendered): 95 of 153 (62%)
 - Deepest bare chain (rendered): 4
 - Top bare selectors (rendered): `div` (17), `div.icon` (6), `div.k` (4), `div.v` (4), `div.who` (4)
+- Pages contributing to the Div Soup aggregation: 98
+
+SCOPE:
+- The bare-div counts describe the single WORST page in the audited set, not a site-wide aggregate. State that explicitly when the figures are above the "low" band. Name the worst-page URL when you cite the figures so the reader knows where the count came from.
 
 DO_NOT:
 - Change any number, percentage, URL, or selector from the FACTS above.
 - Use the phrases "this is hard for machines to understand" or "brittle heuristics".
+- Present the bare-div counts as if they apply to every audited page.
 -->
 
 ---
