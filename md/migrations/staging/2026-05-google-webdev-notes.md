@@ -4,6 +4,8 @@ description: "Source-citable notes on Google's 1 May 2026 web.dev guidance on ag
 author: Tom Cranstoun
 date: 2026-05-07
 status: draft
+created: '2026-05-08'
+
 mx:
   canonicalUri: https://mx.allabout.network/research/2026-05-google-webdev-notes.html
   contentType: research-note

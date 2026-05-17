@@ -4,6 +4,8 @@ description: "Inventory of every supporting surface that needs to stay in step w
 author: Tom Cranstoun
 date: 2026-05-07
 status: draft
+created: '2026-05-08'
+
 mx:
   canonicalUri: https://mx.allabout.network/research/2026-05-corpus-inventory.html
   contentType: research-note
