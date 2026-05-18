@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Use-cases series, AI Usage Declaration, audit-suite recovery, mx-crm absorption, mx-reginald absorption"
-description: "Four interlinked posts on MX vs blockchain/NFTs/crypto shipped under a new use-cases sub-folder; the publisher-level AI Usage Declaration suite landed across hub + three submodules with a Gathering draft note, an audit probe, and a deterministic test; pre-existing audit-suite failures cleared from 22 to 0; the mx-crm submodule was absorbed into the hub as a regular folder, then the mx-reginald submodule (carrying the registry + audit codebase) was absorbed the same way; every submodule-list and narrative reference across the repo was swept to match the new layout."
+title: "Co-Directors Report — Use-cases series, AI Usage Declaration, audit-suite recovery, submodule consolidation"
+description: "Day-long close-out of the MX-hub submodule layout. The morning shipped four blog posts on MX vs blockchain/NFTs/crypto plus a use-cases sub-folder; the early evening landed the publisher-level AI Usage Declaration suite (four carriers, Gathering draft, deterministic audit probe), cleared 22 audit-suite failures to zero, and added HTML hygiene Rule 3; the late evening collapsed three submodules into the hub (mx-crm and mx-reginald absorbed as plain folders, mx-plugin deleted entirely), archived all four upstream repos on GitHub (MX-CRM, mx-reginald, MX-Audit, mx-plugin), replaced .git/hooks symlinks with copies per Tom's preference, regenerated the github-repositories.md registry with archive state and lowercase-org coverage, and filed two new Gathering drafts (Decision Records, Policy Records)."
 author: "Tom Cranstoun"
 created: 2026-05-17
-modified: 2026-05-17
-version: "1.3"
+modified: 2026-05-18
+version: "1.4"
 
 mx:
   status: active
@@ -81,6 +81,20 @@ Tom asked the validator to check every folder containing an HTML set for an `ind
 
 A new principle "Plain Characters in Prose" landed in `principles.cog.md`: no HTML entities (`&ldquo;`, `&rdquo;`, `&hellip;`, `&nbsp;`) inside the reader's words, ASCII straight quotes only, entities reserved for plumbing (URL escapes, displayed code, layout glyphs in chrome). Cross-referenced into `writing-style.md` §3 (typography rules), Pattern 18 in §9 (updated to call back to the §3 rule), Appendix M §26 (HTML carrier guide, with an executable test), and the html-writer skill's polish pass (executable shell check that strips script/style/code/pre and scans the remainder).
 
+### 15. github-repositories.md registry regenerated with archive state + lowercase-org coverage
+
+The auto-generated GitHub repositories registry at `datalake/knowledge/architecture/github-repositories.md` was regenerated and the embedded scanner improved in three ways: it now pulls from a third org (`digital-domain-technologies`, lowercase — where MX-Audit, MX-template-repo, and demo-repository live, previously invisible to the registry); it marks each archived repo with `[ARCHIVED]` in the description, sourced from GitHub's `.isArchived` field; and a long-standing column-shift bug (rows with empty descriptions silently lost their owner column because bash's `read` collapses consecutive tab separators) was fixed by switching the field separator to ASCII Unit Separator. The registry grew from 124 to 135 rows and now accurately reflects archive state across all DDT + ddttom repos.
+
+### 14. Four upstream submodule repos archived on GitHub
+
+Four `gh api -X PATCH archived=true` calls, one per repo: `Digital-Domain-Technologies-Ltd/MX-CRM`, `Digital-Domain-Technologies-Ltd/mx-reginald`, `digital-domain-technologies/MX-Audit`, `Digital-Domain-Technologies-Ltd/mx-plugin`. All four are now read-only on GitHub; history is preserved; existing links continue to resolve. The five "Decide long-term fate of..." and "Add migration notice to..." REMINDERS items those decisions were tracked under have been deleted from REMINDERS.md (decisions resolved, no further action). New REMINDERS items added: the fate decisions for these four are gone, but REMINDERS gained a note tracking that this segment converted the hub's submodule layout from "everything is a submodule" toward "hub is the canon, submodules are only what's genuinely external".
+
+### 13. mx-plugin removed entirely; hook symlinks replaced with copies
+
+Different from the mx-crm and mx-reginald absorptions: Tom asked for mx-plugin to be removed completely, not absorbed. The hub keeps nothing. The folder, the `[submodule "mx-plugin"]` block, the gitlink at mode 160000, and `.git/modules/mx-plugin` are all gone. Submodule-aware code in six scripts was pruned in lockstep so it no longer expects mx-plugin to exist. Five docs were swept (`UBERCOG.cog.md`, `README.md`, `getting-started.cog.md`, `intent-cms-prd.cog.md`, `github-repositories.md`).
+
+In the same commit, `.git/hooks/pre-commit` and `.git/hooks/pre-push` stopped being symlinks. Tom's feedback was "we do not like symlinks"; the installer at `scripts/install-hooks.sh` switched from `ln -sf` to `rm -f` + `cp -f` so the installed hook is now a real file. Trade-off documented in the installer header: every edit to `.claude/hooks/*.sh` now needs `npm run hooks:install` to take effect on subsequent commits/pushes. The two pre-commit hook failures earlier this segment (the markdownlint-cli2 ignore-file leakage) had already produced the `.markdownlintignore` exclusion for `mx-reginald/` and the staged-files filter in the hook itself; the copy-not-symlink change locks those edits in at install time rather than tracking live source edits.
+
 ### 12. mx-reginald absorbed into the hub
 
 Same pattern as the mx-crm absorption, applied to the larger and more central mx-reginald submodule. The hub takes a snapshot of upstream `Digital-Domain-Technologies-Ltd/mx-reginald` and the submodule entry leaves `.gitmodules`. 580 tracked files (8.7 MB without `node_modules`) re-enter the hub as plain tracked files at `mx-reginald/`, including the registry codebase, the cog index, the signing stubs, the publisher-verification scripts, the full audit subsystem at `mx-reginald/audit/`, and the worker at `mx-reginald/worker/`. Commit history stays in the upstream repository.
@@ -122,6 +136,12 @@ Narrative was swept across thirteen docs so the prose matches the new reality: `
 | Files changed (Part 4) | 588 (580 new files under mx-reginald/, 1 .gitmodules edit, 1 gitlink removal, 6 narrative sweep edits) |
 | Lines added (Part 4) | hub: ~149,691 / -4 (mx-reginald carries a much larger codebase than mx-crm: registry, audit, worker, signing, schemas, plans) |
 | Submodule count (after Part 4) | 8 (was 9; mx-reginald absorbed into the hub) |
+| Files changed (Part 5) | 15 (mx-plugin removal: 7 scripts + 5 docs + .gitmodules + install-hooks.sh + D mx-plugin) |
+| Submodule count (after Part 5) | 7 (mx-plugin removed entirely) |
+| Hook symlinks replaced | 2 (.git/hooks/pre-commit + .git/hooks/pre-push are now real files) |
+| Repos archived on GitHub (Part 6) | 4 (MX-CRM, mx-reginald, MX-Audit, mx-plugin) |
+| Registry rows after regen (Part 7) | 135 (was 124; +3 from lowercase org coverage, +8 from column-shift bug fix that exposed previously misaligned rows) |
+| New Gathering drafts filed | 2 (`draft-cranstoun-mx-decision-records`, `draft-cranstoun-mx-policy-records`) |
 
 ---
 
@@ -178,4 +198,13 @@ This segment ran the humanizer skill against material I had just written under t
 | 94ff7c5d | Hub: absorb mx-crm submodule into hub as a plain folder + sweep submodule-aware code and narrative (hub, Part 3) |
 | b3c13c8d | Docs: CHANGELOG entry + REMINDERS item for the mx-crm absorption (hub, Part 3) |
 | 3dad8997 | Learnings: git submodule deinit clears the working tree (hub, Part 3) |
-| _pending_ | Hub: absorb mx-reginald submodule into hub as a plain folder + narrative sweep (hub, Part 4) |
+| f528e526 | Hub: absorb mx-reginald submodule into hub as a plain folder + narrative sweep (hub, Part 4) |
+| f7fc37f5 | Docs: CHANGELOG entry + REMINDERS items for mx-reginald absorption (hub, Part 4) |
+| e7fb406d | Learnings: markdownlint-cli2 ignore-file vs explicit args; absorb upstream lint config (hub, Part 4) |
+| 3346399a | Hub: remove mx-plugin submodule + replace hook symlinks with copies (hub, Part 5) |
+| 5b47f498 | Docs: CHANGELOG entry for mx-plugin removal + archive; drop completed symlink reminder (hub, Part 5) |
+| 2a160cce | Docs: archive MX-CRM + mx-reginald + MX-Audit; drop resolved REMINDERS items (hub, Part 6) |
+| 7f7948aa | Registry: regenerate github-repositories.md with archive state + lowercase-org coverage (hub, Part 7) |
+| dea0654 | Add MX Decision Records + MX Policy Records draft notes (mx-shared-gathering) |
+| 274b61f | 2026-05-17 audit regen + directors v1.3 + sitemap/llms + new PDF (mx-outputs) |
+| _pending_ | Hub: pointer bumps for mx-outputs + mx-shared-gathering + accumulated parallel-session changes + untracked hook (hub, day close-out) |
