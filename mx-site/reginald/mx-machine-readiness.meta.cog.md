@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # ─────────────────────────────────────────────────────────────
 # MX-compliant meta-cog
 #
@@ -254,13 +255,15 @@ The prefix is the contract. A reader of any cog can tell at a glance who owns ea
 
 Note 3 §1 names the most important thing newcomers tend to miss: **not every MX-compliant document is a cog**. A document at Level 1 or Level 2 is fully MX-compliant without using any of the cog vocabulary. Cogs are for the subset of documents that need to be navigable, composable or runnable by agents — documents with explicit relationships, dependencies, or execution contracts.
 
-A cog is identified by either a magic-header HTML comment at byte zero or a `cogHeader` frontmatter field, both defined in Note 3. The magic-header is a single line:
+A cog is identified by either a magic-header YAML comment line inside the frontmatter or a `cogHeader` frontmatter field, both defined in Note 3. The magic-header is a single YAML comment line placed immediately after the opening `---`:
 
-```html
-<!-- cog v1 spec=https://example.org/cog-spec.v1.md runtime=https://example.org/cog-runtime.md -->
+```yaml
+---
+# cog v1 spec=https://example.org/cog-spec.v1.md runtime=https://example.org/cog-runtime.md
+title: ...
 ```
 
-The `cogHeader` field is the YAML equivalent. Either suffices for cog identification; consumers SHOULD prefer the magic-header for byte-zero recognition and `cogHeader` for programmatic consumption. When both are present, every overlapping key MUST agree. The position-paper cog declares both.
+The `cogHeader` field is the parsed-data equivalent. Either suffices for cog identification; consumers SHOULD prefer the magic-header line for raw-text recognition (agents scanning bytes before parsing YAML structurally) and `cogHeader` for programmatic consumption. When both are present, every overlapping key MUST agree. The position-paper cog declares both.
 
 The position-paper cog is a cog because it has explicit relationship structure (`mx:partOf`, `mx:buildsOn`, `mx:dependencies`, `mx:refersTo`) and a contract-fingerprint scope (`contractFields`, `metadataFields`). A blog post explaining a single idea probably is not a cog; a `<meta>`-tagged HTML page with Zone 1 + Zone 2 fields reaches Level 2 and is enough.
 
@@ -335,7 +338,7 @@ These nine fields together get a document well past Level 1 conformance with the
 
 ### Zone 1 · Cog header (Note 3 §5).
 
-`[Tier B · cogHeader]` — object. Frontmatter equivalent of the byte-zero magic-header HTML comment. Sub-keys: `version` (required), `spec` (required), `runtime` (optional), `runtimeDoc` (optional). Identifies this file as a cog to YAML-only consumers. When both this field and a magic-header comment exist, every overlapping key MUST agree (§5.2).
+`[Tier B · cogHeader]` — object. Frontmatter equivalent of the magic-header YAML comment line. Sub-keys: `version` (required), `spec` (required), `runtime` (optional), `runtimeDoc` (optional). Identifies this file as a cog to consumers that work on parsed YAML. When both this field and a magic-header line exist, every overlapping key MUST agree (§5.2).
 
 ### Zone 1 · Contract fingerprint scope (Note 8 §4).
 
@@ -496,7 +499,7 @@ A short list, drawn from the rules the position-paper cog encodes for itself:
 
 A cog-aware tool encountering this file should:
 
-1. Read the frontmatter, recognising the `cogHeader` field and confirming this is a cog with a known spec version (`v1`). Optionally cross-check against the byte-zero magic-header comment, requiring the keys to agree.
+1. Read the frontmatter, recognising the `cogHeader` field and confirming this is a cog with a known spec version (`v1`). Optionally cross-check against the magic-header line in the frontmatter, requiring the keys to agree.
 2. Read `mx:partOf` to see this is a meta-cog whose subject is the cog at `mx-machine-readiness`. Fetch the documented cog if context is needed.
 3. Read `mx:dependencies` and verify each `kind: external` entry resolves. The position-paper cog and meta-cog both depend on Notes 1, 2, 3, plus 4 and 8 for the position paper. Refuse to consider the meta-cog functional if any dependency is missing.
 4. If signed (an external envelope referencing this cog by `mx:canonicalUri` exists), compute the canonical JSON projection of the fields in `contractFields`, hash with SHA-256, and verify the resulting fingerprint against the signature in the envelope. If `mx:x-mx-reginald-registry-record` is present and the tool understands REGINALD, additionally check the registry record. Tools that do not understand the extension MUST ignore the `x-mx-reginald-*` fields and rely on the standard fingerprint check alone.

@@ -24,7 +24,7 @@ mx:
 
 Version 1.2 (draft, review-ready)
 
-> **v1.2 — `cogHeader` frontmatter field.** A new optional frontmatter field carries the same information as the magic-header line (version + spec + runtime + runtime-doc URLs) so YAML-only consumers can read the cog's spec/runtime conformance claim without parsing a byte-zero HTML comment. Defined in [MXS-06 Cog Identification](https://mx.allabout.network/drafts/mxs-06-cog-identification.cog.md). When both forms are present in the same cog they MUST agree on values (§2.5).
+> **v1.2 — `cogHeader` frontmatter field.** A new optional frontmatter field carries the same information as the magic-header line (version + spec + runtime + runtime-doc URLs) so consumers that work on parsed YAML can read the cog's spec/runtime conformance claim from a queryable nested object. Defined in [MXS-06 Cog Identification](https://mx.allabout.network/drafts/mxs-06-cog-identification.cog.md). When both forms are present in the same cog they MUST agree on values (§2.5).
 >
 > **v1.1 — Naming convention change.** Frontmatter field names are now `camelCase` (aligned with MX [NDR-2026-02-16](https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md)). The `x-mx-` and `x-mx-p-` namespace prefixes themselves remain kebab; only the suffix is camelCase (e.g. `x-mx-contractFields`, not `xMxContractFields`). v1.0 cogs that used kebab-case field names should be migrated by converting all field names to camelCase. File and directory names retain kebab-case (e.g. `cog-spec.v1.md`, `cog-review-procedure.cog.md`).
 
@@ -203,7 +203,7 @@ The line exists primarily to help agents that encounter a cog without prior cont
 
 If present, the magic header line MUST be the very first line of the file, before any byte order mark removal (which is not permitted) or whitespace. Implementations MUST NOT recognise a magic header line that appears anywhere other than the first line.
 
-The information carried by the magic header MAY also be expressed as a `cogHeader` frontmatter field defined in [MXS-06 Cog Identification](https://mx.allabout.network/drafts/mxs-06-cog-identification.cog.md). The two forms are equivalent. When both are present in the same cog they MUST agree on `version`, `spec`, `runtime`, and `runtimeDoc` values; validators MUST flag mismatches. Implementations SHOULD prefer the `cogHeader` field for programmatic consumption (queryable, robust to comment-stripping parsers) and the magic-header line for unambiguous self-identification at byte-zero of the file. A cog intended for circulation SHOULD declare both.
+The information carried by the magic header MAY also be expressed as a `cogHeader` frontmatter field defined in [MXS-06 Cog Identification](https://mx.allabout.network/drafts/mxs-06-cog-identification.cog.md). The two forms are equivalent. When both are present in the same cog they MUST agree on `version`, `spec`, `runtime`, and `runtimeDoc` values; validators MUST flag mismatches. Implementations SHOULD prefer the `cogHeader` field for programmatic consumption (queryable, robust to comment-stripping parsers) and the magic-header line for unambiguous self-identification when a consumer scans raw text. A cog intended for circulation SHOULD declare both.
 
 ## 3. Artefact model
 

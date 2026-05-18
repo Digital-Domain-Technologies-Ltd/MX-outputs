@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # ─────────────────────────────────────────────────────────────
 # MX-compliant cog file
 #
@@ -64,8 +65,8 @@ validatesAgainst:
 
 
 # ── ZONE 1 · Cog header (Note 3 §5) ──────────────────────────
-# Frontmatter equivalent of the byte-zero magic-header HTML
-# comment. Identifies this file as a cog to YAML-only consumers.
+# Frontmatter equivalent of the magic-header line. Identifies
+# this file as a cog to consumers that work on parsed YAML.
 cogHeader:
   version: v1
   spec: https://github.com/ddttom/mx-shared-gathering/blob/main/draft-cogs.md

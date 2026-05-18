@@ -1,5 +1,5 @@
-<!-- cog v1 spec=https://tg.community/spec/cog.v1 -->
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # ─────────────────────────────────────────────────────────────
 # MX-compliant cog · The cog v1 specification
 #
@@ -17,7 +17,7 @@
 
 # ── ZONE 1 · Identity (Note 2 §5) ────────────────────────────
 title: "cog v1, the magic-header specification"
-description: "Defines the byte-zero magic-header HTML comment and the cogHeader frontmatter field that every cog v1 file declares for self-identification."
+description: "Defines the magic-header YAML comment line and the cogHeader frontmatter field that every cog v1 file declares for self-identification."
 
 # D6 · originator at Zone 1; author retained as alias.
 originator: "Tom Cranstoun"
@@ -98,7 +98,7 @@ mx:
     legalEntity: "The Gathering"
     brand: "tg.community"
 
-  domain: "machine-experience"
+  x-mx-domain: "machine-experience"
   readingLevel: advanced
 
   runbook: >
@@ -130,10 +130,11 @@ mx:
     - https://www.w3.org/TR/WCAG21/
 
   speakable: >
-    The cog v1 specification. Defines the byte-zero magic-
-    header HTML comment and its frontmatter equivalent, both
-    of which announce a file as a cog and identify which
-    spec version the file claims.
+    The cog v1 specification. Defines the magic-header YAML
+    comment line carried inside the frontmatter and its
+    frontmatter-field equivalent, both of which announce a
+    file as a cog and identify which spec version the file
+    claims.
 
   trainingDataPolicy: permitted-with-attribution
   doNotIndex: false
@@ -193,11 +194,11 @@ mx:
 
 ## 1. Abstract.
 
-A cog file announces itself as a cog by carrying either a magic-header HTML comment at byte zero or a `cogHeader` frontmatter object, or both. This note specifies the grammar of both forms, the conventional keys each carries, and the rule that they must agree on every overlapping key when both are present.
+A cog file announces itself as a cog by carrying either a magic-header YAML comment line inside its frontmatter or a `cogHeader` frontmatter object, or both. This note specifies the grammar of both forms, the conventional keys each carries, and the rule that they must agree on every overlapping key when both are present.
 
-This is the spec the magic-header `<!-- cog v1 spec=https://tg.community/spec/cog.v1 -->` points at. A consumer parsing a cog with `version=v1` should fetch this document and treat §3, §4 and §5 as authoritative.
+This is the spec the magic-header line `# cog v1 spec=https://tg.community/spec/cog.v1` points at. A consumer parsing a cog with `version=v1` should fetch this document and treat §3, §4 and §5 as authoritative.
 
-The magic-header is invisible to rendered Markdown. The `cogHeader` field is invisible to YAML-only consumers. Together they let any consumer recognise a cog with whatever parser it has to hand.
+The magic-header line is preserved by YAML parsers as a comment token and is visible to consumers that scan raw text. The `cogHeader` field is the parsed-data equivalent for consumers that work on structured YAML output. Together they let any consumer recognise a cog with whatever parser it has to hand.
 
 
 ## 2. Conformance.
@@ -207,15 +208,17 @@ The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, REC
 This spec defines two equivalent identification mechanisms. A cog circulating outside a closed system MUST carry at least one of them; a cog SHOULD carry both.
 
 
-## 3. The magic-header HTML comment.
+## 3. The magic-header line.
 
-A cog file SHOULD identify itself as a cog at byte zero through a single-line HTML comment of the following form:
+A cog file SHOULD identify itself as a cog by carrying a magic-header line as a YAML comment inside its frontmatter, placed on the line immediately after the opening `---` delimiter:
 
+```yaml
+---
+# cog VERSION KEY=VALUE KEY=VALUE ...
+title: ...
 ```
-<!-- cog VERSION KEY=VALUE KEY=VALUE ... -->
-```
 
-Tokens, in order:
+Tokens after the leading `# `, in order:
 
 1. The literal `cog` (case-sensitive).
 2. A version token of the form `v\d+(\.\d+)*`. Examples: `v1`, `v1.2`, `v2`. The version token names which spec version the cog claims.
@@ -231,12 +234,14 @@ The conventional keys are:
 
 Implementations MUST treat unknown keys as informational and MUST NOT reject a cog on the basis of an unrecognised key. Implementations MUST NOT silently rewrite or normalise keys they do not recognise.
 
-The comment is a single line. Multi-line magic-headers are not conforming. White-space between tokens is one or more space characters.
+The line is a single YAML comment. Multi-line magic-headers are not conforming. Whitespace between tokens is one or more space characters.
 
 A worked example, identical to the one carried by the position-paper cog:
 
-```
-<!-- cog v1 spec=https://tg.community/spec/cog.v1 runtime=https://tg.community/runtimes/cog.v1 -->
+```yaml
+---
+# cog v1 spec=https://tg.community/spec/cog.v1 runtime=https://tg.community/runtimes/cog.v1
+title: ...
 ```
 
 
@@ -284,7 +289,7 @@ A key present in only one form is permitted; a key present in both with mismatch
 
 Implementations producing cogs intended for circulation SHOULD emit both forms, so that consumers of either kind can recognise the file without round-trip parsing. Specifically:
 
-- The magic-header comment for byte-zero file recognition by agents that have not parsed YAML.
+- The magic-header line as a YAML comment in the frontmatter, for raw-text file recognition by agents that scan bytes before parsing YAML structurally.
 - The `cogHeader` field for programmatic consumption by registries, validators, graph builders, and signing tools.
 
 Implementations consuming cogs:
