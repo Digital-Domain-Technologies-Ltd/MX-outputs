@@ -32,7 +32,7 @@ The recommended order is the order of sections below.
 
 ## Provenance of this bundle
 
-**Generated:** 2026-05-07
+**Generated:** 2026-05-17
 **Source repository:** https://github.com/ddttom/mx-shared-gathering
 **Canonical home for each draft:** https://github.com/ddttom/mx-shared-gathering/blob/main/<filename>
 **Licence:** MIT. The MX vocabulary is free, open, and vendor-neutral.
@@ -1579,6 +1579,56 @@ mx:
         description: Execute the embedded script
 ```
 
+#### 6.5.3 `cogUrn` — universal identifier
+
+A cog SHOULD declare a `cogUrn` field carrying its universal identifier as a URN-shaped string of the form `cog:<publisher-namespace>:<local-id>`. Unlike `cogId` (§6.5), which is reserved in vendor-extension space for a registry-local short identifier, `cogUrn` is a standard-tier field intended for use by every party outside the publisher's own systems: registries, clients, verifiers, and downstream agents.
+
+The `<publisher-namespace>` is a stable namespace the publisher controls, typically derived from the publisher's DID (for example `web:example.com` for `did:web:example.com`). The `<local-id>` is a publisher-chosen identifier unique within that namespace; [ULID](https://github.com/ulid/spec) values are RECOMMENDED for `<local-id>` because they are time-sortable and collision-resistant without coordination.
+
+| Field | Type | Zone | Profile | Conformance |
+|-------|------|:----:|---------|-------------|
+| `cogUrn` | string | 2 | cog (any) | SHOULD; URN-shaped `cog:<publisher-namespace>:<local-id>`; permanent across versions of the same logical record |
+
+The `cogUrn` is set when the cog is created. It is permanent: a cog never changes its `cogUrn`. New versions of the same logical record (a corrected record, an amended clause) share the `cogUrn` and differ in `schemaVersion` (§6.5.4). The namespace prefix ensures global uniqueness without a central authority; two publishers controlling distinct domains cannot collide.
+
+A publisher that loses control of its namespace is a recoverable situation as long as the original DID document remains resolvable; permanent loss is a worst-case that the trust layer handles per the MX Attestation Records and Verification note, with liability resting on the publisher.
+
+**Example:**
+
+```yaml
+mx:
+  cogUrn: cog:web:example.com:01JC8X7K2N4P5Q6R7S8T9V0W1Y
+```
+
+`cogUrn` and `cogId` (§6.5) are independent identifiers and MAY both be present on the same cog. `cogUrn` is the universal long-form identifier; `cogId` is a vendor-extension short-form identifier scoped to a registry's namespace.
+
+#### 6.5.4 `schemaVersion` — cog-schema version
+
+A cog SHOULD declare a `schemaVersion` field carrying the semver of the cog schema this record conforms to. `schemaVersion` is a standard-tier field, distinct from `cogHeader.version` (§5.1) which declares the cog-spec version a file conforms to.
+
+| Field | Type | Zone | Profile | Conformance |
+|-------|------|:----:|---------|-------------|
+| `schemaVersion` | string | 2 | cog (any) | SHOULD; semver (`MAJOR.MINOR.PATCH` or `MAJOR.MINOR`) |
+
+The Gathering versions cog schemas using semver:
+
+- **Patch** (1.0.0 → 1.0.1): editorial corrections to the schema, no field changes. Existing cogs remain valid.
+- **Minor** (1.0.0 → 1.1.0): new optional fields added. Existing cogs remain valid. Clients that understand the previous minor version parse the newer cogs and ignore the unfamiliar fields.
+- **Major** (1.0.0 → 2.0.0): breaking changes, including field removals, semantics changes, or required-field additions. Existing cogs remain readable but require version-aware clients.
+
+Registries MUST serve cogs at whatever `schemaVersion` they were published under. A v1.0 cog is served as v1.0 indefinitely. Registries MUST NOT migrate cogs to newer schema versions; the publisher MAY publish a new version of the same `cogUrn` under a newer `schemaVersion` if they choose, but the old version remains queryable.
+
+Clients SHOULD accept any minor version within the major version they support. Clients encountering a major version they do not support SHOULD report this to the caller rather than attempt partial parsing.
+
+**Example:**
+
+```yaml
+mx:
+  schemaVersion: 1.0
+```
+
+The Gathering publishes a schema-evolution policy as part of the cog-schema documentation. The policy commits to: no breaking changes within a major version; a minimum window between major versions so the ecosystem can adapt; both the current and previous major versions remaining supported for a published transition period.
+
 ### 6.6 Composition and content-shape fields
 
 The following fields describe the cog's body content and how it composes with other cogs. They likewise live in vendor-extension space.
@@ -1667,6 +1717,8 @@ mx:
 | `partOf` | MUST | — | — |
 | `buildsOn` | — | SHOULD | — |
 | `cogHeader` *or* magic-header comment | — | SHOULD (when circulating) | — |
+| `cogUrn` | — | SHOULD | — |
+| `schemaVersion` | — | SHOULD | — |
 | `dependencies` | — | — | MAY |
 | `refersTo` | — | — | MAY |
 | `cogId`, `cogType`, `category` | — | — | MAY |
@@ -4661,7 +4713,7 @@ The author thanks the PDF/UA, WCAG, and EPUB accessibility communities, whose de
 
 **Version:** 1.0
 **Status:** Draft by Tom Cranstoun, offered to The Gathering for review
-**Date:** 27 April 2026
+**Date:** 8 May 2026
 **Author:** Tom Cranstoun
 **License:** MIT
 
@@ -4706,6 +4758,8 @@ This note is a draft authored by Tom Cranstoun and offered to The Gathering for 
 - The two fields `contractFields` and `metadataFields` (definitions in §4).
 - The deterministic fingerprint algorithm (§5).
 - Conformance rules and verifier expectations (§6).
+
+The fingerprint algorithm in §5 is generic over any structured object. Although §4 specifies it for cog frontmatter, sister notes that need to sign other MX payloads adopt §5 unchanged; §5.4 makes that adoption pattern explicit. Verifiers built against this note can therefore verify any MX signature uniformly without per-payload variants.
 
 ### 3.2 Out of scope
 
@@ -4902,6 +4956,25 @@ The projection is:
 (Keys sorted lexicographically: `schema`, `title`, `x-mx-thresholds`.)
 
 The fingerprint is `SHA-256` of these bytes.
+
+### 5.4 Application to non-cog payloads
+
+The §5.2 canonicalisation algorithm (project, sort, canonicalise values, serialise as canonical JSON, SHA-256) is generic. It applies unchanged to any structured object an MX sister note specifies for signing, not only to cog frontmatter. A note adopting §5 for a non-cog payload SHOULD declare so explicitly so that signers and verifiers know which canonicalisation to apply.
+
+For non-cog payloads, the §5.2 step 1 "project" step is replaced by an inclusion rule defined by the adopting note. Two patterns recur:
+
+- **Whole-payload canonicalisation.** The adopting note specifies that the entire payload object is canonicalised, with a single named field (typically the signature carrier itself) excluded so that the signature is computed over a payload that does not contain its own signature. The MX Compliance Claims note follows this pattern: the entire claim object is canonicalised excluding the `signature` field.
+- **Field-list canonicalisation.** The adopting note specifies a fixed list of payload fields to include, analogous to `contractFields` for cogs. This pattern is appropriate where the payload carries fields the adopting note classifies as metadata that should not affect the signature.
+
+Whichever pattern the adopting note chooses, the adopting note MUST be precise about: the inclusion rule, whether unlisted keys are included or excluded, and how the rule interacts with future schema evolution. The §5.2 canonicalisation steps themselves do not vary across adopters; only the projection rule is note-specific.
+
+A sister note that adopts §5 inherits the conformance properties of the algorithm: deterministic, portable, recoverable from the canonical bytes alone. Verifiers that implement §5 once can therefore verify cog signatures and non-cog signatures uniformly, given the per-note projection rule as input.
+
+Current adopters:
+
+- **MX Compliance Claims note** — specifies whole-payload canonicalisation for compliance claim signatures, with the `signature` field excluded.
+
+A sister note proposing a new adoption SHOULD coordinate with this note's authors so that the adoption pattern is recorded in the list above and any incompatibility surfaces early.
 
 ---
 
@@ -5164,6 +5237,1766 @@ The signature attests provenance and integrity, not truth (§9). The cog came fr
 ---
 
 *End of MX Contract Fingerprinting and Signing note draft.*
+
+---
+
+## MX Compliance Claims note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-compliance-claims.md
+**File:** `draft-compliance-claims.md`
+
+# MX Compliance Claims note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 8 May 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+---
+
+## 1. Abstract
+
+This note specifies how a digital artefact carries a verifiable claim of conformance to a named external standard. It defines the structure of a compliance claim, the authority model under which a claim is issued, the evidence it must reference, and the rules for expiry and revocation.
+
+A compliance claim is a signed, dated, revocable assertion that a predicate holds true about a subject. The subject is an addressable artefact (a web page, a PDF, a video, an MX cog). The predicate names a published external standard and the conformance level reached. The authority is the party issuing the claim. The evidence is the documented basis on which the claim was made.
+
+The note is deliberately framework-agnostic: it specifies the primitive — a signed, dated, revocable claim about a digital artefact — not any single regulator's rulebook. Mappings from this primitive to specific regimes (WCAG, EU AI Act, sector-specific compliance) are layered on top through predicate vocabularies that the claim references but does not embed.
+
+The note motivates two authority types from the outset: **self-attestation**, where the publisher of the artefact issues a claim about their own work, and **third-party attestation**, where an independent party issues a claim about an artefact they did not produce. Both types use the same claim structure and signature mechanism. The standard specifies what each authority type MUST declare; it does not specify the procedures by which any specific accreditation body admits, monitors, or revokes third-party authorities, leaving that to operators of accreditation programmes built on this standard.
+
+---
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) and [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174) when, and only when, they appear in all capitals, as shown here.
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of this draft set). That pattern governs the structural template for every field and is binding on this note. This note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+A compliance claim claiming conformance to this note SHALL satisfy:
+
+| Level | Name | Claim requirement |
+|-------|------|-------------------|
+| Level 1 | **Self-Attested** | A signed claim with subject identity and hash, predicate identifier and version, authority of type `self` with verifiable signing identity, issuedAt timestamp |
+| Level 2 | **Verified** | Level 1 plus documented evidence (method and report URI with report hash), expiresAt timestamp, and a revocation list URI |
+| Level 3 | **Independently Attested** | Level 2 plus an authority of type `third-party` carrying a declared accreditation reference, where the third-party authority is distinct from the subject's publisher |
+
+A claim of conformance SHALL state the level reached. A claim that does not reach Level 1 is not a claim under this standard.
+
+The three levels are strictly nested: a Level 3 claim satisfies all Level 2 and Level 1 requirements. A consumer of claims MAY reject lower-level claims for high-stakes evaluations, and MAY accept Level 1 claims for low-stakes evaluations such as user-facing badges.
+
+### 2.2 Draft status
+
+This note is a draft authored by Tom Cranstoun and offered to The Gathering for review. It is not a ratified standard. Until The Gathering accepts it, the field definitions, conformance requirements, and normative rules in this note are working drafts — stable enough to build against, expected to evolve through review. Implementations of this draft SHOULD note the draft version number they implemented against.
+
+---
+
+## 3. Scope
+
+### 3.1 In scope
+
+- The structure of a compliance claim: required and optional fields, types, and serialisation.
+- The authority model: `self` and `third-party` authority types, what each MUST declare, and how a third-party authority's accreditation is referenced.
+- The evidence model: how a claim points to a documented basis without embedding it.
+- The expiry and revocation model: how a claim becomes inert.
+- The signature contract: which fields are covered, in what canonical form.
+- The relationship between a claim and the artefact it is about: subject identification and hash binding.
+- Predicate vocabulary requirements: what a published predicate vocabulary MUST declare for a claim to reference it.
+- A worked example mapping the claim structure to the [WCAG 2.2](https://www.w3.org/TR/WCAG22/) Level AA conformance claim.
+
+### 3.2 Out of scope
+
+- **Predicate vocabulary content.** This note does not enumerate the predicates of any specific regulatory regime. WCAG, EU AI Act, sector-specific frameworks, and similar regimes are referenced as predicate vocabularies but are not specified here.
+- **Accreditation programmes for third-party authorities.** Who admits a third-party authority, what bar they must meet, how their accreditation is monitored and revoked — these are operational concerns for accreditation programmes built on this standard, not for the standard itself.
+- **Cryptographic mechanics of signing and verification.** Canonicalisation, signature algorithms, and signature verification procedures defer to the **MX Contract Fingerprinting and Signing note**.
+- **Provenance of the artefact.** Who created the artefact, when, and on what basis is governed by the **MX Provenance note**. A compliance claim assumes provenance metadata may be present but does not redefine it.
+- **Registry mechanics.** How claims are stored, indexed, and looked up by consumers is implementation-defined. This note specifies what a claim contains and how it is verified, not where it lives.
+- **Badge presentation.** How a claim is rendered as a user-facing visual badge is implementation-defined.
+
+### 3.3 Relationship to existing standards
+
+This note relies on:
+
+- **[RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119)** and **[RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)** for normative key words.
+- **[RFC 7515 JSON Web Signature](https://datatracker.ietf.org/doc/html/rfc7515)** for the baseline signature serialisation.
+- **[RFC 8032 EdDSA](https://datatracker.ietf.org/doc/html/rfc8032)** as the RECOMMENDED signature algorithm.
+- **[RFC 8615 Well-Known URIs](https://datatracker.ietf.org/doc/html/rfc8615)** for revocation list discovery.
+- **[ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)** for date and time fields.
+- **[W3C Decentralized Identifiers (DID) v1.0](https://www.w3.org/TR/did-core/)** for authority identifier syntax (informative; the field accepts URIs more broadly).
+- **[C2PA Content Credentials v1.x](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html)** as the recommended interoperability target for content provenance attestations specifically; a claim about content provenance MAY embed or reference a C2PA manifest.
+
+This note relies on the **MX Field Definition Pattern note** for field-definition discipline, the **MX Contract Fingerprinting and Signing note** for the cryptographic contract over the claim payload, and the **MX Provenance note** for prior-art on the difference between a content origin record and a conformance assertion.
+
+This note adds nothing to the standards above; it specifies how they combine for the verifiable-compliance-claim case.
+
+---
+
+## 4. Claim structure
+
+A compliance claim is a structured object carried alongside or within a digital artefact. Implementations MAY serialise the claim as JSON, YAML, or as a JWS payload over JSON; the field set and semantics in this section are normative across serialisations.
+
+### 4.1 Top-level claim object
+
+A claim object MUST declare the following top-level fields:
+
+| Field | Cardinality | Type | Description |
+|-------|-------------|------|-------------|
+| `claimId` | required | string | Stable, globally unique identifier for the claim. RECOMMENDED form: a URI under the issuing authority's domain. |
+| `subject` | required | object | Identification of the artefact the claim is about. See §4.2. |
+| `predicate` | required | object | Identification of the conformance assertion. See §4.3. |
+| `evidence` | required at Level 2+ | object | Documented basis for the claim. See §4.4. |
+| `authority` | required | object | Identification of the issuing party. See §5. |
+| `issuedAt` | required | string (ISO 8601) | Date and time the claim was issued. |
+| `expiresAt` | required at Level 2+ | string (ISO 8601) | Date and time the claim ceases to be valid without further action. |
+| `revocation` | required at Level 2+ | object | Pointer to the revocation list under which this claim's current status can be checked. See §4.5. |
+| `signature` | required | object | The signature over the canonical claim. See §4.6. |
+
+Implementations MAY define additional fields under an extension prefix per the **MX Extensions note**. Implementations MUST NOT redefine or override the fields above.
+
+### 4.2 Subject
+
+The `subject` object identifies the artefact the claim is about. It MUST declare:
+
+| Field | Cardinality | Type | Description |
+|-------|-------------|------|-------------|
+| `uri` | required | string (URI) | Addressable identifier of the artefact. For web artefacts, the canonical URL. For non-web artefacts, a URI of any scheme that can be resolved by a consumer. |
+| `hash` | required | string | Content hash of the artefact at the moment of claim issuance. |
+| `hashAlgorithm` | required | string | The hashing algorithm used. RECOMMENDED: `sha-256`. |
+| `mediaType` | RECOMMENDED | string | The artefact's media type at the moment of claim issuance. |
+
+Where the artefact is an MX cog with a `schema:` annotation, the `hash` field MAY be the contract fingerprint defined by the **MX Contract Fingerprinting and Signing note**. Where it is not, the `hash` field MUST be the hash of the artefact's full byte sequence.
+
+A claim is bound to a specific byte sequence. If the artefact is modified, the prior claim does not transfer; a new claim against the new hash is required. This is intentional and not an implementation defect.
+
+### 4.3 Predicate
+
+The `predicate` object identifies the conformance assertion: which standard, which level, which version. It MUST declare:
+
+| Field | Cardinality | Type | Description |
+|-------|-------------|------|-------------|
+| `vocabulary` | required | string (URI) | URI of the published predicate vocabulary the claim references. |
+| `vocabularyVersion` | required | string | The version of the predicate vocabulary the claim references. |
+| `claim` | required | string | An identifier defined by the predicate vocabulary, naming the specific assertion being made. |
+| `parameters` | OPTIONAL | object | Vocabulary-defined parameters that further qualify the claim (for example a conformance level). |
+
+A predicate vocabulary is any document that declares one or more `claim` identifiers, each with a defined meaning. A predicate vocabulary published outside this standard MUST declare:
+
+- A versioned URI under which it is reachable.
+- For each `claim` identifier: its name, its meaning, the parameters it accepts, and the evidence requirements that an issuer of this `claim` SHOULD meet.
+
+The standard does not constrain who publishes a predicate vocabulary. A regulatory body, a standards organisation, or a sector consortium MAY publish a vocabulary. Consumers of claims judge a claim's weight partly by the vocabulary's source.
+
+### 4.4 Evidence
+
+The `evidence` object documents the basis for the claim. It is OPTIONAL at Level 1 and REQUIRED at Level 2 and above. Where present, it MUST declare:
+
+| Field | Cardinality | Type | Description |
+|-------|-------------|------|-------------|
+| `method` | required | string (enum) | One of: `selfTest`, `automatedScan`, `manualReview`, `independentAudit`. The method by which the claim's basis was established. |
+| `report` | required | string (URI) | Pointer to the evidence report. The report MUST be retrievable by a consumer authorised to evaluate the claim. |
+| `reportHash` | required | string | Content hash of the evidence report at issuance time. |
+| `reportHashAlgorithm` | required | string | The hashing algorithm used for `reportHash`. |
+| `tooling` | OPTIONAL | array of strings | Identifiers (name and version) of any tools used to produce the evidence. |
+
+The `method` enum is not exhaustive; predicate vocabularies MAY define additional values. Vocabulary-defined values MUST be prefixed with the vocabulary's namespace per the **MX Extensions note** to avoid collision.
+
+### 4.5 Revocation
+
+The `revocation` object provides a mechanism for invalidating a claim before its `expiresAt`. It is REQUIRED at Level 2 and above. Where present, it MUST declare:
+
+| Field | Cardinality | Type | Description |
+|-------|-------------|------|-------------|
+| `listUri` | required | string (URI) | URI of the revocation list under which this claim's current status is published. |
+| `checkInterval` | RECOMMENDED | string (ISO 8601 duration) | Recommended polling interval for high-assurance consumers. |
+
+A revocation list is a signed document published by the issuing authority listing all revoked `claimId` values currently within their `expiresAt` window. The signature on the revocation list MUST be verifiable using the same authority identity declared in the claim's `authority.identity` field.
+
+A consumer treating the claim as authoritative SHOULD check the revocation list before relying on the claim. A consumer that does not check the revocation list accepts the risk that a revoked claim is still being treated as valid.
+
+### 4.6 Signature
+
+The `signature` object carries the cryptographic signature over the canonical claim. It MUST declare:
+
+| Field | Cardinality | Type | Description |
+|-------|-------------|------|-------------|
+| `algorithm` | required | string | The signature algorithm. RECOMMENDED: `Ed25519`. |
+| `value` | required | string | The signature value, base64url-encoded. |
+| `publicKey` | RECOMMENDED | string | The public key under which the signature can be verified, in PEM or JWK form. MAY be omitted where the public key is discoverable from `authority.identity`. |
+
+The canonical form of the claim payload over which the signature is computed is defined by the **MX Contract Fingerprinting and Signing note**. The `signature` object itself is not part of the canonical payload.
+
+---
+
+## 5. Authority model
+
+The `authority` object identifies the party issuing the claim. The standard defines two authority types: `self` and `third-party`. Both types use the same `authority` object structure. The semantics of each type, and what each MUST declare, are specified below.
+
+### 5.1 Authority object
+
+The `authority` object MUST declare:
+
+| Field | Cardinality | Type | Description |
+|-------|-------------|------|-------------|
+| `type` | required | string (enum) | Either `self` or `third-party`. |
+| `identity` | required | string (URI) | Identifier of the issuing party. RECOMMENDED forms: a DID, a URI under the issuer's domain, or an https URL serving the issuer's verifiable identity document. |
+| `name` | RECOMMENDED | string | Human-readable name of the issuer. |
+| `accreditation` | required when `type` is `third-party` | object | See §5.3. |
+
+### 5.2 Self-attestation
+
+An authority of type `self` is the publisher of the subject artefact attesting to a property of their own work. Self-attestation is the simplest authority type and the only one available at Level 1 of conformance.
+
+A self-attesting authority MUST satisfy:
+
+- The `authority.identity` field MUST resolve to an identity verifiably associated with the publisher of the subject artefact. A consumer MUST be able to confirm, by a means defined by the publisher's identity scheme, that the signing identity is the publisher's.
+- The signature on the claim MUST be produced by a key controlled by the publisher.
+
+Self-attested claims carry the assurance level of the publisher's identity. They are appropriate for user-facing badges and low-stakes consumer signals. They are not appropriate for evidence-trail use cases where the consumer's interest is in independent confirmation of the publisher's claim.
+
+### 5.3 Third-party attestation
+
+An authority of type `third-party` is a party distinct from the subject artefact's publisher, attesting to a property they have evaluated. Third-party attestation is REQUIRED for Level 3 conformance.
+
+A third-party authority MUST satisfy:
+
+- The `authority.identity` field MUST resolve to an identity verifiably distinct from the publisher of the subject artefact.
+- The signature on the claim MUST be produced by a key controlled by the third-party authority and not by the subject's publisher.
+- The `authority.accreditation` object MUST be present and MUST declare:
+
+| Field | Cardinality | Type | Description |
+|-------|-------------|------|-------------|
+| `body` | required | string (URI) | URI of the accrediting body that certifies the third-party authority for the predicate vocabulary in question. |
+| `reference` | required | string | Identifier under which the third-party authority's accreditation is recorded by the accrediting body. |
+| `validFrom` | required | string (ISO 8601) | Date the accreditation became effective. |
+| `validUntil` | required | string (ISO 8601) | Date the accreditation expires. |
+| `lookupUri` | RECOMMENDED | string (URI) | URI under which a consumer can verify the accreditation in real time. |
+
+The standard does not specify who runs an accrediting body, what bar a third-party authority MUST meet to be accredited, or how an accrediting body monitors and revokes accreditations. These are operational concerns for accreditation programmes built on this standard. The standard requires only that the claim declare the accreditation reference verifiably, so that a consumer can decide whether to trust the accrediting body.
+
+A consumer evaluating a Level 3 claim SHOULD:
+
+1. Verify the claim's signature against the third-party authority's identity.
+2. Resolve the accreditation reference and confirm the accreditation is current (within `validFrom` and `validUntil` and not revoked).
+3. Independently judge whether the accrediting body is one whose accreditations the consumer accepts.
+
+The third step is the consumer's own decision and is not constrained by the standard. A consumer MAY accept claims accredited by some bodies and not others.
+
+### 5.4 Authority hash separation
+
+The standard intentionally separates authority verification (the claim is signed by the declared issuer) from accreditation verification (the issuer is accredited to make this kind of claim). Both verifications are independent. A claim MAY be signed by a verifiable identity that is not accredited, in which case it is a malformed Level 3 claim and consumers SHOULD treat it as Level 1 at most.
+
+---
+
+## 6. Predicate vocabularies
+
+A predicate vocabulary defines the meaning of `predicate.claim` identifiers. This note does not constrain the content of any predicate vocabulary; it specifies the structural requirements a vocabulary MUST satisfy to be referenced by a compliant claim.
+
+### 6.1 Vocabulary requirements
+
+A predicate vocabulary that is referenced by a compliance claim MUST:
+
+- Be reachable at a stable, versioned URI.
+- Carry an explicit version identifier that distinguishes successive revisions.
+- For each defined `claim` identifier, declare:
+  - The identifier's exact spelling and case.
+  - The conformance condition the identifier asserts.
+  - The parameters the identifier accepts (with their types and meanings).
+  - The evidence method or methods that are appropriate for the identifier (one or more of the values in §4.4 or vocabulary-defined extensions).
+
+Vocabularies SHOULD additionally declare:
+
+- A normative reference to the external standard the vocabulary describes (the standard whose conformance the claims assert).
+- An expiry policy stating the recommended `expiresAt` window for claims using the vocabulary.
+
+A claim MUST cite the vocabulary version it was issued against. Vocabularies SHOULD use semantic-style versioning so consumers can reason about compatibility across versions.
+
+### 6.2 Worked example: WCAG 2.2 Level AA
+
+The following illustrates a Level 2 self-attested claim asserting that a web page meets the [WCAG 2.2](https://www.w3.org/TR/WCAG22/) Level AA conformance requirements as evaluated by an automated scan.
+
+```yaml
+claimId: https://example.com/.well-known/mx/claims/2026-05-08-home-wcag22-aa
+subject:
+  uri: https://example.com/
+  hash: 4b5c0a8d3e7f1c9b6a2d4e8f0c1b3a5d7e9f1c3b5a7d9e1f3c5b7a9d1e3f5c7b
+  hashAlgorithm: sha-256
+  mediaType: text/html
+predicate:
+  vocabulary: https://example.org/vocabularies/wcag-2.2-mx.v0.1
+  vocabularyVersion: "0.1"
+  claim: wcagConformance
+  parameters:
+    level: AA
+    wcagVersion: "2.2"
+evidence:
+  method: automatedScan
+  report: https://example.com/.well-known/mx/evidence/2026-05-08-home-wcag22-aa.json
+  reportHash: 9a1c3e5b7d9f1a3c5e7b9d1f3a5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c
+  reportHashAlgorithm: sha-256
+  tooling:
+    - "axe-core 4.9.1"
+authority:
+  type: self
+  identity: https://example.com/.well-known/mx/identity.json
+  name: "Example Publisher Ltd"
+issuedAt: 2026-05-08T10:30:00Z
+expiresAt: 2027-05-08T10:30:00Z
+revocation:
+  listUri: https://example.com/.well-known/mx/revocations.json
+  checkInterval: P1D
+signature:
+  algorithm: Ed25519
+  value: "qS9PvL7eZ0kTu4yX3fA1nM6dC8bV2lH5gW0rJ4iE7sQ_..."
+```
+
+The same claim, issued by an independent third-party authority accredited by an accreditation body, would carry an `authority` object of:
+
+```yaml
+authority:
+  type: third-party
+  identity: did:web:auditor.example.org
+  name: "Independent Audit Co"
+  accreditation:
+    body: https://accreditation-body.example.org/
+    reference: "ACR-2026-7842"
+    validFrom: 2026-01-01
+    validUntil: 2027-12-31
+    lookupUri: https://accreditation-body.example.org/registry/ACR-2026-7842
+```
+
+This second form satisfies Level 3 of conformance because the `authority.type` is `third-party`, the `authority.identity` is distinct from the subject's publisher, and a verifiable accreditation reference is declared. A consumer who accepts accreditations from `accreditation-body.example.org` would treat this as a stronger evidence trail than the self-attested form.
+
+The standard does not name the WCAG predicate vocabulary's publisher. A vocabulary mapping WCAG 2.2 conformance into the MX claims structure may be published by W3C, by an accessibility consortium, by an accreditation body, or by any party meeting §6.1's requirements. Consumers judge weight by the vocabulary's provenance.
+
+### 6.3 Vocabulary discoverability
+
+A claim MAY include a copy of the predicate vocabulary's metadata (its title, version, and publisher) inline as informational fields under an extension prefix. Inline copies are not normative; the canonical reference is the `predicate.vocabulary` URI. A consumer MUST resolve the URI to determine the binding meaning of the claim.
+
+---
+
+## 7. Why a separate compliance-claims standard
+
+A reader may reasonably ask whether existing standards already cover this ground. They cover adjacent ground; none cover this exactly.
+
+[C2PA Content Credentials](https://c2pa.org/) specify how a content asset carries claims about its origin and modification history. They are tightly bound to media files (images, video, audio) and the C2PA manifest format. The MX Compliance Claims structure is broader: it covers any addressable artefact (a web page, an HTML document, an MX cog, a PDF, a dataset) and any predicate vocabulary (not only provenance assertions). A claim under this standard MAY embed a C2PA manifest as evidence, and a C2PA manifest MAY be the basis for a claim issued under this standard. The two are complementary.
+
+[Verifiable Credentials (W3C VC) v2.0](https://www.w3.org/TR/vc-data-model-2.0/) specify a general model for credentials: an issuer asserts that a subject has properties, and the assertion is signed and verifiable. The VC model is more general than what a compliance claim needs and less specific about the dimensions the compliance use case requires (subject hashing, evidence URIs and report hashes, expiry-and-revocation defaults, predicate vocabularies as a first-class concept). A compliance claim under this note MAY be expressed as a Verifiable Credential by mapping the fields above to the VC model; the standard does not require that mapping but does not prohibit it.
+
+[XAdES](https://www.w3.org/TR/XAdES/) and [PAdES](https://www.etsi.org/deliver/etsi_en/319100_319199/31914201/) specify advanced electronic signature formats for XML and PDF respectively. They describe how a signature is formatted and bound to the carrier. They do not specify the claim being signed. A compliance claim under this note MAY be signed using PAdES inside a PDF, but the claim's structure (subject, predicate, evidence, authority, expiry, revocation) is what this note defines.
+
+Regulatory regimes (the EU AI Act's Article 13 transparency obligations, the European Accessibility Act's conformity assessments, sector-specific compliance) prescribe what evidence a regulated party MUST produce. They do not prescribe a portable, machine-readable, signed envelope for that evidence. The MX Compliance Claims structure is the envelope. A given regulatory regime is one possible predicate vocabulary; the standard supports any.
+
+The combination of these gaps is the reason for a separate note. A reader who needs only one of these capabilities should use the matching existing standard. A reader who needs the combination — a portable, signed, dated, revocable, predicate-flexible claim about an arbitrary digital artefact — has not, until this note, had a single standard to point to.
+
+---
+
+## 8. Implementation guidance (informative)
+
+This section is informative; it is not a normative part of the standard.
+
+### 8.1 Claim discovery
+
+A consumer who has an artefact's URI but not yet a claim about it can discover claims through several patterns:
+
+- **Well-known URI.** The artefact's host serves a `claims.json` (or similar) under `/.well-known/mx/` listing claims about the host's content. RFC 8615 governs the well-known prefix.
+- **In-band reference.** The artefact carries a `link rel="mx-compliance-claim"` (HTML), an XMP property (PDF), or an analogous carrier-format mechanism per the **MX Carrier Formats note** pointing at the claim.
+- **Registry lookup.** A claim registry indexes claims by subject URI; the consumer queries the registry. This pattern is not part of the standard but is a common implementation.
+
+The standard does not mandate a discovery mechanism; an artefact MAY be served with claims through any combination of the above.
+
+### 8.2 Issuance pipeline
+
+A typical issuance pipeline:
+
+1. The publisher freezes the artefact (commits the bytes, generates the hash).
+2. The publisher (for self-attestation) or the third-party authority (for third-party attestation) runs the evidence method against the artefact and produces an evidence report.
+3. The issuer composes the claim object: subject, predicate, evidence, authority, issuedAt, expiresAt, revocation pointer.
+4. The issuer canonicalises the claim payload per the **MX Contract Fingerprinting and Signing note**, signs it with their key, and attaches the signature.
+5. The issuer publishes the claim alongside the artefact (or in a registry pointed at by the artefact).
+6. The issuer retains the signing material and is prepared to publish revocations on the declared revocation list.
+
+For high-volume publishers, steps 1 to 4 are commonly automated as part of a build pipeline. For audit-grade third-party claims, steps 2 and 3 are manual and reviewed.
+
+### 8.3 Verification pipeline
+
+A typical verification pipeline:
+
+1. Resolve the claim from the artefact (or from the claim's own URI).
+2. Recompute the subject hash from the artefact and confirm it matches `subject.hash`. If it does not, the claim does not apply to the bytes the consumer has.
+3. Resolve `authority.identity` and obtain the public key.
+4. Verify the signature on the canonical claim payload.
+5. For Level 2+: confirm `issuedAt <= now <= expiresAt`.
+6. For Level 2+: fetch the revocation list from `revocation.listUri`, verify its signature, and confirm the `claimId` is not present.
+7. For Level 3: fetch the accreditation reference from `authority.accreditation.lookupUri` (or `body`) and confirm the accreditation is current.
+8. Resolve `predicate.vocabulary` and `predicate.vocabularyVersion` to determine the binding meaning of `predicate.claim`.
+9. Decide, based on the consumer's policy, whether to accept the claim.
+
+The verification pipeline is implementation-defined in detail; the steps above are the typical shape.
+
+### 8.4 Revocation policy
+
+A practical revocation policy:
+
+- The revocation list is published at a stable URI and refreshed at a known cadence.
+- Each revocation entry carries the `claimId`, the `revokedAt` timestamp, and a `reason` field with a vocabulary-defined value.
+- The revocation list is signed by the same authority as the claims it revokes.
+- When an artefact is updated, prior claims about the older bytes are not automatically revoked; they remain valid for the bytes they were issued against. New claims are issued against the new bytes. Consumers verifying step 2 of §8.3 will detect that an old claim does not apply to new bytes without needing the revocation list.
+
+---
+
+## 9. Security and privacy considerations
+
+This section is normative.
+
+### 9.1 Signature compromise
+
+If an authority's signing key is compromised, all claims signed by that key are suspect. The authority MUST revoke all outstanding claims and MUST publish a key compromise notice at the same URI as the revocation list. Consumers who have cached claims from the compromised authority SHOULD re-evaluate them on next use.
+
+The standard does not require key rotation on a fixed schedule; it requires that the authority be operationally able to revoke the entire claim set on key compromise.
+
+### 9.2 Subject substitution
+
+A consumer who fails to recompute and compare the subject hash (step 2 of §8.3) accepts the risk that the bytes it has are not the bytes the claim was issued against. This failure mode is the most likely source of false-positive verifications and SHOULD be hard-coded into any compliant verification implementation.
+
+### 9.3 Evidence retrieval
+
+The `evidence.report` URI may be private (auditor-held, regulator-held) or public. A consumer who lacks authorisation to retrieve the evidence MAY still verify the claim's signature and binding to the subject; it cannot independently inspect the basis. This is an intentional two-tier model: signature verification is universal, evidence inspection is conditional.
+
+A consumer that requires evidence inspection (a regulator, an internal compliance team) MUST establish access to the evidence URI through a means out of scope here.
+
+### 9.4 Privacy
+
+A claim necessarily exposes:
+
+- The fact that the subject artefact was claimed against a specific predicate.
+- The identity of the authority.
+- The hash of the subject at issuance time.
+
+A claim does not necessarily expose:
+
+- The content of the evidence report (governed by `evidence.report` access control).
+- The identity of human reviewers within the authority (governed by what the authority chooses to publish).
+
+Where claim publication itself raises privacy concerns (a claim about a private dataset's GDPR conformance, for example), the issuer MAY publish the claim only to authorised consumers via access-controlled distribution, accepting that the claim is then not a public attestation. The standard accommodates both modes.
+
+### 9.5 Replay and reuse
+
+A claim is bound to a specific subject hash and has a specific `claimId` and `issuedAt`. It cannot be replayed against a different subject without breaking the signature. It can, however, be presented to multiple consumers; this is intentional. Consumers MUST NOT treat a claim as freshly issued to them; they MUST evaluate `issuedAt`, `expiresAt`, and revocation against current time.
+
+### 9.6 Vocabulary substitution
+
+A predicate vocabulary's URI is referenced but not embedded. A vocabulary publisher who modifies the meaning of an existing `claim` identifier without bumping `vocabularyVersion` undermines all outstanding claims against that identifier. Vocabulary publishers MUST treat existing identifiers as immutable within a version and MUST bump `vocabularyVersion` on any change to identifier meaning.
+
+Consumers SHOULD pin to specific `vocabularyVersion` values for high-stakes evaluations and re-evaluate on vocabulary upgrade.
+
+---
+
+## 10. IANA considerations
+
+This note proposes no new IANA registrations.
+
+A future revision MAY propose:
+
+- A `mx-compliance-claim` link relation type for in-band claim references.
+- A `application/mx-compliance-claim+json` media type for serialised claims.
+- A `/.well-known/mx/claims/` URI suffix.
+
+These are deferred to a later revision once implementation experience justifies the registration.
+
+---
+
+## 11. References
+
+### 11.1 Normative
+
+- [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) — Key words for use in RFCs.
+- [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174) — Ambiguity of uppercase vs lowercase in RFC 2119 key words.
+- [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515) — JSON Web Signature (JWS).
+- [RFC 8032](https://datatracker.ietf.org/doc/html/rfc8032) — Edwards-Curve Digital Signature Algorithm (EdDSA).
+- [RFC 8615](https://datatracker.ietf.org/doc/html/rfc8615) — Well-Known Uniform Resource Identifiers.
+- [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) — Date and time format.
+
+### 11.2 Informative
+
+- [W3C Decentralized Identifiers (DID) v1.0](https://www.w3.org/TR/did-core/) — Identifier syntax for decentralised authorities.
+- [W3C Verifiable Credentials Data Model v2.0](https://www.w3.org/TR/vc-data-model-2.0/) — General-purpose credential model that compliance claims MAY be expressed under.
+- [C2PA Content Credentials](https://c2pa.org/) — Content provenance manifests; relevant for claims whose predicate concerns content origin.
+- [W3C WCAG 2.2](https://www.w3.org/TR/WCAG22/) — Web Content Accessibility Guidelines, used as the worked predicate vocabulary in §6.2.
+- MX Field Definition Pattern note — Field-definition discipline this note adopts.
+- MX Contract Fingerprinting and Signing note — Canonicalisation and signature mechanics this note defers to.
+- MX Provenance note — Content origin and stewardship vocabulary.
+- MX Carrier Formats note — Carrier-format mappings for claim references in HTML, PDF, and other formats.
+
+---
+
+## 12. Acknowledgements
+
+This note builds on prior work in C2PA Content Credentials, W3C Verifiable Credentials, and the broader content-attestation community. It is informed by the practical experience of issuing and verifying conformance claims in regulated content programmes over many years, and by the gap-analysis exercise that motivated its drafting in early 2026.
+
+---
+
+## MX Attestation Records and Verification note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-attestation-records.md
+**File:** `draft-attestation-records.md`
+
+# MX Attestation Records and Verification note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 15 May 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+---
+
+## 1. Abstract
+
+This note specifies the **attestation record** — a cog produced by an MX trust layer that wraps another cog with cryptographic apparatus. The attestation record references the attested cog by ID and digest; the attested cog is unchanged. A cog can be unattested, attested by one trust layer, or attested independently by several, without any change to its schema or bytes.
+
+The note defines the record's fields, the relationship between the attestation and the cog it covers, and the verification model: trust layers **produce** attestations on submission and **serve** them on retrieval; verification is a client-side operation against existing standards. The registry serves; verifiers verify.
+
+The signing and canonicalisation mechanics referenced here are inherited unchanged from the **MX Contract Fingerprinting and Signing note**; this note specifies only the record format and the lifecycle around it.
+
+---
+
+## 2. Conformance
+
+The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) and [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) when, and only when, they appear in all capitals.
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of the draft set). That pattern governs the structural template for every field; this note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+A trust layer or verifier claiming conformance to this note SHALL satisfy:
+
+- **Level 1 (record format)** — Produced attestation records carry the §4.2 fields, well-formed; absent fields are not silently defaulted.
+- **Level 2 (verification correctness)** — Level 1 plus: a verifier resolves the attested cog by ID and digest, recomputes the fingerprint per the MX Contract Fingerprinting and Signing note §5, and surfaces any mismatch as an explicit failure.
+- **Level 3 (independent verifiability)** — Level 2 plus: the attestation record can be verified offline given the attested cog, the record, and the public key material referenced by `issuedBy`, with no live call to the issuing trust layer.
+
+A claim of conformance SHALL state the level reached.
+
+### 2.2 Draft status
+
+This is a draft note. Conformance levels and field semantics MAY change in response to community review. Implementations SHOULD note the draft version they implemented against.
+
+---
+
+## 3. Scope
+
+### 3.1 In scope
+
+- The fields of an attestation record (§4.2).
+- The reference direction between an attestation and the cog it attests (§4.1).
+- The lifecycle around production, retrieval, and verification (§4.3–§4.5).
+- The batching mechanism for high-volume attestation (§4.6), inheriting Merkle-tree mechanics from existing publications.
+
+### 3.2 Out of scope
+
+- The fingerprint algorithm itself — defers to the **MX Contract Fingerprinting and Signing note** §5.
+- Signature algorithms (Ed25519, ECDSA, RSA, post-quantum) — defer to [W3C VC Data Integrity](https://www.w3.org/TR/vc-data-integrity/), [JWS (RFC 7515)](https://datatracker.ietf.org/doc/html/rfc7515), or [COSE (RFC 9052)](https://datatracker.ietf.org/doc/html/rfc9052).
+- DID method specifics for `issuedBy` — defer to [W3C DID Core](https://www.w3.org/TR/did-core/).
+- Key management, distribution, rotation, and revocation infrastructure — open questions (§7).
+- Compliance claims about external standards — owned by the **MX Compliance Claims note**.
+
+### 3.3 Relationship to existing standards
+
+| Standard | Relationship |
+|----------|--------------|
+| [MX Contract Fingerprinting and Signing note](draft-contract-fingerprinting.md) | Defines the canonicalisation and signing model this note builds on. The attestation record carries the signature; §5 of the sister note specifies what was signed. |
+| [MX Compliance Claims note](draft-compliance-claims.md) | Adjacent: a compliance claim *is* a signed cog and MAY itself be wrapped in an attestation record by a trust layer. |
+| [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) | Date and time format used by `issuedAt`. |
+| [W3C DID Core](https://www.w3.org/TR/did-core/) | Identifier format used by `issuedBy` and by the key reference inside `signature`. |
+| [RFC 6962](https://datatracker.ietf.org/doc/html/rfc6962) | Certificate Transparency Merkle-tree mechanics — referenced by §4.6 batching. |
+
+---
+
+## 4. Attestation records and verification
+
+### 4.1 Position
+
+An attestation record is produced by a trust layer — an MX registry operator — and wraps a cog with cryptographic apparatus. The cog itself is unchanged. The attestation references the cog by ID and digest.
+
+The cog is data. The attestation is the trust wrapper. The two are deliberately separated (§3.1): a cog can be unattested, attested by one registry, or attested by a different registry, without any change to the cog's schema or bytes.
+
+A trust layer does not verify attestations. It produces them on submission and serves them on retrieval. Verification is a client-side operation against existing standards. The registry serves; verifiers verify.
+
+### 4.2 Attestation record fields
+
+An attestation record is itself a cog. It declares `contentType: attestation` in its `mx:` frontmatter (per the **MX Core Metadata note**). It carries `cogUrn` (the universal identifier of the attestation record itself, in the trust layer's namespace) and `schemaVersion` per the **MX Cogs note** §6.5.3 and §6.5.4. This note specifies the attestation-specific top-level fields below.
+
+| Field | Semantics |
+|-------|-----------|
+| `attests` | Reference to the cog being attested. Object with `cogUrn` (the attested cog's universal identifier) and `digest` (the SHA-256 of the attested cog's JCS-canonicalised bytes). Batch-root attestations replace `cogUrn`/`digest` with `merkleRoot`, `leafCount`, and `hashFunction`; see §4.6. |
+| `issuedBy` | DID of the trust-layer operator (the registry instance that produced the attestation). |
+| `issuedAt` | [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) timestamp of attestation. |
+| `mechanism` | One of `individual` or `merkleBatch`; see §4.6 for batching. |
+| `signature` | When `mechanism: individual` (and for batch-root attestations under `merkleBatch`): signature over the attested digest, with algorithm identifier and key reference (DID URL). |
+| `batch` | When the record is a per-cog leaf under `merkleBatch`: a `rootAttestation` reference, a `leafIndex`, and an inclusion `proof` array (see §4.6). |
+
+The attestation references the cog by `cogUrn` and digest. The cog does not reference the attestation. This direction matters: a cog can exist without any attestation, and multiple independent attestations of the same cog by different trust layers can coexist without any of them being privileged inside the cog itself.
+
+### 4.3 Production
+
+*(To be drafted: the lifecycle of producing an attestation on submission to a trust layer — what the trust layer MUST check, what it MUST refuse, and what it serialises into the attestation record.)*
+
+### 4.4 Retrieval
+
+*(To be drafted: how a verifier discovers attestations for a given cog. Discovery patterns expected to cover: well-known registry endpoints, sidecar files, in-cog hint fields pointing outward to the registry.)*
+
+### 4.5 Verification
+
+*(To be drafted: the verifier's algorithm — fetch attested cog, recompute fingerprint per the MX Contract Fingerprinting and Signing note §5, resolve `issuedBy` key material, verify signature, surface any mismatch as explicit failure.)*
+
+### 4.6 Batching: `merkleBatch`
+
+*(To be drafted: Merkle-tree batching for high-volume issuance — when one signed root covers a batch of attested cogs and each individual attestation carries an inclusion proof. Modelled on [RFC 6962](https://datatracker.ietf.org/doc/html/rfc6962) Certificate Transparency.)*
+
+---
+
+## 5. *(Reserved for §5)*
+
+*(No content yet. Drop this heading before publishing if no §5 is needed.)*
+
+---
+
+## 6. *(Reserved for §6)*
+
+*(No content yet. Drop this heading before publishing if no §6 is needed.)*
+
+---
+
+## 7. Open questions
+
+The following remain open for community discussion:
+
+1. **Key rotation** — when the key material referenced by `issuedBy` rotates, how does a verifier distinguish a rotation from a revocation, and how are historical attestations validated against retired keys?
+2. **Revocation** — how does a verifier discover that a previously valid attestation has been revoked? CRL, OCSP, on-chain registry, an MX registry endpoint?
+3. **Cross-registry attestation** — when two trust layers independently attest the same cog, MAY a verifier treat them as additively strengthening trust, or are they always independent claims?
+4. **Trust-layer discovery** — how does a verifier discover *which* trust layers have attested a given cog without prior knowledge of those trust layers?
+
+---
+
+## 8. Implementation guidance (informative)
+
+*This section is informative; it is not a normative part of the standard.*
+
+### 8.1 Producing an attestation
+
+*(To be drafted.)*
+
+### 8.2 Verifying an attestation offline
+
+*(To be drafted: the canonical verification pipeline — fetch cog, recompute fingerprint, resolve DID, verify signature, surface result.)*
+
+### 8.3 Verification
+
+*(To be drafted: shell-level commands or other independently runnable checks a verifier can use to confirm conformance.)*
+
+---
+
+## 9. Security and privacy considerations
+
+- An attestation record asserts only that the trust-layer operator named in `issuedBy` produced the record at `issuedAt` and that the attested digest matches the cog at that moment. It does not assert that the cog's values are factually correct, sound, or current. The narrowness is intentional and inherits the rationale from the **MX Contract Fingerprinting and Signing note** §9.
+- A trust layer that produces attestations without first checking the cog passes the mandatory-fields check in the **MX Contract Fingerprinting and Signing note** §4.3 produces records whose semantics are degraded; verifiers presented with such records cannot tell from the record alone whether the check was performed. Trust layers SHOULD record, and MAY surface in the attestation, evidence that the pre-signature review pipeline ran.
+- The attestation record contains the attested cog's digest, the issuer DID, and a timestamp. A verifier in possession of the record alone can learn which cog was attested, by whom, and when, even without access to the cog body. This is a deliberate property of the format — it is also a privacy consideration in contexts where the attested cog is private.
+- Batching mechanics (§4.6) trade per-cog signature cost against the risk that compromise of a batch root invalidates every member of the batch. Trust layers using `merkleBatch` SHOULD document their batch size policy and the consequences of a compromised root.
+
+---
+
+## 10. IANA considerations
+
+This note proposes no new IANA registrations.
+
+---
+
+## 11. References
+
+### 11.1 Normative references
+
+- [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119), [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) — keywords for use in RFCs to indicate requirement levels.
+- [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) — Date and Time on the Internet: Timestamps.
+- [W3C DID Core](https://www.w3.org/TR/did-core/) — Decentralised Identifiers (DIDs) v1.0.
+- **MX Contract Fingerprinting and Signing note** — canonicalisation, fingerprint, and signing model on which this note builds.
+- **MX Core Metadata note** — Zone 1 / Zone 2 frontmatter, `contentType`, `version`.
+
+### 11.2 Informative references
+
+- [W3C Verifiable Credentials Data Integrity](https://www.w3.org/TR/vc-data-integrity/) — compatible signing model.
+- [JWS RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515) — JSON Web Signature.
+- [COSE RFC 9052](https://datatracker.ietf.org/doc/html/rfc9052) — CBOR Object Signing and Encryption.
+- [RFC 6962](https://datatracker.ietf.org/doc/html/rfc6962) — Certificate Transparency, the model behind §4.6 batching.
+- [C2PA Content Credentials](https://c2pa.org/) — compatible model for signing assertions about content provenance.
+
+---
+
+*End of MX Attestation Records and Verification note draft.*
+
+---
+
+## MX Decision Records note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-decision-records.md
+**File:** `draft-decision-records.md`
+
+# MX Decision Records note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 17 May 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+---
+
+## 1. Abstract
+
+This note specifies the **decision record** — a cog produced by an operator of an automated decision system that records one decision (or one batched group of decisions) against the policy in force at the time. The record carries enough metadata for an auditor to reason about whether the published policy was followed at the moment the decision was made; it does not carry the decision's input data, nor does it assert the correctness of the decision.
+
+The note defines the record's fields, the relationship between a decision record and the policy it cites, and the boundary between what the record claims (an event occurred, against a named policy version, with a named model) and what it does not claim (that the decision was correct, that the model was suitable, or that the policy itself was sound).
+
+Decision records combine with **MX Policy Records note** (the cited policy) and **MX Attestation Records and Verification note** (the cryptographic wrapper around the record) to give regulators, auditors, and subjects of decisions a queryable evidence chain. Each of those three records is a separate cog joined by reference; none of them substitutes for any of the others.
+
+---
+
+## 2. Conformance
+
+The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) and [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) when, and only when, they appear in all capitals.
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of the draft set). That pattern governs the structural template for every field; this note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+An operator or consumer claiming conformance to this note SHALL satisfy:
+
+- **Level 1 (record format)** — Produced decision records carry the §4.2 required fields, well-formed; absent fields are not silently defaulted. Field names follow `camelCase`.
+- **Level 2 (referential integrity)** — Level 1 plus: every `policyRef` resolves to an existing policy record at the `policyRef.version` named, and the policy record's `effectiveFrom` is at or before the decision's `issued` timestamp.
+- **Level 3 (completeness signalling)** — Level 2 plus: records declare a `sequence` field that monotonically increases per `(model, inputClass)` pair, supporting gap-detection by consumers.
+
+A claim of conformance SHALL state the level reached.
+
+### 2.2 Draft status
+
+This is a draft note. Conformance levels and field semantics MAY change in response to community review. Implementations SHOULD note the draft version they implemented against.
+
+---
+
+## 3. Scope
+
+### 3.1 In scope
+
+- The fields of a decision record (§4.2).
+- The reference direction between a decision record and the policy it cites (§4.4).
+- The boundary between what the record claims and what it does not (§4.5, §4.6).
+- The relationship to the cited policy record (§4.4) and to a wrapping attestation record (§5).
+
+### 3.2 Out of scope
+
+- Cryptographic apparatus over the record — signatures, batch roots, inclusion proofs — defer to the **MX Attestation Records and Verification note**.
+- The schema of the cited policy itself — defers to the **MX Policy Records note**.
+- Privacy treatment of the record's body content (`outputSummary`, human-readable description) where it contains personal data. Compliance with [GDPR Article 5(1)(c)](https://gdpr-info.eu/art-5-gdpr/) data minimisation is the operator's responsibility, not this note's.
+- Subject-counter-signing mechanisms by which a subject corroborates a decision; that lives in a future companion note.
+- Sector-specific profiles (financial services, medical devices, employment) — these are downstream specialisations, not core record semantics.
+
+### 3.3 Relationship to existing standards
+
+| Standard | Relationship |
+|----------|--------------|
+| **MX Cogs note** | Decision records are cogs. The universal cog fields (`cogUrn`, `schemaVersion`, `partOf`) apply per the MX Cogs note. |
+| **MX Core Metadata note** | Doc-identity fields (`title`, `description`, `author`, `created`, `modified`) apply per the MX Core Metadata note. |
+| **MX Policy Records note** | A decision record's `policyRef` resolves against a policy record. |
+| **MX Attestation Records and Verification note** | A trust-layer attestation wraps a decision record by reference; the decision record itself carries no cryptographic apparatus. |
+| [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) | Date and time format used by `issued`. |
+| [W3C DID Core](https://www.w3.org/TR/did-core/) | Identifier format used by `operator`. |
+| [SHA-256](https://datatracker.ietf.org/doc/html/rfc6234) | Hash function used by `inputHash`. |
+| [ULID](https://github.com/ulid/spec) | RECOMMENDED form for the local-id portion of `decisionId`. |
+
+---
+
+## 4. Decision records
+
+### 4.1 Position
+
+A decision record is a structured statement of one decision made by an automated system, sufficient to let an auditor reason about whether the published policy was followed at that moment. The record carries identification, the citation of the policy in force, the model that made the decision, an input commitment (a hash, not the input itself), and a short factual description of the output.
+
+A decision record records **what** the system decided. It does not claim that the decision was correct, that the model was suitable, or that the policy itself was sound. It is a faithful record of an event, nothing more.
+
+The record is carrier-neutral. The fields and their semantics are what constitute the record, not the file format. Any carrier that can hold the fields validly is acceptable: a Markdown file with YAML frontmatter, a JSON document, an HTML page with `<meta>` and JSON-LD, a database row's metadata column, or a log line. The Markdown carrier wraps every field below `mx:` per the MX Cogs note; other carriers express the same fields without that envelope.
+
+### 4.2 Required fields
+
+A decision record declares `contentType: decision` in its `mx:` frontmatter. The following fields are REQUIRED for a valid decision record regardless of carrier. Field names follow `camelCase`.
+
+| Field | Type | Semantics |
+|-------|------|-----------|
+| `contentType` | string | Fixed value: `decision`. |
+| `schemaVersion` | string | Semver of the decision-record schema this record conforms to (per **MX Cogs note** §6.5.4). |
+| `cogUrn` | string | Universal identifier in the form `cog:<operator-namespace>:<local-id>` (per **MX Cogs note** §6.5.3). |
+| `decisionId` | string | Operator's internal reference to the decision event; time-sortable. ULIDs are RECOMMENDED. Usually equals the `<local-id>` portion of `cogUrn`. |
+| `operator` | string | DID or resolvable identifier of the operator (the AI system's deployer or controller). |
+| `issued` | string | [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) timestamp of the decision. |
+| `policyRef` | object | Reference to the policy record in force: registry URI, policy `cogUrn`, version, optional clause fragment. See §4.4. |
+| `model` | object | Model identifier, version, and reference to the model card. See §4.3. |
+| `inputHash` | string | SHA-256 of the canonicalised input. The input itself stays with the operator. |
+| `inputClass` | string | Operator-defined category of input. Supports sequence-based completeness reasoning per §6. |
+| `outputSummary` | string | Short factual description of the output. Human-readable. |
+| `humanInLoop` | object | Whether human review was required, whether it fired, and an opaque reviewer reference. See §4.5. |
+
+The following field is OPTIONAL but RECOMMENDED:
+
+| Field | Type | Semantics |
+|-------|------|-----------|
+| `sequence` | integer | Per-`(model, inputClass)` monotonically increasing counter. Enables consumers to detect missing records by inspecting for gaps. See §6. |
+
+A decision record MUST NOT carry trust-wrapper apparatus inline. Signatures, batch roots, and inclusion proofs live in a separate attestation record per the **MX Attestation Records and Verification note**, referencing the decision record by `cogUrn` and content digest. There is no `attestation` field on a decision record; there is no `batchRef` field.
+
+### 4.3 The `model` block
+
+The `model` field is an object with the following sub-fields:
+
+| Sub-field | Type | Semantics |
+|-----------|------|-----------|
+| `id` | string | Stable identifier for the model (vendor namespace plus model name). |
+| `version` | string | Version identifier of the specific model instance that produced the decision. |
+| `cardRef` | string | `cogUrn` of the model card record that documents this model. |
+
+The `model.cardRef` MUST resolve to a record describing the model (training data, evaluation, intended use). The decision record cites the model card by reference; it does not embed the model card.
+
+### 4.4 The `policyRef` block
+
+The `policyRef` field is an object with the following sub-fields:
+
+| Sub-field | Type | Semantics |
+|-----------|------|-----------|
+| `registry` | string | URI of the registry that serves the cited policy record. |
+| `cogUrn` | string | `cogUrn` of the policy record being cited. |
+| `version` | string | Semver of the policy version in force at decision time. |
+| `clause` | string | OPTIONAL. Fragment identifier of the specific clause within the policy. |
+
+A `policyRef` resolves against the policy record as it stood at the decision's `issued` timestamp. Consumers performing time-pinned resolution use the registry's `asOf` query semantics to retrieve the version that was current at that moment, not whichever version is current today. The policy record's schema is specified by the **MX Policy Records note**.
+
+### 4.5 The `humanInLoop` block
+
+The `humanInLoop` field is an object with the following sub-fields:
+
+| Sub-field | Type | Semantics |
+|-----------|------|-----------|
+| `required` | boolean | Whether the operator's policy required human review for this decision. |
+| `fired` | boolean | Whether human review actually took place. |
+| `reviewerRef` | string | OPTIONAL. Opaque reference to the reviewer (an internal identifier, not a name). |
+
+When `required` is `true` and `fired` is `false`, the record is honestly signalling that policy-mandated review did not occur. This is a record of fact, not a defence; consumers reasoning about the record draw their own conclusions about whether the policy was followed.
+
+### 4.6 Human-readable description
+
+A decision record MUST include a human-readable description, in whatever way the carrier supports. In Markdown carriers, this is the body of the cog below the frontmatter. In JSON, this is a top-level `description` field. In HTML, this is the visible page content.
+
+The description is part of the canonicalised payload. Where a trust layer attests the record per the **MX Attestation Records and Verification note**, the description is included in the signed bytes.
+
+The description makes the record reviewable by humans — including the subject of the decision, where law requires that — without parsing the structured metadata.
+
+### 4.7 Illustrative expression
+
+The same record in the Markdown carrier:
+
+```yaml
+---
+title: "Decision: claim-2026-05-15-184729"
+description: "Routine insurance claim routed to standard review queue."
+author: did:web:example-insurance.com
+created: 2026-05-15T10:32:17Z
+modified: 2026-05-15T10:32:17Z
+
+mx:
+  contentType: decision
+  schemaVersion: 1.0
+  cogUrn: cog:web:example-insurance.com:01JC8X7K2N4P5Q6R7S8T9V0W1Y
+  decisionId: claim-2026-05-15-184729
+  operator: did:web:example-insurance.com
+  issued: 2026-05-15T10:32:17Z
+  policyRef:
+    registry: https://reginald.tg.community
+    cogUrn: cog:web:tg.community:eu-ai-act-art-12
+    version: 1.0.0
+    clause: para-1
+  model:
+    id: example-insurance/triage-classifier
+    version: 2.3.1
+    cardRef: cog:web:example-insurance.com:models-triage-v2-card
+  inputHash: sha256:8f3a2b1c
+  inputClass: insurance-claim-routine
+  outputSummary: Routed to standard review queue
+  humanInLoop:
+    required: false
+    fired: false
+  sequence: 184729
+---
+
+This decision routed a routine insurance claim to the standard review queue based on the triage classifier's confidence score (above 0.85). No human review was required under the operator's policy for this input class.
+```
+
+The same record expressed as JSON carries the same field set flat (without the `mx:` envelope and without the Markdown body); the schema is identical, only the envelope differs.
+
+---
+
+## 5. Relationship to attestation
+
+A decision record carries no signature. Where an operator chooses to attest the record cryptographically, the attestation is a separate cog produced by a trust layer and conforming to the **MX Attestation Records and Verification note**. The attestation references the decision record by `cogUrn` and content digest.
+
+This separation matters: a decision record can be unattested, attested by one registry, or attested by several independent registries, without any change to the record's schema or bytes. Trust mechanisms evolve in the attestation layer; the decision record stays stable.
+
+A decision record that has been superseded (a corrected record replacing an earlier one) is recorded via the supersession mechanism described in the **MX Cogs note**. The superseded record is not deleted; both remain queryable. Consumers reasoning about historical state resolve to either the original or the superseding version per the registry's `asOf` semantics.
+
+---
+
+## 6. Completeness
+
+A single decision record speaks only for itself. Whether all decisions an operator made over a period are present in the registry is a separate question that no individual record can answer.
+
+The `sequence` field supports completeness reasoning: operators assigning a monotonically increasing counter per `(model, inputClass)` enable consumers to detect missing records by inspecting for gaps. A registry serves the records; gap-detection happens at the consumer side.
+
+Completeness reasoning is informative, not normative — the absence of a sequence number is not itself a conformance failure for an individual record. Operators committing to completeness signalling SHOULD declare `sequence`; consumers SHOULD respect operators who do.
+
+Independent corroboration of a decision (a subject acknowledging that a decision was made about them, an auditor sampling against ground truth) is published as separate Verifiable Credentials per the [W3C VC Data Model](https://www.w3.org/TR/vc-data-model/), each referencing the decision record by `cogUrn`. This note does not specify the corroboration mechanism; companion future work will.
+
+---
+
+## 7. Why a separate record class
+
+A decision record is structurally distinct from a content record (a document, a page, an asset). The fields a decision record carries are not optional decoration on a content record; they are the substance of what makes the record a faithful description of a decision.
+
+Three properties motivate the separation:
+
+- **Time-series shape.** Decision records are produced in high volume, time-ordered, by automated systems. Content records are produced in low volume by human or machine authors. The two classes have different operational characteristics that registries handle differently (batched ingest, sequence-based completeness reasoning, time-pinned retrieval).
+- **Policy citation discipline.** A decision record's defining property is that it cites the policy it was made under. Content records have no equivalent obligation. Conflating the two would erode the discipline that makes decision records auditable.
+- **Privacy posture.** A decision record carries `inputHash` rather than the input itself, by design. Content records typically carry their content. The schemas diverge on what is in the record.
+
+Separating decision records into their own `contentType` keeps each class coherent and avoids leaking decision-specific obligations onto content records that have no use for them.
+
+---
+
+## 8. Implementation guidance (informative)
+
+This section is informative; it is not a normative part of the standard.
+
+### 8.1 Producing decision records at high volume
+
+Operators producing thousands of decisions per hour SHOULD batch the records for submission to a registry rather than submitting each one individually. The batching mechanism is specified by the **MX Attestation Records and Verification note**; a decision record is unchanged by being part of a batch.
+
+### 8.2 Storage at the operator
+
+The raw input that produced a decision stays with the operator. The `inputHash` field is the only thing about the input that reaches the registry. On later demand, an operator can produce the input and demonstrate the hash matches; the registry never holds the input.
+
+### 8.3 Selective disclosure
+
+Where a regulator's question is "how many decisions did this operator make in this category with this output distribution", the operator can publish a signed aggregate statement (a Verifiable Credential) that commits to the underlying decisions without disclosing them. The regulator verifies the credential using standard VC libraries.
+
+### 8.4 Verification
+
+A consumer fetches a decision record, computes its canonical bytes, and resolves the cited `policyRef` against the registry's `asOf` semantics. If the policy version in force at the decision's `issued` timestamp does not match the `policyRef.version`, the record has cited a policy version that was not in force; that is a discrepancy the consumer surfaces.
+
+---
+
+## 9. Security and privacy considerations
+
+- The `outputSummary` and the human-readable description MAY contain personal data describing the subject of the decision. Operators are responsible for data minimisation per [GDPR Article 5(1)(c)](https://gdpr-info.eu/art-5-gdpr/) and equivalent provisions in other jurisdictions. A registry serving the record does not redact or filter content; the record is published as the operator submitted it.
+- The `inputHash` commits the input cryptographically without disclosing it. An operator who later produces the input and demonstrates the hash matches has shown the record was not retrospectively edited to fit a different input. The hash itself reveals nothing about the input's contents.
+- The `humanInLoop.reviewerRef` field is opaque by intent. A reviewer name in this field would create a personal-data disclosure with no audit benefit; an opaque reference (a UUID or an internal employee identifier with no external mapping) supports traceability without disclosure.
+- Decision records are not authenticated by their own schema. Authentication lives in the attestation layer per the **MX Attestation Records and Verification note**. A consumer who needs to verify provenance of a decision record fetches the wrapping attestation, not the record alone.
+- Sequence numbers leak operator throughput. An operator who values throughput privacy SHOULD batch its sequence increments at a coarser granularity, or omit `sequence` and accept the reduced completeness-detection capability that follows.
+
+---
+
+## 10. IANA considerations
+
+This note proposes no new IANA registrations.
+
+---
+
+## 11. References
+
+### 11.1 Normative
+
+- [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119), [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) — key words for use in RFCs to indicate requirement levels.
+- [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) — date and time on the Internet, timestamp format.
+- [RFC 6234](https://datatracker.ietf.org/doc/html/rfc6234) — US Secure Hash Algorithms (including SHA-256).
+- [W3C DID Core 1.0](https://www.w3.org/TR/did-core/) — identifier format for `operator`.
+- **MX Cogs note** — universal cog fields (`cogUrn`, `schemaVersion`, `partOf`, supersession).
+- **MX Policy Records note** — schema of the record cited by `policyRef`.
+- **MX Attestation Records and Verification note** — schema of the trust-layer wrapper.
+- **MX Field Definition Pattern note** — structural template for field definitions.
+
+### 11.2 Informative
+
+- [W3C Verifiable Credentials Data Model](https://www.w3.org/TR/vc-data-model/) — used for subject corroboration and selective-disclosure aggregates.
+- [GDPR Article 5(1)(c)](https://gdpr-info.eu/art-5-gdpr/) — data minimisation principle.
+- [ULID specification](https://github.com/ulid/spec) — recommended form for the local-id portion of `decisionId`.
+
+---
+
+## 12. Acknowledgements
+
+This note draws on the documentation-evidence framing that emerged from internal review of AI governance regimes by Tom Cranstoun and Scott McGregor at Digital Domain Technologies Ltd, and on community feedback at The Gathering's technical sessions.
+
+---
+
+## MX Policy Records note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-policy-records.md
+**File:** `draft-policy-records.md`
+
+# MX Policy Records note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 17 May 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+---
+
+## 1. Abstract
+
+This note specifies the **policy record** — a cog that publishes a regulatory code, code of practice, or governance policy in a form that other records can cite by reference. A policy record carries a stable identifier, semver versioning, jurisdictional scope, an effective-from date, and addressable clauses; consumers reasoning about whether a decision followed the policy in force at a given moment resolve the citation deterministically.
+
+Decision records cite policy records by `policyRef` (per the **MX Decision Records note**); the same citation discipline applies to any other record class that asserts a policy was followed (compliance claims, audit reports, attestation extensions). Policies that are *not* published as policy records resolve to moving targets: the regulator's PDF is replaced silently, the clause is renumbered, and the citation chain breaks under audit. Publishing the policy as a record fixes that.
+
+The note is carrier-neutral: a regulator's HTML publication with JSON-LD structured data is a valid policy record; so is a Markdown file with YAML frontmatter; so is a JSON document. The Markdown carrier wraps every field below `mx:` per the **MX Cogs note**; other carriers express the same fields without that envelope.
+
+---
+
+## 2. Conformance
+
+The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) and [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) when, and only when, they appear in all capitals.
+
+Field definitions in this note conform to the **MX Field Definition Pattern note** (the primary note of the draft set). That pattern governs the structural template for every field; this note adopts the pattern's authoring rules and does not restate them.
+
+### 2.1 Conformance levels
+
+A publisher or consumer claiming conformance to this note SHALL satisfy:
+
+- **Level 1 (record format)** — Produced policy records carry the §4.2 required fields, well-formed; absent fields are not silently defaulted. Field names follow `camelCase`. The `clauses` array enumerates every addressable fragment.
+- **Level 2 (versioning discipline)** — Level 1 plus: `policyVersion` follows semver; `effectiveFrom` is RFC 3339; supersession of an earlier version uses the `supersedes` mechanism rather than in-place edit.
+- **Level 3 (addressable clauses)** — Level 2 plus: every clause carries a stable fragment identifier the body anchor matches, so consumers citing a clause by `policyRef.clause` resolve to the same text the publisher intended.
+
+A claim of conformance SHALL state the level reached.
+
+### 2.2 Draft status
+
+This is a draft note. Conformance levels and field semantics MAY change in response to community review. Implementations SHOULD note the draft version they implemented against.
+
+---
+
+## 3. Scope
+
+### 3.1 In scope
+
+- The fields of a policy record (§4.2).
+- The relationship between `cogUrn` (universal identifier) and `policyId` (publisher-internal short reference) (§4.3).
+- Clause addressability (§4.4): how a decision record's `policyRef.clause` resolves to a specific fragment.
+- Versioning and supersession (§5).
+- Third-party publication by The Gathering or other intermediaries when the issuing body has not yet published its own (§6).
+
+### 3.2 Out of scope
+
+- The cryptographic apparatus over the record — signatures, witnesses, batched proofs — defer to the **MX Attestation Records and Verification note**.
+- The schema of records that cite a policy — defers to the **MX Decision Records note** and to future companion notes for compliance claims and audit reports.
+- Editorial interpretation of any specific regulatory code; this note specifies the record format, not what any policy says.
+- Translation handling. A policy record published in one language and translated into another is a separate record citing the original via `derivedFrom`; the translation mechanism is out of scope for this note.
+
+### 3.3 Relationship to existing standards
+
+| Standard | Relationship |
+|----------|--------------|
+| **MX Cogs note** | Policy records are cogs. The universal cog fields (`cogUrn`, `schemaVersion`, `partOf`, supersession) apply per the MX Cogs note. |
+| **MX Core Metadata note** | Doc-identity fields (`title`, `description`, `author`, `created`, `modified`) apply per the MX Core Metadata note. |
+| **MX Decision Records note** | Decision records cite policy records via `policyRef`. |
+| **MX Attestation Records and Verification note** | A trust-layer attestation MAY wrap a policy record by reference. |
+| [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) | Date and time format used by `effectiveFrom`. |
+| [W3C DID Core](https://www.w3.org/TR/did-core/) | Identifier format used by `issuingBody`. |
+| [ISO 3166-1 alpha-2](https://www.iso.org/iso-3166-country-codes.html) | Country code format used by `jurisdiction`. |
+
+---
+
+## 4. Policy records
+
+### 4.1 Position
+
+A policy record is the durable referent that every citing record's `policyRef` resolves against. The record fixes three things that an HTML publication or a PDF on a regulator's website does not fix: a stable identifier that survives URL changes, a versioning model that lets consumers reason about which clause text was in force at a given moment, and addressable fragments so a citation like "clause 3.2" resolves deterministically.
+
+A policy record records the **text** and **structure** of a policy. It does not assert that the policy is sound, that the policy is currently in force in any jurisdiction, or that any particular decision did or did not follow it. Those assertions, where needed, live in citing records (decision records, compliance claims, audit reports) and in their attestation wrappers.
+
+### 4.2 Required fields
+
+A policy record declares `contentType: policy` in its `mx:` frontmatter. The following fields are REQUIRED for a valid policy record regardless of carrier. Field names follow `camelCase`.
+
+| Field | Type | Semantics |
+|-------|------|-----------|
+| `contentType` | string | Fixed value: `policy`. |
+| `schemaVersion` | string | Semver of the policy-record schema this record conforms to (per **MX Cogs note** §6.5.4). |
+| `cogUrn` | string | Universal identifier in the form `cog:<publisher-namespace>:<local-id>` (per **MX Cogs note** §6.5.3). For third-party renderings by The Gathering, the publisher namespace is typically `web:tg.community`. |
+| `policyId` | string | Publisher's internal reference to the policy; typically the `<local-id>` portion of `cogUrn`. Provides a short stable handle for human reference. |
+| `policyVersion` | string | Semver of this policy version. Distinct from `schemaVersion` (which versions the record schema) and from `version` (which versions the document file). |
+| `issuingBody` | string | DID or resolvable identifier of the body that issued the policy (the regulator, the standards body, the operator publishing an internal policy). |
+| `jurisdiction` | string | [ISO 3166-1 alpha-2](https://www.iso.org/iso-3166-country-codes.html) country code; or `EU`; or `international` for policies with no single-jurisdiction scope. |
+| `effectiveFrom` | string | [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) date the policy version takes effect. |
+| `clauses` | array | Addressable fragments. Each entry is an object with `id`, `title`, and `bodyAnchor`. See §4.4. |
+
+The following field is OPTIONAL but RECOMMENDED when applicable:
+
+| Field | Type | Semantics |
+|-------|------|-----------|
+| `supersedes` | object | Reference to a previous policy version this one replaces. Carries `cogUrn` and `version` of the superseded record. See §5. |
+
+A policy record MUST NOT carry cryptographic apparatus inline. Attestation of a policy record — typically by the issuing body or by The Gathering acting as third-party publisher per §6 — lives in a separate attestation record per the **MX Attestation Records and Verification note**.
+
+### 4.3 `cogUrn` and `policyId`
+
+A policy record carries both a `cogUrn` (the universal identifier per **MX Cogs note** §6.5.3) and a `policyId` (the publisher's short stable handle). They serve different purposes:
+
+- `cogUrn` is the universal long-form identifier used by registries, clients, verifiers, and anything outside the publisher's own systems. It is namespace-qualified and globally unique.
+- `policyId` is the publisher's local handle, typically equal to the `<local-id>` portion of `cogUrn`. It exists for human reference and for compactness in citation-heavy prose where the full `cogUrn` would clutter.
+
+In most implementations the `<local-id>` portion of `cogUrn` and `policyId` SHOULD be equal; publishers who want a separation (because their internal IDs leak information they prefer to keep internal) MAY choose distinct values.
+
+### 4.4 The `clauses` array
+
+The `clauses` array makes individual policy fragments addressable. Each entry is an object with the following sub-fields:
+
+| Sub-field | Type | Semantics |
+|-----------|------|-----------|
+| `id` | string | Fragment identifier. Stable across versions: where a clause is preserved verbatim across a policyVersion bump, its `id` MUST NOT change. |
+| `title` | string | Human-readable title of the clause. |
+| `bodyAnchor` | string | Anchor name within the record's body that points at the clause text. In a Markdown carrier this is typically a heading slug; in an HTML carrier it is an element `id`. |
+
+A citing record references a specific clause by setting `policyRef.clause` to the clause's `id`. Consumers MUST resolve `policyRef.clause` to the corresponding `clauses[i].bodyAnchor` and retrieve the clause text from the body of the policy record. A `clauses` entry whose `bodyAnchor` does not match a real anchor in the body is a conformance failure.
+
+Where a clause is amended within a major policy version (without renumbering), the publisher SHOULD bump `policyVersion` (minor or patch as appropriate) and preserve the clause `id` so existing citations continue to resolve. Where a clause is removed or renumbered, the publisher MUST bump the major component of `policyVersion`; the previous version remains queryable via supersession (§5) so historical citations still resolve.
+
+### 4.5 Illustrative expression
+
+```yaml
+---
+title: "EU AI Act, Article 12: event recording"
+description: "Policy record rendering of EU AI Act Article 12 on automatic event recording."
+author: did:web:digital-strategy.ec.europa.eu
+created: 2026-08-02
+modified: 2026-08-02
+
+mx:
+  contentType: policy
+  schemaVersion: 1.0
+  cogUrn: cog:web:tg.community:eu-ai-act-art-12
+  policyId: eu-ai-act-art-12
+  policyVersion: 1.0.0
+  issuingBody: did:web:digital-strategy.ec.europa.eu
+  jurisdiction: EU
+  effectiveFrom: 2026-08-02T00:00:00Z
+  clauses:
+    - id: para-1
+      title: Record-keeping requirement
+      bodyAnchor: record-keeping-requirement
+    - id: para-2
+      title: Automatic event recording
+      bodyAnchor: automatic-event-recording
+---
+
+## Record-keeping requirement {#record-keeping-requirement}
+
+(Body text for paragraph 1 goes here.)
+
+## Automatic event recording {#automatic-event-recording}
+
+(Body text for paragraph 2 goes here.)
+```
+
+The same record expressed as JSON carries the same field set flat; the schema is identical, only the envelope differs.
+
+---
+
+## 5. Versioning and supersession
+
+A policy record is amended through the supersession mechanism described in the **MX Cogs note**. A new policy record carrying `supersedes: { cogUrn: <previous cogUrn>, version: <previous policyVersion> }` replaces the earlier version; both remain queryable, and consumers reasoning about historical state retrieve whichever version was in force at the moment they care about.
+
+The interaction between `policyVersion` and supersession:
+
+- **Patch and minor** versions remain inside the same logical record (`cogUrn` unchanged; new `policyVersion`; `supersedes` references the previous `policyVersion` of the same `cogUrn`). The new version inherits clause ids from the previous version.
+- **Major** versions MAY also remain inside the same logical record, but publishers MAY choose to mint a new `cogUrn` when the policy changes scope significantly (e.g. one regulation splitting into two). When a new `cogUrn` is minted, `supersedes` references the predecessor's `cogUrn` and version explicitly.
+
+A consumer performing time-pinned resolution (asking "what was the policy in force on date X") retrieves whichever version's `effectiveFrom` is the latest non-future date relative to X. The registry serves; consumers reason.
+
+A withdrawn policy (a record formally retracted by the issuing body) is recorded by a superseding record carrying `withdrawn: true`. The original is not deleted; consumers reasoning about decisions made before the withdrawal still resolve to the original text.
+
+---
+
+## 6. Third-party publication
+
+Many regulators do not currently publish their codes as policy records. Until they do, an intermediary (The Gathering, a sector body, an academic institution) MAY publish a **third-party rendering** of a policy as a policy record, signed by the intermediary rather than by the issuing body.
+
+A third-party rendering MUST:
+
+- Declare the original issuing body in `issuingBody` (the regulator's DID, not the renderer's).
+- Be clearly labelled in its `description` field as a third-party rendering, not source-of-truth.
+- Cite the source publication (a URL, a regulatory document number, or both) in the body text.
+- Be signed by the rendering intermediary's key per the **MX Attestation Records and Verification note**; the attestation's `issuedBy` is the renderer, not the issuing body.
+
+When the issuing body eventually publishes its own signed version, the third-party rendering is superseded via §5. The new record carries the issuing body's signature; the third-party record remains queryable for historical citation but is no longer the recommended target for new citations.
+
+This is the same pattern Certificate Transparency used: independent monitors started logging first, authorities later participated.
+
+---
+
+## 7. Implementation guidance (informative)
+
+This section is informative; it is not a normative part of the standard.
+
+### 7.1 Choosing `policyId` and `cogUrn`
+
+For a regulatory code, a reasonable convention is `policyId` = the regulator's short reference for the code (e.g. `eu-ai-act-art-12`, `iso-27001`, `nist-800-53-rev5-ac-3`), and `cogUrn` = `cog:<renderer-namespace>:<policyId>`. This keeps citations human-readable while preserving universal uniqueness.
+
+### 7.2 Stable clause ids
+
+A publisher anticipating that consumers will cite specific clauses SHOULD adopt clause ids that match the policy's own internal numbering (e.g. `para-1`, `sub-clause-3-2-a`, `annex-iii-point-5`). Inventing renderer-specific clause ids that diverge from the policy's own numbering creates a translation burden every citing record must handle.
+
+### 7.3 Effective-from versus enacted-on
+
+`effectiveFrom` is when the policy version becomes binding on regulated entities, not when the legal instrument was passed. A policy enacted on date X with a one-year transition period has `effectiveFrom: X + 1 year`. Consumers reasoning about whether a decision followed the policy in force at decision time MUST use `effectiveFrom`, not the enactment date.
+
+### 7.4 Verification
+
+A consumer fetches a policy record and checks: that `clauses[].bodyAnchor` resolves to a real anchor in the body for every clause; that `effectiveFrom` is RFC 3339; that `policyVersion` is semver; and (where the record carries an attestation) that the attestation's signature verifies against the renderer's published key.
+
+---
+
+## 8. Security and privacy considerations
+
+- A third-party rendering signed by an intermediary attests provenance and integrity of the rendering, not the legal correctness of the policy text. Even when the attestation verifies cleanly, downstream consumers MUST NOT treat the text as legally authoritative — it is the renderer's faithful copy, not the issuing body's instrument. User-facing language SHOULD say *attested rendering*, not *official policy*.
+- A policy record carrying clause text in its body is plain content with no privacy obligations; policy text is typically public. However, where a policy record is published with internal-policy scope (an operator's own decision-making rules, not a regulator's code), the body content MAY be sensitive. Internal-policy records SHOULD declare `confidential: true` per the **MX Core Metadata note** and be served from access-controlled endpoints.
+- The `issuingBody` field is operator-attested, not authority-verified. A record claiming `issuingBody: did:web:fictitious-regulator.example` is conformant by this note's rules even if no such regulator exists. Consumers reasoning about regulatory weight MUST verify the `issuingBody` DID resolves to the genuine regulator through external means (the regulator's known web property, an authoritative directory of regulatory bodies, or a trusted intermediary's vouching).
+- Withdrawal of a policy via `withdrawn: true` is published by the same publisher that published the original. A publisher who has lost the operational capability to publish (organisation dissolved, signing key compromised beyond recovery) cannot withdraw their own policies; consumers reasoning about long-superseded policies MAY find them still present in the registry but should treat them as historical, not current.
+
+---
+
+## 9. IANA considerations
+
+This note proposes no new IANA registrations.
+
+---
+
+## 10. References
+
+### 10.1 Normative
+
+- [BCP 14](https://datatracker.ietf.org/doc/html/bcp14) ([RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119), [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)) — key words for use in RFCs to indicate requirement levels.
+- [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) — date and time on the Internet, timestamp format.
+- [ISO 3166-1 alpha-2](https://www.iso.org/iso-3166-country-codes.html) — country codes for the `jurisdiction` field.
+- [W3C DID Core 1.0](https://www.w3.org/TR/did-core/) — identifier format for `issuingBody`.
+- **MX Cogs note** — universal cog fields (`cogUrn`, `schemaVersion`, `partOf`, supersession).
+- **MX Decision Records note** — record class that cites policy records via `policyRef`.
+- **MX Attestation Records and Verification note** — schema of the trust-layer wrapper.
+- **MX Field Definition Pattern note** — structural template for field definitions.
+
+### 10.2 Informative
+
+- [Semantic Versioning 2.0.0](https://semver.org/) — version-number format used by `policyVersion` and `schemaVersion`.
+- [Certificate Transparency (RFC 6962)](https://datatracker.ietf.org/doc/html/rfc6962) — analogue for the third-party-publication pattern in §6.
+
+---
+
+## 11. Acknowledgements
+
+This note draws on the documentation-evidence framing that emerged from internal review of AI governance regimes by Tom Cranstoun and Scott McGregor at Digital Domain Technologies Ltd, and on community feedback at The Gathering's technical sessions.
+
+---
+
+## MX AI Usage Declaration note
+
+**URL:** https://github.com/ddttom/mx-shared-gathering/blob/main/draft-ai-usage-declaration.md
+**File:** `draft-ai-usage-declaration.md`
+
+# MX AI Usage Declaration note
+
+**Version:** 1.0
+**Status:** Draft by Tom Cranstoun, offered to The Gathering for review
+**Date:** 17 May 2026
+**Author:** Tom Cranstoun
+**License:** MIT
+
+---
+
+## 1. Abstract
+
+This note specifies how a publisher declares the role AI played in producing a body of work. The declaration is a signed, scope-bounded, machine-readable statement carrying four facts: what the work is, who is responsible for it, what machines did during its production, and what machines did not do. It is published at a discoverable location on the publisher's host, available in both human-readable and machine-readable carriers, and may be self-attested or third-party-attested.
+
+The note is motivated by a gap in the existing AI-adjacent web conventions. The Spawning Labs `ai.txt` and `robots.txt` carry publisher consent for *training* use of content. The `llms.txt` convention carries navigation aids for *inference-time* agents reading a site. C2PA manifests carry asset-level provenance for individual files. None of these answer the question a regulator, auditor, or attentive reader actually puts to a publisher: how, and to what extent, did AI participate in producing the content you are publishing? An AI Usage Declaration answers that question in a single document, in a form a person can read and a machine can verify.
+
+The note is deliberately framework-agnostic about whether AI involvement is positive, negative, or neutral. It specifies disclosure, not judgement. It does not grant compliance with any AI-governance regime; it provides the kind of structured, machine-readable, tamper-evident record those regimes increasingly expect organisations to produce.
+
+---
+
+## 2. Conformance
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119) and [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174) when, and only when, they appear in all capitals, as shown here.
+
+### 2.1 Conformance levels
+
+A declaration claiming conformance to this note SHALL satisfy:
+
+- **Level 1 (Declared):** the declaration is published at a discoverable location (§5), carries every required field defined in §4, names the work it scopes, and names a responsible author. Self-attestation is the default authority.
+- **Level 2 (Signed):** Level 1 plus a cryptographic signature over a canonical serialisation of the declaration payload, using the signature mechanism in §6.
+- **Level 3 (Attested):** Level 2 plus a third-party attestation binding the declaration to a verified publisher identity, expressed as a compliance claim per the MX Compliance Claims note's third-party authority pattern.
+
+A claim of conformance SHALL state the level reached.
+
+### 2.2 Draft status
+
+This is a draft note. Conformance levels and field semantics MAY change in response to community review. Implementations of this draft SHOULD note the draft version number they implemented against.
+
+---
+
+## 3. Scope
+
+### 3.1 In scope
+
+- A machine-readable schema for a publisher AI Usage Declaration record.
+- A discovery convention by which agents and humans locate the declaration for a given host or work.
+- A signature mechanism that lets a verifier confirm the declaration has not been altered since signing.
+- The relationship between this declaration and the existing AI-adjacent web conventions covering training opt-out, navigation aid, and asset-level provenance.
+
+### 3.2 Out of scope
+
+- Whether AI involvement in a given work is desirable, acceptable, or otherwise. The note specifies disclosure, not editorial judgement.
+- Training data opt-out signalling, which is the territory of `ai.txt` proposals and `robots.txt` directives.
+- Inference-time navigation aids for LLM agents reading a site, which is the territory of `llms.txt`.
+- Asset-level provenance manifests for individual binary files (images, audio, video), which are the territory of C2PA.
+- Model cards and other model-provider disclosures about the AI systems themselves, which are the territory of model documentation standards.
+- Legal compliance with any specific AI-governance regime. A declaration is evidence; compliance is a legal duty of the organisation.
+
+### 3.3 Relationship to existing standards
+
+This note relies on:
+
+- **[RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119)** and **[RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)** for normative key word interpretation.
+- **[RFC 8615](https://datatracker.ietf.org/doc/html/rfc8615)** for the well-known URI mechanism.
+- **[RFC 7515 JSON Web Signature](https://datatracker.ietf.org/doc/html/rfc7515)** for the baseline signature serialisation when a declaration is signed.
+- **[RFC 8032 EdDSA](https://datatracker.ietf.org/doc/html/rfc8032)** as the RECOMMENDED signature algorithm.
+- **[ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)** for date and timestamp values.
+- **[HTML Living Standard](https://html.spec.whatwg.org/)** for the `<link rel>` discovery mechanism.
+- **[Schema.org](https://schema.org/)** for the publisher and author entity vocabulary referenced in §4, and for the `digitalSourceType` property used in the page-level interoperability mapping in §5.6.
+- **[WICG AI Content Disclosure proposal](https://github.com/WICG/proposals/issues/261)** for the page-level `<meta name="ai-disclosure">` and element-level `ai-disclosure` attribute that a declaration's `aiUsage` array reduces to. The MX declaration is the publisher-level superset that produces the page-level value (§4.7).
+- **[IPTC Digital Source Type vocabulary](https://cv.iptc.org/newscodes/digitalsourcetype/)** for the controlled-vocabulary terms referenced in the same mapping (`digitalCapture`, `compositeWithTrainedAlgorithmicMedia`, `trainedAlgorithmicMedia`).
+
+This note adds nothing to those standards; it specifies how they combine for the publisher AI-usage disclosure case.
+
+---
+
+## 4. The declaration record
+
+A declaration is authored as a markdown file with structured YAML frontmatter, following the long-established convention of YAML as the metadata block and CommonMark as the human-readable body. The markdown source is the source of truth at every conformance level; it is the artefact the author edits and the artefact a publisher commits to version control.
+
+From this source file, three deterministic serialisations are derived:
+
+- A canonical JSON form for machine transmission, interop, and signing (§6). The JSON is the artefact that gets signed at Level 2 because RFC 8785 JCS gives a deterministic canonical byte sequence over JSON, which YAML alone does not.
+- A rendered HTML form for in-browser reading by humans.
+- A tagged PDF form for accessible archival (optional but RECOMMENDED).
+
+Each derived form MUST reflect the same fields as the source markdown; no field present in a serialisation MAY be absent from, or contradict, the source. A publisher MAY publish the source markdown itself at `/AI-USAGE.md` (§5.1) so any reader can fetch the editable form. The JSON, HTML, and PDF serialisations are siblings derived from the same source, not parallel artefacts edited in parallel.
+
+The fields below are the ones the source markdown's YAML frontmatter MUST carry. They appear verbatim in the derived JSON (with the prose narrative from the markdown body summarised into the `aiBoundary` array). A conformant declaration MUST declare:
+
+| Field | Cardinality | Type | Description |
+| --- | --- | --- | --- |
+| `id` | required | string (URI) | A stable URI that identifies this declaration. The URI SHOULD be the canonical URL at which the declaration is served. |
+| `subject` | required | object | The work the declaration scopes. See §4.1. |
+| `publisher` | required | object | The organisation or individual responsible for the work. See §4.2. |
+| `author` | required | object | The person signing the declaration. May equal `publisher` when the publisher is an individual. See §4.3. |
+| `created` | required | string (ISO 8601) | The date the declaration was first issued. |
+| `modified` | RECOMMENDED | string (ISO 8601) | The date the declaration was last materially changed. Omit when equal to `created`. |
+| `reviewSchedule` | OPTIONAL | string (ISO 8601 duration) | The interval at which the publisher commits to reviewing and re-confirming or updating the declaration. Example: `P1Y` for annual review. See §9.2. |
+| `aiUsage` | required | array of objects | Enumerated tasks AI performed during production. See §4.4. |
+| `aiBoundary` | required | array of strings | Tasks AI did not perform, stated as boundary claims. See §4.5. |
+| `narrativeUri` | RECOMMENDED | string (URI) | Pointer to the human-readable rendering of the declaration, served on the same host. |
+| `authority` | required at Level 2+ | object | Authority type and identity. See §4.6. |
+| `signature` | required at Level 2+ | object | Cryptographic signature over the canonical payload. See §6. |
+
+### 4.1 Subject object
+
+The work the declaration scopes. A declaration MAY scope a single work (a book, a paper, a podcast episode, a film, a software release), a serial collection (a book series, a podcast feed, a periodical), or the entire output of a host. The `subject` object carries:
+
+- `type`: one of `work`, `collection`, `host`. Required.
+- `name`: human-readable name of the work, collection, or host. Required.
+- `identifier`: a stable URI or ISBN, DOI, ISSN, or similar canonical identifier where one exists. RECOMMENDED.
+
+A declaration that scopes a host (`type: host`) covers every publication on that host until superseded by a more specific declaration whose `subject` names a particular work or collection. Specific declarations override host-level declarations for the works they name.
+
+### 4.2 Publisher object
+
+The organisation or individual responsible for the work. The object SHOULD align with the Schema.org `Organization` or `Person` vocabulary, carrying at minimum:
+
+- `type`: `Organization` or `Person`. Required.
+- `name`: the publisher's name as it appears on the work. Required.
+- `identity`: a URI (web page, DID, or other dereferenceable identifier). RECOMMENDED.
+
+### 4.3 Author object
+
+The person signing the declaration. The same shape as `publisher` but constrained to `Person`. The author signs in a personal capacity; the publisher accepts the signing person's authority to bind the publisher to the declaration.
+
+### 4.4 AI-usage entries
+
+An array of zero or more objects, each describing a category of AI involvement during production. Each object carries:
+
+- `task`: a short noun phrase naming the task. Required. Values are open-ended in this version of the note. Implementations SHOULD use lowercase hyphen-separated phrases (e.g. `spelling-and-grammar`, `code-generation`). The common values listed below are the seed vocabulary; a community registry of task names is expected to emerge from implementation experience. Seed values: `research`, `spelling-and-grammar`, `consistency-checking`, `drafting`, `translation`, `summarisation`, `image-generation`, `code-generation`, `transcription`. Implementations that coin a novel value SHOULD document it in the declaration's `scope` field so that downstream readers can map it back to the closest seed term.
+- `scope`: a one-sentence narrative description of how the AI was used for this task in this work. Required.
+- `extent`: one of `assisted`, `substantial`, `primary`. Required. `assisted` means the AI's output was treated as a suggestion and reworked by a person; `substantial` means the AI produced a draft a person then directed and edited; `primary` means the AI produced the content with light human direction.
+
+An empty `aiUsage` array is a valid declaration. It states that no AI was used in producing the work.
+
+### 4.5 AI-boundary statements
+
+An array of strings, each stating a boundary the publisher commits to: a task AI did not perform. Each string is a complete sentence in the publisher's voice. Common patterns include:
+
+- "No machine decided what this work is about."
+- "No machine wrote the text that carries the ideas."
+- "No machine signed off on the published version."
+
+The boundary array is normative for the publisher: a publisher that later relaxes a stated boundary MUST issue a new declaration with a later `modified` date and an updated boundary array.
+
+### 4.6 Authority object
+
+Authority type and identity. The object SHARES vocabulary with the MX Compliance Claims note for interoperability:
+
+- `type`: `self` or `third-party`. Required.
+- `identity`: URI or DID that names the signing party. Required.
+- `accreditation`: present only when `type` is `third-party`. Object naming the accreditation body, validity dates, and a lookup URI for verification status.
+
+Self-attested declarations carry the assurance level of the publisher's identity. They are appropriate for first-person disclosure by the work's author. They are not appropriate for evidence-trail use cases where the consumer's interest is in independent confirmation of the publisher's claim.
+
+### 4.7 Mapping to WICG and IPTC vocabularies
+
+Page-level and asset-level disclosure standards use finite enumerations. The MX declaration carries a richer per-task record. An MX-conformant implementation MUST derive the single-value WICG `ai-disclosure` and IPTC `digitalSourceType` for the declaration's `subject` from its `aiUsage` and `aiBoundary` by the following rules. The derivation is a function of the declaration record; it adds no new normative content.
+
+A derived `disclosure` object on the declaration record MAY carry:
+
+- `wicg`: one of `none`, `ai-assisted`, `ai-generated`, `autonomous`.
+- `iptc`: one of `digitalCapture`, `compositeWithTrainedAlgorithmicMedia`, `trainedAlgorithmicMedia`.
+- `derivedFrom`: the literal string `aiUsage+aiBoundary` to mark the value as computed rather than independently asserted.
+
+The derivation rules:
+
+| Condition | wicg | iptc |
+| --- | --- | --- |
+| `aiUsage` is empty (no AI involvement asserted) | `none` | `digitalCapture` |
+| Every `aiUsage` entry has `extent: assisted` | `ai-assisted` | `compositeWithTrainedAlgorithmicMedia` |
+| At least one `aiUsage` entry has `extent: substantial`, OR `extent: primary` with `aiBoundary` asserting human decision authority over the published version | `ai-generated` | `trainedAlgorithmicMedia` |
+| Every `aiUsage` entry has `extent: primary` AND `aiBoundary` does not assert human decision authority over the published version | `autonomous` | `trainedAlgorithmicMedia` |
+
+A declaration MAY publish the derived `disclosure` object alongside the underlying record. Consumers that only understand the WICG or IPTC vocabularies MAY rely on the derived values. Consumers that understand the MX schema SHOULD prefer the underlying `aiUsage` and `aiBoundary` for any reasoning that requires per-task granularity.
+
+A publisher MUST NOT publish a derived `disclosure` value that contradicts the rules above. Manually overriding the derivation defeats the interoperability the mapping exists to provide.
+
+The WICG value `mixed` is a page-level signal indicating that different elements on the same page carry different `ai-disclosure` attribute values. It does not arise from the publisher-level derivation in this section. A publisher that serves pages with the element-level WICG `ai-disclosure` attribute on individual elements MAY use `mixed` as the page-level meta value on those pages without this altering the publisher-level MX declaration. The MX `disclosure.wicg` field is restricted to the four values in the derivation table above.
+
+### 4.8 Worked example
+
+```json
+{
+  "id": "https://mx.allabout.network/AI-USAGE.json",
+  "subject": {
+    "type": "collection",
+    "name": "MX book series",
+    "identifier": "https://mx.allabout.network/books/"
+  },
+  "publisher": {
+    "type": "Organization",
+    "name": "CogNovaMX",
+    "identity": "https://mx.allabout.network/about/about.html#organization"
+  },
+  "author": {
+    "type": "Person",
+    "name": "Tom Cranstoun",
+    "identity": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+  },
+  "created": "2026-05-17",
+  "aiUsage": [
+    {"task": "research", "scope": "Gathering sources and prior work before forming a view.", "extent": "assisted"},
+    {"task": "spelling-and-grammar", "scope": "Mechanical checks across long manuscripts.", "extent": "assisted"},
+    {"task": "consistency-checking", "scope": "Term usage and structural coherence across chapters.", "extent": "assisted"}
+  ],
+  "aiBoundary": [
+    "No machine decided what the books are about.",
+    "No machine set the argument, chose the angle, or judged whether a passage was sound.",
+    "No machine wrote the text that carries the ideas."
+  ],
+  "narrativeUri": "https://mx.allabout.network/AI-USAGE.html",
+  "authority": {
+    "type": "self",
+    "identity": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+  },
+  "disclosure": {
+    "wicg": "ai-assisted",
+    "iptc": "compositeWithTrainedAlgorithmicMedia",
+    "derivedFrom": "aiUsage+aiBoundary"
+  }
+}
+```
+
+This example illustrates the schema. It is not a registered declaration.
+
+---
+
+## 5. Discovery and serving
+
+### 5.1 Canonical locations
+
+A host that publishes an AI Usage Declaration SHOULD serve the derived forms at one of these canonical locations, and MAY also serve the source markdown alongside them:
+
+- **Root-level (recommended):**
+  - `/AI-USAGE.md` for the source markdown (OPTIONAL but RECOMMENDED for transparency).
+  - `/AI-USAGE.json` for the machine-readable derived record (REQUIRED at Level 1).
+  - `/AI-USAGE.html` for the human-readable rendering (REQUIRED at Level 1).
+  - `/AI-USAGE.pdf` for the paginated archival form (OPTIONAL).
+  - This pattern matches the conventional placement of `/llms.txt`, `/robots.txt`, `/humans.txt`, and `/ai.txt`.
+- **Well-known prefix:** `/.well-known/ai-usage` (returning the JSON record) with content negotiation or sibling resources at `/.well-known/ai-usage.md`, `/.well-known/ai-usage.html`, and `/.well-known/ai-usage.pdf`. This pattern follows [RFC 8615](https://datatracker.ietf.org/doc/html/rfc8615) for hosts that prefer to keep root URIs clear.
+
+A host MUST NOT serve different declarations at the root-level and well-known locations for the same `subject`. If both locations are served, they MUST point to identical declaration records (one MAY 301-redirect to the other). When the source markdown is served alongside its derived forms, the JSON, HTML, and PDF MUST be derivable from it with no contradictions; a derived form that contradicts the source is a conformance failure.
+
+### 5.2 Content types
+
+- The source markdown SHOULD be served with `Content-Type: text/markdown; charset=utf-8` per [RFC 7763](https://datatracker.ietf.org/doc/html/rfc7763).
+- The JSON record SHOULD be served with `Content-Type: application/json; charset=utf-8`. The media type `application/ai-usage-declaration+json` is reserved for a future revision once implementation experience justifies registration.
+- The human-readable HTML rendering SHOULD be served with `Content-Type: text/html; charset=utf-8`.
+- A PDF rendering SHOULD be served with `Content-Type: application/pdf` and SHOULD be tagged per [ISO 14289-1](https://www.iso.org/standard/64599.html) Level 2 (`pdfuaid:Part=1`) for accessibility.
+
+### 5.3 In-page discovery
+
+Every page on a host that publishes an AI Usage Declaration SHOULD carry a `<link>` element in `<head>` that points to the declaration:
+
+```html
+<link rel="ai-usage" href="/AI-USAGE.json" type="application/json">
+```
+
+The same page MAY carry additional `<link rel="alternate" type="...">` entries pointing to the HTML and PDF renderings. The kebab-case `rel` value `ai-usage` is proposed for a future link-relation registration; until registered, implementations MAY use the extension form `https://mx.allabout.network/ns/ai-usage` as an alternative `rel` value.
+
+### 5.4 Sitemap inclusion
+
+Every canonical location at which the declaration is served SHOULD appear in the host's sitemap. The JSON record and the HTML rendering SHOULD both be listed.
+
+### 5.5 Per-work overrides
+
+When the host-level declaration's `subject` is `host` and a specific work has its own narrower declaration, the work's pages SHOULD carry their own `<link rel="ai-usage">` pointing to the specific declaration. Agents MUST resolve to the more specific declaration when one is named for the work currently being read.
+
+### 5.6 Page-level interoperability with WICG ai-disclosure
+
+A page carrying a `<link rel="ai-usage">` to the publisher's MX declaration SHOULD also carry the page-level WICG `<meta name="ai-disclosure">` value derived from that declaration by the rules in §4.7. A page MAY additionally carry the Schema.org `digitalSourceType` property in its JSON-LD using the IPTC value derived by the same rules.
+
+```html
+<!-- discovery for the MX publisher-level declaration -->
+<link rel="ai-usage" type="application/json" href="/AI-USAGE.json">
+<!-- page-level WICG value derived from the MX declaration -->
+<meta name="ai-disclosure" content="ai-assisted">
+```
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia"
+}
+```
+
+A page MUST NOT carry a WICG or IPTC value that contradicts the derivation from the publisher's MX declaration. Where the two would disagree, the publisher MUST either correct the MX declaration or correct the page-level value; both MUST NOT be served simultaneously with conflicting content.
+
+A consumer that supports only the WICG meta tag or only the Schema.org property gets a useful page-level signal without having to fetch the MX declaration. A consumer that follows `<link rel="ai-usage">` gets the structured, signable, per-task record the page-level signal summarises.
+
+---
+
+## 6. Signature
+
+### 6.1 Mechanism
+
+A signed declaration (Level 2 or above) MUST carry a cryptographic signature over a canonical serialisation of the declaration payload, computed without the `signature` field present.
+
+- The signature serialisation MUST follow [RFC 7515 JSON Web Signature](https://datatracker.ietf.org/doc/html/rfc7515).
+- The signature algorithm SHOULD be Ed25519 ([RFC 8032 EdDSA](https://datatracker.ietf.org/doc/html/rfc8032)). Other algorithms MAY be used where the verifier's policy permits.
+- The signature value MUST be base64url-encoded as defined in RFC 7515.
+- The canonical form of the declaration payload over which the signature is computed MUST follow [RFC 8785 JSON Canonicalization Scheme](https://datatracker.ietf.org/doc/html/rfc8785). Implementations MAY additionally apply the layered fingerprinting approach described in the MX Contract Fingerprinting and Signing note (a sister draft in the MX family) for cross-cog content fingerprinting; the present note does not normatively depend on that approach.
+
+### 6.2 `signature` object
+
+The `signature` field of a signed declaration carries:
+
+- `algorithm`: the JWS algorithm identifier (e.g. `EdDSA`). Required.
+- `value`: the base64url-encoded signature. Required.
+- `keyId`: a URI dereferenceable to the public key used to verify the signature. Required.
+- `signedAt`: ISO 8601 timestamp the signature was produced. Required.
+
+### 6.3 Re-signing
+
+A signature is bound to a specific canonical serialisation. Any change to the declaration payload that affects the canonical form invalidates the signature. The publisher MUST issue a new signature when re-publishing.
+
+---
+
+## 7. Why a separate note
+
+The publisher's AI-usage disclosure sits in a gap between adjacent standards that almost cover the case but do not.
+
+**Why not WICG ai-content-disclosure alone.** The WICG AI Content Disclosure proposal carries a single page-level or element-level enumeration: `none`, `ai-assisted`, `ai-generated`, or `autonomous`. It is the right surface for a browser, a search engine, or a regulator's compliance check that needs a one-token answer for a single page. It does not carry which tasks AI performed, the human-authorship boundary the publisher commits to, or a signature that lets a verifier confirm the disclosure has not been altered. The MX declaration is the publisher-level superset whose summary reduces to the WICG value (§4.7 carries the mapping). A conformant MX implementation publishes both: the structured record at `/AI-USAGE.json` for verifiers, and the derived `<meta name="ai-disclosure">` on every page for consumers that read only the WICG vocabulary.
+
+**Why not Schema.org `digitalSourceType` alone.** The IPTC Digital Source Type vocabulary, exposed in Schema.org as the `digitalSourceType` property, is a three-state controlled vocabulary for indicating how an asset came to exist. It is search-engine readable today and lives in the same JSON-LD block a page already serves. It addresses a strictly narrower question than this note. The MX declaration produces the IPTC value as a derived field (§4.7) so a publisher does not have to choose between the two.
+
+**Why not C2PA.** The Coalition for Content Provenance and Authenticity specifies asset-level provenance manifests for individual binary files. C2PA answers the question "who made and altered this image, audio, or video, and how?" A book series, a website, a podcast feed, or a research programme has no single asset. A publisher-level disclosure of AI involvement across many works is a different layer of the same problem.
+
+**Why not ai.txt.** The Spawning Labs `ai.txt` proposal carries publisher consent for AI *training* use of content. It is a directive to crawlers and dataset builders. It does not describe how the publisher themselves used AI in producing the content. The two declarations are orthogonal and may both be published by the same host.
+
+**Why not robots.txt.** [RFC 9309](https://datatracker.ietf.org/doc/html/rfc9309) governs robots.txt. Its extension forms for AI-related directives are scoped to crawler permission. They do not carry publisher disclosure.
+
+**Why not llms.txt.** The `llms.txt` convention carries navigation aids for inference-time LLM agents reading a site. It tells the agent where to look. It does not tell the agent how the content it is reading came to exist.
+
+**Why not model cards.** Model documentation describes the AI system. An AI Usage Declaration describes a work produced with the help of one or more such systems. Both can be true at once; neither replaces the other.
+
+**Why not a platform-specific AI-content checkbox.** Self-publishing platforms increasingly require authors to declare AI involvement at upload time. These declarations are not interoperable across platforms, not signed, not discoverable from the published work, and not durable beyond the platform's lifetime. A web-native declaration travels with the work.
+
+**Why not EU AI Act Annex IV documentation alone.** Annex IV documentation is a regulatory record an organisation maintains. It is not a web-discoverable, machine-readable declaration attached to the published work. A jurisdiction-neutral declaration format complements the regulatory record without replacing it.
+
+The combination of these gaps is the reason for a separate note.
+
+---
+
+## 8. Implementation guidance (informative)
+
+This section is informative; it is not a normative part of the standard.
+
+### 8.1 Minimum viable implementation
+
+A publisher beginning from scratch can reach Level 1 conformance in a single afternoon:
+
+1. Write the human-readable narrative declaration. Name the subject, the publisher, the author, what AI did, what AI did not do.
+2. Serialise the same facts into the JSON form defined in §4.
+3. Compute the derived WICG and IPTC values per §4.7 and embed them in the JSON `disclosure` object.
+4. Publish both at `/AI-USAGE.html` and `/AI-USAGE.json` on the publisher's host.
+5. Add `<link rel="ai-usage" href="/AI-USAGE.json" type="application/json">` to the site template's `<head>`.
+6. Add `<meta name="ai-disclosure" content="<derived-wicg-value>">` to the same template, and the Schema.org `digitalSourceType` property to the page's JSON-LD `CreativeWork` block.
+7. Add both URLs to the host's sitemap.
+
+Level 2 adds a signing step using any RFC 7515 JWS library that supports Ed25519. Level 3 requires arrangement with a third-party attestation authority operating under the MX Compliance Claims framework; this is a multi-week process and is not necessary for most publishers.
+
+### 8.2 Worked implementation
+
+An existing Level 1 implementation serves the publisher-level declaration for CogNovaMX (subject: the MX book series) at the following URLs:
+
+- Machine-readable JSON record: <https://mx.allabout.network/AI-USAGE.json>
+- Human-readable HTML rendering: <https://mx.allabout.network/AI-USAGE.html>
+- Tagged PDF archival form (ISO 14289-1 Level 2): <https://mx.allabout.network/AI-USAGE.pdf>
+
+Discovery is wired across the site: every page under `https://mx.allabout.network/` carries `<link rel="ai-usage" type="application/json" href="/AI-USAGE.json">` in `<head>`, along with the page-level `<meta name="ai-disclosure" content="ai-assisted">` derived per §4.7. The Schema.org `digitalSourceType` IRI `https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia` is carried in the `WebPage` JSON-LD block on the declaration page itself. All three URLs appear in the host's sitemap.
+
+The signature workflow (Level 2) is the next implementation step on this host. Reviewers can `curl` the JSON record to verify Level 1 conformance against the rules in §8.3.
+
+### 8.3 Deriving the JSON from the source markdown
+
+The JSON form is produced from the source markdown by a mechanical extraction. The recommended algorithm:
+
+1. Parse the file's YAML frontmatter.
+2. Drop document-meta fields not relevant to the declaration (`title`, `description`, `version`, and any document-mechanics fields not enumerated in §4). Keep the fields enumerated in §4.
+3. If the frontmatter does not carry an explicit `aiBoundary` array, derive one from the boundary statements in the markdown body. The author SHOULD carry `aiBoundary` explicitly in frontmatter to avoid round-trip fragility.
+4. Compute the derived `disclosure` object per §4.7 from the resulting `aiUsage` and `aiBoundary` values, and attach it to the JSON.
+5. Serialise the resulting object to canonical JSON per [RFC 8785 JCS](https://datatracker.ietf.org/doc/html/rfc8785).
+
+A reference implementation in any scripting language is approximately 30 lines. Implementations SHOULD publish the derivation script alongside the source markdown for reviewer transparency; the markdown is the editable artefact, the script is the contract that makes the JSON reproducible. At Level 2, the canonical JSON output of step 5 is the byte sequence over which the signature is computed (§6).
+
+### 8.4 Verification
+
+A consumer can verify Level 1 conformance with shell-level commands:
+
+```bash
+HOST=https://example.com
+# 1. The declaration is discoverable
+curl -sf "$HOST/AI-USAGE.json" > /tmp/decl.json
+# 2. The required fields are present
+jq -e '.id, .subject, .publisher, .author, .created, .aiUsage, .aiBoundary' /tmp/decl.json
+# 3. The link relation is wired up on the homepage
+curl -sf "$HOST/" | grep -E '<link[^>]+rel="ai-usage"'
+```
+
+Level 2 verification additionally validates the signature using a JWS library against the public key dereferenced from `signature.keyId`.
+
+---
+
+## 9. Security and privacy considerations
+
+### 9.1 Substitution
+
+An attacker who can replace the JSON declaration on a host can issue a false disclosure. Mitigation: serve Level 2 (signed) declarations whose signature a consumer can verify independently. A consumer that requires high assurance MUST verify the signature against an independently-resolved key, not against a key served from the same host.
+
+### 9.2 Replay and staleness
+
+A signed declaration is bound to its canonical payload, including the `created` and `modified` timestamps. A consumer that requires freshness SHOULD reject declarations whose `modified` is older than the consumer's policy permits. The note does not mandate a freshness window in general.
+
+Publishers that carry a `reviewSchedule` field commit to issuing a new `modified` timestamp at least as frequently as that interval, whether the underlying disclosure has changed or merely been reviewed and re-confirmed. Consumers MAY treat a declaration whose `modified` is older than the stated schedule as stale and request a fresh one before relying on its content. A declaration without `reviewSchedule` makes no such commitment; consumers MUST NOT infer staleness from age alone where the schedule is absent.
+
+### 9.3 Identity exposure
+
+The `author` field names a person. Publishers SHOULD consider whether the named author wishes to be associated with the work in a machine-readable, durable, web-discoverable form. For works published anonymously or pseudonymously, the `author` field carries the pseudonym, and the publisher accepts the disclosure responsibility.
+
+### 9.4 Boundary drift
+
+The `aiBoundary` array states commitments. A publisher who later relaxes a boundary (for example, allowing AI to draft text that earlier declarations said it would not) MUST issue a new declaration with the boundary updated. Silently relaxing a boundary while leaving the old declaration in place is a misrepresentation. The note does not specify enforcement; it specifies the publisher's normative obligation.
+
+### 9.5 Standard scope
+
+These are operational concerns for hosts and consumers implementing the standard, not concerns for the standard itself.
+
+---
+
+## 10. IANA considerations
+
+This note introduces three artefacts that fall within IANA registries:
+
+- The link relation `ai-usage` (§5.3), candidate for the IANA Link Relation Types registry.
+- The media type `application/ai-usage-declaration+json` (§5.2), candidate for the IANA Media Types registry.
+- The well-known URI suffix `ai-usage` (§5.1), candidate for the IANA Well-Known URIs registry per [RFC 8615](https://datatracker.ietf.org/doc/html/rfc8615).
+
+Formal IANA registration for each of these is deferred to a later revision of this note, pending sufficient implementation experience to justify the request. Implementations using the unregistered link relation MAY use the extension URI form `https://mx.allabout.network/ns/ai-usage` as the `rel` value until formal registration is complete. Implementations using the unregistered media type MAY serve `application/json` with a `profile` parameter, or use the vendor-prefixed form `application/vnd.mx.ai-usage-declaration+json`, until the unprefixed registration is granted.
+
+---
+
+## 11. References
+
+### 11.1 Normative
+
+- [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119): Key words for use in RFCs.
+- [RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174): Ambiguity of uppercase vs lowercase in RFC 2119 key words.
+- [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515): JSON Web Signature.
+- [RFC 8032](https://datatracker.ietf.org/doc/html/rfc8032): Edwards-Curve Digital Signature Algorithm (EdDSA).
+- [RFC 8615](https://datatracker.ietf.org/doc/html/rfc8615): Well-Known Uniform Resource Identifiers.
+- [RFC 8785](https://datatracker.ietf.org/doc/html/rfc8785): JSON Canonicalization Scheme (JCS), the canonical form used at Level 2 for the declaration payload over which the signature is computed.
+- [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html): Date and time format.
+- [HTML Living Standard](https://html.spec.whatwg.org/): The HTML specification, for `<link rel>` semantics.
+
+### 11.2 Informative
+
+- [RFC 9309](https://datatracker.ietf.org/doc/html/rfc9309): Robots Exclusion Protocol.
+- [Schema.org](https://schema.org/): Person, Organization, and CreativeWork.digitalSourceType vocabularies.
+- [C2PA Specifications](https://c2pa.org/specifications/specifications/2.1/index.html): Coalition for Content Provenance and Authenticity, asset-level provenance manifests.
+- [ISO 14289-1](https://www.iso.org/standard/64599.html): PDF/UA Universal Accessibility.
+- [WICG AI Content Disclosure proposal](https://github.com/WICG/proposals/issues/261): page-level `<meta name="ai-disclosure">` and element-level `ai-disclosure` attribute, four-value enumeration `none` / `ai-assisted` / `ai-generated` / `autonomous`. W3C Community Group formed February 2026.
+- [IPTC Digital Source Type vocabulary](https://cv.iptc.org/newscodes/digitalsourcetype/): controlled vocabulary for `CreativeWork.digitalSourceType` covering `digitalCapture`, `compositeWithTrainedAlgorithmicMedia`, `trainedAlgorithmicMedia`.
+- [EU AI Act Article 50](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689): machine-readable marking of AI-generated content, effective August 2026.
+- The MX Contract Fingerprinting and Signing note: a sister draft in the MX family that elaborates a layered fingerprinting approach for cross-cog content. Referenced informatively in §6.1; the present note does not normatively depend on it.
+- The MX Compliance Claims note: a sister draft in the MX family that defines the third-party authority pattern referenced at Level 3 conformance (§2.1).
+- [YAML 1.2.2](https://yaml.org/spec/1.2.2/): authoring format for the frontmatter block.
+- [CommonMark 0.31.2](https://spec.commonmark.org/0.31.2/): authoring format for the human-readable body.
+- [RFC 7763](https://datatracker.ietf.org/doc/html/rfc7763): media type `text/markdown` for serving the source markdown.
+- llms.txt: Howard, J., September 2024, navigation aid convention for LLM agents.
+- ai.txt: Spawning Labs proposal, training opt-out signalling.
+
+---
+
+## 12. Acknowledgements
+
+The author thanks the publishers and authors whose first-person AI-usage disclosures, written without a standard to refer to, demonstrated the schema before it was specified. The note formalises the practice; it did not invent it.
 
 ---
 

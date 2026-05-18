@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Use-cases series, AI Usage Declaration, and audit-suite recovery"
-description: "Four interlinked posts on MX vs blockchain/NFTs/crypto shipped under a new use-cases sub-folder; the publisher-level AI Usage Declaration suite landed across hub + three submodules with a Gathering draft note, an audit probe, and a deterministic test; pre-existing audit-suite failures cleared from 22 to 0."
+title: "Co-Directors Report — Use-cases series, AI Usage Declaration, audit-suite recovery, mx-crm absorption, mx-reginald absorption"
+description: "Four interlinked posts on MX vs blockchain/NFTs/crypto shipped under a new use-cases sub-folder; the publisher-level AI Usage Declaration suite landed across hub + three submodules with a Gathering draft note, an audit probe, and a deterministic test; pre-existing audit-suite failures cleared from 22 to 0; the mx-crm submodule was absorbed into the hub as a regular folder, then the mx-reginald submodule (carrying the registry + audit codebase) was absorbed the same way; every submodule-list and narrative reference across the repo was swept to match the new layout."
 author: "Tom Cranstoun"
 created: 2026-05-17
 modified: 2026-05-17
-version: "1.1"
+version: "1.3"
 
 mx:
   status: active
@@ -81,16 +81,32 @@ Tom asked the validator to check every folder containing an HTML set for an `ind
 
 A new principle "Plain Characters in Prose" landed in `principles.cog.md`: no HTML entities (`&ldquo;`, `&rdquo;`, `&hellip;`, `&nbsp;`) inside the reader's words, ASCII straight quotes only, entities reserved for plumbing (URL escapes, displayed code, layout glyphs in chrome). Cross-referenced into `writing-style.md` §3 (typography rules), Pattern 18 in §9 (updated to call back to the §3 rule), Appendix M §26 (HTML carrier guide, with an executable test), and the html-writer skill's polish pass (executable shell check that strips script/style/code/pre and scans the remainder).
 
+### 12. mx-reginald absorbed into the hub
+
+Same pattern as the mx-crm absorption, applied to the larger and more central mx-reginald submodule. The hub takes a snapshot of upstream `Digital-Domain-Technologies-Ltd/mx-reginald` and the submodule entry leaves `.gitmodules`. 580 tracked files (8.7 MB without `node_modules`) re-enter the hub as plain tracked files at `mx-reginald/`, including the registry codebase, the cog index, the signing stubs, the publisher-verification scripts, the full audit subsystem at `mx-reginald/audit/`, and the worker at `mx-reginald/worker/`. Commit history stays in the upstream repository.
+
+The narrative sweep this time touched eight docs: `UBERCOG.cog.md` and `README.md` lost their `[SUBMODULE, PRIVATE]` markers on both `mx-reginald/` and `mx-reginald/audit/`, and the root-level submodule rows no longer include either; `SOUL.md` had its "mounted as a submodule into the hub alongside the other product repos" line rewritten to "lives in the hub at `mx-reginald/`"; the audit-collect skill dropped its "submodule must be initialised" prerequisite; `manual-repository-architecture.cog.md`, `doc-architecture.md`, `hub-mount-table-architecture.md`, and `folder-layout.md` had their `mx-reginald/audit/ [SUBMODULE]` labels rephrased to "hub folder". The mount table in `hub-mount-table-architecture.md` now marks `mx-reginald/` as `(in-repo, not submodule)` alongside `mx-canon/`. The code surface needed no changes: `cog-field-rules.js` already had no explicit `mx-reginald` entry in its `REPO_MAP` (the empty-string MX-hub default covered it), and every path reference in `scripts/audit-pipeline.js` and the audit binaries still resolves because `mx-reginald/audit/` lives at the same path it always did.
+
+Historical entries were left untouched: the CHANGELOG body, the changelog-archives, and the `2026-05-15-mx-audit-into-mx-reginald.cog.md` ADR all correctly describe past state when `mx-reginald` was a submodule; LEARNINGS entry referencing the `mx-audit -> mx-reginald/audit/` rename remains as a worked example.
+
+### 11. mx-crm absorbed into the hub
+
+The mx-crm submodule was retired and its contents brought into the hub as a regular folder at `mx-crm/`. Snapshot-absorb: the hub takes the current `caac795` snapshot from `Digital-Domain-Technologies-Ltd/MX-CRM`; commit history stays in the original repository (which Tom can archive on GitHub at his leisure). The conversion took three coordinated edits — `.gitmodules` lost the `[submodule "packages/mx-crm"]` block, the gitlink at mode 160000 was removed from the hub index, and the working tree was restored from a fresh clone with its `.git` directory stripped so 75 files now live in the hub as plain tracked files.
+
+Six scripts that enumerate writable submodules were pruned in lockstep: `cog-field-rules.js` `REPO_MAP`, and the `SUBMODULE_DIRS` sets in `check-mx-compliance.js`, `fix-mx-compliance.js`, `delete-deprecated-fields.js`, `field-usage-report.js`, `find-dead-canon-fields.js`. Usage-string examples in those scripts and in `reattach-submodules.sh` switched from `--submodule mx-crm` to `--submodule mx-outputs` so they reference something that still exists.
+
+Narrative was swept across thirteen docs so the prose matches the new reality: `UBERCOG.cog.md` and `README.md` lost the `[SUBMODULE, PRIVATE]` markers and the root-level submodule rows now omit mx-crm; the three contact-related skill notes (`mx-contacts`, `write-to`, `opportunity`) had their "commit submodule first then bump pointer" guidance rewritten to "commit alongside other hub work"; `GIT-README.md`'s long submodule tutorial swapped its running example from mx-crm to mx-outputs (still a submodule, so the tutorial stays accurate); the inheritance-boundary example in Appendix M did the same; `manual-repository-architecture.cog.md`, `doc-architecture.md`, `hub-mount-table-architecture.md`, `copyright-and-attribution.md`, `team-onboarding.cog.md`, `mx-canon/README.md`, `folder-layout.md`, and `github-repositories.md` had their "private submodule" / "READ-ONLY" framing rephrased to "hub folder", and the GitHub-repositories registry now marks the upstream `MX-CRM` repo as "archived; contents absorbed into MX-hub at `mx-crm/`". Historical entries (CHANGELOG body, changelog-archives, `about.mx.cog.md` past activity, LEARNINGS rules that name mx-crm as an example identifier) were left untouched on principle.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment | 4 (3 submodules pushed + hub pending) |
-| Files changed (Part 2) | 22 across mx-outputs, mx-reginald, mx-shared-gathering, plus hub |
-| Lines added (Part 2) | mx-outputs: ~2,400 (incl. new AI-USAGE.* and lander); mx-reginald: +1,443 / −135; mx-shared-gathering: +500 |
-| Repositories touched | 4 (mx-outputs, mx-reginald, mx-shared-gathering, hub) |
+| Commits this segment | 5 (3 submodules pushed Part 2 + 2 hub commits in Parts 2 and 3) |
+| Files changed (Part 3) | 99 (75 new files under mx-crm/, 1 .gitmodules edit, 1 gitlink removal, 22 narrative sweep edits, 6 script edits) |
+| Lines added (Part 3) | hub: +7,824 / −4 (the bulk is mx-crm content arriving as plain tracked files) |
+| Repositories absorbed into the hub | 1 (`MX-CRM` snapshot at `caac795`; history stays in the original upstream) |
 | New blog posts | 4 (Part 1) |
 | New blog landers | 2 (use-cases + profiles) |
 | New top-level pages on mx-site | 4 carriers of AI Usage Declaration (md, json, html, pdf) |
@@ -102,6 +118,10 @@ A new principle "Plain Characters in Prose" landed in `principles.cog.md`: no HT
 | HTML hygiene warnings remaining | 0 (122 files scanned clean) |
 | Sub-folder pattern | first content sub-folder on mx-site (Part 1) |
 | Wordlist additions | 17 (Part 1) |
+| Submodule count (after Part 3) | 9 (was 10 before mx-crm absorption) |
+| Files changed (Part 4) | 588 (580 new files under mx-reginald/, 1 .gitmodules edit, 1 gitlink removal, 6 narrative sweep edits) |
+| Lines added (Part 4) | hub: ~149,691 / -4 (mx-reginald carries a much larger codebase than mx-crm: registry, audit, worker, signing, schemas, plans) |
+| Submodule count (after Part 4) | 8 (was 9; mx-reginald absorbed into the hub) |
 
 ---
 
@@ -153,4 +173,9 @@ This segment ran the humanizer skill against material I had just written under t
 | 372bed7 | AI Usage Declaration suite at mx.allabout.network root: HTML, JSON, MD, PDF carriers; profiles lander; eight backlogged blog posts surfaced (mx-outputs, Part 2) |
 | cbf2823 | Audit: AI Usage Declaration probe + pipeline integration + test-suite fixes (mx-reginald, Part 2) |
 | 285424c | Add MX AI Usage Declaration note (mx-shared-gathering, Part 2) |
-| _pending_ | Hub: sub-folder discovery + html-writer skill + check-html-hygiene Rule 3 + plain-characters principle + submodule pointer bumps |
+| 01ae9ebd | Hub: golden-skeleton sync hook + template-voice pre-flight + sidecar API move (hub, Part 2) |
+| 948cd74f | Hub: CHANGELOG entry + REMINDERS items + html-writer skill rule-count fix (hub, Part 2) |
+| 94ff7c5d | Hub: absorb mx-crm submodule into hub as a plain folder + sweep submodule-aware code and narrative (hub, Part 3) |
+| b3c13c8d | Docs: CHANGELOG entry + REMINDERS item for the mx-crm absorption (hub, Part 3) |
+| 3dad8997 | Learnings: git submodule deinit clears the working tree (hub, Part 3) |
+| _pending_ | Hub: absorb mx-reginald submodule into hub as a plain folder + narrative sweep (hub, Part 4) |
