@@ -1,0 +1,51 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-19/mx.allabout.network/mx-allabout-network-report.md",
+  "timestamp": "2026-05-19T16:17:28.841Z",
+  "model": "claude-sonnet-4-6",
+  "runCount": 3,
+  "findingCount": 5,
+  "regexFindingCount": 0,
+  "llmFindingCount": 5,
+  "findings": [
+    {
+      "category": "subtle-failure-framing",
+      "message": "The phrase 'leaves something to be desired' is on the banned subtle-failure list. The Balanced Scorecard assigns 'Could Be Better / C' to Accessibility (WCAG) while the headline Accessibility score is 100/100 — the mismatch is jarring in itself — but the specific phrase pattern flagged here is the grade label 'Could Be Better' used as a prose stand-in for a condemned verdict. More critically, the Summary of Findings table labels the Accessibility score of 100/100 as 'Could Be Better', which directly contradicts the audit data and reads as passive-aggressive condemnation of a perfect score.",
+      "context": "Balanced Scorecard table: 'Accessibility (WCAG) | Could Be Better | C'. Summary of Findings table: 'Accessibility | 100/100 | Could Be Better'.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The llms.txt and llms-full.txt absence findings are presented as recommendations but the prose for llms-full.txt collapses into generic domain framing with no data anchor in the recommendation sentence itself. The sentence 'we recommend adding one so that machines can retrieve the full text of each page in a single structured request rather than crawling each URL individually' names a benefit category but no specific action (file format, placement, content structure, or sitemap entry) that distinguishes this site from any other 100-page property. The llms.txt section earlier in the report does supply a technical mechanism (wrap in HTML, serve as text/html, add sitemap entry), but the llms-full.txt recommendation block contains none of that — it is a pure domain-framing sentence with no data anchor.",
+      "context": "llms-full.txt section: 'We did not locate an llms-full.txt file at mx.allabout.network; the endpoint returns a 404, it is absent from the sitemap, and no discovery link appears in the homepage head. For a content-heavy property of 101 audited pages, we recommend adding one so that machines can retrieve the full text of each page in a single structured request rather than crawling each URL individually.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The AI Attribution section states 'This typically takes about 30 minutes' for setting up GA4 channel groups. This effort estimate does not appear in the audit data or any facts block in the report and cannot be derived from the audit findings. It is a generic implementation estimate introduced as if it were an audit-grounded fact.",
+      "context": "Step 1 of the 6-step playbook: 'Set up custom regex channel groups in GA4 … Match source/medium against [list of domains]. Takes about 30 minutes.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "The word 'optimize' (US spelling) appears in the Appendix E scoring methodology prose ('optimise' is used correctly elsewhere in the report, e.g. 'image optimisation'). The SEO score table uses 'titleOptimization' and 'metaDescriptionOptimization' — these are vocabulary/code identifiers and should not be flagged — but the prose bullet 'Optimise title (30-60 chars) and meta description (70-160 chars)' is correctly British. However, the 'imageOptimization' row label inside the SEO scoring table ('imageOptimization (alt text or decorative)') is a prose-facing label rendered in US spelling in a narrative context, and the Appendix C heading 'Image Optimisation' uses UK spelling. The report is inconsistent: US form 'optimization' appears in the scoring-input labels rendered as prose-facing table content while the surrounding narrative uses UK 'optimisation'. Flag as register drift.",
+      "context": "Appendix E, SEO score input table rows: 'titleOptimization (30-60 chars optimal)', 'metaDescriptionOptimization (70-160 chars optimal)', 'imageOptimization (alt text or decorative)' — US spellings in prose-facing table labels, while Appendix C heading reads 'Image Optimisation' and narrative prose throughout uses 'optimise/optimisation'.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "The phrase 'a genuinely satisfying experience for visitors' in the Executive Summary is marketing-register copy rather than consultant-to-client audit prose. 'Genuinely satisfying' is an evaluative superlative unsupported by any user-research or satisfaction-metric data in the audit — the audit measures performance scores and load times, not visitor satisfaction. The cumulative effect of this sentence alongside 'clearly built with its human audience in mind' and 'earns and retains attention' tips the paragraph into promotional framing.",
+      "context": "Executive Summary: 'Performance stands out as the strongest dimension across the audited set, and that foundation carries real weight: fast, well-structured pages with solid SEO at 91/100 create a genuinely satisfying experience for visitors.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    }
+  ]
+}

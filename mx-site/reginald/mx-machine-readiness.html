@@ -249,17 +249,20 @@
   .voices{
     display:grid; grid-template-columns:repeat(4,1fr); gap:0;
     border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    list-style:none; margin:0; padding:0;
   }
   .voice{padding:28px 24px 28px 0; border-right:1px solid rgba(26,24,21,.18)}
   .voice:last-child{border-right:none; padding-right:0}
   .voice .who{
-    font-family:"JetBrains Mono", monospace; font-size:11px;
+    display:block;
+    font-family:"JetBrains Mono", monospace; font-size:11px; font-style:normal;
     letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;
   }
   .voice .what{
     font-family:"Fraunces", serif; font-style:italic;
-    font-size:17px; line-height:1.45; color:#2e2b27; margin:0;
+    font-size:17px; line-height:1.45; color:#2e2b27; margin:0; padding:0; border:0; quotes:none;
   }
+  .voice .what::before, .voice .what::after{content:none}
   .consensus-conclusion{
     margin-top:56px; font-family:"Fraunces", serif; font-weight:300;
     font-size:clamp(24px, 3vw, 36px); line-height:1.25;
@@ -320,7 +323,7 @@
     font-family:"JetBrains Mono", monospace;
     font-size:10.5px; letter-spacing:.16em;
     text-transform:uppercase; color:var(--muted);
-    margin-bottom:14px;
+    margin:0 0 14px;
   }
   .scope .scope-head h3{
     font-family:"Fraunces", serif; font-weight:400;
@@ -401,8 +404,9 @@
 
   .actions{margin-top:28px; border-top:1px solid var(--rule); padding-top:24px}
   .actions .ah{
-    font-family:"JetBrains Mono", monospace; font-size:11px;
-    letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;
+    font-family:"JetBrains Mono", monospace; font-size:11px; font-weight:normal;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+    margin:0 0 14px;
   }
   .action-list{list-style:none; padding:0; margin:0; display:grid; gap:14px}
   .action-list li{
@@ -435,6 +439,7 @@
   .seal-grid{
     margin-top:64px; display:grid; grid-template-columns:repeat(3,1fr); gap:0;
     border:1px solid rgba(244,239,230,.18);
+    list-style:none; padding:0;
   }
   .seal{padding:32px 28px; border-right:1px solid rgba(244,239,230,.18)}
   .seal:last-child{border-right:none}
@@ -526,7 +531,7 @@
   .cog-body{padding:24px 28px; overflow-x:auto}
   .cog .k{color:#d49a89}
   .cog .s{color:#a8c4a3}
-  .cog .c{color:#6b6258; font-style:italic}
+  .cog .c{color:#928a7d; font-style:italic}
   .cog .v{color:#e8e0cd}
 
   .principles{padding:96px 0; border-bottom:1px solid var(--rule)}
@@ -1090,6 +1095,7 @@
   }
   .arch-principles .ap-grid{
     display:grid; grid-template-columns:repeat(3,1fr); gap:48px;
+    list-style:none; padding:0; margin:0;
   }
   .arch-principles .ap{
     display:grid; grid-template-columns:32px 1fr; gap:14px;
@@ -1256,33 +1262,33 @@
   </section>
 
   <section class="consensus">
-    <div class="consensus-head">
+    <header class="consensus-head">
       <h2>The whole industry is having the <em>same conversation.</em></h2>
       <p class="lede">
         Pick any major framework on the table: from a software vendor,
         a Big Four advisory, a national standards body, a regulator. They differ in
         emphasis. They share a frame. The frame is the building.
       </p>
-    </div>
+    </header>
 
-    <div class="voices">
-      <div class="voice">
-        <div class="who">Platform vendors</div>
-        <p class="what">&ldquo;Adopt our AI responsibly. Train your people. Govern your prompts. Evaluate your suppliers.&rdquo;</p>
-      </div>
-      <div class="voice">
-        <div class="who">Big Four advisory</div>
-        <p class="what">&ldquo;Assess your readiness. Pilot use cases. Scale adoption. Measure ROI and risk together.&rdquo;</p>
-      </div>
-      <div class="voice">
-        <div class="who">Standards bodies</div>
-        <p class="what">&ldquo;Manage AI risk inside the lifecycle. Document the model. Audit the deployment. Govern the system.&rdquo;</p>
-      </div>
-      <div class="voice">
-        <div class="who">Regulators</div>
-        <p class="what">&ldquo;Classify the AI you operate. Disclose the AI you use. Remediate the AI you deploy.&rdquo;</p>
-      </div>
-    </div>
+    <ul class="voices">
+      <li class="voice">
+        <cite class="who">Platform vendors</cite>
+        <blockquote class="what">&ldquo;Adopt our AI responsibly. Train your people. Govern your prompts. Evaluate your suppliers.&rdquo;</blockquote>
+      </li>
+      <li class="voice">
+        <cite class="who">Big Four advisory</cite>
+        <blockquote class="what">&ldquo;Assess your readiness. Pilot use cases. Scale adoption. Measure ROI and risk together.&rdquo;</blockquote>
+      </li>
+      <li class="voice">
+        <cite class="who">Standards bodies</cite>
+        <blockquote class="what">&ldquo;Manage AI risk inside the lifecycle. Document the model. Audit the deployment. Govern the system.&rdquo;</blockquote>
+      </li>
+      <li class="voice">
+        <cite class="who">Regulators</cite>
+        <blockquote class="what">&ldquo;Classify the AI you operate. Disclose the AI you use. Remediate the AI you deploy.&rdquo;</blockquote>
+      </li>
+    </ul>
 
     <p class="consensus-conclusion">
       All of it sound. All of it necessary. All of it <strong>inside the building.</strong>
@@ -1337,10 +1343,10 @@
     </div>
 
     <aside class="scope" aria-label="MX vs GEO scope clarification">
-      <div class="scope-head">
-        <div class="ph">A second contrast &middot; not the same as inward / outward</div>
+      <header class="scope-head">
+        <p class="ph">A second contrast &middot; not the same as inward / outward</p>
         <h3>MX is not <em>GEO.</em></h3>
-      </div>
+      </header>
       <div class="scope-body">
         <p>
           A common misreading places MX in the same category as <strong>Generative Engine Optimization</strong> (GEO) or <strong>AI Engine Optimization</strong> (AEO), but the questions are different, and so are the answers.
@@ -1373,11 +1379,11 @@
   <section class="phases">
 
     <article class="phase">
-      <div class="phase-id">
+      <header class="phase-id">
         <span class="num">01</span>
         Phase 01 <span class="arrow">→</span><br/>
         Audit how machines see you
-      </div>
+      </header>
       <div class="phase-content">
         <h3>Audit the surfaces machines actually read.</h3>
         <p class="lede">
@@ -1400,23 +1406,23 @@
           </p>
         </div>
 
-        <div class="actions">
-          <div class="ah">Actions</div>
+        <footer class="actions">
+          <h4 class="ah">Actions</h4>
           <ul class="action-list">
             <li><span class="marker">→</span><span><strong>Map the five contexts.</strong> Inventory how training ingestion, RAG retrieval, search indexing, browser agents and voice assistants currently see your domain.</span></li>
             <li><span class="marker">→</span><span><strong>Test the easy wins.</strong> Check <code>llms.txt</code> serves the correct MIME type and is included in your sitemap, the two most common failures that block Common Crawl ingestion.</span></li>
             <li><span class="marker">→</span><span><strong>Treat accessibility as foundation.</strong> WCAG-compliant content is, in practice, more machine-readable. Machines and humans benefit from the same structural clarity.</span></li>
           </ul>
-        </div>
+        </footer>
       </div>
     </article>
 
     <article class="phase">
-      <div class="phase-id">
+      <header class="phase-id">
         <span class="num">02</span>
         Phase 02 <span class="arrow">→</span><br/>
         Publish a cog
-      </div>
+      </header>
       <div class="phase-content">
         <h3>Pilot with a self-describing artefact.</h3>
         <p class="lede">
@@ -1439,23 +1445,23 @@
           </p>
         </div>
 
-        <div class="actions">
-          <div class="ah">Actions</div>
+        <footer class="actions">
+          <h4 class="ah">Actions</h4>
           <ul class="action-list">
             <li><span class="marker">→</span><span><strong>Choose one high-cost-of-error document.</strong> Pricing, compliance, safety information: anywhere a hallucination would damage trust or invite a complaint.</span></li>
             <li><span class="marker">→</span><span><strong>Publish it as a cog.</strong> YAML frontmatter declaring purpose, audience, stability, refers-to, and update instructions. Human-readable body underneath.</span></li>
             <li><span class="marker">→</span><span><strong>Measure quotation fidelity.</strong> Ask the major LLMs and retrieval agents the same questions before and after. Track the delta.</span></li>
           </ul>
-        </div>
+        </footer>
       </div>
     </article>
 
     <article class="phase">
-      <div class="phase-id">
+      <header class="phase-id">
         <span class="num">03</span>
         Phase 03 <span class="arrow">→</span><br/>
         Sign with REGINALD
-      </div>
+      </header>
       <div class="phase-content">
         <h3>Move from machine-readable to machine-checkable.</h3>
         <p class="lede">
@@ -1484,23 +1490,23 @@
           </p>
         </div>
 
-        <div class="actions">
-          <div class="ah">Actions</div>
+        <footer class="actions">
+          <h4 class="ah">Actions</h4>
           <ul class="action-list">
             <li><span class="marker">→</span><span><strong>Sign your high-stakes cogs first.</strong> Prices, terms, regulatory statements. Anywhere a counterparty might later need to prove what you said and when.</span></li>
             <li><span class="marker">→</span><span><strong>Make signatures discoverable.</strong> A signed cog that no machine can find is no signature at all. Link from sitemaps, feeds and <code>llms.txt</code>.</span></li>
             <li><span class="marker">→</span><span><strong>Train teams to think in cogs.</strong> Authoring, legal review and publishing all need to understand that a signed artefact is now part of the record.</span></li>
           </ul>
-        </div>
+        </footer>
       </div>
     </article>
 
     <article class="phase">
-      <div class="phase-id">
+      <header class="phase-id">
         <span class="num">04</span>
         Phase 04 <span class="arrow">→</span><br/>
         Watch the citations
-      </div>
+      </header>
       <div class="phase-content">
         <h3>Monitor what machines say about you, not just what you say to them.</h3>
         <p class="lede">
@@ -1523,14 +1529,14 @@
           </p>
         </div>
 
-        <div class="actions">
-          <div class="ah">Actions</div>
+        <footer class="actions">
+          <h4 class="ah">Actions</h4>
           <ul class="action-list">
             <li><span class="marker">→</span><span><strong>Track what assistants say about you.</strong> Set a regular sweep across major LLMs, browser agents and voice interfaces with your priority queries.</span></li>
             <li><span class="marker">→</span><span><strong>Tie corrections to cogs.</strong> When a machine misquotes, the fix is rarely a takedown. It is publishing a signed cog the machine can find next time.</span></li>
             <li><span class="marker">→</span><span><strong>Choose what is better for the planet.</strong> Reduce inference. Build on what already works. Cleaner content reduces compute on every side of the exchange.</span></li>
           </ul>
-        </div>
+        </footer>
       </div>
     </article>
 
@@ -1812,23 +1818,23 @@
       operational weight, set out below.
     </p>
 
-    <div class="seal-grid">
-      <div class="seal">
+    <ul class="seal-grid">
+      <li class="seal">
         <div class="seal-icon">R</div>
         <h4>Registry</h4>
         <p>A public record of what was published, by whom, and when. Designed to be queryable by humans, machines and auditors alike.</p>
-      </div>
-      <div class="seal">
+      </li>
+      <li class="seal">
         <div class="seal-icon">N</div>
         <h4>Notarised</h4>
         <p>Each cog carries a cryptographic signature using established standards. Tampering is detectable. Authorship is not deniable. Time of publication is provable.</p>
-      </div>
-      <div class="seal">
+      </li>
+      <li class="seal">
         <div class="seal-icon">L</div>
         <h4>Legitimate</h4>
         <p>The signature is paired with discoverable metadata: purpose, audience, refers-to, update rules. A machine can decide whether to quote it without guessing.</p>
-      </div>
-    </div>
+      </li>
+    </ul>
 
     <div class="reginald-deploy">
       <div class="rd-head">
@@ -2068,29 +2074,29 @@ already issued remain valid until their stated expiry.
 
     <div class="arch-principles">
       <div class="ap-eyebrow">Three principles bind the four parts</div>
-      <div class="ap-grid">
-        <div class="ap">
+      <ol class="ap-grid">
+        <li class="ap">
           <div class="ap-num">01</div>
           <div class="ap-body">
             <strong>Design for both humans and machines.</strong>
             <p>The human stays in the loop. Every output is readable and reviewable by both audiences. There is no machine-only artefact in MX, and no human-only artefact either.</p>
           </div>
-        </div>
-        <div class="ap">
+        </li>
+        <li class="ap">
           <div class="ap-num">02</div>
           <div class="ap-body">
             <strong>Accessibility is a requirement.</strong>
             <p>WCAG conformance is not an optional adjacency. Content properly structured for assistive technology is, almost without exception, content machines can also parse cleanly.</p>
           </div>
-        </div>
-        <div class="ap">
+        </li>
+        <li class="ap">
           <div class="ap-num">03</div>
           <div class="ap-body">
             <strong>Choose what is better for the planet.</strong>
             <p>Reduce compute, reduce inference, reduce energy. Build on what humans already know and use. Cleaner upstream content reduces downstream cost on every machine that touches it.</p>
           </div>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
   </section>
 
