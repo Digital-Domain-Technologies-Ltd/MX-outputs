@@ -144,8 +144,8 @@
             <li><a href="#a-fair-test">A fair test for a serious CMS</a></li>
             <li><a href="#what-typo3-already-gets-right">What TYPO3 already gets right</a></li>
             <li><a href="#where-the-gap-sits">Where the MX gap sits, and why it is narrow</a></li>
-            <li><a href="#the-configuration-changes">The configuration changes that close it</a></li>
-            <li><a href="#the-verdict">The verdict</a></li>
+            <li><a href="#the-configuration-changes">What to change, and in what order</a></li>
+            <li><a href="#the-verdict">Verdict</a></li>
             <li><a href="#what-to-do-next">What to do next</a></li>
           </ul>
         </nav>
@@ -173,7 +173,7 @@
 
         <h2 id="a-fair-test">A fair test for a serious CMS</h2>
 
-        <p>A CMS earns its place in the MX layer by answering one question well: when an automated reader fetches one of your pages, can it tell what the page is, who stands behind it, when it was published, and whether it may be cited? Not "can a browser render it nicely". Not "can a search engine index it". The agent test is narrower and harsher. The reader gets one HTTP fetch and the bytes that come back. Everything it needs has to be in those bytes.</p>
+        <p>A CMS earns its place in the MX layer by answering one question well: when an automated reader fetches one of your pages, can it tell what the page is, who stands behind it, when it was published, and whether it may be cited? Browser-readability and search-indexability are the easier tests. The agent test is narrower and harsher. The reader gets one HTTP fetch and the bytes that come back. Everything it needs has to be in those bytes.</p>
 
         <p>The two ways a CMS can fail this test are well known. It can fail by hiding content behind client-side JavaScript that the reader will not execute. It can fail by serving content that is technically present but not machine-readable: no schema type, no author, no date, no structural landmarks. TYPO3 passes the first test cleanly. Where work is needed sits in the second.</p>
 
@@ -188,15 +188,15 @@
           <li><strong>JSON-LD in the document head.</strong> Structured data sits where the reader looks first. Every fetched page receives the structured data immediately, without needing to parse the body.</li>
           <li><strong>Security headers complete.</strong> HTTPS, HSTS, Content-Security-Policy, X-Frame-Options, and X-Content-Type-Options were present on every audited page. That is the table stakes layer of trust, and TYPO3 had it right.</li>
           <li><strong>BreadcrumbList implemented and valid.</strong> Navigation context is machine-readable across the article tree. Score: 100 percent on required properties.</li>
-          <li><strong>Hreflang across ten locales.</strong> The multilingual architecture maps each localised page to its siblings correctly. A multilingual agent receives the right language variant on the first hop.</li>
+          <li><strong>Hreflang across ten locales.</strong> The multilingual architecture maps each language-variant page to its siblings correctly. A multilingual agent receives the right language variant on the first hop.</li>
           <li><strong>Heading quality and content ratio.</strong> A single H1 per page, no level jumps, and an average body-content ratio of 66 percent. The pages are content-heavy rather than overhead-heavy, which keeps agents inside their fetch window.</li>
         </ul>
 
-        <p>That is a strong baseline. It is not the baseline of a system that was retrofitted for machine readers; it is the baseline of a CMS whose default behaviour happens to be agent-friendly because the project values served HTML and editorial discipline.</p>
+        <p>That is a strong baseline. It is not the baseline of a system that was retrofitted for machine readers; it is the baseline of a CMS whose default position happens to be agent-friendly because the project values served HTML and editorial discipline.</p>
 
         <h2 id="where-the-gap-sits">Where the MX gap sits, and why it is narrow</h2>
 
-        <p>The gap is not in the content. It is not in the data model. TYPO3 stores rich editorial metadata in its Table Configuration Array, known as TCA: the article title, the author, the editor, the creation date, the content category, the relationships between pages. Editors capture all of that as part of the normal workflow. The gap is that this metadata is not yet surfaced in the markup the agent reads.</p>
+        <p>The gap sits in the markup, not in the content or the data model. TYPO3 stores rich editorial metadata in its Table Configuration Array, known as TCA: the article title, the author, the editor, the creation date, the content category, the relationships between pages. Editors capture all of that as part of the normal workflow. The metadata is simply not yet surfaced in the markup the agent reads.</p>
 
         <p>Three specific shapes recur on TYPO3 sites of this kind.</p>
 
@@ -206,9 +206,9 @@
           <li><strong>The governance layer is missing.</strong> A well-built TYPO3 site usually publishes a complete sitemap.xml from its page tree but stops there. The newer machine-readable governance files, <code>llms.txt</code> and a named-crawler section in <code>robots.txt</code>, are not yet generated. Agents fetch the site under no stated policy.</li>
         </ul>
 
-        <p>None of those gaps requires a content migration. None requires a CMS upgrade. All of them sit in the templating and configuration layer that TYPO3 was designed to make changeable.</p>
+        <p>None of those gaps requires a content migration or a CMS upgrade. They sit in the templating and configuration layer that TYPO3 was designed to make changeable.</p>
 
-        <h2 id="the-configuration-changes">The configuration changes that close it</h2>
+        <h2 id="the-configuration-changes">What to change, and in what order</h2>
 
         <p>The remediation list is short. I have put it in priority order, with the effort each item realistically takes.</p>
 
@@ -221,9 +221,9 @@
           <li><strong>Three accessibility fixes that are also MX fixes.</strong> Add a skip link to the main page template; add <code>&lt;title&gt;</code> and <code>&lt;desc&gt;</code> to the inline SVG icon sprite; wrap article body content in an <code>&lt;article&gt;</code> element. Each of those is a single template-layer change that resolves multiple recurring issues across the entire site, and each one closes both a WCAG gap and an agent-readability gap. The same structural elements serve both audiences.</li>
         </ol>
 
-        <p>The full list above is, in TYPO3 terms, half a day of careful templating and a clean staging deploy. The data layer does not change. The editorial workflow does not change. The agent-readability profile changes from Basic to Structured: from "agents can discover" to "agents can cite and attribute".</p>
+        <p>The full list above is, in TYPO3 terms, half a day of careful templating and a clean staging deploy. Data layer untouched. Editorial workflow untouched. The agent-readability profile shifts from Basic to Structured: from "agents can discover" to "agents can cite and attribute".</p>
 
-        <h2 id="the-verdict">The verdict</h2>
+        <h2 id="the-verdict">Verdict</h2>
 
         <p>TYPO3 is, on the evidence of this audit and others like it, one of the better-suited enterprise CMSes for the MX layer. The reason is structural. The platform values served HTML over client-side rendering. It captures rich editorial metadata in a data model designed for reuse. It exposes a configuration layer (Site Sets, Fluid templates, TypoScript) that is built to be changed without touching content. None of that was done because the project was thinking about AI agents. It was done because the project takes publishing seriously. The two values turn out to be the same value, just looked at from different sides.</p>
 
