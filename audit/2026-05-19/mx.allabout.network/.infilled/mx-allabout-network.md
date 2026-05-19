@@ -12,11 +12,11 @@ auditTool: "web-audit-suite"
 auditDate: "2026-05-19"
 description: "Executive audit report analysing accessibility, performance, SEO, structured data, and AI agent compatibility for Mx Allabout"
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
-performanceScore: 97
+performanceScore: 85
 accessibilityScore: 100
 seoScore: 91
 llmSuitabilityScore: 98
-totalIssues: 10
+totalIssues: 0
 pagesAudited: 101
 version: "1.0"
 confidential: true
@@ -64,7 +64,7 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 | | Score | |
 |:---|---:|:---|
-| Performance | **97**/100 | `#################-` |
+| Performance | **85**/100 | `###############---` |
 | Accessibility | **100**/100 | `##################` |
 | SEO | **91**/100 | `################--` |
 | Machine Suitability | **98**/100 | `##################` |
@@ -89,7 +89,6 @@ PATTERN (follow strictly):
 - Paragraph 2: Introduce the machine-experience OPPORTUNITY. Frame it as the next natural step, not a failing. Use the phrase "the headline opportunity is..." or "the opportunity we want to draw attention to is..." Cite the specific machine dimension that most moves the needle. If there are WCAG AA issues, name accessibility as a Priority 1 compliance item here, before the MX opportunity.
 - Optional Paragraph 3: If there is a served-vs-rendered gap or a platform constraint, name it — and note that Schema.org JSON-LD is the highest-leverage asset that every agent can read regardless of rendering.
 SCOPE: 101 pages were audited. Scope all claims to "the audited set" — do not say "site-wide" unless cross-page consistency is explicitly confirmed in the facts.
-ACCESSIBILITY NOTE: There are 10 WCAG AA issues. If Accessibility is not grade A, do NOT call it the "strongest" dimension in Paragraph 1. Acknowledge the accessibility opportunity in Paragraph 2 as a Priority 1 compliance item before the MX opportunity.
 BANNED WORDS: "failing", "failure", "gap" (as verdict), "weakness", "broken", "poor", "deficient", "inadequate", "lacking" (as verdict), "site-wide" (unless facts explicitly confirm multi-page consistency).
 PREFERRED WORDS: "opportunity", "headline opportunity", "next step", "room to strengthen", "foundation", "the chance to", "solid", "the groundwork is there".
 TONE: "You did good for humans — now build for machines." Never condescending. Never a list of failings. Every metric is framed as a relative position that a concrete improvement can lift.
@@ -99,7 +98,7 @@ Facts (do not change any number, percentage, URL, page count, or name):
 - Platform: GitHub Pages
 - Pages audited: 101
 - SEO: 91/100 (Excellent)
-- Accessibility: 10 critical WCAG AA issues
+- Accessibility: 0 critical WCAG AA issues
 - AI Suitability (served): 98/100
 - Structured Data Quality: 93/100
 - Discovery Readiness: 91/100
@@ -139,17 +138,17 @@ TONE: Factual, warm, peer-to-peer.
 
 Facts (do not change any number, percentage, URL, page count, or name):
 - Pages audited: 101
-- Performance: 300ms avg (Excellent)
+- Performance: 598ms avg (Excellent)
 - Accessibility: 100/100 (Excellent)
 - SEO: 91/100 (Excellent)
-- Accessibility issues: 10
+- Accessibility issues: 0
 -->
 
 | Dimension | Rating | Grade |
 |-----------|--------|-------|
 | UX / Navigation | Excellent | A |
 | Performance | Excellent | A |
-| Accessibility (WCAG) | Could Be Better | C |
+| Accessibility (WCAG) | Excellent | A |
 | Trust and Credibility | Excellent | A |
 
 ### Machine Experience
@@ -248,7 +247,7 @@ Facts (do not change any number, percentage, URL, page count, or name):
 - Pages audited: 101
 - SEO (all pages): 91/100
 - SEO (content pages only): 92/100
-- Accessibility: 100/100, 10 issues
+- Accessibility: 100/100, 0 issues
 - Security headers: 5/5 present (HTTPS, HSTS, CSP, X-Frame-Options, X-Content-Type-Options); 105 of 106 audited URLs carry all five
 - Structured Data Quality: 93/100
 - Consistency: 99%
@@ -256,7 +255,7 @@ Facts (do not change any number, percentage, URL, page count, or name):
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
-| Performance | Excellent | Excellent — 300ms average load time |
+| Performance | Excellent | Excellent — 598ms average load time |
 | SEO (content pages) | 92 | Excellent — titles, meta descriptions, canonical URLs in place |
 | Security | 5/5 | HTTPS, HSTS, CSP, X-Frame-Options, X-Content-Type-Options — 0 headers absent |
 | Structured Data | 93 | Excellent — JSON-LD on every page with valid Schema.org vocabulary |
@@ -266,9 +265,10 @@ Facts (do not change any number, percentage, URL, page count, or name):
 
 **Positive patterns observed:**
 
+- Accessibility is compliant across the audited set: Pa11y reports 100/100 with zero WCAG 2.1 AA errors on 101 pages.
 - All 8 tested AI agents can fetch the site: ClaudeBot (Anthropic), GPTBot (OpenAI), ChatGPT-User (OpenAI), PerplexityBot, GoogleOther (Google AI), Google-Extended, CCBot (Common Crawl), Plain request (no UA) all return HTTP 200 at inference time.
 - Structured Data Quality of 93/100 (Decoration): the schema is valid, required properties are complete, and the vocabulary is in good order.
-- Body content ratio averages 63%: pages are content-heavy, not overhead-heavy, which helps agents reach real prose inside a cheap fetch.
+- Body content ratio averages 62%: pages are content-heavy, not overhead-heavy, which helps agents reach real prose inside a cheap fetch.
 
 ---
 
@@ -330,51 +330,40 @@ Sort the at-a-glance table by bucket in the order: `Compliance Risk` first (lega
 
 After the at-a-glance table, render one Priority N: <Title> block per row in the table. Title format: `**Priority N: <Title>**` on a single line, with the title using only commas, colons, or parentheses. When citing a WCAG criterion or numeric anchor in the title, use a comma or parenthesis: `Duplicate ID Attributes, WCAG 4.1.1` or `Semantic Structure 20/100 (573 Bare Divs out of 867 Total Elements)`. Each Priority block has exactly four labelled fields: **Bucket**, **Finding**, **What to change and why**, **Effort**. The Bucket value matches the table row. The "What to change and why" field is 2-4 bulleted concrete fixes, each with the WHY (which metric moves, which agent behaviour unlocks, which Core Web Vital improves, which WCAG criterion is addressed): developers know HTML; what they need from this report is the reasoning behind the fix.
 
-Div Soup (Semantic Structure): rendered score 43/100, band high. When the rendered score is below 70, include this as a numbered Priority row. The figures 95 bare divs out of 153 total describe the WORST-CASE page in the audited set (https://mx.allabout.network/reginald/mx-machine-readiness.html), not a site-wide average. The finding title and the Finding paragraph must scope to that worst page; do NOT present these numbers as if they hold across every audited page. The title should include the rendered score, the worst-page URL, and the bare-divs-of-total figure (for example, a title naming the score, the page path, and the figure such as "95 of 153 bare divs"). In the Finding paragraph, name the worst page URL explicitly and note that the figures cited come from it specifically; if the band still applies because most pages share the template, say so.
+Div Soup (Semantic Structure): rendered score 43/100, band high. When the rendered score is below 70, include this as a numbered Priority row. The figures 75 bare divs out of 121 total describe the WORST-CASE page in the audited set (https://mx.allabout.network/reginald/mx-machine-readiness.html), not a site-wide average. The finding title and the Finding paragraph must scope to that worst page; do NOT present these numbers as if they hold across every audited page. The title should include the rendered score, the worst-page URL, and the bare-divs-of-total figure (for example, a title naming the score, the page path, and the figure such as "95 of 153 bare divs"). In the Finding paragraph, name the worst page URL explicitly and note that the figures cited come from it specifically; if the band still applies because most pages share the template, say so.
 
 Separate Priority blocks with `---`.
 
 FACTS:
 - Pa11y data for this audit: 
-
-Pa11y findings for this audit (use ONLY these for specific recommendations):
-- **WCAG 2.4.1**: This link points to a named anchor "organisational-implementation" within the document, but no anchor exists with that name. | selector: `#index > nav > ul > li:nth-child(11) > a` | 1 instance on 1 page | affects: sighted keyboard users
-- **WCAG 2.4.1**: This link points to a named anchor "where-mx-fits-in-your-organisation" within the document, but no anchor exists with that name. | selector: `#index > nav > ul > li:nth-child(8) > a` | 1 instance on 1 page | affects: sighted keyboard users
-- **WCAG 1.4.3**: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
-- **WCAG 1.4.3**: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
-- **WCAG 1.4.3**: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
 - Div Soup rendered score: 43/100, band high
-- Div Soup bare divs: 95 of 153 (figures from the WORST page only)
+- Div Soup bare divs: 75 of 121 (figures from the WORST page only)
 - Div Soup worst page URL: https://mx.allabout.network/reginald/mx-machine-readiness.html
 - Div Soup audited page count: 106
+
+When a Pa11y finding row in  is annotated `third-party iframe from <host> (vendor SDK, not site template)`, the "What to change and why" bullets MUST NOT prescribe a site-template, theme, or partial edit for that selector. The iframe is injected at runtime by the named vendor SDK and does not exist in the site's own template. The valid remediation paths are: (a) an SDK upgrade with the vendor (cite the host), or (b) a small DOM-observer patch that adds the missing attribute after injection. Name the third-party origin in the prose so the reader can see why the fix path is different from the in-template patterns above it.
 
 DO_NOT:
 - Use H1 (# heading) — the document already has a title H1; use ## or lower if any heading is needed.
 - Output HTML code blocks or implementation tutorials.
 - Write "cannot" in the Impact column; agents vary in capability and heuristics.
 - Use an em-dash in any Priority title; the em-dash separator `Title — WCAG X.Y.Z` is a tone violation.
-- Invent Pa11y findings (e.g. keyboard-navigation or focus-order issues) not listed in 
-
-Pa11y findings for this audit (use ONLY these for specific recommendations):
-- **WCAG 2.4.1**: This link points to a named anchor "organisational-implementation" within the document, but no anchor exists with that name. | selector: `#index > nav > ul > li:nth-child(11) > a` | 1 instance on 1 page | affects: sighted keyboard users
-- **WCAG 2.4.1**: This link points to a named anchor "where-mx-fits-in-your-organisation" within the document, but no anchor exists with that name. | selector: `#index > nav > ul > li:nth-child(8) > a` | 1 instance on 1 page | affects: sighted keyboard users
-- **WCAG 1.4.3**: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
-- **WCAG 1.4.3**: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users
-- **WCAG 1.4.3**: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.96:1. Recommendation:  change text colour to #fffffe. | selector: `html > body > div:nth-child(4) > section:nth-child(1) > div …` | 1 instance on 1 page | affects: low-vision users above.
+- Invent Pa11y findings (e.g. keyboard-navigation or focus-order issues) not listed in  above.
 - Include Div Soup as a Priority row when the rendered score is 70 or above.
+- Prescribe a site-template / theme / partial edit for any Pa11y row annotated `third-party iframe from <host>`. Those iframes are vendor-SDK injections at runtime; the fix path is an SDK upgrade or DOM-observer patch, not a template change.
 
 FACTS (do not change any number, percentage, URL, page count, or name):
 - Pages audited: 101 — scope all Priority descriptions to "the audited page" (singular) or "the audited set" (plural); do NOT say "site-wide" or "across the site"
 - Discovery Readiness: 91/100 (Excellent)
 - Structured Data Quality: 93/100 (Excellent)
 - Metadata Stack Completeness: 95/100 (Excellent)
-- Accessibility: 100/100 (Excellent) — 10 issues
+- Accessibility: 100/100 (Excellent) — 0 issues
 - SEO: 91/100 (Excellent)
 - Security headers: 5/5 present (HTTPS, HSTS, CSP, X-Frame-Options, X-Content-Type-Options); 105 of 106 audited URLs carry all five
 - Heading quality: 95/100
 - Pipeline Survivability: 100/100
 - Served HTML: 98/100, Rendered HTML: n/a/100
-- Performance: 300ms average load time
+- Performance: 598ms average load time
 
 PRIORITY-BLOCK CONTRACT — non-negotiable for Gate 0e (section completeness):
 - After the at-a-glance table, render one block per row.
@@ -479,11 +468,11 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://mx.allabout.network/blog/profiles/`. A first-time visitor sees the cold-cache cost: the crawler recorded 981 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 878ms, 57ms, 69ms, giving a returning-visitor median of **69 ms**. **Returning-visitor verdict: Healthy**.
+**Slowest.** The slowest page is `https://mx.allabout.network/books/index.html`. A first-time visitor sees the cold-cache cost: the crawler recorded 1534 ms on its initial fetch. **First-visit verdict: Acceptable but elevated**. Three cache-busted re-probes that followed returned 848ms, 240ms, 239ms, giving a returning-visitor median of **240 ms**. **Returning-visitor verdict: Healthy**.
 
-**Median-load control.** The median-load control page is `https://mx.allabout.network/services/examples.html`. A first-time visitor sees the cold-cache cost: the crawler recorded 266 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 299ms, 62ms, 315ms, giving a returning-visitor median of **299 ms**. **Returning-visitor verdict: Healthy**.
+**Median-load control.** The median-load control page is `https://mx.allabout.network/blog/use-cases/what-blockchain-and-crypto-have-to-do-with-mx.html`. A first-time visitor sees the cold-cache cost: the crawler recorded 533 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 181ms, 257ms, 336ms, giving a returning-visitor median of **257 ms**. **Returning-visitor verdict: Healthy**.
 
-**Verdict:** Server response time is within healthy bounds on the slowest page and a median-load page, for both first-visit and returning-visitor requests.
+**Verdict:** Server response time is within healthy bounds for the slowest page across both first-visit and returning-visitor views.
 
 ---
 
@@ -632,63 +621,6 @@ DO_NOT:
 1 additional registered `/.well-known/` path were probed; none returned a recognisable discovery file. The per-path breakdown is preserved alongside this report as a sidecar JSON.
 
 *Reference: the [IANA Well-Known URIs registry](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) lists the full set of registered `/.well-known/` paths and their RFCs. If a path on that registry would be useful here, consider implementing it.*
-
-## AI Usage Declaration
-
-This site publishes a publisher-level AI Usage Declaration: a signed, scope-bounded, machine-readable statement carrying what the work is, who is responsible for it, what machines did during its production, and what machines did not do. The probe verifies the declaration's presence across its four carrier forms, validates the JSON record's schema, and checks the page-level integration on the homepage.
-
-| Attribute | Value |
-|-----------|-------|
-| Origin | https://mx.allabout.network |
-| Draft reference | draft-cranstoun-mx-ai-usage-declaration v1.0 |
-| Conformance level | Level 1 (Declared) |
-| Probed at | 2026-05-19T15:05:48.255Z |
-
-### Carrier forms
-
-| Form | State | URL | HTTP | Content-Type | Type matches expectation |
-| --- | --- | --- | --- | --- | --- |
-| Source markdown | present | `https://mx.allabout.network/AI-USAGE.md` | 200 | text/markdown; charset=utf-8 | yes |
-| JSON record | present | `https://mx.allabout.network/AI-USAGE.json` | 200 | application/json; charset=utf-8 | yes |
-| HTML rendering | present | `https://mx.allabout.network/AI-USAGE.html` | 200 | text/html; charset=utf-8 | yes |
-| Tagged PDF | present | `https://mx.allabout.network/AI-USAGE.pdf` | 200 | application/pdf | yes |
-
-### Schema validation
-
-| Dimension | Result | Notes |
-| --- | --- | --- |
-| JSON record parsed | yes | Required for Level 1 conformance. |
-| Required §4 fields present | all | 7/7 required fields present. |
-| Schema errors | 0 | No enum, type, or format violations detected. |
-| Schema warnings | 0 | No advisory violations. |
-| aiUsage entries | 3 | Tasks the publisher attributes to AI assistance. |
-| aiBoundary statements | 5 | Boundaries the publisher commits to: things AI did not do. |
-| Review schedule | `P1Y` | Publisher commits to re-confirming the declaration at this interval. |
-| Declared disclosure (WICG / IPTC) | `ai-assisted` / `compositeWithTrainedAlgorithmicMedia` | The values the publisher carried in the JSON record. |
-| §4.7 derivation check | consistent | Derived from aiUsage + aiBoundary; declared values match. |
-| Signature present | no | Declaration is at Level 1 (Declared); RFC 7515 JWS over a canonical payload would advance it to Level 2. |
-| Authority type | `self` | Self-attested by the publisher. |
-
-### Page-level integration
-
-| Surface | State | Notes |
-| --- | --- | --- |
-| Homepage fetched | yes | Fetched from `https://mx.allabout.network/`. |
-| `<link rel="ai-usage">` | yes | Discovered at `/AI-USAGE.json` (type `application/json`). |
-| WICG `<meta name="ai-disclosure">` | `ai-assisted` | Value is in the WICG enum. |
-| Schema.org `digitalSourceType` | absent | Optional. Search-engine readable today via Schema.org JSON-LD; absence is informational, not a finding. |
-
-### Probe findings
-
-- [PASS] Machine-readable JSON record is served.
-- [PASS] Human-readable HTML rendering is served.
-- [PASS] Source markdown is served (transparency win: editable form is publicly fetchable).
-- [PASS] Tagged PDF archival form is served.
-- [PASS] JSON record conforms to §4 schema (required fields, enum values, ISO 8601 dates).
-- [PASS] Declared disclosure values agree with the §4.7 derivation from aiUsage + aiBoundary.
-- [PASS] Homepage carries <link rel="ai-usage"> for in-page discovery (§5.3).
-- [PASS] Homepage carries WICG <meta name="ai-disclosure" content="ai-assisted">.
----
 
 ## Structured Data Inventory
 
@@ -914,22 +846,22 @@ DO_NOT:
 
 | Metric | Count |
 |--------|-------|
-| AI crawler hits (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …) | 1070 |
+| AI crawler hits (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …) | 1066 |
 | AI referral hits (human visits from chat surfaces) | 1 |
-| Total AI-attributable visits | 1071 |
+| Total AI-attributable visits | 1067 |
 
 **Top referring AI surfaces:**
 
 | Agent | Event Type | Hits |
 |-------|-----------|------|
 | amazonbot | crawler | 439 |
-| chatgpt | crawler | 218 |
-| claude | crawler | 154 |
-| bytespider | crawler | 113 |
+| chatgpt | crawler | 214 |
+| claude | crawler | 152 |
+| bytespider | crawler | 112 |
 | meta-ai | crawler | 96 |
-| perplexity | crawler | 29 |
-| ccbot | crawler | 10 |
-| gemini | crawler | 10 |
+| perplexity | crawler | 27 |
+| ccbot | crawler | 14 |
+| gemini | crawler | 11 |
 | claude | referral | 1 |
 | you | crawler | 1 |
 
@@ -966,8 +898,8 @@ Every check runs on every audited page. The aggregate score weights truncation r
 | HTTP Content Negotiation (Vary) | Pass | 99/99 | The server returns a single content type per URL. No Vary-on-Accept ambiguity that could confuse agents. | 0 page(s) advertise format negotiation. |
 | Cross-Host Redirect | Pass | 99/99 | No cross-domain redirects. Agents follow internal redirects without host-boundary issues. | 1 page(s) cross origin during redirect. |
 | Generic Headings | Pass | 99/99 | Every heading carries specific content; no page is dominated by generic labels like "Overview" or "Introduction". | Worst case: 0% generic headings. |
-| Body Content Ratio | Pass | N/M | Actual prose content averages 63% of served bytes — well above the 30% threshold. Pages are content-heavy, not overhead-heavy. | Average: 63%. Threshold: 30%. |
-| Inline Tag Bloat | Fail | 1/99 | 1 page(s) carry inline `<style>` or executable `<script>` blocks over 500 bytes. Externalising these to separate .css/.js files lets agents skip them during cheap fetches. | 2 element(s) > 500 bytes. Largest inline CSS: 37135 B. Largest inline JS: 1382 B. Page: https://mx.allabout.network/reginald/mx-machine-readiness.html |
+| Body Content Ratio | Pass | N/M | Actual prose content averages 62% of served bytes — well above the 30% threshold. Pages are content-heavy, not overhead-heavy. | Average: 62%. Threshold: 30%. |
+| Inline Tag Bloat | Fail | 1/99 | 1 page(s) carry inline `<style>` or executable `<script>` blocks over 500 bytes. Externalising these to separate .css/.js files lets agents skip them during cheap fetches. | 2 element(s) > 500 bytes. Largest inline CSS: 37399 B. Largest inline JS: 1382 B. Page: https://mx.allabout.network/reginald/mx-machine-readiness.html |
 | Head Weight | Pass | N/M | Head bytes are a small fraction of each page. Agents reach body content quickly. | Max ratio: 0.00. Average: 0.00. Threshold: 0.50. |
 
 **Pipeline Survivability score:** 100/100
@@ -1010,7 +942,7 @@ We run the Div Soup check on both served and rendered HTML so we can tell whethe
 
 | Source | Score | Band | Bare divs | Bare div ratio | Deepest bare chain | Top bare selectors |
 |--------|-------|------|-----------|----------------|--------------------|-------------------|
-| Rendered HTML | 43/100 | high | 95 | 62% | 4 | `div` (17), `div.icon` (6), `div.k` (4), `div.v` (4), `div.who` (4) |
+| Rendered HTML | 43/100 | high | 75 | 62% | 4 | `div` (17), `div.icon` (6), `div.k` (4), `div.v` (4), `div.role` (4) |
 
 <!-- REWRITE:
 AUDIT CONTEXT (applies to this block):
@@ -1033,9 +965,9 @@ If either row scores below 75, write 2-3 sentences:
 
 FACTS (figures describe the WORST-CASE page in the audited set, not a site-wide average):
 - Rendered score: 43, band high (worst page: https://mx.allabout.network/reginald/mx-machine-readiness.html)
-- Bare divs (rendered): 95 of 153 (62%)
+- Bare divs (rendered): 75 of 121 (62%)
 - Deepest bare chain (rendered): 4
-- Top bare selectors (rendered): `div` (17), `div.icon` (6), `div.k` (4), `div.v` (4), `div.who` (4)
+- Top bare selectors (rendered): `div` (17), `div.icon` (6), `div.k` (4), `div.v` (4), `div.role` (4)
 - Pages contributing to the Div Soup aggregation: 106
 
 SCOPE:
@@ -1159,9 +1091,9 @@ All five standard security headers are present on every audited response. This i
 | /blog/ | Yes | Yes | Yes | Yes | Yes |
 | /the-gathering/ | Yes | Yes | Yes | Yes | Yes |
 | /about/ | Yes | Yes | Yes | Yes | Yes |
+| /AI-USAGE.pdf | Yes | Yes | Yes | Yes | Yes |
 | /reginald/ | Yes | Yes | Yes | Yes | Yes |
 | /about/index.html | Yes | Yes | Yes | Yes | Yes |
-| /AI-USAGE.pdf | Yes | Yes | Yes | Yes | Yes |
 | /blog/profiles/ | Yes | Yes | Yes | Yes | Yes |
 | /blog/use-cases/ | Yes | Yes | Yes | Yes | Yes |
 | /llms-understanding.txt | Yes | Yes | Yes | Yes | Yes |
@@ -1263,7 +1195,7 @@ DO_NOT:
 
 | URL | Source page | Has HTML alternative |
 |-----|-------------|----------------------|
-| https://mx.allabout.network/AI-USAGE.pdf | https://mx.allabout.network/AI-USAGE.html | No |
+| https://mx.allabout.network/AI-USAGE.pdf | https://mx.allabout.network/ | Yes |
 | https://mx.allabout.network/books/mx-introduction-chapter.pdf | https://mx.allabout.network/books/training-vs-inference.html | No |
 
 ### Sample analysis: first PDF
@@ -1295,7 +1227,7 @@ Enforcement penalties vary by jurisdiction and enterprise size: the EAA (Directi
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: address the 10 WCAG 2.1 AA accessibility issues identified (compliance gap)
+1. **Address Priority 1 findings**: resolve Semantic Structure findings (currently 43/100)
 2. **Review Priority 2-3 findings**: metadata and schema improvements that compound over time
 3. **Consider optional enhancements**: optional patterns that give a first-mover advantage in AI search
 
@@ -1303,7 +1235,7 @@ Enforcement penalties vary by jurisdiction and enterprise size: the EAA (Directi
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | WCAG 2.1 AA compliance | Priority 1 items resolved, compliance risk removed |
+| Critical Fixes | Priority 1 compliance items and Semantic Structure fixes | Priority 1 items resolved, compliance risk removed |
 | Full Optimization | Semantic Structure, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | Long-term competitive advantage in AI-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
@@ -1324,7 +1256,7 @@ AUDIT CONTEXT (applies to this block):
 - Vocabulary: use "machines" to refer to AI agents, LLMs, search crawlers, and automated bots; it is the book's canonical term and we prefer it over "AI agents" in prose
 
 WRITE:
-2–3 sentences summarising the audit findings for Mx Allabout (https://mx.allabout.network). Always refer to the site by its domain (https://mx.allabout.network), never by the consultancy name. The highest-scoring dimension is Structured Data at 93/100 — open with this as a strength. Open with the dimension that scored HIGHEST on the scorecard as a genuine STRENGTH. "Leads" means highest score, not highest priority finding. A dimension scoring 10/100 is never "the strongest" — it is an opportunity. High priority ≠ high score; do not confuse the two. Then name 1–2 lowest-scoring dimensions as the key OPPORTUNITIES. Close with an invitation to act.
+2–3 sentences summarising the audit findings for Mx Allabout (https://mx.allabout.network). Always refer to the site by its domain (https://mx.allabout.network), never by the consultancy name. The highest-scoring dimension is Accessibility at 100/100 — open with this as a strength. Open with the dimension that scored HIGHEST on the scorecard as a genuine STRENGTH. "Leads" means highest score, not highest priority finding. A dimension scoring 10/100 is never "the strongest" — it is an opportunity. High priority ≠ high score; do not confuse the two. Then name 1–2 lowest-scoring dimensions as the key OPPORTUNITIES. Close with an invitation to act.
 
 FACTS:
 - Scores: AI Suitability: —/100; Accessibility: —/100; SEO: 91/100; Structured Data: 93/100; Discovery Readiness: 91/100
@@ -1340,7 +1272,7 @@ DO_NOT:
 | Dimension | Score | Band |
 |-----------|-------|------|
 | AI Agent Suitability | 98/100 | Excellent |
-| Accessibility | 100/100 | Could Be Better |
+| Accessibility | 100/100 | Excellent |
 | SEO (all pages) | 91/100 | Excellent |
 | SEO (content pages) | 92/100 | Excellent |
 | MX Stack Completeness | 95/100 | Excellent |
@@ -1359,7 +1291,7 @@ DO_NOT:
 
 | Page | SEO | A11y | Back | Served | Rendered |
 |------|-----|------|------|--------|----------|
-| / (nav) | 91 | 100 | 100 | 100 | 100 |
+| / (nav) | 92 | 100 | 100 | 100 | 100 |
 | /about | 90 | 100 | 75 | 100 | 100 |
 | /about/about.html | 100 | 100 | 100 | 100 | 100 |
 | /about/contact.html | 92 | 100 | 100 | 100 | 100 |
@@ -1382,7 +1314,7 @@ DO_NOT:
 | /blog/from-blobs-to-bots.html | 94 | 100 | 100 | 100 | 100 |
 | /blog/geo-is-a-tactic-mx-is-the-specification.html | 86 | 100 | 100 | 100 | 100 |
 | /blog/llms-txt-guide.html | 99 | 100 | 100 | 100 | 100 |
-| /blog/machine-experience-adding-metadata.html | 95 | 90 | 100 | 100 | 100 |
+| /blog/machine-experience-adding-metadata.html | 95 | 100 | 100 | 100 | 100 |
 | /blog/many-agents-one-metadata-layer.html | 88 | 100 | 100 | 100 | 100 |
 
 *Showing the first 25 of 101 audited pages; the remaining 76 are in `mx-allabout-network-pages-audited.csv` next to this report.*
@@ -1399,7 +1331,7 @@ We recorded every internal link found on every audited page: [N] links in total.
 
 | Link class                      | Count |
 | ------------------------------- | ----: |
-| Same-host internal links        | 1403  |
+| Same-host internal links        | 1480  |
 | External links                  | 0     |
 | Anchor-only (`#fragment`) links | 0     |
 | mailto / tel links              | 4     |

@@ -12,11 +12,11 @@ auditTool: "web-audit-suite"
 auditDate: "2026-05-19"
 description: "Executive audit report analysing accessibility, performance, SEO, structured data, and AI agent compatibility for Mx Allabout"
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
-performanceScore: 97
+performanceScore: 85
 accessibilityScore: 100
 seoScore: 91
 llmSuitabilityScore: 98
-totalIssues: 10
+totalIssues: 0
 pagesAudited: 101
 version: "1.0"
 confidential: true
@@ -42,7 +42,7 @@ We audited 101 pages across mx.allabout.network's site using the Web Audit Suite
 
 We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
-We then review automated findings by hand before finalising this report. The automated pass identifies what is present or absent; we read that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable. Patterns we see repeatedly across sites on the same platform we note as platform characteristics rather than site-specific gaps. When new agent behaviours emerge, we update what we look for.
+We then review automated findings by hand before finalising this report. We identify what is present or absent; we read that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable. Patterns we see repeatedly across sites on the same platform we note as platform characteristics rather than site-specific gaps. When new agent behaviours emerge, we update what we look for.
 
 The scoring criteria follow published MX standards and proposed specifications maintained at [https://tg.community](https://tg.community). Where established external standards apply: WCAG 2.1, Schema.org, RFC 9309, W3C: those take precedence. The MX framework addresses governance and machine experience metadata in the areas those standards do not cover.
 
@@ -64,7 +64,7 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 | | Score | |
 |:---|---:|:---|
-| Performance | **97**/100 | `#################-` |
+| Performance | **85**/100 | `###############---` |
 | Accessibility | **100**/100 | `##################` |
 | SEO | **91**/100 | `################--` |
 | Machine Suitability | **98**/100 | `##################` |
@@ -72,11 +72,11 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 | Agent Readability | **91**/100 | `################--` |
 | Pipeline Survivability | **100**/100 | `##################` |
 
-We audited 101 pages of mx.allabout.network and found a property that is clearly built with its human audience in mind. Performance stands out as the strongest dimension across the audited set, and that foundation carries real weight: fast, well-structured pages with solid SEO at 91/100 support a strong experience for visitors. The content is well-organised, the information architecture supports natural navigation, and the groundwork is there for a site that earns and retains attention.
+We audited 101 pages of mx.allabout.network and found a property in strong shape for human visitors. Performance is the standout dimension, and the SEO foundations at 91/100 reinforce a consistent, well-structured reading experience. Accessibility across the audited set is clean, with zero critical WCAG AA issues recorded, meaning every visitor arrives on a level playing field.
 
-Before turning to machine-readiness, we want to name one Priority 1 item: we identified WCAG AA issues across the audited set, with the three highest-priority findings detailed in the Findings section below. These represent the chance to extend the same quality of experience to all users, including those relying on assistive technology, and addressing them reduces legal exposure as accessibility standards continue to receive closer regulatory attention. The headline opportunity beyond that is machine experience. Discovery Readiness sits at 91/100 and Structured Data Quality at 93/100, both in the Excellent band, yet Schema Maturity is currently at Level 1 (Decoration), meaning the rich schema vocabulary already present across the audited set is not yet being used to make content fully actionable for machines. Lifting schema depth is the single move most likely to extend mx.allabout.network's reach into agent-mediated answers and structured search surfaces.
+The headline opportunity is machine readiness. With AI Suitability at 98/100 and Discovery Readiness at 91/100, the groundwork is there for machines to read and act on mx.allabout.network with confidence. The next natural step is to move Schema Maturity beyond Level 1 (Decoration) into richer, relationship-aware markup. Structured Data Quality sits at 93/100 across the audited set, a solid foundation, and lifting the depth of that schema signals more than presence to search crawlers and AI agents: it signals intent, context, and authority.
 
-AI Suitability on the served layer reaches 98/100, which tells us the content is clean and well-formed where machines can read it directly. The Schema.org JSON-LD already deployed across the audited set is the highest-leverage asset in that picture, readable by every machine regardless of how a page is rendered or hosted. The next step is deepening the relationships and actions encoded within that schema, so that what machines can already reach, they can also reason about and act upon with greater confidence.
+The breadth of schema types we identified across the audited set is considerable, spanning over forty distinct types and anchored by high-frequency use of ListItem, WebPage, BreadcrumbList and many others. The opportunity now is to deepen the relationships between those types rather than to broaden the catalogue further. Schema.org JSON-LD is the highest-leverage asset in this context, readable by every machine regardless of how content is served or rendered, and it is where further investment will move the needle most directly on citation eligibility and agent-surface presence.
 
 > 
 
@@ -86,7 +86,7 @@ AI Suitability on the served layer reaches 98/100, which tells us the content is
 
 ### Human Experience
 
-Across the audited set, mx.allabout.network delivers a strong human experience, with SEO at 91/100 and an average page load of 300ms rating Excellent, and an Accessibility score of 100/100 with WCAG findings noted in the Findings section.
+Across the audited set, mx.allabout.network delivers a strong human experience, with Accessibility at 100/100, SEO at 91/100, and a 598ms average load time all sitting in the Excellent band.
 
 | Dimension | Rating | Grade |
 |-----------|--------|-------|
@@ -97,7 +97,7 @@ Across the audited set, mx.allabout.network delivers a strong human experience, 
 
 ### Machine Experience
 
-Across the audited set, machines can discover, parse, and reliably cite mx.allabout.network content, with Discovery Readiness at 91/100, Structured Data Quality at 93/100, Metadata Stack Completeness at 95/100, and Pipeline Survivability at 100/100.
+Across the audited set, machines can discover, parse, and cite content with a high degree of confidence, supported by Discovery Readiness of 91/100, Structured Data Quality of 93/100, Metadata Stack Completeness of 95/100, and Pipeline Survivability of 100/100.
 
 | Dimension | Score | Rating | Grade |
 |-----------|-------|--------|-------|
@@ -143,11 +143,11 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-Across the 101 audited pages, mx.allabout.network demonstrates a genuinely solid foundation, with SEO at 91/100, a perfect Accessibility score of 100/100, Structured Data Quality at 93/100, and 99% cross-page consistency. These results represent the groundwork on which the improvements ahead can be built with confidence.
+Across the audited set of 101 pages, mx.allabout.network demonstrates genuine technical maturity, with SEO at 91/100, a perfect Accessibility score of 100/100, Structured Data Quality at 93/100, and security headers present on 105 of 106 audited URLs. These results form a solid foundation for the targeted improvements that follow.
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
-| Performance | Excellent | Excellent — 300ms average load time |
+| Performance | Excellent | Excellent — 598ms average load time |
 | SEO (content pages) | 92 | Excellent — titles, meta descriptions, canonical URLs in place |
 | Security | 5/5 | HTTPS, HSTS, CSP, X-Frame-Options, X-Content-Type-Options — 0 headers absent |
 | Structured Data | 93 | Excellent — JSON-LD on every page with valid Schema.org vocabulary |
@@ -157,9 +157,10 @@ Across the 101 audited pages, mx.allabout.network demonstrates a genuinely solid
 
 **Positive patterns observed:**
 
+- Accessibility is compliant across the audited set: Pa11y reports 100/100 with zero WCAG 2.1 AA errors on 101 pages.
 - All 8 tested AI agents can fetch the site: ClaudeBot (Anthropic), GPTBot (OpenAI), ChatGPT-User (OpenAI), PerplexityBot, GoogleOther (Google AI), Google-Extended, CCBot (Common Crawl), Plain request (no UA) all return HTTP 200 at inference time.
 - Structured Data Quality of 93/100 (Decoration): the schema is valid, required properties are complete, and the vocabulary is in good order.
-- Body content ratio averages 63%: pages are content-heavy, not overhead-heavy, which helps agents reach real prose inside a cheap fetch.
+- Body content ratio averages 62%: pages are content-heavy, not overhead-heavy, which helps agents reach real prose inside a cheap fetch.
 
 ---
 
@@ -167,60 +168,26 @@ Across the 101 audited pages, mx.allabout.network demonstrates a genuinely solid
 
 ### At a Glance
 
-We have prioritised the findings below by the impact each opportunity carries for machines encountering mx.allabout.network, with structured data quality leading because richer, more consistent schema directly shapes how agents parse and cite the content. Catalogue visibility and metadata stack completeness follow, grounding both the commerce and discovery layers that everything else depends upon.
+We present the findings below as opportunities prioritised by impact, with commerce schema gaps leading because they most directly shape how machines parse and surface product and service content. Catalogue visibility and metadata completeness follow, reflecting the layers that support both search ranking and agent-driven retrieval across the audited set.
 
 | # | Finding | Bucket | Priority | Effort | Impact |
 |---|---------|--------|----------|--------|--------|
-| 1 | Contrast ratio 2.96:1 on one audited page, WCAG 1.4.3 (minimum 4.5:1 required) | Compliance Risk | High | Low | Low-vision users may miss content at that contrast level |
-| 2 | Dead anchor links on one audited page, WCAG 2.4.1 ("organisational-implementation", "where-mx-fits-in-your-organisation") | Compliance Risk | High | Low | Sighted keyboard users risk missing their navigation target |
-| 3 | Div soup on worst page (43/100 rendered, 95 of 153 bare divs), https://mx.allabout.network/reginald/mx-machine-readiness.html | Compliance Risk | Medium | Medium | Machines are less likely to parse content hierarchy correctly on that page |
+| 1 | Semantic Structure 43/100 on worst page (75 of 121 bare divs, https://mx.allabout.network/reginald/mx-machine-readiness.html) | Compliance Risk | High | Medium | Screen-reader users and machines may miss content hierarchy on structurally dense pages |
 
 ---
 
-**Priority 1: Contrast Ratio 2.96:1 on One Audited Page, WCAG 1.4.3 (Minimum 4.5:1 Required)**
+**Priority 1: Semantic Structure 43/100, Worst Page (75 of 121 Bare Divs, /reginald/mx-machine-readiness.html)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** We recorded three instances via Pa11y of a text element whose contrast ratio measures 2.96:1 on one page across the audited set. WCAG 1.4.3 requires a minimum ratio of 4.5:1 for normal-weight text. The affected element sits within `html > body > div:nth-child(4) > section:nth-child(1)` and the recommended target value is #fffffe.
+**Finding:** The page at https://mx.allabout.network/reginald/mx-machine-readiness.html returns a rendered semantic-structure score of 43/100, with 75 bare divs counted out of 121 total elements on that page specifically. These figures come from that single page and are not a general average across the audited set. Because that page shares its template with other pages in the audited set, the structural pattern likely recurs across those template-matched pages even where the raw counts differ. Bare divs carry no implicit ARIA role, so assistive technologies and machines must infer meaning from surrounding context rather than from explicit element semantics, which reduces reliability for both groups.
 
 **What to change and why:**
 
-- Adjust the foreground text colour of the affected element toward #fffffe so the rendered contrast reaches at least 4.5:1. This directly resolves the WCAG 1.4.3 violation and removes the legal-exposure risk it represents for low-vision users.
-- Verify that no other elements in the same section inherit the same colour pairing. If the styling is applied at the section or template level, a single change may prevent recurrence on any pages that share the same template.
-- After the fix, re-run Pa11y against the affected page to confirm zero residual 1.4.3 instances and update the accessibility score baseline.
-
-**Effort:** Low
-
----
-
-**Priority 2: Dead Anchor Links on One Audited Page, WCAG 2.4.1 ("organisational-implementation", "where-mx-fits-in-your-organisation")**
-
-**Bucket:** Compliance Risk
-
-**Finding:** We identified two in-page navigation links via Pa11y whose target anchors do not exist in the document. The first link targets `#organisational-implementation` (selector: `#index > nav > ul > li:nth-child(11) > a`) and the second targets `#where-mx-fits-in-your-organisation` (selector: `#index > nav > ul > li:nth-child(8) > a`). Both affect sighted keyboard users who rely on the index navigation to move through the page. WCAG 2.4.1 requires that bypass links and navigation anchors resolve to a real destination.
-
-**What to change and why:**
-
-- Confirm whether the corresponding section headings were renamed or removed. If the sections exist under different IDs, align the link targets to match the current IDs so keyboard navigation resolves correctly and the WCAG 2.4.1 issue is closed.
-- If the sections themselves were removed from the page, remove the corresponding index entries so the navigation reflects the actual document structure. Orphaned index entries mislead both sighted keyboard users and machines attempting to parse the page outline.
-- Re-test with Pa11y after either fix to confirm zero residual 2.4.1 instances on that page.
-
-**Effort:** Low
-
----
-
-**Priority 3: Div Soup on Worst Page, Rendered Score 43/100 (95 of 153 Bare Divs), https://mx.allabout.network/reginald/mx-machine-readiness.html**
-
-**Bucket:** Compliance Risk
-
-**Finding:** Across the audited set of 106 pages, we identified https://mx.allabout.network/reginald/mx-machine-readiness.html as the worst-case page, recording a rendered score of 43/100 in the high-concern band. On that specific page, 95 of 153 total elements are bare divs, giving a structural signal that is thin in semantic meaning. Where this template pattern recurs on other pages, the concern applies proportionally; the score and element counts cited here are specific to that URL only.
-
-**What to change and why:**
-
-- Replace generic container elements with semantically meaningful equivalents where the content role is clear, for example sections that introduce topics, navigation regions, or content that stands alone as an article. This moves the rendered semantic score upward and gives machines a clearer content hierarchy to parse, improving citation eligibility and structured-data coherence on that page.
-- Semantic structure is a signal WCAG Success Criterion 1.3.1 (Info and Relationships) draws upon. Where a div carries heading-level or landmark meaning without declaring it, assistive technologies may present the content without the structural cues users expect.
-- Because the Served HTML score across the audited set is 98/100, the issue is concentrated in rendered output on this page. Addressing the template governing this URL would close the gap between the served and rendered signals on the worst-case page.
-- After restructuring, re-run the semantic structure analysis against that URL to confirm the rendered score moves above the 70/100 threshold that marks the boundary of the high-concern band.
+- Replace presentational container elements with semantically appropriate landmarks (such as main, article, section, nav, aside, or header) where the content type warrants it. This directly addresses WCAG 1.3.1 (Info and Relationships), ensuring that the structural relationships visible to sighted users are also conveyed programmatically to screen-reader users.
+- Where a generic container genuinely has no appropriate landmark equivalent, add an explicit ARIA role or label so that machines parsing the DOM can place that block within a meaningful document outline. This supports the structured-data and pipeline-survivability scores already in the Excellent band by reinforcing the document model machines rely on.
+- Audit the shared template responsible for this page's layout and correct it at the template level, since any structural change applied to the template propagates to all pages that inherit it, multiplying the accessibility and machine-readability benefit without requiring per-page edits.
+- After remediation, re-run a rendered-HTML semantic-structure check to confirm the score moves above the 70/100 threshold, at which point the finding no longer warrants High priority.
 
 **Effort:** Medium
 
@@ -228,11 +195,11 @@ We have prioritised the findings below by the impact each opportunity carries fo
 
 These are not issues but areas where additional metadata or patterns would strengthen this site's machine readiness.
 
-- **`sameAs` links on Person and Organization entities**: Adding `sameAs` properties that point to authoritative external identifiers (such as Wikidata or LinkedIn profiles) on the 33 Person and 34 Organization instances identified across the audited pages would help machines resolve and disambiguate entities with confidence, strengthening citation eligibility across the audited set.
+- **`sameAs` links on Person and Organization entities**: Adding `sameAs` properties pointing to external authority records (such as Wikidata or LinkedIn profiles) on the 33 Person and 34 Organization entities we identified across the audited set would allow machines to disambiguate contributors and brands against known knowledge graphs, strengthening citation confidence in agent-generated answers.
 
-- **`potentialAction` on Organization**: The 34 Organization entities identified across the audited pages do not currently advertise contact or search capabilities to machines; attaching `potentialAction` entries to those nodes would let agents surface direct interaction paths when answering queries about the organisations.
+- **`potentialAction` on Organization entities**: Attaching `potentialAction` descriptors to the 34 Organization entities present across the audited set advertises contact or search capabilities directly to machines, making it easier for agents to surface actionable next steps when summarising these entities.
 
-- **Content-Signal directives ([contentsignals.org](https://contentsignals.org)) in robots.txt**: Declaring content-use policy for machines directly in robots.txt is a low-effort addition that signals to AI agents and crawlers exactly how content across the audited set may be used, reducing ambiguity for any machine deciding whether to index, cite, or train on the material.
+- **Content-Signal directives ([contentsignals.org](https://contentsignals.org)) in robots.txt**: Declaring content-use policy for machines via Content-Signal directives would give AI agents and crawlers an explicit, structured signal about how content across the audited set may be used, reducing the ambiguity that machines currently face when deciding whether to index, summarise, or cite pages.
 
 ---
 
@@ -291,11 +258,11 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://mx.allabout.network/blog/profiles/`. A first-time visitor sees the cold-cache cost: the crawler recorded 981 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 878ms, 57ms, 69ms, giving a returning-visitor median of **69 ms**. **Returning-visitor verdict: Healthy**.
+**Slowest.** The slowest page is `https://mx.allabout.network/books/index.html`. A first-time visitor sees the cold-cache cost: the crawler recorded 1534 ms on its initial fetch. **First-visit verdict: Acceptable but elevated**. Three cache-busted re-probes that followed returned 848ms, 240ms, 239ms, giving a returning-visitor median of **240 ms**. **Returning-visitor verdict: Healthy**.
 
-**Median-load control.** The median-load control page is `https://mx.allabout.network/services/examples.html`. A first-time visitor sees the cold-cache cost: the crawler recorded 266 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 299ms, 62ms, 315ms, giving a returning-visitor median of **299 ms**. **Returning-visitor verdict: Healthy**.
+**Median-load control.** The median-load control page is `https://mx.allabout.network/blog/use-cases/what-blockchain-and-crypto-have-to-do-with-mx.html`. A first-time visitor sees the cold-cache cost: the crawler recorded 533 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 181ms, 257ms, 336ms, giving a returning-visitor median of **257 ms**. **Returning-visitor verdict: Healthy**.
 
-**Verdict:** Server response time is within healthy bounds on the slowest page and a median-load page, for both first-visit and returning-visitor requests.
+**Verdict:** Server response time is within healthy bounds for the slowest page across both first-visit and returning-visitor views.
 
 ---
 
@@ -315,7 +282,7 @@ Sitemap: https://mx.allabout.network/sitemap.xml
 
 *The full `robots.txt` (7 lines) is preserved alongside this report as `mx-allabout-network-robots-txt.txt`.*
 
-The robots.txt file is present and announces one sitemap reference, giving machines a clear path to indexed content. Three disallow paths are declared, defining the areas machines are directed away from across mx.allabout.network.
+The robots.txt file is present and declares three disallow paths, restricting machines from crawling those areas while leaving the remainder of mx.allabout.network accessible. A single sitemap reference is announced within the file, giving crawlers a direct pointer to the content inventory.
 
 ### sitemap.xml
 
@@ -328,15 +295,15 @@ The robots.txt file is present and announces one sitemap reference, giving machi
 
 **Sitemap grade:** Complete
 
-The sitemap earns a Complete grade, covering 92 URLs with lastmod dates, changefreq values, and priority attributes all present. The inclusion of all three optional fields gives machines the richest possible crawl-scheduling signal.
+The sitemap earns a Complete grade, covering 92 URLs with lastmod dates, changefreq values, and priority attributes all present across every entry. That combination gives machines a full set of crawl-guidance signals in a single declaration.
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We did not detect a llms.txt file at mx.allabout.network, meaning machines have no structured entry point through which to discover a site description, page inventory, or content policy. We recommend adding one to give automated readers a reliable, intentional surface for understanding and navigating the content we publish.
+The /llms.txt file returns HTTP 200 but carries no sitemap entry and no discovery link in the homepage head. We recommend serving it as `text/html` (wrapping the content in a minimal HTML document with a `<pre>` block, as described in the note on llms.txt above) and adding it to the sitemap so crawlers have a reliable discovery signal.
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We did not locate an llms-full.txt file at mx.allabout.network; the endpoint returns a 404, it is absent from the sitemap, and no discovery link appears in the homepage head. For a content-heavy property of 101 audited pages, we recommend adding one: wrap the content in a minimal HTML document with the full text inside a `<pre>` block, serve it as `Content-Type: text/html`, and add a sitemap entry so crawlers have a reliable discovery signal.
+We did not find a llms-full.txt file at mx.allabout.network; the endpoint returns a 404 with no entry in the sitemap and no discovery link in the homepage head. For a content-heavy property of 101 pages, adding a llms-full.txt would give machines a single, structured source from which to draw full page content, substantially extending the site's reach into agent-generated answers. We recommend building it from the 92-page inventory already in the sitemap, wrapping the content as `text/html` with a `<pre>` block, and adding a sitemap entry so it is discoverable, following the same transport pattern described in the note on llms.txt above.
 
 ### agent-card.json (A2A)
 
@@ -354,63 +321,6 @@ We did not locate an llms-full.txt file at mx.allabout.network; the endpoint ret
 1 additional registered `/.well-known/` path were probed; none returned a recognisable discovery file. The per-path breakdown is preserved alongside this report as a sidecar JSON.
 
 *Reference: the [IANA Well-Known URIs registry](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) lists the full set of registered `/.well-known/` paths and their RFCs. If a path on that registry would be useful here, consider implementing it.*
-
-## AI Usage Declaration
-
-This site publishes a publisher-level AI Usage Declaration: a signed, scope-bounded, machine-readable statement carrying what the work is, who is responsible for it, what machines did during its production, and what machines did not do. The probe verifies the declaration's presence across its four carrier forms, validates the JSON record's schema, and checks the page-level integration on the homepage.
-
-| Attribute | Value |
-|-----------|-------|
-| Origin | https://mx.allabout.network |
-| Draft reference | draft-cranstoun-mx-ai-usage-declaration v1.0 |
-| Conformance level | Level 1 (Declared) |
-| Probed at | 2026-05-19T15:05:48.255Z |
-
-### Carrier forms
-
-| Form | State | URL | HTTP | Content-Type | Type matches expectation |
-| --- | --- | --- | --- | --- | --- |
-| Source markdown | present | `https://mx.allabout.network/AI-USAGE.md` | 200 | text/markdown; charset=utf-8 | yes |
-| JSON record | present | `https://mx.allabout.network/AI-USAGE.json` | 200 | application/json; charset=utf-8 | yes |
-| HTML rendering | present | `https://mx.allabout.network/AI-USAGE.html` | 200 | text/html; charset=utf-8 | yes |
-| Tagged PDF | present | `https://mx.allabout.network/AI-USAGE.pdf` | 200 | application/pdf | yes |
-
-### Schema validation
-
-| Dimension | Result | Notes |
-| --- | --- | --- |
-| JSON record parsed | yes | Required for Level 1 conformance. |
-| Required §4 fields present | all | 7/7 required fields present. |
-| Schema errors | 0 | No enum, type, or format violations detected. |
-| Schema warnings | 0 | No advisory violations. |
-| aiUsage entries | 3 | Tasks the publisher attributes to AI assistance. |
-| aiBoundary statements | 5 | Boundaries the publisher commits to: things AI did not do. |
-| Review schedule | `P1Y` | Publisher commits to re-confirming the declaration at this interval. |
-| Declared disclosure (WICG / IPTC) | `ai-assisted` / `compositeWithTrainedAlgorithmicMedia` | The values the publisher carried in the JSON record. |
-| §4.7 derivation check | consistent | Derived from aiUsage + aiBoundary; declared values match. |
-| Signature present | no | Declaration is at Level 1 (Declared); RFC 7515 JWS over a canonical payload would advance it to Level 2. |
-| Authority type | `self` | Self-attested by the publisher. |
-
-### Page-level integration
-
-| Surface | State | Notes |
-| --- | --- | --- |
-| Homepage fetched | yes | Fetched from `https://mx.allabout.network/`. |
-| `<link rel="ai-usage">` | yes | Discovered at `/AI-USAGE.json` (type `application/json`). |
-| WICG `<meta name="ai-disclosure">` | `ai-assisted` | Value is in the WICG enum. |
-| Schema.org `digitalSourceType` | absent | Optional. Search-engine readable today via Schema.org JSON-LD; absence is informational, not a finding. |
-
-### Probe findings
-
-- [PASS] Machine-readable JSON record is served.
-- [PASS] Human-readable HTML rendering is served.
-- [PASS] Source markdown is served (transparency win: editable form is publicly fetchable).
-- [PASS] Tagged PDF archival form is served.
-- [PASS] JSON record conforms to §4 schema (required fields, enum values, ISO 8601 dates).
-- [PASS] Declared disclosure values agree with the §4.7 derivation from aiUsage + aiBoundary.
-- [PASS] Homepage carries <link rel="ai-usage"> for in-page discovery (§5.3).
-- [PASS] Homepage carries WICG <meta name="ai-disclosure" content="ai-assisted">.
----
 
 ## Structured Data Inventory
 
@@ -466,7 +376,7 @@ This site publishes a publisher-level AI Usage Declaration: a signed, scope-boun
 **Coverage:** 98 pages with JSON-LD out of 99 total (99%)\
 **Unique types:** 45
 
-Across the 101 pages we audited, structured data is strong. Across the audited set, machines can extract and cite entity data reliably; a wider audit confirms whether the same holds across the rest of the estate.
+Across the 101 pages we audited, structured data is strong. Machines extract and cite entity data on these pages reliably; a wider audit confirms whether the same holds across the rest of the estate.
 
 ### SDQ Score Breakdown
 
@@ -559,15 +469,15 @@ Schema.org implementations fall into five maturity tiers. The transitions are no
 |  | Level | Name | What it looks like | Typical SDQ |  |
 |---|-------|------|---------------------|------------|---|
 |  | 0 | Clean slate | No Schema.org markup present. Every addition is net new capability: the full maturity curve is open. | 0-29 |  |
-| **→** | 1 | Decoration | Typed blocks with sparse properties, no nesting, no cross-references. Schema is treated as boilerplate. | 30-50 | **←** |
+|  | 1 | Decoration | Typed blocks with sparse properties, no nesting, no cross-references. Schema is treated as boilerplate. | 30-50 |  |
 |  | 2 | Good schema | Full required and recommended properties, nested types where appropriate, valid vocabulary. No cross-entity wiring. | 75-90 |  |
-|  | 3 | Real graph | Level 2 + @id cross-references between entities + linked-data signals (sameAs, mainEntityOfPage, isPartOf). | 90-95 |  |
+| **→** | 3 | Real graph | Level 2 + @id cross-references between entities + linked-data signals (sameAs, mainEntityOfPage, isPartOf). | 90-95 | **←** |
 |  | 4 | Verified linked data | Level 3 + external identifiers (Wikidata QIDs, ISNIs, ORCIDs) + provenance metadata. | 95-100 |  |
 
-**Current level:** 1: Decoration\
-**To reach the next level:** Fill in the required and recommended Schema.org properties for each typed block (see structured_data_findings.csv for the specific gaps). Connect related entities: either inline (author Person, publisher Organization, image ImageObject) or via @id references to canonical entities defined elsewhere on the site. Ensure every @type value is a valid Schema.org type.
+**Current level:** 3: Real graph\
+**To reach the next level:** Add external identifiers (such as Wikidata QIDs, ISNIs, or ORCIDs) to the 33 Person and 34 Organization entities, and ensure provenance metadata (`author`, `dateModified`, `publisher`) is complete across all entity types; see the structured_data_findings.csv gaps for the specific pages where these are missing.
 
-This is a structural classification, not a numeric score. A page can have a high SDQ score from rich properties without being graph-linked. The maturity level shows whether the schema is decoration, well-formed data, a real graph, or anchored in the linked-data web.
+This is a structural classification, not a numeric score. A page can have a high SDQ score from rich properties without being graph-linked, and we use this level to show whether the schema is decoration, well-formed data, a real graph, or anchored in the linked-data web.
 
 ---
 
@@ -583,38 +493,38 @@ The MX Journey maps the five stages a machine follows when interacting with a we
 | 4 | Price Understanding | Pass | 67 | Pricing visible |
 | 5 | Purchase Confidence | N/A | -- | No transaction forms detected |
 
-Mx Allabout (mx.allabout.network) is MX Compatible for this site type; Purchase Confidence is N/A.
+Mx Allabout (mx.allabout.network) is MX Compatible; Purchase Confidence is N/A for this content-driven site type.
 
 ---
 
 ## AI Attribution
 
-When a human clicks a link from ChatGPT, Perplexity, Gemini, Copilot, or Claude to your site, the browser does not record which AI sent them. Your server sees a visit with no "came from" field, and your analytics counts it as if the user typed the URL directly. A higher-converting channel quietly hides inside direct traffic.
+When a human clicks a link from ChatGPT, Perplexity, Gemini, Copilot, or Claude to your site, the browser does not record which AI sent them. Your server sees a visit with no "came from" field, and your analytics counts it as if the user typed the URL directly. AI referral traffic is recorded as direct traffic, and the source is lost before your server ever sees the request.
 
 This is not a configuration mistake on your end: the information is stripped before your server ever sees the request. In-app browsers on iOS and Android do the same thing, and any AI surface that makes a server-side fetch on the user's behalf carries no browser context at all. The only place to recover the attribution is at the edge, by capturing and classifying the request before it reaches your analytics tag.
 
-We did not surface data sufficient to assess edge capture status for mx.allabout.network across the audited set; a deeper review would extend that lens.
+We did not surface data sufficient to assess whether an edge capture pattern is in place across the audited set; a deeper review would extend that lens.
 
 ### Live capture (last 30 days)
 
 | Metric | Count |
 |--------|-------|
-| AI crawler hits (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …) | 1070 |
+| AI crawler hits (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …) | 1066 |
 | AI referral hits (human visits from chat surfaces) | 1 |
-| Total AI-attributable visits | 1071 |
+| Total AI-attributable visits | 1067 |
 
 **Top referring AI surfaces:**
 
 | Agent | Event Type | Hits |
 |-------|-----------|------|
 | amazonbot | crawler | 439 |
-| chatgpt | crawler | 218 |
-| claude | crawler | 154 |
-| bytespider | crawler | 113 |
+| chatgpt | crawler | 214 |
+| claude | crawler | 152 |
+| bytespider | crawler | 112 |
 | meta-ai | crawler | 96 |
-| perplexity | crawler | 29 |
-| ccbot | crawler | 10 |
-| gemini | crawler | 10 |
+| perplexity | crawler | 27 |
+| ccbot | crawler | 14 |
+| gemini | crawler | 11 |
 | claude | referral | 1 |
 | you | crawler | 1 |
 
@@ -651,13 +561,13 @@ Every check runs on every audited page. The aggregate score weights truncation r
 | HTTP Content Negotiation (Vary) | Pass | 99/99 | The server returns a single content type per URL. No Vary-on-Accept ambiguity that could confuse agents. | 0 page(s) advertise format negotiation. |
 | Cross-Host Redirect | Pass | 99/99 | No cross-domain redirects. Agents follow internal redirects without host-boundary issues. | 1 page(s) cross origin during redirect. |
 | Generic Headings | Pass | 99/99 | Every heading carries specific content; no page is dominated by generic labels like "Overview" or "Introduction". | Worst case: 0% generic headings. |
-| Body Content Ratio | Pass | N/M | Actual prose content averages 63% of served bytes — well above the 30% threshold. Pages are content-heavy, not overhead-heavy. | Average: 63%. Threshold: 30%. |
-| Inline Tag Bloat | Fail | 1/99 | 1 page(s) carry inline `<style>` or executable `<script>` blocks over 500 bytes. Externalising these to separate .css/.js files lets agents skip them during cheap fetches. | 2 element(s) > 500 bytes. Largest inline CSS: 37135 B. Largest inline JS: 1382 B. Page: https://mx.allabout.network/reginald/mx-machine-readiness.html |
+| Body Content Ratio | Pass | N/M | Actual prose content averages 62% of served bytes — well above the 30% threshold. Pages are content-heavy, not overhead-heavy. | Average: 62%. Threshold: 30%. |
+| Inline Tag Bloat | Fail | 1/99 | 1 page(s) carry inline `<style>` or executable `<script>` blocks over 500 bytes. Externalising these to separate .css/.js files lets agents skip them during cheap fetches. | 2 element(s) > 500 bytes. Largest inline CSS: 37399 B. Largest inline JS: 1382 B. Page: https://mx.allabout.network/reginald/mx-machine-readiness.html |
 | Head Weight | Pass | N/M | Head bytes are a small fraction of each page. Agents reach body content quickly. | Max ratio: 0.00. Average: 0.00. Threshold: 0.50. |
 
 **Pipeline Survivability score:** 100/100
 
-Across the audited set, pipeline survivability sits at 100/100, with only a single resilience check surfacing any concern: inline tag bloat, identified on 1 of the 99 pages we reviewed. When a page carries excessive inline tagging, machines parsing its content may encounter unnecessary noise that can dilute the clarity of extracted text. Addressing that one page represents the clearest opportunity to bring the full audited set to a clean structural baseline for automated readers.
+Across the audited set, pipeline survivability sits at a perfect 100/100, meaning machines can parse and consume content with a high degree of confidence. The one area with room to strengthen is inline tag bloat, which affected a single page out of 99 and can impede a machine's ability to cleanly extract the intended content hierarchy. Addressing that page would complete an already strong resilience picture.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -671,9 +581,9 @@ We run the Div Soup check on both served and rendered HTML so we can tell whethe
 
 | Source | Score | Band | Bare divs | Bare div ratio | Deepest bare chain | Top bare selectors |
 |--------|-------|------|-----------|----------------|--------------------|-------------------|
-| Rendered HTML | 43/100 | high | 95 | 62% | 4 | `div` (17), `div.icon` (6), `div.k` (4), `div.v` (4), `div.who` (4) |
+| Rendered HTML | 43/100 | high | 75 | 62% | 4 | `div` (17), `div.icon` (6), `div.k` (4), `div.v` (4), `div.role` (4) |
 
-On the worst-performing page in the audited set, https://mx.allabout.network/reginald/mx-machine-readiness.html, we recorded 95 of 153 rendered elements as bare divs (62%), a ratio at which machines lose structural context and must rely on positional inference to determine meaning. The pattern here is surface-wide rather than deeply nested: a deepest bare chain of 4 combined with a high bare-div ratio points to a component pipeline that serialises content into undifferentiated containers, a behaviour pattern common in untyped component frameworks and drag-and-drop builders. The most direct first move is wrapping the obvious landmarks (header, nav, main, footer, aside) and giving the remaining containers meaningful class names, which would bring the bare-div ratio down without requiring any restructuring of the layout.
+On the worst-performing page in this dimension, https://mx.allabout.network/reginald/mx-machine-readiness.html, we recorded 75 of 121 elements as bare divs (62%), a ratio at which machines lose structural context and fall back on positional inference to determine meaning. The pattern here is surface-wide rather than structurally deep: the deepest bare chain reaches only 4 levels, yet the high bare ratio across a shallow tree points to an untyped component pipeline where containers are emitted without semantic role. The most direct first move is to wrap the obvious landmarks (header, nav, main, footer, aside) and assign meaningful class names beyond generic identifiers such as those we observed in the top selectors, which would bring the bare-div ratio down without requiring any restructuring of the existing layout.
 
 ---
 
@@ -687,7 +597,7 @@ On the worst-performing page in the audited set, https://mx.allabout.network/reg
 | X-Frame-Options | Yes (105/106) | Prevents clickjacking |
 | X-Content-Type-Options | Yes (105/106) | Prevents MIME-type sniffing |
 
-All five standard security headers are present on every audited response. This is the expected baseline for any production website.
+Five standard security headers are present, with 105 of 106 audited URLs carrying all five. This is the expected baseline for any production website.
 
 **Coverage:** 105 of 106 audited URLs carry all five headers (`/about` is the exception).
 
@@ -787,9 +697,9 @@ All five standard security headers are present on every audited response. This i
 | /blog/ | Yes | Yes | Yes | Yes | Yes |
 | /the-gathering/ | Yes | Yes | Yes | Yes | Yes |
 | /about/ | Yes | Yes | Yes | Yes | Yes |
+| /AI-USAGE.pdf | Yes | Yes | Yes | Yes | Yes |
 | /reginald/ | Yes | Yes | Yes | Yes | Yes |
 | /about/index.html | Yes | Yes | Yes | Yes | Yes |
-| /AI-USAGE.pdf | Yes | Yes | Yes | Yes | Yes |
 | /blog/profiles/ | Yes | Yes | Yes | Yes | Yes |
 | /blog/use-cases/ | Yes | Yes | Yes | Yes | Yes |
 | /llms-understanding.txt | Yes | Yes | Yes | Yes | Yes |
@@ -840,9 +750,9 @@ The audited set shows consistent metadata patterns across pages, with no organis
 
 ## PDF Documents: Accessibility and Machine Readability
 
-Accessibility legislation across major markets has converged on ISO 14289-1 (PDF/UA) as the shared technical baseline, with the European Accessibility Act (Directive (EU) 2019/882, in force 28 June 2025) representing the most precisely codified instance of a standard that Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada all resolve to in the same way. The machine-readability concern is equally independent: an untagged or image-based PDF is opaque to search crawlers, AI systems, and automated pipelines in the same way that unsemantic HTML is, whereas a properly tagged PDF with a complete structure tree exposes text, entities, and hierarchy to machines on the same terms as well-formed semantic markup.
+Two distinct pressures make PDF accessibility a priority. Accessibility legislation across major markets has converged on ISO 14289-1 (PDF/UA) as the shared technical baseline: the EAA (Directive (EU) 2019/882, in force 28 June 2025) is the most precisely codified example, yet Section 508 of the US Rehabilitation Act, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada resolve to the same structural requirement. Equally, an untagged PDF is opaque to machines: where semantic HTML gives search crawlers, AI systems, and automated pipelines a navigable structure tree, a scanned or image-based document yields nothing, and any content locked inside it is invisible to every machine that might otherwise surface, cite, or index it.
 
-2 PDF document(s) were identified by this audit: those linked from the crawled pages combined with those declared in the sitemap. PDFs whose only source is the sitemap are marked as such in the inventory. Accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the technical baseline across major markets: the EAA (Directive (EU) 2019/882, in force 28 June 2025) in the EU, Section 508 in the US, UK PSBAR 2018, and equivalent laws in Australia and Canada all treat public-facing PDFs as regulated digital services for in-scope businesses. The MX Document Accessibility note specifies a three-layer conformance contract: **Tagged** (Level 1, ISO 14289-1 PDF/UA), **Declared** (Level 2, XMP `pdfuaid:part`), **Verified** (Level 3, recorded check).
+2 PDF document(s) were identified by the audit: those linked from the crawled pages combined with those declared in the sitemap. PDFs whose only source is the sitemap are marked as such in the inventory. Accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the technical baseline across major markets: the EAA (Directive (EU) 2019/882, in force 28 June 2025) in the EU, Section 508 in the US, UK PSBAR 2018, and equivalent laws in Australia and Canada all treat public-facing PDFs as regulated digital services for in-scope businesses. The MX Document Accessibility note specifies a three-layer conformance contract: **Tagged** (Level 1, ISO 14289-1 PDF/UA), **Declared** (Level 2, XMP `pdfuaid:part`), **Verified** (Level 3, recorded check).
 
 **Scope note:** this inventory covers PDFs reachable from the crawled pages plus any `.pdf` URLs the sitemap declares. PDFs behind login forms, linked only from uncrawled pages, stored in unlinked directories that are kept out of the sitemap, or hosted on third-party domains still fall outside the crawl boundary. A wider-scope engagement is needed for a complete picture of accessibility exposure across the full document estate.
 
@@ -850,7 +760,7 @@ Accessibility legislation across major markets has converged on ISO 14289-1 (PDF
 
 | URL | Source page | Has HTML alternative |
 |-----|-------------|----------------------|
-| https://mx.allabout.network/AI-USAGE.pdf | https://mx.allabout.network/AI-USAGE.html | No |
+| https://mx.allabout.network/AI-USAGE.pdf | https://mx.allabout.network/ | Yes |
 | https://mx.allabout.network/books/mx-introduction-chapter.pdf | https://mx.allabout.network/books/training-vs-inference.html | No |
 
 ### Sample analysis: first PDF
@@ -882,24 +792,22 @@ Enforcement penalties vary by jurisdiction and enterprise size: the EAA (Directi
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: we recommend resolving the 3 WCAG 2.1 AA priority findings identified (compliance gap)
-2. **Review Priority 2-3 findings**: we recommend addressing the metadata and schema improvements that compound over time
-3. **Consider optional enhancements**: we recommend considering the optional patterns that give a first-mover advantage in AI search
+1. **Address Priority 1 findings**: resolve Semantic Structure findings (currently 43/100)
+2. **Consider optional enhancements**: optional patterns that give a first-mover advantage in AI search
 
 ### What's Next
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | P1, P2, P3 (Compliance Risk) | Priority 1, 2, 3 resolved — WCAG 2.1 AA accessibility compliance restored |
-| Full Optimisation | P3 (Semantic Structure) | Priority 3 resolved — semantic HTML restructuring on https://mx.allabout.network/reginald/mx-machine-readiness.html brings rendered score above 70/100 |
-| Ongoing Monitoring | Continuous monitoring and quarterly audits | Re-run Pa11y and Pipeline Survivability checks at each cycle; current baselines are 100/100 (Pipeline Survivability) and 100/100 (Accessibility) across the audited set |
+| Critical Fixes | P1 (Compliance Risk) | Priority 1 resolved — WCAG 2.1 AA accessibility compliance restored |
+| Ongoing Monitoring | Continuous monitoring and quarterly audits | Long-term competitive advantage in AI-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 
 ---
 
 ## Summary of Findings
 
-Across the audited set of 101 pages, https://mx.allabout.network demonstrates its strongest performance in Structured Data, scoring 93/100, with a rich breadth of schema types already deployed and a solid foundation for machine readability. SEO and Discovery Readiness both sit at 91/100, reflecting a well-maintained presence for both human visitors and the machines that surface content to them. The remaining dimensions represent the clearest opportunities for near-term gain, and we invite you to read on for our prioritised recommendations.
+Accessibility leads the scorecard for https://mx.allabout.network at 100/100, a strong foundation for both visitors and the machines that read this content on their behalf. SEO and Discovery Readiness each sit at 91/100, with Structured Data at 93/100, meaning the remaining opportunities centre on sharpening how machines interpret, index, and cite the content we present. We invite you to work through the findings that follow to close those gaps and extend the reach of https://mx.allabout.network across every channel where it can be found.
 
 ### Audit Scores
 
@@ -925,7 +833,7 @@ Across the audited set of 101 pages, https://mx.allabout.network demonstrates it
 
 | Page | SEO | A11y | Back | Served | Rendered |
 |------|-----|------|------|--------|----------|
-| / (nav) | 91 | 100 | 100 | 100 | 100 |
+| / (nav) | 92 | 100 | 100 | 100 | 100 |
 | /about | 90 | 100 | 75 | 100 | 100 |
 | /about/about.html | 100 | 100 | 100 | 100 | 100 |
 | /about/contact.html | 92 | 100 | 100 | 100 | 100 |
@@ -948,7 +856,7 @@ Across the audited set of 101 pages, https://mx.allabout.network demonstrates it
 | /blog/from-blobs-to-bots.html | 94 | 100 | 100 | 100 | 100 |
 | /blog/geo-is-a-tactic-mx-is-the-specification.html | 86 | 100 | 100 | 100 | 100 |
 | /blog/llms-txt-guide.html | 99 | 100 | 100 | 100 | 100 |
-| /blog/machine-experience-adding-metadata.html | 95 | 90 | 100 | 100 | 100 |
+| /blog/machine-experience-adding-metadata.html | 95 | 100 | 100 | 100 | 100 |
 | /blog/many-agents-one-metadata-layer.html | 88 | 100 | 100 | 100 | 100 |
 
 *Showing the first 25 of 101 audited pages; the remaining 76 are in `mx-allabout-network-pages-audited.csv` next to this report.*
@@ -965,7 +873,7 @@ We recorded every internal link found on every audited page: [N] links in total.
 
 | Link class                      | Count |
 | ------------------------------- | ----: |
-| Same-host internal links        | 1403  |
+| Same-host internal links        | 1480  |
 | External links                  | 0     |
 | Anchor-only (`#fragment`) links | 0     |
 | mailto / tel links              | 4     |
@@ -974,9 +882,9 @@ We recorded every internal link found on every audited page: [N] links in total.
 
 ## Appendix C: Image Optimisation
 
-Across the audited set, we catalogued 323 images in total. Format adoption is strong: 320 are served as WebP and the remaining 3 are SVG, with no PNG or JPEG images present. Alt-text coverage sits at 86.1%, meaning 278 images carry descriptive text and 45 do not. Those 45 images represent the clearest opportunity in this dimension, both for screen-reader users and for machines that rely on alt text to interpret visual content.
+We audited 323 images across the audited set. The format distribution is notably consistent: 320 of those images are served as WebP, with the remaining 3 delivered as SVG. No PNG or JPEG images appear in the pages we reviewed, which means the team has already made a near-complete commitment to modern formats. Alt-text coverage stands at 278 images, or 86.1%, leaving 45 images without descriptive text. Pa11y returned zero WCAG 2.1 AA errors across the audited set, indicating that these 45 images are treated as decorative by the platform; we note the count here for completeness.
 
-On loading strategy, the picture across the audited set is clearly intentional. Of the 323 images, 213 carry loading="lazy" and 110 carry loading="eager", accounting for every image audited; we found zero images with no loading attribute set. That last point is worth noting because omitting the attribute is not equivalent to setting eager: browsers apply their own heuristics when the attribute is absent, which can lead to inconsistent behaviour across rendering environments. Here, every image has been explicitly declared, which gives us confidence that the loading behaviour reflects deliberate decisions rather than defaults.
+On loading strategy, 213 images carry `loading="lazy"` and 110 carry `loading="eager"`, accounting for all 323 images in the audited set. Crucially, zero images are left without a loading attribute, which is worth noting explicitly: omitting the attribute is not equivalent to setting `loading="eager"`. When no attribute is present, the browser applies its own heuristic, which can produce inconsistent behaviour across viewport sizes and rendering contexts. The fact that every image in the pages we reviewed has been explicitly attributed means the team retains full control over how the browser prioritises image fetching, with no ambiguity left to browser inference.
 
 > **Double-lazy loading pattern not detected** — no image in the audited set carries both native `loading="lazy"` and a JavaScript lazyload placeholder at the same time.
 
@@ -1235,19 +1143,19 @@ Per-page SEO score averaged across audited pages. Aggregates 13 scoring function
 
 | Input | Weight |
 |-------|--------|
-| titleOptimisation (30-60 chars optimal) | 10 |
-| metaDescriptionOptimisation (70-160 chars optimal) | 8 |
-| urlStructure (lowercase, no underscores, ≤4 levels) | 7 |
-| h1Optimization (present, ≤70 chars) | 6 |
-| contentLength (200-800 words optimal) | 8 |
-| contentQuality (keyword in title/meta/h1, h2/h3 presence) | 9 |
-| internalLinking (1-10 links) | 7 |
-| imageOptimisation (alt text or decorative) | 6 |
-| pageSpeed (load time 1000-5000ms band) | 9 |
-| mobileOptimization (responsive meta tag) | 8 |
-| securityFactors (HTTPS) | 7 |
-| structuredData (any present) | 6 |
-| socialMediaTags (OpenGraph or Twitter Card) | 5 |
+| `titleOptimization` (30-60 chars optimal) | 10 |
+| `metaDescriptionOptimization` (70-160 chars optimal) | 8 |
+| `urlStructure` (lowercase, no underscores, ≤4 levels) | 7 |
+| `h1Optimization` (present, ≤70 chars) | 6 |
+| `contentLength` (200-800 words optimal) | 8 |
+| `contentQuality` (keyword in title/meta/h1, h2/h3 presence) | 9 |
+| `internalLinking` (1-10 links) | 7 |
+| `imageOptimization` (alt text or decorative) | 6 |
+| `pageSpeed` (load time 1000-5000ms band) | 9 |
+| `mobileOptimization` (responsive meta tag) | 8 |
+| `securityFactors` (HTTPS) | 7 |
+| `structuredData` (any present) | 6 |
+| `socialMediaTags` (OpenGraph or Twitter Card) | 5 |
 
 **What moves this score:**
 
