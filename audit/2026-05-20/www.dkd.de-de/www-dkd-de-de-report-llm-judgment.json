@@ -1,0 +1,53 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-20/www.dkd.de-de/www-dkd-de-de-report.md",
+  "timestamp": "2026-05-20T20:41:32.882Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 19847,
+    "output_tokens": 968,
+    "cache_creation_input_tokens": 3100,
+    "cache_read_input_tokens": 0
+  },
+  "findingCount": 6,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "order-mismatch",
+      "message": "The Priorities list orders items as P1 Accessibility (Duplicate IDs), P2 Semantic Structure, P3 Security Headers, P4 Discovery Readiness, P5 Structured Data; but the 'What's Next' Critical Fixes phase lists 'P1, P2 (Compliance Risk)' — skipping P3 Security Headers, which is tagged Cross-cutting and ranked higher than the AI Opportunity priorities — while Full Optimization bundles P1–P5 without reflecting the priority sequence, misrepresenting the recommended remediation order to the client.",
+      "context": "Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved — WCAG 2.1 AA accessibility compliance restored",
+      "severity": "block"
+    },
+    {
+      "category": "missing-in-engagement",
+      "message": "Priority 3 (Security Headers, 0/5 Present) is not addressed in the Critical Fixes phase and is only swept up implicitly in 'Full Optimization (P1–P5)', yet the Critical Fixes phase explicitly lists only P1 and P2; a client reading the phased plan would not know when Security Headers are scheduled for remediation.",
+      "context": "Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved — WCAG 2.1 AA accessibility compliance restored",
+      "severity": "block"
+    },
+    {
+      "category": "tone-inconsistency",
+      "message": "The Findings priority blocks use first-person consultant voice ('we recorded', 'we recommend', 'we want to name') throughout, but the 'Recommended Actions' section switches to impersonal imperative/third-person construction ('Address Priority 1 findings', 'Review Priority 2-3 findings', 'Consider optional enhancements') without any first-person attribution, mixing voices within the same Next Steps section.",
+      "context": "1. **Address Priority 1 findings**: address the 303 WCAG 2.1 AA accessibility issues identified (regulatory exposure)\n2. **Review Priority 2-3 findings**",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Security Headers finding states 'Across the audited set we recorded zero of the five standard security response headers present' and then asserts 'the fix applies to every response served from www.dkd.de', extrapolating a sample-based finding to the full site without scoping the claim to the audited pages.",
+      "context": "Doing so at that layer means the fix applies to every response served from www.dkd.de without requiring per-page edits",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "The Executive Summary states 'Agent access: 6/6 — every tested AI user-agent receives HTTP 200' in the What's Working Well table, but the AI Agent Access Test section records that all 8 tested agents received HTTP 429 (Blocked) and '0 of 8 tested agents can access the site' — a direct factual contradiction between sections that misrepresents site accessibility to the client.",
+      "context": "Agent access | 6/6 | every tested AI user-agent receives HTTP 200",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Recommended Actions section tells the client to 'address the 303 WCAG 2.1 AA accessibility issues identified' as if this is a total site figure, but the 303 issues were recorded across only 6 audited pages, and the report elsewhere acknowledges the sample scope; presenting this count without sample qualification implies it represents the full site.",
+      "context": "**Address Priority 1 findings**: address the 303 WCAG 2.1 AA accessibility issues identified (regulatory exposure)",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}

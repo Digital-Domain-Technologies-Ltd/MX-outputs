@@ -1,0 +1,67 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-20/www.dkd.de/www-dkd-de-report.md",
+  "timestamp": "2026-05-20T17:57:14.536Z",
+  "model": "claude-sonnet-4-6",
+  "runCount": 1,
+  "findingCount": 7,
+  "regexFindingCount": 0,
+  "llmFindingCount": 7,
+  "findings": [
+    {
+      "category": "fabricated-specificity",
+      "message": "The sitemap.xml table contains unfilled placeholder tokens ([SITEMAP_URL_COUNT], [SITEMAP_LOC_ASSESSMENT], [SITEMAP_HAS_LASTMOD], [SITEMAP_LASTMOD_ASSESSMENT], [SITEMAP_HAS_CHANGEFREQ], [SITEMAP_CHANGEFREQ_ASSESSMENT], [SITEMAP_HAS_PRIORITY], [SITEMAP_PRIORITY_ASSESSMENT], [SITEMAP_GRADE]) that are template slots never replaced with real audit data. These are leaked generation artefacts visible to the client.",
+      "context": "### sitemap.xml\n\n| Attribute | Present | Assessment |\n|-----------|---------|------------|\n| `<loc>` URLs | [SITEMAP_URL_COUNT] entries | [SITEMAP_LOC_ASSESSMENT] |\n| `<lastmod>` | [SITEMAP_HAS_LASTMOD] | [SITEMAP_LASTMOD_ASSESSMENT] |\n| `<changefreq>` | [SITEMAP_HAS_CHANGEFREQ] | [SITEMAP_CHANGEFREQ_ASSESSMENT] |\n| `<priority>` | [SITEMAP_HAS_PRIORITY] | [SITEMAP_PRIORITY_ASSESSMENT] |\n\n**Sitemap grade:** [SITEMAP_GRADE]",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "Appendix B states \"We recorded every internal link found on every audited page: [N] links in total\" — the placeholder [N] was never substituted with the actual link count from the audit data. This is a leaked template slot visible to the client.",
+      "context": "## Appendix B: Link Inventory\n\nWe recorded every internal link found on every audited page: [N] links in total.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "Priority 3 recommendation to 'Review and extend the discovery file layer (sitemap, robots directives, and any agent-facing endpoints) so that machines receive explicit, well-structured signals about which content is available and canonical' names only a domain category ('discovery file layer') without specifying what is actually wrong with the current sitemap or robots.txt. No data anchor — a specific missing entry, a malformed directive, a count of excluded URLs — appears in this bullet. The surrounding block does provide the Discovery Readiness score of 25/100 as a data anchor, but this specific bullet's prescription ('review and extend') is pure domain framing that could be pasted into any audit report unchanged.",
+      "context": "**What to change and why:**\n- Review and extend the discovery file layer (sitemap, robots directives, and any agent-facing endpoints) so that machines receive explicit, well-structured signals about which content is available and canonical; this is the primary lever on a 25/100 Discovery Readiness score.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The Priority 4 bullet 'Audit each page in the audited set against the full expected metadata stack and fill gaps systematically; a consistent, complete set of Open Graph and canonical tags reduces the risk that machines misattribute or skip content' names a category of tags but does not identify which specific Open Graph properties are missing, or which of the five audited pages are affected. No URL, selector, or count of missing fields is provided. The Metadata Stack Completeness score of 50/100 is present in the block but the actionable bullet itself is pure category framing.",
+      "context": "**What to change and why:**\n- Audit each page in the audited set against the full expected metadata stack and fill gaps systematically; a consistent, complete set of Open Graph and canonical tags reduces the risk that machines misattribute or skip content when forming responses.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "subtle-failure-framing",
+      "message": "The phrase 'leaves room to deepen entity coverage' is a passive-softening construction that implies the current implementation is inadequate without stating it neutrally. The same paragraph already carries the score (65/100, Good band) as a neutral factual anchor; the rhetorical softener adds a condemnatory gloss that is inconsistent with the 'Good' band rating given to this score.",
+      "context": "However, a score of 65/100 leaves room to deepen entity coverage, and machines that rely on structured data to resolve relationships between content, organisation, and services will have less to work from than a fuller implementation would provide.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "The inline code duplicates table contains a JavaScript fragment whose preview begins '(function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespa' — this is recognisably a Leadinfo session-tracking/analytics SDK injected by third-party JavaScript, not a site-authored inline script. The recommendation to 'Move each duplicate fragment to a shared external file' prescribes a site-template-level edit for vendor-injected analytics code. This is the same class of error as third-party-vendor-template-blame, but raised here under exaggeration because the Inline Code Duplicates section does not itself carry a named remediation recommendation targeting a template — it is a general recommendation — so the strict third-party-vendor-template-blame criteria (prescribing a template-level fix for a named vendor selector) are not fully met. However, the recommendation is technically incorrect for this fragment and will mislead the client.",
+      "context": "| js | 414 | 5 | (function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespa |\n...\n**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel=\"stylesheet\">` for CSS, `<script src=\"...\">` for JS).",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "The phrase 'Full Optimization' in the Next Steps table uses the American spelling 'Optimization' (US form). The report otherwise uses British/neutral forms (e.g. 'optimisation' is not used, but 'organisation', 'co-ordinate' appear). 'Optimization' is the US form; the British form is 'Optimisation'. This is a US/UK register inconsistency.",
+      "context": "| Full Optimization | P1, P2, P3, P4, P5 (P1–P5) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    }
+  ]
+}
