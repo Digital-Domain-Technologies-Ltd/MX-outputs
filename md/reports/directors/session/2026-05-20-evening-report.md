@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — MozFest Submitted, Lifecycle Gap Landed, £203,000 Framing Retired"
-description: "Evening segment: MozFest 2026 talk submitted ahead of deadline; the Lifecycle Gap argument now sits across eleven files as the missing synthesis in MX positioning; the £203,000 cruise misread is reframed away from JSON-LD-as-fix across the editable canon and the public mx-site explainer pages."
+title: "Co-Directors Report — MozFest Submitted, Lifecycle Gap Landed, £203,000 Framing Retired, Governance Doctrine Series Opened"
+description: "Evening segment: MozFest 2026 talk submitted ahead of deadline; the Lifecycle Gap argument now sits across eleven files as the missing synthesis in MX positioning; the £203,000 cruise misread is reframed away from JSON-LD-as-fix across the editable canon and the public mx-site explainer pages; a new governance doctrine series opened on the public blog with 'Whose Standard Is It Anyway?' as the first post."
 author: "Tom Cranstoun"
 created: 2026-05-20
 modified: 2026-05-20
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -56,6 +56,16 @@ In nineteen further files the cruise was retired and replaced with an alternate 
 
 Editable-scope cruise mentions dropped from 68 to 36 (down 47%). Banned-phrase hits at zero: no "Trust the structured data" as advocacy, no "eliminates the £203,000", no MXO. `llms-full.txt` regenerated against the rewritten HTML.
 
+### 6. Governance doctrine series opened on the public blog
+
+A new mx-site sub-folder `/blog/governance/` was created with its own CollectionPage lander and the first post, "Whose Standard Is It Anyway?" The post opens with the principle (a standard that determines whose content is trusted should not be controlled by anyone who profits from generating that content), walks four live cases (WordPress kill switch and the Mullenweg / WP Engine dispute; FAIR forking governance and the Linux Foundation-to-TYPO3 pivot; C2PA coalition model and the Adobe / Microsoft / BBC alignment; Adobe Experience Manager records gap from twelve years of practitioner experience), names the three structural failure modes (capture by infrastructure ownership, capture by sponsor concentration, capture by founder dependency), describes how MX is governed differently, and closes with the three test questions a buyer should apply to any standard that claims to be open.
+
+The "How MX is governed" section carries a new identity-layer paragraph: did:web by default distributes trust across DNS, the CA system, and the publisher's own ops rather than concentrating it in a single-operator directory; the failure modes are local rather than global; the dependencies are public, checkable with any standard library, and documented by IETF and the CA/Browser Forum. The FAIR structural footnote carries a one-sentence contrast to the did:plc shared-directory model used by Bluesky.
+
+Editorial passes: two humanizer passes caught and fixed a PRIORITY-1 two-negation parallel, two cross-sentence negation pivots, a sentence-initial "But", a hedge opener, a meta-label scaffold ("The cost is real: ... The win is that..."), and a tail-pad. Voice score 7/10 → 8.5/10. Spell-check added 21 proper nouns and technical terms to the wordlist (Automattic, Bluesky, Mullenweg, WordCamp, Marucchi, Joost, Karim, plc, toolchain, checkable, and others). All polish gates green: zero em-dashes, zero authored entities, AI disclosure complete with WICG `ai-assisted` + IPTC `compositeWithTrainedAlgorithmicMedia`, sitemap and llms-full.txt updated, HTML hygiene clean.
+
+The post is the first in a doctrine series distinct from the existing `/blog/use-cases/` set (worked-case posts on adjacent technologies). Tom flagged the placement question mid-session: the post stretched the use-cases description ("Worked-case posts on where MX applies"), so it moved to a dedicated `/blog/governance/` sub-folder with its own lander after a five-minute placement-decision turn.
+
 ---
 
 ## By the Numbers
@@ -73,6 +83,10 @@ Editable-scope cruise mentions dropped from 68 to 36 (down 47%). Banned-phrase h
 | MX field gaps opened | 0 (all six lifecycle signals map to existing canon; cruise-framing rewrite needed no new fields) |
 | Cruise-mention reduction | 68 → 36 in editable .md files (down 47%) |
 | Banned-phrase hits after rewrite | 0 ("Trust the structured data", "eliminates the £203,000", MXO) |
+| New blog folder | `/blog/governance/` (lander + 1 post; CollectionPage schema; doctrine series) |
+| Blog post word count | ~1,900 words (10-min read), single H1, 8 H2 anchors matched by TOC |
+| Humanizer voice score | 7/10 → 8.5/10 (two passes, five distinct AI patterns fixed) |
+| Wordlist additions | 21 (proper nouns and technical terms: Automattic, Bluesky, Mullenweg, WordCamp, Marucchi, Joost, Karim, plc, toolchain, checkable, et al.) |
 
 ---
 
@@ -148,9 +162,11 @@ The session compounds the existing thesis rather than changing it. MX as the con
 | 4e8d41b0 | Hub: CHANGELOG — evening 2026-05-20, Lifecycle Gap landed, MozFest submitted |
 | a98a8465 | Hub: LEARNINGS — three rules from the evening 2026-05-20 session |
 | ad32c64d | Hub: Bump mx-outputs — README index includes evening directors report |
-| _pending_ | Hub: £203,000 cruise framing rewrite + plan file (eight anchor passages + nineteen retire-pass files + writing-style house rule) |
+| c94dfdea | Hub: £203,000 cruise framing rewrite + plan file (eight anchor passages + nineteen retire-pass files + writing-style house rule + checkable in wordlist) |
 | 078240b | mx-outputs: Blog: land Lifecycle Gap framing across five posts |
 | b436223 | mx-outputs: Co-directors evening report — MozFest submitted, Lifecycle Gap landed |
 | a26ced8 | mx-outputs: Regenerate mx-outputs README index (evening directors report) |
 | 657f684 | mx-outputs: Retire "three pillars" on learn pages; retire cruise from reginald.cog.md |
+| 238ef9a | mx-outputs: Co-directors evening report v1.1 — cruise-framing rewrite section |
+| 7b2293c | mx-outputs: Blog: governance doctrine series with "Whose Standard Is It Anyway?" |
 | 271760a5 | allaboutv2: cog-system — insert verifiability paragraph after cruise narrative |
