@@ -39,7 +39,7 @@ When AI agents guess, people lose money. REGINALD exists to eliminate that guess
 
 AI inference systems generate wrong answers to questions that already have documented answers. This happens because documentation was designed for humans reading web pages — not for machines parsing structured data.
 
-A river cruise priced at £2,030 was reported by an AI agent as £203,000. European number formatting, no Schema.org PriceSpecification, no structured price data. The couple never booked. The cruise company never knew why it lost the sale.
+A patient asked an AI assistant about a planned medication change before a hospital appointment. The contraindications lived on the NHS site in prose paragraphs with no structured envelope around them and no signed lifecycle marker to tell the agent which entries were current. The assistant returned "no interactions" with full confidence. The information existed; the agent had no way to read it as the safety-critical record it was.
 
 A developer asked an AI coding assistant about a documented authentication command. The command existed. The AI denied it. The troubleshooting cascade consumed over 40,000 tokens across two AI systems. The correct answer required 200 tokens — a 200x cost multiplier on a single question.
 
