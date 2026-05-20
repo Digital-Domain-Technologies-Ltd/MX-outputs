@@ -1,0 +1,83 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-19/typo3.org/typo3-org-report.md",
+  "timestamp": "2026-05-20T08:53:27.997Z",
+  "model": "claude-sonnet-4-6",
+  "runCount": 6,
+  "findingCount": 9,
+  "regexFindingCount": 0,
+  "llmFindingCount": 9,
+  "findings": [
+    {
+      "category": "hollow-recommendation",
+      "message": "The recommendation to 'Complete the metadata stack across the audited set by ensuring all pages carry a full complement of Open Graph and canonical signals' is partially hollow. While Open Graph and canonical are named, the follow-on sentence — 'Richer metadata gives machines an authoritative source for title, description, and page identity, directly lifting the 47/100 Metadata Stack score' — is domain framing. More importantly, the first bullet of Priority 4 names only a category ('full complement of Open Graph and canonical signals') without specifying which pages are missing which tags or what specific fields are absent. However, the second bullet ('Review and publish discovery artefacts (such as llms.txt or equivalent machine-readable routing files)') names no specific field, page type, or missing element beyond a domain category — this is a borderline case. On balance, the Priority 4 block does contain the score anchor 47/100 and the named artefact 'llms.txt', so the specificity test is met. Skipping this finding.",
+      "context": "Priority 4 block — flagged then retracted after specificity test passed. No finding raised.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "American English form 'color' used in narrative prose in the Priority 2 recommendation: 'Adjust the background colour of the #uc-btn-accept-banner element…'. Wait — 'colour' is the British form, which is correct here. Re-checking the full report for American forms.",
+      "context": "Re-check pass — 'colour' is correctly British. No finding raised here.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "American English form 'catalog' appears in the audit data table under 'Inline Code Duplicates': 'totalling 217 KB redundant bytes' — that is British. Scanning further: 'optimize' does not appear. 'behavior' does not appear. However, the report uses 'catalogued' (British) in Appendix C. No clear American form detected in prose.",
+      "context": "Scan pass — no American prose forms confirmed. No finding raised.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "subtle-failure-framing",
+      "message": "The phrase 'falls short of' does not appear; however, the executive summary states the accessibility score of 81/100 sits in 'Needs Improvement' while simultaneously describing it as 'a strong human experience' — this internal contradiction is a framing inconsistency but not a banned subtle-failure phrase. Not flagging.",
+      "context": "Re-review pass — no subtle failure framing confirmed at flag-worthy level.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The Optional Enhancements bullet for 'Content-Signal directives' reads: 'Adding Content-Signal directives to robots.txt would give machines an explicit, machine-readable declaration of how typo3.org content may be used for training, retrieval, and summarisation, removing ambiguity that currently leaves those decisions to each agent's own defaults.' This names a domain action ('Content-Signal directives to robots.txt') and a URL (contentsignals.org), but provides no specific directive syntax, field name, or example value. The recommendation could be copy-pasted unchanged into any audit report for any site. However, the cited domain 'contentsignals.org' is a named external artefact that functions as a data anchor, placing this in borderline territory. A professional editor would note that naming a third-party reference URL without any site-specific data point (no current robots.txt content to amend, no specific directive to add) reads as domain framing. On strict application of the specificity test — is there any data anchor from this audit? The robots.txt is absent entirely (confirmed in Discovery Files), making the recommendation to add directives to a non-existent file feel untethered. Raising this as hollow.",
+      "context": "Optional Enhancements section: 'Content-Signal directives (contentsignals.org): Adding Content-Signal directives to robots.txt would give machines an explicit, machine-readable declaration of how typo3.org content may be used for training, retrieval, and summarisation, removing ambiguity that currently leaves those decisions to each agent's own defaults.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "The phrase 'Long-term competitive advantage in AI-mediated discovery' appears in the Next Steps table under the Ongoing Monitoring phase outcome. This is marketing-copy hyperbole — 'competitive advantage' is an unsubstantiated claim that cannot be derived from the audit data. The audit measures this site's own signals; it contains no competitive benchmarking data and no comparison to peer sites. The phrase reads as sales copy rather than consultant prose.",
+      "context": "Next Steps table, Ongoing Monitoring row, Outcome column: 'Long-term competitive advantage in AI-mediated discovery'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "Priority 5's first bullet reads: 'Introduce Schema.org markup appropriate to each page type within the audited set. Even a minimal implementation covering type, name, and description gives machines the anchors they need to classify and cite pages correctly, moving the Structured Data Quality score from 0/100.' The second bullet continues: 'Prioritise page types that are most likely to appear in agent answers (such as software project pages, organisation pages, and article or documentation pages).' While 'software project pages, organisation pages, and article or documentation pages' are named, these are generic Schema.org category names that could apply to nearly any open-source project or content site — they are not anchored to specific pages from the audit (e.g. 'the /association page warrants an Organization entity' or 'the homepage warrants a WebSite entity'). The SDQ Score Breakdown table and the Structured Data Inventory section confirm 0/100 with no entities, but the recommendation does not map suggested schema types to specific audited URLs. However, the block contains the SDQ score of 0/100 and references the Structured Data Quality dimension by name. On the specificity test, the score anchor is present. This is borderline — a professional editor might note the recommendation is generic but the score anchor saves it. Not raising.",
+      "context": "Priority 5 block — borderline, not raised after specificity test.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The Inline Code Duplicates section states 'totalling 217 KB redundant bytes.' The table shows fragments of 373 bytes (JS, 7 pages), 218748 bytes (CSS, 2 pages), 773 bytes (CSS, 2 pages), 652 bytes (CSS, 2 pages), and 151 bytes (CSS, 2 pages). Summing these raw byte values: 373 + 218748 + 773 + 652 + 151 = 220,697 bytes ≈ 215 KB, not 217 KB. The discrepancy is small but the '217 KB' figure does not reconcile with the table data visible in the report. A number that appears in the narrative but cannot be derived from the audit data table is fabricated specificity.",
+      "context": "Inline Code Duplicates section: 'We found 5 identical inline fragment(s) repeated across multiple pages, totalling 217 KB redundant bytes.' Table shows: 373 B + 218,748 B + 773 B + 652 B + 151 B = 220,697 B ≈ 215 KB.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "The phrase 'puts the site in a different class' does not appear, but the Executive Summary contains the construction: 'the picture for human visitors is strong… Performance stands out as the highest-scoring human-experience dimension… SEO sits at 77/100, a solid result that reflects good on-page fundamentals and a content architecture that search engines can follow with confidence.' The final clause — 'a content architecture that search engines can follow with confidence' — is an implied superlative derived from a score of 77/100. 'With confidence' is not supported by any crawl-behaviour data in the audit; it is an editorial embellishment that overstates what a 77/100 SEO score demonstrates. This is a subtle exaggeration not catchable by token-level regex.",
+      "context": "Executive Summary: 'SEO sits at 77/100, a solid result that reflects good on-page fundamentals and a content architecture that search engines can follow with confidence.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    }
+  ]
+}
