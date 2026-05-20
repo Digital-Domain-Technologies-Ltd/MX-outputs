@@ -145,6 +145,7 @@
             <li><a href="#what-is-happening">What is happening</a></li>
             <li><a href="#why-the-deprecations-matter-more">Why the deprecations matter more than the additions</a></li>
             <li><a href="#what-schema-org-cannot-tell-you">What Schema.org cannot tell you</a></li>
+            <li><a href="#the-lifecycle-gap">The lifecycle gap Schema.org leaves open</a></li>
             <li><a href="#why-this-matters-when-ai-reads-your-markup">Why this matters when AI reads your markup</a></li>
             <li><a href="#the-layer-that-is-missing">The layer that is missing</a></li>
           </ul>
@@ -196,6 +197,23 @@
         <p>A <code>Product</code> schema block on a merchant page says the price is £49. Schema.org has no field for: was this price published by the merchant who owns the product? Was it injected by a third-party script? Has it been modified since publication? Is the page a genuine merchant page or a lookalike designed to deceive?</p>
 
         <p>None of these questions have answers in the Schema.org vocabulary. The vocabulary assumes that the relationship between the markup and the publisher is trustworthy by default. That assumption held when most publishers were organizations with reputations to protect. It is under strain now.</p>
+
+        <h2 id="the-lifecycle-gap">The lifecycle gap Schema.org leaves open</h2>
+
+        <p>There is a second gap beside provenance. Schema.org describes the shape of the content; it does not describe the document as a living artefact. A schema.org <code>Article</code> carries <code>datePublished</code>. It carries no successor pointer and no maintainer distinct from the author. It carries no <code>validUntil</code>. A <code>BreadcrumbList</code> carries position; it carries no expiry. A <code>Product</code> carries price; it carries no canonical URI pointing at the durable record of that product.</p>
+
+        <p>Once a machine has resolved the citation, fetched the page, and read the markup, Schema.org is silent on six signals an arriving agent needs:</p>
+
+        <ul>
+          <li><strong>When the page was published</strong>: some types have <code>datePublished</code>, most do not.</li>
+          <li><strong>When it expires</strong>: no canonical Schema.org property.</li>
+          <li><strong>Who authored it</strong>: present on some types, absent on others, never with a stable cross-type field.</li>
+          <li><strong>Who maintains it now</strong>: distinct from the author; no Schema.org field for it.</li>
+          <li><strong>What its canonical URI is</strong>: HTML carries <code>&lt;link rel="canonical"&gt;</code>; Schema.org has no equivalent for the document inside its own vocabulary.</li>
+          <li><strong>Whether it has been superseded</strong>: no canonical successor pointer.</li>
+        </ul>
+
+        <p>MX carries every one of those as a first-class field every cog has: <code>created</code>, <code>expires</code>, <code>originator</code> (alias <code>author</code>), <code>stewardship.steward</code> (alias <code>maintainer</code>), <code>canonicalUri</code>, and <code>status</code> plus <code>supersedes</code> / <code>supersededBy</code> / <code>replacedBy</code> for supersession. These are the signals a machine needs to act on the page it just landed on, and Schema.org by itself does not carry them. Provenance answers <em>can we believe it</em>; lifecycle answers <em>can we act on it now</em>. Both gaps point at the same conclusion.</p>
 
         <h2 id="why-this-matters-when-ai-reads-your-markup">Why this matters when AI reads your markup</h2>
 

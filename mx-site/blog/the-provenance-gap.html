@@ -132,6 +132,7 @@
           <ul>
             <li><a href="#content-as-afterthought">What happens when content quality is the afterthought</a></li>
             <li><a href="#the-provenance-gap">The provenance gap</a></li>
+            <li><a href="#the-lifecycle-gap">The lifecycle gap</a></li>
             <li><a href="#what-mx-rewards">What MX actually rewards</a></li>
             <li><a href="#mx-is-not-a-rescue">MX is not a rescue</a></li>
             <li><a href="#optimisation-tools-accelerate">The optimisation tools accelerate the problem</a></li>
@@ -167,6 +168,19 @@
         <h2 id="the-provenance-gap" tabindex="-1">The provenance gap</h2>
         <p>Underneath all three disciplines sits a problem that no amount of optimisation will fix on its own. Schema markup can tell a machine what something is: a product, a person, a price, a review. It cannot tell that machine who made the assertion, when, or whether to trust it. As AI agents place greater weight on structured data in decisions that carry real consequences, the incentive to manipulate it grows in lockstep. That is the provenance gap, and it is widening as fast as the surface area grows.</p>
         <p>Machine Experience, or MX, is an emerging standard designed to be the layer beneath structured data that closes this gap. The idea is straightforward: a web page should be a portable, self-describing document that carries its own metadata about origin, intent, and authorship. Format compliance and editorial honesty are different problems, and MX treats them as different problems. The standard rewards what a page actually says rather than how a page is dressed, and it makes both legible to the machines now reading alongside the humans.</p>
+
+        <h2 id="the-lifecycle-gap" tabindex="-1">The lifecycle gap</h2>
+        <p>There is a second gap right next to provenance. SEO, GEO, AEO and JSON-LD all answer the same question: how does a machine find this page. Once the machine has it, the page is silent about how to treat it. None of them carries when the page was published, when it expires, who maintains it now (distinct from who wrote it), what its canonical URI is, or whether a newer version has replaced it.</p>
+        <p>MX names those six signals as first-class top-level fields every cog carries:</p>
+        <ul>
+          <li><code>created</code>: publication date, immutable after creation</li>
+          <li><code>expires</code>: the date after which the content is no longer authoritative</li>
+          <li><code>originator</code> (alias <code>author</code>): the immutable creator</li>
+          <li><code>stewardship.steward</code> (alias <code>maintainer</code>): the mutable accountable contact</li>
+          <li><code>canonicalUri</code>: the durable address the document resolves to, regardless of where it is mirrored</li>
+          <li><code>status</code> plus <code>supersedes</code> / <code>supersededBy</code> / <code>replacedBy</code>: the supersession chain that lets a machine walk from any version to the current one</li>
+        </ul>
+        <p>A machine landing on an MX cog reads not just what the page is about but what the page is: when it was issued, when it stops being valid, who wrote it, who maintains it, where its canonical home is, and whether a newer version has replaced it. SEO got you found; GEO gets you understood; AEO gets you cited; MX makes the page legible to a machine that has arrived and now has to act.</p>
 
         <h2 id="what-mx-rewards" tabindex="-1">What MX actually rewards</h2>
         <p>MX uses a readiness model with levels that build on each other. At the lowest level, a page is simply discoverable: a machine can find it through sitemaps and clean HTML. The next level up is what MX calls Citation readiness, and this is where the work begins. A page reaches Citation readiness when the facts on it are something the publisher actually holds, facts a machine could quote because they are real, specific, and traceable to the source. Levels above that introduce comparison, registration in public indexes, and third-party audit.</p>
