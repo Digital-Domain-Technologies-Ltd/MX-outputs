@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — MozFest Submitted, Lifecycle Gap Landed"
-description: "Evening segment: MozFest 2026 talk submitted ahead of deadline; the Lifecycle Gap argument now sits across eleven files as the missing synthesis in MX positioning."
+title: "Co-Directors Report — MozFest Submitted, Lifecycle Gap Landed, £203,000 Framing Retired"
+description: "Evening segment: MozFest 2026 talk submitted ahead of deadline; the Lifecycle Gap argument now sits across eleven files as the missing synthesis in MX positioning; the £203,000 cruise misread is reframed away from JSON-LD-as-fix across the editable canon and the public mx-site explainer pages."
 author: "Tom Cranstoun"
 created: 2026-05-20
 modified: 2026-05-20
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -46,24 +46,33 @@ The April 29 IDHL email that landed Jonathan Healey as the second founding spons
 
 The "MX does not guarantee compliance, it helps with documentation" framing was extended across sponsor- and investor-facing materials. canonical-sponsor.md gained the multi-jurisdiction regulatory paragraph (EAA + EU AI Act + UK ICO + NIST AI RMF + Colorado AI Act + comparable instruments emerging in Canada, Australia, Singapore) plus the explicit non-guarantee disclaimer. ddt-cognovamx/business-plan.md gained the same disclaimer on the PDF Car Wash service pitch. The wider sweep audited reginald-vnext-prd.md, mx-eaa-exec-brief.md, sponsor-and-funding-ssot.md, and five investor scaffolds (one-pager, pitch-deck, attestation-explainer, faq, adobe-semrush-investor-note) — all already canonical. The corresponding REMINDERS.md:156 cross-check item was closed.
 
+### 5. £203,000 cruise framing retired across the editable canon
+
+The £2,030 / £203,000 river-cruise misread is the repo's most-used proof story for MX. Tom flagged that the way the story has been used across the repo positions JSON-LD, Schema.org, and structured data as *the fix*, which sells MX short and positions MX as a sibling of SEO/GEO/AE rather than the governance envelope above them. Plan agent built the inventory (~198 mentions across 31 files); the rewrite ran end to end this segment.
+
+Eight anchor passages each carry one non-overlapping angle so the cruise lands harder where it stays: provenance (`SOUL.md`), open-governance (`founding-charter.md`, no Reginald name per the Gathering-vendor-neutral rule), lifecycle (`chapter-13-what-agent-creators-must-build.md`, replacing the "Trust the structured data" line directly), carrier-neutral (`mx-vision.cog.md`, replacing "JSON-LD costs almost nothing to implement and eliminates the £203,000 pricing error permanently"), verifiability (`cog-system.cog.md` in allaboutv2), locale/decimal (`appendix-i-pipeline-failure-case-study.md`, new Stage 3a section), levels-stack (`maxine-vision-deck/PRESENTATION-GUIDE.md`, Slide 5 pivot from horror to MX Readiness Model), community (`draft-manifesto.md`). A ninth anchor was added mid-session per Tom's `/btw`: the public mx-site explainer pages `what-is-mx.html` and `key-principles.html` were restructured to retire the "Three Pillars of MX" framing and replace it with the two-layer architecture (discovery-layer techniques MX defers to, and the governance envelope MX adds above them). FAQ JSON-LD, head meta, hero subtitle, and cross-page link labels updated in lockstep.
+
+In nineteen further files the cruise was retired and replaced with an alternate story chosen for audience fit: NHS drug-interaction misread for funder and Reginald-explainer audiences, Ally McBeal fictional-citation for the London lightning talk, wholesaler datasheet for the electricians explainer, developer 200x-token cascade for the onboarding and agent-independence docs. Cross-reference-only stubs in the appendices and READMEs. The writing-style guide now carries one canonical cruise reference with a "House rule" footnote that explicitly forbids new narrative restatements; new prose links to the appendix or one of the eight anchors instead.
+
+Editable-scope cruise mentions dropped from 68 to 36 (down 47%). Banned-phrase hits at zero: no "Trust the structured data" as advocacy, no "eliminates the £203,000", no MXO. `llms-full.txt` regenerated against the rewritten HTML.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment | 1 in mx-outputs (078240b); hub commits pending step 3 of /step-commit |
-| Files edited (committed in mx-outputs) | 7 |
-| Files edited (pending hub commit) | 11 |
+| Commits this segment | 7 in hub (19c86303, 9de4893b, 5976fe68, db8d2cf3, 4e8d41b0, a98a8465, ad32c64d) plus hub commits from cruise-framing rewrite pending step 3; 2 in mx-outputs (078240b, 657f684); 1 in allaboutv2 (271760a5) |
+| Files edited (cumulative across segment) | 60+ |
 | New canonical files | 1 (`business-sponsor-pitch.md`) |
-| Lines added (mx-outputs commit) | +157 |
-| Lines removed (mx-outputs commit) | −49 |
-| Repositories touched | 2 (hub + mx-outputs) |
+| Repositories touched | 3 (hub + mx-outputs + allaboutv2) |
 | New REMINDERS items | 2 (`If MozFest accepts: build demo`, `If accepts: deliver two follow-up sessions + companion note`) |
 | REMINDERS items closed | 2 (MozFest submission line; compliance-disclaimer cross-check) |
 | Memory writes | 3 (Gathering Administration Ltd legal entity; Tom attends CMS Experts not convenes; Business Sponsor terminology) |
-| Plan files | 1 (`json-ld-seo-geo-aeo-fuzzy-porcupine.md`) |
-| MX field gaps opened | 0 (all six lifecycle signals map to existing canon) |
+| Plan files | 2 (`json-ld-seo-geo-aeo-fuzzy-porcupine.md`, `we-use-the-203-000-pure-firefly.md`) |
+| MX field gaps opened | 0 (all six lifecycle signals map to existing canon; cruise-framing rewrite needed no new fields) |
+| Cruise-mention reduction | 68 → 36 in editable .md files (down 47%) |
+| Banned-phrase hits after rewrite | 0 ("Trust the structured data", "eliminates the £203,000", MXO) |
 
 ---
 
@@ -132,5 +141,16 @@ The session compounds the existing thesis rather than changing it. MX as the con
 
 | Hash | Description |
 |------|-------------|
-| _pending_ | Hub: Lifecycle Gap canon sweep + Business Sponsor pitch + compliance-disclaimer sweep + bio fix |
+| 19c86303 | Hub: Lifecycle Gap — name and canonicalise across manuscripts and positioning |
+| 9de4893b | Hub: Business Sponsor pitch, compliance disclaimer sweep, voice fixes |
+| 5976fe68 | Hub: Spell wordlist — pick up new domain terms from this session |
+| db8d2cf3 | Hub: REMINDERS — add Lifecycle Gap deploy + read-through + mx-reginald decision items |
+| 4e8d41b0 | Hub: CHANGELOG — evening 2026-05-20, Lifecycle Gap landed, MozFest submitted |
+| a98a8465 | Hub: LEARNINGS — three rules from the evening 2026-05-20 session |
+| ad32c64d | Hub: Bump mx-outputs — README index includes evening directors report |
+| _pending_ | Hub: £203,000 cruise framing rewrite + plan file (eight anchor passages + nineteen retire-pass files + writing-style house rule) |
 | 078240b | mx-outputs: Blog: land Lifecycle Gap framing across five posts |
+| b436223 | mx-outputs: Co-directors evening report — MozFest submitted, Lifecycle Gap landed |
+| a26ced8 | mx-outputs: Regenerate mx-outputs README index (evening directors report) |
+| 657f684 | mx-outputs: Retire "three pillars" on learn pages; retire cruise from reginald.cog.md |
+| 271760a5 | allaboutv2: cog-system — insert verifiability paragraph after cruise narrative |
