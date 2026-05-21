@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Founder Commitment Published, Governance Series Trimmed, mx-site Contrast Lifted, Audit Pipeline Hardened"
-description: "Morning segment: the founder's commitment not to be the main sponsor of The Gathering published with the trigger condition stated. The first governance post trimmed to remove FAIR, C2PA, and Adobe Experience Manager references; the WordPress kill-switch case kept as the publicly-litigated example. DDT-side canon docs made self-contained except for links to the public governance series. Late-morning: --mx-text-muted lifted across mx-site to clear WCAG AA on every documented background; audit pipeline gains an apex/www hostname normaliser, a 15-minute sitemap cache TTL, and a Phase 1 sanity gate that refuses to ship a sub-3-page report without --allow-thin."
+title: "Co-Directors Report — Founder Commitment Published, Governance Series Trimmed, mx-site Contrast Lifted, Audit Pipeline Hardened, Audit Docs Aligned to Canonical Tree"
+description: "Morning segment: the founder's commitment not to be the main sponsor of The Gathering published with the trigger condition stated. The first governance post trimmed to remove FAIR, C2PA, and Adobe Experience Manager references; the WordPress kill-switch case kept as the publicly-litigated example. DDT-side canon docs made self-contained except for links to the public governance series. Late-morning: --mx-text-muted lifted across mx-site to clear WCAG AA on every documented background; audit pipeline gains an apex/www hostname normaliser, a 15-minute sitemap cache TTL, and a Phase 1 sanity gate that refuses to ship a sub-3-page report without --allow-thin. Mid-morning close: four audit-related skill and cog docs rewritten to the canonical audit-data/domains/<hostSlug>/ storage tree, closing two propagation REMINDERS in one pass."
 author: "Tom Cranstoun"
 created: 2026-05-21
 modified: 2026-05-21
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -19,7 +19,7 @@ mx:
 
 **Date:** 21 May 2026 — Morning
 **Segment:** morning (since midnight)
-**Version:** 1.1 (late-morning update appended)
+**Version:** 1.2 (mid-morning audit-docs propagation appended after the late-morning code work)
 
 ---
 
@@ -30,6 +30,8 @@ The doctrinal commitment Tom has been preparing for, and would not draw down on 
 In the same segment the first governance post was trimmed: FAIR, C2PA, and Adobe Experience Manager cases removed in favour of the publicly-litigated WordPress kill-switch story. The doctrine survives the cuts; what is gone is the named critique of fellow standards efforts and a CMS Tom consults on. Neutral framing, kept where the public record is unambiguous.
 
 Later in the morning two pieces of plumbing work landed. Tom flagged that the /learn pages looked washed out on a phone; the cause traced to the muted text token sitting at 4.12-6.42:1 on the navy palette, borderline AA at desktop, painful on a phone in daylight. Lifted the token across mx-site so every documented pairing clears AA. Separately, four files in the audit pipeline were hardened after the dkd.de German-language audit shipped a blank report yesterday on a stale single-URL sitemap cache: apex/www are now treated as the same site, the sitemap cache TTL drops from 24 hours to 15 minutes, the multilingual deliverable slug fix from yesterday gets a sibling guard in infill-report, and Phase 1 now refuses to ship a sub-three-page report without an explicit --allow-thin opt-in. The dkd.de /de deliverable was re-run cleanly with the fixes in place.
+
+A short interview pass then closed the documentation-propagation debt. The audit-related skills and cogs still described the pre-2026-05-15 storage layout (`mx-reginald/audit/results/<hostname>/`) and the pre-2026-05-20 slug placeholder (`<hostname>` rather than `<hostSlug>`), and `mx-audit.cog.md` carried no documentation for the new `--allow-thin` flag and 3-page minimum. Both REMINDERS items closed together in one rewrite touching four files. The cog body now also names the Phase 1 sanity gate as a first-class behaviour rather than an internal implementation detail.
 
 ---
 
@@ -68,15 +70,27 @@ Yesterday's German-language audit (`dkd.de` /de path) shipped a blank report bec
 
 With the four fixes above in place, the German audit was re-run cleanly. The new deliverable folder at [`mx-outputs/audit/2026-05-21/dkd.de-de/`](../../../../mx-outputs/audit/2026-05-21/dkd.de-de/) carries the 11 expected files (report markdown, sidecar CSVs, scope and finding-page JSON, voice review, robots.txt snapshot, audit log).
 
+### 8. Audit docs aligned to the canonical storage tree
+
+The pre-2026-05-15 audit storage layout split into three roots: `mx-reginald/audit/` for code, `audit-data/domains/<hostSlug>/{cache,results}/` for tool data, `mx-outputs/audit/<date>/<hostSlug>/` for client deliverables. The path-aware `<hostSlug>` placeholder landed 2026-05-20 so multilingual audits get sibling folders. Four audit-related docs still described the older `mx-reginald/audit/results/<hostname>/` layout and the older `<hostname>` placeholder. An interview pass scoped the rewrite (interview-me detected both layers of drift; Tom chose full rewrite), then four files were brought into lockstep with CLAUDE.md and the actual code:
+
+- [`.claude/skills/audit-collect/skill.md`](../../../../.claude/skills/audit-collect/skill.md) - 29-ref pass: paths, JS snippets, shell variables, bin-script invocations. Three layout variants (`mx-reginald/audit/{results,.cache,domains}/`) collapsed to one. The "How to derive the hostname" section became "How to derive the hostSlug" with the canonical derivation in shell. JS snippet for the standalone AI-attribution collector rewritten to compute `hostSlug` properly.
+- [`.claude/skills/audit-site/skill.md`](../../../../.claude/skills/audit-site/skill.md) - 7-ref pass: per-host result/cache/origin paths rewritten, verify-audit-report.js example uses per-host roots, `--allow-thin` argument documented alongside `--force-fresh`.
+- [`scripts/cogs/package-audit.cog.md`](../../../../scripts/cogs/package-audit.cog.md) - 1-ref pass: `<host>` placeholders to `<hostSlug>`, path-aware key examples added (`www.dkd.de-de`, `www.dkd.de-en`).
+- [`scripts/cogs/mx-audit.cog.md`](../../../../scripts/cogs/mx-audit.cog.md) - help text adds `--allow-thin` flag and updates the `--report` path; a new "Phase 1 sanity gate" prose section explains the 3-page minimum and the four likely causes (stale sitemap cache, WAF block, sitemap empty after filters, deliberate single-page) with their remediation commands; Standard Output Paths table and `<hostSlug>` definition aligned; final-delivery-folder row added.
+
+The change closed two REMINDERS in one commit: the 2026-05-20 path-aware-slug propagation item (3 docs) and the 2026-05-21 `--allow-thin` documentation item (2 docs). Net effect: an agent or operator reading any of the four files now sees the same storage layout the code actually uses, and the new sanity gate is documented as a first-class behaviour.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment | 3 in mx-outputs (`dafee27`, `84f1aab`, `d0ddee2`); 1 hub commit pushed earlier (`c5c8b42d`); late-morning hub commit pending Step 3 |
+| Commits this segment | 5 in mx-outputs (`dafee27`, `9ad0fee`, `84f1aab`, `d0ddee2`, `f5ff7e6`, `1b002ea`, `fa8cca6`); 5 hub commits (`c5c8b42d`, `cf2d0b8e`, `ad82cdda`, `26076e56`, `2a785c52`, `846a053c`); v1.2 directors report pending push |
 | Files changed in mx-outputs (late morning) | 13 (2 CSS/brand, 11 audit deliverable) |
 | Files changed in hub (late morning) | 4 (3 audit code, 1 pipeline) |
+| Files changed in hub (mid-morning audit-docs pass) | 4 (2 cogs, 2 skills) + auto-staged registry sidecars |
 | Lines added in mx-outputs (full morning) | +1,849 |
 | Lines removed in mx-outputs (full morning) | -114 |
 | New canonical files | 1 (`not-the-main-sponsor.html`) |
@@ -137,4 +151,12 @@ The trim of the first post is the other half of the same picture. A doctrine pos
 | c5c8b42d | Hub: canon docs (business-plan, canonical-sponsor, business-sponsor-pitch) carry the 25% cap + founder veto-trigger; wordlist +10; mx-outputs pointer bump |
 | 84f1aab | mx-outputs: Raise --mx-text-muted contrast on mx-site; promote card body copy to --mx-text |
 | d0ddee2 | mx-outputs: Add dkd.de /de audit deliverable (re-run 2026-05-21) |
-| _pending_ | Hub: audit pipeline hardening (apex/www, 15-min sitemap TTL, Phase 1 sanity gate, path-aware slug in infill-report); v1.1 morning report; mx-outputs pointer bump |
+| f5ff7e6 | mx-outputs: Co-directors morning report v1.1 (contrast lift, audit pipeline hardened, dkd /de re-run) |
+| 1b002ea | mx-outputs: dkd.de /de audit post-commit verification + fierce-critic + llm-judgment sidecars |
+| fa8cca6 | mx-outputs: Regenerate README index (dkd.de /de audit deliverable + 2026-05-21 reports) |
+| cf2d0b8e | Hub: Audit pipeline hardening + mx-site /learn contrast fix (mx-outputs bump) |
+| ad82cdda | Hub: Document late-morning session: contrast lift + audit pipeline hardening (CHANGELOG + REMINDERS) |
+| 26076e56 | Hub: Bump mx-outputs (v1.1 directors report + audit gate sidecars + README index) |
+| 2a785c52 | Hub: Audit docs - rewrite to audit-data/domains/<hostSlug>/ tree; add --allow-thin (4 files + auto-staged registry sync) |
+| 846a053c | Hub: REMINDERS - close audit-docs propagation items (path-aware slug + --allow-thin) |
+| _pending_ | mx-outputs: v1.2 directors report; hub pointer bump |
