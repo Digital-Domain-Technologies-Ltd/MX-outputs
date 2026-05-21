@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-05-20"
-modified: "2026-05-20"
+created: "2026-05-21"
+modified: "2026-05-21"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -21,11 +21,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 56 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 232 | Markdown — reports, audit results, presentations |
+| [md/](md/) | 233 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **962** | |
+| **Total** | **964** | |
 
 ---
 
@@ -109,7 +109,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (225 files)
+### md/reports/ (226 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -144,7 +144,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (197 files)
+#### md/reports/directors/ (198 files)
 
 **build/** (3 files)
 
@@ -158,7 +158,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (190 files)
+**session/** (191 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -341,6 +341,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-05-20-afternoon-report.md`](md/reports/directors/session/2026-05-20-afternoon-report.md)
 - [`2026-05-20-evening-report.md`](md/reports/directors/session/2026-05-20-evening-report.md)
 - [`2026-05-20-morning-report.md`](md/reports/directors/session/2026-05-20-morning-report.md)
+- [`2026-05-21-morning-report.md`](md/reports/directors/session/2026-05-21-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -504,4 +505,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-20 at 23:17*
+*Generated on 2026-05-21 at 10:07*
