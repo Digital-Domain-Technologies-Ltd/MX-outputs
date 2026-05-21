@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Founder Commitment Published, Governance Series Trimmed, mx-site Contrast Lifted, Audit Pipeline Hardened, Audit Docs Aligned, Content Ops Framing Spread Across the Estate"
-description: "Morning segment: the founder's commitment not to be the main sponsor of The Gathering published with the trigger condition stated. The first governance post trimmed to remove FAIR, C2PA, and Adobe Experience Manager references; the WordPress kill-switch case kept as the publicly-litigated example. DDT-side canon docs made self-contained except for links to the public governance series. Late-morning: --mx-text-muted lifted across mx-site to clear WCAG AA on every documented background; audit pipeline gains an apex/www hostname normaliser, a 15-minute sitemap cache TTL, and a Phase 1 sanity gate that refuses to ship a sub-3-page report without --allow-thin. Mid-morning close: four audit-related skill and cog docs rewritten to the canonical audit-data/domains/<hostSlug>/ storage tree, closing two propagation REMINDERS in one pass. Late-morning second wave: Content Ops introduced as a new top-layer framing above the canonical five-part framing, with a paired MX what-it-is / why-it-matters definition; propagated across canon, the two test-bed chapters, fifteen mx-site pages, four outbound docs, and the agent corpus."
+title: "Co-Directors Report — Founder Commitment Published, Governance Series Trimmed, mx-site Contrast Lifted, Audit Pipeline Hardened, Audit Docs Aligned, Content Ops Framing Spread Across the Estate, Unified Pre-Push Suite + mx:heal Self-Healing CLI"
+description: "Morning segment: the founder's commitment not to be the main sponsor of The Gathering published with the trigger condition stated. The first governance post trimmed to remove FAIR, C2PA, and Adobe Experience Manager references; the WordPress kill-switch case kept as the publicly-litigated example. DDT-side canon docs made self-contained except for links to the public governance series. Late-morning: --mx-text-muted lifted across mx-site to clear WCAG AA on every documented background; audit pipeline gains an apex/www hostname normaliser, a 15-minute sitemap cache TTL, and a Phase 1 sanity gate that refuses to ship a sub-3-page report without --allow-thin. Mid-morning close: four audit-related skill and cog docs rewritten to the canonical audit-data/domains/<hostSlug>/ storage tree, closing two propagation REMINDERS in one pass. Late-morning second wave: Content Ops introduced as a new top-layer framing above the canonical five-part framing, with a paired MX what-it-is / why-it-matters definition; propagated across canon, the two test-bed chapters, fifteen mx-site pages, four outbound docs, and the agent corpus. Late-morning third wave: the pre-push hook gains five new validation gates (orphan directories, index freshness, fields:gate, mx-validator on changed files, link integrity) in soft-warn mode until 2026-07-01, paired with a new mx:heal self-healing CLI that proposes skeletons, rewrites lineage drift, regenerates stale indexes, and offers field-conformance auto-fixes; 182 orphan directories filled in one apply pass."
 author: "Tom Cranstoun"
 created: 2026-05-21
 modified: 2026-05-21
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -19,7 +19,7 @@ mx:
 
 **Date:** 21 May 2026 — Morning
 **Segment:** morning (since midnight)
-**Version:** 1.3 (Content Ops framing propagation appended after the audit-docs work)
+**Version:** 1.4 (unified pre-push validation suite + mx:heal self-healing CLI appended after the Content Ops work)
 
 ---
 
@@ -95,6 +95,20 @@ Propagated across 25 surfaces in one pass:
 
 The five-part framing in CLAUDE.md and the existing canonical MX one-liner in principles are untouched in place; the paired WHAT/WHY definition is added alongside them so the canon carries both phrasings together rather than swapping one for the other.
 
+### 10. Unified pre-push validation suite + `mx:heal` self-healing CLI
+
+A third late-morning workstream closed the gap between the validators the repo already had and the gates the pre-push hook actually ran. Five new gates land in [`.claude/hooks/pre-push.sh`](../../../../.claude/hooks/pre-push.sh) on top of the existing six: Gate 7 (orphan directories without `.mx.yaml.md`), Gate 8 (index freshness — `mx-reginald/index.json`, `routing-registry.json`, `.aspell-mx.pws`, `definitions-index.md`), Gate 9 (`fields:gate` composite — `cog:validate` + `fields:check` + `fields:conformance`), Gate 10 (mx-validator on the changed `.md` set), Gate 11 (link integrity on the changed `.md` set). Each gate is path-filtered so a single-file push stays under two seconds, individually skippable via `MX_SKIP_*` env vars for emergency overrides, and prints `Run: npm run mx:heal -- --<flag>` as the remediation line.
+
+Soft-warn rollout: a single constant `MX_GATES_HARD_AFTER="2026-07-01"` near the top of the hook decides between `WARNING:` and `ERROR:` mode. Until the cutover the gates emit warnings and let the push through; after the cutover the same gates emit errors and exit 1. Six weeks gives time to clear the historical debt (182 tracked orphan directories at switch-on) before the hard cutover binds. The skip env vars stay available after the cutover so emergencies do not force `--no-verify`.
+
+Companion CLI: `npm run mx:heal` extends [`scripts/mx/mx-graph-builder.js`](../../../../scripts/mx/mx-graph-builder.js) with a heal mode that pairs every gate with a fix. Composable sub-flags: `--orphans` (read README.md from the folder, infer title and description from H1 + first paragraph, infer `folderType` and `inherits` from the classifier and ancestor `.mx.yaml.md`, write skeleton), `--lineage` (scan `git log --diff-filter=R` for renames, grep `refersTo` / `buildsOn` / `inherits` / `partOf` / `replaces` / `relatedFolders` arrays in every `.md`, propose a path rewrite), `--indexes` (call the existing `tests/test-indexes-fresh.js` runner and, with `--apply`, regenerate all four), `--fields` (re-run `fields:gate`, on failure offer `fields:conformance:fix --apply`), `--all` (compose the four), `--apply` (write changes; dry-run by default), `--json` (machine-readable for hooks), `--ai` (opt-in LLM gap-fill, gated on `ANTHROPIC_API_KEY`, never invoked by the hook — keeps the pre-push path deterministic and API-key-free per the existing Reginald-determinism rule).
+
+Pre-existing brokenness fixed in passing: [`scripts/mx-validator.js`](../../../../scripts/mx-validator.cjs) used `require()` but `scripts/package.json` declared `"type": "module"`, so the validator failed on import every time `validate:mx` ran. Renamed to `.cjs` and the two package.json references updated; the validator now actually runs.
+
+Heal applied immediately: `npm run mx:heal -- --all --apply` wrote 182 orphan `.mx.yaml.md` skeletons (4 enriched from README sources, 178 from the classifier), regenerated three indexes (`route-sync`, `cog-tools sync`, `check-mx-definitions-index`), found no lineage references needing rewrite against the one recent rename, and confirmed `fields:gate` already clean. The 182-file fill closes the orphan debt before the 2026-07-01 cutover; subsequent pushes pass Gate 7 on a clean tree.
+
+Supporting changes: a new [`.markdown-link-check.json`](../../../../.markdown-link-check.json) at repo root (was referenced by `validate:links` but missing on disk — blocked Gate 11 without it), [`UBERCOG.cog.md`](../../../../UBERCOG.cog.md) gains six `mx:heal` invocations in the MX Graph Operations block, [`.claude/skills/step-commit/skill.md`](../../../../.claude/skills/step-commit/skill.md) Step 8 documents the belt-and-braces relationship between the new pre-push gates and the existing Step 8 hard gate, two new rules added to [`LEARNINGS.md`](../../../../LEARNINGS.md) (soft-warn-then-hard rollout pattern; gate failure must name a single remediation command), one new 🟠 reminder added to [`REMINDERS.md`](../../../../REMINDERS.md) for the 2026-07-01 cutover.
+
 ---
 
 ## By the Numbers
@@ -121,6 +135,12 @@ The five-part framing in CLAUDE.md and the existing canonical MX one-liner in pr
 | Content Ops propagation surfaces | 25 (3 canon, 2 chapters, 15 mx-site, 4 outbound, 1 corpus) |
 | New top-layer framing | Content Ops above the canonical five-part framing |
 | Paired MX definition added to canon | WHAT (records provenance, context, intended use; travels with file) + WHY (keeps Content Ops work usable outside the producing environment) |
+| New pre-push gates | 5 (orphans, indexes, fields, mx-validator on changed files, links) on top of 6 existing |
+| Cutover constant | `MX_GATES_HARD_AFTER="2026-07-01"` (6 weeks soft-warn before hard-block) |
+| Skeleton files written by `mx:heal --orphans --apply` | 182 (4 README-enriched, 178 classifier) |
+| Indexes regenerated by `mx:heal --indexes --apply` | 3 (route-sync, cog-tools sync, definitions-index) |
+| Pre-existing brokenness fixed | `scripts/mx-validator.js` renamed to `.cjs` (ESM/CommonJS mismatch had silently broken `validate:mx`) |
+| New CLI entry point | `npm run mx:heal` extends `scripts/mx/mx-graph-builder.js` heal mode |
 
 ---
 
@@ -141,6 +161,8 @@ The trim of the first post is the other half of the same picture. A doctrine pos
 - "Content Ops" is positioned as a new top layer above the canonical five-part framing, not a replacement. The term is used independently (no Bailie/Halvorson citation) and is house framing rather than standards-body material (no Gathering draft note filed).
 - The canonical MX definition becomes paired: WHAT (provenance, context, intended use; travels with the file) and WHY (keeps Content Ops work usable outside the producing environment). Both lines carried in canon; existing one-liner prose left in place alongside.
 - CLAUDE.md gets a new "Content Ops (top layer)" section above the five-part framing rather than renumbering the five parts. Nothing that cites layer numbers elsewhere needs to change.
+- The five new pre-push gates ship in soft-warn mode (warning + remediation pointer + `MX_SKIP_*` env-var escape hatches) until 2026-07-01, after which they hard-block by flipping a single constant. The pattern is the answer to a question Tom has raised before: how do you add a gate that audits historical state without making `--no-verify` the de-facto override? The answer is a published cutover date and a remediation command paired with every warning, not a flag-day cut.
+- The `mx:heal --ai` flag exists but the hook never invokes it; LLM gap-fill is a manual operator tool, not part of the pre-push contract. This holds the existing Reginald-determinism rule (deterministic outputs across machines; no LLM inference in the trust path) while allowing operators to opt in when context warrants.
 
 ---
 
@@ -159,6 +181,8 @@ The trim of the first post is the other half of the same picture. A doctrine pos
 - Decide the Adobe Experience Manager author-bio question for governance posts specifically.
 - Begin the founding-cohort recruitment work that the 25% cap and the veto-trigger condition both depend on.
 - Audit the rest of mx-site (and the audit-report HTML template) for any other `--mx-text-muted` consumers on tinted surfaces where the lift may have improved readability further than expected, or revealed visual-hierarchy regressions that need a different token.
+- Spot-check the 182 new `.mx.yaml.md` skeletons that `mx:heal --orphans --apply` wrote, particularly the test-fixture directories under [`mx-reginald/audit/test/fixtures/`](../../../../mx-reginald/audit/test/fixtures/) (the classifier gave them all `folderType: testing`; some may not need metadata at all and could be deleted instead) and the parent mount point at [`tg-community/.mx.yaml.md`](../../../../tg-community/.mx.yaml.md) (read-only submodules sit under it; the parent is hub-owned but worth a sanity-check).
+- Before 2026-07-01, run `npm run mx:heal -- --all` periodically and confirm `npm run fields:gate` stays clean so the cutover from WARNING to ERROR mode is a non-event rather than a flag-day.
 
 ---
 
@@ -182,4 +206,11 @@ The trim of the first post is the other half of the same picture. A doctrine pos
 | 8ad5c5aa | Hub: Bump mx-outputs (v1.2 directors report - audit-docs propagation closure) |
 | 24b9f98f | Hub: CHANGELOG - midday audit-docs propagation entry (canonical storage tree + --allow-thin) |
 | 95c967e | mx-outputs: Spread Content Ops + paired MX framing across mx-site (18 files: 17 HTML + llms-understanding.txt) |
-| _pending_ | mx-outputs: v1.3 directors report (Content Ops propagation appended); hub Content Ops commits (canon + chapters + outbound docs); mx-outputs pointer bump |
+| e78b562 | mx-outputs: Co-directors morning report v1.3 (Content Ops framing propagation across 25 surfaces) |
+| a58ff9d0 | Hub: Content Ops + paired MX framing across canon, chapters, outbound |
+| c3564c1f | Hub: REMINDERS - read-through + PDF rebuild for Free-book ch00 + Protocols ch00 after Content Ops insertion |
+| 4c5f1dfb | Hub: CHANGELOG - Content Ops top-layer framing + paired MX definition propagated across 25 surfaces |
+| 320d739 | mx-outputs: Audit dkd.de-de regeneration - fresh report, sidecars, PDF |
+| _pending_ | Hub: Unified pre-push validation suite (Gates 7-11 soft-warn until 2026-07-01) + mx:heal self-healing CLI + 182 orphan skeletons + mx-validator rename to .cjs |
+| _pending_ | mx-outputs: v1.4 directors report (this update) |
+| _pending_ | Hub: mx-outputs pointer bump |
