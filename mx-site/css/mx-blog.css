@@ -17,7 +17,11 @@
    Theme variables
    ════════════════════════════════════════════════════════════════ */
 
-:root {
+/* :where(:root) keeps these variables at specificity 0 so a page that
+   also loads mx-unified.css (where the dark site palette is defined with
+   normal :root specificity) cleanly wins. Standalone blog pages that load
+   only this file still pick these up — they're the only matching rule. */
+:where(:root) {
   /* Colours — light mode default */
   --primary-bg: #ffffff;
   --primary-text: #1a1a1a;
@@ -42,8 +46,8 @@
   --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 
   /* Spacing */
-  --max-width: clamp(600px, 90vw, 1400px);
-  --max-width-wide: clamp(700px, 92vw, 1600px);
+  --max-width: min(90vw, 1400px);
+  --max-width-wide: min(92vw, 1600px);
   --spacing-unit: 1rem;
 
   /* Type scale */
@@ -57,7 +61,7 @@
 
 /* Dark mode — kicks in when the OS asks for it */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :where(:root) {
     --primary-bg: #1a1a1a;
     --primary-text: #e0e0e0;
     --secondary-text: #b0b0b0;
@@ -80,7 +84,7 @@
 
 /* High contrast — overrides both light and dark when the OS asks for it */
 @media (prefers-contrast: high) {
-  :root {
+  :where(:root) {
     --primary-text: #000000;
     --secondary-text: #000000;
     --heading-color: #000000;
@@ -100,18 +104,21 @@
   box-sizing: border-box;
 }
 
-html {
+:where(html) {
   scroll-behavior: smooth;
   font-size: 16px;
 }
 
-body {
+/* Body-level theming uses :where() so its specificity is 0. When this file
+   is loaded alongside mx-unified.css (which sets body bg/colour to the
+   site-wide dark navy), the unified rules win. When mx-blog.css is loaded
+   alone, this rule is still the only match and applies as expected. */
+:where(body) {
   font-family: var(--font-body);
   line-height: 1.6;
   color: var(--primary-text);
   background-color: var(--primary-bg);
   margin: 0;
-  /* No max-width on body itself — content wrappers (.blog-content / .blog-page) handle width. */
 }
 
 /* ════════════════════════════════════════════════════════════════

@@ -42,9 +42,31 @@
   --mx-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 
   /* Layout */
-  --mx-max-width: clamp(800px, 92vw, 1600px);
-  --mx-content-width: clamp(800px, 92vw, 1600px);
+  --mx-max-width: min(92vw, 1600px);
+  --mx-content-width: min(92vw, 1600px);
   --mx-section-padding: 5rem 2rem;
+
+  /* Overrides for the mx-blog.css variable palette so blog/learn pages
+     that load both stylesheets render with the dark site theme instead
+     of mx-blog's light-mode defaults. mx-blog.css now uses :where(:root)
+     for its own definitions, so these (specificity 0,1,0) win. */
+  --primary-bg: var(--mx-blue-deep);
+  --primary-text: var(--mx-text);
+  --secondary-text: var(--mx-text-muted);
+  --heading-color: var(--mx-white);
+  --accent-color: var(--mx-blue-light);
+  --accent-hover: var(--mx-gold);
+  --border-color: var(--mx-border);
+  --code-bg: rgba(26, 58, 92, 0.4);
+  --code-border: var(--mx-border);
+  --code-text: var(--mx-text);
+  --table-header-bg: var(--mx-surface-strong);
+  --intro-bg: var(--mx-surface);
+  --skip-link-bg: var(--mx-gold);
+  --skip-link-text: var(--mx-blue-deep);
+  --back-to-top-text: var(--mx-blue-deep);
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --shadow-color-strong: rgba(0, 0, 0, 0.6);
 }
 
 html {
@@ -337,11 +359,17 @@ a:focus-visible {
 
 .section-subtitle {
   text-align: center;
-  max-width: clamp(500px, 65vw, 900px);
+  max-width: min(65vw, 900px);
   margin: 0 auto 3rem;
   font-size: 1.125rem;
   color: var(--mx-text-muted);
   line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .section-subtitle {
+    max-width: 100%;
+  }
 }
 
 /* ── Prose columns ──
@@ -350,7 +378,13 @@ a:focus-visible {
  * and read as a wall.
  */
 .section-inner.section-prose {
-  max-width: clamp(560px, 65vw, 780px);
+  max-width: min(65vw, 780px);
+}
+
+@media (max-width: 768px) {
+  .section-inner.section-prose {
+    max-width: 100%;
+  }
 }
 
 .section-prose p {
