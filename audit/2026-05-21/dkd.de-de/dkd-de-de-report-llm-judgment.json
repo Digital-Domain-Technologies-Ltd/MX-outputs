@@ -1,54 +1,53 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-21/dkd.de-de/dkd-de-de-report.md",
-  "timestamp": "2026-05-21T08:49:31.004Z",
+  "timestamp": "2026-05-21T17:28:44.849Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 20394,
-    "output_tokens": 948,
+    "input_tokens": 20661,
+    "output_tokens": 1111,
     "cache_creation_input_tokens": 3100,
     "cache_read_input_tokens": 0
   },
-  "findingCount": 5,
-  "withdrawnCount": 1,
+  "findingCount": 6,
+  "withdrawnCount": 0,
   "findings": [
     {
-      "category": "order-mismatch",
-      "message": "The Priorities list orders Discovery Readiness (P3) before Metadata Stack Completeness (P4), but the 'At a Glance' table narrative lists them in reverse order: 'Structured Data Quality at 65/100, Catalogue Visibility at 10/100, Metadata Stack Completeness at 49/100, and Discovery Readiness at 25/100', placing Metadata Stack before Discovery Readiness, contradicting the numbered priority order.",
-      "context": "Structured Data Quality at 65/100, Catalogue Visibility at 10/100, Metadata Stack Completeness at 49/100, and Discovery Readiness at 25/100",
+      "category": "missing-in-engagement",
+      "message": "Priority 3 (Discovery Readiness 25/100) is not addressed in the 'Critical Fixes' phase — that phase covers only P1 and P2 — yet Discovery Readiness is a 'High' priority finding equal in urgency to P4, and its first appearance in the engagement table is only implicitly bundled under 'Full Optimization' (P1-P5). However, the Critical Fixes phase explicitly lists 'P1, P2 (Compliance Risk)' and omits P3 entirely by label, while P3 carries a 'High' priority tag identical to P1. The engagement phasing therefore misrepresents P3's urgency relative to P1 and P2.",
+      "context": "| Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved - WCAG 2.1 AA accessibility compliance restored |",
+      "severity": "block"
+    },
+    {
+      "category": "missing-in-engagement",
+      "message": "Priority 4 (Metadata Stack Completeness 49/100) is also tagged 'High' priority in the Findings table but is excluded from the Critical Fixes phase, which lists only P1 and P2, creating an inconsistency between the stated priority level and its placement in the engagement phasing.",
+      "context": "| 4 | Metadata Stack Completeness 49/100, Could Be Better | AI Opportunity | High | Medium |",
       "severity": "block"
     },
     {
       "category": "tone-inconsistency",
-      "message": "The Machine Experience scorecard paragraph switches mid-section from third-person ('Machines can reliably process content') to first-person ('how consistently they can find and contextualise what we publish'), mixing voices within the same narrative paragraph.",
-      "context": "constrain how consistently they can find and contextualise what we publish",
-      "severity": "block"
-    },
-    {
-      "category": "tone-inconsistency",
-      "message": "The Summary of Findings section switches from third-person ('https://dkd.de performs at its strongest') to first-person ('We invite the team at https://dkd.de to review the findings') within the same paragraph.",
-      "context": "We invite the team at https://dkd.de to review the findings that follow",
+      "message": "The 'About This Report' section opens in first-person plural ('We audited', 'We fetch every page twice', 'We then review') but the Executive Summary shifts to third-person passive construction ('the foundations built for human visitors are genuinely solid', 'SEO sits at 92/100') without a first-person anchor, then the Findings priorities revert to first-person ('we recorded 527 WCAG AA issues', 'we observed'). The Summary of Findings section also mixes constructions, using 'We invite the team' after sections that used third-person framing, creating an inconsistent voice across body narrative sections of the same type.",
+      "context": "We audited seven pages of dkd.de against ten dimensions... We invite the team at https://dkd.de to explore those findings",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The Security Headers section states '4 of the five standard security headers are absent across every audited response' but then asserts this as a site-wide fact — the prose says 'Adding these at the origin-server or CDN edge closes the corresponding attack surfaces' with no sample-scope qualifier, and the header table above it states all five headers as 'Yes' (present), directly contradicting the finding that four are absent.",
-      "context": "4 of the five standard security headers are absent across every audited response: Content-Security-Policy (CSP), X-Frame-Options, X-Content-Type-Options, HSTS",
+      "message": "The Structured Data Inventory section states 'Across the 7 pages we audited, structured data is solid' but then instructs 'Adding recommended properties and increasing type diversity on the sampled pages gives machines more to work with' — the phrase 'solid' without scope qualification implies a site-wide verdict from a 7-page sample.",
+      "context": "Across the 7 pages we audited, structured data is solid. Adding recommended properties and increasing type diversity on the sampled pages",
       "severity": "block"
     },
     {
-      "category": "missing-priority",
-      "message": "The 'At a Glance' findings table includes 'Catalogue Visibility at 10/100' as a named metric in the introductory narrative, but no Priority item in the numbered Priorities list (P1–P6) addresses Catalogue Visibility, meaning it appears in the findings summary without a corresponding priority.",
-      "context": "Structured Data Quality at 65/100, Catalogue Visibility at 10/100, Metadata Stack Completeness at 49/100",
+      "category": "sample-vs-total-overreach",
+      "message": "Priority 4's finding states 'across the audited set, a substantial portion of the page-level metadata signals machines use…are absent or incomplete' but the recommended action says 'Audit Open Graph and meta-description coverage across the audited set' while the Marker Reachability table shows Open Graph tags as 'Yes/Yes' on the audited pages, and the Cross-Page Consistency table marks Open Graph tags as 'N/A'. The finding asserts site-level metadata incompleteness without scoping it to the sample, overstating what the 7-page evidence supports.",
+      "context": "Audit Open Graph and meta-description coverage across the audited set. Where pages lack these fields, machines...may fall back to arbitrary text",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "The Truncation Risk pipeline check reports 'Fail' with 'Largest page: 232 KB. Threshold: 250 KB' — every audited page is actually under the 250 KB threshold, yet the check is marked Fail and the narrative states '7 page(s) exceed the 250 KB threshold', asserting with certainty a failure condition that the cited data (232 KB largest page) contradicts.",
+      "context": "Truncation Risk | Fail | 7/7 | 7 page(s) exceed the 250 KB threshold... | Largest page: 232 KB. Threshold: 250 KB.",
       "severity": "block"
     }
   ],
-  "withdrawn": [
-    {
-      "category": "missing-in-engagement",
-      "message": "Priority 4 (Metadata Stack Completeness 49/100) is listed as a standalone priority but the 'Critical Fixes' phase in What's Next covers only P1 and P2, and the 'Full Optimization' phase lists 'P1, P2, P3, P4, P5, P6' — however the phase scope label reads '(P1-P6)' while the cell text spells out 'P1, P2, P3, P4, P5, P6', which is consistent. No issue here — re-examining the actual gap: the What's Next table's 'Critical Fixes' phase is scoped to 'P1, P2 (Compliance Risk)' only, which correctly excludes P3-P6. Full Optimization covers all six. This is consistent with the priority list.",
-      "context": "Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved",
-      "severity": "withdrawn"
-    }
-  ]
+  "withdrawn": []
 }
