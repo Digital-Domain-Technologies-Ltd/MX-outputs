@@ -70,10 +70,10 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 | | Score | |
 |:---|---:|:---|
 | Performance | **97**/100 | `#################-` |
-| Accessibility | **15**/100 | `###---------------` **(!)** |
+| Accessibility | **15**/100 | `###---------------` **(!)** |
 | SEO | **92**/100 | `#################-` |
 | Machine Suitability | **64**/100 | `############------` |
-| MX Stack | **49**/100 | `#########---------` **(!)** |
+| MX Stack | **49**/100 | `#########---------` **(!)** |
 | Agent Readability | **68**/100 | `############------` |
 | Pipeline Survivability | **79**/100 | `##############----` |
 
@@ -366,7 +366,7 @@ We found dkd.de's robots.txt in place, carrying 21 disallow paths that define th
 
 **Sitemap grade:** [SITEMAP_GRADE]
 
-We did not surface data sufficient to assess the sitemap across the audited set; a deeper review would extend that lens.
+We did not surface data sufficient to assess the sitemap; a deeper review would extend that lens.
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
@@ -651,8 +651,8 @@ We linked no PDFs from the 6-page sample we crawled, and the sitemap declares no
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved — WCAG 2.1 AA accessibility compliance restored |
-| Full Optimization | P1, P2, P3, P4, P5 (P1–P5) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved - WCAG 2.1 AA accessibility compliance restored |
+| Full Optimization | P1, P2, P3, P4, P5 (P1-P5) | Full machine readiness - every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | Long-term competitive advantage in AI-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 

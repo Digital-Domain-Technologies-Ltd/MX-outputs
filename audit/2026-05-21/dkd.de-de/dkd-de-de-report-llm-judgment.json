@@ -1,0 +1,47 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-21/dkd.de-de/dkd-de-de-report.md",
+  "timestamp": "2026-05-21T08:05:43.189Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 20212,
+    "output_tokens": 978,
+    "cache_creation_input_tokens": 3100,
+    "cache_read_input_tokens": 0
+  },
+  "findingCount": 5,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "order-mismatch",
+      "message": "The Priorities list orders items as P1 Duplicate IDs (Compliance), P2 Semantic Structure (Compliance), P3 Discovery Readiness (AI), P4 Metadata Stack (AI), P5 Structured Data (AI), but the 'What's Next' Critical Fixes phase covers only P1 and P2 while Full Optimization lists them as P1, P2, P3, P4, P5 — this is consistent. However, the 'Recommended Actions' step 2 groups 'Discovery Readiness improvements' (P3) together with 'metadata tuning' (P4) and skips Semantic Structure (P2), then step 1 bundles all 303 WCAG issues without distinguishing P1 from P2, misrepresenting the priority ordering to the client.",
+      "context": "1. **Address Priority 1 findings**: address the 303 WCAG 2.1 AA accessibility issues\n2. **Review Priority 2-3 findings**: Discovery Readiness improvements and metadata tuning",
+      "severity": "block"
+    },
+    {
+      "category": "missing-in-engagement",
+      "message": "Priority 4 (Metadata Stack Completeness 49/100) is not explicitly addressed in any named engagement phase in the 'What's Next' table; the Full Optimization phase lists 'P1-P5' as scope but the Outcome column describes only 'full machine readiness' without naming metadata stack, and the Critical Fixes phase omits it entirely, leaving clients with no phase-level commitment to this priority.",
+      "context": "| Full Optimization | P1, P2, P3, P4, P5 (P1-P5) | Full machine readiness - every agent, search engine, and structured-data consumer",
+      "severity": "block"
+    },
+    {
+      "category": "tone-inconsistency",
+      "message": "The Findings priority blocks consistently use first-person voice ('We recorded', 'we identified', 'we recommend'), but Priority 2's finding paragraph switches to third-person mid-section: 'The figures 26 bare divs out of 48 total elements come specifically from the worst-performing page' and 'Because dkd.de pages share a common template, the same pattern driving the contact-page score is likely present' — impersonal constructions inconsistent with the first-person voice used in all other priority blocks.",
+      "context": "The figures 26 bare divs out of 48 total elements come specifically from the worst-performing page in the audited set",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "Priority 1 states '280 of the 303 issues we identified across the audited set trace to 56 recurring template-level patterns, meaning a single theme edit per pattern resolves all matching instances across the audited set' — but then the Recommended Actions step 1 generalises this to 'the 303 WCAG 2.1 AA accessibility issues identified (regulatory exposure)' without scope qualification, implying this is a full-site issue count when it derives from only 6 audited pages.",
+      "context": "1. **Address Priority 1 findings**: address the 303 WCAG 2.1 AA accessibility issues identified (regulatory exposure)",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "The Security Headers section's narrative flatly states '4 of the five standard security headers are absent across every audited response' but the table immediately above it marks HSTS, Content-Security-Policy, X-Frame-Options, and X-Content-Type-Options all as 'Yes' (present) — the narrative contradicts the table by asserting absence of headers the table shows as present.",
+      "context": "| HSTS | Yes | Forces HTTPS, prevents downgrade attacks |\n| Content-Security-Policy | Yes | Prevents XSS",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}
