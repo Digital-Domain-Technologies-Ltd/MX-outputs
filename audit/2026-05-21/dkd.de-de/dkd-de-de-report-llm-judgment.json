@@ -1,47 +1,54 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-21/dkd.de-de/dkd-de-de-report.md",
-  "timestamp": "2026-05-21T08:05:43.189Z",
+  "timestamp": "2026-05-21T08:49:31.004Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 20212,
-    "output_tokens": 978,
+    "input_tokens": 20394,
+    "output_tokens": 948,
     "cache_creation_input_tokens": 3100,
     "cache_read_input_tokens": 0
   },
   "findingCount": 5,
-  "withdrawnCount": 0,
+  "withdrawnCount": 1,
   "findings": [
     {
       "category": "order-mismatch",
-      "message": "The Priorities list orders items as P1 Duplicate IDs (Compliance), P2 Semantic Structure (Compliance), P3 Discovery Readiness (AI), P4 Metadata Stack (AI), P5 Structured Data (AI), but the 'What's Next' Critical Fixes phase covers only P1 and P2 while Full Optimization lists them as P1, P2, P3, P4, P5 — this is consistent. However, the 'Recommended Actions' step 2 groups 'Discovery Readiness improvements' (P3) together with 'metadata tuning' (P4) and skips Semantic Structure (P2), then step 1 bundles all 303 WCAG issues without distinguishing P1 from P2, misrepresenting the priority ordering to the client.",
-      "context": "1. **Address Priority 1 findings**: address the 303 WCAG 2.1 AA accessibility issues\n2. **Review Priority 2-3 findings**: Discovery Readiness improvements and metadata tuning",
-      "severity": "block"
-    },
-    {
-      "category": "missing-in-engagement",
-      "message": "Priority 4 (Metadata Stack Completeness 49/100) is not explicitly addressed in any named engagement phase in the 'What's Next' table; the Full Optimization phase lists 'P1-P5' as scope but the Outcome column describes only 'full machine readiness' without naming metadata stack, and the Critical Fixes phase omits it entirely, leaving clients with no phase-level commitment to this priority.",
-      "context": "| Full Optimization | P1, P2, P3, P4, P5 (P1-P5) | Full machine readiness - every agent, search engine, and structured-data consumer",
+      "message": "The Priorities list orders Discovery Readiness (P3) before Metadata Stack Completeness (P4), but the 'At a Glance' table narrative lists them in reverse order: 'Structured Data Quality at 65/100, Catalogue Visibility at 10/100, Metadata Stack Completeness at 49/100, and Discovery Readiness at 25/100', placing Metadata Stack before Discovery Readiness, contradicting the numbered priority order.",
+      "context": "Structured Data Quality at 65/100, Catalogue Visibility at 10/100, Metadata Stack Completeness at 49/100, and Discovery Readiness at 25/100",
       "severity": "block"
     },
     {
       "category": "tone-inconsistency",
-      "message": "The Findings priority blocks consistently use first-person voice ('We recorded', 'we identified', 'we recommend'), but Priority 2's finding paragraph switches to third-person mid-section: 'The figures 26 bare divs out of 48 total elements come specifically from the worst-performing page' and 'Because dkd.de pages share a common template, the same pattern driving the contact-page score is likely present' — impersonal constructions inconsistent with the first-person voice used in all other priority blocks.",
-      "context": "The figures 26 bare divs out of 48 total elements come specifically from the worst-performing page in the audited set",
+      "message": "The Machine Experience scorecard paragraph switches mid-section from third-person ('Machines can reliably process content') to first-person ('how consistently they can find and contextualise what we publish'), mixing voices within the same narrative paragraph.",
+      "context": "constrain how consistently they can find and contextualise what we publish",
+      "severity": "block"
+    },
+    {
+      "category": "tone-inconsistency",
+      "message": "The Summary of Findings section switches from third-person ('https://dkd.de performs at its strongest') to first-person ('We invite the team at https://dkd.de to review the findings') within the same paragraph.",
+      "context": "We invite the team at https://dkd.de to review the findings that follow",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "Priority 1 states '280 of the 303 issues we identified across the audited set trace to 56 recurring template-level patterns, meaning a single theme edit per pattern resolves all matching instances across the audited set' — but then the Recommended Actions step 1 generalises this to 'the 303 WCAG 2.1 AA accessibility issues identified (regulatory exposure)' without scope qualification, implying this is a full-site issue count when it derives from only 6 audited pages.",
-      "context": "1. **Address Priority 1 findings**: address the 303 WCAG 2.1 AA accessibility issues identified (regulatory exposure)",
+      "message": "The Security Headers section states '4 of the five standard security headers are absent across every audited response' but then asserts this as a site-wide fact — the prose says 'Adding these at the origin-server or CDN edge closes the corresponding attack surfaces' with no sample-scope qualifier, and the header table above it states all five headers as 'Yes' (present), directly contradicting the finding that four are absent.",
+      "context": "4 of the five standard security headers are absent across every audited response: Content-Security-Policy (CSP), X-Frame-Options, X-Content-Type-Options, HSTS",
       "severity": "block"
     },
     {
-      "category": "hedged-vs-asserted-imbalance",
-      "message": "The Security Headers section's narrative flatly states '4 of the five standard security headers are absent across every audited response' but the table immediately above it marks HSTS, Content-Security-Policy, X-Frame-Options, and X-Content-Type-Options all as 'Yes' (present) — the narrative contradicts the table by asserting absence of headers the table shows as present.",
-      "context": "| HSTS | Yes | Forces HTTPS, prevents downgrade attacks |\n| Content-Security-Policy | Yes | Prevents XSS",
+      "category": "missing-priority",
+      "message": "The 'At a Glance' findings table includes 'Catalogue Visibility at 10/100' as a named metric in the introductory narrative, but no Priority item in the numbered Priorities list (P1–P6) addresses Catalogue Visibility, meaning it appears in the findings summary without a corresponding priority.",
+      "context": "Structured Data Quality at 65/100, Catalogue Visibility at 10/100, Metadata Stack Completeness at 49/100",
       "severity": "block"
     }
   ],
-  "withdrawn": []
+  "withdrawn": [
+    {
+      "category": "missing-in-engagement",
+      "message": "Priority 4 (Metadata Stack Completeness 49/100) is listed as a standalone priority but the 'Critical Fixes' phase in What's Next covers only P1 and P2, and the 'Full Optimization' phase lists 'P1, P2, P3, P4, P5, P6' — however the phase scope label reads '(P1-P6)' while the cell text spells out 'P1, P2, P3, P4, P5, P6', which is consistent. No issue here — re-examining the actual gap: the What's Next table's 'Critical Fixes' phase is scoped to 'P1, P2 (Compliance Risk)' only, which correctly excludes P3-P6. Full Optimization covers all six. This is consistent with the priority list.",
+      "context": "Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved",
+      "severity": "withdrawn"
+    }
+  ]
 }

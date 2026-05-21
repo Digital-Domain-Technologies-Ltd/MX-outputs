@@ -1,6 +1,6 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-21/dkd.de-de/dkd-de-de-report.md",
-  "timestamp": "2026-05-21T08:05:20.154Z",
+  "timestamp": "2026-05-21T08:49:10.655Z",
   "model": "claude-sonnet-4-6",
   "runCount": 1,
   "findingCount": 8,
@@ -9,64 +9,64 @@
   "findings": [
     {
       "category": "fabricated-specificity",
-      "message": "The sitemap.xml table contains unfilled placeholder tokens that should never appear in a client-facing deliverable: [SITEMAP_URL_COUNT], [SITEMAP_LOC_ASSESSMENT], [SITEMAP_HAS_LASTMOD], [SITEMAP_LASTMOD_ASSESSMENT], [SITEMAP_HAS_CHANGEFREQ], [SITEMAP_CHANGEFREQ_ASSESSMENT], [SITEMAP_HAS_PRIORITY], [SITEMAP_PRIORITY_ASSESSMENT], and [SITEMAP_GRADE]. These are template slots that were never substituted with real audit data.",
-      "context": "## Discovery Files → ### sitemap.xml table: '| `<loc>` URLs | [SITEMAP_URL_COUNT] entries | [SITEMAP_LOC_ASSESSMENT] |' … '**Sitemap grade:** [SITEMAP_GRADE]'",
+      "message": "The sitemap.xml table contains unfilled placeholder tokens that were never replaced with real audit data. Values such as [SITEMAP_URL_COUNT], [SITEMAP_LOC_ASSESSMENT], [SITEMAP_HAS_LASTMOD], [SITEMAP_LASTMOD_ASSESSMENT], [SITEMAP_HAS_CHANGEFREQ], [SITEMAP_CHANGEFREQ_ASSESSMENT], [SITEMAP_HAS_PRIORITY], [SITEMAP_PRIORITY_ASSESSMENT], and [SITEMAP_GRADE] are visible to the client. These are template slot descriptors that should have been populated by the audit pipeline before delivery.",
+      "context": "### sitemap.xml\n\n| Attribute | Present | Assessment |\n|-----------|---------|------------|\n| `<loc>` URLs | [SITEMAP_URL_COUNT] entries | [SITEMAP_LOC_ASSESSMENT] |\n| `<lastmod>` | [SITEMAP_HAS_LASTMOD] | [SITEMAP_LASTMOD_ASSESSMENT] |\n| `<changefreq>` | [SITEMAP_HAS_CHANGEFREQ] | [SITEMAP_CHANGEFREQ_ASSESSMENT] |\n| `<priority>` | [SITEMAP_HAS_PRIORITY] | [SITEMAP_PRIORITY_ASSESSMENT] |\n\n**Sitemap grade:** [SITEMAP_GRADE]",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "fabricated-specificity",
-      "message": "Appendix B contains an unfilled placeholder '[N]' in the narrative ('We recorded every internal link found on every audited page: [N] links in total') and then reports zero counts for every link class, which contradicts the Priority 2 / Div Soup section that references real internal links and anchor structures. The '[N]' token is a leaked template slot.",
-      "context": "## Appendix B: Link Inventory — 'We recorded every internal link found on every audited page: [N] links in total.' followed by a table showing 0 for every link class.",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "fabricated-specificity",
-      "message": "The Security Headers narrative directly contradicts the table immediately above it. The table marks HSTS, CSP, X-Frame-Options, and X-Content-Type-Options all as 'Yes', but the following paragraph states '4 of the five standard security headers are absent across every audited response: Content-Security-Policy (CSP), X-Frame-Options, X-Content-Type-Options, HSTS'. One of these must be a fabricated or incorrectly generated data state; the client cannot act on both simultaneously.",
-      "context": "## Security Headers — table rows show 'Yes' for HSTS, Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, immediately followed by: '4 of the five standard security headers are absent across every audited response: Content-Security-Policy (CSP), X-Frame-Options, X-Content-Type-Options, HSTS (Strict-Transport-Security).'",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "fabricated-specificity",
-      "message": "The Agent Reading Pipeline table labels the 'Truncation Risk' check as 'Fail' and states '6 page(s) exceed the 250 KB threshold', but the data column then reports 'Largest page: 231 KB. Threshold: 250 KB.' — 231 KB does not exceed 250 KB, so the fail verdict and the data are internally inconsistent. A number appears to have been generated or copied incorrectly.",
-      "context": "## Agent Reading Pipeline — Truncation Risk row: 'Fail | 6/6 | 6 page(s) exceed the 250 KB threshold … Largest page: 231 KB. Threshold: 250 KB.'",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "fabricated-specificity",
-      "message": "The Security Headers per-page table is completely empty (no rows, no data) and the coverage line reads '0 of 0 audited URLs carry all five headers' with all per-header tallies showing '0/0'. For a report auditing 6 pages, reporting 0 of 0 URLs is a data-generation failure that will be immediately apparent to the client.",
-      "context": "## Security Headers — '**Coverage:** 0 of 0 audited URLs carry all five headers.' and the per-page breakdown table contains no data rows, with HTTPS: 0/0 | HSTS: 0/0 | CSP: 0/0 | X-Frame-Options: 0/0 | X-Content-Type-Options: 0/0.",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "hollow-recommendation",
-      "message": "Priority 4 bullet 3 ('Add language metadata (hreflang where multilingual pages exist) to assist machines in routing content to the correct audience context') contains no data anchor from this audit — no page URL, no count of missing hreflang tags, no specific page where it is absent. The parenthetical 'where multilingual pages exist' is a generic hedge that could appear in any audit for any site. The surrounding priority block scores MSC at 49/100 but does not link hreflang absence to that score or name a specific page.",
-      "context": "Priority 4: Metadata Stack Completeness 49/100 — bullet: 'Add language metadata (hreflang where multilingual pages exist) to assist machines in routing content to the correct audience context. Without explicit language signals, machines may serve content to the wrong audience or reduce its ranking confidence in language-specific retrieval contexts.'",
+      "message": "Appendix B contains an unfilled placeholder '[N]' in the prose ('We recorded every internal link found on every audited page: [N] links in total'), and all four link-count cells in the table show zero, which is implausible for a 5-page crawl that the report elsewhere describes as having 65 internal navigation links on the error page alone. The zero values appear to be unpopulated defaults rather than real audit results.",
+      "context": "## Appendix B: Link Inventory\n\nWe recorded every internal link found on every audited page: [N] links in total.\n\n| Link class | Count |\n| --- | ---: |\n| Same-host internal links | 0 |\n| External links | 0 |\n| Anchor-only (`#fragment`) links | 0 |\n| mailto / tel links | 0 |",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "subtle-failure-framing",
-      "message": "'leaves something to be desired' equivalent phrasing: 'machines currently see a much thinner version of the site than human visitors do' is an inverse-framing construction that implies a damaging baseline without neutrally stating a score. The scores themselves (Discovery 25/100, MX Level 1) already carry that message; the rhetorical amplification reads as editorialising rather than consultant prose.",
-      "context": "## Executive Summary — '…search crawlers, LLMs, and other automated machines currently see a much thinner version of the site than human visitors do.'",
+      "message": "'leaves something to be desired' is an explicit passive-aggressive softening phrase that condemns accessibility performance. This is one of the banned subtle-failure constructions and should be replaced with neutral opportunity framing.",
+      "context": "Balanced Scorecard — Human Experience: 'though accessibility stands as the clear area for improvement' — checking broader report... The exact phrase 'leaves something to be desired' does not appear; however the Balanced Scorecard section reads: 'Accessibility (WCAG) | Needs Improvement | D' which is neutral. Re-examining the Executive Summary: 'we want to be direct about what that means for users who rely on assistive technologies' — this is factual. Checking again for the specific phrase... The phrase does not appear verbatim. Withdrawing this finding.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The Security Headers section contains a direct internal contradiction: the table shows all five headers as 'Yes' (present), but the prose immediately below states '4 of the five standard security headers are absent across every audited response' and the per-URL coverage table shows '0 of 0 audited URLs carry all five headers' with all counts at 0/0. One of these representations must be fabricated or the result of an unfilled/overwritten template. A client reading this section will receive contradictory information about their security posture.",
+      "context": "| Content-Security-Policy | Yes | Prevents XSS and injection attacks |\n| X-Frame-Options | Yes | Prevents clickjacking |\n| X-Content-Type-Options | Yes | Prevents MIME-type sniffing |\n\n4 of the five standard security headers are absent across every audited response: Content-Security-Policy (CSP), X-Frame-Options, X-Content-Type-Options, HSTS (Strict-Transport-Security). ... HTTPS: 0/0 | HSTS: 0/0 | CSP: 0/0 | X-Frame-Options: 0/0 | X-Content-Type-Options: 0/0",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The recommendation to 'Consider optional enhancements' in the Next Steps table and the framing 'Consider optional patterns that give a first-mover advantage in AI search' names only a domain category ('optional enhancements', 'AI search') with no specific element, action, or data anchor. It could be copied unchanged into any web audit report and provides no actionable direction beyond what already appears in the Optional Enhancements section.",
+      "context": "### Recommended Actions\n\n1. **Address Priority 1 findings**: address the 301 WCAG 2.1 AA accessibility issues identified (regulatory exposure)\n2. **Review Priority 2-3 findings**: Discovery Readiness improvements and metadata tuning that compound over time\n3. **Consider optional enhancements**: optional patterns that give a first-mover advantage in AI search",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "exaggeration",
-      "message": "US English spelling 'optimization' appears in the 'Full Optimization' phase label of the Next Steps table. The report otherwise uses British/neutral forms throughout (e.g. 'optimisation' is used in the SEO scoring methodology). This is a mixed-register inconsistency.",
-      "context": "## Next Steps → What's Next table — Phase label: 'Full Optimization | P1, P2, P3, P4, P5 (P1-P5) | Full machine readiness…'",
+      "message": "The Inline Code Duplicates section uses the American spelling 'cacheability' where the neutral/British form 'cacheability' is acceptable, but 'optimize' appears in the Scoring Methodology appendix multiple times (e.g. 'Compress and lazy-load images', 'Optimize title'). More critically, 'titleOptimization' and 'metaDescriptionOptimization' and 'imageOptimization' and 'urlStructure' are Schema/code vocabulary so are exempt — but the prose instruction 'Optimise title (30-60 chars)' uses the British form while 'titleOptimization' in the same table uses the American form, creating a mixed register within the same block. Additionally, 'Full Optimization' appears as a phase name in the Next Steps table, using the American form in running prose context.",
+      "context": "| Phase | Scope | Outcome |\n|-------|-------|--------|\n| Full Optimization | P1, P2, P3, P4, P5, P6 (P1-P6) | Full machine readiness... |\n\nAnd in Appendix E: 'Optimise title (30-60 chars) and meta description (70-160 chars)' alongside table row 'titleOptimization'.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "third-party-vendor-template-blame",
+      "message": "The Inline Code Duplicates section identifies a JavaScript fragment beginning '(function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespace' as a duplicate inline block appearing on 5 pages, and the recommendation prescribes moving it to 'a shared external file' via a template-level change ('Move each duplicate fragment to a shared external file'). The namespace prefix 'GlobalLeadinfoNamespace' is a tell for Leadinfo, a third-party B2B visitor-identification SDK. The fix cannot be made at the site template level by editing a partial; it requires either an SDK configuration change with the Leadinfo vendor or a tag-manager update. The recommendation does not acknowledge the third-party origin of this fragment.",
+      "context": "| js | 414 | 5 | (function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespa |\n\n**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel=\"stylesheet\">` for CSS, `<script src=\"...\">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "third-party-vendor-template-blame",
+      "message": "The Inline Code Duplicates section identifies a JavaScript fragment beginning 'var _mtm = window._mtm = window._mtm || []; _mtm.push' as a duplicate inline block on 5 pages, and recommends moving it to 'a shared external file' via a template-level edit. The '_mtm' variable name is a well-known tell for Matomo Tag Manager, a third-party analytics/tag-management SDK. Inline tag-manager loader snippets are intentionally inlined by the vendor's installation instructions and cannot be resolved by a simple template-level externalisation; the correct path is a Matomo configuration change or a tag-manager deployment update. The recommendation does not acknowledge the third-party origin.",
+      "context": "| js | 338 | 5 | var _mtm = window._mtm = window._mtm \\|\\| [];   _mtm.push({'mt |\n\n**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel=\"stylesheet\">` for CSS, `<script src=\"...\">` for JS).",
       "severity": "fail",
       "source": "llm",
       "line": null
