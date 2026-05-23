@@ -1,0 +1,35 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-22/dkd.de-de/dkd-de-de-report.md",
+  "timestamp": "2026-05-22T23:04:06.982Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 20803,
+    "output_tokens": 624,
+    "cache_creation_input_tokens": 3100,
+    "cache_read_input_tokens": 0
+  },
+  "findingCount": 3,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "missing-in-engagement",
+      "message": "Priority 3 (Discovery Readiness 25/100) is listed in the Priorities section but the 'What's Next' engagement table only explicitly names 'P1, P2, P3, P4' in the Full Optimization phase without distinguishing P3 — however, the Critical Fixes phase covers only 'P1, P2 (Compliance Risk)', meaning P3 (an AI Opportunity bucket item) is not addressed in Critical Fixes and its only coverage is the bundled 'P1-P4' label in Full Optimization. While P3 is technically included in that bundle, the Critical Fixes phase description 'Priority 1, 2 resolved — WCAG 2.1 AA accessibility compliance restored' maps Compliance Risk priorities only, and the Recommended Actions step 2 groups 'Discovery Readiness improvements' under 'Priority 2-3 findings', conflating Priority 2 (Semantic Structure, Compliance Risk) with Priority 3 (Discovery Readiness, AI Opportunity) — misrepresenting Priority 3's bucket and urgency to the client.",
+      "context": "\"Review Priority 2-3 findings\": Discovery Readiness improvements and metadata tuning that compound over time",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Structured Data Inventory section states 'Adding recommended properties and increasing type diversity on the sampled pages gives machines more to work with' but then the conclusion sentence 'Across the 11 pages we audited, structured data is solid' is immediately followed by a generalising claim in Priority 4 that schema gaps exist 'across the audited set' — the material overreach is in Priority 4's finding which states 'entity-level and content-level schema types are absent or incomplete' as a site-wide verdict rather than scoping it to the 11 audited pages.",
+      "context": "\"entity-level and content-level schema types are absent or incomplete, reducing the confidence machines have when extracting authoritative facts about www.dkd.de\"",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Security Headers section asserts 'One of the five standard security headers is absent across every audited response' — this is correctly scoped — but the recommendation sentence immediately following overstates scope: 'Adding these at the origin-server or CDN edge closes the corresponding attack surfaces' implies the finding applies to the full site, when the evidence base is only 11 audited pages.",
+      "context": "\"Adding these at the origin-server or CDN edge closes the corresponding attack surfaces without touching application code.\"",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}
