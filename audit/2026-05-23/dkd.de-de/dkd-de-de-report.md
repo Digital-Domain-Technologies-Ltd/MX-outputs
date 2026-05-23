@@ -12,12 +12,12 @@ auditTool: "web-audit-suite"
 auditDate: "2026-05-23"
 description: "Executive audit report analysing accessibility, performance, SEO, structured data, and AI agent compatibility for Dkd"
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
-performanceScore: 55
+performanceScore: 70
 accessibilityScore: 90
-seoScore: 91
-llmSuitabilityScore: 75
-totalIssues: 813
-pagesAudited: 12
+seoScore: 92
+llmSuitabilityScore: 78
+totalIssues: 527
+pagesAudited: 7
 version: "1.0"
 confidential: true
 mx:
@@ -43,7 +43,7 @@ mx:
 
 ## About This Report
 
-We audited 12 pages across www.dkd.de's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.
+We audited 7 pages across www.dkd.de's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.
 
 We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
@@ -53,7 +53,7 @@ The scoring criteria follow published MX standards and proposed specifications m
 
 **What we cover here, and what MX covers.** This audit covers the web estate: every page served over HTTP, analysed for metadata, structured data, accessibility, and machine readability. MX runs deeper. A machine-ready estate covers every document type an organisation publishes: PDFs, data feeds, API responses, structured documents, presentations: and every machine class that consumes them: search crawlers, AI assistants, autonomous vehicles, industrial systems, IoT devices, and future classes not yet defined. Get the web estate right, and you have the foundation. Get all of it right, and you have a machine-ready estate.
 
-**About sample scope.** Findings throughout this report describe what we observed on the 12 pages we crawled. Verdicts scoped to the sample should not be extrapolated to the full estate without a wider audit; where a finding is structural (a missing security header, a soft 404 pattern, an llms.txt transport problem) we say so. Contact <info@cognovamx.com> to scope a full-estate engagement.
+**About sample scope.** Findings throughout this report describe what we observed on the 7 pages we crawled. Verdicts scoped to the sample should not be extrapolated to the full estate without a wider audit; where a finding is structural (a missing security header, a soft 404 pattern, an llms.txt transport problem) we say so. Contact <info@cognovamx.com> to scope a full-estate engagement.
 
 ### A note on llms.txt
 
@@ -69,19 +69,19 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 | | Score | |
 |:---|---:|:---|
-| Performance | **55**/100 | `##########--------` |
+| Performance | **70**/100 | `#############-----` |
 | Accessibility | **90**/100 | `################--` |
-| SEO | **91**/100 | `################--` |
-| Machine Suitability | **75**/100 | `##############----` |
+| SEO | **92**/100 | `#################-` |
+| Machine Suitability | **78**/100 | `##############----` |
 | MX Stack Completeness | **62**/100 | `###########-------` |
-| Agent Readability | **62**/100 | `###########-------` |
-| Pipeline Survivability | **77**/100 | `##############----` |
+| Agent Readability | **67**/100 | `############------` |
+| Pipeline Survivability | **78**/100 | `##############----` |
 
-We audited twelve pages of www.dkd.de and found a property that presents well to the humans it serves. Performance stands as the strongest dimension in the audited set, and the SEO foundations reinforce that strong first impression: across the 12 audited pages, a score of 91/100 places the audited set firmly in the Excellent band, meaning search engines can find, crawl, and interpret the content with confidence. The content itself is clear, the brand voice is consistent, and the overall experience reflects a team that has invested meaningfully in the craft of communicating with its audience.
+We audited seven pages of www.dkd.de and found a site that serves its human visitors well. The strongest dimension we recorded is SEO, sitting at 92/100 and placing it firmly in the Excellent band. Content is clearly structured, the brand voice reads with authority, and the groundwork for a strong search presence is genuinely in place across the audited set.
 
-Before we turn to machine-readiness, we want to name accessibility as a Priority 1 compliance item. Across the audited set we recorded 813 raw instances flagged by Pa11y, spanning 25 distinct WCAG AA issue types. The encouraging finding is that the majority of these instances trace to recurring template patterns, meaning a single correction at the theme level resolves a large cluster of instances in one edit rather than requiring page-by-page remediation. Addressing this work protects users who rely on assistive technology and reduces legal exposure. The headline opportunity beyond accessibility is Discovery Readiness, which sits at 25/100 and represents the dimension with the most room to strengthen. Machines, including search crawlers, AI agents, and automated bots, are navigating the site with limited structural guidance, and raising this score is the lever most likely to move overall machine-readiness quickly.
+Before we turn to machine-readiness, we want to name accessibility as a Priority 1 compliance item. Across the audited set we recorded 527 raw instances flagged as critical, spanning 14 distinct WCAG AA issue types. The remediation picture is more manageable than the raw count implies: 408 of those instances trace to 64 recurring template patterns, meaning a single theme-level edit per pattern resolves all associated instances in one action. That is the first concrete investment we recommend. The headline opportunity beyond accessibility is machine-readiness. Discovery Readiness sits at 25/100 and Catalogue Visibility at 10/100, placing www.dkd.de at MX Readiness Level 1. Search crawlers, AI agents, and automated bots can find the site, but they cannot yet read it with the depth and confidence needed to cite, summarise, or surface it in agent-driven answers.
 
-The structured data picture tells a similar story: the Schema Maturity sits at Level 1 (Decoration), with BreadcrumbList and WebSite types already in place but deeper entity signals yet to be added. JSON-LD structured data is the highest-leverage asset available in this context because every machine can read it regardless of how the page is rendered or assembled by TYPO3 at request time. Extending the schema vocabulary is therefore a high-value, low-disruption next step that builds on the groundwork already in place.
+The Schema Maturity assessment sits at Level 1, reflecting a Decoration-stage deployment of structured data. Lifting that maturity is the highest-leverage move available: Schema.org JSON-LD is readable by every machine regardless of how a page is rendered or served, making it a durable asset that pays dividends across every discovery channel simultaneously.
 
 \clearpage
 
@@ -89,7 +89,7 @@ The structured data picture tells a similar story: the Schema Maturity sits at L
 
 ### Human Experience
 
-Across the audited set, www.dkd.de delivers a strong human experience, with Performance, Accessibility and SEO all sitting in the Excellent band, though the volume of recurring accessibility instances points to template-level patterns as the clearest area for further attention.
+Across the audited set, we found that www.dkd.de delivers a strong human experience, with Performance, Accessibility, and SEO all sitting in the Excellent band.
 
 | Dimension | Rating | Grade |
 |-----------|--------|-------|
@@ -100,14 +100,14 @@ Across the audited set, www.dkd.de delivers a strong human experience, with Perf
 
 ### Machine Experience
 
-Across the audited set, machines can survive the content pipeline and partially interpret structured data, though their ability to discover and contextualise www.dkd.de remains constrained by the gap between a strong Pipeline Survivability of 77/100 and a Discovery Readiness of 25/100.
+Across the audited set, we found that machines can partially parse and survive the content pipeline, though their ability to discover and contextualise pages remains constrained by the low Discovery Readiness score and a partially complete machine-experience stack.
 
 | Dimension | Score | Rating | Grade |
 |-----------|-------|--------|-------|
 | Discovery Readiness | 25/100 | Needs Improvement | D |
 | Structured Data Quality | 65/100 | Good | B |
 | MX Stack Completeness | 62/100 | Good | B |
-| Pipeline Survivability | 77/100 | Excellent | A |
+| Pipeline Survivability | 78/100 | Excellent | A |
 
 ---
 
@@ -136,7 +136,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 **Current Level:** 1: Discoverable
 
-**Evidence:** MX Stack Completeness 62/100 | Structured Data Quality 65/100 | Discovery Readiness 25/100 | Consistency 62%
+**Evidence:** MX Stack Completeness 62/100 | Structured Data Quality 65/100 | Discovery Readiness 25/100 | Consistency 64%
 
 **To reach the next level:** Add full MX fields, governance, and provenance metadata so agents can cite as well as discover. Raise MSC above 60 and DR above 40.
 
@@ -146,22 +146,22 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-Across the audited set, www.dkd.de demonstrates real strengths that form a solid foundation for the improvements we outline in this report. Strong SEO scores, a high accessibility baseline, and meaningful structured data coverage all represent groundwork that the recommended changes are designed to build upon.
+Across the audited set, we found that www.dkd.de demonstrates measurable strengths in several areas, and the scores recorded lay solid groundwork for the improvements we outline in the sections that follow. An SEO score of 92/100, an Accessibility score of 90/100, and the presence of four of five security headers give the team a credible foundation to build from.
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
-| Performance | Excellent | Excellent - 2033ms average load time |
-| SEO (content pages) | 91 | Excellent - titles, meta descriptions, canonical URLs in place |
-| Security | 4/5 | 4/5 headers present (X-Frame-Options absent); 0 of 12 URLs carry all five |
+| Performance | Excellent | Excellent - 1294ms average load time |
+| SEO (content pages) | 92 | Excellent - titles, meta descriptions, canonical URLs in place |
+| Security | 4/5 | 4/5 headers present (X-Frame-Options absent); 0 of 7 URLs carry all five |
 | Structured Data | 65 | Good - JSON-LD on every page with valid Schema.org vocabulary |
-| Heading Quality | 79 | Excellent - single H1 per page, no level jumps, Lighthouse-compliant |
-| Consistency | 62% | 62% - same metadata patterns across every page |
-| Agent access | 6/7 | 6 of 7 AI user-agents receive HTTP 200; Google-Extended blocked |
+| Heading Quality | 92 | Excellent - single H1 per page, no level jumps, Lighthouse-compliant |
+| Consistency | 64% | 64% - same metadata patterns across every page |
+| Agent access | 5/7 | 5 of 7 AI user-agents receive HTTP 200; Google-Extended, CCBot (Common Crawl) blocked |
 
 **Positive patterns observed:**
 
 - JSON-LD is present in the served HTML of every audited page: every agent that fetches the raw HTML gets the structured data.
-- Body content ratio averages 49%: pages are content-heavy, not overhead-heavy, which helps agents reach real prose inside a cheap fetch.
+- Body content ratio averages 50%: pages are content-heavy, not overhead-heavy, which helps agents reach real prose inside a cheap fetch.
 
 ---
 
@@ -169,74 +169,72 @@ Across the audited set, www.dkd.de demonstrates real strengths that form a solid
 
 ### At a Glance
 
-We have prioritised the findings below by the degree to which each gap constrains machines from discovering, parsing, and citing www.dkd.de accurately, so discovery and visibility gaps lead because they block everything downstream. Structured data and stack completeness opportunities follow, each representing a distinct lever for extending the reach and reliability of machine-readable signals across the audited set.
+We present the findings below as prioritised opportunities, ordered by the downstream impact each gap carries for machines reading www.dkd.de. We lead with discovery gaps because they constrain everything a machine can reach before any other signal is evaluated.
 
 | # | Finding | Bucket | Priority | Effort | Impact |
 |---|---------|--------|----------|--------|--------|
-| 1 | Duplicate ID Attributes on 12 of 12 Pages, WCAG 4.1.1 (IDs: accessibility, account, alarm, article, bell) | Compliance Risk | High | Low | Assistive tech users may miss or misread labelled regions on every audited page |
-| 2 | Semantic Structure 53/100, Worst Page: /de/kontakt (26 of 48 bare divs) | Compliance Risk | Medium | Medium | Screen reader and keyboard users are less likely to navigate content structure accurately on layout-heavy pages |
-| 3 | Discovery Readiness 25/100, Needs Improvement | AI Opportunity | High | Medium | Machines risk missing large portions of www.dkd.de content when no discovery files guide crawl scope |
-| 4 | Structured Data Quality 65/100 (Good band, schema gaps present) | AI Opportunity | Medium | Medium | Machines may reduce citation confidence when schema coverage is incomplete across the audited set |
+| 1 | Duplicate ID Attributes on 5 Values, WCAG 4.1.1, 7 of 7 Pages | Compliance Risk | High | Low | Assistive tech users may miss or misread content anchored to non-unique IDs |
+| 2 | Semantic Structure 53/100, Worst Page: /de/kontakt, 26 of 48 Bare Divs | Compliance Risk | Medium | Medium | The contact page carries 26 of 48 bare divs, reducing the structural cues available to screen readers and DOM-parsing agents |
+| 3 | Discovery Readiness 25/100, robots.txt / sitemap / llms.txt Coverage | Cross-cutting | High | Medium | Search crawlers and machines risk missing indexable content across the audited set |
+| 4 | Structured Data Quality 65/100, Missing Schema Types | AI Opportunity | Medium | Medium | Machines may miss entity relationships, reducing agent confidence in content attribution |
 
 ---
 
-**Priority 1: Duplicate ID Attributes on 12 of 12 Pages, WCAG 4.1.1 (IDs: accessibility, account, alarm, article, bell)**
+**Priority 1: Duplicate ID Attributes, WCAG 4.1.1, 5 Repeated Values Across 7 Pages**
 
 **Bucket:** Compliance Risk
 
-**Finding:** Pa11y surfaces five duplicate `id` values ("accessibility", "account", "alarm", "article", "bell") present on all 12 audited pages. WCAG 4.1.1 (Parsing) requires that every `id` attribute value is unique within a document; when duplicates exist, assistive technologies that use those IDs to resolve labels, landmarks, or skip-navigation targets may silently bind to the wrong element or fail to bind at all. Because the same IDs recur on every audited page, this is a template-level issue: a single fix per repeated pattern propagates the correction across the full affected set. Of the 813 total issues recorded across the audited set, 672 (83%) trace to 56 recurring template-level patterns, and these five duplicate-ID families fall within that group.
+**Finding:** Across the audited set, five ID values ("accessibility", "account", "alarm", "article", "bell") each appear more than once per page, covering all seven audited pages. WCAG 4.1.1 (Name, Role, Value) requires every ID to be unique within a document; when it is not, assistive technologies receive ambiguous programmatic references and may resolve anchor targets, ARIA labels, or form associations incorrectly. Of the total 527 issues recorded across the audited set, 408 trace to 64 recurring template-level patterns, so a focused set of theme-level edits carries a disproportionately high resolution rate.
 
 **What to change and why:**
-- Ensure each `id` value appears exactly once per page. When the same icon or functional element (for example, an SVG icon labelled "accessibility" or "alarm") is used multiple times in a single document, each instance must receive a distinct, unique identifier. This directly addresses WCAG 4.1.1 and prevents assistive technologies from encountering ambiguous anchor targets.
-- Audit the template component(s) that render these IDs to confirm whether they originate in a shared partial, an icon sprite, or a navigation include. Because the pattern appears on all 12 audited pages, resolving it at the template level propagates the fix without page-by-page edits, which moves the Accessibility score and closes the WCAG 4.1.1 exposure in one pass.
-- After applying the fix, re-run Pa11y across the audited set to confirm the duplicate-ID errors no longer appear. This also provides the audit-trail evidence that a compliance team would expect to see against a reported WCAG 4.1.1 breach.
+- We recommend ensuring every ID value is unique within each document. Duplicate IDs cause assistive technologies to stop at the first match and ignore subsequent elements sharing that value, directly violating WCAG 4.1.1 and excluding users who rely on programmatic name resolution.
+- We recommend auditing the template layer where these five IDs originate. Because the same values recur on all seven audited pages, the source is almost certainly a shared template component; resolving it at that layer removes the violation from every page that inherits it, addressing the bulk of the 64 template-level patterns in a single change cycle.
+- After any template edit, we recommend validating that ARIA attributes, landmark roles, and in-page anchor links that reference these IDs continue to resolve correctly. A renamed ID that is not updated in its referencing attributes moves the violation rather than closes it.
 
 **Effort:** Low
 
 ---
 
-**Priority 2: Semantic Structure 53/100, Worst Page /de/kontakt (26 of 48 Bare Divs)**
+**Priority 2: Semantic Structure 53/100, Worst Page https://www.dkd.de/de/kontakt, 26 of 48 Bare Divs**
 
 **Bucket:** Compliance Risk
 
-**Finding:** The semantic structure rendered score across the audited set sits at 53/100, placing it in the medium band. The worst-case page, https://www.dkd.de/de/kontakt, records 26 bare divs out of 48 total structural elements. The figures cited here (26 of 48) come specifically from that page and should not be read as a uniform average across all 12 audited pages. Because the audited pages share a common template, the structural pattern that produces a high bare-div ratio on /de/kontakt is likely present to varying degrees elsewhere in the set, which is why the band-level score remains below 70 across the audited set.
+**Finding:** The rendered semantic structure score sits at 53/100, placing it in the medium band. The figures cited here come specifically from https://www.dkd.de/de/kontakt, the worst-performing page in the audited set, where 26 of 48 total elements are bare divs carrying no semantic role. Where this contact-page template is shared or replicated across other audited pages, the band-level concern extends with it. An over-reliance on non-semantic container elements reduces the document outline available to screen readers, voice-navigation tools, and machines parsing page structure without visual context.
 
 **What to change and why:**
-- Replace presentational wrapper divs that hold discrete, identifiable content blocks with their appropriate semantic counterparts (sections, articles, navigation, aside, main, header, footer). Each conversion gives assistive technologies a document-outline signal they can surface to users, directly addressing the semantic-structure score and supporting WCAG 1.3.1 (Info and Relationships).
-- For the contact page specifically, review each bare div to determine whether it wraps a form group, a content section, or a navigation cluster, and assign the semantically correct element. Screen reader users navigating /de/kontakt by landmarks will find structured regions rather than an undifferentiated block of layout, reducing the chance of orientation errors.
-- Treat this as a template-level concern where multiple pages share the same wrapper pattern: a change to a shared layout partial would move the score across the audited set rather than requiring individual page edits.
-- Validate the resulting landmark and heading structure after changes to confirm the document outline is coherent; this also improves the signal machines use when parsing page structure for content extraction.
+- We recommend replacing non-semantic container elements with appropriate sectioning and landmark elements wherever content has a meaningful structural role. This directly supports WCAG 1.3.1 (Info and Relationships) by ensuring that structure conveyed visually is also conveyed programmatically, reducing the exclusion risk for screen reader users.
+- We recommend prioritising the contact page template specifically, as it produces the highest bare-div ratio in the audited set. Structural improvements there will move the rendered score upward and benefit every page built from the same template.
+- Adding semantic structure also improves how machines parse content hierarchy. Agents that traverse the DOM to extract named sections, contact details, or landmark regions rely on semantic cues; thin structure reduces confidence in those extractions.
 
 **Effort:** Medium
 
 ---
 
-**Priority 3: Discovery Readiness 25/100, Needs Improvement**
+**Priority 3: Discovery Readiness 25/100, robots.txt, Sitemap, and llms.txt Coverage**
 
-**Bucket:** AI Opportunity
+**Bucket:** Cross-cutting
 
-**Finding:** Discovery Readiness across www.dkd.de scores 25/100, placing it in the Needs Improvement band. This score reflects the degree to which machines (search crawlers, LLMs, and automated agents) can locate, scope, and interpret content without human guidance. A score at this level means that machines arriving at www.dkd.de have limited structured signals telling them what content exists, which pages matter, and how the site wishes its content to be used. Without those signals, coverage in AI-generated answers and search indices is likely to be narrower than the content catalogue warrants.
+**Finding:** Discovery Readiness sits at 25/100, the lowest score in this audit. This dimension measures how reliably machines can locate, index, and traverse content across the audited set. A score in this band signals that the foundational files and signals machines use to map a site are thin or absent, meaning search crawlers and other automated readers are less likely to form an accurate picture of available content, regardless of how strong individual page scores are.
 
 **What to change and why:**
-- Publish a well-formed sitemap that enumerates the canonical URLs machines should index. A sitemap is the primary mechanism by which crawlers establish scope; its absence or incompleteness is the single largest driver of a low Discovery Readiness score and is the highest-leverage change available.
-- Extend the existing robots.txt to reference an llms.txt file and add an ai.txt directive. The robots.txt file already carries 21 disallow paths and one sitemap reference, so the file itself is in good shape; the gap is that it carries no signal about AI-specific crawl policy or the location of an llms.txt resource, both of which the Discovery Readiness score rewards directly.
-- Consider publishing an llms.txt file at the root of www.dkd.de to provide LLMs and AI agents with a curated, structured index of the site's key content, served as `text/html` so that Common Crawl indexes it. This is an emerging convention that directly improves the likelihood of www.dkd.de content appearing in agent-generated answers, and it is the primary lever for moving the Discovery Readiness score from 25/100 toward a higher band.
-- Confirm that any discovery files served at the root return appropriate HTTP status codes and content types, as machines that receive error responses will treat the resource as absent regardless of intent.
+- We recommend introducing an llms.txt file at the root level as the highest-priority action for this priority block. With a Discovery Readiness score of 25/100 and no llms.txt currently present, this is the single highest-leverage surface for improving machine-readable coverage. Our recommendation diverges from the llmstxt.org specification in that we recommend text/html as the content type to maximise compatibility with the broadest range of agents.
+- We recommend reviewing the 21 disallow paths in robots.txt for rules that may be broader than intended. Paths such as `/*id=*` and `/*cHash=*` block all URLs carrying those query parameters, and `/_assets/` and `/fileadmin/_processed_/` exclude entire asset directories; each of these is worth confirming against the content that should be discoverable to search engines and machines performing structured retrieval.
+- We recommend verifying that the sitemap reference already declared in robots.txt remains accurate and that newly published pages are added to the sitemap promptly, so compliant crawlers can locate all intended content from that single entry point.
 
 **Effort:** Medium
 
 ---
 
-**Priority 4: Structured Data Quality 65/100, Schema Coverage Gaps**
+**Priority 4: Structured Data Quality 65/100, Missing Schema Types Beyond BreadcrumbList and WebSite**
 
 **Bucket:** AI Opportunity
 
-**Finding:** Structured data quality across the audited set scores 65/100, sitting in the Good band but with room to extend coverage. The schema types already present are ListItem, BreadcrumbList, and WebSite, which provide navigational context. The gap lies in richer entity and content-type schema that would allow machines to extract factual claims, entity relationships, and page-level intent with greater confidence. When schema coverage is incomplete, machines handling knowledge extraction may reduce their confidence in attributing facts to www.dkd.de, which in turn reduces citation eligibility in AI-generated answers.
+**Finding:** Structured Data Quality sits at 65/100. The audited set carries ListItem, BreadcrumbList, and WebSite schema, which provides a navigational backbone but leaves richer entity types absent. Entity Richness scores 0/15 and Linked-data signals score 0/10 in the SDQ breakdown, confirming that machines processing structured data to build knowledge graphs, generate rich results, or attribute content to named organisations have no entity-level properties or cross-source signals to work with.
 
 **What to change and why:**
-- On the /de homepage, add the four recommended properties that are currently absent from the WebSite entity: `image` (a logo or hero image URL), `datePublished` (the site-level publish date), `author` (the top-level author or owner), and `publisher` (the publishing organisation). These are the specific gaps recorded in the Structured Data Findings table and are the most direct route to lifting the recommended-property coverage component of the 65/100 score.
-- Where pages describe the organisation itself (such as contact or about pages), add structured data that links identifiers and contact information so that machines can anchor facts to a verified entity record. This reduces the risk of misattribution in agent answers.
-- After extending schema coverage, validate all markup against the Schema.org specification to confirm there are no property mismatches or missing required fields. Validation errors in existing markup can suppress rich result eligibility even when the type is present, so clean coverage is more valuable than volume alone.
+- We recommend introducing richer Schema.org types to match the content on the audited pages. Service pages map to `Service`, team profiles map to `Person`, and the contact page maps to `ContactPage`; adding these gives machines explicit entity signals rather than requiring inference from prose, and directly addresses the Entity Richness score of 0/15.
+- We recommend adding Organisation or LocalBusiness markup where contact and about-page content describes the company. Machines use this to establish entity identity and anchor content attribution; its absence means agent-generated answers about www.dkd.de may rely on less reliable signals.
+- Where applicable, we recommend linking structured data entities to external identifiers through sameAs properties. This addresses the Linked-data signals score of 0/10 and strengthens the confidence machines place in entity resolution, improving the likelihood that content is correctly attributed in agent-generated responses and knowledge panels.
 
 **Effort:** Medium
 
@@ -244,11 +242,11 @@ We have prioritised the findings below by the degree to which each gap constrain
 
 These are not issues but areas where additional metadata or patterns would strengthen this site's machine readiness.
 
-- **sameAs links on Organization**: adding `sameAs` properties pointing to dkd's Wikidata, LinkedIn, or other authoritative directory entries on the `Organization` entity gives machines an unambiguous cross-reference that ties the brand's identity across knowledge graphs, reducing the risk of conflation with similarly named entities.
+- **sameAs**: Adding `sameAs` links on the `Organisation` entity to authoritative external profiles (such as Wikidata or LinkedIn) gives machines a stable, cross-platform identity anchor for www.dkd.de, reducing ambiguity when agents reconcile the brand across knowledge graphs.
 
-- **potentialAction on Organization**: declaring a `potentialAction` on the root `Organization` entity advertises contact or search capabilities directly to machines, allowing agents to surface actionable entry points when a user asks how to reach or engage with dkd.
+- **potentialAction**: Attaching a `potentialAction` to the `Organization` entity advertises contact or search capabilities directly to machines, allowing agents to surface actionable next steps (such as reaching the team) without needing to parse page content.
 
-- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt to declare content-use policy for AI agents.
+- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in `robots.txt` to declare content-use policy for AI agents, giving machines explicit permission signals rather than leaving use rights inferred from silence.
 
 ---
 
@@ -264,10 +262,10 @@ This test fetches the homepage using the User-Agent strings of known AI agents t
 | PerplexityBot | `PerplexityBot/1.0` | 200 | Accessible |
 | GoogleOther (Google AI) | `GoogleOther` | 200 | Accessible |
 | Google-Extended (Google AI-training opt-out) | `Google-Extended` | 429 | Blocked |
-| CCBot (Common Crawl) | `CCBot/2.0` | 200 | Accessible |
+| CCBot (Common Crawl) | `CCBot/2.0` | 429 | Blocked |
 | Plain request (no UA) | *(empty)* | 200 | Accessible |
 
-**Summary:** 7 of 8 agents can access the site.
+**Summary:** 5 of the 7 named agents can access the site; Google-Extended and CCBot are blocked.
 
 ### Markdown Content Negotiation
 
@@ -289,7 +287,7 @@ No non-standard response headers were recorded in this audit.
 This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate how this site handles errors for both human visitors and machines.
 
 | Check | Result |
-|--------|--------|
+|-------|--------|
 | HTTP status code | 404 (correct) |
 | Custom error page | Yes, branded page with navigation |
 | Semantic HTML (`<main>`, `<nav>`, `<h1>`) | Yes |
@@ -307,11 +305,11 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://www.dkd.de/de/typo3-shopware-experten-frankfurt`. A first-time visitor sees the cold-cache cost: the crawler recorded 6950 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three cache-busted re-probes that followed returned 228ms (HTTP 503), 227ms (HTTP 503), 222ms (HTTP 503); no median is reported because no sample returned a usable timing. **Returning-visitor verdict: Indeterminate**.
+**Slowest.** The slowest page is `https://www.dkd.de/de`. A first-time visitor sees the cold-cache cost: the crawler recorded 2617 ms on its initial fetch. **First-visit verdict: Acceptable but elevated**. Three cache-busted re-probes that followed returned 225ms (HTTP 503), 244ms (HTTP 503), 256ms (HTTP 503); no median is reported because no sample returned a usable timing. **Returning-visitor verdict: Indeterminate**.
 
-**Median-load control.** The median-load control page is `https://www.dkd.de/de/referenzen`. A first-time visitor sees the cold-cache cost: the crawler recorded 1158 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 221ms (HTTP 503), 244ms (HTTP 503), 216ms (HTTP 503); no median is reported because no sample returned a usable timing. **Returning-visitor verdict: Indeterminate**.
+**Median-load control.** The median-load control page is `https://www.dkd.de/de/datenschutz`. A first-time visitor sees the cold-cache cost: the crawler recorded 958 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 232ms (HTTP 503), 281ms (HTTP 503), 350ms (HTTP 503); no median is reported because no sample returned a usable timing. **Returning-visitor verdict: Indeterminate**.
 
-**Verdict:** The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides.
+**Verdict:** First-visit response time is within healthy bounds. The returning-visitor view is Indeterminate for both pages because cache-busted re-probes were rate-limited (HTTP 429) or otherwise unsuccessful, so we cannot characterise the warmed-cache experience from this audit.
 
 ---
 
@@ -334,28 +332,28 @@ Disallow: /*cHash=*
 
 *Showing the first 10 lines of `robots.txt`; the full 25-line file is preserved alongside this report as `dkd-de-de-robots-txt.txt`.*
 
-We found a valid robots.txt in place, carrying 21 disallow paths that define which areas of www.dkd.de machines are restricted from crawling. One sitemap reference is declared within the file, giving crawlers a direct route to the indexed content.
+We found robots.txt to be present and declaring 21 disallow paths, giving machines a defined but substantially restricted view of what they may crawl. One sitemap reference is announced within the file, ensuring that compliant crawlers can locate the sitemap from this single entry point.
 
 ### sitemap.xml
 
 | Attribute | Present | Assessment |
 |-----------|---------|------------|
-| `<loc>` URLs | 13 entries | Matches crawl count |
+| `<loc>` URLs | 8 entries | Matches crawl count |
 | `<lastmod>` | Yes | Varied dates |
 | `<changefreq>` | Yes | Appropriate values |
 | `<priority>` | Yes | Differentiated values |
 
 **Sitemap grade:** A
 
-The sitemap earns a grade of A, covering 13 URLs with lastmod dates, changefreq values, and priority attributes all present across every entry. This level of completeness gives machines a well-structured crawl signal with no missing scheduling or weighting metadata to resolve.
+The sitemap earns a grade of A, covering 8 URLs with lastmod dates, changefreq values, and priority attributes all present across every entry. The inclusion of all three optional fields gives machines a precise freshness and importance signal for each URL.
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We found no llms.txt file present at www.dkd.de, meaning machines that query this endpoint for a structured overview of the site receive nothing in return. We recommend adding a well-formed llms.txt covering a site description, a page inventory, and a content policy to give those machines a reliable entry point.
+We did not find an llms.txt file present at the time of this audit. We recommend adding one that includes a site description, a page inventory, and a content policy, giving machines a structured, authoritative entry point to www.dkd.de.
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We did not locate an llms-full.txt file; the endpoint returns a 404 and the file is absent from both the sitemap and the homepage head. For a content-rich site such as www.dkd.de, adding an llms-full.txt would give machines a consolidated, full-text view of the pages we audited, improving citation eligibility without requiring repeated crawl requests.
+We did not find an llms-full.txt file at this location; the endpoint returns a 404, it is absent from the sitemap, and no discovery link appears in the homepage head. For a content-heavy site such as www.dkd.de, adding a full-text companion file would give machines the richest possible view of available content without requiring repeated page-level crawls.
 
 ### agent-card.json (A2A)
 
@@ -371,15 +369,15 @@ No additional registered `/.well-known/` or root discovery files were detected o
 
 | Schema Type | Pages | Required % | Recommended % | Notes |
 |-------------|-------|-----------|--------------|-------|
-| ListItem | 12 | 100% | 100% | Reference |
-| BreadcrumbList | 12 | 100% | 100% | - |
+| ListItem | 7 | 100% | 100% | Reference |
+| BreadcrumbList | 7 | 100% | 100% | - |
 | WebSite | 1 | 100% | 0% | - |
 
 **Structured Data Quality:** 65/100\
-**Coverage:** 12 pages with JSON-LD out of 12 total (100%)\
+**Coverage:** 7 pages with JSON-LD across the 7 audited pages (100%)\
 **Unique types:** 3
 
-Across the 12 pages we audited, structured data is solid. Adding recommended properties and increasing type diversity on the sampled pages gives machines more to work with.
+Across the 7 pages we audited, structured data is solid. Adding recommended properties and increasing type diversity on the sampled pages gives machines more to work with.
 
 ### SDQ Score Breakdown
 
@@ -389,7 +387,7 @@ The Structured Data Quality score is composed of seven measurable signals. This 
 |-----------|--------|-----|---------|
 | Presence | 10 | 10 | schema.org JSON-LD exists on the page |
 | Required property coverage | 25 | 25 | Worst-case across all entities (one broken entity is not hidden by good ones) |
-| Recommended property coverage | 15 | 15 | Average across entities |
+| Recommended property coverage | 14 | 15 | Average across entities |
 | Entity richness | 0 | 15 | Average property count per entity (3-5 = 5pt, 6-9 = 10pt, 10+ = 15pt) |
 | Cross-entity references | 6 | 15 | Nested @type values + @id linking |
 | Linked-data signals | 0 | 10 | sameAs, mainEntityOfPage, isPartOf, about, mentions, etc. (capped at 10) |
@@ -483,12 +481,12 @@ The MX Journey maps the five stages a machine follows when interacting with a we
 | Stage | Name | Status | Score | Key Metric |
 |-------|------|--------|-------|------------|
 | 1 | Discovery | Partial | 78 | Crawlable with semantic HTML |
-| 2 | Citation | Partial | 59 | Schema.org: BreadcrumbList, ListItem, ListItem (100% required properties) |
+| 2 | Citation | Partial | 67 | Schema.org: BreadcrumbList, ListItem, ListItem (100% required properties) |
 | 3 | Search & Compare | Site type does not require | -- | No comparison content detected |
 | 4 | Price Understanding | Site type does not require | -- | No pricing content detected |
 | 5 | Purchase Confidence | Site type does not require | -- | No transaction forms detected |
 
-Across the audited set, www.dkd.de is Not Compatible with the MX Journey framework; the three transactional stages (Search & Compare, Price Understanding, and Purchase Confidence) are N/A for this site type, and neither of the two applicable stages passes.
+Partially Compatible; Search & Compare, Price Understanding, and Purchase Confidence are not applicable for this site type.
 
 ---
 
@@ -500,23 +498,23 @@ Every check runs on every audited page. The aggregate score weights truncation r
 
 | Resilience Check | Status | Pages | What It Means | Data |
 | ---------------- | ------ | ----- | ------------- | ---- |
-| Truncation Risk | Fail | 12/12 | 12 page(s) flag for truncation risk because their main content (the first <main>, <article>, or top heading) sits past the 50 KB safe-fetch offset, even though no page exceeds the 250 KB hard ceiling. Agents with limited fetch windows may stop reading before they reach prose. | Largest page: 232 KB. Thresholds: 250 KB hard ceiling; 50/75/100 KB content-offset windows. See dkd-de-de-pipeline-truncation-risk-pages.csv (12 pages). |
-| SPA Shell | Pass | 12/12 | Served HTML matches rendered HTML - no JavaScript is required for content. Server-side agents see the same content a browser does. | Max gap score: 7. 0 means served and rendered match. |
-| Soft 404 | Pass | 12/12 | Missing pages return a proper HTTP 404 status. No pages misleadingly return 200 for non-existent URLs. | 0 soft-404 page(s) detected. |
-| Boilerplate Burial | Pass | 12/12 | Navigation and chrome do not dominate the page; main content is reachable without wading through overhead. | Highest boilerplate-to-content ratio: 0.18. Threshold: < 10 (and < 80 KB of inline head bytes). |
-| Tabbed Disclosure | Pass | 12/12 | No content is hidden behind JavaScript tabs. All content is directly reachable in the served HTML. | 0 page(s) with tab widgets. |
-| Delayed Content Start | Pass | 2/2 | Main content begins early in the document. Agents that truncate fetches reach the lead paragraphs easily. | Content starts at up to 30% of the document on some pages. Check applied to 2 of 12 audited pages; the remaining 10 pages were skipped by a size or eligibility gate. |
-| Broken Code Fences | Pass | 12/12 | All fenced code blocks are properly balanced. No parser-confusion risk for agents reading prose that contains code examples. | 0 page(s) with unbalanced fenced code blocks. |
-| HTTP Content Negotiation (Vary) | Fail | 6/12 | The server advertises content negotiation via Vary: Accept. Agents that ask for a different Accept header may receive different content than the browser version. | 6 page(s) advertise format negotiation. See dkd-de-de-pipeline-http-content-negotiation-(vary)-pages.csv (6 pages). |
-| Cross-Host Redirect | Pass | 12/12 | No cross-domain redirects. Agents follow internal redirects without host-boundary issues. | 6 page(s) cross origin during redirect. |
-| Generic Headings | Pass | 12/12 | Every heading carries specific content; no page is dominated by generic labels like "Overview" or "Introduction". | Worst case: 0% generic headings. |
-| Body Content Ratio | Pass | 2/2 | Actual prose content averages 49% of served bytes - well above the 30% threshold. Pages are content-heavy, not overhead-heavy. | Average: 49%. Threshold: 30%. Check applied to 2 of 12 audited pages; the remaining 10 pages were skipped by a size or eligibility gate. |
-| Inline Tag Bloat | Fail | 12/12 | 12 page(s) carry inline `<style>` or executable `<script>` blocks over 500 bytes. Externalising these to separate .css/.js files lets agents skip them during cheap fetches. | 12 element(s) > 500 bytes. Largest single-page inline CSS block: 2965 B. Largest single-page inline JS block: 841 B. See dkd-de-de-pipeline-inline-tag-bloat-pages.csv (12 pages). |
-| Head Weight | Pass | 2/2 | Head bytes are a small fraction of each page. Agents reach body content quickly. | Max ratio: 0.04. Average: 0.01. Threshold: 0.50. Check applied to 2 of 12 audited pages; the remaining 10 pages were skipped by a size or eligibility gate. |
+| Truncation Risk | Fail | 7/7 | 7 page(s) flag for truncation risk because their main content (the first <main>, <article>, or top heading) sits past the 50 KB safe-fetch offset, even though no page exceeds the 250 KB hard ceiling. Agents with limited fetch windows may stop reading before they reach prose. | Largest page: 232 KB. Thresholds: 250 KB hard ceiling; 50/75/100 KB content-offset windows. See dkd-de-de-pipeline-truncation-risk-pages.csv (7 pages). |
+| SPA Shell | Pass | 7/7 | Served HTML matches rendered HTML - no JavaScript is required for content. Server-side agents see the same content a browser does. | Max gap score: 7. 0 means served and rendered match. |
+| Soft 404 | Pass | 7/7 | Missing pages return a proper HTTP 404 status. No pages misleadingly return 200 for non-existent URLs. | 0 soft-404 page(s) detected. |
+| Boilerplate Burial | Pass | 7/7 | Navigation and chrome do not dominate the page; main content is reachable without wading through overhead. | Highest boilerplate-to-content ratio: 0.18. Threshold: < 10 (and < 80 KB of inline head bytes). |
+| Tabbed Disclosure | Pass | 7/7 | No content is hidden behind JavaScript tabs. All content is directly reachable in the served HTML. | 0 page(s) with tab widgets. |
+| Delayed Content Start | Pass | 2/2 | Main content begins early in the document. Agents that truncate fetches reach the lead paragraphs easily. | Content starts at up to 30% of the document on some pages. Check applied to 2 of 7 audited pages; the remaining 5 pages were skipped by a size or eligibility gate. |
+| Broken Code Fences | Pass | 7/7 | All fenced code blocks are properly balanced. No parser-confusion risk for agents reading prose that contains code examples. | 0 page(s) with unbalanced fenced code blocks. |
+| HTTP Content Negotiation (Vary) | Fail | 1/7 | The server advertises content negotiation via Vary: Accept. Agents that ask for a different Accept header may receive different content than the browser version. | 1 page(s) advertise format negotiation. Page: https://www.dkd.de/de/datenschutz |
+| Cross-Host Redirect | Pass | 7/7 | No cross-domain redirects. Agents follow internal redirects without host-boundary issues. | 6 page(s) cross origin during redirect. |
+| Generic Headings | Pass | 7/7 | Every heading carries specific content; no page is dominated by generic labels like "Overview" or "Introduction". | Worst case: 0% generic headings. |
+| Body Content Ratio | Pass | 2/2 | Actual prose content averages 50% of served bytes - well above the 30% threshold. Pages are content-heavy, not overhead-heavy. | Average: 50%. Threshold: 30%. Check applied to 2 of 7 audited pages; the remaining 5 pages were skipped by a size or eligibility gate. |
+| Inline Tag Bloat | Fail | 7/7 | 7 page(s) carry inline `<style>` or executable `<script>` blocks over 500 bytes. Externalising these to separate .css/.js files lets agents skip them during cheap fetches. | 7 element(s) > 500 bytes. Largest single-page inline CSS block: 2612 B. Largest single-page inline JS block: 841 B. See dkd-de-de-pipeline-inline-tag-bloat-pages.csv (7 pages). |
+| Head Weight | Pass | 2/2 | Head bytes are a small fraction of each page. Agents reach body content quickly. | Max ratio: 0.04. Average: 0.01. Threshold: 0.50. Check applied to 2 of 7 audited pages; the remaining 5 pages were skipped by a size or eligibility gate. |
 
-**Pipeline Survivability score:** 77/100
+**Pipeline Survivability score:** 78/100
 
-Across the audited set, every page carries a truncation risk, meaning machines that consume content in fixed-size windows may receive incomplete text and draw conclusions from a partial picture. Content negotiation and inline tag bloat add further friction, making it harder for automated readers to extract clean, well-structured content efficiently. Resolving truncation risk across all twelve pages would have the largest single effect on machine readability, and addressing it represents the clearest opportunity to strengthen how www.dkd.de is understood by every automated reader that visits.
+Across the audited set, three resilience checks warrant attention: Truncation Risk, Content Negotiation, and Inline Tag Bloat, with Truncation Risk standing out as the most pervasive concern, affecting every one of the seven audited pages. When machines encounter content that may be cut short before they have read a complete thought or entity, they risk generating incomplete or inaccurate representations of what www.dkd.de actually says. Addressing Truncation Risk across the full page set would therefore have the largest single effect on how reliably machines read and relay this content.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -530,9 +528,9 @@ We run the Div Soup check on both served and rendered HTML so we can tell whethe
 
 | Source | Score | Band | Bare divs | Bare div ratio | Deepest bare chain | Top bare selectors |
 |--------|-------|------|-----------|----------------|--------------------|-------------------|
-| Rendered HTML | 53/100 | medium | 26 | 54% | 3 | `div.text-columns__column` (133), `div.blog-card__info` (55), `div.text-columns.text-columns--` (46), `div.toujou-card__bottom` (20), `div.toujou-card__chips` (20) |
+| Rendered HTML | 53/100 | medium | 26 | 54% | 3 | `div.text-columns__column` (78), `div.blog-card__info` (55), `div.text-columns.text-columns--` (28), `div.wrap.wrap--master` (7), `div.text-columns.text-columns--above` (4) |
 
-On the audited page at https://www.dkd.de/de/kontakt, rendered content carries a bare-div ratio of 54% (26 of 48 elements), meaning machines lose structural context and must rely on positional inference to determine meaning rather than reading explicit semantics. The pattern here is surface-wide rather than structural: the deepest bare chain reaches only 3 levels, yet the ratio itself is high, which points to a component framework that emits untyped wrappers at render time rather than a deeply nested hand-coded template. The most direct first move is to wrap the obvious landmarks (header, nav, main, footer, aside) and assign meaningful class names to the highest-frequency bare selectors, which would reduce the ratio materially without requiring any layout restructuring.
+On the worst-performing page, https://www.dkd.de/de/kontakt, more than half of all div elements carry no semantic role, leaving machines to infer meaning from position rather than structure. The pattern here is surface-wide rather than deeply nested: a high bare-div ratio paired with a shallow chain depth points to a component framework that generates wrapper elements without assigning semantic roles, rather than a rendering pipeline that stacks deeply nested containers. The most direct first move is to replace the outermost layout containers with proper landmark elements and ensure the named component divs carry meaningful roles, which would reduce the bare-div ratio on that page without requiring any change to the visual layout.
 
 ---
 
@@ -546,9 +544,9 @@ On the audited page at https://www.dkd.de/de/kontakt, rendered content carries a
 | X-Frame-Options | No | Prevents clickjacking |
 | X-Content-Type-Options | Yes | Prevents MIME-type sniffing |
 
-X-Frame-Options is absent from the audited responses. Adding this header at the origin-server or CDN edge closes the corresponding attack surface without touching application code.
+One of the five standard security headers is absent across every audited response: X-Frame-Options. Adding these at the origin-server or CDN edge closes the corresponding attack surfaces without touching application code.
 
-**Coverage:** 0 of 12 audited URLs carry all five headers; see the Security Headers appendix for the full exception list.
+**Coverage:** 0 of 7 audited URLs carry all five headers; see the Security Headers appendix for the full exception list.
 
 | Page | HTTPS | HSTS | CSP | X-Frame | X-Content-Type |
 |------|-------|------|-----|---------|----------------|
@@ -559,13 +557,8 @@ X-Frame-Options is absent from the audited responses. Adding this header at the 
 | /de/kontakt | Yes | Yes | Yes | No | Yes |
 | /de/impressum | Yes | Yes | Yes | No | Yes |
 | /de/datenschutz | Yes | Yes | Yes | No | Yes |
-| /de/blog | Yes | Yes | Yes | No | Yes |
-| /de/blog/blog-data/kategorie | Yes | Yes | Yes | No | Yes |
-| /de/blog/tag | Yes | Yes | Yes | No | Yes |
-| /de/typo3-shopware-experten-frankfurt | Yes | Yes | Yes | No | Yes |
-| /de/jobs | Yes | Yes | Yes | No | Yes |
 
-HTTPS: 12/12 | HSTS: 12/12 | CSP: 12/12 | X-Frame-Options: 0/12 | X-Content-Type-Options: 12/12
+HTTPS: 7/7 | HSTS: 7/7 | CSP: 7/7 | X-Frame-Options: 0/7 | X-Content-Type-Options: 7/7
 
 ---
 
@@ -574,19 +567,19 @@ HTTPS: 12/12 | HSTS: 12/12 | CSP: 12/12 | X-Frame-Options: 0/12 | X-Content-Type
 | Pattern | Coverage | Pages missing it |
 |---------|----------|------------------|
 | Schema.org JSON-LD | 100% | - |
-| MX governance tags | 0% | 12 |
+| MX governance tags | 0% | 7 |
 | Open Graph tags | 100% | - |
 | Twitter Card tags | 100% | - |
-| Skip link | 0% | 12 |
-| llms.txt link tag | 0% | 12 |
+| Skip link | 0% | 7 |
+| llms.txt link tag | 0% | 7 |
 | Canonical URL | 100% | - |
-| Exactly 1 H1 | 83% | 2 |
-| Code examples present | 0% | 12 |
+| Exactly 1 H1 | 100% | - |
+| Code examples present | 0% | 7 |
 | Self-contained sections | 100% | - |
-| Error/troubleshooting docs | 0% | 12 |
-| Lighthouse heading compliance | 33% | 8 |
+| Error/troubleshooting docs | 0% | 7 |
+| Lighthouse heading compliance | 43% | 4 |
 
-**Overall Consistency:** 62%
+**Overall Consistency:** 64%
 
 ## Content Consistency
 
@@ -594,8 +587,8 @@ The audited set shows consistent metadata patterns across pages, with no organis
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| Organisation name parity | Pass | Organisation name appears consistently across all 12 audited pages |
-| Canonical URL duplicates | Pass | No duplicate canonical URLs detected across the 12-page audited set |
+| Organisation name parity | Pass | Organisation name appears consistently across all 7 audited pages |
+| Canonical URL duplicates | Pass | No duplicate canonical URLs detected across the 7-page audited set |
 | Meta description length | Pass | Meta descriptions present on all pages; none flagged for length violations |
 | Cross-page entity spread (same entity on multiple pages) | Pass | Schema.org entities reference consistent identifiers across the audited set |
 
@@ -603,28 +596,30 @@ The audited set shows consistent metadata patterns across pages, with no organis
 
 ## Inline Code Duplicates
 
-We found 6 identical inline fragment(s) repeated across multiple pages, totalling 57 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
+We found 6 identical inline fragment(s) repeated across multiple pages, totalling 40 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
 
 | Type | Bytes per fragment | Appears on N pages | Preview |
 |------|-------------------:|-------------------:|---------|
-| css | 19 | 24 | .st0{fill:#B6D644;} |
-| css | 2478 | 12 | /*InlineDefaultCss*/ /* default styles for extension "tx_for |
-| js | 414 | 12 | (function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespa |
-| js | 338 | 12 | var _mtm = window._mtm = window._mtm \|\| [];   _mtm.push({'mt |
-| js | 67 | 12 | var dataLayer = [];     function gtag(){dataLayer.push(argum |
+| css | 19 | 14 | .st0{fill:#B6D644;} |
+| css | 2478 | 7 | /*InlineDefaultCss*/ /* default styles for extension "tx_for |
+| js | 414 | 7 | (function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespa |
+| js | 338 | 7 | var _mtm = window._mtm = window._mtm \|\| [];   _mtm.push({'mt |
+| js | 67 | 7 | var dataLayer = [];     function gtag(){dataLayer.push(argum |
 | css | 4288 | 6 | .rek-prediction .rek-style p{margin:0}.rek-prediction .rek-s |
 
 *The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `dkd-de-de-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate CSS fragment to a shared external file (`<link rel="stylesheet">`), with two exceptions. For the two JavaScript fragments that are third-party vendor scripts (the Leadinfo analytics SDK beginning `(function(l,e,a,d,i,n,f,o)` and the Matomo Tag Manager snippet beginning `var _mtm`), the correct remediation is a configuration change within the respective vendor platform or tag manager rather than a theme-level file extraction; consult the Leadinfo and Matomo Tag Manager documentation to control how and where each snippet is injected. Similarly, the CSS fragment beginning `.rek-prediction .rek-style` carries a `rek-` prefix that identifies it as a third-party recommendation or personalisation SDK stylesheet; if this fragment is injected by a vendor SDK, the correct remediation is likewise a vendor platform configuration change rather than theme-level extraction. The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+Three of the duplicate JS fragments originate from third-party and tag-manager SDKs rather than site-authored code, and each has a different correct remediation path. The fragment beginning `(function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespa` is the Leadinfo visitor-identification tracking snippet; the correct fix is to update the Leadinfo SDK or tag configuration to load the script once via the external CDN tag that Leadinfo already provides, rather than allowing the vendor JS to inject the snippet inline on every page. The fragment beginning `var _mtm = window._mtm = window._mtm || []` is the Matomo Tag Manager data-layer initialisation snippet; the correct fix is to configure Matomo Tag Manager to load the snippet externally rather than inline. The fragment beginning `var dataLayer = []; function gtag(){dataLayer.push(argum` is the standard Google Tag Manager data-layer initialisation snippet; the correct fix is to load it once via the standard GTM container snippet rather than duplicating the inline initialisation across pages.
+
+**Recommendation:** For first-party CSS and JS fragments, move each duplicate to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical. The third-party SDK fragments listed above require the vendor-specific fixes described above rather than this general approach.
 
 ---
 
 ## PDF Documents: Accessibility and Machine Readability
 
-Across the audited set, we record a structural gap that operates on two independent fronts: accessibility legislation has converged on ISO 14289-1 (PDF/UA) as its technical baseline across major markets, with the EU's Directive (EU) 2019/882 (EAA, in force 28 June 2025) as the most precisely codified example alongside Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada. A tagged PDF with a proper structure tree is also machine-readable in the same way that semantic HTML is, meaning an untagged or image-based PDF is invisible to search crawlers, AI systems, and automated pipelines that would otherwise extract text, entities, and structure from it.
+Across major markets, accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the shared technical baseline: the EAA (Directive (EU) 2019/882, in force 28 June 2025) is the most precisely codified instance, but Section 508 of the US Rehabilitation Act, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada all resolve to the same structural requirement. The machine-readability case is equally independent: an untagged PDF is opaque to machines in the same way that unsemantic markup is, and search crawlers, AI systems, and automated pipelines cannot extract text, entities, or structure from a scanned or image-based document unless a proper structure tree is present.
 
-We linked no PDFs from the 12-page sample we crawled, and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
+We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
 
 **Contact us for a wider PDF audit.** If you publish datasheets, white papers, investor documents, product manuals, accessibility statements, annual reports, or any other public-facing documents that were not reached by this sample, a focused PDF audit walks the full estate, checks every document against the ISO 14289-1 (PDF/UA) baseline (Tagged, Declared, Verified), and produces a per-document verdict you can act on. The audit you are reading covers HTML structure, structured data, and machine-readability across the crawled pages; the document layer is a separate engagement we run on request.
 
@@ -634,9 +629,9 @@ We linked no PDFs from the 12-page sample we crawled, and the sitemap declares n
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: address the 813 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
-2. **Review Priority 2-3 findings**: Discovery Readiness improvements and metadata tuning that compound over time
-3. **Consider optional enhancements**: optional patterns that give a first-mover advantage in AI search
+1. **Address Priority 1 findings**: fix the five duplicate ID values ("accessibility", "account", "alarm", "article", "bell") at the shared template layer, which resolves the bulk of the 527 accessibility instances recorded across the 7 audited pages by closing the 64 recurring template-level patterns in a single change cycle (WCAG 4.1.1 compliance and regulatory exposure).
+2. **Review Priority 2-3 findings**: replace bare `<div>` containers on the /de/kontakt template with semantic landmark elements to raise the 53/100 semantic structure score, add an llms.txt file at the root to address the Discovery Readiness score of 25/100, and review the 21 disallow paths in robots.txt for rules broader than intended.
+3. **Consider optional enhancements**: add `sameAs` links on the `Organisation` entity, attach a `potentialAction` to advertise contact capabilities to machines, and add Content-Signal directives to robots.txt to declare content-use policy for AI agents.
 
 ### What's Next
 
@@ -651,25 +646,25 @@ We linked no PDFs from the 12-page sample we crawled, and the sitemap declares n
 
 ## Summary of Findings
 
-Across the audited set, https://www.dkd.de performs well for human visitors, with SEO leading the scorecard at 91/100, reflecting a solid foundation in the signals that search crawlers read. The clearest opportunities lie in Discovery Readiness and Structured Data, where scores of 25/100 and 65/100 respectively indicate that machines encounter meaningful gaps in the metadata and discovery infrastructure needed to surface and interpret this content reliably. We welcome the chance to walk through these findings and map a practical path forward.
+Across the audited set, https://www.dkd.de performs at 92/100 for SEO, a strong foundation that serves human visitors well and signals solid on-page discipline. The clearest opportunities lie in Discovery Readiness, which sits at 25/100, and Structured Data at 65/100, both of which shape how machines find, interpret, and cite content from this domain. We invite the team at https://www.dkd.de to explore the recommendations in this report and take the next step toward a more complete machine-readable presence.
 
 ### Audit Scores
 
 | Dimension | Score | Band |
 |-----------|-------|------|
-| AI Agent Suitability | 75/100 | Good |
+| AI Agent Suitability | 78/100 | Excellent |
 | Accessibility | 90/100 | Excellent |
-| SEO (all pages) | 91/100 | Excellent |
-| SEO (content pages) | 91/100 | Excellent |
+| SEO (all pages) | 92/100 | Excellent |
+| SEO (content pages) | 92/100 | Excellent |
 | MX Stack Completeness | 62/100 | Good |
 | Structured Data Quality | 65/100 | Good |
 | Commerce Visibility | 10/100 | Needs Improvement |
 | Discovery Readiness | 25/100 | Needs Improvement |
-| Heading Quality | 79/100 | Excellent |
-| Semantic Ratio | 23% | Needs Improvement |
-| Agent Readability | 62/100 | Good |
-| Pipeline Survivability | 77/100 | Excellent |
-| Cross-Page Consistency | 62% | Good |
+| Heading Quality | 92/100 | Excellent |
+| Semantic Ratio | 22% | Needs Improvement |
+| Agent Readability | 67/100 | Good |
+| Pipeline Survivability | 78/100 | Excellent |
+| Cross-Page Consistency | 64% | Good |
 
 ---
 
@@ -677,28 +672,23 @@ Across the audited set, https://www.dkd.de performs well for human visitors, wit
 
 | Page | SEO | A11y | Back | Served | Rendered |
 |------|-----|------|------|--------|----------|
-| /de | 92 | 85 | 95 | 85 | 77 |
-| /de/leistungen | 92 | 90 | 95 | 85 | 85 |
-| /de/referenzen | 94 | 85 | 95 | 69 | 69 |
-| /de/produkte | 95 | 95 | 95 | 85 | 85 |
-| /de/kontakt | 85 | 90 | 95 | 70 | 70 |
-| /de/impressum | 89 | 95 | 95 | 85 | 85 |
+| /de | 92 | 85 | 95 | 83 | 77 |
+| /de/leistungen | 92 | 90 | 95 | 83 | 85 |
+| /de/referenzen | 94 | 85 | 95 | 68 | 69 |
+| /de/produkte | 95 | 95 | 95 | 83 | 85 |
+| /de/kontakt | 85 | 90 | 95 | 68 | 70 |
+| /de/impressum | 89 | 95 | 95 | 83 | 85 |
 | /de/datenschutz | 98 | 90 | 100 | 75 | 75 |
-| /de/blog | 94 | 75 | 95 | 83 | 83 |
-| /de/blog/blog-data/kategorie | 89 | 95 | 95 | 73 | 73 |
-| /de/blog/tag | 79 | 95 | 95 | 70 | 70 |
-| /de/typo3-shopware-experten-frankfurt | 88 | 90 | 95 | 83 | 83 |
-| /de/jobs | 91 | 90 | 95 | 53 | 53 |
 
 ---
 
 ## Appendix B: Link Inventory
 
-We recorded every internal link found on every audited page: 2138 links in total. Link status was not probed; for a dedicated broken-link audit, run a rate-limited crawler on the link set at a time that suits the site.
+We recorded every internal link found on every audited page: 1395 links in total. Link status was not probed; for a dedicated broken-link audit, run a rate-limited crawler on the link set at a time that suits the site.
 
 | Link class                      | Count |
 | ------------------------------- | ----: |
-| Same-host internal links        | 2138  |
+| Same-host internal links        | 1395  |
 | External links                  | 0     |
 | Anchor-only (`#fragment`) links | 0     |
 | mailto / tel links              | 0     |
@@ -707,9 +697,9 @@ We recorded every internal link found on every audited page: 2138 links in total
 
 ## Appendix C: Image Optimisation
 
-We audited 115 images across the audited set. The format distribution shows 37 PNG and 37 JPEG images alongside 41 images in other or unrecognised formats; no WebP or SVG images appear in the pages we reviewed. Alt-text coverage is strong at 97.4%, with 112 of 115 images carrying descriptive text. Three images are missing alt attributes, and addressing those would bring coverage to full compliance with WCAG Success Criterion 1.1.1.
+We audited 84 images across the audited set. The format distribution skews toward raster: 37 PNG, 33 JPEG, and 14 images in other or unrecognised formats, with no WebP or SVG present. Alt-text coverage is strong, with 83 of the 84 images carrying descriptive text; one image is missing its alt attribute and warrants attention.
 
-Every one of the 115 images carries a loading="lazy" attribute, and none are set to loading="eager" or left without a loading attribute. That last point is worth noting: omitting the attribute entirely is not equivalent to eager loading; it leaves the decision to the browser's own heuristics, which can vary across rendering contexts. The audited pages avoid that ambiguity entirely, with consistent lazy declarations throughout. We detected no instances of the JS Lazy Pattern, so there is no risk of double-lazy conflicts arising from a native attribute colliding with a JavaScript-driven lazy-load library.
+Every one of the 84 images carries a loading="lazy" attribute, and none are set to loading="eager" or left without an attribute. That last point is worth noting: omitting the loading attribute entirely is not the same as eager loading, since the browser applies its own heuristics to decide when to fetch each image. The fact that no images fall into that ambiguous state across the audited set is a good sign, though the universal application of lazy loading is worth reviewing against above-the-fold images, where lazy loading can delay the largest contentful paint.
 
 > **Double-lazy loading pattern not detected** - no image in the audited set carries both native `loading="lazy"` and a JavaScript lazyload placeholder at the same time.
 
@@ -727,7 +717,7 @@ Pa11y is an open-source automated accessibility testing tool that checks web pag
 
 **Link inventory:** We record every internal link found on every audited page with its URL, anchor text, and link type. We do not probe link status: a dedicated, rate-limited broken-link crawler handles that separately and avoids hammering the origin. Appendix B is a link inventory, not a broken-link list.
 
-**Scope:** 12 pages analysed | Platform: TYPO3 CMS | Analysis method: Hybrid (automated + manual verification) | robots.txt: Found
+**Scope:** 7 pages analysed | Platform: TYPO3 CMS | Analysis method: Hybrid (automated + manual verification) | robots.txt: Found
 
 ---
 
@@ -968,16 +958,16 @@ Per-page SEO score averaged across audited pages. Aggregates 13 scoring function
 
 | Input | Weight |
 |-------|--------|
-| titleOptimization (30-60 chars optimal) | 10 |
-| metaDescriptionOptimization (70-160 chars optimal) | 8 |
+| titleOptimisation (30-60 chars optimal) | 10 |
+| metaDescriptionOptimisation (70-160 chars optimal) | 8 |
 | urlStructure (lowercase, no underscores, ≤4 levels) | 7 |
 | h1Optimization (present, ≤70 chars) | 6 |
 | contentLength (200-800 words optimal) | 8 |
 | contentQuality (keyword in title/meta/h1, h2/h3 presence) | 9 |
 | internalLinking (1-10 links) | 7 |
-| imageOptimization (alt text or decorative) | 6 |
+| imageOptimisation (alt text or decorative) | 6 |
 | pageSpeed (load time 1000-5000ms band) | 9 |
-| mobileOptimization (responsive meta tag) | 8 |
+| mobileOptimisation (responsive meta tag) | 8 |
 | securityFactors (HTTPS) | 7 |
 | structuredData (any present) | 6 |
 | socialMediaTags (OpenGraph or Twitter Card) | 5 |

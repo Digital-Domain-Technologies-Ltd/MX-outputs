@@ -1,56 +1,56 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-23/dkd.de-de/dkd-de-de-report.md",
-  "timestamp": "2026-05-23T08:25:41.941Z",
+  "timestamp": "2026-05-23T13:49:14.732Z",
   "model": "claude-sonnet-4-6",
-  "runCount": 2,
+  "runCount": 3,
   "findingCount": 6,
   "regexFindingCount": 0,
   "llmFindingCount": 6,
   "findings": [
     {
       "category": "hollow-recommendation",
-      "message": "Priority 3's recommendation to 'Add or complete a robots.txt file with explicit crawl directives' is hollow: the audit's own Discovery Files section shows a valid, 25-line robots.txt is already present and fully excerpted. The recommendation should be rewritten to address a specific gap in the existing file (e.g. the missing llms.txt reference or ai.txt directive) rather than suggesting the file needs to be added or completed.",
-      "context": "Priority 3 prose: 'Add or complete a robots.txt file with explicit crawl directives so that machines understand which paths are in scope and which are excluded.' — yet the Discovery Files section records a valid robots.txt with 21 disallow paths and one sitemap reference already in place.",
+      "message": "The recommendation to 'address the 527 WCAG 2.1 AA accessibility issues identified (regulatory exposure)' in the Next Steps / Recommended Actions list is a domain-level restatement with no mechanism, element, or action named. Although Priority 1 in the Findings section gives specific guidance, this standalone line in the Next Steps section could be copied unchanged into any accessibility audit for any site and carries no actionable signal on its own.",
+      "context": "Next Steps > Recommended Actions: '1. Address Priority 1 findings: address the 527 WCAG 2.1 AA accessibility issues identified (regulatory exposure)'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "hollow-recommendation",
-      "message": "The Priority 4 recommendation to 'Identify the primary content types across the audited set... and map each to an appropriate Schema.org type' names no specific Schema.org type, no specific page, and no specific gap from the audit data. The Structured Data Findings table already identifies four concrete missing properties on /de's WebSite entity (image, datePublished, author, publisher), none of which are referenced in this recommendation. Without a data anchor, the recommendation is generic enough to appear in any audit of any site.",
-      "context": "Priority 4 recommendation: 'Identify the primary content types across the audited set (for example, service pages, team profiles, articles, events) and map each to an appropriate Schema.org type.' The parenthetical examples are illustrative placeholders, not audit findings, and the specific gaps documented in the Structured Data Findings table are not mentioned here.",
+      "message": "The recommendation to 'Review Priority 2-3 findings: Discovery Readiness improvements and metadata tuning that compound over time' names only domains ('Discovery Readiness', 'metadata tuning') without identifying a specific element, file, header, or action. The phrase 'metadata tuning' is especially vague and could appear in any web audit report for any site.",
+      "context": "Next Steps > Recommended Actions: '2. Review Priority 2-3 findings: Discovery Readiness improvements and metadata tuning that compound over time'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "'Consider optional enhancements: optional patterns that give a first-mover advantage in AI search' is hollow. It names no specific enhancement, pattern, or mechanism. The phrase 'first-mover advantage in AI search' is marketing framing with no data anchor from this audit.",
+      "context": "Next Steps > Recommended Actions: '3. Consider optional enhancements: optional patterns that give a first-mover advantage in AI search'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "exaggeration",
-      "message": "American English spelling 'organization' used in narrative prose. The report's default register is British English (e.g. 'organise', 'analysed', 'behaviour' implied by 'organisation' used correctly elsewhere). 'Organization' should be 'organisation' for register consistency.",
-      "context": "Retracting — all prose-level uses are UK-form 'organisation'; Schema.org type-name uses of 'Organization' are vocabulary and exempt.",
+      "message": "'First-mover advantage in AI search' is unsubstantiated marketing language. The audit data provides no evidence that implementing the optional enhancements would confer a first-mover advantage, nor any competitive benchmark to support the claim. This reads as promotional copy rather than consultant prose.",
+      "context": "Next Steps > Recommended Actions: '3. Consider optional enhancements: optional patterns that give a first-mover advantage in AI search'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "exaggeration",
-      "message": "American English form 'optimize' appears in the scoring methodology appendix narrative prose ('optimize title'). The report's British English register requires 'optimise'.",
-      "context": "Appendix E, SEO score 'What moves this score' section: 'Optimise title (30-60 chars) and meta description (70-160 chars)' — on checking, this actually uses 'Optimise' (UK). Checking other instances: 'imageOptimization', 'titleOptimization', 'metaDescriptionOptimization', 'urlStructure' — these are JSON field/key names (technical identifiers), not prose. The narrative bullet reads 'Optimise title'. No prose-level US form found here.",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "subtle-failure-framing",
-      "message": "'leaves something to be desired' equivalent framing: 'machines encounter meaningful gaps in the metadata and discovery infrastructure needed to surface and interpret this content reliably' uses the 'meaningful gaps' construction as a subtle condemnation. This is borderline but within normal consultant register. Skipping per the raise-the-bar instruction.",
-      "context": "Summary of Findings: 'machines encounter meaningful gaps in the metadata and discovery infrastructure needed to surface and interpret this content reliably'. Borderline — skipping.",
+      "message": "US spelling 'optimization' appears in the scoring methodology prose ('titleOptimization', 'metaDescriptionOptimization', 'urlStructure'). While these are internal score-component labels, they appear in running narrative prose sentences ('titleOptimization (30-60 chars optimal)') rather than quoted code or schema vocabulary, mixing US forms into what is otherwise British-register prose throughout the report (e.g. 'optimise', 'analysing', 'recognised' used elsewhere).",
+      "context": "Appendix E > SEO scoring table: 'titleOptimization (30-60 chars optimal)', 'metaDescriptionOptimization (70-160 chars optimal)', 'urlStructure (lowercase, no underscores, ≤4 levels)'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "third-party-vendor-template-blame",
-      "message": "The Inline Code Duplicates section identifies a Leadinfo analytics SDK snippet and a Matomo Tag Manager snippet as inline JS duplicates, and correctly advises using vendor platform configuration rather than theme-level extraction for those two. However, it also identifies a JavaScript fragment beginning '(function(l,e,a,d,i,n,f,o)' as the Leadinfo snippet and another beginning 'var _mtm = window._mtm' as the Matomo Tag Manager snippet — both are third-party vendor-injected scripts. The preceding general recommendation ('Move each duplicate CSS fragment to a shared external file') implicitly groups all six fragments together before carving out the two JS ones. The CSS fragment '.rek-prediction .rek-style p{margin:0}' (the rek- prefix is a strong vendor tell for a recommendation/advertising SDK) is not separately identified as third-party and is grouped with the site-owned CSS as a candidate for theme-level extraction. If this is a vendor SDK's injected stylesheet, recommending theme-level extraction is the wrong remediation path.",
-      "context": "Inline Code Duplicates table row: 'css | 4288 | 6 | .rek-prediction .rek-style p{margin:0}.rek-prediction .rek-s' — the 'rek-' prefix is a known vendor-SDK tell (recommendation/personalisation engine). The recommendation reads: 'Move each duplicate CSS fragment to a shared external file (<link rel=\"stylesheet\">)' without excluding this fragment, even though the two JS vendor snippets are correctly carved out immediately after.",
+      "message": "The inline code duplicates section identifies the Leadinfo tracking snippet ('GlobalLeadinfoNamespa…') and recommends the fix as 'load the Leadinfo script once via the external CDN tag … rather than embedding the inline injection in the template'. Prescribing a template-level edit ('embedding the inline injection in the template') for a third-party visitor-identification SDK without acknowledging that the element is injected by vendor JS — and that the correct remediation path is a Leadinfo SDK/tag configuration change, not a template edit — misdirects the developer to the wrong layer.",
+      "context": "Inline Code Duplicates section: 'The fragment beginning (function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespa is the Leadinfo visitor-identification tracking snippet; the correct fix is to load the Leadinfo script once via the external CDN tag that Leadinfo already provides, rather than embedding the inline injection in the template.'",
       "severity": "fail",
       "source": "llm",
       "line": null

@@ -1,16 +1,35 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-23/dkd.de-de/dkd-de-de-report.md",
-  "timestamp": "2026-05-23T08:25:44.763Z",
+  "timestamp": "2026-05-23T13:49:30.531Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 20968,
-    "output_tokens": 33,
-    "cache_creation_input_tokens": 3100,
+    "input_tokens": 20524,
+    "output_tokens": 643,
+    "cache_creation_input_tokens": 2372,
     "cache_read_input_tokens": 0
   },
-  "findingCount": 0,
+  "findingCount": 3,
   "withdrawnCount": 0,
-  "findings": [],
+  "findings": [
+    {
+      "category": "tone-inconsistency",
+      "message": "Priority 1 and Priority 2 finding blocks use first-person voice ('We recommend…') while Priority 3 and Priority 4 blocks also use first-person, but the 'At a Glance' table and the Findings section header use third-person ('We present the findings below' is first-person, but 'Machines may miss entity relationships' and similar table cells switch to third-person impersonal). More critically, the 'What's Working Well' section opens in third-person ('Across the audited set, www.dkd.de demonstrates…') and the 'Executive Summary' section opens in first-person ('We audited seven pages…'), then the Balanced Scorecard sections return to third-person ('Across the audited set, www.dkd.de delivers…'), creating a systematic alternation between first-person and third-person across sections that share the same structural role as narrative body paragraphs.",
+      "context": "We audited seven pages of www.dkd.de and found a site that serves its human visitors well.",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Structured Data Inventory section states 'Across the 7 pages we audited, structured data is solid. Adding recommended properties and increasing type diversity on the sampled pages gives machines more to work with,' but the immediately preceding sentence asserts '7 pages with JSON-LD out of 7 total (100%)' — the word 'total' implies this is a site-wide figure (100% of all pages) rather than 100% of the 7-page sample, overstating the coverage finding to the full site.",
+      "context": "Coverage: 7 pages with JSON-LD out of 7 total (100%)",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "The Executive Summary states 'Across the audited set we recorded 527 raw instances flagged as critical, spanning 14 distinct WCAG AA issue types,' and the Recommended Actions list then asserts 'address the 527 WCAG 2.1 AA accessibility issues identified (regulatory exposure)' — presenting the raw automated count from 7 pages as a definitive site-wide remediation target with regulatory framing, when the sample scope means the true site-wide count is unknown and could be materially higher or lower.",
+      "context": "address the 527 WCAG 2.1 AA accessibility issues identified (regulatory exposure)",
+      "severity": "block"
+    }
+  ],
   "withdrawn": []
 }
