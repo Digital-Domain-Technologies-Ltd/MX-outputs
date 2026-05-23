@@ -221,6 +221,20 @@ Every cog has exactly one narrative artefact. It is the body content following t
 
 The narrative artefact is allowed to evolve freely. A change to the narrative is not a change to the contract.
 
+#### 3.2.1 Named sub-sections within the narrative
+
+The narrative artefact MAY carry more than one named zone. A **sub-section** is a contiguous span of body content enclosed by two HTML comments of the form `<!-- begin: <id> -->` and `<!-- end: <id> -->`. The `<id>` is a stable, kebab-case identifier matching the regular expression `^[a-z][a-z0-9_-]*$`. The markers are HTML comments so they survive markdown round-trips and render invisibly in any HTML view of the document.
+
+The narrative artefact remains a single artefact for fingerprinting and identity purposes. Sub-sections are an addressing convention within that artefact, not separate artefacts.
+
+A reader MAY include, exclude, or extract a named sub-section. The canonical motivating case is a renderer that produces two derived artefacts from one source cog — for example, a covering letter plus a formal briefing in one document, where one derived artefact strips the covering-letter sub-section and the other keeps it. Narrative outside any marker pair is the default zone and is always included.
+
+Conformance requirements:
+
+- Sub-sections MUST NOT nest. A marker pair MUST close before the next pair opens. Nested ids constitute a malformed cog.
+- Each `<id>` MUST appear in at most one marker pair per cog. Repeated ids constitute a malformed cog.
+- A reader that does not implement sub-section addressing MUST treat the markers as ordinary HTML comments and render the contained content as part of the narrative.
+
 ### 3.3 Embedded executable artefacts
 
 A cog MAY contain zero or more embedded executable artefacts. These are fenced code blocks within the narrative that carry an explicit annotation marking them as addressable by the runtime.
