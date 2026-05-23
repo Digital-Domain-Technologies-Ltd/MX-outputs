@@ -1,0 +1,4450 @@
+{
+  "_description": "Per-audit evidence chain. One entry per consequential pipeline step (gate, LLM call, probe, repair). Designed as evidence for multiple AI-governance regimes; the frameworks array on each step names which regime expects this record. Reader: walk steps in order; each carries timestamp, agent identity, intent, parameters, input/output hashes, optional reasoning trace, and human-intervention state.",
+  "auditId": "dkd.de-de-2026-05-23",
+  "operator": "tom.cranstoun@gmail.com",
+  "target": "https://www.dkd.de",
+  "startedAt": "2026-05-23T14:58:36.254Z",
+  "frameworksCited": [
+    "EU-AI-Act",
+    "EAA-Directive-2019-882",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "steps": [
+    {
+      "timestamp": "2026-05-23T14:58:36.257Z",
+      "stepId": "collect.start",
+      "agent": "deterministic",
+      "intent": "collect phase started",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de pages=10 client=dkd-de-de date=2026-05-23"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.257Z",
+      "stepId": "collect.0",
+      "agent": "deterministic",
+      "intent": "audit-pipeline.js collect invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de pages=10 forceFresh=false client=dkd-de-de date=2026-05-23"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.257Z",
+      "stepId": "collect.1",
+      "agent": "deterministic",
+      "intent": "check-egress.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.257Z",
+      "stepId": "collect.1",
+      "agent": "deterministic",
+      "intent": "Egress anomaly detected",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "VPN or DNS filter may distort browser-console errors"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.257Z",
+      "stepId": "collect.2",
+      "agent": "deterministic",
+      "intent": "check-wellknown.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.257Z",
+      "stepId": "collect.2",
+      "agent": "deterministic",
+      "intent": "Well-known probe passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.257Z",
+      "stepId": "collect.3",
+      "agent": "deterministic",
+      "intent": "Results dir cleared: audit-data/domains/dkd.de-de/results",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Fresh run — stale CSVs removed, cache preserved"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.258Z",
+      "stepId": "collect.3a",
+      "agent": "deterministic",
+      "intent": "check-ai-usage.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.258Z",
+      "stepId": "collect.3a",
+      "agent": "deterministic",
+      "intent": "AI Usage Declaration probe passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.258Z",
+      "stepId": "collect.4",
+      "agent": "deterministic",
+      "intent": "Sitemap: https://dkd.de/de/sitemap.xml",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Responded HTTP 200 to HEAD request"
+      },
+      "inputs": {
+        "source": "https://dkd.de/de/sitemap.xml"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.259Z",
+      "stepId": "collect.5",
+      "agent": "deterministic",
+      "intent": "mx-reginald/audit/index.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "entry=https://dkd.de/de/sitemap.xml htmlPagesRequested=10 crawlCap=12 (buffer=2 for non-HTML discovery files) forceFresh=false"
+      },
+      "inputs": {
+        "source": "mx-reginald/audit/index.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.259Z",
+      "stepId": "collect.5",
+      "agent": "deterministic",
+      "intent": "Crawler complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.259Z",
+      "stepId": "collect.5a",
+      "agent": "deterministic",
+      "intent": "discover-urls.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/discovery.json"
+      },
+      "inputs": {
+        "source": "discover-urls.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.259Z",
+      "stepId": "collect.5a",
+      "agent": "deterministic",
+      "intent": "Sitemap grading complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "discovery.json written — SITEMAP_* placeholders will be filled at report time"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/discovery.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.259Z",
+      "stepId": "collect.5b",
+      "agent": "deterministic",
+      "intent": "topup-pdfs-from-sitemap.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "results=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.260Z",
+      "stepId": "collect.5b",
+      "agent": "deterministic",
+      "intent": "Sitemap PDF topup complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no append count parsed"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.260Z",
+      "stepId": "collect.5c",
+      "agent": "deterministic",
+      "intent": "capture-pdf-sample.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.260Z",
+      "stepId": "collect.5c",
+      "agent": "deterministic",
+      "intent": "PDF accessibility sample captured",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no pdfCount parsed"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.260Z",
+      "stepId": "collect.6",
+      "agent": "deterministic",
+      "intent": "error-page-test.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.261Z",
+      "stepId": "collect.6",
+      "agent": "deterministic",
+      "intent": "Error page test passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.261Z",
+      "stepId": "collect.7",
+      "agent": "deterministic",
+      "intent": "agent-access-test.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.261Z",
+      "stepId": "collect.7",
+      "agent": "deterministic",
+      "intent": "Agent access test complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — agent-access.json written to /Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.261Z",
+      "stepId": "collect.8",
+      "agent": "deterministic",
+      "intent": "check-served-rendered-gap.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "check-served-rendered-gap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.261Z",
+      "stepId": "collect.8",
+      "agent": "deterministic",
+      "intent": "No significant served/rendered gap",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "All AI suitability dimensions within 5-point threshold"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/audit_averages.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.261Z",
+      "stepId": "collect.8a",
+      "agent": "deterministic",
+      "intent": "slowest-page-probe.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results method=cache-busted-x3"
+      },
+      "inputs": {
+        "source": "slowest-page-probe.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.262Z",
+      "stepId": "collect.8a",
+      "agent": "deterministic",
+      "intent": "Slowest-page re-probe: slow",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides."
+      },
+      "inputs": {
+        "source": "slowest-page-perf.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.262Z",
+      "stepId": "collect.8b",
+      "agent": "deterministic",
+      "intent": "provenance-gap.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/cache"
+      },
+      "inputs": {
+        "source": "provenance-gap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.262Z",
+      "stepId": "collect.8b",
+      "agent": "deterministic",
+      "intent": "Provenance-gap scan complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap: 0 pages scanned, 0 self-promotional listicles, 0 year-swap pages, 0 provenance-gap cluster(s)"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/provenance_gap.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.262Z",
+      "stepId": "collect.8c",
+      "agent": "deterministic",
+      "intent": "provenance-gap-llm.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/cache maxPages=5"
+      },
+      "inputs": {
+        "source": "provenance-gap-llm.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.262Z",
+      "stepId": "collect.8c",
+      "agent": "deterministic",
+      "intent": "Provenance-gap LLM pass complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap-llm: 0 page(s) evaluated, 0 qualitative finding(s)."
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/provenance_gap_llm.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.263Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "generate-preflight-findings.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "inputs": {
+        "source": "generate-preflight-findings.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.263Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "Preflight findings written",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Pre-digested scores, findings, schema maturity, journey, agent access — ready for LLM phases"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.263Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "Schema.org coverage is partial — Decoration (SDQ 65/100)",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Agents can partially parse structured facts but key properties may be missing"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.263Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "No llms.txt published",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Agents have no machine-curated index of site content or declared access policy"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.264Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "No sitemap.xml",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Crawlers rely on link discovery only; unlisted pages may not be indexed"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.264Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "Security headers absent: X-Frame-Options",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Missing security headers increase exposure to content injection and clickjacking"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.264Z",
+      "stepId": "collect.10",
+      "agent": "deterministic",
+      "intent": "Collect phase complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "All automated steps finished including preflight-findings.json"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.265Z",
+      "stepId": "collect.end",
+      "agent": "deterministic",
+      "intent": "collect phase ended — SUCCESS",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "All automated collection steps complete; LLM phases ready to start"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.265Z",
+      "stepId": "report.start",
+      "agent": "deterministic",
+      "intent": "report phase started",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "hostname=dkd.de client=dkd-de-de date=2026-05-23 model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.265Z",
+      "stepId": "report.0",
+      "agent": "deterministic",
+      "intent": "Template: web-audit-suite-template.md",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Generic template — no commerce anchor"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/seo_scores.csv"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.266Z",
+      "stepId": "report.0",
+      "agent": "deterministic",
+      "intent": "Template voice check passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md"
+      },
+      "inputs": {
+        "source": "check-template-voice.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.266Z",
+      "stepId": "report.1",
+      "agent": "deterministic",
+      "intent": "infill-report.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.266Z",
+      "stepId": "report.1",
+      "agent": "deterministic",
+      "intent": "Infill complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — skeleton at mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.266Z",
+      "stepId": "report.2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "rewrite-report.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "infilled=mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md out=mx-outputs/audit/2026-05-23/dkd.de-de/dkd-de-de-report.md model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.267Z",
+      "stepId": "report.rewrite-1",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 1/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.267Z",
+      "stepId": "report.rewrite-2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 2/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.267Z",
+      "stepId": "report.rewrite-3",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 3/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.267Z",
+      "stepId": "report.rewrite-4",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 4/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.268Z",
+      "stepId": "report.rewrite-5",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 5/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.268Z",
+      "stepId": "report.rewrite-6",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 6/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.268Z",
+      "stepId": "report.rewrite-7",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 7/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.269Z",
+      "stepId": "report.rewrite-8",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 8/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.269Z",
+      "stepId": "report.rewrite-9",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 9/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.269Z",
+      "stepId": "report.rewrite-10",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 10/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.270Z",
+      "stepId": "report.rewrite-11",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 11/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.270Z",
+      "stepId": "report.rewrite-12",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 12/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.270Z",
+      "stepId": "report.rewrite-13",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 13/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.271Z",
+      "stepId": "report.rewrite-14",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 14/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.271Z",
+      "stepId": "report.rewrite-15",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 15/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.271Z",
+      "stepId": "report.rewrite-16",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 16/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.272Z",
+      "stepId": "report.rewrite-17",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 17/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.272Z",
+      "stepId": "report.rewrite-18",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 18/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.272Z",
+      "stepId": "report.2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "Rewrite complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — final report at mx-outputs/audit/2026-05-23/dkd.de-de/dkd-de-de-report.md"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.273Z",
+      "stepId": "report.2.5",
+      "agent": "deterministic",
+      "intent": "Engagement table regenerated",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Deterministic rebuild from priority blocks — no LLM drift possible"
+      },
+      "inputs": {
+        "source": "regenerate-engagement-table.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.273Z",
+      "stepId": "report.end",
+      "agent": "deterministic",
+      "intent": "report phase ended",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "infill=ok rewrite=ok"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.273Z",
+      "stepId": "collect.start",
+      "agent": "deterministic",
+      "intent": "collect phase started",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de pages=10 client=dkd-de-de date=2026-05-23"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.274Z",
+      "stepId": "collect.0",
+      "agent": "deterministic",
+      "intent": "audit-pipeline.js collect invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de pages=10 forceFresh=false client=dkd-de-de date=2026-05-23"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.274Z",
+      "stepId": "collect.1",
+      "agent": "deterministic",
+      "intent": "check-egress.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.274Z",
+      "stepId": "collect.1",
+      "agent": "deterministic",
+      "intent": "Egress anomaly detected",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "VPN or DNS filter may distort browser-console errors"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.275Z",
+      "stepId": "collect.2",
+      "agent": "deterministic",
+      "intent": "check-wellknown.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.275Z",
+      "stepId": "collect.2",
+      "agent": "deterministic",
+      "intent": "Well-known probe passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.275Z",
+      "stepId": "collect.3",
+      "agent": "deterministic",
+      "intent": "Results dir cleared: audit-data/domains/dkd.de-de/results",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Fresh run — stale CSVs removed, cache preserved"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.276Z",
+      "stepId": "collect.3a",
+      "agent": "deterministic",
+      "intent": "check-ai-usage.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.276Z",
+      "stepId": "collect.3a",
+      "agent": "deterministic",
+      "intent": "AI Usage Declaration probe passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.277Z",
+      "stepId": "collect.4",
+      "agent": "deterministic",
+      "intent": "Sitemap: https://dkd.de/de/sitemap.xml",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Responded HTTP 200 to HEAD request"
+      },
+      "inputs": {
+        "source": "https://dkd.de/de/sitemap.xml"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.277Z",
+      "stepId": "collect.5",
+      "agent": "deterministic",
+      "intent": "mx-reginald/audit/index.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "entry=https://dkd.de/de/sitemap.xml htmlPagesRequested=10 crawlCap=12 (buffer=2 for non-HTML discovery files) forceFresh=false"
+      },
+      "inputs": {
+        "source": "mx-reginald/audit/index.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.277Z",
+      "stepId": "collect.5",
+      "agent": "deterministic",
+      "intent": "Crawler complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.278Z",
+      "stepId": "collect.5a",
+      "agent": "deterministic",
+      "intent": "discover-urls.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/discovery.json"
+      },
+      "inputs": {
+        "source": "discover-urls.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.278Z",
+      "stepId": "collect.5a",
+      "agent": "deterministic",
+      "intent": "Sitemap grading complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "discovery.json written — SITEMAP_* placeholders will be filled at report time"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/discovery.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.279Z",
+      "stepId": "collect.5b",
+      "agent": "deterministic",
+      "intent": "topup-pdfs-from-sitemap.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "results=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.279Z",
+      "stepId": "collect.5b",
+      "agent": "deterministic",
+      "intent": "Sitemap PDF topup complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no append count parsed"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.279Z",
+      "stepId": "collect.5c",
+      "agent": "deterministic",
+      "intent": "capture-pdf-sample.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.280Z",
+      "stepId": "collect.5c",
+      "agent": "deterministic",
+      "intent": "PDF accessibility sample captured",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no pdfCount parsed"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.280Z",
+      "stepId": "collect.6",
+      "agent": "deterministic",
+      "intent": "error-page-test.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.281Z",
+      "stepId": "collect.6",
+      "agent": "deterministic",
+      "intent": "Error page test passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.281Z",
+      "stepId": "collect.7",
+      "agent": "deterministic",
+      "intent": "agent-access-test.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.282Z",
+      "stepId": "collect.7",
+      "agent": "deterministic",
+      "intent": "Agent access test complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — agent-access.json written to /Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.282Z",
+      "stepId": "collect.8",
+      "agent": "deterministic",
+      "intent": "check-served-rendered-gap.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "check-served-rendered-gap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.282Z",
+      "stepId": "collect.8",
+      "agent": "deterministic",
+      "intent": "No significant served/rendered gap",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "All AI suitability dimensions within 5-point threshold"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/audit_averages.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.283Z",
+      "stepId": "collect.8a",
+      "agent": "deterministic",
+      "intent": "slowest-page-probe.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results method=cache-busted-x3"
+      },
+      "inputs": {
+        "source": "slowest-page-probe.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.283Z",
+      "stepId": "collect.8a",
+      "agent": "deterministic",
+      "intent": "Slowest-page re-probe: slow",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides."
+      },
+      "inputs": {
+        "source": "slowest-page-perf.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.284Z",
+      "stepId": "collect.8b",
+      "agent": "deterministic",
+      "intent": "provenance-gap.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/cache"
+      },
+      "inputs": {
+        "source": "provenance-gap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.284Z",
+      "stepId": "collect.8b",
+      "agent": "deterministic",
+      "intent": "Provenance-gap scan complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap: 0 pages scanned, 0 self-promotional listicles, 0 year-swap pages, 0 provenance-gap cluster(s)"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/provenance_gap.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.285Z",
+      "stepId": "collect.8c",
+      "agent": "deterministic",
+      "intent": "provenance-gap-llm.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/cache maxPages=5"
+      },
+      "inputs": {
+        "source": "provenance-gap-llm.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.285Z",
+      "stepId": "collect.8c",
+      "agent": "deterministic",
+      "intent": "Provenance-gap LLM pass complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap-llm: 0 page(s) evaluated, 0 qualitative finding(s)."
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/provenance_gap_llm.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.286Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "generate-preflight-findings.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "inputs": {
+        "source": "generate-preflight-findings.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.286Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "Preflight findings written",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Pre-digested scores, findings, schema maturity, journey, agent access — ready for LLM phases"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.287Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "Schema.org coverage is partial — Decoration (SDQ 65/100)",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Agents can partially parse structured facts but key properties may be missing"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.287Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "No llms.txt published",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Agents have no machine-curated index of site content or declared access policy"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.288Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "No sitemap.xml",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Crawlers rely on link discovery only; unlisted pages may not be indexed"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.288Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "Security headers absent: X-Frame-Options",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Missing security headers increase exposure to content injection and clickjacking"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.289Z",
+      "stepId": "collect.10",
+      "agent": "deterministic",
+      "intent": "Collect phase complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "All automated steps finished including preflight-findings.json"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.289Z",
+      "stepId": "collect.end",
+      "agent": "deterministic",
+      "intent": "collect phase ended — SUCCESS",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "All automated collection steps complete; LLM phases ready to start"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.290Z",
+      "stepId": "report.start",
+      "agent": "deterministic",
+      "intent": "report phase started",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "hostname=dkd.de client=dkd-de-de date=2026-05-23 model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.290Z",
+      "stepId": "report.0",
+      "agent": "deterministic",
+      "intent": "Template: web-audit-suite-template.md",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Generic template — no commerce anchor"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/seo_scores.csv"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.291Z",
+      "stepId": "report.0",
+      "agent": "deterministic",
+      "intent": "Template voice check passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md"
+      },
+      "inputs": {
+        "source": "check-template-voice.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.291Z",
+      "stepId": "report.1",
+      "agent": "deterministic",
+      "intent": "infill-report.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.292Z",
+      "stepId": "report.1",
+      "agent": "deterministic",
+      "intent": "Infill FAILED",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 1 — Infill failed and no skeleton was written"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "fail",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.293Z",
+      "stepId": "report.end",
+      "agent": "deterministic",
+      "intent": "report phase ended — FAILED at infill",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Cannot proceed to rewrite without valid skeleton"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "fail",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.293Z",
+      "stepId": "report.start",
+      "agent": "deterministic",
+      "intent": "report phase started",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "hostname=dkd.de client=dkd-de-de date=2026-05-23 model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.294Z",
+      "stepId": "report.0",
+      "agent": "deterministic",
+      "intent": "Template: web-audit-suite-template.md",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Generic template — no commerce anchor"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/seo_scores.csv"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.294Z",
+      "stepId": "report.0",
+      "agent": "deterministic",
+      "intent": "Template voice check passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md"
+      },
+      "inputs": {
+        "source": "check-template-voice.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.295Z",
+      "stepId": "report.1",
+      "agent": "deterministic",
+      "intent": "infill-report.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.296Z",
+      "stepId": "report.1",
+      "agent": "deterministic",
+      "intent": "Infill complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — skeleton at mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.296Z",
+      "stepId": "report.2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "rewrite-report.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "infilled=mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md out=mx-outputs/audit/2026-05-23/dkd.de-de/dkd-de-de-report.md model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.297Z",
+      "stepId": "report.rewrite-1",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 1/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.298Z",
+      "stepId": "report.rewrite-2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 2/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.298Z",
+      "stepId": "report.rewrite-3",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 3/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.299Z",
+      "stepId": "report.rewrite-4",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 4/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.300Z",
+      "stepId": "report.rewrite-5",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 5/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.300Z",
+      "stepId": "report.rewrite-6",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 6/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.301Z",
+      "stepId": "report.rewrite-7",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 7/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.302Z",
+      "stepId": "report.rewrite-8",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 8/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.302Z",
+      "stepId": "report.rewrite-9",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 9/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.303Z",
+      "stepId": "report.rewrite-10",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 10/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.304Z",
+      "stepId": "report.rewrite-11",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 11/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.304Z",
+      "stepId": "report.rewrite-12",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 12/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.305Z",
+      "stepId": "report.rewrite-13",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 13/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.306Z",
+      "stepId": "report.rewrite-14",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 14/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.307Z",
+      "stepId": "report.rewrite-15",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 15/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.307Z",
+      "stepId": "report.rewrite-16",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 16/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.308Z",
+      "stepId": "report.rewrite-17",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 17/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.309Z",
+      "stepId": "report.rewrite-18",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 18/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.309Z",
+      "stepId": "report.2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "Rewrite complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — final report at mx-outputs/audit/2026-05-23/dkd.de-de/dkd-de-de-report.md"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.310Z",
+      "stepId": "report.2.5",
+      "agent": "deterministic",
+      "intent": "Engagement table regenerated",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Deterministic rebuild from priority blocks — no LLM drift possible"
+      },
+      "inputs": {
+        "source": "regenerate-engagement-table.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.311Z",
+      "stepId": "report.end",
+      "agent": "deterministic",
+      "intent": "report phase ended",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "infill=ok rewrite=ok"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.312Z",
+      "stepId": "collect.start",
+      "agent": "deterministic",
+      "intent": "collect phase started",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de pages=5 client=dkd-de-de date=2026-05-23"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.312Z",
+      "stepId": "collect.0",
+      "agent": "deterministic",
+      "intent": "audit-pipeline.js collect invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de pages=5 forceFresh=false client=dkd-de-de date=2026-05-23"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.313Z",
+      "stepId": "collect.1",
+      "agent": "deterministic",
+      "intent": "check-egress.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.314Z",
+      "stepId": "collect.1",
+      "agent": "deterministic",
+      "intent": "Egress anomaly detected",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "VPN or DNS filter may distort browser-console errors"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.314Z",
+      "stepId": "collect.2",
+      "agent": "deterministic",
+      "intent": "check-wellknown.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.315Z",
+      "stepId": "collect.2",
+      "agent": "deterministic",
+      "intent": "Well-known probe passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.316Z",
+      "stepId": "collect.3",
+      "agent": "deterministic",
+      "intent": "Results dir cleared: audit-data/domains/dkd.de-de/results",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Fresh run — stale CSVs removed, cache preserved"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.316Z",
+      "stepId": "collect.3a",
+      "agent": "deterministic",
+      "intent": "check-ai-usage.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.318Z",
+      "stepId": "collect.3a",
+      "agent": "deterministic",
+      "intent": "AI Usage Declaration probe passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.318Z",
+      "stepId": "collect.4",
+      "agent": "deterministic",
+      "intent": "Sitemap: https://dkd.de/de/sitemap.xml",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Responded HTTP 200 to HEAD request"
+      },
+      "inputs": {
+        "source": "https://dkd.de/de/sitemap.xml"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.319Z",
+      "stepId": "collect.5",
+      "agent": "deterministic",
+      "intent": "mx-reginald/audit/index.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "entry=https://dkd.de/de/sitemap.xml htmlPagesRequested=5 crawlCap=7 (buffer=2 for non-HTML discovery files) forceFresh=false"
+      },
+      "inputs": {
+        "source": "mx-reginald/audit/index.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.320Z",
+      "stepId": "collect.5",
+      "agent": "deterministic",
+      "intent": "Crawler complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.321Z",
+      "stepId": "collect.5a",
+      "agent": "deterministic",
+      "intent": "discover-urls.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/discovery.json"
+      },
+      "inputs": {
+        "source": "discover-urls.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.321Z",
+      "stepId": "collect.5a",
+      "agent": "deterministic",
+      "intent": "Sitemap grading complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "discovery.json written — SITEMAP_* placeholders will be filled at report time"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/discovery.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.322Z",
+      "stepId": "collect.5b",
+      "agent": "deterministic",
+      "intent": "topup-pdfs-from-sitemap.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "results=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.323Z",
+      "stepId": "collect.5b",
+      "agent": "deterministic",
+      "intent": "Sitemap PDF topup complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no append count parsed"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.324Z",
+      "stepId": "collect.5c",
+      "agent": "deterministic",
+      "intent": "capture-pdf-sample.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.325Z",
+      "stepId": "collect.5c",
+      "agent": "deterministic",
+      "intent": "PDF accessibility sample captured",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no pdfCount parsed"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.326Z",
+      "stepId": "collect.6",
+      "agent": "deterministic",
+      "intent": "error-page-test.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.326Z",
+      "stepId": "collect.6",
+      "agent": "deterministic",
+      "intent": "Error page test passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.327Z",
+      "stepId": "collect.7",
+      "agent": "deterministic",
+      "intent": "agent-access-test.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.328Z",
+      "stepId": "collect.7",
+      "agent": "deterministic",
+      "intent": "Agent access test complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — agent-access.json written to /Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.329Z",
+      "stepId": "collect.8",
+      "agent": "deterministic",
+      "intent": "check-served-rendered-gap.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results"
+      },
+      "inputs": {
+        "source": "check-served-rendered-gap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.330Z",
+      "stepId": "collect.8",
+      "agent": "deterministic",
+      "intent": "No significant served/rendered gap",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "All AI suitability dimensions within 5-point threshold"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/audit_averages.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.331Z",
+      "stepId": "collect.8a",
+      "agent": "deterministic",
+      "intent": "slowest-page-probe.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results method=cache-busted-x3"
+      },
+      "inputs": {
+        "source": "slowest-page-probe.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.331Z",
+      "stepId": "collect.8a",
+      "agent": "deterministic",
+      "intent": "Slowest-page re-probe: acceptable",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "First-visit response time is within healthy bounds. The returning-visitor view is Indeterminate for both pages because cache-busted re-probes were rate-limited (HTTP 429) or otherwise unsuccessful, so we cannot characterise the warmed-cache experience from this audit."
+      },
+      "inputs": {
+        "source": "slowest-page-perf.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.332Z",
+      "stepId": "collect.8b",
+      "agent": "deterministic",
+      "intent": "provenance-gap.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/cache"
+      },
+      "inputs": {
+        "source": "provenance-gap.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.333Z",
+      "stepId": "collect.8b",
+      "agent": "deterministic",
+      "intent": "Provenance-gap scan complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap: 0 pages scanned, 0 self-promotional listicles, 0 year-swap pages, 0 provenance-gap cluster(s)"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/provenance_gap.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.334Z",
+      "stepId": "collect.8c",
+      "agent": "deterministic",
+      "intent": "provenance-gap-llm.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "url=https://dkd.de/de resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/cache maxPages=5"
+      },
+      "inputs": {
+        "source": "provenance-gap-llm.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.335Z",
+      "stepId": "collect.8c",
+      "agent": "deterministic",
+      "intent": "Provenance-gap LLM pass complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap-llm: 0 page(s) evaluated, 0 qualitative finding(s)."
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/provenance_gap_llm.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.336Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "generate-preflight-findings.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results out=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "inputs": {
+        "source": "generate-preflight-findings.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.337Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "Preflight findings written",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Pre-digested scores, findings, schema maturity, journey, agent access — ready for LLM phases"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.337Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "Schema.org coverage is partial — Decoration (SDQ 65/100)",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Agents can partially parse structured facts but key properties may be missing"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.338Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "No llms.txt published",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Agents have no machine-curated index of site content or declared access policy"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.339Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "No sitemap.xml",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Crawlers rely on link discovery only; unlisted pages may not be indexed"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.340Z",
+      "stepId": "collect.9",
+      "agent": "deterministic",
+      "intent": "Security headers absent: X-Frame-Options",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Missing security headers increase exposure to content injection and clickjacking"
+      },
+      "inputs": {
+        "source": "audit-data/domains/dkd.de-de/results/preflight-findings.json"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.341Z",
+      "stepId": "collect.10",
+      "agent": "deterministic",
+      "intent": "Collect phase complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "All automated steps finished including preflight-findings.json"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.342Z",
+      "stepId": "collect.end",
+      "agent": "deterministic",
+      "intent": "collect phase ended — SUCCESS",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "All automated collection steps complete; LLM phases ready to start"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.343Z",
+      "stepId": "report.start",
+      "agent": "deterministic",
+      "intent": "report phase started",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "hostname=dkd.de client=dkd-de-de date=2026-05-23 model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.344Z",
+      "stepId": "report.0",
+      "agent": "deterministic",
+      "intent": "Template: web-audit-suite-template.md",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Generic template — no commerce anchor"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results/seo_scores.csv"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.344Z",
+      "stepId": "report.0",
+      "agent": "deterministic",
+      "intent": "Template voice check passed",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md"
+      },
+      "inputs": {
+        "source": "check-template-voice.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.345Z",
+      "stepId": "report.1",
+      "agent": "deterministic",
+      "intent": "infill-report.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/audit-data/domains/dkd.de-de/results out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.346Z",
+      "stepId": "report.1",
+      "agent": "deterministic",
+      "intent": "Infill complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — skeleton at mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.347Z",
+      "stepId": "report.2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "rewrite-report.js invoked",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "infilled=mx-outputs/audit/2026-05-23/dkd.de-de/.infilled/dkd-de-de.md out=mx-outputs/audit/2026-05-23/dkd.de-de/dkd-de-de-report.md model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.348Z",
+      "stepId": "report.rewrite-1",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 1/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.349Z",
+      "stepId": "report.rewrite-2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 2/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.350Z",
+      "stepId": "report.rewrite-3",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 3/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.351Z",
+      "stepId": "report.rewrite-4",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 4/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.352Z",
+      "stepId": "report.rewrite-5",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 5/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.353Z",
+      "stepId": "report.rewrite-6",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 6/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.353Z",
+      "stepId": "report.rewrite-7",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 7/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.354Z",
+      "stepId": "report.rewrite-8",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 8/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.355Z",
+      "stepId": "report.rewrite-9",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 9/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.356Z",
+      "stepId": "report.rewrite-10",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 10/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.357Z",
+      "stepId": "report.rewrite-11",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 11/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.358Z",
+      "stepId": "report.rewrite-12",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 12/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.359Z",
+      "stepId": "report.rewrite-13",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 13/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.360Z",
+      "stepId": "report.rewrite-14",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 14/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.361Z",
+      "stepId": "report.rewrite-15",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 15/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.362Z",
+      "stepId": "report.rewrite-16",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 16/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.363Z",
+      "stepId": "report.rewrite-17",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 17/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.364Z",
+      "stepId": "report.rewrite-18",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 18/18 replaced via API",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "model=claude-sonnet-4-6 status=ok"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.365Z",
+      "stepId": "report.2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "Rewrite complete",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — final report at mx-outputs/audit/2026-05-23/dkd.de-de/dkd-de-de-report.md"
+      },
+      "inputs": {
+        "source": "rewrite-report.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.366Z",
+      "stepId": "report.2.5",
+      "agent": "deterministic",
+      "intent": "Engagement table regenerated",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "Deterministic rebuild from priority blocks — no LLM drift possible"
+      },
+      "inputs": {
+        "source": "regenerate-engagement-table.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-23T14:58:36.367Z",
+      "stepId": "report.end",
+      "agent": "deterministic",
+      "intent": "report phase ended",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance"
+      ],
+      "parameters": {
+        "rationale": "infill=ok rewrite=ok"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": null,
+      "rubricHash": null,
+      "reasoningTrace": null,
+      "humanIntervention": "none",
+      "outcome": "pass",
+      "notes": "confidence=high"
+    }
+  ]
+}
