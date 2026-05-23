@@ -290,7 +290,7 @@
   }
 };</code></pre>
 <p>To make the difference concrete, here is a real <code>llms.txt</code>, the one we use for allabout.network, as it sits on the server before any wrapping:</p>
-<pre><code class="language-text"># allabout.network, CogNovaMX Ltd
+<pre><code class="language-text"># allabout.network, CogNovaMX
 
 &gt; Making the web, and everything you publish beyond it, work for everyone and everything that uses it.
 &gt; MX (Machine Experience) is structured metadata that makes your content
@@ -303,7 +303,7 @@
 - Contact: mailto:info@cognovamx.com
 - Website: https://allabout.network
 
-CogNovaMX Ltd works on Machine Experience (MX) methodology. Founded by Tom Cranstoun -
+CogNovaMX works on Machine Experience (MX) methodology. Founded by Tom Cranstoun -
 content management specialist since 2001, conference speaker, and author of the MX book
 series. We help organizations design websites that work for both humans and machines.
 
@@ -334,7 +334,7 @@ series. We help organizations design websites that work for both humans and mach
 &lt;/head&gt;
 &lt;body&gt;
 &lt;pre&gt;
-# allabout.network, CogNovaMX Ltd
+# allabout.network, CogNovaMX
 
 &amp;gt; Making the web, and everything you publish beyond it, work for everyone and everything that uses it.
 &amp;gt; MX (Machine Experience) is structured metadata that makes your content
@@ -418,7 +418,7 @@ ${canonicalTag}&lt;script type="application/ld+json"&gt;${jsonLd}&lt;/script&gt;
 <p>The differences from the minimum viable snippet are deliberate, and each one earns its place:</p>
 <ul>
 <li>HTML escaping: the raw <code>llms.txt</code> may legitimately contain <code>&lt;</code>, <code>&gt;</code>, or <code>&amp;</code>. Inserting that into a template without escaping would corrupt the document and, in the worst case, smuggle markup into the page. The minimum-viable snippet skips this for clarity; production cannot.</li>
-<li>Title from the first <code>#</code> heading: most well-formed <code>llms.txt</code> files start with a heading like <code># allabout.network, CogNovaMX Ltd</code>. Promoting it to <code>&lt;title&gt;</code> gives crawlers and humans a real page title for free, with a sensible <code>llms.txt, {hostname}</code> fallback if there is no heading.</li>
+<li>Title from the first <code>#</code> heading: most well-formed <code>llms.txt</code> files start with a heading like <code># allabout.network, CogNovaMX</code>. Promoting it to <code>&lt;title&gt;</code> gives crawlers and humans a real page title for free, with a sensible <code>llms.txt, {hostname}</code> fallback if there is no heading.</li>
 <li><code>&lt;link rel="canonical"&gt;</code>: tells crawlers that the bare <code>.txt</code> URL is the canonical address for this content, so the HTML wrapping is treated as a presentation of the same resource rather than a separate page that competes with itself. Query strings and fragments are stripped so cache-busters do not pollute the canonical.</li>
 <li><code>&lt;meta name="robots" content="index, follow"&gt;</code>: explicit indexing permission. The point of the exercise is to be indexed, so we say so.</li>
 <li>MX governance metadata: three carrier tags (<code>mx:status</code>, <code>mx:contentType=agent-directory</code>, <code>mx:audience=machines, humans</code>) tell MX-aware tooling that this is a live agent directory intended for both audiences, not a general-purpose page. This is the same pattern every other MX page on the site uses.</li>
