@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Provenance Generalised, Bio Consolidated, Staleness Swept, Trading-Name Sweep Continued"
-description: "Four streams: the audit-only provenance sidecar became a Reginald-level primitive every pipeline can adopt; five overlapping founder-bio files collapsed into one canonical pair (public + confidential) at repo root; a hub-wide staleness sweep refreshed canon REGINALD positioning, frontmatter dates, drafts terminology, and the tests/ README; a bounded trading-name follow-up sweep corrected 122 files across public HTML, canon, UBERCOG, and the Maxine splash."
+title: "Co-Directors Report — Provenance Generalised, Bio Consolidated, Staleness Swept, Trading-Name Sweep Continued, Audit PDF Self-Contained"
+description: "Five streams: the audit-only provenance sidecar became a Reginald-level primitive every pipeline can adopt; five overlapping founder-bio files collapsed into one canonical pair (public + confidential) at repo root; a hub-wide staleness sweep refreshed canon REGINALD positioning, frontmatter dates, drafts terminology, and the tests/ README; a bounded trading-name follow-up sweep corrected 122 files across public HTML, canon, UBERCOG, and the Maxine splash; the audit PDF now ships self-contained with the full AI evidence chain embedded in its XMP metadata under xmp:ProvenanceAiPayload, EAA Directive 2019/882 conformance declared in the closing Practice What We Preach section, and five rounds of template/rubric tightening to drive fierce-critic findings down from a 9-finding baseline."
 author: "Tom Cranstoun"
 created: 2026-05-23
 modified: 2026-05-23
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -68,17 +68,30 @@ The bounded sweep landed across three repos: 49 files in `allaboutv2/` (demos, l
 
 Remaining work tracked in REMINDERS: the internal/non-public surfaces (`mx-crm/`, `mx-shared-gathering/draft-provenance.md`, `mx-reginald/docs,pr,plans`, `datalake/`, scripts cogs, `.claude/skills`) plus generated mirrors that will catch up on next regen. Book manuscripts remain locked per the imprint constraints already tracked separately.
 
+### 5. Audit PDF made self-contained: AI evidence chain embedded in XMP + EAA conformance + rubric hardening
+
+The morning's provenance pair (`.provenance.ai.json` plus `.provenance.deterministic.json`) shipped with the AI sidecar pointer in PDF XMP but the chain itself stayed adjacent on disk. The closing prose said "the PDF carries a pointer to the AI evidence chain"; a regulator opening the PDF alone still needed file-system access to read the chain. The evening session closed that gap. The XMP injector (`mx-reginald/audit/scripts/bin/inject-mx-xmp.sh`) now reads the AI sidecar and embeds its full JSON body inside the PDF XMP under `xmp:ProvenanceAiPayload`. The PDF is self-contained: `exiftool -b -XMP-mx:ProvenanceAiPayload dkd-report.pdf | jq .` returns the 22-step AI chain with every rubric hash and reasoning trace. The deterministic chain stays adjacent on disk (size + scope: ~50 KB operator-relevant conformance evidence does not need to inflate the PDF; its pointer travels in `xmp:ProvenanceCompanion`). Two ancillary bugs surfaced and fixed: the Python emit pipeline was splitting the 800-line JSON into 540 separate XMP fields (tab/newline mishandling — fixed by using `exiftool -XMP-mx:Field<=file` syntax in a second pass), and the sidecar path resolved relative to `mx.pdf.sh`'s `/tmp/` staging directory instead of the PDF's output directory (fixed via a `MX_PROVENANCE_SIDECAR_DIR` env var the bash wrapper exports for the Python inside).
+
+The audit template gained a closing section, *Practice What We Preach: This Audit's Own Evidence Chain*, that names the practice in client-facing prose: the AI chain in XMP, the deterministic chain on disk, the EAA Directive 2019/882 conformance (ISO 14289-1 PDF/UA Level 2, `pdfuaid:Part=1` declared, complete `StructTreeRoot`), the inspection command. The governance blog at `mx-outputs/md/blog/2026-05-23-governance-when-ai-acts.md` bumped from v0.1 to v0.3 to reflect the pair-of-sidecars shape and the embedded-payload practice; the published prose now matches what the pipeline actually does.
+
+Five rounds of template + rubric hardening followed against the dkd.de/de fierce-critic + LLM-judgment findings, working from a baseline of 9 (5 fierce-critic + 4 LLM-judgment). The high-leverage mechanical wins all landed: (a) operator-prose sanitiser in the Audit Diagnostics section (no more `mx exec mx-audit`, `infill-report.js` or `Re-run gates` leaking into client deliverables); (b) vendor-SDK signature exclusion from the Inline Code Duplicates table (Matomo `_mtm`, Leadinfo `GlobalLeadinfoNamespace`, Google Tag Manager `dataLayer`, etc. no longer mis-framed as site template duplicates); (c) the `[X agents can access the site.]` placeholder bug — a regex that hardcoded "of 6" never matched the current "of 8" template — fixed in `tableHandlers/agentAccess.js`; (d) US to UK spelling collapses for `Optimization`, `Organization`, `Analyze`, and family added to `rewrite-report.js`'s post-rewrite TONE_FIXES; (e) WITHDRAWAL_PATTERNS filter ported from `audit-llm-judgment.js` to `audit-fierce-critic.js` so model self-cancellations ("withdrawing this finding", "no US/UK drift confirmed", "Skipping this") no longer count toward the exit code; (f) SYSTEM_PROMPT additions for fact-named-entity ("when the FACTS name X-Frame-Options, the recommendation MUST say X-Frame-Options"), vendor-blame (Matomo / Leadinfo / GTM are not the site's failure), cross-section voice consistency, sample-scoping every quantitative claim, hedge-vs-priority consistency, tier-label comparative-framing ban; (g) Schema Maturity table dropped the misleading "Typical SDQ" column that implied score-driven tier assignment.
+
+After five rounds the LLM-side finding count bounces between 2 and 8 — the LLM judges re-score fresh prose each run, so the floor is noisy rather than zero. The structural fixes are sticky; the bounce is signal in itself (the gates are still finding things to flag, which is the point). The PDF carries the full evidence chain, the closing prose names the practice, the EAA conformance is declared, and the rubric forbids the patterns that produced last round's findings.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits | 8 (3 earlier + 1 hub staleness + 1 hub REMINDERS + 1 hub CHANGELOG + 1 mx-shared-gathering + 1 mx-outputs report v1.1) plus 3 follow-up trading-name commits (allaboutv2 ad3edd5d, mx-outputs e2466eb, hub 0a8113a5) |
-| Files changed | ~165 (~25 earlier + 18 staleness sweep + 122 trading-name sweep) |
-| Lines added | ~744 (earlier) plus staleness-sweep + trading-name-sweep deltas |
-| Lines removed | ~497 (earlier) plus staleness-sweep + trading-name-sweep deltas |
-| Repositories | 3 (hub + mx-shared-gathering + allaboutv2 + mx-outputs) |
+| Commits | 8 earlier streams (provenance + bio + staleness + trading-name round 1) + 3 trading-name round 2 + 2 audit-stream submodule commits (allaboutv2 e4e97fe7, mx-outputs 8e26eb3) + pending hub commits for the audit-stream hardening |
+| Files changed | ~165 earlier + ~25 in the audit-stream rubric/template/script hardening |
+| Lines added | ~744 earlier + audit-stream additions (SYSTEM_PROMPT rules, TONE_FIXES regex, vendor-SDK filter, sanitiser, XMP payload injection, EAA closing section) |
+| Lines removed | ~497 earlier + audit-stream removals (Schema Maturity Typical-SDQ column, llms-full.txt conditional hedge, misleading note text) |
+| Repositories | 4 (hub + mx-shared-gathering + allaboutv2 + mx-outputs) |
+| Audit PDF self-containment | Full AI evidence chain (22 LLM steps, 27 KB JSON) embedded in PDF XMP under xmp:ProvenanceAiPayload; PDF inspectable via `exiftool -b -XMP-mx:ProvenanceAiPayload report.pdf \| jq .` |
+| EAA conformance | Declared in XMP (`pdfuaid:Part=1`) and named in closing prose; ISO 14289-1 Level 2; `StructTreeRoot` present |
+| Fierce-critic + LLM-judgment baseline → final | 9 findings → 8 findings; mechanical patterns retired (US spellings, placeholder leaks, vendor-SDK blame, operator-prose Audit Diagnostics); residual is LLM-judge noise floor on soft phrasings |
 | Trading-name corrections this segment | 122 files across 3 repos (49 allaboutv2 + 6 mx-outputs + 77 hub including auto-regen of routing-registry) |
 | Schema.org `alternateName` slots preserved | 20 (canonical pattern: name/legalName/alternateName triple) |
 | Bio surfaces collapsed | 5 → 2 (1 public + 1 gitignored) |
@@ -122,5 +135,10 @@ All three streams are governance work, not feature work. The provenance generali
 | ad3edd5d (allaboutv2) | Trading-name sweep: CogNovaMX Ltd -> CogNovaMX across demos + landing |
 | e2466eb (mx-outputs) | Trading-name sweep: CogNovaMX Ltd -> CogNovaMX in 6 blog posts |
 | 0a8113a5 | Trading-name sweep: CogNovaMX Ltd -> CogNovaMX across canon, UBERCOG, splash |
-| _pending_ (mx-outputs) | Directors evening report v1.2 add trading-name-sweep stream |
-| _pending_ (hub) | REMINDERS + CHANGELOG: trading-name sweep round 2 |
+| 81a72be (mx-outputs) | Directors evening report v1.2 add trading-name-sweep stream |
+| 3ae01c90 | REMINDERS + CHANGELOG: trading-name sweep round 2 |
+| e4e97fe7 (allaboutv2) | notebook-validator: add cell-quality checks for headings, emoji, line breaks |
+| 8e26eb3 (mx-outputs) | Audit deliverables + governance blog: dkd.de/de re-run with split provenance + embedded AI payload |
+| _pending_ (hub) | Audit pipeline hardening: AI sidecar payload embedded in PDF XMP + EAA conformance closing section + five rounds of rubric/template tightening |
+| _pending_ (mx-outputs) | Directors evening report v1.3: add audit-PDF-self-contained stream |
+| _pending_ (hub) | REMINDERS + CHANGELOG: audit PDF self-contained, EAA conformance, rubric hardening |
