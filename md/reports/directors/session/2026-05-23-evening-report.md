@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Provenance Generalised, Bio Consolidated, Staleness Swept"
-description: "Three streams: the audit-only provenance sidecar became a Reginald-level primitive every pipeline can adopt; five overlapping founder-bio files collapsed into one canonical pair (public + confidential) at repo root; a hub-wide staleness sweep refreshed canon REGINALD positioning, frontmatter dates, drafts terminology, and the tests/ README."
+title: "Co-Directors Report — Provenance Generalised, Bio Consolidated, Staleness Swept, Trading-Name Sweep Continued"
+description: "Four streams: the audit-only provenance sidecar became a Reginald-level primitive every pipeline can adopt; five overlapping founder-bio files collapsed into one canonical pair (public + confidential) at repo root; a hub-wide staleness sweep refreshed canon REGINALD positioning, frontmatter dates, drafts terminology, and the tests/ README; a bounded trading-name follow-up sweep corrected 122 files across public HTML, canon, UBERCOG, and the Maxine splash."
 author: "Tom Cranstoun"
 created: 2026-05-23
 modified: 2026-05-23
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -60,17 +60,27 @@ The hub-side `mx-canon/README.md`, `mx-canon/SOUL.md`, `scripts/SOUL.md` got dat
 
 Two items surfaced but deferred to Tom's judgement, then resolved mid-session: the REGINALD-positioning rewrite was confirmed before edits landed, and the legal-entity wording was confirmed (CogNovaMX is still a trading name, not a Ltd) before propagating across files.
 
+### 4. Trading-name follow-up sweep — bounded pass across public HTML, canon, UBERCOG, splash
+
+The first staleness sweep flagged in REMINDERS that many "CogNovaMX Ltd" occurrences across the repo still needed the same correction. A second pass this evening tackled the bounded subset agreed mid-session: public-facing HTML on `allaboutv2/` and `mx-outputs/mx-site/blog/`, plus the canonical site (`mx-outputs/mx-site/about/` already on the canonical pattern), plus all of `mx-canon/`, plus `UBERCOG.cog.md` and `mx-maxine-app/src/splash.html`. Out of scope: `mx-crm/`, `mx-shared-gathering/draft-provenance.md`, `mx-reginald/docs,pr,plans,publishers.json,audit/templates`, `scripts/cogs,qr-code-generator`, `datalake/{pipeline,knowledge,assets,registries}`, `.claude/skills`, generated mirror files (`mx-outputs/reginald/cogs/`, `mx-outputs/html/books/`, `mx-outputs/.well-known/`), and book manuscripts (Handbook ISBN-locked, Protocols pending imprint decision).
+
+The bounded sweep landed across three repos: 49 files in `allaboutv2/` (demos, landing, cogs, .well-known), 6 files in `mx-outputs/mx-site/blog/`, and 70+ files in the hub (mostly `mx-canon/`, plus `UBERCOG.cog.md`, `mx-maxine-app/src/splash.html`, and the auto-regenerated `mx-canon/mx-maxine-lives/routing-registry.json` triggered by the canon edits). Substitution patterns: Schema.org JSON-LD `"name"` becomes `"CogNovaMX"`, `"legalName"` becomes `"Digital Domain Technologies Ltd"` (rare but critical fix at `allaboutv2/index.html:50`), `"alternateName": "CogNovaMX Ltd"` preserved as the canonical historical-name slot (all 20 occurrences left intact); YAML `author:` and HTML `<meta name="author">` corrected to "CogNovaMX"; footer copyrights restructured to the canonical "2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved." form; body prose `CogNovaMX Ltd` swept to `CogNovaMX`. The `allaboutv2/index.html` Organization block also gained the missing `alternateName` line to complete the canonical three-field pattern that `mx-outputs/mx-site/about/about.html` lines 51-53 already carry.
+
+Remaining work tracked in REMINDERS: the internal/non-public surfaces (`mx-crm/`, `mx-shared-gathering/draft-provenance.md`, `mx-reginald/docs,pr,plans`, `datalake/`, scripts cogs, `.claude/skills`) plus generated mirrors that will catch up on next regen. Book manuscripts remain locked per the imprint constraints already tracked separately.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits | 5 (3 earlier + 1 hub + 1 mx-shared-gathering this session) |
-| Files changed | ~43 (~25 earlier + 18 this session) |
-| Lines added | ~744 (earlier) plus staleness-sweep deltas |
-| Lines removed | ~497 (earlier) plus staleness-sweep deltas |
-| Repositories | 2 (hub + mx-shared-gathering) |
+| Commits | 8 (3 earlier + 1 hub staleness + 1 hub REMINDERS + 1 hub CHANGELOG + 1 mx-shared-gathering + 1 mx-outputs report v1.1) plus 3 follow-up trading-name commits (allaboutv2 ad3edd5d, mx-outputs e2466eb, hub 0a8113a5) |
+| Files changed | ~165 (~25 earlier + 18 staleness sweep + 122 trading-name sweep) |
+| Lines added | ~744 (earlier) plus staleness-sweep + trading-name-sweep deltas |
+| Lines removed | ~497 (earlier) plus staleness-sweep + trading-name-sweep deltas |
+| Repositories | 3 (hub + mx-shared-gathering + allaboutv2 + mx-outputs) |
+| Trading-name corrections this segment | 122 files across 3 repos (49 allaboutv2 + 6 mx-outputs + 77 hub including auto-regen of routing-registry) |
+| Schema.org `alternateName` slots preserved | 20 (canonical pattern: name/legalName/alternateName triple) |
 | Bio surfaces collapsed | 5 → 2 (1 public + 1 gitignored) |
 | Files deleted | 6 (4 bios + 2 folder-metadata stubs) |
 | New canonical files at root | 2 (ABOUT-TOM.md, ABOUT-TOM-CONFIDENTIAL.md) |
@@ -105,4 +115,12 @@ All three streams are governance work, not feature work. The provenance generali
 | 8f6b15c3 | CHANGELOG: 2026-05-23 evening entry for founder bio consolidation |
 | a6ae95e5 | UBERCOG: surface ABOUT-TOM.md in boot chain + bump mx-outputs README regen |
 | 63f75d0 (mx-shared-gathering) | Drafts: bump frontmatter dates and scrub .cog.md terminology leaks |
-| _pending_ (hub) | Staleness sweep: REGINALD positioning, CogNovaMX trading-name corrections, tests/README rewrite, mx-shared-gathering pointer bump |
+| 4bcdc1b (mx-outputs) | Directors evening report v1.1 add staleness-sweep stream |
+| 41a4adbb | Staleness sweep: REGINALD positioning, CogNovaMX trading-name, drafts terminology, tests README |
+| 60787901 | REMINDERS: 2026-05-23 evening staleness sweep |
+| 7c62c0c3 | CHANGELOG: 2026-05-23 evening staleness sweep entry |
+| ad3edd5d (allaboutv2) | Trading-name sweep: CogNovaMX Ltd -> CogNovaMX across demos + landing |
+| e2466eb (mx-outputs) | Trading-name sweep: CogNovaMX Ltd -> CogNovaMX in 6 blog posts |
+| 0a8113a5 | Trading-name sweep: CogNovaMX Ltd -> CogNovaMX across canon, UBERCOG, splash |
+| _pending_ (mx-outputs) | Directors evening report v1.2 add trading-name-sweep stream |
+| _pending_ (hub) | REMINDERS + CHANGELOG: trading-name sweep round 2 |
