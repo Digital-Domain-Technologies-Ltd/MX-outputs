@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Provenance Generalised, Bio Consolidated, Staleness Swept, Trading-Name Sweep Continued, Audit PDF Self-Contained"
-description: "Five streams: the audit-only provenance sidecar became a Reginald-level primitive every pipeline can adopt; five overlapping founder-bio files collapsed into one canonical pair (public + confidential) at repo root; a hub-wide staleness sweep refreshed canon REGINALD positioning, frontmatter dates, drafts terminology, and the tests/ README; a bounded trading-name follow-up sweep corrected 122 files across public HTML, canon, UBERCOG, and the Maxine splash; the audit PDF now ships self-contained with the full AI evidence chain embedded in its XMP metadata under xmp:ProvenanceAiPayload, EAA Directive 2019/882 conformance declared in the closing Practice What We Preach section, and five rounds of template/rubric tightening to drive fierce-critic findings down from a 9-finding baseline."
+title: "Co-Directors Report — Provenance Generalised, Bio Consolidated, Staleness Swept, Trading-Name Sweep Continued, Audit PDF Self-Contained, Audit Driver Automated"
+description: "Six streams: the audit-only provenance sidecar became a Reginald-level primitive every pipeline can adopt; five overlapping founder-bio files collapsed into one canonical pair (public + confidential) at repo root; a hub-wide staleness sweep refreshed canon REGINALD positioning, frontmatter dates, drafts terminology, and the tests/ README; a bounded trading-name follow-up sweep corrected 122 files across public HTML, canon, UBERCOG, and the Maxine splash; the audit PDF now ships self-contained with the full AI evidence chain embedded in its XMP metadata under xmp:ProvenanceAiPayload; and the manual Option B (four copy-paste skill commands between Phase 1 and Phase 3) became a single npm command, npm run audit:full, that drives the four LLM skills as sub-agents (three via thin SDK calls, audit-report via headless claude -p) with provenance logged at each step, plus a sibling npm run audit:provenance helper that wraps the correct exiftool -b extraction so the next operator does not trip the column-11 jq error."
 author: "Tom Cranstoun"
 created: 2026-05-23
 modified: 2026-05-23
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -78,6 +78,14 @@ Five rounds of template + rubric hardening followed against the dkd.de/de fierce
 
 After five rounds the LLM-side finding count bounces between 2 and 8 — the LLM judges re-score fresh prose each run, so the floor is noisy rather than zero. The structural fixes are sticky; the bounce is signal in itself (the gates are still finding things to flag, which is the point). The PDF carries the full evidence chain, the closing prose names the practice, the EAA conformance is declared, and the rubric forbids the patterns that produced last round's findings.
 
+### 6. Audit driver automated: npm run audit:full + audit:provenance helper
+
+The higher-quality LLM-driven Phase 2 (Option B in the audit cog) had been the only non-scripted surface in the workflow: an operator ran `mx exec mx-audit ... --phase1-only`, then copy-pasted `/audit-scores`, `/audit-discovery`, `/audit-access`, `/audit-report` into a Claude Code session by hand, then ran `mx exec mx-audit --gates ...` to finish. This session closed that gap. A new pipeline mode, `--full-llm`, dispatches into `scripts/audit-llm-phase2.js` between Phase 1 and Phase 3, which drives the four skills as sub-agents and chains straight into the gates. The three "mechanical" skills (audit-scores, audit-discovery, audit-access) run as thin single-shot Anthropic SDK calls: skill body as system prompt, Phase 1 outputs aggregated into the user message, structured output via a `submit_skill_output` tool. The fourth, audit-report, is delegated to a headless `claude -p` session because its narrative work depends on the full skill-orchestration code path (template selection, two-pass placeholder fill, readability review, LLM confirmation pass). Each step records to the future report's `.provenance.ai.json` sidecar via the Reginald primitive, so the same evidence chain the morning's stream embedded in the PDF now extends to the automated invocations. Exposed as `npm run audit:full -- <url> [--pages N]`. Bails fast on first failure with a `--resume-from` resume command printed to stderr.
+
+The hybrid SDK + claude-p shape was a deliberate trade-off. A pure-headless implementation (all four via `claude -p`) keeps zero forked logic but adds wall-clock latency: each headless Claude Code session spins up cold. A pure-SDK implementation forks the four skill bodies into hand-written tool-use loops that drift the moment a skill changes. The hybrid uses the SDK where the contract is small enough to express as a single tool call (scores + discovery + access produce structured findings) and keeps the canonical code path for the prose-heavy report.
+
+The session also surfaced a separate operator-ergonomics gap: the documented extraction command in CLAUDE.md and the audit template for pulling the AI chain out of a generated PDF was correct but easy to mistype. The `-b` flag (raw binary output) is mandatory because without it `exiftool` prepends a labelled header that `jq` chokes on at column 11. A new wrapper at `scripts/bin/mx.audit.provenance.sh` makes the flag impossible to forget, exposed as `npm run audit:provenance -- <pdf> '<jq-filter>'`. The flag rule was added to three surfaces: CLAUDE.md provenance bullet, the provenance-sidecar skill's inspect section, and the audit cog's new "Inspect a generated PDF's AI evidence chain" subsection. The web-audit-suite template's closing *Practice What We Preach* section was corrected in lockstep so the auto-regenerated `golden-skeleton.md` fixture picks up the right command for every future report.
+
 ---
 
 ## By the Numbers
@@ -115,6 +123,7 @@ All three streams are governance work, not feature work. The provenance generali
 - Audit whether any other artefact-producing pipeline beyond the audit suite should adopt the provenance sidecar convention now that the primitive sits at the Reginald level.
 - Sweep other public-facing surfaces (sponsor decks, investor one-pager, contracts, sponsor-pitch doc) for "CogNovaMX Ltd" wording and apply the same trading-name correction.
 - Consider whether a recurring staleness sweep (monthly or per-quarter) is worth automating, or whether the existing `tests/test-indexes-fresh.js` and frontmatter-validator gates plus the new pre-commit-provenance hook are sufficient coverage.
+- End-to-end smoke-test `npm run audit:full -- https://www.dkd.de/de/ --pages 5` once with `ANTHROPIC_API_KEY` set and the `claude` CLI on `PATH`; confirm the four `claude-code:audit-*` / SDK steps land in the report's `.provenance.ai.json` alongside the existing rewrite + critic + judgment steps. The hybrid driver was syntax-verified and dispatcher-tested this session but the wall-clock LLM run was not executed (10+ minute runtime, API credit cost).
 
 ---
 
@@ -139,6 +148,10 @@ All three streams are governance work, not feature work. The provenance generali
 | 3ae01c90 | REMINDERS + CHANGELOG: trading-name sweep round 2 |
 | e4e97fe7 (allaboutv2) | notebook-validator: add cell-quality checks for headings, emoji, line breaks |
 | 8e26eb3 (mx-outputs) | Audit deliverables + governance blog: dkd.de/de re-run with split provenance + embedded AI payload |
-| _pending_ (hub) | Audit pipeline hardening: AI sidecar payload embedded in PDF XMP + EAA conformance closing section + five rounds of rubric/template tightening |
-| _pending_ (mx-outputs) | Directors evening report v1.3: add audit-PDF-self-contained stream |
-| _pending_ (hub) | REMINDERS + CHANGELOG: audit PDF self-contained, EAA conformance, rubric hardening |
+| a28f1b5f | Audit pipeline: AI provenance payload embedded in PDF XMP + EAA conformance + rubric/template hardening (5 rounds) |
+| b1552748 | Docs + REMINDERS: 2026-05-23 evening round 2 (audit PDF self-contained + EAA + rubric hardening) |
+| 6bddb91d (mx-outputs) | Directors evening report v1.3: audit-PDF-self-contained stream |
+| c796af56 | LEARNINGS: three rules from the 2026-05-23 evening round 2 (tab/newline pipeline + staging-path resolution + backticks in template literals) |
+| ec6561d0 (mx-outputs) | README index regen for dkd.de/de round-2 audit + governance blog v0.3 |
+| _pending_ (hub) | npm run audit:full hybrid driver (SDK + claude -p) + npm run audit:provenance helper + em-dash sweep on new prose + template fix propagated to golden fixture |
+| _pending_ (mx-outputs) | Directors evening report v1.4: add audit-driver-automated stream |
