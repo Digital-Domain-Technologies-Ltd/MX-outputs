@@ -1,0 +1,47 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-24/typo3.com/typo3-report.md",
+  "timestamp": "2026-05-24T07:02:43.445Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 18892,
+    "output_tokens": 689,
+    "cache_creation_input_tokens": 2372,
+    "cache_read_input_tokens": 0
+  },
+  "findingCount": 5,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "tone-inconsistency",
+      "message": "The 'About This Report' section opens in first-person plural ('We audited', 'We fetch', 'We then review') but the 'Structured Data Inventory' section switches to third-person ('No Schema.org JSON-LD entities were detected across the audited set. Adding at least one typed entity per page … is the highest-impact improvement') before reverting to first-person in the very next sentence ('Across the 7 pages we audited'), creating a mid-section voice switch.",
+      "context": "No Schema.org JSON-LD entities were detected across the audited set. Adding at least one typed entity per page … Across the 7 pages we audited",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The 'Structured Data Inventory' section states 'a wider audit identifies the same gaps across the rest of the estate' as though the sample finding can be projected to the full site, which overreaches the 7-page sample evidence.",
+      "context": "a wider audit identifies the same gaps across the rest of the estate",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The 'Marker Reachability' section closes with 'a wider audit confirms whether the same pattern holds across the rest of the estate', presenting a sample-only observation about all detected markers being present as if it characterises the whole site.",
+      "context": "a wider audit confirms whether the same pattern holds across the rest of the estate",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "Finding 7 in the At-a-Glance table states the div-soup pattern 'is likely to recur across other landing surfaces' based solely on the homepage, but Priority 7's narrative body asserts it as a known fact — 'because most pages share the template, the pattern is likely to recur' — without the qualifier used in the table, creating an inconsistency in confidence level for the same claim between the two sections.",
+      "context": "The figures cited here come from the homepage specifically; because most pages share the template, the pattern is likely to recur",
+      "severity": "block"
+    },
+    {
+      "category": "tone-inconsistency",
+      "message": "The 'Cross-Page Consistency' table section is written in third-person passive ('We recorded', absent), but the immediately following 'Content Consistency' narrative reverts to unexplained third-person audit-tool language ('Audit scope: 1 unique page') inconsistent with the first-person plural voice used throughout every other narrative section of the report.",
+      "context": "Audit scope: 1 unique page",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}
