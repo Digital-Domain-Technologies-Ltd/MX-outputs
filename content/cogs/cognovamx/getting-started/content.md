@@ -372,9 +372,7 @@ For team members wanting deeper understanding of the architecture.
 
 **What COGs Are:**
 
-- **COG = dual-layer verified document** — universal format, not just for REGINALD
-- **Certificate of Genuineness** — trust layer: who published, when, signed, compliance level
-- **Contract of Governance** — accountability layer: who maintains, review cycle, triggers, SLA
+- **COG = Community Owned Governance Standard** — universal trust wrapper around a cog, carrying attestation (who published, when, whether signed, compliance level) and stewardship (who maintains, review cycle, triggers, SLA) in one record. Not just for REGINALD.
 - **Format**: Markdown file (`.cog.md`) with YAML frontmatter + human-readable narrative body
 - **Maxine uses COGs to work** — COGs are how AI agents avoid guessing at every level
 - **REGINALD is the hosted COG** — one deployment of the universal format

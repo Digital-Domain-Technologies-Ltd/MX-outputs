@@ -39,7 +39,7 @@ Investigation confirmed the mapping is structurally precise across fourteen poin
 | Signal system | `invokes` / IPC |
 | Route manifest | SOUL.md |
 | Network map | Builds-on graph |
-| Ticket inspector | COG (Certificate of Genuineness) |
+| Ticket inspector | COG (Community Owned Governance Standard) |
 | Railway company | Cog-Nova-MX |
 | Cog railway | Traction on difficult terrain |
 

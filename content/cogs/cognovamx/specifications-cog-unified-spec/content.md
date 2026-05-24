@@ -1044,8 +1044,8 @@ An action-doc is a machine-executable SOP. The same document that a human reads 
 | Quality control | `invokes` chains and `checks` extensions — built-in validation |
 | Safety protocols | `access` object and guardrail pattern — controlled execution |
 | Version control | `version` field and lifecycle — draft through re-attested |
-| Accountability | Contract of Governance — named maintainer, review cycle, correction SLA |
-| Audit trail | Certificate of Genuineness — attested, timestamped, provenance established |
+| Accountability | COG stewardship metadata — named maintainer, review cycle, correction SLA |
+| Audit trail | COG attestation — attested, timestamped, provenance established |
 
 The difference between a traditional SOP and an action-doc is the difference between a recipe printed on paper and a recipe that cooks the meal. A traditional SOP lives in a binder, a wiki, or a PDF. Someone reads it. Someone follows it. Someone might skip a step. An action-doc lives in the system. The AI agent reads it and executes every step, every time. No steps skipped. No corners cut.
 
@@ -1055,7 +1055,7 @@ The `runtime: runbook` field is what makes this work. It tells the system: this 
 
 ---
 
-## 9. Governance Layer — Certificate of Genuineness
+## 9. Governance Layer — COG Attestation
 
 The governance layer wraps a cog with trust. It proves the document is genuine: who published it, when, and that it conforms to MX standards.
 
@@ -1243,7 +1243,7 @@ The universal lifecycle applies to all cogs. Specific types add or modify behavi
 
 **Routing cogs** are infrastructure. They should be `permanent` cacheability and rarely change state. A routing cog in `review` means agents may be navigating to the wrong places — this is urgent.
 
-**Certificate cogs** (Certificate of Genuineness) have the richest lifecycle because they carry cryptographic attestations. Every state transition requires re-attestation. The certificate lifecycle in Section 13.2 applies on top of the base lifecycle.
+**Attestation cogs** have the richest lifecycle because they carry cryptographic attestations. Every state transition requires re-attestation. The attestation lifecycle in Section 13.2 applies on top of the base lifecycle.
 
 ---
 
@@ -1432,7 +1432,7 @@ usage:
 - **Cog** is the atomic unit of MX (universal, works at all visibility levels)
 - **Action-doc** is a cog with an action block (it turns, it produces output)
 - **Info-doc** is a cog without an action block (it documents, describes, certifies)
-- **COG** (Certificate of Genuineness / Contract of Governance) is the trust wrapper around a cog
+- **COG** (Community Owned Governance Standard) is the trust wrapper around a cog
 - **REGINALD** is the public registry for hosted COGs (the library)
 - **Signing Engine** validates and signs COGs (the librarian's stamp)
 - **MX** is the discipline that defines what makes a cog well-structured (the cataloguing standard)
@@ -1454,7 +1454,7 @@ MX OS is the MX Operating System — the principle that MX documentation IS the 
 | **File format** | `.cog.md` — YAML frontmatter + markdown, universal across all cog types |
 | **System API** | The Gathering specification — defines how programs are structured |
 | **Package registry** | REGINALD — where published programs are hosted and discovered |
-| **Code attestation** | COG (Certificate of Genuineness) — trust layer proving a program is genuine |
+| **Code attestation** | COG (Community Owned Governance Standard) — trust layer proving a program is genuine |
 | **Permission levels** | Compliance levels 1–5 — from local unattested to independently audited |
 | **Network scope** | Visibility levels — local, private, shared, hosted |
 | **Filesystem metadata** | `.mx.yaml.md` files — folder-level context and inheritance |

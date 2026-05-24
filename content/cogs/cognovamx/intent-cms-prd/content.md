@@ -143,7 +143,7 @@ Core principles:
 | Shebang line (`#!/bin/bash`) | The `runtime:` field |
 | System API | The Gathering specification |
 | Package registry (npm) | REGINALD |
-| Code signing | COG (Certificate of Genuineness) |
+| Code signing | COG (Community Owned Governance Standard) |
 | Permission levels | Compliance levels 1–5 |
 | Filesystem metadata | `.mx.yaml.md` files |
 | User profile | `SOUL.md` |
@@ -182,7 +182,7 @@ Cogs reference other cogs via `builds-on` — "read these first for context." Fo
 
 ### Layer 4: Trust — The COG Verification Layer
 
-COG = Certificate of Genuineness + Contract of Governance. Compliance levels 1 (local/unsigned) through 5 (independently audited). Visibility levels: Local → Private → Shared → Hosted. REGINALD is the public host for levels 3–5. Not the COG system itself.
+COG = Community Owned Governance Standard. The trust wrapper around a cog, carrying attestation (who signed it, when) and stewardship metadata (who keeps it accurate). Compliance levels 1 (local/unsigned) through 5 (independently audited). Visibility levels: Local → Private → Shared → Hosted. REGINALD is the public host for levels 3–5. Not the COG system itself.
 
 ### Layer 5: The Gathering Standard
 

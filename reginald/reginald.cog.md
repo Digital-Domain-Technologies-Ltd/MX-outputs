@@ -69,20 +69,20 @@ REGINALD is a pure resolver, not a host. It resolves identifiers to URLs — it 
 
 ## What Is a COG?
 
-A COG is any document that carries MX metadata — a Certificate of Genuineness and Contract of Governance. An HTML page with Schema.org JSON-LD and `<meta name="mx:*">` tags is a COG. A markdown file with YAML frontmatter is a COG. A JavaScript file with `@mx:*` JSDoc tags is a COG. The `.cog.md` extension is the human-readable naming convention for the markdown carrier format.
+A COG (Community Owned Governance Standard) is any document that carries MX metadata. An HTML page with Schema.org JSON-LD and `<meta name="mx:*">` tags is a COG. A markdown file with YAML frontmatter is a COG. A JavaScript file with `@mx:*` JSDoc tags is a COG. The `.cog.md` extension is the human-readable naming convention for the markdown carrier format.
 
 ### Carrier Formats
 
 Every file type carries MX metadata in its own native format. HTML pages use Schema.org JSON-LD (`<script type="application/ld+json">`) for structured data and `<meta name="mx:*">` tags for governance metadata. Markdown files use YAML frontmatter. JavaScript and CSS files carry metadata in JSDoc and block comments with `@mx:*` tags. Shell scripts use YAML blocks with `#` prefixes. The same trust and governance information travels in whichever format suits the content.
 
-### The Dual Meaning
+### The Two Strands
 
-| Layer | Full Name | What It Proves |
-|-------|-----------|----------------|
-| **Certificate** | Certificate of Genuineness | "This document is real" |
-| **Contract** | Contract of Governance | "Someone keeps this accurate" |
+| Strand | What It Carries | What It Proves |
+|--------|-----------------|----------------|
+| **Attestation** | Publisher signature, timestamp, MX compliance level | "This document is real" |
+| **Stewardship metadata** | Named maintainer, review cycle, correction SLA, expiry date | "Someone keeps this accurate" |
 
-Every COG carries both layers. The Certificate tells an AI agent whether to trust the content. The Contract tells it who is responsible for keeping the content current — with a named maintainer, a review cycle, and an expiry date.
+Every COG carries both strands. The attestation tells an AI agent whether to trust the content. The stewardship metadata tells it who is responsible for keeping the content current.
 
 ### Two Types
 

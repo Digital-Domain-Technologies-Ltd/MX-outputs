@@ -54,7 +54,7 @@ Every concept in MX maps to something on a railway. This is not a loose comparis
 | **Signal system** | `invokes` / IPC | One action-doc calling another. Coordinating movements across the network. |
 | **Route manifest** | SOUL.md | What this section of track is for. What the train is carrying. Where it is headed. |
 | **The network map** | Builds-on graph | Individual journeys are linear. The network is a graph. Every station connects to other stations. |
-| **Ticket inspector** | COG (Certificate of Genuineness) | Trust verification. Is this carriage genuine? Is it authorised to be on this line? |
+| **Ticket inspector** | COG (Community Owned Governance Standard) | Trust verification. Is this carriage genuine? Is it authorised to be on this line? |
 | **Railway company** | CogNovaMX | Built the first railway on the standard gauge. Others can build theirs. |
 
 ---

@@ -139,7 +139,7 @@ You are reading a cog. A cog is any file that carries structured MX metadata via
 
 - **Cog** — The atomic unit of MX. Any file carrying structured MX metadata via its native carrier format. The most common form is a `.cog.md` file with YAML frontmatter.
 - **Action-doc** — A cog with an `execute` block and a `runtime:` field. It has actions. It turns.
-- **COG** — Certificate of Genuineness / Contract of Governance. The trust wrapper around a cog. Not for public launch yet.
+- **COG** — Community Owned Governance Standard. The trust wrapper around a cog. Not for public launch yet.
 - **REGINALD** — Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation. The public registry.
 
 Every action-doc is a cog. Not every cog is an action-doc. The distinction is in the frontmatter — if it has an `execute` block, it turns.

@@ -80,7 +80,7 @@ Every concept in MX OS maps to something developers already know:
 | **File format** | Any file with MX metadata in its native carrier format (`.cog.md`, HTML meta tags, JSDoc, etc.) |
 | **System API / ABI** | The Gathering specification — defines how programs are structured |
 | **Package registry** (npm, apt) | REGINALD — where published programs are hosted and discovered |
-| **Code signing** | COG (Certificate of Genuineness) — trust layer proving a program is genuine |
+| **Code signing** | COG (Community Owned Governance Standard) — trust layer proving a program is genuine |
 | **Permission levels** | Compliance levels 1–5 — from local unsigned to independently audited |
 | **Network scope** | Visibility levels — local, private, shared, hosted |
 | **Filesystem metadata** | `.mx.yaml.md` files — folder-level context and inheritance |
@@ -117,7 +117,7 @@ Root cogs (those with no `builds-on`) are entry points. This cog has two parents
 
 ### 4. Trust — The Verification Layer
 
-COG (Certificate of Genuineness / Contract of Governance) wraps cogs in trust. Compliance levels range from 1 (basic local) to 5 (independently audited). Visibility levels range from local to hosted.
+COG (Community Owned Governance Standard) wraps cogs in trust. Compliance levels range from 1 (basic local) to 5 (independently audited). Visibility levels range from local to hosted.
 
 The trust layer is how MX OS ensures that a cog found in the wild is genuine, current, and from a verified source. Not for public launch yet — but the architecture is in place.
 

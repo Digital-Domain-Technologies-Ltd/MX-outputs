@@ -29,7 +29,7 @@ Comprehensive terminology migration across the entire MX ecosystem to eliminate 
 
 ### 1. Terminology Design (Interview-Driven)
 
-Conducted structured interview to resolve ambiguity across five dimensions: crypto layer scope, provenance scope, maintained field shape, compliance level naming, and HTML field conventions. Key decisions: rename everything including crypto operations, use flat camelCase prefixed fields (provenanceAuthor, maintainedDate, etc.), keep Certificate of Genuineness name unchanged, Level 3 becomes "Attested."
+Conducted structured interview to resolve ambiguity across five dimensions: crypto layer scope, provenance scope, maintained field shape, compliance level naming, and HTML field conventions. Key decisions: rename everything including crypto operations, use flat camelCase prefixed fields (provenanceAuthor, maintainedDate, etc.), keep the trust-wrapper concept under the COG name (the term that later resolved to Community Owned Governance Standard), Level 3 becomes "Attested."
 
 ### 2. SSOT and Canon Updates
 
@@ -76,7 +76,7 @@ Updated reginald-grant.md (revenue model language), reginald-explainer.md, and C
 
 - **"Attest" not "witness"** — chosen as the crypto verb because it means "to declare/confirm" without legal binding connotation
 - **camelCase for all new fields** — consistent with HTML/JSON-LD conventions (maintainedDate, not maintained-date)
-- **Certificate of Genuineness name kept** — despite "certificate" having some legal connotation, it is the established brand
+- **COG trust-wrapper name kept** — the COG abbreviation stays as the trust-wrapper marker (later resolved to Community Owned Governance Standard); the prior expansion was retired
 - **Backward compatibility** — CLI accepts old commands (sign, verify, sign-all); publisher-verify checks both attestation and signature fields
 - **Level 5 general "verification" kept** — in regulatory audit context, "verification" is the correct English term for third-party checks
 

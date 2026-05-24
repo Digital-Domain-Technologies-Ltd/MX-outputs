@@ -208,12 +208,12 @@ The canonical specification for cog metadata, governed by The Gathering. Defines
 
 ## Layer 8 — Trust
 
-### COG (Certificate of Genuineness / Contract of Governance)
+### COG (Community Owned Governance Standard)
 
-The trust wrapper for cogs. Two meanings, one acronym:
+The trust wrapper for cogs. Two strands in one record:
 
-- **Certificate of Genuineness** — this cog is what it says it is. Verified. Authentic.
-- **Contract of Governance** — these are the rules for using this cog. Permissions. Constraints. Liability.
+- **Attestation** — this cog is what it says it is. Signed. Authentic.
+- **Stewardship metadata** — these are the rules for using this cog. Permissions. Constraints. Liability.
 
 ### Compliance Levels
 
