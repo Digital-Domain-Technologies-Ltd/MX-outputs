@@ -1,0 +1,59 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/www.paribu.com/www-paribu-com-report.md",
+  "timestamp": "2026-05-25T14:18:36.038Z",
+  "model": "claude-sonnet-4-6",
+  "runCount": 1,
+  "findingCount": 6,
+  "regexFindingCount": 0,
+  "llmFindingCount": 6,
+  "findings": [
+    {
+      "category": "subtle-failure-framing",
+      "message": "The phrase 'machines may struggle to isolate the substantive content from surrounding markup noise' uses the subtle failure framing verb 'struggle to', which implies a condemning baseline rather than stating the finding neutrally.",
+      "context": "Pipeline Survivability section, final paragraph: 'When inline tag volume is high, machines may struggle to isolate the substantive content from surrounding markup noise, reducing the reliability of any answer or citation drawn from those pages.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The 'Next Steps' recommended action item 2 ('Review Priority 2-3 findings: Semantic Structure improvements and metadata tuning that compound over time') names only domains ('Semantic Structure', 'metadata') without referencing the specific findings, scores, or mechanisms already detailed in the report. It could be copy-pasted unchanged into any web audit report.",
+      "context": "Next Steps > Recommended Actions: '2. **Review Priority 2-3 findings**: Semantic Structure improvements and metadata tuning that compound over time'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The recommended action item 3 ('Consider optional enhancements: optional patterns that give a early-mover opportunity in AI search') names no specific element, page type, or mechanism. It is pure domain framing with no data anchor and could apply to any site.",
+      "context": "Next Steps > Recommended Actions: '3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "The phrase 'ahead of nearly every peer site we audit' or equivalent compound superlative is not present. However, the Body Content Ratio check reports 'Actual prose content averages 21% of served bytes - well above the 30% threshold' when 21% is actually BELOW the 30% threshold, not above it. This is a factual inversion that reads as exaggeration in the client's favour (implying the check passed because performance was strong, when in fact 21% < 30%).",
+      "context": "Agent Reading Pipeline table, Body Content Ratio row: 'Status: Pass | Actual prose content averages 21% of served bytes - well above the 30% threshold.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The Cross-Host Redirect resilience check reports 'Fail' with '0 page(s) redirect to a different host' and '0 page(s) cross origin during redirect', yet the Status column shows 'Fail' and the Pages column shows '2/6'. A fail verdict with zero cross-host redirects detected is internally contradictory and the '2/6' figure cannot be derived from the stated audit data. The narrative data appears fabricated or misassigned.",
+      "context": "Agent Reading Pipeline table, Cross-Host Redirect row: 'Fail | 2/6 | 0 page(s) redirect to a different host. Agents that enforce same-origin policy may not follow these chains. | 0 page(s) cross origin during redirect. See www-paribu-com-pipeline-cross-host-redirect-pages.csv (2 pages).'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The Finding for Priority 6 states in the at-a-glance table that 'llms.txt, llms-full.txt, agent-card.json, ai.txt, humans.txt absent', but the Discovery Files section states 'We find llms.txt present on www.paribu.com with a site description in place'. The at-a-glance table contradicts the later factual section by asserting llms.txt is absent when the audit data says it is present.",
+      "context": "At-a-Glance table row 6: 'Discovery Readiness 33/100, llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt absent' vs Discovery Files section: 'We find llms.txt present on www.paribu.com with a site description in place...'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    }
+  ]
+}
