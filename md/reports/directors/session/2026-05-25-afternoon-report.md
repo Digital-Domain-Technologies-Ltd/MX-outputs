@@ -112,7 +112,15 @@ Saved [feedback_gathering_no_payments.md](/Users/tomcranstoun/.claude/projects/-
 
 | Hash | Description |
 |------|-------------|
-| d3b872e (mx-outputs) | Add www.paribu.com audit (2026-05-25) |
+| 20c1569a (hub) | Audit tone gate: stop "limited ... instead of" tripping tier-comparative-framing |
+| a3c948ab (hub) | Changelog: 2026-05-25 afternoon entry for paribu.com audit + tone-gate fix |
+| a2943f63 (hub) | Learnings: mx-audit --report fails under nounset, bypass via pipeline.js |
+| c50eb891 (hub) | Bump mx-outputs: regenerate README index after audit add |
+| 38da17a8 (hub) | Promote four blog drafts to published; bump mx-outputs |
+| 5c94334f (hub) | HTTP 402 settlement and pilot decisions: design note v0.5, brief, manuscripts, commercial docs |
+| 43169a07 (hub) | Changelog: 2026-05-25 afternoon second-half entry |
+| d3b872e5 (mx-outputs) | Add www.paribu.com audit (2026-05-25) |
+| 2a6b23e (mx-outputs) | Add 2026-05-25 afternoon directors report |
+| 1ba88665 (mx-outputs) | Regenerate index after paribu.com audit add |
 | c71dc63 (mx-outputs) | Publish four blog posts and add files-away-from-source assets |
-| _pending_ (hub) | HTTP 402 decisions: design note v0.5 + pilot brief + commercial docs + manuscript propagation + REMINDERS hygiene |
-| _pending_ (hub) | Submodule pointer bump for mx-outputs blog publication |
+| 523aa71 (mx-outputs) | Afternoon report v1.1 + relocate files-away-from-source assets |
