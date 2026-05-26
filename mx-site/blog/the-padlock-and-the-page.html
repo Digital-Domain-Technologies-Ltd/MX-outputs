@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "The Padlock Attests the Pipe, Not the Page"
+description: "The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side."
+author: Tom Cranstoun
+created: 2026-05-26
+modified: 2026-05-26
+version: "1.0"
+mx:
+  x-mx-contentState: published
+  blogFilename: the-padlock-and-the-page
+  blogUrl: https://mx.allabout.network/blog/the-padlock-and-the-page.html
+  generate:
+    script: scripts/generate-content-html.cjs
+  status: published
+  contentType: blog
+  audience:
+  - humans
+  - machines
+  tags:
+  - provenance
+  - mx-foundations
+  - practitioner
+  x-mx-category: MX blog series
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/pipeline/drafts/the-padlock-and-the-page.md
+refersTo:
+- provenance-you-can-see.md
+- pope-leo-ai-encyclical-and-mx.md
+refersToExternal:
+- https://www.rfc-editor.org/rfc/rfc9421
+- https://www.w3.org/TR/did-core/
+- https://www.rfc-editor.org/rfc/rfc6962
+x-mx-ai:
+  summary: 'The TLS padlock attests the connection between a device and a server, not the truth of the page that arrives. That distinction has shaped twenty years of web trust by inference, and the inference-based approach does not survive contact with machine readers. This post unifies the discovery problem (a machine cannot use a document it cannot find) and the trust problem (a machine cannot rely on a document whose origin it cannot check) as two faces of the same gap, and shows how reader-side verification closes both at once. Walks through what a publisher does to make their content verifiable, what a registry contributes (and explicitly does not contribute), what a reader or agent does to verify, and the honest limits of the approach.'
+  key_concepts:
+  - padlock attests the pipe not the page
+  - trust by inference does not survive machines
+  - discovery problem and trust problem are the same shape
+  - reader-side verification
+  - the registry indexes and attests, does not arbitrate
+  - signed claims with resolvable identity
+  - what the publisher does
+  - honest limits of provenance
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side.">
+  <meta name="keywords" content="machine-experience, ai-agents">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://mx.allabout.network/blog/the-padlock-and-the-page.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/the-padlock-and-the-page.html">
+  <meta property="og:title" content="The Padlock Attests the Pipe, Not the Page | CogNovaMX">
+  <meta property="og:description" content="The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side.">
+  <meta property="og:image" content="https://mx.allabout.network/blog/the-padlock-and-the-page-social.svg">
+  <meta property="og:image:alt" content="The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-05-26">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Padlock Attests the Pipe, Not the Page | CogNovaMX">
+  <meta name="twitter:description" content="The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side.">
+  <meta name="twitter:image" content="https://mx.allabout.network/blog/the-padlock-and-the-page-social.svg">
+  <meta name="twitter:image:alt" content="The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="published">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The Padlock Attests the Pipe, Not the Page | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "The Padlock Attests the Pipe, Not the Page",
+        "headline": "The Padlock Attests the Pipe, Not the Page",
+        "description": "The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side.",
+        "datePublished": "2026-05-26",
+        "dateModified": "2026-05-26",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/the-padlock-and-the-page.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1890,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/the-padlock-and-the-page.html",
+        "name": "The Padlock Attests the Pipe, Not the Page",
+        "url": "https://mx.allabout.network/blog/the-padlock-and-the-page.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#why-machines-suffer-worse">Why machines suffer worse</a></li>
+        <li><a href="#two-problems-one-shape">Two problems, one shape</a></li>
+        <li><a href="#what-reader-side-verification-actually-looks-like">What reader-side verification actually looks like</a></li>
+        <li><a href="#what-the-publisher-does">What the publisher does</a></li>
+        <li><a href="#what-a-reader-or-agent-sees">What a reader or agent sees</a></li>
+        <li><a href="#honest-limits">Honest limits</a></li>
+        <li><a href="#the-byline-for-the-machine-age">The byline for the machine age</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1890">
+        <header class="article-header">
+          <h1>The Padlock Attests the Pipe, Not the Page</h1>
+          <div class="article-meta"
+               data-published="2026-05-26"
+               data-modified="2026-05-26"
+               data-reading-time="10 min">
+            <time datetime="2026-05-26">26 May 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>10 min read</span>
+          </div>
+          <ul class="article-tags" aria-label="Tags"><li><a href="index.html#tags=provenance" rel="tag">Provenance</a></li><li><a href="index.html#tags=mx-foundations" rel="tag">MX foundations</a></li><li><a href="index.html#tags=practitioner" rel="tag">Practitioner</a></li></ul>
+        </header>
+
+
+<p>There is a small padlock in every browser's address bar, and the web has spent twenty years misreading it. The padlock means that the connection between the device and the server is encrypted. It does not mean that the page is true, official, or safe. A fraudster's site can carry exactly the same padlock as a bank, because the padlock was never a statement about the content. It was a statement about the plumbing.</p>
+<p>That gap, between what the protocols verify and what a reader actually wants to know, has shaped the web for its entire life. The TLS layer verifies that bytes arrived unaltered from a server. It does not, from the padlock alone, tell anyone who wrote them, when, on what authority, or whether they have been changed since publication. Human readers have always filled that gap with inference: how a page looks, whether the brand is familiar, the confidence of the prose. Inference dressed as knowledge.</p>
+<p>For human readers, trust by inference has always been a quiet risk. For machine readers it is the central failure mode.</p>
+<h2 id="why-machines-suffer-worse" tabindex="-1">Why machines suffer worse</h2>
+<p>When a person reads a page, they bring a lifetime of context to the guess; they notice a clumsy logo, an address that does not resolve, a tone that feels off. The inference is unreliable but not naive.</p>
+<p>A machine summarising the same page brings far less context. It reads the text and produces an answer, and it has no native way to tell a primary source from a confident copy, an official record from a forum post that paraphrased it three years ago. When it cannot tell, it does what these systems do: it fills the gap with something plausible. The output is what the field calls hallucination. The deeper cause is structural. The machine was asked to know something the content never told it, where it came from, and whether to believe it, so it inferred, and sometimes it inferred wrongly.</p>
+<p>No amount of prompt engineering lets a model verify a claim that arrives carrying no evidence. The fix has to travel with the content.</p>
+<h2 id="two-problems-one-shape" tabindex="-1">Two problems, one shape</h2>
+<p>The agentic web is talking, in 2026, about two problems that look distinct and are actually the same shape.</p>
+<p>The first is the discovery problem. A machine cannot use a document it cannot find. Self-describing content helps; without indexing and identifiers, the helpfulness stops at the file boundary. An LLM that does not know the surgery's website exists cannot answer the question "what time does it open on Saturday".</p>
+<p>The second is the trust problem. A machine cannot rely on a document whose origin it cannot check. Even if the LLM finds three plausible Saturday hours, none of them carry evidence the LLM can verify. So it averages, or it picks the most confident-sounding source, or it invents one that fits the pattern of an opening-hours line. Each of those failure modes has been documented in production.</p>
+<p>Both problems are gaps in the same place. The discovery problem says the machine cannot find the content. The trust problem says the machine cannot evaluate the content. Both are answered by attaching a checkable claim about the document to the document itself, indexing those claims so the machine can find them, and giving the machine an open way to verify each claim on its own side.</p>
+<p>That is the architectural job. A registry does it, in a particular shape.</p>
+<h2 id="what-reader-side-verification-actually-looks-like" tabindex="-1">What reader-side verification actually looks like</h2>
+<p>The temptation, when an industry hits a trust gap, is to nominate a referee. Pick an organisation, give it the power to bless content, and let everyone else trust the organisation. This is how content moderation, certification schemes, and most professional registers work. It is also how every centralised trust regime fails: the referee gets captured, gets compromised, or gets bored.</p>
+<p>The web's TLS infrastructure, by way of comparison, does not work this way. Browsers do not trust a certificate authority because the authority is nice. They trust it because the browser can verify the certificate's chain independently, using open libraries, against an algorithm anyone can audit. If the authority lied or was compromised, the maths would not check out, and the client would say so. The trust is in the verification, not in the vouching.</p>
+<p>A modern provenance layer works on the same principle. Three things travel alongside any content:</p>
+<ol>
+<li>A claim about origin: who published this, when, under what identity. The identity has to be resolvable independently (the W3C's <a href="https://www.w3.org/TR/did-core/">DID Core</a> is the standards-track answer; the practical equivalent is a public key bound to a domain the reader can look up).</li>
+<li>A signature over the claim plus a fingerprint of the bytes. The signature scheme is well-trodden (<a href="https://www.rfc-editor.org/rfc/rfc9421">RFC 9421 HTTP Message Signatures</a> for the HTTP carrier; JSON Canonicalisation for the static-file case). The fingerprint catches any later alteration.</li>
+<li>A way for the reader to fetch the publisher's identity material at verification time, and an optional transparency log (<a href="https://www.rfc-editor.org/rfc/rfc6962">RFC 6962</a>) that records every claim the registry has ever served, so a tampered or back-dated claim is visible to anyone who looks.</li>
+</ol>
+<p>None of this is novel cryptography. It is the assembly of standards that already exist into a claim that travels with the content rather than being locked inside one company's database.</p>
+<p>The registry's job in this picture is narrower than people assume. It holds and serves signed claims. It indexes them so an agent can find them. It records what it has served so the record itself is auditable. It does not arbitrate truth. The reader's client checks the signature itself; the registry could lie, and the maths would say so. That is the inversion that makes the architecture worth doing rather than just another badge.</p>
+<h2 id="what-the-publisher-does" tabindex="-1">What the publisher does</h2>
+<p>If you publish content on the web, none of this lands by accident. Three concrete steps make the difference between content an agent treats as inferred and content an agent treats as attested.</p>
+<p><strong>One. Give your content an explicit, machine-readable identity.</strong> That means a stable URL, structured metadata describing what the content is and what it is about, and an explicit author or organisation it is attributable to. This is the Machine Experience layer. <a href="http://Schema.org">Schema.org</a>, Dublin Core, and the wider standards your sector already uses cover most of it; what is missing in most published content today is not vocabulary but discipline about emitting it.</p>
+<p><strong>Two. Sign the metadata.</strong> A signing step takes the structured metadata and produces a small attestation: the metadata canonicalised, hashed, signed with the publisher's private key, and bound to the publisher's resolvable identity. The publisher's verification material (the public key, the DID document, whatever the chosen scheme uses) is hosted somewhere stable a reader can fetch independently.</p>
+<p><strong>Three. Make the attestation discoverable.</strong> That is what a registry does. The publisher registers the attestation; the registry indexes it; an agent that finds the original content can resolve the attestation, fetch it, and verify it. The registry's role here is logistical, not authoritative. If the registry vanished tomorrow, attestations cached elsewhere would still verify, because the cryptographic chain does not depend on the registry being honest.</p>
+<p>Each step is independently useful. Step one alone makes the content findable and parseable. Steps one and two together make the content verifiable for anyone who already has it. Adding step three is what closes the loop with discovery: agents that have never encountered the publisher before can find the content, find the attestation, and decide whether to believe it.</p>
+<h2 id="what-a-reader-or-agent-sees" tabindex="-1">What a reader or agent sees</h2>
+<p>For human readers, almost nothing visible changes. The cryptography stays out of sight, the way TLS does. What surfaces is a small, honest distinction the reader learns to weight: this fact is attested, this fact is inferred. Both can appear on the same screen. The reader now knows which is which.</p>
+<p>For AI agents, the value compounds. An agent that can verify provenance can be built to prefer attested facts over inferred ones, and to say so. Asked for a surgery's opening hours, it returns the hours that arrived signed by the surgery last week, marked as attested, rather than averaging three contradictory mentions and presenting the average with false confidence. Two things follow. Hallucination drops, because the agent is leaning on facts that carry evidence instead of inventing the missing context. The agent's answer also becomes auditable, because it can show which sources it relied on and which it discarded, with the verification to back the choice. In the use cases where accuracy is not optional (healthcare, finance, legal, technical documentation), that is the difference between a tool you can stand behind and one you have to apologise for.</p>
+<h2 id="honest-limits" tabindex="-1">Honest limits</h2>
+<p>This is not a panacea. It helps to say what it does not do.</p>
+<p>It does not stop lying. A publisher can sign content that says something untrue, and the signature will verify. What changes is that the lie now travels with an identity and a fingerprint. The publisher cannot retract it without leaving a record. A reader who is being misled has an audit trail that names the source.</p>
+<p>It does not grant compliance with the EU AI Act, the European Accessibility Act, the UK ICO code, the NIST AI Risk Management Framework, or any of the regulatory regimes that have arrived in this area. The legal duty remains with the organisation. What the technical work does is narrower and useful: it makes the documentation those duties already require structured, tamper-evident, and verifiable on request. Sold as that, it is honest. Sold as ethics in a box, it collapses on the first inquiry, and deserves to.</p>
+<p>It does not stop a determined adversary. A nation-state can compromise endpoints, steal private keys, or coerce publishers. What it does do is raise the cost of subtle, undetectable interference. Signed content with a fingerprint cannot be quietly edited after the fact. A compromised key produces signatures that succeed cryptographically and fail a transparency log's gap-detection. The adversary still gets there; the operator and the regulator now see it happen.</p>
+<h2 id="the-byline-for-the-machine-age" tabindex="-1">The byline for the machine age</h2>
+<p>For five hundred years, publishers built the accountability layer for the print era one habit at a time. The byline, so a reader knew who wrote it. The masthead and printer's mark, so a reader knew who set the type. Libel law, so there was a name to point at. None of it stopped lying. All of it made lying legible.</p>
+<p>The agentic web is at the same moment with the same answer. Provenance does not tell the press what to generate. It lets the page say who set the type, when, and on what authority, in a form a machine can actually read and check. The padlock kept attesting the pipe. The content can now attest the page.</p>
+<p>A great deal of the work that follows is structural, dull, and load-bearing: the metadata fields, the signing chain, the registry that holds the claims, the transparency log that audits the registry, the client libraries that do the verification on the reader's side. None of it is glamorous. All of it is the difference between an agentic web that knows what it knows and one that confidently invents the rest.</p>
+<p>Tom Cranstoun is the Machine Experience Authority and founder of the MX community. He consults on MX strategy through CogNovaMX Ltd.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
