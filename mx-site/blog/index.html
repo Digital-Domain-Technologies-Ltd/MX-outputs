@@ -143,49 +143,7 @@ mx:
 
   <link rel="stylesheet" href="../css/mx-unified.css">
   <link rel="stylesheet" href="../css/mx-hero.css">
-
-  <style>
-    /* Tag filter + per-card tag chips (blog/index.html) */
-    .section--filter { padding-top: 0; padding-bottom: 0; }
-    .tag-filter { margin: 1rem auto; max-width: 1100px; }
-    .tag-filter-label { margin: 0 0 0.5rem; font-weight: 600; font-size: 0.95rem; }
-    .tag-filter-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
-    .tag-chip {
-      background: #fff;
-      border: 1px solid #cfd4dc;
-      color: #1f2937;
-      border-radius: 999px;
-      padding: 0.35rem 0.8rem;
-      font: inherit;
-      font-size: 0.85rem;
-      line-height: 1.2;
-      cursor: pointer;
-      transition: background-color 0.15s, border-color 0.15s, color 0.15s;
-    }
-    .tag-chip:hover { border-color: #1976d2; }
-    .tag-chip:focus-visible { outline: 2px solid #1976d2; outline-offset: 2px; }
-    .tag-chip[aria-pressed="true"] { background: #1976d2; border-color: #1976d2; color: #fff; }
-    .tag-chip--clear { font-weight: 600; }
-    .tag-filter-status { margin: 0.5rem 0 0; font-size: 0.85rem; color: #4b5563; min-height: 1.4em; }
-
-    .card-tags {
-      list-style: none;
-      margin: 0.5rem 0 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-    }
-    .card-tags li {
-      font-size: 0.72rem;
-      background: #eef2f7;
-      color: #4b5563;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      line-height: 1.4;
-    }
-    .proposition-card[hidden] { display: none; }
-  </style>
+  <link rel="stylesheet" href="../css/mx-blog.css">
 </head>
 
 <body>
@@ -265,7 +223,7 @@ mx:
       <div class="section-inner tag-filter" role="region">
         <p class="tag-filter-label">Filter by tag (multi-select — a post must match every selected tag):</p>
         <div class="tag-filter-chips">
-          <button type="button" class="tag-chip tag-chip--clear" data-tag-clear aria-pressed="false">Clear filters</button>
+          <button type="button" class="tag-chip tag-chip--clear" data-tag-clear aria-pressed="false" aria-label="Clear all filters"><span class="clear-x" aria-hidden="true">&times;</span> Clear all</button>
         <button type="button" class="tag-chip" data-tag="mx-foundations" aria-pressed="false">MX foundations</button>
         <button type="button" class="tag-chip" data-tag="ai-agents" aria-pressed="false">AI agents</button>
         <button type="button" class="tag-chip" data-tag="provenance" aria-pressed="false">Provenance</button>
@@ -693,87 +651,6 @@ mx:
   </footer>
 
   <script src="../js/app.js"></script>
-
-  <script>
-    (function () {
-      var filter = document.querySelector('.tag-filter');
-      if (!filter) return;
-      var chips = Array.prototype.slice.call(filter.querySelectorAll('.tag-chip[data-tag]'));
-      var clearBtn = filter.querySelector('[data-tag-clear]');
-      var status = filter.querySelector('[data-tag-status]');
-      var cards = Array.prototype.slice.call(document.querySelectorAll('.proposition-card[data-tags]'));
-      var selected = Object.create(null);
-
-      function selectedKeys() { return Object.keys(selected); }
-
-      function apply() {
-        var keys = selectedKeys();
-        var visible = 0;
-        cards.forEach(function (card) {
-          var cardTags = (card.getAttribute('data-tags') || '').split(',').map(function (s) { return s.trim(); });
-          var match = true;
-          if (keys.length > 0) {
-            for (var i = 0; i < keys.length; i++) {
-              if (cardTags.indexOf(keys[i]) === -1) { match = false; break; }
-            }
-          }
-          if (match) { card.removeAttribute('hidden'); visible++; }
-          else { card.setAttribute('hidden', ''); }
-        });
-        if (keys.length === 0) {
-          status.textContent = '';
-        } else {
-          var label = keys.join(' AND ');
-          status.textContent = visible + ' post' + (visible === 1 ? '' : 's') + ' match ' + label + '.';
-        }
-      }
-
-      chips.forEach(function (chip) {
-        chip.addEventListener('click', function () {
-          var tag = chip.getAttribute('data-tag');
-          var pressed = chip.getAttribute('aria-pressed') === 'true';
-          if (pressed) { chip.setAttribute('aria-pressed', 'false'); delete selected[tag]; }
-          else { chip.setAttribute('aria-pressed', 'true'); selected[tag] = true; }
-          apply();
-        });
-      });
-
-      if (clearBtn) {
-        clearBtn.addEventListener('click', function () {
-          for (var k in selected) { delete selected[k]; }
-          chips.forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
-          if (history && history.replaceState) {
-            history.replaceState(null, '', location.pathname + location.search);
-          }
-          apply();
-        });
-      }
-
-      // Pre-select tags from URL hash, e.g. #tags=provenance,commentary or #tag=provenance.
-      function applyHashSelection() {
-        var hash = (location.hash || '').replace(/^#/, '');
-        if (!hash) return;
-        var params = {};
-        hash.split('&').forEach(function (pair) {
-          var idx = pair.indexOf('=');
-          if (idx > -1) { params[pair.slice(0, idx)] = pair.slice(idx + 1); }
-        });
-        var raw = params.tags || params.tag;
-        if (!raw) return;
-        var requested = decodeURIComponent(raw).split(',').map(function (s) { return s.trim(); }).filter(Boolean);
-        var known = {};
-        chips.forEach(function (c) { known[c.getAttribute('data-tag')] = c; });
-        requested.forEach(function (t) {
-          if (known[t]) {
-            known[t].setAttribute('aria-pressed', 'true');
-            selected[t] = true;
-          }
-        });
-        if (Object.keys(selected).length > 0) apply();
-      }
-
-      applyHashSelection();
-    })();
-  </script>
+  <script src="../js/blog-filter.js"></script>
 </body>
 </html>
