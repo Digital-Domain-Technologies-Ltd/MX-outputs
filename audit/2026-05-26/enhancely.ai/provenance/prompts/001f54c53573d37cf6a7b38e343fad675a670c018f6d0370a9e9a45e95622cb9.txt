@@ -1,3 +1,138 @@
+# prompt capture
+# script: audit-fierce-critic
+# stepId: llm-critic-pass
+# model:  claude-sonnet-4-6
+# sha256: 001f54c53573d37cf6a7b38e343fad675a670c018f6d0370a9e9a45e95622cb9
+# capturedAt: 2026-05-26T16:06:25.891Z
+# systemPromptBytes: 11625
+# userMessageBytes:  79823
+
+--- system ---
+You are a senior audit-report editor reviewing a client-facing web audit report produced by a web consultancy. Automated regex checks have already run and caught explicit pattern violations (banned words, leaked paths, overpromise phrases). Your job is to catch what the regex cannot.
+
+Check SEVEN areas only. Raise the bar: only flag what a professional editor reviewing 100 similar reports would flag. If a finding is borderline, skip it.
+
+=== AREA 1: Subtle failure framing ===
+
+The regex caught explicit banned words (failing, broken, poor, deficient). Catch the subtler forms:
+  - "struggles to", "falls short of", "has failed to", "lags behind", "disappointing", "unfortunately", "worrying", "alarmingly", "regrettably"
+  - Inverse framing that implies a low baseline: "surprisingly good for", "better than expected given", "not as bad as"
+  - Passive-aggressive softening that still condemns: "leaves something to be desired", "could be improved significantly", "is far from optimal"
+
+Do NOT flag:
+  - Legitimate hedging ("may benefit from", "has room to")
+  - Factual descriptions of low scores stated neutrally ("a score of 23/100")
+  - Opportunity framing the report already uses correctly
+
+=== AREA 2: Hollow recommendations ===
+
+A recommendation is hollow when it names a category but not a mechanism. "Invest in better accessibility" is hollow. "Add a visible skip link before the main navigation on all pages" is specific.
+
+Flag as "hollow-recommendation" when a recommendation:
+  - Could be copy-pasted unchanged into any web audit report for any site
+  - Names only a domain ("accessibility", "SEO", "performance") without a specific element, page type, or action from the audit findings
+  - Uses "consider improving", "focus on", "invest in", "work towards" without naming what specifically to do
+
+Do NOT flag:
+  - Recommendations that are inherently site-wide by nature ("add llms.txt at the domain root")
+  - Recommendations that reference specific findings from earlier in the report
+  - Prioritisation language ("tackle X before Y")
+  - Security header recommendations that name a missing header by its technical name (Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, HSTS). A header is a binary artefact, present or absent. A recommendation naming a specific absent header is already data-anchored to this audit and is not hollow even if the explanatory prose is standard web-security text.
+  - Any recommendation that names at least one specific data point from this report: a technical header name, a scored dimension, a URL, a count from audit data, a CSS selector, a schema property, or a missing binary artefact. Presence of a named data anchor means the recommendation is not hollow, only flag when the prose is pure domain framing with no data anchor at all.
+
+SPECIFICITY TEST (apply before flagging hollow-recommendation): Search the entire priority block, from the "### Priority N:" heading through to the end of that priority's prose, including any facts or scores listed within it, for any data anchor: a header name, a score value, a page URL, a CSS selector, a schema type, a count. If any data anchor appears anywhere in the same priority block (not just the immediately preceding sentence), the recommendation is not hollow. Only flag when you can confirm there is no data anchor anywhere in the surrounding priority block.
+
+=== AREA 3: Voice drift ===
+
+The regex caught "I [verb]" constructions. Catch the forms it missed:
+  - "After reviewing", "Having examined", "Looking at the data", "Based on my"
+  - Academic hedges that break consultant voice: "One might argue", "It could be said", "Some would suggest"
+  - Sudden shift to passive bureaucratic voice mid-paragraph when the surrounding sentences are first-person plural ("We found X. Y has been identified. We recommend Z.", the middle sentence breaks the voice)
+
+Do NOT flag:
+  - Technical passive ("was detected", "was not found"), standard audit language
+  - Third-person references to the site or client ("the site has", "the client's page")
+
+=== AREA 4: Fabricated specificity ===
+
+Flag when prose narrative introduces specific numbers, percentages, named comparisons, or effort estimates that do not appear in the preceding facts block and cannot be derived from the audit data.
+
+Common examples:
+  - Industry benchmarks not from this audit: "Most e-commerce sites achieve X% coverage"
+  - Named comparisons not in audit data: "Sites like [Competitor] already implement this"
+  - Effort estimates: "This typically takes N hours to implement"
+
+Do NOT flag:
+  - Numbers from the audit data tables (scores, counts, percentages from the facts)
+  - Well-known binary facts ("Google's rich-results eligibility requires AggregateRating")
+  - Schema.org type names and property names
+
+=== AREA 5: Leaked AI generation artifacts ===
+
+Flag as "fabricated-specificity" when the report contains content that is clearly internal AI generation machinery never meant to appear in the client deliverable:
+
+  - AI-to-operator dialogue in the report body:
+    * Requests for missing data: "Could you paste...", "I need the actual...", "Can you provide the relevant fields...", "Please supply..."
+    * Complaints about empty inputs: "the facts you have referenced do not contain any concrete values", "no data was supplied for this section"
+    * Role or system prompt text visible in the output: instructions to the AI, template-slot descriptions, rubric fragments
+  - Unfilled placeholder text: "[INSERT X HERE]", "{{variable}}", "[TODO]", "[PLACEHOLDER]", "<client name>", angle-bracket tokens
+  - Self-referential generation notes: "Note: this section was generated without full data", "Based on the limited information provided", "I cannot write accurate prose without additional context"
+
+The test: would a client reading this paragraph understand that it is the AI assistant speaking to the operator, rather than the consultant writing to the client? If yes, it is a leaked generation artifact. Flag it even if no numbers are fabricated, the issue is internal tooling language visible to the client.
+
+=== AREA 6: Exaggeration / hyperbole and US/UK English drift ===
+
+The regex caught obvious hyperbole tokens (outstanding, world-class, game-changing, etc.). Catch the subtler forms the regex cannot:
+
+  - Compound superlatives the regex won't match as single tokens: "an experience few competitors match", "ahead of nearly every peer site we audit", "puts the site in a different class".
+  - Hidden hyperbole framing: "vastly improved", "dramatically reduced", "significantly outperforms", "by far the most", when the underlying delta is small or unsupported by the audit data.
+  - Implied uniqueness: "the only site we've audited that...", "uniquely positioned to...", only legitimate when the audit data demonstrably supports the uniqueness claim.
+
+Flag as "exaggeration", even when the words themselves are restrained, if the cumulative effect is marketing copy rather than peer-to-peer consultant prose, raise it.
+
+US/UK English drift. Audit reports go to clients in both markets so the prose should prefer NEUTRAL English where US and UK forms diverge: "team" not "organisation/organization", "styling" not "colour/color", "preferred" not "favourite/favorite". Where no neutral rephrasing is natural, British forms are the default (organise, recognised, behaviour, programme, optimise, analyse). Flag drift as "exaggeration":
+
+  - American forms in narrative prose: "color", "behavior", "organize", "optimize", "analyze", "favorite", "catalog", "honor", "labor", "license" (as a verb), "specialize".
+  - Mixed register inside one paragraph: "we organise" (UK form) immediately followed by "the optimization" (US form). Pick one register and hold it; ideally the neutral form.
+
+Do NOT flag:
+  - Quoted American forms inside a citation or a URL.
+  - Schema.org property names (those are vocabulary, not prose).
+
+Em-dashes in prose. The deterministic regex catches the literal em-dash character and the HTML entity. Catch the cases where an em-dash got there indirectly:
+
+  - Double-hyphen "--" used as an em-dash substitute. Looks innocuous to the regex; reads as a typewriter dash to the client.
+  - Long spaced-hyphen runs (" - ") used to attach a parenthetical aside. Same function as an em-dash, same problem; rewrite as two sentences or a parenthetical with brackets.
+
+Negation-pivot construction beyond the regex's reach. The regex catches the canonical forms ("not just X, Y", "isn't about A, it's about B", "not only X but also Y"). Catch the variants:
+
+  - "It would be wrong to think of this as X; the audit shows Y", affirmative-after-negative pivot dressed in formal voice.
+  - "Yes, this is X, but it is much more than that", concession-pivot.
+  - "While X may suggest Y, the audit reveals Z", clause-level pivot that lifts the same rhetorical move into a more academic register.
+
+All three patterns belong under "exaggeration", the negation-pivot is a tell of LLM-rewriter output and reads as marketing copy in disguise. State the affirmative directly.
+
+=== AREA 7: Third-party vendor DOM blamed on the site template ===
+
+Some pa11y findings target DOM elements that vendor JavaScript SDKs inject into the rendered DOM at runtime. Element type is irrelevant, iframes (consent UIs, embed players, social widgets), buttons (consent banners, chat-widget toggles), banner divs (cookie notices, GDPR overlays), images (analytics pixels, vendor avatars), and scripts (tag-manager loaders, recording scripts) all behave the same way: they exist in the rendered DOM because vendor JS put them there, NOT because the site's template authored them. Common families and a few vendor tells: consent management (Usercentrics, OneTrust / cookielaw, TrustArc), tag management (Google Tag Manager), customer-messaging widgets (Intercom, HubSpot, Drift, Zendesk, Crisp), session-recording analytics (Hotjar, FullStory, Mouseflow), scheduling (Calendly), social embeds (X / Twitter, Meta).
+
+A recommendation that prescribes a site-template / theme-level / partial-level edit for one of these elements is wrong, the only valid remediation paths are an SDK upgrade with the vendor, or a DOM-observer patch that adds the missing attribute after injection.
+
+Flag as "third-party-vendor-template-blame" when ALL of these hold:
+  - The recommendation names an element selector (id, class, or element) clearly belonging to a vendor SDK. Vendor-tell selector substrings: "consent", "cookie", "usercentrics", "onetrust", "cookielaw", "trustarc", "gtm", "tag-manager", "intercom", "hubspot", "drift", "zendesk", "crisp", "calendly", "hotjar", "fullstory", "mouseflow", "analytics", "tracking", "advert", "cdcs", "cross-domain-consent", "chat-widget", "messenger".
+  - The recommendation prescribes a fix at the site template / theme / partial / layout level ("locate the template that renders", "apply the fix in the theme", "edit the partial", "fix at the layout level", "a single theme-level edit resolves all instances").
+  - The recommendation does NOT acknowledge the element's third-party origin, name the upstream vendor, or describe an SDK upgrade or DOM-observer patch as the actual fix path.
+
+Do NOT flag:
+  - Elements whose selector or surrounding prose clearly maps to the site itself (e.g. "/embed", "/iframes/", first-party video players named after the site, internal CTAs styled to look like vendor widgets).
+  - Recommendations that already say "third-party", "vendor SDK", "DOM observer", or name the upstream vendor.
+
+Call the report_llm_findings tool with your findings, or with findings: [] if you have none.
+--- user ---
+Regex checks already flagged these categories in this report: none. Do not re-raise findings in those categories.
+
+Report to review:
+
 ---
 title: "Enhancely: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
@@ -64,28 +199,19 @@ mx:
 
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this section surfaces 18 findings (2 errors, 11 warnings, 5 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+Every automated gate ran to completion; this section surfaces 9 findings (1 error, 6 warnings, 2 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
 
 ### Errors (I/O or structural failures)
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
 | 1 | check-report-coherence.js | placeholder-leak | 1 unresolved placeholder token(s) leaked into the final report: NUMBER_OF_PAGES_AUDITED | 2026-05-26T15:37:41Z |
-| 2 | check-report-coherence.js | placeholder-leak | 6 unresolved placeholder token(s) leaked into the final report: NUMBER_OF_PAGES_AUDITED, N, PLACEHOLDER | 2026-05-26T16:15:51Z |
 
-<details><summary>Error detail (2)</summary>
+<details><summary>Error detail (1)</summary>
 
 **1. check-report-coherence.js - 1 unresolved placeholder token(s) leaked into the final report: NUMBER_OF_PAGES_AUDITED**
 
-/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md — 1 placeholder leaks at lines: 83([NUMBER_OF_PAGES_AUDITED]). Each one indicates an infill handler that did not match its template anchor, or a handler that returned empty for an expected field.
-
-Suggested next steps:
-
-- For each token, grep infill-report.js and tableHandlers/ for the replacement code path. Verify the template text matches the regex.
-
-**2. check-report-coherence.js - 6 unresolved placeholder token(s) leaked into the final report: NUMBER_OF_PAGES_AUDITED, N, PLACEHOLDER**
-
-/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md — 6 placeholder leaks at lines: 79([NUMBER_OF_PAGES_AUDITED]), 106([NUMBER_OF_PAGES_AUDITED]), 125([NUMBER_OF_PAGES_AUDITED]), 131([N]), 135([PLACEHOLDER]), 136([NUMBER_OF_PAGES_AUDITED]). Each one indicates an infill handler that did not match its template anchor, or a handler that returned empty for an expected field.
+/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md - 1 placeholder leaks at lines: 83([NUMBER_OF_PAGES_AUDITED]). Each one indicates an infill handler that did not match its template anchor, or a handler that returned empty for an expected field.
 
 Suggested next steps:
 
@@ -103,20 +229,15 @@ Suggested next steps:
 | 4 | section-sanity | orphan-bullets-or-leaked-markers | Section sanity issues: 1 issue(s) | 2026-05-26T15:29:27Z |
 | 5 | template-leaks | template-leaks | 1 leak(s) in the rendered report | 2026-05-26T15:29:28Z |
 | 6 | gates-summary | gates-failed | Audit gates raised findings: 0a, 0b-voice, 0g, 1 | 2026-05-26T15:37:41Z |
-| 7 | template-coverage | unfilled-placeholders | Unfilled placeholders in rendered report | 2026-05-26T15:58:34Z |
-| 8 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-26T16:06:23Z |
-| 9 | section-sanity | orphan-bullets-or-leaked-markers | Section sanity issues: 2 issue(s) | 2026-05-26T16:06:25Z |
-| 10 | template-leaks | template-leaks | 2 leak(s) in the rendered report | 2026-05-26T16:06:25Z |
-| 11 | gates-summary | gates-failed | Audit gates raised findings: 0a, 0b-voice, 0g, 1 | 2026-05-26T16:15:50Z |
 
-<details><summary>Warning detail (11)</summary>
+<details><summary>Warning detail (6)</summary>
 
 **1. template-voice - Template voice/style findings: 1 violation(s)**
 
 Pre-flight template-voice check raised 1 violation(s) against web-audit-suite-template.md. The template prose carries forbidden patterns (third-person leak, banned vocab, em-dash, etc.). Pipeline continues; reviewer sees the finding in the report.
 
 FAIL  /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-reginald/audit/templates/web-audit-suite-template.md  (1 violation)
-      line 378 [voice] "the page " — Bare third-person "the page" leaks into client prose. Use "each page", "this page", or "a page".
+      line 378 [voice] "the page " - Bare third-person "the page" leaks into client prose. Use "each page", "this page", or "a page".
         [IF SDQ_SCORE >= 76: "Across the [NUMBER_OF_PAGES_AUDITED] pages we audited, structured data is strong. Machines extract
 
 **2. template-coverage - Unfilled placeholders in rendered report**
@@ -135,8 +256,8 @@ Gate section-sanity (check-report-section-sanity.js) returned non-zero. Output e
 Section sanity: enhancely-ai-report.md: 1 issue(s)
 
   leaked-template-marker (1):
-    line 83 — section "Warnings (rule violations)"
-      Unprocessed template marker "[IF SDQ_SCORE >= 76: "Across the [NUMBER_OF_PAGES_AUDITED]" survived infill — every IF/ELSE/ENDIF must be consumed before the report ships.
+    line 83 - section "Warnings (rule violations)"
+      Unprocessed template marker "[IF SDQ_SCORE >= 76: "Across the [NUMBER_OF_PAGES_AUDITED]" survived infill - every IF/ELSE/ENDIF must be consumed before the report ships.
 
 → Fix the template / infill so each section is self-contained: every bullet list has an introducer in the same section, every code-token is named in surrounding prose, and every conditional marker is consumed at infill time.
 
@@ -157,7 +278,7 @@ Resolve each leak before PDF generation:
 Suggested next steps:
 
 - Add the missing entries to the `replacements` map in mx-reginald/audit/bin/infill-report.js (look up the placeholder name in the leak detector output above).
-- When the source data is genuinely absent, fall back to a clear 'N/A' or a sentence that does not need the count — never let the raw token reach the PDF.
+- When the source data is genuinely absent, fall back to a clear 'N/A' or a sentence that does not need the count - never let the raw token reach the PDF.
 - For multi-line REWRITE blocks, ensure the LLM-rewrite phase has API access (ANTHROPIC_API_KEY set).
 
 **6. gates-summary - Audit gates raised findings: 0a, 0b-voice, 0g, 1**
@@ -168,65 +289,7 @@ Suggested next steps:
 
 - Review each failed gate entry above for its specific detail and suggested fix.
 - Re-run gates only after fixing: mx exec mx-audit --gates mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md
-- If the same gate fails twice in a row with no underlying data change, the gate itself is misbehaving — file an issue against the gate script.
-
-**7. template-coverage - Unfilled placeholders in rendered report**
-
-Gate template-coverage returned non-zero with no captured output.
-
-**8. voice-consistency - Mixed-voice section(s) remain after auto-repair: 1**
-
-Gate voice-consistency returned non-zero with no captured output.
-
-**9. section-sanity - Section sanity issues: 2 issue(s)**
-
-Gate section-sanity (check-report-section-sanity.js) returned non-zero. Output excerpt:
-
-
-Section sanity: enhancely-ai-report.md: 2 issue(s)
-
-  leaked-template-marker (2):
-    line 106 — section "Warnings (rule violations)"
-      Unprocessed template marker "[IF SDQ_SCORE >= 76: "Across the [NUMBER_OF_PAGES_AUDITED]" survived infill — every IF/ELSE/ENDIF must be consumed before the report ships.
-    line 125 — section "Warnings (rule violations)"
-      Unprocessed template marker "[IF SDQ_SCORE >= 76: "Across the [NUMBER_OF_PAGES_AUDITED]" survived infill — every IF/ELSE/ENDIF must be consumed before the report ships.
-
-→ Fix the template / infill so each section is self-contained: every bullet list has an introducer in the same section, every code-token is named in surrounding prose, and every conditional marker is consumed at infill time.
-
-**10. template-leaks - 2 leak(s) in the rendered report**
-
-The rendered enhancely-ai-report.md contains unresolved placeholders (e.g. `[SITEMAP_...]`, `[N]`, bare bracket-instructions, or REWRITE comment blocks). These would print as literal prose in the PDF. check-template-leaks.js output:
-
-check-template-leaks: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md
-  2 leak category/categories found:
-  - [mustache-token] 1 unresolved {{TOKEN}} occurrence(s): {{TOKEN}}
-  - [bracket-placeholder] 5 unresolved [PLACEHOLDER] token(s): NUMBER_OF_PAGES_AUDITED, PLACEHOLDER
-        line 28: "[NUMBER_OF_PAGES_AUDITED]"
-        line 55: "[NUMBER_OF_PAGES_AUDITED]"
-        line 74: "[NUMBER_OF_PAGES_AUDITED]"
-        line 84: "[PLACEHOLDER]"
-        line 85: "[NUMBER_OF_PAGES_AUDITED]"
-Resolve each leak before PDF generation:
-  - REWRITE block           → rewrite the section into plain prose, then delete the comment
-  - {{TOKEN}}               → re-run infill-report.js with the correct results directory
-  - [Bracket]               → replace with actual content, or convert to a REWRITE block
-  - further-reading-no-qr-table → restore the two-column QR table from the template (| Scan | Link and description |)
-
-Suggested next steps:
-
-- Add the missing entries to the `replacements` map in mx-reginald/audit/bin/infill-report.js (look up the placeholder name in the leak detector output above).
-- When the source data is genuinely absent, fall back to a clear 'N/A' or a sentence that does not need the count — never let the raw token reach the PDF.
-- For multi-line REWRITE blocks, ensure the LLM-rewrite phase has API access (ANTHROPIC_API_KEY set).
-
-**11. gates-summary - Audit gates raised findings: 0a, 0b-voice, 0g, 1**
-
-Phase 3 gate suite reported 4 unresolved gates. Individual gates may have recorded richer detail entries above this one. The PDF below is a partial deliverable produced under the always-produce-PDF rule; treat it as diagnostic context rather than a delivered audit until the listed gates pass.
-
-Suggested next steps:
-
-- Review each failed gate entry above for its specific detail and suggested fix.
-- Re-run gates only after fixing: mx exec mx-audit --gates mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md
-- If the same gate fails twice in a row with no underlying data change, the gate itself is misbehaving — file an issue against the gate script.
+- If the same gate fails twice in a row with no underlying data change, the gate itself is misbehaving - file an issue against the gate script.
 
 </details>
 
@@ -235,50 +298,21 @@ Suggested next steps:
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
 | 1 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance (line 82) | 2026-05-26T15:22:13Z |
-| 2 | tone | negation-pivot | Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 1 instance (line 279) | 2026-05-26T15:22:13Z |
-| 3 | tone | banned-verdict | Banned verdict words: 1 instance (line 69) | 2026-05-26T15:58:34Z |
-| 4 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 8 instances (line 79) | 2026-05-26T15:58:34Z |
-| 5 | tone | negation-pivot | Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 4 instances (line 166) | 2026-05-26T15:58:34Z |
+| 2 | tone | negation-pivot | Negation-pivot pattern ("not just X, Y" / "isn't about A, it's about B"): 1 instance (line 279) | 2026-05-26T15:22:13Z |
 
-<details><summary>Info detail (5)</summary>
+<details><summary>Info detail (2)</summary>
 
 **1. tone - Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance**
 
 Em-dash in prose (use comma, semicolon, parentheses, or two sentences)
 
-line 82: "—" - line 378 [voice] "the page " — Bare third-person "the page" leaks into client prose. Use "each
+line 82: "-" - line 378 [voice] "the page " - Bare third-person "the page" leaks into client prose. Use "each
 
-**2. tone - Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 1 instance**
+**2. tone - Negation-pivot pattern ("not just X, Y" / "isn't about A, it's about B"): 1 instance**
 
-Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B")
+Negation-pivot pattern ("not just X, Y" / "isn't about A, it's about B")
 
 line 279: "not just" - - Delivering both headers through a centralised server or CDN configuration ensures consistent cover
-
-**3. tone - Banned verdict words: 1 instance**
-
-Banned verdict words
-
-line 69: "failures" - ### Errors (I/O or structural failures)
-
-**4. tone - Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 8 instances**
-
-Em-dash in prose (use comma, semicolon, parentheses, or two sentences)
-
-line 79: "—" - /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-re
-line 105: "—" - line 378 [voice] "the page " — Bare third-person "the page" leaks into client prose. Use "each
-line 124: "—" - line 83 — section "Warnings (rule violations)"
-line 125: "—" - Unprocessed template marker "[IF SDQ_SCORE >= 76: "Across the [NUMBER_OF_PAGES_AUDITED]" survi
-line 146: "—" - - When the source data is genuinely absent, fall back to a clear 'N/A' or a sentence that does not n
-... and 3 more
-
-**5. tone - Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 4 instances**
-
-Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B")
-
-line 166: "not just" - | 2 | tone | negation-pivot | Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B
-line 176: "not just" - **2. tone - Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 1 instance**
-line 178: "not just" - Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B")
-line 180: "not just" - line 279: "not just" - - Delivering both headers through a centralised server or CDN configuration e
 
 </details>
 
@@ -472,7 +506,7 @@ We have prioritised the findings below by the degree to which each gap constrain
 
 - Add a Content-Security-Policy header at the server or CDN layer to declare trusted content sources; its absence leaves pages open to cross-site scripting injection, which can corrupt content that machines subsequently crawl and index.
 - Add a Referrer-Policy header to control what referrer information browsers forward when users navigate away from www.enhancely.ai; without it, full URL paths may be passed to third-party destinations, a privacy-hygiene concern relevant to data-protection obligations.
-- We recommend delivering both headers through a centralised server or CDN configuration rather than per-page changes, so the fix applies consistently without requiring a deployment for each URL.
+- Deliver both headers through a centralised server or CDN configuration rather than per-page changes, so the fix applies consistently without requiring a deployment for each URL.
 - Adding both headers moves the security-header count from 3 of 5 to a complete set, improving the signal www.enhancely.ai sends to security scanners and to machines that factor header completeness into trust scoring.
 
 **Effort:** Low
@@ -500,7 +534,7 @@ We have prioritised the findings below by the degree to which each gap constrain
 
 **Bucket:** AI Opportunity
 
-**Finding:** We score Discovery Readiness at 40/100 (Could Be Better) on www.enhancely.ai. Across the discovery checks we ran, none of the five well-known discovery artefacts we check (llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt) were found. For a site whose subject matter is directly relevant to how machines consume and cite web content, these artefacts are a clear addition opportunity: machines arrive without any explicit signal about intended content scope, preferred citation format, or publisher identity.
+**Finding:** We score Discovery Readiness at 40/100 (Could Be Better) on www.enhancely.ai. All five well-known discovery artefacts we check, llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt, are absent. For a site whose subject matter is directly relevant to how machines consume and cite web content, these artefacts are a clear addition opportunity: machines arrive without any explicit signal about intended content scope, preferred citation format, or publisher identity.
 
 **What to change and why:**
 
@@ -698,11 +732,11 @@ The full per-entity list is delivered alongside this report as a sidecar CSV: [`
 
 | Type | Severity | Property | Instances | Pages | Why it matters |
 |------|----------|----------|----------:|------:|----------------|
-| WebSite | recommended | image | 7 | 7 | No logo / hero image declared in structured data on the audited pages |
+| WebSite | recommended | image | 7 | 7 | Site has no logo / hero image declared in structured data |
 | WebSite | recommended | datePublished | 7 | 7 | No site-level publish date for crawler context |
-| WebSite | recommended | author | 7 | 7 | No top-level author/owner declared on the audited pages |
+| WebSite | recommended | author | 7 | 7 | Site has no top-level author/owner declared |
 | BreadcrumbList | required | itemListElement | 2 | 2 | BreadcrumbList has no items - entire entity is empty |
-| Article | required | author | 1 | 1 | No attribution surface - AI agents may not identify who wrote the article |
+| Article | required | author | 1 | 1 | No attribution surface - AI agents cannot identify who wrote the article |
 
 Each summary row covers multiple per-entity rows in the sidecar; the grouped view is for reading at a glance, the sidecar is for processing.
 
@@ -933,7 +967,7 @@ We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved — WCAG 2.1 AA accessibility compliance restored |
+| Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved - WCAG 2.1 AA accessibility compliance restored |
 | Full Optimisation | Catalogue Visibility, Discovery Readiness, Semantic Structure, MX Stack Completeness, Performance, Security headers, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | durable visibility in agent-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |

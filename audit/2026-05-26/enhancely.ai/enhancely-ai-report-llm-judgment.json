@@ -1,33 +1,39 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md",
-  "timestamp": "2026-05-26T14:37:39.099Z",
+  "timestamp": "2026-05-26T16:07:35.631Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 19697,
-    "output_tokens": 611,
+    "input_tokens": 22052,
+    "output_tokens": 598,
     "cache_creation_input_tokens": 2369,
     "cache_read_input_tokens": 0
   },
-  "findingCount": 3,
+  "findingCount": 4,
   "withdrawnCount": 0,
   "findings": [
     {
       "category": "tone-inconsistency",
-      "message": "The 'About This Report' section opens in first-person plural ('We audited', 'We fetch', 'We then review') but the 'Executive Summary' section switches to third-person ('We audited seven pages' is followed immediately by impersonal constructions such as 'SEO sits at 84/100' and 'the breadth of structured content … tells a coherent story'), while subsequent Priority finding blocks return to first-person ('We recorded', 'We score', 'We recommend'). The Priority 5 finding block, however, shifts to third-person passive ('We recorded 3 of the 5 expected security headers present … HTTPS, X-Frame-Options, and X-Content-Type-Options are in place'), breaking the first-person voice established uniformly across Priorities 1–4.",
-      "context": "We recorded 3 of the 5 expected security headers present on www.enhancely.ai: HTTPS, X-Frame-Options, and X-Content-Type-Options are in place",
+      "message": "The Priority 3 'What to change and why' bullets switch from first-person ('We confirmed') used throughout the Findings section to third-person passive in the final bullet ('Delivering both headers through a centralised server or CDN configuration ensures consistent cover'), breaking voice mid-section.",
+      "context": "Deliver both headers through a centralised server or CDN configuration rather than per-page changes, so the fix applies consistently",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The Discovery Files section's llms-full.txt entry states that 'whether publishing it becomes a priority depends on the content depth of the full 51-page estate', implying the audit can speak to the full 51-page estate, when the underlying evidence comes from only the 7 audited pages.",
-      "context": "Whether publishing it becomes a priority depends on the content depth of the full 51-page estate, which the audited sample does not yet measure.",
+      "message": "The Priority 5 finding states that 'all five well-known discovery artefacts … are absent' as a site-wide assertion, but absence was confirmed only for the 7 audited pages/fetches, not across the full 51-URL estate declared in the sitemap.",
+      "context": "All five well-known discovery artefacts we check, llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt, are absent.",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Security Headers section asserts that HSTS and CSP are 'absent from every audited response' but the narrative summary in Priority 3 escalates this to a site-wide claim ('Content-Security-Policy and Referrer-Policy absent across all 7 audited URLs'), while the Security Headers table omits HSTS entirely and instead lists Referrer-Policy as the second missing header, creating an internal inconsistency that implies a broader, unscoped claim.",
+      "context": "We found that 2 of the five standard security headers are absent from every audited response: HSTS (Strict-Transport-Security) and Content-Security-Policy (CSP).",
       "severity": "block"
     },
     {
       "category": "hedged-vs-asserted-imbalance",
-      "message": "The Security Headers section asserts with certainty '2 of the five standard security headers are absent across every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP)', but Priority 5 in the Findings section states only 'Content-Security-Policy and Permissions-Policy Absent (3 of 5 present)', omitting HSTS from the named absent headers. The two sections assert different sets of missing headers with equal certainty, creating an internal factual conflict presented as settled evidence.",
-      "context": "2 of the five standard security headers are absent across every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP).",
+      "message": "The Structured Data Findings section asserts 'Site has no top-level author/owner declared' and 'Site has no logo / hero image declared in structured data' for WebSite entities as site-wide facts, but these are observed only across the 7 audited pages with no hedge limiting the claim to the sample.",
+      "context": "Site has no logo / hero image declared in structured data … Site has no top-level author/owner declared",
       "severity": "block"
     }
   ],
