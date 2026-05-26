@@ -20,12 +20,12 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 58 | PDFs — books, reports, manuals, presentations |
+| [pdf/](pdf/) | 61 | PDFs — books, reports, manuals, presentations |
 | [md/](md/) | 241 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **986** | |
+| **Total** | **990** | |
 
 ---
 
@@ -516,4 +516,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-26 at 08:58*
+*Generated on 2026-05-26 at 14:16*
