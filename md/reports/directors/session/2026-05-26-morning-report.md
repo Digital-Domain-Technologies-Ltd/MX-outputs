@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — UBERCOG and validator alignment, blog frontmatter retrofit, padlock blog post + manuscript propagation, possible.md three-audience overview"
-description: "Four threads. First, Gate 10 was closed: UBERCOG.cog.md gained the three required mx-validator fields and the validator itself was aligned with the May 2026 canon vendor-namespace decision. Second, the public blog gained machine-readable structure end-to-end: a 13-tag taxonomy with a multi-select AND filter on the blog index, visible tag chips on every post and card, and retrofitted YAML frontmatter on 49 older blog posts and 17 lander pages. Third, a new blog post (the-padlock-and-the-page) shipped to mx.allabout.network and its ideas propagated into the Protocols Ch20 manuscript. Fourth, possible.md landed at hub root: a 7800-word three-audience strategy presentation (investor, partner, sponsor) that lifts the proven hooks verbatim from the canonical commercial docs and stitches them into one read; the humanizer pass and back-propagation of the forbidden word 'valuable' across the commercial spine followed."
+title: "Co-Directors Report - UBERCOG and validator alignment, blog frontmatter retrofit, padlock blog post + manuscript propagation, possible.md three-audience overview, audit-pipeline non-blocking refactor"
+description: "Five threads. First, Gate 10 was closed: UBERCOG.cog.md gained the three required mx-validator fields and the validator itself was aligned with the May 2026 canon vendor-namespace decision. Second, the public blog gained machine-readable structure end-to-end: a 13-tag taxonomy with a multi-select AND filter on the blog index, visible tag chips on every post and card, and retrofitted YAML frontmatter on 49 older blog posts and 17 lander pages. Third, a new blog post (the-padlock-and-the-page) shipped to mx.allabout.network and its ideas propagated into the Protocols Ch20 manuscript. Fourth, possible.md landed at hub root: a 7800-word three-audience strategy presentation (investor, partner, sponsor) that lifts the proven hooks verbatim from the canonical commercial docs and stitches them into one read; the humanizer pass and back-propagation of the forbidden word 'valuable' across the commercial spine followed. Fifth, an enhancely.ai audit caught a tone-gate false positive that the operator wanted fixed structurally: every gate now records findings at error/warn/info severity, no gate blocks the PDF, and a post-PDF reviewer sign-off prompt records a wall-clock statement into both provenance sidecars."
 author: "Tom Cranstoun"
 created: 2026-05-26
 modified: 2026-05-26
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -72,6 +72,20 @@ New 7800-word document at hub root: [`possible.md`](../../../../../possible.md).
 
 Pre-scanner caught a superlative echo on line 166. Catalogue walk caught a forbidden vocab hit ("valuable", from a verbatim lift) and 15 H3 headings opening with "The" (a smell, even when the heading names a concrete thing). All three classes fixed. The "valuable" fix back-propagated to the source canon: partner-strategy.md, canonical-agency-mx-partner.md, plus five maxine/ docs that carried the same word in network-effects bullet form. Zero "valuable" hits remain in `mx-canon/mx-maxine-lives/businesses/`.
 
+### 10. Audit-pipeline non-blocking refactor (thread five)
+
+An enhancely.ai audit (5 pages) failed at the report-phase infill step because the tone gate flagged "recognize" inside the URL slug `/blog/.../co-recognize-your-brand-...` - that slug is enhancely.ai's own blog URL, not our prose. A surgical fix extended [`check-report-tone.js`](../../../../../mx-reginald/audit/scripts/check-report-tone.js)'s `stripInline` to also strip URL path slugs and absolute-path markdown links, getting the audit through.
+
+The operator then named the structural issue: gates that exit non-zero on stylistic findings are blocking deliverables that should ship. The directive was clear: no gate blocks the PDF, every gate records findings at a meaningful severity, all findings surface in the final md and PDF for the human reviewer, and a sign-off statement closes the chain. Implementation:
+
+- **Severity model** extended in [`audit-errors.js`](../../../../../mx-reginald/audit/lib/audit-errors.js): three levels (`error`, `warn`, `info`) with legacy `blocker`/`warning` normalised on read. Tone-check findings land at `info`; rule violations at `warn`; only true I/O failures at `error`. Findings carry a `provenanceClass` (`ai` or `deterministic`) so the chain routes correctly.
+- **Non-blocking gates**: [`check-report-tone.js`](../../../../../mx-reginald/audit/scripts/check-report-tone.js), [`verify-audit-report.js`](../../../../../mx-reginald/audit/scripts/verify-audit-report.js), [`verify-skeleton.js`](../../../../../mx-reginald/audit/bin/verify-skeleton.js), [`infill-report.js`](../../../../../mx-reginald/audit/bin/infill-report.js), and every gate orchestration site in [`audit-pipeline.js`](../../../../../scripts/audit-pipeline.js) (template-voice, template-coverage, tone, voice, scope, html-render, contradictions, finding-pages, section-completeness, provenance-gap, section-sanity, rating-grade, deterministic verifier) now exit 0 and route findings through a new `recordGateFinding()` helper instead of aborting.
+- **Top-of-report findings section**: [`render-error-section.js`](../../../../../mx-reginald/audit/lib/render-error-section.js) rewritten. Section heading: "Audit gate findings for human review". Grouped by severity, each entry names the gate / category / finding / timestamp with collapsible detail. The section sits before "About This Report" so the human reviewer sees the diagnostic surface first. The previous operator-internal sources filter was dropped because the audience IS the operator.
+- **Reviewer sign-off flow**: after PDF generation, the pipeline prompts the operator for a multi-line statement (skipped automatically when stdin is not a TTY or `MX_AUDIT_SKIP_SIGNOFF=1`). If given, the statement is written to `audit_errors.json` with a real wall-clock timestamp, the findings section is regenerated to include it, both provenance sidecars are rebuilt via [`build-provenance.js`](../../../../../mx-reginald/audit/scripts/build-provenance.js), and the PDF is re-rendered with the updated XMP payload.
+- **Stray probe write-paths gitignored**: two probes write to `<delivery>/cache/sitemap_urls.json` and `<delivery>/www.<host>/pdf_sample.json` instead of the canonical per-host `.cache/` root. Added two new `audit/*/*/cache/` and `audit/*/*/www.*/` patterns to `mx-outputs/.gitignore`.
+
+End-to-end test on enhancely.ai (now committed): Gate 0b-voice raised one mixed-voice finding after auto-repair; pipeline did not abort; PDF generated with the finding at the top of the report under "Audit gate findings for human review"; a follow-up reviewer-statement injection regenerated provenance + PDF cleanly.
+
 ---
 
 ## By the Numbers
@@ -125,11 +139,26 @@ Pre-scanner caught a superlative echo on line 166. Catalogue walk caught a forbi
 | Verbatim hooks lifted | 10 distinct paragraphs across CLAUDE.md and 5 commercial source docs |
 | Plan-mode artefact | `.claude/plans/the-blog-posts-cover-atomic-tulip.md` |
 
+### Thread five: audit-pipeline non-blocking refactor
+
+| Metric | Value |
+|---|---|
+| Hub files changed | 9 (audit-pipeline.js plus 6 mx-reginald audit scripts/libs plus mx.pdf.sh + report) |
+| mx-outputs commits | 2 (`81801c2` enhancely.ai delivery; `c7f0e52` gitignore strays) |
+| Severity levels added | 3 (error, warn, info) |
+| Gates converted to non-blocking | 13 (template-voice, template-coverage, tone, voice, scope, html-render, contradictions, finding-pages, section-completeness, provenance-gap, section-sanity, rating-grade, deterministic verifier) |
+| Pre-existing recordError sites preserved | 10 (extracted gates already used the always-produce-PDF pattern) |
+| Audit pages | 5 |
+| PDF output (enhancely-ai-report.pdf) | 1.2M, EAA Level 2, 52KB AI provenance in XMP |
+| Reviewer-statement flow | Interactive prompt (TTY) + MX_AUDIT_SKIP_SIGNOFF=1 escape |
+
 ---
 
 ## The Insight
 
-The mx-validator and the canon dictionary are independently enforced — the validator checks at push time, the canon's deprecation table feeds the pre-write hook at edit time — and a drift between them produces an unfixable state. A file that satisfies the canon's deprecation rule fails the validator; a file that satisfies the validator's path expectation fails the pre-write hook. The pre-write hook is the harder block (every Edit hits it), so the validator must follow the canon, not the other way round. The fix is structural: when a field migrates between paths in the canon, the validator's REQUIRED_FIELDS table needs to migrate in the same release. The deprecation entry is the canonical record; the validator is downstream of it.
+The mx-validator and the canon dictionary are independently enforced - the validator checks at push time, the canon's deprecation table feeds the pre-write hook at edit time - and a drift between them produces an unfixable state. A file that satisfies the canon's deprecation rule fails the validator; a file that satisfies the validator's path expectation fails the pre-write hook. The pre-write hook is the harder block (every Edit hits it), so the validator must follow the canon, not the other way round. The fix is structural: when a field migrates between paths in the canon, the validator's REQUIRED_FIELDS table needs to migrate in the same release. The deprecation entry is the canonical record; the validator is downstream of it.
+
+The second insight came from the afternoon audit. A gate that exits non-zero is asking for two distinct things at once: "this is wrong" and "stop everything until you fix it". Those are different verdicts. Tone violations and stylistic findings rarely justify blocking a deliverable; I/O failures always do. Conflating them means every gate runs as an emergency brake, and the operator ends up patching scripts mid-audit to get past stylistic checks. The structural fix is severity: every checking script emits findings at a level that names what it caught, the pipeline never aborts on a finding, and the human reviewer reads the surfaced list at the top of the deliverable. The deliverable still ships; the reviewer signs off (or rebuts) the findings; the chain captures the decision honestly. This pattern was already half-built (the always-produce-PDF rule in `audit-errors.js`, the `[ERROR_REPORT_SECTION]` placeholder in the template) — completing it took extending the severity model, converting the remaining blocking gates, and wiring the sign-off prompt.
 
 ---
 
@@ -145,6 +174,9 @@ The mx-validator and the canon dictionary are independently enforced — the val
 - Verify Gate 10 against the next cog edit that touches `x-mx-contextProvides` in a fresh push to confirm the path realignment holds end-to-end.
 - Teach the html-writer skill to emit the YAML frontmatter block by default so the morning's retrofit pattern becomes the authoring default rather than a one-off pass. The canon-source posts will not need retrofitting again; new posts should carry the frontmatter from creation.
 - Consider whether the public sitemap entry for `/blog/` should advertise the filter URL pattern (e.g. `#tags=ai-agents`) somewhere a search engine can index. Currently the hash fragment is not surfaced anywhere outside the filter UI.
+- Fix the two probes that write stray paths inside an audit delivery folder (`cache/sitemap_urls.json` and `www.<host>/pdf_sample.json`). They should write to the per-host `<hostSlug>/.cache/` root instead. The gitignore patch added today is a containment measure, not a fix.
+- Capture the `recordGateFinding()` helper's `output` parameter from each gate's stderr/stdout so the finding detail in the report carries actionable evidence rather than the placeholder "Gate X returned non-zero with no captured output" that shows up for gates whose result object doesn't expose the captured text.
+- Verify the gates-phase audit log is wired into `build-provenance.js` so gate findings make it into the deterministic provenance sidecar; currently the gates log is `<stem>-report-audit-log.csv` and the build-provenance pass reads from a different stem.
 
 ---
 
@@ -171,3 +203,12 @@ The mx-validator and the canon dictionary are independently enforced — the val
 | 3cf5f5f7 (hub) | Add possible.md: three-audience MX strategy presentation |
 | 535da8ff (hub) | Humanize possible.md: drop 'The'-prefixed H3 headings, fix superlative echo, swap 'valuable' |
 | 6e46a60b (hub) | Canon sweep: remove forbidden word 'valuable' from business docs |
+| a73a9cb0 (hub) | Bump mx-outputs: morning directors report v1.2 with possible.md threads |
+| 51f0ac58 (hub) | Changelog: 2026-05-26 late-morning entry for padlock post + possible.md + 'valuable' canon sweep |
+| 384aec8d (hub) | Learnings: source-verbatim hygiene inheritance + mx-validator vs template drift |
+| 60710187 (hub) | Bump mx-outputs: add possible.pdf render |
+| 9c4acec6 (hub) | Bump mx-outputs: provenance sidecars for possible.pdf |
+| 4d5bc374 (hub) | mx.pdf.sh: ensure provenance sidecars exist before render; inject default-convention sidecar in XMP |
+| cf0a606b (hub) | mx.pdf.sh: declare no-upstream-provenance honestly when sidecar is fresh |
+| 81801c2 (mx-outputs) | Add enhancely.ai audit (2026-05-26): 5 pages, new findings-section pattern |
+| c7f0e52 (mx-outputs) | gitignore: stray probe write paths inside audit delivery folder |
