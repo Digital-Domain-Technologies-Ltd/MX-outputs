@@ -50,6 +50,18 @@ node_modules/
 # to each audit's deliverables for local diffing; never shipped.
 .infilled/
 
+# Audit pipeline raw data — consolidated into mx-outputs/audit/ by domain
+# as of 2026-05-26. The leading-dot folders are infrastructure, not
+# deliverables, so they stay out of the submodule:
+#   audit/<hostSlug>/.cache/          per-domain HTML + origin cache (shared across dates)
+#   audit/<hostSlug>/.history.jsonl   per-domain history of audit runs
+#   audit/<date>/<hostSlug>/.infill/  raw audit results + template/methodology snapshot
+#   audit/.benchmarks/                cross-domain peer-scores dataset
+audit/**/.cache/
+audit/**/.infill/
+audit/.benchmarks/
+audit/**/.history.jsonl
+
 # Confidential strategy companion to business-plan.md — rendered PDF and any
 # adjacent provenance sidecars. Source .md is gitignored in the hub .gitignore.
 # Restricted to DDT board and CogNovaMX directors.
