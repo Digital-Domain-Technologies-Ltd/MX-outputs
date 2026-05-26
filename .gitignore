@@ -61,6 +61,12 @@ audit/**/.cache/
 audit/**/.infill/
 audit/.benchmarks/
 audit/**/.history.jsonl
+# Stray probe write paths inside a delivery folder. The canonical layout
+# keeps probe data under <hostSlug>/.cache/ at the per-host root; anything
+# else inside <date>/<hostSlug>/ that is not a committed deliverable is a
+# stray (sitemap_urls.json, host-named pdf_sample.json subdir, etc.).
+audit/*/*/cache/
+audit/*/*/www.*/
 
 # Confidential strategy companion to business-plan.md — rendered PDF and any
 # adjacent provenance sidecars. Source .md is gitignored in the hub .gitignore.
