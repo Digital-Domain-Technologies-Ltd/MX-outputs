@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Self-contained PDF provenance, html-writer pipeline overhaul, IPTC corpus backfill"
-description: "Two related disciplines closed end-to-end. The PDF render pipeline now produces self-contained evidence chains: every PDF carries its full AI provenance inside its XMP packet with an honest no-upstream-provenance marker when the chain begins at the render. The blog-publishing pipeline gained three default behaviours (YAML embed, tag-chip row, IPTC digitalSourceType) that were previously hand-applied per post. A new blog post landed alongside, and the three-gap entry from the 25 May review was retired with all gaps closed."
+title: "Co-Directors Report - Self-contained PDF provenance, html-writer pipeline overhaul, IPTC corpus backfill, audit-PDF table layouts, MX Readiness Level honesty fix, blog filter clear-all"
+description: "Two related disciplines closed end-to-end. The PDF render pipeline now produces self-contained evidence chains: every PDF carries its full AI provenance inside its XMP packet with an honest no-upstream-provenance marker when the chain begins at the render. The blog-publishing pipeline gained three default behaviours (YAML embed, tag-chip row, IPTC digitalSourceType) that were previously hand-applied per post. A new blog post landed alongside, and the three-gap entry from the 25 May review was retired with all gaps closed. A second cluster mid-afternoon: an enhancely.ai re-audit using the new non-blocking pipeline surfaced PDF-layout breakage in five wide tables (Resilience Check, Pages Audited, Security Headers per-page, Div Soup, At-a-Glance), all restructured with column-collapse + CSS column-count font scaling + bullet-list conversion for long-URL cases. A logic bug surfaced in the same audit: the MX Readiness Level classifier promoted a site with zero MX governance metadata to 'Citation-ready' on the strength of Schema.org + canonical alone; classifier now requires actual mxGovernance markers for Level 2+. The blog filter gained a red x clear-all chip, and all inline CSS/JS on the blog index was extracted into external files per the no-inline rule (added to memory)."
 author: "Tom Cranstoun"
 created: 2026-05-26
 modified: 2026-05-26
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -74,6 +74,28 @@ Gap (b) from the 25 May three-gaps entry. The WICG `<meta name="ai-disclosure">`
 
 The generator now derives the IPTC IRI from `mx.aiDisclosure` via the canonical mapping (`none` → `digitalCapture`, `ai-assisted` → `compositeWithTrainedAlgorithmicMedia`, `ai-generated` or `autonomous` → `trainedAlgorithmicMedia`) and substitutes a new `{{DIGITAL_SOURCE_TYPE_IRI}}` placeholder in the template's BlogPosting JSON-LD scaffold. A backfill script at `scripts/lib/backfill-digital-source-type.cjs` walks the corpus, reads each page's `ai-disclosure` meta tag, maps to IRI, and injects the field immediately after `description` in the BlogPosting node. Idempotent: re-runs are no-ops. Forty-eight of forty-eight top-level posts now carry the field; six use-cases/ posts already did. Three-gap REMINDERS entry retired.
 
+### 7. Audit PDF table layouts: five wide tables restructured
+
+An enhancely.ai re-audit using the new non-blocking pipeline produced a 1.2MB EAA-Level-2 PDF, and a page-25 screenshot showed the Resilience Check 5-column table cramped into one-word-per-line wrapping in the prose columns. Chrome's `table-layout: auto` allocates column widths in proportion to content; in a 5-col table where two cols carry prose and three carry short values, each prose column gets only ~25% of the page width. Five tables restructured to either fewer columns or to a bullet list:
+
+- **Resilience Check** (5 -> 3 cols): merged Status / Pages into one cell, merged What-it-means / Data into one wide prose cell, in [pipelineSurvivability.js](mx-reginald/audit/bin/tableHandlers/pipelineSurvivability.js) with a backward-compatible regex covering both the new 3-col and legacy 5-col template shapes.
+- **Pages Audited** (6 -> 2 cols, then -> bullet list): first compressed scores into one "SEO 85 . A11y 90 . Back 70 . Served 100 . Rendered 100" cell, then converted to a bullet list once the screenshot showed long URL slugs still wrapping hyphen-by-hyphen inside the table cell. Handler + template both updated.
+- **Security Headers per-page** (6 -> bullet list): same long-URL problem; same fix. Bullet list with each URL on its own line and the five Yes/No verdicts clustered into a single inline label.
+- **Div Soup** (7 -> 4 cols): collapsed the bare-divs / ratio / depth columns into one "44 bare divs . 43% ratio . depth 5" cell so the wide "Top bare selectors" column gets the room it needs.
+- **CSS column-count font scaling**: a `:has(thead tr > th:nth-child(N))` rule in the audit PDF stylesheet auto-shrinks the font (8pt -> 7.5pt -> 7pt) and tightens padding for tables with 5 / 6 / 7+ columns. Applies to every wide table that didn't get a structural restructure (At-a-Glance findings, Schema inventory, Schema issues, Marker reachability, Pipeline stages, MX-readiness ladder) without per-table edits.
+
+### 8. MX Readiness Level classifier: require mxGovernance markers for Level 2+
+
+A logic bug surfaced in the same enhancely.ai audit. The MX Readiness Level table said "Current Level: 2: Citation-ready" with the description "Full MX fields, governance, provenance" — but the site has zero MX-namespaced governance metadata. The classifier at [llmReports.js:1513](mx-reginald/audit/src/utils/reportUtils/llmReports.js) was reading MSC=68 + SDQ=87 + DR=40 and ignoring the existing `markerCoverage.mxGovernance` signal (which correctly registered zero presence on every audited page). A site with strong Schema.org + canonical + OG tags + sitemap can hit MSC=68 and DR=40 without ever declaring an MX-namespaced field, so the level claim was structurally false.
+
+Fix: gated Levels 2-5 on `mxGovernancePresent === true`, computed inline from `htmlMetrics[*].markerReachability.mxGovernance`. When the score thresholds for Level 2 are met but MX governance is absent, the "To reach the next level" prose now explicitly names what's missing (`mx:status`, `mx:contentType`, `mx:audience`, `canonicalUri`, provenance markers) instead of telling the reader to chase SDQ above 75. For enhancely.ai: now correctly Level 1 (Discoverable).
+
+### 9. Blog filter clear-all (x) chip + no-inline-CSS-or-JS rule landed
+
+The [blog/index.html](mx-outputs/mx-site/blog/index.html) filter gained a red x-icon "Clear all" chip that appears only when at least one tag filter is active, so the visual signal scales with state. The chip uses a circular x glyph + "Clear all" text, with hover inverting the colour. Visibility is driven by an `is-visible` class added in the filter's `apply()` function.
+
+Once the chip was wired, the inline `<style>` (~60 lines covering tag-filter chips, card tags, the clear-all chip) and inline `<script>` (filter logic, hash-preselect, clear-all click) were both extracted: CSS into [mx-blog.css](mx-outputs/mx-site/css/mx-blog.css), JS into a new [js/blog-filter.js](mx-outputs/mx-site/js/blog-filter.js). The blog/index.html shrank from 803 to 656 lines and carries only external `<link>` / `<script src>` references plus its JSON-LD (the documented exception). A new memory record was saved as the canonical rule for future writes: [feedback_no_inline_css_or_js](/Users/tomcranstoun/.claude/projects/-Users-tomcranstoun-Documents-GitHub-MX-hub/memory/feedback_no_inline_css_or_js.md) — public HTML on mx-site carries no inline `<style>` or `<script>`, with JSON-LD as the only exception. The reason is the audit's own Inline Tag Bloat resilience check: mx-site teaches by example, so the file that publishes the rule has to follow it.
+
 ---
 
 ## By the Numbers
@@ -102,6 +124,34 @@ The generator now derives the IPTC IRI from `mx.aiDisclosure` via the canonical 
 
 - Line 177 (html-writer skill update): all three additions wired into the generator. Deleted.
 - Line 374 (three-gap blog-publish review): gaps (a) typographer, (b) IPTC IRI, and (c) llms.txt Featured all actioned. Deleted.
+- Line 377 (audit-pipeline stray probe write paths): probe scripts (capture-pdf-sample.js + sitemapSummary.js + main.js) now write directly to the per-run results directory rather than `<delivery>/www.<host>/` / `<delivery>/cache/`. Containment `.gitignore` patterns still in place; the actual fix landed in the same session. (Note: REMINDERS entry was already deleted in the parallel work; the fix scripts are in the working tree pending commit in Step 3.)
+
+### Audit PDF table layouts
+
+| Table | Before | After |
+|-------|--------|-------|
+| Resilience Check | 5 cols (Check / Status / Pages / What-it-means / Data) | 3 cols (Check / Result / Prose+Data) |
+| Pages Audited | 6 cols (Page / SEO / A11y / Back / Served / Rendered) | bullet list (URL on own line + score cluster) |
+| Security Headers per-page | 6 cols (Page / HTTPS / HSTS / CSP / X-Frame / X-Content-Type) | bullet list (URL on own line + headers cluster) |
+| Div Soup | 7 cols | 4 cols (Source / Score+band / stats cluster / selectors) |
+| Wide tables (5+ cols) generally | font 9pt, fixed padding | CSS `:has()` auto-shrink 8pt -> 7.5pt -> 7pt + tighter padding by col count |
+
+### MX Readiness Level fix
+
+| Site state | Pre-fix verdict | Post-fix verdict |
+|------------|-----------------|------------------|
+| enhancely.ai (MSC 68, SDQ 87, DR 40, mxGovernance 0%) | Level 2: Citation-ready (false) | Level 1: Discoverable (honest) |
+| Next-level prose | "Raise SDQ above 75 and consistency above 90%" (wrong lever) | "Add MX governance fields: mx:status, mx:contentType, mx:audience, canonicalUri, provenance markers" (right lever) |
+
+### Blog filter clear-all + inline extraction
+
+| Metric | Value |
+|--------|-------|
+| blog/index.html before | 803 lines (inline `<style>` + `<script>`) |
+| blog/index.html after | 656 lines (external CSS/JS refs + JSON-LD only) |
+| New JS file | `mx-outputs/mx-site/js/blog-filter.js` (97 lines) |
+| Extracted CSS | ~60 lines appended to `mx-blog.css` |
+| Memory record saved | `feedback_no_inline_css_or_js.md` (rule + MEMORY.md index entry) |
 
 ---
 
@@ -140,3 +190,11 @@ The lesson worth carrying forward is the one the LEARNINGS now records about sou
 | 3e0b66ad (hub) | REMINDERS: mark gap (c) llms.txt curation done; bump mx-outputs pointer |
 | c00f3a4 (mx-outputs) | Backfill digitalSourceType IPTC IRI into 46 BlogPosting JSON-LD blocks |
 | 70378d89 (hub) | html-writer: emit digitalSourceType IPTC IRI in BlogPosting JSON-LD |
+| d9505cdf (hub) | Bump mx-outputs: 2026-05-26 afternoon directors report |
+| 3af9441f (hub) | Changelog: 2026-05-26 afternoon second-half entry |
+| 06ee4867 (hub) | Learnings: when a hand-step lands twice, fix the producer not the output |
+| 7dbdf05e (hub) | CHANGELOG: retire reginald-vnext-prd.md rename from carry-forward list |
+| 501c881 (mx-outputs) | Blog index: clear-all (x) button + extract filter CSS/JS to external files |
+| (hub, pending) | Audit-PDF: restructure five wide tables + CSS `:has()` column-count font scale |
+| (hub, pending) | MX Readiness Level: require mxGovernance markers for Level 2+ |
+| (hub, pending) | Probes: write per-run output directly to results dir, not to legacy `<delivery>/<host>/` (parallel work in the working tree) |
