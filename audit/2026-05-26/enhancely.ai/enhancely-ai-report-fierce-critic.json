@@ -1,10 +1,43 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md",
-  "timestamp": "2026-05-26T09:00:03.667Z",
+  "timestamp": "2026-05-26T14:37:23.816Z",
   "model": "claude-sonnet-4-6",
   "runCount": 1,
-  "findingCount": 0,
+  "findingCount": 4,
   "regexFindingCount": 0,
-  "llmFindingCount": 0,
-  "findings": []
+  "llmFindingCount": 4,
+  "findings": [
+    {
+      "category": "fabricated-specificity",
+      "message": "The Balanced Scorecard table includes a 'vs Peers' column with named benchmark medians ('median 83', 'median 81', 'median 25', 'median 57', 'median 50', 'median 90') that do not appear in the preceding facts blocks and are not derivable from the audit data. The source of these medians is described only as 'a curated audit dataset' with no further attribution, count, or methodology reference. These are introduced as comparative facts in a client-facing table without evidence anchoring them to this audit.",
+      "context": "Balanced Scorecard table, Human Experience and Machine Experience sub-tables: 'vs Peers' column values including 'median 83', 'median 81', 'median 25', 'median 57', 'median 50', 'median 90'. Footnote reads: '*Benchmark median drawn from a curated audit dataset.*'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "third-party-vendor-template-blame",
+      "message": "The Inline Code Duplicates section identifies a CSS fragment ('div.cmpwrapper:empty, div.cmpwrapper, div#cmpwrapper.cmpwrap…') that is a well-known Usercentrics/CMP consent-management SDK selector. The recommendation prescribes moving it to a shared external file via '<link rel=\"stylesheet\">' — a site-template-level fix — without acknowledging that this fragment originates from a third-party consent management platform injected at runtime. The valid remediation path would be to configure the CMP SDK to load its CSS externally, not to edit the site template.",
+      "context": "Inline Code Duplicates table, last row: 'css · 125 bytes · 6 pages · div.cmpwrapper:empty, div.cmpwrapper, div#cmpwrapper.cmpwrap…'. Recommendation immediately below: 'Move each duplicate fragment to a shared external file (<link rel=\"stylesheet\"> for CSS, <script src=\"...\"> for JS).'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The third bullet under 'Consider optional enhancements' in Next Steps reads: 'Consider optional enhancements: optional patterns that give a early-mover opportunity in AI search.' This names only a domain ('AI search') and a vague benefit phrase ('early-mover opportunity') with no specific element, artefact, page type, or action. The Priority block for this item contains no data anchor — no score, header name, URL, selector, or count. The optional enhancements are listed elsewhere in the report, but the Next Steps entry itself is a pure domain label that could be copy-pasted into any web audit.",
+      "context": "Next Steps > Recommended Actions, bullet 3: 'Consider optional enhancements: optional patterns that give a early-mover opportunity in AI search.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "subtle-failure-framing",
+      "message": "'falls short of passing' is used to describe the MX Journey stage results. This is exactly the form of subtle failure framing the area-1 check targets — an explicit 'falls short of' construction implying a low baseline in client-facing prose.",
+      "context": "5-Stage MX Journey section, closing paragraph: 'Across the audited set, www.enhancely.ai is Not Compatible with the MX Journey; both assessed stages fall short of passing, and Search & Compare, Price Understanding, and Purchase Confidence are not applicable to this site type.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    }
+  ]
 }
