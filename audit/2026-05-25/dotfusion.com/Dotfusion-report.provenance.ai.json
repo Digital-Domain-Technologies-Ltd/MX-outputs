@@ -1,0 +1,708 @@
+{
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": "dotfusion.com-2026-05-25",
+  "operator": "tom.cranstoun@gmail.com",
+  "target": "https://dotfusion.com",
+  "startedAt": "2026-05-25T15:36:53.094Z",
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "Dotfusion-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "6c3cd18b6c204fb6762dd28b4365e3ed490e8730",
+      "shortSha": "6c3cd18"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.4.0",
+    "host": "MacBookPro.lan",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-05-25T15:17:48.671Z",
+      "stepId": "phase2.audit-scores",
+      "agent": "claude-sonnet-4-6",
+      "intent": "LLM-driven audit-scores pass (single-shot SDK)",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 8192,
+        "toolName": "submit_skill_output"
+      },
+      "inputs": {
+        "skill": "audit-scores",
+        "url": "https://dotfusion.com",
+        "userMessageSha256": "a9379182a3ca7f7ff3dfaf2d45760fa388028812c9f374f0e7f9258b053ac197",
+        "userMessageBytes": 111897
+      },
+      "outputs": {
+        "file": "llm-audit-scores.json",
+        "sha256": "14bb7887ef9d0cefa70bd22d30292996b140cc8d7a1c4258a83aed2c1a3373ce"
+      },
+      "rubricHash": "734a1c0af41ece9f0a37f8a7ef10f518481b3b06f3bcca50965195ef4ef88d70",
+      "reasoningTrace": "{}",
+      "outcome": "pass",
+      "notes": "inputTok=35159 outputTok=8192"
+    },
+    {
+      "timestamp": "2026-05-25T15:19:37.850Z",
+      "stepId": "phase2.audit-discovery",
+      "agent": "claude-sonnet-4-6",
+      "intent": "LLM-driven audit-discovery pass (single-shot SDK)",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 8192,
+        "toolName": "submit_skill_output"
+      },
+      "inputs": {
+        "skill": "audit-discovery",
+        "url": "https://dotfusion.com",
+        "userMessageSha256": "615231fe4cdb0de5d71bc9a600aff5ca2562fbe489de2756c358d7b03ab4d3b7",
+        "userMessageBytes": 4609
+      },
+      "outputs": {
+        "file": "llm-audit-discovery.json",
+        "sha256": "4e44881da7255582fe654f001636c5d0d1fc993d47a2b133841c0430e5e552cd"
+      },
+      "rubricHash": "571943ecaf23c36b6c45ba37635bed31bfefb765bd0dcc50cce0d5568365b95c",
+      "reasoningTrace": "{\"output\":{\"llmsTxt\":{\"present\":false,\"url\":\"https://dotfusion.com/llms.txt\",\"httpStatus\":404,\"assessment\":\"No llms.txt file detected at the standard path. The site is not currently discoverable by AI agents via the llms.txt convention. As the llms.txt standard gains adoption across the industry, absence represents a growing gap in AI agent visibility.\",\"verificationCommand\":\"curl -sL -o /dev/null -w '%{http_code}' https://dotfusion.com/llms.txt\",\"verificationOutput\":\"404\"},\"llmsFullTxt\":{\"prese",
+      "outcome": "pass",
+      "notes": "inputTok=2479 outputTok=6849"
+    },
+    {
+      "timestamp": "2026-05-25T15:19:51.312Z",
+      "stepId": "phase2.audit-access",
+      "agent": "claude-sonnet-4-6",
+      "intent": "LLM-driven audit-access pass (single-shot SDK)",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 8192,
+        "toolName": "submit_skill_output"
+      },
+      "inputs": {
+        "skill": "audit-access",
+        "url": "https://dotfusion.com",
+        "userMessageSha256": "87d517ffbc431bff2e777223f107cda959eb59659583f08d933cc7aebc78fa9d",
+        "userMessageBytes": 6000
+      },
+      "outputs": {
+        "file": "llm-audit-access.json",
+        "sha256": "482cf92649fdb82a871d7412a42b563a7c98c268692daa49c32155a577eaca37"
+      },
+      "rubricHash": "344fa87c78b83de6d34ca93e0ede4e5ce48154583743c82f6b7b4ebc99b690fc",
+      "reasoningTrace": "{\"output\":{\"agentAccessResults\":{\"url\":\"https://dotfusion.com\",\"tests\":[{\"agent\":\"ClaudeBot\",\"status\":200},{\"agent\":\"GPTBot\",\"status\":200},{\"agent\":\"ChatGPT-User\",\"status\":200},{\"agent\":\"PerplexityBot\",\"status\":200},{\"agent\":\"GoogleOther\",\"status\":200},{\"agent\":\"Google-Extended\",\"status\":200},{\"agent\":\"CCBot\",\"status\":200},{\"agent\":\"Plain curl (no UA)\",\"status\":200}],\"allPassed\":true,\"blocked\":[],\"notes\":\"All eight AI agent probes returned HTTP 200. The single cached HTML sample is a Next.js 404",
+      "outcome": "pass",
+      "notes": "inputTok=3054 outputTok=538"
+    },
+    {
+      "timestamp": "2026-05-25T15:23:09.561Z",
+      "stepId": "phase2.audit-report",
+      "agent": "claude-code:audit-report",
+      "intent": "Drive audit-report skill via headless Claude Code session",
+      "parameters": {
+        "command": "claude -p",
+        "outputFormat": "text",
+        "stableMs": 15000,
+        "hardTimeoutMs": 1800000
+      },
+      "inputs": {
+        "skill": "audit-report",
+        "url": "https://dotfusion.com",
+        "promptSha256": "069d0b9c0307d1ad19a4718174a6ddc497e36f4705ab9fc179bf3d7e9094f581"
+      },
+      "outputs": {
+        "exitCode": 0,
+        "exitSignal": null,
+        "stdoutBytes": 2613,
+        "stderrBytes": 0,
+        "elapsedMs": 198092,
+        "discoveredReport": null,
+        "killReason": null
+      },
+      "outcome": "fail",
+      "notes": "no *-report.md detected (exit=0, signal=null). stderr tail: "
+    },
+    {
+      "timestamp": "2026-05-25T15:33:13.762Z",
+      "stepId": "phase2.audit-scores",
+      "agent": "claude-sonnet-4-6",
+      "intent": "LLM-driven audit-scores pass (single-shot SDK)",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 8192,
+        "toolName": "submit_skill_output"
+      },
+      "inputs": {
+        "skill": "audit-scores",
+        "url": "https://dotfusion.com",
+        "userMessageSha256": "0b1cc7162a4f201dc920185e208c01cbd5545d438e7526ac4e285dcc53748b91",
+        "userMessageBytes": 112479
+      },
+      "outputs": {
+        "file": "llm-audit-scores.json",
+        "sha256": "e0e3699388ab5d820571e511e925f72c172624a22fce922e0fa6c28253f7348f"
+      },
+      "rubricHash": "734a1c0af41ece9f0a37f8a7ef10f518481b3b06f3bcca50965195ef4ef88d70",
+      "reasoningTrace": "{}",
+      "outcome": "pass",
+      "notes": "inputTok=35361 outputTok=8192"
+    },
+    {
+      "timestamp": "2026-05-25T15:34:34.243Z",
+      "stepId": "phase2.audit-discovery",
+      "agent": "claude-sonnet-4-6",
+      "intent": "LLM-driven audit-discovery pass (single-shot SDK)",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 8192,
+        "toolName": "submit_skill_output"
+      },
+      "inputs": {
+        "skill": "audit-discovery",
+        "url": "https://dotfusion.com",
+        "userMessageSha256": "615231fe4cdb0de5d71bc9a600aff5ca2562fbe489de2756c358d7b03ab4d3b7",
+        "userMessageBytes": 4609
+      },
+      "outputs": {
+        "file": "llm-audit-discovery.json",
+        "sha256": "d09f0dc92f38beb1e307c7d6332f428e41dd83052483c3981cc29478c38c2bc8"
+      },
+      "rubricHash": "571943ecaf23c36b6c45ba37635bed31bfefb765bd0dcc50cce0d5568365b95c",
+      "reasoningTrace": "{\"output\":{\"llmsTxt\":{\"present\":false,\"url\":\"https://dotfusion.com/llms.txt\",\"httpStatus\":null,\"notes\":\"Not fetched in Phase 1 probe. No evidence of llms.txt in cached HTML or well-known sidecar data. Treat as absent pending live fetch.\",\"assessment\":\"No llms.txt file detected for dotfusion.com. As the llms.txt standard grows in adoption across the AI agent ecosystem, absence represents a missed opportunity for early AI-agent visibility.\"},\"llmsFullTxt\":{\"present\":false,\"url\":\"https://dotfusion.",
+      "outcome": "pass",
+      "notes": "inputTok=2479 outputTok=5168"
+    },
+    {
+      "timestamp": "2026-05-25T15:34:46.585Z",
+      "stepId": "phase2.audit-access",
+      "agent": "claude-sonnet-4-6",
+      "intent": "LLM-driven audit-access pass (single-shot SDK)",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 8192,
+        "toolName": "submit_skill_output"
+      },
+      "inputs": {
+        "skill": "audit-access",
+        "url": "https://dotfusion.com",
+        "userMessageSha256": "b30ad097b1b4e53d2886cef11e24e82e23f75a07e8a338e2b1d9aece743f24eb",
+        "userMessageBytes": 6000
+      },
+      "outputs": {
+        "file": "llm-audit-access.json",
+        "sha256": "08474393edf6282d2a43b2b2d0e3b3998c0ec54431bb53e9ee3358a5f126a158"
+      },
+      "rubricHash": "344fa87c78b83de6d34ca93e0ede4e5ce48154583743c82f6b7b4ebc99b690fc",
+      "reasoningTrace": "{\"output\":{\"agentAccessResults\":{\"url\":\"https://dotfusion.com\",\"tests\":[{\"agent\":\"ClaudeBot\",\"status\":200},{\"agent\":\"GPTBot\",\"status\":200},{\"agent\":\"ChatGPT-User\",\"status\":200},{\"agent\":\"PerplexityBot\",\"status\":200},{\"agent\":\"GoogleOther\",\"status\":200},{\"agent\":\"Google-Extended\",\"status\":200},{\"agent\":\"CCBot\",\"status\":200},{\"agent\":\"Plain curl (no UA)\",\"status\":200}],\"allPassed\":true,\"blocked\":[],\"notes\":\"All eight AI agent User-Agents received HTTP 200. No bot-specific blocking detected at the ",
+      "outcome": "pass",
+      "notes": "inputTok=3054 outputTok=551"
+    },
+    {
+      "timestamp": "2026-05-25T15:37:11.988Z",
+      "stepId": "phase2.audit-report",
+      "agent": "claude-code:audit-report",
+      "intent": "Drive audit-report skill via headless Claude Code session",
+      "parameters": {
+        "command": "claude -p",
+        "outputFormat": "text",
+        "stableMs": 15000,
+        "hardTimeoutMs": 1800000
+      },
+      "inputs": {
+        "skill": "audit-report",
+        "url": "https://dotfusion.com",
+        "promptSha256": "069d0b9c0307d1ad19a4718174a6ddc497e36f4705ab9fc179bf3d7e9094f581"
+      },
+      "outputs": {
+        "exitCode": 143,
+        "exitSignal": null,
+        "stdoutBytes": 0,
+        "stderrBytes": 0,
+        "elapsedMs": 145259,
+        "discoveredReport": "Dotfusion-report.md",
+        "killReason": "report-stable"
+      },
+      "outcome": "pass",
+      "notes": "terminated by watcher (report-stable); discovered Dotfusion-report.md"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:53.246Z",
+      "stepId": "report.rewrite-1",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 1/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "e397972db05e68390dc094ec7d2171f821bd7e29aefa918b67c26b77240af1ac"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "We audited seven pages of dotfusion.com, sampling across the live Next.js build to measure how well the site serves both human visitors and the machines that increasingly mediate discovery. The picture for human visitors is genuinely solid: performance leads all dimensions, and SEO sits at 86/100, the Excellent band, meaning search engines can find, read, and rank the content without structural obstacles. The content itself is well-structured and the navigation carries clear intent, giving visit",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:53.384Z",
+      "stepId": "report.rewrite-2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 2/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "0ed5e565d38348b74ccde71a9e6302dbe1cc0d18ea0407bff2008b27843eee81"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "Across the audited set, dotfusion.com delivers strong performance and SEO results for human visitors, with accessibility at 73/100 representing the clearest opportunity to improve the experience for all users.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:53.526Z",
+      "stepId": "report.rewrite-3",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 3/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "0e3a4affa79d5458e75888fb4bdc0374d33fe0a779ffa0fda4a8b41a5e7cbc1f"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "Machines can reliably read the content we serve across the audited set, though structured discovery and stack completeness leave meaningful room to grow.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:53.665Z",
+      "stepId": "report.rewrite-4",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 4/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "e4f0b9d1cac88f735877b33bb2d9eaff2b0a73beb3c6f541352fdc9221b5c682"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "Across the audited set, dotfusion.com demonstrates a solid foundation to build from, with SEO performance sitting at 86/100 and a rich, well-populated schema vocabulary already in place. These strengths give the improvements that follow a firm base to land on.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:53.803Z",
+      "stepId": "report.rewrite-5",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 5/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "f118ebb97b0075bb5c1cf25c331b253a5a3e5e87cab31a9f35af94dc1e11eb8a"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "The findings below are prioritised by downstream impact, with Discovery Readiness leading because gaps at that layer constrain what machines can locate and parse before any other signal is evaluated. Structured data depth and catalogue visibility follow, where the strongest near-term opportunity lies in extending schema coverage to serve both search crawlers and AI agents more completely across the audited set.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:53.935Z",
+      "stepId": "report.rewrite-6",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 6/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 4000
+      },
+      "inputs": {
+        "blockIndex": 6,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "4f67967c26f61a16bc6146e4fb4398a987b8ea88cae1a581b367a9ccda2a9ec9"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "| # | Finding | Bucket | Priority | Effort | Impact |\n|---|---------|--------|----------|--------|--------|\n| 1 | Unlabelled anchor links in site header, WCAG 4.1.2 (7 pages) | Compliance Risk | High | Low | Screen reader users may miss navigation destinations |\n| 2 | reCAPTCHA textarea missing accessible name and label, WCAG 4.1.2 and 1.3.1 (7 pages, vendor-injected via cdn-ca.aglty.io) | Compliance Risk | High | Medium | Screen reader users may miss form purpose and are less likely to complete",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:54.075Z",
+      "stepId": "report.rewrite-7",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 7/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 7,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "def0495159016827a6202338ea0f8fa8050ac250a1265387717464ca3dabb0b0"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "- **sameAs links on Organization**: adding `sameAs` properties to the Organization entities already in the audited set would let machines confidently reconcile dotfusion.com with its profiles on Wikidata, LinkedIn, and equivalent public directories, strengthening citation eligibility in agent-generated answers.\n\n- **potentialAction on Organization**: attaching a `potentialAction` entry to the existing Organization entities would advertise contact or enquiry capabilities directly to machines, all",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:54.210Z",
+      "stepId": "report.rewrite-8",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 8/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 8,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "4ea3382fec2eb19d40e25f067b678882d53932e50072336a87b75d23c8b1b36a"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "We found robots.txt present and permissive, with no disallow paths configured, meaning all machines are free to crawl the full site. One sitemap reference is declared, giving crawlers a direct route to the content index.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:54.349Z",
+      "stepId": "report.rewrite-9",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 9/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 9,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "2a04b4302bdabab6b09c363f2234e1ce9a05d45477e375b30d416353c0dca450"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "We grade the sitemap Partial: it covers 148 URLs and carries both lastmod and changefreq values, yet the absence of priority attributes across all 148 entries leaves machines without the relative crawl-weight signals that would help them sequence their visits more precisely.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:54.489Z",
+      "stepId": "report.rewrite-10",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 10/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 10,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "5a817245b8a766f5f7365b131cb60751fa1c6585152866b34ec7e485386d7ea0"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "We find llms.txt present on dotfusion.com with a site description in place, which gives machines a starting point for contextual orientation. The file would serve machines more fully with a page inventory and a content policy added, as both sections are currently absent.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:54.623Z",
+      "stepId": "report.rewrite-11",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 11/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 11,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "8715c10b0bd761c840356b7ced54dce3369d23e89ed4e0fe72233aa1ef1d3450"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "We find no llms-full.txt at dotfusion.com, with the endpoint returning a 404 across every discovery signal we checked. Whether adding it would be worthwhile depends on the content depth of the full 148-page set, which the audited sample does not yet measure; we recommend revisiting this once a broader crawl confirms whether the site carries sufficient long-form content to justify a full machine-readable corpus.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:54.758Z",
+      "stepId": "report.rewrite-12",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 12/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 12,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "1a0a541875b787282a2356792a07717dad147ea533c073ee85b874614c6185e0"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "Dotfusion.com is Partially Compatible with the MX Journey; Purchase Confidence is N/A for this site type.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:54.895Z",
+      "stepId": "report.rewrite-13",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 13/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 13,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "4f7cfc19aba805dfc04c24da3d2b9e4929df63a7019f04c9b055fee850f18095"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "Across the audited set, pipeline survivability scores at 97, and the one area we flag for attention is truncation risk, which affects two of the seven pages we reviewed. When a page's content is cut short before a machine has finished reading it, the machine may form an incomplete picture of what dotfusion.com offers, potentially missing services, structured data, or key claims. Addressing truncation on those two pages would be the single highest-leverage step towards ensuring every machine that",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:55.031Z",
+      "stepId": "report.rewrite-14",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 14/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 14,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "808097320200bc9b813f66e1854c12e6b78e67277bc9947cf19574245f8b1081"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "On the worst-performing page we sampled, https://dotfusion.com/services/contentful-development-agency, the rendered surface carries a bare-div ratio of 51% (23 of 45 elements), which means machines lose structural context and fall back on positional inference to determine meaning. The pattern here is surface-wide rather than structurally deep: the deepest bare chain reaches only 4 levels, while the high bare ratio points toward a component framework that leaves many containers untyped, a common ",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:55.165Z",
+      "stepId": "report.rewrite-15",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 15/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 15,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "9a1fc8eadef2e19da1d5ea126057c8a45d8877cf23b3312e0960f29c16a7dbb6"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "The audited set shows consistent metadata patterns across pages, with no organisation-name or canonical-URL divergence flagged by the consistency check.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:55.299Z",
+      "stepId": "report.rewrite-16",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 16/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 16,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "2731de6270f66ed50b0f3026229bc76a1275bdf1e3c2d4ecec3856a7050b16e4"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "Across the audited set, PDF handling sits at an intersection of two independent concerns that reinforce each other: accessibility legislation in the EU, US, UK, Australia, and Canada has converged on ISO 14289-1 (PDF/UA) as the shared technical baseline, with the European Accessibility Act (Directive (EU) 2019/882, in force 28 June 2025) as the most precisely codified instance of that global alignment; and an untagged PDF is equally invisible to machines, because search crawlers, AI systems, and",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:55.448Z",
+      "stepId": "report.rewrite-17",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 17/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 17,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "f45a649731373f8958c639bfd7836ab775d71b1a3c613ae1c3b6e427b95016a7"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "Across the audited set, https://dotfusion.com performs well on search fundamentals, with SEO scoring 86/100, a result that reflects solid metadata and crawlability foundations. The clearest opportunities lie in Discovery Readiness, which scores 25/100, and Structured Data at 63/100, both of which shape how machines read, interpret, and surface the site in automated contexts. We invite the dotfusion.com team to review the findings that follow and take the steps needed to close those gaps.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:36:55.602Z",
+      "stepId": "report.rewrite-18",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 18/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 18,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/.infilled/Dotfusion.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "dbaf68ffa847523d9d6a7e795428ba5c6bfa07a402c63400722df7732c679e0d"
+      },
+      "rubricHash": "fa29331d1a2b3ef25f753ae7a49035d457f940fac1d6f96dba2968155842b916",
+      "reasoningTrace": "Across the audited set, we identified 89 images in total. The format distribution breaks down as 38 SVG, 27 PNG, 3 WebP, and 21 images in other or unrecognised formats, with no JPEG images present. Alt-text coverage stands at 62 images (69.7%), leaving 27 without alternative text. For a developer audience, that gap is worth prioritising: missing alt text affects both screen-reader users and the signals machines use to interpret visual content.\n\nOn loading strategy, 19 images carry an explicit `l",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-25T15:44:07.033Z",
+      "stepId": "audit.repair-voice-scope",
+      "agent": "claude-sonnet-4-6",
+      "intent": "Voice + scope repair pass: act on 3 finding(s) from voice + scope gates",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 32000
+      },
+      "inputs": {
+        "reportPath": "Dotfusion-report.md",
+        "findingCount": 3
+      },
+      "outputs": {
+        "file": "Dotfusion-report.md",
+        "sha256": "557f948a611f4d4166357087231d223a98c5c5f1f06b0d0b4e486ea05f1a5cc2"
+      },
+      "rubricHash": "f2188da105ac0f907e4b5febf33924eaa8b5aa02152f4714402fcb02072218d0",
+      "reasoningTrace": "---\ntitle: \"Dotfusion: Website Analysis & Machine Readiness\"\nauthor: \"Tom Cranstoun\"\ncreated: \"2026-05-25\"\nmodified: \"2026-05-25\"\nclient: \"Dotfusion\"\nclientSlug: \"Dotfusion\"\nclientUrl: \"https://dotfusion.com\"\nreportId: \"Dotfusion-WEB-AUDIT-20260525\"\nreportType: \"executive-sales-report\"\nauditTool: \"web-audit-suite\"\nauditDate: \"2026-05-25\"\ndescription: \"Executive audit report analysing accessibility, performance, SEO, structured data, and AI agent compatibility for Dotfusion\"\ntags: [web-audit, acc",
+      "outcome": "pass",
+      "notes": "inputTok=20319 outputTok=18859 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-05-25T15:44:53.023Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "claude-sonnet-4-6",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "Dotfusion-report.md",
+        "regexCategoriesFlagged": []
+      },
+      "outputs": {
+        "file": "Dotfusion-report-fierce-critic.json",
+        "sha256": "744cceb7d130cab0696441a49c4d5b602d08c11e75269642c847d411da7d45c4"
+      },
+      "rubricHash": "8a488965de03eb267a847ab7a015b60d93a1df3866ce80b91c5c2af8021b6826",
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"message\": \"The 'Next Steps' Priority 2 action ('Review Priority 2-3 findings: Catalogue Visibility improvements and metadata tuning that compound over time') names only a domain category with vague framing ('metadata tuning that compound over time') and no specific element, action, or data anchor beyond a priority number. It could be inserted unchanged into any web audit report.\",\n      \"context\": \"### Recommended Actions\\",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=0 llmFindings=5"
+    },
+    {
+      "timestamp": "2026-05-25T15:45:02.508Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "claude-sonnet-4-6",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "Dotfusion-report.md"
+      },
+      "outputs": {
+        "file": "Dotfusion-report-llm-judgment.json",
+        "sha256": "3a20a4281ab2a15286a8a0534a29832f302d8da53d1971ecab28fc92c5e721ab"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"sample-vs-total-overreach\",\n      \"message\": \"The Discovery Files section states 'We find llms.txt present on dotfusion.com' as a site-wide fact, but Priority 6 in the Findings section lists llms.txt as one of 'all five discovery artefacts absent', contradicting each other; one of these is an overreach of the audited evidence.\",\n      \"context\": \"We find llms.txt present on dotfusion.com with a site description in place, which gives machines a starting ",
+      "outcome": "warn",
+      "notes": "findings=2 withdrawn=0 inputTok=19310 outputTok=268"
+    }
+  ]
+}

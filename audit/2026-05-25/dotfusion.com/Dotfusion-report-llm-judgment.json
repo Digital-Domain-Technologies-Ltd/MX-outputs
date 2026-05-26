@@ -1,0 +1,29 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-25/dotfusion.com/Dotfusion-report.md",
+  "timestamp": "2026-05-25T15:45:01.612Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 19310,
+    "output_tokens": 268,
+    "cache_creation_input_tokens": 2369,
+    "cache_read_input_tokens": 0
+  },
+  "findingCount": 2,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Discovery Files section states 'We find llms.txt present on dotfusion.com' as a site-wide fact, but Priority 6 in the Findings section lists llms.txt as one of 'all five discovery artefacts absent', contradicting each other; one of these is an overreach of the audited evidence.",
+      "context": "We find llms.txt present on dotfusion.com with a site description in place, which gives machines a starting point",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "The Soft 404 resilience check in Agent Reading Pipeline is marked 'Pass 7/7' with the note 'Missing pages return a proper HTTP 404 status', but the Error Page Test section explicitly records that the site returns HTTP 200 (soft 404) for a non-existent page, directly contradicting this pass verdict.",
+      "context": "HTTP status code | 200 (soft 404)",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}
