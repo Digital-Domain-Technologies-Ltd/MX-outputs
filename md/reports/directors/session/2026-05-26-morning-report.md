@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — UBERCOG required-fields fix and mx-validator path realignment"
-description: "Closes the Gate 10 warning surfaced at yesterday's afternoon push. UBERCOG.cog.md gains the three required mx-validator fields, and the validator itself is aligned with the 2026-05 canon vendor-namespace decision so future cogs that adopt the canon path do not re-trip the gate."
+title: "Co-Directors Report — UBERCOG required-fields fix, mx-validator path realignment, and blog frontmatter retrofit"
+description: "Two parallel threads. First, Gate 10 was closed: UBERCOG.cog.md gained the three required mx-validator fields and the validator itself was aligned with the May 2026 canon vendor-namespace decision. Second, the public blog gained machine-readable structure end-to-end: a 13-tag taxonomy with a multi-select AND filter on the blog index, visible tag chips on every post and card, and retrofitted YAML frontmatter on 49 older blog posts and 17 lander pages so the HTML is now the canonical source for every page's metadata."
 author: "Tom Cranstoun"
 created: 2026-05-26
 modified: 2026-05-26
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -15,7 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-26-morning-report.md
 ---
 
-# Co-Directors Report — UBERCOG required-fields fix and mx-validator path realignment
+# Co-Directors Report — UBERCOG required-fields fix, mx-validator path realignment, and blog frontmatter retrofit
 
 **Date:** 26 May 2026 — Morning
 **Segment:** morning (since midnight)
@@ -24,7 +24,9 @@ mx:
 
 ## Summary
 
-Two commits closed a tooling-and-canon drift that surfaced at the end of yesterday's afternoon push. UBERCOG.cog.md picked up the three required fields the pre-push mx-validator (Gate 10) had been flagging on every push, and the validator itself was realigned with the May 2026 canon vendor-namespace decision so that the agreement holds for every future cog. Gate 10 is now clean for the canonical path; the next push that touches any cog will see a validator and a canon that agree.
+Two parallel threads landed this morning. First thread: two commits closed a tooling-and-canon drift that surfaced at the end of yesterday's afternoon push. UBERCOG.cog.md picked up the three required fields the pre-push mx-validator (Gate 10) had been flagging on every push, and the validator itself was realigned with the May 2026 canon vendor-namespace decision so that the agreement holds for every future cog. Gate 10 is now clean for the canonical path.
+
+Second thread: the public blog gained machine-readable structure end-to-end. A 13-tag taxonomy was designed, a multi-select AND filter shipped on the blog index, every Featured and Blog-listing card grew visible tag chips, every blog post grew a clickable tag chip row beneath the byline, and 66 pages (49 older posts plus all 17 lander/index pages) gained retrofitted YAML frontmatter inside an HTML comment in `<head>`. With no markdown source for these older pages, the HTML is now declared the canonical source for the YAML via a runbook line on every block. The Cloudflare cache fronting mx.allabout.network was purged twice.
 
 ---
 
@@ -42,19 +44,47 @@ Two commits closed a tooling-and-canon drift that surfaced at the end of yesterd
 
 `node scripts/mx-validator.cjs UBERCOG.cog.md` now returns 1 valid, 0 invalid, 0 errors, 2 non-blocking warnings (recommended `refersTo` and `mx.x-mx-contextRequired`). The push of the validator commit triggered the pre-push Gate 10 on no markdown files (the diff only touched `scripts/mx-validator.cjs`, a `.cjs` not a `.md`), so the hook's `--changed-only` mode produced no validator output and the push completed without re-running the gate. Future pushes that touch any cog will see the new path expectations.
 
+### 4. Blog taxonomy and multi-select AND filter (thread two)
+
+Designed a 13-tag taxonomy for the public blog: `mx-foundations`, `ai-agents`, `provenance`, `cogs`, `seo-geo-aeo`, `cms`, `standards`, `accessibility`, `practitioner`, `business-case`, `commentary`, `blockchain`, `announcements`. Every Featured and Blog-listing card on [`mx-outputs/mx-site/blog/index.html`](../../../../mx-site/blog/index.html) carries 2 to 4 of these as a `data-tags` attribute plus a visible chip list. A filter bar sits between the Featured and Blog-listing sections: 13 chip buttons plus a Clear button, multi-select AND semantics (a post must match every selected tag), a live status line that announces the visible-post count. The filter logic is a small vanilla-JS IIFE inline on the index page — no JS dependency change. Profile cards do not carry `data-tags` so they remain visible regardless of the filter state.
+
+### 5. Per-post tag chips with hash-preselect
+
+Every one of the 50 published blog posts gained a clickable tag-chip row directly under the byline. Each chip is an anchor linking to `index.html#tags=<slug>`; the index parses the `#tags=` hash on load and pre-selects matching chips, so a reader who clicks a chip on one post arrives at the index already filtered. The Clear button also clears the hash via `history.replaceState`. Chip styling lives in [`mx-outputs/mx-site/css/mx-blog.css`](../../../../mx-site/css/mx-blog.css) (the canonical blog stylesheet), with hover and focus-visible states that match the existing accent-colour pattern.
+
+### 6. YAML frontmatter retrofit (HTML declared canonical)
+
+Forty-nine older blog posts had no embedded YAML frontmatter at all. Every one now carries a block inside `<!-- ... -->` immediately after `<head>` opening, generated from existing page metadata: title (stripped of the `| CogNovaMX` brand suffix), description, author, dates from JSON-LD `datePublished` / `dateModified`, mx.status / contentType / audience / aiAssistance from existing meta tags, taxonomy tags from the morning's pass. `canonicalUri` points at raw.githubusercontent.com for the HTML file; `servedAt` points at the live mx.allabout.network URL; a `runbook` line on every block records that the HTML is the canonical source for this YAML because no separate markdown source exists. The same treatment applied to 17 lander/index pages on mx-site: the homepage, about, blog/drafts, blog/governance, blog/profiles, blog/use-cases, books and its appendices subtree, learn, services, reginald, the-gathering. The one blog post that already had a markdown-sourced YAML block (`files-away-from-source.html`) was left alone.
+
 ---
 
 ## By the Numbers
+
+### Thread one: UBERCOG and validator
 
 | Metric | Value |
 |--------|-------|
 | Commits | 2 (`6c3cd18b` UBERCOG fields-add; `4ce28f62` validator alignment) |
 | Files changed | 2 (UBERCOG.cog.md, scripts/mx-validator.cjs) |
 | Lines added | +27 |
-| Lines removed | −15 |
-| Repositories | 1 (hub only) |
+| Lines removed | -15 |
 | Submodule pointer bumps | 0 |
 | Gate 10 errors cleared | 3 (mx.purpose, mx.stability, contextProvides path) |
+
+### Thread two: blog taxonomy, filter, YAML retrofit
+
+| Metric | Value |
+|--------|-------|
+| Hub commits | 2 (`8d84953f`, `f4eff122`) |
+| mx-outputs commits | 3 (`e05bffa` filter; `98b938d` blog YAML; `4934b4e` lander YAML) |
+| Blog posts gaining filter chips | 50 (Featured 4 + Blog-listing 46) |
+| Blog posts gaining clickable tag chips under byline | 50 |
+| Blog posts gaining retrofitted YAML frontmatter | 49 |
+| Lander/index pages gaining retrofitted YAML frontmatter | 17 |
+| Total pages now carrying YAML frontmatter | 67 (50 blog posts + 17 landers) |
+| Tags in taxonomy | 13 |
+| Filter UX | Multi-select AND, hash-preselect (`#tags=foo,bar`) |
+| Cloudflare cache purges | 2 (after blog YAML; after lander YAML) |
 
 ---
 
@@ -74,6 +104,8 @@ The mx-validator and the canon dictionary are independently enforced — the val
 
 - Sweep the recommended-field warnings remaining on UBERCOG (`refersTo`, `mx.x-mx-contextRequired`). Both are pre-existing on the canon's recommended list but currently unmet on UBERCOG specifically. Low priority.
 - Verify Gate 10 against the next cog edit that touches `x-mx-contextProvides` in a fresh push to confirm the path realignment holds end-to-end.
+- Teach the html-writer skill to emit the YAML frontmatter block by default so the morning's retrofit pattern becomes the authoring default rather than a one-off pass. The canon-source posts will not need retrofitting again; new posts should carry the frontmatter from creation.
+- Consider whether the public sitemap entry for `/blog/` should advertise the filter URL pattern (e.g. `#tags=ai-agents`) somewhere a search engine can index. Currently the hash fragment is not surfaced anywhere outside the filter UI.
 
 ---
 
@@ -81,5 +113,14 @@ The mx-validator and the canon dictionary are independently enforced — the val
 
 | Hash | Description |
 |------|-------------|
-| 6c3cd18b | UBERCOG: add mx.purpose, mx.stability, x-mx-contextProvides |
-| 4ce28f62 | mx-validator: align contextProvides path with canon vendor namespace |
+| 6c3cd18b (hub) | UBERCOG: add mx.purpose, mx.stability, x-mx-contextProvides |
+| 4ce28f62 (hub) | mx-validator: align contextProvides path with canon vendor namespace |
+| 8bef350d (hub) | Bump mx-outputs: 2026-05-26 morning directors report (v1.0) |
+| af70f8b0 (hub) | Changelog: 2026-05-26 morning entry for UBERCOG and validator alignment |
+| 9f670154 (hub) | Learnings: canon deprecation table is authoritative for every enforcement tool |
+| d49335ff (hub) | Bump mx-outputs: README regen after morning report add |
+| 8d84953f (hub) | Bump mx-outputs: retroactive YAML frontmatter on 49 blog posts |
+| f4eff122 (hub) | Bump mx-outputs: retroactive YAML frontmatter on 17 mx-site landers |
+| e05bffa (mx-outputs) | Blog: multi-select AND tag filter on index; visible tag chips on every post |
+| 98b938d (mx-outputs) | Blog: HTML now canonical for YAML frontmatter on 49 older posts |
+| 4934b4e (mx-outputs) | Landers: HTML canonical for YAML frontmatter on 17 lander pages |
