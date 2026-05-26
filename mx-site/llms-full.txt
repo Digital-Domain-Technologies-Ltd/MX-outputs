@@ -646,6 +646,168 @@ Tom Cranstoun
 
 ---
 
+## A PDF That Can Prove Itself | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html
+
+**Description:** Every PDF this site produces now carries its own evidence chain inside its XMP packet. Open the file with no network and no source repo and an inspector can still read who made it, when, what it was rendered from, and what the chain is silent about. The honest absence matters as much as the present steps.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - What the file now says
+
+        - The honest absence
+
+        - The render's own facts
+
+        - Why the deterministic side gets the same step
+
+        - What an inspector does with this
+
+        - What this is not
+
+        - How to use it
+
+          A PDF That Can Prove Itself
+
+            26 May 2026
+            ·
+            Tom Cranstoun
+            ·
+            10 min read
+
+          - Practitioner
+
+- Provenance
+
+- MX foundations
+
+A PDF is a thing that travels. It leaves the system that produced it, gets emailed, attached to a deal room, dropped in a shared drive, printed and rescanned, forwarded to a regulator. Wherever it lands, the question waiting for it is the one this blog has been writing about for two months: who made this, when, on what authority, and has it been changed.
+
+The honest answer until recently has been: open the source repo on your own machine, look up the provenance sidecar next to the original, and trust that the PDF in your hand matches that sidecar. Which is not really verification. The chain depends on the inspector having the right filesystem access at the right moment, and on the file in their hand being the file the sidecar describes. Two assumptions, both broken on the email path most PDFs actually take.
+
+The cleaner answer is the one the file should give for itself. The PDF should carry its own evidence chain inside, in a structured form a machine can extract without network access, source-tree access, or any of the operator's cooperation. That is what shipped this morning.
+
+What the file now says
+
+Every PDF produced through this site's render pipeline now carries its full AI provenance chain in the XMP metadata packet at the front of the file. XMP is the same place ISO 14289 puts its accessibility conformance declaration; reading it is one exiftool call:
+
+exiftool -b -XMP-mx:ProvenanceAiPayload report.pdf | jq '.steps'
+
+The -b flag is not optional. Without it exiftool prepends a label and jq breaks at column eleven. With it, you get back the same JSON the sidecar next to the source carries.
+
+A typical chain from a hub-direct render now reads as two steps:
+
+[
+  {
+    "stepId": "no-upstream-provenance",
+    "agent": "mx.pdf.sh",
+    "outcome": "skipped",
+    "intent": "No provenance sidecar existed for the source artefact when this PDF was rendered. The evidence chain for this PDF begins at the pdf-render step that follows. No claim is made about the authoring, review, signing, or any pre-render handling of the source markdown."
+  },
+  {
+    "stepId": "pdf-render",
+    "agent": "mx.pdf.sh",
+    "outcome": "pass",
+    "inputs": {
+      "source": "possible.md",
+      "doctype": "report",
+      "sourceSha": "807e45d482d3c3d520f958592b70dcb7d0d15724",
+      "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/possible.md"
+    }
+  }
+]
+
+Two things in that chain worth dwelling on, because they sit at the centre of the design.
+
+The honest absence
+
+The first step says, explicitly, that the chain begins at this render. The PDF is not claiming to know who wrote the source markdown, when it was last reviewed, whether anybody signed it, or which version of which review process passed it. The chain in the PDF only claims what the chain in the PDF can actually back up.
+
+I have to be honest about why this matters more than it might look. The temptation when building a provenance system is to make the chain look complete. The file is signed, the chain exists, the colour-coded badge says "verified"; the inspector relaxes. If the chain is silent about pre-render history, the same temptation is to fill the silence with confident-sounding boilerplate that suggests due process happened upstream when nothing of the kind has been recorded.
+
+A chain that lies about its own completeness is worse than no chain at all. The next inspector who finds the lie discounts every chain after it. Provenance is a system that depends on the cheap parts being honest so the expensive parts (the signing, the verification, the registry) have somewhere to land. The cheapest part is admitting when the chain begins; pulling that out of the system breaks the system.
+
+The marker step records the absence by name. stepId: no-upstream-provenance, outcome: skipped. An inspector extracting the chain knows on the first read: this PDF was rendered, the render itself is recorded, and any claim about what happened before the render must come from somewhere else. The file has not promised what it cannot back up.
+
+When the chain DID exist before this render (an audit PDF that ran through the audit pipeline carries an audit-collect step, a report-rewrite step, a pdf-render step, all in sequence), no marker step fires. The render simply appends. Honesty by construction: the marker is the absence of a fact, not the presence of a different fact.
+
+The render's own facts
+
+The second step is the render itself. Three things in its inputs block tie the chain to a specific source forever.
+
+source names the file the render consumed by basename. Useful for human readers; not enough on its own to identify which possible.md (yesterday's commit or today's, after this morning's humanizer pass or before).
+
+sourceSha is the content-addressed identifier of the source. Specifically, git's hash-object SHA-1 of the source markdown's bytes. The same SHA git would compute if the source were committed to a tree. Two consequences. First, the chain points at one specific version of the source, forever; the SHA changes when the source bytes change, so re-rendering after a source edit produces a chain that points at a different SHA, and the old PDF's chain still points at what it actually consumed. Second, the SHA is verifiable by anyone with the source: clone the repo, git hash-object possible.md, compare. If the hashes match, the PDF was rendered from this exact source; if they do not, the source has moved on.
+
+canonicalUri carries the public address the source declares on itself. For published files this is a raw.githubusercontent.com/... URL; for internal-only files it can be any URI an organisation has agreed to as the canonical address. The chain ties the SHA to a fetchable location. The inspector with network access can fetch the URI, hash it, and confirm both the content and the address.
+
+doctype records the render mode (report, blog-post, letter, book, etc.) so the chain captures not just what was rendered but how. Two PDFs of the same source produced under different doctypes are different artefacts, and their chains say so.
+
+Why the deterministic side gets the same step
+
+The chain runs on two streams. The AI stream carries every step that involved non-deterministic processing (LLM calls, multi-agent collectors, human-committed edits). The deterministic stream carries every step that is rule-driven (a gate verdict, a CSV check, a probe result, a render with declared parameters).
+
+A render is on the deterministic side of that line. Same source, same doctype, same toolchain produce the same bytes; if the source changes, the SHA changes and the chain says so. So the render's facts go in BOTH streams: the AI stream because the render is the step the inspector cares about reading inside the PDF, and the deterministic stream because the render IS a deterministic step that the EAA Directive's documentation expectations land on.
+
+The two streams are not redundant. The AI sidecar travels in metadata, embedded inside the artefact, surfaced for AI-governance regimes (EU AI Act, UK ICO, NIST AI RMF, Colorado AI Act). The deterministic sidecar lives adjacent on disk, larger and more detailed, surfaced for accessibility-conformance regimes (EAA Directive 2019/882). One reader, one frame; one file, one frame. The cross-reference is by mutual companion pointer at the top of each.
+
+What an inspector does with this
+
+The simplest path: open the PDF in any tool that exposes XMP and read the mx:ProvenanceAiPayload field. Acrobat, Apple Preview's metadata inspector, every command-line PDF tool. The JSON pasted above is what they get back.
+
+The verifying path: clone the source repo (if the chain's canonicalUri is one they can reach), run git hash-object on the source, compare to the chain's sourceSha. If they match, the PDF was produced from exactly that source, and the chain is honest about what happened to the source on its way to PDF. If they do not match, the PDF still verifies as having been rendered from SOME version of the source; the inspector then has to decide whether the divergence matters.
+
+The investigating path: fetch the canonicalUri over the network, hash the bytes, compare. Same logic, no repo needed. The URL is part of the chain; the inspector does not have to take the operator's word for which file is canonical.
+
+The skeptical path: when there is no upstream provenance, the chain says so. The inspector knows on first read that the chain only claims what happens from the render forward. Everything before is asserted by other mechanisms (the source's own provenance, the signing chain on the source repo, the publisher's reputation, libel law) and the inspector can ask whoever is supplying the PDF to provide those mechanisms separately. The chain has not lied about what it does not know.
+
+What this is not
+
+It is not a guarantee that the source is true. The render captures who rendered what, when, against which canonical address. It does not capture whether the source's claims are factually correct. A signed, verified chain on a PDF that says the moon is made of cheese verifies that someone published the claim, not that the claim is true.
+
+It is not a substitute for a regulator. The chain is queryable, verifiable evidence about the file. Whether the file complies with the EU AI Act, the European Accessibility Act, or any other regulatory regime remains a legal duty of the publisher. The chain gives a regulator the records they expect to find; it does not interpret those records on the publisher's behalf.
+
+It is not the end of the work. The chain is one layer. The signing chain on the publisher's identity (DIDs, key rotation, transparency logs) is another. The conformance declarations elsewhere in the PDF (pdfuaid:Part=1, StructTreeRoot, the rest of the EAA Level 2 declaration) are another. Together they answer the four medieval questions; alone, none of them does. Provenance is a system; this is the metadata layer of that system.
+
+How to use it
+
+If you publish PDFs through this site, you already use it. The pipeline does the work. There is nothing to configure, nothing to opt into, and the existing audit-pipeline PDFs (which carried full provenance chains before this morning's change) still produce the same chains they always did. The change closes the gap for hub-direct PDFs of arbitrary markdown sources, which previously shipped with the XMP metadata block but without the AI payload inside it.
+
+If you receive a PDF this site produced, extract the chain with one command:
+
+exiftool -b -XMP-mx:ProvenanceAiPayload <file>.pdf | jq .
+
+Pipe through jq '.steps' to see just the chain. Pipe through jq '.steps[].stepId' to get the step names. Pipe through jq '.steps[] | select(.stepId == "pdf-render") | .inputs' to get the source's identifying inputs in one line.
+
+If you publish PDFs through a different pipeline, the file format of the chain is open and the primitives sit at mx-reginald/lib/provenance.js. The convention is the convention any provenance regime ought to land on: a chain that is honest about where it begins, that ties to specific bytes by content hash, and that the file carries with it wherever it goes.
+
+The PDF should be able to prove itself. After today, the ones we produce can.
+
+Tom Cranstoun is the Machine Experience Authority and founder of the MX community. He consults on MX strategy through CogNovaMX Ltd.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
 ## A Standard That Knows What It Isn't | Tom Cranstoun
 
 **URL:** https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html
@@ -4743,6 +4905,17 @@ Blog
         Commentary
         Blockchain
         Announcements
+
+            A PDF That Can Prove Itself
+
+            Every PDF this site produces now carries its own evidence chain inside its XMP packet. Open the file with no network and no source repo; an inspector can still read who made it, when, what it was rendered from, and what the chain is honestly silent about.
+
+            26 May 2026
+            - Practitioner
+
+- Provenance
+
+- MX foundations
 
             The Padlock Attests the Pipe, Not the Page
 
