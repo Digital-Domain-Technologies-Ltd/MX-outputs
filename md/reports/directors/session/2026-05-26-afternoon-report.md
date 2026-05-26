@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Self-contained PDF provenance, html-writer pipeline overhaul, IPTC corpus backfill, audit-PDF table layouts, MX Readiness Level honesty fix, blog filter clear-all"
-description: "Two related disciplines closed end-to-end. The PDF render pipeline now produces self-contained evidence chains: every PDF carries its full AI provenance inside its XMP packet with an honest no-upstream-provenance marker when the chain begins at the render. The blog-publishing pipeline gained three default behaviours (YAML embed, tag-chip row, IPTC digitalSourceType) that were previously hand-applied per post. A new blog post landed alongside, and the three-gap entry from the 25 May review was retired with all gaps closed. A second cluster mid-afternoon: an enhancely.ai re-audit using the new non-blocking pipeline surfaced PDF-layout breakage in five wide tables (Resilience Check, Pages Audited, Security Headers per-page, Div Soup, At-a-Glance), all restructured with column-collapse + CSS column-count font scaling + bullet-list conversion for long-URL cases. A logic bug surfaced in the same audit: the MX Readiness Level classifier promoted a site with zero MX governance metadata to 'Citation-ready' on the strength of Schema.org + canonical alone; classifier now requires actual mxGovernance markers for Level 2+. The blog filter gained a red x clear-all chip, and all inline CSS/JS on the blog index was extracted into external files per the no-inline rule (added to memory)."
+title: "Co-Directors Report - Self-contained PDF provenance, html-writer pipeline overhaul, IPTC corpus backfill, audit-PDF table layouts, MX Readiness Level honesty fix, blog filter clear-all, LLM prompt + input capture (full provenance)"
+description: "Two related disciplines closed end-to-end. The PDF render pipeline now produces self-contained evidence chains: every PDF carries its full AI provenance inside its XMP packet with an honest no-upstream-provenance marker when the chain begins at the render. The blog-publishing pipeline gained three default behaviours (YAML embed, tag-chip row, IPTC digitalSourceType) that were previously hand-applied per post. A new blog post landed alongside, and the three-gap entry from the 25 May review was retired with all gaps closed. A second cluster mid-afternoon: an enhancely.ai re-audit using the new non-blocking pipeline surfaced PDF-layout breakage in five wide tables (Resilience Check, Pages Audited, Security Headers per-page, Div Soup, At-a-Glance), all restructured with column-collapse + CSS column-count font scaling + bullet-list conversion for long-URL cases. A logic bug surfaced in the same audit: the MX Readiness Level classifier promoted a site with zero MX governance metadata to 'Citation-ready' on the strength of Schema.org + canonical alone; classifier now requires actual mxGovernance markers for Level 2+. The blog filter gained a red x clear-all chip, and all inline CSS/JS on the blog index was extracted into external files per the no-inline rule (added to memory). A third cluster late afternoon: every LLM call the audit pipeline makes now writes the exact prompt bytes the model saw AND the upstream input files the script read to disk under provenance/, indexed by sha256 in hash.index.csv. Three-hash chain per LLM step: rubricHash (source-tree), promptHash (bytes the model saw), inputHashes (raw data that fed the prompt)."
 author: "Tom Cranstoun"
 created: 2026-05-26
 modified: 2026-05-26
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -155,6 +155,20 @@ Once the chip was wired, the inline `<style>` (~60 lines covering tag-filter chi
 
 ---
 
+### 10. LLM prompt + input capture: full per-call provenance
+
+The audit pipeline calls the model from nine different scripts, and each call injects per-call facts into the prompt before sending. The static `<name>.system.md` files committed under `mx-reginald/audit/system-prompts/` are the rubric the script loads, but the bytes the model actually saw are not byte-identical to any file in the source tree. Pointing the provenance chain at the static file alone misrepresents the call. Same for the upstream inputs - the report markdown, the sidecar JSONs, the cached HTML pages - which may be truncated before reaching the user message.
+
+The fix is symmetric. A new lib at [`mx-reginald/audit/lib/capture-prompt.js`](mx-reginald/audit/lib/capture-prompt.js) exposes two helpers: `capturePrompt(...)` writes the rendered prompt (system + user message) to `<deliveryDir>/provenance/prompts/<sha256>.txt`, and `captureInput(...)` writes the upstream input file to `<deliveryDir>/provenance/inputs/<sha256>.<ext>`. Both append rows to `<deliveryDir>/provenance/hash.index.csv` with a `kind` column distinguishing prompts from inputs. The CSV schema migrates old-schema rows in place on first call so prior runs do not break.
+
+The primitive at [`mx-reginald/lib/provenance.js`](mx-reginald/lib/provenance.js) gains `promptHash` (single sha256) and `inputHashes` (array of `{hash, label}`) on every step entry; the AI-stream wrapper at [`mx-reginald/audit/lib/llm-provenance.js`](mx-reginald/audit/lib/llm-provenance.js) forwards both. Every LLM call now produces three hashes for a regulator to walk: `rubricHash` (source-tree rubric), `promptHash` (bytes the model saw), `inputHashes` (raw data that fed the prompt).
+
+Wired across all nine LLM scripts: rewrite-report, audit-fierce-critic, audit-llm-judgment, repair-report-final, repair-report-voice-scope, repair-report, audit-llm-attribution-judge, collect-llm-attribution, and provenance-gap-llm. The duplicate `import path` bug in audit-llm-attribution-judge.js (a relic from a prior partial edit) was fixed in the same pass. The first verification run on enhancely.ai produced four prompt captures and two distinct input captures (the same report.md read by repair-voice-scope and fierce-critic differed by seventeen bytes because the repair pass mutated the file between calls; the input captures preserve that per-call truth rather than a single reference).
+
+This work was also a merge-conflict recovery. The earlier session-mid attempt to land the same lib was rolled back by parallel APA-7 work in the same files; the re-application happened on top of the parallel work without conflict, with the duplicate-import bug fixed as a side effect.
+
+---
+
 ## The Insight
 
 The shape of this afternoon's work was the same shape twice: turn a manual sequence that we did by hand into a default the script does for us. The PDF case was provenance metadata that lived in mx-reginald primitives but was not wired into the hub-direct render path. The blog-publishing case was three steps that the skill prose documented as the contract but the generator had not been updated to honour. Both shapes had the same fix at structure level: the discipline already existed in the canon (the primitive, the skill prose); the producer just had to start calling it.
@@ -195,6 +209,11 @@ The lesson worth carrying forward is the one the LEARNINGS now records about sou
 | 06ee4867 (hub) | Learnings: when a hand-step lands twice, fix the producer not the output |
 | 7dbdf05e (hub) | CHANGELOG: retire reginald-vnext-prd.md rename from carry-forward list |
 | 501c881 (mx-outputs) | Blog index: clear-all (x) button + extract filter CSS/JS to external files |
-| (hub, pending) | Audit-PDF: restructure five wide tables + CSS `:has()` column-count font scale |
-| (hub, pending) | MX Readiness Level: require mxGovernance markers for Level 2+ |
-| (hub, pending) | Probes: write per-run output directly to results dir, not to legacy `<delivery>/<host>/` (parallel work in the working tree) |
+| 78d107db (hub) | Audit pipeline: PDF table layouts, MX Readiness honesty, probe write-path fix |
+| 5348c5e4 (hub) | Audit prompts: stop falsely claiming citation when MX governance is absent |
+| 283fad2f (hub) | Docs: changelog + reminders for table layouts, MX Readiness fix, prompt sweep, blog filter |
+| f91ca229 (hub) | Learnings: table-layout misfit, classifier honesty, public-HTML inline rule |
+| ca26f1a0 (hub) | Bump mx-outputs: directors report v1.1, audit refresh, blog filter externals, README regen |
+| 20129c42 (hub) | Audit prompt + input capture: full LLM-call provenance per audit run |
+| 3a8507d8 (hub) | Housekeeping: routing registry regen + changelog archive trailing newline |
+| 1332371 (mx-outputs) | Refresh enhancely.ai audit + add provenance/ capture folder |
