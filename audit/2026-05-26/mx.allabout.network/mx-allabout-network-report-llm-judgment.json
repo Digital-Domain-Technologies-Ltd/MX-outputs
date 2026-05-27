@@ -1,0 +1,35 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/mx.allabout.network/mx-allabout-network-report.md",
+  "timestamp": "2026-05-27T06:18:23.214Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 26319,
+    "output_tokens": 482,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 2369
+  },
+  "findingCount": 3,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "tone-inconsistency",
+      "message": "The 'Discovery Files — llms-full.txt' section switches from the first-person voice used throughout the body ('We find no llms-full.txt reachable') into a hedged, distanced construction ('Whether adding it would be worthwhile depends on...') that reads as machine/third-person authorial detachment, breaking the consistent first-person consultant voice used in every other Finding and Discovery Files subsection.",
+      "context": "Whether adding it would be worthwhile depends on the actual depth of content across the full site, which the audited sample alone does not resolve.",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The llms.txt Discovery Files subsection states 'We found no llms.txt reachable on mx.allabout.network' as a site-wide assertion, but Priority 2 in the Findings section explicitly states that llms.txt IS present ('Four of the five canonical discovery artefacts are present: llms.txt, agent-card.json, ai.txt, and humans.txt'), making the Discovery Files verdict a contradictory overstatement about the full site rather than the audited sample.",
+      "context": "We found no llms.txt reachable on mx.allabout.network, meaning machines that consult this discovery file to understand the site's scope",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "The llms-full.txt Discovery Files subsection hedges a strong, directly evidenced finding ('Whether adding it would be worthwhile depends on the actual depth of content across the full site') when Priority 2 in Findings confidently asserts the same absence as a Medium-priority gap with a clear recommendation to publish llms-full.txt — the identical evidence base warrants the same confidence in both sections.",
+      "context": "Whether adding it would be worthwhile depends on the actual depth of content across the full site, which the audited sample alone does not resolve.",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}

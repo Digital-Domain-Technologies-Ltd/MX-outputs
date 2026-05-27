@@ -64,28 +64,19 @@ mx:
 
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this section surfaces 18 findings (2 errors, 11 warnings, 5 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+Every automated gate ran to completion; this section surfaces 9 findings (1 error, 7 warnings, 1 info) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
 
 ### Errors (I/O or structural failures)
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | check-report-coherence.js | placeholder-leak | 1 unresolved placeholder token(s) leaked into the final report: NUMBER_OF_PAGES_AUDITED | 2026-05-26T15:37:41Z |
-| 2 | check-report-coherence.js | placeholder-leak | 6 unresolved placeholder token(s) leaked into the final report: NUMBER_OF_PAGES_AUDITED, N, PLACEHOLDER | 2026-05-26T16:15:51Z |
+| 1 | check-report-coherence.js | placeholder-leak | 1 unresolved placeholder token(s) leaked into the final report: NUMBER_OF_PAGES_AUDITED | 2026-05-26T19:37:58Z |
 
-<details><summary>Error detail (2)</summary>
+<details><summary>Error detail (1)</summary>
 
 **1. check-report-coherence.js - 1 unresolved placeholder token(s) leaked into the final report: NUMBER_OF_PAGES_AUDITED**
 
 /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md — 1 placeholder leaks at lines: 83([NUMBER_OF_PAGES_AUDITED]). Each one indicates an infill handler that did not match its template anchor, or a handler that returned empty for an expected field.
-
-Suggested next steps:
-
-- For each token, grep infill-report.js and tableHandlers/ for the replacement code path. Verify the template text matches the regex.
-
-**2. check-report-coherence.js - 6 unresolved placeholder token(s) leaked into the final report: NUMBER_OF_PAGES_AUDITED, N, PLACEHOLDER**
-
-/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md — 6 placeholder leaks at lines: 79([NUMBER_OF_PAGES_AUDITED]), 106([NUMBER_OF_PAGES_AUDITED]), 125([NUMBER_OF_PAGES_AUDITED]), 131([N]), 135([PLACEHOLDER]), 136([NUMBER_OF_PAGES_AUDITED]). Each one indicates an infill handler that did not match its template anchor, or a handler that returned empty for an expected field.
 
 Suggested next steps:
 
@@ -97,19 +88,15 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | template-voice | template-voice-style | Template voice/style findings: 1 violation(s) | 2026-05-26T15:21:08Z |
-| 2 | template-coverage | unfilled-placeholders | Unfilled placeholders in rendered report | 2026-05-26T15:22:12Z |
-| 3 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-26T15:29:26Z |
-| 4 | section-sanity | orphan-bullets-or-leaked-markers | Section sanity issues: 1 issue(s) | 2026-05-26T15:29:27Z |
-| 5 | template-leaks | template-leaks | 1 leak(s) in the rendered report | 2026-05-26T15:29:28Z |
-| 6 | gates-summary | gates-failed | Audit gates raised findings: 0a, 0b-voice, 0g, 1 | 2026-05-26T15:37:41Z |
-| 7 | template-coverage | unfilled-placeholders | Unfilled placeholders in rendered report | 2026-05-26T15:58:34Z |
-| 8 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-26T16:06:23Z |
-| 9 | section-sanity | orphan-bullets-or-leaked-markers | Section sanity issues: 2 issue(s) | 2026-05-26T16:06:25Z |
-| 10 | template-leaks | template-leaks | 2 leak(s) in the rendered report | 2026-05-26T16:06:25Z |
-| 11 | gates-summary | gates-failed | Audit gates raised findings: 0a, 0b-voice, 0g, 1 | 2026-05-26T16:15:50Z |
+| 1 | template-voice | template-voice-style | Template voice/style findings: 1 violation(s) | 2026-05-26T19:19:57Z |
+| 2 | template-coverage | unfilled-placeholders | Unfilled placeholders in rendered report | 2026-05-26T19:21:49Z |
+| 3 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-26T19:29:08Z |
+| 4 | section-sanity | orphan-bullets-or-leaked-markers | Section sanity issues: 1 issue(s) | 2026-05-26T19:29:09Z |
+| 5 | template-leaks | template-leaks | 1 leak(s) in the rendered report | 2026-05-26T19:29:09Z |
+| 6 | gates-summary | gates-failed | Audit gates raised findings: 0a, 0b-voice, 0g, 1 | 2026-05-26T19:37:58Z |
+| 7 | check-recommendation-consistency.js | missing-in-engagement | Priority 6 not represented in Engagement phases | 2026-05-26T19:37:59Z |
 
-<details><summary>Warning detail (11)</summary>
+<details><summary>Warning detail (7)</summary>
 
 **1. template-voice - Template voice/style findings: 1 violation(s)**
 
@@ -125,7 +112,16 @@ Gate template-coverage returned non-zero with no captured output.
 
 **3. voice-consistency - Mixed-voice section(s) remain after auto-repair: 1**
 
-Gate voice-consistency returned non-zero with no captured output.
+Gate voice-consistency (check-report-voice.js) returned non-zero. Output excerpt:
+
+check-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md
+  1 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person ("the site does X") with first-person ("we found Y") inside the same section reads as drafted-by-committee.
+
+  ## Executive Summary  (line 64)
+    first-person tokens: 2 (lines 76, 78)
+    third-person markers: 1 (lines 78)
+
+  Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice ("we"); scorecards and appendices use third-person.
 
 **4. section-sanity - Section sanity issues: 1 issue(s)**
 
@@ -170,63 +166,15 @@ Suggested next steps:
 - Re-run gates only after fixing: mx exec mx-audit --gates mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md
 - If the same gate fails twice in a row with no underlying data change, the gate itself is misbehaving — file an issue against the gate script.
 
-**7. template-coverage - Unfilled placeholders in rendered report**
+**7. check-recommendation-consistency.js - Priority 6 not represented in Engagement phases**
 
-Gate template-coverage returned non-zero with no captured output.
+Priority 6 ("MX Governance Fields Absent from Page Frontmatter (canonicalUri, contentType, audience, status)") does not appear in any of the 4 engagement-phase rows. Low-numbered priorities sometimes legitimately don't recur in a 3-phase plan; verify the omission is intentional.
 
-**8. voice-consistency - Mixed-voice section(s) remain after auto-repair: 1**
-
-Gate voice-consistency returned non-zero with no captured output.
-
-**9. section-sanity - Section sanity issues: 2 issue(s)**
-
-Gate section-sanity (check-report-section-sanity.js) returned non-zero. Output excerpt:
-
-
-Section sanity: enhancely-ai-report.md: 2 issue(s)
-
-  leaked-template-marker (2):
-    line 106 — section "Warnings (rule violations)"
-      Unprocessed template marker "[IF SDQ_SCORE >= 76: "Across the [NUMBER_OF_PAGES_AUDITED]" survived infill — every IF/ELSE/ENDIF must be consumed before the report ships.
-    line 125 — section "Warnings (rule violations)"
-      Unprocessed template marker "[IF SDQ_SCORE >= 76: "Across the [NUMBER_OF_PAGES_AUDITED]" survived infill — every IF/ELSE/ENDIF must be consumed before the report ships.
-
-→ Fix the template / infill so each section is self-contained: every bullet list has an introducer in the same section, every code-token is named in surrounding prose, and every conditional marker is consumed at infill time.
-
-**10. template-leaks - 2 leak(s) in the rendered report**
-
-The rendered enhancely-ai-report.md contains unresolved placeholders (e.g. `[SITEMAP_...]`, `[N]`, bare bracket-instructions, or REWRITE comment blocks). These would print as literal prose in the PDF. check-template-leaks.js output:
-
-check-template-leaks: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md
-  2 leak category/categories found:
-  - [mustache-token] 1 unresolved {{TOKEN}} occurrence(s): {{TOKEN}}
-  - [bracket-placeholder] 5 unresolved [PLACEHOLDER] token(s): NUMBER_OF_PAGES_AUDITED, PLACEHOLDER
-        line 28: "[NUMBER_OF_PAGES_AUDITED]"
-        line 55: "[NUMBER_OF_PAGES_AUDITED]"
-        line 74: "[NUMBER_OF_PAGES_AUDITED]"
-        line 84: "[PLACEHOLDER]"
-        line 85: "[NUMBER_OF_PAGES_AUDITED]"
-Resolve each leak before PDF generation:
-  - REWRITE block           → rewrite the section into plain prose, then delete the comment
-  - {{TOKEN}}               → re-run infill-report.js with the correct results directory
-  - [Bracket]               → replace with actual content, or convert to a REWRITE block
-  - further-reading-no-qr-table → restore the two-column QR table from the template (| Scan | Link and description |)
+Engagement scopes: "P1, P2, P3 (Compliance Risk)", "Catalogue Visibility, Discovery Readiness, Semantic Structure, MX Stack Completeness, Performance, Security headers, and optional enhancements", "Continuous monitoring and quarterly audits", "Web estate + PDFs + data feeds + APIs + documents".
 
 Suggested next steps:
 
-- Add the missing entries to the `replacements` map in mx-reginald/audit/bin/infill-report.js (look up the placeholder name in the leak detector output above).
-- When the source data is genuinely absent, fall back to a clear 'N/A' or a sentence that does not need the count — never let the raw token reach the PDF.
-- For multi-line REWRITE blocks, ensure the LLM-rewrite phase has API access (ANTHROPIC_API_KEY set).
-
-**11. gates-summary - Audit gates raised findings: 0a, 0b-voice, 0g, 1**
-
-Phase 3 gate suite reported 4 unresolved gates. Individual gates may have recorded richer detail entries above this one. The PDF below is a partial deliverable produced under the always-produce-PDF rule; treat it as diagnostic context rather than a delivered audit until the listed gates pass.
-
-Suggested next steps:
-
-- Review each failed gate entry above for its specific detail and suggested fix.
-- Re-run gates only after fixing: mx exec mx-audit --gates mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md
-- If the same gate fails twice in a row with no underlying data change, the gate itself is misbehaving — file an issue against the gate script.
+- Add a phase row that addresses this priority, or confirm the priority is bundled into an existing phase under a different name.
 
 </details>
 
@@ -234,51 +182,15 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance (line 82) | 2026-05-26T15:22:13Z |
-| 2 | tone | negation-pivot | Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 1 instance (line 279) | 2026-05-26T15:22:13Z |
-| 3 | tone | banned-verdict | Banned verdict words: 1 instance (line 69) | 2026-05-26T15:58:34Z |
-| 4 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 8 instances (line 79) | 2026-05-26T15:58:34Z |
-| 5 | tone | negation-pivot | Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 4 instances (line 166) | 2026-05-26T15:58:34Z |
+| 1 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance (line 82) | 2026-05-26T19:21:49Z |
 
-<details><summary>Info detail (5)</summary>
+<details><summary>Info detail (1)</summary>
 
 **1. tone - Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance**
 
 Em-dash in prose (use comma, semicolon, parentheses, or two sentences)
 
 line 82: "—" - line 378 [voice] "the page " — Bare third-person "the page" leaks into client prose. Use "each
-
-**2. tone - Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 1 instance**
-
-Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B")
-
-line 279: "not just" - - Delivering both headers through a centralised server or CDN configuration ensures consistent cover
-
-**3. tone - Banned verdict words: 1 instance**
-
-Banned verdict words
-
-line 69: "failures" - ### Errors (I/O or structural failures)
-
-**4. tone - Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 8 instances**
-
-Em-dash in prose (use comma, semicolon, parentheses, or two sentences)
-
-line 79: "—" - /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-re
-line 105: "—" - line 378 [voice] "the page " — Bare third-person "the page" leaks into client prose. Use "each
-line 124: "—" - line 83 — section "Warnings (rule violations)"
-line 125: "—" - Unprocessed template marker "[IF SDQ_SCORE >= 76: "Across the [NUMBER_OF_PAGES_AUDITED]" survi
-line 146: "—" - - When the source data is genuinely absent, fall back to a clear 'N/A' or a sentence that does not n
-... and 3 more
-
-**5. tone - Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 4 instances**
-
-Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B")
-
-line 166: "not just" - | 2 | tone | negation-pivot | Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B
-line 176: "not just" - **2. tone - Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 1 instance**
-line 178: "not just" - Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B")
-line 180: "not just" - line 279: "not just" - - Delivering both headers through a centralised server or CDN configuration e
 
 </details>
 
@@ -322,11 +234,11 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 | Agent Readability | **64**/100 | `############------` |
 | Pipeline Survivability | **79**/100 | `##############----` |
 
-We audited seven pages from www.enhancely.ai and found a property that communicates clearly, earns strong search visibility, and presents its content with evident care for the people reading it. SEO foundations are solid at 84/100, and the structured data layer is well developed, with a broad vocabulary of schema types already in place across the audited set. The groundwork is there for a site that serves human visitors well.
+We audited seven pages of www.enhancely.ai and found a site that is doing real work for its human visitors. SEO foundations are solid, scoring 84/100 (Excellent) across the audited set, and the structured data layer is already well-populated with 12 unique schema types across 7 audited pages that reinforce topical relevance and content organisation. The platform serves content cleanly.
 
-Before turning to machine-readiness, we want to name an accessibility priority. Across the audited set we recorded 53 raw instances of WCAG AA issues spanning 16 distinct issue types, with 53 instances marked critical. The constructive news is that 48 of those instances trace to 11 recurring template patterns, meaning a single fix per pattern resolves all instances it generates. Remediation effort is therefore more contained than the raw count suggests, and we treat this as a Priority 1 compliance item.
+Before turning to machine readiness, we want to name accessibility as a Priority 1 compliance item. Across the audited set we recorded 53 raw instances of WCAG AA issues spanning 16 distinct issue types. The good news is that 48 of those instances trace back to 11 recurring template patterns, which means a single corrective edit per pattern resolves the majority of the raw count without page-by-page intervention. Addressing these patterns is the most direct route to a meaningful improvement in inclusion and audit-trail confidence. The headline opportunity beyond that is machine readiness. www.enhancely.ai sits at MX Readiness Level 1 (Discoverable): machines can find and parse the audited pages, but they cannot yet cite those pages as attested sources. We find that the score thresholds for Citation-ready (Level 2) are already met across MSC, Structured Data Quality, and Discovery Readiness, so the lever is not raising those scores further. What is missing is a small set of MX governance fields, specifically mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers, on at least one published page. Without those fields, a machine can read the content but cannot treat it as a citable, attributed source.
 
-The headline opportunity is machine-readiness. We find that the score thresholds for Citation-ready (MX Level 2) are already met across the key dimensions, with MSC at 68, Structured Data Quality at 87, and Discovery Readiness at 40. What currently holds www.enhancely.ai at Level 1 (Discoverable) is the absence of MX governance metadata: fields such as mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers were not detected on any of the audited pages. Without those fields, a machine can discover and parse a page but cannot cite it as an attested source. Adding MX governance fields to at least one published page is the single concrete step that unlocks Citation-ready, and it requires no changes to the schema vocabulary or discovery infrastructure already in place.
+The one dimension that warrants a closer look in that machine-readiness picture is Catalogue Visibility, which scores 10/100 across the audited set. Discovery Readiness at 40/100 is already above the Citation-ready threshold, yet there is still room to strengthen how well the site surfaces itself to machine catalogues and crawlers. Taken together, the groundwork is genuinely there for www.enhancely.ai to move from a site that machines can discover to one they can actively cite and recommend. The sections that follow lay out exactly where to focus to make that step.
 
 \clearpage
 
@@ -334,25 +246,27 @@ The headline opportunity is machine-readiness. We find that the score thresholds
 
 ### Human Experience
 
-Across the audited set, www.enhancely.ai delivers a strong human experience, with Accessibility at 89/100 and SEO at 84/100 both sitting in the Excellent band, while performance at a 3632ms average lands in the Good range and the concentration of accessibility issues in template patterns points to a clear area for improvement.
+Across the audited set, www.enhancely.ai delivers a strong experience for human visitors, with Accessibility and SEO both sitting in the Excellent band, and the primary area for attention being the template-level patterns that account for the majority of the WCAG instances we recorded.
 
-| Dimension | Rating | Grade |
-|-----------|--------|-------|
-| UX / Navigation | Excellent | A |
-| Performance | Good | B |
-| Accessibility (WCAG) | Excellent | A |
-| Trust and Credibility | Excellent | A |
+| Dimension | Rating | Grade | vs Peers |
+|-----------|--------|-------|----------|
+| UX / Navigation | Excellent | A | - |
+| Performance | Good | B | median 83 |
+| Accessibility (WCAG) | Excellent | A | median 81 |
+| Trust and Credibility | Excellent | A | - |
 
 ### Machine Experience
 
-Across the audited set, machines can discover and parse www.enhancely.ai at a functional level, with structured data quality and pipeline survivability providing a solid technical foundation, though discovery readiness and the absence of MX governance markers mean citation-ready status remains the natural next step.
+Across the audited set, machines can discover and parse content with reasonable confidence, though citation capability as an attested source remains a step ahead, contingent on closing the gaps in discovery readiness and MX governance that currently hold www.enhancely.ai at Level 1 (Discoverable).
 
-| Dimension | Score | Rating | Grade |
-|-----------|-------|--------|-------|
-| Discovery Readiness | 40/100 | Could Be Better | C |
-| Structured Data Quality | 87/100 | Excellent | A |
-| MX Stack Completeness | 68/100 | Good | B |
-| Pipeline Survivability | 79/100 | Excellent | A |
+| Dimension | Score | Rating | Grade | vs Peers |
+|-----------|-------|--------|-------|----------|
+| Discovery Readiness | 40/100 | Could Be Better | C | median 25 |
+| Structured Data Quality | 87/100 | Excellent | A | median 57 |
+| MX Stack Completeness | 68/100 | Good | B | median 50 |
+| Pipeline Survivability | 79/100 | Excellent | A | median 90 |
+
+*Benchmark median drawn from a curated audit dataset.*
 
 ---
 
@@ -391,7 +305,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-Across the audited set, www.enhancely.ai demonstrates a strong foundations in search visibility, accessibility, and structured data, with SEO scoring 84/100, Accessibility at 89/100, and Structured Data Quality at 87/100. These results reflect real care in how the pages have been built, and they form the groundwork for the improvements we outline in the sections that follow.
+Across the audited set, www.enhancely.ai arrives with a strong foundations: strong SEO and Structured Data Quality scores, an Accessibility result that places the work well within reach of full compliance, and a schema vocabulary already covering a broad range of types. These results are the groundwork on which the improvements detailed below can be built with confidence.
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
@@ -416,83 +330,80 @@ Across the audited set, www.enhancely.ai demonstrates a strong foundations in se
 
 ### At a Glance
 
-We have prioritised the findings below by the degree to which each gap constrains downstream visibility, with discovery and catalogue readiness leading because they determine whether machines can locate and index www.enhancely.ai content before any other signal takes effect. Structured data and MX stack completeness follow as areas to strengthen once the foundational discovery layer is in place.
+We have prioritised the findings below by the degree to which each gap limits what machines can do with www.enhancely.ai, placing discovery and catalogue visibility at the top because those gaps constrain every downstream capability, from crawling and indexing through to citation and structured retrieval. Structured Data Quality sits at 87/100 across the audited set, yet Catalogue Visibility at 10/100 and Discovery Readiness at 40/100 show that the strongest opportunities lie in making the content machines can already parse more fully reachable and classifiable.
 
 | # | Finding | Bucket | Priority | Effort | Impact |
 |---|---------|--------|----------|--------|--------|
-| 1 | Footer and content contrast gaps, WCAG 1.4.3 (3.67:1 and 3.70:1 vs required 4.5:1), 6 of 7 audited pages | Compliance Risk | High | Low | Low-vision users may miss footer and section text that falls below the minimum contrast threshold |
-| 2 | Semantic structure, Div Soup rendered 49/100, worst page: /blog/schema-markup-explained-the-invisible-code-that-makes-your-website-visible-to-ai (44 of 103 bare divs) | Compliance Risk | Medium | Medium | Screen-reader users and machines are less likely to correctly interpret document structure and content hierarchy |
-| 3 | Security headers incomplete, 3 of 5 present (Content-Security-Policy and Referrer-Policy absent) | Cross-cutting | High | Low | Browsers and security scanners risk missing defences against injection attacks and referrer leakage |
-| 4 | Performance, 3632ms average load time across the audited set | Cross-cutting | Medium | Medium | Users on slower connections may miss content before abandoning; slower Time to First Byte reduces crawl budget efficiency |
-| 5 | Discovery Readiness 40/100, llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt all absent | AI Opportunity | High | Medium | Machines may miss structured intent signals and risk attributing content incorrectly or omitting www.enhancely.ai from agent answers |
-| 6 | MX Stack Completeness 68/100, MX governance fields (canonicalUri, contentType, audience, status) absent from page frontmatter | AI Opportunity | Medium | Low | Machines are less likely to classify content type and audience correctly, reducing citation confidence |
+| 1 | Footer contrast ratio 3.67:1, below WCAG 1.4.3 minimum 4.5:1 (6 pages) | Compliance Risk | High | Low | Low-vision users may miss footer content on 6 of 7 audited pages |
+| 2 | Hero section contrast ratio 3.7:1, below WCAG 1.4.3 minimum 4.5:1 (6 pages) | Compliance Risk | High | Low | Low-vision users may miss primary section content on 6 of 7 audited pages |
+| 3 | Semantic structure 49/100, worst page: 44 of 103 elements are bare divs (https://www.enhancely.ai/blog/schema-markup-explained-the-invisible-code-that-makes-your-website-visible-to-ai) | Compliance Risk | Medium | Medium | Screen reader users and machines are less likely to interpret page structure correctly |
+| 4 | Security headers incomplete: Content-Security-Policy and Permissions-Policy absent | Cross-cutting | Medium | Low | Browsers may apply weaker default policies; security posture reduces agent confidence |
+| 5 | Discovery Readiness 40/100: llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt all absent | AI Opportunity | High | Medium | Machines may miss structured entry points and risk missing this site in agent-driven discovery |
+| 6 | MX governance fields absent from page frontmatter (canonicalUri, contentType, audience, status) | AI Opportunity | Medium | Low | Machines are less likely to classify content intent and audience correctly, reduces agent confidence |
 
 ---
 
-**Priority 1: Footer and Content Contrast Gaps, WCAG 1.4.3 (3.67:1 and 3.70:1 Ratios on 6 of 7 Audited Pages)**
+**Priority 1: Footer Contrast Gaps, WCAG 1.4.3 (3.67:1 on 6 Pages)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** We recorded two distinct contrast ratios below the WCAG 1.4.3 minimum of 4.5:1 across the audited set. Footer text in two separate selectors measures 3.67:1 across 6 pages, and a content-section element measures 3.70:1 across 6 pages. Because 48 of 53 total issues (91%) trace to 11 recurring template patterns, a single update to the shared footer and content-section styling would resolve all instances across the audited set in one pass.
+**Finding:** Across the audited set, footer text on 6 of 7 pages carries a contrast ratio of 3.67:1 against its background, below the WCAG 1.4.3 minimum of 4.5:1 for normal text. We identify three distinct footer selectors sharing the same shortfall, all traceable to a single shared footer template. Because 48 of the 53 total issues we recorded trace to 11 recurring template patterns, a single theme-level adjustment to the footer background resolves all instances across the audited set in one pass.
 
 **What to change and why:**
 
-- Adjust the footer background to #000 to bring the footer text elements into WCAG 1.4.3 compliance (minimum 4.5:1), ensuring low-vision users can read footer navigation and legal copy without assistive magnification.
-- Adjust the content-section background to #1f1f1f to bring that element's 3.70:1 ratio into compliance, preventing low-vision users from missing primary section text on the pages where this pattern appears.
-- Address both changes at the template level rather than page by page; because the selectors are footer and content-section patterns shared across the audited set, a theme-level edit propagates the fix to all affected pages simultaneously and improves the Accessibility score from its current 89/100.
-- Re-test with an automated contrast tool after each change to confirm ratios meet or exceed 4.5:1 before deploying; WCAG 1.4.3 is a Level AA criterion with direct legal-exposure implications in many jurisdictions.
+- Adjust the footer background to #000 for the selectors in `footer > div:nth-child(1) > div:nth-child(1)` and `footer > div:nth-child(2)`: this brings the 3.67:1 ratio into WCAG 1.4.3 compliance and removes legal exposure for low-vision users who rely on sufficient contrast to read footer navigation and legal copy.
+- Address this at the template level rather than per-page: because the footer is shared, a single change resolves all 6 affected pages simultaneously, giving the highest ratio of compliance gain to engineering effort.
+- After the change, verify the updated ratio meets 4.5:1 for all footer text variants (link states, small print, icon labels) so that no secondary contrast issue is introduced by the fix.
 
 **Effort:** Low
 
 ---
 
-**Priority 2: Semantic Structure, Div Soup Rendered 49/100, Worst Page /blog/schema-markup-explained-the-invisible-code-that-makes-your-website-visible-to-ai (44 of 103 Bare Divs)**
+**Priority 2: Hero Section Contrast Gap, WCAG 1.4.3 (3.7:1 on 6 Pages)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** We score Semantic Structure at 49/100 (High band) across the audited set. The figures of 44 bare divs out of 103 total elements come specifically from the worst-performing page in the sample, https://www.enhancely.ai/blog/schema-markup-explained-the-invisible-code-that-makes-your-website-visible-to-ai. Because most audited pages share the same blog-post template, the structural pattern that produces this result is likely present across the broader template, even if individual page counts vary.
+**Finding:** Across the audited set, the primary content section on 6 of 7 pages records a contrast ratio of 3.7:1, again below the WCAG 1.4.3 threshold of 4.5:1. The affected selector (`#content > section:nth-child(1)`) points to a shared section component, so the gap is template-level. This is a distinct gap surface from the footer findings and warrants a separate remediation step to ensure neither is overlooked.
 
 **What to change and why:**
 
-- Audit the blog-post template for layout containers that carry no semantic role and replace appropriate wrappers with elements that communicate document structure (such as landmarks, headings, lists, and sectioning elements); this improves screen-reader navigation for users who rely on landmark-based browsing, which relates to WCAG 1.3.1 (Info and Relationships).
-- Reducing the bare-div ratio on the worst page and on its shared template moves the Semantic Structure score above the 70/100 threshold and reduces the likelihood that machines will misparse the content outline during crawl.
-- Prioritise the blog-post template specifically, because the worst-page URL sits inside a topical cluster (schema and structured data) that is a direct subject-matter signal for www.enhancely.ai's authority; poor structural markup on that page works against the topical relevance signals that the SDQ 87/100 score is otherwise building.
-
-**Effort:** Medium
-
----
-
-**Priority 3: Security Headers Incomplete, 3 of 5 Present (Content-Security-Policy and Referrer-Policy Absent)**
-
-**Bucket:** Cross-cutting
-
-**Finding:** We confirmed that HTTPS, X-Frame-Options, and X-Content-Type-Options are present, but Content-Security-Policy and Referrer-Policy are absent across all 7 audited URLs. No audited URL carries all five headers.
-
-**What to change and why:**
-
-- Add a Content-Security-Policy header at the server or CDN layer to declare trusted content sources; its absence leaves pages open to cross-site scripting injection, which can corrupt content that machines subsequently crawl and index.
-- Add a Referrer-Policy header to control what referrer information browsers forward when users navigate away from www.enhancely.ai; without it, full URL paths may be passed to third-party destinations, a privacy-hygiene concern relevant to data-protection obligations.
-- We recommend delivering both headers through a centralised server or CDN configuration rather than per-page changes, so the fix applies consistently without requiring a deployment for each URL.
-- Adding both headers moves the security-header count from 3 of 5 to a complete set, improving the signal www.enhancely.ai sends to security scanners and to machines that factor header completeness into trust scoring.
+- Adjust the background for the first content section to #1f1f1f as identified in the audit data: this closes the 3.7:1 gap and meets WCAG 1.4.3, protecting low-vision users who encounter this element before any other page content.
+- Treating this as a template component edit means the fix propagates to all pages sharing the component, making the remediation proportionate to the scale of the exposure.
+- After applying the change, re-test the section in both light and any dark-mode variants served by www.enhancely.ai to confirm the ratio holds under all rendering conditions.
 
 **Effort:** Low
 
 ---
 
-**Priority 4: Performance, 3632ms Average Load Time Across the Audited Set**
+**Priority 3: Semantic Structure 49/100, Worst Page 44 of 103 Bare Divs (https://www.enhancely.ai/blog/schema-markup-explained-the-invisible-code-that-makes-your-website-visible-to-ai)**
 
-**Bucket:** Cross-cutting
+**Bucket:** Compliance Risk
 
-**Finding:** We recorded an average load time of 3632ms across the audited set. Slower load times affect both human users on constrained connections and the efficiency with which crawlers can process pages within their allocated crawl budget. The Served HTML score of 100/100 shows the server itself responds cleanly; the latency originates downstream of the initial response.
+**Finding:** We score semantic structure at 49/100 across the audited set, placing it in the high-concern band. The figures we cite here come specifically from the worst-performing page in the audited set, https://www.enhancely.ai/blog/schema-markup-explained-the-invisible-code-that-makes-your-website-visible-to-ai, where 44 of 103 total elements are bare divs. Because the blog template is shared across multiple posts, pages using the same template are likely to share a comparable structural profile, even though the precise figures apply to that one URL.
 
 **What to change and why:**
 
-- Audit render-blocking resources (scripts and stylesheets loaded in the critical path) and defer or asynchronously load anything that does not affect above-the-fold rendering; this reduces the time before a user or machine can read primary content.
-- Review image delivery: where large images are present in the audited set, serving appropriately sized and compressed assets reduces the bytes transferred before the page reaches a visually complete state.
-- Investigate third-party tag loading order; analytics, consent, and other vendor scripts loaded early in the document can block rendering and inflate load times without contributing to the user-facing content that machines parse.
-- Bringing average load time below 2500ms would improve user retention on slower connections and support more efficient crawl-budget use, both of which feed into the SEO 84/100 score's potential ceiling.
+- Replace presentational container divs with semantically meaningful elements (articles, sections, asides, headers, footers, nav) where the content role is clear: this directly moves the semantic structure score upward and gives screen readers the landmark structure they need to navigate the page efficiently, addressing WCAG 1.3.1 (Info and Relationships).
+- Prioritise the blog post template specifically: because that template drives the worst-page figures, improvements there propagate to every post sharing it, giving the greatest structural coverage per unit of effort.
+- Machines parsing content for citation or summarisation use structural signals to determine which text is body content, which is navigation, and which is supplementary; a reduction in bare-div ratio makes those distinctions clearer and reduces the risk of content being misread or skipped by automated pipelines.
 
 **Effort:** Medium
+
+---
+
+**Priority 4: Security Headers Incomplete, Content-Security-Policy and Permissions-Policy Absent**
+
+**Bucket:** Cross-cutting
+
+**Finding:** We detect 3 of 5 expected security headers in place across www.enhancely.ai (HTTPS, X-Frame-Options, X-Content-Type-Options). Content-Security-Policy and Permissions-Policy are absent from all 7 audited URLs. While neither header directly determines search ranking, their absence signals a weaker security posture to browsers, automated security scanners, and the machines that assess trustworthiness of content sources.
+
+**What to change and why:**
+
+- Add a Content-Security-Policy header at the server or CDN layer: this restricts which resources browsers may load, reducing exposure to cross-site scripting vectors and signalling to automated trust assessors that www.enhancely.ai controls its content delivery surface.
+- Add a Permissions-Policy header to declare which browser features the pages require: this limits the attack surface available to injected third-party scripts and demonstrates deliberate feature governance, which contributes positively to automated security assessments.
+- Resolving both headers moves www.enhancely.ai from 3/5 to 5/5 on the security header check, a foundational improvement that benefits every other audit lens (performance, structured data trustworthiness, machine confidence) rather than any single page.
+
+**Effort:** Low
 
 ---
 
@@ -500,31 +411,31 @@ We have prioritised the findings below by the degree to which each gap constrain
 
 **Bucket:** AI Opportunity
 
-**Finding:** We score Discovery Readiness at 40/100 (Could Be Better) on www.enhancely.ai. Across the discovery checks we ran, none of the five well-known discovery artefacts we check (llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt) were found. For a site whose subject matter is directly relevant to how machines consume and cite web content, these artefacts are a clear addition opportunity: machines arrive without any explicit signal about intended content scope, preferred citation format, or publisher identity.
+**Finding:** We score Discovery Readiness at 40/100 (Could Be Better) across the audited set. None of the five well-known discovery artefacts are reachable on www.enhancely.ai: llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt are all absent. Without these files, machines that probe for structured entry points before crawling or summarising a site receive no signal about content scope, permitted use, or brand attribution. The Discovery Readiness score is the single largest gap between www.enhancely.ai's current posture and full MX Stack Completeness.
 
 **What to change and why:**
 
-- Add llms.txt to declare the content scope and preferred summary that LLMs should use when representing www.enhancely.ai; note that our recommendation diverges from the llmstxt.org specification and we recommend serving llms.txt as text/html to maximise compatibility with machines that evaluate MIME types before parsing.
-- Add llms-full.txt to provide a more detailed content inventory for machines capable of consuming it; this raises the probability that agents citing www.enhancely.ai draw on accurate, publisher-controlled information.
-- Add agent-card.json to declare machine-readable metadata about the site's identity, capabilities, and contact points; its absence means machines must infer these from page content alone, reducing confidence in attribution.
-- Add ai.txt and humans.txt as lightweight governance signals; ai.txt communicates crawl permissions to AI systems that respect it, and humans.txt provides publisher contact and team information. Together, all five artefacts move Discovery Readiness from 40/100 towards the Excellent band and directly strengthen the MX Stack Completeness score of 68/100.
+- Add llms.txt and llms-full.txt at the root of www.enhancely.ai: these files give machines a structured, human-readable index of content scope and permitted use, and are the highest-priority artefacts for improving Discovery Readiness. We note that our recommendation for the content type of llms.txt diverges from the llmstxt.org specification; we recommend serving it as text/html.
+- Add agent-card.json to declare the site's machine-interaction policy in a structured format: this allows automated agents to understand capabilities, contact points, and usage terms without relying on inference from page content.
+- Add ai.txt and humans.txt to complete the five-artefact set: ai.txt extends machine-readable usage policy beyond robots.txt, while humans.txt provides attribution metadata that agents can surface when crediting content sources.
+- Each artefact is a standalone file deployment with no dependency on the page templates; combined, they address the primary driver of the 40/100 Discovery Readiness score and increase www.enhancely.ai's eligibility to be cited by machines as an attested source.
 
 **Effort:** Medium
 
 ---
 
-**Priority 6: MX Stack Completeness 68/100, MX Governance Fields (canonicalUri, contentType, audience, status) Absent from Page Frontmatter**
+**Priority 6: MX Governance Fields Absent from Page Frontmatter (canonicalUri, contentType, audience, status)**
 
 **Bucket:** AI Opportunity
 
-**Finding:** We score MX Stack Completeness at 68/100 (Good) across the audited set. The structured data component of this score benefits from a strong SDQ of 87/100, but the discovery-artefact gap (addressed in Priority 5) and the absence of MX governance fields in page frontmatter (canonicalUri, contentType, audience, status) hold the overall score below the Excellent band. Without these fields, machines processing www.enhancely.ai pages must infer content classification from body text alone, which reduces the confidence of audience targeting and content-type attribution in agent responses.
+**Finding:** Across the audited set, page frontmatter does not carry the four MX governance fields we look for: canonicalUri, contentType, audience, and status. These fields allow machines to classify each page by its content type, intended readership, and publication status without having to infer those properties from surrounding text. Their absence is a secondary contributor to the MX Stack Completeness score of 68/100 (Good), and addressing them is the most targeted way to move that score toward the next band.
 
 **What to change and why:**
 
-- Add canonicalUri to page frontmatter so that machines reading metadata have an unambiguous pointer to the preferred URL for each piece of content, reducing the risk of duplicate-content attribution in agent pipelines.
-- Add contentType to signal whether a page is an article, a tool page, a landing page, or another format; machines use this classification to decide how to summarise and cite content, and its absence means classification defaults to inference.
-- Add audience to declare the intended reader profile; this allows machines to surface www.enhancely.ai content to the right user intent and improves the precision of citation in agent-generated answers.
-- Add status to communicate whether content is current, archived, or in draft; without it, machines have no publisher signal to distinguish authoritative live content from outdated pages, which risks stale content being cited alongside current material.
+- Add canonicalUri to each page's frontmatter: this gives machines an unambiguous, self-declared canonical address for the page, reducing the risk of content being attributed to a variant URL rather than the preferred one.
+- Add contentType and audience fields: machines use these to determine whether a page is an article, a product page, a FAQ, or a guide, and who it is written for; accurate classification improves the relevance of any agent-generated summary that draws on the page.
+- Add a status field to indicate whether each page is published, draft, or deprecated: this prevents machines from citing or surfacing content that the team considers out of date, a particularly important control for a site publishing technical guidance such as the schema markup content in the audited set.
+- All four fields can be added incrementally, starting with the highest-traffic pages in the audited set, and the improvement in MX Stack Completeness will be visible in the next audit cycle without requiring changes to the visible page templates.
 
 **Effort:** Low
 
@@ -532,11 +443,11 @@ We have prioritised the findings below by the degree to which each gap constrain
 
 These are not issues but areas where additional metadata or patterns would strengthen this site's machine readiness.
 
-- **sameAs links on Organisation and Person**: Adding sameAs properties to the Organisation and Person entities already present across the audited set would allow machines to resolve www.enhancely.ai's brand and contributors against authoritative external records such as Wikidata or LinkedIn, strengthening citation confidence in agent answers.
+- **sameAs links on Person and Organisation entities**: Adding `sameAs` properties to the Person and Organisation entries already present across the audited set would connect those entities to authoritative external identifiers (such as LinkedIn profiles or Wikidata records), giving machines a verifiable anchor when attributing content to a named individual or to Enhancely as a team.
 
-- **potentialAction on Organisation**: Attaching a potentialAction to the existing Organisation entities would advertise structured contact or engagement capabilities directly to machines, making it easier for agents to surface actionable next steps when presenting www.enhancely.ai to users.
+- **AggregateRating on FAQPage and Article entities**: The FAQPage and Article types already in use across the audited set could carry `AggregateRating` markup where genuine user ratings exist on those pages; we have not audited the full estate and cannot confirm whether such ratings are present beyond the 7 pages we reviewed.
 
-- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt to declare content-use policy for AI agents.
+- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt to declare content-use policy for AI agents: because no such directives are currently declared, adding them would give machines a clear, machine-readable statement of how Enhancely's content may be used, reducing ambiguity for any agent that checks before indexing or citing.
 
 ---
 
@@ -577,7 +488,7 @@ No non-standard response headers were recorded in this audit.
 This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate how this site handles errors for both human visitors and machines.
 
 | Check | Result |
-|--------|--------|
+|-------|--------|
 | HTTP status code | 404 (correct) |
 | Custom error page | Yes, branded page with navigation |
 | Semantic HTML (`<main>`, `<nav>`, `<h1>`) | Yes |
@@ -595,9 +506,9 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://www.enhancely.ai/blog/why-your-product-pages-are-invisible-to-ai-shopping-assistants-and-how-to-fix-it`. A first-time visitor sees the cold-cache cost: the crawler recorded 7517 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three cache-busted re-probes that followed returned 322ms, 218ms, 175ms, giving a returning-visitor median of **218 ms**. **Returning-visitor verdict: Healthy**.
+**Slowest.** The slowest page is `https://www.enhancely.ai/blog/why-your-product-pages-are-invisible-to-ai-shopping-assistants-and-how-to-fix-it`. A first-time visitor sees the cold-cache cost: the crawler recorded 7517 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three cache-busted re-probes that followed returned 231ms, 114ms, 172ms, giving a returning-visitor median of **172 ms**. **Returning-visitor verdict: Healthy**.
 
-**Median-load control.** The median-load control page is `https://www.enhancely.ai/blog/e-e-a-t-for-the-ai-era-how-chatgpt-co-recognise-your-brand-as-a-trustworthy-source`. A first-time visitor sees the cold-cache cost: the crawler recorded 2940 ms on its initial fetch. **First-visit verdict: Acceptable but elevated**. Three cache-busted re-probes that followed returned 232ms, 240ms, 139ms, giving a returning-visitor median of **232 ms**. **Returning-visitor verdict: Healthy**.
+**Median-load control.** The median-load control page is `https://www.enhancely.ai/blog/e-e-a-t-for-the-ai-era-how-chatgpt-co-recognise-your-brand-as-a-trustworthy-source`. A first-time visitor sees the cold-cache cost: the crawler recorded 2940 ms on its initial fetch. **First-visit verdict: Acceptable but elevated**. Three cache-busted re-probes that followed returned 95ms, 111ms, 124ms, giving a returning-visitor median of **111 ms**. **Returning-visitor verdict: Healthy**.
 
 **Verdict:** The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides.
 
@@ -617,7 +528,7 @@ Sitemap: https://www.enhancely.ai/sitemap.xml
 
 *The full `robots.txt` (5 lines) is preserved alongside this report as `enhancely-ai-robots-txt.txt`.*
 
-We found robots.txt in place, with one disallow path restricting machine access to a designated area and one sitemap reference pointing crawlers toward the full content inventory.
+We found robots.txt in place, declaring one disallow path and pointing machines to one sitemap reference. The configuration grants broad access while clearly signalling the crawl boundary and sitemap location.
 
 ### sitemap.xml
 
@@ -630,15 +541,15 @@ We found robots.txt in place, with one disallow path restricting machine access 
 
 **Sitemap grade:** Complete
 
-We grade the sitemap Complete: it covers 51 URLs and supplies lastmod, changefreq, and priority attributes across every entry, giving machines a well-formed crawl signal on each URL.
+The sitemap earns a Complete grade, covering 51 URLs with lastmod, changefreq, and priority attributes all present across every entry. This level of completeness gives machines a well-formed crawl signal with no structural gaps to resolve.
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We found no llms.txt file reachable on www.enhancely.ai, meaning machines have no structured entry point for the site description, page inventory, or content policy. We recommend adding llms.txt to give machines a clear, structured orientation to www.enhancely.ai's content.
+We found no llms.txt file present on www.enhancely.ai, meaning machines that rely on this artefact to understand the site's scope, page inventory, and content policy receive no structured guidance. We recommend adding an llms.txt file covering a site description, a page inventory, and a content policy to give machines a clear entry point into www.enhancely.ai's content.
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We find no llms-full.txt at www.enhancely.ai, with the endpoint returning a 404 across all discovery checks. We recommend adding llms-full.txt to provide a detailed content inventory for machines capable of consuming it, drawing on the 51-page set declared in the sitemap.
+The llms-full.txt endpoint returns a 404 and no reference to it appears in the sitemap or the homepage head. Whether adding a full-content machine-readable file is worth prioritising depends on the depth of content across the remaining pages not yet covered by the audited sample; we recommend revisiting this decision once broader page coverage has been assessed.
 
 ### agent-card.json (A2A)
 
@@ -698,11 +609,11 @@ The full per-entity list is delivered alongside this report as a sidecar CSV: [`
 
 | Type | Severity | Property | Instances | Pages | Why it matters |
 |------|----------|----------|----------:|------:|----------------|
-| WebSite | recommended | image | 7 | 7 | No logo / hero image declared in structured data on the audited pages |
+| WebSite | recommended | image | 7 | 7 | Site has no logo / hero image declared in structured data |
 | WebSite | recommended | datePublished | 7 | 7 | No site-level publish date for crawler context |
-| WebSite | recommended | author | 7 | 7 | No top-level author/owner declared on the audited pages |
+| WebSite | recommended | author | 7 | 7 | Site has no top-level author/owner declared |
 | BreadcrumbList | required | itemListElement | 2 | 2 | BreadcrumbList has no items - entire entity is empty |
-| Article | required | author | 1 | 1 | No attribution surface - AI agents may not identify who wrote the article |
+| Article | required | author | 1 | 1 | No attribution surface - AI agents cannot identify who wrote the article |
 
 Each summary row covers multiple per-entity rows in the sidecar; the grouped view is for reading at a glance, the sidecar is for processing.
 
@@ -785,7 +696,7 @@ The MX Journey maps the five stages a machine follows when interacting with a we
 | 4 | Price Understanding | Site type does not require | -- | No pricing content detected |
 | 5 | Purchase Confidence | Site type does not require | -- | No transaction forms detected |
 
-Partially Compatible; Search & Compare, Price Understanding, and Purchase Confidence are not applicable to this site type, and neither of the two relevant stages currently passes.
+Partially Compatible; the two assessed stages are Partial, while Search & Compare, Price Understanding, and Purchase Confidence are not applicable to this site type.
 
 ---
 
@@ -813,7 +724,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 
 **Pipeline Survivability score:** 79/100
 
-Across the audited set, two resilience checks drew flags: Truncation Risk and Inline Tag Bloat, with Truncation Risk appearing on every one of the seven pages we reviewed. When pages carry content that machines are likely to cut short before reaching the end, structured signals buried deeper in the document risk going unread entirely. Addressing Truncation Risk would therefore have the largest effect, giving machines a cleaner, complete view of each page's content before they move on.
+Across the audited set, every page we reviewed carries a Truncation Risk flag, meaning machines that impose a content-length ceiling may cut off the page before reaching its most valuable material. Inline Tag Bloat appears alongside this on a subset of pages, adding structural noise that can further disrupt how machines parse and process the content. Addressing Truncation Risk first would have the largest effect, since resolving it across the audited set directly improves the completeness of what machines can read in a single pass.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -829,7 +740,7 @@ We run the Div Soup check on both served and rendered HTML so we can tell whethe
 |--------|--------------|----------------|--------------------|
 | Rendered HTML | 49/100 (high) | 44 bare divs · 43% ratio · depth 5 | `div.k-block.k-block__text` (59), `div.mobile-sub` (42), `div.max-w-[1440px].mx-auto` (41), `div.faq-a.text-[0.92rem]` (22), `div.flyout-panel` (21) |
 
-On the worst-performing page in the audited set, https://www.enhancely.ai/blog/schema-markup-explained-the-invisible-code-that-makes-your-website-visible-to-ai, we record a bare-div ratio of 43% across the rendered surface, meaning machines lose structural context and must rely on positional inference to determine meaning. The pattern here is primarily surface-wide rather than deeply nested: a deepest chain of 5 sits alongside a high bare ratio, and the top offending selectors carry functional class names such as `div.k-block.k-block__text`, `div.mobile-sub`, and `div.flyout-panel`, a signature consistent with a component framework that assigns styling roles to divs rather than semantic roles, leaving the structural layer underspecified. The most direct first move is to wrap the obvious landmarks (header, nav, main, footer, aside) in their corresponding semantic elements and give remaining utility divs meaningful roles where possible, which would bring the bare-div ratio down considerably without requiring a layout restructure.
+The rendered surface of the worst-performing page we examined, https://www.enhancely.ai/blog/schema-markup-explained-the-invisible-code-that-makes-your-website-visible-to-ai, carries a bare-div ratio of 43% across 103 elements, meaning machines lose structural context on that page and fall back on positional inference to determine meaning. The pattern here is surface-wide rather than deeply nested: a deepest bare chain of 5 sits alongside a high bare-div count, and the top offending selectors suggest utility-class and component-framework conventions where divs receive visual styling classes rather than semantic roles. The most direct first move is to wrap the obvious landmark regions (header, nav, main, footer, aside) explicitly, and to ensure the remaining high-frequency elements carry meaningful roles or class names that signal purpose rather than layout position, which would bring the bare-div ratio down without requiring a structural rebuild.
 
 ---
 
@@ -843,7 +754,7 @@ On the worst-performing page in the audited set, https://www.enhancely.ai/blog/s
 | X-Frame-Options | Yes | Prevents clickjacking |
 | X-Content-Type-Options | Yes | Prevents MIME-type sniffing |
 
-We found that 2 of the five standard security headers are absent from every audited response: HSTS (Strict-Transport-Security) and Content-Security-Policy (CSP). Adding these at the origin-server or CDN edge closes the corresponding attack surfaces without touching application code.
+We find 2 of the five standard security headers absent from every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP). Adding these at the origin-server or CDN edge closes the corresponding attack surfaces without touching application code.
 
 **Coverage:** 0 of 7 audited URLs carry all five headers; see the Security Headers appendix for the full exception list.
 
@@ -907,13 +818,13 @@ We found 7 identical inline fragment(s) repeated across multiple pages, totallin
 
 *The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `enhancely-ai-inline-code-duplicates.csv`.*
 
-**Recommendation:** For the Mermaid theme CSS (3347 B), the PostHog JS (787 B and 736 B), the GTM loader (358 B), and the theme-toggle script (247 B), move each fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS); the fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical. The two remaining fragments, the `gdprAppliesGlobally` JS block (11973 B) and the `cmpwrapper` CSS block (125 B), are injected by a third-party consent management platform SDK and are not authored in the site template; the correct remediation path for those is to configure the CMP vendor's SDK to load its own assets from its own external files, or to use a DOM-observer approach, rather than editing the site template directly.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical. **Exception:** the `div.cmpwrapper` CSS fragment (125 bytes, 6 pages) is injected by a third-party consent management SDK rather than authored in the site template; the remediation path for that fragment is an SDK configuration update or a DOM-observer patch coordinated with the consent vendor, not externalisation to a site CSS file.
 
 ---
 
 ## PDF Documents: Accessibility and Machine Readability
 
-Across the audited set, we treat PDF accessibility as two concurrent concerns rather than one: accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the shared technical baseline, with the EAA (Directive (EU) 2019/882, in force 28 June 2025) as the most precisely codified instance of a global pattern that also includes Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada. In parallel, an untagged PDF is invisible to machines in the same way that unsemantic markup is: without a proper structure tree, search crawlers, AI systems, and automated pipelines cannot extract text, entities, or meaning, whereas a tagged PDF with a complete structure tree is as machine-readable as well-formed semantic HTML.
+Accessibility legislation across major markets, with the EU's EAA (Directive (EU) 2019/882, in force 28 June 2025) as the most precisely codified example, has converged on ISO 14289-1 (PDF/UA) as the shared structural baseline, making tagged PDF structure a legal expectation in the EU, the US, the UK, Australia, and Canada alike. The machine-readability concern is equally pressing and independent: an untagged or image-based PDF is opaque to machines, search crawlers and automated pipelines cannot extract text, entities, or structure from it, whereas a properly tagged PDF with a complete structure tree is machine-readable in the same way that semantic HTML is.
 
 We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
 
@@ -926,14 +837,14 @@ We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no
 ### Recommended Actions
 
 1. **Address Priority 1 findings**: address the 53 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
-2. **Review Priority 2-3 findings**: Discovery Readiness improvements and metadata tuning that compound over time
-3. **Consider optional enhancements**: the patterns listed in the Optional Enhancements section, including sameAs links on Organisation and Person entities and potentialAction on Organisation, represent additions that strengthen machine readiness without requiring changes to the schema vocabulary already in place
+2. **Review Priority 2-3 findings**: close the Discovery Readiness gap (llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt are all absent) and add the four missing MX governance fields (canonicalUri, contentType, audience, status) to page frontmatter
+3. **Consider optional enhancements**: add sameAs links on Person and Organisation entities and Content-Signal directives in robots.txt to strengthen machine attribution ahead of wider agent adoption
 
 ### What's Next
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved — WCAG 2.1 AA accessibility compliance restored |
+| Critical Fixes | P1, P2, P3 (Compliance Risk) | Priority 1, 2, 3 resolved — WCAG 2.1 AA accessibility compliance restored |
 | Full Optimisation | Catalogue Visibility, Discovery Readiness, Semantic Structure, MX Stack Completeness, Performance, Security headers, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | durable visibility in agent-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
@@ -942,7 +853,7 @@ We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no
 
 ## Summary of Findings
 
-Across the audited set, https://www.enhancely.ai scores 87/100 in Structured Data, reflecting a rich schema foundation that positions each page well for machine interpretation. SEO reaches 84/100, supporting solid human-visitor visibility, while Discovery Readiness at 40/100 represents the clearest opportunity to extend that presence to the machines that power AI-driven answers and agent-based search.
+Across the audited set, https://www.enhancely.ai scores strongly on Structured Data at 87/100, reflecting a rich schema foundation that gives machines a solid basis for reading and parsing content. SEO performs well at 84/100, yet Discovery Readiness at 40/100 represents the clearest opportunity to close, as the signals machines rely on to locate, index, and surface the site remain underdeveloped. We invite you to read on for a prioritised set of recommendations that would move these dimensions forward and extend the value of the structured data already in place.
 
 ### Audit Scores
 
@@ -991,9 +902,9 @@ We recorded every internal link found on every audited page: 358 links in total.
 
 ## Appendix C: Image Optimisation
 
-Across the audited set, we catalogued 131 images in total. Of these, 48 are served in WebP format and 83 in PNG, with no JPEG, SVG, or other formats present in the pages we reviewed. Alt-text coverage stands at 98 images, representing 74.8% of the total, which leaves 33 images without descriptive text. Those 33 missing instances represent a meaningful accessibility gap and will affect how machines interpret the visual content on those pages.
+Across the audited set, we catalogued 131 images in total. Of these, 48 are served in WebP format and 83 in PNG; we found no JPEG, SVG, or other format variants in the pages we reviewed. Alt-text coverage stands at 98 images, or 74.8% of the total, leaving 33 images without descriptive text. For a developer audience, it is worth noting that those 33 missing instances span both decorative and potentially meaningful images, so a case-by-case review will be needed to determine whether each warrants a descriptive attribute or an explicit empty one.
 
-On loading strategy, the picture is more nuanced than it first appears. We recorded 41 images carrying an explicit `loading="lazy"` attribute and none set to `loading="eager"`. The remaining 90 images have no loading attribute set at all. That absence is worth calling out directly: a missing attribute is not the same as eager loading. The browser applies its own heuristic, typically treating images in the initial viewport as eager and those below the fold as deferred, but the behaviour is not guaranteed and varies between rendering engines. Explicit attribution gives the team control that heuristic inference does not.
+On loading strategy, 41 images carry a native loading="lazy" attribute, and none are set to loading="eager". The remaining 90 images have no loading attribute at all. This third state is worth separating from eager loading: when no attribute is present, the browser applies its own heuristics, typically rendering above-the-fold images immediately and making its own judgement about the rest. That means those 90 images are neither deliberately deferred nor deliberately prioritised; the loading behaviour is, in effect, unmanaged. Explicit attribution across the full image set would give the team direct control over which assets block the initial render and which are safely deferred.
 
 > **Double-lazy loading pattern detected on 41 image(s).** These images carry BOTH the native HTML attribute `loading="lazy"` AND a JavaScript lazyload pattern (a placeholder `data:image/gif` in `src`, the real URL in `data-src`, and a `lazyload` class). The image cannot render until:
 > 1. The lazyload JavaScript library loads and parses.

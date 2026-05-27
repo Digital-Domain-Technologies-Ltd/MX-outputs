@@ -1,39 +1,33 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-26/enhancely.ai/enhancely-ai-report.md",
-  "timestamp": "2026-05-26T16:07:35.631Z",
+  "timestamp": "2026-05-26T19:29:54.957Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 22052,
-    "output_tokens": 598,
+    "input_tokens": 20386,
+    "output_tokens": 562,
     "cache_creation_input_tokens": 2369,
     "cache_read_input_tokens": 0
   },
-  "findingCount": 4,
+  "findingCount": 3,
   "withdrawnCount": 0,
   "findings": [
     {
       "category": "tone-inconsistency",
-      "message": "The Priority 3 'What to change and why' bullets switch from first-person ('We confirmed') used throughout the Findings section to third-person passive in the final bullet ('Delivering both headers through a centralised server or CDN configuration ensures consistent cover'), breaking voice mid-section.",
-      "context": "Deliver both headers through a centralised server or CDN configuration rather than per-page changes, so the fix applies consistently",
+      "message": "The Priority 4 finding opens in first-person ('We detect 3 of 5 expected security headers') but the Priority 4 security headers section in the Security Headers appendix switches to third-person impersonal construction ('2 of the five standard security headers are absent across every audited response'), while all other named Priority findings (1, 2, 3, 5, 6) consistently use first-person ('We score', 'We identify', 'We find', 'We score').",
+      "context": "2 of the five standard security headers are absent across every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP).",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The Priority 5 finding states that 'all five well-known discovery artefacts … are absent' as a site-wide assertion, but absence was confirmed only for the 7 audited pages/fetches, not across the full 51-URL estate declared in the sitemap.",
-      "context": "All five well-known discovery artefacts we check, llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt, are absent.",
-      "severity": "block"
-    },
-    {
-      "category": "sample-vs-total-overreach",
-      "message": "The Security Headers section asserts that HSTS and CSP are 'absent from every audited response' but the narrative summary in Priority 3 escalates this to a site-wide claim ('Content-Security-Policy and Referrer-Policy absent across all 7 audited URLs'), while the Security Headers table omits HSTS entirely and instead lists Referrer-Policy as the second missing header, creating an internal inconsistency that implies a broader, unscoped claim.",
-      "context": "We found that 2 of the five standard security headers are absent from every audited response: HSTS (Strict-Transport-Security) and Content-Security-Policy (CSP).",
+      "message": "The llms-full.txt finding in Discovery Files hedges the recommendation against 'the depth of content across the remaining pages not yet covered by the audited sample' but then advises revisiting once 'broader page coverage has been assessed', which implies the absence finding itself may not hold site-wide — however the opening clause 'We find no llms-full.txt on www.enhancely.ai' asserts a site-wide absence from a 7-page sample without scoping it to the sample.",
+      "context": "We find no llms-full.txt on www.enhancely.ai, with the endpoint returning a 404 and no reference to it in the sitemap or the homepage head.",
       "severity": "block"
     },
     {
       "category": "hedged-vs-asserted-imbalance",
-      "message": "The Structured Data Findings section asserts 'Site has no top-level author/owner declared' and 'Site has no logo / hero image declared in structured data' for WebSite entities as site-wide facts, but these are observed only across the 7 audited pages with no hedge limiting the claim to the sample.",
-      "context": "Site has no logo / hero image declared in structured data … Site has no top-level author/owner declared",
+      "message": "The Optional Enhancements section asserts 'AggregateRating on FAQPage and Article entities… where genuine user ratings exist' with certainty, but the underlying evidence is drawn from only 7 audited pages; the report has no evidence about whether genuine user ratings exist or do not exist across the estate, making the conditional assertion unsupported rather than appropriately hedged.",
+      "context": "AggregateRating on FAQPage and Article entities: The FAQPage and Article types already in use across the audited set could carry `AggregateRating` markup where genuine user ratings exist",
       "severity": "block"
     }
   ],
