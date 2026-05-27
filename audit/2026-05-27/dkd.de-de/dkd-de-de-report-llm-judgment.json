@@ -1,39 +1,33 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/dkd-de-de-report.md",
-  "timestamp": "2026-05-27T14:16:57.629Z",
+  "timestamp": "2026-05-27T16:47:51.092Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 18970,
-    "output_tokens": 560,
+    "input_tokens": 19876,
+    "output_tokens": 666,
     "cache_creation_input_tokens": 2369,
     "cache_read_input_tokens": 0
   },
-  "findingCount": 4,
+  "findingCount": 3,
   "withdrawnCount": 0,
   "findings": [
     {
       "category": "tone-inconsistency",
-      "message": "The 'About This Report' section opens in consistent first-person ('We audited', 'We fetch', 'We then review') but the 'Next Steps > Recommended Actions' list switches to third-person imperative phrasing ('Address Priority 1 findings', 'Review Priority 2-3 findings', 'Consider optional enhancements') while every other findings-level section uses first-person voice.",
-      "context": "1. **Address Priority 1 findings**: resolve Catalogue Visibility findings (currently 10/100)",
+      "message": "The Findings section mixes first-person voice ('We score', 'We found', 'We identified') in Priorities 1–4 with a third-person construction in the At-a-Glance narrative ('We have prioritised' is first-person but the surrounding priority blocks are first-person throughout—the actual switch occurs in Priority 2's Finding paragraph which reverts to third-person passive: 'the score is measured across a five-page audited set') while all sibling priority Finding paragraphs use first-person ('We score', 'We found').",
+      "context": "Because the score is measured across a five-page audited set and the same score band holds broadly, a template-level change is likely",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The llms-full.txt section states the decision to publish depends on 'the depth of content across the wider site', but then asserts 'which the audited sample alone does not yet measure' — the concern is that just before this, it says 'We found no llms-full.txt on dkd.de' without a sample-scope qualifier, implying a site-wide absence from a 5-page sample.",
-      "context": "We found no llms-full.txt on dkd.de, with the endpoint returning a 404 across every signal we checked",
+      "message": "The llms-full.txt Discovery Files entry states 'Whether adding one would be worthwhile depends on the full site's content depth, which the audited sample does not yet measure' but then implies a site-wide verdict by saying 'if dkd.de carries substantial long-form or technical content beyond what we sampled'—the preceding sentence 'We found no llms-full.txt on dkd.de' asserts a site-wide absence that is a binary structural fact and is fine, but the phrase 'the audited sample does not yet measure' directly after is internally contradicted by the gate warning flagging 'across the audited set' in the same Discovery Files section as a scope mis-statement, confirming the section mixes per-sample and site-wide framing.",
+      "context": "We found no llms-full.txt on dkd.de; the endpoint returns a 404 and no reference to it appears in the sitemap or the homepage head.",
       "severity": "block"
     },
     {
       "category": "hedged-vs-asserted-imbalance",
-      "message": "Priority 4 finding states MX governance fields 'were not present' and 'are not present' as a site-wide certainty ('canonicalUri, contentType, audience, and status are not present'), but the evidence base is only the 5 audited pages, and no explicit sample-scope qualifier is attached to this assertion.",
-      "context": "fields such as mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers were not detected on any of the five pages",
-      "severity": "block"
-    },
-    {
-      "category": "sample-vs-total-overreach",
-      "message": "The Security Headers summary states 'All five standard security headers are present on every audited response' but the per-URL breakdown immediately below shows CSP is absent on 3 of 5 pages and X-Frame-Options is absent on 2 of 5 pages, making the summary claim materially inaccurate.",
-      "context": "All five standard security headers are present on every audited response. This is the expected baseline for any production website.",
+      "message": "The Cross-Host Redirect check in the Agent Reading Pipeline section reports contradictory counts in the same row: the Means field states '3 page(s) redirect to a different host' while the Data field states '3 page(s) cross origin during redirect. See … (5 pages)', asserting both 3 and 5 affected pages with equal confidence for the same finding.",
+      "context": "Cross-Host Redirect - Fail · 5/5\n  - *Means:* 3 page(s) redirect to a different host.\n  - *Data:* 3 page(s) cross origin during redirect. See dkd-de-de-pipeline-cross-host-redirect-pages.csv (5 pages).",
       "severity": "block"
     }
   ],

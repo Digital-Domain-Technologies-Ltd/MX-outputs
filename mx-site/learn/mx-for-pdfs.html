@@ -137,6 +137,25 @@
 
           <p>Both sidecars cross-reference each other through a <code>companion</code> field. Together they form an evidence vehicle, not a compliance grant. Compliance with any law stays a legal duty of the organisation that publishes the file. What the records do is make the evidence the organisation must produce structured, machine-readable, tamper-evident, and verifiable on request.</p>
 
+          <h3 id="responsible-person-identifier">Responsible Person Identifier</h3>
+
+          <p>At the top of every sidecar — both the AI stream and the deterministic stream — sits a structured <code>responsiblePerson</code> block. It carries the name, email, identifier URL, role, organisation, and country of the human accountable for the audit chain. Any reader walking from a finding to the person responsible finds the full identifier in one step, without having to cross-reference an external directory or guess from a commit author. The block is the structured identity regulators look for under EU AI Act Article 4 (AI literacy and a named responsible person), the UK ICO AI guidance accountability principle, the United States NIST AI Risk Management Framework GOVERN function (roles, responsibilities, and lines of communication), and EAA Directive 2019/882's responsible economic operator requirement.</p>
+
+          <p>The shape:</p>
+
+          <pre><code class="language-json">{
+  "name": "Tom Cranstoun",
+  "email": "tom.cranstoun@gmail.com",
+  "identifier": "https://allabout.network",
+  "role": "Audit operator and accountable individual",
+  "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+  "country": "GB"
+}</code></pre>
+
+          <p>Each field serves a regulator-facing question. The <code>name</code> is the legal individual answerable for the audit. The <code>email</code> is the direct contact channel. The <code>identifier</code> is a stable URL that an auditor can resolve to verify the identity claim against an independent record (in this case the operator's own public-facing biography). The <code>role</code> says in plain language what this person did in the audit chain. The <code>organisation</code> names the legal entity behind the work, distinguishing the public brand from the registered company where they differ. The <code>country</code> is the two-letter ISO 3166-1 alpha-2 code that determines which jurisdiction's accountability rules apply.</p>
+
+          <p>The identifier travels with the file. A regulator who downloads the PDF, extracts the AI sidecar from the XMP payload, and reads the first six fields knows immediately who is accountable, where to reach them, and which jurisdiction governs the chain. There is no separate identity directory to consult and no email-address-from-commit-history reconstruction to attempt. The audit identifies its own author and stands behind the chain by name.</p>
+
           <h3 id="the-mx-metadata-packet">The MX metadata packet</h3>
 
           <p>The document's XMP metadata carries an MX namespace with twenty-plus fields that record what the file is, who wrote it, when, against what canonical source, with what intended audience, under what status. The fields draw from MX, an open, community-governed standard administered by The Gathering. The wire schema travels with the file: a tool that opens the PDF without ever visiting a network can still read provenance, intent, audience, and canonical pointers directly from the metadata. The structure survives mirroring, archiving, and re-distribution.</p>

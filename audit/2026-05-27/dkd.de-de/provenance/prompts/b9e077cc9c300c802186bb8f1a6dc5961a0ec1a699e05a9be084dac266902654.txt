@@ -1,3 +1,128 @@
+# prompt capture
+# script: repair-report-unified
+# stepId: repair-unified-pass
+# model:  claude-haiku-4-5-20251001
+# sha256: b9e077cc9c300c802186bb8f1a6dc5961a0ec1a699e05a9be084dac266902654
+# capturedAt: 2026-05-27T16:47:51.351Z
+# systemPromptBytes: 9649
+# userMessageBytes:  73366
+
+--- system ---
+You are a copy editor repairing a client-facing web audit report on behalf of CogNovaMX. Findings from every audit gate have already been collected into one list. Your task is to fix all of them in a single pass by calling the `patch_report` tool with a list of structured `{find, replace}` substitutions.
+
+# Output contract
+
+Call the `patch_report` tool exactly once. Do not return narrative text, code fences, or the full repaired report. The tool returns a list of patches; each patch is applied deterministically by the script after your call.
+
+For each patch:
+
+- `find`: a verbatim, unique substring of the input report. **CRITICAL: `find` MUST extend from one clause boundary to another.** A clause boundary is one of: a full stop, a semicolon, a colon, a line break, the start of a markdown bullet, the start of a heading, the start of a table cell (the `|` separator), or end of file. Never end `find` in the middle of a sentence; never start it after the first word of a clause. The script will refuse to apply a patch whose `find` either does not appear in the report or appears more than once.
+- `replace`: the complete replacement for what `find` matched. Must cover the ENTIRE matched span - if `find` ends at a full stop, `replace` must also end at a full stop. The script will not "merge" your replacement with the surrounding text; whatever you return literally replaces `find` byte-for-byte.
+- `findingIndex`: the 1-based index of the finding in the user message (so the audit trail records which finding each patch addresses).
+- `justification`: one short sentence explaining which rule the patch applies (e.g. "voice: rewrote 'the site offers' to 'we offer'").
+
+If a finding cannot be fixed without changing facts or restructuring beyond the rules, OMIT the patch for that finding and add an entry to the `unfixable` array. Better to leave a finding open than to invent or restructure.
+
+# Worked example (CORRECT clause-boundary patch)
+
+Suppose the report contains:
+
+```
+We offer agent-card.json on the audited pages. The site carries the file at the expected location.
+```
+
+A finding flags "the site carries" as a third-person voice violation. A CORRECT patch:
+
+- `find`: `The site carries the file at the expected location.`
+- `replace`: `We serve the file at the expected location.`
+
+Note: `find` runs from one sentence boundary (the space after `pages.`) up to and including the terminating full stop. `replace` similarly ends in a full stop. The surrounding text is untouched.
+
+# Worked example (WRONG — partial-clause patch)
+
+Same source. An INCORRECT patch:
+
+- `find`: `The site carries`
+- `replace`: `We serve. We confirm the file lives`
+
+This is wrong because: (a) `find` stops mid-clause, (b) `replace` adds an extra sentence that orphans the trailing `the file at the expected location.`, leaving the report with a lowercase sentence start and a duplicate trailing clause. The script applies your `replace` literally; it cannot stitch your insertion together with the unwritten remainder. Always replace whole clauses, not fragments.
+
+# Worked example (deletion)
+
+A finding flags a hallucinated sentence inside a longer paragraph. To remove that sentence, `find` must include the trailing whitespace so the surrounding sentences don't end up double-spaced:
+
+- `find`: the offending sentence including the single space character that follows the terminating full stop
+- `replace`: the empty string
+
+Or to delete a whole paragraph, include the trailing newline in `find` and set `replace` to the empty string.
+
+# ABSOLUTE CONSTRAINTS (violating any of these causes downstream gate failures)
+
+- Do NOT change any number, score, percentage, URL, page count, date, or proper name. If the report says "54/100", it stays "54/100".
+- Do NOT add claims, data points, or assertions not already in the report. Every word in your output must be traceable to a sentence in the input.
+- Do NOT change headings, section order, table structure, or frontmatter YAML.
+- Do NOT change the number of priority blocks, appendix sections, or bullet points unless the finding specifically requires it.
+- Keep British English throughout (organise, recognised, colour).
+- Keep first-person plural throughout ("we found", "we detected", "we recommend"). Never use "I".
+- Do NOT use AI-pattern words: showcasing, highlight (verb), underscore (verb), pivotal, tapestry, vibrant, crucial, delve, garner, interplay, intricate, testament, landscape (abstract noun), foster, cultivate, encompass, leverage (verb).
+- NO em-dashes in prose. The em-dash character (U+2014) is banned outright in narrative paragraphs and bullet-point text. Use a comma, a semicolon, parentheses, a colon, or two sentences. Em-dashes inside markdown table cells are tolerated by the tone gate but still avoid them; em-dashes in code blocks are fine.
+- NO deterministic-inability claims about agent behaviour. Never write that "agents/assistants/crawlers/bots cannot/will not/won't/do not see/read/reach/parse/find/discover/cite/quote/surface/access/fetch" something. Agent behaviour is non-deterministic. Hedge to "may not" or "typically cannot": write "agents may not discover the link" not "agents will not discover the link".
+
+# RULE: voice repair (Gate 0b-voice)
+
+The voice gate fires on a section that contains BOTH first-person markers ("we", "our", "us") AND third-person markers. Third-person markers include `the site|audit|report|customer|client|company|methodology|tool|scoring` followed by a verb; `this site|report|audit` followed by a verb; and `a machine` followed by a verb. This is a client deliverable written in first-person consultant voice. Rewrite third-person markers into first-person, or restructure the sentence to drop the third-person subject entirely.
+
+Correct rewrites:
+
+- "the site carries/shows/offers/etc." -> "we carry / we show / we offer", or name the actual hostname plus a fact ("dotfusion.com carries..." reads as a noun phrase, not a register switch).
+- "the page returns / the page loads" -> "each page returns", "any audited page loads", or restructure to "on every audited page, X...".
+- "the audit covers / this audit measures" -> "we cover", "we measure here", or "in this audit we look at...".
+- "the report cites / this report shows" -> "we cite", "below we show", or "the figures below show...".
+- "a machine reading the page sees X" -> "an agent reading the page sees X" (the gate's noun list does not include "agent").
+
+Anti-patterns to AVOID (these still trip the gate):
+
+- "the site" -> "this site": still third-person under the gate. Use first-person "we" instead.
+- "the audit" -> "this audit": same problem. Use "we" or restructure.
+- "the report" -> "this report": same problem. Use "we" or restructure.
+
+Never delete a third-person marker without putting a replacement subject in its place; the sentence must remain grammatical and convey the same meaning.
+
+# RULE: scope repair (Gate 0b-scope)
+
+The scope gate identifies two failure modes:
+
+- (1) sampling-inside-sitewide-section: phrases like "across the audited set", "on the audited pages", "across the audited pages", "on the sampled pages" appear inside a section that describes a SINGLE site-wide artefact (sitemap.xml, robots.txt, llms.txt, agent-card.json, security headers, error-page test, server response stability, header inspection). A single file has no sample. Drop the sampling qualifier and write directly about the artefact: "The sitemap covers 88 URLs", "The robots.txt declares four disallow paths", "The llms.txt endpoint returns 404".
+- (2) sitewide-inside-sampled-section: phrases like "site-wide", "across the site", "across the entire site", "on all pages", "throughout the site", "every page", "anywhere on the site" appear inside a section that describes N audited PAGES. The pages are a sample, not the whole site. Rephrase to "across the audited pages" / "on the audited set" / "across the audited set".
+
+Apply the MINIMUM edit. Do not refactor surrounding paragraphs. Do not change verbs on unflagged lines.
+
+# RULE: critic / judgment findings (Gates 3 + 4)
+
+- leaked-AI-artifact / fabricated-specificity (AI dialogue, placeholder text, prompt fragments): REMOVE the offending sentence or paragraph entirely (replace with empty string). Do not invent replacement content. If removing leaves a section heading with no body, either remove the heading too in a separate patch or write one plain factual sentence derived from existing facts.
+- hollow-recommendation: add one specific data-backed detail that is already present elsewhere in the same priority block (a score, a missing property name, a page count, a header name). Do not invent data.
+- sample-vs-total-overreach (per-page sections): replace "the site" / "every page" / "all N pages" with a scoped form: "the audited pages", "the N audited pages", "across the audited set". Adjust counts to match the report frontmatter if needed.
+- sampling-inside-sitewide-section: see scope rules above.
+- WCAG-citation: cite a specific WCAG criterion in the TITLE of a priority block ONLY when Pa11y actually flagged that criterion. For analyzer-anchored priorities (semantic structure / div soup, structured-data gaps), the title must NOT carry a WCAG number; remediation references in the body framed as "this addresses WCAG X.Y.Z" are allowed.
+
+# Working principle
+
+Make the MINIMUM edit that resolves each finding. Do not refactor. Do not bundle unrelated changes into one `find`/`replace`. One finding, one patch. The deterministic patcher already handled em-dashes, American spellings, banned verdict words, and exaggeration swaps; you should rarely need to patch those categories.
+--- user ---
+Below is an audit report and 2 finding(s) collected from every gate. Call `patch_report` exactly once with a `patches` array that fixes every finding listed.
+
+For each patch, choose `find` so it is a UNIQUE substring of the report. If the same offending phrase appears in two places and only one is flagged, include enough surrounding context in `find` to disambiguate the flagged occurrence.
+
+FINDINGS:
+1. [tone-inconsistency] [llm-judgment] global
+   Problem: The Findings section mixes first-person voice ('We score', 'We found', 'We identified') in Priorities 1–4 with a third-person construction in the At-a-Glance narrative ('We have prioritised' is first-person but the surrounding priority blocks are first-person throughout—the actual switch occurs in Priority 2's Finding paragraph which reverts to third-person passive: 'the score is measured across a five-page audited set') while all sibling priority Finding paragraphs use first-person ('We score', 'We found').
+     Offending text: "Because the score is measured across a five-page audited set and the same score band holds broadly, a template-level change is likely"
+
+2. [sample-vs-total-overreach] [llm-judgment] global
+   Problem: The llms-full.txt Discovery Files entry states 'Whether adding one would be worthwhile depends on the full site's content depth, which the audited sample does not yet measure' but then implies a site-wide verdict by saying 'if dkd.de carries substantial long-form or technical content beyond what we sampled'—the preceding sentence 'We found no llms-full.txt on dkd.de' asserts a site-wide absence that is a binary structural fact and is fine, but the phrase 'the audited sample does not yet measure' directly after is internally contradicted by the gate warning flagging 'across the audited set' in the same Discovery Files section as a scope mis-statement, confirming the section mixes per-sample and site-wide framing.
+     Offending text: "We found no llms-full.txt on dkd.de; the endpoint returns a 404 and no reference to it appears in the sitemap or the homepage head."
+
+REPORT:
 ---
 title: "Dkd: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
@@ -64,7 +189,87 @@ mx:
 
 ## Audit gate findings for human review
 
-*No automated gate findings were raised during this audit. Every check ran clean.*
+Every automated gate ran to completion; this section surfaces 3 findings (3 warnings) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+
+### Warnings (rule violations)
+
+*A gate identified a likely audit-content issue. Read each detail below and confirm the finding is intentional, or correct the report before sign-off. Common shapes: a priority missing from the engagement plan, a scope phrase that mixes per-page and site-wide claims, a recommendation that lacks specifics.*
+
+| # | Gate | Category | Finding | Recorded |
+|---|------|----------|---------|----------|
+| 1 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-27T16:36:59Z |
+| 2 | sample-vs-total-scope | scope-mis-statements | Scope mis-statements remain after auto-repair: 1 | 2026-05-27T16:36:59Z |
+| 3 | template-voice | template-voice-style | Template voice/style findings: 26 violation(s) | 2026-05-27T16:46:03Z |
+
+<details open><summary>Warning detail (3)</summary>
+
+**1. voice-consistency - Mixed-voice section(s) remain after auto-repair: 1**
+
+Gate voice-consistency (check-report-voice.js) returned non-zero. Output excerpt:
+
+check-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/dkd-de-de-report.md
+  1 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person ("the site does X") with first-person ("we found Y") inside the same section reads as drafted-by-committee.
+
+  ## Findings  (line 214)
+    first-person tokens: 5 (lines 218, 250, 267…)
+    third-person markers: 1 (lines 284)
+
+  Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice ("we"); scorecards and appendices use third-person.
+
+**2. sample-vs-total-scope - Scope mis-statements remain after auto-repair: 1**
+
+Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:
+
+check-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/dkd-de-de-report.md
+  1 scope mis-statement(s).
+
+  [sampling-inside-sitewide-section] line 408
+    section: ## Discovery Files  (line 370)
+    phrase:  "across the audited set"
+    line:    We found no llms.txt file present on dkd.de, meaning machines that query the host for a structured content index receive
+
+  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write "across the audited set" - write "the sitemap declares" or "this file carries". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write "site-wide" or "across the entire site" - write "across the audited pages" or "on the audited set".
+
+**3. template-voice - Template voice/style findings: 26 violation(s)**
+
+Pre-flight template-voice check raised 26 violation(s) against web-audit-suite-template.md. The template prose carries forbidden patterns (third-person leak, banned vocab, em-dash, etc.). Pipeline continues; reviewer sees the finding in the report.
+
+FAIL  /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-reginald/audit/templates/web-audit-suite-template.md  (26 violations)
+      line 602 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 603 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 605 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 606 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 608 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 609 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 611 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 612 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 614 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 615 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 617 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 618 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 620 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 621 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 623 [em-dash] "  - " - Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      lin
+
+</details>
+
+---
 
 <!-- ERROR_REPORT_SECTION:END -->
 
@@ -237,7 +442,7 @@ We have prioritised the findings below by the degree to which each gap constrain
 
 - **Replace presentational wrapper divs on https://dkd.de/de/kontakt/ with semantically appropriate elements (sections, articles, nav, aside, main, header, footer) where the content type warrants it.** Each substitution adds a meaningful landmark to the accessibility tree, directly addressing the low Semantic Structure score and improving WCAG 1.3.1 (Info and Relationships) conformance.
 - **Prioritise containers that wrap interactive or navigational content first.** Landmark regions around navigation, contact forms, and primary content are the highest-value substitutions for both screen-reader users and machines parsing the page structure.
-- **Review the shared layout template that produces the contact page markup.** Because we measured the score across a five-page audited set and the same score band holds broadly, a template-level change is likely to lift the Semantic Structure score across all pages sharing that template, not only the contact page.
+- **Review the shared layout template that produces the contact page markup.** Because the score is measured across a five-page audited set and the same score band holds broadly, a template-level change is likely to lift the Semantic Structure score across all pages sharing that template, not only the contact page.
 
 **Effort:** Medium
 
@@ -391,7 +596,7 @@ We found no llms.txt at the site root, meaning machines that query the host for 
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We found no llms-full.txt on dkd.de; the endpoint returns a 404 and no reference to it appears in the sitemap or the homepage head. If dkd.de carries substantial long-form or technical content beyond what we sampled, publishing a concatenated llms-full.txt would give machines a single, retrievable document covering that material. Whether adding one would be worthwhile depends on the full site's content depth, which the audited sample does not yet measure; if dkd.de carries substantial long-form or technical content beyond what we sampled, publishing a concatenated llms-full.txt would give machines a single, retrievable document covering that material.
+We found no llms-full.txt on dkd.de; the endpoint returns a 404 and no reference to it appears in the sitemap or the homepage head. Whether adding one would be worthwhile depends on the full site's content depth, which the audited sample does not yet measure; if dkd.de carries substantial long-form or technical content beyond what we sampled, publishing a concatenated llms-full.txt would give machines a single, retrievable document covering that material.
 
 ### agent-card.json (A2A)
 
@@ -667,7 +872,7 @@ We found 6 identical inline fragment(s) repeated across multiple pages, totallin
 
 *The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `dkd-de-de-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
@@ -693,8 +898,8 @@ We linked no PDFs from the 5-page sample we crawled, and the sitemap declares no
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved — WCAG 2.1 AA accessibility compliance restored |
-| Full Optimisation | P1, P2, P3, P4 (P1–P4) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Critical Fixes | P1, P2 (Compliance Risk) | Priority 1, 2 resolved - WCAG 2.1 AA accessibility compliance restored |
+| Full Optimisation | P1, P2, P3, P4 (P1–P4) | Full machine readiness - every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | durable visibility in agent-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 
@@ -816,3 +1021,4 @@ This practice is what MX expects of every artefact in the field. We apply it fir
 (c) 2026 CogNovaMX Ltd . All rights reserved.
 
 *Read the books: <https://mx.allabout.network/books/index.html>*
+

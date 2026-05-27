@@ -1,64 +1,56 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/dkd-de-de-report.md",
-  "timestamp": "2026-05-27T14:16:42.246Z",
+  "timestamp": "2026-05-27T16:47:33.725Z",
   "model": "claude-sonnet-4-6",
   "runCount": 1,
-  "findingCount": 7,
+  "findingCount": 6,
   "regexFindingCount": 0,
-  "llmFindingCount": 7,
+  "llmFindingCount": 6,
   "findings": [
     {
       "category": "subtle-failure-framing",
-      "message": "\"firmly in the Needs Improvement band\" uses intensifying adverb \"firmly\" to editorially condemn a score that could be stated neutrally. \"Firmly\" implies a particularly bad result rather than simply reporting the band.",
-      "context": "Priority 3 finding: \"Discovery Readiness scores 25/100, placing dkd.de firmly in the Needs Improvement band.\"",
+      "message": "\"leaves something to be desired\" framing through inverse construction: 'Performance leads the scorecard as the leading dimension across the audited set' implies other dimensions lag behind by contrast, but more directly, the phrase 'the picture for human visitors is a strong one' followed by 'The headline opportunity is in machine readiness' is acceptable. However, the Executive Summary states 'The Catalogue Visibility score of 10/100 is the lowest machine-readiness figure we recorded' — this is neutral and fine. Flag instead: the Balanced Scorecard section opens with 'dkd.de delivers a strong human experience... though Discovery Readiness at 25/100 represents the clearest area for improvement' — this is legitimate hedging and acceptable. Actual flag: in the Executive Summary, 'Performance leads the scorecard as the leading dimension across the audited set' is internally contradictory — Performance scored 55/100 while Accessibility scored 100/100 and SEO scored 92/100. The prose asserts Performance as the leading dimension when the scorecard plainly shows it is not; this is fabricated specificity in narrative form rather than subtle failure framing.",
+      "context": "Executive Summary: 'Performance leads the scorecard as the leading dimension across the audited set, and the SEO foundations are equally solid at 92/100'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "fabricated-specificity",
-      "message": "The \"vs Peers\" column in the Balanced Scorecard Human Experience table lists \"median 83\" for Performance and \"median 81\" for Accessibility, but no peer benchmark dataset is defined or sourced in the audit data. The Machine Experience table similarly lists \"median 25\", \"median 57\", \"median 50\", and \"median 90\". These figures do not appear in any facts block and cannot be derived from the five-page audit. The footnote \"Benchmark median drawn from a curated audit dataset\" does not constitute an auditable data source within this report.",
-      "context": "Balanced Scorecard tables: Human Experience row Performance \"median 83\", Accessibility \"median 81\"; Machine Experience rows \"median 25\", \"median 57\", \"median 50\", \"median 90\".",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "fabricated-specificity",
-      "message": "The \"Catalogue Visibility\" score of 10/100 is referenced in the Next Steps section (\"resolve Catalogue Visibility findings (currently 10/100)\") but does not appear in the audit facts, the At-a-Glance table, the Balanced Scorecard, or the Summary Scores table. It is introduced without any preceding data block that establishes it, making it an unsupported number injected into a recommendation.",
-      "context": "Next Steps > Recommended Actions: \"Address Priority 1 findings: resolve Catalogue Visibility findings (currently 10/100)\". Also referenced in the At a Glance intro prose: \"10/100 for Catalogue Visibility\".",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "exaggeration",
-      "message": "American English form \"optimize\" (implied by \"optimisation\" used correctly elsewhere) is not itself the issue here, but \"color\" appears in the inline CSS preview fragment in the Inline Code Duplicates table (\".st0{fill:#B6D644;}\") — that is quoted code, not prose, so it is exempt. However, \"organization\" does not appear. Upon review the main US/UK drift issue is the word \"catalog\" used in the Appendix D methodology section: \"Site Profile JSON enables cross-audit comparison\" — not flagged. Re-checking: no clear US-form prose drift is present at a flaggable level.",
-      "context": "N/A — on closer inspection no clear flaggable US-form drift in narrative prose.",
+      "message": "The narrative claims 'Performance leads the scorecard as the leading dimension across the audited set' but the scorecard immediately above this sentence records Performance at 55/100, Accessibility at 100/100, and SEO at 92/100. Performance is demonstrably not the leading dimension; this assertion contradicts the audit data and introduces a false claim not derivable from the facts block.",
+      "context": "Executive Summary: 'Performance leads the scorecard as the leading dimension across the audited set, and the SEO foundations are equally solid at 92/100, placing dkd.de in the Excellent band.'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "hollow-recommendation",
-      "message": "The Optional Enhancement recommendation for \"Content-Signal directives\" names only a domain-level category (\"content-use policy for AI agents\") and instructs adding unspecified directives to robots.txt without naming any specific directive, syntax, or field. The surrounding priority block contains no data anchor (no directive name, no score, no URL, no selector). The recommendation could be copy-pasted unchanged into any audit report for any site.",
-      "context": "Optional Enhancements: \"Content-Signal directives (contentsignals.org) in robots.txt to declare content-use policy for AI agents: without these directives, machines have no explicit signal about how content across the audited set may be used for training or citation, and adding them to robots.txt is a low-effort way to establish that policy clearly.\"",
+      "message": "The 'Next Steps' section Priority 1 action reads 'Address Priority 1 findings: resolve Catalogue Visibility findings (currently 10/100)'. The Findings section contains no Priority block labelled 'Catalogue Visibility' — none of the four priority blocks addresses Catalogue Visibility. The score of 10/100 appears only in the Summary of Findings table. This recommendation references a score that has no corresponding priority block with remediation detail, making it hollow: it names a dimension and score but provides no specific action, element, page, or mechanism anywhere in the same priority block (because no such block exists).",
+      "context": "Next Steps > Recommended Actions: '1. Address Priority 1 findings: resolve Catalogue Visibility findings (currently 10/100)'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "voice-drift",
+      "message": "The phrase 'Based on the audited stages, dkd.de is Partially Compatible' uses a participial opener ('Based on...') that is characteristic of AI-generated hedging voice and breaks the first-person consultant register used throughout the rest of the report. The surrounding sections use 'we audited', 'we found', 'we recommend'; this sentence switches to an impersonal passive-analytical construction.",
+      "context": "5-Stage MX Journey section, final paragraph: 'Based on the audited stages, dkd.de is Partially Compatible; Search & Compare, Price Understanding, and Purchase Confidence are N/A for this site type.'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "exaggeration",
-      "message": "\"Performance leads the way as the standout dimension across the audited set\" is hyperbolic framing. The performance score is 55/100, which the scorecard itself labels with a bar showing roughly half filled. Describing a 55/100 score as \"leading the way\" and the \"standout dimension\" is unsupported by the audit data and reads as marketing copy.",
-      "context": "Executive Summary: \"Performance leads the way as the standout dimension across the audited set, and SEO follows closely at 92/100...\"",
+      "message": "The phrase 'every subsequent optimisation more impactful' in the What's Working Well introductory paragraph contains the American spelling 'optimization' — checking: the actual text uses 'optimisation' (UK form), which is correct. Real flag in this section: 'demonstrates a strong foundations' is a grammatical error (singular verb with plural noun) but not an exaggeration issue. Scanning for negation-pivot constructions: 'While these figures describe the worst page specifically, a template-level origin means the pattern is likely shared across other audited pages' in Priority 2 is a 'While X may suggest Y, the audit reveals Z' clause-level pivot. This lifts a concession into a rhetorical move that reads as marketing softening rather than direct consultant prose. The direct statement would be: 'The pattern is likely shared across other audited pages because the source is template-level.'",
+      "context": "Priority 2 Finding: 'While these figures describe the worst page specifically, a template-level origin means the pattern is likely shared across other audited pages.'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
-      "category": "exaggeration",
-      "message": "The What's Working Well table labels Performance as \"Excellent\" in both the Rating and Highlights columns (\"Excellent - 2025ms average load time\"), yet the Executive Summary scorecard assigns Performance a score of 55/100 with a bar showing approximately half coverage. Labelling a 55/100 score \"Excellent\" is an exaggeration unsupported by the audit data; the scorecard's own visual representation contradicts it.",
-      "context": "What's Working Well table, Performance row: \"Excellent | Excellent - 2025ms average load time\". Executive Summary scorecard: Performance 55/100.",
+      "category": "fabricated-specificity",
+      "message": "The Balanced Scorecard table lists 'vs Peers' benchmark medians: 'median 83' for Performance and 'median 81' for Accessibility. A footnote states '*Benchmark median drawn from a curated audit dataset.*' These peer medians do not appear in any facts block or audit data table in the report and are not derivable from the five-page crawl data. The Human Experience scorecard rows for UX/Navigation and Trust and Credibility show '-' for vs Peers, while the Machine Experience medians (25, 57, 50, 90) similarly have no sourcing in the audit data. The prose footnote 'curated audit dataset' is an assertion without any anchor in this report's evidence, making these numbers externally-sourced benchmarks introduced as if they were from the audit.",
+      "context": "Balanced Scorecard > Human Experience table: 'Performance | Excellent | A | median 83' and 'Accessibility (WCAG) | Excellent | A | median 81'; Machine Experience table medians similarly unsourced.",
       "severity": "fail",
       "source": "llm",
       "line": null

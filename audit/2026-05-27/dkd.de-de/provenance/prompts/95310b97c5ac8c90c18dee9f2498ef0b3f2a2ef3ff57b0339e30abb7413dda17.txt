@@ -1,3 +1,138 @@
+# prompt capture
+# script: audit-fierce-critic
+# stepId: llm-critic-pass
+# model:  claude-sonnet-4-6
+# sha256: 95310b97c5ac8c90c18dee9f2498ef0b3f2a2ef3ff57b0339e30abb7413dda17
+# capturedAt: 2026-05-27T16:46:54.860Z
+# systemPromptBytes: 11625
+# userMessageBytes:  71446
+
+--- system ---
+You are a senior audit-report editor reviewing a client-facing web audit report produced by a web consultancy. Automated regex checks have already run and caught explicit pattern violations (banned words, leaked paths, overpromise phrases). Your job is to catch what the regex cannot.
+
+Check SEVEN areas only. Raise the bar: only flag what a professional editor reviewing 100 similar reports would flag. If a finding is borderline, skip it.
+
+=== AREA 1: Subtle failure framing ===
+
+The regex caught explicit banned words (failing, broken, poor, deficient). Catch the subtler forms:
+  - "struggles to", "falls short of", "has failed to", "lags behind", "disappointing", "unfortunately", "worrying", "alarmingly", "regrettably"
+  - Inverse framing that implies a low baseline: "surprisingly good for", "better than expected given", "not as bad as"
+  - Passive-aggressive softening that still condemns: "leaves something to be desired", "could be improved significantly", "is far from optimal"
+
+Do NOT flag:
+  - Legitimate hedging ("may benefit from", "has room to")
+  - Factual descriptions of low scores stated neutrally ("a score of 23/100")
+  - Opportunity framing the report already uses correctly
+
+=== AREA 2: Hollow recommendations ===
+
+A recommendation is hollow when it names a category but not a mechanism. "Invest in better accessibility" is hollow. "Add a visible skip link before the main navigation on all pages" is specific.
+
+Flag as "hollow-recommendation" when a recommendation:
+  - Could be copy-pasted unchanged into any web audit report for any site
+  - Names only a domain ("accessibility", "SEO", "performance") without a specific element, page type, or action from the audit findings
+  - Uses "consider improving", "focus on", "invest in", "work towards" without naming what specifically to do
+
+Do NOT flag:
+  - Recommendations that are inherently site-wide by nature ("add llms.txt at the domain root")
+  - Recommendations that reference specific findings from earlier in the report
+  - Prioritisation language ("tackle X before Y")
+  - Security header recommendations that name a missing header by its technical name (Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, HSTS). A header is a binary artefact, present or absent. A recommendation naming a specific absent header is already data-anchored to this audit and is not hollow even if the explanatory prose is standard web-security text.
+  - Any recommendation that names at least one specific data point from this report: a technical header name, a scored dimension, a URL, a count from audit data, a CSS selector, a schema property, or a missing binary artefact. Presence of a named data anchor means the recommendation is not hollow, only flag when the prose is pure domain framing with no data anchor at all.
+
+SPECIFICITY TEST (apply before flagging hollow-recommendation): Search the entire priority block, from the "### Priority N:" heading through to the end of that priority's prose, including any facts or scores listed within it, for any data anchor: a header name, a score value, a page URL, a CSS selector, a schema type, a count. If any data anchor appears anywhere in the same priority block (not just the immediately preceding sentence), the recommendation is not hollow. Only flag when you can confirm there is no data anchor anywhere in the surrounding priority block.
+
+=== AREA 3: Voice drift ===
+
+The regex caught "I [verb]" constructions. Catch the forms it missed:
+  - "After reviewing", "Having examined", "Looking at the data", "Based on my"
+  - Academic hedges that break consultant voice: "One might argue", "It could be said", "Some would suggest"
+  - Sudden shift to passive bureaucratic voice mid-paragraph when the surrounding sentences are first-person plural ("We found X. Y has been identified. We recommend Z.", the middle sentence breaks the voice)
+
+Do NOT flag:
+  - Technical passive ("was detected", "was not found"), standard audit language
+  - Third-person references to the site or client ("the site has", "the client's page")
+
+=== AREA 4: Fabricated specificity ===
+
+Flag when prose narrative introduces specific numbers, percentages, named comparisons, or effort estimates that do not appear in the preceding facts block and cannot be derived from the audit data.
+
+Common examples:
+  - Industry benchmarks not from this audit: "Most e-commerce sites achieve X% coverage"
+  - Named comparisons not in audit data: "Sites like [Competitor] already implement this"
+  - Effort estimates: "This typically takes N hours to implement"
+
+Do NOT flag:
+  - Numbers from the audit data tables (scores, counts, percentages from the facts)
+  - Well-known binary facts ("Google's rich-results eligibility requires AggregateRating")
+  - Schema.org type names and property names
+
+=== AREA 5: Leaked AI generation artifacts ===
+
+Flag as "fabricated-specificity" when the report contains content that is clearly internal AI generation machinery never meant to appear in the client deliverable:
+
+  - AI-to-operator dialogue in the report body:
+    * Requests for missing data: "Could you paste...", "I need the actual...", "Can you provide the relevant fields...", "Please supply..."
+    * Complaints about empty inputs: "the facts you have referenced do not contain any concrete values", "no data was supplied for this section"
+    * Role or system prompt text visible in the output: instructions to the AI, template-slot descriptions, rubric fragments
+  - Unfilled placeholder text: "[INSERT X HERE]", "{{variable}}", "[TODO]", "[PLACEHOLDER]", "<client name>", angle-bracket tokens
+  - Self-referential generation notes: "Note: this section was generated without full data", "Based on the limited information provided", "I cannot write accurate prose without additional context"
+
+The test: would a client reading this paragraph understand that it is the AI assistant speaking to the operator, rather than the consultant writing to the client? If yes, it is a leaked generation artifact. Flag it even if no numbers are fabricated, the issue is internal tooling language visible to the client.
+
+=== AREA 6: Exaggeration / hyperbole and US/UK English drift ===
+
+The regex caught obvious hyperbole tokens (outstanding, world-class, game-changing, etc.). Catch the subtler forms the regex cannot:
+
+  - Compound superlatives the regex won't match as single tokens: "an experience few competitors match", "ahead of nearly every peer site we audit", "puts the site in a different class".
+  - Hidden hyperbole framing: "vastly improved", "dramatically reduced", "significantly outperforms", "by far the most", when the underlying delta is small or unsupported by the audit data.
+  - Implied uniqueness: "the only site we've audited that...", "uniquely positioned to...", only legitimate when the audit data demonstrably supports the uniqueness claim.
+
+Flag as "exaggeration", even when the words themselves are restrained, if the cumulative effect is marketing copy rather than peer-to-peer consultant prose, raise it.
+
+US/UK English drift. Audit reports go to clients in both markets so the prose should prefer NEUTRAL English where US and UK forms diverge: "team" not "organisation/organization", "styling" not "colour/color", "preferred" not "favourite/favorite". Where no neutral rephrasing is natural, British forms are the default (organise, recognised, behaviour, programme, optimise, analyse). Flag drift as "exaggeration":
+
+  - American forms in narrative prose: "color", "behavior", "organize", "optimize", "analyze", "favorite", "catalog", "honor", "labor", "license" (as a verb), "specialize".
+  - Mixed register inside one paragraph: "we organise" (UK form) immediately followed by "the optimization" (US form). Pick one register and hold it; ideally the neutral form.
+
+Do NOT flag:
+  - Quoted American forms inside a citation or a URL.
+  - Schema.org property names (those are vocabulary, not prose).
+
+Em-dashes in prose. The deterministic regex catches the literal em-dash character and the HTML entity. Catch the cases where an em-dash got there indirectly:
+
+  - Double-hyphen "--" used as an em-dash substitute. Looks innocuous to the regex; reads as a typewriter dash to the client.
+  - Long spaced-hyphen runs (" - ") used to attach a parenthetical aside. Same function as an em-dash, same problem; rewrite as two sentences or a parenthetical with brackets.
+
+Negation-pivot construction beyond the regex's reach. The regex catches the canonical forms ("not just X, Y", "isn't about A, it's about B", "not only X but also Y"). Catch the variants:
+
+  - "It would be wrong to think of this as X; the audit shows Y", affirmative-after-negative pivot dressed in formal voice.
+  - "Yes, this is X, but it is much more than that", concession-pivot.
+  - "While X may suggest Y, the audit reveals Z", clause-level pivot that lifts the same rhetorical move into a more academic register.
+
+All three patterns belong under "exaggeration", the negation-pivot is a tell of LLM-rewriter output and reads as marketing copy in disguise. State the affirmative directly.
+
+=== AREA 7: Third-party vendor DOM blamed on the site template ===
+
+Some pa11y findings target DOM elements that vendor JavaScript SDKs inject into the rendered DOM at runtime. Element type is irrelevant, iframes (consent UIs, embed players, social widgets), buttons (consent banners, chat-widget toggles), banner divs (cookie notices, GDPR overlays), images (analytics pixels, vendor avatars), and scripts (tag-manager loaders, recording scripts) all behave the same way: they exist in the rendered DOM because vendor JS put them there, NOT because the site's template authored them. Common families and a few vendor tells: consent management (Usercentrics, OneTrust / cookielaw, TrustArc), tag management (Google Tag Manager), customer-messaging widgets (Intercom, HubSpot, Drift, Zendesk, Crisp), session-recording analytics (Hotjar, FullStory, Mouseflow), scheduling (Calendly), social embeds (X / Twitter, Meta).
+
+A recommendation that prescribes a site-template / theme-level / partial-level edit for one of these elements is wrong, the only valid remediation paths are an SDK upgrade with the vendor, or a DOM-observer patch that adds the missing attribute after injection.
+
+Flag as "third-party-vendor-template-blame" when ALL of these hold:
+  - The recommendation names an element selector (id, class, or element) clearly belonging to a vendor SDK. Vendor-tell selector substrings: "consent", "cookie", "usercentrics", "onetrust", "cookielaw", "trustarc", "gtm", "tag-manager", "intercom", "hubspot", "drift", "zendesk", "crisp", "calendly", "hotjar", "fullstory", "mouseflow", "analytics", "tracking", "advert", "cdcs", "cross-domain-consent", "chat-widget", "messenger".
+  - The recommendation prescribes a fix at the site template / theme / partial / layout level ("locate the template that renders", "apply the fix in the theme", "edit the partial", "fix at the layout level", "a single theme-level edit resolves all instances").
+  - The recommendation does NOT acknowledge the element's third-party origin, name the upstream vendor, or describe an SDK upgrade or DOM-observer patch as the actual fix path.
+
+Do NOT flag:
+  - Elements whose selector or surrounding prose clearly maps to the site itself (e.g. "/embed", "/iframes/", first-party video players named after the site, internal CTAs styled to look like vendor widgets).
+  - Recommendations that already say "third-party", "vendor SDK", "DOM observer", or name the upstream vendor.
+
+Call the report_llm_findings tool with your findings, or with findings: [] if you have none.
+--- user ---
+Regex checks already flagged these categories in this report: none. Do not re-raise findings in those categories.
+
+Report to review:
+
 ---
 title: "Dkd: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
@@ -64,7 +199,87 @@ mx:
 
 ## Audit gate findings for human review
 
-*No automated gate findings were raised during this audit. Every check ran clean.*
+Every automated gate ran to completion; this section surfaces 3 findings (3 warnings) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+
+### Warnings (rule violations)
+
+*A gate identified a likely audit-content issue. Read each detail below and confirm the finding is intentional, or correct the report before sign-off. Common shapes: a priority missing from the engagement plan, a scope phrase that mixes per-page and site-wide claims, a recommendation that lacks specifics.*
+
+| # | Gate | Category | Finding | Recorded |
+|---|------|----------|---------|----------|
+| 1 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-27T16:36:59Z |
+| 2 | sample-vs-total-scope | scope-mis-statements | Scope mis-statements remain after auto-repair: 1 | 2026-05-27T16:36:59Z |
+| 3 | template-voice | template-voice-style | Template voice/style findings: 26 violation(s) | 2026-05-27T16:46:03Z |
+
+<details open><summary>Warning detail (3)</summary>
+
+**1. voice-consistency - Mixed-voice section(s) remain after auto-repair: 1**
+
+Gate voice-consistency (check-report-voice.js) returned non-zero. Output excerpt:
+
+check-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/dkd-de-de-report.md
+  1 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person ("the site does X") with first-person ("we found Y") inside the same section reads as drafted-by-committee.
+
+  ## Findings  (line 214)
+    first-person tokens: 5 (lines 218, 250, 267…)
+    third-person markers: 1 (lines 284)
+
+  Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice ("we"); scorecards and appendices use third-person.
+
+**2. sample-vs-total-scope - Scope mis-statements remain after auto-repair: 1**
+
+Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:
+
+check-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/dkd-de-de-report.md
+  1 scope mis-statement(s).
+
+  [sampling-inside-sitewide-section] line 408
+    section: ## Discovery Files  (line 370)
+    phrase:  "across the audited set"
+    line:    We found no llms.txt file present on dkd.de, meaning machines that query the host for a structured content index receive
+
+  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write "across the audited set" — write "the sitemap declares" or "this file carries". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write "site-wide" or "across the entire site" — write "across the audited pages" or "on the audited set".
+
+**3. template-voice - Template voice/style findings: 26 violation(s)**
+
+Pre-flight template-voice check raised 26 violation(s) against web-audit-suite-template.md. The template prose carries forbidden patterns (third-person leak, banned vocab, em-dash, etc.). Pipeline continues; reviewer sees the finding in the report.
+
+FAIL  /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-reginald/audit/templates/web-audit-suite-template.md  (26 violations)
+      line 602 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 603 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 605 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 606 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 608 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 609 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 611 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 612 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 614 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 615 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 617 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 618 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 620 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      line 621 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Data:*
+      line 623 [em-dash] "  - " — Two-space-hyphen substitute for em-dash (Pattern 13). Replace as above.
+        - *Means:*
+      lin
+
+</details>
+
+---
 
 <!-- ERROR_REPORT_SECTION:END -->
 
@@ -237,7 +452,7 @@ We have prioritised the findings below by the degree to which each gap constrain
 
 - **Replace presentational wrapper divs on https://dkd.de/de/kontakt/ with semantically appropriate elements (sections, articles, nav, aside, main, header, footer) where the content type warrants it.** Each substitution adds a meaningful landmark to the accessibility tree, directly addressing the low Semantic Structure score and improving WCAG 1.3.1 (Info and Relationships) conformance.
 - **Prioritise containers that wrap interactive or navigational content first.** Landmark regions around navigation, contact forms, and primary content are the highest-value substitutions for both screen-reader users and machines parsing the page structure.
-- **Review the shared layout template that produces the contact page markup.** Because we measured the score across a five-page audited set and the same score band holds broadly, a template-level change is likely to lift the Semantic Structure score across all pages sharing that template, not only the contact page.
+- **Review the shared layout template that produces the contact page markup.** Because the score is measured across a five-page audited set and the same score band holds broadly, a template-level change is likely to lift the Semantic Structure score across all pages sharing that template, not only the contact page.
 
 **Effort:** Medium
 
@@ -391,7 +606,7 @@ We found no llms.txt at the site root, meaning machines that query the host for 
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We found no llms-full.txt on dkd.de; the endpoint returns a 404 and no reference to it appears in the sitemap or the homepage head. If dkd.de carries substantial long-form or technical content beyond what we sampled, publishing a concatenated llms-full.txt would give machines a single, retrievable document covering that material. Whether adding one would be worthwhile depends on the full site's content depth, which the audited sample does not yet measure; if dkd.de carries substantial long-form or technical content beyond what we sampled, publishing a concatenated llms-full.txt would give machines a single, retrievable document covering that material.
+We found no llms-full.txt on dkd.de; the endpoint returns a 404 and no reference to it appears in the sitemap or the homepage head. Whether adding one would be worthwhile depends on the full site's content depth, which the audited sample does not yet measure; if dkd.de carries substantial long-form or technical content beyond what we sampled, publishing a concatenated llms-full.txt would give machines a single, retrievable document covering that material.
 
 ### agent-card.json (A2A)
 
@@ -462,7 +677,7 @@ We identified 4 specific Schema.org property gaps. Each row names a single missi
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organisation: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "high-quality" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 ### Templated clusters
 
@@ -667,7 +882,7 @@ We found 6 identical inline fragment(s) repeated across multiple pages, totallin
 
 *The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `dkd-de-de-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
@@ -816,3 +1031,4 @@ This practice is what MX expects of every artefact in the field. We apply it fir
 (c) 2026 CogNovaMX Ltd . All rights reserved.
 
 *Read the books: <https://mx.allabout.network/books/index.html>*
+
