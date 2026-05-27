@@ -1,56 +1,64 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/typo3.com/typo3-com-report.md",
-  "timestamp": "2026-05-27T09:11:46.891Z",
+  "timestamp": "2026-05-27T13:56:04.090Z",
   "model": "claude-sonnet-4-6",
   "runCount": 1,
-  "findingCount": 6,
+  "findingCount": 7,
   "regexFindingCount": 0,
-  "llmFindingCount": 6,
+  "llmFindingCount": 7,
   "findings": [
     {
-      "category": "subtle-failure-framing",
-      "message": "\"leaves room to grow\" is an inverse-framing construction that implies a low baseline for the accessibility score. The score of 87/100 is graded Excellent in the scorecard; the qualifier undermines that grade with subtle condemnation rather than neutral opportunity language.",
-      "context": "\"Across the audited set, typo3.com delivers a strong human experience, with Performance, Accessibility, and SEO all sitting in the Excellent band, though the accessibility score leaves room to grow through resolving the recurring template-level patterns...\"",
+      "category": "fabricated-specificity",
+      "message": "The 'vs Peers' column in the Balanced Scorecard cites specific median benchmark figures (e.g. 'median 83' for Performance, 'median 81' for Accessibility, 'median 57' for Structured Data Quality, 'median 90' for Pipeline Survivability, 'median 25' for Discovery Readiness, 'median 50' for MX Stack Completeness) with only a footnote saying 'Benchmark median drawn from a curated audit dataset.' These figures do not appear anywhere in the preceding audit facts block and cannot be derived from the 7-page crawl data. The source, composition, and size of the 'curated audit dataset' are undisclosed, making these numbers unverifiable by the client and potentially fabricated or misleading.",
+      "context": "| Performance | Excellent | A | median 83 |\n| Accessibility (WCAG) | Excellent | A | median 81 |\n...\n| Discovery Readiness | 25/100 | Needs Improvement | D | median 25 |\n| Structured Data Quality | 0/100 | Needs Improvement | D | median 57 |\n| MX Stack Completeness | 50/100 | Could Be Better | C | median 50 |\n| Pipeline Survivability | 96/100 | Excellent | A | median 90 |\n*Benchmark median drawn from a curated audit dataset.*",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "subtle-failure-framing",
-      "message": "\"leaves substantial room to move upward\" applied to the semantic structure score of 22/100 is a softened condemnation. The score and context make clear this is low; the phrase adds a rhetorical veneer without changing the meaning, and in context reads as passive-aggressive softening.",
-      "context": "\"Track the rendered semantic structure score after template changes; the current 22/100 leaves substantial room to move upward, and incremental re-audits will confirm which component changes yield the greatest structural improvement.\"",
+      "message": "The phrase 'though the accessibility result carries room to grow given the concentration of issues tracing to a small number of repeating template patterns' is subtle failure framing. The qualifier 'though' pivots from positive framing to a condemnation, and the clause 'carries room to grow' combined with the explanation of why implies the score is structurally disappointing. This is the 'could be improved significantly' / inverse-baseline pattern dressed in softer language.",
+      "context": "Across the audited set, typo3.com delivers a strong human experience, with Performance, Accessibility, and SEO all sitting in the Excellent band, though the accessibility result carries room to grow given the concentration of issues tracing to a small number of repeating template patterns.",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
-      "category": "third-party-vendor-template-blame",
-      "message": "Priority 3 recommends fixing the duplicate ID \"Ebene_1\" with a \"theme-level fix\" by locating \"the template or component that generates the #Ebene_1 ID\". The inline code duplicates section shows CSS beginning with `@keyframes ucOpacity` and `.usercentrics-button` patterns on the same pages, and the selector \"Ebene_1\" is a German-language SVG layer name consistent with an inline SVG injected by a vendor asset (e.g. the Usercentrics consent SDK or a GTM-loaded asset). The recommendation prescribes a site-template/theme-level edit without acknowledging the possibility of third-party origin, naming a vendor, or describing a DOM-observer or SDK-upgrade path as the fix.",
-      "context": "\"Locate the template or component that generates the `#Ebene_1` ID and ensure each instance produces a unique identifier... Because the pattern recurs across pages in the audited set, a theme-level fix is the most efficient path; correcting the source component removes the duplication from every page that uses it.\"",
+      "category": "hollow-recommendation",
+      "message": "The recommendation for 'sameAs links on Organisation' in Optional Enhancements names only the domain action ('adding sameAs properties') and two generic target platforms (Wikidata and LinkedIn) without any data anchor from this audit — no entity URL, no existing schema block to extend, no page URL. Since the SDQ score is 0/100 and no Organisation entity exists yet, this recommendation presupposes an entity that does not exist, and provides no actionable instruction tied to audit findings. Applying the specificity test: the surrounding optional-enhancement block contains no data anchor (no schema property value from the audit, no URL, no score specific to this enhancement); the mention of 'Wikidata and LinkedIn' is a generic industry suggestion, not derived from audit data.",
+      "context": "**sameAs links on Organisation**: adding `sameAs` properties pointing to Typo3's Wikidata and LinkedIn entries on any Organisation entity would allow machines to cross-reference the publisher's identity across the open web, strengthening attribution confidence when agents encounter Typo3 content.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The recommendation for 'BreadcrumbList on deep content pages' in Optional Enhancements names a schema type but provides no data anchor from the audit — no specific page URL, no crawl count of deep pages, no score. The phrase 'pages reached through Typo3's documentation and product hierarchy' is a generic description that could apply to any CMS-driven site. Applying the specificity test: the surrounding block contains no data anchor specific to this audit for this enhancement.",
+      "context": "**BreadcrumbList on deep content pages**: pages reached through Typo3's documentation and product hierarchy currently rely on URL path alone for navigational context; adding `BreadcrumbList` markup would give machines a structured trail to follow, improving how agents understand and surface those pages within multi-step queries.",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "exaggeration",
-      "message": "\"color\" is an American English form used in narrative prose. The report otherwise uses British/neutral English conventions (\"colour\" does not appear, but the surrounding prose uses \"styling\", \"behaviour\", etc.). The American spelling should be \"colour\" or a neutral rephrasing.",
-      "context": "\"Verify that the colour change does not inadvertently create a new contrast gap for adjacent or overlapping text layers on the same component.\" — Earlier in Priority 4: \"Update the background or foreground styling of the element at selector `#c491 > div > div > div > div > div > div > div:nth-child(2)` so that the resulting contrast ratio meets at least 4.5:1... the audit identifies #c25700 as a background value that satisfies this requirement.\"",
+      "message": "American English spelling 'organization' does not appear, but 'optimize' appears implicitly via 'machine-optimised' (UK form used correctly). However, 'color' appears in audit data CSS previews (acceptable as quoted code). More critically, 'optimize' appears as 'optimised' (UK). Checking further: the report uses 'colour' in 'background-colour parameter' (Priority 1 recommendation) — this is a UK form used in narrative prose, which is correct. No US drift found there. However, the report uses 'organized' nowhere but does use the construction 'analyzed' — checking: 'analyse' is used correctly throughout. One clear US form appears: 'color' in the narrative prose of Priority 1: 'Confirm with Usercentrics whether their SDK theming or configuration API already exposes a background-colour parameter' — this uses UK 'colour', which is correct. Re-checking for actual US drift: the Inline Code Duplicates section contains CSS preview snippets with 'color' inside code fragments (acceptable as quoted code). After thorough review, no clear US/UK drift in narrative prose is present that rises to the flag threshold.",
+      "context": "N/A — on further review this finding does not meet the bar; skipping.",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
-      "category": "exaggeration",
-      "message": "The phrase \"performance stands as the strongest human-experience dimension we measured\" in the Executive Summary is a compound superlative/ranking claim. The scorecard shows Performance at 55/100 (graded Excellent in the Human Experience table but scored below Accessibility at 87 and SEO at 80). Calling performance \"the strongest human-experience dimension\" is factually inconsistent with the audit data, where Accessibility (87) and SEO (80) both outscore Performance (55/100). This reads as marketing uplift inconsistent with the numbers.",
-      "context": "\"SEO comes in at 80/100 and AI Suitability (served) at 85/100, and performance stands as the strongest human-experience dimension we measured, meaning visitors arriving on these pages encounter a well-structured, fast-loading experience.\"",
+      "category": "subtle-failure-framing",
+      "message": "The phrase 'is far from optimal' does not appear, but 'the structural pattern is broadly representative of the audited set' following a score of 23/100 is paired with the framing 'a band that warrants attention' — this construction is borderline. On reflection this does not clearly meet the flag bar as it is factual score-based language. Withdrawing.",
+      "context": "N/A — withdrawing as borderline.",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "fabricated-specificity",
-      "message": "The report states that \"Common Crawl (the archive underpinning most major LLM training datasets) prioritises HTML for its LLM-training subsets, so a plain-text llms.txt is unlikely to enter training corpora at the same rate as the rest of the site.\" This is a specific comparative claim about Common Crawl's relative ingestion rates for text/plain versus text/html that is not derived from any audit data in this report. It is presented as fact without a citation, and the specific behavioural claim about prioritisation rates constitutes an unsourced industry assertion inserted as narrative.",
-      "context": "\"We recommend serving llms.txt as `text/html` instead, because Common Crawl (the archive underpinning most major LLM training datasets) prioritises HTML for its LLM-training subsets, so a plain-text llms.txt is unlikely to enter training corpora at the same rate as the rest of the site.\"",
+      "message": "The Inline Code Duplicates section states there are '1293 KB redundant bytes' from '6 identical inline fragments repeated across multiple pages'. The table shows individual fragment sizes (218748 bytes, 773 bytes, 652 bytes, 373 bytes, 151 bytes, 20 bytes). Summing these: 218748 + 773 + 652 + 373 + 151 + 20 = 220,717 bytes per occurrence. Multiplying by page counts (7, 7, 7, 7, 7, 5): 218748×7 + 773×7 + 652×7 + 373×7 + 151×7 + 20×5 = 1,531,236 + 5,411 + 4,564 + 2,611 + 1,057 + 100 = 1,544,979 bytes ≈ 1509 KB, not 1293 KB. The '1293 KB' figure cannot be derived from the table data provided and appears to be a fabricated or inconsistently calculated number.",
+      "context": "We found 6 identical inline fragment(s) repeated across multiple pages, totalling 1293 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.",
       "severity": "fail",
       "source": "llm",
       "line": null

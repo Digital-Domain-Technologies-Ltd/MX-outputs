@@ -12,7 +12,7 @@ auditTool: "web-audit-suite"
 auditDate: "2026-05-27"
 description: "Executive audit report analysing accessibility, performance, SEO, structured data, and AI agent compatibility for Dotfusion"
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
-performanceScore: 35
+performanceScore: 55
 accessibilityScore: 73
 seoScore: 86
 llmSuitabilityScore: 100
@@ -64,7 +64,7 @@ mx:
 
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this section surfaces 1 finding (1 warning) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+Every automated gate ran to completion; this section surfaces 2 findings (1 warning, 1 info) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
 
 ### Warnings (rule violations)
 
@@ -72,26 +72,40 @@ Every automated gate ran to completion; this section surfaces 1 finding (1 warni
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 2 | 2026-05-27T12:26:35Z |
+| 1 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-27T14:03:02Z |
 
 <details open><summary>Warning detail (1)</summary>
 
-**1. voice-consistency - Mixed-voice section(s) remain after auto-repair: 2**
+**1. voice-consistency - Mixed-voice section(s) remain after auto-repair: 1**
 
 Gate voice-consistency (check-report-voice.js) returned non-zero. Output excerpt:
 
 check-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dotfusion.com/dotfusion-com-report.md
-  2 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person ("the site does X") with first-person ("we found Y") inside the same section reads as drafted-by-committee.
+  1 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person ("the site does X") with first-person ("we found Y") inside the same section reads as drafted-by-committee.
 
-  ## Findings  (line 191)
-    first-person tokens: 8 (lines 195, 214, 228…)
-    third-person markers: 2 (lines 195, 319)
-
-  ## Agent Reading Pipeline  (line 604)
-    first-person tokens: 1 (lines 652)
-    third-person markers: 2 (lines 606, 652)
+  ## Findings  (line 196)
+    first-person tokens: 4 (lines 200, 278, 294…)
+    third-person markers: 1 (lines 294)
 
   Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice ("we"); scorecards and appendices use third-person.
+
+</details>
+
+### Info (tone / style observations)
+
+*A gate flagged a tone, voice, or style observation. Usually safe to accept; scan the detail to confirm the phrasing reads as intended.*
+
+| # | Gate | Category | Finding | Recorded |
+|---|------|----------|---------|----------|
+| 1 | tone | exaggeration | Exaggeration / hyperbole: 1 instance (line 274) | 2026-05-27T14:03:02Z |
+
+<details open><summary>Info detail (1)</summary>
+
+**1. tone - Exaggeration / hyperbole: 1 instance**
+
+Exaggeration / hyperbole
+
+line 274: "outstanding" - - Because the selector traces to a recurring template pattern, a single fix in the shared header par
 
 </details>
 
@@ -127,7 +141,7 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 | | Score | |
 |:---|---:|:---|
-| Performance | **35**/100 | `######------------` **(!)** |
+| Performance | **55**/100 | `##########--------` |
 | Accessibility | **73**/100 | `#############-----` |
 | SEO | **86**/100 | `###############---` |
 | Machine Suitability | **100**/100 | `##################` |
@@ -135,11 +149,11 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 | Agent Readability | **77**/100 | `##############----` |
 | Pipeline Survivability | **97**/100 | `#################-` |
 
-We audited seven pages of dotfusion.com and came away with a clear picture of a site that serves its human visitors well. SEO foundations are solid, scoring 86/100 in the Excellent band, and the Next.js platform delivers fully rendered, machine-readable markup at every page we tested. Content is well-structured, and the breadth of structured data types already deployed across the audited set reflects a team that has invested seriously in its digital foundations.
+We audited seven pages of dotfusion.com and found a strong foundation built for human visitors. SEO performance across the audited set sits at 86/100, an Excellent result, and the breadth of Schema.org types already deployed tells us the team has invested seriously in structured content. The Next.js platform delivers a technically coherent experience, and the content is clearly organised with clear navigational intent throughout.
 
-Accessibility is our Priority 1 compliance item. Across the audited set we recorded 68 raw instances of WCAG AA issues spanning 38 distinct issue types, and we want to note an important nuance in that figure: 44 of those instances trace to 9 recurring template patterns, meaning a single theme-level correction per pattern resolves a cluster of instances at once. The remediation effort is more contained than the raw count suggests, and addressing it protects both users and the site's audit-trail standing. Once accessibility is on a solid footing, the headline opportunity is machine readiness. dotfusion.com currently sits at MX Readiness Level 1 (Discoverable), which means machines can discover and parse the audited pages but cannot yet cite them as an attested source. Discovery Readiness sits at 25/100 and Structured Data Quality at 63/100. The path to Level 2 (Citation-ready) runs through adding full MX governance fields, including mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers, alongside raising Machine-Signal Confidence above 60 and Discovery Readiness above 40.
+Accessibility is a Priority 1 compliance item we want to name directly before turning to machine readiness. Across the audited set we recorded 68 raw instances across 38 distinct WCAG AA issue types, and 43 of those instances trace to 9 recurring template patterns, meaning a single corrective edit per pattern resolves a substantial share of the raw instance count. The remediation surface is more concentrated than the raw figure suggests, and we recommend treating it as the first action in the roadmap.
 
-Because dotfusion.com runs on Next.js, the served and rendered states are aligned across the pages we tested, so machines read the same content human visitors see. Schema.org JSON-LD remains the highest-leverage asset for the machine channel regardless of rendering approach, and with the schema vocabulary already broad across the audited set, the groundwork is there to move from Decoration to richer structural depth, and from Discoverable to Citation-ready, with targeted, well-sequenced improvements.
+The headline opportunity beyond accessibility is advancing from Level 1 (Discoverable) to Level 2 (Citation-ready) on the MX Readiness scale. Machines can already discover and parse dotfusion.com across the audited set, but they cannot yet cite it as an attested source, because no MX-namespaced governance metadata was detected on the audited pages. The concrete path forward is to add full MX fields, governance, and provenance metadata so agents can cite as well as discover, alongside raising Machine Suitability above 60 and Discovery Readiness above 40. Those additions are the lever that unlocks citation readiness; the Schema.org foundation already in place gives that work an excellent base to build from.
 
 \clearpage
 
@@ -147,7 +161,7 @@ Because dotfusion.com runs on Next.js, the served and rendered states are aligne
 
 ### Human Experience
 
-Across the audited set, dotfusion.com delivers a strong SEO result and solid load performance, with accessibility the clearest area for improvement given the volume of WCAG instances we identified.
+Across the audited set, dotfusion.com delivers a strong SEO result and solid performance, with accessibility the clearest area for improvement given the volume of WCAG issues we identified across the seven pages.
 
 | Dimension | Rating | Grade | vs Peers |
 |-----------|--------|-------|----------|
@@ -158,7 +172,7 @@ Across the audited set, dotfusion.com delivers a strong SEO result and solid loa
 
 ### Machine Experience
 
-Across the audited set, machines can discover and parse content on dotfusion.com, though the combination of a Discovery Readiness score of 25/100, a Structured Data Quality score of 63/100, and an MX Readiness Level of 1 (Discoverable) means citation as an attested source is not yet within reach.
+Across the audited set, machines can discover and parse dotfusion.com's pages reliably, though the current MX Readiness Level of 1 (Discoverable) means they cannot yet cite the site as an attested source.
 
 | Dimension | Score | Rating | Grade | vs Peers |
 |-----------|-------|--------|-------|----------|
@@ -206,12 +220,12 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-Across the audited set, dotfusion.com demonstrates a strong foundations in several areas that will carry real weight as the improvements ahead take hold. The SEO scores, schema presence, and security baselines we recorded all point to groundwork that is ready to build on.
+Across the audited set, dotfusion.com demonstrates a strong foundations to build from, with strong SEO scores, a meaningful structured data vocabulary already in place, and secure transport consistently enforced. These strengths represent real groundwork for the improvements that follow.
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
-| Performance | Good | Good - 3114ms average load time |
-| SEO (content pages) | 86 | Excellent - titles, meta descriptions, canonical URLs in place |
+| Performance | Good | Good - 2719ms average load time |
+| SEO (content pages) | 85 | Excellent - titles, meta descriptions, canonical URLs in place |
 | Security | 2/5 | 2/5 headers present (CSP, X-Frame-Options, X-Content-Type-Options absent); 0 of 7 URLs carry all five |
 | Structured Data | 63 | Good - JSON-LD on every page with valid Schema.org vocabulary |
 | Heading Quality | 96 | Excellent - single H1 per page, no level jumps, Lighthouse-compliant |
@@ -228,144 +242,150 @@ Across the audited set, dotfusion.com demonstrates a strong foundations in sever
 
 ### At a Glance
 
-We have ordered the findings below by downstream impact, with discovery and machine-readiness gaps leading because they constrain everything a machine can do before it ever reaches structured data or content. Schema depth and catalogue visibility follow as the opportunities most likely to extend dotfusion.com's reach once those foundations are in place.
+We have ordered the findings below by the impact they carry for machines attempting to discover, read, and act on dotfusion.com, so discovery gaps lead because they constrain everything that depends on them downstream. Each row names an opportunity to strengthen a specific layer, from foundational reachability through to structured-data depth and agent-stack completeness.
 
 | # | Finding | Bucket | Priority | Effort | Impact |
 |---|---------|--------|----------|--------|--------|
-| 1 | Unlabelled anchor links in site header, WCAG 4.1.2 (7 of 7 pages) | Compliance Risk | High | Low | Screen reader users may miss navigation destinations entirely |
-| 2 | reCAPTCHA textarea missing accessible name and label, WCAG 4.1.2 and 1.3.1 (7 of 7 pages) | Compliance Risk | High | Medium | Screen reader users may miss the form field's purpose and be unable to complete contact forms |
-| 3 | Unlabelled form inputs (#name, #company), WCAG 4.1.2 (5 of 7 pages) | Compliance Risk | High | Low | Screen reader users may miss the purpose of contact form fields |
-| 4 | Semantic structure, rendered score 49/100, worst page: /services/contentful-development-agency (23 of 45 bare divs) | Compliance Risk | High | Medium | Screen reader users and machines are less likely to parse content hierarchy accurately |
-| 5 | Security headers incomplete, 2 of 5 present across all 7 audited URLs | Cross-cutting | Medium | Low | Browsers and security scanners may flag pages as lower-trust |
-| 6 | Discovery Readiness 25/100, llms-full.txt, agent-card.json, ai.txt, and humans.txt absent | AI Opportunity | High | Medium | Machines may miss key discovery surfaces and reduce agent confidence in dotfusion.com as a source |
-| 7 | MX Stack Completeness 44/100, discovery artefacts and MX governance fields incomplete | AI Opportunity | Medium | Medium | Machines are less likely to classify content accurately or attribute responses to dotfusion.com |
-| 8 | Structured Data Quality 63/100, schema coverage gaps in audited set | AI Opportunity | Medium | Medium | Machines may miss entity relationships, reducing citation eligibility |
+| 1 | Unlabelled Header Anchor Links, WCAG 4.1.2 (7 instances across 7 pages) | Compliance Risk | High | Low | Screen reader users may miss navigation links with no readable name |
+| 2 | reCAPTCHA Textarea Unlabelled, WCAG 4.1.2 and 1.3.1 (7 instances across 7 pages, vendor-injected via cdn-ca.aglty.io) | Compliance Risk | High | Medium | Screen reader users risk missing the purpose of the CAPTCHA field |
+| 3 | Contact Form Fields Unlabelled, WCAG 4.1.2 (#name, #company, 5 pages) | Compliance Risk | High | Low | Screen reader users may be unable to identify form fields |
+| 4 | Semantic Structure 49/100 (23 of 45 bare divs on https://dotfusion.com/services/contentful-development-agency) | Compliance Risk | Medium | Medium | Screen reader users and machines are less likely to interpret content hierarchy correctly |
+| 5 | Security Headers Incomplete (2 of 5 present; Content-Security-Policy, X-Frame-Options, X-Content-Type-Options absent) | Cross-cutting | High | Medium | Browsers and security scanners may flag pages as insufficiently hardened |
+| 6 | Discovery Readiness 25/100 (llms-full.txt, agent-card.json, ai.txt, humans.txt absent) | AI Opportunity | High | Medium | Machines risk missing structured intent signals and are less likely to cite dotfusion.com as an attested source |
+| 7 | MX Stack Completeness 44/100 (discovery artefacts and MX governance fields incomplete) | AI Opportunity | Medium | Medium | Machines may miss audience, content-type, and canonical signals, reducing agent confidence |
+| 8 | Structured Data Quality 63/100 (Good, no sameAs or author authority links detected) | AI Opportunity | Medium | Low | Machines are less likely to resolve dotfusion.com entities to external knowledge sources |
 
 ---
 
-**Priority 1: Unlabelled Anchor Links in Site Header, WCAG 4.1.2 (7 of 7 Pages)**
+**Priority 1: Unlabelled Header Anchor Links, WCAG 4.1.2**
 
 **Bucket:** Compliance Risk
 
-**Finding:** We identified anchor elements in the site header on every audited page that carry valid href attributes but supply no link content visible to an accessibility API. Because the issue traces to a single recurring template pattern shared across the audited pages, a single theme edit resolves all seven instances we identified.
+**Finding:** We detected at least one anchor element in the site header on every one of the 7 audited pages that carries a valid href but supplies no readable link content to accessibility APIs. The pattern is consistent across all 7 pages, pointing to a single template-level element that can be resolved with one theme edit.
 
 **What to change and why:**
-- Supply descriptive link content for each affected anchor in the site header. Without it, screen reader users hear an unlabelled interactive element and may not know where the link leads, which directly breaches WCAG 4.1.2 (Name, Role, Value) and creates legal exposure under accessibility regulations.
-- If the link is icon-only or image-only, add an accessible text equivalent via an appropriate attribute so the link purpose is announced. This brings the template into WCAG 2.1 AA conformance and removes the finding from all seven audited pages in a single deployment.
+- Supply a descriptive accessible name for each unlabelled anchor in the site header, using either visible text content, an aria-label attribute, or an aria-labelledby reference pointing to a visible label. This directly addresses WCAG 4.1.2 (Name, Role, Value) and ensures screen reader users can identify what each header link does.
+- Because the selector traces to a recurring template pattern, a single fix in the shared header partial resolves all 7 instances across the audited set in one change, improving the Accessibility score from 73/100 and reducing the strong WCAG 4.1.2 exposure.
 
 **Effort:** Low
 
 ---
 
-**Priority 2: reCAPTCHA Textarea Missing Accessible Name and Label, WCAG 4.1.2 and 1.3.1 (7 of 7 Pages)**
+**Priority 2: reCAPTCHA Textarea Unlabelled, WCAG 4.1.2 and 1.3.1 (vendor-injected via cdn-ca.aglty.io)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** Across the audited set, the reCAPTCHA response textarea (selector: `#g-recaptcha-response-100000`) carries no name exposed to an accessibility API and no associated label, breaching both WCAG 4.1.2 (Name, Role, Value) and WCAG 1.3.1 (Info and Relationships). We identify this as one of 2 vendor-injected DOM patterns originating from cdn-ca.aglty.io; the element is not present in the site's own template and a theme edit will not reach it.
+**Finding:** Across the audited set, all 7 pages carry a reCAPTCHA textarea element injected by the third-party SDK hosted at cdn-ca.aglty.io. The element carries no accessible name and no programmatic label, triggering both WCAG 4.1.2 (Name, Role, Value) and WCAG 1.3.1 (Info and Relationships) violations. Because the element is injected at runtime by the vendor SDK and does not exist in the site's own template, a theme edit will not resolve it.
 
 **What to change and why:**
-- Engage the vendor whose SDK is hosted at cdn-ca.aglty.io to ship an SDK upgrade that adds a valid accessible name and label to the injected textarea. This is the cleanest resolution and prevents the issue re-emerging with future SDK updates.
-- As an interim measure, a DOM-observer patch can add the missing accessible name attribute after the vendor element is injected at runtime. This addresses the WCAG 4.1.2 and 1.3.1 violations for screen reader users without requiring a template change, and removes legal exposure while the vendor fix is in progress.
-- Resolving this finding improves the Accessibility score (currently 73/100) and removes a barrier that prevents screen reader users from completing contact forms across the audited set.
+- Engage the vendor responsible for the SDK hosted at cdn-ca.aglty.io to ship an SDK upgrade that adds a valid accessible name (via label, title, aria-label, or aria-labelledby) to the reCAPTCHA textarea at the point of injection. This is the cleanest resolution and addresses both WCAG 4.1.2 and 1.3.1 at the source.
+- If an SDK upgrade is not immediately available, a DOM-observer patch can add the missing accessible name attribute to the injected textarea after it enters the DOM. This is a bridging measure and should be replaced by the vendor-side fix when it ships.
+- Resolving this finding removes 7 instances across the audited set and closes a recurring WCAG compliance gap that affects every page carrying the reCAPTCHA widget.
 
 **Effort:** Medium
 
 ---
 
-**Priority 3: Unlabelled Form Inputs (#name, #company), WCAG 4.1.2 (5 of 7 Pages)**
+**Priority 3: Contact Form Fields Unlabelled, WCAG 4.1.2 (#name, #company)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** Across the audited set, the `#name` and `#company` form inputs each lack a name available to an accessibility API on five of the seven audited pages. Both trace to recurring template-level patterns, meaning a single theme edit per pattern resolves all instances.
+**Finding:** Across the audited set, 5 of the 7 pages carry contact form fields (#name and #company) that supply no accessible name to the accessibility API. Both fields lack a label element, title attribute, aria-label, or aria-labelledby reference, meaning screen reader users have no programmatic indication of what each field expects. The pattern is consistent across affected pages and traces to a template-level form partial.
 
 **What to change and why:**
-- Associate a visible or programmatic label with each of the `#name` and `#company` inputs. Without a label, screen reader users hear an unlabelled field and may not understand what information to supply, which breaches WCAG 4.1.2 (Name, Role, Value).
-- Addressing both inputs at the template level removes the WCAG violation from all affected pages in a single deployment, improves the Accessibility score from its current 73/100, and reduces legal exposure related to inaccessible form fields.
+- Add a properly associated accessible name to the #name input field, using any of the four valid methods: a label element with a matching for attribute, a wrapping label element, a title attribute, an aria-label, or an aria-labelledby reference. This addresses WCAG 4.1.2 and ensures screen reader users can identify the field before entering data.
+- Apply the same labelling fix to the #company input field. Both fields appear together in the same form partial, so resolving them in a single template edit removes all 5 instances of each violation across the audited set.
+- Correctly labelled form fields also improve machine-readable form semantics, which supports automated testing pipelines and accessibility audit-trail documentation.
 
 **Effort:** Low
 
 ---
 
-**Priority 4: Semantic Structure, Rendered Score 49/100, Worst Page /services/contentful-development-agency (23 of 45 Bare Divs)**
+**Priority 4: Semantic Structure 49/100 (23 of 45 Bare Divs on /services/contentful-development-agency)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** We score semantic structure at a rendered 49/100, placing it in the high-concern band. The most acute instance we measured across the audited set is https://dotfusion.com/services/contentful-development-agency, where 23 of 45 total elements are bare divs. Because most pages share the same template structure, the band applies broadly across the audited set even though the specific figures come from that worst-case page.
+**Finding:** The rendered Semantic Structure score sits at 49/100 across the audited set. The figures cited here come specifically from the worst-performing page in the sample, https://dotfusion.com/services/contentful-development-agency, where nearly half of all measured elements are bare divs with no semantic role. Because most audited pages share the same template, the structural pattern is likely representative of the broader set, though the precise ratio varies per page.
 
 **What to change and why:**
-- Review the template used by the /services/contentful-development-agency page and replace structurally significant bare div elements with appropriate semantic elements (such as those conveying sections, articles, navigation, or lists). Semantic elements convey document structure to both screen readers and machines; a high ratio of bare divs means neither audience receives reliable structural cues, which touches WCAG 1.3.1 (Info and Relationships).
-- Improving semantic structure moves the rendered score upward from 49/100 and benefits screen reader users who rely on landmark navigation, making content hierarchy perceivable without visual context.
-- Because the pattern is template-driven, resolving it on the shared template propagates the improvement to other pages in the audited set that share the same layout, compounding the accessibility gain across a single deployment.
+- Review the content sections on https://dotfusion.com/services/contentful-development-agency and replace generic container elements used for content grouping with semantically meaningful equivalents such as article, section, nav, aside, header, footer, or main as appropriate to each region's role. This moves the Semantic Structure score upward from 49/100 and directly supports WCAG 1.3.1 (Info and Relationships).
+- Improved semantic structure benefits screen reader users, who rely on landmark regions and sectioning elements to navigate pages without reading every line; it also improves the confidence with which machines can map content to topics, which supports both SEO and structured data parsing.
+- Because the template is shared, fixes applied to the service page template propagate to other pages in the audited set that share the same layout, multiplying the remediation return from a single editing pass.
 
 **Effort:** Medium
 
 ---
 
-**Priority 5: Security Headers Incomplete, 2 of 5 Present Across All 7 Audited URLs**
+**Priority 5: Security Headers Incomplete (2 of 5 Present; Content-Security-Policy, X-Frame-Options, X-Content-Type-Options Absent)**
 
 **Bucket:** Cross-cutting
 
-**Finding:** Across the audited set, dotfusion.com serves only 2 of the 5 security headers we check (HTTPS and HSTS are present). The three absent headers leave browsers without server-side instructions on content policy, framing permissions, and cross-origin behaviour.
+**Finding:** Across the audited set, every page returns only 2 of the 5 security headers we check: HTTPS and HSTS are present, but Content-Security-Policy, X-Frame-Options, and X-Content-Type-Options are absent from all 7 audited URLs. This leaves dotfusion.com exposed to known browser-level attack vectors and means automated security scanners are likely to flag the absence.
 
 **What to change and why:**
-- Add the three security headers absent from the current server configuration. Each absent header removes a layer of browser-enforced protection: without them, dotfusion.com pages are more susceptible to content-injection and clickjacking vectors, and security scanning tools are likely to flag the configuration as incomplete.
-- These headers are applied at the server or CDN layer and do not require changes to page templates, making the effort low relative to the protection gained. Completing the set to 5 of 5 also removes a reputational risk in any third-party security audit a prospective client might commission.
+- Add the Content-Security-Policy header at the server or CDN layer to declare approved content sources. This mitigates cross-site scripting and data injection risks and is checked by browser-based security tooling used by enterprise procurement teams.
+- Add the X-Frame-Options header to prevent dotfusion.com pages from being embedded in frames on other domains, reducing clickjacking exposure.
+- Add the X-Content-Type-Options header set to nosniff to prevent browsers from MIME-type-sniffing responses away from the declared content type, closing a class of content-injection vulnerabilities.
+- All three headers are configured at the infrastructure level rather than in page templates, so a single server or CDN configuration change applies the fix across every served response.
+
+**Effort:** Medium
+
+---
+
+**Priority 6: Discovery Readiness 25/100 (llms-full.txt, agent-card.json, ai.txt, humans.txt Absent)**
+
+**Bucket:** AI Opportunity
+
+**Finding:** Discovery Readiness scores 25/100 (Needs Improvement) across the audited set. While llms.txt is present, four of the five discovery artefacts we check are absent: llms-full.txt, agent-card.json, ai.txt, and humans.txt. Machines that index dotfusion.com for agent-delivered answers and citation attribution rely on these artefacts to understand what the site offers, who it is for, and how to attribute content. Without them, machines risk mischaracterising dotfusion.com or omitting it from agent-generated responses where it would otherwise qualify.
+
+**What to change and why:**
+- Publish llms-full.txt as a comprehensive content manifest for machines that ingest the full text of pages rather than just metadata summaries. This extends the signal available to LLM indexers and moves Discovery Readiness meaningfully upward from 25/100.
+- Publish agent-card.json to declare dotfusion.com's machine-readable service identity, capability claims, and contact endpoints. This is the artefact that agent frameworks use to determine whether a site can act as a source in an agentic workflow.
+- Add ai.txt to communicate crawl preferences and permitted use cases to AI crawlers, giving dotfusion.com a defined policy posture rather than leaving machine behaviour to default assumptions.
+- Add humans.txt to record team and project authorship. This artefact supports attribution chains that machines use when assembling cited answers, and its absence means authorship credit may be omitted.
+
+**Effort:** Medium
+
+---
+
+**Priority 7: MX Stack Completeness 44/100 (Discovery Artefacts and MX Governance Fields Incomplete)**
+
+**Bucket:** AI Opportunity
+
+**Finding:** MX Stack Completeness sits at 44/100 (Could Be Better) across the audited set. Two categories contribute to this gap: the missing discovery artefacts addressed in Priority 6, and the absence of MX governance fields in page frontmatter. Machines that parse dotfusion.com pages for structured intent signals look for canonicalUri, contentType, audience, and status fields; without them, agent confidence in the page's scope and currency is reduced.
+
+**What to change and why:**
+- Add canonicalUri as a frontmatter or metadata field on each page so machines can resolve the authoritative URL for a piece of content without ambiguity, particularly where URL variants or query strings exist.
+- Add contentType to signal whether a page is a service description, a case study, a blog post, or another content category. This allows machines to apply appropriate parsing and citation logic for the content class.
+- Add audience to declare the intended reader or buyer segment. Machines use this field to match content to query intent, and its absence reduces the precision with which dotfusion.com pages surface in agent-filtered results.
+- Add status to indicate whether a page's content is current, archived, or in draft. Without a declared status, machines treat all pages as equally current, which can introduce stale content into agent-generated answers.
+
+**Effort:** Medium
+
+---
+
+**Priority 8: Structured Data Quality 63/100 (Good, sameAs and Author Authority Links Absent)**
+
+**Bucket:** AI Opportunity
+
+**Finding:** Structured Data Quality scores 63/100 (Good) across the audited set. The schema vocabulary in use is broad, with Organisation, WebSite, and ProfessionalService types already present. The gap is at the authority-linkage layer: we detected no sameAs properties connecting dotfusion.com's Organisation entity to external knowledge sources such as Wikidata, Companies House, LinkedIn, or Crunchbase entries. Without sameAs links, machines cannot confirm that the entity described in the structured data corresponds to a known, independently verified party, reducing entity resolution confidence.
+
+**What to change and why:**
+- Add sameAs properties to the existing Organisation entity, pointing to any stable, publicly accessible external profiles where dotfusion.com is listed (for example, a LinkedIn company page, a Crunchbase entry, or a Wikidata item if one exists). Each sameAs link gives machines a cross-reference to confirm entity identity, moving the SDQ score upward from 63/100.
+- Review the existing ProfessionalService and WebSite markup for completeness. Adding a url property on the Organisation type and ensuring the name value matches the canonical brand name used across external profiles strengthens the entity graph that machines build when indexing dotfusion.com.
+- Stronger entity resolution increases the likelihood that dotfusion.com is cited as an attested source in agent-generated answers about the services it provides, particularly in competitive query spaces where multiple vendors describe similar offerings.
 
 **Effort:** Low
-
----
-
-**Priority 6: Discovery Readiness 25/100, llms-full.txt, agent-card.json, ai.txt, and humans.txt Absent**
-
-**Bucket:** AI Opportunity
-
-**Finding:** We score Discovery Readiness at 25/100 (Needs Improvement). While llms.txt is present, the four remaining well-known discovery artefacts, llms-full.txt, agent-card.json, ai.txt, and humans.txt, are absent from dotfusion.com. When we traverse the host, we find a partial signal that may reduce agent confidence in dotfusion.com as a complete or governable source.
-
-**What to change and why:**
-- Add llms-full.txt to provide machines with a richer content index beyond the summary that llms.txt alone supplies. This directly improves Discovery Readiness, the primary metric driving the 25/100 score, and increases the probability that agent crawlers surface deeper content from dotfusion.com.
-- Add agent-card.json to declare dotfusion.com's identity and capabilities in a machine-readable format. This is the artefact most directly linked to agent confidence and reduces ambiguity about the site's content scope when machines evaluate it as a potential source.
-- Add ai.txt to communicate crawl permissions and preferences to AI-specific crawlers, and add humans.txt to satisfy the human-readable discovery convention. Together these complete the discovery artefact set and move Discovery Readiness materially upward.
-
-**Effort:** Medium
-
----
-
-**Priority 7: MX Stack Completeness 44/100, Discovery Artefacts and MX Governance Fields Incomplete**
-
-**Bucket:** AI Opportunity
-
-**Finding:** We score MX Stack Completeness at 44/100 (Could Be Better). The score reflects gaps across two contributing categories: the discovery artefacts named in Priority 6, and the MX governance fields in page frontmatter (canonicalUri, contentType, audience, and status), which we find absent or incomplete across the audited set.
-
-**What to change and why:**
-- Add the MX governance fields canonicalUri, contentType, audience, and status to page frontmatter across the audited set. These fields allow machines to classify content accurately, understand its intended audience, and determine whether the page is a current or archived source. Without them, agent confidence in dotfusion.com content is reduced.
-- Completing the discovery artefact layer (as described in Priority 6) addresses the artefact component of the MX Stack score simultaneously, making the two priorities complementary. Addressing both raises MX Stack Completeness from 44/100 toward a band that unlocks more reliable agent attribution.
-
-**Effort:** Medium
-
----
-
-**Priority 8: Structured Data Quality 63/100, Schema Coverage Gaps in Audited Set**
-
-**Bucket:** AI Opportunity
-
-**Finding:** We score Structured Data Quality at 63/100 (Good). We find that the audited set carries a broad range of schema types already, but the numeric score indicates coverage or depth gaps that reduce how reliably machines can resolve entity relationships when processing dotfusion.com pages.
-
-**What to change and why:**
-- Review existing schema instances across the audited set for completeness of recommended properties on the types already in use. Sparse property coverage on present types is a common driver of SDQ scores in the 63/100 range, and enriching properties moves the score upward without introducing new schema types.
-- Where entity relationships between existing types (such as Organisation, Service, and Offer) are not explicitly linked in structured data, add the relevant relationship properties. Machines use these links to build a connected entity model; gaps in the links reduce citation confidence when a machine is assembling a response that draws on dotfusion.com as a source.
-- Improving SDQ from 63/100 also contributes to MX Stack Completeness (currently 44/100), since structured data coverage is one of the components feeding that composite score.
-
-**Effort:** Medium
 
 ### Optional Enhancements
 
 These are not issues but areas where additional metadata or patterns would strengthen this site's machine readiness.
 
-- **sameAs links on Organisation**: adding `sameAs` properties to the Organisation entities already present across the audited set would let machines resolve dotfusion.com against authoritative external registries such as Wikidata or LinkedIn, strengthening attribution confidence when agents compile answers about the company.
+- **sameAs links on Organisation**: adding `sameAs` properties to the Organisation entities already present across the audited set would allow machines to cross-reference dotfusion.com against authoritative external records, strengthening entity disambiguation and citation confidence.
 
-- **potentialAction on Organisation**: attaching a `potentialAction` descriptor to the existing Organisation entities would advertise contact or service-request capabilities directly to machines, allowing agents to surface actionable next steps without requiring a user to navigate the site manually.
+- **AggregateRating on Service and Offer entities**: the Service and Offer types already present across the audited set carry no aggregate rating data; adding `AggregateRating` would give machines a structured quality signal to surface alongside service listings in agent-generated answers.
 
-- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt: declaring content-use policy for AI agents via Content-Signal directives would give machines an explicit, machine-readable signal about how dotfusion.com's content may be used, a low-effort addition to robots.txt that sits outside schema markup entirely.
+- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt to declare content-use policy for AI agents.
 
 ---
 
@@ -424,9 +444,9 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://dotfusion.com/services/answer-engine-optimisation-agency-dotfusion`. A first-time visitor sees the cold-cache cost: the crawler recorded 4162 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three cache-busted re-probes that followed returned 167ms, 531ms, 99ms, giving a returning-visitor median of **167 ms**. **Returning-visitor verdict: Healthy**.
+**Slowest.** The slowest page is `https://dotfusion.com/services/answer-engine-optimisation-agency-dotfusion`. A first-time visitor sees the cold-cache cost: the crawler recorded 4433 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three cache-busted re-probes that followed returned 217ms, 91ms, 101ms, giving a returning-visitor median of **101 ms**. **Returning-visitor verdict: Healthy**.
 
-**Median-load control.** The median-load control page is `https://dotfusion.com/`. A first-time visitor sees the cold-cache cost: the crawler recorded 2785 ms on its initial fetch. **First-visit verdict: Acceptable but elevated**. Three cache-busted re-probes that followed returned 132ms, 130ms, 112ms, giving a returning-visitor median of **130 ms**. **Returning-visitor verdict: Healthy**.
+**Median-load control.** The median-load control page is `https://dotfusion.com/services/storyblok-development-agency`. A first-time visitor sees the cold-cache cost: the crawler recorded 2711 ms on its initial fetch. **First-visit verdict: Acceptable but elevated**. Three cache-busted re-probes that followed returned 93ms, 133ms, 94ms, giving a returning-visitor median of **94 ms**. **Returning-visitor verdict: Healthy**.
 
 **Verdict:** The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides.
 
@@ -445,7 +465,7 @@ Sitemap: https://dotfusion.com/sitemap.xml
 
 *The full `robots.txt` (4 lines) is preserved alongside this report as `dotfusion-com-robots-txt.txt`.*
 
-The robots.txt file is present and announces one sitemap reference, giving machines a clear path to crawl content. With no disallow paths declared, all parts of dotfusion.com are open to machine access.
+We found dotfusion.com's robots.txt to be open and permissive, with no disallow paths blocking any machine from crawling any part of the site. The file announces one sitemap reference, giving crawlers a direct route to the full content inventory.
 
 ### sitemap.xml
 
@@ -458,15 +478,15 @@ The robots.txt file is present and announces one sitemap reference, giving machi
 
 **Sitemap grade:** Partial
 
-The sitemap covers 148 URLs and earns a Partial grade, with lastmod and changefreq values present to guide crawl scheduling, but the absence of priority attributes leaves machines without explicit guidance on which pages matter most.
+The sitemap covers 148 URLs and earns a Partial grade, with lastmod and changefreq values present across entries but no priority attributes supplied, leaving machines without the relative-weight signals that would help them sequence crawling more precisely.
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We confirmed that llms.txt is present and carries a site description, which gives machines a starting point for understanding dotfusion.com. The file is missing both a page inventory and a content policy, however, and adding those two sections would give machines a materially fuller picture of the content they are permitted to read and index.
+We found llms.txt present and carrying a site description, which gives machines a starting point for context, though the file currently omits both a page inventory and a content policy, and adding those two sections would give machines a more complete picture of what dotfusion.com covers and how its content may be used.
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We find no llms-full.txt at dotfusion.com, with the endpoint returning a 404 across every signal we checked: HTTP status, sitemap.xml inclusion, and the homepage head. We recommend adding llms-full.txt to provide machines with a richer content index beyond the summary that llms.txt alone supplies.
+We find no llms-full.txt on dotfusion.com, with the endpoint returning a 404 and no reference to it in the sitemap or homepage head; whether adding it would be worthwhile depends on the content depth of the full 148-page set, which the audited sample does not yet measure.
 
 ### agent-card.json (A2A)
 
@@ -633,13 +653,13 @@ The MX Journey maps the five stages a machine follows when interacting with a we
 | 4 | Price Understanding | Pass | 67 | Pricing visible |
 | 5 | Purchase Confidence | Site type does not require | -- | No transaction forms detected |
 
-Partially Compatible; Purchase Confidence is N/A for this site type.
+Dotfusion is Partially Compatible with the MX Journey; Purchase Confidence is N/A for this site type.
 
 ---
 
 ## Agent Reading Pipeline
 
-Scoring a machine's metadata is not the same as scoring whether machines can read each page at all. Pipeline Survivability runs eleven reading-resilience checks on every audited page. Each one asks whether a page survives a known agent-reading risk: truncation by the agent's fetch tool, summarisation by the relevance layer, JavaScript-only content, tab disclosure, soft 404s, broken code fences, content negotiation drift, cross-host redirects, generic headings, content that begins too far into the document, or overhead-heavy pages where scripts, styles, and images outweigh actual content.
+Scoring a machine's metadata is not the same as scoring whether a machine can read each page at all. Pipeline Survivability runs eleven reading-resilience checks on every audited page. Each one asks whether a page survives a known agent-reading risk: truncation by the agent's fetch tool, summarisation by the relevance layer, JavaScript-only content, tab disclosure, soft 404s, broken code fences, content negotiation drift, cross-host redirects, generic headings, content that begins too far into the document, or overhead-heavy pages where scripts, styles, and images outweigh actual content.
 
 Every check runs on every audited page. The aggregate score weights truncation resilience, SPA resilience, and proper 404 signalling most heavily: these three determine whether each page is reachable to the agent at all. Boilerplate burial, tabbed disclosure, and delayed content start carry medium weight. The remaining checks contribute to the score but any single one slipping is less critical on its own.
 
@@ -685,7 +705,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 
 **Pipeline Survivability score:** 97/100
 
-We score pipeline survivability at 97 across the audited set, and the one area we flag for attention is truncation risk, present on two of the seven pages we reviewed. When a page's content is cut short before a machine has finished reading it, that machine may form an incomplete picture of what the page offers, which can affect how accurately it represents or routes requests to dotfusion.com. Addressing the truncated pages would consolidate an already strong foundation and ensure machines receive the full signal on every page they process.
+Across the audited set, pipeline survivability scores 97/100, and the single area requiring attention is truncation risk, which we detected on two of the seven pages reviewed. When a page's content is cut short before a machine finishes reading it, structured data and body text may be partially or entirely lost, reducing how reliably machines can parse and act on the information we present. Addressing truncation on those two pages would close the most consequential remaining gap and bring the full audited set to consistent readiness.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -701,7 +721,7 @@ We run the Div Soup check on both served and rendered HTML so we can tell whethe
 |--------|--------------|----------------|--------------------|
 | Rendered HTML | 49/100 (high) | 23 bare divs · 51% ratio · depth 4 | `div` (36), `div.input-container.flex` (20), `div.absolute.bottom-0` (6), `div.max-w-2xl.h-full` (6), `#__next` (6) |
 
-On the worst-performing page we sampled, https://dotfusion.com/services/contentful-development-agency, rendered bare divs account for 51% of structural elements, meaning machines lose structural context and must fall back on positional inference to determine meaning. The pattern is predominantly surface-wide rather than deeply nested, a high bare ratio alongside a modest chain depth of 4, which points toward a component framework or drag-and-drop builder that emits untyped wrapper divs prolifically rather than a problem confined to one deeply stacked section of the template. The most accessible first move is to wrap the obvious landmark regions, header, nav, main, footer, and any aside panels, in their proper semantic elements, which reduces the bare-div ratio materially without requiring a structural rebuild of the layout.
+On the worst-performing page we sampled, https://dotfusion.com/services/contentful-development-agency, 23 of 45 elements are bare divs (51%), which means machines lose structural context on that page and fall back on positional inference to determine meaning. The pattern there is surface-wide rather than deeply nested, with the deepest bare chain reaching 4 levels; a high bare ratio alongside relatively shallow chains typically points to a component framework where containers are emitted without semantic roles rather than to a deeply nested drag-and-drop pipeline. The cheapest first move is to wrap the obvious landmarks, header, nav, main, footer, and aside, in their correct HTML elements, which would reduce the bare-div ratio on that page without touching the underlying layout.
 
 ---
 
@@ -788,7 +808,7 @@ We found 12 identical inline fragment(s) repeated across multiple pages, totalli
 
 ## PDF Documents: Accessibility and Machine Readability
 
-Across the audited set, PDFs sit at the intersection of two independent concerns: global accessibility legislation, from the EAA (Directive (EU) 2019/882, in force 28 June 2025) to Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada, has converged on ISO 14289-1 (PDF/UA) as the shared technical baseline, making the EAA the most precisely codified instance of a worldwide alignment rather than a regional outlier. Separately, and with equal weight, an untagged or image-based PDF is opaque to machines: search crawlers, AI systems, and automated pipelines cannot extract text, entities, or structure from it, whereas a properly tagged PDF with a complete structure tree is machine-readable in precisely the same way that semantic HTML is.
+Accessibility legislation across major markets, with the EU's Directive (EU) 2019/882 as the most precisely codified instance, has converged on ISO 14289-1 (PDF/UA) as the shared structural baseline, meaning an untagged PDF carries legal exposure in the EU, the US, the UK, Australia, and Canada simultaneously. The same structural gap that excludes assistive-technology users also renders a PDF invisible to machines: without a proper tag tree, search crawlers, AI systems, and automated pipelines cannot extract text, entities, or structure any more than they can from a scanned image.
 
 We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
 
@@ -800,9 +820,9 @@ We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: We recommend addressing the 68 WCAG 2.1 AA accessibility issues identified (regulatory exposure).
-2. **Review Priority 2-3 findings**: We encourage reviewing Catalogue Visibility improvements and metadata tuning that compound over time.
-3. **Consider optional enhancements**: We suggest considering optional patterns that give an early-mover opportunity in AI search.
+1. **Address Priority 1 findings**: address the 68 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
+2. **Review Priority 2-3 findings**: Catalogue Visibility improvements and metadata tuning that compound over time
+3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search
 
 ### What's Next
 
@@ -817,7 +837,7 @@ We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no
 
 ## Summary of Findings
 
-Across the audited set, https://dotfusion.com performs well for search visibility, with SEO scoring 86/100, a clear strength that reflects solid on-page foundations for human visitors. Discovery Readiness and Structured Data present the primary opportunities, with scores of 25/100 and 63/100 respectively, pointing to meaningful gains available in how machines locate, parse, and trust the content they encounter. We invite the dotfusion.com team to work through the detailed findings that follow and take the steps that will extend those human-facing strengths into the machine-readable layer.
+Across the audited set, https://dotfusion.com performs well for search visibility, with SEO scoring 86/100, a strong foundations for human-facing discoverability. The clearest opportunities lie in Discovery Readiness at 25/100 and Structured Data at 63/100, where closing the gaps would meaningfully improve how machines read, parse, and surface the site's content. We invite the team to review the findings that follow and prioritise the actions most aligned with their next stage of growth.
 
 ### Audit Scores
 
@@ -826,7 +846,7 @@ Across the audited set, https://dotfusion.com performs well for search visibilit
 | AI Agent Suitability | 100/100 | Excellent |
 | Accessibility | 73/100 | Good |
 | SEO (all pages) | 86/100 | Excellent |
-| SEO (content pages) | 86/100 | Excellent |
+| SEO (content pages) | 85/100 | Excellent |
 | MX Stack Completeness | 44/100 | Could Be Better |
 | Structured Data Quality | 63/100 | Good |
 | Commerce Visibility | 35/100 | Could Be Better |
@@ -846,10 +866,10 @@ Across the audited set, https://dotfusion.com performs well for search visibilit
 - **`/services/headless-cms-agency`**: SEO 87 · A11y 75 · Back 85 · Served 100 · Rendered 100
 - **`/services/contentful-development-agency`**: SEO 83 · A11y 70 · Back 85 · Served 100 · Rendered 100
 - **`/services/storyblok-development-agency`**: SEO 86 · A11y 70 · Back 85 · Served 100 · Rendered 100
-- **`/services/agility-cms-development-agency`**: SEO 87 · A11y 70 · Back 85 · Served 100 · Rendered 100
+- **`/services/agility-cms-development-agency`**: SEO 86 · A11y 70 · Back 85 · Served 100 · Rendered 100
 - **`/services/answer-engine-optimisation-agency-dotfusion`**: SEO 85 · A11y 75 · Back 85 · Served 100 · Rendered 100
 
-The page marked (nav) is navigational: it routes visitors to content rather than containing it, and is excluded from the SEO content average. Content-pages SEO average: 86/100.
+The page marked (nav) is navigational: it routes visitors to content rather than containing it, and is excluded from the SEO content average. Content-pages SEO average: 85/100.
 
 ---
 
@@ -868,9 +888,9 @@ We recorded every internal link found on every audited page: 157 links in total.
 
 ## Appendix C: Image Optimisation
 
-Across the audited set, we sampled 87 images in total. The format distribution breaks down as 38 SVG, 27 PNG, 3 WebP, and 19 images in other or unrecognised formats, with no JPEG images present. Alt-text coverage stands at 62 images (71.3%), leaving 25 without any alt attribute. For a developer audience, the SVG-heavy composition is understandable for iconography and UI elements, but the low WebP adoption and the 19 unclassified formats are worth reviewing: consolidating towards WebP where raster images are used would improve compression without quality loss.
+Across the audited set, we sampled 89 images in total. The format distribution breaks down as 38 SVG, 27 PNG, 3 WebP, and 21 images in other or unrecognised formats, with no JPEG images present. Alt-text coverage stands at 62 images (69.7%), leaving 27 without an alt attribute. For a developer audience that is a straightforward accessibility gap: every decorative image should carry an empty alt attribute, and every informative image should carry a meaningful description. The 27 missing instances represent meaningful opportunity to improve both accessibility compliance and machine-readable content signals across the audited set.
 
-On loading strategy, 19 images across the audited set carry an explicit `loading="lazy"` attribute, and none carry `loading="eager"`. The remaining 68 images have no loading attribute set at all. That last group is worth calling out clearly: no attribute is not the same as eager loading. When no attribute is present, the browser applies its own heuristics to decide when to fetch the image, which can mean above-the-fold images are deprioritised in some contexts, or below-the-fold images are fetched immediately. Explicit attribution gives the browser a clear instruction and removes the guesswork, so we recommend auditing the 68 unattributed images and assigning either `loading="lazy"` or `loading="eager"` based on their position in the viewport.
+On loading strategy, 19 images carry an explicit `loading="lazy"` attribute and none carry `loading="eager"`. The remaining 70 images have no loading attribute set at all. It is worth being precise here: no attribute is not the same as eager loading. Without an explicit value, the browser applies its own heuristics, typically loading images in the initial viewport eagerly and deferring others based on scroll position estimates. That heuristic is not unreliable, but it is unpredictable, and for performance-sensitive pages it is always preferable to declare intent explicitly. We recommend auditing those 70 images and assigning either `loading="lazy"` or `loading="eager"` based on each image's position relative to the viewport.
 
 > **Double-lazy loading pattern not detected** - no image in the audited set carries both native `loading="lazy"` and a JavaScript lazyload placeholder at the same time.
 

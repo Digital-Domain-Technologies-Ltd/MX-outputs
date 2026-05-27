@@ -1,11 +1,11 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/typo3.com/typo3-com-report.md",
-  "timestamp": "2026-05-27T09:11:59.688Z",
+  "timestamp": "2026-05-27T13:56:22.176Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 19747,
-    "output_tokens": 500,
+    "input_tokens": 20739,
+    "output_tokens": 731,
     "cache_creation_input_tokens": 2369,
     "cache_read_input_tokens": 0
   },
@@ -14,26 +14,26 @@
   "findings": [
     {
       "category": "tone-inconsistency",
-      "message": "The 'About This Report' section opens in first-person plural ('We audited', 'We fetch', 'We then review') but the 'Executive Summary' section switches to third-person ('We audited seven pages' is consistent, however the Balanced Scorecard narrative uses 'the seven pages we reviewed' and 'machines can discover and parse typo3.com pages'), while the individual Priority findings blocks return to first-person ('We identified', 'we found'). The Structured Data Inventory section mixes both voices within the same short paragraph.",
-      "context": "Across the 7 pages we audited, structured data is limited. Machines cannot reliably extract entity data from these pages.",
+      "message": "The 'About This Report' section opens in first-person plural ('We audited', 'We fetch', 'We then review') but the Findings priority blocks switch inconsistently: Priority 3 opens with 'We identified' (first-person) while Priority 7 opens with 'We score' and Priority 8 opens with 'We record' — these are consistent — however the 'Summary of Findings' closing paragraph switches back to first-person ('We invite the team') after the structured Findings section uses first-person throughout, which is internally consistent. The real tone-inconsistency is in the 'Structured Data Inventory' section, which mixes third-person passive ('No Schema.org JSON-LD entities were detected') with first-person ('the 7 pages we audited') within the same short paragraph.",
+      "context": "No Schema.org JSON-LD entities were detected across the audited set. Adding at least one typed entity per page...a wider audit identifies the same gaps across the rest of the estate.",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The Marker Reachability section closes with a statement that generalises from the 7-page sample to 'the rest of the estate' without an explicit scope qualifier, implying the finding holds site-wide.",
-      "context": "a wider audit confirms whether the same pattern holds across the rest of the estate.",
+      "message": "The 'Structured Data Inventory' section asserts 'a wider audit identifies the same gaps across the rest of the estate' — treating a 7-page sample finding (zero schema markup) as though it has already been confirmed across the full site, which has not been audited.",
+      "context": "a wider audit identifies the same gaps across the rest of the estate.",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The Security Headers section asserts that three headers are absent 'across every audited response' but then the narrative header states they are absent as a site-wide fact without scoping to the sample, overstating the evidence base of 7 pages.",
-      "context": "3 of the five standard security headers are absent across every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP), X-Frame-Options.",
+      "message": "The 'Cross-Page Consistency' table reports 'Skip link: 0% — 7 pages missing it', but the Marker Reachability table directly above records 'Skip link (accessibility): Yes | Yes | Body | Yes | No', asserting a skip link is present — these two statements cannot both be true for the same audited pages, and the consistency table implies a site-wide 0% conclusion from a contradicted sample finding.",
+      "context": "Skip link | 0% | 7",
       "severity": "block"
     },
     {
       "category": "hedged-vs-asserted-imbalance",
-      "message": "The Structured Data Inventory section asserts with certainty that 'a wider audit identifies the same gaps across the rest of the estate' — a claim about unaudited pages that goes well beyond the 7-page sample and is stated as fact rather than inference.",
-      "context": "a wider audit identifies the same gaps across the rest of the estate.",
+      "message": "The 'llms-full.txt' section hedges whether publishing the file 'would be worthwhile' by saying it 'depends on the content depth of the full site, which our audited sample of 7 pages does not yet measure' — but the absence of the file is a binary, deterministic fact (404 confirmed), and the recommendation to publish it appears without hedging in Priority 7; the inconsistency in confidence between the Discovery Files section (hedged) and the Findings section (asserted) is a material imbalance for the same item.",
+      "context": "Whether adding it would be worthwhile depends on the content depth of the full site, which our audited sample of 7 pages does not yet measure",
       "severity": "block"
     }
   ],
