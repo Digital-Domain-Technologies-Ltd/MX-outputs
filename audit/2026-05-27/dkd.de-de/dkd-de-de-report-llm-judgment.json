@@ -1,0 +1,47 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/dkd-de-de-report.md",
+  "timestamp": "2026-05-27T08:48:42.657Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 18031,
+    "output_tokens": 758,
+    "cache_creation_input_tokens": 2369,
+    "cache_read_input_tokens": 0
+  },
+  "findingCount": 5,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "tone-inconsistency",
+      "message": "The 'About This Report' section opens in consistent first-person plural ('We audited', 'We fetch', 'We then review'), but the final paragraph of that section shifts to third-person ('Here we look at the web estate' is fine, but 'Get the web estate right, and you have the foundation' switches to second-person imperative mid-section, breaking the established first-person plural voice used throughout the surrounding paragraphs).",
+      "context": "Get the web estate right, and you have the foundation. Get all of it right, and you have a machine-ready estate.",
+      "severity": "block"
+    },
+    {
+      "category": "tone-inconsistency",
+      "message": "The four Priority findings blocks all use first-person plural voice ('We score', 'We identify', 'we audited'), but the 'Summary of Findings' section switches to third-person passive ('We invite the team') mid-paragraph while also switching back to first-person, creating a mixed voice in a section that should hold a single tone consistent with the other narrative sections.",
+      "context": "We invite the team at https://dkd.de to work through the detailed findings below and take the practical next steps",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Security Headers section states 'All five standard security headers are present on every audited response' as a general assertion, then immediately contradicts this with per-page data showing CSP and X-Frame-Options are absent on multiple pages; the opening sentence implies full coverage that does not exist even within the sample.",
+      "context": "All five standard security headers are present on every audited response. This is the expected baseline for any production website.",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "The Agent Reading Pipeline section reports 'Cross-Host Redirect: Fail · 6/6' and '3 page(s) redirect to a different host', but these two figures are contradictory — the check label says all 6 pages fail while the data field says only 3 pages cross origin — overstating the pervasiveness of the issue with confidence across the narrative.",
+      "context": "Cross-Host Redirect | Fail · 6/6 | 3 page(s) redirect to a different host. Agents that enforce same-origin policy may not follow these chains. **Data:** 3 page(s) cross origin",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The 'Next Steps / Recommended Actions' item 1 references resolving 'Catalogue Visibility findings (currently 10/100)', but no Priority finding in the Findings section addresses Catalogue Visibility — this score appears only in the Audit Scores summary table, making the action item an overreach that implies a finding supported by the full site rather than the audited sample.",
+      "context": "Address Priority 1 findings: resolve Catalogue Visibility findings (currently 10/100)",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}

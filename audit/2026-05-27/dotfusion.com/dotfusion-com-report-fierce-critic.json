@@ -1,0 +1,67 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dotfusion.com/dotfusion-com-report.md",
+  "timestamp": "2026-05-27T12:27:08.955Z",
+  "model": "claude-sonnet-4-6",
+  "runCount": 2,
+  "findingCount": 7,
+  "regexFindingCount": 0,
+  "llmFindingCount": 7,
+  "findings": [
+    {
+      "category": "hollow-recommendation",
+      "message": "Priority 1 of the 'Next Steps / Recommended Actions' block is a hollow recommendation. It names only the domain ('68 WCAG 2.1 AA accessibility issues') and the budget category ('regulatory exposure') without directing the reader to any specific action. The three specific Priority 1 findings (unlabelled anchors, reCAPTCHA textarea, unlabelled form inputs) are named and actionable earlier in the report but this summary recommendation collapses them into a generic 'address the issues' instruction that could appear unchanged in any accessibility audit.",
+      "context": "### Recommended Actions\n1. **Address Priority 1 findings**: We recommend addressing the 68 WCAG 2.1 AA accessibility issues identified (regulatory exposure).",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "Recommended Action 2 ('Review Priority 2-3 findings') is hollow. 'Catalogue Visibility improvements and metadata tuning that compound over time' names only a domain category with no data anchor, no specific artefact, no score, no field name, and no URL. It could be copy-pasted verbatim into any digital audit report. The phrase 'compound over time' adds no actionable specificity.",
+      "context": "### Recommended Actions\n2. **Review Priority 2-3 findings**: We encourage reviewing Catalogue Visibility improvements and metadata tuning that compound over time.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "Recommended Action 3 ('Consider optional enhancements') is hollow. 'Optional patterns that give an early-mover opportunity in AI search' names no specific pattern, no schema property, no artefact, and no score. The phrase 'early-mover opportunity in AI search' is marketing language with no data anchor from the audit.",
+      "context": "### Recommended Actions\n3. **Consider optional enhancements**: We suggest considering optional patterns that give an early-mover opportunity in AI search.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The Security Headers Priority 5 recommendation names the three absent headers (CSP, X-Frame-Options, X-Content-Type-Options) in the Finding line, but the 'What to change and why' prose does not name any of the three absent headers by their technical names. Instead it refers only to 'the three security headers absent from the current server configuration' and generic attack-surface language. However, because the named headers appear within the same Priority 5 block in the Finding paragraph immediately above the recommendation prose, the specificity test is satisfied — this is borderline and should NOT be flagged. Skipping.",
+      "context": "N/A — skipped after specificity test.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "American English spelling 'optimization' appears in the audit gate findings section (inline in the gate output excerpt). While this is inside a quoted tool-output block, the word appears in running prose that the client reads as part of the report body, not inside a URL or a schema vocabulary term. The remainder of the report consistently uses British/neutral forms ('optimisation', 'analyse', 'organisation'). The single American form creates a mixed-register inconsistency within the delivered document.",
+      "context": "Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice (\"we\"); scorecards and appendices use third-person.\n\n**2. sample-vs-total-scope - Scope mis-statements remain after auto-repair: 1**\n\n...Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write \"across the audited set\" — write \"the sitemap declares\" or \"this file carries\". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write \"site-wide\" or \"across the entire site\" — write \"across the audited pages\" or \"on the audited set\".",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "The phrase 'a genuine structural advantage' is mild hyperbole that tips into marketing copy. The underlying data point (served and rendered states are aligned) is factual and already stated neutrally earlier. Calling it 'a genuine structural advantage' editorialises beyond what a peer-to-peer consultant would write; 'genuine' is an intensifier that implies competitors lack this property without audit data to support the comparison.",
+      "context": "Because dotfusion.com runs on Next.js, the served and rendered states are aligned across the pages we tested, so machines read the same content human visitors see. That is a genuine structural advantage.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "subtle-failure-framing",
+      "message": "'Leaves room to strengthen both' is passive-aggressive softening that implies deficiency while avoiding a direct statement. The surrounding context (Discovery Readiness 25/100, Structured Data Quality 63/100) already conveys the factual position neutrally; the added editorial gloss 'leaving room to strengthen both' functions as a softer synonym for 'falls short of'. The opportunity framing that follows ('the path to Level 2 runs through…') makes this phrase redundant and the framing should be stated directly without the preceding implied condemnation.",
+      "context": "Discovery Readiness sits at 25/100 and Structured Data Quality at 63/100, leaving room to strengthen both.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    }
+  ]
+}

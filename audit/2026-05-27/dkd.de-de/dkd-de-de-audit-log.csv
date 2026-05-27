@@ -1,0 +1,75 @@
+timestamp,phase,step,decision_type,decision,rationale,data_source,confidence,outcome
+2026-05-27T08:34:31.271Z,collect,start,phase_start,collect phase started,url=https://dkd.de/de pages=5 client=dkd-de-de date=2026-05-27,audit-pipeline.js,high,n-a
+2026-05-27T08:34:31.271Z,collect,0,sitemap_discovery,audit-pipeline.js collect invoked,url=https://dkd.de/de pages=5 forceFresh=true client=dkd-de-de date=2026-05-27,audit-pipeline.js,high,n-a
+2026-05-27T08:34:31.272Z,collect,1,anomaly,check-egress.js invoked,url=https://dkd.de/de,check-egress.js,high,n-a
+2026-05-27T08:34:32.678Z,collect,1,anomaly,Egress clean,No VPN or DNS filter detected,check-egress.js,high,pass
+2026-05-27T08:34:32.678Z,collect,2,sitemap_discovery,check-wellknown.js invoked,url=https://dkd.de/de,check-wellknown.js,high,n-a
+2026-05-27T08:37:18.184Z,collect,2,sitemap_discovery,Well-known probe passed,Exit 0,check-wellknown.js,high,pass
+2026-05-27T08:37:18.185Z,collect,3,anomaly,Results dir cleared: mx-outputs/audit/2026-05-27/dkd.de-de/.infill,"Fresh run — stale CSVs removed, cache preserved",audit-pipeline.js,high,pass
+2026-05-27T08:37:18.185Z,collect,3a,sitemap_discovery,check-ai-usage.js invoked,url=https://dkd.de/de,check-ai-usage.js,high,n-a
+2026-05-27T08:38:13.976Z,collect,3a,sitemap_discovery,AI Usage Declaration probe passed,Exit 0,check-ai-usage.js,high,pass
+2026-05-27T08:39:05.001Z,collect,4,sitemap_discovery,No sitemap — falling back to root: https://dkd.de/de,"sitemap.xml, sitemap_index.xml, and robots.txt Sitemap: all returned non-200",https://dkd.de/de,medium,warn
+2026-05-27T08:39:05.002Z,collect,5,sitemap_discovery,mx-reginald/audit/index.js invoked,entry=https://dkd.de/de htmlPagesRequested=5 crawlCap=7 (buffer=2 for non-HTML discovery files) forceFresh=true,mx-reginald/audit/index.js,high,n-a
+2026-05-27T08:42:49.538Z,collect,5,score_summary,Crawler complete,Exit 0,mx-outputs/audit/2026-05-27/dkd.de-de/.infill,high,pass
+2026-05-27T08:42:49.539Z,collect,5a,sitemap_discovery,discover-urls.js invoked,url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill/discovery.json,discover-urls.js,high,n-a
+2026-05-27T08:42:50.040Z,collect,5a,sitemap_discovery,Sitemap grading complete,discovery.json written — SITEMAP_* placeholders will be filled at report time,/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill/discovery.json,high,pass
+2026-05-27T08:42:50.040Z,collect,5b,sitemap_discovery,topup-pdfs-from-sitemap.js invoked,results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill,topup-pdfs-from-sitemap.js,high,n-a
+2026-05-27T08:42:50.114Z,collect,5b,sitemap_discovery,Sitemap PDF topup complete,no append count parsed,topup-pdfs-from-sitemap.js,high,pass
+2026-05-27T08:42:50.114Z,collect,5c,sitemap_discovery,capture-pdf-sample.js invoked,url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill,capture-pdf-sample.js,high,n-a
+2026-05-27T08:42:50.186Z,collect,5c,sitemap_discovery,PDF accessibility sample captured,no pdfCount parsed,capture-pdf-sample.js,high,pass
+2026-05-27T08:42:50.186Z,collect,6,anomaly,error-page-test.js invoked,url=https://dkd.de/de,error-page-test.js,high,n-a
+2026-05-27T08:42:50.977Z,collect,6,anomaly,Error page test passed,Exit 0,error-page-test.js,high,pass
+2026-05-27T08:42:50.978Z,collect,7,agent_access,agent-access-test.js invoked,url=https://dkd.de/de out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill,agent-access-test.js,high,n-a
+2026-05-27T08:43:33.844Z,collect,7,agent_access,Agent access test complete,Exit 0 — agent-access.json written to /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill,agent-access-test.js,high,pass
+2026-05-27T08:43:33.844Z,collect,8,score_summary,check-served-rendered-gap.js invoked,resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill,check-served-rendered-gap.js,high,n-a
+2026-05-27T08:43:33.950Z,collect,8,score_summary,No significant served/rendered gap,All AI suitability dimensions within 5-point threshold,mx-outputs/audit/2026-05-27/dkd.de-de/.infill/audit_averages.json,high,pass
+2026-05-27T08:43:33.950Z,collect,8a,anomaly,slowest-page-probe.js invoked,resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill method=cache-busted-x3,slowest-page-probe.js,high,n-a
+2026-05-27T08:45:08.922Z,collect,8a,anomaly,Slowest-page re-probe: slow,The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides.,slowest-page-perf.json,high,warn
+2026-05-27T08:45:08.922Z,collect,8b,score_summary,provenance-gap.js invoked,url=https://dkd.de/de resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/dkd.de-de/.cache,provenance-gap.js,high,n-a
+2026-05-27T08:45:09.184Z,collect,8b,score_summary,Provenance-gap scan complete,"provenance-gap: 0 pages scanned, 0 self-promotional listicles, 0 year-swap pages, 0 provenance-gap cluster(s)",mx-outputs/audit/2026-05-27/dkd.de-de/.infill/provenance_gap.json,high,pass
+2026-05-27T08:45:09.185Z,collect,8c,score_summary,provenance-gap-llm.js invoked,url=https://dkd.de/de resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/dkd.de-de/.cache maxPages=5,provenance-gap-llm.js,high,n-a
+2026-05-27T08:45:09.412Z,collect,8c,score_summary,Provenance-gap LLM pass complete,"provenance-gap-llm: 0 page(s) evaluated, 0 qualitative finding(s).",mx-outputs/audit/2026-05-27/dkd.de-de/.infill/provenance_gap_llm.json,high,pass
+2026-05-27T08:45:09.413Z,collect,9,score_summary,generate-preflight-findings.js invoked,resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill/preflight-findings.json,generate-preflight-findings.js,high,n-a
+2026-05-27T08:45:09.500Z,collect,9,score_summary,Preflight findings written,"Pre-digested scores, findings, schema maturity, journey, agent access — ready for LLM phases",mx-outputs/audit/2026-05-27/dkd.de-de/.infill/preflight-findings.json,high,pass
+2026-05-27T08:45:09.500Z,collect,9,absence_finding,Schema.org coverage is partial — Decoration (SDQ 65/100),Agents can partially parse structured facts but key properties may be missing,mx-outputs/audit/2026-05-27/dkd.de-de/.infill/preflight-findings.json,high,warn
+2026-05-27T08:45:09.500Z,collect,9,absence_finding,No llms.txt published,Agents have no machine-curated index of site content or declared access policy,mx-outputs/audit/2026-05-27/dkd.de-de/.infill/preflight-findings.json,high,warn
+2026-05-27T08:45:09.501Z,collect,9,absence_finding,No sitemap.xml,Crawlers rely on link discovery only; unlisted pages may not be indexed,mx-outputs/audit/2026-05-27/dkd.de-de/.infill/preflight-findings.json,high,warn
+2026-05-27T08:45:09.501Z,collect,9,absence_finding,Security headers absent: CSP,Missing security headers increase exposure to content injection and clickjacking,mx-outputs/audit/2026-05-27/dkd.de-de/.infill/preflight-findings.json,high,warn
+2026-05-27T08:45:09.501Z,collect,10,score_summary,Collect phase complete,All automated steps finished including preflight-findings.json,audit-pipeline.js,high,pass
+2026-05-27T08:45:09.501Z,collect,end,phase_end,collect phase ended — SUCCESS,All automated collection steps complete; LLM phases ready to start,audit-pipeline.js,high,pass
+2026-05-27T08:45:09.590Z,report,start,phase_start,report phase started,hostname=dkd.de client=dkd-de-de date=2026-05-27 model=claude-sonnet-4-6,audit-pipeline.js,high,n-a
+2026-05-27T08:45:09.590Z,report,0,template_selection,Template: web-audit-suite-template.md,Generic template — no commerce anchor,/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill/seo_scores.csv,high,pass
+2026-05-27T08:45:09.590Z,report,0,gate_result,Infill provenance snapshot written,Copied web-audit-suite-template.md and scoring-methodology.json into .infill/ for provenance,mx-outputs/audit/2026-05-27/dkd.de-de/.infill,high,pass
+2026-05-27T08:45:09.675Z,report,0,gate_result,Template voice check passed,template=web-audit-suite-template.md,check-template-voice.js,high,pass
+2026-05-27T08:45:09.675Z,report,1,placeholder_fill,infill-report.js invoked,template=web-audit-suite-template.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infill out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dkd.de-de/.infilled/dkd-de-de.md,infill-report.js,high,n-a
+2026-05-27T08:45:18.281Z,report,1,placeholder_fill,Infill complete,Exit 0 — skeleton at mx-outputs/audit/2026-05-27/dkd.de-de/.infilled/dkd-de-de.md,infill-report.js,high,pass
+2026-05-27T08:45:18.281Z,report,2,placeholder_fill,rewrite-report.js: invoked,infilled=mx-outputs/audit/2026-05-27/dkd.de-de/.infilled/dkd-de-de.md out=mx-outputs/audit/2026-05-27/dkd.de-de/dkd-de-de-report.md model=claude-sonnet-4-6,audit-pipeline.js,high,n-a
+2026-05-27T08:47:41.783Z,report,2,placeholder_fill,rewrite-report.js: complete,Exit 0 — final report at mx-outputs/audit/2026-05-27/dkd.de-de/dkd-de-de-report.md,audit-pipeline.js,high,pass
+2026-05-27T08:47:41.859Z,report,2.5,placeholder_fill,Engagement table regenerated,Deterministic rebuild from priority blocks — no LLM drift possible,regenerate-engagement-table.js,high,pass
+2026-05-27T08:47:41.934Z,report,end,phase_end,report phase ended,infill=ok rewrite=ok,audit-pipeline.js,high,pass
+2026-05-27T08:58:43.719Z,collect,start,phase_start,collect phase started,url=https://dkd.de/de pages=5 client=dkd-de-de date=2026-05-27,audit-pipeline.js,high,n-a
+2026-05-27T08:58:43.719Z,collect,0,sitemap_discovery,audit-pipeline.js collect invoked,url=https://dkd.de/de pages=5 forceFresh=true client=dkd-de-de date=2026-05-27,audit-pipeline.js,high,n-a
+2026-05-27T08:58:43.720Z,collect,1,anomaly,check-egress.js invoked,url=https://dkd.de/de,check-egress.js,high,n-a
+2026-05-27T08:58:44.001Z,collect,1,anomaly,Egress clean,No VPN or DNS filter detected,check-egress.js,high,pass
+2026-05-27T08:58:44.001Z,collect,2,sitemap_discovery,check-wellknown.js invoked,url=https://dkd.de/de,check-wellknown.js,high,n-a
+2026-05-27T08:59:36.654Z,collect,2,sitemap_discovery,Well-known probe passed,Exit 0,check-wellknown.js,high,pass
+2026-05-27T08:59:36.661Z,collect,3,anomaly,Results dir cleared: mx-outputs/audit/2026-05-27/dkd.de-de/.infill,"Fresh run — stale CSVs removed, cache preserved",audit-pipeline.js,high,pass
+2026-05-27T08:59:36.661Z,collect,3a,sitemap_discovery,check-ai-usage.js invoked,url=https://dkd.de/de,check-ai-usage.js,high,n-a
+2026-05-27T08:59:36.940Z,collect,3a,sitemap_discovery,AI Usage Declaration probe passed,Exit 0,check-ai-usage.js,high,pass
+2026-05-27T08:59:37.000Z,collect,4,sitemap_discovery,No sitemap — falling back to root: https://dkd.de/de,"sitemap.xml, sitemap_index.xml, and robots.txt Sitemap: all returned non-200",https://dkd.de/de,medium,warn
+2026-05-27T08:59:37.001Z,collect,5,sitemap_discovery,mx-reginald/audit/index.js invoked,entry=https://dkd.de/de htmlPagesRequested=5 crawlCap=7 (buffer=2 for non-HTML discovery files) forceFresh=true,mx-reginald/audit/index.js,high,n-a
+2026-05-27T08:59:39.800Z,collect,5,anomaly,Crawler FAILED,Exit 1,mx-reginald/audit/index.js,high,fail
+2026-05-27T08:59:39.800Z,collect,end,phase_end,collect phase ended — FAILED at crawler,Crawler fatal error; subsequent steps cannot run without results,audit-pipeline.js,high,fail
+2026-05-27T10:57:34.159Z,collect,start,phase_start,collect phase started,url=https://dkd.de/de pages=5 client=dkd-de-de date=2026-05-27,audit-pipeline.js,high,n-a
+2026-05-27T10:57:34.159Z,collect,0,sitemap_discovery,audit-pipeline.js collect invoked,url=https://dkd.de/de pages=5 forceFresh=true client=dkd-de-de date=2026-05-27,audit-pipeline.js,high,n-a
+2026-05-27T10:57:34.159Z,collect,1,anomaly,check-egress.js invoked,url=https://dkd.de/de,check-egress.js,high,n-a
+2026-05-27T10:57:34.864Z,collect,1,anomaly,Egress clean,No VPN or DNS filter detected,check-egress.js,high,pass
+2026-05-27T10:57:34.864Z,collect,2,sitemap_discovery,check-wellknown.js invoked,url=https://dkd.de/de,check-wellknown.js,high,n-a
+2026-05-27T11:00:18.989Z,collect,2,sitemap_discovery,Well-known probe passed,Exit 0,check-wellknown.js,high,pass
+2026-05-27T11:00:18.990Z,collect,3,anomaly,Results dir cleared: mx-outputs/audit/2026-05-27/dkd.de-de/.infill,"Fresh run — stale CSVs removed, cache preserved",audit-pipeline.js,high,pass
+2026-05-27T11:00:18.990Z,collect,3a,sitemap_discovery,check-ai-usage.js invoked,url=https://dkd.de/de,check-ai-usage.js,high,n-a
+2026-05-27T11:00:23.081Z,collect,3a,sitemap_discovery,AI Usage Declaration probe passed,Exit 0,check-ai-usage.js,high,pass
+2026-05-27T11:00:23.865Z,collect,4,sitemap_discovery,Sitemap: https://dkd.de/de/sitemap.xml,Responded HTTP 200 to HEAD request,https://dkd.de/de/sitemap.xml,high,pass
+2026-05-27T11:00:23.866Z,collect,5,sitemap_discovery,mx-reginald/audit/index.js invoked,entry=https://dkd.de/de/sitemap.xml htmlPagesRequested=5 crawlCap=7 (buffer=2 for non-HTML discovery files) forceFresh=true,mx-reginald/audit/index.js,high,n-a
+2026-05-27T11:01:12.377Z,collect,5,anomaly,Crawler FAILED,Exit 1,mx-reginald/audit/index.js,high,fail
+2026-05-27T11:01:12.378Z,collect,end,phase_end,collect phase ended — FAILED at crawler,Crawler fatal error; subsequent steps cannot run without results,audit-pipeline.js,high,fail

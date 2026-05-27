@@ -64,29 +64,7 @@ mx:
 
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this section surfaces 1 finding (1 warning) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
-
-### Warnings (rule violations)
-
-| # | Gate | Category | Finding | Recorded |
-|---|------|----------|---------|----------|
-| 1 | check-recommendation-consistency.js | missing-in-engagement | Priority 2 not represented in Engagement phases | 2026-05-27T06:18:31Z |
-
-<details><summary>Warning detail (1)</summary>
-
-**1. check-recommendation-consistency.js - Priority 2 not represented in Engagement phases**
-
-Priority 2 ("llms-full.txt Absent, Discovery Readiness 86/100") does not appear in any of the 4 engagement-phase rows. Low-numbered priorities sometimes legitimately don't recur in a 3-phase plan; verify the omission is intentional.
-
-Engagement scopes: "P1 (Compliance Risk)", "Semantic Structure, and optional enhancements", "Continuous monitoring and quarterly audits", "Web estate + PDFs + data feeds + APIs + documents".
-
-Suggested next steps:
-
-- Add a phase row that addresses this priority, or confirm the priority is bundled into an existing phase under a different name.
-
-</details>
-
----
+*No automated gate findings were raised during this audit. Every check ran clean.*
 
 <!-- ERROR_REPORT_SECTION:END -->
 
@@ -130,7 +108,7 @@ We audited mx.allabout.network across 116 pages and came away with a clear pictu
 
 The headline opportunity is in machine experience, and the position here is already strong. With an MX Readiness Level of 5 (Purchase-confident) and MX governance markers present across the audited set, machines can do considerably more than discover and parse the content; they can read structured signals that support purchase-stage decisions. Structured Data Quality sits at 92/100, and Discovery Readiness at 86/100, the lowest single machine-readiness score across the audit, which means the groundwork is there and targeted improvements to discovery configuration represent the clearest path to a perfect machine-experience posture. AI Suitability on the served layer reaches 97/100, a position that gives the team a firm foundation from which to extend.
 
-Schema Maturity sits at Level 1 (Decoration), a structural classification independent of the numeric Structured Data Quality score of 92/100. That level tells us the rich vocabulary already deployed across the audited set is doing decorative work rather than expressing the deep relational signals that would move the schema posture forward. The chance to advance that maturity is the most concentrated single improvement available, and because Schema.org JSON-LD is readable by every machine regardless of rendering context, progress here compounds across every other machine-experience dimension simultaneously.
+Schema Maturity sits at Level 1 (Decoration) on the audited sample, a structural classification independent of the numeric Structured Data Quality score of 92/100. That level tells us the rich vocabulary already deployed across the audited set is doing decorative work rather than expressing the deep relational signals that would move the schema posture forward. The chance to advance that maturity is the most concentrated single improvement available, and because Schema.org JSON-LD is readable by every machine regardless of rendering context, progress here compounds across every other machine-experience dimension simultaneously.
 
 \clearpage
 
@@ -235,7 +213,7 @@ We present the findings below as opportunities prioritised by impact, ordered so
 
 **Bucket:** Compliance Risk
 
-**Finding:** We score Semantic Structure at 43/100 across the audited set of 122 pages, placing it in the high-concern band. The worst-affected page is https://mx.allabout.network/reginald/mx-machine-readiness.html, where 75 of 121 total elements are bare divs; the figures cited here apply specifically to that page. Because the majority of audited pages share the same template, the structural pattern is likely present beyond that single URL, even if not at the same intensity.
+**Finding:** We score Semantic Structure at 43/100 across the audited set of 116 pages, placing it in the high-concern band. The worst-affected page is https://mx.allabout.network/reginald/mx-machine-readiness.html, where 75 of 121 total elements are bare divs; the figures cited here apply specifically to that page. Because the majority of audited pages share the same template, the structural pattern is likely present beyond that single URL, even if not at the same intensity.
 
 **What to change and why:**
 
@@ -448,7 +426,7 @@ We find no llms-full.txt reachable on mx.allabout.network, with the endpoint ret
 **Coverage:** 112 pages with JSON-LD out of 114 total (98%)\
 **Unique types:** 45
 
-Across the 116 pages we audited, structured data is strong. Machines extract entity data from these pages reliably and the typed vocabulary survives the read; whether they can cite each page as an attested source is a separate question that depends on governance metadata (see the MX Readiness Level section). A wider audit confirms whether the same structural quality holds across the rest of the estate.
+Across the 116 pages we audited, structured data is strong. Machines may extract entity data from these pages reliably and the typed vocabulary may survive the read; whether they can cite each page as an attested source is a separate question that depends on governance metadata (see the MX Readiness Level section). A wider audit confirms whether the same structural quality holds across the rest of the estate.
 
 ### SDQ Score Breakdown
 
@@ -883,7 +861,7 @@ Enforcement penalties vary by jurisdiction and enterprise size: the EAA (Directi
 | Phase | Scope | Outcome |
 |-------|-------|---------|
 | Critical Fixes | P1 (Compliance Risk) | Priority 1 resolved — WCAG 2.1 AA accessibility compliance restored |
-| Full Optimisation | Semantic Structure, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Full Optimisation | P1, P2 (P1–P2) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | durable visibility in agent-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 

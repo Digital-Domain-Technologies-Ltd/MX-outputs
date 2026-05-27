@@ -1,0 +1,41 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/typo3.com/typo3-com-report.md",
+  "timestamp": "2026-05-27T09:11:59.688Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 19747,
+    "output_tokens": 500,
+    "cache_creation_input_tokens": 2369,
+    "cache_read_input_tokens": 0
+  },
+  "findingCount": 4,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "tone-inconsistency",
+      "message": "The 'About This Report' section opens in first-person plural ('We audited', 'We fetch', 'We then review') but the 'Executive Summary' section switches to third-person ('We audited seven pages' is consistent, however the Balanced Scorecard narrative uses 'the seven pages we reviewed' and 'machines can discover and parse typo3.com pages'), while the individual Priority findings blocks return to first-person ('We identified', 'we found'). The Structured Data Inventory section mixes both voices within the same short paragraph.",
+      "context": "Across the 7 pages we audited, structured data is limited. Machines cannot reliably extract entity data from these pages.",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Marker Reachability section closes with a statement that generalises from the 7-page sample to 'the rest of the estate' without an explicit scope qualifier, implying the finding holds site-wide.",
+      "context": "a wider audit confirms whether the same pattern holds across the rest of the estate.",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Security Headers section asserts that three headers are absent 'across every audited response' but then the narrative header states they are absent as a site-wide fact without scoping to the sample, overstating the evidence base of 7 pages.",
+      "context": "3 of the five standard security headers are absent across every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP), X-Frame-Options.",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "The Structured Data Inventory section asserts with certainty that 'a wider audit identifies the same gaps across the rest of the estate' — a claim about unaudited pages that goes well beyond the 7-page sample and is stated as fact rather than inference.",
+      "context": "a wider audit identifies the same gaps across the rest of the estate.",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}
