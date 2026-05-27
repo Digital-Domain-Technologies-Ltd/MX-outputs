@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  MX Compatible badge - composite SVG template.
+
+  Layout: 320 x 120 user units. Left half carries the MX mark and
+  Compatible wordmark. Right half is the QR slot; the badge renderer
+  splices a generated QR SVG into <g id="qr-slot"> at render time.
+
+  Colours: navy #0a1628 (mx-site brand background), gold #d4a843
+  (premium accent), white #ffffff. Typeface: Segoe UI / Helvetica Neue
+  via the brand font stack.
+
+  This file is the static template. The composite that ends up inside
+  a PDF is built by scripts/lib/pdf/render-mx-compatible-badge.cjs.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 320 120"
+     width="320" height="120"
+     role="img"
+     aria-label="MX Compatible">
+  <title>MX Compatible</title>
+  <desc>This PDF carries MX-compatible structure, metadata, and provenance. Scan the QR code to learn what that means.</desc>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="320" height="120" fill="#ffffff" stroke="#d4a843" stroke-width="1"/>
+
+  <!-- MX mark: solid navy square with white MX letters, matching brand guide hero mark -->
+  <g id="mx-mark" transform="translate(12, 18)">
+    <rect width="56" height="56" fill="#0a1628"/>
+    <text x="28" y="40"
+          font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+          font-size="24"
+          font-weight="700"
+          fill="#ffffff"
+          text-anchor="middle">MX</text>
+  </g>
+
+  <!-- "Compatible" wordmark and identity strap -->
+  <g id="wordmark" transform="translate(78, 26)">
+    <text x="0" y="14"
+          font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+          font-size="9"
+          font-weight="600"
+          fill="#0a1628"
+          letter-spacing="1.2">MACHINE EXPERIENCE</text>
+    <text x="0" y="38"
+          font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+          font-size="22"
+          font-weight="700"
+          fill="#d4a843">Compatible</text>
+    <text x="0" y="56"
+          font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+          font-size="7.5"
+          fill="#5a6878">tagged · provenance · attested</text>
+  </g>
+
+  <!-- QR slot - the badge renderer replaces this group's children with a generated QR SVG. -->
+  <g id="qr-slot" transform="translate(230, 16)">
+    <rect width="80" height="80" fill="#f6f7f9" stroke="#0a1628" stroke-width="0.5"/>
+    <text x="40" y="44"
+          font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+          font-size="8"
+          fill="#5a6878"
+          text-anchor="middle">QR PLACEHOLDER</text>
+  </g>
+
+  <!-- Scan-me caption under the QR -->
+  <text x="270" y="108"
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="6.5"
+        fill="#5a6878"
+        text-anchor="middle">Scan to learn more</text>
+</svg>
