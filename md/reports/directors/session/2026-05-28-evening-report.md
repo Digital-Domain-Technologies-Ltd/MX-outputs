@@ -147,5 +147,13 @@ Two scoping rules I had — "don't edit skill prose" and "don't volunteer moneti
 | 6181855 (mx-outputs) | pdf-inspector: rename vendor pdfjs from .mjs to .js so the worker serves them |
 | 1cd20349 (hub) | Bump mx-outputs: rename pdfjs vendor files to .js for correct MIME |
 | 5bd1643 (mx-outputs) | Add audit deliverables for typo3.org, dkd.de/de, dotfusion.com (2026-05-28) |
-| _pending_ (hub) | Patch infill-report.js to emit mx.canonicalUri + bump mx-outputs (audit batch + report v1.3) |
-| _pending_ (mx-outputs) | Directors report v1.3 + README regen |
+| d723838 (mx-outputs) | pdf-inspector: extract core + fix case-insensitive XMP lookup |
+| e05fdc72 (hub) | Add tests/test-pdf-inspector.js harness + wire into npm test |
+| 571d25f (mx-outputs) | pdf-inspector: add "we run every PDF through this tool" section + Node ESM shims |
+| a4e53bc5 (hub) | mx.pdf.sh: gate every render through the public PDF inspector |
+| bcb506b (mx-outputs) | pdf-inspector: tail section — credibility by mechanism, not by claim |
+| 9d4bdff7 (hub) | Bump mx-outputs: pdf-inspector tail section on credibility by mechanism |
+| 242a0a8 (mx-outputs) | Directors report v1.3 + pdf-inspector "credibility by mechanism" copy |
+| 049133cf (hub) | Bump mx-outputs: directors report v1.3 + inspector copy refinement (incl. infill-report.js canonicalUri fix) |
+| _pending_ (mx-outputs) | Directors report v1.4 + README regen |
+| _pending_ (hub) | Step-commit: CHANGELOG v2.74 + REMINDERS v3.63 + mx-outputs pointer bump |
