@@ -1,0 +1,59 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/typo3.org/typo3-org-report.md",
+  "timestamp": "2026-05-28T12:33:09.345Z",
+  "model": "claude-sonnet-4-6",
+  "runCount": 1,
+  "findingCount": 6,
+  "regexFindingCount": 0,
+  "llmFindingCount": 6,
+  "findings": [
+    {
+      "category": "subtle-failure-framing",
+      "message": "\"falls short of\" is a subtle failure-framing phrase flagged under Area 1. It implies a low or inadequate baseline rather than stating the finding neutrally.",
+      "context": "Priority 1: '...presents a contrast ratio of 3.09:1 against its background, below the 4.5:1 threshold required by WCAG 1.4.3.' — this specific instance is fine, but in Priority 2: 'body-copy text and in-text link elements within #c1012 present a contrast ratio of 3.09:1, below the WCAG 1.4.3 minimum of 4.5:1.' — both are neutral. However, in the Executive Summary: 'the absence of these signals is a material gap as machine-mediated discovery becomes a primary access path' — acceptable neutral framing. Flagging instead: 'The gap between where typo3.org sits today and a citation-ready posture is a matter of deliberate, targeted additions rather than any fundamental rebuild.' — this is fine. Actual flag: in the Balanced Scorecard / Machine Experience section, 'machines can do relatively little with the content they find' — this is passive-aggressive condensation that implies a deeply inadequate state beyond what the scores alone communicate.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The 'Next Steps / Recommended Actions' block item 2 is hollow: 'Review Priority 2-3 findings: Structured Data improvements and metadata tuning that compound over time.' This names only a domain category ('Structured Data improvements and metadata tuning') with no specific element, action, or data anchor beyond a vague priority reference. It could be copied unchanged into any web audit report.",
+      "context": "Next Steps > Recommended Actions, item 2: 'Review Priority 2-3 findings: Structured Data improvements and metadata tuning that compound over time.' The surrounding block contains no data anchor — no score value, no URL, no header name, no CSS selector. The priority reference ('Priority 2-3') maps to the at-a-glance table numbering which labels 'Structured Data Quality 0/100' and 'Discovery Readiness 25/100', but item 2 itself does not name those scores or link to specific findings; it merely repeats a category label.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The 'Next Steps / Recommended Actions' block item 3 is hollow: 'Consider optional enhancements: optional patterns that give a early-mover opportunity in AI search.' This is pure domain framing with no data anchor — no score, URL, header name, or specific artefact named. It could be placed in any audit report verbatim.",
+      "context": "Next Steps > Recommended Actions, item 3: 'Consider optional enhancements: optional patterns that give a early-mover opportunity in AI search.' No specific element, mechanism, or data point from this audit appears in the surrounding block. The phrase 'early-mover opportunity' also leans toward marketing copy rather than consultant prose.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "\"early-mover opportunity\" in the Recommended Actions is marketing-register hyperbole (implied uniqueness / competitive advantage framing) rather than consultant-register prose. The audit data does not support a claim about competitive timing.",
+      "context": "Next Steps > Recommended Actions, item 3: 'Consider optional enhancements: optional patterns that give a early-mover opportunity in AI search.' No audit data establishes the competitive landscape or the site's position within it relative to a timing window.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "\"for a project of typo3.org's standing in the open-source CMS space\" introduces an implied prestige/prominence claim that is not derived from audit data. This is editorial hyperbole inserted into what should be a data-grounded finding.",
+      "context": "Priority 5, Finding paragraph: 'For a project of typo3.org's standing in the open-source CMS space, the absence of these signals is a material gap as machine-mediated discovery becomes a primary access path.' The audit data contains no benchmark or ranking data establishing TYPO3's standing relative to peers; the phrase functions as flattery, not evidence.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "subtle-failure-framing",
+      "message": "\"machines can do relatively little with the content they find\" is passive-aggressive condensing language that implies a more severe inadequacy than the scores alone warrant (Machine Suitability 91/100, Pipeline Survivability 93/100). It overstates the failure relative to the data.",
+      "context": "Summary of Findings section: 'Structured Data and Discovery Readiness present the clearest opportunities, scoring 0/100 and 25/100 respectively, meaning machines can do relatively little with the content they find.' The factual scores are stated correctly but the interpretive gloss ('do relatively little') is disproportionate to the overall machine-suitability picture shown in the scorecard.",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    }
+  ]
+}
