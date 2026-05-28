@@ -1,15 +1,17 @@
 // MX PDF Inspector — client-side inspection of MX Compatible PDFs.
 //
 // The visitor drops a PDF on the page. The browser parses it locally via
-// pdf.js (loaded as an ES module from a CDN). We classify the file into one
-// of three tiers (MX Compatible, EAA tagged only, plain), render an evidence
-// table, build three downloadable blobs (machine-readable JSON, human report,
-// extracted provenance), and surface a tier-specific services pitch.
+// pdf.js (served from this site under /js/vendor/pdfjs/). We classify the
+// file into one of three tiers (MX Compatible, EAA tagged only, plain),
+// render an evidence table, build three downloadable blobs (machine-readable
+// JSON, human report, extracted provenance), and surface a tier-specific
+// services pitch.
 //
-// PDF bytes never leave the browser. There is no upload endpoint.
+// PDF bytes never leave the browser. There is no upload endpoint, and
+// no third-party CDN fetch happens at inspection time.
 
-const PDFJS_CDN = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs';
-const PDFJS_WORKER_CDN = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
+const PDFJS_URL = '/js/vendor/pdfjs/pdf.min.mjs';
+const PDFJS_WORKER_URL = '/js/vendor/pdfjs/pdf.worker.min.mjs';
 
 const MX_NAMESPACE_PRIMARY = 'https://mx.allabout.network/ns/1.0';
 const MX_NAMESPACE_LEGACY = 'https://schemas.cognovamx.com/mx/1.0/';
@@ -44,8 +46,8 @@ async function loadPdfJs() {
   if (pdfjsLib) return pdfjsLib;
   if (pdfjsLoadPromise) return pdfjsLoadPromise;
 
-  pdfjsLoadPromise = import(PDFJS_CDN).then((mod) => {
-    mod.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_CDN;
+  pdfjsLoadPromise = import(PDFJS_URL).then((mod) => {
+    mod.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_URL;
     pdfjsLib = mod;
     return mod;
   });
