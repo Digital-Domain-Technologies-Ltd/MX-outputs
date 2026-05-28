@@ -213,4 +213,5 @@ Second — the user's "no migration needed, we will regen, it's early days" cour
 | 29d69e2 (mx-outputs) | Backfill mx-validator required fields across all .mx.yaml.md |
 | c5b9a69 (mx-outputs) | Add three audit blog posts for engineers, clients, and auditors |
 | 77cb6f4 (mx-outputs) | PDF inspector: read lastWriteAt instead of lastRunAt |
-| *pending* (hub) | Audit deliverable polish: banded scorecard, TOC page break, findings sidecar, two test fixes, MX Compatible regression test, three blog posts (and earlier morning strands' bumps + this report) |
+| c21ad3c (mx-outputs) | Directors report 1.3: fourth-strand audit deliverable polish |
+| c9105411 (hub) | mx-validator skip list + audit deliverable polish (banded scorecard, TOC break, findings sidecar, two test fixes, MX Compatible test) + mx-outputs pointer |
