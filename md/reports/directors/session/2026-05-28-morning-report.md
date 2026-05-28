@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Four-Site Audit Rerun + Provenance v2 + Lead-Capture Endpoints + Hard Gates"
-description: "Morning segment had three strands. (1) Four-site audit rerun validates evening fixes end-to-end. (2) Provenance JSON restructured from activity-first v1 to regime-first v2. (3) Public lead-capture endpoints shipped on mx.allabout.network for the free PDF check and the Certified Operator waitlist; MX Compatible badge tied to Certified Operator status in canon §3.1; alpha REGINALD declared live in canon §10.1; pre-push Gate 7-11 grace period removed (hard from now on); 909 .mx.yaml.md skeletons backfilled to pass the now-hard validator."
+title: "Co-Directors Report — Four-Site Audit Rerun + Provenance v2 + Lead-Capture Endpoints + Hard Gates + Audit Deliverable Polish"
+description: "Morning segment had four strands. (1) Four-site audit rerun validates evening fixes end-to-end. (2) Provenance JSON restructured from activity-first v1 to regime-first v2. (3) Public lead-capture endpoints shipped on mx.allabout.network for the free PDF check and the Certified Operator waitlist; MX Compatible badge tied to Certified Operator status in canon §3.1; alpha REGINALD declared live in canon §10.1; pre-push Gate 7-11 grace period removed (hard from now on); 909 .mx.yaml.md skeletons backfilled to pass the now-hard validator. (4) Audit deliverable polish: one scoring vocabulary across the Balanced Scorecard, TOC forced onto its own page, reviewer findings moved to a sibling sidecar, two pre-existing test failures fixed, a new MX Compatible regression test, and three blog posts on mx-site for engineers, clients, and auditors."
 author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -137,6 +137,40 @@ Sweeping mx-validator across all 931 `.mx.yaml.md` files surfaced 909 violators 
 
 ---
 
+## What Was Done (continued, fourth strand of the morning)
+
+### 16. Balanced Scorecard speaks one vocabulary
+
+The vs Peers column previously emitted raw peer medians ("median 25", "median 83") next to bands and grades in every other cell. An auditor had to translate the number into a band in their head to compare site against cohort. `formatPeerComparison()` in `mx-reginald/audit/bin/infill-report.js` now routes the peer median through `scoreBandFromValue()` and emits letter grades — `A (median)`, `B (median)`, `C (median)`, `D (median)` — so the row's own grade and its peer comparison speak the same vocabulary. Golden-skeleton fixture moved with the code.
+
+### 17. Table of contents lands on its own page
+
+Cover doctypes already broke the page after the MX Compatible badge zone, but the rule did not always carry through to the contents page in practice. Added an explicit `nav#TOC { break-before: page; break-after: page; }` (with legacy `page-break-*` siblings) in `scripts/templates/pdf/_base.css`. Doctypes that hide the TOC (letter, blog-post, briefing-2col) already set `display: none`, so the new rule is a no-op there. Net flow on a report: title plus badge on page one, contents alone on page two, body from page three onward.
+
+### 18. Reviewer findings move out of the report into a sibling sidecar
+
+The "Audit gate findings for human review" block used to open every report — gate name, category, evidence, every warning the deterministic gates raised. The reviewer needed it for sign-off; the client read it too, which is not who it was for. Now the same content travels in a sibling markdown file (`<basename>-report-findings.md`) with its own MX frontmatter (`contentType: audit-findings`, `companion` pointer back to the report). Renderer split in `mx-reginald/audit/lib/render-error-section.js` (`renderFindingsMarkdownDoc()` new, `renderErrorReportSection()` retained as an empty-sentinel no-op for legacy skeletons). `regenerate-error-section.js` repurposed to write the sidecar and strip any residual block from the report markdown. Templates and contracts dropped the `[ERROR_REPORT_SECTION]` placeholder. Golden-skeleton fixture lost the block.
+
+### 19. Two pre-existing test failures fixed
+
+`infill-golden.test.js` had been failing on the random `mkdtemp` directory's basename leaking into `mx.generate.output` on every run; the test was using the random dir directly as `[CLIENT_HOST_SLUG]`'s source. Fix: write the skeleton into a stable `example.com` subfolder inside the tmp root, golden updates to match, byte-identical from then on. `audit-gates.test.js`'s verifier assertion still expected exit code 1 on unsupported-numeric claims; the verifier moved to the always-produce-PDF contract some time ago (exit zero, log warnings to `audit_errors.json`). Test updated to assert exit zero and check stdout contains `unverified claim(s) - logged as warnings`.
+
+### 20. MX Compatible regression test on the rendered PDF
+
+`tests/test-pdf-mx-compatible.js` writes a fixture markdown to `/tmp`, renders it through `scripts/bin/mx.pdf.sh`, then asserts every signal an inspector relies on: AI sidecar adjacent, deterministic sidecar adjacent, `pdfuaid:Part=1` declared in XMP, MX-namespaced identity fields populated from frontmatter (Status, ContentType, Audience, Tags, Author), provenance pointer fields naming the sidecars by basename, full AI evidence chain embedded inline under `XMP-mx:ProvenanceAiPayload`, and the inline payload matching the adjacent `.ai.json` byte-for-byte after JSON normalisation. Eleven assertions; wired into `npm test` and `npm run test:pdf-mx-compatible`. Companion to the existing `test-pdf-provenance-chain.js` (structural honesty of the chain) and `test-pdf-eaa.js` (accessibility conformance); together the three tests cover the three orthogonal aspects of MX Compatible.
+
+### 21. Three blog posts shipped to mx-site
+
+Evergreen descriptions of how an MX audit deliverable is shaped, one post per audience:
+
+- [`/blog/audit-for-engineers.html`](https://mx.allabout.network/blog/audit-for-engineers.html) — scorecard vocabulary, page composition, sidecar layout, regression tests, MX Compatible contract; from inside the pipeline
+- [`/blog/audit-for-clients.html`](https://mx.allabout.network/blog/audit-for-clients.html) — what the deliverable looks like on the desk; the document is yours, the reviewer's working is alongside
+- [`/blog/audit-for-auditors.html`](https://mx.allabout.network/blog/audit-for-auditors.html) — how the evidence chain travels with the PDF; `exiftool` extraction recipe; pointer to the interactive inspector
+
+All three link to the interactive PDF inspector at `/tools/pdf-inspector.html` and the explainer at `/learn/mx-for-pdfs.html`. Drafts went through the humanizer skill (verbal-tics pre-scan plus a manual sweep for headings starting with "The...", hollow-quantifier openers, rule-of-three forcing, em-dashes, sentence-initial conjunctions, AI vocabulary). Two course-corrections from Tom shaped the final shape: timeless prose (no "this week", "we landed", "five small changes" — describe how the deliverable IS, not what changed) and rename from `audit-clean-up-*` to `audit-for-*`. Index cards added at the top of the blog listing; sitemap and llms-full.txt regenerated; both .html files indexable (no draft noindex).
+
+---
+
 ## What Changed About Me
 
 Two patterns I will carry forward.
@@ -177,4 +211,6 @@ Second — the user's "no migration needed, we will regen, it's early days" cour
 | aaa46cfb (hub) | Lead capture endpoints + Certified Operator waitlist live |
 | 17cc5709 (allaboutv2) | Backfill mx-validator required fields across all .mx.yaml.md |
 | 29d69e2 (mx-outputs) | Backfill mx-validator required fields across all .mx.yaml.md |
-| *pending* (hub) | Grace period removed, validator + heal generator aligned, 514 .mx.yaml.md backfilled, submodule pointer bumps, this report |
+| c5b9a69 (mx-outputs) | Add three audit blog posts for engineers, clients, and auditors |
+| 77cb6f4 (mx-outputs) | PDF inspector: read lastWriteAt instead of lastRunAt |
+| *pending* (hub) | Audit deliverable polish: banded scorecard, TOC page break, findings sidecar, two test fixes, MX Compatible regression test, three blog posts (and earlier morning strands' bumps + this report) |
