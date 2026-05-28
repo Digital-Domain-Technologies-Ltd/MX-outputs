@@ -110,17 +110,43 @@ The CLI is designed for CI pipelines. Three exit codes only:
 ## Test pack
 
 The distribution bundles a small test pack so a fresh install can verify the
-CLI works end-to-end against a known-good PDF. After install:
+CLI works end-to-end against a known-good PDF. Two runners are bundled; pick
+whichever fits your platform.
+
+**Node runner (cross-platform, no extra tools).** Works on Linux, macOS, and
+Windows out of the box:
+
+```bash
+cd test-pack
+node run-test-pack.mjs
+```
+
+Or, from the distribution root:
+
+```bash
+npm run test-pack
+```
+
+**Bash runner (POSIX shell, requires jq).** Convenient for operators who
+already have bash and jq integrated into their CI. Native on macOS and
+Linux; on Windows, run from WSL or Git Bash with jq installed:
 
 ```bash
 cd test-pack
 bash run-test-pack.sh
 ```
 
-The runner walks the fixtures in `test-pack/fixtures/` and asserts the tier
-each one produces matches the expected tier recorded in `expected-results.json`.
-A clean pass means the CLI, pdf.js, and the detection core all loaded
-correctly on this machine.
+Or, from the distribution root:
+
+```bash
+npm run test-pack:bash
+```
+
+Both runners walk the fixtures in `test-pack/fixtures/` and assert the tier
+each one produces matches the expected tier recorded in
+`expected-results.json`. They produce the same verdict against the same
+fixtures. A clean pass means the CLI, pdf.js, and the detection core all
+loaded correctly on this machine.
 
 ## Privacy and locality
 
