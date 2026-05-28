@@ -181,6 +181,16 @@
 
           <p>What this means for you. The reports we send to clients and the books we publish are not asked to meet the MX Compatible bar by hand and by hope; they are blocked from shipping unless they meet it by machine. When you drop a PDF we produced into this inspector, you should see the same verdict the build saw before it released the file.</p>
 
+          <h2 id="credibility-by-mechanism">Credibility by mechanism, not by claim</h2>
+
+          <p>Three things have to line up before a PDF we send you carries a real MX Compatible verdict. The page you are looking at must say so. The production gate must enforce it. The test harness must prove it. All three live in the open. This page makes the claim. The gate at <code>scripts/bin/mx.pdf.sh</code> hard-fails the build when a PDF does not meet the bar. The harness at <code>tests/test-pdf-inspector.js</code> walks the same checks against the gold-standard fixture and exits non-zero on regression, every time <code>npm test</code> runs.</p>
+
+          <p>Each layer reads from the same source. The detection core at <code>mx-outputs/mx-site/js/pdf-inspector-core.js</code> is shared by the inspector you are running and the gate that protects our outbound work. When the producer changes, when pdf.js changes, when the inspector changes, the same code path is exercised by both surfaces. A regression cannot quietly drift between them; if the harness fails, the gate fails, and the inspector fails for every visitor in the same way.</p>
+
+          <p>This is the argument MX makes generally and that the inspector demonstrates specifically. Not "trust us, we did this carefully" but "here is the file, here is the rule, here is the check, run any of them yourself, decide for yourself." For the EU AI Act, the European Accessibility Act, and the AI-governance instruments emerging in adjacent jurisdictions, that distinction matters. An auditor holding the file can walk to the rule, walk to the check, and arrive at the same verdict the build saw. No proprietary intermediary, no closed-source verifier, no "ask the vendor."</p>
+
+          <p>The mechanism is the credibility. That is why we run every PDF through this tool, and why the tool runs in your browser when you ask it to.</p>
+
         </article>
       </div>
     </section>
