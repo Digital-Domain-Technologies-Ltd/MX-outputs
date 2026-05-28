@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Audit Lander Adds Third Entry-Point on mx-site"
-description: "Afternoon segment added /audit/ as a top-level lander on mx-site, routing visitors to the three audience-specific blog posts written this morning, plus the PDF inspector and the explainer page so any reader can verify a deliverable on their own machine. Discovery infrastructure (sync-blog-discovery) learned about extensible KEY_PAGES_DIRS; a handful of small tidies the morning did not catch landed too."
+title: "Co-Directors Report — Audit Lander + Manuscript Propagation Skill"
+description: "Afternoon had two strands. (1) /audit/ lander added at mx-site root with KEY_PAGES_DIRS extension for discovery infrastructure. (2) /manuscript-propagate skill authored, then executed on this session: provenance v2 + inspector + WAF-fingerprint concepts propagated into three books, six appendices, and the DDT business plan at depth-tier-appropriate sizes."
 author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -41,6 +41,14 @@ The `sync-blog-discovery` script holds a static list of top-level lander folders
 ### 3. Small morning tidies that did not catch in the segment
 
 Three small follow-ups landed this segment that the morning did not catch. The `LEARNINGS.md` prose rule now requires timeless wording and artefact-name file slugs in any public-web entry that documents a rule; the UBERCOG essential-commands table registers `npm run test:pdf-mx-compatible` next to `npm run test:pdf-eaa` so the new PDF gate is one keystroke away; and the `mx-audit` cog now carries `mx.purpose`, `mx.stability`, and `mx.x-mx-contextProvides` so it passes the now-hard Gate 10 mx-validator check.
+
+### 4. /manuscript-propagate skill authored
+
+A new skill at `.claude/skills/manuscript-propagate/skill.md` teaches an agent how to propagate substantive session work into the three published books and the topic-routed appendices at the depth each surface carries. The skill body documents the depth rule (lightest on free book, main on handbook v2, deepest in protocols), the 22 topic-routed appendices and which concepts route to each, anchor-point conventions per book, the Tom-voice patterns from `writing-style.md` §9 (vignette openers, punchline + expansion, named brands / dates / prices, bold paragraph leads, concrete closers), the no-repeat rule from §0, the timeless-manuscript rule from §3, and the forbidden vocabulary catalogue. A Phase 0 scope check broadens the surface beyond manuscripts to include canon business plans, position papers, action-cogs, info-cogs, and hub-level docs; scaffolds awaiting trigger (the DDT one-pager, attestation explainer, FAQ, pitch deck) are explicitly excluded from speculative propagation. The Gathering vs CogNovaMX audience-split rule is documented so the open-standard surfaces stay vendor-neutral while CogNovaMX surfaces carry regime-specific enumerations.
+
+### 5. First propagation pass: provenance v2 + inspector + WAF fingerprint across the canon
+
+The skill was run on this session's work. Nine inserts landed across the manuscripts and the DDT business plan. The free book chapter-00 gained one pull-quote on the verify-in-browser inspector. Handbook v2 ch12 absorbed a paragraph on the `parties[]` role taxonomy and per-step `jurisdictionalEvidence` inside the existing "Provenance Fields Travel Across Carriers" section. Protocols ch20 gained five new paragraphs covering the schema declarations, the role enum with regulatory citations, the thirty-regime registry, per-step jurisdictional tagging, and the flat-surface compatibility shape. Appendix M (the canonical metadata index) gained a "Multi-party, regime-tagged provenance fields" subsection with five field-index entries (`parties`, `frameworks`, `runRevision`, `lastWriteAt`, `jurisdictionalEvidence`), the controlled role enum, and two worked YAML examples. Appendix T (the field dictionary) gained a "Provenance Chain" subsection with five field-dictionary rows. Appendix V (the Reginald vNext record types) gained a new §4 "The provenance record" with required fields, a worked sample, and reasoning; the composition prose was updated for five record types. Appendix R (testing agent comprehension) gained a new H2 "Self-testing PDFs in the browser" framing the inspector as a continuous publisher self-test mirroring the HEAD self-test pattern. Appendix I (the pipeline failure case study) gained a second case study "The 44-False-Positive WAF Cluster" with symptom, root cause, fix, validation, and narrow + broad lessons. The DDT/CogNovaMX business plan gained two bullets after §"Why REGINALD matters for the machine economy": the thirty-regime evidence position (one chain answers every regime in its clause vocabulary; cost moat for documentation reuse) and the browser-side verifier (public, free, no-account inspection forecloses the trust objection). The Gathering business plan was reviewed and left unchanged per the vendor-neutrality rule. Scaffolds stayed untouched per their own runbooks.
 
 ---
 
@@ -81,3 +89,10 @@ The audit narrative was already in good shape after the morning — three blog p
 | 66bda54b (hub) | LEARNINGS: timeless prose + artefact-name file slugs for public-web writing |
 | 3f45f074 (hub) | Bump mx-outputs: pick up directors report 1.3 final hash backfill |
 | 14b50462 (hub) | scripts/cogs/mx-audit.cog.md: add mx.purpose, mx.stability, mx.x-mx-contextProvides for Gate 10 |
+| 888fd291 (hub) | Manuscripts: document provenance v2 schema in published chapters |
+| 4b5a937d (hub) | Manuscripts: round-out provenance v2 across appendices M, R, T, V |
+| 99aee86f (hub) | mx-validator: skip /datalake/manuscripts/ from operational field gate |
+| ca6d56a4 (hub) | Appendix I: add WAF false-positive cluster case study |
+| 2bec6925 (hub) | Manuscript propagation: voice fixes + DDT business plan + skill scope widening |
+| 6ca3127c (hub) | Business plan frontmatter: add mx.purpose, mx.stability, mx.x-mx-contextProvides for Gate 10 |
+| _pending_ (mx-outputs) | This report v1.1 |
