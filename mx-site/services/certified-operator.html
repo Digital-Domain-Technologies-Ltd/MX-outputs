@@ -191,6 +191,22 @@
 
           <p>For audit firms and compliance practices whose claims are read by regulators, judges, or oversight committees. Adds rigorous methodology audit, independent peer review of issued claims, professional indemnity insurance (minimum &pound;2M), named-individual signing authorities, and an annual five-percent sample audit of claims issued. Suitable for regulated-sector compliance work.</p>
 
+          <h2 id="inspector-cli">Tools available to accredited operators</h2>
+
+          <p>Active accreditation includes access to working tools that operators put inside their own pipelines. The flagship tool in the seed phase is the MX PDF Inspector CLI.</p>
+
+          <h3 id="pdf-inspector-cli">MX PDF Inspector CLI</h3>
+
+          <p>The MX PDF Inspector CLI is the same detection core that runs the <a href="/tools/pdf-inspector.html">public PDF inspector</a>, packaged as a command-line tool for operator pipelines. Drop it into a CI step or run it ad-hoc against a directory of deliverables. Each PDF is classified into one of three tiers (MX Compatible, EAA Tagged Only, Plain) with a full evidence table covering tagged structure, MX metadata, provenance schema version, and accountable parties. Exit codes are CI-clean: zero when every fixture meets the configured minimum tier, non-zero otherwise.</p>
+
+          <p>The CLI is a tool, not a hosted service. PDFs an operator wants to verify are usually confidential (draft contracts, unpublished audit reports, regulatory submissions, board papers); the CLI runs locally, sees no network, and leaves no trace outside the operator's own environment. Verification belongs in the operator's pipeline, not in ours. Same code path the operator's clients can re-verify in the public inspector at any time, so the claim text and the published artefact agree by construction.</p>
+
+          <p>Three audiences run it routinely. Tier 2 and Tier 3 operators gate every client deliverable on it in CI. Tier 1 in-house compliance teams gate internal releases. Procurement and oversight reviewers integrate it at intake to verify supplier claims before payment, on the buyer's side of the trust boundary.</p>
+
+          <p>The CLI is bundled with active accreditation in every tier during the seed phase; renewal of the accreditation renews access. The detection core is shared across the public inspector, our own production gate (the <code>mx.pdf.sh</code> publishing pipeline that emits every PDF this site ships), the regression test in <code>npm test</code>, and the operator CLI itself, so a regression in any surface fails all of them in the same way. For the architecture rationale, the blog post <a href="/blog/the-inspector-you-can-audit-yourself.html">The Inspector You Can Audit Yourself</a> walks the four-layer structure end to end.</p>
+
+          <p>A non-accredited evaluation copy (60-day, single-machine, no commercial use) is available on request for prospects evaluating accreditation. Join the waitlist below and mention the evaluation in your application notes.</p>
+
           <h2 id="pricing">Indicative pricing for the seed phase</h2>
 
           <p>Fees fund the audit programme, the registry infrastructure, and programme governance. The schedule below is indicative for the seed phase; the published commercial schedule is the authoritative document and supersedes this table at admission time. Agency partners operating Tier 2 with multiple vocabularies negotiate volume discount structures.</p>
