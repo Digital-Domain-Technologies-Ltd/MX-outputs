@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>An MX Audit, Read by an Engineer | CogNovaMX</title>
+  <meta name="description" content="A walk through an MX audit deliverable from an engineer's perspective: scorecard vocabulary, page composition, findings sidecar, regression tests, and the contract that makes the PDF MX Compatible.">
+  <meta name="author" content="Tom Cranstoun">
+  <link rel="canonical" href="https://mx.allabout.network/blog/audit-for-engineers.html">
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="ai-txt" href="/ai.txt">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="An MX Audit, for Engineers">
+  <meta property="og:description" content="An MX audit, from inside the pipeline.">
+  <meta property="og:url" content="https://mx.allabout.network/blog/audit-for-engineers.html">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="An MX Audit, for Engineers">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ddttomtom">
+  <meta name="twitter:title" content="An MX Audit, for Engineers">
+  <meta name="twitter:description" content="An MX audit, from inside the pipeline.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="An MX Audit, for Engineers">
+
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a1628">
+
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "article > header h1",
+          "article > h2:first-of-type + p",
+          "article > section p:first-of-type"
+        ]
+      },
+      "@id": "https://mx.allabout.network/blog/audit-for-engineers.html#blogposting",
+      "name": "An MX Audit, Read by an Engineer | CogNovaMX",
+      "description": "An MX audit, from inside the pipeline.",
+      "url": "https://mx.allabout.network/blog/audit-for-engineers.html",
+      "dateModified": "2026-05-28",
+      "inLanguage": "en-GB",
+      "publisher": { "@id": "https://mx.allabout.network/about/about.html#organization" },
+      "author": { "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person" },
+      "headline": "An MX Audit, Read by an Engineer",
+      "datePublished": "2026-05-28",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mx.allabout.network/images/book-cover-3d.png",
+        "width": 1200,
+        "height": 630
+      },
+      "mainEntityOfPage": { "@id": "https://mx.allabout.network/blog/audit-for-engineers.html" },
+      "isPartOf": { "@id": "https://mx.allabout.network/#website" },
+      "keywords": "audit pipeline, MX Compatible, provenance, sidecar, regression tests",
+      "articleSection": "Engineering",
+      "wordCount": 1100,
+      "about": { "@id": "https://mx.allabout.network/about/about.html#organization" },
+      "mentions": [
+        { "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person" },
+        { "@id": "https://mx.allabout.network/about/about.html#organization" }
+      ],
+      "subjectOf": { "@id": "https://mx.allabout.network/#website" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mx.allabout.network/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://mx.allabout.network/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "An MX Audit, for Engineers", "item": "https://mx.allabout.network/blog/audit-for-engineers.html" }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://mx.allabout.network/blog/audit-for-engineers.html#article",
+      "headline": "An MX Audit, Read by an Engineer",
+      "url": "https://mx.allabout.network/blog/audit-for-engineers.html",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mx.allabout.network/images/avatars/tom-avatar.webp",
+        "width": 80,
+        "height": 80
+      },
+      "author": { "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person" },
+      "publisher": { "@id": "https://mx.allabout.network/about/about.html#organization" },
+      "datePublished": "2026-05-28",
+      "dateModified": "2026-05-28",
+      "inLanguage": "en-GB",
+      "mainEntityOfPage": { "@id": "https://mx.allabout.network/blog/audit-for-engineers.html" },
+      "isPartOf": { "@id": "https://mx.allabout.network/#website" },
+      "keywords": "audit pipeline, MX Compatible, provenance, sidecar, regression tests",
+      "articleSection": "Engineering",
+      "wordCount": 1100,
+      "about": { "@id": "https://mx.allabout.network/about/about.html#organization" },
+      "mentions": [
+        { "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person" },
+        { "@id": "https://mx.allabout.network/about/about.html#organization" }
+      ],
+      "subjectOf": { "@id": "https://mx.allabout.network/#website" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/audit-for-engineers.html",
+      "name": "An MX Audit, Read by an Engineer | CogNovaMX",
+      "url": "https://mx.allabout.network/blog/audit-for-engineers.html",
+      "inLanguage": "en-GB",
+      "isPartOf": { "@id": "https://mx.allabout.network/#website" }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="blog-page" aria-label="overview">
+
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.webp" alt="Tom Cranstoun profile picture" class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">An MX audit lands as a PDF on a desk with a particular shape. We walk through that shape from the inside out, in the order an engineer would meet it.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+            <li><a href="#balanced-scorecard">One vocabulary in the Balanced Scorecard</a></li>
+            <li><a href="#toc-page">Contents lands on its own page</a></li>
+            <li><a href="#findings-sidecar">Findings ride in a sibling sidecar</a></li>
+            <li><a href="#tests">Tests that hold the contract</a></li>
+            <li><a href="#mx-compatible-test">An MX Compatible regression test</a></li>
+            <li><a href="#how-it-fits">How the pieces fit</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <article data-agent-visible="true">
+        <header>
+          <h1>An MX Audit, Read by an Engineer</h1>
+          <div class="article-meta" data-published="2026-05-28" data-modified="2026-05-28" data-reading-time="6 min">
+            <time datetime="2026-05-28">28 May 2026</time>
+            <span>&middot;</span>
+            <span>6 min read</span>
+          </div>
+        </header>
+
+        <p>An MX audit is rendered through a pipeline that places every fact into a skeleton, rewrites the skeleton into prose, gates the prose against a battery of deterministic checks, and ships a tagged PDF along with a provenance sidecar pair. We walk through the artefact from an engineer's perspective: the scorecard, the page composition, the sidecar layout, the regression tests, and the contract that makes the PDF MX Compatible.</p>
+
+        <h2 id="balanced-scorecard" tabindex="-1">One vocabulary in the Balanced Scorecard</h2>
+        <p>The Balanced Scorecard at the top of every audit report grades each dimension on a four-band scale (Excellent, Good, Could Be Better, Needs Improvement) with a letter grade alongside (A through D). The vs Peers column speaks the same vocabulary, never raw numbers. Each cell reads as <code>A (median)</code>, <code>B (median)</code>, <code>C (median)</code>, or <code>D (median)</code>.</p>
+        <p>The helper that maps a raw score to a band lives in <code>scoreBandFromValue()</code> at <code>mx-reginald/audit/bin/infill-report.js</code>. The peer-comparison formatter (<code>formatPeerComparison()</code>) routes the peer median through the same helper before emitting the cell, so the row's own grade and its peer comparison can never speak different languages. The boundaries (76, 51, 26) and band names also live as a single source of truth in <code>mx-reginald/audit/lib/scoring-methodology.json</code> for any tooling that wants to read the same enum.</p>
+
+        <h2 id="toc-page" tabindex="-1">Contents lands on its own page</h2>
+        <p>A cover doctype's PDF flow is: title plus MX Compatible badge on page one, contents on page two, body from page three onward. The cover-to-contents break comes from <code>break-after: page</code> on <code>section.mx-compatible-zone</code>. The contents-to-body break comes from a dedicated rule in <code>scripts/templates/pdf/_base.css</code>:</p>
+        <pre><code>nav#TOC {
+  break-before: page;
+  page-break-before: always;
+  break-after: page;
+  page-break-after: always;
+}</code></pre>
+        <p>Both the modern (<code>break-*</code>) and legacy (<code>page-break-*</code>) properties are set because the rendering engine pairs CSS Paged Media with Chrome's print path. Doctypes that hide the TOC entirely (letter, blog-post, briefing-2col) set <code>display: none</code> on <code>nav#TOC</code>, so the break rule is a no-op there.</p>
+
+        <h2 id="findings-sidecar" tabindex="-1">Findings ride in a sibling sidecar</h2>
+        <p>Every audit goes through deterministic gates that catch scope mis-statements, exaggeration in prose, unverified numeric claims, voice drift, and similar reviewer-only signals. The gates record every finding to <code>audit_errors.json</code> and the pipeline continues; nothing fails the run. This is the always-produce-PDF contract: a failing gate becomes a recorded warning, not an exit code.</p>
+        <p>The findings travel with the report as a sibling sidecar named after it:</p>
+        <pre><code>mx-outputs/audit/&lt;date&gt;/&lt;host&gt;/
+&#9500;&#9472;&#9472; &lt;basename&gt;-report.md
+&#9500;&#9472;&#9472; &lt;basename&gt;-report.pdf
+&#9500;&#9472;&#9472; &lt;basename&gt;-report-findings.md
+&#9500;&#9472;&#9472; &lt;basename&gt;-report-fierce-critic.json
+&#9492;&#9472;&#9472; &lt;basename&gt;-report.provenance.ai.json</code></pre>
+        <p>The findings sidecar is a complete markdown document with its own MX frontmatter (<code>contentType: audit-findings</code>, <code>companion: &lt;report&gt;.md</code>). It carries the gate name, the category, the timestamp, and the supporting evidence for every finding, by severity. The reviewer reads the sidecar before sign-off; the client reads the report.</p>
+        <p>The renderer at <code>mx-reginald/audit/lib/render-error-section.js</code> exposes <code>renderFindingsMarkdownDoc()</code> for the sidecar; a legacy <code>renderErrorReportSection()</code> survives as an empty no-op so older skeletons that still carry <code>[ERROR_REPORT_SECTION]</code> resolve to invisible sentinels. The post-gates regenerator script writes the sidecar and strips any residual block out of the report markdown. Templates and contracts no longer reference the placeholder.</p>
+
+        <h2 id="tests" tabindex="-1">Tests that hold the contract</h2>
+        <p>Two regression tests live under <code>mx-reginald/audit/test/</code> and exercise the path from canned fixtures to a rendered skeleton. <code>infill-golden.test.js</code> renders the canonical web-audit-suite template against a synthetic <code>example.com</code> fixture and asserts byte-identical output against <code>golden-skeleton.md</code>; the fixture writes through a stable host-slug subfolder so the rendered <code>mx.generate.output</code> line is deterministic. <code>audit-gates.test.js</code> covers every gate's exit-code contract, including the deterministic verifier's always-continue behaviour: on the unsupported-numeric fixture the verifier exits zero and stdout names <code>unverified claim(s) - logged as warnings</code>, so the test asserts both the exit code and the message.</p>
+
+        <h2 id="mx-compatible-test" tabindex="-1">An MX Compatible regression test</h2>
+        <p>The phrase "MX Compatible" names a specific set of signals an inspector can verify on the rendered PDF: provenance sidecar pair on disk, the <code>pdfuaid:Part=1</code> Level 2 declaration, MX-namespaced XMP fields populated from frontmatter, pointer fields naming the sidecars, and the full AI evidence chain embedded inline under <code>XMP-mx:ProvenanceAiPayload</code>.</p>
+        <p><code>tests/test-pdf-mx-compatible.js</code> at the hub root writes a fixture markdown to a tmp dir with the full <code>mx</code> frontmatter and a declared <code>x-mx-provenance</code> block, renders it through <code>scripts/bin/mx.pdf.sh</code>, then makes eleven assertions: the two sidecars on disk, the PDF/UA declaration, five identity fields, two pointer fields, and one byte-for-byte match between the embedded XMP payload and the adjacent <code>.ai.json</code> after JSON normalisation. The test is wired into <code>npm test</code> and exposed as <code>npm run test:pdf-mx-compatible</code>.</p>
+        <p>An engineer who wants to sanity-check the contract from outside the repository can run the same probes by hand. The interactive inspector at <a href="/tools/pdf-inspector.html">/tools/pdf-inspector.html</a> accepts any MX PDF and walks the chain in the browser; the explainer at <a href="/learn/mx-for-pdfs.html">/learn/mx-for-pdfs.html</a> maps each signal to the standard it cites.</p>
+
+        <h2 id="how-it-fits" tabindex="-1">How the pieces fit</h2>
+        <p>One scoring vocabulary across every row of the scorecard. One contents page on its own page. One sibling sidecar carrying every reviewer signal so the report markdown stays client-facing. A regression-tested PDF contract that an inspector can verify in a browser or from the command line.</p>
+        <p>The shared property across all of those is the same: each part of the deliverable does one job, and the part that does it is the part the reader expects to look at. The report carries the argument. The sidecar carries the reviewer's working. The XMP packet carries the evidence chain. The tests catch when any of them stops doing its job.</p>
+
+      </article>
+
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want a copy of the audit pipeline running against your own site?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <a href="#main" class="back-to-top" aria-label="Back to top">Back to Top</a>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>

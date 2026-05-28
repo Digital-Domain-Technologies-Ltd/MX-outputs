@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How an MX Audit Proves Itself | CogNovaMX</title>
+  <meta name="description" content="What an auditor reading one of our deliverables can verify without trusting our word for it: the evidence chain inside the PDF, the sidecar pair on disk, and the regression test that proves all of it holds on a fresh render.">
+  <meta name="author" content="Tom Cranstoun">
+  <link rel="canonical" href="https://mx.allabout.network/blog/audit-for-auditors.html">
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="ai-txt" href="/ai.txt">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How an MX Audit Proves Itself">
+  <meta property="og:description" content="What an auditor reading one of our deliverables can verify without trusting our word for it.">
+  <meta property="og:url" content="https://mx.allabout.network/blog/audit-for-auditors.html">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="How an MX Audit Proves Itself">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ddttomtom">
+  <meta name="twitter:title" content="How an MX Audit Proves Itself">
+  <meta name="twitter:description" content="What an auditor reading one of our deliverables can verify without trusting our word for it.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="How an MX Audit Proves Itself">
+
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a1628">
+
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "article > header h1",
+          "article > h2:first-of-type + p",
+          "article > section p:first-of-type"
+        ]
+      },
+      "@id": "https://mx.allabout.network/blog/audit-for-auditors.html#blogposting",
+      "name": "How an MX Audit Proves Itself | CogNovaMX",
+      "description": "What an auditor reading one of our deliverables can verify without trusting our word for it.",
+      "url": "https://mx.allabout.network/blog/audit-for-auditors.html",
+      "dateModified": "2026-05-28",
+      "inLanguage": "en-GB",
+      "publisher": { "@id": "https://mx.allabout.network/about/about.html#organization" },
+      "author": { "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person" },
+      "headline": "How an MX Audit Proves Itself",
+      "datePublished": "2026-05-28",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mx.allabout.network/images/book-cover-3d.png",
+        "width": 1200,
+        "height": 630
+      },
+      "mainEntityOfPage": { "@id": "https://mx.allabout.network/blog/audit-for-auditors.html" },
+      "isPartOf": { "@id": "https://mx.allabout.network/#website" },
+      "keywords": "audit, evidence chain, provenance, EAA Directive 2019/882, EU AI Act, MX Compatible, regulator-facing",
+      "articleSection": "Governance",
+      "wordCount": 1150,
+      "about": { "@id": "https://mx.allabout.network/about/about.html#organization" },
+      "mentions": [
+        { "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person" },
+        { "@id": "https://mx.allabout.network/about/about.html#organization" }
+      ],
+      "subjectOf": { "@id": "https://mx.allabout.network/#website" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mx.allabout.network/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://mx.allabout.network/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "How an MX Audit Proves Itself", "item": "https://mx.allabout.network/blog/audit-for-auditors.html" }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://mx.allabout.network/blog/audit-for-auditors.html#article",
+      "headline": "How an MX Audit Proves Itself",
+      "url": "https://mx.allabout.network/blog/audit-for-auditors.html",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mx.allabout.network/images/avatars/tom-avatar.webp",
+        "width": 80,
+        "height": 80
+      },
+      "author": { "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person" },
+      "publisher": { "@id": "https://mx.allabout.network/about/about.html#organization" },
+      "datePublished": "2026-05-28",
+      "dateModified": "2026-05-28",
+      "inLanguage": "en-GB",
+      "mainEntityOfPage": { "@id": "https://mx.allabout.network/blog/audit-for-auditors.html" },
+      "isPartOf": { "@id": "https://mx.allabout.network/#website" },
+      "keywords": "audit, evidence chain, provenance, EAA Directive 2019/882, EU AI Act, MX Compatible, regulator-facing",
+      "articleSection": "Governance",
+      "wordCount": 1150,
+      "about": { "@id": "https://mx.allabout.network/about/about.html#organization" },
+      "mentions": [
+        { "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person" },
+        { "@id": "https://mx.allabout.network/about/about.html#organization" }
+      ],
+      "subjectOf": { "@id": "https://mx.allabout.network/#website" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/audit-for-auditors.html",
+      "name": "How an MX Audit Proves Itself | CogNovaMX",
+      "url": "https://mx.allabout.network/blog/audit-for-auditors.html",
+      "inLanguage": "en-GB",
+      "isPartOf": { "@id": "https://mx.allabout.network/#website" }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="blog-page" aria-label="overview">
+
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.webp" alt="Tom Cranstoun profile picture" class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">An auditor reading one of our reports asks a fair question. How do I know what I am reading is what was found? The answer is built into the deliverable.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+            <li><a href="#evidence-travels-with-pdf">Evidence rides inside the PDF</a></li>
+            <li><a href="#reviewer-separated">Reviewer signals separated from the client surface</a></li>
+            <li><a href="#one-vocabulary">One scoring vocabulary, machine-verifiable</a></li>
+            <li><a href="#regression-test">A regression test that proves the claim on every render</a></li>
+            <li><a href="#what-you-can-do">What an auditor can do with this</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <article data-agent-visible="true">
+        <header>
+          <h1>How an MX Audit Proves Itself</h1>
+          <div class="article-meta" data-published="2026-05-28" data-modified="2026-05-28" data-reading-time="6 min">
+            <time datetime="2026-05-28">28 May 2026</time>
+            <span>&middot;</span>
+            <span>6 min read</span>
+          </div>
+        </header>
+
+        <p>Audit reports usually carry their own credibility problem. The reader has the document. They do not have the evidence that produced it. They can ask the writer; the writer can show their working; the working may or may not match what shipped. An MX audit closes that gap from the other side. An auditor reading an MX deliverable can walk from the document to every signal it depends on, without needing our word for anything.</p>
+
+        <h2 id="evidence-travels-with-pdf" tabindex="-1">Evidence rides inside the PDF</h2>
+        <p>Every PDF an MX audit produces carries a structured XMP packet inside its metadata stream. The packet declares the artefact's conformance claim: <code>pdfuaid:Part=1</code>, the Level 2 declaration for ISO 14289-1, the tagged-PDF standard that EAA Directive 2019/882 leans on. It also carries a set of MX-namespaced identity fields populated from the source frontmatter: who authored it, when, what content type it is, which audiences it is for, what it conforms to. The same packet embeds the full AI provenance evidence chain inline under <code>XMP-mx:ProvenanceAiPayload</code>: every step that touched the artefact, who or what executed each one, what inputs went in, what verdict came out, and which AI-governance frameworks the step is recorded against (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act).</p>
+        <p>The same evidence chain also lives in a sidecar JSON file adjacent to the PDF on disk (<code>&lt;basename&gt;.provenance.ai.json</code>) along with its deterministic companion (<code>&lt;basename&gt;.provenance.deterministic.json</code>) for the rule-driven steps. The on-disk copies serve EAA accessibility-conformance evidence and any inspector who prefers file-system access. The inline XMP copy serves the inspector who only has the PDF.</p>
+        <p>To extract the embedded chain on any MX PDF: <code>exiftool -b -XMP-mx:ProvenanceAiPayload &lt;file&gt;.pdf</code>. The <code>-b</code> flag matters; without it exiftool prepends a label and the JSON does not parse.</p>
+
+        <h2 id="reviewer-separated" tabindex="-1">Reviewer signals stay separate from the client surface</h2>
+        <p>Every audit goes through a battery of deterministic gates before delivery. They catch scope drift, hyperbole in prose, claims a numeric verifier could not corroborate against the source data, voice inconsistencies. Each gate that flags something records the finding to a structured store (<code>audit_errors.json</code>) and the pipeline continues to a deliverable PDF. This is the always-produce-PDF contract: a failing gate raises a warning, not an exit code, so the client receives a document that names its own gaps rather than a silent failure.</p>
+        <p>Those reviewer-facing findings live in a sibling sidecar, not inside the client-facing report. Each delivery ships with a companion markdown file (<code>&lt;basename&gt;-report-findings.md</code>) carrying every finding the gates raised, by severity, with the gate name, the category, the timestamp, and the supporting evidence. The reviewer reads this before signing off; the client reads the report; the auditor reads either or both.</p>
+        <p>The separation is structural, not cosmetic. The findings sidecar carries its own MX frontmatter declaring <code>contentType: audit-findings</code> and a <code>companion</code> pointer to the report. The report's provenance chain records the reviewer's sign-off statement (if any) as an audit step, so the evidence chain still names the human who released the document. The chain integrity is intact; the surface that meets the client is clean.</p>
+
+        <h2 id="one-vocabulary" tabindex="-1">One scoring vocabulary, machine-verifiable</h2>
+        <p>The Balanced Scorecard speaks one scoring vocabulary across every cell. The audited row reports a band (Excellent, Good, Could Be Better, Needs Improvement) with a letter grade alongside (A through D). The peer-comparison cell uses the same band, never a raw median. Each cell reads as <code>A (median)</code>, <code>B (median)</code>, <code>C (median)</code>, or <code>D (median)</code>. An auditor scanning the scorecard sees site versus cohort in a single eye-pass.</p>
+        <p>The change is also useful when the scorecard is consumed by a machine. The bands map cleanly to a four-value enum; a tooling pipeline can compare site to peer without parsing or normalising. The methodology that maps a numeric score to a band lives in <code>mx-reginald/audit/lib/scoring-methodology.json</code>, the single source of truth for every score's inputs, weights, and band boundaries. The auditor can verify any reported band by re-running the methodology against the raw figures in <code>audit_averages.json</code>; the figures are committed alongside the delivery in the <code>.infill/</code> archive.</p>
+
+        <h2 id="regression-test" tabindex="-1">A regression test that proves the claim on every render</h2>
+        <p>"MX Compatible" is a regression-tested contract, not a marketing line. <code>tests/test-pdf-mx-compatible.js</code> renders a small fixture markdown through the same PDF pipeline that produces client deliveries, then asserts every signal an inspector relies on:</p>
+        <ul>
+          <li>The AI provenance sidecar exists adjacent to the PDF.</li>
+          <li>The deterministic provenance sidecar exists adjacent to the PDF.</li>
+          <li>The PDF XMP packet declares <code>pdfuaid:Part=1</code>.</li>
+          <li>The MX identity fields in XMP mirror the source frontmatter byte-for-byte.</li>
+          <li>The provenance pointer fields name the adjacent sidecars by basename.</li>
+          <li>The full AI evidence chain is embedded inline under <code>XMP-mx:ProvenanceAiPayload</code>.</li>
+          <li>The inline copy matches the adjacent <code>.ai.json</code> after JSON normalisation.</li>
+        </ul>
+        <p>The test is wired into <code>npm test</code>. Any change that would silently break the MX Compatible contract breaks the test instead. The pipeline does not ship a PDF that fails this test, and the operator who runs the pipeline gets a clear, named failure pointing at the missing signal.</p>
+
+        <h2 id="what-you-can-do" tabindex="-1">What an auditor can do with this</h2>
+        <p>An MX audit report can be verified without leaving the document. <code>exiftool -b -XMP-mx:ProvenanceAiPayload &lt;file&gt;.pdf | jq .</code> returns the full AI chain on the command line. The deterministic companion is named in the same packet under <code>XMP-mx:ProvenanceCompanion</code>; an inspector with file-system access can resolve and read it. The reviewer's findings live alongside in the findings sidecar. The methodology that produced every score lives at <code>scoring-methodology.json</code> in the audit toolkit, public and re-runnable. The frameworks each provenance step is recorded against are named in the chain itself, so an auditor working a regulatory clause can walk from the clause to the steps the report cites.</p>
+        <p>An auditor who prefers a browser to a terminal can use the interactive inspector at <a href="/tools/pdf-inspector.html">/tools/pdf-inspector.html</a>. The inspector accepts any MX PDF (the QR code on the cover badge resolves to the same URL) and walks the full evidence chain end-to-end in the browser. A reader who wants the short version of what each signal means and which standard it cites can read the explainer at <a href="/learn/mx-for-pdfs.html">/learn/mx-for-pdfs.html</a>.</p>
+        <p>None of this constitutes a compliance claim against any specific regulation. EAA conformance, EU AI Act conformance, ICO accountability: all of those remain legal duties of the publishing organisation. What MX provides is the evidence vehicle: the structured, tamper-evident, machine-readable trail that the organisation needs to produce when asked. An auditor walking that trail has the cover, the inspector, the explainer, the sidecars, the methodology, and the framework citations to lean on. That is the contract.</p>
+
+      </article>
+
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want a walk-through of the evidence chain on a sample audit?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <a href="#main" class="back-to-top" aria-label="Back to top">Back to Top</a>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
