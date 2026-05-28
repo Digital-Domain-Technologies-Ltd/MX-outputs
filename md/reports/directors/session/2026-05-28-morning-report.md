@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Four-Site Audit Rerun Validates Evening Fixes"
-description: "Morning segment reruns mx.allabout.network, typo3.com, dotfusion.com, and dkd.de/de with --force-fresh to validate the previous evening's pipeline hardening (WAF fingerprint, Responsible Person Identifier, badge URL fix, audit-pdf.sh rename). All four pipelines complete with all gates passed."
+title: "Co-Directors Report — Four-Site Audit Rerun + Provenance v2 Regime Restructure"
+description: "Morning segment had two strands. (1) Four-site audit rerun (mx.allabout.network, typo3.com, dotfusion.com, dkd.de/de) validates evening fixes end-to-end. (2) Provenance JSON restructured from activity-first v1 to regime-first v2: parties[] role taxonomy, frameworks[] registry enumerating 30 AI-governance regimes worldwide, runRevision + lastWriteAt counters, per-step jurisdictionalEvidence, canon position paper, evidence-preservation hook."
 author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -76,10 +76,49 @@ The evening's pipeline work was theoretical until this rerun. A classifier that 
 
 ---
 
+## What Was Done (continued, second strand of the morning)
+
+### 6. Provenance JSON v2 — regime-first restructure
+
+Question that triggered the work: *"is the provenance JSON compatible with all known AI Acts in all jurisdictions?"* Honest two-layered answer surfaced: yes for the evidence-vehicle role the canon already claims (any regime asking "who decided, on what input, when, with whom accountable" is served by the shape); no for the compliance-grant role (no JSON pre-fills the EU AI Act risk classification, Colorado deployer registration ID, NYC LL144 bias-audit hash, China filing number — that's operator-side work). The schema was extended to admit both honestly.
+
+Concrete additions:
+
+- **`parties[]`** — replaces the single `responsiblePerson` block with a role-attributed array. Controlled enum: `auditOperator`, `provider` (EU AI Act Art. 16), `deployer` (Art. 26), `authorisedRepresentative` (Art. 25), `importer`, `distributor`, `auditor` (NYC LL144 bias auditor; ISO 42001 internal audit), `dataController`, `dataProcessor`, `dpo`, `modelDeveloper`, `modelEvaluator`. Multiple entries per role permitted.
+- **`frameworks[]`** — 30 AI-governance and adjacent regulatory regimes enumerated in [`mx-canon/ssot/registries/ai-regimes.json`](../../../../../mx-canon/ssot/registries/ai-regimes.json): EU AI Act, EAA, GDPR, Council of Europe Framework Convention, UK ICO, US NIST AI RMF, Colorado, Texas TRAIGA, California AB 2013, NYC LL144, China generative-AI / algorithmic-recommendation / deep-synthesis, South Korea AI Basic Act, Brazil PL 2338, Canada AIDA, OECD principles, G7 Hiroshima, ISO 42001/23894/27001, EU DSA/DORA. Each entry carries version, jurisdiction, applicability claim, reserved `x-<framework>` extension namespace.
+- **`runRevision` + `lastWriteAt`** — version tracking. `runRevision` increments on every `initProvenance` call (counts re-inits); `lastWriteAt` updates on every write including `recordStep` appends; `startedAt` pins to the first write.
+- **Per-step `jurisdictionalEvidence`** — operators can record clause-level evidence ("this step satisfies EU AI Act Article 12") via `recordStep`.
+- **v1 compatibility shadows** — `responsiblePerson`, `frameworksCited`, `operator` preserved so the PDF inspector, exiftool extractors, and existing scripts continue to function unchanged.
+
+### 7. Canon paper + cross-links
+
+New canon paper [`mx-canon/ssot/papers/provenance-regime-compatibility.md`](../../../../../mx-canon/ssot/papers/provenance-regime-compatibility.md) documents the two-layered position statement, the regime inventory, the role taxonomy, the extension catalogue, and how an operator extends the chain for a new regime. Pointable from PDFs, audit reports, and the inspector. CLAUDE.md gained a one-bullet summary; the explainer at `/learn/mx-for-pdfs.html` gained a paragraph on the role taxonomy linking forward to the paper.
+
+### 8. Evidence-preserving hook
+
+New pre-bash hook [`.claude/hooks/pre-bash-audit-evidence-preservation.sh`](../../../../../.claude/hooks/pre-bash-audit-evidence-preservation.sh) detects audit-pipeline invocations and refuses to run when the target hostSlug has uncommitted prior deliverables under `mx-outputs/audit/`. Bypass via `MX_AUDIT_ALLOW_OVERWRITE=1` for mid-development iterations. Rule recorded as feedback memory `feedback_commit_audit_before_rerun.md`.
+
+### 9. Migrator + tests
+
+[`scripts/migrate-provenance-v1-to-v2.js`](../../../../../scripts/migrate-provenance-v1-to-v2.js) — pure-function migrate(v1) + CLI walker. Idempotent. Used once to back-fit 29 sidecars across `mx-outputs/audit/` and `mx-outputs/pdf/` to v2 shape. Tests in [`tests/test-provenance-v2.js`](../../../../../tests/test-provenance-v2.js) cover schema, registry, migrator, primitive (v2 emission, runRevision increment, jurisdictionalEvidence persistence, lastWriteAt refresh). 14/14 pass.
+
+---
+
+## What Changed About Me
+
+Two patterns I will carry forward.
+
+First — the honest self-critique after declaring v2 "done" surfaced two real bugs in what I'd just shipped: `lastRunAt` was a misleading field name (it was actually "last init", not "most recent write"), and `recordStep` admitted no API for the per-step `jurisdictionalEvidence` the schema invited. Both fixed before the session closed. The lesson: after a substantial sprint, treat "what's missing and what can be improved" as a mandatory step, not a rhetorical question to wave away with "shipped". The bugs were in my code, recently written; an outside reader would have caught them in review. I caught them by asking myself.
+
+Second — the user's "no migration needed, we will regen, it's early days" course-correction. I'd been adding back-compat rename logic for a field name I changed; he reminded me that early-days code earns the right to break old bytes when the regen path is trivial. Adding migration code that nobody will ever exercise is gold-plating in a different colour. The rename simplified by ~40 lines once the back-compat path came out.
+
+---
+
 ## Next Steps
 
 - Walk back any unrelated audit deliveries in `mx-outputs/audit/2026-05-*` that still carry pre-fix wafBlocked flags, if a regulator or sponsor asks. The four sites we re-ran today are clean; older deliveries on disk may not be.
-- The Gate 10 mx-validator residual on the heal-generated `.mx.yaml.md` skeletons (audience: [humans] array vs. expected string, missing mx.runbook + mx.x-mx-contextProvides) is still open. Worth a generator change before the 2026-07-01 hard-cut.
+- Gate 10 mx-validator residual on heal-generated `.mx.yaml.md` skeletons still open before 2026-07-01 hard-cut.
+- v2 follow-ups deferred (in REMINDERS): no schema-validation gate yet; PDF XMP payloads still v1 until each PDF re-renders; canon paper not published to mx-site public web yet; inspector doesn't surface `frameworks[]` to users; regime registry has no in-force-from / in-force-until dates; `responsiblePerson` not explicitly marked deprecated in schema; evidence-preservation hook only covers Claude Code, not direct CLI invocations.
 
 ---
 
@@ -88,4 +127,15 @@ The evening's pipeline work was theoretical until this rerun. A classifier that 
 | Hash | Description |
 |------|-------------|
 | 8d1e093 (mx-outputs) | Audit reruns 2026-05-27: 4 sites validate evening fixes (WAF, RPI, badge URL) |
-| _pending_ (hub) | Bump mx-outputs: audit reruns + morning report |
+| 5de8f9f (mx-outputs) | Migrate 29 provenance sidecars to v2 schema (regime-first shape) |
+| b727474 (mx-outputs) | Add MX PDF Inspector tool + v1/v2 sidecar reader |
+| 8fcb814e (hub) | Bump mx-outputs: four-site audit reruns validate evening fixes |
+| efa1053d (hub) | REMINDERS: add Gate 10 heal-skeleton mx-validator fix before 2026-07-01 cutover |
+| e6e955b1 (hub) | Changelog 2026-05-28 morning: four-site rerun validates evening fixes |
+| e1e298e6 (hub) | Bump mx-outputs: regenerate README index for 2026-05-27 audit reruns |
+| 31069650 (hub) | Canon: provenance v2 — regime registry + JSON schemas + position paper |
+| fa9fb122 (hub) | Provenance v2 writer + migrator + tests + badge URL points at inspector |
+| 93493c9c (hub) | Hook: evidence-preservation gate on audit invocations |
+| a52db735 (hub) | Bump mx-outputs + document v2 in CLAUDE.md |
+| 097e4845 (hub) | Provenance v2: fix recordStep gaps (lastWriteAt + jurisdictionalEvidence) |
+| *pending* (hub + mx-outputs) | This report + REMINDERS update |
