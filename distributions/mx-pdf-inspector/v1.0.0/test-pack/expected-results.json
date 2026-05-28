@@ -1,0 +1,22 @@
+{
+  "_description": "Expected MX PDF Inspector CLI output for each bundled test fixture. The runner at run-test-pack.sh inspects each fixture and asserts the tier matches the expected value plus, for the mx-tier fixtures, that every required evidence row passes. Add a new fixture by dropping the PDF in fixtures/ and a new entry here.",
+  "fixtures": [
+    {
+      "file": "mx-compatible.pdf",
+      "expectedTier": "mx",
+      "expectedTierLabel": "MX Compatible",
+      "requiredPasses": [
+        "tagged-tree",
+        "mx-namespace",
+        "provenance-ai",
+        "responsible-person",
+        "schema-version"
+      ],
+      "optionalPasses": [
+        "parties",
+        "run-revision"
+      ],
+      "notes": "Gold-standard fixture rendered via mx.pdf.sh from a minimal info-doc markdown. Every signal the CLI inspects for is present: ISO 14289-1 tagged structure, MX XMP namespace, AI provenance payload (schema v2.0, parties[], runRevision), responsible-person identifier."
+    }
+  ]
+}
