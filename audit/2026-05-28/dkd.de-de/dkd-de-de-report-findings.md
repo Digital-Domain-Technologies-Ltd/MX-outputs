@@ -5,12 +5,12 @@ author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
 auditDate: "2026-05-28"
-findingsCount: 0
 companion: "dkd-de-de-report.md"
 mx:
   status: active
   contentType: audit-findings
   audience: [humans]
+  x-mx-findingsCount: 0
   runbook: "Human reviewer reads this file before signing off on the client-facing report. Findings here are raised by the automated gates; accept, rebut, or correct each one before delivery."
 ---
 ## Audit gate findings for human review

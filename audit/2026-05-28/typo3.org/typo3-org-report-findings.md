@@ -5,12 +5,12 @@ author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
 auditDate: "2026-05-28"
-findingsCount: 1
 companion: "typo3-org-report.md"
 mx:
   status: active
   contentType: audit-findings
   audience: [humans]
+  x-mx-findingsCount: 1
   runbook: "Human reviewer reads this file before signing off on the client-facing report. Findings here are raised by the automated gates; accept, rebut, or correct each one before delivery."
 ---
 ## Audit gate findings for human review
