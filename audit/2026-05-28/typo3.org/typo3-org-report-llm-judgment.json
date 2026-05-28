@@ -1,45 +1,39 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/typo3.org/typo3-org-report.md",
-  "timestamp": "2026-05-28T12:33:24.980Z",
+  "timestamp": "2026-05-28T13:15:08.723Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 19092,
-    "output_tokens": 629,
+    "input_tokens": 19114,
+    "output_tokens": 595,
     "cache_creation_input_tokens": 2369,
     "cache_read_input_tokens": 0
   },
-  "findingCount": 5,
+  "findingCount": 4,
   "withdrawnCount": 0,
   "findings": [
     {
       "category": "tone-inconsistency",
-      "message": "The 'About This Report' section opens and sustains first-person voice ('We audited', 'We fetch', 'We then review', 'we update') but the 'Marker Reachability' section closes with a passive third-person construction ('a wider audit confirms whether the same pattern holds') that switches away from the first-person voice used throughout the surrounding narrative sections.",
-      "context": "a wider audit confirms whether the same pattern holds across the rest of the estate.",
-      "severity": "block"
-    },
-    {
-      "category": "tone-inconsistency",
-      "message": "The Priority 4 finding block uses first-person voice consistently ('We score Semantic Structure') but the closing Div Soup section covering the same issue switches to third-person impersonal constructions ('machines lose structural context', 'The most direct first move is to replace') without a first-person subject, breaking the consistent first-person voice of the surrounding priority finding blocks.",
-      "context": "The most direct first move is to replace the outermost wrappers with appropriate landmark elements",
+      "message": "The 'About This Report' section opens in consistent first-person plural ('We audited', 'We fetch', 'We then review') but the final paragraph of that section switches to third-person ('Here we look at the web estate… MX runs deeper… Get the web estate right') before returning to first-person, mixing voices within the same section.",
+      "context": "\"Here we look at the web estate: every page served over HTTP… MX runs deeper. A machine-ready estate covers every document type\"",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The Structured Data Inventory section states 'a wider audit identifies the same gaps across the rest of the estate', asserting a finding about the full estate based on 7 sampled pages without a scope qualifier on the estate-level claim.",
-      "context": "a wider audit identifies the same gaps across the rest of the estate.",
-      "severity": "block"
-    },
-    {
-      "category": "sample-vs-total-overreach",
-      "message": "Priority 6 states 'We detected no schema markup on any of the 7 audited pages' but then asserts 'making it unlikely that typo3.org content will surface as a rich result in search' as a site-wide conclusion, not scoped to the audited sample.",
-      "context": "making it unlikely that typo3.org content will surface as a rich result in search or be cited with high confidence",
+      "message": "The Structured Data Inventory section asserts 'a wider audit identifies the same gaps across the rest of the estate' as a direct finding, implying a full-site conclusion from a 7-page sample without any qualifying language that this is a prediction rather than an evidenced observation.",
+      "context": "\"a wider audit identifies the same gaps across the rest of the estate\"",
       "severity": "block"
     },
     {
       "category": "hedged-vs-asserted-imbalance",
-      "message": "Priority 7 states that Content-Security-Policy, X-Frame-Options, and Permissions-Policy are absent, but the detailed Security Headers section confirms HSTS is also absent on all 7 pages; the Priority 7 finding omits HSTS from the list of absent headers, creating an inconsistency between the finding's stated evidence and the supporting data.",
-      "context": "Content-Security-Policy, X-Frame-Options, Permissions-Policy absent) … 3 of the five standard security headers are absent … HSTS (Strict-Transport-Security), Content-Security-Policy (CSP), X-Frame-Options",
+      "message": "Priority 4 and the Div Soup section both state 'most pages across the audited set share the same template' to extend the bare-div finding beyond the single worst-case page, but only one page (https://typo3.org/association) is cited with data; asserting this pattern will 'persist beyond this single worst-case page' is overconfident given evidence from only one page.",
+      "context": "\"the band is likely to persist beyond this single worst-case page, though the figures cited are specific to https://typo3.org/association\"",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Security Headers section summary states '3 of the five standard security headers are absent on every audited response' but the findings table in Priority 5 lists four absent headers (X-Frame-Options, CSP, HSTS, Permissions-Policy), creating an internal inconsistency that implies a different count for the full site than the per-page evidence supports.",
+      "context": "\"3 of the five standard security headers are absent on every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP), X-Frame-Options.\"",
       "severity": "block"
     }
   ],

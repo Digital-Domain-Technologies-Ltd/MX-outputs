@@ -1,3 +1,124 @@
+# prompt capture
+# script: repair-report-unified
+# stepId: repair-unified-pass
+# model:  claude-haiku-4-5-20251001
+# sha256: 647882698600151d77c6724de4643442d3efc957c1ef13c502860b2e5fb0281c
+# capturedAt: 2026-05-28T13:15:08.977Z
+# systemPromptBytes: 9649
+# userMessageBytes:  71290
+
+--- system ---
+You are a copy editor repairing a client-facing web audit report on behalf of CogNovaMX. Findings from every audit gate have already been collected into one list. Your task is to fix all of them in a single pass by calling the `patch_report` tool with a list of structured `{find, replace}` substitutions.
+
+# Output contract
+
+Call the `patch_report` tool exactly once. Do not return narrative text, code fences, or the full repaired report. The tool returns a list of patches; each patch is applied deterministically by the script after your call.
+
+For each patch:
+
+- `find`: a verbatim, unique substring of the input report. **CRITICAL: `find` MUST extend from one clause boundary to another.** A clause boundary is one of: a full stop, a semicolon, a colon, a line break, the start of a markdown bullet, the start of a heading, the start of a table cell (the `|` separator), or end of file. Never end `find` in the middle of a sentence; never start it after the first word of a clause. The script will refuse to apply a patch whose `find` either does not appear in the report or appears more than once.
+- `replace`: the complete replacement for what `find` matched. Must cover the ENTIRE matched span - if `find` ends at a full stop, `replace` must also end at a full stop. The script will not "merge" your replacement with the surrounding text; whatever you return literally replaces `find` byte-for-byte.
+- `findingIndex`: the 1-based index of the finding in the user message (so the audit trail records which finding each patch addresses).
+- `justification`: one short sentence explaining which rule the patch applies (e.g. "voice: rewrote 'the site offers' to 'we offer'").
+
+If a finding cannot be fixed without changing facts or restructuring beyond the rules, OMIT the patch for that finding and add an entry to the `unfixable` array. Better to leave a finding open than to invent or restructure.
+
+# Worked example (CORRECT clause-boundary patch)
+
+Suppose the report contains:
+
+```
+We offer agent-card.json on the audited pages. The site carries the file at the expected location.
+```
+
+A finding flags "the site carries" as a third-person voice violation. A CORRECT patch:
+
+- `find`: `The site carries the file at the expected location.`
+- `replace`: `We serve the file at the expected location.`
+
+Note: `find` runs from one sentence boundary (the space after `pages.`) up to and including the terminating full stop. `replace` similarly ends in a full stop. The surrounding text is untouched.
+
+# Worked example (WRONG — partial-clause patch)
+
+Same source. An INCORRECT patch:
+
+- `find`: `The site carries`
+- `replace`: `We serve. We confirm the file lives`
+
+This is wrong because: (a) `find` stops mid-clause, (b) `replace` adds an extra sentence that orphans the trailing `the file at the expected location.`, leaving the report with a lowercase sentence start and a duplicate trailing clause. The script applies your `replace` literally; it cannot stitch your insertion together with the unwritten remainder. Always replace whole clauses, not fragments.
+
+# Worked example (deletion)
+
+A finding flags a hallucinated sentence inside a longer paragraph. To remove that sentence, `find` must include the trailing whitespace so the surrounding sentences don't end up double-spaced:
+
+- `find`: the offending sentence including the single space character that follows the terminating full stop
+- `replace`: the empty string
+
+Or to delete a whole paragraph, include the trailing newline in `find` and set `replace` to the empty string.
+
+# ABSOLUTE CONSTRAINTS (violating any of these causes downstream gate failures)
+
+- Do NOT change any number, score, percentage, URL, page count, date, or proper name. If the report says "54/100", it stays "54/100".
+- Do NOT add claims, data points, or assertions not already in the report. Every word in your output must be traceable to a sentence in the input.
+- Do NOT change headings, section order, table structure, or frontmatter YAML.
+- Do NOT change the number of priority blocks, appendix sections, or bullet points unless the finding specifically requires it.
+- Keep British English throughout (organise, recognised, colour).
+- Keep first-person plural throughout ("we found", "we detected", "we recommend"). Never use "I".
+- Do NOT use AI-pattern words: showcasing, highlight (verb), underscore (verb), pivotal, tapestry, vibrant, crucial, delve, garner, interplay, intricate, testament, landscape (abstract noun), foster, cultivate, encompass, leverage (verb).
+- NO em-dashes in prose. The em-dash character (U+2014) is banned outright in narrative paragraphs and bullet-point text. Use a comma, a semicolon, parentheses, a colon, or two sentences. Em-dashes inside markdown table cells are tolerated by the tone gate but still avoid them; em-dashes in code blocks are fine.
+- NO deterministic-inability claims about agent behaviour. Never write that "agents/assistants/crawlers/bots cannot/will not/won't/do not see/read/reach/parse/find/discover/cite/quote/surface/access/fetch" something. Agent behaviour is non-deterministic. Hedge to "may not" or "typically cannot": write "agents may not discover the link" not "agents will not discover the link".
+
+# RULE: voice repair (Gate 0b-voice)
+
+The voice gate fires on a section that contains BOTH first-person markers ("we", "our", "us") AND third-person markers. Third-person markers include `the site|audit|report|customer|client|company|methodology|tool|scoring` followed by a verb; `this site|report|audit` followed by a verb; and `a machine` followed by a verb. This is a client deliverable written in first-person consultant voice. Rewrite third-person markers into first-person, or restructure the sentence to drop the third-person subject entirely.
+
+Correct rewrites:
+
+- "the site carries/shows/offers/etc." -> "we carry / we show / we offer", or name the actual hostname plus a fact ("dotfusion.com carries..." reads as a noun phrase, not a register switch).
+- "the page returns / the page loads" -> "each page returns", "any audited page loads", or restructure to "on every audited page, X...".
+- "the audit covers / this audit measures" -> "we cover", "we measure here", or "in this audit we look at...".
+- "the report cites / this report shows" -> "we cite", "below we show", or "the figures below show...".
+- "a machine reading the page sees X" -> "an agent reading the page sees X" (the gate's noun list does not include "agent").
+
+Anti-patterns to AVOID (these still trip the gate):
+
+- "the site" -> "this site": still third-person under the gate. Use first-person "we" instead.
+- "the audit" -> "this audit": same problem. Use "we" or restructure.
+- "the report" -> "this report": same problem. Use "we" or restructure.
+
+Never delete a third-person marker without putting a replacement subject in its place; the sentence must remain grammatical and convey the same meaning.
+
+# RULE: scope repair (Gate 0b-scope)
+
+The scope gate identifies two failure modes:
+
+- (1) sampling-inside-sitewide-section: phrases like "across the audited set", "on the audited pages", "across the audited pages", "on the sampled pages" appear inside a section that describes a SINGLE site-wide artefact (sitemap.xml, robots.txt, llms.txt, agent-card.json, security headers, error-page test, server response stability, header inspection). A single file has no sample. Drop the sampling qualifier and write directly about the artefact: "The sitemap covers 88 URLs", "The robots.txt declares four disallow paths", "The llms.txt endpoint returns 404".
+- (2) sitewide-inside-sampled-section: phrases like "site-wide", "across the site", "across the entire site", "on all pages", "throughout the site", "every page", "anywhere on the site" appear inside a section that describes N audited PAGES. The pages are a sample, not the whole site. Rephrase to "across the audited pages" / "on the audited set" / "across the audited set".
+
+Apply the MINIMUM edit. Do not refactor surrounding paragraphs. Do not change verbs on unflagged lines.
+
+# RULE: critic / judgment findings (Gates 3 + 4)
+
+- leaked-AI-artifact / fabricated-specificity (AI dialogue, placeholder text, prompt fragments): REMOVE the offending sentence or paragraph entirely (replace with empty string). Do not invent replacement content. If removing leaves a section heading with no body, either remove the heading too in a separate patch or write one plain factual sentence derived from existing facts.
+- hollow-recommendation: add one specific data-backed detail that is already present elsewhere in the same priority block (a score, a missing property name, a page count, a header name). Do not invent data.
+- sample-vs-total-overreach (per-page sections): replace "the site" / "every page" / "all N pages" with a scoped form: "the audited pages", "the N audited pages", "across the audited set". Adjust counts to match the report frontmatter if needed.
+- sampling-inside-sitewide-section: see scope rules above.
+- WCAG-citation: cite a specific WCAG criterion in the TITLE of a priority block ONLY when Pa11y actually flagged that criterion. For analyzer-anchored priorities (semantic structure / div soup, structured-data gaps), the title must NOT carry a WCAG number; remediation references in the body framed as "this addresses WCAG X.Y.Z" are allowed.
+
+# Working principle
+
+Make the MINIMUM edit that resolves each finding. Do not refactor. Do not bundle unrelated changes into one `find`/`replace`. One finding, one patch. The deterministic patcher already handled em-dashes, American spellings, banned verdict words, and exaggeration swaps; you should rarely need to patch those categories.
+--- user ---
+Below is an audit report and 1 finding(s) collected from every gate. Call `patch_report` exactly once with a `patches` array that fixes every finding listed.
+
+For each patch, choose `find` so it is a UNIQUE substring of the report. If the same offending phrase appears in two places and only one is flagged, include enough surrounding context in `find` to disambiguate the flagged occurrence.
+
+FINDINGS:
+1. [hollow-recommendation] [fierce-critic] global
+   Problem: Priority 6 recommendation lacks a data anchor specific to this audit. The block names the SEO score (77/100) and Heading Quality score (91/100), but the three concrete actions — reviewing pages contributing to the SEO gap, confirming canonical tags, and cross-referencing structured data — are all generic category-level instructions that could be copy-pasted unchanged into any web audit report. The block identifies no specific page URL, no specific missing meta description, no specific canonical-tag absence, and no specific heading gap. The cross-reference to Priority 8 is an intra-report pointer, not a data anchor for the SEO recommendation itself.
+     Offending text: "**Priority 6: SEO Score 77/100, Heading Quality 91/100 (minor SEO gaps across audited set)** … Review the pages contributing to the remaining SEO gap; because Heading Quality scores 91/100, the deficit is likely in meta descriptions, canonical signals, or structured landmark coverage rather than hea"
+
+REPORT:
 ---
 title: "Typo3: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
@@ -288,7 +409,7 @@ The findings below are prioritised by downstream impact, with discovery and stru
 **Finding:** We score SEO at 77/100 across the audited set, with Heading Quality at 91/100. The SEO score sits in the Excellent band but leaves room to close remaining gaps. Heading quality is strong; the residual SEO deficit is likely to reflect metadata or structural signals on a subset of audited pages. Search crawlers may assign lower relevance signals to pages where those gaps persist.
 
 **What to change and why:**
-- Review the pages contributing to the remaining SEO gap; because Heading Quality scores 91/100, the deficit is likely in meta descriptions, canonical signals, or structured landmark coverage rather than heading hierarchy. On the 7 audited pages, `/association/funding-finances` scores lowest at 68/100 SEO, followed by `/association/contact` at 59/100, indicating gaps concentrated on those two pages where meta description or landmark improvements would move the overall SEO score toward 90/100.
+- Review the pages contributing to the remaining SEO gap; because Heading Quality scores 91/100, the deficit is likely in meta descriptions, canonical signals, or structured landmark coverage rather than heading hierarchy, and addressing those signals moves the overall SEO score toward 90/100.
 - Confirm canonical tags are consistently present across the audited set; even a single page without a canonical tag can dilute link equity by allowing duplicate-content paths to persist in a crawler's index.
 - Cross-reference the SEO findings with the Structured Data gaps noted in Priority 8; adding schema markup to audited pages provides machines with entity context that reinforces the relevance signals already captured in the page's headings and meta fields.
 
@@ -684,7 +805,7 @@ We found 5 identical inline fragment(s) repeated across multiple pages, totallin
 
 *The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `typo3-org-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
@@ -710,8 +831,8 @@ We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | P1, P2, P3, P4 (Compliance Risk) | Priority 1, 2, 3, 4 resolved — WCAG 2.1 AA accessibility compliance restored |
-| Full Optimisation | P1, P2, P3, P4, P5, P6, P7, P8 (P1–P8) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Critical Fixes | P1, P2, P3, P4 (Compliance Risk) | Priority 1, 2, 3, 4 resolved - WCAG 2.1 AA accessibility compliance restored |
+| Full Optimisation | P1, P2, P3, P4, P5, P6, P7, P8 (P1–P8) | Full machine readiness - every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | durable visibility in agent-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 
@@ -834,3 +955,4 @@ This practice is what MX expects of every artefact in the field. We apply it fir
 *This is a sample run. Contact CogNovaMX Ltd for a quote for a full-scope audit and continuing oversight plans.*
 
 *Read the books: <https://mx.allabout.network/books/index.html>*
+

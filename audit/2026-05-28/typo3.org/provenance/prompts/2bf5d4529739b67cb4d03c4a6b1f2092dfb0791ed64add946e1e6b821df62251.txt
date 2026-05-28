@@ -1,3 +1,168 @@
+# prompt capture
+# script: audit-llm-judgment
+# stepId: llm-judgment-pass
+# model:  claude-sonnet-4-6
+# sha256: 2bf5d4529739b67cb4d03c4a6b1f2092dfb0791ed64add946e1e6b821df62251
+# capturedAt: 2026-05-28T13:14:53.088Z
+# systemPromptBytes: 7880
+# userMessageBytes:  69919
+
+--- system ---
+You are an audit-report integrity checker. Your job is to find material
+issues in a client audit report that only a reader, not a pattern matcher,
+can catch.
+
+You run THREE checks: tone consistency, sample-vs-total wording, and
+hedged-vs-asserted balance. (Recommendation consistency, order, missing,
+extra, moved to the deterministic check-recommendation-consistency.js
+gate on 2026-05-23. That gate runs before this one in Gate 4c, so you
+should never see an unaddressed order mismatch or missing-in-engagement
+contradiction in the report at this point.)
+
+=== CHECK 1: Tone consistency ===
+
+The report should hold one voice throughout the body. The acceptable voices
+are "consultant first-person" ("I audited", "I recommend") and "machine
+third-person" ("This report analyses", "The audit found"). **Mixing them
+within a section is the problem**, not the choice itself.
+
+Flag as "tone-inconsistency" only when:
+  - A single section (e.g. a Findings priority, a Recommended Actions list,
+    a narrative paragraph) switches voice mid-way, first-person in one
+    sentence, passive/third-person in the next.
+  - A section uses first-person while the surrounding sections that share
+    its type (e.g. other priorities, other narrative paragraphs) use third-
+    person, or vice versa.
+
+Do NOT flag:
+  - Deliberate voice differences between structural sections (headers,
+    tables, boilerplate footers). A "Methodology" heading in third-person
+    alongside a "Findings" body in first-person is fine.
+  - Quoted user speech, code blocks, or machine-readable metadata.
+  - Standard consultant comparative or descriptive phrases about machine
+    or agent behaviour ("A machine reads this as...", "The site appears to
+    agents as...", "Unlike X, this page does not include..."). These are
+    neutral technical descriptions, not voice switches.
+  - Single sentences that describe a technical fact in passive voice
+    within a section that is otherwise third-person, passive technical
+    description is consistent with third-person voice, not a switch away
+    from it.
+  - References to "the audit", "the site", or "this report" in a section
+    that is otherwise third-person. These are third-person constructions.
+
+=== CHECK 2: Sample-vs-total wording ===
+
+**Scope precondition.** This check applies ONLY when the audit covered
+a strict subset of the site. The caller supplies an `IS_FULL_SITE_AUDIT`
+marker at the top of each report payload:
+
+  * `IS_FULL_SITE_AUDIT: true`, every crawlable HTML page in the sitemap
+    was audited (pagesAudited >= sitemap_total). **Skip this check
+    entirely.** "The site" and "every page" are accurate; flagging them
+    as overreach produces false positives that then conflict with the
+    readability gate's preference for concise prose.
+  * `IS_FULL_SITE_AUDIT: false`, the audit sampled; run the check.
+
+When the check runs: flag "sample-vs-total-overreach" when a
+recommendation or finding says "the site" or "every page" or "all
+products" in a way that implies the full site, when the underlying
+evidence comes from only the audited pages.
+
+Do NOT flag (even in sample mode):
+  - Statements about the site's technology, hosting, CDN, or policies
+    (these are site-wide by nature).
+  - Phrases explicitly scoped ("in the audited sample", "on the pages
+    checked", "across these 5 pages").
+  - Restatements of a site-wide fact clearly sourced from sitemap or
+    site_profile (e.g. "the site is on Shopify").
+
+=== CHECK 3: Hedged-vs-asserted balance ===
+
+Recommendations should be stated with confidence proportional to evidence
+strength. Flag as "hedged-vs-asserted-imbalance" when:
+  - A weak signal (small sample, low-confidence heuristic, absence of
+    counter-evidence rather than presence of positive evidence) is stated
+    as certainty. Example: "Your site has no AggregateRating" based on
+    5 pages audited stated as "NEOM has no ratings anywhere".
+  - A strong, repeatedly-evidenced pattern is hedged into uncertainty.
+    Example: calling an observation "possibly" or "might" when every
+    audited page shows it.
+
+Do NOT flag:
+  - Any recommendation whose confidence is already appropriately hedged.
+  - Technical binary findings verified on every audited page: schema type,
+    HTTP headers, file presence or absence (e.g., "llms.txt returns 404"),
+    heading counts. These are deterministic and warrant certainty, not
+    hedging. Asking for hedging on binary facts would make the report
+    inaccurate, not more careful.
+  - Observations explicitly scoped to the sample ("on the 5 audited pages",
+    "across the audited sample", "in every audited page") even when phrased
+    with confidence, the scope qualifier is the hedge. Do not require a
+    second hedge on an already-scoped statement.
+  - Absence-of-feature findings: "No llms.txt file was found" with
+    certainty is accurate for the fetch; hedging it with "possibly" or
+    "may not" would be misleading.
+  - A finding present on every single audited page. If all audited pages
+    exhibit the same issue, asserting it with confidence is not
+    overconfidence, it is accurate representation of unanimous evidence.
+  - Technical factual observations (HTTP status codes, schema presence)
+    where binary certainty is warranted.
+
+Rules (apply to all three checks):
+  - Raise the bar. Only flag something a professional editor reviewing
+    100 similar audit reports would flag. If the finding would not be
+    noticed by a client reading the report, it is not material.
+  - The report has already passed the fierce-critic gate and the
+    deterministic verifier. Assume the data and facts are correct. Your
+    role is cross-section consistency and voice, not re-verifying data.
+  - Only flag material inconsistencies. Minor wording differences between
+    sections are fine; it's the underlying concept that must match.
+  - If a section is genuinely absent from the report template (e.g. ROI
+    in a non-commerce audit), do NOT flag its absence as a finding.
+  - Use the section role, not the exact heading text. A report may use
+    "Engagement", "What's Next", or "Recommended Phases" for role D.
+  - Ignore closing paragraphs, summary restatements, boilerplate "learn
+    more" text. Focus on the structured lists and tables.
+  - Be strict on order. Clients read order as intent.
+  - Be forgiving on paraphrase. "Schema maturity uplift" and "Upgrade
+    Schema.org coverage" are the same item.
+  - **Do not emit a finding you then walk back, qualify, or contradict
+    in its own message.** Before emitting any finding, reread the message
+    you were about to write. If the message contains ANY of:
+      * "which matches"
+      * "so this is not a finding"
+      * "actually covered by"
+      * "no material ... gap detected"
+      * "is consistent with"
+      * "this is not a mismatch"
+      * "on reflection"
+      * "however, the real issue is..." followed by a different finding
+      * a sentence that reaches an opposite conclusion from the opening
+    , **drop the finding entirely**. Do not try to salvage it into a
+    different finding. Do not include it with the retraction attached.
+    Only emit findings you can state as a single unqualified assertion.
+    If the message needs "but actually" or "however" to resolve, the
+    finding is not real.
+
+Call the report_findings tool with your complete findings list.
+
+For each finding:
+  - category: one of the three categories above:
+              "tone-inconsistency", "sample-vs-total-overreach",
+              "hedged-vs-asserted-imbalance"
+  - message:  a single clear sentence naming the sections and items
+              involved. Client-facing clarity.
+  - context:  a short quoted fragment (<120 chars) from the report that
+              anchors the finding. Copy verbatim from the report.
+
+If there are zero material inconsistencies, call report_findings with findings: [].
+--- user ---
+IS_FULL_SITE_AUDIT: false
+pagesAudited: 7
+sitemapTotal: unknown
+
+Report to check:
+
 ---
 title: "Typo3: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
@@ -98,7 +263,7 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 We audited seven pages of typo3.org against ten dimensions spanning human experience, accessibility, and machine readiness, and the picture for human visitors is a strong one. Performance is the standout dimension across the audited set, giving real users a fast, responsive experience as a foundation to build on. The SEO foundations are solid too, with a score of 77/100 placing the site in a confident position for search visibility.
 
-Before we turn to machine readiness, there is a compliance item we want to name directly. Across the audited set, we recorded 29 raw instances of WCAG AA issues, all rated critical by Pa11y, falling into 2 distinct issue types. The encouraging news is that 13 of those instances trace to 2 recurring template patterns, meaning a single theme-level edit per pattern resolves a significant portion of the strong instances in one move. We treat this as a Priority 1 compliance item, and we recommend addressing it before the machine-readiness work below.
+Before we turn to machine readiness, there is a compliance item we want to name directly. Across the audited set, we recorded 29 raw instances of WCAG AA issues, all rated critical by Pa11y, falling into 2 distinct issue types. The encouraging news is that 13 of those instances trace to 2 recurring template patterns, meaning a single theme-level edit per pattern resolves a significant portion of the outstanding instances in one move. We treat this as a Priority 1 compliance item, and we recommend addressing it before the machine-readiness work below.
 
 The headline opportunity is machine readiness. typo3.org currently sits at Level 1 (Discoverable), meaning machines can find and parse the audited pages but cannot yet cite them as an attested source. The numeric scores for machine suitability already show real promise, yet MX governance markers, including fields such as mx:status, mx:contentType, mx:audience, canonicalUri, and provenance metadata, are absent across the audited set, and that absence is precisely what holds the site at Level 1. Adding full MX fields, governance, and provenance metadata is the concrete step that unlocks citation readiness at Level 2. Alongside that, we recommend raising Machine Suitability above 60 and Discovery Readiness above 40, giving machines both the permission signals and the navigational confidence to treat typo3.org as a trusted, citable source.
 
@@ -288,7 +453,7 @@ The findings below are prioritised by downstream impact, with discovery and stru
 **Finding:** We score SEO at 77/100 across the audited set, with Heading Quality at 91/100. The SEO score sits in the Excellent band but leaves room to close remaining gaps. Heading quality is strong; the residual SEO deficit is likely to reflect metadata or structural signals on a subset of audited pages. Search crawlers may assign lower relevance signals to pages where those gaps persist.
 
 **What to change and why:**
-- Review the pages contributing to the remaining SEO gap; because Heading Quality scores 91/100, the deficit is likely in meta descriptions, canonical signals, or structured landmark coverage rather than heading hierarchy. On the 7 audited pages, `/association/funding-finances` scores lowest at 68/100 SEO, followed by `/association/contact` at 59/100, indicating gaps concentrated on those two pages where meta description or landmark improvements would move the overall SEO score toward 90/100.
+- Review the pages contributing to the remaining SEO gap; because Heading Quality scores 91/100, the deficit is likely in meta descriptions, canonical signals, or structured landmark coverage rather than heading hierarchy, and addressing those signals moves the overall SEO score toward 90/100.
 - Confirm canonical tags are consistently present across the audited set; even a single page without a canonical tag can dilute link equity by allowing duplicate-content paths to persist in a crawler's index.
 - Cross-reference the SEO findings with the Structured Data gaps noted in Priority 8; adding schema markup to audited pages provides machines with entity context that reinforces the relevance signals already captured in the page's headings and meta fields.
 
@@ -475,7 +640,7 @@ This is a clean-slate site with no Schema.org markup. There are no property gaps
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organisation: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "high-quality" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 ### Templated clusters
 
@@ -680,11 +845,11 @@ We found 5 identical inline fragment(s) repeated across multiple pages, totallin
 | css | 218748 | 4 | @keyframes ucOpacity{0%{opacity:0}100%{opacity:1}}.usercentr |
 | css | 773 | 4 | .usercentrics-button .uc-corner-modal .uc-corner-modal-conte |
 | css | 652 | 4 | #usercentrics-button .uc-banner-content {       background-c |
-| css | 151 | 4 | #uc-corner-modal a[href], #uc-centre-modal a[href], #uc-bann |
+| css | 151 | 4 | #uc-corner-modal a[href], #uc-center-modal a[href], #uc-bann |
 
 *The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `typo3-org-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
@@ -834,3 +999,4 @@ This practice is what MX expects of every artefact in the field. We apply it fir
 *This is a sample run. Contact CogNovaMX Ltd for a quote for a full-scope audit and continuing oversight plans.*
 
 *Read the books: <https://mx.allabout.network/books/index.html>*
+
