@@ -10,8 +10,12 @@
 // PDF bytes never leave the browser. There is no upload endpoint, and
 // no third-party CDN fetch happens at inspection time.
 
-const PDFJS_URL = '/js/vendor/pdfjs/pdf.min.mjs';
-const PDFJS_WORKER_URL = '/js/vendor/pdfjs/pdf.worker.min.mjs';
+// Vendored from pdfjs-dist@4.10.38. Files are kept as .js (not .mjs) because
+// the Cloudflare worker's content-type map (allaboutv2/cloudflare/files/
+// cloudflare-worker.js) does not yet emit application/javascript for .mjs;
+// without that header the browser refuses to execute the module.
+const PDFJS_URL = '/js/vendor/pdfjs/pdf.min.js';
+const PDFJS_WORKER_URL = '/js/vendor/pdfjs/pdf.worker.min.js';
 
 const MX_NAMESPACE_PRIMARY = 'https://mx.allabout.network/ns/1.0';
 const MX_NAMESPACE_LEGACY = 'https://schemas.cognovamx.com/mx/1.0/';
