@@ -1,24 +1,56 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dotfusion.com/dotfusion-com-report.md",
-  "timestamp": "2026-05-27T14:03:17.717Z",
+  "timestamp": "2026-05-27T19:49:54.201Z",
   "model": "claude-sonnet-4-6",
   "runCount": 1,
-  "findingCount": 2,
+  "findingCount": 6,
   "regexFindingCount": 0,
-  "llmFindingCount": 2,
+  "llmFindingCount": 6,
   "findings": [
     {
       "category": "subtle-failure-framing",
-      "message": "\"falls short of\" implicit framing via 'Needs Improvement' label is not the issue here, but the phrase 'leaves something to be desired' does not appear. However, 'struggles to' equivalent: 'machines risk mischaracterising dotfusion.com or omitting it from agent-generated responses' carries a subtly alarming framing that goes beyond a neutral statement of risk. More critically, the phrase 'a strong foundations to build from' in What's Working Well is not a framing issue, but the Executive Summary contains: 'they cannot yet cite it as an attested source' — this is neutral. No clear subtle-failure-framing flag clears the bar on close reading.",
-      "context": "Reviewed all narrative prose for subtle failure framing; no instances clear the bar for flagging after close reading.",
+      "message": "The phrase 'structured data is limited' in the Structured Data Inventory section implies a low baseline in a way that goes beyond neutral factual description. The sentence 'Machines cannot reliably extract entity data from these pages' follows immediately, compounding the negative framing beyond what the score (44/100, 'Could Be Better') and the rich inventory table above it actually support.",
+      "context": "Structured Data Inventory section: 'Across the 12 pages we audited, structured data is limited. Machines cannot reliably extract entity data from these pages.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The 'Next Steps / Recommended Actions' item 2 ('Review Priority 2-3 findings: Semantic Structure improvements and metadata tuning that compound over time') names only domain categories without referencing any specific element, selector, score, or action from the audit. It could be copy-pasted unchanged into any web audit report. The surrounding priority block contains no data anchor specific to this item.",
+      "context": "Next Steps > Recommended Actions: '2. **Review Priority 2-3 findings**: Semantic Structure improvements and metadata tuning that compound over time'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The 'Next Steps / Recommended Actions' item 3 ('Consider optional enhancements: optional patterns that give a early-mover opportunity in AI search') is pure domain framing with no data anchor. It names no specific pattern, score, URL, or artefact from this audit and could apply to any site.",
+      "context": "Next Steps > Recommended Actions: '3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The Balanced Scorecard table lists peer benchmark median values ('median 83' for Performance and 'median 81' for Accessibility in the Human Experience table; 'median 25', 'median 57', 'median 50', 'median 90' in the Machine Experience table) with only a vague attribution ('Benchmark median drawn from a curated audit dataset'). These figures do not appear in the audit facts block and cannot be derived from the 12-page audit data. The comparator dataset is unnamed and unverifiable, making these numbers fabricated specificity.",
+      "context": "Balanced Scorecard > Human Experience table (median 83, median 81) and Machine Experience table (median 25, median 57, median 50, median 90), footnoted only as 'Benchmark median drawn from a curated audit dataset.'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "exaggeration",
-      "message": "US English form 'optimize' does not appear, but 'organized' / 'organization' do not appear either. However, the word 'catalog' appears in American spelling in the Next Steps section: '**Review Priority 2-3 findings**: Catalogue Visibility improvements' — 'Catalogue' is correct UK/neutral form here. On closer inspection: the Inline Code Duplicates section uses 'cacheability' (neutral). The phrase 'answer-engine-optimisation-agency' in URLs is a quoted URL so exempt. The word 'behavior' does not appear. However, 'organized' does not appear. After thorough review: no US/UK drift instances clear the bar.",
-      "context": "Reviewed all narrative prose for US English forms; no clear instances found after close reading.",
+      "message": "The phrase 'while X may suggest Y, the audit reveals Z' negation-pivot pattern appears in the Server Response Stability section: 'The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides.' The construction 'the returning-visitor median hides' is a clause-level pivot that implies the median is concealing a worse truth, framing a factual measurement as a rhetorical reveal. It reads as LLM-rewriter copy rather than neutral consultant prose.",
+      "context": "Server Response Stability > Verdict: 'first-time visitors carry a cold-origin cost that the returning-visitor median hides.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The llms.txt section asserts that 'Common Crawl (the archive underpinning most major LLM training datasets) prioritises HTML for its LLM-training subsets, so a plain-text llms.txt is unlikely to enter training corpora at the same rate as the rest of the site.' This is a specific technical claim about Common Crawl's ingestion prioritisation behaviour that does not appear in the audit facts block and is not a well-known binary fact. It is presented as audit-derived insight but is an unsourced assertion about third-party infrastructure behaviour.",
+      "context": "A note on llms.txt section: 'Common Crawl (the archive underpinning most major LLM training datasets) prioritises HTML for its LLM-training subsets, so a plain-text llms.txt is unlikely to enter training corpora at the same rate as the rest of the site.'",
       "severity": "fail",
       "source": "llm",
       "line": null

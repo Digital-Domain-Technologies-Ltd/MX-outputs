@@ -1,39 +1,33 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/typo3.com/typo3-com-report.md",
-  "timestamp": "2026-05-27T13:56:22.176Z",
+  "timestamp": "2026-05-27T19:45:37.741Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 20739,
-    "output_tokens": 731,
-    "cache_creation_input_tokens": 2369,
-    "cache_read_input_tokens": 0
+    "input_tokens": 21864,
+    "output_tokens": 368,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 2369
   },
-  "findingCount": 4,
+  "findingCount": 3,
   "withdrawnCount": 0,
   "findings": [
     {
       "category": "tone-inconsistency",
-      "message": "The 'About This Report' section opens in first-person plural ('We audited', 'We fetch', 'We then review') but the Findings priority blocks switch inconsistently: Priority 3 opens with 'We identified' (first-person) while Priority 7 opens with 'We score' and Priority 8 opens with 'We record' — these are consistent — however the 'Summary of Findings' closing paragraph switches back to first-person ('We invite the team') after the structured Findings section uses first-person throughout, which is internally consistent. The real tone-inconsistency is in the 'Structured Data Inventory' section, which mixes third-person passive ('No Schema.org JSON-LD entities were detected') with first-person ('the 7 pages we audited') within the same short paragraph.",
-      "context": "No Schema.org JSON-LD entities were detected across the audited set. Adding at least one typed entity per page...a wider audit identifies the same gaps across the rest of the estate.",
+      "message": "The 'Summary of Findings' closing paragraph switches from the consistent third-person voice used throughout the report body to first-person ('We invite the team to review'), while every other narrative paragraph in that section and surrounding sections uses third-person constructions.",
+      "context": "We invite the team to review the findings that follow and prioritise the steps that will extend that foundation to machine audiences.",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The 'Structured Data Inventory' section asserts 'a wider audit identifies the same gaps across the rest of the estate' — treating a 7-page sample finding (zero schema markup) as though it has already been confirmed across the full site, which has not been audited.",
+      "message": "The Structured Data Inventory section asserts 'a wider audit identifies the same gaps across the rest of the estate' — an unscoped claim that extrapolates the 12-page sample finding to the full site without qualification.",
       "context": "a wider audit identifies the same gaps across the rest of the estate.",
       "severity": "block"
     },
     {
-      "category": "sample-vs-total-overreach",
-      "message": "The 'Cross-Page Consistency' table reports 'Skip link: 0% — 7 pages missing it', but the Marker Reachability table directly above records 'Skip link (accessibility): Yes | Yes | Body | Yes | No', asserting a skip link is present — these two statements cannot both be true for the same audited pages, and the consistency table implies a site-wide 0% conclusion from a contradicted sample finding.",
-      "context": "Skip link | 0% | 7",
-      "severity": "block"
-    },
-    {
       "category": "hedged-vs-asserted-imbalance",
-      "message": "The 'llms-full.txt' section hedges whether publishing the file 'would be worthwhile' by saying it 'depends on the content depth of the full site, which our audited sample of 7 pages does not yet measure' — but the absence of the file is a binary, deterministic fact (404 confirmed), and the recommendation to publish it appears without hedging in Priority 7; the inconsistency in confidence between the Discovery Files section (hedged) and the Findings section (asserted) is a material imbalance for the same item.",
-      "context": "Whether adding it would be worthwhile depends on the content depth of the full site, which our audited sample of 7 pages does not yet measure",
+      "message": "The Cross-Page Consistency table reports 'Skip link: 0% — 12 pages missing it', stated with certainty across all 12 audited pages, but the Marker Reachability table on the same report records 'Skip link (accessibility): Yes / Yes / Body / Yes / No', directly contradicting the certainty of a 0% skip-link finding.",
+      "context": "Skip link | 0% | 12",
       "severity": "block"
     }
   ],

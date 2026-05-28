@@ -1,6 +1,6 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/typo3.com/typo3-com-report.md",
-  "timestamp": "2026-05-27T13:56:04.090Z",
+  "timestamp": "2026-05-27T19:45:27.365Z",
   "model": "claude-sonnet-4-6",
   "runCount": 1,
   "findingCount": 7,
@@ -9,56 +9,56 @@
   "findings": [
     {
       "category": "fabricated-specificity",
-      "message": "The 'vs Peers' column in the Balanced Scorecard cites specific median benchmark figures (e.g. 'median 83' for Performance, 'median 81' for Accessibility, 'median 57' for Structured Data Quality, 'median 90' for Pipeline Survivability, 'median 25' for Discovery Readiness, 'median 50' for MX Stack Completeness) with only a footnote saying 'Benchmark median drawn from a curated audit dataset.' These figures do not appear anywhere in the preceding audit facts block and cannot be derived from the 7-page crawl data. The source, composition, and size of the 'curated audit dataset' are undisclosed, making these numbers unverifiable by the client and potentially fabricated or misleading.",
-      "context": "| Performance | Excellent | A | median 83 |\n| Accessibility (WCAG) | Excellent | A | median 81 |\n...\n| Discovery Readiness | 25/100 | Needs Improvement | D | median 25 |\n| Structured Data Quality | 0/100 | Needs Improvement | D | median 57 |\n| MX Stack Completeness | 50/100 | Could Be Better | C | median 50 |\n| Pipeline Survivability | 96/100 | Excellent | A | median 90 |\n*Benchmark median drawn from a curated audit dataset.*",
+      "message": "The 'vs Peers' column in the Balanced Scorecard cites peer-median figures ('median 83', 'median 81', 'median 25', 'median 57', 'median 50', 'median 90') that do not appear in any audit-data facts block and are attributed only to a vague 'curated audit dataset'. These figures are fabricated benchmarks — the report provides no data anchor for the dataset size, composition, or derivation method.",
+      "context": "Balanced Scorecard tables: '| Performance | Excellent | A | median 83 |' and '| Discovery Readiness | 25/100 | Needs Improvement | D | median 25 |' etc., followed by footnote '*Benchmark median drawn from a curated audit dataset.*'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "Priority 7 names three absent headers (HSTS, Content-Security-Policy, X-Frame-Options) in the Finding block, but the recommendation prose itself contains no data anchor — it instructs adding 'three absent security response headers' without naming them by technical name in the recommendation bullets, and one bullet ('Prioritise headers that govern framing and cross-site behaviour') is pure domain framing with no specific header named. However, re-applying the SPECIFICITY TEST: the header names do appear in the same priority block (the Finding paragraph), so this does not qualify as hollow. Disregarding — not flagging.",
+      "context": "Priority 7 recommendation bullets: 'Add the three absent security response headers at the server or CDN layer' and 'Prioritise headers that govern framing and cross-site behaviour, as these carry the most direct exposure for a CMS-vendor site likely to be embedded or referenced by third parties.'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "subtle-failure-framing",
-      "message": "The phrase 'though the accessibility result carries room to grow given the concentration of issues tracing to a small number of repeating template patterns' is subtle failure framing. The qualifier 'though' pivots from positive framing to a condemnation, and the clause 'carries room to grow' combined with the explanation of why implies the score is structurally disappointing. This is the 'could be improved significantly' / inverse-baseline pattern dressed in softer language.",
-      "context": "Across the audited set, typo3.com delivers a strong human experience, with Performance, Accessibility, and SEO all sitting in the Excellent band, though the accessibility result carries room to grow given the concentration of issues tracing to a small number of repeating template patterns.",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "hollow-recommendation",
-      "message": "The recommendation for 'sameAs links on Organisation' in Optional Enhancements names only the domain action ('adding sameAs properties') and two generic target platforms (Wikidata and LinkedIn) without any data anchor from this audit — no entity URL, no existing schema block to extend, no page URL. Since the SDQ score is 0/100 and no Organisation entity exists yet, this recommendation presupposes an entity that does not exist, and provides no actionable instruction tied to audit findings. Applying the specificity test: the surrounding optional-enhancement block contains no data anchor (no schema property value from the audit, no URL, no score specific to this enhancement); the mention of 'Wikidata and LinkedIn' is a generic industry suggestion, not derived from audit data.",
-      "context": "**sameAs links on Organisation**: adding `sameAs` properties pointing to Typo3's Wikidata and LinkedIn entries on any Organisation entity would allow machines to cross-reference the publisher's identity across the open web, strengthening attribution confidence when agents encounter Typo3 content.",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "hollow-recommendation",
-      "message": "The recommendation for 'BreadcrumbList on deep content pages' in Optional Enhancements names a schema type but provides no data anchor from the audit — no specific page URL, no crawl count of deep pages, no score. The phrase 'pages reached through Typo3's documentation and product hierarchy' is a generic description that could apply to any CMS-driven site. Applying the specificity test: the surrounding block contains no data anchor specific to this audit for this enhancement.",
-      "context": "**BreadcrumbList on deep content pages**: pages reached through Typo3's documentation and product hierarchy currently rely on URL path alone for navigational context; adding `BreadcrumbList` markup would give machines a structured trail to follow, improving how agents understand and surface those pages within multi-step queries.",
+      "message": "'the accessibility score leaves room to address the template-level patterns that account for a meaningful share of the raw WCAG instances' is passive-aggressive softening that implies a low baseline while appearing measured. The phrase 'leaves room to' is a variant of 'leaves something to be desired' and is used specifically to flag an inadequacy rather than to frame a genuine opportunity.",
+      "context": "Balanced Scorecard, Human Experience section: 'though the accessibility score leaves room to address the template-level patterns that account for a meaningful share of the raw WCAG instances we identified.'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "exaggeration",
-      "message": "American English spelling 'organization' does not appear, but 'optimize' appears implicitly via 'machine-optimised' (UK form used correctly). However, 'color' appears in audit data CSS previews (acceptable as quoted code). More critically, 'optimize' appears as 'optimised' (UK). Checking further: the report uses 'colour' in 'background-colour parameter' (Priority 1 recommendation) — this is a UK form used in narrative prose, which is correct. No US drift found there. However, the report uses 'organized' nowhere but does use the construction 'analyzed' — checking: 'analyse' is used correctly throughout. One clear US form appears: 'color' in the narrative prose of Priority 1: 'Confirm with Usercentrics whether their SDK theming or configuration API already exposes a background-colour parameter' — this uses UK 'colour', which is correct. Re-checking for actual US drift: the Inline Code Duplicates section contains CSS preview snippets with 'color' inside code fragments (acceptable as quoted code). After thorough review, no clear US/UK drift in narrative prose is present that rises to the flag threshold.",
-      "context": "N/A — on further review this finding does not meet the bar; skipping.",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "subtle-failure-framing",
-      "message": "The phrase 'is far from optimal' does not appear, but 'the structural pattern is broadly representative of the audited set' following a score of 23/100 is paired with the framing 'a band that warrants attention' — this construction is borderline. On reflection this does not clearly meet the flag bar as it is factual score-based language. Withdrawing.",
-      "context": "N/A — withdrawing as borderline.",
+      "message": "The phrase 'a behaviour pattern consistent with untyped component wrappers rather than a drag-and-drop builder' in the Div Soup section is speculative inference dressed as an audit finding. Attributing intent ('untyped component wrappers') without audit evidence to support the distinction from a 'drag-and-drop builder' goes beyond what the data shows and reads as hyperbolic editorial characterisation.",
+      "context": "Div Soup section: 'a behaviour pattern consistent with untyped component wrappers rather than a drag-and-drop builder'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "fabricated-specificity",
-      "message": "The Inline Code Duplicates section states there are '1293 KB redundant bytes' from '6 identical inline fragments repeated across multiple pages'. The table shows individual fragment sizes (218748 bytes, 773 bytes, 652 bytes, 373 bytes, 151 bytes, 20 bytes). Summing these: 218748 + 773 + 652 + 373 + 151 + 20 = 220,717 bytes per occurrence. Multiplying by page counts (7, 7, 7, 7, 7, 5): 218748×7 + 773×7 + 652×7 + 373×7 + 151×7 + 20×5 = 1,531,236 + 5,411 + 4,564 + 2,611 + 1,057 + 100 = 1,544,979 bytes ≈ 1509 KB, not 1293 KB. The '1293 KB' figure cannot be derived from the table data provided and appears to be a fabricated or inconsistently calculated number.",
-      "context": "We found 6 identical inline fragment(s) repeated across multiple pages, totalling 1293 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.",
+      "message": "The PDF section states 'Enforcement penalties vary by jurisdiction and enterprise size: the EAA (Directive (EU) 2019/882) carries fines ranging from low four-figure to six-figure euro sums depending on severity'. No source or audit data anchors the specific fine ranges. These penalty figures are not derivable from the audit data and represent fabricated specificity introduced as an implicit effort to create urgency.",
+      "context": "PDF Documents section, Future work subsection: 'Enforcement penalties vary by jurisdiction and enterprise size: the EAA (Directive (EU) 2019/882) carries fines ranging from low four-figure to six-figure euro sums depending on severity, and Section 508 and ADA Title III carry litigation exposure in the US market.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The 'Recommended Actions' in Next Steps contains a bullet that names only a count and a domain label with no specific mechanism, element, page type, or action derived from findings: 'address the 43 WCAG 2.1 AA accessibility issues identified (regulatory exposure)'. The count 43 is a data anchor, but the recommendation itself adds nothing beyond the domain category — it is equivalent to 'fix your accessibility issues'. Priorities 1–6 already carry the specific actions; this summary bullet is pure hollow restatement.",
+      "context": "Next Steps > Recommended Actions: '1. **Address Priority 1 findings**: address the 43 WCAG 2.1 AA accessibility issues identified (regulatory exposure)'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "hollow-recommendation",
+      "message": "The second bullet in Recommended Actions ('Review Priority 2-3 findings: Structured Data improvements and metadata tuning that compound over time') names only domain categories ('Structured Data improvements and metadata tuning') without any specific element, action, or data anchor. It could be copy-pasted unchanged into any web audit for any site. The phrase 'compound over time' is pure motivational framing with no mechanical specificity.",
+      "context": "Next Steps > Recommended Actions: '2. **Review Priority 2-3 findings**: Structured Data improvements and metadata tuning that compound over time'",
       "severity": "fail",
       "source": "llm",
       "line": null

@@ -13,11 +13,11 @@ auditDate: "2026-05-27"
 description: "Executive audit report analysing accessibility, performance, SEO, structured data, and AI agent compatibility for Typo3"
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
 performanceScore: 85
-accessibilityScore: 86
-seoScore: 80
+accessibilityScore: 88
+seoScore: 81
 llmSuitabilityScore: 85
-totalIssues: 35
-pagesAudited: 7
+totalIssues: 43
+pagesAudited: 12
 version: "1.0"
 confidential: true
 mx:
@@ -70,7 +70,7 @@ mx:
 
 ## About This Report
 
-We audited 7 pages across typo3.com's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.
+We audited 12 pages across typo3.com's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.
 
 We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
@@ -80,7 +80,7 @@ The scoring criteria follow published MX standards and proposed specifications m
 
 **What we cover here, and what MX covers.** Here we look at the web estate: every page served over HTTP, analysed for metadata, structured data, accessibility, and machine readability. MX runs deeper. A machine-ready estate covers every document type an organisation publishes: PDFs, data feeds, API responses, structured documents, presentations: and every machine class that consumes them: search crawlers, AI assistants, autonomous vehicles, industrial systems, IoT devices, and future classes not yet defined. Get the web estate right, and you have the foundation. Get all of it right, and you have a machine-ready estate.
 
-**About sample scope.** Findings throughout this report describe what we observed on the 7 pages we crawled. Verdicts scoped to the sample should not be extrapolated to the full estate without a wider audit; where a finding is structural (a missing security header, a soft 404 pattern, an llms.txt transport problem) we say so. Contact <info@cognovamx.com> to scope a full-estate engagement.
+**About sample scope.** Findings throughout this report describe what we observed on the 12 pages we crawled. Verdicts scoped to the sample should not be extrapolated to the full estate without a wider audit; where a finding is structural (a missing security header, a soft 404 pattern, an llms.txt transport problem) we say so. Contact <info@cognovamx.com> to scope a full-estate engagement.
 
 ### A note on llms.txt
 
@@ -97,18 +97,18 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 | | Score | |
 |:---|---:|:---|
 | Performance | **85**/100 | `###############---` |
-| Accessibility | **86**/100 | `###############---` |
-| SEO | **80**/100 | `##############----` |
+| Accessibility | **88**/100 | `################--` |
+| SEO | **81**/100 | `###############---` |
 | Machine Suitability | **85**/100 | `###############---` |
-| MX Stack Completeness | **50**/100 | `#########---------` |
-| Agent Readability | **71**/100 | `#############-----` |
-| Pipeline Survivability | **96**/100 | `#################-` |
+| MX Stack Completeness | **49**/100 | `#########---------` **(!)** |
+| Agent Readability | **67**/100 | `############------` |
+| Pipeline Survivability | **98**/100 | `##################` |
 
-We audited seven pages of typo3.com on 2026-05-27, scoring each across ten dimensions of human and machine experience. The clearest foundation to build on is performance: across the audited set, the platform delivers content quickly and consistently, and an SEO score of 80/100 confirms that the structural fundamentals serving human visitors are well established. The content is purposeful, the navigation is coherent, and the groundwork is there for a stronger experience across every lens we apply.
+We audited 12 pages from typo3.com's 278-page sitemap as a representative sample, and the picture for human visitors is genuinely encouraging. Performance leads the scorecard as the strongest dimension across the audited set, giving real users a fast, responsive experience that reflects well on the platform's technical foundations. SEO scores at 81/100 (Excellent), which tells us the groundwork for organic discoverability is solid and well-maintained.
 
-Before we turn to machine readiness, we want to name accessibility as a Priority 1 compliance item. Across the audited set, we recorded 35 raw instances of WCAG AA issues spanning 20 distinct issue types, and Pa11y marks all 35 critical. The remediation picture is more manageable than the raw count suggests: 17 of those instances trace to 3 recurring template patterns, meaning a single theme-level edit per pattern clears a significant portion of the total. We recommend treating those template patterns as the first item on the remediation list, as each fix compounds across every page that shares the template.
+Before we turn to machine readiness, we want to name accessibility as a Priority 1 compliance item. Across the audited set we recorded 28 distinct WCAG AA issue types across 43 raw instances, all 43 flagged as critical by Pa11y. The remediation picture is more manageable than the raw count suggests: 22 of those instances trace to just two recurring template patterns, meaning a single theme-level correction per pattern resolves the majority of affected elements in one pass. Addressing these patterns is the most direct path to a more inclusive experience for all visitors. The headline opportunity beyond that sits firmly in machine readiness. typo3.com currently sits at MX Readiness Level 1 (Discoverable), meaning machines can find and parse the audited pages but cannot yet cite them as an attested source. The score thresholds for Citation-ready (Level 2) are within reach, but the lever is not raising Discovery Readiness or deepening Schema.org markup in isolation; the concrete next step is adding full MX governance fields, including mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers, so that machines can treat the content as a citable, trustworthy source rather than simply a readable one.
 
-The headline opportunity on the machine side is citation readiness. typo3.com currently sits at MX Readiness Level 1 (Discoverable), meaning machines can discover and parse the audited pages but cannot yet cite them as an attested source. The score thresholds that govern Structured Data Quality and Discovery Readiness already signal room to grow, yet the actual lever to reach Level 2 is adding full MX governance fields: mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers. We also recommend raising the Machine Suitability score above 60 and Discovery Readiness above 40 as complementary steps. The opportunity, in short, is to add the governance and provenance layer that transforms a well-built, discoverable site into one that agents can cite with confidence.
+The path forward is clear and well-sequenced. We recommend addressing the two template-level accessibility patterns first to close the compliance exposure, then adding MX governance metadata and raising MSC above 60 and DR above 40 to unlock citation readiness. The groundwork typo3.com has already established for human visitors makes it well-placed to extend that same quality of signal to the machines that increasingly shape how audiences discover and trust content.
 
 \clearpage
 
@@ -116,25 +116,27 @@ The headline opportunity on the machine side is citation readiness. typo3.com cu
 
 ### Human Experience
 
-Across the audited set, typo3.com delivers a strong human experience, with Performance, Accessibility, and SEO all sitting in the Excellent band, with accessibility gains concentrated in a small number of repeating template patterns that, when addressed, will compound across every page that shares each template.
+Across the audited set, typo3.com delivers a strong human experience, with Performance, Accessibility, and SEO each reaching the Excellent band, though the accessibility score leaves room to address the template-level patterns that account for a meaningful share of the raw WCAG instances we identified.
 
-| Dimension | Rating | Grade |
-|-----------|--------|-------|
-| UX / Navigation | Excellent | A |
-| Performance | Excellent | A |
-| Accessibility (WCAG) | Excellent | A |
-| Trust and Credibility | Excellent | A |
+| Dimension | Rating | Grade | vs Peers |
+|-----------|--------|-------|----------|
+| UX / Navigation | Excellent | A | - |
+| Performance | Excellent | A | median 83 |
+| Accessibility (WCAG) | Excellent | A | median 81 |
+| Trust and Credibility | Excellent | A | - |
 
 ### Machine Experience
 
-Across the audited set, machines can discover and parse typo3.com pages reliably, though the current MX Readiness Level of 1 (Discoverable) means they cannot yet cite those pages as an attested source.
+Across the audited set of 12 pages, machines can discover and parse typo3.com content reliably, though the scores for Discovery Readiness, Structured Data Quality, and MX Stack Completeness indicate that citation-level readiness remains an opportunity to develop.
 
-| Dimension | Score | Rating | Grade |
-|-----------|-------|--------|-------|
-| Discovery Readiness | 25/100 | Needs Improvement | D |
-| Structured Data Quality | 0/100 | Needs Improvement | D |
-| MX Stack Completeness | 50/100 | Could Be Better | C |
-| Pipeline Survivability | 96/100 | Excellent | A |
+| Dimension | Score | Rating | Grade | vs Peers |
+|-----------|-------|--------|-------|----------|
+| Discovery Readiness | 25/100 | Needs Improvement | D | median 25 |
+| Structured Data Quality | 0/100 | Needs Improvement | D | median 57 |
+| MX Stack Completeness | 49/100 | Could Be Better | C | median 50 |
+| Pipeline Survivability | 98/100 | Excellent | A | median 90 |
+
+*Benchmark median drawn from a curated audit dataset.*
 
 ---
 
@@ -163,7 +165,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 **Current Level:** 1: Discoverable
 
-**Evidence:** MX Stack Completeness 50/100 | Structured Data Quality 0/100 | Discovery Readiness 25/100 | Consistency 30%
+**Evidence:** MX Stack Completeness 49/100 | Structured Data Quality 0/100 | Discovery Readiness 25/100 | Consistency 28%
 
 **To reach the next level:** Add full MX fields, governance, and provenance metadata so agents can cite as well as discover. Raise MSC above 60 and DR above 40.
 
@@ -173,22 +175,22 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-Across the audited set, typo3.com has built a strong foundations in core SEO and accessibility, with strong scores that provide real momentum for the refinements ahead. These results reflect careful attention to the fundamentals, and the work that follows builds directly on that groundwork.
+Across the audited set, typo3.com demonstrates a strong foundations in search visibility and accessibility, with SEO scoring 81/100 and accessibility reaching 88/100. These results reflect considered work at the template level and give the team a strong base from which to address the remaining opportunities in this report.
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
-| Performance | Excellent | Excellent - 867ms average load time |
+| Performance | Excellent | Excellent - 1000ms average load time |
 | SEO (content pages) | 81 | Excellent - titles, meta descriptions, canonical URLs in place |
-| Security | 2/5 | 2/5 headers present (HSTS, CSP, X-Frame-Options absent); 0 of 7 URLs carry all five |
+| Security | 2/5 | 2/5 headers present (HSTS, CSP, X-Frame-Options absent); 0 of 12 URLs carry all five |
 | Structured Data | 0 | Needs Improvement - no Schema.org JSON-LD present yet |
-| Heading Quality | 90 | Excellent - single H1 per page, no level jumps, Lighthouse-compliant |
-| Consistency | 30% | 30% - same metadata patterns across every page |
+| Heading Quality | 84 | Excellent - single H1 per page, no level jumps, Lighthouse-compliant |
+| Consistency | 28% | 28% - same metadata patterns across every page |
 | Agent access | 7/7 | every tested AI user-agent receives HTTP 200 |
 
 **Positive patterns observed:**
 
 - All 8 tested AI agents can fetch the site: ClaudeBot (Anthropic), GPTBot (OpenAI), ChatGPT-User (OpenAI), PerplexityBot, GoogleOther (Google AI), Google-Extended, CCBot (Common Crawl), Plain request (no UA) all return HTTP 200 at inference time.
-- Body content ratio averages 73%: pages are content-heavy, not overhead-heavy, which helps agents reach real prose inside a cheap fetch.
+- Body content ratio averages 79%: pages are content-heavy, not overhead-heavy, which helps agents reach real prose inside a cheap fetch.
 
 ---
 
@@ -196,168 +198,179 @@ Across the audited set, typo3.com has built a strong foundations in core SEO and
 
 ### At a Glance
 
-We present the findings below as a set of prioritised opportunities, ordered by how directly each gap blocks machines from discovering, parsing, and acting on content from typo3.com. Discovery and structured data gaps lead the table because they affect every other machine-readable layer downstream.
+We have prioritised the findings below by the degree to which each gap constrains what machines can do with typo3.com, so the opportunities that block the most downstream capability appear first. Structured Data Quality and Catalogue Visibility both at 0/100 lead the table because they determine whether machines can read, classify, and act on the content at all; Discovery Readiness at 25/100 and MX Stack Completeness at 49/100 follow as the next layer of capability to unlock across the audited set.
 
 | # | Finding | Bucket | Priority | Effort | Impact |
 |---|---------|--------|----------|--------|--------|
-| 1 | Contrast Ratio 3.09:1 on Usercentrics Accept Button, WCAG 1.4.3 (7 pages) | Compliance Risk | High | Low | Low-vision users may miss the accept action on the consent banner |
-| 2 | Unlabelled Consent iframe, WCAG 2.4.1 (7 pages, Usercentrics SDK) | Compliance Risk | High | Low | Sighted keyboard users risk missing the purpose of the consent-sharing frame |
-| 3 | Duplicate ID "Ebene_1", WCAG 4.1.1 (2 pages) | Compliance Risk | High | Low | Assistive technology users may receive incorrect or ambiguous element references |
-| 4 | Contrast Ratio 3.09:1 on Content Element, WCAG 1.4.3 (1 page) | Compliance Risk | High | Low | Low-vision users may miss text content within that element |
-| 5 | Form Without Submit Button, WCAG 3.2.2 (1 page) | Compliance Risk | High | Low | All keyboard-only users risk being unable to submit the case-study filter form |
-| 6 | Semantic Structure 23/100 (https://typo3.com/, 234 of 332 bare divs) | Cross-cutting | Medium | Medium | Screen readers and machines are less likely to resolve page structure accurately |
-| 7 | Discovery Readiness 25/100, five artefacts absent (llms.txt, llms-full.txt, agent-card.json, ai.txt, humans.txt) | AI Opportunity | High | Medium | Machines may miss typo3.com entirely when building agent knowledge surfaces |
-| 8 | Structured Data Quality 0/100, no schema markup detected | AI Opportunity | High | Medium | Machines reduce confidence in entity attribution and citation eligibility for typo3.com |
-| 9 | MX Stack Completeness 50/100, discovery and governance gaps | AI Opportunity | Medium | Medium | Agents are less likely to treat typo3.com as a trusted, attributable source |
+| 1 | Iframe Missing Title Attribute, WCAG 2.4.1 (12 instances, 12 pages, Usercentrics SDK) | Compliance Risk | High | Low | Sighted keyboard users may miss consent iframe context across the audited set |
+| 2 | Consent Banner Contrast Ratio 3.09:1, WCAG 1.4.3 (10 instances, 10 pages, Usercentrics SDK) | Compliance Risk | High | Low | Low-vision users risk missing or misreading the consent accept button across the audited set |
+| 3 | Duplicate ID "Ebene_1", WCAG 4.1.1 (3 instances, 2 pages) | Compliance Risk | High | Low | All assistive-technology users may receive incorrect element references on affected pages |
+| 4 | Form Missing Submit Button, WCAG 3.2.2 (1 instance, 1 page) | Compliance Risk | High | Low | Keyboard-only users are less likely to submit the case-study filter form successfully |
+| 5 | Contrast Ratio 3.09:1 on Content Element, WCAG 1.4.3 (1 instance, 1 page) | Compliance Risk | Medium | Low | Low-vision users may miss text content on the affected page |
+| 6 | Semantic Structure 22/100, High Bare-Div Ratio (https://typo3.com/, 222 of 310) | Compliance Risk | Medium | Medium | Machines and assistive technologies are less likely to parse document structure accurately on that page |
+| 7 | Security Headers Incomplete, 2 of 5 Present | Cross-cutting | High | Low | Browsers and security scanners may flag typo3.com as a lower-trust origin |
+| 8 | Discovery Readiness 25/100, Five Artefacts Absent (llms.txt, llms-full.txt, agent-card.json, ai.txt, humans.txt) | AI Opportunity | High | Medium | Machines may miss typo3.com as a crawlable, citable source; reduces agent confidence |
+| 9 | Structured Data Quality 0/100, No Schema Markup Detected | AI Opportunity | High | Medium | Machines are less likely to surface structured facts from typo3.com in agent answers |
+| 10 | MX Stack Completeness 49/100, Discovery and Governance Gaps | AI Opportunity | Medium | Medium | Machines may treat typo3.com as a lower-confidence source; reduces agent citation eligibility |
 
 ---
 
-**Priority 1: Contrast Ratio 3.09:1 on Usercentrics Accept Button, WCAG 1.4.3 (7 pages)**
+**Priority 1: Iframe Missing Title Attribute, WCAG 2.4.1 (12 instances, 12 pages, Usercentrics SDK)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** Across the audited set, the accept button rendered by the Usercentrics consent banner carries a contrast ratio of 3.09:1 against its background, well below the WCAG 1.4.3 threshold of 4.5:1. This element is injected at runtime by the Usercentrics SDK and does not exist in the site's own template. Because it appears on all 7 audited pages, every user who encounters the consent banner is affected.
+**Finding:** Across the audited set, all 12 pages carry an untitled iframe injected by the Usercentrics consent-management SDK (`#cross-domain-consent-sharing-iframe`, hosted at `app.usercentrics.eu`). This element is not part of typo3.com's own template; it is injected at runtime by the Usercentrics SDK and therefore cannot be addressed through a theme or partial edit. Sighted keyboard users navigating by frame receive no label identifying the iframe's purpose, a direct breach of WCAG 2.4.1.
 
 **What to change and why:**
-- Engage Usercentrics to update the `#uc-btn-accept-banner` button's background so that the resulting foreground-to-background contrast reaches at least 4.5:1; the audit data identifies #c25700 as a compliant target background value. This moves the banner into conformance with WCAG 1.4.3 and removes the legal exposure on the consent interaction that every visitor must complete.
-- If an SDK release that corrects the contrast is not imminent, apply a DOM-observer patch that overwrites the button's background styling after the Usercentrics widget injects it. This is a temporary measure and should be retired once the vendor ships a fix; document it in the audit trail so the patch is not forgotten.
-- Confirm with Usercentrics whether their SDK theming or configuration API already exposes a background-colour parameter; using the official theming route is preferable to a patch because it survives SDK upgrades without re-testing.
+- Engage Usercentrics to ship a fix in their consent SDK that supplies a non-empty, descriptive title attribute on the `#cross-domain-consent-sharing-iframe` element; this is the cleanest resolution because it removes the violation at source and requires no ongoing maintenance from the typo3.com team.
+- If the SDK fix is delayed, apply a DOM-observer patch that detects the injected iframe after insertion and programmatically assigns a descriptive title; this addresses the WCAG 2.4.1 criterion immediately and can be removed once the vendor ships a native fix.
+- Resolving this finding moves the Accessibility score by addressing the largest single-volume pattern across the audited set (12 instances on 12 pages).
 
 **Effort:** Low
 
 ---
 
-**Priority 2: Unlabelled Consent iframe, WCAG 2.4.1 (7 pages, Usercentrics SDK)**
+**Priority 2: Consent Banner Contrast Ratio 3.09:1, WCAG 1.4.3 (10 instances, 10 pages, Usercentrics SDK)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** Across the audited set, the `#cross-domain-consent-sharing-iframe` element, injected by the Usercentrics SDK from `app.usercentrics.eu`, carries no title attribute. WCAG 2.4.1 requires that every iframe have a non-empty title that identifies its purpose to sighted keyboard users navigating by frame. Because this element is not part of the site template, a theme edit will not resolve it.
+**Finding:** Across 10 of the 12 audited pages, the Usercentrics consent banner accept button (`#uc-btn-accept-banner`) presents text at a contrast ratio of 3.09:1 against its background, below the 4.5:1 minimum required by WCAG 1.4.3 for normal text. This button is injected by the Usercentrics SDK and does not exist in the typo3.com template. Low-vision users attempting to accept or decline consent may be unable to read the button label clearly.
 
 **What to change and why:**
-- Engage Usercentrics to add a descriptive, non-empty title attribute to the `#cross-domain-consent-sharing-iframe` element within their SDK. Naming the frame's purpose removes the WCAG 2.4.1 violation and ensures keyboard users understand what the frame contains before entering it.
-- If the vendor cannot ship this promptly, apply a DOM-observer patch that sets the title attribute on the iframe after it is injected. As with the contrast patch above, document this as a temporary measure and retire it when the SDK delivers a native fix.
-- Verify the fix against keyboard navigation after deployment; sighted keyboard users should be able to read the frame's title in their browser's frame list or via a screen reader's frame navigation shortcut.
+- Engage Usercentrics to update the contrast-ratio of the `#uc-btn-accept-banner` element in their SDK so that text meets the 4.5:1 minimum; the audit data identifies background colour #c25700 as a compliant target value.
+- If the SDK cannot be configured to the required contrast through its theming options, apply a DOM-observer patch that overrides the injected button's background after insertion to reach the #c25700 value; this satisfies WCAG 1.4.3 until a vendor-side fix is available.
+- Addressing this pattern across the 10 affected pages is a direct contribution to improving the 88/100 Accessibility score and reduces legal exposure under WCAG 1.4.3.
 
 **Effort:** Low
 
 ---
 
-**Priority 3: Duplicate ID "Ebene_1", WCAG 4.1.1 (2 pages)**
+**Priority 3: Duplicate ID "Ebene_1", WCAG 4.1.1 (3 instances, 2 pages)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** We identified the ID value `Ebene_1` appearing more than once on 2 of the 7 audited pages. WCAG 4.1.1 requires that all ID attribute values on a given page are unique; duplicate IDs cause assistive technologies to behave unpredictably when resolving references, labels, or landmarks. This finding traces to a template-level pattern, meaning a single edit in the appropriate template resolves all affected instances across the audited set.
+**Finding:** We detected the duplicate ID value `Ebene_1` on 2 of the 12 audited pages, with 3 instances in total. Duplicate IDs violate WCAG 4.1.1 because assistive technologies rely on ID uniqueness to associate labels, descriptions, and landmarks with their target elements. When the same ID appears more than once, screen readers and other assistive technologies may resolve to the wrong element or fail to resolve at all, affecting all assistive-technology users on those pages. These instances trace to a template-level pattern, meaning a single targeted fix in the relevant template component resolves all occurrences across the audited set.
 
 **What to change and why:**
-- Audit the template that outputs the `#Ebene_1` element and ensure each rendered instance receives a unique ID. Where the element is an inline SVG (a common source of this pattern), the SVG layer ID should be made unique per instance, for example by appending a counter or a content-specific suffix. This directly addresses WCAG 4.1.1 and prevents assistive technologies from reading the wrong element when a label or anchor references the ID.
-- After the fix, re-run automated accessibility testing on both affected pages to confirm the duplicate is fully resolved; SVG elements can carry multiple copies of the same ID across separate `<use>` or `<symbol>` references, and all must be unique.
-- Because this is a template-level pattern, coordinate the fix with the theming team rather than a content editor; a content-level workaround will not prevent the pattern recurring when new pages are published.
+- Audit the template component that renders SVG or graphic elements named `Ebene_1` and ensure each instance receives a unique ID value; because this traces to a template pattern, a single edit propagates the fix to every page sharing that component.
+- Confirm after remediation that no remaining elements carry the `Ebene_1` ID more than once per page, as WCAG 4.1.1 requires all ID attribute values to be unique within a single document.
+- Fixing duplicate IDs directly supports the Accessibility score and removes a WCAG 4.1.1 audit trail risk.
 
 **Effort:** Low
 
 ---
 
-**Priority 4: Contrast Ratio 3.09:1 on Content Element, WCAG 1.4.3 (1 page)**
+**Priority 4: Form Missing Submit Button, WCAG 3.2.2 (1 instance, 1 page)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** On one audited page, a content element matching the selector `#c491 > div > div > div > div > div > div > div:nth-child(2)…` also returns a contrast ratio of 3.09:1, below the 4.5:1 minimum required by WCAG 1.4.3. Unlike the Usercentrics banner finding, this element is part of the page content and is addressable through a template or content edit.
+**Finding:** On the page containing the case-study filter (`#collapseCaseStudyFilter > div > form`), we identified a form element with no submit button. WCAG 3.2.2 requires forms to either submit on change or provide an explicit submit control so that all users, including those who rely solely on a keyboard, can complete submission. Without a submit button, keyboard-only users are less likely to submit the filter form successfully, and the predictability expectation of WCAG 3.2.2 is unmet.
 
 **What to change and why:**
-- Adjust the background or foreground styling of the affected content element so that the resulting contrast ratio meets the 4.5:1 threshold. The audit data identifies #c25700 as a compliant background target; apply this or an equivalent value that achieves the required ratio. This closes the WCAG 1.4.3 gap for low-vision users reading that section of the page.
-- If this styling originates in a shared content block or partial template, updating it at the template level will prevent the same ratio appearing on other pages that reuse the block.
-- After adjustment, validate the contrast of adjacent text elements in the same component; a background change can affect neighbouring text colours that were previously borderline.
+- Add an explicit submit control to the case-study filter form so that keyboard-only users can trigger submission without relying on change-event behaviour; this directly addresses WCAG 3.2.2.
+- Verify that the form's submission behaviour is predictable and does not change the page context unexpectedly on input, as the same criterion covers unexpected context changes triggered by form controls.
+- Resolving this finding removes a WCAG 3.2.2 violation on the affected page and improves the experience for all users who do not use a pointing device.
 
 **Effort:** Low
 
 ---
 
-**Priority 5: Form Without Submit Button, WCAG 3.2.2 (1 page)**
+**Priority 5: Contrast Ratio 3.09:1 on Content Element, WCAG 1.4.3 (1 instance, 1 page)**
 
 **Bucket:** Compliance Risk
 
-**Finding:** On one audited page, the case-study filter form identified by selector `#collapseCaseStudyFilter > div > form` contains no submit button. WCAG 3.2.2 requires that forms provide a submit mechanism accessible to keyboard users; without a submit button, users who rely on keyboard interaction may be unable to apply the filter at all.
+**Finding:** On one page in the audited set, a content element (`#c491 > div > div > div > div > div > div > div:nth-child(2)…`) presents text at a contrast ratio of 3.09:1, below the 4.5:1 threshold required by WCAG 1.4.3. Unlike the consent-banner contrast finding, this element is part of the page content and is addressable through the site's own template or content layer. Low-vision users may miss or misread the text on the affected page.
 
 **What to change and why:**
-- Add a submit button to the case-study filter form. WCAG 3.2.2 accepts an input element with type `submit` or `image`, or a button element with type `submit` or an omitted or invalid type attribute. The exact implementation is the development team's choice; what matters is that a keyboard-operable submission control is present within the form.
-- If the form currently relies on JavaScript change-event listeners to submit automatically on selection, that approach excludes keyboard users who trigger change events differently from mouse users. A visible submit button ensures all interaction modes work, regardless of how the JavaScript behaves.
-- Test the fix with keyboard-only navigation: tab to the form, make a selection, and confirm that pressing Enter on the submit button or tabbing to it and activating it produces the expected filtered result.
+- Update the background colour of the affected content element to reach a contrast ratio of at least 4.5:1; the audit data identifies #c25700 as a compliant background value.
+- Where the colour is set in a shared style or component, updating it at the component level will prevent the same contrast gap from appearing on other pages that reuse the component.
+- This fix directly satisfies WCAG 1.4.3 on the affected page and reduces legal exposure for low-vision users.
 
 **Effort:** Low
 
 ---
 
-**Priority 6: Semantic Structure 23/100 (https://typo3.com/, 234 of 332 bare divs)**
+**Priority 6: Semantic Structure 22/100, High Bare-Div Ratio (https://typo3.com/, 222 of 310)**
+
+**Bucket:** Compliance Risk
+
+**Finding:** We score Semantic Structure at 22/100 (High band). The figures cited here come specifically from the homepage, https://typo3.com/, which is the worst-performing page in the audited set: 222 of its 310 total elements are bare divs. Because the homepage is built from templates shared with other pages, the structural pattern is likely to recur across the audited set, even if the raw counts differ per page. Assistive technologies depend on semantic elements to communicate document structure; a high proportion of bare divs reduces the reliability of that structural signal. Machines parsing the page for entity relationships and content hierarchy are also less likely to derive an accurate document outline from a largely flat div tree.
+
+**What to change and why:**
+- Review the homepage template and replace presentational div wrappers with semantically appropriate elements (articles, sections, nav, header, footer, main, aside) where the content role warrants it; this directly reduces the bare-div ratio on https://typo3.com/ and, via the shared template, across the audited set.
+- Prioritise structural landmarks first, as these have the greatest impact on assistive-technology navigation and on the machine-readable document outline.
+- Improving Semantic Structure supports both the Accessibility score and machine parsing quality, making this a finding that moves multiple metrics simultaneously.
+
+**Effort:** Medium
+
+---
+
+**Priority 7: Security Headers Incomplete, 2 of 5 Present**
 
 **Bucket:** Cross-cutting
 
-**Finding:** We score Semantic Structure at 23/100 across the audited set, a band that warrants attention. The figures in this finding come specifically from https://typo3.com/, the worst-performing page in the audited set, where a high proportion of the total elements we measured are bare divs. Because most audited pages share the same template, the structural pattern is broadly representative of the audited set even if the exact counts vary per page. Screen readers depend on semantic elements to announce regions, headings, lists, and interactive controls; a page built predominantly from undifferentiated divs gives assistive technology and machines very little structural signal to work with.
+**Finding:** Across the audited set, only 2 of the 5 expected security headers are present: HTTPS and X-Content-Type-Options. The remaining three are absent from every one of the 12 audited URLs. Absent security headers reduce the trust signal typo3.com sends to browsers, security-scanning tools, and increasingly to machines that assess page trustworthiness as part of content-ranking heuristics.
 
 **What to change and why:**
-- Audit the template used by https://typo3.com/ and identify which bare-div wrappers can be replaced with semantically meaningful elements such as `main`, `nav`, `section`, `article`, `aside`, `header`, or `footer`. Each substitution gives screen readers a navigable landmark and gives machines a clearer content model, improving the Semantic Structure score.
-- Where a structural element genuinely requires a generic container, add an appropriate ARIA role so that assistive technologies can still resolve the region's purpose. This is a fallback, not a replacement for native semantics, but it addresses cases where a template constraint prevents a direct element swap.
-- Prioritise the highest-traffic or most-navigated page templates first; because the template is shared, a single edit propagates the structural improvement across every page rendered from it, multiplying the accessibility and machine-readability benefit.
-- Track the Semantic Structure score on re-audit to confirm the bare-div ratio is falling; a rendered score below 70 places this finding in the active remediation band.
+- Add the three absent security response headers at the server or CDN layer; because header configuration is typically a single server or infrastructure change, the fix propagates across all served pages without per-page edits.
+- Prioritise headers that govern framing and cross-site behaviour, as these carry the most direct exposure for a CMS-vendor site likely to be embedded or referenced by third parties.
+- Completing the security header set moves the score from 2 of 5 to 5 of 5 and removes a common audit-tool flag that reduces perceived trustworthiness.
+
+**Effort:** Low
+
+---
+
+**Priority 8: Discovery Readiness 25/100, Five Artefacts Absent (llms.txt, llms-full.txt, agent-card.json, ai.txt, humans.txt)**
+
+**Bucket:** AI Opportunity
+
+**Finding:** We score Discovery Readiness at 25/100 (Needs Improvement). None of the five well-known discovery artefacts are reachable on typo3.com: llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt are all absent. Without these files, machines crawling typo3.com have no structured declaration of what content is available, what the site represents, or how agents should interact with it. This reduces the likelihood that typo3.com is selected as a source in agent-generated answers and directly suppresses the Discovery Readiness score.
+
+**What to change and why:**
+- Add llms.txt to declare the content inventory and intent for machine consumption; we recommend serving it as text/html, noting that our recommendation diverges from the llmstxt.org specification, which specifies plain text.
+- Add llms-full.txt to extend the machine-readable content declaration with fuller page-level detail, increasing the depth of information available to crawling agents.
+- Add agent-card.json to declare typo3.com's identity, capabilities, and preferred interaction patterns for AI agents; this is the primary route to unlocking citation eligibility at MX Readiness Level 2.
+- Add ai.txt and humans.txt to complete the discovery artefact set; ai.txt signals machine-access preferences and humans.txt provides team and project attribution, both of which contribute to agent confidence in the source.
 
 **Effort:** Medium
 
 ---
 
-**Priority 7: Discovery Readiness 25/100, five artefacts absent (llms.txt, llms-full.txt, agent-card.json, ai.txt, humans.txt)**
+**Priority 9: Structured Data Quality 0/100, No Schema Markup Detected**
 
 **Bucket:** AI Opportunity
 
-**Finding:** We score Discovery Readiness at 25/100 (Needs Improvement) for typo3.com. None of the five well-known discovery artefacts we check are reachable on this host: llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt are all absent. Without these artefacts, machines that build knowledge surfaces by crawling well-known endpoints have no structured entry point into typo3.com's content model, identity, or permissions posture. The site's crawlable HTML remains accessible, but the guided, machine-optimised layer is entirely missing.
+**Finding:** We score Structured Data Quality at 0/100 (Needs Improvement) across the audited set. We detect no schema markup on any of the 12 audited pages. Without structured data, machines reading typo3.com pages cannot extract typed facts (product names, software descriptions, pricing, authorship, organisation identity) with confidence. This means typo3.com is less likely to be surfaced as a structured-fact source in agent answers, and rich-result eligibility in search is also absent.
 
 **What to change and why:**
-- Publish llms.txt at the well-known path on typo3.com. This file tells machines which sections of the site contain authoritative content and which should be deprioritised. We recommend serving it as `text/html`; note that our recommendation here diverges from the llmstxt.org specification, which defines a plain-text format. Publishing llms.txt is the single highest-leverage step because it unlocks the guided-discovery layer for a broad class of machines.
-- Publish llms-full.txt to provide a richer, expanded content map for machines that follow the extended specification. This complements llms.txt and improves the depth of machine understanding beyond the summary index.
-- Publish agent-card.json to declare typo3.com's identity, capabilities, and contact information in a structured format that agent orchestration layers can consume. This is the foundation of machine-to-machine trust and is a prerequisite for moving toward citation-ready status.
-- Add ai.txt and humans.txt to complete the discovery surface. ai.txt communicates permissions and preferences to AI crawlers; humans.txt documents the team behind the site for any reader, human or machine, looking for attribution context.
+- Implement Schema.org markup covering at minimum the Organisation and SoftwareApplication types, as these are the most directly relevant to a CMS-vendor site and give machines typed identity and product facts to work with.
+- Add markup for page-level content types (Article, FAQPage, BreadcrumbList as applicable) so that machines can classify individual pages and extract structured facts from them.
+- Moving Structured Data Quality from 0/100 to a working baseline directly improves MX Stack Completeness (currently 49/100) and is a prerequisite for advancing beyond MX Readiness Level 1.
+- Prioritise pages that represent typo3.com's core value proposition (product pages, feature pages) as these are the most likely candidates for agent citation once structured data is present.
 
 **Effort:** Medium
 
 ---
 
-**Priority 8: Structured Data Quality 0/100, no schema markup detected**
+**Priority 10: MX Stack Completeness 49/100, Discovery and Governance Gaps**
 
 **Bucket:** AI Opportunity
 
-**Finding:** We record a Structured Data Quality score of 0/100 (Needs Improvement) across the audited set. We detected no schema markup on any of the 7 audited pages, meaning machines attempting to extract structured facts about typo3.com's products, organisation, or content have no machine-readable graph to work from. Without schema, entity attribution is inferred from unstructured text rather than declared data, which reduces agent confidence and makes citation eligibility harder to establish.
+**Finding:** We score MX Stack Completeness at 49/100 (Could Be Better). The score reflects gaps across three contributing categories: discovery artefacts (llms.txt, llms-full.txt, agent-card.json, ai.txt, and humans.txt are all absent, addressed in Priority 8), structured data coverage (SDQ is 0/100, addressed in Priority 9), and MX governance fields in page frontmatter (canonicalUri, contentType, audience, and status are not consistently present across the audited set). Machines assessing typo3.com as a potential citation source use these signals collectively; gaps in any category reduce overall agent confidence and keep typo3.com at MX Readiness Level 1, where agents can discover and parse pages but cannot yet cite the site as an attested source.
 
 **What to change and why:**
-- Introduce Organisation schema on the root domain to declare typo3.com's identity, including name, URL, logo, and sameAs links to authoritative external profiles. This gives machines a verified anchor for entity resolution and is the minimum foundation for improving the SDQ score from zero.
-- Add appropriate content-type schema to key page templates, for example WebPage, Article, or SoftwareApplication where relevant to typo3.com's product and content model. Schema applied at the template level propagates across every page that uses the template, maximising coverage from a single engineering effort.
-- Include sameAs links in the Organisation schema to connect typo3.com to its recognised profiles on external platforms. This strengthens entity confidence for machines that cross-reference multiple sources when deciding whether to attribute a claim to a domain.
-- Validate schema output on a representative sample of pages after deployment to confirm markup is well-formed and resolves without errors; malformed schema can score lower than absent schema on some evaluation pipelines.
-
-**Effort:** Medium
-
----
-
-**Priority 9: MX Stack Completeness 50/100, discovery and governance gaps**
-
-**Bucket:** AI Opportunity
-
-**Finding:** We score MX Stack Completeness at 50/100 (Could Be Better) for typo3.com. Two categories contribute to this gap: the discovery artefact layer (addressed in Priority 7) and MX governance fields in page frontmatter, specifically the canonicalUri, contentType, audience, and status fields, which we do not detect across the audited set. Without these governance fields, machines processing the page cannot determine its canonical identity, intended audience, content type, or publication status from structured metadata; they must infer these from content alone, which reduces confidence in any downstream attribution or summarisation.
-
-**What to change and why:**
-- Add MX governance fields to page frontmatter across the audited set, covering canonicalUri, contentType, audience, and status. Each field removes a category of inference that machines must otherwise make from unstructured content, directly improving MX Stack Completeness.
-- Align the canonicalUri field with the canonical link element already present in the page head so that both human-facing and machine-facing signals agree on the page's authoritative address. Consistency between the two reduces the risk of machines resolving a different canonical than search crawlers do.
-- Define contentType and audience values for each major template and apply them at the template layer so that all pages rendered from a template inherit correct values without per-page editorial effort.
-- Treat the discovery artefact work in Priority 7 and the governance field work here as a coordinated programme; the MX Stack Completeness score reflects both categories together, and resolving only one will leave the score at a partial state.
-
-**Effort:** Medium
+- Once the discovery artefacts and structured data work in Priorities 8 and 9 are in progress, address the MX governance fields by adding canonicalUri, contentType, audience, and status declarations to page frontmatter; these fields give machines the context they need to classify content accurately and assess its authority.
+- Treat MX Stack Completeness as the composite score it is: progress on discovery artefacts and structured data will lift it, but the governance fields represent an independent category that requires its own attention
 
 ### Optional Enhancements
 
 These are not issues but areas where additional metadata or patterns would strengthen this site's machine readiness.
 
+- **SameAs links on Organisation**: adding `sameAs` properties pointing to typo3.com's Wikidata and LinkedIn entries on an Organisation entity would allow machines to cross-reference the brand across knowledge graphs and improve citation confidence when agents resolve the publisher's identity.
 
+- **BreadcrumbList on deep content pages**: typo3.com serves a large page tree (278 URLs in the sitemap), and structured breadcrumb markup on deeper pages would give machines an unambiguous path context that URL structure alone cannot guarantee.
 
-
-
-- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt: declaring content-use policy for AI agents via Content-Signal directives would give machines an explicit, machine-readable statement of how Typo3's content may be used, reducing ambiguity for any agent that ingests the site.
+- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt to declare content-use policy for AI agents, giving machines a machine-readable signal about how typo3.com content may be used in training and inference pipelines.
 
 ---
 
@@ -416,9 +429,9 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://typo3.com/case-studies`. A first-time visitor sees the cold-cache cost: the crawler recorded 956 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 254ms (HTTP 404), 156ms (HTTP 404), 145ms (HTTP 404); no median is reported because no sample returned a usable timing. **Returning-visitor verdict: Indeterminate**.
+**Slowest.** The slowest page is `https://typo3.com/case-studies`. A first-time visitor sees the cold-cache cost: the crawler recorded 1485 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 247ms (HTTP 404), 168ms (HTTP 404), 427ms (HTTP 404); no median is reported because no sample returned a usable timing. **Returning-visitor verdict: Indeterminate**.
 
-**Median-load control.** The median-load control page is `https://typo3.com/typo3-cms/why-typo3`. A first-time visitor sees the cold-cache cost: the crawler recorded 874 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 232ms (HTTP 404), 162ms (HTTP 404), 160ms (HTTP 404); no median is reported because no sample returned a usable timing. **Returning-visitor verdict: Indeterminate**.
+**Median-load control.** The median-load control page is `https://typo3.com/typo3-cms/why-typo3`. A first-time visitor sees the cold-cache cost: the crawler recorded 979 ms on its initial fetch. **First-visit verdict: Healthy**. Three cache-busted re-probes that followed returned 1068ms (HTTP 404), 160ms (HTTP 404), 187ms (HTTP 404); no median is reported because no sample returned a usable timing. **Returning-visitor verdict: Indeterminate**.
 
 **Verdict:** First-visit response time is within healthy bounds. The returning-visitor view is Indeterminate for both pages because cache-busted re-probes were rate-limited (HTTP 429) or otherwise unsuccessful, so we cannot characterise the warmed-cache experience from this audit.
 
@@ -432,7 +445,7 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 # robots.txt not found at origin
 ```
 
-We found no robots.txt file reachable on typo3.com, which means machines receive no crawl directives, no disallow paths are declared, and no sitemap location is announced.
+We found no robots.txt file at typo3.com, meaning machines receive no crawl guidance, no disallow paths, and no sitemap declaration from this endpoint.
 
 ### sitemap.xml
 
@@ -445,15 +458,15 @@ We found no robots.txt file reachable on typo3.com, which means machines receive
 
 **Sitemap grade:** Partial
 
-We grade the sitemap Partial: it covers 278 URLs and carries both lastmod and priority attributes, yet the absence of changefreq values leaves crawlers without explicit guidance on how frequently each URL is expected to change.
+The sitemap declares 278 URLs and earns a Partial grade, with lastmod and priority values present throughout but no changefreq attributes supplied to guide crawl scheduling.
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We found no llms.txt file present on typo3.com, meaning machines that consult this endpoint before crawling or summarising content receive no site description, page inventory, or content policy. We recommend adding llms.txt to give machines a structured, authoritative entry point into the content.
+We found no llms.txt at the site root, meaning machines that query typo3.com for a structured content index receive no site description, no page inventory, and no content policy. We recommend adding llms.txt to give machines the structured entry point they need to discover and interpret the content offered here.
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-We did not locate llms-full.txt on typo3.com; the endpoint returns a 404 and the file is referenced neither in the sitemap nor in the homepage head. Publishing llms-full.txt would provide machines with an expanded, richer content map; so we treat that step as conditional on a broader content review.
+We found no llms-full.txt at typo3.com; the endpoint returns a 404 with no reference to it in the sitemap or the homepage head. Whether adding this file would deliver meaningful value depends on the depth of the full content set, which the audited sample does not yet measure, so we recommend treating its creation as conditional on a fuller content review.
 
 ### agent-card.json (A2A)
 
@@ -469,7 +482,7 @@ No additional registered `/.well-known/` or root discovery files were detected o
 
 No Schema.org JSON-LD entities were detected across the audited set. Adding at least one typed entity per page (e.g. `Organisation` on the homepage, `Product` or `Article` on content pages) is the highest-impact improvement for machine readability.
 
-Across the 7 pages we audited, structured data is limited. Machines cannot reliably extract entity data from these pages. Adding Schema.org JSON-LD with required properties is the highest-impact improvement, and 
+Across the 12 pages we audited, structured data is limited. Machines cannot reliably extract entity data from these pages. Adding Schema.org JSON-LD with required properties is the highest-impact improvement, and the gaps identified on the audited sample may recur elsewhere in the full estate.
 
 ### SDQ Score Breakdown
 
@@ -563,7 +576,7 @@ The MX Journey maps the five stages a machine follows when interacting with a we
 | 4 | Price Understanding | Site type does not require | -- | No pricing content detected |
 | 5 | Purchase Confidence | Site type does not require | -- | No transaction forms detected |
 
-Partially Compatible; Search & Compare, Price Understanding, and Purchase Confidence are not applicable to this site type, and neither of the two relevant stages currently passes.
+Partially Compatible; the three commerce-oriented stages (Search & Compare, Price Understanding, and Purchase Confidence) are not applicable to this site type, and neither of the two relevant stages currently pass.
 
 ---
 
@@ -573,49 +586,49 @@ Scoring a machine's metadata is not the same as scoring whether a machine can re
 
 Every check runs on every audited page. The aggregate score weights truncation resilience, SPA resilience, and proper 404 signalling most heavily: these three determine whether each page is reachable to the agent at all. Boilerplate burial, tabbed disclosure, and delayed content start carry medium weight. The remaining checks contribute to the score but any single one slipping is less critical on its own.
 
-- **Truncation Risk** - Fail · 1/7
+- **Truncation Risk** - Fail · 1/12
   - *Means:* 1 page(s) flag for truncation risk because their main content (the first <main>, <article>, or top heading) sits past the 50 KB safe-fetch offset, even though no page exceeds the 250 KB hard ceiling. Agents with limited fetch windows may stop reading before they reach prose.
   - *Data:* Largest page: 231 KB. Thresholds: 250 KB hard ceiling; 50/75/100 KB content-offset windows. Page: https://typo3.com/partners
-- **SPA Shell** - Pass · 7/7
+- **SPA Shell** - Pass · 12/12
   - *Means:* Served HTML matches rendered HTML - no JavaScript is required for content. Server-side agents see the same content a browser does.
-  - *Data:* Max gap score: 11. 0 means served and rendered match.
-- **Soft 404** - Pass · 7/7
+  - *Data:* Max gap score: 9. 0 means served and rendered match.
+- **Soft 404** - Pass · 12/12
   - *Means:* Missing pages return a proper HTTP 404 status. No pages misleadingly return 200 for non-existent URLs.
   - *Data:* 0 soft-404 page(s) detected.
-- **Boilerplate Burial** - Pass · 7/7
+- **Boilerplate Burial** - Pass · 12/12
   - *Means:* Navigation and chrome do not dominate the page; main content is reachable without wading through overhead.
-  - *Data:* Highest boilerplate-to-content ratio: 0.40. Threshold: < 10 (and < 80 KB of inline head bytes).
-- **Tabbed Disclosure** - Pass · 7/7
+  - *Data:* Highest boilerplate-to-content ratio: 0.41. Threshold: < 10 (and < 80 KB of inline head bytes).
+- **Tabbed Disclosure** - Pass · 12/12
   - *Means:* No content is hidden behind JavaScript tabs. All content is directly reachable in the served HTML.
   - *Data:* 0 page(s) with tab widgets.
-- **Delayed Content Start** - Pass · 4/4
+- **Delayed Content Start** - Pass · 7/7
   - *Means:* Main content begins early in the document. Agents that truncate fetches reach the lead paragraphs easily.
-  - *Data:* Content starts at up to 32% of the document on some pages. Check applied to 4 of 7 audited pages; the remaining 3 pages were skipped by a size or eligibility gate.
-- **Broken Code Fences** - Pass · 7/7
+  - *Data:* Content starts at up to 32% of the document on some pages. Check applied to 7 of 12 audited pages; the remaining 5 pages were skipped by a size or eligibility gate.
+- **Broken Code Fences** - Pass · 12/12
   - *Means:* All fenced code blocks are properly balanced. No parser-confusion risk for agents reading prose that contains code examples.
   - *Data:* 0 page(s) with unbalanced fenced code blocks.
-- **HTTP Content Negotiation (Vary)** - Pass · 7/7
+- **HTTP Content Negotiation (Vary)** - Pass · 12/12
   - *Means:* The server returns a single content type per URL. No Vary-on-Accept ambiguity that could confuse agents.
   - *Data:* 0 page(s) advertise format negotiation.
-- **Cross-Host Redirect** - Pass · 7/7
+- **Cross-Host Redirect** - Pass · 12/12
   - *Means:* No cross-domain redirects. Agents follow internal redirects without host-boundary issues.
   - *Data:* 0 page(s) cross origin during redirect.
-- **Generic Headings** - Pass · 7/7
+- **Generic Headings** - Pass · 12/12
   - *Means:* Every heading carries specific content; no page is dominated by generic labels like "Overview" or "Introduction".
   - *Data:* Worst case: 0% generic headings.
-- **Body Content Ratio** - Pass · 4/4
-  - *Means:* Actual prose content averages 73% of served bytes - well above the 30% threshold. Pages are content-heavy, not overhead-heavy.
-  - *Data:* Average: 73%. Threshold: 30%. Check applied to 4 of 7 audited pages; the remaining 3 pages were skipped by a size or eligibility gate.
-- **Inline Tag Bloat** - Fail · 2/7
+- **Body Content Ratio** - Pass · 7/7
+  - *Means:* Actual prose content averages 79% of served bytes - well above the 30% threshold. Pages are content-heavy, not overhead-heavy.
+  - *Data:* Average: 79%. Threshold: 30%. Check applied to 7 of 12 audited pages; the remaining 5 pages were skipped by a size or eligibility gate.
+- **Inline Tag Bloat** - Fail · 2/12
   - *Means:* 2 page(s) carry inline `<style>` or executable `<script>` blocks over 500 bytes. Externalising these to separate .css/.js files lets agents skip them during cheap fetches.
   - *Data:* 5 element(s) > 500 bytes. Largest single-page inline CSS block: 4365 B. Largest single-page inline JS block: 42011 B. See typo3-com-pipeline-inline-tag-bloat-pages.csv (2 pages).
-- **Head Weight** - Pass · 4/4
+- **Head Weight** - Pass · 7/7
   - *Means:* Head bytes are a small fraction of each page. Agents reach body content quickly.
-  - *Data:* Max ratio: 0.18. Average: 0.03. Threshold: 0.50. Check applied to 4 of 7 audited pages; the remaining 3 pages were skipped by a size or eligibility gate.
+  - *Data:* Max ratio: 0.18. Average: 0.02. Threshold: 0.50. Check applied to 7 of 12 audited pages; the remaining 5 pages were skipped by a size or eligibility gate.
 
-**Pipeline Survivability score:** 96/100
+**Pipeline Survivability score:** 98/100
 
-Across the audited set, pipeline survivability is strong at 96/100, and the two checks that warrant attention are Truncation Risk and Inline Tag Bloat, with Inline Tag Bloat appearing on the greater share of audited pages. When machines ingest content that carries excess inline markup, they may allocate processing capacity to structural noise rather than the substantive text, so reducing that bloat represents the most practical single step available to us for strengthening machine readability across the audited set.
+Across the audited set, resilience is strong, with the two checks that warrant attention being Truncation Risk and Inline Tag Bloat, the latter touching a small number of the audited pages. When machines ingest content that carries excess inline tagging, they may spend parsing capacity on markup rather than meaning, which can reduce the fidelity of what they extract. Addressing Inline Tag Bloat across the affected pages would deliver the greatest single improvement to how reliably machines read and represent typo3.com content.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -629,9 +642,9 @@ We run the Div Soup check on both served and rendered HTML so we can tell whethe
 
 | Source | Score (band) | Bare div stats | Top bare selectors |
 |--------|--------------|----------------|--------------------|
-| Rendered HTML | 23/100 (high) | 234 bare divs · 70% ratio · depth 7 | `div.frame-group-container` (85), `div.frame-group-inner` (85), `div.frame-container.frame-container-default` (85), `div.frame-inner` (85), `div.partner-list-item__types` (20) |
+| Rendered HTML | 22/100 (high) | 222 bare divs · 72% ratio · depth 7 | `div.frame-group-container` (93), `div.frame-group-inner` (93), `div.frame-container.frame-container-default` (93), `div.frame-inner` (93), `div.container` (35) |
 
-On the worst-performing page we audited, https://typo3.com/, the rendered surface carries a bare-div ratio of 70% (234 of 332 elements), meaning machines lose structural context and must rely on positional inference to determine meaning. The pattern here is structural rather than merely surface-wide: a deepest bare chain of 7, combined with repeated high-count selectors such as `div.frame-group-container`, `div.frame-group-inner`, `div.frame-container.frame-container-default`, and `div.frame-inner`, each appearing 85 times, points to a component framework where layout containers are generated as generic divs rather than typed semantic elements. The most immediate opportunity is to wrap the obvious landmarks (header, nav, main, footer, aside) in their native HTML equivalents and assign meaningful class names to the remaining containers, so the bare-div ratio falls without requiring a layout restructure.
+On the worst-performing page we recorded, https://typo3.com/, the rendered surface carries a bare-div ratio of 72%, meaning machines lose structural context across that page and fall back on positional inference to determine meaning. The pattern here is both deep and surface-wide: a deepest bare chain of 7 combined with a high bare ratio points to a component framework where layout containers are stacked without semantic roles, a behaviour pattern consistent with untyped component wrappers rather than a drag-and-drop builder. The most direct first move is to wrap the obvious landmarks, header, nav, main, footer, and aside, with their corresponding semantic elements, then assign meaningful class names to the dominant bare selectors such as `div.frame-group-container`, `div.frame-group-inner`, `div.frame-container.frame-container-default`, and `div.frame-inner`, which together account for the bulk of the count; this reduces the bare-div ratio without requiring any layout restructuring.
 
 ---
 
@@ -645,9 +658,9 @@ On the worst-performing page we audited, https://typo3.com/, the rendered surfac
 | X-Frame-Options | No | Prevents clickjacking |
 | X-Content-Type-Options | Yes | Prevents MIME-type sniffing |
 
-3 of the five standard security headers are absent across every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP), X-Frame-Options. Adding these at the origin-server or CDN edge closes the corresponding attack surfaces without touching application code.
+3 of the five standard security headers are absent on every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP), X-Frame-Options. Adding them at the origin-server or CDN edge closes the corresponding attack surfaces without touching application code.
 
-**Coverage:** 0 of 7 audited URLs carry all five headers; see the Security Headers appendix for the full exception list.
+**Coverage:** 0 of 12 audited URLs carry all five headers; see the Security Headers appendix for the full exception list.
 
 - **`/`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
 - **`/case-studies`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
@@ -656,8 +669,13 @@ On the worst-performing page we audited, https://typo3.com/, the rendered surfac
 - **`/partners`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
 - **`/typo3-cms/what-is-typo3`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
 - **`/typo3-cms/why-typo3`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
+- **`/typo3-cms/the-brand`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
+- **`/typo3-cms/the-typo3-story`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
+- **`/partner`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
+- **`/privacy-policy`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
+- **`/legal-notice`**: HTTPS Yes · HSTS No · CSP No · X-Frame No · X-Content-Type Yes
 
-HTTPS: 7/7 | HSTS: 0/7 | CSP: 0/7 | X-Frame-Options: 0/7 | X-Content-Type-Options: 7/7
+HTTPS: 12/12 | HSTS: 0/12 | CSP: 0/12 | X-Frame-Options: 0/12 | X-Content-Type-Options: 12/12
 
 ---
 
@@ -665,20 +683,20 @@ HTTPS: 7/7 | HSTS: 0/7 | CSP: 0/7 | X-Frame-Options: 0/7 | X-Content-Type-Option
 
 | Pattern | Coverage | Pages missing it |
 |---------|----------|------------------|
-| Schema.org JSON-LD | 0% | 7 |
-| MX governance tags | 0% | 7 |
-| Open Graph tags | 0% | 7 |
-| Twitter Card tags | 0% | 7 |
-
-| llms.txt link tag | 0% | 7 |
+| Schema.org JSON-LD | 0% | 12 |
+| MX governance tags | 0% | 12 |
+| Open Graph tags | 0% | 12 |
+| Twitter Card tags | 0% | 12 |
+| Skip link | Inconsistent | 12 |
+| llms.txt link tag | 0% | 12 |
 | Canonical URL | 100% | - |
-| Exactly 1 H1 | 100% | - |
-| Code examples present | 0% | 7 |
+| Exactly 1 H1 | 83% | 2 |
+| Code examples present | 0% | 12 |
 | Self-contained sections | 100% | - |
-| Error/troubleshooting docs | 0% | 7 |
-| Lighthouse heading compliance | 0% | 7 |
+| Error/troubleshooting docs | 0% | 12 |
+| Lighthouse heading compliance | 0% | 12 |
 
-**Overall Consistency:** 30%
+**Overall Consistency:** 28%
 
 ## Content Consistency
 
@@ -695,15 +713,11 @@ The audited set shows consistent metadata patterns across pages, with no organis
 
 ## Inline Code Duplicates
 
-We found 6 identical inline fragment(s) repeated across multiple pages, totalling 1509 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
+We found 2 identical inline fragment(s) repeated across multiple pages, totalling 4 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
 
 | Type | Bytes per fragment | Appears on N pages | Preview |
 |------|-------------------:|-------------------:|---------|
-| css | 218748 | 7 | @keyframes ucOpacity{0%{opacity:0}100%{opacity:1}}.usercentr |
-| css | 773 | 7 | .usercentrics-button .uc-corner-modal .uc-corner-modal-conte |
-| css | 652 | 7 | #usercentrics-button .uc-banner-content {       background-c |
-| js | 373 | 7 | (function(w,d,s,l,i){w[l]=w[l]\|\|[];w[l].push({'gtm.start':   |
-| css | 151 | 7 | #uc-corner-modal a[href], #uc-centre-modal a[href], #uc-bann |
+| js | 373 | 12 | (function(w,d,s,l,i){w[l]=w[l]\|\|[];w[l].push({'gtm.start':   |
 | css | 20 | 5 | .cls-1{fill:#f18518} |
 
 *The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `typo3-com-inline-code-duplicates.csv`.*
@@ -714,11 +728,42 @@ We found 6 identical inline fragment(s) repeated across multiple pages, totallin
 
 ## PDF Documents: Accessibility and Machine Readability
 
-Across the audited set, PDF accessibility sits at the intersection of two independent concerns: accessibility legislation has converged globally on ISO 14289-1 (PDF/UA) as the technical baseline, with the EU's Directive (EU) 2019/882 (EAA, in force 28 June 2025) serving as the most precisely codified instance of a standard that Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada all resolve to in parallel. A tagged PDF with a complete structure tree is also machine-readable in the same way that semantic HTML is; without that tagging, machines cannot extract text, entities, or structure from a document, making untagged PDFs invisible to search crawlers, AI systems, and automated pipelines alike.
+Across the audited set, we find that accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the shared technical baseline: the EAA (Directive (EU) 2019/882, in force 28 June 2025) is the most precisely codified example, but Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada resolve to the same structural requirement. The machine-readability dimension is equally consequential and independent: an untagged or image-based PDF is opaque to search crawlers, AI systems, and automated pipelines in the same way that unsemantic markup is, while a properly tagged PDF with a complete structure tree gives machines the same foothold that well-formed HTML does.
 
-We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
+1 PDF document(s) were identified by the audit: those linked from the crawled pages combined with those declared in the sitemap. PDFs whose only source is the sitemap are marked as such in the inventory. Accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the technical baseline across major markets: the EAA (Directive (EU) 2019/882, in force 28 June 2025) in the EU, Section 508 in the US, UK PSBAR 2018, and equivalent laws in Australia and Canada all treat public-facing PDFs as regulated digital services for in-scope businesses. The MX Document Accessibility note specifies a three-layer conformance contract: **Tagged** (Level 1, ISO 14289-1 PDF/UA), **Declared** (Level 2, XMP `pdfuaid:part`), **Verified** (Level 3, recorded check).
 
-**Contact us for a wider PDF audit.** If you publish datasheets, white papers, investor documents, product manuals, accessibility statements, annual reports, or any other public-facing documents that were not reached by this sample, a focused PDF audit walks the full estate, checks every document against the ISO 14289-1 (PDF/UA) baseline (Tagged, Declared, Verified), and produces a per-document verdict you can act on. The audit you are reading covers HTML structure, structured data, and machine-readability across the crawled pages; the document layer is a separate engagement we run on request.
+**Scope note:** this inventory covers PDFs reachable from the crawled pages plus any `.pdf` URLs the sitemap declares. PDFs behind login forms, linked only from uncrawled pages, stored in unlinked directories that are kept out of the sitemap, or hosted on third-party domains still fall outside the crawl boundary. A wider-scope engagement is needed for a complete picture of accessibility exposure across the full document estate.
+
+### Inventory
+
+| URL | Source page | Has HTML alternative |
+|-----|-------------|----------------------|
+| https://typo3.com/fileadmin/TYPO3_org_assets/History/2014-04-06_15-40_Berlin_Manifesto_-_TYPO3.pdf | https://typo3.com/typo3-cms/the-typo3-story | No |
+
+### Sample analysis: first PDF
+
+We sampled the first PDF in the inventory with the heuristic checker. Findings:
+
+| Layer | Status | What this means |
+|-------|--------|-----------------|
+| Level 1: Tagged (ISO 14289-1) | **fail** | Structure tree + `/Marked true` declaration |
+| Level 2: Declared (XMP `pdfuaid:part`) | n/a | Public conformance claim in the document metadata |
+| Level 3: Verified (independent check) | n/a: out of scope of this snapshot | Vendor or in-house validator run, recorded in `provenancePedigree.checks[]` |
+
+**Accessibility exposure on this sample: high.** 
+
+**This PDF does not meet the ISO 14289-1 (PDF/UA) baseline.** Accessibility legislation across major markets (EAA, Section 508, UK PSBAR) treats Level 1 as the structural floor for in-scope public PDFs; non-conformance with the baseline is the regulatory finding, not a stylistic note. We inspected the sample against the cached PDF bytes (sha256 `78cd5ed75f360ab7f515111565863a8f3fbacd14144c7f125283aff4359aba1a`); the verdict is reproducible offline against the same bytes.
+
+### Future work: full PDF accessibility engagement
+
+This is a one-PDF sample. The full PDF Accessibility Audit service runs the same checker over every document in the inventory and adds:
+
+- per-document Level 1 / Level 2 / Level 3 reports with remediation guidance
+- structural fixes (alt-text, reading order, tag tree) where the source pipeline supports them
+- `provenancePedigree.checks[]` entries to record outcomes in the document metadata
+- a regression-safe re-check schedule so each new release stays within the accessibility compliance boundary
+
+Enforcement penalties vary by jurisdiction and enterprise size: the EAA (Directive (EU) 2019/882) carries fines ranging from low four-figure to six-figure euro sums depending on severity, and Section 508 and ADA Title III carry litigation exposure in the US market. The structural issues above are the cheapest layer to fix; most disappear at PDF generation time once the source pipeline is configured to emit tagged PDFs.
 
 ---
 
@@ -726,7 +771,7 @@ We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: address the 35 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
+1. **Address Priority 1 findings**: address the 43 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
 2. **Review Priority 2-3 findings**: Structured Data improvements and metadata tuning that compound over time
 3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search
 
@@ -734,8 +779,8 @@ We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | P1, P2, P3, P4, P5 (Compliance Risk) | Priority 1, 2, 3, 4, 5 resolved — WCAG 2.1 AA accessibility compliance restored |
-| Full Optimisation | P1, P2, P3, P4, P5, P6, P7, P8, P9 (P1–P9) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Critical Fixes | P1, P2, P3, P4, P5, P6 (Compliance Risk) | Priority 1, 2, 3, 4, 5, 6 resolved — WCAG 2.1 AA accessibility compliance restored |
+| Full Optimisation | P1, P2, P3, P4, P5, P6, P7, P8, P9, P10 (P1–P10) | Full machine readiness — every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | durable visibility in agent-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 
@@ -743,37 +788,42 @@ We linked no PDFs from the 7-page sample we crawled, and the sitemap declares no
 
 ## Summary of Findings
 
-Across the audited set, https://typo3.com performs at its strongest in SEO, scoring 80/100, which gives human visitors a well-structured and findable experience. The clearest opportunities lie in Structured Data, which scores 0/100, and Discovery Readiness at 25/100, both of which limit what machines can read, interpret, and act upon when encountering the site. We invite the team at https://typo3.com to work through the findings that follow and take those first steps toward a richer, machine-ready presence.
+Across the audited set, https://typo3.com performs well on technical SEO, scoring 81/100, which gives human visitors and search crawlers a strong foundations to work from. Structured Data and Discovery Readiness are the clearest opportunities, scoring 0/100 and 25/100 respectively, meaning machines currently have limited signals to parse, attribute, or act on the content they encounter. The team should review the findings that follow and prioritise the steps that will extend that foundation to machine audiences.
 
 ### Audit Scores
 
 | Dimension | Score | Band |
 |-----------|-------|------|
 | AI Agent Suitability | 85/100 | Excellent |
-| Accessibility | 86/100 | Excellent |
-| SEO (all pages) | 80/100 | Excellent |
+| Accessibility | 88/100 | Excellent |
+| SEO (all pages) | 81/100 | Excellent |
 | SEO (content pages) | 81/100 | Excellent |
-| MX Stack Completeness | 50/100 | Could Be Better |
+| MX Stack Completeness | 49/100 | Could Be Better |
 | Structured Data Quality | 0/100 | Needs Improvement |
 | Commerce Visibility | 0/100 | Needs Improvement |
 | Discovery Readiness | 25/100 | Needs Improvement |
-| Heading Quality | 90/100 | Excellent |
-| Semantic Ratio | 3% | Needs Improvement |
-| Agent Readability | 71/100 | Good |
-| Pipeline Survivability | 96/100 | Excellent |
-| Cross-Page Consistency | 30% | Could Be Better |
+| Heading Quality | 84/100 | Excellent |
+| Semantic Ratio | 5% | Needs Improvement |
+| Agent Readability | 67/100 | Good |
+| Pipeline Survivability | 98/100 | Excellent |
+| Cross-Page Consistency | 28% | Could Be Better |
 
 ---
 
 ## Appendix A: Pages Audited
 
-- **`/ (nav)`**: SEO 77 · A11y 90 · Back 45 · Served 95 · Rendered 100
+- **`/ (nav)`**: SEO 76 · A11y 95 · Back 45 · Served 95 · Rendered 100
 - **`/case-studies`**: SEO 83 · A11y 80 · Back 45 · Served 65 · Rendered 76
-- **`/products-services`**: SEO 69 · A11y 90 · Back 45 · Served 95 · Rendered 100
-- **`/solutions`**: SEO 83 · A11y 85 · Back 45 · Served 95 · Rendered 100
-- **`/partners`**: SEO 88 · A11y 75 · Back 45 · Served 55 · Rendered 60
-- **`/typo3-cms/what-is-typo3`**: SEO 83 · A11y 90 · Back 45 · Served 95 · Rendered 100
-- **`/typo3-cms/why-typo3`**: SEO 79 · A11y 90 · Back 45 · Served 95 · Rendered 100
+- **`/products-services`**: SEO 69 · A11y 95 · Back 45 · Served 95 · Rendered 100
+- **`/solutions`**: SEO 86 · A11y 85 · Back 45 · Served 95 · Rendered 95
+- **`/partners`**: SEO 88 · A11y 75 · Back 45 · Served 55 · Rendered 55
+- **`/typo3-cms/what-is-typo3`**: SEO 85 · A11y 90 · Back 45 · Served 95 · Rendered 95
+- **`/typo3-cms/why-typo3`**: SEO 82 · A11y 90 · Back 45 · Served 95 · Rendered 95
+- **`/typo3-cms/the-brand`**: SEO 83 · A11y 90 · Back 45 · Served 95 · Rendered 95
+- **`/typo3-cms/the-typo3-story`**: SEO 88 · A11y 90 · Back 45 · Served 75 · Rendered 75
+- **`/partner`**: SEO 63 · A11y 90 · Back 45 · Served 84 · Rendered 84
+- **`/privacy-policy`**: SEO 88 · A11y 90 · Back 45 · Served 95 · Rendered 95
+- **`/legal-notice`**: SEO 76 · A11y 90 · Back 45 · Served 79 · Rendered 79
 
 The page marked (nav) is navigational: it routes visitors to content rather than containing it, and is excluded from the SEO content average. Content-pages SEO average: 81/100.
 
@@ -781,11 +831,11 @@ The page marked (nav) is navigational: it routes visitors to content rather than
 
 ## Appendix B: Link Inventory
 
-We recorded every internal link found on every audited page: 451 links in total. Link status was not probed; for a dedicated broken-link audit, run a rate-limited crawler on the link set at a time that suits the site.
+We recorded every internal link found on every audited page: 729 links in total. Link status was not probed; for a dedicated broken-link audit, run a rate-limited crawler on the link set at a time that suits the site.
 
 | Link class                      | Count |
 | ------------------------------- | ----: |
-| Same-host internal links        | 451   |
+| Same-host internal links        | 729   |
 | External links                  | 0     |
 | Anchor-only (`#fragment`) links | 0     |
 | mailto / tel links              | 0     |
@@ -794,9 +844,9 @@ We recorded every internal link found on every audited page: 451 links in total.
 
 ## Appendix C: Image Optimisation
 
-Across the audited set, we catalogued 143 images in total. The format distribution skews heavily toward SVG (80 images) and WebP (54 images), with a smaller tail of PNG (9 images) and no JPEG images at all. On alt text, 113 of those 143 images carry a text alternative, giving 79.0% coverage; the remaining 30 are missing alt text entirely, which represents a meaningful accessibility gap for screen-reader users and a signal machines use when indexing visual content.
+Across the audited set, we sampled 179 images in total. The format distribution skews strongly toward SVG and WebP, with 100 SVG files and 70 WebP files accounting for the clear majority, while the remaining 9 images are PNG. We recorded no JPEG images in the pages we reviewed. Alt-text coverage stands at 149 images carrying descriptive text, 83.2% of the total, leaving 30 images without alt attributes. For a developer audience, that gap is worth addressing methodically: decorative images need an empty alt to be correctly silenced for screen readers, while informative images need meaningful descriptions.
 
-On loading strategy, 94 images across the audited set carry `loading="lazy"`, and none are set to `loading="eager"`. The remaining 49 images have no loading attribute set at all. That third state is worth separating from eager: without an explicit attribute, the browser applies its own heuristics to decide when to fetch each image, which can mean above-the-fold images load later than intended or below-the-fold images fetch sooner. For images that should be in the viewport on arrival, we recommend adding `loading="eager"` explicitly; for everything else, `loading="lazy"` is the right call. We found no JS Lazy Pattern or Double Lazy instances across the audited set, so there are no conflicting lazy-load mechanisms to untangle.
+On loading strategy, 95 images carry an explicit `loading="lazy"` attribute, which is the correct signal for below-the-fold content. None carry `loading="eager"`. The remaining 84 images have no loading attribute set at all, and it is worth being precise here: the absence of a loading attribute is not equivalent to `loading="eager"`. When no attribute is present, the browser applies its own heuristics, typically loading the image eagerly if it appears early in the document, but the behaviour is not guaranteed or consistent across engines. For images that are intentionally above the fold and business-critical, setting `loading="eager"` explicitly removes that ambiguity and makes the intent legible to both the browser and future maintainers.
 
 > **Double-lazy loading pattern not detected** - no image in the audited set carries both native `loading="lazy"` and a JavaScript lazyload placeholder at the same time.
 
@@ -814,7 +864,7 @@ Pa11y is an open-source automated accessibility testing tool that checks web pag
 
 **Link inventory:** We record every internal link found on every audited page with its URL, anchor text, and link type. We do not probe link status: a dedicated, rate-limited broken-link crawler handles that separately and avoids hammering the origin. Appendix B is a link inventory, not a broken-link list.
 
-**Scope:** 7 pages analysed | Platform: TYPO3 CMS | Analysis method: Hybrid (automated + manual verification) | robots.txt: Absent
+**Scope:** 12 pages analysed | Platform: TYPO3 CMS | Analysis method: Hybrid (automated + manual verification) | robots.txt: Absent
 
 ---
 

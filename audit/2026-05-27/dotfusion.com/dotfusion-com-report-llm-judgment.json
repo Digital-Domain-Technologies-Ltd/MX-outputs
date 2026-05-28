@@ -1,33 +1,33 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dotfusion.com/dotfusion-com-report.md",
-  "timestamp": "2026-05-27T14:03:33.547Z",
+  "timestamp": "2026-05-27T19:50:09.495Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 21192,
-    "output_tokens": 557,
-    "cache_creation_input_tokens": 2369,
-    "cache_read_input_tokens": 0
+    "input_tokens": 21687,
+    "output_tokens": 513,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 2369
   },
   "findingCount": 3,
   "withdrawnCount": 0,
   "findings": [
     {
       "category": "tone-inconsistency",
-      "message": "The 'About This Report' section opens and sustains first-person voice ('We audited', 'We fetch', 'We then review'), but the 'Summary of Findings' closing section switches to first-person only in its final sentence while the rest of the report body uses first-person consistently — the real inconsistency is in the 'Findings' priority blocks, where Priorities 1–8 body paragraphs all use third-person passive constructions ('The pattern is consistent', 'The element carries no accessible name', 'Structured Data Quality scores') while the surrounding narrative sections use first-person ('We audited', 'We recommend', 'We invite the team').",
-      "context": "\"Finding:** Across the audited set, every one of the 7 pages carries at least one anchor element\"",
+      "message": "The 'About This Report' section opens and sustains first-person voice ('We audited', 'We fetch', 'We then review') but the 'Next Steps / Recommended Actions' list abruptly shifts to third-person imperative constructions ('address the 99 WCAG 2.1 AA accessibility issues identified', 'Semantic Structure improvements') without a subject, breaking the consistent first-person consultant voice established across all other narrative sections.",
+      "context": "1. **Address Priority 1 findings**: address the 99 WCAG 2.1 AA accessibility issues identified (regulatory exposure)",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The 'Soft 404' check in the Agent Reading Pipeline section reports 'Pass · 7/7' with the finding 'Missing pages return a proper HTTP 404 status. No pages misleadingly return 200 for non-existent URLs', but the Discovery Files section explicitly documents that the site returns HTTP 200 soft-404s for at least 41 paths — the pipeline check's site-wide clean verdict contradicts the sample evidence and overstates the site's soft-404 handling.",
-      "context": "\"Soft 404** - Pass · 7/7 … No pages misleadingly return 200 for non-existent URLs.\"",
+      "message": "The 'Structured Data Inventory' closing paragraph states 'Machines cannot reliably extract entity data from these pages' and then asserts 'a wider audit identifies the same gaps across the rest of the estate' — the second clause extrapolates a sample finding to the full unaudited estate as a stated fact rather than a conditional inference.",
+      "context": "Adding Schema.org JSON-LD with required properties is the highest-impact improvement, and a wider audit identifies the same gaps across the rest of the estate.",
       "severity": "block"
     },
     {
       "category": "hedged-vs-asserted-imbalance",
-      "message": "The 'Optional Enhancements' section repeats 'sameAs links on Organisation' as an optional enhancement after it has already been identified and recommended with confidence as Priority 8 in the Findings section, creating an imbalance where the same evidenced gap is simultaneously asserted as a prioritised finding and downgraded to a discretionary enhancement.",
-      "context": "\"sameAs links on Organisation: adding sameAs properties to the Organisation entities already present across the audited set\"",
+      "message": "The 'llms-full.txt' discovery-file section hedges its recommendation with 'Whether adding it would be worthwhile depends on the true depth of the site's content … so we frame this as a conditional recommendation', but Priority 6 in the Findings section unconditionally asserts 'Publish llms-full.txt' as the 'highest-leverage addition' — the same artefact is treated as uncertain in one section and as the top priority in another.",
+      "context": "Whether adding it would be worthwhile depends on the true depth of the site's content, which the audited sample does not yet measure, so we frame this as a conditional recommendation",
       "severity": "block"
     }
   ],
