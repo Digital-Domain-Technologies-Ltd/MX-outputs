@@ -175,6 +175,12 @@
 
           <p>Cost honesty. A free service that pays for itself in inspection volume eventually monetises in ways the visitor did not sign up for. We make our money from rebuilding documents into MX Compatible PDFs, not from inspecting yours.</p>
 
+          <h2 id="we-run-every-pdf-through-this-tool">We run every PDF we ship through this tool</h2>
+
+          <p>Every PDF we produce goes through this same inspector before it leaves our hands. The production pipeline calls the harness at <code>tests/test-pdf-inspector.js</code> against every artefact the renderer emits — audit reports, books, briefings, contracts. If the inspector does not certify the file as MX Compatible, the build fails and nothing ships. The browser inspector you see on this page and the production gate share one source of truth, the detection core at <code>mx-outputs/mx-site/js/pdf-inspector-core.js</code>, so a regression in either surface fails both.</p>
+
+          <p>What this means for you. The reports we send to clients and the books we publish are not asked to meet the MX Compatible bar by hand and by hope; they are blocked from shipping unless they meet it by machine. When you drop a PDF we produced into this inspector, you should see the same verdict the build saw before it released the file.</p>
+
         </article>
       </div>
     </section>
