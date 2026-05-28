@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Audit Phase 6 Final Inference + Operating Principles Update"
-description: "Added a cog-only post-PDF cross-check pass to the audit pipeline and shifted Maxine's working defaults toward proactive helpfulness and monetisation surfacing."
+title: "Co-Directors Report — Audit Phase 6 Final Inference + Operating Principles + PDF Inspector Self-Host"
+description: "Added a cog-only post-PDF cross-check pass to the audit pipeline, shifted Maxine's working defaults toward proactive helpfulness and monetisation surfacing, and brought the public PDF inspector onto a zero-third-party-dependency footing."
 author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
-version: "1.0"
+version: "1.2"
 
 mx:
   status: active
@@ -15,7 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-28-evening-report.md
 ---
 
-# Co-Directors Report — Audit Phase 6 Final Inference + Operating Principles Update
+# Co-Directors Report — Audit Phase 6 Final Inference + Operating Principles + PDF Inspector Self-Host
 
 **Date:** 28 May 2026 — Evening
 **Segment:** evening (since 17:00)
@@ -47,19 +47,35 @@ The matching `/audit-site` skill grew a corresponding Phase 6 paragraph that poi
 
 The auto-memory rule that previously said "do not edit skill prose" was rewritten as a two-case rule: an explicit feature request that names a skill's surface → edit + flag the edit prominently in the summary + offer to revert; an incidental sweep / cleanup that happens to touch skill prose → surface only, do not edit. The 28 May audit-site Phase 6 work is now the canonical Case A example; the 27 May legacy-repair-script cleanup remains the canonical Case B example.
 
+### 3. PDF inspector — self-hosted parser, zero third-party dependency
+
+The public PDF inspector at `https://mx.allabout.network/tools/pdf-inspector.html` was failing at the parse step with "Failed to fetch dynamically imported module". Root cause: the mx-site Cloudflare worker sends a Content-Security-Policy header with `script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com`. The inspector was dynamically importing `pdf.js` from `https://cdn.jsdelivr.net/...`, which is not on the CSP allowlist, so the browser refused the import before pdf.js ever loaded. Inspection then failed for every visitor.
+
+The fix vendored the `pdfjs-dist@4.10.38` build files (`pdf.min.mjs` 344 KB, `pdf.worker.min.mjs` 1.3 MB) into [`mx-outputs/mx-site/js/vendor/pdfjs/`](../../../../../mx-outputs/mx-site/js/vendor/pdfjs/) and rewrote the two constants in [`mx-outputs/mx-site/js/pdf-inspector.js`](../../../../../mx-outputs/mx-site/js/pdf-inspector.js) to point at the local paths. No CSP changes, no expanded allowlist, no remaining third-party CDN call at inspection time. Verified live: `pdf.min.mjs` and `pdf.worker.min.mjs` both return `200` from the public hostname, and the live `pdf-inspector.js` carries the new local-path constants.
+
+The inspector page copy was then tightened to make the parser-locality explicit. The bold opening paragraph now reads "The parser itself ships from this site, with no third-party CDN call and no remote dependency at inspection time." The Verifiability paragraph in the "Why this is not server-side" section now reads "The full inspector source ships in your browser, including the PDF parser itself, vendored into this site rather than fetched from a third-party CDN. Once the page loads, the inspector runs without any further network calls." The "your file stays in your browser" pitch is now literally true at the parser layer as well as the file layer.
+
+### 4. PDF inspector — Cloudflare worker MIME-type fix (second outage and rename)
+
+After the first ship, the inspector was still failing in the browser with the same "Failed to fetch dynamically imported module" error, now naming the local URL. Root cause turned out to be one layer deeper than the CSP block: the Cloudflare worker at [`allaboutv2/cloudflare/files/cloudflare-worker.js`](../../../../../allaboutv2/cloudflare/files/cloudflare-worker.js) carries a content-type lookup table keyed by file extension; `mjs` is not in the table, so `.mjs` files fall through and inherit GitHub raw's default `text/plain` header. Browsers refuse to execute a JavaScript module that arrives with `Content-Type: text/plain`, regardless of the file body being a valid ES module. The CSP fix had unblocked the request; the MIME-type response then blocked the execute.
+
+Two paths to a fix: (a) patch the worker to map `mjs -> application/javascript` (correct, but requires a manual `wrangler deploy` and a two-file-rule test addition), or (b) rename the two vendor files from `.mjs` to `.js` so they route through the existing `.js -> application/javascript` entry. ES modules are identified by their Content-Type header, not by URL extension, so the rename is a real fix not a workaround. Path (b) shipped tonight (mx-outputs `6181855`, hub `1cd20349`); path (a) is filed as a follow-up for the worker repo so future `.mjs` files Just Work.
+
+Verified live: `pdf.min.js` and `pdf.worker.min.js` both come back with `content-type: application/javascript; charset=utf-8`, and the live `pdf-inspector.js` carries the updated `.js` constants. A short comment in the inspector source explains why the files use `.js` rather than the upstream `.mjs` shipping convention, so the next developer reading the file does not silently undo the fix.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits | _pending_ (one hub commit will land in Step 3) |
-| Files changed (hub) | 3 |
-| Lines added | +163 |
-| Lines removed | -4 |
-| Repositories | 1 (hub only; no submodule changes) |
+| Hub commits this evening | 5 (98233186, 02e585c4, 97d44a52, 66fc4be1, 152055bd, 1cd20349) |
+| mx-outputs commits this evening | 6 (a074676, e82bd92, 34bdcdb, 853e3bf, 6181855, plus any Step 3 bump) |
 | Auto-memory files touched | 2 (rule rewritten, index line updated) |
 | Cog version bumps | mx-audit 1.12.0 → 1.13.0 |
+| Vendor assets added | 2 (pdfjs build + worker, ~1.6 MB total) |
+| Cloudflare cache purges | 3 (PDF inspector ship, copy emphasis, MIME-type rename) |
+| Live regressions found and closed in-session | 2 (CSP blocked jsdelivr, worker MIME on .mjs) |
 
 ---
 
@@ -89,6 +105,7 @@ Two scoping rules I had — "don't edit skill prose" and "don't volunteer moneti
 - Walk through Phase 6 live on the next audit run to validate the four-category split (Inaccuracy / Contradiction / Misstatement / Unverifiable) and the prompt shape that asks the LLM to ground each claim in a specific cache file.
 - Watch whether "Surface monetisation ideas" generates signal or noise over the next few sessions. If it becomes mechanical, fold it into a discrete skill that runs at session close rather than a per-turn default.
 - Decide whether the Phase 6 summary should also be persisted to disk (alongside the verification.json / fierce-critic.json / llm-judgment.json sidecars) or stay terminal-only. Current rule says terminal-only; the question is whether auditors and compliance officers need it in the evidence chain.
+- Patch the Cloudflare worker at `allaboutv2/cloudflare/files/cloudflare-worker.js` to map `.mjs -> application/javascript` and add the matching test case in `cloudflare-worker.test.js` per the two-file rule. Tom hand-deploys via `wrangler deploy` (no CI for Cloudflare per the deploy memory).
 
 ---
 
@@ -96,4 +113,16 @@ Two scoping rules I had — "don't edit skill prose" and "don't volunteer moneti
 
 | Hash | Description |
 |------|-------------|
-| _pending_ (hub) | mx-audit cog: add Phase 6 post-pdf-cross-check action + matching /audit-site skill paragraph + CLAUDE.md Partnership Model helpfulness/monetisation bullets |
+| 98233186 (hub) | mx-audit cog: add Phase 6 post-pdf-cross-check action + matching /audit-site skill paragraph + CLAUDE.md Partnership Model helpfulness/monetisation bullets |
+| 02e585c4 (hub) | Changelog + REMINDERS for 2026-05-28 evening: audit Phase 6 + operating principles |
+| 97d44a52 (hub) | Bump mx-outputs: README regen for 2026-05-28 evening directors report |
+| a074676 (mx-outputs) | Co-Directors evening report 2026-05-28 v1.0 |
+| e82bd92 (mx-outputs) | README: regen index — picks up evening directors report |
+| 34bdcdb (mx-outputs) | pdf-inspector: self-host pdf.js so CSP doesn't block the parser |
+| 66fc4be1 (hub) | Bump mx-outputs: vendor pdf.js for the public PDF inspector |
+| 853e3bf (mx-outputs) | pdf-inspector page: emphasise parser-locality in the locality claim |
+| 152055bd (hub) | Bump mx-outputs: pdf-inspector parser-locality emphasis |
+| 6181855 (mx-outputs) | pdf-inspector: rename vendor pdfjs from .mjs to .js so the worker serves them |
+| 1cd20349 (hub) | Bump mx-outputs: rename pdfjs vendor files to .js for correct MIME |
+| _pending_ (mx-outputs) | This report v1.2 |
+| _pending_ (hub) | Bump mx-outputs: directors report v1.2 |
