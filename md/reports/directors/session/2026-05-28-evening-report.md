@@ -4,7 +4,7 @@ description: "Added a cog-only post-PDF cross-check pass to the audit pipeline, 
 author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -72,6 +72,16 @@ After the first ship, the inspector was still failing in the browser with the sa
 Two paths to a fix: (a) patch the worker to map `mjs -> application/javascript` (correct, but requires a manual `wrangler deploy` and a two-file-rule test addition), or (b) rename the two vendor files from `.mjs` to `.js` so they route through the existing `.js -> application/javascript` entry. ES modules are identified by their Content-Type header, not by URL extension, so the rename is a real fix not a workaround. Path (b) shipped tonight (mx-outputs `6181855`, hub `1cd20349`); path (a) is filed as a follow-up for the worker repo so future `.mjs` files Just Work.
 
 Verified live: `pdf.min.js` and `pdf.worker.min.js` both come back with `content-type: application/javascript; charset=utf-8`, and the live `pdf-inspector.js` carries the updated `.js` constants. A short comment in the inspector source explains why the files use `.js` rather than the upstream `.mjs` shipping convention, so the next developer reading the file does not silently undo the fix.
+
+### 6. PDF inspector — test harness, production gate, public claim
+
+The third strand of the inspector work surfaced a real consumer-side bug worth describing on its own. Tom asked for a test harness that exercises the gold-standard MX Compatible audit PDF (the new dkd.de/de report at `mx-outputs/audit/2026-05-28/www.dkd.de-de/www-dkd-de-de-report.pdf`) through the same code the public inspector runs. Building the harness required extracting the inspector's pure detection + classification pipeline into a sibling module ([`mx-outputs/mx-site/js/pdf-inspector-core.js`](../../../../../mx-outputs/mx-site/js/pdf-inspector-core.js)) so both browser and Node could import the same source of truth. The harness at [`tests/test-pdf-inspector.js`](../../../../../tests/test-pdf-inspector.js) loads the same vendored pdf.js the browser loads, calls `inspectPdfDoc` on a fixture PDF, and asserts tier=mx with every required evidence row green.
+
+First run of the harness against the DKD report classified the file as `plain` with every required check FAIL — the consumer-side bug. pdf.js lowercases XMP field keys on parse (so `mx:Status` arrives as `mx:status`, `pdfuaid:Part` as `pdfuaid:part`); the inspector probes the capitalised forms, none matched, no MX evidence was found. The PDF carried the data; the reader could not see it. The fix in `readXmpField` now does an exact-match first then falls back to a case-insensitive sweep of `getAll()` keys, so the lookup survives whichever case-folding the XMP parser applied. Every existing MX Compatible PDF the canonical mx.pdf.sh produces now correctly classifies as MX Compatible in both browser and Node.
+
+The fix unlocked a stronger discipline. The harness was wired into `npm test` and given a `--quiet` flag (suppresses the evidence table on pass, keeps it on fail). [`scripts/bin/mx.pdf.sh`](../../../../../scripts/bin/mx.pdf.sh) now calls the harness as a hard gate after every canonical render: if the public PDF inspector would not certify the freshly-rendered PDF as MX Compatible, the build fails non-zero and nothing ships. `MX_PDF_SKIP_INSPECTOR=1` bypasses the gate for dev iterations on intentionally-incomplete drafts. The browser inspector and the production gate share one source of truth — the detection core — so a regression in either surface fails both.
+
+The inspector page itself grew two new sections to make the discipline visible to the reader. The first ("We run every PDF we ship through this tool") names the harness path and the gate path and says the production pipeline blocks any PDF the inspector cannot certify. The second ("Credibility by mechanism, not by claim") frames the three-layer architecture as the answer to "trust us, we did this carefully" — the page makes the claim, the gate enforces it, the harness proves it, all three layers live in the open, and each reads from the same detection core. For AI-governance regimes that increasingly require evidence-chain documentation, this is the argument MX makes generally; the inspector makes it concretely.
 
 ---
 
