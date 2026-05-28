@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Audit Phase 6 Final Inference + Operating Principles + PDF Inspector Self-Host"
-description: "Added a cog-only post-PDF cross-check pass to the audit pipeline, shifted Maxine's working defaults toward proactive helpfulness and monetisation surfacing, and brought the public PDF inspector onto a zero-third-party-dependency footing."
+title: "Co-Directors Report — Audit Phase 6 Final Inference + Operating Principles + PDF Inspector Self-Host + Three-Site Audit Batch"
+description: "Added a cog-only post-PDF cross-check pass to the audit pipeline, shifted Maxine's working defaults toward proactive helpfulness and monetisation surfacing, brought the public PDF inspector onto a zero-third-party-dependency footing, and shipped the first three external audit deliverables (typo3.org, dkd.de/de, dotfusion.com) along with a canonicalUri fix in the audit report generator."
 author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -55,6 +55,16 @@ The fix vendored the `pdfjs-dist@4.10.38` build files (`pdf.min.mjs` 344 KB, `pd
 
 The inspector page copy was then tightened to make the parser-locality explicit. The bold opening paragraph now reads "The parser itself ships from this site, with no third-party CDN call and no remote dependency at inspection time." The Verifiability paragraph in the "Why this is not server-side" section now reads "The full inspector source ships in your browser, including the PDF parser itself, vendored into this site rather than fetched from a third-party CDN. Once the page loads, the inspector runs without any further network calls." The "your file stays in your browser" pitch is now literally true at the parser layer as well as the file layer.
 
+### 5. Three-site audit batch + canonicalUri generator fix
+
+Ran the Web Audit Suite against three external sites — typo3.org, dkd.de/de, dotfusion.com — at five pages each (the pipeline's +2 buffer for `llms.txt` / `sitemap` discovery probes brings each to seven). All three completed end to end (Phase 1 crawl + recon, Phase 2 deterministic report, Phase 3 six gates + tagged PDF). Every report passed every gate. The deliverables landed at [`mx-outputs/audit/2026-05-28/`](../../../../audit/2026-05-28/) — markdown report, tagged PDF, AI provenance sidecar (citing EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act), deterministic sidecar (citing EAA Directive 2019/882), pa11y findings, per-section CSVs, hash-indexed prompt / input archives. These are the first audit deliverables in the new `mx-outputs/audit/<date>/<hostSlug>/` layout to land in the public mx-outputs repo for external sites this team does not own.
+
+A cross-check pass against the COG (Community Owned Governance Standard) frontmatter rules surfaced a real defect in the audit report generator. Every audit report wrote a complete `mx:` block — status, contentType, audience, runbook, generate target, x-mx-provenance pointer pair — but no `canonicalUri`. The pre-write-frontmatter hook in MX-Hub requires `canonicalUri` on every MX-aware md file, derived from the file's repo mount via `scripts/cog-field-rules.js` `deriveCanonicalUri()`. The hook fires on `Write` only, and the audit pipeline writes via Node directly, so the hook never caught it. Result: every audit report shipped to date carries a frontmatter that would fail the hub's own validator.
+
+The fix in [`mx-reginald/audit/bin/infill-report.js`](../../../../../mx-reginald/audit/bin/infill-report.js) computes the canonical URI from the report's known output path against the mx-outputs repo map (`Digital-Domain-Technologies-Ltd/MX-outputs`, branch `main`) and emits it into the generated frontmatter under `mx:`. The three reports shipped tonight were backfilled with the matching URI, validated clean against `validateFrontmatter()` (`valid: true`, zero errors, zero warnings), and re-rendered to PDF so the XMP `ProvenanceAiPayload` carries the correct canonicalUri. Verified live via `exiftool -b -XMP-mx:ProvenanceAiPayload | grep canonicalUri` on each PDF — all three now match. Every future audit run produces a COG-clean report by construction.
+
+A second feedback memory was added during the same session: the +2 page buffer in `mx-audit --max-pages` is intentional (it reserves room for llms.txt / sitemap discovery probes); future accuracy reviews must not flag it as drift. The memory is now in the `~/.claude/projects/.../memory/` index.
+
 ### 4. PDF inspector — Cloudflare worker MIME-type fix (second outage and rename)
 
 After the first ship, the inspector was still failing in the browser with the same "Failed to fetch dynamically imported module" error, now naming the local URL. Root cause turned out to be one layer deeper than the CSP block: the Cloudflare worker at [`allaboutv2/cloudflare/files/cloudflare-worker.js`](../../../../../allaboutv2/cloudflare/files/cloudflare-worker.js) carries a content-type lookup table keyed by file extension; `mjs` is not in the table, so `.mjs` files fall through and inherit GitHub raw's default `text/plain` header. Browsers refuse to execute a JavaScript module that arrives with `Content-Type: text/plain`, regardless of the file body being a valid ES module. The CSP fix had unblocked the request; the MIME-type response then blocked the execute.
@@ -69,9 +79,11 @@ Verified live: `pdf.min.js` and `pdf.worker.min.js` both come back with `content
 
 | Metric | Value |
 |--------|-------|
-| Hub commits this evening | 5 (98233186, 02e585c4, 97d44a52, 66fc4be1, 152055bd, 1cd20349) |
-| mx-outputs commits this evening | 6 (a074676, e82bd92, 34bdcdb, 853e3bf, 6181855, plus any Step 3 bump) |
-| Auto-memory files touched | 2 (rule rewritten, index line updated) |
+| Hub commits this evening | 5 (98233186, 02e585c4, 97d44a52, 66fc4be1, 152055bd, 1cd20349, plus this segment's hub commits) |
+| mx-outputs commits this evening | 6 + 1 (audit batch 5bd1643) + 1 (this report v1.3) |
+| External-site audit deliverables shipped | 3 (typo3.org, dkd.de/de, dotfusion.com — all gates passed) |
+| Audit pipeline defects found and fixed | 1 (canonicalUri missing from generated mx: block) |
+| Auto-memory files touched | 3 (skill-prose rule rewritten, page-count buffer feedback added, index updated) |
 | Cog version bumps | mx-audit 1.12.0 → 1.13.0 |
 | Vendor assets added | 2 (pdfjs build + worker, ~1.6 MB total) |
 | Cloudflare cache purges | 3 (PDF inspector ship, copy emphasis, MIME-type rename) |
@@ -124,5 +136,6 @@ Two scoping rules I had — "don't edit skill prose" and "don't volunteer moneti
 | 152055bd (hub) | Bump mx-outputs: pdf-inspector parser-locality emphasis |
 | 6181855 (mx-outputs) | pdf-inspector: rename vendor pdfjs from .mjs to .js so the worker serves them |
 | 1cd20349 (hub) | Bump mx-outputs: rename pdfjs vendor files to .js for correct MIME |
-| _pending_ (mx-outputs) | This report v1.2 |
-| _pending_ (hub) | Bump mx-outputs: directors report v1.2 |
+| 5bd1643 (mx-outputs) | Add audit deliverables for typo3.org, dkd.de/de, dotfusion.com (2026-05-28) |
+| _pending_ (hub) | Patch infill-report.js to emit mx.canonicalUri + bump mx-outputs (audit batch + report v1.3) |
+| _pending_ (mx-outputs) | Directors report v1.3 + README regen |
