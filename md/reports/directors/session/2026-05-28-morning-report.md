@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Four-Site Audit Rerun + Provenance v2 Regime Restructure"
-description: "Morning segment had two strands. (1) Four-site audit rerun (mx.allabout.network, typo3.com, dotfusion.com, dkd.de/de) validates evening fixes end-to-end. (2) Provenance JSON restructured from activity-first v1 to regime-first v2: parties[] role taxonomy, frameworks[] registry enumerating 30 AI-governance regimes worldwide, runRevision + lastWriteAt counters, per-step jurisdictionalEvidence, canon position paper, evidence-preservation hook."
+title: "Co-Directors Report — Four-Site Audit Rerun + Provenance v2 + Lead-Capture Endpoints + Hard Gates"
+description: "Morning segment had three strands. (1) Four-site audit rerun validates evening fixes end-to-end. (2) Provenance JSON restructured from activity-first v1 to regime-first v2. (3) Public lead-capture endpoints shipped on mx.allabout.network for the free PDF check and the Certified Operator waitlist; MX Compatible badge tied to Certified Operator status in canon §3.1; alpha REGINALD declared live in canon §10.1; pre-push Gate 7-11 grace period removed (hard from now on); 909 .mx.yaml.md skeletons backfilled to pass the now-hard validator."
 author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -104,6 +104,39 @@ New pre-bash hook [`.claude/hooks/pre-bash-audit-evidence-preservation.sh`](../.
 
 ---
 
+## What Was Done (continued, third strand of the morning)
+
+### 10. Lead-capture endpoints live on mx.allabout.network
+
+Two new POST endpoints on the `cool-cell-c75e` Cloudflare worker:
+
+- `POST /api/v1/lead/pdf-check` — backs the free MX-readiness check form on [`/learn/mx-for-pdfs.html`](https://mx.allabout.network/learn/mx-for-pdfs.html). Visitor pastes a PDF URL + email + consent; the form posts JSON, the worker validates, sends an admin notification + submitter acknowledgement via Resend, and either returns JSON (for JS-enabled clients) or 303 to the source page with a `?submitted=pdf-check` flag the page JS uses for an inline status banner.
+- `POST /api/v1/lead/certified-operator-waitlist` — backs the waitlist form on the new [`/services/certified-operator.html`](https://mx.allabout.network/services/certified-operator.html) page. Captures name, email, organisation, target tier, predicate vocabulary, optional note.
+
+Pure functions in `reginald/lib/lead-capture.js` (`validateLeadCapture`, `escapeHtml`, `buildAdminEmail`, `buildAcknowledgementEmail`, `buildSuccessRedirectUrl`, `buildSuccessResponseBody`); handler in `reginald/handlers/lead-capture.js` (`classifyLeadCaptureRequest`, `handleLeadCapture`); 28 new unit tests; total suite 252/252 passing. Worker deployed at version `7a6fda33-3af7-48b4-a522-e9b0c76e7654`. Smoke-tested live: OPTIONS preflight 200, GET 405, bad payload 400 JSON, unknown lead path 404 JSON.
+
+### 11. MX Compatible badge bound to Certified Operator status
+
+[`/learn/mx-for-pdfs.html`](https://mx.allabout.network/learn/mx-for-pdfs.html) "If you publish PDFs" section rewritten. The standard the badge points to is open (ISO 14289-1 + MX metadata + provenance pair); the badge itself is reserved to accredited MX practitioners — formally Certified Operators of the CogNovaMX Accreditation Programme. Three tiers named in-prose. Canon updated in lockstep: [`accreditation-programme.md`](../../../../../mx-canon/mx-maxine-lives/businesses/ddt-cognovamx/accreditation-programme.md) gains §3.1 "The MX Compatible badge" with the honour-system tooling note, and §10.1 "Liveness" declaring alpha REGINALD live at `reginald.allabout.network` as of 2026-05-28. Decision per Tom: tooling stays honour-system (no online verification at render time, no env-var gate).
+
+### 12. Two Service entities and three Offer rows added to schema.org JSON-LD
+
+The explainer page's JSON-LD graph now declares the Accreditation Programme as a `Service` with three `Offer` rows (Tier 1 £750, Tier 2 £3,500, Tier 3 £12,000 as `PreOrder`), plus separate Service entities for the free PDF check and MX PrintWorks. High-intent queries like "EU AI Act PDF compliance" now surface CogNovaMX as the offer, not just MX as a concept.
+
+### 13. Pre-push Gates 7-11 grace period removed
+
+[`.claude/hooks/pre-push.sh`](../../../../../.claude/hooks/pre-push.sh): deleted `MX_GATES_HARD_AFTER="2026-07-01"`, deleted `mx_gate_is_hard()`, simplified `mx_gate_fail()` to always print `❌ ERROR` and return 1. Every existing caller already had `|| exit 1`, so the gates flip to hard immediately. `MX_SKIP_*` emergency overrides preserved.
+
+### 14. mx-validator audience enum aligned with canon
+
+`scripts/mx-validator.cjs` `audience` field now loads its enum from `mx-canon/ssot/fields-data.yaml` at startup (with safe fallback) and accepts `string-or-array` type. Earlier it hardcoded `['human', 'machine', 'both']` (singular) which diverged from the canon's `[tech, business, humans, machines, agents, both]` (plural). Validators and canon are now in lockstep.
+
+### 15. 909 .mx.yaml.md skeletons backfilled (Gate 10 cleanup)
+
+Sweeping mx-validator across all 931 `.mx.yaml.md` files surfaced 909 violators — every folder skeleton in the corpus lacked `mx.runbook` and `mx.x-mx-contextProvides`, with 99 needing `stability` fixes (72 missing, 27 `evolving` remapped to `unstable`), 116 needing audience adjustments (114 missing, 1 `developers` remapped to `tech`, 1 object flattened), 3 needing `purpose`. One-off script [`scripts/one-off/backfill-mx-validator-fields.cjs`](../../../../../scripts/one-off/backfill-mx-validator-fields.cjs) does the bulk fix with YAML round-trip; idempotent. Result: **931 valid, 0 invalid** corpus-wide. Heal generator at `scripts/mx/mx-graph-builder.js` patched to emit `runbook` + `x-mx-contextProvides` by default so future orphans land valid.
+
+---
+
 ## What Changed About Me
 
 Two patterns I will carry forward.
@@ -138,4 +171,10 @@ Second — the user's "no migration needed, we will regen, it's early days" cour
 | 93493c9c (hub) | Hook: evidence-preservation gate on audit invocations |
 | a52db735 (hub) | Bump mx-outputs + document v2 in CLAUDE.md |
 | 097e4845 (hub) | Provenance v2: fix recordStep gaps (lastWriteAt + jurisdictionalEvidence) |
-| *pending* (hub + mx-outputs) | This report + REMINDERS update |
+| 971cede9 (hub) | REMINDERS + bump mx-outputs: provenance v2 follow-ups + morning report |
+| 1c53cafd (allaboutv2) | Add lead-capture endpoints for mx.allabout.network |
+| 3b9d797 (mx-outputs) | mx-site: Free PDF check form + Certified Operator waitlist page |
+| aaa46cfb (hub) | Lead capture endpoints + Certified Operator waitlist live |
+| 17cc5709 (allaboutv2) | Backfill mx-validator required fields across all .mx.yaml.md |
+| 29d69e2 (mx-outputs) | Backfill mx-validator required fields across all .mx.yaml.md |
+| *pending* (hub) | Grace period removed, validator + heal generator aligned, 514 .mx.yaml.md backfilled, submodule pointer bumps, this report |
