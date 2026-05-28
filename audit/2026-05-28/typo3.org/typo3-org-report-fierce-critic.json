@@ -1,48 +1,56 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/typo3.org/typo3-org-report.md",
-  "timestamp": "2026-05-28T13:14:52.778Z",
+  "timestamp": "2026-05-28T16:40:06.661Z",
   "model": "claude-sonnet-4-6",
   "runCount": 1,
-  "findingCount": 5,
+  "findingCount": 6,
   "regexFindingCount": 0,
-  "llmFindingCount": 5,
+  "llmFindingCount": 6,
   "findings": [
     {
       "category": "hollow-recommendation",
-      "message": "Priority 6 recommendation lacks a data anchor specific to this audit. The block names the SEO score (77/100) and Heading Quality score (91/100), but the three concrete actions — reviewing pages contributing to the SEO gap, confirming canonical tags, and cross-referencing structured data — are all generic category-level instructions that could be copy-pasted unchanged into any web audit report. The block identifies no specific page URL, no specific missing meta description, no specific canonical-tag absence, and no specific heading gap. The cross-reference to Priority 8 is an intra-report pointer, not a data anchor for the SEO recommendation itself.",
-      "context": "**Priority 6: SEO Score 77/100, Heading Quality 91/100 (minor SEO gaps across audited set)** … Review the pages contributing to the remaining SEO gap; because Heading Quality scores 91/100, the deficit is likely in meta descriptions, canonical signals, or structured landmark coverage rather than heading hierarchy … Confirm canonical tags are consistently present across the audited set … Cross-reference the SEO findings with the Structured Data gaps noted in Priority 8",
+      "message": "Priority 7 recommendation to identify the three absent headers lacks any data anchor in the action step itself: 'Identify the three absent headers from the full five-header set and configure them at the server or CDN layer.' The facts block names the three absent headers (HSTS, Content-Security-Policy, X-Frame-Options) but this first bullet point does not name them, making the action generically copy-pasteable. However, on re-applying the specificity test: the surrounding priority block (heading through prose) does name HSTS, CSP, and X-Frame-Options explicitly in the Finding paragraph. The data anchors are present in the block. Not flagging.",
+      "context": "Priority 7 — intentionally suppressed after specificity test confirmed data anchors in the Finding paragraph within the same priority block.",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
-      "category": "subtle-failure-framing",
-      "message": "The phrase 'leaves room to grow' applied to the SEO score in the Balanced Scorecard narrative is a borderline softening, but the more clear-cut instance is 'the sharpest opportunities lie in Structured Data (0/100) and Discovery Readiness (25/100), where improving metadata, schema markup, and discovery artefacts would make the site's content far more accessible to machines' — this is acceptable framing. However, 'the SEO score sits in the Excellent band but leaves room to close remaining gaps' in Priority 6 is a passive formulation that implies a deficiency without stating one factually. More precisely, the Balanced Scorecard narrative 'SEO at 77/100 is the area with the clearest room to grow' is legitimate opportunity framing, but 'leaves room to close remaining gaps' in Priority 6 body text echoes it as a second, vaguer instance that implies inadequacy without a factual peg.",
-      "context": "Priority 6 body: 'The SEO score sits in the Excellent band but leaves room to close remaining gaps.'",
-      "severity": "fail",
-      "source": "llm",
-      "line": null
-    },
-    {
-      "category": "exaggeration",
-      "message": "American English spelling 'optimize' does not appear, but 'color' appears in Priority 3 as part of the prose recommendation: 'Update the background or text colour' — this uses the UK form correctly. However, 'organization' does not appear but 'organisation' does. The report is broadly consistent with British forms. One clear US-form instance: the word 'analyze' does not appear, but checking for 'color' vs 'colour': Priority 3 uses 'text colour' (UK, correct) and later 'link colour' (UK, correct). The Inline Code Duplicates section recommendation uses 'Externalising' (UK, correct). One actual drift: the frontmatter tag list contains 'mx' items which are metadata and exempt. On review, no clear US-form prose drift was found warranting a flag.",
-      "context": "N/A — on full review, no US/UK prose drift rises to the threshold for flagging.",
+      "category": "hollow-recommendation",
+      "message": "The 'Next Steps / Recommended Actions' block contains a hollow recommendation: 'Consider optional enhancements: optional patterns that give a early-mover opportunity in AI search.' This names only a domain ('AI search') with no specific element, page type, or action. It does not reference any of the named optional enhancements (sameAs, BreadcrumbList, Content-Signal directives) from earlier in the report, and 'Consider optional enhancements' is pure category framing that could be pasted into any audit report unchanged.",
+      "context": "Under '### Recommended Actions', item 3: '**Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
       "category": "fabricated-specificity",
-      "message": "Priority 2 states 'The audit recorded a target background value of #c25700 as the threshold adjustment needed to meet the criterion.' The same value #c25700 then appears in Priority 3 as the background value for a completely different element on a different page (a first-party content paragraph). It is structurally implausible that two entirely different elements — one a Usercentrics SDK consent banner button and one a first-party content block on a single page — would both require the identical background hex value #c25700 to reach the 4.5:1 WCAG threshold. This repeated identical value across two independent findings with different element selectors, different pages, and different contexts suggests the value was not independently derived from audit data for each finding and may be a fabricated or copy-pasted placeholder.",
-      "context": "Priority 2: 'The audit recorded a target background value of #c25700 as the threshold adjustment needed to meet the criterion.' Priority 3: 'the audit records #c25700 as the background value that meets the threshold, giving the team a concrete target for that content zone.'",
+      "message": "In Priority 2, the recommendation specifies an exact hex colour value to fix the contrast ratio: 'update the button's background value to `#c25700`' and 'update the styling so the text background meets the `#c25700` value or an equivalent that achieves at least 4.5:1'. The colour value #c25700 does not appear anywhere in the audit data tables or facts blocks preceding this recommendation. The audit data reports only the measured contrast ratio of 3.09:1 and the required threshold of 4.5:1. A specific hex remediation value is a fabricated detail not derivable from the audit data as presented.",
+      "context": "Priority 2 recommendation bullets: 'engage Usercentrics to update the button's background value to `#c25700` in their SDK' and 'update the styling so the text background meets the `#c25700` value or an equivalent that achieves at least 4.5:1'",
       "severity": "fail",
       "source": "llm",
       "line": null
     },
     {
-      "category": "third-party-vendor-template-blame",
-      "message": "The Inline Code Duplicates recommendation directs the site team to 'Move each duplicate fragment to a shared external file' for CSS blocks whose preview text clearly shows Usercentrics SDK classes ('ucOpacity', '.usercentrics-button', '.uc-corner-modal', '#usercentrics-button', '#uc-corner-modal'). These inline CSS blocks are injected by the Usercentrics consent-management SDK, not authored in the site template. Prescribing a template-level externalisation fix ('Move each duplicate fragment to a shared external file') for vendor-injected CSS is incorrect; the valid remediation path is an SDK configuration change with Usercentrics or a post-injection DOM/style patch, not a theme-level edit. The recommendation does not acknowledge the third-party origin of these fragments.",
-      "context": "Inline Code Duplicates table rows: 'css | 218748 | 4 | @keyframes ucOpacity{0%{opacity:0}…}.usercentr', 'css | 773 | 4 | .usercentrics-button .uc-corner-modal…', 'css | 652 | 4 | #usercentrics-button .uc-banner-content…', 'css | 151 | 4 | #uc-corner-modal a[href]…' — Recommendation: 'Move each duplicate fragment to a shared external file (<link rel=\"stylesheet\"> for CSS, <script src=\"...\"> for JS).'",
+      "category": "subtle-failure-framing",
+      "message": "The phrase 'is far from optimal' equivalent appears as 'is a near-total absence' in Priority 3: 'this ratio represents a near-total absence of semantic landmark and sectioning elements on that page.' While the underlying data (216 bare divs of 288 elements) is real, the interpretive gloss 'near-total absence' is charged framing that goes beyond neutral description of a score. A professional editor would soften this to something like 'semantic landmark elements account for fewer than 25% of container elements on this page.'",
+      "context": "Priority 3 Finding paragraph: 'presents 216 bare divs out of 288 total elements; this ratio represents a near-total absence of semantic landmark and sectioning elements on that page.'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "exaggeration",
+      "message": "The Balanced Scorecard table compares typo3.org performance against peer benchmarks ('B (median)', 'D (median)', 'C (median)', 'A (median)') with no audit data source named for those benchmarks. The footnote says only '*Benchmark median drawn from a curated audit dataset.*' This is unsupported comparative framing: the peer medians are presented as factual data points but the dataset is unnamed, unverified, and not part of the audit evidence. A reader cannot check whether 'D (median)' for Discovery Readiness or 'C (median)' for Structured Data Quality are accurate. This meets the fabricated-specificity threshold rather than exaggeration, but also reads as implicit flattery (typo3.org scores above median on several dimensions against an unchecked baseline).",
+      "context": "Balanced Scorecard — Machine Experience table: 'vs Peers' column entries 'D (median)', 'C (median)', 'B (median)', 'A (median)' with footnote '*Benchmark median drawn from a curated audit dataset.*'",
+      "severity": "fail",
+      "source": "llm",
+      "line": null
+    },
+    {
+      "category": "fabricated-specificity",
+      "message": "The Balanced Scorecard peer-median column ('vs Peers': 'B (median)', 'D (median)', 'C (median)', 'A (median)') introduces comparative benchmark figures that do not appear in any preceding facts block and cannot be derived from the seven-page audit data. The sourcing footnote 'Benchmark median drawn from a curated audit dataset' names no dataset, sample size, date, or methodology. These figures function as factual claims in a client-facing table but are entirely unanchored to the audit evidence.",
+      "context": "Balanced Scorecard tables — Human Experience and Machine Experience 'vs Peers' columns, with footnote: '*Benchmark median drawn from a curated audit dataset.*'",
       "severity": "fail",
       "source": "llm",
       "line": null

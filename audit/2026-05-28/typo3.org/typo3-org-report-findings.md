@@ -15,23 +15,30 @@ mx:
 ---
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this sidecar surfaces 1 finding (1 info) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+Every automated gate ran to completion; this sidecar surfaces 1 finding (1 warning) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
 
-### Info (tone / style observations)
+### Warnings (rule violations)
 
-*A gate flagged a tone, voice, or style observation. Usually safe to accept; scan the detail to confirm the phrasing reads as intended.*
+*A gate identified a likely audit-content issue. Read each detail below and confirm the finding is intentional, or correct the report before sign-off. Common shapes: a priority missing from the engagement plan, a scope phrase that mixes per-page and site-wide claims, a recommendation that lacks specifics.*
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | tone | exaggeration | Exaggeration / hyperbole: 1 instance (line 101) | 2026-05-28T13:14:16Z |
+| 1 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-28T16:39:30Z |
 
-<details open><summary>Info detail (1)</summary>
+<details open><summary>Warning detail (1)</summary>
 
-**1. tone - Exaggeration / hyperbole: 1 instance**
+**1. voice-consistency - Mixed-voice section(s) remain after auto-repair: 1**
 
-Exaggeration / hyperbole
+Gate voice-consistency (check-report-voice.js) returned non-zero. Output excerpt:
 
-line 101: "outstanding" - Before we turn to machine readiness, there is a compliance item we want to name directly. Across the
+check-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/typo3.org/typo3-org-report.md
+  1 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person ("the site does X") with first-person ("we found Y") inside the same section reads as drafted-by-committee.
+
+  ## Findings  (line 138)
+    first-person tokens: 7 (lines 142, 176, 193…)
+    third-person markers: 1 (lines 142)
+
+  Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice ("we"); scorecards and appendices use third-person.
 
 </details>
 

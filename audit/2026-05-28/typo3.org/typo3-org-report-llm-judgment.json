@@ -1,11 +1,11 @@
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/typo3.org/typo3-org-report.md",
-  "timestamp": "2026-05-28T13:15:08.723Z",
+  "timestamp": "2026-05-28T16:40:22.715Z",
   "model": "claude-sonnet-4-6",
   "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
   "usage": {
-    "input_tokens": 19114,
-    "output_tokens": 595,
+    "input_tokens": 18758,
+    "output_tokens": 626,
     "cache_creation_input_tokens": 2369,
     "cache_read_input_tokens": 0
   },
@@ -14,26 +14,26 @@
   "findings": [
     {
       "category": "tone-inconsistency",
-      "message": "The 'About This Report' section opens in consistent first-person plural ('We audited', 'We fetch', 'We then review') but the final paragraph of that section switches to third-person ('Here we look at the web estate… MX runs deeper… Get the web estate right') before returning to first-person, mixing voices within the same section.",
-      "context": "\"Here we look at the web estate: every page served over HTTP… MX runs deeper. A machine-ready estate covers every document type\"",
+      "message": "The 'About This Report' section opens in first-person plural ('We audited', 'We fetch', 'We then review') but the 'Executive Summary' and all subsequent Findings priority blocks also use first-person plural consistently — however, the 'Recommended Actions' list in 'Next Steps' switches to impersonal imperative/third-person constructions ('address the 29 WCAG 2.1 AA accessibility issues', 'Structured Data improvements') while every other action-oriented section in the report uses first-person plural voice.",
+      "context": "1. **Address Priority 1 findings**: address the 29 WCAG 2.1 AA accessibility issues identified (regulatory exposure)",
       "severity": "block"
     },
     {
       "category": "sample-vs-total-overreach",
-      "message": "The Structured Data Inventory section asserts 'a wider audit identifies the same gaps across the rest of the estate' as a direct finding, implying a full-site conclusion from a 7-page sample without any qualifying language that this is a prediction rather than an evidenced observation.",
-      "context": "\"a wider audit identifies the same gaps across the rest of the estate\"",
+      "message": "The 'Structured Data Inventory' section asserts 'a wider audit identifies the same gaps across the rest of the estate' — this projects a sample finding (0/100 structured data on 7 pages) as a confirmed fact about the full site without qualification.",
+      "context": "a wider audit identifies the same gaps across the rest of the estate.",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The 'Marker Reachability' section states 'a wider audit confirms whether the same pattern holds across the rest of the estate', which is correctly hedged, but the preceding sentence asserts 'All detected markers are present in the served HTML on the pages we audited' and then adds 'Server-side and browser-based agents see the same signals on the sampled pages' — this is fine — however the sentence 'a wider audit confirms whether the same pattern holds' is inconsistent with the unhedged assertion two sentences earlier that treats the sampled finding as a site-wide statement.",
+      "context": "All detected markers are present in the served HTML on the pages we audited. Server-side and browser-based agents see the same signals on the sampled pages",
       "severity": "block"
     },
     {
       "category": "hedged-vs-asserted-imbalance",
-      "message": "Priority 4 and the Div Soup section both state 'most pages across the audited set share the same template' to extend the bare-div finding beyond the single worst-case page, but only one page (https://typo3.org/association) is cited with data; asserting this pattern will 'persist beyond this single worst-case page' is overconfident given evidence from only one page.",
-      "context": "\"the band is likely to persist beyond this single worst-case page, though the figures cited are specific to https://typo3.org/association\"",
-      "severity": "block"
-    },
-    {
-      "category": "sample-vs-total-overreach",
-      "message": "The Security Headers section summary states '3 of the five standard security headers are absent on every audited response' but the findings table in Priority 5 lists four absent headers (X-Frame-Options, CSP, HSTS, Permissions-Policy), creating an internal inconsistency that implies a different count for the full site than the per-page evidence supports.",
-      "context": "\"3 of the five standard security headers are absent on every audited response: HSTS (Strict-Transport-Security), Content-Security-Policy (CSP), X-Frame-Options.\"",
+      "message": "Priority 3 asserts 'Because most audited pages share the same template, the pattern is likely present across the audited set' — the bare-div issue is evidenced on only one named page (https://typo3.org/association) yet the finding is extended with stated confidence to the full audited set of 7 pages without data from those other pages.",
+      "context": "Because most audited pages share the same template, the pattern is likely present across the audited set, though the figures cited are specific to https://typo3.org/association",
       "severity": "block"
     }
   ],

@@ -1,0 +1,35 @@
+{
+  "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/dkd-de-de-report.md",
+  "timestamp": "2026-05-28T16:44:38.140Z",
+  "model": "claude-sonnet-4-6",
+  "scope": "v2: recommendation consistency + tone + sample-vs-total + hedged-vs-asserted",
+  "usage": {
+    "input_tokens": 17825,
+    "output_tokens": 520,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 2369
+  },
+  "findingCount": 3,
+  "withdrawnCount": 0,
+  "findings": [
+    {
+      "category": "tone-inconsistency",
+      "message": "The 'Next Steps / Recommended Actions' section switches from the report's consistent first-person voice ('We audited', 'We recommend') to impersonal imperative constructions ('Address Priority 1 findings', 'Review Priority 2-3 findings', 'Consider optional enhancements') without a voice shift in any surrounding section, breaking the uniform first-person consultant voice held throughout the body.",
+      "context": "1. **Address Priority 1 findings**: address the 520 WCAG 2.1 AA accessibility issues identified (regulatory exposure)",
+      "severity": "block"
+    },
+    {
+      "category": "sample-vs-total-overreach",
+      "message": "The Structured Data Inventory section states 'Across the 7 pages we audited, structured data is solid. Adding recommended properties and increasing type diversity on the sampled pages gives machines more to work with.' The first sentence asserts structured data is 'solid' as a site-level quality judgement, but the second sentence correctly scopes it to the sample — the opening assertion implies a site-wide verdict from a 7-page sample.",
+      "context": "Across the 7 pages we audited, structured data is solid. Adding recommended properties and increasing type diversity on the sampled pages gives machines more to work with.",
+      "severity": "block"
+    },
+    {
+      "category": "hedged-vs-asserted-imbalance",
+      "message": "The llms-full.txt finding in the Discovery Files section hedges a straightforward absence ('Whether adding a concatenated full-text companion file would deliver meaningful value depends on the actual content depth of the broader site') into a conditional recommendation, whereas every other absent discovery artefact (llms.txt, agent-card.json, ai.txt, humans.txt) is stated with confident, unhedged recommendations — creating an inconsistent confidence level across structurally identical absence findings.",
+      "context": "Whether adding a concatenated full-text companion file would deliver meaningful value depends on the actual content depth of the broader site, which the audited sample does not yet measure",
+      "severity": "block"
+    }
+  ],
+  "withdrawn": []
+}

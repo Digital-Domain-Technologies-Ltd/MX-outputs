@@ -1,0 +1,962 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": "dkd.de-de-2026-05-28",
+  "runRevision": 2,
+  "lastWriteAt": "2026-05-28T18:59:50.985Z",
+  "operator": "tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://www.dkd.de",
+  "startedAt": "2026-05-28T16:43:51.182Z",
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 24-205 — Consumer Protections for Artificial Intelligence",
+      "version": "SB-24-205",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "dkd-de-de-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "997e164ba5f9b3b97f56902ee8cae72f237fcda8",
+      "shortSha": "997e164"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.4.0",
+    "host": "toms-MacBook-Pro-304.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-05-28T16:43:51.329Z",
+      "stepId": "report.rewrite-1",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 1/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "8e35e9a3bf9ea157e80b2de6d8efb10acedba8b7e9cb2b4eb9ea9889aa5dab7e"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "cf5dea738b01b2613762716a82fa8b892c3dd81f09cc8b4b0c4b6dfbe58e5b45",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We audited seven pages of www.dkd.de and came away with a clear picture: the foundations built for human visitors are solid. Performance is the strongest dimension across the audited set, and an SEO score of 92/100 confirms that search engines are meeting the site in good order. The TYPO3 CMS platform is evidently well configured, content is well structured, and the overall experience for a human reader landing on any of the seven pages we reviewed is coherent and professionally presented.\n\nAcce",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:51.465Z",
+      "stepId": "report.rewrite-2",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 2/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "6e661fcd3d1dd4deb07ca07f916b404ccab64b4da43bf3d4aac0b136296873db"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "7e5c99d6f1573e88cb0562f37ade730734a882256c7ad25efb2e717671e00862",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, www.dkd.de delivers a strong experience for human visitors, with Performance, Accessibility, and SEO all sitting in the Excellent band, though the accessibility findings point to a meaningful opportunity in WCAG conformance.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:51.602Z",
+      "stepId": "report.rewrite-3",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 3/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "ab5e58ee0f5920f9f48931a8074398fcb62d80cc92d89e14bea701917f4a2d9a"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "5b1f912eba7c87d1506784a70c32fd96c8ab4ee196c18111174dff49756d7f08",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, machines can discover and parse www.dkd.de, though a Discovery Readiness score of 25/100 and the absence of MX governance markers mean citation as an attested source is not yet within reach.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:51.734Z",
+      "stepId": "report.rewrite-4",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 4/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "b74a3fb7bbf13399e4a6bbdbc16b32b295933507d51133d3a9a35671cf7460f6"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "77d18340f9816b752b31d099a88a148654f85cb48842e4795eec0c680758de67",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, www.dkd.de demonstrates a solid foundation in the areas that matter most to both users and machines: an SEO score of 92/100, an Accessibility score of 89/100, and four of five key security headers already in place. These results represent genuine groundwork on which the improvements ahead can build confidently.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:51.869Z",
+      "stepId": "report.rewrite-5",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 5/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "c8f33a29cfb8645a08d760e9faac4e5dd652a0e8cd99651f971e9bdc025bec1b"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "6ee384c3bbc1ed4534682af0b052e6dcb321c6a0bbc2a56b225f29e13ff1df63",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "The table below presents our findings as opportunities prioritised by impact, with discovery and machine-visibility gaps leading because they constrain what machines can read, index, and act upon before any other signal is evaluated. Structured Data Quality at 65/100 and Catalogue Visibility at 10/100 sit alongside Discovery Readiness at 25/100 and MX Stack Completeness at 62/100 as the clearest areas to strengthen across the audited set.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:52.006Z",
+      "stepId": "report.rewrite-6",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 6/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 4000
+      },
+      "inputs": {
+        "blockIndex": 6,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "ec8999fb33514019df77f5bd8001483ce6aac5daa07eee4b748582faa5d0cfef"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "7a3aef525520ee9499f65bac5ddbcd35b237faf5109e6c6d643c7bc1dafe900d",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "| # | Finding | Bucket | Priority | Effort | Impact |\n|---|---------|--------|----------|--------|--------|\n| 1 | Duplicate ID Attributes across all 7 audited pages, WCAG 4.1.1 (IDs: accessibility, account, alarm, article, bell) | Compliance Risk | High | Low | Assistive technology users may miss or mis-navigate content anchored to these IDs |\n| 2 | Semantic Structure 53/100, worst page https://www.dkd.de/de/kontakt (26 of 48 bare divs) | Compliance Risk | Medium | Medium | Screen reader and mac",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:52.139Z",
+      "stepId": "report.rewrite-7",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 7/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 7,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "edfa3bbbb5c8b07a02d621352bf5ef6758702b9993bb3b146b58a7d514d7c362"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "d75868c3a92f0e30ec8f0326ca6ef90f734623873a76dd6701efa2e5367c26e7",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "- **sameAs**: Adding sameAs links to the existing WebSite and BreadcrumbList entities, pointing to Wikidata or LinkedIn profiles, gives machines a verified identity anchor they can use to reconcile mentions of Dkd (www.dkd.de) across sources.\n\n- **potentialAction**: Attaching a potentialAction declaration to the WebSite entity advertises contact or search capabilities directly to machines, reducing the inference step agents otherwise need to take when deciding whether to surface the site as an a",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:52.273Z",
+      "stepId": "report.rewrite-8",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 8/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 8,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "0e2c40eff1fa8f8f4215700f6dd3a7716a151ea66d9f14ff3daaa4900d73bbb9"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "18594d7bb464c797ab2da4141d15d9cd0eecad5519f20e663135c8d5cff197b2",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "The robots.txt file is present and actively restricts machine access across 21 disallow paths, indicating a deliberate crawl-boundary strategy. A single sitemap reference is announced within the file, giving compliant crawlers a direct route to indexed content.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:52.408Z",
+      "stepId": "report.rewrite-9",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 9/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 9,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "c61d78d03ee1041216d8cce55060b9da47c6e6f661a9d59dd408a643211b9bf2"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "64c28e29edcbd8b181b1ca81ef882a59978fd676c6574e72b5828a0d64cd20e3",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "The sitemap earns a Grade A, declaring 8 URLs with lastmod dates, changefreq values, and priority attributes all present, giving machines a complete and well-formed crawl signal.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:52.541Z",
+      "stepId": "report.rewrite-10",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 10/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 10,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "1b429649270ed83841a019b6f017a0e47c1c7706743f27b3fee38fc8f3000b13"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "bd5fe2e465e8c5186875c55d9c1e43cb40a9b80e57fe8b03f94270f1beb12f0e",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found no llms.txt at the root of www.dkd.de, meaning machines that query the host for a structured content index receive no site description, page inventory, or content policy. We recommend adding an llms.txt to give machines a clear, structured entry point for understanding the scope and permissions of the content available.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:52.676Z",
+      "stepId": "report.rewrite-11",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 11/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 11,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "30acfe9e477a2131c9bcd5e141bbc3fe3e0c438e13818ddd0dba6de4f486302f"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "0d19347cb13cf5eb923893363f65ed71355d0e46a6b697939ced9445628e1175",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found no llms-full.txt on www.dkd.de, with the endpoint returning a 404 and no reference to it in the sitemap or the homepage head. Whether adding a concatenated full-text companion file would deliver meaningful value depends on the actual content depth of the broader site, which the audited sample does not yet measure; we recommend treating this as a conditional next step once that depth is established.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:52.808Z",
+      "stepId": "report.rewrite-12",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 12/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 12,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "b22dde5af9fa9d7f874199682f0582e2317bb318f24f43850e6d22925fb29f3c"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "5ff40190b6838dbdac112792cab38c8b90ea7e33a8758cd43831bbbf92d0bb7b",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Partially Compatible; the Search & Compare, Price Understanding, and Purchase Confidence stages are not applicable for this site type.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:52.957Z",
+      "stepId": "report.rewrite-13",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 13/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 13,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "d297bd129626f97d1597fd949b0ac2279da1f45cc6329252ab2aec89f5b1917a"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "2cb818a84f2b48f4a781e60fd692a66cefbd52e955e74e866749c380da5ad897",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, three resilience checks warrant attention: Truncation Risk, Content Negotiation, and Inline Tag Bloat, with Truncation Risk standing out as the most pervasive concern, affecting every one of the seven pages we examined. When machines fetch pages that exceed safe-fetch thresholds, they may receive only a partial view of the content, reducing how accurately they can index, summarise, or act on what we publish. Addressing Truncation Risk across the audited set would deliver ",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:53.101Z",
+      "stepId": "report.rewrite-14",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 14/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 14,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "23eebd9bd9a50e684aaadeeeae21975d04ce176b346cc5bf2371910c1f4c8904"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "8e59aded00c49cf448fb9f3a9d3db3212994698ebdd8b78f5c6f0fe5dfb4bd5c",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "On the contact page (https://www.dkd.de/de/kontakt), the rendered surface carries a bare-div ratio of 54%, meaning machines lose structural context on that page and fall back on positional inference to determine meaning. The pattern is surface-wide rather than structurally deep, with chains reaching only three levels, which points to a component framework where elements carry visual class names rather than semantic roles. The most immediate gain comes from wrapping the obvious landmarks (header,",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:53.238Z",
+      "stepId": "report.rewrite-15",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 15/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 15,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "9a1fc8eadef2e19da1d5ea126057c8a45d8877cf23b3312e0960f29c16a7dbb6"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "ca0436b67b4e98e1a168671c59961b2c4f502a56bbd33205c21d744f65dd706e",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "The audited set shows consistent metadata patterns across pages, with no organisation-name or canonical-URL divergence flagged by the consistency check.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:53.374Z",
+      "stepId": "report.rewrite-16",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 16/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 16,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "4ae6ab884bd63b61d3e0482861de06fb6e7c4ebcf2628d3c1a144238f7c93f3b"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "57c09a5d5fc352e7f0fa17328299c8dda88726f1250c5780431584a855276be3",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, PDF accessibility sits at the intersection of two genuinely independent concerns: accessibility legislation has converged globally on ISO 14289-1 (PDF/UA) as the shared technical baseline, with the EAA (Directive (EU) 2019/882, in force 28 June 2025) representing the most precisely codified instance of that convergence alongside Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent frameworks in Australia and Canada. Equally, an untagged ",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:53.514Z",
+      "stepId": "report.rewrite-17",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 17/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 17,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "85531fd26f1f5544136babe135c03dc08cca7116df930ae84378c0e5e6be7d9e"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "60a5c6532ea22d00c473fdad5cd6f876162fe1a2cd91220cd084d891ab17112f",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, https://www.dkd.de performs well for search visibility, with SEO scoring 92/100, a clear indicator that the foundations for human-facing discoverability are in good shape. The principal opportunities lie in Discovery Readiness, which scores 25/100, and Structured Data, which scores 65/100, both of which shape how machines read, interpret, and ultimately surface the site's content in automated pipelines. We invite the team at https://www.dkd.de to work through the findings",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:43:53.652Z",
+      "stepId": "report.rewrite-18",
+      "agent": "claude-sonnet-4-6",
+      "intent": "REWRITE block 18/18 replaced via API",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 18,
+        "blockCount": 18,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-28/dkd.de-de/.infilled/dkd-de-de.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "fabea439a0da66d0abb8da5685016520d52b8c3363bcfe9bef27537d1d741fd5"
+      },
+      "rubricHash": "7753189e9a5c093741908081e2bbaddcf613c02ecaa3697f5c12371e6ee2c809",
+      "promptHash": "a84c433032646e43bed7d1384f39b42307d1a6ff80cfaca23339595f7a305776",
+      "inputHashes": [
+        {
+          "hash": "9cd273f0c3f70c3dbc23176d77a568cce1d7cab6454731a64654d0f061608c53",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, we reviewed 84 images in total. The format distribution breaks down as 37 PNG, 33 JPEG, and 14 images in other or unrecognised formats; we found no WebP or SVG images in the pages we reviewed. Alt-text coverage is strong: 83 of the 84 images carry descriptive alt text, representing 98.8% coverage, with one image missing an attribute.\n\nEvery one of the 84 images we sampled carries a loading=\"lazy\" attribute, and we recorded no instances of loading=\"eager\" or images with no",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-28T16:44:25.409Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "claude-sonnet-4-6",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "dkd-de-de-report.md",
+        "regexCategoriesFlagged": []
+      },
+      "outputs": {
+        "file": "dkd-de-de-report-fierce-critic.json",
+        "sha256": "34cf5aa46e50c8b85f3dd6fb59e256d5b43824f9ffe02c83739556a8ecc10eda"
+      },
+      "rubricHash": "8a488965de03eb267a847ab7a015b60d93a1df3866ce80b91c5c2af8021b6826",
+      "promptHash": "69a3bff9eebadf0d64da85cccee33dc3fb9e0070920a7a8163b2e7d2ff229728",
+      "inputHashes": [
+        {
+          "hash": "30f6adc819cc64274c2c22b23568064e6db39d80d047860372f86d010754290a",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"exaggeration\",\n      \"message\": \"US English form 'organization' implied by 'Organisation name parity' — the report uses 'Organisation' (UK) in the Content Consistency table, which is fine, but the Cross-Page Consistency and Content Consistency sections inconsistently mix register. More critically, 'optimize' appears nowhere, but 'optimization' does not appear either — however, 'optimisation' is used correctly throughout. No US/UK drift flag needed there",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=0 llmFindings=5"
+    },
+    {
+      "timestamp": "2026-05-28T16:44:38.297Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "claude-sonnet-4-6",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "dkd-de-de-report.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report-llm-judgment.json",
+        "sha256": "b6e60a6e4edf68622e2e18515a73f633034646404989ae3acfd61d08aabc5a68"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "1766684bc568a19355ed2576eddd1f6d42e5d38d044d501384276a65f52f7b3b",
+      "inputHashes": [
+        {
+          "hash": "30f6adc819cc64274c2c22b23568064e6db39d80d047860372f86d010754290a",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"tone-inconsistency\",\n      \"message\": \"The 'Next Steps / Recommended Actions' section switches from the report's consistent first-person voice ('We audited', 'We recommend') to impersonal imperative constructions ('Address Priority 1 findings', 'Review Priority 2-3 findings', 'Consider optional enhancements') without a voice shift in any surrounding section, breaking the uniform first-person consultant voice held throughout the body.\",\n      \"context\": ",
+      "outcome": "warn",
+      "notes": "findings=3 withdrawn=0 inputTok=17825 outputTok=520"
+    },
+    {
+      "timestamp": "2026-05-28T16:44:44.840Z",
+      "stepId": "audit.repair-unified",
+      "agent": "claude-haiku-4-5-20251001",
+      "intent": "Unified repair: Layer 1 applied 3 mechanical patch(es); Layer 2 applied 3/3 LLM patch(es) for 3 finding(s)",
+      "parameters": {
+        "model": "claude-haiku-4-5-20251001",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "dkd-de-de-report.md",
+        "findingCount": 3,
+        "layer1Patches": 3,
+        "layer1Resolved": 5
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "e263e9d68fea45963a5972679bc8e30d729de83e65d6242ddde3fd1f841a72bd",
+        "patchesApplied": 3,
+        "patchesSkipped": 0,
+        "unfixableCount": 0
+      },
+      "rubricHash": "b137ebffdaff50afa25c67371dcc1c3a489f1593b4f49b24af153e3e6322b0af",
+      "promptHash": "b64a9b92e835d99c420518cba83137c5d2bc11f4d0415d6c3811582d11792c27",
+      "inputHashes": [
+        {
+          "hash": "4e36fbb2f43d57ef81d9f1f330a2a33a9954db37859ef024585a257895f96cb2",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"findingIndex\": 1,\n      \"find\": \"1. **Address Priority 1 findings**: address the 520 WCAG 2.1 AA accessibility issues identified (regulatory exposure)\",\n      \"replace\": \"1. **Address Priority 1 findings**: We recommend resolving the 520 WCAG 2.1 AA accessibility issues identified (regulatory exposure)\",\n      \"justification\": \"voice: rewrote imperative 'address the' to first-person 'We recommend resolving' to align with consultant voice throughout the report.\"\n    },\n    {\n      \"findingIndex\": 2,\n      \"find\": \"Across the 7 pages we audited, structured data is solid. Adding recommended properties and increasing type diversity on the sampled pages gives machines more to work with.\",\n      \"replace\": \"Across the 7 pages we audited, structured data shows a stro",
+      "outcome": "pass",
+      "notes": "inputTok=21397 outputTok=450 layer1=3 layer2applied=3 layer2skipped=0 unfixable=0 hygiene=1 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-05-28T18:59:50.985Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render dkd-de-de-report.md to tagged PDF via mx.pdf.sh (doctype: report)",
+      "inputs": {
+        "source": "dkd-de-de-report.md",
+        "doctype": "report",
+        "sourceSha": "d87e9d658c2083c98c081fccd8365159dae2f7ae",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-05-28/dkd.de-de/dkd-de-de-report.md"
+      },
+      "outcome": "pass"
+    }
+  ]
+}
