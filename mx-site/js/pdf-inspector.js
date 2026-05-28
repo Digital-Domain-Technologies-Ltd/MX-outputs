@@ -265,8 +265,8 @@ function classify(findings) {
       status: Number.isInteger(findings.provenance?.parsed?.runRevision) ? 'pass' : 'na',
       detail: Number.isInteger(findings.provenance?.parsed?.runRevision)
         ? `revision ${findings.provenance.parsed.runRevision}` +
-          (findings.provenance.parsed.lastRunAt
-            ? `, last run ${findings.provenance.parsed.lastRunAt}`
+          (findings.provenance.parsed.lastWriteAt
+            ? `, last write ${findings.provenance.parsed.lastWriteAt}`
             : '') +
           (findings.provenance.parsed.startedAt
             ? `, started ${findings.provenance.parsed.startedAt}`
