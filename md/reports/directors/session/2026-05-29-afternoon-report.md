@@ -4,7 +4,7 @@ description: "Landed the founding-sponsor recognition framing across canon and o
 author: "Tom Cranstoun"
 created: 2026-05-29
 modified: 2026-05-29
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -161,7 +161,17 @@ The Year 1 revenue planning shape moved from £125k-£335k to £165k-£455k off 
 | Repo | SHA | Subject |
 |------|-----|---------|
 | mx-outputs | 3375b55 | services/our-services.html: Private REGINALD platform section 7, scripted-SOPs and local-inference positioning, franchise-operator customer cohort |
-| MX-hub | pending | (this report + canon, CRM, audit-pipeline, PDF-rendering edits across the afternoon) |
+| mx-outputs | 5001610 | Regenerate index: pick up afternoon directors report 2026-05-29 |
+| mx-outputs | 50b02d1 | Three pre-investor traction signals: Stripe Publisher Listing + real contact form + EAA vertical lander |
+| mx-outputs | 7bf2b16 | Directors report 2026-05-29 afternoon v1.1: late-afternoon audit-subsystem six-pass sweep addendum |
+| MX-hub | 16583e0c | Audit-subsystem six-pass sweep: rate-limit-aware probing, hard-fail gating, data-fallback hygiene, cross-section consistency gate, conditional-prose discipline, mandatory rewrite pass |
+| MX-hub | 8b617a42 | Manuscript propagation: four-layer architecture, three-layer governance, local-inference, x-mx-domainTerms |
+| MX-hub | 86bc0c7b | Scott opportunities brief polish + mx-outputs pointer bump for afternoon directors report v1.1 |
+| MX-hub | b91c95d4 | REMINDERS v3.66: two new audit-pipeline open items from the late-afternoon six-pass sweep (verify dkd.de probe pacing; deferred predicate audit) |
+| MX-hub | dbd6c788 | CHANGELOG: 2026-05-29 (late afternoon) entry — audit-subsystem six-pass sweep, local-LLM default doc fix, manuscript propagation |
+| MX-hub | a940c1d7 | LEARNINGS: two new rules — local-LLM default in audit docs; concurrent git-add/git-commit race in multi-agent sessions |
+| MX-hub | b6f4d34c | UBERCOG: routing entries for the new hard-fail gating, MX_AUDIT_FORCE_PDF override, and check-cross-section-consistency.js |
+| MX-hub | 262d64bd | Backfill Gate 10 required fields on CONDITIONAL-PROSE-GUIDE.md (mx.purpose, mx.stability, mx.runbook, mx.x-mx-contextProvides) |
 
 ---
 
@@ -185,7 +195,9 @@ The work landed as six passes against an approved plan.
 
 **Local-LLM default — three doc leaks fixed.** Tom flagged after Pass F that the unified repair is not always Haiku 4.5 — `lib/llm-client.js` defaults to a local Ollama `gpt-oss:20b` model, and Anthropic Haiku 4.5 is only used when `MX_AUDIT_LLM_PROVIDER=anthropic`. Three doc surfaces fixed in lockstep: the new audit-site skill prose I wrote in Pass F, plus two pre-existing leaks in `scripts/cogs/mx-audit.cog.md` lines 1383 and 1427. Memory entry `feedback_repair_pass_not_always_haiku.md` added so the wording stays correct in future doc passes.
 
-**Manuscript carryover.** The afternoon's earlier three-layer-model + local-inference work had left uncommitted edits in the published manuscripts (free-book chapter-00, mx-handbook-v2 chapter-00 + chapter-11 + chapter-12, mx-protocols chapter-07 + chapter-20, appendix-c + appendix-m + appendix-t + appendix-u). These ship in the same hub commit as the audit sweep.
+**Manuscript carryover.** The afternoon's earlier three-layer-model + local-inference work had left uncommitted edits in the published manuscripts (free-book chapter-00, mx-handbook-v2 chapter-00 + chapter-11 + chapter-12, mx-protocols chapter-07 + chapter-20, appendix-c + appendix-m + appendix-t + appendix-u). These ended up shipping as their own atomic commit, 8b617a42, rather than bundled into the audit-sweep commit as the v1.1 addendum had assumed (see the concurrent-commit race note below for why).
+
+**Concurrent-commit race captured in LEARNINGS.** While the manuscript propagation pass was preparing its commit, an unrelated parallel process was staging audit-pipeline files into the same index. The first commit attempt produced a mis-labelled artefact (the manuscript commit message landed on top of audit-pipeline contents) before the race resolved. The mis-labelled SHA was reset locally; the substantive work landed cleanly as `8b617a42` (manuscripts) and `16583e0c` (audit sweep) on separate commits. The lesson is recorded in `LEARNINGS.md` under "concurrent git-add/git-commit race in multi-agent sessions": when more than one agent is active in the same working tree, stage and commit with explicit pathspecs (`git commit --only <files>`) rather than relying on the index being undisturbed between `git add` and `git commit`.
 
 ### Late-afternoon by the numbers
 
@@ -212,4 +224,4 @@ The work landed as six passes against an approved plan.
 
 ---
 
-*Filed 2026-05-29 afternoon. Updated 17:00 with the audit-subsystem six-pass sweep addendum. Hub commit follows in Step 3 of /step-commit.*
+*Filed 2026-05-29 afternoon. Updated 17:00 with the audit-subsystem six-pass sweep addendum (v1.1). Re-updated 16:25 with the actual commit SHAs and the concurrent-commit race lesson (v1.2). The substantive work has all shipped; this report's hub-commit slot is the v1.2 update itself, a Commit Log backfill plus the race-note paragraph.*
