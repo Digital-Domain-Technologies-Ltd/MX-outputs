@@ -37,6 +37,7 @@
   <meta name="theme-color" content="#0a1628">
 
   <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-forms.css">
   <link rel="stylesheet" href="../css/mx-hero.css">
   <link rel="stylesheet" href="../css/mx-blog.css">
 
@@ -184,10 +185,10 @@
           <p>Tell us about your goals and challenges.</p>
 
       <!-- Contact Form -->
-      <form id="contact-form" class="contact-form" novalidate>
+      <form id="contact-form" class="mx-lead-form contact-form" data-mx-lead-form="general-enquiry" action="https://mx.allabout.network/api/v1/lead/general-enquiry" method="POST" novalidate>
         <div class="form-group">
           <label for="contact-name">Name <span class="required" aria-hidden="true">*</span></label>
-          <input type="text" id="contact-name" name="name" required autocomplete="name" placeholder="Your full name">
+          <input type="text" id="contact-name" name="name" required autocomplete="name" placeholder="Your full name" maxlength="120">
         </div>
 
         <div class="form-group">
@@ -202,7 +203,7 @@
 
         <div class="form-group">
           <label for="contact-company">Company <span class="required" aria-hidden="true">*</span></label>
-          <input type="text" id="contact-company" name="company" required autocomplete="organization" placeholder="Company name">
+          <input type="text" id="contact-company" name="company" required autocomplete="organization" placeholder="Company name" maxlength="160">
         </div>
 
         <div class="form-group">
@@ -214,35 +215,38 @@
           <label for="contact-service">How can we help? <span class="required" aria-hidden="true">*</span></label>
           <select id="contact-service" name="service" required autocomplete="off">
             <option value="">Select a service</option>
-            <option value="MX Readiness Assessment">MX Readiness Assessment</option>
-            <option value="Strategic MX Planning">Strategic MX Planning</option>
-            <option value="Implementation Support">Implementation Support</option>
-            <option value="Team Training">Team Training</option>
-            <option value="Strategic Advisory">Strategic Advisory</option>
-            <option value="General Inquiry">General Inquiry</option>
+            <option value="mx-printworks">MX Printworks: print and publish with attested provenance</option>
+            <option value="mx-audit">MX Audit Suite: site and content estate audit</option>
+            <option value="pdf-eaa">PDF accessibility remediation (EAA Directive 2019/882)</option>
+            <option value="reginald">REGINALD Publisher Listing and attestation</option>
+            <option value="certification">Agency or Certified Operator certification</option>
+            <option value="training">Team training or strategic advisory</option>
+            <option value="other">Other / general enquiry</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="contact-message">Tell us about your needs <span class="required" aria-hidden="true">*</span></label>
-          <textarea id="contact-message" name="message" required rows="6" autocomplete="off" placeholder="What are your goals? What challenges are you facing? What is your timeline?"></textarea>
+          <textarea id="contact-message" name="message" required rows="6" autocomplete="off" placeholder="What are your goals? What challenges are you facing? What is your timeline?" maxlength="4000"></textarea>
         </div>
 
         <div class="form-group">
           <label for="contact-budget">Budget indication <span class="optional">(optional, everything is negotiable)</span></label>
           <select id="contact-budget" name="budget" autocomplete="off">
             <option value="">Prefer not to say</option>
-            <option value="Exploring options">Exploring options</option>
-            <option value="Have budget allocated">Have budget allocated</option>
-            <option value="Need help building business case">Need help building business case</option>
+            <option value="exploring">Exploring options</option>
+            <option value="allocated">Have budget allocated</option>
+            <option value="business-case">Need help building business case</option>
           </select>
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn-submit">Send Enquiry</button>
+          <button type="submit" class="btn-submit btn-primary">Send Enquiry</button>
         </div>
 
-        <p class="form-note">This form opens your email client with a pre-filled message to <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>. No data is stored or sent to third parties.</p>
+        <p class="form-status" data-mx-lead-status="general-enquiry" data-state="idle" role="status" aria-live="polite"></p>
+
+        <p class="form-note">Your submission is sent securely to our team at <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>. We do not pass it to third parties. A copy is emailed back to you for your records.</p>
       </form>
 
       <hr>
@@ -341,5 +345,6 @@
   </footer>
 
   <script src="../js/app.js"></script>
+  <script src="../js/lead-capture.js"></script>
 </body>
 </html>
