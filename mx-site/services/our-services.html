@@ -609,9 +609,12 @@
 <li><strong>Structured Data Analysis.</strong> What <a href="https://schema.org">Schema.org</a> markup exists? What's missing?</li>
 <li><strong>Accessibility Evaluation.</strong> WCAG 2.1 AA compliance across key user journeys</li>
 <li><strong>Explicit Intent Review.</strong> Where do agents have to guess vs. parse with certainty?</li>
-<li><strong>Agent Interaction Testing.</strong> How do actual AI agents (ChatGPT, Perplexity, shopping agents) interact with your site?</li>
-<li><strong>Competitive Benchmarking.</strong> How MX-compliant are your top 3 competitors?</li>
+<li><strong>Machine Interaction Testing.</strong> How do actual machines (ChatGPT, Perplexity, shopping agents, server-side parsers) interact with your site?</li>
+<li><strong>Competitive Benchmarking.</strong> How MX-compliant are your top competitors?</li>
 </ul>
+<h3 id="how-the-audit-is-built">How the audit is built</h3>
+<p>Most of the MX Readiness Assessment is scripted SOPs running deterministic checks, not inference. The crawl, the served-versus-rendered comparison, the structured-data extraction, the accessibility passes, the discovery-file probes, the platform fingerprinting and the per-section scoring all run as scripts producing byte-identical outputs on the same input. A small number of stages run a judgement pass over the resulting report (rewrite-and-repair on the prose, verification, fierce-critic review, post-PDF cross-check). That judgement pass is the only inference layer.</p>
+<p><strong>The local-inference option for regulated and privacy-sensitive customers.</strong> The judgement passes can run against a local LLM (Ollama, LM Studio, on-premise Llama or equivalent) instead of a cloud provider. The deterministic scripts already run locally. For regulated industries and privacy-sensitive customers, this means the entire audit can run with no audit data leaving the customer's network. The option ships as part of the Private REGINALD platform deployment (see section 7); the local-inference engagement is priced separately from the cloud-inference baseline because the operational support shape differs.</p>
 <h3 id="deliverables" tabindex="-1">Deliverables</h3>
 <ul>
 <li><strong>MX Readiness Score</strong> (0-100) with detailed breakdown by pillar</li>
@@ -804,6 +807,7 @@
 <li><strong>European Accessibility Act readiness.</strong> What the EAA expects for documents distributed to consumers from June 2025</li>
 <li><strong>Authoring workflow review.</strong> Where in your production process accessibility is being lost (Word, InDesign, exporters, scanners, headless pipelines)</li>
 </ul>
+<p>The PDF audit pipeline is fully scripted: qpdf, exiftool, ghostscript, tagged-structure parsing, and the heuristic ISO 14289 checks. No inference involved at the PDF compliance layer. For regulated-sector engagements where the PDF estate cannot leave the customer's network, the entire PDF audit runs locally as part of the local-inference option named in section 1.</p>
 <h3 id="deliverables-5" tabindex="-1">Deliverables</h3>
 <ul>
 <li><strong>PDF Accessibility Report</strong> with per-document conformance status, severity-ranked findings, and screenshots of each issue</li>
@@ -840,6 +844,7 @@
 <li><strong>Signing engines.</strong> The cryptographic infrastructure that emits attested cogs. Ed25519 key generation and rotation, RFC 9421 HTTP Signatures on every write endpoint, revocation paths, and the audit log a regulator can walk from a published claim back to the human who authorised it. Runs alongside your CMS or content pipeline; called from your release process.</li>
 <li><strong>PDF auditing, creation, and validation.</strong> The MX Compatible PDF toolchain end to end. Audit existing PDFs in batch and pinpoint exactly what each file is missing for ISO 14289 tagged structure, MX XMP metadata, and the AI plus deterministic provenance pair. Create new PDFs through the canonical render pipeline that ships every output as MX Compatible by construction. Validate any PDF in a release gate so nothing leaves your build pipeline without the credential.</li>
 <li><strong>Website designer.</strong> A designer that produces MX-ready HTML by default. Pages emerge with the YAML frontmatter, the per-field meta tags, the JSON-LD blocks, the cog metadata, and the accessibility scaffolding already in place. No retro-tagging passes; the artefact ships MX-ready the first time, and the designer is the surface where your content team works rather than a hand-off to engineering.</li>
+<li><strong>Local-inference engagement option.</strong> The full MX audit pipeline (described in section 1) runs entirely on your infrastructure, with the judgement passes routed to a local LLM (Ollama, LM Studio, on-premise Llama or equivalent) instead of a cloud provider. The deterministic scripts always run locally; the local-inference option adds the inference layer so the entire audit pipeline operates inside your network with no audit data crossing the boundary. Available as an engagement variant of all three platform models (self-hosted, co-managed, hosted by CogNovaMX under your tenant); priced separately from the cloud-inference baseline.</li>
 </ul>
 <h3 id="deliverables-6" tabindex="-1">Deliverables</h3>
 <ul>
