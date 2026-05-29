@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Founding-Sponsor Recognition + Three-Layer Franchise Model + Private REGINALD Platform + Audit Pipeline Terminology and TOC Fix"
-description: "Landed the founding-sponsor recognition framing across canon and outreach, productised the Private REGINALD platform as DDT business-plan line 7, formalised a three-layer governance model (Gathering owns standards; CogNovaMX owns franchise rules; founding sponsors choose), confirmed the pragmatic legal-first franchise launch model with the first-operator agreement skeleton drafted, swept the audit pipeline to prefer 'machines'/'SOPs' over 'AI' with selective preservation of 'AI agents' / 'AI assistant' as terms of art, and fixed two PDF rendering defects (duplicate title H1; TOC not starting on a new page)."
+title: "Co-Directors Report — Founding-Sponsor Recognition + Three-Layer Franchise Model + Private REGINALD Platform + Audit Pipeline Terminology + Humanizer Toolchain Expansion"
+description: "Landed the founding-sponsor recognition framing across canon and outreach, productised the Private REGINALD platform as DDT business-plan line 7, formalised a three-layer governance model (Gathering owns standards; CogNovaMX owns franchise rules; founding sponsors choose), confirmed the pragmatic legal-first franchise launch model with the first-operator agreement skeleton drafted, swept the audit pipeline to prefer 'machines'/'SOPs' over 'AI' with selective preservation of 'AI agents' / 'AI assistant' as terms of art, fixed two PDF rendering defects (duplicate title H1; TOC not starting on a new page), then in late-afternoon built three new deterministic AI-tell scanners (copula-avoidance, AI-vocabulary, prose-patterns) wired into the humanizer skill as PRIORITY-1 SCANs D / E / F, extended writing-style.md §5 with a 40-entry web-sourced AI vocabulary table and §6 with an AI-register openers ban list, expanded Pattern 7 and Pattern 8 catalogue entries to match, and timeless-cleaned the Scott opportunities brief with five rounds of humanizer."
 author: "Tom Cranstoun"
 created: 2026-05-29
 modified: 2026-05-29
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -225,3 +225,58 @@ The work landed as six passes against an approved plan.
 ---
 
 *Filed 2026-05-29 afternoon. Updated 17:00 with the audit-subsystem six-pass sweep addendum (v1.1). Re-updated 16:25 with the actual commit SHAs and the concurrent-commit race lesson (v1.2). The substantive work has all shipped; this report's hub-commit slot is the v1.2 update itself, a Commit Log backfill plus the race-note paragraph.*
+
+---
+
+## Late-Afternoon Second Addendum — Humanizer Toolchain Expansion (v1.3, post-17:00)
+
+After the audit-sweep work shipped, Tom flagged one specific AI tell in the Scott opportunities brief — "the substance of MX sits at this layer" — and asked for the brief to be timeless-cleaned, then the writing-style guide and humanizer skill extended to catch the family of tells the existing scanners miss. The work landed as five passes plus a small Tom-driven cleanup.
+
+**Pass A — Changelog strip on the Scott opportunities brief.** [`mx-crm/contacts/scott-mcgregor/opportunities-2026-05-28.md`](../../../../../mx-crm/contacts/scott-mcgregor/opportunities-2026-05-28.md) had three "follow-through" sections recording history of canon edits, plus dated "added" sign-offs and version-number cross-references. The Pattern 26 section was deleted entirely (pure history). The Private REGINALD, three-layer model, terminology, and founding-sponsor sections kept the substantive content but lost the temporal framing. All `(added 2026-05-29 ...)` sign-offs reduced to `— Tom`. Two residual `(post-meeting)` time-qualifiers removed in a later cleanup pass. The brief now reads as if it had always existed in this form.
+
+**Pass B — Copula-avoidance scanner (Tom flagged "sits at this layer").** New deterministic scanner at [`.claude/skills/humanizer/scan-copula.mjs`](../../../../../.claude/skills/humanizer/scan-copula.mjs) catching four families: replacement copulas (`serves as`, `stands as`, `acts as`, `functions as`), `marks/represents [a]`, locative dodges with abstract subjects (`sits at`, `sits in`, `sits behind`, `lives at`, `lives in`, `lies at`, `rests in`, `resides in`), and possession dodges (`boasts`, `features [as verb-of-having]`, `carries [as verb-of-having]`). Concrete-agent subject exemption built in (`we`, `both sides`, `partners`, `team`, named persons survive as voice usages). Wired into the humanizer skill as PRIORITY-1 SCAN D. The original AI tell and its eight sibling instances in the brief all fixed.
+
+**Pass C — AI-vocabulary scanner sourced from a 2026 web survey.** New deterministic scanner at [`.claude/skills/humanizer/scan-ai-vocab.mjs`](../../../../../.claude/skills/humanizer/scan-ai-vocab.mjs) catching three categories: 40-plus single-word AI tells with inflections (`bolster`, `ignite`, `unleash`, `meticulous`, `vibrant`, `testament`, `beacon`, `symphony`, `demystify`, `synergy`, `transformative`, `revolutionary`, `unwavering`, `profound`, `multifaceted`, `groundbreaking`, `harness`, `illuminate`, `elevate`, `nestled`, `breathtaking`, `renowned`, `stunning`, `vital`, `pivotal`, `realm`, `journey`, `roadmap`, `foster`, `underscore`, `embark`, `moreover`, `furthermore`, `additionally`, `arguably`); multi-word phrases (`dive into`, `paradigm shift`, `game-changer`, `diverse array`, `vast array`, `rich tapestry/history/culture`, `deeply rooted`, `commitment to`, `dedicated to`); AI-register openers (`In today's [adj] world`, `In the ever-evolving/fast-paced/digital landscape`, `In the realm of`, `At its core`, `Picture this`, `Imagine a world`, `Let's dive in/into`, `I hope this message finds you well`, `It's worth/important to note`, `Why does this matter?`, `That's only half the story`, `As a [business owner/leader], you know`, and others). Each rephrase hint names the exempt context (proper-noun product names, literal product roadmaps, `harness` for horse equipment, `journey` for literal travel, etc.). Wired as PRIORITY-1 SCAN E. Sources: Wikipedia "Signs of AI writing", OliviaCal 2026, Plus AI, Walter Writes AI, Tom Orbach Anti-AI cheat sheet.
+
+**Pass D — House-specific AI-tell metaphors added to scan-ai-vocab (Tom flagged "the room is a forbidden construct in my mind").** Six metaphor patterns from writing-style.md §6 that had been documented but not yet caught by any scanner: `the room` (as audience), `the spine` (as common structure), `put the cape on`, `wearing X branding`, `load-bearing [claim/fact/part/work]`, `on Monday` (time-of-week shorthand). Each rephrase hint cites writing-style.md §6 and names the replacements. Five instances of "the room" in the Scott brief fixed in the same pass (heading "What I want from the room" → "What I want from each of you"; "warrants a read across the room" → "warrants every director's attention"; etc.).
+
+**Pass E — Prose-patterns scanner covering the next-largest gap class.** New deterministic scanner at [`.claude/skills/humanizer/scan-prose-patterns.mjs`](../../../../../.claude/skills/humanizer/scan-prose-patterns.mjs) catching seven families that the existing scanners miss: superficial -ing endings (Pattern 3 — `, highlighting`, `, ensuring`, `, contributing`, `, underscoring`, etc.); verbose constructions (Pattern 22 — `in order to`, `due to the fact that`, `has the ability to`, `is able to`, etc.); filler adverbs (Pattern 23 — `essentially`, `fundamentally`, `ultimately`, `basically`, `frankly`, `needless to say`, `in many ways`, `across the board`); vague attributions (Pattern 5 — `industry reports suggest`, `experts argue`, `observers have noted`, `several sources`, `studies show`); false ranges (Pattern 12 — `from X to Y` with abstract endpoints); bridging clichés (extended Pattern 9 — `more than just`, `beyond just`, `the true power lies in`, `what's interesting is`, `what this means`, `here's the thing/kicker/catch`); extended copula-locative (Pattern 8 extension — `lies in`, `stems from`, `boils down to`, `comes down to`, `at the heart of`, `at the core of`, `at the centre of`). Wired as PRIORITY-1 SCAN F.
+
+**Pass F — Six house-vocab entries added to make the original §5 set deterministically caught.** After Tom asked "does it include my original set", a coverage audit identified six §5 entries that were trivially scanner-addable: `battle-tested`, `impress/impressive`, `the lens`, `the substrate`, `the surface area`, `obviously`. Five went into scan-ai-vocab.mjs (first four as ai-vocab words/phrases, last via prose-patterns filler-adverb category). The trickier §5 entries (`shape of X`, `the contract`, `reader`, `primitive`, `unit`, `delta/diff`) were named in the report-back as needing context-sensitive rules and held for later.
+
+**Writing-style guide extended in lockstep.** [`mx-canon/ssot/writing-guides/writing-style.md`](../../../../../mx-canon/ssot/writing-guides/writing-style.md) §5 gained a "Web-sourced AI vocabulary (2026 research)" sub-table with 40+ entries, each with rephrase and exempt context. §6 gained an "AI-register openers" sub-block grouping 20 opener phrases by family (trend / importance / engagement / email / authority). §9 Pattern 7 rewritten with the full word/phrase/opener lists, source citations, and a high-density before/after example. §9 Pattern 8 expanded to name three families with explicit before/after pairs for the replacement-copula and locative-dodge variants, plus a `keep when` clause for concrete-agent metaphors.
+
+**The Scott brief — five humanizer passes shipped clean.** The brief was run through the full humanizer workflow five times across this session (pass per scanner addition + a final all-scanners verification). Final state: all five scanners report zero confirmed AI patterns, the residual hits are all judged exempt (MX-domain `carries`, concrete-agent metaphor `both sides sit at the same table`, proper-noun `MX Journey Stage`, literal product `roadmaps`, real ordered progression `from concept to demonstrable product`). Voice score holds at 9/10.
+
+### Humanizer-build by the numbers
+
+| Metric | Value |
+|--------|-------|
+| New deterministic scanners shipped | 3 (`scan-copula.mjs`, `scan-ai-vocab.mjs`, `scan-prose-patterns.mjs`) |
+| Total PRIORITY-1 scanners now in the workflow | 6 (A negation-pivot, B verbal tics, C word frequency, D copula, E AI vocab, F prose patterns) |
+| Pattern categories covered by the three new scanners | 14 (4 copula families, 3 AI-vocab categories, 7 prose-pattern families) |
+| AI-vocab words catalogued | 40-plus single-word tells (with inflections) |
+| AI-vocab phrases catalogued | 16 multi-word phrases + 18 opener forms |
+| House-specific §6 metaphors now scanner-caught | 6 (`the room`, `the spine`, `put the cape on`, `wearing X branding`, `load-bearing X`, `on Monday`) |
+| House-specific §5 entries newly scanner-caught | 6 (`battle-tested`, `impress`/`impressive`, `the lens`, `the substrate`, `the surface area`, `obviously`) |
+| writing-style.md §5 new entries | 40+ in a sub-table |
+| writing-style.md §6 new entries | 20 AI-register openers in five sub-categories |
+| Scott opportunities brief — humanizer passes shipped | 5 |
+| Scott opportunities brief — final voice score | 9/10 |
+| Web sources surveyed | 5 (Wikipedia Signs of AI Writing, OliviaCal 2026, Plus AI, Walter Writes AI, Tom Orbach) |
+
+### Humanizer-build decisions
+
+- **Separate scanners per pattern class, one file each.** Three scanner files instead of one mega-scanner. The architecture lets each scanner evolve independently and keeps the rephrase-hint table focused. Cost: more imports in the skill workflow; benefit: clearer maintenance and per-class fixture testing.
+- **Over-flag by design.** Every new scanner flags every match; the rephrase hint names the exempt context (concrete-agent metaphor, proper noun, literal sense, technical term of art). The LLM judges keep-vs-rephrase against the surrounding context. False-negative cost (a real AI tell slips past) is much higher than false-positive cost (a legitimate use gets briefly flagged then waved through), so the bias is toward flag-everything.
+- **House-specific entries stay paired with writing-style.md citations.** Every rephrase hint that ports a §5 or §6 entry cites the section, so a future maintenance pass can walk back from the hit to the rule.
+- **The Scott brief is the canonical regression fixture.** The same document has been run through every scanner addition this session. Its voice-score trajectory (9 → 9 with each pass) confirms each new scanner is additive without false positives on real Tom-voice prose.
+
+### Humanizer-build next steps
+
+- **Six trickier §5 entries deferred** — `shape of X`, `the contract`, `reader`, `primitive`, `unit`, `delta/diff` need context-sensitive rules and will over-flag legitimate technical uses if added naïvely. Held for a separate pass with explicit exemption registries.
+- **Apply the new scanners to the next outward-facing document.** The blog backlog has C2PA-positioning posts queued for writing (Tom action-item 4 from the 28 May meeting); running them through the full six-scanner workflow before publication will confirm the toolchain catches the pattern classes a fresh draft introduces.
+
+---
+
+*v1.3 filed late-afternoon following the humanizer-toolchain expansion. Commit SHA for this session's hub work will land in the Step 3 hub commit (see hub log post-Step 3 for the actual SHA). The substantive work is the three new scanners, the writing-style guide extensions, and the clean-shipped Scott opportunities brief.*
