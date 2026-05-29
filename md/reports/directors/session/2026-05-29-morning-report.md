@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — MX PDF Inspector CLI Productised"
-description: "Turned the existing PDF inspector harness into a standalone shippable product. A slim, self-contained v1.0.0 distribution went out alongside a public blog post, a services-page offering section for accredited operators, an internal pitch document, and a bundled test pack with cross-platform runners. The 60-day evaluation promise now has a delivery mechanism."
+title: "Co-Directors Report — MX PDF Inspector CLI Productised + Pattern 26 Word-Frequency Rule"
+description: "Two strands. (1) Turned the existing PDF inspector harness into a standalone shippable product — a slim self-contained v1.0.0 distribution with a public blog post, a services-page offering for accredited operators, an internal pitch, and a bundled test pack with cross-platform runners. The 60-day evaluation promise now has a delivery mechanism. (2) Landed Pattern 26 in writing-style.md (distinctive-word overuse detection), built the deterministic pre-scanner that mirrors scan-tics.mjs, added the x-mx-domainTerms canon field, and tuned the threshold defaults against a seven-document sweep so the rule fires on real overuse without false-positiving Tom-voice rhythm."
 author: "Tom Cranstoun"
 created: 2026-05-29
 modified: 2026-05-29
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -58,7 +58,25 @@ The Certified Operator page at [services/certified-operator.html](https://mx.all
 
 The internal pitch at [`mx-canon/mx-maxine-lives/businesses/ddt-cognovamx/inspector-cli-offering.md`](../../../../../mx-canon/mx-maxine-lives/businesses/ddt-cognovamx/inspector-cli-offering.md) carries the sales-side positioning: what the CLI is, why it ships as a tool not a hosted service, why accreditation is the qualifier, three audiences with conversation hooks, pricing posture for the seed phase, what ships with the CLI, sales conversation hooks.
 
-### 5. Two real bugs caught while building
+### 5. Pattern 26 — distinctive-word overuse rule, scanner, canon field, sweep
+
+The session also delivered the second writing-style rule from the 28 May Scott opportunities doc work. The first rule (Section 5 forbidden vocabulary entry for abstract-noun "surface") landed yesterday. The deeper observation — that word-frequency repetition is itself an AI tell journalists are trained to catch — became Pattern 26 today, with the full enforcement layer behind it.
+
+The rule lives at [`writing-style.md` §9 Pattern 26](../../../../../mx-canon/ssot/writing-guides/writing-style.md). It is the detection-side complement to the existing Pattern 11 (Elegant Variation). The two rules deliberately sit in opposite corners: Pattern 11 says do not substitute synonyms for the sake of variation; Pattern 26 says do notice when a word recurs and prefer rephrasing the second occurrence away. **The default fix is never to substitute.** That separation is what stops the rule pendulum-swinging into the over-correction failure mode Tom called out when commissioning the work — "but not too much else, it can read robot-like".
+
+Exemptions are explicit and broad: function words, proper nouns (detected by capitalisation heuristic), domain terms of art (a built-in MX-domain list plus per-document overrides), Tom-voice rhythmic repetition (sentence-fragment lists, anaphora, direct second-person address), and schema or external-standard terms where accuracy forces the repetition. The fix hierarchy puts rephrasing first, pronoun second, restructure-to-absorb third, true synonym last, and explicitly forbids synonym cycling (which is Pattern 11).
+
+The deterministic pre-scanner at [`scan-word-frequency.mjs`](../../../../../.claude/skills/humanizer/scan-word-frequency.mjs) mirrors the architecture of scan-tics.mjs exactly — zero npm dependencies, the same `isProseLine` walker, the same JSON hit schema. It emits hits at three window categories (paragraph, rolling 500-word local, rolling 2000-word document) and lets the writer judge each hit against the exemption list. The test harness at [`scan-word-frequency.test.mjs`](../../../../../.claude/skills/humanizer/scan-word-frequency.test.mjs) is a non-negotiable addition (scan-tics.mjs ships without one; the new scanner has more moving parts and earns one). Eight assertions cover the triggering case (the Scott doc's "surface" overuse), the Tom-voice non-triggering passage, the JSON-shape contract, the rephrase-hint discipline, and the threshold-tuning CLI flags.
+
+The `x-mx-domainTerms` canon field landed in [`mx-canon/ssot/cognovamx-fields.yaml`](../../../../../mx-canon/ssot/cognovamx-fields.yaml) under the vendor-extensions namespace (the /mx-add-field skill correctly routes vendor extensions away from the open-standard fields-data.yaml). End-to-end verified: declaring `x-mx-domainTerms: [surface]` in the test fixture suppresses every "surface" hit.
+
+A seven-document sweep covered the Scott opportunities doc, the three audit reports we shipped last night, the evening directors report, a recent blog post, and the Tom-voice baseline (Protocols ch1). At the original thresholds the Tom-voice baseline produced 159 hits — almost all false positives from MX-domain vocabulary the scanner did not yet recognise. Two tuning steps brought the false-positive rate down: expanding the built-in domain list from twenty-five entries to seventy-plus (machine, agent, user, accessibility, pattern, model, content, document, chapter, protocol, platform, architecture, etc.), and raising the document threshold from 5 to 8. The new defaults — **paragraph=3, local=5 in 500 words, document=8 in 2000 words** — keep the canonical Scott case firing while letting Tom-voice prose breathe. The decision and the sweep results are recorded in BDR 004 at [`mx-canon/mx-maxine-lives/registers/BDR/2026-05-29-pattern-26-thresholds.cog.md`](../../../../../mx-canon/mx-maxine-lives/registers/BDR/2026-05-29-pattern-26-thresholds.cog.md).
+
+The humanizer skill grew a new PRIORITY-1 SCAN C step between SCAN B (verbal tics) and the broader pattern walk, plus an inline catalogue entry for Pattern 26 alongside the existing Pattern 25. Bidirectional cross-references between Pattern 11 and Pattern 26 keep both surfaces visible to a reader entering through either door. Tom-voice patterns 1, 4, 9 carry explicit `(Pattern 26 exempts this rhythm explicitly.)` parentheticals so the carve-out is visible at the voice-target reading level too.
+
+The rule now ships with everything around it that makes a rule actually work: the canonical statement in the writing guide, the deterministic enforcement layer, the canon field for per-document configuration, and the dated decision record explaining why the thresholds are set where they are. The next humanizer pass on any new document will catch the kind of word-frequency drift the Scott opportunities doc demonstrated.
+
+### 6. Two real bugs caught while building
 
 The harness had two latent bugs that only surfaced when the productisation stress-tested it.
 
@@ -81,6 +99,13 @@ The stdout-warning bug was new. The vendored pdf.js 4.10.38 writes its "Please u
 | Test pack runners | 2 (Node default + bash legacy, identical verdict) |
 | Bugs caught by the new productisation | 2 (XMP case-folding from prior segment + pdfjs stdout-warning this segment) |
 | Cloudflare cache purges | 2 (blog post + services-page platform detail) |
+| New writing-style patterns | 1 (Pattern 26: Distinctive-Word Overuse Without Rhetorical Purpose) |
+| New canon fields | 1 (`x-mx-domainTerms`, vendor extension namespace) |
+| New scanner scripts | 1 (`scan-word-frequency.mjs`, 308 lines, zero npm dependencies) |
+| New test runners | 1 (`scan-word-frequency.test.mjs`, 8/8 assertions passing) |
+| Documents in the threshold-tuning sweep | 7 |
+| Tom-voice baseline false-positive rate | 159 → 50 hits (after domain-list expansion + threshold rise) |
+| Pattern-26 BDR records | 1 (BDR 004, the dated threshold decision) |
 
 ---
 
@@ -141,5 +166,6 @@ This is the rhythm I want to keep for the seed phase. Run the harness inside our
 | 63ec6daf (hub) | Bump mx-outputs: cross-platform Node test-pack runner for the v1.0.0 distribution |
 | 20fd5f0 (mx-outputs) | certified-operator: expand CLI offering with install + platform detail |
 | b82d3168 (hub) | Bump mx-outputs: certified-operator CLI install + platform detail |
-| _pending_ (mx-outputs) | Directors morning report v1.0 |
-| _pending_ (hub) | Step-commit close: CHANGELOG + REMINDERS + LEARNINGS + mx-outputs bump |
+| _pending_ (hub) | Pattern 26: distinctive-word-overuse rule + scanner + canon field + sweep BDR |
+| _pending_ (mx-outputs) | Directors morning report v1.1 (Pattern 26 strand added) |
+| _pending_ (hub) | Bump mx-outputs: directors morning report v1.1 |
