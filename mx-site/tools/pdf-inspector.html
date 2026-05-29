@@ -120,9 +120,9 @@
 
           <p><strong>This inspector reads any PDF in your browser. There is no upload. We have no server-side record of which files you inspect. The parser itself ships from this site, with no third-party CDN call and no remote dependency at inspection time. The inspection is entirely a conversation between the file and your browser.</strong></p>
 
-          <p>Drop a PDF below. The inspector will read its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded. It will then classify the file into one of three tiers — MX Compatible, EAA tagged only, or plain — and surface what each tier means in plain language. You can download the inspection results as a machine-readable JSON, a human-readable markdown report, or (when present) the embedded AI provenance record lifted out for offline analysis.</p>
+          <p>Drop a PDF below. The inspector will read its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded. It will then classify the file into one of three tiers (MX Compatible, EAA tagged only, or plain, and surface what each tier means in plain language. You can download the inspection results as a machine-readable JSON, a human-readable markdown report, or (when present) the embedded AI provenance record lifted out for offline analysis.</p>
 
-          <p>For the conceptual background — what each of these artefacts is, why they matter under the European Accessibility Act and the EU AI Act, and how to verify any claim with three command-line tools — read the explainer: <a href="/learn/mx-for-pdfs.html">MX for PDFs</a>. The inspector is the interactive companion; the explainer is the walk-through.</p>
+          <p>For the conceptual background, what each of these artefacts is, why they matter under the European Accessibility Act and the EU AI Act, and how to verify any claim with three command-line tools, read the explainer: <a href="/learn/mx-for-pdfs.html">MX for PDFs</a>. The inspector is the interactive companion; the explainer is the walk-through.</p>
 
           <h2 id="drop-the-file">Drop the file</h2>
 
@@ -169,7 +169,7 @@
 
           <p>Some inspectors upload your PDF to their server, parse it there, and email you results. We do not. There are three reasons:</p>
 
-          <p>Privacy. The PDF you drop on this page may be confidential — a draft contract, a board paper, a medical record, a tax return. We do not want a copy. The inspector is built so that we cannot have one.</p>
+          <p>Privacy. The PDF you drop on this page may be confidential, a draft contract, a board paper, a medical record, a tax return. We do not want a copy. The inspector is built so that we cannot have one.</p>
 
           <p>Verifiability. An inspection you can re-run locally, on the same file, with the same code, is more trustworthy than a server-side process you cannot see. The full inspector source ships in your browser, including the PDF parser itself, vendored into this site rather than fetched from a third-party CDN. Once the page loads, the inspector runs without any further network calls. You can read the source, copy it, run it offline.</p>
 
@@ -177,7 +177,7 @@
 
           <h2 id="we-run-every-pdf-through-this-tool">We run every PDF we ship through this tool</h2>
 
-          <p>Every PDF we produce goes through this same inspector before it leaves our hands. The production pipeline calls the harness at <code>tests/test-pdf-inspector.js</code> against every artefact the renderer emits — audit reports, books, briefings, contracts. If the inspector does not certify the file as MX Compatible, the build fails and nothing ships. The browser inspector you see on this page and the production gate share one source of truth, the detection core at <code>mx-outputs/mx-site/js/pdf-inspector-core.js</code>, so a regression in either surface fails both.</p>
+          <p>Every PDF we produce goes through this same inspector before it leaves our hands. The production pipeline calls the harness at <code>tests/test-pdf-inspector.js</code> against every artefact the renderer emits, audit reports, books, briefings, contracts. If the inspector does not certify the file as MX Compatible, the build fails and nothing ships. The browser inspector you see on this page and the production gate share one source of truth, the detection core at <code>mx-outputs/mx-site/js/pdf-inspector-core.js</code>, so a regression in either surface fails both.</p>
 
           <p>What this means for you. The reports we send to clients and the books we publish are not asked to meet the MX Compatible bar by hand and by hope; they are blocked from shipping unless they meet it by machine. When you drop a PDF we produced into this inspector, you should see the same verdict the build saw before it released the file.</p>
 

@@ -149,23 +149,23 @@ id="toc-acknowledgements">Acknowledgements</a></li>
 <h2 id="appendix-s-the-fourteen-agent-reading-failure-modes">Appendix S:
 The Fourteen Agent Reading Failure Modes</h2>
 <p>This appendix is a reference catalog. Each entry describes one way
-an AI agent’s pipeline can silently fail to read web content correctly, that is, fail in a way that the publisher cannot see, the agent does not
+an AI agent's pipeline can silently fail to read web content correctly, that is, fail in a way that the publisher cannot see, the agent does not
 report, and the user discovers only when an answer turns out to be
 wrong. The catalog is paired with <strong>Appendix N: Anti-Patterns
 Catalog</strong>, which describes failures originating on the publisher
-side. Where Appendix N asks “what does the publisher get wrong?”,
-Appendix S asks “what does the agent’s pipeline get wrong, even when the
-publisher is doing the right things?”</p>
+side. Where Appendix N asks "what does the publisher get wrong?",
+Appendix S asks "what does the agent's pipeline get wrong, even when the
+publisher is doing the right things?"</p>
 <p>The methodology for detecting these failure modes against a real
 agent, using canary tokens, two-phase scoring, and publisher-controlled
 fixtures, is set out in <strong>Appendix R: Testing Agent
 Comprehension</strong>. This appendix is the catalog Appendix R refers
-to. Each entry follows the same template: the failure mode’s name, the
+to. Each entry follows the same template: the failure mode's name, the
 symptom an agent reports (or fails to report), why agents fail on it,
 how a publisher can detect it from served HTML or HTTP behavior, and
 how to fix or mitigate it on the publisher side.</p>
 <p>The original catalog described ten failure modes. The eleventh, URL Encoding Mismatch, was added after a production audit found that
-twelve URLs in a major brand’s sitemap were silently unfetchable to
+twelve URLs in a major brand's sitemap were silently unfetchable to
 every standards-compliant AI agent because the URL slugs contained raw
 non-ASCII characters that the JavaScript <code>URL</code> constructor
 (and equivalent libraries in every other language) reject as invalid
@@ -182,10 +182,10 @@ read in.</p>
 <h2 id="truncation">1. Truncation</h2>
 <p><strong>Symptom.</strong> The agent reports that the page does not
 document a feature that is in fact documented further down the page. The
-agent’s answer is confident and reads as if the entire page were
+agent's answer is confident and reads as if the entire page were
 considered. There is no warning that the page was incomplete.</p>
 <p><strong>Why agents fail.</strong> Most fetch tools cap the content
-they return at a fixed byte count to protect the agent’s context window.
+they return at a fixed byte count to protect the agent's context window.
 The cap is rarely advertised and rarely the same across agents. Common
 values cluster around 75 kilobytes, 100 kilobytes and 130 kilobytes. A
 page longer than the cap is silently truncated at the byte position the
@@ -206,22 +206,22 @@ make the parent page summarize the most important points so that an
 agent that fetches only the parent has the gist. For very long reference
 pages, publish a short companion summary at a separate URL and link to
 it from the long page; agents that hit the cap on the long page can be
-redirected to the summary by the agent’s user, if not by the agent
+redirected to the summary by the agent's user, if not by the agent
 itself.</p>
 <h2 id="boilerplate-burial">2. Boilerplate Burial</h2>
 <p><strong>Symptom.</strong> The agent reports a generic answer drawn
-from the site’s footer or navigation, even though the actual content the
+from the site's footer or navigation, even though the actual content the
 user asked about is on the page. Repeated questions produce different
-answers depending on which boilerplate the agent’s relevance layer
+answers depending on which boilerplate the agent's relevance layer
 happened to forward.</p>
 <p><strong>Why agents fail.</strong> When the bytes that arrive at the
 relevance layer are dominated by inline CSS, navigation, footer text,
 advertising scripts, and tracking code, the actual content is a small
-fraction of the total. The relevance layer’s filter is forced to choose
+fraction of the total. The relevance layer's filter is forced to choose
 between many candidate sections, and its choice is influenced more by
 position and density than by topical relevance. Boilerplate appears
 early and at high density on most pages, so it wins the relevance
-layer’s attention more often than its content value justifies.</p>
+layer's attention more often than its content value justifies.</p>
 <p><strong>How to detect from served HTML.</strong> Measure the byte
 size of the inline <code>&lt;style&gt;</code> and
 <code>&lt;link rel="stylesheet"&gt;</code> content that appears in the
@@ -248,7 +248,7 @@ JavaScript. They retrieve the served HTML, the bytes the server
 returned in the initial response, and pass it to the relevance layer. A
 single-page application that depends on client-side rendering returns an
 empty shell in the served HTML and assembles its content only after
-JavaScript has executed. Agents that do run JavaScript exist (Google’s
+JavaScript has executed. Agents that do run JavaScript exist (Google's
 rendering pipeline is one) but they are the minority, and even they have
 execution timeouts and JavaScript-disabled fallbacks that produce
 inconsistent results.</p>
@@ -273,12 +273,12 @@ question about another one, even though both are documented on the same
 page. The agent appears to know the page exists but only sees a fraction
 of its content.</p>
 <p><strong>Why agents fail.</strong> Tabbed widgets, common in API
-documentation that shows the same example in multiple languages, typically render the first tab’s content visible and the remaining tabs
+documentation that shows the same example in multiple languages, typically render the first tab's content visible and the remaining tabs
 hidden via CSS. When the page is read by an agent that does not interact
-with the DOM, only the first tab’s content reaches the relevance layer
+with the DOM, only the first tab's content reaches the relevance layer
 in a usable form. The other tabs are present in the HTML but the agent
 has no way to know which content belongs to which tab without parsing
-the widget’s markup, and most fetch tools do not parse tab widgets.</p>
+the widget's markup, and most fetch tools do not parse tab widgets.</p>
 <p><strong>How to detect from served HTML.</strong> Look for the
 standard tab patterns: elements with <code>role="tab"</code>,
 <code>role="tablist"</code>, <code>aria-selected</code>,
@@ -286,9 +286,9 @@ standard tab patterns: elements with <code>role="tab"</code>,
 by Bootstrap, Material UI, Tailwind UI, and similar libraries. Count the
 number of tabs detected and the number of tab panels whose content is
 present in the served HTML. A page with eight tabs but only the first
-tab’s content rendered into a position the agent can read is at
+tab's content rendered into a position the agent can read is at
 risk.</p>
-<p><strong>Publisher-side fix.</strong> Render every tab’s content as
+<p><strong>Publisher-side fix.</strong> Render every tab's content as
 visible body text in the served HTML, and use CSS or JavaScript only for
 the visual disclosure pattern. The tab labels can remain as headings;
 the content under each label should be present as flat content rather
@@ -301,11 +301,11 @@ results.</p>
 does not exist. The page returns a custom error message but the HTTP
 status code is 200, so the agent treats the error message as valid
 content and may quote it as if it were authoritative. In the worst case
-the agent invents an answer based on the error page’s boilerplate.</p>
+the agent invents an answer based on the error page's boilerplate.</p>
 <p><strong>Why agents fail.</strong> Agent fetch tools rely on the HTTP
-status code to distinguish “this is a real page” from “this is a missing
-page”. A response with status 200 is treated as a real page even when
-the body says “page not found”. Custom 404 pages are a common cause: a
+status code to distinguish "this is a real page" from "this is a missing
+page". A response with status 200 is treated as a real page even when
+the body says "page not found". Custom 404 pages are a common cause: a
 content management system catches the missing-page condition, renders a
 styled 404 page with brand chrome and helpful navigation, and returns it
 with status 200 because the developer wanted the URL to remain in the
@@ -314,8 +314,8 @@ agent it looks like a normal page with the unfortunate property of being
 entirely about not finding anything.</p>
 <p><strong>How to detect from served HTML.</strong> Fetch a URL that
 should not exist and inspect the response. If the status code is 200 and
-the body contains “not found”, “page does not exist”, “page missing”,
-“404”, “error”, or similar strings in the <code>&lt;h1&gt;</code> or
+the body contains "not found", "page does not exist", "page missing",
+"404", "error", or similar strings in the <code>&lt;h1&gt;</code> or
 <code>&lt;title&gt;</code>, the site is serving soft 404s. The fix is at
 the server, not in the page content.</p>
 <p><strong>Publisher-side fix.</strong> Configure the server to return
@@ -331,9 +331,9 @@ touching the application.</p>
 <p><strong>Symptom.</strong> The agent reports a code example that
 appears to continue indefinitely, or an answer where prose and code have
 merged into a single block, or a missing code block where a code example
-was clearly intended. The agent’s response sometimes contains structural
+was clearly intended. The agent's response sometimes contains structural
 artefacts from the page, closing tags, fragment markers, navigation
-labels, that indicate the agent’s parser failed.</p>
+labels, that indicate the agent's parser failed.</p>
 <p><strong>Why agents fail.</strong> When a documentation page is
 converted from HTML to markdown for agent consumption, fenced code
 blocks are demarcated by backtick fences. If a fence opens but does not
@@ -345,7 +345,7 @@ document as code. Prose, headings, navigation, and footer all become a
 single oversized code block. The agent then either reports the code
 block as a code example (wrong) or skips the page entirely (no
 information at all).</p>
-<p><strong>How to detect from served HTML.</strong> Parse the page’s
+<p><strong>How to detect from served HTML.</strong> Parse the page's
 <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> blocks and
 confirm that every opening tag has a matching closing tag. Pages that
 fail this check are at risk. The MX Web Audit Suite includes a
@@ -366,7 +366,7 @@ publisher believes both versions are kept in sync but a recent edit
 landed in only one of them.</p>
 <p><strong>Why agents fail.</strong> HTTP content negotiation allows a
 server to return different representations of the same URL based on the
-client’s <code>Accept</code> header. A site that serves
+client's <code>Accept</code> header. A site that serves
 <code>text/html</code> to browsers and <code>text/markdown</code> to
 agents that request it explicitly is using content negotiation
 correctly. The failure mode is not the mechanism; it is the assumption
@@ -393,9 +393,9 @@ the build pipeline rather than relying on editorial discipline.</p>
 <p><strong>Symptom.</strong> The agent reports that it cannot reach the
 page, or reports content from a different page than the one the user
 asked about, or reports inconsistent content across re-runs. The
-redirect chain crosses a host boundary and the agent’s fetch tool either
+redirect chain crosses a host boundary and the agent's fetch tool either
 refuses to follow it, follows it but loses the request context, or
-follows it inconsistently depending on the agent’s version.</p>
+follows it inconsistently depending on the agent's version.</p>
 <p><strong>Why agents fail.</strong> Many agent fetch tools have
 policies about following redirects that cross host boundaries. The
 reasoning is sound, cross-host redirects are sometimes used in phishing
@@ -416,7 +416,7 @@ possible. Configure the canonical URL to be the same host that serves
 the content. Where a cross-host redirect is unavoidable, for example,
 when consolidating two acquired brands under a single domain, minimise
 the depth of the chain (one redirect, not three) and document the
-canonical URL clearly in the destination page’s
+canonical URL clearly in the destination page's
 <code>&lt;link rel="canonical"&gt;</code> so that agents that do follow
 the redirect have a stable reference.</p>
 <h2 id="generic-headings">9. Generic Headings</h2>
@@ -427,18 +427,18 @@ AWS section first, but the agent quotes the AWS content for a question
 about Azure. The agent has read all three sections but cannot tell them
 apart.</p>
 <p><strong>Why agents fail.</strong> When sections share generic heading
-text, “Step 1”, “Step 2”, “Configuration”, “Installation”, “Overview”, the relevance layer cannot distinguish them. The summarization pass
-strips away the surrounding context (the parent heading that said “AWS”,
-“GCP”, “Azure”) and forwards the generic heading and its content. The
-reasoning model sees three “Step 1” sections and conflates them. Even
-when the parent heading is preserved, the agent’s confidence in the
+text, "Step 1", "Step 2", "Configuration", "Installation", "Overview", the relevance layer cannot distinguish them. The summarization pass
+strips away the surrounding context (the parent heading that said "AWS",
+"GCP", "Azure") and forwards the generic heading and its content. The
+reasoning model sees three "Step 1" sections and conflates them. Even
+when the parent heading is preserved, the agent's confidence in the
 association between parent and child is lower than its confidence in the
-child’s content, so quotes tend to drift toward the most common
+child's content, so quotes tend to drift toward the most common
 interpretation rather than the qualified one.</p>
 <p><strong>How to detect from served HTML.</strong> Walk the heading
-tree and flag any heading whose text is entirely generic, “Step 1”,
-“Step 2”, “Step 3”, “Overview”, “Introduction”, “Configuration”,
-“Setup”, “Installation”, without a qualifying word. Bonus marks for
+tree and flag any heading whose text is entirely generic, "Step 1",
+"Step 2", "Step 3", "Overview", "Introduction", "Configuration",
+"Setup", "Installation", without a qualifying word. Bonus marks for
 detecting siblings that share the same generic text under different
 parents, which is the strongest signal that conflation is likely.</p>
 <p><strong>Publisher-side fix.</strong> Make every heading
@@ -448,11 +448,11 @@ self-qualifying. Instead of <code>Step 1</code> under
 redundant, it survives the summarization pass. Where the page documents
 the same procedure for multiple platforms, give each platform its own
 page rather than nesting them as siblings under a generic parent. The
-agent can then reach each platform’s procedure through a clean,
+agent can then reach each platform's procedure through a clean,
 unambiguous URL.</p>
 <h2 id="delayed-content-start">10. Delayed Content Start</h2>
-<p><strong>Symptom.</strong> The agent’s answer reads as if drawn
-entirely from the page’s navigation, breadcrumbs, or boilerplate. The
+<p><strong>Symptom.</strong> The agent's answer reads as if drawn
+entirely from the page's navigation, breadcrumbs, or boilerplate. The
 actual content of the page is technically present, but it begins so far
 into the document that agents working from the first chunk of the
 response never reach it.</p>
@@ -483,24 +483,24 @@ at the top of the rendered page while sitting at the bottom of the
 source document.</p>
 <h2 id="url-encoding-mismatch">11. URL Encoding Mismatch</h2>
 <p><strong>Symptom.</strong> A page exists, serves correctly to a human
-visitor, and is listed in the site’s sitemap, yet AI agents and search
+visitor, and is listed in the site's sitemap, yet AI agents and search
 engine crawlers report that the page cannot be found, returns an error,
 or simply does not exist. The publisher checks the page in a browser and
 the page loads. The publisher checks the sitemap and the URL is there.
 The publisher cannot understand why the agent reports a problem, because
-no part of the publisher’s infrastructure is broken.</p>
+no part of the publisher's infrastructure is broken.</p>
 <p><strong>Why agents fail.</strong> The URL contains a non-ASCII
 character, a curly apostrophe, an en dash, an em dash, a euro sign, a
 pound sign, an acute accent, a Cyrillic letter, an emoji, that has not
 been percent-encoded according to RFC 3986. Browsers paper over the
 issue: when a human visitor clicks the link, the browser auto-encodes
 the character at request time. AI agent fetch tools do not. They consult
-the sitemap directly and pass each URL string to a strict URL parser, JavaScript’s <code>URL</code> constructor, Python’s
-<code>urllib.parse</code>, Go’s <code>net/url</code>, Rust’s
+the sitemap directly and pass each URL string to a strict URL parser, JavaScript's <code>URL</code> constructor, Python's
+<code>urllib.parse</code>, Go's <code>net/url</code>, Rust's
 <code>url</code> crate, and every modern parser rejects raw non-ASCII
 characters as malformed input. The rejection happens before any HTTP
-request is made, so the page is never even fetched. The publisher’s logs
-show no visit. The agent’s logs show “invalid URL”. Neither side can
+request is made, so the page is never even fetched. The publisher's logs
+show no visit. The agent's logs show "invalid URL". Neither side can
 explain the discrepancy without comparing notes.</p>
 <p>The same problem appears inside HTML pages whenever a relative or
 absolute <code>&lt;a href="..."&gt;</code> value contains a raw
@@ -542,7 +542,7 @@ longform pieces written by humans for humans, where the title naturally
 contains apostrophes (<code>it's</code>, <code>we're</code>,
 <code>bob's</code>), en dashes (<code>–</code>), em dashes
 (<code>—</code>), and currency or other symbols. These are the URLs the
-brand most wants AI agents to surface, because they contain the brand’s
+brand most wants AI agents to surface, because they contain the brand's
 voice. They are also the URLs most likely to be silently invisible to
 agents through this failure mode. A brand whose homepage is fetchable
 but whose press releases are not is a brand whose AI-mediated
@@ -589,10 +589,10 @@ their per-fetch byte budget.</p>
 <code>&lt;style&gt;</code> blocks or executable inline
 <code>&lt;script&gt;</code> blocks sit inside <code>&lt;head&gt;</code>,
 inflating the head-byte count. Agents with limited fetch windows (some
-server-side agents cap head reads around 8–12 KB on first fetch) reach
+server-side agents cap head reads around 8-12 KB on first fetch) reach
 the end of their budget before structured data later in the head is
 indexed. The per-element and per-page thresholds are 500 bytes each, above that, any single <code>&lt;style&gt;</code> or executable
-<code>&lt;script&gt;</code> body, or any single page’s cumulative inline
+<code>&lt;script&gt;</code> body, or any single page's cumulative inline
 CSS or inline JS, is an externalisation candidate.</p>
 <p>The rule excludes
 <code>&lt;script type="application/ld+json"&gt;</code> (Schema.org data
@@ -614,10 +614,10 @@ and load with <code>&lt;script src="..." defer&gt;</code>. For shared
 patterns, consolidate into a site-wide CSS or JS bundle. Keep JSON-LD,
 importmap, and JSON data islands inline, they are not the target.</p>
 <h2 id="head-weight">14. Head Weight</h2>
-<p><strong>Symptom.</strong> A page’s head carries useful data, consolidated JSON-LD, complete meta tags, rich Open Graph, and agents
+<p><strong>Symptom.</strong> A page's head carries useful data, consolidated JSON-LD, complete meta tags, rich Open Graph, and agents
 extract that data correctly. But the head is so large relative to the
 rest of the page that the byte ratio of <code>&lt;head&gt;</code> to
-total document exceeds 50%. Agents that budget for “read first N bytes”
+total document exceeds 50%. Agents that budget for "read first N bytes"
 sometimes never reach the body at all.</p>
 <p><strong>Why agents fail.</strong> The head-to-page ratio measures how
 much of the served document is reachable before
@@ -665,7 +665,7 @@ catalog after a production audit found twelve unfetchable sitemap URLs
 at a major brand and traced every one to the same root cause; the
 failure mode had been theoretically obvious but had not been observed at
 scale until the audit tooling started doing real HEAD requests rather
-than defaulting to “200 OK”.</p>
+than defaulting to "200 OK".</p>
 <p>For the testing methodology that puts these failure modes into a
 measurable form, see <strong>Appendix R: Testing Agent
 Comprehension</strong>. For the publisher-side anti-patterns that create
@@ -676,21 +676,21 @@ build to defend against the failures cataloged here, see
 particularly the section on testing and validation harnesses.</p>
 <h2 id="acknowledgements">Acknowledgements</h2>
 <p>The first ten failure modes in this appendix were crystallised by
-Dachary Carey’s article “Designing an Agent Reading Test”, published 6
+Dachary Carey's article "Designing an Agent Reading Test", published 6
 April 2026, which named the conditions and demonstrated each one against
 current agents using publisher-controlled test fixtures. The treatment
-here adapts Carey’s catalog into a publisher-side reference and
+here adapts Carey's catalog into a publisher-side reference and
 connects each entry to a corresponding audit metric in the MX Web Audit
 Suite. The original observations of those ten modes are hers; the
 adaptation, the audit metrics, and the cross-references are mine.</p>
 <p>The eleventh failure mode, URL Encoding Mismatch, was added through
 production observation: the MX Web Audit Suite gained real HEAD-based
-link and sitemap health checking, ran against a major brand’s marketing
-site, and found twelve URLs in the brand’s sitemap that no
+link and sitemap health checking, ran against a major brand's marketing
+site, and found twelve URLs in the brand's sitemap that no
 standards-compliant AI agent could fetch. The root cause was the same in
 every case, raw non-ASCII characters in the URL slug, and the pattern
 was distinctive enough to warrant its own entry in the catalog. The
-discovery confirmed something Carey’s original article warns about
+discovery confirmed something Carey's original article warns about
 explicitly: failure modes that are theoretically obvious can remain
 invisible until tooling stops defaulting to success.</p>
 <p>Modes twelve through fourteen, Body Content Ratio, Inline Tag Bloat,
@@ -708,7 +708,7 @@ pairs with Boilerplate Burial as a composable ratio, one measures
 chrome inside the body, the other measures pre-body byte weight, so a
 page can pass one and fail the other. All three were added to
 <code>pipeline_survivability.csv</code> with a per-failure-mode
-plain-language explanation in the “What It Means” column.</p>
+plain-language explanation in the "What It Means" column.</p>
 </div>
 <hr>
 <nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
