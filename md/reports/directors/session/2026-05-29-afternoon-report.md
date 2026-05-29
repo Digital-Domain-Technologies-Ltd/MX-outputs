@@ -4,7 +4,7 @@ description: "Landed the founding-sponsor recognition framing across canon and o
 author: "Tom Cranstoun"
 created: 2026-05-29
 modified: 2026-05-29
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -165,4 +165,51 @@ The Year 1 revenue planning shape moved from £125k-£335k to £165k-£455k off 
 
 ---
 
-*Filed 2026-05-29 afternoon. Hub commit follows in Step 3 of /step-commit.*
+## Late-Afternoon Addendum — Audit-Subsystem Six-Pass Sweep (v1.1, 15:00-17:00)
+
+After the earlier-afternoon work shipped, Tom flagged a representative audit defect from a shipped dkd.de report — three cache-busted re-probes returning HTTP 503 in under 200 ms each, producing a "Returning-visitor verdict: Indeterminate" line that's honest but useless to the client. An Explore survey returned 19 distinct defect classes spanning rate-limit handling, gate severity inversion, placeholder leaks reaching client PDFs, "Level undefined (undefined)" data fallbacks, cross-section semantic contradictions, AI-tell prose surviving the rewrite pass, and contract/template version drift. Tom confirmed scope: fix all 19 in one coherent sweep, and for the rate-limit class specifically, "fix the scripts to ensure we bypass rate limiting".
+
+The work landed as six passes against an approved plan.
+
+**Pass A — Rate-limit-aware probing.** [`mx-reginald/audit/bin/slowest-page-probe.js`](../../../../../mx-reginald/audit/bin/slowest-page-probe.js) v5 → v6: pre-flight WAF fingerprint detection (Cloudflare cf-ray, Akamai, Imperva, AWS WAF, Sucuri), 60s/90s initial cool-down, 20s/30s inter-probe pacing, three-UA rotation across Chrome 120 / Firefox 122 / Safari 17, new `rate_limited_after_pacing` verdict bucket that splits the overloaded "Indeterminate" label, and a `verdictCompound` field that surfaces the honest "Slow on first visit; returning-visitor cost not measurable" compound rather than collapsing one band into the other.
+
+**Pass B — Gate severity correctness.** [`scripts/audit-pipeline.js`](../../../../../scripts/audit-pipeline.js): Gate 0a (template-coverage) and Gate 1 (template-leak post-render) promoted to hard-fail with a new `hardFailedGates` set. New Gate 0a-versioning catches template-vs-contract drift (template tokens missing from the contract JSON = hard-fail). `MX_AUDIT_FORCE_PDF=1` override added for diagnostic passes. The PDF render is now blocked when mechanical gates fail; the operator no longer ships PDFs with visible `[PLACEHOLDER]` literals.
+
+**Pass C — Data fallback hygiene.** [`mx-reginald/audit/bin/infill-report.js`](../../../../../mx-reginald/audit/bin/infill-report.js) + [`tableHandlers/sitemapSummary.js`](../../../../../mx-reginald/audit/bin/tableHandlers/sitemapSummary.js): the "Level undefined (undefined)" defect (which had been printing on typo3.com audits) fixed via null guards on the Schema Maturity and MX Readiness fact lines in the LLM rewrite prompt; score-line null guards added across the Executive Summary fact bundle; sitemap missing-metadata explanations now platform-aware (TYPO3, WordPress, AEM, Drupal each name why lastmod/priority/changefreq is absent, with a fallback noting Google deprecated priority/changefreq as ranking signals in 2017).
+
+**Pass D — Cross-section consistency gate.** New [`mx-reginald/audit/scripts/check-cross-section-consistency.js`](../../../../../mx-reginald/audit/scripts/check-cross-section-consistency.js) wired into Gate 4c. Five structured assertions: llms.txt agreement between Discovery Files and Marker Reachability, Schema Maturity vs MX Readiness reconciliation, Pa11y raw-count vs Accessibility score band sanity, marker reachability vs cross-page consistency disagreement, and scope-mix prose (sentences mixing site-wide with per-sample language). Smoke-tested against the 2026-05-28 dkd.de delivery and surfaced one true-positive scope-mix finding at line 378.
+
+**Pass E — Conditional-prose discipline.** [`rewrite-report.system.md`](../../../../../mx-reginald/audit/system-prompts/rewrite-report.system.md) v1.1 → v1.2 carries an explicit IF-branch evaluation rule: resolve every `[IF X:` marker before emitting prose, pick the matching branch, emit only that branch's text, never leave the literal token in the output. [`CONDITIONAL-PROSE-GUIDE.md`](../../../../../mx-reginald/audit/templates/CONDITIONAL-PROSE-GUIDE.md) v1.0 → v1.1 documents the three-rule discipline that prevents surviving `[IF X:` tokens from reaching the PDF (authoring discipline → system-prompt resolution → Gate 1 hard-fail catches anything that slipped). The predicate audit of the 55 `[IF X:]` instances across the two templates was deferred as separate surgical work; the new rules catch the same defect class without the predicate-by-predicate sweep.
+
+**Pass F — Rewrite pass always runs.** Tightened the `repair-report-unified.js` invocation in audit-pipeline.js with explicit always-run intent (no anyFail / failedGates gate). Audit-site skill prose updated to document the mandatory single-pass semantics. The pre-existing semantics in `mx-audit.cog.md` were already correct.
+
+**Local-LLM default — three doc leaks fixed.** Tom flagged after Pass F that the unified repair is not always Haiku 4.5 — `lib/llm-client.js` defaults to a local Ollama `gpt-oss:20b` model, and Anthropic Haiku 4.5 is only used when `MX_AUDIT_LLM_PROVIDER=anthropic`. Three doc surfaces fixed in lockstep: the new audit-site skill prose I wrote in Pass F, plus two pre-existing leaks in `scripts/cogs/mx-audit.cog.md` lines 1383 and 1427. Memory entry `feedback_repair_pass_not_always_haiku.md` added so the wording stays correct in future doc passes.
+
+**Manuscript carryover.** The afternoon's earlier three-layer-model + local-inference work had left uncommitted edits in the published manuscripts (free-book chapter-00, mx-handbook-v2 chapter-00 + chapter-11 + chapter-12, mx-protocols chapter-07 + chapter-20, appendix-c + appendix-m + appendix-t + appendix-u). These ship in the same hub commit as the audit sweep.
+
+### Late-afternoon by the numbers
+
+| Metric | Value |
+|--------|-------|
+| Audit-subsystem files edited | 9 (6 substantive JS/script edits + 3 doc updates) |
+| New gate script | 1 (`check-cross-section-consistency.js`) |
+| Hard-fail gates added | 3 (Gate 0a promoted, Gate 1 promoted, Gate 0a-versioning new) |
+| New env-var override | 1 (`MX_AUDIT_FORCE_PDF=1`) |
+| Defect classes addressed | 19 (full sweep against the approved plan) |
+| Doc leaks fixed in lockstep | 3 (Haiku-as-default in audit-site skill + mx-audit cog ×2) |
+| Memory entry added | 1 (`feedback_repair_pass_not_always_haiku.md`) |
+| Manuscript files carried in the same commit | 10 |
+
+### Late-afternoon decisions
+
+- **Hard-fail any gate whose failure produces a client-visible defect.** Stylistic gates (voice, tone, scope) stay as warns; mechanical gates that would print `[PLACEHOLDER]` or `Level undefined` in the PDF block the render. Diagnostic override exists but is explicit.
+- **Local Ollama is the default LLM for every audit step, named first in every doc.** Anthropic Haiku is the explicit opt-out. Drift on this in docs creates downstream confusion when a regulator asks where audit data is sent.
+- **Cross-section consistency is a first-class gate.** Per-section gates catch intra-section defects; a dedicated cross-section gate catches the join-only contradictions that survive every per-section pass.
+
+### Late-afternoon next step
+
+- **Re-run the dkd.de audit** with the new pacing to verify the WAF detection + 60s/20s pacing actually clears the 503s in practice. Deferred to the next audit-run segment.
+
+---
+
+*Filed 2026-05-29 afternoon. Updated 17:00 with the audit-subsystem six-pass sweep addendum. Hub commit follows in Step 3 of /step-commit.*
