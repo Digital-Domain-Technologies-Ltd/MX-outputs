@@ -1,16 +1,18 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "Markdown-to-PPTX Deck Builder"
-description: "Build any styled PPTX deck from a markdown master and a hand-designed PPTX template. Per-slide layout selection lives in HTML-comment hints inside the markdown. The engine is reusable across any deck."
+description: "Build any styled PPTX deck from a markdown master and a hand-designed PPTX template. Per-slide layout hints live in HTML comments. Engine reusable across decks."
 author: "Tom Cranstoun"
 created: 2026-05-08
 modified: 2026-05-08
 version: "2.1.0"
 mx:
+  x-mx-category: mx-tool
   status: active
   contentType: action-doc
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/deck-builder.cog.md

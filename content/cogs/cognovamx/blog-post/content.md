@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -6,7 +7,7 @@
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "blog-post"
 version: "1.0.0"
-description: "End-to-end cog for mx-site blog posts: create a draft, review it for AI patterns and dual-audience balance, publish via git mv. Replaces blog-generator and blog-reviewer."
+description: "End-to-end cog for mx-site blog posts: create a draft, review for AI patterns and dual-audience balance, publish via git mv."
 
 created: 2026-05-10
 modified: 2026-05-10
@@ -41,6 +42,13 @@ mx:
   readingLevel: advanced
 
   contentType: info-doc
+  purpose: "Single action-doc covering the three blog-post lifecycle stages on mx-site (create, review, publish) plus the series-and-cluster authoring rules sub-folder posts follow. Read by /mx-c-blog-post and /html-writer skills."
+  stability: stable
+  x-mx-contextProvides:
+    - "Three-stage lifecycle (create, review, publish) for mx-site blog posts"
+    - "Series and cluster authoring rules (engaging tone, depth-based CTA, canonical first-mention)"
+    - "Dual-audience check gate (business value + technical evidence)"
+    - "Submodule-first publish workflow with metadata flips and asset-path fixes"
   runbook: "Read this cog to understand the topic; no executable workflow."
 ---
 
@@ -82,6 +90,108 @@ This cog covers three things any agent needs to do with that blog:
 | State tracking | None | `<meta name="mx:status" content="draft|published">` |
 
 Both formats share the same voice: first-person, conversational, no exaggeration, honest about trade-offs, varied sentence rhythm. Neutral English in public HTML on `mx-outputs/mx-site/**` (rephrase to avoid US/UK divergent spellings); British English elsewhere. The full register rules live in [`mx-canon/ssot/writing-guides/writing-style.md`](../../mx-canon/ssot/writing-guides/writing-style.md).
+
+Blog posts are in-scope APA 7 prose per [`writing-style.md §14`](../../mx-canon/ssot/writing-guides/writing-style.md). Headings use APA Title Case across all five levels (`Why This Matters`, not `why this matters`, and not `Why This Matters For You` — short prepositions lowercase). External claims cited in the post use APA author-date form (`(Anthropic, 2026)` / `Anthropic (2026) announced`); cited posts carry a reference list at the foot. Tables and figures use the APA three-zone shape (number bold above, italic sentence-case title, body, optional `*Note.*`). Bias-free language conventions in §14.4 apply when the post names identity dimensions. House overrides (no em-dashes, ASCII straight quotes, no pre-announced counts in prose) still bind per §14.8.
+
+---
+
+## Series and cluster authoring rules
+
+A series is a set of related posts grouped under a sub-folder of `mx-outputs/mx-site/blog/` (e.g. `blog/drafts/watching-the-machines/`, `blog/series/`). A cluster is a sub-sub-folder of a series (e.g. `blog/drafts/watching-the-machines/google-nano-model/`) holding a tight set of posts that argue one shape together. The rules below apply to every HTML file in a series or cluster: the series-index lander, the cluster-index lander, and every child post. Standalone posts in bare `blog/` skip these rules and use the simpler post-conclusion aside that `content-template.html` already supplies.
+
+**Trigger.** Rules activate when the output path is inside a sub-folder of `blog/` or `blog/drafts/`. Depth gate is mechanical: depth 0 from `blog/` (or `blog/drafts/`) = standalone, depth 1 = index-equivalent (series index, cluster index, editorial-standard page like `how-it-works.html`), depth 2+ = child post inside a cluster. Calibration anchor: [`mx-outputs/mx-site/blog/drafts/watching-the-machines/`](../../mx-outputs/mx-site/blog/drafts/watching-the-machines/). Open the series index, the cluster index, and one child post side by side when writing.
+
+### Engaging tone
+
+Series and cluster pages read as a magazine column, not a corporate update. The voice pulls the reader through a set rather than a single piece. Specifics:
+
+- **Name the actors.** Companies, regulators, individuals named; the column doesn't pretend neutrality on what it's recording. Anonymised "a major tech company" prose is the wrong register.
+- **State the position.** Every post takes a clear line on what happened and why it matters. The reader leaves knowing where the writer stands.
+- **Balance the entry kinds across the cluster.** Three balanced kinds: what broke (a specific behaviour with evidence and the principle it offends), what good looks like (the right answer when someone builds it), the line being drawn (regulation or enforcement read through MX readiness). A cluster that's all "what broke" reads as one long complaint.
+- **Open with the editor-avatar aside.** Series and cluster pages carry a `<aside class="blog-introduction">` with the editor's avatar and a one-sentence framing of what the page is for.
+- **First-person opinion in the body.** "I am not going to ask Google to be good" is the register, not "this raises questions about whether Google should...". Cross-reference: writing-style.md §0 (one voice, declarative authority) and §9.9 (Tom-voice patterns).
+
+### Conclusion leads to a CTA (depth-based)
+
+Two CTA surfaces. The shape differs by depth.
+
+**Index-equivalents (depth 1): TWO surfaces.** Pages a reader arrives at from outside the cluster. They need an outward action surface. Surface 1: an inline body section before the post-conclusion aside, last `<h2>`, audience-appropriate question form ("Where your own content stands", "Where this leaves you", "What to do about it"), 2-3 short paragraphs connecting the page's argument to the reader's situation, followed by a `<ul>` of 2-3 outward action links (book an audit, join The Gathering, read the editorial standard, register a Publisher Listing). Surface 2: the standard `<aside class="post-conclusion">` chrome with editor avatar, eyebrow, prompt, and a separate `<ul class="post-conclusion-links">` for next-reads.
+
+```html
+<!-- Surface 1: inline body CTA, index-equivalents only -->
+<h2 id="where-your-own-content-stands">Where your own content stands</h2>
+
+<p>The discipline that would make a silent install checkable is the one that decides whether the machines now reading the web on your buyers' behalf can find, trust, and act on what you publish.</p>
+
+<ul>
+  <li><a href="/about/contact.html">Get in touch about an MX audit</a></li>
+  <li><a href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+</ul>
+```
+
+**Child posts (depth 2+): ONE surface plus series navigation.** Child posts sit inside the cluster's argument; the reader doesn't need an outward CTA from every leaf page. Surface 1: a `<h2 id="part-of-the-series">Part of the series: <Cluster Name></h2>` navigation block before the conclusion aside, with a short paragraph naming the hub and a `<ul>` listing each sibling with its role ("this post", "the principle", "the mechanism"). Surface 2: the standard `<aside class="post-conclusion">` chrome with eyebrow / prompt / links calibrated to the next-reads inside the cluster plus one outward link in the aside.
+
+```html
+<!-- Series-navigation block, child posts only -->
+<h2 id="part-of-the-series">Part of the series: The Silent Install</h2>
+
+<p>The hub for the set is <strong><a href="/blog/drafts/watching-the-machines/google-nano-model/">The Silent Install</a></strong>.</p>
+
+<ul>
+  <li><strong>Respect Runs Both Ways</strong>, the principle (this post)</li>
+  <li><a href="/blog/drafts/watching-the-machines/google-nano-model/the-signature-and-the-download.html">The Signature Covers Who Shipped It, Not What It Fetches</a>, the mechanism</li>
+  <li><a href="/blog/drafts/watching-the-machines/google-nano-model/dont-be-evil-to-dont-ask.html">From "Don't Be Evil" to "Don't Ask"</a>, the moan, and the fix</li>
+</ul>
+```
+
+The series-navigation block ALSO carries an inline first-mention explanation for each sibling (`, the principle (this post)`, `, the mechanism`, `, the moan, and the fix`). The current post's entry uses `<strong>` without a link and ends `(this post)`; siblings carry the link plus a short defining clause.
+
+### Inline explanation on first mention
+
+When a series or cluster post surfaces an idea that lives on another page, the first mention on this page carries a brief inline explanation. The reader who arrives at this page first should not have to follow the link to know what they're being told to read. After the first mention, the explanation drops — future mentions of the same target on the same page use the bare link or a definite reference (`the cluster`, `the column`, `it`).
+
+**Two triggers:**
+
+1. **Cross-page sibling references** — links to another post in the same series or cluster, or to a sibling page in the same area of the site.
+2. **Specialist MX terminology** — first mention of REGINALD, the Gathering, MX-practitioner, attestation, cog, x-mx-domainTerms, COG (the trust wrapper), or any other term the reader landing fresh might not know. Per-page tracking. Default-domain terms exempt: MX, machine, agent, web, blog, post, page.
+
+**Canonical shape — the only acceptable form:**
+
+```
+<strong><a href="...">Bold link</a></strong>, <comma> <short defining clause> <full stop>
+```
+
+The `<strong>` wrap on the link is mandatory. Italic-eyebrow forms (`<em>Part of the series <a>...</a>, the moan, and the fix.</em>`) are NOT a substitute — they read as decorative scaffolding and don't carry the visual weight a first-mention reference needs. Rewrite italic eyebrows that name siblings into the canonical strong-bold form, or move the sibling-naming work into the body where strong-bold is the standard.
+
+**Worked examples** from [`watching-the-machines/`](../../mx-outputs/mx-site/blog/drafts/watching-the-machines/):
+
+Cluster reference (from the series index, naming a cluster for the first time):
+
+```html
+<li><strong><a href="/blog/drafts/watching-the-machines/google-nano-model/">The Silent Install</a></strong>, a cluster on what a program may do to your device without asking, opened by Chrome writing a multi-gigabyte AI model to people's disks with no prompt.</li>
+```
+
+Sibling reference inside a cluster (from a child post, naming a sibling for the first time):
+
+```html
+<p>The third of a short set. The first, <strong><a href="/blog/drafts/watching-the-machines/google-nano-model/respect-runs-both-ways.html">Respect Runs Both Ways</a></strong>, set out the principle. The second, <strong><a href="/blog/drafts/watching-the-machines/google-nano-model/the-signature-and-the-download.html">The Signature Covers Who Shipped It, Not What It Fetches</a></strong>, set out the mechanism.</p>
+```
+
+Specialist-term first mention:
+
+```html
+<p>The durable answer is attestation and provenance, written into <strong>REGINALD</strong>, the public registry that holds the records and lets an outsider verify them.</p>
+```
+
+Second-pass on the same page uses the definite reference:
+
+```html
+<p>The signature lives in REGINALD; the verifier reads it; the publisher never has to be trusted to be honest about it.</p>
+```
+
+### What this doesn't change
+
+The existing polish pass in [`html-writer/skill.md`](../../.claude/skills/html-writer/skill.md) runs unchanged for series and cluster posts: structure, head block, Schema.org, Open Graph, Twitter cards, accessibility, terminology against the Glossary, voice and timelessness, APA 7, MX body rules, humanizer pass, em-dash ban, HTML entities, AI disclosure, HTML hygiene, MX audit, spell-check, link sanity. The series rules add to that polish pass; they don't replace any of it.
 
 ---
 

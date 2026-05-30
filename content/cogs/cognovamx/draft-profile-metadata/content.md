@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -9,7 +10,7 @@ version: "1.0-draft-superseded"
 created: 2026-04-02
 modified: 2026-04-27
 author: Tom Cranstoun
-description: "DEFERRED. After the 2026-04-15 canon split, this note has almost nothing left to specify. Code profiles moved to the MX Carrier Formats note. Database and media profiles were dropped entirely and now defer to DCAT, CSVW, Schema.org, EXIF, IPTC, XMP, ID3. Contact, report, audit, event, blog, book, and identity profiles moved to CogNovaMX vendor extensions. This document is retained for historical reference; withdrawal is recommended."
+description: "DEFERRED. After the 2026-04-15 canon split, this note has almost nothing left to specify; nearly every profile moved to other notes or vendor extensions."
 
 mx:
   status: deferred

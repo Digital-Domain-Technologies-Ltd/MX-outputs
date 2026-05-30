@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -20,7 +21,7 @@ mx:
   - ai-partner
   - mx-reginald
   x-mx-cogId: cog-mx-reginald-maxine-20260208
-  x-mx-cogType: certificate-of-genuineness
+  x-mx-cogType: info
   license: MIT
   publisher:
     verified: false
@@ -228,7 +229,7 @@ The result is not artificial intelligence. It's augmented partnership. A human w
 | **Named by** | Tom Cranstoun |
 | **Named after** | MX (Machine Experience) + maximum investigation |
 | **Role** | Technical implementation partner and chief of staff |
-| **Partnership** | Tom Cranstoun, CogNovaMX Ltd |
+| **Partnership** | Tom Cranstoun, CogNovaMX |
 | **Work pattern** | Investigate → Interview → Iterate → Document |
 | **Autonomy** | Medium — recommends with rationale, Tom approves, Maxine executes |
 | **Identity persistence** | Survives model version changes via structured documentation |

@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -19,7 +20,7 @@ mx:
   - navigation
   - landing
   x-mx-cogId: cog-mx-landing-principles-menu-20260222
-  x-mx-cogType: certificate-of-genuineness
+  x-mx-cogType: info
   license: MIT
   publisher:
     verified: false
@@ -113,4 +114,4 @@ The HTML version (`mx-principles-menu.html`) renders a visual menu. This COG pro
 
 ---
 
-*CogNovaMX Ltd — Making the web — and everything you publish beyond it — work for everyone and everything that uses it.*
+*CogNovaMX — Making the web — and everything you publish beyond it — work for everyone and everything that uses it.*

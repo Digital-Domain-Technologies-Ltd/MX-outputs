@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -9,7 +10,7 @@ version: "1.0.0"
 description: "A conceptual map of MX — every idea, how they connect, and where to go deeper. The newcomer's guide to Machine Experience."
 
 created: 2026-02-11
-modified: 2026-02-11
+modified: 2026-05-23
 
 author: Tom Cranstoun
 
@@ -82,7 +83,7 @@ The YAML is the reason an AI agent can understand a document without reading the
 
 ### MX OS
 
-The Machine Experience Operating System. A product of CogNovaMX Ltd.
+The Machine Experience Operating System. A product of CogNovaMX.
 
 MX OS is an operating system where files are the platform. There is nothing to install. No server. No API. No SDK. The system is written into the filesystem as markdown files with YAML frontmatter, and any AI agent that can read markdown becomes the runtime.
 
@@ -243,9 +244,11 @@ Key principle: discovery is always public. Frontmatter is always readable. Conte
 
 ### REGINALD
 
-The package registry for MX OS. Named after the butler — he knows where everything is. Contains the core tool action-docs: accessibility auditing, readability scoring, metadata validation, link checking, schema validation, and more.
+**Re**gistry for **G**enuine **I**nformation, **N**otarised **A**uthentication, and **L**egitimate **D**ocumentation. CogNovaMX's proprietary implementation of the open registry layer that the cog standard defines — public infrastructure that holds, indexes, and serves cogs and produces attestation records. Verification itself stays client-side, against any registry on the same standard.
 
-Home: `mx-reginald/`
+Other implementations of the registry layer can exist on the same open standard. REGINALD's competitive position is operational quality, not format ownership.
+
+Home: `mx-reginald/` — the same codebase currently bundles the operational tooling MX OS users reach for (audit, accessibility, readability, metadata, schema, link checking, the cog query tool). Registry infrastructure and operational tools sit together today; the split may sharpen over time.
 
 ### Cog Query Tool
 

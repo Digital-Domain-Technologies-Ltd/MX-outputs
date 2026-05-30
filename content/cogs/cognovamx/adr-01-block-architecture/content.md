@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -191,7 +192,7 @@ MX is the process of honouring all existing and future standards. RDF, JSON-LD, 
 
 ## Business Separation
 
-**CogNovaMX Ltd** builds and sells Maxine — the reference implementation. Commercial.
+**CogNovaMX** builds and sells Maxine — the reference implementation. Commercial.
 
 **The Gathering** owns the open standard. Uncontrolled by CogNovaMX. Tom set it up. He wants to give the techniques away. A truly open community takes it forward. The W3C model.
 

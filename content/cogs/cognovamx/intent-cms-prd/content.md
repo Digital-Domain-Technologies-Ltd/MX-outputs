@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -6,7 +7,7 @@
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "Intent CMS — Product Requirements Document"
 version: "2.0.0"
-description: "The complete product requirements document for Intent CMS (MX OS). Defines the problem, architecture, five-layer model, MX Readiness Model, publishing zones, REGINALD, MaXinE, competitive position, and all functional and non-functional requirements."
+description: "Product requirements for Intent CMS (MX OS). Defines the problem, five-layer architecture, MX Readiness, REGINALD, MaXinE, and all requirements."
 
 created: 2026-05-09
 modified: 2026-05-09
@@ -53,7 +54,7 @@ mx:
 
 # Intent CMS — Product Requirements Document (MX OS)
 
-**Version:** 2.0 | **Date:** May 2026 | **Entity:** CogNovaMX Ltd | **Author:** Tom Cranstoun
+**Version:** 2.0 | **Date:** May 2026 | **Entity:** CogNovaMX | **Author:** Tom Cranstoun
 
 ---
 
@@ -69,8 +70,6 @@ Deane Barker's parallel concept: "Contentbase" (Aug 2025) — "Data is what it I
 ---
 
 ## 2. The Problem — In Concrete Form
-
-A river cruise costs £2,030. An AI agent reads £203,000.
 
 Three failure modes (every AI content problem traces to one):
 
@@ -182,7 +181,7 @@ Cogs reference other cogs via `builds-on` — "read these first for context." Fo
 
 ### Layer 4: Trust — The COG Verification Layer
 
-COG = Community Owned Governance Standard. The trust wrapper around a cog, carrying attestation (who signed it, when) and stewardship metadata (who keeps it accurate). Compliance levels 1 (local/unsigned) through 5 (independently audited). Visibility levels: Local → Private → Shared → Hosted. REGINALD is the public host for levels 3–5. Not the COG system itself.
+COG = Community Owned Governance Standard. The trust wrapper around a cog, carrying both attestation (who signed it, when) and stewardship metadata (who keeps it accurate). Compliance levels 1 (local/unsigned) through 5 (independently audited). Visibility levels: Local → Private → Shared → Hosted. REGINALD is the public host for levels 3–5. Not the COG system itself.
 
 ### Layer 5: The Gathering Standard
 
@@ -269,6 +268,7 @@ After migration, what does the CMS do? The content is in cog files. The CMS was 
 **Zone 1 Raw (Draft)** — low-friction creation, incomplete metadata OK, not deployed
 
 **Zone 2 Curated (Validation)** — automated quality gates:
+
 - Metadata completeness
 - Schema.org compliance
 - WCAG 2.1 AA accessibility
@@ -306,6 +306,7 @@ Structured metadata in every file — AI agents find, understand, and act withou
 Cryptographic attestation — AI agents cite attested facts, not inferences.
 
 Together:
+
 - Reduce AI hallucinations
 - Lower inference cost and energy (structured input = fewer tokens)
 - Satisfy EU AI Act, European Accessibility Act, digital-records legislation
@@ -341,7 +342,6 @@ Air-gapped, sovereign AI inference appliance for organisations that cannot send 
 | MX Graph | Live | Dependency graph builder and MCP server |
 | Companion web | Specified | MX metadata in HTML pages |
 | Personal cog | Specified | User's own cog collection on-device |
-| mx-plugin | In dev | COGify WordPress sites |
 | Datalake service | Available | Lift-and-shift CMS content to cogs |
 
 ---
@@ -389,6 +389,7 @@ Competitors are retrofitting agent capabilities onto existing platforms. MX OS i
 ## 21. Key Language
 
 **Use:**
+
 - "Intent CMS" — for non-technical investor audiences
 - "Document-native runtime" — for technical audiences
 - "The documentation IS the system" — the founding inversion
@@ -399,6 +400,7 @@ Competitors are retrofitting agent capabilities onto existing platforms. MX OS i
 - "Stop guessing. Start reading."
 
 **Avoid:**
+
 - Speculative figures without verified sources
 - Claiming AI features competitors demonstrably have (MCP, structured content APIs)
 - Overstating adversarial relationship with Adobe/Contentful — they are migration candidates

@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -8,8 +9,8 @@ title: "Getting Started with MX OS"
 description: "Complete onboarding guide for new CogNovaMX team members — from fresh Mac to full immersion"
 author: Tom Cranstoun
 created: 2026-02-24
-modified: 2026-02-24
-version: "1.1"
+modified: 2026-05-29
+version: "1.4"
 
 mx:
   status: active
@@ -34,7 +35,7 @@ Welcome to CogNovaMX. This guide takes you from a fresh Mac to a fully operation
 
 ### The Problem
 
-When AI agents visit websites, they have to *guess* what things mean. They infer from incomplete context. When AI guesses, it hallucinates. A travel site showing "£2,030" might become "£203,000" in an AI summary. A legal question gets answered with TV show citations instead of case law.
+When AI agents visit websites, they have to *guess* what things mean. They infer from incomplete context. When AI guesses, it hallucinates. A developer asks an AI coding assistant about a real, fully-documented authentication command; the AI says it does not exist, and the resulting troubleshooting cascade burns 40,000 tokens to recover an answer that needed 200. A legal question gets answered with TV show citations instead of case law.
 
 ### The Solution
 
@@ -46,7 +47,7 @@ MX is the practice of adding structured information to internet assets — websi
 
 | Concept | What It Is |
 |---------|------------|
-| **Cog** | A structured document (YAML + markdown) that describes something — a person, a place, a product, a document. Machines read cogs to understand context. |
+| **Cog** | A structured unit of MX metadata. It is carrier-neutral and can be embedded in any file type (like `.js`, `.html`, `.css`, or `.md`). The `.cog.*` infix is entirely optional for machines and is used purely as a human signpost/marker. |
 | **$MX_HOME** | `~/.mx/` — Your machine's identity. Contains your personal cogs, repo registry, and machine context. |
 | **Personal Cogs** | Your identity layers — dietary needs, accessibility requirements, professional context. These match against site cogs to personalise the Machine Experience. |
 | **MX View** | The machine-generated view of a page, personalised to *you* based on your cogs matching the site's cogs. |
@@ -225,7 +226,7 @@ npm run cog:stats      # Check cog registry status
 
 Key directories:
 
-- Root-level submodules (`allaboutv2/`, `mx-audit/`, `mx-crm/`, `mx-collaboration/`, `mx-outputs/`)
+- Root-level submodules (`allaboutv2/`, `mx-outputs/`, `mx-shared-gathering/`); plain hub folders include `mx-canon/`, `mx-crm/`, and `mx-reginald/` (which contains the audit suite at `mx-reginald/audit/`)
 - `mx-canon/` — Single source of truth for MX content
 - `.claude/` — Claude Code configuration and skills
 
@@ -234,10 +235,32 @@ Key directories:
 Claude Code has specialised skills. Try:
 
 ```
-/step-commit    # Systematic commit workflow
-/interview-me   # Clarify requirements before starting work
-/review-docs    # Review documents against style guide
+/step-commit            # Systematic commit workflow
+/interview-me           # Clarify requirements before starting work
+/review-docs            # Review documents against style guide
+/mx-add-field           # Add a new field to the MX canon
+/mx-gathering-submit    # Round-trip an MX draft note through The Gathering
+/audit-site             # Run a comprehensive three-perspective web audit
 ```
+
+### 4a. Run an audit from the shell
+
+The audit suite (`mx-reginald/audit/`) is the largest single tooling cluster in the repo. It crawls a site, scores it on accessibility / SEO / AI-suitability / discovery, and produces a client-facing PDF report. Two operator-facing one-liners cover most use:
+
+```bash
+# Full pipeline end-to-end (Phase 1 collect + Phase 2 LLM-driven + Phase 3 gates + PDF)
+# AI steps run on a local Ollama model by default (regulated-safe; nothing leaves your
+# network). Option B's report skill needs the `claude` CLI on PATH; set ANTHROPIC_API_KEY
+# only to opt into the Anthropic provider (MX_AUDIT_LLM_PROVIDER=anthropic).
+npm run audit:full -- https://example.com --pages 5
+
+# Inspect the AI evidence chain inside a generated PDF
+# (wraps `exiftool -b -XMP-mx:ProvenanceAiPayload <pdf> | jq`)
+npm run audit:provenance -- mx-outputs/audit/YYYY-MM-DD/example.com/example-com-report.pdf
+npm run audit:provenance -- example-com-report.pdf '.steps | length'
+```
+
+Each LLM step records to the report's `.provenance.ai.json` sidecar via the Reginald primitive (rubric hash, reasoning trace, model parameters). The generated PDF carries the full chain inside its XMP metadata, so a regulator opening the PDF alone receives the evidence without needing file-system access.
 
 ### 4a. Spell-check (aspell + the MX wordlist)
 
@@ -257,11 +280,11 @@ The authoritative MX content lives in `mx-canon/`:
 
 | Folder | Contains |
 |--------|----------|
-| `mx-the-gathering/` | Open standards body (W3C model) |
+| `mx-the-gathering/` | Open standards body (W3C model). The draft notes themselves live in [`mx-shared-gathering/`](mx-shared-gathering/); to file one with the community, see [`scripts/cogs/mx-gathering-submit.cog.md`](scripts/cogs/mx-gathering-submit.cog.md) — submissions reach Stream through GitHub releases on per-draft repos, not forum threads. |
 | `mx-maxine-lives/` | Maxine's brain — decisions, plans, memory |
 | `mx-app/` | Maxine application (Electron + PWA) |
 | `mx-os/` | Operating system specs |
-| `mx-vision/` | Strategic vision documents |
+| `ssot/` | Single source of truth: principles, field dictionary (`fields-data*.yaml`), writing-style guide, canonical templates |
 
 ---
 
@@ -363,7 +386,7 @@ For team members wanting deeper understanding of the architecture.
 - **Book**: Shared (between MX: The Protocols and MX: The Handbook)
 - **Chapter**: 0 (anchor chapter)
 - **Status**: Written, in the manuscript
-- **Key examples**: Danube cruise pricing error (£2,030→£203,000), Ally McBeal vs legal citations
+- **Key examples**: developer token cascade (200x waste on an undocumented command), Ally McBeal vs legal citations, NHS drug-interaction misread; the Danube cruise pricing case study lives in Appendix I
 - **Commercial urgency**: Amazon Alexa+ (5 Jan), Microsoft Copilot Checkout (8 Jan), Google UCP (11 Jan) — all January 2026
 - **Adobe data cited**: AI referrals Retail +700%, Travel +500%, conversion rates leading by 30%
 - **Organizational models**: 3 models for MX roles (Expanded Accessibility Team, Cross-Functional Practice, Distributed Ownership)
@@ -373,7 +396,7 @@ For team members wanting deeper understanding of the architecture.
 **What COGs Are:**
 
 - **COG = Community Owned Governance Standard** — universal trust wrapper around a cog, carrying attestation (who published, when, whether signed, compliance level) and stewardship (who maintains, review cycle, triggers, SLA) in one record. Not just for REGINALD.
-- **Format**: Markdown file (`.cog.md`) with YAML frontmatter + human-readable narrative body
+- **Format**: Carrier-neutral (conventionally a Markdown `.cog.md` file, but can be embedded natively in `.js`, `.html`, `.css`, or any `.md` file; the `.cog` infix is an optional human marker)
 - **Maxine uses COGs to work** — COGs are how AI agents avoid guessing at every level
 - **REGINALD is the hosted COG** — one deployment of the universal format
 
@@ -403,14 +426,14 @@ For team members wanting deeper understanding of the architecture.
 | 4 | Signed + registered with SLA |
 | 5 | Signed + registered + third-party audited |
 
-### MX Reginald Ltd
+### REGINALD and CogNovaMX
 
-- **Company**: Operates REGINALD registry + Signing Engine
-- **Co-founders**: Tom Cranstoun + Scott McGregor
-- **Parent**: MX Holdings (Tom 70%, Scott 25%, Staff 5%)
-- **Grant target**: £250k-£1.1M from Scottish Government
-- **Key dates**: Handbook 2 Apr, Protocols 1 Jul 2026
+- **REGINALD**: **Re**gistry for **G**enuine **I**nformation, **N**otarised **A**uthentication, and **L**egitimate **D**ocumentation. The proprietary CogNovaMX implementation of the registry layer (Layer 5 of the five-part framing in [CLAUDE.md](CLAUDE.md)); operates the registry + Signing Engine.
+- **CogNovaMX**: the public brand. A trading name of Digital Domain Technologies Ltd (DDT), the parent legal entity that Tom founded and operates.
+- **Layers 1-4 are open and Gathering-governed**; Layer 5 (REGINALD itself) is proprietary. Other registries can exist on the same standard; REGINALD's competitive position is operational quality, not format ownership.
+- **The Gathering** is a separate legal entity — The Gathering Administration Ltd — not part of DDT or CogNovaMX. It is the community-led standards body that owns Layers 1-4.
+- **Published**: MX: The Handbook (2 Apr 2026). MX: The Protocols is the second book in the series; check `datalake/manuscripts/mx-books/mx-protocols/` for current status.
 
 ---
 
-*Last updated: 2026-02-24*
+*Last updated: 2026-05-24*

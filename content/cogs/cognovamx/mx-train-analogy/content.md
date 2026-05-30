@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -9,7 +10,7 @@ version: "1.0.0"
 description: "The railway analogy for MX OS. A physical metaphor that maps every MX concept to something everyone already understands."
 
 created: 2026-02-11
-modified: 2026-02-11
+modified: 2026-05-23
 
 author: Tom Cranstoun
 

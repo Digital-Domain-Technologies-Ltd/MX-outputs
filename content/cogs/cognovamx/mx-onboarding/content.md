@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -6,7 +7,7 @@
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-onboarding"
 version: "1.0"
-description: Single entry-point reading-order navigator for newcomers to MX. Walks the gathering drafts in dependency order, then the published manuscripts, then the cog registry, then the validator stack. Use as the first thing a fresh human or agent reads.
+description: Reading-order navigator for MX. Walks gathering drafts, manuscripts, cog registry, validator stack. First read for a fresh human or agent.
 
 created: 2026-05-03
 modified: 2026-05-05

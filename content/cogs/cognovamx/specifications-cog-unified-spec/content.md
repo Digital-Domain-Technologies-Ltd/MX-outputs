@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -32,6 +33,8 @@ mx:
 Machine-readable metadata. Human-readable documentation. Self-describing modules. Verified trust.
 
 This specification is governed by **The Gathering** — an independent, open standards body focused on metadata that helps machines understand documents. The specification is MIT licensed. Anyone can implement it.
+
+**Published v1 reference:** [`https://mx.allabout.network/drafts/cog-spec.v1.md`](https://mx.allabout.network/drafts/cog-spec.v1.md) and its companion [`/cog-runtime.md`](https://mx.allabout.network/drafts/cog-runtime.md) — the canonical URLs cited in every `.cog.md` file's header comment. The unified specification here is the v2 evolution; v1 remains the stable contract cogs in the wild trust.
 
 ---
 
@@ -98,6 +101,48 @@ A cog is composed of blocks. Each block has a type that declares what its conten
 The markdown body of every cog is its prose block. It is never declared in YAML — it is implicit. The prose block is for humans. It reads like a well-written blog post: informative, editorial, authoritative. The YAML is for machines. The markdown is for humans.
 
 Any MX-aware file can declare `mx.inherits` to extend another file. The inheriting file adds structured metadata on top of the target's content. The target can be any file type — `.md`, `.cog.md`, `.html`, `.json`, `.yaml`, or anything else. Paths can be relative or absolute. The older `prose-source` field is deprecated in favour of `inherits`.
+
+#### Named sub-sections (multi-zone prose)
+
+A single prose block may carry more than one named zone. A **sub-section** is a contiguous span of prose enclosed by two HTML comments of the form:
+
+```markdown
+<!-- begin: <id> -->
+
+...prose content...
+
+<!-- end: <id> -->
+```
+
+The `<id>` is a stable, kebab-case identifier. The whitespace between `begin:` / `end:` and the id is optional but recommended for readability. Markers are HTML comments so they survive markdown round-trips and never render visually.
+
+**Semantics:**
+
+- **One prose block, many zones.** The prose block remains the single implicit block of the cog. Sub-sections are an addressing convention within that block, not separate blocks.
+- **Addressable.** Readers and renderers MAY include, exclude, or extract a sub-section by id. The canonical use is a PDF or HTML renderer that strips a sub-section to produce one artefact and keeps it to produce another from the same source cog.
+- **Non-nested.** Sub-sections do not nest. A marker pair must close before the next pair opens. Nested ids are a malformed cog.
+- **Unique per cog.** Each id appears at most once. Multiple ranges with the same id are a malformed cog.
+- **Unmarked prose is the default zone.** Prose outside any marker pair is always included by readers that strip or extract by id, unless the reader is explicitly extracting a specific sub-section.
+
+**Worked example.** A sponsor pitch cog whose prose block carries a per-recipient cover letter and a formal briefing in one source:
+
+```markdown
+<!-- begin: outbound-cover -->
+
+# Outbound Cover (per-recipient covering letter)
+
+Hi [CONTACT_FIRST_NAME], ...
+
+<!-- end: outbound-cover -->
+
+# Canonical Sponsor Briefing
+
+The Gathering is the open standards body ...
+```
+
+A renderer producing the briefing-only PDF strips the `outbound-cover` sub-section and renders the rest. A renderer producing the full pitch PDF leaves both in place. One cog, two artefacts. The reference implementation lives at [`mx-canon/mx-maxine-lives/businesses/the-gathering/sponsor-pitch.cog.md`](../../mx-maxine-lives/businesses/the-gathering/sponsor-pitch.cog.md); the renderer wiring is in [`scripts/lib/pdf/strip-section.cjs`](../../../scripts/lib/pdf/strip-section.cjs) and the `--strip-section` / `--all-targets` flags of [`scripts/bin/mx.pdf.sh`](../../../scripts/bin/mx.pdf.sh).
+
+**Why not separate prose blocks?** An earlier draft considered making each sub-section a distinct prose block declared in YAML. This was rejected. The prose block stays implicit and singular; sub-sections are a lightweight in-body convention that any markdown-aware reader can honour without parsing YAML. Heavier structural needs (binary content, executable scripts, signed claims) remain the domain of typed blocks.
 
 ### The Essence Block
 
@@ -1061,11 +1106,11 @@ The governance layer wraps a cog with trust. It proves the document is genuine: 
 
 This layer is optional for local use. It is required for REGINALD registration.
 
-### Certificate Header
+### Attestation Header
 
 ```yaml
 cogId: "cog-{publisher}-{subject}-{date}"
-cogType: "certificate-of-genuineness"
+cogType: "cogs"
 
 publisher:
   name: "Publisher Name"
@@ -1243,7 +1288,7 @@ The universal lifecycle applies to all cogs. Specific types add or modify behavi
 
 **Routing cogs** are infrastructure. They should be `permanent` cacheability and rarely change state. A routing cog in `review` means agents may be navigating to the wrong places — this is urgent.
 
-**Attestation cogs** have the richest lifecycle because they carry cryptographic attestations. Every state transition requires re-attestation. The attestation lifecycle in Section 13.2 applies on top of the base lifecycle.
+**Cogs carrying attestation** have the richest lifecycle because of the cryptographic attestations they carry (attestation is a property set, not a distinct cog type). Every state transition requires re-attestation. The attestation lifecycle in Section 13.2 applies on top of the base lifecycle.
 
 ---
 
@@ -1355,7 +1400,7 @@ status: active
 category: developer-tool
 version: "1.0"
 cogId: "cog-anthropic-claude-code-update-20260208"
-cogType: "certificate-of-genuineness"
+cogType: "cogs"
 
 publisher:
   name: "Anthropic"

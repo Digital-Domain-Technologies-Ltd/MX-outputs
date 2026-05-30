@@ -1,13 +1,14 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Principles"
-version: "3.5"
+version: "3.8"
 created: 2026-02-04
-modified: 2026-05-07
+modified: 2026-05-17
 author: Tom Cranstoun
 description: "The principles that govern how MX builds things — for humans and every machine that reads what you publish"
 
@@ -26,11 +27,18 @@ mx:
 
 These are the rules we build by. Not guidelines. Not suggestions. Principles — the things that stay true even when everything else changes.
 
+**Content Ops is the discipline of creating, managing, optimising, publishing, distributing, archiving, and retiring content across every digital channel.** MX is the layer that sits underneath it. The work a Content Ops team produces has to keep being usable once it leaves the system that produced it. What survives is what travelled with the file. MX is what travels.
+
 **Make anything you publish — a video, a podcast, a PDF, an image, a web page — readable by machines.** That is what MX is for. Not just the web. Every machine that reads what humans publish — AI agents, robots, autonomous vehicles, industrial control systems, IoT devices, medical instruments, manufacturing pipelines, scientific instruments, and future machine classes not yet invented — reaches for the same files a human reaches for. MX is the machine layer: the runtime that makes those files executable by any of them.
 
 This is not an AI layer. Not a web layer. Not a content layer. The machine layer. The things humans publish — every video, every podcast, every PDF, every image, every web page — are the universal substrate of human knowledge. Machines are becoming the universal consumers of that knowledge. These principles govern how we make that work.
 
 They apply to every cog, every file, every script, every piece of work that carries the MX name.
+
+The canonical statement, in two lines:
+
+- **MX (what it is):** metadata that records a file's provenance, context, and intended use, and travels with the file.
+- **MX (why it matters):** what keeps Content Ops work usable when an AI agent, or any other system, encounters the file outside the environment that produced it.
 
 ---
 
@@ -280,6 +288,18 @@ MX makes content machine-readable. REGINALD makes it machine-trustworthy. Both p
 
 ---
 
+## Verification Is Deterministic
+
+Trust requires that two parties reach the same answer about the same artefact. That property is only possible when every step in the verification path is deterministic.
+
+The REGINALD core — cog validation, canonicalisation, signing, attestation checking, registry indexing — produces byte-identical outputs for byte-identical inputs. The verdicts are produced by schema validation and cryptographic primitives, the same kind of finite, enumerated machinery that runs the DNS root or a TLS handshake. No language model. No agent loop. No retrieval-augmented anything. A registry whose answers shift when a model is upgraded, a temperature is changed, or a prompt is rewritten is an oracle, not a registry, and it cannot underwrite the trust chain that signed-cog consumers depend on.
+
+Agents have a legitimate place elsewhere — in the web-audit suite, where pages on the open web are too varied for every check to be enumerated up front. Even there, the binding pattern is *run the agent, observe its runs, log every step, instrument until the behaviour is understood, convert the steady-state behaviour into a deterministic script, and add a small LLM-judgement pass at the end only where a human-style verdict is genuinely needed.* Anything an agent does the same way more than twice becomes code.
+
+The boundary is firm: agents may discover; deterministic scripts must deliver; the verification core never crosses the line. This is the property that makes attestation tractable, machine-checkable, and worth what it claims to be worth.
+
+---
+
 ## Design for the Worst Machine
 
 You cannot detect which machine is consuming your document. User-Agent strings are spoofable. The machine might be a server-side model with no JavaScript execution. It might be a local model with fewer than 100 million parameters and a tiny context window. It might be a browser extension with full DOM access but no ability to follow links. It might be an industrial controller that needs the answer in a single structured field. It might be a robot reading a maintenance manual on a warehouse floor.
@@ -287,6 +307,32 @@ You cannot detect which machine is consuming your document. User-Agent strings a
 The principle: design for the machine with the least capability. If the worst machine can understand the document, every machine can. This means: critical information explicit in the markup, not locked behind JavaScript. Explicit structure, not inferred relationships. Redundancy across formats — the same fact in meta tags, Schema.org JSON-LD, and visible text — because different machines read different parts of the document.
 
 This is not over-engineering. It is strategic redundancy for an audience you cannot predict.
+
+---
+
+## Plain Characters in Prose
+
+Prose carries the meaning. HTML entities and decorative Unicode get in the way of it.
+
+In prose, the readable text a human is meant to consume, write literal characters. Straight quotes (`"` and `'`) not typographic curly quotes (`"` `"` `'` `'`) and not their HTML-entity equivalents (`&ldquo;`, `&rdquo;`, `&lsquo;`, `&rsquo;`). Three-dot ellipsis (`...`) not `&hellip;` or `…`. Plain hyphens for compound words; em-dashes are banned on every surface in any form, with commas, semicolons, colons, or parentheses doing the work instead. Regular spaces, not `&nbsp;`.
+
+Three audiences win at once. Machines spend fewer tokens parsing the page and fewer cycles normalising codepoints across editors. Humans reading the source pay no cognitive overhead, because every character looks the same in every editor, terminal, and diff. Pipelines stop tripping over encoding drift between Markdown, HTML, JSON, PDF, and whatever format comes next.
+
+The rule is scoped to prose. HTML entities remain necessary where they are structurally required: `&amp;` in URL query strings, `&lt;` and `&gt;` when source code is shown as text, layout glyphs like `&copy;` in footers or `&middot;` as a visual separator in chrome, icon codepoints like `&#9776;` for a menu button. The principle is no entities inside the reader's words. Where the entity carries plumbing rather than meaning, leave it alone.
+
+If a renderer wants to curl your quotes or convert your `...` into `…` at display time, that is the renderer's job, not the source's.
+
+---
+
+## Plumbing Beats Tactics
+
+There is no single "LLM" to optimise for. ChatGPT, Claude, and Gemini have different ingestion paths, different fetch behaviour, and different trust signals — and the agents built on top of them add another layer of variation. A markup tactic that earns citations on one platform can be ignored by another, and the rankings reshuffle whenever a vendor changes a system prompt, retires a model, or ships a new one. New readers arrive every quarter with rules that are not yours to know in advance.
+
+The conclusion is not that tactics never matter. It is that tactics are not the layer to invest in. The durable layer is the plumbing: correct MIME types, a discoverable sitemap, an `llms.txt` (or whatever follows it) that is actually wired up — served, listed, and referenced — and structured data that agrees with the rendered page. Four items. Each is a configuration change in tools you already use. The simplest machine can parse the result, and every smarter one inherits the work for free.
+
+The rule: when there is a choice between optimising for a named platform and fixing the plumbing underneath, fix the plumbing. Tactics will reshuffle every few months. Plumbing does not.
+
+This is the per-platform sibling of *Design for the Worst Machine*. That principle governs the capability floor — the least-capable reader you must serve. This one governs the time axis — the readers that have not arrived yet, whose rules you cannot anticipate.
 
 ---
 
@@ -301,6 +347,8 @@ The same convergence holds across every machine class. A robot reading a mainten
 This convergence is not coincidental. It reflects a shared underlying truth: explicit, structured, unambiguous content is universally comprehensible. When you optimise for accessibility, you get machine readability as a side effect. When you optimise for MX, you get accessibility as a side effect.
 
 The principle: never treat SEO, accessibility, usability, and MX as separate workstreams. They are the same workstream viewed from different angles. A well-built MX document passes WCAG, ranks well in search, works for every machine class, and is easy for humans to use — all at once.
+
+Two specific shapes the convergence takes are worth naming. The Provenance Gap is what JSON-LD and the Schema.org vocabulary do not carry about who made the assertion, when, and whether to trust it. The Lifecycle Gap is what they do not carry about when the document was published, when it expires, who maintains it now, what its canonical URI is, and whether it has been superseded. MX names both as first-class signals, with each lifecycle signal mapped to an existing canon field (`created`, `expires`, `originator` / `author`, `stewardship.steward` / `maintainer`, `canonicalUri`, and `status` plus the `supersedes` / `supersededBy` / `replacedBy` chain). The discovery layers solve *find me*; MX solves *now what*. The full treatment sits in *MX: The Protocols* chapter 10 and in the positioning paper at [`mx-canon/ssot/papers/geo-vs-mx.md`](papers/geo-vs-mx.md).
 
 ---
 

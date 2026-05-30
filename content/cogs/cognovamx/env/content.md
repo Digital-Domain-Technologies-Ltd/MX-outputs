@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -30,8 +31,9 @@ mx:
   audience: both
   readingLevel: advanced
 
-  contentType: "config-doc"
-  runbook: "mx exec env"
+  contentType: "action-doc"
+  actionType: sop
+  runbook: "mx exec env. Primary character is configuration data; agent actions (show, validate) are SOP-style and described below."
   # ─────────────────────────────────────────────
   # PROJECT ENVIRONMENT — the values live here
   # ─────────────────────────────────────────────

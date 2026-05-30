@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -21,9 +22,9 @@ mx:
   security:
     scope:
       filesystem:
-        - mx-audit/results/**
-        - mx-audit/src/**
-        - mx-audit/bin/**
+        - mx-reginald/audit/results/**
+        - mx-reginald/audit/src/**
+        - mx-reginald/audit/bin/**
         - mx-crm/outreach/**
         - mx-outputs/pdf/outreach/**
       network: read-only
@@ -59,12 +60,12 @@ mx:
           1. Resolve DOMAIN_URL and PAGE_COUNT from context or ask the user.
           2. Derive shell variables: HOSTNAME (via node URL parse), CLIENT_SLUG
              (dots to dashes), DATE (YYYY-MM-DD), PDF_OUT, REPORT_MD, LOG.
-          3. Clear previous results: rm -rf mx-audit/results/${HOSTNAME}
+          3. Clear previous results: rm -rf mx-reginald/audit/results/${HOSTNAME}
           4. Run the crawler: npm run audit:start -- -s "${DOMAIN_URL}" -c
-             "${PAGE_COUNT}" --output "mx-audit/results/${HOSTNAME}" --log-level info
+             "${PAGE_COUNT}" --output "mx-reginald/audit/results/${HOSTNAME}" --log-level info
              Stop if exit code ≠ 0.
           5. Run the pipeline (report + gates + PDF):
-             npm run audit:pipeline -- --results "mx-audit/results/${HOSTNAME}"
+             npm run audit:pipeline -- --results "mx-reginald/audit/results/${HOSTNAME}"
              --out "${PDF_OUT}" --client "${CLIENT_SLUG}" --date "${DATE}" 2>&1 | tee "${LOG}"
              Stop if PIPESTATUS[0] ≠ 0.
           6. Confirm PDF exists: test -f "${PDF_OUT}"
@@ -127,12 +128,12 @@ LOG="/tmp/audit-pipeline-${HOSTNAME}.log"
 ### 1.2 Crawl
 
 ```bash
-rm -rf "mx-audit/results/${HOSTNAME}"
+rm -rf "mx-reginald/audit/results/${HOSTNAME}"
 
 npm run audit:start -- \
   -s "${DOMAIN_URL}" \
   -c "${PAGE_COUNT}" \
-  --output "mx-audit/results/${HOSTNAME}" \
+  --output "mx-reginald/audit/results/${HOSTNAME}" \
   --log-level info
 ```
 
@@ -142,7 +143,7 @@ Stop if exit code ≠ 0. Do not proceed to 1.3.
 
 ```bash
 npm run audit:pipeline -- \
-  --results "mx-audit/results/${HOSTNAME}" \
+  --results "mx-reginald/audit/results/${HOSTNAME}" \
   --out "${PDF_OUT}" \
   --client "${CLIENT_SLUG}" \
   --date "${DATE}" \
@@ -197,7 +198,7 @@ When a claim does not match the cache, correct `${REPORT_MD}`, then re-run gates
 ```bash
 npm run audit:pipeline -- \
   --gates "${REPORT_MD}" \
-  --results "mx-audit/results/${HOSTNAME}" \
+  --results "mx-reginald/audit/results/${HOSTNAME}" \
   --out "${PDF_OUT}"
 ```
 

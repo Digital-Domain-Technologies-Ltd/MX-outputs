@@ -1,15 +1,17 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "how-to-write-a-cog"
-version: "1.1"
-description: General authorial guide for writing any cog — from blank file to a working `.cog.md`. Walks through the standard opening header, the YAML frontmatter shape, the cog-type choice, the cog-graph fields, the typed body blocks, embedded `@embedded:` scripts for action cogs, and where the file goes.
+version: "1.2"
+
+description: "Authorial guide for writing any cog from blank file to working .cog.md. Covers opening header, frontmatter, cog-type choice, body blocks, file placement."
 
 created: 2026-05-03
-modified: 2026-05-05
+modified: 2026-05-30
 
 author: Tom Cranstoun
 
@@ -38,7 +40,7 @@ Walks an author from a blank file to a working cog of any flavour. The steps are
 
 ## Overview
 
-A cog is a `.cog.md` file: markdown body, structured YAML frontmatter, opens with a fixed 5-line orientation header. Cogs come in flavours (info, action, routing, certificate-of-genuineness, community-owned-governance-standard) and the flavour shapes which Zone-2 fields apply, but every cog shares the same skeleton. This cog walks you through the skeleton in ten steps, then points at the flavour-specific drill-down docs for the bits that differ.
+A cog is a `.cog.md` file: markdown body, structured YAML frontmatter, opens with a fixed 5-line orientation header. Cogs come in flavours (info, action, routing, community-owned-governance-standard) and the flavour shapes which Zone-2 fields apply, but every cog shares the same skeleton. This cog walks you through the skeleton in ten steps, then points at the flavour-specific drill-down docs for the bits that differ.
 
 ## Step 0 — Where this fits with skills
 
@@ -50,7 +52,7 @@ An action-cog declares **`actionType`** alongside `contentType: action-doc` so a
 - **`sop`** — the cog body has no `@embedded` block. The `x-mx-execute.actions[].usage` value is descriptive prose intended for an LLM (via a skill) to read and perform. LLM-mediated.
 - **`hybrid`** — both an embedded script AND descriptive usage prose. Script handles the deterministic portion; prose carries the judgment-dependent portion an LLM performs.
 
-Two further cog kinds exist alongside info and action: a **routing-cog** (`contentType: routing-doc`) maps user intent to other cogs and carries a `routes:` block; a **certificate-of-genuineness** carries publisher-signed claims with `proofOfAuthorship` and `integritySignature`; a **community-owned-governance-standard** (`contentType: cogs`) is a cog whose definition is owned and stewarded by an open community, governed by <https://tg.community>. The full layered model — skills above, cogs as the readable content layer underneath — lives in [`cogs-for-agent-developers`](cogs-for-agent-developers.cog.md). When you are about to write a new cog, decide first whether you also need a skill alongside it (you do whenever the cog should be discoverable from chat by intent rather than by name).
+Two further cog kinds exist alongside info and action: a **routing-cog** (`contentType: routing-doc`) maps user intent to other cogs and carries a `routes:` block; a **community-owned-governance-standard** (`contentType: cogs`) is a cog whose definition is owned and stewarded by an open community, governed by <https://tg.community>. Publisher-signed attestation (`proofOfAuthorship`, `integritySignature`, a publisher block) is not a separate cog kind; it is carried as properties on a cog of any type. The full layered model — skills above, cogs as the readable content layer underneath — lives in [`cogs-for-agent-developers`](cogs-for-agent-developers.cog.md). When you are about to write a new cog, decide first whether you also need a skill alongside it (you do whenever the cog should be discoverable from chat by intent rather than by name).
 
 ## Step 1 — Pick the cog type
 
@@ -61,17 +63,19 @@ Two further cog kinds exist alongside info and action: a **routing-cog** (`conte
 | `action` (sop) | LLM-mediated action; descriptive `usage` prose a skill reads and performs | `contentType: action-doc`, `actionType: sop`, `x-mx-execute:` with descriptive `actions[].usage` |
 | `action` (hybrid) | Both an embedded script AND descriptive usage prose | `contentType: action-doc`, `actionType: hybrid`, `x-mx-execute:`, embedded block, descriptive usage |
 | `routing` | Agent navigation; maps user intent to other cogs or destinations | `contentType: routing-doc`, `routes:` |
-| `certificate-of-genuineness` | Publisher-provenanced credential carrying signed claims | `contentType: certificate-of-genuineness`, `proofOfAuthorship`, `integritySignature` |
 | `community-owned-governance-standard` | Cog whose definition is owned and stewarded by an open community as a published governance reference; governance lives at <https://tg.community> | `contentType: cogs`, declared community ownership |
+
+Publisher-signed attestation is not a row in this table: it is a property set (`proofOfAuthorship`, `integritySignature`, a publisher block) that any cog can carry, most often a `cogs` community-owned-governance-standard.
 
 Pick one. The choice drives which optional sections apply; everything else is shared.
 
-## Step 2 — The 5-line opening header
+## Step 2 — The opening header
 
-Every cog opens with this exact block, verbatim, before any other frontmatter:
+Every cog opens with this exact block, verbatim, immediately after the opening `---` and before any other frontmatter:
 
 ```yaml
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -79,7 +83,12 @@ Every cog opens with this exact block, verbatim, before any other frontmatter:
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 ```
 
-Five YAML-comment lines. The wording is fixed; the URL is fixed. The pre-write-cog-opening hook (`.claude/hooks/pre-write-cog-opening.sh`) is a two-way gate: it blocks any new `.cog.md` write that doesn't carry these lines, and it blocks any plain `.md` write that does. The header is reserved for `.cog.md` files — if you want it, give the file the `.cog.md` extension. When in doubt, copy from any existing cog.
+Two parts, both fixed wording and fixed URLs:
+
+- **The magic-header line** (`# cog v1 spec=…`) on the line immediately after the opening `---`. It declares the cog spec and runtime versions (per draft-cogs.md §4 and reginald-vnext-prd.md §1.3.1).
+- **The 5-line briefing block** addressed to any first-time reader.
+
+The pre-write-cog-opening hook (`.claude/hooks/pre-write-cog-opening.sh`) enforces **both** and is a two-way gate: it blocks any new `.cog.md` write that is missing either the magic-header line or the briefing block, and it blocks any plain `.md` write that carries the briefing. The header is reserved for `.cog.md` files — if you want it, give the file the `.cog.md` extension. When in doubt, copy all six lines verbatim from any existing cog.
 
 ## Step 3 — Zone 1 frontmatter (document identity)
 
@@ -112,7 +121,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<relpath>
   status: published
   partOf: <parent>
-  contentType: <one of info-doc | action-doc | routing-doc | certificate-of-genuineness | cogs>
+  contentType: <one of info-doc | action-doc | routing-doc | cogs>
 ```
 
 Recommended for any cog that ships:

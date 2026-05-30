@@ -1,11 +1,12 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "MX Field Triage Rubric"
-description: "The rule every candidate field must pass to appear in the MX canon. Resolves the describes-the-document test, the three-lens test, and the code-provenance exception, with worked examples for the common grey zones."
+description: "The rule every candidate field must pass to appear in the MX canon. Covers the describes-the-document, three-lens, and code-provenance tests."
 author: "Tom Cranstoun"
 created: "2026-04-17"
 modified: "2026-04-17"

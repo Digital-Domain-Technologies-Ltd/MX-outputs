@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -9,7 +10,7 @@ version: "1.0-draft"
 created: 2026-04-02
 modified: 2026-04-27
 author: Tom Cranstoun
-description: "DEFERRED. The ai.* field namespace was moved to CogNovaMX vendor extensions (cognovamx-fields.yaml) on 2026-04-15 pending concrete adoption. This note will be revised or withdrawn once adoption evidence exists. Authored by Tom Cranstoun and offered to The Gathering for review."
+description: "DEFERRED. ai.* field namespace moved to CogNovaMX vendor extensions on 2026-04-15 pending adoption. Will be revised or withdrawn once evidence exists."
 
 mx:
   status: deferred

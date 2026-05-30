@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -48,4 +49,4 @@ mx:
 
 This cog inherits its prose from [LICENSE](LICENSE). The standard MIT license, unmodified.
 
-**The Gathering** licenses the specification under MIT. **CogNovaMX Ltd** licenses its commercial products separately. The standard belongs to everyone. The product is ours.
+**The Gathering** licenses the specification under MIT. **CogNovaMX** licenses its commercial products separately. The standard belongs to everyone. The product is ours.

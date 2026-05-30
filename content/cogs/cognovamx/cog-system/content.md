@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -67,6 +68,8 @@ A COG is a markdown file with YAML frontmatter. That's it. No special format, no
 AI assistants get things wrong. Not because they're stupid, but because they have nowhere reliable to look things up.
 
 A couple wanted to book a Danube river cruise. The price was £2,030 — a good deal. They asked an AI assistant for help. The AI read the website, but the price wasn't formatted for machines to understand. The AI saw £203,000. Two hundred and three thousand pounds. The AI told them it was unreasonably expensive. They never saw the real price. They never booked. The cruise company lost the sale. Neither party knew why.
+
+The page could have carried Schema.org markup that named the field as a price; any page can. Schema.org defines what `price` means as a field; it does not certify that the operator actually issued the figure. The same JSON-LD payload could have come from the operator, from a scraper, from a competitor's mirror, from a malicious copy. The trust layer is not on the page. It is in the signed record above the page — the version the operator published, dated, cryptographically signed, and registered, against which the agent verifies what the page claims. The page can lie; the signature cannot. That is the layer COGs add, and it is the layer REGINALD indexes.
 
 A developer asked an AI coding assistant about a specific authentication command. The command was real. It was fully documented on the vendor's website. The AI said it didn't exist. The resulting troubleshooting cascade consumed over 40,000 tokens across two AI systems. The correct answer required 200 tokens. A 200x waste ratio — on a single question.
 
@@ -221,7 +224,7 @@ COGs don't exist in isolation. They're part of a broader ecosystem of companies,
 
 Three companies work together:
 
-**CogNovaMX Ltd** is the commercial steward of Machine Experience. Founded and owned by Tom Cranstoun — 52 years in technology, BBC, Adobe Expert, Fortune 500 clients. CogNovaMX operates consulting, the MX certification framework, and the MaXinE AI engine. Tom originated the MX discipline, built on Steve Krug's "Don't Make Me Think" principle applied to AI agents: if a machine has to think, it hallucinates.
+**CogNovaMX** is the commercial steward of Machine Experience. Founded and owned by Tom Cranstoun — 52 years in technology, BBC, Adobe Expert, Fortune 500 clients. CogNovaMX operates consulting, the MX certification framework, and the MaXinE AI engine. Tom originated the MX discipline, built on Steve Krug's "Don't Make Me Think" principle applied to AI agents: if a machine has to think, it hallucinates.
 
 **MX Reginald Ltd** operates the REGINALD registry and the Signing Engine. Co-founded by Tom Cranstoun and Scott McGregor, who runs independent technology pilots. This is the company publishing this COG — the company that runs the library where verified documentation lives.
 
@@ -261,7 +264,7 @@ Together they provide the foundation for the COG format and everything in the RE
 |---|---|
 | First COG created (this document) | 8 February 2026 |
 | MX: The Handbook publishes | 2 April 2026 |
-| REGINALD general availability, CMS Summit Frankfurt ✅ | 12 May 2026 |
+| REGINALD general availability, CMS Summit Frankfurt | 12 May 2026 |
 | MX: The Protocols publishes | 1 July 2026 |
 
 ---

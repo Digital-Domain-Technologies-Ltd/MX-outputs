@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -19,7 +20,7 @@ mx:
   - header
   - navigation
   x-mx-cogId: cog-eds-block-header-20260222
-  x-mx-cogType: certificate-of-genuineness
+  x-mx-cogType: info
   license: MIT
   publisher:
     verified: false
@@ -212,4 +213,4 @@ Document structure:
 
 ---
 
-*Block maintained by Tom Cranstoun, CogNovaMX Ltd*
+*Block maintained by Tom Cranstoun, CogNovaMX*

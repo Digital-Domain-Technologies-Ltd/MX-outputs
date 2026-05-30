@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -516,4 +517,4 @@ These four benefits are not separate initiatives. One MX implementation delivers
 
 ---
 
-**🎯 CogNovaMX Ltd — Making the web — and everything you publish beyond it — work for everyone and everything that uses it.**
+**🎯 CogNovaMX — Making the web — and everything you publish beyond it — work for everyone and everything that uses it.**

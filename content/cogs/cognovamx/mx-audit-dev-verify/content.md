@@ -1,15 +1,16 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-audit-dev-verify"
-version: "1.0.0"
+version: "1.1.0"
 description: "Developer verification pass for the mx-audit pipeline — checks template/contract/handler consistency, prompt quality, and gate chain completeness."
 
 created: 2026-05-08
-modified: 2026-05-08
+modified: 2026-05-14
 
 author: Tom Cranstoun
 
@@ -46,19 +47,19 @@ mx:
       - name: template-contract-sync
         description: Compare [PLACEHOLDER] tokens in the template against the declared entries in the matching .contract.json.
         usage: |
-          Read mx-audit/templates/web-audit-suite-template.md.
+          Read mx-reginald/audit/templates/web-audit-suite-template.md.
           Extract every [TOKEN] pattern: search for strings matching \[[A-Z][A-Z0-9_]+\] that appear
           in the document body (not inside HTML comments or REWRITE blocks).
-          Read mx-audit/templates/web-audit-suite-template.contract.json.
+          Read mx-reginald/audit/templates/web-audit-suite-template.contract.json.
           List the keys under the "placeholders" object.
           Compare the two sets and report:
             FAIL — tokens in the template but absent from the contract (will cause CONTRACT ERROR at infill time)
             WARN — tokens in the contract but absent from the template (dead entries, safe but misleading)
             PASS — sets match exactly
-          Repeat the same check for mx-audit/templates/ecommerce-audit-template.md and its
-          mx-audit/templates/ecommerce-audit-template.contract.json counterpart.
+          Repeat the same check for mx-reginald/audit/templates/ecommerce-audit-template.md and its
+          mx-reginald/audit/templates/ecommerce-audit-template.contract.json counterpart.
           If generate-template-contract.js supports a --dry-run or --diff flag, use it:
-            node mx-audit/bin/generate-template-contract.js --dry-run
+            node mx-reginald/audit/bin/generate-template-contract.js --dry-run
           Otherwise perform the comparison by reading both files.
         outputs:
           - name: sync-report
@@ -68,10 +69,10 @@ mx:
       - name: contract-handler-sync
         description: Verify that every script-deterministic contract entry has a fill handler in infill-report.js.
         usage: |
-          Read mx-audit/templates/web-audit-suite-template.contract.json.
+          Read mx-reginald/audit/templates/web-audit-suite-template.contract.json.
           Collect every key under "placeholders" where the handler value is "script-deterministic".
           For each such key TOKEN:
-            Search mx-audit/bin/infill-report.js for the string replace('[TOKEN]' or replace("[TOKEN]"
+            Search mx-reginald/audit/bin/infill-report.js for the string replace('[TOKEN]' or replace("[TOKEN]"
             or for the token name appearing in a handler dispatch map (e.g. an object key or switch case).
           Report:
             FAIL — tokens with no handler found (will silently remain unfilled in every report)
@@ -88,13 +89,13 @@ mx:
       - name: prompt-quality-review
         description: Review the REWRITE block instructions and gate system prompts for truncation risk, internal contradictions, and missing quality guards.
         usage: |
-          Read mx-audit/scripts/rewrite-report.js.
+          Read mx-reginald/audit/scripts/rewrite-report.js.
           Locate the SYSTEM_PROMPT constant (or equivalent system prompt string).
           Check:
             WARN if the prompt does not include a max_tokens or output-length guard — missing guards
               allow the API to truncate mid-section (as seen with Priority 2-5 being dropped).
 
-          Read mx-audit/templates/web-audit-suite-template.md.
+          Read mx-reginald/audit/templates/web-audit-suite-template.md.
           Locate the large REWRITE block that generates the At-a-Glance table and Priority sections
           (typically the block containing "render the at-a-glance findings table" or similar).
           Check:
@@ -103,7 +104,7 @@ mx:
             WARN if the block does not specify a concrete output format for each Priority section
               (e.g. "each Priority block has exactly three labelled fields: **Finding**, **What to change and why**, **Effort**").
 
-          Read mx-audit/scripts/audit-fierce-critic.js.
+          Read mx-reginald/audit/scripts/audit-fierce-critic.js.
           Locate the LLM_CRITIC_RUBRIC constant.
           Check:
             FAIL if two AREA sections contain directly contradictory instructions
@@ -114,7 +115,7 @@ mx:
               a specific header (CSP, X-Frame-Options, X-Content-Type-Options, HSTS) should be exempt
               from hollow-recommendation flagging.
 
-          Read mx-audit/scripts/audit-llm-judgment.js.
+          Read mx-reginald/audit/scripts/audit-llm-judgment.js.
           Locate RUBRIC CHECK 1 (the "MISSING IN ENGAGEMENT" check).
           Check:
             FAIL if the rubric says "check top 2-3 priorities" or "check the top priorities" without
@@ -122,6 +123,87 @@ mx:
               low-numbered priorities (3, 4, 5) to be omitted from the engagement table undetected.
             PASS if the rubric explicitly says "check EVERY numbered priority (Priority 1 through N,
               not just the top two or three)".
+
+          Read mx-reginald/audit/scripts/rewrite-report.js again.
+          Locate the REFUSAL_PATTERNS array and the detectRefusal function.
+          Check:
+            FAIL if REFUSAL_PATTERNS is absent or contains fewer than 8 patterns —
+              the source-side refusal guard was added 2026-05-14 after the rewrite LLM
+              leaked "I cannot write this section without fabricating specifics" into
+              a client-facing report. Removing the array re-opens that drift path.
+            FAIL if the rewrite loop does not call detectRefusal on the API response
+              and retry on hit. The retry + neutral-fallback substitution is the
+              defence-in-depth pattern; without it, gate-warn findings start blocking
+              the pipeline downstream of repair-final.
+            WARN if REFUSAL_FALLBACK is missing or empty — the harness uses this
+              string when both the first call and the retry leak refusal patterns.
+
+          Locate BANNED_VERDICTS, BANNED_VERDICT_ALLOWLIST, BANNED_VERDICT_SUBSTITUTES,
+          detectBannedVerdicts, and substituteBannedVerdicts.
+          Check:
+            FAIL if BANNED_VERDICTS is missing or out of step with the same list in
+              mx-reginald/audit/scripts/check-report-tone.js. The two must stay aligned so the
+              source-side check has the same coverage as Gate 0b.
+            FAIL if BANNED_VERDICT_SUBSTITUTES is missing a key for any word in
+              BANNED_VERDICTS — the deterministic substitute is what stops a single
+              "broken outline" / "lacking metadata" drift from blocking the PDF.
+            FAIL if the rewrite loop does not call detectBannedVerdicts after the
+              refusal guard. The two guards must both run on every block.
+
+          Read mx-reginald/audit/scripts/audit-fierce-critic.js once more.
+          Locate checkOperatorDialogue (Check Y2).
+          Check:
+            FAIL if checkOperatorDialogue is absent — this is the belt-and-braces
+              regex backstop to the rewrite-side refusal guard, and removing it
+              means any refusal that slips both the system prompt and the harness
+              retry reaches the client deliverable silently.
+            WARN if the runner (main function) does not call checkOperatorDialogue
+              in the gate sequence.
+
+          Read mx-reginald/audit/bin/infill-report.js.
+          Locate the at-a-glance findings facts injection (the block that replaces
+          the "Render the at-a-glance findings table" REWRITE block with facts).
+          Check:
+            FAIL if the injection does not include a "PRIORITY-BLOCK CONTRACT" section
+              that names the **Priority N: <Title>** heading format, the three labelled
+              fields (Finding, What to change and why, Effort), and the `---` separator
+              between blocks. Without this contract the rewrite LLM omits the Priority
+              heading lines and Gate 0e fires "Priority N — Missing block" for every row.
+
+          Locate the security at-a-glance fact line (search for `securityFact,` inside
+          the findingsFacts array).
+          Check:
+            FAIL if the line reads `averages.bands.security.grade === 'A' ? ... : ...`
+              instead of using the precomputed securityFact variable. The grade-proxy
+              pattern produced a contradictory Priority 4 on the 2026-05-14 audit
+              (the band's threshold for 'A' is stricter than "5/5 on every URL").
+
+          Locate the security headers coverage line (search for `[N] of [TOTAL] pages have all five headers`).
+          Check:
+            WARN if the replacement string still uses "pages" instead of "audited URLs".
+              Security headers apply to every probed response, including non-HTML
+              discovery files; calling the count "pages" trips the LLM judge's
+              sample-vs-total-overreach check.
+
+          Locate the Full Optimization engagement scope (search for `[All priorities + enhancements]`).
+          Check:
+            FAIL if the scope is built by `dimRanks.slice(0, 3)` or by repeating
+              "X improvements" for each dim — the first pattern omits Heading Quality
+              and Performance from the engagement table; the second reads as box-ticking
+              and trips the fierce-critic hollow-recommendation rule.
+            PASS if the scope enumerates every dim under threshold, plus Heading Quality
+              when < 70, Performance when load > 2000 ms, and Security headers when
+              incomplete — without the repeated "improvements" suffix.
+
+          Read scripts/audit-pipeline.js.
+          Locate the `NON_HTML_BUFFER` constant near the `pages` argument parsing.
+          Check:
+            FAIL if NON_HTML_BUFFER is absent or set to 0 — without the buffer, a
+              `--max-pages 10` request against a site that publishes llms.txt,
+              llms-full.txt, and agents.md delivers 7 HTML pages instead of 10.
+            WARN if the crawler invocation passes `String(pages)` instead of
+              `String(crawlCap)` — the buffer must be passed to the crawler's -c
+              flag for the widening to take effect.
         outputs:
           - name: prompt-report
             type: string
@@ -133,7 +215,7 @@ mx:
           Read scripts/audit-pipeline.js.
           In the --gates block, identify every node(join(HERE, 'scriptname.js'), ...) call.
           For each script path referenced:
-            Check that the file exists at scripts/scriptname.js (the stub) OR at mx-audit/scripts/scriptname.js
+            Check that the file exists at scripts/scriptname.js (the stub) OR at mx-reginald/audit/scripts/scriptname.js
             (the authoritative copy). A file existing at either location is sufficient.
             Report FAIL if neither path exists.
           Verify the gate invocation order matches the documented gate numbering:
@@ -214,11 +296,11 @@ Run `full-verify` after any of these changes:
 
 - Adding, renaming, or removing a `[PLACEHOLDER]` in a template
 - Editing `web-audit-suite-template.contract.json` or `ecommerce-audit-template.contract.json`
-- Modifying a fill handler in `mx-audit/bin/infill-report.js`
+- Modifying a fill handler in `mx-reginald/audit/bin/infill-report.js`
 - Editing the REWRITE block instructions in a template
-- Modifying the system prompt in `mx-audit/scripts/rewrite-report.js`
-- Editing `LLM_CRITIC_RUBRIC` in `mx-audit/scripts/audit-fierce-critic.js`
-- Editing the judgment rubric in `mx-audit/scripts/audit-llm-judgment.js`
+- Modifying the system prompt in `mx-reginald/audit/scripts/rewrite-report.js`
+- Editing `LLM_CRITIC_RUBRIC` in `mx-reginald/audit/scripts/audit-fierce-critic.js`
+- Editing the judgment rubric in `mx-reginald/audit/scripts/audit-llm-judgment.js`
 - Adding or reordering gates in `scripts/audit-pipeline.js`
 
 ## What each action checks

@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -18,7 +19,7 @@ includes:
 
 mx:
   status: active
-  contentType: reference-implementation
+  contentType: action.sop
   x-mx-category: mx-core
   partOf: mx-os
   tags: [includes, composition, reference-implementation, example]

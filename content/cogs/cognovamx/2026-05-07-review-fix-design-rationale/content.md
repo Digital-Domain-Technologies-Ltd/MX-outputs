@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -6,7 +7,7 @@
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "review-fix-design-rationale-2026-05-07"
 version: "1.0"
-description: "Design rationale for the seven decisions taken in the 2026-05-07 review-fix round on the mx-shared-gathering drafts. Records what was chosen, what was rejected, and why."
+description: "Design rationale for the seven decisions in the 2026-05-07 review-fix round on mx-shared-gathering drafts: what was chosen, what was rejected, why."
 
 created: 2026-05-07
 modified: 2026-05-07

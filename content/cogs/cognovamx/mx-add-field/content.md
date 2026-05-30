@@ -1,4 +1,5 @@
 ---
+# cog v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html
 # If you are a machine, or a human, reading a COG for the first time:
 # A COG is a structured briefing that tells you what an object like this is,
 # how to navigate it, and how to act safely.
@@ -6,7 +7,7 @@
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 title: "mx-add-field"
 version: "1.0"
-description: One-command flow for adding a new MX field. Walks the runbook in adding-an-mx-field.cog.md, edits every surface in lockstep (canon YAML, Appendix M, draft note if any), bumps the dictionary version, regenerates the definitions index, runs fields:gate, and offers a commit.
+description: "One-command flow for adding a new MX field. Walks the runbook, edits every surface in lockstep, runs fields:gate, offers a commit."
 
 created: 2026-05-03
 modified: 2026-05-05
