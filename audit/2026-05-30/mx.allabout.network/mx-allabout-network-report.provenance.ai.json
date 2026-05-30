@@ -1,0 +1,808 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": "mx.allabout.network-2026-05-30",
+  "runRevision": 2,
+  "lastWriteAt": "2026-05-30T00:46:50.611Z",
+  "operator": "tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://mx.allabout.network",
+  "startedAt": "2026-05-30T00:46:43.191Z",
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 24-205 — Consumer Protections for Artificial Intelligence",
+      "version": "SB-24-205",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "mx-allabout-network-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "eb72a5806000811ac8293f4902842880ab8c1e74",
+      "shortSha": "eb72a58"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.4.0",
+    "host": "toms-MacBook-Pro-304.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-05-30T00:46:43.352Z",
+      "stepId": "report.rewrite-1",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 1/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "9932c187732ab260ec4b39faa54e4173ad16678e1726267fd436087109e31efd",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:43.495Z",
+      "stepId": "report.rewrite-2",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 2/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "99307a3e41c4c493de10f4812d6eced123191407995db6f2c51e78ca6c04a212",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:43.637Z",
+      "stepId": "report.rewrite-3",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 3/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "5076343d2e1237882f67dd3034e5967d3d7b34be3de3d53055d7d05f00338a32",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:43.779Z",
+      "stepId": "report.rewrite-4",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 4/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "72bd26e8611d9f7ef5bb369facde05b601389bb69e14aa973fa5e0d5b5b1039b",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:43.923Z",
+      "stepId": "report.rewrite-5",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 5/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "90718cc60adc495262bb68597f5342caad3fc98b1125630eda7c3e893a4238dd",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:44.068Z",
+      "stepId": "report.rewrite-6",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 6/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4000
+      },
+      "inputs": {
+        "blockIndex": 6,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "241887475dc606bc2449d8ac94963cd76df3dc64061acb2d3a224c647f2667f6",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:44.211Z",
+      "stepId": "report.rewrite-7",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 7/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 7,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "a710212f677cf8e9bbc2395389a324f74779fe29bf002615a75284152637b2cd",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:44.356Z",
+      "stepId": "report.rewrite-8",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 8/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 8,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "0c8781f9e53c8ed73683b12346f642ac6155cc58fe0d8e464f091a9e9ba1d537",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:44.500Z",
+      "stepId": "report.rewrite-9",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 9/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 9,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "7df38cb2c6bf92d0eb2d3606e2d6538ccacd17e6ace2d3f0926bc7cc71eb411b",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:44.642Z",
+      "stepId": "report.rewrite-10",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 10/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 10,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "930f5693c05d67873760ffb36c85fcf7db352945bc49ed3208088e66ba1a448e",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:44.783Z",
+      "stepId": "report.rewrite-11",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 11/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 11,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "f70ba6850150822d8a6ed44e1ba7a72f5d0a052680459af66dea0c32969518ee",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:44.927Z",
+      "stepId": "report.rewrite-12",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 12/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 12,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "10a5fdcd1b211890de9f4f842d3206c618f9f6c07fe72268a1763d44689a191c",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:45.072Z",
+      "stepId": "report.rewrite-13",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 13/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 13,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "d623b921bc57c09e0abffe9056038f543e3aa1c69e77378e5dc88551afbc2a1a",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:45.213Z",
+      "stepId": "report.rewrite-14",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 14/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 14,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "bf167fadd23b0ba26f0be86e3813323136535abdf4084924123afd98dd5981e0",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:45.356Z",
+      "stepId": "report.rewrite-15",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 15/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 15,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "721320b57506af52d96443dbd9099b1befc4e8c1b5441890a99bb59bfed70a7d",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:45.500Z",
+      "stepId": "report.rewrite-16",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 16/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 16,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "560ad7b7360b18b80a127f401ccea4ef016ce97d29a510d737d0e23fde58d3e5",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:45.642Z",
+      "stepId": "report.rewrite-17",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 17/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 17,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "d70f30a6b7292fb2ade35310065c910f67601c639e5395151b4be93b59f1165b",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:45.783Z",
+      "stepId": "report.rewrite-18",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 18/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 18,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "b2157ac6b5b26a6d0bed1bdcd41ca1d48ed5abec17e32230a8b28bb2a9156945",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-30T00:46:45.931Z",
+      "stepId": "report.rewrite-19",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 19/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 19,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "7b1ef52b90d7f7b7714ab2f09f95ce99eaf95ea07f119b1154600e0200cf3daa",
+      "promptHash": "342ece3ed90a8e64d11a7dcafecc0f24ca26d755209f84de690d43c73f8ecd94",
+      "inputHashes": [
+        {
+          "hash": "2d8fe9e8a3194dd48ad04947444dd420224d2cecd30ef30a457d86c1921b1841",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    }
+  ]
+}
