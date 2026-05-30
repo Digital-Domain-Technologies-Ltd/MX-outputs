@@ -3,8 +3,8 @@
   "schemaVersion": "2.0",
   "_description": "Deterministic evidence chain. One entry per rule-driven pipeline step (gate verdict, CSV check, regex match, render step, probe result). Designed as evidence for the deterministic-conformance regime (EAA Directive 2019/882); the Level 2 tagged PDF and per-page accessibility verdicts come from these steps. Adjacent on disk only; the artefact frontmatter does NOT embed a pointer to this file (the .ai.json companion is the regulator-facing one).",
   "auditId": "mx.allabout.network-2026-05-30",
-  "runRevision": 1,
-  "lastWriteAt": "2026-05-30T00:47:04.202Z",
+  "runRevision": 2,
+  "lastWriteAt": "2026-05-30T06:55:43.433Z",
   "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
@@ -45,8 +45,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "eb72a5806000811ac8293f4902842880ab8c1e74",
-      "shortSha": "eb72a58"
+      "sha": "9cf9c9ad59630a84bafbf0cd83ebaf6de4e65d28",
+      "shortSha": "9cf9c9a"
     },
     "branch": "main",
     "dirty": true,
@@ -1666,6 +1666,3293 @@
     },
     {
       "timestamp": "2026-05-30T00:47:04.202Z",
+      "stepId": "pdf.delivery",
+      "intent": "PDF rendered as the run's delivery artefact; carries this sidecar pointer in its XMP metadata.",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "engine": "chrome-headless",
+        "conformance": "ISO-14289-1-Level-2"
+      },
+      "inputs": {
+        "report": "mx-allabout-network-report.md"
+      },
+      "outputs": {
+        "pdf": "mx-allabout-network-report.pdf"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:15.895Z",
+      "stepId": "collect.start",
+      "intent": "collect phase started",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network pages=999 client=mx-allabout-network date=2026-05-30"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:16.042Z",
+      "stepId": "collect.0",
+      "intent": "audit-pipeline.js collect invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network pages=999 forceFresh=false client=mx-allabout-network date=2026-05-30"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:16.188Z",
+      "stepId": "collect.1",
+      "intent": "check-egress.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:16.333Z",
+      "stepId": "collect.1",
+      "intent": "Egress clean",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "No VPN or DNS filter detected"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:16.477Z",
+      "stepId": "collect.2",
+      "intent": "check-wellknown.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": {
+        "file": "wellknown_discovery.json",
+        "sha256": "29de3e137b515a1e915d143152baaa975c9183da15cdc1509fe1e2ff8e0e9715"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:16.622Z",
+      "stepId": "collect.2",
+      "intent": "Well-known probe passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": {
+        "file": "wellknown_discovery.json",
+        "sha256": "29de3e137b515a1e915d143152baaa975c9183da15cdc1509fe1e2ff8e0e9715"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:16.766Z",
+      "stepId": "collect.3",
+      "intent": "Results dir cleared: mx-outputs/audit/2026-05-30/mx.allabout.network/.infill",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Fresh run — stale CSVs removed, cache preserved"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:16.911Z",
+      "stepId": "collect.3a",
+      "intent": "check-ai-usage.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:17.057Z",
+      "stepId": "collect.3a",
+      "intent": "AI Usage Declaration probe passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:17.201Z",
+      "stepId": "collect.4",
+      "intent": "Sitemap: https://mx.allabout.network/sitemap.xml",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Responded HTTP 200 to HEAD request"
+      },
+      "inputs": {
+        "source": "https://mx.allabout.network/sitemap.xml"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:17.346Z",
+      "stepId": "collect.5",
+      "intent": "mx-reginald/audit/index.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "entry=https://mx.allabout.network/sitemap.xml htmlPagesRequested=999 crawlCap=1001 (buffer=2 for non-HTML discovery files) forceFresh=false"
+      },
+      "inputs": {
+        "source": "mx-reginald/audit/index.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:17.490Z",
+      "stepId": "collect.5",
+      "intent": "Crawler complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:17.633Z",
+      "stepId": "collect.5a",
+      "intent": "discover-urls.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/discovery.json"
+      },
+      "inputs": {
+        "source": "discover-urls.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:17.775Z",
+      "stepId": "collect.5a",
+      "intent": "Sitemap grading complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "discovery.json written — SITEMAP_* placeholders will be filled at report time"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/discovery.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:17.920Z",
+      "stepId": "collect.5b",
+      "intent": "topup-pdfs-from-sitemap.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:18.065Z",
+      "stepId": "collect.5b",
+      "intent": "Sitemap PDF topup complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no append count parsed"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:18.209Z",
+      "stepId": "collect.5c",
+      "intent": "capture-pdf-sample.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:18.353Z",
+      "stepId": "collect.5c",
+      "intent": "PDF accessibility sample captured",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no pdfCount parsed"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:18.497Z",
+      "stepId": "collect.6",
+      "intent": "error-page-test.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:18.645Z",
+      "stepId": "collect.6",
+      "intent": "Error page test passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:18.789Z",
+      "stepId": "collect.7",
+      "intent": "agent-access-test.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:18.935Z",
+      "stepId": "collect.7",
+      "intent": "Agent access test complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — agent-access.json written to /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:19.079Z",
+      "stepId": "collect.8",
+      "intent": "check-served-rendered-gap.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "check-served-rendered-gap.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:19.226Z",
+      "stepId": "collect.8",
+      "intent": "No significant served/rendered gap",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "All AI suitability dimensions within 5-point threshold"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/audit_averages.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:19.371Z",
+      "stepId": "collect.8a",
+      "intent": "slowest-page-probe.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill method=cache-busted-x3"
+      },
+      "inputs": {
+        "source": "slowest-page-probe.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:19.516Z",
+      "stepId": "collect.8a",
+      "intent": "Slowest-page re-probe: slow",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides."
+      },
+      "inputs": {
+        "source": "slowest-page-perf.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:19.662Z",
+      "stepId": "collect.8b",
+      "intent": "provenance-gap.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache"
+      },
+      "inputs": {
+        "source": "provenance-gap.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:19.807Z",
+      "stepId": "collect.8b",
+      "intent": "Provenance-gap scan complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap: 0 pages scanned, 0 self-promotional listicles, 0 year-swap pages, 0 provenance-gap cluster(s)"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/provenance_gap.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:19.951Z",
+      "stepId": "collect.8c",
+      "intent": "provenance-gap-llm.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache maxPages=5"
+      },
+      "inputs": {
+        "source": "provenance-gap-llm.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:20.095Z",
+      "stepId": "collect.8c",
+      "intent": "Provenance-gap LLM pass complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap-llm: 0 page(s) evaluated, 0 qualitative finding(s)."
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/provenance_gap_llm.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:20.242Z",
+      "stepId": "collect.9",
+      "intent": "generate-preflight-findings.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "inputs": {
+        "source": "generate-preflight-findings.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:20.390Z",
+      "stepId": "collect.9",
+      "intent": "Preflight findings written",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Pre-digested scores, findings, schema maturity, journey, agent access — ready for LLM phases"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:20.532Z",
+      "stepId": "collect.9",
+      "intent": "No llms.txt published",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Agents have no machine-curated index of site content or declared access policy"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:20.677Z",
+      "stepId": "collect.9",
+      "intent": "No sitemap.xml",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Crawlers rely on link discovery only; unlisted pages may not be indexed"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:20.821Z",
+      "stepId": "collect.9",
+      "intent": "Security headers absent: HSTS, CSP, X-Frame-Options, X-Content-Type-Options",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Missing security headers increase exposure to content injection and clickjacking"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:20.972Z",
+      "stepId": "collect.9",
+      "intent": "Open Graph metadata incomplete or absent",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Social sharing previews and agent link summaries lack author-controlled descriptions"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:21.116Z",
+      "stepId": "collect.10",
+      "intent": "Collect phase complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "All automated steps finished including preflight-findings.json"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:21.266Z",
+      "stepId": "collect.end",
+      "intent": "collect phase ended — SUCCESS",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "All automated collection steps complete; LLM phases ready to start"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:21.412Z",
+      "stepId": "report.start",
+      "intent": "report phase started",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "hostname=mx.allabout.network client=mx-allabout-network date=2026-05-30 model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:21.557Z",
+      "stepId": "report.0",
+      "intent": "Template: web-audit-suite-template.md",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Generic template — no commerce anchor"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/seo_scores.csv"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:21.702Z",
+      "stepId": "report.0",
+      "intent": "Infill provenance snapshot written",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Copied web-audit-suite-template.md and scoring-methodology.json into .infill/ for provenance"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:21.850Z",
+      "stepId": "report.0",
+      "intent": "Template voice check WARNING - 26 violation(s)",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Template prose carries forbidden patterns; recorded for reviewer, pipeline continues"
+      },
+      "inputs": {
+        "source": "check-template-voice.js"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:21.995Z",
+      "stepId": "report.1",
+      "intent": "infill-report.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:22.141Z",
+      "stepId": "report.1",
+      "intent": "Infill complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — skeleton at mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:22.287Z",
+      "stepId": "report.2",
+      "intent": "rewrite-report.js: invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "infilled=mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md out=mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:22.433Z",
+      "stepId": "report.2",
+      "intent": "rewrite-report.js: finished with errors",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 1 — report written with failure markers"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:22.576Z",
+      "stepId": "report.2.5",
+      "intent": "Engagement table regenerated",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Deterministic rebuild from priority blocks — no LLM drift possible"
+      },
+      "inputs": {
+        "source": "regenerate-engagement-table.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:22.722Z",
+      "stepId": "report.end",
+      "intent": "report phase ended",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "infill=ok rewrite=warn"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:22.872Z",
+      "stepId": "gates.start",
+      "intent": "gates phase started",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:23.020Z",
+      "stepId": "gates.start",
+      "intent": "audit_errors.json cleared for fresh gates run",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Each --gates invocation records its own findings; previous run state has been preserved in the audit log CSV"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:23.161Z",
+      "stepId": "gates.0",
+      "intent": "audit-pipeline.js --gates invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill cache=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:23.304Z",
+      "stepId": "gates.0a",
+      "intent": "check-template-coverage.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md template=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-reginald/audit/templates/web-audit-suite-template.md"
+      },
+      "inputs": {
+        "source": "check-template-coverage.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:23.449Z",
+      "stepId": "gates.0a",
+      "intent": "Template coverage passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no [UPPERCASE] placeholders remain"
+      },
+      "inputs": {
+        "source": "check-template-coverage.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:23.595Z",
+      "stepId": "gates.0a-versioning",
+      "intent": "Template-contract drift WARNING",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "54 token(s) declared in contract but absent from template: [WCAG_RECURRING_PATTERNS], [ALT_COUNT], [ALT_MISSING_COUNT], [ALT_PCT], [DIV_SOUP_RENDERED_TOTAL], [DIV_SOUP_RENDERED_WORST_URL], [DIV_SOUP_RENDERED_PAGE_COUNT], [DIV_SOUP_SERVED_WORST_URL], ..."
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:23.739Z",
+      "stepId": "gates.0b",
+      "intent": "check-report-tone.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-tone.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:23.882Z",
+      "stepId": "gates.0b",
+      "intent": "Tone check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no tone violations"
+      },
+      "inputs": {
+        "source": "check-report-tone.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:24.025Z",
+      "stepId": "gates.0b-voice",
+      "intent": "check-report-voice.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-voice.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:24.167Z",
+      "stepId": "gates.0b-scope",
+      "intent": "check-report-scope.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-scope.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:24.315Z",
+      "stepId": "gates.0b-scope",
+      "intent": "Scope check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no scope mis-statements"
+      },
+      "inputs": {
+        "source": "check-report-scope.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:24.457Z",
+      "stepId": "gates.0b-repair",
+      "intent": "voice-scope repair deferred to unified pass",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "sidecars retained for the single consolidated repair below"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:24.604Z",
+      "stepId": "gates.0b-voice",
+      "intent": "Voice consistency WARNING after auto-repair",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "1 mixed-voice section(s) remain"
+      },
+      "inputs": {
+        "source": "check-report-voice.js"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:24.748Z",
+      "stepId": "gates.0c",
+      "intent": "HTML render heading count OK: 34/33",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "pandoc rendered all H2 headings — no raw-tag truncation"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:24.893Z",
+      "stepId": "gates.0d",
+      "intent": "check-report-contradictions.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md ok-contradictions=false"
+      },
+      "inputs": {
+        "source": "check-report-contradictions.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:25.041Z",
+      "stepId": "gates.0d",
+      "intent": "Contradiction check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no dimension appears with conflicting band labels"
+      },
+      "inputs": {
+        "source": "check-report-contradictions.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:25.186Z",
+      "stepId": "gates.0d-pages",
+      "intent": "check-report-finding-pages.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "check-report-finding-pages.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:25.328Z",
+      "stepId": "gates.0d-pages",
+      "intent": "Finding-page attribution passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — every named page matches Pa11y attribution"
+      },
+      "inputs": {
+        "source": "check-report-finding-pages.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:25.474Z",
+      "stepId": "gates.0e",
+      "intent": "check-report-section-completeness.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-section-completeness.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:25.648Z",
+      "stepId": "gates.0e",
+      "intent": "Section completeness passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — all At-a-Glance priority rows have complete findings blocks"
+      },
+      "inputs": {
+        "source": "check-report-section-completeness.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:25.800Z",
+      "stepId": "gates.0p",
+      "intent": "check-report-provenance-gap.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill warn-year-swap=false"
+      },
+      "inputs": {
+        "source": "check-report-provenance-gap.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:25.945Z",
+      "stepId": "gates.0p",
+      "intent": "Provenance-gap gate passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no blocking provenance signals"
+      },
+      "inputs": {
+        "source": "check-report-provenance-gap.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:26.088Z",
+      "stepId": "gates.0g",
+      "intent": "check-report-section-sanity.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-section-sanity.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:26.233Z",
+      "stepId": "gates.0g",
+      "intent": "Section sanity passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no orphan bullets / leaked markers / unexplained tokens"
+      },
+      "inputs": {
+        "source": "check-report-section-sanity.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:26.380Z",
+      "stepId": "gates.0f",
+      "intent": "check-report-rating-grade.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-rating-grade.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:26.525Z",
+      "stepId": "gates.0f",
+      "intent": "Rating-grade check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — all rating/grade and score/band pairs match expected thresholds"
+      },
+      "inputs": {
+        "source": "check-report-rating-grade.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:26.671Z",
+      "stepId": "gates.1",
+      "intent": "check-template-leaks.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-template-leaks.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:26.814Z",
+      "stepId": "gates.1",
+      "intent": "Template leak check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no unresolved placeholders or REWRITE blocks"
+      },
+      "inputs": {
+        "source": "check-template-leaks.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:26.957Z",
+      "stepId": "gates.2",
+      "intent": "verify-audit-report.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "args: --report /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md --results /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill --cache /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache"
+      },
+      "inputs": {
+        "source": "verify-audit-report.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:27.100Z",
+      "stepId": "gates.2",
+      "intent": "Deterministic verifier passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — numeric=14 url=77 html=0 passed=24 skipped=77 total=101"
+      },
+      "inputs": {
+        "source": "verify-audit-report.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:27.242Z",
+      "stepId": "gates.2",
+      "intent": "Verification: 0 deterministic, 0 synthesised, 77 skipped",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Deterministic ratio 0% — high LLM ratio indicates data gaps"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report-verification.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:27.386Z",
+      "stepId": "gates.3",
+      "intent": "audit-fierce-critic.js: 0 issue(s) — repairing",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "categories: unknown categories"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:27.530Z",
+      "stepId": "gates.3",
+      "intent": "fierce-critic repair deferred to unified pass",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "findings=0"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:27.670Z",
+      "stepId": "gates.4",
+      "intent": "audit-llm-judgment.js: 0 issue(s) — repairing",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "categories: unknown categories"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:27.815Z",
+      "stepId": "gates.4",
+      "intent": "llm-judgment repair deferred to unified pass",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "findings=0"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:27.957Z",
+      "stepId": "gates.3-4-final",
+      "intent": "Running repair-report-unified.js",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Consolidates voice + scope + fierce-critic + llm-judgment + attribution findings into one tool-use call after deterministic patches"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:28.103Z",
+      "stepId": "gates.3-4-final",
+      "intent": "repair-report-unified.js: failed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "exit=1"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=low"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:28.247Z",
+      "stepId": "gates.3-4-final-regen",
+      "intent": "Engagement table regenerated post-repair",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Deterministic rebuild after final repair"
+      },
+      "inputs": {
+        "source": "regenerate-engagement-table.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:28.391Z",
+      "stepId": "gates.revalidate",
+      "intent": "Re-running 2 previously-failed gate(s) after consolidated repair",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "gates: 0a-versioning, 0b-voice"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:28.534Z",
+      "stepId": "gates.0a-versioning-revalidate",
+      "intent": "0a-versioning not re-checked (no runner registered)",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Gate is not addressed by the consolidated repair; preserving original failure"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:28.682Z",
+      "stepId": "gates.0b-voice-revalidate",
+      "intent": "0b-voice still failed after final repair",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Re-check exit 1"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "fail",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:28.829Z",
+      "stepId": "gates.revalidate",
+      "intent": "Gates still failing after revalidation: 0a-versioning, 0b-voice",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Final repair did not fix every early-gate failure"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "fail",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:28.975Z",
+      "stepId": "gates.4b",
+      "intent": "check-report-coherence.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "check-report-coherence.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:29.123Z",
+      "stepId": "gates.4b",
+      "intent": "Coherence check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no cross-section contradictions"
+      },
+      "inputs": {
+        "source": "check-report-coherence.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:29.272Z",
+      "stepId": "gates.4c",
+      "intent": "Extracted checks passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Six gates returned 0 findings"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:29.416Z",
+      "stepId": "gates.4d",
+      "intent": "Provenance sidecar written",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "chain at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/provenance.json"
+      },
+      "inputs": {
+        "source": "build-provenance.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:29.561Z",
+      "stepId": "gates.5",
+      "intent": "audit-pdf.sh invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "input=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md output=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.pdf engine=chrome"
+      },
+      "inputs": {
+        "source": "audit-pdf.sh"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:29.708Z",
+      "stepId": "gates.5",
+      "intent": "PDF generated: mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.pdf",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "audit-pdf.sh exited 0 — engine=chrome EAA Level 0 size=unknown"
+      },
+      "inputs": {
+        "source": "audit-pdf.sh"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:29.851Z",
+      "stepId": "gates.6",
+      "intent": "Gates pipeline complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Full gate suite ran; PDF generated"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:29.996Z",
+      "stepId": "gates.end",
+      "intent": "gates phase ended",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Full gate suite ran; PDF generated; awaiting optional reviewer sign-off"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:30.143Z",
+      "stepId": "collect.start",
+      "intent": "collect phase started",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network pages=999 client=mx-allabout-network date=2026-05-30"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:30.292Z",
+      "stepId": "collect.0",
+      "intent": "audit-pipeline.js collect invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network pages=999 forceFresh=false client=mx-allabout-network date=2026-05-30"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:30.434Z",
+      "stepId": "collect.1",
+      "intent": "check-egress.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:30.579Z",
+      "stepId": "collect.1",
+      "intent": "Egress clean",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "No VPN or DNS filter detected"
+      },
+      "inputs": {
+        "source": "check-egress.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:30.722Z",
+      "stepId": "collect.2",
+      "intent": "check-wellknown.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": {
+        "file": "wellknown_discovery.json",
+        "sha256": "29de3e137b515a1e915d143152baaa975c9183da15cdc1509fe1e2ff8e0e9715"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:30.866Z",
+      "stepId": "collect.2",
+      "intent": "Well-known probe passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-wellknown.js"
+      },
+      "outputs": {
+        "file": "wellknown_discovery.json",
+        "sha256": "29de3e137b515a1e915d143152baaa975c9183da15cdc1509fe1e2ff8e0e9715"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:31.010Z",
+      "stepId": "collect.3",
+      "intent": "Results dir cleared: mx-outputs/audit/2026-05-30/mx.allabout.network/.infill",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Fresh run — stale CSVs removed, cache preserved"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:31.152Z",
+      "stepId": "collect.3a",
+      "intent": "check-ai-usage.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:31.294Z",
+      "stepId": "collect.3a",
+      "intent": "AI Usage Declaration probe passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "check-ai-usage.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:31.437Z",
+      "stepId": "collect.4",
+      "intent": "Sitemap: https://mx.allabout.network/sitemap.xml",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Responded HTTP 200 to HEAD request"
+      },
+      "inputs": {
+        "source": "https://mx.allabout.network/sitemap.xml"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:31.583Z",
+      "stepId": "collect.5",
+      "intent": "mx-reginald/audit/index.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "entry=https://mx.allabout.network/sitemap.xml htmlPagesRequested=999 crawlCap=1001 (buffer=2 for non-HTML discovery files) forceFresh=false"
+      },
+      "inputs": {
+        "source": "mx-reginald/audit/index.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:31.726Z",
+      "stepId": "collect.5",
+      "intent": "Crawler complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:31.872Z",
+      "stepId": "collect.5a",
+      "intent": "discover-urls.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/discovery.json"
+      },
+      "inputs": {
+        "source": "discover-urls.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:32.015Z",
+      "stepId": "collect.5a",
+      "intent": "Sitemap grading complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "discovery.json written — SITEMAP_* placeholders will be filled at report time"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/discovery.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:32.168Z",
+      "stepId": "collect.5b",
+      "intent": "topup-pdfs-from-sitemap.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:32.311Z",
+      "stepId": "collect.5b",
+      "intent": "Sitemap PDF topup complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no append count parsed"
+      },
+      "inputs": {
+        "source": "topup-pdfs-from-sitemap.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:32.452Z",
+      "stepId": "collect.5c",
+      "intent": "capture-pdf-sample.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:32.595Z",
+      "stepId": "collect.5c",
+      "intent": "PDF accessibility sample captured",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "no pdfCount parsed"
+      },
+      "inputs": {
+        "source": "capture-pdf-sample.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:32.738Z",
+      "stepId": "collect.6",
+      "intent": "error-page-test.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:32.880Z",
+      "stepId": "collect.6",
+      "intent": "Error page test passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "error-page-test.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:33.025Z",
+      "stepId": "collect.7",
+      "intent": "agent-access-test.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:33.166Z",
+      "stepId": "collect.7",
+      "intent": "Agent access test complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — agent-access.json written to /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "agent-access-test.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:33.311Z",
+      "stepId": "collect.8",
+      "intent": "check-served-rendered-gap.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "check-served-rendered-gap.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:33.455Z",
+      "stepId": "collect.8",
+      "intent": "No significant served/rendered gap",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "All AI suitability dimensions within 5-point threshold"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/audit_averages.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:33.598Z",
+      "stepId": "collect.8a",
+      "intent": "slowest-page-probe.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill method=cache-busted-x3"
+      },
+      "inputs": {
+        "source": "slowest-page-probe.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:33.744Z",
+      "stepId": "collect.8a",
+      "intent": "Slowest-page re-probe: slow",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "The slowest page returned slowly on its first cold-cache visit but is served acceptably under cache-busted re-probes; first-time visitors carry a cold-origin cost that the returning-visitor median hides."
+      },
+      "inputs": {
+        "source": "slowest-page-perf.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:33.887Z",
+      "stepId": "collect.8b",
+      "intent": "provenance-gap.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache"
+      },
+      "inputs": {
+        "source": "provenance-gap.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:34.031Z",
+      "stepId": "collect.8b",
+      "intent": "Provenance-gap scan complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap: 0 pages scanned, 0 self-promotional listicles, 0 year-swap pages, 0 provenance-gap cluster(s)"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/provenance_gap.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:34.174Z",
+      "stepId": "collect.8c",
+      "intent": "provenance-gap-llm.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "url=https://mx.allabout.network resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill cacheDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache maxPages=5"
+      },
+      "inputs": {
+        "source": "provenance-gap-llm.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:34.317Z",
+      "stepId": "collect.8c",
+      "intent": "Provenance-gap LLM pass complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "provenance-gap-llm: 0 page(s) evaluated, 0 qualitative finding(s)."
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/provenance_gap_llm.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:34.464Z",
+      "stepId": "collect.9",
+      "intent": "generate-preflight-findings.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "inputs": {
+        "source": "generate-preflight-findings.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:34.611Z",
+      "stepId": "collect.9",
+      "intent": "Preflight findings written",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Pre-digested scores, findings, schema maturity, journey, agent access — ready for LLM phases"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:34.757Z",
+      "stepId": "collect.9",
+      "intent": "No llms.txt published",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Agents have no machine-curated index of site content or declared access policy"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:34.899Z",
+      "stepId": "collect.9",
+      "intent": "No sitemap.xml",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Crawlers rely on link discovery only; unlisted pages may not be indexed"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:35.043Z",
+      "stepId": "collect.9",
+      "intent": "Security headers absent: HSTS, CSP, X-Frame-Options, X-Content-Type-Options",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Missing security headers increase exposure to content injection and clickjacking"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:35.188Z",
+      "stepId": "collect.9",
+      "intent": "Open Graph metadata incomplete or absent",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Social sharing previews and agent link summaries lack author-controlled descriptions"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/preflight-findings.json"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:35.334Z",
+      "stepId": "collect.10",
+      "intent": "Collect phase complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "All automated steps finished including preflight-findings.json"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:35.475Z",
+      "stepId": "collect.end",
+      "intent": "collect phase ended — SUCCESS",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "All automated collection steps complete; LLM phases ready to start"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:35.622Z",
+      "stepId": "report.start",
+      "intent": "report phase started",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "hostname=mx.allabout.network client=mx-allabout-network date=2026-05-30 model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:35.766Z",
+      "stepId": "report.0",
+      "intent": "Template: web-audit-suite-template.md",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Generic template — no commerce anchor"
+      },
+      "inputs": {
+        "source": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill/seo_scores.csv"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:35.910Z",
+      "stepId": "report.0",
+      "intent": "Infill provenance snapshot written",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Copied web-audit-suite-template.md and scoring-methodology.json into .infill/ for provenance"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:36.053Z",
+      "stepId": "report.0",
+      "intent": "Template voice check WARNING - 26 violation(s)",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Template prose carries forbidden patterns; recorded for reviewer, pipeline continues"
+      },
+      "inputs": {
+        "source": "check-template-voice.js"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:36.196Z",
+      "stepId": "report.1",
+      "intent": "infill-report.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "template=web-audit-suite-template.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:36.338Z",
+      "stepId": "report.1",
+      "intent": "Infill complete",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — skeleton at mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "inputs": {
+        "source": "infill-report.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:36.483Z",
+      "stepId": "report.2",
+      "intent": "rewrite-report.js: invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "infilled=mx-outputs/audit/2026-05-30/mx.allabout.network/.infilled/mx-allabout-network.md out=mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md model=claude-sonnet-4-6"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:36.625Z",
+      "stepId": "report.2",
+      "intent": "rewrite-report.js: finished with errors",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 1 — report written with failure markers"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:36.769Z",
+      "stepId": "report.2.5",
+      "intent": "Engagement table regenerated",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Deterministic rebuild from priority blocks — no LLM drift possible"
+      },
+      "inputs": {
+        "source": "regenerate-engagement-table.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:36.913Z",
+      "stepId": "report.end",
+      "intent": "report phase ended",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "infill=ok rewrite=warn"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:37.056Z",
+      "stepId": "gates.start",
+      "intent": "gates phase started",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:37.201Z",
+      "stepId": "gates.start",
+      "intent": "audit_errors.json cleared for fresh gates run",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Each --gates invocation records its own findings; previous run state has been preserved in the audit log CSV"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:37.351Z",
+      "stepId": "gates.0",
+      "intent": "audit-pipeline.js --gates invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill cache=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:37.498Z",
+      "stepId": "gates.0a",
+      "intent": "check-template-coverage.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md template=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-reginald/audit/templates/web-audit-suite-template.md"
+      },
+      "inputs": {
+        "source": "check-template-coverage.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:37.642Z",
+      "stepId": "gates.0a",
+      "intent": "Template coverage passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no [UPPERCASE] placeholders remain"
+      },
+      "inputs": {
+        "source": "check-template-coverage.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:37.786Z",
+      "stepId": "gates.0a-versioning",
+      "intent": "Template-contract drift WARNING",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "54 token(s) declared in contract but absent from template: [WCAG_RECURRING_PATTERNS], [ALT_COUNT], [ALT_MISSING_COUNT], [ALT_PCT], [DIV_SOUP_RENDERED_TOTAL], [DIV_SOUP_RENDERED_WORST_URL], [DIV_SOUP_RENDERED_PAGE_COUNT], [DIV_SOUP_SERVED_WORST_URL], ..."
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:37.930Z",
+      "stepId": "gates.0b",
+      "intent": "check-report-tone.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-tone.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:38.077Z",
+      "stepId": "gates.0b",
+      "intent": "Tone check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no tone violations"
+      },
+      "inputs": {
+        "source": "check-report-tone.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:38.222Z",
+      "stepId": "gates.0b-voice",
+      "intent": "check-report-voice.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-voice.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:38.366Z",
+      "stepId": "gates.0b-scope",
+      "intent": "check-report-scope.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-scope.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:38.513Z",
+      "stepId": "gates.0b-scope",
+      "intent": "Scope check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no scope mis-statements"
+      },
+      "inputs": {
+        "source": "check-report-scope.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:38.658Z",
+      "stepId": "gates.0b-repair",
+      "intent": "voice-scope repair deferred to unified pass",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "sidecars retained for the single consolidated repair below"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:38.801Z",
+      "stepId": "gates.0b-voice",
+      "intent": "Voice consistency WARNING after auto-repair",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "1 mixed-voice section(s) remain"
+      },
+      "inputs": {
+        "source": "check-report-voice.js"
+      },
+      "outcome": "warn",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:38.947Z",
+      "stepId": "gates.0c",
+      "intent": "HTML render heading count OK: 34/33",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "pandoc rendered all H2 headings — no raw-tag truncation"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:39.091Z",
+      "stepId": "gates.0d",
+      "intent": "check-report-contradictions.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md ok-contradictions=false"
+      },
+      "inputs": {
+        "source": "check-report-contradictions.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:39.234Z",
+      "stepId": "gates.0d",
+      "intent": "Contradiction check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no dimension appears with conflicting band labels"
+      },
+      "inputs": {
+        "source": "check-report-contradictions.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:39.379Z",
+      "stepId": "gates.0d-pages",
+      "intent": "check-report-finding-pages.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "check-report-finding-pages.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:39.525Z",
+      "stepId": "gates.0d-pages",
+      "intent": "Finding-page attribution passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — every named page matches Pa11y attribution"
+      },
+      "inputs": {
+        "source": "check-report-finding-pages.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:39.670Z",
+      "stepId": "gates.0e",
+      "intent": "check-report-section-completeness.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-section-completeness.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:39.814Z",
+      "stepId": "gates.0e",
+      "intent": "Section completeness passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — all At-a-Glance priority rows have complete findings blocks"
+      },
+      "inputs": {
+        "source": "check-report-section-completeness.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:39.960Z",
+      "stepId": "gates.0p",
+      "intent": "check-report-provenance-gap.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill warn-year-swap=false"
+      },
+      "inputs": {
+        "source": "check-report-provenance-gap.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:40.110Z",
+      "stepId": "gates.0p",
+      "intent": "Provenance-gap gate passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no blocking provenance signals"
+      },
+      "inputs": {
+        "source": "check-report-provenance-gap.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:40.256Z",
+      "stepId": "gates.0g",
+      "intent": "check-report-section-sanity.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-section-sanity.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:40.401Z",
+      "stepId": "gates.0g",
+      "intent": "Section sanity passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no orphan bullets / leaked markers / unexplained tokens"
+      },
+      "inputs": {
+        "source": "check-report-section-sanity.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:40.547Z",
+      "stepId": "gates.0f",
+      "intent": "check-report-rating-grade.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-report-rating-grade.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:40.695Z",
+      "stepId": "gates.0f",
+      "intent": "Rating-grade check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — all rating/grade and score/band pairs match expected thresholds"
+      },
+      "inputs": {
+        "source": "check-report-rating-grade.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:40.839Z",
+      "stepId": "gates.1",
+      "intent": "check-template-leaks.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md"
+      },
+      "inputs": {
+        "source": "check-template-leaks.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:40.984Z",
+      "stepId": "gates.1",
+      "intent": "Template leak check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no unresolved placeholders or REWRITE blocks"
+      },
+      "inputs": {
+        "source": "check-template-leaks.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:41.126Z",
+      "stepId": "gates.2",
+      "intent": "verify-audit-report.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "args: --report /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md --results /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill --cache /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache"
+      },
+      "inputs": {
+        "source": "verify-audit-report.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:41.274Z",
+      "stepId": "gates.2",
+      "intent": "Deterministic verifier passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — numeric=15 url=91 html=0 passed=25 skipped=91 total=116"
+      },
+      "inputs": {
+        "source": "verify-audit-report.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:41.418Z",
+      "stepId": "gates.2",
+      "intent": "Verification: 0 deterministic, 0 synthesised, 91 skipped",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Deterministic ratio 0% — high LLM ratio indicates data gaps"
+      },
+      "inputs": {
+        "source": "mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report-verification.json"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:41.564Z",
+      "stepId": "gates.3",
+      "intent": "audit-fierce-critic.js: gate passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:41.709Z",
+      "stepId": "gates.4",
+      "intent": "audit-llm-judgment.js: 0 issue(s) — repairing",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "categories: unknown categories"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:41.854Z",
+      "stepId": "gates.4",
+      "intent": "llm-judgment repair deferred to unified pass",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "findings=0"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:41.998Z",
+      "stepId": "gates.3-4-final",
+      "intent": "Running repair-report-unified.js",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Consolidates voice + scope + fierce-critic + llm-judgment + attribution findings into one tool-use call after deterministic patches"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:42.141Z",
+      "stepId": "gates.3-4-final",
+      "intent": "repair-report-unified.js: failed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "exit=1"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=low"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:42.284Z",
+      "stepId": "gates.3-4-final-regen",
+      "intent": "Engagement table regenerated post-repair",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Deterministic rebuild after final repair"
+      },
+      "inputs": {
+        "source": "regenerate-engagement-table.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:42.426Z",
+      "stepId": "gates.revalidate",
+      "intent": "Re-running 2 previously-failed gate(s) after consolidated repair",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "gates: 0a-versioning, 0b-voice"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:42.566Z",
+      "stepId": "gates.0a-versioning-revalidate",
+      "intent": "0a-versioning not re-checked (no runner registered)",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Gate is not addressed by the consolidated repair; preserving original failure"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "warn",
+      "notes": "confidence=medium"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:42.713Z",
+      "stepId": "gates.0b-voice-revalidate",
+      "intent": "0b-voice still failed after final repair",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Re-check exit 1"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "fail",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:42.858Z",
+      "stepId": "gates.revalidate",
+      "intent": "Gates still failing after revalidation: 0a-versioning, 0b-voice",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Final repair did not fix every early-gate failure"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "fail",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:43.000Z",
+      "stepId": "gates.4b",
+      "intent": "check-report-coherence.js invoked",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-30/mx.allabout.network/.infill"
+      },
+      "inputs": {
+        "source": "check-report-coherence.js"
+      },
+      "outcome": "n-a",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:43.144Z",
+      "stepId": "gates.4b",
+      "intent": "Coherence check passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Exit 0 — no cross-section contradictions"
+      },
+      "inputs": {
+        "source": "check-report-coherence.js"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:43.291Z",
+      "stepId": "gates.4c",
+      "intent": "Extracted checks passed",
+      "frameworks": [
+        "EAA-Directive-2019-882"
+      ],
+      "parameters": {
+        "rationale": "Six gates returned 0 findings"
+      },
+      "inputs": {
+        "source": "audit-pipeline.js"
+      },
+      "outputs": {
+        "file": "results.json",
+        "sha256": "2f2b29a05f0b780542eb6da857f0dc320d501c8f496f60a427a335fd92ed97a4"
+      },
+      "outcome": "pass",
+      "notes": "confidence=high"
+    },
+    {
+      "timestamp": "2026-05-30T06:55:43.433Z",
       "stepId": "pdf.delivery",
       "intent": "PDF rendered as the run's delivery artefact; carries this sidecar pointer in its XMP metadata.",
       "frameworks": [

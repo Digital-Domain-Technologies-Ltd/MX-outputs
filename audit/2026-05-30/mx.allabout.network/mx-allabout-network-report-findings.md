@@ -23,8 +23,8 @@ Every automated gate ran to completion; this sidecar surfaces 2 findings (2 warn
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | template-contract-drift | contract-stale | Contract declares tokens the template no longer uses | 2026-05-30T00:46:46Z |
-| 2 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-30T00:46:46Z |
+| 1 | template-contract-drift | contract-stale | Contract declares tokens the template no longer uses | 2026-05-30T06:48:30Z |
+| 2 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-30T06:48:31Z |
 
 <details open><summary>Warning detail (2)</summary>
 
