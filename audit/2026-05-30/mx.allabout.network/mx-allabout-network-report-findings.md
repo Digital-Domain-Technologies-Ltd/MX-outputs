@@ -10,12 +10,43 @@ mx:
   status: active
   contentType: audit-findings
   audience: [humans]
-  x-mx-findingsCount: 4
+  x-mx-findingsCount: 6
   runbook: "Human reviewer reads this file before signing off on the client-facing report. Findings here are raised by the automated gates; accept, rebut, or correct each one before delivery."
 ---
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this sidecar surfaces 4 findings (2 warnings, 2 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+Every automated gate ran to completion; this sidecar surfaces 6 findings (1 error, 3 warnings, 2 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+
+### Errors (I/O or structural failures)
+
+*A gate could not complete or hit a structural failure. Investigate before relying on the report’s figures in that section.*
+
+| # | Gate | Category | Finding | Recorded |
+|---|------|----------|---------|----------|
+| 1 | rewrite-failures | rewrite-failure | Pass 2 left 4 [REWRITE FAILED] marker(s) inline in the report | 2026-05-30T11:10:44Z |
+
+<details open><summary>Error detail (1)</summary>
+
+**1. rewrite-failures - Pass 2 left 4 [REWRITE FAILED] marker(s) inline in the report**
+
+Gate rewrite-failures (rewrite-report.js) returned non-zero. Output excerpt:
+
+Reasons (deduped): 4× Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?
+
+Occurrences:
+line 196: [REWRITE FAILED after 3 attempts: Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?]
+line 202: [REWRITE FAILED after 3 attempts: Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?]
+line 921: [REWRITE FAILED after 3 attempts: Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?]
+line 994: [REWRITE FAILED after 3 attempts: Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?]
+
+Suggested next steps:
+
+- Read the reason in the marker — typically a transient LLM failure (cold start, fetch failed, HTTP 5xx) or a configuration gap (model not pulled, context window too small).
+- For Ollama: ensure the model is pulled and warm; check MX_AUDIT_LLM_NUM_CTX is large enough for the largest block (defaults to 32768).
+- Lower MX_REWRITE_CONCURRENCY (default 2 for Ollama, 4 for Anthropic) if the failures correlate with parallel-request memory pressure.
+- Resume only the rewrite step: mx exec mx-audit --report <hostSlug> --client <client> --date <date>
+
+</details>
 
 ### Warnings (rule violations)
 
@@ -23,10 +54,11 @@ Every automated gate ran to completion; this sidecar surfaces 4 findings (2 warn
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | template-contract-drift | contract-stale | Contract declares tokens the template no longer uses | 2026-05-30T09:01:08Z |
-| 2 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-30T09:01:09Z |
+| 1 | template-contract-drift | contract-stale | Contract declares tokens the template no longer uses | 2026-05-30T11:10:44Z |
+| 2 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-30T11:10:45Z |
+| 3 | gates-summary | gates-failed | Audit gates raised findings: 0-rewrite, 0a-versioning, 0b-voice | 2026-05-30T11:56:07Z |
 
-<details open><summary>Warning detail (2)</summary>
+<details open><summary>Warning detail (3)</summary>
 
 **1. template-contract-drift - Contract declares tokens the template no longer uses**
 
@@ -52,6 +84,16 @@ check-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit
 
   Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice ("we"); scorecards and appendices use third-person.
 
+**3. gates-summary - Audit gates raised findings: 0-rewrite, 0a-versioning, 0b-voice**
+
+Phase 3 gate suite reported 3 unresolved gates. Individual gates may have recorded richer detail entries above this one. The PDF below is a partial deliverable produced under the always-produce-PDF rule; treat it as diagnostic context rather than a delivered audit until the listed gates pass.
+
+Suggested next steps:
+
+- Review each failed gate entry above for its specific detail and suggested fix.
+- Re-run gates only after fixing: mx exec mx-audit --gates mx-outputs/audit/2026-05-30/mx.allabout.network/mx-allabout-network-report.md
+- If the same gate fails twice in a row with no underlying data change, the gate itself is misbehaving — file an issue against the gate script.
+
 </details>
 
 ### Info (tone / style observations)
@@ -60,8 +102,8 @@ check-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | tone | exaggeration | Exaggeration / hyperbole: 1 instance (line 169) | 2026-05-30T09:01:09Z |
-| 2 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance (line 862) | 2026-05-30T09:01:09Z |
+| 1 | tone | exaggeration | Exaggeration / hyperbole: 1 instance (line 169) | 2026-05-30T11:10:45Z |
+| 2 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance (line 862) | 2026-05-30T11:10:45Z |
 
 <details open><summary>Info detail (2)</summary>
 
