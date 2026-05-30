@@ -4,7 +4,7 @@ description: "The morning session covered four pieces of work in sequence. First
 author: "Tom Cranstoun"
 created: 2026-05-30
 modified: 2026-05-30
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -76,6 +76,16 @@ Thirteen mechanical fixes came from the MX rulebook applied by reference: seven 
 
 This run validated three things at once. The scanner catalogue is well-calibrated for Tom-voice prose. The domain-term exemption mechanism (`mx.x-mx-domainTerms` in frontmatter) works as designed for documents with legitimate repeated nouns. The rulebook-as-reference architecture lets the skill apply discipline without restating it. The toolchain is ready to ship as a real productionised quality gate on outward-facing prose.
 
+### 7. Pitch substrate derived from the Scott opportunity brief
+
+The 28 May opportunity brief was Raskinised into a founder-voice pitch substrate at `mx-crm/contacts/scott-mcgregor/opportunities-2026-05-28.pitch.md`. The new file applies Andy Raskin's five-element narrative frame to the substance of the inventory: the change in late 2025 / early 2026 (machines as primary web consumers paired with the EAA and AI-regulation documentation expectations), the winners and losers it creates (CMS Vendors taking founding seats vs watching the cohort close, regulated publishers shipping signed PDFs by the deadline vs reconstructing audits under regulator pressure, regulated-sector operators in the franchise vs late entry, consumer-facing publishers whose agent-misread failures arrive in litigation), the promised land for any buyer (criteria a buyer can verify against their own audit pipeline), the magic gifts (Private REGINALD platform with the three engagement models, the local-LLM audit option, the founding-sponsor recognition lines, the three-layer model, the signed lifecycle envelope, the missing buy button on /audit/), and the evidence (each layer's documentation published, REGINALD alpha-live, the platform offer documented, the founding cohort filling, the named team).
+
+The substrate carries the operational handles at the end: Scott's nine action items and Tom's three remaining action items synthesised into prose blocks with element references woven in. Tables from the source replaced with bold-paragraph-lead prose (Tom-voice Pattern 7) to fit the substrate's register.
+
+Two iterations on the artefact. The first version (v1.0) leaked changelog and audit-history into element 5 ("ran a sweep this morning", "11 May 2026 IDHL committed", "28 May 2026 external read"). Per Tom's correction, the v1.1 rewrite stripped every retrospective date that referred to a project event rather than a foundational change (January 2026 platform week and 28 June 2025 EAA deadline kept; all session-event dates removed) and reframed element 5 as forward-looking proof. The v1.2 added the operational handles and ran a full /humanizer pass: all six scanners zero hits, the only flagged item was a false-positive anaphora at the closer that the scanner over-flags by design.
+
+The substrate is reusable across investor, founding-sponsor, customer, and partner conversations. The `runbook` field in the frontmatter names the adaptation pattern per audience.
+
 ---
 
 ## By the Numbers
@@ -107,6 +117,11 @@ This run validated three things at once. The scanner catalogue is well-calibrate
 | Scott opportunities humanizer run — scanner hits | 0 across all 6 scanners |
 | Scott opportunities humanizer run — manual fixes applied | 13 |
 | Scott opportunities humanizer run — line delta | 311 to 296 |
+| Pitch substrate — new file | `opportunities-2026-05-28.pitch.md` v1.2 (125 lines, ~3,050 words) |
+| Pitch substrate — Raskin elements landed | 5 (change, winners/losers, promised land, magic gifts, evidence) + operational handles |
+| Pitch substrate — Tom-voice patterns used | 11 (1, 2, 6, 7, 8, 9, 10, 11, 12) of 12 available |
+| Pitch substrate — /humanizer scanner hits | 0 across all 6 scanners on v1.2 |
+| Pitch substrate — iterations to land | 3 (v1.0 initial; v1.1 stripped changelog/audit-history; v1.2 added operational handles + restructure) |
 
 ---
 
@@ -127,6 +142,8 @@ The mechanical humanizer sweep is the first time the deterministic toolchain has
 - **Single-source-per-rule discipline as architectural principle.** writing-style.md owns MX house rules; /humanizer owns generic internet-sourced AI tells with per-entry citations; /review-docs is reporting-only sibling. Skills load the rulebook by reference; they do not restate it. New MX-brand bans land in writing-style.md with a rationale tied to MX positioning. New internet-sourced AI tells land in /humanizer with a source citation. The principle is now canon in CLAUDE.md (Writing Style section) and the rulebook header runbook.
 - **Writing-style discipline beats published-prose drift on every contested rule.** Em-dashes, sentence-initial conjunctions, and the words `pivotal / foster / transformative / showcase / crucial` all appear in Tom's published CMS Critic and allabout.network pieces, and on every one the current rule won. The pieces are now noted in §0 as pre-discipline baseline; the rulebook is the direction of travel. Positive structural patterns (problem-statement opener, parallel-demonstration contrast) joined §9.9 as Patterns 11 and 12.
 - **CLAUDE.md and other always-on rulebooks must read as canon, not as a what-changed log.** No dates, no "as of X", no "landed" framing. The git history is the changelog. Same timeless-manuscript discipline applied to assistant-loaded context files. Captured as a feedback memory.
+- **The pitch substrate looks forward, not back.** The first draft leaked session events ("ran a sweep this morning", "11 May 2026 IDHL committed", "28 May 2026 external read") into the evidence element. Tom's correction: pitch artefacts strip every retrospective project event and reframe as forward-looking proof. Foundational change-dates (January 2026 platform week, 28 June 2025 EAA deadline) stay because they ARE the change, not events being recited. This discipline applies to every Raskinised artefact this work produces.
+- **Tables for facts, prose for argument.** The pitch substrate's operational handles section started as inherited tables from the source brief; restructured to bold-paragraph-lead prose (Tom-voice Pattern 7) to fit the substrate's register. The rule: argument prose lands in paragraphs (with bold lead-ins where structure helps the reader), tabular facts (numbers, owners, dated commitments) land in tables.
 
 ---
 
@@ -164,9 +181,12 @@ The mechanical humanizer pass demonstrates the writing-style toolchain in produc
 | 01e79ee4 (hub) | Separate writing-style rulebook from /humanizer skill (-232 lines) |
 | ccc0183b (hub) | Docs: CHANGELOG 2.81 (writing-style / humanizer separation) |
 | 2e21ed56 (hub) | Bump mx-outputs: audit-preservation commits (3998aa0 + 21540c9) |
-| _pending_ (mx-outputs) | This-segment directors-report update (v1.1) |
-| _pending_ (hub) | Writing-style calibration + Scott opportunities humanizer fixes |
-| _pending_ (hub) | Bump mx-outputs: directors-report v1.1 |
+| 841be0d (mx-outputs) | Directors-report v1.1 (calibration + first applied humanizer run segment) |
+| 4bce6dda (hub) | Writing-style calibration (Patterns 11+12) + Scott opportunities humanizer fixes |
+| 8a100fa7 (hub) | Docs: CHANGELOG 2.82 (calibration + first applied humanizer run) |
+| _pending_ (mx-outputs) | Directors-report v1.2 (this-segment update with pitch-substrate work) |
+| _pending_ (hub) | Pitch substrate derived from Scott opportunity brief (v1.2) + mx-outputs pointer bump |
+| _pending_ (hub) | Docs: CHANGELOG entry for the pitch substrate |
 
 ---
 
