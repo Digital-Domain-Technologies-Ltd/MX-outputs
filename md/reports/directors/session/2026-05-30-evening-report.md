@@ -4,7 +4,7 @@ description: "Two pieces of evening work. /md-writer landed as the markdown-grad
 author: "Tom Cranstoun"
 created: 2026-05-30
 modified: 2026-05-30
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -30,7 +30,7 @@ First, `/md-writer` landed as the markdown-grade sibling of `/html-writer` (cove
 
 Second, the `watching-the-machines` cluster got an end-to-end review and rewrite pass. Six files audited (series index, how-it-works editorial standard, cluster index, three child posts). Findings: outward inline CTA missing on `how-it-works.html`; three child-post openers used italic-eyebrow first-mention shape that doesn't carry the visual weight a first-mention reference needs; chrome author bio "Founder of the Machine Experience (MX) community..." tripped the bio-parens detection across all six; banned vocabulary across the three child posts (`same shape`, `posture` x2, `surface`, `shape` x2, `rest on` x2). All findings addressed: chrome bio rewritten across all six files to a comma-appositive form; outward CTA added to `how-it-works.html`; three child-post openers rewritten to strong-bold form; banned vocab fixes applied per file. Cog-rule codification of the underlying pattern stays deferred for a separate pass; the cluster rewrites stand on the writing-style rulebook and humanizer scanners that already exist.
 
-Third, the Scott opportunities brief got a user rewrite from version 3.1 to 4.0. Repositioned from "Co-directors" recipient to "Scott McGregor" recipient, restructured around nine specific actions with concrete deliverables, the operating positions behind them, the valuation framing, and the inventory items closest to Scott's remit.
+Third, the Scott opportunities brief got a directed rewrite from version 3.1 to 4.0. Repositioned from "Co-directors" recipient to "Scott McGregor" recipient, restructured around nine specific actions with concrete deliverables, the operating positions behind them, the valuation framing, and the inventory items closest to Scott's remit. Tom's three open action items (updated outreach materials, licensing-model + onboarding docs, MX-vs-C2PA blog post) moved out to REMINDERS.md as 🟠 Active items so the brief stays Scott's working surface, not a mixed-owner workspace. Brief then rendered to a tagged PDF for hand-over (mx-outputs/pdf/scott-mcgregor-opportunities-2026-05-28.pdf, 421K, ISO 14289-1 Level 2, MX Compatible badge embedded, AI provenance payload in XMP).
 
 ---
 
@@ -56,15 +56,19 @@ New field-shape validator at `scripts/check-domain-terms-lemmas.mjs`. Flags any 
 
 Sibling commit bundle on mx-outputs: JSON-LD enrichment across `mx-site/audit/index.html`, `mx-site/learn/mx-for-pdfs.html`, `mx-site/reginald/index.html`, `mx-site/services/certified-operator.html`, `mx-site/services/eaa/index.html`, `mx-site/tools/pdf-inspector.html` (Schema.org Offer, image, datePublished, author, publisher properties added to existing JSON-LD); `mx-site/llms-full.txt` regenerated to reflect the per-post metadata expansion. Allaboutv2 worker also got the matching enrichment on the free-book download form. Audit refresh for `mx.allabout.network` 2026-05-30 captured (16,700+ line additions across audit log, report, finding pages, voice/verification JSON, PDF, provenance hash index plus six new provenance prompt + input files).
 
+### 6. Scott opportunities brief tightened, Tom's items moved out, PDF rendered
+
+End-to-end Scott pass after the v3.0→3.1 polish earlier in the evening. The brief moved from a "Co-directors" surface that mixed Tom's outstanding work with Scott's asks, to "Scott McGregor"'s working brief with nine sharpened actions (Andris one-pager, Andris meeting booking, Andris+Jonathan technical review, written PDF audit test report, compact badge SVG candidate, LinkedIn networking with Matt and Boye & Company tagging, investor one-pager, follow-up on Jonathan routing, marked-up core-vs-satellite inventory). Each action now names a deliverable and an outcome. Operating positions (concept-to-product, licensing-and-franchising, core-vs-satellite, valuation tiers, MX-vs-C2PA, terminology and local-inference) compressed; founding-sponsor recognition and three-layer model kept but tightened; inventory cut to the five items closest to Scott's remit (MX Printworks productisation, MX Compatible badge legal protection, CMS-vendor sponsor outreach, three S-effort funnel fixes Tom owns, the biggest-unclaimed Maxine subject-side counter-signing opportunity). Tom's three open items (updated outreach materials, licensing-model + onboarding docs, MX-vs-C2PA blog post) moved out to REMINDERS.md as 🟠 Active items cross-referenced back to the brief. Frontmatter recipient flipped from "Co-directors" to "Scott McGregor"; `mx.generate` block added so future renders don't need ad-hoc invocation; version bumped 3.1 to 4.0. Rendered to tagged PDF (421K, info-doc doctype, ISO 14289-1 Level 2, MX Compatible badge embedded with per-PDF QR encoding the explainer fragment, AI provenance payload embedded in XMP for the regulator-walkable evidence chain, deterministic sidecar adjacent).
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment (across hub + submodules) | 9 (1 allaboutv2, 4 mx-outputs, 4 hub: lemma+Scott+bumps, REMINDERS, CHANGELOG, LEARNINGS) |
+| Commits this segment (across hub + submodules) | 10 (1 allaboutv2, 5 mx-outputs incl. Scott PDF, 4 hub: lemma+Scott+bumps, REMINDERS, CHANGELOG, LEARNINGS) |
 | Files changed (hub) | 7 (lemma validator + Scott rewrite + routing-registry + REMINDERS + CHANGELOG + LEARNINGS + 2 submodule pointers) |
-| Files changed (mx-outputs) | 33 (6 cluster files + 7 mx-site pages + 19 audit artefacts + directors report v1.1) |
+| Files changed (mx-outputs) | 36 (6 cluster files + 7 mx-site pages + 19 audit artefacts + 3 Scott PDF artefacts + directors report v1.2) |
 | Files changed (allaboutv2) | 1 (cloudflare-worker.js JSON-LD enrich) |
 | Lines added (across submodules) | ~16,800 (most in the audit artefacts; cluster rewrites are surgical) |
 | Lines removed | ~170 |
@@ -120,8 +124,9 @@ The most-used tools in the workflow surface their gaps by being used out-of-lane
 | e7902ee | mx-outputs | Apply blog-post.cog.md series rules across watching-the-machines cluster |
 | 575467d | mx-outputs | Enrich JSON-LD across mx-site service pages with Offer + author + publisher |
 | 0ed0fc7 | mx-outputs | Audit refresh: mx.allabout.network 2026-05-30 (re-run with widened humanizer scanners) |
-| _pending_ | hub | /md-writer skill + INDEX row + Scott opportunities polish + blog-post.cog series rules + html-writer routing + mx-c-blog-post mention + submodule pointer bumps |
+| 72673d3 | mx-outputs | Add Scott McGregor opportunities brief PDF + provenance pair (tagged, MX Compatible badge, AI payload in XMP) |
+| _pending_ | hub | /md-writer skill + INDEX row + Scott opportunities v3.1→4.0 tighten + mx.generate frontmatter + blog-post.cog series rules + html-writer routing + mx-c-blog-post mention + REMINDERS Tom-items move + submodule pointer bumps |
 
 ---
 
-_Filed 2026-05-30 evening, version 1.1. Submodule SHAs backfilled from Step 1; hub commit lands in Step 3 of this step-commit run._
+_Filed 2026-05-30 evening, version 1.2. Submodule SHAs backfilled from Step 1; hub commit lands in Step 3 of this step-commit run. v1.2 adds the late-evening Scott tighten-and-render pass (v3.1→4.0 brief, Tom-items move to REMINDERS, tagged PDF + provenance pair)._
