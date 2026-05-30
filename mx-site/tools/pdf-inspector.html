@@ -153,13 +153,13 @@
 
           <h3 id="check-responsible-person">Responsible Person Identifier</h3>
 
-          <p>The responsible person block carries the human accountable for the file's audit chain: name, email, identifier URL, role, organisation, and country. The inspector reads it from the XMP packet (or from the embedded provenance payload as a fallback). The block is what regulators ask for under EU AI Act Article 4, the UK ICO accountability principle, the NIST AI Risk Management Framework, and EAA Directive 2019/882.</p>
+          <p>The responsible person block names the human accountable for the file's audit chain: name, email, identifier URL, role, organisation, and country. The inspector reads it from the XMP packet (or from the embedded provenance payload as a fallback). The block is what regulators ask for under EU AI Act Article 4, the UK ICO accountability principle, the NIST AI Risk Management Framework, and EAA Directive 2019/882.</p>
 
           <h2 id="what-the-three-tiers-mean">What the three tiers mean</h2>
 
           <p>The inspector classifies every file into one of three tiers.</p>
 
-          <p><strong>MX Compatible.</strong> The file declares a tagged structure tree and carries the MX XMP namespace. It is accessible, attested, and machine-readable. This is the bar the MX Compatible badge represents.</p>
+          <p><strong>MX Compatible.</strong> The file declares a tagged structure tree and includes the MX XMP namespace. It is accessible, attested, and machine-readable. This is the bar the MX Compatible badge represents.</p>
 
           <p><strong>EAA tagged only.</strong> The file declares a tagged structure tree but no MX namespace. It is accessible (Screen readers can walk it; EAA Directive 2019/882 conformance is plausible) but it is not attested. A regulator or AI agent cannot verify what the file claims or who authored it.</p>
 
@@ -179,7 +179,7 @@
 
           <p>Every PDF we produce goes through this same inspector before it leaves our hands. The production pipeline calls the harness at <code>tests/test-pdf-inspector.js</code> against every artefact the renderer emits, audit reports, books, briefings, contracts. If the inspector does not certify the file as MX Compatible, the build fails and nothing ships. The browser inspector you see on this page and the production gate share one source of truth, the detection core at <code>mx-outputs/mx-site/js/pdf-inspector-core.js</code>, so a regression in either surface fails both.</p>
 
-          <p>What this means for you. The reports we send to clients and the books we publish are not asked to meet the MX Compatible bar by hand and by hope; they are blocked from shipping unless they meet it by machine. When you drop a PDF we produced into this inspector, you should see the same verdict the build saw before it released the file.</p>
+          <p>The reports we send to clients and the books we publish are not asked to meet the MX Compatible bar by hand and by hope; they are blocked from shipping unless they meet it by machine. When you drop a PDF we produced into this inspector, you should see the same verdict the build saw before it released the file.</p>
 
           <h2 id="credibility-by-mechanism">Credibility by mechanism, not by claim</h2>
 

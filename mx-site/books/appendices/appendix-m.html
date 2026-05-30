@@ -2921,8 +2921,8 @@ field wins when two seem similar. The <code>namespace-policy</code>
 section defines who owns what.</p>
 <p><strong>For humans:</strong> Start with the naming conventions and
 namespace policy below, that is the philosophy. Then browse the carrier
-format sections to understand how metadata lives in different file
-types. The field-by-field definitions are in the YAML above, organized
+format sections to understand how metadata is held in different file
+types. The field-by-field definitions are in the YAML above, organised
 by profile.</p>
 <hr />
 <h3 id="how-fields-are-organized">2. How fields are organized</h3>
@@ -3419,7 +3419,7 @@ anything about MX. Zone 2 fields are MX-operational, they require
 understanding of the MX ecosystem to interpret correctly. Separating
 them makes the frontmatter self-describing at a glance.</p>
 <p>In non-YAML contexts (HTML, JS, CSS), the <code>mx:</code> prefix
-marks the same boundary:
+is the same boundary:
 <code>&lt;meta name="mx:content-type"&gt;</code> in HTML,
 <code>@mx:content-type</code> in JSDoc. The pattern is consistent, <code>mx:</code> signals MX-operational metadata whether in a YAML block
 or an HTML attribute.</p>
@@ -3647,7 +3647,7 @@ the deprecations table; they emit migration warnings pointing at the
 <hr />
 <h3 id="block-types">11. Block types</h3>
 <p>A cog is composed of blocks. Each block has a type that declares what
-its content is. Blocks live in the YAML frontmatter as entries in the
+its content is. Blocks are in the YAML frontmatter as entries in the
 <code>blocks</code> array. The markdown body below the frontmatter is
 the prose block, it does not need to be declared in YAML.</p>
 <p>The <code>blockTypes</code> array in the YAML above defines every
@@ -3814,7 +3814,7 @@ a skill) to read and perform. SOP action-cogs are LLM-mediated; the
 runtime is the language model itself.</li>
 <li><strong><code>hybrid</code></strong>, the cog carries both an
 <code>@embedded</code> script and descriptive <code>usage</code> prose.
-The script handles the deterministic portion; the prose carries the
+The script handles the deterministic portion; the prose has the
 judgment-dependent portion an LLM performs.</li>
 </ul>
 <p><code>actionType</code> is required iff
@@ -4678,7 +4678,7 @@ class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><
 <span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Tom Cranstoun&quot;</span></span>
 <span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">license</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://spdx.org/licenses/CC-BY-4.0.html&quot;</span></span>
 <span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>Width, height, format, creator, and license live under
+<p>Width, height, format, creator, and license are under
 <code>schema:</code> using Schema.org's vocabulary. MX owns the identity
 fields and the pointer at the asset.</p>
 <p>For images with embedded EXIF/XMP metadata, the
@@ -4750,7 +4750,7 @@ class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><
 <span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">primaryKey</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;month&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;product_line&quot;</span><span class="kw">]</span></span>
 <span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>Column types, primary keys, and required-ness live under
+<p>Column types, primary keys, and required-ness are under
 <code>csvw:</code> using CSVW's vocabulary. MX owns the identity layer
 (title, author, created, ownership, audience, stability) and the pointer
 at the dataset file.</p>
@@ -4763,7 +4763,7 @@ and spatial scope.</p>
 <h3 id="ai-interpretation-guidance">16. AI interpretation guidance</h3>
 <p>This section consolidates guidance for AI agents interpreting MX
 metadata across all carriers. The principles apply regardless of whether
-the metadata lives in YAML frontmatter, HTML meta tags, code comments,
+the metadata is in YAML frontmatter, HTML meta tags, code comments,
 or database sidecars.</p>
 <h4 id="general-principles">16.1. General principles</h4>
 <ol type="1">
@@ -5452,7 +5452,7 @@ principle:</p>
 information presented in two forms, each optimized for its primary
 audience.</p>
 <h4 id="information-flow">Information Flow</h4>
-<p>README.md serves as the <strong>source of truth</strong> for
+<p>README.md is the <strong>source of truth</strong> for
 narrative content:</p>
 <pre><code>README.md (human-authored)
     ↓ Extract metadata
