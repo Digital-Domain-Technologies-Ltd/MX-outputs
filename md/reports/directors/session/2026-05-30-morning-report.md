@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Watching the Machines column shipped as drafts + full mechanical humanizer sweep across mx-site"
-description: "Shipped the Watching the Machines column as six nested drafts (hub, editorial standard, cluster lander, three entries on the Google nano model silent install) with mx.runbook on every file, then ran a full mechanical humanizer pass across all 151 mx-site HTML files, applying roughly 240 fixes (British-English spellings, copula collapses, AI-vocab rewrites, bridging clichés, superficial -ing endings) without breaking a single page."
+title: "Co-Directors Report — Watching the Machines + mechanical humanizer sweep + writing-style separation, calibration, and first applied run"
+description: "The morning session covered four pieces of work in sequence. First, the Watching the Machines editorial column landed as six nested draft files on mx-site, paired with a ten-fork mechanical humanizer sweep across every published mx-site HTML file. Second, the /humanizer skill was architecturally separated from mx-canon/ssot/writing-guides/writing-style.md, removing 234 lines of duplicated rule prose and giving each rule a single source of truth. Third, writing-style.md was calibrated against two of Tom's published pieces (CMS Critic and allabout.network); contradictions on em-dashes, sentence-initial conjunctions, and certain vocabulary were left as discipline (rules win); positive patterns surfaced as new Tom-voice Patterns 11 (problem-statement opener) and 12 (parallel demonstration through contrast). Fourth, the new toolchain was applied to a live internal document (the Scott opportunities brief), where the six deterministic scanners returned zero hits and the remaining thirteen fixes came from the rulebook applied by reference (em-dashes, three uses of `aligned`, one `optimise`, and two pre-announced counts)."
 author: "Tom Cranstoun"
 created: 2026-05-30
 modified: 2026-05-30
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -52,6 +52,30 @@ Two files were flagged for editorial follow-up (no mechanical edits applied): `b
 
 The drafts index hadn't been updated since 2026-05-26 and was stale by two clusters. Added the Watching the Machines column card, bumped frontmatter `modified` to 2026-05-30 and `version` to 1.1.
 
+### 4. Writing-style rulebook separated from /humanizer skill
+
+The /humanizer skill had drifted into restating roughly 40% of `mx-canon/ssot/writing-guides/writing-style.md` inline. Tom-voice patterns 1-10, the six Maxine-overlay families, the full 40-plus internet-sourced AI vocabulary table, the verbal-tics rule, and Pattern 26 distinctive-word overuse thresholds with the exemption list all appeared in both files. Any rule change required lockstep edits, and no cross-check prevented drift.
+
+The fix draws one line. The MX house rulebook owns rules that apply because of MX positioning: the variety demand, MX-brand forbidden vocabulary (`leverage` in business prose, `the room` as audience metaphor, `surface` as abstract noun), voice by surface, dialect, Tom-voice, Maxine-overlay, APA 7. The /humanizer skill owns generic internet-sourced AI tells that would apply to any prose-writing project: the AI vocabulary catalogue with per-entry citations to Wikipedia "Signs of AI writing", OliviaCal 2026 list, Plus AI overused-words list, Walter Writes AI 2026 blacklist, and Tom Orbach Anti-AI cheat sheet; the AI-register openers; the negation-pivot two-sentence form; copula avoidance; the seven prose-pattern families. /review-docs is the reporting-only sibling: same rulebook, no rewrites. The six `.mjs` scanners stay where they are (humanizer's execution layer). The skill loads the rulebook by reference; it does not restate it.
+
+Net effect: writing-style.md down 55 lines, /humanizer skill.md down 191 lines (650 to 459), verbal-tics.md trimmed, review-docs scope clarified. Total -234 lines of duplication removed. Verification confirmed Tom-voice patterns and Maxine-overlay families appear in writing-style.md only (count 1 each); internet-sourced AI vocabulary appears in /humanizer's catalogue with all entries citing at least one source.
+
+### 5. Writing-style calibration against Tom's published prose
+
+Tom shared two pieces as samples of his normal writing pattern: a CMS Critic article on CMS Kickoff 2024 and an allabout.network technical post on making llms.txt work for headless websites. The brief was to ensure future work follows the patterns, with Tom deciding on any contradictions with current rules.
+
+After surfacing six contradictions (em-dashes, sentence-initial conjunctions, the words `pivotal / foster / transformative / showcase / crucial`, multi-sentence negation pivots, the `It's important to` bridging phrase, and the `In fact` opener), Tom chose "Split — specific carve-outs per contradiction" as the framing, and on every contested rule chose **keep the current discipline**. The pieces are pre-discipline baseline on punctuation and vocabulary; the rules in §3, §5, and §6 are the direction of travel.
+
+The result was an additive-only calibration. Two new Tom-voice patterns landed in §9.9: Pattern 11 (problem-statement vignette opener — `There's a critical disconnect hiding in plain sight: AI systems can't see your JavaScript-rendered content.`) and Pattern 12 (parallel demonstration through contrast — paired `What AI Scrapers See` / `What Human Users See` blocks). Section 0 voice ground truth was split into a primary tier (Protocols ch1, Free-Book ch0 — manuscript voice, full-spectrum reference) and a secondary tier (the two URLs — consultant-voice and technical-blog-voice spot checks). The secondary tier carries an explicit scope statement: positive patterns only, the rulebook overrides on punctuation and vocabulary. Net 23 lines added to writing-style.md (one file changed; no skill or scanner touched).
+
+### 6. First applied /humanizer run since the separation
+
+The Scott opportunities document (`mx-crm/contacts/scott-mcgregor/opportunities-2026-05-28.md`, 311 lines) was the first real-world test of the separated architecture. The six deterministic scanners (negation-pivot, verbal tics, distinctive-word overuse, copula avoidance, AI vocabulary, prose patterns) returned **zero hits** across the entire document. The `mx.x-mx-domainTerms` exemption block (carrying `tier`, `founding`, `directory`, `recognition`, `operator`, `franchise`-adjacent terms) kept legitimate domain repetitions from being flagged.
+
+Thirteen mechanical fixes came from the MX rulebook applied by reference: seven em-dash `Tom` signature lines dropped (the doc was already attributed in frontmatter); three uses of `aligned` rephrased to `fits` / `matches` / `agreed` per §5; one `optimise` rephrased to `tune` per §5; two pre-announced counts removed (`Six sections follow, each numbered 1, 2, 3 internally` and `Three items at the bottom of the inventory are the strongest`) per §3. Re-running all six scanners after the edits confirmed they stayed clean. Line count 311 to 296 (-15, the signature blocks).
+
+This run validated three things at once. The scanner catalogue is well-calibrated for Tom-voice prose. The domain-term exemption mechanism (`mx.x-mx-domainTerms` in frontmatter) works as designed for documents with legitimate repeated nouns. The rulebook-as-reference architecture lets the skill apply discipline without restating it. The toolchain is ready to ship as a real productionised quality gate on outward-facing prose.
+
 ---
 
 ## By the Numbers
@@ -73,6 +97,16 @@ The drafts index hadn't been updated since 2026-05-26 and was stale by two clust
 | Files held back entirely by forks | 0 (substrate-anchored article held one editorial decision only) |
 | Gate result — HTML hygiene full sweep | 151 files clean |
 | Gate result — JSON-LD-in-head | 162 files clean |
+| Rulebook-vs-enforcer separation — lines of duplication removed | 234 net |
+| writing-style.md size after separation | 1625 (was 1680) |
+| /humanizer skill.md size after separation | 459 (was 650) |
+| Internet-sourced AI-tell entries in /humanizer (all cited) | 56 source references across vocabulary, openers, copula, prose patterns |
+| Writing-style calibration — new Tom-voice patterns | 2 (Patterns 11 and 12) |
+| Writing-style calibration — new voice ground-truth sources | 2 (CMS Critic, allabout.network) |
+| Writing-style calibration — lines added to writing-style.md | 23 |
+| Scott opportunities humanizer run — scanner hits | 0 across all 6 scanners |
+| Scott opportunities humanizer run — manual fixes applied | 13 |
+| Scott opportunities humanizer run — line delta | 311 to 296 |
 
 ---
 
@@ -90,6 +124,9 @@ The mechanical humanizer sweep is the first time the deterministic toolchain has
 - **Mechanical humanizer pass skips judgement-call categories.** Filler adverbs, false ranges, distinctive-word overuse, and verbal tics all need contextual judgement that mechanical regex can't reliably make. Holding those for a separate slow-pass keeps the mechanical pass safe and shippable.
 - **MX-domain idiom `carries [a/the]` is preserved across the site.** The phrase appears dozens of times as the canonical metaphor for metadata carriage (file carries the COG, page carries the JSON-LD, badge carries the QR). It is not a possession-copula AI tell in this domain.
 - **One internal-link anchor was paired-updated rather than left mismatched.** The blog n-z fork edited a same-document `#where-mx-fits-in-your-organization` fragment + matching `id=""` together when the heading text changed to `organisation`. Strictly the brief said never edit href URLs, but leaving them mismatched would have broken the link.
+- **Single-source-per-rule discipline as architectural principle.** writing-style.md owns MX house rules; /humanizer owns generic internet-sourced AI tells with per-entry citations; /review-docs is reporting-only sibling. Skills load the rulebook by reference; they do not restate it. New MX-brand bans land in writing-style.md with a rationale tied to MX positioning. New internet-sourced AI tells land in /humanizer with a source citation. The principle is now canon in CLAUDE.md (Writing Style section) and the rulebook header runbook.
+- **Writing-style discipline beats published-prose drift on every contested rule.** Em-dashes, sentence-initial conjunctions, and the words `pivotal / foster / transformative / showcase / crucial` all appear in Tom's published CMS Critic and allabout.network pieces, and on every one the current rule won. The pieces are now noted in §0 as pre-discipline baseline; the rulebook is the direction of travel. Positive structural patterns (problem-statement opener, parallel-demonstration contrast) joined §9.9 as Patterns 11 and 12.
+- **CLAUDE.md and other always-on rulebooks must read as canon, not as a what-changed log.** No dates, no "as of X", no "landed" framing. The git history is the changelog. Same timeless-manuscript discipline applied to assistant-loaded context files. Captured as a feedback memory.
 
 ---
 
@@ -123,7 +160,13 @@ The mechanical humanizer pass demonstrates the writing-style toolchain in produc
 | Hash | Description |
 |------|-------------|
 | 769a5ca (mx-outputs) | Humanizer pass across mx-site + Watching the Machines drafts |
-| _pending_ (hub) | Hub pointer bump + REMINDERS + CHANGELOG updates from Step 3 |
+| 21540c9 (mx-outputs) | Audit-preservation snapshots for mx.allabout.network re-runs |
+| 01e79ee4 (hub) | Separate writing-style rulebook from /humanizer skill (-232 lines) |
+| ccc0183b (hub) | Docs: CHANGELOG 2.81 (writing-style / humanizer separation) |
+| 2e21ed56 (hub) | Bump mx-outputs: audit-preservation commits (3998aa0 + 21540c9) |
+| _pending_ (mx-outputs) | This-segment directors-report update (v1.1) |
+| _pending_ (hub) | Writing-style calibration + Scott opportunities humanizer fixes |
+| _pending_ (hub) | Bump mx-outputs: directors-report v1.1 |
 
 ---
 
