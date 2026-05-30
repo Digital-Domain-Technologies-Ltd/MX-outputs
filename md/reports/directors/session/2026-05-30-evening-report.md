@@ -1,6 +1,6 @@
 ---
-title: "Co-Directors Report — /md-writer skill landed, then series-cluster authoring rules codified from the watching-the-machines pattern"
-description: "Two tool gaps closed in one evening. /md-writer landed as the markdown-grade sibling of /html-writer. The watching-the-machines cluster was reviewed against new series-and-cluster authoring rules added to blog-post.cog.md, with depth-based CTA and canonical first-mention shape derived directly from the pattern it codifies."
+title: "Co-Directors Report — /md-writer skill landed; watching-the-machines cluster reviewed and rewritten against its own pattern"
+description: "Two pieces of evening work. /md-writer landed as the markdown-grade sibling of /html-writer. The watching-the-machines cluster got an end-to-end review and rewrite pass; chrome bio cleanup, outward CTA on the editorial-standard page, child-post openers rewritten, banned vocabulary fixed. Cog-rule codification of the underlying pattern stays deferred; the rewrites stand on the writing-style rulebook and humanizer scanners that already exist."
 author: "Tom Cranstoun"
 created: 2026-05-30
 modified: 2026-05-30
@@ -15,7 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-30-evening-report.md
 ---
 
-# Co-Directors Report — /md-writer Skill Landed, Then Series-Cluster Authoring Rules Codified from the Watching-the-Machines Pattern
+# Co-Directors Report — /md-writer Skill Landed; Watching-the-Machines Cluster Reviewed and Rewritten Against Its Own Pattern
 
 **Date:** 30 May 2026 - Evening
 **Segment:** evening (since 5pm)
@@ -24,11 +24,13 @@ mx:
 
 ## Summary
 
-Two evening tool gaps surfaced and got closed.
+Two pieces of evening work, plus a substantial user-led rewrite of the Scott brief.
 
 First, `/md-writer` landed as the markdown-grade sibling of `/html-writer` (covered in the earlier evening pass). The Scott opportunities brief that drove the request was polished in the same pass and serves as the worked example.
 
-Then a second gap surfaced: the `watching-the-machines` cluster had a pattern (engaging magazine voice, two-surface CTA, inline first-mention explanations) that no skill formalised. The pattern was reverse-engineered into a new "Series and cluster authoring rules" section in `scripts/cogs/blog-post.cog.md`, with the html-writer and mx-c-blog-post skills routed at it. A live review of the cluster against the new rules surfaced misses (italic-eyebrow first-mention shape, missing outward CTA on child-equivalent pages, banned vocabulary `shape`/`posture`/`surface`/`rest on`/`same shape` across the three child posts, chrome bio tripping the bio-parens regex). All six cluster files were rewritten. Cog rule was tightened mid-review based on user interview: depth-based CTA differentiation (index-equivalents carry outward CTA; child posts carry series-nav), canonical strong-bold-only first-mention shape (italic-eyebrow form explicitly rejected), chrome bio rewritten to comma-appositive form across all six files. Cluster now passes its own bar.
+Second, the `watching-the-machines` cluster got an end-to-end review and rewrite pass. Six files audited (series index, how-it-works editorial standard, cluster index, three child posts). Findings: outward inline CTA missing on `how-it-works.html`; three child-post openers used italic-eyebrow first-mention shape that doesn't carry the visual weight a first-mention reference needs; chrome author bio "Founder of the Machine Experience (MX) community..." tripped the bio-parens detection across all six; banned vocabulary across the three child posts (`same shape`, `posture` x2, `surface`, `shape` x2, `rest on` x2). All findings addressed: chrome bio rewritten across all six files to a comma-appositive form; outward CTA added to `how-it-works.html`; three child-post openers rewritten to strong-bold form; banned vocab fixes applied per file. Cog-rule codification of the underlying pattern stays deferred for a separate pass; the cluster rewrites stand on the writing-style rulebook and humanizer scanners that already exist.
+
+Third, the Scott opportunities brief got a user rewrite from version 3.1 to 4.0. Repositioned from "Co-directors" recipient to "Scott McGregor" recipient, restructured around nine specific actions with concrete deliverables, the operating positions behind them, the valuation framing, and the inventory items closest to Scott's remit.
 
 ---
 
@@ -42,13 +44,13 @@ Then a second gap surfaced: the `watching-the-machines` cluster had a pattern (e
 
 Ran the equivalent polish pass on `mx-crm/contacts/scott-mcgregor/opportunities-2026-05-28.md` (frontmatter stayed at `audience: [business]`, `confidential: true`, `recipient: "Co-directors"`). All H1, H2, and H3 headings converted to APA 7 Title Case. Counting-in-prose removed from the inventory intro, the strongest-three heading, the what-I-want lead-in, the sponsor-recognition section's two lists, the Private REGINALD platform bundled-components and engagement-models paragraphs, and the three-layer model's question count. One negation-pivot in the Postscript fixed ("Items in section 5 aren't just conversion hygiene. They're..." became a single declarative). Version bumped 3.0 to 3.1. Body content, tables, and source-tag conventions all preserved.
 
-### 3. Series and cluster authoring rules added to blog-post.cog.md
+### 3. Watching-the-machines cluster reviewed and rewritten end-to-end
 
-New `## Series and cluster authoring rules` section in `scripts/cogs/blog-post.cog.md`, sitting between "Two formats, one voice" and the lifecycle stages. The section is the single source of truth for three rules series and cluster pages follow on top of the existing polish pass: engaging magazine-column tone (named actors, stated positions, three-balanced-entry frame, editor-avatar opener), depth-based two-surface CTA conclusion (index-equivalents carry inline outward CTA + post-conclusion aside; child posts carry series-navigation + post-conclusion aside with outward link in the aside; standalone posts skip both), and canonical strong-bold-only first-mention inline explanation (cross-page sibling refs + specialist MX terms, per-page tracking, italic-eyebrow form explicitly rejected). Calibrated against `mx-outputs/mx-site/blog/drafts/watching-the-machines/`. Both `/html-writer` and `/mx-c-blog-post` skills now route to the section: html-writer adds a paragraph in its "Content sub-folders" block, mx-c-blog-post adds a bullet under "How It Works".
+Six-file review of the cluster (series index, how-it-works editorial standard, cluster index, three child posts). Findings: every file passed engaging-tone and editor-avatar opener; how-it-works (the editorial standard page) was missing the outward inline CTA; three child posts used an italic-eyebrow first-mention shape that doesn't carry the visual weight a first-mention reference needs; chrome author bio "Founder of the Machine Experience (MX) community..." tripped the bio-parens detection across all six; banned vocabulary across the three child posts (`same shape`, `posture` x2, `surface`, `shape` x2, `rest on` x2). Rewrites: outward inline CTA section added to `how-it-works.html`; three child-post openers rewritten to a strong-bold form; chrome bio rewritten across all six files to a comma-appositive form ("Founder of the Machine Experience community, author of the MX book series, and consultant on MX strategy through Digital Domain Technologies Ltd, trading as CogNovaMX"); banned vocab fixes applied per file. Final scanner pass clean across all six files except two context-exempt residuals (legitimate metaphor + regex false positive on `features the`).
 
-### 4. Watching-the-machines cluster reviewed and rewritten against the new rules
+### 4. Domain-terms lemma validator landed
 
-Six-file review of the cluster (series index, how-it-works editorial standard, cluster index, three child posts). Findings: every file passed engaging-tone and editor-avatar opener; how-it-works (depth-1 index-equivalent) was missing the outward inline CTA; three child posts used italic-eyebrow first-mention form instead of canonical strong-bold; chrome author bio "Founder of the Machine Experience (MX) community..." tripped the bio-parens regex across all six; banned vocabulary across the three child posts (`same shape`, `posture` x2, `surface`, `shape` x2, `rest on` x2). Rewrites: outward inline CTA section added to how-it-works.html; three child-post openers rewritten to strong-bold canonical form; chrome bio rewritten across all six files to comma-appositive form ("Founder of the Machine Experience community, author of the MX book series, and consultant on MX strategy through Digital Domain Technologies Ltd, trading as CogNovaMX"); banned vocab fixes applied per file. Final scanner pass clean across all six files except two context-exempt residuals (legitimate metaphor + regex false positive on `features the`). The cluster is back to being the calibration anchor for the cog rule — and the cog rule now actually matches what the calibration anchor does.
+New field-shape validator at `scripts/check-domain-terms-lemmas.mjs`. Flags any `x-mx-domainTerms` array that contains both a singular and its regular plural (e.g. `vendor` plus `vendors`, `opportunity` plus `opportunities`). The rule it enforces: the field declares lemmas only. Runs standalone (`node scripts/check-domain-terms-lemmas.mjs --format=table <path>`). The broader scanner integration (inflection expansion at scan time so a lemma-only field still matches plurals in prose) and a `mx:heal --domain-terms` sub-action for repo-wide cleanup were drafted alongside this validator but stay deferred for a separate pass — the validator itself is the durable output that landed this session.
 
 ### 5. Additional Schema.org enrichment shipped on supporting pages
 
@@ -60,15 +62,14 @@ Sibling commit bundle on mx-outputs: JSON-LD enrichment across `mx-site/audit/in
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment (across hub + submodules) | 5 (1 allaboutv2, 3 mx-outputs, 1 pending hub) |
-| Files changed (hub, pending commit) | ~10 (cog + 2 skills + new md-writer skill + Scott md + supporting) |
-| Files changed (mx-outputs) | 32 (6 cluster files + 7 mx-site pages + 19 audit artefacts) |
+| Commits this segment (across hub + submodules) | 9 (1 allaboutv2, 4 mx-outputs, 4 hub: lemma+Scott+bumps, REMINDERS, CHANGELOG, LEARNINGS) |
+| Files changed (hub) | 7 (lemma validator + Scott rewrite + routing-registry + REMINDERS + CHANGELOG + LEARNINGS + 2 submodule pointers) |
+| Files changed (mx-outputs) | 33 (6 cluster files + 7 mx-site pages + 19 audit artefacts + directors report v1.1) |
 | Files changed (allaboutv2) | 1 (cloudflare-worker.js JSON-LD enrich) |
 | Lines added (across submodules) | ~16,800 (most in the audit artefacts; cluster rewrites are surgical) |
 | Lines removed | ~170 |
-| New skills landed | 1 (/md-writer) |
-| Skills modified | 2 (html-writer + mx-c-blog-post for series routing) |
-| Cogs modified | 1 (blog-post.cog.md — new top-level section) |
+| New skills landed | 1 (/md-writer, earlier evening) |
+| New scripts landed | 1 (check-domain-terms-lemmas.mjs validator) |
 | Documents polished as worked examples | 2 (Scott opportunities + 6 cluster files) |
 
 ---
@@ -83,7 +84,7 @@ The pattern is reusable. Every time we run blog-grade enforcement on a markdown 
 
 ## The Insight
 
-The most-used tools in the workflow surface their gaps by being used out-of-lane. Today produced two examples in the same segment. First the `/html-writer` call with a "keep it as md" rider; `/md-writer` is the parallel skill that closes that lane. Then the watching-the-machines cluster: a six-file pattern that no skill formalised, manifest as the calibration anchor everyone could see but the rules couldn't enforce. Both were closed by extracting the new lane (a sibling skill in the first case, a new section in the existing cog in the second) rather than growing the original tool. The rider is the signal; the calibration anchor that has no codified rule is the same signal. When the next pattern surfaces, the move is to read the pattern, write the rule, then audit the pattern against its own rule. The cog rule tightened mid-review (depth-based CTA, canonical first-mention shape) precisely because the live review against the pattern surfaced edges the initial rule hadn't seen. Pattern-driven rule extraction beats rule-driven pattern construction in every case where the pattern already exists in working form.
+The most-used tools in the workflow surface their gaps by being used out-of-lane. The `/html-writer` "keep it as md" rider produced `/md-writer` earlier this evening. The same rider-pattern surfaced again on the watching-the-machines cluster: a six-file pattern (engaging magazine voice, two-surface CTA, inline first-mention explanations) that no skill formalised. A draft rule for the cog and a routing pointer in both writer skills were sketched mid-session, then withdrawn by the user pending more iteration. The application of the would-be rule (cluster rewrites) landed; the codification stayed deferred. The honest reading: a pattern that works in the calibration anchor isn't automatically ready to land in canon — the rewrites are evidence the pattern is real, but the rule needs another pass before it earns a section in the cog. The session output that landed is the work; the rule itself stays in working memory for the next pass to extract cleanly.
 
 ---
 
@@ -91,15 +92,16 @@ The most-used tools in the workflow surface their gaps by being used out-of-lane
 
 - `/md-writer` is a separate skill, not an `/html-writer --no-html` flag. Reason: keeping HTML-only stages (site-chrome contract, JSON-LD, AI-disclosure, sitemap updates, source-md deletion) out of the markdown lane is the structural job, not a runtime branch. A separate skill makes the lane explicit and the polish pass shareable across both via the humanizer skill and the writing-style rulebook.
 - Scope rules per content type baked into the skill, not deferred to the user. Reason: a user invoking `/md-writer book-chapter.md` should get the book-shaped profile (third-person, expanded contractions, longer narrative rhythms tolerated); `/md-writer audit-report-source.md` should get the consultant-voice with no construction leak; `/md-writer gathering-draft.md` should get the vendor-neutral, no-Reginald rule. Deciding by path and content type at skill-entry time avoids the user having to remember which flags apply where.
-- Series and cluster authoring rules live in the cog (`scripts/cogs/blog-post.cog.md`), not in writing-style.md. Reason: the rules are HTML/blog-carrier-specific and tied to the depth-based CTA shape only blog and cluster posts use. The writing-style rulebook stays the prose-rules home; the cog is the carrier-specific home. Both writer skills route to the same cog section, so the rule has one source.
-- CTA structure differs by depth, not by template. Reason: an index-equivalent page (series index, cluster index, editorial-standard page) is the lander a reader arrives at from outside and needs an outward action surface; a child post sits inside the cluster's argument and the action is "read the next sibling". Codifying this as a depth-based gate (depth 0 = standalone, depth 1 = index-equivalent, depth 2+ = child post) makes the rule mechanical without losing the editorial intent.
-- First-mention inline explanation uses canonical strong-bold form only; italic-eyebrow is rejected. Reason: italic-eyebrow scaffolding reads decoratively, doesn't carry the visual weight a first-mention reference needs, and creates two acceptable forms where one will do. The cluster review surfaced both forms in use; the rule resolved to one.
+- Apply the watching-the-machines cluster fixes (chrome bio, outward CTA on `how-it-works`, strong-bold openers in three child posts, banned vocab) without codifying the underlying rule in `scripts/cogs/blog-post.cog.md` yet. Reason: the rule went through three revisions mid-session (initial sketch, depth-based CTA differentiation, canonical strong-bold-only first-mention) and the user withdrew the cog-section addition pending another pass. Rewriting the cluster against the working pattern is durable on its own; the rule that would govern future cluster posts deserves a cleaner pass before it lands in canon.
+- Land the `check-domain-terms-lemmas.mjs` validator without the paired scanner integration. Reason: the validator is standalone and useful on its own; the scanner-side inflection expansion (which would let the field declare lemmas only while still matching plurals at scan time) and the `mx:heal --domain-terms` sub-action were drafted but not committed this session. The validator catches the redundancy; the scanner-side and heal-side enrichment land separately.
 
 ---
 
 ## Open Questions
 
-- None this segment. The Pattern 26 distinctive-word-overuse scanner unit and its associated artefacts (parallel agent work) stay in working tree, deferred from earlier today.
+- The series-and-cluster authoring rules section for `scripts/cogs/blog-post.cog.md` (engaging-tone + depth-based CTA + canonical strong-bold-only first-mention) is sketched but not yet in canon. The user withdrew the addition mid-session. Carry to the next pass: revisit the rule shape against any subsequent cluster work, then codify cleanly.
+- The scanner-side inflection expansion in `scan-word-frequency.mjs` (so `x-mx-domainTerms` can declare lemmas only) and the `mx:heal --domain-terms` sub-action both stay drafted in working memory. The validator script is the durable output from this session; the scanner + heal pair is the next pass.
+- The Pattern 26 distinctive-word-overuse scanner unit and its associated artefacts (parallel agent work) stay in working tree, deferred from earlier today.
 
 ---
 
