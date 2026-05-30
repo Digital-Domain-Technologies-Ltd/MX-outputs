@@ -10,12 +10,12 @@ mx:
   status: active
   contentType: audit-findings
   audience: [humans]
-  x-mx-findingsCount: 2
+  x-mx-findingsCount: 4
   runbook: "Human reviewer reads this file before signing off on the client-facing report. Findings here are raised by the automated gates; accept, rebut, or correct each one before delivery."
 ---
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this sidecar surfaces 2 findings (2 warnings) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+Every automated gate ran to completion; this sidecar surfaces 4 findings (2 warnings, 2 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
 
 ### Warnings (rule violations)
 
@@ -23,8 +23,8 @@ Every automated gate ran to completion; this sidecar surfaces 2 findings (2 warn
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | template-contract-drift | contract-stale | Contract declares tokens the template no longer uses | 2026-05-30T06:48:30Z |
-| 2 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-30T06:48:31Z |
+| 1 | template-contract-drift | contract-stale | Contract declares tokens the template no longer uses | 2026-05-30T09:01:08Z |
+| 2 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-30T09:01:09Z |
 
 <details open><summary>Warning detail (2)</summary>
 
@@ -51,6 +51,31 @@ check-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit
     third-person markers: 1 (lines 18)
 
   Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice ("we"); scorecards and appendices use third-person.
+
+</details>
+
+### Info (tone / style observations)
+
+*A gate flagged a tone, voice, or style observation. Usually safe to accept; scan the detail to confirm the phrasing reads as intended.*
+
+| # | Gate | Category | Finding | Recorded |
+|---|------|----------|---------|----------|
+| 1 | tone | exaggeration | Exaggeration / hyperbole: 1 instance (line 169) | 2026-05-30T09:01:09Z |
+| 2 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance (line 862) | 2026-05-30T09:01:09Z |
+
+<details open><summary>Info detail (2)</summary>
+
+**1. tone - Exaggeration / hyperbole: 1 instance**
+
+Exaggeration / hyperbole
+
+line 169: "flawless" - We’ve mapped a strong foundations across the audited set, with strong SEO, flawless accessibility, r
+
+**2. tone - Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance**
+
+Em-dash in prose (use comma, semicolon, parentheses, or two sentences)
+
+line 862: "—" - We also recognise that an untagged PDF remains invisible to machines—search crawlers, AI systems, an
 
 </details>
 
