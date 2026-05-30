@@ -23,21 +23,18 @@ Every automated gate ran to completion; this sidecar surfaces 6 findings (1 erro
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | rewrite-failures | rewrite-failure | Pass 2 left 4 [REWRITE FAILED] marker(s) inline in the report | 2026-05-30T11:10:44Z |
+| 1 | rewrite-failures | rewrite-failure | Pass 2 left 1 [REWRITE FAILED] marker(s) inline in the report | 2026-05-30T13:13:27Z |
 
 <details open><summary>Error detail (1)</summary>
 
-**1. rewrite-failures - Pass 2 left 4 [REWRITE FAILED] marker(s) inline in the report**
+**1. rewrite-failures - Pass 2 left 1 [REWRITE FAILED] marker(s) inline in the report**
 
 Gate rewrite-failures (rewrite-report.js) returned non-zero. Output excerpt:
 
-Reasons (deduped): 4× Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?
+Reasons (deduped): 1× Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?
 
 Occurrences:
 line 196: [REWRITE FAILED after 3 attempts: Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?]
-line 202: [REWRITE FAILED after 3 attempts: Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?]
-line 921: [REWRITE FAILED after 3 attempts: Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?]
-line 994: [REWRITE FAILED after 3 attempts: Ollama request to http://127.0.0.1:11434/api/chat failed: fetch failed. Is the local Ollama daemon running?]
 
 Suggested next steps:
 
@@ -54,9 +51,9 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | template-contract-drift | contract-stale | Contract declares tokens the template no longer uses | 2026-05-30T11:10:44Z |
-| 2 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-30T11:10:45Z |
-| 3 | gates-summary | gates-failed | Audit gates raised findings: 0-rewrite, 0a-versioning, 0b-voice | 2026-05-30T11:56:07Z |
+| 1 | template-contract-drift | contract-stale | Contract declares tokens the template no longer uses | 2026-05-30T13:13:27Z |
+| 2 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-05-30T13:13:28Z |
+| 3 | gates-summary | gates-failed | Audit gates raised findings: 0-rewrite, 0a-versioning, 0b-voice | 2026-05-30T13:58:51Z |
 
 <details open><summary>Warning detail (3)</summary>
 
@@ -102,8 +99,8 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | tone | exaggeration | Exaggeration / hyperbole: 1 instance (line 169) | 2026-05-30T11:10:45Z |
-| 2 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance (line 862) | 2026-05-30T11:10:45Z |
+| 1 | tone | exaggeration | Exaggeration / hyperbole: 1 instance (line 169) | 2026-05-30T13:13:28Z |
+| 2 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 1 instance (line 862) | 2026-05-30T13:13:28Z |
 
 <details open><summary>Info detail (2)</summary>
 
