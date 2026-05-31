@@ -298,7 +298,7 @@ The non-emptiness check is applied to the string as written in the YAML, before 
 
 A cog that participates in the contract model declares:
 
-- `schema` — a string referencing a JSON Schema in YAML form. Resolution rules are defined in section 4.3.
+- `schema` — a string referencing a JSON Schema in YAML form. Resolution rules are defined in section 4.4.
 - `validatesAgainst` — an array of validator names. Each name MUST match the regular expression `^[a-z][a-z0-9_-]*(\.[a-z][a-z0-9_-]*)+$` (anchored, lowercase only, at least two dot-separated segments). The names are looked up in the runtime registry; this specification does not constrain the runtime's choice of names beyond the syntax.
 
 A cog without these fields is a valid cog but cannot be notarised. Notarisation requires a declared schema and at least one declared validator.
@@ -306,10 +306,26 @@ A cog without these fields is a valid cog but cannot be notarised. Notarisation 
 A cog MAY also declare:
 
 - `cogHeader` — an object carrying the spec version and the spec/runtime/runtimeDoc URLs. This is the frontmatter equivalent of the magic-header comment defined in section 2.5; the equivalence rule (mismatched values are a conformance failure) is specified in [MXS-06](https://mx.allabout.network/drafts/mxs-06-cog-identification.cog.md). `cogHeader` SHOULD be a member of `metadataFields` (excluded from the contract fingerprint) — its values describe the cog's identity, not its contract.
-- `produces` — an object declaring the typed shape of a successful execution output. Sub-keys are `shape` (a schema reference resolved per section 4.3), `format` (a MIME type or named format identifier), and `example` (an illustrative value). `produces` is informational unless a runtime chooses to validate the output against `produces.shape` post-execution; runtimes that validate MUST treat a shape mismatch as an unmodelled failure (see section 4.5). A cog with no `execute` block and no procedure-declaring field SHOULD NOT declare `produces`. Distinct from `schema` (input contract for the document itself); `produces` is the contract for what comes out, not what goes in.
+- `produces` — an object declaring the typed shape of a successful execution output. Sub-keys are `shape` (a schema reference resolved per section 4.4), `format` (a MIME type or named format identifier), and `example` (an illustrative value). `produces` is informational unless a runtime chooses to validate the output against `produces.shape` post-execution; runtimes that validate MUST treat a shape mismatch as an unmodelled failure (see section 4.6). A cog with no `execute` block and no procedure-declaring field SHOULD NOT declare `produces`. Distinct from `schema` (input contract for the document itself); `produces` is the contract for what comes out, not what goes in.
 - `actionType` — a string that names the cognitive class of an action cog. The cog specification draws a sharp axis through every action cog: it MAY be **deterministic**, **inference-driven**, or **both**. A deterministic action cog carries fixed instructions a runtime executes the same way every time; an inference-driven action cog carries instructions a language-model runtime reads and performs using its own reasoning; a both-form action cog carries each in the role each is fit for. The `actionType` field is how the cog declares which, so a consumer can choose to accept, reject, or sandbox the cog without inspecting the body. Valid values are `scripted`, `sop`, and `hybrid`. A `scripted` action cog carries an embedded executable artefact (an `@embedded:<id>` block per section 3.3); a runtime extracts the artefact by id and runs it directly; the same inputs produce the same outputs. An `sop` action cog has no embedded executable artefact; the `execute.actions[].usage` value is descriptive prose intended for a language-model runtime to read and perform the steps; the runtime is the language model itself. A `hybrid` action cog carries both an embedded executable artefact AND descriptive `usage` prose; the script handles the deterministic portion and the prose carries the part that needs reasoning. Cogs with an `execute` block SHOULD declare `actionType` so that consumers can determine the runtime requirement (interpreter vs. language model vs. both) without inspecting the body. Cogs without an `execute` block MUST NOT declare `actionType`.
 
-### 4.3 Schema reference resolution
+### 4.3 Relationship-declaring fields
+
+A cog that stands on another cog — by being part of it, building on it, requiring it, inheriting from it, including it, or referring to it — MUST declare the relationship in the frontmatter using the appropriate relationship field. Inheritance and inclusion count as dependencies for this purpose: any field that names another cog the current cog stands on carries the rule.
+
+The relationship fields a cog uses to make these declarations are:
+
+- `partOf` — string. The parent collection, suite, registry, or initiative the cog belongs to. MUST.
+- `buildsOn` — array of cog names. Cogs that provide context and that a reader is expected to have read first. SHOULD.
+- `dependencies` — array of dependency objects (each carrying `name`, `kind`, optional `version`, optional `reason`). The hard-dependency declaration; a runtime treats a missing or unresolvable entry as non-functional. MUST be declared as an array of objects when the cog has any such dependencies, or as `[]` when the cog is standalone. The empty array is the visible standalone marker. Omitting the field is the older form and is being retired.
+- `refersTo` — array of cog names. Informational cross-references. MAY.
+- `inherits` — string or array. Sibling or companion cogs the current cog extends. MAY (when present, see the umbrella rule).
+
+A **standalone cog** is one that names no other cog. It declares `dependencies: []` to make the absence explicit and carries no other relationship fields. The standalone case is the explicit converse of the MUST rule, not a separate category: every cog either lists what it depends on, or declares that it depends on nothing.
+
+The rule applies to dependencies the cog itself relies on. Cogs the current cog publishes about, comments on, or supersedes are not dependencies and belong in their own fields (`supersedes`, `replaces`, vendor-namespaced extensions).
+
+### 4.4 Schema reference resolution
 
 The `schema` field is a string. Conforming implementations MUST resolve the string as follows:
 
@@ -336,7 +352,7 @@ A reference with no fragment selects the root of the document. A reference whose
 
 The contract fingerprint computation uses the schema selected by fragment resolution, not the document containing it. Two cogs referencing different fragments of the same document have different contract views and may produce different contract fingerprints even though they refer to the same file.
 
-### 4.4 Procedure-declaring fields
+### 4.5 Procedure-declaring fields
 
 A cog that declares an executable procedure does so via a top-level field whose name describes the procedure type. The reference implementation uses `reviewProcedure` for the cog-review system; domain cogs use names like `approvalProcedure`, `setup`, or other domain-specific labels.
 
@@ -362,7 +378,7 @@ These constraints exist for the same reason as the others in this specification:
 
 A phase function is a callable registered in a runtime under a name matching the dotted-name syntax. The callable is invoked by the runner once per phase, in declaration order.
 
-A phase function MUST accept two arguments: the parsed cog (as defined in section 4.7) and a state object containing the accumulated outputs of prior phases (keyed by phase id). It MUST return an object with at least the field `ok` (boolean). It MAY also return `message` (string), `output` (any), and `criteria` (object mapping criterion names to booleans).
+A phase function MUST accept two arguments: the parsed cog (as defined in section 4.8) and a state object containing the accumulated outputs of prior phases (keyed by phase id). It MUST return an object with at least the field `ok` (boolean). It MAY also return `message` (string), `output` (any), and `criteria` (object mapping criterion names to booleans).
 
 A phase function MUST NOT mutate the cog argument. Phase functions are pure with respect to their inputs; cogs are immutable from the phase function's perspective. A phase function that needs to express a transformed cog (such as a rewriter) MUST return the transformed representation through `output` rather than by mutating the input cog.
 
@@ -372,7 +388,7 @@ Runners MUST treat a phase function that returns a non-conforming value (null, u
 
 A phase function MAY raise (throw, panic) instead of returning a result. Runners MUST treat a raised phase function as `{ok: false, message: <error message>}` and continue executing subsequent optional phases unless the raised phase was non-optional.
 
-### 4.5 Troubleshooting blocks
+### 4.6 Troubleshooting blocks
 
 A cog MAY declare conditional remedies:
 
@@ -395,7 +411,7 @@ defaultRemedy: <dotted-name>
 
 The value MUST match the validator name regex defined in section 4.2 and is resolved through the same runtime registry as `troubleshooting[].remedy`. `defaultRemedy` removes the runtime's need to guess a safe behaviour for unmodelled conditions; it pairs with `troubleshooting` (named conditions catalogued explicitly, everything else routed through the default). A cog declaring `defaultRemedy` without `troubleshooting` is valid but unusual and asserts a single fallback for every failure mode.
 
-### 4.6 Update instructions
+### 4.7 Update instructions
 
 A cog SHOULD declare how it is maintained:
 
@@ -410,7 +426,7 @@ updateInstructions:
 
 The `method` field is constrained to the four enum values. Implementations MAY use this field to refuse operations that conflict with the declared method (for example, refusing to regenerate a cog whose method is `dictation`).
 
-### 4.7 Validator function contract
+### 4.8 Validator function contract
 
 A validator is a callable registered in a runtime under a name matching the syntax defined in section 4.2. The callable is invoked by the runtime when validating a cog and returns a structured result. This section specifies the validator's interface so independent implementations agree on what a validator is.
 
@@ -436,7 +452,7 @@ A validator MUST NOT mutate the cog argument. Cogs are immutable from the valida
 
 A validator MAY raise (throw, panic, return an error) instead of returning a structured result. Runtimes encountering a raised validator MUST treat it as `{pass: false, reason: <error message>}` for witness purposes; they MAY also log the error separately.
 
-### 4.8 Runtime registry
+### 4.9 Runtime registry
 
 The runtime registry is the namespace in which validator names, phase function names, and remedy function names are resolved to callable implementations. This specification does not mandate a registration mechanism — that is left to each runtime — but does constrain what consistency the registry provides.
 
@@ -881,4 +897,4 @@ YAML 1.2 Specification, <https://yaml.org/spec/1.2.2/>.
 
 CommonMark Specification (for fenced code block syntax), <https://commonmark.org/>.
 
-<!-- cog-spec-sync: 2026-05-31-c -->
+<!-- cog-spec-sync: 2026-05-31-d -->
