@@ -8,7 +8,7 @@
 //   4. Compute the deterministic readiness score from the combined
 //      findings (one weight table, transparent maths).
 //   5. Ask Chrome's on-device Gemini Nano (the LanguageModel global) for a
-//      three-sentence summary of where the page stands. Graceful fallback
+//      brief summary of where the page stands. Graceful fallback
 //      if the model is unavailable.
 //   6. Render. Tabs filter the findings list by section.
 
@@ -250,11 +250,11 @@ function formatForClipboard() {
 // All paths return { text, source } so the renderer is single-pathed.
 
 const SYSTEM_PROMPT =
-  'You are an MX-readiness reviewer. MX is a metadata standard that helps machines (LLMs, agents, automation) understand and act on web content. A page is MX-capable when it carries mx: governance meta tags, declares its AI authoring policy, serves discovery files like /llms.txt and /AI-USAGE.json, exposes structured data, and meets accessibility floors. Reply in three short sentences: (1) the verdict; (2) the strongest signal you see; (3) the most impactful single fix.';
+  'You are an MX-readiness reviewer. MX is a metadata standard that helps machines (LLMs, agents, automation) understand and act on web content. A page is MX-capable when it carries mx: governance meta tags, declares its AI authoring policy, serves discovery files like /llms.txt and /AI-USAGE.json, exposes structured data, and meets accessibility floors. Reply briefly with the verdict, the strongest signal you see, and the most impactful single fix.';
 
 function buildUserPrompt(pageInfo, findings, score) {
   const compact = compactFindings(findings, score);
-  return `Page: ${pageInfo.title || pageInfo.url}\nURL: ${pageInfo.url}\nDeterministic readiness score: ${score.value}/100.\n\nFindings (status:label):\n${compact}\n\nSummarise in three sentences. Reply with only the three sentences.`;
+  return `Page: ${pageInfo.title || pageInfo.url}\nURL: ${pageInfo.url}\nDeterministic readiness score: ${score.value}/100.\n\nFindings (status:label):\n${compact}\n\nSummarise briefly. Reply with the summary only.`;
 }
 
 async function generateSummary(pageInfo, findings, score, { forceOllama = false } = {}) {

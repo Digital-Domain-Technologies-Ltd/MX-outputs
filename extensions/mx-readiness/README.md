@@ -18,7 +18,7 @@ mx:
 
 # MX Readiness Inspector
 
-A Chrome extension that inspects the page you are currently looking at for the signals MX cares about (governance meta, AI disclosure, discovery files, structured data, Open Graph, accessibility, provenance), scores them deterministically, and asks Chrome's on-device **Gemini Nano** model for a three-sentence summary.
+A Chrome extension that inspects the page you are currently looking at for the signals MX cares about (governance meta, AI disclosure, discovery files, structured data, Open Graph, accessibility, provenance), scores them deterministically, and asks Chrome's on-device **Gemini Nano** model for a brief summary.
 
 There is a small piece of irony here. The Watching the Machines cluster on [mx.allabout.network/blog/drafts/watching-the-machines/](https://mx.allabout.network/blog/drafts/watching-the-machines/) is about Chrome silently installing a multi-gigabyte AI model to people's disks. This extension uses that same model — already on your machine, never asked to be — to grade pages on whether they meet the standard the cluster argues for.
 
@@ -185,7 +185,7 @@ Replace the 32-character ID with the value Chrome shows under the extension's na
 
 #### 5. Why the wildcard is reasonable for a dev machine
 
-`OLLAMA_ORIGINS="*"` allows any origin in any browser to talk to your local Ollama. The threat model that hides behind is: "a malicious site running in your browser can call your local model server." That is a real concern, but on a single-user developer machine three things are usually true:
+`OLLAMA_ORIGINS="*"` allows any origin in any browser to talk to your local Ollama. The threat model that hides behind is: "a malicious site running in your browser can call your local model server." That is a real concern, but on a single-user developer machine the picture looks different:
 
 - You are the only person running scripts on the machine, so "any local origin" really means "you and your tools."
 - A malicious site that already has a tab open is already inside your browser session, with all the cookies and storage that implies. The marginal capability of also using your local Ollama is small compared to what they could already do.
@@ -237,7 +237,7 @@ popup.js  ─┬─►  chrome.scripting.executeScript( content.js in active tab
                     │
                     └─►  session.prompt( compactFindings + score )
                            │
-                           └─►  three-sentence summary
+                           └─►  brief summary
 ```
 
 - `content.js` runs in the page's main world (DOM access) but has no host permission — it only reads.
