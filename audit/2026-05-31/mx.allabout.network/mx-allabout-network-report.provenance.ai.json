@@ -1,0 +1,876 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": "mx.allabout.network-2026-05-31",
+  "runRevision": 2,
+  "lastWriteAt": "2026-05-31T14:37:50.570Z",
+  "operator": "tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://mx.allabout.network",
+  "startedAt": "2026-05-31T13:52:21.681Z",
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 24-205 — Consumer Protections for Artificial Intelligence",
+      "version": "SB-24-205",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "mx-allabout-network-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "185ec35ab59b086bdef44b0db0d79a995fc3becf",
+      "shortSha": "185ec35"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.4.0",
+    "host": "toms-MacBook-Pro-304.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-05-31T13:52:22.006Z",
+      "stepId": "report.rewrite-1",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 1/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "948d55505e3c3ac793cf1902342ce07ab3753793815b4e9f6c0315edae341ddc",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:22.144Z",
+      "stepId": "report.rewrite-2",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 2/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "ede73d16d38b26ae667845fc7c9c3d7103594483e36ebd4ad0a513a6b0977e75"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "9d62dff73e41a13ba87a23882a3d4a1a2b57627c4ff5d55499fa62e2586589a2",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, we find the site delivers a strong experience for human visitors, with excellent performance, accessibility, and SEO scores.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:22.285Z",
+      "stepId": "report.rewrite-3",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 3/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "7f63f7042e0c674d8b500a4ad8538e52ab96c6a86d8914525548de0d2ecfa243"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "33f83885d74ae5837e6206d470d9742dafb0ba8515be0a41bddbe0bb82bc34a0",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, we find that agents can discover and parse the content, read structured data with high quality, and, thanks to a MX Readiness Level of 5 and present governance markers, can cite the pages as attested sources.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:22.424Z",
+      "stepId": "report.rewrite-4",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 4/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "3aacd9cda0b3a9a1717d481db531417d79d84b91570160a43eb931c4c9959bd4"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "18f889e3bbe9b59eb2e2e1be5492c0a0c35ee4436a9d5dbedc6ef397c29dd109",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We’ve found that across the audited set the site demonstrates a solid foundation in SEO, accessibility, security, and structured data, with scores of 91/100, 100/100, 5/5 headers, and 92/100 respectively. These strengths lay the groundwork for the targeted improvements that follow, enabling machines to parse and index content more effectively.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:22.567Z",
+      "stepId": "report.rewrite-5",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 5/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "e1b404d722ba0911aafc52d54984985685525f467de748486ae503765cecfb35"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "fb536664b0768b7a6df99ab6065a6f1f60c3843f01d9f90bf0b90d599d5dbc4d",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We identified a set of opportunities across the audited set, prioritised by impact: discovery readiness leads because it blocks downstream processes, followed by structured data quality, catalogue visibility, and MX stack completeness. These priorities reflect the relative scores and the direct influence each area has on machine discoverability and user experience.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:22.706Z",
+      "stepId": "report.rewrite-6",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 6/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4000
+      },
+      "inputs": {
+        "blockIndex": 6,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "05f372b140b9c6fc93f5814935d8a948d055c334bf7463e686ff3235c94ec4d5",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "fail",
+      "notes": "API call failed after retries; rewrite-failed marker in output"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:22.842Z",
+      "stepId": "report.rewrite-7",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 7/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 7,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "bdee3b0b01eb53997891e06fb1b394d7cdaed419fe6e623d53f5e994eb791838",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:22.979Z",
+      "stepId": "report.rewrite-8",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 8/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 8,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "2e1e938fc2e4afdbe37d56c0f3f211480f48c44593a98269ddd6f86424de95bc"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "27d5af8977f589591dbde035d8cf867a90424196d1a94eaf07abcb4b3fc4870c",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found a robots.txt file that declares a single sitemap reference. It disallows three paths, allowing all other agents to crawl the rest of the site.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:23.118Z",
+      "stepId": "report.rewrite-9",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 9/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 9,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "19be9a36e61084a0a0c6df207ecda49ab04461348a934102dbbab0ee78da9eb9"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "2603bf6704e8098abd820a1e10efdb185b0f93bb1243958d7b08e7142cd98589",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found the sitemap complete, declaring 115 URLs. It includes lastmod, changefreq, and priority attributes.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:23.253Z",
+      "stepId": "report.rewrite-10",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 10/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 10,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "60ae4e2fd18c8cfeb65ecbfc9b16090c4d0ca3eb1940f11f2a828cc1d4deda50"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "0363ba686ab2e56a6139264e1d9251e618637a0457f4cecbd8828f04d44e8ada",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found no llms.txt on the host; the file is missing a description, page inventory, and content policy, so machines that query the host for a structured content index receive no information. We recommend adding a well‑formed llms.txt to provide machines with a concise description, a page inventory, and a content policy.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:23.390Z",
+      "stepId": "report.rewrite-11",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 11/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 11,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "e24104c7e77b227e5553c7722a568f600233e98eaa697cab45f084ac777a29eb"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "e08eead0061b7f3733230468d3d276cde49e118549d4d0948cfa917884dfdc66",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found no llms‑full.txt at the root of mx.allabout.network; the file is missing, not referenced in the sitemap or homepage, and returned a 404 status. Adding llms‑full.txt would be advisable if the site hosts a substantial amount of content beyond the pages we audited, but the current audit sample does not confirm such depth.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:23.530Z",
+      "stepId": "report.rewrite-12",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 12/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 12,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "e6a49f45818a75e01ee4ec0e80f744e28bd669966738c9677424a042d2f16573"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "6b3bfc18d925d6a0f65c8c1598c1e3f9117886f0981d981e83d59f40912bda61",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "MX Compatible for this site type; Purchase Confidence is N/A",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:23.669Z",
+      "stepId": "report.rewrite-13",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 13/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 13,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "8ab1b52ed3534e9401553e43cc2ef3098a70392f4d6de4c0df1d420008420d1b"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "d751a209b5f67a09639d8b087faea375e69c23a2bea81719d60df87e28311b11",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We did not surface data sufficient to assess whether an edge capture pattern is in place across the audited pages. A deeper review would extend that lens.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:23.804Z",
+      "stepId": "report.rewrite-14",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 14/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 14,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "9fcb3d68144180b29576c8292b15e71c520d7c3624b55911f898dec208090d88"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "562d0726ebfb6bd9d670fb49ba6c54084e53d12512dce6e1266c860a5d14a432",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We identified a single page with inline tag bloat, a resilience check that can make it harder for machines to parse or render efficiently. By moving inline styles and scripts to external files on that page, we can keep the site resilient and improve machine readability. This small change is an opportunity to strengthen the overall resilience of the audited set.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:23.940Z",
+      "stepId": "report.rewrite-15",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 15/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 15,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "5b06fa27302f96159537bffe29bbf060fefd6adca985fc8c5676ddd23ea39982",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:24.080Z",
+      "stepId": "report.rewrite-16",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 16/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 16,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "f1eafcbf5db2b6e6191e419bbbcbb27a229799c76dc34e8944667c322df2ff33"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "bede091690cdd1e13b8296df6507ccf7723158ba0a9568a5a523b169c6d792d6",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "The audited set shows consistent metadata patterns across pages, with no organisation‑name or canonical‑URL divergence flagged by the consistency check.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:24.218Z",
+      "stepId": "report.rewrite-17",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 17/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 17,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "a4dee52472ab986e9b9fec1a5129ae058331975e2ade6a3c2edbd7cb25d76c21"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "8f7a301d08dbcdce7102e633bcea8fd59d0c23a0e4da8ca5e875d8d2826d6d63",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We note that accessibility legislation worldwide converges on ISO 14289‑1 (PDF/UA) as the technical baseline, with the EAA Directive (EU) 2019/882 in force 28 June 2025 serving as a precisely codified example, while an untagged PDF remains invisible to machines. Machines such as search crawlers, AI systems, and automated pipelines cannot extract text, entities, or structure from a scanned or image‑based PDF, but a tagged PDF with a proper structure tree becomes machine‑readable in the same way s",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:24.357Z",
+      "stepId": "report.rewrite-18",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 18/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 18,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "4c97d5e2d59e41b13bf56d338845d496125ea51da57d28102a9cae7e6c02a7fe",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-05-31T13:52:24.497Z",
+      "stepId": "report.rewrite-19",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 19/19 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 19,
+        "blockCount": 19,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-31/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "5bad21871fe8b35a2dc3a428eaf1f479dee1e48c1e97856417ddfe14b170ae85"
+      },
+      "rubricHash": "a0a4581c16202e3afb5afd1116f313417080e88c7c0bdced81e18950652a6e31",
+      "promptHash": "ba7460404528ae8fba7b3359b336d1585fb80dbfa680b4880f539f7058b9a844",
+      "inputHashes": [
+        {
+          "hash": "e673fb48f88432ae9fef725d0f0c23b2497e62ebb265df73b70025f53a6304d9",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found 407 images across the audited set, of which 404 are WebP, 3 are SVG, and none are PNG, JPEG, or other formats. Alt text is present on 346 images (85.0%), leaving 61 images without alt text.  \n\nWe observed that 271 images use loading=\"lazy\", 136 use loading=\"eager\", and none lack a loading attribute, so every image has an explicit loading strategy. Because no image omits the loading attribute, we do not have any cases where the browser defaults to eager loading.",
+      "outcome": "pass"
+    }
+  ]
+}
