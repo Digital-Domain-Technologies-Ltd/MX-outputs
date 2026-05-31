@@ -35,7 +35,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/blog/drafts/watching-with-the-machines.html
   productionCanonical: https://mx.allabout.network/blog/watching-with-the-machines.html
 x-mx-ai:
-  summary: "A blog post about the MX Readiness Inspector browser extension. The extension inspects any page for MX-readiness signals and uses the browser's on-device language model (Chrome's Gemini Nano, Edge's Phi-Silica, or local Ollama as a universal fallback) to summarise where the page stands. The post ties the extension to the Watching the Machines cluster's argument that the same model Chrome installed without asking can be used for the very work the cluster argues for: machine-side legibility, run locally, no data leaving the device."
+  summary: "A blog post about the MX Readiness Inspector browser extension. The extension inspects any page for MX-readiness signals and uses the browser's on-device language model (Chrome's Gemini Nano, Edge's Phi-Silica, or local Ollama as a universal fallback) to summarise where the page stands. The post ties the extension to the Watching the Machines series' argument that the same model Chrome installed without asking can be used for the very work the series argues for: machine-side legibility, run locally, no data leaving the device."
   key_concepts:
     - on-device MX-readiness inspection
     - the silent install used for legitimate work
@@ -161,7 +161,7 @@ x-mx-ai:
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
           <div class="introduction-text" role="presentation">
-            <p class="introduction-message">A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has. The same model the Silent Install cluster was about, used for the work the cluster argues for.</p>
+            <p class="introduction-message">A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has. The same model the Silent Install series was about, used for the work the series argues for.</p>
             <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
           </div>
         </div>
@@ -182,13 +182,13 @@ x-mx-ai:
           </div>
         </header>
 
-        <p>The <a href="/blog/drafts/watching-the-machines/google-nano-model/">Silent Install</a> cluster argued one thing across three posts. Trust has to run in both directions. If the web is going to make content legible to machines, the machines have to be legible back: who deployed them, what they may do, what they actually did. The cluster's exhibit was Chrome quietly writing a four-gigabyte AI model to people's disks. The fix the cluster pointed at was attestation and a record.</p>
+        <p>The <a href="/blog/drafts/watching-the-machines/google-nano-model/">Silent Install</a> series argued one thing across all of it. Trust has to run in both directions. If the web is going to make content legible to machines, the machines have to be legible back: who deployed them, what they may do, what they actually did. The exhibit was Chrome quietly writing a four-gigabyte AI model to people's disks. The fix the series pointed at was attestation and a record.</p>
 
         <p>This is the same model, used for the thing it should have been used for.</p>
 
         <h2 id="what-it-does">What it does</h2>
 
-        <p>Click an icon in the browser toolbar on any web page. A small panel opens. It reads the page's HTML for the signals MX cares about, asks the page's own origin whether it serves the discovery files machines look for, and asks the on-device language model to write a three-sentence summary of how MX-ready the page is.</p>
+        <p>Click an icon in the browser toolbar on any web page. A small panel opens. It reads the page's HTML for the signals MX cares about, asks the page's own origin whether it serves the discovery files machines look for, and asks the on-device language model to write a brief summary of how MX-ready the page is.</p>
 
         <p>No part of the inspection sends the page anywhere. The model that writes the summary is whichever the browser brought along. Chrome ships <strong>Gemini Nano</strong>, Edge ships <strong>Phi-Silica</strong> on Copilot+ PCs, and the panel uses whichever one is enabled. On any browser without an in-built model, the panel reaches a local <strong>Ollama</strong> server if Ollama is installed, and uses whichever model the operator has pulled.</p>
 
@@ -213,9 +213,9 @@ x-mx-ai:
 
         <h2 id="model-paths">Three places the summary can come from</h2>
 
-        <p>The summary panel writes the verdict in three sentences. Where that prose comes from depends on what the browser exposes:</p>
+        <p>The summary panel writes the verdict. Where that prose comes from depends on what the browser exposes:</p>
 
-        <p><strong>Chrome with the Prompt API flag.</strong> The on-device Gemini Nano model answers. Chrome installed the weights through its component-update system, which is also the subject of the cluster. On a machine where Nano has been installed, this is the lightest and fastest path because the model is already in memory.</p>
+        <p><strong>Chrome with the Prompt API flag.</strong> The on-device Gemini Nano model answers. Chrome installed the weights through its component-update system, which is also the subject of the series. On a machine where Nano has been installed, this is the lightest and fastest path because the model is already in memory.</p>
 
         <p><strong>Edge on a Copilot+ PC.</strong> Microsoft's Phi-Silica answers, also locally. The Edge surface (<code>self.ai.assistant</code>) has the same shape as Chrome's, so the panel does not care which one fires.</p>
 
@@ -235,13 +235,13 @@ x-mx-ai:
 
         <p>Regulation: the MX audit pipeline already runs in a local-LLM-first configuration because regulated industries (financial, healthcare, public sector) cannot ship client data across vendor sandboxes for inference. The extension follows the same rule. The Ollama fallback is the same lever the audit pipeline pulls.</p>
 
-        <h2 id="cluster-tie-back">Where this fits</h2>
+        <h2 id="where-this-fits">Where this fits</h2>
 
         <p>The MX audit pipeline is the full system: dozens of inputs, weighted scoring, written reports, accessibility conformance, provenance sidecars, gates against drift. The panel is its lightweight cousin. The audit is for client engagements where you want the report. The panel is for ten seconds on the page in front of you when someone asks "is this MX-ready?"</p>
 
-        <p>The signals the panel grades are the signals the cluster argued for. The magic-header meta tag and the governance triplet are the page's way of telling a machine what it is. The AI disclosure is the page's account of how it was authored. The discovery files at the origin are the publisher's offer to be machine-legible at the site level. The provenance markers are the chain a regulator or an inspector can walk back to the source. None of these are theoretical. They are the things a machine reading the web on someone's behalf either finds or has to guess about. Guessing, in MX terms, is the part the standard exists to remove.</p>
+        <p>The signals the panel grades are the signals the series argued for. The magic-header meta tag and the governance triplet are the page's way of telling a machine what it is. The AI disclosure is the page's account of how it was authored. The discovery files at the origin are the publisher's offer to be machine-legible at the site level. The provenance markers are the chain a regulator or an inspector can walk back to the source. None of these are theoretical. They are the things a machine reading the web on someone's behalf either finds or has to guess about. Guessing, in MX terms, is the part the standard exists to remove.</p>
 
-        <p>The Silent Install cluster pointed at a browser writing a model to a user's disk without asking. The lesson was not that on-device inference is wrong. The lesson was that the relationship between the person and the software acting on their behalf has to run in both directions. This extension is one small step at the page level: a local read of how legible a single page is, run on the same kind of on-device model that started the conversation. Installed carefully, with a button that names the boundary it runs inside, used to make a thing more legible rather than less.</p>
+        <p>The Silent Install series pointed at a browser writing a model to a user's disk without asking. The lesson was not that on-device inference is wrong. The lesson was that the relationship between the person and the software acting on their behalf has to run in both directions. This extension is one small step at the page level: a local read of how legible a single page is, run on the same kind of on-device model that started the conversation. Installed carefully, with a button that names the boundary it runs inside, used to make a thing more legible rather than less.</p>
 
         <h2 id="how-to-get-it">Where to find it</h2>
 
