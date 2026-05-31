@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "MX Comprehension Probe - demo pages"
+description: "Landing page for the MozFest demo: two fictional treatment pages, one with a full machine-readable layer and one stripped of it, read by the same local AI through the MX Comprehension Probe."
+author: "Tom Cranstoun"
+created: 2026-05-31
+modified: 2026-05-31
+version: "1.0"
+
+mx:
+  status: active
+  contentType: info-doc
+  audience: [humans, machines]
+  aiAssistance: welcome
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/extensions/mx-comprehension/demo/index.html
+  runbook: "Open this with the MX Comprehension Probe extension loaded, then run the same question against both linked pages to show facts versus guesses."
+---
+-->
+  <!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MX Comprehension Probe - demo pages</title>
+  <meta name="description" content="Two fictional treatment pages, one structured and one stripped, read by the same local AI to show what a machine can and cannot work out.">
+  <meta name="author" content="Tom Cranstoun">
+
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="info-doc">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <main class="page">
+    <p class="fiction-banner">Fictional demo content - not medical advice. Both pages describe a made-up medicine. The planted dosage error exists to be caught.</p>
+
+    <h1>Facts, or a guess</h1>
+    <p class="lede">Two pages describe the same fictional medication. A human understands both. A machine does not: one page hands it the facts, the other hands it a guess.</p>
+
+    <p>Load the <strong>MX Comprehension Probe</strong> extension, open each page, and ask the same question of both. The probe reads only what the page carries and answers from that alone. It never looks for MX. The difference in the answer is the page's doing.</p>
+
+    <div class="compare">
+      <a class="card" href="treatment-structured.html">
+        <p class="tag full">Structured page</p>
+        <h3>Full machine-readable layer</h3>
+        <p>Carries per-section authorship and clinical review, a clinician-verified dose, and an explicit disclosure of the one AI-drafted paragraph. The machine answers with a list of facts.</p>
+      </a>
+      <a class="card" href="treatment-hostile.htm">
+        <p class="tag none">Stripped page</p>
+        <h3>The hostile web</h3>
+        <p>Same words for a human, but no authorship, no review, no disclosure, no structured data. Facts buried in tabs and images, padded with cookie walls and promos. The machine can only guess.</p>
+      </a>
+    </div>
+
+    <h2>Ask both pages the same three questions</h2>
+    <ol class="questions">
+      <li>Who wrote this page, when, and has a qualified person reviewed it?</li>
+      <li>Is the dosage on this page safe to act on - who verified it and when?</li>
+      <li>Was any part of this written by AI? Which part, and by which model?</li>
+    </ol>
+
+    <h2>Run it</h2>
+    <p>Serve this folder over localhost, then open each page in its own tab:</p>
+    <p><code>python3 -m http.server 8000</code> from <code>mx-outputs/extensions/mx-comprehension/demo</code></p>
+    <p>Point an on-device model at it: Chrome or Edge built-in, or local Ollama with <code>OLLAMA_ORIGINS="*"</code> set. Setup is in the extension README.</p>
+
+    <footer>
+      <p>Demo for the MX Comprehension Probe. Built for the MozFest 2026 talk, "Wilding the metadata layer".</p>
+    </footer>
+  </main>
+</body>
+</html>
