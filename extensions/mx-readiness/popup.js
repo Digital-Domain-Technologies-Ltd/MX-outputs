@@ -40,22 +40,6 @@ let currentPageInfo = null;
 let currentScore = null;
 let currentSummary = null;
 
-// Local Ollama runtime. The default endpoint is the one Ollama serves
-// on after `ollama serve`. The preference list orders models by latency
-// for popup-sized prompts; the chooser picks the first that is locally
-// pulled. Hardcoded here so the extension carries no settings page; an
-// operator who wants a different default edits these constants.
-const OLLAMA_ENDPOINT = 'http://localhost:11434';
-const OLLAMA_MODEL_PREFERENCES = [
-  /^llama3\.2:3b/i,
-  /^llama3\.2:1b/i,
-  /^qwen2\.5:3b/i,
-  /^phi3\.5:3\.8b/i,
-  /^llama3\.1:8b/i,
-  /^mistral:7b/i,
-  /^gpt-oss/i,
-];
-
 async function getActiveTab() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   return tab;
@@ -151,25 +135,7 @@ function wireTabs() {
 // Toolbar --------------------------------------------------------------
 
 function wireToolbar() {
-  const forceBtn = $('#btn-force-ollama');
   const copyBtn = $('#btn-copy');
-
-  forceBtn.addEventListener('click', async () => {
-    if (!currentPageInfo || !allFindings.length) return;
-    const originalLabel = forceBtn.textContent;
-    forceBtn.disabled = true;
-    forceBtn.textContent = 'Asking Ollama…';
-    renderSummary({
-      score: currentScore,
-      summaryText: 'Force-Ollama requested. Querying local Ollama…',
-      summarySource: '',
-    });
-    const summary = await generateSummary(currentPageInfo, allFindings, currentScore, { forceOllama: true });
-    currentSummary = summary;
-    renderSummary({ score: currentScore, summaryText: summary.text, summarySource: summary.source });
-    forceBtn.disabled = false;
-    forceBtn.textContent = originalLabel;
-  });
 
   copyBtn.addEventListener('click', async () => {
     const text = formatForClipboard();
@@ -227,27 +193,21 @@ function formatForClipboard() {
 
 // On-device language-model integration --------------------------------
 //
-// Two paths, tried in order:
+// Tries browser on-device Prompt API. Chrome and Edge expose an on-device
+// model under different globals. We feature-detect each surface and use the
+// first that exposes a working .create():
 //
-//   1. Browser on-device Prompt API. Chrome and Edge expose an on-device
-//      model under different globals. We feature-detect each surface and
-//      use the first that exposes a working .create():
+//   self.LanguageModel              — WICG-aligned global.
+//                                      Chrome 131+, Edge 138+ on
+//                                      Copilot+ PCs.
+//   self.ai.languageModel           — Chrome origin-trial namespace.
+//   self.ai.assistant               — Edge's earlier Prompt API
+//                                      surface (Phi-Silica on
+//                                      Copilot+ PCs).
+//   self.chrome.aiOriginTrial.*     — Chrome legacy.
 //
-//        self.LanguageModel              — WICG-aligned global.
-//                                          Chrome 131+, Edge 138+ on
-//                                          Copilot+ PCs.
-//        self.ai.languageModel           — Chrome origin-trial namespace.
-//        self.ai.assistant               — Edge's earlier Prompt API
-//                                          surface (Phi-Silica on
-//                                          Copilot+ PCs).
-//        self.chrome.aiOriginTrial.*     — Chrome legacy.
-//
-//   2. Local Ollama at http://localhost:11434. Used when no browser API
-//      is exposed, or when the operator clicks "Force Ollama". The model
-//      is whichever the user has pulled, preferring small/fast (see
-//      OLLAMA_MODEL_PREFERENCES).
-//
-// All paths return { text, source } so the renderer is single-pathed.
+// Returns { text, source } so the renderer is single-pathed. If no browser
+// model is available, shows a note explaining how to enable it.
 
 const SYSTEM_PROMPT =
   'You are an MX-readiness reviewer. MX is a metadata standard that helps machines (LLMs, agents, automation) understand and act on web content. A page is MX-capable when it carries mx: governance meta tags, declares its AI authoring policy, serves discovery files like /llms.txt and /AI-USAGE.json, exposes structured data, and meets accessibility floors. Reply briefly with the verdict, the strongest signal you see, and the most impactful single fix.';
@@ -257,12 +217,13 @@ function buildUserPrompt(pageInfo, findings, score) {
   return `Page: ${pageInfo.title || pageInfo.url}\nURL: ${pageInfo.url}\nDeterministic readiness score: ${score.value}/100.\n\nFindings (status:label):\n${compact}\n\nSummarise briefly. Reply with the summary only.`;
 }
 
-async function generateSummary(pageInfo, findings, score, { forceOllama = false } = {}) {
-  if (!forceOllama) {
-    const browser = await tryBrowserModel(pageInfo, findings, score);
-    if (browser) return browser;
-  }
-  return tryOllama(pageInfo, findings, score, { forced: forceOllama });
+async function generateSummary(pageInfo, findings, score) {
+  const browser = await tryBrowserModel(pageInfo, findings, score);
+  if (browser) return browser;
+  return {
+    text: 'Score ' + score.value + '/100. No browser on-device model is available. See browser setup instructions at chrome://extensions.',
+    source: 'fallback (no model available)',
+  };
 }
 
 async function tryBrowserModel(pageInfo, findings, score) {
@@ -282,7 +243,7 @@ async function tryBrowserModel(pageInfo, findings, score) {
     } catch (_) { /* keep walking the chain */ }
   }
 
-  // No browser surface exposed at all. Caller falls through to Ollama.
+  // No browser surface exposed at all. Return null so caller knows.
   if (!ModelClass) return null;
 
   let availability = 'available';
@@ -295,7 +256,7 @@ async function tryBrowserModel(pageInfo, findings, score) {
   } catch (_) { /* assume available */ }
 
   // Model surface exists but the runtime says it's not ready (downloading,
-  // unsupported hardware). Bubble through to Ollama rather than fail here.
+  // unsupported hardware). Return null so caller can show a message.
   if (availability === 'unavailable' || availability === 'no') return null;
 
   let session;
@@ -324,75 +285,6 @@ async function tryBrowserModel(pageInfo, findings, score) {
     return {
       text: `Score ${score.value}/100. ${chosen.vendor} raised: ${e.message}`,
       source: `fallback (${chosen.vendor} prompt error)`,
-    };
-  }
-}
-
-// Ollama fallback ------------------------------------------------------
-//
-// When no browser API exposes an on-device model (or when the operator
-// clicks "Force Ollama"), the extension reaches a local Ollama at
-// http://localhost:11434. The model is whichever the user has pulled —
-// the chooser prefers small/fast (3B / 1B class) but falls back to any
-// available. If Ollama is not running, the result names the install
-// command rather than leaving the user guessing.
-
-async function pickOllamaModel() {
-  const r = await fetch(`${OLLAMA_ENDPOINT}/api/tags`, { method: 'GET' });
-  if (!r.ok) throw new Error(`Ollama returned ${r.status}`);
-  const data = await r.json();
-  const models = (data.models || []).map((m) => m.name);
-  if (!models.length) throw new Error('Ollama is running but no models are pulled. Run: ollama pull llama3.2:3b');
-  for (const pref of OLLAMA_MODEL_PREFERENCES) {
-    const match = models.find((m) => pref.test(m));
-    if (match) return match;
-  }
-  return models[0];
-}
-
-async function tryOllama(pageInfo, findings, score, { forced = false } = {}) {
-  let model;
-  try {
-    model = await pickOllamaModel();
-  } catch (e) {
-    const prefix = forced
-      ? 'Force-Ollama requested but Ollama is unreachable.'
-      : 'No browser on-device model was available, and Ollama is unreachable.';
-    return {
-      text:
-        `Score ${score.value}/100. ${prefix} ${e.message}. ` +
-        `To install: brew install ollama && ollama pull llama3.2:3b && ollama serve. ` +
-        `For the extension to reach it, also set: launchctl setenv OLLAMA_ORIGINS "*" (or run OLLAMA_ORIGINS="*" ollama serve).`,
-      source: 'fallback (Ollama unreachable)',
-    };
-  }
-
-  const body = {
-    model,
-    stream: false,
-    messages: [
-      { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: buildUserPrompt(pageInfo, findings, score) },
-    ],
-  };
-
-  try {
-    const r = await fetch(`${OLLAMA_ENDPOINT}/api/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const data = await r.json();
-    const text = (data.message?.content || '').trim();
-    return {
-      text: text || `(${model} returned an empty response)`,
-      source: `Ollama (${model})`,
-    };
-  } catch (e) {
-    return {
-      text: `Score ${score.value}/100. Ollama ${model} raised: ${e.message}. Check that Ollama allows the extension's origin: OLLAMA_ORIGINS="*" ollama serve.`,
-      source: `fallback (Ollama ${model} error)`,
     };
   }
 }
@@ -456,7 +348,7 @@ async function main() {
     summarySource: '',
   });
 
-  // Browser model first; Ollama fallback if no browser API or model unready.
+  // Ask the on-device model to summarise the findings.
   const summary = await generateSummary(currentPageInfo, allFindings, currentScore);
   currentSummary = summary;
   renderSummary({

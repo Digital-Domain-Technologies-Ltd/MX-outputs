@@ -11,7 +11,7 @@ mx:
   contentType: info-doc
   audience: [humans]
   x-mx-category: mx-tools
-  tags: [chrome-extension, on-device, comprehension, mozfest, demo, ollama, gemini-nano]
+  tags: [chrome-extension, on-device, comprehension, mozfest, demo, gemini-nano]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/extensions/mx-comprehension/README.md
   runbook: "Load the unpacked extension at chrome://extensions, open a page, type a question, and the on-device model answers from the page content alone. Pair it with the demo pages in ./demo to show a structured page answering with facts where a stripped page can only guess."
 ---
@@ -72,20 +72,8 @@ The probe needs a language model. It tries the same sources, in the same order, 
 | 2 | Chrome | `self.ai.languageModel` |
 | 3 | Edge | `self.ai.assistant` (Phi-Silica) |
 | 4 | Chrome | `self.chrome.aiOriginTrial.languageModel` |
-| 5 | Local Ollama | `http://localhost:11434/api/chat` |
 
-For the venue, Ollama is the reliable path because it runs offline and you control the model. Setup:
-
-```
-brew install ollama
-ollama pull gpt-oss:20b          # the audit pipeline's default; pull a small fallback too, e.g. llama3.2:3b
-launchctl setenv OLLAMA_ORIGINS "*"   # let the chrome-extension:// origin through Ollama's CORS check
-ollama serve
-```
-
-The `OLLAMA_ORIGINS` step is the one that catches every first-time user: Ollama answers `curl` fine but rejects the extension's `chrome-extension://` origin until you set it. The Readiness Inspector README has the full [CORS explainer](../mx-readiness/README.md#why-ollama_origins-matters--the-cors-gotcha-in-full); it applies here unchanged.
-
-Tick **Force Ollama** in the popup to skip the browser model and go straight to Ollama (useful for forcing the regulated-industry path, or comparing `gpt-oss:20b` against Chrome's smaller Nano).
+On Chrome and Edge without an on-device model available, the extension shows a fallback message with setup instructions.
 
 ## How it works
 
@@ -94,7 +82,7 @@ popup.js  ──►  chrome.scripting.executeScript( content.js in active tab )
            │       └─►  returns { payload, counts }  (visible text + JSON-LD + meta + frontmatter)
            │
            └─►  MXLocalModel.generate( systemPrompt, payload + question )   [lib/ai-client.js]
-                    └─►  browser on-device model, else local Ollama
+                    └─►  browser on-device model
                            └─►  answer, drawn only from the page
 ```
 
@@ -108,7 +96,7 @@ The system prompt tells the model to answer only from the page and to say plainl
 
 | File | Role |
 |---|---|
-| `manifest.json` | MV3 manifest. `activeTab` + `scripting`; host permission for localhost only (the Ollama endpoint). |
+| `manifest.json` | MV3 manifest. `activeTab` + `scripting`. |
 | `popup.html` | Popup UI: question box, preset chips, answer panel, "what the machine saw" detail. |
 | `popup.css` | Popup styles (light + dark, amber accent so it reads as the Readiness Inspector's sibling). |
 | `popup.js` | Orchestrator: read the page, build the prompt, call the model, render. |
@@ -119,9 +107,8 @@ The system prompt tells the model to answer only from the page and to say plainl
 ## Permissions
 
 - `activeTab` + `scripting` — read the current tab and inject the reader when you click Ask.
-- `http://localhost/*`, `http://127.0.0.1/*` host permission — reach a local Ollama. No `<all_urls>`, no origin probing; this tool does not fetch discovery files.
 
-No tabs history, no storage, no remote calls beyond the local model endpoint.
+No tabs history, no storage, no remote calls. All inference runs locally in the browser.
 
 ## Known limits
 

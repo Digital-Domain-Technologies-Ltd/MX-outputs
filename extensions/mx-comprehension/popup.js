@@ -4,8 +4,8 @@
 //   1. Find the active tab.
 //   2. Inject content.js to read the page's machine-visible payload.
 //   3. Build a prompt: the page payload + the user's free-text question.
-//   4. Ask the on-device model (lib/ai-client.js: browser model first, local
-//      Ollama fallback) to answer using only that payload.
+//   4. Ask the on-device model (lib/ai-client.js: browser model) to answer
+//      using only that payload.
 //   5. Render the answer and the "what the machine saw" detail.
 //
 // The contrast the demo turns on lives entirely in step 2's payload. A
@@ -100,7 +100,6 @@ async function ask() {
   }
 
   const askBtn = $('#btn-ask');
-  const forceOllama = $('#force-ollama').checked;
 
   askBtn.disabled = true;
   setStatus('Reading the page…');
@@ -145,9 +144,9 @@ async function ask() {
   currentPayload = page;
   renderPayloadDetail(page);
 
-  setStatus(forceOllama ? 'Asking local Ollama…' : 'Asking the on-device model…');
+  setStatus('Asking the on-device model…');
   const userPrompt = buildUserPrompt(page.payload, question);
-  const answer = await MXLocalModel.generate(SYSTEM_PROMPT, userPrompt, { forceOllama });
+  const answer = await MXLocalModel.generate(SYSTEM_PROMPT, userPrompt);
   lastAnswer = answer;
 
   setStatus('');
