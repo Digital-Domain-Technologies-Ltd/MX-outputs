@@ -80,3 +80,28 @@ timestamp,phase,step,decision_type,decision,rationale,data_source,confidence,out
 2026-06-01T14:43:51.206Z,report,2,placeholder_fill,rewrite-report.js: finished with errors,Exit 1 — report written with failure markers,audit-pipeline.js,medium,warn
 2026-06-01T14:43:51.282Z,report,2.5,placeholder_fill,Engagement table regenerated,Deterministic rebuild from priority blocks — no LLM drift possible,regenerate-engagement-table.js,high,pass
 2026-06-01T14:43:51.357Z,report,end,phase_end,report phase ended,infill=ok rewrite=warn,audit-pipeline.js,high,warn
+2026-06-01T15:37:33.960Z,collect,start,phase_start,collect phase started,url=https://dotfusion.com pages=10 client=dotfusion-com date=2026-06-01,audit-pipeline.js,high,n-a
+2026-06-01T15:37:33.960Z,collect,0,sitemap_discovery,audit-pipeline.js collect invoked,url=https://dotfusion.com pages=10 forceFresh=false client=dotfusion-com date=2026-06-01,audit-pipeline.js,high,n-a
+2026-06-01T15:37:33.961Z,collect,1,anomaly,check-egress.js invoked,url=https://dotfusion.com,check-egress.js,high,n-a
+2026-06-01T15:37:34.182Z,collect,1,anomaly,Egress clean,No VPN or DNS filter detected,check-egress.js,high,pass
+2026-06-01T15:37:34.182Z,collect,2,sitemap_discovery,check-wellknown.js invoked,url=https://dotfusion.com,check-wellknown.js,high,n-a
+2026-06-01T15:37:34.383Z,collect,2,sitemap_discovery,Well-known probe passed,Exit 0,check-wellknown.js,high,pass
+2026-06-01T15:37:34.392Z,collect,3,anomaly,Results dir cleared: mx-outputs/audit/2026-06-01/dotfusion.com/.infill,"Fresh run — stale CSVs removed, cache preserved",audit-pipeline.js,high,pass
+2026-06-01T15:37:34.392Z,collect,3a,sitemap_discovery,check-ai-usage.js invoked,url=https://dotfusion.com,check-ai-usage.js,high,n-a
+2026-06-01T15:37:34.595Z,collect,3a,sitemap_discovery,AI Usage Declaration probe passed,Exit 0,check-ai-usage.js,high,pass
+2026-06-01T15:37:35.798Z,collect,4,sitemap_discovery,Sitemap: https://dotfusion.com/sitemap.xml,Responded HTTP 200 to HEAD request,https://dotfusion.com/sitemap.xml,high,pass
+2026-06-01T15:37:35.799Z,collect,5,sitemap_discovery,mx-reginald/audit/index.js invoked,entry=https://dotfusion.com/sitemap.xml htmlPagesRequested=10 crawlCap=12 (buffer=2 for non-HTML discovery files) forceFresh=false,mx-reginald/audit/index.js,high,n-a
+2026-06-01T15:37:40.975Z,collect,5,score_summary,Crawler complete,Exit 0,mx-outputs/audit/2026-06-01/dotfusion.com/.infill,high,pass
+2026-06-01T15:37:40.975Z,collect,5a,sitemap_discovery,discover-urls.js invoked,url=https://dotfusion.com out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/dotfusion.com/.infill/discovery.json,discover-urls.js,high,n-a
+2026-06-01T15:37:41.924Z,collect,5a,sitemap_discovery,Sitemap grading complete,discovery.json written — SITEMAP_* placeholders will be filled at report time,/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/dotfusion.com/.infill/discovery.json,high,pass
+2026-06-01T15:37:41.924Z,collect,5b,sitemap_discovery,topup-pdfs-from-sitemap.js invoked,results=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/dotfusion.com/.infill,topup-pdfs-from-sitemap.js,high,n-a
+2026-06-01T15:37:41.994Z,collect,5b,sitemap_discovery,Sitemap PDF topup complete,no append count parsed,topup-pdfs-from-sitemap.js,high,pass
+2026-06-01T15:37:41.995Z,collect,5c,sitemap_discovery,capture-pdf-sample.js invoked,url=https://dotfusion.com out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/dotfusion.com/.infill,capture-pdf-sample.js,high,n-a
+2026-06-01T15:37:42.070Z,collect,5c,sitemap_discovery,PDF accessibility sample captured,no pdfCount parsed,capture-pdf-sample.js,high,pass
+2026-06-01T15:37:42.070Z,collect,6,anomaly,error-page-test.js invoked,url=https://dotfusion.com,error-page-test.js,high,n-a
+2026-06-01T15:37:42.602Z,collect,6,anomaly,Error page test passed,Exit 0,error-page-test.js,high,pass
+2026-06-01T15:37:42.603Z,collect,7,agent_access,agent-access-test.js invoked,url=https://dotfusion.com out=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/dotfusion.com/.infill,agent-access-test.js,high,n-a
+2026-06-01T15:38:04.202Z,collect,7,agent_access,Agent access test complete,Exit 0 — agent-access.json written to /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/dotfusion.com/.infill,agent-access-test.js,high,pass
+2026-06-01T15:38:04.203Z,collect,8,score_summary,check-served-rendered-gap.js invoked,resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/dotfusion.com/.infill,check-served-rendered-gap.js,high,n-a
+2026-06-01T15:38:04.280Z,collect,8,score_summary,No significant served/rendered gap,All AI suitability dimensions within 5-point threshold,mx-outputs/audit/2026-06-01/dotfusion.com/.infill/audit_averages.json,high,pass
+2026-06-01T15:38:04.281Z,collect,8a,anomaly,slowest-page-probe.js invoked,resultsDir=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/dotfusion.com/.infill method=cache-busted-x3,slowest-page-probe.js,high,n-a
