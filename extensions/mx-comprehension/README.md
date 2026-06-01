@@ -3,8 +3,8 @@ title: "MX Comprehension Probe — Chrome Extension"
 description: "Chrome extension that asks a local AI model a free-text question about the current page, reading only what any machine can see. The MX-agnostic companion to the MX Readiness Inspector, built for the MozFest 'facts vs guesses' demo."
 author: Tom Cranstoun
 created: 2026-05-31
-modified: 2026-05-31
-version: "0.1.0"
+modified: 2026-06-01
+version: "0.2.0"
 
 mx:
   status: active
@@ -25,15 +25,29 @@ A Chrome extension that asks the page you are on a plain-language question and a
 
 The point of keeping it MX-agnostic is honesty. The probe never rewards a page for carrying MX. It just reads what is there. A page that carries provenance, authorship, and verified facts hands the model a list it can quote. A page that carries none hands it bare prose with the safety-critical facts missing. The difference in the answer is the page's doing, not the tool's.
 
+## Usage
+
+1. **Open a page** you want to ask about.
+2. **Click "Ask the model"** (or type a question first).
+3. The extension **reads the page** and **generates 3 relevant questions** using the on-device model. These appear as clickable buttons.
+4. **Pick a suggestion** or type your own question.
+5. **Click "Ask the model"** again to get an answer.
+6. **Copy the Q&A** to clipboard (includes both question and answer with source attribution).
+
+The copy button formats the output as:
+
+```
+Q: <your question>
+
+A (<model source>):
+<the answer>
+```
+
 ## The demo it was built for
 
 The `demo/` folder holds a matched pair of pages for the MozFest 2026 talk ("Wilding the metadata layer"). Both describe the same fictional medication. One carries a full machine-readable layer; the other mirrors the real web, with the same words for a human but no structure for a machine.
 
-Ask both pages the same question:
-
-- "Who wrote this page, when, and has a qualified person reviewed it?"
-- "Is the dosage on this page safe to act on - who verified it and when?"
-- "Was any part of this written by AI? Which part, and by which model?"
+Open both pages and let the suggestion engine generate questions for each. The structured page's suggested questions will be more specific (it can see provenance, authorship, verification); the stripped page's suggestions will be more generic (less data to work with). Then ask any of the suggested questions on both pages:
 
 The structured page answers each as a list of facts. The stripped page can only say the page does not provide them. That contrast is the talk's closing argument: the vocabulary that lets a machine read AI-disclosed content is being written now, in public or behind a vendor wall.
 
@@ -77,30 +91,41 @@ On Chrome and Edge without an on-device model available, the extension shows a f
 
 ## How it works
 
+When you click "Ask the model", the extension follows this sequence:
+
+1. **Read the page** — Inject `content.js` into the active tab to collect visible text, JSON-LD, meta tags, and source frontmatter (MX-agnostic).
+2. **Generate suggestions** — Feed the page payload to the on-device model to generate 3 relevant questions.
+3. **Ask the question** — Build a prompt from the page payload plus the user's question, then call the on-device model to answer using only that content.
+4. **Render** — Display the answer plus the full payload (so you can show the audience what the machine saw).
+
+The architecture:
+
 ```
 popup.js  ──►  chrome.scripting.executeScript( content.js in active tab )
            │       └─►  returns { payload, counts }  (visible text + JSON-LD + meta + frontmatter)
            │
+           ├─►  MXLocalModel.generate( suggestionPrompt, payload )   [lib/ai-client.js]
+           │       └─►  browser on-device model → 3 suggested questions
+           │
            └─►  MXLocalModel.generate( systemPrompt, payload + question )   [lib/ai-client.js]
-                    └─►  browser on-device model
-                           └─►  answer, drawn only from the page
+                    └─►  browser on-device model → answer, drawn only from the page
 ```
 
 - `content.js` runs in the page and only reads. It collects the machine-visible payload in one pass, MX-agnostic.
 - `lib/ai-client.js` is the on-device model client, generalised from the Readiness Inspector so both tools share one fallback chain. It takes a system prompt and a user prompt and returns `{ text, source }`.
-- `popup.js` builds the prompt, calls the client, and renders the answer plus a "what the machine saw" panel so you can show the audience how thin the stripped page's payload is.
+- `popup.js` orchestrates both model calls: first to generate suggestions, then to answer. It renders the answer plus a "what the machine saw" panel so you can show the audience how thin the stripped page's payload is.
 
-The system prompt tells the model to answer only from the page and to say plainly when the page does not carry the answer. That keeps the demo honest: the stripped page fails because the facts are absent, not because the tool told the model to stumble. Removing the "do not guess" clause turns the stripped-page answer into a confident, unverifiable guess - a stronger but less defensible beat, left out by default.
+The system prompt tells the model to answer only from the page and to say plainly when the page does not carry the answer. That keeps the demo honest: the stripped page fails because the facts are absent, not because the tool told the model to stumble. Removing the "do not guess" clause turns the stripped-page answer into a confident, unverifiable guess — a stronger but less defensible beat, left out by default.
 
 ## Files
 
 | File | Role |
 |---|---|
 | `manifest.json` | MV3 manifest. `activeTab` + `scripting`. |
-| `popup.html` | Popup UI: question box, preset chips, answer panel, "what the machine saw" detail. |
+| `popup.html` | Popup UI: question box, suggestion buttons, answer panel, "what the machine saw" detail. |
 | `popup.css` | Popup styles (light + dark, amber accent so it reads as the Readiness Inspector's sibling). |
-| `popup.js` | Orchestrator: read the page, build the prompt, call the model, render. |
-| `content.js` | MX-agnostic page reader injected into the active tab. |
+| `popup.js` | Orchestrator: read the page, generate question suggestions, build user prompt, call the model, render. Includes `generateSuggestedQuestions()` to create 3 page-specific questions. |
+| `content.js` | MX-agnostic page reader injected into the active tab. Collects visible text, JSON-LD, meta tags, frontmatter. |
 | `lib/ai-client.js` | On-device model client, shared design with the Readiness Inspector. |
 | `demo/` | The MozFest page pair plus its landing page and styles. |
 

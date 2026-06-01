@@ -28,17 +28,34 @@ const SYSTEM_PROMPT =
   'If the page does not contain the information needed, say plainly that the page does not provide it. Do not guess and do not use outside knowledge. ' +
   'When the page does provide the answer, give it as a short list of facts, quoting the specific values, names, models, and dates from the page, and note where on the page each fact came from.';
 
-const PRESET_QUESTIONS = [
-  'Who wrote this page, when, and has a qualified person reviewed it?',
-  'Is the dosage on this page safe to act on - who verified it and when?',
-  'Was any part of this written by AI? Which part, and by which model?',
-];
-
 let currentPayload = null;
 let lastAnswer = null;
+let suggestedQuestions = [];
 
 function buildUserPrompt(payloadText, question) {
   return `PAGE CONTENT:\n${payloadText}\n\n----------\nQUESTION: ${question}\n\nAnswer using only the page content above.`;
+}
+
+async function generateSuggestedQuestions(payloadText) {
+  const systemPrompt =
+    'You are a helpful assistant that generates 3 relevant, concise questions someone might ask about a webpage. ' +
+    'The questions should be practical and specific to the page content. ' +
+    'Each question should be 1-2 sentences. Return exactly 3 questions, one per line, without numbering or bullets.';
+
+  const userPrompt =
+    `Based on this page content, generate 3 different, relevant questions someone might ask about it:\n\n${payloadText}\n\nReturn only the 3 questions, one per line, no numbering.`;
+
+  try {
+    const result = await MXLocalModel.generate(systemPrompt, userPrompt);
+    const questions = result.text
+      .split('\n')
+      .map(q => q.trim())
+      .filter(q => q.length > 0)
+      .slice(0, 3);
+    return questions;
+  } catch (_) {
+    return [];
+  }
 }
 
 async function getActiveTab() {
@@ -144,6 +161,10 @@ async function ask() {
   currentPayload = page;
   renderPayloadDetail(page);
 
+  setStatus('Generating question suggestions…');
+  suggestedQuestions = await generateSuggestedQuestions(page.payload);
+  renderPresets(suggestedQuestions);
+
   setStatus('Asking the on-device model…');
   const userPrompt = buildUserPrompt(page.payload, question);
   const answer = await MXLocalModel.generate(SYSTEM_PROMPT, userPrompt);
@@ -154,9 +175,10 @@ async function ask() {
   askBtn.disabled = false;
 }
 
-function wirePresets() {
+function renderPresets(questions) {
   const wrap = $('#presets');
-  for (const q of PRESET_QUESTIONS) {
+  wrap.innerHTML = '';
+  for (const q of questions) {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'preset';
@@ -199,7 +221,6 @@ function wireToolbar() {
 }
 
 async function main() {
-  wirePresets();
   wireToolbar();
   try {
     const tab = await getActiveTab();
