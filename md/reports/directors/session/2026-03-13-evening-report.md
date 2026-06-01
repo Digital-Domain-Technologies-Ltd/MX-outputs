@@ -72,7 +72,7 @@ A chapter-prefixed numbering scheme was applied across both books:
 
 ### 4. Writing Standards Codified
 
-**writing-style.md updated to v1.1:**
+**writing-style.cog.md updated to v1.1:**
 
 - Section 3 dash rule corrected: replaced "Use short dashes (-) only" with full typographic rule — em-dash for parenthetical/connective use, hyphen for compound modifiers, no overuse
 - Section 9 Pattern 13 (em-dash overuse) rewritten: clarifies the AI pattern is *overuse*, not correct single use; updated example shows one em-dash correctly retained
@@ -162,7 +162,7 @@ Both manuscript PDFs generated successfully after diagnosing and fixing a build 
 | Table labels added | 19 |
 | Coming-soon audit findings fixed | 7 |
 | Pa11y WCAG AA issues | 0 |
-| Skill files updated | 2 (writing-style.md, humanizer.json) |
+| Skill files updated | 2 (writing-style.cog.md, humanizer.json) |
 | Memory files created/updated | 2 |
 | Production audit pages analyzed | 2 (homepage + llms.txt) |
 | Homepage SEO score | 72/100 |
@@ -199,7 +199,7 @@ Both manuscript PDFs generated successfully after diagnosing and fixing a build 
 | allaboutv2 | New coming-soon design, CSS externalised, all audit fixes, llms.txt updated; index.html accessibility + SEO fixes; coming-soon.html footer structure |
 | mx-crm | Audit reports: `coming-soon-report.md` (local pre-prod), `allabout-report.md` (live production) |
 | datalake | 55 manuscripts: British English + em-dash + figures/tables + Q1 date removal + LaTeX footer; chapter-11 text edits; 19 SVG + 19 PNG illustrations created |
-| mx-canon | writing-style.md v1.1: Section 3 dash rule, Section 9 Pattern 13, Section 13 new |
+| mx-canon | writing-style.cog.md v1.1: Section 3 dash rule, Section 9 Pattern 13, Section 13 new |
 | .claude | humanizer.json: Phase 1+2 updated with Section 13 structural checks |
 | scripts | generate-illustrations.sh v3.0.0: Part 2 for manuscript SVGs |
 | datalake/assets/configs | protocols/metadata.yaml: removed listings package |

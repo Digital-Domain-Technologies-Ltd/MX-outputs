@@ -40,7 +40,7 @@ A new paragraph was added between the "two ways a CMS can fail" paragraph and th
 
 ### 3. Humanizer pass
 
-The draft went through the full humanizer workflow against writing-style.md §6, §9 and the Tom-voice patterns. Two house-rule violations were caught: two headings starting with "The..." ("The configuration changes that close it", "The verdict") were reworded ("What to change, and in what order", "Verdict"); four cross-sentence negation-pivot stacks were collapsed into single-sentence pivots. Two divergent-spelling rephrases ("default behaviour" → "default position", "each localised page" → "each language-variant page") applied per the mx-site neutral-English carve-out. Voice score: 6/10 → 8/10. Zero em-dashes, zero forbidden vocabulary, zero Maxine-overlay patterns throughout.
+The draft went through the full humanizer workflow against writing-style.cog.md §6, §9 and the Tom-voice patterns. Two house-rule violations were caught: two headings starting with "The..." ("The configuration changes that close it", "The verdict") were reworded ("What to change, and in what order", "Verdict"); four cross-sentence negation-pivot stacks were collapsed into single-sentence pivots. Two divergent-spelling rephrases ("default behaviour" → "default position", "each localised page" → "each language-variant page") applied per the mx-site neutral-English carve-out. Voice score: 6/10 → 8/10. Zero em-dashes, zero forbidden vocabulary, zero Maxine-overlay patterns throughout.
 
 ### 4. Audit-specificity rewrite
 
@@ -48,7 +48,7 @@ After the humanizer pass, the user flagged that the gap-and-fix sections still r
 
 ### 5. Negation-pivot rule tightened
 
-While running the humanizer pass, it became clear that the cross-references in writing-style.md §9 and the humanizer skill bullet still described the multi-sentence negation-pivot threshold as "three or more consecutive sentences" even though the §6 ban list already covers two-sentence forms explicitly. That mismatch let a two-sentence form ("The gap is not in the content. It is not in the data model.") survive the humanizer's first pass. All three locations now agree that two consecutive negation sentences is the trigger, with the gap-and-data-model case added as the canonical example.
+While running the humanizer pass, it became clear that the cross-references in writing-style.cog.md §9 and the humanizer skill bullet still described the multi-sentence negation-pivot threshold as "three or more consecutive sentences" even though the §6 ban list already covers two-sentence forms explicitly. That mismatch let a two-sentence form ("The gap is not in the content. It is not in the data model.") survive the humanizer's first pass. All three locations now agree that two consecutive negation sentences is the trigger, with the gap-and-data-model case added as the canonical example.
 
 ### 6. Social card
 

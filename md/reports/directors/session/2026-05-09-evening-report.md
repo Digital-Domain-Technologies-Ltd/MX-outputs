@@ -52,7 +52,7 @@ Tom's earlier-session post (`mx-site/blog/cms-vocabulary-war.html`) is live: eve
 
 ### 4. Writing-style banned-words list extended
 
-Three new rules merged into the writing-style guide (`mx-canon/ssot/writing-guides/writing-style.md`):
+Three new rules merged into the writing-style guide (`mx-canon/ssot/writing-guides/writing-style.cog.md`):
 
 - **Abstract category nouns for central concepts** — when a piece names a central concept with a single abstract noun (primitive, unit, the executable thing) and reuses it five or more times, rewrite to verb-object phrasing (what an agent runs against, what gets executed).
 - **AI-tell metaphors** — bans "the room" used to mean a buying audience, "the spine" used to mean a common underlying message, "put the cape on", "wearing X branding for the analyst call". These read as AI-generated even when grammatically correct.
@@ -87,7 +87,7 @@ A separate rule now applies to `mx-site/blog/index.html`: every post lives in ex
 | New saved-memory rules | 3 (cross-facet synthesis, AI-tell phrasings expanded, blog-index dedup) |
 | Saved-memory entries deleted | 1 (subsumed) |
 | Saved-memory entries audited | 47 |
-| Hub files modified | 2 (businesses/README.md, writing-style.md) |
+| Hub files modified | 2 (businesses/README.md, writing-style.cog.md) |
 | Writing-style banned entries added across the day | 11 (3 in v1.1 plus 8 added in the post-publication pass) |
 | Submodule commits | 5 (mx-outputs: 8a47eb1, 2500d17, 60f2e09, 61d93ca, 36e6b2c) |
 | Blog posts published | 1 (CMS Vocabulary War) |

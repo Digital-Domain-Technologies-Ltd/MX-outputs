@@ -44,7 +44,7 @@ New cog and script (`reginald-mirror.cog.md`, `reginald-mirror.sh`) automating t
 
 ### Footnote URL convention
 
-Documented the trailing backslash `\` convention for multi-URL footnotes in writing-style.md (Section 11), pdf-generator cog policy (v1.12.1), and generate-footnotes cog. Without this, pandoc collapses footnote URLs into one line.
+Documented the trailing backslash `\` convention for multi-URL footnotes in writing-style.cog.md (Section 11), pdf-generator cog policy (v1.12.1), and generate-footnotes cog. Without this, pandoc collapses footnote URLs into one line.
 
 ## What Changed
 

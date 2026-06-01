@@ -24,7 +24,7 @@ mx:
 
 ## Summary
 
-CogNovaMX has adopted APA 7th Edition as the structural baseline for every published and client-facing surface: book manuscripts, blog posts, audit reports, stakeholder docs, news entries, and slide content. The decision lands in writing-style.md as a new authoritative section, cascades through six skills, two audit templates, and the blog-post cog, and migrates sixty-four existing figure and table captions across the Handbook, Handbook-v2, Protocols, appendices, and executive summary to the APA three-zone shape in a single session. The published output now conforms to the most widely cited academic and editorial standard worldwide, which closes a quiet credibility gap for any reader or auditor who maps our work against an external bar.
+CogNovaMX has adopted APA 7th Edition as the structural baseline for every published and client-facing surface: book manuscripts, blog posts, audit reports, stakeholder docs, news entries, and slide content. The decision lands in writing-style.cog.md as a new authoritative section, cascades through six skills, two audit templates, and the blog-post cog, and migrates sixty-four existing figure and table captions across the Handbook, Handbook-v2, Protocols, appendices, and executive summary to the APA three-zone shape in a single session. The published output now conforms to the most widely cited academic and editorial standard worldwide, which closes a quiet credibility gap for any reader or auditor who maps our work against an external bar.
 
 ---
 
@@ -59,7 +59,7 @@ Sixty-four figure and table captions across the Handbook, Handbook-v2, Protocols
 | Skills updated | 6 |
 | Cogs updated | 1 |
 | Templates updated | 2 |
-| New SSOT section | 1 (writing-style.md §14) |
+| New SSOT section | 1 (writing-style.cog.md §14) |
 
 ---
 

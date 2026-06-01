@@ -46,7 +46,7 @@ Appendix C now opens with an explicit framing paragraph stating that the appendi
 
 Chapter 12 of MX: The Protocols received the matching treatment in its "Measuring Your Progress" section: the suite is introduced as a commercial service, the Quick Start install block aligned with Appendix C's licensed-distribution framing.
 
-Appendix M had a tangentially related stale link — the Writing Style Guide URL pointed at `MX-hub/blob/main/docs/for-ai/writing-style.md`, a path that no longer exists. Updated to the live SSOT location at `mx-canon/ssot/writing-guides/writing-style.md`.
+Appendix M had a tangentially related stale link — the Writing Style Guide URL pointed at `MX-hub/blob/main/docs/for-ai/writing-style.cog.md`, a path that no longer exists. Updated to the live SSOT location at `mx-canon/ssot/writing-guides/writing-style.cog.md`.
 
 ### 3. Retired the manuscript `web/` staging trees
 

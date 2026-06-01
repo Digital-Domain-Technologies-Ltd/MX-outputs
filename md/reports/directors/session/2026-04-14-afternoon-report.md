@@ -83,7 +83,7 @@ Same insight applied to the audit fix — the skill conflated two concerns (resu
 
 - Watch the next `/audit-site` run to confirm results are cleared and cache is preserved
 - If other dense reference sections accrete in CLAUDE.md again, apply the same extraction pattern
-- Consider extracting `writing-style.md` pointers into a similar short-form pattern for `mx-canon/ssot/writing-guides/README.md`
+- Consider extracting `writing-style.cog.md` pointers into a similar short-form pattern for `mx-canon/ssot/writing-guides/README.md`
 
 ---
 

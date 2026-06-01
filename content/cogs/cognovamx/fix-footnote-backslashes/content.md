@@ -66,7 +66,7 @@ Validates and fixes trailing backslash line breaks in manuscript footnotes. Pand
 
 ## Convention
 
-From `mx-canon/ssot/writing-guides/writing-style.md` Section 11:
+From `mx-canon/ssot/writing-guides/writing-style.cog.md` Section 11:
 
 ```markdown
 [^example]: Description of the source material.\

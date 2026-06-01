@@ -89,9 +89,9 @@ This cog covers three things any agent needs to do with that blog:
 | Social card | Not generated | SVG social card per post |
 | State tracking | None | `<meta name="mx:status" content="draft|published">` |
 
-Both formats share the same voice: first-person, conversational, no exaggeration, honest about trade-offs, varied sentence rhythm. Neutral English in public HTML on `mx-outputs/mx-site/**` (rephrase to avoid US/UK divergent spellings); British English elsewhere. The full register rules live in [`mx-canon/ssot/writing-guides/writing-style.md`](../../mx-canon/ssot/writing-guides/writing-style.md).
+Both formats share the same voice: first-person, conversational, no exaggeration, honest about trade-offs, varied sentence rhythm. Neutral English in public HTML on `mx-outputs/mx-site/**` (rephrase to avoid US/UK divergent spellings); British English elsewhere. The full register rules live in [`mx-canon/ssot/writing-guides/writing-style.cog.md`](../../mx-canon/ssot/writing-guides/writing-style.cog.md).
 
-Blog posts are in-scope APA 7 prose per [`writing-style.md §14`](../../mx-canon/ssot/writing-guides/writing-style.md). Headings use APA Title Case across all five levels (`Why This Matters`, not `why this matters`, and not `Why This Matters For You` — short prepositions lowercase). External claims cited in the post use APA author-date form (`(Anthropic, 2026)` / `Anthropic (2026) announced`); cited posts carry a reference list at the foot. Tables and figures use the APA three-zone shape (number bold above, italic sentence-case title, body, optional `*Note.*`). Bias-free language conventions in §14.4 apply when the post names identity dimensions. House overrides (no em-dashes, ASCII straight quotes, no pre-announced counts in prose) still bind per §14.8.
+Blog posts are in-scope APA 7 prose per [`writing-style.cog.md §14`](../../mx-canon/ssot/writing-guides/writing-style.cog.md). Headings use APA Title Case across all five levels (`Why This Matters`, not `why this matters`, and not `Why This Matters For You` — short prepositions lowercase). External claims cited in the post use APA author-date form (`(Anthropic, 2026)` / `Anthropic (2026) announced`); cited posts carry a reference list at the foot. Tables and figures use the APA three-zone shape (number bold above, italic sentence-case title, body, optional `*Note.*`). Bias-free language conventions in §14.4 apply when the post names identity dimensions. House overrides (no em-dashes, ASCII straight quotes, no pre-announced counts in prose) still bind per §14.8.
 
 ---
 
@@ -109,7 +109,7 @@ Series and cluster pages read as a magazine column, not a corporate update. The 
 - **State the position.** Every post takes a clear line on what happened and why it matters. The reader leaves knowing where the writer stands.
 - **Balance the entry kinds across the cluster.** Three balanced kinds: what broke (a specific behaviour with evidence and the principle it offends), what good looks like (the right answer when someone builds it), the line being drawn (regulation or enforcement read through MX readiness). A cluster that's all "what broke" reads as one long complaint.
 - **Open with the editor-avatar aside.** Series and cluster pages carry a `<aside class="blog-introduction">` with the editor's avatar and a one-sentence framing of what the page is for.
-- **First-person opinion in the body.** "I am not going to ask Google to be good" is the register, not "this raises questions about whether Google should...". Cross-reference: writing-style.md §0 (one voice, declarative authority) and §9.9 (Tom-voice patterns).
+- **First-person opinion in the body.** "I am not going to ask Google to be good" is the register, not "this raises questions about whether Google should...". Cross-reference: writing-style.cog.md §0 (one voice, declarative authority) and §9.9 (Tom-voice patterns).
 
 ### Conclusion leads to a CTA (depth-based)
 
@@ -215,7 +215,7 @@ The existing polish pass in [`html-writer/skill.md`](../../.claude/skills/html-w
 Review reads like a sharp editor and a humanizer working together: scan for register tells, check whether both audiences are served, ask the author about intent, then rewrite.
 
 1. **Discover** candidates if no path is given. Otherwise accept the path.
-2. **Scan** for AI writing patterns. The authority is the writing-style guide ([Section 5 forbidden vocabulary](../../mx-canon/ssot/writing-guides/writing-style.md), [Section 6 forbidden constructs](../../mx-canon/ssot/writing-guides/writing-style.md), [Section 9 AI patterns](../../mx-canon/ssot/writing-guides/writing-style.md)). Flag specific locations and line numbers; score the post.
+2. **Scan** for AI writing patterns. The authority is the writing-style guide ([Section 5 forbidden vocabulary](../../mx-canon/ssot/writing-guides/writing-style.cog.md), [Section 6 forbidden constructs](../../mx-canon/ssot/writing-guides/writing-style.cog.md), [Section 9 AI patterns](../../mx-canon/ssot/writing-guides/writing-style.cog.md)). Flag specific locations and line numbers; score the post.
 3. **Dual-audience check** — the explicit gate. Every section must serve both readers:
    - **Business readers** get the value claim. They skim past code blocks; they read headings and opening sentences. They need to know what changes, what gets cheaper, what gets faster.
    - **Technologists** get the proof. Code blocks, real formats, named standards, architectural reasoning. They read both the claim and the evidence.
@@ -273,7 +273,7 @@ There is no `allaboutv2/blogs/mx/` step. There is no `cp` to a deploy mirror. Th
 - **MX template reference:** [`mx-outputs/mx-site/blog/data-sovereignty.html`](../../mx-outputs/mx-site/blog/data-sovereignty.html) — a fully-populated MX post to copy structure from.
 - **Canonical blog template:** [`mx-canon/ssot/templates/blog-post.html`](../../mx-canon/ssot/templates/blog-post.html).
 - **MX stylesheets:** [`mx-outputs/mx-site/css/mx-blog.css`](../../mx-outputs/mx-site/css/mx-blog.css), [`mx-outputs/mx-site/css/mx-unified.css`](../../mx-outputs/mx-site/css/mx-unified.css).
-- **Writing style guide:** [`mx-canon/ssot/writing-guides/writing-style.md`](../../mx-canon/ssot/writing-guides/writing-style.md) — forbidden vocabulary, forbidden constructs, AI patterns, AI-tell metaphors, abstract category nouns.
+- **Writing style guide:** [`mx-canon/ssot/writing-guides/writing-style.cog.md`](../../mx-canon/ssot/writing-guides/writing-style.cog.md) — forbidden vocabulary, forbidden constructs, AI patterns, AI-tell metaphors, abstract category nouns.
 - **Tom's EDS blog catalogue (legacy):** [`allaboutv2/blogs/ddt/my-blog.json`](../../allaboutv2/blogs/ddt/my-blog.json).
 
 ---

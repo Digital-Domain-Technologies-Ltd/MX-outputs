@@ -79,7 +79,7 @@ Tom asked the validator to check every folder containing an HTML set for an `ind
 
 ### 10. Plain-characters-in-prose principle planted across the canon
 
-A new principle "Plain Characters in Prose" landed in `principles.cog.md`: no HTML entities (`&ldquo;`, `&rdquo;`, `&hellip;`, `&nbsp;`) inside the reader's words, ASCII straight quotes only, entities reserved for plumbing (URL escapes, displayed code, layout glyphs in chrome). Cross-referenced into `writing-style.md` §3 (typography rules), Pattern 18 in §9 (updated to call back to the §3 rule), Appendix M §26 (HTML carrier guide, with an executable test), and the html-writer skill's polish pass (executable shell check that strips script/style/code/pre and scans the remainder).
+A new principle "Plain Characters in Prose" landed in `principles.cog.md`: no HTML entities (`&ldquo;`, `&rdquo;`, `&hellip;`, `&nbsp;`) inside the reader's words, ASCII straight quotes only, entities reserved for plumbing (URL escapes, displayed code, layout glyphs in chrome). Cross-referenced into `writing-style.cog.md` §3 (typography rules), Pattern 18 in §9 (updated to call back to the §3 rule), Appendix M §26 (HTML carrier guide, with an executable test), and the html-writer skill's polish pass (executable shell check that strips script/style/code/pre and scans the remainder).
 
 ### 15. github-repositories.md registry regenerated with archive state + lowercase-org coverage
 
