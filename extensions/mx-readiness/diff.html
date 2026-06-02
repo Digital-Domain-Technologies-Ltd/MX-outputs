@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MX Readiness — Served vs Rendered</title>
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="extension-popup">
+  <meta name="mx:audience" content="humans">
+  <meta name="mx:aiAssistance" content="welcome">
+  <meta name="mx:aiEditable" content="false">
+  <meta name="mx:category" content="mx-tools">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #111827; --ink-soft: #4b5563; --paper: #ffffff; --paper-soft: #f9fafb;
+      --rule: #e5e7eb; --accent: #0f766e;
+      --pass: #15803d; --pass-bg: #dcfce7;
+      --warn: #b45309; --warn-bg: #fef3c7;
+      --fail: #b91c1c; --fail-bg: #fee2e2;
+      --info: #1d4ed8; --info-bg: #dbeafe;
+      --changed-bg: #fffbeb;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #f3f4f6; --ink-soft: #9ca3af; --paper: #111827;
+        --paper-soft: #1f2937; --rule: #374151; --accent: #5eead4;
+        --pass: #86efac; --pass-bg: #14532d;
+        --warn: #fcd34d; --warn-bg: #78350f;
+        --fail: #fca5a5; --fail-bg: #7f1d1d;
+        --info: #93c5fd; --info-bg: #1e3a8a;
+        --changed-bg: #292524;
+      }
+    }
+    body { font-family: var(--font); color: var(--ink); background: var(--paper);
+           font-size: 13px; line-height: 1.45; }
+    .header { padding: 16px 24px 12px; border-bottom: 1px solid var(--rule);
+              background: var(--paper-soft); }
+    .header h1 { font-size: 15px; color: var(--accent); margin-bottom: 6px; }
+    .header-meta { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); margin-bottom: 4px;
+                   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .header-served { font-size: 11px; color: var(--ink-soft); }
+    .summary-bar { padding: 8px 24px; background: var(--paper);
+                   border-bottom: 1px solid var(--rule); font-size: 12px; }
+    .diff-count { font-weight: 700; }
+    .diff-count.has-changes { color: var(--warn); }
+    .diff-count.no-changes { color: var(--pass); }
+    .main { padding: 16px 24px 32px; max-width: 880px; }
+    h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em;
+         color: var(--ink-soft); margin: 20px 0 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 8px; }
+    th { text-align: left; padding: 6px 10px; font-size: 10px; text-transform: uppercase;
+         letter-spacing: .07em; color: var(--ink-soft); border-bottom: 2px solid var(--rule);
+         background: var(--paper-soft); }
+    td { padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    tr.changed { background: var(--changed-bg); }
+    tr.changed td { font-weight: 500; }
+    .section-label { font-size: 10px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .05em; }
+    .pill { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 10px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+    .pill.pass { background: var(--pass-bg); color: var(--pass); }
+    .pill.warn { background: var(--warn-bg); color: var(--warn); }
+    .pill.fail { background: var(--fail-bg); color: var(--fail); }
+    .pill.info { background: var(--info-bg); color: var(--info); }
+    .delta { font-size: 11px; color: var(--warn); font-style: italic; }
+    .note { font-size: 11px; color: var(--ink-soft); margin-top: 16px; font-style: italic; }
+    .empty { padding: 40px 24px; color: var(--ink-soft); font-style: italic; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>MX Readiness — Served vs Rendered</h1>
+    <div class="header-meta" id="hdr-url">Loading…</div>
+    <div class="header-served" id="hdr-served"></div>
+  </div>
+  <div class="summary-bar" id="summary-bar"></div>
+  <div class="main" id="main"></div>
+  <script src="diff.js"></script>
+</body>
+</html>

@@ -56,6 +56,165 @@ async function inspectDom(tab) {
   return results?.[0]?.result || { url: tab.url, title: tab.title || '', findings: [], inspectedAt: new Date().toISOString() };
 }
 
+// Served HTML: fetch raw page from background and parse with DOMParser -----------
+
+function fetchServedHtml(url) {
+  return new Promise((resolve) => {
+    chrome.runtime.sendMessage({ type: 'fetch-served-html', url }, (resp) => {
+      if (chrome.runtime.lastError || !resp) resolve({ error: 'no response' });
+      else resolve(resp);
+    });
+  });
+}
+
+// Mirror of content.js inspection checks — runs on any Document object.
+// Used for the served (pre-JS) HTML perspective.
+function inspectDocument(doc, baseUrl) {
+  const findings = [];
+  const add = (section, id, label, status, detail, evidence) =>
+    findings.push({ section, id, label, status, detail, evidence: evidence ?? null });
+
+  const mc  = (n) => doc.querySelector(`meta[name="${n}"]`)?.getAttribute('content') || null;
+  const mcp = (p) => doc.querySelector(`meta[property="${p}"]`)?.getAttribute('content') || null;
+  const lh  = (r) => doc.querySelector(`link[rel="${r}"]`)?.getAttribute('href') || null;
+
+  // 1. MX governance
+  const mxCog = doc.querySelector('meta[name="mx:cog"]')?.getAttribute('content') || null;
+  add('mx-governance', 'mx-cog', 'MX magic-header meta (mx:cog)',
+    mxCog ? 'pass' : 'fail',
+    mxCog ? 'mx:cog present.' : 'No <meta name="mx:cog"> present.',
+    mxCog);
+
+  const mxStatus = mc('mx:status'), mxContentType = mc('mx:contentType'), mxAudience = mc('mx:audience');
+  const hasTrip = mxStatus && mxContentType && mxAudience;
+  add('mx-governance', 'mx-triplet', 'Governance triplet',
+    hasTrip ? 'pass' : (mxStatus || mxContentType || mxAudience ? 'warn' : 'fail'),
+    hasTrip ? `status="${mxStatus}", contentType="${mxContentType}", audience="${mxAudience}".`
+            : 'Governance triplet incomplete.',
+    { status: mxStatus, contentType: mxContentType, audience: mxAudience });
+
+  const aiAssistance = mc('mx:aiAssistance'), aiEditable = mc('mx:aiEditable'), contentPolicy = mc('mx:contentPolicy');
+  add('mx-governance', 'mx-ai-policy', 'AI policy hints',
+    (aiAssistance || aiEditable || contentPolicy) ? 'pass' : 'warn',
+    (aiAssistance || aiEditable || contentPolicy) ? 'AI policy hints present.' : 'No AI policy hints.',
+    { aiAssistance, aiEditable, contentPolicy });
+
+  // 2. AI disclosure
+  const aiDiscl = mc('ai-disclosure');
+  const validVals = ['none', 'ai-assisted', 'ai-generated', 'autonomous'];
+  add('ai-disclosure', 'wicg-disclosure', 'WICG AI-disclosure meta',
+    (aiDiscl && validVals.includes(aiDiscl)) ? 'pass' : aiDiscl ? 'warn' : 'fail',
+    aiDiscl ? `"${aiDiscl}"` : 'No <meta name="ai-disclosure">.',
+    aiDiscl);
+
+  let jsonLdObjects = [];
+  for (const block of doc.querySelectorAll('script[type="application/ld+json"]')) {
+    try {
+      const p = JSON.parse(block.textContent);
+      jsonLdObjects.push(...(Array.isArray(p) ? p : (p['@graph'] ? p['@graph'] : [p])));
+    } catch (_) {}
+  }
+  const dst = jsonLdObjects.map((o) => o.digitalSourceType).find((v) => typeof v === 'string');
+  add('ai-disclosure', 'iptc-source-type', 'IPTC digitalSourceType in JSON-LD',
+    dst && dst.startsWith('https://cv.iptc.org/') ? 'pass' : dst ? 'warn' : 'fail',
+    dst ? `"${dst}"` : 'No digitalSourceType in JSON-LD.',
+    dst);
+
+  // 3. Discovery links
+  const llmsTxt = lh('llms-txt');
+  add('discovery-links', 'link-llms-txt', '<link rel="llms-txt">',
+    llmsTxt ? 'pass' : 'warn', llmsTxt ? `→ ${llmsTxt}` : 'No <link rel="llms-txt">.', llmsTxt);
+
+  const aiUsage = lh('ai-usage');
+  add('discovery-links', 'link-ai-usage', '<link rel="ai-usage">',
+    aiUsage ? 'pass' : 'warn', aiUsage ? `→ ${aiUsage}` : 'No <link rel="ai-usage">.', aiUsage);
+
+  const canonical = lh('canonical');
+  const normBase = (baseUrl || '').split('#')[0].split('?')[0];
+  const normCan  = (canonical || '').split('#')[0].split('?')[0];
+  add('discovery-links', 'canonical', '<link rel="canonical">',
+    canonical ? (normCan === normBase ? 'pass' : 'warn') : 'fail',
+    canonical ? (normCan === normBase ? 'Canonical matches URL.' : `Canonical: "${canonical}".`) : 'No canonical.',
+    canonical);
+
+  const sitemap = lh('sitemap');
+  add('discovery-links', 'sitemap', '<link rel="sitemap">',
+    sitemap ? 'pass' : 'info', sitemap ? `→ ${sitemap}` : 'No <link rel="sitemap">.', sitemap);
+
+  // 4. Structured data
+  add('structured-data', 'jsonld-present', 'JSON-LD blocks',
+    jsonLdObjects.length ? 'pass' : 'fail',
+    jsonLdObjects.length ? `${jsonLdObjects.length} JSON-LD object(s).` : 'No JSON-LD.',
+    jsonLdObjects.length);
+  const jsonLdTypes = jsonLdObjects.map((o) => o['@type']).filter(Boolean);
+  add('structured-data', 'jsonld-types', 'Schema.org @type coverage',
+    jsonLdTypes.length ? 'pass' : 'warn',
+    jsonLdTypes.length ? `Types: ${jsonLdTypes.flat().join(', ')}.` : 'No @type fields.',
+    jsonLdTypes);
+
+  // 5. Open Graph + Twitter
+  const og = {
+    type: mcp('og:type'), title: mcp('og:title'), description: mcp('og:description'),
+    url: mcp('og:url'), image: mcp('og:image'), site_name: mcp('og:site_name'), locale: mcp('og:locale'),
+  };
+  const ogN = Object.values(og).filter(Boolean).length;
+  add('open-graph', 'og-completeness', 'Open Graph completeness',
+    ogN >= 5 ? 'pass' : ogN >= 3 ? 'warn' : 'fail', `${ogN}/7 OG fields.`, og);
+
+  const tw = { card: mc('twitter:card'), title: mc('twitter:title'),
+               description: mc('twitter:description'), image: mc('twitter:image') };
+  const twN = Object.values(tw).filter(Boolean).length;
+  add('open-graph', 'twitter-card', 'Twitter Card completeness',
+    twN >= 3 ? 'pass' : twN >= 1 ? 'warn' : 'fail', `${twN}/4 Twitter Card fields.`, tw);
+
+  // 6. Accessibility
+  const htmlLang = doc.documentElement?.getAttribute('lang') || null;
+  add('accessibility', 'html-lang', '<html lang="…">',
+    htmlLang ? 'pass' : 'fail', htmlLang ? `lang="${htmlLang}".` : 'No lang attribute.', htmlLang);
+
+  const skipLink = doc.querySelector('a.skip-link, a[href="#main"], a[href="#content"]');
+  add('accessibility', 'skip-link', 'Skip-to-main link',
+    skipLink ? 'pass' : 'warn', skipLink ? 'Skip link present.' : 'No skip link.', skipLink?.getAttribute('href') || null);
+
+  const imgs = Array.from(doc.querySelectorAll('img'));
+  const missingAlt = imgs.filter((i) => !i.hasAttribute('alt'));
+  const altCov = imgs.length ? Math.round(100 * (imgs.length - missingAlt.length) / imgs.length) : 100;
+  add('accessibility', 'img-alt', 'Image alt coverage',
+    altCov === 100 ? 'pass' : altCov >= 80 ? 'warn' : 'fail',
+    imgs.length ? `${altCov}% of ${imgs.length} images have alt.` : 'No images.',
+    { total: imgs.length, missing: missingAlt.length });
+
+  const inputs = Array.from(doc.querySelectorAll('input, select, textarea'))
+    .filter((el) => !['hidden','submit','button','reset'].includes(el.type));
+  const labelled = inputs.filter((el) =>
+    el.hasAttribute('aria-label') || el.hasAttribute('aria-labelledby') || el.hasAttribute('title') ||
+    (el.id && doc.querySelector(`label[for="${el.id}"]`)) || el.closest('label') !== null
+  );
+  const lblCov = inputs.length ? Math.round(100 * labelled.length / inputs.length) : 100;
+  add('accessibility', 'form-labels', 'Form-control labelling',
+    inputs.length === 0 ? 'info' : lblCov === 100 ? 'pass' : lblCov >= 80 ? 'warn' : 'fail',
+    inputs.length ? `${lblCov}% of ${inputs.length} controls labelled.` : 'No form controls.',
+    { total: inputs.length, labelled: labelled.length });
+
+  // 7. Provenance
+  const headHtml = doc.head?.innerHTML || '';
+  const hasFm = headHtml.includes('MX-SOURCE-FRONTMATTER:START');
+  const hasProv = headHtml.includes('xmp:ProvenanceAiPayload') || headHtml.includes('mx:x-mx-provenance');
+  add('provenance', 'source-yaml', 'Embedded source-YAML frontmatter',
+    hasFm ? 'pass' : 'info', hasFm ? 'MX-SOURCE-FRONTMATTER markers present.' : 'No frontmatter markers.', hasFm);
+  add('provenance', 'provenance-payload', 'Provenance payload reference',
+    hasProv ? 'pass' : 'info', hasProv ? 'Provenance payload present.' : 'No provenance payload.', hasProv);
+
+  return findings;
+}
+
+// Diff tab ---------------------------------------------------------------
+
+async function openDiffTab(diffData) {
+  await chrome.storage.session.set({ mxReadinessDiff: diffData });
+  chrome.tabs.create({ url: chrome.runtime.getURL('diff.html') });
+}
+
 function inspectOrigin(pageUrl) {
   return new Promise((resolve) => {
     chrome.runtime.sendMessage({ type: 'inspect-origin', pageUrl }, (resp) => {
@@ -133,6 +292,13 @@ function wireTabs() {
 }
 
 // Toolbar --------------------------------------------------------------
+
+function showNoticeBanner(msg) {
+  const el = $('#notice-banner');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
 
 function wireToolbar() {
   const copyBtn = $('#btn-copy');
@@ -317,6 +483,9 @@ async function main() {
 
   renderHeader({ url: tab.url });
 
+  // Launch served-HTML fetch in parallel with DOM inspection.
+  const servedPromise = fetchServedHtml(tab.url);
+
   let domPayload;
   try {
     domPayload = await inspectDom(tab);
@@ -325,30 +494,85 @@ async function main() {
     return;
   }
 
+  // Detect non-HTML or LLM View replacement — use served HTML as the primary
+  // source when the current DOM is not the actual page content.
+  const useServedAsPrimary = domPayload.isLlmViewPage
+    || (domPayload.contentType && !domPayload.contentType.startsWith('text/html'));
+
   currentPageInfo = domPayload;
 
-  // Show DOM findings immediately while origin probes run.
-  allFindings = domPayload.findings.slice();
+  if (!useServedAsPrimary) {
+    // Normal path: show DOM findings immediately while served HTML loads.
+    allFindings = domPayload.findings.slice();
+    renderFindings();
+    currentScore = computeScore(allFindings);
+    renderSummary({
+      score: currentScore,
+      summaryText: 'DOM findings ready. Fetching served HTML and probing origin…',
+      summarySource: '',
+    });
+  } else {
+    const reason = domPayload.isLlmViewPage
+      ? 'LLM View is active — inspecting the served HTML at this URL instead.'
+      : `Non-HTML content type (${domPayload.contentType}) — inspecting the served HTML instead.`;
+    showNoticeBanner(reason);
+    renderSummary({ score: { value: '--', band: 'fail' }, summaryText: 'Fetching served HTML…', summarySource: '' });
+  }
+
+  // Wait for served HTML, parse, run inspection.
+  const servedResult = await servedPromise;
+  let servedFindings = [];
+  if (servedResult.html && !servedResult.error) {
+    try {
+      const parser = new DOMParser();
+      const servedDoc = parser.parseFromString(servedResult.html, 'text/html');
+      servedFindings = inspectDocument(servedDoc, servedResult.finalUrl || tab.url);
+    } catch (_) {}
+  }
+
+  if (useServedAsPrimary && servedFindings.length) {
+    // Replace DOM findings with served findings as the primary view.
+    allFindings = servedFindings;
+    renderFindings();
+    currentScore = computeScore(allFindings);
+    renderSummary({
+      score: currentScore,
+      summaryText: 'Served HTML inspected. Probing origin discovery files…',
+      summarySource: '',
+    });
+    // currentPageInfo.url stays as tab.url so origin probes target the right origin.
+  }
+
+  // Wire the diff button — enabled whenever we have both rendered and served findings.
+  const diffBtn = $('#btn-diff');
+  if (diffBtn && servedFindings.length && domPayload.findings.length) {
+    diffBtn.disabled = false;
+    diffBtn.addEventListener('click', () => {
+      openDiffTab({
+        url: tab.url,
+        checkedAt: new Date().toISOString(),
+        servedStatus: servedResult.status,
+        servedContentType: servedResult.contentType || '',
+        served: servedFindings,
+        rendered: domPayload.findings,
+      });
+    });
+  }
+
+  // Origin discovery probes.
+  const originFindings = await inspectOrigin(
+    (useServedAsPrimary ? servedResult.finalUrl : domPayload.url) || tab.url
+  );
+  allFindings = (useServedAsPrimary ? servedFindings : domPayload.findings).concat(originFindings);
   renderFindings();
   currentScore = computeScore(allFindings);
   renderSummary({
     score: currentScore,
-    summaryText: 'DOM findings ready. Probing origin discovery files…',
+    summaryText: 'Combining signals. Asking the on-device model for a summary…',
     summarySource: '',
   });
 
-  // Add origin-discovery findings as they come back.
-  const originFindings = await inspectOrigin(domPayload.url);
-  allFindings = allFindings.concat(originFindings);
-  renderFindings();
-  currentScore = computeScore(allFindings);
-  renderSummary({
-    score: currentScore,
-    summaryText: 'Combining DOM + origin signals. Asking the on-device model for a summary…',
-    summarySource: '',
-  });
-
-  // Ask the on-device model to summarise the findings.
+  // On-device model summary.
   const summary = await generateSummary(currentPageInfo, allFindings, currentScore);
   currentSummary = summary;
   renderSummary({

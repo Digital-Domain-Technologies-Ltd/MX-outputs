@@ -128,11 +128,37 @@ async function inspectOrigin(pageUrl) {
   return findings;
 }
 
+const SERVED_HTML_TIMEOUT_MS = 6000;
+
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg.type === 'inspect-origin') {
     inspectOrigin(msg.pageUrl)
       .then((findings) => sendResponse({ ok: true, findings }))
       .catch((e) => sendResponse({ ok: false, error: e.message }));
-    return true; // async
+    return true;
+  }
+  if (msg.type === 'fetch-served-html') {
+    fetchServedHtml(msg.url)
+      .then((result) => sendResponse(result))
+      .catch((e) => sendResponse({ error: e.message }));
+    return true;
   }
 });
+
+async function fetchServedHtml(url) {
+  const controller = new AbortController();
+  const t = setTimeout(() => controller.abort(), SERVED_HTML_TIMEOUT_MS);
+  try {
+    const r = await fetch(url, {
+      headers: { 'Accept': 'text/html,application/xhtml+xml,*/*;q=0.8' },
+      redirect: 'follow',
+      signal: controller.signal,
+    });
+    clearTimeout(t);
+    const html = r.ok ? await r.text() : null;
+    return { ok: r.ok, status: r.status, contentType: r.headers.get('content-type') || '', html, finalUrl: r.url };
+  } catch (e) {
+    clearTimeout(t);
+    return { ok: false, error: e.name === 'AbortError' ? 'Timed out fetching served HTML.' : e.message };
+  }
+}

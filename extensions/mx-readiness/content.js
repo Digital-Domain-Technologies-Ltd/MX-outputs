@@ -271,6 +271,8 @@
   return {
     url: location.href,
     title: document.title,
+    contentType: document.contentType || 'text/html',
+    isLlmViewPage: document.title.startsWith('LLM View — '),
     findings,
     inspectedAt: new Date().toISOString(),
   };
