@@ -254,6 +254,8 @@ mx:
 
           <p>Which laws bite depends on where the file is read, not where it was written. The sharpest enforcement risk today is European, because the European Accessibility Act and the EU AI Act both carry fines large enough to fund the lawyers who chase them; treat those as the floor any publisher serving European readers has to clear. The same evidence answers the United States NIST AI Risk Management Framework, the UK ICO AI guidance, the Colorado AI Act, and the analogous instruments now appearing in other jurisdictions, so a publisher who builds for the European floor inherits the rest for free.</p>
 
+          <p><small><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</small></p>
+
           <p>The QR code you scanned ends with a fragment of the form <code>#mx:&lt;hash&gt;</code>. That hash is the first eight characters of the source-content SHA recorded inside the document. It identifies which version of the source the PDF was rendered from. Anyone can match it back to the canonical source on disk or in the repository.</p>
 
           <h2 id="what-this-pdf-carries">What this PDF carries</h2>
@@ -262,7 +264,7 @@ mx:
 
           <h3 id="a-tagged-structure-tree">A tagged structure tree</h3>
 
-          <p>Inside the PDF, every heading, paragraph, list item, table cell, figure, and caption is recorded as a node in a logical tree. The tree follows ISO 14289-1, the international standard for tagged PDF, declared at PDF/UA Level 2 in the document's XMP packet under <code>pdfuaid:Part=1</code>. A screen reader can walk that tree the same way a sighted reader walks the visible page: heading by heading, paragraph by paragraph, alt text on every figure. An AI agent reads exactly the same tree. The structure is the file; it is not reconstructed from pixels.</p>
+          <p>Inside the PDF, every heading, paragraph, list item, table cell, figure, and caption is recorded as a node in a logical tree. The tree follows ISO 14289-1, the international standard for accessible tagged PDF (PDF/UA-1), declared in the document's XMP packet under <code>pdfuaid:part=1</code>. A screen reader can walk that tree the same way a sighted reader walks the visible page: heading by heading, paragraph by paragraph, alt text on every figure. An AI agent reads exactly the same tree. The structure is the file; it is not reconstructed from pixels.</p>
 
           <p>For comparison, an ordinary PDF carries only the visual rendering. The order of text in the file is the order the typesetter wrote it, not the order a reader would follow. A screen reader has to guess. An AI agent has to do vision-based reconstruction. Both are slower, less accurate, and more expensive than reading a tree that is already there.</p>
 
@@ -276,7 +278,7 @@ mx:
 
           <h3 id="responsible-person-identifier">Responsible Person Identifier</h3>
 
-          <p>At the top of every sidecar (both the AI stream and the deterministic stream) sits a structured <code>responsiblePerson</code> block. It carries the name, email, identifier URL, role, organisation, and country of the human accountable for the audit chain. Any reader walking from a finding to the person responsible finds the full identifier in one step, without having to cross-reference an external directory or guess from a commit author. The block is the structured identity regulators look for under EU AI Act Article 4 (AI literacy and a named responsible person), the UK ICO AI guidance accountability principle, the United States NIST AI Risk Management Framework GOVERN function (roles, responsibilities, and lines of communication), and EAA Directive 2019/882's responsible economic operator requirement.</p>
+          <p>At the top of every sidecar (both the AI stream and the deterministic stream) sits a structured <code>responsiblePerson</code> block. It carries the name, email, identifier URL, role, organisation, and country of the human accountable for the audit chain. Any reader walking from a finding to the person responsible finds the full identifier in one step, without having to cross-reference an external directory or guess from a commit author. The block is the structured identity regulators look for under EU AI Act Article 4 (AI literacy obligations for providers and deployers), the UK ICO AI guidance accountability principle, the United States NIST AI Risk Management Framework GOVERN function (roles, responsibilities, and lines of communication), and EAA Directive 2019/882's responsible economic operator requirement.</p>
 
           <p>The shape:</p>
 
