@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-05-31"
-modified: "2026-05-31"
+created: "2026-06-02"
+modified: "2026-06-02"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -20,18 +20,38 @@ Build artefacts, reports, and generated outputs organised by media type.
 
 | Type | Files | Description |
 |------|-------|-------------|
-| [pdf/](pdf/) | 79 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 256 | Markdown — reports, audit results, presentations |
+| [pdf/](pdf/) | 73 | PDFs — books, reports, manuals, presentations |
+| [md/](md/) | 261 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1066** | |
+| **Total** | **1070** | |
 
 ---
 
 ## pdf/
 
 PDF documents — books, manuals, presentations, blog exports.
+
+### pdf/About/ (12 files)
+
+- [`ABOUT-DOGU.pdf`](pdf/About/ABOUT-DOGU.pdf)
+- [`ABOUT-DOGU.provenance.ai.json`](pdf/About/ABOUT-DOGU.provenance.ai.json)
+- [`ABOUT-DOGU.provenance.deterministic.json`](pdf/About/ABOUT-DOGU.provenance.deterministic.json)
+- [`ABOUT-SALVA.pdf`](pdf/About/ABOUT-SALVA.pdf)
+- [`ABOUT-SALVA.provenance.ai.json`](pdf/About/ABOUT-SALVA.provenance.ai.json)
+- [`ABOUT-SALVA.provenance.deterministic.json`](pdf/About/ABOUT-SALVA.provenance.deterministic.json)
+- [`ABOUT-SCOTT.pdf`](pdf/About/ABOUT-SCOTT.pdf)
+- [`ABOUT-SCOTT.provenance.ai.json`](pdf/About/ABOUT-SCOTT.provenance.ai.json)
+- [`ABOUT-SCOTT.provenance.deterministic.json`](pdf/About/ABOUT-SCOTT.provenance.deterministic.json)
+- [`ABOUT-TOM.pdf`](pdf/About/ABOUT-TOM.pdf)
+- [`ABOUT-TOM.provenance.ai.json`](pdf/About/ABOUT-TOM.provenance.ai.json)
+- [`ABOUT-TOM.provenance.deterministic.json`](pdf/About/ABOUT-TOM.provenance.deterministic.json)
+
+### pdf/Dogu/ (2 files)
+
+- [`dogu-abaris-contractor-agreement.pdf`](pdf/Dogu/dogu-abaris-contractor-agreement.pdf)
+- [`dogu-abaris-visa-reference-letter.pdf`](pdf/Dogu/dogu-abaris-visa-reference-letter.pdf)
 
 ### pdf/assets/ (5 files)
 
@@ -113,7 +133,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (248 files)
+### md/reports/ (253 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -148,7 +168,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (219 files)
+#### md/reports/directors/ (224 files)
 
 **build/** (3 files)
 
@@ -162,7 +182,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (212 files)
+**session/** (217 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -366,7 +386,12 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-05-30-afternoon-report.md`](md/reports/directors/session/2026-05-30-afternoon-report.md)
 - [`2026-05-30-evening-report.md`](md/reports/directors/session/2026-05-30-evening-report.md)
 - [`2026-05-30-morning-report.md`](md/reports/directors/session/2026-05-30-morning-report.md)
+- [`2026-05-31-afternoon-report.md`](md/reports/directors/session/2026-05-31-afternoon-report.md)
+- [`2026-05-31-evening-report.md`](md/reports/directors/session/2026-05-31-evening-report.md)
 - [`2026-05-31-morning-report.md`](md/reports/directors/session/2026-05-31-morning-report.md)
+- [`2026-06-01-afternoon-report.md`](md/reports/directors/session/2026-06-01-afternoon-report.md)
+- [`2026-06-01-evening-report.md`](md/reports/directors/session/2026-06-01-evening-report.md)
+- [`2026-06-02-morning-report.md`](md/reports/directors/session/2026-06-02-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -530,4 +555,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-05-31 at 11:14*
+*Generated on 2026-06-02 at 09:44*
