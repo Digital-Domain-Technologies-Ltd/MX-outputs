@@ -121,4 +121,6 @@ The RESONEO Chrome research makes the inference-vs-declaration argument concrete
 | 1494c088 | hub | Document afternoon session: three blog posts, CHANGELOG v2.98 |
 | d1477e59 | hub | Bump mx-outputs; audit pipeline fixes from contentful audit run |
 | 10179da9 | mx-outputs | Add www.contentful.com audit deliverables 2026-06-02 |
-| _pending_ | hub | Batch audit system: two-pace architecture, TTL cache, docs |
+| 1f5de699 | hub | Batch audit system: two-pace architecture, TTL cache, docs |
+| 100a429d | hub | Add mx.triggers field to canon (v6.13) |
+| _pending_ | hub | Docs commit: CLAUDE.md cache versions, LEARNINGS, REMINDERS, mx-outputs bump |
