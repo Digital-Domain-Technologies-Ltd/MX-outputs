@@ -52,7 +52,7 @@ A third Chrome/Edge extension was built alongside the existing MX Readiness Insp
 
 | Metric | Value |
 |--------|-------|
-| Hub commits | _pending_ (Step 3) |
+| Hub commits | 2 |
 | mx-outputs commits | 2 |
 | Hub files changed | 16 |
 | Hub lines added | +624 |
@@ -90,6 +90,7 @@ The LLM View extension is a sales and demonstration tool as much as a developer 
 
 | Hash | Description |
 |------|-------------|
-| _pending_ | Hub: audit provenance capture, pipeline improvements, LLM View extension |
+| 9616c6a1 | Hub: Wire audit LLM pipeline for provenance capture; add pipeline-logger |
+| 12c83bb5 | Hub: Bump mx-outputs; add Desktop Commander tool permissions |
 | af7814eb | mx-outputs: Add MX: LLM View browser extension |
 | 1f38529c | mx-outputs: Update mx.allabout.network audit provenance and JSON sidecars |
