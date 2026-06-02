@@ -1,3 +1,138 @@
+# prompt capture
+# script: audit-fierce-critic
+# stepId: llm-critic-pass
+# model:  gpt-oss:20b
+# sha256: 5515623f2a822109e81c4aeb6b8aae1ab56dc157b815ac294fa9bd5955894d1b
+# capturedAt: 2026-06-02T14:25:00.909Z
+# systemPromptBytes: 11625
+# userMessageBytes:  71669
+
+--- system ---
+You are a senior audit-report editor reviewing a client-facing web audit report produced by a web consultancy. Automated regex checks have already run and caught explicit pattern violations (banned words, leaked paths, overpromise phrases). Your job is to catch what the regex cannot.
+
+Check SEVEN areas only. Raise the bar: only flag what a professional editor reviewing 100 similar reports would flag. If a finding is borderline, skip it.
+
+=== AREA 1: Subtle failure framing ===
+
+The regex caught explicit banned words (failing, broken, poor, deficient). Catch the subtler forms:
+  - "struggles to", "falls short of", "has failed to", "lags behind", "disappointing", "unfortunately", "worrying", "alarmingly", "regrettably"
+  - Inverse framing that implies a low baseline: "surprisingly good for", "better than expected given", "not as bad as"
+  - Passive-aggressive softening that still condemns: "leaves something to be desired", "could be improved significantly", "is far from optimal"
+
+Do NOT flag:
+  - Legitimate hedging ("may benefit from", "has room to")
+  - Factual descriptions of low scores stated neutrally ("a score of 23/100")
+  - Opportunity framing the report already uses correctly
+
+=== AREA 2: Hollow recommendations ===
+
+A recommendation is hollow when it names a category but not a mechanism. "Invest in better accessibility" is hollow. "Add a visible skip link before the main navigation on all pages" is specific.
+
+Flag as "hollow-recommendation" when a recommendation:
+  - Could be copy-pasted unchanged into any web audit report for any site
+  - Names only a domain ("accessibility", "SEO", "performance") without a specific element, page type, or action from the audit findings
+  - Uses "consider improving", "focus on", "invest in", "work towards" without naming what specifically to do
+
+Do NOT flag:
+  - Recommendations that are inherently site-wide by nature ("add llms.txt at the domain root")
+  - Recommendations that reference specific findings from earlier in the report
+  - Prioritisation language ("tackle X before Y")
+  - Security header recommendations that name a missing header by its technical name (Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, HSTS). A header is a binary artefact, present or absent. A recommendation naming a specific absent header is already data-anchored to this audit and is not hollow even if the explanatory prose is standard web-security text.
+  - Any recommendation that names at least one specific data point from this report: a technical header name, a scored dimension, a URL, a count from audit data, a CSS selector, a schema property, or a missing binary artefact. Presence of a named data anchor means the recommendation is not hollow, only flag when the prose is pure domain framing with no data anchor at all.
+
+SPECIFICITY TEST (apply before flagging hollow-recommendation): Search the entire priority block, from the "### Priority N:" heading through to the end of that priority's prose, including any facts or scores listed within it, for any data anchor: a header name, a score value, a page URL, a CSS selector, a schema type, a count. If any data anchor appears anywhere in the same priority block (not just the immediately preceding sentence), the recommendation is not hollow. Only flag when you can confirm there is no data anchor anywhere in the surrounding priority block.
+
+=== AREA 3: Voice drift ===
+
+The regex caught "I [verb]" constructions. Catch the forms it missed:
+  - "After reviewing", "Having examined", "Looking at the data", "Based on my"
+  - Academic hedges that break consultant voice: "One might argue", "It could be said", "Some would suggest"
+  - Sudden shift to passive bureaucratic voice mid-paragraph when the surrounding sentences are first-person plural ("We found X. Y has been identified. We recommend Z.", the middle sentence breaks the voice)
+
+Do NOT flag:
+  - Technical passive ("was detected", "was not found"), standard audit language
+  - Third-person references to the site or client ("the site has", "the client's page")
+
+=== AREA 4: Fabricated specificity ===
+
+Flag when prose narrative introduces specific numbers, percentages, named comparisons, or effort estimates that do not appear in the preceding facts block and cannot be derived from the audit data.
+
+Common examples:
+  - Industry benchmarks not from this audit: "Most e-commerce sites achieve X% coverage"
+  - Named comparisons not in audit data: "Sites like [Competitor] already implement this"
+  - Effort estimates: "This typically takes N hours to implement"
+
+Do NOT flag:
+  - Numbers from the audit data tables (scores, counts, percentages from the facts)
+  - Well-known binary facts ("Google's rich-results eligibility requires AggregateRating")
+  - Schema.org type names and property names
+
+=== AREA 5: Leaked AI generation artifacts ===
+
+Flag as "fabricated-specificity" when the report contains content that is clearly internal AI generation machinery never meant to appear in the client deliverable:
+
+  - AI-to-operator dialogue in the report body:
+    * Requests for missing data: "Could you paste...", "I need the actual...", "Can you provide the relevant fields...", "Please supply..."
+    * Complaints about empty inputs: "the facts you have referenced do not contain any concrete values", "no data was supplied for this section"
+    * Role or system prompt text visible in the output: instructions to the AI, template-slot descriptions, rubric fragments
+  - Unfilled placeholder text: "[INSERT X HERE]", "{{variable}}", "[TODO]", "[PLACEHOLDER]", "<client name>", angle-bracket tokens
+  - Self-referential generation notes: "Note: this section was generated without full data", "Based on the limited information provided", "I cannot write accurate prose without additional context"
+
+The test: would a client reading this paragraph understand that it is the AI assistant speaking to the operator, rather than the consultant writing to the client? If yes, it is a leaked generation artifact. Flag it even if no numbers are fabricated, the issue is internal tooling language visible to the client.
+
+=== AREA 6: Exaggeration / hyperbole and US/UK English drift ===
+
+The regex caught obvious hyperbole tokens (outstanding, world-class, game-changing, etc.). Catch the subtler forms the regex cannot:
+
+  - Compound superlatives the regex won't match as single tokens: "an experience few competitors match", "ahead of nearly every peer site we audit", "puts the site in a different class".
+  - Hidden hyperbole framing: "vastly improved", "dramatically reduced", "significantly outperforms", "by far the most", when the underlying delta is small or unsupported by the audit data.
+  - Implied uniqueness: "the only site we've audited that...", "uniquely positioned to...", only legitimate when the audit data demonstrably supports the uniqueness claim.
+
+Flag as "exaggeration", even when the words themselves are restrained, if the cumulative effect is marketing copy rather than peer-to-peer consultant prose, raise it.
+
+US/UK English drift. Audit reports go to clients in both markets so the prose should prefer NEUTRAL English where US and UK forms diverge: "team" not "organisation/organization", "styling" not "colour/color", "preferred" not "favourite/favorite". Where no neutral rephrasing is natural, British forms are the default (organise, recognised, behaviour, programme, optimise, analyse). Flag drift as "exaggeration":
+
+  - American forms in narrative prose: "color", "behavior", "organize", "optimize", "analyze", "favorite", "catalog", "honor", "labor", "license" (as a verb), "specialize".
+  - Mixed register inside one paragraph: "we organise" (UK form) immediately followed by "the optimization" (US form). Pick one register and hold it; ideally the neutral form.
+
+Do NOT flag:
+  - Quoted American forms inside a citation or a URL.
+  - Schema.org property names (those are vocabulary, not prose).
+
+Em-dashes in prose. The deterministic regex catches the literal em-dash character and the HTML entity. Catch the cases where an em-dash got there indirectly:
+
+  - Double-hyphen "--" used as an em-dash substitute. Looks innocuous to the regex; reads as a typewriter dash to the client.
+  - Long spaced-hyphen runs (" - ") used to attach a parenthetical aside. Same function as an em-dash, same problem; rewrite as two sentences or a parenthetical with brackets.
+
+Negation-pivot construction beyond the regex's reach. The regex catches the canonical forms ("not just X, Y", "isn't about A, it's about B", "not only X but also Y"). Catch the variants:
+
+  - "It would be wrong to think of this as X; the audit shows Y", affirmative-after-negative pivot dressed in formal voice.
+  - "Yes, this is X, but it is much more than that", concession-pivot.
+  - "While X may suggest Y, the audit reveals Z", clause-level pivot that lifts the same rhetorical move into a more academic register.
+
+All three patterns belong under "exaggeration", the negation-pivot is a tell of LLM-rewriter output and reads as marketing copy in disguise. State the affirmative directly.
+
+=== AREA 7: Third-party vendor DOM blamed on the site template ===
+
+Some pa11y findings target DOM elements that vendor JavaScript SDKs inject into the rendered DOM at runtime. Element type is irrelevant, iframes (consent UIs, embed players, social widgets), buttons (consent banners, chat-widget toggles), banner divs (cookie notices, GDPR overlays), images (analytics pixels, vendor avatars), and scripts (tag-manager loaders, recording scripts) all behave the same way: they exist in the rendered DOM because vendor JS put them there, NOT because the site's template authored them. Common families and a few vendor tells: consent management (Usercentrics, OneTrust / cookielaw, TrustArc), tag management (Google Tag Manager), customer-messaging widgets (Intercom, HubSpot, Drift, Zendesk, Crisp), session-recording analytics (Hotjar, FullStory, Mouseflow), scheduling (Calendly), social embeds (X / Twitter, Meta).
+
+A recommendation that prescribes a site-template / theme-level / partial-level edit for one of these elements is wrong, the only valid remediation paths are an SDK upgrade with the vendor, or a DOM-observer patch that adds the missing attribute after injection.
+
+Flag as "third-party-vendor-template-blame" when ALL of these hold:
+  - The recommendation names an element selector (id, class, or element) clearly belonging to a vendor SDK. Vendor-tell selector substrings: "consent", "cookie", "usercentrics", "onetrust", "cookielaw", "trustarc", "gtm", "tag-manager", "intercom", "hubspot", "drift", "zendesk", "crisp", "calendly", "hotjar", "fullstory", "mouseflow", "analytics", "tracking", "advert", "cdcs", "cross-domain-consent", "chat-widget", "messenger".
+  - The recommendation prescribes a fix at the site template / theme / partial / layout level ("locate the template that renders", "apply the fix in the theme", "edit the partial", "fix at the layout level", "a single theme-level edit resolves all instances").
+  - The recommendation does NOT acknowledge the element's third-party origin, name the upstream vendor, or describe an SDK upgrade or DOM-observer patch as the actual fix path.
+
+Do NOT flag:
+  - Elements whose selector or surrounding prose clearly maps to the site itself (e.g. "/embed", "/iframes/", first-party video players named after the site, internal CTAs styled to look like vendor widgets).
+  - Recommendations that already say "third-party", "vendor SDK", "DOM observer", or name the upstream vendor.
+
+Call the report_llm_findings tool with your findings, or with findings: [] if you have none.
+--- user ---
+Regex checks already flagged these categories in this report: none. Do not re-raise findings in those categories.
+
+Report to review:
+
 ---
 title: "Contentful: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
@@ -85,11 +220,13 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 | Agent Readability | **72**/100 | `#############-----` |
 | Pipeline Survivability | **79**/100 | `##############----` |
 
-Contentful's website serves its human audience well. SEO foundations across the audited set are excellent at 94/100, titles and meta descriptions are in place across product and navigational pages, and Schema.org JSON-LD is present in the served HTML of every audited page -- meaning every machine that fetches the raw HTML receives structured data without needing to execute JavaScript. The Organization entity carries `sameAs` links to Wikidata (Q18348837), Wikipedia, LinkedIn, GitHub, and YouTube, providing external authority anchors that machines can use to verify the publisher's identity. The homepage and product pages are clearly structured with proper landmark elements and a single H1 on each page.
+Contentful's website serves its human audience well. SEO foundations across the audited set are excellent at 94/100, titles and meta descriptions are in place across product and navigational pages, and Schema.org JSON-LD is present in the served HTML of every audited page -- meaning every machine that fetches the raw HTML receives structured data without needing to execute JavaScript. The Organization entity carries `sameAs` links to Wikidata (Q18348837), Wikipedia, LinkedIn, GitHub, and YouTube, providing external authority anchors that machines can use to verify the publisher's identity.
 
-The headline opportunity, and the one we want to draw attention to first, is accessibility. Pa11y (automated WCAG 2.1 AA testing) identified 279 issues across 11 distinct issue types on the 12 audited pages. Of those, 156 instances trace to 14 recurring template-level patterns -- a single theme edit per pattern resolves all instances at once. A further 12 instances originate from a tracking element injected at runtime by a third-party SDK hosted at ad.ipredictive.com; that fix runs through the vendor, not the site template. Accessibility is a Priority 1 compliance item: the European Accessibility Act (EAA Directive 2019/882), ADA, EN 301 549, and analogous instruments across major markets all resolve to the same technical baseline. Beyond the machine experience opportunity, this is the most direct regulatory exposure in the audited set.
+The headline opportunity we want to draw attention to first is accessibility. Pa11y (automated WCAG 2.1 AA testing) identified 279 issues across 11 distinct issue types on the 12 audited pages. Of those, 156 instances trace to 14 recurring template-level patterns -- a single theme edit per pattern resolves all instances at once. A further 12 instances originate from a tracking element injected at runtime by a third-party SDK hosted at ad.ipredictive.com; that fix runs through the vendor, not the site template. Accessibility is a Priority 1 compliance item: the European Accessibility Act (EAA Directive 2019/882), ADA, EN 301 549, and analogous instruments across major markets all resolve to the same technical baseline.
 
-On the machine-experience side, the site sits at MX Readiness Level 1 (Discoverable): machines can find and parse the site, but they cannot yet cite it as an attested source. The path to Level 2 (Citation-ready) is adding MX governance fields -- mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers -- to each page. Discovery Readiness scores 39/100 because no llms.txt, no llms-full.txt, and no discovery link tags appear in the page heads on the audited set; adding these is low-effort work with clear machine-readability returns.
+This audit also detected seven A/B test and personalisation vendor frameworks active across the audited pages. We confirmed that the `/products/personalization/` page returned a different headline on one of three cache-busted probes -- evidence that the personalisation layer assigns machine fetchers to test cohorts randomly on each cold request. This is the Stateless Machine Visitor problem: machines do not maintain session state, so they receive different experiment variants on each visit and cannot assemble a coherent picture of what the site actually says. The training corpus risk compounds this: sitemap-sweeping bots that ingest pages for model training may record contradictory versions of the same URL across multiple crawl passes.
+
+On the machine-experience side, the site sits at MX Readiness Level 1 (Discoverable): machines can find and parse the site, but they cannot yet cite it as an attested source. The path to Level 2 (Citation-ready) is adding MX governance fields and publishing an llms.txt that gives machines a canonical, authored description of the site's content.
 
 \clearpage
 
@@ -189,9 +326,10 @@ We prioritised findings by regulatory exposure first, then by the number of audi
 | 3 | Skip link absent on all 12 pages (WCAG 2.4.1) | Compliance Risk | Med | Low | Keyboard users must tab through full navigation on every page |
 | 4 | 32 first-party images missing alt text (WCAG 1.1.1) | Compliance Risk | Med | Low | Screen reader users receive no image description |
 | 5 | Cold-origin response: avg 3489ms, slowest 6814ms | Cross-cutting | Med | Med | First-time visitor abandonment risk; CDN serves returning visitors quickly |
-| 6 | No llms.txt, no discovery link tags in page heads | Machine Readability Opportunity | High | Low | Machines receive no structured content index; growing AI-search gap |
-| 7 | Schema Maturity Level 1: WebSite missing recommended properties | Machine Readability Opportunity | Med | Low | Machines lack attribution, publishing context, visual identity |
-| 8 | JSON-LD in body (not head) on several audited pages | Machine Readability Opportunity | Med | Low | Head-only parsers may miss structured data |
+| 6 | 7 A/B test and personalisation vendors; variant confirmed on /products/personalization/ | Machine Readability Opportunity | High | Low | Machines receive random experiment variants; training corpora ingest contradictory versions |
+| 7 | No llms.txt, no discovery link tags in page heads | Machine Readability Opportunity | High | Low | Machines receive no structured content index; growing AI-search gap |
+| 8 | Schema Maturity Level 1: WebSite missing recommended properties | Machine Readability Opportunity | Med | Low | Machines lack attribution, publishing context, visual identity |
+| 9 | JSON-LD in body (not head) on several audited pages | Machine Readability Opportunity | Med | Low | Head-only parsers may miss structured data |
 
 ---
 
@@ -199,7 +337,7 @@ We prioritised findings by regulatory exposure first, then by the number of audi
 
 **Bucket:** Compliance Risk
 
-**Finding:** Pa11y (automated WCAG 2.1 AA testing) identified 279 issues across the 12 audited pages. Of these, 156 instances trace to 14 recurring template-level patterns -- a single theme edit per pattern resolves all instances at once. A further 12 instances originate from a tracking element injected at runtime by a third-party SDK hosted at ad.ipredictive.com; those elements are not in the site template and the fix runs through the vendor. The three most widespread template-level patterns are: iframes without title attributes (12 pages, WCAG 2.4.1 -- affects sighted keyboard users who navigate frames by title); footer anchor links with no text content (11 pages, WCAG 4.1.2 -- screen reader users encounter links with no label); and heading level jumps from h2 to h4 (10 pages, WCAG 2.4.6 -- screen reader users navigating by heading lose the structural thread). The pricing page carries additional button-name violations (WCAG 4.1.2) on the feature comparison table's tooltip controls -- these are also template-level and resolve in one pass. Duplicate ID attributes on accordion and JSON-LD script elements appear on a subset of pages (WCAG 4.1.1), affecting all assistive technology users.
+**Finding:** Pa11y (automated WCAG 2.1 AA testing) identified 279 issues across the 12 audited pages. Of these, 156 instances trace to 14 recurring template-level patterns -- a single theme edit per pattern resolves all instances at once. A further 12 instances originate from a tracking element injected at runtime by a third-party SDK hosted at ad.ipredictive.com; those elements are not in the site template and the fix runs through the vendor. The three most widespread template-level patterns are: iframes without title attributes (12 pages, WCAG 2.4.1 -- affects sighted keyboard users who navigate frames by title); footer anchor links with no text content (11 pages, WCAG 4.1.2 -- screen reader users encounter links with no label); and heading level jumps from h2 to h4 (10 pages, WCAG 2.4.6 -- screen reader users navigating by heading lose the structural thread). The pricing page carries additional button-name violations (WCAG 4.1.2) on the feature comparison table's tooltip controls -- these are also template-level and resolve in one pass.
 
 **What to change and why:**
 
@@ -216,7 +354,7 @@ We prioritised findings by regulatory exposure first, then by the number of audi
 
 **Bucket:** Compliance Risk
 
-**Finding:** The `Content-Security-Policy` (CSP) header is absent from every response in the audited set. HTTPS and HSTS are present on all 12 pages, and X-Frame-Options and X-Content-Type-Options are present on 11 of 12 pages -- but without CSP, the site has no browser-enforced restriction on which scripts, styles, or iframes may load. CSP is the primary mechanism for preventing cross-site scripting (XSS) and data injection attacks; its absence leaves every visitor's session exposed to any script that can be injected into the page. The `/sitemap` route additionally lacks X-Frame-Options and X-Content-Type-Options, leaving that path without clickjacking and MIME-sniffing protection.
+**Finding:** The `Content-Security-Policy` (CSP) header is absent from every response in the audited set. HTTPS and HSTS are present on all 12 pages, and X-Frame-Options and X-Content-Type-Options are present on 11 of 12 pages -- but without CSP, the site has no browser-enforced restriction on which scripts, styles, or iframes may load. CSP is the primary mechanism for preventing cross-site scripting (XSS) and data injection attacks; its absence leaves every visitor's session exposed to any script that can be injected into the page. The `/sitemap` route additionally lacks X-Frame-Options and X-Content-Type-Options.
 
 **What to change and why:**
 
@@ -245,7 +383,7 @@ We prioritised findings by regulatory exposure first, then by the number of audi
 
 **Bucket:** Compliance Risk
 
-**Finding:** Across the 12 audited pages, 44 images are missing alt text. Of these, 32 are first-party images served from Contentful's own CDN (`images-www.contentful.com`) -- hero images, case study thumbnails, and product illustrations. A further 12 are tracking pixels injected by a third-party SDK at ad.ipredictive.com; those require a vendor fix, not a template change. WCAG 1.1.1 (Level A) requires a text alternative for every non-decorative image. Screen reader users receive no description of these images, losing context for product features, case study references, and visual identity cues. This is an increase from the prior audit sample and warrants a site-wide sweep.
+**Finding:** Across the 12 audited pages, 44 images are missing alt text. Of these, 32 are first-party images served from Contentful's own CDN (`images-www.contentful.com`) -- hero images, case study thumbnails, and product illustrations. A further 12 are tracking pixels injected by a third-party SDK at ad.ipredictive.com; those require a vendor fix, not a template change. WCAG 1.1.1 (Level A) requires a text alternative for every non-decorative image. Screen reader users receive no description of these images, losing context for product features, case study references, and visual identity cues.
 
 **What to change and why:**
 
@@ -271,39 +409,59 @@ We prioritised findings by regulatory exposure first, then by the number of audi
 
 ---
 
-**Priority 6: No llms.txt, No Discovery Link Tags in Page Heads**
+**Priority 6: 7 A/B Test and Personalisation Vendors, Variant Confirmed on /products/personalization/**
 
 **Bucket:** Machine Readability Opportunity
 
-**Finding:** The site publishes no [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) at any of the standard locations (`/llms.txt`, `/llms-full.txt`, `/.well-known/llms.txt`). No `<link rel="llms-txt">` or `<link rel="sitemap">` link tags appear in the head of any audited page. Machines querying the site for a structured content index receive no description; they must crawl individual pages to build an understanding of what the site covers. The sitemap carries 3,358 URLs and is referenced in robots.txt, but without a curated llms.txt the machine has no authored summary of the site's purpose, scope, or content policy. Discovery Readiness scores 39/100 (Could Be Better) as a result.
+**Finding:** We detected seven A/B test and personalisation vendor frameworks across the 12 audited pages: Ninetailed, Google Optimize, Optimizely, Visual Website Optimizer (VWO), Kameleoon, Dynamic Yield, and Unbounce Smart Traffic. We confirmed content variance on `/products/personalization/`: three cache-busted probes of the same URL returned "Flexible personalization made for marketers" on probes 1 and 2, then "Personalization that puts devs in the driver seat" on probe 3. The experiment layer assigned a different cohort on the third cold fetch.
+
+This is the Stateless Machine Visitor problem. A/B tests assume persistent sessions: cookies assign a visitor to a cohort on first fetch and that cohort follows them across pages. Machines arrive cold on every fetch -- no cookies, no cohort, no session continuity. Each HTTP request is independent. A machine building an understanding of Contentful may receive variant A on the homepage, variant B on the pricing page, and the control on the product page, assembling a picture from incoherent fragments.
+
+The training corpus risk compounds this. Sitemap-sweeping bots that ingest pages for model training run across the full sitemap on each crawl pass. Each pass is cold. The bot may ingest "Personalization that puts devs in the driver seat" on one crawl and "Flexible personalization made for marketers" on the next, embedding contradictory descriptions of the same product into training data.
+
+**What to change and why:**
+
+- Configure each personalisation platform to serve the control (canonical) variant to known machine User-Agents. ClaudeBot, GPTBot, ChatGPT-User, PerplexityBot, GoogleOther, CCBot, and Google-Extended are the most important to cover. Most platforms support User-Agent bypass rules; this is a configuration change, not a code change.
+- Reference experiment URLs in llms.txt with a note that content varies by session, so machines are warned not to treat any single fetch as canonical.
+- Consider serving a stable, non-personalised version of key pages to bot User-Agents via CDN routing rules, ensuring machines see the publisher's intended canonical content.
+
+**Effort:** Low (platform configuration change; llms.txt update)
+
+---
+
+**Priority 7: No llms.txt, No Discovery Link Tags in Page Heads**
+
+**Bucket:** Machine Readability Opportunity
+
+**Finding:** The site publishes no [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) at any of the standard locations (`/llms.txt`, `/llms-full.txt`, `/.well-known/llms.txt`). No `<link rel="llms-txt">` or `<link rel="sitemap">` link tags appear in the head of any audited page. Machines querying the site for a structured content index receive no description; they must crawl individual pages to build an understanding of what the site covers. Discovery Readiness scores 39/100 (Could Be Better) as a result.
 
 **What to change and why:**
 
 - Publish an llms.txt at `/llms.txt` containing a brief site description, the primary URL, and a page inventory with canonical URLs and summaries. Serve it as `text/html` (with the content inside a `<pre>` block) rather than `text/plain`; our recommendation diverges from the llmstxt.org specification on this point because Common Crawl, which underpins most major LLM training datasets, prioritises HTML pages. Add a sitemap entry so crawlers have a reliable discovery path.
-- For a content estate of Contentful's scale (3,358 URLs in the sitemap), publishing an llms-full.txt companion file is worth scoping. This concatenates the full text of every published page into a single file so machines can ingest the corpus in one fetch rather than crawling each page individually.
+- For a content estate of Contentful's scale (3,358 URLs in the sitemap), publishing an llms-full.txt companion file is worth scoping. This concatenates the full text of every published page into a single file so machines can ingest the corpus in one fetch.
 - Add `<link rel="llms-txt" href="/llms.txt">` and `<link rel="sitemap" href="/sitemap-index.xml">` to the page template's head. These link relations are the standard machine-discovery pointers and require a single template change to propagate across all pages.
 
 **Effort:** Low (file authoring + template change + sitemap entry)
 
 ---
 
-**Priority 7: Schema Maturity Level 1, WebSite Missing Recommended Properties**
+**Priority 8: Schema Maturity Level 1, WebSite Missing Recommended Properties**
 
 **Bucket:** Machine Readability Opportunity
 
-**Finding:** Both Schema.org types in use -- WebSite and Organization -- appear on the audited pages with 100% required-property coverage. The Organization entity is particularly well-implemented: its `sameAs` array connects to authoritative external identifiers including Wikidata (Q18348837) and Wikipedia. However, WebSite blocks earn 0% on recommended properties: `image`, `datePublished`, `author`, and `publisher` are absent from every instance. JSON-LD blocks are emitted inside `<body>` rather than `<head>` on several audited pages; machines that read only the `<head>` for structured data may miss it. The overall Structured Data Quality score is 61/100 (Good). Schema Maturity sits at Level 1 (Decoration): the structural primitives are in place, but the recommended properties and cross-entity wiring that lift the markup to Level 2 (Good Schema) are absent.
+**Finding:** Both Schema.org types in use -- WebSite and Organization -- appear on the audited pages with 100% required-property coverage. The Organization entity is particularly well-implemented: its `sameAs` array connects to authoritative external identifiers including Wikidata (Q18348837) and Wikipedia. However, WebSite blocks earn 0% on recommended properties: `image`, `datePublished`, `author`, and `publisher` are absent from every instance. JSON-LD blocks are emitted inside `<body>` rather than `<head>` on several audited pages. The overall Structured Data Quality score is 61/100 (Good). Schema Maturity sits at Level 1 (Decoration).
 
 **What to change and why:**
 
 - Add `image`, `datePublished`, `author`, and `publisher` to the WebSite JSON-LD block. These are the recommended properties that let machines enrich answers with visual identity, publishing context, and attribution. A single template-level change propagates to all pages.
-- Move JSON-LD blocks into the `<head>` section. Structured data in `<head>` is reachable by machines that parse only the head for metadata. The current placement at body offsets of 18,000-22,000 bytes means these machines may not reach it on pages where they apply a token-budget limit.
-- For product pages, consider adding `SoftwareApplication` schema to describe each product's capabilities, pricing model, and platform requirements. This enriches the machine's understanding beyond "this is a website" to "this is a specific software product."
+- Move JSON-LD blocks into the `<head>` section. Structured data in `<head>` is reachable by machines that parse only the head for metadata.
+- For product pages, consider adding `SoftwareApplication` schema to describe each product's capabilities, pricing model, and platform requirements.
 
 **Effort:** Low (template and JSON-LD changes)
 
 ---
 
-**Priority 8: JSON-LD Emitted Inside body on Several Audited Pages**
+**Priority 9: JSON-LD Emitted Inside body on Several Audited Pages**
 
 **Bucket:** Machine Readability Opportunity
 
@@ -331,8 +489,8 @@ These are not issues but areas where additional metadata or patterns would stren
 
 This test fetches the homepage using the User-Agent strings of known AI agents to verify whether this site is accessible at inference time.
 
-| AI Agent | User-Agent | Status | Result |
-|----------|-----------|--------|--------|
+| AI Agent                         | User-Agent             | Status | Result     |
+|----------------------------------|------------------------|--------|------------|
 | ClaudeBot (Anthropic) | `ClaudeBot/1.0` | 200 | Accessible |
 | GPTBot (OpenAI) | `GPTBot/1.0` | 200 | Accessible |
 | ChatGPT-User (OpenAI) | `ChatGPT-User/1.0` | 200 | Accessible |
@@ -380,15 +538,33 @@ This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate
 
 ## Server Response Stability
 
-Single load-time measurements can mislead. A page that returns in a few hundred milliseconds on the crawler's second visit may be served from a warm CDN edge; the same page on a genuine cold visit could spend several seconds at the origin before the first byte arrives. To separate the two experiences, this section probes the slowest page from the crawl and a median-load control with three cache-busted GETs each, then compares those measurements against the crawler's original cold-cache baseline.
+Single load-time measurements can mislead. A page that returns in a few hundred milliseconds on the crawler's second visit may be served from a warm CDN edge; the same page on a genuine cold visit could spend several seconds at the origin before the first byte arrives. To separate the two experiences, this section probes the slowest page and a median-load control with three cache-busted GETs each, then compares those measurements against the crawler's original cold-cache baseline.
 
-**Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
+**Method:** Each URL fetched three times with a `?_mx_cb={stamp}` cache-busting query parameter and `Cache-Control: no-cache`. For each page we compare both the crawler's cold-cache baseline and the median of three cache-busted GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms.
 
-**Slowest.** The slowest page is `https://www.contentful.com/products/ai-actions/`. A first-time visitor sees the cold-cache cost: the crawler recorded 6,814ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three cache-busted re-probes that followed returned a returning-visitor median of **727ms**. **Returning-visitor verdict: Healthy**.
+**Slowest.** The slowest page is `https://www.contentful.com/products/ai-actions/`. A first-time visitor sees the cold-cache cost: the crawler recorded 6,814ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three cache-busted re-probes returned a returning-visitor median of **727ms**. **Returning-visitor verdict: Healthy**.
 
 **Median-load control.** The median-load control page is `https://www.contentful.com/products/personalization/`. A first-time visitor sees the cold-cache cost: the crawler recorded 3,053ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three cache-busted re-probes returned a returning-visitor median of **578ms**. **Returning-visitor verdict: Healthy**.
 
 **Verdict:** Returning visitors are served quickly across the site, but first-time visitors hit slow cold-cache responses on both the slowest page and a median-load page. The CDN is warming pages effectively, but the origin's cold response time is poor.
+
+---
+
+## Personalisation and A/B Testing: Machine Visitor Impact
+
+We observed confirmed content variance on `/products/personalization/`: the page returned "Personalization that puts devs in the driver seat" on probe 3 versus "Flexible personalization made for marketers" on probes 1 and 2. The experiment layer assigned a different cohort on the third cold, stateless HTTP fetch.
+
+Seven A/B test and personalisation vendor frameworks were detected across the audited pages: Ninetailed, Google Optimize, Optimizely, Visual Website Optimizer (VWO), Kameleoon, Dynamic Yield, and Unbounce Smart Traffic. These were identified from script URL patterns, DOM attributes, and inline JavaScript globals in the served HTML.
+
+The underlying problem is structural: A/B tests assume persistent sessions. A human visitor receives a cohort assignment on first fetch -- stored in a cookie -- and that cohort follows them across every subsequent page. The experiment is coherent. The journey is internally consistent. Machines do not honour this contract. Each HTTP request arrives cold: no session, no cohort, no history. An experiment layer assigns the request to a cohort based on whatever signals are available (timestamp, IP range, a random number) and serves a variant. The machine records the content it received, constructs its answer, and moves on. The next fetch of the same URL repeats the process from the beginning.
+
+The training corpus risk runs deeper. Sitemap-sweeping bots that ingest pages for model training run across the full sitemap on each crawl pass. Each pass is cold. The bot may record "Personalization that puts devs in the driver seat" on one crawl and "Flexible personalization made for marketers" on the next, embedding contradictory descriptions of the same product page into training data. A model trained on this corpus cannot give a consistent answer about what Contentful's personalisation product does, because the training data contains both versions as equally-weighted facts.
+
+**Recommended mitigations:**
+
+- Configure each personalisation platform to serve the control (canonical) variant to known machine User-Agents. ClaudeBot, GPTBot, ChatGPT-User, PerplexityBot, GoogleOther, CCBot, and Google-Extended are the most important to cover. Most platforms support User-Agent bypass rules; this is a configuration change, not a code change.
+- Reference experiment URLs in llms.txt with a note that content varies by session, so machines are warned not to treat any single fetch as canonical.
+- Consider serving a stable, non-personalised version of key pages to bot User-Agents via CDN routing rules, ensuring machines see the publisher's intended canonical content.
 
 ---
 
@@ -432,14 +608,12 @@ No agent-card.json found at `/.well-known/agent-card.json` (HTTP 404). The A2A (
 
 ### Other discovery files detected
 
-One additional registered `/.well-known/` path returned a response: `/.well-known/security.txt` (HTTP 200, PGP-signed). This is a positive signal -- the security.txt file provides a machine-readable security contact following RFC 9116. The per-path breakdown is preserved alongside this report as a sidecar JSON.
-
-*Reference: the [IANA Well-Known URIs registry](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) lists the full set of registered `/.well-known/` paths and their RFCs.*
+One additional registered `/.well-known/` path returned a response: `/.well-known/security.txt` (HTTP 200, PGP-signed). This is a positive signal -- the security.txt file provides a machine-readable security contact following RFC 9116.
 
 ## Structured Data Inventory
 
-| Schema Type | Pages | Required % | Recommended % | Notes |
-|-------------|-------|-----------|--------------|-------|
+| Schema Type  | Pages | Required % | Recommended % | Notes                                    |
+|--------------|-------|------------|---------------|------------------------------------------|
 | WebSite | 12 | 100% | 0% | `image`, `datePublished`, `author`, `publisher` missing |
 | Organization | 12 | 100% | 100% | Well-implemented with sameAs to Wikidata, Wikipedia, LinkedIn |
 
@@ -447,14 +621,12 @@ One additional registered `/.well-known/` path returned a response: `/.well-know
 **Coverage:** 12 pages with JSON-LD out of 12 total (100%)\
 **Unique types:** 2
 
-Across the 12 pages we audited, structured data presence is solid. Both types carry full required-property coverage. The Organization entity is a standout: its sameAs array connects to authoritative external identifiers including Wikidata (Q18348837), which is the kind of linked-data signal that moves the SDQ score and increases machine confidence in entity identity. The opportunity is in the WebSite type, where all four recommended properties are absent, and in expanding the type vocabulary beyond WebSite and Organization to describe specific products.
+Across the 12 pages we audited, structured data presence is solid. Both types carry full required-property coverage. The Organization entity is a standout: its sameAs array connects to authoritative external identifiers including Wikidata (Q18348837), which is the kind of linked-data signal that moves the SDQ score and increases machine confidence in entity identity.
 
 ### SDQ Score Breakdown
 
-The Structured Data Quality (SDQ) score is composed of seven measurable signals. This breakdown shows what your site earns in each.
-
-| Component | Earned | Max | Meaning |
-|-----------|--------|-----|---------|
+| Component                       | Earned | Max | Meaning                                                       |
+|---------------------------------|--------|-----|---------------------------------------------------------------|
 | Presence | 10 | 10 | schema.org JSON-LD exists on the page |
 | Required property coverage | 25 | 25 | Worst-case across all entities |
 | Recommended property coverage | 8 | 15 | Average across entities |
@@ -468,9 +640,7 @@ The Structured Data Quality (SDQ) score is composed of seven measurable signals.
 
 ## Structured Data Findings
 
-We identified structured data property gaps across the audited set. Each row names a single missing property on a single entity with a short note on why it matters to machines.
-
-The full per-entity list is delivered alongside this report as a sidecar CSV: [`www-contentful-com-structured-data-findings.csv`](www-contentful-com-structured-data-findings.csv). The rows describe individual Schema.org property gaps on specific entities; most of them share a small number of underlying patterns, shown below ranked by instance count.
+We identified structured data property gaps across the audited set. The full per-entity list is delivered alongside this report as a sidecar CSV: [`www-contentful-com-structured-data-findings.csv`](www-contentful-com-structured-data-findings.csv).
 
 | Type | Severity | Property | Instances | Pages | Why it matters |
 |------|----------|----------|----------:|------:|----------------|
@@ -481,23 +651,11 @@ The full per-entity list is delivered alongside this report as a sidecar CSV: [`
 | jsonLd | location | outside-head | 5 | 5 | JSON-LD emitted inside body at byte 18,000-22,000. Agents that parse only the head may not see it. |
 | openGraph | location | byteOffset | 1 | 1 | Open Graph tags start past the 250 KB agent-truncation threshold on one page. |
 
-**Severity legend:**
-
-| Severity | Meaning |
-|----------|---------|
-| `required` | Schema.org spec requires this property for the type. Missing values break validation. |
-| `recommended` | Schema.org strongly recommends this property. Missing values reduce richness. |
-| `vocabulary` | The `@type` value is not in the Schema.org vocabulary: typically a typo or an invented type. |
-
 ---
 
 ## Provenance Gap
 
-**What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organization: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
-
-### Templated clusters
-
-No templated clusters detected at the audited scale.
+**What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
 ### Provenance verdict
 
@@ -509,8 +667,8 @@ No provenance-gap blockers detected on the audited set. Pages clear the citation
 
 ## Marker Reachability
 
-| Marker | In served | In rendered | In head | Reachable <250KB | Injected by JS |
-|--------|-----------|-------------|---------|------------------|----------------|
+| Marker                            | In served   | In rendered | In head | Reachable <250KB | Injected by JS |
+|-----------------------------------|-------------|-------------|---------|------------------|----------------|
 | JSON-LD structured data | Yes | Yes | No | Yes | No |
 | Microdata (itemscope) | Not present | Not present | n/a | n/a | n/a |
 | Open Graph meta tags | Yes | Yes | 82% | No | No |
@@ -521,13 +679,11 @@ No provenance-gap blockers detected on the audited set. Pages clear the citation
 | Language declaration (html lang) | Yes | Yes | Yes | Yes | No |
 | Skip link (accessibility) | Not present | Not present | n/a | n/a | n/a |
 
-All detected markers are present in the served HTML on the audited pages. Server-side and browser-based machines see the same signals across the sampled pages. Open Graph, Twitter Card, and canonical tags reach the head on 82% of audited pages; `/sitemap` is the one page in the sample where these three are absent.
+All detected markers are present in the served HTML on the audited pages. Open Graph, Twitter Card, and canonical tags reach the head on 82% of audited pages; `/sitemap` is the one page in the sample where these three are absent.
 
 ---
 
 ## Schema Maturity Level
-
-Schema.org implementations fall into five maturity tiers. The transitions are not continuous. Each level requires structurally different work.
 
 |  | Level | Name | What it looks like |  |
 |---|-------|------|---------------------|---|
@@ -544,10 +700,10 @@ Schema.org implementations fall into five maturity tiers. The transitions are no
 
 ## 5-Stage MX Journey
 
-The MX Journey maps the five stages a machine follows when interacting with a website. Each stage builds on the previous one. A break at any stage propagates to all subsequent stages.
+The MX Journey maps the five stages a machine follows when interacting with a website. Each stage builds on the previous one.
 
-| Stage | Name | Status | Score | Key Metric |
-|-------|------|--------|-------|------------|
+| Stage | Name              | Status      | Score | Key Metric                                        |
+|-------|-------------------|-------------|-------|---------------------------------------------------|
 | 1 | Discovery | Partial | 78 | Crawlable with semantic HTML |
 | 2 | Citation | Fail | 33 | Schema.org: WebSite, Organization (100% required properties) |
 | 3 | Search & Compare | Fail | 20 | Pricing detected but no commerce schema |
@@ -560,16 +716,16 @@ The site is Partially Compatible for its type. Stage 1 (Discovery) is partial: s
 
 ## Agent Reading Pipeline
 
-Scoring a machine's metadata is not the same as scoring whether a machine can read each page at all. Pipeline Survivability (PS) runs eleven reading-resilience checks on every audited page. Each one asks whether a page survives a known agent-reading risk: truncation by the agent's fetch tool, JavaScript-only content, soft 404s, broken code fences, content negotiation drift, cross-host redirects, generic headings, content that begins too far into the document, or overhead-heavy pages where scripts, styles, and images outweigh actual content.
+Scoring a machine's metadata is not the same as scoring whether a machine can read each page at all. Pipeline Survivability (PS) runs eleven reading-resilience checks on every audited page.
 
 - **Truncation Risk** - Fail - 12/12
-  - *Means:* Every page in the audited set exceeds the 250 KB threshold at which some machines stop reading. A machine with a limited fetch window may reach the metadata in the head but stop before the main content -- meaning the structured data and titles are seen but the body text is not.
-  - *Data:* All 12 pages exceed the 250 KB ceiling. See www-contentful-com-pipeline-truncation-risk-pages.csv.
+  - *Means:* Every page in the audited set exceeds the 250 KB threshold at which some machines stop reading. A machine with a limited fetch window may reach the metadata in the head but stop before the main content.
+  - *Data:* All 12 pages exceed the 250 KB ceiling.
 - **SPA Shell** - Pass - 12/12
   - *Means:* Served HTML matches rendered HTML -- no JavaScript is required for content. Server-side machines see the same content a browser does.
-  - *Data:* Max gap score: 3. 0 means served and rendered match.
+  - *Data:* Max gap score: 3.
 - **Soft 404** - Pass - 12/12
-  - *Means:* Missing pages return a proper HTTP 404 status. No pages misleadingly return 200 for non-existent URLs.
+  - *Means:* Missing pages return a proper HTTP 404 status.
   - *Data:* 0 soft-404 pages detected.
 - **Boilerplate Burial** - Pass - 12/12
   - *Means:* Navigation and chrome do not dominate the page; main content is reachable without wading through overhead.
@@ -596,15 +752,15 @@ Scoring a machine's metadata is not the same as scoring whether a machine can re
   - *Means:* Body prose averages only 17% of served bytes on the sampled pages. Scripts, styles, and images account for the remaining 83%; machines receive very little readable signal per byte fetched.
   - *Data:* Average: 17%. Threshold: 30%.
 - **Inline Tag Bloat** - Fail - 12/12
-  - *Means:* Every page in the audited set carries large inline `<script>` blocks. The contact/sales page is the extreme case; machines that read the page as a document must parse through substantial inline JavaScript before reaching content. Externalising these blocks to separate `.js` files lets machines skip them during cheap head-first fetches.
-  - *Data:* Multiple elements over 500 bytes per page. See www-contentful-com-pipeline-inline-tag-bloat-pages.csv.
+  - *Means:* Every page in the audited set carries large inline `<script>` blocks. Externalising these blocks to separate `.js` files lets machines skip them during cheap head-first fetches.
+  - *Data:* Multiple elements over 500 bytes per page.
 - **Head Weight** - Pass - 3/3
   - *Means:* Head bytes are a small fraction of each page. Machines reach body content quickly.
   - *Data:* Max ratio: 0.03.
 
 **Pipeline Survivability score:** 79/100
 
-The two failing checks -- Truncation Risk and Inline Tag Bloat -- both point to the same root cause: page payloads dominated by JavaScript. All 12 audited pages exceed the 250 KB truncation threshold, and all 12 carry large inline script blocks. Moving repeated analytics and consent scripts to external files (they appear identically across all pages) would reduce both the inline bloat and the total page size in one pass. The body content ratio of 17% reflects this imbalance; improving it would directly lift Pipeline Survivability toward the 90+ range.
+The two failing checks -- Truncation Risk and Inline Tag Bloat -- both point to the same root cause: page payloads dominated by JavaScript. All 12 audited pages exceed the 250 KB truncation threshold, and all 12 carry large inline script blocks. Moving repeated analytics and consent scripts to external files would reduce both the inline bloat and the total page size in one pass.
 
 For the methodology behind this section, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -614,40 +770,32 @@ For the methodology behind this section, see **[MX: The Protocols Appendix R: Te
 
 When every container is a `<div>` with no role, no ARIA landmark, and no class name that describes what it is, machines lose structural context and fall back on positional inference to determine meaning. The visual layout still works for sighted users; the structural information that machines need to index, cite, and represent each page is gone.
 
-| Source | Score (band) | Bare div stats | Top bare selectors | Worst page |
-|--------|--------------|----------------|--------------------|------------|
-| Rendered HTML | 34/100 (high) | 290 bare divs (51% of containers, depth 7) | `div` (240), `div.grid-helper-col.col-span-1` (144), `div.tooltip_root__EulUk` (95), `div.button_markup_root__sACGr.button_markup_secondary__F_qxS` (68), `div.round-icon.round_icon_container__Jmlwp` (57) | <https://www.contentful.com/products/personalization/> |
+| Source        | Score (band)  | Bare div stats                              | Top bare selectors                                                                                                                                                                                          |
+|---------------|---------------|---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rendered HTML | 34/100 (high) | 290 bare divs (51% of containers, depth 7) | `div` (240), `div.grid-helper-col.col-span-1` (144), `div.tooltip_root__EulUk` (95), `div.button_markup_root__sACGr.button_markup_secondary__F_qxS` (68), `div.round-icon.round_icon_container__Jmlwp` (57) |
 
-On the `/products/personalization/` page -- the worst case in the audited set -- 290 of 566 container elements (51%) are bare divs with no semantic role, a depth reaching 7 levels. Machines encountering this page lose structural context and fall back on position and class-name inference to determine meaning. The pattern appears to be surface-wide rather than deep-chain: many components across the page use div containers rather than named semantic elements. The most impactful first move is wrapping the obvious landmarks (the feature sections, the testimonial blocks, the comparison grid) with `<section>`, `<article>`, or `<aside>` elements, which drops the bare-div ratio without restructuring the layout.
+**Worst page (rendered):** <https://www.contentful.com/products/personalization/>
+
+On the `/products/personalization/` page -- the worst case in the audited set -- 290 of 566 container elements (51%) are bare divs with no semantic role, a depth reaching 7 levels. Machines encountering this page lose structural context and fall back on position and class-name inference to determine meaning. The most impactful first move is wrapping the obvious landmarks (the feature sections, the testimonial blocks, the comparison grid) with `<section>`, `<article>`, or `<aside>` elements, which drops the bare-div ratio without restructuring the layout.
 
 ---
 
 ## Security Headers
 
-| Header | Status | Purpose |
-|--------|--------|---------|
+| Header                          | Status   | Purpose                                          |
+|---------------------------------|----------|--------------------------------------------------|
 | HTTPS | Yes | Encrypted transport |
 | HSTS | Yes | Forces HTTPS, prevents downgrade attacks |
 | Content-Security-Policy | No | Prevents XSS and injection attacks |
 | X-Frame-Options | Yes (11/12) | Prevents clickjacking |
 | X-Content-Type-Options | Yes (11/12) | Prevents MIME-type sniffing |
 
-Header coverage is uneven across audited responses: X-Frame-Options on 11/12 audited responses, X-Content-Type-Options on 11/12 audited responses. A further header is absent on every audited response: Content-Security-Policy (CSP). A single server-config change brings the missing responses in line with the strongest baseline already in place.
+Header coverage is uneven across audited responses: X-Frame-Options on 11/12 audited responses, X-Content-Type-Options on 11/12 audited responses. CSP is absent from every audited response. A single server-config change brings the missing responses in line with the strongest baseline already in place.
 
 **Coverage:** 0 of 12 audited URLs carry all five headers.
 
 - **`/sitemap`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame No - X-Content-Type No
-- **`/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/pricing/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/contact/sales/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/products/platform/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/products/personalization/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/products/ai-actions/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/products/analytics/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/products/studio/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/products/ecosystem/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/marketplace/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
-- **`/products/personalization/ai-suggestions/`**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
+- **All other pages**: HTTPS Yes - HSTS Yes - CSP No - X-Frame Yes - X-Content-Type Yes
 
 HTTPS: 12/12 | HSTS: 12/12 | CSP: 0/12 | X-Frame-Options: 11/12 | X-Content-Type-Options: 11/12
 
@@ -655,8 +803,8 @@ HTTPS: 12/12 | HSTS: 12/12 | CSP: 0/12 | X-Frame-Options: 11/12 | X-Content-Type
 
 ## Cross-Page Consistency
 
-| Pattern | Coverage | Pages missing it |
-|---------|----------|------------------|
+| Pattern                          | Coverage | Pages missing it   |
+|----------------------------------|----------|--------------------|
 | Schema.org JSON-LD | 100% | - |
 | MX governance tags | 0% | 12 |
 | Open Graph tags | 92% | `/sitemap` |
@@ -676,18 +824,12 @@ HTTPS: 12/12 | HSTS: 12/12 | CSP: 0/12 | X-Frame-Options: 11/12 | X-Content-Type
 
 The audited set shows consistent metadata patterns across pages, with no organisation-name or canonical-URL divergence flagged by the consistency check.
 
-| Check | Result | Notes |
-|-------|--------|-------|
+| Check                            | Result | Notes                    |
+|----------------------------------|--------|--------------------------|
 | Organisation name parity | Pass | Organisation name appears consistently across all 12 audited pages |
 | Canonical URL duplicates | Pass | No duplicate canonical URLs detected across the 12-page audited set |
 | Meta description length | Pass | Meta descriptions present on all pages; none flagged for length violations |
 | Cross-page entity spread (same entity on multiple pages) | Pass | Schema.org entities reference consistent identifiers across the audited set |
-
-### AI Judgment -- Review Required
-
-The following finding requires human review before the report ships. It is derived from LLM analysis of observed patterns and cannot be verified deterministically.
-
-**Personalisation layer serving test-variant H1s to automated fetches.** During manual verification, the homepage was fetched directly and the H1 read "Sorry, content chaos -- your time's up". A separate run returned "Lorem ipsum dolor sit amet... whatever". Neither is the production headline that the Puppeteer-rendered audit score reflects (SEO 94/100 is consistent with real content). Contentful appears to be running A/B or personalisation experiments that serve placeholder H1 content to automated user-agents, including the crawlers used by this audit. Automated agents that fetch raw HTML without browser rendering may receive these test variants rather than production content. This warrants investigation to confirm that test variants are not inadvertently exposed to real machines at inference time.
 
 ---
 
@@ -695,8 +837,8 @@ The following finding requires human review before the report ships. It is deriv
 
 We found 180 identical inline fragments repeated across multiple pages, totalling approximately 1.8 MB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
 
-| Type | Bytes per fragment | Appears on N pages | Preview |
-|------|-------------------:|-------------------:|---------|
+| Type | Bytes per fragment | Appears on N pages | Preview                                                          |
+|------|-------------------:|-------------------:|------------------------------------------------------------------|
 | js | 1042 | 24 | (function(){function g(d){for(var h=document.cookie.split("; |
 | js | 939 | 24 | (function(){window.__ctflCookies=... |
 | js | 891 | 14 | (function(){function f(c){for(var a=0;a<c.length;a++){var d= |
@@ -729,15 +871,16 @@ We linked no PDFs from the 12-page sample we crawled, and the sitemap declares n
 ### Recommended Actions
 
 1. **Address Priority 1 findings**: address the 279 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
-2. **Review Priority 2-5 findings**: CSP, skip link, alt text, performance improvements that compound over time
-3. **Consider optional enhancements**: optional patterns that give a first-mover advantage in AI search
+2. **Address Priority 6**: configure A/B test platforms to serve canonical content to known machine User-Agents
+3. **Review Priority 2-5**: CSP, skip link, alt text, performance improvements
+4. **Consider optional enhancements**: potentialAction, BreadcrumbList, Content-Signal directives
 
 ### What's Next
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | WCAG 2.1 AA compliance | Priority 1 items resolved, compliance risk removed |
-| Full Optimization | Catalogue Visibility, Semantic Structure, Discovery Readiness, Structured Data, MX Stack Completeness, Heading Quality, Performance, Security headers, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Critical Fixes | WCAG 2.1 AA compliance + A/B test bypass rules | Priority 1 compliance resolved; machines receive canonical content |
+| Full Optimization | Catalogue Visibility, Semantic Structure, Discovery Readiness, Structured Data, MX Stack Completeness, Performance, Security headers | Full machine readiness |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | Long-term competitive advantage in AI-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | Every document, every format, every machine |
 
@@ -745,7 +888,7 @@ We linked no PDFs from the 12-page sample we crawled, and the sitemap declares n
 
 ## Summary of Findings
 
-SEO is the standout strength across the audited set: 94/100 overall and 93/100 on content pages, with titles, meta descriptions, and canonical URLs consistently in place. JSON-LD is present in the served HTML of every audited page, all 8 tested machines return HTTP 200 at inference time, and the Organization entity carries strong linked-data signals including Wikidata (Q18348837). The headline opportunities are accessibility (279 WCAG 2.1 AA issues with 14 template-level patterns to resolve), a missing Content Security Policy across all audited pages, and a Discovery Readiness score of 39/100 driven by the absence of llms.txt, discovery link tags, and MX governance fields. Addressing the accessibility and CSP items closes the immediate compliance exposure; adding llms.txt and MX governance metadata moves the site from MX Readiness Level 1 (Discoverable) to Level 2 (Citation-ready). We are ready to scope either engagement.
+SEO is the standout strength across the audited set: 94/100 overall and 93/100 on content pages. JSON-LD is present in the served HTML of every audited page, all 8 tested machines return HTTP 200 at inference time, and the Organization entity carries strong linked-data signals including Wikidata (Q18348837). The headline opportunities are accessibility (279 WCAG 2.1 AA issues with 14 template-level patterns to resolve), seven active A/B test and personalisation vendors with confirmed content variance on the `/products/personalization/` page, a missing Content Security Policy across all audited pages, and a Discovery Readiness score of 39/100 driven by the absence of llms.txt, discovery link tags, and MX governance fields. Addressing the A/B test bypass rules alongside the accessibility and CSP items closes the most urgent gaps; adding llms.txt and MX governance metadata moves the site from MX Readiness Level 1 (Discoverable) to Level 2 (Citation-ready). We are ready to scope either engagement.
 
 ### Audit Scores
 
@@ -787,7 +930,7 @@ Pages marked (nav) are navigational: they route visitors to content rather than 
 
 ## Appendix B: Link Inventory
 
-We recorded every same-host internal link found on each audited page. The total is dominated by the HTML sitemap page (`/sitemap`), which lists 3,388 same-host URLs across the full site. The remaining 11 pages average 66 links each -- normal for a site with a large navigation menu and footer. External links are not tracked; this inventory covers same-host `<a href>` links only. Link status was not probed; for a dedicated broken-link audit, run a rate-limited crawler on the link set at a time that suits the site.
+We recorded every same-host internal link found on each audited page. The total is dominated by the HTML sitemap page (`/sitemap`), which lists 3,388 same-host URLs across the full site. The remaining 11 pages average 66 links each -- normal for a site with a large navigation menu and footer. External links are not tracked; this inventory covers same-host `<a href>` links only.
 
 | Link class | Count |
 | --- | ---: |
@@ -802,9 +945,9 @@ We recorded every same-host internal link found on each audited page. The total 
 
 ## Appendix C: Image Optimisation
 
-We audited 890 images across the 12 pages sampled. Format distribution: 598 SVG, 264 PNG, 15 JPEG, 1 WebP, and 12 in other or unrecognised formats. Alt text coverage requires attention: 846 of 890 images (95.1%) carry alt text; 44 images are missing it. Of the 44 missing, 32 are first-party images served from Contentful's own CDN -- hero images, case study thumbnails, and product illustrations that screen reader users currently receive no description of. A further 12 are tracking pixels injected at runtime by a third-party SDK at ad.ipredictive.com; those require a vendor fix, not a template change. This count is higher than in our prior sample and warrants a site-wide alt text sweep.
+We audited 890 images across the 12 pages sampled. Format distribution: 598 SVG, 264 PNG, 15 JPEG, 1 WebP, and 12 in other or unrecognised formats. Alt text coverage requires attention: 846 of 890 images (95.1%) carry alt text; 44 images are missing it. Of the 44 missing, 32 are first-party images served from Contentful's own CDN -- hero images, case study thumbnails, and product illustrations. A further 12 are tracking pixels injected at runtime by a third-party SDK at ad.ipredictive.com; those require a vendor fix, not a template change.
 
-Loading strategy across the audited set is well-managed: 840 images carry `loading="lazy"`, 14 carry `loading="eager"`, and 36 have no loading attribute set. No attribute is not the same as eager -- the browser applies its default, which historically treated all images as eager but modern browsers may apply lazy heuristics to off-screen images. Only `loading="lazy"` guarantees deferred loading across all browsers; the 36 images with no attribute are candidates for an audit to confirm their fold position.
+Loading strategy across the audited set is well-managed: 840 images carry `loading="lazy"`, 14 carry `loading="eager"`, and 36 have no loading attribute set. No attribute is not the same as eager -- the browser applies its default, which historically treated all images as eager but modern browsers may apply lazy heuristics to off-screen images. Only `loading="lazy"` guarantees deferred loading across all browsers.
 
 The image pipeline predominantly uses SVG for icons and UI elements (appropriate -- SVG is already optimal for vector graphics) and PNG for photographs and product images. The 264 PNG and 15 JPEG images are candidates for WebP conversion: WebP delivers meaningfully smaller file sizes with no visible quality loss, and all modern browsers support it. The original PNG/JPEG files should be retained for `og:image` and `twitter:image` social tags, which benefit from maximum platform compatibility.
 
@@ -818,15 +961,15 @@ The image pipeline predominantly uses SVG for icons and UI elements (appropriate
 
 Pa11y is an open-source automated accessibility testing tool that checks web pages against the Web Content Accessibility Guidelines (WCAG 2.1 AA).
 
-**MX-specific metrics:** MX Stack Completeness (MSC) measures all 7 metadata layers. Structured Data Quality (SDQ) scores JSON-LD entity richness. Discovery Readiness (DR) scores the robots.txt + sitemap + llms.txt + agent-card.json quartet. Cross-Page Consistency flags pages that deviate from site-wide patterns. Site Profile JSON enables cross-audit comparison. **Pipeline Survivability (PS)** runs eleven reading-resilience checks: truncation resilience, SPA shell resilience, soft-404 signalling, boilerplate balance, tabbed-disclosure avoidance, code-fence integrity, single-content-type negotiation, same-host redirects, heading specificity, early content start, and inline-tag bloat control. See **[MX: The Protocols Appendix S](https://mx.allabout.network/books/appendices/appendix-s.html)** for the full taxonomy and **[Appendix R](https://mx.allabout.network/books/appendices/appendix-r.html)** for the testing methodology.
+**MX-specific metrics:** MX Stack Completeness (MSC) measures all 7 metadata layers. Structured Data Quality (SDQ) scores JSON-LD entity richness. Discovery Readiness (DR) scores the robots.txt + sitemap + llms.txt + agent-card.json quartet. Cross-Page Consistency flags pages that deviate from site-wide patterns. **Pipeline Survivability (PS)** runs eleven reading-resilience checks. See **[MX: The Protocols Appendix S](https://mx.allabout.network/books/appendices/appendix-s.html)** for the full taxonomy and **[Appendix R](https://mx.allabout.network/books/appendices/appendix-r.html)** for the testing methodology.
 
-**Platform detection:** We fingerprint the hosting platform from HTTP response headers and HTML signatures. Detected platform: **Next.js**. The main audit uses Next.js-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
+**A/B test and personalisation detection.** The audit scans each cached decoded HTML file for known vendor signatures (script URL patterns, DOM attributes, inline JavaScript globals) against a registry of 12 vendors. When detected, the slowest-page probe's content samples are cross-referenced for H1 variance -- confirming whether the experiment layer is serving different content to stateless machine fetchers.
 
-**Link inventory:** We record every internal link found on every audited page with its URL, anchor text, and link type. We do not probe link status: a dedicated, rate-limited broken-link crawler handles that separately. Appendix B is a link inventory, not a broken-link list.
+**Platform detection:** We fingerprint the hosting platform from HTTP response headers and HTML signatures. Detected platform: **Next.js**. The main audit uses Next.js-specific rate limits from our platform knowledge base.
 
 **Scope:** 12 pages analysed | Platform: Next.js | Analysis method: Hybrid (automated + manual verification) | robots.txt: Found
 
-**Measurement completeness:** Some probes may encounter network errors (HTTP 499 responses) or timeouts that halt data collection for that check. These are recorded in the audit findings as informational notes. Network timeouts are expected behaviour; a machine reading under time constraints stops processing just as a human reviewer would if time ran short.
+**Measurement completeness:** Some probes may encounter network errors (HTTP 499 responses) or timeouts that halt data collection for that check. These are recorded in the audit findings as informational notes.
 
 **What comes next.** This report is the foundation, not the finish line. Implementing the recommendations requires the technical context that produced them; we carry that context forward. Our implementation engagements begin where this audit ends. Speak to us about next steps.
 
@@ -856,7 +999,7 @@ We hold this audit deliverable to the same MX standards we apply to your site. E
 
 The AI evidence chain records every non-deterministic step: the model identifier, the SHA-256 of the system prompt we ran, the SHA-256 of the file the step produced, a short excerpt of the model's reasoning, and the human-intervention state. This chain is designed as evidence for AI-governance regimes: EU AI Act, UK ICO AI guidance, US NIST AI RMF, and Colorado AI Act. The framework citations are claims of relevance, not compliance grants; conformance with each regulation remains a legal duty of the organisation. This PDF carries the full AI evidence chain inside its XMP metadata under `xmp:ProvenanceAiPayload`. The adjacent `www-contentful-com-report.provenance.ai.json` is a copy of the same JSON for tooling that prefers file access.
 
-The deterministic evidence chain lives at `www-contentful-com-report.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility conformance.
+The deterministic evidence chain lives at `www-contentful-com-report.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict.
 
 To extract the chain from the PDF: `exiftool -b -XMP-mx:ProvenanceAiPayload www-contentful-com-report.pdf | jq .`.
 
@@ -874,3 +1017,4 @@ This practice is what MX expects of every artefact in the field. We apply it fir
 *This is a sample run. Contact CogNovaMX for a quote for a full-scope audit and continuing oversight plans.*
 
 *Read the books: <https://mx.allabout.network/books/index.html>*
+
