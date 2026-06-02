@@ -4,7 +4,7 @@
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
   "auditId": null,
   "runRevision": 1,
-  "lastWriteAt": "2026-06-02T08:32:52.773Z",
+  "lastWriteAt": "2026-06-02T08:39:41.713Z",
   "startedAt": "2026-06-02T08:32:52.593Z",
   "operator": null,
   "responsiblePerson": {
@@ -361,6 +361,47 @@
       "reasoningTrace": "{\n  \"findings\": []\n}",
       "outcome": "pass",
       "notes": "runCount=1 regexFindings=3 llmFindings=0"
+    },
+    {
+      "timestamp": "2026-06-02T08:35:27.451Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "www-contentful-com-report.md",
+        "regexCategoriesFlagged": []
+      },
+      "outputs": {
+        "file": "www-contentful-com-report-fierce-critic.json",
+        "sha256": "9a6efde9bbb4d154f5b4ea7abdff022f37eaf7338b0700db659fbcceabaae970"
+      },
+      "rubricHash": "8a488965de03eb267a847ab7a015b60d93a1df3866ce80b91c5c2af8021b6826",
+      "inputHashes": [
+        {
+          "hash": "e37cb49822887cec1a330ee060cd2c132f0dd793d84bf07e3241167d9298202e",
+          "label": "report"
+        }
+      ],
+      "outcome": "pass",
+      "notes": "runCount=2 regexFindings=0 llmFindings=0"
+    },
+    {
+      "timestamp": "2026-06-02T08:39:41.713Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render www-contentful-com-report.md to tagged PDF via mx.pdf.sh (doctype: report)",
+      "inputs": {
+        "source": "www-contentful-com-report.md",
+        "doctype": "report",
+        "sourceSha": "cf842def090da2151f07dd20a27e470750b4fe33",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-06-02/www.contentful.com/www-contentful-com-report.md"
+      },
+      "outcome": "pass"
     }
   ]
 }
