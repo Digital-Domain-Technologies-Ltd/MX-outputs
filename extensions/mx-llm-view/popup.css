@@ -1,0 +1,278 @@
+/* MX: LLM View — popup styles. Matches the 460x560 Chrome action popup
+   constraint used by the sibling MX extensions. Accent: indigo, distinct
+   from Readiness Inspector (teal) and Comprehension Probe (amber). */
+
+:root {
+  --ink: #111827;
+  --ink-soft: #4b5563;
+  --paper: #ffffff;
+  --paper-soft: #f9fafb;
+  --rule: #e5e7eb;
+  --accent: #4f46e5;
+  --pass: #15803d;
+  --pass-bg: #dcfce7;
+  --warn: #b45309;
+  --warn-bg: #fef3c7;
+  --fail: #b91c1c;
+  --fail-bg: #fee2e2;
+  --shadow: 0 1px 2px rgba(0,0,0,0.04);
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+body {
+  width: 460px;
+  min-height: 560px;
+  font-size: 13px;
+  line-height: 1.45;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+
+.popup-header {
+  padding: 12px 16px 8px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-soft);
+  flex: 0 0 auto;
+}
+
+.popup-header h1 {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+.page-url {
+  margin: 4px 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Loading / Error states ──────────────────────────────────── */
+
+.loading-state {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+}
+
+.loading-text {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.loading-text code {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-style: normal;
+  color: var(--accent);
+}
+
+.error-state {
+  flex: 1 1 auto;
+  padding: 24px 16px;
+  font-size: 12px;
+  color: var(--fail);
+  font-style: italic;
+}
+
+/* ── Result section ──────────────────────────────────────────── */
+
+#result {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 14px 0;
+  min-height: 0;
+}
+
+/* ── Meta row: HTTP status + content-type + verdict ─────────── */
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.badge-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-soft);
+}
+
+.badge {
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--paper-soft);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge-pass { background: var(--pass-bg); border-color: var(--pass); color: var(--pass); }
+.badge-warn { background: var(--warn-bg); border-color: var(--warn); color: var(--warn); }
+.badge-fail { background: var(--fail-bg); border-color: var(--fail); color: var(--fail); }
+.badge-neutral { background: var(--paper-soft); border-color: var(--rule); color: var(--ink); }
+
+.status-pill {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.status-pill.pass { background: var(--pass-bg); color: var(--pass); }
+.status-pill.warn { background: var(--warn-bg); color: var(--warn); }
+.status-pill.fail { background: var(--fail-bg); color: var(--fail); }
+
+/* ── Redirect notice / counts ────────────────────────────────── */
+
+.redirect-notice {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: var(--warn);
+  font-family: var(--mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.counts-row {
+  margin: 5px 0 5px;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+/* ── Body pre block ──────────────────────────────────────────── */
+
+.body-pre {
+  flex: 1 1 auto;
+  margin: 0 0 8px;
+  padding: 8px 10px;
+  background: var(--paper-soft);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
+  max-height: 340px;
+  min-height: 80px;
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+
+.popup-footer {
+  flex: 0 0 auto;
+  border-top: 1px solid var(--rule);
+  padding: 8px 14px 10px;
+  background: var(--paper-soft);
+}
+
+.footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.footer-note {
+  font-size: 10px;
+  color: var(--ink-soft);
+  font-style: italic;
+  flex: 1 1 auto;
+}
+
+.copy-btn {
+  flex: 0 0 auto;
+  padding: 5px 10px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.copy-btn:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.copy-btn:active { transform: scale(0.98); }
+
+.copy-btn.copied {
+  background: var(--pass-bg);
+  color: var(--pass);
+  border-color: var(--pass);
+}
+
+.version {
+  margin: 4px 0 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-soft);
+}
+
+/* ── Utilities ───────────────────────────────────────────────── */
+
+.hidden { display: none !important; }
+
+/* ── Dark mode ───────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f3f4f6;
+    --ink-soft: #9ca3af;
+    --paper: #111827;
+    --paper-soft: #1f2937;
+    --rule: #374151;
+    --accent: #a5b4fc;
+    --pass: #86efac;
+    --pass-bg: #14532d;
+    --warn: #fcd34d;
+    --warn-bg: #78350f;
+    --fail: #fca5a5;
+    --fail-bg: #7f1d1d;
+  }
+}
