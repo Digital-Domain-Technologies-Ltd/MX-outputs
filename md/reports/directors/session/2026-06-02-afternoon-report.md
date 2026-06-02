@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Blog Posts Published; Batch Audit Infrastructure Built"
-description: "Afternoon session: three blog posts on Salesforce-Contentful and Chrome classifications; then full two-pace batch audit system built with TTL cache, sitemap HEAD checker, overnight batch orchestrator, and complete doc suite."
+title: "Co-Directors Report — Contentful Audit; A/B Test Detection Pipeline; Manuscripts"
+description: "Afternoon session (extended): Contentful 10-page audit rerun confirming caching fix; full A/B test vendor detection pipeline built (12 vendors, stateless machine visitor finding); Stateless Machine Visitor pattern added to MX Protocols chapter 11; blog post drafted; architecture lockstep checker extended."
 author: "Tom Cranstoun"
 created: 2026-06-02
 modified: 2026-06-02
-version: "2.0"
+version: "3.0"
 
 mx:
   status: active
@@ -101,13 +101,79 @@ The RESONEO Chrome research makes the inference-vs-declaration argument concrete
 
 ---
 
+## Part 2 (Extended Afternoon) -- A/B Test Detection and Manuscript Work
+
+The session ran well past its planned scope when the Contentful audit rerun surfaced a novel finding: Ninetailed (a personalisation platform) was serving different H1 variants on every cold HTTP fetch -- "Sorry, content chaos" on one probe, "Lorem ipsum dolor sit amet" on another. This confirmed a structural problem in how A/B testing interacts with stateless machine visitors. The finding drove a substantial new pipeline feature and a named concept in the manuscripts.
+
+### Contentful Audit Rerun
+
+The 2026-06-02 Contentful audit output folder was deleted to test all pipeline fixes end-to-end. The rerun confirmed:
+
+- `resolveHostCacheDir()` fix: decoded HTML now writes correctly to `mx-outputs/audit/<hostSlug>/.cache/decoded/` (13 files confirmed after the run)
+- `error-page-test.js` hasSchemaOrg false positive fixed (now returns false for the Next.js error boundary shell)
+- Sitemap-dominates detection in Appendix B: `/sitemap` page (3,388 links) correctly isolated from the 11-page average (66 links)
+- Div soup table format fix: `(51% of containers, depth N)` prevents fierce-critic false positive on ratio values
+- All gates passed, PDF generated at EAA Level 2
+
+New finding in this run: Contentful's personalisation layer serves A/B test variant H1s to cold machine fetches. The Ninetailed SDK was detected in the served HTML; content variance was confirmed across three probes. Filed as a judgment finding. This became the seed for the A/B test detection pipeline below.
+
+### A/B Test Detection Pipeline
+
+Built a complete new detection system for the audit, from vendor data to template section:
+
+- `mx-reginald/audit/data/ab-test-vendors.json` -- 12 vendor signatures (Ninetailed, Optimizely, VWO, AB Tasty, Google Optimize, LaunchDarkly, Kameleoon, Convert, Dynamic Yield, Qubit, Unbounce, Monetate); updatable without code changes
+- `mx-reginald/audit/bin/check-ab-test.js` -- detection script scanning cached HTML for script patterns, DOM attributes, inline JS globals; cross-references `slowest-page-perf.json` for content-variance evidence (H1 differs across probes)
+- `mx-reginald/audit/bin/slowest-page-probe.js` -- extended to capture H1 per sample and emit `contentSamples[]` + `contentVarianceDetected`
+- `mx-reginald/audit/bin/tableHandlers/abTestDiscovery.js` -- infill handler; strips section when nothing detected
+- Both audit templates updated with `<!-- SECTION:AB_TEST_DISCOVERY -->` block
+- `scripts/audit-pipeline.js` Step 6.5 wired in (non-fatal)
+- `scripts/audit-llm-phase2.js` updated to include `ab-test-discovery.json` in `PHASE1_JSON_FILES`
+- `scripts/audit-ab-vendors-sync.js` -- maintenance script HEAD-checking CDN URLs
+- `mx-reginald/audit/test/check-ab-test.test.js` -- 8 tests, all passing
+
+The report section frames the finding as the "Stateless Machine Visitor" problem -- machines arrive cold on every fetch, receive random cohort assignments, and assemble incoherent cross-page journeys. Also covers the training corpus problem: sitemap-sweeping bots ingest different variants of the same URL across multiple crawl passes.
+
+### Architecture Lockstep Checker Extended
+
+`check-audit-architecture.js` now covers six surfaces instead of three:
+
+1. Bin scripts (existing)
+2. Table handlers, collectors, scorers, reporters, skills (existing)
+3. **Data files** -- new: `data/` JSON files must be documented in the architecture cog
+4. **Test coverage** -- new: every `check-*.js` bin script must have a test file; pre-existing untested scripts given exempt status with comments
+5. **PHASE1_JSON_FILES completeness** -- new: any sidecar written by the pipeline must be in `audit-llm-phase2.js` PHASE1_JSON_FILES or in the intentional exclusions list
+
+`check-llm-phase2-completeness.js` created as a standalone tool then absorbed into `check-audit-architecture.js`. The checker now runs in `npm test`.
+
+### Manuscripts and Blog
+
+- MX Protocols, Chapter 11 ("Designing for Both"): new section "The Stateless Machine Visitor" -- names the pattern, defines it, gives four mitigation paths (User-Agent bypass, llms.txt declaration, canonical response header, separate machine path), connects it to the training corpus problem
+- Blog post draft `ab-test-lying-to-machines.html` written and published to `mx-outputs/mx-site/blog/drafts/` -- hook is the Contentful audit finding; covers the stateless machine problem, the training corpus risk, and what publishers should do; passes all HTML hygiene checks
+- `npm-run-audit.cog.md` bumped to v1.5.0 with Step 6.5 documented
+
+---
+
 ## Next Steps
 
 - Consider the three blog posts as a cluster for a Boye CMS Experts speaker submission: "Who owns agent-ready content?"
 - The "who-answers" post CTA ("Declare your machine policy") is the closest we have to a direct service page for policy COGs. The services page may need a matching section.
 - llms.txt sync script did not confirm the three new posts in llms.txt - verify the llms.txt key-pages block includes the new posts before next session.
 - Run the batch audit overnight: `node scripts/audit-batch.js scripts/audit-batch-config.example.yaml` -- first real run against mx.allabout.network at full depth.
-- Archive the contentful.com audit work: the report.md is committed but no PDF was generated this session.
+- **Promote the A/B test blog post**: the Contentful finding gives it a concrete hook. Review for tone before promoting.
+- **Gather Gathering feedback on the "Stateless Machine Visitor" pattern**: this may belong as a formal MX gathering draft for the canonical definition.
+
+---
+
+## By the Numbers (Part 2)
+
+| Metric | Value |
+|--------|-------|
+| New scripts created | 5 (check-ab-test.js, abTestDiscovery.js, audit-ab-vendors-sync.js, check-ab-test.test.js, check-llm-phase2-completeness.js) |
+| Vendors in ab-test-vendors.json | 12 |
+| Tests for new detection script | 8 (all passing) |
+| New checks in check-audit-architecture.js | 3 (data files, test coverage, PHASE1_JSON_FILES) |
+| Manuscript words added | ~1,200 (Stateless Machine Visitor section) |
+| Blog post words | ~1,580 |
 
 ---
 
@@ -123,4 +189,7 @@ The RESONEO Chrome research makes the inference-vs-declaration argument concrete
 | 10179da9 | mx-outputs | Add www.contentful.com audit deliverables 2026-06-02 |
 | 1f5de699 | hub | Batch audit system: two-pace architecture, TTL cache, docs |
 | 100a429d | hub | Add mx.triggers field to canon (v6.13) |
-| _pending_ | hub | Docs commit: CLAUDE.md cache versions, LEARNINGS, REMINDERS, mx-outputs bump |
+| 99b97e83 | hub | Fix pre-existing dead relative links in appendix-m |
+| 6416e278 | hub | Document check-ab-test.js and abTestDiscovery.js in architecture cog |
+| f677e14e | mx-outputs | Add A/B test blog post draft |
+| _pending_ | hub | A/B test detection pipeline; caching fix; architecture checker; manuscripts |
