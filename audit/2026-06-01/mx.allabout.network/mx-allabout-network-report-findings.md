@@ -10,12 +10,12 @@ mx:
   status: active
   contentType: audit-findings
   audience: [humans]
-  x-mx-findingsCount: 2
+  x-mx-findingsCount: 3
   runbook: "Human reviewer reads this file before signing off on the client-facing report. Findings here are raised by the automated gates; accept, rebut, or correct each one before delivery."
 ---
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this sidecar surfaces 2 findings (1 error, 1 warning) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+Every automated gate ran to completion; this sidecar surfaces 3 findings (2 errors, 1 warning) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
 
 ### Errors (I/O or structural failures)
 
@@ -23,13 +23,24 @@ Every automated gate ran to completion; this sidecar surfaces 2 findings (1 erro
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | timeout-fierce-critic | subprocess-timeout | Subprocess timeout (fierce-critic) | 2026-06-02T07:34:23Z |
+| 1 | timeout-fierce-critic | subprocess-timeout | Subprocess timeout (fierce-critic) | 2026-06-02T07:44:20Z |
+| 2 | timeout-llm-judgment | subprocess-timeout | Subprocess timeout (llm-judgment) | 2026-06-02T07:46:24Z |
 
-<details open><summary>Error detail (1)</summary>
+<details open><summary>Error detail (2)</summary>
 
 **1. timeout-fierce-critic - Subprocess timeout (fierce-critic)**
 
-The fierce-critic subprocess exceeded the timeout threshold and was terminated. This is expected behavior — a machine reader would also stop processing here. Elapsed: 120004ms. Kill reason: hard-timeout.
+The fierce-critic subprocess exceeded the timeout threshold and was terminated. This is expected behavior — a machine reader would also stop processing here. Elapsed: 120003ms. Kill reason: hard-timeout.
+
+Suggested next steps:
+
+- Review the subprocess output for deadlocks or resource exhaustion.
+- Check if the target URL has changed or is now unreachable.
+- Consider adjusting the timeout threshold via MX_AUDIT_GATE_TIMEOUT_MS.
+
+**2. timeout-llm-judgment - Subprocess timeout (llm-judgment)**
+
+The llm-judgment subprocess exceeded the timeout threshold and was terminated. This is expected behavior — a machine reader would also stop processing here. Elapsed: 120005ms. Kill reason: hard-timeout.
 
 Suggested next steps:
 
@@ -45,7 +56,7 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-06-02T07:32:21Z |
+| 1 | voice-consistency | mixed-voice-sections | Mixed-voice section(s) remain after auto-repair: 1 | 2026-06-02T07:42:18Z |
 
 <details open><summary>Warning detail (1)</summary>
 
@@ -57,7 +68,7 @@ check-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit
   1 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person ("the site does X") with first-person ("we found Y") inside the same section reads as drafted-by-committee.
 
   ## About This Report  (line 10)
-    first-person tokens: 9 (lines 12, 14, 16…)
+    first-person tokens: 10 (lines 12, 14, 16…)
     third-person markers: 1 (lines 18)
 
   Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice ("we"); scorecards and appendices use third-person.

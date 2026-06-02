@@ -3,8 +3,8 @@
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
   "auditId": "mx.allabout.network-2026-06-01",
-  "runRevision": 3,
-  "lastWriteAt": "2026-06-02T07:44:24.839Z",
+  "runRevision": 4,
+  "lastWriteAt": "2026-06-02T07:47:41.986Z",
   "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
@@ -308,8 +308,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "12c83bb50e5512d6549e790898ec036ac9c98afe",
-      "shortSha": "12c83bb"
+      "sha": "7e041f3bd74b28f4fc059adaf8f9bc4ffc399ed0",
+      "shortSha": "7e041f3"
     },
     "branch": "main",
     "dirty": true,
@@ -1085,6 +1085,41 @@
       ],
       "outcome": "pass",
       "notes": "runCount=3 regexFindings=0 llmFindings=0"
+    },
+    {
+      "timestamp": "2026-06-02T07:47:40.713Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 0 mechanical patch(es); Layer 2 applied 1/1 LLM patch(es) for 1 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "mx-allabout-network-report.md",
+        "findingCount": 1,
+        "layer1Patches": 0,
+        "layer1Resolved": 0
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "c402d3eae00c7ea4edcafd71d625c53c4c94b6f1413ddac865207d19b07f3bd1",
+        "patchesApplied": 1,
+        "patchesSkipped": 0,
+        "unfixableCount": 0
+      },
+      "rubricHash": "b137ebffdaff50afa25c67371dcc1c3a489f1593b4f49b24af153e3e6322b0af",
+      "promptHash": "00dc12dab30262c7d1d58f8c2e2cdd1b5be45ce7f3ecdc1777305aab9f3e415b",
+      "inputHashes": [
+        {
+          "hash": "7de925f325cea600767adc7a7914c4d1a961b686c760732806a923f10a1f6af3",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"We audited 128 pages across our site using the Web Audit Suite.\",\n      \"findingIndex\": 1,\n      \"justification\": \"voice: removed third-person marker 'our site' and rephrased sentence.\",\n      \"replace\": \"We audited 128 pages using the Web Audit Suite.\"\n    }\n  ],\n  \"unfixable\": []\n}",
+      "outcome": "pass",
+      "notes": "inputTok=23756 outputTok=1734 layer1=0 layer2applied=1 layer2skipped=0 unfixable=0 hygiene=0 sizeRatio=1.00"
     }
   ]
 }

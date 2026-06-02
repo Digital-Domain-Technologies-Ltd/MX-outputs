@@ -1,0 +1,49 @@
+{
+  "auditDate": "2026-06-02",
+  "errors": [
+    {
+      "timestamp": "2026-06-02T07:42:18.696Z",
+      "severity": "warn",
+      "source": "check-report-voice.js",
+      "gateName": "voice-consistency",
+      "category": "mixed-voice-sections",
+      "title": "Mixed-voice section(s) remain after auto-repair: 1",
+      "detail": "Gate voice-consistency (check-report-voice.js) returned non-zero. Output excerpt:\n\ncheck-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/mx.allabout.network/mx-allabout-network-report.md\n  1 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person (\"the site does X\") with first-person (\"we found Y\") inside the same section reads as drafted-by-committee.\n\n  ## About This Report  (line 10)\n    first-person tokens: 10 (lines 12, 14, 16…)\n    third-person markers: 1 (lines 18)\n\n  Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice (\"we\"); scorecards and appendices use third-person.\n",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T07:44:20.307Z",
+      "severity": "error",
+      "source": "run-with-timeout",
+      "gateName": "timeout-fierce-critic",
+      "category": "subprocess-timeout",
+      "title": "Subprocess timeout (fierce-critic)",
+      "detail": "The fierce-critic subprocess exceeded the timeout threshold and was terminated. This is expected behavior — a machine reader would also stop processing here. Elapsed: 120003ms. Kill reason: hard-timeout.",
+      "suggestions": [
+        "Review the subprocess output for deadlocks or resource exhaustion.",
+        "Check if the target URL has changed or is now unreachable.",
+        "Consider adjusting the timeout threshold via MX_AUDIT_GATE_TIMEOUT_MS."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T07:46:24.921Z",
+      "severity": "error",
+      "source": "run-with-timeout",
+      "gateName": "timeout-llm-judgment",
+      "category": "subprocess-timeout",
+      "title": "Subprocess timeout (llm-judgment)",
+      "detail": "The llm-judgment subprocess exceeded the timeout threshold and was terminated. This is expected behavior — a machine reader would also stop processing here. Elapsed: 120005ms. Kill reason: hard-timeout.",
+      "suggestions": [
+        "Review the subprocess output for deadlocks or resource exhaustion.",
+        "Check if the target URL has changed or is now unreachable.",
+        "Consider adjusting the timeout threshold via MX_AUDIT_GATE_TIMEOUT_MS."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    }
+  ]
+}

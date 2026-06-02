@@ -130,3 +130,16 @@ timestamp,phase,step,decision_type,decision,rationale,data_source,confidence,out
 2026-06-02T07:44:24.843Z,gates,3,gate_result,audit-fierce-critic.js: gate passed,Exit 0,audit-pipeline.js,high,pass
 2026-06-02T07:46:27.262Z,gates,4,gate_result,audit-llm-judgment.js: gate passed,Exit 0 withdrawn=0,audit-pipeline.js,high,pass
 2026-06-02T07:46:27.263Z,gates,3-4-final,gate_result,Running repair-report-unified.js,Consolidates voice + scope + fierce-critic + llm-judgment + attribution findings into one tool-use call after deterministic patches,audit-pipeline.js,high,n-a
+2026-06-02T07:47:40.716Z,gates,3-4-final,gate_result,repair-report-unified.js: complete (report ready for PDF),Report ready for PDF,audit-pipeline.js,high,pass
+2026-06-02T07:47:40.787Z,gates,3-4-final-regen,placeholder_fill,Engagement table regenerated post-repair,Deterministic rebuild after final repair,regenerate-engagement-table.js,high,pass
+2026-06-02T07:47:40.787Z,gates,revalidate,gate_result,Re-running 1 previously-failed gate(s) after consolidated repair,gates: 0b-voice,audit-pipeline.js,high,n-a
+2026-06-02T07:47:40.865Z,gates,0b-voice-revalidate,gate_result,0b-voice still failed after final repair,Re-check exit 1,audit-pipeline.js,high,fail
+2026-06-02T07:47:40.865Z,gates,revalidate,gate_result,Gates still failing after revalidation: 0b-voice,Final repair did not fix every early-gate failure,audit-pipeline.js,high,fail
+2026-06-02T07:47:40.865Z,gates,4b,gate_result,check-report-coherence.js invoked,report=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/mx.allabout.network/mx-allabout-network-report.md results=mx-outputs/audit/2026-06-01/mx.allabout.network/.infill,check-report-coherence.js,high,n-a
+2026-06-02T07:47:41.013Z,gates,4b,gate_result,Coherence check passed,Exit 0 — no cross-section contradictions,check-report-coherence.js,high,pass
+2026-06-02T07:47:41.669Z,gates,4c,gate_result,Extracted checks passed,Six gates returned 0 findings,audit-pipeline.js,high,pass
+2026-06-02T07:48:08.923Z,gates,4d,gate_result,Provenance sidecar written,chain at mx-outputs/audit/2026-06-01/mx.allabout.network/.infill/provenance.json,build-provenance.js,high,pass
+2026-06-02T07:48:08.924Z,gates,5,gate_result,audit-pdf.sh invoked,input=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/mx.allabout.network/mx-allabout-network-report.md output=/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-01/mx.allabout.network/mx-allabout-network-report.pdf engine=chrome,audit-pdf.sh,high,n-a
+2026-06-02T07:48:15.920Z,gates,5,gate_result,PDF generated: mx-outputs/audit/2026-06-01/mx.allabout.network/mx-allabout-network-report.pdf,audit-pdf.sh exited 0 — engine=chrome EAA Level 0 size=unknown,audit-pdf.sh,high,pass
+2026-06-02T07:48:15.920Z,gates,6,gate_result,Gates pipeline complete,Full gate suite ran; PDF generated,audit-pipeline.js,high,pass
+2026-06-02T07:48:15.920Z,gates,end,phase_end,gates phase ended,Full gate suite ran; PDF generated; awaiting optional reviewer sign-off,audit-pipeline.js,high,pass
