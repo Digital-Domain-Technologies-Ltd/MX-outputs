@@ -161,6 +161,14 @@ async function ask() {
   currentPayload = page;
   renderPayloadDetail(page);
 
+  if (page.isLlmViewPage) {
+    const notice = $('#llm-view-notice');
+    if (notice) {
+      notice.textContent = 'Reading LLM View content — questions answered from the server response at this URL, not the rendered page.';
+      notice.classList.remove('hidden');
+    }
+  }
+
   setStatus('Generating question suggestions…');
   suggestedQuestions = await generateSuggestedQuestions(page.payload);
   renderPresets(suggestedQuestions);

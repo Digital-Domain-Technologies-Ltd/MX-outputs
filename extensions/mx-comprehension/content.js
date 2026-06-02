@@ -24,14 +24,27 @@
   const title = document.title || '';
   const metaDesc = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
 
+  // Detect MX LLM View replacement: the page title starts with "LLM View — "
+  // and the body carries a <pre id="llm-body"> with the raw server response.
+  // In this case we read only that pre block — the surrounding chrome (URL bar,
+  // status badge, counts) is UI noise, not page content.
+  const llmBodyEl = document.getElementById('llm-body');
+  const isLlmViewPage = Boolean(llmBodyEl) || title.startsWith('LLM View — ');
+
   // Visible rendered text of the main content. innerText respects CSS
   // visibility, so content hidden in collapsed tabs/accordions or off-screen
   // is excluded — which is exactly what a reader (and a naive agent) gets.
-  const mainEl = document.querySelector('main, article') || document.body;
-  const visibleText = (mainEl.innerText || '')
-    .replace(/[ \t]+\n/g, '\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
+  // When running inside LLM View, use the pre block content directly.
+  let visibleText;
+  if (isLlmViewPage && llmBodyEl) {
+    visibleText = (llmBodyEl.innerText || '').trim();
+  } else {
+    const mainEl = document.querySelector('main, article') || document.body;
+    visibleText = (mainEl.innerText || '')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
 
   // Embedded structured data (JSON-LD), verbatim.
   const ldBlocks = Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
@@ -79,6 +92,7 @@
     payload,
     payloadChars: payload.length,
     truncated,
+    isLlmViewPage,
     counts: {
       visibleTextChars: visibleText.length,
       jsonLdBlocks: ldBlocks.length,
