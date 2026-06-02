@@ -25,7 +25,7 @@ Build artefacts, reports, and generated outputs organised by media type.
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1075** | |
+| **Total** | **1076** | |
 
 ---
 
@@ -557,4 +557,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-06-02 at 14:03*
+*Generated on 2026-06-02 at 14:48*
