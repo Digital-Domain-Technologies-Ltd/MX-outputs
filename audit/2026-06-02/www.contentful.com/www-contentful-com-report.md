@@ -544,7 +544,7 @@ No provenance-gap blockers detected on the audited set. Pages clear the citation
 | Language declaration (html lang) | Yes | Yes | Yes | Yes | No |
 | Skip link (accessibility) | Not present | Not present | n/a | n/a | n/a |
 
-All detected markers are present in the served HTML on the audited pages. Open Graph, Twitter Card, and canonical tags reach the head on 82% of audited pages; `/sitemap` is the one page in the sample where these three are absent.
+All detected markers are present in the served HTML on the content pages we audited. Open Graph, Twitter Card, and canonical tags are present on all 11 content pages. The HTML sitemap page (`/sitemap`) is a navigational directory listing and does not require these tags; it is excluded from content-page consistency checks.
 
 ---
 
@@ -672,18 +672,20 @@ HTTPS: 12/12 | HSTS: 12/12 | CSP: 0/12 | X-Frame-Options: 11/12 | X-Content-Type
 |----------------------------------|----------|--------------------|
 | Schema.org JSON-LD | 100% | - |
 | MX governance tags | 0% | 12 |
-| Open Graph tags | 92% | `/sitemap` |
-| Twitter Card tags | 92% | `/sitemap` |
+| Open Graph tags | 100% | - (nav pages excluded) |
+| Twitter Card tags | 100% | - (nav pages excluded) |
 | Skip link | 0% | 12 |
 | llms.txt link tag | 0% | 12 |
-| Canonical URL | 92% | `/sitemap` |
+| Canonical URL | 100% | - (nav pages excluded) |
 | Exactly 1 H1 | 100% | - |
 | Code examples present | 0% | 12 |
 | Self-contained sections | 92% | `/pricing/` |
 | Error/troubleshooting docs | 8% | 11 |
 | Lighthouse heading compliance | 17% | 10 |
 
-**Overall Consistency:** 59%
+*Note: Open Graph, Twitter Card, and Canonical URL are evaluated on content pages only. The HTML sitemap page (`/sitemap`) is a navigational directory listing -- these tags are optional for it.*
+
+**Overall Consistency:** 62%
 
 ## Content Consistency
 
