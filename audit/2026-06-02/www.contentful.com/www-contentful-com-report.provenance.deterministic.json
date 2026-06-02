@@ -1,0 +1,79 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-deterministic/v2",
+  "schemaVersion": "2.0",
+  "_description": "Deterministic evidence chain. One entry per rule-driven pipeline step (gate verdict, CSV check, regex match, render step, probe result). Designed as evidence for the deterministic-conformance regime (EAA Directive 2019/882); the Level 2 tagged PDF and per-page accessibility verdicts come from these steps. Adjacent on disk only; the artefact frontmatter does NOT embed a pointer to this file (the .ai.json companion is the regulator-facing one).",
+  "auditId": null,
+  "runRevision": 1,
+  "lastWriteAt": "2026-06-02T11:57:19.377Z",
+  "startedAt": "2026-06-02T11:57:19.216Z",
+  "operator": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "target": null,
+  "frameworks": [
+    {
+      "id": "EU-EAA-Directive-2019-882",
+      "title": "Directive (EU) 2019/882 — European Accessibility Act",
+      "version": "2019/882",
+      "jurisdiction": "EU",
+      "appliesTo": "accessibility-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-eaa": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-EAA-Directive-2019-882"
+  ],
+  "companion": "www-contentful-com-report.provenance.ai.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "7aa48adbc223c73ea696bcfcc591e291b1331f0d",
+      "shortSha": "7aa48ad"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.4.0",
+    "host": "toms-MacBook-Pro-366.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "agent": "deterministic",
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-EAA-Directive-2019-882"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-06-02T11:57:19.377Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "www-contentful-com-report.md",
+        "doctype": "report",
+        "sourceSha": "964b5a435af419f986ebc800625b136b4b017bfd",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-06-02/www.contentful.com/www-contentful-com-report.md"
+      },
+      "outcome": "pass"
+    }
+  ]
+}
