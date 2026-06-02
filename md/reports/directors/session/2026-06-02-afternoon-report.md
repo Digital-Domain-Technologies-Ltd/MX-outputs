@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Three Blog Posts Published; Direct Pitch and Chrome Classification Analysis"
-description: "Afternoon session produced and published three new blog posts responding to the Salesforce-Contentful acquisition and Chrome's hidden classification lists, plus a direct pitch post weaving themes from the MX book series."
+title: "Co-Directors Report — Blog Posts Published; Batch Audit Infrastructure Built"
+description: "Afternoon session: three blog posts on Salesforce-Contentful and Chrome classifications; then full two-pace batch audit system built with TTL cache, sitemap HEAD checker, overnight batch orchestrator, and complete doc suite."
 author: "Tom Cranstoun"
 created: 2026-06-02
 modified: 2026-06-02
-version: "1.0"
+version: "2.0"
 
 mx:
   status: active
@@ -15,7 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-02-afternoon-report.md
 ---
 
-# Co-Directors Report — Three Blog Posts Published; Direct Pitch and Chrome Classification Analysis
+# Co-Directors Report — Blog Posts Published; Batch Audit Infrastructure Built
 
 **Date:** 2 June 2026 - Afternoon
 **Segment:** Afternoon (since noon)
@@ -24,7 +24,7 @@ mx:
 
 ## Summary
 
-This session produced and published three new blog posts to mx.allabout.network/blog/: a commentary on the Salesforce-Contentful acquisition framed around the "content that manages itself" concept from MX: The Protocols; a substantive analysis of Chrome's hidden site-classification lists using RESONEO's May 2026 research as the entry point; and a direct client-facing pitch post synthesising both arguments. All three passed HTML hygiene gates, were promoted from drafts to published, and are now indexed. The html-writer draft scaffold was also improved with a charset-placement fix that will benefit all future posts.
+The afternoon ran in two distinct phases. First: three blog posts published to mx.allabout.network/blog/ (Salesforce-Contentful acquisition response; Chrome classification analysis; direct pitch post), all promoted from drafts and now indexed. Second: a complete two-pace audit infrastructure was designed and built from scratch -- overnight batch orchestrator, sitemap HEAD checker, rate limiter, TTL-based cache eviction with checkedAt touch, and the full documentation suite (architecture cog, PRD, QUICKSTART, README, UBERCOG, root README). The default batch config targets mx.allabout.network at full-sitemap depth.
 
 ---
 
@@ -52,17 +52,36 @@ All three posts promoted from `blog/drafts/` to `blog/` with all links, asset pa
 
 ---
 
+### 6. Two-Pace Batch Audit System
+
+The audit pipeline previously ran only on operator demand, one domain at a time, with no TTL mechanism on origin caches. This session built the two-pace model:
+
+**On-demand (simple) run** -- unchanged for operators; all existing commands continue to work.
+
+**Batch/overnight run** -- `node scripts/audit-batch.js <config.yaml>` (or `mx exec mx-audit --batch <config>`). Reads a YAML config listing domains with per-entry `maxPages`, `ratePerSec`, `locale`, `client`, and `scopeFlags`. Runs the full pipeline for each domain sequentially. After each collect phase, fires `bin/check-sitemap-links.js` to HEAD-test every sitemap URL at 2 req/sec with exponential backoff (2s/4s/8s, 3 retries). Writes per-domain deliverables (same format as simple run) plus `mx-outputs/audit/batch/<date>-batch-summary.json`. Default config: `scripts/audit-batch-config.example.yaml` -- single domain, `mx.allabout.network`, all pages.
+
+**Cache TTL (`checkedAt`).** Origin-probe caches (`wellknown.json`, `platform.json`, `ai-usage.json`) now carry a `checkedAt` ISO timestamp. `sweepOriginCachesAt()` applies two eviction rules: version mismatch (existing) and TTL expiry (new, default 7 days). On a valid cache hit, both run paces update `checkedAt` in-place -- actively-audited domains never need manual cache clearing. Same pattern applied to `sitemap-link-health.json`. CACHE_VERSIONS bumped: wellknown 6, platform 2, ai-usage 2.
+
+**New files:** `scripts/audit-batch.js`, `mx-reginald/audit/bin/check-sitemap-links.js`, `mx-reginald/audit/lib/rate-limiter.js`, `scripts/audit-batch-config.example.yaml`.
+
+**Docs updated:** `mx-audit-architecture.cog.md` (v1.4), `mx-audit.cog.md` (--batch flag + handler), `prd.md` (v1.2, new §4.12), `README.md`, `QUICKSTART.md`, `mx-reginald/audit/README.md`, `UBERCOG.cog.md`, root `README.md`.
+
+---
+
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits (mx-outputs) | 2 |
-| Files changed | 32 |
-| Lines added | +523 |
-| Lines removed | -9,027 |
-| New published blog posts | 3 |
+| Hub commits (this half) | 3 pending |
+| mx-outputs commits | 3 (incl. contentful audit deliverables) |
+| New scripts | 3 (`audit-batch.js`, `check-sitemap-links.js`, `rate-limiter.js`) |
+| New config | 1 (`audit-batch-config.example.yaml`) |
+| Modified audit pipeline files | 4 |
+| Docs updated | 7 |
+| CACHE_VERSIONS bumped | 3 (wellknown 5->6, platform 1->2, ai-usage 1->2) |
+| Blog posts published | 3 |
 | Blog sitemap entries | 67 |
-| Repositories touched | 1 (mx-outputs) + hub pending |
+| Repositories touched | hub + mx-outputs |
 
 ---
 
@@ -84,16 +103,22 @@ The RESONEO Chrome research makes the inference-vs-declaration argument concrete
 
 ## Next Steps
 
-- Consider the three posts as a cluster for a Boye CMS Experts speaker submission: "Who owns agent-ready content?" - the acquisition, the Chrome research, and the pitch as a live demonstration.
+- Consider the three blog posts as a cluster for a Boye CMS Experts speaker submission: "Who owns agent-ready content?"
 - The "who-answers" post CTA ("Declare your machine policy") is the closest we have to a direct service page for policy COGs. The services page may need a matching section.
-- llms.txt sync script did not show explicit confirmation of the three new posts in llms.txt - verify the llms.txt key-pages block includes the new posts before next session.
+- llms.txt sync script did not confirm the three new posts in llms.txt - verify the llms.txt key-pages block includes the new posts before next session.
+- Run the batch audit overnight: `node scripts/audit-batch.js scripts/audit-batch-config.example.yaml` -- first real run against mx.allabout.network at full depth.
+- Archive the contentful.com audit work: the report.md is committed but no PDF was generated this session.
 
 ---
 
 ## Commit Log
 
-| Hash | Description |
-|------|-------------|
-| d9660108 | Publish three blog posts; update discovery and indexes |
-| a04b7557 | Remove contentful.com audit deliverables from 2026-06-02 |
-| _pending_ | Hub: Bump mx-outputs pointer + session docs |
+| Hash | Repo | Description |
+|------|------|-------------|
+| d9660108 | mx-outputs | Publish three blog posts; update discovery and indexes |
+| a04b7557 | mx-outputs | Remove contentful.com audit deliverables from 2026-06-02 |
+| 7aa48adb | hub | Bump mx-outputs: README index regenerated |
+| 1494c088 | hub | Document afternoon session: three blog posts, CHANGELOG v2.98 |
+| d1477e59 | hub | Bump mx-outputs; audit pipeline fixes from contentful audit run |
+| 10179da9 | mx-outputs | Add www.contentful.com audit deliverables 2026-06-02 |
+| _pending_ | hub | Batch audit system: two-pace architecture, TTL cache, docs |
