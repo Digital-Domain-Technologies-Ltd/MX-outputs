@@ -1,10 +1,10 @@
 ---
 title: "Co-Directors Report — Audit Provenance, LLM View Extension, and mx-for-pdfs Accuracy Audit"
-description: "Audit LLM pipeline wired for provenance capture; LLM View extension; factual accuracy audit of mx-for-pdfs.html with site-wide fixes"
+description: "Audit provenance capture; LLM View v0.2 viewport replacement; Readiness Inspector served vs rendered diff; Comprehension Probe LLM View awareness; accuracy audit"
 author: "Tom Cranstoun"
 created: 2026-06-02
 modified: 2026-06-02
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -52,9 +52,15 @@ Three parallel research agents fact-checked `mx-for-pdfs.html` against internet 
 
 All errors corrected in the source files. Additionally, a "not legal advice, consult specialists" disclaimer was added to 25+ pages across the site that name specific legislation, and a rule was added to CLAUDE.md requiring the disclaimer on all future regulatory-content posts.
 
-### 4. MX: LLM View Browser Extension
+### 4. MX: LLM View Browser Extension (v0.1 then v0.2)
 
-A third Chrome/Edge extension was built alongside the existing MX Readiness Inspector (teal) and MX Comprehension Probe (amber). The new extension — indigo accent, 9 files, 607 lines — re-fetches the current page with `Accept: text/markdown, text/plain;q=0.9, */*;q=0.1` from a background service worker and displays the raw response body with HTTP status, Content-Type, and a pass/warn/fail verdict on whether the server honoured the Accept header. No cookies sent, no model called, entirely deterministic.
+A third Chrome/Edge extension was built alongside the existing MX Readiness Inspector (teal) and MX Comprehension Probe (amber). v0.1 opened a popup showing the raw server response; v0.2 redesigned it to replace the current browser viewport: clicking the icon fetches with `Accept: text/markdown` from a background service worker and injects a full-page replacement via `chrome.scripting.executeScript`, showing the raw response body, HTTP status, Content-Type verdict, and char/line counts. The address bar URL stays unchanged; browser back returns to the original page. No popup, no cookies, no model.
+
+### 5. Browser Extension Suite v0.2 — MX Readiness and Comprehension Probe
+
+**MX Readiness Inspector v0.2.0** gained two capabilities. First: non-HTML detection. `content.js` now returns `contentType` and `isLlmViewPage`; if the active tab is showing raw markdown or the LLM View replacement, the inspector falls back to fetching the original URL as HTML from the background worker, parsing with `DOMParser`, and running the same 21 MX checks on the served document — with a notice banner explaining what it is doing. Second: a "Served vs rendered" button opens `diff.html` (a new extension page) in a new tab. The diff page reads both served and rendered findings from `chrome.storage.session` and displays a comparison table showing which findings changed, with auto-generated notes explaining what JavaScript added or removed relative to the crawler view.
+
+**MX Comprehension Probe** learned to detect LLM View pages. `content.js` checks for `<pre id="llm-body">` and reads only that pre block rather than the whole body, eliminating the UI chrome (URL bar, status badge, counts row) from the model's context. A notice banner tells the user the probe is reading the server response, not the rendered page. The combination is now intentional: use LLM View to see what the server returns, then ask the Comprehension Probe questions about it.
 
 ---
 
@@ -62,14 +68,14 @@ A third Chrome/Edge extension was built alongside the existing MX Readiness Insp
 
 | Metric | Value |
 |--------|-------|
-| Hub commits | 2 (morning v1.0) + additional this strand |
-| mx-outputs commits | 4 total (2 prior + 2 this strand) |
+| Hub commits | ~15 this session |
+| mx-outputs commits | ~12 this session |
 | mx-shared-gathering commits | 1 |
 | HTML files corrected | 31 (pdfuaid terminology + legal disclaimers) |
 | Factual errors fixed | 2 (pdfuaid Level 2, EU AI Act Art. 25) |
 | Pages with new legal disclaimer | 25+ |
-| Extension files | 9 |
-| Extension lines | +607 |
+| Extensions built/upgraded | 3 (LLM View v0.2, Readiness v0.2, Comprehension Probe) |
+| New extension files | diff.html, diff.js |
 | Repositories touched | 3 (hub, mx-outputs, mx-shared-gathering) |
 
 ---
@@ -106,7 +112,11 @@ The accuracy audit matters for two reasons. First, the factual errors (wrong PDF
 | 9616c6a1 | Hub: Wire audit LLM pipeline for provenance capture; add pipeline-logger |
 | 12c83bb5 | Hub: Bump mx-outputs; add Desktop Commander tool permissions |
 | af7814eb | mx-outputs: Add MX: LLM View browser extension |
-| 1f38529c | mx-outputs: Update mx.allabout.network audit provenance and JSON sidecars |
+| 04bc1f6a | Hub: Bump mx-outputs: LLM View v0.2.0 viewport injection |
+| bd91f5eb | Hub: Bump mx-outputs: MX Readiness v0.2.0 non-HTML and diff tab |
+| 8ce246c3 | Hub: Bump mx-outputs: Comprehension Probe LLM View awareness |
+| b77b982d | mx-outputs: MX Readiness Inspector v0.2.0 |
+| 5c871c01 | mx-outputs: MX Comprehension Probe LLM View detection |
 | fc0c623 | mx-shared-gathering: Fix pdfuaid:Part terminology — PDF/UA-1 not Level 2 |
 | af0d61aa | mx-outputs: Factual accuracy fixes + legal disclaimers across mx-site |
 | 07adb06d | mx-outputs: Add Salesforce/Contentful draft blog post and update drafts index |
