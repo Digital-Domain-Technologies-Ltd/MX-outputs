@@ -830,9 +830,11 @@ What this is not
 
 It is not a guarantee that the source is true. The render captures who rendered what, when, against which canonical address. It does not capture whether the source's claims are factually correct. A signed, verified chain on a PDF that says the moon is made of cheese verifies that someone published the claim, not that the claim is true.
 
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
 It is not a substitute for a regulator. The chain is queryable, verifiable evidence about the file. Whether the file complies with the EU AI Act, the European Accessibility Act, or any other regulatory regime remains a legal duty of the publisher. The chain gives a regulator the records they expect to find; it does not interpret those records on the publisher's behalf.
 
-It is not the end of the work. The chain is one layer. The signing chain on the publisher's identity (DIDs, key rotation, transparency logs) is another. The conformance declarations elsewhere in the PDF (pdfuaid:Part=1, StructTreeRoot, the rest of the EAA Level 2 declaration) are another. Together they answer the four medieval questions; alone, none of them does. Provenance is a system; this is the metadata layer of that system.
+It is not the end of the work. The chain is one layer. The signing chain on the publisher's identity (DIDs, key rotation, transparency logs) is another. The conformance declarations elsewhere in the PDF (pdfuaid:Part=1, StructTreeRoot, the rest of the EAA conformance declarations) are another. Together they answer the four medieval questions; alone, none of them does. Provenance is a system; this is the metadata layer of that system.
 
 How to use it
 
@@ -1101,6 +1103,8 @@ I have been working on this for two years. Drafting the standard, writing the bo
 And the law just arrived alongside the dashboard
 
 The Adobe acquisition is one half of the story. The other half is the European Accessibility Act, Directive (EU) 2019/882. It came into force across the European Union on 28 June 2025. Public-facing PDFs, e-books, banking applications, ticket machines, and digital content from in-scope businesses must now meet the relevant accessibility standard, which for PDFs is ISO 14289-1 (PDF/UA). The penalties are real and the enforcement window has opened.
+
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
 The law was written for human disability accommodation. The artefact it produces, by happy convergence, is the same artefact a machine reader needs. A tagged PDF carries a structure tree of headings, paragraphs, lists, tables, figures, captions, and reading order. A screen-reader user navigates that tree to skim the document. An AI agent ingesting the document reads the same tree, locates sections by heading level, walks tables row by row knowing which cell is a header and which is data, pairs figures with captions. The cognitive work that the screen reader does for the human and the cognitive work that the agent does for the machine are the same work, performed against the same metadata, producing the same correct answer.
 
@@ -1762,7 +1766,7 @@ An auditor reading one of our reports asks a fair question. How do I know what I
 
         Evidence rides inside the PDF
 
-        Every PDF an MX audit produces carries a structured XMP packet inside its metadata stream. The packet declares the artefact's conformance claim: pdfuaid:Part=1, the Level 2 declaration for ISO 14289-1, the tagged-PDF standard that EAA Directive 2019/882 leans on. It also carries a set of MX-namespaced identity fields populated from the source frontmatter: who authored it, when, what content type it is, which audiences it is for, what it conforms to. The same packet embeds the full AI provenance evidence chain inline under XMP-mx:ProvenanceAiPayload: every step that touched the artefact, who or what executed each one, what inputs went in, what verdict came out, and which AI-governance frameworks the step is recorded against (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act).
+        Every PDF an MX audit produces carries a structured XMP packet inside its metadata stream. The packet declares the artefact's conformance claim: pdfuaid:part=1, the ISO 14289-1 (PDF/UA-1) conformance declaration that EAA Directive 2019/882 leans on. It also carries a set of MX-namespaced identity fields populated from the source frontmatter: who authored it, when, what content type it is, which audiences it is for, what it conforms to. The same packet embeds the full AI provenance evidence chain inline under XMP-mx:ProvenanceAiPayload: every step that touched the artefact, who or what executed each one, what inputs went in, what verdict came out, and which AI-governance frameworks the step is recorded against (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act).
 
         The same evidence chain also lives in a sidecar JSON file adjacent to the PDF on disk (<basename>.provenance.ai.json) along with its deterministic companion (<basename>.provenance.deterministic.json) for the rule-driven steps. The on-disk copies serve EAA accessibility-conformance evidence and any inspector who prefers file-system access. The inline XMP copy serves the inspector who only has the PDF.
 
@@ -1807,6 +1811,8 @@ An auditor reading one of our reports asks a fair question. How do I know what I
         An MX audit report can be verified without leaving the document. exiftool -b -XMP-mx:ProvenanceAiPayload <file>.pdf | jq . returns the full AI chain on the command line. The deterministic companion is named in the same packet under XMP-mx:ProvenanceCompanion; an inspector with file-system access can resolve and read it. The reviewer's findings live alongside in the findings sidecar. The methodology that produced every score lives at scoring-methodology.json in the audit toolkit, public and re-runnable. The frameworks each provenance step is recorded against are named in the chain itself, so an auditor working a regulatory clause can walk from the clause to the steps the report cites.
 
         An auditor who prefers a browser to a terminal can use the interactive inspector at /tools/pdf-inspector.html. The inspector accepts any MX PDF (the QR code on the cover badge resolves to the same URL) and walks the full evidence chain end-to-end in the browser. A reader who wants the short version of what each signal means and which standard it cites can read the explainer at /learn/mx-for-pdfs.html.
+
+        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
         None of this constitutes a compliance claim against any specific regulation. EAA conformance, EU AI Act conformance, ICO accountability: all of those remain legal duties of the publishing organisation. What MX provides is the evidence vehicle: the structured, tamper-evident, machine-readable trail that the organisation needs to produce when asked. An auditor walking that trail has the cover, the inspector, the explainer, the sidecars, the methodology, and the framework citations to lean on. That is the contract.
 
@@ -2337,6 +2343,8 @@ MX, Machine Experience, is a broader question. It asks: can any machine, crawler
 
 The two are not in opposition. As I put it in MX: The Protocols: GEO improvement is an outcome of implementing MX. MX is not a kind of GEO. The relationship is asymmetric. When you do the MX work, semantic HTML, machine-readable metadata, server-side rendering, structured pricing markup, cryptographic provenance through REGINALD, the GEO improvement happens automatically as a by-product at the Citation level. The reverse is not true. A site that has done excellent GEO work without addressing the underlying machine-readability still fails the moment the consuming agent changes, when it becomes a vision-capable agent reasoning from screenshots, an audio-LLM agent like Alexa or Siri, an autonomous commerce agent using ACP or UCP, or simply an impatient crawler with a tight timeout that aborts before the page has finished assembling.
 
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
 There is also a regulatory dimension that GEO does not engage with and MX is built to support. The European Accessibility Act began enforcement in June 2025; live court cases are underway. The EU AI Act sits alongside it with its own documentation, logging, transparency, and post-market monitoring obligations. Emerging digital-records legislation is converging on a similar shape. GEO produces no evidence relevant to any of this. A note worth making precisely, because it matters to compliance teams and auditors: MX and Reginald do not grant compliance with any of these regulations, that is a legal duty of the organisation. What they do is make the documentation the organisation must produce structured, machine-readable, tamper-evident, and verifiable on request. The same engineering work, semantic HTML, programmatic form labels, DOM-reflected state, signed documents, supports all three regulatory regimes simultaneously, which is the practical reason to do the work once rather than three times.
 
 For anyone at the conference whose team is currently weighing investment in GEO or AEO services, the honest framing is this: do GEO if you have the marketing budget and the editorial capacity to refresh content every couple of weeks. But do not assume it is a substitute for the underlying infrastructure work, and do not assume it is contributing to regulatory compliance. It is not. MX is the framework that catalogues that underlying work, grades it on a 0 to 5 Readiness scale, and extends it past Citation into the comparison, transaction, and provenance layers GEO does not reach.
@@ -2452,6 +2460,8 @@ Cog files come in two forms that mirror what an agent actually needs from conten
 That answers the question of what an agent runs against. It runs against a cog file. The interface is markdown plus YAML, which has a thirty-year head start on every proprietary content format. The verification layer is REGINALD, which signs and indexes cog files so an agent can check, before quoting, that the file is current and from the named source.
 
 This is the two-pillar pattern the rest of the MX work has been pointing at. MX makes content machine-readable. REGINALD makes it machine-trustworthy. The combined effect is fewer hallucinations, because agents cite attested facts rather than inferences. Lower inference cost and energy, because agents do not have to reconstruct meaning from unstructured text. Alignment with the provenance requirements that the EU AI Act, the European Accessibility Act, and emerging digital-records legislation are beginning to write into law.
+
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
 None of this requires a vendor relationship. A publisher who writes content as cog files and signs them with REGINALD owns what the agent runs against on day one. If the CMS used to author the file shuts down, the file keeps working. If the agent platform targeted today gets acquired and the API changes, the file keeps working. If a regulator asks who said this and when, the file answers.
 
@@ -4291,6 +4301,8 @@ This is the convergence principle made literal. A solicitor writes a letter once
 
 The implications are substantial. A printed contract carrying a QR resolving to its canonical COG is a stronger evidentiary artefact than a printed contract without. The signed paper is the legal instrument, but the QR provides a verifiable link to the canonical machine-readable version. A drug label carrying a QR resolves to the current MHRA-approved patient information with attestation, with the expiry field telling any reader when the label ceases to be canonical. A planning notice on a lamppost carrying a QR resolves to the full application COG. A receipt carrying a QR resolves to the canonical sale record with the terms that applied at the point of sale.
 
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
 There is one case where the QR link stops being optional and becomes essential: printed artefacts containing AI-generated or AI-assisted content. A human reader holding a printed document drafted by an AI has no way to verify what the AI actually produced, which facts it relied on, which model produced it, whether a human reviewed it, when the content was generated, or whether the printed version matches what was attested at publication. Without a QR resolving to a canonical record, specifically a decision-COG with AI provenance fields, the artefact is an unverifiable assertion. The EU AI Act's transparency obligations, the UK ICO's AI code, and equivalent sector regulators are all moving toward requirements that AI-generated content be identifiable and verifiable. A QR linked to a decision-COG is the cleanest way to discharge those obligations. For solicitors sending AI-drafted letters, for pharmaceutical companies producing AI-assisted regulatory submissions, for government departments issuing AI-assisted decision letters, the QR is no longer an optional feature; it is the mechanism by which the publisher remains compliant and the recipient remains protected.
 
 UCP does not do this. AP2 does not do this. Google's structured data guidance does not do this, because Google's guidance is about the web and printed paper is not the web. MX does it because MX is about files, and a file does not stop being a file because it has been printed and handed to a human.
@@ -4822,6 +4834,8 @@ SEO got you found. GEO gets you understood. MX gets you used. Same lineage, thre
         A cog carries each of these as a first-class top-level field, validated at write time. SEO got you found; GEO gets you understood; AEO gets you cited; MX makes the page legible to a machine that has arrived and now has to act.
 
         The practical effect of attestation compounds. An agent that reads a Reginald-registered document hallucinates less, it has verified origin and version to cite rather than gaps to fill by inference. Fewer inference steps means lower token consumption and lower energy draw across AI infrastructure. As the EU AI Act and digital-records legislation place documentation, logging, and verifiability obligations on the bodies they cover, attestation becomes the layer that makes the required provenance evidence verifiable on request. MX and Reginald do not grant compliance with any of these regulations; that remains a legal duty of the body subject to them. They make the documentation that body must produce structured, machine-readable, tamper-evident, and verifiable on request. MX makes content machine-readable. Reginald makes it machine-trustworthy. Both properties are required for content that is genuinely ready for the machine economy.
+
+        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
         The Convergence Principle sits underneath this: interfaces designed for machines turn out to be better for humans too. A document that an agent can read accurately is also a document that a screen reader handles cleanly, that a translator can localise without losing meaning, and that a new team member can understand without a handover meeting. Accessibility, machine-readability, and editorial maintainability stop being separate workstreams.
 
@@ -8554,6 +8568,8 @@ The limit, stated plainly
 
 I have to be honest about what this is not, because the failure mode of governance technology is to promise more than it can hold.
 
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
 MX and Reginald grant no compliance with the EU AI Act, the European Accessibility Act, or any of the instruments now arriving, and they confer none of the moral standing the encyclical is really about. They are an evidence vehicle, nothing more. The legal duty stays with the organisation. The moral duty stays with the people who build and deploy the systems. What the architecture does is narrower and useful: it makes the documentation those duties already require structured, tamper-evident, and verifiable on request. Sold as that, it is honest. Sold as "ethics in a box", it collapses on the first inquiry, and deserves to.
 
 The encyclical is a moral argument. MX is plumbing. I am not pretending the second is the answer to the first, but a moral argument about accountability needs plumbing to land. A call for oversight with no mechanism to record what happened is a sermon, and everyone nods, and nothing is inspectable the morning after. The mechanism is dull on purpose: the right metadata, claims that are signed, a registry anyone can verify against, verification that runs on the reader's side and not on trust.
@@ -9912,6 +9928,8 @@ I will not oversell this, because the failure mode of trust technology is to pro
 
 Visible provenance does not make lying impossible. A publisher can sign a false statement, and the signature will verify perfectly - it proves who said it and that it has not changed, not that it is true. What it does is make lying legible and attributable. The claim is bound to an identity and a timestamp that cannot be quietly retracted. You can no longer say a thing, profit, and pretend later you never said it.
 
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
 None of this grants compliance with any regulation, either. Provenance and attestation are an evidence vehicle for the governance regimes now arriving - the EU AI Act, the European Accessibility Act, emerging digital-records law - not a compliance grant. They make the documentation an organisation already owes structured, tamper-evident, and verifiable on request. The legal duty stays with the organisation. Sold honestly as "queryable, verifiable evidence", this is genuinely useful. Sold as "compliance in a box", it collapses on the first inquiry.
 
 How to start, without waiting for the world to catch up
@@ -10346,6 +10364,8 @@ An accessible PDF and a machine-readable PDF are the same artefact. Accessibilit
 
         Accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the technical baseline for public-facing PDFs across major markets. The European Accessibility Act (Directive (EU) 2019/882, in force across the EU since 28 June 2025) is the most precisely codified digital instrument, its scope covers PDFs, e-books, ATMs, ticket machines, and banking apps. Equivalent obligations flow from Section 508 of the US Rehabilitation Act (federal agencies and recipients of federal funding), the UK Public Sector Bodies Accessibility Regulations 2018, and disability discrimination legislation in Australia and Canada. Every one of these instruments resolves, through different legal mechanisms, to the same technical standard: a structure tree, marked content, declared reading order, language tags, and metadata. The laws speak the language of disability inclusion. The artefact they produce, by happy convergence, is the same artefact a machine reader needs.
 
+        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
         What a tagged PDF actually is
 
         Open a PDF in a viewer that shows the document tree. An untagged PDF is a sequence of positioned glyphs and pictures. The viewer can render it because rendering only requires geometry: this character at this point, that picture at that rectangle. Nothing in an untagged PDF declares that a particular glyph cluster is a heading, that one block of text is a paragraph and another is a caption, that this row of cells belongs to that table, that the reading order goes top of left column then top of right column rather than line by line straight across.
@@ -10406,13 +10426,13 @@ An accessible PDF and a machine-readable PDF are the same artefact. Accessibilit
 
         CogNovaMX follows the standard
 
-        This is not advice given from a distance. CogNovaMX, trading name of Digital Domain Technologies Ltd, publishes its own books, white papers, and audit reports to the ISO 14289-1 (PDF/UA) baseline. Every public PDF on mx.allabout.network carries a structure tree, marked content, declared reading order, alternative text on figures, and a Level 2 pdfuaid:part XMP claim in its metadata packet. The publishing pipeline runs an automated tagging gate before deploy, so an untagged PDF cannot reach the public corpus by accident.
+        This is not advice given from a distance. CogNovaMX, trading name of Digital Domain Technologies Ltd, publishes its own books, white papers, and audit reports to the ISO 14289-1 (PDF/UA) baseline. Every public PDF on mx.allabout.network carries a structure tree, marked content, declared reading order, alternative text on figures, and a pdfuaid:part=1 XMP claim (ISO 14289-1, PDF/UA-1) in its metadata packet. The publishing pipeline runs an automated tagging gate before deploy, so an untagged PDF cannot reach the public corpus by accident.
 
         Compliance with the ISO 14289-1 (PDF/UA) baseline, required by the European Accessibility Act in the EU, Section 508 in the United States, and equivalent legislation in the UK and beyond, is the floor we hold ourselves to before we recommend it to clients. The same audit suite that we sell to organisations we run on our own site, every release, on every PDF we ship.
 
         What else lives in the metadata: provenance, lifecycle, agent affordances
 
-        The Level 2 conformance claim and the structure tree are the load-bearing pieces of EAA compliance. The XMP packet that carries the conformance claim has room for considerably more, and an agent that has just opened a PDF is asking more questions than "is this tagged".
+        The ISO 14289-1 conformance claim and the structure tree are the load-bearing pieces of EAA compliance. The XMP packet that carries the conformance claim has room for considerably more, and an agent that has just opened a PDF is asking more questions than "is this tagged".
 
         The questions sort into four groups.
 
@@ -10685,6 +10705,8 @@ Procurement and oversight reviewers. Buyers checking that supplier deliverables 
 Credibility by mechanism, not by claim
 
 Three things have to line up before a PDF is what its producer says it is. The page must say so. The pipeline must enforce it. The check must be runnable by anyone with the file. All three exist in the open here.
+
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
 The inspector page makes the claim. The production gate enforces it. The test harness proves it. The CLI lets operators do the same in their own pipelines, against their own files, on their own infrastructure. For the AI-governance regimes increasingly requiring evidence-chain documentation (the EU AI Act, the European Accessibility Act, the AI risk-management instruments emerging in adjacent jurisdictions), this is what "evidence-vehicle" looks like in working form. Not "trust us, we did this carefully" but "here is the file, here is the rule, here is the check, run any of them yourself, decide for yourself."
 
@@ -11030,6 +11052,8 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
         Reginald is the public registry that attests the provenance of any document: who published it, that it has not been modified since publication, and whether it was produced by a human, an AI, or an automated system. For public institutions, this matters on two fronts. AI systems reading attested documents hallucinate less, they cite verified facts rather than inferences, which directly reduces the risk of misinformation propagated through AI-mediated public services. And the EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions are converging on the same requirement: that organisations can demonstrate the provenance of content that AI systems acted on. Reginald's attestation, cryptographically verifiable and document-native, answers that requirement at any point in the chain.
 
+        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
         For public institutions and national innovation funds, this architecture offers a direct path towards more accurate and accessible public information, reduced energy and compute cost for AI-mediated services, and interoperability across agencies, vendors, and jurisdictions. It supports transparent, community-governed standards, reduces long-term dependency on proprietary ecosystems, and prepares national infrastructure for the rapid expansion of machine-readable services.
 
         Machines are beginning to read. Their growth will outpace human comprehension. The web is not ready. MX provides the missing layer. COGS provides the economic and governance foundation. The Gathering provides the public venue. Reginald provides the trust signal.
@@ -11153,6 +11177,8 @@ Honest limits
 This is not a panacea. Three things in particular it does not do, and saying them out loud beats letting a buyer assume otherwise.
 
 Lying still works. A publisher can sign content that says something untrue, and the signature will verify. What changes is that the lie now travels with an identity and a fingerprint. The publisher cannot retract it without leaving a record. A reader who is being misled has an audit trail that names the source.
+
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
 Compliance does not come with the architecture either. The EU AI Act, the European Accessibility Act, the UK ICO code, the NIST AI Risk Management Framework, and the regulatory regimes around them remain a legal duty of the organisation. What the technical work does is narrower and useful: it makes the documentation those duties already require structured, tamper-evident, and verifiable on request. Sold as that, it is honest. Sold as ethics in a box, it collapses on the first inquiry, and deserves to.
 
@@ -12084,6 +12110,8 @@ RAG reads. MX proves. Under the European Accessibility Act, regulated publishers
 
         The shape of the problem
 
+        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
         European Accessibility Act enforcement is now operationally live. Directive (EU) 2019/882 began enforcement on 28 June 2025, with EN 301 549 and WCAG 2.1 AA as the technical reference points. The pressure is no longer theoretical. ApiDV and Droit Pluriel have filed emergency injunctions, the French référé procedure, at the Tribunal judiciaire de Paris against Auchan, Carrefour, E.Leclerc, and Picard Surgelés. The E.Leclerc detail is the one that should focus minds: the retailer had improved from 32% to 50% compliance and was sued anyway. Half-measures did not protect them.
 
         What gets contested in these cases is not only the current state of the site, but the trajectory: what the retailer claimed to be doing, what it published about its compliance, and how those claims held up over time. The compliance posture is a moving target, and the question of what was true at a specific date matters as much as what is true today.
@@ -12787,6 +12815,8 @@ SEO got you found. GEO targets citation. Neither fixes the publishing system und
 
         A unified metadata layer across all carriers: canonical URLs, version chains, licenses, lifecycle, training-data policies, and agent-readiness fields. Verifiable through Reginald notarisation (currently in beta) so downstream consumers, including AI agents, can confirm the content is genuine, unaltered, and authored by who it claims to be. Agents reading attested content hallucinate less, they have verified facts to cite rather than inferences to make. The EU AI Act and digital-records legislation are converging on the same requirement: that organisations can demonstrate the provenance of content AI acted on. Reginald makes that demonstration available at any point in the chain.
 
+        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
         Publishing system modernization
 
         Rebuilt export pipelines, semantic HTML, structured DOCX templates, EPUB navigation, CSVW schemas, and machine-readable manifests (`.mx.yaml.md`) at every folder boundary. The cog format underneath is the community-governed standard for documents that machines can read directly, stewarded by The Gathering.
@@ -13435,6 +13465,8 @@ Calling these lists and models "classification" softens what they do. A classifi
 
 The EU AI Act has been in force since August 2024, the first horizontal statute of its kind, built on the idea that automated systems carry obligations in proportion to what they decide. Its timeline moved in May 2026: a provisionally agreed Digital Omnibus deal deferred the heavier duties for high-risk systems to 2027 and 2028, while the transparency obligations — among them the duty to tell people when they are dealing with an AI system at all — stayed on course for August 2026. Adjacent regimes lean the same way, from the data-protection limits on decisions taken by machine alone to the risk-management and accountability frameworks emerging on both sides of the Atlantic.
 
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
 The claim has to be made carefully. A browser's shopping classifier is almost certainly not a high-risk system under the Act, and nothing here says any company is in breach of anything. The point is the direction, not a particular clause. Regulation is moving steadily towards disclosure that a decision was automated, a party responsible for it, and a route to contest it. The classification pattern is built the other way: the decision is undisclosed, the responsible party is unnamed, and there is no route to contest a verdict you cannot see. Whatever the law demands of any single system today, a web run on opaque automated decisions runs against the direction the law is taking.
 
 This marks the narrow and accurate place MX occupies. MX does not regulate the model; that is what law is for. What it offers sits on the other side of the relationship — a way for the party being decided about to keep an accountable record of its own. A declaration with an author, a signature and a date is the kind of evidence an accountability regime expects: structured, queryable, checkable, able to be held against its maker later. MX makes that evidence; it does not make anyone compliant, and it does not make a model behave. But it means that when the question of who said what, and on what basis, finally has to be answered, the declaring side has something to show. The inferring side, unless the law compels it, still has nothing.
@@ -13524,6 +13556,8 @@ Here we are again
 Generative AI is the press, take two. Infinite text, near-zero marginal cost, no native byline, and the very same three medieval questions standing in the doorway with their arms folded. Who wrote it. Who checked it. Who is responsible for the output. We have better fonts and worse excuses.
 
 This time, helpfully, two camps have formed to argue about the answer, and they are so neatly opposed that you could stage them as a pantomime.
+
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
 In one corner: the European Union, carrying a stack of Acts thick enough to stop a crossbow bolt. The AI Act, the European Accessibility Act, the Digital Services Act. Their position, stripped of the recitals, is roughly: "Marvellous press, Johannes. Now label it, log it, and give us the name of a human being who answers for it." It is earnest, it is heavy, and on a bad day it threatens to bury the printer under enough paperwork that he gives up and goes back to copying by hand.
 
@@ -13773,7 +13807,9 @@ Machines now read most published content before humans do. An MX audit tells you
 
         The structure that satisfies the law is the same structure that lets an AI agent read the document without falling back to vision-based reconstruction. The disability case justifies the work; the machine case multiplies the return. Wherever the legal obligation originates, compliance with the law is compliance with the machine experience. The work to satisfy the human auditor is the same work that satisfies the agent reading the document next year.
 
-        The audit's PDF accessibility check reports per-document conformance against the ISO baseline: which PDFs are tagged, which carry the Level 2 XMP declaration, which would fail an enforcement audit if it landed tomorrow. The fix path is clear: regenerate the PDF through a pipeline that produces a tagged output, decline the version that fails the gate from being deployed.
+        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
+        The audit's PDF accessibility check reports per-document conformance against the ISO baseline: which PDFs are tagged, which carry the ISO 14289-1 (PDF/UA-1) XMP declaration, which would fail an enforcement audit if it landed tomorrow. The fix path is clear: regenerate the PDF through a pipeline that produces a tagged output, decline the version that fails the gate from being deployed.
 
         What you get
 
@@ -58416,6 +58452,8 @@ MX
 
         MX makes content machine-readable. REGINALD makes it machine-trustworthy. Together they meet the provenance and accessibility requirements emerging in the EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions.
 
+        Note: This section describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
             REGINALD
 
             The registry that makes MX-attested content verifiable. Cryptographic provenance, narrowly scoped: this is what the publisher published, unaltered.
@@ -59676,6 +59714,8 @@ MX
 
           Which laws bite depends on where the file is read, not where it was written. The sharpest enforcement risk today is European, because the European Accessibility Act and the EU AI Act both carry fines large enough to fund the lawyers who chase them; treat those as the floor any publisher serving European readers has to clear. The same evidence answers the United States NIST AI Risk Management Framework, the UK ICO AI guidance, the Colorado AI Act, and the analogous instruments now appearing in other jurisdictions, so a publisher who builds for the European floor inherits the rest for free.
 
+          Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
           The QR code you scanned ends with a fragment of the form #mx:<hash>. That hash is the first eight characters of the source-content SHA recorded inside the document. It identifies which version of the source the PDF was rendered from. Anyone can match it back to the canonical source on disk or in the repository.
 
           What this PDF carries
@@ -59684,7 +59724,7 @@ MX
 
           A tagged structure tree
 
-          Inside the PDF, every heading, paragraph, list item, table cell, figure, and caption is recorded as a node in a logical tree. The tree follows ISO 14289-1, the international standard for tagged PDF, declared at PDF/UA Level 2 in the document's XMP packet under pdfuaid:Part=1. A screen reader can walk that tree the same way a sighted reader walks the visible page: heading by heading, paragraph by paragraph, alt text on every figure. An AI agent reads exactly the same tree. The structure is the file; it is not reconstructed from pixels.
+          Inside the PDF, every heading, paragraph, list item, table cell, figure, and caption is recorded as a node in a logical tree. The tree follows ISO 14289-1, the international standard for accessible tagged PDF (PDF/UA-1), declared in the document's XMP packet under pdfuaid:part=1. A screen reader can walk that tree the same way a sighted reader walks the visible page: heading by heading, paragraph by paragraph, alt text on every figure. An AI agent reads exactly the same tree. The structure is the file; it is not reconstructed from pixels.
 
           For comparison, an ordinary PDF carries only the visual rendering. The order of text in the file is the order the typesetter wrote it, not the order a reader would follow. A screen reader has to guess. An AI agent has to do vision-based reconstruction. Both are slower, less accurate, and more expensive than reading a tree that is already there.
 
@@ -59698,7 +59738,7 @@ MX
 
           Responsible Person Identifier
 
-          At the top of every sidecar (both the AI stream and the deterministic stream) sits a structured responsiblePerson block. It carries the name, email, identifier URL, role, organisation, and country of the human accountable for the audit chain. Any reader walking from a finding to the person responsible finds the full identifier in one step, without having to cross-reference an external directory or guess from a commit author. The block is the structured identity regulators look for under EU AI Act Article 4 (AI literacy and a named responsible person), the UK ICO AI guidance accountability principle, the United States NIST AI Risk Management Framework GOVERN function (roles, responsibilities, and lines of communication), and EAA Directive 2019/882's responsible economic operator requirement.
+          At the top of every sidecar (both the AI stream and the deterministic stream) sits a structured responsiblePerson block. It carries the name, email, identifier URL, role, organisation, and country of the human accountable for the audit chain. Any reader walking from a finding to the person responsible finds the full identifier in one step, without having to cross-reference an external directory or guess from a commit author. The block is the structured identity regulators look for under EU AI Act Article 4 (AI literacy obligations for providers and deployers), the UK ICO AI guidance accountability principle, the United States NIST AI Risk Management Framework GOVERN function (roles, responsibilities, and lines of communication), and EAA Directive 2019/882's responsible economic operator requirement.
 
           The shape:
 
@@ -59715,7 +59755,7 @@ MX
 
           The identifier travels with the file. A regulator who downloads the PDF, extracts the AI sidecar from the XMP payload, and reads the first six fields knows immediately who is accountable, where to reach them, and which jurisdiction governs the chain. There is no separate identity directory to consult and no email-address-from-commit-history reconstruction to attempt. The audit identifies its own author and stands behind the chain by name.
 
-          One single identifier is enough for the simplest audits. Real-world audits routinely involve more than one accountable party: a provider distinct from a deployer, an authorised representative for non-EU placements, a bias auditor for an employment system. The provenance JSON's v2 shape (from 2026-05-28 onwards) carries these as a parties[] array with a controlled role enum drawn from what regimes actually ask for: auditOperator, provider (EU AI Act Art. 16; Colorado developer), deployer (EU AI Act Art. 26; Colorado deployer), authorisedRepresentative (EU AI Act Art. 25 for non-EU providers), importer, distributor, auditor (NYC Local Law 144 bias auditor; ISO 42001 internal audit), dataController, dataProcessor, dpo, modelDeveloper, modelEvaluator. The full canonical position on regime compatibility, what compatibility means, what it does not mean, which 30 regulatory regimes the chain currently serves as evidence for, and how an operator extends it for a new regime, is documented at provenance-regime-compatibility.md.
+          One single identifier is enough for the simplest audits. Real-world audits routinely involve more than one accountable party: a provider distinct from a deployer, an authorised representative for non-EU placements, a bias auditor for an employment system. The provenance JSON's v2 shape (from 2026-05-28 onwards) carries these as a parties[] array with a controlled role enum drawn from what regimes actually ask for: auditOperator, provider (EU AI Act Art. 16; Colorado developer), deployer (EU AI Act Art. 26; Colorado deployer), authorisedRepresentative (EU AI Act Art. 22 / Art. 54 for non-EU providers), importer, distributor, auditor (NYC Local Law 144 bias auditor; ISO 42001 internal audit), dataController, dataProcessor, dpo, modelDeveloper, modelEvaluator. The full canonical position on regime compatibility, what compatibility means, what it does not mean, which 30 regulatory regimes the chain currently serves as evidence for, and how an operator extends it for a new regime, is documented at provenance-regime-compatibility.md.
 
           The MX metadata packet
 
@@ -59743,11 +59783,11 @@ MX
 
           Read the conformance claim
 
-          Confirm the document declares PDF/UA Level 2:
+          Confirm the document declares PDF/UA-1 (ISO 14289-1):
 
           exiftool -XMP-pdfuaid:Part file.pdf
 
-          A value of 1 indicates ISO 14289-1 Part 1 conformance is asserted. The declaration is open to verification by any tool that walks the XMP packet.
+          A value of 1 indicates ISO 14289-1 (PDF/UA-1) conformance is asserted. The declaration is open to verification by any tool that walks the XMP packet.
 
           Read the provenance chain
 
@@ -60711,6 +60751,8 @@ MX
 
         The practical effect compounds. Agents that read attested documents hallucinate less, because they have verified facts to cite rather than inferences to make. Fewer inference steps means lower token consumption and lower energy draw. As the EU AI Act, the European Accessibility Act, and digital-records legislation across multiple jurisdictions place documentation, logging, and verifiability obligations on the bodies they cover, attestation becomes the layer that makes the required documentation verifiable on request. MX and REGINALD do not grant compliance with any of these regulations; that remains a legal duty of the publishing body. What they do is make the documentation that body must produce structured, machine-readable, tamper-evident, and verifiable on request.
 
+        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
         Position papers
 
             Everyone is looking inward
@@ -60787,6 +60829,8 @@ MX
           A current accreditation gives you four things that a non-accredited practitioner does not have. First, the right to issue third-party MX Compliance Claims about external clients' artefacts within the predicate vocabularies you are accredited for. Second, the right to award and display the MX Compatible badge on those deliverables. Third, an accreditation reference URL hosted on REGINALD, signed by CogNovaMX, that consumers and regulators can resolve to verify your current status (active, suspended, revoked). Fourth, the listing in the public Certified Operator directory, which clients and procurement teams use to find a credible practitioner in their domain.
 
           An accreditation is scoped to one or more named predicate vocabularies. Accreditation for WCAG 2.2 does not extend to EU AI Act Article 13 transparency obligations; each vocabulary is a separate extension applied for through the same process. The seed-phase vocabularies are WCAG 2.2 (now) and EU AI Act Article 13 (target Stage 3).
+
+          Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
           The three tiers
 
@@ -60939,6 +60983,8 @@ MX
 
           Penalties run from approximately ten thousand euros for minor violations to one hundred thousand euros or more for major or repeated non-compliance, with significantly higher figures available against large enterprises. The numbers vary by member state; the obligation does not.
 
+          Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
           What the EAA Asks For
 
           The act asks public-facing PDFs to be accessible to users with disabilities. In practice the conformance baseline is ISO 14289-1 (PDF/UA), the international tagged-PDF standard. A conformant document carries:
@@ -60953,7 +60999,7 @@ MX
 
             - A declared accessibilityConformance claim the publisher can defend.
 
-            - An XMP packet recording the conformance level (PDF/UA-1 Part 1 / Level 2 today).
+            - An XMP packet recording the conformance level (pdfuaid:part=1, PDF/UA-1, ISO 14289-1).
 
           Most PDFs in the wild carry none of these. They are byte streams with structure only the original author could reconstruct.
 
@@ -61309,6 +61355,8 @@ MX
             EAA PDF accessibility remediation
 
             European Accessibility Act (Directive (EU) 2019/882) applies to public-facing PDFs from 28 June 2025. We audit the estate, tag and declare conformance on a representative subset, and stand up a retained pipeline so newly-created PDFs ship compliant. Triage from £3k; remediation engagements from £15k.
+
+            Note: Regulatory requirements vary by jurisdiction and organisation type. Nothing here is legal advice. Consult qualified legal specialists for guidance specific to your situation.
 
             See the EAA offering
 
@@ -61823,6 +61871,8 @@ Inquire About Advisory →
 6. PDF Accessibility Audits
 
 Make your PDFs work for people who use assistive technology, and meet your legal obligations under the European Accessibility Act.
+
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
 What You Get
 
@@ -62500,7 +62550,9 @@ MX
 
           Tagged structure (ISO 14289-1)
 
-          An MX Compatible PDF declares pdfuaid:Part=1 in its XMP metadata packet, indicating Level 2 PDF/UA conformance to ISO 14289-1. The inspector reads the XMP packet and reports the declared Part. The tagged structure tree itself (the /StructTreeRoot in the PDF's catalog) is what lets a screen reader walk the document the way a sighted reader does, and what European Accessibility Act Directive 2019/882 expects for documents published from 28 June 2025 onwards.
+          An MX Compatible PDF declares pdfuaid:part=1 in its XMP metadata packet, indicating PDF/UA-1 conformance to ISO 14289-1. The inspector reads the XMP packet and reports the declared Part. The tagged structure tree itself (the /StructTreeRoot in the PDF's catalog) is what lets a screen reader walk the document the way a sighted reader does, and what European Accessibility Act Directive 2019/882 expects for documents published from 28 June 2025 onwards.
+
+          Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
           MX XMP namespace
 

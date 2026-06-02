@@ -116,7 +116,7 @@ export async function readPdfMetadata(pdfDoc) {
 
 export function detectTaggedTree(metadata) {
   // pdf.js does NOT expose /MarkInfo directly in getMetadata, so we read
-  // the XMP claim of pdfuaid:Part=1 (Level 2 PDF/UA declaration) as a
+  // the XMP claim of pdfuaid:Part=1 (PDF/UA-1 conformance declaration) as a
   // strong proxy. Absence of pdfuaid:Part is not a definitive "no tagged
   // tree" answer, but presence is a definitive yes.
   const pdfuaPart = readXmpField(metadata.metadata, 'pdfuaid:Part') ||
@@ -294,7 +294,7 @@ export function makeReportMarkdown(file, classification, findings) {
   lines.push('# Tagged structure tree');
   lines.push('qpdf --json file.pdf | jq \'.objects[] | select(.["/Type"] == "/StructTreeRoot")\'');
   lines.push('');
-  lines.push('# PDF/UA Level 2 conformance claim');
+  lines.push('# PDF/UA-1 (ISO 14289-1) conformance claim');
   lines.push('exiftool -XMP-pdfuaid:Part file.pdf');
   lines.push('');
   lines.push('# Embedded AI provenance');
