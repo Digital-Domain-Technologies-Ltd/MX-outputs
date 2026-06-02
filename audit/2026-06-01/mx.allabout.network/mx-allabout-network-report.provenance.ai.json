@@ -4,7 +4,7 @@
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
   "auditId": "mx.allabout.network-2026-06-01",
   "runRevision": 3,
-  "lastWriteAt": "2026-06-02T07:39:47.972Z",
+  "lastWriteAt": "2026-06-02T07:44:24.839Z",
   "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
@@ -1057,6 +1057,34 @@
       "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"The automated pass identifies what is present or absent; we read that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable.\",\n      \"findingIndex\": 1,\n      \"justification\": \"voice: rewrote third-person 'The automated pass identifies' to first-person 'We identify'\",\n      \"replace\": \"We identify what is present or absent in the automated pass; we read that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable.\"\n    }\n  ],\n  \"unfixable\": []\n}",
       "outcome": "pass",
       "notes": "inputTok=23766 outputTok=7896 layer1=0 layer2applied=1 layer2skipped=0 unfixable=0 hygiene=0 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-02T07:44:24.839Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "mx-allabout-network-report.md",
+        "regexCategoriesFlagged": []
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report-fierce-critic.json",
+        "sha256": "19cdd421d8323afb85412e05a166c85924e6641f8b1ed0dcc975795b189038f2"
+      },
+      "rubricHash": "8a488965de03eb267a847ab7a015b60d93a1df3866ce80b91c5c2af8021b6826",
+      "inputHashes": [
+        {
+          "hash": "7de925f325cea600767adc7a7914c4d1a961b686c760732806a923f10a1f6af3",
+          "label": "report"
+        }
+      ],
+      "outcome": "pass",
+      "notes": "runCount=3 regexFindings=0 llmFindings=0"
     }
   ]
 }
