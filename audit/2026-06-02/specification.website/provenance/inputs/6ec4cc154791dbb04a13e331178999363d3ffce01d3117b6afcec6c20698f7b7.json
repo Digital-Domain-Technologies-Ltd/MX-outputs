@@ -1,0 +1,168 @@
+{
+  "auditDate": "2026-06-02",
+  "errors": [
+    {
+      "timestamp": "2026-06-02T17:17:02.106Z",
+      "severity": "error",
+      "source": "audit-pipeline.js (Gate 0a-versioning)",
+      "gateName": "template-contract-drift",
+      "category": "template-contract-drift",
+      "title": "Template uses tokens the contract does not declare (hard fail)",
+      "detail": "Gate template-contract-drift (audit-pipeline.js (Gate 0a-versioning)) returned non-zero. Output excerpt:\n\n8 token(s) in template missing from contract: [AB_TEST_CATEGORY_LABEL], [AB_TEST_MACHINE_IMPACT], [AB_TEST_MITIGATIONS], [AB_TEST_PAGES_AFFECTED], [AB_TEST_VARIANT_EVIDENCE], [AB_TEST_VENDOR_NAME], [LINK_INVENTORY_SITEMAP_NOTE], [LINK_INVENTORY_SITEMAP_ROW]\n1 token(s) declared in contract but absent from template: [AVG_LINKS_PER_PAGE]",
+      "suggestions": [
+        "Run `npm run audit:contract:regen` (node mx-reginald/audit/scripts/generate-template-contract.js --write) to regenerate the contract from the current template.",
+        "Or remove the undeclared tokens from the template if they were added by mistake.",
+        "Contract path: mx-reginald/audit/templates/web-audit-suite-template.contract.json",
+        "Template path: mx-reginald/audit/templates/web-audit-suite-template.md"
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:17:02.438Z",
+      "severity": "info",
+      "source": "check-report-tone.js",
+      "gateName": "tone",
+      "category": "banned-verdict",
+      "title": "Banned verdict words: 1 instance",
+      "detail": "Banned verdict words\n\nline 545: \"failure\" - **Finding:** `/spec/foundations` has a heading level jump from H1 directly to H3 (no H2 between them",
+      "suggestions": [],
+      "lineRef": "line 545",
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:17:02.598Z",
+      "severity": "warn",
+      "source": "check-report-voice.js",
+      "gateName": "voice-consistency",
+      "category": "mixed-voice-sections",
+      "title": "Mixed-voice section(s) remain after auto-repair: 2",
+      "detail": "Gate voice-consistency (check-report-voice.js) returned non-zero. Output excerpt:\n\ncheck-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-02/specification.website/spec-website-report.md\n  2 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person (\"the site does X\") with first-person (\"we found Y\") inside the same section reads as drafted-by-committee.\n\n  ## About This Report  (line 10)\n    first-person tokens: 9 (lines 12, 14, 16…)\n    third-person markers: 1 (lines 18)\n\n  ## Div Soup: naked containers without semantic mapping  (line 481)\n    first-person tokens: 2 (lines 485, 511)\n    third-person markers: 1 (lines 537)\n\n  Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice (\"we\"); scorecards and appendices use third-person.\n",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:17:02.598Z",
+      "severity": "warn",
+      "source": "check-report-scope.js",
+      "gateName": "sample-vs-total-scope",
+      "category": "scope-mis-statements",
+      "title": "Scope mis-statements remain after auto-repair: 1",
+      "detail": "Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:\n\ncheck-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-02/specification.website/spec-website-report.md\n  1 scope mis-statement(s).\n\n  [sitewide-inside-sampled-section] line 156\n    section: ## Findings  (line 144)\n    phrase:  \"on every page\"\n    line:    The pipeline scores 91/100 with two checks flagged. Inline Tag Bloat fires on all 11 pages: each carries a 918-byte inli\n\n  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write \"across the audited set\" — write \"the sitemap declares\" or \"this file carries\". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write \"site-wide\" or \"across the entire site\" — write \"across the audited pages\" or \"on the audited set\".\n",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:17:03.269Z",
+      "severity": "warn",
+      "source": "audit-pipeline.js (Gate 0c)",
+      "gateName": "html-render-heading-count",
+      "category": "pandoc-truncation",
+      "title": "HTML render heading count mismatch: markdown=33 rendered=32",
+      "detail": "Gate html-render-heading-count returned non-zero with no captured output.",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:17:03.755Z",
+      "severity": "warn",
+      "source": "check-report-section-sanity.js",
+      "gateName": "section-sanity",
+      "category": "orphan-bullets-or-leaked-markers",
+      "title": "Section sanity issues: 1 issue(s)",
+      "detail": "Gate section-sanity (check-report-section-sanity.js) returned non-zero. Output excerpt:\n\n\nSection sanity: spec-website-report.md: 1 issue(s)\n\n  unexplained-code-token (1):\n    line 579 — section \"Div Soup: naked containers without semantic mapping\"\n      Bullet references `@id` but the surrounding section never introduces what it is. Add an introductory sentence to the section, or fold the legend bullet into the same list so the term carries its own context across page breaks.\n\n→ Fix the template / infill so each section is self-contained: every bullet list has an introducer in the same section, every code-token is named in surrounding prose, and every conditional marker is consumed at infill time.\n\n",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:22:19.824Z",
+      "severity": "warn",
+      "source": "audit-pipeline.js (Phase 3 gate suite)",
+      "gateName": "gates-summary",
+      "category": "gates-failed",
+      "title": "Audit gates raised findings: 0a-versioning, 0b-voice, 0b-scope, 0c, 0g",
+      "detail": "Phase 3 gate suite reported 5 unresolved gates. Individual gates may have recorded richer detail entries above this one. The PDF below is a partial deliverable produced under the always-produce-PDF rule; treat it as diagnostic context rather than a delivered audit until the listed gates pass.",
+      "suggestions": [
+        "Review each failed gate entry above for its specific detail and suggested fix.",
+        "Re-run gates only after fixing: mx exec mx-audit --gates mx-outputs/audit/2026-06-02/specification.website/spec-website-report.md",
+        "If the same gate fails twice in a row with no underlying data change, the gate itself is misbehaving — file an issue against the gate script."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:22:19.910Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Canonical URL 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-02/specification.website/spec-website-report.md — the Cross-Page Consistency table's percentage for Canonical URL does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:22:19.912Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Skip link 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-02/specification.website/spec-website-report.md — the Cross-Page Consistency table's percentage for Skip link does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:22:19.912Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Open Graph tags 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-02/specification.website/spec-website-report.md — the Cross-Page Consistency table's percentage for Open Graph tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:22:19.912Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Twitter Card tags 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-02/specification.website/spec-website-report.md — the Cross-Page Consistency table's percentage for Twitter Card tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-02T17:22:19.912Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports llms.txt link tag 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-02/specification.website/spec-website-report.md — the Cross-Page Consistency table's percentage for llms.txt link tag does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    }
+  ]
+}

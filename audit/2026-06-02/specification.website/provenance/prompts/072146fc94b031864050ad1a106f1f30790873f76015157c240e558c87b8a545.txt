@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fspecification.website%2Fchecklist%2F
+# model:  gpt-oss:20b
+# sha256: 072146fc94b031864050ad1a106f1f30790873f76015157c240e558c87b8a545
+# capturedAt: 2026-06-02T16:41:00.879Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4221
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://specification.website/checklist/
+Title: The checklist · Website Spec
+H1: The checklist
+Outbound link hosts (up to 20): github.com, joost.blog, creativecommons.org
+
+Body text (first 4000 chars):
+Skip to main content Website Spec What a good website does. All topics Checklist MCP About Contribute Search ⌘K All topics Checklist Search MCP server About Contribute GitHub Categories Foundations SEO Accessibility Security Well-Known URIs Agent Readiness Performance Privacy Resilience Internationalisation Foundations SEO Accessibility Security Well-Known URIs Agent Readiness Performance Privacy Resilience Internationalisation Home / Checklist The checklist Every spec item, flat and tickable. Use as a self-audit. Print-friendly. Foundations The HTML, head, and document basics every page needs. The HTML doctype Required Every HTML document must start with <!doctype html> as its first line. This opts the browser into standards mode; without it, you get quirks mode and broken layout. The lang attribute on <html> Required Set a valid BCP 47 language tag on the <html> element so screen readers, translators, search engines, and browsers know what language the page is in. <meta charset> Required Declare UTF-8 as the document character encoding in the first 1024 bytes of the HTML, so browsers parse text correctly before they hit any non-ASCII content. <meta viewport> Required Tell mobile browsers to render the page at the device's actual width instead of pretending to be a 980-pixel desktop. One line, and never disable user scaling. The <title> element Required Every HTML document must have exactly one non-empty <title> element inside <head>. It is used by browsers, search engines, screen readers, social previews, and AI agents. <meta name="description"> Recommended A short, unique summary of the page used by search engines and social platforms as a snippet. Google may rewrite it, but a good one is rewritten less often. Canonical URL (rel="canonical") Recommended Declare the preferred URL for a page so search engines and crawlers consolidate ranking signals on one address, even when several URLs serve the same content. Favicons and app icons Recommended Ship an SVG favicon, an ICO fallback at /favicon.ico, an apple-touch-icon, and a maskable PWA icon. Five files cover every browser and home-screen surface. <meta name="theme-color"> Recommended Tints the browser chrome and OS surfaces to match your brand. Use the media attribute to ship one colour for light mode and another for dark mode. <meta name="color-scheme"> Recommended Tells the browser which colour schemes your page is designed for. Prevents the white flash that dark-mode users see before your CSS loads, and lets the browser style scrollbars, form controls, and the page background to match. Open Graph protocol Recommended Open Graph tags control how pages look when shared on social platforms and chat apps. Set og:title, og:description, og:image, og:url, and og:type on every page. Feed discovery with rel="alternate" Recommended If your site publishes a feed — RSS, Atom, or JSON Feed — announce it in <head> with <link rel="alternate">. Feed readers, agents, and browsers discover it without guessing the URL. Feed content hygiene Recommended If you publish a feed, ship it well-formed. Identify the feed inside itself with atom:link rel="self", give every item a stable guid, declare an update cadence with the Syndication module, and validate before deploy. Popover API Recommended Replace ARIA-puzzled JavaScript modals, menus, and tooltips with a native top-layer primitive that the browser opens, closes, and accessibility-wires for you. SEO Search visibility — robots.txt, sitemaps, canonicals, structured data. robots.txt Recommended A plain-text file at the site root that tells crawlers which paths they may or may not fetch. Standardised in RFC 9309 and supported by every major search engine. XML sitemaps Recommended An XML file listing the canonical URLs of a site, with optional metadata about when each was last changed. The fastest way to tell a search engine what exists. Sitemap index files Recommended A sitemap of sitemaps. Used when a site has more than 50,000 URLs or wants to 
