@@ -1,0 +1,99 @@
+---
+title: "Co-Directors Report — Three Blog Posts Published; Direct Pitch and Chrome Classification Analysis"
+description: "Afternoon session produced and published three new blog posts responding to the Salesforce-Contentful acquisition and Chrome's hidden classification lists, plus a direct pitch post weaving themes from the MX book series."
+author: "Tom Cranstoun"
+created: 2026-06-02
+modified: 2026-06-02
+version: "1.0"
+
+mx:
+  status: active
+  contentType: report
+  audience: [business]
+  confidential: true
+  tags: [directors-report, session, afternoon]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-02-afternoon-report.md
+---
+
+# Co-Directors Report — Three Blog Posts Published; Direct Pitch and Chrome Classification Analysis
+
+**Date:** 2 June 2026 - Afternoon
+**Segment:** Afternoon (since noon)
+
+---
+
+## Summary
+
+This session produced and published three new blog posts to mx.allabout.network/blog/: a commentary on the Salesforce-Contentful acquisition framed around the "content that manages itself" concept from MX: The Protocols; a substantive analysis of Chrome's hidden site-classification lists using RESONEO's May 2026 research as the entry point; and a direct client-facing pitch post synthesising both arguments. All three passed HTML hygiene gates, were promoted from drafts to published, and are now indexed. The html-writer draft scaffold was also improved with a charset-placement fix that will benefit all future posts.
+
+---
+
+## What Was Done
+
+### 1. Salesforce-Contentful Acquisition Response
+
+The Salesforce agreement to acquire Contentful (announced 1 June 2026) was the hook for a post making the open-standards case at the moment the market validated the machine-readable content argument. The post introduces the "content that manages itself" concept from Chapter 18 of MX: The Protocols at the pivot point where it contrasts with Salesforce's "agent-readiness as a platform feature." A discovery corollary paragraph was added after the open-record argument: agent-readiness as a platform feature means discovery through Salesforce's registry, and withdrawal takes the signal with it.
+
+### 2. Chrome Classification Analysis
+
+A 3,500-word analysis of RESONEO's research into Chrome's internal site-classification data. The post covers the three classification layers Google ships inside the browser (Gemini block list, semantic-memory inclusion list, commerce classifier), the cost-of-inference argument, the signature/accountability distinction (a signed lie is better than an unsigned inference), the discovery-as-membership inversion, and the multi-vendor pattern beyond Chrome. The EU AI Act direction section carries the mandatory legal disclaimer per CLAUDE.md. The post is honest about where MX does not yet connect to Chrome's actual lists.
+
+### 3. Direct Pitch Post
+
+A shorter, direct-pitch post ("Declare Once, Work Everywhere") synthesising both posts into a client-facing entry point. Structured as: the problem, the inflection, what we do, what you get, how to start. Includes "read more" links to the companion posts. CTA framed around the MX audit as the fastest entry point.
+
+### 4. Draft Scaffold Improvement
+
+The `content-template-draft.html` scaffold had `<meta charset="UTF-8">` placed after the MX-SOURCE-FRONTMATTER block, triggering an HTML linting hint. Charset is now first in `<head>` across all three new posts and the template, with the duplicate removed.
+
+### 5. Promotion and Discovery
+
+All three posts promoted from `blog/drafts/` to `blog/` with all links, asset paths, canonical URLs, robots directives, and mx:status updated. Blog index updated with two new cards (who-answers was already indexed). Blog sitemap regenerated to 67 entries. llms-full.txt and main sitemap regenerated.
+
+---
+
+## By the Numbers
+
+| Metric | Value |
+|--------|-------|
+| Commits (mx-outputs) | 2 |
+| Files changed | 32 |
+| Lines added | +523 |
+| Lines removed | -9,027 |
+| New published blog posts | 3 |
+| Blog sitemap entries | 67 |
+| Repositories touched | 1 (mx-outputs) + hub pending |
+
+---
+
+## Why It Matters
+
+The Salesforce-Contentful deal is the single clearest market signal the MX argument has received. A founder said "AI agents outnumber humans on the web" on the way to an acquisition, and a platform paid for agent-readiness as a feature. Three posts published within 24 hours of the announcement positions MX as the open-standards voice in that conversation - exactly the Boye CMS Experts audience the pitch is aimed at. The Chrome classification post is independently valuable for the accountability/inference argument and as a Boye speaking angle (the shopping classifier story is a CMS-practitioner story, not just an MX-insider one).
+
+## The Insight
+
+The RESONEO Chrome research makes the inference-vs-declaration argument concrete at scale. The finding that Google's own Search guidance says "declare with Schema.org" while the browser's own classifier ignores declared markup and guesses from truncated text - that is the fracture that makes the open-standards case for us without requiring any MX-specific claim.
+
+## Decisions Made
+
+- Wove "content that manages itself" from Chapter 18 of MX: The Protocols into the Salesforce post at the natural pivot point and in the closing sentence. Not cited by chapter; introduced as a concept the MX books name.
+- Legal disclaimer added to the Chrome post at the first EU AI Act mention per CLAUDE.md rules.
+- Contentful audit deliverables from 2026-06-02 removed from mx-outputs (previously committed; deleted from disk before this session).
+
+---
+
+## Next Steps
+
+- Consider the three posts as a cluster for a Boye CMS Experts speaker submission: "Who owns agent-ready content?" - the acquisition, the Chrome research, and the pitch as a live demonstration.
+- The "who-answers" post CTA ("Declare your machine policy") is the closest we have to a direct service page for policy COGs. The services page may need a matching section.
+- llms.txt sync script did not show explicit confirmation of the three new posts in llms.txt - verify the llms.txt key-pages block includes the new posts before next session.
+
+---
+
+## Commit Log
+
+| Hash | Description |
+|------|-------------|
+| d9660108 | Publish three blog posts; update discovery and indexes |
+| a04b7557 | Remove contentful.com audit deliverables from 2026-06-02 |
+| _pending_ | Hub: Bump mx-outputs pointer + session docs |
