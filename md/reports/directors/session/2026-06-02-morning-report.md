@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report — Audit Provenance Infrastructure and LLM View Extension"
-description: "Audit LLM pipeline wired for provenance capture; new browser extension shows Accept: text/markdown responses"
+title: "Co-Directors Report — Audit Provenance, LLM View Extension, and mx-for-pdfs Accuracy Audit"
+description: "Audit LLM pipeline wired for provenance capture; LLM View extension; factual accuracy audit of mx-for-pdfs.html with site-wide fixes"
 author: "Tom Cranstoun"
 created: 2026-06-02
 modified: 2026-06-02
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -15,7 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-02-morning-report.md
 ---
 
-# Co-Directors Report — Audit Provenance Infrastructure and LLM View Extension
+# Co-Directors Report — Audit Provenance, LLM View Extension, and mx-for-pdfs Accuracy Audit
 
 **Date:** 2 June 2026 — Morning
 **Segment:** Morning (since midnight)
@@ -24,7 +24,7 @@ mx:
 
 ## Summary
 
-This morning completed two independent workstreams. First, the audit LLM pipeline was wired for full provenance capture: every LLM call now records the exact prompt bytes and input data to a hash-indexed file store, making the evidence chain inspectable end-to-end. Second, a third browser extension was built and shipped — MX: LLM View — which re-fetches the current page with `Accept: text/markdown` and shows whether the server honours the request, revealing content-negotiation support in one click.
+This morning completed three workstreams. First, the audit LLM pipeline was wired for full provenance capture: every LLM call now records the exact prompt bytes and input data to a hash-indexed file store, making the evidence chain inspectable end-to-end. Second, a third browser extension was built and shipped — MX: LLM View — which re-fetches the current page with `Accept: text/markdown` and shows whether the server honours the request, revealing content-negotiation support in one click. Third, a three-agent internet fact-check of `mx-for-pdfs.html` surfaced two factual errors and prompted a site-wide accuracy sweep and legal disclaimer rollout.
 
 ---
 
