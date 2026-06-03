@@ -230,13 +230,38 @@ function wireToolbar() {
 
 async function main() {
   wireToolbar();
+  let tab;
   try {
-    const tab = await getActiveTab();
-    $('#page-url').textContent = isInternalUrl(tab?.url) ? '(browser-internal page)' : (tab?.url || '(unknown URL)');
+    tab = await getActiveTab();
   } catch (_) {
     $('#page-url').textContent = '(unknown URL)';
+    $('#question').focus();
+    return;
   }
+
+  if (isInternalUrl(tab?.url)) {
+    $('#page-url').textContent = '(browser-internal page)';
+    $('#question').focus();
+    return;
+  }
+
+  $('#page-url').textContent = tab?.url || '(unknown URL)';
   $('#question').focus();
+
+  // Eagerly read the page and render suggested question chips so the user can
+  // click one without typing. Runs silently — no status text — to avoid
+  // distracting from the textarea.
+  try {
+    const page = await readPage(tab);
+    if (page) {
+      currentPayload = page;
+      renderPayloadDetail(page);
+      const questions = await generateSuggestedQuestions(page.payload);
+      renderPresets(questions);
+    }
+  } catch (_) {
+    // Silently ignore; the user can still type manually.
+  }
 }
 
 main();
