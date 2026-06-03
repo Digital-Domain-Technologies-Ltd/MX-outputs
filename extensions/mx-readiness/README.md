@@ -1,24 +1,24 @@
 ---
-title: "MX Readiness Inspector — Chrome Extension"
-description: "Chrome extension that inspects the current page for MX-readiness signals and summarises with Chrome's on-device Gemini Nano model."
+title: "MX Readiness Inspector — Browser Extension"
+description: "Chromium extension that inspects the current page for MX-readiness signals and summarises with an on-device or local language model."
 author: Tom Cranstoun
 created: 2026-05-31
-modified: 2026-05-31
-version: "0.1.0"
+modified: 2026-06-03
+version: "0.2.0"
 
 mx:
   status: active
   contentType: info-doc
   audience: [humans]
   x-mx-category: mx-tools
-  tags: [chrome-extension, mx-audit, gemini-nano, on-device, mx-readiness]
+  tags: [browser-extension, chrome-extension, edge-extension, mx-audit, gemini-nano, ollama, on-device, mx-readiness]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/extensions/mx-readiness/README.md
-  runbook: "Load the unpacked extension at chrome://extensions and click the action button on any web page to see the MX-readiness signals and a Gemini Nano summary."
+  runbook: "Load the unpacked extension at chrome://extensions or edge://extensions and click the action button on any web page to see the MX-readiness signals and a model summary."
 ---
 
 # MX Readiness Inspector
 
-A Chrome extension that inspects the page you are currently looking at for the signals MX cares about (governance meta, AI disclosure, discovery files, structured data, Open Graph, accessibility, provenance), scores them deterministically, and asks Chrome's on-device **Gemini Nano** model for a brief summary.
+A Chromium-based browser extension (Chrome and Edge) that inspects the page you are currently looking at for the signals MX cares about (governance meta, AI disclosure, discovery files, structured data, Open Graph, accessibility, provenance), scores them deterministically, and asks a language model for a brief summary.
 
 There is a small piece of irony here. The Watching the Machines cluster on [mx.allabout.network/blog/drafts/watching-the-machines/](https://mx.allabout.network/blog/drafts/watching-the-machines/) is about Chrome silently installing a multi-gigabyte AI model to people's disks. This extension uses that same model — already on your machine, never asked to be — to grade pages on whether they meet the standard the cluster argues for.
 
@@ -41,31 +41,32 @@ Every finding is one of `pass` / `warn` / `fail` / `info`. The score is the equa
 
 ## Install
 
-The extension is sideloaded; it is not on the Chrome Web Store.
+The extension is sideloaded; it is not on the Chrome Web Store or Edge Add-ons store.
 
 1. Clone the repo (or pull the latest).
-2. Open Chrome at `chrome://extensions`.
+2. Open your browser's extensions page: `chrome://extensions` (Chrome) or `edge://extensions` (Edge).
 3. Toggle **Developer mode** on (top-right).
 4. Click **Load unpacked**.
 5. Select `mx-outputs/extensions/mx-readiness/`.
 6. The extension appears in the toolbar; pin it for easy access.
 
-To update after editing source: visit `chrome://extensions`, click the refresh-circle icon on the MX Readiness Inspector card.
+To update after editing source: revisit the extensions page and click the refresh-circle icon on the MX Readiness Inspector card.
 
-## Enable the on-device model
+## Enable the language model summary
 
-The deterministic checks work in any modern Chromium-based browser. The summary needs a language model. The extension tries four sources in order; whichever responds first is the one used.
+The deterministic checks work in any modern Chromium-based browser. The summary needs a language model. The extension tries five sources in order; whichever responds first is the one used.
 
 | Order | Source | Surface | Where it ships |
 |---|---|---|---|
-| 1 | Chrome / Edge | `self.LanguageModel` (WICG-aligned) | Chrome 131+ with the Prompt API flag; Edge 138+ on Copilot+ PCs. |
+| 1 | Chrome / Edge | `self.LanguageModel` (WICG-aligned) | Chrome 131+ with the Prompt API flag; Edge 138+ on Copilot+ PCs running Windows. |
 | 2 | Chrome | `self.ai.languageModel` | Pre-WICG Chrome origin trial. |
-| 3 | Edge | `self.ai.assistant` (Phi-Silica) | Edge's earlier Prompt API surface on Copilot+ PCs. |
+| 3 | Edge | `self.ai.assistant` (Phi-Silica) | Edge's earlier Prompt API surface on Copilot+ PCs running Windows. |
 | 4 | Chrome | `self.chrome.aiOriginTrial.languageModel` | Older trial namespace. |
+| 5 | Local Ollama | `http://127.0.0.1:11434` | Any machine with Ollama running — automatic fallback when browser model is absent. |
 
-If none of those are reachable, the popup shows the deterministic score plus a one-line note explaining the install path. The DOM and origin findings still render. Every model runs locally; no page content leaves your machine.
+If none of those are reachable, the popup shows the deterministic score plus a one-line note explaining how to enable a model. The DOM and origin findings still render regardless. Every model runs locally; no page content leaves your machine.
 
-The summary panel's footer line names which source actually answered ("Chrome/Edge (WICG)", "Edge (Phi-Silica)", etc.), so you always know what generated the prose.
+The summary panel's footer line names which source answered ("Chrome/Edge (WICG)", "Ollama (gpt-oss:20b, local)", etc.), so you always know what generated the prose.
 
 ### Chrome setup
 
@@ -73,13 +74,19 @@ The summary panel's footer line names which source actually answered ("Chrome/Ed
 2. **Prompt API for Gemini Nano** enabled at `chrome://flags`. Search for "Prompt API for Gemini Nano" and set to **Enabled**.
 3. **On-device model downloaded.** Visit `chrome://components`, find **Optimization Guide On Device Model**, and check it is at a non-zero version. Chrome downloads it on its own schedule; the **Watching the Machines** cluster covers exactly when and how, with no consent dialogue.
 
-### Edge setup
+### Edge setup (Windows, Copilot+ PC)
 
-1. **Edge 138+ on a Copilot+ PC.** The on-device Prompt API is gated to devices Microsoft considers AI-capable hardware.
-2. **The on-device AI flag enabled** at `edge://flags`. Search for "Prompt API" or "on-device AI".
+1. **Edge 138+ on a Copilot+ PC running Windows.** The on-device Prompt API is gated to devices with an NPU.
+2. **The on-device AI flag enabled** at `edge://flags/#language-model-api`.
 3. **Phi-Silica installed.** The model arrives through Windows Update on supported hardware; you do not download it manually.
 
-On Edge without Copilot+ hardware or on other browsers without an on-device model, the extension shows a fallback message with setup instructions.
+### Edge setup (macOS) / Ollama fallback
+
+Edge on macOS does not expose an on-device model API (Phi-Silica is Windows-only). The extension automatically falls back to a local Ollama instance instead.
+
+1. Install Ollama from [ollama.com](https://ollama.com) and pull a model (`ollama pull llama3.2` or any model the extension recognises).
+2. Allow browser extension requests by setting `OLLAMA_ORIGINS=*`. On macOS this is persistent via a LaunchAgent — a ready-made plist lives at `~/Library/LaunchAgents/com.ollama.environment.plist` in this repo's setup.
+3. Start Ollama (`ollama serve` or open the Ollama app). The extension probes `127.0.0.1:11434` on every popup open and uses the first available model it recognises.
 
 ## The popup toolbar
 
@@ -98,11 +105,13 @@ popup.js  ─┬─►  chrome.scripting.executeScript( content.js in active tab
            │       │
            │       └─►  returns findings[]  (origin probes: /llms.txt, /robots.txt, /AI-USAGE.json, ...)
            │
-           └─►  LanguageModel.create({ initialPrompts: [system: 'You are an MX-readiness reviewer ...'] })
+           └─►  tryBrowserModel()  →  LanguageModel / ai.languageModel / ai.assistant
+                    │  (null if no browser model available)
                     │
-                    └─►  session.prompt( compactFindings + score )
-                           │
-                           └─►  brief summary
+                    └─►  tryOllamaModel()  →  fetch( 127.0.0.1:11434/api/chat )
+                              │  (null if Ollama not running)
+                              │
+                              └─►  fallback message with browser-specific setup hint
 ```
 
 - `content.js` runs in the page's main world (DOM access) but has no host permission — it only reads.
@@ -114,8 +123,9 @@ popup.js  ─┬─►  chrome.scripting.executeScript( content.js in active tab
 - `activeTab` — read the current tab's URL and inject the content script when the action button is clicked.
 - `scripting` — allow the popup to inject `content.js`.
 - `<all_urls>` host permission — origin-level fetches for `/llms.txt`, `/robots.txt`, `/AI-USAGE.json`, `/agent-card.json`, `/sitemap.xml`.
+- `http://127.0.0.1:11434/*` and `http://localhost:11434/*` — Ollama fallback calls. Only used when the browser on-device model is absent.
 
-No tabs, no history, no storage, no remote calls.
+No tabs, no history, no storage, no calls to remote servers.
 
 ## Files
 

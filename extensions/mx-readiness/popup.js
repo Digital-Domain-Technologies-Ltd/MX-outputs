@@ -7,9 +7,12 @@
 //      files (/llms.txt, /robots.txt, /AI-USAGE.json, etc.).
 //   4. Compute the deterministic readiness score from the combined
 //      findings (one weight table, transparent maths).
-//   5. Ask Chrome's on-device Gemini Nano (the LanguageModel global) for a
-//      brief summary of where the page stands. Graceful fallback
-//      if the model is unavailable.
+//   5. Ask the best available language model for a brief summary:
+//        a. Browser on-device model (Chrome Gemini Nano or Edge Phi-Silica
+//           on Copilot+ PCs running Windows).
+//        b. Local Ollama instance at 127.0.0.1:11434 — automatic fallback
+//           when the browser model is absent (e.g. Edge on macOS).
+//      Graceful no-model message if neither is reachable.
 //   6. Render. Tabs filter the findings list by section.
 
 const SECTIONS = [
@@ -383,11 +386,68 @@ function buildUserPrompt(pageInfo, findings, score) {
   return `Page: ${pageInfo.title || pageInfo.url}\nURL: ${pageInfo.url}\nDeterministic readiness score: ${score.value}/100.\n\nFindings (status:label):\n${compact}\n\nSummarise briefly. Reply with the summary only.`;
 }
 
+function browserSetupHint() {
+  const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+  const isEdge = ua.includes('Edg/');
+  const isMac = ua.includes('Macintosh');
+  if (isEdge && isMac) {
+    return 'Edge on macOS does not support on-device models (Phi-Silica requires Windows on a Copilot+ PC). Use Chrome on this Mac instead and enable the model at chrome://flags/#prompt-api-for-gemini-nano.';
+  }
+  if (isEdge) {
+    return 'Enable the on-device model at edge://flags/#language-model-api (requires a Copilot+ PC running Windows).';
+  }
+  return 'Enable the on-device model at chrome://flags/#prompt-api-for-gemini-nano, then download the model at chrome://components.';
+}
+
+const OLLAMA_HOST = 'http://127.0.0.1:11434';
+const OLLAMA_DEFAULT_MODELS = ['gpt-oss:20b', 'llama3.2', 'llama3.1', 'mistral', 'phi3'];
+
+async function tryOllamaModel(pageInfo, findings, score) {
+  // Probe which models are available; pick the first preferred match or the
+  // first model in the list. Returns null if Ollama is not reachable.
+  let model;
+  try {
+    const res = await fetch(`${OLLAMA_HOST}/api/tags`, { signal: AbortSignal.timeout(3000) });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const names = (data.models || []).map((m) => m.model);
+    model = OLLAMA_DEFAULT_MODELS.find((m) => names.includes(m)) || names[0];
+    if (!model) return null;
+  } catch (_) {
+    return null;
+  }
+
+  try {
+    const res = await fetch(`${OLLAMA_HOST}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model,
+        stream: false,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user',   content: buildUserPrompt(pageInfo, findings, score) },
+        ],
+      }),
+      signal: AbortSignal.timeout(30000),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const text = data.message?.content?.trim();
+    if (!text) return null;
+    return { text, source: `Ollama (${model}, local)` };
+  } catch (_) {
+    return null;
+  }
+}
+
 async function generateSummary(pageInfo, findings, score) {
   const browser = await tryBrowserModel(pageInfo, findings, score);
   if (browser) return browser;
+  const ollama = await tryOllamaModel(pageInfo, findings, score);
+  if (ollama) return ollama;
   return {
-    text: 'Score ' + score.value + '/100. No browser on-device model is available. See browser setup instructions at chrome://extensions.',
+    text: 'Score ' + score.value + '/100. No on-device model available. ' + browserSetupHint() + ' Or start Ollama locally (ollama serve) for an automatic fallback.',
     source: 'fallback (no model available)',
   };
 }
