@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report -- Extension Overhaul: Ollama Fallback, Spinner UX, Probe Cache"
-description: "Ollama fallback added to MX Comprehension Probe; spinner replaces status text in both extensions; provenance-gap LLM cache lands"
+title: "Co-Directors Report -- Extension Overhaul + Blog Series + Book HTML Updates"
+description: "Ollama fallback; spinner UX; probe caches; spinner fix; 14 blog post drafts (standards-governance series); book chapter HTML updates"
 author: "Tom Cranstoun"
 created: 2026-06-03
 modified: 2026-06-03
-version: "1.0"
+version: "2.0"
 
 mx:
   status: active
@@ -47,6 +47,18 @@ Both extensions had verbose status strings ("Asking the on-device model...", "Ge
 - **mx-comprehension**: CSS spinner (amber, 20px, `@keyframes mx-spin`) in the answer area; shown during `ask()` model call, hidden on completion. Textarea placeholder removed. "answered by: ..." source label removed on completion.
 - **mx-readiness**: CSS spinner (teal, 16px) in the summary text area; shown while `generateSummary()` runs, hidden on completion. All intermediate status strings removed. Summary-source attribution removed. Footer updated to mention Ollama alongside on-device models.
 
+### 5. Spinner Fix -- Initial Chip Generation
+
+A follow-on bug was reported: the spinner did not show while `main()` generated the initial question chips on popup open. The spinner only showed during `ask()`. Fix: `showSpinner()` now wraps the `readPage()` + `generateSuggestedQuestions()` block in `main()`, hidden after chips render.
+
+### 6. Standards-Governance Blog Series (14 Drafts)
+
+14 blog post drafts landed covering a standards-governance series and adjacent essays. Titles include "A Rule You Sell Is Not a Standard", "The Spec Was Never the Fragile Part", "Two Implementations or It Isn't a Standard", "When the Law Points at Your Standard", and ten further posts on agency, platforms, trust, and capture. All dated 2026-06-03. These feed the manuscripts chapter and the site's thought-leadership surface.
+
+### 7. Book Chapter HTML Updates
+
+Three book chapter HTML files were regenerated: `handbook-chapter-00`, `protocols-chapter-00`, and `protocols-chapter-12`. A new Handbook v2 chapter 00 HTML also landed (`mx-handbook-v2-chapters-chapter-00-chapter-00.html`).
+
 ### 4. Provenance-Gap LLM Cache
 
 `mx-reginald/audit/bin/provenance-gap-llm.js` now caches per-page LLM findings. Cache key: HTML content hash + rubric (system prompt) hash + model. A 30-day TTL backstop prevents stale entries; HTML hash is the real freshness signal. On a repeat audit of an unchanged page, the Ollama call is skipped entirely (~30-40s saved per page). Cache lives at `<cacheDir>/llm/provenance-gap-cache.json` (gitignored).
@@ -62,6 +74,9 @@ Both extensions had verbose status strings ("Asking the on-device model...", "Ge
 | Status text strings removed across both extensions | 8+ |
 | Lines added to provenance-gap-llm.js | ~90 |
 | Contentful audit PDF delivered | 1 |
+| Blog post drafts added (standards-governance series) | 14 |
+| Book chapter HTML files updated or added | 4 |
+| MX compliance violations fixed (invalid folderType enum) | 1 |
 
 ---
 
@@ -85,15 +100,19 @@ The provenance-gap cache is cost-reduction for repeat audits: a 10-page audit th
 
 | Hash | Description |
 |------|-------------|
+| e6079608 | (mx-outputs) Update book chapter HTML: handbook ch00, protocols ch00 and ch12 |
+| 24fc14a1 | (mx-outputs) Add 14 blog post drafts: standards-governance series and related essays |
+| 7b0d5fde | (mx-outputs) Show spinner during initial question chip generation in main() |
+| cb49f7b9 | (mx-outputs) Fix invalid folderType: demo -> content in comprehension demo folder |
+| 842e7045 | (mx-outputs) Regenerate README index |
 | 79d63a39 | (mx-outputs) Sync Contentful audit: report final pass + PDF + LLM judgment results |
 | babfce53 | (mx-outputs) Extensions: remove placeholder/status text, add spinner during model inference |
 | 0cbdca19 | (mx-outputs) Fix MX Comprehension Probe: increase Ollama timeout to 120s, add num_ctx |
 | 678c5735 | (mx-outputs) Add Ollama fallback to MX Comprehension Probe ai-client.js |
+| b12fbad2 | (hub) Bump mx-outputs: spinner during chip generation on popup open |
+| 681c88a2 | (hub) Bump mx-outputs: fix invalid folderType enum in comprehension demo |
+| 9d45029d | (hub) Bump mx-outputs: README regen + evening report |
+| 28d6397d | (hub) Docs: CHANGELOG v3.02, LEARNINGS v4.47 |
+| 5c613cec | (hub) Audit pipeline: per-probe LLM caches; agent-access verdict cache |
 | a83bb65f | (hub) Bump mx-outputs: extension spinner + status text cleanup |
 | 5a18e57b | (hub) Bump mx-outputs: fix Ollama timeout + num_ctx in MX Comprehension Probe |
-| abe1671d | (hub) slowest-page-probe: HEAD-based cache; skip re-probe when ETag/Last-Modified unchanged |
-| 0491c138 | (hub) Fix golden and markerReachability: quoted-string capture prevents [TOKEN] truncation |
-| 85a2a587 | (hub) Fix markerReachability.js: use quoted-string capture to avoid [TOKEN] truncation |
-| eacd9370 | (hub) Docs: remove COG-ONLY exclusion from audit-site skill; add platform/framework tokens |
-| 71baf38d | (hub) Bump mx-outputs: add Ollama fallback to MX Comprehension Probe |
-| 7cac3f61 | (hub) Bump mx-outputs: Contentful audit final pass; routing-registry timestamp |
