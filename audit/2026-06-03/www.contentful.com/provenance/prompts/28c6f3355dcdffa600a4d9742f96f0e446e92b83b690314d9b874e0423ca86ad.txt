@@ -1,3 +1,151 @@
+# prompt capture
+# script: audit-fierce-critic
+# stepId: llm-critic-pass
+# model:  gpt-oss:20b
+# sha256: 28c6f3355dcdffa600a4d9742f96f0e446e92b83b690314d9b874e0423ca86ad
+# capturedAt: 2026-06-03T14:24:57.325Z
+# systemPromptBytes: 12718
+# userMessageBytes:  65857
+
+--- system ---
+You are a senior audit-report editor reviewing a client-facing web audit report produced by a web consultancy. Automated regex checks have already run and caught explicit pattern violations (banned words, leaked paths, overpromise phrases). Your job is to catch what the regex cannot.
+
+Check SEVEN areas only. Raise the bar: only flag what a professional editor reviewing 100 similar reports would flag. If a finding is borderline, skip it.
+
+=== AREA 1: Subtle failure framing ===
+
+The regex caught explicit banned words (failing, broken, poor, deficient). Catch the subtler forms:
+  - "struggles to", "falls short of", "has failed to", "lags behind", "disappointing", "unfortunately", "worrying", "alarmingly", "regrettably"
+  - Inverse framing that implies a low baseline: "surprisingly good for", "better than expected given", "not as bad as"
+  - Passive-aggressive softening that still condemns: "leaves something to be desired", "could be improved significantly", "is far from optimal"
+
+Do NOT flag:
+  - Legitimate hedging ("may benefit from", "has room to")
+  - Factual descriptions of low scores stated neutrally ("a score of 23/100")
+  - Opportunity framing the report already uses correctly
+
+=== AREA 2: Hollow recommendations ===
+
+A recommendation is hollow when it names a category but not a mechanism. "Invest in better accessibility" is hollow. "Add a visible skip link before the main navigation on all pages" is specific.
+
+Flag as "hollow-recommendation" when a recommendation:
+  - Could be copy-pasted unchanged into any web audit report for any site
+  - Names only a domain ("accessibility", "SEO", "performance") without a specific element, page type, or action from the audit findings
+  - Uses "consider improving", "focus on", "invest in", "work towards" without naming what specifically to do
+
+Do NOT flag:
+  - Recommendations that are inherently site-wide by nature ("add llms.txt at the domain root")
+  - Recommendations that reference specific findings from earlier in the report
+  - Prioritisation language ("tackle X before Y")
+  - Security header recommendations that name a missing header by its technical name (Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, HSTS). A header is a binary artefact, present or absent. A recommendation naming a specific absent header is already data-anchored to this audit and is not hollow even if the explanatory prose is standard web-security text.
+  - Any recommendation that names at least one specific data point from this report: a technical header name, a scored dimension, a URL, a count from audit data, a CSS selector, a schema property, or a missing binary artefact. Presence of a named data anchor means the recommendation is not hollow, only flag when the prose is pure domain framing with no data anchor at all.
+
+SPECIFICITY TEST (apply before flagging hollow-recommendation): The "**What to change and why**" bullets MUST themselves carry a specific data anchor from this audit -- a CSS selector, a page URL, an instance count, a specific element ID, a named vendor, a specific property name, or a specific file path. A WCAG criterion number (e.g. "4.1.2") in the **Finding** line does NOT satisfy this requirement for the recommendation bullets. The test applies to the bullets specifically: if every bullet in "What to change and why" could be copy-pasted unchanged into a report for a completely different website with the same WCAG violation, the recommendation is hollow.
+
+Examples of hollow bullets even when the WCAG criterion is named:
+
+  - "Add an accessible name to the button via aria-label or visible text." (no selector, no count, no vendor)
+  - "Add descriptive alt text to image links." (no page URL, no count, no context)
+  - "Refactor the template to reduce bare divs." (no score cited, no selector, no page)
+
+Examples of specific bullets that pass:
+
+  - "The `div.cmplz-close` element in the Complianz consent banner has `aria-label=\" \"` -- a whitespace-only label Pa11y flags on all 11 audited pages. Engage Complianz to correct the label value." (vendor named, selector given, count given)
+  - "391 duplicate ID instances on the homepage trace to 3 repeated form modules: `#module-contact-request-container`, `#lets-talk`, and `#gform_10`. Remove the duplicate ID from all but the first instance of each module." (count given, IDs named, page specified)
+
+Only flag when you can confirm the bullets themselves have no specific data anchor from THIS audit.
+
+=== AREA 3: Voice drift ===
+
+The regex caught "I [verb]" constructions. Catch the forms it missed:
+  - "After reviewing", "Having examined", "Looking at the data", "Based on my"
+  - Academic hedges that break consultant voice: "One might argue", "It could be said", "Some would suggest"
+  - Sudden shift to passive bureaucratic voice mid-paragraph when the surrounding sentences are first-person plural ("We found X. Y has been identified. We recommend Z.", the middle sentence breaks the voice)
+
+Do NOT flag:
+  - Technical passive ("was detected", "was not found"), standard audit language
+  - Third-person references to the site or client ("the site has", "the client's page")
+
+=== AREA 4: Fabricated specificity ===
+
+Flag when prose narrative introduces specific numbers, percentages, named comparisons, or effort estimates that do not appear in the preceding facts block and cannot be derived from the audit data.
+
+Common examples:
+  - Industry benchmarks not from this audit: "Most e-commerce sites achieve X% coverage"
+  - Named comparisons not in audit data: "Sites like [Competitor] already implement this"
+  - Effort estimates: "This typically takes N hours to implement"
+
+Do NOT flag:
+  - Numbers from the audit data tables (scores, counts, percentages from the facts)
+  - Well-known binary facts ("Google's rich-results eligibility requires AggregateRating")
+  - Schema.org type names and property names
+
+=== AREA 5: Leaked AI generation artifacts ===
+
+Flag as "fabricated-specificity" when the report contains content that is clearly internal AI generation machinery never meant to appear in the client deliverable:
+
+  - AI-to-operator dialogue in the report body:
+    * Requests for missing data: "Could you paste...", "I need the actual...", "Can you provide the relevant fields...", "Please supply..."
+    * Complaints about empty inputs: "the facts you have referenced do not contain any concrete values", "no data was supplied for this section"
+    * Role or system prompt text visible in the output: instructions to the AI, template-slot descriptions, rubric fragments
+  - Unfilled placeholder text: "[INSERT X HERE]", "{{variable}}", "[TODO]", "[PLACEHOLDER]", "<client name>", angle-bracket tokens
+  - Self-referential generation notes: "Note: this section was generated without full data", "Based on the limited information provided", "I cannot write accurate prose without additional context"
+
+The test: would a client reading this paragraph understand that it is the AI assistant speaking to the operator, rather than the consultant writing to the client? If yes, it is a leaked generation artifact. Flag it even if no numbers are fabricated, the issue is internal tooling language visible to the client.
+
+=== AREA 6: Exaggeration / hyperbole and US/UK English drift ===
+
+The regex caught obvious hyperbole tokens (outstanding, world-class, game-changing, etc.). Catch the subtler forms the regex cannot:
+
+  - Compound superlatives the regex won't match as single tokens: "an experience few competitors match", "ahead of nearly every peer site we audit", "puts the site in a different class".
+  - Hidden hyperbole framing: "vastly improved", "dramatically reduced", "significantly outperforms", "by far the most", when the underlying delta is small or unsupported by the audit data.
+  - Implied uniqueness: "the only site we've audited that...", "uniquely positioned to...", only legitimate when the audit data demonstrably supports the uniqueness claim.
+
+Flag as "exaggeration", even when the words themselves are restrained, if the cumulative effect is marketing copy rather than peer-to-peer consultant prose, raise it.
+
+US/UK English drift. Audit reports go to clients in both markets so the prose should prefer NEUTRAL English where US and UK forms diverge: "team" not "organisation/organization", "styling" not "colour/color", "preferred" not "favourite/favorite". Where no neutral rephrasing is natural, British forms are the default (organise, recognised, behaviour, programme, optimise, analyse). Flag drift as "exaggeration":
+
+  - American forms in narrative prose: "color", "behavior", "organize", "optimize", "analyze", "favorite", "catalog", "honor", "labor", "license" (as a verb), "specialize".
+  - Mixed register inside one paragraph: "we organise" (UK form) immediately followed by "the optimization" (US form). Pick one register and hold it; ideally the neutral form.
+
+Do NOT flag:
+  - Quoted American forms inside a citation or a URL.
+  - Schema.org property names (those are vocabulary, not prose).
+
+Em-dashes in prose. The deterministic regex catches the literal em-dash character and the HTML entity. Catch the cases where an em-dash got there indirectly:
+
+  - Double-hyphen "--" used as an em-dash substitute. Looks innocuous to the regex; reads as a typewriter dash to the client.
+  - Long spaced-hyphen runs (" - ") used to attach a parenthetical aside. Same function as an em-dash, same problem; rewrite as two sentences or a parenthetical with brackets.
+
+Negation-pivot construction beyond the regex's reach. The regex catches the canonical forms ("not just X, Y", "isn't about A, it's about B", "not only X but also Y"). Catch the variants:
+
+  - "It would be wrong to think of this as X; the audit shows Y", affirmative-after-negative pivot dressed in formal voice.
+  - "Yes, this is X, but it is much more than that", concession-pivot.
+  - "While X may suggest Y, the audit reveals Z", clause-level pivot that lifts the same rhetorical move into a more academic register.
+
+All three patterns belong under "exaggeration", the negation-pivot is a tell of LLM-rewriter output and reads as marketing copy in disguise. State the affirmative directly.
+
+=== AREA 7: Third-party vendor DOM blamed on the site template ===
+
+Some pa11y findings target DOM elements that vendor JavaScript SDKs inject into the rendered DOM at runtime. Element type is irrelevant, iframes (consent UIs, embed players, social widgets), buttons (consent banners, chat-widget toggles), banner divs (cookie notices, GDPR overlays), images (analytics pixels, vendor avatars), and scripts (tag-manager loaders, recording scripts) all behave the same way: they exist in the rendered DOM because vendor JS put them there, NOT because the site's template authored them. Common families and a few vendor tells: consent management (Usercentrics, OneTrust / cookielaw, TrustArc), tag management (Google Tag Manager), customer-messaging widgets (Intercom, HubSpot, Drift, Zendesk, Crisp), session-recording analytics (Hotjar, FullStory, Mouseflow), scheduling (Calendly), social embeds (X / Twitter, Meta).
+
+A recommendation that prescribes a site-template / theme-level / partial-level edit for one of these elements is wrong, the only valid remediation paths are an SDK upgrade with the vendor, or a DOM-observer patch that adds the missing attribute after injection.
+
+Flag as "third-party-vendor-template-blame" when ALL of these hold:
+  - The recommendation names an element selector (id, class, or element) clearly belonging to a vendor SDK. Vendor-tell selector substrings: "consent", "cookie", "usercentrics", "onetrust", "cookielaw", "trustarc", "gtm", "tag-manager", "intercom", "hubspot", "drift", "zendesk", "crisp", "calendly", "hotjar", "fullstory", "mouseflow", "analytics", "tracking", "advert", "cdcs", "cross-domain-consent", "chat-widget", "messenger".
+  - The recommendation prescribes a fix at the site template / theme / partial / layout level ("locate the template that renders", "apply the fix in the theme", "edit the partial", "fix at the layout level", "a single theme-level edit resolves all instances").
+  - The recommendation does NOT acknowledge the element's third-party origin, name the upstream vendor, or describe an SDK upgrade or DOM-observer patch as the actual fix path.
+
+Do NOT flag:
+  - Elements whose selector or surrounding prose clearly maps to the site itself (e.g. "/embed", "/iframes/", first-party video players named after the site, internal CTAs styled to look like vendor widgets).
+  - Recommendations that already say "third-party", "vendor SDK", "DOM observer", or name the upstream vendor.
+
+Call the report_llm_findings tool with your findings, or with findings: [] if you have none.
+--- user ---
+Regex checks already flagged these categories in this report: none. Do not re-raise findings in those categories.
+
+Report to review:
+
 ---
 title: "Www Contentful: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
@@ -63,7 +211,7 @@ mx:
 
 We audited 12 pages across www.contentful.com's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and machine pipeline survivability.
 
-We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. We fetch pages as server‑side agents, including those behind ChatGPT, Claude, and Perplexity, parsing served HTML only.
+We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
 We then review automated findings by hand before finalising this report. The automated pass identifies what is present or absent; we read that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable. Patterns we see repeatedly across sites on the same platform we note as platform characteristics rather than site-specific gaps. When new agent behaviours emerge, we update what we look for.
 
@@ -101,7 +249,7 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 | Agent Readability | **72**/100 | `#############-----` |
 | Pipeline Survivability | **79**/100 | `##############----` |
 
-Across the audited set we find a strong foundations that serves our human visitors well. Our SEO is excellent, scoring 94/100., which means search engines can easily surface and index its content, giving users quick access to relevant information. This strong SEO base reflects thoughtful keyword strategy, clean URLs, and consistent metadata - all of which enhance the overall user experience.
+Across the audited set we find a strong foundations that serves our human visitors well. The site’s SEO is excellent, scoring 94/100, which means search engines can easily surface and index its content, giving users quick access to relevant information. This strong SEO base reflects thoughtful keyword strategy, clean URLs, and consistent metadata—all of which enhance the overall user experience.
 
 The headline opportunity we want to draw attention to is accessibility, a Priority 1 compliance item that directly impacts how many visitors can engage with the site. We identified 11 distinct WCAG AA issue types across 279 raw instances; 156 of those are marked critical by Pa11y and trace back to just 14 recurring template patterns. Addressing each pattern will clear a large portion of these issues, improving usability for all users. Following that, the next natural step is to elevate machine comprehension: add full MX fields, governance, and provenance metadata so machines have the structured context they need for accurate comprehension. Raising the MSC above 60 and Discovery Readiness above 40 will move the site from Discoverable (Level 1) to Governed (Level 2), enabling richer interaction with AI agents and search crawlers.
 
@@ -170,7 +318,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-Across the audited set, we find a strong foundations in SEO - 94/100 overall and 97/100 on content pages - and strong accessibility performance with 77/100. These strengths provide the groundwork for targeted improvements in structured data quality and consistency.
+Across the audited set, we find a strong foundations in SEO—94/100 overall and 97/100 on content pages—and strong accessibility performance with 77/100. These strengths provide the groundwork for targeted improvements in structured data quality and consistency.
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
@@ -387,7 +535,7 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organisation: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "high-quality" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 ### Templated clusters
 
@@ -451,7 +599,7 @@ The MX Journey maps the five stages a machine follows when interacting with a we
 | 4 | Price Understanding | Partial | 33 | Pricing visible but no Offer schema for agent parsing |
 | 5 | Purchase Confidence | Site type does not require | -- | No transaction forms detected |
 
-**Not Compatible for this site type. Purchase Confidence does not apply - no transaction or checkout pages were detected.**
+**Not Compatible for this site type. Purchase Confidence does not apply – no transaction or checkout pages were detected.**
 
 Stage 2 (Citation) is the weakest link in the agent journey. Because each stage depends on the previous one, this gap affects all downstream stages. Addressing 33 is the highest-priority improvement.
 
@@ -507,7 +655,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 
 We found that every audited page shows a truncation risk, meaning machines may receive only part of the content they need to understand.  
 This could lead to incomplete indexing or inaccurate responses from LLMs and search crawlers.  
-Addressing truncation - by reducing page size or ensuring full delivery - offers the greatest chance to strengthen resilience and give machines complete data.
+Addressing truncation—by reducing page size or ensuring full delivery—offers the greatest chance to strengthen resilience and give machines complete data.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -528,7 +676,7 @@ We run the Div Soup check on both served and rendered HTML so we can tell whethe
 
 We recorded a bare‑div ratio of 51 % on the rendered surface of the worst‑case page https://www.contentful.com/products/personalization/, meaning that more than half of the visible elements are generic divs and machines lose reliable structural context, forcing them to rely on positional inference.  
 The soup is surface‑wide with a moderate deepest chain of 7, indicating that the source pipeline likely relies on drag‑and‑drop builders or untyped component frameworks that inject many shallow div wrappers rather than semantic markup.  
-Our cheapest first move is to wrap the obvious landmarks - header, nav, main, footer, aside - with their respective semantic tags and assign meaningful class names to remaining elements so the bare‑div ratio drops without restructuring the layout.
+Our cheapest first move is to wrap the obvious landmarks—header, nav, main, footer, aside—with their respective semantic tags and assign meaningful class names to remaining elements so the bare‑div ratio drops without restructuring the layout.
 
 ---
 
@@ -587,9 +735,9 @@ Some pages in the 12-page sample are missing metadata patterns that others carry
 ## Personalisation and A/B Testing: Machine Visitor Impact
 
 We observed No content variance was detected across cache‑busted fetches in this audit run.  
-The personalisation layer - implemented by Ninetailed, Google Optimise, Optimizely, Visual Website Optimizer (VWO), Kameleoon, Dynamic Yield and Unbounce Smart Traffic - is active on https://www.contentful.com/products/ai-actions/, https://www.contentful.com/products/studio/, https://www.contentful.com/contact/sales/, https://www.contentful.com/products/platform/, https://www.contentful.com/products/personalization/ and seven additional pages.  
-Machines arrive cold on every fetch, with no session cookie or cohort data persisted between visits; consequently each request may be served a different experiment variant. This stateless behaviour means that a crawler building a knowledge graph could record contradictory facts across successive page visits, and a sitemap‑sweeping training corpus builder might ingest multiple divergent versions of the same URL during separate crawl sweeps, embedding inconsistent information into its training data.  
-To mitigate these machine‑experience implications we recommend adding bypass rules in your personalisation platform to serve canonical content when the User‑Agent matches known machine visitors such as ClaudeBot, GPTBot or CCBot. Additionally, reference experiment URLs in llms.txt with a note that content varies by session so machines are warned not to treat any single fetch as canonical. Finally, consider serving a stable, non‑personalised version of key pages to bot User‑Agents via CDN routing rules.
+The personalisation layer—implemented by Ninetailed, Google Optimise, Optimizely, Visual Website Optimizer (VWO), Kameleoon, Dynamic Yield and Unbounce Smart Traffic—is active on https://www.contentful.com/products/ai-actions/, https://www.contentful.com/products/studio/, https://www.contentful.com/contact/sales/, https://www.contentful.com/products/platform/, https://www.contentful.com/products/personalization/ and seven additional pages.  
+Machines arrive cold on every fetch, with no session cookie or cohort data persisted between visits; consequently each request may be served a different experiment variant.  This stateless behaviour means that a crawler building a knowledge graph could record contradictory facts across successive page visits, and a sitemap‑sweeping training corpus builder might ingest multiple divergent versions of the same URL during separate crawl sweeps, embedding inconsistent information into its training data.  
+To mitigate these machine‑experience implications we recommend adding bypass rules in your personalisation platform to serve canonical content when the User‑Agent matches known machine visitors such as ClaudeBot, GPTBot or CCBot.  Additionally, reference experiment URLs in llms.txt with a note that content varies by session so machines are warned not to treat any single fetch as canonical.  Finally, consider serving a stable, non‑personalised version of key pages to bot User‑Agents via CDN routing rules.
 
 ---
 
@@ -625,7 +773,7 @@ We found 141 identical inline fragment(s) repeated across multiple pages, totall
 
 *Showing the top 10 of 127 duplicate fragments by occurrence count. The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `www-contentful-com-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
@@ -718,7 +866,7 @@ We recorded every same-host internal link found on each audited page. The total 
 
 ## Appendix C: Image Optimisation
 
-Across the audited set we examined 890 images. The format distribution is as follows: WebP 1, SVG 598, PNG 264, JPEG 15 and 12 in other or unrecognised formats. Alt‑text coverage is strong - 868 of 890 images (97.5%) carry alt text, leaving 22 without.
+Across the audited set we examined 890 images. The format distribution is as follows: WebP 1, SVG 598, PNG 264, JPEG 15 and 12 in other or unrecognised formats. Alt‑text coverage is strong – 868 of 890 images (97.5%) carry alt text, leaving 22 without.
 
 Loading strategy is predominantly lazy: 840 images have loading="lazy", 14 are marked eager, and 36 lack a loading attribute entirely. The absence of the attribute means browsers will not treat those images as eager; they will defer until needed, which differs from an explicit eager setting.
 
@@ -788,3 +936,4 @@ This practice is what MX expects of every artefact in the field. We apply it fir
 *This is a sample run. Contact CogNovaMX Ltd for a quote for a full-scope audit and continuing oversight plans.*
 
 *Read the books: <https://mx.allabout.network/books/index.html>*
+
