@@ -21,11 +21,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 73 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 265 | Markdown — reports, audit results, presentations |
+| [md/](md/) | 279 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1078** | |
+| **Total** | **1107** | |
 
 ---
 
@@ -116,9 +116,23 @@ PDF documents — books, manuals, presentations, blog exports.
 
 Markdown documents — session reports, audit results, Reginald documentation.
 
-### md/blog/ (1 files)
+### md/blog/ (15 files)
 
 - [`2026-05-23-governance-when-ai-acts.md`](md/blog/2026-05-23-governance-when-ai-acts.md)
+- [`a-rule-you-sell-is-not-a-standard.md`](md/blog/a-rule-you-sell-is-not-a-standard.md)
+- [`agency-platforms-and-the-open-layer.md`](md/blog/agency-platforms-and-the-open-layer.md)
+- [`capture-happens-at-version-two.md`](md/blog/capture-happens-at-version-two.md)
+- [`exit-is-the-only-real-vote.md`](md/blog/exit-is-the-only-real-vote.md)
+- [`microsoft-frontier-tuning-and-the-unsigned-trace.md`](md/blog/microsoft-frontier-tuning-and-the-unsigned-trace.md)
+- [`neither-code-nor-content.md`](md/blog/neither-code-nor-content.md)
+- [`read-is-not-the-same-as-trusted.md`](md/blog/read-is-not-the-same-as-trusted.md)
+- [`software-agreed-the-deal.md`](md/blog/software-agreed-the-deal.md)
+- [`strip-the-marks-lose-the-word.md`](md/blog/strip-the-marks-lose-the-word.md)
+- [`the-badge-and-the-body.md`](md/blog/the-badge-and-the-body.md)
+- [`the-crawl-still-speaks-english.md`](md/blog/the-crawl-still-speaks-english.md)
+- [`the-spec-was-never-the-fragile-part.md`](md/blog/the-spec-was-never-the-fragile-part.md)
+- [`two-implementations-or-it-isnt-a-standard.md`](md/blog/two-implementations-or-it-isnt-a-standard.md)
+- [`when-the-law-points-at-your-standard.md`](md/blog/when-the-law-points-at-your-standard.md)
 
 ### md/migrations/ (5 files)
 
@@ -559,4 +573,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-06-03 at 18:50*
+*Generated on 2026-06-03 at 19:21*
