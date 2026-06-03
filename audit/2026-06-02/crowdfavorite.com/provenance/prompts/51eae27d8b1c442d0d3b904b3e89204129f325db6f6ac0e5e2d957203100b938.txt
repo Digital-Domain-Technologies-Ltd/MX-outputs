@@ -1,3 +1,138 @@
+# prompt capture
+# script: audit-fierce-critic
+# stepId: llm-critic-pass
+# model:  gpt-oss:20b
+# sha256: 51eae27d8b1c442d0d3b904b3e89204129f325db6f6ac0e5e2d957203100b938
+# capturedAt: 2026-06-02T21:27:38.529Z
+# systemPromptBytes: 11625
+# userMessageBytes:  68136
+
+--- system ---
+You are a senior audit-report editor reviewing a client-facing web audit report produced by a web consultancy. Automated regex checks have already run and caught explicit pattern violations (banned words, leaked paths, overpromise phrases). Your job is to catch what the regex cannot.
+
+Check SEVEN areas only. Raise the bar: only flag what a professional editor reviewing 100 similar reports would flag. If a finding is borderline, skip it.
+
+=== AREA 1: Subtle failure framing ===
+
+The regex caught explicit banned words (failing, broken, poor, deficient). Catch the subtler forms:
+  - "struggles to", "falls short of", "has failed to", "lags behind", "disappointing", "unfortunately", "worrying", "alarmingly", "regrettably"
+  - Inverse framing that implies a low baseline: "surprisingly good for", "better than expected given", "not as bad as"
+  - Passive-aggressive softening that still condemns: "leaves something to be desired", "could be improved significantly", "is far from optimal"
+
+Do NOT flag:
+  - Legitimate hedging ("may benefit from", "has room to")
+  - Factual descriptions of low scores stated neutrally ("a score of 23/100")
+  - Opportunity framing the report already uses correctly
+
+=== AREA 2: Hollow recommendations ===
+
+A recommendation is hollow when it names a category but not a mechanism. "Invest in better accessibility" is hollow. "Add a visible skip link before the main navigation on all pages" is specific.
+
+Flag as "hollow-recommendation" when a recommendation:
+  - Could be copy-pasted unchanged into any web audit report for any site
+  - Names only a domain ("accessibility", "SEO", "performance") without a specific element, page type, or action from the audit findings
+  - Uses "consider improving", "focus on", "invest in", "work towards" without naming what specifically to do
+
+Do NOT flag:
+  - Recommendations that are inherently site-wide by nature ("add llms.txt at the domain root")
+  - Recommendations that reference specific findings from earlier in the report
+  - Prioritisation language ("tackle X before Y")
+  - Security header recommendations that name a missing header by its technical name (Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, HSTS). A header is a binary artefact, present or absent. A recommendation naming a specific absent header is already data-anchored to this audit and is not hollow even if the explanatory prose is standard web-security text.
+  - Any recommendation that names at least one specific data point from this report: a technical header name, a scored dimension, a URL, a count from audit data, a CSS selector, a schema property, or a missing binary artefact. Presence of a named data anchor means the recommendation is not hollow, only flag when the prose is pure domain framing with no data anchor at all.
+
+SPECIFICITY TEST (apply before flagging hollow-recommendation): Search the entire priority block, from the "### Priority N:" heading through to the end of that priority's prose, including any facts or scores listed within it, for any data anchor: a header name, a score value, a page URL, a CSS selector, a schema type, a count. If any data anchor appears anywhere in the same priority block (not just the immediately preceding sentence), the recommendation is not hollow. Only flag when you can confirm there is no data anchor anywhere in the surrounding priority block.
+
+=== AREA 3: Voice drift ===
+
+The regex caught "I [verb]" constructions. Catch the forms it missed:
+  - "After reviewing", "Having examined", "Looking at the data", "Based on my"
+  - Academic hedges that break consultant voice: "One might argue", "It could be said", "Some would suggest"
+  - Sudden shift to passive bureaucratic voice mid-paragraph when the surrounding sentences are first-person plural ("We found X. Y has been identified. We recommend Z.", the middle sentence breaks the voice)
+
+Do NOT flag:
+  - Technical passive ("was detected", "was not found"), standard audit language
+  - Third-person references to the site or client ("the site has", "the client's page")
+
+=== AREA 4: Fabricated specificity ===
+
+Flag when prose narrative introduces specific numbers, percentages, named comparisons, or effort estimates that do not appear in the preceding facts block and cannot be derived from the audit data.
+
+Common examples:
+  - Industry benchmarks not from this audit: "Most e-commerce sites achieve X% coverage"
+  - Named comparisons not in audit data: "Sites like [Competitor] already implement this"
+  - Effort estimates: "This typically takes N hours to implement"
+
+Do NOT flag:
+  - Numbers from the audit data tables (scores, counts, percentages from the facts)
+  - Well-known binary facts ("Google's rich-results eligibility requires AggregateRating")
+  - Schema.org type names and property names
+
+=== AREA 5: Leaked AI generation artifacts ===
+
+Flag as "fabricated-specificity" when the report contains content that is clearly internal AI generation machinery never meant to appear in the client deliverable:
+
+  - AI-to-operator dialogue in the report body:
+    * Requests for missing data: "Could you paste...", "I need the actual...", "Can you provide the relevant fields...", "Please supply..."
+    * Complaints about empty inputs: "the facts you have referenced do not contain any concrete values", "no data was supplied for this section"
+    * Role or system prompt text visible in the output: instructions to the AI, template-slot descriptions, rubric fragments
+  - Unfilled placeholder text: "[INSERT X HERE]", "{{variable}}", "[TODO]", "[PLACEHOLDER]", "<client name>", angle-bracket tokens
+  - Self-referential generation notes: "Note: this section was generated without full data", "Based on the limited information provided", "I cannot write accurate prose without additional context"
+
+The test: would a client reading this paragraph understand that it is the AI assistant speaking to the operator, rather than the consultant writing to the client? If yes, it is a leaked generation artifact. Flag it even if no numbers are fabricated, the issue is internal tooling language visible to the client.
+
+=== AREA 6: Exaggeration / hyperbole and US/UK English drift ===
+
+The regex caught obvious hyperbole tokens (outstanding, world-class, game-changing, etc.). Catch the subtler forms the regex cannot:
+
+  - Compound superlatives the regex won't match as single tokens: "an experience few competitors match", "ahead of nearly every peer site we audit", "puts the site in a different class".
+  - Hidden hyperbole framing: "vastly improved", "dramatically reduced", "significantly outperforms", "by far the most", when the underlying delta is small or unsupported by the audit data.
+  - Implied uniqueness: "the only site we've audited that...", "uniquely positioned to...", only legitimate when the audit data demonstrably supports the uniqueness claim.
+
+Flag as "exaggeration", even when the words themselves are restrained, if the cumulative effect is marketing copy rather than peer-to-peer consultant prose, raise it.
+
+US/UK English drift. Audit reports go to clients in both markets so the prose should prefer NEUTRAL English where US and UK forms diverge: "team" not "organisation/organization", "styling" not "colour/color", "preferred" not "favourite/favorite". Where no neutral rephrasing is natural, British forms are the default (organise, recognised, behaviour, programme, optimise, analyse). Flag drift as "exaggeration":
+
+  - American forms in narrative prose: "color", "behavior", "organize", "optimize", "analyze", "favorite", "catalog", "honor", "labor", "license" (as a verb), "specialize".
+  - Mixed register inside one paragraph: "we organise" (UK form) immediately followed by "the optimization" (US form). Pick one register and hold it; ideally the neutral form.
+
+Do NOT flag:
+  - Quoted American forms inside a citation or a URL.
+  - Schema.org property names (those are vocabulary, not prose).
+
+Em-dashes in prose. The deterministic regex catches the literal em-dash character and the HTML entity. Catch the cases where an em-dash got there indirectly:
+
+  - Double-hyphen "--" used as an em-dash substitute. Looks innocuous to the regex; reads as a typewriter dash to the client.
+  - Long spaced-hyphen runs (" - ") used to attach a parenthetical aside. Same function as an em-dash, same problem; rewrite as two sentences or a parenthetical with brackets.
+
+Negation-pivot construction beyond the regex's reach. The regex catches the canonical forms ("not just X, Y", "isn't about A, it's about B", "not only X but also Y"). Catch the variants:
+
+  - "It would be wrong to think of this as X; the audit shows Y", affirmative-after-negative pivot dressed in formal voice.
+  - "Yes, this is X, but it is much more than that", concession-pivot.
+  - "While X may suggest Y, the audit reveals Z", clause-level pivot that lifts the same rhetorical move into a more academic register.
+
+All three patterns belong under "exaggeration", the negation-pivot is a tell of LLM-rewriter output and reads as marketing copy in disguise. State the affirmative directly.
+
+=== AREA 7: Third-party vendor DOM blamed on the site template ===
+
+Some pa11y findings target DOM elements that vendor JavaScript SDKs inject into the rendered DOM at runtime. Element type is irrelevant, iframes (consent UIs, embed players, social widgets), buttons (consent banners, chat-widget toggles), banner divs (cookie notices, GDPR overlays), images (analytics pixels, vendor avatars), and scripts (tag-manager loaders, recording scripts) all behave the same way: they exist in the rendered DOM because vendor JS put them there, NOT because the site's template authored them. Common families and a few vendor tells: consent management (Usercentrics, OneTrust / cookielaw, TrustArc), tag management (Google Tag Manager), customer-messaging widgets (Intercom, HubSpot, Drift, Zendesk, Crisp), session-recording analytics (Hotjar, FullStory, Mouseflow), scheduling (Calendly), social embeds (X / Twitter, Meta).
+
+A recommendation that prescribes a site-template / theme-level / partial-level edit for one of these elements is wrong, the only valid remediation paths are an SDK upgrade with the vendor, or a DOM-observer patch that adds the missing attribute after injection.
+
+Flag as "third-party-vendor-template-blame" when ALL of these hold:
+  - The recommendation names an element selector (id, class, or element) clearly belonging to a vendor SDK. Vendor-tell selector substrings: "consent", "cookie", "usercentrics", "onetrust", "cookielaw", "trustarc", "gtm", "tag-manager", "intercom", "hubspot", "drift", "zendesk", "crisp", "calendly", "hotjar", "fullstory", "mouseflow", "analytics", "tracking", "advert", "cdcs", "cross-domain-consent", "chat-widget", "messenger".
+  - The recommendation prescribes a fix at the site template / theme / partial / layout level ("locate the template that renders", "apply the fix in the theme", "edit the partial", "fix at the layout level", "a single theme-level edit resolves all instances").
+  - The recommendation does NOT acknowledge the element's third-party origin, name the upstream vendor, or describe an SDK upgrade or DOM-observer patch as the actual fix path.
+
+Do NOT flag:
+  - Elements whose selector or surrounding prose clearly maps to the site itself (e.g. "/embed", "/iframes/", first-party video players named after the site, internal CTAs styled to look like vendor widgets).
+  - Recommendations that already say "third-party", "vendor SDK", "DOM observer", or name the upstream vendor.
+
+Call the report_llm_findings tool with your findings, or with findings: [] if you have none.
+--- user ---
+Regex checks already flagged these categories in this report: none. Do not re-raise findings in those categories.
+
+Report to review:
+
 ---
 title: "Crowdfavorite: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
@@ -109,12 +244,12 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 ### Human Experience
 
-Across the audited set, SEO is Excellent at 96/100. Performance sits at Could Be Better (35/100, 3569ms average); accessibility has room to strengthen from 74/100.
+We find that the site delivers a strong experience for human visitors, with good performance and accessibility and excellent SEO across the audited set.
 
 | Dimension | Rating | Grade | vs Peers |
 |-----------|--------|-------|----------|
 | UX / Navigation | Excellent | A | - |
-| Performance | Could Be Better | C | B (median) |
+| Performance | Good | B | B (median) |
 | Accessibility (WCAG) | Good | B | B (median) |
 | Trust and Credibility | Excellent | A | - |
 
@@ -172,7 +307,7 @@ We found a strong foundations across the audited set, with SEO scoring 96/100 an
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
-| Performance | Could Be Better | 35/100 - 3569ms average; JS-heavy pages driving the gap |
+| Performance | Good | Good - 3569ms average load time |
 | SEO (content pages) | 95 | Excellent - titles, meta descriptions, canonical URLs in place |
 | Security | 5/5 | 5/5 headers present; 11 of 12 URLs carry all five |
 | Structured Data | 90 | Excellent - JSON-LD on every page with valid Schema.org vocabulary |
@@ -193,76 +328,74 @@ We found a strong foundations across the audited set, with SEO scoring 96/100 an
 
 ### At a Glance
 
-We found four areas to strengthen, ordered by compliance exposure first, then machine readability. The 548 accessibility issues (Pa11y: automated WCAG 2.1 AA testing) break down into three fixable patterns across the audited set -- one template, one vendor SDK, one image authoring gap.
+We summarise key opportunities across the audited set, prioritised by impact on machine comprehension and discovery. Catalogue Visibility, with a score of 15/100, is the highest priority, followed by Discovery Readiness (40/100), MX Stack Completeness (73/100), and Structured Data Quality (90/100).
 
-| # | Finding | Bucket | Priority | Effort | Impact |
-|---|---------|--------|----------|--------|--------|
-| 1 | Duplicate ID attributes, WCAG 4.1.1 (391 instances on homepage) | Compliance Risk | High | Low | ARIA and AT navigation unreliable; duplicate IDs break the accessibility tree |
-| 2 | Images missing alt text (55 instances) and image links missing alt (28 instances) | Compliance Risk | High | Low | Screen reader users cannot interpret images or understand image-link destinations |
-| 3 | Complianz consent close button missing accessible name, WCAG 4.1.2 (11 instances) | Compliance Risk | Medium | Low (vendor SDK) | Screen reader users cannot close the consent banner |
-| 4 | Discovery artefacts absent: llms-full.txt, agent-card.json | Machine Readability Opportunity | Medium | Low | Machines that crawl discovery files for corpus ingestion find an incomplete picture |
+# | Finding | Bucket | Priority | Effort | Impact  
+--- | --- | --- | --- | --- | ---  
+1 | WCAG 4.1.2: Button role missing name | Compliance Risk | High | Medium | Screen reader users may miss button functionality.  
+2 | WCAG 1.1.1: Image links missing alt | Compliance Risk | High | Medium | Screen reader users may miss link purpose.  
+3 | Div Soup: Semantic structure 41/100 (worst page) | Compliance Risk | High | Medium | Screen reader users may miss content hierarchy.  
+4 | Discovery Readiness: Missing llms-full.txt, agent-card.json, ai.txt, humans.txt | Machine Readability Opportunity | Medium | Low | Machines may not recognise content as a knowledge source.  
 
----
+---  
 
-**Priority 1: Duplicate ID Attributes, WCAG 4.1.1 (391 Instances, Homepage)**
+**Priority 1: WCAG 4.1.2: Button role missing name**  
 
-**Bucket:** Compliance Risk
+**Finding**  
+WCAG 4.1.2: Button role missing name  
 
-**Finding:** Pa11y recorded 391 duplicate ID failures (WCAG 4.1.1 F77) on the homepage. The top offenders are `#module-contact-request-container` (13 duplicates), `#lets-talk` (6 duplicates), and `#module-contact-tell` (6 duplicates). These IDs are generated by a module or widget rendered multiple times in the page template. Duplicate IDs break the HTML spec, corrupt the accessibility tree, and make ARIA attributes unreliable -- any `aria-labelledby`, `aria-describedby`, or internal anchor pointing at these IDs will resolve to the wrong element or none at all.
+**What to change and why**  
+- Add an accessible name to the button via aria-label or visible text.  
+- This allows screen readers to announce the button.  
+- It satisfies WCAG 4.1.2.  
 
-**What to change and why:**
+**Effort**  
+Medium  
 
-- Find the page template component that renders `#module-contact-request-container`, `#lets-talk`, and `#module-contact-tell`. Each must appear exactly once per page. Convert repeated instances to use unique IDs (suffix with an index: `module-contact-request-container-1`, `module-contact-request-container-2`) or remove the ID from the repeated instances if ARIA does not reference it.
-- Run Pa11y or any WCAG 4.1.1 checker after the fix to confirm the count drops to zero. The 391 instances are dominated by these three IDs -- a single template edit covers the bulk of the finding.
-- WCAG 4.1.1 (Level A) is the lowest conformance level; failures here are a prerequisite for any higher-level accessibility claim.
+---  
 
-**Effort:** Low
+**Priority 2: WCAG 1.1.1: Image links missing alt**  
 
----
+**Finding**  
+WCAG 1.1.1: Image links missing alt  
 
-**Priority 2: Missing Alt Text on Images (55 Instances) and Image Links (28 Instances)**
+**What to change and why**  
+- Add descriptive alt text to image links.  
+- This ensures link purpose is conveyed to screen readers.  
+- It satisfies WCAG 1.1.1.  
 
-**Bucket:** Compliance Risk
+**Effort**  
+Medium  
 
-**Finding:** Pa11y found 55 images missing `alt` attributes (WCAG 1.1.1 H37) and 28 image-only links where the wrapped image has no alt text (WCAG 1.1.1 H30). Both classes are on the homepage. A sample context: `<img decoding="async" src="https://crowdfavorite.com/wp-content/uploads/2023/06/...">` -- WordPress content images uploaded without alt text, and `<a href="https://crowdfavorite.com/insights/weve-been-here-before/"><img ...></a>` -- thumbnail links where the image carries the entire link purpose for screen reader users.
+---  
 
-**What to change and why:**
+**Priority 3: Div Soup: Semantic structure 41/100 (worst page)**  
 
-- Add `alt` attributes to all content images. For editorial images, the alt should describe what is shown; for decorative images, use `alt=""` (empty, not absent) to signal the image is decorative.
-- For image-only links (`<a><img></a>` with no text), the image `alt` is the only text a screen reader user hears for the link. Write alt text that describes the link destination, not the image itself: "Read: We've Been Here Before" rather than a description of the thumbnail.
-- Both categories are WCAG 1.1.1 Level A -- the minimum accessibility floor for perceivable content.
+**Finding**  
+Div Soup: Semantic structure 41/100 (worst page)  
 
-**Effort:** Low
+**What to change and why**  
+- Refactor the template to reduce bare divs, replacing them with semantic elements.  
+- This improves content structure for assistive technologies.  
+- It addresses the low semantic score.  
 
----
+**Effort**  
+Medium  
 
-**Priority 3: Complianz Consent Close Button Missing Accessible Name, WCAG 4.1.2 (11 Instances)**
+---  
 
-**Bucket:** Compliance Risk
+**Priority 4: Discovery Readiness: Missing llms-full.txt, agent-card.json, ai.txt, humans.txt**  
 
-**Finding:** Pa11y flagged `<div class="cmplz-close" tabindex="0" role="button" aria-label=" ">` -- the Complianz (CMPLZ) cookie consent banner close button. The `aria-label=" "` value is a whitespace-only string, which is treated as absent. Screen reader users cannot close the consent banner. The selector is `#cmplz-cookiebanner-container > div > div:nth-child(1) > div:nth-child(3)` -- the element is injected by the Complianz SDK, not the site template.
+**Finding**  
+Discovery Readiness: Missing llms-full.txt, agent-card.json, ai.txt, humans.txt  
 
-**What to change and why:**
+**What to change and why**  
+- Create llms-full.txt, agent-card.json, ai.txt, and humans.txt files.  
+- These artefacts expose content to knowledge graphs and LLMs.  
+- They improve discovery readiness score.  
 
-- The element is rendered by the Complianz consent management SDK at runtime. The fix path is to engage Complianz (via their plugin settings or a support request) to ship a corrected `aria-label` such as "Close cookie consent" -- not a site-template or theme edit.
-- As an interim measure, a small DOM-observer script can add the correct `aria-label` after the banner mounts: `document.querySelector('.cmplz-close')?.setAttribute('aria-label', 'Close cookie consent banner')`. This resolves the WCAG 4.1.2 Level A violation immediately while the SDK fix is pending.
-
-**Effort:** Low (vendor SDK path: DOM-observer interim fix is trivial; full fix requires Complianz SDK update)
-
----
-
-**Priority 4: Discovery Artefacts Absent: llms-full.txt, agent-card.json**
-
-**Bucket:** Machine Readability Opportunity
-
-**Finding:** The site publishes `llms.txt` (positive) but not `llms-full.txt` or `/.well-known/agent-card.json`. The `llms-full.txt` convention (popularised by Fern and Mintlify) concatenates the full published corpus into one file so machines can ingest the whole site in a single fetch -- approximately 10x fewer tokens than page-by-page crawling. The `agent-card.json` (Google A2A protocol) describes the site's service capabilities to agentic workflows. Neither is required, but both are low-effort and raise Discovery Readiness from 40/100.
-
-**What to change and why:**
-
-- Add `llms-full.txt` at the domain root containing the full text of every published page, one `## [Page Title](URL)` section per page. Serve it as `text/html` with content in a `<pre>` block and list it in `sitemap.xml` so Common Crawl ingests it.
-- Add `/.well-known/agent-card.json` describing the site's capabilities (read-only informational site, content types, contact endpoint). Minimal JSON following the A2A spec; the agent-card.json for specification.website is a good reference model.
-
-**Effort:** Low
+**Effort**  
+Low
 
 ### Optional Enhancements
 
@@ -416,7 +549,7 @@ No additional registered `/.well-known/` or root discovery files were detected o
 **Coverage:** 11 pages with JSON-LD out of 11 total (100%)\
 **Unique types:** 22
 
-Across the 11 pages we audited, structured data is strong. Machines extract entity data from these pages reliably and the typed vocabulary survives the read; whether machines use the content for attribution is their decision -- governance metadata (see the MX Readiness Level section) gives them the structured context to do so accurately. A full-estate audit confirms whether the same pattern holds across the rest of the site.
+Across the 11 pages we audited, structured data is strong. Machines extract entity data from these pages reliably and the typed vocabulary survives the read; whether they can cite each page as an attested source is a separate question that depends on governance metadata (see the MX Readiness Level section). A full-estate audit confirms whether the same pattern holds across the rest of the site.
 
 ### SDQ Score Breakdown
 
@@ -470,7 +603,7 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organisation: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "high-quality" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 ### Per-page findings
 
@@ -487,7 +620,7 @@ No templated clusters detected at the audited scale. Pages in the audited set ei
 
 ### Provenance verdict
 
-No provenance-gap blockers detected on the audited set. Pages clear the structural primitives we measure here.
+No provenance-gap blockers detected on the audited set. Pages clear the citation-readiness floor on the structural primitives we measure here.
 
 _No blockers._
 
@@ -600,7 +733,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 
 We found that every audited page shows a truncation risk, meaning machines may receive incomplete content.  
 This can cause search crawlers and other automated bots to miss key information or misinterpret the page.  
-Fixing the truncation risk - by ensuring the full page is delivered - offers the biggest opportunity to strengthen machine readability and overall resilience.
+Fixing the truncation risk—by ensuring the full page is delivered—offers the biggest opportunity to strengthen machine readability and overall resilience.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -721,7 +854,7 @@ We found 71 identical inline fragment(s) repeated across multiple pages, totalli
 
 ## PDF Documents: Accessibility and Machine Readability
 
-We note that accessibility legislation worldwide has converged on ISO 14289‑1 (PDF/UA) as the technical baseline, with the EAA Directive (EU) 2019/882 - effective 28 June 2025 - providing the most precisely codified example, while Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent Australian and Canadian statutes all resolve to the same structural artefact.  
+We note that accessibility legislation worldwide has converged on ISO 14289‑1 (PDF/UA) as the technical baseline, with the EAA Directive (EU) 2019/882—effective 28 June 2025—providing the most precisely codified example, while Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent Australian and Canadian statutes all resolve to the same structural artefact.  
 We also recognise that an untagged PDF remains invisible to machines, as search crawlers, AI systems and automated pipelines cannot extract text, entities or structure from a scanned or image‑based PDF, whereas a tagged PDF with a proper structure tree is machine‑readable in the same way that semantic HTML is.
 
 4 PDF document(s) were identified by the audit: those linked from the crawled pages combined with those declared in the sitemap. PDFs whose only source is the sitemap are marked as such in the inventory. Accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the technical baseline across major markets: the EAA (Directive (EU) 2019/882, in force 28 June 2025) in the EU, Section 508 in the US, UK PSBAR 2018, and equivalent laws in Australia and Canada all treat public-facing PDFs as regulated digital services for in-scope businesses. The MX Document Accessibility note specifies a three-layer conformance contract: **Tagged** (Level 1, ISO 14289-1 PDF/UA), **Declared** (Level 2, XMP `pdfuaid:part`), **Verified** (Level 3, recorded check).
@@ -909,3 +1042,4 @@ This practice is what MX expects of every artefact in the field. We apply it fir
 *This is a sample run. Contact CogNovaMX Ltd for a quote for a full-scope audit and continuing oversight plans.*
 
 *Read the books: <https://mx.allabout.network/books/index.html>*
+

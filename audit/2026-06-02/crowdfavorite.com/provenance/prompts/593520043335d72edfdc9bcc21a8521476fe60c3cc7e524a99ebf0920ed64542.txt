@@ -1,3 +1,168 @@
+# prompt capture
+# script: audit-llm-judgment
+# stepId: llm-judgment-pass
+# model:  gpt-oss:20b
+# sha256: 593520043335d72edfdc9bcc21a8521476fe60c3cc7e524a99ebf0920ed64542
+# capturedAt: 2026-06-02T21:29:31.409Z
+# systemPromptBytes: 7880
+# userMessageBytes:  68086
+
+--- system ---
+You are an audit-report integrity checker. Your job is to find material
+issues in a client audit report that only a reader, not a pattern matcher,
+can catch.
+
+You run THREE checks: tone consistency, sample-vs-total wording, and
+hedged-vs-asserted balance. (Recommendation consistency, order, missing,
+extra, moved to the deterministic check-recommendation-consistency.js
+gate on 2026-05-23. That gate runs before this one in Gate 4c, so you
+should never see an unaddressed order mismatch or missing-in-engagement
+contradiction in the report at this point.)
+
+=== CHECK 1: Tone consistency ===
+
+The report should hold one voice throughout the body. The acceptable voices
+are "consultant first-person" ("I audited", "I recommend") and "machine
+third-person" ("This report analyses", "The audit found"). **Mixing them
+within a section is the problem**, not the choice itself.
+
+Flag as "tone-inconsistency" only when:
+  - A single section (e.g. a Findings priority, a Recommended Actions list,
+    a narrative paragraph) switches voice mid-way, first-person in one
+    sentence, passive/third-person in the next.
+  - A section uses first-person while the surrounding sections that share
+    its type (e.g. other priorities, other narrative paragraphs) use third-
+    person, or vice versa.
+
+Do NOT flag:
+  - Deliberate voice differences between structural sections (headers,
+    tables, boilerplate footers). A "Methodology" heading in third-person
+    alongside a "Findings" body in first-person is fine.
+  - Quoted user speech, code blocks, or machine-readable metadata.
+  - Standard consultant comparative or descriptive phrases about machine
+    or agent behaviour ("A machine reads this as...", "The site appears to
+    agents as...", "Unlike X, this page does not include..."). These are
+    neutral technical descriptions, not voice switches.
+  - Single sentences that describe a technical fact in passive voice
+    within a section that is otherwise third-person, passive technical
+    description is consistent with third-person voice, not a switch away
+    from it.
+  - References to "the audit", "the site", or "this report" in a section
+    that is otherwise third-person. These are third-person constructions.
+
+=== CHECK 2: Sample-vs-total wording ===
+
+**Scope precondition.** This check applies ONLY when the audit covered
+a strict subset of the site. The caller supplies an `IS_FULL_SITE_AUDIT`
+marker at the top of each report payload:
+
+  * `IS_FULL_SITE_AUDIT: true`, every crawlable HTML page in the sitemap
+    was audited (pagesAudited >= sitemap_total). **Skip this check
+    entirely.** "The site" and "every page" are accurate; flagging them
+    as overreach produces false positives that then conflict with the
+    readability gate's preference for concise prose.
+  * `IS_FULL_SITE_AUDIT: false`, the audit sampled; run the check.
+
+When the check runs: flag "sample-vs-total-overreach" when a
+recommendation or finding says "the site" or "every page" or "all
+products" in a way that implies the full site, when the underlying
+evidence comes from only the audited pages.
+
+Do NOT flag (even in sample mode):
+  - Statements about the site's technology, hosting, CDN, or policies
+    (these are site-wide by nature).
+  - Phrases explicitly scoped ("in the audited sample", "on the pages
+    checked", "across these 5 pages").
+  - Restatements of a site-wide fact clearly sourced from sitemap or
+    site_profile (e.g. "the site is on Shopify").
+
+=== CHECK 3: Hedged-vs-asserted balance ===
+
+Recommendations should be stated with confidence proportional to evidence
+strength. Flag as "hedged-vs-asserted-imbalance" when:
+  - A weak signal (small sample, low-confidence heuristic, absence of
+    counter-evidence rather than presence of positive evidence) is stated
+    as certainty. Example: "Your site has no AggregateRating" based on
+    5 pages audited stated as "NEOM has no ratings anywhere".
+  - A strong, repeatedly-evidenced pattern is hedged into uncertainty.
+    Example: calling an observation "possibly" or "might" when every
+    audited page shows it.
+
+Do NOT flag:
+  - Any recommendation whose confidence is already appropriately hedged.
+  - Technical binary findings verified on every audited page: schema type,
+    HTTP headers, file presence or absence (e.g., "llms.txt returns 404"),
+    heading counts. These are deterministic and warrant certainty, not
+    hedging. Asking for hedging on binary facts would make the report
+    inaccurate, not more careful.
+  - Observations explicitly scoped to the sample ("on the 5 audited pages",
+    "across the audited sample", "in every audited page") even when phrased
+    with confidence, the scope qualifier is the hedge. Do not require a
+    second hedge on an already-scoped statement.
+  - Absence-of-feature findings: "No llms.txt file was found" with
+    certainty is accurate for the fetch; hedging it with "possibly" or
+    "may not" would be misleading.
+  - A finding present on every single audited page. If all audited pages
+    exhibit the same issue, asserting it with confidence is not
+    overconfidence, it is accurate representation of unanimous evidence.
+  - Technical factual observations (HTTP status codes, schema presence)
+    where binary certainty is warranted.
+
+Rules (apply to all three checks):
+  - Raise the bar. Only flag something a professional editor reviewing
+    100 similar audit reports would flag. If the finding would not be
+    noticed by a client reading the report, it is not material.
+  - The report has already passed the fierce-critic gate and the
+    deterministic verifier. Assume the data and facts are correct. Your
+    role is cross-section consistency and voice, not re-verifying data.
+  - Only flag material inconsistencies. Minor wording differences between
+    sections are fine; it's the underlying concept that must match.
+  - If a section is genuinely absent from the report template (e.g. ROI
+    in a non-commerce audit), do NOT flag its absence as a finding.
+  - Use the section role, not the exact heading text. A report may use
+    "Engagement", "What's Next", or "Recommended Phases" for role D.
+  - Ignore closing paragraphs, summary restatements, boilerplate "learn
+    more" text. Focus on the structured lists and tables.
+  - Be strict on order. Clients read order as intent.
+  - Be forgiving on paraphrase. "Schema maturity uplift" and "Upgrade
+    Schema.org coverage" are the same item.
+  - **Do not emit a finding you then walk back, qualify, or contradict
+    in its own message.** Before emitting any finding, reread the message
+    you were about to write. If the message contains ANY of:
+      * "which matches"
+      * "so this is not a finding"
+      * "actually covered by"
+      * "no material ... gap detected"
+      * "is consistent with"
+      * "this is not a mismatch"
+      * "on reflection"
+      * "however, the real issue is..." followed by a different finding
+      * a sentence that reaches an opposite conclusion from the opening
+    , **drop the finding entirely**. Do not try to salvage it into a
+    different finding. Do not include it with the retraction attached.
+    Only emit findings you can state as a single unqualified assertion.
+    If the message needs "but actually" or "however" to resolve, the
+    finding is not real.
+
+Call the report_findings tool with your complete findings list.
+
+For each finding:
+  - category: one of the three categories above:
+              "tone-inconsistency", "sample-vs-total-overreach",
+              "hedged-vs-asserted-imbalance"
+  - message:  a single clear sentence naming the sections and items
+              involved. Client-facing clarity.
+  - context:  a short quoted fragment (<120 chars) from the report that
+              anchors the finding. Copy verbatim from the report.
+
+If there are zero material inconsistencies, call report_findings with findings: [].
+--- user ---
+IS_FULL_SITE_AUDIT: false
+pagesAudited: 11
+sitemapTotal: unknown
+
+Report to check:
+
 ---
 title: "Crowdfavorite: Website Analysis & Machine Readiness"
 author: "Tom Cranstoun"
@@ -109,12 +274,12 @@ The Discovery Files section records llms.txt presence, transport type, and sitem
 
 ### Human Experience
 
-Across the audited set, SEO is Excellent at 96/100. Performance sits at Could Be Better (35/100, 3569ms average); accessibility has room to strengthen from 74/100.
+We find that the site delivers a strong experience for human visitors, with good performance and accessibility and excellent SEO across the audited set.
 
 | Dimension | Rating | Grade | vs Peers |
 |-----------|--------|-------|----------|
 | UX / Navigation | Excellent | A | - |
-| Performance | Could Be Better | C | B (median) |
+| Performance | Good | B | B (median) |
 | Accessibility (WCAG) | Good | B | B (median) |
 | Trust and Credibility | Excellent | A | - |
 
@@ -172,7 +337,7 @@ We found a strong foundations across the audited set, with SEO scoring 96/100 an
 
 | Dimension | Score | Highlights |
 |-----------|-------|------------|
-| Performance | Could Be Better | 35/100 - 3569ms average; JS-heavy pages driving the gap |
+| Performance | Good | Good - 3569ms average load time |
 | SEO (content pages) | 95 | Excellent - titles, meta descriptions, canonical URLs in place |
 | Security | 5/5 | 5/5 headers present; 11 of 12 URLs carry all five |
 | Structured Data | 90 | Excellent - JSON-LD on every page with valid Schema.org vocabulary |
@@ -193,76 +358,74 @@ We found a strong foundations across the audited set, with SEO scoring 96/100 an
 
 ### At a Glance
 
-We found four areas to strengthen, ordered by compliance exposure first, then machine readability. The 548 accessibility issues (Pa11y: automated WCAG 2.1 AA testing) break down into three fixable patterns across the audited set -- one template, one vendor SDK, one image authoring gap.
+We summarise key opportunities across the audited set, prioritised by impact on machine comprehension and discovery. Catalogue Visibility, with a score of 15/100, is the highest priority, followed by Discovery Readiness (40/100), MX Stack Completeness (73/100), and Structured Data Quality (90/100).
 
-| # | Finding | Bucket | Priority | Effort | Impact |
-|---|---------|--------|----------|--------|--------|
-| 1 | Duplicate ID attributes, WCAG 4.1.1 (391 instances on homepage) | Compliance Risk | High | Low | ARIA and AT navigation unreliable; duplicate IDs break the accessibility tree |
-| 2 | Images missing alt text (55 instances) and image links missing alt (28 instances) | Compliance Risk | High | Low | Screen reader users cannot interpret images or understand image-link destinations |
-| 3 | Complianz consent close button missing accessible name, WCAG 4.1.2 (11 instances) | Compliance Risk | Medium | Low (vendor SDK) | Screen reader users cannot close the consent banner |
-| 4 | Discovery artefacts absent: llms-full.txt, agent-card.json | Machine Readability Opportunity | Medium | Low | Machines that crawl discovery files for corpus ingestion find an incomplete picture |
+# | Finding | Bucket | Priority | Effort | Impact  
+--- | --- | --- | --- | --- | ---  
+1 | WCAG 4.1.2: Button role missing name | Compliance Risk | High | Medium | Screen reader users may miss button functionality.  
+2 | WCAG 1.1.1: Image links missing alt | Compliance Risk | High | Medium | Screen reader users may miss link purpose.  
+3 | Div Soup: Semantic structure 41/100 (worst page) | Compliance Risk | High | Medium | Screen reader users may miss content hierarchy.  
+4 | Discovery Readiness: Missing llms-full.txt, agent-card.json, ai.txt, humans.txt | Machine Readability Opportunity | Medium | Low | Machines may not recognise content as a knowledge source.  
 
----
+---  
 
-**Priority 1: Duplicate ID Attributes, WCAG 4.1.1 (391 Instances, Homepage)**
+**Priority 1: WCAG 4.1.2: Button role missing name**  
 
-**Bucket:** Compliance Risk
+**Finding**  
+WCAG 4.1.2: Button role missing name  
 
-**Finding:** Pa11y recorded 391 duplicate ID failures (WCAG 4.1.1 F77) on the homepage. The top offenders are `#module-contact-request-container` (13 duplicates), `#lets-talk` (6 duplicates), and `#module-contact-tell` (6 duplicates). These IDs are generated by a module or widget rendered multiple times in the page template. Duplicate IDs break the HTML spec, corrupt the accessibility tree, and make ARIA attributes unreliable -- any `aria-labelledby`, `aria-describedby`, or internal anchor pointing at these IDs will resolve to the wrong element or none at all.
+**What to change and why**  
+- Add an accessible name to the button via aria-label or visible text.  
+- This allows screen readers to announce the button.  
+- It satisfies WCAG 4.1.2.  
 
-**What to change and why:**
+**Effort**  
+Medium  
 
-- Find the page template component that renders `#module-contact-request-container`, `#lets-talk`, and `#module-contact-tell`. Each must appear exactly once per page. Convert repeated instances to use unique IDs (suffix with an index: `module-contact-request-container-1`, `module-contact-request-container-2`) or remove the ID from the repeated instances if ARIA does not reference it.
-- Run Pa11y or any WCAG 4.1.1 checker after the fix to confirm the count drops to zero. The 391 instances are dominated by these three IDs -- a single template edit covers the bulk of the finding.
-- WCAG 4.1.1 (Level A) is the lowest conformance level; failures here are a prerequisite for any higher-level accessibility claim.
+---  
 
-**Effort:** Low
+**Priority 2: WCAG 1.1.1: Image links missing alt**  
 
----
+**Finding**  
+WCAG 1.1.1: Image links missing alt  
 
-**Priority 2: Missing Alt Text on Images (55 Instances) and Image Links (28 Instances)**
+**What to change and why**  
+- Add descriptive alt text to image links.  
+- This ensures link purpose is conveyed to screen readers.  
+- It satisfies WCAG 1.1.1.  
 
-**Bucket:** Compliance Risk
+**Effort**  
+Medium  
 
-**Finding:** Pa11y found 55 images missing `alt` attributes (WCAG 1.1.1 H37) and 28 image-only links where the wrapped image has no alt text (WCAG 1.1.1 H30). Both classes are on the homepage. A sample context: `<img decoding="async" src="https://crowdfavorite.com/wp-content/uploads/2023/06/...">` -- WordPress content images uploaded without alt text, and `<a href="https://crowdfavorite.com/insights/weve-been-here-before/"><img ...></a>` -- thumbnail links where the image carries the entire link purpose for screen reader users.
+---  
 
-**What to change and why:**
+**Priority 3: Div Soup: Semantic structure 41/100 (worst page)**  
 
-- Add `alt` attributes to all content images. For editorial images, the alt should describe what is shown; for decorative images, use `alt=""` (empty, not absent) to signal the image is decorative.
-- For image-only links (`<a><img></a>` with no text), the image `alt` is the only text a screen reader user hears for the link. Write alt text that describes the link destination, not the image itself: "Read: We've Been Here Before" rather than a description of the thumbnail.
-- Both categories are WCAG 1.1.1 Level A -- the minimum accessibility floor for perceivable content.
+**Finding**  
+Div Soup: Semantic structure 41/100 (worst page)  
 
-**Effort:** Low
+**What to change and why**  
+- Refactor the template to reduce bare divs, replacing them with semantic elements.  
+- This improves content structure for assistive technologies.  
+- It addresses the low semantic score.  
 
----
+**Effort**  
+Medium  
 
-**Priority 3: Complianz Consent Close Button Missing Accessible Name, WCAG 4.1.2 (11 Instances)**
+---  
 
-**Bucket:** Compliance Risk
+**Priority 4: Discovery Readiness: Missing llms-full.txt, agent-card.json, ai.txt, humans.txt**  
 
-**Finding:** Pa11y flagged `<div class="cmplz-close" tabindex="0" role="button" aria-label=" ">` -- the Complianz (CMPLZ) cookie consent banner close button. The `aria-label=" "` value is a whitespace-only string, which is treated as absent. Screen reader users cannot close the consent banner. The selector is `#cmplz-cookiebanner-container > div > div:nth-child(1) > div:nth-child(3)` -- the element is injected by the Complianz SDK, not the site template.
+**Finding**  
+Discovery Readiness: Missing llms-full.txt, agent-card.json, ai.txt, humans.txt  
 
-**What to change and why:**
+**What to change and why**  
+- Create llms-full.txt, agent-card.json, ai.txt, and humans.txt files.  
+- These artefacts expose content to knowledge graphs and LLMs.  
+- They improve discovery readiness score.  
 
-- The element is rendered by the Complianz consent management SDK at runtime. The fix path is to engage Complianz (via their plugin settings or a support request) to ship a corrected `aria-label` such as "Close cookie consent" -- not a site-template or theme edit.
-- As an interim measure, a small DOM-observer script can add the correct `aria-label` after the banner mounts: `document.querySelector('.cmplz-close')?.setAttribute('aria-label', 'Close cookie consent banner')`. This resolves the WCAG 4.1.2 Level A violation immediately while the SDK fix is pending.
-
-**Effort:** Low (vendor SDK path: DOM-observer interim fix is trivial; full fix requires Complianz SDK update)
-
----
-
-**Priority 4: Discovery Artefacts Absent: llms-full.txt, agent-card.json**
-
-**Bucket:** Machine Readability Opportunity
-
-**Finding:** The site publishes `llms.txt` (positive) but not `llms-full.txt` or `/.well-known/agent-card.json`. The `llms-full.txt` convention (popularised by Fern and Mintlify) concatenates the full published corpus into one file so machines can ingest the whole site in a single fetch -- approximately 10x fewer tokens than page-by-page crawling. The `agent-card.json` (Google A2A protocol) describes the site's service capabilities to agentic workflows. Neither is required, but both are low-effort and raise Discovery Readiness from 40/100.
-
-**What to change and why:**
-
-- Add `llms-full.txt` at the domain root containing the full text of every published page, one `## [Page Title](URL)` section per page. Serve it as `text/html` with content in a `<pre>` block and list it in `sitemap.xml` so Common Crawl ingests it.
-- Add `/.well-known/agent-card.json` describing the site's capabilities (read-only informational site, content types, contact endpoint). Minimal JSON following the A2A spec; the agent-card.json for specification.website is a good reference model.
-
-**Effort:** Low
+**Effort**  
+Low
 
 ### Optional Enhancements
 
@@ -416,7 +579,7 @@ No additional registered `/.well-known/` or root discovery files were detected o
 **Coverage:** 11 pages with JSON-LD out of 11 total (100%)\
 **Unique types:** 22
 
-Across the 11 pages we audited, structured data is strong. Machines extract entity data from these pages reliably and the typed vocabulary survives the read; whether machines use the content for attribution is their decision -- governance metadata (see the MX Readiness Level section) gives them the structured context to do so accurately. A full-estate audit confirms whether the same pattern holds across the rest of the site.
+Across the 11 pages we audited, structured data is strong. Machines extract entity data from these pages reliably and the typed vocabulary survives the read; whether they can cite each page as an attested source is a separate question that depends on governance metadata (see the MX Readiness Level section). A full-estate audit confirms whether the same pattern holds across the rest of the site.
 
 ### SDQ Score Breakdown
 
@@ -470,7 +633,7 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organisation: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "high-quality" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 ### Per-page findings
 
@@ -487,7 +650,7 @@ No templated clusters detected at the audited scale. Pages in the audited set ei
 
 ### Provenance verdict
 
-No provenance-gap blockers detected on the audited set. Pages clear the structural primitives we measure here.
+No provenance-gap blockers detected on the audited set. Pages clear the citation-readiness floor on the structural primitives we measure here.
 
 _No blockers._
 
@@ -600,7 +763,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 
 We found that every audited page shows a truncation risk, meaning machines may receive incomplete content.  
 This can cause search crawlers and other automated bots to miss key information or misinterpret the page.  
-Fixing the truncation risk - by ensuring the full page is delivered - offers the biggest opportunity to strengthen machine readability and overall resilience.
+Fixing the truncation risk—by ensuring the full page is delivered—offers the biggest opportunity to strengthen machine readability and overall resilience.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check catalogue, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -721,7 +884,7 @@ We found 71 identical inline fragment(s) repeated across multiple pages, totalli
 
 ## PDF Documents: Accessibility and Machine Readability
 
-We note that accessibility legislation worldwide has converged on ISO 14289‑1 (PDF/UA) as the technical baseline, with the EAA Directive (EU) 2019/882 - effective 28 June 2025 - providing the most precisely codified example, while Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent Australian and Canadian statutes all resolve to the same structural artefact.  
+We note that accessibility legislation worldwide has converged on ISO 14289‑1 (PDF/UA) as the technical baseline, with the EAA Directive (EU) 2019/882—effective 28 June 2025—providing the most precisely codified example, while Section 508, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent Australian and Canadian statutes all resolve to the same structural artefact.  
 We also recognise that an untagged PDF remains invisible to machines, as search crawlers, AI systems and automated pipelines cannot extract text, entities or structure from a scanned or image‑based PDF, whereas a tagged PDF with a proper structure tree is machine‑readable in the same way that semantic HTML is.
 
 4 PDF document(s) were identified by the audit: those linked from the crawled pages combined with those declared in the sitemap. PDFs whose only source is the sitemap are marked as such in the inventory. Accessibility legislation has converged on ISO 14289-1 (PDF/UA) as the technical baseline across major markets: the EAA (Directive (EU) 2019/882, in force 28 June 2025) in the EU, Section 508 in the US, UK PSBAR 2018, and equivalent laws in Australia and Canada all treat public-facing PDFs as regulated digital services for in-scope businesses. The MX Document Accessibility note specifies a three-layer conformance contract: **Tagged** (Level 1, ISO 14289-1 PDF/UA), **Declared** (Level 2, XMP `pdfuaid:part`), **Verified** (Level 3, recorded check).
@@ -909,3 +1072,4 @@ This practice is what MX expects of every artefact in the field. We apply it fir
 *This is a sample run. Contact CogNovaMX Ltd for a quote for a full-scope audit and continuing oversight plans.*
 
 *Read the books: <https://mx.allabout.network/books/index.html>*
+

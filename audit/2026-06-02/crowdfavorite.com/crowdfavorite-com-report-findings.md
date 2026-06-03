@@ -23,9 +23,9 @@ Every automated gate ran to completion; this sidecar surfaces 6 findings (3 erro
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Canonical URL 91% but consistency_analysis says 100% (10/10) | 2026-06-02T21:08:52Z |
-| 2 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Open Graph tags 91% but consistency_analysis says 100% (10/10) | 2026-06-02T21:08:52Z |
-| 3 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Twitter Card tags 91% but consistency_analysis says 100% (10/10) | 2026-06-02T21:08:52Z |
+| 1 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Canonical URL 91% but consistency_analysis says 100% (10/10) | 2026-06-02T21:31:20Z |
+| 2 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Open Graph tags 91% but consistency_analysis says 100% (10/10) | 2026-06-02T21:31:20Z |
+| 3 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Twitter Card tags 91% but consistency_analysis says 100% (10/10) | 2026-06-02T21:31:20Z |
 
 <details open><summary>Error detail (3)</summary>
 
@@ -61,8 +61,8 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | html-render-heading-count | pandoc-truncation | HTML render heading count mismatch: markdown=33 rendered=32 | 2026-06-02T21:05:29Z |
-| 2 | check-recommendation-consistency.js | missing-priority | Engagement scope "No regulatory compliance findings on the audited surface" does not map to any priority | 2026-06-02T21:08:52Z |
+| 1 | html-render-heading-count | pandoc-truncation | HTML render heading count mismatch: markdown=33 rendered=32 | 2026-06-02T21:27:37Z |
+| 2 | check-recommendation-consistency.js | missing-priority | Engagement scope "No regulatory compliance findings on the audited surface" does not map to any priority | 2026-06-02T21:31:20Z |
 
 <details open><summary>Warning detail (2)</summary>
 
@@ -86,7 +86,7 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 4 instances (line 600) | 2026-06-02T21:05:28Z |
+| 1 | tone | em-dash | Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 4 instances (line 601) | 2026-06-02T21:27:36Z |
 
 <details open><summary>Info detail (1)</summary>
 
@@ -94,10 +94,10 @@ Suggested next steps:
 
 Em-dash in prose (use comma, semicolon, parentheses, or two sentences)
 
-line 600: "—" - Fixing the truncation risk—by ensuring the full page is delivered—offers the biggest opportunity to
-line 600: "—" - Fixing the truncation risk—by ensuring the full page is delivered—offers the biggest opportunity to
-line 721: "—" - We note that accessibility legislation worldwide has converged on ISO 14289‑1 (PDF/UA) as the techni
-line 721: "—" - We note that accessibility legislation worldwide has converged on ISO 14289‑1 (PDF/UA) as the techni
+line 601: "—" - Fixing the truncation risk—by ensuring the full page is delivered—offers the biggest opportunity to
+line 601: "—" - Fixing the truncation risk—by ensuring the full page is delivered—offers the biggest opportunity to
+line 722: "—" - We note that accessibility legislation worldwide has converged on ISO 14289‑1 (PDF/UA) as the techni
+line 722: "—" - We note that accessibility legislation worldwide has converged on ISO 14289‑1 (PDF/UA) as the techni
 
 </details>
 
