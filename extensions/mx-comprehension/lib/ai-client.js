@@ -91,16 +91,69 @@
     }
   }
 
+  // Ollama fallback ----------------------------------------------------------
+  //
+  // Probes http://127.0.0.1:11434 for a running local model. Requires
+  // OLLAMA_ORIGINS=* to be set in the Ollama process (set via LaunchAgent at
+  // ~/Library/LaunchAgents/com.ollama.environment.plist). Returns null when
+  // Ollama is unreachable or CORS blocks the request.
+
+  const OLLAMA_BASE = 'http://127.0.0.1:11434';
+  const OLLAMA_PREFERRED = ['gpt-oss:20b', 'llama3.2', 'llama3.1', 'mistral', 'phi3'];
+
+  async function tryOllamaModel(systemPrompt, userPrompt) {
+    let models;
+    try {
+      const res = await fetch(`${OLLAMA_BASE}/api/tags`, {
+        signal: AbortSignal.timeout(3000),
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      models = (data.models || []).map(m => m.name);
+    } catch (_) {
+      return null;
+    }
+    if (!models || models.length === 0) return null;
+
+    const model =
+      OLLAMA_PREFERRED.find(p => models.some(n => n.startsWith(p))) || models[0];
+
+    try {
+      const res = await fetch(`${OLLAMA_BASE}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout(30000),
+        body: JSON.stringify({
+          model,
+          stream: false,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: userPrompt },
+          ],
+        }),
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      const text = (data.message?.content || '').trim();
+      if (!text) return null;
+      return { text, source: `Ollama (${model}, local)` };
+    } catch (_) {
+      return null;
+    }
+  }
+
   // Public surface -----------------------------------------------------------
   //
   // generate(systemPrompt, userPrompt) → { text, source }.
-  // Tries the browser on-device model.
+  // Tries the browser on-device model, then Ollama, then returns an error.
 
   async function generate(systemPrompt, userPrompt) {
     const browser = await tryBrowserModel(systemPrompt, userPrompt);
     if (browser) return browser;
+    const ollama = await tryOllamaModel(systemPrompt, userPrompt);
+    if (ollama) return ollama;
     return {
-      text: 'No browser on-device model is available. See setup instructions at chrome://extensions.',
+      text: 'No on-device model is available. Start Ollama locally (ollama serve), or use Chrome with the Gemini Nano model enabled at chrome://flags/#prompt-api-for-gemini-nano.',
       source: 'fallback (no model available)',
     };
   }
