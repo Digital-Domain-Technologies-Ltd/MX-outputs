@@ -243,13 +243,12 @@ function renderHeader(pageInfo) {
   $('#page-url').textContent = pageInfo.url || pageInfo.title || '(unknown URL)';
 }
 
-function renderSummary({ score, summaryText, summarySource }) {
+function renderSummary({ score, summaryText }) {
   const scoreEl = $('#score-value');
   scoreEl.textContent = score.value;
   scoreEl.classList.remove('score-pass', 'score-warn', 'score-fail');
   scoreEl.classList.add(`score-${score.band}`);
   $('#summary-text').textContent = summaryText;
-  $('#summary-source').textContent = summarySource;
 }
 
 function renderFindings() {
@@ -536,8 +535,7 @@ async function main() {
       || tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://')
       || tab.url.startsWith('edge://') || tab.url.startsWith('about:')) {
     $('#page-url').textContent = '(browser internal page; MX inspection skipped)';
-    $('#summary-text').textContent = 'Open a regular web page (http: or https:) to inspect.';
-    $('#summary-source').textContent = '';
+    $('#summary-text').textContent = 'Open a regular web page to inspect.';
     return;
   }
 
@@ -566,17 +564,13 @@ async function main() {
     allFindings = domPayload.findings.slice();
     renderFindings();
     currentScore = computeScore(allFindings);
-    renderSummary({
-      score: currentScore,
-      summaryText: 'DOM findings ready. Fetching served HTML and probing origin…',
-      summarySource: '',
-    });
+    renderSummary({ score: currentScore, summaryText: '' });
   } else {
     const reason = domPayload.isLlmViewPage
       ? 'LLM View is active — inspecting the served HTML at this URL instead.'
       : `Non-HTML content type (${domPayload.contentType}) — inspecting the served HTML instead.`;
     showNoticeBanner(reason);
-    renderSummary({ score: { value: '--', band: 'fail' }, summaryText: 'Fetching served HTML…', summarySource: '' });
+    renderSummary({ score: { value: '--', band: 'fail' }, summaryText: '' });
   }
 
   // Wait for served HTML, parse, run inspection.
@@ -595,11 +589,7 @@ async function main() {
     allFindings = servedFindings;
     renderFindings();
     currentScore = computeScore(allFindings);
-    renderSummary({
-      score: currentScore,
-      summaryText: 'Served HTML inspected. Probing origin discovery files…',
-      summarySource: '',
-    });
+    renderSummary({ score: currentScore, summaryText: '' });
     // currentPageInfo.url stays as tab.url so origin probes target the right origin.
   }
 
@@ -626,20 +616,14 @@ async function main() {
   allFindings = (useServedAsPrimary ? servedFindings : domPayload.findings).concat(originFindings);
   renderFindings();
   currentScore = computeScore(allFindings);
-  renderSummary({
-    score: currentScore,
-    summaryText: 'Combining signals. Asking the on-device model for a summary…',
-    summarySource: '',
-  });
+  renderSummary({ score: currentScore, summaryText: '' });
+  $('#spinner').classList.remove('hidden');
 
   // On-device model summary.
   const summary = await generateSummary(currentPageInfo, allFindings, currentScore);
   currentSummary = summary;
-  renderSummary({
-    score: currentScore,
-    summaryText: summary.text,
-    summarySource: summary.source,
-  });
+  $('#spinner').classList.add('hidden');
+  renderSummary({ score: currentScore, summaryText: summary.text });
 }
 
 main();

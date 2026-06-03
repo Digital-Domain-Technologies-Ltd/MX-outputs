@@ -97,46 +97,39 @@ function renderPayloadDetail(page) {
 }
 
 function renderAnswer(answer) {
-  const el = $('#answer');
-  el.classList.remove('placeholder');
-  el.textContent = answer.text;
-  $('#answer-source').textContent = `answered by: ${answer.source}`;
+  $('#answer').textContent = answer.text;
   $('#answer-actions').hidden = false;
 }
 
-function setStatus(text) {
-  $('#answer-status').textContent = text || '';
-}
+function showSpinner() { $('#spinner').classList.remove('hidden'); }
+function hideSpinner() { $('#spinner').classList.add('hidden'); }
 
 async function ask() {
   const question = $('#question').value.trim();
   if (!question) {
     $('#question').focus();
-    setStatus('Type a question first.');
     return;
   }
 
   const askBtn = $('#btn-ask');
-
   askBtn.disabled = true;
-  setStatus('Reading the page…');
-  $('#answer').classList.add('placeholder');
+  showSpinner();
   $('#answer').textContent = '';
-  $('#answer-source').textContent = '';
   $('#answer-actions').hidden = true;
 
   let tab;
   try {
     tab = await getActiveTab();
   } catch (e) {
-    setStatus(`Could not find the active tab (${e.message}).`);
+    hideSpinner();
+    $('#answer').textContent = `Could not find the active tab (${e.message}).`;
     askBtn.disabled = false;
     return;
   }
 
   if (isInternalUrl(tab?.url)) {
-    setStatus('Open a regular web page (http: or https:) to ask about it.');
-    $('#answer').textContent = 'This is a browser-internal page; there is nothing to read.';
+    hideSpinner();
+    $('#answer').textContent = 'Open a regular web page to ask about it.';
     askBtn.disabled = false;
     return;
   }
@@ -147,13 +140,15 @@ async function ask() {
   try {
     page = await readPage(tab);
   } catch (e) {
-    setStatus(`Could not read the page (${e.message}). It may block content-script injection.`);
+    hideSpinner();
+    $('#answer').textContent = `Could not read the page (${e.message}).`;
     askBtn.disabled = false;
     return;
   }
 
   if (!page) {
-    setStatus('The page returned no readable content.');
+    hideSpinner();
+    $('#answer').textContent = 'The page returned no readable content.';
     askBtn.disabled = false;
     return;
   }
@@ -169,16 +164,14 @@ async function ask() {
     }
   }
 
-  setStatus('Generating question suggestions…');
   suggestedQuestions = await generateSuggestedQuestions(page.payload);
   renderPresets(suggestedQuestions);
 
-  setStatus('Asking the on-device model…');
   const userPrompt = buildUserPrompt(page.payload, question);
   const answer = await MXLocalModel.generate(SYSTEM_PROMPT, userPrompt);
   lastAnswer = answer;
 
-  setStatus('');
+  hideSpinner();
   renderAnswer(answer);
   askBtn.disabled = false;
 }
