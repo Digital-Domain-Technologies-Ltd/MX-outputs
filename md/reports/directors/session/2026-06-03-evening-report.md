@@ -4,7 +4,7 @@ description: "Blog index cards for 14 new posts; mx.servedAt added to field dict
 author: "Tom Cranstoun"
 created: 2026-06-03
 modified: 2026-06-03
-version: "3.0"
+version: "3.1"
 
 mx:
   status: active
@@ -69,6 +69,12 @@ Additionally, protocols chapter 24 HTML published, and the blog sitemap and llms
 
 `mx-reginald/audit/bin/provenance-gap-llm.js` now caches per-page LLM findings. Cache key: HTML content hash + rubric (system prompt) hash + model. A 30-day TTL backstop prevents stale entries; HTML hash is the real freshness signal. On a repeat audit of an unchanged page, the Ollama call is skipped entirely (~30-40s saved per page). Cache lives at `<cacheDir>/llm/provenance-gap-cache.json` (gitignored).
 
+### 9. Manuscript Propagation and Investor Pitch
+
+The standards-governance series was carried into the books and the investor materials. The deep treatment is the new Protocols chapter 24, "The Standard and the Engine"; the free book and Handbook v2 chapter 12 carry lighter versions of the same separation argument. The reference layer landed in four appendices: seven dated industry entries in Appendix J (FAIR moving to TYPO3, JPEG XL returning to Chrome, the EU AI Act Digital Omnibus deferral, Microsoft's Frontier Tuning, the Common Crawl AI Visibility Audit, the WPP and Omnicom agency platforms, and OpenSSF Model Signing), two boundary statements with two deferral rows in Appendix U, a machine-to-machine procurement composition example in Appendix V, and a new diacritic-stripping reading failure in Appendix S. The investor pitch gained the credibility argument a sceptical investor reaches for first: why a REGINALD attestation is worth buying when the body that defines compliance does not sell the verdict, and why the proprietary engine is legitimate because the open definition lives elsewhere.
+
+All moving facts were verified against current sources before publishing: the Digital Omnibus dates of 2 December 2027 and 2 August 2028, FAIR's move to TYPO3, JPEG XL behind a flag in Chrome 145, the Common Crawl English share near 41 per cent, and Microsoft's Mayo Clinic model ownership. The European Accessibility Act enforcement language was softened to match the record: injunctions brought against major French retailers, with no ruling yet.
+
 ---
 
 ## By the Numbers
@@ -109,6 +115,8 @@ The provenance-gap cache is cost-reduction for repeat audits: a 10-page audit th
 
 | Hash | Description |
 |------|-------------|
+| 6af6956d | (hub) Propagate governance drop into appendices J, U, V, S |
+| f8917356 | (hub) Investor pitch: standard-and-the-engine credibility argument |
 | 0f618ba6 | (mx-outputs) Update sitemap and llms: reflect new blog cards and protocols chapter 24 |
 | e62a3f29 | (mx-outputs) Add protocols chapter 24 HTML |
 | 5aedf899 | (mx-outputs) Blog index: add cards for 8 governance posts and 6 standalone essays |
