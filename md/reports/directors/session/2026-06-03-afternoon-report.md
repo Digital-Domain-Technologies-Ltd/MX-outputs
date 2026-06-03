@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report -- Audit Pipeline Quality Overhaul: Deterministic Conditionals, Vendor Detection, Bug Fixes"
-description: "Template conditional predicates moved to deterministic infill; Complianz vendor detection added; crowdfavorite.com audit bugs fixed; 22 pipeline improvements across scripts, templates, and gates"
+title: "Co-Directors Report -- Audit Pipeline Quality Overhaul: Deterministic Conditionals, Vendor/Framework Detection, Platform Stats"
+description: "Deterministic infill; Complianz vendor detection; crowdfavorite audit fixes; framework detection collector; per-platform benchmark stats; template changelog prose removed"
 author: "Tom Cranstoun"
 created: 2026-06-03
 modified: 2026-06-03
-version: "1.0"
+version: "2.0"
 
 mx:
   status: active
@@ -116,11 +116,34 @@ Moving predicates to deterministic resolution eliminates this class of error. Th
 
 ---
 
+### 13. Framework Detection Pipeline (continued session)
+
+A new `check-frameworks.js` collector (Step 8.6) fingerprints 23 framework signatures across 4 categories: JS frontend (React, Next.js, Vue, Nuxt, Astro, Gatsby, Angular, Svelte), CSS frameworks (Tailwind, Bootstrap, Foundation), CMS plugins/builders (Elementor, Divi, ACF, WooCommerce, Gutenberg, Yoast), and CDN/delivery layers (Cloudflare, Vercel, Netlify, CloudFront, Fastly, Bunny).
+
+Detection is probabilistic and fully deterministic (no LLM): signal count determines confidence (high=3+, medium=2, low=1). Writes `frameworks.json` to the results dir.
+
+Two new tokens added to `infill-report.js` and the audit template, both computed deterministically from collected data:
+
+- `[PLATFORM_CONFIDENCE]` -- maps confidence tier to prose: "**WordPress** (high confidence)", "Probable **Drupal** (medium confidence -- two signals)"
+- `[FRAMEWORKS_DETECTED]` -- formatted list with confidence tiers
+
+The template now explicitly frames platform detection as probabilistic: "Platform identification is probabilistic -- a site can obscure or mimic platform signals."
+
+### 14. Per-Platform and Per-Framework Benchmark Stats
+
+`build-benchmark-dataset.js` extended to harvest `platform.json` and `frameworks.json` from every past audit run. New `byPlatform` and `byFramework` sections added to `peer-scores.json`. Per-platform score medians only published when a platform reaches ≥10 samples (below threshold: count is recorded but global medians apply). Framework stats exclude low-confidence detections. Schema version bumped to 2.0.0.
+
+### 15. Template Changelog Prose Removed
+
+Three instances of dated changelog references removed from `web-audit-suite-template.md` (e.g., "form was chosen over a table on 2026-05-14 after the rendered PDF...", "the old table was too terse", "Duplication produced an internal contradiction on the 2026-05-14 neomwellbeing audit"). Replaced with timeless explanations of the current rules.
+
+---
+
 ## Next Steps
 
-- Mirror the template deterministic annotations to the ecommerce-specific predicates beyond what was done (commerce catalogue bands still have informal predicates from the commerce scoring logic)
-- Run a fresh crowdfavorite.com audit with all fixes applied to confirm 10+ pages, correct platform, no false positives
-- A/B test generic signal false positive (`\btoggle\b` matching dark mode buttons) -- still in REMINDERS as open item
+- Run a fresh crowdfavorite.com audit to validate framework detection in practice
+- A/B test generic signal false positive (`\btoggle\b`) -- still in REMINDERS
+- Per-platform score medians will start appearing once 10 audits per platform accumulate
 
 ---
 
