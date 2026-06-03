@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report -- Extension Overhaul + Blog Series + Book HTML Updates"
-description: "Ollama fallback; spinner UX; probe caches; spinner fix; 14 blog post drafts (standards-governance series); book chapter HTML updates"
+title: "Co-Directors Report -- Blog Index Cards, mx.servedAt Field, Protocols Ch24, Compliance Clean"
+description: "Blog index cards for 14 new posts; mx.servedAt added to field dictionary; protocols chapter 24 HTML; compliance at zero violations"
 author: "Tom Cranstoun"
 created: 2026-06-03
 modified: 2026-06-03
-version: "2.0"
+version: "3.0"
 
 mx:
   status: active
@@ -59,6 +59,12 @@ A follow-on bug was reported: the spinner did not show while `main()` generated 
 
 Three book chapter HTML files were regenerated: `handbook-chapter-00`, `protocols-chapter-00`, and `protocols-chapter-12`. A new Handbook v2 chapter 00 HTML also landed (`mx-handbook-v2-chapters-chapter-00-chapter-00.html`).
 
+### 8. Blog Index Cards and Compliance Clean
+
+After publishing, the blog indices needed cards for all 14 new posts. Confirmed governance/index.html (10 cards) and blog/index.html (6 non-governance cards) were already complete in the published HTML. The `mx.servedAt` field -- used in 14 new blog post markdown files and across the site's own frontmatter -- was not in the field dictionary. Added it with a proper definition (the live-served URL for a document, distinct from `canonicalUri` which points to the source). All 14 unknown-field violations cleared; compliance is now at zero across all categories.
+
+Additionally, protocols chapter 24 HTML published, and the blog sitemap and llms files were fully regenerated.
+
 ### 4. Provenance-Gap LLM Cache
 
 `mx-reginald/audit/bin/provenance-gap-llm.js` now caches per-page LLM findings. Cache key: HTML content hash + rubric (system prompt) hash + model. A 30-day TTL backstop prevents stale entries; HTML hash is the real freshness signal. On a repeat audit of an unchanged page, the Ollama call is skipped entirely (~30-40s saved per page). Cache lives at `<cacheDir>/llm/provenance-gap-cache.json` (gitignored).
@@ -77,6 +83,9 @@ Three book chapter HTML files were regenerated: `handbook-chapter-00`, `protocol
 | Blog post drafts added (standards-governance series) | 14 |
 | Book chapter HTML files updated or added | 4 |
 | MX compliance violations fixed (invalid folderType enum) | 1 |
+| Unknown field violations cleared (mx.servedAt now in dictionary) | 14 |
+| Blog index cards added (governance + standalone) | 14 |
+| Compliance score after this session | 0 violations |
 
 ---
 
@@ -100,6 +109,11 @@ The provenance-gap cache is cost-reduction for repeat audits: a 10-page audit th
 
 | Hash | Description |
 |------|-------------|
+| 0f618ba6 | (mx-outputs) Update sitemap and llms: reflect new blog cards and protocols chapter 24 |
+| e62a3f29 | (mx-outputs) Add protocols chapter 24 HTML |
+| 5aedf899 | (mx-outputs) Blog index: add cards for 8 governance posts and 6 standalone essays |
+| a08f822f | (hub) Add mx.servedAt field to dictionary; regenerate definitions index |
+| d8cbd45a | (hub) Bump mx-outputs: sitemap + README regen for 14 blog posts |
 | e6079608 | (mx-outputs) Update book chapter HTML: handbook ch00, protocols ch00 and ch12 |
 | 24fc14a1 | (mx-outputs) Add 14 blog post drafts: standards-governance series and related essays |
 | 7b0d5fde | (mx-outputs) Show spinner during initial question chip generation in main() |
