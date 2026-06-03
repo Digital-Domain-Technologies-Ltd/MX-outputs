@@ -242,8 +242,8 @@ async function main() {
   $('#question').focus();
 
   // Eagerly read the page and render suggested question chips so the user can
-  // click one without typing. Runs silently — no status text — to avoid
-  // distracting from the textarea.
+  // click one without typing. Spinner shows while the model generates chips.
+  showSpinner();
   try {
     const page = await readPage(tab);
     if (page) {
@@ -255,6 +255,7 @@ async function main() {
   } catch (_) {
     // Silently ignore; the user can still type manually.
   }
+  hideSpinner();
 }
 
 main();
