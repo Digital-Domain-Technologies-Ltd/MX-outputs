@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fwww.contentful.com%2Fproducts%2Fanalytics%2F
+# model:  gpt-oss:20b
+# sha256: b80be0d05e36ad8f5a548b064d87d5e35a9384eb5f52885a6b194736ff2f06ad
+# capturedAt: 2026-06-03T13:17:51.838Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4463
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://www.contentful.com/products/analytics/
+Title: Contentful Analytics | Contentful
+H1: Analytics that anticipate your next big move
+Outbound link hosts (up to 20): www.salesforce.com, be.contentful.com, training.contentful.com, contentful.allbound.com, www.contentfulstatus.com, www.instagram.com, github.com, x.com, www.youtube.com, www.linkedin.com, preferences.contentful.com, app.contentful.com
+
+Body text (first 4000 chars):
+/products/analytics/2025-09-30T19:34:32.049ZContentful enters into a definitive agreement to be acquired by Salesforce. Read more →ContentfulProductsSolutionsResourcesDevelopersPartnersPricingLog inContact salesProductsProductsPlatformDeliver intelligent experiences from one sourcePersonalizationEasily create highly personalized experiencesAI ActionsNewAutomate and streamline content workflowsAnalyticsBetaAgentic analytics directly in your workflowStudioVisually assemble experiences at scaleExtensibilityEcosystemScale with enterprise solutions & partnershipsMarketplaceApps and integrations to extend ContentfulCapabilitiesAI SuggestionsPersonalize and experiment with confidenceSegmentationDefine your audience in secondsExperimentationLearn what resonates in real-timeInsightsAnalyze content performance on-the-flyData connectionsBring your data all together in one placeFront-end hostingLaunch and scale rich sites faster than everLocalization and TranslationReach more markets without the overheadAutomation and WorkflowsEliminate busywork with AIWhat's new?From Analytics to AI, see the latest Contentful releases in action.Why choose Contentful?Deliver personalized, relevant experiences at scaleSolutionsUse casesPersonalizationIncrease ROI with AI-native personalizationComposable commerceBoost revenue with composable commerceWebsitesFuture-proof your website, extend your reachMulti-brand experiencesElevated experiences without constraintsSEOCreate SEO-friendly experiences with easeKnowledge baseFAQs, intranets & moreAudiencesGrowth marketingTurn new customers into brand loyalistsWebBuild, collaborate, and deliver fasterProductFree developers to focus on what they do bestContentStreamline content creation and collaborationEnterpriseEnterpriseDrive business revenue at scaleWhy choose Contentful?Deliver personalized, relevant experiences at scaleResourcesResource CenterWhite-papers, ebooks and videosCustomer Case StudiesSuccess stories with ContentfulBlogGet the latest from ContentfulEventsLet's meet upHelp CenterWe've got your backLearning CenterLive training, courses and certificationSupport servicesOur teams are here to help you get more value out of Contentful.DevelopersDocumentationHow to build with ContentfulDeveloper BlogDev news, tips and how-tosChangelogStay up to dateReady to start building?Get under the hood and see what’s possible with Contentful.PartnersOverviewYour growing support systemFind a Solution PartnerBuild faster with leading innovatorsFind a Technology PartnerExtend Contentful with trusted toolsBecome a PartnerJoin our rewarding partner programPartner PortalFull toolkit for partnersPricingContact salesLog in2025-09-30T19:34:32.049ZAnalytics that anticipate your next big moveYour content has a story to tell, but most analytics tools make you chase it. Contentful Analytics keeps the insights coming to you — less time reading dashboards, more time driving results.An agent that’s always-onDrive impact without extra headcount. Your AI copilot detects anomalies, predicts outcomes, and optimizes content automatically.No more tool hoppingPerformance data and recommendations show up right in your Contentful workflow, so you can adjust content on the fly and publish faster.Jargon-free answersAsk questions like “Why did engagement drop last week?” and get clear, visual answers with next steps. No analyst or SQL required.Why settle for a scoreboard when you could have a coach? 78%increase in conversion rate for Kraft-Heinz87%higher CTRs for Ace & Tate<30 minsfor Ruggable to personalize experiencesMake every experience a winner with analyticsMarketing isn’t a spectator sport, so why settle for a tool that only keeps score? Contentful Analytics shows you what’s happening, why it matters, and how to fix it, directly in your workflow.Your dashboard, your wayWhen it comes to decision-making, you need the right data on your side. Customize and track the metrics that matter to your business, not somebody else’s defaults. Build das
