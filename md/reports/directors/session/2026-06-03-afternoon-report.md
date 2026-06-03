@@ -4,7 +4,7 @@ description: "Deterministic infill; Complianz vendor detection; crowdfavorite au
 author: "Tom Cranstoun"
 created: 2026-06-03
 modified: 2026-06-03
-version: "2.0"
+version: "3.0"
 
 mx:
   status: active
@@ -97,6 +97,9 @@ Final crowdfavorite.com result: 11 pages crawled (was 3), correct WordPress plat
 | Test files added | 2 |
 | Bugs fixed in crowdfavorite.com audit | 5 |
 | Gate improvements shipped | 6 |
+| Extension model sources (browser on-device + Ollama fallback) | 5 |
+| Extension bugs fixed (chrome:// URL, Edge macOS, no model message) | 3 |
+| Docs updated for extension (popup.js, README x2, getting-started) | 4 |
 
 ---
 
@@ -137,6 +140,22 @@ The template now explicitly frames platform detection as probabilistic: "Platfor
 
 Three instances of dated changelog references removed from `web-audit-suite-template.md` (e.g., "form was chosen over a table on 2026-05-14 after the rendered PDF...", "the old table was too terse", "Duplication produced an internal contradiction on the 2026-05-14 neomwellbeing audit"). Replaced with timeless explanations of the current rules.
 
+### 16. MX Readiness Inspector -- Edge/macOS Support and Ollama Fallback
+
+The browser extension (MX Readiness Inspector) previously showed "See browser setup instructions at chrome://extensions" on any browser without an on-device model -- which is wrong for Edge users and completely broken for Edge on macOS (where `chrome://` URLs don't open).
+
+Three problems diagnosed and fixed:
+
+- **Edge on macOS**: Edge's Phi-Silica on-device model is Windows-only. It does not exist on macOS regardless of chip. The fallback message now detects the browser and OS and tells Edge/macOS users to use Ollama instead (or Chrome on the same machine).
+- **chrome:// URL hardcode**: The fallback message pointed to `chrome://extensions` rather than `edge://extensions`. Fixed with browser detection; Chrome users get the correct Chrome flags URL, Edge users get the Edge flags URL.
+- **Ollama fallback**: Added a second model-source tier. When the browser on-device model is absent, the extension probes `127.0.0.1:11434/api/tags`, picks the first recognised model (`gpt-oss:20b` preferred -- already running on this machine), and calls `/api/chat` as a local LLM fallback. `manifest.json` updated with localhost host permissions.
+
+The summary footer now labels Ollama results as `Ollama (gpt-oss:20b, local)` so the model source is always visible.
+
+The `OLLAMA_ORIGINS=*` environment variable is required for Ollama to accept requests from extension pages. Set permanently via a new LaunchAgent plist at `~/Library/LaunchAgents/com.ollama.environment.plist` -- loaded at login, injects the variable into the launchd session before the Ollama app starts.
+
+Documentation updated across four files: `popup.js` header comment, `extensions/mx-readiness/README.md` (title broadened to "Browser Extension", Ollama row added to model table, Edge/macOS section added), root `README.md` (new MX Readiness Inspector section), `getting-started.cog.md` (new section 4a covering extension install and model chain).
+
 ---
 
 ## Next Steps
@@ -144,6 +163,7 @@ Three instances of dated changelog references removed from `web-audit-suite-temp
 - Run a fresh crowdfavorite.com audit to validate framework detection in practice
 - A/B test generic signal false positive (`\btoggle\b`) -- still in REMINDERS
 - Per-platform score medians will start appearing once 10 audits per platform accumulate
+- Reload the MX Readiness Inspector in Edge after the Ollama LaunchAgent plist is applied; verify the Ollama summary renders
 
 ---
 
@@ -152,3 +172,16 @@ Three instances of dated changelog references removed from `web-audit-suite-temp
 | Hash | Description |
 |------|-------------|
 | ad9a2bc0 | (mx-outputs) Update crowdfavorite.com audit: UA fix, platform fix, Priority block rewrites |
+| 05db8bd7 | (mx-outputs) Add 2026-06-03 afternoon directors report |
+| e4d73de7 | (mx-outputs) Regenerate README index: afternoon report + crowdfavorite audit |
+| 22f2f5e1 | (mx-outputs) Update MX Readiness browser extension: README and popup improvements (Ollama fallback, Edge/macOS fix) |
+| 26af7ab3 | (mx-outputs) Update afternoon report v2.0: framework detection, platform stats, template changelog prose removal |
+| 8327748f | (mx-outputs) Regenerate README index: afternoon report v2 update |
+| 4f129575 | (hub) Audit pipeline quality overhaul: deterministic conditionals, vendor detection, bug fixes |
+| 1e7d811e | (hub) Bump mx-outputs: README regenerated, crowdfavorite audit updates, afternoon report |
+| ffea383c | (hub) Docs: CHANGELOG v3.01, LEARNINGS v4.46, REMINDERS v3.72 |
+| 8c630201 | (hub) Add .mx.yaml.md skeletons for mx-reginald-vnext/examples/ and examples/decisions/ |
+| 7088250a | (hub) Fix audit-fierce-critic.system.md: add required mx.purpose, stability, x-mx-contextProvides |
+| 52c960d7 | (hub) Add framework detection pipeline; per-platform benchmark stats; template cleanup |
+| 4b298144 | (hub) Bump mx-outputs: README regen; add CHANGELOG entry for framework detection |
+| c09995b3 | (hub) Sync routing registry after framework detection additions |
