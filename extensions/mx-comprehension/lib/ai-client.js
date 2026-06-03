@@ -122,10 +122,17 @@
       const res = await fetch(`${OLLAMA_BASE}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        signal: AbortSignal.timeout(30000),
+        // 120 s: page-content prompts can be large (up to 12 000 chars) and
+        // gpt-oss:20b needs more time to produce a detailed answer than the
+        // 30 s used for generating short suggestion chips.
+        signal: AbortSignal.timeout(120000),
         body: JSON.stringify({
           model,
           stream: false,
+          // num_ctx: give Ollama enough context for the full page payload.
+          // Default is 4096 tokens; 12 000 chars ≈ 3 000 tokens, plus system
+          // prompt and question — 8 192 tokens provides comfortable headroom.
+          options: { num_ctx: 8192 },
           messages: [
             { role: 'system', content: systemPrompt },
             { role: 'user', content: userPrompt },
