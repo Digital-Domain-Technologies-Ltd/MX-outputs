@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-06-03"
-modified: "2026-06-03"
+created: "2026-06-04"
+modified: "2026-06-04"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -22,10 +22,10 @@ Build artefacts, reports, and generated outputs organised by media type.
 |------|-------|-------------|
 | [pdf/](pdf/) | 73 | PDFs — books, reports, manuals, presentations |
 | [md/](md/) | 279 | Markdown — reports, audit results, presentations |
-| [html/](html/) | 93 | HTML — blogs (with CSS/SVG), audit baselines |
+| [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1108** | |
+| **Total** | **1107** | |
 
 ---
 
@@ -525,15 +525,13 @@ HTML content with adjacent CSS, JS, and SVG assets.
 ### html/blogs/ (0 files)
 
 
-### html/books/ (5 files)
+### html/books/ (3 files)
 
 - [`chapter-00-introduction-to-mx.html`](html/books/chapters/chapter-00-introduction-to-mx.html)
-- [`chapter-00-what-are-ai-agents.html`](html/books/chapters/chapter-00-what-are-ai-agents.html)
-- [`mx-codex.html`](html/books/codex/mx-codex.html)
 - [`mx-handbook.html`](html/books/handbook/mx-handbook.html)
 - [`mx-protocols.html`](html/books/protocols/mx-protocols.html)
-  - **chapters/** (2 files)
-  - **codex/** (1 files)
+  - **chapters/** (1 files)
+  - **codex/** (0 files)
   - **handbook/** (1 files)
   - **protocols/** (1 files)
 
@@ -573,4 +571,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-06-03 at 19:43*
+*Generated on 2026-06-04 at 10:19*
