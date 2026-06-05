@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fdotfusion.com%2Fservices%2Fstoryblok-development-agency
+# model:  gpt-oss:20b
+# sha256: 2341fb9714847a23995ad575064702487f97736a4ffe81e7f4f5cf474ffc4fca
+# capturedAt: 2026-06-05T10:36:20.183Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4312
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://dotfusion.com/services/storyblok-development-agency
+Title: Storyblok Agency | Certified Implementation Partner | Dotfusion | Dotfusion Technology
+H1: Storyblok Development Agency
+Outbound link hosts (up to 20): dotfusion.com, ca.linkedin.com, www.instagram.com
+
+Body text (first 4000 chars):
+Storyblok Development Agency Dotfusion is a Storyblok development agency based in Toronto, Canada, building enterprise headless CMS platforms on Storyblok for mid-to-large organizations since 1999. We're an official Storyblok partner and a Certified B Corporation. Storyblok's visual editor and component-based architecture work for organizations that need both developer flexibility and marketer autonomy. We've built platforms for Borealis Foods managing global food brands, Ramen Express running multi-location operations, and enterprises migrating from monolithic CMSs. Our Storyblok developers specialize in headless architecture, custom component libraries, third-party integrations (eCommerce, CRM, DAM), and migration strategies. We build platforms optimized for both traditional and AI search, engineered for performance, and structured so your content team publishes without bottlenecks. See our work Why Storyblok for Enterprise Teams? Storyblok is the headless CMS built for content creators who want the power of modern architecture with the ease of visual editing. Unlike traditional headless systems that separate editors from the visual output, Storyblok provides a real-time visual editor that shows exactly how content will look across all channels. This combination makes Storyblok ideal for marketing-led organizations that need to move fast. Content teams can create, edit, and publish without constant developer support, while developers maintain full control over the technical implementation using modern frameworks like Next.js, Nuxt, React, or Vue. Storyblok's component-based approach enables true content reusability. Build a content block once and use it across pages, campaigns, and channels. The visual editor is intuitive for marketers while the API-first architecture gives developers the flexibility they need. Storyblok Platform Features Visual Editor and Live Preview Storyblok's signature feature is its visual editing interface. Content creators see their changes in real-time as they work, eliminating the guesswork of traditional CMSs. This dramatically reduces the time from concept to publication and empowers non-technical teams to work independently. Component-Based Content Build with reusable content components (bloks) that can be assembled like building blocks. Create sections for heroes, testimonials, CTAs, product features, and more. Marketing teams mix and match components to create unique page layouts without custom development. Headless and API-First Despite the visual editing focus, Storyblok is fully headless. Deliver content through powerful REST and GraphQL APIs to any frontend — websites, mobile apps, digital displays, or emerging channels. Your content works everywhere. Rapid Iteration and A/B Testing The visual editor accelerates campaign creation and landing page development. Launch new campaigns in hours, not days. Built-in A/B testing capabilities let you optimize content performance based on real user data. Asset Management and Media Library Integrated DAM functionality with smart cropping, image optimization, and automatic format conversion. Upload once and Storyblok delivers optimized images for every device and screen size. Supports integration with external DAMs like Cloudinary and Bynder. Workflow and Collaboration Sophisticated publishing workflows with scheduled releases, content versioning, and role-based permissions. Enable teams to collaborate effectively with draft states, editorial workflows, and approval processes. How Dotfusion Builds on Storyblok Component Strategy and Design Systems We begin by mapping your content needs to a library of reusable components. This component strategy ensures consistency, accelerates content creation, and maintains brand standards across all pages and channels. Visual-First UX Design Our design team creates conversion-optimized components that look great and drive results. Every component is designed with flexibility in mind: customizable enough to enable cr

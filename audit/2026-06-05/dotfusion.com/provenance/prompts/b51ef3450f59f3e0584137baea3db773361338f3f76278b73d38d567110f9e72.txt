@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fdotfusion.com%2Fservices
+# model:  gpt-oss:20b
+# sha256: b51ef3450f59f3e0584137baea3db773361338f3f76278b73d38d567110f9e72
+# capturedAt: 2026-06-05T10:35:11.927Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4312
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://dotfusion.com/services
+Title: Headless Websites, Discoverability & Content Operations | Dotfusion | Dotfusion Technology
+H1: Digital Agency Services for Enterprise Transformation
+Outbound link hosts (up to 20): dotfusion.com, ca.linkedin.com, www.instagram.com
+
+Body text (first 4000 chars):
+— From Strategy to UX to CMS Platform Selection to ImplementationDigital Agency Services for Enterprise TransformationDotfusion delivers enterprise digital services including headless CMS development (Contentful, Storyblok, Agility), agentic content operations, custom software development, and digital transformation strategy. With 25+ years of experience, we partner with Canadian enterprises in real estate, manufacturing, and mission-driven sectors to build scalable, future-proof digital platforms. As a certified B Corporation, we prioritize sustainable technology, equitable practices, and measurable business impact. Our platform-agnostic approach means we recommend the right technology for your team and goals, not what's winning awards. Whether you need composable architecture, AI-driven content operations, or legacy system modernization, we've built it before.Trusted ByIn Partnership WithHeadless CMS implementation since before Headless Your content team is publishing too slow. Your CMS requires developers for every update. Your platform can't scale with your business. We build enterprise headless websites on Contentful, Storyblok, and Agility CMS. Platforms optimized for AEO and SEO discovery, designed for performance, and built with automated workflows that let your team move faster. Oxford Properties, Mitsubishi Electric, and Sunwing run on our stack. Learn more about our Headless CMS development services. Platform Development & Implementation We build enterprise-grade websites and digital platforms using modern, composable architecture. Our expertise spans headless CMS platforms (Contentful, Storyblok, Agility, Magnolia), custom software development, mobile applications, and eCommerce systems. We specialize in complex content models, API-first architecture, and scalable solutions for organizations with demanding content operations. Contentful Development Agency Enterprise headless CMS for complex content models and global teams Case Study: Sunwing Vacations - Transforming Canada's leading vacation package experience with Contentful Storyblok Development Agency Visual-first headless CMS for marketing teams that need content velocity Case Studies: Borealis Foods - Narrative-driven digital immersion | Ramen Express - Bold visual design with cutting-edge technology Agility CMS Development & Implementation Canadian-built headless CMS with bilingual support and compliance features Case Studies: Oxford Properties - Global real estate platform with automated property pages | Mitsubishi Electric - B2B manufacturing transformation with Salesforce integration Magnolia DXP Implementation Digital experience platform for enterprises needing personalization at scale Case Study: Faith-Based Content Hub - Designing accessibility and discovery through Magnolia CMS Custom Software Development Purpose-built applications and enterprise platforms Case Studies: Moneris Digital Enrollment - Streamlined self-serve journey | Swob - Recruitment app rebuilt on modern tech Mobile Application Development iOS and Android apps with modern UX and backend integrations Case Studies: Pizza Nova App - Reimagined ordering experience | BC Hockey App - Modern platform for youth sports eCommerce Platforms Composable commerce solutions with headless architecture Case Study: Pizza Nova - Streamlined ordering, checkout, and loyalty program Content & AI Solutions We help enterprises scale content production and optimize for AI-driven discovery. Our services include agentic content operations that multiply team output, Answer Engine Optimization (AEO) to ensure your brand appears in ChatGPT and AI search results, intelligent chatbots, and marketing technology automation. These solutions reduce manual workload while improving content quality and discoverability. Agentic Content Operations AI-powered workflows that scale content production 5-10x Answer Engine Optimization (AEO) Schema markup and content architecture for AI citation and visibility Learn more: Making Co

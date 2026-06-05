@@ -1,0 +1,113 @@
+{
+  "auditDate": "2026-06-03",
+  "errors": [
+    {
+      "timestamp": "2026-06-03T19:05:56.724Z",
+      "severity": "info",
+      "source": "check-report-tone.js",
+      "gateName": "tone",
+      "category": "em-dash",
+      "title": "Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 7 instances",
+      "detail": "Em-dash in prose (use comma, semicolon, parentheses, or two sentences)\n\nline 303: \"—\" - We found that our sitemap lists multiple URL forms—trailing‑slash and hash‑fragment variations—for t\nline 303: \"—\" - We found that our sitemap lists multiple URL forms—trailing‑slash and hash‑fragment variations—for t\nline 539: \"—\" - We discovered that every audited page has a truncation risk, which can cause machines to miss part o\nline 539: \"—\" - We discovered that every audited page has a truncation risk, which can cause machines to miss part o\nline 558: \"—\" - On the worst page in our sample—https://crowdfavorite.com/campaign/digital-summit-atlanta-2022—we ob\n... and 2 more",
+      "suggestions": [],
+      "lineRef": "line 303",
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-03T19:05:56.882Z",
+      "severity": "warn",
+      "source": "check-report-scope.js",
+      "gateName": "sample-vs-total-scope",
+      "category": "scope-mis-statements",
+      "title": "Scope mis-statements remain after auto-repair: 1",
+      "detail": "Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:\n\ncheck-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-03/crowdfavorite.com/crowdfavorite-com-report.md\n  1 scope mis-statement(s).\n\n  [sampling-inside-sitewide-section] line 251\n    section: ## Discovery Files  (line 219)\n    phrase:  \"on each page\"\n    line:    We found that our sitemap lists multiple URL forms—trailing‑slash and hash‑fragment variations—for the same canonical re\n\n  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write \"across the audited set\" — write \"the sitemap declares\" or \"this file carries\". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write \"site-wide\" or \"across the entire site\" — write \"across the audited pages\" or \"on the audited set\".\n",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-03T19:05:57.585Z",
+      "severity": "warn",
+      "source": "audit-pipeline.js (Gate 0c)",
+      "gateName": "html-render-heading-count",
+      "category": "pandoc-truncation",
+      "title": "HTML render heading count mismatch: markdown=33 rendered=32",
+      "detail": "Gate html-render-heading-count returned non-zero with no captured output.",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-03T19:09:49.396Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Canonical URL 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-03/crowdfavorite.com/crowdfavorite-com-report.md — the Cross-Page Consistency table's percentage for Canonical URL does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-03T19:09:49.397Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Open Graph tags 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-03/crowdfavorite.com/crowdfavorite-com-report.md — the Cross-Page Consistency table's percentage for Open Graph tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-03T19:09:49.397Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Twitter Card tags 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-03/crowdfavorite.com/crowdfavorite-com-report.md — the Cross-Page Consistency table's percentage for Twitter Card tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-03T19:09:50.049Z",
+      "severity": "warn",
+      "source": "check-cross-section-consistency.js",
+      "gateName": "cross-section-consistency",
+      "category": "cross-section-scope-mix",
+      "title": "Line 312: scope-mixing prose",
+      "detail": "Sentence mixes site-wide language with per-sample language. Choose one frame per sentence: report the site-wide source first, then describe the audited set separately. Line: We found no llms-full.txt; the file is not referenced in the sitemap or via a `<link rel=\"llms-full-txt\">` tag on the homepage. Our recommendation to provide a text/html llms-full.txt diverges from the llmstxt.org specification, but because",
+      "suggestions": [
+        "Re-check the infill sources for each cited section.",
+        "If both sources are correct and the disagreement is genuine (e.g. the sitemap covers a wider set than the audit sampled), name the asymmetry explicitly in the prose so the reader sees it."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-03T19:09:50.050Z",
+      "severity": "warn",
+      "source": "check-cross-section-consistency.js",
+      "gateName": "cross-section-consistency",
+      "category": "cross-section-scope-mix",
+      "title": "Line 618: scope-mixing prose",
+      "detail": "Sentence mixes site-wide language with per-sample language. Choose one frame per sentence: report the site-wide source first, then describe the audited set separately. Line: We observed no content variance was detected across cache‑busted fetches in this audit run. An unknown vendor identified as a personalisation/A/B testing layer is present on pages across the audited set. Because machines arrive cold on ever",
+      "suggestions": [
+        "Re-check the infill sources for each cited section.",
+        "If both sources are correct and the disagreement is genuine (e.g. the sitemap covers a wider set than the audit sampled), name the asymmetry explicitly in the prose so the reader sees it."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    }
+  ]
+}

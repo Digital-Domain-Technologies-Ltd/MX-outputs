@@ -1,0 +1,132 @@
+{
+  "auditDate": "2026-06-04",
+  "errors": [
+    {
+      "timestamp": "2026-06-04T06:06:51.839Z",
+      "severity": "info",
+      "source": "check-report-tone.js",
+      "gateName": "tone",
+      "category": "em-dash",
+      "title": "Em-dash in prose (use comma, semicolon, parentheses, or two sentences): 3 instances",
+      "detail": "Em-dash in prose (use comma, semicolon, parentheses, or two sentences)\n\nline 652: \"—\" - We identified four resilience checks that appear across the audited set—Truncation Risk, Boilerplate\nline 838: \"—\" - We found that https://crowdfavorite.com excels in SEO with a score of 96/100, demonstrating strong o\nline 838: \"—\" - We found that https://crowdfavorite.com excels in SEO with a score of 96/100, demonstrating strong o",
+      "suggestions": [],
+      "lineRef": "line 652",
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-04T06:06:55.130Z",
+      "severity": "warn",
+      "source": "check-report-section-completeness.js",
+      "gateName": "section-completeness",
+      "category": "incomplete-priority-block",
+      "title": "Section completeness issues: 4 issue(s)",
+      "detail": "Gate section-completeness (check-report-section-completeness.js) returned non-zero. Output excerpt:\n\n\nSection completeness: crowdfavorite-com-report.md: 4 issue(s)\n\n  Priority 8 — Missing Finding\n    Priority 8 block has no \"**Finding:**\" paragraph\n  Priority 8 — Missing What-to-change\n    Priority 8 block has no \"**What to change and why:**\" (or \"**What to maintain:**\") section\n  Priority 9 — Missing block\n    No \"**Priority 9:\" heading found in the document\n  Priority 10 — Missing block\n    No \"**Priority 10:\" heading found in the document\n\n→ Ensure every Priority row in the At-a-Glance table has a complete **Finding:** paragraph and a **What to change and why:** section with at least one bullet.\n\n",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-04T06:06:55.621Z",
+      "severity": "error",
+      "source": "audit-pipeline.js (Gate 1 - template-leak check)",
+      "gateName": "template-leaks",
+      "category": "template-leaks",
+      "title": "1 leak(s) in the rendered report (hard fail)",
+      "detail": "The rendered crowdfavorite-com-report.md contains unresolved placeholders (e.g. `[SITEMAP_...]`, `[N]`, bare bracket-instructions, or REWRITE comment blocks). These would print as literal prose in the PDF. check-template-leaks.js output:\n\ncheck-template-leaks: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-04/crowdfavorite.com/crowdfavorite-com-report.md\n  1 leak category/categories found:\n  - [invalid-bucket-value] 2 invalid Bucket value(s). Must be one of: Compliance Risk / Cross-cutting / Machine Readability Opportunity.\n        line 158: \"table row Bucket cell: \"Cross‑cutting\"\"\n        line 159: \"table row Bucket cell: \"Cross‑cutting\"\"\nResolve each leak before PDF generation:\n  - REWRITE block           → rewrite the section into plain prose, then delete the comment\n  - {{TOKEN}}               → re-run infill-report.js with the correct results directory\n  - [Bracket]               → replace with actual content, or convert to a REWRITE block\n  - further-reading-no-qr-table → restore the two-column QR table from the template (| Scan | Link and description |)\ncheck-template-leaks: HARD FAIL (911 lines, 1 hard leak(s), 0 warning(s))",
+      "suggestions": [
+        "Add the missing entries to the `replacements` map in mx-reginald/audit/bin/infill-report.js (look up the placeholder name in the leak detector output above).",
+        "When the source data is genuinely absent, fall back to a clear prose sentence that does not need the count — never let the raw token reach the PDF.",
+        "For multi-line REWRITE blocks, ensure the LLM-rewrite phase has API access (ANTHROPIC_API_KEY set).",
+        "For diagnostic purposes only: MX_AUDIT_FORCE_PDF=1 mx exec mx-audit ... ships the PDF anyway with the literal tokens visible."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-04T06:11:14.228Z",
+      "severity": "error",
+      "source": "audit-pipeline.js (post-repair leak check)",
+      "gateName": "template-leaks",
+      "category": "template-leaks",
+      "title": "Template leaks introduced by the repair pass",
+      "detail": "The consolidated repair pass rewrote prose that introduced structural corruption (e.g. heading-prefixed table rows). check-template-leaks.js output:\n\ncheck-template-leaks: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-04/crowdfavorite.com/crowdfavorite-com-report.md\n  1 leak category/categories found:\n  - [invalid-bucket-value] 2 invalid Bucket value(s). Must be one of: Compliance Risk / Cross-cutting / Machine Readability Opportunity.\n        line 158: \"table row Bucket cell: \"Cross‑cutting\"\"\n        line 159: \"table row Bucket cell: \"Cross‑cutting\"\"\nResolve each leak before PDF generation:\n  - REWRITE block           → rewrite the section into plain prose, then delete the comment\n  - {{TOKEN}}               → re-run infill-report.js with the correct results directory\n  - [Bracket]               → replace with actual content, or convert to a REWRITE block\n  - further-reading-no-qr-table → restore the two-column QR table from the template (| Scan | Link and description |)\ncheck-template-leaks: HARD FAIL (911 lines, 1 hard leak(s), 0 warning(s))",
+      "suggestions": [
+        "Re-run gates only after fixing the structural issue in the report."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-04T06:11:14.229Z",
+      "severity": "warn",
+      "source": "audit-pipeline.js (Phase 3 gate suite)",
+      "gateName": "gates-summary",
+      "category": "gates-failed",
+      "title": "Audit gates raised findings: 0e, 1",
+      "detail": "Phase 3 gate suite reported 2 unresolved gates. Individual gates may have recorded richer detail entries above this one. The PDF below is a partial deliverable produced under the always-produce-PDF rule; treat it as diagnostic context rather than a delivered audit until the listed gates pass.",
+      "suggestions": [
+        "Review each failed gate entry above for its specific detail and suggested fix.",
+        "Re-run gates only after fixing: mx exec mx-audit --gates mx-outputs/audit/2026-06-04/crowdfavorite.com/crowdfavorite-com-report.md",
+        "If the same gate fails twice in a row with no underlying data change, the gate itself is misbehaving — file an issue against the gate script."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-04T06:11:14.325Z",
+      "severity": "warn",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "inventory-mismatch",
+      "title": "Image inventory: 49 images in formats not named in prose",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-04/crowdfavorite.com/crowdfavorite-com-report.md — image_optimization.csv contains 568 images: 330 PNG, 76 JPEG, 1 WebP, 112 SVG, 49 other / unrecognised. Total of named formats is 519; 49 images are in a format the Appendix C narrative does not mention.",
+      "suggestions": [
+        "Verify the [OTHER_FORMAT_COUNT] placeholder is rendered in Appendix C and the rewrite prose names it explicitly when > 0."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-04T06:11:14.326Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Canonical URL 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-04/crowdfavorite.com/crowdfavorite-com-report.md — the Cross-Page Consistency table's percentage for Canonical URL does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-04T06:11:14.326Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Open Graph tags 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-04/crowdfavorite.com/crowdfavorite-com-report.md — the Cross-Page Consistency table's percentage for Open Graph tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    },
+    {
+      "timestamp": "2026-06-04T06:11:14.327Z",
+      "severity": "error",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "marker-section-contradiction",
+      "title": "Cross-Page Consistency reports Twitter Card tags 91% but consistency_analysis says 100% (10/10)",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-04/crowdfavorite.com/crowdfavorite-com-report.md — the Cross-Page Consistency table's percentage for Twitter Card tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.",
+      "suggestions": [
+        "Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic"
+    }
+  ]
+}
