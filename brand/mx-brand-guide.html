@@ -1452,6 +1452,59 @@
 </section>
 
 
+<!-- ==========================================
+     10. SOCIAL CARDS
+========================================== -->
+<section id="social-cards">
+  <div class="wrap">
+    <p class="section-label">10 - Social Cards</p>
+    <h2 class="section-title">Social sharing cards</h2>
+    <p class="section-desc">One shared card serves the whole site. Every page sets <code>og:image</code> and <code>twitter:image</code> to the PNG; the SVG is the editable source. MX Printworks carries its own card in the same visual family. Most platforms (Facebook, LinkedIn, X, Slack, iMessage) do not render SVG <code>og:image</code>s, so the served URL is always the PNG.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin:1.5rem 0;">
+      <figure style="margin:0;">
+        <img src="../mx-site/images/mx-social.png" alt="Generic MX social card: the MX wordmark, the words Machine Experience, and the CogNovaMX tagline on a deep navy background." style="width:100%;height:auto;border-radius:8px;border:1px solid var(--mx-border);display:block;">
+        <figcaption style="font-size:0.8125rem;color:var(--mx-text-muted);margin-top:0.5rem;">Generic card, every page by default</figcaption>
+      </figure>
+      <figure style="margin:0;">
+        <img src="../mx-site/images/printworks-og-image.png" alt="MX Printworks social card: the words MX Printworks and Publishing for the AI Age with an open-book motif on a deep navy background." style="width:100%;height:auto;border-radius:8px;border:1px solid var(--mx-border);display:block;">
+        <figcaption style="font-size:0.8125rem;color:var(--mx-text-muted);margin-top:0.5rem;">MX Printworks, sub-brand</figcaption>
+      </figure>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="swatch-group-title">Specifications</p>
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Dimensions</td><td>1200 × 630px (Open Graph / Twitter summary_large_image)</td></tr>
+        <tr><td>Served format</td><td>PNG, set in <code>og:image</code> and <code>twitter:image</code> on every page</td></tr>
+        <tr><td>Source and extra</td><td>SVG (editable source) plus WebP, same base name</td></tr>
+        <tr><td>Background</td><td>Navy gradient <code>#0a1628</code> to <code>#0d2137</code></td></tr>
+        <tr><td>Accents</td><td>Blue <code>#2070c0</code> / <code>#5ba4e6</code>, gold <code>#d4a843</code> / <code>#e0b84e</code></td></tr>
+        <tr><td>Text</td><td>Heading <code>#e8edf2</code>, body <code>#b3c1d4</code></td></tr>
+      </tbody>
+    </table>
+
+    <p class="swatch-group-title">Assets</p>
+    <table>
+      <thead>
+        <tr><th>Card</th><th>Path</th><th>Use</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Generic MX</td><td><code>mx-outputs/mx-site/images/mx-social.{svg,png,webp}</code></td><td>Site-wide default for every page</td></tr>
+        <tr><td>MX Printworks</td><td><code>mx-outputs/mx-site/images/printworks-og-image.{svg,png,webp}</code></td><td>MX Printworks pages only</td></tr>
+      </tbody>
+    </table>
+
+    <p class="section-desc" style="margin-top:1rem;">To edit a card, change the SVG and re-render the PNG and WebP (<code>rsvg-convert</code> then <code>cwebp</code>). New pages inherit the generic card automatically through the html-writer scaffolds and the content generator; there is no per-post social card.</p>
+  </div>
+</section>
+
+
 <!-- ══════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════ -->
