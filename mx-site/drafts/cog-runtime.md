@@ -102,7 +102,7 @@ This runtime document is versioned independently of the cog spec. A runtime targ
 
 ## 7. References
 
-- [Cog Specification v1.1](./cog-spec.v1.md) — the format this runtime consumes
+- [Cog Specification v1.2](./cog-spec.v1.md) — the format this runtime consumes
 - [MXS-05 Contract Fingerprinting](https://github.com/ddttom/mx-shared-gathering/blob/main/mxs-05-contract-fingerprinting.cog.md) — the signing standard runtimes implement
 - [upgraded-reginald](https://github.com/Digital-Domain-Technologies-Ltd/upgraded-reginald) — reference implementations
 - [NDR-2026-02-16 camelCase naming](https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md) — the field-name convention runtimes parse

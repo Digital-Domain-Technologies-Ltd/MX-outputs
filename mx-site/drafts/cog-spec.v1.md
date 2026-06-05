@@ -24,13 +24,13 @@ mx:
 
 Version 1.2 (draft, review-ready)
 
-> **v1.2 — `cogHeader` frontmatter field.** A new optional frontmatter field carries the same information as the magic-header line (version + spec + runtime + runtime-doc URLs) so consumers that work on parsed YAML can read the cog's spec/runtime conformance claim from a queryable nested object. Defined in [MXS-06 Cog Identification](https://mx.allabout.network/drafts/mxs-06-cog-identification.cog.md). When both forms are present in the same cog they MUST agree on values (§2.5).
+> **v1.2 — `cogHeader` frontmatter field.** A new optional frontmatter field carries the same information as the magic-header line (version + spec + runtime + runtime-doc URLs) so consumers that work on parsed YAML can read the cog's spec/runtime conformance claim from a queryable nested object. Specified inline in section 2.5; a dedicated MX Cog Identification note (MXS-06) is planned but not yet published, and section 2.5 is the normative definition until it is. When both forms are present in the same cog they MUST agree on values (§2.5).
 >
 > **v1.1 — Naming convention change.** Frontmatter field names are now `camelCase` (aligned with MX [NDR-2026-02-16](https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md)). The `x-mx-` and `x-mx-p-` namespace prefixes themselves remain kebab; only the suffix is camelCase (e.g. `x-mx-contractFields`, not `xMxContractFields`). v1.0 cogs that used kebab-case field names should be migrated by converting all field names to camelCase. File and directory names retain kebab-case (e.g. `cog-spec.v1.md`, `cog-review-procedure.cog.md`).
 
 ## Status
 
-This specification is a v1.0 draft, sufficient for independent implementation and ready for community review. It describes the cog file format, the artefact model that gives the format its meaning, the verification algorithm that allows a third party to confirm a cog satisfies a stated contract, and the recognition conventions that allow agents and humans to identify cogs encountered without context.
+This specification is a v1.2 draft, sufficient for independent implementation and ready for community review. It describes the cog file format, the artefact model that gives the format its meaning, the verification algorithm that allows a third party to confirm a cog satisfies a stated contract, and the recognition conventions that allow agents and humans to identify cogs encountered without context.
 
 ### What this draft is sufficient for
 
@@ -42,7 +42,7 @@ This draft is sufficient for *alignment* — implementations can run the conform
 
 - **Conformance suite coverage.** The v0.1 suite covers 23 cases across parsing, annotations, fingerprints, witnesses, and validators. The specification contains substantially more MUST and SHOULD requirements than this suite exercises. An implementation that passes all 23 cases can still violate spec requirements that no case tests. Suite expansion is community work.
 
-- **No second implementation.** All claims about portability are theoretical until at least one independent implementation exists. Until that point, the specification is reasoned-about rather than tested against the reality of being read by someone who did not write it.
+- **No independent third-party implementation.** Two in-house reference implementations (JavaScript and Rust) cross-check each other (see section 6.3), but all claims about portability remain theoretical until a party working only from this specification, with no access to the authors, implements it. Until then the specification is reasoned-about rather than tested against the reality of being read by someone who did not write it.
 
 - **No external review.** Two LLM-driven review cycles have been performed and addressed (one from the perspective of an implementer building the system, one from the perspective of an agent encountering a cog without context). These found and fixed real issues but share a common failure mode; human standards-body review has not yet happened.
 
@@ -50,7 +50,7 @@ This draft is sufficient for *alignment* — implementations can run the conform
 
 ### What the next draft will address
 
-Issues against this specification are welcomed. The v1.1 draft is expected to incorporate findings from a second implementation effort, expanded conformance coverage, and external technical review. Open questions explicitly deferred from this draft are listed in section 11.
+Issues against this specification are welcomed. A future revision is expected to incorporate findings from an independent third-party implementation, expanded conformance coverage, and external technical review. Open questions explicitly deferred from this draft are listed in section 11.
 
 ### About the reference implementation
 
@@ -203,7 +203,7 @@ The line exists primarily to help agents that encounter a cog without prior cont
 
 If present, the magic header line MUST be the very first line of the file, before any byte order mark removal (which is not permitted) or whitespace. Implementations MUST NOT recognise a magic header line that appears anywhere other than the first line.
 
-The information carried by the magic header MAY also be expressed as a `cogHeader` frontmatter field defined in [MXS-06 Cog Identification](https://mx.allabout.network/drafts/mxs-06-cog-identification.cog.md). The two forms are equivalent. When both are present in the same cog they MUST agree on `version`, `spec`, `runtime`, and `runtimeDoc` values; validators MUST flag mismatches. Implementations SHOULD prefer the `cogHeader` field for programmatic consumption (queryable, robust to comment-stripping parsers) and the magic-header line for unambiguous self-identification when a consumer scans raw text. A cog intended for circulation SHOULD declare both.
+The information carried by the magic header MAY also be expressed as a `cogHeader` frontmatter field, specified in this section. The two forms are equivalent. When both are present in the same cog they MUST agree on `version`, `spec`, `runtime`, and `runtimeDoc` values; validators MUST flag mismatches. Implementations SHOULD prefer the `cogHeader` field for programmatic consumption (queryable, robust to comment-stripping parsers) and the magic-header line for unambiguous self-identification when a consumer scans raw text. A cog intended for circulation SHOULD declare both. A dedicated MX Cog Identification note (MXS-06) is planned; until it is published, this section is the normative definition of `cogHeader`.
 
 ## 3. Artefact model
 
@@ -305,7 +305,7 @@ A cog without these fields is a valid cog but cannot be notarised. Notarisation 
 
 A cog MAY also declare:
 
-- `cogHeader` — an object carrying the spec version and the spec/runtime/runtimeDoc URLs. This is the frontmatter equivalent of the magic-header comment defined in section 2.5; the equivalence rule (mismatched values are a conformance failure) is specified in [MXS-06](https://mx.allabout.network/drafts/mxs-06-cog-identification.cog.md). `cogHeader` SHOULD be a member of `metadataFields` (excluded from the contract fingerprint) — its values describe the cog's identity, not its contract.
+- `cogHeader` — an object carrying the spec version and the spec/runtime/runtimeDoc URLs. This is the frontmatter equivalent of the magic-header comment defined in section 2.5; the equivalence rule (mismatched values are a conformance failure) is specified in section 2.5. `cogHeader` SHOULD be a member of `metadataFields` (excluded from the contract fingerprint) — its values describe the cog's identity, not its contract.
 - `produces` — an object declaring the typed shape of a successful execution output. Sub-keys are `shape` (a schema reference resolved per section 4.4), `format` (a MIME type or named format identifier), and `example` (an illustrative value). `produces` is informational unless a runtime chooses to validate the output against `produces.shape` post-execution; runtimes that validate MUST treat a shape mismatch as an unmodelled failure (see section 4.6). A cog with no `execute` block and no procedure-declaring field SHOULD NOT declare `produces`. Distinct from `schema` (input contract for the document itself); `produces` is the contract for what comes out, not what goes in.
 - `actionType` — a string that names the cognitive class of an action cog. The cog specification draws a sharp axis through every action cog: it MAY be **deterministic**, **inference-driven**, or **both**. A deterministic action cog carries fixed instructions a runtime executes the same way every time; an inference-driven action cog carries instructions a language-model runtime reads and performs using its own reasoning; a both-form action cog carries each in the role each is fit for. The `actionType` field is how the cog declares which, so a consumer can choose to accept, reject, or sandbox the cog without inspecting the body. Valid values are `scripted`, `sop`, and `hybrid`. A `scripted` action cog carries an embedded executable artefact (an `@embedded:<id>` block per section 3.3); a runtime extracts the artefact by id and runs it directly; the same inputs produce the same outputs. An `sop` action cog has no embedded executable artefact; the `execute.actions[].usage` value is descriptive prose intended for a language-model runtime to read and perform the steps; the runtime is the language model itself. A `hybrid` action cog carries both an embedded executable artefact AND descriptive `usage` prose; the script handles the deterministic portion and the prose carries the part that needs reasoning. Cogs with an `execute` block SHOULD declare `actionType` so that consumers can determine the runtime requirement (interpreter vs. language model vs. both) without inspecting the body. Cogs without an `execute` block MUST NOT declare `actionType`.
 
@@ -776,7 +776,7 @@ The v0.1 suite is the basis for **alignment**, not yet for **certified conforman
 
 Implementations SHOULD provide a harness that runs the suite against their implementation and SHOULD declare which cases pass, fail, or are skipped, with reasons for any non-passing cases. Implementations claiming alignment SHOULD also document which spec sections they have not yet exercised against the suite.
 
-Future suite versions will expand coverage as the specification stabilises and as more implementations exercise the cases. Certified conformance will become available when the suite covers the spec's normative surface; this is community work and an explicit goal for v1.1.
+Future suite versions will expand coverage as the specification stabilises and as more implementations exercise the cases. Certified conformance will become available when the suite covers the spec's normative surface; this is community work and an explicit goal for a future revision.
 
 ## 9. Examples
 
@@ -897,4 +897,4 @@ YAML 1.2 Specification, <https://yaml.org/spec/1.2.2/>.
 
 CommonMark Specification (for fenced code block syntax), <https://commonmark.org/>.
 
-<!-- cog-spec-sync: 2026-05-31-d -->
+<!-- cog-spec-sync: 2026-06-05-a -->
