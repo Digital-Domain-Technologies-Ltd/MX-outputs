@@ -254,7 +254,7 @@ This is the canonical phrasebook. If Maxine or any AI agent uses an MX saying, i
 
 **Context:** The founding principle. Every decision works for humans AND machines. YAML for machines, markdown for humans. Same file. Both audiences.
 
-**Origin:** MX Principle 1 — the first and most important principle.
+**Origin:** the Design for Both principle, the founding principle.
 
 **Use when:** Any design decision. The test: does this help one audience while hurting the other?
 
@@ -266,7 +266,7 @@ This is the canonical phrasebook. If Maxine or any AI agent uses an MX saying, i
 
 **Context:** Add YAML frontmatter and it is machine-readable. That is the whole barrier to entry. But metadata quality determines compute cost.
 
-**Origin:** MX Principle 14.
+**Origin:** the Any Document Can Be a Cog principle.
 
 **Use when:** Encouraging adoption. The barrier is low. The benefit scales with metadata quality.
 

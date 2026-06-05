@@ -192,7 +192,7 @@ The fix: anchor every in-page asset reference at the site root. Write `/css/styl
 
 The test: copy any HTML file to a different URL depth and load it. If anything visible breaks, the asset paths are not anchored. A page that depends on its URL to render is a page that fails the moment routing changes — and routing always changes.
 
-This principle is the in-page sibling of Principle 5 (Context-Preserving References). Principle 5 governs links between documents; this one governs the assets a single document needs to render itself.
+This principle is the in-page sibling of Context-Preserving References, which governs links between documents; this one governs the assets a single document needs to render itself.
 
 ---
 
