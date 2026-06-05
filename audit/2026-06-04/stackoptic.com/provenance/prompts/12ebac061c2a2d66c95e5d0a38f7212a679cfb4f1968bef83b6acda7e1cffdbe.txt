@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fstackoptic.com%2Fdisclaimer
+# model:  gpt-oss:20b
+# sha256: 12ebac061c2a2d66c95e5d0a38f7212a679cfb4f1968bef83b6acda7e1cffdbe
+# capturedAt: 2026-06-04T17:54:46.446Z
+# systemPromptBytes: 1632
+# userMessageBytes:  3492
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://stackoptic.com/disclaimer
+Title: Disclaimer — StackOptic | StackOptic
+H1: Disclaimer
+Outbound link hosts (up to 20): x.com, linkedin.com, digiwings.co.uk
+
+Body text (first 4000 chars):
+AboutContact Legal · DisclaimerDisclaimerImportant information about the accuracy, limitations, and intended use of StackOptic analysis results.Last updated: April 2026ContentsGeneral disclaimerAccuracy of informationNot professional adviceThird-party websitesLimitation of liabilityUse at your own riskGeneral DisclaimerThe information provided by StackOptic is for general informational purposes only. All analysis results, technology detections, and recommendations are provided “as is” without warranty of any kind, either express or implied. The results should not be considered as definitive, official, or legally binding assessments.Accuracy of InformationWhile we strive to provide accurate and up-to-date information, we make no representations or warranties about the completeness, accuracy, reliability, or availability of the analysis results.Technology detection is based on publicly visible patterns and may not reflect the complete technology stack.Security assessments are based on HTTP headers and do not constitute a comprehensive security audit or penetration test.Performance metrics are point-in-time measurements and may vary based on network conditions.CMS and framework detection may produce false positives or miss certain technologies.AI-generated insights are opinion-based and should be validated by qualified professionals before action.Not Professional AdviceStackOptic analysis results do not constitute:Legal advice — consult a qualified attorney for legal matters.Security audit — engage professional security consultants for comprehensive assessments.Technical consultation — seek expert advice for critical technical decisions.Business recommendations — conduct proper due diligence before making business decisions.Financial or investment advice — consult a qualified advisor for financial matters.Third-Party Websites & Affiliate LinksStackOptic may contain links to third-party websites and affiliate links. We are not responsible for the content, privacy policies, or practices of any third-party sites. The inclusion of any link does not imply endorsement by StackOptic.Some links may be affiliate links, meaning we may earn a commission if you make a purchase. This does not affect the objectivity of our analysis or the price you pay.Limitation of LiabilityIn no event shall StackOptic, its operators, or contributors be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the Service, including but not limited to damages for loss of profits, data, or other intangible losses, even if we have been advised of the possibility of such damages.Use at Your Own RiskYour use of StackOptic is at your sole risk. The Service is provided on an “AS IS” and “AS AVAILABLE” basis. We reserve the right to modify, suspend, or discontinue the Service at any time without notice.Questions about this disclaimer?Contact us Website intelligence platform. One URL, 18 modules, full technical report in seconds.Made in Shrewsbury, UKProductAnalyzeTechnologiesBlogPricingCompanyAboutContactLegalPrivacy PolicyTerms of ServiceDisclaimer© 2026 StackOptic — a product of Digiwings Agency. All rights reserved.Analysis results are for informational purposes only.

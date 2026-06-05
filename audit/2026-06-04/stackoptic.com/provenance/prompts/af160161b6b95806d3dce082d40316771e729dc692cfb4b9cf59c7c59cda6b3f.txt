@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fstackoptic.com%2Ftechnologies
+# model:  gpt-oss:20b
+# sha256: af160161b6b95806d3dce082d40316771e729dc692cfb4b9cf59c7c59cda6b3f
+# capturedAt: 2026-06-04T17:54:01.281Z
+# systemPromptBytes: 1632
+# userMessageBytes:  2946
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://stackoptic.com/technologies
+Title: Web Technologies Directory - CMS, Frameworks, Analytics & More | StackOptic | StackOptic
+H1: Web Technologies Directory
+Outbound link hosts (up to 20): (none)
+
+Body text (first 4000 chars):
+PricingTechnologiesCompareBlogAboutContactWeb Technologies DirectoryExplore 82337+ technologies powering the modern web. Discover which CMS, frameworks, analytics, hosting, and tools websites use.82337Technologies tracked3,300,393Total detections16CategoriesBrowse by CategoryWordPress PluginsDiscover the most popular WordPress plugins for SEO, forms, caching, and more. Yoast SEO, Elementor, WP Rocket, and more.60243 technologiesWeb Hosting & Cloud ProvidersSee which hosting providers and cloud platforms power the web. AWS, Cloudflare, Vercel, Netlify, and more.15307 technologiesE-commerce Platforms & PaymentBrowse e-commerce platforms and payment processors used by online stores. WooCommerce, Magento, Stripe, and more.910 technologiesContent Management SystemsDiscover the most popular content management systems powering websites worldwide. Compare WordPress, Shopify, Wix, and more.733 technologiesAnalytics & Tracking ToolsFind out which analytics and tracking tools websites use to measure performance. Google Analytics, Hotjar, Mixpanel, and more.655 technologiesLive Chat & Customer SupportDiscover live chat widgets and customer support tools. Zendesk, Intercom, Crisp, Tidio, and more.371 technologiesAdvertising & Ad NetworksExplore advertising platforms and ad networks used across the web. Google Ads, Facebook Pixel, and more.333 technologiesJavaScript Libraries & UtilitiesBrowse popular JavaScript utility libraries. jQuery, Lodash, GSAP, Three.js, D3.js, and more.319 technologiesWeb Frameworks & LibrariesExplore JavaScript frameworks and meta-frameworks used to build modern web applications. React, Next.js, Vue, Angular, and more.239 technologiesPayment ProcessorsExplore payment gateways and processors used by websites. Stripe, PayPal, Klarna, and more.176 technologiesSecurity & Bot ProtectionExplore web security tools and bot protection services. Cloudflare Turnstile, reCAPTCHA, Sucuri, and more.135 technologiesEmail Marketing & AutomationFind email marketing platforms and automation tools. Mailchimp, Klaviyo, SendGrid, ConvertKit, and more.114 technologiesReviews & Social ProofBrowse review platforms and social proof tools. Trustpilot, Yotpo, Judge.me, and more.113 technologiesUI & CSS FrameworksDiscover the CSS frameworks and UI component libraries that shape modern web design. Tailwind CSS, Bootstrap, Material UI, and more.95 technologiesWeb Fonts & Icon LibrariesSee which font services and icon libraries websites use. Google Fonts, Adobe Fonts, Font Awesome, and more.23 technologiesOther TechnologiesMiscellaneous web technologies and tools detected across websites.2571 technologies© 2026 StackOptic. All rights reserved.AboutContactDisclaimerPrivacy
