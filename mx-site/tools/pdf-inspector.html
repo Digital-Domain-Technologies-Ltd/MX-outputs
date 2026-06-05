@@ -6,7 +6,7 @@
 <!--
 ---
 title: "PDF Inspector"
-description: "Drop any PDF on this page and inspect what it carries. The browser parses the file locally — bytes never leave your machine. The inspector reports tagged structure, MX metadata, AI-governance provenance, and the responsible-person identifier, then explains what the file lacks and how we close the gap."
+description: "Drop any PDF on this page and inspect what it carries. The browser parses the file locally, and bytes never leave your machine. The inspector reports tagged structure, MX metadata, AI-governance provenance, and the responsible-person identifier, then explains what the file lacks and how we close the gap."
 author: "Tom Cranstoun"
 created: 2026-05-31
 modified: 2026-05-31
@@ -28,7 +28,7 @@ mx:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PDF Inspector | CogNovaMX</title>
-  <meta name="description" content="Drop any PDF on this page and inspect what it carries. The browser parses the file locally — bytes never leave your machine. The inspector reports tagged structure, MX metadata, AI-governance provenance, and the responsible-person identifier, then explains what the file lacks and how we close the gap.">
+  <meta name="description" content="Drop any PDF on this page and inspect what it carries. The browser parses the file locally, and bytes never leave your machine. The inspector reports tagged structure, MX metadata, AI-governance provenance, and the responsible-person identifier, then explains what the file lacks and how we close the gap.">
   <meta name="author" content="Tom Cranstoun">
   <link rel="canonical" href="https://mx.allabout.network/tools/pdf-inspector.html">
   <link rel="llms-txt" href="/llms.txt">
@@ -37,7 +37,7 @@ mx:
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="MX PDF Inspector">
-  <meta property="og:description" content="Inspect any PDF for MX Compatible artefacts. Tagged structure, AI-governance provenance, responsible-person identifier — verified in your browser, no upload.">
+  <meta property="og:description" content="Inspect any PDF for MX Compatible artefacts. Tagged structure, AI-governance provenance, responsible-person identifier, verified in your browser, no upload.">
   <meta property="og:url" content="https://mx.allabout.network/tools/pdf-inspector.html">
   <meta property="og:site_name" content="CogNovaMX">
   <meta property="og:locale" content="en_GB">
@@ -197,6 +197,63 @@ mx:
           <p><strong>EAA tagged only.</strong> The file declares a tagged structure tree but no MX namespace. It is accessible (Screen readers can walk it; EAA Directive 2019/882 conformance is plausible) but it is not attested. A regulator or AI agent cannot verify what the file claims or who authored it.</p>
 
           <p><strong>Plain PDF.</strong> The file does not declare a tagged structure tree. A screen reader has to guess. An AI agent has to do vision-based reconstruction. The European Accessibility Act compliance bar set on 28 June 2025 is not met.</p>
+
+          <h2 id="the-mx-compatible-badge">The MX Compatible badge</h2>
+
+          <p>If you arrived here by scanning a QR code, this is the badge you scanned. Every PDF this hub produces carries it: on the cover for reports and books, on the closing page for letters and briefings. The badge is not decoration. It is a short, readable summary of the evidence inside the file, and the QR resolves to this page so any reader can test the claim against their own copy.</p>
+
+          <p><img src="../images/mx-compatible-badge.svg" alt="The MX Compatible badge: the MX mark beside the words Machine Experience Compatible, above the strap line tagged, provenance, attested" width="220" height="92"></p>
+
+          <p>Under the wordmark, the badge prints one conformance line:</p>
+
+          <p><code>ISO 14289-1 Level 2 &middot; pdfuaid:Part=1 &middot; Provenance: EU AI Act &middot; UK ICO &middot; NIST AI RMF &middot; EAA Directive 2019/882</code></p>
+
+          <p>That line is built to be read by four audiences at once. A European reader, a British reader, and an American reader each find an instrument they know. The fourth reader is a machine. An AI agent, a screen reader, or a regulator's validator does not read the visible badge; it reads the tagged structure, the XMP packet, and the provenance record the badge advertises. The badge is for eyes, the artefacts are for machines, and both say the same thing. All four rest on one international standards baseline that belongs to none of them and serves all of them.</p>
+
+          <table>
+            <caption>What each token on the badge asserts</caption>
+            <thead>
+              <tr>
+                <th scope="col">Token</th>
+                <th scope="col">What it asserts</th>
+                <th scope="col">Whose framework</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ISO 14289-1 Level 2</code></td>
+                <td>The document is tagged to the PDF/UA-1 standard at Level 2: a logical structure tree plus a declared conformance claim a validator can check.</td>
+                <td>International</td>
+              </tr>
+              <tr>
+                <td><code>pdfuaid:Part=1</code></td>
+                <td>The XMP metadata packet states PDF/UA Part 1, so the conformance claim is machine-readable, not only visual.</td>
+                <td>International</td>
+              </tr>
+              <tr>
+                <td><code>EU AI Act</code></td>
+                <td>The embedded provenance record is built as evidence for the European Union Artificial Intelligence Act.</td>
+                <td>European</td>
+              </tr>
+              <tr>
+                <td><code>EAA Directive 2019/882</code></td>
+                <td>The tagged structure is built as evidence for the European Accessibility Act, in force from 28 June 2025.</td>
+                <td>European</td>
+              </tr>
+              <tr>
+                <td><code>UK ICO</code></td>
+                <td>The provenance and responsible-person records are built as evidence for the UK Information Commissioner's Office guidance on AI and the accountability principle.</td>
+                <td>British</td>
+              </tr>
+              <tr>
+                <td><code>NIST AI RMF</code></td>
+                <td>The provenance record is built as evidence for the United States NIST AI Risk Management Framework.</td>
+                <td>United States</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>The citations are claims of relevance, not grants of compliance. Producing a tagged, attested PDF does not make a company compliant with any of these instruments; that remains the company's legal duty. What the file does is carry the structured, machine-readable, verifiable evidence each of these frameworks expects a company to be able to produce on request. Drop the file above and the inspector shows you whether the badge on it is backed by the artefacts it names, or whether the badge is making a promise the bytes do not keep.</p>
 
           <h2 id="why-this-is-not-server-side">Why this is not server-side</h2>
 
