@@ -1,0 +1,103 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-deterministic/v2",
+  "schemaVersion": "2.0",
+  "_description": "Deterministic evidence chain. One entry per rule-driven pipeline step (gate verdict, CSV check, regex match, render step, probe result). Designed as evidence for the deterministic-conformance regime (EAA Directive 2019/882); the Level 2 tagged PDF and per-page accessibility verdicts come from these steps. Adjacent on disk only; the artefact frontmatter does NOT embed a pointer to this file (the .ai.json companion is the regulator-facing one).",
+  "auditId": null,
+  "runRevision": 1,
+  "lastWriteAt": "2026-06-06T16:45:59.379Z",
+  "operator": "tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": null,
+  "startedAt": "2026-06-06T16:22:34.875Z",
+  "frameworks": [
+    {
+      "id": "EU-EAA-Directive-2019-882",
+      "title": "Directive (EU) 2019/882 — European Accessibility Act",
+      "version": "2019/882",
+      "jurisdiction": "EU",
+      "appliesTo": "accessibility-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-eaa": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-EAA-Directive-2019-882"
+  ],
+  "companion": "tom-scott-meeting-notes-mx.provenance.ai.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "2b7c5e55ad4615a75de11c2c7ca3f1ee54c0ed43",
+      "shortSha": "2b7c5e5"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.4.0",
+    "host": "toms-MacBook-Pro-396.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "agent": "deterministic",
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-EAA-Directive-2019-882"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-06-06T16:22:35.952Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "tom-scott-meeting-notes-mx.md",
+        "doctype": "document",
+        "sourceSha": "94a5de9f3c55fbd8e129f1b9ea636f13d4464e0f",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/tom-scott-meeting-notes-mx.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T16:41:17.951Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "tom-scott-meeting-notes-mx.md",
+        "doctype": "document",
+        "sourceSha": "9f01548775e0f46ab2cab171ba8f04934c770747",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/tom-scott-meeting-notes-mx.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T16:45:59.379Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "tom-scott-meeting-notes-mx.md",
+        "doctype": "letter",
+        "sourceSha": "9f01548775e0f46ab2cab171ba8f04934c770747",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/tom-scott-meeting-notes-mx.md"
+      },
+      "outcome": "pass"
+    }
+  ]
+}
