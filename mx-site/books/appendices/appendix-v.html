@@ -170,7 +170,7 @@ verification is a client-side operation against existing standards.</p>
 <p>The deep specification, including optional fields, error responses,
 query semantics, completeness mechanisms, and the build-sequence
 dependencies, lives in the v-next REGINALD PRD in canon. This appendix
-is the book’s reference shape: enough to recognise each record, enough
+is the book's reference shape: enough to recognise each record, enough
 to verify a worked example, enough to reason about how the five record
 types fit together.</p>
 <h2 id="the-decision-record">1. The decision record</h2>
@@ -277,19 +277,19 @@ exactly which clause of which version of which policy was in force at
 decision time, by naming the registry that holds the policy cog. The
 <code>inputHash</code> is the only thing about the input that ever
 reaches the registry; the raw input stays with the operator and is
-recoverable only on the operator’s own systems, on demand. The
+recoverable only on the operator's own systems, on demand. The
 <code>outputSummary</code> is the human-readable verdict, deliberately
 short so the body of the record can be reviewed in seconds. The record
 carries no signature: trust apparatus is a separate record (§3 of this
 appendix). The decision record and its attestation are bound only by the
-record’s ID and content digest, never by an embedded signature
+record's ID and content digest, never by an embedded signature
 field.</p>
 <h2 id="the-policy-record">2. The policy record</h2>
 <p>A policy record is a regulatory code published as a cog: stable
 identity, semver versioning, addressable clauses, currency tracking
 through the same mechanism content cogs use. Decision records reference
 policy records by <code>policyRef</code>; that reference resolves to a
-fixed referent whatever happens to the regulator’s website.</p>
+fixed referent whatever happens to the regulator's website.</p>
 <h3 id="required-fields-1">2.1 Required fields</h3>
 <table>
 <colgroup>
@@ -358,19 +358,19 @@ class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <h3 id="reasoning-1">2.3 Reasoning</h3>
 <p>The policy record is the durable referent that every decision
-record’s <code>policyRef</code> resolves against. <code>policyId</code>
+record's <code>policyRef</code> resolves against. <code>policyId</code>
 plus <code>policyVersion</code> form an identity that does not move when
-the URL of the regulator’s publication changes.
+the URL of the regulator's publication changes.
 <code>effectiveFrom</code> lets a verifier reason about which policy
 version was in force at a given decision time, which matters whenever a
 decision is reviewed long after it was made. The <code>clauses</code>
 array makes individual fragments addressable so a decision record can
-reference “paragraph 1” by <code>clause: para-1</code> without
-ambiguity, and a regulator inquiry can ask “which decisions cited this
-specific clause” without parsing prose. <code>issuingBody</code> names
-the regulator’s DID; whether that DID has actually signed the policy
+reference "paragraph 1" by <code>clause: para-1</code> without
+ambiguity, and a regulator inquiry can ask "which decisions cited this
+specific clause" without parsing prose. <code>issuingBody</code> names
+the regulator's DID; whether that DID has actually signed the policy
 record, or whether a registry has third-party-published it on the
-regulator’s behalf, is recorded in the accompanying attestation record
+regulator's behalf, is recorded in the accompanying attestation record
 (§3 of this appendix), not in the policy record itself. The policy
 record is data; the trust wrapper is separate.</p>
 <h2 id="the-attestation-record">3. The attestation record</h2>
@@ -378,7 +378,7 @@ record is data; the trust wrapper is separate.</p>
 and wraps a cog with cryptographic apparatus. The cog itself is
 unchanged; the attestation references the cog by ID and digest. A cog
 can be unattested, attested by one registry, or attested by several
-different registries, without any change to the cog’s schema or
+different registries, without any change to the cog's schema or
 bytes.</p>
 <p>The attestation record is itself a cog: the first field declares
 <code>contentType: attestation</code>. The record format is recursive,
@@ -455,12 +455,12 @@ class="sourceCode json"><code class="sourceCode json" data-role="code-content"><
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <h3 id="reasoning-individual">3.3 Reasoning — individual</h3>
-<p>The record’s own <code>cogId</code> lives in the registry’s namespace
+<p>The record's own <code>cogId</code> lives in the registry's namespace
 because the registry produced it. The <code>attests</code> block is what
-binds the wrapper to its target: the target’s <code>cogId</code> so the
-verifier can fetch the target, and the SHA-256 digest of the target’s
+binds the wrapper to its target: the target's <code>cogId</code> so the
+verifier can fetch the target, and the SHA-256 digest of the target's
 JCS-canonicalised bytes so the verifier can confirm the target has not
-changed since signing. <code>issuedBy</code> is the registry’s DID;
+changed since signing. <code>issuedBy</code> is the registry's DID;
 <code>signature.keyId</code> is the specific verification method inside
 that DID document holding the public key. To verify, the client resolves
 the DID, retrieves the key by <code>keyId</code>, and validates the
@@ -526,10 +526,10 @@ matter at scale; the security does not change, because changing any leaf
 changes its hash, propagates up, and breaks the root signature.</p>
 <p>A verifier validating an individual decision cog fetches three
 records — the decision cog itself, the per-cog attestation, and the
-batch-root attestation — and performs three checks: the cog’s JCS digest
+batch-root attestation — and performs three checks: the cog's JCS digest
 matches <code>attests.digest</code>, the inclusion proof reconstructs
 the root in <code>batch.rootAttestation</code>, and the Ed25519
-signature on the root verifies against the registry’s public key. All
+signature on the root verifies against the registry's public key. All
 three checks are standard-library operations on existing primitives. The
 registry produced these records; the registry does not run any of the
 verification steps.</p>
@@ -711,7 +711,7 @@ expects organisations to be able to produce on inspection.</p>
 <h2 id="how-the-five-record-types-compose">5. How the five record types
 compose</h2>
 <p>The five record types compose without any of them needing to know
-about the others’ internals.</p>
+about the others' internals.</p>
 <p>A decision record references a policy record by
 <code>policyRef</code>. The reference is structural — registry URI, cog
 ID, version, optional clause — and resolves to whatever policy cog the
@@ -734,7 +734,7 @@ of what kind of cog sits on the other end of the reference.</p>
 and policy records. It does not reference policy records by
 <code>policyRef</code>; the provenance record is the audit trail of how
 an artefact came to exist, not the decision-event log. A decision
-record’s <code>inputHash</code> and a provenance record’s per-step
+record's <code>inputHash</code> and a provenance record's per-step
 <code>inputs</code> are the two ways an inquiring regulator walks back
 to source: the decision record names what the model saw at decision
 time; the provenance record names what the pipeline did at every step.
@@ -760,7 +760,7 @@ negotiates inside that mandate, and at the moment it agrees it emits a
 decision record that references the mandate by <code>policyRef</code>
 and carries the agreed position, the inputs it weighed, and the path to
 the number. An attestation record signs each. The four questions a
-finance team or the counterparty’s machine would later ask, who approved
+finance team or the counterparty's machine would later ask, who approved
 the terms, who is accountable, whether the deal broke policy, how the
 position was reached, resolve by reading the decision against the policy
 it points at: the agreed price sits under the ceiling, no forbidden
@@ -774,14 +774,14 @@ identifier semantics, schema versioning, supersession, the submission
 API, the query model, the security threat model, the governance of the
 standards body, the bootstrap problem for first policy cogs, the
 compliance levels mapped onto the new record types. The PRD is normative
-for the standard; this appendix is the book’s reference shape and stays
+for the standard; this appendix is the book's reference shape and stays
 at the level of <em>what each record is and how they fit
 together</em>.</p>
 <p>The chapter that frames the architecture this appendix references is
 Chapter 20 of <em>MX: The Protocols</em> — <em>Cogs and Reginald</em> —
 particularly the <em>Beyond the content cog</em> section. The companion
 <em>MX Attestation Records and Verification</em> draft note in The
-Gathering’s stream is the corresponding open-standard document for the
+Gathering's stream is the corresponding open-standard document for the
 attestation record specifically.</p>
 </div>
 <hr>
