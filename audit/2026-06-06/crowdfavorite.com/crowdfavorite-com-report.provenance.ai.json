@@ -1,0 +1,791 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": "crowdfavorite.com-2026-06-06",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-06T10:08:48.628Z",
+  "operator": "tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://crowdfavorite.com",
+  "startedAt": "2026-06-06T09:51:32.420Z",
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 24-205 — Consumer Protections for Artificial Intelligence",
+      "version": "SB-24-205",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-42005",
+      "title": "ISO/IEC 42005 — AI System Impact Assessment",
+      "version": "2025",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "impact-assessment",
+      "claim": "evidence-vehicle",
+      "x-iso-42005": {}
+    },
+    {
+      "id": "prEN-18286",
+      "title": "prEN 18286 — AI Management System (candidate harmonised European standard, CEN-CENELEC JTC 21)",
+      "version": "draft",
+      "jurisdiction": "EU (CEN-CENELEC, in development)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-pren-18286": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "crowdfavorite-com-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "5d93aed9f0ed17b9a7921f413a016b100c7ab6df",
+      "shortSha": "5d93aed"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.4.0",
+    "host": "toms-MacBook-Pro-396.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-06-06T09:51:32.592Z",
+      "stepId": "report.rewrite-1",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 1/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "689bc1cd5f2589216815c75613fb8f98c9484d07b809d821a150794765e41807",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:32.746Z",
+      "stepId": "report.rewrite-2",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 2/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "624e6079ae13150bd726cb27994370e16afa261b9343be7271083fe503bce0ef"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "2b49f850198a28ff33ad89392c64b65db04b2ab9934a1b68e1ab375eee84ed0e",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "The Human Experience subtable shows that across the audited set, accessibility and SEO deliver strong results for human visitors, while performance indicates an opportunity to improve.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:32.897Z",
+      "stepId": "report.rewrite-3",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 3/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "ec95c0bfed6cddb3c90d7970bb026f873152fb3e4bb96622d5f1dc55d3a9fac6"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "76299f17a127a23b95f6887479e306ae03ee5033d11136014d8037fb0180cfe0",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We find that across the audited set, machines can discover and parse content with a Discovery Readiness of 40/100, yet lack governance context at MX Level 1, while Structured Data Quality sits at 90/100, MX Stack Completeness at 73/100, and Pipeline Survivability at 63/100.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:33.050Z",
+      "stepId": "report.rewrite-4",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 4/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "66a8cfd4242292d0e1c965df24f2fd95860d6b0c4fabd8e5a91fdcf04d2c9097"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "18f6477828a05326edc69633c2ccdb24e15bd24f39b3bb38ff35202e6140f3ad",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, we see a solid foundation in SEO and structured data, scoring 96/100 and 90/100 respectively, while security headers are consistently applied on all but one page. These strengths provide the groundwork for the improvements that follow.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:33.228Z",
+      "stepId": "report.rewrite-5",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 5/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "80c61c00e6e284097080b3104d78d100b703c3281ae82acfbfb74d13b0f939e5",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:33.387Z",
+      "stepId": "report.rewrite-6",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 6/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 6,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "165ee84a3c05f205310ac7e872ccff490142f134028a966fbc338bc19a1615fe"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "2b2719ebf86ec9f118b08cc50f7b4bdca3a8069d7e6021704bdeb81f5f28455f",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found that the sitemap contains multiple URL variants for the same canonical page, such as trailing‑slash and hash‑fragment forms, which causes AI agents and LLM pipelines that do not normalise URLs to treat them as separate pages, wasting token budget and potentially inflating findings by about 1.1×. The fix is to consolidate the sitemap to a single canonical form per resource and add a <link rel=\"canonical\"> tag to each affected URL.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:33.547Z",
+      "stepId": "report.rewrite-7",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 7/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 7,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "42a40e6ab15105426629205086de1800bf17c22fa8c7ca340c0b1f7a7d4af90f"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "08ef0406fb4b60b815d0b859f0d3958b230b3e7a07bc30e373bfcbe3d21bfbfc",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found that every audited page risks truncating its content, which could cause machines to miss important information when parsing the pages. The same pages also show smaller issues with boilerplate burial, inline tag bloat and delayed content start, but truncation risk is the most widespread concern. Addressing this by ensuring the full content loads before any truncation will give machines complete data and offers the largest opportunity for strengthening resilience.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:33.708Z",
+      "stepId": "report.rewrite-8",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 8/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 8,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "84d4741d35e725d58e7fcab18f80a542504a53941b1c78995e82ed6533c45ccc",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:33.862Z",
+      "stepId": "report.rewrite-9",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 9/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 9,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "ac5dd59dd7c628f05231c8d3185e42d9841add2d30a71366e785f833dc93bde3"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "8a08d53227a71b7cb4bf5c3046ec609ee294dd4e1e262a075f79f01b24dc8b1b",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We examined metadata consistency across the audited set to ensure that machines interpret each page uniformly.  \nWe focused on brand‑name alignment, canonical URLs, meta description length, and structured data entity values.  \nAcross the 11 pages we sampled, we found consistent patterns with no brand‑name or canonical‑URL divergence flagged by the consistency check.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:34.017Z",
+      "stepId": "report.rewrite-10",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 10/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 10,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "ae6004fc1dd1020c4cb6834bcd90d3234e4f5e8641c840cd000061db6328f433",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:51:34.178Z",
+      "stepId": "report.rewrite-11",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 11/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 1000
+      },
+      "inputs": {
+        "blockIndex": 11,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-06/crowdfavorite.com/.infilled/crowdfavorite-com.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "815647819fa3f2b5cae946da464f3e1ae6d0000989f45c1395649c142f836b10"
+      },
+      "rubricHash": "99e5d0f2fa44c81163a7e4416976dd92a2207892d6f7eb57abfbc88752c58f73",
+      "promptHash": "f83523aa8bc4268789db96ae09ee3dfe407901e9e4079fb820b366abc36faed0",
+      "inputHashes": [
+        {
+          "hash": "7de2b94f1a550cc17257534b9ca36e7725a7b0e78ab4fd0c755c570af46cbe59",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found that https://crowdfavorite.com excels in search engine optimisation, scoring 96/100 – a clear strength for attracting organic traffic. However, discovery readiness sits at 40/100 and accessibility at 74/100, representing key opportunities to improve machine discoverability and user inclusivity. We invite you to prioritise enhancements in these areas to unlock further growth and engagement.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T09:53:11.524Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "crowdfavorite-com-report.md",
+        "regexCategoriesFlagged": []
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report-fierce-critic.json",
+        "sha256": "49b16667f109dc6bd101b25d2269a8f4c8391a2ef534bc87efa8033102e6b481"
+      },
+      "rubricHash": "0943f86eb654c2f8b43b87665fc2ef9b72889856583e0f2d5d88fe3a9c5947c8",
+      "promptHash": "f60bf5c03501eea9badb17ecdf0758021ad014367eb6201dae8b4f41b359d56a",
+      "inputHashes": [
+        {
+          "hash": "6cddefb4d5e4efa180d490988a2dc0cb586dfdf253632414fa91345325e85298",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"area\": \"hollow-recommendation\",\n      \"description\": \"Recommendation for Duplicate ID Attributes is generic, lacking specific selector or data anchor.\",\n      \"priority\": 1\n    },\n    {\n      \"area\": \"hollow-recommendation\",\n      \"description\": \"Recommendation for Non-text Content Missing Text Alternatives is generic, no specific image selector or count.\",\n      \"priority\": 2\n    },\n    {\n      \"area\": \"hollow-recommendation\",\n      \"description\": \"Recommendation ",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=0 llmFindings=12"
+    },
+    {
+      "timestamp": "2026-06-06T09:54:15.846Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "crowdfavorite-com-report.md"
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report-llm-judgment.json",
+        "sha256": "b7f7d04a1e0c44b236d1ba43209ae0f6ef4ab0e509978c335a4d8592748f961a"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "dc2cad0af420ab1a144ccfafb1cd9ee13ee095b49ce900401ed3c44ce356c82b",
+      "inputHashes": [
+        {
+          "hash": "6cddefb4d5e4efa180d490988a2dc0cb586dfdf253632414fa91345325e85298",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": []\n}",
+      "outcome": "pass",
+      "notes": "findings=0 withdrawn=0 inputTok=20627 outputTok=1678"
+    },
+    {
+      "timestamp": "2026-06-06T09:55:06.505Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 5 mechanical patch(es); Layer 2 applied 1/1 LLM patch(es) for 2 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "crowdfavorite-com-report.md",
+        "findingCount": 2,
+        "layer1Patches": 5,
+        "layer1Resolved": 0
+      },
+      "outputs": {
+        "file": "crowdfavorite-com-report.md",
+        "sha256": "6af23b570ba92192a0b3bd7291b68eafa85b2773090f3c3639f176d4b0c200b6",
+        "patchesApplied": 1,
+        "patchesSkipped": 0,
+        "unfixableCount": 1
+      },
+      "rubricHash": "1a8f608256de9ed88dff97d53348e1669b5d6c7cb15576dedfdcdf0d120bbe4d",
+      "promptHash": "2693513ad2f6abe9616bb139c3a52f77bfd6a76c5d9da211ce0244386095d3d4",
+      "inputHashes": [
+        {
+          "hash": "175689d10388a6e7941307230e86c15c774dd9c9143ee322ad5029c87cbc2c1e",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once configured.\",\n      \"findingIndex\": 1,\n      \"justification\": \"scope: rewrote 'site-wide' to scoped phrase\",\n      \"replace\": \"- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies across the audited pages once configured.\"\n    }\n  ],\n  \"unfixable\": [\n    {\n      \"findingIndex\": 2\n    }\n  ]\n}",
+      "outcome": "pass",
+      "notes": "inputTok=21364 outputTok=957 layer1=5 layer2applied=1 layer2skipped=0 unfixable=1 hygiene=2 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-06T09:55:22.718Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 6,
+        "autoFixApplied": 0,
+        "escalated": 6,
+        "trailRecorded": 0,
+        "trailRemoved": 0,
+        "roundCounter": 0
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T10:08:48.628Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 0,
+        "autoFixApplied": 0,
+        "escalated": 0,
+        "trailRecorded": 0,
+        "trailRemoved": 0,
+        "trailUnchanged": 2,
+        "roundCounter": 0
+      },
+      "outcome": "pass"
+    }
+  ]
+}
