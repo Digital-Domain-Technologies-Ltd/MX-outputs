@@ -1,6 +1,6 @@
 ---
 title: "Dkd — Audit Gate Findings"
-description: "Reviewer-facing findings sidecar for the Dkd audit on 2026-05-28. Records every gate finding (error, warning, info) raised during the run for human sign-off before delivery."
+description: "Findings sidecar for the Dkd audit on 2026-05-28. Records every gate finding (error, warning, info) raised during the run, for human sign-off and for a machine to consider, decide on, and action before delivery."
 author: "Tom Cranstoun"
 created: 2026-05-28
 modified: 2026-05-28
@@ -9,9 +9,12 @@ companion: "dkd-de-de-report.md"
 mx:
   status: active
   contentType: audit-findings
-  audience: [humans]
+  audience: [humans, machines]
   x-mx-findingsCount: 0
-  runbook: "Human reviewer reads this file before signing off on the client-facing report. Findings here are raised by the automated gates; accept, rebut, or correct each one before delivery."
+  inherits: ["dkd-de-de-report-findings.json"]
+  runbook: "Human reviewer reads the prose body before sign-off; accept, rebut, or correct each finding. A machine reads the committed <basename>-findings.json companion (same data, schema audit-findings.v1) or the embedded x-mx-findings block to consider and action findings loop-safely."
+  x-mx-findings: |
+    []
 ---
 ## Audit gate findings for human review
 

@@ -60,54 +60,6 @@ mx:
 
 ---
 
-<!-- ERROR_REPORT_SECTION:START -->
-
-## Audit gate findings for human review
-
-Every automated gate ran to completion; this section surfaces 2 findings (1 warning, 1 info) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
-
-### Warnings (rule violations)
-
-*A gate identified a likely audit-content issue. Read each detail below and confirm the finding is intentional, or correct the report before sign-off. Common shapes: a priority missing from the engagement plan, a scope phrase that mixes per-page and site-wide claims, a recommendation that lacks specifics.*
-
-| # | Gate | Category | Finding | Recorded |
-|---|------|----------|---------|----------|
-| 1 | check-recommendation-consistency.js | missing-priority | Engagement scope "No regulatory compliance findings on the audited surface" does not map to any priority | 2026-05-27T19:41:31Z |
-
-<details open><summary>Warning detail (1)</summary>
-
-**1. check-recommendation-consistency.js - Engagement scope "No regulatory compliance findings on the audited surface" does not map to any priority**
-
-The "What's Next" / Engagement section names "No regulatory compliance findings on the audited surface" as a scope, but it does not match any of the 3 priorities. Either the priority is missing or the engagement scope is invented.
-
-Suggested next steps:
-
-- Verify "No regulatory compliance findings on the audited surface" corresponds to a numbered priority. If not, add a priority that justifies it or remove it.
-
-</details>
-
-### Info (tone / style observations)
-
-*A gate flagged a tone, voice, or style observation. Usually safe to accept; scan the detail to confirm the phrasing reads as intended.*
-
-| # | Gate | Category | Finding | Recorded |
-|---|------|----------|---------|----------|
-| 1 | tone | negation-pivot | Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 1 instance (line 162) | 2026-05-27T19:40:00Z |
-
-<details open><summary>Info detail (1)</summary>
-
-**1. tone - Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B"): 1 instance**
-
-Negation-pivot pattern ("not just X, Y" / "isn’t about A, it’s about B")
-
-line 162: "not just" - The Structured Data Quality score of 94/100 and AI Suitability of 95/100 (served) confirm that the s
-
-</details>
-
----
-
-<!-- ERROR_REPORT_SECTION:END -->
-
 ## About This Report
 
 We audited 12 pages across mx.allabout.network's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.

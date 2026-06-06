@@ -60,42 +60,6 @@ mx:
 
 ---
 
-<!-- ERROR_REPORT_SECTION:START -->
-
-## Audit gate findings for human review
-
-Every automated gate ran to completion; this section surfaces 1 finding (1 warning) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
-
-### Warnings (rule violations)
-
-*A gate identified a likely audit-content issue. Read each detail below and confirm the finding is intentional, or correct the report before sign-off. Common shapes: a priority missing from the engagement plan, a scope phrase that mixes per-page and site-wide claims, a recommendation that lacks specifics.*
-
-| # | Gate | Category | Finding | Recorded |
-|---|------|----------|---------|----------|
-| 1 | sample-vs-total-scope | scope-mis-statements | Scope mis-statements remain after auto-repair: 1 | 2026-05-27T19:49:10Z |
-
-<details open><summary>Warning detail (1)</summary>
-
-**1. sample-vs-total-scope - Scope mis-statements remain after auto-repair: 1**
-
-Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:
-
-check-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-05-27/dotfusion.com/dotfusion-com-report.md
-  1 scope mis-statement(s).
-
-  [sitewide-inside-sampled-section] line 217
-    section: ## Findings  (line 194)
-    phrase:  "every page carries"
-    line:    **Finding:** Across the audited set, every page carries at least one anchor element with a valid href but no discernible
-
-  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write "across the audited set" — write "the sitemap declares" or "this file carries". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write "site-wide" or "across the entire site" — write "across the audited pages" or "on the audited set".
-
-</details>
-
----
-
-<!-- ERROR_REPORT_SECTION:END -->
-
 ## About This Report
 
 We audited 12 pages across dotfusion.com's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.

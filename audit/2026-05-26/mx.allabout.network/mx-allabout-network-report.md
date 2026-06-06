@@ -60,14 +60,6 @@ mx:
 
 ---
 
-<!-- ERROR_REPORT_SECTION:START -->
-
-## Audit gate findings for human review
-
-*No automated gate findings were raised during this audit. Every check ran clean.*
-
-<!-- ERROR_REPORT_SECTION:END -->
-
 ## About This Report
 
 We audited 116 pages across mx.allabout.network's site using the Web Audit Suite. We analyse each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image optimisation, security headers, content consistency, discovery file coverage, and AI pipeline survivability.

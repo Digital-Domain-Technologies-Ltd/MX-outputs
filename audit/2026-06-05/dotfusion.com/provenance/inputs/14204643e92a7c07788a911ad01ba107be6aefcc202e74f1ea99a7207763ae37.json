@@ -1,0 +1,125 @@
+{
+  "auditDate": "2026-06-05",
+  "errors": [
+    {
+      "timestamp": "2026-06-05T21:26:22.324Z",
+      "severity": "warn",
+      "source": "check-report-voice.js",
+      "gateName": "voice-consistency",
+      "category": "mixed-voice-sections",
+      "title": "Mixed-voice section(s) remain after auto-repair: 1",
+      "detail": "Gate voice-consistency (check-report-voice.js) returned non-zero. Output excerpt:\n\ncheck-report-voice: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-05/dotfusion.com/dotfusion-com-report.md\n  1 mixed-voice section(s). Every section should pick one register and hold it. Mixing third-person (\"the site does X\") with first-person (\"we found Y\") inside the same section reads as drafted-by-committee.\n\n  ## Agent Reading Pipeline  (line 629)\n    first-person tokens: 1 (lines 677)\n    third-person markers: 2 (lines 631, 642)\n\n  Fix: rewrite the section in a single voice. Most audit-report sections use first-person consultant voice (\"we\"); scorecards and appendices use third-person.\n",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic",
+      "fix": null,
+      "status": "escalated",
+      "instanceId": "27339782a086",
+      "patternKey": "7ae7317cf2f3",
+      "decision": "manual-fix",
+      "actionTarget": "report",
+      "regenMode": "none",
+      "loopRound": 0,
+      "actionLog": [
+        {
+          "round": 0,
+          "action": "manual-fix",
+          "agent": "action-findings.js",
+          "at": "2026-06-05T21:31:17.837Z",
+          "outcome": "skipped"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-06-05T21:26:22.325Z",
+      "severity": "warn",
+      "source": "check-report-scope.js",
+      "gateName": "sample-vs-total-scope",
+      "category": "scope-mis-statements",
+      "title": "Scope mis-statements remain after auto-repair: 1",
+      "detail": "Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:\n\ncheck-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-05/dotfusion.com/dotfusion-com-report.md\n  1 scope mis-statement(s).\n\n  [sitewide-inside-sampled-section] line 274\n    section: ## Findings  (line 139)\n    phrase:  \"site-wide\"\n    line:    - Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once c\n\n  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write \"across the audited set\" — write \"the sitemap declares\" or \"this file carries\". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write \"site-wide\" or \"across the entire site\" — write \"across the audited pages\" or \"on the audited set\".\n",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic",
+      "fix": null,
+      "status": "escalated",
+      "instanceId": "465590c62c54",
+      "patternKey": "ef93bf825f21",
+      "decision": "manual-fix",
+      "actionTarget": "report",
+      "regenMode": "none",
+      "loopRound": 0,
+      "actionLog": [
+        {
+          "round": 0,
+          "action": "manual-fix",
+          "agent": "action-findings.js",
+          "at": "2026-06-05T21:31:17.837Z",
+          "outcome": "skipped"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-06-05T21:31:01.587Z",
+      "severity": "warn",
+      "source": "check-report-coherence.js",
+      "gateName": "check-report-coherence.js",
+      "category": "inventory-mismatch",
+      "title": "Image inventory: 36 images in formats not named in prose",
+      "detail": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-05/dotfusion.com/dotfusion-com-report.md — image_optimization.csv contains 944 images: 778 PNG, 25 JPEG, 5 WebP, 100 SVG, 36 other / unrecognised. Total of named formats is 908; 36 images are in a format the Appendix C narrative does not mention.",
+      "suggestions": [
+        "Verify the [OTHER_FORMAT_COUNT] placeholder is rendered in Appendix C and the rewrite prose names it explicitly when > 0."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic",
+      "fix": null,
+      "status": "escalated",
+      "instanceId": "c024888a0e81",
+      "patternKey": "41521b0601dd",
+      "decision": "manual-fix",
+      "actionTarget": "report",
+      "regenMode": "none",
+      "loopRound": 0,
+      "actionLog": [
+        {
+          "round": 0,
+          "action": "manual-fix",
+          "agent": "action-findings.js",
+          "at": "2026-06-05T21:31:17.837Z",
+          "outcome": "skipped"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-06-05T21:31:02.361Z",
+      "severity": "info",
+      "source": "audit-prose-lint.js",
+      "gateName": "prose-lint",
+      "category": "prose-quality",
+      "title": "Prose linter flagged 33 style finding(s) for review",
+      "detail": "Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:\n\n{\n  \"report\": \"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-05/dotfusion.com/dotfusion-com-report.md\",\n  \"total\": 33,\n  \"neutralSurface\": true,\n  \"byScanner\": {\n    \"mechanical\": {\n      \"count\": 24\n    },\n    \"ai-vocab\": {\n      \"count\": 1\n    },\n    \"copula\": {\n      \"count\": 2\n    },\n    \"prose-patterns\": {\n      \"count\": 6\n    },\n    \"tics\": {\n      \"count\": 0\n    }\n  },\n  \"byCategory\": {\n    \"dialect-divergence\": 21,\n    \"em-dash\": 3,\n    \"ai-vocab-phrase\": 1,\n    \"possession-copula\": 2,\n    \"same-sentence-repetition\": 6\n  },\n  \"findings\": [\n    {\n      \"scanner\": \"copula\",\n      \"line\": 40,\n      \"column\": 15,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"# therefore carries the AI sidecar pointer (the regulator-facing\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 52,\n      \"column\": 191,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"file (2x)\",\n      \"snippet\": \"The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPayload; the adjacent .ai.json file is a copy of the same JSON for tooling that pref\",\n      \"rephrase_hint\": \"Distinctive content word \\\"file\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 52,\n      \"column\": 276,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"deterministic (2x)\",\n      \"snippet\": \"The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directiv\",\n      \"rephrase_hint\": \"Distinctive content word \\\"deterministic\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"copula\",\n      \"line\": 52,\n      \"column\": 300,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"note: \\\"AI evidence chain (LLM-driven, multi-agent, and human-committed steps). The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPaylo\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 52,\n      \"column\": 326,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"evidence (2x)\",\n      \"snippet\": \"The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directiv\",\n      \"rephrase_hint\": \"Distinctive content word \\\"evidence\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The ",
+      "suggestions": [
+        "Review the flagged AI-tells and mechanical prose issues in the final markdown before sending to the client. Worklist: prose-lint.json in the run results dir."
+      ],
+      "lineRef": null,
+      "provenanceClass": "deterministic",
+      "fix": null,
+      "status": "escalated",
+      "instanceId": "1f36f4de456d",
+      "patternKey": "60f5e9c9e807",
+      "decision": "manual-fix",
+      "actionTarget": "report",
+      "regenMode": "none",
+      "loopRound": 0,
+      "actionLog": [
+        {
+          "round": 0,
+          "action": "manual-fix",
+          "agent": "action-findings.js",
+          "at": "2026-06-05T21:31:17.837Z",
+          "outcome": "skipped"
+        }
+      ]
+    }
+  ]
+}
