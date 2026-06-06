@@ -1,0 +1,55 @@
+{
+  "name": "report_findings",
+  "description": "Submit qualitative provenance-gap findings for the page. findings: [] when none.",
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "findings"
+    ],
+    "properties": {
+      "findings": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "severity",
+            "evidence",
+            "suggestion"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "hollow-listicle",
+                "ai-stamped-boilerplate",
+                "recycled-definition",
+                "location-implausibility",
+                "unverifiable-first-party-claim",
+                "competitor-could-publish"
+              ]
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ]
+            },
+            "evidence": {
+              "type": "string",
+              "description": "Direct quote from the page, 20–200 chars."
+            },
+            "suggestion": {
+              "type": "string",
+              "description": "Concrete change the publisher could make."
+            }
+          }
+        }
+      }
+    }
+  }
+}
