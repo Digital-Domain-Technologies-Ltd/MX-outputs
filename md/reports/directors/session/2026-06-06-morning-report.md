@@ -36,7 +36,9 @@ A client audit must not contradict itself. A full read of a regenerated 20-page 
 
 ### 2. The audit deliverable made self-improving
 
-The findings a human used to read at the foot of each report are now also written as machine-readable files beside it, against a published schema. A new actioning path lets the pipeline read its own findings and, where it is safe and creates no loop, act on them. Findings also feed an anonymised cross-domain trail - keyed by platform, never by client domain - so a pattern seen on one site informs the next audit. The soft-404 detection in particular is now a keyed, deterministic statement the template can drop in whenever a site returns success for addresses that do not exist, with a plain account of how that confuses a machine.
+The findings a human used to read at the foot of each report are now also written as machine-readable files beside it, against a published schema. A new actioning path lets the pipeline read its own findings and, where it is safe and creates no loop, act on them.
+
+The cross-audit memory was then corrected to learn the right thing. It had been recording the quality of our own report (tone, voice, prose) rather than the wrinkles of the audited site, so it was busy and useless. It now records genuine platform wrinkles - a site that returns success for missing pages, one that blocks agents, one that is slow on first visit, one whose structured data has no usable required fields - keyed by platform, never by client domain. The memory is reconciled per site: a re-audit replaces rather than inflates, and a wrinkle a site has since fixed drops out, so the count of a pattern can go down as the web improves. The one piece that needs the site's identity to undo a previous run is held in a local file that is never committed, so the shared memory stays anonymous while reruns stay clean.
 
 ### 3. The source-frontmatter contract put in lockstep
 
@@ -52,7 +54,7 @@ Closed the last source-frontmatter gap on a published appendix page, synthesised
 
 | Metric | Value |
 |--------|-------|
-| Commits this segment | _pending hub commit_ + 3 (MX-outputs) |
+| Commits this segment | 8 (4 MX-hub, 4 MX-outputs) |
 | Code + content files changed (hub) | 49 |
 | Code + content lines (hub) | +2,644 / -259 |
 | Regenerated audit artefacts (MX-outputs) | 113 files |
@@ -94,7 +96,11 @@ This is risk reduction with a product edge. A self-consistent audit removes the 
 
 | Hash | Description |
 |------|-------------|
-| _pending_ | Audit: nine coherence fixes, five backstop checks, findings-actioning + machine surfaces (hub) |
-| _pending_ | Source-frontmatter single contract: one module for the four scripts, with lockstep test (hub) |
+| b5fd3dec | Audit: make the report self-consistent and self-improving (hub) |
+| 18393e48 | Source-frontmatter: one shared contract for the four scripts (hub) |
+| 7c6ed7b8 | Audit trail: record platform wrinkles, not report-QC; per-domain rerun dedup (hub) |
+| a7b64d62 | Docs: changelog + learnings + REMINDERS for the session (hub) |
+| 9f834436 | Audit trail: purge report-QC rows, reseed platform wrinkles only (MX-outputs) |
+| 13cbcc2d | Add morning directors report 2026-06-06 (MX-outputs) |
 | 5b7ff140 | Audit: extract machine-readable findings; regenerate dotfusion 2026-06-05 (MX-outputs) |
 | 9dccc1af | Backfill MX-SOURCE-FRONTMATTER on appendix-v.html (MX-outputs) |
