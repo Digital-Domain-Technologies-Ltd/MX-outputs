@@ -4,7 +4,7 @@
   "_description": "Deterministic evidence chain. One entry per rule-driven pipeline step (gate verdict, CSV check, regex match, render step, probe result). Designed as evidence for the deterministic-conformance regime (EAA Directive 2019/882); the Level 2 tagged PDF and per-page accessibility verdicts come from these steps. Adjacent on disk only; the artefact frontmatter does NOT embed a pointer to this file (the .ai.json companion is the regulator-facing one).",
   "auditId": "specification.website-2026-06-02",
   "runRevision": 2,
-  "lastWriteAt": "2026-06-02T17:33:47.938Z",
+  "lastWriteAt": "2026-06-06T20:02:03.675Z",
   "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
@@ -2631,6 +2631,18 @@
       },
       "outputs": {
         "pdf": "spec-website-report.pdf"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-06T20:02:03.675Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "spec-website-report.md",
+        "doctype": "report",
+        "sourceSha": "42c3d8bccf2f4332beced72078b7e2360fbfa64e",
+        "canonicalUri": "https://mx.allabout.network/audit/reports/2026-06-02/specification.website"
       },
       "outcome": "pass"
     }

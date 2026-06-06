@@ -166,7 +166,7 @@ The audited set has a strong foundation to build on. Performance, security, and 
 
 ### At a Glance
 
-We found four areas to strengthen, ordered by regulatory exposure first, then by reach across our audited set.
+We found four areas to strengthen, ordered by regulatory exposure first, then by reach across the audited set.
 
 | # | Finding | Bucket | Priority | Effort | Impact |
 |---|---------|--------|----------|--------|--------|

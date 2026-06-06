@@ -97,7 +97,7 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 
 *The three machine metrics measure different things. **Served-HTML Structure** is the semantic markup an agent reads before JavaScript runs; **Agent Readability** is how easily the content can be quoted once reached; **Pipeline Survivability** is whether a page survives an agent's fetch and ingest. A site can score low on one and high on another.*
 
-Across the audited set, we see a strong foundation for human visitors. We deliver clear, well-structured content that reflects our brand identity, and our SEO foundations are solid-an excellent score of 94/100 demonstrates that search engines can easily discover and index the pages. Users benefit from concise navigation, engaging visuals, and consistent layout, all of which reinforce a positive experience for those who browse the site.
+Across the audited set, we see a strong foundation for human visitors. Your site delivers clear, well-structured content that reflects your brand, and your SEO foundations are solid, an excellent score of 94/100 demonstrates that search engines can easily discover and index the pages. Users benefit from concise navigation, engaging visuals, and consistent layout, all of which reinforce a positive experience for those who browse the site.
 
 The headline opportunity is to enhance machine comprehension by first addressing accessibility and then adding governance metadata. Accessibility remains a priority-1 compliance item: 11 distinct WCAG AA issue types generate 279 raw instances, with 156 traced to just 14 recurring template patterns-one fix per pattern can resolve many elements. Once those issues are remedied, the next step is to add full MX fields, governance, and provenance metadata so machines have the structured context they need for accurate comprehension; raising MSC above 60 and DR above 40 will move the site from Level 1 Discoverable to Level 2 Governed.
 
@@ -126,7 +126,7 @@ We include this comparison because it is what continuous monitoring delivers: ea
 
 ### Human Experience
 
-We present the Human Experience subtable, which shows that across our audited set the pages deliver an excellent experience for human visitors, with strong SEO and accessibility scores, while performance could be improved.
+We present the Human Experience subtable, which shows that across the audited set the pages deliver an excellent experience for human visitors, with strong SEO and accessibility scores, while performance could be improved.
 
 | Dimension | Rating | Grade | vs Peers |
 |-----------|--------|-------|----------|
