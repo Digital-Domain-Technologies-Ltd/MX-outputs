@@ -4,7 +4,7 @@ description: "The web-audit pipeline gained two self-improving loops: reports th
 author: "Tom Cranstoun"
 created: 2026-06-06
 modified: 2026-06-06
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -25,6 +25,8 @@ mx:
 ## Summary
 
 The Web Audit Suite stopped being a tool that only measures and became one that improves itself. Two loops landed. First, the report now self-heals: before a deliverable leaves, the engine corrects the deterministic errors it can prove against its own evidence and escalates the rest to a human. Second, the pipeline learns: when the same machine-readability fault recurs across enough client sites on a platform, the engine raises a concrete proposal naming the check to sharpen. The headline consequence for the business is that the audit now gets better with volume, not just bigger, and that compounding is a defensibility argument an investor can follow.
+
+The same evening also closed a gap in the product's own practice. Until now, the images and decks we publish travelled without the machine-readable metadata we tell clients every file should carry. That is now fixed and enforced: every published image and presentation embeds MX metadata in its own carrier, a decorator stamps new ones automatically at commit, and the rule is documented as a contract any CMS importer can follow on ingest. We now practise on our own assets what the audit measures on our clients'.
 
 ---
 
@@ -48,18 +50,24 @@ The audit's automated test suite was found to be running 8 of roughly 500 tests.
 
 The two self-improving loops were written into the investor pitch, the one-pager, the pitch deck, the partner strategy, and the business plan, deepening the existing "data moat" argument from "the memory compounds" to "the audit measurably improves with use." The internal repo map, the engineering README, the operator documentation, and the changelog were updated to match.
 
+### 5. Carrier metadata on every published asset
+
+Every consumer deliverable the Intent CMS publishes now carries MX metadata in the file itself, adjusted to the format: images embed it in their standard metadata block, presentation decks embed it in the document's own properties, and the handful of formats that cannot hold metadata get a small companion file. A decorator does this automatically when a new asset is committed, so the rule holds without anyone remembering it, and a push-time check refuses a bare asset that slips through. The existing back catalogue of seventy-nine published images and decks was swept in one pass. One social-media graphic that arrived with full metadata was preserved as-is and standardised onto the open namespace. The whole capability is written up as a contract any third-party CMS can implement to decorate assets the moment it imports them, which makes it a small, reusable product in its own right.
+
+A deliberate decision worth recording: the asset tooling uses the vendor-neutral namespace the open standard declares, rather than the company's own, so the metadata we publish conforms to the standard rather than advertising the vendor. The PDF pipeline keeps its existing namespace, which the standard documents as a reference-implementation choice pending ratification.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits | 2 |
-| Files changed | 58 |
-| Lines added | +1,713 |
-| Lines removed | −582 |
-| Repositories | 1 (hub) |
+| Commits | 4 substantive, plus 1 submodule-pointer bump (audit 2, assets 2) |
+| Repositories | 2 (hub + mx-outputs) |
+| Audit work | 58 files, +1,713 / −582 lines |
+| Asset work | 14 hub files (+1,557), 79 assets decorated |
 | Audit test suite | 8 → 506 passing |
+| Asset coverage | 79 of 79 in-scope (0 missing) |
 | Pitches updated | 5 |
 
 ---
@@ -85,7 +93,8 @@ No new spend; this is capability unlocked from infrastructure already built. The
 ## Next Steps
 
 - Run the full pipeline on a live e-commerce site so the auto-apply loop and the e-commerce template are exercised end to end against real data.
-- The concurrent manuscripts workstream must regenerate `definitions-index.md` when it commits its appendix/field-dictionary edits; the hub's full test currently flags that one stale index, which is not part of this session's work.
+- Enrich the seventy-nine decorated assets: each carries a placeholder description and reuse policy that a human should replace with real prose before the next publish.
+- The concurrent manuscripts workstream owns its appendix and field-dictionary edits; this session regenerated the shared definitions index so it reflects the new asset cog, which also folds the manuscripts' pending edits into that generated file.
 
 ---
 
@@ -95,3 +104,5 @@ No new spend; this is capability unlocked from infrastructure already built. The
 |------|-------------|
 | 068c0924 | Self-improving audit: auto-apply findings loop + recurrence-driven gate proposals |
 | dbe76518 | LEARNINGS: mocha process.exit-at-load masks the suite; pre-commit hook widens scoped commits |
+| fec3d037 | Decorate published assets with MX carrier metadata (mx-outputs submodule) |
+| 623dc555 | Add MX asset carrier-metadata decorator, checker, hook, and intent cog (hub) |
