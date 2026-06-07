@@ -46,6 +46,10 @@ Each image the importer downloads is decorated with MX metadata derived determin
 
 Corrected a discrepancy where book appendices and chapters had been duplicated into the draft-site layer; their real source is the manuscripts, and the generated HTML now declares that source honestly.
 
+### 5. Documentation hygiene (close of session)
+
+Cleared a handful of small, unrelated fixes that had collected in the working tree, keeping them separate from a parallel audit-suite effort still in progress: the generated definitions index refreshed for the new theme fields, a brand-spelling correction in a contact record, dead documentation links in the business case repointed to the current business plans, and a stale comment in the pre-push hook. Each is a single-purpose commit so the history reads cleanly.
+
 ---
 
 ## By the Numbers
@@ -87,4 +91,12 @@ I reported a 100% fidelity score that turned out to be a blank-page artefact, an
 | Hash | Description |
 |------|-------------|
 | 31f80068 (mx-outputs) | Intent CMS Phase 1-3 artefacts: token themes, preview/import pages, fidelity evidence |
-| _pending_ (hub) | Intent CMS Phase 1-3: component system, generator, universal importer, tests |
+| 30f5bca0 (hub) | Intent CMS Phase 1-3: component system, generator, universal importer, tests |
+| 0ccd2749 (hub) | Intent CMS: lint-normalise imported md whitespace |
+| 1eabf0a0 (hub) | Docs: changelog, learnings (false-fidelity rule), REMINDERS Phase 4 |
+| b782b418 (hub) | Intent CMS: folder metadata (.mx.yaml.md) for new directories (pre-push Gate 7) |
+| fb4256c9 (hub) | Intent CMS: sync routing-registry for new intent:* scripts and tests (Gate 8) |
+| a64eb981 (hub) | Regen definitions-index for intent-cms-importer-prd theme field references |
+| f2a602ea (hub) | Hooks: pre-push header says copied, not symlinked |
+| effd8712 (hub) | CRM: brand fix MXPrintWorks to MX Printworks in Scott bio |
+| f38ffab7 (hub) | Business-case: repoint SOUL links to current business plans |
