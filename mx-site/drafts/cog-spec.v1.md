@@ -315,7 +315,7 @@ A cog that stands on another cog — by being part of it, building on it, requir
 
 The relationship fields a cog uses to make these declarations are:
 
-- `partOf` — string. The parent collection, suite, registry, or initiative the cog belongs to. MUST.
+- `partOf` — string or array. The parent collection(s), suite(s), registry, or initiative(s) the cog belongs to. An array lets a cog belong to more than one set at once (a query for any one set still returns it); a bare string is read as a single-element array. MUST.
 - `buildsOn` — array of cog names. Cogs that provide context and that a reader is expected to have read first. SHOULD.
 - `dependencies` — array of dependency objects (each carrying `name`, `kind`, optional `version`, optional `reason`). The hard-dependency declaration; a runtime treats a missing or unresolvable entry as non-functional. MUST be declared as an array of objects when the cog has any such dependencies, or as `[]` when the cog is standalone. The empty array is the visible standalone marker. Omitting the field is the older form and is being retired.
 - `refersTo` — array of cog names. Informational cross-references. MAY.
@@ -897,4 +897,4 @@ YAML 1.2 Specification, <https://yaml.org/spec/1.2.2/>.
 
 CommonMark Specification (for fenced code block syntax), <https://commonmark.org/>.
 
-<!-- cog-spec-sync: 2026-06-05-a -->
+<!-- cog-spec-sync: 2026-06-07-a -->
