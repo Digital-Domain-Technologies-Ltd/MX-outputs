@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fmx.allabout.network%2F
+# model:  gpt-oss:20b
+# sha256: 0693e7f3e036a8b9b1fa9109173f83012f901766fa13035b13358b9c8659a54d
+# capturedAt: 2026-06-07T07:42:40.240Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4220
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://mx.allabout.network/
+Title: Machine Experience | CogNovaMX
+H1: Machine Experience, make anything you publish readable by machines
+Outbound link hosts (up to 20): (none)
+
+Body text (first 4000 chars):
+Skip to main content ☰ Home Books Learn Services Audit Blog The Gathering About Get the Free Intro MX Machine Experience Machine Experience, make anything you publish readable by machines Videos, podcasts, PDFs, images, web pages: make anything you publish readable by machines. Structure for machines. Explicit for everyone. X-ray your website. Explore Services Learn MX Training Workshops for teams, content strategists, and leadership. Books Three books. Free intro to full specification. Consultancy MX audits, mentoring, and implementation support. MX Printworks Publishing for the AI age. Books built for humans and machines. Content Ops is the discipline of creating, managing, improving, publishing, distributing, archiving, and retiring content across every digital channel. Machine Experience (MX) is the layer that keeps that work usable when an AI agent, or any other system, encounters the file outside the environment that produced it. MX makes digital assets and documents readable by every machine that consumes them, so no machine has to guess. The machine universe is expanding. AI agents, robots, autonomous vehicles, industrial systems, IoT devices, medical instruments, and classes of machine not yet invented all read the same documents. Your website is a fraction of your content estate. Contracts, policy documents, product specifications, and technical reports never reach the web, but AI agents are reading them anyway, inferring what they can and guessing the rest. Being on the web and being machine-readable are not the same thing. MX is the DNA a file carries when it leaves any system. It governs what survives extraction, so the next reader can answer the same questions the originator used to answer. MX builds on what you already have. Schema.org and JSON-LD describe what entities mean, WCAG defines accessibility, Open Graph handles sharing. MX adds governance, provenance, lifecycle state, and agent affordances where those standards leave gaps, never duplicating what they already cover. A provenance layer for machines The web and the wider world of data files lack a provenance layer for machines. MX/REGINALD is built to be it. The industry is preparing to use AI safely inside its walls. Nobody is preparing to be read well outside them. That is the gap, and four parts close it. MXis the contract. The Gatheringsets the standards. REGINALDdoes the signing. CogNovaMXoperates the service. The EU AI Act is the first regulatory forcing function. Other jurisdictions are following. Schema.org shows the gap in miniature. Structured data tells a machine what something is, but not whether to believe it; Google's deprecation of FAQ rich results is what happens when that gap gets gamed. The agentic web is the technical and economic case. Machine adoption is exponential, today's web is hostile to it, and cogs replace expensive inference with cheap execution. That is the engine behind the framework, and it is being built now. Training Book a workshop In-person or remote. Tailored to your team's platform, tech stack, and goals. Learn MX Self-guided. What MX is, why it matters, the core principles, and common mistakes. Free introduction Download MX: The Intro. The business case and the five-step action framework. Books MX: The Intro The starter guide. Free download. MX: The Handbook Patterns you can implement this week. MX: The Protocols The definitive reference. Architecture, standards, and the five-stage journey. Consultancy MX audit What an MX audit delivers, and how to verify it. Routes engineers, clients, and auditors to the read that fits them, plus the tools that let any reader verify the deliverable on their own machine. Implementation Hands-on engagement after the audit. Gap analysis turns into a prioritised plan, then into shipped patterns across the content estate. Mentoring Ongoing advisory for teams implementing MX. Architecture guidance and hands-on support. Examples MX in practice. Real-world implementations across different 

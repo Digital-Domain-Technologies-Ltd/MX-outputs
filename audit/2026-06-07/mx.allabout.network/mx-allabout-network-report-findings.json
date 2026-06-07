@@ -1,0 +1,76 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/audit-findings/v1",
+  "schemaVersion": "1.0",
+  "client": "Mx Allabout",
+  "platform": "drupal",
+  "auditDate": "2026-06-07",
+  "companion": "mx-allabout-network-report.md",
+  "findingsCount": 2,
+  "roundCounter": 0,
+  "findings": [
+    {
+      "instanceId": "59f0fc04cf41",
+      "patternKey": "337934947854",
+      "timestamp": "2026-06-07T07:47:50.200Z",
+      "severity": "info",
+      "source": "check-report-tone.js",
+      "gateName": "tone",
+      "category": "bogus-html-placeholder",
+      "title": "Bogus HTML-tag placeholders (use {name} not <name>): 1 instance",
+      "detail": "Bogus HTML-tag placeholders (use {name} not <name>)\n\nline 641: \"<slug> → {slug}\" - | `/blog/<slug>` | 63 | 0.275 | 0.023 | 4.76 |",
+      "suggestions": [],
+      "lineRef": "line 641",
+      "provenanceClass": "deterministic",
+      "status": "escalated",
+      "decision": "manual-fix",
+      "actionTarget": "report",
+      "regenMode": "none",
+      "loopRound": 0,
+      "fix": null,
+      "actionLog": [
+        {
+          "round": 0,
+          "action": "manual-fix",
+          "agent": "action-findings.js",
+          "at": "2026-06-07T07:53:46.685Z",
+          "outcome": "skipped"
+        }
+      ],
+      "x-mx-priority": "low",
+      "firstSeen": null,
+      "occurrences": null
+    },
+    {
+      "instanceId": "465590c62c54",
+      "patternKey": "ef93bf825f21",
+      "timestamp": "2026-06-07T07:47:50.386Z",
+      "severity": "warn",
+      "source": "check-report-scope.js",
+      "gateName": "sample-vs-total-scope",
+      "category": "scope-mis-statements",
+      "title": "Scope mis-statements remain after auto-repair: 1",
+      "detail": "Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:\n\ncheck-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-07/mx.allabout.network/mx-allabout-network-report.md\n  1 scope mis-statement(s).\n\n  [sitewide-inside-sampled-section] line 242\n    section: ## Findings  (line 157)\n    phrase:  \"site-wide\"\n    line:    - Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once c\n\n  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write \"across the audited set\" — write \"the sitemap declares\" or \"this file carries\". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write \"site-wide\" or \"across the entire site\" — write \"across the audited pages\" or \"on the audited set\".\n",
+      "suggestions": [],
+      "lineRef": null,
+      "provenanceClass": "deterministic",
+      "status": "escalated",
+      "decision": "manual-fix",
+      "actionTarget": "report",
+      "regenMode": "none",
+      "loopRound": 0,
+      "fix": null,
+      "actionLog": [
+        {
+          "round": 0,
+          "action": "manual-fix",
+          "agent": "action-findings.js",
+          "at": "2026-06-07T07:53:46.685Z",
+          "outcome": "skipped"
+        }
+      ],
+      "x-mx-priority": "medium",
+      "firstSeen": null,
+      "occurrences": null
+    }
+  ]
+}

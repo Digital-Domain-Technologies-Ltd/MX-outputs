@@ -1,0 +1,36 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fmx.allabout.network%2Fabout%2Fcontact.html
+# model:  gpt-oss:20b
+# sha256: f9adb13a3735afda2402195a76ebe00957dc9475f0cdbb683d98495aaf686408
+# capturedAt: 2026-06-07T07:43:51.043Z
+# systemPromptBytes: 1632
+# userMessageBytes:  2989
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://mx.allabout.network/about/contact.html
+Title: Contact Us | MX Audits, Training and Consulting | CogNovaMX
+H1: Get in
+        Touch.
+Outbound link hosts (up to 20): (none)
+
+Body text (first 4000 chars):
+Skip to main content ☰ Home Books Learn Services Blog The Gathering About MX Machine Experience Get in Touch. Contact CogNovaMX for consultancy, training, and speaking. Tell us about your goals and challenges. Name * Email * Phone (optional) Company * Website (optional) How can we help? * Select a service MX Printworks: print and publish with attested provenance MX Audit Suite: site and content estate audit PDF accessibility remediation (EAA Directive 2019/882) REGINALD Publisher Listing and attestation Agency or Certified Operator certification Team training or strategic advisory Other / general enquiry Tell us about your needs * Budget indication (optional, everything is negotiable) Prefer not to say Exploring options Have budget allocated Need help building business case Send Enquiry Your submission is sent securely to our team at info@cognovamx.com. We do not pass it to third parties. A copy is emailed back to you for your records. Other Ways to Reach Us Email Directly General enquiries: info@cognovamx.com What Happens Next? We review your enquiry, We read your submission and research your website and document estate to understand your current state. We respond with initial thoughts, A personalised response addressing your specific situation, not a template. We schedule a discovery call, A 30-60 minute conversation to understand goals, constraints, and fit. We propose an engagement, A detailed proposal outlining scope, deliverables, and investment. No commitment required until you are ready. Frequently Asked Questions Can we start with a small engagement first? Yes. An MX Assessment or focused training workshop is a good starting point before committing to larger implementations. Do you work with companies globally? Yes. Time zone differences have never been an obstacle for quality collaboration. What if we are not sure MX is right for us? That is what the discovery call is for. We will be honest about whether MX is appropriate for your situation. Do you sign NDAs? Yes. We are happy to work under confidentiality agreements. Not Ready to Get in Touch? Continue exploring: What is Machine Experience? Why MX Matters Our Services Key MX Principles Implementation Examples CogNovaMX, the trading name of Digital Domain Technologies Ltd, making the web, and everything you publish beyond it, work for everyone and everything that uses it. Related About Contact Making the web, and everything you publish beyond it, work for everyone and everything that uses it. Explore Books Learn MX Services Blog The Gathering Contact info@cognovamx.com Published by Digital Domain Technologies Ltd, trading as CogNovaMX © 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved. Designed with Machine Experience in mind.
