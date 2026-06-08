@@ -6,10 +6,14 @@ version: "1.0"
 author: Tom Cranstoun and Maxine
 
 mx:
-  audience: stakeholders
+  audience: [business, humans, machines]
   confidential: true
   sessionType: full
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/build/2026-02-10-joymaker-build-report.md
+  purpose: "Co-Directors Report - The Joymaker Build"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - The Joymaker Build"]
 ---
 
 

@@ -29,6 +29,9 @@ mx:
     accountableContact: "info@cognovamx.com"
     legalEntity: "Digital Domain Technologies Ltd"
     brand: "CogNovaMX"
+  purpose: "Synthesis of the four Phase 1 staging notes for the May 2026 BMV investor-deck differentiation pass. Drives Phase 2 interview and Phase 3 deck update."
+  stability: stable
+  x-mx-contextProvides: ["BMV deck differentiation pass - Phase 1 briefing"]
 ---
 
 # BMV deck differentiation pass — Phase 1 briefing
