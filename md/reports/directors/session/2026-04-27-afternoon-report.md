@@ -1,7 +1,7 @@
 ---
 title: "Co-Directors Report — SEO Recovery and Entity Identity"
 description: "Fixed a Cloudflare worker redirect that was breaking 103 blog URLs, added sameAs Organisation identity across all domains, and documented the concept in MX Protocols."
-author: "Tom Cranstoun and Maxine"
+author: "Tom Cranstoun"
 created: 2026-04-27
 modified: 2026-04-27
 version: "1.0"

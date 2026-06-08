@@ -1,13 +1,11 @@
 ---
 
 title: "Directors Report: Repository Reset and Consolidation"
-author: Claude Opus 4.5 (Maxine)
+author: Tom Cranstoun
 
 mx:
   date: 2026-02-24
   sessionType: maintenance
-  co-author: Tom Cranstoun
-  status: complete
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/build/2026-02-24-repo-reset-session.md
   purpose: "Directors Report: Repository Reset and Consolidation"
   audience: [humans, machines]

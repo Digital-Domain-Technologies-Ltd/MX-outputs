@@ -3,7 +3,7 @@
 title: "Co-Directors Report — The Joymaker Build"
 created: "2026-02-10"
 version: "1.0"
-author: Tom Cranstoun and Maxine
+author: Tom Cranstoun
 
 mx:
   audience: [business, humans, machines]
