@@ -40,10 +40,10 @@ Let us do this properly first, because the bottle is, in fairness, perfectly cle
 | **innocent** | The brand name. It is a British company. The name is already in English. Nobody translated anything here and that is the first joke. |
 | **Schmeckt gut, tut gut** | "Tastes good, does good." Their slogan. Genuinely sweet. |
 | **Direktsaft** | "Direct juice", i.e. not-from-concentrate. Pressed, bottled, never reconstituted from a syrup. |
-| **Orange mit Fruchtfleisch** | "Orange with pulp." On innocent's own UK bottles this is cheerfully written as **"with bits."** |
+| **Orange mit Fruchtfleisch** | "Orange juice with bits." That is not a paraphrase — "with bits" is the exact phrase a British supermarket prints on the shelf. The German literally reads "fruit flesh"; the honest English is **"with bits."** |
 | **Niemals Zucker zugesetzt** | "Never any sugar added." |
 
-So the correct, boring, human translation of the headline is **"Orange, with bits."** A British brand wrote *bits*, a German label said *Fruchtfleisch* (literally "fruit flesh", which is its own small delight), and the machine, staring at this, reached deep into its probabilities and produced **pump.**
+So the correct, boring, human translation of the headline is the one every British supermarket already uses: **orange juice with bits.** That's the punchline of the whole exercise — the right English answer is a phrase so ordinary it's printed on a thousand shelves. A British brand wrote *bits*, a German label said *Fruchtfleisch* (literally "fruit flesh", which is its own small delight), and the machine, asked to get from one to the other, reached deep into its probabilities and produced **pump.**
 
 ## Where the pump came from
 
