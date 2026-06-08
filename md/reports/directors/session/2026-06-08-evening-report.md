@@ -76,9 +76,9 @@ The backfill tool is a small but real piece of reusable intellectual property: a
 
 ## Next Steps
 
-- The `mx:backfill` npm aliases ride with the in-flight intent-cms `package.json` batch; the tool already runs directly via node.
-- Five audit-tree files carry a separate invalid-value/type debt class that is not backfillable; handle in a dedicated pass if wanted.
-- Extend the backfill tool to other trees as those files are next touched.
+- Apply the backfill tool to the remaining in-scope trees (the Reginald source tree and others) that still carry pre-existing required-metadata gaps; this session scoped to the published outputs, the canon, and the CRM.
+- The five files that initially resisted the backfill are resolved: two were field-fixed, and three (the cog-specification demonstration cogs) are now validator-exempt by design.
+- The `mx:backfill` npm aliases are in `package.json`; the tool also runs directly via node.
 
 ---
 
