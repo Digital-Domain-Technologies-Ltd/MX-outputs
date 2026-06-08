@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-23-evening-report.md
+  purpose: "Completed NEOM Wellbeing ecommerce audit Pass 2 rewrite; built pa11y recurring pattern detector with adjusted accessibility scoring; updated audit toolchain and skills."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - NEOM Wellbeing Report + Pa11y Recurring Pattern Detector"]
 ---
 
 # Co-Directors Report — NEOM Wellbeing Report + Pa11y Recurring Pattern Detector

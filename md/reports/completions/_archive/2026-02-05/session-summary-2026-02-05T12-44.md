@@ -11,6 +11,11 @@ mx:
   contentType: "information-inquiry"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-05/session-summary-2026-02-05T12-44.md
+  purpose: "Chapter 00 Location Inquiry - File Location and Reference Mapping"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Chapter 00 Location Inquiry - File Location and Reference Mapping"]
 ---
 
 

@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-01-afternoon-directors-report.md
+  purpose: "Co-Directors Report - Mount Table Architecture: Git Repos as Trackable Filesystems"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Mount Table Architecture: Git Repos as Trackable Filesystems"]
 ---
 
 # Mount Table Architecture: Git Repos as Trackable Filesystems

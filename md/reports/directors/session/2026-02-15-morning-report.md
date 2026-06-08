@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-15-morning-report.md
+  purpose: "Co-Directors Report - The System Learns to Explain Itself (and a Name Problem Surfaces)"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - The System Learns to Explain Itself (and a Name Problem Surfaces)"]
 ---
 
 # Morning Session — 15 February 2026

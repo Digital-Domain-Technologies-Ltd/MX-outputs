@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-14-morning-report.md
+  purpose: "Expanded the-provenance-gap blog post with three new sections; closed a writing-style hole that let an AI-tell sentence pattern ship to production."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Provenance-gap blog expansion + negation-pivot rule hardening"]
 ---
 
 # Co-Directors Report - Provenance-gap blog expansion + negation-pivot rule hardening

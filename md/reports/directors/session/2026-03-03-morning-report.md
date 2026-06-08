@@ -10,6 +10,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-03-morning-report.md
+  purpose: "Morning session report. Three work streams: carrier format compliance (98%), complete messaging framework (9 deliverables for 7 audiences), and SSOT consolidation (single field dictionary, 4 redundant files removed)."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - From Infrastructure to Arsenal"]
 ---
 
 

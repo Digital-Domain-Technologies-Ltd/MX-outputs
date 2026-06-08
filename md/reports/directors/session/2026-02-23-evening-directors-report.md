@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-23-evening-directors-report.md
+  purpose: "Co-Directors Report - MX-Gathering Standards Body Launch"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - MX-Gathering Standards Body Launch"]
 ---
 
 # Co-Directors Report

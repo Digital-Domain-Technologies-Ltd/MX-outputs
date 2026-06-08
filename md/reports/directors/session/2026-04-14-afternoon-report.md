@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon, audit, documentation, governance]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-14-afternoon-report.md
+  purpose: "Afternoon session: audit results-vs-cache fix, CLAUDE.md slim, and first full audit of mx.allabout.network with templates restored to warm opportunity framing."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline Hardening, CLAUDE.md Refactor, and First mx.allabout.network Audit"]
 ---
 
 # Co-Directors Report — Audit Pipeline Hardening and CLAUDE.md Refactor

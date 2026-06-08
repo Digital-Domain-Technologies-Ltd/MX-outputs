@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-22-afternoon-report.md
+  purpose: "Aligned the press-release post with CogNovaMX site chrome, banned em-dashes in authored HTML and swept 301 occurrences across every blog post, and closed a silent-data-loss bug in the hub-rebase-with-submodule-pointer-conflict workflow."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Site-Chrome Alignment, Em-Dash Policy, Submodule-Rebase Hardening"]
 ---
 
 # Co-Directors Report, Site-Chrome Alignment, Em-Dash Policy, Submodule-Rebase Hardening

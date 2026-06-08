@@ -10,6 +10,11 @@ mx:
   contentType: "feature-implementation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-11/session-summary-2026-02-11T12-50.md
+  purpose: "Maxine vision session - SOUL.md, API layer, boot system, co-directors report"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Maxine vision session - SOUL.md, API layer, boot system, co-directors report"]
 ---
 
 # Session Summary: Maxine Vision Session

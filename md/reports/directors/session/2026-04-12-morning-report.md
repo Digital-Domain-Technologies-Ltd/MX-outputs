@@ -9,6 +9,11 @@ confidential: true
 
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-12-morning-report.md
+  purpose: "Co-Directors Report - Frontmatter Validator: One Rules Engine for All Markdown"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Frontmatter Validator: One Rules Engine for All Markdown"]
 ---
 
 # Co-Directors Report — Frontmatter Validator: One Rules Engine for All Markdown

@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-06-evening-report.md
+  purpose: "Implemented the BMV HTML pitch deck, published the web-is-just-the-start blog post, and surfaced Reginald as an equal pillar to MX across the free-book and Protocols manuscripts."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Pitch Deck and Reginald Manuscript Uplift"]
 ---
 
 # Co-Directors Report — Pitch Deck and Reginald Manuscript Uplift

@@ -10,6 +10,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-04-evening-report.md
+  purpose: "Evening session report. Full tg.community audit using the MX audit cog, Pa11y dependency fix, viewport meta SSOT update, and 372-file standards sweep across all repositories."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline End-to-End and Standards Sweep"]
 ---
 
 

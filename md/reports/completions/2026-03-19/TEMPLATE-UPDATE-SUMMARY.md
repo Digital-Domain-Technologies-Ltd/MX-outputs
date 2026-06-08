@@ -10,6 +10,11 @@ mx:
   contentType: release-notes
   x-mx-category: audit-suite
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-03-19/TEMPLATE-UPDATE-SUMMARY.md
+  purpose: "What changed, why, and how to use the improved templates"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Audit Template Update Summary - v2.0 Release"]
 ---
 
 # Audit Template Update Summary — v2.0 Release

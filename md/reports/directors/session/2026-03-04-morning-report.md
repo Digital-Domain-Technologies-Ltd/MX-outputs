@@ -10,6 +10,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-04-morning-report.md
+  purpose: "Morning session report. Six writing tasks completed: Chapter 00 rewrite with non-commerce case studies, two cog reviews, cog spec two-zone fix, blog deployment, Appendix D verification. REMINDERS refreshed."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Broadening the Case"]
 ---
 
 

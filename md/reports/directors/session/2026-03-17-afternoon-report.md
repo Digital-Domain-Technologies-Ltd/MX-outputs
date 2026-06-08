@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-17-afternoon-report.md
+  purpose: "Co-Directors Report - REGINALD v3.1: Subdomain Architecture Live"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - REGINALD v3.1: Subdomain Architecture Live"]
 ---
 
 

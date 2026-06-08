@@ -10,6 +10,11 @@ mx:
   contentType: "feature-implementation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-10/session-summary-2026-02-10T17-49.md
+  purpose: "MX Joymaker - Splash Screen, Co-Directors Report, Submodule Cleanup"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["MX Joymaker - Splash Screen, Co-Directors Report, Submodule Cleanup"]
 ---
 
 # Session Summary: MX Joymaker Splash Screen, Co-Directors Report, Submodule Cleanup

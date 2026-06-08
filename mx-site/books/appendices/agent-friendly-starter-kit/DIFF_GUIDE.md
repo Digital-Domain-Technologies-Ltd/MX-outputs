@@ -9,6 +9,11 @@ version: "1.0"
 mx:
   status: draft
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/books/appendices/agent-friendly-starter-kit/DIFF_GUIDE.md
+  purpose: "Detailed walkthrough of changes transforming a blocking website into a machine-readable resource"
+  audience: [humans, machines]
+  stability: draft
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Diff Guide: From Blocking to Agent-Friendly"]
 ---
 
 # Diff Guide: From Blocking to Agent-Friendly

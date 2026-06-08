@@ -8,6 +8,11 @@ version: "1.0"
 mx:
   status: active
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-03-19/AUDIT-COMPLETION-CHECKLIST.md
+  purpose: "Verification that all deliverables are in place"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Audit Project Completion Checklist"]
 ---
 
 # Audit Project Completion Checklist

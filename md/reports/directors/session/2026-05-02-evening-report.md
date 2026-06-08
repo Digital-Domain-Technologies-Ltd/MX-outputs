@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-02-evening-report.md
+  purpose: "Full baremetal.vc audit run (14 reports, all gates), systematic global-accessibility framing sweep, and a new house-style convention requiring every .cog.md / skill / command file to open with a fixed orientation header pointing at /cog.html"
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Global Accessibility Framing + Baremetal Audit Suite + COG Opening Convention"]
 ---
 
 # Co-Directors Report — Global Accessibility Framing + Baremetal Audit Suite

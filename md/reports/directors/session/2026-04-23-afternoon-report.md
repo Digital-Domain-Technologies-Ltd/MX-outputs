@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-23-afternoon-report.md
+  purpose: "Shipped Markdown for Agents; 5 audit workflow fixes; blog posts published; Gate 0 pre-commit hook hardened; Adobe LLM Optimizer critique and mx-audit detection added."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Markdown for Agents + Audit Workflow Overhaul + Detached HEAD Prevention"]
 ---
 
 # Co-Directors Report — Markdown for Agents + Audit Workflow Overhaul + Detached HEAD Prevention

@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-18-evening-report.md
+  purpose: "Sponsorship-pitch.md retired and replaced by canonical-sponsor.md as the single send-ready sponsor doc. Festival pitch finalised for MozFest submission. Fees stripped from business-plan and canonical sponsor briefing; both now describe structure, not numbers, and travel safely outside the repo. Letter-doctype page-break gate added to the PDF pipeline."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Sponsor briefing canon-ised; festival pitch finalised"]
 ---
 
 # Co-Directors Report — Sponsor briefing canon-ised; festival pitch finalised

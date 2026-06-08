@@ -11,6 +11,11 @@ mx:
   contentType: "feature-implementation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-04/session-summary-2026-02-04T20-14.md
+  purpose: "MX Repository Navigator - Implementation and Documentation"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["MX Repository Navigator - Implementation and Documentation"]
 ---
 
 

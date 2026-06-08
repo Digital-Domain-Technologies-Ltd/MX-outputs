@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-05-evening-report.md
+  purpose: "Evening session: a deterministic link-path tool, the principle list converted from numbers to names, and a sync hook that keeps it that way."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Principles De-numbered; Context-Preserving References Tooling"]
 ---
 
 # Co-Directors Report - Principles De-numbered; Context-Preserving References Tooling

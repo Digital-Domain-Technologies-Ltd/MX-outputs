@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-13-evening-report.md
+  purpose: "Evening segment publishes the CMS Summit 26 write-up, adds the geo-and-mx positioning paper, lands a slowest-page audit probe, revises the regulatory paragraph to remove any implied compliance grant, and names the provenance gap as the structural reason ranking systems keep withdrawing rich-result rewards."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Evening 13 May 2026: Frankfurt write-up lands, regulatory framing tightened, provenance gap named"]
 ---
 
 # Co-Directors Report — Evening 13 May 2026: Frankfurt write-up lands, regulatory framing tightened

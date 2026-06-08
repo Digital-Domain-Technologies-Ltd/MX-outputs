@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-27-evening-report.md
+  purpose: "Eight-thread session: cogHeader field + MXS-06 + cog-spec v1.2; Dogu contractor agreement; entire mx-site blog consolidated; canon decontaminated (107 vendor entries moved out of Gathering core, runbook extended, compliance driven to zero across 2,219 files); new MX Agent Directory Discovery draft note; mx-shared-gathering canonical template added; mx-reginald signing engine + conformance suite landed; mx-upgraded-reginald submodule removed."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - cogHeader; Dogu Contract; Blog Site-Chrome; Canon Decontamination; Agent-Directory Discovery Note; Reginald Signing Engine"]
 ---
 
 # Co-Directors Report — cogHeader Field, MXS-06, cog-spec v1.2; Dogu Contract

@@ -10,6 +10,11 @@ mx:
   contentType: "feature-implementation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-11/session-summary-2026-02-11T09-00.md
+  purpose: "SOP Reframing, Registry Snapshot, and Universal Cog Executor"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["SOP Reframing, Registry Snapshot, and Universal Cog Executor"]
 ---
 
 # Session Summary: SOP Reframing, Registry Snapshot, and Universal Cog Executor

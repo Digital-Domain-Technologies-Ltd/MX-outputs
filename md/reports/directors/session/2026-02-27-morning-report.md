@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-27-morning-report.md
+  purpose: "Co-Directors Report - Datalake Restructured Into 5 Purpose-Based Categories"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Datalake Restructured Into 5 Purpose-Based Categories"]
 ---
 
 # Datalake Restructured Into 5 Purpose-Based Categories

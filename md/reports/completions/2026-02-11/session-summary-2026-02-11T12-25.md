@@ -10,6 +10,11 @@ mx:
   contentType: "refactoring"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-11/session-summary-2026-02-11T12-25.md
+  purpose: "ai→sop field rename across entire MX ecosystem"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["ai→sop field rename across entire MX ecosystem"]
 ---
 
 # Session Summary: ai→sop Field Rename Across Entire MX Ecosystem

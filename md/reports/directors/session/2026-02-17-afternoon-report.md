@@ -1,3 +1,22 @@
+---
+title: "Session Report - 2026-02-17 (Afternoon)"
+description: "Session Report - 2026-02-17 (Afternoon)"
+author: Tom Cranstoun
+created: 2026-06-08
+modified: 2026-06-08
+version: "1.0"
+
+mx:
+  status: active
+  contentType: info-doc
+  purpose: "Session Report - 2026-02-17 (Afternoon)"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Session Report - 2026-02-17 (Afternoon)"]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-17-afternoon-report.md
+---
+
 # Session Report — 2026-02-17 (Afternoon)
 
 ## Summary

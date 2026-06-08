@@ -16,6 +16,10 @@ mx:
   generatedBy: "claude-opus-4-6"
   reviewedBy: "Tom Cranstoun"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-15-morning-report.md
+  purpose: "Morning session: field-SSOT consolidation, drift-prevention infrastructure, per-file compliance scanner, two cleanup passes, and a hard gate that catches field drift before any push."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - MX Field Discipline End to End"]
 ---
 
 # Co-Directors Report — MX Field Discipline End to End

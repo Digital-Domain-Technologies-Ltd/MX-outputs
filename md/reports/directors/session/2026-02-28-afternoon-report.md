@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-28-afternoon-report.md
+  purpose: "Co-Directors Report - Company Rename: Cog-Nova-MX Ltd"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Company Rename: Cog-Nova-MX Ltd"]
 ---
 
 # Company Rename: Cog-Nova-MX Ltd

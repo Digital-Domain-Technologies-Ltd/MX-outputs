@@ -9,6 +9,11 @@ confidential: true
 
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-13-evening-report.md
+  purpose: "Co-Directors Report - Audit Pipeline Hardened, Registry at 179 Cogs"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline Hardened, Registry at 179 Cogs"]
 ---
 
 # Co-Directors Report — Audit Pipeline Hardened, Registry at 179 Cogs

@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-01-morning-report.md
+  purpose: "Published the 'What I Do' positioning blog, built spell-check infrastructure, and significantly upgraded the mx-audit pipeline: fierce-critic now runs an LLM second pass, output_config replaced with tool use, Pass 2 rewrite script externalised, and all documentation propagated."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Spell-check infrastructure, blog publish, and audit pipeline upgrade"]
 ---
 
 # Co-Directors Report — Spell-check infrastructure, blog publish, and audit pipeline upgrade

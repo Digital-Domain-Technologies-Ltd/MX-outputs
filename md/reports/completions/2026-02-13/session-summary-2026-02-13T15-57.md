@@ -10,6 +10,11 @@ mx:
   contentType: "refactoring"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-13/session-summary-2026-02-13T15-57.md
+  purpose: "Book Consolidation - All Publications Moved to Datalake"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Book Consolidation - All Publications Moved to Datalake"]
 ---
 
 # Session Summary: Book Consolidation — All Publications Moved to Datalake

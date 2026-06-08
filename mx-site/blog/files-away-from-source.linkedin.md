@@ -1,3 +1,22 @@
+---
+title: "Files Away From Their Source: What Universal Cart Reveals About MX"
+description: "Files Away From Their Source: What Universal Cart Reveals About MX"
+author: Tom Cranstoun
+created: 2026-06-08
+modified: 2026-06-08
+version: "1.0"
+
+mx:
+  status: active
+  contentType: info-doc
+  purpose: "Files Away From Their Source: What Universal Cart Reveals About MX"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Files Away From Their Source: What Universal Cart Reveals About MX"]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/blog/files-away-from-source.linkedin.md
+---
+
 # Files Away From Their Source: What Universal Cart Reveals About MX
 
 > **LinkedIn paste-and-publish notes** (delete this whole block before publishing). Title goes in LinkedIn's title field (do not include the `#` heading line below in the body). LinkedIn's editor auto-converts `--` to em-dashes; if you spot any after pasting, swap them back to a comma, colon, or spaced hyphen. The YAML code block below renders as a monospace box in LinkedIn articles. Cover image suggestion: a screenshot of the Universal Cart announcement or the MX site brand mark; LinkedIn requires its own cover, the blog's social card does not auto-pull. End with the canonical link to the full post on mx.allabout.network so readers can follow on.

@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-29-morning-report.md
+  purpose: "Two strands. (1) Turned the existing PDF inspector harness into a standalone shippable product - a slim self-contained v1.0.0 distribution with a public blog post, a services-page offering for accredited operators, an internal pitch, and a bundled test pack with cross-platform runners. The 60-day evaluation promise now has a delivery mechanism. (2) Landed Pattern 26 in writing-style.cog.md (distinctive-word overuse detection), built the deterministic pre-scanner that mirrors scan-tics.mjs, added the x-mx-domainTerms canon field, and tuned the threshold defaults against a seven-document sweep so the rule fires on real overuse without false-positiving Tom-voice rhythm."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - MX PDF Inspector CLI Productised + Pattern 26 Word-Frequency Rule"]
 ---
 
 # Co-Directors Report — MX PDF Inspector CLI Productised

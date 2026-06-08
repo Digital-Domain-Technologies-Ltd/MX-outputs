@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-28-evening-report.md
+  purpose: "Added a cog-only post-PDF cross-check pass to the audit pipeline, shifted Maxine's working defaults toward proactive helpfulness and monetisation surfacing, brought the public PDF inspector onto a zero-third-party-dependency footing, and shipped the first three external audit deliverables (typo3.org, dkd.de/de, dotfusion.com) along with a canonicalUri fix in the audit report generator."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Audit Phase 6 Final Inference + Operating Principles + PDF Inspector Self-Host + Three-Site Audit Batch"]
 ---
 
 # Co-Directors Report — Audit Phase 6 Final Inference + Operating Principles + PDF Inspector Self-Host

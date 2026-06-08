@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening, audit-trustworthiness, mxs, the-gathering]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-16-evening-report.md
+  purpose: "Evening session shipping a seven-step audit-tooling plan end-to-end plus a late-evening arc that published the four MXS proposed drafts at a public URL the Gathering community can read."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Audit Trustworthiness Pass + MXS Public Mirror"]
 ---
 
 # Co-Directors Report — Audit Trustworthiness Pass

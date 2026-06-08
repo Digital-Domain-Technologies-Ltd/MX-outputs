@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-10-evening-report.md
+  purpose: "Evening segment. One PDF orchestrator replaces four overlapping engines, the mx-graph validator stops emitting 425 spurious errors, cog actionType lands as a required field, a PreToolUse hook closes the staged-file failure mode, and a new blog draft enters the queue."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Tooling Discipline Across the Pipeline"]
 ---
 
 # Co-Directors Report — Tooling Discipline Across the Pipeline

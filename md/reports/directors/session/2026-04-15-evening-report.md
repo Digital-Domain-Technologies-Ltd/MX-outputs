@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening, audit-tool, mx-audit]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-15-evening-report.md
+  purpose: "Evening segment - two-column MX one-pager, field-audit scripts, three collector fixes, three gate skills, and an end-to-end NEOM regeneration that proved the whole pipeline clean."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Evening: MX one-pager, field scripts, audit-tool hardening + NEOM regen"]
 ---
 
 # Co-Directors Report — Evening: MX one-pager, field scripts, audit-tool hardening + NEOM regen

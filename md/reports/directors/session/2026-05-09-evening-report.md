@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-09-evening-report.md
+  purpose: "Maxine's operating model upgraded so single-facet prompts now generate proactive cross-facet notes; saved memory audited and reconciled; CMS Vocabulary War blog post landed; writing-style banned-words list extended; late-evening post-publication tightening pass on the new blog post and a Featured-vs-Blog-listing dedup rule for the blog index."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Cross-Facet Synthesis as Default Behaviour"]
 ---
 
 # Co-Directors Report — Cross-Facet Synthesis as Default Behaviour

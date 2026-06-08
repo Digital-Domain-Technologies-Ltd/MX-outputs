@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-27-afternoon-report.md
+  purpose: "Fixed a Cloudflare worker redirect that was breaking 103 blog URLs, added sameAs Organisation identity across all domains, and documented the concept in MX Protocols."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - SEO Recovery and Entity Identity"]
 ---
 
 # Co-Directors Report — SEO Recovery and Entity Identity

@@ -10,6 +10,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-05-evening-report.md
+  purpose: "Evening session report. PDF pipeline completed, tg.community audited with transformative improvements, three audit bugs fixed, and MX Journey Stage assessment added to the audit tool - mapping findings to the 5-stage agent journey."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - PDF Pipeline, tg.community Re-Audit, Tooling Fixes, and MX Journey Stage Assessment"]
 ---
 
 

@@ -10,6 +10,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-03-afternoon-report.md
+  purpose: "Afternoon session report. Five work streams: allaboutv2 carrier compliance (4%→99%), npm vulnerability elimination (0 vulnerabilities), field dictionary reference sweep (40+ files), redirect file removal, and REGINALD language redirect (Cloudflare Worker v1.2.0)."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Cleaning the Last Fingerprints"]
 ---
 
 

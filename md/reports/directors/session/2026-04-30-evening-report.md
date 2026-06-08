@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-30-evening-report.md
+  purpose: "Single new blog post positioning MX as the structural specification underneath GEO, ahead of the WP Engine DE{CODE} 2026 EMEA event where GEO is featured."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - GEO positioning blog ahead of WP Engine DE{CODE}"]
 ---
 
 # Co-Directors Report — GEO positioning blog ahead of WP Engine DE{CODE}

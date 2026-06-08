@@ -11,6 +11,11 @@ mx:
   contentType: "refactoring"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-06/session-summary-2026-02-06T13-12.md
+  purpose: "Rename 'The Bible' to 'The Protocols' across entire repository"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Rename 'The Bible' to 'The Protocols' across entire repository"]
 ---
 
 

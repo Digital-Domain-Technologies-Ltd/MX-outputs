@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-26-evening-report.md
+  purpose: "CogNovaMX adopts APA 7th Edition as the structural baseline for every published / client-facing surface."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - APA 7 as the Standards Baseline for Published Prose"]
 ---
 
 # Co-Directors Report — APA 7 as the Standards Baseline for Published Prose

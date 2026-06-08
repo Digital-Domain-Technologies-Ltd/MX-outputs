@@ -8,6 +8,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/_archive/2026-02-11-session-report-4.md
+  purpose: "Co-Directors Report - Maxine Vision and Product Infrastructure Complete"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Maxine Vision and Product Infrastructure Complete"]
 ---
 
 

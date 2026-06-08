@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-23-afternoon-directors-report.md
+  purpose: "Co-Directors Report - Reorganisation and Improvements at Scale"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Reorganisation and Improvements at Scale"]
 ---
 
 # Co-Directors Report

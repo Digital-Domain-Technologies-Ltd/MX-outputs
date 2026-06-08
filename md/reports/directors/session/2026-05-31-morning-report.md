@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-31-morning-report.md
+  purpose: "Morning session covering three work threads: (1) the four ABOUT-* canonical biographies got declared PDF destinations and the PDF orchestrator learned to self-heal missing mx.generate blocks; (2) a repo-wide stale-information scan ran end-to-end, the audit-template drift gate was fixed, a shared drift-check library was extracted, and a manuscript drift checker landed in the test gate; (3) the cog spec sources were brought into lockstep behind a new pre-push Gate 13, the minimal scripted/hybrid action cog mx-serve shipped alongside a zero-dep local preview server, and an MX Readiness Inspector browser extension landed that grades any page on MX-readiness using whichever on-device model the browser already has (Chrome Gemini Nano / Edge Phi-Silica / local Ollama)."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - ABOUT quartet; stale-info + drift gates; cog-spec lockstep; mx-serve cog; MX Readiness browser extension"]
 ---
 
 # Co-Directors Report — ABOUT quartet shipped; PDF script self-heals; stale-info scan run; drift-checker infrastructure landed

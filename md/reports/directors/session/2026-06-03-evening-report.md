@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-03-evening-report.md
+  purpose: "Blog index cards for 14 new posts; mx.servedAt added to field dictionary; protocols chapter 24 HTML; compliance at zero violations"
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report -- Blog Index Cards, mx.servedAt Field, Protocols Ch24, Compliance Clean"]
 ---
 
 # Co-Directors Report -- Extension Overhaul: Ollama Fallback, Spinner UX, Probe Cache

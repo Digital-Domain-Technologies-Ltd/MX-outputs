@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-25-afternoon-report.md
+  purpose: "Five-page MX audit produced for www.paribu.com; one tone-gate false positive fixed in the pipeline. Afterwards, two REGINALD commercial decisions ratified (settlement protocol = Mastercard Agent Pay; pilot scope = REGINALD-internal smoke test) and propagated to commercial docs, design note v0.5, and manuscripts."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - paribu.com audit shipped; HTTP 402 decisions ratified"]
 ---
 
 # Co-Directors Report — paribu.com audit shipped; HTTP 402 decisions ratified

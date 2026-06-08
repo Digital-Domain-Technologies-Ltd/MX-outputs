@@ -1,3 +1,22 @@
+---
+title: "MX PDF Inspector CLI - Evaluation Licence"
+description: "MX PDF Inspector CLI - Evaluation Licence"
+author: Tom Cranstoun
+created: 2026-06-08
+modified: 2026-06-08
+version: "1.0"
+
+mx:
+  status: active
+  contentType: info-doc
+  purpose: "MX PDF Inspector CLI - Evaluation Licence"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["MX PDF Inspector CLI - Evaluation Licence"]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/distributions/mx-pdf-inspector/v1.0.0/LICENSE-EVALUATION.md
+---
+
 # MX PDF Inspector CLI — Evaluation Licence
 
 **Version 1.0, 2026-05-28**

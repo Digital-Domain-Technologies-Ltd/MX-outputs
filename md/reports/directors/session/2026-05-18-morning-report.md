@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning, cog-magic-header, reginald-vnext, gathering-drafts, byte-zero-scrub]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-18-morning-report.md
+  purpose: "Morning session landing the YAML-comment + HTML-meta + XMP carrier convention across 244 markdown and 302 HTML files, alongside REGINALD v-next PRD edits, two new gathering drafts (Decision + Policy Records), and a new pipeline-metadata-enforcement hook."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Magic-header carrier convention + PRD humanisation + repo-wide byte-zero scrub"]
 ---
 
 # Co-Directors Report — Magic-header carrier convention + PRD humanisation + repo-wide byte-zero scrub

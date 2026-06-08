@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening, reginald, attestation, framing, governance]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-16-evening-report.md
+  purpose: "Evening session landed three parallel tracks. The wider witness->attestation rename across the mx-reginald codebase, schema, conformance fixtures, and persisted data. A full audit-pipeline quality sweep that took the neomwellbeing and allabout.network reports end-to-end through all 14 gates to tagged PDF, adding API-retry resilience across every LLM-calling script. The five-part architectural framing canonicalised across PRD, CLAUDE.md and memory."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - v-next vocabulary alignment + audit-pipeline quality sweep + five-part framing"]
 ---
 
 # Co-Directors Report — v-next vocabulary alignment + five-part framing

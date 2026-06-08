@@ -9,6 +9,11 @@ confidential: true
 
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-22-evening-report.md
+  purpose: "Co-Directors Report - Image Pipeline and Validator Hardening"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Image Pipeline and Validator Hardening"]
 ---
 
 # Co-Directors Report — Image Pipeline and Validator Hardening

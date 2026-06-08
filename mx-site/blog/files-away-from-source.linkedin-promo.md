@@ -1,3 +1,22 @@
+---
+title: "Files Away From Their Source - LinkedIn feed promo"
+description: "Files Away From Their Source - LinkedIn feed promo"
+author: Tom Cranstoun
+created: 2026-06-08
+modified: 2026-06-08
+version: "1.0"
+
+mx:
+  status: active
+  contentType: info-doc
+  purpose: "Files Away From Their Source - LinkedIn feed promo"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Files Away From Their Source - LinkedIn feed promo"]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/blog/files-away-from-source.linkedin-promo.md
+---
+
 # Files Away From Their Source - LinkedIn feed promo
 
 > **LinkedIn paste-and-publish notes** (delete this whole block before publishing). This is the short feed post that promotes the long LinkedIn article. Paste the body below into a new LinkedIn post (not an Article). LinkedIn's editor auto-converts `--` to em-dashes; if you spot any after pasting, swap them back to a comma, colon, or spaced hyphen. Suggested image: attach `mx-outputs/assets/files-away-from-source.png` as the post image. Sized 1200x627 for LinkedIn's feed card. Publish after the long-form article goes live so the link resolves.

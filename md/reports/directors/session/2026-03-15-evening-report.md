@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-15-evening-report.md
+  purpose: "Co-Directors Report - The MX Guy Identity Launched on LinkedIn"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - The MX Guy Identity Launched on LinkedIn"]
 ---
 
 

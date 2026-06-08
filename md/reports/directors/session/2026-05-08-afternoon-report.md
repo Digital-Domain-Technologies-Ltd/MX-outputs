@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon, compliance-claims, accreditation, gathering, vocabularies]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-08-afternoon-report.md
+  purpose: "Afternoon segment: compliance-claims standard, two seeded predicate vocabularies, accreditation programme, deck-builder pipeline (v1.1); mx-audit standalone client script, developer verifier cog, and full pipeline quality gate fixes including SITEMAP discovery, At-a-Glance truncation, and ecommerce contract sync (v1.2)."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Compliance-claims standard, two seeded vocabularies, accreditation programme, ratification gate, and mx-audit pipeline hardening"]
 ---
 
 # Co-Directors Report — Compliance-claims standard, two seeded vocabularies, accreditation programme, ratification gate, and mx-audit pipeline hardening

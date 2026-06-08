@@ -8,6 +8,11 @@ version: "1.0"
 mx:
   status: active
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-03-19/COMPLETE-PROJECT-INDEX.md
+  purpose: "Master index of all deliverables for audit template v2.0 and mx-audit integration"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Complete Project Index: Templates + mx-audit Integration"]
 ---
 
 # Complete Project Index: Templates v2.0 + mx-audit Integration

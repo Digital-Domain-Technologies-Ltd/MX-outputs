@@ -12,6 +12,11 @@ mx:
   reportType: audit
   tags: [carrier-format, compliance, metadata, audit]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/validation/carrier-format-audit.md
+  purpose: "Audit of HTML, JS, CSS, and shell script files against field-dictionary v4.0 Sections 12.1-12.9"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Carrier Format Compliance Audit"]
 ---
 
 # Carrier Format Compliance Audit

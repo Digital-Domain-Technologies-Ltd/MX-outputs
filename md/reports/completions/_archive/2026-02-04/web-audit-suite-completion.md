@@ -9,6 +9,11 @@ version: "1.0"
 mx:
   status: active
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-04/web-audit-suite-completion.md
+  purpose: "Report on the development of the Web Audit Suite for Cog-Nova-MX sales enablement and Arrive First audit"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Completion Report: Web Audit Suite Development"]
 ---
 
 

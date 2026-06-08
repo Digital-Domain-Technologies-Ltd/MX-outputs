@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-04-morning-report.md
+  purpose: "Aligned the Claude Code surface with Anthropic's Skills spec earlier in the segment; this update adds two follow-on changes: a vocabulary registry pointer wired into four operational surfaces, and a CLAUDE.md trim that brings the always-on rules file back to its stated contract."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Skills frontmatter alignment plus terminology-registry wiring and CLAUDE.md trim"]
 ---
 
 # Co-Directors Report — Skills frontmatter alignment with the Claude Skills spec

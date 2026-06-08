@@ -13,6 +13,9 @@ mx:
   tags: [maintenance, drift, alert, audit, governance]
   runbook: "Read the executive summary, then the MUST-FIX section. The fix sequence at the bottom lists the chunks already approved for execution."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/scan-stale-information-2026-05-31.md
+  purpose: "Alert report. Markdown drift in the repo: broken file refs, dated narrative in always-on rulebooks, MEMORY.md bloat, canonicalUri gaps. Excludes allaboutv2, manuscripts, mx-shared-gathering, tg-community."
+  stability: stable
+  x-mx-contextProvides: ["Stale-Information Scan - MX-Hub"]
 ---
 
 # Stale-Information Scan — MX-Hub

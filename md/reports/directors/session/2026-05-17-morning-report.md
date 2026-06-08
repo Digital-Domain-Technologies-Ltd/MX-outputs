@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-17-morning-report.md
+  purpose: "First-person essay 'Why Machines Need Human Creativity' published on mx-site; mx-reginald gains two template-quality gates (voice + drift) plus authoring guides."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - New essay shipped; audit-template lint hardened"]
 ---
 
 # Co-Directors Report — New essay shipped; audit-template lint hardened

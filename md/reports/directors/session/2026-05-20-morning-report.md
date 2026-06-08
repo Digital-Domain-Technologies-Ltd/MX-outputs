@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-20-morning-report.md
+  purpose: "Morning session: shipped third-party iframe awareness across the audit stack, simplified gates to single-pass, and fixed two latent bugs the new revalidation step surfaced."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline Hardening + Third-Party Iframe Detection"]
 ---
 
 # Co-Directors Report — Audit Pipeline Hardening + Third-Party Iframe Detection

@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-20-morning-report.md
+  purpose: "Co-Directors Report - Terminology Migration: Provenance, Maintained, Attested"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Terminology Migration: Provenance, Maintained, Attested"]
 ---
 
 

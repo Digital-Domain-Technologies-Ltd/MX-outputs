@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-08-evening-report.md
+  purpose: "Evening session: mx-site brand guide; Schema.org post; cog enforcer v1.8; mx exec dispatcher; dotfusion.com 5-page audit; three-card Featured pattern; writing-style rules for neutral English in public HTML, em-dash anti-evasion, and negation-pivot ban; corpus-wide neutral-English, em-dash, and spaced-hyphen sweeps across 100+ HTML files; elevator pitch added as a new strategic-framing section on the mx-site landing page and saved to memory as the canonical four-part framing; the two long prose blocks on the home page first split into shorter paragraphs and then redesigned with a constrained 65vw prose column, a real section-lead rule, and a framework-card grid for the four-part split (MX, The Gathering, REGINALD, CogNovaMX); audit gates 3 & 4 redesigned from blocking/warn-mode to a self-repair loop; cog enforcer upgraded to v2.0 with URL/arg parsing and a two-layer plan-mode gate that blocks EnterPlanMode and any non-Bash tool when cog enforcement is active."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Brand guide, Schema.org post, cog enforcer fixed, writing-style rules codified and swept across the corpus, elevator pitch landed and home prose redesigned, audit gate pipeline redesigned with self-repair loop, cog enforcer plan-mode gate added"]
 ---
 
 # Co-Directors Report — Brand guide, Schema.org post, cog enforcer fixed, dotfusion.com re-audited, audit gate pipeline redesigned

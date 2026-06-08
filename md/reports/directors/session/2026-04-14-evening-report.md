@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening, knowledge-architecture, web-audit, testing]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-14-evening-report.md
+  purpose: "Evening segment: LEARNINGS.md redistributed into four new gotcha SSOTs, then the web-audit infill pipeline was hardened against silent skeleton-fill gaps with a full safety-net test suite."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Knowledge architecture + audit infill hardening"]
 ---
 
 # Co-Directors Report — Knowledge architecture + audit infill hardening

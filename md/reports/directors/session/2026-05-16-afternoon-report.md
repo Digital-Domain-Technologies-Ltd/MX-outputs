@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon, reginald, sponsorship, governance]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-16-afternoon-report.md
+  purpose: "Lost API token recovered and rotated through D1; bearer tokens demoted from spec to deployment quirk across vnext PRD and product docs; all sponsor and funding material consolidated into a single canonical SSOT with the hybrid tier model ratified."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - REGINALD bearer-token clarification + sponsor SSOT consolidation"]
 ---
 
 # Co-Directors Report — REGINALD bearer-token clarification + sponsor SSOT consolidation

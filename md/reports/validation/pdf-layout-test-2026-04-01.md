@@ -8,6 +8,11 @@ mx:
   contentType: report
   tags: [pdf, testing, validation, layout]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/validation/pdf-layout-test-2026-04-01.md
+  purpose: "Automated layout quality validation for MX book PDFs"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["PDF Layout Test Report"]
 ---
 
 # PDF Layout Test Report

@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-01-morning-report.md
+  purpose: "Co-Directors Report - Clean Slate: History Reset and Infrastructure Hardening"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Clean Slate: History Reset and Infrastructure Hardening"]
 ---
 
 # Clean Slate: History Reset and Infrastructure Hardening

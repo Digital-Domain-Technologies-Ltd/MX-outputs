@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/_archive/2026-02-10-full-session-report.md
+  purpose: "Co-Directors Report - 10 February 2026 (Full Session)"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - 10 February 2026 (Full Session)"]
 ---
 
 

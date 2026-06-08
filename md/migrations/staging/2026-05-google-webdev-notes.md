@@ -10,6 +10,10 @@ mx:
   canonicalUri: https://mx.allabout.network/research/2026-05-google-webdev-notes.html
   contentType: research-note
   audience: business
+  purpose: "Source-citable notes on Google's 1 May 2026 web.dev guidance on agent-friendly websites, captured for the BMV deck and the planned blog post on the same theme."
+  stability: draft
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["What Google's web.dev agent guidance does and does not touch"]
 ---
 
 # What Google's web.dev agent guidance does and does not touch

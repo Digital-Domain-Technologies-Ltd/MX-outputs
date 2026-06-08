@@ -8,6 +8,11 @@ mx:
   x-mx-segment: morning
   status: final
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-26-morning-report.md
+  purpose: "Co-Directors Report: REGINALD Documented and Deployed"
+  audience: [humans, machines]
+  stability: final
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report: REGINALD Documented and Deployed"]
 ---
 
 # Co-Directors Report: REGINALD Documented and Deployed

@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-02-afternoon-report.md
+  purpose: "Afternoon session (extended): Contentful 10-page audit rerun confirming caching fix; full A/B test vendor detection pipeline built (12 vendors, stateless machine visitor finding); Stateless Machine Visitor pattern added to MX Protocols chapter 11; blog post drafted; architecture lockstep checker extended."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Contentful Audit; A/B Test Detection Pipeline; Manuscripts"]
 ---
 
 # Co-Directors Report — Blog Posts Published; Batch Audit Infrastructure Built

@@ -13,6 +13,10 @@ mx:
   targetReaders: "Boards and executives at organisations deploying agentic AI, plus the technical teams implementing the supporting evidence chains."
   tags: [governance, ai-act, agentic-ai, provenance, evidence-vehicle, mx]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/blog/2026-05-23-governance-when-ai-acts.md
+  purpose: "Every existing AI-governance framework was designed for a static model: one input, one output, one owner. Agentic systems plan, delegate, and act across multiple steps without waiting for approval. The architecture our governance maps to no longer matches the architecture our systems run on. Here is the practical move."
+  stability: draft
+  runbook: "Published article. Read as narrative; the argument is the content."
+  x-mx-contextProvides: ["Governance for AI that Acts"]
 ---
 
 # Governance for AI that Acts

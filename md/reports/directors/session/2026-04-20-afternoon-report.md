@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-20-afternoon-report.md
+  purpose: "Blog styling consolidated into one canonical stylesheet; new DITA-vs-MX comparison post published; html-writer skill gains a timelessness rule."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Shared Blog CSS Architecture + DITA-vs-MX Positioning"]
 ---
 
 # Co-Directors Report — Shared Blog CSS Architecture + DITA-vs-MX Positioning

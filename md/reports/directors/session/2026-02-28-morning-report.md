@@ -9,6 +9,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-28-morning-report.md
+  purpose: "Co-Directors Report - mx-outputs Type-First Restructure"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - mx-outputs Type-First Restructure"]
 ---
 
 # mx-outputs Type-First Restructure

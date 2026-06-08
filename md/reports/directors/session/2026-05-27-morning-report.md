@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-27-morning-report.md
+  purpose: "Unified single-pass LLM repair landed (~178x faster on the repair phase) and three template/script fixes closed a self-feeding feedback loop in the audit gates."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Unified Repair Speedup + Audit Template Fixes"]
 ---
 
 # Co-Directors Report - Unified Repair Speedup + Audit Template Fixes

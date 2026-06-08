@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-07-evening-report.md
+  purpose: "Seven gathering drafts revised through a structured review, canon brought into lockstep, validator promoted to fail on real date errors, conformance gate clean for the first time. Late-evening addendum: an examples-first canonical line locked in across investor and public surfaces after a live mishearing of 'documents' as 'Word documents'."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Review-fix round across the gathering drafts, canon catch-up, validator hardening, plus canonical-line lock-in"]
 ---
 
 # Co-Directors Report — Review-fix round across the gathering drafts, canon catch-up, validator hardening

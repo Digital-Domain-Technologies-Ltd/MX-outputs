@@ -8,6 +8,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/_archive/2026-02-13-session-report.md
+  purpose: "Co-Directors Report - Block Architecture, Messaging, Field Standardisation, Hook Enforcement"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Block Architecture, Messaging, Field Standardisation, Hook Enforcement"]
 ---
 
 

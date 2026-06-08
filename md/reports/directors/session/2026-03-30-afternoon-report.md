@@ -9,6 +9,11 @@ confidential: true
 
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-30-afternoon-report.md
+  purpose: "Co-Directors Report - Printworks Audit: Clean Sheet, Then Fix the Two Gaps"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Printworks Audit: Clean Sheet, Then Fix the Two Gaps"]
 ---
 
 # Printworks Audit: Clean Sheet, Then Fix the Two Gaps

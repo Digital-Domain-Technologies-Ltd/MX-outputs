@@ -8,6 +8,11 @@ mx:
   x-mx-segment: evening
   status: final
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-26-evening-directors-report.md
+  purpose: "Co-Directors Report: Repository Reorganisation - Separation of Concerns"
+  audience: [humans, machines]
+  stability: final
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report: Repository Reorganisation - Separation of Concerns"]
 ---
 
 # Co-Directors Report: Repository Reorganisation — Separation of Concerns

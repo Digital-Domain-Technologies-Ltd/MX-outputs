@@ -11,6 +11,11 @@ mx:
   contentType: "editorial-coordination"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-04/session-summary-2026-02-04T13-50.md
+  purpose: "Editorial Review Phase 1 Complete: MX-Bible & MX: The Handbook Coordination"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Editorial Review Phase 1 Complete: MX-Bible & MX: The Handbook Coordination"]
 ---
 
 

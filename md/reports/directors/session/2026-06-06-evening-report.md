@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-06-evening-report.md
+  purpose: "The web-audit pipeline gained two self-improving loops: reports that correct their own provable errors before delivery, and a memory that proposes which check to sharpen as patterns recur across clients."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - The Audit That Improves Itself"]
 ---
 
 # Co-Directors Report — The Audit That Improves Itself

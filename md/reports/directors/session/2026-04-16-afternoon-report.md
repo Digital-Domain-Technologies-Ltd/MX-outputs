@@ -15,6 +15,10 @@ mx:
   x-mx-segment: afternoon
   tags: [directors-report, session, afternoon, tg-community, stream, standards]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-16-afternoon-report.md
+  purpose: "Afternoon session: mounted The Gathering's community repos, reviewed platform state, identified dogfooding gap, wrote discussion doc for admin"
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report -- TG-Community integration and Stream format decision"]
 ---
 
 # Co-Directors Report -- TG-Community Integration

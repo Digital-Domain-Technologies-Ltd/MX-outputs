@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-29-evening-report.md
+  purpose: "Stale-code sweep of mx-audit, manuscript prose reframed as service offering, in-tree book web/ staging trees retired in favour of direct mx-outputs rendering."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Stale-code cleanup, manuscript sync, retired web/ staging"]
 ---
 
 # Co-Directors Report — Stale-code cleanup, manuscript sync, retired web/ staging

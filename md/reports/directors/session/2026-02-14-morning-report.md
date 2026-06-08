@@ -9,6 +9,11 @@ mx:
   x-mx-segment: morning
   status: published
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-14-morning-report.md
+  purpose: "Morning session: partnership outreach tooling, operational maturity milestones, and the system learning to talk to partners."
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - 14 February 2026 (Morning)"]
 ---
 
 # Morning Session — 14 February 2026

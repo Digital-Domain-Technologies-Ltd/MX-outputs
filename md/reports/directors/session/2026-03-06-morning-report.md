@@ -10,6 +10,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-06-morning-report.md
+  purpose: "Morning session report. Completed Phase B of the MX Journey Stage feature: book manuscript documentation, configurable thresholds, executive summary bug fix, and verification."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Journey Stage Documentation, Configurable Thresholds, and Executive Summary Fix"]
 ---
 
 

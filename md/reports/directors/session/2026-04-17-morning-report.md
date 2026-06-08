@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-17-morning-report.md
+  purpose: "Morning segment: end-to-end mx.allabout.network audit delivered, two reproducible mx-audit bugs fixed, skill-doc hygiene sweep, then the canon-migration sweep that drove compliance to 0 across all five categories with the scanner bug fixed and public-standards namespace rule mechanised."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Hardened audit pipeline + canon-migration sweep to 0 violations"]
 ---
 
 # Co-Directors Report — First full audit through the hardened pipeline + two mx-audit bugs fixed

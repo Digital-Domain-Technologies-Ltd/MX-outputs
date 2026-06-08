@@ -8,6 +8,10 @@ mx:
   audience: business
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-20-evening-report.md
+  purpose: "Co-Directors Report - Field Dictionary Housekeeping"
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Field Dictionary Housekeeping"]
 ---
 
 # Co-Directors Report — Field Dictionary Housekeeping

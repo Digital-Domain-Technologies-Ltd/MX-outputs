@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-16-morning-report.md
+  purpose: "Six new deterministic checks land in the audit-report flow, pushing LLM-judgment categories upstream into mechanical gates, plus a tone-rule pass enforcing neutral English, no exaggeration, no em-dashes, no negation-pivot."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Deterministic gates and tone-rule expansion across the audit pipeline"]
 ---
 
 # Co-Directors Report — Deterministic gates and tone-rule expansion across the audit pipeline

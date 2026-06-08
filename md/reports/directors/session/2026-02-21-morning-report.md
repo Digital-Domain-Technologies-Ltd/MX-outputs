@@ -11,6 +11,11 @@ mx:
   x-mx-segment: morning
   date: 2026-02-21
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-21-morning-report.md
+  purpose: "Session report covering partnership reporting framework, CRM submodule conversion, and HTML baseline audit system implementation."
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - 2026-02-21 Morning"]
 ---
 
 # Co-Directors Report

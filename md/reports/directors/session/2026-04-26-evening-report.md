@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening, consolidation, business-plans]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-26-evening-report.md
+  purpose: "Twenty-two scattered business plans consolidated into seven authoritative documents; field-compliance scan brought to zero across all categories via dictionary extension and dead-metadata cleanup."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report -- Business Plans Consolidated and Compliance Cleaned"]
 ---
 
 # Co-Directors Report -- Business Plans Consolidated Into the Brain

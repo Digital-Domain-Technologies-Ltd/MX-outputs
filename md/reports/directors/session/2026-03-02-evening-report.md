@@ -11,6 +11,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-02-evening-report.md
+  purpose: "Evening session report. Full-day arc: field dictionary v1.7 to v3.0, cog validator to zero errors, markdownlint root-cause fixed, and 1,420+ files restructured into a two-zone YAML model."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - The Day the Data Layer Grew Up"]
 ---
 
 

@@ -12,6 +12,10 @@ mx:
   confidential: true
   tags: [investor, pitch, bare-metal-ventures, slides, pptx-source]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/pptx/presentations/bmv-pitch-2026.md
+  purpose: "15-slide investor pitch deck for Bare Metal Ventures meeting with Michelle Tang."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["MX - Bare Metal Ventures Pitch"]
 ---
 
 # MX — Bare Metal Ventures Pitch

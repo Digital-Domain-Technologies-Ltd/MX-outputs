@@ -13,6 +13,11 @@ mx:
   contentType: "document-generation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-04/session-summary-2026-02-04T15-18.md
+  purpose: "PDF Generation: Arrive First Executive Sales Report"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["PDF Generation: Arrive First Executive Sales Report"]
 ---
 
 

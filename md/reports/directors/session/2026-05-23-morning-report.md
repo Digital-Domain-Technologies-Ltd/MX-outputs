@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-23-morning-report.md
+  purpose: "Two distinct streams: morning sponsor-pitch consolidation extended the cog spec; the rest of the morning closed eight audit-report bugs at their substrate and added five gates so the failures can't recur silently."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Multi-Zone Prose + Audit Pipeline Substrate Refactor"]
 ---
 
 # Co-Directors Report — Multi-Zone Prose + Audit Pipeline Substrate Refactor

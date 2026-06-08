@@ -9,6 +9,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-06-crm-update.md
+  purpose: "Session report covering CRM maintenance: new contact Dogu Abaris, ten contact file updates, interactions log extended, and step-commit workflow with merge conflict resolution."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - CRM Update, Mar 6 2026"]
 ---
 
 

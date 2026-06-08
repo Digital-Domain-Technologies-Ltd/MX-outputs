@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, <segment>]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/_template.md
+  purpose: "<one-line description of what this segment achieved>"
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - <DESCRIPTIVE_TITLE>"]
 ---
 
 <!--

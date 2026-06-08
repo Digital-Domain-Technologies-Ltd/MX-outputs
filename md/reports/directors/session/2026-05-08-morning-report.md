@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-08-morning-report.md
+  purpose: "Propagated a refined mission framing - from website-centric to full content estate - across all public-facing surfaces and both book manuscripts"
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Content Estate Mission Reframe"]
 ---
 
 # Co-Directors Report — Content Estate Mission Reframe

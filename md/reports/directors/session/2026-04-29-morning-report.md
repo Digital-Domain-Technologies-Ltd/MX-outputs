@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-29-morning-report.md
+  purpose: "CSS layout widened; hero whitespace fixed; all hooks registered; tg-community refresh automated; Adobe blog section rewritten; PDF EAA compliance audit service line shipped; CMO removed from blog; humanizer pass made mandatory in html-writer."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Infrastructure Hardening, Hook Registration, Hero Layout Fix, Adobe Blog Rewrite, PDF EAA Audit Service, Blog Quality Controls"]
 ---
 
 # Co-Directors Report — Infrastructure Hardening, Hook Registration, Hero Layout Fix

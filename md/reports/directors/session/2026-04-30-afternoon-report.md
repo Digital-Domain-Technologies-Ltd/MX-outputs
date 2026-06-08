@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-30-afternoon-report.md
+  purpose: "Afternoon: audit pipeline coordinator, robustness gates, logging improvements, plus a second tranche covering the Chris Bryce / Dotfusion re-engagement set, the agent-proliferation blog post, and Gathering / DDT canon tier-pricing updates."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Audit pipeline coordinator + Dotfusion re-engagement + canon tier updates"]
 ---
 
 # Co-Directors Report — Audit pipeline coordinator, v2 baremetal.vc report, and logging improvements

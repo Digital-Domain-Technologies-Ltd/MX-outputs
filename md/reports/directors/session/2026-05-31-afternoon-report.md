@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-31-afternoon-report.md
+  purpose: "Made tight (Haiku) prose the default MX voice, shipped a public blog draft on why it matters, and fixed a hybrid-cog enforcement bug."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Tight Prose, a Blog Asset, and a Hook Fix"]
 ---
 
 # Co-Directors Report — Tight Prose, a Blog Asset, and a Hook Fix

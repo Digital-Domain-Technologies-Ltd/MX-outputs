@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-25-morning-report.md
+  purpose: "Frankfurt CMS Summit talk expanded to 20 slides, humanized, and aligned with the free book."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report -- Frankfurt Talk: 20 slides, two humanizer passes, free book sync"]
 ---
 
 # Co-Directors Report -- Frankfurt Talk: 20 slides, two humanizer passes, free book sync

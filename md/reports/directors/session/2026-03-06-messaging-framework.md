@@ -10,6 +10,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-06-messaging-framework.md
+  purpose: "Session report. Major revision of the MX Messaging Framework - external-ready, terminology aligned across repos, PDF generated, all submodules pushed."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Messaging Framework v2.0"]
 ---
 
 

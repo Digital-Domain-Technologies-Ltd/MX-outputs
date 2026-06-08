@@ -5,6 +5,12 @@ author: "Tom Cranstoun"
 created: 2026-05-07
 modified: 2026-05-07
 status: draft
+mx:
+  purpose: "Voice and language reference assembled from the published REGINALD landing page, the machine-readiness position paper (HTML + cog + meta-cog), and five MX blog posts on mx.allabout.network. For the BMV investor-deck differentiation pass and the parallel manuscript update."
+  audience: [humans, machines]
+  stability: draft
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["MX / REGINALD canonical voice notes - research pack"]
 ---
 
 # MX / REGINALD canonical voice notes

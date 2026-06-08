@@ -11,6 +11,11 @@ mx:
   sessionEnd: "19:50"
   status: completed
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-02-18-evening-report.md
+  purpose: "Co-Directors Report: 2026-02-18 Evening Session"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report: 2026-02-18 Evening Session"]
 ---
 
 # Co-Directors Report

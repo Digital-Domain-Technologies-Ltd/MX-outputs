@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-10-afternoon-report.md
+  purpose: "Quiet hygiene afternoon. One draft blog post mapping MX onto the UNESCO Recommendation on the Ethics of AI; held in blog/drafts/."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - UNESCO Alignment Draft Filed"]
 ---
 
 # Co-Directors Report — UNESCO Alignment Draft Filed

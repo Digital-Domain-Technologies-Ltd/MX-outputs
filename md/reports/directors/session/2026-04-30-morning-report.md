@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-30-morning-report.md
+  purpose: "Morning: XMP injection, field migration to core, audit blog. Late morning: full baremetal.vc client audit (6 gates passing, PDF delivered), plus 5 audit pipeline improvements closing gate-bypass failure modes identified during the run."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - MX governance metadata in PDF; field migration to core; baremetal.vc audit delivered; pipeline hardened"]
 ---
 
 # Co-Directors Report — MX governance metadata in PDF; field migration to core; baremetal.vc audit delivered; pipeline hardened

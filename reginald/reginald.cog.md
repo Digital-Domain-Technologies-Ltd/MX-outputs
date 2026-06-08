@@ -23,6 +23,10 @@ mx:
   reviewCycle: quarterly
   expires: 2026-09-19
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/reginald/reginald.cog.md
+  purpose: "Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation. The DNS of machine-readable documentation."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["REGINALD - The Global COG Registry"]
 ---
 
 # REGINALD

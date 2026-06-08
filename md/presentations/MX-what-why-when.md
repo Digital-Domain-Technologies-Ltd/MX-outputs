@@ -30,6 +30,9 @@ mx:
   - MX-what-why-when.pdf
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/presentations/MX-what-why-when.md
   runbook: "A Marp presentation for conference talks. Render with create-slides skill to produce pptx and pdf outputs in mx-outputs/."
+  purpose: "15 minute lightning talk introducing Machine Experience (MX) to Boye & Company CMS Experts audience"
+  stability: stable
+  x-mx-contextProvides: ["London CMS Experts Lightning Talk"]
 ---
 
 <!-- _class: lead -->

@@ -10,6 +10,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-06-evening-report.md
+  purpose: "Evening session report. Major structural consolidation - 59 documents moved from scattered locations into mx-canon/ssot/, organised by topic. All references updated across the repo."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - SSOT Consolidation: Pitches, Business Case, Specifications, Architecture, Writing Guides"]
 ---
 
 

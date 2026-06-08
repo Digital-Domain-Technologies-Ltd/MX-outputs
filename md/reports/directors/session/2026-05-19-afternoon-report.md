@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-19-afternoon-report.md
+  purpose: "Afternoon segment: drafted the TYPO3-and-MX readiness blog post on mx-site, ran two voice passes against it (humanizer plus an audit-specificity rewrite), generated the social card, added the hostile-web framing paragraph, and tightened the negation-pivot rule from three-or-more sentences to two."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - TYPO3 readiness draft (full afternoon)"]
 ---
 
 # Co-Directors Report — TYPO3 readiness draft (full afternoon)

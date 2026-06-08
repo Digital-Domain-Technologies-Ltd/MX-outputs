@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-29-afternoon-report.md
+  purpose: "Two new sidecar scripts, four code/template bugs fixed, full self-audit run completed, live book PDF regenerated as ISO 14289-1 conformant."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - PDF EAA pipeline shipped end-to-end; audit suite eats its own dog food"]
 ---
 
 # Co-Directors Report — PDF EAA pipeline shipped end-to-end; audit suite eats its own dog food

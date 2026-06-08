@@ -10,6 +10,10 @@ mx:
   audience: "business"
   confidential: true
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-06-late-evening-report.md
+  purpose: "Late-evening session report. Fixed Salva multilingual demo, diagnosed and fixed critical content-encoding bug that broke all HTML on allabout.network, added 404 fallback, set up CLI cache purging."
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - Salva Demo Fixes, Content-Encoding Bug, Cloudflare Worker"]
 ---
 
 

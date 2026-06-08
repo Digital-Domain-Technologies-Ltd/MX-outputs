@@ -9,6 +9,11 @@ confidential: true
 
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-08-morning-report.md
+  purpose: "Co-Directors Report - IDHL Prep + Book Sales Worker Port"
+  audience: [humans, machines]
+  stability: stable
+  runbook: "Reference material. Read for context; not an instruction set."
+  x-mx-contextProvides: ["Co-Directors Report - IDHL Prep + Book Sales Worker Port"]
 ---
 
 # Co-Directors Report — IDHL Prep + Book Sales Worker Port

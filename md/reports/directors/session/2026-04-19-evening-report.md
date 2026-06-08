@@ -13,6 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, evening, protocols, html-writer, blog]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-19-evening-report.md
+  purpose: "New MX Protocols chapter on MCP/UCP/A2A/WebMCP, LinkedIn post for The Gathering, HTML-writer skill replacing fragmented blog tooling, full content restoration of an abbreviated blog post."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Agent-protocols chapter + blog toolchain consolidation"]
 ---
 
 # Co-Directors Report — Agent-protocols chapter + blog toolchain consolidation

@@ -16,6 +16,10 @@ mx:
   generatedBy: "claude-opus-4-6"
   reviewedBy: "Tom Cranstoun"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-15-afternoon-report.md
+  purpose: "Afternoon session: Pa11y cache short-circuit, in-process HEAD memoization, unified shared HEAD cache, throttle-on-cache-hit, and the root-cause fix for cache wiping."
+  stability: stable
+  runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
+  x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline Performance Hardening"]
 ---
 
 # Co-Directors Report — Audit Pipeline Performance Hardening
