@@ -3,8 +3,8 @@
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
   "auditId": "sibotacademy.pl-en-2026-06-09",
-  "runRevision": 7,
-  "lastWriteAt": "2026-06-09T19:35:14.604Z",
+  "runRevision": 8,
+  "lastWriteAt": "2026-06-09T20:02:56.189Z",
   "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
@@ -326,8 +326,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "905d8e5debe896fc303ce49e04b4d004aea7dec5",
-      "shortSha": "905d8e5"
+      "sha": "d14193d76b9860bbda7b4e23e97726978608a15d",
+      "shortSha": "d14193d"
     },
     "branch": "main",
     "dirty": true,
@@ -3067,6 +3067,116 @@
     },
     {
       "timestamp": "2026-06-09T19:35:14.604Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 10,
+        "autoFixApplied": 0,
+        "escalated": 10,
+        "trailRecorded": 0,
+        "trailRemoved": 0,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-09T19:58:11.776Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "sibotacademy-pl-en-report.md",
+        "regexCategoriesFlagged": []
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report-fierce-critic.json",
+        "sha256": "264589e010439ee529b2f141f0498a076c6ab0982d7a38bf51037d6924e26f83"
+      },
+      "rubricHash": "0d2ef9e0909587fc128aebabeff9120eddbc9f252b52dcfdd3cde10e3e5d5fa2",
+      "promptHash": "b1312cdbd7a18b1409a49e699d7b8ca2a30ab7bc7fab15b07db852ec64df9859",
+      "inputHashes": [
+        {
+          "hash": "fe242c01bbcc62a9641c7349d4a1019c80c0cd93da607f48ec202c1831f1723b",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 1 recommendation to raise contrast ratio lacks a specific selector, page URL or element reference.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 2 recommendation to order headings without skipping levels is generic and not anchored to any particular heading instance.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 3 re",
+      "outcome": "warn",
+      "notes": "runCount=2 regexFindings=0 llmFindings=7"
+    },
+    {
+      "timestamp": "2026-06-09T19:59:33.412Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "sibotacademy-pl-en-report.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report-llm-judgment.json",
+        "sha256": "77246e93eaf721043bf7925845f0b166e1d7abd2b3bff380a3e46565b9aa8887"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "f349896b6460206b924e52cab523799c140b56eef2ea7ecb6e642a40488a5ccf",
+      "inputHashes": [
+        {
+          "hash": "fe242c01bbcc62a9641c7349d4a1019c80c0cd93da607f48ec202c1831f1723b",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"tone-inconsistency\",\n      \"context\": \"We audited 11 pages across sibotacademy.pl's site using the Web Audit Suite.\",\n      \"message\": \"Tone inconsistency within the \\\"About This Report\\\" section: mixing first‑person (e.g., \\\"We audited\\\") and third‑person (e.g., \\\"The audit found\\\") voices.\",\n      \"severity\": \"block\"\n    }\n  ]\n}",
+      "outcome": "warn",
+      "notes": "findings=1 withdrawn=0 inputTok=19172 outputTok=2549"
+    },
+    {
+      "timestamp": "2026-06-09T20:00:51.294Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 0 mechanical patch(es); Layer 2 applied 1/5 LLM patch(es) for 7 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "sibotacademy-pl-en-report.md",
+        "findingCount": 7,
+        "layer1Patches": 0,
+        "layer1Resolved": 0
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "01bd18d7f617cbbe733aa1028910676085b85fbf8e9d98fbf893d74612ac0cb4",
+        "patchesApplied": 1,
+        "patchesSkipped": 4,
+        "unfixableCount": 2
+      },
+      "rubricHash": "1a8f608256de9ed88dff97d53348e1669b5d6c7cb15576dedfdcdf0d120bbe4d",
+      "promptHash": "19045d3634f7f34a85126a9dc8c766e64bb6773fee774b1bf497053eb5e632ce",
+      "inputHashes": [
+        {
+          "hash": "fe242c01bbcc62a9641c7349d4a1019c80c0cd93da607f48ec202c1831f1723b",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"We identified 11 finding(s) on the audited set, ordered by regulatory exposure first and then by priority within each category.\",\n      \"findingIndex\": 1,\n      \"justification\": \"voice: rewrote third-person 'the audited set' to first-person 'our audited set'\",\n      \"replace\": \"We identified 11 findings on our audited set, ordered by regulatory exposure first and then by priority within each category.\"\n    },\n    {\n      \"find\": \"(Site-wide)\",\n      \"findingIndex\": 2,\n      \"justification\": \"scope: removed sampling qualifier from sitewide phrase in findings\",\n      \"replace\": \"(Across the audited set)\"\n    },\n    {\n      \"find\": \"(Site-wide)\",\n      \"findingIndex\": 3,\n      \"justification\": \"scope: removed sampling qualifier from sitewide phrase in fin",
+      "outcome": "pass",
+      "notes": "inputTok=20298 outputTok=2295 layer1=0 layer2applied=1 layer2skipped=4 unfixable=2 hygiene=0 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-09T20:02:56.189Z",
       "stepId": "review-and-action-findings",
       "agent": "action-findings.js",
       "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
