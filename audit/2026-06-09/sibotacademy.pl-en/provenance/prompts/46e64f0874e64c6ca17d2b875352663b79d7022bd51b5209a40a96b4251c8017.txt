@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fsibotacademy.pl%2Fen%2Fforparents.html
+# model:  gpt-oss:20b
+# sha256: 46e64f0874e64c6ca17d2b875352663b79d7022bd51b5209a40a96b4251c8017
+# capturedAt: 2026-06-09T11:47:13.537Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4382
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://sibotacademy.pl/en/forparents.html
+Title: For Parents | Sibot Academy
+H1: Your child is already using AI. The question is: do they understand how it works?
+Outbound link hosts (up to 20): www.facebook.com
+
+Body text (first 4000 chars):
+Skip to content Academy About us For parents Contact PL | DE | EN 👨‍👩‍👧 Parent Panel 🎮 Play → Academy About us For parents Contact PL | DE | EN 👨‍👩‍👧 Parent Panel 🎮 Play → The problem Your child is already using AI. The question is: do they understand how it works? Children access AI tools with no preparation. Schools haven't caught up. And open chatbots don't teach — they engage. First contact with AIChildren encounter ChatGPT and other AI tools on average before their 10th birthday. The education gapNo unified AI education standards exist in most school systems — schools are searching for their own solutions. No critical thinkingOpen chatbots don't teach children to spot errors, protect their privacy, or act responsibly with AI. 💬 What parents say ★★★★★ After a week my son was explaining to me what tokens are and how ChatGPT works. I didn't expect that so quickly. MN Niklas's mum ★★★★★ I was worried AI was too complex a topic for an 8-year-old. Sibot showed it can be explained like an adventure — step by step, without stress. MI Ivo's mum ★★★★★ My daughter is 12 and after each lesson she asks me about AI ethics over dinner. I didn't expect those conversations. TV Viktor's dad The solution Sibot Academy: safe, structured AI education for children aged 7+ Instead of banning AI or granting unrestricted access — we give children knowledge. Sibot Academy is an AI course designed specifically for children: in a safe environment, with visible progress, and without the chaos of open chat. After lessons with Sibot, your child will be able to: Explain what AI is and how it recognises images Write effective AI prompts Recognise when AI is wrong Protect their personal data online Know that AI can make mistakes Know that AI can be used for harmful purposes Create parent account → Sign in Not ready for an account? Try the first 3 worlds free → What you get as a parent Peace of mind without hoveringYou don't need to sit beside them — the environment is safe and the panel keeps you informed. Up and running in 2 minutesCreate a parent account, your child starts the first lesson. No installation, no lengthy setup. Your child comes back on their ownSibot looks like a game but teaches like school. Motivation comes naturally — no reminders needed. CertificatesOn completing the programme, your child will receive a Sibot Academy certificate — tangible proof of learning. How it works How Sibot Academy builds AI skills in children 🌍 Safe environment Controlled activities with no risk of exposure to unfiltered content. No open chat — every AI interaction is designed and reviewed by us. 📚 Structured curriculum 18 lessons already available, with the full curriculum of 60 lessons leading from AI fundamentals to ethics — each building on the last. No random clicking — genuine progress with direction. 📊 Visibility for parents Simple dashboard showing completed lessons and your child's progress. You know what they're learning — no need to sit beside them. 🏆 Progress through mastery A new world only opens after the previous one is complete. Children advance through real knowledge — building genuine confidence, not just streaks. Platform values What we truly stand for Sibot Academy is not just an app — it's a set of deliberate design choices rooted in concrete values. 🔒 Safety first — No open chat. Every child activity is designed and verified before it goes live. 🧠 Understanding, not clicking — We teach why AI works the way it does — not just how to use it. That knowledge stays with a child for life. 📊 Parent control — Full progress visibility, no AI expertise required. You decide, your child learns. ⏱ Short, purposeful sessions — 10–15 minutes is the ideal lesson length for children. We don't fight for screen time — we design it well. 🌍 Age-appropriate — Content calibrated for children aged 7+: language, pace, and difficulty level all reflect a child's stage of development. 🏆 Mastery progression — New worlds unlock after previous ones are

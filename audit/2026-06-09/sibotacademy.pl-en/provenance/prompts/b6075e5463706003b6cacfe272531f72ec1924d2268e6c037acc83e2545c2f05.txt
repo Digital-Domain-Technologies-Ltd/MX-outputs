@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fsibotacademy.pl%2Fen%2F
+# model:  gpt-oss:20b
+# sha256: b6075e5463706003b6cacfe272531f72ec1924d2268e6c037acc83e2545c2f05
+# capturedAt: 2026-06-09T11:46:20.030Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4376
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://sibotacademy.pl/en/
+Title: Sibot Academy | Safe AI Learning for Children aged 7–14
+H1: AI is everywhere. Is your child ready?
+Outbound link hosts (up to 20): www.facebook.com
+
+Body text (first 4000 chars):
+Skip to content Academy About us For parents Contact PL | DE | EN 👨‍👩‍👧 Parent Panel 🎮 Play → Academy About us For parents Contact PL | DE | EN 👨‍👩‍👧 Parent Panel 🎮 Play → AI is everywhere. Is your child ready? First 3 worlds free! Sibot Academy teaches children 7+ to understand AI. Safely, under your control. Create parent account Try first lesson 🎁 Download parent guide Hello! Want to learn with me? 🤖 🎓 Certificates 👨‍👩‍👧 Parental control 🏆 18 lessons available 🌍 60 lessons in the curriculum ⭐ Earn tokens 👶 Children 7+ 🔒 No open chat ✅ Safe activities 📊 Parent dashboard 🏆 Final certificate 🇬🇧 In English Safety Safe AI learning — no open chat, under your control. Sibot answers questions about AI and supports learning — in a safe, filtered environment designed for children aged 7–14. No inappropriate content, no uncontrolled access. No open chatChildren use only controlled, safe forms of interaction. Content filteringEvery child's input is verified server-side. Learning about privacySibot teaches which data not to share and why privacy matters. AI can be wrongThe programme teaches critical thinking and fact-checking. 🎁 Download the free guide → Learning outcomes What will your child learn? 🤖Recognise what AI is and where it is used 💬Write better instructions (prompts) 🧐Tell good answers from poor ones ⚠️Know that AI can make mistakes 🔒Protect their personal data ✅Use AI responsibly and wisely Why we built this AI is already in your child's life. The question is: do they understand it? AI is already in schools, apps, and games. In 10 years it will be everywhere — in work, medicine, and everyday decisions. Children who understand AI now — with curiosity rather than fear — will be ready. Sibot Academy was built to help them get there. Built with your child in mind 🎓 Designed by an AI practitionerThe curriculum was designed by someone with professional experience working with AI. 📊 Parents see every completed stepA simple dashboard keeps you informed of your child's progress. 🇪🇺 GDPR and EU AI Act compliantChildren's data protected under European law. Activities meet EU AI Act requirements for education. 🎮 Children come back for moreSibot looks like a game but teaches like school. Motivation comes naturally. How it works A simple learning loop — children understand it straight away, parents see progress 1Child meets SibotSimple parent sign-up, the child begins the first world with no lengthy setup. 2Complete short lessonsQuizzes, prompt blocks, comparing AI answers and mini-missions. 3Earn rewardsQuestions matched to the child's level. Tokens and badges build motivation to return. 4You track progress in the parent dashboardSee your child's progress — which lessons and worlds have been completed. For parents The smart, safe way to introduce your child to the world of AI Instead of yet another app competing for your child's attention, Sibot Academy provides a short learning rhythm, a safe product and a simple view of your child's development. Join Sibot Academy and after our lessons your child will be able to: Explain what AI is and how it recognises images Write effective instructions (prompts) Tell when AI is right and when it makes mistakes Protect their personal data online Create parent account → Sign in Not ready for an account? Try the first 3 worlds free → 💬 What parents say ★★★★★ After a week my son was explaining to me what tokens are and how ChatGPT works. I didn't expect that so quickly. MN Niklas's mum ★★★★★ I was worried AI was too complex a topic for an 8-year-old. Sibot showed it can be explained like an adventure — step by step, without stress. MI Ivo's mum ★★★★★ My daughter is 12 and after each lesson she asks me about AI ethics over dinner. I didn't expect those conversations. TV Viktor's dad Curriculum 4 stages, 16 worlds — from AI basics to building the future Each stage builds knowledge and skills — from understanding AI, to using it consciously, all the way to creating with it 
