@@ -1,0 +1,718 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": "sibotacademy.pl-en-2026-06-10",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-10T10:32:33.410Z",
+  "operator": "tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://sibotacademy.pl",
+  "startedAt": "2026-06-10T10:24:47.169Z",
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 24-205 — Consumer Protections for Artificial Intelligence",
+      "version": "SB-24-205",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-42005",
+      "title": "ISO/IEC 42005 — AI System Impact Assessment",
+      "version": "2025",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "impact-assessment",
+      "claim": "evidence-vehicle",
+      "x-iso-42005": {}
+    },
+    {
+      "id": "prEN-18286",
+      "title": "prEN 18286 — AI Management System (candidate harmonised European standard, CEN-CENELEC JTC 21)",
+      "version": "draft",
+      "jurisdiction": "EU (CEN-CENELEC, in development)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-pren-18286": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "sibotacademy-pl-en-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "c86e74dd1c71c23dc5821a3b02f63f0b2960a42e",
+      "shortSha": "c86e74d"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.4.0",
+    "host": "toms-MacBook-Pro-396.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-06-10T10:24:47.353Z",
+      "stepId": "report.rewrite-1",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 1/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "b1e1bb472d8cf49f33e333a6f9fb94af949519998f1ff47e0442767b8ae235f4"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "e2e9a9176d8a6a87e5c11d786b318b0656598162ca1c3092794f2e926f8b47e9",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, your content delivers a fast and engaging experience that resonates with visitors. Performance stands out as the strongest human‑experience dimension, giving users instant access to learning materials and interactive elements. The clear layout, concise course descriptions, and consistent branding reinforce trust and ease of navigation.\n\nThe headline opportunity we want to draw attention to is enhancing machine comprehension through governance metadata. We identified a sin",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:47.507Z",
+      "stepId": "report.rewrite-2",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 2/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "f1560b53dec95932e299b52827eb6047faa8394155d6ac101d89e75c35d3185e"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "15ed972f33b25fbc5e5e9c46a9537ccb35d848c68660a050528c0cb26f9dfbd9",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Human Experience – this subtable summarises key metrics that matter to visitors.  \nAcross the audited set, we deliver an excellent experience for human visitors, with performance at 896 ms average, accessibility at 95/100, and SEO at 87/100.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:47.662Z",
+      "stepId": "report.rewrite-3",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 3/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "f1fe1b0c266a48a93d43b206aad3957f5783f2adb127f10cdf06ff6730b5e86b"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "0b57f9338f13ae6d54bfec77ef6e49367985a0254e3ad69efdeb0f9cfc7fab55",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We find that across the audited set, machines can discover and parse the content but currently lack structured governance context, reflected in a Discovery Readiness score of 32/100, Structured Data Quality of 52/100, MX Stack Completeness of 59/100, Pipeline Survivability of 97/100, and an overall MX Readiness Level of 1 (Discoverable).",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:47.879Z",
+      "stepId": "report.rewrite-4",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 4/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "d6399f75f605119a07796fd539edaf2e6bb11839dfabe9b69d55f48f6d61f9f0"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "053dec1d3b0301ab36380b0b95d6877ae823c12a26ba436d102dfa9d3a3e266d",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, we see strong foundations in search visibility and user experience, with an SEO score of 87/100 and accessibility at 95/100, while also establishing a solid groundwork with a 52/100 structured data quality score. These achievements lay a solid groundwork for further enhancements.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:48.060Z",
+      "stepId": "report.rewrite-5",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 5/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "c1cbb330996414c86fc3bd97173bfc38624b8a4b07fdb85159cf722e358917c7"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "a7155a8df74961e6ecf202d7badd999073b8e351d30040e3fa65d3bec9a28fcd",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "- **Content‑Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt to declare content‑use policy for machines, enabling agents to understand how they may reuse or transform your content.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:48.225Z",
+      "stepId": "report.rewrite-6",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 6/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 6,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "1509b28359119648e5a72cd9c0d1a149228b70159a405ec7ce9a8559f4a7ba87"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "ec03b149812f536c3de2a2709357d71cb229cf5f3dad83ab6d631d2f573e1537",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found that three of the audited pages contain excessive inline scripts or styles, a condition we call Inline Tag Bloat.  \nThis bloat can slow down or even block machines from parsing the page content quickly, reducing their ability to index and serve the information.  \nMoving those inline tags into external files would give the biggest improvement in how reliably and swiftly machines read the site, while addressing the smaller SPA Shell issue would further strengthen resilience.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:48.395Z",
+      "stepId": "report.rewrite-7",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 7/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 7,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "d974a56d778fc6ac48fa4c267aeacc394385522e94500bce497d9963af59cdea"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "dede9a614f624d33fc00e34775fa39574626b63914189ef6407fd667696a22f7",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We find that your pages employ semantic HTML effectively, giving machines clear structural cues for accurate interpretation.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:48.566Z",
+      "stepId": "report.rewrite-8",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 8/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 8,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "a50e34c3302106452348fc2adfae52af1f8c6a3136b9feffb7597429c504fc8f"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "421c4b2b1ddfb9cbbe94e09123445ec8d16b9e1436b9457b4f3611a347b03cd1",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We observed no content variance across cache‑busted fetches in this audit run.  \nGoogle Optimize, an A/B testing platform, was detected on eight URLs: https://sibotacademy.pl/en/index.html, https://sibotacademy.pl/en/parent/sign-in, https://sibotacademy.pl/en/privacy-policy.html, https://sibotacademy.pl/en, https://sibotacademy.pl/en/forparents.html and six additional pages.  \n\nMachines arrive cold on every fetch – no cookies or session data are persisted, so cohort assignment is random or time‑",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:48.730Z",
+      "stepId": "report.rewrite-9",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 9/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 9,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "16ee42b64ea1195aab2954a2094c8db934d74cbe9bce4ad0d9a58ef59d0cf511"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "3874cba5568264132fbe74d8f7b1288ffbd2802deb2e44f47bc1a5ce99613eee",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "The audited set shows consistent metadata patterns across pages, with no brand-name or canonical-URL divergence flagged by the consistency check.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:48.898Z",
+      "stepId": "report.rewrite-10",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 10/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 10,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "f287663e5958fd3f06614c90bbc8f944eac1cfc9ab516f2a23c636db11b491dd"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "741c0abbb9019e41cd8e705819e8f6092b724272ade333b0ed1b37ce107691eb",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We observe that accessibility legislation worldwide has converged on ISO 14289‑1 (PDF/UA) as the technical baseline, with the European Accessibility Act—Directive (EU) 2019/882, in force 28 June 2025—providing the most precise codification while other jurisdictions such as the United States Section 508, the United Kingdom Public Sector Bodies Accessibility Regulations 2018, and equivalent Australian and Canadian laws all resolve to the same structural artefact.  \nWe also recognise that an untagg",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:24:49.064Z",
+      "stepId": "report.rewrite-11",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 11/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 11,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-10/sibotacademy.pl-en/.infilled/sibotacademy-pl-en.md"
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report.md",
+        "sha256": "7fe418de90e804d6e7f648f6e7e4300e5f1d8ec3990d73f6825826464b382fdb"
+      },
+      "rubricHash": "aa4c12cd0613af6537e46fcc186e7a8a4c3e6a6bb2924891ca489d8f30a9ea2f",
+      "promptHash": "4b6e5066aaf81a3d95b313978bd501905a7030758aaa98fc98c8c4510b4ca400",
+      "inputHashes": [
+        {
+          "hash": "6de0c86100bc6da4b7f4cb4959c05bf97a8b0bad9b85602c13f09fd86f4491f5",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We scored SEO at 87/100 on the audited set of https://sibotacademy.pl, showing strong optimisation that helps machines discover and rank content. Opportunities lie in structured data (52/100) and discovery readiness (32/100), where richer metadata and better crawlability would enhance machine comprehension. We recommend prioritising these improvements to unlock further visibility and engagement.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-10T10:26:56.514Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "sibotacademy-pl-en-report.md",
+        "regexCategoriesFlagged": [
+          "marketing-inflation"
+        ]
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report-fierce-critic.json",
+        "sha256": "281ae8449da25b509c9d4f004693d0d785f408fff926dc0463e1394a60e4a78a"
+      },
+      "rubricHash": "0d2ef9e0909587fc128aebabeff9120eddbc9f252b52dcfdd3cde10e3e5d5fa2",
+      "promptHash": "fb218ff6e10ce0fbf1a472c4c6da8aeb7cc05d18dd57905d2adb29a4e469c0d9",
+      "inputHashes": [
+        {
+          "hash": "e544bed54a14e054307f7d91255e26b3dec49ddf38d96b45a47d56ce34e0f950",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 1 recommendation lacks a specific data anchor from the audit.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 2 recommendation lacks a specific data anchor from the audit.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 3 recommendation lacks a specific data anchor from the audit.\"\n    },\n    {\n      \"category\": \"hollow-",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=1 llmFindings=10"
+    },
+    {
+      "timestamp": "2026-06-10T10:32:33.410Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 11,
+        "autoFixApplied": 0,
+        "escalated": 11,
+        "trailRecorded": 0,
+        "trailRemoved": 0,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
+      "outcome": "pass"
+    }
+  ]
+}
