@@ -2248,6 +2248,31 @@ training data. When machines process your website, they’re performing
 weighted averaging and probability calculations, not “understanding”
 content the way humans do. They guess the next most likely word based on
 patterns they’ve seen before.</p>
+<p>It is worth being precise about what that prediction is, because the
+precision is the whole argument. Ask a model to finish “The first person
+to set foot on the Moon was ___” and it returns “Neil Armstrong,” and it
+is tempting to conclude that it holds a fact about the Apollo programme.
+It does not. The question it resolved was narrower and stranger than the
+one you thought you asked: given everything it has absorbed, which token
+is the most probable continuation of that string of tokens? The answer
+comes out right not because the model consulted the world but because the
+training corpus carries the true sentence often enough that the statistics
+of <em>form</em> land on the correct word. Feed it a corpus that says
+otherwise and the “fact” moves with it.</p>
+<p>This is the distinction between <em>form</em> — the observable
+arrangement of words — and <em>meaning</em> — the relation those words
+hold to things in the world and to a speaker’s intent. Bender and Koller
+make the case that a system exposed only to form has, in principle, no
+route to meaning: it can grow extraordinarily good at predicting what to
+say without ever acquiring what the saying is <em>about</em> (<a
+href="https://aclanthology.org/2020.acl-main.463/">Bender and Koller,
+2020</a>). For anyone publishing for machines, the consequence is not
+philosophical but operational. The model will not recover the meaning you
+left implicit in an image, a layout, or an unstated assumption; it works
+the surface it is given. If a fact about your business is to survive the
+journey into a generated answer, it has to be present <em>as form</em> —
+written down, marked up, and stated outright — because form is the only
+thing the machine ever actually has.</p>
 <p>This statistical foundation explains both their capabilities and
 their failures:</p>
 <p>Machines hallucinate when they encounter incomplete context. They
@@ -2287,6 +2312,84 @@ anthropomorphise their creations — calling them “assistants,”
 confidence in users. When users believe machines “understand” context or
 can “infer” meaning, they trust these systems beyond their actual
 capabilities.</p>
+<p>This is not merely a stylistic preference. The pattern has a name in
+the research literature: the <em>Computational Metaphor</em> — the
+now-reflexive habit of describing the brain as a computer and the computer
+as a brain. In a 2021 paper, the neuroscientists Alexis Baria and Keith
+Cross argue that the metaphor tends to “afford the human mind less
+complexity than is owed, and the computer more wisdom than is due,” and
+that it has been popularised among non-experts “through the rhetoric of
+the tech industry in a way that encourages an inappropriately high level
+of trust in technologies labelled as ‘AI’.” They state the harm plainly:
+unchecked use of the Computational Metaphor “contributes to […] harms by
+falsely attributing human-like capabilities to AI-labelled technologies,
+and aiding in a disregard [for the] complexity of social and human
+experiences” (<a href="https://arxiv.org/abs/2107.14042">Baria and Cross,
+2021</a>).</p>
+<p>Trace the mechanism, because it matters for how you build. Baria and
+Cross observe that our culture quietly equates intelligence with
+rationality, and rationality with trustworthiness. Hang the word
+“intelligent” on a statistical text generator and that chain does the
+rest: an “AI” verdict can end up weighted above a human one, on questions
+the machine cannot actually adjudicate. The label is not describing a
+capability — it is manufacturing trust the system has not earned. That is
+the move that turns a probability distribution over tokens into a number a
+hospital, a council, or a bank acts on without checking the working.</p>
+<p>Now read the first quotation again, because the second half is the half
+most people miss. The metaphor does not only inflate the machine; it
+deflates the human. Every time a vendor says its system “understands” your
+customer, it makes a silent second claim — that understanding a customer
+was never very demanding in the first place, that a weighted average of
+co-occurrence patterns is a fair substitute for a person reading with
+intent, history, and stake. The sentence sells the software by quietly
+downgrading the human it replaces. That is why “it’s only a figure of
+speech” does not get the metaphor off the hook: a figure of speech that
+makes the machine sound wise and the human sound mechanical is an argument
+smuggled in as vocabulary.</p>
+<p>Baria and Cross call for a “new lexicon” for AI-labelled technologies,
+one that resists the anthropomorphising pull of the current discourse.
+That lexicon is not exotic — it is the word <em>machine</em>, and in this
+book it is load-bearing rather than rhetorical. Swap the inflated verbs
+back to honest ones and each becomes a piece of engineering guidance. “The
+machine understands your page” tells you to relax; “the machine
+pattern-matches whatever structure you gave it” tells you to go and give it
+better structure. A machine processes, so you make the processing legible.
+A machine does not infer the context you left implicit, so you state it
+explicitly. Honesty about the tool is not a posture; it is the first line
+of the specification.</p>
+<p>It would be a mistake to put the whole illusion down to loose marketing
+language. A great deal of it is deliberately engineered, by capable
+people, to make the system feel like an interlocutor, and it is worth
+naming the layers because each one targets a different human cue for
+mindedness. A <strong>system prompt</strong> — an instruction block the
+user never sees — assigns the model a name, a persona, and a register, so
+the voice arrives pre-loaded with personality. <strong>Reinforcement from
+human feedback</strong> (RLHF) tunes the raw model against thousands of
+human preference judgements until its answers feel considerate, hedged in
+the right places, and agreeable — which is to say, <em>human</em>.
+<strong>Guardrails</strong> add refusals, caveats, and apologies that read
+as conscience and judgement. An <strong>agentic loop</strong> wraps the
+model so it can call tools, inspect the results, and retry, turning a
+sequence of independent predictions into something that looks like
+sustained deliberation. And the <strong>interface</strong> finishes the
+job: a “thinking…” animation, tokens streamed as though a mind were
+composing them in real time, and affordances as on-the-nose as scanning a
+prompt for the word “ultrathink” and, on finding it, granting the model a
+longer internal reasoning budget.</p>
+<p>Every one of these is real engineering, and several of them make the
+machine genuinely more useful. But notice what none of them changes. RLHF
+alters which continuations are likely, not whether the model knows what
+they mean; a guardrail blocks an output, it does not understand why; a
+loop runs the same formal prediction more times; the “ultrathink” trick
+spends more computation on intermediate tokens, not more thought. The
+layers manage, constrain, and present the <em>form</em> — they never reach
+the <em>meaning</em> beneath it. What they assemble is a more reliable,
+better-mannered, more theatrical predictor, and the performance persuades
+in direct proportion to how well it was built. That is exactly why the
+discipline matters: the more convincing the impression of thinking
+becomes, the more it is worth remembering that it is an impression,
+assembled on purpose, on top of a machine that is still only guessing the
+next word.</p>
 <p>I want to be clear about my stance on AI: I’m not complaining about
 these systems or highlighting edge cases like “How many R’s in
 strawberry?” or users generating obvious junk. I genuinely praise AI for
