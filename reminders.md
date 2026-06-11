@@ -103,6 +103,70 @@ held to the same bar we'd hold a client's estate to.
 
 ---
 
+## 2026-06-11 — Inspector core is shared but only half-tested (NEW)
+
+**The audit-site and the PDF inspector share code, so the same tests must run
+against both.** The detect/classify core exists as **two copies**:
+
+- `mx-site/js/pdf-inspector-core.js` — loaded by the **audit-site** page
+  (`mx-site/audit/index.html` → `mx-site/js/pdf-inspector.js` → this core).
+- `distributions/mx-pdf-inspector/v1.0.0/lib/pdf-inspector-core.js` — the
+  shipped CLI core (`bin/mx-pdf-inspect.js`).
+
+**Problem.** Only the **distribution** copy is exercised — `run-test-pack.mjs` /
+`.sh` drive `bin/mx-pdf-inspect.js`. The audit-site copy has **no test
+coverage**, and the two have **already drifted** (today `diff` shows the
+PDF/UA wording differs: "PDF/UA-1 (ISO 14289-1)" vs "PDF/UA Level 2"). Logic
+is still equal *for now*, but nothing stops a real divergence landing silently —
+exactly the kind of split where the audit-site ships a bug the CLI test would
+have caught.
+
+**To do:**
+- [ ] **Single source of truth.** Make one copy canonical and generate/copy the
+  other with a script (mirror the appendices-splitter pattern), or symlink/import
+  so there is one core. Add a **drift check** to `scripts/session_check.py` (and
+  CI) that fails if the two `pdf-inspector-core.js` files diverge — same idea as
+  `check_canonical_source.py`.
+- [ ] **Run the same test pack against both.** Point the deterministic test pack
+  (including the new hidden-prompt-injection fixture above) at *both* cores, so a
+  green run means the audit-site and the CLI agree. Until the cores are unified,
+  parametrise the runner over both `lib/` paths.
+
+---
+
+## 2026-06-11 — Audit: cross-check llms.txt-type files against Common Crawl (NEW)
+
+**Idea.** The readiness audit already probes the **origin** for the agent-readable
+files (`/llms.txt`, `/llms-full.txt`, `/sitemap.xml`, etc.) in
+`extensions/mx-readiness/background.js`, and scores them deterministically in
+`extensions/mx-readiness/popup.js` (`SCORE_WEIGHTS`, `computeScore`). Serving the
+file is only half the story — what matters for agent reach is whether the file is
+actually **in the crawl corpus** that feeds LLMs. So also check **Common Crawl**.
+
+**Behaviour to add:**
+- [ ] **Probe Common Crawl** for each llms.txt-type URL (and `sitemap.xml`) via
+  the CC index (CDX / columnar index API), e.g. is
+  `https://site/llms.txt` present in a recent CC crawl.
+- [ ] **Record it in the audit** output as its own finding/row (present-in-CC:
+  yes/no, with the crawl id), so the report shows discoverability, not just
+  existence.
+- [ ] **Scoring rule (deterministic):**
+  - **In Common Crawl → increase the readiness/readability score** (bonus weight
+    above a plain `pass`): the file is not just served, it's reaching the corpus.
+  - **On the site but NOT in Common Crawl** → the file isn't being discovered.
+    If it is **also not listed in `sitemap.xml`**, **recommend adding it to
+    `sitemap.xml`** (actionable finding) to improve crawl pickup; re-check on the
+    next crawl.
+
+**Determinism note (same split as the PDF detector).** The CC lookup itself is
+**network-bound**, so it can't run in the offline session gate — keep it out of
+`session_check.py` like the existing link-check exclusion. But factor the
+**scoring rule** (given a `{onSite, inCommonCrawl, inSitemap}` triple → score
+delta + recommendation) as a **pure function** and unit-test it with fixtures, so
+the logic is covered even though the live probe isn't.
+
+---
+
 ## Future work — make the two books unique (the original goal)
 
 The tooling, governance, pipeline, and CI are in place. The remaining content
