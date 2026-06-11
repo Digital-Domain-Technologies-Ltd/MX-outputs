@@ -174,6 +174,8 @@ def render_page(
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="{desc_esc}" />
+  <!-- Appendices are companion content to the books, not standalone destinations: noindex, nofollow per the appendices policy. -->
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="canonical" href="{CANONICAL_BASE}/appendix-{letter}.html">
   <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
   <link rel="llms-txt" href="/llms.txt">

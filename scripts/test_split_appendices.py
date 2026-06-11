@@ -60,6 +60,19 @@ class RenderTest(unittest.TestCase):
         self.assertIn('type="application/ld+json"', page)  # JSON-LD present
         self.assertIn('"@type": "TechArticle"', page)
 
+    def test_render_page_is_noindex_per_appendices_policy(self):
+        # Appendices are companion content to the books, not standalone
+        # destinations: every appendix page is noindex, nofollow so it stays out
+        # of the search index and the sitemap (the hub's check-sitemap-coverage
+        # gate treats a noindex page as an intentional orphan). A splitter change
+        # that drops this would silently re-expose the appendices and fail that
+        # gate, so it is pinned here.
+        page = sa.render_page("a", "Appendix A", "d", "<p>x</p>", ["a"])
+        self.assertIn('<meta name="robots" content="noindex, nofollow" />', page)
+        # The directive must sit inside the head, where crawlers read it.
+        head = page.split("</head>")[0]
+        self.assertIn("noindex", head)
+
     def test_jsonld_is_valid_and_carries_appendix_metadata(self):
         import json
 
