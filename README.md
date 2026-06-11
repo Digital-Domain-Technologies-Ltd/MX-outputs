@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-06-10"
-modified: "2026-06-10"
+created: "2026-06-11"
+modified: "2026-06-11"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -21,11 +21,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 79 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 278 | Markdown — reports, audit results, presentations |
+| [md/](md/) | 279 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1069** | |
+| **Total** | **1070** | |
 
 ---
 
@@ -116,9 +116,10 @@ PDF documents — books, manuals, presentations, blog exports.
 
 Markdown documents — session reports, audit results, Reginald documentation.
 
-### md/blog/ (1 files)
+### md/blog/ (2 files)
 
 - [`2026-05-23-governance-when-ai-acts.md`](md/blog/2026-05-23-governance-when-ai-acts.md)
+- [`2026-06-11-when-the-machine-owns-its-words.md`](md/blog/2026-06-11-when-the-machine-owns-its-words.md)
 
 ### md/migrations/ (5 files)
 
@@ -570,4 +571,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-06-10 at 19:57*
+*Generated on 2026-06-11 at 05:56*
