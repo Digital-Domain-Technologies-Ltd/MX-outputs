@@ -26,7 +26,8 @@ reports; nothing here is hand-authored content. Two tools live here.
 | Script | Language | Reads | Writes |
 |---|---|---|---|
 | `generate-index.sh` | bash | the whole repo tree | `README.md` (the master file index) |
-| `manuscript_uniqueness.py` | python3 | the two book manuscripts | `json/manuscript-index.json`, `scripts/manuscript-uniqueness-report.md` |
+| `manuscript_uniqueness.py` | python3 | the book manuscripts | `json/manuscript-index.json`, `scripts/manuscript-uniqueness-report.md` |
+| `consolidate_appendices.py` | python3 | `mx-site/books/appendices/appendix-*.html` | `html/books/appendices/mx-appendices.html` |
 
 ---
 
@@ -46,11 +47,12 @@ unchanged. The header of the generated README says as much.
 
 ## `manuscript_uniqueness.py`
 
-The two manuscripts in this repository share a common lineage:
+The book manuscripts in this repository share a common lineage:
 
 ```
 html/books/handbook/mx-handbook.html
 html/books/protocols/mx-protocols.html
+html/books/appendices/mx-appendices.html
 ```
 
 Where the same paragraph appears verbatim in both books, the series reads as
@@ -203,3 +205,24 @@ back toward each other above the chosen threshold:
 ```bash
 python3 scripts/manuscript_uniqueness.py --check --quiet
 ```
+
+---
+
+## `consolidate_appendices.py`
+
+A one-off, deterministic migration that folded the 22 standalone appendix
+pages (`mx-site/books/appendices/appendix-*.html`) into a single
+hand-maintainable manuscript, `html/books/appendices/mx-appendices.html`. Each
+appendix becomes a `<section id="appendix-x">` with its internal anchors
+namespaced (`apx-x-…`) so they stay unique in one document.
+
+```bash
+python3 scripts/consolidate_appendices.py          # rebuild the consolidated file
+python3 scripts/consolidate_appendices.py --check   # fail if it is out of date
+python3 scripts/test_consolidate_appendices.py      # unit tests
+```
+
+The consolidated file is now **canonical, hand-maintained HTML** — edit it
+directly. The script is kept for provenance and is not part of any build; do
+not expect to re-run it to pick up hand edits (it rebuilds from the original
+standalone pages).

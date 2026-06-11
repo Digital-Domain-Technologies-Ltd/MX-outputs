@@ -439,7 +439,9 @@ class RealManuscriptSmokeTest(unittest.TestCase):
         sources = mu.load_sources(mu.DEFAULT_MANUSCRIPTS)
         dates = {name: "2026-06-11" for name, _ in mu.DEFAULT_MANUSCRIPTS}
         payload, _ = mu.build_report_payload(sources, mu.DEFAULT_MIN_WORDS, dates)
-        self.assertEqual(payload["summary"]["manuscript_count"], 2)
+        self.assertEqual(
+            payload["summary"]["manuscript_count"], len(mu.DEFAULT_MANUSCRIPTS)
+        )
         self.assertGreater(payload["summary"]["chapter_count"], 0)
         self.assertGreater(payload["summary"]["paragraph_count"], 0)
         self.assertEqual(

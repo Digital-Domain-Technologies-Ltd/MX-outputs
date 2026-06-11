@@ -38,6 +38,21 @@ consolidated and maintained as HTML too.
   part of this change.
 - **Standalone appendix pages → deferred.** See the open decision below.
 
+### Status (2026-06-11)
+
+- ✅ **Phase 0 done** — `SOUL.md` and the `html/books/**` runbooks now declare
+  the books canonical hand-maintained HTML. *External coordination still
+  outstanding: stop the upstream generator.*
+- ✅ **Phase 1 done** — `html/books/appendices/mx-appendices.html` built from
+  the 22 standalone pages by `scripts/consolidate_appendices.py` (deterministic,
+  tested).
+- ✅ **Phase 3 done** — appendices added to the uniqueness tool's manuscript
+  list; index/report regenerated (3 manuscripts, no new cross-book duplicates).
+- ⏸️ **Phase 2 deferred** — in-book appendix links are *not yet* rewritten,
+  because the target URL depends on the standalone-pages decision below (and
+  on where the consolidated file is deployed on the live site). The existing
+  links still resolve to the standalone pages, which remain in place.
+
 ### Migration plan
 
 **Phase 0 — Declare the source of truth (the linchpin).**
@@ -113,6 +128,13 @@ consolidated and maintained as HTML too.
 
   **Suggested path:** Option B short-term (zero breakage), move to Option C
   when there is time to write the splitter.
+
+  **Deployment note (blocks Phase 2):** the canonical consolidated file lives
+  at `html/books/appendices/mx-appendices.html`, but the live site serves from
+  `mx-site/`. Before the in-book links can point at the consolidated file, it
+  must be reachable at a site URL (e.g. copy/deploy to
+  `mx-site/books/appendices/mx-appendices.html`, or have the deploy map
+  `html/books/` → site). Resolve this together with the option above.
 
 ### Risks
 

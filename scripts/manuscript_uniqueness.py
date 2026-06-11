@@ -78,6 +78,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MANUSCRIPTS = [
     ("handbook", REPO_ROOT / "html" / "books" / "handbook" / "mx-handbook.html"),
     ("protocols", REPO_ROOT / "html" / "books" / "protocols" / "mx-protocols.html"),
+    ("appendices", REPO_ROOT / "html" / "books" / "appendices" / "mx-appendices.html"),
 ]
 # The index lives with the repo's other JSON exports (see SOUL.md / json/).
 DEFAULT_INDEX_OUT = REPO_ROOT / "json" / "manuscript-index.json"

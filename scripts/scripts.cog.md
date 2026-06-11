@@ -69,7 +69,8 @@ the long paragraphs that appear word-for-word in more than one book — the
 paragraphs to rewrite so the books read as distinct works.
 
 - **Reads:** `html/books/handbook/mx-handbook.html`,
-  `html/books/protocols/mx-protocols.html`
+  `html/books/protocols/mx-protocols.html`,
+  `html/books/appendices/mx-appendices.html`
 - **Writes:** `json/manuscript-index.json` (the index, stored with the
   repository's other JSON exports) and
   `scripts/manuscript-uniqueness-report.md` (the human-readable report)
@@ -87,6 +88,13 @@ python3 scripts/manuscript_uniqueness.py            # build index + report
 python3 scripts/manuscript_uniqueness.py --check    # exit 1 on duplicates
 python3 scripts/test_manuscript_uniqueness.py       # run the unit tests
 ```
+
+### `consolidate_appendices.py` (python3, stdlib only)
+
+A one-off, deterministic migration that folded the 22 standalone appendix
+pages into the single canonical manuscript
+`html/books/appendices/mx-appendices.html`. That file is now hand-maintained;
+the script is kept for provenance, not for the build. See `MANUAL.md`.
 
 ## How to act safely
 
