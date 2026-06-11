@@ -19,7 +19,7 @@ This is the control document for mx-outputs.
 
 MX Outputs holds generated artefacts — the build products of the MX system. Reports, PDFs, HTML pages, presentations, and JSON exports all land here. Most of this folder is not authored directly; it is produced by scripts, pipelines, or AI-assisted workflows.
 
-**Exception — the books are now canonical source.** The book manuscripts under `html/books/**` (the Handbook, the Protocols, and the consolidated Appendices) are no longer generated. They are hand-maintained HTML and are the source of truth: there is no upstream markdown to regenerate them from. Edit them directly here.
+**Exception — the books are now canonical source.** The book manuscripts under `html/books/**` (the Handbook, the Protocols, and the consolidated Appendices) are no longer generated. They are hand-maintained HTML and are the source of truth: there is no upstream markdown to regenerate them from. Edit them directly here. The old pandoc pipeline must be turned off so it cannot overwrite them — see [`DISABLE-UPSTREAM-GENERATOR.md`](DISABLE-UPSTREAM-GENERATOR.md).
 
 ---
 

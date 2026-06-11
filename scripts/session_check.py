@@ -47,6 +47,7 @@ TEST_FILES = [
     "test_split_appendices.py",
     "test_check_canonical_source.py",
     "test_check_json_valid.py",
+    "test_check_yaml_frontmatter.py",
     "test_session_check.py",
 ]
 
@@ -97,6 +98,7 @@ def main(argv: list[str] | None = None) -> int:
     mu = _load("manuscript_uniqueness")
     cc = _load("check_canonical_source")
     cj = _load("check_json_valid")
+    cy = _load("check_yaml_frontmatter")
     sa = _load("split_appendices")
     failures: list[str] = []
 
@@ -119,6 +121,19 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  {path.relative_to(REPO_ROOT)}: {error}", file=sys.stderr)
     else:
         print("session-check: operational JSON parses.")
+
+    # 1c. YAML frontmatter validity (cheap; needs PyYAML, else skipped).
+    if not cy.YAML_AVAILABLE:
+        print("session-check: YAML frontmatter check skipped (PyYAML not installed).")
+    else:
+        bad_yaml = cy.invalid_files()
+        if bad_yaml:
+            failures.append("invalid YAML frontmatter")
+            print("session-check: INVALID YAML FRONTMATTER:", file=sys.stderr)
+            for path, error in bad_yaml:
+                print(f"  {path.relative_to(REPO_ROOT)}: {error}", file=sys.stderr)
+        else:
+            print("session-check: YAML frontmatter parses.")
 
     # 2. Freshness gate (cheap) → conditional re-index (CPU-intensive).
     index = read_index()

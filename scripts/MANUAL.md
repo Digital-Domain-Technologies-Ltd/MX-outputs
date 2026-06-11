@@ -31,6 +31,7 @@ reports; nothing here is hand-authored content. Two tools live here.
 | `split_appendices.py` | python3 | `html/books/appendices/mx-appendices.html` | `mx-site/books/appendices/appendix-*.html` |
 | `check_canonical_source.py` | python3 | `html/books/**/*.html` | exit code (CI tripwire) |
 | `check_json_valid.py` | python3 | operational `*.json` | exit code (CI) |
+| `check_yaml_frontmatter.py` | python3 + PyYAML | `*.mx.yaml.md`, `*.cog.md`, blog frontmatter | exit code (CI) |
 | `session_check.py` | python3 | the index + book/appendix files | stdout status (SessionStart) |
 
 ---
@@ -282,6 +283,19 @@ python3 scripts/check_json_valid.py           # exit 1 on malformed JSON
 
 ---
 
+## `check_yaml_frontmatter.py`
+
+Extracts the YAML frontmatter from every `*.mx.yaml.md`, `*.cog.md`, and the
+blog posts, and fails if any block does not parse. This is the one check that
+needs a dependency — **PyYAML** — so when PyYAML is absent it reports itself
+skipped and does not fail; CI installs PyYAML so the check is enforced there.
+
+```bash
+python3 scripts/check_yaml_frontmatter.py     # exit 1 on invalid frontmatter
+```
+
+---
+
 ## `session_check.py`
 
 The single deterministic script the SessionStart hook runs before the session
@@ -290,13 +304,14 @@ only does heavy work when a cheap check says it is needed:
 
 1. **Tripwire** — `check_canonical_source` (fast file scan).
 2. **JSON validity** — `check_json_valid` (every operational `*.json` parses).
-3. **Freshness gate** — hashes the raw bytes of each book file and compares to
+3. **YAML frontmatter** — `check_yaml_frontmatter` (parses; skipped without PyYAML).
+4. **Freshness gate** — hashes the raw bytes of each book file and compares to
    the `file_sha` recorded in `json/manuscript-index.json`. If nothing changed,
    duplicate counts are read straight from the committed index — **no
    re-parsing**. Only a changed book triggers the full indexer (to `/tmp`).
-4. **Appendix sync** — confirms the published pages still match the splitter's
+5. **Appendix sync** — confirms the published pages still match the splitter's
    output from the consolidated source.
-5. **Unit tests** — runs every script test suite.
+6. **Unit tests** — runs every script test suite.
 
 ```bash
 python3 scripts/session_check.py            # informational, always exits 0

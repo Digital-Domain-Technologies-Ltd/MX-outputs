@@ -102,6 +102,8 @@ The appendices are maintained as one file and published as many:
   carries the pandoc `generator` marker (i.e. was regenerated upstream). Runs
   in the SessionStart hook and in CI.
 - `check_json_valid.py` — fails if any operational `*.json` is malformed.
+- `check_yaml_frontmatter.py` — fails if any `*.mx.yaml.md` / `*.cog.md` / blog
+  frontmatter does not parse as YAML (needs PyYAML; skipped if absent).
 - `session_check.py` — the single deterministic script the SessionStart hook
   runs before any inference: cheap checks first (tripwire, JSON validity, a
   raw-byte freshness gate, appendix sync, tests), re-indexing only when a book

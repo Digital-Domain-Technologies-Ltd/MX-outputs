@@ -64,10 +64,12 @@ consolidated and maintained as HTML too.
   book (tripwire), drifted appendix pages, malformed JSON, or a failing test
   **cannot land on a protected branch**. This blocks the *symptom* in-repo.
 - ⏳ **Still owed (external, out of reach this session):** disable/archive the
-  upstream pandoc generator at source. `list_repos`/`add_repo` were not
-  available this session, so the generator's repo could not be reached from
-  here. CI now blocks a regenerated file from merging, but the generator should
-  still be turned off so it stops producing them.
+  upstream pandoc generator at source, and enable branch protection requiring
+  the `checks` workflow on `main`. This session is scoped to `mx-outputs` only
+  (a submodule), so the generator's parent repo cannot be edited from here. A
+  step-by-step hand-off is written up in **`DISABLE-UPSTREAM-GENERATOR.md`**.
+  CI already blocks a regenerated file from merging; these two steps stop it
+  being produced and make the block enforced rather than advisory.
 
 ### Migration plan
 
