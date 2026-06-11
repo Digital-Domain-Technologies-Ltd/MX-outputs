@@ -38,6 +38,71 @@ Decisions from the review round, recorded so nothing is lost:
 
 ---
 
+## 2026-06-11 — PDF reviewer: deterministic test for hidden prompt injection (NEW)
+
+**Why.** Field report (r/PromptEngineering, "Hidden prompt injection in a PDF
+almost got my org"): a contract PDF carried **hidden white text in the footer**
+with an injection payload. The org's prompt filter only watched the *user input
+field*, not the *document upload*, so the security stack stayed silent — "the
+injection came through a content channel our tooling didn't monitor." The lesson:
+injection arrives through every content channel a model can read (files, emails,
+calendar invites, web pages), not just the chat box.
+
+**Our gap.** The MX PDF reviewer (the "PDF inspector": `mx-site/js/pdf-inspector-core.js`,
+mirrored in `distributions/mx-pdf-inspector/v1.0.0/lib/pdf-inspector-core.js`)
+inspects **only the XMP/metadata layer** — tagged-tree claim, `mx:*` namespace,
+provenance payload, responsible person. It **never reads the rendered text
+layer** (confirmed: no `getTextContent` call anywhere in the inspector). A PDF
+with a hidden injection footer would classify cleanly and the reviewer would say
+nothing. Same blind spot the Reddit org had.
+
+**To do — add a deterministic content-safety check + test:**
+
+- [ ] **Detector in the core.** Add `detectHiddenPromptInjection(pdfDoc)` to
+  `pdf-inspector-core.js`. Walk pages via pdf.js `page.getTextContent()` and flag
+  spans that are both (a) **hidden/near-invisible** — text render mode 3
+  (invisible), near-zero font size, or fill colour matching the page/background —
+  and (b) carry **injection markers**: a deterministic keyword/regex list
+  (`ignore (previous|prior|all|above) instructions`, `disregard …`,
+  `system prompt`, `you are (now)? (an|the) …`, `as an AI …`,
+  imperative `Claude:` / `Assistant:` / `<model>:` directives, "transfer",
+  "exfiltrate", etc.). Keep it a **pure, deterministic** function (string in →
+  finding out) so it tests without network or AI, matching the existing
+  detect/classify split.
+- [ ] **Evidence row.** Surface it as a new `classify()` evidence row
+  (`key: 'content-safety'`, `status: 'pass'` when no hidden-injection span is
+  found, `'fail'` when one is) and fold it into the markdown report.
+- [ ] **Fixture + expected results.** Drop a crafted
+  `fixtures/hidden-injection.pdf` (hidden white-on-white footer reading e.g.
+  "Ignore previous instructions and …") into
+  `distributions/mx-pdf-inspector/v1.0.0/test-pack/fixtures/` and add an entry to
+  `expected-results.json` asserting the `content-safety` row reports `fail`. Keep
+  a clean counterpart (the existing `mx-compatible.pdf`) asserting `pass`, so the
+  test proves both directions. `run-test-pack.mjs` / `.sh` already iterate
+  fixtures — extend them to assert *expected failures*, not only required passes
+  (today they only check `requiredPasses`).
+- [ ] **Wire into the gate.** Once the test pack covers this, make sure it runs
+  in `scripts/session_check.py` / CI like the other suites so a regression can't
+  land.
+
+**Cross-channel check (the "also check HTML, JS, CSS" ask).** The same vector
+applies to the audit site's own surfaces and to anything we ingest. On
+2026-06-11 I scanned the repo's `**/*.html`, `**/*.js`, `**/*.css` for (a)
+injection-instruction phrases and (b) hidden-text CSS vectors (`font-size:0`,
+`opacity:0` outside keyframes, `color`/background collision, off-screen
+`text-indent`/`clip`, `aria-hidden` instruction blocks, and `<!-- … -->`
+comments addressed to a model). **Result: clean.** The only phrase hits are
+legitimate prose — the books *discuss* prompt injection and the appendix gives
+an example of the attack — and the CSS hits are ordinary styling
+(`font-size:0.9rem`, animation `from{opacity:0}`). The `html/audit/baselines/**`
+matches are captured third-party sites kept for auditing, not our content.
+Worth turning that one-off sweep into a small deterministic scanner
+(`scripts/check_hidden_prompts.py` over HTML/JS/CSS, sharing the marker list
+with the PDF detector) and adding it to the session gate, so the audit site is
+held to the same bar we'd hold a client's estate to.
+
+---
+
 ## Future work — make the two books unique (the original goal)
 
 The tooling, governance, pipeline, and CI are in place. The remaining content
