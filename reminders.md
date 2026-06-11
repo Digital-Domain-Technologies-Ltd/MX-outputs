@@ -59,9 +59,15 @@ consolidated and maintained as HTML too.
 - ✅ **Regenerate guard built** — the pandoc `generator` meta was stripped
   from the book files and `scripts/check_canonical_source.py` (wired into the
   SessionStart hook and runnable in CI) fails if it reappears.
-- ⏳ **Still owed (external):** disable/archive the upstream pandoc generator
-  for the books so it cannot overwrite the canonical HTML. The tripwire only
-  *detects* a regenerate; it does not prevent one.
+- ✅ **CI enforcement added** — `.github/workflows/checks.yml` runs
+  `session_check.py --strict` on push to `main` and on PRs, so a regenerated
+  book (tripwire), drifted appendix pages, malformed JSON, or a failing test
+  **cannot land on a protected branch**. This blocks the *symptom* in-repo.
+- ⏳ **Still owed (external, out of reach this session):** disable/archive the
+  upstream pandoc generator at source. `list_repos`/`add_repo` were not
+  available this session, so the generator's repo could not be reached from
+  here. CI now blocks a regenerated file from merging, but the generator should
+  still be turned off so it stops producing them.
 
 ### Migration plan
 
@@ -170,8 +176,10 @@ gate** (compares each book file's `file_sha` to the committed index, and
 re-parsed all ~9,200 paragraphs every session); appendix-page sync check; and
 **all** script test suites (the hook previously ran only one).
 
-**Further candidates considered (not yet moved):**
-- JSON validity of `json/**` and `reginald/**` (stdlib, cheap) — easy add.
+**Further candidates considered:**
+- ✅ JSON validity of `json/**`, `reginald/**`, `.well-known/**`, `mx-site/**`,
+  `distributions/**` — added (`scripts/check_json_valid.py`), folded into the
+  gate and CI.
 - `.mx.yaml.md` frontmatter parses as YAML — needs PyYAML (not a stdlib dep);
   skipped to keep the hook dependency-free.
 - README index staleness — `generate-index.sh` has no `--check` mode and scans

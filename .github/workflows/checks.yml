@@ -1,0 +1,32 @@
+name: checks
+
+# Deterministic guard rails for MX-outputs. The same script the SessionStart
+# hook runs, in --strict mode, so the build fails on any of:
+#   * a canonical book under html/books/** reappearing as a generated file
+#     (the pandoc generator marker) — i.e. the upstream generator clobbered it;
+#   * published appendix pages drifting from their consolidated source;
+#   * malformed operational JSON;
+#   * a failing tooling unit test.
+#
+# This does not stop the external generator from running, but it stops a
+# regenerated file from ever landing on a protected branch.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run deterministic session checks (strict)
+        run: python3 scripts/session_check.py --strict

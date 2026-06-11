@@ -30,6 +30,7 @@ reports; nothing here is hand-authored content. Two tools live here.
 | `consolidate_appendices.py` | python3 | `mx-site/books/appendices/appendix-*.html` | `html/books/appendices/mx-appendices.html` |
 | `split_appendices.py` | python3 | `html/books/appendices/mx-appendices.html` | `mx-site/books/appendices/appendix-*.html` |
 | `check_canonical_source.py` | python3 | `html/books/**/*.html` | exit code (CI tripwire) |
+| `check_json_valid.py` | python3 | operational `*.json` | exit code (CI) |
 | `session_check.py` | python3 | the index + book/appendix files | stdout status (SessionStart) |
 
 ---
@@ -268,6 +269,19 @@ python3 scripts/check_canonical_source.py     # exit 1 if a book looks generated
 
 ---
 
+## `check_json_valid.py`
+
+Parses every operational `*.json` (under `json/`, `reginald/`, `.well-known/`,
+`mx-site/`, `distributions/`) and fails if any is malformed. The generated
+`audit/` tree is excluded. Cheap, stdlib-only; runs in the SessionStart gate
+and CI.
+
+```bash
+python3 scripts/check_json_valid.py           # exit 1 on malformed JSON
+```
+
+---
+
 ## `session_check.py`
 
 The single deterministic script the SessionStart hook runs before the session
@@ -275,13 +289,14 @@ does any inference or CPU-intensive work. It does the cheap checks first and
 only does heavy work when a cheap check says it is needed:
 
 1. **Tripwire** — `check_canonical_source` (fast file scan).
-2. **Freshness gate** — hashes the raw bytes of each book file and compares to
+2. **JSON validity** — `check_json_valid` (every operational `*.json` parses).
+3. **Freshness gate** — hashes the raw bytes of each book file and compares to
    the `file_sha` recorded in `json/manuscript-index.json`. If nothing changed,
    duplicate counts are read straight from the committed index — **no
    re-parsing**. Only a changed book triggers the full indexer (to `/tmp`).
-3. **Appendix sync** — confirms the published pages still match the splitter's
+4. **Appendix sync** — confirms the published pages still match the splitter's
    output from the consolidated source.
-4. **Unit tests** — runs every script test suite.
+5. **Unit tests** — runs every script test suite.
 
 ```bash
 python3 scripts/session_check.py            # informational, always exits 0
@@ -291,3 +306,13 @@ python3 scripts/session_check.py --skip-tests
 
 This is why the hook is cheap on an unchanged repo: the costly re-index is
 gated behind a byte-hash comparison rather than run unconditionally.
+
+### Continuous integration
+
+`.github/workflows/checks.yml` runs `session_check.py --strict` on every push
+to `main` and on pull requests. It fails the build if a canonical book
+reappears as a generated file (the tripwire), if published appendices drift
+from source, if any operational JSON is malformed, or if a tooling test fails.
+This is the enforcement that stops a regenerated book from landing on a
+protected branch — the external generator itself still has to be disabled at
+source.

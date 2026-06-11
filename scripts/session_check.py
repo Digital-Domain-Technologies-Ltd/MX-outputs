@@ -46,6 +46,7 @@ TEST_FILES = [
     "test_consolidate_appendices.py",
     "test_split_appendices.py",
     "test_check_canonical_source.py",
+    "test_check_json_valid.py",
     "test_session_check.py",
 ]
 
@@ -95,6 +96,7 @@ def main(argv: list[str] | None = None) -> int:
 
     mu = _load("manuscript_uniqueness")
     cc = _load("check_canonical_source")
+    cj = _load("check_json_valid")
     sa = _load("split_appendices")
     failures: list[str] = []
 
@@ -107,6 +109,16 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  {path.relative_to(REPO_ROOT)} ({sig})", file=sys.stderr)
     else:
         print("session-check: books are hand-maintained (no generator marker).")
+
+    # 1b. JSON validity (cheap).
+    bad_json = cj.invalid_files()
+    if bad_json:
+        failures.append("malformed JSON")
+        print("session-check: MALFORMED JSON:", file=sys.stderr)
+        for path, error in bad_json:
+            print(f"  {path.relative_to(REPO_ROOT)}: {error}", file=sys.stderr)
+    else:
+        print("session-check: operational JSON parses.")
 
     # 2. Freshness gate (cheap) → conditional re-index (CPU-intensive).
     index = read_index()

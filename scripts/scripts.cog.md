@@ -101,9 +101,12 @@ The appendices are maintained as one file and published as many:
 - `check_canonical_source.py` — tripwire that fails if a `html/books/**` file
   carries the pandoc `generator` marker (i.e. was regenerated upstream). Runs
   in the SessionStart hook and in CI.
+- `check_json_valid.py` — fails if any operational `*.json` is malformed.
 - `session_check.py` — the single deterministic script the SessionStart hook
-  runs before any inference: cheap checks first (tripwire, a raw-byte freshness
-  gate, appendix sync, tests), re-indexing only when a book actually changed.
+  runs before any inference: cheap checks first (tripwire, JSON validity, a
+  raw-byte freshness gate, appendix sync, tests), re-indexing only when a book
+  actually changed. `.github/workflows/checks.yml` runs it `--strict` in CI, so
+  a regenerated book or broken state cannot land on `main`.
 
 See `MANUAL.md` for full detail.
 
