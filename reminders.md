@@ -38,6 +38,43 @@ Decisions from the review round, recorded so nothing is lost:
 
 ---
 
+## Future work — make the two books unique (the original goal)
+
+The tooling, governance, pipeline, and CI are in place. The remaining content
+work is to remove the paragraphs the Handbook and the Protocols still share
+verbatim. As of 2026-06-11: **16 cross-book duplicates over 100 words**, all in
+the two parts the books share — **Part A — The Business Case** and **Part B —
+The Technical Foundation** (they were copied into both books). 0 within-book.
+
+Approach (per duplicate):
+
+- **Rewrite** the genuine copy-paste ones on one side, keeping the established
+  split — Protocols carries the deeper/technical treatment, Handbook the
+  lighter — then re-run `python3 scripts/manuscript_uniqueness.py` and watch the
+  count fall. The gate + CI then hold it.
+- **Ignore-list** the ones that are deliberately shared (authorial statements,
+  boilerplate, defined terms) by adding their hash to
+  `scripts/manuscript-uniqueness-ignore.txt`. Done so far: the "I want to be
+  clear about my stance on AI" paragraph.
+
+Candidates that may be *deliberately* shared (review before rewriting): the NHS
+"patient asks an AI assistant about drug interactions" example; the
+"Linguistic bias / tokenize English" paragraph near the machines-not-magic
+section. The current list with hashes and locations is in
+`scripts/manuscript-uniqueness-report.md`.
+
+Lower priority / nice-to-have:
+
+- `.mx.yaml.md` frontmatter check is in; a README-index staleness check
+  (`generate-index.sh --check`) was noted as a possible future gate step.
+- Per-appendix JSON-LD is emitted; richer per-appendix metadata (timeRequired,
+  educationalLevel, dates) could be carried through the consolidated source if
+  wanted.
+- Book PDFs remain out of scope; regenerating them from the canonical HTML
+  (e.g. weasyprint) is the option if they are ever brought back in.
+
+---
+
 ## 2026-06-11 — Books as source, appendices consolidated
 
 ### Why
