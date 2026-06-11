@@ -41,6 +41,7 @@ SOURCE_DIR = REPO_ROOT / "mx-site" / "books" / "appendices"
 OUTPUT = REPO_ROOT / "html" / "books" / "appendices" / "mx-appendices.html"
 
 _TITLE = re.compile(r'<h1 class="title">(.*?)</h1>', re.S)
+_DESCRIPTION = re.compile(r'^description:\s*"?(.*?)"?\s*$', re.M)
 _HEADER_END = re.compile(r'<header id="title-block-header">.*?</header>', re.S)
 _BOTTOM_NAV = '<nav class="appendix-navigation"'
 _ID_ATTR = re.compile(r'(\sid=")([^"]+)(")')
@@ -68,6 +69,12 @@ def extract_title(doc: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", m.group(1))).strip()
 
 
+def extract_description(doc: str) -> str:
+    """Per-appendix description from the source frontmatter (or empty)."""
+    m = _DESCRIPTION.search(doc)
+    return re.sub(r"\s+", " ", m.group(1)).strip() if m else ""
+
+
 def extract_content(doc: str) -> str:
     """Body between the title-block header and the bottom page navigation."""
     header = _HEADER_END.search(doc)
@@ -86,25 +93,26 @@ def namespace_anchors(content: str, letter: str) -> str:
     return content
 
 
-def build_section(letter: str, title: str, content: str) -> str:
+def build_section(letter: str, title: str, content: str, description: str = "") -> str:
     content = namespace_anchors(content, letter)
+    desc_attr = f' data-description="{html_lib.escape(description, quote=True)}"' if description else ""
     return (
-        f'<section id="appendix-{letter}" class="appendix">\n'
+        f'<section id="appendix-{letter}" class="appendix"{desc_attr}>\n'
         f"<h1>{html_lib.escape(title)}</h1>\n"
         f"{content}\n"
         f"</section>"
     )
 
 
-def render(appendices: list[tuple[str, str, str]]) -> str:
-    """Render the consolidated document from ``(letter, title, content)``."""
+def render(appendices: list[tuple[str, str, str, str]]) -> str:
+    """Render the document from ``(letter, title, content, description)``."""
     toc = "\n".join(
         f'<li><a href="#appendix-{letter}">{html_lib.escape(title)}</a></li>'
-        for letter, title, _ in appendices
+        for letter, title, _, _ in appendices
     )
     sections = "\n\n".join(
-        build_section(letter, title, content)
-        for letter, title, content in appendices
+        build_section(letter, title, content, description)
+        for letter, title, content, description in appendices
     )
     return f"""<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
@@ -150,7 +158,7 @@ mx:
 
 def build() -> str:
     appendices = [
-        (letter, extract_title(doc), extract_content(doc))
+        (letter, extract_title(doc), extract_content(doc), extract_description(doc))
         for letter, path in appendix_files()
         for doc in [path.read_text(encoding="utf-8")]
     ]

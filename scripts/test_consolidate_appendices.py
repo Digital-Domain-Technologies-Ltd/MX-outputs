@@ -57,13 +57,22 @@ class BuildSectionTest(unittest.TestCase):
 
 class RenderTest(unittest.TestCase):
     def test_render_is_deterministic_and_lists_every_appendix(self):
-        items = [("a", "Appendix A", "<p>a</p>"), ("b", "Appendix B", "<p>b</p>")]
+        items = [
+            ("a", "Appendix A", "<p>a</p>", "Desc A"),
+            ("b", "Appendix B", "<p>b</p>", ""),
+        ]
         first = ca.render(items)
         second = ca.render(items)
         self.assertEqual(first, second)  # no timestamps
         self.assertIn('href="#appendix-a"', first)
         self.assertIn('href="#appendix-b"', first)
+        self.assertIn('data-description="Desc A"', first)
         self.assertEqual(first.count('class="appendix"'), 2)
+
+    def test_extract_description(self):
+        doc = '<!--\n---\ndescription: "A short summary."\ntitle: x\n---\n-->'
+        self.assertEqual(ca.extract_description(doc), "A short summary.")
+        self.assertEqual(ca.extract_description("<p>no frontmatter</p>"), "")
 
 
 if __name__ == "__main__":

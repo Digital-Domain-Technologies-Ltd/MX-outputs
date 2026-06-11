@@ -48,10 +48,20 @@ consolidated and maintained as HTML too.
   tested).
 - ✅ **Phase 3 done** — appendices added to the uniqueness tool's manuscript
   list; index/report regenerated (3 manuscripts, no new cross-book duplicates).
-- ⏸️ **Phase 2 deferred** — in-book appendix links are *not yet* rewritten,
-  because the target URL depends on the standalone-pages decision below (and
-  on where the consolidated file is deployed on the live site). The existing
-  links still resolve to the standalone pages, which remain in place.
+- ✅ **Phase 2 resolved (no rewrite needed)** — decision below settled on
+  **Option C**: the per-appendix URLs are preserved (regenerated from source),
+  so the 8 in-book links still resolve and need no change, and no redirects or
+  new deployment path are required.
+- ✅ **Publishing model (Option C) built** — `scripts/split_appendices.py`
+  regenerates the 22 focused site pages from the consolidated source. One file
+  to edit (`html/books/appendices/mx-appendices.html`), 22 pages published.
+  The pages carry a "GENERATED FILE — do not edit" marker.
+- ✅ **Regenerate guard built** — the pandoc `generator` meta was stripped
+  from the book files and `scripts/check_canonical_source.py` (wired into the
+  SessionStart hook and runnable in CI) fails if it reappears.
+- ⏳ **Still owed (external):** disable/archive the upstream pandoc generator
+  for the books so it cannot overwrite the canonical HTML. The tripwire only
+  *detects* a regenerate; it does not prevent one.
 
 ### Migration plan
 
@@ -99,7 +109,16 @@ consolidated and maintained as HTML too.
 - Re-run the link check (`md/reports/validation/manuscript-url-check.md`
   process) and confirm every appendix anchor resolves.
 
-### OPEN DECISION — the standalone appendix pages
+### RESOLVED 2026-06-11 — Option C chosen
+
+The standalone appendix pages are **regenerated from the consolidated source**
+(`scripts/split_appendices.py`). Single source of truth *and* 22 focused,
+addressable URLs preserved. The options considered are kept below for the
+record. Remaining follow-ups: optionally enrich the splitter with per-appendix
+JSON-LD (the originals had it; the regenerated pages currently carry canonical
++ description + title but not JSON-LD), and disable the upstream generator.
+
+### OPEN DECISION (resolved — see above) — the standalone appendix pages
 
 `mx-site/books/appendices/*.html` are referenced by `sitemap.xml`,
 `robots.txt`, `llms-full.txt`, several `mx-site/books/*.html` pages, and the

@@ -49,4 +49,11 @@ python3 scripts/manuscript_uniqueness.py \
   2>/dev/null \
   || echo "session-start: WARNING manuscript_uniqueness indexer errored" >&2
 
+# 4. Tripwire: the canonical books must not look regenerated (pandoc marker).
+if python3 scripts/check_canonical_source.py; then
+  :
+else
+  echo "session-start: WARNING html/books carries a generator marker — a canonical book may have been regenerated upstream." >&2
+fi
+
 exit 0

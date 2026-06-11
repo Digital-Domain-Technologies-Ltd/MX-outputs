@@ -89,12 +89,20 @@ python3 scripts/manuscript_uniqueness.py --check    # exit 1 on duplicates
 python3 scripts/test_manuscript_uniqueness.py       # run the unit tests
 ```
 
-### `consolidate_appendices.py` (python3, stdlib only)
+### Appendices pipeline (python3, stdlib only)
 
-A one-off, deterministic migration that folded the 22 standalone appendix
-pages into the single canonical manuscript
-`html/books/appendices/mx-appendices.html`. That file is now hand-maintained;
-the script is kept for provenance, not for the build. See `MANUAL.md`.
+The appendices are maintained as one file and published as many:
+
+- `consolidate_appendices.py` — one-off migration that folded the 22 standalone
+  pages into the canonical source `html/books/appendices/mx-appendices.html`.
+- `split_appendices.py` — regenerates the 22 focused site pages
+  (`mx-site/books/appendices/appendix-*.html`) from that source. Edit the
+  source, re-run, commit both.
+- `check_canonical_source.py` — tripwire that fails if a `html/books/**` file
+  carries the pandoc `generator` marker (i.e. was regenerated upstream). Runs
+  in the SessionStart hook and in CI.
+
+See `MANUAL.md` for full detail.
 
 ## How to act safely
 

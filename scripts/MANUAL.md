@@ -28,6 +28,8 @@ reports; nothing here is hand-authored content. Two tools live here.
 | `generate-index.sh` | bash | the whole repo tree | `README.md` (the master file index) |
 | `manuscript_uniqueness.py` | python3 | the book manuscripts | `json/manuscript-index.json`, `scripts/manuscript-uniqueness-report.md` |
 | `consolidate_appendices.py` | python3 | `mx-site/books/appendices/appendix-*.html` | `html/books/appendices/mx-appendices.html` |
+| `split_appendices.py` | python3 | `html/books/appendices/mx-appendices.html` | `mx-site/books/appendices/appendix-*.html` |
+| `check_canonical_source.py` | python3 | `html/books/**/*.html` | exit code (CI tripwire) |
 
 ---
 
@@ -226,3 +228,37 @@ The consolidated file is now **canonical, hand-maintained HTML** — edit it
 directly. The script is kept for provenance and is not part of any build; do
 not expect to re-run it to pick up hand edits (it rebuilds from the original
 standalone pages).
+
+---
+
+## `split_appendices.py`
+
+The publishing half of the appendices pipeline. It regenerates the 22 focused
+site pages (`mx-site/books/appendices/appendix-*.html`) **from** the
+consolidated source, so you maintain one file and publish many. Each page
+keeps its public URL and internal anchors, gains a consistent template
+(canonical, description, `appendix.css`, quick-nav, copy-button script), and
+is marked `GENERATED FILE — do not edit`.
+
+```bash
+python3 scripts/split_appendices.py          # regenerate the 22 pages
+python3 scripts/split_appendices.py --check   # fail if any are stale
+python3 scripts/test_split_appendices.py      # unit tests
+```
+
+Workflow: edit `html/books/appendices/mx-appendices.html`, run
+`split_appendices.py`, commit the source and the regenerated pages together.
+
+---
+
+## `check_canonical_source.py`
+
+A tripwire. The book files under `html/books/**` are canonical hand-maintained
+HTML; if the retired pandoc pipeline runs again it overwrites them and the
+`<meta name="generator" content="pandoc">` marker reappears. This check fails
+when it finds that marker, so an accidental regenerate is caught. It runs in
+the SessionStart hook and is suitable for CI.
+
+```bash
+python3 scripts/check_canonical_source.py     # exit 1 if a book looks generated
+```
