@@ -21,7 +21,9 @@ mx:
 
 # The Desk in the Photo: What the Machine Fills In When You Stop Telling It
 
-A marketer named Garrett Sussman asked Google's AI Mode for desk accessories. Nothing exotic — a cup holder, maybe a riser, something that would fit the look of his office. He didn't upload a photo. He didn't describe the desk. He asked a vague, human question the way you'd ask a colleague who'd been to your place.
+This post owes its spark to [Garrett Sussman](https://www.linkedin.com/in/garrettsussman/), Director of Marketing at iPullRank, who described the episode below in a post on LinkedIn. The observation is his; the argument I hang on it is mine.
+
+Garrett Sussman asked Google's AI Mode for desk accessories. Nothing exotic — a cup holder, maybe a riser, something that would fit the look of his office. He didn't upload a photo. He didn't describe the desk. He asked a vague, human question the way you'd ask a colleague who'd been to your place.
 
 So the machine went and looked. It pulled photos of his desk out of Google Photos — one from June 2023, one from December 2021 — read off the big wooden desk and the industrial aesthetic, and recommended accordingly. The suggestions, he said, were actually solid.
 
@@ -73,7 +75,7 @@ You can't opt out of being inferred. That ship sailed when the query became a sh
 
 ## Sources and further reading
 
-- Garrett Sussman (Director of Marketing, iPullRank), LinkedIn, June 2026 — the Google AI Mode desk-accessories episode, "Google Personal Intelligence," and "we need to think beyond SEO on our site." All quotations are from that post.
+- [Garrett Sussman](https://www.linkedin.com/in/garrettsussman/) (Director of Marketing, iPullRank), on LinkedIn, June 2026 — the Google AI Mode desk-accessories episode, "Google Personal Intelligence," and "we need to think beyond SEO on our site." All quotations are from that post, and the post is the origin of this piece. With thanks.
 - Marianne Sweeny, LinkedIn, June 2026, responding to the above — "we cannot optimize generative search because it is generative" and the case for understanding machine behaviour over optimising the query.
 - Mark Williams-Cook, LinkedIn, June 2026 — the Google Search Console query-intent regex patterns (informational / comparison / product / transactional / navigational), cited here as an artefact of the keyword-query world the post argues is being eclipsed.
 - A related strand of the same discussion on AI platforms ingesting and retaining non-public and personal context; the specific data-retention claims circulating there are contested and are referred to only at the level of the structural concern, not endorsed as fact.
