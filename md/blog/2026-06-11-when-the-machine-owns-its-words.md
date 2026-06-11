@@ -25,7 +25,7 @@ Two publishers in Munich typed their own names into Google.
 
 The AI Overview told them, in Google's own confident prose, that they were known for dubious business practices and were often perceived as a scam. It tied them to subscription traps and shady operators. None of it was true. None of it appeared in any of the pages the overview cited. The machine had read about genuinely sketchy companies, mixed those companies up with the plaintiffs, and drawn a connection that existed nowhere except in the summary it generated.
 
-They sent a cease-and-desist. The output did not change. So they went to court, and on 11 June 2026 the Regional Court of Munich did something no court had done before: it held the operator of an AI answer engine liable for what the engine said, as the author, not the messenger.
+They sent a cease-and-desist. The output did not change. So they went to court, and in June 2026 the [Regional Court of Munich](https://ppc.land/munich-court-holds-google-liable-for-ai-overviews-defamation-a-first/) did something no court had done before: it held the operator of an AI answer engine liable for what the engine said, as the author, not the messenger ([Ars Technica](https://arstechnica.com/tech-policy/2026/06/nobody-needs-ai-to-search-the-internet-court-says-in-ruling-against-google/)).
 
 ## What the court actually held
 
@@ -33,13 +33,13 @@ The interesting part is not that Google lost. It is the line of reasoning the co
 
 German law, like most law, protects search-engine operators from liability for the pages they index. A search engine that returns a list of links is repeating other people's statements; the statements belong to the sites, and the reader follows the link to judge for themselves. That shield is well established and Google leaned on it.
 
-The court took the shield away. An AI Overview, it held, does not repeat third-party statements. It generates **"independent, new, and substantive statements"** by evaluating and combining content from many sources into something none of those sources said. That output is Google's own content. Google, the court wrote, *alone has influence* over it. So Google is not an intermediary pointing at someone else's words. It is the author of its own. A direct infringer.
+The court took the shield away. An AI Overview, it held, does not repeat third-party statements. It generates **"independent, new, and substantive statements"** by evaluating and combining content from many sources into something none of those sources said. That output is Google's own content. Google, the court wrote, *alone has influence* over it. So Google is not an intermediary pointing at someone else's words. It is the author of its own. A direct infringer ([Search Engine Land](https://searchengineland.com/google-liability-false-ai-overview-claims-germany-479820); [The Decoder](https://the-decoder.com/landmark-german-ruling-declares-googles-ai-overviews-are-googles-own-words-and-makes-it-liable-for-false-answers/)).
 
 The load-bearing sentence — the one the headlines reached for — is the reason the shield does not apply. An AI Overview, the court observed, is **an additional function, one without which the use of the search engine would still be, and is, possible.** Nobody needs AI to search the internet. Search worked before the summary existed and works now if you scroll past it. Because the AI layer is elective rather than constitutive, it does not inherit the protections that attach to the thing it sits on top of. The operator chose to add a machine that speaks. The operator owns what it says.
 
-Google's defence was that users can click through to the sources, and that most people know not to trust AI output blindly. The court rejected both, and the rejection matters as much as the ruling. The chance to disprove a statement through further research, it said, does not exempt whoever published it — the same principle that governs the press. A newspaper cannot defame you and then point out that you were free to check. Neither, now, can a model.
+Google's defence was that users can click through to the sources, and that [most people know not to trust AI output blindly](https://www.pcgamer.com/software/ai/google-claims-most-users-know-information-generated-with-ai-should-not-be-blindly-trusted-but-a-court-ruled-its-still-liable-for-false-claims-made-in-ai-overview/). The court rejected both, and the rejection matters as much as the ruling. The chance to disprove a statement through further research, it said, does not exempt whoever published it — the same principle that governs the press. A newspaper cannot defame you and then point out that you were free to check. Neither, now, can a model.
 
-The injunction bars Google from repeating the specific false claims, on pain of fines up to €250,000 per violation. Google bears eighty per cent of the costs. It is a preliminary injunction from a regional court in a civil-law system, not a binding precedent, and Google can appeal. But the court noted the logic reaches further than the case, and it does. The same reasoning, if it survives, lands on every answer engine that composes rather than lists — Gemini, ChatGPT, Perplexity, and whatever ships next quarter.
+The injunction bars Google from repeating the specific false claims, on pain of [fines up to €250,000 per violation](https://ppc.land/munich-court-holds-google-liable-for-ai-overviews-defamation-a-first/), with Google bearing eighty per cent of the costs. It is a preliminary injunction from a regional court in a civil-law system, not a binding precedent, and Google can appeal. But the court noted the logic reaches further than the case, and it does. The same reasoning, if it survives, lands on [every answer engine that composes rather than lists](https://www.engadget.com/2191469/german-court-holds-google-liable-for-false-ai-overview-answers/) — Gemini, ChatGPT, Perplexity, and whatever ships next quarter.
 
 ## The MX reading: this was an attribution failure
 
@@ -69,4 +69,15 @@ We have been building both halves of that for two years, and the structure is pu
 
 ---
 
-*Sources: the ruling discussed is the Regional Court of Munich (Landgericht München) temporary injunction, case no. 26 O 869/26, reported June 2026 (Ars Technica, "Nobody needs AI to search the internet, court says in ruling against Google"; Search Engine Land; The Decoder; Engadget). This post is commentary, not legal advice.*
+## Sources
+
+This post argues that machine-generated claims should carry a chain back to source. It would be poor form not to run on its own principle, so every substantive factual claim above links to the source it came from, and the full list is here. The ruling discussed is the Regional Court of Munich (Landgericht München) temporary injunction, case no. 26 O 869/26, reported June 2026.
+
+- Ars Technica — [Nobody needs AI to search the internet, court says in ruling against Google](https://arstechnica.com/tech-policy/2026/06/nobody-needs-ai-to-search-the-internet-court-says-in-ruling-against-google/)
+- PPC Land — [Munich court holds Google liable for AI Overviews defamation — a first](https://ppc.land/munich-court-holds-google-liable-for-ai-overviews-defamation-a-first/)
+- Search Engine Land — [Google can be directly liable for false AI Overview claims: German court](https://searchengineland.com/google-liability-false-ai-overview-claims-germany-479820)
+- The Decoder — [Landmark German ruling declares Google's AI Overviews are Google's own words](https://the-decoder.com/landmark-german-ruling-declares-googles-ai-overviews-are-googles-own-words-and-makes-it-liable-for-false-answers/)
+- Engadget — [German court holds Google liable for false AI Overview answers](https://www.engadget.com/2191469/german-court-holds-google-liable-for-false-ai-overview-answers/)
+- PC Gamer — [Google claims most users know AI output should not be blindly trusted](https://www.pcgamer.com/software/ai/google-claims-most-users-know-information-generated-with-ai-should-not-be-blindly-trusted-but-a-court-ruled-its-still-liable-for-false-claims-made-in-ai-overview/)
+
+*This post is commentary, not legal advice.*
