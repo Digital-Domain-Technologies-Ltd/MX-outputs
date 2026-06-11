@@ -25,7 +25,7 @@ Build artefacts, reports, and generated outputs organised by media type.
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 1 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1070** | |
+| **Total** | **1073** | |
 
 ---
 
@@ -116,10 +116,9 @@ PDF documents — books, manuals, presentations, blog exports.
 
 Markdown documents — session reports, audit results, Reginald documentation.
 
-### md/blog/ (2 files)
+### md/blog/ (1 files)
 
 - [`2026-05-23-governance-when-ai-acts.md`](md/blog/2026-05-23-governance-when-ai-acts.md)
-- [`2026-06-11-when-the-machine-owns-its-words.md`](md/blog/2026-06-11-when-the-machine-owns-its-words.md)
 
 ### md/migrations/ (5 files)
 
@@ -134,7 +133,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (270 files)
+### md/reports/ (271 files)
 
 #### md/reports/completions/ (25 files)
 
@@ -169,7 +168,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-03-19/** (5 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (241 files)
+#### md/reports/directors/ (242 files)
 
 **build/** (3 files)
 
@@ -183,7 +182,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (234 files)
+**session/** (235 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -410,6 +409,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-06-09-evening-report-2.md`](md/reports/directors/session/2026-06-09-evening-report-2.md)
 - [`2026-06-09-evening-report.md`](md/reports/directors/session/2026-06-09-evening-report.md)
 - [`2026-06-10-evening-report.md`](md/reports/directors/session/2026-06-10-evening-report.md)
+- [`2026-06-11-morning-report.md`](md/reports/directors/session/2026-06-11-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -571,4 +571,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-06-11 at 05:56*
+*Generated on 2026-06-11 at 08:12*
