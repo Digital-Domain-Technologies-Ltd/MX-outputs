@@ -1,10 +1,10 @@
 ---
 title: "Co-Directors Report - Artefact Lifecycle, Index Friability, and the TrustClaw Local-Only Redesign"
-description: "Evening segment: one cross-carrier lifecycle field designed, six enum-prose drifts fixed, generated indexes made self-declaring and gate-enforced, and TrustClaw rebuilt to run fully local across five reviewed phases."
+description: "Evening segment: one cross-carrier lifecycle field designed, six enum-prose drifts fixed, generated indexes made self-declaring and gate-enforced, TrustClaw rebuilt to run fully local across five reviewed phases, and the long-standing working-tree churn ended by making every index generator deterministic behind a new idempotency gate."
 author: "Tom Cranstoun"
 created: 2026-06-11
 modified: 2026-06-11
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -32,6 +32,8 @@ A request to classify the repository's product-requirements documents turned int
 
 In parallel, a second body of work took TrustClaw - our self-hostable personal AI agent - and rebuilt it to run fully local. It now runs its inference on a local model instead of a cloud gateway, so no customer content leaves the machine, which is the same trust posture we sell. This shipped as five reviewed phases, each verified before the next, and is documented end to end.
 
+A third body of work closed a recurring friction that had nagged the team for over a week: every test run and every push left the same handful of files modified, so a developer kept reverting them by hand. The root cause was that the repository's auto-generated index files were built non-deterministically - they stamped the current time into themselves and read directories in whatever order the filesystem returned - so they differed on every run even when nothing had changed. We made every one of those generators deterministic, isolated the test suite so it writes its scratch files to a temporary location rather than into the repository, and added a gate that proves the property holds so it cannot quietly return. The wider lesson became two written rules: a repository whose test suite is tolerated red has stopped meaning anything by "green", and changelog-style narration does not belong in the files that state the current rules. Both are now enforced or documented rather than remembered.
+
 ---
 
 ## What Was Done
@@ -56,17 +58,23 @@ The distribution-history idea from the lifecycle design is also a product: a tam
 
 TrustClaw previously sent every message, memory, and tool result to a cloud inference provider. We rebuilt it so that both its text generation and its memory both run on a local model on the operator's own machine, with the cloud path retained only as an explicit opt-in. The work went in five reviewed phases: move the lowest-risk calls first and prove the transport; build an acceptance test that measures whether a local model can reliably drive the agent's tools, and pass it (the chosen model scored full marks over repeated runs); cut the main agent over; move the memory embeddings, including the data migration that this requires because vectors from different models are not comparable; and package the whole thing as a one-command self-host stack. Every phase was type-checked and verified against a live local model before the next began, and every model call the agent makes is now recorded to the same evidence log the rest of the estate uses. The redesign is captured in a product-requirements document, an architecture reference, and an operator manual, all in the usual places.
 
+### 6. The working-tree churn ended at its source
+
+The index files the repository generates from its own contents stamped the current time into themselves and read directories in filesystem order, so they came out different on every run. A separate maintenance command applied that difference in place after each push, which is why the same files reappeared as "modified" no matter how many times they were reverted. We removed both causes: every generator now sorts its inputs and emits no timestamp, writing only when the content genuinely changed, so regenerating an index twice produces an identical file. The test suite was a second source of the same noise - some tests wrote their working files into the repository's own fixtures, and one rewrote the appendix pages of the public site without the metadata every served page must carry. The tests now write to a temporary location, the appendix pages were corrected at the generator that produces them, and the machine-readable corpus was regenerated to match. A new push-time gate runs every generator and refuses the push if the tree changes as a result, so a future regression that reintroduces the non-determinism is caught immediately rather than rediscovered by hand weeks later. Two operating rules came out of the work and were written into the always-on rulebook: fix a failing check you surface rather than stepping around it, and keep change-narration out of the files that state the current rules.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits (this segment, hub) | 5 (4 artefact-lifecycle + 1 TrustClaw docs) |
+| Commits (this segment, hub) | 9 (4 artefact-lifecycle + 1 TrustClaw docs + 4 working-tree churn) |
 | Commits (this segment, mx-maxine-claw submodule) | 5 (the five redesign phases) |
-| Repositories | 2 (hub + mx-maxine-claw) |
-| New canonical files | 6 (artefact-lifecycle PRD, index-metadata library, index-metadata gate, TrustClaw PRD, architecture doc, operator manual) |
-| New pre-push gate | 1 (Gate 24) |
+| Commits (this segment, mx-outputs submodule) | 1 (appendix noindex + corpus regen) |
+| Repositories | 3 (hub + mx-maxine-claw + mx-outputs) |
+| New canonical files | 6 + 6 (lifecycle PRD, index-metadata library and gate, TrustClaw PRD, architecture doc, operator manual; plus the idempotent-write helper, generated-index registry, idempotency gate, test isolation setup, and two unit tests) |
+| New pre-push gates | 2 (Gate 24 index friability, Gate 25 generator idempotency) |
+| New always-on rules | 2 (fix a surfaced failure; no change-narration in rulebooks) |
 | TrustClaw phases shipped | 5 (compaction, tool-calling harness, agent cut-over, embeddings + migration, self-host) |
 | PRDs classified | every in-scope PRD |
 
@@ -105,6 +113,7 @@ I learned to treat a request as a probe, not just a task. "Classify my PRDs" was
 - Build the unified lifecycle field per the artefact-lifecycle PRD, then migrate the interim per-PRD field and the other per-type state fields into it.
 - Resolve the five open decisions in the PRD before implementation.
 - Add the distribution-history step kind to the provenance primitive.
+- Wire the served-page metadata comment into the appendix page generator so its own freshness check and the site-wide served-page gate stop contradicting each other; today the generator omits a comment the gate requires, so they cannot both be satisfied at once.
 
 ---
 
@@ -122,3 +131,8 @@ I learned to treat a request as a probe, not just a task. "Classify my PRDs" was
 | mx-maxine-claw 7fc5db2 | Local-only Phase 3: route the main agent to local Ollama |
 | mx-maxine-claw 41d2269 | Local-only Phase 4: memory embeddings local + migration |
 | mx-maxine-claw 5d8b67a | Local-only Phase 5: self-host runtime (compose + docs) |
+| 6fc2d181 | End working-tree churn: deterministic generators + idempotency gate |
+| 3b1d8215 | Docs: determinism contract; two rulebook rules; changelog-prose sweep |
+| 843c1e65 | Bump mx-outputs pointer (appendices noindex + corpus regen) |
+| 88797e64 | Tie the cog-sync cogs together; note cog:sync determinism |
+| mx-outputs 547a6f3a | Appendices noindex; regenerate machine corpus deterministically |
