@@ -113,24 +113,32 @@ against both.** The detect/classify core exists as **two copies**:
 - `distributions/mx-pdf-inspector/v1.0.0/lib/pdf-inspector-core.js` — the
   shipped CLI core (`bin/mx-pdf-inspect.js`).
 
-**Problem.** Only the **distribution** copy is exercised — `run-test-pack.mjs` /
-`.sh` drive `bin/mx-pdf-inspect.js`. The audit-site copy has **no test
-coverage**, and the two have **already drifted** (today `diff` shows the
-PDF/UA wording differs: "PDF/UA-1 (ISO 14289-1)" vs "PDF/UA Level 2"). Logic
-is still equal *for now*, but nothing stops a real divergence landing silently —
-exactly the kind of split where the audit-site ships a bug the CLI test would
-have caught.
+**Problem (was).** Only the **distribution** copy was exercised —
+`run-test-pack.mjs` / `.sh` drive `bin/mx-pdf-inspect.js`. The audit-site copy
+had **no test coverage**, and the two had **already drifted** (the PDF/UA
+wording differed: "PDF/UA-1 (ISO 14289-1)" vs "PDF/UA Level 2"). Nothing stopped
+a real divergence landing silently — the audit-site could ship a bug the CLI
+test would have caught.
 
-**To do:**
-- [ ] **Single source of truth.** Make one copy canonical and generate/copy the
-  other with a script (mirror the appendices-splitter pattern), or symlink/import
-  so there is one core. Add a **drift check** to `scripts/session_check.py` (and
-  CI) that fails if the two `pdf-inspector-core.js` files diverge — same idea as
-  `check_canonical_source.py`.
+**Done:**
+- [x] **Single source of truth.** `mx-site/js/pdf-inspector-core.js` is now the
+  canonical copy (it carried the correct "PDF/UA-1 (ISO 14289-1)" wording; the
+  distribution copy had drifted to an inconsistent "Level 2"). The distribution
+  copy was overwritten byte-for-byte from it (both now hash-identical), and a
+  header banner in both files names the canonical path and the re-sync step.
+- [x] **Drift check in the gate + CI.** `scripts/check_inspector_core_sync.py`
+  fails if the two `pdf-inspector-core.js` files diverge (byte compare, reports
+  the first differing line), with `scripts/test_check_inspector_core_sync.py`.
+  Wired into `scripts/session_check.py` (so CI's `--strict` run covers it too).
+  The gate now reports "audit-site and CLI inspector cores are in sync."
+
+**Still to do:**
 - [ ] **Run the same test pack against both.** Point the deterministic test pack
   (including the new hidden-prompt-injection fixture above) at *both* cores, so a
-  green run means the audit-site and the CLI agree. Until the cores are unified,
-  parametrise the runner over both `lib/` paths.
+  green run means the audit-site and the CLI agree on behaviour, not just bytes.
+  Byte-identity (now enforced) makes this a formality, but a JS-level test that
+  loads `mx-site/js/pdf-inspector-core.js` directly would close the audit-site's
+  remaining "no test of my own copy" gap.
 
 ---
 

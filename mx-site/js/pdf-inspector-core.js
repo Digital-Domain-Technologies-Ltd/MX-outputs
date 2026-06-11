@@ -5,6 +5,14 @@
 // the DOM, the network, or pdf.js loading. Caller provides a loaded
 // pdf.js document; this module reads it, classifies it, and returns the
 // findings + classification a renderer can present.
+//
+// SINGLE SOURCE OF TRUTH — this module exists as two byte-identical copies:
+//   - mx-site/js/pdf-inspector-core.js                                (canonical; edit here)
+//   - distributions/mx-pdf-inspector/v1.0.0/lib/pdf-inspector-core.js (shipped CLI copy)
+// The audit-site loads the first; the packaged CLI loads the second. Edit the
+// canonical file, then copy it across so both run identical code.
+// scripts/check_inspector_core_sync.py (SessionStart gate + CI) fails the build
+// if the two diverge.
 
 export const MX_NAMESPACE_PRIMARY = 'https://mx.allabout.network/ns/1.0';
 export const MX_NAMESPACE_LEGACY = 'https://schemas.cognovamx.com/mx/1.0/';
