@@ -21,11 +21,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 79 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 279 | Markdown — reports, audit results, presentations |
+| [md/](md/) | 281 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
-| [json/](json/) | 1 | JSON — audit comparison data |
+| [json/](json/) | 2 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1073** | |
+| **Total** | **1077** | |
 
 ---
 
@@ -116,9 +116,11 @@ PDF documents — books, manuals, presentations, blog exports.
 
 Markdown documents — session reports, audit results, Reginald documentation.
 
-### md/blog/ (1 files)
+### md/blog/ (3 files)
 
 - [`2026-05-23-governance-when-ai-acts.md`](md/blog/2026-05-23-governance-when-ai-acts.md)
+- [`2026-06-11-the-computational-metaphor.md`](md/blog/2026-06-11-the-computational-metaphor.md)
+- [`2026-06-11-when-the-machine-owns-its-words.md`](md/blog/2026-06-11-when-the-machine-owns-its-words.md)
 
 ### md/migrations/ (5 files)
 
@@ -547,6 +549,7 @@ HTML content with adjacent CSS, JS, and SVG assets.
 Structured data — audit comparisons, machine-readable reports.
 
 - [`comparison-2026-02-21-08-35-03.json`](json/audit/comparison-2026-02-21-08-35-03.json)
+- [`manuscript-index.json`](json/manuscript-index.json)
 
 ---
 
@@ -571,4 +574,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-06-11 at 08:12*
+*Generated on 2026-06-11 at 13:20*
