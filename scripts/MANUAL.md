@@ -30,6 +30,7 @@ reports; nothing here is hand-authored content. Two tools live here.
 | `consolidate_appendices.py` | python3 | `mx-site/books/appendices/appendix-*.html` | `html/books/appendices/mx-appendices.html` |
 | `split_appendices.py` | python3 | `html/books/appendices/mx-appendices.html` | `mx-site/books/appendices/appendix-*.html` |
 | `check_canonical_source.py` | python3 | `html/books/**/*.html` | exit code (CI tripwire) |
+| `session_check.py` | python3 | the index + book/appendix files | stdout status (SessionStart) |
 
 ---
 
@@ -238,7 +239,9 @@ site pages (`mx-site/books/appendices/appendix-*.html`) **from** the
 consolidated source, so you maintain one file and publish many. Each page
 keeps its public URL and internal anchors, gains a consistent template
 (canonical, description, `appendix.css`, quick-nav, copy-button script), and
-is marked `GENERATED FILE — do not edit`.
+is marked `GENERATED FILE — do not edit`. Each page also carries a schema.org
+`TechArticle` JSON-LD block (name, description, canonical URL, author,
+`isPartOf` the book, and position).
 
 ```bash
 python3 scripts/split_appendices.py          # regenerate the 22 pages
@@ -262,3 +265,29 @@ the SessionStart hook and is suitable for CI.
 ```bash
 python3 scripts/check_canonical_source.py     # exit 1 if a book looks generated
 ```
+
+---
+
+## `session_check.py`
+
+The single deterministic script the SessionStart hook runs before the session
+does any inference or CPU-intensive work. It does the cheap checks first and
+only does heavy work when a cheap check says it is needed:
+
+1. **Tripwire** — `check_canonical_source` (fast file scan).
+2. **Freshness gate** — hashes the raw bytes of each book file and compares to
+   the `file_sha` recorded in `json/manuscript-index.json`. If nothing changed,
+   duplicate counts are read straight from the committed index — **no
+   re-parsing**. Only a changed book triggers the full indexer (to `/tmp`).
+3. **Appendix sync** — confirms the published pages still match the splitter's
+   output from the consolidated source.
+4. **Unit tests** — runs every script test suite.
+
+```bash
+python3 scripts/session_check.py            # informational, always exits 0
+python3 scripts/session_check.py --strict   # exit 1 on any failure (CI)
+python3 scripts/session_check.py --skip-tests
+```
+
+This is why the hook is cheap on an unchanged repo: the costly re-index is
+gated behind a byte-hash comparison rather than run unconditionally.

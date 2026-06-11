@@ -96,11 +96,14 @@ The appendices are maintained as one file and published as many:
 - `consolidate_appendices.py` — one-off migration that folded the 22 standalone
   pages into the canonical source `html/books/appendices/mx-appendices.html`.
 - `split_appendices.py` — regenerates the 22 focused site pages
-  (`mx-site/books/appendices/appendix-*.html`) from that source. Edit the
-  source, re-run, commit both.
+  (`mx-site/books/appendices/appendix-*.html`) from that source, each with a
+  schema.org `TechArticle` JSON-LD block. Edit the source, re-run, commit both.
 - `check_canonical_source.py` — tripwire that fails if a `html/books/**` file
   carries the pandoc `generator` marker (i.e. was regenerated upstream). Runs
   in the SessionStart hook and in CI.
+- `session_check.py` — the single deterministic script the SessionStart hook
+  runs before any inference: cheap checks first (tripwire, a raw-byte freshness
+  gate, appendix sync, tests), re-indexing only when a book actually changed.
 
 See `MANUAL.md` for full detail.
 

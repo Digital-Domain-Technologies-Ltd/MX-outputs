@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import html as html_lib
+import json
 import re
 from pathlib import Path
 
@@ -110,6 +111,38 @@ def denamespace(body: str, letter: str) -> str:
     return body
 
 
+def build_jsonld(letter: str, title: str, description: str, position: int) -> str:
+    """schema.org TechArticle JSON-LD for one appendix page (deterministic)."""
+    data: dict = {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "name": title,
+    }
+    if description:
+        data["description"] = description
+    data.update(
+        {
+            "url": f"{CANONICAL_BASE}/appendix-{letter}.html",
+            "author": {
+                "@type": "Person",
+                "name": "Tom Cranstoun",
+                "email": "info@cognovamx.com",
+                "url": "https://allabout.network",
+            },
+            "inLanguage": "en-GB",
+            "isPartOf": {
+                "@type": "Book",
+                "name": "MX — The Appendices",
+                "author": {"@type": "Person", "name": "Tom Cranstoun"},
+                "url": "https://mx.allabout.network/books/appendices",
+            },
+            "position": str(position),
+        }
+    )
+    body = json.dumps(data, indent=2, ensure_ascii=False)
+    return f'<script type="application/ld+json">\n{body}\n</script>'
+
+
 def quick_nav(letters: list[str]) -> str:
     links = " |\n        ".join(
         f'<a href="appendix-{l}.html">{l.upper()}</a>' for l in letters
@@ -122,10 +155,14 @@ def quick_nav(letters: list[str]) -> str:
     )
 
 
-def render_page(letter: str, title: str, description: str, body: str, letters: list[str]) -> str:
+def render_page(
+    letter: str, title: str, description: str, body: str, letters: list[str]
+) -> str:
     title_esc = html_lib.escape(title)
     desc_esc = html_lib.escape(description, quote=True)
     nav = quick_nav(letters)
+    position = letters.index(letter) + 1
+    jsonld = build_jsonld(letter, title, description, position)
     return f"""<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
 <head>
@@ -142,6 +179,7 @@ def render_page(letter: str, title: str, description: str, body: str, letters: l
   <link rel="llms-txt" href="/llms.txt">
   <link rel="stylesheet" href="appendix.css">
   <title>{title_esc}</title>
+  {jsonld}
 </head>
 <body>
 {nav}

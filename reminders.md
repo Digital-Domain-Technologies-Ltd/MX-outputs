@@ -114,9 +114,12 @@ consolidated and maintained as HTML too.
 The standalone appendix pages are **regenerated from the consolidated source**
 (`scripts/split_appendices.py`). Single source of truth *and* 22 focused,
 addressable URLs preserved. The options considered are kept below for the
-record. Remaining follow-ups: optionally enrich the splitter with per-appendix
-JSON-LD (the originals had it; the regenerated pages currently carry canonical
-+ description + title but not JSON-LD), and disable the upstream generator.
+record.
+
+- ✅ **Per-appendix JSON-LD restored** — the splitter now emits a schema.org
+  `TechArticle` block (name, description, canonical URL, author, `isPartOf` the
+  book, position) on each page.
+- ⏳ **Still owed (external):** disable/archive the upstream generator.
 
 ### OPEN DECISION (resolved — see above) — the standalone appendix pages
 
@@ -154,6 +157,27 @@ JSON-LD (the originals had it; the regenerated pages currently carry canonical
   must be reachable at a site URL (e.g. copy/deploy to
   `mx-site/books/appendices/mx-appendices.html`, or have the deploy map
   `html/books/` → site). Resolve this together with the option above.
+
+## 2026-06-11 — SessionStart hook consolidated behind a deterministic gate
+
+The hook now runs one deterministic script, `scripts/session_check.py`, before
+any inference or CPU-intensive work. It does cheap checks first and only does
+heavy work when a cheap check says it is needed.
+
+**Moved into the gate:** the canonical-source tripwire; a raw-byte **freshness
+gate** (compares each book file's `file_sha` to the committed index, and
+**skips the full re-index** when nothing changed — previously the hook
+re-parsed all ~9,200 paragraphs every session); appendix-page sync check; and
+**all** script test suites (the hook previously ran only one).
+
+**Further candidates considered (not yet moved):**
+- JSON validity of `json/**` and `reginald/**` (stdlib, cheap) — easy add.
+- `.mx.yaml.md` frontmatter parses as YAML — needs PyYAML (not a stdlib dep);
+  skipped to keep the hook dependency-free.
+- README index staleness — `generate-index.sh` has no `--check` mode and scans
+  the whole repo; would need a cheap staleness check first.
+- Link checking (`manuscript-url-check`) — **deliberately excluded**: it is
+  network-bound and therefore neither cheap nor deterministic offline.
 
 ### Risks
 

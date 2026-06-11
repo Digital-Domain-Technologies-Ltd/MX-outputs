@@ -63,7 +63,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 TOOL_NAME = "scripts/manuscript_uniqueness.py"
-TOOL_VERSION = "2.1.0"
+TOOL_VERSION = "2.2.0"
 DEFAULT_MIN_WORDS = 100
 # Word thresholds reported as a distribution so the operator can see how the
 # shared-paragraph count grows as the bar is lowered, and pick a level.
@@ -290,7 +290,11 @@ def build_manuscript_record(
     record = {
         "name": name,
         "last_changed": change_date,
+        # content_sha hashes the parsed sections; file_sha hashes the whole
+        # raw file, so a cheap byte-hash can gate whether a re-index is needed
+        # at all without parsing the document.
         "content_sha": text_hash("\n".join(signatures)),
+        "file_sha": text_hash(html),
         "chapter_count": len(chapters_out),
         "chapters": chapters_out,
     }

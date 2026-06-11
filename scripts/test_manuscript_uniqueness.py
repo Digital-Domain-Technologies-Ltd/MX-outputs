@@ -353,6 +353,13 @@ class IncrementalTest(unittest.TestCase):
         self.assertEqual(stats["sections_reanalysed"], 1)
         self.assertEqual(stats["sections_skipped"], 0)
 
+    def test_file_sha_present_and_content_sensitive(self):
+        a, _ = mu.build_report_payload(self._one_chapter("a"), 100, {"handbook": "x"})
+        b, _ = mu.build_report_payload(self._one_chapter("b"), 100, {"handbook": "x"})
+        sha_a = a["manuscripts"][0]["file_sha"]
+        self.assertTrue(sha_a)
+        self.assertNotEqual(sha_a, b["manuscripts"][0]["file_sha"])
+
     def test_manuscript_last_changed_recorded(self):
         payload, _ = mu.build_report_payload(
             self._one_chapter("a"), 100, {"handbook": "2026-06-11"}

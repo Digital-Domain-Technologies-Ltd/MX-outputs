@@ -57,6 +57,33 @@ class RenderTest(unittest.TestCase):
         self.assertIn('href="appendix-b.html"', page)  # quick-nav
         self.assertIn("GENERATED FILE", page)
         self.assertIn("copy-button", page)  # copy script present
+        self.assertIn('type="application/ld+json"', page)  # JSON-LD present
+        self.assertIn('"@type": "TechArticle"', page)
+
+    def test_jsonld_is_valid_and_carries_appendix_metadata(self):
+        import json
+
+        page = sa.render_page(
+            "c", "Appendix C: Patterns", "Pattern catalogue.", "<p>x</p>",
+            ["a", "b", "c"],
+        )
+        block = page.split('<script type="application/ld+json">')[1].split("</script>")[0]
+        data = json.loads(block)
+        self.assertEqual(data["@type"], "TechArticle")
+        self.assertEqual(data["name"], "Appendix C: Patterns")
+        self.assertEqual(data["description"], "Pattern catalogue.")
+        self.assertEqual(
+            data["url"], "https://mx.allabout.network/books/appendices/appendix-c.html"
+        )
+        self.assertEqual(data["position"], "3")  # third in the letter list
+        self.assertEqual(data["isPartOf"]["@type"], "Book")
+
+    def test_jsonld_omits_empty_description(self):
+        import json
+
+        page = sa.render_page("a", "Appendix A", "", "<p>x</p>", ["a"])
+        block = page.split('<script type="application/ld+json">')[1].split("</script>")[0]
+        self.assertNotIn("description", json.loads(block))
 
     def test_render_is_deterministic(self):
         a = sa.render_page("a", "T", "d", "<p>x</p>", ["a"])
