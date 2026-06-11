@@ -5,6 +5,14 @@
 // the DOM, the network, or pdf.js loading. Caller provides a loaded
 // pdf.js document; this module reads it, classifies it, and returns the
 // findings + classification a renderer can present.
+//
+// SINGLE SOURCE OF TRUTH — this module exists as two byte-identical copies:
+//   - mx-site/js/pdf-inspector-core.js                                (canonical; edit here)
+//   - distributions/mx-pdf-inspector/v1.0.0/lib/pdf-inspector-core.js (shipped CLI copy)
+// The audit-site loads the first; the packaged CLI loads the second. Edit the
+// canonical file, then copy it across so both run identical code.
+// scripts/check_inspector_core_sync.py (SessionStart gate + CI) fails the build
+// if the two diverge.
 
 export const MX_NAMESPACE_PRIMARY = 'https://mx.allabout.network/ns/1.0';
 export const MX_NAMESPACE_LEGACY = 'https://schemas.cognovamx.com/mx/1.0/';
@@ -116,7 +124,7 @@ export async function readPdfMetadata(pdfDoc) {
 
 export function detectTaggedTree(metadata) {
   // pdf.js does NOT expose /MarkInfo directly in getMetadata, so we read
-  // the XMP claim of pdfuaid:Part=1 (Level 2 PDF/UA declaration) as a
+  // the XMP claim of pdfuaid:Part=1 (PDF/UA-1 conformance declaration) as a
   // strong proxy. Absence of pdfuaid:Part is not a definitive "no tagged
   // tree" answer, but presence is a definitive yes.
   const pdfuaPart = readXmpField(metadata.metadata, 'pdfuaid:Part') ||
@@ -294,7 +302,7 @@ export function makeReportMarkdown(file, classification, findings) {
   lines.push('# Tagged structure tree');
   lines.push('qpdf --json file.pdf | jq \'.objects[] | select(.["/Type"] == "/StructTreeRoot")\'');
   lines.push('');
-  lines.push('# PDF/UA Level 2 conformance claim');
+  lines.push('# PDF/UA-1 (ISO 14289-1) conformance claim');
   lines.push('exiftool -XMP-pdfuaid:Part file.pdf');
   lines.push('');
   lines.push('# Embedded AI provenance');

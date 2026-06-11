@@ -15,6 +15,9 @@ What it does, in order
    duplicate counts are read straight from the committed index — **no
    re-parsing**. Only if a book changed does it run the full indexer (the
    CPU-intensive step), and then only to ``/tmp``.
+2b. **Inspector core drift** (cheap) — confirm the audit-site copy and the
+   shipped CLI copy of ``pdf-inspector-core.js`` are byte-identical, so both run
+   the same detect/classify code.
 3. **Appendix sync** (cheap) — confirm the published per-appendix pages still
    match what the splitter would produce from the consolidated source.
 4. **Unit tests** (cheap) — run the script test suites so the tooling is known
@@ -46,6 +49,7 @@ TEST_FILES = [
     "test_consolidate_appendices.py",
     "test_split_appendices.py",
     "test_check_canonical_source.py",
+    "test_check_inspector_core_sync.py",
     "test_check_json_valid.py",
     "test_check_yaml_frontmatter.py",
     "test_session_check.py",
@@ -97,6 +101,7 @@ def main(argv: list[str] | None = None) -> int:
 
     mu = _load("manuscript_uniqueness")
     cc = _load("check_canonical_source")
+    cs = _load("check_inspector_core_sync")
     cj = _load("check_json_valid")
     cy = _load("check_yaml_frontmatter")
     sa = _load("split_appendices")
@@ -134,6 +139,19 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"  {path.relative_to(REPO_ROOT)}: {error}", file=sys.stderr)
         else:
             print("session-check: YAML frontmatter parses.")
+
+    # 1d. Inspector core drift (cheap) — audit-site and CLI must run one core.
+    core_drift = cs.drift()
+    if core_drift:
+        failures.append("inspector core drift")
+        print(
+            f"session-check: INSPECTOR CORE DRIFT — {core_drift}. "
+            f"Re-sync: cp {cs.CANONICAL.relative_to(REPO_ROOT)} "
+            f"{cs.MIRROR.relative_to(REPO_ROOT)}",
+            file=sys.stderr,
+        )
+    else:
+        print("session-check: audit-site and CLI inspector cores are in sync.")
 
     # 2. Freshness gate (cheap) → conditional re-index (CPU-intensive).
     index = read_index()

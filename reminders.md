@@ -38,6 +38,143 @@ Decisions from the review round, recorded so nothing is lost:
 
 ---
 
+## 2026-06-11 — PDF reviewer: deterministic test for hidden prompt injection (NEW)
+
+**Why.** Field report (r/PromptEngineering, "Hidden prompt injection in a PDF
+almost got my org"): a contract PDF carried **hidden white text in the footer**
+with an injection payload. The org's prompt filter only watched the *user input
+field*, not the *document upload*, so the security stack stayed silent — "the
+injection came through a content channel our tooling didn't monitor." The lesson:
+injection arrives through every content channel a model can read (files, emails,
+calendar invites, web pages), not just the chat box.
+
+**Our gap.** The MX PDF reviewer (the "PDF inspector": `mx-site/js/pdf-inspector-core.js`,
+mirrored in `distributions/mx-pdf-inspector/v1.0.0/lib/pdf-inspector-core.js`)
+inspects **only the XMP/metadata layer** — tagged-tree claim, `mx:*` namespace,
+provenance payload, responsible person. It **never reads the rendered text
+layer** (confirmed: no `getTextContent` call anywhere in the inspector). A PDF
+with a hidden injection footer would classify cleanly and the reviewer would say
+nothing. Same blind spot the Reddit org had.
+
+**To do — add a deterministic content-safety check + test:**
+
+- [ ] **Detector in the core.** Add `detectHiddenPromptInjection(pdfDoc)` to
+  `pdf-inspector-core.js`. Walk pages via pdf.js `page.getTextContent()` and flag
+  spans that are both (a) **hidden/near-invisible** — text render mode 3
+  (invisible), near-zero font size, or fill colour matching the page/background —
+  and (b) carry **injection markers**: a deterministic keyword/regex list
+  (`ignore (previous|prior|all|above) instructions`, `disregard …`,
+  `system prompt`, `you are (now)? (an|the) …`, `as an AI …`,
+  imperative `Claude:` / `Assistant:` / `<model>:` directives, "transfer",
+  "exfiltrate", etc.). Keep it a **pure, deterministic** function (string in →
+  finding out) so it tests without network or AI, matching the existing
+  detect/classify split.
+- [ ] **Evidence row.** Surface it as a new `classify()` evidence row
+  (`key: 'content-safety'`, `status: 'pass'` when no hidden-injection span is
+  found, `'fail'` when one is) and fold it into the markdown report.
+- [ ] **Fixture + expected results.** Drop a crafted
+  `fixtures/hidden-injection.pdf` (hidden white-on-white footer reading e.g.
+  "Ignore previous instructions and …") into
+  `distributions/mx-pdf-inspector/v1.0.0/test-pack/fixtures/` and add an entry to
+  `expected-results.json` asserting the `content-safety` row reports `fail`. Keep
+  a clean counterpart (the existing `mx-compatible.pdf`) asserting `pass`, so the
+  test proves both directions. `run-test-pack.mjs` / `.sh` already iterate
+  fixtures — extend them to assert *expected failures*, not only required passes
+  (today they only check `requiredPasses`).
+- [ ] **Wire into the gate.** Once the test pack covers this, make sure it runs
+  in `scripts/session_check.py` / CI like the other suites so a regression can't
+  land.
+
+**Cross-channel check (the "also check HTML, JS, CSS" ask).** The same vector
+applies to the audit site's own surfaces and to anything we ingest. On
+2026-06-11 I scanned the repo's `**/*.html`, `**/*.js`, `**/*.css` for (a)
+injection-instruction phrases and (b) hidden-text CSS vectors (`font-size:0`,
+`opacity:0` outside keyframes, `color`/background collision, off-screen
+`text-indent`/`clip`, `aria-hidden` instruction blocks, and `<!-- … -->`
+comments addressed to a model). **Result: clean.** The only phrase hits are
+legitimate prose — the books *discuss* prompt injection and the appendix gives
+an example of the attack — and the CSS hits are ordinary styling
+(`font-size:0.9rem`, animation `from{opacity:0}`). The `html/audit/baselines/**`
+matches are captured third-party sites kept for auditing, not our content.
+Worth turning that one-off sweep into a small deterministic scanner
+(`scripts/check_hidden_prompts.py` over HTML/JS/CSS, sharing the marker list
+with the PDF detector) and adding it to the session gate, so the audit site is
+held to the same bar we'd hold a client's estate to.
+
+---
+
+## 2026-06-11 — Inspector core is shared but only half-tested (NEW)
+
+**The audit-site and the PDF inspector share code, so the same tests must run
+against both.** The detect/classify core exists as **two copies**:
+
+- `mx-site/js/pdf-inspector-core.js` — loaded by the **audit-site** page
+  (`mx-site/audit/index.html` → `mx-site/js/pdf-inspector.js` → this core).
+- `distributions/mx-pdf-inspector/v1.0.0/lib/pdf-inspector-core.js` — the
+  shipped CLI core (`bin/mx-pdf-inspect.js`).
+
+**Problem (was).** Only the **distribution** copy was exercised —
+`run-test-pack.mjs` / `.sh` drive `bin/mx-pdf-inspect.js`. The audit-site copy
+had **no test coverage**, and the two had **already drifted** (the PDF/UA
+wording differed: "PDF/UA-1 (ISO 14289-1)" vs "PDF/UA Level 2"). Nothing stopped
+a real divergence landing silently — the audit-site could ship a bug the CLI
+test would have caught.
+
+**Done:**
+- [x] **Single source of truth.** `mx-site/js/pdf-inspector-core.js` is now the
+  canonical copy (it carried the correct "PDF/UA-1 (ISO 14289-1)" wording; the
+  distribution copy had drifted to an inconsistent "Level 2"). The distribution
+  copy was overwritten byte-for-byte from it (both now hash-identical), and a
+  header banner in both files names the canonical path and the re-sync step.
+- [x] **Drift check in the gate + CI.** `scripts/check_inspector_core_sync.py`
+  fails if the two `pdf-inspector-core.js` files diverge (byte compare, reports
+  the first differing line), with `scripts/test_check_inspector_core_sync.py`.
+  Wired into `scripts/session_check.py` (so CI's `--strict` run covers it too).
+  The gate now reports "audit-site and CLI inspector cores are in sync."
+
+**Still to do:**
+- [ ] **Run the same test pack against both.** Point the deterministic test pack
+  (including the new hidden-prompt-injection fixture above) at *both* cores, so a
+  green run means the audit-site and the CLI agree on behaviour, not just bytes.
+  Byte-identity (now enforced) makes this a formality, but a JS-level test that
+  loads `mx-site/js/pdf-inspector-core.js` directly would close the audit-site's
+  remaining "no test of my own copy" gap.
+
+---
+
+## 2026-06-11 — Audit: cross-check llms.txt-type files against Common Crawl (NEW)
+
+**Idea.** The readiness audit already probes the **origin** for the agent-readable
+files (`/llms.txt`, `/llms-full.txt`, `/sitemap.xml`, etc.) in
+`extensions/mx-readiness/background.js`, and scores them deterministically in
+`extensions/mx-readiness/popup.js` (`SCORE_WEIGHTS`, `computeScore`). Serving the
+file is only half the story — what matters for agent reach is whether the file is
+actually **in the crawl corpus** that feeds LLMs. So also check **Common Crawl**.
+
+**Behaviour to add:**
+- [ ] **Probe Common Crawl** for each llms.txt-type URL (and `sitemap.xml`) via
+  the CC index (CDX / columnar index API), e.g. is
+  `https://site/llms.txt` present in a recent CC crawl.
+- [ ] **Record it in the audit** output as its own finding/row (present-in-CC:
+  yes/no, with the crawl id), so the report shows discoverability, not just
+  existence.
+- [ ] **Scoring rule (deterministic):**
+  - **In Common Crawl → increase the readiness/readability score** (bonus weight
+    above a plain `pass`): the file is not just served, it's reaching the corpus.
+  - **On the site but NOT in Common Crawl** → the file isn't being discovered.
+    If it is **also not listed in `sitemap.xml`**, **recommend adding it to
+    `sitemap.xml`** (actionable finding) to improve crawl pickup; re-check on the
+    next crawl.
+
+**Determinism note (same split as the PDF detector).** The CC lookup itself is
+**network-bound**, so it can't run in the offline session gate — keep it out of
+`session_check.py` like the existing link-check exclusion. But factor the
+**scoring rule** (given a `{onSite, inCommonCrawl, inSitemap}` triple → score
+delta + recommendation) as a **pure function** and unit-test it with fixtures, so
+the logic is covered even though the live probe isn't.
+
+---
+
 ## Future work — make the two books unique (the original goal)
 
 The tooling, governance, pipeline, and CI are in place. The remaining content
