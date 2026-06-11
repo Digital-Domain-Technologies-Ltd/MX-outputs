@@ -16,6 +16,28 @@ mx:
 
 # Reminders & Open Plans
 
+## 2026-06-11 — Open items resolved / tracked
+
+Decisions from the review round, recorded so nothing is lost:
+
+- ✅ **Handbook self-repeat fixed.** The 110-word paragraph that appeared in
+  both "Part A — The Business Case" and "Chapter 11: Business Imperative" was
+  rewritten in the Chapter 11 copy. Within-book duplicates are now 0.
+- ⏳ **Pull request:** none for now — keep pushing to
+  `claude/human-terms-machine-thinking-oitwsl`. (Note: the CI `checks` workflow
+  only runs on a PR or a push to `main`, so it stays dormant until then.)
+- ⏳ **Book PDFs:** intentionally **out of scope**. `pdf/books/**` are the old
+  pandoc artefacts and will drift from the canonical HTML; regenerating them
+  from HTML (e.g. weasyprint) is a deliberate non-goal for now.
+- ⏳ **OWNER ACTION — disable the upstream generator** (cannot be done from an
+  `mx-outputs`-scoped session). Follow **`DISABLE-UPSTREAM-GENERATOR.md`**:
+  - [ ] Turn off the pandoc job in the generator/source repo (Step 1).
+  - [ ] Enable branch protection on `main` requiring the `checks` workflow (Step 2).
+  - [x] In-repo tripwire + CI enforcement already block a regenerated file from
+    merging.
+
+---
+
 ## 2026-06-11 — Books as source, appendices consolidated
 
 ### Why
