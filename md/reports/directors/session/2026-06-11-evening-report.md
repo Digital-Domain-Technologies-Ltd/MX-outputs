@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Artefact Lifecycle, Drift Fixes, and Index Friability"
-description: "Evening segment: one cross-carrier lifecycle field designed, six enum-prose drifts fixed, and generated indexes made self-declaring and gate-enforced."
+title: "Co-Directors Report - Artefact Lifecycle, Index Friability, and the TrustClaw Local-Only Redesign"
+description: "Evening segment: one cross-carrier lifecycle field designed, six enum-prose drifts fixed, generated indexes made self-declaring and gate-enforced, and TrustClaw rebuilt to run fully local across five reviewed phases."
 author: "Tom Cranstoun"
 created: 2026-06-11
 modified: 2026-06-11
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -19,7 +19,7 @@ mx:
   x-mx-contextProvides: ["Co-Directors Report - Artefact Lifecycle, Drift Fixes, and Index Friability"]
 ---
 
-# Co-Directors Report - Artefact Lifecycle, Drift Fixes, and Index Friability
+# Co-Directors Report - Artefact Lifecycle, Index Friability, and the TrustClaw Local-Only Redesign
 
 **Date:** 11 June 2026 - Evening
 **Segment:** evening (since 5pm)
@@ -29,6 +29,8 @@ mx:
 ## Summary
 
 A request to classify the repository's product-requirements documents turned into a piece of metadata architecture. We classified every PRD, but in doing so surfaced that the repo had six different fields all answering "what state is this in", several of which contradicted each other. The session ends with a written design for a single cross-carrier lifecycle field to replace them, three classes of latent metadata drift fixed, and a new rule that generated indexes must declare they are not to be trusted as stable, enforced by a gate so the rule cannot rot.
+
+In parallel, a second body of work took TrustClaw - our self-hostable personal AI agent - and rebuilt it to run fully local. It now runs its inference on a local model instead of a cloud gateway, so no customer content leaves the machine, which is the same trust posture we sell. This shipped as five reviewed phases, each verified before the next, and is documented end to end.
 
 ---
 
@@ -50,19 +52,22 @@ The repository auto-generates a number of index files from its own contents. The
 
 The distribution-history idea from the lifecycle design is also a product: a tamper-evident record of where an attested artefact was sent, which is the evidence an auditor or insurer asks for. It went into the investor and team pitches, held as a possibility rather than a promise. Separately, the session-close discipline was tightened so that a focused commit still produces a full written record.
 
+### 5. TrustClaw rebuilt to run fully local
+
+TrustClaw previously sent every message, memory, and tool result to a cloud inference provider. We rebuilt it so that both its text generation and its memory both run on a local model on the operator's own machine, with the cloud path retained only as an explicit opt-in. The work went in five reviewed phases: move the lowest-risk calls first and prove the transport; build an acceptance test that measures whether a local model can reliably drive the agent's tools, and pass it (the chosen model scored full marks over repeated runs); cut the main agent over; move the memory embeddings, including the data migration that this requires because vectors from different models are not comparable; and package the whole thing as a one-command self-host stack. Every phase was type-checked and verified against a live local model before the next began, and every model call the agent makes is now recorded to the same evidence log the rest of the estate uses. The redesign is captured in a product-requirements document, an architecture reference, and an operator manual, all in the usual places.
+
 ---
 
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits (this segment, hub) | 4 |
-| File changes | 36 |
-| Lines added | +510 |
-| Lines removed | -62 |
-| Repositories | 1 (hub) |
-| New canonical files | 3 (artefact-lifecycle PRD, index-metadata library, index-metadata gate) |
+| Commits (this segment, hub) | 5 (4 artefact-lifecycle + 1 TrustClaw docs) |
+| Commits (this segment, mx-maxine-claw submodule) | 5 (the five redesign phases) |
+| Repositories | 2 (hub + mx-maxine-claw) |
+| New canonical files | 6 (artefact-lifecycle PRD, index-metadata library, index-metadata gate, TrustClaw PRD, architecture doc, operator manual) |
 | New pre-push gate | 1 (Gate 24) |
+| TrustClaw phases shipped | 5 (compaction, tool-calling harness, agent cut-over, embeddings + migration, self-host) |
 | PRDs classified | every in-scope PRD |
 
 ---
@@ -111,3 +116,9 @@ I learned to treat a request as a probe, not just a task. "Classify my PRDs" was
 | 44d67c56 | Add dissemination-evidence monetisation note to CogNovaMX pitches |
 | 88ee4a1a | step-commit: quick mode writes the session record; indexes are not its concern |
 | 6cd49f7b | Generated indexes self-declare friability; enforce with a gate |
+| 794315f7 | Add TrustClaw architecture doc + operator manual |
+| mx-maxine-claw c6d95b6 | Local-only Phase 1: compaction LLM calls on local Ollama |
+| mx-maxine-claw 1f083e5 | Local-only Phase 2: tool-calling acceptance harness |
+| mx-maxine-claw 7fc5db2 | Local-only Phase 3: route the main agent to local Ollama |
+| mx-maxine-claw 41d2269 | Local-only Phase 4: memory embeddings local + migration |
+| mx-maxine-claw 5d8b67a | Local-only Phase 5: self-host runtime (compose + docs) |
