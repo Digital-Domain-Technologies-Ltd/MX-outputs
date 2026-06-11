@@ -73,6 +73,23 @@ class RenderTest(unittest.TestCase):
         head = page.split("</head>")[0]
         self.assertIn("noindex", head)
 
+    def test_render_page_carries_dateless_source_frontmatter(self):
+        # Every served mx-site page carries the MX-SOURCE-FRONTMATTER comment the
+        # hub's check-source-frontmatter-present gate requires. The splitter emits
+        # it directly (single source), so no backfill step runs - a backfill would
+        # inject a volatile `modified` date that breaks this script's own --check.
+        # The block is dateless, so generator output, --check, and re-runs all stay
+        # byte-stable.
+        page = sa.render_page("a", "Appendix A", 'He said "hi"', "<p>x</p>", ["a"])
+        self.assertIn("<!-- MX-SOURCE-FRONTMATTER:START -->", page)
+        self.assertIn("<!-- MX-SOURCE-FRONTMATTER:END -->", page)
+        block = page.split("MX-SOURCE-FRONTMATTER:START")[1].split("MX-SOURCE-FRONTMATTER:END")[0]
+        self.assertNotIn("created:", block)
+        self.assertNotIn("modified:", block)
+        self.assertIn("servedAt:", block)
+        # A quote in the description must not break the embedded YAML.
+        self.assertIn('\\"hi\\"', block)
+
     def test_jsonld_is_valid_and_carries_appendix_metadata(self):
         import json
 
