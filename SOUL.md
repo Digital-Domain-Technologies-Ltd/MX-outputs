@@ -17,7 +17,9 @@ This is the control document for mx-outputs.
 
 ## What This Is
 
-MX Outputs holds generated artefacts — the build products of the MX system. Reports, PDFs, HTML pages, presentations, and JSON exports all land here. Nothing in this folder is authored directly; everything is produced by scripts, pipelines, or AI-assisted workflows.
+MX Outputs holds generated artefacts — the build products of the MX system. Reports, PDFs, HTML pages, presentations, and JSON exports all land here. Most of this folder is not authored directly; it is produced by scripts, pipelines, or AI-assisted workflows.
+
+**Exception — the books are now canonical source.** The book manuscripts under `html/books/**` (the Handbook, the Protocols, and the consolidated Appendices) are no longer generated. They are hand-maintained HTML and are the source of truth: there is no upstream markdown to regenerate them from. Edit them directly here. The old pandoc pipeline must be turned off so it cannot overwrite them — see [`DISABLE-UPSTREAM-GENERATOR.md`](DISABLE-UPSTREAM-GENERATOR.md).
 
 ---
 
@@ -43,7 +45,7 @@ MX Outputs holds generated artefacts — the build products of the MX system. Re
 
 ## Constraints
 
-1. **Do not hand-edit outputs.** If a report is wrong, fix the source or the generator, then regenerate.
+1. **Do not hand-edit outputs.** If a report is wrong, fix the source or the generator, then regenerate. **Exception:** `html/books/**` is canonical hand-maintained HTML — edit those files directly; they have no generator to re-run.
 2. **Maintain the index.** Run `./scripts/generate-index.sh` after adding new outputs.
 3. **Type-first structure.** Files are organised by output type (md/, pdf/, html/), then by purpose within each type.
 4. **Submodule discipline.** Commit and push mx-outputs before updating the pointer in the main repo.

@@ -16,6 +16,65 @@ mx:
 
 # Reminders & Open Plans
 
+## 2026-06-11 — Open items resolved / tracked
+
+Decisions from the review round, recorded so nothing is lost:
+
+- ✅ **Handbook self-repeat fixed.** The 110-word paragraph that appeared in
+  both "Part A — The Business Case" and "Chapter 11: Business Imperative" was
+  rewritten in the Chapter 11 copy. Within-book duplicates are now 0.
+- ⏳ **Pull request:** none for now — keep pushing to
+  `claude/human-terms-machine-thinking-oitwsl`. (Note: the CI `checks` workflow
+  only runs on a PR or a push to `main`, so it stays dormant until then.)
+- ⏳ **Book PDFs:** intentionally **out of scope**. `pdf/books/**` are the old
+  pandoc artefacts and will drift from the canonical HTML; regenerating them
+  from HTML (e.g. weasyprint) is a deliberate non-goal for now.
+- ⏳ **OWNER ACTION — disable the upstream generator** (cannot be done from an
+  `mx-outputs`-scoped session). Follow **`DISABLE-UPSTREAM-GENERATOR.md`**:
+  - [ ] Turn off the pandoc job in the generator/source repo (Step 1).
+  - [ ] Enable branch protection on `main` requiring the `checks` workflow (Step 2).
+  - [x] In-repo tripwire + CI enforcement already block a regenerated file from
+    merging.
+
+---
+
+## Future work — make the two books unique (the original goal)
+
+The tooling, governance, pipeline, and CI are in place. The remaining content
+work is to remove the paragraphs the Handbook and the Protocols still share
+verbatim. As of 2026-06-11: **16 cross-book duplicates over 100 words**, all in
+the two parts the books share — **Part A — The Business Case** and **Part B —
+The Technical Foundation** (they were copied into both books). 0 within-book.
+
+Approach (per duplicate):
+
+- **Rewrite** the genuine copy-paste ones on one side, keeping the established
+  split — Protocols carries the deeper/technical treatment, Handbook the
+  lighter — then re-run `python3 scripts/manuscript_uniqueness.py` and watch the
+  count fall. The gate + CI then hold it.
+- **Ignore-list** the ones that are deliberately shared (authorial statements,
+  boilerplate, defined terms) by adding their hash to
+  `scripts/manuscript-uniqueness-ignore.txt`. Done so far: the "I want to be
+  clear about my stance on AI" paragraph.
+
+Candidates that may be *deliberately* shared (review before rewriting): the NHS
+"patient asks an AI assistant about drug interactions" example; the
+"Linguistic bias / tokenize English" paragraph near the machines-not-magic
+section. The current list with hashes and locations is in
+`scripts/manuscript-uniqueness-report.md`.
+
+Lower priority / nice-to-have:
+
+- `.mx.yaml.md` frontmatter check is in; a README-index staleness check
+  (`generate-index.sh --check`) was noted as a possible future gate step.
+- Per-appendix JSON-LD is emitted; richer per-appendix metadata (timeRequired,
+  educationalLevel, dates) could be carried through the consolidated source if
+  wanted.
+- Book PDFs remain out of scope; regenerating them from the canonical HTML
+  (e.g. weasyprint) is the option if they are ever brought back in.
+
+---
+
 ## 2026-06-11 — Books as source, appendices consolidated
 
 ### Why
@@ -37,6 +96,39 @@ consolidated and maintained as HTML too.
 - **Book PDFs → out of scope.** `pdf/books/*` is left as-is for now. Not
   part of this change.
 - **Standalone appendix pages → deferred.** See the open decision below.
+
+### Status (2026-06-11)
+
+- ✅ **Phase 0 done** — `SOUL.md` and the `html/books/**` runbooks now declare
+  the books canonical hand-maintained HTML. *External coordination still
+  outstanding: stop the upstream generator.*
+- ✅ **Phase 1 done** — `html/books/appendices/mx-appendices.html` built from
+  the 22 standalone pages by `scripts/consolidate_appendices.py` (deterministic,
+  tested).
+- ✅ **Phase 3 done** — appendices added to the uniqueness tool's manuscript
+  list; index/report regenerated (3 manuscripts, no new cross-book duplicates).
+- ✅ **Phase 2 resolved (no rewrite needed)** — decision below settled on
+  **Option C**: the per-appendix URLs are preserved (regenerated from source),
+  so the 8 in-book links still resolve and need no change, and no redirects or
+  new deployment path are required.
+- ✅ **Publishing model (Option C) built** — `scripts/split_appendices.py`
+  regenerates the 22 focused site pages from the consolidated source. One file
+  to edit (`html/books/appendices/mx-appendices.html`), 22 pages published.
+  The pages carry a "GENERATED FILE — do not edit" marker.
+- ✅ **Regenerate guard built** — the pandoc `generator` meta was stripped
+  from the book files and `scripts/check_canonical_source.py` (wired into the
+  SessionStart hook and runnable in CI) fails if it reappears.
+- ✅ **CI enforcement added** — `.github/workflows/checks.yml` runs
+  `session_check.py --strict` on push to `main` and on PRs, so a regenerated
+  book (tripwire), drifted appendix pages, malformed JSON, or a failing test
+  **cannot land on a protected branch**. This blocks the *symptom* in-repo.
+- ⏳ **Still owed (external, out of reach this session):** disable/archive the
+  upstream pandoc generator at source, and enable branch protection requiring
+  the `checks` workflow on `main`. This session is scoped to `mx-outputs` only
+  (a submodule), so the generator's parent repo cannot be edited from here. A
+  step-by-step hand-off is written up in **`DISABLE-UPSTREAM-GENERATOR.md`**.
+  CI already blocks a regenerated file from merging; these two steps stop it
+  being produced and make the block enforced rather than advisory.
 
 ### Migration plan
 
@@ -84,7 +176,19 @@ consolidated and maintained as HTML too.
 - Re-run the link check (`md/reports/validation/manuscript-url-check.md`
   process) and confirm every appendix anchor resolves.
 
-### OPEN DECISION — the standalone appendix pages
+### RESOLVED 2026-06-11 — Option C chosen
+
+The standalone appendix pages are **regenerated from the consolidated source**
+(`scripts/split_appendices.py`). Single source of truth *and* 22 focused,
+addressable URLs preserved. The options considered are kept below for the
+record.
+
+- ✅ **Per-appendix JSON-LD restored** — the splitter now emits a schema.org
+  `TechArticle` block (name, description, canonical URL, author, `isPartOf` the
+  book, position) on each page.
+- ⏳ **Still owed (external):** disable/archive the upstream generator.
+
+### OPEN DECISION (resolved — see above) — the standalone appendix pages
 
 `mx-site/books/appendices/*.html` are referenced by `sitemap.xml`,
 `robots.txt`, `llms-full.txt`, several `mx-site/books/*.html` pages, and the
@@ -113,6 +217,36 @@ consolidated and maintained as HTML too.
 
   **Suggested path:** Option B short-term (zero breakage), move to Option C
   when there is time to write the splitter.
+
+  **Deployment note (blocks Phase 2):** the canonical consolidated file lives
+  at `html/books/appendices/mx-appendices.html`, but the live site serves from
+  `mx-site/`. Before the in-book links can point at the consolidated file, it
+  must be reachable at a site URL (e.g. copy/deploy to
+  `mx-site/books/appendices/mx-appendices.html`, or have the deploy map
+  `html/books/` → site). Resolve this together with the option above.
+
+## 2026-06-11 — SessionStart hook consolidated behind a deterministic gate
+
+The hook now runs one deterministic script, `scripts/session_check.py`, before
+any inference or CPU-intensive work. It does cheap checks first and only does
+heavy work when a cheap check says it is needed.
+
+**Moved into the gate:** the canonical-source tripwire; a raw-byte **freshness
+gate** (compares each book file's `file_sha` to the committed index, and
+**skips the full re-index** when nothing changed — previously the hook
+re-parsed all ~9,200 paragraphs every session); appendix-page sync check; and
+**all** script test suites (the hook previously ran only one).
+
+**Further candidates considered:**
+- ✅ JSON validity of `json/**`, `reginald/**`, `.well-known/**`, `mx-site/**`,
+  `distributions/**` — added (`scripts/check_json_valid.py`), folded into the
+  gate and CI.
+- `.mx.yaml.md` frontmatter parses as YAML — needs PyYAML (not a stdlib dep);
+  skipped to keep the hook dependency-free.
+- README index staleness — `generate-index.sh` has no `--check` mode and scans
+  the whole repo; would need a cheap staleness check first.
+- Link checking (`manuscript-url-check`) — **deliberately excluded**: it is
+  network-bound and therefore neither cheap nor deterministic offline.
 
 ### Risks
 

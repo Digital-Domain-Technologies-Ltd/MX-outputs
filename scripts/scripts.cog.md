@@ -69,7 +69,8 @@ the long paragraphs that appear word-for-word in more than one book — the
 paragraphs to rewrite so the books read as distinct works.
 
 - **Reads:** `html/books/handbook/mx-handbook.html`,
-  `html/books/protocols/mx-protocols.html`
+  `html/books/protocols/mx-protocols.html`,
+  `html/books/appendices/mx-appendices.html`
 - **Writes:** `json/manuscript-index.json` (the index, stored with the
   repository's other JSON exports) and
   `scripts/manuscript-uniqueness-report.md` (the human-readable report)
@@ -87,6 +88,29 @@ python3 scripts/manuscript_uniqueness.py            # build index + report
 python3 scripts/manuscript_uniqueness.py --check    # exit 1 on duplicates
 python3 scripts/test_manuscript_uniqueness.py       # run the unit tests
 ```
+
+### Appendices pipeline (python3, stdlib only)
+
+The appendices are maintained as one file and published as many:
+
+- `consolidate_appendices.py` — one-off migration that folded the 22 standalone
+  pages into the canonical source `html/books/appendices/mx-appendices.html`.
+- `split_appendices.py` — regenerates the 22 focused site pages
+  (`mx-site/books/appendices/appendix-*.html`) from that source, each with a
+  schema.org `TechArticle` JSON-LD block. Edit the source, re-run, commit both.
+- `check_canonical_source.py` — tripwire that fails if a `html/books/**` file
+  carries the pandoc `generator` marker (i.e. was regenerated upstream). Runs
+  in the SessionStart hook and in CI.
+- `check_json_valid.py` — fails if any operational `*.json` is malformed.
+- `check_yaml_frontmatter.py` — fails if any `*.mx.yaml.md` / `*.cog.md` / blog
+  frontmatter does not parse as YAML (needs PyYAML; skipped if absent).
+- `session_check.py` — the single deterministic script the SessionStart hook
+  runs before any inference: cheap checks first (tripwire, JSON validity, a
+  raw-byte freshness gate, appendix sync, tests), re-indexing only when a book
+  actually changed. `.github/workflows/checks.yml` runs it `--strict` in CI, so
+  a regenerated book or broken state cannot land on `main`.
+
+See `MANUAL.md` for full detail.
 
 ## How to act safely
 
