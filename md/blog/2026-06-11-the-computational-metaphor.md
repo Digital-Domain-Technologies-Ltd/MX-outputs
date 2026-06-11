@@ -11,7 +11,7 @@ mx:
   contentType: blog-post
   audience: [business, humans, machines]
   targetReaders: "Executives and product teams buying or deploying AI, plus the writers and engineers who describe these systems to customers and to each other. Anyone who has nodded along to the sentence 'the AI understands your customers'."
-  tags: [anthropomorphism, computational-metaphor, ai-literacy, language, trust, mx, machine-experience]
+  tags: [anthropomorphism, computational-metaphor, form-and-meaning, ai-literacy, language, trust, mx, machine-experience]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/blog/2026-06-11-the-computational-metaphor.md
   purpose: "Argue that anthropomorphic language about AI is not loose talk but a persuasion mechanism that manufactures unearned trust, ground the argument in Baria and Cross (2021) on the Computational Metaphor, and show that MX's insistence on the word 'machine' is the corrective."
   stability: draft
@@ -53,6 +53,16 @@ A large language model predicts the next token. Given the text so far, it produc
 
 None of that fits inside the word "thinks." So the word "thinks" has to go.
 
+## Saying the right thing is not the same as knowing what it means
+
+Here is the part that catches people, because the output looks so much like knowledge. Type "The first person to walk on the Moon was" into a model and it completes the line with "Neil Armstrong." Obviously it knows who walked on the Moon — what else could that be?
+
+But look at what was actually asked. The model was not consulted as a witness to the Apollo programme. It was handed a string of words and asked, in effect, a question about its own training data: of all the continuations that have ever followed this sequence in the text I was trained on, which is the most probable? "Neil Armstrong" wins that contest because the human record is full of true sentences that say so. The model lands on the right word through the statistics of how words co-occur — never through any contact with the Moon, the man, or the event. Train it on a corpus that insists someone else got there first, and it will tell you that instead, with exactly the same confidence.
+
+This is an old distinction in linguistics, sharpened for the language-model age by Emily Bender and Alexander Koller: the difference between *form* — the observable shape of language, the words and how they pattern — and *meaning* — what those words are *about*, how they hook onto the world and onto what a speaker intends. Their argument is that a system trained only on form has, in principle, no way to get to meaning ([Bender and Koller, 2020](https://aclanthology.org/2020.acl-main.463/)). It can become superb at producing the right form without ever possessing the meaning underneath it. Knowing which words to say and knowing what they mean are simply not the same accomplishment, however indistinguishable they look from the outside.
+
+That sounds like a seminar point until you are the one publishing. If the machine works the surface of language and not the meaning beneath it, then it cannot recover the meaning you didn't write down. The context you implied with a photograph, the relationship you encoded in a layout, the qualifier you left unsaid because any human would infer it — none of that is *form*, so none of it reliably survives. Which is the whole practical case for Machine Experience: the only way to make sure a fact about you reaches the answer is to put it there *as form* — stated, structured, marked up — because form is the only thing the machine ever actually holds.
+
 ## Baria and Cross's prescription is just MX's house style
 
 The most useful thing in their paper, for anyone who actually ships these systems, is that they do not stop at diagnosis. They call for a "new lexicon" for AI-labelled technologies — language that resists the anthropomorphising pull of the current discourse instead of surrendering to it.
@@ -73,8 +83,9 @@ Baria and Cross gave the trap a name. The way out of it is a vocabulary you alre
 
 ---
 
-## Source
+## Sources
 
 - Alexis T. Baria and Keith Cross (2021). *The brain is a computer is a brain: neuroscience's internal debate and the social significance of the Computational Metaphor.* arXiv:2107.14042. <https://arxiv.org/abs/2107.14042>
+- Emily M. Bender and Alexander Koller (2020). *Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data.* Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, 5185–5198. <https://aclanthology.org/2020.acl-main.463/>
 
 *This post is commentary. The argument it makes about language is the one it tries to follow: every claim about what a machine does is meant to survive being read literally.*
