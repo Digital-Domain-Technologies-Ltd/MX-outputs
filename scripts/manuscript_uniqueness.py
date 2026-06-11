@@ -63,7 +63,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 TOOL_NAME = "scripts/manuscript_uniqueness.py"
-TOOL_VERSION = "2.0.0"
+TOOL_VERSION = "2.1.0"
 DEFAULT_MIN_WORDS = 100
 # Word thresholds reported as a distribution so the operator can see how the
 # shared-paragraph count grows as the bar is lowered, and pick a level.
@@ -87,14 +87,33 @@ DEFAULT_REPORT_OUT = REPO_ROOT / "scripts" / "manuscript-uniqueness-report.md"
 DEFAULT_IGNORE = REPO_ROOT / "scripts" / "manuscript-uniqueness-ignore.txt"
 
 _WHITESPACE = re.compile(r"\s+")
+# Anything that is not a word character (letters, digits, underscore) or
+# whitespace is treated as punctuation and dropped for matching purposes.
+_PUNCTUATION = re.compile(r"[^\w\s]", re.UNICODE)
 
 
 # --------------------------------------------------------------------------
 # Text helpers
 # --------------------------------------------------------------------------
 def normalize_text(text: str) -> str:
-    """Collapse all runs of whitespace to single spaces and strip ends."""
+    """Collapse all runs of whitespace to single spaces and strip ends.
+
+    This is the *display* form: case and punctuation are preserved, so
+    excerpts and word counts read naturally.
+    """
     return _WHITESPACE.sub(" ", text).strip()
+
+
+def canonical_text(text: str) -> str:
+    """Case-, punctuation-, and whitespace-insensitive *matching* form.
+
+    Two paragraphs that differ only in capitalisation, punctuation, or
+    whitespace canonicalise to the same string, so the duplicate detector
+    treats them as identical. Punctuation is replaced with a space (not
+    deleted) so that ``end.Start`` does not collapse into one token.
+    """
+    lowered = _PUNCTUATION.sub(" ", text.lower())
+    return _WHITESPACE.sub(" ", lowered).strip()
 
 
 def word_count(text: str) -> int:
@@ -105,6 +124,11 @@ def word_count(text: str) -> int:
 def text_hash(text: str) -> str:
     """Stable SHA-256 of the given text."""
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def canonical_hash(text: str) -> str:
+    """Identity hash used for duplicate matching (ignores case/punct/space)."""
+    return text_hash(canonical_text(text))
 
 
 def excerpt(text: str, words: int = 15) -> str:
@@ -192,7 +216,9 @@ def build_paragraph_records(paragraphs: list[str]) -> list[dict]:
         {
             "index": p_index,
             "word_count": word_count(text),
-            "hash": text_hash(text),
+            # Identity ignores case, punctuation, and whitespace so that
+            # paragraphs differing only in those are detected as duplicates.
+            "hash": canonical_hash(text),
             "excerpt": excerpt(text),
         }
         for p_index, text in enumerate(paragraphs)

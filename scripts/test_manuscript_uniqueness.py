@@ -63,6 +63,30 @@ class TextHelpersTest(unittest.TestCase):
         self.assertNotEqual(a, b)
         self.assertEqual(a, mu.section_signature("Title", ["one two", "three"]))
 
+    def test_canonical_text_ignores_case_punctuation_whitespace(self):
+        # Punctuation (incl. the apostrophe) becomes a space, consistently.
+        self.assertEqual(
+            mu.canonical_text("Hello,  WORLD!  It's   here."),
+            "hello world it s here",
+        )
+        self.assertEqual(
+            mu.canonical_text("HELLO world — it's here"),
+            mu.canonical_text("hello, world. It's here!"),
+        )
+
+    def test_canonical_text_keeps_word_boundaries(self):
+        # Punctuation becomes a space, not nothing.
+        self.assertEqual(mu.canonical_text("end.Start"), "end start")
+
+    def test_canonical_hash_matches_across_case_and_punctuation(self):
+        self.assertEqual(
+            mu.canonical_hash("The Moon — was it? Yes!"),
+            mu.canonical_hash("the moon was it yes"),
+        )
+        self.assertNotEqual(
+            mu.canonical_hash("alpha beta"), mu.canonical_hash("alpha gamma")
+        )
+
 
 class ExtractChaptersTest(unittest.TestCase):
     def test_chapters_split_on_h1(self):
@@ -139,6 +163,19 @@ class FindDuplicatesTest(unittest.TestCase):
         self.assertEqual(
             mu.find_duplicates(_manuscripts(sources), min_words=209), []
         )
+
+    def test_duplicate_detection_ignores_case_punct_and_whitespace(self):
+        # Same 220 words, but one book differs in case, punctuation, spacing.
+        words = " ".join(["alpha"] * 220)
+        hb = "<h1>HB</h1><p>" + words + ".</p>"
+        pb = "<h1>PB</h1><p>" + words.upper().replace("alpha", "Alpha") + "!  </p>"
+        # Inject extra spaces and punctuation into the protocols copy.
+        pb = "<h1>PB</h1><p>  " + ", ".join(["Alpha"] * 220) + "  </p>"
+        dups = mu.find_duplicates(
+            _manuscripts([("handbook", hb), ("protocols", pb)]), min_words=100
+        )
+        self.assertEqual(len(dups), 1)
+        self.assertEqual(dups[0]["book_count"], 2)
 
     def test_occurrences_sorted_deterministically(self):
         shared = _para(300, "alpha")

@@ -137,8 +137,12 @@ are recorded in the index under `ignore` for transparency.
   (`<a>`, `<em>`, `<sup>` …) flattened to their text and all whitespace
   collapsed. Two paragraphs that differ only in source line-wrapping count as
   identical.
-- Word counts and identity are computed on that normalised text; identity is
-  a SHA-256 hash of it.
+- Word counts come from that normalised text. **Identity, however, ignores
+  case, punctuation, and whitespace**: two paragraphs that differ only in
+  capitalisation, punctuation, or spacing produce the same hash and are
+  reported as duplicates. The `hash` is a SHA-256 of that canonical form, so
+  the hashes you copy into the ignore list are case/punctuation-insensitive
+  too.
 
 ### Thresholds
 

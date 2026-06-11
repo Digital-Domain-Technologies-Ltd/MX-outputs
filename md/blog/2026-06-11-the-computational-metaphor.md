@@ -11,7 +11,7 @@ mx:
   contentType: blog-post
   audience: [business, humans, machines]
   targetReaders: "Executives and product teams buying or deploying AI, plus the writers and engineers who describe these systems to customers and to each other. Anyone who has nodded along to the sentence 'the AI understands your customers'."
-  tags: [anthropomorphism, computational-metaphor, form-and-meaning, ai-literacy, language, trust, mx, machine-experience]
+  tags: [anthropomorphism, computational-metaphor, form-and-meaning, system-prompts, rlhf, guardrails, ai-literacy, language, trust, mx, machine-experience]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/blog/2026-06-11-the-computational-metaphor.md
   purpose: "Argue that anthropomorphic language about AI is not loose talk but a persuasion mechanism that manufactures unearned trust, ground the argument in Baria and Cross (2021) on the Computational Metaphor, and show that MX's insistence on the word 'machine' is the corrective."
   stability: draft
@@ -62,6 +62,14 @@ But look at what was actually asked. The model was not consulted as a witness to
 This is an old distinction in linguistics, sharpened for the language-model age by Emily Bender and Alexander Koller: the difference between *form* — the observable shape of language, the words and how they pattern — and *meaning* — what those words are *about*, how they hook onto the world and onto what a speaker intends. Their argument is that a system trained only on form has, in principle, no way to get to meaning ([Bender and Koller, 2020](https://aclanthology.org/2020.acl-main.463/)). It can become superb at producing the right form without ever possessing the meaning underneath it. Knowing which words to say and knowing what they mean are simply not the same accomplishment, however indistinguishable they look from the outside.
 
 That sounds like a seminar point until you are the one publishing. If the machine works the surface of language and not the meaning beneath it, then it cannot recover the meaning you didn't write down. The context you implied with a photograph, the relationship you encoded in a layout, the qualifier you left unsaid because any human would infer it — none of that is *form*, so none of it reliably survives. Which is the whole practical case for Machine Experience: the only way to make sure a fact about you reaches the answer is to put it there *as form* — stated, structured, marked up — because form is the only thing the machine ever actually holds.
+
+## The impression of thinking is manufactured, and that's the point
+
+It would be lazy to pin all of this on marketing copy. A great deal of the impression of a mind is engineered, deliberately and well, by people who are very good at their jobs. It is worth seeing the machinery, because each piece is aimed at a different instinct we use to detect another mind.
+
+A **system prompt** — the instructions you never see — hands the model a name, a persona, and a tone, so the voice shows up already sounding like someone. **Reinforcement from human feedback** tunes the raw model against piles of human preference judgements until its answers feel considerate, suitably hedged, agreeable — which is to say, like a person being helpful. **Guardrails** layer on refusals and apologies that read as conscience. An **agentic loop** lets it call a tool, read the result, and try again, so a string of separate predictions looks like someone working a problem through. And the **interface** seals it: a "thinking…" shimmer, words streamed as if typed by a mind in real time, and touches as literal as scanning your prompt for the word "ultrathink" and, on seeing it, quietly handing the model a bigger budget to ramble internally before it answers.
+
+Here is the thing worth holding onto: none of that adds understanding. Feedback tuning changes which words are likely, not whether the model knows what they are about. A guardrail stops an output; it does not comprehend it. A loop runs the same formal guess more times. "Ultrathink" buys more computation, not more thought. Every layer manages and presents the form; not one of them touches the meaning underneath. What you get is a more reliable, better-mannered, more theatrical next-word predictor — and it persuades in exact proportion to how skilfully it was assembled. Which is the whole reason to keep your head: the better the impression of thinking gets, the more it is worth remembering that it is an impression, built on purpose, over a machine that is still only guessing what comes next.
 
 ## Baria and Cross's prescription is just MX's house style
 
