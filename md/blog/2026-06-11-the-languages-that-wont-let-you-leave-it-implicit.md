@@ -81,6 +81,20 @@ People hear that and assume it is a concession to the crudeness of machines — 
 
 English lets you leave it implicit. That is a freedom, and like most freedoms it is mostly used to be lazy. The languages above took the freedom away, and what they bought with it was a listener who has less to guess wrong. When you mark up a page so a machine can't mistake you, you are not stooping to the machine. You are doing what half the world's grammars already do before breakfast.
 
+## And we built the machine on the leakiest language of all
+
+Here is the part that should keep you up at night. Of all the languages we could have built these machines on, we built them mostly on English — and English is the one that leans hardest on the listener to fill in what the words leave out.
+
+There are two losses stacked here, and they get blamed on each other. The first is in the language. English makes evidence and certainty optional; Turkish and Quechua make them obligatory. So an English speaker spends a lifetime writing sentences that omit how they know and how sure they are — not from carelessness, but because the grammar permits it and trusts the reader to reconstruct the rest from context, register, and what came before. English is tuned for a richly inferring reader. That is an efficiency, and it only works when the reader can pay it back.
+
+The second loss is in the medium. Write the sentence down and the tone goes. Tokenise it and what survives is the bare form — the only layer, as the rest of this series keeps insisting, that the machine ever actually holds. The sarcasm, the hedge, the register that told you whether "we need to talk" was warm or a warning: all of it lived in prosody and pragmatics, and none of it is in the tokens.
+
+Put the two together and you have the irony this whole series has been walking toward. We trained the machine that can read only form on the human language that leans hardest on inference. It inherits English's gappy, context-presuming style and reproduces it fluently — then is deployed as exactly the reader that style was never written for. It writes like someone counting on you to read between the lines, while being the one entity that cannot.
+
+And there is a third turn, the same knife from another angle. Because the models are pivoted on English, a Quechua sentence that grammatically marks *they told me, I didn't see it* has no English target for that marker. It flattens into a plain assertion on the way through an English-shaped representation. The machine does not merely fail to add provenance; it strips the provenance out of the languages that had it, laundering an evidential into English's confident, source-free declarative. The one feature you would most want, the architecture quietly removes.
+
+None of which is to say English is a poor language — every language relies on the listener to infer, and English is not uniquely lossy. It is that English makes *optional* precisely the things — source, stance, certainty — that other grammars make mandatory and that the machine most needs and least supplies. The problem was never that English is impoverished. It is that English's bet — *the reader is human, let them infer* — is the exact bet that breaks when the reader is a machine. We made that bet the mother tongue of the machine, and now we are surprised when it guesses.
+
 ---
 
 ## Sources and further reading
