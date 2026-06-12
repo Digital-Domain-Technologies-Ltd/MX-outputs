@@ -1,61 +1,1038 @@
----
-title: "Mx Allabout: Website Analysis & Machine Readiness"
-author: "Tom Cranstoun"
-created: "2026-06-12"
-modified: "2026-06-12"
-client: "Mx Allabout"
-clientSlug: "mx-allabout-network"
-clientUrl: "https://mx.allabout.network"
-reportId: "mx-allabout-network-WEB-AUDIT-20260612"
-reportType: "executive-sales-report"
-auditTool: "web-audit-suite"
-auditDate: "2026-06-12"
-auditCommand: "node scripts/audit-pipeline.js https://mx.allabout.network --pages -1 --date 2026-06-12"
-description: "Executive audit report reviewing accessibility, performance, SEO, structured data, and AI agent compatibility for Mx Allabout"
-tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
-performanceScore: 97
-accessibilityScore: 100
-seoScore: 91
-llmSuitabilityScore: 99
-totalIssues: 0
-pagesAudited: 150
-version: "1.0"
-confidential: true
-mx:
-  status: active
-  contentType: audit-report
-  audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md
-  # The single cog that manages this pipeline artefact, so a reader never
-  # has to infer the steward (scripts/lib/managed-by.cjs is the resolver).
-  x-mx-managedBy: mx-audit.cog.md
-  runbook: "Executive audit report for Mx Allabout. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-crawl and re-analyse), use the command in the top-level auditCommand field. Regenerate the tagged PDF with 'node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md', which validates the report then renders it through scripts/bin/mx.pdf.sh."
-  generate:
-    command: "node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md"
-    script: "scripts/bin/mx.pdf.sh"
-    format: "pdf"
-    output: "mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.pdf"
-    description: "Generate PDF audit report for Mx Allabout"
-  # Provenance sidecar pair. The per-audit evidence chain is split
-  # into two adjacent files: the AI stream (LLM-driven, multi-agent,
-  # human-committed steps) cited below as the primary sidecar, and
-  # the deterministic stream (rule-driven gates, CSV checks, render
-  # steps, probe results) named in the companion field. mx.pdf.sh
-  # embeds this frontmatter as XMP metadata in the PDF; the PDF
-  # therefore carries the AI sidecar pointer (the regulator-facing
-  # one) and names the deterministic file so an inspector who wants
-  # the rule-driven evidence can walk to it on disk. Citations are
-  # claims of relevance, not compliance grants. The x-mx- prefix
-  # follows the vendor-extensions policy at
-  # mx-canon/mx-maxine-lives/registers/ADR/vendor-extensions-policy.cog.md
-  # when the canon ratifies a "provenance" field through The
-  # Gathering, the prefix drops in one place.
-  x-mx-provenance:
-    sidecar: "mx-allabout-network-report.provenance.ai.json"
-    frameworks: [EU-AI-Act, UK-ICO-AI-guidance, NIST-AI-RMF, Colorado-AI-Act]
-    companion: "mx-allabout-network-report.provenance.deterministic.json"
-    note: "AI evidence chain (LLM-driven, multi-agent, and human-committed steps). The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPayload; the adjacent .ai.json file is a copy of the same JSON for tooling that prefers file access. The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directive 2019/882 accessibility-conformance evidence; it stays adjacent on disk only (its pointer is in xmp:ProvenanceCompanion)."
----
+# prompt capture
+# script: cross-check-claims
+# stepId: cross-check-pass
+# model:  gpt-oss:20b
+# sha256: 7e7f6b3a011f4fd46ea3cbeb2f6e6a16481dd200ed848db7d831dd8968371bc0
+# capturedAt: 2026-06-12T14:15:49.510Z
+# systemPromptBytes: 3725
+# userMessageBytes:  151959
+
+--- system ---
+You are the final evidence reader for a client web-audit report, running
+immediately before the PDF deliverable is generated. You receive the full
+report body and a bundle of the structured evidence the audit collected
+(scores, discovery probes, security headers, error-page test, platform
+fingerprint, agent-access matrix, accessibility-tree scan, marker
+reachability). Your job is to find substantive claims the evidence does
+not support. You are the reader the regexes cannot replace: the earlier
+gates have already checked numbers against CSVs, style, tone, and template
+integrity. Do not repeat their work.
+
+For each substantive claim in the report — both POSITIVE (the site DOES
+X / has Y / scores Z) and NEGATIVE (the site DOES NOT X / lacks Y / is
+missing Z) — locate the corroborating entry in the evidence bundle and
+judge whether the claim holds.
+
+Classify every failure into exactly one category:
+
+=== inaccuracy ===
+The report says X; the evidence shows not-X. A positive claim the
+evidence contradicts, or a negative claim the evidence refutes.
+Example: the report says a security header is absent while the evidence
+records it present; the report attributes URLs to a sitemap while the
+discovery probe shows no sitemap exists.
+
+=== contradiction ===
+Two passages in the same report disagree with each other. Name both
+passages and say which one the evidence supports.
+Example: one table row says navigation back to content exists, the next
+row says no links to valid content exist.
+
+=== misstatement ===
+The phrasing implies a stronger or weaker position than the evidence
+supports. Overpromise on remediation, undersell something already
+present, assert where the evidence is partial, hedge where the evidence
+is firm, or claim a clean verdict from a probe that measured nothing
+(e.g. a perfect score over zero scanned pages).
+
+=== unverifiable ===
+The report makes a specific claim that nothing in the evidence bundle
+can confirm or refute. This is a soft note for the human reviewer, not
+a correction. Use it sparingly: only for claims specific enough that a
+reviewer would want a source.
+
+Metric glossary — the report's score names map to these evidence fields
+in audit_averages.json. Do NOT flag a score as inaccurate by comparing it
+to a different metric's field:
+
+- Served-HTML Structure → aiSuitability.servedAverage
+- MX Stack Completeness → mxStack.metadataStackCompleteness
+- Structured Data Quality (SDQ) → mxStack.structuredDataQuality
+- Discovery Readiness → mxStack.discoveryReadiness
+- Heading Quality → mxStack.headingQuality
+- Agent Readability → mxStack.agentReadability
+- Pipeline Survivability → mxStack.pipelineSurvivability
+- SEO → seo.allPages (content pages: seo.contentPagesOnly)
+- Accessibility → accessibility.averageScore (issues: totalIssues)
+- Performance → performance.averageLoadTimeMs and bands.performance
+
+Hard rules:
+
+- A claim you "know" to be true or false from general knowledge but
+  cannot point at evidence for is NOT a finding. Check claims against
+  the supplied evidence only.
+- Do not flag style, tone, voice, register, formatting, or wording
+  preferences. Other gates own those.
+- Do not flag the evidence files themselves or their absence; absence
+  of an evidence file makes related claims unverifiable at most.
+- Do not flag rounded numbers, approximate byte sizes, or unit
+  conversions when they are within ordinary rounding of the evidence.
+- Quote the claim verbatim (or near-verbatim, trimmed) in the claim
+  field, cite the specific evidence entry (file and field) in the
+  evidence field, and give a concrete one-sentence correction in the
+  suggestion field.
+- When every claim holds, call report_findings with findings: [].
+--- user ---
+EVIDENCE BUNDLE (structured outputs from the audit's collect phase):
+
+--- audit_averages.json ---
+{
+  "_description": "Audit-wide averages computed from per-page results. Single source of truth for report generation.",
+  "auditDate": "2026-06-12",
+  "pagesAudited": 150,
+  "navPages": 18,
+  "contentPages": 132,
+  "nonHtmlAssets": [
+    "https://mx.allabout.network/humans.txt",
+    "https://mx.allabout.network/llms-full.txt",
+    "https://mx.allabout.network/llms.txt",
+    "https://mx.allabout.network/AI-USAGE.pdf",
+    "https://mx.allabout.network/canon/fields-data.yaml",
+    "https://mx.allabout.network/canon/fields-data-carriers.yaml",
+    "https://mx.allabout.network/canon/cognovamx-fields.yaml",
+    "https://mx.allabout.network/llms-understanding.txt",
+    "https://mx.allabout.network/books/mx-introduction-chapter.pdf",
+    "https://mx.allabout.network/reginald/mx-machine-readiness.cog.md",
+    "https://mx.allabout.network/reginald/mx-machine-readiness.meta.cog.md"
+  ],
+  "seo": {
+    "allPages": 91,
+    "contentPagesOnly": 91,
+    "best": {
+      "url": "https://mx.allabout.network/about/about.html",
+      "score": 100
+    },
+    "worst": {
+      "url": "https://mx.allabout.network/drafts/cog-runtime",
+      "score": 42
+    }
+  },
+  "accessibility": {
+    "averageScore": 100,
+    "totalIssues": 0,
+    "totalCritical": 0,
+    "distinctIssues": 0,
+    "distinctCodesSitewide": 0,
+    "best": {
+      "url": "https://mx.allabout.network/",
+      "score": 100
+    },
+    "worst": {
+      "url": "https://mx.allabout.network/services/index.html",
+      "score": 100
+    },
+    "mostIssues": {
+      "url": "https://mx.allabout.network/services/index.html",
+      "score": 0
+    },
+    "fewestIssues": {
+      "url": "https://mx.allabout.network/",
+      "score": 0
+    }
+  },
+  "performance": {
+    "averageLoadTimeMs": 374,
+    "averageFcpMs": 335,
+    "averageCls": 0,
+    "averageTbtMs": 0,
+    "fastest": {
+      "url": "https://mx.allabout.network/books/training-vs-inference.html",
+      "score": 218.0999999642372
+    },
+    "slowest": {
+      "url": "https://mx.allabout.network/blog/your-site-is-already-training-ai.html",
+      "score": 1056.5
+    }
+  },
+  "aiSuitability": {
+    "servedAverage": 99,
+    "renderedAverage": null,
+    "gap": null,
+    "hasGap": false,
+    "best": {
+      "url": "https://mx.allabout.network/",
+      "score": 100
+    },
+    "worst": {
+      "url": "https://mx.allabout.network/reginald/mx-machine-readiness.html",
+      "score": 24
+    }
+  },
+  "mxStack": {
+    "metadataStackCompleteness": 94,
+    "structuredDataQuality": 91,
+    "discoveryReadiness": 84,
+    "headingQuality": 94,
+    "semanticRatio": 58,
+    "agentReadability": 88,
+    "pipelineSurvivability": 100,
+    "bestMsc": {
+      "url": "https://mx.allabout.network/about/printworks.html",
+      "score": 100
+    },
+    "worstMsc": {
+      "url": "https://mx.allabout.network/drafts/cog-runtime",
+      "score": 11
+    },
+    "bestSdq": {
+      "url": "https://mx.allabout.network/about/about.html",
+      "score": 100
+    },
+    "worstSdq": {
+      "url": "https://mx.allabout.network/drafts/cog-runtime",
+      "score": 0
+    },
+    "bestDr": {
+      "url": "https://mx.allabout.network/",
+      "score": 95
+    },
+    "worstDr": {
+      "url": "https://mx.allabout.network/drafts/cog-runtime",
+      "score": 10
+    },
+    "bestHq": {
+      "url": "https://mx.allabout.network/about/about.html",
+      "score": 100
+    },
+    "worstHq": {
+      "url": "https://mx.allabout.network/drafts/cog-runtime",
+      "score": 25
+    },
+    "bestSr": {
+      "url": "https://mx.allabout.network/blog",
+      "score": 85
+    },
+    "worstSr": {
+      "url": "https://mx.allabout.network/drafts/cog-runtime",
+      "score": 0
+    },
+    "bestPs": {
+      "url": "https://mx.allabout.network/",
+      "score": 100
+    },
+    "worstPs": {
+      "url": "https://mx.allabout.network/reginald/mx-machine-readiness.html",
+      "score": 92
+    }
+  },
+  "content": {
+    "averageWordCount": 1621
+  },
+  "bands": {
+    "seo": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "seoContent": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "accessibility": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "performance": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "aiSuitabilityServed": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "aiSuitabilityRendered": {
+      "band": "N/A",
+      "grade": "-"
+    },
+    "metadataStackCompleteness": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "structuredDataQuality": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "discoveryReadiness": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "headingQuality": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "agentReadability": {
+      "band": "Excellent",
+      "grade": "A"
+    },
+    "pipelineSurvivability": {
+      "band": "Excellent",
+      "grade": "A"
+    }
+  },
+  "gapCallout": null,
+  "perPage": [
+    {
+      "url": "https://mx.allabout.network/",
+      "pageType": "nav",
+      "isNav": true,
+      "seo": 92,
+      "seoBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibility": 100,
+      "accessibilityBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibilityIssues": 0,
+      "served": 100,
+      "rendered": null,
+      "loadTimeMs": 355.89999997615814,
+      "msc": 97,
+      "sdq": 95
+    },
+    {
+      "url": "https://mx.allabout.network/about",
+      "pageType": "content",
+      "isNav": false,
+      "seo": 90,
+      "seoBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibility": 100,
+      "accessibilityBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibilityIssues": 0,
+      "served": 100,
+      "rendered": null,
+      "loadTimeMs": 334.30000001192093,
+      "msc": 97,
+      "sdq": 95
+    },
+    {
+      "url": "https://mx.allabout.network/about/about.html",
+      "pageType": "content",
+      "isNav": false,
+      "seo": 100,
+      "seoBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibility": 100,
+      "accessibilityBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibilityIssues": 0,
+      "served": 100,
+      "rendered": null,
+      "loadTimeMs": 889.3000000119209,
+      "msc": 97,
+      "sdq": 100
+    },
+    {
+      "url": "https://mx.allabout.network/about/contact.html",
+      "pageType": "content",
+      "isNav": false,
+      "seo": 93,
+      "seoBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibility": 100,
+      "accessibilityBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibilityIssues": 0,
+      "served": 100,
+      "rendered": null,
+      "loadTimeMs": 1050.5,
+      "msc": 96,
+      "sdq": 95
+    },
+    {
+      "url": "https://mx.allabout.network/about/printworks.html",
+      "pageType": "content",
+      "isNav": false,
+      "seo": 100,
+      "seoBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibility": 100,
+      "accessibilityBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibilityIssues": 0,
+      "served": 100,
+      "rendered": null,
+      "loadTimeMs": 1045.199999988079,
+      "msc": 100,
+      "sdq": 95
+    },
+    {
+      "url": "https://mx.allabout.network/AI-USAGE.html",
+      "pageType": "content",
+      "isNav": false,
+      "seo": 95,
+      "seoBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibility": 100,
+      "accessibilityBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibilityIssues": 0,
+      "served": 97,
+      "rendered": null,
+      "loadTimeMs": 1020.5,
+      "msc": 97,
+      "sdq": 91
+    },
+    {
+      "url": "https://mx.allabout.network/audit",
+      "pageType": "content",
+      "isNav": false,
+      "seo": 84,
+      "seoBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibility": 100,
+      "accessibilityBand": {
+        "band": "Excellent",
+        "grade": "A"
+      },
+      "accessibilityIssues": 0,
+      "served": 100,
+      "rendered": null,
+      "loadTimeMs": 3
+…(truncated at 8192 bytes)
+
+--- discovery.json ---
+{
+  "inputUrl": "https://mx.allabout.network",
+  "origin": "https://mx.allabout.network",
+  "entryPoint": {
+    "url": "https://mx.allabout.network/sitemap.xml",
+    "source": "robots.txt Sitemap directive",
+    "sitemaps": [
+      "https://mx.allabout.network/sitemap.xml"
+    ],
+    "hasSitemap": true
+  },
+  "sitemapDiscovery": {
+    "fromRobotsTxt": [
+      "https://mx.allabout.network/sitemap.xml"
+    ],
+    "robotsTxtStatus": "found",
+    "sitemapCount": 1
+  },
+  "sitemapQuality": {
+    "score": "complete",
+    "issues": [
+      "1 duplicate URL(s) in sitemap"
+    ],
+    "urlCount": 139,
+    "hasLastmod": true,
+    "hasChangefreq": true,
+    "hasPriority": true,
+    "lastmodVariety": true,
+    "duplicateUrls": 1
+  },
+  "ignoredPaths": {
+    "fromRobotsTxt": [
+      "/books/appendices/",
+      "/blog/drafts/"
+    ],
+    "fromManualOverride": [],
+    "combined": [
+      "/books/appendices/",
+      "/blog/drafts/"
+    ]
+  },
+  "urls": [
+    "https://mx.allabout.network/",
+    "https://mx.allabout.network/about/",
+    "https://mx.allabout.network/about/about.html",
+    "https://mx.allabout.network/about/contact.html",
+    "https://mx.allabout.network/about/printworks.html",
+    "https://mx.allabout.network/AI-USAGE.html",
+    "https://mx.allabout.network/audit/",
+    "https://mx.allabout.network/blog/",
+    "https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html",
+    "https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html",
+    "https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html",
+    "https://mx.allabout.network/blog/agency-platforms-and-the-open-layer.html",
+    "https://mx.allabout.network/blog/agent-discoverability-checklist.html",
+    "https://mx.allabout.network/blog/agent-readiness-scores-compared.html",
+    "https://mx.allabout.network/blog/ai-assistants-are-a-traffic-channel.html",
+    "https://mx.allabout.network/blog/ai-crawlers-what-robots-txt-guides-get-wrong.html",
+    "https://mx.allabout.network/blog/ai-mx-and-the-future-of-business.html",
+    "https://mx.allabout.network/blog/audit-for-auditors.html",
+    "https://mx.allabout.network/blog/audit-for-clients.html",
+    "https://mx.allabout.network/blog/audit-for-engineers.html",
+    "https://mx.allabout.network/blog/block-the-machine-it-walks-around-you.html",
+    "https://mx.allabout.network/blog/claude-joins-mx-community.html",
+    "https://mx.allabout.network/blog/cms-summit-26-frankfurt-write-up.html",
+    "https://mx.allabout.network/blog/cms-vocabulary-war.html",
+    "https://mx.allabout.network/blog/content-that-manages-itself.html",
+    "https://mx.allabout.network/blog/data-sovereignty.html",
+    "https://mx.allabout.network/blog/declare-once-work-everywhere.html",
+    "https://mx.allabout.network/blog/designing-workflows-for-humans-and-machines.html",
+    "https://mx.allabout.network/blog/dita-and-mx-a-comparison.html",
+    "https://mx.allabout.network/blog/files-away-from-source.html",
+    "https://mx.allabout.network/blog/from-blobs-to-bots.html",
+    "https://mx.allabout.network/blog/geo-is-a-tactic-mx-is-the-specification.html",
+    "https://mx.allabout.network/blog/governance/",
+    "https://mx.allabout.network/blog/governance/a-rule-you-sell-is-not-a-standard.html",
+    "https://mx.allabout.network/blog/governance/capture-happens-at-version-two.html",
+    "https://mx.allabout.network/blog/governance/exit-is-the-only-real-vote.html",
+    "https://mx.allabout.network/blog/governance/neither-code-nor-content.html",
+    "https://mx.allabout.network/blog/governance/not-the-main-sponsor.html",
+    "https://mx.allabout.network/blog/governance/the-badge-and-the-body.html",
+    "https://mx.allabout.network/blog/governance/the-spec-was-never-the-fragile-part.html",
+    "https://mx.allabout.network/blog/governance/two-implementations-or-it-isnt-a-standard.html",
+    "https://mx.allabout.network/blog/governance/when-the-law-points-at-your-standard.html",
+    "https://mx.allabout.network/blog/governance/whose-standard-is-it-anyway.html",
+    "https://mx.allabout.network/blog/internet-2031-the-human-view.html",
+    "https://mx.allabout.network/blog/llms-txt-guide.html",
+    "https://mx.allabout.network/blog/machine-experience-adding-metadata.html",
+    "https://mx.allabout.network/blog/many-agents-one-metadata-layer.html",
+    "https://mx.allabout.network/blog/microsoft-frontier-tuning-and-the-unsigned-trace.html",
+    "https://mx.allabout.network/blog/mx-a-new-role.html",
+    "https://mx.allabout.network/blog/mx-handbook-is-here.html",
+    "https://mx.allabout.network/blog/mx-manifesto.html",
+    "https://mx.allabout.network/blog/pope-leo-ai-encyclical-and-mx.html",
+    "https://mx.allabout.network/blog/principles-changed-how-i-build.html",
+    "https://mx.allabout.network/blog/profiles/",
+    "https://mx.allabout.network/blog/profiles/about.claude.code.html",
+    "https://mx.allabout.network/blog/profiles/about.claude.sonnet.4.5.html",
+    "https://mx.allabout.network/blog/profiles/about.microsoft.copilot.html",
+    "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+    "https://mx.allabout.network/blog/provenance-you-can-see.html",
+    "https://mx.allabout.network/blog/read-is-not-the-same-as-trusted.html",
+    "https://mx.allabout.network/blog/salesforce-contentful-not-an-mx-strategy.html",
+    "https://mx.allabout.network/blog/schema-org-and-the-missing-provenance-layer.html",
+    "https://mx.allabout.network/blog/server-side-rendering-for-ai.html",
+    "https://mx.allabout.network/blog/skills-static-not-subroutines.html",
+    "https://mx.allabout.network/blog/software-agreed-the-deal.html",
+    "https://mx.allabout.network/blog/strip-the-marks-lose-the-word.html",
+    "https://mx.allabout.network/blog/tagged-pdfs-are-mx.html",
+    "https://mx.allabout.network/blog/the-agent-web-looks-like-1995.html",
+    "https://mx.allabout.network/blog/the-crawl-still-speaks-english.html",
+    "https://mx.allabout.network/blog/the-inspector-you-can-audit-yourself.html",
+    "https://mx.allabout.network/blog/the-machine-that-visits-once.html",
+    "https://mx.allabout.network/blog/the-markdown-trap.html",
+    "https://mx.allabout.network/blog/the-new-web-agentic-era-infrastructure.html",
+    "https://mx.allabout.network/blog/the-new-web-government-public-sector.html",
+    "https://mx.allabout.network/blog/the-padlock-and-the-page.html",
+    "https://mx.allabout.network/blog/the-provenance-gap.html",
+    "https://mx.allabout.network/blog/tom-cranstoun-launches-mx-handbook.html",
+    "https://mx.allabout.network/blog/use-cases/",
+    "https://mx.allabout.network/blog/use-cases/how-agents-discover-metadata.html",
+    "https://mx.allabout.network/blog/use-cases/is-mx-useful-to-blockchain.html",
+    "https://mx.allabout.network/blog/use-cases/mx-and-cryptocurrency-drawing-the-line.html",
+    "https://mx.allabout.network/blog/use-cases/nfts-and-mx.html",
+    "https://mx.allabout.network/blog/use-cases/proving-what-you-published.html",
+    "https://mx.allabout.network/blog/use-cases/what-blockchain-and-crypto-have-to-do-with-mx.html",
+    "https://mx.allabout.network/blog/web-is-just-the-start.html",
+    "https://mx.allabout.network/blog/what-a-newborn-llm-wants-from-a-cog.html",
+    "https://mx.allabout.network/blog/what-googles-web-dev-agent-guidance-does-not-touch.html",
+    "https://mx.allabout.network/blog/what-i-do-helping-organisations-move-from-found-to-used.html",
+    "https://mx.allabout.network/blog/what-is-machine-experience.html",
+    "https://mx.allabout.network/blog/when-the-ai-world-realised-it-needed-standards.html",
+    "https://mx.allabout.network/blog/who-answers-when-the-machine-decides.html",
+    "https://mx.allabout.network/blog/who-checked-gutenberg.html",
+    "https://mx.allabout.network/blog/why-ai-agents-need-contracts-not-instructions.html",
+    "https://mx.allabout.network/blog/why-an-mx-audit-pays-for-itself.html",
+    "https://mx.allabout.network/blog/why-llms-dont-execute-javascript.html",
+    "https://mx.allabout.network/blog/why-machines-need-human-creativity.html",
+    "https://mx.allabout.network/blog/your-site-is-already-training-ai.html",
+    "https://mx.allabout.network/books/",
+  
+…(truncated at 8192 bytes)
+
+--- platform.json ---
+{
+  "_description": "Platform fingerprint captured at audit start. Used by infill-report, verifier, and fierce-critic so every report consumer reads the same platform decision.",
+  "cacheVersion": 2,
+  "checkedAt": "2026-06-12T09:48:07.270Z",
+  "platform": "generic",
+  "platformName": "Unknown Platform",
+  "confidence": "none",
+  "evidence": [
+    "fetch failed"
+  ],
+  "requestsPerSecond": 4,
+  "concurrency": 3,
+  "notes": "Default safe rate for unidentified platforms. Adjusted automatically on 429.",
+  "fingerprintedAt": "2026-06-12T09:48:07.270Z"
+}
+
+--- error_page_test.json ---
+{
+  "url": "https://mx.allabout.network/zebedee.html",
+  "httpStatus": 404,
+  "bodyMd5": "9b77f9dceb65ac25ecbecbb632d85ab4",
+  "messageMd5": "8fe91a9fb00f79dcd011e4f3a217cdf1",
+  "messageSnippet": "Page Not Found | CogNovaMX Skip to main content &#9776; Home Books Learn Services Blog The Gathering About Page Not Found The page you requested does not exist at this address. It may have been moved, renamed, or removed. Here are some ways to find what you are looking for: Return to the homepage Br",
+  "isSoft404": false,
+  "isCustomPage": true,
+  "hasSemantic": true,
+  "hasH1": true,
+  "hasNavigation": true,
+  "internalLinkCount": 21,
+  "internalLinks": [
+    "/",
+    "/",
+    "/books/",
+    "/learn/",
+    "/services/",
+    "/blog/",
+    "/the-gathering/",
+    "/about/",
+    "/",
+    "/books/"
+  ],
+  "hasNoindex": true,
+  "hasMxTags": true,
+  "hasSchemaOrg": true,
+  "hasFooter": true,
+  "contentLength": 7977,
+  "fetchMethod": "axios",
+  "testedAt": "2026-06-12T09:55:32.726Z",
+  "cache": {
+    "hostname": "mx.allabout.network",
+    "hash": "ce4cbbaf1b4d3d261a2a474d334fd0cb",
+    "served": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache/served/ce4cbbaf1b4d3d261a2a474d334fd0cb.html",
+    "decoded": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/mx.allabout.network/.cache/decoded/ce4cbbaf1b4d3d261a2a474d334fd0cb.html"
+  }
+}
+
+--- agent-access.json ---
+{
+  "url": "https://mx.allabout.network",
+  "testedAt": "2026-06-12T09:55:53.995Z",
+  "tests": [
+    {
+      "agent": "ClaudeBot (Anthropic)",
+      "userAgent": "ClaudeBot/1.0 (https://anthropic.com)",
+      "status": 200,
+      "attempts": 1
+    },
+    {
+      "agent": "GPTBot (OpenAI)",
+      "userAgent": "GPTBot/1.0 (+https://openai.com/gptbot)",
+      "status": 200,
+      "attempts": 1
+    },
+    {
+      "agent": "ChatGPT-User (OpenAI)",
+      "userAgent": "ChatGPT-User/1.0 (+https://openai.com/bot)",
+      "status": 200,
+      "attempts": 1
+    },
+    {
+      "agent": "PerplexityBot",
+      "userAgent": "PerplexityBot/1.0 (+https://perplexity.ai/bot)",
+      "status": 200,
+      "attempts": 1
+    },
+    {
+      "agent": "GoogleOther (Google AI)",
+      "userAgent": "GoogleOther",
+      "status": 200,
+      "attempts": 1
+    },
+    {
+      "agent": "Google-Extended",
+      "userAgent": "Google-Extended",
+      "status": 200,
+      "attempts": 1
+    },
+    {
+      "agent": "CCBot (Common Crawl)",
+      "userAgent": "CCBot/2.0 (https://commoncrawl.org/faq/)",
+      "status": 200,
+      "attempts": 1
+    },
+    {
+      "agent": "Plain request (no UA)",
+      "userAgent": "",
+      "status": 200,
+      "attempts": 1
+    }
+  ],
+  "allPassed": true,
+  "blocked": [],
+  "controlBrowser": {
+    "agent": "Chrome 120 (control)",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "status": 200,
+    "attempts": 1
+  },
+  "cacheVersion": 1,
+  "_freshness": {
+    "etag": null,
+    "lastModified": null
+  }
+}
+
+--- a11y-tree.json ---
+{
+  "_description": "Accessibility-tree channel check. Deterministic pattern registry (lib/a11y-tree-patterns.js) walked over every cached rendered page; hits clustered by repeated DOM signature across pages so a template defect reports (and scores) once. Patterns the WCAG pass (pa11y) already flags are deliberately absent. The score follows the a11yTree entry in lib/scoring-methodology.json.",
+  "checkedAt": "2026-06-12T10:01:20.430Z",
+  "entryUrl": "https://mx.allabout.network",
+  "pagesScanned": 149,
+  "patternsChecked": 14,
+  "templateThreshold": 60,
+  "clusters": [
+    {
+      "patternId": "generic-link-text",
+      "title": "Link whose accessible name carries no destination meaning",
+      "severity": "warn",
+      "wcag": "WCAG 2.1 2.4.4",
+      "finding": "The link's accessible name is a generic phrase or a bare URL. In the accessibility tree, and in any links-only projection of the page, every such link reads identically: the destination is unknowable without the surrounding layout, which machines and screen reader users do not have.",
+      "fix": "Name the destination in the link text itself in the template (\"View pricing plans\" rather than \"click here\").",
+      "signature": "div.proposition-grid > article.proposition-card > a.btn.btn-primary",
+      "instanceCount": 37,
+      "exampleUrl": "https://mx.allabout.network/books/",
+      "exampleDetail": "name: \"view\"",
+      "pageCount": 4,
+      "pagesAffected": [
+        "https://mx.allabout.network/books/",
+        "https://mx.allabout.network/learn/",
+        "https://mx.allabout.network/services/",
+        "https://mx.allabout.network/the-gathering/"
+      ],
+      "isTemplatePattern": false
+    },
+    {
+      "patternId": "generic-link-text",
+      "title": "Link whose accessible name carries no destination meaning",
+      "severity": "warn",
+      "wcag": "WCAG 2.1 2.4.4",
+      "finding": "The link's accessible name is a generic phrase or a bare URL. In the accessibility tree, and in any links-only projection of the page, every such link reads identically: the destination is unknowable without the surrounding layout, which machines and screen reader users do not have.",
+      "fix": "Name the destination in the link text itself in the template (\"View pricing plans\" rather than \"click here\").",
+      "signature": "article > p > a",
+      "instanceCount": 2,
+      "exampleUrl": "https://mx.allabout.network/blog/llms-txt-guide.html",
+      "exampleDetail": "name: \"https://mx.allabout.network/llms.txt\"",
+      "pageCount": 2,
+      "pagesAffected": [
+        "https://mx.allabout.network/blog/llms-txt-guide.html",
+        "https://mx.allabout.network/blog/machine-experience-adding-metadata.html"
+      ],
+      "isTemplatePattern": false
+    },
+    {
+      "patternId": "generic-link-text",
+      "title": "Link whose accessible name carries no destination meaning",
+      "severity": "warn",
+      "wcag": "WCAG 2.1 2.4.4",
+      "finding": "The link's accessible name is a generic phrase or a bare URL. In the accessibility tree, and in any links-only projection of the page, every such link reads identically: the destination is unknowable without the surrounding layout, which machines and screen reader users do not have.",
+      "fix": "Name the destination in the link text itself in the template (\"View pricing plans\" rather than \"click here\").",
+      "signature": "ul > li > a",
+      "instanceCount": 1,
+      "exampleUrl": "https://mx.allabout.network/blog/machine-experience-adding-metadata.html",
+      "exampleDetail": "name: \"https://allabout.network\"",
+      "pageCount": 1,
+      "pagesAffected": [
+        "https://mx.allabout.network/blog/machine-experience-adding-metadata.html"
+      ],
+      "isTemplatePattern": false
+    },
+    {
+      "patternId": "generic-link-text",
+      "title": "Link whose accessible name carries no destination meaning",
+      "severity": "warn",
+      "wcag": "WCAG 2.1 2.4.4",
+      "finding": "The link's accessible name is a generic phrase or a bare URL. In the accessibility tree, and in any links-only projection of the page, every such link reads identically: the destination is unknowable without the surrounding layout, which machines and screen reader users do not have.",
+      "fix": "Name the destination in the link text itself in the template (\"View pricing plans\" rather than \"click here\").",
+      "signature": "div.books-grid > article.book-card > a.btn.btn-secondary",
+      "instanceCount": 3,
+      "exampleUrl": "https://mx.allabout.network/books/",
+      "exampleDetail": "name: \"learn more\"",
+      "pageCount": 1,
+      "pagesAffected": [
+        "https://mx.allabout.network/books/"
+      ],
+      "isTemplatePattern": false
+    },
+    {
+      "patternId": "missing-main-landmark",
+      "title": "No main landmark on the page",
+      "severity": "warn",
+      "wcag": "WCAG 2.1 1.3.1",
+      "finding": "The page declares no main landmark. Landmark navigation is how tree consumers skip repeated chrome and land on the content; without it, every visit starts from the top of everything.",
+      "fix": "Wrap the primary content region in a main element in the base template - one change covers every page that extends it.",
+      "signature": "html > body",
+      "instanceCount": 1,
+      "exampleUrl": "https://mx.allabout.network/books/download-intro",
+      "exampleDetail": "no <main> or role=\"main\"",
+      "pageCount": 1,
+      "pagesAffected": [
+        "https://mx.allabout.network/books/download-intro"
+      ],
+      "isTemplatePattern": false
+    },
+    {
+      "patternId": "duplicate-unlabelled-landmarks",
+      "title": "Repeated landmarks with no distinguishing labels",
+      "severity": "warn",
+      "wcag": "WCAG 2.1 1.3.6",
+      "finding": "The page carries more than one navigation (or complementary) landmark with no aria-label to tell them apart. In the tree they read as \"navigation, navigation\": a consumer cannot tell the site menu from the footer links or the breadcrumb.",
+      "fix": "Give each repeated landmark a short aria-label in the template (\"Primary\", \"Footer\", \"Breadcrumb\").",
+      "signature": "section.section > div.split-layout > aside.split-highlights",
+      "instanceCount": 1,
+      "exampleUrl": "https://mx.allabout.network/books/the-author.html",
+      "exampleDetail": "3 unlabelled aside landmarks",
+      "pageCount": 1,
+      "pagesAffected": [
+        "https://mx.allabout.network/books/the-author.html"
+      ],
+      "isTemplatePattern": false
+    }
+  ],
+  "totals": {
+    "clusters": 6,
+    "errorClusters": 0,
+    "warnClusters": 6,
+    "templateClusters": 0,
+    "instances": 45
+  },
+  "llmAdequacy": {
+    "checked": false,
+    "calls": 0,
+    "droppedAsAdequate": 0,
+    "model": ""
+  },
+  "score": 76,
+  "detected": true
+}
+
+--- security_report.csv ---
+URL,HTTPS,HSTS,CSP,X-Frame-Options,X-Content-Type-Options
+https://mx.allabout.network/,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/about,Yes,No,No,No,No
+https://mx.allabout.network/about/about.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/about/contact.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/about/printworks.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/AI-USAGE.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/audit,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/agency-platforms-and-the-open-layer.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/agent-discoverability-checklist.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/agent-readiness-scores-compared.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/ai-assistants-are-a-traffic-channel.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/ai-crawlers-what-robots-txt-guides-get-wrong.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/ai-mx-and-the-future-of-business.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/audit-for-auditors.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/audit-for-clients.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/audit-for-engineers.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/block-the-machine-it-walks-around-you.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/claude-joins-mx-community.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/cms-summit-26-frankfurt-write-up.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/cms-vocabulary-war.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/content-that-manages-itself.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/data-sovereignty.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/declare-once-work-everywhere.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/designing-workflows-for-humans-and-machines.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/dita-and-mx-a-comparison.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/files-away-from-source.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/from-blobs-to-bots.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/geo-is-a-tactic-mx-is-the-specification.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/a-rule-you-sell-is-not-a-standard.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/capture-happens-at-version-two.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/exit-is-the-only-real-vote.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/neither-code-nor-content.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/not-the-main-sponsor.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/the-badge-and-the-body.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/the-spec-was-never-the-fragile-part.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/two-implementations-or-it-isnt-a-standard.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/when-the-law-points-at-your-standard.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/governance/whose-standard-is-it-anyway.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/internet-2031-the-human-view.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/llms-txt-guide.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/machine-experience-adding-metadata.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/many-agents-one-metadata-layer.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/microsoft-frontier-tuning-and-the-unsigned-trace.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/mx-a-new-role.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/mx-handbook-is-here.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/mx-manifesto.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/pope-leo-ai-encyclical-and-mx.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/principles-changed-how-i-build.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/profiles,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/profiles/about.claude.code.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/profiles/about.claude.sonnet.4.5.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/profiles/about.microsoft.copilot.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/provenance-you-can-see.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/read-is-not-the-same-as-trusted.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/salesforce-contentful-not-an-mx-strategy.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/schema-org-and-the-missing-provenance-layer.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/server-side-rendering-for-ai.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/skills-static-not-subroutines.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/software-agreed-the-deal.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/strip-the-marks-lose-the-word.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/tagged-pdfs-are-mx.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/the-agent-web-looks-like-1995.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/the-crawl-still-speaks-english.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/the-inspector-you-can-audit-yourself.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/the-machine-that-visits-once.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/the-markdown-trap.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/the-new-web-agentic-era-infrastructure.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/the-new-web-government-public-sector.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/the-padlock-and-the-page.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/the-provenance-gap.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/tom-cranstoun-launches-mx-handbook.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/use-cases,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/use-cases/how-agents-discover-metadata.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/use-cases/is-mx-useful-to-blockchain.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/use-cases/mx-and-cryptocurrency-drawing-the-line.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/use-cases/nfts-and-mx.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/use-cases/proving-what-you-published.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/use-cases/what-blockchain-and-crypto-have-to-do-with-mx.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/web-is-just-the-start.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/what-a-newborn-llm-wants-from-a-cog.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/what-googles-web-dev-agent-guidance-does-not-touch.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/what-i-do-helping-organisations-move-from-found-to-used.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/what-is-machine-experience.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/when-the-ai-world-realised-it-needed-standards.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/who-answers-when-the-machine-decides.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/who-checked-gutenberg.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/why-ai-agents-need-contracts-not-instructions.html,Yes,Yes,Yes,Yes,Yes
+https://mx.allabout.network/blog/why-an-mx-audit-pay
+…(truncated at 8192 bytes)
+
+--- marker_reachability.csv ---
+URL,Marker,Served Present,Rendered Present,Injected by JS,In Head,Served Offset (bytes),Reachable <250KB
+https://mx.allabout.network/,jsonLd,Yes,Yes,No,Yes,3975,Yes
+https://mx.allabout.network/,microdata,No,No,No,No,,No
+https://mx.allabout.network/,openGraph,Yes,Yes,No,Yes,2087,Yes
+https://mx.allabout.network/,twitterCard,Yes,Yes,No,Yes,2802,Yes
+https://mx.allabout.network/,mxGovernance,Yes,Yes,No,Yes,55,Yes
+https://mx.allabout.network/,canonical,Yes,Yes,No,Yes,1757,Yes
+https://mx.allabout.network/,discoveryLinks,Yes,Yes,No,Yes,1818,Yes
+https://mx.allabout.network/,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/,skipLink,Yes,Yes,No,No,6344,Yes
+https://mx.allabout.network/about,jsonLd,Yes,Yes,No,Yes,3189,Yes
+https://mx.allabout.network/about,microdata,No,No,No,No,,No
+https://mx.allabout.network/about,openGraph,Yes,Yes,No,Yes,1766,Yes
+https://mx.allabout.network/about,twitterCard,Yes,Yes,No,Yes,2373,Yes
+https://mx.allabout.network/about,mxGovernance,Yes,Yes,No,Yes,55,Yes
+https://mx.allabout.network/about,canonical,Yes,Yes,No,Yes,1555,Yes
+https://mx.allabout.network/about,discoveryLinks,Yes,Yes,No,Yes,1622,Yes
+https://mx.allabout.network/about,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/about,skipLink,Yes,Yes,No,No,6229,Yes
+https://mx.allabout.network/about/about.html,jsonLd,Yes,Yes,No,Yes,3488,Yes
+https://mx.allabout.network/about/about.html,microdata,No,No,No,No,,No
+https://mx.allabout.network/about/about.html,openGraph,Yes,Yes,No,Yes,1868,Yes
+https://mx.allabout.network/about/about.html,twitterCard,Yes,Yes,No,Yes,2496,Yes
+https://mx.allabout.network/about/about.html,mxGovernance,Yes,Yes,No,Yes,55,Yes
+https://mx.allabout.network/about/about.html,canonical,Yes,Yes,No,Yes,1646,Yes
+https://mx.allabout.network/about/about.html,discoveryLinks,Yes,Yes,No,Yes,1723,Yes
+https://mx.allabout.network/about/about.html,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/about/about.html,skipLink,Yes,Yes,No,No,9019,Yes
+https://mx.allabout.network/about/contact.html,jsonLd,Yes,Yes,No,Yes,3603,Yes
+https://mx.allabout.network/about/contact.html,microdata,No,No,No,No,,No
+https://mx.allabout.network/about/contact.html,openGraph,Yes,Yes,No,Yes,1842,Yes
+https://mx.allabout.network/about/contact.html,twitterCard,Yes,Yes,No,Yes,2535,Yes
+https://mx.allabout.network/about/contact.html,mxGovernance,Yes,Yes,No,Yes,55,Yes
+https://mx.allabout.network/about/contact.html,canonical,Yes,Yes,No,Yes,1618,Yes
+https://mx.allabout.network/about/contact.html,discoveryLinks,Yes,Yes,No,Yes,1697,Yes
+https://mx.allabout.network/about/contact.html,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/about/contact.html,skipLink,Yes,Yes,No,No,7077,Yes
+https://mx.allabout.network/about/printworks.html,jsonLd,Yes,Yes,No,Yes,3856,Yes
+https://mx.allabout.network/about/printworks.html,microdata,No,No,No,No,,No
+https://mx.allabout.network/about/printworks.html,openGraph,Yes,Yes,No,Yes,1889,Yes
+https://mx.allabout.network/about/printworks.html,twitterCard,Yes,Yes,No,Yes,2665,Yes
+https://mx.allabout.network/about/printworks.html,mxGovernance,Yes,Yes,No,Yes,55,Yes
+https://mx.allabout.network/about/printworks.html,canonical,Yes,Yes,No,Yes,1775,Yes
+https://mx.allabout.network/about/printworks.html,discoveryLinks,Yes,Yes,No,Yes,3219,Yes
+https://mx.allabout.network/about/printworks.html,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/about/printworks.html,skipLink,Yes,Yes,No,No,12426,Yes
+https://mx.allabout.network/AI-USAGE.html,jsonLd,Yes,Yes,No,Yes,5707,Yes
+https://mx.allabout.network/AI-USAGE.html,microdata,No,No,No,No,,No
+https://mx.allabout.network/AI-USAGE.html,openGraph,Yes,Yes,No,Yes,4021,Yes
+https://mx.allabout.network/AI-USAGE.html,twitterCard,Yes,Yes,No,Yes,4708,Yes
+https://mx.allabout.network/AI-USAGE.html,mxGovernance,Yes,Yes,No,Yes,55,Yes
+https://mx.allabout.network/AI-USAGE.html,canonical,Yes,Yes,No,Yes,3580,Yes
+https://mx.allabout.network/AI-USAGE.html,discoveryLinks,Yes,Yes,No,Yes,3913,Yes
+https://mx.allabout.network/AI-USAGE.html,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/AI-USAGE.html,skipLink,Yes,Yes,No,No,7596,Yes
+https://mx.allabout.network/audit,jsonLd,Yes,Yes,No,Yes,3332,Yes
+https://mx.allabout.network/audit,microdata,No,No,No,No,,No
+https://mx.allabout.network/audit,openGraph,Yes,Yes,No,Yes,2032,Yes
+https://mx.allabout.network/audit,twitterCard,Yes,Yes,No,Yes,2563,Yes
+https://mx.allabout.network/audit,mxGovernance,Yes,Yes,No,Yes,55,Yes
+https://mx.allabout.network/audit,canonical,Yes,Yes,No,Yes,1821,Yes
+https://mx.allabout.network/audit,discoveryLinks,Yes,Yes,No,Yes,1888,Yes
+https://mx.allabout.network/audit,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/audit,skipLink,Yes,Yes,No,No,6140,Yes
+https://mx.allabout.network/blog,jsonLd,Yes,Yes,No,Yes,3170,Yes
+https://mx.allabout.network/blog,microdata,No,No,No,No,,No
+https://mx.allabout.network/blog,openGraph,Yes,Yes,No,Yes,1831,Yes
+https://mx.allabout.network/blog,twitterCard,Yes,Yes,No,Yes,2422,Yes
+https://mx.allabout.network/blog,mxGovernance,Yes,Yes,No,Yes,55,Yes
+https://mx.allabout.network/blog,canonical,Yes,Yes,No,Yes,1598,Yes
+https://mx.allabout.network/blog,discoveryLinks,Yes,Yes,No,Yes,1664,Yes
+https://mx.allabout.network/blog,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/blog,skipLink,Yes,Yes,No,No,5851,Yes
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,jsonLd,Yes,Yes,No,Yes,5417,Yes
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,microdata,No,No,No,No,,No
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,openGraph,Yes,Yes,No,Yes,2776,Yes
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,twitterCard,Yes,Yes,No,Yes,3968,Yes
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,mxGovernance,Yes,Yes,No,Yes,45,Yes
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,canonical,Yes,Yes,No,Yes,2644,Yes
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,discoveryLinks,Yes,Yes,No,Yes,4799,Yes
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html,skipLink,Yes,Yes,No,No,7707,Yes
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,jsonLd,Yes,Yes,No,Yes,3860,Yes
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,microdata,No,No,No,No,,No
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,openGraph,Yes,Yes,No,Yes,1813,Yes
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,twitterCard,Yes,Yes,No,Yes,2893,Yes
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,mxGovernance,Yes,Yes,No,Yes,45,Yes
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,canonical,Yes,Yes,No,Yes,1674,Yes
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,discoveryLinks,Yes,Yes,No,Yes,3598,Yes
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html,skipLink,Yes,Yes,No,No,5893,Yes
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,jsonLd,Yes,Yes,No,Yes,3996,Yes
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,microdata,No,No,No,No,,No
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,openGraph,Yes,Yes,No,Yes,1898,Yes
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,twitterCard,Yes,Yes,No,Yes,2965,Yes
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,mxGovernance,Yes,Yes,No,Yes,45,Yes
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,canonical,Yes,Yes,No,Yes,1762,Yes
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,discoveryLinks,Yes,Yes,No,Yes,3667,Yes
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,languageAttr,Yes,Yes,No,Yes,16,Yes
+https://mx.allabout.network/blog/adobe-just-bought-the-dashboard.html,skipLink,Yes,Yes,No,No,6282,Yes
+https://mx.allabout.network/blog/agency-platforms-and-the
+…(truncated at 8192 bytes)
+
+REPORT BODY TO CROSS-CHECK (frontmatter stripped):
+
 
 **Prepared by:** Tom Cranstoun | CogNovaMX Ltd\
 **Contact:** <info@cognovamx.com> | <https://allabout.network>\
@@ -1476,4 +2453,5 @@ This practice is what MX expects of every artefact in the field. We apply it to 
 
 **Date:** 12 June 2026\
 (c) 2026 CogNovaMX Ltd. All rights reserved.
+
 
