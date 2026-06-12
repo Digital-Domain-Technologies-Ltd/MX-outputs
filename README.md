@@ -1,8 +1,8 @@
 ---
 title: "MX Outputs — Build Artefacts Index"
 author: "Auto-generated"
-created: "2026-06-11"
-modified: "2026-06-11"
+created: "2026-06-12"
+modified: "2026-06-12"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
 mx:
@@ -21,11 +21,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 79 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 281 | Markdown — reports, audit results, presentations |
-| [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
+| [md/](md/) | 288 | Markdown — reports, audit results, presentations |
+| [html/](html/) | 92 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 2 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1077** | |
+| **Total** | **1088** | |
 
 ---
 
@@ -116,10 +116,13 @@ PDF documents — books, manuals, presentations, blog exports.
 
 Markdown documents — session reports, audit results, Reginald documentation.
 
-### md/blog/ (3 files)
+### md/blog/ (6 files)
 
 - [`2026-05-23-governance-when-ai-acts.md`](md/blog/2026-05-23-governance-when-ai-acts.md)
 - [`2026-06-11-the-computational-metaphor.md`](md/blog/2026-06-11-the-computational-metaphor.md)
+- [`2026-06-11-the-desk-in-the-photo.md`](md/blog/2026-06-11-the-desk-in-the-photo.md)
+- [`2026-06-11-the-languages-that-wont-let-you-leave-it-implicit.md`](md/blog/2026-06-11-the-languages-that-wont-let-you-leave-it-implicit.md)
+- [`2026-06-11-two-ways-to-be.md`](md/blog/2026-06-11-two-ways-to-be.md)
 - [`2026-06-11-when-the-machine-owns-its-words.md`](md/blog/2026-06-11-when-the-machine-owns-its-words.md)
 
 ### md/migrations/ (5 files)
@@ -135,9 +138,9 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (271 files)
+### md/reports/ (275 files)
 
-#### md/reports/completions/ (25 files)
+#### md/reports/completions/ (26 files)
 
 - [`session-summary-2026-02-10T17-49.md`](md/reports/completions/2026-02-10/session-summary-2026-02-10T17-49.md)
 - [`session-summary-2026-02-11T09-00.md`](md/reports/completions/2026-02-11/session-summary-2026-02-11T09-00.md)
@@ -150,6 +153,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-AUDIT-V2-SUMMARY.md`](md/reports/completions/2026-03-19/MX-AUDIT-V2-SUMMARY.md)
 - [`MX-HUB-UPDATES-2026-03-19.md`](md/reports/completions/2026-03-19/MX-HUB-UPDATES-2026-03-19.md)
 - [`TEMPLATE-UPDATE-SUMMARY.md`](md/reports/completions/2026-03-19/TEMPLATE-UPDATE-SUMMARY.md)
+- [`session-summary-evening-artefact-lifecycle.md`](md/reports/completions/2026-06-11/session-summary-evening-artefact-lifecycle.md)
 - [`README.md`](md/reports/completions/README.md)
 - [`README.md`](md/reports/completions/_archive/2026-02-04/README.md)
 - [`completion-system-creation.md`](md/reports/completions/_archive/2026-02-04/completion-system-creation.md)
@@ -168,9 +172,10 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-02-11/** (3 files)
   - **2026-02-13/** (2 files)
   - **2026-03-19/** (5 files)
+  - **2026-06-11/** (1 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (242 files)
+#### md/reports/directors/ (245 files)
 
 **build/** (3 files)
 
@@ -184,7 +189,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (235 files)
+**session/** (238 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -411,7 +416,10 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-06-09-evening-report-2.md`](md/reports/directors/session/2026-06-09-evening-report-2.md)
 - [`2026-06-09-evening-report.md`](md/reports/directors/session/2026-06-09-evening-report.md)
 - [`2026-06-10-evening-report.md`](md/reports/directors/session/2026-06-10-evening-report.md)
+- [`2026-06-11-afternoon-report.md`](md/reports/directors/session/2026-06-11-afternoon-report.md)
+- [`2026-06-11-evening-report.md`](md/reports/directors/session/2026-06-11-evening-report.md)
 - [`2026-06-11-morning-report.md`](md/reports/directors/session/2026-06-11-morning-report.md)
+- [`2026-06-12-morning-report.md`](md/reports/directors/session/2026-06-12-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
 - [`2026-02-11-session-report-2.md`](md/reports/directors/session/_archive/2026-02-11-session-report-2.md)
@@ -527,11 +535,13 @@ HTML content with adjacent CSS, JS, and SVG assets.
 ### html/blogs/ (0 files)
 
 
-### html/books/ (3 files)
+### html/books/ (4 files)
 
+- [`mx-appendices.html`](html/books/appendices/mx-appendices.html)
 - [`chapter-00-introduction-to-mx.html`](html/books/chapters/chapter-00-introduction-to-mx.html)
 - [`mx-handbook.html`](html/books/handbook/mx-handbook.html)
 - [`mx-protocols.html`](html/books/protocols/mx-protocols.html)
+  - **appendices/** (1 files)
   - **chapters/** (1 files)
   - **codex/** (0 files)
   - **handbook/** (1 files)
@@ -574,4 +584,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-06-11 at 13:20*
+*Generated on 2026-06-12 at 09:47*
