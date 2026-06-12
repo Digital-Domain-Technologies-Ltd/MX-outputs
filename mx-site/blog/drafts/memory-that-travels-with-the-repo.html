@@ -112,7 +112,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 859,
+        "wordCount": 848,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -191,7 +191,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="859">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="848">
         <header class="article-header">
           <h1>Memory That Travels With the Repo</h1>
           <div class="article-meta"
@@ -209,27 +209,27 @@ mx:
 
 <p><strong>Tom Cranstoun</strong> · The Machine Experience Authority · CogNovaMX Ltd</p>
 <hr>
-<p>Work with an AI assistant for a few months and it learns things. Not model weights, nothing mystical: small, hard-won working rules. The staging folder is safe to clear; the uploads folder is not. When the team says &quot;the report&quot;, they mean the client-facing PDF, not the spreadsheet that feeds it. Commit before you regenerate, because the generator overwrites its own output. Each of those lessons cost a mistake to learn, and each one is now a small text file in the assistant's memory.</p>
-<p>Here is the problem. That memory lives on my machine.</p>
-<p>The repository travels. It goes to GitHub, it gets cloned by a teammate, it lands on a fresh laptop in another company entirely. The code arrives, the docs arrive, the tests arrive. The practice does not. The new machine's assistant starts from zero and re-learns everything by making the same mistakes, which is a strange way to run a team in an industry that talks about knowledge transfer all day.</p>
+<p>Work with an AI assistant for a few months and it learns things. Not model weights, nothing mystical: small, hard-won rules. The staging folder is safe to clear; the uploads one isn't. When the team says &quot;the report&quot;, they mean the client-facing PDF, not the spreadsheet that feeds it. Commit before you regenerate, because the generator overwrites its own output. Each of those lessons cost a mistake to learn, and each one is now a small text file in its memory.</p>
+<p>Here's the problem. That memory lives on my machine.</p>
+<p>The repository travels. It goes to GitHub, it gets cloned by a teammate, it lands on a fresh laptop in another company entirely. The code arrives, the docs arrive, the tests arrive. The practice doesn't. The new machine's assistant starts from zero and re-learns everything by making the same mistakes, which is a strange way to run a team in an industry that talks about knowledge transfer all day.</p>
 <h2 id="the-file-is-the-platform" tabindex="-1">The File Is the Platform</h2>
-<p>The fix is the oldest instinct we have at CogNovaMX: if knowledge matters beyond the machine that produced it, put it in the artefact and let it travel. We say this about metadata constantly. A file should carry its provenance, its context, and its intended use, so that whoever meets it next, human or machine, does not have to guess.</p>
+<p>The fix is the oldest instinct we have at CogNovaMX: if knowledge matters beyond the machine that produced it, put it in the artefact and let it travel. We say this about metadata constantly. A file should carry its provenance, its context, and its intended use, so that whoever meets it next, human or machine, doesn't have to guess.</p>
 <p>An assistant's working memory is exactly that kind of cargo. So we moved it into the repository.</p>
 <p>The mechanics are unglamorous, which is the point. Each memory is a plain markdown file with a small metadata block: a name, a one-line description, and a type. Files typed as project knowledge or team feedback are copied into a tracked folder beside the code. They ride every push and every clone. At the start of a session on a new machine, the shared set merges into the local one, and the assistant behaves like it has been here for months. Because, in every way that matters, it has.</p>
 <h2 id="merge-never-mirror" tabindex="-1">Merge, Never Mirror</h2>
 <p>The interesting design decision was refusing to make one side the boss.</p>
 <p>A mirror would have been simpler: device wins, or repo wins, end of story. But a mirror destroys somebody's knowledge every time it runs. Two people on two machines both accumulate practice; both contributions belong in the pool. So the sync is a merge with three rules.</p>
 <p>First, union. A file that exists on only one side is copied to the other, never deleted. Moving the repository to a new system adds to what that machine already holds; it never wipes it.</p>
-<p>Second, the newest correction wins. Working notes go stale: a script gets renamed, a layout changes, a rule gets superseded. When the two sides disagree, the file's own modified stamp decides, so a fix made by one teammate reaches everyone else at their next session. Stale guidance is worse than none, because it is confident.</p>
+<p>Second, the newest correction wins. Working notes go stale: a script gets renamed, a layout changes, a rule gets superseded. When the two sides disagree, the file's own modified stamp decides, so a fix made by one teammate reaches everyone else at their next session. Stale guidance is worse than none, because it's confident.</p>
 <p>Third, deletions are recorded, not silent. Under union semantics a plainly deleted file simply comes back, like a cat. Retirement means writing the name in a list that travels with the repository, so the deletion itself is shared: that lesson no longer applies, stop applying it everywhere.</p>
 <p>And one boundary that matters more than the rest: notes about the person stay on the device. Anything typed as personal context never enters the shared set. The team inherits the practice, not the personality profile.</p>
 <h2 id="determinism-does-the-remembering" tabindex="-1">Determinism Does the Remembering</h2>
-<p>None of this relies on anyone remembering to sync. A hook copies an edited file across at the moment it is written. Another hook runs the merge at session start. A checker runs in the test suite and refuses a push when the two sides have drifted. The same discipline we apply to build artefacts applies here: if a script can enforce the rule, it should, because a manual habit is just a defect with good intentions.</p>
-<p>There is even a small bonus we did not plan. The checker also flags notes that reference files which no longer exist, which turns out to be a decent rot detector in general. The first run caught a couple of dozen.</p>
+<p>None of this relies on anyone remembering to sync. A hook copies an edited file across the moment it's written. Another hook runs the whole pass at session start. A checker runs in the test suite and refuses a push when the two sides have drifted. The same discipline we apply to build artefacts applies here: if a script can enforce the rule, it should, because a manual habit is just a defect with good intentions.</p>
+<p>There's even a small bonus we didn't plan. The checker also flags notes that reference files which no longer exist, which turns out to be a decent rot detector in general. The first run caught a couple of dozen.</p>
 <h2 id="why-this-is-a-content-ops-story" tabindex="-1">Why This Is a Content Ops Story</h2>
 <p>I keep returning to this: an assistant's memory is content. It has authors, an audience, a lifecycle, provenance, and a retirement policy. Treat it like content and the familiar machinery applies: version it, review it, merge it, retire it deliberately. Leave it as opaque state on one laptop and you get what that always gives you: a single point of failure with a personality.</p>
 <p>The pattern generalises well beyond one team's tooling. Any organisation pairing people with AI assistants is accumulating working practice somewhere right now. The only question is whether it accumulates in a place that travels.</p>
-<p>If you want to try the shape yourself, start small: give each working rule its own file, type it so the personal stays private, track the shared set next to the code, and make the merge boring and automatic. The knowledge your team paid for in mistakes should arrive with the clone.</p>
+<p>If you want to try this yourself, start small: give each working rule its own file, type it so the personal stays private, track the shared set next to the code, and make the merge boring and automatic. The knowledge your team paid for in mistakes should arrive with the clone.</p>
 
 
       </article>
