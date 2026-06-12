@@ -184,27 +184,36 @@ def main(argv: list[str] | None = None) -> int:
             failures.append("manuscript indexer")
             sys.stderr.write(result.stderr)
 
-    # 3. Appendix sync (cheap).
-    try:
-        pages = sa.build_pages()
-        drifted = [
-            f"appendix-{letter}.html"
-            for letter, html in pages.items()
-            if (sa.OUTPUT_DIR / f"appendix-{letter}.html").read_text(encoding="utf-8") != html
-            if (sa.OUTPUT_DIR / f"appendix-{letter}.html").exists()
-        ]
-        if drifted:
-            failures.append("appendix pages out of sync")
-            print(
-                "session-check: WARNING published appendices differ from source — "
-                "run split_appendices.py: " + ", ".join(sorted(drifted)),
-                file=sys.stderr,
-            )
-        else:
-            print(f"session-check: {len(pages)} appendix pages in sync with source.")
-    except Exception as exc:  # noqa: BLE001 - report, never crash the hook
-        failures.append("appendix sync check")
-        print(f"session-check: WARNING appendix sync check errored: {exc}", file=sys.stderr)
+    # 3. Appendix sync (cheap). Applies only when the consolidated in-repo
+    # source exists; the appendices publish from the hub manuscripts
+    # (MX-hub `npm run appendix:publish`), so an absent source means the
+    # splitter path is not in use and there is nothing to compare.
+    if not sa.SOURCE.exists():
+        print(
+            "session-check: appendix sync skipped — no consolidated source; "
+            "appendices publish from the hub manuscripts."
+        )
+    else:
+        try:
+            pages = sa.build_pages()
+            drifted = [
+                f"appendix-{letter}.html"
+                for letter, html in pages.items()
+                if (sa.OUTPUT_DIR / f"appendix-{letter}.html").read_text(encoding="utf-8") != html
+                if (sa.OUTPUT_DIR / f"appendix-{letter}.html").exists()
+            ]
+            if drifted:
+                failures.append("appendix pages out of sync")
+                print(
+                    "session-check: WARNING published appendices differ from source — "
+                    "run split_appendices.py: " + ", ".join(sorted(drifted)),
+                    file=sys.stderr,
+                )
+            else:
+                print(f"session-check: {len(pages)} appendix pages in sync with source.")
+        except Exception as exc:  # noqa: BLE001 - report, never crash the hook
+            failures.append("appendix sync check")
+            print(f"session-check: WARNING appendix sync check errored: {exc}", file=sys.stderr)
 
     # 4. Unit tests (cheap).
     if not args.skip_tests:
