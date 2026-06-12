@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - REGINALD vNext Cutover; the Audit Cross-Check Becomes a Gate"
-description: "did:web:reginald.allabout.network is live against the vNext worker via path-scoped routes with revenue paths protected; the audit's claims-vs-evidence verification now runs as a gate inside the pipeline, with the defects it caught fixed at source"
+title: "Co-Directors Report - Structural Convergence Becomes Enforceable; REGINALD vNext Cutover; the Audit Cross-Check Becomes a Gate"
+description: "Peer-reviewed research on AI narrative convergence became a deterministic scanner, a house writing rule, and a billable audit add-on in one session; did:web:reginald.allabout.network is live against the vNext worker via path-scoped routes with revenue paths protected; the audit's claims-vs-evidence verification now runs as a gate inside the pipeline"
 author: "Tom Cranstoun"
 created: 2026-06-12
 modified: 2026-06-12
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -13,13 +13,13 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-12-evening-report.md
-  purpose: "did:web:reginald.allabout.network is live against the vNext worker via path-scoped routes with revenue paths protected; the audit's claims-vs-evidence verification now runs as a gate inside the pipeline, with the defects it caught fixed at source"
+  purpose: "Peer-reviewed research on AI narrative convergence became a deterministic scanner, a house writing rule, and a billable audit add-on in one session; did:web:reginald.allabout.network is live against the vNext worker via path-scoped routes with revenue paths protected; the audit's claims-vs-evidence verification now runs as a gate inside the pipeline"
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
-  x-mx-contextProvides: ["Co-Directors Report - REGINALD vNext Cutover; the Audit Cross-Check Becomes a Gate"]
+  x-mx-contextProvides: ["Co-Directors Report - Structural Convergence Becomes Enforceable; REGINALD vNext Cutover; the Audit Cross-Check Becomes a Gate"]
 ---
 
-# Co-Directors Report - REGINALD vNext Cutover; the Audit Cross-Check Becomes a Gate
+# Co-Directors Report - Structural Convergence Becomes Enforceable; REGINALD vNext Cutover; the Audit Cross-Check Becomes a Gate
 
 **Date:** 12 June 2026 - Evening
 **Segment:** evening (since 5pm)
@@ -27,6 +27,8 @@ mx:
 ---
 
 ## Summary
+
+The writing stack closed a gap no word-level check could see. New research (StoryScope, 61,608 stories) shows AI models from five vendors converging on one narrative shape - tidy plots, themes spelled out, a clean moral at the end - while human writers scatter; structure alone identifies the machine 93% of the time. Within the session that finding became enforcement at every layer the estate has: a house rule in the writing rulebook (Pattern 28), a deterministic scanner with its own test suite wired into the gate chain, and a judgement pass in the humanizer. Calibration evidence is strong: all fifty published manuscript chapters pass clean (the human baseline), 73 published blog sources produce one plausible flag, and the scanner caught the exact moral-closer lines in the draft that motivated the work. The same finding was recorded as a billable Web Audit Suite add-on ("does your content read machine-made") in a new business-opportunities database, with the research citation as the authority behind it.
 
 REGINALD vNext is now live on the production hostname. did:web:reginald.allabout.network resolves against the vNext worker's DID document, and the vNext registry API answers at reginald.allabout.network/v1/*. The cutover was done with two path-scoped Cloudflare routes rather than the full-host swap originally specified, because investigation showed the hostname also carries live book-sales revenue (Stripe webhook, checkout, emailed download links) on a different worker - a full swap would have broken it. The principal partner leading the vNext track is unblocked on his next step without needing any new account permissions.
 
@@ -84,7 +86,19 @@ Every Claude Code hook now carries a declared enforcement level (blocking, advis
 
 Tom ratified the positioning line "MX prefers determinism, not inference. Same result every time." The root manifesto gained a dedicated section (explicit beats inferred, recorded beats remembered, a result you can reproduce beats one you can only explain), the memory-sync blog draft states it in miniature, the line is saved as travelling memory with usage rules (never claim it for LLM judgement steps), and the manifesto PDF was regenerated with the full provenance chain binding it to the credo-bearing source. A blog post telling the memory-sync story for outside readers sits at Zone 2 noindex with every gate green, publish-ready pending review.
 
-### 12. CRM caught up with IDHL reality
+### 12. Structural convergence becomes enforceable
+
+The StoryScope finding (Russell et al., 2026, arXiv:2604.03136) became the estate's first structure-level writing enforcement. The rulebook gained Pattern 28, the MX-house structure demand: structure varies across sections, bold claims stay bold through rewrites, an open question may survive to the page, the theme is never spelled out. A new deterministic scanner (Scan J in the humanizer chain) detects the mechanically checkable subset - moral-of-the-story closers in the closing paragraphs, endings that restate the opening, mean-seeking sentence and paragraph rhythm, uniform section shapes - with register calibration so audit reports keep their conclusions and lose only the sermonising. The judgement subset the scripts cannot reach (hedged boldness, every-thread-resolved endings) went to the humanizer's reading pass, with the hard rule that a rewrite never resolves an author's open question and never smooths a bold claim. Wiring is complete across the skill family and the test chain; the scanner's false-positive sweep drove two precision fixes (adjectival "the moral", author-bio footers) before anything shipped.
+
+### 13. Drift fixed where found
+
+The retired book title was scrubbed estate-wide: the news skill, the writing rulebook's official-titles list, the manuscript-rule config, Appendix M's frontmatter templates and worked examples, and the served appendices HTML (regenerated). The fossil repository-architecture document was rewritten end to end (v2.0): it now owns the why (hub-and-mount rationale, source-to-served flow, determinism and gates, authority model) and defers the where to UBERCOG, so it cannot drift the same way again. The /opportunity skill's CRM paths were repointed from a pre-reorganisation layout to the real per-prospect folders, and the appendices generator lost three of its own drifts: a dead news-page URL in its llms.txt, manually-maintained-page checks aimed at locations the files left long ago, and a Gate 14 gap where its regenerated index page shipped without the source-frontmatter comment - the generator now backfills its own output at the write boundary. An orphaned legacy artefact still carrying the retired title was deleted from mx-outputs.
+
+### 14. Average Machines: the scanner's own story, drafted
+
+The motivating text became a blog draft (Zone 2, noindex): the study, the convergence finding, what we built, and the detail that the scanner flagged the draft's own original closing line - a tidy moral about competence and moats - which is gone for exactly the reason the post describes. The draft passes every scanner including the new one, plus the spell gate after a vocabulary update. A new business-opportunities database (mx-crm/business/, the location the /opportunity skill documented but which never existed) records the audit add-on this enables, with three service shapes and negotiating-position pricing.
+
+### 15. CRM caught up with IDHL reality
 
 Jonathan Healey's contact record was upgraded from "Prospect" to founding sponsor of The Gathering (confirmed 11 May; paperwork still outstanding, now an open item). A new contact records Liam Goldfinch: IDHL practitioner, Kentico MVP, attended the 8 April Leeds MX presentation, and presented an AI-assisted website-rebuild case study at the Kentico MVP Summit in Brno whose stated conclusion - structured context and specifications beat clever prompting - is the MX thesis arrived at independently from the delivery floor. He is a second thread into the sponsor relationship and a candidate for Gathering draft review.
 
@@ -105,6 +119,11 @@ Jonathan Healey's contact record was upgraded from "Prospect" to founding sponso
 | LEARNINGS buffer | 230 entries to 0 (distilled to six themed gotcha docs, one new) |
 | Hooks self-declaring enforcement | every hook (blocking / advisory / sync), generated registry |
 | New push gate | Gate 26 (device and repo memory in sync) |
+| Structural-convergence scanner | 5 categories, 22 test assertions, wired into the test chain |
+| Scanner calibration | 50 manuscript chapters clean; 73 blog sources, 1 plausible flag |
+| Business-opportunities database | created, 1 entry (audit content-authenticity add-on) |
+| Architecture doc rewritten | doc-architecture.md v2.0 (fossil to current, defers to UBERCOG) |
+| Blog drafts at Zone 2 | 2 (memory-that-travels, average-machines) |
 
 ---
 
@@ -121,6 +140,9 @@ REGINALD's trust story rests on a verifier resolving did:web:reginald.allabout.n
 - Cross-check gate is cog-path-only (operator contract restored): the npm surface carries the deterministic gates; the LLM claims-vs-evidence reader runs when the cog wrapper sets MX_AUDIT_COG_PATH=1.
 - Balanced Scorecard qualitative grades derive from measured data with a stated basis; template-asserted ratings are gone.
 - Storage folder names never end in a macOS bundle extension; the slug derivation enforces it with a .d guard.
+- Structural-convergence enforcement runs at all three layers (rulebook, deterministic scanner, humanizer judgement) and binds all registers, calibrated per surface; the write-boundary vocabulary hook was deliberately NOT extended because the closer phrases are position-dependent and fail its every-hit-is-a-violation admission rule.
+- The retired book title is gone from every current surface; official titles are "MX-Protocols" and "MX: The Handbook".
+- The audit golden-master fixture decision stays with the audit session that changed the error-page phrasing.
 
 ---
 
@@ -131,6 +153,9 @@ REGINALD's trust story rests on a verifier resolving did:web:reginald.allabout.n
 - Consider a short mx-site post on did:web resolution going live once Salva calls vNext ready.
 - Review and publish the memory-that-travels blog draft (Zone 2, gates green; promote command in REMINDERS), and weigh the productisation angle (Gathering draft note, Maxine hook, consulting story).
 - Rulebook rewrite phases still open: skills consolidation, UBERCOG rewrite, CLAUDE.md slim - one session each per the approved plan; the plan-state memory travels with the repo.
+- Propagate the structural-convergence concept into the manuscripts via /manuscript-propagate (Tom approved; in progress).
+- Review and publish the average-machines blog draft (Zone 2, gates green).
+- Pilot the content-authenticity section in the next scheduled audit deliverables, then price it as the named add-on per the opportunities database entry.
 
 ---
 
@@ -159,4 +184,6 @@ REGINALD's trust story rests on a verifier resolving did:web:reginald.allabout.n
 | 2186a22f | LEARNINGS buffer emptied: final entries become infrastructure or migrate |
 | (mx-outputs) 8e0df773 | session-check: appendix sync skips cleanly when no consolidated source exists |
 
-The writing session's memory-sync engine and hook-registry files landed inside the audit session's commits (e781808e, dfb59a34) through concurrent staging; content verified byte-identical, recorded here rather than re-committed.
+| (mx-outputs) 79e6aeb5 | Appendices index regenerated with source frontmatter; Average Machines blog draft (Zone 2, noindex) |
+
+The writing session's memory-sync engine and hook-registry files landed inside the audit session's commits (e781808e, dfb59a34) through concurrent staging; content verified byte-identical, recorded here rather than re-committed. The style session's stack (Pattern 28, scan-structure, the drift fixes, the opportunities database, the doc-architecture rewrite, LEARNINGS entries since migrated to the gotcha cogs) rode 17e7c902 and the audit session's later sweep commits the same way; content verified on disk, recorded here rather than re-committed.
