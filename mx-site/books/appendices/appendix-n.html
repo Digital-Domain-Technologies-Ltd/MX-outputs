@@ -195,7 +195,7 @@ fixes for each pattern.</p>
 <ol type="1">
 <li><strong>For audits:</strong> Run through every pattern when
 evaluating a site</li>
-<li><strong>For debugging:</strong> Find specific failures you’re
+<li><strong>For debugging:</strong> Find specific failures you're
 encountering</li>
 <li><strong>For prevention:</strong> Review before implementing new
 features</li>
@@ -331,13 +331,13 @@ invisible to AI agents and accessibility users</p>
 <h3 id="context">Context</h3>
 <p>This anti-pattern commonly appears in:</p>
 <ul>
-<li>E-commerce sites with pricing tiers and “recommended” plans</li>
+<li>E-commerce sites with pricing tiers and "recommended" plans</li>
 <li>SaaS products with feature comparison tables</li>
 <li>Marketing sites with highlighted calls-to-action</li>
 <li>Dashboard interfaces with status indicators and alerts</li>
-<li>Product catalogs with “bestseller” or “featured” badges</li>
+<li>Product catalogs with "bestseller" or "featured" badges</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Designers specify visual emphasis without semantic requirements</li>
 <li>Developers implement designs directly from visual mockups without
@@ -351,9 +351,9 @@ planning</li>
 <p>Information conveyed purely through visual styling (colour, size,
 position, borders) without semantic backing in HTML.</p>
 <p>Humans perceive visual cues immediately-a gold border indicates
-“recommended”, larger size suggests importance, green means “success”.
+"recommended", larger size suggests importance, green means "success".
 AI agents and screen readers parse HTML structure and content, not CSS
-styling. When critical information exists only in CSS, it’s invisible to
+styling. When critical information exists only in CSS, it's invisible to
 these users.</p>
 <p><strong>Impact:</strong></p>
 <ul>
@@ -395,12 +395,12 @@ class="sourceCode css"><code class="sourceCode css" data-role="code-content"><sp
 gold border, larger size, subtle yellow background tint-clearly the
 recommended option.</p>
 <p><strong>What AI agents see:</strong> Three identical
-<code>&lt;div&gt;</code> structures. The “Most Popular” badge appears,
-but there’s no semantic indication that “Professional” is actually
+<code>&lt;div&gt;</code> structures. The "Most Popular" badge appears,
+but there's no semantic indication that "Professional" is actually
 recommended. The CSS class <code>tier-featured</code> means nothing
 without visual rendering.</p>
-<p><strong>What screen readers announce:</strong> “Pricing tiers. Basic
-£29. Professional £99 Most Popular. Enterprise £299.” No indication of
+<p><strong>What screen readers announce:</strong> "Pricing tiers. Basic
+£29. Professional £99 Most Popular. Enterprise £299." No indication of
 recommendation or importance.</p>
 <h3 id="forces">Forces</h3>
 <ul>
@@ -420,7 +420,7 @@ and implementation time than adding visual-only classes</li>
 <li><strong>Browser compatibility:</strong> Visual approaches work
 consistently across all browsers with minimal testing</li>
 <li><strong>Perceived simplicity:</strong> Developers see CSS styling as
-“cleaner” than semantic HTML with additional attributes</li>
+"cleaner" than semantic HTML with additional attributes</li>
 </ul>
 <h3 id="the-fix-solution">The Fix (Solution)</h3>
 <p>Make recommendations explicit in HTML structure and content using
@@ -455,7 +455,7 @@ groups pricing tiers with clear purpose</li>
 <li><strong>ARIA label:</strong>
 <code>aria-label="Recommended plan"</code> makes recommendation
 machine-readable</li>
-<li><strong>Explicit text:</strong> “Recommended for most businesses”
+<li><strong>Explicit text:</strong> "Recommended for most businesses"
 appears in HTML (not CSS)</li>
 <li><strong>Proper data elements:</strong>
 <code>&lt;data value="99"&gt;</code> provides machine-readable
@@ -470,8 +470,8 @@ proper document outline</li>
 recommended options through HTML structure, ARIA attributes, and
 explicit text without requiring visual parsing</li>
 <li><strong>Screen reader clarity:</strong> Screen reader users hear
-“Recommended plan: Professional. Most popular plan. Recommended for most
-businesses” with proper context</li>
+"Recommended plan: Professional. Most popular plan. Recommended for most
+businesses" with proper context</li>
 <li><strong>Search indexing:</strong> Search engines understand content
 hierarchy, relative importance, and recommendations</li>
 <li><strong>Maintainability:</strong> Semantic HTML is
@@ -539,17 +539,17 @@ HTML</li>
 </ul>
 <p><strong>Specific examples:</strong></p>
 <ul>
-<li>SaaS pricing pages with CSS-highlighted “recommended” tiers (gold
+<li>SaaS pricing pages with CSS-highlighted "recommended" tiers (gold
 borders, larger size, background tint) but no semantic indication</li>
-<li>E-commerce category pages with visually emphasised “bestseller”
+<li>E-commerce category pages with visually emphasised "bestseller"
 badges that are pure CSS <code>::before</code> pseudo-elements</li>
 <li>Dashboard interfaces with colour-coded status indicators
 (success=green, warning=yellow, error=red) without accompanying
 text</li>
 <li>Feature comparison tables using background colours to show
-“included” vs “not included” without checkmarks, text, or semantic
+"included" vs "not included" without checkmarks, text, or semantic
 markup</li>
-<li>Mobile app landing pages with visually prominent “Get Started”
+<li>Mobile app landing pages with visually prominent "Get Started"
 buttons that lack semantic distinction from other buttons</li>
 </ul>
 <h3 id="related-patterns">Related Patterns</h3>
@@ -569,7 +569,7 @@ content is inaccessible without styles</li>
 <li>Auto-Playing Content — Also assumes visual presentation without
 considering alternative access methods</li>
 <li>Generic Link Text — Another pattern where visual context
-(surrounding content) isn’t available to non-visual users</li>
+(surrounding content) isn't available to non-visual users</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -585,7 +585,7 @@ agents and accessibility users)</li>
 <p><strong>Pattern ID:</strong>
 <code>mx.anti-pattern.media.content-in-images</code>
 <strong>Status:</strong> active <strong>Intent:</strong> Prevent
-critical content from being trapped in non-text formats where it’s
+critical content from being trapped in non-text formats where it's
 inaccessible to AI agents and screen readers</p>
 <h3 id="context-1">Context</h3>
 <p>This anti-pattern commonly appears in:</p>
@@ -598,7 +598,7 @@ processes</li>
 appeal</li>
 <li>Dashboard screenshots showing data tables or metrics</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Designers create compelling visual content without considering text
 alternatives</li>
@@ -612,7 +612,7 @@ text</li>
 <h3 id="the-problem-1">The Problem</h3>
 <p>Text embedded in images without proper alt text or supplementary HTML
 text.</p>
-<p>When critical information exists only as pixels in an image, it’s
+<p>When critical information exists only as pixels in an image, it's
 completely inaccessible to non-visual users. AI agents cannot extract
 text from images (OCR is unreliable and not universally available), and
 screen readers can only announce the alt text-which is often generic or
@@ -621,7 +621,7 @@ missing entirely.</p>
 <ul>
 <li>AI agents cannot parse service descriptions, pricing details, or
 feature lists embedded in images</li>
-<li>Screen reader users miss essential information that’s trapped in
+<li>Screen reader users miss essential information that's trapped in
 infographics</li>
 <li>Search engines cannot index text content that exists only as image
 pixels</li>
@@ -643,13 +643,13 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <li>Cloud Infrastructure: AWS and Azure deployment</li>
 <li>DevOps: CI/CD pipelines</li>
 </ul>
-<p><strong>What AI agents see:</strong> “Our services” — no detail
+<p><strong>What AI agents see:</strong> "Our services" — no detail
 whatsoever. The alt text provides no information about the actual
 services offered.</p>
-<p><strong>What screen readers announce:</strong> “Image: Our services”
+<p><strong>What screen readers announce:</strong> "Image: Our services"
 — users with vision impairments receive no information about the four
 service categories or their descriptions.</p>
-<p><strong>What search engines index:</strong> Only “Our services” — the
+<p><strong>What search engines index:</strong> Only "Our services" — the
 detailed service descriptions remain invisible to Google, Bing, and
 other search engines.</p>
 <h3 id="forces-content-in-images">Forces (Content in Images)</h3>
@@ -706,7 +706,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <li><strong>Semantic container:</strong> <code>&lt;section&gt;</code>
 groups related content with clear heading</li>
 <li><strong>Improved alt text:</strong> Describes what the infographic
-shows (four service categories) instead of generic “Our services”</li>
+shows (four service categories) instead of generic "Our services"</li>
 <li><strong>Text alternative:</strong> All content from image is
 provided as semantic HTML below the image</li>
 <li><strong>Article elements:</strong> Each service is an
@@ -788,7 +788,7 @@ weight (usually minimal compared to images)</li>
 brand styling with HTML/CSS vs images</li>
 <li><strong>Content duplication:</strong> Information exists in two
 places (image and text), requiring synchronised updates</li>
-<li><strong>Design tool limitations:</strong> Workflow doesn’t support
+<li><strong>Design tool limitations:</strong> Workflow doesn't support
 automatic text extraction from design files</li>
 </ul>
 <h3 id="known-uses-content-in-images">Known Uses (Content in
@@ -808,7 +808,7 @@ embedded as images</li>
 </ul>
 <p><strong>Specific examples:</strong></p>
 <ul>
-<li>Agency websites with “Our Process” infographics showing 5-step
+<li>Agency websites with "Our Process" infographics showing 5-step
 workflows as single images</li>
 <li>Product pages with specification tables photographed from print
 catalogs</li>
@@ -858,18 +858,18 @@ context</p>
 <h3 id="context-generic-link-text">Context (Generic Link Text)</h3>
 <p>This anti-pattern commonly appears in:</p>
 <ul>
-<li>Marketing sites with repeated “Learn more” or “Read more” CTAs
+<li>Marketing sites with repeated "Learn more" or "Read more" CTAs
 across multiple sections</li>
-<li>Blog listing pages where every post has identical “Read full
-article” links</li>
-<li>Product catalog pages with generic “View details” or “See more”
+<li>Blog listing pages where every post has identical "Read full
+article" links</li>
+<li>Product catalog pages with generic "View details" or "See more"
 links</li>
-<li>SaaS landing pages with multiple “Get started” buttons linking to
+<li>SaaS landing pages with multiple "Get started" buttons linking to
 different destinations</li>
-<li>Service pages with “Click here” links scattered throughout
+<li>Service pages with "Click here" links scattered throughout
 descriptive paragraphs</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Designers prioritise visual consistency over semantic clarity (all
 CTAs look identical)</li>
@@ -880,17 +880,17 @@ and teasers</li>
 <li>Marketing teams optimise for brevity without considering
 accessibility implications</li>
 <li>Developers implement templates with hardcoded generic link text that
-content editors don’t customise</li>
+content editors don't customise</li>
 </ul>
 <h3 id="problem-generic-link-text">Problem (Generic Link Text)</h3>
-<p>Links with meaningless text like “click here”, “read more”, “learn
-more”, “see more”, “view details” that provide no information about
+<p>Links with meaningless text like "click here", "read more", "learn
+more", "see more", "view details" that provide no information about
 destinations when read without surrounding context.</p>
-<p>Sighted users see links in context-a “Learn more” link below a
-heading about “Edge Delivery Services Migration” is obviously about that
+<p>Sighted users see links in context-a "Learn more" link below a
+heading about "Edge Delivery Services Migration" is obviously about that
 topic. AI agents and screen reader users often navigate by extracting
-all links from a page as a list. When every link says “Learn more”,
-“Read more”, or “Click here”, the list becomes useless:</p>
+all links from a page as a list. When every link says "Learn more",
+"Read more", or "Click here", the list becomes useless:</p>
 <ol type="1">
 <li>Learn more</li>
 <li>Read more</li>
@@ -908,7 +908,7 @@ understand each link</li>
 topics</li>
 <li>Automated testing cannot verify that correct links point to intended
 destinations</li>
-<li>Voice interface users cannot specify which “learn more” link they
+<li>Voice interface users cannot specify which "learn more" link they
 want to activate</li>
 </ul>
 <h3 id="detection-method-generic-link-text">Detection Method (Generic
@@ -923,13 +923,13 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <li><strong>Visual design consistency:</strong> Designers want uniform
 CTA appearance and length across all cards and sections</li>
 <li><strong>Content brevity:</strong> Character limits in card layouts
-force generic text like “More” or “View”</li>
+force generic text like "More" or "View"</li>
 <li><strong>Print convention legacy:</strong> Print design assumes
 readers see surrounding context for every element</li>
 <li><strong>CMS template limitations:</strong> Default templates include
-hardcoded generic link text that content editors don’t customise</li>
+hardcoded generic link text that content editors don't customise</li>
 <li><strong>Marketing copy patterns:</strong> Marketing teams use action
-verbs (“Learn”, “Discover”, “Explore”) without objects</li>
+verbs ("Learn", "Discover", "Explore") without objects</li>
 <li><strong>Visual hierarchy:</strong> Designers prioritise heading
 clarity over link specificity, assuming context is always visible</li>
 <li><strong>Translation simplification:</strong> Generic links reduce
@@ -973,7 +973,7 @@ browse links as a list and understand each destination</li>
 <li><strong>Search indexing:</strong> Search engines understand link
 relationships and can weight target page relevance</li>
 <li><strong>Voice interface clarity:</strong> Voice users can specify
-exactly which link they want (“click EDS migration services link”)</li>
+exactly which link they want ("click EDS migration services link")</li>
 <li><strong>Keyboard navigation:</strong> Keyboard users navigating by
 links hear distinct, meaningful descriptions</li>
 <li><strong>Testing automation:</strong> Automated tests can verify
@@ -1003,7 +1003,7 @@ specific links by speaking descriptive link text</li>
 <p><strong>Negative/Trade-offs:</strong></p>
 <ul>
 <li><strong>Longer link text:</strong> Descriptive links require more
-characters than generic “Learn more” (may affect card layouts)</li>
+characters than generic "Learn more" (may affect card layouts)</li>
 <li><strong>Design flexibility:</strong> Less visual consistency if link
 text varies in length across similar sections</li>
 <li><strong>Content effort:</strong> Requires content editors to write
@@ -1019,29 +1019,29 @@ link text fields instead of hardcoded strings</li>
 Text)</h3>
 <p><strong>Common in:</strong></p>
 <ul>
-<li>WordPress themes using hardcoded “Read More” links on blog listing
+<li>WordPress themes using hardcoded "Read More" links on blog listing
 pages</li>
-<li>Bootstrap-based marketing sites with repeated “Learn More” CTAs in
+<li>Bootstrap-based marketing sites with repeated "Learn More" CTAs in
 feature cards</li>
-<li>E-commerce platforms with generic “View Product” links that don’t
+<li>E-commerce platforms with generic "View Product" links that don't
 include product names</li>
-<li>SaaS landing pages with multiple “Get Started” buttons linking to
+<li>SaaS landing pages with multiple "Get Started" buttons linking to
 different signup flows</li>
-<li>News sites with “Continue reading” links on article excerpts without
+<li>News sites with "Continue reading" links on article excerpts without
 article titles</li>
 </ul>
 <p><strong>Specific examples:</strong></p>
 <ul>
-<li>Blog archives where every post has identical “Read full article”
+<li>Blog archives where every post has identical "Read full article"
 link text</li>
-<li>Service comparison tables with “Learn more” in every cell, all
+<li>Service comparison tables with "Learn more" in every cell, all
 linking to different pages</li>
-<li>Product listing pages with “Add to basket” buttons that don’t
+<li>Product listing pages with "Add to basket" buttons that don't
 specify product names</li>
-<li>Documentation sites with “Next step” links that don’t indicate next
+<li>Documentation sites with "Next step" links that don't indicate next
 topic</li>
-<li>Footer navigation with “Privacy policy”, “Terms”, “Contact” followed
-by generic “Click here” links</li>
+<li>Footer navigation with "Privacy policy", "Terms", "Contact" followed
+by generic "Click here" links</li>
 </ul>
 <h3 id="related-patterns-generic-link-text">Related Patterns (Generic
 Link Text)</h3>
@@ -1094,12 +1094,12 @@ without considering page context</li>
 <li>Single-page applications where sections use arbitrary heading levels
 without considering overall hierarchy</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Designers specify heading styles in visual mockups without
 considering semantic HTML levels</li>
-<li>Developers use headings as styling tools (“h3 looks better than h2
-here”)</li>
+<li>Developers use headings as styling tools ("h3 looks better than h2
+here")</li>
 <li>CSS frameworks provide utility classes that override heading
 semantics</li>
 <li>Component-based development isolates heading choices without
@@ -1162,12 +1162,12 @@ semantics</li>
 <li><strong>WYSIWYG editors:</strong> Content editors see visual
 dropdown of heading options and choose based on appearance</li>
 <li><strong>Legacy print conventions:</strong> Print design background
-encourages “headline”, “subhead”, “deck” thinking instead of semantic
+encourages "headline", "subhead", "deck" thinking instead of semantic
 levels</li>
 <li><strong>Developer convenience:</strong> Easier to use h3 for visual
 consistency than to fix CSS or choose semantically correct level</li>
 <li><strong>Design system constraints:</strong> Design systems specify
-limited heading sizes (e.g., “Display”, “Headline”, “Title”) that don’t
+limited heading sizes (e.g., "Display", "Headline", "Title") that don't
 map to HTML levels</li>
 <li><strong>Responsive sizing:</strong> Different heading sizes needed
 for mobile vs desktop, leading to semantic choices based on
@@ -1283,7 +1283,7 @@ hierarchies across large sites requires a thorough audit</li>
 <li><strong>Team training:</strong> Developers and content editors need
 training on semantic heading usage</li>
 <li><strong>CMS limitations:</strong> Some content management systems
-don’t provide easy heading level customisation</li>
+don't provide easy heading level customisation</li>
 </ul>
 <h3 id="known-uses-broken-heading-hierarchy">Known Uses (Broken Heading
 Hierarchy)</h3>
@@ -1308,7 +1308,7 @@ across category pages</li>
 already have h2 section headings</li>
 <li>Sidebar widgets using h2 or h3 without considering main content
 hierarchy</li>
-<li>Footer sections using h4 for “About Us”, “Contact” when no h2 or h3
+<li>Footer sections using h4 for "About Us", "Contact" when no h2 or h3
 exists</li>
 <li>Product comparison tables using h5 for all product names regardless
 of page structure</li>
@@ -1364,13 +1364,13 @@ with client-rendered navigation</li>
 <li>E-commerce platforms where navigation menus are dynamically loaded
 from APIs</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Modern JavaScript frameworks default to client-side rendering
 without SSR (server-side rendering)</li>
 <li>Developers build SPAs without considering progressive
 enhancement</li>
-<li>Navigation data comes from APIs and developers don’t implement
+<li>Navigation data comes from APIs and developers don't implement
 server-side fallbacks</li>
 <li>Performance optimisation attempts defer navigation rendering until
 after JavaScript loads</li>
@@ -1394,12 +1394,12 @@ all.</p>
 <ul>
 <li>CLI agents cannot discover site structure or navigate beyond the
 current page</li>
-<li>Search engines may not crawl linked pages if navigation isn’t in
+<li>Search engines may not crawl linked pages if navigation isn't in
 served HTML</li>
 <li>Users with JavaScript disabled or blocked see no navigation
 options</li>
 <li>Screen readers encounter empty navigation landmarks</li>
-<li>Progressive web app “add to home screen” initial loads show no
+<li>Progressive web app "add to home screen" initial loads show no
 navigation</li>
 <li>Performance metrics show longer time-to-interactive due to
 JavaScript-dependent navigation</li>
@@ -1544,7 +1544,7 @@ before rendering page</li>
 (user-specific) harder to cache with SSR</li>
 <li><strong>Development time:</strong> Progressive enhancement requires
 more planning than client-only approach</li>
-<li><strong>Framework limitations:</strong> Some frameworks don’t
+<li><strong>Framework limitations:</strong> Some frameworks don't
 support SSR without significant refactoring</li>
 </ul>
 <h3 id="known-uses-javascript-only-navigation">Known Uses
@@ -1624,10 +1624,10 @@ to expand</li>
 button click</li>
 <li>Collapsible sections where content is hidden by default to save
 vertical space</li>
-<li>“Read more” truncated content that expands only when JavaScript
+<li>"Read more" truncated content that expands only when JavaScript
 executes</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Developers prioritise compact visual design over content
 accessibility</li>
@@ -1668,7 +1668,7 @@ patterns</li>
 presence</li>
 <li>Poor initial page rendering (FOUC — Flash of Unstyled Content) when
 JavaScript delays</li>
-<li>SEO penalties for “thin content” when hidden text isn’t indexed</li>
+<li>SEO penalties for "thin content" when hidden text isn't indexed</li>
 </ul>
 <h3 id="detection-method-hidden-content-with-no-fallback">Detection
 Method (Hidden Content with No Fallback)</h3>
@@ -1813,7 +1813,7 @@ hide panels by default</li>
 <code>display: none</code></li>
 <li>WordPress themes with FAQ sections using JavaScript-dependent
 show/hide</li>
-<li>E-commerce sites with “Product Details” sections collapsed until
+<li>E-commerce sites with "Product Details" sections collapsed until
 user clicks</li>
 <li>Documentation sites with collapsible API reference sections</li>
 </ul>
@@ -1821,14 +1821,14 @@ user clicks</li>
 <ul>
 <li>FAQ pages where answers are hidden until questions are clicked,
 making content invisible to search engines</li>
-<li>Product pages with specifications hidden behind “View More Details”
+<li>Product pages with specifications hidden behind "View More Details"
 buttons</li>
 <li>Contact pages with business hours hidden in collapsed accordion
 until expanded</li>
 <li>Terms and conditions pages with sections collapsed by default
 (potential legal issues)</li>
-<li>Pricing pages with feature comparison tables hidden behind “Compare
-Plans” toggle</li>
+<li>Pricing pages with feature comparison tables hidden behind "Compare
+Plans" toggle</li>
 </ul>
 <h3 id="related-patterns-hidden-content-with-no-fallback">Related
 Patterns (Hidden Content with No Fallback)</h3>
@@ -1873,20 +1873,20 @@ Outdated Sitemap)</h3>
 <ul>
 <li>Small business websites where sitemaps were never created during
 initial development</li>
-<li>Rapidly-growing content sites where sitemaps aren’t regenerated
+<li>Rapidly-growing content sites where sitemaps aren't regenerated
 after new pages are added</li>
 <li>Legacy sites migrated from old platforms without sitemap
 migration</li>
 <li>Custom-built sites without automated sitemap generation in the build
 process</li>
 <li>E-commerce platforms where product pages are added but sitemaps
-aren’t updated</li>
+aren't updated</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
-<li>Developers skip sitemap creation for “small” sites, assuming manual
+<li>Developers skip sitemap creation for "small" sites, assuming manual
 navigation is sufficient</li>
-<li>Content management systems don’t have automatic sitemap generation
+<li>Content management systems don't have automatic sitemap generation
 enabled</li>
 <li>Site migrations or redesigns break sitemap generation without being
 noticed</li>
@@ -1906,7 +1906,7 @@ about site structure.</p>
 for discovering content. When sitemaps are missing, outdated, or
 incorrect, agents may miss new content, waste crawl budget on deleted
 pages, or fail to prioritise recently-updated pages. This is especially
-problematic for large sites where navigation links don’t reach all pages
+problematic for large sites where navigation links don't reach all pages
 or for dynamic content that changes frequently.</p>
 <p><strong>Impact:</strong></p>
 <ul>
@@ -1938,7 +1938,7 @@ class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> https://example.com/sitemap.xml <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;&lt;lastmod&gt;&#39;</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span></span></code></pre></div>
 <p><strong>Common issues to check:</strong></p>
 <ul>
-<li>Sitemap returns 404 (doesn’t exist)</li>
+<li>Sitemap returns 404 (doesn't exist)</li>
 <li>Sitemap contains URLs that return 404 (broken links)</li>
 <li><code>&lt;lastmod&gt;</code> dates are years old despite recent
 content updates</li>
@@ -1955,11 +1955,11 @@ manually is tedious and error-prone</li>
 <li><strong>Build process gaps:</strong> Sitemap generation not
 integrated into deployment workflows</li>
 <li><strong>CMS limitations:</strong> Some content management systems
-don’t include sitemap generation by default</li>
+don't include sitemap generation by default</li>
 <li><strong>Dynamic content complexity:</strong> Products, blog posts,
 user-generated content change frequently</li>
 <li><strong>Small site assumption:</strong> Developers assume small
-sites don’t need sitemaps (incorrect)</li>
+sites don't need sitemaps (incorrect)</li>
 <li><strong>Lack of monitoring:</strong> No alerts when sitemap
 generation fails or becomes outdated</li>
 <li><strong>Migration neglect:</strong> Sitemaps often missed during
@@ -2086,7 +2086,7 @@ Sitemap or Outdated Sitemap)</h3>
 <ul>
 <li>Small business websites built by freelancers without SEO
 expertise</li>
-<li>Custom-built sites where developers didn’t implement sitemap
+<li>Custom-built sites where developers didn't implement sitemap
 generation</li>
 <li>WordPress sites without Yoast SEO or similar plugins</li>
 <li>Static sites built with custom generators missing sitemap
@@ -2121,8 +2121,8 @@ discovery strategies</li>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
 <li>JavaScript-Only Navigation — Similar discoverability issue</li>
-<li>Content in iframes — Content that’s hard for agents to discover</li>
-<li>PDF-Only Content — Content that sitemaps can’t help with</li>
+<li>Content in iframes — Content that's hard for agents to discover</li>
+<li>PDF-Only Content — Content that sitemaps can't help with</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -2141,30 +2141,30 @@ trustworthy machine-readable information</p>
 Schema.org)</h3>
 <p>This anti-pattern commonly appears in:</p>
 <ul>
-<li>E-commerce product pages where Schema.org markup isn’t updated when
+<li>E-commerce product pages where Schema.org markup isn't updated when
 prices or availability change</li>
-<li>Event listing pages where Schema.org dates don’t match visible dates
+<li>Event listing pages where Schema.org dates don't match visible dates
 after rescheduling</li>
 <li>Recipe sites where Schema.org ingredient lists are shortened or
 simplified</li>
 <li>Local business pages where Schema.org addresses or phone numbers
-don’t match footer contact details</li>
+don't match footer contact details</li>
 <li>Article pages where Schema.org publish dates differ from visible
 dates</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Schema.org markup is generated once during page creation but never
 updated</li>
 <li>Content editors update visible content without understanding
 Schema.org requirements</li>
-<li>Automated content management doesn’t synchronise Schema.org with
+<li>Automated content management doesn't synchronise Schema.org with
 HTML updates</li>
 <li>Developers hardcode Schema.org data separately from dynamic content
 rendering</li>
 <li>Marketing teams run promotions that update visible prices but not
 structured data</li>
-<li>Template systems don’t bind Schema.org properties to the same data
+<li>Template systems don't bind Schema.org properties to the same data
 sources as HTML</li>
 </ul>
 <h3 id="problem-inconsistent-schema.org">Problem (Inconsistent
@@ -2183,7 +2183,7 @@ information.</p>
 <ul>
 <li>AI agents use incorrect information (wrong prices, outdated
 availability, mismatched names)</li>
-<li>Trust erosion when agents discover structured data doesn’t match
+<li>Trust erosion when agents discover structured data doesn't match
 visible content</li>
 <li>Search engine penalties for misleading structured data (Google rich
 snippet removal)</li>
@@ -2216,8 +2216,8 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Problems:</strong></p>
 <ul>
-<li>Name mismatch: “Standing Desk” in Schema vs “Professional Standing
-Desk — White Oak Finish” in HTML</li>
+<li>Name mismatch: "Standing Desk" in Schema vs "Professional Standing
+Desk — White Oak Finish" in HTML</li>
 <li>Price mismatch: £599 in Schema vs £499 visible sale price</li>
 <li>Sale price not reflected in structured data</li>
 <li>Missing required fields: <code>availability</code>,
@@ -2234,15 +2234,15 @@ generated from different data source than HTML</li>
 happen quickly without technical updates</li>
 <li><strong>Template complexity:</strong> Harder to maintain
 synchronisation across multiple output formats</li>
-<li><strong>Developer awareness:</strong> Developers don’t always
+<li><strong>Developer awareness:</strong> Developers don't always
 understand Schema.org importance or requirements</li>
 <li><strong>Content editor training:</strong> Editors update visible
-content but don’t know Schema.org exists</li>
+content but don't know Schema.org exists</li>
 <li><strong>Testing gaps:</strong> Visual QA catches HTML issues but not
 Schema.org inconsistencies</li>
 <li><strong>Performance assumptions:</strong> Developers believe
 updating Schema.org on every content change is too expensive</li>
-<li><strong>Legacy systems:</strong> Old CMSes don’t provide tools for
+<li><strong>Legacy systems:</strong> Old CMSes don't provide tools for
 synchronised Schema.org management</li>
 </ul>
 <h3 id="solution-inconsistent-schema.org">Solution (Inconsistent
@@ -2359,9 +2359,9 @@ Schema.org)</h3>
 <ul>
 <li>E-commerce platforms where product prices update frequently but
 Schema.org is static</li>
-<li>Event management sites where Schema.org isn’t updated after date
+<li>Event management sites where Schema.org isn't updated after date
 changes</li>
-<li>Restaurant websites with Schema.org menus that don’t match PDF
+<li>Restaurant websites with Schema.org menus that don't match PDF
 menus</li>
 <li>Real estate listings where Schema.org prices lag behind visible
 prices</li>
@@ -2370,9 +2370,9 @@ open</li>
 </ul>
 <p><strong>Specific examples:</strong></p>
 <ul>
-<li>Amazon third-party sellers where listing updates don’t regenerate
+<li>Amazon third-party sellers where listing updates don't regenerate
 Schema.org markup</li>
-<li>WordPress sites using outdated Schema.org plugins that don’t sync
+<li>WordPress sites using outdated Schema.org plugins that don't sync
 with content</li>
 <li>Custom CMSes where marketing teams update prices but Schema.org
 remains static</li>
@@ -2424,23 +2424,23 @@ Labels)</h3>
 for labels</li>
 <li>Mobile-first forms where screen space constraints encourage label
 omission</li>
-<li>Login forms with just “Username” and “Password” placeholder
+<li>Login forms with just "Username" and "Password" placeholder
 text</li>
 <li>Newsletter signup forms with single email input and placeholder</li>
-<li>Search forms with placeholder-only text like “Search…”</li>
+<li>Search forms with placeholder-only text like "Search..."</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Designers prioritise visual minimalism over semantic clarity</li>
 <li>Mobile app design patterns (placeholder-only) are copied to web
 without adaptation</li>
 <li>CSS frameworks demonstrate forms with placeholder-only patterns in
 documentation</li>
-<li>Developers don’t understand the difference between placeholders and
+<li>Developers don't understand the difference between placeholders and
 labels</li>
 <li>Rapid prototyping tools generate forms without proper label
 markup</li>
-<li>Time pressure leads to skipping “extra” HTML for labels</li>
+<li>Time pressure leads to skipping "extra" HTML for labels</li>
 </ul>
 <h3 id="problem-forms-without-labels">Problem (Forms Without
 Labels)</h3>
@@ -2448,7 +2448,7 @@ Labels)</h3>
 and accessibility failures for AI agents, screen readers, and
 form-filling automation.</p>
 <p>Placeholders are temporary hint text that disappears when users start
-typing. They’re not substitutes for labels. AI agents and screen readers
+typing. They're not substitutes for labels. AI agents and screen readers
 cannot reliably access placeholder text, and even when they can, the
 information disappears once the field has a value. This makes it
 impossible to review form data before submission or understand what a
@@ -2457,12 +2457,12 @@ pre-filled field contains.</p>
 <ul>
 <li>AI agents cannot understand form structure or determine which fields
 require what information</li>
-<li>Screen readers don’t announce placeholder text consistently across
+<li>Screen readers don't announce placeholder text consistently across
 browsers</li>
 <li>Form auto-fill features cannot correctly match labels to inputs</li>
 <li>Users cannot see field purpose once they start typing (placeholder
 disappears)</li>
-<li>Validation errors are ambiguous (“Email address is required” — which
+<li>Validation errors are ambiguous ("Email address is required" — which
 field was that?)</li>
 <li>Automated testing cannot reliably identify form fields</li>
 <li>Browser password managers cannot correctly associate credentials
@@ -2601,7 +2601,7 @@ placeholder-only</li>
 semantics</li>
 <li>Login forms with just username/password placeholders and no
 labels</li>
-<li>Search bars with placeholder “Search…” and no visible label</li>
+<li>Search bars with placeholder "Search..." and no visible label</li>
 <li>Contact forms designed for visual appeal over accessibility</li>
 </ul>
 <p><strong>Specific examples:</strong></p>
@@ -2668,7 +2668,7 @@ markup</li>
 <li>Pricing comparison pages where tables lack proper header
 structure</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Developers maintain legacy code without modernising layout
 patterns</li>
@@ -2719,11 +2719,11 @@ for HTML emails</li>
 <li><strong>Quick implementation:</strong> Faster to use all
 <code>&lt;td&gt;</code> cells than think about <code>&lt;th&gt;</code>
 structure</li>
-<li><strong>Visual appearance:</strong> Tables “just work” for visual
+<li><strong>Visual appearance:</strong> Tables "just work" for visual
 alignment without CSS knowledge</li>
 <li><strong>WYSIWYG editor output:</strong> Visual editors generate
 table-heavy HTML</li>
-<li><strong>Framework gaps:</strong> Some component libraries don’t
+<li><strong>Framework gaps:</strong> Some component libraries don't
 generate semantic table markup</li>
 <li><strong>Developer awareness:</strong> Not all developers understand
 semantic table requirements</li>
@@ -2805,11 +2805,11 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <li><strong>Agent understanding:</strong> AI agents correctly identify
 tabular data and understand relationships</li>
 <li><strong>Screen reader clarity:</strong> Screen readers announce
-“Plan Name column header: Basic” instead of “Plan Basic”</li>
+"Plan Name column header: Basic" instead of "Plan Basic"</li>
 <li><strong>Data extraction:</strong> Search engines and AI can extract
 structured data from tables</li>
-<li><strong>Voice interface support:</strong> Users can ask “What’s the
-price for Professional plan?” and get accurate answers</li>
+<li><strong>Voice interface support:</strong> Users can ask "What's the
+price for Professional plan?" and get accurate answers</li>
 <li><strong>Better SEO:</strong> Rich snippets can display table data in
 search results</li>
 <li><strong>Testing reliability:</strong> Automated tests can verify
@@ -2846,7 +2846,7 @@ simple <code>&lt;td&gt;</code> grids</li>
 <code>&lt;tbody&gt;</code></li>
 <li><strong>Migration effort:</strong> Converting layout tables to CSS
 Grid/Flexbox is time-intensive</li>
-<li><strong>Legacy support:</strong> Some very old browsers don’t fully
+<li><strong>Legacy support:</strong> Some very old browsers don't fully
 support CSS Grid (increasingly rare)</li>
 <li><strong>Email templates:</strong> Table-based layouts still
 necessary for HTML email compatibility</li>
@@ -2927,7 +2927,7 @@ tools</li>
 <li>Multi-brand sites using iframes to include content from other
 company domains</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Third-party services provide only iframe embed codes, not APIs</li>
 <li>Content management workflows separate content into different
@@ -2948,7 +2948,7 @@ cross. When agents parse a page containing
 element itself, not the content within. This is by design — iframes are
 security boundaries preventing cross-origin access. For agents to access
 iframe content, they must separately fetch and parse the iframe source
-URL, which many agents don’t do automatically.</p>
+URL, which many agents don't do automatically.</p>
 <p><strong>Impact:</strong></p>
 <ul>
 <li>CLI agents cannot see content within iframes, missing critical
@@ -2959,7 +2959,7 @@ parent page</li>
 flow</li>
 <li>Automated testing cannot access iframe content without special
 handling</li>
-<li>SEO penalties for “thin content” when important text is in
+<li>SEO penalties for "thin content" when important text is in
 iframes</li>
 <li>Analytics cannot track user interactions within third-party
 iframes</li>
@@ -3070,7 +3070,7 @@ external content</li>
 <li><strong>API dependencies:</strong> Requires reliable APIs, not just
 embed codes</li>
 <li><strong>Cross-origin limitations:</strong> Some content genuinely
-can’t be fetched cross-origin</li>
+can't be fetched cross-origin</li>
 <li><strong>Maintenance overhead:</strong> Must handle API changes and
 errors</li>
 </ul>
@@ -3089,8 +3089,8 @@ CMSes</li>
 </ul>
 <p><strong>Specific examples:</strong></p>
 <ul>
-<li>Google Calendar embeds on company “Events” pages</li>
-<li>Twitter/X timeline widgets embedded in “Latest Updates”
+<li>Google Calendar embeds on company "Events" pages</li>
+<li>Twitter/X timeline widgets embedded in "Latest Updates"
 sections</li>
 <li>Instagram feed widgets on photography portfolio sites</li>
 <li>External blog platform content embedded on main company site</li>
@@ -3145,16 +3145,16 @@ downloads</li>
 <li>Product documentation sites requiring PDF downloads to read
 instructions</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Content originates from print design workflows (brochures, reports)
-and isn’t adapted for web</li>
-<li>Content management systems don’t support rich web content,
+and isn't adapted for web</li>
+<li>Content management systems don't support rich web content,
 defaulting to PDF uploads</li>
-<li>Print-first organisations prioritise PDF as “official” format</li>
+<li>Print-first organisations prioritise PDF as "official" format</li>
 <li>Marketing teams create PDFs in design tools without considering web
 alternatives</li>
-<li>Legal/compliance teams require “final” PDF versions, discouraging
+<li>Legal/compliance teams require "final" PDF versions, discouraging
 HTML versions</li>
 <li>Legacy workflows assume PDFs preserve formatting better than
 HTML</li>
@@ -3165,8 +3165,8 @@ accessibility barriers for AI agents and many human users who cannot
 easily parse or navigate PDF content.</p>
 <p>PDF files are designed for print, not digital accessibility. AI
 agents struggle to extract structured information from PDFs — text order
-may not match visual layout, tables become plain text, headings aren’t
-semantic, and forms aren’t interactive. Many mobile users find PDFs
+may not match visual layout, tables become plain text, headings aren't
+semantic, and forms aren't interactive. Many mobile users find PDFs
 difficult to read, and screen reader users encounter unpredictable PDF
 accessibility depending on how the file was created.</p>
 <p><strong>Impact:</strong></p>
@@ -3181,7 +3181,7 @@ poor)</li>
 <li>Users must download files to view content, adding friction</li>
 <li>Content not searchable within page (need to download and open)</li>
 <li>Analytics cannot track user engagement with PDF content</li>
-<li>No responsive design — PDFs don’t adapt to screen sizes</li>
+<li>No responsive design — PDFs don't adapt to screen sizes</li>
 </ul>
 <h3 id="forces-pdf-only-content">Forces (PDF-Only Content)</h3>
 <ul>
@@ -3190,11 +3190,11 @@ assumes PDF is natural digital format</li>
 <li><strong>Design tool outputs:</strong> InDesign, Illustrator, Canva
 export to PDF, not HTML</li>
 <li><strong>Perceived professionalism:</strong> PDFs seen as more
-“official” or “polished” than web pages</li>
+"official" or "polished" than web pages</li>
 <li><strong>Format preservation:</strong> PDFs maintain exact layout
-across platforms (HTML doesn’t)</li>
+across platforms (HTML doesn't)</li>
 <li><strong>Legal requirements:</strong> Some organisations require
-“final” PDF versions for compliance</li>
+"final" PDF versions for compliance</li>
 <li><strong>Legacy infrastructure:</strong> Older CMSes make PDF upload
 easier than rich HTML creation</li>
 <li><strong>Brand consistency:</strong> Marketing teams control PDF
@@ -3277,7 +3277,7 @@ instant access</li>
 sizes and devices</li>
 <li><strong>Analytics integration:</strong> Track content engagement and
 user behaviour</li>
-<li><strong>Lower friction:</strong> Users don’t need PDF readers or
+<li><strong>Lower friction:</strong> Users don't need PDF readers or
 downloads</li>
 <li><strong>Future-proof:</strong> HTML works on emerging platforms and
 devices</li>
@@ -3309,7 +3309,7 @@ publications</li>
 </ul>
 <p><strong>Specific examples:</strong></p>
 <ul>
-<li>Service provider “Services” pages with single PDF brochure link</li>
+<li>Service provider "Services" pages with single PDF brochure link</li>
 <li>Event sites with speaker schedules only in downloadable PDF
 programme</li>
 <li>Product sites with instruction manuals only as PDF downloads</li>
@@ -3362,14 +3362,14 @@ seconds</li>
 <li>Product display pages with auto-advancing feature highlights</li>
 <li>Portfolio sites with auto-playing project galleries</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
-<li>Marketing teams request “dynamic” visual effects for engagement</li>
+<li>Marketing teams request "dynamic" visual effects for engagement</li>
 <li>Design trends favour carousel components for space efficiency</li>
 <li>UX assumptions prioritise visual variety over content
 accessibility</li>
 <li>Component libraries include auto-play as default behaviour</li>
-<li>Developers implement “modern” interactions without considering agent
+<li>Developers implement "modern" interactions without considering agent
 access</li>
 <li>Mobile design patterns encourage single-item-at-a-time displays</li>
 </ul>
@@ -3383,7 +3383,7 @@ carousel rotations or witness auto-playing content changes. When only
 the first carousel slide exists in served HTML (others loaded via
 JavaScript), agents see only that first item. Even when all slides exist
 in HTML but are hidden (<code>display: none</code>), agents may struggle
-to determine which content is actually “current” or relevant.</p>
+to determine which content is actually "current" or relevant.</p>
 <p><strong>Impact:</strong></p>
 <ul>
 <li>AI agents see only the first carousel slide, missing other content
@@ -3402,7 +3402,7 @@ name</li>
 <h3 id="forces-auto-playing-content">Forces (Auto-Playing Content)</h3>
 <ul>
 <li><strong>Visual dynamism:</strong> Auto-play creates perception of
-“modern” interactive site</li>
+"modern" interactive site</li>
 <li><strong>Space efficiency:</strong> Carousels show multiple items in
 limited vertical space</li>
 <li><strong>Marketing pressure:</strong> Teams want to highlight
@@ -3503,7 +3503,7 @@ slide</li>
 without forced auto-play</li>
 <li><strong>Direct linking:</strong> Specific carousel items can be
 bookmarked and shared</li>
-<li><strong>Reduced cognitive load:</strong> Content doesn’t disappear
+<li><strong>Reduced cognitive load:</strong> Content doesn't disappear
 before users finish reading</li>
 <li><strong>Testing simplicity:</strong> All content present in HTML for
 automated testing</li>
@@ -3513,7 +3513,7 @@ automated testing</li>
 <li><strong>Longer pages:</strong> All content visible increases
 vertical page length</li>
 <li><strong>Less visual dynamism:</strong> Static content perceived as
-less “interactive”</li>
+less "interactive"</li>
 <li><strong>Design constraints:</strong> Need to design for
 all-items-visible layout</li>
 <li><strong>Component library conflicts:</strong> Popular carousel
@@ -3595,16 +3595,16 @@ repos</li>
 <code>../../docs/guide.md</code></li>
 <li>Confluence/wiki exports with broken relative links</li>
 </ul>
-<p>It’s typically introduced when:</p>
+<p>It's typically introduced when:</p>
 <ul>
 <li>Documentation is written within IDEs where relative links work
 perfectly</li>
 <li>Version control workflows prioritise repository-relative paths</li>
 <li>Markdown editors show working relative links in preview</li>
 <li>Documentation generators expect repository context</li>
-<li>Teams don’t consider documents being read outside repository
+<li>Teams don't consider documents being read outside repository
 structure</li>
-<li>PDF generation or documentation exports aren’t tested</li>
+<li>PDF generation or documentation exports aren't tested</li>
 </ul>
 <h3 id="problem-context-free-references">Problem (Context-Free
 References)</h3>
@@ -3615,7 +3615,7 @@ the repository structure.</p>
 scraping, or direct download), they receive files without repository
 context. A link like
 <code>[README.md](../../README.md) ("MX: The Handbook" at &lt;&gt;)</code>
-becomes meaningless — what’s two directories up from a standalone file?
+becomes meaningless — what's two directories up from a standalone file?
 Where does the path resolve to? Which repository? What branch? The link
 destination cannot be determined without the original file system
 structure.</p>
@@ -3640,7 +3640,7 @@ class="sourceCode markdown"><code class="sourceCode markdown" data-role="code-co
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Event organisation resources</span>
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Discussion archives</span></code></pre></div>
 <p>When extracted or printed, the link <code>../../README.md</code> is
-meaningless. What’s two directories up? Where is this file located? What
+meaningless. What's two directories up? Where is this file located? What
 repository? Context is completely lost.</p>
 <h3 id="detection-method-context-free-references">Detection Method
 (Context-Free References)</h3>
@@ -3849,7 +3849,7 @@ withholding them from human readers.</p>
 experience. A sitemap index points to many sub-sitemaps, each a fixed
 block (often a round ten thousand URLs), and the totals run to hundreds
 of thousands of pages. Most describe third parties rather than the
-site’s own material. Fetch the index twice and the count drifts, because
+site's own material. Fetch the index twice and the count drifts, because
 it is generated on request, not authored. A direct request for one of
 the listed pages returns a bot-protection challenge, while robots.txt
 admits a roster of AI crawlers to the same path.</p>
@@ -3891,14 +3891,14 @@ Allow: /site/
 
 User-agent: *
 Disallow: /site/</code></pre>
-<p><strong>What humans see:</strong> A bot-protection challenge (“Just a
-moment…”) and, on most of the hundreds of thousands of listed pages, no
-content at all.</p>
+<p><strong>What humans see:</strong> A bot-protection challenge ("Just a
+moment...") and, on most of the hundreds of thousands of listed pages,
+no content at all.</p>
 <p><strong>What AI agents see:</strong> A vast body of templated profile
 pages, admitted by robots.txt, ready to ingest and cite.</p>
 <p><strong>What the sitemap claims:</strong> Hundreds of thousands of
-pages of site content, when a few small sub-sitemaps hold the site’s
-real material and the rest are generated listings of other people’s
+pages of site content, when a few small sub-sitemaps hold the site's
+real material and the rest are generated listings of other people's
 websites.</p>
 <h3 id="forces-1">Forces</h3>
 <ul>
@@ -3949,7 +3949,7 @@ rewards volume alone</li>
 <li><strong>Stable provenance chain:</strong> A regulator or a
 downstream model can walk from a cited statement to the party that
 stands behind it</li>
-<li><strong>Honest scale:</strong> The sitemap reflects the site’s real
+<li><strong>Honest scale:</strong> The sitemap reflects the site's real
 body of work, and the count does not drift between requests</li>
 </ul>
 <h3 id="consequences-1">Consequences</h3>
@@ -3981,7 +3981,7 @@ served</li>
 <h3 id="known-uses-1">Known Uses</h3>
 <p><strong>Common in:</strong></p>
 <ul>
-<li>Technology-detection and “what is the stack of this domain”
+<li>Technology-detection and "what is the stack of this domain"
 directory sites that publish one page per external domain</li>
 <li>Comparison-page generators that mint a page for every pairwise
 permutation of products or tools</li>
@@ -4015,7 +4015,7 @@ date</li>
 <li>Timetables, schedules, and fare tables for a season that has
 ended</li>
 <li>Booking pages for a service, venue, or operator that has closed</li>
-<li>Event pages, press releases, and “latest news” for events long
+<li>Event pages, press releases, and "latest news" for events long
 past</li>
 </ul>
 <p>It is typically introduced when:</p>
@@ -4024,7 +4024,7 @@ past</li>
 acts on, or the date was never set</li>
 <li>Publishing is easy and retiring is manual, so stale pages
 accumulate</li>
-<li>No one owns the question “when does this stop being true?”</li>
+<li>No one owns the question "when does this stop being true?"</li>
 </ul>
 <h3 id="the-problem-3">The Problem</h3>
 <p>A page describes something that is no longer the case, keeps being
@@ -4045,7 +4045,7 @@ ran it: nothing on it is false in isolation, and nothing on it is true
 any more</li>
 </ul>
 <h3 id="real-example-3">Real Example</h3>
-<p>A ferry operator’s booking page, still served after the company
+<p>A ferry operator's booking page, still served after the company
 folded. The page renders, the booking control loads, and the calendar
 opens empty. No <code>expires</code> was set, because no one was left to
 set it. An agent planning a journey reports a ferry that cannot be
@@ -4071,7 +4071,7 @@ the page</li>
 <p>The core check is structural and clock-free: does a time-bound page
 or asset declare a machine-readable <code>expires</code>? That is a
 single true/false test, the same on every run, with no dependence on the
-audit’s clock. The absence of an expiry declaration on content that is
+audit's clock. The absence of an expiry declaration on content that is
 plainly time-bound is the finding. A second, timestamped test, whether a
 declared <code>expires</code> has already passed, is recorded against
 the audit date only when an <code>expires</code> is present. The MX
@@ -4091,13 +4091,13 @@ several machine readers consume</p>
 containers: design systems that style <code>div</code> elements as
 buttons, card components whose whole surface is clickable, icon-only
 controls, forms assembled from unlabelled inputs with placeholder hints,
-and hand-rolled widgets that copy a pattern’s appearance without its
+and hand-rolled widgets that copy a pattern's appearance without its
 roles.</p>
 <h3 id="the-problem-4">The Problem</h3>
 <p>The accessibility tree is computed from markup, roles, and names, not
 from appearance. A container that responds to clicks but declares no
 role does not exist in the tree as anything actionable. A link named
-“read more” carries no destination once layout is gone. A placeholder is
+"read more" carries no destination once layout is gone. A placeholder is
 not a label; it vanishes on input. A label reference pointing at a
 missing or duplicated id resolves to nothing. Interactive elements
 nested inside interactive elements cannot be represented at all. In
@@ -4106,7 +4106,7 @@ screen readers and structure-reading machines, is missing the
 meaning.</p>
 <h3 id="real-example-4">Real Example</h3>
 <p>A pricing page renders its buy action as a styled <code>div</code>
-with a click handler, repeats a “read more” link under each plan card,
+with a click handler, repeats a "read more" link under each plan card,
 and shows the comparison data as a chart image with a one-word
 alternative text. A sighted mouse user completes the purchase without
 friction. In the tree there is no buy control, three identical link
@@ -4122,8 +4122,8 @@ carries it. Fix at the component level: these defects repeat because one
 template renders them on every page, so one component change clears the
 finding site-wide.</p>
 <h3 id="detection-1">Detection</h3>
-<p>Open the browser’s developer tools, switch the Elements panel to the
-Accessibility view, and enable the full-tree toggle. Find the page’s
+<p>Open the browser's developer tools, switch the Elements panel to the
+Accessibility view, and enable the full-tree toggle. Find the page's
 primary action and its key facts in the tree. The MX Web Audit Suite
 detects the full defect family deterministically and groups repeated
 findings by structural signature, so a template defect reports as one
@@ -4138,7 +4138,7 @@ CSS to adjust visual sizes if needed.</p>
 <p><strong>Impact:</strong> Enables agents to understand document
 structure and content relationships.</p>
 <h3 id="fix-link-text-1-2-hours">2. Fix Link Text (1-2 hours)</h3>
-<p>Replace all “click here” and “learn more” with descriptive labels
+<p>Replace all "click here" and "learn more" with descriptive labels
 that explain destinations.</p>
 <p><strong>Impact:</strong> Agents can navigate your site intelligently
 without visiting every URL.</p>
@@ -4158,8 +4158,8 @@ systematically.</p>
 to Homepage (1 hour)</h3>
 <p>Implement Organisation or LocalBusiness markup with contact details
 and key information.</p>
-<p><strong>Impact:</strong> Enables accurate citations and “find near
-me” queries.</p>
+<p><strong>Impact:</strong> Enables accurate citations and "find near
+me" queries.</p>
 <p><strong>Total time investment:</strong> 6-8 hours
 <strong>Impact:</strong> Solves 80% of common agent-readability
 problems</p>

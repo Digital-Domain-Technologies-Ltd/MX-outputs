@@ -168,7 +168,7 @@ whether an agent selects a page for fetching.</p>
 <h3 id="rag-chunking">RAG Chunking</h3>
 <p>Support bots and knowledge systems chunk documentation by heading
 structure, typically at H2 or H3 level. Multiple chunks from different
-sections appear together in the agent’s context. Each chunk must be
+sections appear together in the agent's context. Each chunk must be
 independently comprehensible — it cannot rely on information from a
 different chunk.</p>
 <h3 id="tool-calling-mcp">Tool Calling (MCP)</h3>
@@ -181,8 +181,8 @@ requirement.</p>
 <h2 id="per-page-patterns">Per-Page Patterns</h2>
 <h3 id="self-contained-sections">Self-Contained Sections</h3>
 <p>Sections retrieved by RAG systems lack their surrounding context.
-Backward references — “see above”, “as mentioned earlier”, “refer to the
-previous section” — cause hallucination when agents cannot locate the
+Backward references — "see above", "as mentioned earlier", "refer to the
+previous section" — cause hallucination when agents cannot locate the
 referenced information. Research on RAG performance shows that spreading
 critical information across multiple sections reduces accuracy by up to
 20%.</p>
@@ -208,8 +208,8 @@ increasing error rates.</p>
 <p><strong>Inline comments.</strong> Comments inside code blocks reduce
 dependency on surrounding markdown. Research shows agents sometimes
 treat code examples as additional tasks rather than illustrations. Clear
-inline comments distinguish “this is an example” from “execute
-this.”</p>
+inline comments distinguish "this is an example" from "execute
+this."</p>
 <p><strong>Diversity.</strong> Research on few-shot learning
 demonstrates that diverse examples outperform similar ones, with
 accuracy gains of 10.72% on complex tasks versus 5.11% on simple ones. A
@@ -230,7 +230,7 @@ free context) preferentially discards repetitive information, verbose
 prose, and formatting tokens. Structured formats — tables, YAML schemas,
 callout blocks — survive compression better than narrative prose.</p>
 <p><strong>The pattern:</strong> Signal importance explicitly using
-terms like “required”, “critical”, “optional”, “forbidden”. Use
+terms like "required", "critical", "optional", "forbidden". Use
 structured formats for constraints and defaults. Keep sections
 proportional to their reasoning complexity: authentication setup (simple
 lookup) can tolerate longer sections; multi-step workflows should be
@@ -272,9 +272,9 @@ JavaScript-dependent content.</p>
 <h2 id="cross-page-patterns">Cross-Page Patterns</h2>
 <h3 id="terminology-consistency">Terminology Consistency</h3>
 <p>Agents select actions based on semantic alignment with user queries.
-When documentation alternates between synonyms — “rate limit” and
-“quota” and “throttle” for the same concept, or “archive” and
-“deactivate” and “disable” for the same action — agents lose confidence
+When documentation alternates between synonyms — "rate limit" and
+"quota" and "throttle" for the same concept, or "archive" and
+"deactivate" and "disable" for the same action — agents lose confidence
 in term matching and may select incorrect tools or retrieve irrelevant
 documentation.</p>
 <p><strong>The pattern:</strong> Establish a terminology glossary and
@@ -288,20 +288,20 @@ frequency map, and reports terminology distribution in the terminology
 consistency report.</p>
 <h3 id="structural-consistency">Structural Consistency</h3>
 <p>Consistent heading patterns, section types, and navigation structures
-help agents locate information predictably across pages. When a “Getting
-Started” page uses H2 for major steps and H3 for substeps, every similar
+help agents locate information predictably across pages. When a "Getting
+Started" page uses H2 for major steps and H3 for substeps, every similar
 page should follow the same convention. Structural inconsistency forces
-agents to re-learn the page’s information architecture for each new
+agents to re-learn the page's information architecture for each new
 page.</p>
 <p><strong>The pattern:</strong> Define heading level conventions per
 document type (tutorial, reference, how-to, explanation) and apply them
-uniformly. The MX audit tool’s cross-page consistency report measures
+uniformly. The MX audit tool's cross-page consistency report measures
 coverage of structural patterns including Schema.org, metadata,
 accessibility features, and code examples across all pages.</p>
 <h3 id="code-style-consistency">Code Style Consistency</h3>
 <p>When code examples across different pages use different languages,
 different comment styles, or different naming conventions, agents face
-increased ambiguity in translating examples to the user’s context.
+increased ambiguity in translating examples to the user's context.
 Consistent code style across the site reduces this translation
 overhead.</p>
 <p><strong>The pattern:</strong> Maintain a consistent language,
@@ -337,7 +337,7 @@ checks this as part of the Agent Readability score.</p>
 <p><strong>Detection:</strong> The MX audit tool analyses content
 position by examining the first and last quarter of
 <code>&lt;main&gt;</code> for key signals and action elements, producing
-“Important First” and “CTA Last” indicators per page.</p>
+"Important First" and "CTA Last" indicators per page.</p>
 <h2 id="patterns-by-document-type">Patterns by Document Type</h2>
 <p>Different document types optimise for different agent consumption
 patterns.</p>
@@ -363,8 +363,8 @@ unified terminology.</p>
 <h3 id="explanation">Explanation</h3>
 <p>Explanations provide conceptual understanding. Agents compress
 explanatory content more aggressively than structured reference content.
-Include centralised definitions and comparison tables (“X versus Y”,
-“when to use which”) — these structured formats survive compression
+Include centralised definitions and comparison tables ("X versus Y",
+"when to use which") — these structured formats survive compression
 well.</p>
 <h2 id="mx-alignment">MX Alignment</h2>
 <p>Agent-readable content patterns map directly to the MX five-stage

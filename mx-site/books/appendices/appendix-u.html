@@ -131,7 +131,7 @@ mx:
 <ul>
 <li><a href="#appendix-u-a-standard-that-knows-what-it-isnt"
 id="toc-appendix-u-a-standard-that-knows-what-it-isnt">Appendix U: A
-Standard That Knows What It Isn’t</a>
+Standard That Knows What It Isn't</a>
 <ul>
 <li><a href="#a-light-touch-on-cogs" id="toc-a-light-touch-on-cogs">A
 light touch on cogs</a></li>
@@ -158,7 +158,7 @@ id="toc-chapter-20-goes-further">Chapter 20 goes further</a></li>
 </nav>
 <div data-content-type="appendix">
 <h2 id="appendix-u-a-standard-that-knows-what-it-isnt">Appendix U: A
-Standard That Knows What It Isn’t</h2>
+Standard That Knows What It Isn't</h2>
 <p>Most metadata standards tell you what they cover. They publish a
 vocabulary, define every field, claim a scope, and ask implementers to
 adopt the whole surface. MX is different. MX is an open standard for
@@ -178,7 +178,7 @@ document carries (title, author, created, description), and Zone 2 (the
 <code>mx:</code> block) is the operational metadata a machine actually
 reads to decide what to do.</p>
 <p>That is all this appendix needs to say about cogs. Chapter 20 of
-<em>MX: The Protocols</em> — “Cogs and Reginald” — covers cogs in depth:
+<em>MX: The Protocols</em> — "Cogs and Reginald" — covers cogs in depth:
 the reader behaviour, the block structure, how Reginald registers them,
 how inheritance works, what the carrier formats look like. Read that
 chapter before implementing. Everything below assumes the cog shape is
@@ -219,8 +219,8 @@ every MX-aware document carries — title, author, created, modified,
 version, description, tags, audience, status, licence, maintainer —
 together with the two-zone frontmatter model and a Pass-through fields
 section naming the keys MX borrows from established external
-vocabularies (Dublin Core’s <code>date</code>, <code>format</code>,
-<code>rights</code>; Schema.org’s <code>duration</code>,
+vocabularies (Dublin Core's <code>date</code>, <code>format</code>,
+<code>rights</code>; Schema.org's <code>duration</code>,
 <code>displayName</code>, <code>usage</code>, <code>url</code>). Three
 conformance levels: Level 1 is the baseline every MX document must
 satisfy; Level 2 adds complete metadata; Level 3 adds AI-specific
@@ -240,14 +240,14 @@ public extensions use <code>x-vendor-</code> (for CogNovaMX,
 <code>x-mx-</code>). Vendor private extensions add a <code>-p-</code>
 marker (for CogNovaMX, <code>x-mx-p-</code>). The prefix is the policy:
 every reader of a cog can tell at a glance whether a field belongs to
-the standard, to a named vendor, or to a vendor’s operational private
+the standard, to a named vendor, or to a vendor's operational private
 layer. The convention follows HTTP custom-header practice.</p>
 <p><strong>The MX Provenance note.</strong> Attribution, trust,
 maintenance, and decision-record references. The fields that establish
 who created content, how it was derived, who maintains it, and what
 governance decisions shaped it. This is the layer that turns a cog from
-“some text claiming to be a guide” into “a guide with a traceable origin
-and a nominated maintainer.”</p>
+"some text claiming to be a guide" into "a guide with a traceable origin
+and a nominated maintainer."</p>
 <p><strong>The MX Carrier Formats note.</strong> Code. Source files —
 JavaScript, TypeScript, Python, Go, shell, CSS — carry metadata through
 their native mechanisms (JSDoc, CSS comments, shell comment blocks, SQL
@@ -255,7 +255,7 @@ comment blocks). The Carrier Formats note specifies a tight code-only
 provenance vocabulary (<code>sourceRepo</code>,
 <code>derivedFromCommit</code>); function-level annotations, API
 surface, test metadata, and inline code annotations defer to each
-language’s own documentation convention. Databases and media are
+language's own documentation convention. Databases and media are
 explicitly not in scope.</p>
 <p><strong>The MX Contract Fingerprinting and Signing note.</strong>
 <strong>Signing is optional.</strong> Most cogs ship unsigned. When a
@@ -267,7 +267,7 @@ the mandatory-when-signed fields (<code>title</code>,
 <code>validatesAgainst</code> with resolvable validators,
 <code>schema</code>). Compatible with W3C VC Data Integrity, JWS (RFC
 7515), COSE (RFC 9052), and C2PA. Reginald (Digital Domain Technologies
-Ltd’s implementation) is the machine-trustworthiness pillar that builds
+Ltd's implementation) is the machine-trustworthiness pillar that builds
 on this standard: the public registry where signed cogs are registered,
 discovered, and verified by any machine on earth.</p>
 <p>That is the active family. Two earlier drafts are deferred. An
@@ -294,7 +294,7 @@ href="https://mx.allabout.network/canon/fields-data-carriers.yaml"><code>fields-
 is the carriers companion — 2 fields. Code-specific provenance only:
 <code>sourceRepo</code> and <code>derivedFromCommit</code>. What the
 code does (signatures, APIs, tests, type systems, inline annotations) is
-out of MX scope and defers to each language’s own documentation
+out of MX scope and defers to each language's own documentation
 convention (JSDoc, Python docstrings, Doxygen, rustdoc, godoc). This is
 what the MX Carrier Formats note specifies.</p>
 <p><a
@@ -367,7 +367,7 @@ equivalents</td>
 <td>OpenSSF Model Signing (OMS), Sigstore</td>
 </tr>
 <tr>
-<td>What “open source AI” means</td>
+<td>What "open source AI" means</td>
 <td>Open Source Initiative (OSAID)</td>
 </tr>
 </tbody>
@@ -382,16 +382,16 @@ The Gathering uses for its own standards drafts adopts RFC frontmatter
 (<code>title</code>, <code>abbrev</code>, <code>docname</code>,
 <code>normative</code>, <code>informative</code>) and RFC body structure
 (<code>--- abstract</code>, <code>--- middle</code>,
-<code>--- back</code>). That is not a contradiction of MX’s own metadata
+<code>--- back</code>). That is not a contradiction of MX's own metadata
 standard. It is the same principle applied consistently.
-Standards-document authoring is the IETF’s domain. MX defers there
+Standards-document authoring is the IETF's domain. MX defers there
 too.</p>
-<p>A trained model’s weights sit in the same deferral logic, even though
+<p>A trained model's weights sit in the same deferral logic, even though
 they are neither code nor content. The integrity question, is this the
-producer’s blob, unchanged, is a code-shaped problem, and the answer is
+producer's blob, unchanged, is a code-shaped problem, and the answer is
 arriving from the code-signing world through OpenSSF Model Signing and
 Sigstore. What openness should require of a model is the Open Source
-Initiative’s question, settled or not, and not MX’s. MX supplies the
+Initiative's question, settled or not, and not MX's. MX supplies the
 part that fell between the categories: the readable, attested provenance
 record that says what the model is, what it was trained on, by whom, and
 under what policy. The signature and the definition belong to others;
@@ -412,10 +412,10 @@ The <code>x-vendor-</code> prefix is a visible, auditable marker. A cog
 reader encountering an unfamiliar prefixed field knows immediately that
 it is a vendor extension, not a claim on standard vocabulary. The
 namespace is the honest declaration: <em>this is my extension, not The
-Gathering’s standard, read at your discretion</em>.</p>
+Gathering's standard, read at your discretion</em>.</p>
 <p><strong>Manageable standard growth.</strong> A small core stays
 maintainable. The community can read it. Conformance is achievable.
-Review cycles are bounded. The Gathering’s governance model — open
+Review cycles are bounded. The Gathering's governance model — open
 participation, consensus ratification, no membership — only works when
 the specification is small enough that the community can hold it in its
 collective head.</p>
@@ -427,7 +427,7 @@ by the publisher — whether it was produced by a human, an AI, or an
 automated system. The attestation says one thing only: <em>this is the
 content the publisher signed; the cog genuinely came from that owner and
 has not been altered downstream</em>. It does not say the content is
-factually correct. MX deliberately confines the registry’s job to a
+factually correct. MX deliberately confines the registry's job to a
 question it can actually answer — <em>is this what the owner
 published?</em> — and uses the word <em>attest</em> rather than
 <em>verify</em> to make the smaller scope explicit. Chapter 21 of
@@ -439,7 +439,7 @@ committing to when they adopt MX.</p>
 <p>The Gathering owns the open standard: the field shapes, the carrier
 conventions, the conformance levels, the proposed patterns awaiting
 ratification. The standard is MIT licensed and community-governed. No
-vendor can rescind the conformance rule a buyer’s content was authored
+vendor can rescind the conformance rule a buyer's content was authored
 against. No vendor can charge for the right to use the vocabulary. The
 boundary holds because The Gathering is structurally independent of
 every operator running on top of the standard.</p>
@@ -447,23 +447,23 @@ every operator running on top of the standard.</p>
 registry methodology, the accreditation programme, the audit
 methodology, the operator-network rulebook. The boundary between the
 standard and the operating rules is what stops the standard collapsing
-into a vendor product the day a vendor’s commercial priorities shift.
+into a vendor product the day a vendor's commercial priorities shift.
 The signing primitive, the registry protocol, and the verification chain
 stay open. The methodology a particular operator runs against them is
-the operator’s intellectual property.</p>
+the operator's intellectual property.</p>
 <p>Other operators can run on the same standard. Other registries can
 index the same signed cogs. Other audit methodologies can score against
-the same conformance levels. The standard’s neutrality is preserved by
-its governance, not by any one operator’s good behaviour. A reader
+the same conformance levels. The standard's neutrality is preserved by
+its governance, not by any one operator's good behaviour. A reader
 walking from a cog to the rule it conforms to walks to The Gathering,
-not to any operator’s website. That separation is the boundary the rest
+not to any operator's website. That separation is the boundary the rest
 of this appendix returns to from a different angle each time, and it is
-what makes the standard worth adopting before any one operator’s
+what makes the standard worth adopting before any one operator's
 commercial offer is on the table.</p>
 <p>Two boundaries on the claim itself follow from the same discipline.
 MX is an evidence and provenance layer that supports compliance; it does
 not grant it. It is not a harmonised standard, confers no presumption of
-conformity, and does not stand in for the law’s own requirements or the
+conformity, and does not stand in for the law's own requirements or the
 bodies that set them. Being useful to a regulated organisation is not
 the same as being the regulation. The vocabulary has a limit worth
 stating plainly too: MX field keys are English, in the way HTTP headers
@@ -506,14 +506,14 @@ href="https://github.com/TG-Community/draft-cranstoun-mx-provenance">draft-crans
 <a
 href="https://github.com/TG-Community/draft-cranstoun-mx-carrier-formats">draft-cranstoun-mx-carrier-formats</a>.
 Same content as the source drafts, converted into IETF RFC format for
-Stream’s review process — the frontmatter keys (<code>title</code>,
+Stream's review process — the frontmatter keys (<code>title</code>,
 <code>abbrev</code>, <code>docname</code>, <code>normative</code>,
 <code>informative</code>) and body delimiters
 (<code>--- abstract</code>, <code>--- middle</code>,
 <code>--- back</code>) that Stream expects. These are the versions the
 community reviews and ratifies through <a
 href="https://stream.tg.community">stream.tg.community</a>. They carry
-the formal RFC 2119 language (“MUST”, “SHOULD”, “MAY”) the conformance
+the formal RFC 2119 language ("MUST", "SHOULD", "MAY") the conformance
 levels depend on.</p>
 <p><strong>The book</strong> — Appendix M of this book is the complete
 prose reference for every field the drafts cite: definitions, types,
@@ -521,8 +521,8 @@ validation values, profile membership, usage examples, cross-references.
 Sections 22 through 27 cover the field dictionary, folder metadata, the
 book-manuscript template, the carrier format map, the HTML carrier
 writing guide, and the canon-layout explanation with the
-external-standards deferral table. Chapter 21 — “The Fields and the
-Standards” — is the full narrative counterpart to this architecture
+external-standards deferral table. Chapter 21 — "The Fields and the
+Standards" — is the full narrative counterpart to this architecture
 summary.</p>
 <p>Four artefacts, one set of drafts. Source for reading, YAML for
 tooling, RFC for formal review, book for reference prose. Pick whichever
@@ -530,18 +530,18 @@ entry point fits what you are trying to do — they all point at the same
 standard.</p>
 <h2 id="chapter-20-goes-further">Chapter 20 goes further</h2>
 <p>This appendix hits the architecture and the rationale. Chapter 20 of
-<em>MX: The Protocols</em> — “The Fields and the Standards” — goes
+<em>MX: The Protocols</em> — "The Fields and the Standards" — goes
 further: it traces the full three-pass reading model a machine uses to
 comprehend a cog, walks through the economics of shared vocabulary,
 covers author-facing guidance (what to include at each conformance
-level), and explains how participation through The Gathering’s Stream
+level), and explains how participation through The Gathering's Stream
 process actually works.</p>
 <p>If you are building content for machine consumption, the architecture
 in this appendix is what you are building against. You can start today.
 The drafts are stable. The deferrals are real. The extensibility
 mechanism is published. The standard stays small because the discipline
 is tight.</p>
-<p>And because The Gathering’s process is open and requires no
+<p>And because The Gathering's process is open and requires no
 membership, if you have a view on how MX should evolve, Stream is how
 you contribute. The cog format you use in a year will reflect whoever
 engages between now and then — including, potentially, you.</p>

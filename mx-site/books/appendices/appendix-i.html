@@ -172,23 +172,23 @@ validation layers that should have prevented it.</p>
 <hr />
 <h2 id="error-summary">Error Summary</h2>
 <p><strong>Source of Error:</strong> This analysis is based on output
-from the author’s AI assistant (Claude for Chrome, early beta version)
+from the author's AI assistant (Claude for Chrome, early beta version)
 when researching cruise options in December 2024. The agent was asked to
 find Danube cruises ending in Budapest in May 2026.</p>
 <p><strong>The Error:</strong> The AI-generated cruise itinerary
-incorrectly listed one luxury river cruise operator’s pricing as
+incorrectly listed one luxury river cruise operator's pricing as
 <strong>£203,000-£402,000</strong> when the actual pricing was likely
 <strong>£2,030-£4,020</strong> per person.</p>
 <p>This represents a <strong>100x multiplication error</strong> — two
 extra zeros added to the correct price.</p>
 <p><strong>Note on Anonymisation:</strong> Operator names have been
-anonymised in this appendix. The error occurred in the agent’s reasoning
+anonymised in this appendix. The error occurred in the agent's reasoning
 and data extraction, not due to any fault by the cruise operators
 themselves. All operators mentioned in the original output (Saga
 Cruises, Uniworld River Cruises, Viking River Cruises) provide
 legitimate services with accurate pricing on their websites.</p>
 <p>This appendix provides the complete error analysis that informed
-Chapter 13’s discussion of pipeline failures, validation layers, and
+Chapter 13's discussion of pipeline failures, validation layers, and
 confidence scoring. It demonstrates why agent creators must build
 guardrails into their systems.</p>
 <hr />
@@ -198,11 +198,11 @@ guardrails into their systems.</p>
 (Germany → Budapest → Rovinj, May 2026)</p>
 <p><strong>AI Task:</strong> Research multiple cruise operators, gather
 pricing, dates, and details</p>
-<h3 id="agents-actual-output-anonymised">Agent’s Actual Output
+<h3 id="agents-actual-output-anonymised">Agent's Actual Output
 (Anonymised)</h3>
 <p>The agent provided comparative information for three operators:</p>
-<h4 id="operator-a-scenic-river-journey">Operator A — “Scenic River
-Journey”</h4>
+<h4 id="operator-a-scenic-river-journey">Operator A — "Scenic River
+Journey"</h4>
 <ul>
 <li>Route: Vienna to Budapest (7 nights)</li>
 <li>Departs: ~10-12 May 2026</li>
@@ -212,7 +212,7 @@ Journey”</h4>
 <li>Suited for: All-inclusive comfort</li>
 </ul>
 <h4 id="operator-b-delightful-cruise-experience">Operator B —
-“Delightful Cruise Experience”</h4>
+"Delightful Cruise Experience"</h4>
 <ul>
 <li>Route: Various starting points to Budapest</li>
 <li>Departs: Early May 2026</li>
@@ -220,8 +220,8 @@ Journey”</h4>
 <li>Ship: Luxury vessel</li>
 <li>Suited for: Luxury, boutique experience</li>
 </ul>
-<h4 id="operator-c-classic-river-route">Operator C — “Classic River
-Route”</h4>
+<h4 id="operator-c-classic-river-route">Operator C — "Classic River
+Route"</h4>
 <ul>
 <li>Route: Multiple options ending in Budapest</li>
 <li>Departs: Early-mid May 2026</li>
@@ -230,19 +230,19 @@ Route”</h4>
 <li>Suited for: First-timers</li>
 </ul>
 <p><strong>Critical observation</strong>: The agent provided pricing for
-only one of three operators. Operators A and C showed “not specified” or
+only one of three operators. Operators A and C showed "not specified" or
 were presented without price data. Only Operator B included pricing —
 and that pricing was erroneous.</p>
 <p><strong>What comparative analysis should have revealed</strong>: Even
-without pricing for all operators, Operator B’s £203,000-£402,000 is
+without pricing for all operators, Operator B's £203,000-£402,000 is
 100x higher than typical river cruise pricing (£2,000-£6,000). This
 extreme outlier should have triggered immediate validation flags,
 especially given the absence of pricing data for peer operators with
 which to compare.</p>
 <h3 id="stage-2-information-retrieval">Stage 2: Information
 Retrieval</h3>
-<p><strong>AI Action:</strong> Web search or database query for “luxury
-Danube cruise pricing 2026”</p>
+<p><strong>AI Action:</strong> Web search or database query for "luxury
+Danube cruise pricing 2026"</p>
 <p><strong>Data Source Encountered:</strong> Likely one of:</p>
 <ul>
 <li>Travel booking website with pricing tables</li>
@@ -300,7 +300,7 @@ HTML. Parsing without CSS awareness produces concatenation errors.</p>
 locale gap Schema.org does not close</h3>
 <p>Read literally, <code>€2.030,00</code> is two euros and three cents
 under Anglo notation, or two thousand and thirty euros under European
-notation. Both readings are syntactically valid. Schema.org’s
+notation. Both readings are syntactically valid. Schema.org's
 <code>Offer</code> and <code>PriceSpecification</code> types name the
 figure and the currency code; ISO 4217 covers the currency itself.
 Neither requires the publisher to declare which decimal grouping is in
@@ -312,7 +312,7 @@ announce <em>how to read</em> the field.</p>
 page carries <code>priceLocale</code> so the agent knows whether
 <code>,</code> is a decimal mark or a thousands separator; carries
 <code>validFrom</code> and <code>validUntil</code> so the agent knows
-the figure is current; carries the operator’s signature so the agent can
+the figure is current; carries the operator's signature so the agent can
 verify the version it parsed is the version the operator issued; carries
 a canonical URI so the same record can be re-read off the web (PDF
 brochure, contract, confirmation email). The decimal misread in Scenario
@@ -329,7 +329,7 @@ Validation Failure (Missing Guardrails)</h3>
 <li>£203,000 per person = £406,000 per couple for one week</li>
 <li>This exceeds typical round-the-world luxury cruise pricing</li>
 <li>Luxury river cruise operators typically price £3,000-£8,000</li>
-<li>No contextual warnings about “ultra-luxury” or “suite-only”
+<li>No contextual warnings about "ultra-luxury" or "suite-only"
 pricing</li>
 </ul>
 <p><strong>Why Validation Failed:</strong></p>
@@ -337,7 +337,7 @@ pricing</li>
 <li>No price range boundaries set in agent parameters</li>
 <li>Luxury cruise market has high variance (£500-£50,000+ exists)</li>
 <li>Agent lacked real-time market context for 2026 pricing</li>
-<li>No comparative check against other operators’ pricing</li>
+<li>No comparative check against other operators' pricing</li>
 </ul>
 <p><strong>This is the critical failure</strong>: Not the parsing error
 (which is understandable), but the absence of validation layers that
@@ -357,13 +357,13 @@ ratings)</li>
 formatting and detailed presentation mask underlying data quality
 issues. Structure != accuracy.</p>
 <h3 id="stage-6-human-detection">Stage 6: Human Detection</h3>
-<p><strong>User Query:</strong> “Does the pasted document really quote
-203,000?”</p>
+<p><strong>User Query:</strong> "Does the pasted document really quote
+203,000?"</p>
 <p><strong>Recognition Point:</strong> Human domain knowledge identified
 impossibility</p>
 <ul>
 <li>Immediate recognition that price was absurd</li>
-<li>Context awareness (river cruises don’t cost £200k)</li>
+<li>Context awareness (river cruises don't cost £200k)</li>
 <li>Comparative reasoning (other operators priced reasonably)</li>
 </ul>
 <p><strong>This reveals the gap</strong>: The human had validation
@@ -406,7 +406,7 @@ numbers, users assume verification has occurred. Mixing accurate data
 (dates, routes, ratings) with incorrect data (pricing) creates false
 confidence.</p>
 <p><strong>The danger</strong>: Users trust the agent because 90% of the
-information is correct. The 10% that’s wrong (pricing) is precisely the
+information is correct. The 10% that's wrong (pricing) is precisely the
 critical decision point.</p>
 <h3 id="silent-failure">2. Silent Failure</h3>
 <p>No warning flags, caveats, or uncertainty indicators accompanied the
@@ -414,13 +414,13 @@ incorrect price. The agent presented it with the same confidence as
 verified information.</p>
 <p><strong>Missing elements</strong>:</p>
 <ul>
-<li>No “unverified — recommend checking operator site” caveat</li>
-<li>No confidence score (e.g., “40% confidence due to data
-conflicts”)</li>
-<li>No comparative context (e.g., “significantly above market
-average”)</li>
-<li>No source attribution (e.g., “extracted from TourRadar.com, January
-2026”)</li>
+<li>No "unverified — recommend checking operator site" caveat</li>
+<li>No confidence score (e.g., "40% confidence due to data
+conflicts")</li>
+<li>No comparative context (e.g., "significantly above market
+average")</li>
+<li>No source attribution (e.g., "extracted from TourRadar.com, January
+2026")</li>
 </ul>
 <h3 id="human-expertise-required">3. Human Expertise Required</h3>
 <p>Detection required:</p>
@@ -439,7 +439,7 @@ should provide validation, not require it.</p>
 <li>Insufficient validation rules</li>
 <li>No cross-referencing mechanisms</li>
 <li>Limited real-world knowledge boundaries</li>
-<li>Absence of “common sense” filters</li>
+<li>Absence of "common sense" filters</li>
 </ul>
 <p><strong>The implication</strong>: If an obvious 100x error passes
 through, subtler errors (20% too high, wrong dates, incorrect
@@ -541,7 +541,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { <span class="dt">action</span><span class="op">:</span> <span class="st">&#39;PROCEED&#39;</span><span class="op">,</span> confidence }<span class="op">;</span></span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><strong>This would have prevented output</strong>: Confidence score
-of 10-30% would trigger “require verification” response instead of
+of 10-30% would trigger "require verification" response instead of
 presenting the price as fact</p>
 <h3 id="for-users-readers-of-this-book">For Users (Readers of This
 Book)</h3>
@@ -564,7 +564,7 @@ human verification.</p>
 <li>Recent reviews or forums</li>
 </ul>
 <p><strong>The £203k error would have been caught immediately</strong>:
-A 30-second check of the operator’s website would show £2,030, not
+A 30-second check of the operator's website would show £2,030, not
 £203,000.</p>
 <h4 id="question-anomalies">3. Question Anomalies</h4>
 <p>If something seems wrong:</p>
@@ -582,7 +582,7 @@ assistant, not an authoritative source.</p>
 <li>Industry norms and standards</li>
 <li>Red flags for errors or scams</li>
 </ul>
-<p><strong>You don’t need expertise, just rough ranges</strong>: Knowing
+<p><strong>You don't need expertise, just rough ranges</strong>: Knowing
 that river cruises cost £2k-£8k (not £200k) is sufficient to catch this
 error.</p>
 <hr />
@@ -593,7 +593,7 @@ encountering numbers:</p>
 <h4 id="no-inherent-concept-of-magnitude">1. No Inherent Concept of
 Magnitude</h4>
 <ul>
-<li>“203000” and “2030” are just token sequences</li>
+<li>"203000" and "2030" are just token sequences</li>
 <li>No built-in understanding that one is 100x the other</li>
 <li>Models learn statistical patterns, not mathematical properties</li>
 </ul>
@@ -615,7 +615,7 @@ Interpretation</h4>
 Compound</h4>
 <pre class="text" data-role="code-block" data-language="text"><code>Original source → OCR/parsing → AI interpretation → formatting → output</code></pre>
 <p>Each step can introduce errors. No checksums or validation between
-steps. By the time the error reaches output, it’s treated as validated
+steps. By the time the error reaches output, it's treated as validated
 data.</p>
 <h3 id="why-this-specific-error-pattern">Why This Specific Error
 Pattern</h3>
@@ -627,8 +627,8 @@ suggests:</p>
 <li>Copy-paste error in training data or retrieval source</li>
 <li>Systematic parsing rule misapplied to European number format</li>
 </ul>
-<p><strong>The key insight</strong>: This wasn’t a reasoning failure.
-The agent didn’t think £203,000 was reasonable. It never had the chance
+<p><strong>The key insight</strong>: This wasn't a reasoning failure.
+The agent didn't think £203,000 was reasonable. It never had the chance
 to reason about the data because validation layers were absent.</p>
 <hr />
 <h2 id="lessons-learned">Lessons Learned</h2>
@@ -646,9 +646,9 @@ allowed bad data to propagate. Comparative validation would have caught
 this.</p>
 <p><strong>The incomplete data problem</strong>: The agent retrieved
 pricing for only one of three operators. This itself should have
-triggered a warning: “Unable to provide comparative pricing — only 1 of
+triggered a warning: "Unable to provide comparative pricing — only 1 of
 3 operators returned price data. Confidence: low. Recommend manual
-verification.”</p>
+verification."</p>
 <p><strong>Best practice</strong>: Never process data in isolation.
 Always maintain context and comparison points. When comparative data is
 incomplete, flag it explicitly and reduce confidence scores.</p>
@@ -669,8 +669,8 @@ Essential</h3>
 <li>Cross-referencing (do multiple sources agree?)</li>
 </ul>
 <p><strong>This is the core lesson of Chapter 13</strong>: Build these
-checkpoints into your agent systems. They’re not optional extras;
-they’re essential guardrails.</p>
+checkpoints into your agent systems. They're not optional extras;
+they're essential guardrails.</p>
 <h3 id="format-creates-false-confidence">5. Format Creates False
 Confidence</h3>
 <p>Professional formatting and detailed presentation mask underlying
@@ -680,9 +680,9 @@ than plain text, even when data quality is identical.</p>
 <h3 id="detection-methods-matter">6. Detection Methods Matter</h3>
 <p>This error was caught through:</p>
 <ul>
-<li>Human domain knowledge (cruises don’t cost £200k)</li>
+<li>Human domain knowledge (cruises don't cost £200k)</li>
 <li>Contextual comparison (other operators were £2k-£6k)</li>
-<li>Questioning anomalies (asking “does this really say £203,000?”)</li>
+<li>Questioning anomalies (asking "does this really say £203,000?")</li>
 </ul>
 <p>Not through:</p>
 <ul>
@@ -726,7 +726,7 @@ cross-referencing</li>
 official operator site</li>
 </ol>
 <h3 id="what-this-reveals">What This Reveals</h3>
-<p>This wasn’t an AI “not understanding that £203,000 is expensive” — it
+<p>This wasn't an AI "not understanding that £203,000 is expensive" — it
 was a <strong>data pipeline failure</strong>:</p>
 <ul>
 <li>Wrong data extracted from source (most likely)</li>
@@ -750,11 +750,11 @@ confidence</li>
 verification</li>
 </ul>
 <h3 id="key-takeaway">Key Takeaway</h3>
-<p>The failure wasn’t in AI reasoning about prices, but in data
+<p>The failure wasn't in AI reasoning about prices, but in data
 extraction and validation. Even sophisticated AI systems need reliable
 data pipelines with cross-referencing and sanity checks, not just better
 reasoning capabilities.</p>
-<p><strong>For agent creators</strong>: Build validation layers. Don’t
+<p><strong>For agent creators</strong>: Build validation layers. Don't
 assume your extraction is correct. Cross-reference. Score confidence.
 Require verification for low-confidence data. These guardrails are the
 difference between a reliable agent and one that propagates £203k
@@ -778,14 +778,14 @@ site is throttling the probe under normal load) or it might mean a Web
 Application Firewall is blocking the probe outright. The two
 classifications imply different actions. A rate-limited probe waits and
 retries; a WAF-blocked probe should report the block honestly to the
-report’s narrative because the audit cannot collect data the firewall is
+report's narrative because the audit cannot collect data the firewall is
 refusing.</p>
 <p>The failure mode this case study records is what happens when the
 classifier conflates the two. A pipeline configured to read any 429 or
-503 status as “WAF blocked” produces a report that names a firewall the
+503 status as "WAF blocked" produces a report that names a firewall the
 target site does not run. The reader of the report, who may be the
 prospective client, sees claims about their infrastructure that are not
-true. The audit’s credibility collapses; the relationship may not
+true. The audit's credibility collapses; the relationship may not
 survive it.</p>
 <h3 id="symptom">Symptom</h3>
 <p>An audit pass against <code>dkd.de/de</code> produced a slowest-page
@@ -794,9 +794,9 @@ performance JSON that flagged forty-four URLs as
 backend, with rate-limiting configured at the nginx layer for crawler
 protection. The site does not run Cloudflare, AWS WAF, Akamai, Imperva,
 or any other named WAF product. The forty-four flagged URLs covered
-roughly half the sample set; the report’s narrative read “the site
+roughly half the sample set; the report's narrative read "the site
 appears to be protected by a Web Application Firewall, blocking the
-audit’s data collection at scale”. The site’s actual configuration was
+audit's data collection at scale". The site's actual configuration was
 simpler: nginx returning 429 to fast probes, with no further inference
 possible from the bare status.</p>
 <h3 id="root-cause">Root cause</h3>
@@ -812,7 +812,7 @@ number.</p>
 <p>The fix replaces bare-status inference with positive-evidence
 classification. A response is classified as <code>wafBlocked</code> only
 when the probe finds at least one of: a <code>cf-ray</code> header
-(Cloudflare’s request identifier), a server vendor name in the
+(Cloudflare's request identifier), a server vendor name in the
 <code>server</code> header matching a known WAF
 (<code>Cloudflare</code>, <code>Akamai</code>, <code>Imperva</code>,
 <code>F5</code>, <code>Sucuri</code>, <code>AWS WAF</code>), a known WAF
@@ -843,9 +843,9 @@ baseline.</p>
 <p>The narrow lesson is operational: do not classify responses by status
 code alone when the same status code carries different meanings
 depending on the responder. The broad lesson is methodological: an audit
-pipeline that produces claims about a target’s infrastructure has the
+pipeline that produces claims about a target's infrastructure has the
 same evidence standard as the regulatory chain it supports. The pipeline
-that says “your site runs a WAF” should produce the evidence — the
+that says "your site runs a WAF" should produce the evidence — the
 cookie, the header, the body marker — that backs the claim. A pipeline
 that infers infrastructure from one data point will eventually infer
 wrongly; the harm scales with how many readers depend on the report.
@@ -859,7 +859,7 @@ evidence.</p>
 audit pipeline is confident about — backed by positive evidence rather
 than inference — is a report the audit pipeline can stand behind in a
 sales conversation, a regulatory inquiry, or a credentialing check. The
-classifier’s calibration is itself part of the chain’s trustworthiness;
+classifier's calibration is itself part of the chain's trustworthiness;
 an over-eager classifier degrades every report the pipeline produces,
 not just the ones where the over-eagerness happens to bite.</p>
 <hr />

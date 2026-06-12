@@ -188,7 +188,7 @@ Claude Code, Cursor, or GitHub Copilot.</p>
 <li>Open <code>appendix-d-ai-friendly-html-guide.txt</code> in this
 directory</li>
 <li>Copy the entire content (Ctrl+A, Ctrl+C)</li>
-<li>Paste into your AI assistant’s context window</li>
+<li>Paste into your AI assistant's context window</li>
 <li>Reference specific sections when asking for implementation help</li>
 </ol>
 <p><strong>Guide Contents:</strong></p>
@@ -454,7 +454,7 @@ benefit.</p>
 Affects Humans, Not AI Agents</h3>
 <p>Before diving into patterns that help AI agents, remember:
 <strong>visual design problems are human problems</strong>.</p>
-<p>AI agents parse HTML directly. They don’t see colours, fonts, or
+<p>AI agents parse HTML directly. They don't see colours, fonts, or
 visual styling. They read the underlying structure. This means:</p>
 <ul>
 <li><strong>Poor colour contrast</strong> - Humans struggle to read
@@ -485,8 +485,8 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 ensures adequate contrast (passes WCAG AA at 4.5:1 ratio).</p>
 <p><strong>The lesson:</strong> Fix visual design for humans. Fix
 explicit state and structure for AI agents. Both matter. Neither is
-optional. The patterns in this guide focus on structure because that’s
-what machines need. Still, don’t neglect the visual layer-that’s what
+optional. The patterns in this guide focus on structure because that's
+what machines need. Still, don't neglect the visual layer-that's what
 humans need.</p>
 <p><strong>WCAG contrast requirements:</strong></p>
 <ul>
@@ -495,7 +495,7 @@ humans need.</p>
 <li><strong>Stricter:</strong> 7:1 for normal text, 4.5:1 for large text
 (WCAG AAA)</li>
 </ul>
-<p>Use tools like WebAIM’s contrast checker to verify your colour
+<p>Use tools like WebAIM's contrast checker to verify your colour
 choices meet accessibility standards for human users.</p>
 <h3 id="show-authentication-state-explicitly">Show Authentication State
 Explicitly</h3>
@@ -522,7 +522,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 parsing visual cues.</p>
 <h3 id="make-state-explicit-in-attributes">Make State Explicit in
 Attributes</h3>
-<p>Don’t rely on visual cues alone. Put state in the DOM where machines
+<p>Don't rely on visual cues alone. Put state in the DOM where machines
 can read it.</p>
 <p><strong>Bad - Visual only:</strong></p>
 <div class="sourceCode" id="cb6" data-role="code-container"><pre
@@ -661,7 +661,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 remain for styling</li>
 <li><strong>Clarifies intent</strong> - Semantic roles are explicit, not
 inferred</li>
-<li><strong>Prevents duplication</strong> - Machines won’t process the
+<li><strong>Prevents duplication</strong> - Machines won't process the
 same content multiple times</li>
 <li><strong>Forward-compatible</strong> - Older systems ignore unknown
 attributes</li>
@@ -669,7 +669,7 @@ attributes</li>
 <p>This pattern applies whenever:</p>
 <ul>
 <li>The same class appears on parent and child elements</li>
-<li>Visual structure is clear but semantic purpose isn’t</li>
+<li>Visual structure is clear but semantic purpose isn't</li>
 <li>Multiple elements serve related but distinct functions</li>
 </ul>
 <p><strong>Real-world example:</strong> The HTML appendices in this book
@@ -682,7 +682,7 @@ structure.</p>
 forms work reliably.</p>
 <h3 id="disabled-buttons-that-explain-themselves">Disabled Buttons That
 Explain Themselves</h3>
-<p>Don’t just disable buttons. Explain why they’re disabled and what’s
+<p>Don't just disable buttons. Explain why they're disabled and what's
 needed.</p>
 <p><strong>Bad - Mysterious:</strong></p>
 <div class="sourceCode" id="cb14" data-role="code-container"><pre
@@ -705,7 +705,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Payment method not selected<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
-<p>Everyone knows exactly what’s needed to proceed. No guessing.</p>
+<p>Everyone knows exactly what's needed to proceed. No guessing.</p>
 <h3 id="synchronous-form-validation">Synchronous Form Validation</h3>
 <p>Validate as users type. Show all errors at once. Never wait until
 submission to reveal problems.</p>
@@ -761,7 +761,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    Complete order (fix 2 errors first)</span>
 <span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
 <span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code></pre></div>
-<p>The submit button explains exactly why it’s disabled. Machines can
+<p>The submit button explains exactly why it's disabled. Machines can
 read the current validation state of every field.</p>
 <h3 id="multi-step-wizard-pattern">Multi-Step Wizard Pattern</h3>
 <p>For complex processes, show clear progress and make each step
@@ -1161,7 +1161,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>The <code>value</code> attribute on <code>&lt;data&gt;</code> holds
 the machine value; the element content holds the display.
-<code>&lt;time&gt;</code>’s <code>datetime</code> attribute follows ISO
+<code>&lt;time&gt;</code>'s <code>datetime</code> attribute follows ISO
 8601. Agents read the attributes; browsers and screen readers render the
 content. Both audiences get the correct interpretation without requiring
 a second representation.</p>
@@ -1288,7 +1288,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;</span>£149.99<span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
 <span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">dl</span><span class="dt">&gt;</span></span>
 <span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;lt;</span>/details<span class="dv">&amp;gt;</span></span></code></pre></div>
-<p>No deceptive “from” pricing. Complete costs are visible. Breakdown
+<p>No deceptive "from" pricing. Complete costs are visible. Breakdown
 available but not intrusive.</p>
 <h3 id="error-recovery-pattern">Error Recovery Pattern</h3>
 <p>When something fails mid-transaction, show clear recovery paths:</p>
@@ -1458,7 +1458,7 @@ body</li>
 </ul>
 <p><strong>Why JSON-LD Only:</strong></p>
 <ol type="1">
-<li><strong>No attribute merging</strong> - Google and AI agents don’t
+<li><strong>No attribute merging</strong> - Google and AI agents don't
 merge properties across formats</li>
 <li><strong>Maintenance burden</strong> - Every FAQ update requires
 changing both JSON-LD and HTML attributes</li>
@@ -1468,7 +1468,7 @@ results</li>
 <li><strong>Official guidance</strong> - Google Search Central
 recommends JSON-LD as primary format</li>
 </ol>
-<p><strong>Real-world example:</strong> This book’s FAQ page
+<p><strong>Real-world example:</strong> This book's FAQ page
 demonstrates this pattern. View source at: <a
 href="https://mx.allabout.network/books/faq.html"
 class="uri">https://mx.allabout.network/books/faq.html</a></p>
@@ -1551,21 +1551,21 @@ class="sourceCode json"><code class="sourceCode json" data-role="code-content"><
 <li><code>author</code>: Person or Organization who wrote the book</li>
 <li><code>bookFormat</code>: Type (EBook, Paperback, Hardcover,
 AudioBook)</li>
-<li><code>inLanguage</code>: Language code (e.g., “en-GB”, “en-US”,
-“fr-FR”)</li>
+<li><code>inLanguage</code>: Language code (e.g., "en-GB", "en-US",
+"fr-FR")</li>
 </ul>
 <p><strong>Multi-type pattern:</strong> Use
 <code>"@type": ["Product", "Book"]</code> when selling books
 commercially. This combines commercial properties (price, availability)
 with bibliographic metadata (author, ISBN, publisher).</p>
-<p>Add to your page’s <code>&lt;head&gt;</code> section wrapped in
+<p>Add to your page's <code>&lt;head&gt;</code> section wrapped in
 <code>&lt;script type="application/ld+json"&gt;</code>.</p>
 <h3 id="per-page-graph-fragments">Per-Page <span class="citation"
 data-cites="graph">@graph</span> Fragments</h3>
 <p>For documentation sites and structured content systems where topics
 have declared relationships — a concept required by a task, a task
 referencing a field definition — embed those relationships as an
-<code>@graph</code> array in each page’s JSON-LD. Agents walk
+<code>@graph</code> array in each page's JSON-LD. Agents walk
 <code>sitemap.xml</code>, fetch each page, extract the
 <code>@graph</code>, and union <code>@id</code>-linked nodes across
 fetches to reconstruct the relationship graph. No consolidator endpoint
@@ -1644,7 +1644,7 @@ L: Proposed AI Metadata Patterns</a>.</strong></p>
 site-wide guidance to AI systems. This is similar to how robots.txt
 guides search engines.</p>
 <p><strong>Real-world reference:</strong> For a complete production
-example, see Digital Domain Technologies’ llms.txt at <a
+example, see Digital Domain Technologies' llms.txt at <a
 href="https://allabout.network/llms.txt"
 class="uri">https://allabout.network/llms.txt</a>, which demonstrates
 how to structure 91 posts across 6 categories with clear access
@@ -1652,7 +1652,7 @@ guidelines and attribution requirements.</p>
 <p><strong>Required elements:</strong></p>
 <ul>
 <li>Title (H1) - First element, identifies your site</li>
-<li>Description - Concise summary of your site’s purpose</li>
+<li>Description - Concise summary of your site's purpose</li>
 <li>Contact information - How to reach you regarding AI access</li>
 </ul>
 <p><strong>Full template:</strong></p>
@@ -1873,7 +1873,7 @@ Disallow: /
 
 Sitemap: https://example.com/sitemap.xml</code></pre>
 <p>Note: robots.txt controls access, not usage rights. An AI agent
-respecting robots.txt may still be blocked from pages you’d want it to
+respecting robots.txt may still be blocked from pages you'd want it to
 access. Use llms.txt for nuanced guidance.</p>
 <p><strong>sitemap.xml - Content Discovery:</strong></p>
 <div class="sourceCode" id="cb46" data-role="code-container"><pre
@@ -1921,7 +1921,7 @@ covering identity, authentication, certificates, federation, mobile app
 linking, calendar/contact discovery, IoT device provisioning,
 accessibility, and AI agent integration. Most sites implement a handful
 and silently ignore the rest. An AI agent or service-discovery client
-can probe the registry’s full set looking for whichever signal matches
+can probe the registry's full set looking for whichever signal matches
 its job.</p>
 <p>The most commonly observed paths in the wild:</p>
 <table>
@@ -1991,7 +1991,7 @@ its job.</p>
 </tr>
 <tr>
 <td><code>/.well-known/acme-challenge/</code></td>
-<td>Let’s Encrypt / ACME certificate validation (transient)</td>
+<td>Let's Encrypt / ACME certificate validation (transient)</td>
 <td>RFC 8555</td>
 </tr>
 <tr>
@@ -2140,7 +2140,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <p>A machine visiting your page:</p>
 <ol type="1">
 <li>Checks llms.txt - learns you have an API</li>
-<li>Reads meta tags - finds this product’s API endpoint</li>
+<li>Reads meta tags - finds this product's API endpoint</li>
 <li>Fetches structured data - gets complete product information</li>
 <li>Respects your rate limits and policies</li>
 </ol>
@@ -2178,9 +2178,9 @@ inaccessible</li>
 <p>For AI, accessing a headless website is like reading a document with
 no formatting, no headlines, and no visual organisation.</p>
 <h3 id="dual-channel-solution">Dual-Channel Solution</h3>
-<p>The solution is “dual-channel content” - serving rich interactive
+<p>The solution is "dual-channel content" - serving rich interactive
 experiences to humans while providing structured, accessible formats to
-AI systems that don’t require JavaScript execution or visual
+AI systems that don't require JavaScript execution or visual
 interpretation.</p>
 <p>This means:</p>
 <ol type="1">
@@ -2194,7 +2194,7 @@ relationship information (covered in Part 5)</li>
 optimised for machine consumption</li>
 </ol>
 <h3 id="server-side-rendering-for-ai">Server-Side Rendering for AI</h3>
-<p>If you’re using a JavaScript framework, enable SSR so the initial
+<p>If you're using a JavaScript framework, enable SSR so the initial
 HTML response contains actual content:</p>
 <p><strong>Without SSR (AI sees nothing):</strong></p>
 <div class="sourceCode" id="cb53" data-role="code-container"><pre
@@ -2394,7 +2394,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb57-36"><a href="#cb57-36" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb57-37"><a href="#cb57-37" aria-hidden="true" tabindex="-1"></a>  res<span class="op">.</span><span class="fu">render</span>(<span class="st">&#39;product&#39;</span><span class="op">,</span> { product })<span class="op">;</span></span>
 <span id="cb57-38"><a href="#cb57-38" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-<p><strong>Important:</strong> Don’t block machines unnecessarily. Use
+<p><strong>Important:</strong> Don't block machines unnecessarily. Use
 detection for analytics segmentation and serving appropriate content,
 not for denial of service.</p>
 <h3 id="cookie-consent-and-gdpr-banners">Cookie Consent and GDPR
@@ -2466,7 +2466,7 @@ Sec-GPC: 1</code></pre>
 <p>The <code>Sec-GPC: 1</code> header (Global Privacy Control) signals
 do-not-track preference. Respect it for AI agents.</p>
 <p><strong>Key principle:</strong> Never let consent dialogs block page
-content. Use <code>&lt;dialog&gt;</code> that overlays but doesn’t
+content. Use <code>&lt;dialog&gt;</code> that overlays but doesn't
 prevent DOM access. AI agents should receive page content regardless of
 consent state, with only necessary cookies set.</p>
 <h3 id="captcha-and-bot-protection">Captcha and Bot Protection</h3>
@@ -2566,7 +2566,7 @@ provide clarity.</p>
 5. Confirmation page displays</code></pre>
 <p>This gives machines clear signals:</p>
 <ul>
-<li>303 response means “action completed, look here for result”</li>
+<li>303 response means "action completed, look here for result"</li>
 <li>New URL confirms state change</li>
 <li>GET request is safe to retry</li>
 </ul>
@@ -2633,7 +2633,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
 <span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>The <code>llms-txt</code> meta tag tells AI agents where to find site
-navigation guidance when a page doesn’t exist.</p>
+navigation guidance when a page doesn't exist.</p>
 <p>For a complete production-ready 404 page example with full styling
 and server-side implementation patterns, see Appendix K - Common Page
 Patterns.</p>
@@ -2756,7 +2756,7 @@ href="../mx-code-examples/examples/README.md">code-examples/README.md</a>.</p>
 <hr />
 <h2 id="part-8---complete-examples">Part 8 - Complete Examples</h2>
 <h3 id="small-business-template">Small Business Template</h3>
-<p>You don’t need complex infrastructure. Here’s a complete small
+<p>You don't need complex infrastructure. Here's a complete small
 business page:</p>
 <div class="sourceCode" id="cb73" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
@@ -3190,7 +3190,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb75-157"><a href="#cb75-157" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> price <span class="op">=</span> <span class="cf">await</span> page<span class="op">.</span><span class="fu">$</span>(<span class="st">&#39;[data-price]&#39;</span>)<span class="op">;</span></span>
 <span id="cb75-158"><a href="#cb75-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect</span>(price)<span class="op">.</span><span class="fu">toBeTruthy</span>()<span class="op">;</span></span>
 <span id="cb75-159"><a href="#cb75-159" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-<p>If these tests fail, you’ve broken machine compatibility.</p>
+<p>If these tests fail, you've broken machine compatibility.</p>
 <h3 id="testing---validation-tools">Testing - Validation Tools</h3>
 <p>Verify your implementations with these tools:</p>
 <p><strong>Structured Data:</strong></p>
@@ -3302,7 +3302,7 @@ relationships</li>
 </ol>
 <hr />
 <h2 id="part-11---why-this-matters">Part 11 - Why This Matters</h2>
-<p>These patterns don’t just help AI agents. They help:</p>
+<p>These patterns don't just help AI agents. They help:</p>
 <ul>
 <li><strong>Screen reader users</strong> - semantic HTML, explicit
 state, persistent errors</li>
@@ -3328,7 +3328,7 @@ Building for AI Development Assistants</h2>
 <p>The patterns above focus on web interfaces for AI agents interacting
 with end users. This section covers building codebases that AI coding
 assistants can understand and work with effectively.</p>
-<p>AI assistants learn through “skills” - structured documentation that
+<p>AI assistants learn through "skills" - structured documentation that
 teaches them how to work with specific technologies. You can extend this
 pattern to your own codebase, giving AI deep understanding of your
 architecture, conventions, and transformation processes.</p>
@@ -3350,7 +3350,7 @@ everything.</p>
 generated files clearly so AI debugs source templates, not runtime
 output.</p>
 <h3 id="semantic-folder-structure">Semantic Folder Structure</h3>
-<p>Use folder names that encode meaning. AI can’t interpret conventions
+<p>Use folder names that encode meaning. AI can't interpret conventions
 the way humans do.</p>
 <p><strong>Bad - Requires human interpretation:</strong></p>
 <pre class="text" data-role="code-block" data-language="text"><code>project/
@@ -3385,7 +3385,7 @@ about what it can safely change:</p>
     +-- custom-components/   # User-defined functionality</code></pre>
 <h3 id="documentation-for-ai-skills-pattern">Documentation for AI
 (Skills Pattern)</h3>
-<p>AI coding assistants like Claude use “skills” - folders containing
+<p>AI coding assistants like Claude use "skills" - folders containing
 in-depth learning material that help them understand how to work with
 specific technologies. The <code>docs/for-ai/</code> pattern extends
 this concept to your own codebase.</p>
@@ -3395,7 +3395,7 @@ learn how to create spreadsheets or presentations, it can read your
 works.</p>
 <p>Create a <code>docs/for-ai/</code> folder with technical system
 documentation optimised for AI consumption. This is not project
-requirements or AI personas - it’s architectural knowledge that helps AI
+requirements or AI personas - it's architectural knowledge that helps AI
 assistants understand your codebase deeply:</p>
 <pre class="text" data-role="code-block" data-language="text"><code>docs/
 |-- for-humans/
@@ -3577,8 +3577,8 @@ assumptions prevent machine comprehension.</p>
 Linking</h3>
 <p>AI agents reference specific sections of a page, not just the URL.
 When headings lack stable <code>id</code> attributes, they cannot
-construct deep links. The machine must describe the section’s position
-(“the third paragraph under the pricing heading”) instead of linking
+construct deep links. The machine must describe the section's position
+("the third paragraph under the pricing heading") instead of linking
 directly to it.</p>
 <p><strong>The problem:</strong></p>
 <div class="sourceCode" id="cb85" data-role="code-container"><pre
@@ -3603,9 +3603,9 @@ exceptions. If a heading exists, it is a potential citation target.</li>
 <code>id="DeliveryOptions"</code>.</li>
 <li><strong>Prefix child headings with parent context.</strong>
 <code>id="pricing-enterprise-plan"</code> avoids collisions when
-multiple sections contain headings named “Overview” or “Details”.</li>
+multiple sections contain headings named "Overview" or "Details".</li>
 <li><strong>Never change IDs after publication.</strong> Anchor IDs are
-part of the page’s API. Changing them breaks citations, bookmarks, and
+part of the page's API. Changing them breaks citations, bookmarks, and
 agent references. Treat them as permanent.</li>
 <li><strong>Generate deterministically.</strong> If using a CMS or
 static site generator, derive IDs from the heading text with a
@@ -3638,7 +3638,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <p><strong>Why this matters for machines:</strong> Citation accuracy
 depends on stable, addressable content. A machine that cites
 <code>#pricing-enterprise-plan</code> gives the user verifiable
-evidence. One that says “the enterprise section” gives the user a search
+evidence. One that says "the enterprise section" gives the user a search
 task.</p>
 <h3 id="external-css-separation">External CSS Separation</h3>
 <p>Machines that parse HTML encounter inline styles as noise. Every
@@ -3655,7 +3655,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> style</span><span class="op">=</span><span class="st">&quot;font-size: 0.875rem; colour: rgba(255,255,255,0.8);&quot;</span><span class="dt">&gt;</span>per month<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
 <span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>A machine parsing this HTML spends tokens on gradients, shadows, and
-font sizes. The semantic content - “£49 per month” - is buried in
+font sizes. The semantic content - "£49 per month" - is buried in
 presentation.</p>
 <p><strong>The solution:</strong></p>
 <div class="sourceCode" id="cb89" data-role="code-container"><pre
@@ -3735,14 +3735,14 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 attributes. Without them, the image is invisible to screen readers and
 undescribed for AI agents.</li>
 <li><strong>Write alt text that describes content, not
-appearance.</strong> “Comparison table showing Enterprise, Business, and
-Startup plan features and pricing” is useful. “A colourful banner image”
+appearance.</strong> "Comparison table showing Enterprise, Business, and
+Startup plan features and pricing" is useful. "A colourful banner image"
 is not.</li>
 <li><strong>Set explicit dimensions.</strong>
 <code>og:image:width</code> and <code>og:image:height</code> prevent
 layout shift on platforms that pre-render cards. The recommended size is
 1200×630 pixels for <code>summary_large_image</code>.</li>
-<li><strong>Match <code>og:description</code> to the page’s
+<li><strong>Match <code>og:description</code> to the page's
 <code>&lt;meta name="description"&gt;</code>.</strong> Inconsistency
 between these values confuses machines that cross-reference page
 metadata.</li>
@@ -3824,7 +3824,7 @@ without image recognition.</p>
 <li>URL changes reflect state changes</li>
 <li>HTTP status codes communicate accurately</li>
 </ul>
-<p>This isn’t accommodation. This is good design that serves
+<p>This isn't accommodation. This is good design that serves
 everyone.</p>
 <hr />
 <h2 id="resources">Resources</h2>

@@ -216,7 +216,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;price&#39;</span>)<span class="op">.</span><span class="at">innerHTML</span> <span class="op">=</span> <span class="vs">`£</span><span class="sc">${</span>data<span class="op">.</span><span class="at">price</span><span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>script<span class="op">&gt;</span></span></code></pre></div>
-<p>Machines saw “Loading…” because JavaScript replaced the
+<p>Machines saw "Loading..." because JavaScript replaced the
 server-rendered content before fetching completed.</p>
 <p><strong>Solution:</strong> Never replace server-rendered content —
 only enhance it:</p>
@@ -312,7 +312,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
 <p><strong>Lesson:</strong> Frontend and backend changes must be
-coordinated. Removing pagination UI doesn’t help if API still limits
+coordinated. Removing pagination UI doesn't help if API still limits
 results.</p>
 <h2 id="structured-data-gets-out-of-sync">4. Structured Data Gets Out of
 Sync</h2>
@@ -350,7 +350,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="vs">  `</span><span class="op">;</span></span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><strong>Lesson:</strong> Structured data and HTML must share the same
-data source. Don’t maintain prices in two places.</p>
+data source. Don't maintain prices in two places.</p>
 <h2 id="form-validation-state-attributes-forgotten">5. Form Validation
 State Attributes Forgotten</h2>
 <p><strong>The Problem:</strong> Added
@@ -361,7 +361,7 @@ Inconsistent implementation confused both developers and machines.</p>
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;email&quot;</span><span class="ot"> data-validation-state</span><span class="op">=</span><span class="st">&quot;valid&quot;</span><span class="dt">&gt;</span> <span class="co">&lt;!-- Has state --&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;phone&quot;</span><span class="dt">&gt;</span> <span class="co">&lt;!-- Missing state --&gt;</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;postcode&quot;</span><span class="ot"> data-validation-state</span><span class="op">=</span><span class="st">&quot;invalid&quot;</span><span class="dt">&gt;</span> <span class="co">&lt;!-- Has state --&gt;</span></span></code></pre></div>
-<p>Machines couldn’t determine phone field status.</p>
+<p>Machines couldn't determine phone field status.</p>
 <p><strong>Solution:</strong> Validation framework ensures consistent
 state:</p>
 <div class="sourceCode" id="cb11" data-role="code-container"><pre
@@ -396,7 +396,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  currentStep<span class="op">++;</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateUI</span>()<span class="op">;</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Machines couldn’t tell which checkout step they were on. Refreshing
+<p>Machines couldn't tell which checkout step they were on. Refreshing
 the page lost progress.</p>
 <p><strong>Solution:</strong> Explicit state in URL and DOM:</p>
 <div class="sourceCode" id="cb13" data-role="code-container"><pre
@@ -427,7 +427,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;phone&quot;</span><span class="ot"> aria-describedby</span><span class="op">=</span><span class="st">&quot;error&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;error&quot;</span><span class="dt">&gt;</span>Invalid phone<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span> <span class="co">&lt;!-- Duplicate ID! --&gt;</span></span></code></pre></div>
-<p>Screen readers and machines couldn’t associate errors with
+<p>Screen readers and machines couldn't associate errors with
 fields.</p>
 <p><strong>Solution:</strong> Unique error IDs per field:</p>
 <div class="sourceCode" id="cb15" data-role="code-container"><pre
@@ -441,7 +441,7 @@ pattern: <code>{fieldId}-error</code>.</p>
 <h2 id="loading-states-without-expected-duration">8. Loading States
 Without Expected Duration</h2>
 <p><strong>The Problem:</strong> Added <code>data-state="loading"</code>
-but machines still didn’t know how long to wait.</p>
+but machines still didn't know how long to wait.</p>
 <p><strong>First attempt:</strong></p>
 <div class="sourceCode" id="cb16" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> data-state</span><span class="op">=</span><span class="st">&quot;loading&quot;</span><span class="dt">&gt;</span>Loading...<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
@@ -456,12 +456,12 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>Machines can now make informed timeout decisions.</p>
 <p><strong>Lesson:</strong> Loading states should indicate expected
-duration. “Loading…” is insufficient — specify how long.</p>
+duration. "Loading..." is insufficient — specify how long.</p>
 <h2 id="inline-styles-bloat-html-for-machines">9. Inline Styles Bloat
 HTML for Machines</h2>
 <p><strong>The Problem:</strong> Used inline styles for convenience
 during development but never refactored to external CSS. Machines that
-parse HTML but don’t execute CSS were downloading and processing
+parse HTML but don't execute CSS were downloading and processing
 hundreds of lines of unused styling code with every page request.</p>
 <p><strong>First attempt:</strong></p>
 <div class="sourceCode" id="cb18" data-role="code-container"><pre
@@ -493,12 +493,12 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <p>HTML file reduced to 23KB. Browsers cache the CSS file. Machines
 parse clean HTML without style noise.</p>
 <p><strong>Lesson:</strong> Separate presentation from content. Inline
-styles waste bandwidth for machines that don’t render them and make HTML
+styles waste bandwidth for machines that don't render them and make HTML
 harder to parse. External CSS benefits everyone — machines get faster
 parsing, browsers get caching, developers get maintainability.</p>
 <h2 id="pre-converting-pages-to-markdown-stripped-metadata">10.
 Pre-Converting Pages to Markdown Stripped Metadata</h2>
-<p><strong>The Problem:</strong> Built a “chatbot-friendly” site by
+<p><strong>The Problem:</strong> Built a "chatbot-friendly" site by
 converting all pages to markdown. In 2023, this seemed smart — simpler
 format, easier parsing, clean text. By 2025, machines struggled to cite
 us accurately. Prices were often wrong, publication dates got
@@ -517,9 +517,9 @@ URLs)</li>
 questions) whilst the market moved to 2026 reality (machines that
 discover, evaluate, compare, and cite sources with accuracy).</p>
 <p><strong>What we saw:</strong></p>
-<p>Machines reading our markdown would cite “approximately £30” when
-price was exactly £24.99. They’d say “published recently” when we had
-explicit dates. They’d mention the product but not link to our site
+<p>Machines reading our markdown would cite "approximately £30" when
+price was exactly £24.99. They'd say "published recently" when we had
+explicit dates. They'd mention the product but not link to our site
 because they had no canonical URL.</p>
 <p>Competitors with rich HTML and structured data got cited accurately.
 We got vague references or got skipped entirely.</p>
@@ -542,18 +542,18 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>Citation accuracy improved dramatically. Machines now reference exact
 prices, correct dates, proper author attribution. If a platform needs
-markdown, they can extract it from our rich HTML — we don’t pre-strip
+markdown, they can extract it from our rich HTML — we don't pre-strip
 the signals they need.</p>
-<p><strong>Lesson:</strong> Don’t optimise for yesterday’s paradigm.
+<p><strong>Lesson:</strong> Don't optimise for yesterday's paradigm.
 Machines in 2026 need structured metadata for accurate citation, not
 stripped markdown that loses context. Provide rich source material and
-let platforms convert to simpler formats if needed. You can’t add
+let platforms convert to simpler formats if needed. You can't add
 structure back to stripped markdown, but you can always extract markdown
 from rich HTML.</p>
 <h2 id="robots.txt-missing-sitemap-declaration">11. robots.txt Missing
 Sitemap Declaration</h2>
 <p><strong>The Problem:</strong> Created robots.txt but forgot sitemap
-declaration. Machines couldn’t discover content efficiently.</p>
+declaration. Machines couldn't discover content efficiently.</p>
 <p><strong>First version:</strong></p>
 <pre class="text" data-role="code-block" data-language="text"><code>User-agent: *
 Disallow: /admin/</code></pre>
@@ -618,14 +618,14 @@ class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><
 (curl/wget), not just browser DevTools.</p>
 <h2 id="incomplete-pricing-disclosure-persisted">14. Incomplete Pricing
 Disclosure Persisted</h2>
-<p><strong>The Problem:</strong> Changed “From £99” to “£149.99” on
+<p><strong>The Problem:</strong> Changed "From £99" to "£149.99" on
 product pages, but forgot checkout summary, confirmation emails, and API
 responses.</p>
 <p><strong>Inconsistency:</strong></p>
 <ul>
-<li>Product page: “£149.99” (fixed)</li>
-<li>Cart: “From £99” (not fixed)</li>
-<li>Email: “Starting at £99” (not fixed)</li>
+<li>Product page: "£149.99" (fixed)</li>
+<li>Cart: "From £99" (not fixed)</li>
+<li>Email: "Starting at £99" (not fixed)</li>
 <li>API: <code>{"base_price": 99}</code> (not fixed)</li>
 </ul>
 <p><strong>Solution:</strong> Search entire codebase for pricing
@@ -681,7 +681,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
 <span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
 <p><strong>Lesson:</strong> API must match or exceed web UI quality.
-Don’t fix UI and leave API broken.</p>
+Don't fix UI and leave API broken.</p>
 <h2 id="forgetting-mobile-viewport">16. Forgetting Mobile Viewport</h2>
 <p><strong>The Problem:</strong> Fixed desktop patterns but mobile site
 still paginated, hid content, showed incomplete prices.</p>
@@ -717,7 +717,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>app<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;/api/products/:id&#39;</span><span class="op">,</span> requireAuth<span class="op">,</span> (req<span class="op">,</span> res) <span class="kw">=&gt;</span> {</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  res<span class="op">.</span><span class="fu">json</span>(<span class="fu">getProduct</span>(req<span class="op">.</span><span class="at">params</span><span class="op">.</span><span class="at">id</span>))<span class="op">;</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-<p>Public product data now requires authentication. Machines can’t
+<p>Public product data now requires authentication. Machines can't
 browse products.</p>
 <p><strong>Solution:</strong> Separate public and private data:</p>
 <div class="sourceCode" id="cb32" data-role="code-container"><pre
@@ -732,7 +732,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> customerData <span class="op">=</span> <span class="fu">getCustomerProductData</span>(req<span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">id</span><span class="op">,</span> product<span class="op">.</span><span class="at">id</span>)<span class="op">;</span></span>
 <span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  res<span class="op">.</span><span class="fu">json</span>({ <span class="op">...</span>product<span class="op">,</span> customerData })<span class="op">;</span></span>
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-<p><strong>Lesson:</strong> Public data should remain public. Don’t add
+<p><strong>Lesson:</strong> Public data should remain public. Don't add
 authentication to publicly-browsable content.</p>
 <h2 id="performance-optimisation-lessons">18. Performance Optimisation
 Lessons</h2>
@@ -792,13 +792,13 @@ concerns about automated access.</p>
 <p><strong>Context:</strong> Many robots.txt files provide minimal
 guidance for machines.</p>
 <p><strong>Problem:</strong> Website owners want to control machine
-access but don’t know what to include in robots.txt.</p>
+access but don't know what to include in robots.txt.</p>
 <p><strong>Solution:</strong> 100-point scoring system evaluates 6
 criteria (AI-specific user agents, sitemap references, sensitive path
 protection, llms.txt references, comments, completeness).</p>
 <p><strong>Impact:</strong> Actionable feedback helps sites improve
 machine guidance.</p>
-<p><strong>Key insight:</strong> Educational tools that explain “why”
+<p><strong>Key insight:</strong> Educational tools that explain "why"
 drive adoption better than binary pass/fail judgments.</p>
 <p><strong>Book reference:</strong> Chapter 10 covers robots.txt best
 practices for machines.</p>
@@ -809,7 +809,7 @@ JavaScript must enhance, never replace server-rendered content</li>
 <li><strong>Consistency is critical:</strong> If one field has state
 attributes, all fields must have them</li>
 <li><strong>Frontend and backend must align:</strong> Removing
-pagination UI doesn’t help if API limits results</li>
+pagination UI doesn't help if API limits results</li>
 <li><strong>Structured data must stay in sync:</strong> Generate JSON-LD
 from same source as HTML</li>
 <li><strong>State must be visible:</strong> Hidden JavaScript state
@@ -818,11 +818,11 @@ breaks machines and users</li>
 not just browser DevTools</li>
 <li><strong>Pattern changes are global:</strong> Use grep to find all
 instances, update systematically</li>
-<li><strong>API must be first-class:</strong> Don’t fix UI and leave API
+<li><strong>API must be first-class:</strong> Don't fix UI and leave API
 broken</li>
 <li><strong>Mobile matters:</strong> Machine patterns must work at all
 breakpoints</li>
-<li><strong>Public data stays public:</strong> Don’t add authentication
+<li><strong>Public data stays public:</strong> Don't add authentication
 to browsable content</li>
 </ol>
 </div>
