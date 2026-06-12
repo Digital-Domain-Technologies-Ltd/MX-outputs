@@ -87,6 +87,6 @@ REGINALD's trust story rests on a verifier resolving did:web:reginald.allabout.n
 
 | Hash | Description |
 |------|-------------|
-| _pending_ | Memory: reginald.allabout.network path-split routing shape |
+| e41b42f3 | REGINALD vNext cutover: record path-split routing for reginald.allabout.network |
 
 Concurrent sessions landed separate work in this segment (cross-check hardening, repo-travelling memory wiring, blog drafts); those commits are reported by their own sessions and are excluded here to avoid double-counting.
