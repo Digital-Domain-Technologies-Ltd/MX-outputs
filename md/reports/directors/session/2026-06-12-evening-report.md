@@ -4,7 +4,7 @@ description: "did:web:reginald.allabout.network is live against the vNext worker
 author: "Tom Cranstoun"
 created: 2026-06-12
 modified: 2026-06-12
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -31,6 +31,8 @@ mx:
 REGINALD vNext is now live on the production hostname. did:web:reginald.allabout.network resolves against the vNext worker's DID document, and the vNext registry API answers at reginald.allabout.network/v1/*. The cutover was done with two path-scoped Cloudflare routes rather than the full-host swap originally specified, because investigation showed the hostname also carries live book-sales revenue (Stripe webhook, checkout, emailed download links) on a different worker - a full swap would have broken it. The principal partner leading the vNext track is unblocked on his next step without needing any new account permissions.
 
 In parallel, the audit pipeline's final integrity check - reading every claim in the report against the evidence the audit collected - now runs as compute inside the pipeline, before the PDF is rendered (on the cog path, by operator contract). Its first live run against a new external domain caught six classes of defect in our own instrumentation, every one fixed in the crawler, the gates, or the template rather than in the report; the Balanced Scorecard's human-experience grades now derive from measured data instead of template-asserted "Excellent" rows; and a macOS-specific storage hazard (folders named after .app hostnames rendering as application bundles in Finder) was closed at the slug-derivation source.
+
+The parallel writing session shipped the first three phases of the approved rulebook rewrite. The assistant's accumulated working memory now travels with the repository: a deterministic merge engine syncs the device-local memory into a tracked `.claude/memory/` folder (union by file, newest correction wins, deletions by tombstone), hooks apply it at the write boundary and at session start, and a checker gates it in the test suite and at push. A fresh clone now inherits months of working practice on day one. The hook estate became self-declaring (every hook carries an enforcement level, with a generated machine-readable registry), and LEARNINGS.md went from 230 accumulated entries to an empty buffer: every proven rule now lives in its themed gotcha doc (including a new MX-tooling sibling), three entries became permanent infrastructure, and the document-learn-automate-delete loop is closed. The same session drafted the memory-sync story as a blog post (staged at Zone 2, publish-ready), added the "Determinism, not inference" credo to the root manifesto with a regenerated provenance-carrying PDF, and fixed the MX-outputs CI session-check, whose appendix step now skips cleanly under the publish-from-hub model.
 
 A third thread refreshed the business-development surface. A contact-agnostic capability update now exists for partners and prospects (Olivier Dobberkau, Chris Bryce, Jonathan Healey, and others), carrying the six weeks of shipped capability since the Frankfurt summit; the investor, team, and Gathering sponsor pitches were brought current with the same facts in per-audience framing; and the CRM caught up with reality on IDHL - the sponsorship record on Jonathan Healey's contact and a new contact for Liam Goldfinch, the IDHL practitioner whose Kentico MVP Summit talk independently argued the specifications-over-prompts thesis.
 
@@ -70,7 +72,19 @@ A folder named after a .app hostname renders as an application bundle in macOS F
 
 A reusable, contact-agnostic update (mx-crm/outreach/update.md) tells partners and prospects what shipped in the six weeks since Frankfurt, in three outcome-led sections: the audit a client can defend (vendor attribution, template-level accessibility findings, refusal-as-finding, byte-identical re-runs), the evidence chain every deliverable carries, and the air-gapped local-model delivery for regulated sectors. Frankfurt gets one passing mention; REGINALD is deliberately absent; the regulatory legal disclaimer rides the first named-legislation mention. The same facts landed in the live pitches in per-audience framing: the investor pitch's determinism-moat, evidence-chain, local-inference, and traction sections; the team pitch's audit, regulated-audit, and REGINALD product lines; and the Gathering sponsor pitch in vendor-neutral language only, per the audience-split rule. All four files then went through the full humanizer pass - scanner-clean apart from confirmed exemptions (house idiom, deliberate anaphora, the "Worth being up close to" signature line).
 
-### 9. CRM caught up with IDHL reality
+### 9. Memory that travels with the repository
+
+Tom approved a six-phase rewrite of the AI-rulebook layer after a structured interview; three phases shipped same-day. Phase one is the headline: Claude's device-local working memory (the small files recording team practice, corrections, and conventions) now merges into a repo-tracked folder through one deterministic contract - union by file so contributions accumulate and nothing is overwritten, newest modified-stamp wins so a teammate's correction reaches every machine, tombstones so retirements stay retired, and personal-context memories never leave the device. Hooks run the merge at the write boundary and at session start; a checker holds the two sides together in the test suite and as a push gate. The travelling set carries the project's accumulated practice to any clone, any team, any machine.
+
+### 10. Hook estate self-declares; LEARNINGS loop closed
+
+Every Claude Code hook now carries a declared enforcement level (blocking, advisory, or sync) beside its description, with a generated machine-readable registry; a hook missing either header is a hard regeneration error, and the duplicated detached-HEAD submodule check collapsed into one shared guard sourced by both git hooks. LEARNINGS.md - the rolling mistakes buffer - was swept from 230 entries to empty: proven rules distilled into the themed gotcha docs (a new MX-tooling sibling joins the family), two entries became standing rules in CLAUDE.md and a source-file contract comment, one became a tracked gate-debt item, and pure duplicates were deleted. The buffer now does what it was designed for: capture fresh mistakes, then empty itself into infrastructure.
+
+### 11. The determinism credo, stated outward
+
+Tom ratified the positioning line "MX prefers determinism, not inference. Same result every time." The root manifesto gained a dedicated section (explicit beats inferred, recorded beats remembered, a result you can reproduce beats one you can only explain), the memory-sync blog draft states it in miniature, the line is saved as travelling memory with usage rules (never claim it for LLM judgement steps), and the manifesto PDF was regenerated with the full provenance chain binding it to the credo-bearing source. A blog post telling the memory-sync story for outside readers sits at Zone 2 noindex with every gate green, publish-ready pending review.
+
+### 12. CRM caught up with IDHL reality
 
 Jonathan Healey's contact record was upgraded from "Prospect" to founding sponsor of The Gathering (confirmed 11 May; paperwork still outstanding, now an open item). A new contact records Liam Goldfinch: IDHL practitioner, Kentico MVP, attended the 8 April Leeds MX presentation, and presented an AI-assisted website-rebuild case study at the Kentico MVP Summit in Brno whose stated conclusion - structured context and specifications beat clever prompting - is the MX thesis arrived at independently from the delivery floor. He is a second thread into the sponsor relationship and a candidate for Gathering draft review.
 
@@ -87,6 +101,10 @@ Jonathan Healey's contact record was upgraded from "Prospect" to founding sponso
 | Pre-push gates passing | 25 of 25 |
 | New gate scripts | 1 (plus host-slug and cross-check core libs, both unit-tested) |
 | External-domain deliveries | 1 (atmors.netlify.app, tagged PDF/UA-1 with provenance pair) |
+| Memories now travelling with the repo | 120+ (project and feedback types; personal stays device-local) |
+| LEARNINGS buffer | 230 entries to 0 (distilled to six themed gotcha docs, one new) |
+| Hooks self-declaring enforcement | every hook (blocking / advisory / sync), generated registry |
+| New push gate | Gate 26 (device and repo memory in sync) |
 
 ---
 
@@ -111,6 +129,8 @@ REGINALD's trust story rests on a verifier resolving did:web:reginald.allabout.n
 - Salva to confirm the path-split shape works for vNext and declare the two routes in his worker config so future deploys keep them in lockstep.
 - Salva to refresh the stale comments in the vNext worker config (it still describes the hostname as serving the v1 worker).
 - Consider a short mx-site post on did:web resolution going live once Salva calls vNext ready.
+- Review and publish the memory-that-travels blog draft (Zone 2, gates green; promote command in REMINDERS), and weigh the productisation angle (Gathering draft note, Maxine hook, consulting story).
+- Rulebook rewrite phases still open: skills consolidation, UBERCOG rewrite, CLAUDE.md slim - one session each per the approved plan; the plan-state memory travels with the repo.
 
 ---
 
@@ -129,4 +149,14 @@ REGINALD's trust story rests on a verifier resolving did:web:reginald.allabout.n
 | 9212488f | Architecture cog and audit cogs current with the host-slug SSOT and cross-check gate |
 | (mx-outputs) e77e69d5, 67631395, d541b5df, 6a6befe2 | atmors delivery, derived-scorecard regen, .d folder rename, consistent-path regen |
 
-Remaining segment commits (repo-travelling memory wiring, blog drafts, manifesto credo, prose-score-binding gate) belong to the concurrent writing session and are reported separately.
+| 72ce58be | Memory travels with the repo: merge wiring, hooks registration, Gate 26 |
+| 349c7986 | Memory: rulebook-rewrite plan state (phases 1-2 live, 3-6 pending) |
+| b329f911 | Blog: memory-that-travels-with-the-repo (Zone 2 draft); REMINDERS: product angle |
+| 9e42bc56 | Determinism, not inference: manifesto credo, blog passage, positioning memory |
+| 3870459c | Bump mx-outputs: manifesto PDF v1.1 (determinism-not-inference section) |
+| ab679094 | LEARNINGS sweep, named-destination batch: distil to the five gotcha docs |
+| 70550f69 | LEARNINGS to minimum: full migration sweep, buffer holds only fresh entries |
+| 2186a22f | LEARNINGS buffer emptied: final entries become infrastructure or migrate |
+| (mx-outputs) 8e0df773 | session-check: appendix sync skips cleanly when no consolidated source exists |
+
+The writing session's memory-sync engine and hook-registry files landed inside the audit session's commits (e781808e, dfb59a34) through concurrent staging; content verified byte-identical, recorded here rather than re-committed.
