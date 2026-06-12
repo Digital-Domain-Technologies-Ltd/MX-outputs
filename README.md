@@ -21,11 +21,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 79 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 289 | Markdown — reports, audit results, presentations |
-| [html/](html/) | 92 | HTML — blogs (with CSS/SVG), audit baselines |
+| [md/](md/) | 290 | Markdown — reports, audit results, presentations |
+| [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 2 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1091** | |
+| **Total** | **1093** | |
 
 ---
 
@@ -138,7 +138,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (276 files)
+### md/reports/ (277 files)
 
 #### md/reports/completions/ (26 files)
 
@@ -175,7 +175,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-06-11/** (1 files)
   - **_archive/** (13 files)
 
-#### md/reports/directors/ (246 files)
+#### md/reports/directors/ (247 files)
 
 **build/** (3 files)
 
@@ -189,7 +189,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-02-10-universal-cms-interview.md`](md/reports/directors/interview/2026-02-10-universal-cms-interview.md)
 - [`2026-02-10-vision-document-interview.md`](md/reports/directors/interview/2026-02-10-vision-document-interview.md)
 
-**session/** (239 files)
+**session/** (240 files)
 
 - [`2026-02-13-afternoon-report.md`](md/reports/directors/session/2026-02-13-afternoon-report.md)
 - [`2026-02-13-morning-report.md`](md/reports/directors/session/2026-02-13-morning-report.md)
@@ -420,6 +420,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`2026-06-11-evening-report.md`](md/reports/directors/session/2026-06-11-evening-report.md)
 - [`2026-06-11-morning-report.md`](md/reports/directors/session/2026-06-11-morning-report.md)
 - [`2026-06-12-afternoon-report.md`](md/reports/directors/session/2026-06-12-afternoon-report.md)
+- [`2026-06-12-evening-report.md`](md/reports/directors/session/2026-06-12-evening-report.md)
 - [`2026-06-12-morning-report.md`](md/reports/directors/session/2026-06-12-morning-report.md)
 - [`2026-02-10-full-session-report.md`](md/reports/directors/session/_archive/2026-02-10-full-session-report.md)
 - [`2026-02-10-session-report.md`](md/reports/directors/session/_archive/2026-02-10-session-report.md)
@@ -536,13 +537,11 @@ HTML content with adjacent CSS, JS, and SVG assets.
 ### html/blogs/ (0 files)
 
 
-### html/books/ (4 files)
+### html/books/ (3 files)
 
-- [`mx-appendices.html`](html/books/appendices/mx-appendices.html)
 - [`chapter-00-introduction-to-mx.html`](html/books/chapters/chapter-00-introduction-to-mx.html)
 - [`mx-handbook.html`](html/books/handbook/mx-handbook.html)
 - [`mx-protocols.html`](html/books/protocols/mx-protocols.html)
-  - **appendices/** (1 files)
   - **chapters/** (1 files)
   - **codex/** (0 files)
   - **handbook/** (1 files)
@@ -585,4 +584,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-06-12 at 17:22*
+*Generated on 2026-06-12 at 18:13*
