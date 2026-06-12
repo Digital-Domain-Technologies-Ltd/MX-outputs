@@ -10,15 +10,15 @@ mx:
   status: active
   contentType: audit-findings
   audience: [humans, machines]
-  x-mx-findingsCount: 11
+  x-mx-findingsCount: 7
   inherits: ["mx-allabout-network-report-findings.json"]
   runbook: "Human reviewer reads the prose body before sign-off; accept, rebut, or correct each finding. A machine reads the committed <basename>-findings.json companion (same data, schema audit-findings.v1) or the embedded x-mx-findings block to consider and action findings loop-safely."
   x-mx-findings: |
-    [{"instanceId":"59f0fc04cf41","patternKey":"337934947854","timestamp":"2026-06-12T07:25:58.680Z","severity":"info","source":"check-report-tone.js","gateName":"tone","category":"bogus-html-placeholder","title":"Bogus HTML-tag placeholders (use {name} not <name>): 1 instance","detail":"Bogus HTML-tag placeholders (use {name} not <name>)\n\nline 652: \"<slug> → {slug}\" - | `/blog/<slug>` | 63 | 0.275 | 0.023 | 4.76 |","suggestions":[],"lineRef":"line 652","provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null},{"instanceId":"465590c62c54","patternKey":"ef93bf825f21","timestamp":"2026-06-12T07:25:58.845Z","severity":"warn","source":"check-report-scope.js","gateName":"sample-vs-total-scope","category":"scope-mis-statements","title":"Scope mis-statements remain after auto-repair: 2","detail":"Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:\n\ncheck-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md\n  2 scope mis-statement(s).\n\n  [sitewide-inside-sampled-section] line 214\n    section: ## Findings  (line 178)\n    phrase:  \"Site-wide\"\n    line:    **Finding:** Security headers absent: HSTS, CSP, X-Frame-Options, X-Content-Type-Options (Site-wide). Missing security h\n\n  [sitewide-inside-sampled-section] line 218\n    section: ## Findings  (line 178)\n    phrase:  \"site-wide\"\n    line:    - Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once c\n\n  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write \"across the audited set\" — write \"the sitemap declares\" or \"this file carries\". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write \"site-wide\" or \"across the entire site\" — write \"across the audited pages\" or \"on the audited set\".\n","suggestions":[],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"medium","firstSeen":null,"occurrences":null},{"instanceId":"68e3dfd20413","patternKey":"356e8b18815c","timestamp":"2026-06-12T07:30:14.641Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"construction-path-leak","title":"construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:13","detail":"Internal script path \"scripts/audit-*.js\" leaked.\n\nLine 13: auditCommand: \"node scripts/audit-pipeline.js https://mx.allabout.network --pages 5\"","suggestions":["Rewrite the offending sentence to remove the leaked phrase."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"68e3dfd20413~1","patternKey":"356e8b18815c","timestamp":"2026-06-12T07:30:14.643Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"construction-path-leak","title":"construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:32","detail":"Internal script path \"scripts/audit-*.js\" leaked.\n\nLine 32: runbook: \"Executive audit report for Mx Allabout. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-crawl and re-analyse), use the command in t","suggestions":["Rewrite the offending sentence to remove the leaked phrase."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"68e3dfd20413~2","patternKey":"356e8b18815c","timestamp":"2026-06-12T07:30:14.643Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"construction-path-leak","title":"construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:34","detail":"Internal script path \"scripts/audit-*.js\" leaked.\n\nLine 34: command: \"node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md\"","suggestions":["Rewrite the offending sentence to remove the leaked phrase."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"833beb10eead","patternKey":"6de3a9c49e22","timestamp":"2026-06-12T07:30:14.643Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"marker-section-contradiction","title":"Cross-Page Consistency reports Canonical URL 86% but consistency_analysis says 100% (6/6)","detail":"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for Canonical URL does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.","suggestions":["Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"5d7e76f072e7","patternKey":"6de3a9c49e22","timestamp":"2026-06-12T07:30:14.643Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"marker-section-contradiction","title":"Cross-Page Consistency reports Skip link 86% but consistency_analysis says 100% (6/6)","detail":"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for Skip link does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.","suggestions":["Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"1f9ca211a824","patternKey":"6de3a9c49e22","timestamp":"2026-06-12T07:30:14.644Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"marker-section-contradiction","title":"Cross-Page Consistency reports Open Graph tags 86% but consistency_analysis says 100% (6/6)","detail":"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for Open Graph tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.","suggestions":["Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"34cde4ffef18","patternKey":"6de3a9c49e22","timestamp":"2026-06-12T07:30:14.644Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"marker-section-contradiction","title":"Cross-Page Consistency reports Twitter Card tags 86% but consistency_analysis says 100% (6/6)","detail":"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for Twitter Card tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.","suggestions":["Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"f1a3a9e2081f","patternKey":"6de3a9c49e22","timestamp":"2026-06-12T07:30:14.644Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"marker-section-contradiction","title":"Cross-Page Consistency reports llms.txt link tag 86% but consistency_analysis says 100% (6/6)","detail":"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for llms.txt link tag does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.","suggestions":["Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"1f36f4de456d","patternKey":"60f5e9c9e807","timestamp":"2026-06-12T07:30:15.418Z","severity":"info","source":"audit-prose-lint.js","gateName":"prose-lint","category":"prose-quality","title":"Prose linter flagged 52 style finding(s) for review","detail":"Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:\n\n{\n  \"report\": \"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md\",\n  \"total\": 52,\n  \"neutralSurface\": true,\n  \"byScanner\": {\n    \"mechanical\": {\n      \"count\": 20\n    },\n    \"ai-vocab\": {\n      \"count\": 6\n    },\n    \"copula\": {\n      \"count\": 4\n    },\n    \"prose-patterns\": {\n      \"count\": 22\n    },\n    \"tics\": {\n      \"count\": 0\n    }\n  },\n  \"byCategory\": {\n    \"dialect-divergence\": 19,\n    \"curly-quote\": 1,\n    \"ai-vocab-word\": 5,\n    \"ai-vocab-phrase\": 1,\n    \"possession-copula\": 3,\n    \"locative-copula\": 1,\n    \"same-sentence-repetition\": 22\n  },\n  \"findings\": [\n    {\n      \"scanner\": \"mechanical\",\n      \"line\": 32,\n      \"column\": 173,\n      \"category\": \"dialect-divergence\",\n      \"match\": \"analyse (UK)\",\n      \"snippet\": \"runbook: \\\"Executive audit report for Mx Allabout. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-cra\",\n      \"rephrase_hint\": \"Neutral-English surface (writing-style.md §3): rephrase to avoid the US/UK divergent spelling \\\"analyse\\\" entirely - e.g. examine / review.\"\n    },\n    {\n      \"scanner\": \"copula\",\n      \"line\": 45,\n      \"column\": 15,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"# therefore carries the AI sidecar pointer (the regulator-facing\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 57,\n      \"column\": 191,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"file (2x)\",\n      \"snippet\": \"The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPayload; the adjacent .ai.json file is a copy of the same JSON for tooling that pref\",\n      \"rephrase_hint\": \"Distinctive content word \\\"file\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 57,\n      \"column\": 276,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"deterministic (2x)\",\n      \"snippet\": \"The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directiv\",\n      \"rephrase_hint\": \"Distinctive content word \\\"deterministic\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"copula\",\n      \"line\": 57,\n      \"column\": 300,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"note: \\\"AI evidence chain (LLM-driven, multi-agent, and human-committed steps). The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPaylo\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 57,\n ","suggestions":["Review the flagged AI-tells and mechanical prose issues in the final markdown before sending to the client. Worklist: prose-lint.json in the run results dir."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T07:30:31.766Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null}]
+    [{"instanceId":"1c607578f3f7","patternKey":"a5b8319d5121","timestamp":"2026-06-12T09:40:10.022Z","severity":"info","source":"check-report-tone.js","gateName":"tone","category":"exaggeration","title":"Exaggeration / hyperbole: 1 instance","detail":"Exaggeration / hyperbole\n\nline 136: \"flawless\" - Across the audited set, the pages deliver an excellent experience for human visitors, with fast load","suggestions":[],"lineRef":"line 136","provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T09:46:08.536Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null},{"instanceId":"59f0fc04cf41","patternKey":"337934947854","timestamp":"2026-06-12T09:40:10.024Z","severity":"info","source":"check-report-tone.js","gateName":"tone","category":"bogus-html-placeholder","title":"Bogus HTML-tag placeholders (use {name} not <name>): 1 instance","detail":"Bogus HTML-tag placeholders (use {name} not <name>)\n\nline 784: \"<slug> → {slug}\" - | `/blog/<slug>` | 69 | 0.27 | 0.022 | 4.62 |","suggestions":[],"lineRef":"line 784","provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T09:46:08.536Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null},{"instanceId":"49636c6e981a","patternKey":"9cabeb757220","timestamp":"2026-06-12T09:40:12.332Z","severity":"warn","source":"verify-audit-report.js","gateName":"deterministic-verifier","category":"unverified-claims","title":"1 claim could not be verified against source data","detail":"Deterministic verifier scanned numeric, URL, HTML-snippet, positional, and behavioural claims in the report. The entries below did not match the source CSV / JSON / cached HTML and need a reviewer's eye.\n\nline 697: Numeric 145 (145) not found in any results CSV / JSON","suggestions":[],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T09:46:08.536Z","outcome":"skipped"}],"x-mx-priority":"medium","firstSeen":null,"occurrences":null},{"instanceId":"68e3dfd20413","patternKey":"356e8b18815c","timestamp":"2026-06-12T09:45:29.177Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"construction-path-leak","title":"construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:13","detail":"Internal script path \"scripts/audit-*.js\" leaked.\n\nLine 13: auditCommand: \"node scripts/audit-pipeline.js https://mx.allabout.network --pages -1 --date 2026-06-12\"","suggestions":["Rewrite the offending sentence to remove the leaked phrase."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T09:46:08.536Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"68e3dfd20413~1","patternKey":"356e8b18815c","timestamp":"2026-06-12T09:45:29.180Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"construction-path-leak","title":"construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:32","detail":"Internal script path \"scripts/audit-*.js\" leaked.\n\nLine 32: runbook: \"Executive audit report for Mx Allabout. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-crawl and re-analyse), use the command in t","suggestions":["Rewrite the offending sentence to remove the leaked phrase."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T09:46:08.536Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"68e3dfd20413~2","patternKey":"356e8b18815c","timestamp":"2026-06-12T09:45:29.180Z","severity":"error","source":"check-report-coherence.js","gateName":"check-report-coherence.js","category":"construction-path-leak","title":"construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:34","detail":"Internal script path \"scripts/audit-*.js\" leaked.\n\nLine 34: command: \"node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md\"","suggestions":["Rewrite the offending sentence to remove the leaked phrase."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T09:46:08.536Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"1f36f4de456d","patternKey":"60f5e9c9e807","timestamp":"2026-06-12T09:45:30.048Z","severity":"info","source":"audit-prose-lint.js","gateName":"prose-lint","category":"prose-quality","title":"Prose linter flagged 69 style finding(s) for review","detail":"Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:\n\n{\n  \"report\": \"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md\",\n  \"total\": 69,\n  \"neutralSurface\": true,\n  \"byScanner\": {\n    \"mechanical\": {\n      \"count\": 31\n    },\n    \"ai-vocab\": {\n      \"count\": 7\n    },\n    \"copula\": {\n      \"count\": 6\n    },\n    \"prose-patterns\": {\n      \"count\": 25\n    },\n    \"tics\": {\n      \"count\": 0\n    }\n  },\n  \"byCategory\": {\n    \"dialect-divergence\": 31,\n    \"ai-vocab-word\": 5,\n    \"ai-vocab-phrase\": 2,\n    \"possession-copula\": 5,\n    \"locative-copula\": 1,\n    \"same-sentence-repetition\": 25\n  },\n  \"findings\": [\n    {\n      \"scanner\": \"mechanical\",\n      \"line\": 32,\n      \"column\": 173,\n      \"category\": \"dialect-divergence\",\n      \"match\": \"analyse (UK)\",\n      \"snippet\": \"runbook: \\\"Executive audit report for Mx Allabout. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-cra\",\n      \"rephrase_hint\": \"Neutral-English surface (writing-style.md §3): rephrase to avoid the US/UK divergent spelling \\\"analyse\\\" entirely - e.g. examine / review.\"\n    },\n    {\n      \"scanner\": \"copula\",\n      \"line\": 45,\n      \"column\": 15,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"# therefore carries the AI sidecar pointer (the regulator-facing\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 57,\n      \"column\": 191,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"file (2x)\",\n      \"snippet\": \"The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPayload; the adjacent .ai.json file is a copy of the same JSON for tooling that pref\",\n      \"rephrase_hint\": \"Distinctive content word \\\"file\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 57,\n      \"column\": 276,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"deterministic (2x)\",\n      \"snippet\": \"The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directiv\",\n      \"rephrase_hint\": \"Distinctive content word \\\"deterministic\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"copula\",\n      \"line\": 57,\n      \"column\": 300,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"note: \\\"AI evidence chain (LLM-driven, multi-agent, and human-committed steps). The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPaylo\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 57,\n      \"column\": 326,\n  ","suggestions":["Review the flagged AI-tells and mechanical prose issues in the final markdown before sending to the client. Worklist: prose-lint.json in the run results dir."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T09:46:08.536Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null}]
 ---
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this sidecar surfaces 11 findings (8 errors, 1 warning, 2 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
+Every automated gate ran to completion; this sidecar surfaces 7 findings (3 errors, 1 warning, 3 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
 
 ### Errors (I/O or structural failures)
 
@@ -26,22 +26,17 @@ Every automated gate ran to completion; this sidecar surfaces 11 findings (8 err
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | check-report-coherence.js | construction-path-leak | construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:13 | 2026-06-12T07:30:14Z |
-| 2 | check-report-coherence.js | construction-path-leak | construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:32 | 2026-06-12T07:30:14Z |
-| 3 | check-report-coherence.js | construction-path-leak | construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:34 | 2026-06-12T07:30:14Z |
-| 4 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Canonical URL 86% but consistency_analysis says 100% (6/6) | 2026-06-12T07:30:14Z |
-| 5 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Skip link 86% but consistency_analysis says 100% (6/6) | 2026-06-12T07:30:14Z |
-| 6 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Open Graph tags 86% but consistency_analysis says 100% (6/6) | 2026-06-12T07:30:14Z |
-| 7 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports Twitter Card tags 86% but consistency_analysis says 100% (6/6) | 2026-06-12T07:30:14Z |
-| 8 | check-report-coherence.js | marker-section-contradiction | Cross-Page Consistency reports llms.txt link tag 86% but consistency_analysis says 100% (6/6) | 2026-06-12T07:30:14Z |
+| 1 | check-report-coherence.js | construction-path-leak | construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:13 | 2026-06-12T09:45:29Z |
+| 2 | check-report-coherence.js | construction-path-leak | construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:32 | 2026-06-12T09:45:29Z |
+| 3 | check-report-coherence.js | construction-path-leak | construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:34 | 2026-06-12T09:45:29Z |
 
-<details open><summary>Error detail (8)</summary>
+<details open><summary>Error detail (3)</summary>
 
 **1. check-report-coherence.js - construction-path-leak at /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md:13**
 
 Internal script path "scripts/audit-*.js" leaked.
 
-Line 13: auditCommand: "node scripts/audit-pipeline.js https://mx.allabout.network --pages 5"
+Line 13: auditCommand: "node scripts/audit-pipeline.js https://mx.allabout.network --pages -1 --date 2026-06-12"
 
 Suggested next steps:
 
@@ -67,46 +62,6 @@ Suggested next steps:
 
 - Rewrite the offending sentence to remove the leaked phrase.
 
-**4. check-report-coherence.js - Cross-Page Consistency reports Canonical URL 86% but consistency_analysis says 100% (6/6)**
-
-/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for Canonical URL does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.
-
-Suggested next steps:
-
-- Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly.
-
-**5. check-report-coherence.js - Cross-Page Consistency reports Skip link 86% but consistency_analysis says 100% (6/6)**
-
-/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for Skip link does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.
-
-Suggested next steps:
-
-- Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly.
-
-**6. check-report-coherence.js - Cross-Page Consistency reports Open Graph tags 86% but consistency_analysis says 100% (6/6)**
-
-/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for Open Graph tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.
-
-Suggested next steps:
-
-- Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly.
-
-**7. check-report-coherence.js - Cross-Page Consistency reports Twitter Card tags 86% but consistency_analysis says 100% (6/6)**
-
-/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for Twitter Card tags does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.
-
-Suggested next steps:
-
-- Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly.
-
-**8. check-report-coherence.js - Cross-Page Consistency reports llms.txt link tag 86% but consistency_analysis says 100% (6/6)**
-
-/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md — the Cross-Page Consistency table's percentage for llms.txt link tag does not match the underlying consistency_analysis.json record. The two values are computed from the same source data and should agree.
-
-Suggested next steps:
-
-- Trace the Cross-Page Consistency printer in infill-report.js — verify it reads coverage from consistency_analysis.patterns directly.
-
 </details>
 
 ### Warnings (rule violations)
@@ -115,28 +70,15 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | sample-vs-total-scope | scope-mis-statements | Scope mis-statements remain after auto-repair: 2 | 2026-06-12T07:25:58Z |
+| 1 | deterministic-verifier | unverified-claims | 1 claim could not be verified against source data | 2026-06-12T09:40:12Z |
 
 <details open><summary>Warning detail (1)</summary>
 
-**1. sample-vs-total-scope - Scope mis-statements remain after auto-repair: 2**
+**1. deterministic-verifier - 1 claim could not be verified against source data**
 
-Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:
+Deterministic verifier scanned numeric, URL, HTML-snippet, positional, and behavioural claims in the report. The entries below did not match the source CSV / JSON / cached HTML and need a reviewer's eye.
 
-check-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md
-  2 scope mis-statement(s).
-
-  [sitewide-inside-sampled-section] line 214
-    section: ## Findings  (line 178)
-    phrase:  "Site-wide"
-    line:    **Finding:** Security headers absent: HSTS, CSP, X-Frame-Options, X-Content-Type-Options (Site-wide). Missing security h
-
-  [sitewide-inside-sampled-section] line 218
-    section: ## Findings  (line 178)
-    phrase:  "site-wide"
-    line:    - Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once c
-
-  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write "across the audited set" — write "the sitemap declares" or "this file carries". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write "site-wide" or "across the entire site" — write "across the audited pages" or "on the audited set".
+line 697: Numeric 145 (145) not found in any results CSV / JSON
 
 </details>
 
@@ -146,50 +88,56 @@ check-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | tone | bogus-html-placeholder | Bogus HTML-tag placeholders (use {name} not <name>): 1 instance (line 652) | 2026-06-12T07:25:58Z |
-| 2 | prose-lint | prose-quality | Prose linter flagged 52 style finding(s) for review | 2026-06-12T07:30:15Z |
+| 1 | tone | exaggeration | Exaggeration / hyperbole: 1 instance (line 136) | 2026-06-12T09:40:10Z |
+| 2 | tone | bogus-html-placeholder | Bogus HTML-tag placeholders (use {name} not <name>): 1 instance (line 784) | 2026-06-12T09:40:10Z |
+| 3 | prose-lint | prose-quality | Prose linter flagged 69 style finding(s) for review | 2026-06-12T09:45:30Z |
 
-<details open><summary>Info detail (2)</summary>
+<details open><summary>Info detail (3)</summary>
 
-**1. tone - Bogus HTML-tag placeholders (use {name} not <name>): 1 instance**
+**1. tone - Exaggeration / hyperbole: 1 instance**
+
+Exaggeration / hyperbole
+
+line 136: "flawless" - Across the audited set, the pages deliver an excellent experience for human visitors, with fast load
+
+**2. tone - Bogus HTML-tag placeholders (use {name} not <name>): 1 instance**
 
 Bogus HTML-tag placeholders (use {name} not <name>)
 
-line 652: "<slug> → {slug}" - | `/blog/<slug>` | 63 | 0.275 | 0.023 | 4.76 |
+line 784: "<slug> → {slug}" - | `/blog/<slug>` | 69 | 0.27 | 0.022 | 4.62 |
 
-**2. prose-lint - Prose linter flagged 52 style finding(s) for review**
+**3. prose-lint - Prose linter flagged 69 style finding(s) for review**
 
 Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
 
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md",
-  "total": 52,
+  "total": 69,
   "neutralSurface": true,
   "byScanner": {
     "mechanical": {
-      "count": 20
+      "count": 31
     },
     "ai-vocab": {
-      "count": 6
+      "count": 7
     },
     "copula": {
-      "count": 4
+      "count": 6
     },
     "prose-patterns": {
-      "count": 22
+      "count": 25
     },
     "tics": {
       "count": 0
     }
   },
   "byCategory": {
-    "dialect-divergence": 19,
-    "curly-quote": 1,
+    "dialect-divergence": 31,
     "ai-vocab-word": 5,
-    "ai-vocab-phrase": 1,
-    "possession-copula": 3,
+    "ai-vocab-phrase": 2,
+    "possession-copula": 5,
     "locative-copula": 1,
-    "same-sentence-repetition": 22
+    "same-sentence-repetition": 25
   },
   "findings": [
     {
@@ -240,6 +188,7 @@ Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
     {
       "scanner": "prose-patterns",
       "line": 57,
+      "column": 326,
 
 Suggested next steps:
 
