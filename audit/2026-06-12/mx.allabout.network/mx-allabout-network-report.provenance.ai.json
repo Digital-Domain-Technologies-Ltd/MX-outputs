@@ -1,0 +1,780 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": "mx.allabout.network-2026-06-12",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-12T07:30:31.939Z",
+  "operator": "tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://mx.allabout.network",
+  "startedAt": "2026-06-12T07:25:10.253Z",
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 24-205 — Consumer Protections for Artificial Intelligence",
+      "version": "SB-24-205",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-42005",
+      "title": "ISO/IEC 42005 — AI System Impact Assessment",
+      "version": "2025",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "impact-assessment",
+      "claim": "evidence-vehicle",
+      "x-iso-42005": {}
+    },
+    {
+      "id": "prEN-18286",
+      "title": "prEN 18286 — AI Management System (candidate harmonised European standard, CEN-CENELEC JTC 21)",
+      "version": "draft",
+      "jurisdiction": "EU (CEN-CENELEC, in development)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-pren-18286": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "mx-allabout-network-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "d492e66b531f95d506c0d64d891d63aa03969703",
+      "shortSha": "d492e66"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.4.0",
+    "host": "toms-MacBook-Pro-396.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-06-12T07:25:10.426Z",
+      "stepId": "report.rewrite-1",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 1/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "7597e688b8fb7babe74e012c041a482824b28fcf0982fbcb6169e55df65af1df"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "77d0e981f5d4723ae53eff4e4a7ea626b31eb8487ed168d50acbd2685238f62f",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set we see a site that delivers a smooth and engaging experience for visitors. The performance foundation is solid, with page loads consistently swift, allowing users to access content quickly and enjoy interactive elements without delay. Design choices such as clear navigation, responsive imagery, and concise copy reinforce your brand’s credibility and keep readers focused on the information they seek.\n\nThe headline opportunity we want to draw attention to is commerce visibil",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:10.572Z",
+      "stepId": "report.rewrite-2",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 2/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "2b2b466ccff619624025805f8b5c822e25855acf1aeef409977a646e3c7fb7e0"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "158518f12b5db1b6040a16f007bf3458f2f7fcbb4eb20bd37c358b8152b6b037",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We find that across the audited set, the pages deliver a strong experience for human visitors, with excellent performance, accessibility and SEO.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:10.716Z",
+      "stepId": "report.rewrite-3",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 3/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "b0fe54f2cdebe82b91ff29d58551d1e8642fbea10ec42f593a641d50430da119"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "dad65b982db5d6227dbcc094ca637c5658b1c688679f3d16e9a30722903cc1f5",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, machines can discover and parse content with a readiness score of 94/100 yet still lack full governance context, while structured data quality (95/100), MX stack completeness (97/100) and pipeline survivability (100/100) collectively give them a robust foundation for accurate comprehension at Level 3 (Comparable / Attested).",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:10.862Z",
+      "stepId": "report.rewrite-4",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 4/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "91360f35f00070c5f222f189ac271eb68054ecd2843a8f0b0a0a6391e82ed07a"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "633cb6f9708726303ca311f167eb44cce41470fc94083880da5e400c87a91a46",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, we find that your seven pages demonstrate a solid foundation in SEO (93/100), accessibility (100/100), security headers (5/5 present on six URLs), and structured data quality (95/100). These strengths provide the groundwork for the targeted improvements outlined below.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:11.010Z",
+      "stepId": "report.rewrite-5",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 5/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "f74d0655aed00c2a8b84a749a3794d29312b5ad44f57619f1685545840fda427"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "63bf3435c2bf806715d2c18161fb0abb24ed4ab4a24e78e92e34d4769c4a62b6",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "- **sameAs links**: linking the Person and Organization entities to ORCID, Wikidata or LinkedIn gives machines richer identity context and improves cross‑source attribution.  \n- **PotentialAction on Organization**: adding a contact `potentialAction` exposes machine‑readable ways for agents to reach your organization, enhancing discoverability of communication channels.  \n- **Content‑Signal directives** ([contentsignals.org](https://contentsignals.org)) in robots.txt to declare content‑use policy",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:11.156Z",
+      "stepId": "report.rewrite-6",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 6/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 6,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "40be4a1fc7a2210920826c260fecc85c6f4f52f2325e09899998946995c6796a"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "9d3f7f09bc6dd19e3bf20160299fc3ce02c86318aacf7d8a98fef17fa3749169",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We have an active edge‑capture pattern on https://mx.allabout.network, so AI visits are being separated from organic direct traffic. The browser does not inform the server which AI generated the request.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:11.299Z",
+      "stepId": "report.rewrite-7",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 7/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 7,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "c951ca5090fb6240bd1d06832864ee0dc81453e4c4ebadeec84fd7e3086ce8d5"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "fb7899d62ed47bbc7b1674f5844f1140ac806398b29214c1b27903c9757c1a82",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found that every resilience check we ran on the seven audited pages passed, meaning machines can fetch and render your content without interruption. Because there are no flagged issues, there is currently nothing to fix; the site already delivers a fully reliable experience for automated agents. This presents an opportunity to maintain this level of stability by continuing routine checks as new pages are added.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:11.446Z",
+      "stepId": "report.rewrite-8",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 8/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 8,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "fff45880b6c92c9c588c3a5d98ba2732d6d3b901fd7b518090d722355ea52e97"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "b3dd5d857f3048e043f8ccd71b0c71263d6111f6b202f360848e4e6a0e0f4208",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We find that the site uses semantic HTML well, giving machines reliable structural cues.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:11.588Z",
+      "stepId": "report.rewrite-9",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 9/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 9,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "c91d5700cad107b89504e87943145d9c2a87c3a843cb1d704562ec4ca9ecad26"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "9f27fbb1ac5d2fb1c603d8a4804f076077893b03fb0d265f5d41f19d0c4fdf48",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Dynamic Yield and Unbounce Smart Traffic (personalisation) are present on pages in the audited set, but every visit returned the same content during this audit.  \n\nThe layer is installed, yet it served machines consistent content throughout the run. Because machines arrive with no cookie and no session, the layer could begin assigning variant content if it is later configured to act on first‑touch or uncohorted traffic. This is a latent risk worth noting, not a problem observed in this run.\n\nNo ",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:11.737Z",
+      "stepId": "report.rewrite-10",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 10/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 10,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "057b551650d797284ae1b675c7bdfd327f17d18c339123d02173fd1b58b60c85"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "38fcbc4b862a24ae8ee1878cc897286e0a2d38c9f915cd8e686ed360b7faf2a6",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We examined the metadata and structured data across the seven pages to assess how consistently your content is presented to machines. Across the audited set, we found consistent brand naming, canonical URLs, meta descriptions, and entity values, with no duplication or out‑of‑range values flagged by our consistency check. No brand-name or canonical-URL divergence was detected in the sampled pages.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:11.894Z",
+      "stepId": "report.rewrite-11",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 11/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 11,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "50835ccc0e28c5abd42fea5e7a779a247e188eff6e096837ce453b87d40f1900"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "cd46c5ed3ef1901b81168d3d364e891974100c70fbb073554ca5929164514f09",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We note that accessibility legislation worldwide converges on ISO 14289‑1 (PDF/UA) as the technical baseline, with the European Accessibility Act—Directive (EU) 2019/882, in force 28 June 2025—as a particularly precise codification, while Section 508 of the US Rehabilitation Act, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent statutes in Australia and Canada all resolve to the same structural artefact.  \nWe also observed that an untagged PDF is invisible to machines; ",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:25:12.052Z",
+      "stepId": "report.rewrite-12",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 12/12 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 12,
+        "blockCount": 12,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/.infilled/mx-allabout-network.md"
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "3a6b36ca4d93c94a795d1e5f9083037dbb3e12ce20a7582d1c02bafe2391f753"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "12aa2403893de3d6dbd51abe89711fed19db637995e60fff1cf38b589a4e932a",
+      "inputHashes": [
+        {
+          "hash": "d75ec66f2d1b57a72034cf45cb866a67e8b0025dd17e28c34fc4026e9bb53cbc",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set of seven pages on https://mx.allabout.network, we found AI Suitability at a perfect 100/100, indicating that machines can immediately understand and use your content. Opportunities for improvement lie in SEO (93/100) and Discovery Readiness (94/100), where enhancing keyword relevance and discovery artefacts will further boost machine visibility. We invite you to act on these insights to strengthen your digital presence.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-12T07:27:11.849Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "mx-allabout-network-report.md",
+        "regexCategoriesFlagged": []
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report-fierce-critic.json",
+        "sha256": "477317fb48999877f9ce6d91d9402b14599b2e7329cac62b771be549f0bfceb1"
+      },
+      "rubricHash": "ee8b368406d5c514e5f8a627ba55daaee8ea2359d2211e157094f844ef6942f2",
+      "promptHash": "3aa5d5c78b11551b09ce36f2b5a8e5a24afa8f539877ea2c7411a48e48bf1738",
+      "inputHashes": [
+        {
+          "hash": "fc4254503352d9f1edab3747a5456a76f20484970e94db625ee52a0a3d017e32",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"details\": \"Recommendation to add descriptive alt text to informative images is generic and does not reference a specific selector, page URL, or count from the audit data. It can be copy‑pasted unchanged into any audit report.\"\n    }\n  ]\n}",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=0 llmFindings=1"
+    },
+    {
+      "timestamp": "2026-06-12T07:30:14.216Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 1 mechanical patch(es); Layer 2 applied 0/2 LLM patch(es) for 3 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "mx-allabout-network-report.md",
+        "findingCount": 3,
+        "layer1Patches": 1,
+        "layer1Resolved": 0
+      },
+      "outputs": {
+        "file": "mx-allabout-network-report.md",
+        "sha256": "9dd543863b97a5417b113909083cd54d2184c38390c22b98d65a33abbd2379a0",
+        "patchesApplied": 0,
+        "patchesSkipped": 2,
+        "unfixableCount": 0
+      },
+      "rubricHash": "acc0c5928b434a9612422edc74f6213e4c00b6d8a2384fb1645205c78bbaf183",
+      "promptHash": "05fdc9410ebfcb61165b9a332e699c643f762c2510933408acc11492ea135d13",
+      "inputHashes": [
+        {
+          "hash": "9dd543863b97a5417b113909083cd54d2184c38390c22b98d65a33abbd2379a0",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"**Finding:** Security headers absent: HSTS, CSP, X-Frame-Options, X-Content-Type-Options (Site‑wide). Missing security headers increase exposure to content injection and clickjacking\",\n      \"findingIndex\": 1,\n      \"justification\": \"scope: rewrote site-wide to across the audited set\",\n      \"replace\": \"**Finding:** Security headers absent: HSTS, CSP, X-Frame-Options, X-Content-Type-Options (across the audited set). Missing security headers increase exposure to content injection and clickjacking\"\n    },\n    {\n      \"find\": \"- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site‑wide once configured.\",\n      \"findingIndex\": 2,\n      \"justification\": \"scope: rewrote site-wide to across the audited set",
+      "outcome": "pass",
+      "notes": "inputTok=21831 outputTok=1762 layer1=1 layer2applied=0 layer2skipped=2 unfixable=0 hygiene=0 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-12T07:30:31.939Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 11,
+        "autoFixApplied": 0,
+        "escalated": 11,
+        "trailRecorded": 0,
+        "trailRemoved": 0,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
+      "outcome": "pass"
+    }
+  ]
+}
