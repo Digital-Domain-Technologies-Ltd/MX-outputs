@@ -4,7 +4,7 @@ description: "did:web:reginald.allabout.network is live against the vNext worker
 author: "Tom Cranstoun"
 created: 2026-06-12
 modified: 2026-06-12
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -31,6 +31,8 @@ mx:
 REGINALD vNext is now live on the production hostname. did:web:reginald.allabout.network resolves against the vNext worker's DID document, and the vNext registry API answers at reginald.allabout.network/v1/*. The cutover was done with two path-scoped Cloudflare routes rather than the full-host swap originally specified, because investigation showed the hostname also carries live book-sales revenue (Stripe webhook, checkout, emailed download links) on a different worker - a full swap would have broken it. The principal partner leading the vNext track is unblocked on his next step without needing any new account permissions.
 
 In parallel, the audit pipeline's final integrity check - reading every claim in the report against the evidence the audit collected - now runs as compute inside the pipeline, before the PDF is rendered (on the cog path, by operator contract). Its first live run against a new external domain caught six classes of defect in our own instrumentation, every one fixed in the crawler, the gates, or the template rather than in the report; the Balanced Scorecard's human-experience grades now derive from measured data instead of template-asserted "Excellent" rows; and a macOS-specific storage hazard (folders named after .app hostnames rendering as application bundles in Finder) was closed at the slug-derivation source.
+
+A third thread refreshed the business-development surface. A contact-agnostic capability update now exists for partners and prospects (Olivier Dobberkau, Chris Bryce, Jonathan Healey, and others), carrying the six weeks of shipped capability since the Frankfurt summit; the investor, team, and Gathering sponsor pitches were brought current with the same facts in per-audience framing; and the CRM caught up with reality on IDHL - the sponsorship record on Jonathan Healey's contact and a new contact for Liam Goldfinch, the IDHL practitioner whose Kentico MVP Summit talk independently argued the specifications-over-prompts thesis.
 
 ---
 
@@ -63,6 +65,14 @@ The Balanced Scorecard's UX / Navigation and Trust and Credibility rows were har
 ### 7. Finder-safe storage slugs
 
 A folder named after a .app hostname renders as an application bundle in macOS Finder. The hostSlug derivation moved to a single tested SSOT (mx-reginald/audit/lib/host-slug.js): hostnames whose final label is a bundle extension carry a .d directory suffix in the storage slug (atmors.netlify.app keys atmors.netlify.app.d), client filenames strip the guard, the existing delivery was renamed and regenerated with consistent paths, and the rule is saved to project memory. The architecture cog and audit cogs were brought current with the slug SSOT and the gate.
+
+### 8. Pitch family refreshed with the six-week capability story
+
+A reusable, contact-agnostic update (mx-crm/outreach/update.md) tells partners and prospects what shipped in the six weeks since Frankfurt, in three outcome-led sections: the audit a client can defend (vendor attribution, template-level accessibility findings, refusal-as-finding, byte-identical re-runs), the evidence chain every deliverable carries, and the air-gapped local-model delivery for regulated sectors. Frankfurt gets one passing mention; REGINALD is deliberately absent; the regulatory legal disclaimer rides the first named-legislation mention. The same facts landed in the live pitches in per-audience framing: the investor pitch's determinism-moat, evidence-chain, local-inference, and traction sections; the team pitch's audit, regulated-audit, and REGINALD product lines; and the Gathering sponsor pitch in vendor-neutral language only, per the audience-split rule. All four files then went through the full humanizer pass - scanner-clean apart from confirmed exemptions (house idiom, deliberate anaphora, the "Worth being up close to" signature line).
+
+### 9. CRM caught up with IDHL reality
+
+Jonathan Healey's contact record was upgraded from "Prospect" to founding sponsor of The Gathering (confirmed 11 May; paperwork still outstanding, now an open item). A new contact records Liam Goldfinch: IDHL practitioner, Kentico MVP, attended the 8 April Leeds MX presentation, and presented an AI-assisted website-rebuild case study at the Kentico MVP Summit in Brno whose stated conclusion - structured context and specifications beat clever prompting - is the MX thesis arrived at independently from the delivery floor. He is a second thread into the sponsor relationship and a candidate for Gathering draft review.
 
 ---
 
@@ -109,9 +119,10 @@ REGINALD's trust story rests on a verifier resolving did:web:reginald.allabout.n
 | Hash | Description |
 |------|-------------|
 | e41b42f3 | REGINALD vNext cutover: record path-split routing for reginald.allabout.network |
-| 17e7c902 | Parallel session work swept in: humanizer structure scanner, CRM contacts, agent-wallet draft, page-lander template, manuscripts |
+| 17e7c902 | Parallel session work swept in: humanizer structure scanner, CRM contacts (Healey sponsorship record, Goldfinch contact), agent-wallet draft, page-lander template, manuscripts |
 | aad9a5e4 | Audit pipeline: pre-PDF claims-vs-evidence cross-check gate; evidence-accuracy fixes |
-| dfb59a34 | Cross-check hardening: cache schema v2, tested core lib, data-derived scorecard grades |
+| dfb59a34 | Cross-check hardening: cache schema v2, tested core lib, data-derived scorecard grades (also swept in: outreach capability update, pitch-family refresh + humanizer pass) |
+| b9ad7de3 | REMINDERS: re-delete the review-docs pitch-family item (resurrected by a concurrent snapshot) |
 | 4e644851 | Required mx fields on the cross-check prompt files (Gate 10) |
 | 4dc3f15a | Finder-safe hostSlug: .d guard for macOS bundle-extension TLDs |
 | 5bb7bc61 | Intent CMS PRD: generator schema.org href canonicalisation and ASCII-quote emission |
