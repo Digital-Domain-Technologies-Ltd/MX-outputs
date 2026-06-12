@@ -21,6 +21,16 @@ pagesAudited: 7
 version: "1.0"
 confidential: true
 mx:
+  generate:
+    script: "scripts/bin/mx.pdf.sh"
+    format: "pdf"
+    output: "mx-outputs/audit/2026-05-16/allabout.network/allabout-network-report.pdf"
+    description: "Generate PDF audit report for allabout-network"
+  maintainer: info@cognovamx.com
+  stability: stable
+  partOf: mx-audit
+  purpose: "Executive machine-readiness audit for Allabout covering accessibility, performance, SEO, structured data, and AI agent compatibility."
+  x-mx-contextProvides: ["web audit findings for Allabout", "WCAG accessibility assessment", "AI agent compatibility scores", "SEO and structured data analysis", "machine readiness recommendations"]
   status: active
   contentType: audit-report
   audience: [humans, machines]

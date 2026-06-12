@@ -21,6 +21,11 @@ pagesAudited: 7
 version: "1.0"
 confidential: true
 mx:
+  maintainer: info@cognovamx.com
+  stability: stable
+  partOf: mx-audit
+  purpose: "Executive machine-readiness audit for Www Bollants covering accessibility, performance, SEO, structured data, and AI agent compatibility."
+  x-mx-contextProvides: ["web audit findings for Www Bollants", "WCAG accessibility assessment", "AI agent compatibility scores", "SEO and structured data analysis", "machine readiness recommendations"]
   status: active
   contentType: audit-report
   audience: [humans, machines]

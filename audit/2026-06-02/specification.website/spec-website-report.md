@@ -7,6 +7,8 @@ modified: 2026-04-03
 version: "2.0"
 
 mx:
+  maintainer: info@cognovamx.com
+  partOf: mx-audit
   status: active
   contentType: report
   audience: [humans]

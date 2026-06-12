@@ -21,6 +21,16 @@ pagesAudited: 10
 version: "1.0"
 confidential: true
 mx:
+  generate:
+    script: "scripts/bin/mx.pdf.sh"
+    format: "pdf"
+    output: "mx-outputs/audit/2026-05-14/neomwellbeing-com/neomwellbeing-com-report.pdf"
+    description: "Generate PDF audit report for neomwellbeing-com"
+  maintainer: info@cognovamx.com
+  stability: stable
+  partOf: mx-audit
+  purpose: "Executive machine-readiness audit for Neomwellbeing covering accessibility, performance, SEO, structured data, and AI agent compatibility."
+  x-mx-contextProvides: ["web audit findings for Neomwellbeing", "WCAG accessibility assessment", "AI agent compatibility scores", "SEO and structured data analysis", "machine readiness recommendations"]
   status: active
   contentType: audit-report
   audience: [humans, machines]
