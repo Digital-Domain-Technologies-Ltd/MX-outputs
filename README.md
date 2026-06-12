@@ -21,11 +21,11 @@ Build artefacts, reports, and generated outputs organised by media type.
 | Type | Files | Description |
 |------|-------|-------------|
 | [pdf/](pdf/) | 79 | PDFs — books, reports, manuals, presentations |
-| [md/](md/) | 290 | Markdown — reports, audit results, presentations |
+| [md/](md/) | 291 | Markdown — reports, audit results, presentations |
 | [html/](html/) | 91 | HTML — blogs (with CSS/SVG), audit baselines |
 | [json/](json/) | 2 | JSON — audit comparison data |
 | [pptx/](pptx/) | 14 | PowerPoint — presentation source files |
-| **Total** | **1093** | |
+| **Total** | **1094** | |
 
 ---
 
@@ -138,9 +138,9 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-what-why-when.md`](md/presentations/MX-what-why-when.md)
 - [`MX-what-why-when.pptx`](md/presentations/MX-what-why-when.pptx)
 
-### md/reports/ (277 files)
+### md/reports/ (278 files)
 
-#### md/reports/completions/ (26 files)
+#### md/reports/completions/ (27 files)
 
 - [`session-summary-2026-02-10T17-49.md`](md/reports/completions/2026-02-10/session-summary-2026-02-10T17-49.md)
 - [`session-summary-2026-02-11T09-00.md`](md/reports/completions/2026-02-11/session-summary-2026-02-11T09-00.md)
@@ -154,6 +154,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
 - [`MX-HUB-UPDATES-2026-03-19.md`](md/reports/completions/2026-03-19/MX-HUB-UPDATES-2026-03-19.md)
 - [`TEMPLATE-UPDATE-SUMMARY.md`](md/reports/completions/2026-03-19/TEMPLATE-UPDATE-SUMMARY.md)
 - [`session-summary-evening-artefact-lifecycle.md`](md/reports/completions/2026-06-11/session-summary-evening-artefact-lifecycle.md)
+- [`session-summary-evening-bizdev.md`](md/reports/completions/2026-06-12/session-summary-evening-bizdev.md)
 - [`README.md`](md/reports/completions/README.md)
 - [`README.md`](md/reports/completions/_archive/2026-02-04/README.md)
 - [`completion-system-creation.md`](md/reports/completions/_archive/2026-02-04/completion-system-creation.md)
@@ -173,6 +174,7 @@ Markdown documents — session reports, audit results, Reginald documentation.
   - **2026-02-13/** (2 files)
   - **2026-03-19/** (5 files)
   - **2026-06-11/** (1 files)
+  - **2026-06-12/** (1 files)
   - **_archive/** (13 files)
 
 #### md/reports/directors/ (247 files)
@@ -584,4 +586,4 @@ PowerPoint presentation source files.
 
 ---
 
-*Generated on 2026-06-12 at 18:57*
+*Generated on 2026-06-12 at 20:54*
