@@ -4,7 +4,7 @@ description: "Expanded the humanizer AI-tell catalogue, wired new patterns into 
 author: "Tom Cranstoun"
 created: 2026-06-13
 modified: 2026-06-13
-version: "1.7"
+version: "1.8"
 
 mx:
   status: active
@@ -269,6 +269,34 @@ Three generated indexes went stale after the merge (routing-registry.json, docum
 
 ---
 
+## Update - PR #31 Merge: OKF Positioning
+
+### Context
+
+Google announced the Open Knowledge Format (OKF) - a machine-readable content standard built on markdown and YAML linked into a graph. OKF validates the readable layer MX is built on and leaves the trust and governance layers open. PR #31 reshapes the MX pitch and commercial framing around that gap and delivers the content set that lands it.
+
+### What was delivered
+
+**`mx-canon/ssot/papers/okf-mx-positioning-prd.md`** (214 lines) - OKF positioning PRD. Leads the pitch with trust, not readability (readability is now table stakes since OKF ships it). COG positioned as OKF-compatible; REGINALD as the trust wrapper OKF omits; The Gathering as the governance OKF cannot be. Includes the OKF-bridge engagement model, EAA forcing function, competitive landscape (C2PA, W3C VCs, Schema.org, specification.website), customer journeys, resourcing (Salva for REGINALD, Dogu for The Gathering), and 30/60/90-day success criteria.
+
+**Three blog drafts** (in `blog-drafts/`, authored outside the Intent CMS per instruction):
+
+- `google-shipped-a-knowledge-format.md` - Post 1, the announcement. Time-sensitive; leads on what OKF is, what it validates, and what it leaves open for MX to fill.
+- `cog-to-okf-field-mapping.md` - Post 2, the field-by-field mapping. Marked draft/experimental pending Salva's validation of the correspondences.
+- `mx-protocols-is-here.md` - MX Protocols launch note (1 July), led with OKF framing. Price/ISBN left as pre-publish TODO.
+
+**`REMINDERS.md`** updated with OKF follow-up items (publication sequence, Salva field-mapping validation, Dogu intro).
+
+### Gate fix on merge
+
+`blog-drafts/` is a new directory introduced by this PR. Gate 7 (orphan directories) blocked the push because it lacked `.mx.yaml.md`. Fixed by running `npm run mx:heal -- --orphans --apply`, enriching the generated skeleton with the folder's actual purpose (staging area for pre-promote drafts before moving to `datalake/draft-site/blog/`), and committing (`3d25ca22`).
+
+### Strategic note
+
+OKF changes the pitch order. Before OKF: lead with machine-readability, then build to trust. After OKF: machine-readability is assumed (Google shipped it); the pitch opens on trust, governance, and regulatory evidence. REGINALD and The Gathering are now the differentiators, not the format itself. This is the first time a major platform move has made MX's positioning sharper rather than more complicated.
+
+---
+
 ## Commit Log
 
 | Hash | Description |
@@ -289,3 +317,6 @@ Three generated indexes went stale after the merge (routing-registry.json, docum
 | 3e0f5929 | merge: resolve package.json conflict - combine check-llm-queue and test-ai-citation-matrix |
 | 7b90191c | docs: changelog v3.42 and bump mx-outputs for PR #29 session |
 | 7afbfcae | chore: regenerate stale indexes after PR #30 merge (ai-citation-matrix) |
+| 4c98ae1c | Merge pull request #31 - OKF positioning PRD and blog drafts |
+| 61d37278 | chore: regenerate stale indexes after PR #31 merge (OKF positioning) |
+| 3d25ca22 | fix(gate-7): add .mx.yaml.md to blog-drafts/ (PR #31 introduced dir) |
