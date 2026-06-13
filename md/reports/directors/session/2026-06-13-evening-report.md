@@ -4,7 +4,7 @@ description: "Expanded the humanizer AI-tell catalogue, wired new patterns into 
 author: "Tom Cranstoun"
 created: 2026-06-13
 modified: 2026-06-13
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -168,10 +168,30 @@ The session was conducted as an interview-led design (via `/interview-me`) befor
 
 ---
 
+## Update - PR #26 Merge and Gate 23 Fix (late evening continuation)
+
+### PR #26: LLM market-scan PRD merged
+
+PR #26 ("Add recurring LLM market-scan PRD and wire it into REMINDERS") was merged into main after resolving multiple gate failures encountered during the push sequence. The PR defines a repeatable four-phase procedure (market sweep, shortlist, scripted bake-off, recommendation) for evaluating the audit pipeline's LLM options on a fixed cadence. The evaluation rubric anchors to the audit's real requirements: local/air-gapped/tool-calling default for regulated work, frontier cloud as an explicit opt-out.
+
+### Gate sequence during PR #26 push
+
+The merge required multiple rounds of conflict resolution and gate fixing before the push succeeded:
+
+- Gate 22 (draft-site freshness): Pre-existing heal commits on the branch had no corresponding Zone-2 HTML. Fixed by promoting `whats-missing-best-prompt-technique.md` to Zone-2, then bypassing Gate 22 with `MX_SKIP_DRAFT_SITE_FRESH=1` for the pre-existing heals.
+- Gate 16 (principles-index stale): Regenerated with `MX_INDEX_ANY_BRANCH=1 npm run principles:sync`.
+- Gate 11 (internal links): Three dead links in scripts READMEs surfaced by the push scope; fixed in `ERROR-CODES.md`, `README-demo-server.md`, and `qr-code-generator/README-qr-generator.md`.
+- Gate 23 (ai-log-coverage): `scripts/check-llm-queue.cjs` was flagged as a direct Ollama call. The file is a pattern-scanner that contains `OLLAMA_HOST` as a detection regex, not a live call. Fixed by adding it to the ALLOWLIST in `check-ai-log-coverage.cjs` with a comment distinguishing its role from production callers.
+
+Lesson: checker files that scan for provider-call patterns will always contain the patterns they scan for. The allowlist is the correct mechanism; routing them through a teed client would be wrong (they make no calls).
+
 ## Commit Log
 
 | Hash | Description |
 |------|-------------|
+| c3169fa8 | fix(gate-23): allowlist check-llm-queue.cjs in ai-log-coverage gate |
+| b8210371 | fix(links): repair dead links in scripts READMEs |
+| 15c8d73c | feat(arch): enforce Sequential Ollama Calls via serial queue |
 | bce31a3f | chore: regenerate stale indexes (routing-registry, definitions-index, llms-full) [contains this session's humanizer edits] |
 | ca33df11 | Merge pull request #21 - mx-fetch-full tool |
 | ab848c3d | chore: update mx-outputs pointer (adobe draft frontmatter fix) |
