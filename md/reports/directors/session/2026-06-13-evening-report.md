@@ -4,7 +4,7 @@ description: "Expanded the humanizer AI-tell catalogue, wired new patterns into 
 author: "Tom Cranstoun"
 created: 2026-06-13
 modified: 2026-06-13
-version: "1.5"
+version: "1.6"
 
 mx:
   status: active
@@ -212,6 +212,32 @@ The CHANGELOG and LEARNINGS updates from the previous step-document run were on 
 
 - CHANGELOG v3.41: PR #26 entry (LLM market-scan PRD, Gate 23 fix) + PR #28 entry
 - LEARNINGS: checker-script false-positive pattern rule
+
+## Update - PR #29 Merge: Google GEO Guidance Probe and Grounding Audit
+
+### What was built
+
+PR #29 ("Add Google generative-AI-search guidance probe and grounding audit") adds deterministic signal detection plus an optional local-LLM grounding pass for Google's June 2026 generative-AI-search optimisation guidance.
+
+**New audit probes:**
+
+- `mx-reginald/audit/bin/check-geo-guidance.js` (453 lines) - deterministic homepage probe. Scans HTML, robots.txt, and response headers against Google's June 2026 guidance signal set. Separates debunked tactics (llms.txt pointers, AI-chunking markers, AI-only alternates, excess JSON-LD blocks) from durable fundamentals (crawlability, indexability, canonical declaration, visible word count, outbound source count, semantic structure). Derives an alignment verdict: `aligned`, `partial`, or `fundamentals-gap`. Caches with TTL and version tracking; outputs `results/geo_guidance.json`.
+
+- `mx-reginald/audit/bin/geo-grounding-llm.js` (233 lines) - optional local-LLM companion. Judges whether page claims are grounded in cited sources. Runs against Ollama by default; soft-skips when unavailable. Up to 5 pages configurable. Outputs `results/geo_grounding_llm.json` summary + `results/geo_grounding_llm.jsonl` sidecar per finding.
+
+**Supporting materials:** `system-prompts/geo-grounding.system.md`, `user-messages/geo-grounding.user.md`, `templates/seeds/geo-guidance-myths.json` (reference data cataloguing debunked tactics with Google quotes), unit tests.
+
+**Pipeline integration:** `check-geo-guidance.js` wired into Phase 1 after the AI-usage check; `geo_guidance.json` passed to Phase 2 for context.
+
+**Blog draft:** `datalake/draft-site/blog/google-named-geo-then-debunked-it.md` - explains Google's June 2026 guidance, what it debunks, and how MX provenance fills the gap. Updated blog index and two existing GEO/MX posts with cross-references.
+
+### Design principle
+
+All signal detection is regex-based enumerated rules with no inference. The grounding judgment (are claims actually supported by cited sources?) is the only LLM-driven step, and it is optional and soft-skips gracefully. The probe implements Google's guidance literally - debunked tactics surface as `info` severity, not failures; durable fundamentals are the ones that warn or fail when absent.
+
+### Gate fix on merge
+
+`mx-reginald/audit/user-messages/geo-grounding.user.md` was missing three required fields (`mx.purpose`, `mx.stability`, `mx.x-mx-contextProvides`). Fixed on main before push.
 
 ## Commit Log
 
