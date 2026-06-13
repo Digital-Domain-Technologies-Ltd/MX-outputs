@@ -4,7 +4,7 @@ description: "Expanded the humanizer AI-tell catalogue, wired new patterns into 
 author: "Tom Cranstoun"
 created: 2026-06-13
 modified: 2026-06-13
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -101,6 +101,26 @@ The humanizer is the last line of defence before client-facing prose ships. A ca
 
 - Consider a dedicated `scan-scaffolds.mjs` for structural scaffolds (agree-then-pivot, hollow frames, critique scaffolds) as the list grows - the current bridging-cliché row in `scan-prose-patterns.mjs` is becoming long.
 - Run `/humanizer` on the next client-facing deliverable to validate the new patterns fire in a real document.
+
+---
+
+## Update — Skills Session (later evening)
+
+### New skill: step-document
+
+Added `.claude/skills/step-document/skill.md`. Runs the documentation subset of the step-commit workflow (directors report, REMINDERS, documentation review, LEARNINGS, session-docs-check) without touching git, submodules, compliance gates, or the push. The skill reads step-commit on entry and applies an include/exclude test based on the nature of each step's work - no hard-coded step labels - so it tracks step-commit automatically as the workflow evolves.
+
+### New skill: eliminate-numbers
+
+Added `.claude/skills/eliminate-numbers/skill.md`. Removes numbered sequences from any file where the numbers are labels rather than meaning. Target named in the prompt; infers from session context if omitted. Frames the principle explicitly: numbers used only as labels create maintenance debt every time the list changes - names do not. Applies to skills, cogs, documents, and any other file with a numbered sequence.
+
+### step-commit skill: number elimination and directors report fix
+
+Applied `/eliminate-numbers` to step-commit itself. All numbered step cross-references in prose were replaced with the step's name (e.g. "Step 3" became "the main-repo commit step"; "Step 8" became "the MX field compliance gate"). The git-hashes requirement was also removed from the directors report step - the report does not need commit hashes to be generated.
+
+### Memory: numbers-as-labels principle
+
+Saved `feedback_eliminate_numbers_principle.md` to device and repo memory so future sessions default to named references in sequences.
 
 ---
 
