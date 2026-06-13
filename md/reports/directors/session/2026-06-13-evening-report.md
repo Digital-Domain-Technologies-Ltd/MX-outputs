@@ -4,7 +4,7 @@ description: "Expanded the humanizer AI-tell catalogue, wired new patterns into 
 author: "Tom Cranstoun"
 created: 2026-06-13
 modified: 2026-06-13
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -124,8 +124,30 @@ Saved `feedback_eliminate_numbers_principle.md` to device and repo memory so fut
 
 ---
 
+## Update - PR Sequencing Session (late evening)
+
+### PR #21 and PR #18 sequenced and merged
+
+Tom selected the two oldest open PRs to merge first. Both had conflicts with main that required local resolution before merge.
+
+**PR #21 - mx-fetch-full tool:** Added `scripts/bin/mx-fetch-full.cjs`, a 464-line CLI that fetches raw HTML and extracts all machine-readable artefacts (JSON-LD, meta tags, link rels, heading outline) without truncation. Classifies pages into three render-cost rungs. Optional `--rendered` flag diffs raw vs browser-rendered DOM. Optional `--discovery` flag probes origin-level files. Also added a draft blog post (`what-machines-hit-when-they-fetch.md`) and handbook sections in three chapters explaining that the raw HTTP fetch is the agent's default and that page architecture decides what agents can read without rendering.
+
+**PR #18 - drop doc synonym:** Terminology sweep replacing the "doc" business synonym with "cog" across all audiences. Added BDR 005 (`2026-06-05-doc-to-cog-rename.cog.md`) recording the decision to retire "MX Docs"/"doc" and fold the "MX Docs Ready" badge into the existing "MX Compatible" mark.
+
+**Pre-existing failures fixed along the way (CLAUDE.md rule):** The merge process surfaced pre-existing gate failures that were fixed as part of the work: missing `mx.x-mx-contextProvides` on seven repo-audit, vnext, and mx-os files; corrupted MX-SOURCE-FRONTMATTER YAML in the adobe blog draft HTML (a `$1.9bn` value had been corrupted to `<meta name="mx:cog">1.9bn` by the cog-header hook); missing `mx.purpose`/`mx.stability`/`mx.runbook` on four script README and vnext files; and BDR-005 cog was an island in the documentation graph (fixed by wiring it to `decision-record-index`).
+
+---
+
 ## Commit Log
 
 | Hash | Description |
 |------|-------------|
 | bce31a3f | chore: regenerate stale indexes (routing-registry, definitions-index, llms-full) [contains this session's humanizer edits] |
+| ca33df11 | Merge pull request #21 - mx-fetch-full tool |
+| ab848c3d | chore: update mx-outputs pointer (adobe draft frontmatter fix) |
+| aec77261 | fix(metadata): add missing mx.x-mx-contextProvides to repo-audit and vnext files |
+| c68935f9 | chore(merge): resolve conflicts merging PR#21 mx-fetch-full into main |
+| 0f107ae2 | chore(merge): resolve conflicts merging PR#18 drop-doc-synonym into main |
+| fd80b67b | fix(metadata): add missing mx fields to vnext and scripts READMEs |
+| 239058e2 | fix(docmap): add refersTo edges to BDR-005 cog |
+| 02f31f96 | fix(docmap): use decision-record-index edge on BDR-005 to join graph |
