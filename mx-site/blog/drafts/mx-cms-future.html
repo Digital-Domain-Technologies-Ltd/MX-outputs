@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+
+title: "The CMS We're Building"
+description: "Blog post on building a CMS with MCP as primary interface using the entity asset layer"
+author: Tom Cranstoun
+created: 2026-01-15
+modified: 2026-02-09
+version: "1.0"
+
+mx:
+  x-mx-contentState: draft
+  contentType: blog-post
+  status: draft
+  movedFrom: "mx-crm/mx-cms-future-blog.md"
+  movedDate: 2026-02-14
+  purpose: "Draft blog post for the mx-site."
+  stability: draft
+  runbook: "Draft source for the mx-site blog. Promote via npm run promote to publish."
+  x-mx-contextProvides: ["Blog post draft: The CMS We're Building"]
+  audience: [humans, machines]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/mx-cms-future.md
+  blogUrl: https://mx.allabout.network/blog/drafts/mx-cms-future.html
+  blogFilename: mx-cms-future
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="How the future CMS works with MCP, Agent APIs, and modular EALs to serve the agent-driven web.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://allabout.network/blogs/mx/mx-cms-future.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://allabout.network/blogs/mx/mx-cms-future.html">
+  <meta property="og:title" content="The CMS We're Building - and How the Entity Asset Layer Makes It Possible | CogNovaMX">
+  <meta property="og:description" content="How the future CMS works with MCP, Agent APIs, and modular EALs to serve the agent-driven web.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2025-01-24">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The CMS We're Building - and How the Entity Asset Layer Makes It Possible | CogNovaMX">
+  <meta name="twitter:description" content="How the future CMS works with MCP, Agent APIs, and modular EALs to serve the agent-driven web.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="The CMS We're Building - and How the Entity Asset Layer Makes It Possible">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://allabout.network/blogs/mx/mx-cms-future.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The CMS We're Building - and How the Entity Asset Layer Makes It Possible | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "The CMS We're Building - and How the Entity Asset Layer Makes It Possible",
+        "headline": "The CMS We're Building - and How the Entity Asset Layer Makes It Possible",
+        "description": "How the future CMS works with MCP, Agent APIs, and modular EALs to serve the agent-driven web.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2025-01-24",
+        "dateModified": "2025-01-24",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://allabout.network/blogs/mx/mx-cms-future.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 2207,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://allabout.network/blogs/mx/mx-cms-future.html",
+        "name": "The CMS We're Building - and How the Entity Asset Layer Makes It Possible",
+        "url": "https://allabout.network/blogs/mx/mx-cms-future.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">The CMS we're building uses MCP as its primary interface, designing pages for both humans and machines in one pot - this is Machine Experience.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#where-were-heading">Where We're Heading</a></li>
+        <li><a href="#what-your-digital-passport-enables">What Your Digital Passport Enables</a></li>
+        <li><a href="#how-machine-experience-works-in-practice">How Machine Experience Works in Practice</a></li>
+        <li><a href="#how-content-operations-evolution-supports-this">How Content Operations Evolution Supports This</a></li>
+        <li><a href="#building-blocks-of-data-sovereignty">Building Blocks of Data Sovereignty</a></li>
+        <li><a href="#assessing-your-foundation">Assessing Your Foundation</a></li>
+        <li><a href="#why-now-is-the-right-time">Why Now Is the Right Time</a></li>
+        <li><a href="#your-first-steps">Your First Steps</a></li>
+        <li><a href="#the-path-forward">The Path Forward</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="2207">
+        <header class="article-header">
+          <h1>The CMS We're Building - and How the Entity Asset Layer Makes It Possible</h1>
+          <div class="article-meta"
+               data-published="2025-01-24"
+               data-modified="2025-01-24"
+               data-reading-time="12 min">
+            <time datetime="2025-01-24">24 January 2025</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>12 min read</span>
+          </div>
+        </header>
+
+
+<h2 id="where-were-heading" tabindex="-1">Where We're Heading</h2>
+<p>The web is evolving to serve machines alongside humans. Search engines parse content. Screen readers navigate it. Translation tools process it. Content aggregators remix it. API consumers transform it. AI agents use it as context. With UCP and other technologies accelerating adoption, machines will become the primary consumers very quickly.</p>
+<p>This demands a CMS architecture where machines are the primary interface, content flows from existing data sources, and a Digital Passport brokers between agents and your subsystems. The CMS we're building pulls from data lakes, exposes modular components through Agent APIs, and produces output designed for both audiences in one pot. This is Machine Experience.</p>
+<p>This evolution demands a new architectural approach built on your Digital Passport - the Entity Asset Layer (EAL). Your Digital Passport is a shared, independent database that travels from agent to agent. It's not owned by an AI provider like Google or OpenAI. It's not owned by a CMS provider like Adobe or Shopify. It belongs to you. Your EAL brokers between agents and your subsystems, acting as a connector between your existing systems and requesting agents.</p>
+<p>Your EAL is modular - it integrates only the subsystems your entity needs:</p>
+<p><strong>Identity</strong> - who you are, your core attributes, your defining characteristics. Every entity needs this foundation.</p>
+<p><strong>Reputation</strong> - verified reviews, trust scores, customer history that you control. Commerce entities integrate this; content platforms might not need it.</p>
+<p><strong>Knowledge</strong> - your ontologies, taxonomies, product classifications, domain expertise. Libraries, educational platforms, and content hubs use this; personal sites might not.</p>
+<p><strong>Transactional data</strong> - pricing, availability, terms, the specifics agents need to complete a journey. Online stores require this; informational sites don't.</p>
+<p>When an agent encounters you, it reads your EAL. Your EAL exposes exactly what you've integrated - no guessing, no inference. An individual shows Identity. A library shows Identity and Knowledge. An e-commerce platform shows all four. Each entity builds the subset it needs, and your EAL brokers access between agents and your subsystems.</p>
+<figure>
+  <object type="image/svg+xml"
+          data="modular-eal-subsystems-by-entity-type.svg"
+          width="800"
+          height="400"
+          class="diagram"
+          title="Modular Eal Subsystems By Entity Type">
+    <p>Diagram not available</p>
+  </object>
+  <figcaption>Modular Eal Subsystems By Entity Type</figcaption>
+</figure>
+<p>Content teams often reach for components based on visual appeal rather than semantic meaning. Someone grabs the bio component to build an article header because they like the look of it. The machine sees a biography where there's actually a news headline. It looks right to human eyes, but the semantic structure tells a different story. This behavior shows us why explicit metadata matters - we can't rely on visual similarity to communicate meaning to machines.</p>
+<h2 id="what-your-digital-passport-enables" tabindex="-1">What Your Digital Passport Enables</h2>
+<p>This is the world I'm writing about in The MX Book. Machines are now first-class users of the web. And unlike humans, they fail silently.</p>
+<p>When an AI agent encounters parsing errors or ambiguous structure, it doesn't retry. It doesn't call support. It doesn't leave a trace in your analytics. It fails once, times out, and disappears. Silent failures are invisible failures - you never know you lost the transaction.</p>
+<figure>
+  <object type="image/svg+xml"
+          data="human-persistence-vs-agent-silent-failures.svg"
+          width="800"
+          height="400"
+          class="diagram"
+          title="Human Persistence Vs Agent Silent Failures">
+    <p>Diagram not available</p>
+  </object>
+  <figcaption>Human Persistence Vs Agent Silent Failures</figcaption>
+</figure>
+<p>Humans will retry, call support, use workarounds. They persist. Agents don't. This creates an opportunity: zero-tolerance parsing and explicit metadata become competitive advantages.</p>
+<p>There are now over a million models deployed. While frontier models like GPT-4 improve, 40% of models have fewer than 100 million parameters - edge agents, mobile agents, specialized agents. When you design for the worst agent rather than the best, you ensure universal compatibility across the entire model spectrum.</p>
+<p>Your EAL (Identity, Reputation, Knowledge, Transactional data) addresses this through modular integration. Each subsystem you've built becomes readable to every agent - from frontier models to edge devices with 100M parameters.</p>
+<p>Your assets reach agents when they survive the publication process. MX - Machine Experience - is the discipline of adding metadata and instructions so agents don't have to think or infer context. It's the bridge between Content Operations (where you build semantics) and Delivery (where agents consume them). With proper MX, your EAL exposes your subsystems intact to every platform and every agent.</p>
+<p>The EAL doesn't replace your existing systems. It sits between agents and the review databases, knowledge bases, pricing engines, and identity management you already have. It acts as a controlled interface, exposing exactly what each entity needs agents to see.</p>
+<figure>
+  <object type="image/svg+xml"
+          data="eal-as-broker-between-agents-and-subsystems.svg"
+          width="800"
+          height="400"
+          class="diagram"
+          title="Eal As Broker Between Agents And Subsystems">
+    <p>Diagram not available</p>
+  </object>
+  <figcaption>Eal As Broker Between Agents And Subsystems</figcaption>
+</figure>
+<h2 id="how-machine-experience-works-in-practice" tabindex="-1">How Machine Experience Works in Practice</h2>
+<p>The CMS we're building uses machines as its primary interface. Content creation happens through MCP (Model Context Protocol) - agents interact with the CMS directly, not through traditional editorial interfaces.</p>
+<p>Data flows from your existing sources. The CMS pulls from your data lake for core content. EAL subsystems may join to that data lake, or they might use simpler systems - JSON files, spreadsheets, structured documents. The requirement is MX compliance, not architectural complexity. A blog might use JSON files for Identity and Knowledge. An enterprise platform might integrate full database systems.</p>
+<p>The CMS generates pages built for both audiences in one pot. This is Machine Experience - pages designed primarily for agent parsing whilst remaining human-readable. Zero-tolerance structure. Explicit metadata. No inference required. Humans see the content. Machines read the structure. Both audiences served by the same output.</p>
+<figure>
+  <object type="image/svg+xml"
+          data="machine-experience-one-pot-for-both-audiences.svg"
+          width="800"
+          height="400"
+          class="diagram"
+          title="Machine Experience One Pot For Both Audiences">
+    <p>Diagram not available</p>
+  </object>
+  <figcaption>Machine Experience One Pot For Both Audiences</figcaption>
+</figure>
+<p>The CMS exposes an Agent API - a structured endpoint where agents query your EAL and receive machine-readable responses. As machine consumption rises, the API becomes the primary interface. Agents query the EAL directly through MCP, receiving structured responses without rendering HTML first. The CMS manages access, permissions, and data transformation between requesting agents and your subsystems.</p>
+<p>You're building for both from the start. Pages serve humans through presentation and machines through structure. The shift is in proportion - initially more human readers, eventually more machine consumers - but the dual-purpose design remains constant.</p>
+<p>Your existing content operations feed this model. You're already building semantics in Content Ops. MX ensures those semantics survive publication. The EAL exposes them through whatever interface the requesting agent needs - rendered page, structured data, or direct API response.</p>
+<figure>
+  <object type="image/svg+xml"
+          data="mx-bridge-prevents-metadata-stripping.svg"
+          width="800"
+          height="400"
+          class="diagram"
+          title="Mx Bridge Prevents Metadata Stripping">
+    <p>Diagram not available</p>
+  </object>
+  <figcaption>Mx Bridge Prevents Metadata Stripping</figcaption>
+</figure>
+<h2 id="how-content-operations-evolution-supports-this" tabindex="-1">How Content Operations Evolution Supports This</h2>
+<p>Organizations using ontologies, formal vocabularies, taxonomies, or knowledge graphs are already building the foundation. You're thinking about meaning rather than presentation. These become your Knowledge assets.</p>
+<p>Organizations with dedicated content ops teams, content models, structured authoring, or metadata governance are treating content as data. You're building the Construction layer. MX becomes the bridge that prevents metadata stripping during publication.</p>
+<p>This evolution from Content Operations to MX to Delivery creates a pipeline where semantics survive. Metadata built during construction reaches agents during delivery. Nothing gets stripped. Nothing gets inferred. Everything stays explicit.</p>
+<h2 id="building-blocks-of-data-sovereignty" tabindex="-1">Building Blocks of Data Sovereignty</h2>
+<p>An EAL works when you truly control the subsystems it connects. Data sovereignty means you can move it, interpret it, audit it, and recreate it across any platform or agent - not just host it somewhere.</p>
+<p><strong>Complete export capability.</strong> Your EAL is complete when your CMS exports content with relationships, workflow states, version history, and rendering logic intact.</p>
+<p><strong>Migration without transformation.</strong> Your assets are sovereign when content moves between systems as-is, with meaning in the structure rather than the platform.</p>
+<p><strong>Machine-readable validation.</strong> Your Transactional assets are portable when automated tests verify content without running through your CMS.</p>
+<p><strong>Platform-independent reputation.</strong> Your Reputation assets are sovereign when reviews, ratings, and trust scores travel with you between platforms.</p>
+<p><strong>Metadata in the delivery mechanism.</strong> You've built the MX bridge when structured data from Content Ops reaches the HTML, JSON-LD, and API responses.</p>
+<p><strong>Schema in the content.</strong> Your Knowledge assets are sovereign when content structure is defined in the content itself, not CMS configuration.</p>
+<h2 id="assessing-your-foundation" tabindex="-1">Assessing Your Foundation</h2>
+<p>Understanding where you stand helps you build effectively toward an EAL.</p>
+<p><strong>Machine comprehension.</strong> Can machines read your content and understand what it means? Not just parse the HTML, but know which parts are headings, which are calls to action, which are legal disclaimers, which are temporary promotional messages. Can the worst agent - not just GPT-4 - parse your structure without inference?</p>
+<p><strong>Business logic location.</strong> When rules for what makes content valid, appropriate, or compliant exist in machine-readable formats rather than only in workflows or editors' heads - you can build a portable EAL. The machine can learn your constraints.</p>
+<p><strong>Vendor independence.</strong> When you can reconstruct your entire digital presence from your content exports - relationships, logic, constraints, verified reputation data, and context intact - your assets are sovereign.</p>
+<p><strong>Content model ownership.</strong> When you can describe your content structure in a format that any agent could consume - formats like JSON Schema, <a href="https://schema.org">Schema.org</a> - your information architecture travels with you.</p>
+<p><strong>Reputation data location.</strong> When reviews, trust scores, and reputation data live in your EAL rather than the platform's database - you own your Reputation assets. They travel with you during migration.</p>
+<h2 id="why-now-is-the-right-time" tabindex="-1">Why Now Is the Right Time</h2>
+<p>Your EAL, Data Sovereignty, and MX converge at exactly the right moment. The web is becoming machine-first. AI agents are becoming the primary way people interact with digital content. And agents fail silently.</p>
+<p>Building sovereign assets now means you're ready when the shift accelerates. When machines become primary content consumers, teams with EALs adapt in weeks. Your EAL determines whether agents recommend you, trust you, or acknowledge you exist.</p>
+<p>When you make your assets truly portable, when you prevent metadata stripping through proper MX - you're building the foundation for the agent-driven web.</p>
+<p>Silent failures mean competitive advantage for those who build correctly. You won't compete with organizations that never know they lost the transaction - it just times out and disappears from their potential revenue. You'll be visible whilst others vanish.</p>
+<h2 id="your-first-steps" tabindex="-1">Your First Steps</h2>
+<p>You don't need to rebuild everything. Start small, start specific, start where the value is clearest.</p>
+<p><strong>Document your content model in plain formats.</strong> Write down what your content types mean in JSON Schema, <a href="https://schema.org">Schema.org</a> markup, or similar. Not how your CMS stores them - what they represent. This is your first step toward sovereign Knowledge assets in your EAL.</p>
+<p><strong>Make one content type portable.</strong> Pick something simple - blog posts, product descriptions, team bios. Ensure you can export it with all its meaning intact and import it somewhere else without transformation. Learn what enables portability. This shows you where to build next.</p>
+<p><strong>Build the MX bridge.</strong> Take one piece of structured data that currently lives only in your Content Ops database. Surface it in your HTML as JSON-LD or microdata. Now machines can read it. Now it survives publication without metadata stripping. This is the MX discipline - making implicit context explicit for agents.</p>
+<p><strong>Centralize one Reputation asset.</strong> Pick reviews, ratings, or trust scores. Store them in a format and location that you control. Make them readable by any agent. This is your first integrated subsystem - data that travels with you, exposed through your EAL.</p>
+<p><strong>Map your dependencies.</strong> Identify where your Entity Assets rely on platform-specific features, proprietary markup, or vendor extensions. Each one shows you where to build portability next. Understanding the boundaries helps you expand them.</p>
+<p><strong>Test across agents.</strong> Feed your content to a screen reader, a translation API, a search engine crawler, or an AI agent. Learn what they understand. Learn what they miss. Design for the worst agent, not the best - because 40% of deployed models can't infer context the way frontier models can.</p>
+<p>These steps build your EAL incrementally. Each step reveals where your assets can become more sovereign, where metadata can survive better, where your subsystems can integrate more effectively. Once you see the opportunities, you can pursue them.</p>
+<h2 id="the-path-forward" tabindex="-1">The Path Forward</h2>
+<p>The CMS we're building changes the relationship between humans, content, and machines. It uses MCP as its primary interface. It maintains an EAL - your sovereign connector that brokers between agents and your subsystems. Machines query our EAL through Agent APIs, receiving exactly what we've integrated. MX prevents metadata stripping. Content stays sovereign and portable.</p>
+<p>We build for both audiences in one pot - humans read the presentation, machines read the structure. The proportion shifts as adoption grows, but the dual-purpose design remains constant. Teams building for machine consumers whilst maintaining human readability are shaping what comes next. The architecture exists in pieces across organizations now - data lakes, review systems, knowledge bases, pricing engines. The EAL integrates them. MCP exposes them. The future CMS manages the broker layer.</p>
+<p>I'm writing the MX Book to show you how to build this. Not the theory - the actual implementation. How to design for both audiences in one pot. How to structure MX-compliant data that survives publication. How to build EAL subsystems that integrate with your existing systems. How to prevent metadata stripping. How to design for the worst agent whilst serving humans.</p>
+<p>The framework is here. The architecture exists in pieces across your organisation. The book shows you how to bring them together. How to build pages that serve machines through structure and humans through presentation. How to make your content sovereign, portable, and visible to agents.</p>
+<p>If you're building the future of content, if you care about sovereignty, portability, and being visible to the agent-driven web, follow me on LinkedIn. This is where I share the journey, the drafts, and the frameworks as the book takes shape.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+</body>
+</html>
