@@ -64,7 +64,11 @@ Both features required storing the actual description string in the IDX payload 
 
 The action-cog (`scripts/cogs/content-dashboard.cog.md`) and the operator manual (`mx-canon/mx-maxine-lives/manuals/manual-content-dashboard.cog.md`) were updated to cover all three new features: version bumps, extended `x-mx-contextProvides`, new sections in the `usage` prose and the manual body. Both cogs validated clean.
 
-### 4. Audit batch deliverables
+### 4. Link-paths bug fix
+
+The link checker and fixer (`scripts/lib/link-paths.cjs`) had a latent bug: host-absolute URLs like `/about/contact.html` in markdown were treated as internal relative paths. `path.resolve(fileDir, '/about/contact.html')` ignores `fileDir` entirely and resolves from the filesystem root, so the fixer found no file there, searched the basename index, and relocated the link to the only `contact.html` in the repo - `mx-crm/dotfusion/data/contact.html`. The damage was caught by Gate 22 during the session-close push, which blocked until the bad rewrites were reverted. The root fix is a single guard in `resolveMarkdownTarget`: any `pathPart` starting with `/` is now returned as `external` immediately, leaving host-absolute web URLs untouched. All existing tests pass; the fix is live at `4b0410d3`.
+
+### 5. Audit batch deliverables
 
 A parallel session ran the audit pipeline for 11 domains and committed the results to mx-outputs: crowdfavorite.com, dkd.de-de, dotfusion.com, enhancely.ai, sibotacademy.pl-en, specification.website, stackoptic.com, typo3.com, typo3.org, www.contentful.com, www.dkd.de-de. Updates also landed for atmors and mx.allabout.network from re-runs. 284 files, ~31k lines.
 
@@ -110,6 +114,9 @@ The cockpit previously showed only web-content pipeline state. Adding Assets, PR
 | 07ee148f | feat(audit): deterministic debug library for collect-phase failures |
 | d47a8c38 | feat(check-library): deterministic MCP check library for Claude |
 | bc2c99dc | feat(mx-os): MX-aware universal editor PRD and prompt library |
+| 712caf5a | fix(gate-12): document /audit-debug skill in architecture cog |
+| bb1522ef | fix(links): revert bad contact.html rewrites in draft-site sources |
+| 4b0410d3 | fix(link-paths): treat host-absolute paths as external in markdown |
 
 </content>
 </invoke>
