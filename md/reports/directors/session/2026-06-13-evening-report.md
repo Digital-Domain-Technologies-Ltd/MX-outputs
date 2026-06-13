@@ -4,7 +4,7 @@ description: "Expanded the humanizer AI-tell catalogue, wired new patterns into 
 author: "Tom Cranstoun"
 created: 2026-06-13
 modified: 2026-06-13
-version: "1.4"
+version: "1.5"
 
 mx:
   status: active
@@ -184,6 +184,34 @@ The merge required multiple rounds of conflict resolution and gate fixing before
 - Gate 23 (ai-log-coverage): `scripts/check-llm-queue.cjs` was flagged as a direct Ollama call. The file is a pattern-scanner that contains `OLLAMA_HOST` as a detection regex, not a live call. Fixed by adding it to the ALLOWLIST in `check-ai-log-coverage.cjs` with a comment distinguishing its role from production callers.
 
 Lesson: checker files that scan for provider-call patterns will always contain the patterns they scan for. The allowlist is the correct mechanism; routing them through a teed client would be wrong (they make no calls).
+
+## Update - PR #28 Merge: EU Commission Code of Practice Blog Post
+
+### Content added
+
+PR #28 ("Add blog post on EU Commission's Code of Practice for AI-generated content marking") merged cleanly with no conflicts.
+
+**New draft source:** `datalake/draft-site/blog/the-commission-chose-open-standards.md`
+
+The post contextualises the European Commission's June 2026 voluntary Code of Practice on marking and labelling AI-generated content, which promotes open and interoperable standards (C2PA Content Credentials) rather than inventing a proprietary mechanism. Key editorial angles:
+
+- Article 50 mandatory obligations land 2 August 2026 - eight weeks from publish
+- The Commission's choice validates MX's founding bet on open standards and deference to existing specs (Dublin Core, Schema.org, EXIF, XMP, C2PA)
+- Watermarking (robustness after separation from context) and signed provenance (verifiable history that travels with the artefact) are complementary, not competing
+- The MX/C2PA complementarity: C2PA is media-bound cryptographic manifests; MX is provenance for any addressable artefact
+
+Also updated `appendix-m-index-of-metadata.md` with a reference addition related to the EU content-marking framework.
+
+### Index regeneration
+
+The new blog source and Appendix M change caused three generated indexes to go stale (routing-registry.json, definitions-index.md, mx-reginald/index.json). Regenerated on `main` using `npm run index:regen` and committed.
+
+### Documentation catch-up
+
+The CHANGELOG and LEARNINGS updates from the previous step-document run were on the now-closed PR branch, not in main. Re-applied both on main as part of this session:
+
+- CHANGELOG v3.41: PR #26 entry (LLM market-scan PRD, Gate 23 fix) + PR #28 entry
+- LEARNINGS: checker-script false-positive pattern rule
 
 ## Commit Log
 
