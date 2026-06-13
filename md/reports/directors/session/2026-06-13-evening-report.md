@@ -4,7 +4,7 @@ description: "Expanded the humanizer AI-tell catalogue, wired new patterns into 
 author: "Tom Cranstoun"
 created: 2026-06-13
 modified: 2026-06-13
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -135,6 +135,36 @@ Tom selected the two oldest open PRs to merge first. Both had conflicts with mai
 **PR #18 - drop doc synonym:** Terminology sweep replacing the "doc" business synonym with "cog" across all audiences. Added BDR 005 (`2026-06-05-doc-to-cog-rename.cog.md`) recording the decision to retire "MX Docs"/"doc" and fold the "MX Docs Ready" badge into the existing "MX Compatible" mark.
 
 **Pre-existing failures fixed along the way (CLAUDE.md rule):** The merge process surfaced pre-existing gate failures that were fixed as part of the work: missing `mx.x-mx-contextProvides` on seven repo-audit, vnext, and mx-os files; corrupted MX-SOURCE-FRONTMATTER YAML in the adobe blog draft HTML (a `$1.9bn` value had been corrupted to `<meta name="mx:cog">1.9bn` by the cog-header hook); missing `mx.purpose`/`mx.stability`/`mx.runbook` on four script README and vnext files; and BDR-005 cog was an island in the documentation graph (fixed by wiring it to `decision-record-index`).
+
+---
+
+## Update - Sequential Ollama Calls (late evening)
+
+### Problem addressed
+
+Multiple scripts in the repo call a local Ollama instance concurrently - the audit pipeline, the content dashboard's editing tools, and future scripts all share one GPU. Concurrent Ollama requests thrash context windows, slow each other, and can crash the daemon. There was no architectural enforcement of sequential calls; it was a remembered convention.
+
+### What was built
+
+A serial call queue for all Ollama requests, enforced as a repo manifesto principle.
+
+**`scripts/lib/llm-queue.cjs`** - new CJS singleton. Concurrency 1. Exports `queueOllamaCall(fn)`: fn() is called only after all previously-enqueued calls have settled; retries (up to `MX_OLLAMA_RETRY_MAX`, default 3) run inside the slot so other callers never interleave with a retrying call. The CJS module cache means both the audit pipeline and the content dashboard draw from the same queue instance in the same process.
+
+**`mx-reginald/audit/lib/llm-client.js`** - `messages.create` and `messages.stream` Ollama paths now wrap `ollamaCreate` in `queueOllamaCall`. Anthropic cloud path unchanged.
+
+**`scripts/lib/local-llm.cjs`** - `ollamaChat` wraps `_ollamaChatDirect` in `queueOllamaCall`. Same queue singleton.
+
+**`scripts/check-llm-queue.cjs`** - gate checker. Fails on any direct Ollama endpoint call outside the two sanctioned wrap files; also verifies both wrap files import `llm-queue.cjs`. Available as `npm run llm:queue:check`, wired into `npm test` and the pre-push hook as Gate 23b.
+
+**`mx-canon/ssot/principles.cog.md`** - **Sequential Ollama Calls** added as a named manifesto principle.
+
+**`mx-reginald/audit/mx-audit-architecture.cog.md`** - Ollama queue section added under the LLM provider paragraph.
+
+**`scripts/check-ai-log-coverage.cjs`** - Gate 23 allowlist comments updated to note the queue requirement on both sanctioned files.
+
+**`.claude/hooks/pre-push.sh`** - Gate 23b added; hooks reinstalled.
+
+The session was conducted as an interview-led design (via `/interview-me`) before any code was written: queue scope, provider scope, location, enforcement strategy, error handling, and concurrency were all confirmed before implementation began.
 
 ---
 
