@@ -4,7 +4,7 @@ description: "Afternoon session: MX-Aware Editor PRD authored and all design dec
 author: "Tom Cranstoun"
 created: 2026-06-13
 modified: 2026-06-13
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -28,7 +28,7 @@ mx:
 
 ## Summary
 
-The afternoon session produced the complete product requirements document for the MX-Aware Universal Editor, closing all 23 design decisions and a canonical AI prompt library. Separately, the 2026-06-12 audit batch deliverables -- reports, PDFs, and provenance pairs for 12 domains -- were committed to mx-outputs. Several morning-session fixes to link-paths, the verifier summary, and the audit architecture gate were also landed.
+The afternoon session produced the complete product requirements document for the MX-Aware Universal Editor, closing all 23 design decisions and a canonical AI prompt library. Separately, the 2026-06-12 audit batch deliverables -- reports, PDFs, and provenance pairs for 12 domains -- were committed to mx-outputs. Several morning-session fixes to link-paths, the verifier summary, and the audit architecture gate were also landed. A later sub-session added a verified industry news entry for the Claude Fable 5 and Mythos 5 launch and US export control suspension to both the public news lander and Appendix J, and committed the "fix pre-existing failures" manifesto rule to session memory.
 
 ---
 
@@ -47,7 +47,13 @@ The product-brief was updated to document the editor under The Cog Ecosystem, an
 
 All outstanding 2026-06-12 audit deliverables were committed to mx-outputs -- reports, PDFs, and full provenance pairs for 12 domains: crowdfavorite.com, dkd.de-de, dotfusion.com, enhancely.ai, mx.allabout.network, sibotacademy.pl-en, specification.website, stackoptic.com, typo3.com, typo3.org, www.contentful.com, and www.dkd.de-de. The cross-domain trail files (gate-proposals.jsonl, pre-machine-web.jsonl) and llms-full.txt were also updated.
 
-### 3. Morning-Session Fixes Landed
+### 3. Industry News Entry: Claude Fable 5 and Mythos 5
+
+A seven-phase verified news entry was added for Anthropic's Claude Fable 5 and Mythos 5 launch (9 June 2026) and the US government export control suspension (12 June 2026). Entry written to both the public news lander (`mx-outputs/mx-site/news.html`) and Appendix J of the books. Three validation points documented: refusals as a new class of invisible failure, mandatory 30-day retention as a privacy-architecture change, and the overnight suspension as the first documented case of a government directive disabling globally deployed AI infrastructure. Sources verified against official Anthropic documentation, TechCrunch, and Bloomberg. HTML hygiene gate: clean. JSON-LD: valid, 7 items.
+
+The session also committed the "fix pre-existing failures" commitment to device memory as a manifesto rule, not a courtesy.
+
+### 4. Morning-Session Fixes Landed
 
 Fixes from the earlier session in the commit boundary:
 
@@ -111,4 +117,9 @@ The MX-Aware Universal Editor PRD is the first formal product specification for 
 | 42538c4f | fix(verifier): rename failed -> unverified in verifier summary |
 | 3e24e2d2 | fix(verifier): rename summary.failed to summary.unverified |
 | c4fed9d8 | audit 2026-06-12: complete deliverables, PDFs, and provenance for all domains (mx-outputs) |
-| _pending_ | feat(editor): MX-Aware Universal Editor PRD and prompt library (hub -- lands in Step 3) |
+| bc2c99dc | feat(mx-os): MX-aware universal editor PRD and prompt library |
+| e19b524c | chore: commit concurrent session edits (REMINDERS, pitch-deck) |
+| 66bfe4c1 | feat(positioning): tools-not-services blog draft and pitch updates |
+| 65db9e7c | refactor(blog): rename and reframe tools-not-services draft |
+| 7b221604 | fix(blog): humanizer pass on build-once-run-everywhere draft |
+| 2f16ee85 | propagate(delivery-model): four routes + independence angle across manuscripts and business docs (unpushed) |
