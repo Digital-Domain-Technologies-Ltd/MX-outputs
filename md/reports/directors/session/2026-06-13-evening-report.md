@@ -4,7 +4,7 @@ description: "Expanded the humanizer AI-tell catalogue, wired new patterns into 
 author: "Tom Cranstoun"
 created: 2026-06-13
 modified: 2026-06-13
-version: "1.6"
+version: "1.7"
 
 mx:
   status: active
@@ -239,6 +239,36 @@ All signal detection is regex-based enumerated rules with no inference. The grou
 
 `mx-reginald/audit/user-messages/geo-grounding.user.md` was missing three required fields (`mx.purpose`, `mx.stability`, `mx.x-mx-contextProvides`). Fixed on main before push.
 
+## Update - PR #30 Merge: Per-Engine AI-Citation Analysis
+
+### What was built
+
+PR #30 ("Add per-engine AI-citation analysis: matrix aggregator, canon axis, blog") adds infrastructure to track how different AI search engines - ChatGPT, Perplexity, Gemini, Grok, Copilot - cite sources, and to analyse the gap between what each engine values and what MX addresses.
+
+**`mx-reginald/audit/lib/citation-matrix.js`** (232 lines) - core matrix logic. Defines the five citation goals each engine optimises for (authority, recency, user-intent match, structured retrieval, trust signals). Scores a site's MX implementation against each engine's citation model. Outputs a per-engine alignment matrix.
+
+**`scripts/ai-citation-matrix.cjs`** (334 lines) - CLI entry point. Accepts a domain and produces a JSON report ranking citation-factor gaps across engines. Optional `--compare` flag overlays two domains for a competitive read.
+
+**`mx-reginald/audit/scripts/build-citation-matrix.js`** (100 lines) - pipeline integration. Called from the audit orchestrator after Phase 2; appends citation-matrix findings to the audit report's AI-Visibility section.
+
+**`mx-reginald/audit/ai-citation-matrix-prd.md`** (105 lines) - product requirements document for the matrix, recording design decisions (why five goals not per-feature scoring, the engine roster, the citation-goal taxonomy).
+
+**`mx-reginald/audit/test/citation-matrix.test.js`** and **`tests/test-ai-citation-matrix.js`** - unit and integration tests wired into `npm test`.
+
+**`datalake/draft-site/blog/ai-citation-is-five-goals-not-one.md`** - blog draft explaining the citation taxonomy, why different engines optimise for different goals, and how MX addresses each layer.
+
+**`mx-canon/ssot/papers/geo-vs-mx.md`** updated with the citation-matrix framing (GEO is a tactic, MX is a specification; the matrix quantifies the gap).
+
+### Merge conflict resolution
+
+PR #30 had a `package.json` conflict with main: the PR added `test-ai-citation-matrix.js` to the test suite; main had meanwhile added `check-llm-queue.cjs`. Resolved locally by keeping both entries, pushed the resolution to the branch, then merged.
+
+### Index regeneration
+
+Three generated indexes went stale after the merge (routing-registry.json, documentation-map.json, documentation-map.md). Regenerated on main with `npm run index:regen` and committed (`7afbfcae`).
+
+---
+
 ## Commit Log
 
 | Hash | Description |
@@ -255,3 +285,7 @@ All signal detection is regex-based enumerated rules with no inference. The grou
 | fd80b67b | fix(metadata): add missing mx fields to vnext and scripts READMEs |
 | 239058e2 | fix(docmap): add refersTo edges to BDR-005 cog |
 | 02f31f96 | fix(docmap): use decision-record-index edge on BDR-005 to join graph |
+| 87c481f1 | Merge pull request #30 - per-engine AI-citation analysis |
+| 3e0f5929 | merge: resolve package.json conflict - combine check-llm-queue and test-ai-citation-matrix |
+| 7b90191c | docs: changelog v3.42 and bump mx-outputs for PR #29 session |
+| 7afbfcae | chore: regenerate stale indexes after PR #30 merge (ai-citation-matrix) |
