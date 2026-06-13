@@ -1,0 +1,36 @@
+# prompt capture
+# script: audience-classify
+# stepId: audience-classify
+# model:  gpt-oss:20b
+# sha256: efcc82f24ad7275550001f5d021c9d22df40e0d85cd87709e4257f539b9acd9f
+# capturedAt: 2026-06-13T00:43:36.268Z
+# systemPromptBytes: 1735
+# userMessageBytes:  3183
+
+--- system ---
+You are classifying a single web page by its intended human audience, for an accessibility and governance audit. You judge only who the page appears to be written for. You do not judge the merit, quality, legality, or appropriateness of the content. The audit is non-censoring: it describes and routes, it never blocks or gates lawful content. Your finding is a signal a human reviewer signs off, never a verdict reached alone.
+
+Return exactly one finding through the classify_audience tool:
+
+- child: the page is written for, or primarily aimed at, people under 18 (children's toys and games, school-age learning, child-targeted entertainment, parenting content addressed to the child).
+- normal: the page is written for a general adult or professional audience with no age-restriction signals (most business, news, documentation, and information sites).
+- adult: the page is written for, or restricted to, adults only (age-restricted goods, gambling, alcohol, explicit material, or content carrying an adult rating or an age-confirmation step).
+- indeterminate: the evidence does not support any of the above with confidence.
+
+Rules:
+
+- Judge only from the page text and metadata provided. Do not speculate about what the wider site does elsewhere.
+- Precision over recall. When the intended audience is genuinely unclear, return indeterminate rather than guessing.
+- Do not assert a fixed adult threshold of 18. Adulthood ratings vary by jurisdiction. If the page declares an age range, copy it verbatim into ageRangeFound; otherwise leave ageRangeFound empty.
+- Give a one-sentence rationale grounded in what the page actually shows.
+- Most pages are normal. Reserve child and adult for pages that genuinely signal those audiences.
+--- user ---
+Classify the intended human audience of this page.
+
+Page URL: https://www.dkd.de/de/kontakt/
+Title: Kontakt | dkd Internet Service GmbH
+H1: Bereit für ein neues digitales Projekt?
+Declared audience and rating signals found in the markup: (none declared)
+
+Body text (first 4000 chars):
+Deutsch de English en Deutsch de English en Leistungen Enterprise Websites MIT TYPO3 Government Site Builder 11 TYPO3-Upgrade TYPO3-Support Hosting MACH-Technologie Consulting Digitale Barrierefreiheit E-Commerce-Systeme Data Science Webapplikationen nach Maß Ruby/Ruby on Rails JavaScript-Expert:innen Website-Optimierungen UX/UI-Design Suchmaschinenoptimierung Contentpflege Workshops Experten Referenzen Produkte Starfruit AI Solr Enterprise Search dkd-gdpr DSGVO-Website-Audit Hosted Solr Direkt zum Shop Über uns Zertifizierungen Awards Leitbild Team Netzwerk Press Kit Blog Jobs Barrierefreiheitserklärung Home Kontakt Bereit für ein neues digitales Projekt? Starten Sie jetzt Ihr digitales Projekt mit uns. Egal, wie Sie uns kontaktieren, ob per E-Mail oder Telefon, wir sind jederzeit für Sie erreichbar! Natürlich auch per Zoom, Webex oder einem Videokonferenz-Tool Ihrer Wahl. Wir freuen uns auf einen virtuellen Besprechungstermin mit Ihnen. Gerne können Sie einen Termin im Voraus mit uns vereinbaren und planen. Mit Ihnen gemeinsam meistern wir jede Herausforderung. Wir freuen uns auf Ihre Kontaktaufnahme! Vor- und Nachname E-Mail Telefon Wie sind Sie auf uns aufmerksam geworden? Ihre Nachricht Ich bin mit der Speicherung meiner Daten einverstanden.* Hinweise und weitere Informationen zu der von Ihnen gegebenen Einwilligung zur Speicherung der oben eingegebenen Daten zum Zweck der Kontaktaufnahme und Ihrem Widerrufsrecht erhalten Sie in den Datenschutzhinweisen. * Pflichtfelder Absenden Ihre Ansprechpartnerin Anika Heimann | Head of Sales & Customer Development +49 69 2475218-0info@dkd.de Wir sind rund 60 Entwickler:innen, Digital Natives, UX-Spezialist:innen, Mehrwert-Berater:innen, Daten-Kenner:innen, Innovations-Antreiber:innen und Zeitgeist-Former:innen. Wir sind radikal digital. Wir sind dkd. dkd Internet Service GmbHKaiserstraße 7360329 Frankfurt am Main Tel. Zentrale: +49 69 2475218-0Tel. Support: +49 69 2475218-50E-Mail: info@dkd.de TechnologienTYPO3-AgenturStoryblok-AgenturShopware-AgenturPimcore-Agentur ReferenzenBitburger Braugruppe GmbHBaywa r.e. AGAktion Deutschland hilftAlle Referenzen > Relevante ThemenGovernment Site Builder 11Digitale BarrierefreiheitMACH-TechnologieSEO-Beratung Weitere Websitesmach.dkd.deshop.dkd.dehosted-solr.comtypo3-solr.com 1_ForgeTYPO3 Solution Partner Social Media:LinkedInInstagramThreadsYoutubeGlossarKontaktNewsletterImpressumDatenschutz Navigation schließen Kontakt schließen Auswahl schließen Cookies & Drittinhalte Auf dieser Website werden Cookies und Drittinhalte verwendet. Im Folgenden können Sie Ihre Zustimmung geben oder widerrufen. Weitere Informationen finden Sie in unserer Datenschutzerklärung. Einstellungen Anonymes Tracking erlauben (2 Jahre) Externe Videos erlauben (30 Tage) Externe Karten erlauben (30 Tage) Externe HTML-Inhalte erlauben (30 Tage) Alles ablehnen Alles akzeptieren OK

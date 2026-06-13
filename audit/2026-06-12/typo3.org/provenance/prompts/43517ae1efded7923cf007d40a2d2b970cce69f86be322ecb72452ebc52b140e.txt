@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Ftypo3.org%2F
+# model:  gpt-oss:20b
+# sha256: 43517ae1efded7923cf007d40a2d2b970cce69f86be322ecb72452ebc52b140e
+# capturedAt: 2026-06-13T01:55:38.510Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4541
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://typo3.org/
+Title: TYPO3 Project and Governance — Democratic Open Source - TYPO3 Project
+H1: The TYPO3 Project and its Governance
+Outbound link hosts (up to 20): docs.typo3.org, international.eco.de, orcwg.org, osb-alliance.de, opensource.org, openwebsitealliance.org, typo3.com, typo3.community, news.typo3.com, extensions.typo3.org, my.typo3.org, get.typo3.org, www.linkedin.com, www.instagram.com, bsky.app, typo3.social, www.facebook.com, www.youtube.com, digitalpublicgoods.net
+
+Body text (first 4000 chars):
+Skip to main navigation Skip to main content Skip to page footer Project (current) TYPO3 Association Submenu for "TYPO3 Association" TYPO3 Association Members & Membership Funding & Finances Structure By-Laws Strategy Contact TYPO3 Company Submenu for "TYPO3 Company" TYPO3 Company Structure & Leadership Contact Governance & Values Submenu for "Governance & Values" Governance & Values Vision, Mission, and Purpose Community Values Decision-Making Security Data Privacy Rules, Guidelines, & Policies Strategic Collaboration Submenu for "Strategic Collaboration" Strategic Collaboration eco — Association of the Internet industry TYPO3 Association: Member Open Regulatory Compliance Working Group TYPO3 Association: Foundation Member Open Source Business Alliance (OSBA) TYPO3 Company: Member Open Source Initiative (OSI) TYPO3 Association: Affiliate Open Website Alliance (OWA) TYPO3 Association: Member and co-founder Menu Become a Member The TYPO3 Project and its Governance A democratic open-source project with solid governance. The TYPO3 project is backed by a governance structure that both encourages democratic volunteer participation, builds trust, and supports a living commercial ecosystem. It is a volunteer community backed by a not-for-profit member association, and a fully-owned service company. TYPO3 Association TYPO3 Company Looking for the TYPO3 CMS product? Dive into the features and ecosystem at typo3.com More About TYPO3 CMS TYPO3 Association We set the foundation The TYPO3 Association guides, coordinates, and funds the long-term development of TYPO3 CMS. We lay the groundwork for the TYPO3 Project’s strategic growth by empowering our community with infrastructure and guidance. Our decisions are always long-term oriented and consensus-driven. Vision We view the TYPO3 Project as so much more than a CMS. It’s a model that shows how vibrant communities, collaboration, and democratic decision-making can contribute to society at large. Role in the community Our role in the community is to funnel the income from memberships, donations, and events back into community-driven development and initiatives. Service company The TYPO3 Company provides support and services to the ecosystem and facilitates the development of the CMS. It is fully owned by the Association and does not offer agency services, such as creating websites. More About the TYPO3 Association Members Members support TYPO3 Members of the TYPO3 Association support the development of TYPO3 CMS and take part in shaping the future of your favorite CMS. Being a member is both a statement of support for TYPO3 and your ticket to participate in and vote at the annual General Assembly and other decision-making processes. When you join the TYPO3 Community, you contribute to open source sustainability, get access to a wealth of TYPO3 knowledge, and participate in a democratic-driven project up close and personal. Member Benefits Become a Member TYPO3 GmbH — The Company behind TYPO3 CMS We make TYPO3 work better for you As the business behind TYPO3, the GmbH does the heavy lifting to create, support, and promote services that improve the entire TYPO3 Project ecosystem. As the commercial and operational arm of TYPO3, we enable and strengthen the broader TYPO3 Community through partner promotion, professional development, knowledge-sharing, and support services. Vision Our vision is to share the open source spirit of TYPO3 and our community embody to make a true positive social impact in the world that goes far beyond tech. Role in the community Our role in the TYPO3 community is to connect you with trusted partners, promote TYPO3 wherever (and whenever) we can, share our knowledge and know-how, and help you negotiate, navigate, and network with other TYPO3 professionals. Relationship to the association We act on the goals and ideals of the TYPO3 Association. Together, we combine commercial goals with a community-driven project to ensure the longevity and health of TYPO3. More About 

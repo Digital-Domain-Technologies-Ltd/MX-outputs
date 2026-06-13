@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Ftypo3.org%2Fassociation
+# model:  gpt-oss:20b
+# sha256: 061554fd67d0d677b6f2c88ba63585d693be5dcd2d158d59f10f678339d00b5f
+# capturedAt: 2026-06-13T01:55:53.722Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4531
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://typo3.org/association
+Title: The TYPO3 Association: Who We Are - TYPO3 Project
+H1: The TYPO3 Association
+Outbound link hosts (up to 20): docs.typo3.org, international.eco.de, orcwg.org, osb-alliance.de, opensource.org, openwebsitealliance.org, typo3.com, typo3.community, t3dd.typo3.com, t3con.typo3.com, news.typo3.com, extensions.typo3.org, my.typo3.org, get.typo3.org, www.linkedin.com, www.instagram.com, bsky.app, typo3.social, www.facebook.com, www.youtube.com
+
+Body text (first 4000 chars):
+Skip to main navigation Skip to main content Skip to page footer Project TYPO3 Association (current) Submenu for "TYPO3 Association" TYPO3 Association Members & Membership Funding & Finances Structure By-Laws Strategy Contact TYPO3 Company Submenu for "TYPO3 Company" TYPO3 Company Structure & Leadership Contact Governance & Values Submenu for "Governance & Values" Governance & Values Vision, Mission, and Purpose Community Values Decision-Making Security Data Privacy Rules, Guidelines, & Policies Strategic Collaboration Submenu for "Strategic Collaboration" Strategic Collaboration eco — Association of the Internet industry TYPO3 Association: Member Open Regulatory Compliance Working Group TYPO3 Association: Foundation Member Open Source Business Alliance (OSBA) TYPO3 Company: Member Open Source Initiative (OSI) TYPO3 Association: Affiliate Open Website Alliance (OWA) TYPO3 Association: Member and co-founder Menu Become a Member The TYPO3 Association Ensuring the sustainability of the TYPO3 Project The not-for-profit TYPO3 Association was founded to foster the health, value, and sustainability of the TYPO3 Project. The membership organization plays an important role in funding and setting the long-term strategy of the TYPO3 project. Our role By members, for the community Guidance from people who care The TYPO3 Association is a membership organization. The main activities include funding the development of the TYPO3 software, providing a platform for the TYPO3 community to share knowledge and resources, and promoting the use of TYPO3 around the world. Read about the member benefits and become a member Institutional Support In 2016, the TYPO3 Association founded TYPO3 GmbH (colloquially “The TYPO3 Company”), a fully-owned service company providing support and services. The company also facilitates the development of the CMS. To ensure the health of the community, the company won’t offer agency services, such as creating websites. Learn about the TYPO3 Company The official legal body of TYPO3 The TYPO3 Association is the legal not-for-profit body representing the TYPO3 Project. We uphold the software’s GNU General Public License (GPL) and the TYPO3 trademark in the interest of the TYPO3 community. To protect the brand, we also decide how and where the TYPO3 trademark can be used. Learn about our open source license and trademark Organizing TYPO3 Events and Initiatives Together with the TYPO3 Company (TYPO3 GmbH), we organize events to inform about TYPO3 and expand the professional expertise in our community. The Developer Days bring together TYPO3 professionals to share knowledge, build skills, and learn about innovations and best practices. T3CON is the event where clients, freelancers, and agencies earn from industry experts, network, and create new business opportunities together. Check out our events calendar Our responsibilities Making the TYPO3 Project’s vision a reality We work with every part of the TYPO3 community. The TYPO3 Association is committed to sharing knowledge, increasing adoption, and helping the TYPO3 Project reach its goals. What we do Communicate the value of the TYPO3 Project, products, and communityIncrease adoption of TYPO3 and related extensions and servicesShare up-to-date information on technology, consumer behavior, and market evolutionIncrease contribution and participation in TYPO3Facilitate open knowledge transferEnable clear, transparent, and insightful communication­ Learn more about the TYPO3 Community How we make decisions A consensus-driven process The TYPO3 Association Board delegates most day-to-day decision-making and development to teams and committees. These groups make decisions in line with the TYPO3 Association’s long-term strategy. When decisions affect multiple groups, they are raised to the joint Team Leader Meeting or the Association Board. Types of groups Official Teams are initiated by the community and have long-term responsibility for a defined areaCommittees are similar to team

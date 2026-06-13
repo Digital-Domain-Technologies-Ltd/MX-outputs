@@ -1,0 +1,36 @@
+# prompt capture
+# script: audience-classify
+# stepId: audience-classify
+# model:  gpt-oss:20b
+# sha256: a79113d7395248df16a7a3dde0ea8fade801144c37b2475a1524b664c257b5ed
+# capturedAt: 2026-06-13T00:32:00.565Z
+# systemPromptBytes: 1735
+# userMessageBytes:  4294
+
+--- system ---
+You are classifying a single web page by its intended human audience, for an accessibility and governance audit. You judge only who the page appears to be written for. You do not judge the merit, quality, legality, or appropriateness of the content. The audit is non-censoring: it describes and routes, it never blocks or gates lawful content. Your finding is a signal a human reviewer signs off, never a verdict reached alone.
+
+Return exactly one finding through the classify_audience tool:
+
+- child: the page is written for, or primarily aimed at, people under 18 (children's toys and games, school-age learning, child-targeted entertainment, parenting content addressed to the child).
+- normal: the page is written for a general adult or professional audience with no age-restriction signals (most business, news, documentation, and information sites).
+- adult: the page is written for, or restricted to, adults only (age-restricted goods, gambling, alcohol, explicit material, or content carrying an adult rating or an age-confirmation step).
+- indeterminate: the evidence does not support any of the above with confidence.
+
+Rules:
+
+- Judge only from the page text and metadata provided. Do not speculate about what the wider site does elsewhere.
+- Precision over recall. When the intended audience is genuinely unclear, return indeterminate rather than guessing.
+- Do not assert a fixed adult threshold of 18. Adulthood ratings vary by jurisdiction. If the page declares an age range, copy it verbatim into ageRangeFound; otherwise leave ageRangeFound empty.
+- Give a one-sentence rationale grounded in what the page actually shows.
+- Most pages are normal. Reserve child and adult for pages that genuinely signal those audiences.
+--- user ---
+Classify the intended human audience of this page.
+
+Page URL: https://crowdfavorite.com/insights/
+Title: Insights | Digital Transformation & More!
+H1: Notes from a Diplomatic Mission
+Declared audience and rating signals found in the markup: (none declared)
+
+Body text (first 4000 chars):
+Menu What We DoWhat We’ve Built What We Do Digital Growth Acceleration Intelligent Open Source Architecture Composable Applications Enterprise Systems Implementing enterprise platforms Platform Operations & Optimization Running and improving WordPress for the Enterprise Running and improving What We Do View All Digital Growth Acceleration Services Digital Strategy Digital Transformation Roadmapping Information Architecture Conversion Optimization Program Management Data Privacy & Security Requirements Documentation Global Platform Launch During a High-Stakes Financial MergerView Case Study View All Intelligent Open Source Architecture Services Open Source Development & System Integration API Development & Integration Open Source & AI Website Code Audits & Refactoring Personalization UI/UX Audits View All Composable Applications Services Custom Online Applications Web Application Development Bespoke Judging ApplicationView Case Study From Silos to Synergy: Lexus’s Integrated Customer Care RevolutionView Case Study View All Enterprise Systems Services Composable CMS Agile CMS Composable DXP TYPO3 Data Migration eCommerce Development Omnichannel Integration View All Platform Operations & Optimization Services Website Maintenance & Support Website Accessibility Website Performance Optimization Webflow Support Incident Response 24/7 Mission Critical Support NVIDIA: A Strategic Rebuild Forged from a Decade of TrustView Case Study View All WordPress for the Enterprise Services Enterprise Development Scalability Performance Optimization Migrations Headless CMS Support & Maintenance Integrations Hosting & Deployment Consulting Website Audits View Case Study Digital Growth Acceleration Intelligent Open Source Architecture Composable Applications Enterprise Systems Platform Operations & Optimization WordPress for the Enterprise Digital Growth Acceleration Intelligent Open Source Architecture Composable Applications Enterprise Systems Platform Operations & Optimization WordPress for the Enterprise Back Digital Growth Acceleration Digital Strategy Digital Transformation Roadmapping Information Architecture Conversion Optimization Program Management Data Privacy & Security Requirements Documentation Global Platform Launch During a High-Stakes Financial MergerView Case Study View All Digital Growth Acceleration Services Back Intelligent Open Source Architecture Open Source Development & System Integration API Development & Integration Open Source & AI Website Code Audits & Refactoring Personalization UI/UX Audits View All Intelligent Open Source Architecture Services Back Composable Applications Custom Online Applications Web Application Development Bespoke Judging ApplicationView Case Study From Silos to Synergy: Lexus’s Integrated Customer Care RevolutionView Case Study View All Composable Applications Services Back Enterprise Systems Composable CMS Agile CMS Composable DXP TYPO3 Data Migration eCommerce Development Omnichannel Integration View All Enterprise Systems Services Back Platform Operations & Optimization Website Maintenance & Support Website Accessibility Website Performance Optimization Webflow Support Incident Response 24/7 Mission Critical Support NVIDIA: A Strategic Rebuild Forged from a Decade of TrustView Case Study View All Platform Operations & Optimization Services Back WordPress for the Enterprise Enterprise Development Scalability Performance Optimization Migrations Headless CMS Support & Maintenance Integrations Hosting & Deployment Consulting Website Audits View Case Study View All WordPress for the Enterprise Services What We've Built Our Work & Case Studies Our Products Our Work & Case Studies Our Products Our Work & Case Studies Our Products Who We Help Brands We Work With Brands We Work With Brands We Work With What We Think Who We Are History FavCreate Giving Days Careers History FavCreate Giving Days Careers History FavCreate Giving Days Careers What We Do Digital Growth Acceleration Intelligent Open Source Ar

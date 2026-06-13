@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Ftypo3.org%2Fgovernance-values
+# model:  gpt-oss:20b
+# sha256: f1a98dfd355465b1be3e6ac98d9c5b66b594e65bfe7d765ed5b79078b5a026f6
+# capturedAt: 2026-06-13T01:56:58.050Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4571
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://typo3.org/governance-values
+Title: Our Values, Policies, & Code of Conduct - TYPO3 Project
+H1: TYPO3 Governance, Values, Policies, and Code of Conduct
+Outbound link hosts (up to 20): docs.typo3.org, international.eco.de, orcwg.org, osb-alliance.de, opensource.org, openwebsitealliance.org, typo3.community, typo3.com, news.typo3.com, extensions.typo3.org, my.typo3.org, get.typo3.org, www.linkedin.com, www.instagram.com, bsky.app, typo3.social, www.facebook.com, www.youtube.com, digitalpublicgoods.net
+
+Body text (first 4000 chars):
+Skip to main navigation Skip to main content Skip to page footer Project TYPO3 Association Submenu for "TYPO3 Association" TYPO3 Association Members & Membership Funding & Finances Structure By-Laws Strategy Contact TYPO3 Company Submenu for "TYPO3 Company" TYPO3 Company Structure & Leadership Contact Governance & Values (current) Submenu for "Governance & Values" Governance & Values Vision, Mission, and Purpose Community Values Decision-Making Security Data Privacy Rules, Guidelines, & Policies Strategic Collaboration Submenu for "Strategic Collaboration" Strategic Collaboration eco — Association of the Internet industry TYPO3 Association: Member Open Regulatory Compliance Working Group TYPO3 Association: Foundation Member Open Source Business Alliance (OSBA) TYPO3 Company: Member Open Source Initiative (OSI) TYPO3 Association: Affiliate Open Website Alliance (OWA) TYPO3 Association: Member and co-founder Menu Become a Member TYPO3 Governance, Values, Policies, and Code of Conduct Our obligations to one another TYPO3’s community comes from all over the world. We are drawn to learning from others with diverse cultures, backgrounds, and skill sets. In general, we want our members to feel free to be themselves while behaving with consideration and respect toward one another. Our official values, guidelines, and code of conduct exist to help the community navigate gray areas and keep TYPO3 strong. Our policies keep members up to date on the technical issues—like how to use the TYPO3 trademark or handle GDPR issues. Empower, Enable, Equalize! The TYPO3 Project's Vision, Mission, and Purpose Having a clear vision, mission, and purpose for the project means we can have clear visions, missions, and purposes for other fields of responsibility as well. Those form the basis for strategic decisions. Read the TYPO3 Project's vision, mission, and purpose Our policy and governance documents are maintained in one place. Browse the Policy Directory Community Values TYPO3’s values are community-sourced and enforced. We foster a culture of contribution, respect, and collaboration—and we have a good time while we’re at it! As a tech product, we prioritize our code quality, security, knowledge-sharing, and meaningful innovations, always with an eye toward our end users. Finally, as an organization, we believe in transparent communication, reliability, fair business models, and mentorship. Human, technological, and business values go hand-in-hand in creating a cohesive TYPO3 project. Learn more about our values and character Code of Conduct To respect each other is to respect the TYPO3 as a whole. TYPO3’s Code of Conduct defines six basic rules and advises community members on how to make everyone feel welcome and included. We also provide a resource for handling Code of Conduct violations and answers to frequently asked questions that dives into the nuances of each rule and guidance. Read the TYPO3 Code of Conduct Contribution and Engagement with Open Source Open source is not just a license; it’s an ethos. As a 100% open source project, TYPO3 is committed to collaboration with other open source products and giving back to the open source community. By sharing standards, security best practices, and guidelines, we take part in organizations that strengthen the open source ecosystem. Learn how to engage in open source TYPO3 Brand and Trademark TYPO3 is a trademarked brand name with a standardized color, style, and logo. Others can use our trademark when promoting their use of our software. We restrict our trademark use in certain cases — in domains, ad campaigns, and official brand connections, for example. Not sure whether you can use our trademark? Some uses require prior permission from the TYPO3 Association. Read about out Brand & Trademark Data Privacy Corner TYPO3 protects data privacy in accordance with GDPR requirements. We have a dedicated Data Protection Officer who ensures that users and community members remain compliant with the regul

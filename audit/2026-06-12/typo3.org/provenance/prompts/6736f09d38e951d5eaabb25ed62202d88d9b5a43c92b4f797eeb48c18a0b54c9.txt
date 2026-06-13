@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Ftypo3.org%2Fcompany
+# model:  gpt-oss:20b
+# sha256: 6736f09d38e951d5eaabb25ed62202d88d9b5a43c92b4f797eeb48c18a0b54c9
+# capturedAt: 2026-06-13T01:56:14.176Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4501
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://typo3.org/company
+Title: TYPO3 Company - TYPO3 Project
+H1: The TYPO3 Company
+Outbound link hosts (up to 20): docs.typo3.org, international.eco.de, orcwg.org, osb-alliance.de, opensource.org, openwebsitealliance.org, typo3.community, typo3.com, news.typo3.com, extensions.typo3.org, my.typo3.org, get.typo3.org, www.linkedin.com, www.instagram.com, bsky.app, typo3.social, www.facebook.com, www.youtube.com, digitalpublicgoods.net
+
+Body text (first 4000 chars):
+Skip to main navigation Skip to main content Skip to page footer Project TYPO3 Association Submenu for "TYPO3 Association" TYPO3 Association Members & Membership Funding & Finances Structure By-Laws Strategy Contact TYPO3 Company (current) Submenu for "TYPO3 Company" TYPO3 Company Structure & Leadership Contact Governance & Values Submenu for "Governance & Values" Governance & Values Vision, Mission, and Purpose Community Values Decision-Making Security Data Privacy Rules, Guidelines, & Policies Strategic Collaboration Submenu for "Strategic Collaboration" Strategic Collaboration eco — Association of the Internet industry TYPO3 Association: Member Open Regulatory Compliance Working Group TYPO3 Association: Foundation Member Open Source Business Alliance (OSBA) TYPO3 Company: Member Open Source Initiative (OSI) TYPO3 Association: Affiliate Open Website Alliance (OWA) TYPO3 Association: Member and co-founder Menu Become a Member The TYPO3 Company TYPO3 GmbH — the business behind TYPO3 The company does the heavy lifting to create, support, and promote services that improve the entire TYPO3 Project ecosystem. We enable and strengthen the broader TYPO3 Community through partner promotion, professional development, knowledge-sharing, and support services. Caring for TYPO3 is our job The TYPO3 Company was founded to act as the operational and commercial arm of the TYPO3 Project. In that role, we support the broader TYPO3 community by matching organizations with partners, promoting TYPO3, and sharing our know-how. We offer essential commercial products like SLAs and ELTS, as well as unbiased, third-party project reviews or mediation. What we’ll never do is compete with our partner agencies and freelancers. We’re here to support you in your TYPO3 endeavors. What we do Our mission is to enable and strengthen the broader TYPO3 Community. This goal informs everything we do, including partner promotion, professional development, knowledge-sharing, and support services. We connect you with trusted partners We love to connect people within the TYPO3 community and help you find technology resources that will help you and your organization excel. If you need consulting, development, or project work, explore our partner area for our offical listing of TYPO3 partners. If you’re looking for other software and systems that will enhance your TYPO3 project, check out our technology partners. Get to know our partners We promote TYPO3 wherever (and whenever) we can Our team members enjoy sharing their enthusiasm of TYPO3 with organizations, developers, marketers, and editors. Whether you’re hosting a community event, conference, barcamp, or a casual meetup, our team members can help organize or speak to TYPO3’s powerful features and performance. And because we’re open source, we have no qualms about sharing our processes, workflows, and contribution guidelines to anyone who wants to get involved. Get in touch to arrange for a TYPO3 GmbH keynote speaker or presenter at your next event. Get in Touch, let's talk TYPO3 We share our knowledge and know-how We have a font of knowledge about the TYPO3 CMS, and we’re eager to share it. To that end, we host code sprints and offer a unique training program for junior developers. During code sprints, the TYPO3 developer community comes together and educates one another as they improve the TYPO3 product. We work with agencies around the world to organize around 5-12 code sprints each year, and welcome newcomers and experts alike. Learn more about TYPO3 trainings We help you negotiate, navigate, and network Sometimes projects don’t go according to plan. Whether you experience communication difficulties, need help outlining specific requirements, or want a second opinion, TYPO3 GmbH can help get you on track. Our team of TYPO3 professionals knows the CMS better than anyone and offers services in negotiation, navigation, and networking. While we don’t do TYPO3 projects, we can act as a trusted third party. Bring us o

@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Ftypo3.com%2F
+# model:  gpt-oss:20b
+# sha256: f7d8febda6c6ea8d08e4bd9374e56832c92e63b5ca125e78f8ca5473b742b1fb
+# capturedAt: 2026-06-13T01:43:37.626Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4478
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://typo3.com/
+Title: TYPO3 - The Open Source Enterprise CMS - TYPO3 CMS
+H1: The CMS That Grows With You
+Outbound link hosts (up to 20): typo3.org, docs.typo3.org, get.typo3.org, demo.typo3.org, typo3.community, news.typo3.com, extensions.typo3.org, my.typo3.org, www.linkedin.com, www.instagram.com, bsky.app, typo3.social, www.facebook.com, www.youtube.com, support.typo3.com, creativecommons.org, digitalpublicgoods.net
+
+Body text (first 4000 chars):
+Skip to main navigation Skip to main content Skip to page footer TYPO3 CMS Submenu for "TYPO3 CMS" TYPO3 CMS What is TYPO3? Fast. Scalable. Secure. Why TYPO3? One Platform. Limitless Experiences Development Roadmap Release Info & PHP Support Core Development The Team Behind the Core Getting Started Introduction & Core Concepts Release Materials Release Updates and More. The Brand Logo, Trademark, and Style Guide The TYPO3 Story Est. 1997 Latest Release TYPO3 v14 LTS—The Next Generation We are thrilled to announce TYPO3 v14 LTS, our latest flagship release and a major milestone in TYPO3's evolution. Read more Case Studies Submenu for "Case Studies" Case Studies Project Migration Move to TYPO3 with minimal disruption Project Relaunch Deliver modern digital experiences Project Launch Built for scale, designed for growth TYPO3 Case Studies Explore real-world TYPO3 projects from organizations of all sizes and sectors. Filter by focus area, industry, or partner agency to find examples relevant to your needs. Learn more Products & Services Submenu for "Products & Services" Products & Services Extended Long Term Support Stay Secure Beyond Upgrades Certifications Officially Prove Your Skills Official Integrations & Services Trusted Partner Solutions Official Trainings Learn From the Source Officially prove your skills Earn globally recognized TYPO3 certifications to validate your expertise. Showcase your skills, boost your credibility, and stand out in the professional web development community. Explore certifications Solutions Submenu for "Solutions" Solutions Industries Powering Every Industry Use Cases TYPO3 in Action Official Integrations & Services Trusted Partner Solutions Solutions TYPO3 is a powerful, open-source CMS. For the past 25 years, we’ve provided powerful solutions across a diverse set of industries and use cases. Learn more Partners Submenu for "Partners" Partners Official TYPO3 Partners Get the Most Out of TYPO3 The TYPO3 Partner Program Unlocking Success, Together. Menu Contact Us Download v14 TYPO3 v14 LTS is here The next-generation enterprise CMS Download v14 LTS Explore all new features The CMS That Grows With You Fast. Scalable. Secure. Products & Services Learn More About TYPO3 Features Seamless Connectivity. Unmatched Scalability. Multisite and Multilingual TYPO3 simplifies multilingual site management with translation workflows and integration. It supports unlimited websites and languages for global businesses. Security & Predictable Releases TYPO3 is built with security as a core principle, ensuring robust protection for your data through dedicated security teams and strict access controls. With predictable release cycles, you can rely on regular updates and long-term support, keeping your system secure and up to date without unexpected disruptions. Learn More About Security Enterprise-Grade Digital Solutions TYPO3 is built for enterprise-scale: managing tens or hundreds of sites, high performance under load, seamless integration with ERP/CRM systems, and dedicated vendor support. Organisations with global reach and mission-critical demands trust TYPO3 for its infrastructure and ecosystem. Discover Enterprise Capabilities Accessible by Design — Inclusive for Everyone TYPO3 is designed with accessibility in mind: the backend supports keyboard navigation and screen reader use, while frontend projects can meet WCAG 2.1 and national standards to serve users of all abilities. See Accessibility Standards Explore our Features Trusted by Leading Organizations TYPO3 powers businesses, institutions, and communities around the world. Yours could be next.Let’s build something great — together. Our Success Stories The TYPO3 Partner Program Strengthen your business with exclusive financial advantages, high-visibility marketing, and direct collaboration with the TYPO3 team. Partners benefit from attractive discounts, expert positioning across official TYPO3 channels, and access to strategic roundtables that help shape the

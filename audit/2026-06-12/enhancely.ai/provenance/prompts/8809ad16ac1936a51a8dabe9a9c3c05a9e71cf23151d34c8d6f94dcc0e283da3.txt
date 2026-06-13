@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Fwww.enhancely.ai%2Fblog%2Fwhy-your-product-pages-are-invisible-to-
+# model:  gpt-oss:20b
+# sha256: 8809ad16ac1936a51a8dabe9a9c3c05a9e71cf23151d34c8d6f94dcc0e283da3
+# capturedAt: 2026-06-13T01:01:51.361Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4465
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://www.enhancely.ai/blog/why-your-product-pages-are-invisible-to-ai-shopping-assistants-and-how-to-fix-it
+Title: Why Your Product Pages Are Invisible to AI Shopping Assistants – And How to Fix It | enhancely.ai
+H1: Why Your Product Pages Are Invisible to AI Shopping Assistants – And How to Fix It
+Outbound link hosts (up to 20): www.enhancely.ai, app.enhancely.ai, github.com, www.linkedin.com
+
+Body text (first 4000 chars):
+enhancely.ai What is enhancely? Learn Integrations Pricing Blog Sign in Get started. What is enhancely? About What enhancely actually is. How enhancely works. The idea How enhancely works. How to set enhancely up. Setup How to setup enhancely. Why enhancely The Why Why should you choose enhancely? Already convinced? Check out our menu and get yummy schema for your website or shop. Order here → Learn about structured data Schema.org What is Schema.org? Learn what matters AI Optimization What matters in AI optimization? State of AI search optimization Research How are others doing? Learn about schema markup Schema.org How does schema markup work? Apr 5, 2026 · 9 min read Ready to make your website / shop yummy for bots? Order now → CMS WordPress Kirby Magnolia TYPO3 FirstSpirit Coremedia Headless CMS Contentstack Storyblok Contentful Frameworks JavaScript PHP Related Architecture enhancely for dev teams Need more? Take a look at our overview page. Integrations → enhancely.ai What is enhancely? What is enhancely? What enhancely actually is. How enhancely works. How enhancely works. How to set enhancely up. How to setup enhancely. Why enhancely Why should you choose enhancely? Learn Learn about structured data What is Schema.org? Learn what matters What matters in AI optimization? State of AI search optimization How are others doing? Learn about schema markup How does schema markup work? Integrations CMS WordPress Kirby Magnolia TYPO3 FirstSpirit Coremedia Headless CMS Contentstack Storyblok Contentful Frameworks JavaScript PHP Related enhancely for dev teams Pricing Blog Dark mode Light mode Get started. Sign in Home Blog Why Your Product Pages Are Invisible to AI Shopping Assistants – And How to Fix It // E-Commerce Why Your Product Pages Are Invisible to AI Shopping Assistants – And How to Fix It BS Bastian Sirvend December 10, 2025 · 6 min read Amazon has launched an AI shopping assistant. Google Shopping is enhanced by AI Overviews. ChatGPT recommends products based on user questions. The way people shop online is fundamentally changing. And your online store? Probably doesn't appear in these recommendations. That's not because your products are bad. It's because AI systems can't understand your product information. How AI Shopping Assistants Select Products When someone asks ChatGPT "What's the best coffee machine for a two-person household under $300?", here's what happens: the system searches the web for relevant product information, evaluates it against various criteria, and synthesizes a recommendation. Unlike Google, where good rankings at least get you into the link list, AI responses offer only two possibilities: you're cited as a source – or you don't exist for the user. Current research shows that AI systems prefer certain types of information for product recommendations: clear pricing, structured specifications, verifiable reviews, and unambiguous availability information. Websites with "marketing fluff" and unstructured content are systematically bypassed. The Problem: Unstructured Product Data Most e-commerce websites present product information for humans – not machines. Beautiful images, persuasive text, emotional descriptions. For an AI agent, this is problematic. When a user asks "Find me the best deal on a Dyson vacuum including warranty costs," the AI needs to extract the price, find the warranty terms, calculate everything together, and present it. Without structured data in JSON-LD format, the AI can't reliably complete this task. The result: your product isn't recommended, even if it would objectively be the best option. What AI Systems Expect from Product Pages Soul food for bots: The key product data elements AI shopping assistants crave — from machine-readable prices and structured specs to ratings and availability — all served in Schema.org format for optimal AI visibility. Research on Generative Engine Optimization in e-commerce identifies several critical factors for product visibility in AI recomm

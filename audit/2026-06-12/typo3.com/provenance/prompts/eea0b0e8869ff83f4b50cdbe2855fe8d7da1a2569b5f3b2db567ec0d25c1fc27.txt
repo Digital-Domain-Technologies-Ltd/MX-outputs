@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Ftypo3.com%2Fproducts-services
+# model:  gpt-oss:20b
+# sha256: eea0b0e8869ff83f4b50cdbe2855fe8d7da1a2569b5f3b2db567ec0d25c1fc27
+# capturedAt: 2026-06-13T01:44:29.565Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4496
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://typo3.com/products-services
+Title: Official TYPO3 Products & Services: Support, Training, and More - TYPO3 CMS
+H1: Products & Services
+Outbound link hosts (up to 20): typo3.org, docs.typo3.org, get.typo3.org, typo3.community, news.typo3.com, extensions.typo3.org, my.typo3.org, www.linkedin.com, www.instagram.com, bsky.app, typo3.social, www.facebook.com, www.youtube.com, support.typo3.com, creativecommons.org, digitalpublicgoods.net
+
+Body text (first 4000 chars):
+Skip to main navigation Skip to main content Skip to page footer TYPO3 CMS Submenu for "TYPO3 CMS" TYPO3 CMS What is TYPO3? Fast. Scalable. Secure. Why TYPO3? One Platform. Limitless Experiences Development Roadmap Release Info & PHP Support Core Development The Team Behind the Core Getting Started Introduction & Core Concepts Release Materials Release Updates and More. The Brand Logo, Trademark, and Style Guide The TYPO3 Story Est. 1997 Latest Release TYPO3 v14 LTS—The Next Generation We are thrilled to announce TYPO3 v14 LTS, our latest flagship release and a major milestone in TYPO3's evolution. Read more Case Studies Submenu for "Case Studies" Case Studies Project Migration Move to TYPO3 with minimal disruption Project Relaunch Deliver modern digital experiences Project Launch Built for scale, designed for growth TYPO3 Case Studies Explore real-world TYPO3 projects from organizations of all sizes and sectors. Filter by focus area, industry, or partner agency to find examples relevant to your needs. Learn more Products & Services (current) Submenu for "Products & Services" Products & Services Extended Long Term Support Stay Secure Beyond Upgrades Certifications Officially Prove Your Skills Official Integrations & Services Trusted Partner Solutions Official Trainings Learn From the Source Officially prove your skills Earn globally recognized TYPO3 certifications to validate your expertise. Showcase your skills, boost your credibility, and stand out in the professional web development community. Explore certifications Solutions Submenu for "Solutions" Solutions Industries Powering Every Industry Use Cases TYPO3 in Action Official Integrations & Services Trusted Partner Solutions Solutions TYPO3 is a powerful, open-source CMS. For the past 25 years, we’ve provided powerful solutions across a diverse set of industries and use cases. Learn more Partners Submenu for "Partners" Partners Official TYPO3 Partners Get the Most Out of TYPO3 The TYPO3 Partner Program Unlocking Success, Together. Menu Contact Us Download v14 Products & Services Everything You Need to Succeed With TYPO3 Discover TYPO3’s official offerings designed to help you build, run, and grow successful digital projects. From long-term support and trusted integrations to professional certifications and expert trainings — our products and services ensure security, reliability, and continuous growth for your TYPO3 journey. Get in Touch to Learn More Extended Long Term Support Stay Secure Beyond Upgrades Get up to four years of extended official support for your TYPO3 instance. Read more Certifications Officially Prove Your Skills Globally recognized TYPO3 CMS certifications to advance careers and strengthen teams. Read more Official Integrations & Services Trusted Partner Solutions TYPO3’s curated hub of scalable and secure solutions. Read more Official Trainings Learn From the Source Our instructor-led training courses can help you progress to the next step in your journey with TYPO3. Read more Open Source With Professional Support TYPO3 GmbH was founded to enable the open source TYPO3 community. We champion developers and agencies, offer professional services to bolster use of our tech, and forge partnerships with other tech companies. Learn more about the TYPO3 Company TYPO3 is Open Source Need Help Finding the Right Service for Your Team? Get in touch TYPO3 CMS What is TYPO3? Why TYPO3? Development Roadmap Core Development Getting Started Release Materials The Brand The TYPO3 Story Case Studies Project Migration Project Relaunch Project Launch Products & Services Extended Long Term Support Certifications Official Integrations & Services Official Trainings Solutions Industries Use Cases Official Integrations & Services Partners Official TYPO3 Partners The TYPO3 Partner Program About TYPO3 GmbH Who is TYPO3 Jobs TYPO3 Universe Community Community Meet Get help Contribute News & Events News & Events Hub Security Events Newsletter Project Project TYPO3 Association TYPO3

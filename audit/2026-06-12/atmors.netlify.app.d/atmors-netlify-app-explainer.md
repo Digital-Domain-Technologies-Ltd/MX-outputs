@@ -920,3 +920,66 @@ This audit uses three complementary perspectives:
 1. unified-repair - 1m 44s
 2. gate-4d-provenance - 1m 39s
 3. gate-3-fierce-critic - 1m 29s
+
+---
+
+## COLLECT - 2026-06-13 00:23:11
+
+### Steps
+
+| # | Step | Phase | Duration | Outcome | Notes |
+|---|------|-------|----------|---------|-------|
+| 1 | sweep-caches | COLLECT | 0.2s | pass |  |
+| 2 | wellknown-probe | COLLECT | 0.4s | pass |  |
+| 3 | sitemap-defects | COLLECT | 0.1s | pass |  |
+| 4 | clear-results | COLLECT | 0.0s | pass |  |
+| 5 | ai-usage-check | COLLECT | 0.2s | pass |  |
+| 6 | sitemap-discovery | COLLECT | 1.4s | warn | no sitemap found |
+| 7 | sitemap-anomaly | COLLECT | 0.1s | pass |  |
+| 8 | crawler | COLLECT | 3.7s | pass |  |
+| 9 | url-discovery | COLLECT | 0.8s | pass |  |
+| 10 | pdf-topup | COLLECT | 0.1s | pass |  |
+| 11 | pdf-sample | COLLECT | 0.1s | pass |  |
+| 12 | error-page-test | COLLECT | 0.6s | pass |  |
+| 13 | agent-access-test | COLLECT | 1.0s | pass |  |
+| 14 | served-rendered-gap | COLLECT | 0.1s | pass |  |
+| 15 | slowest-page-probe | COLLECT | 1.2s | pass |  |
+| 16 | ab-test-detection | COLLECT | 0.1s | pass | no A/B test or personalisation vendors detected |
+| 17 | framework-detection | COLLECT | 0.1s | pass | 2 framework(s) detected: Bootstrap (low), Netlify (low) |
+| 18 | freshness-expiry-detection | COLLECT | 0.1s | pass | no content-declared expires across 3 page(s) |
+| 19 | a11y-tree-check | COLLECT | 0.2s | pass | 0 page(s), 0 cluster(s) (0 template-level), score 100/100 |
+| 20 | provenance-gap-deterministic | COLLECT | 0.2s | pass |  |
+| 21 | provenance-gap-llm | COLLECT | 0.2s | pass |  |
+| 22 | audience-classify | COLLECT | 0.2s | pass |  |
+| 23 | readability-penalties | COLLECT | 0.1s | pass |  |
+| 24 | generate-preflight | COLLECT | 0.1s | pass |  |
+
+### Contract Checks
+
+| After Step | Files Checked | Result |
+|------------|---------------|--------|
+| crawler | 2 | PASS |
+| generate-preflight | 1 | PASS |
+
+### Testing Methodology
+
+This audit uses three complementary perspectives:
+
+- **Web Audit Suite** - crawl-based checks across pages: MX metadata, accessibility signals, structured data, performance, and linking patterns.
+- **DOM Analysis** - rendered-page inspection using a headless browser to capture what users and assistants actually receive.
+- **MX Appropriateness** - assessment of whether the site's metadata and content structure meet the MX standard for machine readability and provenance.
+- **Gates** - deterministic rule checks that confirm audit integrity and flag any findings that require human review before the report is finalised.
+
+### Timing Summary
+
+| Metric | Value |
+|--------|-------|
+| Total elapsed | 11.2s |
+| Steps completed | 24 |
+| Steps skipped | 0 |
+
+**Slowest steps:**
+
+1. crawler - 3.7s
+2. sitemap-discovery - 1.4s
+3. slowest-page-probe - 1.2s

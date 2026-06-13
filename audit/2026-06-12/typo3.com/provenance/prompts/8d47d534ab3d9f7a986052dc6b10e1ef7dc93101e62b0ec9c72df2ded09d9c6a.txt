@@ -1,0 +1,35 @@
+# prompt capture
+# script: provenance-gap-llm
+# stepId: page:https%3A%2F%2Ftypo3.com%2Fsolutions
+# model:  gpt-oss:20b
+# sha256: 8d47d534ab3d9f7a986052dc6b10e1ef7dc93101e62b0ec9c72df2ded09d9c6a
+# capturedAt: 2026-06-13T01:44:56.113Z
+# systemPromptBytes: 1632
+# userMessageBytes:  4481
+
+--- system ---
+You are evaluating individual web pages for provenance-gap signals, qualitative content patterns that a deterministic scanner cannot catch. These patterns indicate content that exists for the index rather than for a real reader, and that cannot reach Citation readiness on the MX readiness ladder.
+
+For each page, look for any of:
+
+- hollow-listicle, a ranked list where the entry copy is generic enough that the position is unmotivated; the same paragraph could apply to any of the entries.
+- ai-stamped-boilerplate, definitions, intros, conclusions that read as generated from a prompt rather than written by someone with first-hand knowledge of the subject.
+- recycled-definition, text that any glossary site could reproduce. No first-party detail, no specific example, no attribution.
+- location-implausibility, a page targeting a city or region where the body offers no evidence the business actually operates there.
+- unverifiable-first-party-claim, a superlative or factual claim ("we are the leading X", "trusted by Y") with no citation, attribution, or evidence on the page.
+- competitor-could-publish, the diagnostic: the page is generic enough that a competitor could ship a near-identical version using the same prompt.
+
+Rules:
+- Only flag what is in the page text. Do NOT speculate about what the page "probably" does elsewhere.
+- Quote 20 to 200 characters of the page as the evidence for each finding.
+- If a signal is borderline, do not flag it. Precision over recall.
+- One finding per pattern instance. Do not raise the same evidence twice.
+- Call the report_findings tool with findings: [] when the page is clean.
+--- user ---
+Page URL: https://typo3.com/solutions
+Title: TYPO3 Solutions for your Business - TYPO3 CMS
+H1: Solutions
+Outbound link hosts (up to 20): typo3.org, docs.typo3.org, get.typo3.org, demo.typo3.org, typo3.com, typo3.community, news.typo3.com, extensions.typo3.org, my.typo3.org, www.linkedin.com, www.instagram.com, bsky.app, typo3.social, www.facebook.com, www.youtube.com, support.typo3.com, creativecommons.org, digitalpublicgoods.net
+
+Body text (first 4000 chars):
+Skip to main navigation Skip to main content Skip to page footer TYPO3 CMS Submenu for "TYPO3 CMS" TYPO3 CMS What is TYPO3? Fast. Scalable. Secure. Why TYPO3? One Platform. Limitless Experiences Development Roadmap Release Info & PHP Support Core Development The Team Behind the Core Getting Started Introduction & Core Concepts Release Materials Release Updates and More. The Brand Logo, Trademark, and Style Guide The TYPO3 Story Est. 1997 Latest Release TYPO3 v14 LTS—The Next Generation We are thrilled to announce TYPO3 v14 LTS, our latest flagship release and a major milestone in TYPO3's evolution. Read more Case Studies Submenu for "Case Studies" Case Studies Project Migration Move to TYPO3 with minimal disruption Project Relaunch Deliver modern digital experiences Project Launch Built for scale, designed for growth TYPO3 Case Studies Explore real-world TYPO3 projects from organizations of all sizes and sectors. Filter by focus area, industry, or partner agency to find examples relevant to your needs. Learn more Products & Services Submenu for "Products & Services" Products & Services Extended Long Term Support Stay Secure Beyond Upgrades Certifications Officially Prove Your Skills Official Integrations & Services Trusted Partner Solutions Official Trainings Learn From the Source Officially prove your skills Earn globally recognized TYPO3 certifications to validate your expertise. Showcase your skills, boost your credibility, and stand out in the professional web development community. Explore certifications Solutions (current) Submenu for "Solutions" Solutions Industries Powering Every Industry Use Cases TYPO3 in Action Official Integrations & Services Trusted Partner Solutions Solutions TYPO3 is a powerful, open-source CMS. For the past 25 years, we’ve provided powerful solutions across a diverse set of industries and use cases. Learn more Partners Submenu for "Partners" Partners Official TYPO3 Partners Get the Most Out of TYPO3 The TYPO3 Partner Program Unlocking Success, Together. Menu Contact Us Download v14 Solutions Solve Digital Challenges With TYPO3 TYPO3 is an open-source CMS built to meet the demands of modern organizations. Our flexible software and professional-grade support services help you impress new web visitors as you scale with TYPO3. Industries Powering Every Industry From healthcare to higher education, from e-commerce to the public sector — TYPO3 delivers the tools and flexibility modern industries need. Discover how TYPO3 meets the unique demands of your field. Show All Use Cases TYPO3 in Action See how organizations of all sizes use TYPO3 to solve real-world challenges — from launching global campaigns to streamlining internal workflows. Discover practical use cases that show TYPO3’s flexibility in action. See TYPO3 Use Cases A Forward-Looking Approach to Content Management Whether you're launching campaigns for your NGO or internationalizing your manufacturing company, TYPO3 ensures security, performance, and seamless content delivery across all channels. Talk to us Preview How TYPO3 Eases and Improves Your Daily Workload Check out our free demo Most Recent Case Study Highlights Unifying Austria’s Classical Ticketing Market Migrating from WordPress to TYPO3 to create a secure, role-based ticketing and content platform for klassikticket Read more Experience the Berlinische Galerie Online—Powered by TYPO3 How 3pc and TYPO3 Transformed a Museum Website into a Sustainable, Accessible Cultural Platform Read more HANSEN receives a TYPO3-powered Tourism Portal Modernization atlantis dx led the relaunch of the portal which serves Hamburg’s tourism industry. Read more Kontiki, a Leading Swiss Travel Specialist, Elevates the Digital Travel Experience with TYPO3 internezzo AG creates a user-friendly, sustainable travel journey built for discovery and performance Read more EKHN completes headless CMS relaunch with TYPO3 A modern relaunch delivers flexible content management and seamless multi-channel publishing 

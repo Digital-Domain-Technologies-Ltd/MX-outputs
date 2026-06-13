@@ -1,0 +1,31 @@
+{
+  "name": "classify_audience",
+  "description": "Submit the intended-audience classification for this page.",
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "finding",
+      "rationale"
+    ],
+    "properties": {
+      "finding": {
+        "type": "string",
+        "enum": [
+          "child",
+          "normal",
+          "adult",
+          "indeterminate"
+        ]
+      },
+      "ageRangeFound": {
+        "type": "string",
+        "description": "Verbatim declared age range if the page states one, else empty."
+      },
+      "rationale": {
+        "type": "string",
+        "description": "One sentence grounded in the page."
+      }
+    }
+  }
+}
