@@ -12,9 +12,9 @@ created: 2026-05-26
 modified: 2026-05-26
 version: "1.0"
 mx:
+  x-mx-managedBy: blog-post.cog.md
   x-mx-contentState: published
-  blogFilename: a-pdf-that-can-prove-itself
-  blogUrl: https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html
+  servedAt: https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html
   generate:
     script: scripts/generate-content-html.cjs
   status: published
@@ -27,7 +27,15 @@ mx:
   - provenance
   - mx-foundations
   x-mx-category: MX blog series
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/pipeline/drafts/a-pdf-that-can-prove-itself.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/a-pdf-that-can-prove-itself.md
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator."
+  x-mx-contextProvides:
+    - "Every PDF this site produces now carries its own evidence chain inside its XMP packet. Open the file with no network and no source repo and an inspector can still read who made it, when, what it was rendered from, and what the chain is silent about. The honest absence matters as much as the present steps."
+  stability: stable
+  purpose: "Every PDF this site produces now carries its own evidence chain inside its XMP packet. Open the file with no network and no source repo and an inspector can still read who made it, when, what it was rendered from, and what the chain is silent about. The honest absence matters as much as the present steps."
+  x-mx-backport: clean
+  blogUrl: https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html
+  blogFilename: a-pdf-that-can-prove-itself
 refersTo:
 - the-padlock-and-the-page.md
 - provenance-you-can-see.md
@@ -49,7 +57,6 @@ x-mx-ai:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
   <meta name="description" content="Every PDF this site produces now carries its own evidence chain inside its XMP packet. Open the file with no network and no source repo and an inspector can still read who made it, when, what it was rendered from, and what the chain is silent about. The honest absence matters as much as the present steps.">
-  <meta name="keywords" content="machine-experience, ai-agents">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html">
 
@@ -83,6 +90,11 @@ x-mx-ai:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
   <meta name="mx:name" content="A PDF That Can Prove Itself">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -126,7 +138,7 @@ x-mx-ai:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1850,
+        "wordCount": 1883,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -160,13 +172,14 @@ x-mx-ai:
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
         <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
-      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
         <a href="/">Home</a>
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
         <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
       </nav>
     </div>
@@ -207,7 +220,7 @@ x-mx-ai:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1850">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1883">
         <header class="article-header">
           <h1>A PDF That Can Prove Itself</h1>
           <div class="article-meta"
@@ -256,7 +269,7 @@ x-mx-ai:
 <p>Two things in that chain worth dwelling on, because they sit at the centre of the design.</p>
 <h2 id="the-honest-absence" tabindex="-1">The honest absence</h2>
 <p>The first step says, explicitly, that the chain begins at this render. The PDF is not claiming to know who wrote the source markdown, when it was last reviewed, whether anybody signed it, or which version of which review process passed it. The chain in the PDF only claims what the chain in the PDF can actually back up.</p>
-<p>I have to be honest about why this matters more than it might look. The temptation when building a provenance system is to make the chain look complete. The file is signed, the chain exists, the colour-coded badge says "verified"; the inspector relaxes. If the chain is silent about pre-render history, the same temptation is to fill the silence with confident-sounding boilerplate that suggests due process happened upstream when nothing of the kind has been recorded.</p>
+<p>I have to be honest about why this matters more than it might look. The temptation when building a provenance system is to make the chain look complete. The file is signed, the chain exists, the colour-coded badge says &quot;verified&quot;; the inspector relaxes. If the chain is silent about pre-render history, the same temptation is to fill the silence with confident-sounding boilerplate that suggests due process happened upstream when nothing of the kind has been recorded.</p>
 <p>A chain that lies about its own completeness is worse than no chain at all. The next inspector who finds the lie discounts every chain after it. Provenance is a system that depends on the cheap parts being honest so the expensive parts (the signing, the verification, the registry) have somewhere to land. The cheapest part is admitting when the chain begins; pulling that out of the system breaks the system.</p>
 <p>The marker step records the absence by name. <code>stepId: no-upstream-provenance</code>, <code>outcome: skipped</code>. An inspector extracting the chain knows on the first read: this PDF was rendered, the render itself is recorded, and any claim about what happened before the render must come from somewhere else. The file has not promised what it cannot back up.</p>
 <p>When the chain DID exist before this render (an audit PDF that ran through the audit pipeline carries an <code>audit-collect</code> step, a <code>report-rewrite</code> step, a <code>pdf-render</code> step, all in sequence), no marker step fires. The render simply appends. Honesty by construction: the marker is the absence of a fact, not the presence of a different fact.</p>
@@ -277,7 +290,7 @@ x-mx-ai:
 <p>The skeptical path: when there is no upstream provenance, the chain says so. The inspector knows on first read that the chain only claims what happens from the render forward. Everything before is asserted by other mechanisms (the source's own provenance, the signing chain on the source repo, the publisher's reputation, libel law) and the inspector can ask whoever is supplying the PDF to provide those mechanisms separately. The chain has not lied about what it does not know.</p>
 <h2 id="what-this-is-not" tabindex="-1">What this is not</h2>
 <p>It is not a guarantee that the source is true. The render captures who rendered what, when, against which canonical address. It does not capture whether the source's claims are factually correct. A signed, verified chain on a PDF that says the moon is made of cheese verifies that someone published the claim, not that the claim is true.</p>
-<p><small><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</small></p>
+<p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
 <p>It is not a substitute for a regulator. The chain is queryable, verifiable evidence about the file. Whether the file complies with the EU AI Act, the European Accessibility Act, or any other regulatory regime remains a legal duty of the publisher. The chain gives a regulator the records they expect to find; it does not interpret those records on the publisher's behalf.</p>
 <p>It is not the end of the work. The chain is one layer. The signing chain on the publisher's identity (DIDs, key rotation, transparency logs) is another. The conformance declarations elsewhere in the PDF (<code>pdfuaid:Part=1</code>, <code>StructTreeRoot</code>, the rest of the EAA conformance declarations) are another. Together they answer the four medieval questions; alone, none of them does. Provenance is a system; this is the metadata layer of that system.</p>
 <h2 id="how-to-use-it" tabindex="-1">How to use it</h2>

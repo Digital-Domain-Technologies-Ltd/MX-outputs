@@ -12,9 +12,9 @@ created: 2026-05-26
 modified: 2026-05-26
 version: "1.0"
 mx:
+  x-mx-managedBy: blog-post.cog.md
   x-mx-contentState: published
-  blogFilename: the-padlock-and-the-page
-  blogUrl: https://mx.allabout.network/blog/the-padlock-and-the-page.html
+  servedAt: https://mx.allabout.network/blog/the-padlock-and-the-page.html
   generate:
     script: scripts/generate-content-html.cjs
   status: published
@@ -27,7 +27,15 @@ mx:
   - mx-foundations
   - practitioner
   x-mx-category: MX blog series
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/pipeline/drafts/the-padlock-and-the-page.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/the-padlock-and-the-page.md
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator."
+  x-mx-contextProvides:
+    - "The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side."
+  stability: stable
+  purpose: "The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side."
+  x-mx-backport: clean
+  blogUrl: https://mx.allabout.network/blog/the-padlock-and-the-page.html
+  blogFilename: the-padlock-and-the-page
 refersTo:
 - provenance-you-can-see.md
 - pope-leo-ai-encyclical-and-mx.md
@@ -53,7 +61,6 @@ x-mx-ai:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
   <meta name="description" content="The TLS padlock has been the web's most-misread icon for twenty years. It says the connection is encrypted; it has never said the page is true. Closing the gap takes content that carries its own evidence and a verification step that runs on the reader's side.">
-  <meta name="keywords" content="machine-experience, ai-agents">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://mx.allabout.network/blog/the-padlock-and-the-page.html">
 
@@ -87,6 +94,11 @@ x-mx-ai:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
   <meta name="mx:name" content="The Padlock Attests the Pipe, Not the Page">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -130,7 +142,7 @@ x-mx-ai:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1890,
+        "wordCount": 1921,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -164,13 +176,14 @@ x-mx-ai:
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
         <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
-      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
         <a href="/">Home</a>
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
         <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
       </nav>
     </div>
@@ -211,7 +224,7 @@ x-mx-ai:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1890">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1921">
         <header class="article-header">
           <h1>The Padlock Attests the Pipe, Not the Page</h1>
           <div class="article-meta"
@@ -237,7 +250,7 @@ x-mx-ai:
 <p>No amount of prompt engineering lets a model verify a claim that arrives carrying no evidence. The fix has to travel with the content.</p>
 <h2 id="two-problems-one-shape" tabindex="-1">Two problems, one shape</h2>
 <p>The agentic web is talking, in 2026, about two problems that look distinct and are actually the same shape.</p>
-<p>The first is the discovery problem. A machine cannot use a document it cannot find. Self-describing content helps; without indexing and identifiers, the helpfulness stops at the file boundary. An LLM that does not know the surgery's website exists cannot answer the question "what time does it open on Saturday".</p>
+<p>The first is the discovery problem. A machine cannot use a document it cannot find. Self-describing content helps; without indexing and identifiers, the helpfulness stops at the file boundary. An LLM that does not know the surgery's website exists cannot answer the question &quot;what time does it open on Saturday&quot;.</p>
 <p>The second is the trust problem. A machine cannot rely on a document whose origin it cannot check. Even if the LLM finds three plausible Saturday hours, none of them carry evidence the LLM can verify. So it averages, or it picks the most confident-sounding source, or it invents one that fits the pattern of an opening-hours line. Each of those failure modes has been documented in production.</p>
 <p>Both problems are gaps in the same place. The discovery problem says the machine cannot find the content. The trust problem says the machine cannot evaluate the content. Both are answered by attaching a checkable claim about the document to the document itself, indexing those claims so the machine can find them, and giving the machine an open way to verify each claim on its own side.</p>
 <p>That is the architectural job. A registry does it, in a particular shape.</p>
@@ -258,7 +271,7 @@ x-mx-ai:
 <h2 id="honest-limits" tabindex="-1">Honest limits</h2>
 <p>This is not a panacea. Three things in particular it does not do, and saying them out loud beats letting a buyer assume otherwise.</p>
 <p>Lying still works. A publisher can sign content that says something untrue, and the signature will verify. What changes is that the lie now travels with an identity and a fingerprint. The publisher cannot retract it without leaving a record. A reader who is being misled has an audit trail that names the source.</p>
-<p><small><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</small></p>
+<p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
 <p>Compliance does not come with the architecture either. The EU AI Act, the European Accessibility Act, the UK ICO code, the NIST AI Risk Management Framework, and the regulatory regimes around them remain a legal duty of the organisation. What the technical work does is narrower and useful: it makes the documentation those duties already require structured, tamper-evident, and verifiable on request. Sold as that, it is honest. Sold as ethics in a box, it collapses on the first inquiry, and deserves to.</p>
 <p>A determined adversary still gets in. Nation-states compromise endpoints, steal private keys, and coerce publishers. What the architecture does is raise the cost of subtle, undetectable interference. Signed content with a fingerprint cannot be quietly edited after the fact. A compromised key produces signatures that succeed cryptographically and fail a transparency log's gap-detection. The adversary still gets there; the operator and the regulator now see it happen.</p>
 <h2 id="the-byline-for-the-machine-age" tabindex="-1">The byline for the machine age</h2>

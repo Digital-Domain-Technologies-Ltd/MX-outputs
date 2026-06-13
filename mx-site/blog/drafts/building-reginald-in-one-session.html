@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+
+title: "Building a Company's Grant Application in One Session"
+description: "How MX Reginald Ltd built a complete grant-ready package of 17 deliverables in a single Claude Code session"
+author: Tom Cranstoun and Maxine
+created: 2026-02-08
+modified: 2026-02-09
+version: "1.0"
+
+mx:
+  x-mx-contentState: draft
+  contentType: blog-post
+  status: active
+  tags: [blog, grant, reginald, mx-in-practice, claude-code]
+  movedFrom: "mx-reginald/blog/blog-building-reginald-in-one-session.md"
+  movedDate: 2026-02-14
+  purpose: "Draft blog post for the mx-site."
+  stability: draft
+  runbook: "Draft source for the mx-site blog. Promote via npm run promote to publish."
+  x-mx-contextProvides: ["Blog post draft: Building a Company's Grant Application in One Session"]
+  audience: [humans, machines]
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun and Maxine">
+  <meta name="description" content="How MX Reginald Ltd built a complete grant-ready package of 17 deliverables in a single Claude Code session">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://allabout.network/blogs/mx/building-reginald-in-one-session.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://allabout.network/blogs/mx/building-reginald-in-one-session.html">
+  <meta property="og:title" content="Building a Company's Grant Application in One Session | CogNovaMX">
+  <meta property="og:description" content="How MX Reginald Ltd built a complete grant-ready package of 17 deliverables in a single Claude Code session">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-02-08">
+  <meta property="article:author" content="Tom Cranstoun and Maxine">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Building a Company's Grant Application in One Session | CogNovaMX">
+  <meta name="twitter:description" content="How MX Reginald Ltd built a complete grant-ready package of 17 deliverables in a single Claude Code session">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="published">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Building a Company's Grant Application in One Session">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun and Maxine">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://allabout.network/blogs/mx/building-reginald-in-one-session.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Building a Company's Grant Application in One Session | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Building a Company's Grant Application in One Session",
+        "headline": "Building a Company's Grant Application in One Session",
+        "description": "How MX Reginald Ltd built a complete grant-ready package of 17 deliverables in a single Claude Code session",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-02-08",
+        "dateModified": "2026-02-08",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun and Maxine",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://allabout.network/blogs/mx/building-reginald-in-one-session.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1058,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://allabout.network/blogs/mx/building-reginald-in-one-session.html",
+        "name": "Building a Company's Grant Application in One Session",
+        "url": "https://allabout.network/blogs/mx/building-reginald-in-one-session.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun and Maxine</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-happened">What happened</a></li>
+        <li><a href="#what-we-started-with">What we started with</a></li>
+        <li><a href="#what-we-built">What we built</a></li>
+        <li><a href="#the-meta-observation">The meta observation</a></li>
+        <li><a href="#whats-next">What's next</a></li>
+        <li><a href="#by-the-numbers">By the numbers</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1058">
+        <header class="article-header">
+          <h1>Building a Company's Grant Application in One Session</h1>
+          <div class="article-meta"
+               data-published="2026-02-08"
+               data-modified="2026-02-08"
+               data-reading-time="6 min">
+            <time datetime="2026-02-08">8 February 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun and Maxine</span>
+            <span>·</span>
+            <span>6 min read</span>
+          </div>
+          <ul class="article-tags" aria-label="Tags"><li><a href="index.html#tags=blog" rel="tag">Blog</a></li><li><a href="index.html#tags=grant" rel="tag">Grant</a></li><li><a href="index.html#tags=reginald" rel="tag">Reginald</a></li><li><a href="index.html#tags=mx-in-practice" rel="tag">Mx In Practice</a></li><li><a href="index.html#tags=claude-code" rel="tag">Claude Code</a></li></ul>
+        </header>
+
+
+<p><strong>How MX Reginald Ltd went from a technical proposal to a complete grant-ready package in a single Claude Code session.</strong></p>
+<p><strong>Date:</strong> 8 February 2026
+<strong>Author:</strong> Tom Cranstoun
+<strong>Co-Authored-By:</strong> Claude Opus 4.6 (Maxine)</p>
+<hr>
+<h2 id="what-happened" tabindex="-1">What happened</h2>
+<p>On 7 February 2026, a technical document existed: a pilot proposal for REGINALD, a verified documentation registry designed to reduce AI inference waste. It was a good document — detailed, data-driven, aimed at AI provider engineering leads. But it was one document. A company needs more than one document.</p>
+<p>On 8 February, in a single working session with Maxine (Claude Code), we built the entire operational foundation for MX Reginald Ltd's grant application to the Scottish Government. From a standing start to 17 deliverables, a demo website, and a clear strategy for securing £250k+ in funding.</p>
+<p>This is what MX in practice looks like.</p>
+<hr>
+<h2 id="what-we-started-with" tabindex="-1">What we started with</h2>
+<ul>
+<li><a href="../../../mx-reginald/docs/reginald.md">reginald.md</a> — A technical pilot proposal aimed at AI providers (existed before this session)</li>
+<li>reginald.pdf — PDF version of the same</li>
+</ul>
+<p>That was it. One technical document and its PDF.</p>
+<hr>
+<h2 id="what-we-built" tabindex="-1">What we built</h2>
+<h3 id="session-1-company-identity-previous-session" tabindex="-1">Session 1: Company identity (previous session)</h3>
+<ul>
+<li><a href="http://README.md">README.md</a> — What MX Reginald Ltd does and why it exists</li>
+<li><a href="../../../mx-reginald/pr/company-launch.md">pr/company-launch.md</a> — Press release for company formation</li>
+<li><a href="../../../mx-reginald/pr/product-launch.md">pr/product-launch.md</a> — Press release for REGINALD general availability (12 May 2026, CMS Summit Frankfurt)</li>
+</ul>
+<h3 id="session-2-grant-application-package-this-session" tabindex="-1">Session 2: Grant application package (this session)</h3>
+<p><strong>The interview.</strong> Before writing a single word, Maxine interviewed me. Nine questions, each surfaced with multiple-choice options. Company structure? Sister company, same owner. Grant targeting? Need recommendations. Headcount? Flexible with funding. Scott McGregor's role? Co-founder and director. Why Glasgow? Tech ecosystem and universities. Budget range? £250k+. Demo scope? Both interactive and static. Existing traction? All of it — live registry, pilot conversations, books in progress, community.</p>
+<p>The interview took three minutes. It shaped everything that followed.</p>
+<p><strong>Strategy and tracking (4 documents):</strong></p>
+<ul>
+<li>grant/plan.md — Month-by-month grant strategy. Layer university seed funding (£5-10k), feasibility study (£100k), RSA job creation (£250-500k), Innovate UK R&amp;D (£250-500k). Total target: £610k-£1.1M across stacked grants.</li>
+<li>grant/budget.md — Three-year financial summary. Year 1: £345k. Year 2: £466k. Year 3: £666k. Revenue exceeds costs in Year 3. Break-even Month 18-24.</li>
+<li>grant/tracker.md — Ten grants identified, tracked, and sequenced. RSA, SMART:SCOTLAND, Innovate UK Smart Grants, Scottish National Investment Bank, Interface Innovation Vouchers, and more.</li>
+<li>grant/risk-register.md — Eleven risks scored by likelihood and impact. Highest: AI providers build their own (score 6), market doesn't adopt MX standards (score 6). Both mitigated by two-year head start and MIT-licensed specifications.</li>
+</ul>
+<p><strong>Evidence and validation (3 documents):</strong></p>
+<ul>
+<li>grant/market-research.md — $10-30B problem by 2030. TAM/SAM/SOM analysis. Competitive landscape showing REGINALD's differentiation from RAG, fine-tuning, web search, and prompt engineering.</li>
+<li>grant/traction.md — Everything that exists today: live registry, operational signing engine, two pilots (digital + physical media), Dotfusion case study, advisory board of four, two-year publication track record, active AI provider pilot conversations.</li>
+<li>grant/letters-of-support.md — Four templates (industry expert, academic partner, client, industry body) plus an 11-row tracker for obtaining letters before grant deadlines.</li>
+</ul>
+<p><strong>Alignment and impact (3 documents):</strong></p>
+<ul>
+<li>grant/scottish-alignment.md — REGINALD mapped against seven Scottish Government priorities: AI strategy, net zero, digital transformation, fair work, inclusive growth, export potential, and innovation. Each with specific contribution statements.</li>
+<li>grant/impact-framework.md — Theory of change diagram. Measurable targets across commercial, employment, environmental, and innovation outcomes. Quarterly reporting commitments.</li>
+<li>grant/sustainability.md — How REGINALD sustains itself after grant funding ends. Four revenue streams. Path from grant-dependent (Year 1) to self-sustaining (Year 3). Contingency plan if revenue grows slower.</li>
+</ul>
+<p><strong>Team and credibility (2 documents):</strong></p>
+<ul>
+<li>grant/team.md — Tom Cranstoun (52 years, BBC, Adobe, Fortune 500). Scott McGregor (co-founder, MX Printworks pilot). Advisory board. Planned hires.</li>
+<li>grant/fund-criteria-matrix.md — Six grants scored across 13 criteria (innovation, job creation, R&amp;D risk, net zero, export potential, etc.). Shows which grants to apply for first and how to frame each application.</li>
+</ul>
+<p><strong>Pitch and communication (2 documents, Rankinized):</strong></p>
+<ul>
+<li>
+<p>grant/README.md — The critical document. An investor pitch for grant committees, restructured using Andy Raskin's 5-element sales narrative framework:</p>
+<ol>
+<li><strong>The Change</strong> — Four AI commerce launches in one week, January 2026</li>
+<li><strong>Winners and Losers</strong> — The cruise that cost 100x too much vs the retailer that adapted</li>
+<li><strong>Promised Land</strong> — Scotland in 2028, operating the global verification registry</li>
+<li><strong>Magic Gifts</strong> — Three obstacles, three gifts (Registry, Signing Engine, MX Specifications)</li>
+<li><strong>Evidence</strong> — Working technology, two pilots, published track record, the team</li>
+</ol>
+</li>
+<li>
+<p>grant/public-explainer.md — Plain language, zero jargon. Opens with &quot;Something big just happened&quot; (the Change), moves to &quot;The AI that ruined a holiday&quot; (Winners/Losers), paints a picture of a world where AI never guesses (Promised Land), explains REGINALD as &quot;a library for AI&quot; (Magic Gift), and closes with the team (Evidence).</p>
+</li>
+</ul>
+<p><strong>Demo website:</strong></p>
+<ul>
+<li>An MX-compliant HTML page at <code>mx-outputs/datalake/clients/reginald/reginald-website/index.html</code>. Run with <code>npm run demo</code>, select &quot;reginald&quot;. Features:
+<ul>
+<li>Interactive REGINALD registry lookup (type &quot;Claude Code&quot;, &quot;npm&quot;, or &quot;git submodule&quot;)</li>
+<li>Before/after comparison (AI guessing vs AI looking it up)</li>
+<li>Winners and losers cards</li>
+<li>Environmental impact statistics</li>
+<li><a href="https://schema.org">Schema.org</a> JSON-LD metadata (viewable in-page — this page practices what it preaches)</li>
+<li>MX compliance badge</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="the-meta-observation" tabindex="-1">The meta observation</h2>
+<p>This session is itself a demonstration of the problem REGINALD solves.</p>
+<p>Maxine (Claude Opus 4.6) built 17 documents and a demo website in one session because she had access to structured, well-organised source material. The technical proposal had YAML frontmatter. The VISION-BRIEF had clear structure. The company information was in known locations with consistent formatting.</p>
+<p>When AI has access to structured, findable, trustworthy documentation, it produces correct, useful output at remarkable speed. When it doesn't, it guesses.</p>
+<p>The entire REGINALD grant application package was built because the source documentation was MX-compliant. The grant application argues for funding a company that makes documentation MX-compliant for other AI systems.</p>
+<p>MX in practice, building the case for MX. Recursive. Self-referential. And it works.</p>
+<hr>
+<h2 id="whats-next" tabindex="-1">What's next</h2>
+<ol>
+<li>Contact Scottish Enterprise for an account manager</li>
+<li>Apply for Interface Innovation Voucher (£5k, university partnership seed)</li>
+<li>Submit SMART:SCOTLAND feasibility study (£100k)</li>
+<li>Prepare RSA application (£250-500k)</li>
+<li>MX: The Handbook publishes 2 April 2026</li>
+<li>CMS Summit Frankfurt launch 12 May 2026</li>
+<li>Run the demo for grant assessors: <code>npm run demo</code></li>
+</ol>
+<hr>
+<h2 id="by-the-numbers" tabindex="-1">By the numbers</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documents created</td>
+<td>17</td>
+</tr>
+<tr>
+<td>Demo website pages</td>
+<td>1 (single-page app)</td>
+</tr>
+<tr>
+<td>Grant funds targeted</td>
+<td>£610k - £1.1M (stacked)</td>
+</tr>
+<tr>
+<td>Grants identified</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Risks registered</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Letters of support templates</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Scottish Government priorities mapped</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Measurable impact targets defined</td>
+<td>20+</td>
+</tr>
+<tr>
+<td>Raskin framework elements applied</td>
+<td>5 (on 2 documents)</td>
+</tr>
+<tr>
+<td>Starting documents</td>
+<td>1 (<a href="http://reginald.md">reginald.md</a>)</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>One session</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><em>MX Reginald Ltd, Scotland</em></p>
+<p><em>&quot;Design for machines. Benefit humans. Advance both.&quot;</em></p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name">Tom Cranstoun and Maxine</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
