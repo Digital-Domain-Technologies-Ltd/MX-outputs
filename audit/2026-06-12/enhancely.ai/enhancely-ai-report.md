@@ -87,7 +87,9 @@ Our scoring criteria follow published MX standards and proposed specifications m
 
 **About sample scope.** Findings throughout this report describe what we observed on the 12 pages we crawled. Verdicts scoped to the sample should not be extrapolated to the full estate without a wider audit; where a finding is structural (a missing security header, a soft 404 pattern, an llms.txt transport problem) we say so.
 
-<!-- STATIC-SEED: note-llms-txt -->
+### A note on llms.txt
+
+The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention places a structured description file at a site's root for AI systems to read, following the same pattern as robots.txt. The Discovery Files section below records its presence, transport type, and sitemap registration, and covers the two structural problems (content type and discovery) that limit most implementations.
 
 ---
 
@@ -115,7 +117,7 @@ Our audit shows that your site delivers a strong experience for visitors. The fo
 
 The headline opportunity for your site lies in enhancing machine comprehension. While machines can parse the served HTML perfectly (AI Suitability 100/100), the current governance layer is missing. Across the audited set, no MX-namespaced metadata such as mx:status, mx:contentType, mx:audience, canonicalUri or provenance markers was detected. Adding these fields to at least one published page will lift your site from Discoverable (Level 1) to Governed (Level 2), giving machines the context they need for accurate attribution.
 
-By addressing this governance gap, you unlock a higher level of machine readiness while preserving the excellent human experience that already characterises your brand.
+Addressing this governance gap improves machine readiness and keeps the current human experience.dy characterises your brand.
 
 \clearpage
 
@@ -207,7 +209,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 **Evidence:** MX Stack Completeness 68/100 | Structured Data Quality 88/100 | Discovery Readiness 40/100 | Consistency 52%
 
-**To reach the next level:** Score thresholds for Governed are met (MSC 68, SDQ 88, DR 40), but no MX-namespaced governance metadata was detected on the audited pages. Add MX governance fields (mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers) to at least one published page to unlock Governed level. Without those fields a machine can discover the page but lacks the governance context for accurate comprehension.
+**To reach the next level:** Score thresholds for Governed are met (MSC 68, SDQ 88, DR 40), but no MX-namespaced governance metadata was detected.ected on the audited pages. Add MX governance fields (mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers) to at least one published page to unlock Governed level. Without those fields a machine can discover the page but lacks the governance context for accurate comprehension.
 
 ---
 
@@ -315,7 +317,7 @@ We identified 6 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **What to change and why:**
 
-- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once configured.
+- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies across the audited set once configured.
 - Set them once in the edge or server configuration rather than per page so coverage stays complete as new pages ship.
 
 **Effort:** Low
@@ -647,7 +649,7 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organisation: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "high-quality" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 **The list format is not the problem.** Ranked, comparative lists are among the most-cited content shapes in AI answers, so we never flag a page for being a list. What we flag is the self-ranking variant: a "best N" page that puts its own brand at position one. It repeats a familiar move - the FAQ markup Google deprecated for gaming while AI systems kept reading it. The gamed surface gets demoted; the format stays valuable; the gap between them is provenance. The demotion is not an SEO cost you can trade for AI reach: AI answer engines retrieve through search, Google's own among them, so a page the search engine demotes is a page the AI does not surface at the top. A self-ranking list reads as a rigged result to anything checking who made the ranking, and it forfeits the visibility it was trying to manufacture.
 
@@ -666,10 +668,10 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 | [/blog/why-composable-architecture-needs-a-dedicated-structured-data-service](https://www.enhancely.ai/blog/why-composable-architecture-needs-a-dedicated-structured-data-service) | - | - | - | 2 third-party links | complete |
 | [/blog/why-your-product-pages-are-invisible-to-ai-shopping-assistants-and-how-to-fix-it](https://www.enhancely.ai/blog/why-your-product-pages-are-invisible-to-ai-shopping-assistants-and-how-to-fix-it) | - | - | - | 2 third-party links | complete |
 | [/blog/the-content-code-credibility-formula-what-really-matters-for-ai-search-visibility](https://www.enhancely.ai/blog/the-content-code-credibility-formula-what-really-matters-for-ai-search-visibility) | - | - | - | 2 third-party links | complete |
-| [/blog/why-your-developer-online-documentation-is-not yet meeting-ai-coding-assistants-and-how-knowledge-graphs-fix-it](https://www.enhancely.ai/blog/why-your-developer-online-documentation-is-failing-ai-coding-assistants-and-how-knowledge-graphs-fix-it) | - | - | - | 2 third-party links | complete |
+| [/blog/why-your-developer-online-documentation-is-not yet meeting-ai-coding-assistants-and-how-knowledge-graphs-fix-it](https://www.enhancely.ai/blog/why-your-developer-online-documentation-is-falling short of-ai-coding-assistants-and-how-knowledge-graphs-fix-it) | - | - | - | 2 third-party links | complete |
 | [/blog/knowledge-graphs-how-ai-systems-understand-your-website-as-a-whole](https://www.enhancely.ai/blog/knowledge-graphs-how-ai-systems-understand-your-website-as-a-whole) | - | - | - | 2 third-party links | complete |
 | [/blog](https://www.enhancely.ai/blog) | - | - | - | 2 third-party links | missing: author |
-| [/blog/e-e-a-t-for-the-ai-era-how-chatgpt-co-recognise-your-brand-as-a-trustworthy-source](https://www.enhancely.ai/blog/e-e-a-t-for-the-ai-era-how-chatgpt-co-recognize-your-brand-as-a-trustworthy-source) | - | - | - | 2 third-party links | complete |
+| [/blog/e-e-a-t-for-the-ai-era-how-chatgpt-co-recognise-your-brand-as-a-trustworthy-source](https://www.enhancely.ai/blog/e-e-a-t-for-the-ai-era-how-chatgpt-co-recognise-your-brand-as-a-trustworthy-source) | - | - | - | 2 third-party links | complete |
 | [/blog/the-3c-framework-code-the-technical-foundation](https://www.enhancely.ai/blog/the-3c-framework-code-the-technical-foundation) | - | - | - | 8 third-party links | complete |
 
 The **Self-ranking** column flags a self-promotional listicle: a page whose `<title>` or `<h1>` advertises a ranked list and whose position-one entry resolves to the publisher's own host or brand. A year-swap refresh is a page whose title year is two or more years ahead of its JSON-LD `dateModified`. The citation column counts outbound links to hosts other than the audited site; pages with body content over 400 words and zero third-party citations carry no verifiable references.
@@ -932,7 +934,7 @@ We found 7 identical inline fragment(s) repeated across multiple pages, totallin
 
 *The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `enhancely-ai-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
@@ -976,7 +978,7 @@ This audit is a starting point. The outcome we work toward is a site any machine
 
 AI Suitability scores 100/100, showing that machines can immediately understand and use the content on https://www.enhancely.ai.  
 Opportunities exist in Discovery Readiness (40/100) and SEO (87/100), where improving metadata visibility and search optimisation will enhance machine discoverability.  
-We invite you to address these areas to unlock further value for your audience and the machines that serve them.
+Addressing these areas will provide additional value for both users and machines.
 
 ### Audit Scores
 
@@ -1001,7 +1003,17 @@ We invite you to address these areas to unlock further value for your audience a
 
 ---
 
-<!-- STATIC-SEED: working-with-us -->
+## Working With Us
+
+This is an automated audit. The deeper work is a paid consultancy engagement, and we offer it across every report type:
+
+- **Full-render, all-pages audience and age-awareness review.** Here we classify the entry page; in the consultancy version we render every page and read the age-assurance, consent, and age or date-of-birth data collection across the whole estate.
+- **Full-site qualitative review.** We read every audited page for the content-quality patterns the automated pass samples on the first few pages.
+- **PDF estate accessibility remediation.** We tag the structure, declare the conformance, and record an independent check across the document estate, aligned with Directive (EU) 2019/882.
+- **On-premise, regulated-sector audit.** We run the whole pipeline against a local model on infrastructure you control, so no audited content leaves your network.
+- **Implementation and remediation.** We carry the technical context that produced these findings into the work that resolves them.
+
+To scope an engagement, speak to us about next steps.
 
 ---
 

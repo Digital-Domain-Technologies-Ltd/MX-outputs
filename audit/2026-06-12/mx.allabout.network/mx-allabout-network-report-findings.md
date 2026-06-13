@@ -10,37 +10,15 @@ mx:
   status: active
   contentType: audit-findings
   audience: [humans, machines]
-  x-mx-findingsCount: 7
+  x-mx-findingsCount: 5
   inherits: ["mx-allabout-network-report-findings.json"]
   runbook: "Human reviewer reads the prose body before sign-off; accept, rebut, or correct each finding. A machine reads the committed <basename>-findings.json companion (same data, schema audit-findings.v1) or the embedded x-mx-findings block to consider and action findings loop-safely."
   x-mx-findings: |
-    [{"instanceId":"1c607578f3f7","patternKey":"a5b8319d5121","timestamp":"2026-06-12T14:07:00.347Z","severity":"info","source":"check-report-tone.js","gateName":"tone","category":"exaggeration","title":"Exaggeration / hyperbole: 1 instance","detail":"Exaggeration / hyperbole\n\nline 136: \"flawless\" - Across the audited set, the pages deliver an excellent experience for human visitors, with fast load","suggestions":[],"lineRef":"line 136","provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T14:14:57.169Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null},{"instanceId":"59f0fc04cf41","patternKey":"337934947854","timestamp":"2026-06-12T14:07:00.349Z","severity":"info","source":"check-report-tone.js","gateName":"tone","category":"bogus-html-placeholder","title":"Bogus HTML-tag placeholders (use {name} not <name>): 1 instance","detail":"Bogus HTML-tag placeholders (use {name} not <name>)\n\nline 784: \"<slug> → {slug}\" - | `/blog/<slug>` | 69 | 0.27 | 0.022 | 4.62 |","suggestions":[],"lineRef":"line 784","provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T14:14:57.169Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null},{"instanceId":"465590c62c54","patternKey":"ef93bf825f21","timestamp":"2026-06-12T14:07:00.500Z","severity":"warn","source":"check-report-scope.js","gateName":"sample-vs-total-scope","category":"scope-mis-statements","title":"Scope mis-statements remain after auto-repair: 2","detail":"Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:\n\ncheck-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md\n  2 scope mis-statement(s).\n\n  [sitewide-inside-sampled-section] line 260\n    section: ## Findings  (line 175)\n    phrase:  \"Site-wide\"\n    line:    **Finding:** Security headers absent: HSTS, CSP, X-Frame-Options, X-Content-Type-Options (Site-wide). Missing security h\n\n  [sitewide-inside-sampled-section] line 264\n    section: ## Findings  (line 175)\n    phrase:  \"site-wide\"\n    line:    - Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once c\n\n  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write \"across the audited set\" — write \"the sitemap declares\" or \"this file carries\". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write \"site-wide\" or \"across the entire site\" — write \"across the audited pages\" or \"on the audited set\".\n","suggestions":[],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T14:14:57.169Z","outcome":"skipped"}],"x-mx-priority":"medium","firstSeen":null,"occurrences":null},{"instanceId":"49636c6e981a","patternKey":"9cabeb757220","timestamp":"2026-06-12T14:07:02.215Z","severity":"warn","source":"verify-audit-report.js","gateName":"deterministic-verifier","category":"unverified-claims","title":"1 claim could not be verified against source data","detail":"Deterministic verifier scanned numeric, URL, HTML-snippet, positional, and behavioural claims in the report. The entries below did not match the source CSV / JSON / cached HTML and need a reviewer's eye.\n\nline 697: Numeric 145 (145) not found in any results CSV / JSON","suggestions":[],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T14:14:57.169Z","outcome":"skipped"}],"x-mx-priority":"medium","firstSeen":null,"occurrences":null},{"instanceId":"2b113b1f1ed3","patternKey":"fff7118542b0","timestamp":"2026-06-12T14:11:00.512Z","severity":"error","source":"run-with-timeout","gateName":"timeout-llm-judgment","category":"subprocess-timeout","title":"Subprocess timeout (llm-judgment)","detail":"The llm-judgment subprocess exceeded the timeout threshold and was terminated. This is expected behavior — a machine reader would also stop processing here. Elapsed: 120004ms. Kill reason: hard-timeout.","suggestions":["Review the subprocess output for deadlocks or resource exhaustion.","Check if the target URL has changed or is now unreachable.","Consider adjusting the timeout threshold via MX_AUDIT_GATE_TIMEOUT_MS."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T14:14:57.169Z","outcome":"skipped"}],"x-mx-priority":"high","firstSeen":null,"occurrences":null},{"instanceId":"01934462c40b","patternKey":"245f47636cbe","timestamp":"2026-06-12T14:12:43.238Z","severity":"warn","source":"check-cross-section-consistency.js","gateName":"cross-section-consistency","category":"cross-section-scope-mix","title":"Line 839: scope-mixing prose","detail":"Sentence mixes site-wide language with per-sample language. Choose one frame per sentence: report the site-wide source first, then describe the audited set separately. Line: The level is a site-wide, conservative classification: every Schema.org block across the audited pages must clear a level's bar before this site claims it, so a handful of thin blocks or pages without markup caps the level even when most pa","suggestions":["Re-check the infill sources for each cited section.","If both sources are correct and the disagreement is genuine (e.g. the sitemap covers a wider set than the audit sampled), name the asymmetry explicitly in the prose so the reader sees it."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T14:14:57.169Z","outcome":"skipped"}],"x-mx-priority":"medium","firstSeen":null,"occurrences":null},{"instanceId":"1f36f4de456d","patternKey":"60f5e9c9e807","timestamp":"2026-06-12T14:12:43.446Z","severity":"info","source":"audit-prose-lint.js","gateName":"prose-lint","category":"prose-quality","title":"Prose linter flagged 72 style finding(s) for review","detail":"Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:\n\n{\n  \"report\": \"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md\",\n  \"total\": 72,\n  \"neutralSurface\": true,\n  \"byScanner\": {\n    \"mechanical\": {\n      \"count\": 31\n    },\n    \"ai-vocab\": {\n      \"count\": 7\n    },\n    \"copula\": {\n      \"count\": 6\n    },\n    \"prose-patterns\": {\n      \"count\": 28\n    },\n    \"tics\": {\n      \"count\": 0\n    }\n  },\n  \"byCategory\": {\n    \"dialect-divergence\": 31,\n    \"ai-vocab-word\": 5,\n    \"ai-vocab-phrase\": 2,\n    \"possession-copula\": 5,\n    \"locative-copula\": 1,\n    \"same-sentence-repetition\": 28\n  },\n  \"findings\": [\n    {\n      \"scanner\": \"mechanical\",\n      \"line\": 32,\n      \"column\": 173,\n      \"category\": \"dialect-divergence\",\n      \"match\": \"analyse (UK)\",\n      \"snippet\": \"runbook: \\\"Executive audit report for Mx Allabout. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-cra\",\n      \"rephrase_hint\": \"Neutral-English surface (writing-style.md §3): rephrase to avoid the US/UK divergent spelling \\\"analyse\\\" entirely - e.g. examine / review.\"\n    },\n    {\n      \"scanner\": \"copula\",\n      \"line\": 45,\n      \"column\": 15,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"# therefore carries the AI sidecar pointer (the regulator-facing\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 57,\n      \"column\": 191,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"file (2x)\",\n      \"snippet\": \"The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPayload; the adjacent .ai.json file is a copy of the same JSON for tooling that pref\",\n      \"rephrase_hint\": \"Distinctive content word \\\"file\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 57,\n      \"column\": 276,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"deterministic (2x)\",\n      \"snippet\": \"The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directiv\",\n      \"rephrase_hint\": \"Distinctive content word \\\"deterministic\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"copula\",\n      \"line\": 57,\n      \"column\": 300,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"note: \\\"AI evidence chain (LLM-driven, multi-agent, and human-committed steps). The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPaylo\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 57,\n      \"column\": 326,\n  ","suggestions":["Review the flagged AI-tells and mechanical prose issues in the final markdown before sending to the client. Worklist: prose-lint.json in the run results dir."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-12T14:14:57.169Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null}]
+    [{"instanceId":"59f0fc04cf41","patternKey":"337934947854","timestamp":"2026-06-13T08:46:08.323Z","severity":"info","source":"check-report-tone.js","gateName":"tone","category":"bogus-html-placeholder","title":"Bogus HTML-tag placeholders (use {name} not <name>): 1 instance","detail":"Bogus HTML-tag placeholders (use {name} not <name>)\n\nline 791: \"<slug> → {slug}\" - | `/blog/<slug>` | 69 | 0.27 | 0.022 | 4.62 |","suggestions":[],"lineRef":"line 791","provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-13T08:52:19.993Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null},{"instanceId":"465590c62c54","patternKey":"ef93bf825f21","timestamp":"2026-06-13T08:46:08.486Z","severity":"warn","source":"check-report-scope.js","gateName":"sample-vs-total-scope","category":"scope-mis-statements","title":"Scope mis-statements remain after auto-repair: 2","detail":"Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output excerpt:\n\ncheck-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md\n  2 scope mis-statement(s).\n\n  [sitewide-inside-sampled-section] line 262\n    section: ## Findings  (line 177)\n    phrase:  \"Site-wide\"\n    line:    **Finding:** Security headers absent: HSTS, CSP, X-Frame-Options, X-Content-Type-Options (Site-wide). Missing security h\n\n  [sitewide-inside-sampled-section] line 266\n    section: ## Findings  (line 177)\n    phrase:  \"site-wide\"\n    line:    - Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once c\n\n  Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write \"across the audited set\" — write \"the sitemap declares\" or \"this file carries\". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write \"site-wide\" or \"across the entire site\" — write \"across the audited pages\" or \"on the audited set\".\n","suggestions":[],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-13T08:52:19.993Z","outcome":"skipped"}],"x-mx-priority":"medium","firstSeen":null,"occurrences":null},{"instanceId":"a2ad53ed69ac","patternKey":"9cabeb757220","timestamp":"2026-06-13T08:46:10.062Z","severity":"warn","source":"verify-audit-report.js","gateName":"deterministic-verifier","category":"unverified-claims","title":"13 claims could not be verified against source data","detail":"Deterministic verifier scanned numeric, URL, HTML-snippet, positional, and behavioural claims in the report. The entries below did not match the source CSV / JSON / cached HTML and need a reviewer's eye.\n\nline 116: Numeric 99 (99) not found in any results CSV / JSON\nline 440: Numeric 149 (149) not found in any results CSV / JSON\nline 704: Numeric 145 (145) not found in any results CSV / JSON\nline 1392: Numeric 330 (330) not found in any results CSV / JSON\nline 17: AI Attribution numeric 1906 not found in ai-attribution.json (totals or bucket counts)\nline 19: AI Attribution numeric 1906 not found in ai-attribution.json (totals or bucket counts)\nline 29: AI Attribution numeric 617 not found in ai-attribution.json (totals or bucket counts)\nline 30: AI Attribution numeric 360 not found in ai-attribution.json (totals or bucket counts)\nline 31: AI Attribution numeric 270 not found in ai-attribution.json (totals or bucket counts)\nline 32: AI Attribution numeric 243 not found in ai-attribution.json (totals or bucket counts)\nline 33: AI Attribution numeric 201 not found in ai-attribution.json (totals or bucket counts)\nline 34: AI Attribution numeric 159 not found in ai-attribution.json (totals or bucket counts)\nline 36: AI Attribution numeric 16 not found in ai-attribution.json (totals or bucket counts)","suggestions":[],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-13T08:52:19.993Z","outcome":"skipped"}],"x-mx-priority":"medium","firstSeen":null,"occurrences":null},{"instanceId":"01934462c40b","patternKey":"245f47636cbe","timestamp":"2026-06-13T08:50:44.747Z","severity":"warn","source":"check-cross-section-consistency.js","gateName":"cross-section-consistency","category":"cross-section-scope-mix","title":"Line 846: scope-mixing prose","detail":"Sentence mixes site-wide language with per-sample language. Choose one frame per sentence: report the site-wide source first, then describe the audited set separately. Line: The level is a site-wide, conservative classification: every Schema.org block across the audited pages must clear a level's bar before this site claims it, so a handful of thin blocks or pages without markup caps the level even when most pa","suggestions":["Re-check the infill sources for each cited section.","If both sources are correct and the disagreement is genuine (e.g. the sitemap covers a wider set than the audit sampled), name the asymmetry explicitly in the prose so the reader sees it."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-13T08:52:19.993Z","outcome":"skipped"}],"x-mx-priority":"medium","firstSeen":null,"occurrences":null},{"instanceId":"1f36f4de456d","patternKey":"60f5e9c9e807","timestamp":"2026-06-13T08:50:44.976Z","severity":"info","source":"audit-prose-lint.js","gateName":"prose-lint","category":"prose-quality","title":"Prose linter flagged 73 style finding(s) for review","detail":"Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:\n\n{\n  \"report\": \"/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md\",\n  \"total\": 73,\n  \"neutralSurface\": true,\n  \"byScanner\": {\n    \"mechanical\": {\n      \"count\": 31\n    },\n    \"ai-vocab\": {\n      \"count\": 7\n    },\n    \"copula\": {\n      \"count\": 6\n    },\n    \"prose-patterns\": {\n      \"count\": 29\n    },\n    \"tics\": {\n      \"count\": 0\n    }\n  },\n  \"byCategory\": {\n    \"dialect-divergence\": 31,\n    \"ai-vocab-word\": 5,\n    \"ai-vocab-phrase\": 2,\n    \"possession-copula\": 5,\n    \"locative-copula\": 1,\n    \"same-sentence-repetition\": 29\n  },\n  \"findings\": [\n    {\n      \"scanner\": \"mechanical\",\n      \"line\": 37,\n      \"column\": 173,\n      \"category\": \"dialect-divergence\",\n      \"match\": \"analyse (UK)\",\n      \"snippet\": \"runbook: \\\"Executive audit report for Mx Allabout. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-cra\",\n      \"rephrase_hint\": \"Neutral-English surface (writing-style.md §3): rephrase to avoid the US/UK divergent spelling \\\"analyse\\\" entirely - e.g. examine / review.\"\n    },\n    {\n      \"scanner\": \"copula\",\n      \"line\": 50,\n      \"column\": 15,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"# therefore carries the AI sidecar pointer (the regulator-facing\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 62,\n      \"column\": 191,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"file (2x)\",\n      \"snippet\": \"The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPayload; the adjacent .ai.json file is a copy of the same JSON for tooling that pref\",\n      \"rephrase_hint\": \"Distinctive content word \\\"file\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 62,\n      \"column\": 276,\n      \"category\": \"same-sentence-repetition\",\n      \"match\": \"deterministic (2x)\",\n      \"snippet\": \"The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directiv\",\n      \"rephrase_hint\": \"Distinctive content word \\\"deterministic\\\" appears 2 times in one sentence (writing-style.md §6 \\\"No distinctive content word repeated in one sentence\\\"). Rephrase the second occurrence away. Canonical fix: \\\"The Gathering cohort closes when the cohort closes\\\" -> \\\"The seat at The Gathering closes when the cohort closes\\\". Do NOT substitute a synonym (that triggers Pattern 11 elegant variation). Exemption: parallel structure across multiple clauses with the same word three or more times is anaphora, which the rule allows.\"\n    },\n    {\n      \"scanner\": \"copula\",\n      \"line\": 62,\n      \"column\": 300,\n      \"category\": \"possession-copula\",\n      \"match\": \"carries the\",\n      \"snippet\": \"note: \\\"AI evidence chain (LLM-driven, multi-agent, and human-committed steps). The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPaylo\",\n      \"rephrase_hint\": \"Use \\\"has\\\" directly. \\\"X boasts four rooms\\\" -> \\\"X has four rooms\\\". \\\"Y features three engagement models\\\" -> \\\"Y has three engagement models\\\" or \\\"the three engagement models are A, B, C\\\".\"\n    },\n    {\n      \"scanner\": \"prose-patterns\",\n      \"line\": 62,\n      \"column\": 326,\n  ","suggestions":["Review the flagged AI-tells and mechanical prose issues in the final markdown before sending to the client. Worklist: prose-lint.json in the run results dir."],"lineRef":null,"provenanceClass":"deterministic","status":"escalated","decision":"manual-fix","actionTarget":"report","regenMode":"none","loopRound":0,"fix":null,"actionLog":[{"round":0,"action":"manual-fix","agent":"action-findings.js","at":"2026-06-13T08:52:19.993Z","outcome":"skipped"}],"x-mx-priority":"low","firstSeen":null,"occurrences":null}]
 ---
 ## Audit gate findings for human review
 
-Every automated gate ran to completion; this sidecar surfaces 7 findings (1 error, 3 warnings, 3 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
-
-### Errors (I/O or structural failures)
-
-*A gate could not complete or hit a structural failure. Investigate before relying on the report’s figures in that section.*
-
-| # | Gate | Category | Finding | Recorded |
-|---|------|----------|---------|----------|
-| 1 | timeout-llm-judgment | subprocess-timeout | Subprocess timeout (llm-judgment) | 2026-06-12T14:11:00Z |
-
-<details open><summary>Error detail (1)</summary>
-
-**1. timeout-llm-judgment - Subprocess timeout (llm-judgment)**
-
-The llm-judgment subprocess exceeded the timeout threshold and was terminated. This is expected behavior — a machine reader would also stop processing here. Elapsed: 120004ms. Kill reason: hard-timeout.
-
-Suggested next steps:
-
-- Review the subprocess output for deadlocks or resource exhaustion.
-- Check if the target URL has changed or is now unreachable.
-- Consider adjusting the timeout threshold via MX_AUDIT_GATE_TIMEOUT_MS.
-
-</details>
+Every automated gate ran to completion; this sidecar surfaces 5 findings (3 warnings, 2 infos) for the human reviewer to read, accept, or rebut before sign-off. Each entry names the gate that raised it, the severity, and the supporting evidence.
 
 ### Warnings (rule violations)
 
@@ -48,9 +26,9 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | sample-vs-total-scope | scope-mis-statements | Scope mis-statements remain after auto-repair: 2 | 2026-06-12T14:07:00Z |
-| 2 | deterministic-verifier | unverified-claims | 1 claim could not be verified against source data | 2026-06-12T14:07:02Z |
-| 3 | cross-section-consistency | cross-section-scope-mix | Line 839: scope-mixing prose | 2026-06-12T14:12:43Z |
+| 1 | sample-vs-total-scope | scope-mis-statements | Scope mis-statements remain after auto-repair: 2 | 2026-06-13T08:46:08Z |
+| 2 | deterministic-verifier | unverified-claims | 13 claims could not be verified against source data | 2026-06-13T08:46:10Z |
+| 3 | cross-section-consistency | cross-section-scope-mix | Line 846: scope-mixing prose | 2026-06-13T08:50:44Z |
 
 <details open><summary>Warning detail (3)</summary>
 
@@ -61,25 +39,37 @@ Gate sample-vs-total-scope (check-report-scope.js) returned non-zero. Output exc
 check-report-scope: /Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md
   2 scope mis-statement(s).
 
-  [sitewide-inside-sampled-section] line 260
-    section: ## Findings  (line 175)
+  [sitewide-inside-sampled-section] line 262
+    section: ## Findings  (line 177)
     phrase:  "Site-wide"
     line:    **Finding:** Security headers absent: HSTS, CSP, X-Frame-Options, X-Content-Type-Options (Site-wide). Missing security h
 
-  [sitewide-inside-sampled-section] line 264
-    section: ## Findings  (line 175)
+  [sitewide-inside-sampled-section] line 266
+    section: ## Findings  (line 177)
     phrase:  "site-wide"
     line:    - Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once c
 
   Fix: site-wide artefact sections (sitemap, robots, llms.txt, agent-card, security headers) describe a single file; do not write "across the audited set" — write "the sitemap declares" or "this file carries". Per-page sampled sections (Findings, Accessibility, Performance, SEO) describe N audited pages; do not write "site-wide" or "across the entire site" — write "across the audited pages" or "on the audited set".
 
-**2. deterministic-verifier - 1 claim could not be verified against source data**
+**2. deterministic-verifier - 13 claims could not be verified against source data**
 
 Deterministic verifier scanned numeric, URL, HTML-snippet, positional, and behavioural claims in the report. The entries below did not match the source CSV / JSON / cached HTML and need a reviewer's eye.
 
-line 697: Numeric 145 (145) not found in any results CSV / JSON
+line 116: Numeric 99 (99) not found in any results CSV / JSON
+line 440: Numeric 149 (149) not found in any results CSV / JSON
+line 704: Numeric 145 (145) not found in any results CSV / JSON
+line 1392: Numeric 330 (330) not found in any results CSV / JSON
+line 17: AI Attribution numeric 1906 not found in ai-attribution.json (totals or bucket counts)
+line 19: AI Attribution numeric 1906 not found in ai-attribution.json (totals or bucket counts)
+line 29: AI Attribution numeric 617 not found in ai-attribution.json (totals or bucket counts)
+line 30: AI Attribution numeric 360 not found in ai-attribution.json (totals or bucket counts)
+line 31: AI Attribution numeric 270 not found in ai-attribution.json (totals or bucket counts)
+line 32: AI Attribution numeric 243 not found in ai-attribution.json (totals or bucket counts)
+line 33: AI Attribution numeric 201 not found in ai-attribution.json (totals or bucket counts)
+line 34: AI Attribution numeric 159 not found in ai-attribution.json (totals or bucket counts)
+line 36: AI Attribution numeric 16 not found in ai-attribution.json (totals or bucket counts)
 
-**3. cross-section-consistency - Line 839: scope-mixing prose**
+**3. cross-section-consistency - Line 846: scope-mixing prose**
 
 Sentence mixes site-wide language with per-sample language. Choose one frame per sentence: report the site-wide source first, then describe the audited set separately. Line: The level is a site-wide, conservative classification: every Schema.org block across the audited pages must clear a level's bar before this site claims it, so a handful of thin blocks or pages without markup caps the level even when most pa
 
@@ -96,31 +86,24 @@ Suggested next steps:
 
 | # | Gate | Category | Finding | Recorded |
 |---|------|----------|---------|----------|
-| 1 | tone | exaggeration | Exaggeration / hyperbole: 1 instance (line 136) | 2026-06-12T14:07:00Z |
-| 2 | tone | bogus-html-placeholder | Bogus HTML-tag placeholders (use {name} not <name>): 1 instance (line 784) | 2026-06-12T14:07:00Z |
-| 3 | prose-lint | prose-quality | Prose linter flagged 72 style finding(s) for review | 2026-06-12T14:12:43Z |
+| 1 | tone | bogus-html-placeholder | Bogus HTML-tag placeholders (use {name} not <name>): 1 instance (line 791) | 2026-06-13T08:46:08Z |
+| 2 | prose-lint | prose-quality | Prose linter flagged 73 style finding(s) for review | 2026-06-13T08:50:44Z |
 
-<details open><summary>Info detail (3)</summary>
+<details open><summary>Info detail (2)</summary>
 
-**1. tone - Exaggeration / hyperbole: 1 instance**
-
-Exaggeration / hyperbole
-
-line 136: "flawless" - Across the audited set, the pages deliver an excellent experience for human visitors, with fast load
-
-**2. tone - Bogus HTML-tag placeholders (use {name} not <name>): 1 instance**
+**1. tone - Bogus HTML-tag placeholders (use {name} not <name>): 1 instance**
 
 Bogus HTML-tag placeholders (use {name} not <name>)
 
-line 784: "<slug> → {slug}" - | `/blog/<slug>` | 69 | 0.27 | 0.022 | 4.62 |
+line 791: "<slug> → {slug}" - | `/blog/<slug>` | 69 | 0.27 | 0.022 | 4.62 |
 
-**3. prose-lint - Prose linter flagged 72 style finding(s) for review**
+**2. prose-lint - Prose linter flagged 73 style finding(s) for review**
 
 Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
 
 {
   "report": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/mx.allabout.network/mx-allabout-network-report.md",
-  "total": 72,
+  "total": 73,
   "neutralSurface": true,
   "byScanner": {
     "mechanical": {
@@ -133,7 +116,7 @@ Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
       "count": 6
     },
     "prose-patterns": {
-      "count": 28
+      "count": 29
     },
     "tics": {
       "count": 0
@@ -145,12 +128,12 @@ Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
     "ai-vocab-phrase": 2,
     "possession-copula": 5,
     "locative-copula": 1,
-    "same-sentence-repetition": 28
+    "same-sentence-repetition": 29
   },
   "findings": [
     {
       "scanner": "mechanical",
-      "line": 32,
+      "line": 37,
       "column": 173,
       "category": "dialect-divergence",
       "match": "analyse (UK)",
@@ -159,7 +142,7 @@ Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
     },
     {
       "scanner": "copula",
-      "line": 45,
+      "line": 50,
       "column": 15,
       "category": "possession-copula",
       "match": "carries the",
@@ -168,7 +151,7 @@ Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
     },
     {
       "scanner": "prose-patterns",
-      "line": 57,
+      "line": 62,
       "column": 191,
       "category": "same-sentence-repetition",
       "match": "file (2x)",
@@ -177,7 +160,7 @@ Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
     },
     {
       "scanner": "prose-patterns",
-      "line": 57,
+      "line": 62,
       "column": 276,
       "category": "same-sentence-repetition",
       "match": "deterministic (2x)",
@@ -186,7 +169,7 @@ Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
     },
     {
       "scanner": "copula",
-      "line": 57,
+      "line": 62,
       "column": 300,
       "category": "possession-copula",
       "match": "carries the",
@@ -195,7 +178,7 @@ Gate prose-lint (audit-prose-lint.js) returned non-zero. Output excerpt:
     },
     {
       "scanner": "prose-patterns",
-      "line": 57,
+      "line": 62,
       "column": 326,
 
 Suggested next steps:

@@ -2,19 +2,10 @@
   "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
-  "auditId": null,
-  "runRevision": 1,
-  "lastWriteAt": "2026-06-13T08:06:08.710Z",
-  "startedAt": "2026-06-13T08:06:06.894Z",
-  "operator": null,
-  "responsiblePerson": {
-    "name": "Tom Cranstoun",
-    "email": "tom.cranstoun@gmail.com",
-    "identifier": "https://allabout.network",
-    "role": "auditOperator",
-    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
-    "country": "GB"
-  },
+  "auditId": "specification.website-2026-06-12",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-13T09:05:14.954Z",
+  "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
       "role": "auditOperator",
@@ -25,7 +16,16 @@
       "country": "GB"
     }
   ],
-  "target": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://specification.website",
+  "startedAt": "2026-06-13T08:06:06.894Z",
   "frameworks": [
     {
       "id": "EU-AI-Act",
@@ -326,8 +326,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
-      "shortSha": "d47a8c3"
+      "sha": "57d30778ae2adf841085719b89c9f079c7d87c74",
+      "shortSha": "57d3077"
     },
     "branch": "main",
     "dirty": true,
@@ -664,6 +664,119 @@
         }
       ],
       "reasoningTrace": "We found AI Suitability at a perfect 100/100 for https://specification.website, confirming the content’s readiness for machine consumption. Across the audited set, Structured Data and Discovery Readiness scored 75/100 and 76/100 respectively, indicating key opportunities to enhance machine discoverability and metadata richness. We invite you to address these areas to further strengthen your digital presence.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T09:01:15.427Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "specification-website-report.md",
+        "regexCategoriesFlagged": [
+          "absence-as-positive",
+          "marketing-inflation"
+        ]
+      },
+      "outputs": {
+        "file": "specification-website-report-fierce-critic.json",
+        "sha256": "271b87d0ce0b1f0f43a0c2bc7002206f86d446ba2f59f86c3b65435bf0fc90b7"
+      },
+      "rubricHash": "ee8b368406d5c514e5f8a627ba55daaee8ea2359d2211e157094f844ef6942f2",
+      "promptHash": "b19aa8799a6310205875b539a8a903e1530aeaa2d58fcd1b411e4012b42cca22",
+      "inputHashes": [
+        {
+          "hash": "b3c134947354ddcfd90810bf69a5f2bc12092b08d9cb01eaf1d833ec645f8030",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"description\": \"Recommendation to order headings without skipping levels is generic and not anchored to a specific selector, page URL or element instance.\",\n      \"type\": \"hollow-recommendation\"\n    },\n    {\n      \"description\": \"Recommendation to add missing Schema.org properties lacks specific data anchors such as selectors or page URLs.\",\n      \"type\": \"hollow-recommendation\"\n    },\n    {\n      \"description\": \"Optional enhancement suggestions (sameAs links, poten",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=3 llmFindings=3"
+    },
+    {
+      "timestamp": "2026-06-13T09:02:57.307Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "specification-website-report.md"
+      },
+      "outputs": {
+        "file": "specification-website-report-llm-judgment.json",
+        "sha256": "b05d5b786860da14175dbe418e8918c42f20060d918c8694426e32b6b6226f6d"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "125213ac2f8c12ef15efdd4d5a6a07d428b8cbb2f1fb60d100f1848e1e370d49",
+      "inputHashes": [
+        {
+          "hash": "b3c134947354ddcfd90810bf69a5f2bc12092b08d9cb01eaf1d833ec645f8030",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"tone-inconsistency\",\n      \"context\": \"We found that the audited pages deliver a strong user experience. Performance is excellent; accessibility flawless.\",\n      \"message\": \"Executive Summary paragraph mixes first-person 'We found...' with third-person statements about performance.\",\n      \"severity\": \"block\"\n    },\n    {\n      \"category\": \"tone-inconsistency\",\n      \"context\": \"We identified 2 finding(s) on the audited set, ordered by regulatory expos",
+      "outcome": "warn",
+      "notes": "findings=3 withdrawn=0 inputTok=18395 outputTok=3780"
+    },
+    {
+      "timestamp": "2026-06-13T09:05:04.481Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 3 mechanical patch(es); Layer 2 applied 4/5 LLM patch(es) for 7 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "specification-website-report.md",
+        "findingCount": 7,
+        "layer1Patches": 3,
+        "layer1Resolved": 0
+      },
+      "outputs": {
+        "file": "specification-website-report.md",
+        "sha256": "ae45d208f8f296ca69dbc277f02fc195da66ff2ad09febcc6f4854467ae7afe8",
+        "patchesApplied": 4,
+        "patchesSkipped": 1,
+        "unfixableCount": 2
+      },
+      "rubricHash": "acc0c5928b434a9612422edc74f6213e4c00b6d8a2384fb1645205c78bbaf183",
+      "promptHash": "73ea6b3f23fe2cb5735a5b7369f5ae2aec320ee9ef3413739d5576a30f5f2c5f",
+      "inputHashes": [
+        {
+          "hash": "472f4418bc29f912a8b29618a883f002f710ce8a532c229fcf1bd1c50e111b44",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"The headline opportunity is to elevate machine comprehension by adding MX governance metadata.\",\n      \"findingIndex\": 2,\n      \"justification\": \"marketing-inflation removal\",\n      \"replace\": \"Adding MX governance metadata will improve machine comprehension.\"\n    },\n    {\n      \"find\": \"**To reach the next level:** Score thresholds for Governed are met (MSC 76, SDQ 75, DR 76), but no MX-namespaced governance metadata was det\",\n      \"findingIndex\": 3,\n      \"justification\": \"marketing-inflation removal\",\n      \"replace\": \"Score thresholds for Governed are met (MSC 76, SDQ 75, DR 76), but no MX‑namespaced governance metadata was detected across the audited set.\"\n    },\n    {\n      \"find\": \"We found that the audited pages deliver a strong user experienc",
+      "outcome": "pass",
+      "notes": "inputTok=19686 outputTok=4849 layer1=3 layer2applied=4 layer2skipped=1 unfixable=2 hygiene=1 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-13T09:05:14.954Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 8,
+        "autoFixApplied": 0,
+        "escalated": 8,
+        "trailRecorded": 1,
+        "trailRemoved": 1,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
       "outcome": "pass"
     }
   ]

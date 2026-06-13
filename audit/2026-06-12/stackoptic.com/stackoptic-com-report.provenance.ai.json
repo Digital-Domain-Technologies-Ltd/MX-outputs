@@ -2,19 +2,10 @@
   "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
-  "auditId": null,
-  "runRevision": 1,
-  "lastWriteAt": "2026-06-13T08:08:44.587Z",
-  "startedAt": "2026-06-13T08:08:42.828Z",
-  "operator": null,
-  "responsiblePerson": {
-    "name": "Tom Cranstoun",
-    "email": "tom.cranstoun@gmail.com",
-    "identifier": "https://allabout.network",
-    "role": "auditOperator",
-    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
-    "country": "GB"
-  },
+  "auditId": "stackoptic.com-2026-06-12",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-13T09:09:15.254Z",
+  "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
       "role": "auditOperator",
@@ -25,7 +16,16 @@
       "country": "GB"
     }
   ],
-  "target": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://stackoptic.com",
+  "startedAt": "2026-06-13T08:08:42.828Z",
   "frameworks": [
     {
       "id": "EU-AI-Act",
@@ -326,8 +326,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
-      "shortSha": "d47a8c3"
+      "sha": "57d30778ae2adf841085719b89c9f079c7d87c74",
+      "shortSha": "57d3077"
     },
     "branch": "main",
     "dirty": true,
@@ -664,6 +664,119 @@
         }
       ],
       "reasoningTrace": "Across the audited set of six pages on https://stackoptic.com, we found AI Suitability at a perfect 100/100, showing your content is fully ready for advanced machine processing.  \nKey opportunities lie in Discovery Readiness (38/100) and Structured Data (89/100), where richer metadata can improve machine discoverability while human visitors are already served well.  \nWe invite you to act on these findings to strengthen machine comprehension and unlock the full potential of your content.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T09:06:37.308Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "stackoptic-com-report.md",
+        "regexCategoriesFlagged": [
+          "duplicate-paragraph",
+          "marketing-inflation"
+        ]
+      },
+      "outputs": {
+        "file": "stackoptic-com-report-fierce-critic.json",
+        "sha256": "266fa9f08fc6b0a5a61d18099abe5f127fb0065cc42d3bf1991ec5c34f616062"
+      },
+      "rubricHash": "ee8b368406d5c514e5f8a627ba55daaee8ea2359d2211e157094f844ef6942f2",
+      "promptHash": "8524265065bb40fb5056d48557fb8667b0fc3438d407d628724400fd6ecbc61d",
+      "inputHashes": [
+        {
+          "hash": "46a98941e7a592139f952fa6770e4d08d94c781e32a5f72d08b2f8c402376aff",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 1 recommendation is a generic domain‑level suggestion without any specific selector, page reference or data anchor from the audit.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 2 recommendation is a generic domain‑level suggestion without any specific selector, page reference or data anchor from the audit.\"\n    },\n    {\n      \"category\": \"hollow-recommendati",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=4 llmFindings=7"
+    },
+    {
+      "timestamp": "2026-06-13T09:07:56.422Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "stackoptic-com-report.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report-llm-judgment.json",
+        "sha256": "a42f26027ee33b21ad83879aca755b646072007e23b3b5a0f2c5ef664a7f597b"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "d489f150ff84ad85d39cab05425c982944617b450998341d49a4463b4f5f185e",
+      "inputHashes": [
+        {
+          "hash": "46a98941e7a592139f952fa6770e4d08d94c781e32a5f72d08b2f8c402376aff",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"tone-inconsistency\",\n      \"context\": \"We audited 6 pages across stackoptic.com’s site using the Web Audit Suite.\",\n      \"message\": \"The \\\"About This Report\\\" section mixes first‑person narration (“We audited…”) with third‑person description (“The gap between those two results…”).\",\n      \"severity\": \"block\"\n    },\n    {\n      \"category\": \"tone-inconsistency\",\n      \"context\": \"We present the Human Experience subtable, which shows that across the audit",
+      "outcome": "warn",
+      "notes": "findings=3 withdrawn=0 inputTok=22642 outputTok=2197"
+    },
+    {
+      "timestamp": "2026-06-13T09:08:55.360Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 1 mechanical patch(es); Layer 2 applied 2/3 LLM patch(es) for 4 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "stackoptic-com-report.md",
+        "findingCount": 4,
+        "layer1Patches": 1,
+        "layer1Resolved": 4
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "fd153bd55b4e5c5a3555684f7ba15fe7f6d6f2f1b5c287d7fda7a4a6a21ad6a4",
+        "patchesApplied": 2,
+        "patchesSkipped": 1,
+        "unfixableCount": 1
+      },
+      "rubricHash": "acc0c5928b434a9612422edc74f6213e4c00b6d8a2384fb1645205c78bbaf183",
+      "promptHash": "9a60a2cc9301ab97289f7e7f8b007820e6c262b8f227378fcf05c2d3fef75818",
+      "inputHashes": [
+        {
+          "hash": "ae1e4b2d9777e2c9c348a11eb9881ecc30eac5091711b24c8abd09405d6e1954",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"We invite you to act on these findings to strengthen machine comprehension and unlock the full potential of your content.\",\n      \"findingIndex\": 1,\n      \"justification\": \"marketing: removed inflated marketing language, replaced with concise benefit.\",\n      \"replace\": \"Acting on these findings will improve machine comprehension and maximise the reach of your content.\"\n    },\n    {\n      \"find\": \"We present the Human Experience subtable, which shows that across the audited set your pages deliver an excellent overall experience.\",\n      \"findingIndex\": 3,\n      \"justification\": \"voice: switched to site owner perspective.\",\n      \"replace\": \"The Human Experience subtable shows that across the audited set your pages deliver an excellent overall experienc",
+      "outcome": "pass",
+      "notes": "inputTok=23699 outputTok=1119 layer1=1 layer2applied=2 layer2skipped=1 unfixable=1 hygiene=2 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-13T09:09:15.254Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 7,
+        "autoFixApplied": 0,
+        "escalated": 7,
+        "trailRecorded": 2,
+        "trailRemoved": 0,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
       "outcome": "pass"
     }
   ]

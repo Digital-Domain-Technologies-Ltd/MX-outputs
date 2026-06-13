@@ -2,19 +2,10 @@
   "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
-  "auditId": null,
-  "runRevision": 1,
-  "lastWriteAt": "2026-06-13T08:11:15.312Z",
-  "startedAt": "2026-06-13T08:11:13.577Z",
-  "operator": null,
-  "responsiblePerson": {
-    "name": "Tom Cranstoun",
-    "email": "tom.cranstoun@gmail.com",
-    "identifier": "https://allabout.network",
-    "role": "auditOperator",
-    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
-    "country": "GB"
-  },
+  "auditId": "typo3.com-2026-06-12",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-13T09:13:57.221Z",
+  "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
       "role": "auditOperator",
@@ -25,7 +16,16 @@
       "country": "GB"
     }
   ],
-  "target": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://typo3.com",
+  "startedAt": "2026-06-13T08:11:13.577Z",
   "frameworks": [
     {
       "id": "EU-AI-Act",
@@ -326,8 +326,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
-      "shortSha": "d47a8c3"
+      "sha": "57d30778ae2adf841085719b89c9f079c7d87c74",
+      "shortSha": "57d3077"
     },
     "branch": "main",
     "dirty": true,
@@ -635,6 +635,119 @@
         }
       ],
       "reasoningTrace": "Accessibility scores 100/100 across the audited set of https://typo3.com, demonstrating that your pages are fully compliant with WCAG guidelines and ready for all users. Key opportunities lie in structured data (0/100) and discovery readiness (25/100), where adding rich metadata and improving search discoverability will unlock machine‑readable value. We recommend prioritising these enhancements to empower machines to understand and surface your content more effectively.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T09:10:50.923Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "typo3-com-report.md",
+        "regexCategoriesFlagged": [
+          "duplicate-paragraph",
+          "marketing-inflation"
+        ]
+      },
+      "outputs": {
+        "file": "typo3-com-report-fierce-critic.json",
+        "sha256": "03285318e4b7ba262570d619c482e342ba87db80d33a528b43e1b5b4bdae6893"
+      },
+      "rubricHash": "ee8b368406d5c514e5f8a627ba55daaee8ea2359d2211e157094f844ef6942f2",
+      "promptHash": "f9022140354c8f5dc8ece0ff271bbb5f3bb862b8ef4d789811cae08e9a0c5718",
+      "inputHashes": [
+        {
+          "hash": "1b261ed6e00d1c38b2f572ffa64ff312d9a3f0a6f894b807457700d6b86d0499",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 1 recommendation \\\"Add descriptive alt text to the informative images that lack it and empty alt to the decorative ones\\\" lacks a specific data anchor (no image selector, count or URL) and is therefore generic.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 2 recommendation \\\"Order headings without skipping levels\\\" does not reference any specific heading ele",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=2 llmFindings=6"
+    },
+    {
+      "timestamp": "2026-06-13T09:12:00.343Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "typo3-com-report.md"
+      },
+      "outputs": {
+        "file": "typo3-com-report-llm-judgment.json",
+        "sha256": "2d8431e51120c3584258c7383023c4461b7ac7095b6098b99e0b408b4f38c16c"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "5a11b16553c12e975dd6bee1ab232a54bf6bc57d09aa88ac52f6a0e2fc7ca199",
+      "inputHashes": [
+        {
+          "hash": "1b261ed6e00d1c38b2f572ffa64ff312d9a3f0a6f894b807457700d6b86d0499",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": []\n}",
+      "outcome": "pass",
+      "notes": "findings=0 withdrawn=0 inputTok=19502 outputTok=2057"
+    },
+    {
+      "timestamp": "2026-06-13T09:13:36.015Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 4 mechanical patch(es); Layer 2 applied 3/3 LLM patch(es) for 4 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "typo3-com-report.md",
+        "findingCount": 4,
+        "layer1Patches": 4,
+        "layer1Resolved": 1
+      },
+      "outputs": {
+        "file": "typo3-com-report.md",
+        "sha256": "7c040a711e3cbeccb1b565c31f32d6e0c60406cc6a39a5ff23ebef8757eb7074",
+        "patchesApplied": 3,
+        "patchesSkipped": 0,
+        "unfixableCount": 0
+      },
+      "rubricHash": "acc0c5928b434a9612422edc74f6213e4c00b6d8a2384fb1645205c78bbaf183",
+      "promptHash": "da961c986e40f027528ad23637f3bf1bfe0571eb295bbec737793a8eed7612ff",
+      "inputHashes": [
+        {
+          "hash": "595a59ed805431ca8805c8f4ffa12ce71e5346e6232ed95e6dff346fc2365121",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"**Finding:** Security headers absent: HSTS, CSP, X-Frame-Options (Site-wide). Missing security headers increase exposure\",\n      \"findingIndex\": 1,\n      \"justification\": \"scope: replaced site‑wide with across the audited set\",\n      \"replace\": \"**Finding:** Security headers absent: HSTS, CSP, X-Frame-Options (across the audited set). Missing security headers increase exposure\"\n    },\n    {\n      \"find\": \"- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once c\",\n      \"findingIndex\": 2,\n      \"justification\": \"scope: replaced site‑wide with across the audited set and added data-backed detail\",\n      \"replace\": \"- Add the missing response headers at the server or CDN edge; each is a one-li",
+      "outcome": "pass",
+      "notes": "inputTok=20565 outputTok=3230 layer1=4 layer2applied=3 layer2skipped=0 unfixable=0 hygiene=1 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-13T09:13:57.221Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 6,
+        "autoFixApplied": 0,
+        "escalated": 6,
+        "trailRecorded": 3,
+        "trailRemoved": 0,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
       "outcome": "pass"
     }
   ]

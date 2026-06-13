@@ -2,19 +2,10 @@
   "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
-  "auditId": null,
-  "runRevision": 1,
-  "lastWriteAt": "2026-06-13T07:56:26.172Z",
-  "startedAt": "2026-06-13T07:56:24.081Z",
-  "operator": null,
-  "responsiblePerson": {
-    "name": "Tom Cranstoun",
-    "email": "tom.cranstoun@gmail.com",
-    "identifier": "https://allabout.network",
-    "role": "auditOperator",
-    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
-    "country": "GB"
-  },
+  "auditId": "dkd.de-de-2026-06-12",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-13T08:35:10.007Z",
+  "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
       "role": "auditOperator",
@@ -25,7 +16,16 @@
       "country": "GB"
     }
   ],
-  "target": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://www.dkd.de",
+  "startedAt": "2026-06-13T07:56:24.081Z",
   "frameworks": [
     {
       "id": "EU-AI-Act",
@@ -326,8 +326,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
-      "shortSha": "d47a8c3"
+      "sha": "57d30778ae2adf841085719b89c9f079c7d87c74",
+      "shortSha": "57d3077"
     },
     "branch": "main",
     "dirty": true,
@@ -664,6 +664,118 @@
         }
       ],
       "reasoningTrace": "Accessibility is a clear strength on https://www.dkd.de, scoring 100/100 and ensuring all users can interact with content without barriers. Across the audited set, Discovery Readiness sits at 25/100 and Structured Data scores 68/100, limiting how effectively machines can discover and understand your pages. We recommend prioritising improvements in discovery signals and structured data to unlock greater machine visibility and engagement.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:32:13.664Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "dkd-de-de-report.md",
+        "regexCategoriesFlagged": [
+          "marketing-inflation"
+        ]
+      },
+      "outputs": {
+        "file": "dkd-de-de-report-fierce-critic.json",
+        "sha256": "ecf20f35f9c50ed40e1d87bfe21c87003cb7749618084cbc3c9d2881be06b114"
+      },
+      "rubricHash": "ee8b368406d5c514e5f8a627ba55daaee8ea2359d2211e157094f844ef6942f2",
+      "promptHash": "c93b640100cb1d7f77c37665b720587db3ef829afe0c1b82b368ffbb4391f5e9",
+      "inputHashes": [
+        {
+          "hash": "c0bd422a7b5986cef3bb16ee1b61f0eead1213db1a0e74b9018758a92f84edb2",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 1: Image Alt-text Coverage recommendation is generic – it advises adding alt text but does not reference specific image selectors, page URLs or counts from the audit.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 2: Heading Hierarchy Skips Levels recommendation lacks a data anchor; it simply instructs to order headings without specifying which heading tags o",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=1 llmFindings=8"
+    },
+    {
+      "timestamp": "2026-06-13T08:33:30.529Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "dkd-de-de-report.md"
+      },
+      "outputs": {
+        "file": "dkd-de-de-report-llm-judgment.json",
+        "sha256": "4629da553b64823a753320339f336e938493db00ceef45efc74bd4e2c0548139"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "79afabe8ead2014aeb48a5a4c37cebf71a4fb37d8fb93aad0691b1f4c36578ff",
+      "inputHashes": [
+        {
+          "hash": "c0bd422a7b5986cef3bb16ee1b61f0eead1213db1a0e74b9018758a92f84edb2",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"tone-inconsistency\",\n      \"context\": \"We find that across the audited set, your pages demonstrate a strong foundations in SEO and accessibility\",\n      \"message\": \"Tone inconsistency in the 'What's Working Well' section: it mixes first‑person 'We find…' with third‑person 'The strong implementation…'.\",\n      \"severity\": \"block\"\n    }\n  ]\n}",
+      "outcome": "warn",
+      "notes": "findings=1 withdrawn=0 inputTok=19509 outputTok=2426"
+    },
+    {
+      "timestamp": "2026-06-13T08:34:49.049Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 2 mechanical patch(es); Layer 2 applied 3/4 LLM patch(es) for 5 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "dkd-de-de-report.md",
+        "findingCount": 5,
+        "layer1Patches": 2,
+        "layer1Resolved": 0
+      },
+      "outputs": {
+        "file": "dkd-de-de-report.md",
+        "sha256": "395eed1275a8419ea80d52e831a77bc5ad25f8039f7d5ffab8409800f2d6def6",
+        "patchesApplied": 3,
+        "patchesSkipped": 1,
+        "unfixableCount": 0
+      },
+      "rubricHash": "acc0c5928b434a9612422edc74f6213e4c00b6d8a2384fb1645205c78bbaf183",
+      "promptHash": "bb59ddb699c43dfdc3c836bb4fe49991016e2a2f02298f38e984d4ede9d8a659",
+      "inputHashes": [
+        {
+          "hash": "91e9ba07abb9fbcc4348676d01f5a890a4af9e27c45da9606d38b645485a9d02",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"**Finding:** Security headers absent: X-Frame-Options (Site-wide). Missing security headers increase exposure to content\",\n      \"findingIndex\": 1,\n      \"justification\": \"scope: replaced site‑wide with across the audited set\",\n      \"replace\": \"**Finding:** Security headers absent: X-Frame-Options (across the audited set). Missing security headers increase exposure to content\"\n    },\n    {\n      \"find\": \"- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site‑wide once c\",\n      \"findingIndex\": 2,\n      \"justification\": \"scope: replaced site‑wide with across the audited set and added data reference\",\n      \"replace\": \"- Add the missing response headers at the server or CDN edge; each is a one-line d",
+      "outcome": "pass",
+      "notes": "inputTok=20643 outputTok=2392 layer1=2 layer2applied=3 layer2skipped=1 unfixable=0 hygiene=1 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-13T08:35:10.007Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 5,
+        "autoFixApplied": 0,
+        "escalated": 5,
+        "trailRecorded": 5,
+        "trailRemoved": 2,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
       "outcome": "pass"
     }
   ]

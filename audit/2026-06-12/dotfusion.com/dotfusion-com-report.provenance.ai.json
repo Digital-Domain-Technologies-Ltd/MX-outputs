@@ -2,19 +2,10 @@
   "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
-  "auditId": null,
-  "runRevision": 1,
-  "lastWriteAt": "2026-06-13T07:58:47.456Z",
-  "startedAt": "2026-06-13T07:58:45.764Z",
-  "operator": null,
-  "responsiblePerson": {
-    "name": "Tom Cranstoun",
-    "email": "tom.cranstoun@gmail.com",
-    "identifier": "https://allabout.network",
-    "role": "auditOperator",
-    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
-    "country": "GB"
-  },
+  "auditId": "dotfusion.com-2026-06-12",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-13T08:41:37.653Z",
+  "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
       "role": "auditOperator",
@@ -25,7 +16,16 @@
       "country": "GB"
     }
   ],
-  "target": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://dotfusion.com",
+  "startedAt": "2026-06-13T07:58:45.764Z",
   "frameworks": [
     {
       "id": "EU-AI-Act",
@@ -326,8 +326,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
-      "shortSha": "d47a8c3"
+      "sha": "57d30778ae2adf841085719b89c9f079c7d87c74",
+      "shortSha": "57d3077"
     },
     "branch": "main",
     "dirty": true,
@@ -635,6 +635,118 @@
         }
       ],
       "reasoningTrace": "We found that https://dotfusion.com scores a perfect 100/100 for AI Suitability, indicating it is fully ready for machine consumption and can deliver high‑value insights to machines. Across the audited set, Discovery Readiness sits at 20/100 and Structured Data at 44/100, highlighting opportunities to expose metadata and discovery artefacts that will improve machine understanding. We invite you to address these gaps to unlock greater visibility and engagement for your content.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:37:21.765Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "dotfusion-com-report.md",
+        "regexCategoriesFlagged": [
+          "absence-as-positive",
+          "duplicate-paragraph",
+          "marketing-inflation"
+        ]
+      },
+      "outputs": {
+        "file": "dotfusion-com-report-fierce-critic.json",
+        "sha256": "07d5ff353de91aafb7184f49bc346c16b6241480aa357a89cba28d36e442564d"
+      },
+      "rubricHash": "ee8b368406d5c514e5f8a627ba55daaee8ea2359d2211e157094f844ef6942f2",
+      "inputHashes": [
+        {
+          "hash": "e4c50b1a53c6c71dcffc8ab6c2d9855804e3a817d68f6922a1b86f5a11f97e44",
+          "label": "report"
+        }
+      ],
+      "outcome": "pass",
+      "notes": "runCount=1 regexFindings=4 llmFindings=0"
+    },
+    {
+      "timestamp": "2026-06-13T08:39:15.660Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "dotfusion-com-report.md"
+      },
+      "outputs": {
+        "file": "dotfusion-com-report-llm-judgment.json",
+        "sha256": "50f2bd048301bdfb9d85e985181bd95aa39bfc6ac5759848a086894bc91b44db"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "e78e336b7ccda4843285e62fda52a4d13dfcac5c890f1240adc62f95b8cc874a",
+      "inputHashes": [
+        {
+          "hash": "e4c50b1a53c6c71dcffc8ab6c2d9855804e3a817d68f6922a1b86f5a11f97e44",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": []\n}",
+      "outcome": "pass",
+      "notes": "findings=0 withdrawn=0 inputTok=21859 outputTok=3921"
+    },
+    {
+      "timestamp": "2026-06-13T08:41:16.508Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 1 mechanical patch(es); Layer 2 applied 1/5 LLM patch(es) for 6 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "dotfusion-com-report.md",
+        "findingCount": 6,
+        "layer1Patches": 1,
+        "layer1Resolved": 2
+      },
+      "outputs": {
+        "file": "dotfusion-com-report.md",
+        "sha256": "e358dc55533b35472d56dac1c8977905fa7affb2ef629b05a301ba3257d6f282",
+        "patchesApplied": 1,
+        "patchesSkipped": 4,
+        "unfixableCount": 1
+      },
+      "rubricHash": "acc0c5928b434a9612422edc74f6213e4c00b6d8a2384fb1645205c78bbaf183",
+      "promptHash": "e26e39d1b7d98ec4fee0d2b72098b566fe97a9be94ccc34f7356c01a8f0c62c0",
+      "inputHashes": [
+        {
+          "hash": "06432db9ac0870077d9c5b42a917638a23e6ce59340285a208b0612e42e7094f",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"Pipeline Survivability runs eleven reading‑resilience checks on every audited page.\",\n      \"findingIndex\": 1,\n      \"justification\": \"voice: rewrite third-person 'runs' to first-person 'run'\",\n      \"replace\": \"We run eleven reading‑resilience checks on every audited page.\"\n    },\n    {\n      \"find\": \"**Finding:** Security headers absent: CSP, X-Frame-Options, X-Content-Type-Options (Site-wide). Missing security headers\",\n      \"findingIndex\": 2,\n      \"justification\": \"scope: replace sitewide with across the audited set\",\n      \"replace\": \"**Finding:** Security headers absent: CSP, X-Frame-Options, X-Content-Type-Options (across the audited set). Missing security headers\"\n    },\n    {\n      \"find\": \"- Add the missing response headers at the server or",
+      "outcome": "pass",
+      "notes": "inputTok=23168 outputTok=4112 layer1=1 layer2applied=1 layer2skipped=4 unfixable=1 hygiene=1 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-13T08:41:37.653Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 8,
+        "autoFixApplied": 0,
+        "escalated": 8,
+        "trailRecorded": 5,
+        "trailRemoved": 3,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
       "outcome": "pass"
     }
   ]

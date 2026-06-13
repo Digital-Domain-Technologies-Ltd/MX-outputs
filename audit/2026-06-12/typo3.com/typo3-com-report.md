@@ -87,7 +87,9 @@ Our scoring criteria follow published MX standards and proposed specifications m
 
 **About sample scope.** Findings throughout this report describe what we observed on the 11 pages we crawled. Verdicts scoped to the sample should not be extrapolated to the full estate without a wider audit; where a finding is structural (a missing security header, a soft 404 pattern, an llms.txt transport problem) we say so.
 
-<!-- STATIC-SEED: note-llms-txt -->
+### A note on llms.txt
+
+The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention places a structured description file at a site's root for AI systems to read, following the same pattern as robots.txt. The Discovery Files section below records its presence, transport type, and sitemap registration, and covers the two structural problems (content type and discovery) that limit most implementations.
 
 ---
 
@@ -144,7 +146,7 @@ We include this comparison because it is what continuous monitoring delivers: ea
 
 ### Human Experience
 
-The following table summarizes how the audited pages perform for human visitors.  
+The following table summarises how the audited pages perform for human visitors.  
 Across the audited set, the pages deliver a strong experience for human visitors.
 
 **Table 2**
@@ -219,7 +221,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 ## What's Working Well
 
 Below is a snapshot of what’s working well across the audited set.  
-Your pages demonstrate a strong foundations with an SEO score of 82/100 on all content pages and flawless accessibility at 100/100, setting the groundwork for further enhancements.
+Your pages demonstrate a strong foundations with an SEO score of 82/100 on all content pages and consistent accessibility at 100/100, setting the groundwork for further enhancements.
 
 **Table 5**
 
@@ -313,11 +315,11 @@ We identified 7 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **Bucket:** Cross-cutting
 
-**Finding:** Security headers absent: HSTS, CSP, X-Frame-Options (Site-wide). Missing security headers increase exposure to content injection and clickjacking
+**Finding:** Security headers absent: HSTS, CSP, X-Frame-Options (across the audited set). Missing security headers increase exposure to content injection and clickjacking
 
 **What to change and why:**
 
-- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once configured.
+- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies across the audited set. All 11 audited URLs lack these headers.onfigured.
 - Set them once in the edge or server configuration rather than per page so coverage stays complete as new pages ship.
 
 **Effort:** Low
@@ -611,7 +613,7 @@ This is a clean-slate site with no Schema.org markup. There are no property gaps
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organisation: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "high-quality" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 **The list format is not the problem.** Ranked, comparative lists are among the most-cited content shapes in AI answers, so we never flag a page for being a list. What we flag is the self-ranking variant: a "best N" page that puts its own brand at position one. It repeats a familiar move - the FAQ markup Google deprecated for gaming while AI systems kept reading it. The gamed surface gets demoted; the format stays valuable; the gap between them is provenance. The demotion is not an SEO cost you can trade for AI reach: AI answer engines retrieve through search, Google's own among them, so a page the search engine demotes is a page the AI does not surface at the top. A self-ranking list reads as a rigged result to anything checking who made the ranking, and it forfeits the visibility it was trying to manufacture.
 
@@ -876,12 +878,12 @@ We found 6 identical inline fragment(s) repeated across multiple pages, totallin
 | css | 218748 | 10 | @keyframes ucOpacity{0%{opacity:0}100%{opacity:1}}.usercentr |
 | css | 773 | 10 | .usercentrics-button .uc-corner-modal .uc-corner-modal-conte |
 | css | 652 | 10 | #usercentrics-button .uc-banner-content {       background-c |
-| css | 151 | 10 | #uc-corner-modal a[href], #uc-center-modal a[href], #uc-bann |
+| css | 151 | 10 | #uc-corner-modal a[href], #uc-centre-modal a[href], #uc-bann |
 | css | 20 | 6 | .cls-1{fill:#f18518} |
 
 *The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `typo3-com-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
@@ -923,7 +925,7 @@ This audit is a starting point. The outcome we work toward is a site any machine
 
 ## Summary of Findings
 
-Accessibility scores 100/100 across the audited set of https://typo3.com, demonstrating that your pages are fully compliant with WCAG guidelines and ready for all users. Key opportunities lie in structured data (0/100) and discovery readiness (25/100), where adding rich metadata and improving search discoverability will unlock machine-readable value. We recommend prioritising these enhancements to empower machines to understand and surface your content more effectively.
+Accessibility scores 100/100 across the audited set of https://typo3.com.ines and ready for all users. Key opportunities lie in structured data (0/100) and discovery readiness (25/100), where adding rich metadata and improving search discoverability will unlock machine-readable value. We recommend prioritising these enhancements to empower machines to understand and surface your content more effectively.
 
 ### Audit Scores
 
@@ -948,7 +950,17 @@ Accessibility scores 100/100 across the audited set of https://typo3.com, demons
 
 ---
 
-<!-- STATIC-SEED: working-with-us -->
+## Working With Us
+
+This is an automated audit. The deeper work is a paid consultancy engagement, and we offer it across every report type:
+
+- **Full-render, all-pages audience and age-awareness review.** Here we classify the entry page; in the consultancy version we render every page and read the age-assurance, consent, and age or date-of-birth data collection across the whole estate.
+- **Full-site qualitative review.** We read every audited page for the content-quality patterns the automated pass samples on the first few pages.
+- **PDF estate accessibility remediation.** We tag the structure, declare the conformance, and record an independent check across the document estate, aligned with Directive (EU) 2019/882.
+- **On-premise, regulated-sector audit.** We run the whole pipeline against a local model on infrastructure you control, so no audited content leaves your network.
+- **Implementation and remediation.** We carry the technical context that produced these findings into the work that resolves them.
+
+To scope an engagement, speak to us about next steps.
 
 ---
 

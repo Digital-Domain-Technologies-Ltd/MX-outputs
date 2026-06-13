@@ -2,19 +2,10 @@
   "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
-  "auditId": null,
-  "runRevision": 1,
-  "lastWriteAt": "2026-06-13T08:03:54.726Z",
-  "startedAt": "2026-06-13T08:03:52.982Z",
-  "operator": null,
-  "responsiblePerson": {
-    "name": "Tom Cranstoun",
-    "email": "tom.cranstoun@gmail.com",
-    "identifier": "https://allabout.network",
-    "role": "auditOperator",
-    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
-    "country": "GB"
-  },
+  "auditId": "sibotacademy.pl-en-2026-06-12",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-13T08:59:43.095Z",
+  "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
       "role": "auditOperator",
@@ -25,7 +16,16 @@
       "country": "GB"
     }
   ],
-  "target": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://sibotacademy.pl",
+  "startedAt": "2026-06-13T08:03:52.982Z",
   "frameworks": [
     {
       "id": "EU-AI-Act",
@@ -326,8 +326,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
-      "shortSha": "d47a8c3"
+      "sha": "57d30778ae2adf841085719b89c9f079c7d87c74",
+      "shortSha": "57d3077"
     },
     "branch": "main",
     "dirty": true,
@@ -664,6 +664,52 @@
         }
       ],
       "reasoningTrace": "SEO is a clear strength for https://sibotacademy.pl, scoring 87/100 and demonstrating strong optimisation for search engines. Key opportunities lie in Discovery Readiness (32/100) and Structured Data (52/100), where improving metadata will enhance machine comprehension and visibility. We invite you to act on these findings to further elevate the site’s performance for both human visitors and machines.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:54:06.133Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "sibotacademy-pl-en-report.md",
+        "regexCategoriesFlagged": []
+      },
+      "outputs": {
+        "file": "sibotacademy-pl-en-report-fierce-critic.json",
+        "sha256": "fa977ac7000248d958bba91631abacd1f53a37559c8600a4a448769d557c4562"
+      },
+      "rubricHash": "ee8b368406d5c514e5f8a627ba55daaee8ea2359d2211e157094f844ef6942f2",
+      "promptHash": "097d6f725bf69e6f0d693b54749a98e5a8b886f957f141c1b8174c2413845505",
+      "inputHashes": [
+        {
+          "hash": "098c01c1b77c099619ce63f041cdfbdcf2ff5a5184cdf57085074aae6b0ae07a",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Recommendation for \\\"Insufficient Colour Contrast\\\" lacks a specific selector, page URL or count – generic advice that could be copied verbatim.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Recommendation for \\\"Heading Hierarchy Skips Levels\\\" provides no element selector or page reference – generic guidance.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"de",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=0 llmFindings=8"
+    },
+    {
+      "timestamp": "2026-06-13T08:59:43.095Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 9,
+        "autoFixApplied": 0,
+        "escalated": 9,
+        "trailRecorded": 3,
+        "trailRemoved": 0,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
       "outcome": "pass"
     }
   ]

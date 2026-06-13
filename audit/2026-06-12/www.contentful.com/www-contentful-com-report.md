@@ -87,7 +87,9 @@ Our scoring criteria follow published MX standards and proposed specifications m
 
 **About sample scope.** Findings throughout this report describe what we observed on the 12 pages we crawled. Verdicts scoped to the sample should not be extrapolated to the full estate without a wider audit; where a finding is structural (a missing security header, a soft 404 pattern, an llms.txt transport problem) we say so.
 
-<!-- STATIC-SEED: note-llms-txt -->
+### A note on llms.txt
+
+The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention places a structured description file at a site's root for AI systems to read, following the same pattern as robots.txt. The Discovery Files section below records its presence, transport type, and sitemap registration, and covers the two structural problems (content type and discovery) that limit most implementations.
 
 ---
 
@@ -119,7 +121,7 @@ Your site runs on **Netlify** (detected from multiple platform signals).
 
 Across the audited set, your site delivers a polished experience for visitors. The strong SEO foundation-scoring 94/100-ensures that search engines surface your content quickly and accurately. Clear navigation, concise copy, and consistent branding reinforce the user journey, making it easy for people to find what they need.
 
-Accessibility remains a Priority 1 compliance area; across the audited set we identified 11 distinct WCAG AA issue types affecting 279 elements. Addressing each category with a single fix will resolve many instances and improve usability for all users. The headline opportunity that follows is to elevate your machine-readiness from Level 1 Discoverable to Level 2 Governed by adding full MX governance fields-mx:status, mx:contentType, mx:audience, canonicalUri, provenance markers-so machines have the structured context they need for accurate comprehension. Raising MSC above 60 and Discovery Readiness above 40 will unlock this next step.
+Accessibility remains a Priority 1 compliance area; we identified 11 distinct WCAG AA issue types affecting 279 elements.nts. Addressing each category with a single fix will resolve many instances and improve usability for all users. The headline opportunity that follows is to elevate your machine-readiness from Level 1 Discoverable to Level 2 Governed by adding full MX governance fields-mx:status, mx:contentType, mx:audience, canonicalUri, provenance markers-so machines have the structured context they need for accurate comprehension. Raising MSC above 60 and Discovery Readiness above 40 will unlock this next step.
 
 \clearpage
 
@@ -289,7 +291,7 @@ We identified 14 finding(s) on the audited set, ordered by regulatory exposure f
 
 **Bucket:** Compliance Risk
 
-**Finding:** This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 4.05:1. Recommendation:  change background to #3478c7. This pattern appears 38 time(s) across the audited set, affecting low-vision users.
+**Finding:** This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 4.05:1. Recommendation: change background to #3478c7. This pattern appears 38 time(s) across the audited set, affecting low-vision users.
 
 **What to change and why:**
 
@@ -989,7 +991,7 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 **What we mean by provenance gap.** A provenance gap is the structural distance between a page that *describes* a claim and a page that *evidences* it. Schema markup tells a machine what an entity is: a Product, an Article, an Organisation: but it cannot tell a machine who made the assertion, when, or whether the claim is supported by anything outside any single page. AI systems that cite content increasingly need both halves: the typed assertion and a verifiable trail behind it. A page with rich JSON-LD but no third-party links, no `dateModified`, no `author`, and a year-swapped title is structurally indistinguishable from a page that was generated to fill an index slot. The Provenance Gap concept and its full taxonomy are documented at <https://mx.allabout.network/blog/the-provenance-gap.html>.
 
-**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "world-class" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
+**What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "high-quality" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
 **The list format is not the problem.** Ranked, comparative lists are among the most-cited content shapes in AI answers, so we never flag a page for being a list. What we flag is the self-ranking variant: a "best N" page that puts its own brand at position one. It repeats a familiar move - the FAQ markup Google deprecated for gaming while AI systems kept reading it. The gamed surface gets demoted; the format stays valuable; the gap between them is provenance. The demotion is not an SEO cost you can trade for AI reach: AI answer engines retrieve through search, Google's own among them, so a page the search engine demotes is a page the AI does not surface at the top. A self-ranking list reads as a rigged result to anything checking who made the ranking, and it forfeits the visibility it was trying to manufacture.
 
@@ -1266,7 +1268,7 @@ We found 141 identical inline fragment(s) repeated across multiple pages, totall
 
 *Showing the top 10 of 127 duplicate fragments by occurrence count. The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `www-contentful-com-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
@@ -1308,7 +1310,7 @@ This audit is a starting point. The outcome we work toward is a site any machine
 
 ## Summary of Findings
 
-Our audit of https://www.contentful.com shows AI Suitability at an exceptional 99/100, indicating that machines can quickly understand and use the content. Across the audited set, Discovery Readiness (39/100) and Structured Data (61/100) are the lowest-scoring dimensions, presenting clear opportunities to improve machine discoverability and data richness. We invite you to address these gaps to enhance your digital presence for both human visitors and machines.
+Our audit of https://www.contentful.com shows AI Suitability at an strong 99/100, indicating that machines can quickly understand and use the content. Across the audited set, Discovery Readiness (39/100) and Structured Data (61/100) are the lowest-scoring dimensions, presenting clear opportunities to improve machine discoverability and data richness. We invite you to address these gaps to enhance your digital presence for both human visitors and machines.
 
 ### Audit Scores
 
@@ -1333,7 +1335,17 @@ Our audit of https://www.contentful.com shows AI Suitability at an exceptional 9
 
 ---
 
-<!-- STATIC-SEED: working-with-us -->
+## Working With Us
+
+This is an automated audit. The deeper work is a paid consultancy engagement, and we offer it across every report type:
+
+- **Full-render, all-pages audience and age-awareness review.** Here we classify the entry page; in the consultancy version we render every page and read the age-assurance, consent, and age or date-of-birth data collection across the whole estate.
+- **Full-site qualitative review.** We read every audited page for the content-quality patterns the automated pass samples on the first few pages.
+- **PDF estate accessibility remediation.** We tag the structure, declare the conformance, and record an independent check across the document estate, aligned with Directive (EU) 2019/882.
+- **On-premise, regulated-sector audit.** We run the whole pipeline against a local model on infrastructure you control, so no audited content leaves your network.
+- **Implementation and remediation.** We carry the technical context that produced these findings into the work that resolves them.
+
+To scope an engagement, speak to us about next steps.
 
 ---
 

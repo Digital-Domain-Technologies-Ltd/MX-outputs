@@ -2,19 +2,10 @@
   "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
-  "auditId": null,
-  "runRevision": 1,
-  "lastWriteAt": "2026-06-13T08:13:58.048Z",
-  "startedAt": "2026-06-13T08:13:56.311Z",
-  "operator": null,
-  "responsiblePerson": {
-    "name": "Tom Cranstoun",
-    "email": "tom.cranstoun@gmail.com",
-    "identifier": "https://allabout.network",
-    "role": "auditOperator",
-    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
-    "country": "GB"
-  },
+  "auditId": "typo3.org-2026-06-12",
+  "runRevision": 2,
+  "lastWriteAt": "2026-06-13T09:19:06.413Z",
+  "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
       "role": "auditOperator",
@@ -25,7 +16,16 @@
       "country": "GB"
     }
   ],
-  "target": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://typo3.org",
+  "startedAt": "2026-06-13T08:13:56.311Z",
   "frameworks": [
     {
       "id": "EU-AI-Act",
@@ -326,8 +326,8 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
-      "shortSha": "d47a8c3"
+      "sha": "57d30778ae2adf841085719b89c9f079c7d87c74",
+      "shortSha": "57d3077"
     },
     "branch": "main",
     "dirty": true,
@@ -635,6 +635,118 @@
         }
       ],
       "reasoningTrace": "Accessibility stands out as a strength, scoring 100/100 across the audited set of pages on https://typo3.org.  \nKey opportunities lie in structured data, which scored 0/100, and discovery readiness at 25/100, limiting machine comprehension and discoverability.  \nWe recommend prioritising these areas to enhance your site’s machine‑readable value and unlock further growth potential.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T09:15:56.983Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "typo3-org-report.md",
+        "regexCategoriesFlagged": [
+          "marketing-inflation"
+        ]
+      },
+      "outputs": {
+        "file": "typo3-org-report-fierce-critic.json",
+        "sha256": "ebb676aee21a1dfef9f52c83d29f1dff211516f1d56e7e10c90e3bfb757b0a00"
+      },
+      "rubricHash": "ee8b368406d5c514e5f8a627ba55daaee8ea2359d2211e157094f844ef6942f2",
+      "promptHash": "28a306cd327d0a343b44a5f8f84120b400babb95015890f5481d9e7380d28b64",
+      "inputHashes": [
+        {
+          "hash": "9bfc90cd0017a7032b01647712a3e13604400025e2c7f94ea41f0c12ac039209",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 1 recommendation to add alt text lacks a specific selector, count or page reference.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 2 recommendation to order headings is generic and does not cite any specific element or page.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Priority 3 recommendation to replace landmark containers",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=2 llmFindings=4"
+    },
+    {
+      "timestamp": "2026-06-13T09:17:34.526Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "typo3-org-report.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report-llm-judgment.json",
+        "sha256": "63b4a36ac8eaab578974db088f14a3cff7fbc5ca54bdd4e03c39c278174834b5"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "d2927eec45b04ca281dfdc8fb0716534bb33d9d261daaebe472607d3fc198877",
+      "inputHashes": [
+        {
+          "hash": "9bfc90cd0017a7032b01647712a3e13604400025e2c7f94ea41f0c12ac039209",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": []\n}",
+      "outcome": "pass",
+      "notes": "findings=0 withdrawn=0 inputTok=19005 outputTok=3454"
+    },
+    {
+      "timestamp": "2026-06-13T09:18:45.183Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 3 mechanical patch(es); Layer 2 applied 4/5 LLM patch(es) for 5 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "typo3-org-report.md",
+        "findingCount": 5,
+        "layer1Patches": 3,
+        "layer1Resolved": 0
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "a2b73a2240f0fa394cb60a445c68e830b02662574f5ffb4ee6b2569793e59c09",
+        "patchesApplied": 4,
+        "patchesSkipped": 1,
+        "unfixableCount": 0
+      },
+      "rubricHash": "acc0c5928b434a9612422edc74f6213e4c00b6d8a2384fb1645205c78bbaf183",
+      "promptHash": "789635becb74db3425a24302ec59a730f21564ae5981cd3174d2a4fd16f0b3db",
+      "inputHashes": [
+        {
+          "hash": "9b6211781d3755c3dad6d2766f8ba73547e4d0389cc3e044f77a5e41481b4567",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"**Finding:** Security headers absent: HSTS, CSP, X-Frame-Options (Site-wide). Missing security headers increase exposure\",\n      \"findingIndex\": 1,\n      \"justification\": \"scope: replaced site‑wide with scoped phrase\",\n      \"replace\": \"**Finding:** Security headers absent: HSTS, CSP, X-Frame-Options (across the audited pages). Missing security headers increase exposure\"\n    },\n    {\n      \"find\": \"- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once configured.\",\n      \"findingIndex\": 2,\n      \"justification\": \"scope: replaced site‑wide with scoped phrase\",\n      \"replace\": \"- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies across th",
+      "outcome": "pass",
+      "notes": "inputTok=20125 outputTok=2070 layer1=3 layer2applied=4 layer2skipped=1 unfixable=0 hygiene=1 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-13T09:19:06.413Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 7,
+        "autoFixApplied": 0,
+        "escalated": 7,
+        "trailRecorded": 4,
+        "trailRemoved": 0,
+        "trailUnchanged": 0,
+        "roundCounter": 0
+      },
       "outcome": "pass"
     }
   ]
