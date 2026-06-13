@@ -34,7 +34,23 @@ The MX Content Cockpit (`npm run cockpit`) gained two operator-experience featur
 
 ## What Was Done
 
-### 1. Cockpit view system
+### 1. Audit collect-phase debug library
+
+A deterministic debug library (`mx-reginald/audit/lib/debug-run.js`) was added to the audit suite alongside a CLI wrapper (`scripts/audit-debug.js`, `npm run audit:debug`), an action-cog (`scripts/cogs/mx-audit-debug.cog.md`), and a routing skill (`.claude/skills/audit-debug/skill.md`). When a collect phase fails, the tool identifies the first failing gate, shows an evidence snapshot from the cached results, and recommends a targeted fix - replacing the previous approach of manual inspection of raw JSON. The operator manual and QUICKSTART were updated to document the `--resume` flag and the debug workflow.
+
+### 2. Cog relatedTo scanner and update-cogs-and-docs workflow
+
+A deterministic scanner (`scripts/check-cog-related-to.cjs`, `npm run cog:related-to`) checks every action-doc cog for a `relatedTo` field that lists all related surfaces. A fix mode (`npm run cog:related-to:fix`) inserts a skeleton `relatedTo: []` on cogs missing it. The `/update-cogs-and-docs` skill was written to govern the "update all related surfaces" workflow and is now the canonical entry point for propagating session changes across cogs, manuals, manuscripts, and mx-site pages. A cog authoring template (`mx-canon/ssot/templates/cog-template.md`) was added to give a ready-to-fill starting point for new cogs.
+
+### 3. MX-aware universal editor PRD and prompt library
+
+A PRD (`mx-canon/mx-os/mx-aware-editor-prd.cog.md`) and accompanying prompt library (`mx-canon/mx-os/mx-aware-editor-prompt-library.cog.md`) were committed from a parallel session. These define the MX-aware editor feature, its integration contract, and the reusable prompt patterns it will rely on.
+
+### 4. Deterministic MCP check library
+
+A check library (`d47a8c38`) was added to provide deterministic tool-use verification for Claude's MCP integrations.
+
+### 5. Cockpit view system
 
 A view dropdown in the header switches the tree between six modes. Content is the existing pipeline view (blog, pages, landers, registry, exceptions). Full tree, Assets, PRD/Docs, Scripts, and Manuscripts each walk different parts of the repo and surface their files as a navigable folder tree. Each non-Content view fetches `/api/view?name=X` from a new server endpoint and replaces the tree; the Content view is stashed in memory at startup so switching back is instant. Content-specific controls (kind/stage filters, import and commit buttons) hide when a non-Content view is active. Every leaf in any view opens a source preview via the existing guarded `/preview/` route.
 
@@ -88,6 +104,12 @@ The cockpit previously showed only web-content pipeline state. Adding Assets, PR
 |------|-------------|
 | e3b96ee7 | audit(batch): add 2026-06-12 batch deliverables for 11 domains |
 | 479b3984 | feat(cockpit): view switcher, hover float, description bar |
+| 605316d6 | feat(cog-workflow): update-cogs-and-docs skill, relatedTo scanner, cog template |
+| f91bd5d9 | feat(audit): /audit-debug skill + relatedTo on debug cog |
+| 1b928048 | docs(audit): add debug tool and --resume flag to README and QUICKSTART |
+| 07ee148f | feat(audit): deterministic debug library for collect-phase failures |
+| d47a8c38 | feat(check-library): deterministic MCP check library for Claude |
+| bc2c99dc | feat(mx-os): MX-aware universal editor PRD and prompt library |
 
 </content>
 </invoke>

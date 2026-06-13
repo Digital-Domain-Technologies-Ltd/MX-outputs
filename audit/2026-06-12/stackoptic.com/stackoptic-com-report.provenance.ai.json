@@ -1,0 +1,670 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": null,
+  "runRevision": 1,
+  "lastWriteAt": "2026-06-13T08:08:44.587Z",
+  "startedAt": "2026-06-13T08:08:42.828Z",
+  "operator": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "target": null,
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 24-205 — Consumer Protections for Artificial Intelligence",
+      "version": "SB-24-205",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-42005",
+      "title": "ISO/IEC 42005 — AI System Impact Assessment",
+      "version": "2025",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "impact-assessment",
+      "claim": "evidence-vehicle",
+      "x-iso-42005": {}
+    },
+    {
+      "id": "prEN-18286",
+      "title": "prEN 18286 — AI Management System (candidate harmonised European standard, CEN-CENELEC JTC 21)",
+      "version": "draft",
+      "jurisdiction": "EU (CEN-CENELEC, in development)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-pren-18286": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "stackoptic-com-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
+      "shortSha": "d47a8c3"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v26.3.0",
+    "host": "toms-MacBook-Pro-396.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-06-13T08:08:43.018Z",
+      "stepId": "report.rewrite-1",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 1/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "89c1bd16a056215d3bbddc8e8a3fd3598d7531514889da114330dd634a8b5f60"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "abdfbad8fd5d48048a1d0976a00e45d00270c1dabc0e3077ba4fd555e14177b6",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, your site delivers clear, engaging content built on solid SEO foundations. The 86/100 score demonstrates that search engines can easily discover and index your pages, giving visitors fast access to relevant information.\n\nThe headline opportunity we want to draw attention to is accessibility compliance. We identified three distinct WCAG AA issue types affecting 34 instances; addressing each pattern will resolve many critical errors at once. Following this, the next natural",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:43.178Z",
+      "stepId": "report.rewrite-2",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 2/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "5af780eb0ec041b28168348b0d4c00112482fee1e563741f026b2a947073be20"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "1cf3b663e3bc290265e334bcfa98ce19e12854dbe0fc413bfeba13ee91eadbce",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We present the Human Experience subtable, which shows that across the audited set your pages deliver an excellent overall experience, with accessibility at 93/100 and SEO at 86/100, though page load times averaging 3085 ms indicate room for improvement.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:43.329Z",
+      "stepId": "report.rewrite-3",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 3/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "a41337d05deb7eaccc3365cee3b0645271db6489d6b7e4b1a9e8d42696b963df"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "1e6d4f6f5940a7b3ba3a81b183ab02284b37c98f06c6dcbc499cdbcd6d1f0d34",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, machines can discover and parse your content—supported by a Structured Data Quality of 89/100 and Pipeline Survivability of 92/100—but they lack governance context, as shown by an MX Readiness Level of 1 (Discoverable), a Discovery Readiness score of 38/100, and an MX Stack Completeness of 69/100.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:43.486Z",
+      "stepId": "report.rewrite-4",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 4/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "f7cba4f239a2f3533665e2f65cec1739f2d2d2e33494af6e9cb8fc61df3d9446"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "f083e5771e3492f96a9daa7070bcf06d450f58b935c14e53d691c17ab9b07e47",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, your pages exhibit a solid foundation in SEO (86/100), accessibility (93/100 with only three WCAG codes across 34 instances), security headers (5/5 on every URL), and structured‑data quality (89/100). These strengths provide the groundwork for focused enhancements that will elevate performance even further.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:43.645Z",
+      "stepId": "report.rewrite-5",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 5/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "bc4dea485586dd78eebf93a5398249b56fd19df8fedc764ddc48450f8f4b0e87"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "d0f146b08ea3f2a27f52719878f6db2cbdfae9ad4f7749aaeb4722b53fcb3f31",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "- **sameAs**: adds authoritative external identifiers to Person and Organization entities, enabling machines to disambiguate profiles; add to all Person and Organization JSON‑LD blocks.  \n- **SpeakableSpecification**: lets voice assistants surface key excerpts from BlogPosting pages by defining CSS selectors for headline and first paragraph; include in each blog post’s JSON‑LD.  \n- **potentialAction**: exposes contact capabilities on Organization entities, allowing machines to discover how to re",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:43.802Z",
+      "stepId": "report.rewrite-6",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 6/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 6,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "ae167973eb78c902a10c471525cbc5d25c952265fb4512057653683c62fa74b4"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "a025396049cce321adaa9e2bd64db3011821c375b2dde9790a69c368c5a27462",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We discovered that the sitemap lists multiple URL variants for the same canonical resource, such as trailing‑slash and hash‑fragment forms, which means machines will treat them as distinct pages. To prevent token waste and contradictory findings, we recommend publishing a single canonical URL per resource in sitemap.xml and adding a <link rel=\"canonical\"> tag to each affected URL.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:43.961Z",
+      "stepId": "report.rewrite-7",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 7/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 7,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "87b182df89d7ec773f43335a688b9919e74c8c96e37bcfdef3684e7be53d5549"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "042ce4d8f66a981f3b3f840c4e76aa70dea58c859b683f5f1a7f351ba2f95e71",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found that every audited page shows Inline Tag Bloat, a resilience issue that can make it harder for machines to parse and render content quickly. Because of this bloat, agents may experience slower load times or misinterpret the structure of the page. The most impactful fix is to consolidate or move inline styles and scripts into external files, which will streamline parsing and improve machine efficiency.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:44.118Z",
+      "stepId": "report.rewrite-8",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 8/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 8,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "9abbdd46d4682da8c6049e34206c3a1ba7c9153edb506992c454f28117d1457d"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "a3d4525daea471138dcbe3e085005718fe365c405e6b7a927541361685735bb1",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "On the worst‑page (https://stackoptic.com/), 206 of 325 elements are plain `<div>` tags, a 63 % bare‑div ratio that forces machines to fall back on positional inference rather than semantic structure.  \nThe soup is structural, with a deepest chain of seven nested bare `<div>`s, indicating the use of an untyped component framework or late‑stage JavaScript injection that nests many generic containers.  \nA low‑cost first step is to wrap obvious landmarks—header, nav, main, footer, aside—and assign ",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:44.274Z",
+      "stepId": "report.rewrite-9",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 9/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 9,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "f589703ad1fc5faae427f7db2adea083a67750aa11ee8de67654c2f0341e7ff3"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "6e0df77a3f6672686a5d68be270659bbe4e95f97dfc8446407202e27dc2a994f",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Content consistency examines how metadata and structured data align across the audited pages, influencing how machines interpret and surface your content. We evaluated title tags, meta descriptions, canonical URLs, brand identifiers, and entity values to detect any divergence that could confuse crawlers or dilute search relevance. This assessment helps ensure a unified signal for both users and machines.\n\nThe audited set shows consistent metadata patterns across pages, with no brand-name or cano",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:44.428Z",
+      "stepId": "report.rewrite-10",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 10/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 10,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "c8732a017f11394152e919e6c4d06451e26f759d512b6093be8ca6a3a48d27c4"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "b094e01b2e0be41a833d0c8d1c29551d982712d5a1ddb050d28047b39cc167ff",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We observe that across major markets, accessibility law now converges on ISO 14289‑1 (PDF/UA) as the technical baseline for PDFs; the European Accessibility Act is a clear example of this global alignment.  \nWe also recognise that without proper tagging, a PDF remains invisible to machines—search crawlers and AI systems cannot extract text or structure from a scanned or image-based file, whereas a tagged PDF with a full structure tree becomes machine‑readable just like semantic HTML.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:08:44.587Z",
+      "stepId": "report.rewrite-11",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 11/11 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 11,
+        "blockCount": 11,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/stackoptic.com/.infilled/stackoptic-com.md"
+      },
+      "outputs": {
+        "file": "stackoptic-com-report.md",
+        "sha256": "c46c5e6c78c796eba01f15cfc3cbdc0cc803640ddb289fb5530297bf6ea94718"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "06d299d429eb528943a1cc0796cc0d285dad4617f1e9d6cda1dfcaf92be66440",
+      "inputHashes": [
+        {
+          "hash": "f8f9e7a5f48959175ffa62e09bf6c6286c732f447aef9d198dc8ebd6786da9c1",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set of six pages on https://stackoptic.com, we found AI Suitability at a perfect 100/100, showing your content is fully ready for advanced machine processing.  \nKey opportunities lie in Discovery Readiness (38/100) and Structured Data (89/100), where richer metadata can improve machine discoverability while human visitors are already served well.  \nWe invite you to act on these findings to strengthen machine comprehension and unlock the full potential of your content.",
+      "outcome": "pass"
+    }
+  ]
+}

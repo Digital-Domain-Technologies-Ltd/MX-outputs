@@ -833,7 +833,7 @@ PDFs are part of the machine-readable estate but sit outside this HTML audit's s
 ### Recommended Actions
 
 1. **Address Priority 1 findings**: address the 43 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
-2. **Review Priority 2-3 findings**: Structured Data improvements and metadata tuning that compound over time
+2. **Review Priority 2-3 findings**: Structured Data improvements, such as adding missing Schema.org properties for the homepage (currently SDQ 0/100), and metadata tuning that compound over time.
 3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search
 
 ### What's Next
@@ -855,7 +855,7 @@ This audit is a starting point. The outcome we work toward is a site any machine
 
 ## Summary of Findings
 
-On the audited page at https://atmors.netlify.app, we find a strong SEO foundation with an 84/100 score, indicating that search engines can readily discover and index its content. However, opportunities exist in structured data-scoring 0/100-and discovery readiness-10/100-where adding rich metadata and discovery artefacts would give machines better context. We recommend addressing these gaps to enhance machine comprehension and unlock further visibility.
+On the audited page at https://atmors.netlify.app, the site has a strong SEO foundation with an 84/100 score, enabling search engines to discover and index its content efficiently. However, opportunities exist in structured data-scoring 0/100-and discovery readiness-10/100-where adding rich metadata and discovery artefacts would give machines better context. We recommend addressing these gaps to enhance machine comprehension and unlock further visibility.
 
 ### Audit Scores
 

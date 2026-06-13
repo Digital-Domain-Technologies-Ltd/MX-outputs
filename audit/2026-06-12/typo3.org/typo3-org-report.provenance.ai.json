@@ -1,0 +1,641 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": null,
+  "runRevision": 1,
+  "lastWriteAt": "2026-06-13T08:13:58.048Z",
+  "startedAt": "2026-06-13T08:13:56.311Z",
+  "operator": null,
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "target": null,
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 24-205 — Consumer Protections for Artificial Intelligence",
+      "version": "SB-24-205",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-42005",
+      "title": "ISO/IEC 42005 — AI System Impact Assessment",
+      "version": "2025",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "impact-assessment",
+      "claim": "evidence-vehicle",
+      "x-iso-42005": {}
+    },
+    {
+      "id": "prEN-18286",
+      "title": "prEN 18286 — AI Management System (candidate harmonised European standard, CEN-CENELEC JTC 21)",
+      "version": "draft",
+      "jurisdiction": "EU (CEN-CENELEC, in development)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-pren-18286": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "typo3-org-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
+      "shortSha": "d47a8c3"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v26.3.0",
+    "host": "toms-MacBook-Pro-396.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-06-13T08:13:56.614Z",
+      "stepId": "report.rewrite-1",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 1/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "dfaf8ce3eb05164563e894dc5882b7dbd71de93bf86bd58471e69a7c99702b7f"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "6a37797ddf1c9ce41db4c2c396a06ef9381e1408cc24d7d9f8608443202b0403",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set your pages deliver a smooth and engaging experience for visitors. Performance is the strongest human‑experience dimension, with fast load times that keep users on track. Accessibility is flawless – we recorded zero distinct WCAG AA issue types across all 12 pages, giving every visitor an inclusive journey.\n\nThe headline opportunity we want to draw attention to is adding full MX governance metadata. While machines can parse your served HTML (AI Suitability 91/100), the abse",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:13:56.775Z",
+      "stepId": "report.rewrite-2",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 2/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "b0cf90339a5537c6b8dc92f1bd7cb99a5e69e7ec38544b71d0b2b5e21b3b22e6"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "10f1c1731ebaf08419d06ff8426a0afad4e60936bd39da494f0a4ece25b3ace2",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, we find that the pages deliver a strong experience for human visitors, with excellent performance and accessibility scores, while SEO presents an area for improvement.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:13:56.938Z",
+      "stepId": "report.rewrite-3",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 3/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "61a676a79e9a33314fab46a0a0043c34ed607835cc2915112e718a9f7aaddb80"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "94e1509235f4290e3d56b70a27fb3341ab77b488dec127de9f3f68a2bfb88773",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, machines can discover and parse your content with a Discovery Readiness of 25/100 and Structured Data Quality of 0/100, yet they lack governance context because MX Readiness Level is 1 (Discoverable) and no governance markers are present; however, the MX stack completeness at 52/100 and Pipeline Survivability at 96/100 give them a solid foundation for future enhancements.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:13:57.098Z",
+      "stepId": "report.rewrite-4",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 4/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "078af8bb8270385bd25c5d7787a897d05d06308d3ff16042a1a4189885ba818a"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "afb61c88da5ff6c35a917403ea199d02a10057d57516c2f9c34ae0fdc30da542",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, your pages demonstrate a solid foundation in SEO and accessibility, with an overall SEO score of 75/100 and perfect compliance on accessibility (0 distinct WCAG codes). These strengths provide the groundwork for targeted enhancements that will further elevate performance, security, and consistency across the site.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:13:57.255Z",
+      "stepId": "report.rewrite-5",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 5/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "09c4c5269b23a6751a30a077cb4f942f24afe1758da75439c54e95908db0323c"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "c939102f11e40859f388201f4aa484182cc0124b518452711db679bd9c7f7df0",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "- **Organization JSON‑LD**: Add a minimal Organization entity with name and URL on the homepage or About page to give machines basic context about your brand.  \n- **Content‑Signal directives**: Include Content‑Signal directives in robots.txt to declare content‑use policy for machines, enabling agents to understand how they may reuse your content.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:13:57.414Z",
+      "stepId": "report.rewrite-6",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 6/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 6,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "61bbd04772d3f9062add60e7a6859b46487aa2c95af814aa82598cd57198df92"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "aaa831a5d20bc7e39849ab0bfc194456020e4b6abbdd557401a655d5fb4ad344",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We found that Inline Tag Bloat and Truncation Risk are the resilience checks that need attention across the audited set. Because inline tags inflate page size, machines can truncate content before fully parsing it, which means they may miss key information or metadata on those five pages. The biggest opportunity is to move scripts and styles out of the HTML so the pages load more efficiently, giving agents a complete view of the content.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:13:57.573Z",
+      "stepId": "report.rewrite-7",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 7/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 7,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "6ed5501f222b4c5b493e4377e660e5891450aa980781c7c02aa29b4a0e8b3037"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "42b5d4dfe7dd122e9dd6190def878b5d335c6ba49959f72c3033e6dc1740d0fa",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Across the audited set, the worst‑page at https://typo3.org/association shows a higher bare‑div ratio on the served surface (216 of 288, 75 %) than on the rendered surface (228 of 310, 74 %), meaning machines lose structural context and must rely on positional inference to determine meaning.  \nThe soup is structural, with deep chains reaching seven levels; this pattern indicates that the source pipeline likely relies on drag‑and‑drop builders or untyped component frameworks that generate nested ",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:13:57.729Z",
+      "stepId": "report.rewrite-8",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 8/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 8,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "52317af78f45e342415923c62eafac8595febd730369d54ef606aad40815f84c"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "dee6443580a5605a6eabd04d4c9a9943ef689095f069e5bfde7c3bf40f2b5b50",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We examined metadata and structured‑data consistency across the 12 audited pages to assess how well your content aligns with machine expectations. Consistency in brand naming, canonical URLs, meta descriptions, and entity values is critical for reliable indexing and accurate attribution by machines. Across the audited set, we found no brand‑name or canonical‑URL divergence flagged by the consistency check.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:13:57.887Z",
+      "stepId": "report.rewrite-9",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 9/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 9,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "5db578cb0c9b5df831fd8c1700d0ef88be34edf85c4520cb53c5a20b3f5a12a0"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "159cbc64413d025329ecd6627874015ad8073ead2975a9e87da95c66e17536ba",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We note that across major markets, accessibility legislation has converged on ISO 14289‑1 (PDF/UA) as the technical baseline for document accessibility, with the European Accessibility Act—Directive (EU) 2019/882, in force 28 June 2025—as a precisely codified example of that global alignment; similar convergence is reflected in Section 508 of the US Rehabilitation Act, the UK Public Sector Bodies Accessibility Regulations 2018, and equivalent legislation in Australia and Canada. Because an untag",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:13:58.048Z",
+      "stepId": "report.rewrite-10",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 10/10 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 10,
+        "blockCount": 10,
+        "skeletonPath": "/Users/tomcranstoun/Documents/GitHub/MX-hub/mx-outputs/audit/2026-06-12/typo3.org/.infilled/typo3-org.md"
+      },
+      "outputs": {
+        "file": "typo3-org-report.md",
+        "sha256": "3a94f3f3c6f5e8915901753c1e42f5539d3140fbef8f90f60a45fe49ee1d94f9"
+      },
+      "rubricHash": "aa5ef9d9504cbb1d2e86afaf3f72343017d025fe13d46010d913d59d0806638d",
+      "promptHash": "185502e0cb64e8e9f1d6405ef56d7ed867a45e2251cce462514cab235e7df447",
+      "inputHashes": [
+        {
+          "hash": "bc8948a7f2304d5e84e16b0b9b555b51c39f2351d6c3cac0dee4ce6fee41d38e",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Accessibility stands out as a strength, scoring 100/100 across the audited set of pages on https://typo3.org.  \nKey opportunities lie in structured data, which scored 0/100, and discovery readiness at 25/100, limiting machine comprehension and discoverability.  \nWe recommend prioritising these areas to enhance your site’s machine‑readable value and unlock further growth potential.",
+      "outcome": "pass"
+    }
+  ]
+}

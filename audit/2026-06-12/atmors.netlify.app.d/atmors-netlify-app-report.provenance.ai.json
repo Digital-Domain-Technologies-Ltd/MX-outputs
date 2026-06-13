@@ -3,8 +3,8 @@
   "schemaVersion": "2.0",
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
   "auditId": "atmors.netlify.app.d-2026-06-12",
-  "runRevision": 8,
-  "lastWriteAt": "2026-06-12T16:27:39.879Z",
+  "runRevision": 9,
+  "lastWriteAt": "2026-06-13T08:25:18.584Z",
   "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
@@ -326,12 +326,12 @@
   "provenance": {
     "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
     "commit": {
-      "sha": "3ae69522b48a807a3e198e6177f46a7f0af22f5c",
-      "shortSha": "3ae6952"
+      "sha": "d47a8c3843deacbcfd894c756545559e2b6f48c8",
+      "shortSha": "d47a8c3"
     },
     "branch": "main",
     "dirty": true,
-    "nodeVersion": "v25.4.0",
+    "nodeVersion": "v26.3.0",
     "host": "toms-MacBook-Pro-396.local",
     "platform": "darwin",
     "arch": "arm64",
@@ -2360,6 +2360,118 @@
         "trailRecorded": 2,
         "trailRemoved": 0,
         "trailUnchanged": 0,
+        "roundCounter": 0
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-13T08:20:41.283Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "atmors-netlify-app-report.md",
+        "regexCategoriesFlagged": [
+          "marketing-inflation"
+        ]
+      },
+      "outputs": {
+        "file": "atmors-netlify-app-report-fierce-critic.json",
+        "sha256": "e406ffc99e2578c07f7cbf3ca098bad962c4a6badc66f62f2cf0e1e4e2b6a7a5"
+      },
+      "rubricHash": "ee8b368406d5c514e5f8a627ba55daaee8ea2359d2211e157094f844ef6942f2",
+      "promptHash": "247fa6d12185944d809757ee2a1b53dce0aa03cd665cb5847ba142f102aaabc9",
+      "inputHashes": [
+        {
+          "hash": "18820cb7871f3e0e5af14142389ee078d295c390547fc2038038872f45f6609f",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Recommendation for Interactive Elements Missing Name, Role, or Value lacks specific data anchors; generic guidance on accessible names and roles.\",\n      \"priority\": 1\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Recommendation for Insufficient Colour Contrast provides only general advice to raise contrast ratios without referencing specific elements or selectors.\",\n      \"pr",
+      "outcome": "warn",
+      "notes": "runCount=2 regexFindings=1 llmFindings=12"
+    },
+    {
+      "timestamp": "2026-06-13T08:22:19.927Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "atmors-netlify-app-report.md"
+      },
+      "outputs": {
+        "file": "atmors-netlify-app-report-llm-judgment.json",
+        "sha256": "45fb7ef02fabc17ab96c4e984e0ea95e7fed0d4a8b5f2cd371cbae79adb83162"
+      },
+      "rubricHash": "0a86440c6eace79e526aab76c43b1d6e9279faed155123dda53f95651075e3d7",
+      "promptHash": "d9f82db759d0fc5ea1034b74e217836b4291f293619b02438bbc387e90aa236b",
+      "inputHashes": [
+        {
+          "hash": "18820cb7871f3e0e5af14142389ee078d295c390547fc2038038872f45f6609f",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"tone-inconsistency\",\n      \"context\": \"Pipeline Survivability score: 71/100\\n\\nWe found that on the audited page\",\n      \"message\": \"Section 'Agent Reading Pipeline' switches from third-person to first-person voice mid‑paragraph.\",\n      \"severity\": \"block\"\n    }\n  ]\n}",
+      "outcome": "warn",
+      "notes": "findings=1 withdrawn=0 inputTok=17897 outputTok=3677"
+    },
+    {
+      "timestamp": "2026-06-13T08:23:13.074Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 0 mechanical patch(es); Layer 2 applied 2/2 LLM patch(es) for 2 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "atmors-netlify-app-report.md",
+        "findingCount": 2,
+        "layer1Patches": 0,
+        "layer1Resolved": 1
+      },
+      "outputs": {
+        "file": "atmors-netlify-app-report.md",
+        "sha256": "4338f47d5a1b795c0ff8f90143e4502ed0d19f5e2852121f4a6edc76137686e2",
+        "patchesApplied": 2,
+        "patchesSkipped": 0,
+        "unfixableCount": 0
+      },
+      "rubricHash": "acc0c5928b434a9612422edc74f6213e4c00b6d8a2384fb1645205c78bbaf183",
+      "promptHash": "7793eecbdece1c97b9687ee6fec3bf420849250a9935d16778991717e2247af6",
+      "inputHashes": [
+        {
+          "hash": "18820cb7871f3e0e5af14142389ee078d295c390547fc2038038872f45f6609f",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [\n    {\n      \"find\": \"On the audited page at https://atmors.netlify.app, we find a strong SEO foundation with an 84/100 score, indicating that search engines can readily discover and index its content.\",\n      \"findingIndex\": 1,\n      \"justification\": \"voice: rewrote marketing-verb inflation to neutral machine-experience benefit\",\n      \"replace\": \"On the audited page at https://atmors.netlify.app, the site has a strong SEO foundation with an 84/100 score, enabling search engines to discover and index its content efficiently.\"\n    },\n    {\n      \"find\": \"**Review Priority 2-3 findings**: Structured Data improvements and metadata tuning that compound over time\",\n      \"findingIndex\": 2,\n      \"justification\": \"hollow-recommendation: added specific data-backed detail\",\n      ",
+      "outcome": "pass",
+      "notes": "inputTok=18793 outputTok=1335 layer1=0 layer2applied=2 layer2skipped=0 unfixable=0 hygiene=0 sizeRatio=1.00"
+    },
+    {
+      "timestamp": "2026-06-13T08:25:18.584Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 2,
+        "autoFixApplied": 0,
+        "escalated": 2,
+        "trailRecorded": 0,
+        "trailRemoved": 0,
+        "trailUnchanged": 2,
         "roundCounter": 0
       },
       "outcome": "pass"
