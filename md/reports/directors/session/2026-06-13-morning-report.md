@@ -87,6 +87,7 @@ The cockpit previously showed only web-content pipeline state. Adding Assets, PR
 | Hash | Description |
 |------|-------------|
 | e3b96ee7 | audit(batch): add 2026-06-12 batch deliverables for 11 domains |
-| _pending_ | feat(cockpit): view switcher, hover float, description bar |
+| 479b3984 | feat(cockpit): view switcher, hover float, description bar |
+
 </content>
 </invoke>
