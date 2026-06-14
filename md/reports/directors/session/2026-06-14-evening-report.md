@@ -1,10 +1,10 @@
 ---
 title: "Co-Directors Report - Gate Hardening, Prose Engine, and Fable 5 Blog Draft"
-description: "Evening covered Gate 25 data-loss fix, prose engine centralisation, Fable 5 blog draft, Gitea audit delivery infrastructure, and live push notifications in the cockpit."
+description: "Evening covered Gate 25 data-loss fix, prose engine centralisation, Fable 5 blog draft, Gitea audit delivery infrastructure, live push notifications in the cockpit, and audit template quality fixes."
 author: "Tom Cranstoun"
 created: 2026-06-14
 modified: 2026-06-14
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -72,6 +72,18 @@ The `mx-outputs/.gitignore` was extended to exclude dated delivery folders perma
 The cockpit gained a new "Gitea" view in the header dropdown. It scans the 50 local Gitea clones at `~/.gitea-audit-repos/`, builds a collapsible tree of repos and delivery dates, and shows file counts and direct links to each delivery in the Gitea web UI. No API round-trip on page load - the view reads the local clone directories directly for speed.
 
 Push notifications are live. The cockpit now holds an SSE (Server-Sent Events) connection open to the server. When Gitea fires its webhook on a repo push, the server pulls the relevant local clone immediately and broadcasts an event to all connected browser tabs. If the Gitea view is active, it auto-reloads within 1.5 seconds to show the new delivery. If another view is active, a status bar message announces the push.
+
+### Audit template quality fixes and quotes enforcement removal
+
+A session-long debugging cycle exposed and fixed four interconnected problems in the audit quality machinery.
+
+The audience classification handler was leaking the `[AUDIENCE_NOTICE_TEXT]` placeholder token into reports whenever the audience was not indeterminate. A defensive replacement now strips the token on the non-indeterminate code path, so it never reaches the rendered output.
+
+The `x-mx-quotes` enforcement machinery was removed from the gate suite. The field remains available as an opt-in hint - prose scanners still use it when declared - but Gate 27 (pre-push freshness check), the pre-commit auto-population hook, and the `npm test` wiring are gone. The reason: as the repo grows, the populator treats all `> blockquotes` as verbatim external quotes, including template callout boxes, fixture output, and operational notices. Any time one changes, Gate 27 would block the push. The gate was generating more churn than value.
+
+During the fix cycle, three `>` blockquote prefixes in the audit template were incorrectly converted to plain text. This removed the visual callout styling from rendered PDFs. All three were restored. The audit template directory is now excluded from the quotes populator so the restored formatting cannot trigger a re-extraction cycle.
+
+Nine fable5 cog files in `mx-outputs` were declared as `action-doc` but carried no `x-mx-execute` block or `actionType` - a pre-existing cog validator failure that was blocking pushes. All nine were correctly demoted to `info-doc`.
 
 ### Documentation and cog updates
 
