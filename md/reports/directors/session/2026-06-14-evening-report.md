@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Gate Hardening, Prose Engine, and Fable 5 Blog Draft"
-description: "Evening covered Gate 25 data-loss fix, prose engine centralisation, Fable 5 blog draft, Gitea audit delivery infrastructure, live push notifications in the cockpit, and audit template quality fixes."
+title: "Co-Directors Report - Gate Hardening, Prose Engine, Fable 5 Publication, and JS/CSS Carrier Guides"
+description: "Evening covered Gate 25 data-loss fix, prose engine centralisation, Fable 5 blog post published to Zone 2 with WCAG overlay, frontmatter humanizer cog, JS and CSS carrier authoring guides, and Gitea audit delivery infrastructure."
 author: "Tom Cranstoun"
 created: 2026-06-14
 modified: 2026-06-14
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -13,13 +13,13 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-14-evening-report.md
-  purpose: "Evening covered Gate 25 data-loss fix, prose engine centralisation, Fable 5 blog draft, Gitea audit delivery infrastructure, and live push notifications in the cockpit."
+  purpose: "Evening covered Gate 25 data-loss fix, prose engine centralisation, Fable 5 blog post published to Zone 2 with WCAG overlay, frontmatter humanizer cog, JS/CSS carrier guides, and Gitea audit delivery infrastructure."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Gate Hardening, Prose Engine, Fable 5 Blog Draft, and Gitea Audit Infrastructure"]
 ---
 
-# Co-Directors Report - Gate Hardening, Prose Engine, Fable 5 Blog Draft, and Gitea Audit Infrastructure
+# Co-Directors Report - Gate Hardening, Prose Engine, Fable 5 Publication, and JS/CSS Carrier Guides
 
 **Date:** 14 June 2026 - Evening
 **Segment:** Evening (since 5pm)
@@ -28,7 +28,7 @@ mx:
 
 ## Summary
 
-A full evening across four streams. The most safety-critical work was hardening Gate 25, which had a restore loop that could silently destroy another session's uncommitted edits - now fixed with two structural guards. The prose/AI-tell detection engine was centralised into a shared library and shipped via a merged PR. A new blog post draft uses Anthropic's Fable 5 system prompt as the strongest external validation yet for MX OS architecture. The evening's second half completed the Gitea audit delivery infrastructure: 50 per-domain audit repos are now live on the local Gitea instance, the MX Content Cockpit has a new Gitea view showing all repos and delivery dates, and push events from Gitea arrive as live browser notifications that auto-refresh the view.
+A full evening across six streams. The most safety-critical work was hardening Gate 25, which had a restore loop that could silently destroy another session's uncommitted edits - now fixed with two structural guards. The prose/AI-tell detection engine was centralised into a shared library and shipped via a merged PR. A new blog post draft uses Anthropic's Fable 5 system prompt as the strongest external validation yet for MX OS architecture. The evening's second half completed the Gitea audit delivery infrastructure: 50 per-domain audit repos are now live on the local Gitea instance, the MX Content Cockpit has a new Gitea view showing all repos and delivery dates, and push events from Gitea arrive as live browser notifications that auto-refresh the view.
 
 ---
 
@@ -85,6 +85,22 @@ During the fix cycle, three `>` blockquote prefixes in the audit template were i
 
 Nine fable5 cog files in `mx-outputs` were declared as `action-doc` but carried no `x-mx-execute` block or `actionType` - a pre-existing cog validator failure that was blocking pushes. All nine were correctly demoted to `info-doc`.
 
+### Fable 5 blog post published to Zone 2 with WCAG-compliant overlay
+
+The Fable 5 blog draft moved from `blog-drafts/` through the full publication pipeline to Zone 2 HTML at `mx-outputs/mx-site/blog/drafts/`. The post uses Anthropic's leaked Fable 5 system prompt as evidence that MX OS architecture is the natural decomposition practitioners reach for independently.
+
+The list of 13 COG files in the post was made interactive. Clicking any filename opens a modal overlay that fetches and displays the raw COG content without leaving the page. The overlay is built to WCAG 2.1 AA modal requirements: focus trap on Tab/Shift-Tab, return-focus to the trigger on close, keyboard activation (Enter and Space) on each filename, Escape and backdrop-click close, and full `role="dialog"` / `aria-modal` / `aria-labelledby` semantics. The first implementation failed contrast - the dark page theme's CSS variables bled into the overlay `<pre>` element, making text near-invisible. All overlay elements now carry explicit `#111111` text on `#ffffff`/`#f9fafb` backgrounds, independent of the page theme.
+
+MX JSDoc metadata was added to `cog-viewer.js` (dogfooding the JS carrier format on the first script that needed it). The drafts lander was updated with four new post cards from this sprint.
+
+### Frontmatter humanizer cog and script
+
+Prose scanners mask YAML frontmatter before running, so em-dashes and unexpanded contraction forms in `description`, `purpose`, `x-mx-contextProvides`, and similar free-text frontmatter fields pass every gate silently. A new script (`scripts/fix-frontmatter-humanizer.cjs`) scans YAML frontmatter string values for em-dashes and - on blog-post surfaces - expanded auxiliary forms (`does not`, `it is`, etc.) where the Chatty register requires contractions. The `x-mx-quotes` field is skipped (verbatim content). A companion scripted action-cog (`frontmatter-humanizer.cog.md`) wraps the script with `mx exec` so any future session can run it as part of the humanizer workflow.
+
+### JS and CSS carrier format authoring guides
+
+Two new info-cogs cover how to author JS and CSS files as first-class MX carriers. `how-to-write-a-js-cog.cog.md` covers JSDoc `@mx:` tags, the two-zone model in a comment block, `contentType: script/module/worker`, `canonicalUri` vs `servedAt`, and the `cog-viewer.js` file as a worked example. `how-to-write-a-css-cog.cog.md` covers comment-block `@mx:` tags, `contentType: stylesheet/theme/component`, `:root` custom property recognition, and `mx-unified.css` as a worked example. Each cog cross-references the other. The combined draft (`how-to-write-a-js-css-cog.cog.md`) was replaced by the two focused guides.
+
 ### Documentation and cog updates
 
 All audit-facing cogs and docs were updated to reflect the two-tier storage model: `gitea.cog.md` (v1.1) gained sections on Actions, system webhook, audit repositories, and the cockpit Gitea view; the audit architecture cog (v1.7) gained a new section describing the GitHub/Gitea split; the audit routing cog, README, and QUICKSTART all received Gitea environment variable documentation. The `audit-suite-sync` sentinel was bumped to `2026-06-14-a` across all eight lockstep files.
@@ -93,7 +109,7 @@ All audit-facing cogs and docs were updated to reflect the two-tier storage mode
 
 ## Why It Matters
 
-The Fable 5 draft is the most concrete external proof point MX has had. A leaked 1,585-line monolith decomposing cleanly into 13 typed cogs is not a coincidence - it confirms that the mental model MX formalises is the one practitioners reach for independently. That argument, published, is worth more to The Gathering's positioning than any internal architecture document.
+The Fable 5 post is now live in Zone 2 and ready for promotion to Zone 3 after Tom's final read. It is the most concrete external proof point MX has had. A leaked 1,585-line monolith decomposing cleanly into 13 typed cogs is not a coincidence - it confirms that the mental model MX formalises is the one practitioners reach for independently. That argument, published, is worth more to The Gathering's positioning than any internal architecture document.
 
 The Gitea infrastructure solves a real operational problem: GitHub is the wrong home for per-audit artefacts. Deliverables are large, change frequently, and accumulate per client - they belong in a storage tier that can hold them privately and surface them to the auditor without polluting the main repository's commit history. The live push notifications mean the cockpit stays current without manual refresh; that matters when an audit run takes 45 minutes and the operator wants to know the moment results are ready.
 
@@ -113,7 +129,8 @@ The gate hardening work protects developer confidence in the tooling. A gate tha
 
 ## Next Steps
 
-- Publish the Fable 5 blog post via `/md-workflow` once Tom has reviewed the draft
+- Promote the Fable 5 blog post from Zone 2 drafts to Zone 3 published (`npm run promote -- --republish`) once Tom has reviewed it
+- Wire `frontmatter-humanizer` into the standard `/humanizer` session workflow so frontmatter is always scanned alongside body prose
 - Monitor Gate 25 across the next few push cycles to confirm the guards hold under concurrent-session load
 - Phase 4: wire the Gitea push into `scripts/audit-pipeline.js` so a completed audit run pushes to Gitea automatically
 - Phase 7: build the auditor handoff tool - git bundle plus cover sheet PDF, triggered from the cockpit Unpack tab
