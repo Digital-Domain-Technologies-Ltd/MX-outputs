@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Housekeeping, Field Cleanup, and Draft Blog Fix"
-description: "Morning session: pulled upstream changes, cleared stale branches, removed kebab-case field duplicates, fixed corrupted draft blog HTML files"
+title: "Co-Directors Report - Housekeeping, Sitemap Optimisation, and Source Consolidation"
+description: "Morning session: housekeeping, robots.txt-driven sitemap scripts, removal of duplicate agent-friendly-starter-kit from mx-site"
 author: "Tom Cranstoun"
 created: 2026-06-14
 modified: 2026-06-14
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -19,7 +19,7 @@ mx:
   x-mx-contextProvides: ["Co-Directors Report - Repo Housekeeping and Branch Cleanup"]
 ---
 
-# Co-Directors Report - Housekeeping, Field Cleanup, and Draft Blog Fix
+# Co-Directors Report - Housekeeping, Sitemap Optimisation, and Source Consolidation
 
 **Date:** 14 June 2026 - Morning
 **Segment:** Morning (since midnight)
@@ -28,7 +28,7 @@ mx:
 
 ## Summary
 
-A full morning of housekeeping across three areas. The first pass pulled upstream changes, cleared stale branches, and synced submodules. The second pass removed stale kebab-case field duplicates left from an earlier cannon cleanup. The third pass fixed a crawl-safety issue: four draft blog HTML files had been left in a corrupted mid-publish state where their metadata claimed they were published but no live copy existed.
+A full morning across five areas. Early work covered upstream pulls, branch cleanup, field cleanup, and a crawl-safety fix on corrupted draft HTML files. The second half introduced a meaningful infrastructure improvement: the sitemap generator and checker now derive exclusions from `robots.txt` at runtime rather than opening every HTML file to read a meta tag - saving a file read per excluded page and making the exclusion list self-maintaining. A content-duplication audit of the agent-friendly-starter-kit found a redundant published copy on mx-site; manuscripts only ever pointed to the manuscript-bundled copy, so the mx-site version was removed and the robots.txt exception that had been added for it was reverted.
 
 ---
 
@@ -53,20 +53,31 @@ Left unchecked, crawlers would have indexed these corrupted drafts pointing at n
 
 ---
 
+### 4. Sitemap Scripts: robots.txt-Driven Exclusions
+
+Both `generate-sitemap.cjs` and `check-sitemap-coverage.js` previously opened every HTML file and read 8KB to check for a `<meta robots noindex>` tag. Both scripts now parse `robots.txt` once at startup instead, applying standard Allow/Disallow precedence (longest rule wins) to skip excluded files without opening them. The per-file `isNoIndex()` check still runs for files not covered by any robots.txt rule. A new `check-web-assets-changed.cjs` script was also added for the step-commit Cloudflare cache gate, using mtime-based detection rather than git diff.
+
+### 5. Agent-Friendly Starter Kit: Single Source
+
+An audit of the agent-friendly-starter-kit found two copies: `mx-code-examples/` (manuscript-bundled, pointed to by all chapters and appendices) and `mx-outputs/mx-site/books/appendices/` (published to mx-site, unreferenced by any manuscript). The mx-site copy was removed, the robots.txt `Allow` exception added for it was reverted, and the sitemap and `llms-full.txt` corpus were regenerated.
+
+---
+
 ## By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Commits (since midnight, hub + submodules) | 20+ |
-| Draft HTML files fixed | 3 |
-| Draft HTML files deleted | 1 |
-| Stale kebab field keys removed | 4 |
+| Commits this session (hub + submodules) | 30+ |
+| Files changed | 38 |
+| Lines added | +839 |
+| Lines removed | -153 |
+| Duplicate starter kit files removed | 11 |
+| File reads eliminated per sitemap run | ~141 (disallowed paths) |
 | Stale branches deleted | 6 |
-| Remote tracking refs pruned | 1 |
 
 ---
 
 ## Next Steps
 
-- No new action items from this session.
-- Three reverted draft posts (accessibility-is-machine-readability, announcing-the-gathering, ai-native) remain in `blog/drafts/` and can be properly promoted when ready.
+- Three reverted draft posts (accessibility-is-machine-readability, announcing-the-gathering, ai-native) remain in `blog/drafts/` and can be promoted when ready.
+- Agent-friendly-starter-kit content review flagged it predates MX frontmatter, COGs, and provenance patterns - an `mx/` example directory would close that gap. Deferred.
