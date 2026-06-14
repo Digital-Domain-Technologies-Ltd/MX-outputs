@@ -220,19 +220,19 @@ mx:
 <p>I took the structure from the leaked document and rewrote it as COGs. No forcing was required. The blocks in Anthropic's document match the COG types in MX because both try to answer the same question: how do you describe a machine's behaviour, persistently, in a form the machine can execute?</p>
 <p>The 13 COGs I ended up with:</p>
 <ol>
-<li><strong><a href="http://manifest.cog.md">manifest.cog.md</a></strong> - boot sequence, lists what loads and in what order</li>
-<li><strong><a href="http://identity.cog.md">identity.cog.md</a></strong> - who the agent is, what products it can describe</li>
-<li><strong><a href="http://behaviour.cog.md">behaviour.cog.md</a></strong> - tone, formatting, refusal handling, evenhandedness</li>
-<li><strong><a href="http://wellbeing.cog.md">wellbeing.cog.md</a></strong> - user protection, mental health, crisis response</li>
-<li><strong><a href="http://knowledge.cog.md">knowledge.cog.md</a></strong> - what the model knows and when to search vs answer</li>
-<li><strong><a href="http://search.cog.md">search.cog.md</a></strong> - how and when to search, copyright compliance</li>
-<li><strong><a href="http://tools.cog.md">tools.cog.md</a></strong> - available tool definitions (info-doc, not action-doc)</li>
-<li><strong><a href="http://memory.cog.md">memory.cog.md</a></strong> - state of the persistent memory system</li>
-<li><strong><a href="http://storage.cog.md">storage.cog.md</a></strong> - the persistent artefact API</li>
-<li><strong><a href="http://connectors.cog.md">connectors.cog.md</a></strong> - MCP app routing rules</li>
-<li><strong><a href="http://computer-use.cog.md">computer-use.cog.md</a></strong> - file creation, skill reading, outputs</li>
-<li><strong><a href="http://filesystem.cog.md">filesystem.cog.md</a></strong> - mounted directories (info-doc)</li>
-<li><strong><a href="http://network.cog.md">network.cog.md</a></strong> - connectivity configuration (info-doc)</li>
+<li><strong><code>manifest.cog.md</code></strong> - boot sequence, lists what loads and in what order</li>
+<li><strong><code>identity.cog.md</code></strong> - who the agent is, what products it can describe</li>
+<li><strong><code>behaviour.cog.md</code></strong> - tone, formatting, refusal handling, evenhandedness</li>
+<li><strong><code>wellbeing.cog.md</code></strong> - user protection, mental health, crisis response</li>
+<li><strong><code>knowledge.cog.md</code></strong> - what the model knows and when to search vs answer</li>
+<li><strong><code>search.cog.md</code></strong> - how and when to search, copyright compliance</li>
+<li><strong><code>tools.cog.md</code></strong> - available tool definitions (info-doc, not action-doc)</li>
+<li><strong><code>memory.cog.md</code></strong> - state of the persistent memory system</li>
+<li><strong><code>storage.cog.md</code></strong> - the persistent artefact API</li>
+<li><strong><code>connectors.cog.md</code></strong> - MCP app routing rules</li>
+<li><strong><code>computer-use.cog.md</code></strong> - file creation, skill reading, outputs</li>
+<li><strong><code>filesystem.cog.md</code></strong> - mounted directories (info-doc)</li>
+<li><strong><code>network.cog.md</code></strong> - connectivity configuration (info-doc)</li>
 </ol>
 <p>The COG distinction between info-docs and action-docs fell out naturally. The tools definitions block in Fable 5 is pure description - it tells the agent what exists. That's an info-doc. The behaviour block contains rules the agent must follow in real time. That's an action-doc. Anthropic's own structure already encodes this. They just didn't name it.</p>
 <h2 id="why-the-fit-matters" tabindex="-1">Why the Fit Matters</h2>
@@ -313,5 +313,17 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+
+  <!-- COG viewer overlay -->
+  <div id="cog-overlay" class="cog-overlay" role="dialog" aria-modal="true" aria-labelledby="cog-overlay-title">
+    <div class="cog-overlay__dialog">
+      <div class="cog-overlay__header">
+        <strong id="cog-overlay-title" class="cog-overlay__title"></strong>
+        <button type="button" id="cog-overlay-close" class="cog-overlay__close" aria-label="Close">&times;</button>
+      </div>
+      <pre id="cog-overlay-body" class="cog-overlay__body"></pre>
+    </div>
+  </div>
+  <script src="../../js/cog-viewer.js"></script>
 </body>
 </html>
