@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Repo Housekeeping and Branch Cleanup"
-description: "Morning session: pulled upstream changes, synced submodules, cleared stale branches"
+title: "Co-Directors Report - Housekeeping, Field Cleanup, and Draft Blog Fix"
+description: "Morning session: pulled upstream changes, cleared stale branches, removed kebab-case field duplicates, fixed corrupted draft blog HTML files"
 author: "Tom Cranstoun"
 created: 2026-06-14
 modified: 2026-06-14
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -19,7 +19,7 @@ mx:
   x-mx-contextProvides: ["Co-Directors Report - Repo Housekeeping and Branch Cleanup"]
 ---
 
-# Co-Directors Report - Repo Housekeeping and Branch Cleanup
+# Co-Directors Report - Housekeeping, Field Cleanup, and Draft Blog Fix
 
 **Date:** 14 June 2026 - Morning
 **Segment:** Morning (since midnight)
@@ -28,19 +28,28 @@ mx:
 
 ## Summary
 
-The morning session was a clean housekeeping pass: pulled the latest upstream changes (including the repo-audit skill safety scan spec and a validator fix from PR #33), synced all submodules, and cleared the local branch list down to `main` only. The repository is now in a clean state with no stale branches or detached submodule HEADs.
+A full morning of housekeeping across three areas. The first pass pulled upstream changes, cleared stale branches, and synced submodules. The second pass removed stale kebab-case field duplicates left from an earlier cannon cleanup. The third pass fixed a crawl-safety issue: four draft blog HTML files had been left in a corrupted mid-publish state where their metadata claimed they were published but no live copy existed.
 
 ---
 
 ## What Was Done
 
-### 1. Upstream Pull and Submodule Sync
+### 1. Upstream Pull, Submodule Sync, and Branch Cleanup
 
-Pulled `origin/main`, which fast-forwarded to include PR #33 (repo-audit PRD updates, `skill-safety-scan-spec.md`, and an `mx-validator.cjs` crash fix). All submodules were updated via `git submodule update --remote --merge` - all eight are on `main` with no detached HEADs.
+Pulled `origin/main` (PR #33: repo-audit PRD updates, skill-safety-scan spec, mx-validator crash fix). All submodules synced; no detached HEADs. Cleared six stale local branches and pruned one remote tracking ref.
 
-### 2. Branch Cleanup
+### 2. Stale Field Cleanup
 
-Deleted three merged local branches (`ai-citations-by-engine`, `keen-mirzakhani`, `project-implications`) and pruned one stale remote tracking ref. Three additional unmerged branches (`ollama-kimi-k2-7`, `skills-capabilities`, `worktree-cross-check-permanent`) were reviewed per their commit logs: all contained old session-doc commits superseded by newer content on `main`. Merge was attempted but conflicted on `CHANGELOG.md`, `LEARNINGS.md`, and the `mx-outputs` submodule pointer - the branch content was clearly behind `main` on all three. Merged aborted; all three force-deleted. Local branch list is now `main` only.
+Removed kebab-case field duplicates (`content-type`, `x-mx-content-state`, `x-mx-ai-assistance`, `x-mx-ai-editable`) left in the field dictionary after the canonical camelCase forms were introduced. Corresponding REMINDERS and CHANGELOG were tidied.
+
+### 3. Draft Blog HTML Fix (Crawl Safety)
+
+Investigated a report of draft HTML files marked as published. Found four files in `mx-outputs/mx-site/blog/drafts/` that had been partially promoted: `blog-publish-retire.cjs` had flipped their `mx:status`, `robots`, and canonical URL to published values, but the files were never moved out of `drafts/`. No published copy existed at those live canonical URLs.
+
+- Three posts reverted to clean draft state: `noindex/nofollow`, `mx:status=draft`, canonical pointing back to the `blog/drafts/` URL.
+- `building-reginald-in-one-session.html` deleted: no source markdown, no published destination.
+
+Left unchecked, crawlers would have indexed these corrupted drafts pointing at non-existent pages.
 
 ---
 
@@ -48,17 +57,16 @@ Deleted three merged local branches (`ai-citations-by-engine`, `keen-mirzakhani`
 
 | Metric | Value |
 |--------|-------|
-| Commits (since midnight, all sessions) | 17 |
-| Files changed | 49 |
-| Lines added | +1,318 |
-| Lines removed | -92 |
-| Local branches deleted | 6 |
+| Commits (since midnight, hub + submodules) | 20+ |
+| Draft HTML files fixed | 3 |
+| Draft HTML files deleted | 1 |
+| Stale kebab field keys removed | 4 |
+| Stale branches deleted | 6 |
 | Remote tracking refs pruned | 1 |
-| Submodules synced | 8 |
 
 ---
 
 ## Next Steps
 
 - No new action items from this session.
-- Repository is clean and ready for the next substantive session.
+- Three reverted draft posts (accessibility-is-machine-readability, announcing-the-gathering, ai-native) remain in `blog/drafts/` and can be properly promoted when ready.
