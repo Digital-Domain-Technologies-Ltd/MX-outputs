@@ -111,4 +111,4 @@ Dry-run confirmed: 188 session files found, candidates extracted correctly.
 
 - Three reverted draft posts (accessibility-is-machine-readability, announcing-the-gathering, ai-native) remain in `blog/drafts/` and can be promoted when ready.
 - Agent-friendly-starter-kit content review flagged it predates MX frontmatter, COGs, and provenance patterns - an `mx/` example directory would close that gap. Deferred.
-- Run `npm run dream` (with Ollama running) to populate `datalake/dream-files/findings.jsonl` for the first time.
+- Dream completed its first full run: 106 findings across session transcripts committed to `datalake/dream-files/`. Run `npm run dream` periodically (with Ollama running) to pick up new sessions.
