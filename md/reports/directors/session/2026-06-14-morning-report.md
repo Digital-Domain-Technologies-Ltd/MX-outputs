@@ -4,7 +4,7 @@ description: "Morning session: housekeeping, robots.txt-driven sitemap scripts, 
 author: "Tom Cranstoun"
 created: 2026-06-14
 modified: 2026-06-14
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -77,7 +77,38 @@ An audit of the agent-friendly-starter-kit found two copies: `mx-code-examples/`
 
 ---
 
+### 6. Dream Skill - Ollama-Powered Session Mistake Miner
+
+Tom observed repeated Claude mistakes by watching tool calls in real time and asked for an automated equivalent. Dream is a new local skill that scans this project's Claude Code session JSONL transcripts, classifies tool-call errors and structural bad patterns (such as `cd` to a relative path or `Edit` without a preceding `Read`) using a local Ollama model, and commits a growing findings catalogue to `datalake/dream-files/`.
+
+Key properties: fully off-device (no transcript content leaves the machine), interruptable (every write is synchronous `appendFileSync`; ctrl-C is safe), incremental (processed files are checkpointed, new sessions are picked up on the next run), deduplicated by normalised hash (timestamps, UUIDs, paths stripped before hashing - the same logical mistake from two sessions produces one classification call).
+
+Deliverables this session:
+
+- `scripts/dream.cjs` - main script with Phase 1 (hard errors + retries) and Phase 2 (cd-relative, Edit-without-Read) extraction
+- `.claude/skills/dream/skill.md` - Claude Code skill routing `/dream`
+- `scripts/cogs/dream.cog.md` - action cog with security scope, `refersTo` links, runbook
+- `datalake/knowledge/system/dream-architecture.md` - full architecture doc with data-flow diagram, normalisation table, LLM contract
+- `datalake/dream-files/` - output directory with `.mx.yaml.md` and `.gitignore`
+- `npm run dream` script added to `package.json`
+
+Dry-run confirmed: 188 session files found, candidates extracted correctly.
+
+---
+
+## By the Numbers
+
+| Metric | Value |
+|--------|-------|
+| Commits this session (hub + submodules) | 30+ |
+| Session JSONL files Dream can process | 188 |
+| Dream skill files created | 6 |
+| Files changed (full morning) | 43+ |
+
+---
+
 ## Next Steps
 
 - Three reverted draft posts (accessibility-is-machine-readability, announcing-the-gathering, ai-native) remain in `blog/drafts/` and can be promoted when ready.
 - Agent-friendly-starter-kit content review flagged it predates MX frontmatter, COGs, and provenance patterns - an `mx/` example directory would close that gap. Deferred.
+- Run `npm run dream` (with Ollama running) to populate `datalake/dream-files/findings.jsonl` for the first time.
