@@ -37,7 +37,6 @@ mx:
     - "How we turned Claude Code's session transcripts into a growing mistake catalogue - and why making each dream type a COG was the right call."
   stability: stable
   purpose: "How we turned Claude Code's session transcripts into a growing mistake catalogue - and why making each dream type a COG was the right call."
-  x-mx-quotes: []
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -126,7 +125,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1403,
+        "wordCount": 1588,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -208,7 +207,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1403">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1588">
         <header class="article-header">
           <h1>Dream: COG-driven mistake mining for Claude Code</h1>
           <div class="article-meta"
@@ -240,15 +239,20 @@ mx:
 <hr>
 <h2 id="why-cog-driven" tabindex="-1">Why COG-driven</h2>
 <p>The original version of Dream had its scan targets and classification lenses hardcoded. Two phases: hard errors, structural patterns. That was fine for two known patterns.</p>
-<p>But the moment I wanted to add a third lens - say, <code>repo-learnings-drift</code>, scanning for <a href="http://LEARNINGS.md">LEARNINGS.md</a> rules that the repo's own scripts no longer enforce - I'd need to edit the script. And a fourth. And a fifth.</p>
-<p>The fix is obvious once you see it: each dream type is a COG. A <code>.cog.md</code> file in <code>datalake/dream-files/cogs/</code> that declares what to scan and how to classify. Adding a new dream type means writing a COG, not touching the script.</p>
-<p>Each dream COG declares three things in its frontmatter:</p>
+<p>But the moment I wanted to add a third lens - say, one that checks the repo's published blog posts for stale factual claims - I'd need to edit the script. And a fourth. And a fifth.</p>
+<p>The fix is obvious once you see it: each dream type is a COG. A <code>.cog.md</code> file in <code>datalake/dream-files/cogs/</code> that declares what to scan, what to look for, and where to write. Adding a new dream type means writing a COG, not touching the script.</p>
+<p>Each dream COG declares three key fields in its frontmatter:</p>
 <ul>
-<li><code>x-mx-dreamtype</code>: the composite label, e.g. <code>session-tool-errors</code>. This becomes the output filename prefix.</li>
-<li><code>x-mx-dreamScanTarget</code>: what to scan. Right now that's <code>session-jsonl</code> (the Claude Code transcripts). Future values could be <code>repo-files</code>, <code>git-history</code>, <code>learnings-corpus</code>.</li>
-<li><code>x-mx-dreamLens</code>: what to look for. <code>tool-errors</code> runs the hard-error extraction. <code>structural-patterns</code> runs the structural scan. A custom value gets passed as context to the Ollama prompt, letting the model apply a different rubric without any code change.</li>
+<li><code>x-mx-dreamtype</code>: the composite label. This becomes the output filename prefix and the dream's identity.</li>
+<li><code>x-mx-dreamScanTarget</code>: what to scan - session transcripts, scripts in the repo, published blog HTML, the dream COGs themselves.</li>
+<li><code>x-mx-dreamLens</code>: what to look for, within that scan target.</li>
 </ul>
 <p>The script reads all COGs in the folder, builds the list, and picks one.</p>
+<h3 id="a-worked-example" tabindex="-1">A worked example</h3>
+<p>Take <code>session-structural-patterns</code>, one of the two session-analysis dreams. Its scan target is the Claude Code session JSONL transcripts. Its lens is structural patterns in tool use - the kinds of mistake that do not immediately produce an error but consistently produce bad outcomes.</p>
+<p>The COG names two patterns. It describes each one clearly enough that the runner can implement the check without inference. It specifies the dedup rule: every candidate is normalised and hashed before any Ollama call; if that hash is already in the exclusions file, the candidate is skipped. It tells Ollama exactly what JSON schema to return. And it names where findings go: <code>LEARNINGS.md</code> for the rule, and the relevant gotcha cog for the domain.</p>
+<p>That is the whole contract. The COG is the specification. The script is the executor. A new contributor who wants to understand what <code>session-structural-patterns</code> does reads the COG - not the script, not the memory, not a conversation. The COG travels with the repo.</p>
+<p>Want to understand what the COG actually says - the specific extraction rules, the exact Ollama prompt schema, the dedup algorithm? Join us to understand.</p>
 <hr>
 <h2 id="why-random-selection" tabindex="-1">Why random selection</h2>
 <p>I could have Dream run every dream type on every invocation. I didn't, for two reasons.</p>
@@ -279,7 +283,7 @@ node scripts/dream.cjs --dry-run          # extract candidates, no Ollama, no wr
 node scripts/dream.cjs --dream session-tool-errors  # fix the COG selection
 </code></pre>
 <p>Ollama needs to be running locally (<code>ollama serve</code>). The default model is <code>gpt-oss:20b</code>. No session content reaches any external service.</p>
-<p>After a run, read <code>datalake/dream-files/&lt;dreamtype&gt;-report.md</code>. Promote anything useful to <a href="http://LEARNINGS.md">LEARNINGS.md</a> or the relevant gotcha cog. Commit <code>findings.jsonl</code>, <code>exclusions.jsonl</code>, and <code>report.md</code> together.</p>
+<p>After a run, read <code>datalake/dream-files/YYYY-MM-DD/&lt;dreamtype&gt;-report.md</code> - each run writes to a dated subfolder so the history accumulates without overwriting. Promote anything useful to <a href="http://LEARNINGS.md">LEARNINGS.md</a> or the relevant gotcha cog. Commit <code>findings.jsonl</code>, <code>exclusions.jsonl</code>, and <code>report.md</code> together from the dated folder.</p>
 
 
       </article>
