@@ -6,17 +6,19 @@
 <!--
 ---
 title: "The Layer Beneath the System Prompt"
-description: "Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These are not the same thing, and only one of them can be built on an open standard."
+description: "Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These aren't the same thing, and only one of them can be built on an open standard."
 author: Tom Cranstoun
 created: "2026-06-14"
 modified: "2026-06-14"
 version: "0.1"
 mx:
+  x-mx-quotes:
+    - "This hook removes the reading-and-judging step from the path: it runs the scanner itself and fails closed, so a hard-banned word cannot reach disk no matter what the author did or did not read."
   status: draft
   contentType: blog-post
   audience: [humans, machines]
   tags: [mx-os, cog, system-prompt, governance, hooks, provenance, agent-architecture, anthropic]
-  purpose: "Show that system prompts are the wrong layer for operator-specific AI governance. The right layer is per-context, per-domain, enforced mechanically — and needs an open standard."
+  purpose: "Show that system prompts are the wrong layer for operator-specific AI governance. The right layer is per-context, per-domain, enforced mechanically, and needs an open standard."
   stability: draft
   x-mx-contextProvides:
     - "Six capabilities the MX .claude/ governance layer has that Fable 5 cannot: mechanical enforcement, session memory persistence, intent-to-COG routing, automatic provenance, pipeline awareness, and vocabulary determinism with tested scanners. Argument: system prompts govern general behaviour; operators need a second layer for context-specific governance, and that layer needs an open standard."
@@ -30,7 +32,7 @@ mx:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
-  <meta name="description" content="Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These are not the same thing, and only one of them can be built on an open standard.">
+  <meta name="description" content="Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These aren't the same thing, and only one of them can be built on an open standard.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://allabout.network/blogs/mx/the-layer-beneath-the-system-prompt.html">
 
@@ -38,7 +40,7 @@ mx:
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://allabout.network/blogs/mx/the-layer-beneath-the-system-prompt.html">
   <meta property="og:title" content="The Layer Beneath the System Prompt | CogNovaMX">
-  <meta property="og:description" content="Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These are not the same thing, and only one of them can be built on an open standard.">
+  <meta property="og:description" content="Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These aren't the same thing, and only one of them can be built on an open standard.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta property="og:image:width" content="1200">
@@ -51,7 +53,7 @@ mx:
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Layer Beneath the System Prompt | CogNovaMX">
-  <meta name="twitter:description" content="Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These are not the same thing, and only one of them can be built on an open standard.">
+  <meta name="twitter:description" content="Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These aren't the same thing, and only one of them can be built on an open standard.">
   <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta name="twitter:site" content="@ddttomtom">
@@ -89,7 +91,7 @@ mx:
         "@type": "BlogPosting",
         "name": "The Layer Beneath the System Prompt",
         "headline": "The Layer Beneath the System Prompt",
-        "description": "Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These are not the same thing, and only one of them can be built on an open standard.",
+        "description": "Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These aren't the same thing, and only one of them can be built on an open standard.",
         "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
         "datePublished": "2026-06-14",
         "dateModified": "2026-06-14",
@@ -112,7 +114,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 993,
+        "wordCount": 965,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -192,7 +194,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="993">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="965">
         <header class="article-header">
           <h1>The Layer Beneath the System Prompt</h1>
           <div class="article-meta"
@@ -211,45 +213,45 @@ mx:
 
 <p>I took the leaked Fable 5 system prompt and decomposed it into MX COGs. <a href="https://mx.allabout.network/blog/drafts/fable5-system-prompt-is-a-cog.html">That post</a> is about how well the structure fits.</p>
 <p>This post is about what the structure misses.</p>
-<p>Fable 5 is Anthropic's answer to one question: how should Claude behave in general? It is a good answer. 1,585 lines covering tone, refusal rules, tool definitions, knowledge cutoff, copyright compliance, memory state, and filesystem configuration. Comprehensive, well-structured, and leaked the day after the model launched.</p>
+<p>Fable 5 is Anthropic's answer to one question: how should Claude behave in general? It's a good answer. 1,585 lines covering tone, refusal rules, tool definitions, knowledge cutoff, copyright compliance, memory state, and filesystem configuration. Comprehensive, well-structured, and leaked the day after the model launched.</p>
 <p>My <code>.claude/</code> folder is my answer to a different question: how should an agent behave in this specific codebase, on this specific quality standard, with these specific pipelines, under this specific governance regime?</p>
-<p>That question cannot be answered with a system prompt. It needs a different layer. And that layer is what MX is for.</p>
+<p>That question can't be answered with a system prompt. It needs a different layer. And that layer is what MX does.</p>
 <h2 id="the-difference-between-instructions-and-enforcement" tabindex="-1">The difference between instructions and enforcement</h2>
-<p>Fable 5's tone section tells Claude: avoid over-formatting with bold emphasis, headers, and lists.</p>
+<p>Its tone section tells Claude: avoid over-formatting with bold emphasis, headers, and lists.</p>
 <p>My <code>pre-write-forbidden-vocab.sh</code> hook runs a banned-word scanner against the proposed file content and blocks the write before it happens. The code comment explains the design decision:</p>
 <blockquote>
 <p>This hook removes the reading-and-judging step from the path: it runs the scanner itself and fails closed, so a hard-banned word cannot reach disk no matter what the author did or did not read.</p>
 </blockquote>
-<p>The difference is not subtle. One is a request. The other is a gate. A request reaches the model and the model decides whether to honour it. A gate runs before the write and the write does not happen if it fails.</p>
+<p>The difference is not subtle. One is a request. The other is a gate. A request reaches the model, which decides whether to honour it. A gate runs before the write; if it fails, the action doesn't complete.</p>
 <p>Fifteen hooks in my <code>.claude/</code> folder are blocking. <code>pre-write-frontmatter.sh</code> blocks any markdown write with invalid MX frontmatter. <code>pre-write-html-hygiene.sh</code> blocks HTML writes with hygiene failures. <code>pre-bash-readonly.sh</code> blocks writes to read-only submodule repos entirely. <code>pre-bash-deterministic-tooling.sh</code> blocks throwaway in-place mutations and directs the agent to save a script instead.</p>
-<p>A system prompt, no matter how detailed, cannot do this. It can ask. It cannot block.</p>
+<p>A system prompt, no matter how detailed, can't do this. It can ask. It can't block.</p>
 <h2 id="the-difference-between-memory-and-state" tabindex="-1">The difference between memory and state</h2>
-<p>Fable 5's memory section reads: &quot;Claude has no memories of the user because the user has not enabled Claude's memory in Settings.&quot;</p>
-<p>That is accurate. It is also the only option available when memory lives inside the model provider's platform.</p>
-<p>My <code>session-memory-hydrate.sh</code> hook runs at every session start. It merges repo-tracked memory from <code>.claude/memory/</code> with the device memory directory, newest-wins, tombstones honoured. <code>session-uber-plan.sh</code> loads the active project plan into context. <code>session-index-trust.sh</code> sets the index trust state. After every write, <code>post-write-memory-sync.sh</code> writes new memory back to the repository.</p>
+<p>Its memory section reads: &quot;Claude has no memories of the user because they haven't enabled it in Settings.&quot;</p>
+<p>That's accurate. It's also the only option available when memory is on the model provider's platform.</p>
+<p>My <code>session-memory-hydrate.sh</code> hook runs at every session start. It merges the repo-tracked memory store from <code>.claude/memory/</code> with the device-local cache, newest-wins, tombstones honoured. <code>session-uber-plan.sh</code> loads the active project plan into context. <code>session-index-trust.sh</code> sets the index trust state. After every write, <code>post-write-memory-sync.sh</code> writes new memory back to the repository.</p>
 <p>The agent starts from where the project actually is, not from a blank slate. That state is in version control. It travels with the repository. A new team member gets the accumulated project memory on their first clone.</p>
-<p>No system prompt can do this. Memory that lives in the model provider's platform is the model provider's memory. Memory that lives in your repository is yours.</p>
+<p>No system prompt can do this. Memory on the model provider's platform belongs to the provider. Memory in your repository is yours.</p>
 <h2 id="the-difference-between-a-tool-list-and-a-routing-system" tabindex="-1">The difference between a tool list and a routing system</h2>
-<p>Fable 5 lists fifteen available tools. There is no routing logic. No way to find the right document for a task.</p>
+<p>Fable 5 lists fifteen available tools. There's no routing logic. No way to find the right document for a task.</p>
 <p>My <code>proactive-cog-beacon.sh</code> hook scores every incoming prompt against the full COG registry using trigger, tag, name, and description matching. If a relevant action-doc scores strongly, it injects a soft advisory before the model responds. <code>run-cog-enforcer.sh</code> handles hard intent detection and resolves the exact COG file from the registry. <code>cog-authoring-gate.sh</code> intercepts authoring intent and injects the <code>how-to-write-a-cog.cog.md</code> authority before the model guesses at the structure from training data.</p>
-<p>The system finds the right document before the first token of response. A system prompt cannot do this because it does not know what documents exist in your specific codebase.</p>
+<p>The system finds the right document before the first token of response. A system prompt can't do this because it doesn't know what documents exist in your specific codebase.</p>
 <h2 id="the-difference-between-documentation-and-provenance" tabindex="-1">The difference between documentation and provenance</h2>
 <p>Fable 5 has no concept of provenance. The word does not appear in 1,585 lines.</p>
-<p>My <code>pre-commit-provenance-sidecar.sh</code> hook scans every staged artefact under <code>mx-outputs/</code> at commit time. For any artefact without a sidecar, it auto-generates a <code>.provenance.ai.json</code> and stages it alongside the artefact. The evidence chain lands in version control as part of the commit. <code>post-write-metadata-transfer.sh</code> verifies that artefacts carry their source MX metadata through the pipeline as they are transformed from markdown to HTML to PDF.</p>
-<p>This is not documentation about what happened. It is evidence that travels with what was produced. Auditors can verify it. Regulators can query it. The model provider does not hold it.</p>
-<p>Anthropic's controversial 30-day data retention policy on all Fable 5 and Mythos 5 traffic exists because they have no equivalent mechanism. The evidence their system is making good decisions has to live somewhere. They chose the API log. The right answer is the artefact.</p>
+<p>My <code>pre-commit-provenance-sidecar.sh</code> hook scans every staged artefact under <code>mx-outputs/</code> at commit time. For any file without a sidecar, it auto-generates a <code>.provenance.ai.json</code> and stages it alongside. The evidence chain lands in version control as part of the commit. <code>post-write-metadata-transfer.sh</code> verifies that artefacts carry their source MX metadata through the pipeline as they are transformed from markdown to HTML to PDF.</p>
+<p>This is evidence that travels with what was produced, not a record of what happened. Auditors can verify it. Regulators can query it. The model provider does not hold it.</p>
+<p>Anthropic's controversial 30-day data retention policy on all Fable 5 and Mythos 5 traffic exists because they have no equivalent mechanism. The evidence that their system is making good decisions has to live somewhere. They chose the API log. The right answer is the artefact.</p>
 <h2 id="the-question-system-prompts-cannot-answer" tabindex="-1">The question system prompts cannot answer</h2>
-<p>Fable 5 is a general-purpose instruction document. It governs how Claude behaves when talking to anyone, about anything, on any platform. That is a hard problem and Anthropic has put serious thought into it.</p>
-<p>But &quot;how should an agent behave on your codebase, with your quality standards, in your governance regime&quot; is a different problem. It is per-operator. It is per-context. It is per-domain. No model provider can answer it for you, because they do not know what your codebase contains, what your quality standards require, what your pipelines do, or what governance obligations you operate under.</p>
+<p>Fable 5 is a general-purpose instruction document. It governs how Claude behaves when talking to anyone, about anything, on any platform. That's a hard problem and Anthropic has put serious thought into it.</p>
+<p>But &quot;how should an agent behave on your codebase, with your quality standards, in your governance regime&quot; is a different problem. It's per-operator. It's per-context. It's per-domain. No model provider can answer it for you, because they don't know what your codebase contains, what your quality standards require, what your pipelines do, or what governance obligations you operate under.</p>
 <p>The answer to that question needs to be:</p>
 <ul>
 <li>Written by the operator, not the model provider</li>
 <li>Enforced mechanically, not aspirationally</li>
 <li>Versioned alongside the work it governs</li>
-<li>Portable across model providers — not locked to Claude or any other vendor</li>
+<li>Portable across model providers, not locked to Claude or any other vendor</li>
 <li>Governed by an open standard, not a commercial API contract</li>
 </ul>
-<p>That is what MX OS is for. The <code>.claude/</code> folder is MX running live, in a real codebase, governing a real agent's behaviour in a real production context. Every blocking hook, every session-start hydration, every provenance sidecar, every post-write sync is the architecture operating as designed.</p>
+<p>That is what MX OS does. The <code>.claude/</code> folder is MX running live, in a real codebase, governing a real agent's behaviour in a real production context. Every blocking hook, every session-start hydration, every provenance sidecar, every post-write sync is the architecture operating as designed.</p>
 <p>The system prompt tells the agent what to do.</p>
 <p>MX is the layer that makes sure it does it.</p>
 <hr>
