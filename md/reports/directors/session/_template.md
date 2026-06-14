@@ -30,7 +30,7 @@ mx:
   - Plain business language. Honest about failures.
   - No confidential names - advisory board referenced by role only.
   - Audience: co-directors, advisory board, investors, future team.
-  - Numbers must be real. Do not estimate.
+  - No commit hashes, PR numbers, or raw metrics tables - this is a business report, not a git log.
   - Sections marked OPTIONAL appear only when warranted.
   - Delete this comment block before saving.
 -->
@@ -59,20 +59,6 @@ mx:
 <Description.>
 
 <!-- Add or remove ### subsections as the work demands. Three is typical, one is fine for a tight session, more is fine when the session genuinely spanned multiple themes. -->
-
----
-
-## By the Numbers
-
-| Metric | Value |
-|--------|-------|
-| Commits | <N> |
-| Files changed | <N> |
-| Lines added | +<N> |
-| Lines removed | −<N> |
-| Repositories | <N> |
-
-<!-- Append rows when relevant: submodules touched, scripts deleted, new canonical files, new REMINDERS items, etc. -->
 
 ---
 
@@ -115,15 +101,3 @@ mx:
 ## Next Steps
 
 - <Actionable item - these get mirrored into REMINDERS.md by Step 2g of the workflow>
-
----
-
-## Commit Log
-
-| Hash | Description |
-|------|-------------|
-| <hash> | <commit message first line> |
-
-<!--
-  If the report is written before the session's hub commit lands (e.g. when no submodule commits exist to anchor against), record the hub commit's hash as `_pending_` and update post-commit, OR re-run the table refresh after Step 3.
--->

@@ -4,7 +4,7 @@ description: "Merged PR #35; registered x-mx-quotes canon; fixed CI and HTML hyg
 author: "Tom Cranstoun"
 created: 2026-06-14
 modified: 2026-06-14
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -72,22 +72,6 @@ A circular dependency between the quotes generator (Gate 27) and the index regen
 
 ---
 
-## By the Numbers
-
-| Metric | Value |
-|--------|-------|
-| Commits this session | 12 (from 554c206f to ce369e4a) |
-| Total commits today | 25 |
-| Files changed (this session) | 34 |
-| Lines added | +2,277 |
-| Lines removed | -93 |
-| Dream COGs created | 9 |
-| Dream COGs total | 9 + template + health + suggestions = 11 files |
-| New docs | how-to-write-a-dream-cog.cog.md, human-in-command.cog.md |
-| Gate cycles fixed | 1 (Gate 27/Gate 8 circular dependency) |
-
----
-
 ## Why It Matters
 
 The COG-driven dream architecture makes the mistake-mining system extensible without code changes. Adding a new dream type requires writing one COG file - the runner discovers it automatically. The Human-in-Command principle gives the governance framing a name and an anchor in EU AI HLEG 2019, making it citable in investor and regulatory conversations. The output boundary rule (`x-mx-dreamOutputBoundary`) is the practical implementation: a system that cannot act outside its declared scope is a system under command, not operating autonomously. The Gate 27/Gate 8 fix removes a circular dependency that had been causing repeated push failures - the root cause (blockquotes in generated files being extracted as quotes) was traced and eliminated structurally rather than worked around.
@@ -109,35 +93,3 @@ The COG-driven dream architecture makes the mistake-mining system extensible wit
 - Build the HTML/submodule population path for `x-mx-quotes` so served mx-site HTML also carries the exemption
 - Publish the dream blog post (currently Zone 2 draft/noindex) when ready for public release
 - Run `/dream` to exercise the new COG-driven system against the session transcripts from today
-
----
-
-## Commit Log
-
-| Hash | Description |
-|------|-------------|
-| f64b7dc7 | regen: refresh cog registry after hygiene commit |
-| 14763efb | feat(hygiene): add --fix flag to check-html-hygiene.js; add pre-commit auto-fix for curly quotes |
-| a42dc6f2 | fix(ci): add pull-requests: write permission to html-regression workflow |
-| 1c1649ed | regen: refresh hooks registry.json |
-| 99b8888d | regen: refresh routing-registry and hooks INDEX after x-mx-quotes merge |
-| b0d800c0 | feat(canon): register x-mx-quotes in cognovamx-fields.yaml v6.16 |
-| 72860835 | Merge pull request #35 |
-| 7cacd939 | Document x-mx-quotes + dream skill; add feature blog; update reminders |
-| 0a07c358 | Make git hooks thin-clone aware; still enforce on full clones |
-| a48682bb | Verify, heal, and protect x-mx-quotes freshness |
-| 0c3a002f | Populate x-mx-quotes across hub markdown from blockquotes |
-| 228d6bdf | Add x-mx-quotes verbatim-quote exemption for prose scanners |
-| 1d628584 | Style pass on Cannemeijer blog post |
-| 554c206f | feat(dream): COG-driven dream system + Human-in-Command principle |
-| fa336f2e | fix(dream): add output boundary to all dream COGs; fix Gate 7; update CHANGELOG |
-| f741c9d7 | regen: refresh definitions-index after human-in-command and dream COG additions |
-| 22d74988 | fix(links): fix wrong-depth link in manual-repository-architecture.cog.md |
-| 4ae13b49 | chore: update mx-outputs pointer after dream blog draft promotion |
-| 89a3f4aa | chore: populate x-mx-quotes on dream blog and definitions indexes |
-| 7caf58ed | chore: populate x-mx-quotes on definitions-index and documentation-map |
-| 4fb9c959 | fix(quotes): convert blockquote notices to italic to break Gate 27/Gate 8 cycle |
-| 25d9af2c | feat(dream): dated output folders, repo-link-health COG, template, how-to-write-a-dream-cog |
-| 1bad458e | regen: refresh definitions-index after dream additions |
-| 592d4252 | fix(dream): add missing x-mx-contextProvides to template and how-to-write-a-dream-cog |
-| ce369e4a | chore: update mx-outputs pointer after dream blog republish |
