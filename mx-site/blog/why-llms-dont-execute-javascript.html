@@ -221,7 +221,7 @@ mx:
 
 <p>If you have noticed that AI assistants struggle with modern single-page applications, you might assume they just haven't invested in JavaScript rendering yet. That's not quite right. The real reason reveals something more interesting about how LLMs acquire knowledge versus how search engines index the web.</p>
 
-<p>The difference isn't about technology. It's about purpose. Once you see it, you realise you already have a new class of users visiting your website: machines.</p>
+<p>The difference is about purpose, not technology. Once you see it, you realise you already have a new class of users visiting your website: machines.</p>
 
 <h2 id="machines-are-users-too" tabindex="-1">Machines are users too</h2>
 
@@ -252,15 +252,15 @@ mx:
 
 <p>When Common Crawl encounters your React or Vue application, it gets the skeleton, the bare <code>&lt;div id="app"&gt;&lt;/div&gt;</code> and your JavaScript bundle references. That's it. No rendered content, no populated data, no information about what your site does.</p>
 
-<p>But here's the thing: Common Crawl isn't trying to capture your current data. It is trying to understand what your site <em>is</em>.</p>
+<p>Common Crawl isn't trying to capture your current data. It's trying to understand what your site <em>is</em>.</p>
 
 <h2 id="the-snapshot-problem" tabindex="-1">The snapshot problem</h2>
 
 <p>Consider a stock-tracking website. If Google visits it, Googlebot renders the JavaScript and indexes the current stock prices. That makes sense for search, someone querying "AAPL stock price" wants today's value, and Google needs to index current state.</p>
 
-<p>But what would an LLM do with that snapshot? Train on Apple's stock being &pound;187.42 on 15 March 2024? That is worthless knowledge. By the time the model is deployed, that price is historical noise.</p>
+<p>But what would an LLM do with that snapshot? Train on Apple's stock being &pound;187.42 on 15 March 2024? That's worthless knowledge. By the time the model is deployed, that price is historical noise.</p>
 
-<p>Even if you server-rendered your stock tracker, you would just be feeding Common Crawl different snapshots. If your prices update every second, you would be generating server-rendered pages continuously, massive effort, no benefit. Common Crawl would catch one snapshot anyway, containing one moment's worth of data that is immediately outdated.</p>
+<p>Even if you server-rendered your stock tracker, you would just be feeding Common Crawl different snapshots. If your prices update every second, you would be generating server-rendered pages continuously, massive effort, no benefit. Common Crawl would catch one snapshot anyway, containing one moment's worth of data that's immediately outdated.</p>
 
 <p>The same applies to weather sites, countdown timers, calendar applications, live sports scores, anything where the specific values change constantly.</p>
 
@@ -275,9 +275,9 @@ mx:
   <li>It provides market commentary.</li>
 </ul>
 
-<p>It doesn't care what Apple's stock price is right now. It cares that this site <em>tracks</em> stock prices.</p>
+<p>It cares that this site <em>tracks</em> stock prices, not what Apple's price is right now.</p>
 
-<p>When you server-render your Vue application, you are not helping Common Crawl capture your dynamic data. You are helping it understand your site's purpose and structure. The content in your HTML provides context: navigation labels, section headings, explanatory text, metadata.</p>
+<p>When you server-render your Vue application, you aren't helping Common Crawl capture your dynamic data. You're helping it understand your site's purpose and structure. The content in your HTML provides context: navigation labels, section headings, explanatory text, metadata.</p>
 
 <p>A client-side rendered app gives Common Crawl almost nothing to work with. A server-rendered version gives it the information architecture, the content categories, the relationships between sections, the material that actually matters for understanding what the site does.</p>
 
@@ -285,7 +285,7 @@ mx:
 
 <p>Google visits sites on a schedule. More important sites get crawled more frequently. It renders JavaScript because its business is returning current results for search queries. When someone searches for something, Google needs to show what exists <em>now</em>, not what existed when Common Crawl last passed by.</p>
 
-<p>That is a fundamentally different goal from building training data. Google indexes current state for retrieval. Common Crawl captures structure and context for understanding.</p>
+<p>That's a different goal from building training data. Google indexes current state for retrieval. Common Crawl captures structure and context for understanding.</p>
 
 <p>Google creates snapshots too, public-facing versions of sites without logins or session state, the kind of thing a first-time visitor would see. But those snapshots feed a search index that gets updated regularly, not a language model trained once on historical data.</p>
 
@@ -341,7 +341,7 @@ mx:
 
 <p>If you set <code>aria-live="polite"</code> on a second-by-second countdown, the screen reader would constantly interrupt: "59 seconds, 58 seconds, 57 seconds." Completely unusable.</p>
 
-<p>The solution: mark it <code>aria-live="off"</code>. Let users navigate to the timer when they want the current value, rather than forcing continuous updates they cannot keep up with.</p>
+<p>The solution: mark it <code>aria-live="off"</code>. Let users navigate to the timer when they want the current value, rather than forcing continuous updates they can't keep pace with.</p>
 
 <h3>The parallel is exact</h3>
 
@@ -352,7 +352,7 @@ mx:
 
 <p>Both need signals about what updates too rapidly to consume passively.</p>
 
-<p>This validates the MX approach. We are not inventing something new. We are applying proven accessibility patterns to machine consumers. The web already has mechanisms for marking dynamic content. MX extends that thinking.</p>
+<p>This validates the MX approach. We're applying proven accessibility patterns to machine consumers, not inventing something new. The web already has mechanisms for marking dynamic content. MX extends that thinking.</p>
 
 <h2 id="training-data-reality" tabindex="-1">Common Crawl: how training data actually works</h2>
 
@@ -360,7 +360,7 @@ mx:
 
 <h3>What Common Crawl actually does</h3>
 
-<p>Common Crawl is not an AI agent. Its bot, CCBot, is a scraper that visits HTML pages, checks <code>robots.txt</code> first, and only fetches a page if crawling is allowed. The relevant facts for site owners:</p>
+<p>Common Crawl isn't an AI agent. Its bot, CCBot, is a scraper that visits HTML pages, checks <code>robots.txt</code> first, and only fetches a page if crawling is allowed. The relevant facts for site owners:</p>
 
 <ul>
   <li><code>robots.txt</code> is honoured. Add a <code>User-agent: CCBot</code> block with <code>Disallow: /</code> and CCBot will stop crawling the site. It re-checks <code>robots.txt</code> periodically, so the change takes effect on the next pass.</li>
@@ -377,7 +377,7 @@ mx:
 
 <h3>The llms.txt problem stands separately</h3>
 
-<p>None of the <code>robots.txt</code> behaviour above helps a crawler find an <code>llms.txt</code> file. CCBot follows <code>robots.txt</code>, reads sitemaps, and indexes HTML. A raw <code>.txt</code> file with no entry in your sitemap is invisible to it. That is the problem the next section addresses.</p>
+<p>None of the <code>robots.txt</code> actions above help a crawler find an <code>llms.txt</code> file. CCBot follows <code>robots.txt</code>, reads sitemaps, and indexes HTML. A raw <code>.txt</code> file with no entry in your sitemap is invisible to it. That's the problem the next section addresses.</p>
 
 <h3>The llms.txt problem</h3>
 
@@ -389,7 +389,7 @@ mx:
   <li>It's not HTML (Common Crawl primarily harvests HTML).</li>
   <li>It's not in your sitemap (typically).</li>
   <li>There's no standard discovery mechanism.</li>
-  <li>It's a <code>.txt</code> file that machines have no reason to look for.</li>
+  <li>It's a <code>.txt</code> file that machines have no path to find.</li>
 </ul>
 
 <h3>The Machine Experience solution: keep llms.txt as it is, serve it as HTML for Common Crawl</h3>
@@ -447,7 +447,7 @@ mx:
 
 <h3>llms.txt and robots.txt as ephemeral operational files</h3>
 
-<p>An important distinction: <code>llms.txt</code> and <code>robots.txt</code> are not static sovereign data. They are ephemeral operational instructions that change as your site evolves.</p>
+<p>An important distinction: <code>llms.txt</code> and <code>robots.txt</code> aren't static sovereign data. They're ephemeral operational instructions that change as your site evolves.</p>
 
 <p><strong>llms.txt is ephemeral:</strong></p>
 
@@ -467,7 +467,7 @@ mx:
   <li>It reflects current operational needs, not permanent rules.</li>
 </ul>
 
-<p>Both are operational configuration files, not content. A snapshot of <code>robots.txt</code> from January 2025 does not tell you about the site's state in January 2026. These files document "how to interact with this site right now". That is ephemeral by definition.</p>
+<p>Both are operational configuration files, not content. A snapshot of <code>robots.txt</code> from January 2025 doesn't tell you about the site's state in January 2026. These files document "how to interact with this site right now". That's ephemeral by definition.</p>
 
 <h3>YAML frontmatter for metadata</h3>
 
@@ -502,7 +502,7 @@ This site is optimised for LLM understanding...
   <li>What site it describes (<code>site</code>)</li>
 </ul>
 
-<p>YAML frontmatter is already understood by static site generators, markdown processors, and increasingly by AI systems. It is machine-readable metadata using existing technology.</p>
+<p>YAML frontmatter is already understood by static site generators, markdown processors, and increasingly by AI systems. It's machine-readable metadata using existing technology.</p>
 
 <p>Don't just create <code>llms.txt</code> and hope machines understand its purpose. Give them the metadata they need to use it correctly.</p>
 
@@ -514,7 +514,7 @@ This site is optimised for LLM understanding...
 
 <h2 id="practical-outcome" tabindex="-1">The practical outcome</h2>
 
-<p>Client-side rendering is not inherently bad for AI consumption. A React app with good semantic HTML, clear navigation, descriptive text, and proper metadata can be understood by Common Crawl, if the meaningful content is in the initial HTML.</p>
+<p>Client-side rendering isn't inherently bad for AI consumption. A React app with good semantic HTML, clear navigation, descriptive text, and proper metadata can be understood by Common Crawl, if the meaningful content is in the initial HTML.</p>
 
 <p>The problem is when all your content is generated client-side. When the only HTML is <code>&lt;div id="app"&gt;&lt;/div&gt;</code>, there's nothing for a scraper to find.</p>
 
@@ -522,15 +522,15 @@ This site is optimised for LLM understanding...
 
 <h2 id="mx-perspective" tabindex="-1">The MX perspective: serving machine users</h2>
 
-<p>Machine Experience is not about inventing new standards. It is about treating machines as users and applying the same UX thinking we use for human users.</p>
+<p>Machine Experience isn't about inventing new standards. It's about treating machines as users and applying the same UX thinking we use for human users.</p>
 
 <p><strong>Who are your users?</strong> Humans and machines.</p>
 
 <p><strong>What are their constraints?</strong></p>
 
 <ul>
-  <li>Humans with screen readers cannot consume rapid visual updates.</li>
-  <li>Machines scraping pages cannot execute JavaScript or consume second-by-second changes.</li>
+  <li>Humans with screen readers can't consume rapid visual updates.</li>
+  <li>Machines scraping pages can't execute JavaScript or consume second-by-second changes.</li>
 </ul>
 
 <p><strong>What technology already exists to serve them?</strong></p>
@@ -546,16 +546,16 @@ This site is optimised for LLM understanding...
 <p>Machine Experience separates two types of dynamic content based on whether snapshots provide meaningful information:</p>
 
 <ul>
-  <li><strong>Sovereign dynamic data</strong>: current state that is meaningful (product specifications, documentation versions, policy updates), snapshots are valid knowledge.</li>
+  <li><strong>Sovereign dynamic data</strong>: current state that's meaningful (product specifications, documentation versions, policy updates), snapshots are valid knowledge.</li>
   <li><strong>Ephemeral dynamic data</strong>: values that change so rapidly snapshots are meaningless (stock prices updating every second, live scores, countdown timers).</li>
 </ul>
 
-<p>For sovereign data, expose the state. For ephemeral data, signal that snapshots cannot be trusted.</p>
+<p>For sovereign data, expose the state. For ephemeral data, signal that snapshots can't be trusted.</p>
 
 <p>This matters for every machine user visiting your site right now:</p>
 
 <ul>
-  <li><strong>Training pipelines</strong> (Common Crawl), understand the site's purpose but do not train on ephemeral values.</li>
+  <li><strong>Training pipelines</strong> (Common Crawl), understand the site's purpose but don't train on ephemeral values.</li>
   <li><strong>AI browsers</strong> (Claude in Chrome, Arc), know which data to cache versus query fresh.</li>
   <li><strong>Browser extensions</strong>, understand what data is reliable versus fleeting.</li>
   <li><strong>AI agents</strong>, see when to use live APIs instead of page snapshots.</li>
@@ -565,7 +565,7 @@ This site is optimised for LLM understanding...
 
 <h3>Using existing technology to serve machine users</h3>
 
-<p>We already have the tools. Screen readers taught us how to mark content for non-visual users. ARIA live regions tell assistive technology which content updates too rapidly to announce continuously. Machine users have the same constraint, they cannot consume second-by-second updates.</p>
+<p>We already have the tools. Screen readers taught us how to mark content for non-visual users. ARIA live regions tell assistive technology which content updates too rapidly to announce continuously. Machine users have the same constraint, they can't consume second-by-second updates.</p>
 
 <p>Use the same technology.</p>
 
@@ -617,7 +617,7 @@ This site is optimised for LLM understanding...
 
 <p>No new technology. No additional attributes. Just applying UX thinking to machine users.</p>
 
-<p>The <code>data-reason</code> attribute matters. It is not just a boolean flag, it is explicit, human-readable context that prevents AI hallucination.</p>
+<p>The <code>data-reason</code> attribute matters. It isn't just a boolean flag, it's explicit, human-readable context that prevents AI hallucination.</p>
 
 <p>Without this signal, an AI visiting your stock page might:</p>
 
@@ -625,14 +625,14 @@ This site is optimised for LLM understanding...
   <li>See "AAPL: &pound;187.42" in a cached snapshot.</li>
   <li>User asks "what is Apple's stock price?"</li>
   <li>AI responds "&pound;187.42" based on three-hour-old data.</li>
-  <li>That is hallucination, presenting stale information as current.</li>
+  <li>That's hallucination, presenting stale information as current.</li>
 </ul>
 
 <p>With the context:</p>
 
 <ul>
   <li><code>data-reason="Stock prices update every second"</code></li>
-  <li>The AI knows: this is a stock tracker, these values are ephemeral, do not trust the snapshot.</li>
+  <li>The AI knows: this is a stock tracker, these values are ephemeral, don't trust the snapshot.</li>
   <li>Correct reasoning: "I need to query live data, not use this cached page."</li>
 </ul>
 
@@ -671,7 +671,7 @@ This site is optimised for LLM understanding...
 
 <p>LLMs don't execute JavaScript because they don't learn about the web by visiting sites. They learn from datasets created by simple scrapers. Those scrapers need HTML that explains what your site is, not what values it happens to show at any given moment.</p>
 
-<p>Google executes JavaScript because its business model requires indexing current state for search results. That is a different use case with different economics.</p>
+<p>Google executes JavaScript because its business model requires indexing current state for search results. That's a different use case with its own economics.</p>
 
 <p>This distinction changes how you think about making sites AI-accessible. It is not about rendering every dynamic value server-side. It is about making sure your site's purpose, structure, and context exist in the HTML, the part that actually gets scraped, archived, and used for training.</p>
 

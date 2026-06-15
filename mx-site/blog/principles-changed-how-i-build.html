@@ -317,15 +317,15 @@ mx:
 
         <p>Then I started noticing something odd. The sites that worked best for screen reader users also happened to work better for everyone under stress. The patterns that made content comprehensible to people with cognitive disabilities also made it easier for anyone multitasking or distracted. And increasingly, the structure that helped humans understand pages also helped AI agents parse them correctly.</p>
 
-        <p>This wasn't a coincidence. I was seeing evidence of something I'd later come to understand as the convergence principle: the patterns that optimise for machine comprehension also improve human accessibility and comprehension. Not as a trade-off, but as a natural consequence of explicit, semantic communication.</p>
+        <p>This wasn't a coincidence. I was seeing evidence of something I'd later come to understand as the convergence principle: the patterns that improve machine comprehension also improve human accessibility. Not as a trade-off, but as a natural consequence of explicit, semantic communication.</p>
 
-        <p>That realisation led me to develop what I now call Machine Experience principles. These aren't new technologies or fancy frameworks. They're design principles that recognise a simple truth: if we build digital products that communicate meaning explicitly, rather than just displaying it attractively, we serve everyone better.</p>
+        <p>That realisation led me to develop what I now call Machine Experience principles. These aren't new technologies or fancy frameworks. They're design principles built on a simple truth: if we build digital products that communicate meaning explicitly, rather than just displaying it attractively, we serve everyone better.</p>
 
         <p>Let me share the principles that fundamentally changed how I approach building digital products.</p>
 
         <h2 id="principle-one">Principle One: Design for Both</h2>
 
-        <p>The first principle is the foundation for everything else: every design decision should optimise for both human developers and AI agents simultaneously.</p>
+        <p>The first principle is the foundation for everything else: every design decision should work for both human developers and AI agents simultaneously.</p>
 
         <p>I know what you're thinking. "Isn't that impossible? Don't machines and humans need different things?"</p>
 
@@ -333,19 +333,19 @@ mx:
 
         <p>The alternative is to make errors persistent. Put them at the top of the form, keep them visible until resolved, and clearly state what's wrong and how to fix it. This single pattern helps everyone. Not ideally for each specific case, but substantially for all cases.</p>
 
-        <p>That's what "design for both" means: recognising that explicitness, semantic structure, and persistent feedback serve all users regardless of their technical capabilities or limitations, rather than satisfying competing requirements.</p>
+        <p>That's what "design for both" means: accepting that explicitness, semantic structure, and persistent feedback serve all users regardless of their technical capabilities or limitations, rather than satisfying competing requirements.</p>
 
         <p>Hidden configuration files are another example. Files like <code>.gitignore</code> or configuration files that start with a dot reduce visual clutter for humans browsing directories. But they're fully discoverable via standard filesystem APIs for machines. YAML frontmatter in markdown documents provides readable content for humans and structured metadata for machines. These aren't compromises-they're solutions that genuinely serve both audiences.</p>
 
         <p>The anti-pattern? Mermaid diagrams. They require a rendering engine for humans to understand and an interpretation layer for machines to parse. They fail the "design for both" test because they introduce unnecessary complexity for both audiences.</p>
 
-        <p>This principle isn't about being clever with dual-purpose solutions. It's about asking a different question. Instead of "how do I make this work for users?" we ask "how do I make this work for everyone who encounters it-humans, disabled users, AI agents, automated systems?" The answer usually involves being more explicit, more semantic, and less dependent on visual presentation alone.</p>
+        <p>The real question isn't "how do I make this work for users?" but "how do I make this work for everyone who encounters it-humans, disabled users, AI agents, automated systems?" The answer usually involves being more explicit, more semantic, and less dependent on visual presentation alone.</p>
 
         <h2 id="principle-two">Principle Two: Metadata-Driven Architecture</h2>
 
         <p>The second principle builds on the first: use structured metadata to make content and code maximally machine-readable whilst remaining human-readable.</p>
 
-        <p>I used to think metadata was something you added after building the thing. You know, for search engine optimisation or accessibility compliance. But that's backwards. Metadata isn't decoration-it's infrastructure.</p>
+        <p>I used to think metadata was something you added after building the thing. You know, for search engine ranking or accessibility compliance. But that's backwards. Metadata isn't decoration-it's infrastructure.</p>
 
         <p>Think about it this way. When you write a function, you probably give it a clear name, add parameters with descriptive names, and maybe write a comment explaining what it does. That's metadata for humans. Now imagine if your codebase could tell an AI agent not just what each function does, but what context it provides, what context it requires, and how it relates to other parts of the system.</p>
 
@@ -353,15 +353,15 @@ mx:
 
         <p>At the repository level, you have a configuration file at the root that establishes project context and conventions. This tells anyone-human or machine-encountering your project what kind of system it's, what principles guide it, and how to navigate it effectively.</p>
 
-        <p>At the directory level, package-specific context lives in each major subdirectory. This explains what that package does, what it depends on, and how it fits into the larger system. No more hunting through README files scattered across dozens of folders trying to understand the architecture.</p>
+        <p>At the directory level, each major subdirectory carries a package-specific context file. This explains what that package does, what it depends on, and how it fits into the larger system. No more hunting through README files scattered across dozens of folders trying to understand the architecture.</p>
 
         <p>At the file level, YAML frontmatter declares each document's purpose, intended audience, stability level, and what context it provides to AI agents. I learned this the hard way. I was working with an AI assistant on a multi-repository project, and it kept getting confused about which repository we were working in, what the file naming conventions meant, and how different documents related to each other. So I started adding frontmatter that explicitly declared these relationships. The difference was dramatic. The AI stopped making incorrect assumptions and started asking better questions.</p>
 
-        <p>At the code level, annotations mark functions and critical sections with behavioural declarations. These aren't just comments-they're structured metadata that both humans and automated tools can parse reliably.</p>
+        <p>At the code level, annotations mark functions and critical sections with declared intent. These aren't just comments-they're structured metadata that both humans and automated tools can parse reliably.</p>
 
         <p>The required fields at each level include purpose, audience designation (human, machine, or both), stability indicator (experimental, unstable, stable, or frozen), what context this provides to AI agents, and cross-references to related content. For JSON and similar files that don't support frontmatter, you can mirror this structure using a comment metadata pattern.</p>
 
-        <p>Why does this matter? Because when you make context explicit through metadata, you're not just helping machines. You're helping the next developer who encounters your code, the documentation system that generates references, and the AI agent that's trying to understand how to modify a function safely. Single source of truth, multiple audiences served.</p>
+        <p>When you make context explicit through metadata, you're not just helping machines. You're helping the next developer who encounters your code, the documentation system that generates references, and the AI agent trying to understand how to modify a function safely. Single source of truth, multiple audiences served.</p>
 
         <h2 id="principle-three">Principle Three: Context Declaration</h2>
 
@@ -381,9 +381,9 @@ mx:
 
         <h2 id="principle-four">Principle Four: Universal Accessibility</h2>
 
-        <p>The fourth principle recognises that accessibility and machine-readability converge: plain text formats, explicit markup, and declared relationships serve both disabled users and automated systems.</p>
+        <p>The fourth principle identifies where accessibility and machine-readability converge: plain text formats, explicit markup, and declared relationships serve both disabled users and automated systems.</p>
 
-        <p>I used to think accessibility was primarily about screen readers and keyboard navigation. It's about those things, but it's about something much larger. It's about ensuring that information remains accessible regardless of how someone or something accesses it.</p>
+        <p>I used to think accessibility was primarily about screen readers and keyboard navigation. It's about those things, but it's about something much larger. It's about keeping information reachable regardless of how someone or something accesses it.</p>
 
         <p>Plain text formats-markdown, YAML, JSON, ASCII diagrams-work everywhere. You can read them in any text editor, process them with any programming language, version control them effectively, and they never become obsolete because they require specific software versions. Binary formats like Microsoft Word documents or Mermaid diagrams that require rendering? They work until they don't. They're accessible until the software breaks or the rendering engine changes or the AI agent doesn't have the right interpreter.</p>
 
@@ -391,11 +391,11 @@ mx:
 
         <p>The principle is straightforward: no JavaScript-required content for core functionality, no binary-only documentation, no formats that require specific proprietary tools to access. If something matters, make it accessible in the most universal format possible.</p>
 
-        <p>This doesn't mean you can't use JavaScript or rich media. It means you design with progressive enhancement. The core content and functionality work in plain text or basic HTML. JavaScript enhances the experience for those who have it, but doesn't gate access for those who don't.</p>
+        <p>You can still use JavaScript or rich media - design with progressive enhancement so the core works without it. The core content and functionality work in plain text or basic HTML. JavaScript enhances the experience for those who have it, but doesn't gate access for those who don't.</p>
 
         <p>I learned this working on a project where we built a complex dashboard with real-time updates. Beautiful interface, smooth interactions, completely inaccessible to AI agents trying to extract data because everything lived in JavaScript state. We redesigned it so the data existed in HTML data attributes and semantic structure first, then enhanced with JavaScript for real-time updates. Suddenly screen readers could navigate it, AI agents could parse it, and the experience actually got better for everyone because the structure was clearer.</p>
 
-        <p>Universal accessibility isn't about following compliance checklists. It's about recognising that the web is a communication medium accessed by diverse audiences using diverse tools. Making your content accessible in its most basic form ensures it remains accessible regardless of who or what encounters it.</p>
+        <p>Universal accessibility isn't about following compliance checklists. The web is a communication medium accessed by diverse audiences using diverse tools. Making your content accessible in its most basic form means it stays accessible regardless of who or what encounters it.</p>
 
         <h2 id="principle-five">Principle Five: Context-Preserving References</h2>
 
@@ -405,7 +405,7 @@ mx:
 
         <p>This happens because most people write links optimally for one context-usually the original location-without considering how the content might be reused or accessed differently.</p>
 
-        <p>The solution is context-preserving references. Each link should work for IDE users (clickable relative links), external readers who might encounter the document in isolation (full absolute URLs with complete titles), and anyone in between.</p>
+        <p>The solution is context-preserving references. Each link should work for IDE users (clickable relative links), external readers who might encounter the document in isolation (full absolute URLs with complete titles), and everyone who falls between those two cases.</p>
 
         <p>The pattern looks like this: you write the link text and relative path as normal, making it clickable in your IDE or repository browser. Then you add a parenthetical citation with the full title and absolute URL. This serves IDE users with immediate navigation, serves anyone reading an extracted or copied version with full context, and serves AI agents with both machine-readable relative paths and human-readable absolute references.</p>
 
@@ -439,21 +439,21 @@ mx:
 
         <p>Executable documentation flips this. The document itself contains prompting instructions and generation instructions as metadata. When an AI reads the file, these instructions are automatically included in context. When a user requests generation, these instructions get executed.</p>
 
-        <p>A specification document might include metadata that says "when generating implementation code from this specification, ensure you create validation matching the documented constraints, generate complete error messages for each failure case, and include examples demonstrating each documented feature."</p>
+        <p>A specification document might include metadata that says "when generating implementation code from this specification, create validation matching the documented constraints, generate complete error messages for each failure case, and include examples demonstrating each documented feature."</p>
 
         <p>An architecture document might include generation instructions that say "when creating component files based on this architecture, follow the package structure described in section two, implement the interfaces defined in section three, and add metadata declaring which architectural concepts each component provides."</p>
 
         <p>This creates a single source of truth that's both documentation and executable specification. The document describes what should exist, contains instructions for how to create it, and provides context for understanding it. Changes to requirements happen in one place-the document-and propagate to implementation through the generation instructions.</p>
 
-        <p>This doesn't mean documentation automatically writes code without human oversight. It means documentation can guide and constrain generation in a way that ensures implementations match specifications. The human still reviews, approves, and refines. But the documentation itself becomes an active participant in the build process rather than a passive reference that drifts out of sync.</p>
+        <p>This doesn't mean documentation automatically writes code without human oversight. It means documentation can guide and constrain generation in a way that keeps implementations matched to specifications. The human still reviews, approves, and refines. But the documentation itself becomes an active participant in the build process rather than a passive reference that drifts out of sync.</p>
 
         <p>The metadata fields that enable this are <code>runbook</code> (context automatically injected when AI reads the file) and <code>createOutputPrompt</code> (generation instructions executed when user requests generation). The former provides understanding. The latter enables action.</p>
 
-        <p>I've used this pattern for everything from API specifications that generate both server and client code to architecture documents that scaffold project structures to data schemas that generate validation logic. Each time, the benefit is the same: the documentation stays synchronized with implementation because it IS the source of implementation guidance.</p>
+        <p>I've used this pattern for everything from API specifications that generate both server and client code to architecture documents that scaffold project structures to data schemas that generate validation logic. Each time, the benefit is the same: the documentation stays synchronised with implementation because it's the source of implementation guidance.</p>
 
         <h2 id="principle-eight">Principle Eight: WCAG-Informed Design</h2>
 
-        <p>The eighth principle connects all the others to established accessibility standards: design decisions should align with Web Content Accessibility Guidelines (WCAG), recognising that accessibility requirements for disabled users provide proven patterns that also benefit machine readability.</p>
+        <p>The eighth principle connects all the others to established accessibility standards: design decisions should align with Web Content Accessibility Guidelines (WCAG), which identify accessibility requirements for disabled users that also prove useful for machine readability.</p>
 
         <p>I used to think of accessibility and machine-readability as separate concerns. One was about compliance and helping disabled users. The other was about making content parseable by AI agents. Then I started actually studying WCAG in depth, and I realised they're describing the same patterns from different perspectives.</p>
 
@@ -465,15 +465,15 @@ mx:
 
         <p>Let me share a concrete example from this week. I was reviewing some HTML I'd generated for blog posts about MX principles. The footer had this styling: light gray text (<code>#e5e7eb</code>) on a dark gray background (<code>#1f2937</code>). It looked fine on my monitor. But when I tested it with a contrast checker, it barely passed WCAG AA requirements. For users with low vision, in bright sunlight, or on older displays, that footer would be hard to read.</p>
 
-        <p>The fix was simple: change the footer text to white (<code>#ffffff</code>). Now it has excellent contrast (15:1 ratio) and passes WCAG AAA standards. Machines don't care about contrast ratios-they parse text regardless of colour. This principle serves humans first.</p>
+        <p>The fix was simple: change the footer text to white (<code>#ffffff</code>). Now it has excellent contrast (15:1 ratio) and passes WCAG AAA standards. Machines don't care about contrast ratios-they parse text regardless of shade. This principle serves humans first.</p>
 
-        <p>But here's the interesting part. When I fix contrast issues, I'm making the content more accessible to disabled users while also showing the same care about universal design that extends to how I structure everything else. The same rigor that makes me test contrast ratios also makes me verify semantic structure, check that links work out of context, and ensure documentation doesn't contain misleading information.</p>
+        <p>But here's the interesting part. When I fix contrast issues, I'm making the content more accessible to disabled users while also showing the same care about universal design that extends to how I structure everything else. The same rigor that makes me test contrast ratios also makes me verify semantic structure, check that links work out of context, and verify documentation doesn't contain misleading information.</p>
 
         <h3>WCAG and Documentation Accuracy</h3>
 
         <p>WCAG Success Criterion 3.1.5 (Reading Level) requires providing supplementary content when text requires advanced reading ability. It also implies that content should be accurate and clear. When documentation says "the seven principles" but lists eight principles, that creates cognitive overhead. Users must stop and reconcile the mismatch. This particularly affects users with cognitive disabilities, users reading in non-native languages, and users under stress.</p>
 
-        <p>That is why size-neutral documentation (Principle Six) matters: it reduces cognitive load for all users, a core accessibility principle, beyond the obvious maintenance convenience.</p>
+        <p>That's why size-neutral documentation (Principle Six) matters: it reduces cognitive load for all users, a core accessibility principle, beyond the obvious maintenance convenience.</p>
 
         <p>WCAG Success Criterion 2.4.4 (Link Purpose) requires that the purpose of each link can be determined from link text or context. That's exactly what context-preserving references (Principle Five) provide. Screen reader users navigating by links need full context. AI agents extracting documents need full context. The same solution serves both audiences.</p>
 
@@ -507,7 +507,7 @@ mx:
 
         <p>When you make documentation size-neutral, you stop creating maintenance debt through hard-coded counts. Your documentation evolves cleanly as your product grows.</p>
 
-        <p>When you enable executable documentation, you stop treating specifications as separate from implementation. Your documentation becomes an active part of your build process, ensuring that what you describe matches what you build.</p>
+        <p>When you enable executable documentation, you stop treating specifications as separate from implementation. Your documentation becomes an active part of your build process, so what you describe matches what you build.</p>
 
         <h2 id="convergence-continues">The Convergence Continues</h2>
 
@@ -515,7 +515,7 @@ mx:
 
         <p>When you make meaning explicit rather than implicit, you help everyone. When you structure information semantically rather than just visually, you serve all users regardless of their capabilities or access methods. When you treat documentation as infrastructure rather than afterthought, you create systems that remain understandable as they grow.</p>
 
-        <p>The web was built on principles of universal access and progressive enhancement. These principles extend those foundations to an era where machines are users too, where content lives in multiple contexts simultaneously, and where the distinction between human and automated access matters less than ensuring everyone can access and understand what you've built.</p>
+        <p>The web was built on principles of universal access and progressive enhancement. These principles extend those foundations to an era where machines are users too, where content lives in multiple contexts simultaneously, and where the distinction between human and automated access matters less than making sure everyone can access and understand what you've built.</p>
 
         <p>Start with one principle. Pick the one that resonates most with your current challenges. Maybe you're struggling with documentation drift-try size-neutral documentation. Maybe your accessibility metrics are poor-try universal accessibility patterns. Maybe you're working with AI agents and hitting context issues-try context declaration.</p>
 
@@ -540,12 +540,12 @@ mx:
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Areas of focus: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your team sits on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>

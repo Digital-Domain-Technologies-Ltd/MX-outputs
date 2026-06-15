@@ -228,13 +228,13 @@ mx:
 
 <p>Most content teams are watching the wrong thing.</p>
 <p>They add an <code>llms.txt</code> file, argue about whether to block GPTBot, and check whether their pages turn up in ChatGPT answers. Meanwhile, every month, their pages are quietly harvested by a system that shapes what large language models know about the world, and almost nobody tunes for it.</p>
-<p>That system is Common Crawl. You are already in it. The only question worth asking is whether you are in it well.</p>
+<p>That system is Common Crawl. You're already in it. The only question worth asking is whether you're in it well.</p>
 <p>I work on a practice called Machine Experience, or MX. The short version: it's the work of making anything you publish - a page, a PDF, an image, a product listing - readable by the machines that now consume it, so no machine has to guess what you meant. Common Crawl is where a great deal of that guessing begins.</p>
-<p>This post is about the archive, and it opens a three-part series on how AI systems read the web. The second post, <a href="https://mx.allabout.network/blog/ai-crawlers-what-robots-txt-guides-get-wrong.html">What Most robots.txt Guides Get Wrong About AI Crawlers</a>, is about the live crawlers, GPTBot, ClaudeBot, PerplexityBot and the rest, and what robots.txt does and does not control. The third, <a href="https://mx.allabout.network/blog/server-side-rendering-for-ai.html">What AI Crawlers See When They Can't Run Your JavaScript</a>, is about what those crawlers actually read when they arrive. Read the three together.</p>
+<p>This post is about the archive, and it opens a three-part series on how AI systems read the web. The second post, <a href="https://mx.allabout.network/blog/ai-crawlers-what-robots-txt-guides-get-wrong.html">What Most robots.txt Guides Get Wrong About AI Crawlers</a>, is about the live crawlers, GPTBot, ClaudeBot, PerplexityBot and the rest, and what robots.txt does and doesn't control. The third, <a href="https://mx.allabout.network/blog/server-side-rendering-for-ai.html">What AI Crawlers See When They Can't Run Your JavaScript</a>, is about what those crawlers actually read when they arrive. Read the three together.</p>
 <h2 id="what-common-crawl-is" tabindex="-1">What Common Crawl Is</h2>
 <p>Common Crawl is a non-profit that has archived the public web since 2008. A new crawl lands roughly every month, fetches several billion pages, and stores them in a public archive on AWS. It's free. Anyone can use it.</p>
 <p>Here's why it matters: nearly every major model has trained on it. GPT, Claude, Gemini, Llama, the models now answering questions about your industry, your products, and your company, all learned from Common Crawl data.</p>
-<p>You are already in there. The thing in question is the quality of what they found.</p>
+<p>You're already in there. The thing in question is the quality of what they found.</p>
 <h2 id="three-files-three-jobs" tabindex="-1">Three Files, Three Jobs</h2>
 <p>For each page it crawls, Common Crawl writes three files. Knowing the difference tells you what actually matters.</p>
 <p><strong>WARC files</strong> hold the raw HTTP response: the complete HTML, every header, every byte. This is the archive. If your page was fetched, the whole thing is here, including every <code>&lt;meta&gt;</code> tag and every <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> block.</p>
@@ -297,7 +297,7 @@ mx:
 </tr>
 </tbody>
 </table>
-<p>Blocking CCBot removes you from the open research ecosystem. It doesn't make you invisible to any commercial AI product.</p>
+<p>Blocking CCBot removes you from the open research network. It doesn't make you invisible to any commercial AI product.</p>
 <p><strong>It archives <code>robots.txt</code> itself</strong> as a dedicated dataset, kept separate from the main crawl, for researchers building robots.txt parsers.</p>
 <p><strong>It crawls <code>text/plain</code> files</strong> (a small fraction of the most recent crawl), so a plain-text <code>llms.txt</code> listed in your sitemap can be archived, though only as part of that small fraction. But Common Crawl is a passive archive. It stores the bytes; it doesn't read <code>llms.txt</code> to change how it crawls.</p>
 <h2 id="llmstxt-honestly" tabindex="-1">llms.txt, Honestly</h2>
@@ -306,11 +306,11 @@ mx:
 <p>In May 2026, Google added an <strong>Agentic Browsing</strong> category to Lighthouse 13.3. It scores how well a site is built for machine interaction, using pass or fail checks rather than the traditional 0-to-100 number. Among the checks: presence of <code>llms.txt</code>, WebMCP integration, accessibility-tree integrity, and layout stability (CLS).</p>
 <p>Google's stated reason: &quot;Without llms.txt, agents may spend more time crawling the site to understand its high-level structure and primary content.&quot;</p>
 <p>Here's the tension worth naming. Google Search has said plainly that <code>llms.txt</code> isn't needed for AI search visibility. Lighthouse now flags its absence as a failing audit. The most plausible reading is that Google is future-proofing for agentic browsing, where a software agent navigates your site on its own, without yet committing to it as a ranking signal for AI Overviews.</p>
-<p>For Common Crawl specifically, nothing has changed. It will store your <code>llms.txt</code> if it finds it, and it won't read it to change how it crawls. The training pipeline is unaffected either way.</p>
+<p>For Common Crawl specifically, nothing has changed. It'll store your <code>llms.txt</code> if it finds it, and it won't read it to change how it crawls. The training pipeline is unaffected either way.</p>
 <p>There's a transport detail that decides whether <code>llms.txt</code> reaches the crawl at all, and it's the piece most implementations get wrong. Common Crawl archives HTML pages from your sitemap reliably, but it captures only a small fraction of plain-text files. A <code>llms.txt</code> served as plain text is therefore the less certain route into the archive. The fix, and what I do on this site, is to serve <code>llms.txt</code> as an HTML page that wraps the plain-text content in a <code>&lt;pre&gt;</code> block. The crawler ingests it like any other HTML page, so the full text lands in the archive; the <code>&lt;pre&gt;</code> renders it faithfully as the readable plain-text file a person expects. The monospaced, code-block look is the point, not a fault: it's a rendering I chose, not anything Common Crawl did, and it gives you HTML reach and plain-text readability in one file. I walk through the same content before and after the wrap, with working Cloudflare Worker code, in <a href="https://mx.allabout.network/blog/llms-txt-guide.html">Why llms.txt Probably Isn't Working</a>. As <code>llms.txt</code> moves from a nicety to a file people expect to find, getting the transport right is what separates a file that reaches the crawl from one that quietly doesn't.</p>
-<p>So the practical position is: add <code>llms.txt</code>. It's now an official Lighthouse check, which means it shows up in performance reports, agency audits, and client dashboards. The cost is one file. The benefit is a pass on an increasingly visible check, plus genuine use for the agentic browsing that is coming regardless.</p>
+<p>So the practical position is: add <code>llms.txt</code>. It's now an official Lighthouse check, which means it shows up in performance reports, agency audits, and client dashboards. The cost is one file. The benefit is a pass on an increasingly visible check, plus genuine use for the agentic browsing that's coming regardless.</p>
 <p>For a worked example, <a href="https://mx.allabout.network/llms.txt">mx.allabout.network/llms.txt</a> shows what a complete file looks like: an explicit content policy, a link to a full-site corpus (<code>llms-full.txt</code>) for agents that want everything in one fetch, and direct links to the core technical specifications. That's the pattern to follow, a machine-readable briefing rather than a minimal placeholder.</p>
-<p>There's a larger point buried in that Lighthouse category. The Agentic Browsing checks put accessibility-tree integrity and layout stability alongside <code>llms.txt</code>. Google has now formally treated accessibility signals as agent-readiness signals: what makes a page usable by an agent is structurally the same as what makes it usable by a person with assistive technology. That's not a new idea. It is, at last, an official one.</p>
+<p>There's a larger point buried in that Lighthouse category. The Agentic Browsing checks put accessibility-tree integrity and layout stability alongside <code>llms.txt</code>. Google has now formally treated accessibility signals as agent-readiness signals: what makes a page usable by an agent is structurally the same as what makes it usable by a person with assistive technology. That idea is, at last, an official one.</p>
 <h2 id="what-actually-works" tabindex="-1">What Actually Works</h2>
 <p>If you want your content well represented in AI systems, in training data and in live retrieval both, the stack looks like this.</p>
 <p><strong>Sitemaps declared in <code>robots.txt</code></strong> are the main lever for crawl coverage. If CCBot can't find your pages, they don't get archived.</p>
@@ -400,7 +400,7 @@ mx:
 </tr>
 </tbody>
 </table>
-<p>This has a consequence that is easy to miss. A model trained on FineWeb has seen your content as it stood in every monthly crawl going back a decade, not just the most recent one. The oldest version of a page often carries the most weight, not the newest, because it appears in the most snapshots.</p>
+<p>This has a consequence that's easy to miss. A model trained on FineWeb has seen your content as it stood in every monthly crawl going back a decade, not just the most recent one. The oldest version of a page often carries the most weight, not the newest, because it appears in the most snapshots.</p>
 <p>Knowledge cutoffs aren't crawl cutoffs. If an AI states something confidently wrong about your company, something that was true in 2019 and corrected in 2021, it's usually because the 2019 version sits in far more training snapshots than the correction does. There's no mechanism for an update to travel backwards through a decade of archived crawls.</p>
 <h2 id="old-versions-never-go-away" tabindex="-1">Old Versions Never Go Away</h2>
 <p>Each monthly crawl is a permanent snapshot. Common Crawl doesn't update or delete old records. If your 2023 page held wrong information, an outdated price, or no structured data at all, that version still sits in the archive, and in any training dataset built from that snapshot.</p>
@@ -424,7 +424,7 @@ mx:
 <p>It tells you when CCBot last visited, what HTTP status it got, and whether the page is in the current index. If a key page is missing or shows a stale date, you know there's a problem. The fix is indirect: correct the sitemap, clear any accidental block, build inbound links, and wait for the next cycle.</p>
 <h2 id="why-ai-says-wrong-things-about-your-company" tabindex="-1">Why AI Says Wrong Things About Your Company</h2>
 <p>This is the question most teams eventually ask, and the answer almost always leads back here.</p>
-<p>When an AI states something wrong about your company, a product you discontinued, a price you changed, a description that hasn't been accurate for three years, it isn't hallucinating in the inventive sense. It is faithfully reporting what was true in the Common Crawl snapshots it trained on.</p>
+<p>When an AI states something wrong about your company, a product you discontinued, a price you changed, a description that hasn't been accurate for three years, it isn't hallucinating in the inventive sense. It's faithfully reporting what was true in the Common Crawl snapshots it trained on.</p>
 <p>The 2019 version of your pricing page lives in C4. The 2021 version of your about page is in Pile-CC. The 2022 version of your product description is in FineWeb. All of them, weighted by how many snapshots they appear in, shaped what the model learned about you.</p>
 <p>Corrections don't travel backwards. A model trained before your update knows nothing about the update. It won't find it unless it's retrained, which happens rarely and unpredictably, or unless it has live retrieval and your current page is structured well enough to surface.</p>
 <p>So the structured data and explicit metadata on your current pages do two jobs at once: they shape future training runs, and they give the clearest possible signal to live-retrieval systems that can override stale training knowledge. Both matter. Both rest on the same underlying quality.</p>
@@ -440,7 +440,7 @@ mx:
 <h2 id="where-mx-fits" tabindex="-1">Where MX Fits</h2>
 <p>Everything above, complete structured data, explicit metadata, accurate sitemaps, canonical signals, content that survives the quality filters, isn't a checklist. It's an architecture. MX is the discipline of building digital experiences that are machine-readable by design: not retrofitted, not half-compliant, but clear from the ground up. The visible page is for human eyes; the metadata behind it is for the machine; both say the same thing.</p>
 <p>There's a faster way to find out where you stand than reading your own pages and hoping. An <a href="https://mx.allabout.network/audit/">MX audit</a> runs every signal in this post against your live site: sitemap and <code>robots.txt</code> reachability, CCBot access, JSON-LD completeness, canonical coverage, <code>llms.txt</code>, and whether your <code>lastmod</code> dates are real. It tells you, page by page, where a crawler or a model would be left guessing about you, and it reports back in a form you can verify yourself rather than take on trust.</p>
-<p>If you are wondering how your company shows up in AI systems, or whether your content is in Common Crawl at all, <a href="https://mx.allabout.network/audit/">start with an audit</a> and I will walk you through what it finds.</p>
+<p>If you're wondering how your company shows up in AI systems, or whether your content is in Common Crawl at all, <a href="https://mx.allabout.network/audit/">start with an audit</a> and I'll walk you through what it finds.</p>
 
 
       </article>
@@ -453,12 +453,12 @@ mx:
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Areas of focus: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your company sits on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
