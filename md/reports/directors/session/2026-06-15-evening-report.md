@@ -4,7 +4,7 @@ description: "Adversarial and machine-readability probes wired into the audit pi
 author: "Tom Cranstoun"
 created: 2026-06-15
 modified: 2026-06-15
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -62,3 +62,10 @@ The language guard is a small change with a clear correctness argument: an Engli
 
 - Review the two new blog posts (`48-days-article-50-reginald.md`, `document-os-vs-content-os.md`) once live - confirm rendering and prose quality
 - Run a non-English audit to verify the language guard fires correctly end-to-end in a real delivery
+- Run `/dream` to verify the new surfacing filter works: no previously-seen findings should appear in the next report
+
+### 5. Dream System: Surfacing Memory
+
+The dream system gained a deterministic surfacing filter. Previously, running `/dream` across sessions would re-raise findings that Tom had already reviewed, because the script's dedup gate (exclusions.jsonl) only prevented re-classifying candidates - it did not track what had already been written to a report and raised to the operator.
+
+A new per-dream-type `<prefix>-surfaced.jsonl` file records the hashes of every finding written to a report. On subsequent runs, `generateReport()` filters those hashes out before writing the new report and marks the fresh findings as surfaced once written. The result: each `/dream` run shows only findings Tom has not seen before. A `--reset-surfaced` flag forces a full re-surface when needed; a `--backfill` flag pre-populates the surfaced registry from all historical findings so the first run after deploying the change does not re-raise the entire accumulated catalogue. Backfill ran immediately: 903 hashes across seven dream types registered.
