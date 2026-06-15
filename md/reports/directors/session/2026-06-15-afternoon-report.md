@@ -4,7 +4,7 @@ description: "Dream ran; 151 draft-site links converted to canonical URLs; full 
 author: "Tom Cranstoun"
 created: 2026-06-15
 modified: 2026-06-15
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -122,6 +122,22 @@ The 109 "absolute links should be relative" findings from Dream turned out to be
 - Draft-site links to mx-site content use canonical URLs, not relative paths - the repos are separate and the boundary is now declared in `repo-manifest.json`
 - Cross-submodule references in `mx.relatedTo` are warnings, not errors - load-bearing references belong in hub-local files; informational pointers to submodule content are valid on a fat clone
 - The topology generator runs in the pre-commit hook when `.gitmodules` changes, so the manifest stays current without manual maintenance
+
+---
+
+---
+
+## What Was Done (continued - evening continuation)
+
+### 12. Two Cloud PRs Investigated and Merged
+
+Two open pull requests from cloud Claude sessions were reviewed and merged into main.
+
+**PR #38** brought the Fable 5 cog decomposition from scratch work into proper canonical status. The leaked Fable 5 system prompt (1,585 lines) had previously been decomposed into 13 MX COGs as an experiment; this PR promoted those COGs into the reference-implementations directory, added a `why-this-repo.cog.md` explaining the repository's purpose for new contributors, shipped the Dream self-improving loop as a first-class cog with its own authoring guide, and added four blog drafts covering the Dream architecture and the Fable 5 decomposition. The PR also updated the self-healing repository architecture cog and reframed the per-span provenance idea as a dedicated Quotation Handler PRD.
+
+**PR #39** added "Corroboration over Assertion" as a named principle. The principle requires that blog claims be backed by checkable evidence rather than asserted from plausibility alone. It shipped with a new field (`x-mx-corroboratedBy`), a deterministic gate (`scripts/check-blog-corroboration.cjs`) wired into `npm test` and pre-push, a blog-ideation cog that routes new post ideas through a corroboration-first checklist before writing begins, a blog draft demonstrating the principle, and a memory capture so the principle travels with future sessions.
+
+Both PRs had conflicts with main requiring manual resolution before merge. PR #38 had four conflicts (CHANGELOG, dream.cjs canonicalUri path, REMINDERS, and a deleted-vs-modified README); PR #39 had one (package.json test script gaining the two new corroboration test entries). Three gate failures were also resolved: a missing `.mx.yaml.md` for the reinstated fable5 examples directory (Gate 7), draft blog HTML not yet promoted for the four new blog drafts (Gate 22 - resolved by promoting all four to Zone 2), and a memory sync gap on first push of each branch (Gate 26 - resolved by running `npm run memory:sync`).
 
 ---
 
