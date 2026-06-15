@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "The Silent Install"
+description: "A short series on a single question: what may a program do to your device without asking? A browser that writes a multi-gigabyte AI model to disk with no prompt brought it into the open. The principle that should govern the answer, the mechanism that would make the answer checkable, and a plain look at the company at the centre of the case."
+author: Tom Cranstoun
+created: 2026-05-29
+modified: 2026-05-29
+version: "1.0"
+mx:
+  x-mx-contentState: draft
+  servedAt: https://mx.allabout.network/blog/drafts/the-silent-install.html
+  status: draft
+  contentType: index-page
+  runbook: "Add a new entry to the reading list when a piece is added to the series; keep the one-line summaries in step with each article's standfirst."
+  audience:
+    - humans
+    - machines
+  tags:
+    - watching-the-machines
+    - the-silent-install
+    - consent
+    - attestation
+    - provenance
+    - on-device
+    - chrome
+    - gemini-nano
+  x-mx-category: Watching the Machines
+  x-mx-aiAssistance: welcome
+  partOf: https://mx.allabout.network/blog/drafts/watching-the-machines/
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/watching-the-machines/google-nano-model/index.md
+  x-mx-contextProvides:
+    - "A short series on a single question: what may a program do to your device without asking? A browser that writes a multi-gigabyte AI model to disk with no prompt brought it into the open. The principle that should govern the answer, the mechanism that would make the answer checkable, and a plain look at the company at the centre of the case."
+  stability: stable
+  purpose: "A short series on a single question: what may a program do to your device without asking? A browser that writes a multi-gigabyte AI model to disk with no prompt brought it into the open. The principle that should govern the answer, the mechanism that would make the answer checkable, and a plain look at the company at the centre of the case."
+  x-mx-backport: clean
+  productionCanonical: https://mx.allabout.network/blog/drafts/the-silent-install.html
+refersTo:
+  - https://mx.allabout.network/blog/drafts/watching-the-machines/google-nano-model/respect-runs-both-ways.html
+  - https://mx.allabout.network/blog/drafts/watching-the-machines/google-nano-model/the-signature-and-the-download.html
+  - https://mx.allabout.network/blog/drafts/watching-the-machines/google-nano-model/dont-be-evil-to-dont-ask.html
+  - https://mx.allabout.network/blog/drafts/watching-the-machines/
+x-mx-ai:
+  summary: "The introduction to The Silent Install, an ongoing series opened by Chrome writing a multi-gigabyte on-device model to disk without prompting. The series covers the principle (two-way respect), the mechanism (signature attests identity, not behaviour or downstream payloads), and a plain look at the operator at the centre of the case, closing on attestation and provenance as the only durable answer."
+  key_concepts:
+    - what a program may do to your device without asking
+    - signature attests identity, not behaviour
+    - attestation and provenance as the durable answer
+    - enforcement of standing law as the regulatory half
+    - the trust-the-evidence move when you cannot trust the actor
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A short series on a single question: what may a program do to your device without asking? A browser that writes a multi-gigabyte AI model to disk with no prompt brought it into the open. The principle that should govern the answer, the mechanism that would make the answer checkable, and a plain look at the company at the centre of the case.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/the-silent-install.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/the-silent-install.html">
+  <meta property="og:title" content="The Silent Install | CogNovaMX">
+  <meta property="og:description" content="A short series on a single question: what may a program do to your device without asking? A browser that writes a multi-gigabyte AI model to disk with no prompt brought it into the open. The principle that should govern the answer, the mechanism that would make the answer checkable, and a plain look at the company at the centre of the case.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-05-29">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Silent Install | CogNovaMX">
+  <meta name="twitter:description" content="A short series on a single question: what may a program do to your device without asking? A browser that writes a multi-gigabyte AI model to disk with no prompt brought it into the open. The principle that should govern the answer, the mechanism that would make the answer checkable, and a plain look at the company at the centre of the case.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="The Silent Install">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/the-silent-install.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The Silent Install | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "The Silent Install",
+        "headline": "The Silent Install",
+        "description": "A short series on a single question: what may a program do to your device without asking? A browser that writes a multi-gigabyte AI model to disk with no prompt brought it into the open. The principle that should govern the answer, the mechanism that would make the answer checkable, and a plain look at the company at the centre of the case.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-05-29",
+        "dateModified": "2026-05-29",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/the-silent-install.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 494,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/the-silent-install.html",
+        "name": "The Silent Install",
+        "url": "https://mx.allabout.network/blog/drafts/the-silent-install.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#the-series">The series</a></li>
+        <li><a href="#what-the-series-argues">What the series argues</a></li>
+        <li><a href="#where-your-own-content-stands">Where your own content stands</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="494">
+        <header class="article-header">
+          <h1>The Silent Install</h1>
+          <div class="article-meta"
+               data-published="2026-05-29"
+               data-modified="2026-05-29"
+               data-reading-time="3 min">
+            <time datetime="2026-05-29">29 May 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>3 min read</span>
+          </div>
+          <ul class="article-tags" aria-label="Tags"><li><a href="index.html#tags=watching-the-machines" rel="tag">Watching The Machines</a></li><li><a href="index.html#tags=the-silent-install" rel="tag">The Silent Install</a></li><li><a href="index.html#tags=consent" rel="tag">Consent</a></li><li><a href="index.html#tags=attestation" rel="tag">Attestation</a></li><li><a href="index.html#tags=provenance" rel="tag">Provenance</a></li><li><a href="index.html#tags=on-device" rel="tag">On Device</a></li><li><a href="index.html#tags=chrome" rel="tag">Chrome</a></li><li><a href="index.html#tags=gemini-nano" rel="tag">Gemini Nano</a></li></ul>
+        </header>
+
+
+<p>What may a program do to your device without asking? The question used to be academic. It stopped being academic when a browser installed on billions of machines began writing a multi-gigabyte AI model to people's disks with no prompt, hiding the file behind an opaque name, and rewriting it whenever they deleted it. This series works through what that means and what to do about it.</p>
+<p>The argument in a line: a signature tells you who shipped a program and that it has not been altered; it tells you nothing about what the program does once it is running, or what it pulls onto your device next. Closing that gap is a job for attestation and provenance, not for anyone's good intentions.</p>
+<h2 id="the-series" tabindex="-1">The series</h2>
+<p>Read in order, or take whichever question you came for.</p>
+<ul>
+<li><strong><a href="https://mx.allabout.network/blog/drafts/watching-the-machines/google-nano-model/respect-runs-both-ways.html">Respect Runs Both Ways</a></strong>, <em>the principle.</em> MX asks people to make their content legible to machines. That is one signature on a contract. The other is the machine, and the company behind it, owing the person consent and restraint in return.</li>
+<li><strong><a href="https://mx.allabout.network/blog/drafts/watching-the-machines/google-nano-model/the-signature-and-the-download.html">The Signature Covers Who Shipped It, Not What It Fetches</a></strong>, <em>the mechanism.</em> Code signing attests identity, not behaviour. Model weights are inscrutable as content and unexecutable as code, which is why reading them is off the table and attestation is the only route left. Where FAIR carries trust in code, MX carries trust in content, and the two meet at the binary.</li>
+<li><strong><a href="https://mx.allabout.network/blog/drafts/watching-the-machines/google-nano-model/dont-be-evil-to-dont-ask.html">From &quot;Don't Be Evil&quot; to &quot;Don't Ask&quot;</a></strong>, <em>the moan, and the fix.</em> A plain look at the company whose motto was once &quot;Don't be evil&quot; and which deleted it quietly in 2018, and why the durable answer does not depend on any company choosing to be good.</li>
+</ul>
+<h2 id="what-the-series-argues" tabindex="-1">What the series argues</h2>
+<p>One idea runs through all of it. The relationship between a person and the software acting on their behalf has to run in both directions; consent and restraint are owed back. The trust model we have checks who shipped a thing, not what it does over its life. The artefact at the centre of the question, a model's weights, cannot be read at all, which leaves attestation as the only honest way to trust it. The law that would govern this already exists and sits largely unenforced. Enforce that law. Make conduct a record rather than a promise, so consent, permitted behaviour, and what a program actually did become things an outsider can check rather than things you take on faith.</p>
+<p>That is the whole of it. Where you cannot trust the actor, you trust the evidence, and you make sure the evidence exists.</p>
+<h2 id="where-your-own-content-stands" tabindex="-1">Where your own content stands</h2>
+<p>The same discipline that would make a silent install checkable is the one that decides whether the machines now reading the web on your buyers' behalf can find, trust, and act on what you publish.</p>
+<ul>
+<li><a href="https://mx.allabout.network/about/contact.html">Get in touch about an MX audit</a></li>
+<li><a href="https://mx.allabout.network/blog/provenance-you-can-see.html">Provenance You Can See: Why Content Should Carry Its Own Evidence</a></li>
+<li><a href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+</ul>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+</body>
+</html>
