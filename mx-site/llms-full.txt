@@ -5047,11 +5047,11 @@ What Universal Cart actually is
 
 Strip away the demo polish and there are several components.
 
-The first is the consumer surface. Universal Cart presents as a single basket that persists across Google properties. Add a pair of trainers from a Search result, an eyeshadow palette from a Gemini conversation, and a side table from a YouTube creator's video, and they all sit in one place. The cart watches prices, flags stock returns, surfaces deals, and checks compatibility on multi-item purchases. From the shopper's point of view it looks like one shopping experience instead of twenty browser tabs.
+The first is the consumer surface. Universal Cart presents as a single basket that persists across Google properties. Add a pair of trainers from a Search result, an eyeshadow palette from a Gemini conversation, and a side table from a YouTube creator's video, and they all land in one place. The cart watches prices, flags stock returns, surfaces deals, and checks compatibility on multi-item purchases. From the shopper's point of view it looks like one shopping experience instead of twenty browser tabs.
 
 The second is the Universal Commerce Protocol, or UCP. This is the part that matters technically. UCP is the shared language Google has built, co-developed with Shopify, that lets agents talk to merchant commerce systems. The merchant remains the merchant of record. UCP offers both a native checkout integration and an embedded checkout integration. So the merchant still owns the legal relationship with the buyer, still takes the payment, still ships the goods. Google isn't trying to be the retailer. Google is trying to be the protocol.
 
-The third is the Agent Payments Protocol, or AP2. AP2 is the accountability layer. When an agent buys on a shopper's behalf, within a stated set of brands, products, and a spending cap, AP2 produces a tamper-evident record that links the shopper to the purchase. This is the bit Google is least loud about and the bit with the longest implications, because once you have agents transacting at scale you have to be able to answer the question "who authorised this" in a way a regulator, a fraud team, or a dispute process can rely on.
+The third is the Agent Payments Protocol, or AP2. AP2 is the accountability layer. When an agent buys on a shopper's behalf, within a stated set of brands, products, and a spending cap, AP2 produces a tamper-evident record that links the shopper to the purchase. This is the bit Google is least loud about and the bit with the longest implications, because once you have agents transacting at scale you have to be able to answer the question "who authorised this" in a form a regulator, a fraud team, or a dispute process can verify.
 
 So: a cart, a protocol, and an attestation mechanism. Not separate product launches; one architecture.
 
@@ -5134,9 +5134,9 @@ The same structure carries any file type. A product description has the same ske
 
 This is why MX extends beyond the cart, and beyond the web. The cart is commerce on the web; Google's guidance is the web; MX is about any file that needs to remain meaningful once it leaves the page, the domain, the platform, or the format it was first published in. A contract excerpt cited in a dispute. A policy clause quoted by an agent advising a customer. An accessibility statement referenced in an EAA enforcement query. A pricing claim resurfaced in a comparison. A runbook step lifted into an incident response. Each of these is a file or a fragment of a file travelling away from its source, and each of them either carries enough metadata to stand on its own or doesn't.
 
-The contract case is worth a paragraph. A supplier sends a contract by email. Months later, in a dispute, a single clause is quoted in a letter from the other side's lawyer. Which version was it from? Was that clause amended between the version sent and the version signed? Who authored the amendment? On what date? If the contract is an MX-shaped file, the answers travel with the clause. The file carries version, created date, modified date, author, a content hash, and a canonicalUrn that identifies the file regardless of where it's now hosted. An excerpt copied out can be checked against the canonical file because the canonical file's identity is in the frontmatter the excerpt was lifted from, and the cogUrn resolves through REGINALD to wherever the supplier currently hosts the document, even if the supplier's website has been rebuilt twice in the intervening years. If the contract is a PDF with a layout and no metadata discipline, those answers don't travel. The receiver has the clause and nothing else. The problem happens off the web, between businesses, every day.
+The contract case is worth a paragraph. A supplier sends a contract by email. Months later, in a dispute, a single clause is quoted in a letter from the other side's lawyer. Which version did it come from? Was that clause amended between the version sent and the version signed? Who authored the amendment? On what date? If the contract is an MX-shaped file, the answers travel with the clause. The file carries version, created date, modified date, author, a content hash, and a canonicalUrn that identifies the file regardless of where it's now hosted. An excerpt copied out can be checked against the canonical file because the canonical file's identity is in the frontmatter the excerpt was lifted from, and the cogUrn resolves through REGINALD to wherever the supplier currently hosts the document, even if the supplier's website has been rebuilt twice in the intervening years. If the contract is a PDF with a layout and no metadata discipline, those answers don't travel. The receiver has the clause and nothing else. The problem happens off the web, between businesses, every day.
 
-UCP can't describe a returns policy. AP2 can't describe an accessibility audit. Neither was designed to. They were designed for one carrier, commerce on Google's web surfaces, and they do that well. The category error is treating them, or the wider body of Google's web guidance, as the answer to the broader problem they weren't built to address.
+UCP can't describe a returns policy. AP2 can't describe an accessibility audit. Neither was built for that purpose. They were designed for one carrier, commerce on Google's web surfaces, and they do that well. The category error is treating them, or the wider body of Google's web guidance, as the answer to the broader problem they weren't built to address.
 
 The rest of this post uses retail as the worked example, because that's the announcement on the table. The reasoning applies in the same form to any file a business publishes, on the web or off it. Public-sector procurement records. Healthcare information. Financial product disclosures. Contracts. Policies. Accessibility statements. Anything that needs to remain meaningful once it leaves the place it was first published.
 
@@ -5152,7 +5152,7 @@ The human reader sees the printed page. The machine reader sees the COG. Both se
 
 This is the convergence principle made literal. A solicitor writes a letter once. The printed version reaches the client. The machine-readable version is available to any agent, verification tool, regulator, or downstream system that scans the QR. Both versions are authoritative; neither is a derived approximation of the other.
 
-The implications are substantial. A printed contract carrying a QR resolving to its canonical COG is a stronger evidentiary artefact than a printed contract without. The signed paper is the legal instrument, but the QR provides a verifiable link to the canonical machine-readable version. A drug label carrying a QR resolves to the current MHRA-approved patient information with attestation, with the expiry field telling any reader when the label ceases to be canonical. A planning notice on a lamppost carrying a QR resolves to the full application COG. A receipt carrying a QR resolves to the canonical sale record with the terms that applied at the point of sale.
+The implications are substantial. A printed contract carrying a QR resolving to its canonical COG is a stronger evidentiary artefact than a printed contract lacking one. The signed paper is the legal instrument, but the QR provides a verifiable link to the canonical machine-readable version. A drug label carrying a QR resolves to the current MHRA-approved patient information with attestation, with the expiry field telling any reader when the label ceases to be canonical. A planning notice on a lamppost carrying a QR resolves to the full application COG. A receipt carrying a QR resolves to the canonical sale record with the terms that applied at the point of sale.
 
 Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, entity type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
@@ -5166,13 +5166,13 @@ The MX Readiness Model gives a useful frame for what merchants outside the ring 
 
 L1, Discovery. The site has to be parseable by a machine reader at all. Semantic HTML, a working sitemap, server-side rendering of anything that matters. This is table stakes. A retailer whose product listing only renders after a JavaScript app has hydrated isn't visible to half the agents in the field. Shopify merchants get most of L1 from the platform; the rest of the launch ring (Walmart, Target, Nike, and the bespoke stacks) verify it themselves, the same way every other retailer outside the ring has to.
 
-L2, Citation. Facts about products have to be readable at the level of individual claims. Schema.org JSON-LD on Product, Offer, Brand, AggregateRating. The agent should be able to lift a single price, a single availability state, a single shipping window without having to scrape an opaque component. This is where most retailers think they are already done because they have JSON-LD. They usually have it on the homepage and on category pages, and the per-product detail is thinner than they think.
+L2, Citation. Facts about products have to be readable at the level of individual claims. Schema.org JSON-LD on Product, Offer, Brand, AggregateRating. The agent should be able to lift a single price, a single availability state, a single shipping window without having to scrape an opaque component. This is where most retailers think they're already done because they have JSON-LD. They usually have it on the homepage and on category pages, and the per-product detail is thinner than they think.
 
-L3, Search/Compare/Attested. The data starts to carry evidence of where it came from and when. JSON-LD microdata with provenance fields, dated assertions, and an attestation that the bytes the agent reads are the bytes the publisher published. This is the level where a retailer outside the ring starts to have a position to defend, because they can stand behind their own price and availability data in a way agents can rely on.
+L3, Search/Compare/Attested. The data starts to carry evidence of where it came from and when. JSON-LD microdata with provenance fields, dated assertions, and an attestation that the bytes the agent reads are the bytes the publisher published. This is the level where a retailer outside the ring starts to have a position to defend, because they can stand behind their own price and availability data with enough evidence for agents to trust it.
 
-L4, Price Understanding / Registered. Schema.org Product with Offer, ISO 4217 currency codes, and presence in a registry that agents can query for the canonical location of the data. Pricing in particular needs the expires field. A price without an expiry is a price without a currency window, and an agent quoting it three weeks later has no way to know whether it still stands. The canonicalUrn matters here too, because prices change frequently and the cogUrn gives the new version a stable identity the old version can be checked against. For UCP merchants this is what UCP itself provides on Google's surfaces. For everyone else, this is what REGINALD provides, and the difference is governance, not function.
+L4, Price Understanding / Registered. Schema.org Product with Offer, ISO 4217 currency codes, and presence in a registry that agents can query for the canonical location of the data. Pricing in particular needs the expires field. A price without an expiry is a price without a currency window, and an agent quoting it three weeks later has no way to know whether it still stands. The canonicalUrn matters here too, because prices change frequently and the cogUrn gives the new version a stable identity that agents can use to check it against the old version. For UCP merchants this is what UCP itself provides on Google's surfaces. For everyone else, this is what REGINALD provides, and the difference is governance, not function.
 
-L5, Purchase Confidence / Audited. State reflected in the DOM, explicit form semantics, the Universal Commerce Protocol or an equivalent purchase-confidence mechanism, third-party verification. AP2 sits at this level for Google's ring. For everyone else, the audit comes from a separately operated trust layer: attestation records, signed assertions, and a process that a regulator or a serious buyer can independently check.
+L5, Purchase Confidence / Audited. State reflected in the DOM, explicit form semantics, the Universal Commerce Protocol or an equivalent purchase-confidence mechanism, third-party verification. AP2 covers this level for Google's ring. For everyone else, the audit comes from a separately operated trust layer: attestation records, signed assertions, and a process that a regulator or a serious buyer can independently check.
 
 Universal Cart and UCP don't invent anything that wasn't already in the MX plan. They package L4 and L5 for Google's chosen merchants on Google's chosen surfaces. The rest of the model, and the levels below L4 which UCP assumes are already in place, is what every retailer needs regardless of whether they're in the ring.
 
@@ -5188,7 +5188,7 @@ MX takes a different approach. The COG format, the carrier-neutral data file, is
 
 A note on the field. MX isn't the only open standard in the agent-discoverability space. Anthropic's Model Context Protocol (MCP) defines how an agent connects to tools and data sources. Google's own Agent-to-Agent (A2A) protocol addresses agent interoperability. llms.txt proposes a per-site declaration of what agents should read. Agent cards describe agent capabilities. These are useful and mostly complementary. What MX adds is the file itself: the artefact the agent reads, with provenance and attestation baked in, designed to remain meaningful when separated from its source. MCP gets the agent to the data. MX makes sure the data is worth reading once the agent arrives, and is still worth reading when a fragment of it ends up somewhere the agent never was.
 
-There's also a difference in what each treats as a precondition. UCP makes no statement about accessibility. It inherits whatever the merchant's site happens to do. For a retailer in the EAA enforcement zone that's a material gap, because the protocol does nothing to produce the evidence a regulator would ask for. MX treats WCAG conformance as a requirement of the standard, not an optional add-on. A site can't be MX-compliant and inaccessible at the same time. The discipline that gets a retailer to MX readiness is the same discipline that gets them to documented accessibility: they fall out of the same work, because both are downstream of writing data files that humans and machines can both read.
+There's also a difference in what each treats as a precondition. UCP makes no statement about accessibility. It inherits whatever the merchant's site happens to do. For a retailer in the EAA enforcement zone that's a material gap, because the protocol produces no evidence a regulator would accept. MX treats WCAG conformance as a requirement of the standard, not an optional extra. A site can't be MX-compliant and inaccessible at the same time. The discipline that gets a retailer to MX readiness is the same discipline that gets them to documented accessibility: they fall out of the same work, because both are downstream of writing data files that humans and machines can both read.
 
 That's the structural difference. It isn't a "Google bad, MX good" claim. UCP is a serious piece of engineering and the partner ring will benefit. The difference is that UCP is one platform's answer to one slice of the problem. MX is an open answer to the whole problem, including the layers UCP assumes are already done and the obligations UCP doesn't address.
 
@@ -5206,7 +5206,7 @@ For a retailer outside the ring whose agents (whether their own, or partner agen
 
 What this means in practice
 
-For a retailer outside the ring, the practical question isn't "should we wait to see if UCP comes to us." UCP may or may not. The practical question is "what evidence does our site already produce about itself, and is that evidence good enough for any agent (Google's, Anthropic's, OpenAI's, a regulator's verification tool) to rely on?"
+For a retailer outside the ring, the practical question isn't "should we wait to see if UCP comes to us." UCP may or may not. The practical question is "what evidence does our site already produce about itself, and is that evidence good enough for any agent (Google's, Anthropic's, OpenAI's, a regulator's verification tool) to trust?"
 
 The honest answer for most retailers is: not yet. The product pages render. The JSON-LD is patchy. There's no attestation. The data files that an agent would want (canonical price, canonical availability, canonical accessibility statement, canonical returns policy) exist only as HTML that an agent has to extract by inference.
 
@@ -5214,9 +5214,9 @@ This was already a problem. Universal Cart just made it visible by showing what 
 
 A retailer outside the ring has reasonable moves available.
 
-Audit the site against MX Readiness L1 and L2. Most retailers will find more gaps than they expect at L1, usually around server-side rendering and selective JavaScript dependencies, and significant gaps at L2 on per-product structured data quality. This is work that pays back regardless of which agentic-commerce protocol the retailer eventually answers to. It pays back in current search visibility, in regulatory readiness for the EAA, and in the foundation it lays for everything above it.
+Audit the site against MX Readiness L1 and L2. Most retailers will find more gaps than they expect at L1, usually around server-side rendering and selective JavaScript dependencies, and significant gaps at L2 on per-product structured data quality. This is work that pays back regardless of which agentic-commerce protocol the retailer eventually adopts. It pays back in current search visibility, in regulatory readiness for the EAA, and in the foundation it lays for everything above it.
 
-Start producing COGs for the parts of the catalogue and the policy surface that matter. Price, availability, accessibility statement, returns policy, shipping terms, product specification. A COG is a data file with structured metadata and human-readable content. It isn't a new piece of infrastructure; it's a discipline about how data files are written. The investment is modest. The output is something agents can actually rely on.
+Start producing COGs for the parts of the product range and the policy surface that matter. Price, availability, accessibility statement, returns policy, shipping terms, product specification. A COG is a data file with structured metadata and human-readable content. It isn't a new piece of infrastructure; it's a discipline about how data files are written. The investment is modest. The output is something agents can actually use.
 
 Register with REGINALD where attestation matters. REGINALD indexes metadata only; the merchant hosts the COG. Registration gives an agent a canonical way to discover the file and check its integrity. It doesn't lock the merchant into a single platform, because the registry is open.
 
@@ -5226,11 +5226,11 @@ How this gets delivered
 
 A retailer reading the moves above and wondering "do we do this ourselves or does someone do it for us" has a fair question. MX has a commercial model that doesn't depend on retailers becoming MX specialists themselves.
 
-The shape is borrowed from structural engineering. A building doesn't need every property owner to be a structural engineer; it needs a structural engineer to set the specification and certify that the build meets it, and a builder to do the work. MX works the same way. The specification is set by The Gathering. The certification is operated by CogNovaMX through the REGINALD registry and the audit process behind REGINALD Compliance Levels. The build is done by agencies and platform partners (Founding Partners and the wider partner network) who implement against the standard.
+The model is borrowed from structural engineering. A building doesn't need every property owner to be a structural engineer; it needs a structural engineer to set the specification and certify that the build meets it, and a builder to do the work. MX works the same way. The specification is set by The Gathering. The certification is operated by CogNovaMX through the REGINALD registry and the audit process behind REGINALD Compliance Levels. The build is done by agencies and platform partners (Founding Partners and the wider partner network) who implement against the standard.
 
-A retailer outside the ring has commercial routes. They can engage a Founding Partner agency to take the work end-to-end, which is the common case for retailers without internal capacity. They can engage their existing CMS platform or agency if those partners hold MX certification. Or they can implement themselves and seek REGINALD attestation directly, which is the route for organisations with strong in-house engineering and content teams. The point of the partner network is that the retailer doesn't have to choose between "do it ourselves" and "wait for Google." There's another route, and it doesn't depend on a single platform's commercial schedule.
+A retailer outside the ring has commercial routes. They can engage a Founding Partner agency to take the work end-to-end, which is the common case for retailers without internal capacity. They can engage their existing CMS platform or agency if those partners hold MX certification. Or they can implement themselves and seek REGINALD attestation directly, which is the route for teams with strong in-house engineering and content capability. The point of the partner network is that the retailer doesn't have to choose between "do it ourselves" and "wait for Google." There's another route, and it doesn't depend on a single platform's commercial schedule.
 
-For agencies, the inverse applies. The MX standard creates a defined scope of work (audit, COG production, registration, attestation, ongoing maintenance) that is independent of which agentic-commerce protocol any given platform eventually wins with. That's a more durable book of business than implementing against a single vendor's specification.
+For agencies, the inverse applies. The MX standard creates a defined scope of work (audit, COG production, registration, attestation, ongoing maintenance) that's independent of which agentic-commerce protocol any given platform eventually wins. That's a more durable book of business than implementing against a single vendor's specification.
 
 Where the EAA bites
 
@@ -5248,11 +5248,11 @@ Closing
 
 Universal Cart is the consumer-facing announcement. UCP and AP2 are the architectural ones. For the launch ring, the path forward is integration with Google's protocol. For everyone else (which is most of retail by count and a large fraction of retail by revenue once you look outside US-headquartered category leaders), the question is which open standards their site already supports and which they need to add.
 
-The MX Readiness Model maps that question to a sequence of practical steps that don't depend on any single platform's commercial plans. COGs are the carrier-neutral data files. REGINALD is the trust layer. The Gathering governs the standard. None of it is proprietary. All of it is composable with UCP for retailers who later want both.
+The MX Readiness Model maps that question to a sequence of practical steps that don't depend on any single platform's commercial plans. COGs are the carrier-neutral data files. REGINALD is the trust layer. The Gathering governs the standard. None of it's proprietary. All of it's composable with UCP for retailers who later want both.
 
-The model holds outside retail, and outside the web. The same file discipline that produces an attested price produces an attested accessibility statement, an attested policy version, an attested decision record, an attested contract clause. Universal Cart is a useful object to think with because it makes the shape of the problem visible in one familiar domain. The shape repeats across every other place an organisation publishes files that someone (an agent, a regulator, a court, a customer, a future colleague) needs to rely on.
+The model holds outside retail, and outside the web. The same file discipline that produces an attested price produces an attested accessibility statement, an attested policy version, an attested decision record, an attested contract clause. Universal Cart is a useful object to think with because it makes the problem visible in one familiar domain. The pattern repeats across every other place a business publishes files that someone (an agent, a regulator, a court, a customer, a future colleague) needs to trust.
 
-Google has shown what the inside-the-ring version of agentic commerce on the web looks like. The interesting work for the rest of us reaches beyond the ring, beyond commerce, beyond the web, making sure the files an organisation publishes remain readable, attributable, and trustworthy once they have travelled away from their source.
+Google has shown what the inside-the-ring version of agentic commerce on the web looks like. The interesting work for the rest of us reaches beyond the ring, beyond commerce, beyond the web, making sure the files a business publishes remain readable, attributable, and trustworthy once they have travelled away from their source.
 
 Going further
 
@@ -5266,11 +5266,11 @@ For retailers, agencies, or CMS platforms thinking about their position relative
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the MX community and author of the forthcoming MX book series. Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through where your organisation sits on the agent-readiness curve?
+          Want to talk through where your business stands on the agent-readiness curve?
 
             - Get in touch
 
@@ -8372,7 +8372,7 @@ Side Benefits: Improves SEO (product rich results), improves GEO (pricing citati
 
 Failure Mode: Agents misunderstand costs by orders of magnitude
 
-Real-world example: while researching Danube river cruises in late 2024, Claude for Chrome quoted £203,000 for a one-week cruise. The actual price was £2,030. European currency formatting (€2.030,00 vs £2,030) had been misread, throwing the figure off by a factor of 100. The pricing metadata never specified the currency correctly, so the AI could not reason about prices sensibly. Had an autonomous agent auto-booked at that quote, the financial damage would have been severe.
+Real-world example: while researching Danube river cruises in late 2024, Claude for Chrome quoted £203,000 for a one-week cruise. The actual price was £2,030. European currency formatting (€2.030,00 vs £2,030) had been misread, throwing the figure off by a factor of 100. The pricing metadata never specified the currency correctly, so the AI couldn't reason about prices sensibly. Had an autonomous agent auto-booked at that quote, the financial damage would have been severe.
 
 We implement MX patterns for agent price parsing. Schema.org benefits multiple disciplines automatically.
 
@@ -8456,9 +8456,9 @@ Human vs AI agent response
 
 "AI Will Figure It Out" Fallacy
 
-The common objection: "AI is getting better all the time, why worry? It will work itself out."
+The common objection: "AI is getting better all the time, why worry? It'll work itself out."
 
-The flaw in this argument: AI models are improving, but they are also multiplying at an accelerating rate. The diversity problem is getting worse, not better.
+The flaw in this argument: AI models are improving, but they're also multiplying at an accelerating rate. The diversity problem is getting worse, not better.
 
 Unknown Agent Problem
 
@@ -8889,15 +8889,15 @@ Cost of Inaction
 
 - No recovery path once agents learn to skip your site
 
-Ask "Can we afford not to do this?" rather than "Can we afford to?"
+Ask "Can we afford not to do this?" rather than "Can we afford the cost of waiting?"
 
 Implementation across teams
 
 Who Owns MX?
 
-MX is at the intersection of several disciplines. Ownership depends on how your team is structured, but it typically needs coordination across several functions.
+MX spans several disciplines. Ownership depends on how your team is structured, but it typically needs coordination across several functions.
 
-Content Operations is the right home if you have a strong content ops team managing semantic structure and metadata. Development or Engineering takes the lead if implementation is primarily technical: DOM structure, Schema.org, server-side rendering. Digital Experience works if a team already manages the full digital customer journey. Product Management fits if MX is treated as a product feature.
+Content Operations is the right home if you have a strong content ops team managing semantic structure and metadata. Development or Engineering takes the lead if implementation is primarily technical: DOM structure, Schema.org, server-side rendering. Digital Experience works if a team already manages the full digital customer lifecycle. Product Management fits if MX is treated as a product feature.
 
 However ownership lands, a shared responsibility model typically looks like this:
 
@@ -8959,7 +8959,7 @@ Cross-functional collaboration: MX requires coordination, not silos.
 
 - UX participates in agent compatibility testing
 
-- QA validates both human and agent user journeys
+- QA validates both human and agent interactions
 
 The goal: MX becomes standard practice, not a special initiative requiring executive intervention.
 
@@ -8967,9 +8967,9 @@ Complete MX Resource Package
 
 Two Books for Different Needs
 
-"MX: The Handbook" (300-400 pages) - A practical implementation guide for developers, UX designers, content strategists, product managers, and executives. It offers step-by-step platform-specific implementations, content strategies, testing approaches, and patterns across major CMS platforms. Accessible enough for decision-makers, detailed enough for implementers.
+"MX: The Handbook" (300-400 pages) - A practical implementation guide for developers, UX designers, content strategists, product managers, and executives. It offers step-by-step platform-specific implementations, content strategies, testing approaches, and patterns across major CMS platforms. Accessible for decision-makers, detailed enough for implementers.
 
-"MX: The Protocols" (800 pages) is the definitive technical reference for architects, consultants, and serious practitioners who need complete coverage of Machine Experience. It's the book for those implementing MX at scale or setting team-wide practice.
+"MX: The Protocols" (800 pages) is the definitive technical reference for architects and practitioners who need complete coverage of Machine Experience. It's the book for those implementing MX at scale or setting team-wide practice.
 
 13 Appendices, Freely Available Online
 
@@ -8985,7 +8985,7 @@ Implementation Guides:
 
 - Appendix D: AI Patterns Quick Reference
 
-- Appendix E: Implementation Roadmap
+- Appendix E: Implementation Plan
 
 - Appendix F: Common Page Patterns
 
@@ -9003,15 +9003,15 @@ Resources and References:
 
 - Appendix L: Index of Metadata
 
-- Appendix M: Anti-Patterns Catalog
+- Appendix M: Anti-Patterns Index
 
-Distribution model: All appendices published openly on the web. Books provide context, appendices provide free implementation guides. Lower barrier to entry with "try before you buy" model.
+Distribution model: All appendices published openly on the web. Books give you context; appendices give you free implementation guides. Lower barrier to entry with "try before you buy" model.
 
 Take Action Now
 
-In January 2026, Google, Microsoft, and Amazon all launched agent-powered purchasing features within weeks of each other. The agent economy arrived, and it has not slowed down since.
+In January 2026, Google, Microsoft, and Amazon all launched agent-powered purchasing features within weeks of each other. The agent economy arrived, and it hasn't slowed down since.
 
-First-mover advantage exists. Sites that work early become trusted sources that agents return to repeatedly. Sites that fail at any stage of the agent journey disappear from recommendations with no analytics visibility and no recovery opportunity.
+First-mover advantage exists. Sites that work early become trusted sources that agents return to repeatedly. Sites that fail at any stage disappear from recommendations with no analytics visibility and no recovery opportunity.
 
 Get Started
 
@@ -9031,7 +9031,7 @@ For professional implementation services, website analysis, or questions about M
 
 - Website: https://allabout.network
 
-The same principles that improve discoverability for AI agents also improve search engine rankings and accessibility compliance: one implementation serves multiple audiences.
+The same principles that improve discoverability for AI agents also lift search engine rankings and accessibility compliance: one implementation serves multiple audiences.
 
 Design for machines that need zero ambiguity, and you create structure that helps everyone.
 
@@ -9041,11 +9041,11 @@ MX is the act of adding metadata and instructions so AI doesn't have to guess. M
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Focus areas: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through where your organisation sits on the agent-readiness curve?
+          Want to talk through where your team sits on the agent-readiness curve?
 
             - Get in touch
 
@@ -9071,7 +9071,7 @@ Every week another agent platform launches, each rebuilding the same context-dis
 
             - What each agent is actually doing
 
-            - The substrate, not the application
+            - The metadata layer, not the application
 
             - MX in every carrier
 
@@ -9091,83 +9091,83 @@ Every week another agent platform launches, each rebuilding the same context-dis
 
         The week AWS Quick launched
 
-        AWS announced Quick this month, an agent platform aimed squarely at the same territory ChatGPT, Claude and Perplexity have been carving up for two years. It joins a list that has grown faster than anyone in the industry can keep track of. Cowork, the multi-agent collaboration framework. OpenClaw, the open-runtime project gathering momentum on GitHub. Cursor, the developer agent that has reshaped how working programmers ship code. Microsoft Copilot in three flavors, embedded in Office, in GitHub, and in Windows. Google's Gemini agents, Anthropic's Claude with computer use, Replit's agentic coding tools, Perplexity Labs. Vertical specialists in legal, in medical, in finance, in DevOps, in customer support. The list continues, and another platform will probably launch in the time it takes me to finish writing this paragraph.
+        AWS announced Quick this month, an agent platform aimed squarely at the same territory ChatGPT, Claude and Perplexity have been carving up for two years. It joins a list that has grown faster than anyone in the industry can follow. Cowork, the multi-agent collaboration framework. OpenClaw, the open-runtime project gathering momentum on GitHub. Cursor, the developer agent that has reshaped how working programmers ship code. Microsoft Copilot in three forms, embedded in Office, in GitHub, and in Windows. Google's Gemini agents, Anthropic's Claude with computer use, Replit's agentic coding tools, Perplexity Labs. Vertical specialists in legal, in medical, in finance, in DevOps, in customer support. The list continues, and another platform will probably launch in the time it takes me to finish writing this paragraph.
 
-        Every one of these is doing the same first task before it can do anything useful. Every one is reading the public web, the published PDFs, the API documentation, the company sites, the help articles, the policy pages, the pricing tables, the regulatory filings. Every one of them, given an unfamiliar URL, has to perform context discovery: what is this site, what is this organisation, what may I do with this content, who is the author, when was it last updated, what version chain does it sit on, which standards does it claim conformance to, which downstream resources does it point at. Every agent does that work. Every agent does it again on the next visit, and on the visit after that, because no agent shares its context-discovery cache with any other.
+        Every one of these is doing the same first task before it can do anything useful. Every one is reading the public web, the published PDFs, the API documentation, the company sites, the help articles, the policy pages, the pricing tables, the regulatory filings. Given an unfamiliar URL, each has to perform context discovery: what's this site, what's this team, what may I do with this content, who's the author, when was it last updated, what version chain does it build on, which standards does it claim conformance to, which downstream resources does it reference. Every agent does that work, and repeats it on the next visit and the one after, because no agent shares its context-discovery cache with any other.
 
         The waste is enormous. The redundancy is invisible to the publisher. And the cost shows up everywhere except on the publisher's bill.
 
         What each agent is actually doing
 
-        Strip away the marketing copy and every agent platform is, at the layer that matters, a context-discovery engine attached to an action engine. The action engines differ. The context-discovery engines do not, in any meaningful way. They all need the same five things from any document or URL they are asked to act on.
+        Strip away the marketing copy and every agent platform is, at the level that matters, a context-discovery engine attached to an action engine. The action engines differ. The context-discovery ones don't, in any meaningful way. They all need the same five things from any document or URL they're asked to process.
 
-        Identity: what is this thing, and is it the current version. Provenance: where did it come from, who made it, when. Lifecycle: is the content still authoritative or has it been superseded. Affordances: what may an agent do with the content, and what should it do next. Semantics: what is this about, in machine-resolvable terms, so the agent can decide whether the document is relevant before reading the body.
+        Identity: what's this thing, and is it the current version. Provenance: where did it come from, who made it, when. Lifecycle: is the content still authoritative or has it been superseded. Affordances: what may an agent do with the content, and what's the recommended next step. Semantics: what's this about, in machine-resolvable terms, so the agent can decide whether the document is relevant before reading the body.
 
-        Provenance is the one primitive where declaration and verification diverge. An agent can read a provenance claim from MX metadata; it cannot confirm whether that claim is genuine without an external reference. That is Reginald's function, the public registry where documents are signed and registered so provenance is verifiable, not just declared. MX provides the substrate. Reginald provides the trust layer. Together they address all five discovery questions an agent asks, including the one that metadata alone cannot answer.
+        Provenance is the one primitive where declaration and verification diverge. An agent can read a provenance claim from MX metadata; it can't confirm whether it's genuine without an external reference. That's Reginald's function, the public registry where documents are signed and registered so provenance is verifiable, not just declared. MX provides the metadata foundation. Reginald provides the trust layer. Together they address all five discovery questions an agent asks, including the one that metadata alone can't answer.
 
-        An agent that finds those five answers in metadata does its job in a tree walk. An agent that has to derive them from prose does its job in a vision-and-language reconstruction. The compute differential is one to two orders of magnitude per document. The error rate diverges similarly: the metadata path produces a deterministic answer, the reconstruction path produces an estimate that may or may not be correct, with errors that propagate downstream into citations, generated contracts, and customer support conversations the publisher never sees.
+        An agent that finds those five answers in metadata does its job in a tree walk. An agent that has to derive them from prose does its job in a vision-and-language reconstruction. The compute differential is one to two orders of magnitude per document. The error rate diverges similarly: the metadata path produces a deterministic answer, while reconstruction produces an estimate that may or may not be correct, with errors that propagate downstream into citations, generated contracts, and customer support conversations the publisher never sees.
 
         Every new agent platform that ships in 2026 will pay these costs again. The publishers who reach the agents will pay them. The end users who read the agent's output will pay them. The grid that runs the inference will pay them in megawatts.
 
-        The substrate, not the application
+        The metadata layer, not the application
 
-        The argument I want to make in this post is structural: the answer to the agent proliferation problem is not another agent. The agent layer is in good shape. There are dozens of platforms, more arriving each week, each one good at some specific subset of the work. They will fight over the action layer for the next several years and the result of that fight will be three or four winning platforms in each category, plus a long tail of vertical specialists. That is fine. That is how layers settle.
+        The argument I want to make in this post is structural: the answer to the agent proliferation problem isn't a new platform. The agent layer is in good shape. There are dozens of platforms, more arriving each week, each one good at some specific subset of the work. They will fight over the action layer for the next several years and the result of that contest will be three or four winning platforms in each category, plus a long tail of vertical specialists. That's fine. That's how layers settle.
 
-        The substrate underneath is in poor shape. The substrate is the metadata that every agent has to read, regardless of which platform built it: the structure tree of a tagged PDF, the JSON-LD on the canonical URL, the XMP packet that survives copying and syndication, the llms.txt manifest, the agent-card.json service description, the .mx.yaml.md folder declaration that tells an agent what the directory it is reading actually contains. The substrate is everywhere or it is nowhere. If it is in the HTML but missing from the PDF, the agent that downloads the PDF starts again. If it is in the canonical site but missing from the third-party syndication, the agent that found the syndication has no way back to the canonical. If it is in the file but missing from the folder, the agent has to crawl the folder to figure out what the file is even part of.
+        The metadata foundation underneath is in poor shape. It's the set of fields every agent has to read, regardless of which platform built it: the structure tree of a tagged PDF, the JSON-LD on the canonical URL, the XMP packet that survives copying and syndication, the llms.txt manifest, the agent-card.json service description, the .mx.yaml.md folder declaration that tells an agent what the directory it's reading actually contains. The foundation is everywhere or it's nowhere. If it's in the HTML but missing from the PDF, the agent that downloads the PDF starts again. If it's in the canonical site but absent from the third-party syndication copy, the agent that found the syndicated version has no way back to the original. If it's in the file but missing from the folder, the agent has to crawl the directory to figure out what collection the file belongs in.
 
-        An operating system gives every application the same access to the same primitives. Files, processes, network, time, identifiers. Every application can assume that open() works, that the file system has folders, that processes have names, that the kernel will tell you what time it is. Applications do not reinvent these primitives. They were standardised long ago. Productivity at the application layer comes from not having to do the substrate work twice.
+        An operating system gives every application the same access to the same foundation of calls. Files, processes, network, time, identifiers. Every application can assume that open() works, that the file system has folders, that processes have names, that the OS will tell you what time it is. Applications don't reinvent these calls. They were standardised long ago. Productivity at the application layer comes from not having to do the foundation work twice.
 
-        MX is the same kind of move at the agent layer. Identity, provenance, lifecycle, affordances, semantics: these are the primitives an agent needs from any artefact. They should not be rediscovered for each new platform. They should be declared once, by the publisher, in the carrier the artefact is shipped in, in a vocabulary every agent can read.
+        MX is the same kind of move at the agent layer. Identity, provenance, lifecycle, affordances, semantics: these are the primitives an agent needs from any artefact. They shouldn't be rediscovered for each new platform. They should be declared once, by the publisher, in the carrier the artefact is shipped in, in a vocabulary every agent can read.
 
         MX in every carrier
 
-        The carrier discipline I keep coming back to in this blog and in MX: The Protocols is the same point made differently. A modern publisher ships HTML, PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, and increasingly Markdown via content-negotiation. Each of those formats has its own native idiom for declaring meaning. HTML has structured data. PDF has a structure tree and an XMP packet. DOCX has OOXML styles. EPUB has a navigation document. WebVTT carries cues for audio and video. CSVW lets a CSV declare its schema in JSON-LD. None of these are MX-specific; they are open W3C and ISO standards that have existed for years.
+        The carrier discipline I keep coming back to in this blog and in MX: The Protocols is the same point made differently. A modern publisher ships HTML, PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, and Markdown via content-negotiation. Each of those formats has its own native idiom for declaring meaning. HTML has structured data. PDF has a structure tree and an XMP packet. DOCX has OOXML styles. EPUB has a navigation document. WebVTT carries cues for audio and video. CSVW lets a CSV declare its schema in JSON-LD. None of these are MX-specific; they're open W3C and ISO standards that have existed for years.
 
-        What MX adds is the consolidation. The same fields that an agent reads from a page's <meta> tags should be readable from a PDF's XMP packet. The same governance signals that the page declares should travel with the document when the document is downloaded. The same canonical URL declared on the HTML should appear in the PDF metadata so that an agent holding a stale copy can find the current one. The same training-data policy. The same conformance claims. The same author. The same license.
+        What MX adds is the consolidation. The same fields that an agent reads from a page's <meta> tags should be readable from a PDF's XMP packet. The same governance signals that the page declares should travel with the document on download. The same canonical URL declared on the HTML should appear in the PDF metadata so that an agent holding a stale copy can find the current one. The same training-data policy. The same conformance claims. The same author. The same license.
 
-        Without that consolidation, every agent that reaches the document via a different path has to start its context discovery from scratch. With it, the document carries its own context, in every form it ships in, surviving every copy and every syndication. That is the substrate.
+        Without that consolidation, every agent that reaches the document via a different path has to start its context discovery from scratch. With it, the document carries its own context, in every form it ships in, surviving every copy and every syndication. That's the metadata layer.
 
         .mx.yaml.md at folder boundaries
 
         One layer up from the file is the folder. A directory containing forty PDFs and ten markdown files is, to an agent, a wall of forty-plus context-discovery jobs. The agent that figures out the folder is a quarterly-report archive on the third PDF has wasted the cost of two PDFs to reach that conclusion. The agent that follows behind, working for a different platform, will repeat the same wasted reads.
 
-        This is the gap .mx.yaml.md closes. A folder-level metadata file declares, in one place, what the directory is, what it inherits from its parent, what it contains, who maintains it, what governance applies. The convention is already in use across the MX project. The generator script lives in scripts/mx/, the validator runs on commit, and every folder of any size in the project carries one. The format is small: a YAML frontmatter declaring the folder's purpose, a markdown narrative explaining the contents in human-readable form, an inheritance chain so child folders adopt their parent's defaults without restating them.
+        This is the gap .mx.yaml.md closes. A folder-level metadata file declares, in one place, what the directory is, what it inherits from its parent, what it contains, who maintains it, what governance applies. The convention is already in use across the MX project. The generator script is in scripts/mx/, the validator runs on commit, and every folder of any size in the project carries one. The format is small: a YAML frontmatter declaring the folder's purpose, a markdown narrative explaining the contents in human-readable form, an inheritance chain so child folders adopt their parent's defaults without restating them.
 
-        An agent reading .mx.yaml.md first answers all the discovery questions about the folder before reading any individual file. Two outcomes follow. First, the agent skips folders that are not relevant to its task; it does not read fifteen quarterly reports to discover the directory is the historical archive of an investor relations site. Second, the agent that does read individual files reads them with the folder's context already in hand: the same author chain, the same governance, the same conformance claims, the same canonical site context.
+        An agent reading .mx.yaml.md first answers all the discovery questions about the folder before reading any individual file. Two outcomes follow. First, the agent skips folders that aren't relevant to its task; it doesn't read fifteen quarterly reports to discover the directory is the historical archive of an investor relations site. Second, the agent that does read individual files reads them with the folder's context already in hand: the same author chain, the same governance, the same conformance claims, the same canonical site context.
 
-        The convention is one file per folder, the same way README.md has been one file per repository for thirty years. What is new is making it machine-first by default, with the YAML frontmatter as the load-bearing structure and the markdown narrative as the human accompaniment.
+        The convention is one descriptor per folder, the same way README.md has been one file per repository for thirty years. What's new is making it machine-first by default, with the YAML frontmatter as the load-bearing structure and the markdown narrative as the human accompaniment.
 
         Three vectors, compounded across every reader
 
-        The case I made for the audit pays back through three vectors: reduced inference cost, fewer hallucinations, lower regulatory exposure. The same three vectors compound differently when the substrate is everywhere.
+        The case I made for the audit pays back through three vectors: reduced inference cost, fewer hallucinations, lower regulatory exposure. All three compound differently when the metadata layer reaches every carrier.
 
-        Inference cost compounds across agents. A site whose metadata is consolidated does less work for each agent that reads it, and there are more agents arriving each week. The savings are not per-page; they are per-page-per-agent, multiplied by the visit frequency. As agent traffic surpasses human traffic on most public corpora, this is the curve that bends the energy bill.
+        Inference cost compounds across agents. A site whose metadata is consolidated does less work for each agent that reads it, and there are more agents arriving each week. The savings aren't per-page; they're per-page-per-agent, multiplied by the visit frequency. As agent visits surpass human traffic on most public corpora, this is the curve that bends the energy bill.
 
-        Hallucination compounds across the chain of agents that read each other's output. An agent that has misread a table cites the misread numbers. The next agent that summarizes the first agent's output cites them again. By the time the error reaches the human reader, three agents have signed off on it. Each of those agents would have done their job correctly if the substrate had answered the question deterministically. Fix the substrate, and you remove a class of error from a class of conversations the publisher will never witness.
+        Hallucination compounds across the chain of agents that read each other's output. An agent that has misread a table cites those wrong numbers. The next agent that summarizes the first agent's output cites them again. By the time the error reaches the human reader, three agents have signed off on it. Each of those agents would have done their job correctly if the metadata had answered the question deterministically. Fix the metadata foundation, and you remove a category of error from a set of conversations the publisher will never witness.
 
-        Energy compounds twice. Once in the inference savings I have already described. Twice in the failure modes the substrate prevents: an agent that has to retry against three sources before it gets a consistent answer pays its inference bill three times.
+        Energy compounds twice. Once in the inference savings I have already described. And again in the failure modes good metadata prevents: an agent that has to retry against three sources before it gets a consistent answer pays its inference bill three times.
 
         The MX OS position
 
-        The position I want this blog post to land on the table is one I expect to argue many more times before the industry settles. The MX layer is an operating system primitive rather than an application. The metadata that lives in HTML, PDF, DOCX, EPUB, audio, video, CSV, in llms.txt, in agent-card.json, in .mx.yaml.md at every folder boundary, is the substrate every agent platform builds on, whether the platform is from AWS or Anthropic or a graduate-student project on GitHub.
+        The position I want this blog post to land on the table is one I expect to argue many more times before the industry settles. The MX layer is an operating system primitive rather than an application. The metadata that belongs in HTML, PDF, DOCX, EPUB, audio, video, CSV, in llms.txt, in agent-card.json, in .mx.yaml.md at every folder boundary, is the foundation every agent platform builds on, whether that platform is from AWS or Anthropic or a graduate-student project on GitHub.
 
-        The publishers who carry the substrate get read correctly by every agent that arrives. The publishers who do not get read correctly by the agent that has the budget to do the reconstruction work, and incorrectly by every other agent. As agent budgets compress (and they will; the long tail of vertical agents cannot afford to do vision-based reconstruction on every read), the gap between the substrate-equipped publishers and the rest will widen.
+        The publishers who carry that foundation get read correctly by every agent that arrives. Those who don't get read correctly only by the agent that has the budget to do the reconstruction work, and incorrectly by every other. As agent budgets compress (and they will; the long tail of vertical agents can't afford to do vision-based reconstruction on every read), the gap between the well-equipped publishers and the rest will widen.
 
-        The work is field declarations and folder metadata and structure trees in tagged PDFs, exactly the kind of work that wins the long game and looks tedious in the short one. The publishers who took the same posture in the early HTML era, the ones who learned semantic markup and accessibility and structured data while everyone else was chasing the latest framework, are the publishers whose content is most readable today. The MX OS position says: do that again, deliberately, for the agent era.
+        The work is field declarations and folder metadata and structure trees in tagged PDFs, exactly the kind of practice that wins the long game and looks tedious in the short one. The publishers who took the same approach in the early HTML era, the ones who learned semantic markup and accessibility and structured data while everyone else was chasing the latest framework, are the publishers whose content is most readable today. The MX OS position says: do that again, deliberately, for the agent era.
 
         What to do this week
 
-        If you are responsible for a published corpus, three actions return their cost quickly. Add MX governance fields to your HTML <meta> tags so that the basic identity, audience, content-policy and license claims are machine-readable. Regenerate your public PDFs with a tagged-PDF pipeline so they carry the same fields in their XMP packet, plus the ISO 14289-1 structure tree that accessibility law across major markets mandates. Drop a .mx.yaml.md file at every folder boundary in your published source tree so that an agent reading the folder does not have to crawl every file to figure out what is there.
+        If you're responsible for a published corpus, three actions return their cost quickly. Add MX governance fields to your HTML <meta> tags so that the basic identity, audience, and license claims are machine-readable. Regenerate your public PDFs with a tagged-PDF pipeline so they carry the same fields in their XMP packet, plus the ISO 14289-1 structure tree that accessibility law across major markets mandates. Drop a .mx.yaml.md at every folder boundary in your published source tree so that an agent reading the directory doesn't have to crawl each item to figure out what's there.
 
-        None of these is a multi-quarter program. Each is a finite, scoped pass that an engineering team can complete and verify against a specific gate. The audit work I described in the previous post is the entry point: it tells you which fields are missing, which PDFs are untagged, which folders are bare. The discipline is what keeps the substrate consistent as the corpus grows.
+        None of these is a multi-quarter program. Each is a finite, scoped pass that an engineering team can complete and verify against a specific gate. The audit work I described in the previous post is the entry point: it tells you which fields are missing, which PDFs are untagged, which folders are bare. The discipline is what keeps the metadata foundation consistent as the corpus grows.
 
-        The agent platforms will keep launching. Another one will land while you are reading this. The substrate they all build on is the same substrate, and it is yours to ship.
+        The agent platforms will keep launching. Another one will land while you're reading this. The metadata layer they all build on is the same one, and it's yours to ship.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series. Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd, trading as CogNovaMX.
+            Founder of the Machine Experience community and author of the MX book series. Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd, trading as CogNovaMX.
 
           Continue the conversation
 
@@ -9333,7 +9333,7 @@ Tom Cranstoun is the founder of the Machine Experience (MX) community and author
 
 **Description:** Machine Experience (MX) is the missing discipline in web development-ensuring AI agents get complete context from HTML structure, not just visual interfaces.
 
-Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.
+Machine Experience is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every system that consumes it, so no machine has to guess.
 
         Author: Tom Cranstoun
 
@@ -9369,7 +9369,7 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
         The Missing Discipline in Web Development
 
-We've spent decades building disciplines for the web. User Experience (UX) tunes for humans. Search Engine Optimisation (SEO) tunes for crawlers. Accessibility (a11y) tunes for users with disabilities. These three disciplines have shaped modern web development, created professional roles, and established best practices.
+We've spent decades building disciplines for the web. User Experience (UX) tunes for humans. Search Engine Ranking (SEO) tunes for crawlers. Accessibility (a11y) tunes for users with disabilities. These three disciplines have shaped modern web development, created professional roles, and established best practices.
 
 But there's a fourth visitor type we haven't built for: AI agents acting on behalf of humans.
 
@@ -9381,19 +9381,19 @@ The Invisible Visitor Problem
 
 Unlike human users who show up in analytics, persist through poor UX, and give feedback, AI agents arrive once, assess your site's structure, and either succeed or fail silently. When they succeed, they build computational trust in your site and return for future queries. When they fail, they disappear from recommendations permanently. No analytics warning. No second chance. No angry email explaining what went wrong.
 
-The business impact is immediate. Adobe's Holiday 2025 data shows AI referrals surged dramatically, up 700% in retail, 500% in travel. Conversion rates from AI-referred users now lead human traffic by 30%. Agent-mediated commerce moved from experimental to revenue driver in a single quarter. If agents can't extract your pricing, understand your offering, or complete your checkout flow, they recommend competitors who've implemented the explicit structure they require.
+The business impact is immediate. Adobe's Holiday 2025 data shows AI referrals surged dramatically, up 700% in retail, 500% in travel. Conversion rates from AI-referred users now lead human traffic by 30%. Agent-mediated commerce became a revenue driver in a single quarter. If agents can't extract your pricing, understand your offering, or complete your checkout flow, they recommend competitors who've implemented the explicit structure they require.
 
 This gap in web development practice has a name: Machine Experience (MX).
 
 What Machine Experience Actually Means
 
-Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to think. When AI has to "think" (infer meaning from incomplete context), it must generate confident answers even when context is missing, leading to hallucination. MX ensures all context is explicitly present in your website's structure.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to think. When AI has to "think" (infer meaning from incomplete context), it must generate confident answers even when information is missing, leading to hallucination. MX puts all context explicitly into your website's structure.
 
-Let me be clear what MX is NOT:
+Let me be clear what MX isn't:
 
-- Not SEO: search engine optimisation focuses on ranking signals, keyword targeting, and organic traffic. MX focuses on structural clarity for agent comprehension.
+- Not SEO: search engine ranking focuses on ranking signals, keyword targeting, and organic traffic. MX focuses on structural clarity for agent comprehension.
 
-- Not GEO: Generative Engine Optimisation targets citations in AI-generated responses. MX provides the foundation that makes GEO possible.
+- Not GEO: Generative Engine Ranking targets citations in AI-generated responses. MX provides the foundation that makes GEO possible.
 
 - Not accessibility: WCAG tunes for users with disabilities. MX tunes for machines that can't infer visual cues.
 
@@ -9419,7 +9419,7 @@ MX: The Handbook
 
 These AI agents are "invisible" for two distinct reasons:
 
-First, agents are invisible to site owners. They blend into analytics logs, visit once, assess structure, and either succeed or disappear, no persistent patterns to track, no cookies, no user journeys. If they fail, you never know why.
+First, agents are invisible to site owners. They blend into analytics logs, visit once, assess structure, and either succeed or disappear, no persistent patterns to track, no cookies, no recorded paths. If they fail, you never know why.
 
 Second, the interface is invisible to them. They can't see animations, visual coding, toast notifications, or loading spinners. Visual hierarchy built with CSS? Invisible. Brand messaging conveyed through imagery? Invisible. Implicit state indicated by shade changes? Invisible.
 
@@ -9459,7 +9459,7 @@ Schema.org gaps are inconsistent. Structured data exists on some pages but not o
 
 Explicit state is missing throughout. Form validation errors display as visual shade changes. Checkout progress shows via CSS-animated steppers. Button states indicate loading with spinners. None of this state appears in HTML attributes where agents can read it. State exists visually but not semantically.
 
-These aren't edge cases or budget-constrained sites. These patterns appear across teams with sophisticated web skills, substantial budgets, and public commitments to technical excellence. The gap is awareness, not resources.
+These aren't edge cases or budget-constrained sites. These patterns appear across teams with sophisticated web skills and substantial budgets. The gap is awareness, not resources.
 
 The patterns that confuse agents also harm accessibility users. A missing <main> element forces screen reader users to navigate the entire page to find primary content. Missing alt text blocks both agents and blind users. Visual-only state indicators exclude both agents and keyboard users. The convergence between MX needs and accessibility needs isn't coincidental, both groups lack access to visual design cues.
 
@@ -9475,13 +9475,13 @@ Miss any stage and the entire chain breaks
 
 Stage 1, Discovery: can agents find you? This requires crawlable structure (robots.txt compliance, sitemap.xml), semantic HTML markup, and server-side rendering for JavaScript-heavy content. Block GPTBot, ClaudeBot, or Amazonbot and agents never discover you exist.
 
-Stage 2, Extraction: can agents accurately extract your content? This requires fact-level clarity (each statistic, definition, concept needs standalone clarity), structured data (Schema.org JSON-LD), and explicit content architecture. If agents can't extract clear facts, they generate incorrect details or route to competitors with clearer structure.
+Stage 2, Extraction: can agents accurately extract your content? This requires fact-level precision (each statistic, definition, concept needs standalone clarity), structured data (Schema.org JSON-LD), and explicit content architecture. If agents can't extract clear facts, they generate incorrect details or route to competitors with clearer structure.
 
-Stage 3, Compare: can agents understand your offering? This requires JSON-LD microdata at the pricing level, explicit comparison attributes (product features, specifications), and semantic HTML that agents can parse for feature extraction. Visual-only comparison data means agents skip you in comparison lists.
+Stage 3, Compare: can agents understand your offering? This requires JSON-LD microdata at the pricing level, explicit comparison attributes (product features, specifications), and semantic HTML that agents can parse for feature extraction. Visual-only pricing data means agents skip you in comparison lists.
 
 Stage 4, Pricing: can agents understand your costs? This requires Schema.org types (Product, Offer, PriceSpecification), unambiguous pricing structure with currency specification (ISO 4217 codes), and validation to prevent decimal formatting errors. Without proper metadata, agents misunderstand costs by orders of magnitude, the Danube cruise error where £2,030 became £203,000 because European decimal formatting (€2.030,00) was misinterpreted.
 
-Stage 5, Confidence: can agents complete checkout? This requires no hidden state buried in JavaScript (state must be DOM-reflected), explicit form semantics (<button> not <div class="btn">), persistent feedback (role="alert" for important messages), and data-state attributes for checkout progress tracking. Visual-only state means agents can't see what buttons do, can't track progress, and abandon carts.
+Stage 5, Confidence: can agents complete checkout? This requires no hidden status buried in JavaScript (state must be DOM-reflected), explicit form semantics (<button> not <div class="btn">), persistent feedback (role="alert" for important messages), and data-state attributes for checkout progress tracking. Visual-only state means agents can't see what buttons do, can't track progress, and abandon carts.
 
 The catastrophic failure principle applies: miss any stage and the entire commerce chain breaks. Sites that successfully complete all stages gain computational trust, agents return for more purchases through learned patterns. Sites that fail at any stage disappear from the agent's map permanently.
 
@@ -9715,7 +9715,7 @@ January 2026 convergence: three major platforms launched agent commerce systems 
 
 - Google Universal Commerce Protocol (11 January 2026) - Open standard for agent-mediated transactions
 
-This convergence signals an industry inflection point. Agent-mediated commerce moved from experimental to infrastructure. The technology isn't coming, it's here.
+This convergence signals an industry inflection point. Agent-mediated commerce is now infrastructure. The technology isn't coming, it's here.
 
 The Data Confirms Commercial Reality
 
@@ -9745,7 +9745,7 @@ Sites that fail early disappear from recommendations with no recovery opportunit
 
 MX: The Protocols (launching April 2026) documents this convergence, provides implementation patterns across 13 chapters and 14 appendices, and establishes MX as the strategic discipline for agent-compatible web development. The book isn't speculation about future possibilities, it's documentation of patterns needed right now for platforms launching this quarter.
 
-The timeline is compressed. Within two years (by January 2028), human browsing will likely be the exception rather than the norm. Organizations that build agent-compatible structure now will dominate agent-mediated interactions. Those that remain dependent on visual-only interfaces will face insurmountable catch-up costs.
+The timeline is compressed. Within two years (by January 2028), human browsing will likely be the exception rather than the norm. Teams that build agent-compatible structure now will dominate agent-mediated interactions. Those that remain dependent on visual-only interfaces will face insurmountable catch-up costs.
 
 Can you afford to wait whilst competitors build computational trust?
 
@@ -9795,7 +9795,7 @@ Practical checklist for getting started:
 
 - Events: Event with startDate, location, organizer
 
-- Organizations: Organization with address, contactPoint, logo
+- Businesses: Organization with address, contactPoint, logo
 
 - Reviews: Review with reviewRating, author, itemReviewed
 
@@ -9825,7 +9825,7 @@ Practical checklist for getting started:
 
 - List key pages and their purpose
 
-- Explain organizational context
+- Explain site context and purpose
 
 - Provide contact information for agent queries
 
@@ -9857,7 +9857,7 @@ Practical checklist for getting started:
 
 - Monitor for regressions after deployments
 
-These aren't hypothetical future requirements. These are patterns needed right now for platforms launching this quarter. The Web Audit Suite (launching soon after book publication in April 2026) provides complete analysis across all six dimensions, priority-based recommendations, and ongoing monitoring to ensure MX patterns remain intact through deployments and content updates.
+These aren't hypothetical future requirements. These are patterns needed right now for platforms launching this quarter. The Web Audit Suite (launching soon after book publication in April 2026) provides complete analysis across all six dimensions, priority-based recommendations, and ongoing monitoring to keep MX patterns intact through deployments and content updates.
 
 What's Next
 
@@ -9919,17 +9919,17 @@ This is about collaboration, not criticism. When we provide well-structured inpu
 
 MX is the missing piece in web development. Not an optional extra. Not a future concern. A discipline needed right now for platforms launching this quarter.
 
-The question isn't whether to optimize for agents. The question is whether you can afford not to whilst competitors build agent-compatible structure and gain computational trust.
+Can you afford to wait whilst competitors build agent-compatible structure and gain computational trust?
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Focus areas include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through where your organisation sits on the agent-readiness curve?
+          Want to talk through where your team stands on the agent-readiness curve?
 
             - Get in touch
 
@@ -10893,7 +10893,7 @@ Tom Cranstoun is the Machine Experience Authority and founder of the MX communit
 
 **Description:** A practitioner's guide to Machine Experience principles that make digital products work better for humans, AI agents, and everyone in between.
 
-Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.
+MX - Machine Experience - is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.
 
             Author: Tom Cranstoun
 
@@ -10927,7 +10927,7 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
         I've been building websites and digital products for years, and for most of that time, I was designing for one audience: people with browsers and eyeballs. That seemed reasonable. After all, the web is a visual medium, right?
 
-        Then I started noticing something odd. The sites that worked best for screen reader users also happened to work better for everyone under stress. The patterns that made content comprehensible to people with cognitive disabilities also made it easier for anyone multitasking or distracted. And increasingly, the structure that helped humans understand pages also helped AI agents parse them correctly.
+        Then I started noticing something odd. The sites that worked best for screen reader users also happened to work better for everyone under stress. The patterns that made content comprehensible to people with cognitive disabilities also helped anyone multitasking or distracted. And increasingly, the structure that helped humans understand pages also helped AI agents parse them correctly.
 
         This wasn't a coincidence. I was seeing evidence of something I'd later come to understand as the convergence principle: the patterns that improve machine comprehension also improve human accessibility. Not as a trade-off, but as a natural consequence of explicit, semantic communication.
 
@@ -11127,7 +11127,7 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
         When you make meaning explicit rather than implicit, you help everyone. When you structure information semantically rather than just visually, you serve all users regardless of their capabilities or access methods. When you treat documentation as infrastructure rather than afterthought, you create systems that remain understandable as they grow.
 
-        The web was built on principles of universal access and progressive enhancement. These principles extend those foundations to an era where machines are users too, where content lives in multiple contexts simultaneously, and where the distinction between human and automated access matters less than making sure everyone can access and understand what you've built.
+        The web was built on principles of universal access and progressive enhancement. These principles extend those foundations to an era where machines are users too, where content reaches multiple contexts simultaneously, and where the distinction between human and automated access matters less than making sure everyone can access and understand what you've built.
 
         Start with one principle. Pick the one that resonates most with your current challenges. Maybe you're struggling with documentation drift-try size-neutral documentation. Maybe your accessibility metrics are poor-try universal accessibility patterns. Maybe you're working with AI agents and hitting context issues-try context declaration.
 
@@ -11135,7 +11135,7 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
         These aren't rules to follow rigidly. They're lenses for viewing your work differently. Perspectives that shift how you think about building digital products. Principles that, once you internalize them, become obvious in retrospect even though they weren't obvious before.
 
-        The web is evolving. AI agents are becoming users. Content lives in multiple contexts. Universal access matters more than ever. These principles help us build for that reality-not by adding complexity, but by embracing clarity, structure, and explicit communication that serves everyone.
+        The web is evolving. AI agents are becoming users. Content reaches multiple contexts. Universal access matters more than ever. These principles help us build for that reality-not by adding complexity, but by embracing clarity, structure, and explicit communication that serves everyone.
 
         That's what Machine Experience really means: making the web, and everything you publish beyond it, work for everyone and everything that uses it.
 
@@ -11145,7 +11145,7 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Areas of focus: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the MX community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Areas of focus: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
@@ -13006,49 +13006,49 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
 
 - Convergence Principle
 
-A question the AI-governance strategist Birgul Cotelli put on LinkedIn this week is worth sitting with. A procurement platform negotiates pricing with a supplier's platform. Terms are discussed, conditions adjusted, a final agreement reached. A seven-figure contract, settled. No emails, no meetings, no human in the exchange.
+A question the AI-governance strategist Birgul Cotelli put on LinkedIn this week deserves a direct answer. A procurement platform negotiates pricing with a supplier's system. Terms are discussed, conditions adjusted, a final agreement reached. A seven-figure contract, settled. No emails, no meetings, no human in the exchange.
 
-Then something goes wrong. Who approved the final terms? Who is accountable for the outcome? What if the agreement broke company policy? What if nobody can explain how the final position was reached?
+Then something goes wrong. Who approved the agreed terms? Who's accountable for the outcome? What if the agreement broke company policy? What if nobody can explain how the final position was reached?
 
 The framing behind the questions is the one contracts have rested on for as long as there have been contracts. Humans negotiate. Humans agree. Humans are accountable. Software negotiating with software pulls the first two away and leaves the third hanging in the air with nothing under it.
 
 The sibling case to a question already asked
 
-A fortnight ago I wrote about machines deciding about a site - Chrome's hidden lists ruling whether an agent may act on your pages, whether you are remembered, whether you count as a place that trades, with no record you can read and no party you can name. Who answers when the machine decides? made the accountability argument in full: an inference made about you can be wrong and answered for by no one, while a signed declaration has someone on the hook. I won't rebuild that argument here. It holds.
+A fortnight ago I wrote about machines deciding about a site - Chrome's hidden lists ruling whether an agent may act on your pages, whether you're remembered, whether you count as a place that trades, with no record you can read and no party you can name. Who answers when the machine decides? made the accountability argument in full: an inference drawn about you can be wrong and answered for by no one, while a signed declaration has someone on the hook. I won't rebuild that argument here. It holds.
 
 This is its sibling. There the machine decides about you. Here the machine transacts for you. The first is a classification problem, settled in private before you ever see it. The second is a transaction problem, and it has a property the classification case doesn't: it leaves a moment where a commitment is made. The question is whether anything is written down at that moment, and in a form anyone can later read.
 
 Command moves upstream
 
-Look again at the four questions, because they are not four questions. They are one question asked from four angles, and the angle decides the answer.
+Look again at the four questions, because they aren't four questions. They're one question asked from four angles, and the angle decides the answer.
 
-Start with the one that sounds hardest. What if nobody can explain how the final position was reached? This is the determinism problem I have written about before - why an AI agent gives a different answer every time when you instruct it instead of contracting with it. A negotiation with no record of its path is a negotiation that happened once and cannot be re-walked. The fix isn't to slow the machine down. It is to make the agent emit a decision COG: the record of the position it took, the inputs it weighed, and the path to the number it agreed. Not a transcript of every token. The declared account of how the deal got where it got, written at the moment it got there.
+Start with the one that sounds hardest. What if nobody can explain how the final position was reached? This is the determinism problem I have written about before - why an AI agent gives a different answer every time when you instruct it instead of contracting with it. A negotiation with no record of its path happened once and can't be re-walked. The fix isn't to slow the machine down. It's to make the agent emit a decision COG: the record of the position it took, the inputs it weighed, and the path to the number it agreed. Not a transcript of every token. The declared account of how the deal got where it got, written at the moment it got there.
 
-What if the agreement broke company policy? Then the policy was never given to the agent in a form it had to respect. A policy COG is the mandate the agent negotiates inside - the floor on price, the terms that may never be conceded, the categories it may not buy at all - published as a record both the agent and a later auditor can read. Checking whether the deal broke policy stops being forensic. You hold the agreed position against the mandate it was bound by, and the answer is plain.
+What if the agreement broke company policy? Then the policy was never given to the agent in a form it had to respect. A policy COG is the mandate the agent negotiates inside - the floor on price, the terms that may never be conceded, the categories it may not buy at all - published as a record both the agent and a later auditor can read. Checking whether the outcome broke policy stops being forensic. You hold the agreed position against the mandate it was bound by, and the answer is plain.
 
-Who approved the final terms? Approval is the wrong word for it, and reaching for it is what makes the scenario feel ungoverned. In machine-to-machine commerce nobody approves the terms, because the terms are settled in milliseconds with no one watching. What a human does instead is command the mandate: direct the agent on what it may transact, on whose behalf, and inside what limits, before the negotiation runs. Command sits upstream of the deal and stays in force through it. The price is not approved after it lands; it is commanded before it is sought. That is not a workaround for the missing human. It is where authority has to live once the exchange itself has none.
+Who approved the final terms? Approval is the wrong word for it, and reaching for it is what makes the scenario feel ungoverned. In machine-to-machine commerce nobody approves the terms, because the terms are settled in milliseconds with no one watching. What a human does instead is command the mandate: direct the agent on what it may transact, on whose behalf, and inside what limits, before the negotiation runs. Command sits upstream of the deal and stays in force through it. The price isn't approved after it lands; it's commanded before it's sought - authority upstream rather than a workaround for the missing human. That's where it has to live once the exchange itself has none.
 
-Who is accountable for the outcome? The party whose key signed the mandate and the record. An attestation COG carries an Ed25519 signature over the canonicalised bytes - a confirmation that this mandate, this agreed position, this account of the path, are genuinely from the party they name and have not been altered since. That gives the outcome an accountable author. Not a guarantee the deal was wise. A name against it that can be questioned, audited and held to its own record later.
+Who's accountable for the outcome? The party whose key signed the mandate and the record. An attestation COG has an Ed25519 signature over the canonicalised bytes - a confirmation that this mandate, this agreed position, this account of the path, are genuinely from the party they name and haven't been altered since. That gives the outcome an accountable author. Not a guarantee the deal was wise. A name against it that can be questioned and held to its own record later.
 
-So the four questions resolve into a sequence. A human commands the mandate and signs it. The agent negotiates under that command. The agent records what it agreed and how. Each record is attested. The deal runs at machine speed, and a person can still answer for it afterwards, because the deal ran under their command and left something behind that carries their name.
+So the four questions resolve into a sequence. A human commands the mandate and signs it. The agent negotiates under that command. The agent records what it agreed and how. Each record is attested. The transaction runs at machine speed, and a person can still answer for it afterwards, because it ran under their command and left something behind that carries their name.
 
 Human in command, not in the loop
 
 The LinkedIn framing said: humans negotiate, humans agree, humans are accountable. The instinct that follows is to put a human back into the negotiation, to keep all three bound together by refusing to let the exchange run without one present.
 
-That instinct reaches for the wrong model. Oversight of an automated system comes in distinct strengths, and the difference is not pedantic. A human in the loop is a checkpoint inside the flow: the machine pauses, the person decides, the machine proceeds. A human on the loop watches a running system and can intervene. A human in command directs what the system is for and what it may do, and carries the answer for it, whether or not they witness any single act. The EU's own trustworthy-AI work names all three; the European Economic and Social Committee built its position on the last of them, arguing that people should stay in command of what tasks are transferred to a machine at all.
+That instinct reaches for the wrong model. Oversight of an automated system comes in distinct strengths, and the difference isn't pedantic. A human in the loop is a checkpoint inside the flow: the system pauses, the person decides, it proceeds. A human on the loop watches a running system and can intervene. A human in command directs what the system is for and what it may do, and carries the answer for it, whether or not they witness any single act. The EU's own trustworthy-AI work names all three; the European Economic and Social Committee built its position on the last of them, arguing that people should stay in command of what tasks are transferred to a machine at all.
 
-Machine-speed negotiation rules out the first. There's no point in the loop to stand at - the exchange completes faster than a person can be a checkpoint in it, and a human stationed there would only be a rubber stamp pretending to be a brake. On the loop is little better when a deal closes in milliseconds. In command is the only model that fits, and it fits well, because command never required the commander to be present at the moment of action. It requires that they directed it and own it.
+Machine-speed negotiation rules out the first. There's no point in the loop to stand at - the transaction completes faster than a person can be a checkpoint in it, and a human stationed there would only be a rubber stamp pretending to be a brake. On the loop is little better when a deal closes in milliseconds. In command is the only model that fits, and it fits well, because command never required the commander to be present at the moment of action. It requires that they directed it and answer for it.
 
-Read the three clauses through that lens and they come apart cleanly. Humans negotiate changes hands - the machine runs the exchange, and that is the point of building it - but the human commands the negotiation that the machine runs. Humans agree narrows to the act that carries weight: a human agreed to the mandate, under their own authority, not to each term struck beneath it. Humans are accountable survives in full, and survives precisely because the first clause became command rather than disappearing. Accountability with nothing above it is what the scenario feared. Accountability that flows from a signed command is the thing that was missing.
+Read the three clauses through that lens and they come apart cleanly. Humans negotiate changes hands - the machine runs the exchange, and that's the point of building it - but the human commands the negotiation the machine runs. Humans agree narrows to the act that carries weight: a human agreed to the mandate, under their own authority, not to each term struck beneath it. Humans are accountable survives in full, and survives precisely because the first clause became command rather than disappearing. Accountability with nothing above it is what the scenario feared. Accountability that flows from a signed command is what was missing.
 
-This is the Convergence Principle in a commercial setting. The record that lets a finance team audit a deal after the fact is the same record the counterparty's machine reads to confirm the deal sat within mandate. The internal auditor and the external agent want the same artefact. Build it for one and you have built it for both, and neither has to guess.
+This is the Convergence Principle in a commercial setting. The record that lets a finance team audit a transaction after the fact is the same record the counterparty's machine reads to confirm it sat within mandate. The internal auditor and the external agent want the same artefact. Build it for one and you have built it for both, and neither has to guess.
 
-The MX standard anticipated this case before the case arrived. The contract-fingerprinting note exists precisely so that a document a machine commits to carries a checkable identity - so the thing the supplier's agent agreed to is provably the thing your agent proposed, byte for byte, with no quiet substitution between proposal and signature.
+The MX standard anticipated this scenario before it arrived. The contract-fingerprinting note exists precisely so that a document a machine commits to has a checkable identity - so what the supplier's agent agreed to is provably what your agent proposed, byte for byte, with no quiet substitution between proposal and signature.
 
 What the command looks like on disk
 
-The doctrine stays abstract until you see the artefact, so here is the procurement mandate written as a command rather than a fence. The fields are illustrative and would align to the canonical COG schema, but the shape is the argument.
+The doctrine stays abstract until you see the artefact, so here is the procurement mandate written as a command rather than a fence. The fields are illustrative and would align to the canonical COG schema, but the structure is the argument.
 
 A fence says only don't exceed two million. A command says who issued the limit, over what authority, to which agent, and for how long:
 
@@ -13085,39 +13085,39 @@ weighed: [list-price, three-year-TCO, two-rival-quotes]
 reached_at: 2026-06-03T14:36:11Z
 signature: ed25519:…
 
-Read the two together and the four questions answer themselves. The path was recorded (weighed, agreed). The mandate is checkable (ceiling, never_concede), and £1.84m sits under £2m with no forbidden clause in sight, so the deal was within command. The author is named and signed. And approval was never a thing that happened after the price landed - it was the act of issuing and signing the mandate before the agent ran. The human in command did one thing, once, in advance, and the record carries it forward through every deal struck under it.
+Read the two together and the four questions answer themselves. The path was recorded (weighed, agreed). The mandate is checkable (ceiling, never_concede), and £1.84m is under £2m with no forbidden clause in sight, so the deal was within command. The author is named and signed. And approval was never something that happened after the price landed - it was the act of issuing and signing the mandate before the agent ran. The human in command did one thing, once, in advance, and the record carries it forward through every deal struck under it.
 
-The distinction the example makes plain: take the issuer and signature away and you are left with a fence, a constraint with no one behind it. Put them back and the same record becomes a command, with a name on it that answers for whatever the agent does inside the limits.
+The distinction the example makes plain: take the issuer and signature away and you're left with a fence, a constraint with no one behind it. Put them back and the same record becomes a command, with a name on it that answers for whatever the agent does inside the limits.
 
 Where this stops being flattering to MX
 
 Honesty about the limit matters more than the argument winning.
 
-A decision COG does not make the deal a good one. It records the position the agent took; it doesn't improve the agent's judgement, and it will faithfully record a bad bargain struck badly. Attestation signs the bytes, never the wisdom. A signed mandate that was loosely drawn produces a signed record of a loss. MX makes the deal reconstructable and assigns it an author. It does not make the deal sound. That work stays with whoever writes the mandate, which is to say it stays with a human.
+A decision COG records the position the agent took rather than making it a good one; it doesn't improve the agent's judgement, and it'll faithfully record a bad bargain struck badly. Attestation signs the bytes, never the wisdom. A signed mandate that was loosely drawn produces a signed record of a loss. MX makes the deal reconstructable and assigns it an author. It doesn't make it sound. That work stays with whoever writes the mandate, which is to say it stays with a human.
 
-And nothing here is read by the platforms doing the negotiating today. The decision, policy and attestation COGs are the publishing-layer answer; the agents transacting at machine speed would have to choose to write and read them. That is the same parallel-layer point the earlier post made about Chrome's lists, now moved to the transaction. MX is not the rule the negotiating agents currently follow. It is the argument that a negotiation worth a seven-figure commitment should leave a record worth the same.
+And nothing here is read by the platforms doing the negotiating today. The decision, policy, and attestation COGs are the publishing-layer answer; the agents transacting at machine speed would have to choose to write and read them. That's the same parallel-layer point the earlier post made about Chrome's lists, now moved to the transaction. MX isn't the rule the negotiating agents currently follow. It's the argument that a negotiation worth a seven-figure commitment should leave a record of equal weight.
 
 The direction the law is taking
 
 The claim has to be made carefully, and the regulatory ground is moving. The EU AI Act's transparency duties - among them telling a person when an automated system is acting - remain on course for August 2026, while the heavier high-risk obligations were deferred under the May 2026 Digital Omnibus agreement. Adjacent regimes, from the data-protection limits on decisions taken by machine alone to the accountability frameworks emerging on both sides of the Atlantic, lean the same way: towards disclosure that a decision was automated, a party responsible for it, and a route to contest it.
 
-The human-in-command model is not a phrase MX coined for the occasion. It is the language European policy reached for years ago, when the European Economic and Social Committee argued for an approach in which machines remain machines and people stay in command of what is transferred to them. The point of repeating it here is that command without a record is a claim no one can check. A mandate that was commanded but never written, a position reached but never recorded, leaves the commander asserting authority over a deal they cannot produce. Command is the doctrine; the COG is what makes the command provable after the fact.
+The human-in-command model isn't a phrase MX coined for the occasion. It's the language European policy reached for years ago, when the European Economic and Social Committee argued for an approach in which machines remain machines and people stay in command of what's transferred to them. The point of repeating it here is that command without a record is a claim no one can check. A mandate that was commanded but never written, a position reached but never recorded, leaves the commander asserting authority over a deal they can't produce. Command is the doctrine; the COG is what makes that command provable after the fact.
 
 Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
-A machine-negotiated contract with no readable mandate and no recorded path is built the opposite way to where the law is heading. The fix is not to forbid the negotiation. It is to make it leave the evidence an accountability regime expects: a declaration with an author, a date, and a record that can be held against its maker later.
+A machine-negotiated contract with no readable mandate and no recorded path is built the opposite way to where the law is heading. The fix isn't to forbid the negotiation. It's to make it leave the evidence an accountability regime expects: a declaration with an author, a date, and a record that can be held against its maker later.
 
 The choice the scenario puts in front of us
 
-Software negotiating with software is not a future worth resisting. It's faster, it's cheaper, and the deals it settles are mostly the dull ones that never needed a human in the first place. The question the scenario asks is not whether to allow it. It's whether each deal vanishes into an exchange no one can reconstruct, or leaves an attested record with a name against it.
+Software negotiating with software isn't a future worth resisting. It's faster, it's cheaper, and the deals it settles are mostly the dull ones that never needed a human in the first place. The question the scenario asks isn't whether to allow it. It's whether each deal vanishes into an exchange no one can reconstruct, or leaves an attested record with a name against it.
 
-The machines can run the negotiation. What they can't do is hold command of it, and command is what the scenario was missing. A human commands the mandate, the machine executes under it, and the deal leaves an attested record of what it agreed, under whose authority, and how it got there. Humans are accountable outlives humans negotiate - not because a person stood in the loop, but because a person stayed in command, and the record proves it.
+The machines can run the negotiation. What they can't do is hold command of it, and command was what the scenario was missing. A human commands the mandate, the machine executes under it, and the deal leaves an attested record of what it agreed, under whose authority, and how it got there. Humans are accountable outlives humans negotiate - not because someone stood in the loop, but because a person stayed in command, and the record proves it.
 
-The negotiation scenario is Birgul Cotelli's, posted on LinkedIn. The decision, policy and attestation COG types are specified in MX: The Protocols and governed through The Gathering.
+The negotiation scenario is Birgul Cotelli's, posted on LinkedIn. The decision, policy, and attestation COG types are specified in MX: The Protocols and governed through The Gathering.
 
 About the author
 
-Tom Cranstoun is the founder of the Machine Experience (MX) community and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd. He started working on computers in 1977 and turned it into his career in 1979.
+Tom Cranstoun is the founder of the MX community and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd. He started working on computers in 1977 and turned it into his career in 1979.
 
 Continue the conversation:
 
@@ -13133,11 +13133,11 @@ Continue the conversation:
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the MX community and author of the forthcoming MX book series. Building content systems since 1977. Areas of focus: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through where your organisation sits on the agent-readiness curve?
+          Want to talk through where your team sits on the agent-readiness curve?
 
             - Get in touch
 
@@ -14349,7 +14349,7 @@ SEO, GEO and AEO describe the page. They don't validate it. The layer underneath
 
             - MX is not a rescue
 
-            - The optimisation tools accelerate the problem
+            - The tuning tools accelerate the problem
 
             - The self-referential listicle, and the irony of getting caught
 
@@ -14367,7 +14367,7 @@ SEO, GEO and AEO describe the page. They don't validate it. The layer underneath
 
         SEO, GEO and AEO are now standard items on every content team's checklist. Search engine tuning aims at Google's ranking systems, generative engine tuning aims at AI answer engines, and answer engine tuning aims at the citation slots inside those answers. Each discipline has its own playbook, its own tooling, and its own vendors selling volume.
 
-        The disciplines are fine. The mistake is treating them as ingredients to add to a page without considering whether it is worth ranking, quoting, or citing in the first place. Adding SEO, GEO and AEO to the mix without considering content quality is the error. Decorating a page with rich snippets, FAQ schema, and answer-ready bullets isn't the same as creating a high-quality, fact-based resource. The markup describes the content; it doesn't validate it.
+        The disciplines are fine. The mistake is treating them as ingredients to add to a page without considering whether it is worth ranking, quoting, or citing in the first place. Adding SEO, GEO and AEO to the mix without considering content quality is the error. Decorating a page with rich snippets, FAQ schema, and answer-ready bullets describes the content rather than validating it; that's a long way from a high-quality, fact-based resource.
 
         What happens when content quality is the afterthought
 
@@ -14409,9 +14409,9 @@ SEO, GEO and AEO describe the page. They don't validate it. The layer underneath
 
         MX uses a readiness model with levels that build on each other. At the lowest level, a page is simply discoverable: a machine can find it through sitemaps and clean HTML. The next level up is what MX calls Citation readiness, and this is where the effort begins. A page reaches Citation readiness when the facts on it are something the publisher actually holds, facts a machine could quote because they're real, specific, and traceable to the source. Levels above that introduce comparison, registration in public indexes, and third-party audit.
 
-        The point of the ladder is that a page can't reach Citation readiness unless there's something real behind it. The format doesn't invent facts. It makes them legible when they exist. That means climbing the ladder demands the same effort good publishers have always made: getting facts right, knowing your subject, writing things only you can write.
+        The point of the ladder is that a page can't reach Citation readiness unless there's something real behind it. The format makes facts legible when they exist, rather than inventing them. That means climbing the ladder demands the same effort good publishers have always made: getting facts right, knowing your subject, writing things only you can write.
 
-        There's a useful design principle underneath all of this. Interfaces built for machines tend to improve human and accessibility outcomes too. The inverse also holds. Interfaces built to appear machine-ready, with nothing underneath, fail for both audiences. A glossary page stamped out from a template doesn't help a human, because the same answer sits on the first ten results already. It doesn't help a machine either, because there's no way of checking where the claim came from.
+        There's a useful design principle underneath all of this. Interfaces built for machines tend to improve human and accessibility outcomes too. The inverse also holds. Interfaces built to appear machine-ready, with nothing underneath, fail for both audiences. A glossary page stamped out from a template leaves both audiences cold: a human finds the same answer on the first ten results already, and a machine has no way of checking where the claim came from.
 
         MX predicts the failure pattern structurally rather than as a moral observation. Sites running these templated approaches are discoverable but nothing more. They can't reach Citation readiness because there's no fact-level clarity behind the content. The facts were generated to fill a slot, with no source to point toward. When ranking systems accumulate enough signal that the pages are interchangeable across publishers, the ranking evaporates.
 
@@ -14421,7 +14421,7 @@ SEO, GEO and AEO describe the page. They don't validate it. The layer underneath
 
         MX gives good content a structure that machines can verify, and gives auditors something to look at that isn't opinion, rather than protecting bad content from ranking collapses. The discipline is the same as it has always been: write things only you can write, get facts right, take responsibility for what you publish. MX makes that effort portable. It doesn't replace it.
 
-        Optimisation tools accelerate the problem
+        Tuning tools accelerate the problem
 
         The clearest response from the enterprise content world to the rise of AI-driven discovery is a new generation of GEO and answer-engine tuning products. Adobe's LLM Optimizer is the most prominent of these, integrated natively with Adobe Experience Manager and pitched to enterprise marketing teams as the way to monitor AI-driven traffic and improve generative-engine citation. Other vendors are building comparable tooling, and those features will appear inside most enterprise content platforms within the next year.
 
@@ -14443,29 +14443,29 @@ SEO, GEO and AEO describe the page. They don't validate it. The layer underneath
 
         One specific pattern is worth pulling out, because it shows the failure mode in its purest form. The self-promotional "best of" listicle, a "Top 10 [Category]" post published on a company's own blog where the company places itself at number one, became the dominant GEO tactic of 2025. The mechanic was straightforward. AI assistants liked numbered lists, "best X" queries were among those most commonly put to them, and ranking yourself at position one inside your own listicle was a near-free way to be cited as the leading answer. Reciprocal arrangements emerged, where competitors mutually featured each other in their respective listicles in exchange for the same favour. Year-swap refreshes, changing "2024" to "2025" to "2026" in the title without updating the body, were standard practice.
 
-        It worked, until it stopped working very visibly in January 2026. After the December 2025 core update, ranking volatility through January correlated with steep visibility losses at SaaS and B2B brands whose blogs were heavily populated with self-promotional listicles. Affected sites lost 30 to 50% of organic visibility within weeks. A Google spokesperson subsequently told The Verge that pages created specifically to place a website's own products in the top spot of competitor roundups are considered a form of manipulation, and that sites doing this may be hit by Google's spam algorithms.
+        It worked, until it stopped working very visibly in January 2026. After the December 2025 core update, volatility through January correlated with steep traffic losses at SaaS and B2B brands whose blogs were heavily populated with self-promotional listicles. Affected sites lost 30 to 50% of organic reach within weeks. A Google spokesperson subsequently told The Verge that pages created specifically to place a website's own products in the top spot of competitor roundups are considered a form of manipulation, and that sites doing this may be hit by Google's spam algorithms.
 
-        The interesting part is what happens to the visibility those listicles used to capture. Independent analysis showed it moving toward primary sources, official sites, institutional destinations, branded specialists, rather than disappearing. In practical terms, the company that ranked itself number one in its own listicle didn't just lose its ranking. The visibility it had captured got redistributed to the competitors it had named in positions two through ten, and to genuinely independent third-party sources covering the same category. Ranking yourself first becomes evidence that the page isn't trustworthy, and the trustworthiness gets handed to whoever the page mentioned next.
+        The interesting part is what happens to the reach those listicles used to capture. Independent analysis showed it moving toward primary sources, official sites, institutional destinations, branded specialists, rather than disappearing. In practical terms, the company that ranked itself number one in its own listicle didn't just lose its position. The traffic it had captured got redistributed to the competitors it had named in positions two through ten, and to genuinely independent third-party sources covering the same category. Ranking yourself first becomes evidence that a result isn't trustworthy, and the trustworthiness transfers to whoever the list mentioned next.
 
-        The irony is structural. The publisher writing the listicle is the only entity making first-party claims that can't be cross-checked against anything. Every other name on the list is a third-party reference. Once ranking systems learn to weight third-party references more heavily than first-party self-claims, which is what cross-referencing against other sources amounts to, the listicle becomes a promotional vehicle for everyone except its publisher. Google didn't have to design that penalty; it follows naturally from trusting verifiable references over unverifiable assertions.
+        The irony is structural. The publisher writing the listicle is the only entity making first-party claims that can't be cross-checked against anything. Every other name on the list is a third-party reference. Once ranking systems learn to weight those third-party references more heavily than first-party self-claims, which is what cross-referencing against other sources amounts to, the listicle becomes a promotional vehicle for everyone except its publisher. Google didn't have to design that penalty; it follows naturally from trusting verifiable references over unverifiable assertions.
 
-        This is the failure pattern in a single page. The page reaches discoverability easily. It can't reach Citation readiness because the central claim ("we are the best") is unverifiable by construction. The provenance gap isn't philosophical here; it's the literal reason the page fails. The optimisation tooling that recommended publishing listicles like this had no mechanism to flag the problem either, because the problem isn't visible in the format: it's visible only in the relationship between the claim and the publisher.
+        This is the failure pattern in a single page. The content reaches discoverability easily. It can't reach Citation readiness because the central claim ("we are the best") is unverifiable by construction. The provenance gap isn't philosophical here; it's the literal reason the page fails. The tuning tooling that recommended publishing listicles like this had no mechanism to flag the gap either, because it isn't visible in the format: it's visible only in the relationship between the claim and the publisher.
 
         A diagnostic question
 
-        One test does most of the work. Could a competitor publish a near-identical version of this page tomorrow using the same prompt? If yes, the page exists for the index rather than for either reader. Pages that pass this test carry something specific. Pages that fail it carry nothing distinctive enough to be worth pointing at.
+        One test does most of the work. Could a competitor publish a near-identical version of this page tomorrow using the same prompt? If yes, the page exists for the index rather than for either reader. Pages that pass this test carry something specific. Pages that fail it have nothing distinctive enough to earn a citation.
 
         Bottom line
 
-        The packaging keeps changing: AI-first SEO, GEO programmes, AEO for citation slots. The pattern stays the same. Sites that come through each ranking cycle best are the ones that put quality, originality, and topical focus ahead of volume. Decorating a page with rich snippets isn't the same as creating a high-quality, fact-based resource, and ranking systems are getting better at telling the two apart.
+        The packaging keeps changing: AI-first SEO, GEO programmes, AEO for citation slots. The underlying pattern stays the same. Sites that come through each ranking cycle best are the ones that put quality, originality, and topical focus ahead of volume. Decorating a page with rich snippets isn't the same as creating a high-quality, fact-based resource, and ranking systems are getting better at telling the two apart.
 
-        MX makes the alternative concrete. A readiness model that rewards fact-level clarity. A structured-content layer that carries provenance. A standard that lets machines verify what they are reading rather than guess. The work is not different in kind from what good publishers have always done. It is the same work, made legible to a wider audience: the machines now reading the web on behalf of the humans who used to do it themselves.
+        MX makes the alternative concrete. A readiness model that rewards fact-level clarity. A structured-content layer that carries provenance. A standard that lets machines verify what they're reading rather than guess. The effort isn't different in kind from what good publishers have always made. It's the same work, made legible to a wider audience: the machines now reading the web on behalf of the humans who used to do it themselves.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series. Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd, trading as CogNovaMX.
+            Founder at Machine Experience and author of the MX book series. Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd, trading as CogNovaMX.
 
           Continue the conversation
 
@@ -16506,7 +16506,7 @@ When browsers classify your site by inference, in private, and act on that class
 
         A Classification Is a Decision
 
-        Calling these lists and models "classification" softens what they do. A classification is a decision. The shopping model decides whether you trade. The block list decides whether an agent may act on you. The semantic-memory list decides whether you're remembered by meaning or not remembered at all. Each is a determination made about a party, by an automated system, with consequences for that party. That's the category law has started to take an interest in.
+        Calling these lists and models "classification" softens what they do. A classification is a decision. The shopping model decides whether you trade. The block list decides whether an agent may act on you. The semantic-memory list decides whether you're remembered by meaning or not remembered at all. Each is a determination made about a subject, by an automated system, with consequences for that subject. That's the category law has started to take an interest in.
 
         Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
@@ -16514,25 +16514,25 @@ When browsers classify your site by inference, in private, and act on that class
 
         The claim has to be made carefully. A browser's shopping classifier is almost certainly not a high-risk system under the Act, and nothing here says any company is in breach of anything. The point is the direction, not a particular clause. Regulation is moving steadily towards disclosure that a decision was automated, a party responsible for it, and a route to contest it. The classification pattern is built the other way: the decision is undisclosed, the responsible party is unnamed, and there's no route to contest a verdict you can't see. Whatever the law demands of any single system today, a web run on opaque automated decisions runs against the direction the law is taking.
 
-        This marks the narrow and accurate place MX occupies. MX doesn't regulate the model; that's what law is for. What it offers sits on the other side of the relationship - a way for the party being decided about to keep an accountable record of its own. A declaration with an author, a signature and a date is the kind of evidence an accountability regime expects: structured, queryable, checkable, able to be held against its maker later. MX makes that evidence; it doesn't make anyone compliant, and it doesn't make a model behave. But it means that when the question of who said what, and on what basis, finally has to be answered, the declaring side has something to show. The inferring side, unless the law compels it, still has nothing.
+        This is the narrow and accurate place MX occupies. MX doesn't regulate the model; that's what legislation is for. What it offers is on the other side of the relationship - a way for the subject being decided about to keep an accountable record of its own. A declaration with an author, a signature and a date is the kind of evidence an accountability regime expects: structured, queryable, checkable, able to be held against its maker later. MX makes that evidence; it doesn't make anyone compliant, and it doesn't make a model behave. But it means that when the question of who said what, and on what basis, finally has to be answered, the declaring side has something to show. The inferring side, unless law compels it, still has nothing.
 
         A Frontier with No Shared Rules
 
-        Chrome is the rulebook that has been measured, but there's no agreed standard beneath any of these systems. Each writes its own, and Google has written one and shipped it inside Chrome. It doesn't publish it, doesn't explain how a site lands on a list, and offers no route to read or contest the entries. The figures here surfaced through reverse engineering, not disclosure. That's the frontier as it stands: the party that ships the browser writes the rules, writes them for itself, and keeps them to itself.
+        Chrome is the rulebook that has been measured, but there's no agreed standard beneath any of these systems. Each keeps its own, and Google has written one and shipped it inside Chrome. It doesn't publish the list, doesn't explain how a site lands on it, and offers no route to read or contest the entries. The figures here surfaced through reverse engineering, not disclosure. That's the frontier as it stands: whoever ships the browser sets the rules, sets them for themselves, and keeps them private.
 
         The fracture runs inside Google as much as between vendors. In the same month, its Search guidance told site owners not to bother making machine-readable files for AI, while its browser tooling began auditing pages for exactly those signals - a summary file for agents, semantic markup, a clean accessibility tree. That last signal is the Convergence Principle in Google's own tooling: the accessibility tree an agent reads is the structure a screen reader reads, so building for one builds for the other. One arm of the company says declarations for machines aren't worth making; another checks whether you have made them. If a single company's own products can't agree on whether to read what a site declares, a site has no fixed target to build towards. The rules aren't only unshared between vendors; they're unsettled within them.
 
-        Chunking shows the same split, and resolves it tellingly. The Search guidance tells site owners not to chunk their content for AI, to leave their pages whole. Google's cloud tooling, in the same period, tells developers building on its models to chunk documents with care - tune the chunk size, set the overlap, run a layout-aware parser so the pieces keep their meaning. Both are Google's advice. The reconciliation is the revealing part: don't chunk your content, because the machine will chunk it for you, exactly as Chrome's classifier already does when it splits a page into hundred-word pieces. Deciding where your meaning begins and ends is reserved to the reader, not granted to the writer - the inference stance in miniature. The site supplies the text; the machine keeps the right to cut it up and rule on what it meant.
+        Chunking shows the same split, and resolves it tellingly. The Search guidance tells owners not to segment their content for AI, to leave their pages whole. Google's cloud tooling, in the same period, tells developers building on its models to split documents with care - tune the segment size, set the overlap, run a layout-aware parser so the pieces keep their meaning. Both are Google's advice. The reconciliation is the revealing part: don't segment your content, because the machine will do it for you, exactly as Chrome's classifier already does when it splits a page into hundred-word pieces. Deciding where your meaning begins and ends is reserved to the reader, not granted to the writer - the inference stance in miniature. The site supplies the text; the machine keeps the right to cut it up and rule on what it meant.
 
-        This is the case for community-led standards, and it's why The Gathering exists as an independent body rather than a product feature. A standard a site can read, implement and help shape is the alternative to a register it can't see. The COG format and the registry concept are open and governed in common for that reason; REGINALD is one implementation of them, not the standard itself. The point of holding the two apart is that the rules don't belong to whoever happens to own the most-used implementation.
+        This is the case for community-led standards, and it's why The Gathering exists as an independent body rather than a product feature. A standard a site can read and help shape is the alternative to a register it can't see. The COG format and the registry concept are open and governed in common for that reason; REGINALD is one implementation of them, not the standard itself. The point of holding the two apart is that the rules don't belong to whoever happens to own the most-used implementation.
 
-        The alternative isn't neutral ground. If the community doesn't set these rules, the rules still get set - by whoever ships the binary, in private, to suit their own ends. The absence of a shared standard isn't the absence of rules. It's ground claimed by default, and we're watching it be claimed.
+        There's no neutral ground here. When the community doesn't set these standards, they still get set - by whoever ships the binary, in private, to suit their own ends. Without a shared standard, rules don't disappear. They're just claimed by default, and we're watching that happen.
 
         The Question the Finding Leaves Open
 
         The open question is whether declared, attested signals will ever feed classifications of this kind, or whether vendors will keep deciding alone - and whether the standard those signals follow is one anyone can read, or one held inside a browser.
 
-        The MX position is clear. A site states what it is and how it wishes machines to treat it. The statement is attested so a reader can trust its origin and integrity. The human stays in the loop for editorial judgement, which no signature should ever stand in for. None of this requires Google to adopt anything. It requires only that we're clear about the choice the research puts in front of us: a web where machines guess and gatekeep in private, or one where sites declare in the open. Chrome has shown us the first at scale. The second is still ours to build.
+        The MX position is clear. A site states what it's for and how it wishes machines to treat it. The statement is attested so a reader can trust its origin and integrity. The human stays in the loop for editorial judgement, which no signature should ever replace. None of this requires Google to adopt anything. It requires only that we're clear about the choice the research puts in front of us: a web where machines guess and gatekeep in private, or one where sites declare in the open. Chrome has shown the first at scale. The second is still ours to build.
 
         The Chrome classification research is RESONEO's, published at think.resoneo.com. The shopping-classifier reverse engineering is Dan Petrovic's at Dejan.
 
@@ -16544,7 +16544,7 @@ When browsers classify your site by inference, in private, and act on that class
 
           Declare your machine policy
 
-          We help organisations publish attested, machine-readable signals for how their content should be treated by any machine that encounters it. Read our services or get in touch.
+          We help teams publish attested, machine-readable signals for how their content should be treated by any machine that encounters it. Read our services or get in touch.
 
             - CogNovaMX services
 
@@ -17006,7 +17006,7 @@ It cares that this site tracks stock prices, not what Apple's price is right now
 
 When you server-render your Vue application, you aren't helping Common Crawl capture your dynamic data. You're helping it understand your site's purpose and structure. The content in your HTML provides context: navigation labels, section headings, explanatory text, metadata.
 
-A client-side rendered app gives Common Crawl almost nothing to work with. A server-rendered version gives it the information architecture, the content categories, the relationships between sections, the material that actually matters for understanding what the site does.
+A client-side rendered app gives Common Crawl almost nothing usable. A server-rendered version gives it the information architecture, the content categories, the relationships between sections, the material that actually matters for understanding what the site does.
 
 Why Google takes a different approach
 
@@ -17020,7 +17020,7 @@ The Machine Experience angle
 
 This is where Machine Experience becomes relevant. If you want AI systems to understand your site, give them context and structure, not dynamic values.
 
-Server-side rendering helps because it puts your information architecture into the HTML. Your navigation structure, content hierarchy, section purposes, metadata, all the material that helps a scraper understand what your site is about.
+Server-side rendering helps because it puts your information architecture into the HTML. Your navigation structure, content hierarchy, section purposes, metadata, all the material a scraper needs to understand your site.
 
 But you don't need to server-render every dynamic value. If your countdown timer shows "23 days, 4 hours, 17 minutes", Common Crawl doesn't need that precision. It needs to understand "this site has event-countdown functionality."
 
@@ -17104,7 +17104,7 @@ Common Crawl isn't an AI agent. Its bot, CCBot, is a scraper that visits HTML pa
 
 The MX caveat
 
-robots.txt is a voluntary signalling mechanism, not a legal enforcement mechanism. It expresses preferences, not permissions. CCBot respects it. Not every bot calling itself a crawler does. For sites you care about, verify the traffic by IP and reverse DNS rather than trusting the user-agent string alone, and assume that any rule designed to keep content out of AI training is honoured by the well-behaved scrapers and ignored by the rest.
+robots.txt is a voluntary signalling mechanism, not a legal enforcement tool. It expresses preferences, not permissions. CCBot respects it. Not every bot calling itself a crawler does. For sites you care about, verify the traffic by IP and reverse DNS rather than trusting the user-agent string alone, and assume that any rule designed to keep content out of AI training is honoured by the well-behaved scrapers and ignored by the rest.
 
 The llms.txt problem stands separately
 
@@ -17169,7 +17169,7 @@ export default {
 
 Sitemap inclusion is what tells Common Crawl the URL exists at all. HTML wrapping is what makes it index the content once it arrives.
 
-The full recipe, including the production version of the wrapper (which also injects JSON-LD, OG, and Twitter metadata into the wrapper <head> so the page carries proper agent-facing signals), is in the companion post: Why llms.txt Isn't Working, and How to Fix It.
+The full recipe, including the production version of the wrapper (which also injects JSON-LD, OG, and Twitter card metadata into the <head> so the page carries proper agent-facing signals), is in the companion post: Why llms.txt Isn't Working, and How to Fix It.
 
 Why this matters
 
@@ -17253,7 +17253,7 @@ Client-side rendering isn't inherently bad for AI consumption. A React app with 
 
 The problem is when all your content is generated client-side. When the only HTML is <div id="app"></div>, there's nothing for a scraper to find.
 
-Server-side rendering helps not because it captures your dynamic data, but because it ensures your structure and context exist in the HTML that scrapers actually see.
+Server-side rendering helps not because it captures your dynamic data, but because it puts your structure and context into the HTML that scrapers actually see.
 
 The MX perspective: serving machine users
 
@@ -17372,7 +17372,7 @@ With the context:
 
   - Correct reasoning: "I need to query live data, not use this cached page."
 
-This is core MX: give machines the context they need to reason correctly, rather than forcing them to guess. The tag provides sovereign data about the page itself, meta-information that prevents incorrect assumptions about data validity.
+This is core MX: give machines the context they need to reason correctly, rather than forcing them to guess. The tag provides sovereign metadata about the page itself, information that prevents incorrect assumptions about what values can be trusted.
 
 Don't make AI think. Give it the context.
 
@@ -17395,9 +17395,9 @@ For a news article (static once published):
 
 <!-- No tag needed, absence means content="false" -->
 
-Whether browser extensions, AI browsers, training pipelines, or agent frameworks adopt this convention depends on broader take-up of MX principles. The discipline proposes it because it addresses a real need: helping machines distinguish data they can trust from a snapshot versus data they need to query live or ignore entirely.
+Whether browser extensions, AI browsers, training pipelines, or agent frameworks adopt this convention depends on broader take-up of MX principles. The discipline proposes it because it addresses a real need: helping machines distinguish values they can trust from a snapshot versus values they need to query live or ignore entirely.
 
-This maintains MX principles while acknowledging that not all dynamic content has the same temporal validity. The page structure, navigation, metadata, and explanatory text remain useful for understanding. The specific numbers at any given moment require different handling.
+This maintains MX principles while acknowledging that not all dynamic content has the same temporal validity. The page structure, navigation, and explanatory text remain useful for understanding. The specific numbers at any given moment require different handling.
 
 Looking forward
 
@@ -17405,13 +17405,13 @@ LLMs don't execute JavaScript because they don't learn about the web by visiting
 
 Google executes JavaScript because its business model requires indexing current state for search results. That's a different use case with its own economics.
 
-This distinction changes how you think about making sites AI-accessible. It is not about rendering every dynamic value server-side. It is about making sure your site's purpose, structure, and context exist in the HTML, the part that actually gets scraped, archived, and used for training.
+This distinction changes how you think about making sites AI-accessible. It isn't about rendering every dynamic value server-side. It's about making sure your site's purpose and structure exist in the HTML, the part that actually gets scraped and used for training.
 
-Machine Experience is treating you as having a new class of users, machines, and using existing technology to serve them properly.
+Machine Experience means treating machines as a new class of users and using the tools you already have to serve them properly.
 
 For pages with sovereign data, make that state visible. For pages with ephemeral values, use meta tags and ARIA to signal what updates too rapidly to trust from snapshots.
 
-The technology already exists. ARIA already marks content for non-visual consumption. Meta tags already provide page-level context. You aren't inventing new standards, you are treating machines as users and applying the same UX thinking you use for humans.
+The technology already exists. ARIA already marks content for non-visual consumption. Meta tags already provide page-level context. You aren't inventing new standards, you're treating machines as users and applying the same UX thinking you use for humans.
 
 That's Machine Experience: understanding what your machine users need, and using the tools you already have to serve them.
 
@@ -17419,7 +17419,7 @@ That's Machine Experience: understanding what your machine users need, and using
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Works on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the MX community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Works on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 

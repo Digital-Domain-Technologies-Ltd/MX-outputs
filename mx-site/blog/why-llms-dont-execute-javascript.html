@@ -279,7 +279,7 @@ mx:
 
 <p>When you server-render your Vue application, you aren't helping Common Crawl capture your dynamic data. You're helping it understand your site's purpose and structure. The content in your HTML provides context: navigation labels, section headings, explanatory text, metadata.</p>
 
-<p>A client-side rendered app gives Common Crawl almost nothing to work with. A server-rendered version gives it the information architecture, the content categories, the relationships between sections, the material that actually matters for understanding what the site does.</p>
+<p>A client-side rendered app gives Common Crawl almost nothing usable. A server-rendered version gives it the information architecture, the content categories, the relationships between sections, the material that actually matters for understanding what the site does.</p>
 
 <h2 id="google-different" tabindex="-1">Why Google takes a different approach</h2>
 
@@ -293,7 +293,7 @@ mx:
 
 <p>This is where Machine Experience becomes relevant. If you want AI systems to understand your site, give them context and structure, not dynamic values.</p>
 
-<p>Server-side rendering helps because it puts your information architecture into the HTML. Your navigation structure, content hierarchy, section purposes, metadata, all the material that helps a scraper understand what your site is about.</p>
+<p>Server-side rendering helps because it puts your information architecture into the HTML. Your navigation structure, content hierarchy, section purposes, metadata, all the material a scraper needs to understand your site.</p>
 
 <p>But you don't need to server-render every dynamic value. If your countdown timer shows "23 days, 4 hours, 17 minutes", Common Crawl doesn't need that precision. It needs to understand "this site has event-countdown functionality."</p>
 
@@ -373,7 +373,7 @@ mx:
 
 <h3>The MX caveat</h3>
 
-<p><code>robots.txt</code> is a voluntary signalling mechanism, not a legal enforcement mechanism. It expresses preferences, not permissions. CCBot respects it. Not every bot calling itself a crawler does. For sites you care about, verify the traffic by IP and reverse DNS rather than trusting the user-agent string alone, and assume that any rule designed to keep content out of AI training is honoured by the well-behaved scrapers and ignored by the rest.</p>
+<p><code>robots.txt</code> is a voluntary signalling mechanism, not a legal enforcement tool. It expresses preferences, not permissions. CCBot respects it. Not every bot calling itself a crawler does. For sites you care about, verify the traffic by IP and reverse DNS rather than trusting the user-agent string alone, and assume that any rule designed to keep content out of AI training is honoured by the well-behaved scrapers and ignored by the rest.</p>
 
 <h3>The llms.txt problem stands separately</h3>
 
@@ -439,7 +439,7 @@ mx:
 
 <p>Sitemap inclusion is what tells Common Crawl the URL exists at all. HTML wrapping is what makes it index the content once it arrives.</p>
 
-<p>The full recipe, including the production version of the wrapper (which also injects JSON-LD, OG, and Twitter metadata into the wrapper <code>&lt;head&gt;</code> so the page carries proper agent-facing signals), is in the companion post: <a href="llms-txt-guide.html">Why llms.txt Isn't Working, and How to Fix It</a>.</p>
+<p>The full recipe, including the production version of the wrapper (which also injects JSON-LD, OG, and Twitter card metadata into the <code>&lt;head&gt;</code> so the page carries proper agent-facing signals), is in the companion post: <a href="llms-txt-guide.html">Why llms.txt Isn't Working, and How to Fix It</a>.</p>
 
 <h3>Why this matters</h3>
 
@@ -518,7 +518,7 @@ This site is optimised for LLM understanding...
 
 <p>The problem is when all your content is generated client-side. When the only HTML is <code>&lt;div id="app"&gt;&lt;/div&gt;</code>, there's nothing for a scraper to find.</p>
 
-<p>Server-side rendering helps not because it captures your dynamic data, but because it ensures your structure and context exist in the HTML that scrapers actually see.</p>
+<p>Server-side rendering helps not because it captures your dynamic data, but because it puts your structure and context into the HTML that scrapers actually see.</p>
 
 <h2 id="mx-perspective" tabindex="-1">The MX perspective: serving machine users</h2>
 
@@ -636,7 +636,7 @@ This site is optimised for LLM understanding...
   <li>Correct reasoning: "I need to query live data, not use this cached page."</li>
 </ul>
 
-<p>This is core MX: <strong>give machines the context they need to reason correctly, rather than forcing them to guess</strong>. The tag provides sovereign data about the <em>page itself</em>, meta-information that prevents incorrect assumptions about data validity.</p>
+<p>This is core MX: <strong>give machines the context they need to reason correctly, rather than forcing them to guess</strong>. The tag provides sovereign metadata about the <em>page itself</em>, information that prevents incorrect assumptions about what values can be trusted.</p>
 
 <p>Don't make AI think. Give it the context.</p>
 
@@ -663,9 +663,9 @@ This site is optimised for LLM understanding...
 <pre><code class="language-html">&lt;!-- No tag needed, absence means content="false" --&gt;
 </code></pre>
 
-<p>Whether browser extensions, AI browsers, training pipelines, or agent frameworks adopt this convention depends on broader take-up of MX principles. The discipline proposes it because it addresses a real need: helping machines distinguish data they can trust from a snapshot versus data they need to query live or ignore entirely.</p>
+<p>Whether browser extensions, AI browsers, training pipelines, or agent frameworks adopt this convention depends on broader take-up of MX principles. The discipline proposes it because it addresses a real need: helping machines distinguish values they can trust from a snapshot versus values they need to query live or ignore entirely.</p>
 
-<p>This maintains MX principles while acknowledging that not all dynamic content has the same temporal validity. The page structure, navigation, metadata, and explanatory text remain useful for understanding. The specific numbers at any given moment require different handling.</p>
+<p>This maintains MX principles while acknowledging that not all dynamic content has the same temporal validity. The page structure, navigation, and explanatory text remain useful for understanding. The specific numbers at any given moment require different handling.</p>
 
 <h2 id="looking-forward" tabindex="-1">Looking forward</h2>
 
@@ -673,13 +673,13 @@ This site is optimised for LLM understanding...
 
 <p>Google executes JavaScript because its business model requires indexing current state for search results. That's a different use case with its own economics.</p>
 
-<p>This distinction changes how you think about making sites AI-accessible. It is not about rendering every dynamic value server-side. It is about making sure your site's purpose, structure, and context exist in the HTML, the part that actually gets scraped, archived, and used for training.</p>
+<p>This distinction changes how you think about making sites AI-accessible. It isn't about rendering every dynamic value server-side. It's about making sure your site's purpose and structure exist in the HTML, the part that actually gets scraped and used for training.</p>
 
-<p><strong>Machine Experience is treating you as having a new class of users, machines, and using existing technology to serve them properly.</strong></p>
+<p><strong>Machine Experience means treating machines as a new class of users and using the tools you already have to serve them properly.</strong></p>
 
 <p>For pages with sovereign data, make that state visible. For pages with ephemeral values, use meta tags and ARIA to signal what updates too rapidly to trust from snapshots.</p>
 
-<p>The technology already exists. ARIA already marks content for non-visual consumption. Meta tags already provide page-level context. You aren't inventing new standards, you are treating machines as users and applying the same UX thinking you use for humans.</p>
+<p>The technology already exists. ARIA already marks content for non-visual consumption. Meta tags already provide page-level context. You aren't inventing new standards, you're treating machines as users and applying the same UX thinking you use for humans.</p>
 
 <p>That's Machine Experience: understanding what your machine users need, and using the tools you already have to serve them.</p>
 
@@ -692,7 +692,7 @@ This site is optimised for LLM understanding...
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Works on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the MX community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Works on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
