@@ -125,7 +125,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1588,
+        "wordCount": 1607,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -197,7 +197,7 @@ mx:
           <ul>
         <li><a href="#what-dream-does">What Dream does</a></li>
         <li><a href="#why-cog-driven">Why COG-driven</a></li>
-        <li><a href="#why-random-selection">Why random selection</a></li>
+        <li><a href="#why-order-does-not-matter">Why order does not matter</a></li>
         <li><a href="#processed-files-go-to-archive">Processed files go to archive</a></li>
         <li><a href="#what-this-means-for-learningsmd">What this means for LEARNINGS.md</a></li>
         <li><a href="#where-dream-sits-in-the-ml-landscape">Where Dream sits in the ML landscape</a></li>
@@ -207,18 +207,18 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1588">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1607">
         <header class="article-header">
           <h1>Dream: COG-driven mistake mining for Claude Code</h1>
           <div class="article-meta"
                data-published="2026-06-14"
                data-modified="2026-06-14"
-               data-reading-time="8 min">
+               data-reading-time="9 min">
             <time datetime="2026-06-14">14 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>8 min read</span>
+            <span>9 min read</span>
           </div>
           <ul class="article-tags" aria-label="Tags"><li><a href="index.html#tags=dream" rel="tag">Dream</a></li><li><a href="index.html#tags=claude-code" rel="tag">Claude Code</a></li><li><a href="index.html#tags=mistake-mining" rel="tag">Mistake Mining</a></li><li><a href="index.html#tags=cogs" rel="tag">COGs</a></li><li><a href="index.html#tags=ollama" rel="tag">Ollama</a></li><li><a href="index.html#tags=local-llm" rel="tag">Local Llm</a></li><li><a href="index.html#tags=determinism" rel="tag">Determinism</a></li></ul>
         </header>
@@ -254,11 +254,10 @@ mx:
 <p>That is the whole contract. The COG is the specification. The script is the executor. A new contributor who wants to understand what <code>session-structural-patterns</code> does reads the COG - not the script, not the memory, not a conversation. The COG travels with the repo.</p>
 <p>Want to understand what the COG actually says - the specific extraction rules, the exact Ollama prompt schema, the dedup algorithm? Join us to understand.</p>
 <hr>
-<h2 id="why-random-selection" tabindex="-1">Why random selection</h2>
-<p>I could have Dream run every dream type on every invocation. I didn't, for two reasons.</p>
-<p>First, session transcripts grow fast. Running ten extraction passes over thousands of JSONL lines on every <code>/dream</code> invocation would be slow. One pass is fast.</p>
-<p>Second, variety. If the script always ran in the same order, the first dream type would get all the attention and the others would accumulate a backlog. Random selection means that over many runs, every dream type gets exercised roughly equally. The long tail gets covered.</p>
-<p>The randomness is the only non-deterministic step in the pipeline. Everything else - which session files to scan, which candidates to extract, which hashes to skip, what Ollama receives - is fully determined by the input state. And the random choice is logged, so if I want to understand what a specific run did, or reproduce it, I can see exactly which COG was selected and pass <code>--dream &lt;dreamtype&gt;</code> to fix it next time.</p>
+<h2 id="why-order-does-not-matter" tabindex="-1">Why order does not matter</h2>
+<p>Dream runs every dream type on each invocation, looping through them until all are done. The order it takes them in does not matter, and that independence is the point: no dream relies on another having run first, so the catalogue is the same however the run sequences them. &quot;Pick one at random&quot; was always shorthand for this - order is not a dependency.</p>
+<p>That independence is what lets the deterministic part carry the load. Each dream's extraction is fully determined by its scan target and the input state: which files to scan, which candidates to extract, which hashes to skip, what Ollama receives. The only judgement is the per-candidate classification, and even that is gated by the dedup hash, so the same mistake is never classified twice. Run the dreams in any order, on any day, and the findings converge on the same result.</p>
+<p>To focus on a single dream type, pass <code>--dream &lt;dreamtype&gt;</code>.</p>
 <hr>
 <h2 id="processed-files-go-to-archive" tabindex="-1">Processed files go to archive</h2>
 <p>After a full dream run, the session JSONL files that were processed move to <code>datalake/dream-files/_archive/</code>. The archive folder is gitignored - these are machine-local transcripts, not repo state.</p>
@@ -278,12 +277,12 @@ mx:
 <p>There's a governance framing that also holds up. The EU AI HLEG calls the right model &quot;Human-in-Command&quot; - not human-in-the-loop (a human present at every decision) but human in command (a human who holds authority over when and how the system operates). Dream is built on that principle. The output boundary is the enforcement mechanism: Dream writes only inside <code>datalake/dream-files/</code>. It cannot touch <a href="http://LEARNINGS.md">LEARNINGS.md</a>, cannot edit a cog, cannot act outside its declared scope. The human reads the report and decides what to promote. That's HIC in practice - the machine mines, the human commands.</p>
 <hr>
 <h2 id="running-it" tabindex="-1">Running it</h2>
-<pre><code class="language-bash">/dream                                    # pick a dream COG at random and run
+<pre><code class="language-bash">/dream                                    # run every dream COG, in any order, until all are done
 node scripts/dream.cjs --dry-run          # extract candidates, no Ollama, no writes
 node scripts/dream.cjs --dream session-tool-errors  # fix the COG selection
 </code></pre>
 <p>Ollama needs to be running locally (<code>ollama serve</code>). The default model is <code>gpt-oss:20b</code>. No session content reaches any external service.</p>
-<p>After a run, read <code>datalake/dream-files/YYYY-MM-DD/&lt;dreamtype&gt;-report.md</code> - each run writes to a dated subfolder so the history accumulates without overwriting. Promote anything useful to <a href="http://LEARNINGS.md">LEARNINGS.md</a> or the relevant gotcha cog. Commit <code>findings.jsonl</code>, <code>exclusions.jsonl</code>, and <code>report.md</code> together from the dated folder.</p>
+<p>After a run, read <code>datalake/dream-files/YYYY-MM-DD/&lt;dreamtype&gt;-report.md</code> - findings and report write to a dated subfolder so the history accumulates without overwriting, while the per-type <code>exclusions.jsonl</code> and resume state persist flat at the root so dedup holds across runs. Promote anything useful to <a href="http://LEARNINGS.md">LEARNINGS.md</a> or the relevant gotcha cog. Commit the dated <code>findings.jsonl</code> and <code>report.md</code> together with the updated root <code>exclusions.jsonl</code>.</p>
 
 
       </article>

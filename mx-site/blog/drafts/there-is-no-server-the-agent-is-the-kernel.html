@@ -9,13 +9,13 @@ title: "There Is No Server. The Agent Is the Kernel."
 description: "Every operating system before MX needed installation. MX OS doesn't. The AI agent reading structured files is both the kernel and the shell. This post explains what that means, why it matters, and why it isn't just an AI story."
 author: Tom Cranstoun
 created: "2026-06-14"
-modified: "2026-06-14"
+modified: "2026-06-15"
 version: "0.1"
 mx:
   status: draft
   contentType: blog-post
   audience: [humans, machines]
-  tags: [mx-os, cog, kernel, agent-architecture, machine-layer, files, runtime, open-standard]
+  tags: [mx-os, cog, kernel, agent-architecture, machine-layer, files, runtime, open-standard, dream]
   purpose: "Explain the central architectural insight of MX OS: the agent is the runtime, the files are the platform, and the OS doesn't need to be installed; it needs to be written."
   stability: draft
   x-mx-contextProvides:
@@ -112,7 +112,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1125,
+        "wordCount": 1397,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -185,6 +185,8 @@ mx:
         <li><a href="#what-makes-something-an-operating-system">What makes something an operating system</a></li>
         <li><a href="#the-boot-sequence">The boot sequence</a></li>
         <li><a href="#files-are-the-platform">Files are the platform</a></li>
+        <li><a href="#the-os-that-learns-between-runs">The OS that learns between runs</a></li>
+        <li><a href="#the-os-remembers-between-clones">The OS remembers between clones</a></li>
         <li><a href="#this-is-not-an-ai-story">This is not an AI story</a></li>
         <li><a href="#the-three-cogs">The three COGs</a></li>
           </ul>
@@ -192,20 +194,20 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1125">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1397">
         <header class="article-header">
           <h1>There Is No Server. The Agent Is the Kernel.</h1>
           <div class="article-meta"
                data-published="2026-06-14"
                data-modified="2026-06-14"
-               data-reading-time="6 min">
+               data-reading-time="7 min">
             <time datetime="2026-06-14">14 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>6 min read</span>
+            <span>7 min read</span>
           </div>
-          <ul class="article-tags" aria-label="Tags"><li><a href="index.html#tags=mx-os" rel="tag">Mx Os</a></li><li><a href="index.html#tags=cog" rel="tag">Cog</a></li><li><a href="index.html#tags=kernel" rel="tag">Kernel</a></li><li><a href="index.html#tags=agent-architecture" rel="tag">Agent Architecture</a></li><li><a href="index.html#tags=machine-layer" rel="tag">Machine Layer</a></li><li><a href="index.html#tags=files" rel="tag">Files</a></li><li><a href="index.html#tags=runtime" rel="tag">Runtime</a></li><li><a href="index.html#tags=open-standard" rel="tag">Open Standard</a></li></ul>
+          <ul class="article-tags" aria-label="Tags"><li><a href="index.html#tags=mx-os" rel="tag">Mx Os</a></li><li><a href="index.html#tags=cog" rel="tag">Cog</a></li><li><a href="index.html#tags=kernel" rel="tag">Kernel</a></li><li><a href="index.html#tags=agent-architecture" rel="tag">Agent Architecture</a></li><li><a href="index.html#tags=machine-layer" rel="tag">Machine Layer</a></li><li><a href="index.html#tags=files" rel="tag">Files</a></li><li><a href="index.html#tags=runtime" rel="tag">Runtime</a></li><li><a href="index.html#tags=open-standard" rel="tag">Open Standard</a></li><li><a href="index.html#tags=dream" rel="tag">Dream</a></li></ul>
         </header>
 
 
@@ -234,6 +236,12 @@ mx:
 <p>A COG is any file that carries MX metadata in its native format. Markdown files carry it as YAML frontmatter. HTML files carry it as <code>&lt;meta&gt;</code> tags. JavaScript files carry it in JSDoc comments. Shell scripts carry it in comment blocks. PDFs carry it as XMP metadata.</p>
 <p>The carrier changes to match the file format. The semantics stay the same. A deploy script with <code>@mx:status published</code> in its header is as much a COG as the markdown file you are reading now.</p>
 <p>This means the OS works on a USB stick, a laptop, a shared file server, a git repository, a web host, or pasted into a chat window. The visibility model (local, private, shared, hosted) describes where the same file lives, not four different things. MX OS has no platform dependency. The files are the platform.</p>
+<h2 id="the-os-that-learns-between-runs" tabindex="-1">The OS that learns between runs</h2>
+<p>A kernel that only executes is incomplete; this one also improves on itself. Between sessions, the <code>dream</code> skill reads the agent's own transcripts, mines the mistakes that recur, and classifies them with a local model that never sends a byte off the machine. The findings are recommendations, written to a bounded area. They do not edit the rulebook. A human reads them and decides what becomes a permanent rule.</p>
+<p>So the agent is the kernel during a run and the miner of its own history between runs, but the authority to change how it behaves stays with the person. The machine proposes; the human commands. A self-improving system is only safe while the loop that proposes is kept separate from the hand that promotes.</p>
+<h2 id="the-os-remembers-between-clones" tabindex="-1">The OS remembers between clones</h2>
+<p>Because the files are the platform, so is the memory. What the agent learns about this estate - a fact, a correction, a convention - is captured into a repo-tracked store and travels with the clone. Each machine keeps a working copy; the copies reconcile by a deterministic merge (union by file, newest stamp wins, deletions as tombstones) and a pre-push check holds them in step, so two operators converge rather than overwrite each other. A fresh clone boots with the prior operators' practice already loaded, not a blank slate.</p>
+<p>This is the difference between memory that belongs to a model provider and memory that belongs to you. The provider's memory lives on their platform and stays there. This memory is a set of files in your repository, and the files travel, so the knowledge does too.</p>
 <h2 id="this-is-not-an-ai-story" tabindex="-1">This is not an AI story</h2>
 <p>Here's where I want to be precise.</p>
 <p>MX is described as a machine layer, not an AI layer. Not a web layer. Not a content layer. The machine layer.</p>

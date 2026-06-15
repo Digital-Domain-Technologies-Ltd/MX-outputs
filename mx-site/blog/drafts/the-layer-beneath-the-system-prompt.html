@@ -9,7 +9,7 @@ title: "The Layer Beneath the System Prompt"
 description: "Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These aren't the same thing, and only one of them can be built on an open standard."
 author: Tom Cranstoun
 created: "2026-06-14"
-modified: "2026-06-14"
+modified: "2026-06-15"
 version: "0.1"
 mx:
   x-mx-quotes:
@@ -17,11 +17,11 @@ mx:
   status: draft
   contentType: blog-post
   audience: [humans, machines]
-  tags: [mx-os, cog, system-prompt, governance, hooks, provenance, agent-architecture, anthropic]
+  tags: [mx-os, cog, system-prompt, governance, hooks, provenance, agent-architecture, anthropic, dream]
   purpose: "Show that system prompts are the wrong layer for operator-specific AI governance. The right layer is per-context, per-domain, enforced mechanically, and needs an open standard."
   stability: draft
   x-mx-contextProvides:
-    - "Six capabilities the MX .claude/ governance layer has that Fable 5 can't: mechanical enforcement, session memory persistence, intent-to-COG routing, automatic provenance, pipeline awareness, and vocabulary determinism with tested scanners. Argument: system prompts govern general behaviour; operators need a second layer for context-specific governance, and that layer needs an open standard."
+    - "Seven capabilities the MX .claude/ governance layer has that Fable 5 can't: mechanical enforcement, session memory persistence, intent-to-COG routing, automatic provenance, pipeline awareness, vocabulary determinism with tested scanners, and a self-improving loop (Dream) that mines its own sessions with a local model and recommends rules without acting. Argument: system prompts govern general behaviour; operators need a second layer for context-specific governance, and that layer needs an open standard."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/the-layer-beneath-the-system-prompt.md
   runbook: "Blog post. No special context required. Read straight through."
   x-mx-repoPath: datalake/draft-site/blog/drafts/the-layer-beneath-the-system-prompt.md
@@ -114,7 +114,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 965,
+        "wordCount": 1311,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -188,26 +188,27 @@ mx:
         <li><a href="#the-difference-between-memory-and-state">The difference between memory and state</a></li>
         <li><a href="#the-difference-between-a-tool-list-and-a-routing-system">The difference between a tool list and a routing system</a></li>
         <li><a href="#the-difference-between-documentation-and-provenance">The difference between documentation and provenance</a></li>
+        <li><a href="#the-difference-between-a-fixed-prompt-and-a-learning-loop">The difference between a fixed prompt and a learning loop</a></li>
         <li><a href="#the-question-system-prompts-cannot-answer">The question system prompts cannot answer</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="965">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1311">
         <header class="article-header">
           <h1>The Layer Beneath the System Prompt</h1>
           <div class="article-meta"
                data-published="2026-06-14"
                data-modified="2026-06-14"
-               data-reading-time="5 min">
+               data-reading-time="7 min">
             <time datetime="2026-06-14">14 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>5 min read</span>
+            <span>7 min read</span>
           </div>
-          <ul class="article-tags" aria-label="Tags"><li><a href="index.html#tags=mx-os" rel="tag">Mx Os</a></li><li><a href="index.html#tags=cog" rel="tag">Cog</a></li><li><a href="index.html#tags=system-prompt" rel="tag">System Prompt</a></li><li><a href="index.html#tags=governance" rel="tag">Governance</a></li><li><a href="index.html#tags=hooks" rel="tag">Hooks</a></li><li><a href="index.html#tags=provenance" rel="tag">Provenance</a></li><li><a href="index.html#tags=agent-architecture" rel="tag">Agent Architecture</a></li><li><a href="index.html#tags=anthropic" rel="tag">Anthropic</a></li></ul>
+          <ul class="article-tags" aria-label="Tags"><li><a href="index.html#tags=mx-os" rel="tag">Mx Os</a></li><li><a href="index.html#tags=cog" rel="tag">Cog</a></li><li><a href="index.html#tags=system-prompt" rel="tag">System Prompt</a></li><li><a href="index.html#tags=governance" rel="tag">Governance</a></li><li><a href="index.html#tags=hooks" rel="tag">Hooks</a></li><li><a href="index.html#tags=provenance" rel="tag">Provenance</a></li><li><a href="index.html#tags=agent-architecture" rel="tag">Agent Architecture</a></li><li><a href="index.html#tags=anthropic" rel="tag">Anthropic</a></li><li><a href="index.html#tags=dream" rel="tag">Dream</a></li></ul>
         </header>
 
 
@@ -229,6 +230,7 @@ mx:
 <p>Its memory section reads: &quot;Claude has no memories of the user because they haven't enabled it in Settings.&quot;</p>
 <p>That's accurate. It's also the only option available when memory is on the model provider's platform.</p>
 <p>My <code>session-memory-hydrate.sh</code> hook runs at every session start. It merges the repo-tracked memory store from <code>.claude/memory/</code> with the device-local cache, newest-wins, tombstones honoured. <code>session-uber-plan.sh</code> loads the active project plan into context. <code>session-index-trust.sh</code> sets the index trust state. After every write, <code>post-write-memory-sync.sh</code> writes new memory back to the repository.</p>
+<p>The capture is deliberate, not incidental. Write a memory in one session - a fact established about this codebase, a correction I made - and it is folded into the repo-tracked store at the write boundary and hydrated back at the next session start. Each machine keeps its own working copy, and the two reconcile by a deterministic merge: union by file, newest stamp wins, deletions carried as tombstones, so two operators on two machines converge instead of clobbering each other. Memories meant to be shared are typed to travel; private ones stay on the device. And it is gated - a pre-push check refuses to let the repository and the device drift apart - so the shared memory is trustworthy, not best-effort.</p>
 <p>The agent starts from where the project actually is, not from a blank slate. That state is in version control. It travels with the repository. A new team member gets the accumulated project memory on their first clone.</p>
 <p>No system prompt can do this. Memory on the model provider's platform belongs to the provider. Memory in your repository is yours.</p>
 <h2 id="the-difference-between-a-tool-list-and-a-routing-system" tabindex="-1">The difference between a tool list and a routing system</h2>
@@ -240,6 +242,11 @@ mx:
 <p>My <code>pre-commit-provenance-sidecar.sh</code> hook scans every staged artefact under <code>mx-outputs/</code> at commit time. For any file without a sidecar, it auto-generates a <code>.provenance.ai.json</code> and stages it alongside. The evidence chain lands in version control as part of the commit. <code>post-write-metadata-transfer.sh</code> verifies that artefacts carry their source MX metadata through the pipeline as they are transformed from markdown to HTML to PDF.</p>
 <p>This is evidence that travels with what was produced, not a record of what happened. Auditors can verify it. Regulators can query it. The model provider does not hold it.</p>
 <p>Anthropic's controversial 30-day data retention policy on all Fable 5 and Mythos 5 traffic exists because they have no equivalent mechanism. The evidence that their system is making good decisions has to live somewhere. They chose the API log. The right answer is the artefact.</p>
+<h2 id="the-difference-between-a-fixed-prompt-and-a-learning-loop" tabindex="-1">The difference between a fixed prompt and a learning loop</h2>
+<p>Fable 5 is the same 1,585 lines for every session. It does not learn that this codebase keeps tripping over the same mistake, because it has no memory of the codebase and no mechanism to mine one.</p>
+<p>My <code>dream</code> skill does exactly that. It reads the project's own Claude Code session transcripts, finds the mistakes that recur (a <code>cd</code> to a relative path after the Bash working directory has drifted, an <code>Edit</code> with no preceding <code>Read</code>), and classifies them with a local Ollama model. Nothing leaves the machine. The output is a findings catalogue and a human-readable report.</p>
+<p>Here is the part that matters: Dream recommends, it does not act. It writes only inside <code>datalake/dream-files/</code>. It never edits <code>LEARNINGS.md</code>, never touches a cog, never changes the rulebook on its own. I read the report and decide what graduates into a permanent rule. The machine mines; the human commands. That is Human-in-Command, and it is the line a self-improving system has to hold: the loop that proposes is never the loop that promotes.</p>
+<p>A system prompt cannot mine its own history, and a model platform that could would hold the evidence on its side, not yours. The learning loop belongs in your repository, on a local model, writing to a bounded area you control.</p>
 <h2 id="the-question-system-prompts-cannot-answer" tabindex="-1">The question system prompts cannot answer</h2>
 <p>Fable 5 is a general-purpose instruction document. It governs how Claude behaves when talking to anyone, about anything, on any platform. That's a hard problem and Anthropic has put serious thought into it.</p>
 <p>But &quot;how should an agent behave on your codebase, with your quality standards, in your governance regime&quot; is a different problem. It's per-operator. It's per-context. It's per-domain. No model provider can answer it for you, because they don't know what your codebase contains, what your quality standards require, what your pipelines do, or what governance obligations you operate under.</p>
