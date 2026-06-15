@@ -15696,21 +15696,21 @@ A COG is the contract a machine reads before it acts. This piece is written from
 
 **Description:** Google's 1 May 2026 web.dev guide tells developers to make their pages agent-friendly. The advice is sound. It also stops at the rendered HTML page. Provenance, authentication, rights, lifecycle, and off-web carriers are not in scope. MX is.
 
-Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - What the guide covers
+        - What the guide covers
 
-            - Google's own equivalence
+        - Google's own equivalence
 
-            - What the guide doesn't touch
+        - What the guide does not touch
 
-            - Google covered the page. MX covers the file.
+        - Google covered the page. MX covers the file
 
-            - What this means for your content
+        - What this means for your content
 
           What Google's web.dev agent guidance does not touch
 
@@ -15718,85 +15718,87 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
             ·
             Tom Cranstoun
             ·
-            5 min read
+            6 min read
 
-        On 1 May 2026 Google's developer platform published a guide titled Build agent-friendly websites, at web.dev/articles/ai-agent-site-ux. The article asks developers to think about how AI agents experience their pages, and gives eight specific things to do. The advice is sound. It's also a useful signal about where the conversation is moving: agent-readiness is now a mainstream developer concern, not a niche held by accessibility specialists or structured-data engineers.
+On 1 May 2026 Google's developer platform published a guide titled Build agent-friendly websites, at web.dev/articles/ai-agent-site-ux. The article asks developers to think about how AI agents experience their pages, and gives eight specific things to do. The advice is sound. It is also a useful signal about where the conversation is moving: agent-readiness is now a mainstream developer concern, not a niche held by accessibility specialists or structured-data engineers.
 
-        It's worth being precise about what the guide is and what it isn't. It tells developers how to make a rendered HTML page legible to an agent that arrives at the URL. It doesn't tell publishers how to make the underlying file - the contract, the policy, the recorded talk, the dataset, the manuscript - legible to any agent that reads it without ever touching the page. That's a different problem with a narrower scope, and Google's guide doesn't pretend otherwise.
+What the guide is, and what it is not, are both worth being precise about. It tells developers how to make a rendered HTML page legible to an agent that arrives at the URL. It does not tell publishers how to make the underlying file, the contract, the policy, the recorded talk, the dataset, the manuscript, legible to any agent that reads it without ever touching the page. That is a different problem, with a different scope, and Google's guide does not pretend otherwise.
 
-        This post is a careful read of what the guide includes, what it deliberately leaves out, and where Machine Experience (MX) picks up the work it doesn't address.
+This post is a careful read of what the guide includes, what it deliberately leaves out, and where Machine Experience (MX) picks up the work the guide does not address.
 
-        What the guide covers
+What the guide covers
 
-        The guide falls under three section headings: How agents view your site, Build agent-friendly websites, and Next steps. The concrete recommendations are eight specific properties of the rendered HTML page:
+The guide is organised under three section headings: How agents view your site, Build agent-friendly websites, and Next steps. The concrete recommendations are eight specific properties of the rendered HTML page:
 
-          - Every necessary action, human or agent, is reflected in the interface.
+- Every necessary action, human or agent, is reflected in the interface.
 
-          - Page layout is stable, so an agent that takes screenshots isn't confused by buttons that move between product categories.
+- Page layout is stable, so an agent that takes screenshots is not confused by buttons that move between product categories.
 
-          - No ghost elements or transparent overlays that hide interactive elements.
+- No ghost elements or transparent overlays that hide interactive elements.
 
-          - Actionable elements use semantic HTML, prefer <button> and <a> over modified <div> and <span>.
+- Actionable elements use semantic HTML, prefer <button> and <a> over modified <div> and <span>.
 
-          - Where semantic HTML isn't possible, supply role and tabindex.
+- Where semantic HTML is not possible, supply role and tabindex.
 
-          - Set cursor: pointer in CSS as an actionability signal.
+- Set cursor: pointer in CSS as an actionability signal.
 
-          - Add for on <label> tags to bind them to inputs.
+- Add for on <label> tags to bind them to inputs.
 
-          - Interactive elements have a visible area larger than 8 square pixels, so they aren't filtered out by visual analysis.
+- Interactive elements have a visible area larger than 8 square pixels, so they are not filtered out by visual analysis.
 
-        Every item is a property of the rendered page: the DOM, the accessibility tree, the CSS, the choice of semantic element, the visual stability of the layout. The guide assumes the agent is looking at a page through a browser-like interface, either via the DOM or via screenshots, and tells the developer how to make it legible.
+Every item is a property of the rendered page: the DOM, the accessibility tree, the CSS, the choice of semantic element, the visual stability of the layout. The guide assumes the agent is looking at a page through a browser-like interface, either via the DOM or via screenshots, and tells the developer how to make that page legible.
 
-        Google's own equivalence
+Google's own equivalence
 
-        The strongest single line in the guide is Google's own equivalence statement:
+The strongest single line in the guide is Google's own equivalence statement:
 
-          Everything we suggest to make a site "agent-ready" also makes sites better for humans.
+Everything we suggest to make a site "agent-ready" also makes sites better for humans.
 
-        That's exactly right, and it's the answer to the question some readers will be asking: why isn't Google addressing the rest of it? Because the rest of it isn't page UX. Provenance, authentication, rights, lifecycle, and off-web carriers are distinct surface areas, with distinct conventions, owned by different working groups. Google's web.dev team is publishing what's in scope for web.dev. They aren't promising more; they're also not arguing the rest doesn't matter.
+That is exactly right, and it is the answer to the question some readers will be asking: why isn't Google addressing the rest of it? Because the rest of it is not page UX. Provenance, authentication, rights, lifecycle, and off-web carriers are different surface areas, with different conventions, owned by different working groups. Google's web.dev team is publishing what is in scope for web.dev. They are not promising more; they are also not arguing the rest doesn't matter.
 
-        What the guide doesn't touch
+What the guide does not touch
 
-        Five things, by name or by substance, are absent from the article:
+Five things, by name or by substance, are absent from the article:
 
-          - Provenance. Where the content came from, who authored it, when it was first published, and the unbroken chain back to source. No mention of C2PA. No mention of content credentials. No mention of signed manifests.
+- Provenance. Where the content came from, who authored it, when it was first published, and the unbroken chain back to source. No mention of C2PA. No mention of content credentials. No mention of signed manifests.
 
-          - Authentication and attestation. No mention of cryptographic signing of content, of integrity signatures, of publisher identity attached to the asset itself.
+- Authentication and attestation. No mention of cryptographic signing of content, of integrity signatures, of publisher identity attached to the asset itself.
 
-          - Rights and licensing. No license metadata. No usage permissions for AI training or inference. No SPDX, no Creative Commons vocabulary, no rights expression.
+- Rights and licensing. No license metadata. No usage permissions for AI training or inference. No SPDX, no Creative Commons vocabulary, no rights expression.
 
-          - Lifecycle. No versioning, no supersession, no retraction, no deprecation. An agent has no way to know that a previously authoritative document has been replaced.
+- Lifecycle. No versioning, no supersession, no retraction, no deprecation. An agent has no way to know that a previously authoritative document has been replaced.
 
-          - Off-web carriers. The guidance is HTML-only. It says nothing about PDF, DOCX, EPUB, MP4, audio files, CSV, ICS feeds, RSS, or Markdown, the formats in which most enterprise, government, and scholarly content actually lives.
+- Off-web carriers. The guidance is HTML-only. It says nothing about PDF, DOCX, EPUB, MP4, audio files, CSV, ICS feeds, RSS, or Markdown, the formats in which most enterprise, government, and scholarly content actually lives.
 
-        This is the MX scope. MX picks up exactly where the guide stops.
+This is the MX scope. MX picks up exactly where the guide stops.
 
-        Google covered the page. MX covers the file.
+Google covered the page. MX covers the file
 
-        That's the framing in one line. Google's 1 May 2026 web.dev guidance is hygiene for the rendered HTML page: semantic elements, the accessibility tree, stable layouts. MX adds what the page can't carry on its own: provenance, authentication, rights, lifecycle, and the off-web carriers (PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, Markdown) where most of the world's content actually lives.
+That is the framing in one line. Google's 1 May 2026 web.dev guidance is accessibility hygiene for the rendered HTML page, semantic elements, the accessibility tree, stable layouts. MX adds what the page cannot carry on its own: provenance, authentication, rights, lifecycle, and the off-web carriers (PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, Markdown) where most of the world's content actually lives.
 
-        MX isn't a competitor to Google's guidance, and Google's guidance isn't a competitor to MX. They share an audience, they share a goal, and they sit at different layers of the same stack. A site that follows the web.dev guide and carries MX declarations is doing both jobs. A site that does only one is doing half.
+MX is not a competitor to Google's guidance, and the guidance is not a competitor to MX. They share an audience, they share a goal, and they sit at different layers of the same stack. A site that follows the web.dev guide and carries MX declarations is doing both jobs. A site that does only one is doing half.
 
-        What this means for your content
+A month later, Google drew the same boundary itself. On 5 June 2026 its Search Central docs published an official guide to optimizing for generative AI features, which named GEO as a category and then debunked most of what is sold under it: no llms.txt, no special AI schema, no "AI chunking", no machine-flavoured rewrite of the page. What it left standing was the page done well, which is exactly the scope of this web.dev guide. Neither document reaches the file once it leaves the page, and neither claims to. That absence is the same one this post is about.
 
-        If your job is web, design, development, performance, the web.dev guide is essential reading. Implement what it says. The eight recommendations are genuine work and genuine wins.
+What this means for your content
 
-        After that, ask the harder question: what happens when an agent reads your content where the page isn't present? The contract attached to a procurement portal email. The policy file lifted into a regulatory submission. The training video extracted from your course library. The dataset published once and indexed forever. Each of those is a file an agent will read in isolation, away from the page that gave it context.
+If your job is web, design, development, performance, the web.dev guide is essential reading. Implement what it says. The eight recommendations are real work and real wins.
 
-        For those files, MX is the discipline. REGINALD is the public registry that makes the declarations verifiable - MX makes content machine-readable; REGINALD makes it machine-trustworthy. The standard is governed openly at tg.community. No single vendor. No proprietary runtime. No licensing.
+After that, ask the harder question: what happens when an agent reads your content where the page is not present? The contract attached to a procurement portal email. The policy file lifted into a regulatory submission. The training video extracted from your course library. The dataset published once and indexed forever. Each of those is a file an agent will read in isolation, away from the page that gave it context.
 
-        Google covered the page. We cover the file. Both jobs need doing.
+For those files, MX is the discipline. REGINALD is the public registry that makes the declarations verifiable - MX makes content machine-readable; REGINALD makes it machine-trustworthy. The standard is governed openly at tg.community. No single vendor. No proprietary runtime. No licensing.
+
+Google covered the page. We cover the file. Both jobs need doing.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through how MX applies to the content your team publishes off the web?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
 
