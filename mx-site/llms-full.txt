@@ -15052,25 +15052,25 @@ Use cases
 
 **Description:** When a chain is used as a record system rather than a currency, MX is the discovery and structure layer that makes the on-chain record's content readable by machines.
 
-A chain proves a record is genuine. It does almost nothing to help a machine find that record, parse it, or decide what to do with it. That second job is what MX is for.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - Two different jobs at the same record
+        - Two different jobs at the same record
 
-            - What an on-chain record looks like to a machine
+        - What an on-chain record looks like to a machine
 
-            - Where MX plugs in
+        - Where MX plugs in
 
-            - Worked example: a verifiable credential
+        - Worked example: a verifiable credential
 
-            - Worked example: a public register
+        - Worked example: a public register
 
-            - What MX does not do for chains
+        - What MX does not do for chains
 
-            - Read the rest of the set
+        - Read the rest of the set
 
           Is MX Useful to Blockchain?
 
@@ -15080,99 +15080,95 @@ A chain proves a record is genuine. It does almost nothing to help a machine fin
             ·
             6 min read
 
-          - Blockchain
+The previous post in this set established that MX is not a blockchain and does not need one. That is one direction of the question. This post takes the other: when somebody is using a chain, does MX add anything useful? The answer depends on what they are using the chain for.
 
-- MX foundations
+Two different jobs at the same record
 
-        The previous post in this set established that MX is not a blockchain and does not need one. That is one direction of the question. This post takes the other: when somebody is using a chain, does MX add anything useful? The answer depends on what they are using the chain for.
+Take any single piece of evidence a chain is being asked to hold: a verifiable credential, a notarised document hash, a land-title entry, a supply-chain attestation. There are two jobs to do with it.
 
-        Two different jobs at the same record
+The first is verification: is this record genuine, who put it there, and has it been altered since? A well-designed chain answers all three with cryptographic certainty.
 
-        Take any single piece of evidence a chain is being asked to hold: a verifiable credential, a notarised document hash, a land-title entry, a supply-chain attestation. There are two jobs to do with it.
+The second is discovery and use: where does an agent or system find this record, what does it mean, who is allowed to act on it, and how does it relate to other records? A chain answers almost none of those questions, because that was never its job.
 
-        The first is verification: is this record genuine, who put it there, and has it been altered since? A well-designed chain answers all three with cryptographic certainty.
+MX is built for the second job. When a chain is the bearer of a record, MX is the layer that turns it into a record other systems can find and use.
 
-        The second is discovery and use: where does an agent or system find this record, what does it mean, who is allowed to act on it, and how does it relate to other records? A chain answers almost none of those questions, because that was never its job.
+What an on-chain record looks like to a machine
 
-        MX is built for the second job. When a chain is the bearer of a record, MX is the layer that turns it into a record other systems can find and use.
+From a machine's point of view, a typical on-chain record is a hash, a signature, a timestamp, the address of whoever put it there, and maybe a URI pointing somewhere else for the actual content. That is enough to verify it. It is not enough to act on it.
 
-        What an on-chain record looks like to a machine
+What is missing from the on-chain blob, every time:
 
-        From a machine's point of view, a typical on-chain record is a hash, a signature, a timestamp, the address of whoever put it there, and maybe a URI pointing somewhere else for the actual content. That is enough to verify it. It is not enough to act on it.
+- A discoverable title and description in a form a search index or AI agent can consume.
 
-        What is missing from the on-chain blob, every time:
+- Provenance: who created the underlying thing, when, against which version of which standard.
 
-          - A discoverable title and description in a form a search index or AI agent can consume.
+- A content type, so an agent knows whether it is looking at a credential, a contract, an invoice, or a photograph.
 
-          - Provenance: who created the underlying thing, when, against which version of which standard.
+- Relationship metadata: what does this record amend, supersede, depend on, or attest to.
 
-          - A content type, so an agent knows whether it is looking at a credential, a contract, an invoice, or a photograph.
+- Permissions and intended use: who is supposed to read this, and for what purpose.
 
-          - Relationship metadata: what does this record amend, supersede, depend on, or attest to.
+- Localisation: which language, which jurisdiction, which schema version.
 
-          - Permissions and intended use: who is supposed to read this, and for what purpose.
+A chain does not carry any of those because putting them on the chain would be wasteful and impossible to update. MX puts them in the document the record points at and exposes them in a form a machine can discover and read.
 
-          - Localisation: which language, which jurisdiction, which schema version.
+Where MX plugs in
 
-        A chain does not carry any of those because putting them on the chain would be wasteful and impossible to update. MX puts them in the document the record points at and exposes them in a form a machine can discover and read.
+The integration is simpler than it sounds. The on-chain record carries a URI; the document at that URI is an MX-described object; an agent that follows the URI finds a record it can structurally understand. The chain still does the verification; MX does the description. Neither has to know much about the other.
 
-        Where MX plugs in
+Three patterns recur:
 
-        The integration is simpler than it sounds. The on-chain record carries a URI; the document at that URI is an MX-described object; an agent that follows the URI finds a record it can structurally understand. The chain still does the verification; MX does the description. Neither has to know much about the other.
+Hash-anchored documents. A document is hashed; the hash plus a signature goes on the chain; the document is hosted on a normal web server with MX metadata. An agent fetches the document, verifies the hash against the on-chain entry, and uses the MX structure to understand what it has just verified.
 
-        Three patterns recur:
+Linked credentials. A verifiable credential issued under W3C VC-Data-Model 2.0 includes a status field that can point at a chain entry. The credential itself is a JSON-LD object that MX patterns describe (issuer identity, valid-from, valid-to, schema reference, attestation chain). An agent reads the credential, checks status against the chain, and uses the MX-exposed metadata to know what the credential is for.
 
-        Hash-anchored documents. A document is hashed; the hash plus a signature goes on the chain; the document is hosted on a normal web server with MX metadata. An agent fetches the document, verifies the hash against the on-chain entry, and uses the MX structure to understand what it has just verified.
+Indexed registries. An on-chain registry (of titles, of companies, of identifiers) is fine for proof-of-record. It is hostile to discovery. An MX-described mirror, refreshed from the chain on every commit, gives search indexers and AI agents something they can actually read, with the chain entry as the source of truth they verify against.
 
-        Linked credentials. A verifiable credential issued under W3C VC-Data-Model 2.0 includes a status field that can point at a chain entry. The credential itself is a JSON-LD object that MX patterns describe (issuer identity, valid-from, valid-to, schema reference, attestation chain). An agent reads the credential, checks status against the chain, and uses the MX-exposed metadata to know what the credential is for.
+Worked example: a verifiable credential
 
-        Indexed registries. An on-chain registry (of titles, of companies, of identifiers) is fine for proof-of-record. It is hostile to discovery. An MX-described mirror, refreshed from the chain on every commit, gives search indexers and AI agents something they can actually read, with the chain entry as the source of truth they verify against.
+Imagine a professional certification issued to a contractor. The issuer wants tamper-evidence; the contractor wants portability; a hiring platform wants to verify the certification quickly and a recruiter wants to find people who hold it.
 
-        Worked example: a verifiable credential
+A chain entry can do tamper-evidence and revocation status. By itself it cannot do "find me everyone certified to install medical-grade gas systems in Scotland with their certification valid through 2027". That second query is a discovery problem. The credential document, hosted as JSON-LD with MX-described provenance, audience, and validity metadata, is what the discovery layer reads. The chain is what the verification step checks against. Together they answer both questions; either alone answers half of one.
 
-        Imagine a professional certification issued to a contractor. The issuer wants tamper-evidence; the contractor wants portability; a hiring platform wants to verify the certification quickly and a recruiter wants to find people who hold it.
+Worked example: a public register
 
-        A chain entry can do tamper-evidence and revocation status. By itself it cannot do "find me everyone certified to install medical-grade gas systems in Scotland with their certification valid through 2027". That second query is a discovery problem. The credential document, hosted as JSON-LD with MX-described provenance, audience, and validity metadata, is what the discovery layer reads. The chain is what the verification step checks against. Together they answer both questions; either alone answers half of one.
+A land registry on a chain solves a real problem: nobody can quietly alter a title. It introduces another: how does anyone find a title, parse the parcel boundaries, see what easements apply, or relate a title to its planning history?
 
-        Worked example: a public register
+The chain answer is "we will publish indexes off-chain". As soon as that decision is made, the off-chain index has all the same problems the rest of the web has, and benefits from the same solutions. MX-described title documents, with provenance back to the chain entry, give search, audit, and AI access without putting any of that on the chain. The chain still owns the proof. MX owns the access.
 
-        A land registry on a chain solves a real problem: nobody can quietly alter a title. It introduces another: how does anyone find a title, parse the parcel boundaries, see what easements apply, or relate a title to its planning history?
+What MX does not do for chains
 
-        The chain answer is "we will publish indexes off-chain". As soon as that decision is made, the off-chain index has all the same problems the rest of the web has, and benefits from the same solutions. MX-described title documents, with provenance back to the chain entry, give search, audit, and AI access without putting any of that on the chain. The chain still owns the proof. MX owns the access.
+To stay honest about scope:
 
-        What MX does not do for chains
+- MX does not validate on-chain signatures. That is the chain's job and the verifier's job; MX records the result, it does not produce it.
 
-        To stay honest about scope:
+- MX does not arbitrate forks. If two chains disagree about the history of a record, neither MX nor REGINALD has an opinion. The chain that the document references is the chain whose authority counts for that document.
 
-          - MX does not validate on-chain signatures. That is the chain's job and the verifier's job; MX records the result, it does not produce it.
+- MX does not run smart contracts. A smart contract that has read access to MX-described content reads it the same way any other client does.
 
-          - MX does not arbitrate forks. If two chains disagree about the history of a record, neither MX nor REGINALD has an opinion. The chain that the document references is the chain whose authority counts for that document.
+- MX does not store on-chain data or replicate the chain. The registry holds attestations about documents; the chain holds the chain.
 
-          - MX does not run smart contracts. A smart contract that has read access to MX-described content reads it the same way any other client does.
+Within those limits, MX is straightforwardly useful to any application that uses a chain as a record system. The two layers do different jobs at the same record and stay out of each other's way.
 
-          - MX does not store on-chain data or replicate the chain. The registry holds attestations about documents; the chain holds the chain.
+Read the rest of the set
 
-        Within those limits, MX is straightforwardly useful to any application that uses a chain as a record system. The two layers do different jobs at the same record and stay out of each other's way.
-
-        Read the rest of the set
-
-        What Blockchain and Crypto Have to Do with MX sets out what MX is and is not. NFTs and MX is the worked case where token-on-chain and content-off-chain meet. MX and Cryptocurrency: Drawing the Line closes the set with the case where MX has nothing useful to say.
+What Blockchain and Crypto Have to Do with MX sets out what MX is and is not. NFTs and MX is the worked case where token-on-chain and content-off-chain meet. MX and Cryptocurrency: Drawing the Line closes the set with the case where MX has nothing useful to say.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series. Building content systems since 1977. Working with clients on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
-          Continue the set
+          Continue the conversation
 
-            - NFTs and MX
-
-            - MX and Cryptocurrency: Drawing the Line
-
-            - What Blockchain and Crypto Have to Do with MX
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
 
 ---
 
@@ -15182,21 +15178,21 @@ A chain proves a record is genuine. It does almost nothing to help a machine fin
 
 **Description:** Cryptocurrency is the part of the blockchain world MX has the least to do with. Why the line falls cleanly across the set of posts on MX and crypto.
 
-Cryptocurrency is the part of the blockchain world MX has the least to do with. Not because there is a gap to close, but because the two are answering different questions and barely overlap.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - Two things called the same name
+        - Two things called the same name
 
-            - Why MX has nothing to add to a currency
+        - Why MX has nothing to add to a currency
 
-            - Where a thin connection exists
+        - Where a thin connection exists
 
-            - How the set fits together
+        - How the set fits together
 
-            - Where the line falls
+        - Where the line falls
 
           MX and Cryptocurrency: Drawing the Line
 
@@ -15204,69 +15200,65 @@ Cryptocurrency is the part of the blockchain world MX has the least to do with. 
             ·
             Tom Cranstoun
             ·
-            5 min read
+            4 min read
 
-          - Blockchain
+Cryptocurrency is the part of the blockchain world MX has the least to do with. Not because there is a gap to close, but because the two are answering different questions and barely overlap. This post draws that line plainly, and ties together the set of posts on MX and crypto.
 
-- MX foundations
+Two things called the same name
 
-        Cryptocurrency is the part of the blockchain world MX has the least to do with. Not because there is a gap to close, but because the two are answering different questions and barely overlap. This post draws that line plainly, and ties together the set of posts on MX and crypto.
+"Blockchain" and "crypto" get used as if they name one thing. They do not. A chain can be put to two quite different uses, and the difference decides whether MX has anything to offer.
 
-        Two things called the same name
+A chain can be a record system: anchoring document hashes, provenance trails, credentials, and registries. A chain can also be a currency: a tradeable financial instrument made of tokens, coins, balances, and transfers. The same technology, two purposes.
 
-        "Blockchain" and "crypto" get used as if they name one thing. They do not. A chain can be put to two quite different uses, and the difference decides whether MX has anything to offer.
+MX relates to the first use and not the second. That is the line, and the rest of this post explains why it falls there.
 
-        A chain can be a record system: anchoring document hashes, provenance trails, credentials, and registries. A chain can also be a currency: a tradeable financial instrument made of tokens, coins, balances, and transfers. The same technology, two purposes.
+Why MX has nothing to add to a currency
 
-        MX relates to the first use and not the second. That is the line, and the rest of this post explains why it falls there.
+A cryptocurrency's content, if you can call it that, is account balances and transactions. There is no document to publish, no article for an agent to read, and no record to expose as structured human-and-machine-readable content.
 
-        Why MX has nothing to add to a currency
+The discovery and structure work MX does has nothing to act on here. An AI agent does not need MX to find out what a coin is worth; it queries an exchange or a node. The thing MX makes discoverable is not the thing a currency produces.
 
-        A cryptocurrency's content, if you can call it that, is account balances and transactions. There is no document to publish, no article for an agent to read, and no record to expose as structured human-and-machine-readable content.
+There is also a design point. As the first post in this set explained, MX deliberately has no token, no coin, nothing to trade or stake. A currency is, by definition, the thing MX chose not to be. MX and cryptocurrency therefore belong to different categories; they never competed, and they never complemented.
 
-        The discovery and structure work MX does has nothing to act on here. An AI agent does not need MX to find out what a coin is worth; it queries an exchange or a node. The thing MX makes discoverable is not the thing a currency produces.
+Where a thin connection exists
 
-        There is also a design point. As the first post in this set explained, MX deliberately has no token, no coin, nothing to trade or stake. A currency is, by definition, the thing MX chose not to be. MX and cryptocurrency therefore belong to different categories; they never competed, and they never complemented.
+One narrow connection is worth naming so it is not mistaken for more than it is.
 
-        Where a thin connection exists
+A crypto project (the company or foundation, not the coin) publishes ordinary content: documentation, a whitepaper, governance proposals, and disclosures. That content is web content like any other, and MX applies to it exactly as it would to any publisher. That is MX relating to a company that happens to work in crypto, however, not MX relating to the currency itself.
 
-        One narrow connection is worth naming so it is not mistaken for more than it is.
+How the set fits together
 
-        A crypto project (the company or foundation, not the coin) publishes ordinary content: documentation, a whitepaper, governance proposals, and disclosures. That content is web content like any other, and MX applies to it exactly as it would to any publisher. That is MX relating to a company that happens to work in crypto, however, not MX relating to the currency itself.
+This post is one of a set, and cryptocurrency is the right place to draw them together because it is the boundary the others work up to.
 
-        How the set fits together
+What Blockchain and Crypto Have to Do with MX makes the first point: MX is not a blockchain or a crypto project. It uses public-key cryptography, as blockchain does, but there is no ledger, no consensus mechanism, and no token. The signed-registry model behind REGINALD is closer to Certificate Transparency than to a chain.
 
-        This post is one of a set, and cryptocurrency is the right place to draw them together because it is the boundary the others work up to.
+Is MX Useful to Blockchain? turns to the other side. Not depending on a chain is not the same as opposing one. When a chain is used as a record system, MX is the layer that makes the on-chain record's content discoverable and readable by machines. A chain proves a record is genuine; MX helps a machine find it and understand what it is for.
 
-        What Blockchain and Crypto Have to Do with MX makes the first point: MX is not a blockchain or a crypto project. It uses public-key cryptography, as blockchain does, but there is no ledger, no consensus mechanism, and no token. The signed-registry model behind REGINALD is closer to Certificate Transparency than to a chain.
+NFTs and MX is the sharpest worked example. An NFT sits on the seam: the token is crypto, but it points at off-chain content. The chain proves who owns the token. It does little about whether the content the token points at still exists, is unaltered, or can be read. That gap, discovery and integrity for off-chain material, is MX's job.
 
-        Is MX Useful to Blockchain? turns to the other side. Not depending on a chain is not the same as opposing one. When a chain is used as a record system, MX is the layer that makes the on-chain record's content discoverable and readable by machines. A chain proves a record is genuine; MX helps a machine find it and understand what it is for.
+This post completes the picture. Cryptocurrency is the case where the line is cleanest: MX is not useful to a currency as money, and does not try to be.
 
-        NFTs and MX is the sharpest worked example. An NFT sits on the seam: the token is crypto, but it points at off-chain content. The chain proves who owns the token. It does little about whether the content the token points at still exists, is unaltered, or can be read. That gap, discovery and integrity for off-chain material, is MX's job.
+Where the line falls
 
-        This post completes the picture. Cryptocurrency is the case where the line is cleanest: MX is not useful to a currency as money, and does not try to be.
+MX is not a blockchain. MX is useful to blockchain as a record system. MX is not useful to cryptocurrency as money.
 
-        Where the line falls
-
-        MX is not a blockchain. MX is useful to blockchain as a record system. MX is not useful to cryptocurrency as money.
-
-        Those three statements are consistent, and stating them together stops a reader sliding from one to the next by accident, from "MX works with blockchain" to "MX is somehow a crypto play." It is not. MX uses cryptography to make content discoverable and its provenance attestable. That work is valuable wherever there is content to publish. A currency does not publish content, so the line falls there, and it falls cleanly.
+Those three statements are consistent, and stating them together stops a reader sliding from one to the next by accident, from "MX works with blockchain" to "MX is somehow a crypto play." It is not. MX uses cryptography to make content discoverable and its provenance attestable. That work is valuable wherever there is content to publish. A currency does not publish content, so the line falls there, and it falls cleanly.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series. Building content systems since 1977. Working with clients on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
-          Read the rest of the set
+          Continue the conversation
 
-            - What Blockchain and Crypto Have to Do with MX
-
-            - Is MX Useful to Blockchain?
-
-            - NFTs and MX
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
 
 ---
 
@@ -15276,27 +15268,27 @@ Cryptocurrency is the part of the blockchain world MX has the least to do with. 
 
 **Description:** An NFT proves ownership of a token. It does little about whether the content the token points at still exists, is unaltered, or can be read. That gap is MX's job.
 
-An NFT is a pointer with a price. The token is on a chain; the thing it points to almost never is. Whether the pointer still resolves to anything meaningful is not the chain's problem.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - Seam between on-chain and off-chain
+        - Seam between on-chain and off-chain
 
-            - What the chain can prove
+        - What the chain can prove
 
-            - What the chain cannot prove
+        - What the chain cannot prove
 
-            - How MX closes the gap
+        - How MX closes the gap
 
-            - Worked example: a collectible
+        - Worked example: a collectible
 
-            - Worked example: a membership pass
+        - Worked example: a membership pass
 
-            - Two jobs, no overlap
+        - Two jobs, no overlap
 
-            - Read the rest of the set
+        - Read the rest of the set
 
           NFTs and MX
 
@@ -15306,101 +15298,97 @@ An NFT is a pointer with a price. The token is on a chain; the thing it points t
             ·
             6 min read
 
-          - Blockchain
+NFTs are the sharpest example in this set, because they sit on the exact seam where blockchain meets ordinary web content. The token is crypto. The picture, the document, the membership pass, the music file is web content. The chain proves who owns the token. It says next to nothing about whether the content the token points at is still there, still untouched, or still legible to anything that wants to read it. That second half is MX's job.
 
-- MX foundations
+Seam between on-chain and off-chain
 
-        NFTs are the sharpest example in this set, because they sit on the exact seam where blockchain meets ordinary web content. The token is crypto. The picture, the document, the membership pass, the music file is web content. The chain proves who owns the token. It says next to nothing about whether the content the token points at is still there, still untouched, or still legible to anything that wants to read it. That second half is MX's job.
+Almost every NFT in practice has the same structure: an ERC-721 or ERC-1155 token entry on a chain, with a tokenURI field that points somewhere else for the actual content. The "somewhere else" might be IPFS, Arweave, a CDN, or a plain old web server. The chain holds the deed of ownership. The bytes the deed describes live elsewhere.
 
-        Seam between on-chain and off-chain
+This is sensible. Putting an image on a chain would be expensive and inflexible. The trouble is that everyone treats the deed and the bytes as if they were the same thing, and they are not.
 
-        Almost every NFT in practice has the same structure: an ERC-721 or ERC-1155 token entry on a chain, with a tokenURI field that points somewhere else for the actual content. The "somewhere else" might be IPFS, Arweave, a CDN, or a plain old web server. The chain holds the deed of ownership. The bytes the deed describes live elsewhere.
+What the chain can prove
 
-        This is sensible. Putting an image on a chain would be expensive and inflexible. The trouble is that everyone treats the deed and the bytes as if they were the same thing, and they are not.
+The chain can prove, with cryptographic certainty:
 
-        What the chain can prove
+- Which address minted the token, and when.
 
-        The chain can prove, with cryptographic certainty:
+- Which address currently owns it.
 
-          - Which address minted the token, and when.
+- The history of transfers since mint.
 
-          - Which address currently owns it.
+- The tokenURI recorded at mint and any subsequent updates the contract allows.
 
-          - The history of transfers since mint.
+That is genuinely useful. It is the part of the NFT story that works.
 
-          - The tokenURI recorded at mint and any subsequent updates the contract allows.
+What the chain cannot prove
 
-        That is genuinely useful. It is the part of the NFT story that works.
+Once an agent or buyer follows the tokenURI off the chain, the cryptography stops helping. The chain cannot prove:
 
-        What the chain cannot prove
+- That the URI still resolves at all (the "where is my JPEG" problem).
 
-        Once an agent or buyer follows the tokenURI off the chain, the cryptography stops helping. The chain cannot prove:
+- That the bytes returned today are the bytes that existed at mint, unless an integrity hash was minted with the token (most are not).
 
-          - That the URI still resolves at all (the "where is my JPEG" problem).
+- That the metadata file conforms to a published schema and can be parsed reliably.
 
-          - That the bytes returned today are the bytes that existed at mint, unless an integrity hash was minted with the token (most are not).
+- Who originally produced the underlying work, against which standard, and with what rights statement.
 
-          - That the metadata file conforms to a published schema and can be parsed reliably.
+- Which version of the content this token actually refers to, if the content has been revised.
 
-          - Who originally produced the underlying work, against which standard, and with what rights statement.
+- Whether the rendering platform is presenting the same thing every other platform would render.
 
-          - Which version of the content this token actually refers to, if the content has been revised.
+Every one of those is a content question, not a chain question. They are the questions MX is built to answer.
 
-          - Whether the rendering platform is presenting the same thing every other platform would render.
+How MX closes the gap
 
-        Every one of those is a content question, not a chain question. They are the questions MX is built to answer.
+The fix is to treat the off-chain content as an MX-described document and to anchor that description back to the chain. Three pieces do most of the work:
 
-        How MX closes the gap
+An integrity hash committed at mint. The token contract records a hash of the canonical content file (and, where it differs, the metadata file) at mint time. Any reader can re-hash the off-chain bytes and check the result against the on-chain value. If a host swaps the content, the verification fails. This is one extra field on the contract and the only part that has to be on the chain.
 
-        The fix is to treat the off-chain content as an MX-described document and to anchor that description back to the chain. Three pieces do most of the work:
+MX provenance on the content document. The metadata file at the tokenURI carries the structured fields MX patterns specify: creator identity, creation date, schema reference, rights statement, version, intended use, and the chain address and token ID it is associated with. An agent that reads the file knows what it is looking at without inference. A search index can list it. A rights system can act on it.
 
-        An integrity hash committed at mint. The token contract records a hash of the canonical content file (and, where it differs, the metadata file) at mint time. Any reader can re-hash the off-chain bytes and check the result against the on-chain value. If a host swaps the content, the verification fails. This is one extra field on the contract and the only part that has to be on the chain.
+A registry record that pairs them. A signed registry entry (the kind REGINALD produces, the kind the first post in this set describes as a Certificate-Transparency-style log) cross-references the token, the URI, and the integrity hash. Anyone who wants to verify a claim about the NFT can do so without trusting any single host, including the chain operator.
 
-        MX provenance on the content document. The metadata file at the tokenURI carries the structured fields MX patterns specify: creator identity, creation date, schema reference, rights statement, version, intended use, and the chain address and token ID it is associated with. An agent that reads the file knows what it is looking at without inference. A search index can list it. A rights system can act on it.
+None of those steps require putting the content on the chain. None require a new standard the broader NFT ecosystem has not already considered. They require treating the content layer with the same care the token layer already receives.
 
-        A registry record that pairs them. A signed registry entry (the kind REGINALD produces, the kind the first post in this set describes as a Certificate-Transparency-style log) cross-references the token, the URI, and the integrity hash. Anyone who wants to verify a claim about the NFT can do so without trusting any single host, including the chain operator.
+Worked example: a collectible
 
-        None of those steps require putting the content on the chain. None require a new standard the broader NFT ecosystem has not already considered. They require treating the content layer with the same care the token layer already receives.
+An artist mints a digital print as an ERC-721. The chain records the mint, the owner, and a tokenURI that points at an IPFS metadata file. The metadata file points at the image.
 
-        Worked example: a collectible
+Today, here is what a buyer can know for certain: they own the token. Here is what they cannot know: whether the image they are looking at on the marketplace is the image the artist actually minted, whether anyone is still pinning it on IPFS, what print run it is part of, what rights they have to display it, or whether a future marketplace will render it the same way.
 
-        An artist mints a digital print as an ERC-721. The chain records the mint, the owner, and a tokenURI that points at an IPFS metadata file. The metadata file points at the image.
+Add MX, and the buyer can know all of those, because the content document carries them and the registry vouches for the pairing. The chain still owns "this is your token". MX owns "this is what your token actually entitles you to".
 
-        Today, here is what a buyer can know for certain: they own the token. Here is what they cannot know: whether the image they are looking at on the marketplace is the image the artist actually minted, whether anyone is still pinning it on IPFS, what print run it is part of, what rights they have to display it, or whether a future marketplace will render it the same way.
+Worked example: a membership pass
 
-        Add MX, and the buyer can know all of those, because the content document carries them and the registry vouches for the pairing. The chain still owns "this is your token". MX owns "this is what your token actually entitles you to".
+A membership NFT grants access to a private community: events, channels, perhaps a physical venue. The token entry on the chain proves membership. The terms of membership (what tier, what expiry, what regions, what code of conduct version) are off-chain.
 
-        Worked example: a membership pass
+If the terms file is a loose PDF on a website, no agent can read it reliably and the issuer can quietly amend it after sale. If the terms file is an MX-described document anchored to the token by an integrity hash and a registry attestation, the member, the platform, and a third-party auditor can all check that the terms today are the terms that were minted with the pass. The chain proves the entitlement exists. MX proves what the entitlement is.
 
-        A membership NFT grants access to a private community: events, channels, perhaps a physical venue. The token entry on the chain proves membership. The terms of membership (what tier, what expiry, what regions, what code of conduct version) are off-chain.
+Two jobs, no overlap
 
-        If the terms file is a loose PDF on a website, no agent can read it reliably and the issuer can quietly amend it after sale. If the terms file is an MX-described document anchored to the token by an integrity hash and a registry attestation, the member, the platform, and a third-party auditor can all check that the terms today are the terms that were minted with the pass. The chain proves the entitlement exists. MX proves what the entitlement is.
+NFTs are the case where MX and crypto sit closest, and even here the jobs do not overlap. The chain handles ownership and transfer of a token. MX handles discovery, structure, integrity, and provenance of the content the token points at. Each layer does what it is good at and ignores what it is not.
 
-        Two jobs, no overlap
+Where this matters most is in the next generation of NFT-adjacent products: digital twins, token-bound credentials, programmable memberships, and on-chain proofs of off-chain work. All of them share the NFT seam. All of them need both halves to be solid before any of the value proposition holds.
 
-        NFTs are the case where MX and crypto sit closest, and even here the jobs do not overlap. The chain handles ownership and transfer of a token. MX handles discovery, structure, integrity, and provenance of the content the token points at. Each layer does what it is good at and ignores what it is not.
+Read the rest of the set
 
-        Where this matters most is in the next generation of NFT-adjacent products: digital twins, token-bound credentials, programmable memberships, and on-chain proofs of off-chain work. All of them share the NFT seam. All of them need both halves to be solid before any of the value proposition holds.
-
-        Read the rest of the set
-
-        What Blockchain and Crypto Have to Do with MX sets out what MX is and is not. Is MX Useful to Blockchain? turns the question round to chain-as-record-system. MX and Cryptocurrency: Drawing the Line closes the set by stating where MX has nothing useful to say.
+What Blockchain and Crypto Have to Do with MX sets out what MX is and is not. Is MX Useful to Blockchain? turns the question round to chain-as-record-system. MX and Cryptocurrency: Drawing the Line closes the set by stating where MX has nothing useful to say.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series. Building content systems since 1977. Working with clients on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
-          Continue the set
+          Continue the conversation
 
-            - MX and Cryptocurrency: Drawing the Line
-
-            - What Blockchain and Crypto Have to Do with MX
-
-            - Is MX Useful to Blockchain?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
 
 ---
 
@@ -15548,23 +15536,23 @@ RAG reads. MX proves. Under the European Accessibility Act, regulated publishers
 
 **Description:** MX is not a blockchain or a crypto project. It uses the same primitive (public-key cryptography) for a different job, with no ledger, no consensus, and no token.
 
-People hear "cryptography" and "registry" and want to put MX in the same bucket as blockchain. The primitive is shared. The shape, the cost, and the trust model are not.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - Overlap at the primitive, not the design
+        - Overlap at the primitive, not the design
 
-            - What MX is not
+        - What MX is not
 
-            - A signed registry is not a chain
+        - A signed registry is not a chain
 
-            - Closer to Certificate Transparency than to bitcoin
+        - Closer to Certificate Transparency than to bitcoin
 
-            - Why this matters for buyers
+        - Why this matters for buyers
 
-            - Read the rest of the set
+        - Read the rest of the set
 
           What Blockchain and Crypto Have to Do with MX
 
@@ -15574,77 +15562,73 @@ People hear "cryptography" and "registry" and want to put MX in the same bucket 
             ·
             5 min read
 
-          - Blockchain
+The short answer is: less than the surface vocabulary suggests, and exactly what the underlying mathematics suggests. MX uses public-key cryptography. So does blockchain. That is where the resemblance ends. This post sets out what MX shares with the blockchain world and what it does not, so the rest of the set can be read without confusion.
 
-- MX foundations
+Overlap at the primitive, not the design
 
-        The short answer is: less than the surface vocabulary suggests, and exactly what the underlying mathematics suggests. MX uses public-key cryptography. So does blockchain. That is where the resemblance ends. This post sets out what MX shares with the blockchain world and what it does not, so the rest of the set can be read without confusion.
+Signing a record so anyone with the public key can verify it was signed by the holder of the private key is a 1976 idea. Blockchain uses it. TLS uses it. SSH uses it. PGP uses it. So does every signed software update on every operating system you have ever run. MX uses it too, because there is no better way to make a record verifiable at a distance without a trusted intermediary in the middle.
 
-        Overlap at the primitive, not the design
+Sharing a tool does not make two systems the same kind of thing. A bicycle and a tractor both use wheels.
 
-        Signing a record so anyone with the public key can verify it was signed by the holder of the private key is a 1976 idea. Blockchain uses it. TLS uses it. SSH uses it. PGP uses it. So does every signed software update on every operating system you have ever run. MX uses it too, because there is no better way to make a record verifiable at a distance without a trusted intermediary in the middle.
+What MX is not
 
-        Sharing a tool does not make two systems the same kind of thing. A bicycle and a tractor both use wheels.
+MX has:
 
-        What MX is not
+- No ledger. There is no append-only chain of blocks recording every change to every record forever.
 
-        MX has:
+- No consensus mechanism. No proof-of-work, no proof-of-stake, no validator set. A signed record is verified by the reader against the signer's public key, not by a global vote.
 
-          - No ledger. There is no append-only chain of blocks recording every change to every record forever.
+- No token, coin, NFT, or tradeable asset of any kind. Nothing to buy, sell, stake, mine, or hold for price exposure. The economics of MX are the economics of running a registry and offering attestation services, not of issuing an instrument.
 
-          - No consensus mechanism. No proof-of-work, no proof-of-stake, no validator set. A signed record is verified by the reader against the signer's public key, not by a global vote.
+- No on-chain storage. Documents stay where their publisher puts them. The registry holds discovery records and attestations of integrity, not the documents themselves.
 
-          - No token, coin, NFT, or tradeable asset of any kind. Nothing to buy, sell, stake, mine, or hold for price exposure. The economics of MX are the economics of running a registry and offering attestation services, not of issuing an instrument.
+- No smart-contract execution layer. The registry serves signed records; it does not run programs against them.
 
-          - No on-chain storage. Documents stay where their publisher puts them. The registry holds discovery records and attestations of integrity, not the documents themselves.
+Each one of those is a decision rather than an omission. The blockchain stack was built to make trust possible without a trusted operator, at the cost of substantial energy, latency, and operational complexity. MX is built to make documents trustable at web speed under a known operator, with public verifiability of every claim the operator makes. Different cost profile, different trust model, different problem.
 
-          - No smart-contract execution layer. The registry serves signed records; it does not run programs against them.
+A signed registry is not a chain
 
-        Each one of those is a decision rather than an omission. The blockchain stack was built to make trust possible without a trusted operator, at the cost of substantial energy, latency, and operational complexity. MX is built to make documents trustable at web speed under a known operator, with public verifiability of every claim the operator makes. Different cost profile, different trust model, different problem.
+The most common confusion is around the registry itself. REGINALD, CogNovaMX's registry, signs every record it holds and publishes the signature chain so anyone can verify the registry has not quietly altered the past. That sounds like a chain. It is not one.
 
-        A signed registry is not a chain
+A blockchain serialises state changes from many independent actors and reaches global agreement through consensus. REGINALD serialises state changes from one operator (the registry itself) and publishes signed transparency information so any reader can detect tampering. There is no global state to agree on, no competing block proposals, no fork-choice rule. It is closer to a notary's signed register than to a public ledger.
 
-        The most common confusion is around the registry itself. REGINALD, CogNovaMX's registry, signs every record it holds and publishes the signature chain so anyone can verify the registry has not quietly altered the past. That sounds like a chain. It is not one.
+Closer to Certificate Transparency than to bitcoin
 
-        A blockchain serialises state changes from many independent actors and reaches global agreement through consensus. REGINALD serialises state changes from one operator (the registry itself) and publishes signed transparency information so any reader can detect tampering. There is no global state to agree on, no competing block proposals, no fork-choice rule. It is closer to a notary's signed register than to a public ledger.
+The closest existing system to the REGINALD signed-registry model is RFC 9162: Certificate Transparency. CT was built so that any certificate authority that wrongly issues a TLS certificate can be caught by any monitor that watches the public log. The CA still operates the log; the public can still verify that no entry has been removed or rewritten. Browsers refuse to trust a certificate that does not appear in an approved CT log. This is signature-and-log accountability without a chain, and it works at internet scale.
 
-        Closer to Certificate Transparency than to bitcoin
+MX uses the same pattern for documents: the registry signs each record, publishes the log, and anyone can verify that what the registry says today matches what it said yesterday. The threat model is operator misbehaviour, and the remedy is independent verification by anyone who wants to look. No coin needs to change hands for that to work.
 
-        The closest existing system to the REGINALD signed-registry model is RFC 9162: Certificate Transparency. CT was built so that any certificate authority that wrongly issues a TLS certificate can be caught by any monitor that watches the public log. The CA still operates the log; the public can still verify that no entry has been removed or rewritten. Browsers refuse to trust a certificate that does not appear in an approved CT log. This is signature-and-log accountability without a chain, and it works at internet scale.
+Why this matters for buyers
 
-        MX uses the same pattern for documents: the registry signs each record, publishes the log, and anyone can verify that what the registry says today matches what it said yesterday. The threat model is operator misbehaviour, and the remedy is independent verification by anyone who wants to look. No coin needs to change hands for that to work.
+If you are evaluating MX or REGINALD for use inside your business, this difference matters in three practical ways.
 
-        Why this matters for buyers
+Procurement. Nothing in MX or REGINALD requires your business to hold, exchange, or report on a digital asset. There is no token to put on a balance sheet, no wallet to safeguard, and no exchange relationship to disclose. Treasury, audit, and risk teams have far less to ask about than a blockchain integration would put in front of them.
 
-        If you are evaluating MX or REGINALD for use inside your business, this difference matters in three practical ways.
+Regulation. MiCA, the EU's markets-in-crypto regulation, applies to assets and the firms that handle them. MX produces no asset. Anti-money-laundering and travel-rule obligations attach to transfers of value; the registry transfers signatures, not value. The compliance surface is the ordinary one of operating a web service and a notarial log.
 
-        Procurement. Nothing in MX or REGINALD requires your business to hold, exchange, or report on a digital asset. There is no token to put on a balance sheet, no wallet to safeguard, and no exchange relationship to disclose. Treasury, audit, and risk teams have far less to ask about than a blockchain integration would put in front of them.
+Operating cost. A registry does not pay block rewards or transaction fees. It pays for storage, compute, and the staff to operate it. The cost curve is the cost curve of a normal piece of internet infrastructure, not of a public chain.
 
-        Regulation. MiCA, the EU's markets-in-crypto regulation, applies to assets and the firms that handle them. MX produces no asset. Anti-money-laundering and travel-rule obligations attach to transfers of value; the registry transfers signatures, not value. The compliance surface is the ordinary one of operating a web service and a notarial log.
+Sharing a primitive with blockchain buys MX the verifiability properties of strong cryptography. It does not buy any of the rest, and the rest is what most "blockchain" objections are actually about.
 
-        Operating cost. A registry does not pay block rewards or transaction fees. It pays for storage, compute, and the staff to operate it. The cost curve is the cost curve of a normal piece of internet infrastructure, not of a public chain.
+Read the rest of the set
 
-        Sharing a primitive with blockchain buys MX the verifiability properties of strong cryptography. It does not buy any of the rest, and the rest is what most "blockchain" objections are actually about.
-
-        Read the rest of the set
-
-        Is MX Useful to Blockchain? turns the question round and looks at the case where a chain is being used as a record system rather than a currency. NFTs and MX takes the sharpest case (a token that points at off-chain content) and shows exactly which half is crypto's job and which half is MX's. MX and Cryptocurrency: Drawing the Line closes the set by stating where MX has nothing to add at all.
+Is MX Useful to Blockchain? turns the question round and looks at the case where a chain is being used as a record system rather than a currency. NFTs and MX takes the sharpest case (a token that points at off-chain content) and shows exactly which half is crypto's job and which half is MX's. MX and Cryptocurrency: Drawing the Line closes the set by stating where MX has nothing to add at all.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series. Building content systems since 1977. Working with clients on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
-          Continue the set
+          Continue the conversation
 
-            - Is MX Useful to Blockchain?
-
-            - NFTs and MX
-
-            - MX and Cryptocurrency: Drawing the Line
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
 
 ---
 
