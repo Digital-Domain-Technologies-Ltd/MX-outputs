@@ -2419,83 +2419,87 @@ The shape does not change what the audit measures. Your scores, the schema you c
 
 **Description:** A walk through an MX audit deliverable from an engineer's perspective: scorecard vocabulary, page composition, findings sidecar, regression tests, and the contract that makes the PDF MX Compatible.
 
-An MX audit lands as a PDF on a desk with a particular shape. We walk through that shape from the inside out, in the order an engineer would meet it.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - One vocabulary in the Balanced Scorecard
+        - One vocabulary in the Balanced Scorecard
 
-            - Contents lands on its own page
+        - Contents lands on its own page
 
-            - Findings ride in a sibling sidecar
+        - Findings ride in a sibling sidecar
 
-            - Tests that hold the contract
+        - Tests that hold the contract
 
-            - An MX Compatible regression test
+        - An MX Compatible regression test
 
-            - How the pieces fit
+        - How the pieces fit
 
           An MX Audit, Read by an Engineer
 
             28 May 2026
-            &middot;
-            6 min read
+            ·
+            Tom Cranstoun
+            ·
+            5 min read
 
-        An MX audit is rendered through a pipeline that places every fact into a skeleton, rewrites the skeleton into prose, gates the prose against a battery of deterministic checks, and ships a tagged PDF along with a provenance sidecar pair. We walk through the artefact from an engineer's perspective: the scorecard, the page composition, the sidecar layout, the regression tests, and the contract that makes the PDF MX Compatible.
+An MX audit is rendered through a pipeline that places every fact into a skeleton, rewrites the skeleton into prose, gates the prose against a battery of deterministic checks, and ships a tagged PDF along with a provenance sidecar pair. We walk through the artefact from an engineer's perspective: the scorecard, the page composition, the sidecar layout, the regression tests, and the contract that makes the PDF MX Compatible.
 
-        One vocabulary in the Balanced Scorecard
+One vocabulary in the Balanced Scorecard
 
-        The Balanced Scorecard at the top of every audit report grades each dimension on a four-band scale (Excellent, Good, Could Be Better, Needs Improvement) with a letter grade alongside (A through D). The vs Peers column speaks the same vocabulary, never raw numbers. Each cell reads as A (median), B (median), C (median), or D (median).
+The Balanced Scorecard at the top of every audit report grades each dimension on a four-band scale (Excellent, Good, Could Be Better, Needs Improvement) with a letter grade alongside (A through D). The vs Peers column speaks the same vocabulary, never raw numbers. Each cell reads as A (median), B (median), C (median), or D (median).
 
-        The helper that maps a raw score to a band lives in scoreBandFromValue() at mx-reginald/audit/bin/infill-report.js. The peer-comparison formatter (formatPeerComparison()) routes the peer median through the same helper before emitting the cell, so the row's own grade and its peer comparison can never speak different languages. The boundaries (76, 51, 26) and band names also live as a single source of truth in mx-reginald/audit/lib/scoring-methodology.json for any tooling that wants to read the same enum.
+The helper that maps a raw score to a band lives in scoreBandFromValue() at mx-reginald/audit/bin/infill-report.js. The peer-comparison formatter (formatPeerComparison()) routes the peer median through the same helper before emitting the cell, so the row's own grade and its peer comparison can never speak different languages. The boundaries (76, 51, 26) and band names also live as a single source of truth in mx-reginald/audit/lib/scoring-methodology.json for any tooling that wants to read the same enum.
 
-        Contents lands on its own page
+Contents lands on its own page
 
-        A cover doctype's PDF flow is: title plus MX Compatible badge on page one, contents on page two, body from page three onward. The cover-to-contents break comes from break-after: page on section.mx-compatible-zone. The contents-to-body break comes from a dedicated rule in scripts/templates/pdf/_base.css:
+A cover doctype's PDF flow is: title plus MX Compatible badge on page one, contents on page two, body from page three onward. The cover-to-contents break comes from break-after: page on section.mx-compatible-zone. The contents-to-body break comes from a dedicated rule in scripts/templates/pdf/_base.css:
 
-        nav#TOC {
+nav#TOC {
   break-before: page;
   page-break-before: always;
   break-after: page;
   page-break-after: always;
 }
-        Both the modern (break-*) and legacy (page-break-*) properties are set because the rendering engine pairs CSS Paged Media with Chrome's print path. Doctypes that hide the TOC entirely (letter, blog-post, briefing-2col) set display: none on nav#TOC, so the break rule is a no-op there.
 
-        Findings ride in a sibling sidecar
+Both the modern (break-*) and legacy (page-break-*) properties are set because the rendering engine pairs CSS Paged Media with Chrome's print path. Doctypes that hide the TOC entirely (letter, blog-post, briefing-2col) set display: none on nav#TOC, so the break rule is a no-op there.
 
-        Every audit goes through deterministic gates that catch scope mis-statements, exaggeration in prose, unverified numeric claims, voice drift, and similar reviewer-only signals. The gates record every finding to audit_errors.json and the pipeline continues; nothing fails the run. This is the always-produce-PDF contract: a failing gate becomes a recorded warning, not an exit code.
+Findings ride in a sibling sidecar
 
-        The findings travel with the report as a sibling sidecar named after it:
+Every audit goes through deterministic gates that catch scope mis-statements, exaggeration in prose, unverified numeric claims, voice drift, and similar reviewer-only signals. The gates record every finding to audit_errors.json and the pipeline continues; nothing fails the run. This is the always-produce-PDF contract: a failing gate becomes a recorded warning, not an exit code.
 
-        mx-outputs/audit/<date>/<host>/
+The findings travel with the report as a sibling sidecar named after it:
+
+mx-outputs/audit/<date>/<host>/
 ├── <basename>-report.md
 ├── <basename>-report.pdf
 ├── <basename>-report-findings.md
 ├── <basename>-report-fierce-critic.json
 └── <basename>-report.provenance.ai.json
-        The findings sidecar is a complete markdown document with its own MX frontmatter (contentType: audit-findings, companion: <report>.md). It carries the gate name, the category, the timestamp, and the supporting evidence for every finding, by severity. The reviewer reads the sidecar before sign-off; the client reads the report.
 
-        The renderer at mx-reginald/audit/lib/render-error-section.js exposes renderFindingsMarkdownDoc() for the sidecar; a legacy renderErrorReportSection() survives as an empty no-op so older skeletons that still carry [ERROR_REPORT_SECTION] resolve to invisible sentinels. The post-gates regenerator script writes the sidecar and strips any residual block out of the report markdown. Templates and contracts no longer reference the placeholder.
+The findings sidecar is a complete markdown document with its own MX frontmatter (contentType: audit-findings, companion: <report>.md). It carries the gate name, the category, the timestamp, and the supporting evidence for every finding, by severity. The reviewer reads the sidecar before sign-off; the client reads the report.
 
-        Tests that hold the contract
+The renderer at mx-reginald/audit/lib/render-error-section.js exposes renderFindingsMarkdownDoc() for the sidecar; a legacy renderErrorReportSection() survives as an empty no-op so older skeletons that still carry [ERROR_REPORT_SECTION] resolve to invisible sentinels. The post-gates regenerator script writes the sidecar and strips any residual block out of the report markdown. Templates and contracts no longer reference the placeholder.
 
-        Two regression tests live under mx-reginald/audit/test/ and exercise the path from canned fixtures to a rendered skeleton. infill-golden.test.js renders the canonical web-audit-suite template against a synthetic example.com fixture and asserts byte-identical output against golden-skeleton.md; the fixture writes through a stable host-slug subfolder so the rendered mx.generate.output line is deterministic. audit-gates.test.js covers every gate's exit-code contract, including the deterministic verifier's always-continue behaviour: on the unsupported-numeric fixture the verifier exits zero and stdout names unverified claim(s) - logged as warnings, so the test asserts both the exit code and the message.
+Tests that hold the contract
 
-        An MX Compatible regression test
+Two regression tests live under mx-reginald/audit/test/ and exercise the path from canned fixtures to a rendered skeleton. infill-golden.test.js renders the canonical web-audit-suite template against a synthetic example.com fixture and asserts byte-identical output against golden-skeleton.md; the fixture writes through a stable host-slug subfolder so the rendered mx.generate.output line is deterministic. audit-gates.test.js covers every gate's exit-code contract, including the deterministic verifier's always-continue behaviour: on the unsupported-numeric fixture the verifier exits zero and stdout names unverified claim(s) - logged as warnings, so the test asserts both the exit code and the message.
 
-        The phrase "MX Compatible" names a specific set of signals an inspector can verify on the rendered PDF: provenance sidecar pair on disk, the pdfuaid:Part=1 Level 2 declaration, MX-namespaced XMP fields populated from frontmatter, pointer fields naming the sidecars, and the full AI evidence chain embedded inline under XMP-mx:ProvenanceAiPayload.
+An MX Compatible regression test
 
-        tests/test-pdf-mx-compatible.js at the hub root writes a fixture markdown to a tmp dir with the full mx frontmatter and a declared x-mx-provenance block, renders it through scripts/bin/mx.pdf.sh, then makes eleven assertions: the two sidecars on disk, the PDF/UA declaration, five identity fields, two pointer fields, and one byte-for-byte match between the embedded XMP payload and the adjacent .ai.json after JSON normalisation. The test is wired into npm test and exposed as npm run test:pdf-mx-compatible.
+The phrase "MX Compatible" names a specific set of signals an inspector can verify on the rendered PDF: provenance sidecar pair on disk, the pdfuaid:Part=1 Level 2 declaration, MX-namespaced XMP fields populated from frontmatter, pointer fields naming the sidecars, and the full AI evidence chain embedded inline under XMP-mx:ProvenanceAiPayload.
 
-        An engineer who wants to sanity-check the contract from outside the repository can run the same probes by hand. The interactive inspector at /tools/pdf-inspector.html accepts any MX PDF and walks the chain in the browser; the explainer at /learn/mx-for-pdfs.html maps each signal to the standard it cites.
+tests/test-pdf-mx-compatible.js at the hub root writes a fixture markdown to a tmp dir with the full mx frontmatter and a declared x-mx-provenance block, renders it through scripts/bin/mx.pdf.sh, then makes eleven assertions: the two sidecars on disk, the PDF/UA declaration, five identity fields, two pointer fields, and one byte-for-byte match between the embedded XMP payload and the adjacent .ai.json after JSON normalisation. The test is wired into npm test and exposed as npm run test:pdf-mx-compatible.
 
-        How the pieces fit
+An engineer who wants to sanity-check the contract from outside the repository can run the same probes by hand. The interactive inspector at /tools/pdf-inspector.html accepts any MX PDF and walks the chain in the browser; the explainer at /learn/mx-for-pdfs.html maps each signal to the standard it cites.
 
-        One scoring vocabulary across every row of the scorecard. One contents page on its own page. One sibling sidecar carrying every reviewer signal so the report markdown stays client-facing. A regression-tested PDF contract that an inspector can verify in a browser or from the command line.
+How the pieces fit
 
-        The shared property across all of those is the same: each part of the deliverable does one job, and the part that does it is the part the reader expects to look at. The report carries the argument. The sidecar carries the reviewer's working. The XMP packet carries the evidence chain. The tests catch when any of them stops doing its job.
+One scoring vocabulary across every row of the scorecard. One contents page on its own page. One sibling sidecar carrying every reviewer signal so the report markdown stays client-facing. A regression-tested PDF contract that an inspector can verify in a browser or from the command line.
+
+The shared property across all of those is the same: each part of the deliverable does one job, and the part that does it is the part the reader expects to look at. The report carries the argument. The sidecar carries the reviewer's working. The XMP packet carries the evidence chain. The tests catch when any of them stops doing its job.
 
             About the author
 
@@ -2505,7 +2509,7 @@ An MX audit lands as a PDF on a desk with a particular shape. We walk through th
 
           Continue the conversation
 
-          Want a copy of the audit pipeline running against your own site?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
 
@@ -3567,21 +3571,21 @@ Structure is freedom. Make it machine-readable and you make it portable.
 
 **Description:** Every machine reading your content is guessing what it means and how to treat it. We end that. One attested record, written once, readable by any system that encounters the file.
 
-MX makes content readable to every machine that encounters it - without tying that readability to any platform's stack, any vendor's list, or any inference run on your behalf.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - The Problem
+        - The Problem
 
-            - The Inflection
+        - The Inflection
 
-            - What We Do
+        - What We Do
 
-            - What You Get
+        - What You Get
 
-            - How to Start
+        - How to Start
 
           Declare Once, Work Everywhere
 
@@ -3589,71 +3593,83 @@ MX makes content readable to every machine that encounters it - without tying th
             ·
             Tom Cranstoun
             ·
-            4 min read
+            5 min read
 
-        Every machine reading your content right now is guessing. It guesses what your pages sell, whether they are sensitive, how much to trust them, and whether to act on them at all. It does that work fresh, on every page load, independently of every other machine doing the same thing on the same content. None of those guesses are yours to see or correct.
+          - Machine Experience
 
-        We change that.
+- Pitch
 
-        The Problem
+- Open Standards
 
-        AI agents, browsers, search systems, and assistants are reading your content to serve their users. That is not the problem. The problem is that they do it by inference, and inference is private. Chrome carries internal lists - built into the browser binary, updated without notice - that decide whether an agent may act on your pages. A shopping model chops each page into hundred-word chunks and judges whether you trade. Assistants form their own read of your credibility and quote accordingly. None of it is disclosed, none of it is contestable, and none of it reflects what you have said about yourself.
+- Reginald
 
-        The result is a web where the decisions made about your content are made without you. When they are wrong, there is no one to answer for it.
+- Cog
 
-        The Inflection
+- Content Strategy
 
-        Two things happened in June 2026 that mark where this is heading.
+Every machine reading your content right now is guessing. It guesses what your pages sell, whether they are sensitive, how much to trust them, and whether to act on them at all. It does that work fresh, on every page load, independently of every other machine doing the same thing on the same content. None of those guesses are yours to see or correct.
 
-        Salesforce paid to acquire Contentful. The stated reason is agent infrastructure: content assembled by machines, delivered across channels, managed inside one vendor's stack. Agent-readiness is now a platform feature you purchase and a register you join. Withdraw from the platform and the signal leaves with you.
+We change that.
 
-        In the same month, researchers reverse-engineered the classification data Chrome ships alongside itself. More than thirty thousand domains gated from AI assistant actions. Another thirty thousand selected for semantic indexing. A live model deciding page by page whether you count as commerce. All of it written by one vendor, for one vendor's purposes, with no route to read or contest your entry.
+The Problem
 
-        The market has confirmed that machines need structured signals about content. The question it has not answered is who writes those signals, and whether the site has any say.
+AI agents, browsers, search systems, and assistants are reading your content to serve their users. That is not the problem. The problem is that they do it by inference, and inference is private. Chrome carries internal lists - built into the browser binary, updated without notice - that decide whether an agent may act on your pages. A shopping model chops each page into hundred-word chunks and judges whether you trade. Assistants form their own read of your credibility and quote accordingly. None of it is disclosed, none of it is contestable, and none of it reflects what you have said about yourself.
 
-        Read more: Salesforce Bought Contentful, but They Didn't Buy an MX Strategy and Who Answers When the Machine Decides?
+The result is a web where the decisions made about your content are made without you. When they are wrong, there is no one to answer for it.
 
-        What We Do
+The Inflection
 
-        We make content that manages itself.
+Two things happened in June 2026 that mark where this is heading.
 
-        A COG is a carrier-neutral record that travels with the file: what it is, who produced it, when it changed, how machines should treat it. The format is open, governed by The Gathering, published under an open licence. Any system can read it. No vendor owns the schema.
+Salesforce paid to acquire Contentful. The stated reason is agent infrastructure: content assembled by machines, delivered across channels, managed inside one vendor's stack. Agent-readiness is now a platform feature you purchase and a register you join. Withdraw from the platform and the signal leaves with you.
 
-        REGINALD adds the trust layer. An Ed25519 signature over the canonicalised bytes lets any reader confirm the record is genuinely yours and has not been altered in transit. The signature covers provenance and integrity. It does not make claims about editorial truth - that judgement stays with you and your readers. It gives the record an author and a date, so a machine that reads it knows whose word it is taking.
+In the same month, researchers reverse-engineered the classification data Chrome ships alongside itself. More than thirty thousand domains gated from AI assistant actions. Another thirty thousand selected for semantic indexing. A live model deciding page by page whether you count as commerce. All of it written by one vendor, for one vendor's purposes, with no route to read or contest your entry.
 
-        The pair - COG plus REGINALD attestation - means your content introduces itself to every system that encounters it. Not through a vendor's API, not through membership in a list you cannot see, but through a record in the file itself.
+The market has confirmed that machines need structured signals about content. The question it has not answered is who writes those signals, and whether the site has any say.
 
-        What You Get
+Read more: Salesforce Bought Contentful, but They Didn't Buy an MX Strategy and Who Answers When the Machine Decides?
 
-        Content that is machine-readable on your terms, not inferred on someone else's. When an agent reads your page and misrepresents it, you have a signed, dated statement of what the page actually says - and you have an accountable author, which is more than the inference has.
+What We Do
 
-        Content that travels. Platform lock-in is the dependency on a vendor to explain your content for you. A COG removes that dependency. The record is in the file. Move the file and you move the record.
+We make content that manages itself.
 
-        Evidence for governance. The AI Act, accessibility regulations, and digital-records law are moving in the same direction: disclosed, attributable, auditable decisions. A structured, signed declaration is the kind of evidence those regimes expect. We make that evidence. We do not make you compliant - compliance is a legal duty - but we make the documentation that compliance requires.
+A COG is a carrier-neutral record that travels with the file: what it is, who produced it, when it changed, how machines should treat it. The format is open, governed by The Gathering, published under an open licence. Any system can read it. No vendor owns the schema.
 
-        How to Start
+REGINALD adds the trust layer. An Ed25519 signature over the canonicalised bytes lets any reader confirm the record is genuinely yours and has not been altered in transit. The signature covers provenance and integrity. It does not make claims about editorial truth - that judgement stays with you and your readers. It gives the record an author and a date, so a machine that reads it knows whose word it is taking.
 
-        The fastest entry is an MX audit. We assess your current content against the machine-readability standard, score it against what agents and browsers actually resolve, and tell you exactly what to fix and in what order. Most organisations find the gap is smaller than it looks: the structured content work their CMS already forces is most of the journey. What is missing is the record that travels with the file.
+The pair - COG plus REGINALD attestation - means your content introduces itself to every system that encounters it. Not through a vendor's API, not through membership in a list you cannot see, but through a record in the file itself.
 
-        From there we work with your team to implement COG metadata, connect REGINALD attestation for the records that carry regulatory weight, and build the content infrastructure that no acquisition can take away.
+What You Get
 
-        Write to us at info@cognovamx.com or read what we offer at cognovamx.com/services.
+Content that is machine-readable on your terms, not inferred on someone else's. When an agent reads your page and misrepresents it, you have a signed, dated statement of what the page actually says - and you have an accountable author, which is more than the inference has.
+
+Content that travels. Platform lock-in is the dependency on a vendor to explain your content for you. A COG removes that dependency. The record is in the file. Move the file and you move the record.
+
+Evidence for governance. The AI Act, accessibility regulations, and digital-records law are moving in the same direction: disclosed, attributable, auditable decisions. A structured, signed declaration is the kind of evidence those regimes expect. We make that evidence. We do not make you compliant - compliance is a legal duty - but we make the documentation that compliance requires.
+
+How to Start
+
+The fastest entry is an MX audit. We assess your current content against the machine-readability standard, score it against what agents and browsers actually resolve, and tell you exactly what to fix and in what order. Most organisations find the gap is smaller than it looks: the structured content work their CMS already forces is most of the journey. What is missing is the record that travels with the file.
+
+From there we work with your team to implement COG metadata, connect REGINALD attestation for the records that carry regulatory weight, and build the content infrastructure that no acquisition can take away.
+
+Write to us at info@cognovamx.com or read what we offer at cognovamx.com/services.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Consults on MX strategy through Digital Domain Technologies Ltd, trading as CogNovaMX.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
-          Ready to start?
+          Continue the conversation
 
-          An MX audit takes a week. It tells you exactly where your content stands and what to fix. Get in touch.
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
-            - CogNovaMX services
+            - Get in touch
 
-            - Learn MX
+            - Explore the books
 
-            - info@cognovamx.com
+            - Join The Gathering
 
 ---
 
@@ -3663,11 +3679,11 @@ MX makes content readable to every machine that encounters it - without tying th
 
 **Description:** How we used Claude to understand a complex multi-step workflow, then automated it so humans could repeat it without AI assistance
 
-Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
-        Author: Tom Cranstoun
+            Author: Tom Cranstoun
 
-    Index
+        Index
 
         - The Challenge
 
@@ -3699,17 +3715,15 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
         - Appendix: The Commands
 
-          Designing Workflows for Humans and Machines: From AI Assistance to Automation
+          Designing Workflows for Humans and Machines
 
-          4 February 2026
-          ·
-          19 min read
+            2 April 2026
+            ·
+            Tom Cranstoun
+            ·
+            19 min read
 
-          - Practitioner
-
-- AI agents
-
-        The Challenge
+The Challenge
 
 I needed to add a new repository (MX-Audit) to our multi-repository hub system. The process involved:
 
@@ -4734,7 +4748,7 @@ Related:
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
@@ -5544,27 +5558,27 @@ Content strategy and IA:
 
 **Description:** Generative Engine Optimization has been around for years. It tells you to chase citations. Machine Experience tells you to build content that earns them, across every machine context, on any platform.
 
-SEO got you found. GEO gets you understood. MX gets you used. Same lineage, three different jobs. Only the third one is infrastructure.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - What GEO actually does
+        - What GEO actually does
 
-            - The contexts GEO ignores
+        - The contexts GEO ignores
 
-            - What MX adds underneath
+        - What MX adds underneath
 
-            - SEO, GEO, MX
+        - SEO, GEO, MX
 
-            - The structural-engineer view
+        - The structural-engineer view
 
-            - Where this leaves the agency conversation
+        - Where this leaves the agency conversation
 
-            - Found, used, acted on
+        - Found, used, acted on
 
-            - Where this is written down, and where it is debated
+        - Where this is written down, and where it is debated
 
           GEO is a tactic. MX is the specification.
 
@@ -5572,119 +5586,241 @@ SEO got you found. GEO gets you understood. MX gets you used. Same lineage, thre
             ·
             Tom Cranstoun
             ·
-            9 min read
+            12 min read
 
-          - SEO / GEO / AEO
+Generative Engine Optimization is not new. The term has been circulating in SEO and content circles for years now, and the underlying practice, adjusting content so it gets cited by AI-generated answers, predates the label. What is new is the volume at which platform vendors are now packaging GEO as a product story, complete with citation gap audits, optimization roadmaps, and "structured data stacks" sold as the route to AI visibility.
 
-- MX foundations
+If your brand is invisible in Claude, ChatGPT, Perplexity, or Google AI Overviews, GEO will help. It is a useful tactical layer, but tactics need a foundation. The foundation GEO needs, and rarely names, is whether your content was built to be read by machines in the first place. That is what Machine Experience addresses, and that is the difference worth understanding before you commission another tuning engagement.
 
-        Generative Engine Optimization is not new. The term has been circulating in SEO and content circles for years now, and the underlying practice, adjusting content so it gets cited by AI-generated answers, predates the label. What is new is the volume at which platform vendors are now packaging GEO as a product story, complete with citation gap audits, optimization roadmaps, and "structured data stacks" sold as the route to AI visibility.
+The progression is straightforward once you see it. SEO got you found. GEO gets you understood by the AI systems that now sit between your content and your reader. MX gets you used: read, trusted, and acted on by any machine, in any context, on any time horizon. Each step solves the problem the previous step left behind. SEO was for the web. GEO is for the web until the next platform innovation. MX is infrastructure for all documents for all time, the web included.
 
-        If your brand is invisible in Claude, ChatGPT, Perplexity, or Google AI Overviews, GEO will help. It is a useful tactical layer, but tactics need a foundation. The foundation GEO needs, and rarely names, is whether your content was built to be read by machines in the first place. That is what Machine Experience addresses, and that is the difference worth understanding before you commission another tuning engagement.
+What GEO actually does
 
-        The progression is straightforward once you see it. SEO got you found. GEO gets you understood by the AI systems that now sit between your content and your reader. MX gets you used: read, trusted, and acted on by any machine, in any context, on any time horizon. Each step solves the problem the previous step left behind. SEO was for the web. GEO is for the web until the next platform innovation. MX is infrastructure for all documents for all time, the web included.
+GEO works on the surface of existing content. It audits which AI systems mention your brand, identifies the content patterns that suppress citations, and prescribes adjustments: clearer headings, more direct factual statements, schema markup, authoritative outbound links, content freshness signals. Done well, it moves the needle on citation rates inside the platforms it targets.
 
-        What GEO actually does
+What GEO does not do is change the underlying nature of your content. The article still lives inside a CMS database. The product page still depends on a rendering pipeline to express its meaning. The maintenance context still sits in a separate ticketing system. The asset still cannot travel intact to a different platform, a different agent, or a different audience without being rebuilt or re-explained.
 
-        GEO works on the surface of existing content. It audits which AI systems mention your brand, identifies the content patterns that suppress citations, and prescribes adjustments: clearer headings, more direct factual statements, schema markup, authoritative outbound links, content freshness signals. Done well, it moves the needle on citation rates inside the platforms it targets.
+This matters because the surface GEO optimizes for is one of several machine reading contexts, and not the most strategic one.
 
-        What GEO does not do is change the underlying nature of your content. The article still lives inside a CMS database. The product page still depends on a rendering pipeline to express its meaning. The maintenance context still sits in a separate ticketing system. The asset still cannot travel intact to a different platform, a different agent, or a different audience without being rebuilt or re-explained.
+The contexts GEO ignores
 
-        This matters because the surface GEO optimizes for is one of several machine reading contexts, and not the most strategic one.
+Machines read content in distinct ways. Training corpora absorb it for model weights. Retrieval-augmented inference pulls passages at query time. Search engines index it for ranking. Browser agents traverse it on behalf of a user with an actual task. Voice assistants and LLM-mediated commerce act on it without rendering it visually at all.
 
-        The contexts GEO ignores
+GEO concentrates on the citation surface: primarily the third and fourth of those contexts, and only the parts visible to a public crawler. It has little to say about content that needs to be trusted by an agent making a purchase, content that has to survive ingestion into a private knowledge base, or content that has to remain accurate three years after publication when the original author has moved on. Those problems are not reachable through surface tuning. They require the content itself to carry its own context, its own provenance, and its own update instructions.
 
-        Machines read content in distinct ways. Training corpora absorb it for model weights. Retrieval-augmented inference pulls passages at query time. Search engines index it for ranking. Browser agents traverse it on behalf of a user with an actual task. Voice assistants and LLM-mediated commerce act on it without rendering it visually at all.
+That is what MX specifies.
 
-        GEO concentrates on the citation surface: primarily the third and fourth of those contexts, and only the parts visible to a public crawler. It has little to say about content that needs to be trusted by an agent making a purchase, content that has to survive ingestion into a private knowledge base, or content that has to remain accurate three years after publication when the original author has moved on. Those problems are not reachable through surface tuning. They require the content itself to carry its own context, its own provenance, and its own update instructions.
+What MX adds underneath
 
-        That is what MX specifies.
+Machine Experience is a framework for building content as a portable, self-describing artefact rather than as a database row dressed up by a template. Cogs are the unit of work: COGS stands for Community Owned Governance Standards, and a cog is a single document written to those standards, with structured metadata in its frontmatter and human-readable content in its body, expressed in a format that both humans and machines can read directly without intermediary tooling. The "community owned" part is where the real work happens. Cogs are governed by an open community, not by a single vendor's product roadmap.
 
-        What MX adds underneath
+Cogs carry their purpose, their audience, their stability guarantees, their relationships to other content, and the instructions for keeping them current. They can be notarised through Reginald, currently in beta, so that downstream consumers, including AI agents, can verify they are genuine, unaltered, and authored by who they claim to be. They render the same in a browser, a training pipeline, a RAG retrieval, an agent traversal, and a voice query, because the content is the source of truth rather than a projection of it. MX is the DNA a file carries when it leaves any pool, so each of those reading contexts gets the same answer to the same questions: what this is, who published it, whether it has been altered, whether it is current.
 
-        Machine Experience is a framework for building content as a portable, self-describing artefact rather than as a database row dressed up by a template. Cogs are the unit of work: COGS stands for Community Owned Governance Standards, and a cog is a single document written to those standards, with structured metadata in its frontmatter and human-readable content in its body, expressed in a format that both humans and machines can read directly without intermediary tooling. The "community owned" part is where the real work happens. Cogs are governed by an open community, not by a single vendor's product roadmap.
+Here is the concrete shape of what a cog carries that JSON-LD and the Schema.org playbook do not. SEO, GEO, AEO and the structured-data vocabularies underneath all answer the same question: how does a machine find this page. Once a machine has the page, those layers are silent on the signals an arriving agent needs:
 
-        Cogs carry their purpose, their audience, their stability guarantees, their relationships to other content, and the instructions for keeping them current. They can be notarised through Reginald, currently in beta, so that downstream consumers, including AI agents, can verify they are genuine, unaltered, and authored by who they claim to be. They render the same in a browser, a training pipeline, a RAG retrieval, an agent traversal, and a voice query, because the content is the source of truth rather than a projection of it. MX is the DNA a file carries when it leaves any pool, so each of those reading contexts gets the same answer to the same questions: what this is, who published it, whether it has been altered, whether it is current.
+- created: publication date, immutable after creation
 
-        Here is the concrete shape of what a cog carries that JSON-LD and the Schema.org playbook do not. SEO, GEO, AEO and the structured-data vocabularies underneath all answer the same question: how does a machine find this page. Once a machine has the page, those layers are silent on the signals an arriving agent needs:
+- expires: the date after which the content is no longer authoritative
 
-          - created: publication date, immutable after creation
+- originator (alias author): the immutable creator
 
-          - expires: the date after which the content is no longer authoritative
+- stewardship.steward (alias maintainer): the mutable accountable contact
 
-          - originator (alias author): the immutable creator
+- canonicalUri: the durable address the document resolves to, regardless of where it is mirrored
 
-          - stewardship.steward (alias maintainer): the mutable accountable contact
+- status plus supersedes / supersededBy / replacedBy: the supersession chain that lets a machine walk from any version to the current one
 
-          - canonicalUri: the durable address the document resolves to, regardless of where it is mirrored
+A cog carries each of these as a first-class top-level field, validated at write time. SEO got you found; GEO gets you understood; AEO gets you cited; MX makes the page legible to a machine that has arrived and now has to act.
 
-          - status plus supersedes / supersededBy / replacedBy: the supersession chain that lets a machine walk from any version to the current one
+The practical effect of attestation compounds. An agent that reads a Reginald-registered document hallucinates less, it has verified origin and version to cite rather than gaps to fill by inference. Fewer inference steps means lower token consumption and lower energy draw across AI infrastructure. As the EU AI Act and digital-records legislation place documentation, logging, and verifiability obligations on the bodies they cover, attestation becomes the layer that makes the required provenance evidence verifiable on request. MX and Reginald do not grant compliance with any of these regulations; that remains a legal duty of the body subject to them. They make the documentation that body must produce structured, machine-readable, tamper-evident, and verifiable on request. MX makes content machine-readable. Reginald makes it machine-trustworthy. Both properties are required for content that is genuinely ready for the machine economy.
 
-        A cog carries each of these as a first-class top-level field, validated at write time. SEO got you found; GEO gets you understood; AEO gets you cited; MX makes the page legible to a machine that has arrived and now has to act.
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
-        The practical effect of attestation compounds. An agent that reads a Reginald-registered document hallucinates less, it has verified origin and version to cite rather than gaps to fill by inference. Fewer inference steps means lower token consumption and lower energy draw across AI infrastructure. As the EU AI Act and digital-records legislation place documentation, logging, and verifiability obligations on the bodies they cover, attestation becomes the layer that makes the required provenance evidence verifiable on request. MX and Reginald do not grant compliance with any of these regulations; that remains a legal duty of the body subject to them. They make the documentation that body must produce structured, machine-readable, tamper-evident, and verifiable on request. MX makes content machine-readable. Reginald makes it machine-trustworthy. Both properties are required for content that is genuinely ready for the machine economy.
+The Convergence Principle sits underneath this: interfaces designed for machines turn out to be better for humans too. A document that an agent can read accurately is also a document that a screen reader handles cleanly, that a translator can localise without losing meaning, and that a new team member can understand without a handover meeting. Accessibility, machine-readability, and editorial maintainability stop being separate workstreams.
 
-        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+GEO cannot deliver any of that, because GEO is a remediation layer applied to content architectures that were never designed for machine audiences in the first place, rather than a content architecture in its own right.
 
-        The Convergence Principle sits underneath this: interfaces designed for machines turn out to be better for humans too. A document that an agent can read accurately is also a document that a screen reader handles cleanly, that a translator can localise without losing meaning, and that a new team member can understand without a handover meeting. Accessibility, machine-readability, and editorial maintainability stop being separate workstreams.
+SEO, GEO, MX
 
-        GEO cannot deliver any of that, because GEO is a remediation layer applied to content architectures that were never designed for machine audiences in the first place, rather than a content architecture in its own right.
+SEO is the first generation. Tune pages so search engines find them and rank them. The audience is a crawler that returns a list of links to a human. The output is traffic. SEO did the job it was designed to do, and it still does, for the part of the web that lives behind a search box.
 
-        SEO, GEO, MX
+GEO is the second. Tune pages so AI systems will cite them in generated answers. The audience is an LLM-mediated reader, deciding whether to mention you in a synthesised response. The output is visibility inside the model's reply. GEO is still surface tuning, still bound to the public web, and still subject to whatever the next major platform change does to retrieval. The lever that quietly governs all of this is the system prompt, the hidden instructions a vendor runs before any user query, telling the model how to search, when to cite, what to attribute, and which sources to prefer. System prompts are not published, are rewritten without notice, and reshape citation patterns overnight. When OpenAI moved ChatGPT to GPT-5.3 Instant in March 2026, third-party monitoring across 27,000 responses found cited domains dropped roughly 20%, from an average of 19 unique domains per response to 15, with crawl frequency falling in lockstep on independent log analysis. Nothing about the underlying web changed. The system prompt did. Every site that had been tuning for the previous patterns had to start again. GEO is for the web until the next innovation, and the next innovation is usually a system-prompt rewrite the vendor never tells you about.
 
-        SEO is the first generation. Tune pages so search engines find them and rank them. The audience is a crawler that returns a list of links to a human. The output is traffic. SEO did the job it was designed to do, and it still does, for the part of the web that lives behind a search box.
+MX is the next generation. Structure content so any machine, in any reading context, on any time horizon, can act on it directly. The audience is everything that will ever read the document, including agents that have not been built yet. The output is a document that is usable, not just findable or quotable. Infrastructure, not surface tuning. For the web, and for everything else that is not the web: PDFs, internal knowledge bases, regulatory filings, training corpora, voice surfaces, agent commerce flows, archival systems that have to read your content twenty years from now.
 
-        GEO is the second. Tune pages so AI systems will cite them in generated answers. The audience is an LLM-mediated reader, deciding whether to mention you in a synthesised response. The output is visibility inside the model's reply. GEO is still surface tuning, still bound to the public web, and still subject to whatever the next major platform change does to retrieval. The lever that quietly governs all of this is the system prompt, the hidden instructions a vendor runs before any user query, telling the model how to search, when to cite, what to attribute, and which sources to prefer. System prompts are not published, are rewritten without notice, and reshape citation patterns overnight. When OpenAI moved ChatGPT to GPT-5.3 Instant in March 2026, third-party monitoring across 27,000 responses found cited domains dropped roughly 20%, from an average of 19 unique domains per response to 15, with crawl frequency falling in lockstep on independent log analysis. Nothing about the underlying web changed. The system prompt did. Every site that had been tuning for the previous patterns had to start again. GEO is for the web until the next innovation, and the next innovation is usually a system-prompt rewrite the vendor never tells you about.
+Found. Understood. Used.
 
-        MX is the next generation. Structure content so any machine, in any reading context, on any time horizon, can act on it directly. The audience is everything that will ever read the document, including agents that have not been built yet. The output is a document that is usable, not just findable or quotable. Infrastructure, not surface tuning. For the web, and for everything else that is not the web: PDFs, internal knowledge bases, regulatory filings, training corpora, voice surfaces, agent commerce flows, archival systems that have to read your content twenty years from now.
+The structural-engineer view
 
-        Found. Understood. Used.
+Picture how a building works. GEO is the surface treatment: the paint, the cladding, the signage that helps people find the entrance. Useful, often necessary, sometimes the difference between a building that works and one that does not. The building stands or falls, though, on the structural specification underneath: the load paths, the materials, the connections, the codes it was designed to.
 
-        The structural-engineer view
+MX is that specification for content. It defines what a piece of content has to be to earn citation, recommendation, agent-trust, and long-term reuse, across any platform, any machine context, any time horizon. GEO is one tactic you can apply on top of an MX-compliant foundation. It is also a tactic you can apply on top of a foundation that will fail you the moment a major AI provider changes its retrieval policy, or a new agent commerce protocol arrives, or your hosting vendor decides to lock its structured data behind a paywall.
 
-        Picture how a building works. GEO is the surface treatment: the paint, the cladding, the signage that helps people find the entrance. Useful, often necessary, sometimes the difference between a building that works and one that does not. The building stands or falls, though, on the structural specification underneath: the load paths, the materials, the connections, the codes it was designed to.
+If your strategy depends on the ranking patterns of a specific platform's AI system, you are renting visibility. If your content meets the MX specification, you own it.
 
-        MX is that specification for content. It defines what a piece of content has to be to earn citation, recommendation, agent-trust, and long-term reuse, across any platform, any machine context, any time horizon. GEO is one tactic you can apply on top of an MX-compliant foundation. It is also a tactic you can apply on top of a foundation that will fail you the moment a major AI provider changes its retrieval policy, or a new agent commerce protocol arrives, or your hosting vendor decides to lock its structured data behind a paywall.
+Where this leaves the agency conversation
 
-        If your strategy depends on the ranking patterns of a specific platform's AI system, you are renting visibility. If your content meets the MX specification, you own it.
+The agencies starting to win this work are the ones who can hold both layers in mind. GEO answers the immediate brief: the client wants to be cited in Claude by next quarter, and that is a real number on a real dashboard. MX answers the structural one: the client wants to still be cited in three years, in tools that do not exist yet, by audiences that include agents acting autonomously on their users' behalf.
 
-        Where this leaves the agency conversation
+The two are not competing. GEO done on top of MX-compliant content compounds. GEO done on top of fragile content gets undone by the next platform shift.
 
-        The agencies starting to win this work are the ones who can hold both layers in mind. GEO answers the immediate brief: the client wants to be cited in Claude by next quarter, and that is a real number on a real dashboard. MX answers the structural one: the client wants to still be cited in three years, in tools that do not exist yet, by audiences that include agents acting autonomously on their users' behalf.
+Found, used, acted on
 
-        The two are not competing. GEO done on top of MX-compliant content compounds. GEO done on top of fragile content gets undone by the next platform shift.
+The web is shifting toward AI agents as primary users. Most of what is being sold into that shift focuses on tuning content for AI; that is GEO. MX goes further. It makes your site directly usable by AI systems, not just findable by them. That is the difference between being found and being used.
 
-        Found, used, acted on
+Most of the conversation in the market right now is about GEO and machine-readable content. That is surface tuning. MX is infrastructure. The work is not to help an AI understand your site; it is to make your site something an AI can act on, with the provenance and structural integrity that warrants the action.
 
-        The web is shifting toward AI agents as primary users. Most of what is being sold into that shift focuses on tuning content for AI; that is GEO. MX goes further. It makes your site directly usable by AI systems, not just findable by them. That is the difference between being found and being used.
+SEO got you found. GEO gets you understood. MX gets you used. That is the progression worth holding in mind before the next tuning engagement: not "how do I rank in this AI system?" but "what does my content have to be, so that any AI system, on any time horizon, can act on it without first having to interpret it?"
 
-        Most of the conversation in the market right now is about GEO and machine-readable content. That is surface tuning. MX is infrastructure. The work is not to help an AI understand your site; it is to make your site something an AI can act on, with the provenance and structural integrity that warrants the action.
+That question is what MX exists to answer, and it has been answerable for longer than the GEO acronym has been in marketing decks.
 
-        SEO got you found. GEO gets you understood. MX gets you used. That is the progression worth holding in mind before the next tuning engagement: not "how do I rank in this AI system?" but "what does my content have to be, so that any AI system, on any time horizon, can act on it without first having to interpret it?"
+Where this is written down, and where it is debated
 
-        That question is what MX exists to answer, and it has been answerable for longer than the GEO acronym has been in marketing decks.
+If the argument lands and you want to take it further, the book series and the open community carry the rest of it. The MX book series is the long-form specification: MX: The Handbook for the framework and the day-to-day patterns, MX: The Protocols for the cog format, the carrier rules, and the agent-facing contracts, and MX: The Appendices for the field dictionary and recipes. The books are the place where the structural argument is written down once, in the form a serious team can adopt without having to reverse-engineer it from blog posts.
 
-        Where this is written down, and where it is debated
-
-        If the argument lands and you want to take it further, the book series and the open community carry the rest of it. The MX book series is the long-form specification: MX: The Handbook for the framework and the day-to-day patterns, MX: The Protocols for the cog format, the carrier rules, and the agent-facing contracts, and MX: The Appendices for the field dictionary and recipes. The books are the place where the structural argument is written down once, in the form a serious team can adopt without having to reverse-engineer it from blog posts.
-
-        The Gathering is where the standard is debated, refined, and kept honest. It is the open community that owns the cog specification, reviews proposed extensions, and stops the format from drifting into any one vendor's interest. If you build content systems, run an agency, or operate a published corpus that AI systems are starting to read first, that is the community to join. tg.community is the door.
+The Gathering is where the standard is debated, refined, and kept honest. It is the open community that owns the cog specification, reviews proposed extensions, and stops the format from drifting into any one vendor's interest. If you build content systems, run an agency, or operate a published corpus that AI systems are starting to read first, that is the community to join. tg.community is the door.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series. Building content systems since 1977. Works on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd, trading as CogNovaMX.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to know what your content looks like to the AI systems your buyers are starting to ask first?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
-            - Get in touch about an MX audit
+            - Get in touch
 
-            - Why an MX audit pays for itself
+            - Explore the books
 
-            - Many agents, one metadata layer
+            - Join The Gathering
+
+---
+
+## Google Named GEO, Then Debunked Most of It | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/google-named-geo-then-debunked-it.html
+
+**Description:** On 5 June 2026 Google's Search Central docs named generative engine optimization as a real thing, and in the same update told you most of what is sold under that name does nothing. The tactics it crossed out were never the MX claim. What survives is the floor MX builds on, plus the one layer Google Search is not in the business of giving you: provenance.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - The tactics Google just crossed out
+
+        - What Google says actually works
+
+        - None of what Google torched was ever the MX claim
+
+        - The one thing Google's guide structurally cannot give you
+
+        - So what changed for the people who actually write?
+
+          Google Named GEO, Then Debunked Most of It
+
+            13 June 2026
+            ·
+            Tom Cranstoun
+            ·
+            7 min read
+
+          - SEO / GEO / AEO
+
+- Commentary
+
+- Provenance
+
+- MX foundations
+
+- Google
+
+On 5 June 2026 Google updated its Search Central documentation with an official guide to optimizing for generative AI features on Google Search. For the first time, Google's own docs name the thing: generative engine optimization, GEO, alongside answer engine optimization, AEO. After two years of practitioners arguing about whether the category was real, Google put it in writing. GEO is a thing now, officially.
+
+Then, in the same update, Google quietly torched most of what is being sold under that name.
+
+That is the part worth sitting with. The vendor whose surface everyone is optimizing for just published the list of GEO tactics that do nothing, and it is a long list. It reads like an itemised GEO invoice with most of the line items crossed out.
+
+The tactics Google just crossed out
+
+Google's mythbusting section is blunt. You do not need any of the following to appear in its generative AI results:
+
+- llms.txt. In Google's words, you do not need to create new machine-readable files, AI text files, markup, or Markdown to appear in generative AI search. The Search team had been comparing llms.txt to the old keywords meta tag for months. Now it is in the docs.
+
+- Special schema for AI. Structured data is not required for generative AI search, and there is no special schema.org markup you bolt on to win citations.
+
+- "AI chunking." Breaking your content into bespoke chunks for the model is not a requirement. The chunking-as-a-service pitch is smoke.
+
+- AI-specific rewrites. You do not write a separate, machine-flavoured version of your page. The same page that serves a human serves the model.
+
+- Inauthentic mentions. Manufacturing brand mentions to game the answer engines is a tactic Google warns against, not one it rewards.
+
+Look at that list against the GEO retainers people post about. A "structured data stack". An "llms.txt implementation". An "AI chunking strategy". A "citation gap audit" whose remedies are mostly the four bullets above. Google just published the docs that say those moves are noise.
+
+What Google says actually works
+
+Strip the debunked tactics out and what Google leaves standing is almost insultingly plain. Write unique, genuinely useful content. Ground it in real sources. Keep the structure clean. Make sure the site is crawlable and indexable. Give people a clear experience. From Google's perspective, optimizing for generative AI search is optimizing for the search experience, so it is, in their phrase, still SEO.
+
+That is the advice nobody can build a retainer around. There is no proprietary file to sell, no markup stack to install, no chunking pipeline to license. It is the work, done properly, the way it was always supposed to be done. Which is exactly why it is uncomfortable for a chunk of the GEO market, and exactly why it is correct.
+
+None of what Google torched was ever the MX claim
+
+Here is where I have to be honest, because I build in this space and I have a dog in this fight.
+
+You might expect Machine Experience to be on Google's debunked list. We talk about machine-readable content. We serve an llms.txt. We care about structured data. Surely Google just torched us too?
+
+No. Read what we actually wrote.
+
+On llms.txt, our position has been the unpopular one for a while: llms.txt probably isn't working. It was never a Google ranking trick, and we said so. It is a convenience for the agents that choose to read it, not a signal Google Search promised to honour. Google saying "this does nothing for our generative results" is not a correction of MX. It is the same thing we said, from the other side of the fence.
+
+On schema, our line has been that structured data is necessary and nowhere near sufficient. Schema.org keeps growing, and the provenance layer still does not exist. Google deprecating rich-result types that publishers gamed, and now telling you not to obsess over markup, lands on the same point: schema describes a claim, it does not evidence one. We have never told anyone to stack schema and call it a strategy.
+
+On "AI chunking" and AI-specific rewrites, MX is the opposite of that. The whole argument is that one well-built artefact serves every reader, human and machine, with no special machine-flavoured fork. Google's "the same page serves both" is our Convergence Principle in Google's own words: a page an agent can read accurately is a page a screen reader handles cleanly and a person understands without a handover.
+
+So when Google torched the GEO surface tactics, it did not torch MX. It cleared the floor that MX has been building on the whole time.
+
+The one thing Google's guide structurally cannot give you
+
+"Still SEO" is true, and it is also the tell. Google's guide is about the page, on Google's surface, found through Google's index. It is silent on the file once it leaves that surface, because Google Search is not in the business of telling an arriving agent who published a document, when, and whether it has been altered since.
+
+That is the gap. The four bullets Google left standing get you found and get you read. They say nothing about whether the thing reading you can prove where you came from. When your contract is lifted into a procurement portal, your policy file into a regulatory submission, your article into a training corpus, the page is gone and the Google index is not in the loop. What travels with the file is whatever the file carries on its own.
+
+That carried layer is provenance: who published this, when, under what version, and a way to check it has not changed. MX is the discipline that puts it in the file. Reginald, currently in beta, is the registry that makes it verifiable. MX makes content machine-readable. Reginald makes it machine-trustworthy. Google's guide, by design, does neither, and never claimed to.
+
+This is also where the regulatory weather is heading. The EU AI Act, the European Accessibility Act, and the digital-records rules arriving alongside them expect organisations to produce documentation that is structured, logged, and verifiable on request. MX and Reginald do not grant compliance with any of them; that stays a legal duty of the organisation. They make the documentation that organisation has to produce tamper-evident and checkable, which is precisely the part a search optimization guide is never going to cover.
+
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
+So what changed for the people who actually write?
+
+Less than the invoices imply, and that is the good news.
+
+If you were already writing unique content, citing real sources, and keeping your structure clean and crawlable, Google just told you that you have been doing GEO correctly the entire time. Keep going. Do not buy the chunking pipeline.
+
+If your visibility plan was a stack of the tactics Google just crossed out, you were renting it, on a lease Google can cancel in a docs update, which it just did. The same lesson runs under the platform churn we wrote about in Game the Signals, Lose the Engine: the surface advice contradicts itself every quarter because it tracks one product team's release notes, while the machine layer underneath does not move.
+
+And if you want the part Google's guide cannot reach, the part that survives the next system-prompt rewrite and travels with the file when the page is nowhere in sight, that is the layer to build now. Not "how do I rank in this AI system this quarter", but "what does my content carry so that any machine, anywhere, can prove what it is".
+
+Google named GEO and debunked most of it in the same breath. The unglamorous floor it left standing is real, and it is the floor MX builds on. The provenance layer it left untouched is the part worth owning. Found, understood, used: Google just confirmed the first two and stayed quiet on the third.
+
+If you want the longer argument, it is in GEO is a tactic, MX is the specification, and the standard itself is debated in the open at tg.community.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
 
             - Join The Gathering
 
@@ -6995,6 +7131,59 @@ Blog
         Blockchain
         Announcements
 
+            GEO is a tactic. MX is the specification.
+
+            Generative Engine Optimization has been around for years. It tells you to chase citations. Machine Experience tells you to build content that earns them, across every machine context, on any platform.
+
+            30 April 2026
+            - SEO / GEO / AEO
+
+            Build Content Systems That Machines Can Trust
+
+            Most organizations optimize for visibility. The publishing systems underneath still produce content machines cannot reliably read, interpret, or act on. The work I do fixes that.
+
+            1 May 2026
+            - Business case
+
+            MX: The Handbook Is Here
+
+            The practical implementation guide to Machine Experience, making your website work for AI agents, screen readers, and everything in between. Available now as PDF and print.
+
+            10 April 2026
+            - Announcements
+
+            Why llms.txt Isn't Working, and How to Fix It
+
+            Most llms.txt implementations have two structural problems that stop them reaching LLM training. Here is the fix and the working code.
+
+            9 April 2026
+            - Practitioner
+
+            Designing Workflows for Humans and Machines
+
+            How we used Claude to understand a complex multi-step workflow, then automated it so humans could repeat it without AI assistance
+
+            2 April 2026
+            - Practitioner
+
+            Declare Once, Work Everywhere
+
+            Every machine reading your content is guessing what it means and how to treat it. We end that. One attested record, written once, readable by any system that encounters the file.
+
+            2 June 2026
+            - MX foundations
+
+- COGs
+
+            An MX Audit, Read by an Engineer
+
+            A walk through an MX audit deliverable from an engineer's perspective: scorecard vocabulary, page composition, findings sidecar, regression tests, and the contract that makes the PDF MX Compatible.
+
+            28 May 2026
+            - Practitioner
+
+- COGs
+
             An MX Audit, On Your Desk
 
             The audit report we deliver to clients has one job: tell them what we found and what to do about it. We have shaped the deliverable around that job.
@@ -7205,17 +7394,6 @@ Blog
 
 - Commentary
 
-            Declare Once, Work Everywhere
-
-            Every machine reading your content is guessing what it means and how to treat it. One attested record, written once and readable by any system that encounters the file, ends that. This is what we do and why it matters now.
-
-            2 June 2026
-            - Open standards
-
-- MX foundations
-
-- Practitioner
-
             The Inspector You Can Audit Yourself
 
             The public PDF inspector at mx.allabout.network checks one file at a time for free. The same detection core is now available as a command-line tool for accredited operators, and as a hard gate in our own publishing pipeline. Four surfaces, one source of truth, all readable in the open.
@@ -7226,17 +7404,6 @@ Blog
 - MX foundations
 
 - Accredited operators
-
-            An MX Audit, Read by an Engineer
-
-            A walk through an MX audit deliverable from an engineer's perspective: one scoring vocabulary across the scorecard, the contents page on its own page, findings in a sibling sidecar, regression tests, and the contract that makes the PDF MX Compatible.
-
-            28 May 2026
-            - Practitioner
-
-- Provenance
-
-- MX foundations
 
             A PDF That Can Prove Itself
 
@@ -7426,24 +7593,6 @@ Blog
 
 - AI agents
 
-            Build Content Systems That Machines Can Trust
-
-            SEO and GEO optimise for visibility. The publishing systems underneath still produce content machines cannot reliably read, interpret, or act on. MX upgrades the content supply chain so every output, in every format, is machine-ready by design.
-
-            1 May 2026
-            - Business case
-
-- MX foundations
-
-            GEO is a tactic. MX is the specification.
-
-            Generative Engine Optimization optimizes the surface. Machine Experience specifies the structure underneath. The agencies winning this work hold both layers in mind, before the next platform shift undoes anything built on a fragile foundation.
-
-            30 April 2026
-            - SEO / GEO / AEO
-
-- MX foundations
-
             Why an MX Audit Pays for Itself
 
             Machines now read most published content before humans do. Three ways an MX audit returns its cost: reduced inference cost across every reader, fewer hallucinated citations, and lower regulatory exposure under the European Accessibility Act.
@@ -7518,15 +7667,6 @@ Blog
 
 - Commentary
 
-            Designing Workflows for Humans and Machines
-
-            How we used Claude to understand a complex multi-step workflow, then automated it so humans could repeat it without AI assistance.
-
-            4 February 2026
-            - Practitioner
-
-- AI agents
-
             Content That Manages Itself
 
             What happens when content carries its own metadata, declares its own dependencies, and tells machines what it needs.
@@ -7544,15 +7684,6 @@ Blog
             - Commentary
 
 - MX foundations
-
-            Why llms.txt Probably Isn't Working, And What to Do About It
-
-            Most llms.txt implementations have two structural problems that prevent them from reaching LLM training data at all. The fix and the working Cloudflare Worker code.
-
-            9 April 2026
-            - Practitioner
-
-- AI agents
 
             Agent Discoverability: What Your Site Is Missing
 
@@ -7638,15 +7769,6 @@ Blog
             - COGs
 
 - AI agents
-
-            MX: The Handbook Is Here
-
-            The practical implementation guide to Machine Experience, making your website work for AI agents, screen readers, and everything in between. Available now as PDF and print.
-
-            10 April 2026
-            - Announcements
-
-- MX foundations
 
         Profiles
 
@@ -7782,13 +7904,23 @@ Tom Cranstoun is the Machine Experience Authority and founder of the MX communit
 
 **Description:** Most llms.txt implementations have two structural problems that stop them reaching LLM training. Here is the fix and the working code.
 
-Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
-        Author: Tom Cranstoun
+            Author: Tom Cranstoun
 
-    Index
+        Index
 
         - The Two Problems Nobody Mentions
+
+        - About CogNovaMX
+
+        - Services
+
+        - Docs
+
+        - Optional
+
+        - About CogNovaMX
 
         - What MX Practice Says About This
 
@@ -7800,21 +7932,19 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
         - Readable by Both Means Readable by Both
 
-          Why llms.txt Probably Isn't Working, And What to Do About It
+          Why llms.txt Isn't Working, and How to Fix It
 
-          9 April 2026
-          ·
-          9 min read
+            9 April 2026
+            ·
+            Tom Cranstoun
+            ·
+            15 min read
 
-          - Practitioner
-
-- AI agents
-
-        There is a reasonable idea behind llms.txt. Proposed by Jeremy Howard in September 2024, it follows the same logic as robots.txt: place a structured file at your root, and AI systems can find a curated, structured description of your site, without needing to crawl every page to piece together what you do.
+There is a reasonable idea behind llms.txt. Proposed by Jeremy Howard in September 2024, it follows the same logic as robots.txt: place a structured file at your root, and AI systems can find a curated, structured description of your site, without needing to crawl every page to piece together what you do.
 
 The proposal is sensible. The execution, for most sites, is broken in two specific ways that are easy to miss and easy to fix.
 
-  How llms.txt reaches LLM training data, serve as text/html and reference it in sitemap.xml.
+How llms.txt reaches LLM training data, serve as text/html and reference it in sitemap.xml.
 
 The Two Problems Nobody Mentions
 
@@ -7853,6 +7983,7 @@ export default {
     return fetch(request);
   }
 };
+
 To make the difference concrete, here is a real llms.txt, the one we use for allabout.network, as it sits on the server before any wrapping:
 
 # allabout.network, CogNovaMX
@@ -7889,6 +8020,7 @@ series. We help organizations design websites that work for both humans and mach
 
 ## Optional
 - [Blog](https://allabout.network/blogs/ddt/): Articles on MX, CMS, and AI readiness.
+
 This is what an LLM training pipeline needs to understand who we are, what we do, and where to find more. It describes services in plain terms, links to substantive content, and gives enough context that an AI system encountering it during training can form an accurate picture of the organisation, without needing to crawl dozens of pages. That is the point of the format: curated signal, not bulk content.
 
 And here is the same content after HTML wrapping, as Common Crawl will see it:
@@ -7912,6 +8044,7 @@ And here is the same content after HTML wrapping, as Common Crawl will see it:
 </pre>
 </body>
 </html>
+
 The content is identical. The wrapper is minimal. The difference is that crawlers will now index it.
 
 What this site actually deploys
@@ -7985,6 +8118,7 @@ ${canonicalTag}<script type="application/ld+json">${jsonLd}</script>
 </body>
 </html>`;
 };
+
 The differences from the minimum viable snippet are deliberate, and each one earns its place:
 
 - HTML escaping: the raw llms.txt may legitimately contain <, >, or &. Inserting that into a template without escaping would corrupt the document and, in the worst case, smuggle markup into the page. The minimum-viable snippet skips this for clarity; production cannot.
@@ -8025,9 +8159,11 @@ The HTML meta tag approach does exactly that. Rather than relying on a crawler t
 
 <link rel="llms-txt" href="/llms.txt">
 <meta name="llms-txt-description" content="A description of your site and its content.">
+
 The link tag tells any agent or crawler that encounters the page exactly where to find the llms.txt file, no guessing, no root discovery required. For sites where content is concise enough, the full content can also go directly into the page as a meta tag:
 
 <meta name="llms-txt-content" content="# Your Site > Description...">
+
 No new standard needs to be adopted. No new crawler behavior needs to be assumed. The structural information is present in the HTML itself, where crawlers have always looked.
 
 A Note on Headless and JavaScript-Rendered Sites
@@ -8040,6 +8176,7 @@ Headless CMSs, Contentful, Sanity, Hygraph, and similar, deliver content through
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
 </body>
+
 No content. Just a shell. The scraper cannot see the products, articles, or services the site exists to describe. The link tag and meta description approach is especially useful here because they sit in the <head>, the part of the page that is served before JavaScript runs, and the only part most crawlers will ever see. You are not waiting for the JavaScript to execute; the reference to llms.txt is already in the response.
 
 The Standard Behind the Recipe
@@ -8094,7 +8231,7 @@ Related reading
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
@@ -9863,103 +10000,101 @@ The question isn't whether to optimize for agents. The question is whether you c
 
 **Description:** The practical implementation guide to Machine Experience, making your website work for AI agents, screen readers, and everything in between. Available now as PDF and print.
 
-Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - The problem is not intelligence, it is guessing
+        - The problem is not intelligence, it is guessing
 
-            - What MX actually means in practice
+        - What MX actually means in practice
 
-            - What is in the book
+        - What is in the book
 
-            - Who this is for
+        - Who this is for
 
-            - The standards hierarchy
+        - The standards hierarchy
 
-            - Get the book
+        - Get the book
 
-        MX: The Handbook Is Here
+          MX: The Handbook Is Here
 
-          10 April 2026
-          &bull;
-          Tom Cranstoun
+            10 April 2026
+            ·
+            Tom Cranstoun
+            ·
+            4 min read
 
-          - Announcements
+In January 2026, Amazon launched Alexa+. Microsoft launched Copilot Checkout. Google launched UCP. Anthropic launched Claude Cowork. The infrastructure for machines to act on web pages arrived in a single month.
 
-- MX foundations
+Your website was not ready. Neither was mine. Neither was almost anyone's.
 
-        In January 2026, Amazon launched Alexa+. Microsoft launched Copilot Checkout. Google launched UCP. Anthropic launched Claude Cowork. The infrastructure for machines to act on web pages arrived in a single month.
+That is why I wrote this book.
 
-        Your website was not ready. Neither was mine. Neither was almost anyone's.
+The problem is not intelligence, it is guessing
 
-        That is why I wrote this book.
+Over 40% of models on Hugging Face have fewer than 100 million parameters. The agent visiting your product page might be Claude with a million-token context window, or it might be a local model running on a phone with 4,000 tokens to work with. You cannot detect which one it is, User-Agent strings are trivially spoofed.
 
-        The problem is not intelligence, it is guessing
+When an agent encounters incomplete information, it does what any system does with missing data: it fills in the gaps. In AI, we call that hallucination. In web development, we call it a bug.
 
-        Over 40% of models on Hugging Face have fewer than 100 million parameters. The agent visiting your product page might be Claude with a million-token context window, or it might be a local model running on a phone with 4,000 tokens to work with. You cannot detect which one it is, User-Agent strings are trivially spoofed.
+Machine Experience is the practice of making the gaps disappear.
 
-        When an agent encounters incomplete information, it does what any system does with missing data: it fills in the gaps. In AI, we call that hallucination. In web development, we call it a bug.
+What MX actually means in practice
 
-        Machine Experience is the practice of making the gaps disappear.
+MX is a discipline, the same way UX is a discipline for human interfaces; MX is the discipline for machine interfaces.
 
-        What MX actually means in practice
+The core insight came from Steve Krug's "Don't Make Me Think", applied to a different audience. When a human has to think about how to use your interface, you have failed at UX. When an AI agent has to think about what your page means, you have failed at MX. The agent will guess. The guess may be wrong. The user relying on that agent will get wrong information about your business.
 
-        MX is a discipline, the same way UX is a discipline for human interfaces; MX is the discipline for machine interfaces.
+Every pattern in The Handbook follows the same principle: be explicit. State what something is. State what it costs. State where it lives. State who wrote it and when. If the information exists, surface it in the DOM where any agent, from a billion-parameter model to a hundred-million-parameter crawler, can find it without inference.
 
-        The core insight came from Steve Krug's "Don't Make Me Think", applied to a different audience. When a human has to think about how to use your interface, you have failed at UX. When an AI agent has to think about what your page means, you have failed at MX. The agent will guess. The guess may be wrong. The user relying on that agent will get wrong information about your business.
+What is in the book
 
-        Every pattern in The Handbook follows the same principle: be explicit. State what something is. State what it costs. State where it lives. State who wrote it and when. If the information exists, surface it in the DOM where any agent, from a billion-parameter model to a hundred-million-parameter crawler, can find it without inference.
+The Handbook is 320 pages of implementation patterns. Every chapter starts with a problem you recognise and ends with code you can deploy.
 
-        What is in the book
+Chapters 1-3 establish how AI agents actually read your pages, the five agent types, what they can and cannot perceive, and the principles that make the difference between a page that works and one that hallucinates.
 
-        The Handbook is 320 pages of implementation patterns. Every chapter starts with a problem you recognise and ends with code you can deploy.
+Chapters 4-7 are the implementation core. Content architecture. Metadata. Navigation. JavaScript. Each chapter covers the patterns that matter, with working examples you can adapt to your CMS.
 
-        Chapters 1-3 establish how AI agents actually read your pages, the five agent types, what they can and cannot perceive, and the principles that make the difference between a page that works and one that hallucinates.
+Chapter 8 is testing, how to verify your pages work for machines the way you verify they work for humans.
 
-        Chapters 4-7 are the implementation core. Content architecture. Metadata. Navigation. JavaScript. Each chapter covers the patterns that matter, with working examples you can adapt to your CMS.
+Chapter 9 catalogs the anti-patterns. The things teams do that actively break agent comprehension. Hidden state behind JavaScript toggles. Prices that only appear after interaction. Forms with no semantic structure. Each one documented with the fix.
 
-        Chapter 8 is testing, how to verify your pages work for machines the way you verify they work for humans.
+Chapters 10-12 connect implementation to business outcomes. The five-stage MX journey from discovery through purchase confidence. Cogs and Reginald, the registry that attests provenance, who published a cog, that it is unaltered since publication, whether it was produced by a human or an AI, so agents can act on verified content rather than inference. MX makes content machine-readable. Reginald makes it machine-trustworthy.
 
-        Chapter 9 catalogs the anti-patterns. The things teams do that actively break agent comprehension. Hidden state behind JavaScript toggles. Prices that only appear after interaction. Forms with no semantic structure. Each one documented with the fix.
+Who this is for
 
-        Chapters 10-12 connect implementation to business outcomes. The five-stage MX journey from discovery through purchase confidence. Cogs and Reginald, the registry that attests provenance, who published a cog, that it is unaltered since publication, whether it was produced by a human or an AI, so agents can act on verified content rather than inference. MX makes content machine-readable. Reginald makes it machine-trustworthy.
+Frontend developers who want copy-paste patterns. UX designers exploring the machine side. Technical leads making architectural decisions. QA engineers who need testing methodologies. Business leaders who want to understand why their competitors' products appear in AI answers and theirs do not.
 
-        Who this is for
+The book works from both ends. Developers start at Chapter 1 and work forward. Business leaders start at Chapter 11 and work back.
 
-        Frontend developers who want copy-paste patterns. UX designers exploring the machine side. Technical leads making architectural decisions. QA engineers who need testing methodologies. Business leaders who want to understand why their competitors' products appear in AI answers and theirs do not.
+The standards hierarchy
 
-        The book works from both ends. Developers start at Chapter 1 and work forward. Business leaders start at Chapter 11 and work back.
+MX does not replace anything you already do well. Everything that benefits SEO also benefits MX. Everything that benefits accessibility also benefits MX. Established web standards, HTML semantics, WCAG, Schema.org, Open Graph, Dublin Core, come first. MX adds governance and lifecycle metadata where those standards leave gaps.
 
-        The standards hierarchy
+A well-built MX page is a well-built SEO page, a well-built accessible page, and a well-built GEO page. The patterns compound.
 
-        MX does not replace anything you already do well. Everything that benefits SEO also benefits MX. Everything that benefits accessibility also benefits MX. Established web standards, HTML semantics, WCAG, Schema.org, Open Graph, Dublin Core, come first. MX adds governance and lifecycle metadata where those standards leave gaps.
+Get the book
 
-        A well-built MX page is a well-built SEO page, a well-built accessible page, and a well-built GEO page. The patterns compound.
+MX: The Handbook is available now.
 
-        Get the book
+- PDF, £25, instant download
 
-        MX: The Handbook is available now.
+- Print (UK), £35, posted paperback
 
-          - PDF, £25, instant download
+- Print (Worldwide), £40, posted paperback
 
-          - Print (UK), £35, posted paperback
+Buy the book
 
-          - Print (Worldwide), £40, posted paperback
+ISBN 978-1-067638-40-5. Published by Digital Domain Technologies Ltd, trading as CogNovaMX.
 
-        Buy the book
-
-        ISBN 978-1-067638-40-5. Published by Digital Domain Technologies Ltd, trading as CogNovaMX.
-
-        New to MX? Start with the free Introduction. Want the full strategic picture? MX: The Protocols publishes 1 July 2026.
+New to MX? Start with the free Introduction. Want the full strategic picture? MX: The Protocols publishes 1 July 2026.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
@@ -15936,23 +16071,23 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
 **Description:** Most organizations optimize for visibility. The publishing systems underneath still produce content machines cannot reliably read, interpret, or act on. The work I do fixes that.
 
-SEO got you found. GEO targets citation. Neither fixes the publishing system underneath. The work I do does.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - The gap I work in
+        - The gap I work in
 
-            - MX, the operating system for modern publishing
+        - MX, the operating system for modern publishing
 
-            - Why organisations need MX-driven publishing
+        - Why organisations need MX-driven publishing
 
-            - What I deliver
+        - What I deliver
 
-            - The outcome
+        - The outcome
 
-            - In one line
+        - In one line
 
           Build Content Systems That Machines Can Trust
 
@@ -15960,107 +16095,101 @@ SEO got you found. GEO targets citation. Neither fixes the publishing system und
             ·
             Tom Cranstoun
             ·
-            3 min read
+            4 min read
 
-          - Business case
+The gap I work in
 
-- MX foundations
+Most organisations optimise for visibility. SEO for humans, GEO for citations inside AI-generated answers. Both are useful. Neither fixes the part underneath: the publishing systems still produce content that machines cannot reliably read, interpret, or act on.
 
-        The gap I work in
+The result is expensive reconstruction at every read, inconsistent answers across platforms, and content that breaks every time the next platform shift lands.
 
-        Most organisations optimise for visibility. SEO for humans, GEO for citations inside AI-generated answers. Both are useful. Neither fixes the part underneath: the publishing systems still produce content that machines cannot reliably read, interpret, or act on.
+I fix that. I help organisations modernize their content operations and their publishing pipelines so every output, whether HTML, PDF, DOCX, EPUB, CSV, audio, or video, is machine-ready by design rather than by accident.
 
-        The result is expensive reconstruction at every read, inconsistent answers across platforms, and content that breaks every time the next platform shift lands.
+MX, the operating system for modern publishing
 
-        I fix that. I help organisations modernize their content operations and their publishing pipelines so every output, whether HTML, PDF, DOCX, EPUB, CSV, audio, or video, is machine-ready by design rather than by accident.
+Machine Experience is the specification layer that makes published content:
 
-        MX, the operating system for modern publishing
+- Consistent across every format.
 
-        Machine Experience is the specification layer that makes published content:
+- Self-describing through metadata that travels with the document.
 
-          - Consistent across every format.
+- Deterministic for agents and automation, not something they have to guess at.
 
-          - Self-describing through metadata that travels with the document.
+- Portable across platforms and time.
 
-          - Deterministic for agents and automation, not something they have to guess at.
+- Governed through lifecycle, provenance, and versioning.
 
-          - Portable across platforms and time.
+Where GEO tweaks prompts and surfaces, MX upgrades the content supply chain itself.
 
-          - Governed through lifecycle, provenance, and versioning.
+Why organisations need MX-driven publishing
 
-        Where GEO tweaks prompts and surfaces, MX upgrades the content supply chain itself.
+1. Publishing pipelines need structure, not guesswork
 
-        Why organisations need MX-driven publishing
+Most CMSs and export pipelines produce content that looks fine to humans but is structurally ambiguous to machines. Agents have to reconstruct meaning at read time, a slow, error-prone, compute-heavy process. MX replaces reconstruction with declaration.
 
-        1. Publishing pipelines need structure, not guesswork
+2. Metadata is the foundation of machine trust
 
-        Most CMSs and export pipelines produce content that looks fine to humans but is structurally ambiguous to machines. Agents have to reconstruct meaning at read time, a slow, error-prone, compute-heavy process. MX replaces reconstruction with declaration.
+Every agent begins with the same job: discover context. If identity, provenance, lifecycle, affordances, and semantics are declared, machines can act with confidence. If not, they guess, and guessing does not scale.
 
-        2. Metadata is the foundation of machine trust
+3. GEO only works when the content architecture is sound
 
-        Every agent begins with the same job: discover context. If identity, provenance, lifecycle, affordances, and semantics are declared, machines can act with confidence. If not, they guess, and guessing does not scale.
+GEO improves visibility, but it cannot fix broken content structures. MX makes the content usable, so GEO compounds across platforms instead of evaporating with the next vendor change.
 
-        3. GEO only works when the content architecture is sound
+What I deliver
 
-        GEO improves visibility, but it cannot fix broken content structures. MX makes the content usable, so GEO compounds across platforms instead of evaporating with the next vendor change.
+MX readiness audits
 
-        What I deliver
+A full review of your content operations, publishing pipelines, metadata practices, and output formats. I identify where machines fail to read, trust, or reuse your content, and hand back a prioritised remediation plan a content or engineering team can run. Worked argument for the return on this work: why an MX audit pays for itself.
 
-        MX readiness audits
+Metadata and governance architecture
 
-        A full review of your content operations, publishing pipelines, metadata practices, and output formats. I identify where machines fail to read, trust, or reuse your content, and hand back a prioritised remediation plan a content or engineering team can run. Worked argument for the return on this work: why an MX audit pays for itself.
+A unified metadata layer across all carriers: canonical URLs, version chains, licenses, lifecycle, training-data policies, and agent-readiness fields. Verifiable through Reginald notarisation (currently in beta) so downstream consumers, including AI agents, can confirm the content is genuine, unaltered, and authored by who it claims to be. Agents reading attested content hallucinate less, they have verified facts to cite rather than inferences to make. The EU AI Act and digital-records legislation are converging on the same requirement: that organisations can demonstrate the provenance of content AI acted on. Reginald makes that demonstration available at any point in the chain.
 
-        Metadata and governance architecture
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
-        A unified metadata layer across all carriers: canonical URLs, version chains, licenses, lifecycle, training-data policies, and agent-readiness fields. Verifiable through Reginald notarisation (currently in beta) so downstream consumers, including AI agents, can confirm the content is genuine, unaltered, and authored by who it claims to be. Agents reading attested content hallucinate less, they have verified facts to cite rather than inferences to make. The EU AI Act and digital-records legislation are converging on the same requirement: that organisations can demonstrate the provenance of content AI acted on. Reginald makes that demonstration available at any point in the chain.
+Publishing system modernization
 
-        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+Rebuilt export pipelines, semantic HTML, structured DOCX templates, EPUB navigation, CSVW schemas, and machine-readable manifests (`.mx.yaml.md`) at every folder boundary. The cog format underneath is the community-governed standard for documents that machines can read directly, stewarded by The Gathering.
 
-        Publishing system modernization
+MX-compliant content operations
 
-        Rebuilt export pipelines, semantic HTML, structured DOCX templates, EPUB navigation, CSVW schemas, and machine-readable manifests (`.mx.yaml.md`) at every folder boundary. The cog format underneath is the community-governed standard for documents that machines can read directly, stewarded by The Gathering.
+Workflows, CI gates, and governance rules that ensure every published asset is machine-ready before it leaves the pipeline. Accessibility (WCAG, PDF/UA, the European Accessibility Act), machine-readability, and editorial governance run as one coherent process rather than three.
 
-        MX-compliant content operations
+The outcome
 
-        Workflows, CI gates, and governance rules that ensure every published asset is machine-ready before it leaves the pipeline. Accessibility (WCAG, PDF/UA, the European Accessibility Act), machine-readability, and editorial governance run as one coherent process rather than three.
+Your organisation gains:
 
-        The outcome
+- Reliable machine-readability across every format.
 
-        Your organisation gains:
+- Lower inference cost for the agents and automation reading you.
 
-          - Reliable machine-readability across every format.
+- Consistent answers across platforms, not platform-by-platform drift.
 
-          - Lower inference cost for the agents and automation reading you.
+- Publishing systems that survive the next shift in the AI vendor stack.
 
-          - Consistent answers across platforms, not platform-by-platform drift.
+- A single source of truth for identity, provenance, and lifecycle.
 
-          - Publishing systems that survive the next shift in the AI vendor stack.
+The shift is from firefighting content issues to operating at the infrastructure layer of the modern web.
 
-          - A single source of truth for identity, provenance, and lifecycle.
+If a deeper read of the philosophy is useful, the MX book series carries the long-form specification: MX: The Intro, MX: The Handbook, and MX: The Protocols.
 
-        The shift is from firefighting content issues to operating at the infrastructure layer of the modern web.
+In one line
 
-        If a deeper read of the philosophy is useful, the MX book series carries the long-form specification: MX: The Intro, MX: The Handbook, and MX: The Protocols.
-
-        In one line
-
-        I help organisations modernize their content operations so every published asset is trustworthy, structured, and usable by every machine that will ever read it.
+I help organisations modernize their content operations so every published asset is trustworthy, structured, and usable by every machine that will ever read it.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series. Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd, trading as CogNovaMX.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to know what your content looks like to the AI systems your buyers are starting to ask first?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
-            - Get in touch about an MX readiness audit
+            - Get in touch
 
-            - Why an MX audit pays for itself
-
-            - GEO is a tactic. MX is the specification.
+            - Explore the books
 
             - Join The Gathering
 

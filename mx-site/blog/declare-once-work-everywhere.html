@@ -1,11 +1,6 @@
 <!DOCTYPE html>
-<!--
-  DRAFT blog post - mx-site (mx.allabout.network).
-  noindex, nofollow. Promote to blog/ when ready to publish.
--->
 <html lang="en-GB">
 <head>
-  <meta charset="UTF-8">
   <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
@@ -18,6 +13,7 @@ modified: 2026-06-02
 version: "0.1"
 
 mx:
+  x-mx-managedBy: blog-post.cog.md
   status: published
   contentType: blog-post
   audience: [humans, machines]
@@ -31,14 +27,19 @@ mx:
     - cog
     - content-strategy
   partOf: "MX blog"
-  runbook: "Blog post on mx-site. The HTML is the canonical source for this YAML frontmatter; no separate markdown source exists. Keep short and direct. Update the inflection-point evidence if better examples emerge."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/blog/declare-once-work-everywhere.html
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/declare-once-work-everywhere.md
+  x-mx-contextProvides:
+    - "Every machine reading your content is guessing what it means and how to treat it. We end that. One attested record, written once, readable by any system that encounters the file."
+  stability: stable
+  x-mx-backport: clean
   servedAt: https://mx.allabout.network/blog/declare-once-work-everywhere.html
+  blogUrl: https://mx.allabout.network/blog/declare-once-work-everywhere.html
+  blogFilename: declare-once-work-everywhere
 ---
 -->
-  <!-- MX-SOURCE-FRONTMATTER:END -->
-  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
-  <meta name="ai-disclosure" content="ai-assisted">
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
   <meta name="description" content="Every machine reading your content is guessing what it means and how to treat it. We end that. One attested record, written once, readable by any system that encounters the file.">
@@ -69,18 +70,26 @@ mx:
 
   <!-- Discovery -->
   <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
 
   <!-- MX Carrier -->
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
   <meta name="mx:name" content="Declare Once, Work Everywhere">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="0.1">
   <meta name="mx:author" content="Tom Cranstoun">
   <meta name="x-mx-managedBy" content="blog-post.cog.md">
   <link rel="mx" href="https://mx.allabout.network/blog/declare-once-work-everywhere.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
   <title>Declare Once, Work Everywhere | CogNovaMX</title>
 
   <!-- Schema.org JSON-LD -->
@@ -114,8 +123,8 @@ mx:
           "@id": "https://mx.allabout.network/blog/declare-once-work-everywhere.html"
         },
         "articleSection": "Machine Experience",
-        "keywords": ["machine-experience", "pitch", "open-standards", "reginald", "cog", "content-strategy"],
-        "wordCount": 650,
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 801,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -140,6 +149,7 @@ mx:
   <link rel="stylesheet" href="../css/mx-blog.css">
 </head>
 <body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
   <!-- Site Header -->
@@ -173,109 +183,90 @@ mx:
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
           <div class="introduction-text" role="presentation">
-            <p class="introduction-message">MX makes content readable to every machine that encounters it - without tying that readability to any platform's stack, any vendor's list, or any inference run on your behalf.</p>
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
             <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
           </div>
         </div>
       </aside>
 
-      <!-- Collapsible Index -->
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
       <details id="index" class="table-of-contents" data-state="initially-collapsed">
         <summary>Index</summary>
         <nav aria-label="Table of contents">
           <ul>
-            <li><a href="#the-problem">The Problem</a></li>
-            <li><a href="#the-inflection">The Inflection</a></li>
-            <li><a href="#what-we-do">What We Do</a></li>
-            <li><a href="#what-you-get">What You Get</a></li>
-            <li><a href="#how-to-start">How to Start</a></li>
+        <li><a href="#the-problem">The Problem</a></li>
+        <li><a href="#the-inflection">The Inflection</a></li>
+        <li><a href="#what-we-do">What We Do</a></li>
+        <li><a href="#what-you-get">What You Get</a></li>
+        <li><a href="#how-to-start">How to Start</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="650">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="801">
         <header class="article-header">
           <h1>Declare Once, Work Everywhere</h1>
           <div class="article-meta"
                data-published="2026-06-02"
                data-modified="2026-06-02"
-               data-reading-time="4 min">
+               data-reading-time="5 min">
             <time datetime="2026-06-02">2 June 2026</time>
-            <span>&#183;</span>
+            <span>·</span>
             <span>Tom Cranstoun</span>
-            <span>&#183;</span>
-            <span>4 min read</span>
+            <span>·</span>
+            <span>5 min read</span>
           </div>
+          <ul class="article-tags" aria-label="Tags"><li><a href="index.html#tags=machine-experience" rel="tag">Machine Experience</a></li><li><a href="index.html#tags=pitch" rel="tag">Pitch</a></li><li><a href="index.html#tags=open-standards" rel="tag">Open Standards</a></li><li><a href="index.html#tags=reginald" rel="tag">Reginald</a></li><li><a href="index.html#tags=cog" rel="tag">Cog</a></li><li><a href="index.html#tags=content-strategy" rel="tag">Content Strategy</a></li></ul>
         </header>
 
-        <p>Every machine reading your content right now is guessing. It guesses what your pages sell, whether they are sensitive, how much to trust them, and whether to act on them at all. It does that work fresh, on every page load, independently of every other machine doing the same thing on the same content. None of those guesses are yours to see or correct.</p>
 
-        <p>We change that.</p>
+<p>Every machine reading your content right now is guessing. It guesses what your pages sell, whether they are sensitive, how much to trust them, and whether to act on them at all. It does that work fresh, on every page load, independently of every other machine doing the same thing on the same content. None of those guesses are yours to see or correct.</p>
+<p>We change that.</p>
+<h2 id="the-problem" tabindex="-1">The Problem</h2>
+<p>AI agents, browsers, search systems, and assistants are reading your content to serve their users. That is not the problem. The problem is that they do it by inference, and inference is private. Chrome carries internal lists - built into the browser binary, updated without notice - that decide whether an agent may act on your pages. A shopping model chops each page into hundred-word chunks and judges whether you trade. Assistants form their own read of your credibility and quote accordingly. None of it is disclosed, none of it is contestable, and none of it reflects what you have said about yourself.</p>
+<p>The result is a web where the decisions made about your content are made without you. When they are wrong, there is no one to answer for it.</p>
+<h2 id="the-inflection" tabindex="-1">The Inflection</h2>
+<p>Two things happened in June 2026 that mark where this is heading.</p>
+<p>Salesforce paid to acquire Contentful. The stated reason is agent infrastructure: content assembled by machines, delivered across channels, managed inside one vendor's stack. Agent-readiness is now a platform feature you purchase and a register you join. Withdraw from the platform and the signal leaves with you.</p>
+<p>In the same month, researchers reverse-engineered the classification data Chrome ships alongside itself. More than thirty thousand domains gated from AI assistant actions. Another thirty thousand selected for semantic indexing. A live model deciding page by page whether you count as commerce. All of it written by one vendor, for one vendor's purposes, with no route to read or contest your entry.</p>
+<p>The market has confirmed that machines need structured signals about content. The question it has not answered is who writes those signals, and whether the site has any say.</p>
+<p>Read more: <a href="https://mx.allabout.network/blog/drafts/salesforce-contentful-not-an-mx-strategy.html">Salesforce Bought Contentful, but They Didn't Buy an MX Strategy</a> and <a href="https://mx.allabout.network/blog/drafts/who-answers-when-the-machine-decides.html">Who Answers When the Machine Decides?</a></p>
+<h2 id="what-we-do" tabindex="-1">What We Do</h2>
+<p>We make content that manages itself.</p>
+<p>A COG is a carrier-neutral record that travels with the file: what it is, who produced it, when it changed, how machines should treat it. The format is open, governed by The Gathering, published under an open licence. Any system can read it. No vendor owns the schema.</p>
+<p>REGINALD adds the trust layer. An Ed25519 signature over the canonicalised bytes lets any reader confirm the record is genuinely yours and has not been altered in transit. The signature covers provenance and integrity. It does not make claims about editorial truth - that judgement stays with you and your readers. It gives the record an author and a date, so a machine that reads it knows whose word it is taking.</p>
+<p>The pair - COG plus REGINALD attestation - means your content introduces itself to every system that encounters it. Not through a vendor's API, not through membership in a list you cannot see, but through a record in the file itself.</p>
+<h2 id="what-you-get" tabindex="-1">What You Get</h2>
+<p>Content that is machine-readable on your terms, not inferred on someone else's. When an agent reads your page and misrepresents it, you have a signed, dated statement of what the page actually says - and you have an accountable author, which is more than the inference has.</p>
+<p>Content that travels. Platform lock-in is the dependency on a vendor to explain your content for you. A COG removes that dependency. The record is in the file. Move the file and you move the record.</p>
+<p>Evidence for governance. The AI Act, accessibility regulations, and digital-records law are moving in the same direction: disclosed, attributable, auditable decisions. A structured, signed declaration is the kind of evidence those regimes expect. We make that evidence. We do not make you compliant - compliance is a legal duty - but we make the documentation that compliance requires.</p>
+<h2 id="how-to-start" tabindex="-1">How to Start</h2>
+<p>The fastest entry is an MX audit. We assess your current content against the machine-readability standard, score it against what agents and browsers actually resolve, and tell you exactly what to fix and in what order. Most organisations find the gap is smaller than it looks: the structured content work their CMS already forces is most of the journey. What is missing is the record that travels with the file.</p>
+<p>From there we work with your team to implement COG metadata, connect REGINALD attestation for the records that carry regulatory weight, and build the content infrastructure that no acquisition can take away.</p>
+<p>Write to us at <a href="mailto:info@cognovamx.com">info@cognovamx.com</a> or read what we offer at <a href="https://mx.allabout.network/services/">cognovamx.com/services</a>.</p>
 
-        <h2 id="the-problem">The Problem</h2>
-
-        <p>AI agents, browsers, search systems, and assistants are reading your content to serve their users. That is not the problem. The problem is that they do it by inference, and inference is private. Chrome carries internal lists - built into the browser binary, updated without notice - that decide whether an agent may act on your pages. A shopping model chops each page into hundred-word chunks and judges whether you trade. Assistants form their own read of your credibility and quote accordingly. None of it is disclosed, none of it is contestable, and none of it reflects what you have said about yourself.</p>
-
-        <p>The result is a web where the decisions made about your content are made without you. When they are wrong, there is no one to answer for it.</p>
-
-        <h2 id="the-inflection">The Inflection</h2>
-
-        <p>Two things happened in June 2026 that mark where this is heading.</p>
-
-        <p>Salesforce paid to acquire Contentful. The stated reason is agent infrastructure: content assembled by machines, delivered across channels, managed inside one vendor's stack. Agent-readiness is now a platform feature you purchase and a register you join. Withdraw from the platform and the signal leaves with you.</p>
-
-        <p>In the same month, researchers reverse-engineered the classification data Chrome ships alongside itself. More than thirty thousand domains gated from AI assistant actions. Another thirty thousand selected for semantic indexing. A live model deciding page by page whether you count as commerce. All of it written by one vendor, for one vendor's purposes, with no route to read or contest your entry.</p>
-
-        <p>The market has confirmed that machines need structured signals about content. The question it has not answered is who writes those signals, and whether the site has any say.</p>
-
-        <p>Read more: <a href="salesforce-contentful-not-an-mx-strategy.html">Salesforce Bought Contentful, but They Didn't Buy an MX Strategy</a> and <a href="who-answers-when-the-machine-decides.html">Who Answers When the Machine Decides?</a></p>
-
-        <h2 id="what-we-do">What We Do</h2>
-
-        <p>We make content that manages itself.</p>
-
-        <p>A COG is a carrier-neutral record that travels with the file: what it is, who produced it, when it changed, how machines should treat it. The format is open, governed by The Gathering, published under an open licence. Any system can read it. No vendor owns the schema.</p>
-
-        <p>REGINALD adds the trust layer. An Ed25519 signature over the canonicalised bytes lets any reader confirm the record is genuinely yours and has not been altered in transit. The signature covers provenance and integrity. It does not make claims about editorial truth - that judgement stays with you and your readers. It gives the record an author and a date, so a machine that reads it knows whose word it is taking.</p>
-
-        <p>The pair - COG plus REGINALD attestation - means your content introduces itself to every system that encounters it. Not through a vendor's API, not through membership in a list you cannot see, but through a record in the file itself.</p>
-
-        <h2 id="what-you-get">What You Get</h2>
-
-        <p>Content that is machine-readable on your terms, not inferred on someone else's. When an agent reads your page and misrepresents it, you have a signed, dated statement of what the page actually says - and you have an accountable author, which is more than the inference has.</p>
-
-        <p>Content that travels. Platform lock-in is the dependency on a vendor to explain your content for you. A COG removes that dependency. The record is in the file. Move the file and you move the record.</p>
-
-        <p>Evidence for governance. The AI Act, accessibility regulations, and digital-records law are moving in the same direction: disclosed, attributable, auditable decisions. A structured, signed declaration is the kind of evidence those regimes expect. We make that evidence. We do not make you compliant - compliance is a legal duty - but we make the documentation that compliance requires.</p>
-
-        <h2 id="how-to-start">How to Start</h2>
-
-        <p>The fastest entry is an MX audit. We assess your current content against the machine-readability standard, score it against what agents and browsers actually resolve, and tell you exactly what to fix and in what order. Most organisations find the gap is smaller than it looks: the structured content work their CMS already forces is most of the journey. What is missing is the record that travels with the file.</p>
-
-        <p>From there we work with your team to implement COG metadata, connect REGINALD attestation for the records that carry regulatory weight, and build the content infrastructure that no acquisition can take away.</p>
-
-        <p>Write to us at <a href="mailto:info@cognovamx.com">info@cognovamx.com</a> or read what we offer at <a href="/services/">cognovamx.com/services</a>.</p>
 
       </article>
 
-      <!-- Post Conclusion -->
+
+      <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
           <img src="../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Consults on MX strategy through Digital Domain Technologies Ltd, trading as CogNovaMX.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
-          <p class="post-conclusion-eyebrow">Ready to start?</p>
-          <p class="post-conclusion-prompt">An MX audit takes a week. It tells you exactly where your content stands and what to fix. Get in touch.</p>
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
-            <li><a class="post-conclusion-link" href="/services/">CogNovaMX services</a></li>
-            <li><a class="post-conclusion-link" href="/learn/">Learn MX</a></li>
-            <li><a class="post-conclusion-link" href="mailto:info@cognovamx.com">info@cognovamx.com</a></li>
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
           </ul>
         </div>
       </aside>
@@ -297,7 +288,6 @@ mx:
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
           <li><a href="/blog/">Blog</a></li>
-          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
