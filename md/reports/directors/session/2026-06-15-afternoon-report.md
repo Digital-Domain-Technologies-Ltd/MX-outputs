@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Dream Pipeline, Blog Truth-Check, and Split-Lines Refactor"
-description: "Dream ran across all nine COGs; blog stale claims fixed; split-lines refactored into 14 callers; repo link health diagnosed."
+title: "Co-Directors Report - Dream Pipeline, Link Infrastructure, and Sub-Repo Topology"
+description: "Dream ran; 151 draft-site links converted to canonical URLs; full sub-repo topology added to manifest, validators, skills, hooks, and cog authoring guidance."
 author: "Tom Cranstoun"
 created: 2026-06-15
 modified: 2026-06-15
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -87,11 +87,47 @@ The 109 findings from the repo-link-health Dream scan were investigated. `npm ru
 
 ---
 
+## What Was Done (continued - session continuation 2)
+
+### 7. Gitea Integration Complete
+
+The Gitea push was confirmed wired into `audit-pipeline.js` - verified by code inspection rather than re-running it. The end-to-end test from the previous session confirmed the integration works. This closes out the Gitea delivery track.
+
+### 8. Custom Script: 151 Draft-Site Links Fixed
+
+The custom `scripts/fix-draft-site-absolute-links.cjs` script was built to address the 109 findings from the repo-link-health Dream scan. The correct fix was not relative paths - it was canonical URLs. Draft-site markdown files live in the hub repo but their link targets live in `mx-outputs/mx-site/`, a separate git submodule. No relative path can bridge that boundary reliably on GitHub or in a thin clone. The script rewrites site-relative (`/path`) links to `https://mx.allabout.network/path`. It ran and produced 151 rewrites across the draft-site corpus. Two unpublished targets remain as site-relative - they point to pages not yet promoted to Zone 3, and the script correctly leaves them rather than converting to a broken canonical URL. A full test suite (55 tests) covers all edge cases including image syntax exclusion, multi-link offset safety, and submodule-absent graceful degradation.
+
+### 9. Sub-Repo Topology Added to repo-manifest.json
+
+The repository now carries a machine-readable topology in `repo-manifest.json`. The new `topology` section declares the canonical base URL, the mx-site directory, which directories cross the hub-to-submodule boundary, how draft-site URL prefixes map to source directories, and the full list of submodules (auto-generated from `.gitmodules` by a new generator script). This is the single source of truth every tool reads rather than each one making its own assumptions about the repo layout.
+
+### 10. Dream Link-Patterns Lens Made Sub-Repo Aware
+
+The Dream scanner's `extractLinkPatterns()` function now loads `topology.crossRepoBoundaryDirs` from `repo-manifest.json`. Files in `datalake/draft-site/` now receive "crosses repo boundary, use canonical URL" in findings rather than "should be relative" - which was the wrong fix. The skill documentation, the repo-link-health cog, and the draft-site README all reflect this.
+
+### 11. Cog Validator Made Sub-Repo Aware
+
+The `cogRelatedTo()` function in `scripts/lib/check-mx.cjs` now loads `topology.submodules` from `repo-manifest.json`. When a path in `mx.relatedTo` does not exist on disk, the function checks whether it falls under a known submodule path. If it does, the entry is classified as `crossSubmodule` (a warning) rather than `dead` (a hard error). This allows cogs to legitimately reference companion files in `mx-outputs/`, `allaboutv2/`, and other submodules without hard-failing on a thin clone. The authoring guide (`how-to-write-a-cog.cog.md`) and CLAUDE.md both document this behaviour.
+
+---
+
+## The Insight
+
+The 109 "absolute links should be relative" findings from Dream turned out to be pointing at the right problem with the wrong fix. Relative paths across a repo boundary are not wrong-depth - they are structurally impossible. Recognising that distinction required understanding the topology of the repository: what is hub, what is submodule, where the boundary sits. Once the topology was made explicit in `repo-manifest.json`, the correct fix (canonical URLs) was obvious, and every tool that needed to understand boundaries could read from a single source rather than each one making its own guess. The topology artefact is now used by the Dream scanner, the link fixer, the cog validator, and the authoring guidance - and future tools inherit it automatically.
+
+---
+
+## Decisions Made
+
+- Draft-site links to mx-site content use canonical URLs, not relative paths - the repos are separate and the boundary is now declared in `repo-manifest.json`
+- Cross-submodule references in `mx.relatedTo` are warnings, not errors - load-bearing references belong in hub-local files; informational pointers to submodule content are valid on a fat clone
+- The topology generator runs in the pre-commit hook when `.gitmodules` changes, so the manifest stays current without manual maintenance
+
+---
+
 ## Next Steps
 
-- Build custom script to resolve 109 draft-site absolute site-relative links to correct relative paths
 - Promote Fable 5 blog post from Zone 2 to Zone 3 once Tom has reviewed
-- Test Gitea end-to-end
 - Review LPC and Los G sites
-- Wire Gitea push into audit-pipeline.js (Phase 4)
-- Build auditor handoff tool (Phase 7)
+- Build auditor handoff tool - `scripts/unpack-audit.cjs` (Phase 7)
+- Wire remaining two `split-lines` callers: `scripts/audit-pipeline.js` and `scripts/dream.cjs`
