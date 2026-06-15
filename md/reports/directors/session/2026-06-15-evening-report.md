@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Blog Content Quality: Tag Chips Removed and New Post Published"
-description: "Humanized and published a new blog draft; removed misfiring visible tag chips from 98 blog posts; fixed the generator so no future post inherits the problem."
+title: "Co-Directors Report - Audit Pipeline Hardened: Language Guard, Three Posts Published, Probes Wired"
+description: "Adversarial and machine-readability probes wired into the audit pipeline; AI-tells probe now skips non-English sites deterministically; three blog posts published; prose quality pass on 8 live posts."
 author: "Tom Cranstoun"
 created: 2026-06-15
 modified: 2026-06-15
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -13,13 +13,13 @@ mx:
   confidential: true
   tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-15-evening-report.md
-  purpose: "New blog post written and humanized; article-tag chip rendering removed from all 98 affected blog posts and fixed at the generator level."
+  purpose: "Adversarial and machine-readability probes wired into audit pipeline; AI-tells probe gains a deterministic English-language guard; three blog posts published to the live site."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
-  x-mx-contextProvides: ["Co-Directors Report - Blog Content Quality: Tag Chips Removed and New Post Published"]
+  x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline Hardened: Language Guard, Three Posts Published, Probes Wired"]
 ---
 
-# Co-Directors Report - Blog Content Quality: Tag Chips Removed and New Post Published
+# Co-Directors Report - Audit Pipeline Hardened: Language Guard, Three Posts Published, Probes Wired
 
 **Date:** 15 June 2026 - Evening
 **Segment:** Evening (since 5pm)
@@ -28,33 +28,37 @@ mx:
 
 ## Summary
 
-The evening session produced one new blog post and fixed a content-quality defect affecting every post on the site. The post "Without Cogs, No Machine Moves" argues the case for COGs to a content ops and CMS audience. A row of clickable tag chips was rendering visibly at the top of every blog post; it was removed from 98 files and suppressed in the generator so nothing inherits it. Both changes are live in the mx-outputs submodule.
+The evening session produced new blog content and a series of improvements to the web audit pipeline. Three blog posts went live on the site. Two new deterministic probes - one detecting adversarial signals in crawled HTML, one scoring machine-readability - were wired into the audit collection phase. The AI-writing-tells detector gained a language guard: it now reads the site's declared locales and skips the scan entirely on non-English sites, writing a structured skip record that removes the "Text Patterns" section from the client report automatically. A prose-quality pass was also applied across eight existing live posts.
 
 ---
 
 ## What Was Done
 
-### 1. New Blog Post: Without Cogs, No Machine Moves
+### 1. Blog Content Quality and Tag Chip Fix
 
-A draft titled "Without Cogs, No Machine Moves" was humanized and published to the drafts tree. The post targets CMS decision-makers and content strategists, arguing that content ops and content design have built the right governance foundations but optimise for human readers. COGs are the natural extension that makes that work travel with the document when it leaves the CMS environment. The post runs to 876 words and is ready for final review before promotion to the published blog.
+"Without Cogs, No Machine Moves" was humanized, published to the live site, and a PDF was generated with the full provenance chain. Two further posts - one on 48 days to EU AI Act compliance and one comparing Document OS to Content OS - were also published. A row of clickable tag chips that had been rendering visibly at the top of every blog post was removed from all 98 affected HTML files and suppressed in the generator. A further prose-quality pass was applied across eight previously published posts: contraction normalization, word-choice tightening, and filler removal.
 
-The humanizer pass removed 12 em-dashes, a negation-pivot sentence pair, two same-sentence word repeats, a three-word triplet, two possession-copula dodges, and tightened the word "shape" (AI vocabulary) to "structure" throughout. A provocative blame-chain sentence was added to the Governance section at Tom's direction: when the machine cannot read the page, the data owner blames the vendor, the vendor blames the agency, and nobody owns the failure because nobody wrote machines into the contract.
+### 2. Audit Pipeline: New Probes Wired
 
-The cog registry was also corrected: an earlier serve command used an ad-hoc Python server rather than `mx exec mx-serve`. The correct invocation was noted and a memory entry saved so the error does not repeat.
+Two new deterministic probes were added to the web audit collection phase and wired into the report template and infill system. The adversarial-signal probe scans cached HTML for prompt injection, invisible Unicode, CSS-hidden content, and steganographic metadata patterns. The machine-readability probe scores parse difficulty against four weighted signals: semantic content ratio, DOM nesting depth, average sentence length, and tables without header rows. Both probes produce structured JSON sidecars that feed placeholder tokens in the client report.
 
-### 2. Article-Tag Chip Defect Fixed
+### 3. Audit Pipeline: Non-English Language Guard on AI-Tells Detector
 
-The blog post generator was rendering the post's `mx.tags` frontmatter as a visible row of clickable chips at the top of every blog post. Tags are metadata; they should not appear as a design element in the reader's view. The generator function was updated to return an empty string, and all 98 affected HTML files (published and draft) were cleaned in a single pass. The sitemap was also regenerated.
+The AI-writing-tells probe runs six English-only prose scanners. Applying them to non-English content produces meaningless scores. The probe now reads `hreflang_coverage.json` from the delivery folder before scanning. If the site declares no locale starting with `en`, the probe writes a skip sidecar (`skipped: true`, `peakBand: 0`) and exits. The infill system detects the skip and empties the template tokens, causing the `STRIP-IF: aiTells.peakBand < 2` guard in the report template to remove the "Text Patterns" section entirely. Sites without any `hreflang` declaration default to English - conservative, non-fatal.
+
+### 4. Pipeline Version Stamp and Gate
+
+The audit pipeline moved to v1.1.0 with a version stamp in every generated report, a CHANGELOG in the audit package, and a new Gate 28 that enforces version-stamp presence in committed reports.
 
 ---
 
 ## The Insight
 
-The tag chip defect had been present across the entire blog without being caught. It was only visible because a post was served locally and inspected. This is the kind of defect that does not surface in gate runs or linting - it requires actually looking at the rendered page. The local serve workflow (`mx exec mx-serve`) exists for exactly this, and the session made productive use of it.
+The language guard is a small change with a clear correctness argument: an English-only scanner on a German site produces a score that means nothing and could mislead a client. The fix is fully deterministic - no LLM involvement - and the report section disappears cleanly when the probe skips. This is the pattern the audit pipeline is built on: deterministic detection, structured skip records, template guards that respond to data rather than conditional logic in prose.
 
 ---
 
 ## Next Steps
 
-- Promote "Without Cogs, No Machine Moves" from drafts to published after final read-through
-- Review the other two new blog drafts that appeared this session (`48-days-article-50-reginald.md`, `document-os-vs-content-os.md`) and schedule them for the same humanize-and-publish pipeline
+- Review the two new blog posts (`48-days-article-50-reginald.md`, `document-os-vs-content-os.md`) once live - confirm rendering and prose quality
+- Run a non-English audit to verify the language guard fires correctly end-to-end in a real delivery
