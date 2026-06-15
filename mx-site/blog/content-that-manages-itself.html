@@ -282,19 +282,19 @@ mx:
 
 <p>Think about what happens when you publish a page today. Someone writes it. Someone else tags it with metadata. A third person assigns it to a workflow. A developer wires it into navigation. An SEO specialist checks the meta descriptions. A compliance officer reviews the accessibility. An operations person monitors whether the links still work six months later.</p>
 
-<p>The content itself? Passive. Inert. A lump of HTML waiting to be acted upon.</p>
+<p>The content itself? Passive. Inert. A lump of HTML waiting for someone to act.</p>
 
 <p>That was fine when humans were the only audience. It's not fine any more.</p>
 
-<p>In January 2026, Amazon, Microsoft, and Google all launched AI agent commerce. Machines are now browsing, evaluating, and buying on behalf of consumers. Your content isn't just being read by people with browsers. It's being parsed by agents that need to understand what they're looking at, instantly, without a human in the loop. If your content can't introduce itself to a machine, you're already behind.</p>
+<p>In January 2026, Amazon, Microsoft, and Google all launched AI agent commerce. Machines are now browsing and buying on behalf of consumers. Your content isn't just being read by people with browsers. It's being parsed by agents that need to understand what they're looking at, instantly, without a human in the loop. If your content can't introduce itself to a machine, you're already behind.</p>
 
 <p>I started asking a different question. What if the content carried its own instructions?</p>
 
 <h2 id="the-metadata-layer-we-always-wanted" tabindex="-1">The metadata layer we always wanted</h2>
 
-<p>Every CMS professional knows the value of good metadata. We've been fighting for it for years. Tag your content properly. Fill in the fields. Please, for the love of all that is holy, write a meta description that isn't just the first paragraph copied and pasted.</p>
+<p>Every CMS professional knows the value of good metadata. We've been fighting for it for years. Tag your content properly. Fill in the fields. Please, for the love of all that's holy, write a meta description that isn't just the first paragraph copied and pasted.</p>
 
-<p>The problem isn't that people don't understand metadata. The problem is that metadata lives in the CMS, not in the content. Move the content to a different system and the metadata stays behind. Export it as a file and the structure is gone. Hand it to an AI agent and it has to guess what the document is about.</p>
+<p>The problem isn't that people don't understand metadata. The problem is that metadata belongs to the CMS, not to the content. Move the content to a different system and the metadata stays behind. Export it as a file and the structure is gone. Hand it to an AI agent and it has to guess the document's meaning.</p>
 
 <h3 id="embedded-metadata">Metadata That Travels with the Content</h3>
 <p>There's a simpler approach. Put the metadata in the document itself.</p>
@@ -320,7 +320,7 @@ status: active
 <p>Self-describing content is useful. Self-acting content is where it gets interesting.</p>
 
 <h3 id="documents-as-executable-programs">Documents as Executable Programs</h3>
-<p>I've been building a system where certain documents contain their own execution logic. Not in some proprietary scripting language, but in plain metadata that an AI agent can read and act on.</p>
+<p>I've been building a system where certain documents contain their own execution logic. Not in some proprietary scripting language, but in plain metadata an AI agent can read and execute.</p>
 
 <p>Here's a real example. We have an INSTALLME.md at the root of our project. It's a markdown file that any human can read. Clear headings, numbered steps, prerequisites listed up front. Standard documentation.</p>
 
@@ -330,7 +330,7 @@ status: active
 
 <p>This pattern extends further than installation guides. We build self-contained documents we call cogs, short for components of governance. Technically, they're markdown files with structured YAML frontmatter. In business terms, think of them as SOPs that machines can actually read.</p>
 
-<p>Every organisation has standard operating procedures. Onboarding checklists. Deployment runbooks. Content approval workflows. Security review processes. They live in wikis, shared drives, people's heads. Humans read them, interpret them, and carry out the steps. Machines can't touch them.</p>
+<p>Every team has standard operating procedures. Onboarding checklists. Deployment runbooks. Content approval workflows. Security review processes. They live in wikis, shared drives, people's heads. Humans read them, interpret them, and carry out the steps. Machines can't touch them.</p>
 
 <p>A cog changes that. Here's what a deployment runbook looks like when the procedure carries its own metadata:</p>
 
@@ -347,13 +347,13 @@ owner: platform-team
 review-cycle: quarterly
 ---</code></pre>
 
-<p>Below that YAML block sits the same plain-language runbook your team already writes. The difference is the machine-readable header. An AI agent reading this file knows what the procedure requires before it starts, who owns it, and when it was last reviewed. Your deployment runbook isn't just steps on a page. It's an instruction set a machine can validate and act on.</p>
+<p>Below that YAML block sits the same plain-language runbook your team already writes. The difference is the machine-readable header. An AI agent reading this file knows what the procedure requires before it starts, who owns it, and when it was last reviewed. Your deployment runbook isn't just steps on a page. It's an instruction set a machine can validate and run.</p>
 
 <p>The SOP becomes the system. Not a description of the system. The system itself.</p>
 
 <h2 id="sops-that-know-their-own-dependencies" tabindex="-1">SOPs that know their own dependencies</h2>
 
-<p>Here's where it gets interesting for anyone running content operations. When every procedure declares what it provides and what it requires, you get an organizational dependency map for free.</p>
+<p>Here's where it gets interesting for anyone running content operations. When every procedure declares what it provides and what it requires, you get a dependency map for free.</p>
 
 <p>Your security review SOP provides "authentication-overview." Your API governance SOP requires "authentication-overview" and provides "api-security-patterns." Your release process requires "api-security-patterns." Those <code>requires</code> and <code>provides</code> fields in the YAML frontmatter are all it takes.</p>
 
@@ -361,25 +361,25 @@ review-cycle: quarterly
 
 <p>This is what I mean by content that manages itself. Not content that magically rewrites itself. Content that carries enough information about itself that machines can do the managing humans have been doing manually for decades.</p>
 
-<p>Stale procedure? The SOP declares its dependencies, so a machine can check them. Missing prerequisite? The document says what it needs. Outdated? It carries a version and a last-updated date. None of this requires a human to notice the problem first.</p>
+<p>Stale procedure? The SOP declares its dependencies, so a machine can check them. Missing prerequisite? The document says what it needs. Outdated? It has a version and a last-updated date. None of this requires a human to notice the problem first.</p>
 
 <h2 id="what-this-means-if-you-build-content-systems" tabindex="-1">What this means if you build content systems</h2>
 
-<p>If you run the business side of a CMS operation, here's the headline: self-managing content reduces the human overhead of content governance. Your teams spend less time tagging, routing, checking, and chasing. The procedures carry their own rules. Machines enforce them. People focus on the work that actually needs human judgment.</p>
+<p>If you run the business side of a CMS operation, here's the headline: self-managing content reduces the human overhead of governance. Your teams spend less time tagging and chasing. The procedures carry their own rules. Machines enforce them. People focus on the work that actually needs human judgment.</p>
 
 <h3 id="inverting-the-cms-model">Inverting the CMS Model</h3>
 <p>If you're a CMS vendor or architect, the technical implication is significant. The traditional CMS model assumes content needs a system wrapped around it. Content goes into the CMS. The CMS provides structure, workflow, metadata, permissions, publishing. Without the CMS, the content is just files.</p>
 
-<p>Self-managing content inverts that. The content carries its own structure in standard formats, YAML, markdown, plain text. No proprietary schema. No database dependency for the metadata layer. The CMS becomes a coordination layer, not a container. It orchestrates rather than imprisons. This doesn't make CMS platforms irrelevant. It makes them lighter. Let the content handle the content concerns. Let the CMS handle the people concerns.</p>
+<p>Self-managing content inverts that. The content carries its own structure in standard formats, YAML, markdown, plain text. No proprietary schema. No database dependency for the metadata layer. The CMS becomes a coordination layer, not a container. It orchestrates rather than imprisons. CMS platforms stay relevant, but lighter. Let the content handle its own concerns. Let the CMS handle the people concerns.</p>
 
-<p>If you're a content strategist, think about what this means for governance. Today you maintain taxonomies, tagging guidelines, and style guides as separate documents that people are supposed to follow. With self-managing content, the governance rules live in the content itself. A document either has the required frontmatter fields or it doesn't. A machine can validate that in milliseconds across thousands of documents.</p>
+<p>If you're a content strategist, think about what this means for governance. Today you maintain taxonomies, tagging guidelines, and style guides as separate documents that people are supposed to follow. With self-managing content, the governance rules travel inside the file itself. A document either has the required frontmatter fields or it doesn't. A machine can validate that in milliseconds across thousands of documents.</p>
 
 <h3 id="the-missing-layer-for-ai-agents">The Missing Layer for AI Agents</h3>
-<p>If you're bringing AI agents into your content operations, this is the missing layer. AI agents are capable but they need structured context. They need to know what a document is, what it's for, who should act on it, and what it depends on. Today, that context lives in CMS databases, in people's heads, in tribal knowledge spread across Slack channels. Self-managing SOPs put that context in the one place every agent can read it: the document itself.</p>
+<p>If you're bringing AI agents into your content operations, this is the missing layer. AI agents are capable but they need structured context. They need to know what a document is, what it's for, who should act on it, and what prerequisites it needs. Today, that context sits scattered across CMS databases, people's heads, and tribal knowledge spread across Slack channels. Self-managing SOPs put that context in the one place every agent can read it: the document itself.</p>
 
 <h2 id="the-simplest-version-of-this" tabindex="-1">The simplest version of this</h2>
 
-<p>You don't need a new platform to start. Take a markdown file. Add YAML frontmatter. Declare the title, the audience, the status, and what the document is about. That's it. The document now carries its own identity.</p>
+<p>You don't need a new platform to start. Take a markdown file. Add YAML frontmatter. Declare the title, the audience, the status, and the document's purpose. That's it. The document now carries its own identity.</p>
 
 <p>Next step: add dependency declarations. What does this document require a reader to already understand? What does it provide? Now the document knows where it fits in a larger body of work.</p>
 
@@ -393,12 +393,12 @@ review-cycle: quarterly
 
 <p>I've been running a system built entirely on this pattern. The SOPs ARE the system. The documentation IS the configuration. Plain text files are the platform. Every procedure declares itself, relates itself to others, and in some cases executes itself.</p>
 
-<p>It works. Not theoretically. In production, with AI agents reading and acting on content daily. We built a registry for these self-managing documents, a place where AI agents look up verified, governed SOPs instead of guessing. The registry is live. The documents are real. The technology is nothing exotic, markdown, YAML, git, standard tooling your developers already know. The business outcome is what matters: the overhead of managing content drops because the content carries the management burden itself.</p>
+<p>It works. Not theoretically. In production, with AI agents reading and acting on content daily. We built a registry for these self-managing documents, a place where AI agents look up verified, governed SOPs instead of guessing. The registry is live. The documents are real. The technology is nothing exotic, markdown, YAML, git, standard tooling your developers already know. The business outcome is what matters: the overhead of managing content drops because the files carry the management burden themselves.</p>
 
 <h3 id="bridging-human-and-machine-workers">Serving Both Human and Machine Workers</h3>
-<p>Organizations are gaining machine workers alongside human workers. Content operations built for humans alone will struggle to serve both. Content that manages itself, procedures that describe themselves in ways both people and machines can read and act on, is how you bridge that gap.</p>
+<p>Teams are gaining machine workers alongside human workers. Content operations built for humans alone will struggle to serve both. Content that manages itself, procedures that describe themselves in ways both people and machines can read and act on, is how you bridge that gap.</p>
 
-<p>The technologists on your team will recognise the patterns. The business people will recognise the savings: less manual overhead, machine-enforceable governance, explicitly structured content from day one.</p>
+<p>The technologists on your team will spot the patterns. The business people will see the savings: less manual overhead, machine-enforceable governance, explicitly structured content from day one.</p>
 
 <p>Start with one document. Add a frontmatter block. See what changes.</p>
 
@@ -413,12 +413,12 @@ review-cycle: quarterly
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your team stands on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>

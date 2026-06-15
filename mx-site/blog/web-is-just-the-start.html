@@ -160,7 +160,7 @@ mx:
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
           <div class="introduction-text" role="presentation">
-            <p class="introduction-message">Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.</p>
+            <p class="introduction-message">MX - Machine Experience - is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so none has to guess.</p>
             <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
           </div>
         </div>
@@ -198,7 +198,7 @@ mx:
         </header>
 
         <p>Google's developer platform published a guide to AI agent UX. The article, at <a href="https://web.dev/articles/ai-agent-site-ux" rel="noopener">web.dev/articles/ai-agent-site-ux</a>, asks developers to think about how AI agents experience their sites. Reduce friction. Use clear headings. Avoid ambiguous navigation. Make content semantically predictable.</p>
-        <p>The advice is sound. Google's developer platform publishing it signals something worth noting: AI agent readiness is now a mainstream concern, not a niche view held by accessibility engineers or structured-data specialists. This is the direction the web is moving, and Google is telling developers to move with it.</p>
+        <p>The advice is sound. Google's developer platform publishing it signals the shift: AI agent readiness is now a mainstream concern, not a niche view held by accessibility engineers or structured-data specialists. This is the direction the web is moving, and Google is telling developers to move with it.</p>
 
         <h2 id="the-document-problem" tabindex="-1">The file-data problem</h2>
         <p>The guide focuses on websites. That makes sense, Google indexes websites. But the file-data AI agents read extends well beyond the browser:</p>
@@ -211,7 +211,7 @@ mx:
           <li>Diagrams, photographs, dashboard screenshots, infographics (image files)</li>
           <li>Datasets, schema files, API responses (structured-data feeds)</li>
         </ul>
-        <p>Every one of these is now being consumed by AI agents. Every one of them carries the same problems the web.dev guide describes, ambiguity, implicit structure, missing provenance, and none of them sits on a web page that a developer can adjust for UX.</p>
+        <p>Every one of these is now being consumed by AI agents. Every one has the same problems the web.dev guide describes, ambiguity, implicit structure, missing provenance, and none of them lives on a web page that a developer can adjust for UX.</p>
         <figure>
           <object type="image/svg+xml"
                   data="assets/web-is-just-the-start-cogs-sit-inside-any-file.svg"
@@ -219,36 +219,36 @@ mx:
                   height="320"
                   class="diagram"
                   title="COGs sit inside any file format">
-            <p>Diagram: seven file icons (.md, .html, .pdf, .mp4, .mp3, .jpg, .json), each carrying the same COG metadata block at the top. The visual shows that COGs travel inside existing file formats and do not require a new runtime or proprietary tooling.</p>
+            <p>Diagram: seven file icons (.md, .html, .pdf, .mp4, .mp3, .jpg, .json), each with the same COG metadata block at the top. The visual shows that COGs travel inside existing file formats and don't require a new runtime or proprietary tooling.</p>
           </object>
-          <figcaption>COGs sit inside any file format, the same metadata block in every carrier where it can travel.</figcaption>
+          <figcaption>COGs embed in any file format - the same metadata block in every carrier where it can travel.</figcaption>
         </figure>
-        <p>The challenge is a file-data problem rather than a web problem; it applies to anything you publish that a machine might read in isolation, away from the surrounding context that gave it meaning.</p>
+        <p>The challenge is a file-data problem, not purely a web one; it applies to anything you publish that a machine might read in isolation, away from the surrounding context that gave it meaning.</p>
 
         <h2 id="what-machines-need-from-any-document" tabindex="-1">What machines need from any file-data</h2>
-        <p>When a machine reads a file, any file: a video, a podcast, a PDF, an image, a web page, it needs to answer ten questions, not four:</p>
+        <p>When a machine reads a file - any format: a video, a podcast, a PDF, an image, a web page - it needs to answer ten questions, not four:</p>
         <ol>
-          <li>What is this thing, its identity, category, and role?</li>
-          <li>What is inside it, its structure, sections, and fields?</li>
-          <li>What state is it in, draft, live, deprecated, complete, or partial?</li>
+          <li>What's this thing: its identity, category, and role?</li>
+          <li>What's inside it: its structure, sections, and fields?</li>
+          <li>What state is it in - draft, live, deprecated, complete, or partial?</li>
           <li>Who created it, and who stands behind it?</li>
-          <li>How did it come to be, was it written by a human or generated by an agent?</li>
-          <li>What is the reader allowed to do with it?</li>
-          <li>What should happen next, which workflow transition is valid from here?</li>
-          <li>What other files or standards does it depend on?</li>
+          <li>How did it come to be - written by a human or generated by an agent?</li>
+          <li>What's the reader allowed to do with it?</li>
+          <li>What should happen next - which workflow transition is valid from here?</li>
+          <li>What files or standards does it depend on?</li>
           <li>What does a correct output look like, if one is expected?</li>
-          <li>What is the safe thing to do when something is unclear?</li>
+          <li>What's the safe thing to do when something is unclear?</li>
         </ol>
         <p>Most file-data answers none of these today. An agent reading a contract, a product specification, a podcast transcript, or a video manifest has to infer all of it. That inference is expensive in compute terms. It introduces error. And it makes provenance impossible to verify, which matters as AI-generated content multiplies and regulators begin to require proof of origin.</p>
 
         <h2 id="cogs-what-a-document-says-about-itself" tabindex="-1">COGs: what file-data says about itself</h2>
-        <p>This is the gap that COGs address. COG stands for Community Owned Governance System. A COG is a small set of declarations any file makes about itself, carried in plain text, in the file header (or the file's sidecar where the format does not have a header of its own), before the content begins. It answers the ten questions directly, so no machine has to infer them.</p>
+        <p>This is the gap that COGs address. COG stands for Community Owned Governance System. A COG is a small set of declarations any file makes about itself, carried in plain text in the header (or a sidecar where the format doesn't have one), before the content begins. It answers the ten questions directly, so no machine has to infer them.</p>
         <p>The core declarations:</p>
         <dl>
           <dt><strong>Identity</strong></dt>
           <dd>What this is, who wrote it, who stands behind it, what version it is.</dd>
           <dt><strong>State</strong></dt>
-          <dd>Whether the file is draft, live, or deprecated, so an agent doesn't treat a provisional draft as a signed contract.</dd>
+          <dd>Whether the file is draft, live, or deprecated, so an agent doesn't treat a provisional version as a signed contract.</dd>
           <dt><strong>Provenance</strong></dt>
           <dd>Whether it was human-directed or agent-generated, and the full authorship chain.</dd>
           <dt><strong>Conformance</strong></dt>
@@ -256,20 +256,20 @@ mx:
           <dt><strong>Permissions and failure mode</strong></dt>
           <dd>What actions are allowed, what require human approval, and what the safe default is when something is unclear.</dd>
         </dl>
-        <p>A file carrying a COG doesn't require inference. It requires execution. The meaning is explicit. A machine can verify the provenance, check the conformance claims, and act, without guessing, without re-reading.</p>
+        <p>A file with a COG doesn't require inference. It requires execution. The meaning is explicit. A machine can verify the provenance, check the conformance claims, and act - without guessing, without re-reading.</p>
         <p>COGs declare provenance, they can't verify it independently. A file's frontmatter (or sidecar) says who published it and when; nothing in the file itself can prove that claim to an external reader. That's where <a href="https://reginald.allabout.network/" rel="noopener">Reginald</a> fits: the public registry where files are signed and registered, so any agent can verify that this is what the owner published, unaltered since publication, and whether it was produced by a human, an AI, or an automated system. Agents reading attested files hallucinate less, they have verified facts to cite rather than gaps to fill by inference. MX makes content machine-readable. Reginald makes it machine-trustworthy. <strong>MX is the DNA a file carries when it leaves any pool</strong>, so a video extracted from a course library, a PDF lifted into a training corpus, or a podcast transcript pulled into a RAG retriever each remains interpretable in the new context.</p>
-        <p>COGs are not a new format. They sit inside existing file formats, Markdown, HTML, PDF, YAML, XMP for media, sidecars for binaries. They travel with the file. They require no new runtime, no proprietary tooling, no installation.</p>
+        <p>COGs aren't a new format. They embed in existing file formats - Markdown, HTML, PDF, YAML, XMP for media, sidecars for binaries. They travel with the file and require no new runtime, no proprietary tooling, no installation.</p>
 
         <h2 id="beyond-the-web" tabindex="-1">Beyond the web</h2>
-        <p>The web.dev guide is a useful prompt for any web team. But the content most enterprises rely on sits mostly off the web, inside content management systems, intranets, document management systems, regulatory archives, manufacturing databases, video libraries, podcast feeds, image asset banks, and dataset stores.</p>
-        <p>Machine Experience (MX) extends the discipline the web.dev guide describes to all of those surfaces. The question it asks is the same one Google is asking about web pages: can any machine that reads this understand what it means, who made it, and what it is allowed to do?</p>
+        <p>The web.dev guide is a useful prompt for any web team. But most enterprise files live off the web - inside CMS platforms, intranets, document management systems, regulatory archives, manufacturing databases, video libraries, podcast feeds, image asset banks, and dataset stores.</p>
+        <p>MX extends the discipline the web.dev guide describes to all of those surfaces. The question it's asking is the same one Google asks about web pages: can any machine that reads this understand what it means, who made it, and what it's allowed to do?</p>
         <p>For most enterprise file-data today, the answer is no.</p>
 
         <h2 id="what-this-means-for-your-content" tabindex="-1">What this means for your content</h2>
-        <p>If you are responsible for content or web experience, the web.dev guide is worth reading. After you have read it, ask a harder question: what happens when an AI agent reads your file-data, not your web pages? The training video your customer success team recorded last quarter. The PDF datasheet your sales team emails out. The podcast episodes your CEO records. The diagrams in your engineering wiki. The dataset your finance team publishes. Each of those is a file an agent will eventually read in isolation, away from the surrounding context that gave it meaning.</p>
+        <p>If you're responsible for content or web experience, the web.dev guide is worth reading. After you've read it, ask a harder question: what happens when an AI agent reads your file-data, not your web pages? The training video your customer success team recorded last quarter. The PDF datasheet your sales team emails out. The podcast episodes your CEO records. The diagrams in your engineering wiki. The dataset your finance team publishes. Each of those is a file an agent will eventually read in isolation, away from the surrounding context that gave it meaning.</p>
         <p>Your contracts, your product documentation, your policy files, your service specifications, your training videos, your podcast briefings, your image libraries, do they declare their own identity? Do they carry provenance? Do they specify what an agent is allowed to do with them?</p>
         <p>If not, agents will guess. Sometimes they will guess correctly. Often they won't.</p>
-        <p>COGs are the infrastructure for file-data that does not leave machines to guess. They are governed openly at <a href="https://tg.community" rel="noopener">tg.community</a> as a community standard, no single vendor, no licensing, no proprietary runtime.</p>
+        <p>COGs are the infrastructure for file-data that doesn't leave machines to guess. They're governed openly at <a href="https://tg.community" rel="noopener">tg.community</a> as an open standard - no single vendor, no licensing, no proprietary runtime.</p>
         <p>The web.dev guide describes what good looks like on a web page. COGs describe what good looks like in any file-data, a video, a podcast, a PDF, an image, a web page, anywhere it travels. The web is just the start.</p>
 
       </article>
@@ -280,12 +280,12 @@ mx:
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the MX - Machine Experience - community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Focus areas: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your team stands on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>

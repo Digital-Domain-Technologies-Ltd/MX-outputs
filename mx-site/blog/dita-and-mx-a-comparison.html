@@ -158,7 +158,7 @@ mx:
     <div class="introduction-content" role="presentation">
       <a href="profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile"><img src="../images/avatars/tom-avatar.webp" alt="Tom Cranstoun profile picture" class="author-image" width="80" height="80" loading="lazy"></a>
       <div class="introduction-text" role="presentation">
-        <p class="introduction-message">Machine Experience (MX) is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no machine has to guess.</p>
+        <p class="introduction-message">MX is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so no agent has to guess.</p>
         <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
       </div>
     </div>
@@ -200,7 +200,7 @@ mx:
 
       <h2 id="what-they-are" tabindex="-1">What they are</h2>
 
-      <p><strong>DITA</strong> (Darwin Information Typing Architecture) is an open standard that defines a set of document types for authoring and organising topic-oriented information, together with mechanisms for combining, extending and constraining those document types. Developed at IBM in the late 1990s and donated to OASIS, it is maintained by the OASIS DITA Technical Committee.</p>
+      <p><strong>DITA</strong> (Darwin Information Typing Architecture) is an open standard that defines a set of content types for authoring and structuring topic-oriented information, together with mechanisms for combining and constraining those types. Developed at IBM in the late 1990s and donated to OASIS, it's maintained by the OASIS DITA Technical Committee.</p>
 
       <p><strong>MX</strong> (Machine Experience) is a discipline and methodology concerned with how digital environments are experienced by machines, agents, crawlers, AI systems, as well as humans. Where DITA focuses on human-readable documentation production, MX focuses on the structural and semantic conditions under which content is correctly interpreted by both humans and machines across any channel.</p>
 
@@ -236,19 +236,19 @@ mx:
 
       <h2 id="where-they-overlap" tabindex="-1">Where they overlap</h2>
 
-      <p>Both treat content as modular and separable from its presentation. Both use metadata to enable filtering, routing and contextual delivery. Both are oriented toward multi-channel output. Both operate at the architectural and methodological level rather than existing as tools. Both have formalized content types and inheritance models.</p>
+      <p>Both treat content as modular and separable from its presentation. Both use metadata to enable filtering and routing. Both are oriented toward multi-channel output. Both operate at the architectural and methodological level rather than existing as tools. Both have formalized content types and inheritance models.</p>
 
       <h2 id="where-they-diverge" tabindex="-1">Where they diverge</h2>
 
       <p>Scope of audience differs. DITA's primary reader is human. MX treats machines as first-class readers alongside humans, not as a downstream concern, but as a design constraint from the outset.</p>
 
-      <p>File format is another dividing line. DITA requires XML. MX is format-agnostic: a content unit can be Markdown, HTML, JSON, or any other file type. The MX metadata layer travels with the content regardless of format, and across every output format the transform produces. HTML carries metadata in JSON-LD blocks; PDF carries it in XMP and structure tags (Tagged PDF, ISO 32000); EPUB carries it in the OPF metadata spine; feeds carry it in typed schema properties. MX is a delivery-layer requirement for every output doctype, not an HTML-only concern.</p>
+      <p>File format is another dividing line. DITA requires XML. MX is format-agnostic: a content unit can be Markdown, HTML, JSON, or any other file type. The MX metadata layer travels with the content regardless of format, across every output doctype the transform produces. HTML embeds metadata in JSON-LD blocks; PDF holds it in XMP and structure tags (Tagged PDF, ISO 32000); EPUB holds it in the OPF spine; feeds hold it in typed schema properties. MX is a delivery-layer requirement for every output doctype, not an HTML-only concern.</p>
 
-      <p>The two systems also differ on publication pipeline versus content posture. DITA is centred on the production pipeline: authors write topics, maps assemble them, processors publish outputs. MX is concerned with the ongoing posture of content in a live environment, how it behaves when encountered by AI agents, search systems or API consumers at any point, not only at publish time.</p>
+      <p>The two systems also differ on publication pipeline versus content posture. DITA is built around the production pipeline: authors write topics, maps assemble them, processors publish outputs. MX is concerned with the ongoing posture of content in a live environment, how it behaves when encountered by AI agents, search systems or API consumers at any point, not only at publish time.</p>
 
-      <p>AI integration reflects a deeper difference in design intent. DITA's modular content is compatible with AI delivery, but AI integration is incidental to DITA's purpose. MX places machine interpretation at the centre of the content model. The hostile-web framing and the five machine-reading contexts reflect a fundamentally different starting assumption.</p>
+      <p>AI integration reflects a deeper difference in design intent. DITA's modular content is compatible with AI delivery, but AI integration is incidental to DITA's purpose. MX makes machine interpretation core to the content model. The hostile-web framing and the five machine-reading contexts reflect a different starting assumption.</p>
 
-      <p>Relationship management follows different patterns in each system. DITA uses relationship tables (reltables), a map-level construct that defines links between topics without embedding those links in the topics themselves. MX implements the same concern at the delivery layer: each rendered page carries a JSON-LD <code>@graph</code> fragment in its <code>&lt;head&gt;</code>, declaring the topic as a node with its outgoing typed edges. A crawler unions those fragments across the site to reconstruct the graph. The reltable's typed edges survive the transform as JSON-LD predicates; no bespoke endpoint is required.</p>
+      <p>Relationship management follows different patterns in each system. DITA uses relationship tables (reltables), a map-level construct that defines links between topics without embedding those links in the topics themselves. MX implements the same concern at the delivery layer: each rendered page includes a JSON-LD <code>@graph</code> fragment in its <code>&lt;head&gt;</code>, declaring the topic as a node with its outgoing edges. A crawler unions those fragments across the site to reconstruct the graph. The reltable's edges survive the build as JSON-LD predicates; no bespoke endpoint is required.</p>
 
       <figure class="mx-diagram" aria-labelledby="graph-figure-caption">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="graph-figure-title graph-figure-desc" font-family="Georgia, 'Times New Roman', serif">
@@ -324,10 +324,10 @@ mx:
             <text x="720" y="452" text-anchor="middle" font-size="11" font-style="italic" fill="#888">… one of N rendered topic pages, each carrying its own @graph fragment.</text>
           </g>
         </svg>
-        <figcaption id="graph-figure-caption">The reltable is already an edge list. DITA-OT, with an MX transform step added, emits each topic's outgoing typed edges as JSON-LD predicates inside a <code>&lt;script type="application/ld+json"&gt;</code> block in the page's <code>&lt;head&gt;</code>. An agent walks the sitemap, fetches each page, and unions the <code>@graph</code> fragments, no bespoke endpoint required.</figcaption>
+        <figcaption id="graph-figure-caption">The reltable is already an edge list. DITA-OT, with an MX transform step added, emits each topic's outgoing edges as JSON-LD predicates inside a <code>&lt;script type="application/ld+json"&gt;</code> block in the page's <code>&lt;head&gt;</code>. An agent walks the sitemap, fetches each page, and unions the <code>@graph</code> fragments, no bespoke endpoint required.</figcaption>
       </figure>
 
-      <p>Locale-unambiguous values are handled differently. DITA authors write prose; the transform decides how numbers, currencies and dates render. MX requires the machine-readable form to travel alongside every locale-formatted display. The HTML5 <code>&lt;data&gt;</code> element pins a locale-free numeric value to a localised display string; <code>&lt;time datetime&gt;</code> carries the ISO 8601 date beside the prose form; Schema.org <code>PriceSpecification</code> carries the currency-safe numeric value in JSON-LD. A European decimal-comma number such as <code>€2.030,00</code>, two thousand and thirty euros, is misread as 2.030 by any machine expecting a decimal point. Publishing the unambiguous value alongside the localised display eliminates that class of error.</p>
+      <p>Locale-unambiguous values are handled differently. DITA authors write prose; the transform decides how numbers and dates render. MX requires the machine-readable form to travel alongside every locale-formatted output. The HTML5 <code>&lt;data&gt;</code> element pins a locale-free numeric value to a localised string; <code>&lt;time datetime&gt;</code> has the ISO 8601 date beside the prose form; Schema.org <code>PriceSpecification</code> has the currency-safe figure in JSON-LD. A European decimal-comma number such as <code>€2.030,00</code>, two thousand and thirty euros, is misread as 2.030 by any machine expecting a decimal point. Publishing the unambiguous form alongside the localised output eliminates that class of error.</p>
 
       <p>Governance models also differ. OASIS maintains DITA through a formal Technical Committee process. The Gathering operates as an open standards body for MX with a lighter-weight RFC process, explicitly focused on emerging machine-interaction patterns.</p>
 
@@ -337,7 +337,7 @@ mx:
 
       <ul>
         <li>Information typing, MX declares content types in YAML frontmatter.</li>
-        <li>Specialisation and inheritance, MX content-type hierarchy declared in frontmatter.</li>
+        <li>Type hierarchy and inheritance, declared via content-type in frontmatter.</li>
         <li>Audience profiling, <code>mx: audience</code>.</li>
         <li>Relationship management, JSON-LD <code>@graph</code> blocks emitted per rendered page, unioned by the crawler.</li>
         <li>Canonical-identity declarations carried in frontmatter.</li>
@@ -348,11 +348,11 @@ mx:
 
       <p>The single DITA concept not yet formalized in MX at the time of this analysis:</p>
 
-      <p>The single-source governance rule is a principle I am proposing for The Gathering: duplicate content is prohibited. Any content appearing in more than one context must reference a canonical source, never copy it. Without this as a stated principle, redundant nodes accumulate, canonical identity becomes ambiguous, and agent traversal results become unreliable. The rule isn't yet a formal RFC, it's an intent-to-propose, credited to DITA's long-standing discipline.</p>
+      <p>The single-source governance rule is a principle I'm proposing for The Gathering: duplicate content is prohibited. Any content appearing in more than one context must reference a canonical source, never copy it. Without this as a stated principle, redundant nodes accumulate, canonical identity becomes ambiguous, and agent traversal results become unreliable. The rule isn't yet a formal RFC, it's an intent-to-propose, credited to DITA's long-standing discipline.</p>
 
       <h2 id="when-to-use-which" tabindex="-1">When to use which</h2>
 
-      <p><strong>DITA</strong> is well-suited to large-scale technical documentation environments, software manuals, regulated industries such as medical, aerospace and financial, and organizations that need structured content reuse across print and digital channels with established toolchains. <strong>MX</strong> applies wherever content is authored for environments in which machine agents are active readers, AI-powered search, agentic workflows, LLM retrieval contexts, and any site or platform where structured machine interpretation matters at the point of content creation, not only at publication.</p>
+      <p><strong>DITA</strong> is well-suited to large-scale technical documentation environments, software manuals, regulated industries, and teams that need structured content reuse across print and digital channels with established toolchains. <strong>MX</strong> applies wherever material is authored for environments in which agents are active readers, AI-powered search, agentic workflows, LLM retrieval contexts, and any site or platform where structured machine interpretation matters at the point of creation, not only at publication.</p>
 
       <p>They aren't mutually exclusive. A DITA-based content operation can adopt MX principles by enriching topics with machine-readable metadata, treating MX as a layer above the DITA architecture rather than a replacement for it.</p>
 
@@ -366,12 +366,12 @@ mx:
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the MX community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Focuses on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory at Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your team stands on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>

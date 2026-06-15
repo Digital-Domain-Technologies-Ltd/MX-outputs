@@ -193,7 +193,7 @@ mx:
         <li><a href="#why-this-matters-now">Why This Matters Now</a></li>
         <li><a href="#the-two-states-that-matter">The Two States That Matter</a></li>
         <li><a href="#the-mx-community">The MX Community</a></li>
-        <li><a href="#where-mx-fits-in-your-organisation">Where MX Fits in Your Organisation</a></li>
+        <li><a href="#where-mx-fits-in-your-organisation">Where MX Fits in Your Business</a></li>
         <li><a href="#getting-started">Getting Started</a></li>
         <li><a href="#whats-next">What's Next</a></li>
           </ul>
@@ -218,14 +218,14 @@ mx:
 
 
 <p>Machine Experience (MX) is the practice of transferring complete context about your website to AI machines so they don't have to guess, infer, or hallucinate what your content means.</p>
-<p>It's not about making your site look good. It's about making your site understood.</p>
+<p>It's about making your site understood, not just good-looking.</p>
 <h2 id="why-context-transfer-matters" tabindex="-1">Why Context Transfer Matters</h2>
-<p>When a human visits your website, they see visual cues: colors, layouts, buttons, hover states, error messages. They can read between the lines. They tolerate ambiguity. They persist when things break.</p>
+<p>When a human visits your website, they see visual cues: visual styling, layouts, buttons, hover states, error messages. They can read between the lines. They tolerate ambiguity. They persist when things break.</p>
 <p>AI agents visiting your website see none of that. They parse HTML structure. They read metadata. They look for explicit signals about what's important, what's clickable, what's out of stock, what requires authentication.</p>
 <p>If your HTML doesn't explicitly say &quot;this button completes the purchase&quot; or &quot;this field is required&quot; or &quot;this product is unavailable,&quot; the agent has two choices: guess what it means, or fail silently and move on.</p>
 <p>Both outcomes cost you conversions you'll never see in your analytics.</p>
 <h2 id="the-business-problem" tabindex="-1">The Business Problem</h2>
-<p>Right now, companies optimise websites for three audiences:</p>
+<p>Right now, companies build websites for three audiences:</p>
 <ol>
 <li>UX (User Experience), make it intuitive for humans</li>
 <li>SEO (Search Engine Optimisation), make it discoverable by Google</li>
@@ -233,7 +233,7 @@ mx:
 </ol>
 <p>But there's a fourth visitor type that most businesses are completely blind to: <strong>AI agents acting on behalf of humans</strong>.</p>
 <p>These agents are already visiting your site. ChatGPT, Microsoft Copilot, Google's shopping agents, Amazon's Alexa+ system, Perplexity, Claude, they're all trying to help users find products, compare prices, book services, and complete purchases.</p>
-<p>We call them the <strong>invisible users</strong>, and they're invisible for two distinct reasons. First, they're invisible to you: they blend into your analytics, arrive once, assess your site's structure, and either succeed or disappear without trace. Second, your interface is invisible to them: they can't see animations, colour coding, toast notifications, loading spinners, or any of the visual signals your site uses to communicate. They parse HTML structure. They read metadata. Visual design means nothing to them.</p>
+<p>We call them the <strong>invisible users</strong>, and they're hidden for two distinct reasons. First, they're invisible to you: they blend into your analytics, arrive once, assess your site's structure, and either succeed or disappear without trace. Second, your interface is invisible to them: they can't see animations, visual coding, toast notifications, loading spinners, or any of the visual signals your site uses to communicate. They parse HTML structure. They read metadata. Visual design means nothing to them.</p>
 <p>Most of these agent visits are invisible to your analytics. They don't show up in Google Analytics. They don't trigger conversion tracking. When they fail to complete a purchase, you never know they tried.</p>
 <p>January 2026 data from Adobe shows AI referrals up 700% in retail and 500% in travel compared to the previous year. Conversion rates for AI-referred users lead traditional web traffic by 30%. The agent economy isn't coming, it's here.</p>
 <h2 id="what-machine-experience-actually-means" tabindex="-1">What Machine Experience Actually Means</h2>
@@ -246,15 +246,15 @@ mx:
 <li>Machine-readable instructions for AI agents discovering your site (llms.txt files)</li>
 <li>Validation feedback that agents can read and act upon (error messages marked with <code>role=&quot;alert&quot;</code>)</li>
 </ul>
-<p>MX isn't SEO. It isn't accessibility. It isn't performance optimisation. But implementing MX patterns improves all three as beneficial side effects.</p>
+<p>MX is its own discipline, separate from SEO, accessibility, and performance tuning - though implementing MX patterns improves all three as side effects.</p>
 <h2 id="the-transfer-not-transformation" tabindex="-1">The Transfer, Not Transformation</h2>
 <p>MX doesn't ask you to rebuild your website from scratch. It asks you to transfer the context that already exists in your visual design into your HTML structure.</p>
 <p>If a button is disabled in your UI, make that explicit in the HTML (<code>disabled</code> attribute or <code>aria-disabled=&quot;true&quot;</code>).</p>
 <p>If a product is out of stock, don't just gray out the buy button, add structured data declaring inventory status (<code>&quot;availability&quot;: &quot;OutOfStock&quot;</code>).</p>
 <p>If a field is required, don't just add a red asterisk, use the <code>required</code> attribute or <code>aria-required=&quot;true&quot;</code>.</p>
-<p>If your checkout flow has three steps, don't just number them visually, use <code>aria-current=&quot;step&quot;</code> to tell agents where they are in the process.</p>
+<p>If your checkout flow has three steps, don't just number them visually, use <code>aria-current=&quot;step&quot;</code> to tell agents where they're in the process.</p>
 <p>The information is already in your design. MX is about making it machine-readable.</p>
-<p>The portability principle that follows from this: <strong>MX is the DNA a file carries when it leaves any pool</strong>. Once the context is in the HTML rather than the design, the file is interpretable in isolation, in a training corpus, a RAG retrieval, a knowledge base extracted from your site, an agent's context window. The originating system's structure no longer has to be reachable for the file to be understood. A memory-pool architecture (an LLM-wiki, an Obsidian vault, a vector store) and MX are orthogonal layers, both useful, neither a substitute for the other.</p>
+<p>The portability principle that follows from this: <strong>MX is the DNA a file carries when it leaves any pool</strong>. Once that metadata is in the HTML rather than the design, the file is interpretable in isolation, in a training corpus, a RAG retrieval, a knowledge base extracted from your site, an agent's context window. The originating system's structure no longer has to be reachable for the file to be understood. A memory-pool architecture (an LLM-wiki, an Obsidian vault, a vector store) and MX are orthogonal layers, both useful, neither a substitute for the other.</p>
 <h2 id="why-this-matters-now" tabindex="-1">Why This Matters Now</h2>
 <p>The timeline for agent-mediated commerce has compressed dramatically. What industry analysts predicted would take 24 months happened in less than 9 months.</p>
 <p>In January 2026, three major platforms launched agent commerce systems within seven days:</p>
@@ -263,15 +263,15 @@ mx:
 <li>8 January 2026: Microsoft Copilot Checkout integration</li>
 <li>11 January 2026: Google Universal Commerce Protocol (UCP)</li>
 </ul>
-<p>This convergence moved agent commerce from experimental to infrastructure overnight. Companies that optimised for Machine Experience early are now trusted sources for agent recommendations. Those that didn't are being bypassed for competitors with clearer context.</p>
+<p>This convergence made agent commerce part of standard infrastructure overnight. Companies that built for Machine Experience early are now trusted sources for agent recommendations. Those that didn't are being bypassed for competitors with clearer context.</p>
 <p>First-mover advantage in the agent economy isn't about being first to market. It's about being first to be understood.</p>
 <h2 id="the-two-states-that-matter" tabindex="-1">The Two States That Matter</h2>
-<p>AI agents interact with your website in two fundamentally different ways, and most businesses only test one of them:</p>
+<p>AI agents interact with your website in two different ways, and most businesses only test one of them:</p>
 <p><strong>Served HTML</strong> is what your server returns before JavaScript executes. CLI-based agents, server-side agents, and some browser extensions parse this state. If your semantic structure and metadata only appear after JavaScript runs, these agents never see them.</p>
 <p><strong>Rendered HTML</strong> is what appears after JavaScript frameworks (React, Vue, Angular) finish manipulating the DOM. Browser-based agents see this state, but they need explicit signals that content has finished loading and is ready for interaction.</p>
 <p>Both states need MX patterns. Testing only the rendered state (which is what most QA teams do) misses half your agent audience.</p>
 <h2 id="the-mx-community" tabindex="-1">The MX Community</h2>
-<p>Machine Experience is not a proprietary framework. It's a set of universal patterns built on web standards that have existed for years: semantic HTML5, ARIA attributes, <a href="https://schema.org">Schema.org</a> structured data, and emerging standards like llms.txt.</p>
+<p>Machine Experience isn't a proprietary framework. It's a set of universal patterns built on web standards that have existed for years: semantic HTML5, ARIA attributes, <a href="https://schema.org">Schema.org</a> structured data, and emerging standards like llms.txt.</p>
 <p>To accelerate adoption, we're building an <strong>MX Community</strong> where businesses, developers, designers, and consultancies can:</p>
 <ul>
 <li>Access open-source guidance on implementing MX patterns</li>
@@ -281,17 +281,17 @@ mx:
 </ul>
 <p>The guidance is open. The patterns are universal. The community is collaborative.</p>
 <p>What remains proprietary are the tools that automate MX implementation and validation, those enable businesses to move faster, but they're not required to adopt the principles.</p>
-<h2 id="where-mx-fits-in-your-organisation" tabindex="-1">Where MX Fits in Your Organisation</h2>
-<p>If you have a website, you need Machine Experience. It doesn't matter if you're ecommerce, SaaS, content publishing, B2B services, or government.</p>
-<p>Any website that serves a goal, purchase, contact form, information delivery, trust building, needs to give AI agents the explicit context to understand and complete that goal.</p>
-<p>MX sits alongside your existing web disciplines:</p>
+<h2 id="where-mx-fits-in-your-organisation" tabindex="-1">Where MX Fits in Your Business</h2>
+<p>If you have a website, you need Machine Experience - whether you're ecommerce, SaaS, content publishing, B2B services, or government.</p>
+<p>Any website that serves a purpose - purchase, contact form, information delivery, trust building - needs to give AI agents the explicit context to understand and complete it.</p>
+<p>MX belongs alongside your existing web disciplines:</p>
 <ul>
 <li>Your UX team designs for human comprehension</li>
 <li>Your SEO team optimises for search discovery</li>
 <li>Your accessibility team ensures usability for people with disabilities</li>
 <li>Your MX practice gives AI agents explicit, complete context</li>
 </ul>
-<p>These aren't competing priorities. They're complementary. Patterns that help agents also help accessibility users. Semantic HTML that agents parse is the same semantic HTML that improves SEO.</p>
+<p>These aren't competing priorities. They're complementary. Patterns that benefit agents also benefit accessibility users. Semantic HTML that agents parse is the same semantic HTML that improves SEO.</p>
 <p>The difference is tolerance. Humans persist through broken experiences. Accessibility users work around missing structure. AI agents fail silently and move to your competitor.</p>
 <h2 id="getting-started" tabindex="-1">Getting Started</h2>
 <p>You don't need to rebuild your entire site to start implementing Machine Experience. Begin with your highest-value conversion paths:</p>
@@ -301,7 +301,7 @@ mx:
 <p><strong>Audit your checkout flow</strong> - Can an agent understand each step, identify required fields, detect validation errors, and confirm order completion?</p>
 </li>
 <li>
-<p><strong>Check your product pages</strong> - Do they include structured data for price, availability, product specifications, and shipping options?</p>
+<p><strong>Check your product pages</strong> - Do they include structured data for price, availability, item specifications, and shipping options?</p>
 </li>
 <li>
 <p><strong>Review your navigation</strong> - Is it semantic (<code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>) or just styled divs?</p>
@@ -337,12 +337,12 @@ mx:
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your business lands on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>

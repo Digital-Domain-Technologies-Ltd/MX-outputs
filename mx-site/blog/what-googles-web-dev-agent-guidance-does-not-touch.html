@@ -173,7 +173,7 @@ mx:
           <ul>
             <li><a href="#what-the-guide-covers">What the guide covers</a></li>
             <li><a href="#googles-own-equivalence">Google's own equivalence</a></li>
-            <li><a href="#what-the-guide-does-not-touch">What the guide does not touch</a></li>
+            <li><a href="#what-the-guide-does-not-touch">What the guide doesn't touch</a></li>
             <li><a href="#google-covered-the-page">Google covered the page. MX covers the file.</a></li>
             <li><a href="#what-this-means">What this means for your content</a></li>
           </ul>
@@ -199,25 +199,25 @@ mx:
 
         <p>On 1 May 2026 Google's developer platform published a guide titled <em>Build agent-friendly websites</em>, at <a href="https://web.dev/articles/ai-agent-site-ux" rel="noopener">web.dev/articles/ai-agent-site-ux</a>. The article asks developers to think about how AI agents experience their pages, and gives eight specific things to do. The advice is sound. It's also a useful signal about where the conversation is moving: agent-readiness is now a mainstream developer concern, not a niche held by accessibility specialists or structured-data engineers.</p>
 
-        <p>What the guide is, and what it isn't, are both worth being precise about. It tells developers how to make a rendered HTML page legible to an agent that arrives at the URL. It doesn't tell publishers how to make the underlying file, the contract, the policy, the recorded talk, the dataset, the manuscript, legible to any agent that reads it without ever touching the page. That's a different problem, with a different scope, and Google's guide doesn't pretend otherwise.</p>
+        <p>It's worth being precise about what the guide is and what it isn't. It tells developers how to make a rendered HTML page legible to an agent that arrives at the URL. It doesn't tell publishers how to make the underlying file - the contract, the policy, the recorded talk, the dataset, the manuscript - legible to any agent that reads it without ever touching the page. That's a different problem with a narrower scope, and Google's guide doesn't pretend otherwise.</p>
 
-        <p>This post is a careful read of what the guide includes, what it deliberately leaves out, and where Machine Experience (MX) picks up the work the guide doesn't address.</p>
+        <p>This post is a careful read of what the guide includes, what it deliberately leaves out, and where Machine Experience (MX) picks up the work it doesn't address.</p>
 
         <h2 id="what-the-guide-covers" tabindex="-1">What the guide covers</h2>
 
-        <p>The guide is organised under three section headings: <em>How agents view your site</em>, <em>Build agent-friendly websites</em>, and <em>Next steps</em>. The concrete recommendations are eight specific properties of the rendered HTML page:</p>
+        <p>The guide falls under three section headings: <em>How agents view your site</em>, <em>Build agent-friendly websites</em>, and <em>Next steps</em>. The concrete recommendations are eight specific properties of the rendered HTML page:</p>
         <ol>
           <li>Every necessary action, human or agent, is reflected in the interface.</li>
-          <li>Page layout is stable, so an agent that takes screenshots is not confused by buttons that move between product categories.</li>
+          <li>Page layout is stable, so an agent that takes screenshots isn't confused by buttons that move between product categories.</li>
           <li>No ghost elements or transparent overlays that hide interactive elements.</li>
           <li>Actionable elements use semantic HTML, prefer <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> over modified <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>.</li>
-          <li>Where semantic HTML is not possible, supply <code>role</code> and <code>tabindex</code>.</li>
+          <li>Where semantic HTML isn't possible, supply <code>role</code> and <code>tabindex</code>.</li>
           <li>Set <code>cursor: pointer</code> in CSS as an actionability signal.</li>
           <li>Add <code>for</code> on <code>&lt;label&gt;</code> tags to bind them to inputs.</li>
-          <li>Interactive elements have a visible area larger than 8 square pixels, so they are not filtered out by visual analysis.</li>
+          <li>Interactive elements have a visible area larger than 8 square pixels, so they aren't filtered out by visual analysis.</li>
         </ol>
 
-        <p>Every item is a property of the rendered page: the DOM, the accessibility tree, the CSS, the choice of semantic element, the visual stability of the layout. The guide assumes the agent is looking at a page through a browser-like interface, either via the DOM or via screenshots, and tells the developer how to make that page legible.</p>
+        <p>Every item is a property of the rendered page: the DOM, the accessibility tree, the CSS, the choice of semantic element, the visual stability of the layout. The guide assumes the agent is looking at a page through a browser-like interface, either via the DOM or via screenshots, and tells the developer how to make it legible.</p>
 
         <h2 id="googles-own-equivalence" tabindex="-1">Google's own equivalence</h2>
 
@@ -227,9 +227,9 @@ mx:
           <p>Everything we suggest to make a site "agent-ready" also makes sites better for humans.</p>
         </blockquote>
 
-        <p>That's exactly right, and it's the answer to the question some readers will be asking: <em>why isn't Google addressing the rest of it?</em> Because the rest of it isn't page UX. Provenance, authentication, rights, lifecycle, and off-web carriers are different surface areas, with different conventions, owned by different working groups. Google's web.dev team is publishing what is in scope for web.dev. They aren't promising more; they are also not arguing the rest doesn't matter.</p>
+        <p>That's exactly right, and it's the answer to the question some readers will be asking: <em>why isn't Google addressing the rest of it?</em> Because the rest of it isn't page UX. Provenance, authentication, rights, lifecycle, and off-web carriers are distinct surface areas, with distinct conventions, owned by different working groups. Google's web.dev team is publishing what's in scope for web.dev. They aren't promising more; they're also not arguing the rest doesn't matter.</p>
 
-        <h2 id="what-the-guide-does-not-touch" tabindex="-1">What the guide does not touch</h2>
+        <h2 id="what-the-guide-does-not-touch" tabindex="-1">What the guide doesn't touch</h2>
 
         <p>Five things, by name or by substance, are absent from the article:</p>
 
@@ -245,15 +245,15 @@ mx:
 
         <h2 id="google-covered-the-page" tabindex="-1">Google covered the page. MX covers the file.</h2>
 
-        <p>That's the framing in one line. Google's 1 May 2026 web.dev guidance is accessibility hygiene for the rendered HTML page, semantic elements, the accessibility tree, stable layouts. MX adds what the page cannot carry on its own: <strong>provenance</strong>, <strong>authentication</strong>, <strong>rights</strong>, <strong>lifecycle</strong>, and the <strong>off-web carriers</strong> (PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, Markdown) where most of the world's content actually lives.</p>
+        <p>That's the framing in one line. Google's 1 May 2026 web.dev guidance is hygiene for the rendered HTML page: semantic elements, the accessibility tree, stable layouts. MX adds what the page can't carry on its own: <strong>provenance</strong>, <strong>authentication</strong>, <strong>rights</strong>, <strong>lifecycle</strong>, and the <strong>off-web carriers</strong> (PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, Markdown) where most of the world's content actually lives.</p>
 
-        <p>MX is not a competitor to Google's guidance, and the guidance is not a competitor to MX. They share an audience, they share a goal, and they sit at different layers of the same stack. A site that follows the web.dev guide and carries MX declarations is doing both jobs. A site that does only one is doing half.</p>
+        <p>MX isn't a competitor to Google's guidance, and Google's guidance isn't a competitor to MX. They share an audience, they share a goal, and they sit at different layers of the same stack. A site that follows the web.dev guide and carries MX declarations is doing both jobs. A site that does only one is doing half.</p>
 
         <h2 id="what-this-means" tabindex="-1">What this means for your content</h2>
 
-        <p>If your job is web, design, development, performance, the web.dev guide is essential reading. Implement what it says. The eight recommendations are real work and real wins.</p>
+        <p>If your job is web, design, development, performance, the web.dev guide is essential reading. Implement what it says. The eight recommendations are genuine work and genuine wins.</p>
 
-        <p>After that, ask the harder question: what happens when an agent reads your content where the page is not present? The contract attached to a procurement portal email. The policy file lifted into a regulatory submission. The training video extracted from your course library. The dataset published once and indexed forever. Each of those is a file an agent will read in isolation, away from the page that gave it context.</p>
+        <p>After that, ask the harder question: what happens when an agent reads your content where the page isn't present? The contract attached to a procurement portal email. The policy file lifted into a regulatory submission. The training video extracted from your course library. The dataset published once and indexed forever. Each of those is a file an agent will read in isolation, away from the page that gave it context.</p>
 
         <p>For those files, MX is the discipline. <a href="https://reginald.allabout.network/" rel="noopener">REGINALD</a> is the public registry that makes the declarations verifiable - <strong>MX makes content machine-readable; REGINALD makes it machine-trustworthy</strong>. The standard is governed openly at <a href="https://tg.community" rel="noopener">tg.community</a>. No single vendor. No proprietary runtime. No licensing.</p>
 
@@ -267,12 +267,12 @@ mx:
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Specializes in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through how MX applies to the content your organisation publishes off the web?</p>
+          <p class="post-conclusion-prompt">Want to talk through how MX applies to the content your team publishes off the web?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>

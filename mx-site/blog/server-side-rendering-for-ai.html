@@ -222,30 +222,30 @@ mx:
         </header>
 
 
-<p>In the first two posts of this series I kept arriving at the same fix and then walking past it. The Common Crawl post said the content that survives a training pipeline is the content that is actually in your HTML. The robots.txt post said only Googlebot renders JavaScript, and every other major AI crawler fetches the raw HTML and processes that, and nothing more. Both ended on a version of the same sentence: if it isn't in the raw HTML response, it doesn't exist for the machine.</p>
+<p>In the first two posts of this series I kept arriving at the same fix and then walking past it. The Common Crawl post said that what survives a training pipeline is whatever is actually in your HTML. The robots.txt post said only Googlebot renders JavaScript, and every other major AI crawler fetches the raw HTML and processes that alone. Both ended on a version of the same sentence: if it isn't in the raw HTML response, it doesn't exist for the machine.</p>
 <p>This post is about that sentence. It's the one that decides whether any of the rest matters.</p>
 <p>It closes a three-part series on how AI systems read the web: <a href="https://mx.allabout.network/blog/your-site-is-already-training-ai.html">Your Site Is Already Training AI Models</a> covered the archive most models train on, <a href="https://mx.allabout.network/blog/ai-crawlers-what-robots-txt-guides-get-wrong.html">What Most robots.txt Guides Get Wrong About AI Crawlers</a> covered the live crawlers and what robots.txt controls, and this one covers what those crawlers actually read when they arrive.</p>
 <h2 id="the-asymmetry-that-decides-everything" tabindex="-1">The Asymmetry That Decides Everything</h2>
 <p>Googlebot renders JavaScript. It loads your page, runs your scripts, waits for the DOM to settle, and indexes what a person would see. As far as I know, it's the only major crawler that does.</p>
-<p>GPTBot, ClaudeBot, CCBot, OAI-SearchBot, PerplexityBot: none of them run your JavaScript. They make an HTTP request, they get back whatever your server sends in that first response, and that's the page. No script execution, no waiting, no second pass. The raw HTML is not a step on the way to your page. For these crawlers, it is your page.</p>
-<p>So the question that matters is simple, and most teams have never asked it: what is in your HTML before a single line of JavaScript runs?</p>
+<p>GPTBot, ClaudeBot, CCBot, OAI-SearchBot, PerplexityBot: none of them run your JavaScript. They make an HTTP request, they get back whatever your server sends in that first response, and that's the page. No script execution, no waiting, no second pass. The raw HTML isn't a step on the way to your page. For these crawlers, it is your page.</p>
+<p>So the question that matters is simple, and most teams have never asked it: what's in your HTML before a single line of JavaScript runs?</p>
 <h2 id="see-your-site-the-way-a-crawler-does" tabindex="-1">See Your Site the Way a Crawler Does</h2>
 <p>You don't need special tools. You need to look at the response your server actually sends, not the page your browser assembles from it.</p>
 <p>The fastest check is curl:</p>
 <pre><code class="language-bash">curl -sL https://example.com/your-page | grep -iE '&lt;h1|&lt;title|application/ld\+json'
 </code></pre>
 <p>If your headline, your title, and your structured data come back, a crawler can see them. If that command returns an empty <code>&lt;title&gt;</code>, no <code>&lt;h1&gt;</code>, and no JSON-LD, then neither can the crawler, no matter how complete the page looks in your browser.</p>
-<p>The browser equivalent is View Source, not Inspect. Inspect shows the rendered DOM after JavaScript has run; View Source shows the raw response. If your content is not in View Source, you are looking at what every non-rendering crawler gets.</p>
+<p>The browser equivalent is View Source, not Inspect. Inspect shows the rendered DOM after JavaScript has run; View Source shows the raw response. If your content isn't in View Source, you're looking at what every non-rendering crawler gets.</p>
 <p>The starkest test of all: turn JavaScript off in your browser and reload. What remains is, near enough, what GPTBot and ClaudeBot read.</p>
 <h2 id="where-the-content-goes-missing" tabindex="-1">Where the Content Goes Missing</h2>
 <p>A handful of common patterns hide content from machines that don't render. Each is invisible in normal use, because your browser papers over all of them.</p>
-<p><strong>The client-side-rendered shell.</strong> A single-page app often ships HTML that is almost empty:</p>
+<p><strong>The client-side-rendered shell.</strong> A single-page app often ships HTML that's almost empty:</p>
 <pre><code class="language-html">&lt;body&gt;
   &lt;div id=&quot;root&quot;&gt;&lt;/div&gt;
   &lt;script src=&quot;/static/bundle.js&quot;&gt;&lt;/script&gt;
 &lt;/body&gt;
 </code></pre>
-<p>The text, the headings, the structured data, all of it arrives later, written into that <code>&lt;div&gt;</code> by JavaScript. A person sees a full page. A crawler sees an empty box and a script it will not run.</p>
+<p>The text, the headings, the structured data, all of it arrives later, written into that <code>&lt;div&gt;</code> by JavaScript. A person sees a full page. A crawler sees an empty box and a script it won't run.</p>
 <p>Here is the same page when the server renders it:</p>
 <pre><code class="language-html">&lt;body&gt;
   &lt;main&gt;
@@ -260,7 +260,7 @@ mx:
 <p>Same app, same framework, different output. The second version carries its meaning in the first response.</p>
 <p><strong>JSON-LD injected by JavaScript.</strong> This one catches careful teams. You added complete structured data, you tested it, it passed. But a tag manager or a client-side schema plugin injected it after load. Googlebot renders, so Googlebot sees it; every AI crawler fetches raw HTML, so none of them do. Your structured data is real for search and absent for AI. The <a href="https://mx.allabout.network/blog/your-site-is-already-training-ai.html">Common Crawl post</a> makes the case for complete JSON-LD; this is the catch that quietly cancels it.</p>
 <p><strong>Client-set metadata.</strong> Title, meta description, canonical link, and Open Graph tags written by JavaScript after load have the same problem. The crawler reads the server's version, which is too often a generic placeholder.</p>
-<p><strong>Lazy-loaded and infinite-scroll content.</strong> Anything that loads on scroll, on click, or by a fetch after the page settles is content the crawler never triggers. It doesn't scroll. It doesn't click. It reads the first response and moves on.</p>
+<p><strong>Lazy-loaded and infinite-scroll content.</strong> Anything that loads on scroll, on click, or by a fetch after the page settles is content the crawler never triggers. No scrolling, no clicking - it reads the first response and moves on.</p>
 <h2 id="what-each-rendering-choice-means-for-ai" tabindex="-1">What Each Rendering Choice Means for AI</h2>
 <p>The fix has a name, but it helps to see where each common approach lands.</p>
 <table>
@@ -304,20 +304,20 @@ mx:
 </tr>
 </tbody>
 </table>
-<p>The headline is the simple one. If the meaningful content and metadata are in the HTML the server sends, the approach works for AI. The frameworks people reach for, Next.js, Nuxt, Astro, SvelteKit, Remix, all offer an SSR or static mode that produces complete first-response HTML. The framework is not the point. The output is. A static site built by hand passes this test as easily as the newest meta-framework.</p>
+<p>The headline is the simple one. If the meaningful content and metadata are in the HTML the server sends, the approach works for AI. The frameworks people reach for, Next.js, Nuxt, Astro, SvelteKit, Remix, all offer an SSR or static mode that produces complete first-response HTML. The framework isn't the point. The output is. A static site built by hand passes this test as easily as the newest meta-framework.</p>
 <h2 id="do-not-solve-it-by-cloaking" tabindex="-1">Do Not Solve It by Cloaking</h2>
 <p>There's a tempting shortcut: detect the crawler by its user-agent and serve it a special pre-rendered version while humans keep the client-side app. This is dynamic rendering, and Google describes it as a stopgap, not a recommended long-term setup.</p>
-<p>Two problems. First, it's fragile. You are maintaining a second rendering path and a bot list that goes stale the moment a new crawler appears, and the <a href="https://mx.allabout.network/blog/ai-crawlers-what-robots-txt-guides-get-wrong.html">robots.txt post</a> showed how many there now are. Second, it shades into cloaking: serving materially different content to bots than to people, which crosses from workaround into something search guidelines treat as a violation. The line is whether the bot and the human get the same content. Keep them the same and you are fine. Let them drift and you are exposed.</p>
+<p>Two problems. First, it's fragile. You're maintaining a second rendering path and a bot list that goes stale the moment a new crawler appears, and the <a href="https://mx.allabout.network/blog/ai-crawlers-what-robots-txt-guides-get-wrong.html">robots.txt post</a> showed how many there now are. Second, it shades into cloaking: serving materially different content to bots than to people, which crosses from workaround into something search guidelines treat as a violation. The line is whether the bot and the human get the same content. Keep them the same and you're fine. Let them drift and you're exposed.</p>
 <p>Server-side rendering sidesteps the whole problem. Every crawler, every person, every screen reader gets the same complete HTML. There's no second path to maintain and nothing to keep in sync. The honest fix is also the simpler one.</p>
 <h2 id="the-accessibility-overlap-is-not-a-coincidence" tabindex="-1">The Accessibility Overlap Is Not a Coincidence</h2>
-<p>A page that works without JavaScript is a page that works for a screen reader, for a slow connection, for a browser extension, and for an AI agent. These are the same property seen from different angles: the meaning is in the markup, not locked behind script execution. The first post noted that Google's new Agentic Browsing checks put accessibility-tree integrity alongside <code>llms.txt</code>. This is why. What makes a page legible to an agent is, structurally, what makes it legible to a person using assistive technology. Build for one and you have built for both.</p>
+<p>A page that works without JavaScript works for a screen reader, for a slow connection, for a browser extension, and for an AI agent. These are the same property seen from different angles: the meaning is in the markup, not locked behind script execution. The first post noted that Google's new Agentic Browsing checks put accessibility-tree integrity alongside <code>llms.txt</code>. This is why. What makes a page legible to an agent is, structurally, what makes it legible to a person using assistive technology. Build for one and you have built for both.</p>
 <h2 id="the-test-that-settles-it" tabindex="-1">The Test That Settles It</h2>
 <p>You don't need to audit your whole stack. You need one answer: are the content and metadata you care about present in the raw HTTP response, before any JavaScript runs?</p>
-<p>Fetch the page with curl. Read the source. Turn JavaScript off and reload. If your headline, your body text, your structured data, and your meta tags are all there, you are readable. If they appear only after the scripts run, every AI crawler in this series is reading a hollow version of your page, and so is everything trained on it.</p>
+<p>Fetch the page with curl. Read the source. Turn JavaScript off and reload. If your headline, your body text, your structured data, and your meta tags are all there, you're readable. If they appear only after the scripts run, every AI crawler in this series is reading a hollow version of your page, and so is everything trained on it.</p>
 <h2 id="where-mx-fits" tabindex="-1">Where MX Fits</h2>
-<p>MX is metadata that travels in the carrier: structured data, explicit meta tags, the source frontmatter embedded in the page itself. All of it lives in the HTML. If your HTML is an empty shell waiting for JavaScript, there's nothing for that metadata to live in, and nothing for a machine to read. Server-side rendering isn't an MX feature. It's the precondition for every machine-readable thing MX asks you to add. The page has to exist in the response before its metadata can mean anything.</p>
-<p>This is also one of the first things <a href="https://mx.allabout.network/audit/">an MX audit</a> checks. It fetches each page the way a non-rendering crawler does, compares that against the rendered version, and tells you exactly which content and which structured data are present for a browser but missing for a machine. It is the gap you cannot see from your own screen, because your own screen runs the JavaScript.</p>
-<p>If you want to know what AI actually reads when it visits your site, <a href="https://mx.allabout.network/audit/">start with an audit</a> and I will show you the difference between what you publish and what a machine receives.</p>
+<p>MX is metadata that travels in the carrier: structured data, explicit meta tags, the source frontmatter embedded in the page itself. All of it goes into the HTML. If your HTML is an empty shell waiting for JavaScript, there's no carrier for that metadata and nothing for a machine to read. Server-side rendering isn't an MX feature. It's the precondition for every machine-readable thing MX asks you to add. The page has to exist in the response before its metadata can mean anything.</p>
+<p>This is also one of the first things <a href="https://mx.allabout.network/audit/">an MX audit</a> checks. It fetches each page the way a non-rendering crawler does, compares that against the rendered version, and tells you exactly which content and which structured data are present for a browser but missing for a machine. It's the gap you can't see from your own screen, because that device runs the JavaScript.</p>
+<p>If you want to know what AI actually reads when it visits your site, <a href="https://mx.allabout.network/audit/">start with an audit</a> and I'll show you the difference between what you publish and what a machine receives.</p>
 
 
       </article>
@@ -330,12 +330,12 @@ mx:
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your team lands on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
