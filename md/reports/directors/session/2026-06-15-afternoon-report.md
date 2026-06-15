@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Dream Pipeline: First Full Run and Quality Fixes"
-description: "Dream ran for real across all nine COGs, classifying 913 findings. False positives were eliminated at source. Session closed clean."
+title: "Co-Directors Report - Dream Pipeline, Blog Truth-Check, and Split-Lines Refactor"
+description: "Dream ran across all nine COGs; blog stale claims fixed; split-lines refactored into 14 callers; repo link health diagnosed."
 author: "Tom Cranstoun"
 created: 2026-06-15
 modified: 2026-06-15
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -13,7 +13,7 @@ mx:
   confidential: true
   tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-15-afternoon-report.md
-  purpose: "Dream ran for real across all nine COGs, classifying 913 findings. False positives were eliminated at source. Session closed clean."
+  purpose: "Dream ran across all nine COGs; blog stale claims fixed; split-lines refactored into 14 callers; repo link health diagnosed."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Dream Pipeline: First Full Run and Quality Fixes"]
@@ -67,11 +67,31 @@ A mistake-mining system that can flag problems in its own extractor code is a me
 
 ---
 
+## What Was Done (continued - session continuation)
+
+### 4. Split-Lines Wired into 14 Callers
+
+The `scripts/lib/split-lines.cjs` helper (CRLF-safe line splitting) was wired into 14 of the 17 callers flagged by the library-opportunities scan. Two were deferred: `audit-pipeline.js` (inside a large complex function requiring careful scope review) and `dream.cjs` (the empty catch block per an existing directive). All 14 callers now use the shared helper rather than the fragile `.split('\n').filter(Boolean)` pattern.
+
+### 5. Blog Truth-Check Findings Actioned
+
+The 474 findings from the blog truth-check Dream scan were reviewed. The vast majority were Ollama false positives: the local model's training predates 2026 and it classifies `2026` dates as "future year" claims; JSON-LD "syntax errors" were extraction truncation artefacts. The genuine actionable findings were four stale claims across three posts:
+
+- `what-is-machine-experience.md` and `data-sovereignty.md`: "MX: The Protocols (launching April 2026)" corrected to "publishing July 2026" - both republished live
+- `machine-experience-adding-metadata.md`: stale present-tense "It's January 2026" opener rewritten to past tense ("In January 2026, Google, Microsoft, and Amazon all launched...") - republished live
+- `mx-the-blog.md`: same stale opener fixed in Zone 2 draft (not yet published to Zone 3)
+
+### 6. Repo Link Health Diagnosed
+
+The 109 findings from the repo-link-health Dream scan were investigated. `npm run links:fix` returned zero fixes because the tool only repairs wrong-depth relative links - not site-relative CMS source URLs (`/blog/foo.html`, `/books/`). The draft-site markdown intentionally uses these site-relative forms as source references. Fixing them requires a custom script to calculate relative depth from each file's position within `datalake/draft-site/`. Flagged as a follow-on; no links were changed.
+
+---
+
 ## Next Steps
 
-- Action the 109 repo-link-health findings (absolute `/path` links in `datalake/draft-site/` markdown); `npm run links:fix` handles some, others need manual depth calculation
-- Wire `scripts/lib/split-lines.cjs` into the 17 callers flagged by the library-opportunities scan - currently added but callers not yet updated
-- Review the blog truth-check findings for claims that are genuinely stale and update the relevant posts
+- Build custom script to resolve 109 draft-site absolute site-relative links to correct relative paths
 - Promote Fable 5 blog post from Zone 2 to Zone 3 once Tom has reviewed
 - Test Gitea end-to-end
 - Review LPC and Los G sites
+- Wire Gitea push into audit-pipeline.js (Phase 4)
+- Build auditor handoff tool (Phase 7)
