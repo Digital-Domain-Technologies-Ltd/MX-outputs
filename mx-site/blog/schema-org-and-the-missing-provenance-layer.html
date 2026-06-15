@@ -208,15 +208,15 @@ mx:
 
         <p>Google has used Schema.org markup to generate rich results in Search for more than a decade: the star ratings under a product listing, the event date in a search card, the recipe time in a featured snippet. The direction of travel is consistently towards more types, more properties, and more interactive presentations generated from structured data.</p>
 
-        <p>Google and Microsoft both confirmed publicly that they use Schema.org markup to inform generative AI features. ChatGPT has confirmed that structured data influences which products appear in its results. The machine-readable web is not a coming development; it is the infrastructure already in use.</p>
+        <p>Google and Microsoft both confirmed publicly that they use Schema.org markup to inform generative AI features. ChatGPT has confirmed that structured data influences which products appear in its results. The machine-readable web isn't a coming development; it's the infrastructure already in use.</p>
 
         <h2 id="why-the-deprecations-matter-more">Why the deprecations matter more than the additions</h2>
 
         <p>When Google deprecated FAQ, Q&amp;A, and Practice Problem rich results, the stated reason was low quality and widespread misuse. Publishers were adding FAQ schema to pages that contained no genuine question-and-answer content. The markup was being used to claim formatting space in search results, not to describe anything real.</p>
 
-        <p>This is not a technical failure but a structural one. Schema.org has no mechanism to distinguish a publisher who genuinely runs a Q&amp;A service from one who added FAQ markup to a landing page for ranking purposes. Both produce identical markup, and the vocabulary has no concept of assertion, authority, or verification.</p>
+        <p>This isn't a technical failure but a structural one. Schema.org has no mechanism to distinguish a publisher who genuinely runs a Q&amp;A service from one who added FAQ markup to a landing page for ranking purposes. Both produce identical markup, and the vocabulary has no concept of assertion, authority, or verification.</p>
 
-        <p>Google's response was to withdraw the rich result entirely for most publishers. That is a blunt instrument, and it will not be the last time it is needed.</p>
+        <p>Google's response was to withdraw the rich result entirely for most publishers. That's a blunt instrument, and it won't be the last time it's needed.</p>
 
         <h2 id="what-schema-org-cannot-tell-you">What Schema.org cannot tell you</h2>
 
@@ -226,11 +226,11 @@ mx:
 
         <p>A <code>Product</code> schema block on a merchant page says the price is £49. Schema.org has no field for: was this price published by the merchant who owns the product? Was it injected by a third-party script? Has it been modified since publication? Is the page a genuine merchant page or a lookalike designed to deceive?</p>
 
-        <p>None of these questions have answers in the Schema.org vocabulary. The vocabulary assumes that the relationship between the markup and the publisher is trustworthy by default. That assumption held when most publishers were businesses with reputations to protect. It is under strain now.</p>
+        <p>None of these questions have answers in the Schema.org vocabulary. The vocabulary assumes that the relationship between the markup and the publisher is trustworthy by default. That assumption held when most publishers were businesses with reputations to protect. It's under strain now.</p>
 
         <h2 id="the-lifecycle-gap">The lifecycle gap Schema.org leaves open</h2>
 
-        <p>There is a second gap beside provenance. Schema.org describes the shape of the content; it does not describe the document as a living artefact. A schema.org <code>Article</code> carries <code>datePublished</code>. It carries no successor pointer and no maintainer distinct from the author. It carries no <code>validUntil</code>. A <code>BreadcrumbList</code> carries position; it carries no expiry. A <code>Product</code> carries price; it carries no canonical URI pointing at the durable record of that product.</p>
+        <p>There's a second gap beside provenance. Schema.org describes the shape of the content; it doesn't describe the document as a living artefact. A schema.org <code>Article</code> carries <code>datePublished</code>. It carries no successor pointer and no maintainer distinct from the author. It carries no <code>validUntil</code>. A <code>BreadcrumbList</code> carries position; it carries no expiry. A <code>Product</code> carries price; it carries no canonical URI pointing at the durable record of that product.</p>
 
         <p>Once a machine has resolved the citation, fetched the page, and read the markup, Schema.org is silent on six signals an arriving agent needs:</p>
 
@@ -243,7 +243,7 @@ mx:
           <li><strong>Whether it has been superseded</strong>: no canonical successor pointer.</li>
         </ul>
 
-        <p>MX carries every one of those as a first-class field every cog has: <code>created</code>, <code>expires</code>, <code>originator</code> (alias <code>author</code>), <code>stewardship.steward</code> (alias <code>maintainer</code>), <code>canonicalUri</code>, and <code>status</code> plus <code>supersedes</code> / <code>supersededBy</code> / <code>replacedBy</code> for supersession. These are the signals a machine needs to act on the page it just landed on, and Schema.org by itself does not carry them. Provenance answers <em>can we believe it</em>; lifecycle answers <em>can we act on it now</em>. Both gaps point at the same conclusion.</p>
+        <p>MX carries every one of those as a first-class field every cog has: <code>created</code>, <code>expires</code>, <code>originator</code> (alias <code>author</code>), <code>stewardship.steward</code> (alias <code>maintainer</code>), <code>canonicalUri</code>, and <code>status</code> plus <code>supersedes</code> / <code>supersededBy</code> / <code>replacedBy</code> for supersession. These are the signals a machine needs to act on the page it just landed on, and Schema.org by itself doesn't carry them. Provenance answers <em>can we believe it</em>; lifecycle answers <em>can we act on it now</em>. Both gaps point at the same conclusion.</p>
 
         <h2 id="why-this-matters-when-ai-reads-your-markup">Why this matters when AI reads your markup</h2>
 
@@ -251,7 +251,7 @@ mx:
 
         <p>The volume of structured data in use is growing, precisely because AI systems have found it useful. The more useful structured data becomes as an input to AI, the more incentive exists to manipulate it. FAQ schema was deprecated because enough publishers gamed it. The same dynamic will appear in every high-value schema type as AI systems place increasing weight on structured data.</p>
 
-        <p>Structured data can be gamed; the question is whether there is a layer that lets a machine verify whether a piece of structured data was published by the entity it claims to represent, at the time it claims, and has not been altered since.</p>
+        <p>Structured data can be gamed; the question is whether there's a layer that lets a machine verify whether a piece of structured data was published by the entity it claims to represent, at the time it claims, and hasn't been altered since.</p>
 
         <h2 id="the-layer-that-is-missing">The layer that is missing</h2>
 
@@ -261,7 +261,7 @@ mx:
 
         <p>REGINALD adds provenance. A content object signed through REGINALD carries a verifiable record of who published it, when, with what identity, and whether it has been modified. A machine reading a REGINALD-signed piece of markup can verify the assertion, not just read it.</p>
 
-        <p>The verification path inside REGINALD is also deterministic by design. The chain that proves a signed piece of markup is what its publisher published, unaltered, runs on a fixed set of cryptographic steps. There is no language model in the path, and no agent loop deciding what to attest. Two readers checking the same signed markup reach the same yes-or-no verdict, on different machines, on different days, every time. That property is what makes the attestation worth something to a regulator, an auditor, or an AI agent acting on the result. A trust layer whose answers shift when a model is upgraded is a recommendation engine, not a registry.</p>
+        <p>The verification path inside REGINALD is also deterministic by design. The chain that proves a signed piece of markup is what its publisher published, unaltered, runs on a fixed set of cryptographic steps. There's no language model in the path, and no agent loop deciding what to attest. Two readers checking the same signed markup reach the same yes-or-no verdict, on different machines, on different days, every time. That property is what makes the attestation worth something to a regulator, an auditor, or an AI agent acting on the result. A trust layer whose answers shift when a model is upgraded is a recommendation engine, not a registry.</p>
 
         <p>Schema.org and REGINALD are not in competition. Schema.org describes what content is. REGINALD attests that the description is genuine. The combination is what the machine-readable web needs as AI systems rely on structured data for decisions that carry real consequences: which product to recommend, which source to cite, which answer to trust.</p>
 

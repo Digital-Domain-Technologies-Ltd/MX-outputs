@@ -201,13 +201,13 @@ mx:
 
       </header>
 
-<p>In February 2026, Cloudflare shipped a feature called Markdown for Agents. The pitch is token efficiency: convert HTML to Markdown at the CDN edge so AI agents receive smaller payloads. Cloudflare cites approximately 80% token reduction. The logic is seductive, and for a certain class of content it is correct. For another class, the structured, governed web content that organisations are actively building for the machine-readable future, it is exactly backwards.</p>
+<p>In February 2026, Cloudflare shipped a feature called Markdown for Agents. The pitch is token efficiency: convert HTML to Markdown at the CDN edge so AI agents receive smaller payloads. Cloudflare cites approximately 80% token reduction. The logic is seductive, and for a certain class of content it's correct. For another class, the structured, governed web content that organisations are actively building for the machine-readable future, it's exactly backwards.</p>
 
 <p>I fetched a single page twice to see what the difference actually looks like.</p>
 
 <h2 id="the-experiment" tabindex="-1">The experiment</h2>
 
-<p>The page was <code>https://mx.allabout.network/books/handbook.html</code>, the landing page for MX: The Handbook. I requested it first as a browser would, then with <code>Accept: text/markdown</code> as an AI agent might if it defaulted to Markdown for all requests. The HTML response was 32,236 bytes. The Markdown response was 21,890 bytes. That is 32% smaller, not 80%, though the exact figure varies by page composition.</p>
+<p>The page was <code>https://mx.allabout.network/books/handbook.html</code>, the landing page for MX: The Handbook. I requested it first as a browser would, then with <code>Accept: text/markdown</code> as an AI agent might if it defaulted to Markdown for all requests. The HTML response was 32,236 bytes. The Markdown response was 21,890 bytes. That's 32% smaller, not 80%, though the exact figure varies by page composition.</p>
 
 <p>The size is not the issue; the contents of the missing 10,346 bytes are.</p>
 
@@ -219,15 +219,15 @@ mx:
 
 <p>Open Graph metadata: <code>og:type: book</code> tells an agent this resource describes a Book. <code>og:locale: en_GB</code> establishes locale. Image dimensions are declared. All of this disappears in the Markdown conversion. The type declaration matters: an agent that knows it is reading a Book resource can query Schema.org for the <code>Book</code> vocabulary and process the content accordingly. An agent reading plain text has no such signal.</p>
 
-<p>Discovery links: the page carries <code>&lt;link rel="llms-txt"&gt;</code>, <code>&lt;link rel="sitemap"&gt;</code>, and <code>&lt;link rel="ai-txt"&gt;</code>. These are the entry points an agent follows to find the AI directory, the structured content inventory, and the crawl guidance for the site. When an agent reads the Markdown version, those links do not exist. The discovery chain is severed at the first request. The agent cannot find what the site deliberately made available, because the page it read had already had the signposts removed.</p>
+<p>Discovery links: the page carries <code>&lt;link rel="llms-txt"&gt;</code>, <code>&lt;link rel="sitemap"&gt;</code>, and <code>&lt;link rel="ai-txt"&gt;</code>. These are the entry points an agent follows to find the AI directory, the structured content inventory, and the crawl guidance for the site. When an agent reads the Markdown version, those links don't exist. The discovery chain is severed at the first request. The agent can't find what the site deliberately made available, because the page it read had already had the signposts removed.</p>
 
-<p>The JSON-LD false comfort: the page's JSON-LD structured data does appear in the Markdown output, but as a fenced code block. An HTML parser encountering <code>&lt;script type="application/ld+json"&gt;</code> knows it has found authoritative structured data and extracts the block accordingly. A language model encountering <code>```json</code> in a Markdown document knows it has found a code sample. It may read the contents. It will not automatically treat them as a structured data description of the resource. The JSON-LD's presence looks like preservation. It is not. The structured data signal has been demoted from machine-processable metadata to human-readable code illustration. The difference is the difference between a signpost and a photograph of a signpost.</p>
+<p>The JSON-LD false comfort: the page's JSON-LD structured data does appear in the Markdown output, but as a fenced code block. An HTML parser encountering <code>&lt;script type="application/ld+json"&gt;</code> knows it has found authoritative structured data and extracts the block accordingly. A language model encountering <code>```json</code> in a Markdown document knows it has found a code sample. It may read the contents. It won't automatically treat them as a structured data description of the resource. The JSON-LD's presence looks like preservation. It isn't. The structured data signal has been demoted from machine-processable metadata to human-readable code illustration. The difference is the difference between a signpost and a photograph of a signpost.</p>
 
 <p>Machine-readable temporal data: the HTML uses <code>&lt;time datetime="2026-04"&gt;April 2026&lt;/time&gt;</code>. The Markdown renders this as the plain text "April 2026". The ISO 8601 date is gone. An agent comparing publication dates or sorting by recency is now working from human-formatted text rather than a parseable timestamp.</p>
 
 <p>Language and direction: <code>lang="en-GB"</code> and <code>dir="ltr"</code> establish the content's language and text direction at the document level. An agent performing translation, locale-aware ranking, or language detection loses this signal and must infer language from the prose, a solvable problem, but an unnecessary one when the answer was there.</p>
 
-<p>The footer: the copyright statement is completely absent from the Markdown output. For a page carrying attribution requirements, this is not a minor omission.</p>
+<p>The footer: the copyright statement is completely absent from the Markdown output. For a page carrying attribution requirements, this isn't a minor omission.</p>
 
 <h2 id="the-token-efficiency-argument-examined" tabindex="-1">The token efficiency argument examined</h2>
 
@@ -243,7 +243,7 @@ mx:
 
 <p>This is the part that concerns me most, because it leaves no obvious trace.</p>
 
-<p>When an agent requests a governed page in Markdown format and receives stripped text, it does not receive an error. The request succeeds. The agent gets content. The agent processes content. The agent produces output. Nowhere in that chain is there a signal that the attribution requirement was present and ignored, that the content policy was specified and bypassed, that the discovery links existed and were cut. The agent did not misbehave. It was given text and it read text. The damage was done upstream, at the format selection step.</p>
+<p>When an agent requests a governed page in Markdown format and receives stripped text, it doesn't receive an error. The request succeeds. The agent gets content. The agent processes content. The agent produces output. Nowhere in that chain is there a signal that the attribution requirement was present and ignored, that the content policy was specified and bypassed, that the discovery links existed and were cut. The agent didn't misbehave. It was given text and it read text. The damage was done upstream, at the format selection step.</p>
 
 <p>The MX governance framework places machine-readable policy onto web pages specifically so that agents can read that policy and act accordingly. An agent framework that systematically strips those signals by requesting Markdown has undermined the entire governance layer without knowing it did so. The page author worked to specify what agents may do. The agent framework worked to read pages efficiently. Both worked correctly within their own logic. The combination produced a silent failure.</p>
 
@@ -273,7 +273,7 @@ mx:
 
 <p>HTTP content negotiation is correct. The <code>Accept</code> header mechanism is how the web has always allowed clients to declare format preferences. Nothing here argues against content negotiation. The argument is against a specific miscalibration: agents defaulting to Markdown for all requests, including requests for pages built on the assumption that their metadata will be read.</p>
 
-<p>Text efficiency is a genuine concern. It should not be purchased at the cost of the signals that tell machines what the text means and what they may do with it. The web has spent thirty years building the infrastructure to carry those signals. An agent that discards them to save tokens has not found an efficiency. It has opted out of the governance layer without knowing it did so.</p>
+<p>Text efficiency is a genuine concern. It shouldn't be purchased at the cost of the signals that tell machines what the text means and what they may do with it. The web has spent thirty years building the infrastructure to carry those signals. An agent that discards them to save tokens has not found an efficiency. It has opted out of the governance layer without knowing it did so.</p>
 
 <p>The 10,346 bytes that distinguish the HTML from the Markdown version of that book page are not waste. They are the governance layer. Discarding them to save tokens is building on sand.</p>
 

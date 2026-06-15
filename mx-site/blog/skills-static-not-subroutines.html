@@ -214,11 +214,11 @@ mx:
 
         </header>
 
-<p><strong>Claude Code skills are static snapshots, not dynamic subroutines.</strong> Understanding this architectural principle matters when you build skills that need to stay current, and it matters at least as much when the model underneath them is upgraded or the system prompt that runs every session is revised. The skill is the part that stays put. It is the difference between a skill that ages well and one that quietly produces wrong output six months later, and it is also the contract that stops an upstream model release from silently re-shaping your workflow.</p>
+<p><strong>Claude Code skills are static snapshots, not dynamic subroutines.</strong> Understanding this architectural principle matters when you build skills that need to stay current, and it matters at least as much when the model underneath them is upgraded or the system prompt that runs every session is revised. The skill is the part that stays put. It's the difference between a skill that ages well and one that quietly produces wrong output six months later, and it's also the contract that stops an upstream model release from silently re-shaping your workflow.</p>
 
 <h2 id="static-snapshot-model" tabindex="-1">The static-snapshot model</h2>
 
-<p>When a Claude Code skill is created, here is what actually happens:</p>
+<p>When a Claude Code skill is created, here's what actually happens:</p>
 
 <ol>
   <li><strong>The skill author reads the authoritative source</strong> at creation time.</li>
@@ -227,7 +227,7 @@ mx:
   <li><strong>The skill is locked into time</strong>: it captures the source's state at the moment it was written.</li>
 </ol>
 
-<p>If the authoritative source changes after the skill is created, <strong>the skill does not know about it</strong>. The skill continues executing with its original instructions, unaware that the underlying patterns or requirements have moved on.</p>
+<p>If the authoritative source changes after the skill is created, <strong>the skill doesn't know about it</strong>. The skill continues executing with its original instructions, unaware that the underlying patterns or requirements have moved on.</p>
 
 <h2 id="why-this-matters" tabindex="-1">Why this matters</h2>
 
@@ -244,7 +244,7 @@ When generating blog HTML:
 4. Generate SVG social media cards
 </code></pre>
 
-<p>If the blog template file changes in March to require new metadata fields or a different Schema.org type, <strong>the skill still uses the January instructions</strong>. It does not re-read the template file on each invocation. It uses the hard-coded instructions written into it at creation time.</p>
+<p>If the blog template file changes in March to require new metadata fields or a different Schema.org type, <strong>the skill still uses the January instructions</strong>. It doesn't re-read the template file on each invocation. It uses the hard-coded instructions written into it at creation time.</p>
 
 <h3 id="subroutine-misconception">The subroutine misconception</h3>
 
@@ -346,7 +346,7 @@ Last verified: 2026-01-15
 
 <p>The same logic that makes a static snapshot a virtue points at a practice for getting there. When a task is new and the right shape is not yet clear, I run an agent on it. The agent is observed, every step is logged, every input and output is instrumented. After a handful of runs, the steady-state shows itself: the parts the agent does the same way every time, and the parts where it drifts.</p>
 
-<p>That steady-state is what becomes the deterministic script. Anything the agent did twice the same way is now code; anything that drifted gets a named decision, not a silent re-run. The skill that ships is the script, not the agent loop, and that is what gives downstream consumers the static snapshot they can rely on.</p>
+<p>That steady-state is what becomes the deterministic script. Anything the agent did twice the same way is now code; anything that drifted gets a named decision, not a silent re-run. The skill that ships is the script, not the agent loop, and that's what gives downstream consumers the static snapshot they can rely on.</p>
 
 <p>One detail matters: a small LLM judgement pass at the very end is acceptable when a genuinely qualitative verdict is needed, for example, "is this report readable" or "does this prose match the house voice". That pass is bounded, single-shot, and clearly separated from the deterministic core. The bulk of the work is reproducible bytes; the judgement pass is the only part the model is responsible for, and its scope is named in the skill so a reader can see exactly where determinism ends.</p>
 
@@ -354,7 +354,7 @@ Last verified: 2026-01-15
 
 <h2 id="when-beneficial" tabindex="-1">When static behaviour is the right answer</h2>
 
-<p>Static snapshots are not always a limitation. They give you <strong>stability</strong>:</p>
+<p>Static snapshots aren't always a limitation. They give you <strong>stability</strong>:</p>
 
 <ul>
   <li>Consistent behaviour across skill invocations.</li>
@@ -367,7 +367,7 @@ Last verified: 2026-01-15
 
 <h3 id="model-and-system-prompt-churn">Insulation from model and system-prompt churn</h3>
 
-<p>The same principle cuts in the other direction. The model and its system prompt can shift underneath the user, and a static skill is the part that does not move. When the underlying model is upgraded, or when the system prompt that runs every Claude Code session is revised, every skill the user has written continues to execute its captured instructions. The work invested in writing the skill is not silently re-interpreted by a model whose defaults have moved on.</p>
+<p>The same principle cuts in the other direction. The model and its system prompt can shift underneath the user, and a static skill is the part that doesn't move. When the underlying model is upgraded, or when the system prompt that runs every Claude Code session is revised, every skill the user has written continues to execute its captured instructions. The work invested in writing the skill is not silently re-interpreted by a model whose defaults have moved on.</p>
 
 <p>In the AI and LLM race this matters more than it sounds, because the cadence is high. Anthropic shipped Claude Opus 4.7 on 16 April 2026, less than a month before this post was written, and a public diff of its system prompt against Opus 4.6 shows real behaviour changes: the model is less inclined to push for another turn when a user signals they are done, it now prefers calling an available tool to resolve ambiguity rather than asking the user to look something up, and the naming for the platform itself was tidied up. None of those changes are wrong; all of them are improvements; every one of them is the kind of upstream shift that would re-shape ad-hoc behaviour for any workflow that relied on the model's defaults rather than its own captured instructions.</p>
 
@@ -385,7 +385,7 @@ Last verified: 2026-01-15
   <li>Test skills against current sources on a schedule.</li>
 </ol>
 
-<p>Skills are locked into time at creation. Recognising the constraint is what stops a skill from quietly producing wrong output long after the source it was written from has moved on, and it is also what keeps the user's work intact when the model or its system prompt is revised underneath. In a race where model releases land every few weeks, that insulation is the point.</p>
+<p>Skills are locked into time at creation. Recognising the constraint is what stops a skill from quietly producing wrong output long after the source it was written from has moved on, and it's also what keeps the user's work intact when the model or its system prompt is revised underneath. In a race where model releases land every few weeks, that insulation is the point.</p>
 
       </article>
 
