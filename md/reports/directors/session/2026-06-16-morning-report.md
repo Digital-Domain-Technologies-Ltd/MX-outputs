@@ -4,7 +4,7 @@ description: "Empty-sitemap detection and automatic re-crawl shipped; audit inde
 author: "Tom Cranstoun"
 created: 2026-06-16
 modified: 2026-06-16
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -51,6 +51,26 @@ Full five-phase audits completed and committed for dangerdevices.com, www.bollan
 ## Why It Matters
 
 A site with a broken sitemap used to produce a misleading thin-audit report. The pipeline now self-corrects, and clients receive an honest account of what happened and why. The audit index gives the estate its first machine-readable history of what has been audited - a piece of MX tracking infrastructure that regulators and operators will both value.
+
+---
+
+### 4. PDF Inspector Redesign
+
+The PDF inspector page was dense and hard to read. Three visual improvements landed. The tier classification (MX Compatible / EAA Tagged Only / Plain PDF) moved from plain paragraphs to colour-coded cards with a clear label column and a body column, making the three tiers scannable at a glance. The badge token table received proper styling - dark surface, uppercase column headers, correct padding. The "Why this is not server-side" section converted from three run-together paragraphs to a card list with a bold reason label above the explanation. All CSS additions went into `mx-tools.css`; no inline styles.
+
+### 5. Cog-Graph-First Hook
+
+A new PreToolUse/Bash hook (`pre-bash-cog-graph-first.sh`) now blocks `grep -r`, `find`, and `ls` commands aimed at `scripts/cogs/` and redirects to the MX graph MCP tools (`mx_graph_query`, `mx_graph_deps`, `mx_graph_lineage`). The hook is wired into `settings.json`. The rule is also in CLAUDE.md and recorded as a feedback memory. This closes a recurring gap where the assistant used filesystem scanning to discover cogs rather than querying the registry.
+
+---
+
+## Why It Matters
+
+A site with a broken sitemap used to produce a misleading thin-audit report. The pipeline now self-corrects, and clients receive an honest account of what happened and why. The audit index gives the estate its first machine-readable history of what has been audited - a piece of MX tracking infrastructure that regulators and operators will both value.
+
+The PDF inspector is a client-facing demonstration tool: it is the page QR codes on every PDF badge resolve to. A dense, hard-to-read inspector undermines the credibility of the badge it explains. The redesign makes the three-tier verdict legible at a glance.
+
+The cog-graph-first hook turns a known pattern of lazy filesystem scanning into a hard enforcement: the graph is the registry, and the registry is what answers cog-discovery questions correctly.
 
 ---
 
