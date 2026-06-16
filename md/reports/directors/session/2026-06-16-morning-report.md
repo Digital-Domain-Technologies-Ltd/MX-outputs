@@ -4,7 +4,7 @@ description: "Empty-sitemap detection and automatic re-crawl shipped; audit inde
 author: "Tom Cranstoun"
 created: 2026-06-16
 modified: 2026-06-16
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -74,8 +74,15 @@ The cog-graph-first hook turns a known pattern of lazy filesystem scanning into 
 
 ---
 
+### 6. Session Close - Gate Fixes and Audit Inventory
+
+The step-commit push was blocked by Gate 11 (internal link integrity): REMINDERS.md held nine links to blog draft files at their old flat root paths after the group-subfolder migration. Each path was corrected to its new subdirectory, and the push was re-attempted. Gate 25 (index idempotency) then caught four stale generated files - the hook registry, memory index, routing registry, and llms-full.txt - which were regenerated and committed. The push succeeded with all gates green.
+
+A full audit inventory confirmed fifteen completed reports in the estate. Fourteen domains have folders but no report yet. These were captured as a REMINDERS.md item so the next session can resume the batch without re-checking the list. Two additional audit deliverables also surfaced: enhancely.ai and oxide.computer, committed to the submodule. dkd.de-de was also committed.
+
+---
+
 ## Next Steps
 
 - Build `scripts/update-audit-index.js` per the PRD
-- Monitor remaining batch audit chains (dkd.de-de, enhancely.ai, oxide.computer, www.leica-microsystems.com still running at session start)
-- Check rivan.com lock status and re-run when clear
+- Resume batch audits: axiompartners.vc, neomwellbeing.com, pentatonic.com, rivan.com, specification.website, typo3.com, www.bravecap.com, www.dreambigsemi.com, www.evantic.ai, www.exo.inc, www.leica-microsystems.com, www.marriott.com, www.roamrobotics.com, www.steelatlas.vc
