@@ -4,7 +4,7 @@ description: "Evening session building the x-mx- vendor extension namespace PRD,
 author: "Tom Cranstoun"
 created: 2026-06-16
 modified: 2026-06-16
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -53,6 +53,18 @@ Added to `mx-canon/ssot/cognovamx-fields.yaml`. Any script or source file can no
 ## Why It Matters
 
 The field namespace has grown across two years of sessions with no governing document. The scanner result - 116 fields in use that the dictionary does not know about - is the audit evidence that confirms the problem is real, not theoretical. A namespace without governance accumulates synonyms, near-duplicates, and deprecated forms that never retire, which raises the cost of every tool that reads MX metadata (the audit pipeline, the compliance gates, the content cockpit). The PRD closes the governance gap; the scanner makes it auditable on demand. Both are prerequisites for the field-consolidation sweep the 🔴 REMINDERS item has been tracking since June.
+
+---
+
+### 4. Blog Group Landers and Hygiene Gates
+
+The continuation session resolved two classes of HTML hygiene findings that had accumulated across the blog group subfolder migration.
+
+**198 curly-quote violations** across nine draft HTML files were replaced with straight ASCII quotes. The violation class was pre-existing from the blog group migration; a deterministic sed sweep with the `MX_ALLOW_THROWAWAY=1` bypass cleared all of them in one pass. The HTML hygiene gate (`check-html-hygiene.js`) re-ran clean.
+
+**11 missing blog group index landers** were built and committed. Four published groups (agent-web, foundations, industry, provenance) received full-treatment landers matching the governance group pattern: JSON-LD CollectionPage, open graph and Twitter card meta, canonical URL, proposition-card grid with post titles and dates. Seven draft group landers (agent-web, cogs-and-metadata, community, dev, foundations, industry, provenance) received noindex landers for internal navigation. One broken link (a post referenced in the foundations draft lander that did not exist on disk) was caught and removed before commit. The `warn:missing-index` class in the hygiene gate is now clear for all blog group folders.
+
+The gates that blocked the prior session's step-commit push were also resolved: Gate 11 (stale REMINDERS.md blog paths after the subfolder migration), Gate 25 (stale generated indexes after a pull that brought in PR #44), Gate 8 (stale cog registry and llms.txt), Gate 26 (two memory files present in repo but absent on device). All passed on the final push.
 
 ---
 
