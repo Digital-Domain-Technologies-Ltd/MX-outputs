@@ -192,11 +192,20 @@ mx:
 
           <p>The inspector classifies every file into one of three tiers.</p>
 
-          <p><strong>MX Compatible.</strong> The file declares a tagged structure tree and includes the MX XMP namespace. It is accessible, attested, and machine-readable. This is the bar the MX Compatible badge represents.</p>
-
-          <p><strong>EAA tagged only.</strong> The file declares a tagged structure tree but no MX namespace. It is accessible (Screen readers can walk it; EAA Directive 2019/882 conformance is plausible) but it is not attested. A regulator or AI agent cannot verify what the file claims or who authored it.</p>
-
-          <p><strong>Plain PDF.</strong> The file does not declare a tagged structure tree. A screen reader has to guess. An AI agent has to do vision-based reconstruction. The European Accessibility Act compliance bar set on 28 June 2025 is not met.</p>
+          <div class="tool-tier-cards">
+            <div class="tool-tier-card is-mx">
+              <span class="tool-tier-card-label">MX Compatible</span>
+              <p class="tool-tier-card-body">The file declares a tagged structure tree and includes the MX XMP namespace. It is accessible, attested, and machine-readable. This is the bar the MX Compatible badge represents.</p>
+            </div>
+            <div class="tool-tier-card is-eaa">
+              <span class="tool-tier-card-label">EAA Tagged Only</span>
+              <p class="tool-tier-card-body">The file declares a tagged structure tree but no MX namespace. It is accessible (screen readers can walk it; EAA Directive 2019/882 conformance is plausible) but it is not attested. A regulator or AI agent cannot verify what the file claims or who authored it.</p>
+            </div>
+            <div class="tool-tier-card is-plain">
+              <span class="tool-tier-card-label">Plain PDF</span>
+              <p class="tool-tier-card-body">The file does not declare a tagged structure tree. A screen reader has to guess. An AI agent has to do vision-based reconstruction. The European Accessibility Act compliance bar set on 28 June 2025 is not met.</p>
+            </div>
+          </div>
 
           <h2 id="the-mx-compatible-badge">The MX Compatible badge</h2>
 
@@ -210,7 +219,7 @@ mx:
 
           <p>That line is built to be read by four audiences at once. A European reader, a British reader, and an American reader each find an instrument they know. The fourth reader is a machine. An AI agent, a screen reader, or a regulator's validator does not read the visible badge; it reads the tagged structure, the XMP packet, and the provenance record the badge advertises. The badge is for eyes, the artefacts are for machines, and both say the same thing. All four rest on one international standards baseline that belongs to none of them and serves all of them.</p>
 
-          <table>
+          <table class="tool-badge-table">
             <caption>What each token on the badge asserts</caption>
             <thead>
               <tr>
@@ -259,11 +268,11 @@ mx:
 
           <p>Some inspectors upload your PDF to their server, parse it there, and email you results. We do not. There are three reasons:</p>
 
-          <p>Privacy. The PDF you drop on this page may be confidential, a draft contract, a board paper, a medical record, a tax return. We do not want a copy. The inspector is built so that we cannot have one.</p>
-
-          <p>Verifiability. An inspection you can re-run locally, on the same file, with the same code, is more trustworthy than a server-side process you cannot see. The full inspector source ships in your browser, including the PDF parser itself, vendored into this site rather than fetched from a third-party CDN. Once the page loads, the inspector runs without any further network calls. You can read the source, copy it, run it offline.</p>
-
-          <p>Cost honesty. A free service that pays for itself in inspection volume eventually monetises in ways the visitor did not sign up for. We make our money from rebuilding documents into MX Compatible PDFs, not from inspecting yours.</p>
+          <ul class="tool-reason-list">
+            <li><strong>Privacy</strong>The PDF you drop on this page may be confidential, a draft contract, a board paper, a medical record, a tax return. We do not want a copy. The inspector is built so that we cannot have one.</li>
+            <li><strong>Verifiability</strong>An inspection you can re-run locally, on the same file, with the same code, is more trustworthy than a server-side process you cannot see. The full inspector source ships in your browser, including the PDF parser itself, vendored into this site rather than fetched from a third-party CDN. Once the page loads, the inspector runs without any further network calls. You can read the source, copy it, run it offline.</li>
+            <li><strong>Cost honesty</strong>A free service that pays for itself in inspection volume eventually monetises in ways the visitor did not sign up for. We make our money from rebuilding documents into MX Compatible PDFs, not from inspecting yours.</li>
+          </ul>
 
           <h2 id="we-run-every-pdf-through-this-tool">We run every PDF we ship through this tool</h2>
 
