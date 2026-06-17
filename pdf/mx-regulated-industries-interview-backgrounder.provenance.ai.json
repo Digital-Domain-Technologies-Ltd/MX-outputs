@@ -1,0 +1,670 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": null,
+  "runRevision": 1,
+  "lastWriteAt": "2026-06-17T17:52:15.401Z",
+  "operator": "tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": null,
+  "startedAt": "2026-06-17T14:48:17.068Z",
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 24-205 — Consumer Protections for Artificial Intelligence",
+      "version": "SB-24-205",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-42005",
+      "title": "ISO/IEC 42005 — AI System Impact Assessment",
+      "version": "2025",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "impact-assessment",
+      "claim": "evidence-vehicle",
+      "x-iso-42005": {}
+    },
+    {
+      "id": "prEN-18286",
+      "title": "prEN 18286 — AI Management System (candidate harmonised European standard, CEN-CENELEC JTC 21)",
+      "version": "draft",
+      "jurisdiction": "EU (CEN-CENELEC, in development)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-pren-18286": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "mx-regulated-industries-interview-backgrounder.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "a5d97ccb65367180827a214f7ddbe60d711c3556",
+      "shortSha": "a5d97cc"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v26.3.0",
+    "host": "toms-MacBook-Pro-396.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-06-17T14:48:17.464Z",
+      "stepId": "no-upstream-provenance",
+      "agent": "mx.pdf.sh",
+      "intent": "No provenance sidecar existed for the source artefact when this PDF was rendered. The evidence chain for this PDF begins at the pdf-render step that follows. No claim is made about the authoring, review, signing, or any pre-render handling of the source markdown.",
+      "outcome": "skipped"
+    },
+    {
+      "timestamp": "2026-06-17T14:48:17.829Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "97f70aca1d1ddec4e66e68e1799bdac0fc4357f6",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T14:59:52.728Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "6e8952660669960e792b0ef97b0896ec989d903f",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T15:05:30.040Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "439819bb41704fd17e77911e4e4348b73f213a2f",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T15:06:18.396Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "affa95c8e26a4241beae7ba6da17f75c4bf5ce3f",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T15:08:16.033Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "affa95c8e26a4241beae7ba6da17f75c4bf5ce3f",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T15:25:30.980Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "d2235dfae05b6d67bcc7f6950d5a7370f6b81bc0",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T15:27:18.523Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "d5e8fffe72d8fd779b23bf3e7892aefaaccd2d69",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T15:29:08.869Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "a302c09995dedf6753d3b731843e33566b34bcc9",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T15:30:11.893Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "17a27b6454f2aad7af32dbb0afb8f9021e8c89ac",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T15:32:37.924Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "e2594b7c371fe925e3d4b44eefdfb0d6527e332f",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T15:38:41.697Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "d97bcfab36abd3dc82d724f8fa6e12b508362c96",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T16:18:01.225Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "4e243c2b67bd2be5a5f9032a399fe2a077f55fdb",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T16:22:10.967Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "ed564005a512f247e4d8af30524a2d107864ccb8",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T16:27:15.627Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "5c2bc76ae0b9f2603041a30654a7d50ba09690bc",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T16:31:33.105Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "214310158b95c1e81e934075892882f3907a3c8e",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T16:38:05.851Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "1e9ab0e4d42d3689c59ece4c246e882a8434f25c",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T16:39:06.000Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "dc26745b764cbf6f7bcea2710ccf2878852f8fd2",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T16:56:15.750Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "b9c00ce616429982e9c8c4cdc66b38f8ca8f63a7",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T17:08:19.638Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "005f003ae8aaecd9ab1fb2fccad534d52e7cabc5",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T17:09:31.147Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "a07467047fb9a1fcea20a17a984a1d1987cba7b2",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T17:39:09.041Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "f4034bad7d2305080e0838e2711cf53a3aed4388",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T17:41:23.269Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "d8e97c616a47c1a12c6a19f1d1fe0d97744b9a22",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T17:43:36.130Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "df67cc1706e7e6c62299eebd52535c8f682596de",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-17T17:52:15.401Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render vc-magazine-interview-backgrounder.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "vc-magazine-interview-backgrounder.md",
+        "doctype": "letter",
+        "sourceSha": "752102cee9a2154aa58243a0aa248b2c302683b6",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-crm/contacts/sixteen-ramos/vc-magazine-interview-backgrounder.md"
+      },
+      "outcome": "pass"
+    }
+  ]
+}
