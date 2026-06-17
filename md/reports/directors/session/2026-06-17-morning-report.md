@@ -4,7 +4,7 @@ description: "Morning session tightening the step-commit workflow: concurrent-se
 author: "Tom Cranstoun"
 created: 2026-06-17
 modified: 2026-06-17
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -50,6 +50,14 @@ A new script (`scripts/check-secret-scan.cjs`) replaces the inline `git grep` pa
 
 Two further blocking checks were added to the pre-push gate: a symlink zero-count assertion (the tracked tree must contain no symlinks, which go stale across machines), and a hook-freshness check that reinstalls git hooks automatically when a hook source file changed in this session's commits.
 
+### 5. Root-File Hygiene Gate (Gate 30)
+
+A deterministic gate now ensures only known-legitimate files exist directly at the repository root. An explicit allowlist in `scripts/check-root-files.cjs` defines what belongs there; any file outside it is flagged at push time. The gate also checks link integrity in every root markdown file. On a thin clone (submodules not initialised — typical in CI), links into absent submodule paths are downgraded to warnings rather than hard failures, so contributors on fresh clones are not blocked. Gitignored audit-delivery paths (which live in Gitea and are always absent from disk) are suppressed unconditionally.
+
+### 6. Contact Bio Cogs
+
+The ABOUT-TOM.md and ABOUT-SALVA.md flat files at root were replaced with structured cog files under `mx-crm/contacts/`. Tom now has two cogs: an internal/Maxine bio (`tom-cranstoun-bio.cog.md`) and a prospect-facing advisory-register bio (`tom-cranstoun-public.cog.md`). Salva, Scott McGregor, and Dogu Abaris each have their own bio cog in the same directory. `CLAUDE.md`, `repo-manifest.json`, and `project-context.md` were updated to point to the new paths.
+
 ---
 
 ## Why It Matters
@@ -74,3 +82,4 @@ The correct response to staged files not authored by this session is now unambig
 
 - Rotate the Cloudflare cache-purge token and replace hardcoded literals with env-var references across all four affected files (🔴 REMINDERS item already active)
 - Fix the promote path-doubling bug for sources in `blog/drafts/` (🟡 REMINDERS item)
+- Publish Tom's public bio cog once `npm run promote` is wired for the profiles path
