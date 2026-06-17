@@ -40,7 +40,7 @@ mx:
     command: "node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-06-16/dotfusion.com/dotfusion-com-report.md"
     script: "scripts/bin/mx.pdf.sh"
     format: "pdf"
-    output: "mx-outputs/audit/dotfusion.com/latest-report.pdf"
+    output: "mx-outputs/audit/dotfusion.com/result-copy/dotfusion-com-report.pdf"
     description: "Generate PDF audit report for Dotfusion"
   # Provenance sidecar pair. The per-audit evidence chain is split
   # into two adjacent files: the AI stream (LLM-driven, multi-agent,
