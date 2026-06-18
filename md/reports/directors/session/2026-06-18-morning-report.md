@@ -4,7 +4,7 @@ description: "Ran 15/16 outreach sites batch audit (10 pages each); fixed Puppet
 author: "Tom Cranstoun"
 created: 2026-06-18
 modified: 2026-06-18
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -101,3 +101,40 @@ The `BrowserPool.shutdown()` method existed and worked correctly - it was just n
 ## Why It Matters (Batch and Fix)
 
 The batch audit creates a baseline snapshot of all 16 outreach prospects in one overnight run - a direct business input for sales and partner conversations. Reliability matters: a pipeline that fails non-deterministically on Chrome launch undermines confidence in every run that passes. Both problems (intermittent launch failure and zombie Chrome processes between batch domains) shared a root cause - no explicit browser specifier, no explicit pool teardown. One helper file and one two-line addition make both permanent.
+
+---
+
+## Pre-Existing Errors Sweep (Session 3)
+
+### 8. Established the no-broken-windows policy for validators
+
+The session began when a validator run on three new dream COGs (created at the start of the conversation) showed 24 advisory warnings. The policy was clarified: no pre-existing error, regardless of how long it has sat there, is acceptable. Every finding is addressed - either fixed by a deterministic script, deferred through a decision gate, or logged in REMINDERS for human editing. A new `pre-existing-errors-policy.cog.md` documents the three resolution tracks permanently.
+
+### 9. Found and fixed a validator path bug (24 false warnings cleared)
+
+The MX metadata validator checked for the `refersTo` field at the top level of cog frontmatter. The field actually lives under `mx:` - the validator was checking the wrong path. The fix is one line in `RECOMMENDED_FIELDS`. This cleared 24 false warnings across all dream COGs without requiring any edits to the cog files themselves.
+
+### 10. Canonicalised x-mx-contextRequired
+
+The validator recommended `mx.x-mx-contextRequired` on every cog it checked, but the field had no entry in any canon YAML file. The validator was enforcing a field the standard did not define. The field was added to `cognovamx-fields.yaml` (version 6.17) with a proper definition and documented in Appendix M alongside its sibling `x-mx-contextProvides`. A deterministic script (`fix-dream-cog-metadata.cjs`) then backfilled `x-mx-contextRequired: []` into all 12 dream COGs.
+
+### 11. Fixed the link checker's asset-skipping inconsistency
+
+The HTML link scanner correctly skipped asset files (PNG, PDF, etc.). The markdown link scanner did not - so image references in pandoc templates were flagged as dead links. The fix adds asset-extension skipping to the markdown scanner and extends the asset list with `.csv` (generated audit sidecar data). This cleared a set of false dead-link reports on audit templates and test fixtures.
+
+### 12. Fixed the validation report generator wrong-depth links
+
+When the MX validator wrote a report from a subdirectory (e.g., running inside `mx-reginald/audit/`), its internal links used hardcoded `../../` traversals that assumed a two-level-deep output path. The generator now computes the relative depth dynamically from `__dirname`, so reports written from any directory produce correct links.
+
+---
+
+## Why It Matters (Errors Sweep)
+
+The no-broken-windows principle is not cosmetic. A repository where `npm test` reliably means green is one where green signals something - a new failure is immediately visible. A repository that tolerates a baseline of warnings trains operators to ignore the validator output, which is exactly when real problems slip through. Eight concrete bugs were fixed, two REMINDERS items were added for work that needs human judgment, and the policy is now documented in a cog so future sessions know the expectation.
+
+---
+
+## Next Steps (added this session)
+
+- Trim 20 cog descriptions that exceed 160 chars (REMINDERS item added - needs human editing per description).
+- Run repo-wide link sweep on a fat clone on main: `node scripts/check-link-paths.cjs --all --cleanup --stage` to auto-fix wrong-depth links; review dead links manually (REMINDERS item added).
