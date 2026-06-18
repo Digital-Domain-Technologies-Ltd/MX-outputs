@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Audit Output Storage Overhaul"
-description: "Diagnosed audit folder pollution, wired Gitea, redesigned stable copy surface to runs/, added runs index cog."
+title: "Co-Directors Report - Batch Audit Run and Puppeteer Reliability Fix"
+description: "Ran 15/16 outreach sites batch audit (10 pages each); fixed Puppeteer Chrome launch and BrowserPool shutdown gap; shipped browser-launch-options.js helper."
 author: "Tom Cranstoun"
 created: 2026-06-18
 modified: 2026-06-18
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -13,13 +13,13 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-18-morning-report.md
-  purpose: "Diagnosed audit folder pollution, wired Gitea, redesigned stable copy surface to runs/, added runs index cog."
+  purpose: "Ran 15/16 outreach sites batch audit; fixed Puppeteer Chrome launch and BrowserPool shutdown gap; shipped browser-launch-options.js helper."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
-  x-mx-contextProvides: ["Co-Directors Report - Audit Output Storage Overhaul"]
+  x-mx-contextProvides: ["Co-Directors Report - Batch Audit Run and Puppeteer Reliability Fix"]
 ---
 
-# Co-Directors Report - Audit Output Storage Overhaul
+# Co-Directors Report - Batch Audit Run and Puppeteer Reliability Fix
 
 **Date:** 18 June 2026 - Morning
 **Segment:** Morning (since midnight)
@@ -76,6 +76,28 @@ After the index cog was generated, a review of the directory listing against the
 
 ## Next Steps
 
-- Run a full audit against a live domain to verify Gitea integration works end-to-end.
 - Migrate the remaining domains from the old `<hostSlug>/latest-report.*` path to `runs/<hostSlug>/latest-copy.*` (other sessions have deletions staged but no corresponding `runs/` additions yet).
+- Commit rivan.com re-audit output once the stuck ai-tells process completes (it has been running at 100% CPU for over 74 minutes - may need investigation).
 - Consider adding a pre-push gate that detects `audit/runs/` entries with no matching domain folder - catches migration gaps before they reach GitHub.
+
+---
+
+## Batch Audit and Reliability Fix (Session 2)
+
+### 5. Ran overnight batch audit across outreach sites
+
+A batch config was created at `scripts/outreach-batch-2026-06-17.yaml` covering all 16 outreach prospects. The batch ran overnight (20:45 to 03:49): 15 domains completed successfully, rivan.com was partial due to a Puppeteer Chrome launch error that surfaced before the fix shipped. The `audit/batch/2026-06-17-batch-summary.json` file is committed to mx-outputs.
+
+### 6. Fixed Puppeteer Chrome launch - all six launch sites now use channel: chrome
+
+Puppeteer v22+ and puppeteer-core both require an explicit `channel` or `executablePath` at launch. Six files in the audit pipeline called `puppeteer.launch()` with neither, making Chrome discovery non-deterministic across OS layouts. A single helper `mx-reginald/audit/lib/browser-launch-options.js` was created as the SSOT; all six callers now import `getBaseLaunchOptions()`. The `PUPPETEER_EXECUTABLE_PATH` env var overrides `channel` for CI/Docker.
+
+### 7. Closed the BrowserPool shutdown gap
+
+The `BrowserPool.shutdown()` method existed and worked correctly - it was just never called on SIGINT/SIGTERM/uncaughtException paths. `shutdownHandler.js` called `process.exit(0)` after 100ms, bypassing the `finally` block in `main.js` that would have shut down the pool. A two-line addition to `handleShutdown()` closes the gap. Chrome processes from a completed domain no longer outlive the Node process and interfere with the next batch domain's pool initialisation.
+
+---
+
+## Why It Matters (Batch and Fix)
+
+The batch audit creates a baseline snapshot of all 16 outreach prospects in one overnight run - a direct business input for sales and partner conversations. Reliability matters: a pipeline that fails non-deterministically on Chrome launch undermines confidence in every run that passes. Both problems (intermittent launch failure and zombie Chrome processes between batch domains) shared a root cause - no explicit browser specifier, no explicit pool teardown. One helper file and one two-line addition make both permanent.
