@@ -15,8 +15,9 @@ description: "Executive audit report reviewing accessibility, performance, SEO, 
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
 performanceScore: 35
 accessibilityScore: 100
-seoScore: 76
-llmSuitabilityScore: 100
+seoScore: 77
+llmServedHtmlScore: 100
+agentReadabilityScore: 
 totalIssues: 0
 pagesAudited: 12
 version: "1.0"
@@ -82,7 +83,7 @@ We then review automated findings by hand before completing this report. The aut
 
 **How we build it.** We use scripted SOPs running deterministic checks rather than inference. The crawl, the served-versus-rendered comparison, the structured-data extraction, the accessibility passes, the discovery-file probes, the platform fingerprinting and the per-section scoring all run as scripts producing byte-identical outputs on the same input. A small number of stages run a judgement pass over the resulting report; that is the only inference layer. Those judgement passes can run against a local model, so the whole audit runs inside the organisation's own network with nothing leaving it: relevant where content is regulated or privacy-sensitive.
 
-Our scoring criteria follow published MX standards and proposed specifications maintained at [https://tg.community](https://tg.community). Where established external standards apply: WCAG 2.1, Schema.org, RFC 9309, W3C: those take precedence. MX addresses governance and machine experience metadata in the areas those standards do not cover.
+Our scoring criteria follow published MX standards and proposed specifications maintained at [https://tg.community](https://tg.community). Where established external standards apply: WCAG 2.1, Schema.org, RFC 9309, W3C: those take precedence. MX addresses governance and machine experience metadata in the areas those standards do not cover. The methodology behind every section of this report is documented in full in MX: The Protocols at [mx.allabout.network/books/](https://mx.allabout.network/books/).
 
 **What we cover here, and what MX covers.** This report looks at the web estate: every page served over HTTP, examined for metadata, structured data, accessibility, and machine readability. MX runs deeper, covering every document type a business publishes (PDFs, data feeds, API responses, structured documents) and the machines that read them. The web estate is the foundation; the rest builds on it.
 
@@ -104,7 +105,7 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 |:---|---:|:---|
 | Performance | **35**/100 | `######------------` **(!)** |
 | Accessibility | **100**/100 | `##################` |
-| SEO | **76**/100 | `##############----` |
+| SEO | **77**/100 | `##############----` |
 | Served-HTML Structure | **100**/100 | `##################` |
 | MX Stack Completeness | **43**/100 | `########----------` **(!)** |
 | Agent Readability | **69**/100 | `############------` |
@@ -114,14 +115,16 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 
 Agent Readability was adjusted down by 10 points for site-wide gaps a machine cannot work around:
 
-- **Origin server is slow for an agent fetch** (-5): origin verdict slow, slowest median 639ms
-- **Pages are consistently heavy to load** (-5): median page load 16568ms across 12 pages
+- **Origin server is slow for an agent fetch** (-5): origin verdict slow, slowest median 487ms
+- **Pages are consistently heavy to load** (-5): median page load 6429ms across 12 pages
 
 Your site runs on **Next.js** (detected from multiple platform signals).
 
-Across the audited set, Dotfusion delivers a compelling human experience. The site’s SEO foundations are solid, earning an excellent 76/100 score that ensures content appears prominently in search results and feels familiar to visitors. A clean Next.js design, consistent branding, and consistent accessibility-zero WCAG AA issue types-create a reliable, intuitive journey for every user.
+Across the audited set, Dotfusion scores n/a/100 for accessibility and n/a/100 for SEO.
 
-The headline opportunity we want to draw attention to is elevating machine comprehension by adding full MX governance metadata. Across the audited set, no MX fields are present, keeping the site at Level 1 Discoverable. By embedding mx:status, mx:contentType, mx:audience, canonicalUri and provenance markers, and raising MSC above 60 and Discovery Readiness above 40, we can move the site to Level 2 Governed, giving machines the structured context they need for accurate attribution.
+The headline opportunity is to move the audited set from a discoverable state to governed, giving machines the governance context they need for accurate comprehension. With AI Suitability at 100/100 and SEO excellent, the most impactful lever is adding MX fields-mx:status, mx:contentType, mx:audience, canonicalUri, provenance markers-to each page so that every agent can interpret the content’s intent and versioning.
+
+Across the audited set, the foundation for machine comprehension is solid. Structured data quality sits at 44/100 and the audited set already delivers fully parseable HTML; Schema.org JSON-LD provides a robust layer that every agent can consume regardless of rendering. Adding full MX governance fields will lift MSC above 60 and DR above 40, moving the audited set into Governed territory and enabling machines to attribute content accurately if they choose to use it.
 
 \clearpage
 
@@ -134,12 +137,11 @@ We last audited dotfusion.com on 16 June 2026. The table compares that audit wit
 |---------|------:|------:|:-------|
 | Performance | 55 | 35 | -20 (declined) |
 | Accessibility | 73 | 100 | +27 (improved) |
-| SEO | 84 | 76 | -8 (declined) |
-| Machine Suitability | 100 | 100 | No change |
+| SEO | 84 | 77 | -7 (declined) |
 | WCAG AA issues | 100 | 0 | -100 (improved) |
 | Pages audited | 12 | 12 | No change |
 
-We include this comparison because it is what continuous monitoring delivers: each re-audit shows what moved and what held, so open items stay visible until they are closed.
+*Re-audit note: this run is 1 day after the previous one. Score swings over short windows are normal, as network conditions, CDN warm/cold state, and origin load all vary. Use audits 7 or more days apart as the reliable trend signal; treat this run as a spot-check, not a regression.*
 <!-- AUDIT-DELTA:END -->
 
 \clearpage
@@ -148,7 +150,7 @@ We include this comparison because it is what continuous monitoring delivers: ea
 
 ### Human Experience
 
-We find that across the audited set, the site delivers a strong experience for human visitors, though page load times could be improved.
+We find that across the audited set, the site delivers a strong experience for human visitors, though page load times suggest room for improvement.
 
 **Table 2**
 
@@ -165,7 +167,7 @@ We find that across the audited set, the site delivers a strong experience for h
 
 ### Machine Experience
 
-Across the audited set, machines can discover and parse content with a Discovery Readiness score of 20/100, Structured Data Quality of 44/100, and MX Stack Completeness of 43/100, yet they lack governance context as reflected by an MX Readiness Level of 1 (Discoverable) while Pipeline Survivability remains high at 95/100.
+Across the audited set, machines can discover and parse content with a Discovery Readiness score of 20/100, Structured Data Quality of 44/100, and MX Stack Completeness of 43/100, yet they lack governance context as reflected by an MX Readiness Level of 1 (Discoverable) while Pipeline Survivability remains high at 95/100.
 
 **Table 3**
 
@@ -221,7 +223,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-We’ve identified a strong foundations across the audited set: every page scores perfect accessibility and strong SEO, with HTTPS and HSTS already in place. These achievements provide the groundwork for further enhancements to security headers and structured data quality.
+Across the audited set, we find a strong foundations in accessibility-100/100-and strong SEO scores around 75-77/100 that demonstrate effective on-page optimisation. These strengths provide the groundwork for targeted improvements to security headers and structured data quality.
 
 **Table 5**
 
@@ -271,7 +273,7 @@ We identified 8 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **Bucket:** Compliance Risk
 
-**Finding:** 27 of 126 images (21%) on the audited set carry no alt text, so their content is unavailable to assistive technology and to machines reading the page.
+**Finding:** 26 of 125 images (21%) on the audited set carry no alt text, so their content is unavailable to assistive technology and to machines reading the page.
 
 **What to change and why:**
 
@@ -286,7 +288,7 @@ We identified 8 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **Bucket:** Compliance Risk
 
-**Finding:** Heading levels skip on 1 audited page(s) (for example an h2 followed by an h4), so the document outline a machine or screen reader builds does not match the visible structure.
+**Finding:** Heading levels skip on 1 audited page (/services/headless-cms-agency) (for example an h2 followed by an h4), so the document outline a machine or screen reader builds does not match the visible structure.
 
 **What to change and why:**
 
@@ -316,12 +318,13 @@ We identified 8 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **Bucket:** Cross-cutting
 
-**Finding:** The slowest audited page took 48285 ms on a first-time (cold-cache) fetch, well above the healthy origin-response band, so a first-time visitor or an agent arriving on a cold cache waits noticeably for the first byte (returning visitors with a warm cache are served in about 639 ms).
+**Finding:** The slowest audited page took 33483 ms on a first-time (cold-cache) fetch, well above the healthy origin-response band, so a first-time visitor or an agent arriving on a cold cache waits noticeably for the first byte (returning visitors with a warm cache are served in about 487 ms).
 
 **What to change and why:**
 
-- Profile the slow route with server-side tooling (application logs, an APM tool, the browser performance panel against an uncached load) to find the time-to-first-byte cost; origin latency is a separate engineering investigation this audit can only name.
-- Cache or precompute the expensive path so first-time visitors and agents that arrive on a cold cache do not pay the full origin cost.
+- The slow response is at the origin (first-byte time), not the CDN: returning visitors with a warm cache see normal load times, but first-time visitors and agents fetching on a cold cache pay the full origin cost. Profile the cold-cache waterfall in your server logs or APM tool and look for a single blocking operation -  a database query, a synchronous API call, or unoptimised server-side rendering -  that takes more than 5 seconds.
+- Once the bottleneck is identified, cache or precompute that path so cold-cache visitors do not trigger the full origin cost on every first visit.
+- If you are on a managed hosting platform (Vercel, Netlify, and similar), check whether the origin function is in the same region as your primary audience -  a geo-mismatch adds 200-500 ms of fixed latency before any code runs.
 
 **Effort:** High
 
@@ -331,11 +334,11 @@ We identified 8 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **Bucket:** Cross-cutting
 
-**Finding:** Security headers absent: CSP, X-Frame-Options, X-Content-Type-Options (Site-wide). Missing security headers increase exposure to content injection and clickjacking
+**Finding:** Security headers absent: CSP, X-Frame-Options, X-Content-Type-Options (All responses). Missing security headers increase exposure to content injection and clickjacking
 
 **What to change and why:**
 
-- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies site-wide once configured.
+- Add the missing response headers at the server or CDN edge; each is a one-line directive that applies to all responses once configured.
 - Set them once in the edge or server configuration rather than per page so coverage stays complete as new pages ship.
 
 **Effort:** Low
@@ -389,9 +392,9 @@ We identified 8 finding(s) on the audited set, ordered by regulatory exposure fi
 
 These are not issues but areas where additional metadata or patterns would strengthen this site's machine readiness.
 
-- **sameAs**: link the Organisation entity to authoritative external profiles (ORCID, Wikidata, LinkedIn) so machines can resolve the brand’s identity across platforms and improve trust signals for content discovery.  
-- **BreadcrumbList**: add breadcrumb structured data on deep pages that currently rely only on URL path navigation; this gives agents a clear hierarchy of the page within the site’s structure.  
-- **potentialAction**: attach a `Contact` or `SendMessage` action to the Organisation entity using its existing ContactPoint information, enabling machines to discover how to reach out directly from the structured data.
+- **sameAs Links**: We add sameAs URLs to the Organisation entities (e.g., ORCID, Wikidata, LinkedIn) to give machines authoritative cross-references that improve entity disambiguation across search results and knowledge panels; we place these in the existing Organisation JSON-LD on the homepage and any other pages that expose the organisation.  
+- **potentialAction on Organisation**: We include a Contact action (e.g., “Contact” or “RequestInformation”) within the Organisation JSON-LD to expose a machine-readable call-to-action that can surface as a quick-link in search results; we add this to the same Organisation markup used on the contact page and the homepage.  
+- **Content-Signal Directives**: We declare Content-Signal directives in robots.txt to inform machines of permissible content-use policies, enabling richer AI-generated responses while respecting copyright; we add these directives to the existing robots.txt file.
 
 ---
 
@@ -495,9 +498,9 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL is re-measured across several fresh visits and scored on the median of those measurements. For each page we compare both the crawler's cold-cache baseline and the median of three fresh GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://dotfusion.com/`. A first-time visitor sees the cold-cache cost: the crawler recorded 48285 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three fresh re-probes that followed returned 639ms, 774ms, 550ms, giving a returning-visitor median of **639 ms**. **Returning-visitor verdict: Healthy**.
+**Slowest.** The slowest page is `https://dotfusion.com/services/headless-cms-agency`. A first-time visitor sees the cold-cache cost: the crawler recorded 33483 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three fresh re-probes that followed returned 487ms, 479ms, 627ms, giving a returning-visitor median of **487 ms**. **Returning-visitor verdict: Healthy**.
 
-**Median-load control.** The median-load control page is `https://dotfusion.com/services`. A first-time visitor sees the cold-cache cost: the crawler recorded 15975 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three fresh re-probes that followed returned 1070ms, 464ms, 2329ms, giving a returning-visitor median of **1070 ms**. **Returning-visitor verdict: Healthy**.
+**Median-load control.** The median-load control page is `https://dotfusion.com/services`. A first-time visitor sees the cold-cache cost: the crawler recorded 6306 ms on its initial fetch. **First-visit verdict: Slow: investigate origin**. Three fresh re-probes that followed returned 691ms, 3741ms, 740ms, giving a returning-visitor median of **740 ms**. **Returning-visitor verdict: Healthy**.
 
 **Verdict:** Returning visitors are served quickly across the site, but first-time visitors hit slow cold-cache responses on both the slowest page and a median-load page. The CDN is warming pages effectively, but the origin's cold response time is poor.
 
@@ -533,7 +536,7 @@ The robots.txt declares no disallow paths, so every path is open to crawlers and
 
 **Sitemap grade:** Partial
 
-The sitemap declares 149 URLs and grades Partial. Lastmod is present but identical across entries, so it reads as a single file-stamp rather than a per-page change signal. The sitemap omits priority. Google dropped this as ranking signals in 2017, but non-Google crawlers and AI agents still read changefreq as a re-crawl cadence hint and priority as a relative-importance signal, so adding it is a low-effort way to broaden machine compatibility.
+The sitemap declares 149 URLs and grades Partial. Lastmod is present but identical across entries, so it reads as a single file-stamp rather than a per-URL change signal. The sitemap omits priority. Google dropped this as ranking signals in 2017, but non-Google crawlers and AI agents still read changefreq as a re-crawl cadence hint and priority as a relative-importance signal, so adding it is a low-effort way to broaden machine compatibility.
 
 This was a full crawl: the audit reached every page it could discover, and 1 of them is absent from the sitemap (which lists 149). The unlisted pages: `/ai-voice-demos`. The full set is recorded in the `dotfusion-com-pages-not-in-sitemap.csv` sidecar alongside this report. Adding them to the sitemap lets search engines and machines discover all content.
 
@@ -545,7 +548,7 @@ The llms.txt carries a site description, but lacks a page inventory and a conten
 
 ### agent-card.json (A2A)
 
-No agent-card.json found at `/.well-known/agent-card.json`  -  the URL returned HTTP 200 but the body is not valid JSON. The A2A (Agent2Agent) protocol defines this location as the standard way to make services findable in agentic workflows. If this site offers transactional or service capabilities, publishing an agent card here is the most important gap to close for Stage 5 (Confidence).
+No agent-card.json found at `/.well-known/agent-card.json` -  the URL returned HTTP 200 but the body is the site's standard error page (soft-404), not a valid agent card. The A2A (Agent2Agent) protocol defines this location as the standard way to make services findable in agentic workflows. If this site offers transactional or service capabilities, publishing an agent card here is the most important gap to close for Stage 5 (Confidence).
 
 ### Other discovery files detected
 
@@ -555,19 +558,18 @@ No agent-card.json found at `/.well-known/agent-card.json`  -  the URL returned 
 
 | Path | Purpose | Quality |
 |------|---------|---------|
-| *(31 paths  -  see sidecar)* | Various |  -  |
-| *(7 paths  -  see sidecar)* | Various | Soft 404  -  body contains 404 error text (HTTP 200) |
+| *(38 paths  -  see sidecar)* | Various | Soft 404  -  same error page template as /zebedee.html (URL slug differs in embedded JS) |
 
-**Soft 404s detected (7 paths):** The server returns a custom error page with HTTP 200 for these paths. AI agents and crawlers rely on HTTP status codes  -  a 200 response signals success, so agents treat the error page body as if it were a real discovery file. The server should return HTTP 404 (or 301 to a canonical URL) for paths it does not implement. This is a web server configuration change, not a content change.
+**Soft 404s detected (41 paths):** The server returns a custom error page with HTTP 200 for these paths. AI agents and crawlers rely on HTTP status codes -  a 200 response signals success, so agents treat the error page body as if it were a real discovery file. The server should return HTTP 404 (or 301 to a canonical URL) for paths it does not implement. This is a web server configuration change, not a content change.
 
 *Reference: the [IANA Well-Known URIs registry](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) lists the full set of registered `/.well-known/` paths and their RFCs. If a path on that registry would be useful here, consider implementing it.*
 
 <!-- SECTION:SOFT_404 -->
 ## Soft 404s
 
-This site answers HTTP 200 for addresses that do not exist. A control address that cannot be real still returned a 200 with a normal-looking page. This is a soft 404, and on this site it is the default for missing addresses, not an isolated case. For a person it is invisible. For a machine it is corrosive: a 200 is the signal that a resource is present, so every check of the form "does this exist?" now returns yes. An agent confirming a price, a product, a policy, or a declaration cannot tell a real answer from a placeholder. A crawler building a training set ingests the catch-all page under thousands of distinct addresses as if each were real content. A validator probing for a well-known file records it as published when nothing is there. The correct behaviour is to return 404 (or 410) for an address that does not resolve, and to reserve 200 for addresses that do. Until that holds, no presence claim derived from a fetch of this site can be trusted, including some made elsewhere in this report where the underlying probe was misled.
+The audited set returns HTTP 200 for addresses that do not exist. A control address that cannot be real still returned a 200 with a normal-looking page. This is a soft 404, and on this site it is the default for missing addresses, not an isolated case. For a person it is invisible. For a machine it is corrosive: a 200 is the signal that a resource is present, so every check of the form "does this exist?" now returns yes. An agent confirming a price, a product, a policy, or a declaration cannot tell a real answer from a placeholder. A crawler building a training set ingests the catch-all page under thousands of distinct addresses as if each were real content. A validator probing for a well-known file records it as published when nothing is there. The correct behaviour is to return 404 (or 410) for an address that does not resolve, and to reserve 200 for addresses that do. Until that holds, no presence claim derived from a fetch of this site can be trusted, including some made elsewhere in this report where the underlying probe was misled.
 
-We probed 43 addresses that should answer 404 when they are absent; 7 returned a soft 404 instead. Among the well-known discovery paths, 7 of 43 were soft 404s. Severity: pervasive.
+We probed 43 addresses that should answer 404 when they are absent; 41 returned a soft 404 instead. Among the well-known discovery paths, 41 of 43 were soft 404s. Severity: pervasive.
 <!-- END:SOFT_404 -->
 
 ---
@@ -612,7 +614,7 @@ Across the 12 pages we audited, structured data is limited. Machines cannot reli
 
 ### SDQ Score Breakdown
 
-The Structured Data Quality score is composed of seven measurable signals. This breakdown shows what the site earns in each.
+The Structured Data Quality score is composed of seven measurable signals. This breakdown shows what Dotfusion earns in each.
 
 **Table 14**
 
@@ -633,7 +635,7 @@ The Structured Data Quality score is composed of seven measurable signals. This 
 
 ## Structured Data Findings
 
-We identified 67 specific Schema.org property gaps. Each row names a single missing property on a single entity with a short note on why it matters to machines.
+The audit identified 67 specific Schema.org property gaps. Each row names a single missing property on a single entity with a short note on why it matters to machines.
 
 The full per-entity list is delivered alongside this report as a sidecar CSV: [`dotfusion-com-structured-data-findings.csv`](dotfusion-com-structured-data-findings.csv). The 67 rows describe individual Schema.org property gaps on specific entities; most of them share a small number of underlying patterns, shown below ranked by instance count.
 
@@ -750,7 +752,7 @@ Schema.org implementations fall into five maturity tiers. The transitions are no
 
 The Structured Data Quality (SDQ) score and the Schema Maturity Level measure two different things. SDQ counts the properties present and validates them against Schema.org expectations; the level captures whether those properties are connected (cross-entity wiring, linked-data signals, external authority identifiers). Both numbers above are reported as-is from the audit data.
 
-The level is a site-wide, conservative classification: every Schema.org block across the audited pages must clear a level's bar before this site claims it, so a handful of thin blocks or pages without markup caps the level even when most pages individually sit higher. That is deliberate. An agent does not choose which page it lands on, so the level reflects what the weakest landing point guarantees.
+The classification is conservative: every Schema.org block on every audited page must clear a level's bar for the site to claim it, so a handful of thin blocks or pages without markup caps the level even when most pages individually sit higher. That is deliberate. An agent does not choose which page it lands on, so the level reflects what the weakest landing point guarantees.
 
 ---
 
@@ -788,9 +790,9 @@ Every check runs on every audited page. The aggregate score weights truncation r
 - **SPA Shell** - Pass · 12/12
   - *Means:* Served HTML matches rendered HTML, no JavaScript is required for content. Server-side agents see the same content a browser does.
   - *Data:* Max gap score: 15. 0 means served and rendered match.
-- **Soft 404** - Fail · site-wide
+- **Soft 404** - Fail · catch-all
   - *Means:* This site returns HTTP 200 for addresses that do not exist (a soft-404 catch-all), so agents and search engines cannot distinguish a missing resource from a real one. Missing addresses must return HTTP 404 or 410.
-  - *Data:* A control address that does not exist returned HTTP 200; 7 of 43 well-known paths are soft-404s.
+  - *Data:* A control address that does not exist returned HTTP 200; 41 of 43 well-known paths are soft-404s.
 - **Boilerplate Burial** - Pass · 12/12
   - *Means:* Navigation and chrome do not dominate the page; main content is reachable without wading through overhead.
   - *Data:* Highest boilerplate-to-content ratio: 0.05. Threshold: < 10 (and < 80 KB of inline head bytes).
@@ -824,7 +826,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 
 **Pipeline Survivability score:** 95/100
 
-We found that five of the twelve audited pages risk content truncation, so machines may only see part of those pages and miss key information. This limits what automated agents can understand or index from those pages. Fixing the truncation threshold on these pages will give machines full visibility and has the biggest impact on overall resilience.
+Truncation risk is flagged on five pages in the audit. Because the content is cut off before machines finish reading it, search crawlers and other automated agents may miss key information or fail to index those pages fully. Addressing this by ensuring complete page loads-such as reducing response size or adjusting fetch offsets-offers the biggest opportunity to strengthen machine comprehension and overall resilience.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check set, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -843,13 +845,13 @@ We run the Div Soup check on both served and rendered HTML so we can tell whethe
 | Source | Score (band) | Bare div stats | Top bare selectors |
 |--------|--------------|----------------|--------------------|
 | Served HTML | 31/100 (high) | 261 bare divs (73% of containers, depth 5) | `div` (160), `div.flex.items-center` (57), `div.slick-slide.slick-cloned` (38), `div.input-container.flex` (28), `div.slick-slide` (15) |
-| Rendered HTML | 31/100 (high) | 269 bare divs (73% of containers, depth 5) | `div` (179), `div.flex.items-center` (57), `div.slick-slide.slick-cloned` (38), `div.input-container.flex` (28), `div.slick-slide` (15) |
+| Rendered HTML | 31/100 (high) | 269 bare divs (73% of containers, depth 5) | `div` (175), `div.flex.items-center` (57), `div.slick-slide.slick-cloned` (38), `div.input-container.flex` (28), `div.slick-slide` (15) |
 
 **Worst page (both):** [/about](https://dotfusion.com/about)
 
-Both served and rendered surfaces of the worst-page (https://dotfusion.com/about) show a bare-div ratio of 73 %, meaning machines lose structural context and fall back on positional inference to determine meaning.  
-The soup is surface-wide, with a high bare-div ratio but shallow chains (deepest chain length 5), indicating the source pipeline likely relies on drag-and-drop builders or untyped component frameworks that inject many generic divs.  
-Our cheapest first move is to wrap the obvious landmarks-header, nav, main, footer, aside-and give remaining elements meaningful class names so the bare-div ratio drops without restructuring the layout.
+Across the audited set, the worst-page at https://dotfusion.com/about shows a bare-div ratio of 73 % on both served and rendered surfaces, meaning machines lose structural context and must rely on positional inference to determine meaning.  
+The soup is structural, with a deepest bare chain of five levels, indicating that the source pipeline likely relies on untyped component frameworks or late-stage JavaScript injection rather than semantic markup.  
+Our cheapest first move is to wrap the obvious landmarks-header, nav, main, footer, aside-and assign meaningful class names to remaining elements so the bare-div ratio drops without restructuring the layout.
 
 ---
 
@@ -902,7 +904,7 @@ HTTPS: 12/12 | HSTS: 12/12 | CSP: 0/12 | X-Frame-Options: 0/12 | X-Content-Type-
 | Twitter Card tags | 0% | 11 |
 | Skip link | 0% | 11 |
 | llms.txt link tag | 0% | 11 |
-| Canonical URL | 92% |  -  |
+| Canonical URL | 100% |  -  |
 | Exactly 1 H1 | 92% | `/contact-us` |
 | Code examples present | 0% | 12 |
 | Self-contained sections | 100% |  -  |
@@ -915,7 +917,7 @@ Some pages in the 12-page sample are missing metadata patterns that others carry
 
 ## Content Consistency
 
-The audited set shows consistent metadata patterns across pages, with no brand-name or canonical-URL divergence flagged by the consistency check.
+We found consistent metadata patterns across the audited set, with no brand-name or canonical-URL divergence flagged by the consistency check.
 
 **Table 24**
 
@@ -932,7 +934,7 @@ The audited set shows consistent metadata patterns across pages, with no brand-n
 
 ## Inline Code Duplicates
 
-We found 12 identical inline fragment(s) repeated across multiple pages, totalling 530 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
+We found 12 identical inline fragment(s) repeated across multiple pages, totalling 520 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
 
 **Table 25**
 
@@ -944,22 +946,22 @@ We found 12 identical inline fragment(s) repeated across multiple pages, totalli
 | css | 14154 | 12 | :root{--toastify-color-light: #fff;--toastify-color-dark: #1 |
 | css | 34504 | 11 | @charset "UTF-8";.rhap_container{box-sizing:border-box;displ |
 | css | 624 | 11 | .Menu_blobby__qf9bF{position:absolute;width:527.44px;height: |
-| js | 657 | 9 | setTimeout(function(){!function(e,f){try{if(e.vector)return  |
-| js | 634 | 9 | setTimeout(function(){!function(){var a=window.reb2b=window. |
-| js | 435 | 9 | setTimeout(function(){(function(a,e,f,g,b,h,d,c){a[b]\|\|(a.Gl |
-| js | 376 | 9 | setTimeout(function(){function b(){return"01f314ab-30b2-4266 |
-| js | 351 | 9 | setTimeout(function(){function b(){var c=Math.random().toStr |
-| js | 312 | 9 | setTimeout(function(){(function(){window.ldfdr=window.ldfdr\| |
+| js | 657 | 6 | setTimeout(function(){!function(e,f){try{if(e.vector)return  |
+| js | 634 | 6 | setTimeout(function(){!function(){var a=window.reb2b=window. |
+| js | 435 | 6 | setTimeout(function(){(function(a,e,f,g,b,h,d,c){a[b]\|\|(a.Gl |
+| js | 376 | 6 | setTimeout(function(){function b(){return"01f314ab-30b2-4266 |
+| js | 351 | 6 | setTimeout(function(){function b(){var c=Math.random().toStr |
+| js | 312 | 6 | setTimeout(function(){(function(){window.ldfdr=window.ldfdr\| |
 
 *Showing the top 10 of 12 duplicate fragments by occurrence count. The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `dotfusion-com-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
 ## PDF Documents: Accessibility and Machine Readability
 
-Our audit identified no PDF files, yet accessibility legislation worldwide converges on ISO 14289-1 (PDF/UA) as the technical baseline-European Accessibility Act being a highly detailed example of this global alignment. An untagged PDF is invisible to machines; search crawlers, AI systems and automated pipelines cannot extract text or structure from scanned or image-based PDFs, whereas a tagged PDF with a proper structure tree becomes machine-readable like semantic HTML.
+We recognise that accessibility law now converges on ISO 14289-1 (PDF/UA) as the technical baseline for all major markets, with the European Accessibility Act serving as a clear example of this global alignment. We also understand that an untagged PDF remains invisible to machines-search crawlers, AI systems and automated pipelines cannot extract text or structure-whereas a tagged PDF with a proper structure tree becomes machine-readable just like semantic HTML.
 
 We linked no PDFs from the 12-page sample we crawled, and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
 
@@ -980,7 +982,7 @@ Analysis of prose content across audited pages found 1 of 12 HTML pages reaching
 | `/contact-us` | 0% | Low Machine Value |
 
 **Most-shared content blocks:**
-- "tell us what's on your mind name email your company about your dream project sen..." (4 pages, 33%)
+- "tell us what's on your mind name email your company about your dream project sen." (4 pages, 33%)
 The full per-page breakdown (12 pages) is in `prose-repetition.json` in the results directory.
 
 ---
@@ -1005,14 +1007,15 @@ The full per-page breakdown (12 pages) is in `prose-repetition.json` in the resu
 | Full Implementation | P1, P2, P3, P4, P5, P6, P7, P8 (P1-P8) | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | durable visibility in agent-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | The full machine-readable estate, beyond the web pages |
+| Data-Sovereign Option | Regulated industries | Run the full audit pipeline on your own infrastructure - no client content leaves your network |
 
-This audit is a starting point. The outcome we work toward is a site any machine can read, trust, and act on, and a dated, attested record you can show to a regulator, a partner, or an acquirer on request. Reaching it (structured data, discovery files, accessibility, governance metadata, and re-audit on a schedule you set) is available as a managed service. To take any of it further, contact CogNovaMX Ltd at <info@cognovamx.com>.
+This audit is a starting point. The outcome we work toward is a site any machine can read, trust, and act on, and a dated, attested record you can show to a regulator, a partner, or an acquirer on request. Reaching it (structured data, discovery files, accessibility, governance metadata, and re-audit on a schedule you set) is available as a managed service. We also run training sessions that give development teams the MX vocabulary and implementation patterns directly, so the gap between findings and fixes is weeks, not quarters. To take any of it further, contact CogNovaMX Ltd at <info@cognovamx.com>.
 
 ---
 
 ## Summary of Findings
 
-We found that https://dotfusion.com scores a perfect 100/100 for AI Suitability, indicating the content is highly ready for machine consumption. Across the audited set, Discovery Readiness and Structured Data sit at 20/100 and 44/100 respectively, signalling key opportunities to enhance discoverability and machine-readable metadata. We invite you to address these gaps to unlock greater machine engagement and improve overall performance.
+We found that accessibility scores a perfect 100/100 across the audited set, demonstrating that machines and human visitors experience fully compliant interfaces on https://dotfusion.com. However, discovery readiness sits at 20/100 and structured data at 44/100, limiting how quickly and accurately agents can locate and understand content. We recommend prioritising enhancements in these areas to unlock greater machine visibility and engagement.
 
 ### Audit Scores
 
@@ -1024,7 +1027,7 @@ We found that https://dotfusion.com scores a perfect 100/100 for AI Suitability,
 |-----------|-------|------|
 | Served-HTML Structure | 100/100 | Excellent |
 | Accessibility | 100/100 | Excellent |
-| SEO (all pages) | 76/100 | Excellent |
+| SEO (all pages) | 77/100 | Excellent |
 | SEO (content pages) | 75/100 | Good |
 | MX Stack Completeness | 43/100 | Could Be Better |
 | Structured Data Quality | 44/100 | Could Be Better |
@@ -1055,7 +1058,7 @@ To scope an engagement, speak to us about next steps.
 
 ## Appendix A: Pages Audited
 
-- **`/ (nav)`**: SEO 81 · A11y 100 · Back 85 · Served 100 · Rendered 100
+- **`/ (nav)`**: SEO 90 · A11y 100 · Back 85 · Served 100 · Rendered 100
 - **`/services`**: SEO 76 · A11y 100 · Back 85 · Served 100 · Rendered 100
 - **`/services/headless-cms-agency`**: SEO 78 · A11y 100 · Back 85 · Served 100 · Rendered 100
 - **`/services/contentful-development-agency`**: SEO 73 · A11y 100 · Back 85 · Served 100 · Rendered 100
@@ -1093,11 +1096,11 @@ Per page, internal links range from 15 to 33, averaging 20 across 12 pages. That
 
 ## Appendix C: Image Efficiency
 
-We reviewed 126 images across the audited set: 3 WebP, 60 SVG, 38 PNG and 25 in other or unidentified formats. 99 of 126 (78.6%) carry alt text, leaving 27 without it. Each missing alt attribute is a place where a screen-reader user or a machine reading the page gets no description of what the image shows.
+We reviewed 125 images across the audited set: 3 WebP, 60 SVG, 38 PNG and 24 in other or unidentified formats. 99 of 125 (79.2%) carry alt text, leaving 26 without it. Each missing alt attribute is a place where a screen-reader user or a machine reading the page gets no description of what the image shows.
 
-On loading strategy, 24 images are marked `loading="lazy"` and 0 `loading="eager"`, while 102 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
+On loading strategy, 24 images are marked `loading="lazy"` and 0 `loading="eager"`, while 101 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
-> **Double-lazy loading pattern not detected**  -  no image in the audited set carries both native `loading="lazy"` and a JavaScript lazyload placeholder at the same time.
+> **Double-lazy loading pattern not detected** -  no image in the audited set carries both native `loading="lazy"` and a JavaScript lazyload placeholder at the same time.
 
 ---
 
@@ -1109,9 +1112,9 @@ Pa11y is an open-source automated accessibility testing tool that checks web pag
 
 **MX-specific metrics:** MX Stack Completeness measures all 7 metadata layers. Structured Data Quality (SDQ) scores JSON-LD entity richness. Discovery Readiness scores the robots.txt + sitemap + llms.txt + agent-card.json quartet. Cross-Page Consistency flags pages that deviate from site-wide patterns. Site Profile JSON enables cross-audit comparison. **Pipeline Survivability** runs eleven reading-resilience checks: truncation resilience, SPA shell resilience, soft-404 signalling, boilerplate balance, tabbed-disclosure avoidance, code-fence integrity, single-content-type negotiation, same-host redirects, heading specificity, early content start, and inline-tag bloat control. See **[MX: The Protocols Appendix S](https://mx.allabout.network/books/appendices/appendix-s.html)** for the full taxonomy and **[Appendix R](https://mx.allabout.network/books/appendices/appendix-r.html)** for the testing methodology.
 
-**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Next.js** (high confidence  -  multiple fingerprint signals). The main audit uses Next.js-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
+**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Next.js** (high confidence -  multiple fingerprint signals). The main audit uses Next.js-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
 
-**Frameworks detected:** **Next.js**  -  JS framework; **Tailwind CSS**  -  CSS framework; **Bootstrap** (low confidence)  -  CSS framework. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
+**Frameworks detected:** **Next.js** -  JS framework; **Tailwind CSS** -  CSS framework; **Bootstrap** (low confidence) -  CSS framework. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
 
 **Link inventory:** We record every internal link found on every audited page with its URL, anchor text, and link type. We do not probe link status: a dedicated, rate-limited broken-link crawler handles that separately and avoids hammering the origin. Appendix B is a link inventory, not a broken-link list.
 
@@ -1121,7 +1124,7 @@ Pa11y is an open-source automated accessibility testing tool that checks web pag
 
 **What comes next.** This report is the foundation, not the finish line. Implementing the recommendations requires the technical knowledge that produced them; we bring that forward. Our implementation engagements begin where this audit ends.
 
-The outcome we work toward is a site - and an estate of documents beyond it - that any machine can read, trust, and act on, and that carries its own dated, attested record for the humans who need to verify that claim. Reaching it - structured data, discovery files, accessibility, governance metadata, and re-audit on a regular schedule - is available as a managed service or as licensed tooling your team runs independently. To take any of it further, contact CogNovaMX Ltd at info@cognovamx.com.
+The outcome we work toward is a site - and an estate of documents beyond it - that any machine can read, trust, and act on, and that carries its own dated, attested record for the humans who need to verify that claim. Reaching it - structured data, discovery files, accessibility, governance metadata, and re-audit on a regular schedule - is available as a managed service or as licensed tooling your team runs independently. We also run training sessions that give development teams the MX vocabulary and implementation patterns directly. To take any of it further, contact CogNovaMX Ltd at info@cognovamx.com.
 
 ---
 
