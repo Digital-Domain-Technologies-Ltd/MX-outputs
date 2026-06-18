@@ -4,7 +4,7 @@ description: "Diagnosed audit folder pollution, wired Gitea, redesigned stable c
 author: "Tom Cranstoun"
 created: 2026-06-18
 modified: 2026-06-18
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -67,6 +67,10 @@ The `.env.local` file is the operator's configuration surface for private creden
 - Consolidate to a single `latest-copy` per domain in `runs/`; remove `result-copy/` entirely.
 - The index cog (`runs/index.cog.md`) is generated automatically on every gates run.
 - Other sessions' pre-existing deletions in `mx-outputs/audit/` are left for Tom to commit separately.
+
+### 4. Corrected tracker status values
+
+After the index cog was generated, a review of the directory listing against the tracker revealed that all 33 domain directories already existed on disk. The status field was initialised as `pending` (implying a queue) but the correct value for "exists on disk, run state not yet verified" is `unknown`. Updated all 32 non-completed entries from `pending` to `unknown`. `dotfusion.com` stays `pass`.
 
 ---
 
