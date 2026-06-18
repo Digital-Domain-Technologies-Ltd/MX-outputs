@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Audit Pipeline, Validator Sweep, Cockpit Extension Filter"
-description: "Four sessions: audit pipeline/storage overhaul, Puppeteer fix, pre-existing errors sweep, and cockpit extension filter with admin view."
+title: "Co-Directors Report - Audit Pipeline, Validator Sweep, Cockpit Extension Filter, Graph Discoverability"
+description: "Five sessions: audit pipeline/storage overhaul, Puppeteer fix, pre-existing errors sweep, cockpit extension filter with admin view, and MX graph discoverability improvements."
 author: "Tom Cranstoun"
 created: 2026-06-18
 modified: 2026-06-18
-version: "1.4"
+version: "1.5"
 
 mx:
   status: active
@@ -165,8 +165,29 @@ The cockpit is the operator's primary interface for the repo estate. Before this
 
 ---
 
+## MX Graph Discoverability (Session 5)
+
+### 16. Closed the gap between what the graph claimed to support and what it actually indexed
+
+A session-start search for "scripts knowing their prd" required eight attempts before finding the right cog, eventually falling back to grep. The root cause was a three-part gap in the graph query engine: the `purpose` field was listed in the MCP schema as queryable but was never copied into graph nodes; `x-mx-contextProvides` (the rich AI-context hint text each cog carries) was similarly invisible; and there was no way to search by intent across multiple fields at once.
+
+Two files were edited. The graph builder now copies `purpose` and `contextProvides` into every cog node when it builds the graph. The MCP tool now supports a `fulltext:` prefix that searches across title, description, purpose, contextProvides, and tags in a single pass. The MCP schema string was corrected to match what the tool actually supports.
+
+The cog whose description made it unfindable was also updated - its description now names `x-mx-govRef` directly, so searching for "govRef" returns it in one step.
+
+Six new test assertions were added to the graph test suite, all passing.
+
+---
+
+## Why It Matters (Graph Discoverability)
+
+Every session that needs to find a specific capability or specification starts by querying the graph. When the graph cannot return the right cog from an intent-based query, the operator falls back to grep - a slower, noisier path that requires knowing where to look rather than what to look for. The fix is architectural: the graph is now the honest single-source of queryable metadata, and `fulltext:` gives any operator a path from intent to cog in one query. This directly reduces session start-up friction.
+
+---
+
 ## Next Steps (combined)
 
 - Trim 20 cog descriptions that exceed 160 chars (REMINDERS - needs human editing per description).
 - Run repo-wide link sweep on a fat clone on main: `node scripts/check-link-paths.cjs --all --cleanup --stage` to auto-fix wrong-depth links; review dead links manually.
 - Fill in the empty description fields in `scripts/lib/file-extensions.json` for any edge-case extensions discovered by the first real startup on each new machine.
+- Wire `x-mx-govRef` onto priority scripts (`scripts/promote.cjs`, `scripts/generate-content-html.cjs`, `scripts/audit-pipeline.js`) per the open REMINDERS item.

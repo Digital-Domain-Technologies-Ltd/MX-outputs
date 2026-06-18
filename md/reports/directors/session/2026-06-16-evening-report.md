@@ -4,7 +4,7 @@ description: "Evening session building the x-mx- vendor extension namespace PRD,
 author: "Tom Cranstoun"
 created: 2026-06-16
 modified: 2026-06-16
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -65,6 +65,19 @@ The continuation session resolved two classes of HTML hygiene findings that had 
 **11 missing blog group index landers** were built and committed. Four published groups (agent-web, foundations, industry, provenance) received full-treatment landers matching the governance group pattern: JSON-LD CollectionPage, open graph and Twitter card meta, canonical URL, proposition-card grid with post titles and dates. Seven draft group landers (agent-web, cogs-and-metadata, community, dev, foundations, industry, provenance) received noindex landers for internal navigation. One broken link (a post referenced in the foundations draft lander that did not exist on disk) was caught and removed before commit. The `warn:missing-index` class in the hygiene gate is now clear for all blog group folders.
 
 The gates that blocked the prior session's step-commit push were also resolved: Gate 11 (stale REMINDERS.md blog paths after the subfolder migration), Gate 25 (stale generated indexes after a pull that brought in PR #44), Gate 8 (stale cog registry and llms.txt), Gate 26 (two memory files present in repo but absent on device). All passed on the final push.
+
+---
+
+### 5. Understand skill suite aligned with blog philosophy
+
+The blog post "Give the Machine a Memory" (`foundations/give-the-machine-a-memory.md`) — shipped in PR #44 — became the canonical philosophy statement for the two project-memory files. A follow-on session aligned all four understand-system artefacts with it:
+
+- `understand.cog.md` now states the LEARNINGS/UNDERSTAND distinction, the two-audience (human + machine) design, and the "trail is the value" append-only principle explicitly.
+- `compact-understand` skill now carries a philosophy preamble explaining it is an exception to append-only — for actively misleading entries only, not routine pruning.
+- `understand-session` skill now redirects lesson-type insights ("we tried X, it broke") to `LEARNINGS.md` rather than UNDERSTAND.md.
+- The canonical template now carries both principles in its "How this file works" block, so every new UNDERSTAND.md inherits the philosophy from day one.
+
+The old UNDERSTAND.md was archived, a blank log started, and `understand.json` (the machine-readable replay companion) was removed at Tom's direction.
 
 ---
 
