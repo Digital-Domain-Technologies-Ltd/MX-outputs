@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Batch Audit Run and Puppeteer Reliability Fix"
-description: "Ran 15/16 outreach sites batch audit (10 pages each); fixed Puppeteer Chrome launch and BrowserPool shutdown gap; shipped browser-launch-options.js helper."
+title: "Co-Directors Report - Audit Pipeline, Validator Sweep, Cockpit Extension Filter"
+description: "Four sessions: audit pipeline/storage overhaul, Puppeteer fix, pre-existing errors sweep, and cockpit extension filter with admin view."
 author: "Tom Cranstoun"
 created: 2026-06-18
 modified: 2026-06-18
-version: "1.3"
+version: "1.4"
 
 mx:
   status: active
@@ -13,10 +13,10 @@ mx:
   confidential: true
   tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-18-morning-report.md
-  purpose: "Ran 15/16 outreach sites batch audit; fixed Puppeteer Chrome launch and BrowserPool shutdown gap; shipped browser-launch-options.js helper."
+  purpose: "Four sessions: audit pipeline/storage overhaul, Puppeteer fix, pre-existing errors sweep, and cockpit extension filter with admin view."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
-  x-mx-contextProvides: ["Co-Directors Report - Batch Audit Run and Puppeteer Reliability Fix"]
+  x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline, Validator Sweep, Cockpit Extension Filter"]
 ---
 
 # Co-Directors Report - Batch Audit Run and Puppeteer Reliability Fix
@@ -138,3 +138,35 @@ The no-broken-windows principle is not cosmetic. A repository where `npm test` r
 
 - Trim 20 cog descriptions that exceed 160 chars (REMINDERS item added - needs human editing per description).
 - Run repo-wide link sweep on a fat clone on main: `node scripts/check-link-paths.cjs --all --cleanup --stage` to auto-fix wrong-depth links; review dead links manually (REMINDERS item added).
+
+---
+
+## Cockpit Extension Filter and Admin View (Session 4)
+
+### 13. Added a file-type filter to the cockpit tree
+
+The Content Cockpit's tree views (Full tree, PRD/Docs, Scripts, Manuscripts, Assets) now have an extension filter dropdown in the toolbar. Selecting `.cog.md`, `.md`, `.js`, or any other registered type narrows the tree to matching files - useful when looking for all governance cogs across the repo, or all shell scripts. The dropdown is hidden for the Content view where kind/stage filters already serve the same purpose.
+
+The filter is populated from a pre-built registry rather than live-scanning the tree on every view switch. The registry (`scripts/lib/file-extensions.json`) carries 48 file types, each with a plain-language description: `.cog.md - MX governance cog`, `.sh - Shell script`, and so on.
+
+### 14. Self-updating extension registry
+
+On first startup, the cockpit walks the full repo tree and writes any file extension it finds to the registry. On every subsequent startup the file is read directly - no scan overhead. A new admin view in the cockpit (accessible from the IDE views dropdown as "Extension Registry") shows all registered extensions in a two-column table and provides a Run discovery button that triggers the scan on demand, appends any new extensions it finds, and reloads the view.
+
+### 15. Documentation kept in step
+
+The content-dashboard cog and the operator manual were updated to reflect both additions - the extension filter and the Extension Registry admin view join the view dropdown table, the filters section now distinguishes Content-view filters from the extension filter, and the new file paths are in the Related sections.
+
+---
+
+## Why It Matters (Cockpit)
+
+The cockpit is the operator's primary interface for the repo estate. Before this, browsing the full-tree view to find all `.cog.md` files meant scrolling a large tree manually. The extension filter makes that a single dropdown selection. The pre-built registry approach means there is no startup penalty - the file exists, it loads in milliseconds. The admin view gives any operator the ability to see what file types are tracked and discover new ones without touching the command line.
+
+---
+
+## Next Steps (combined)
+
+- Trim 20 cog descriptions that exceed 160 chars (REMINDERS - needs human editing per description).
+- Run repo-wide link sweep on a fat clone on main: `node scripts/check-link-paths.cjs --all --cleanup --stage` to auto-fix wrong-depth links; review dead links manually.
+- Fill in the empty description fields in `scripts/lib/file-extensions.json` for any edge-case extensions discovered by the first real startup on each new machine.
