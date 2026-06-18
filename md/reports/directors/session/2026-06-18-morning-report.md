@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Audit Pipeline, Validator Sweep, Cockpit Extension Filter, Graph Discoverability"
-description: "Five sessions: audit pipeline/storage overhaul, Puppeteer fix, pre-existing errors sweep, cockpit extension filter with admin view, and MX graph discoverability improvements."
+title: "Co-Directors Report - Audit Pipeline, Validator Sweep, Cockpit, Graph Discoverability, ARD Catalog"
+description: "Six sessions: audit pipeline/storage overhaul, Puppeteer fix, pre-existing errors sweep, cockpit extension filter, MX graph discoverability, and ARD ai-catalog generator."
 author: "Tom Cranstoun"
 created: 2026-06-18
 modified: 2026-06-18
-version: "1.5"
+version: "1.6"
 
 mx:
   status: active
@@ -182,6 +182,28 @@ Six new test assertions were added to the graph test suite, all passing.
 ## Why It Matters (Graph Discoverability)
 
 Every session that needs to find a specific capability or specification starts by querying the graph. When the graph cannot return the right cog from an intent-based query, the operator falls back to grep - a slower, noisier path that requires knowing where to look rather than what to look for. The fix is architectural: the graph is now the honest single-source of queryable metadata, and `fulltext:` gives any operator a path from intent to cog in one query. This directly reduces session start-up friction.
+
+---
+
+## ARD ai-catalog and Node/Phone App Cogs (Session 6)
+
+### 17. Built the ARD Agentic Resource Discovery catalog generator
+
+Google published the Agentic Resource Discovery (ARD) specification — a multi-vendor standard for making callable capabilities machine-discoverable across federated registries. The house position is to complement rather than compete: build the generator now so mx-site can participate in ARD from day one, and design the REGINALD-to-ARD bridge as the proprietary differentiator (our richer evidence chain populates ARD's thin trust manifest in ways no other registry can).
+
+The generator produces `mx-outputs/mx-site/.well-known/ai-catalog.json` from what mx-site already serves: the `llms.txt` discovery corpora, the COG spec and runtime explainers, key pages, and blog posts on request. It is deterministic, written through `write-if-changed`, and carries a full unit-test suite. Two npm scripts wire it in: `ardcatalog:generate` (writes, fat-clone only) and `ardcatalog:check` (prints, any environment). A shared library `scripts/lib/html-meta.cjs` extracts the metadata every served page carries in its `<head>` — one definition that every generator scans through, so the page's title, description, canonical, and noindex state can never drift between consumers.
+
+The served artefact and its estate freshness gate land on a fat clone on `main`; the REMINDERS item tracks the wiring steps.
+
+### 18. Added two how-to cogs for Node.js and phone app building
+
+Two info-cogs were added covering the common "how do I build X?" questions that arise when extending MX tooling or building a demo: `how-to-build-a-nodejs-app.cog.md` walks a zero-dependency HTTP server from blank folder to verified endpoint; `how-to-build-a-phone-app.cog.md` covers the route choice (PWA, cross-platform, native) and the PWA route extending the Node cog. Both reference the `constellation-app/` as the worked reference implementation.
+
+---
+
+## Why It Matters (ARD and Cogs)
+
+ARD positions us to be interoperable with the machine-discovery ecosystem on day one, without any platform integration work. The generator costs nothing to maintain once wired. The REGINALD-to-ARD bridge is where the commercial differentiation sits: other registries advertise capabilities; REGINALD attests them with a tamper-evident evidence chain that satisfies regulators. The two how-to cogs reduce the ramp-up time for anyone extending the MX tooling or building a new demo — a context-efficient guide the agent can read in one fetch rather than inferring from first principles.
 
 ---
 
