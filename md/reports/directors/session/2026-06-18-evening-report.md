@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Bug Fix, Tests, and Link-Depth Reference"
-description: "Fixed a Gitea path bug that broke overnight batch audits, added unit tests, and captured the link-depth rule as a permanent cog."
+title: "Co-Directors Report - Bug Fix, Tests, Link-Depth Reference, and Vivid-Planet Dream"
+description: "Fixed overnight audit pipeline, added unit tests, captured link-depth rule, and built a git-based co-creation tagging system for the MX graph."
 author: "Tom Cranstoun"
 created: 2026-06-18
 modified: 2026-06-18
-version: "1.0"
+version: "2.0"
 
 mx:
   status: active
@@ -19,7 +19,7 @@ mx:
   x-mx-contextProvides: ["Co-Directors Report - Bug Fix, Tests, and Link-Depth Reference"]
 ---
 
-# Co-Directors Report - Bug Fix, Tests, and Link-Depth Reference
+# Co-Directors Report - Bug Fix, Tests, Link-Depth Reference, and Vivid-Planet Dream
 
 **Date:** 18 June 2026 - Evening
 **Segment:** Evening (since 5pm)
@@ -28,7 +28,7 @@ mx:
 
 ## Summary
 
-The evening fixed a configuration bug that caused all 31 overnight batch audits to fail silently - every domain completed data collection but then died before producing a report, because the script looked for the data in the wrong location. The fix was two lines of code, backed by fourteen unit tests, and the batch restarted. A permanent reference cog now documents the link-depth rule so the same class of wrong-path error cannot propagate undetected.
+The evening fixed a configuration bug that caused all 31 overnight batch audits to fail silently, added fourteen unit tests, and captured the link-depth rule as a permanent cog. Later in the evening, a new git-based tagging system called vivid-planet was built: it scans the full commit history, groups files created together in the same commit, and stamps each with a shared identifier (`x-mx-createdHash`) so the MX graph can answer "show me everything built in the same session as this file."
 
 ---
 
@@ -69,7 +69,35 @@ The `--report` mode and the `--full-llm` mode shared the same Gitea conditional 
 
 ---
 
+### 4. Vivid-Planet Dream - Co-Creation Tagging
+
+The MX graph previously had no way to express that a group of files was created together in the same work session. Knowing that context is useful for traceability, for grouping related work, and for understanding what changed together when something breaks.
+
+The vivid-planet dream fills that gap. It scans the full git commit history for commits that added two or more markdown or cog files in one operation. Each such group of files shares a creation context - they were built together. The system stamps each file with `x-mx-createdHash`, an eight-character commit SHA prefix that links the cohort. Once applied, the graph can return any file's "sisters" - the other files born in the same session.
+
+The system follows the standard dream pattern: a classifier (Ollama, running locally) reads each cohort and categorises the session type (feature addition, documentation batch, refactor, and so on). A separate fixer script applies the hash to the files' metadata. The classifier never re-processes a cohort it has already seen, even after a machine reboot, because its dedup memory is committed to the repository. Running the fixer twice is safe - it skips any file that already carries the field.
+
+The initial scan found 128 qualifying commit cohorts across the full project history, covering 1,791 files.
+
+---
+
+## Why It Matters
+
+The audit pipeline fix means 31 client-ready reports arrive as scheduled. Without the evening's fix, the batch would have been delayed by at least a full day and required manual diagnosis.
+
+The co-creation tagging system adds a dimension to the MX graph that no existing field provides. When a team member asks "what else was built at the same time as this cog?", the graph can now answer without consulting git. For compliance and audit purposes it strengthens the provenance chain: a regulator walking from a deliverable to its creation context gets the full cohort in one query.
+
+---
+
+## The Insight
+
+The dream system's scan targets are not limited to session transcripts. Any deterministic source - git log, a directory of scripts, a set of markdown files - can feed a dream type. The vivid-planet work made this explicit in the architecture documentation, which previously implied all dreams scanned JSONL session files.
+
+---
+
 ## Next Steps
 
 - Review batch audit results when the overnight run completes (all 31 domains)
 - Consider extracting path resolution from `audit-llm-phase2.js` into a shared helper so future execution modes cannot miss the Gitea conditional
+- Run `/dream --dream vivid-planet` (Ollama must be running) to classify the 128 cohorts
+- Run `npm run vivid-planet:fix:apply` after reviewing the report to stamp co-created files
