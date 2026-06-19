@@ -35,7 +35,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | crowdfavorite.com | - | pending | - | - |
 | dangerdevices.com | - | pending | - | - |
 | dkd.de-de | - | pending | - | - |
-| dotfusion.com | 2026-06-18 | pass | [latest-copy.pdf](dotfusion.com/latest-copy.pdf) | [latest-copy.md](dotfusion.com/latest-copy.md) |
+| dotfusion.com | 2026-06-19 | pass | [latest-copy.pdf](dotfusion.com/latest-copy.pdf) | [latest-copy.md](dotfusion.com/latest-copy.md) |
 | enhancely.ai | - | pending | - | - |
 | leica-microsystems.com | - | pending | - | - |
 | mx.allabout.network | - | pending | - | - |
