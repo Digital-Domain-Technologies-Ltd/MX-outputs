@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - MX Graph, CRM Cross-linking, CMS Experts Intelligence, and Peer Consensus Principle"
-description: "Extended MX graph with temporal queries and 14 new fields; created CMS Experts community contact; cross-linked 11 CRM contacts; named and propagated the Peer Consensus over Expert Authority principle across 9 files."
+title: "Co-Directors Report - MX Graph, CRM Cross-linking, CMS Experts Intelligence, Peer Consensus Principle, and Audit Pipeline Fixes"
+description: "Extended MX graph with temporal queries and 14 new fields; created CMS Experts community contact; cross-linked 11 CRM contacts; named and propagated the Peer Consensus over Expert Authority principle; fixed two audit pipeline bugs; renamed pagesAudited to htmlPagesAudited across 20+ files."
 author: "Tom Cranstoun"
 created: 2026-06-19
 modified: 2026-06-19
-version: "1.2"
+version: "1.3"
 
 mx:
   status: active
@@ -101,6 +101,24 @@ The graph was built with the right architecture but never fully populated. The 2
 
 - **Namespace policy** — the four field-pair overlap decisions in `x-mx-namespace-prd.cog.md` (e.g. `x-mx-contextProvides` vs `purpose`, `x-mx-category` vs `tags`) need Tom's ruling before any new `x-mx-` fields can be added cleanly. Until resolved, new CogNovaMX fields accumulate inconsistently.
 - **Field-addition checklist** — should the graph-builder extraction step be added as a mandatory gate to the `/mx-add-field` runbook? If yes, the insight above becomes policy rather than a note.
+
+---
+
+### 6. Web Audit of Dotfusion (Chris Bryce)
+
+A full web audit of dotfusion.com was run using the Web Audit Suite, crawling 12 HTML pages plus sitemap.xml and llms.txt. Key findings: Accessibility 100/100, SEO 77/100, Performance 35/100 (slow origin response), MX Stack Completeness 43/100, all eight AI agents fully accessible. Security headers are missing site-wide. The site runs on Next.js with Tailwind. The audit PDF was generated, gated, and pushed to Gitea at `http://localhost:3000/ddttom/audit-dotfusion.com`.
+
+### 7. Audit Pipeline Bug Fixes and Naming Sweep
+
+Two bugs were discovered and fixed in the audit pipeline, and a naming convention sweep was applied to 20-plus files.
+
+**Bug 1 - Thin-audit PDF.** When the pipeline is run with Gitea enabled, the `--results` path (where the actual audit data lives) and the `infillDir` path (derived from the report file path) point to different directories. The thin-audit trigger was reading from `infillDir`, found no `audit_averages.json` there, defaulted to zero pages audited, and fired the thin-site one-pager rewrite. The result: the PDF was generated from an 84-line condensed document instead of the full 1,204-line report. Fix: the thin-audit check now reads from `resultsDir`, which correctly resolves whether Gitea is in use or not.
+
+**Bug 2 - Thin-audit detection refactored.** The gates phase was re-deriving the HTML page count from averages JSON to decide if an audit is thin. The infill phase already makes this determination deterministically and writes `.thin-audit.json` with the reason (empty sitemap, agent blocking, etc.) when the count is below the threshold. The gates phase now checks sidecar existence only. This removes duplicated logic and makes the detection fully deterministic.
+
+**Naming sweep - `pagesAudited` to `htmlPagesAudited`.** The audit pipeline uses a `NON_HTML_BUFFER` to collect slightly more URLs than requested, absorbing non-HTML discovery files (sitemap.xml, llms.txt, agent-card.json) without diluting the HTML page count. Despite this, the count field was named `pagesAudited`, giving LLMs and human readers no way to tell it was HTML-only. The field was renamed to `htmlPagesAudited` across: the JSON writers (`audit_averages.js`, `llmReports.js`), all readers in `infill-report.js` (60-plus uses), gate scripts, LLM prompt templates, table handlers, test fixtures, cogs, and architecture docs. A new `urlsCollected` field was added alongside, recording the total URLs including non-HTML discovery files. Backward-compatibility fallback (`?? pagesAudited`) added to all readers to handle existing on-disk JSON.
+
+The `--pages N` CLI flag was not renamed - users mean HTML pages when they type it, and the name is correct at the user interface level.
 
 ---
 
