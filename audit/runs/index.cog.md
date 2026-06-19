@@ -9,7 +9,7 @@ title: "audit-runs-index"
 version: "1.0"
 description: "Index of all committed audit run outputs under mx-outputs/audit/runs/."
 created: 2026-06-18
-modified: 2026-06-18
+modified: 2026-06-19
 author: Tom Cranstoun
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/mx-outputs/main/audit/runs/index.cog.md
@@ -30,36 +30,36 @@ Index of all domains with committed audit deliverables. Each row links to the st
 
 | hostSlug | latestDate | status | PDF | MD |
 |----------|------------|--------|-----|----|
-| atmors.netlify.app.d | - | unknown | - | - |
-| axiompartners.vc | - | unknown | - | - |
-| crowdfavorite.com | - | unknown | - | - |
-| dangerdevices.com | - | unknown | - | - |
-| dkd.de-de | - | unknown | - | - |
+| atmors.netlify.app.d | - | pending | - | - |
+| axiompartners.vc | 2026-06-19 | pass | [latest-copy.pdf](axiompartners.vc/latest-copy.pdf) | [latest-copy.md](axiompartners.vc/latest-copy.md) |
+| crowdfavorite.com | - | pending | - | - |
+| dangerdevices.com | - | pending | - | - |
+| dkd.de-de | - | pending | - | - |
 | dotfusion.com | 2026-06-18 | pass | [latest-copy.pdf](dotfusion.com/latest-copy.pdf) | [latest-copy.md](dotfusion.com/latest-copy.md) |
-| enhancely.ai | - | unknown | - | - |
-| leica-microsystems.com | - | unknown | - | - |
-| mx.allabout.network | - | unknown | - | - |
-| neomwellbeing.com | - | unknown | - | - |
-| oxide.computer | - | unknown | - | - |
-| pentatonic.com | - | unknown | - | - |
-| rivan.com | - | unknown | - | - |
-| sibotacademy.pl-en | - | unknown | - | - |
-| specification.website | - | unknown | - | - |
-| stackoptic.com | - | unknown | - | - |
-| typo3.com | - | unknown | - | - |
-| typo3.org | - | unknown | - | - |
-| www.bollants.de | - | unknown | - | - |
-| www.bravecap.com | - | unknown | - | - |
-| www.contentful.com | - | unknown | - | - |
-| www.cruciblecap.xyz | - | unknown | - | - |
-| www.dkd.de-de | - | unknown | - | - |
-| www.dreambigsemi.com | - | unknown | - | - |
-| www.evantic.ai | - | unknown | - | - |
-| www.exo.inc | - | unknown | - | - |
-| www.fluidstack.io | - | unknown | - | - |
-| www.leica-microsystems.com | - | unknown | - | - |
-| www.marriott.com | - | unknown | - | - |
-| www.meetkai.com | - | unknown | - | - |
-| www.paribu.com | - | unknown | - | - |
-| www.roamrobotics.com | - | unknown | - | - |
-| www.steelatlas.vc | - | unknown | - | - |
+| enhancely.ai | - | pending | - | - |
+| leica-microsystems.com | - | pending | - | - |
+| mx.allabout.network | - | pending | - | - |
+| neomwellbeing.com | - | pending | - | - |
+| oxide.computer | - | pending | - | - |
+| pentatonic.com | - | pending | - | - |
+| rivan.com | - | pending | - | - |
+| sibotacademy.pl-en | - | pending | - | - |
+| specification.website | - | pending | - | - |
+| stackoptic.com | - | pending | - | - |
+| typo3.com | - | pending | - | - |
+| typo3.org | - | pending | - | - |
+| www.bollants.de | - | pending | - | - |
+| www.bravecap.com | - | pending | - | - |
+| www.contentful.com | - | pending | - | - |
+| www.cruciblecap.xyz | - | pending | - | - |
+| www.dkd.de-de | - | pending | - | - |
+| www.dreambigsemi.com | - | pending | - | - |
+| www.evantic.ai | - | pending | - | - |
+| www.exo.inc | - | pending | - | - |
+| www.fluidstack.io | - | pending | - | - |
+| www.leica-microsystems.com | - | pending | - | - |
+| www.marriott.com | - | pending | - | - |
+| www.meetkai.com | - | pending | - | - |
+| www.paribu.com | - | pending | - | - |
+| www.roamrobotics.com | - | pending | - | - |
+| www.steelatlas.vc | - | pending | - | - |
