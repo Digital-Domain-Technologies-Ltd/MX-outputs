@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - MX Graph System: Temporal Queries and Field Expansion"
-description: "Extended the MX metadata graph with temporal query capability, 14 newly indexed fields including computed git-authoritative dates, and promoted the architecture doc to a first-class cog."
+title: "Co-Directors Report - MX Graph, CRM Cross-linking, and CMS Experts Intelligence"
+description: "Extended MX graph with temporal queries and 14 new fields; created CMS Experts community contact with full market profile; cross-linked 11 CRM contacts with queryable membership attribute."
 author: "Tom Cranstoun"
 created: 2026-06-19
 modified: 2026-06-19
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -19,7 +19,7 @@ mx:
   x-mx-contextProvides: ["Co-Directors Report - MX Graph System: Temporal Queries and Field Expansion"]
 ---
 
-# Co-Directors Report - MX Graph System: Temporal Queries and Field Expansion
+# Co-Directors Report - MX Graph, CRM Cross-linking, and CMS Experts Intelligence
 
 **Date:** 19 June 2026 - Afternoon
 **Segment:** Afternoon (since noon)
@@ -28,7 +28,7 @@ mx:
 
 ## Summary
 
-The afternoon session overhauled the MX metadata graph — the internal index that catalogues every folder and cog in the repository — making it answer operational questions it previously could not. The primary addition is a new temporal query tool: an agent or operator can now ask "what did we do yesterday?" and receive a structured list of git commits with enriched file metadata. A parallel change added 14 fields that were in the MX standard but silently ignored by the graph, including a computed, git-authoritative last-modified date that is more reliable than the frontmatter date authors often forget to update. The graph test suite grew from 112 to 135 passing assertions.
+The afternoon session covered two distinct bodies of work. The first overhauled the MX metadata graph — the internal index that catalogues every folder and cog in the repository — making it answer operational questions it previously could not. A new temporal query tool lets an agent or operator ask "what did we do yesterday?" and receive a structured, enriched answer. Fourteen previously silenced fields were added to the graph, including a git-authoritative last-modified date. The second body of work turned the CMS Experts intelligence gathered in April into live CRM infrastructure: a community contact record was created from the value profile PDF, eleven individual contacts were cross-linked with a queryable membership attribute, and the graph can now answer "which of our CMS Experts contacts have gone quiet?"
 
 ---
 
@@ -51,6 +51,16 @@ The `getStaleNodes()` function (used by the `--stale` CLI flag and cockpit views
 ### 3. Architecture Cog Promotion
 
 The graph system's architecture document was a plain `.md` file — invisible to the cog registry and the graph itself. It was promoted to a proper `.cog.md` with the standard 5-line opening header, `triggers`, `dependencies`, `partOf`, and a `canonicalUri` that points to the new path. All references across CLAUDE.md, UBERCOG, and eight other cogs were updated. The cog registry was resynced. The architecture cog now describes the full new field surface, including the temporal query tools.
+
+### 4. CMS Experts Community Contact and CRM Cross-linking
+
+The April 2026 Boye & Co CMS Experts company value profile — a 14-page PDF covering revenue, staff, and customers across approximately 86 organisations — was converted into a live CRM record and wired into the graph.
+
+**Community contact created.** A new contact record (`boye-co-cms-experts`) profiles the community as an organisation: market sizing (approximately $2.5 billion across the 81 CMS-industry members, excluding five enterprise-scale rows that dwarf the rest), member segments by geography and type, standout vendors by ARR, and the connection to CogNovaMX's conference and sponsorship pipeline.
+
+**Eleven individual contacts cross-linked.** Every contact in the CRM whose employer is a CMS Experts member organisation received a new `x-mx-communityMemberships: [boye-co-cms-experts]` attribute. Five of those contacts were also missing the `cms-experts` tag, which was backfilled for consistency. The community record received an `x-mx-members` list pointing back to all eleven, enabling graph traversal in both directions.
+
+**The query this enables.** Running `mx_graph_query x-mx-communityMemberships:boye-co-cms-experts` returns all eleven contacts. Filtering by `lastContact` surfaces the contacts that have gone quiet: Stuart Rex and William Borgbarthet (BloomReach, last contact March 2026), and David Strachan (HCL Software) and Chris Bryce (Dotfusion), both last contacted in April 2026. Those four are the immediate outreach priority.
 
 ---
 
@@ -85,3 +95,5 @@ The graph was built with the right architecture but never fully populated. The 2
 - Resolve namespace policy: rule on the four field-pair overlaps in `mx-canon/mx-os/x-mx-namespace-prd.cog.md`
 - Add graph-builder extraction as a mandatory step in the `/mx-add-field` runbook
 - Consider the five deferred future field proposals for the next graph iteration
+- Re-engage the four quiet CMS Experts contacts: Stuart Rex and William Borgbarthet (BloomReach), David Strachan (HCL Software), Chris Bryce (Dotfusion)
+- Consider registering `x-mx-communityMemberships` formally in `cognovamx-fields.yaml` now that it is used across eleven contacts
