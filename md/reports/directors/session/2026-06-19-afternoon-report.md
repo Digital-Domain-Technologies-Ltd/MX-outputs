@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - MX Graph, CRM Cross-linking, and CMS Experts Intelligence"
-description: "Extended MX graph with temporal queries and 14 new fields; created CMS Experts community contact with full market profile; cross-linked 11 CRM contacts with queryable membership attribute."
+title: "Co-Directors Report - MX Graph, CRM Cross-linking, CMS Experts Intelligence, and Peer Consensus Principle"
+description: "Extended MX graph with temporal queries and 14 new fields; created CMS Experts community contact; cross-linked 11 CRM contacts; named and propagated the Peer Consensus over Expert Authority principle across 9 files."
 author: "Tom Cranstoun"
 created: 2026-06-19
 modified: 2026-06-19
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -19,7 +19,7 @@ mx:
   x-mx-contextProvides: ["Co-Directors Report - MX Graph System: Temporal Queries and Field Expansion"]
 ---
 
-# Co-Directors Report - MX Graph, CRM Cross-linking, and CMS Experts Intelligence
+# Co-Directors Report - MX Graph, CRM Cross-linking, CMS Experts Intelligence, and Peer Consensus Principle
 
 **Date:** 19 June 2026 - Afternoon
 **Segment:** Afternoon (since noon)
@@ -28,7 +28,7 @@ mx:
 
 ## Summary
 
-The afternoon session covered two distinct bodies of work. The first overhauled the MX metadata graph — the internal index that catalogues every folder and cog in the repository — making it answer operational questions it previously could not. A new temporal query tool lets an agent or operator ask "what did we do yesterday?" and receive a structured, enriched answer. Fourteen previously silenced fields were added to the graph, including a git-authoritative last-modified date. The second body of work turned the CMS Experts intelligence gathered in April into live CRM infrastructure: a community contact record was created from the value profile PDF, eleven individual contacts were cross-linked with a queryable membership attribute, and the graph can now answer "which of our CMS Experts contacts have gone quiet?"
+The afternoon session covered three bodies of work. The first overhauled the MX metadata graph — the internal index that catalogues every folder and cog in the repository — making it answer operational questions it previously could not. A new temporal query tool lets an agent or operator ask "what did we do yesterday?" and receive a structured, enriched answer. Fourteen previously silenced fields were added to the graph, including a git-authoritative last-modified date. The second body of work turned the CMS Experts intelligence gathered in April into live CRM infrastructure: a community contact record was created from the value profile PDF, eleven individual contacts were cross-linked with a queryable membership attribute, and the graph can now answer "which of our CMS Experts contacts have gone quiet?" The third body of work named and propagated a new MX principle: Peer Consensus over Expert Authority, articulated by Janus Boye (Boye & Company) in a message received this afternoon. The principle is now canon — a named concept cog, an entry in principles.cog.md (34 principles total), a draft blog post, a Gathering governance note, updates to The Gathering's messaging documents, and propagation into all three book manuscripts.
 
 ---
 
@@ -61,6 +61,20 @@ The April 2026 Boye & Co CMS Experts company value profile — a 14-page PDF cov
 **Eleven individual contacts cross-linked.** Every contact in the CRM whose employer is a CMS Experts member organisation received a new `x-mx-communityMemberships: [boye-co-cms-experts]` attribute. Five of those contacts were also missing the `cms-experts` tag, which was backfilled for consistency. The community record received an `x-mx-members` list pointing back to all eleven, enabling graph traversal in both directions.
 
 **The query this enables.** Running `mx_graph_query x-mx-communityMemberships:boye-co-cms-experts` returns all eleven contacts. Filtering by `lastContact` surfaces the contacts that have gone quiet: Stuart Rex and William Borgbarthet (BloomReach, last contact March 2026), and David Strachan (HCL Software) and Chris Bryce (Dotfusion), both last contacted in April 2026. Those four are the immediate outreach priority.
+
+### 5. Peer Consensus over Expert Authority
+
+Janus Boye (Boye & Company, CMS Experts community convener) sent a message this afternoon naming a gap in how MX and The Gathering are positioned. His observation: technology evolves rapidly but the fundamental practitioner questions stay unchanged (how to adopt without creating complexity, how to maintain clarity, how to build confidence amid change). AI has made expert advice abundant. What it cannot manufacture is the honest peer account from someone who has deployed the standard and will tell you what they actually found. The Scandinavian learning tradition frames this clearly: communities learn from one another, not from seeking the wisest individual.
+
+The principle was named Peer Consensus over Expert Authority and propagated into nine files across the session:
+
+- **Concept cog** — `mx-canon/ssot/concept-peer-consensus.cog.md` is the canonical statement with the concept as Janus articulated it, how MX adopts it, and a three-condition design test.
+- **Principles** — a new `## Peer Consensus over Expert Authority` entry in `principles.cog.md` takes the total to 34 named principles; `principles-index.json` regenerated.
+- **Blog post** — `datalake/draft-site/blog/the-question-ai-cant-answer.md` is a draft chatty-register post citing Janus as the originator. Awaiting Tom's approval before promotion to the site.
+- **Gathering messaging** — `messaging-ideas.md` gained a new `## The Scandinavian Frame` section and a new "Peer consensus over expert authority" hook.
+- **Gathering draft** — `mx-shared-gathering/draft-governance-peer-consensus.md` is a vendor-neutral governance note offered to The Gathering for review; its README entry is live.
+- **Manuscript propagation** — the principle landed in all three books: a pull-quote in the free book, a new H2 "Why the standard belongs to the community" in handbook v2 chapter 12, and a full H2 "Why Community Governance, Not Expert Authority" in protocols chapter 20.
+- **CRM** — Janus Boye's contact record updated with today's contact and the insight recorded.
 
 ---
 
@@ -97,3 +111,5 @@ The graph was built with the right architecture but never fully populated. The 2
 - Consider the five deferred future field proposals for the next graph iteration
 - Re-engage the four quiet CMS Experts contacts: Stuart Rex and William Borgbarthet (BloomReach), David Strachan (HCL Software), Chris Bryce (Dotfusion)
 - Consider registering `x-mx-communityMemberships` formally in `cognovamx-fields.yaml` now that it is used across eleven contacts
+- Review and approve the blog post at `datalake/draft-site/blog/the-question-ai-cant-answer.md` before promotion to the mx-site
+- Run `npm run cog:sync` on a fat clone on main after merge to register `concept-peer-consensus.cog.md` in the cog registry
