@@ -4,7 +4,7 @@ description: "Completed audit pipeline deterministic refactor; built Gitea manag
 author: "Tom Cranstoun"
 created: 2026-06-19
 modified: 2026-06-19
-version: "1.1"
+version: "1.2"
 
 mx:
   status: active
@@ -89,6 +89,22 @@ The local Gitea instance (26 audit repositories) was manually cleared for test r
 ## Why It Matters
 
 The Gitea tooling converts a manual, ad-hoc reset operation into a deterministic, repeatable command. The test suite proves the script behaviour without a real Gitea instance, which means CI can run it safely. The unit-test guide gives future agents and developers a single authoritative reference so new tests match the existing conventions instead of introducing new patterns.
+
+---
+
+---
+
+## MX Graph Fulltext Search Fix
+
+### 7. Multi-Word AND Tokenisation in `mx_graph_query`
+
+A practical blocker surfaced during the session: searching for `fulltext:audit prd` returned zero results, even though `repo-adoption-prd.cog.md` carries both "audit" and "prd" in its tags and description. The bug was in the fulltext implementation in `scripts/mx/mx-graph-mcp.js`: it treated the entire string after `fulltext:` as a single literal substring. No node contains the exact text "audit prd" (with space), so every multi-word search returned nothing.
+
+The fix splits on whitespace and requires all tokens to match (AND semantics). `fulltext:audit prd` now finds every node where both "audit" and "prd" appear anywhere across the six searched fields. Single-word queries are unaffected.
+
+A second issue in the builder CLI (`scripts/mx/mx-graph-builder.js`) was fixed at the same time: the `queryGraph()` function had no fulltext support at all, used exact-match (`===`) instead of substring matching, and split on `:` with `str.split(':')` which breaks on values containing colons. Both were corrected to match the MCP server's behaviour.
+
+A new test in `tests/test-mx-graph.sh` asserts that `fulltext:audit prd` finds `repo-adoption-prd`. All 98 graph tests pass.
 
 ---
 
