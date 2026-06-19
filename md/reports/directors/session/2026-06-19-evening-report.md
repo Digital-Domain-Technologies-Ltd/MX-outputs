@@ -4,7 +4,7 @@ description: "Extended graph to index SOUL.md files and enriched 1015 folder met
 author: "Tom Cranstoun"
 created: 2026-06-19
 modified: 2026-06-19
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -80,6 +80,12 @@ The macOS case-insensitive filesystem is a silent source of correctness bugs in 
 
 - `MX_CLONE_TYPE` replaces `MX_INDEX_TRUST_COMPLETE` as the preferred variable; the old variable is retained as a legacy alias rather than removed, to avoid breaking existing `~/.zshenv` configurations.
 - Gate 18 exclusions use a pipeline filter (`grep -vE`) rather than a negative lookahead in the trigger regex, keeping the gate logic readable and independently auditable.
+
+---
+
+### 6. Dream COG Inventory and Memory Correction
+
+A late-evening check of the dream system surfaced that Maxine was using filesystem commands (`ls` + `grep`) to list the dream COGs, when `mx_graph_query tags:dream` would have done the job through the registry. The pattern had been documented before for grep over `scripts/cogs/`, but not for `ls` over other cog directories such as `datalake/dream-files/cogs/`. The feedback memory was updated to cover both cases and any future cog directory. The redundant memory file was retired; the existing `feedback_cog_graph_first` entry now carries the full rule. The repo has eleven active dream types covering blog truth-checking, session pattern analysis, repo link health, script improvement, and more.
 
 ---
 
