@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Audit Pipeline Deterministic Refactor"
-description: "Replaced two Ollama SDK calls in the full-LLM batch pipeline with deterministic extractors, eliminating the HTTP 500 truncation failures that blocked all 31 domain audits."
+title: "Co-Directors Report - Audit Pipeline Determinism + Gitea Test Infrastructure"
+description: "Completed audit pipeline deterministic refactor; built Gitea management tooling with a full mock-server unit test suite and a unit-testing guide cog."
 author: "Tom Cranstoun"
 created: 2026-06-19
 modified: 2026-06-19
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -61,6 +61,34 @@ The 31-domain batch is the core of the current outreach push. Every domain that 
 ## The Insight
 
 The two-phase architecture (Phase 1 deterministic, Phase 2 LLM) was designed correctly, but the boundary was drawn in the wrong place. The Phase 2 SDK skills were asking Ollama to reformat data rather than interpret it. Genuine LLM work in this pipeline is narrow: `audit-access` (content consistency across pages) and `audit-report` (narrative synthesis). Everything else is data reshaping that belongs in a script.
+
+---
+
+---
+
+## Gitea Test Infrastructure
+
+### 4. Gitea Reset Tooling
+
+The local Gitea instance (26 audit repositories) was manually cleared for test reset. To avoid repeating the ad-hoc approach, a deterministic management script and an action cog were built.
+
+`scripts/bin/mx.gitea.sh` reads env vars (`MX_GITEA_TOKEN`, `MX_GITEA_URL`, `MX_GITEA_USER`, `MX_GITEA_AUDIT_LOCAL_DIR`) and supports four commands: `list`, `clear-all`, `clear-remote`, `clear-local`. It paginates the Gitea API (50 repos per page), sources `.env.local` at invocation boundaries rather than inside the script itself (so tests can inject their own URL), and hard-fails with a named error on a missing token. A subtle `set -euo pipefail` + curl bug was found and fixed: connection-refused returns curl exit code 7, which killed the script before the helpful error message could print. Fix was `|| true` after the curl call, checking the HTTP status code independently.
+
+`scripts/cogs/gitea-reset.cog.md` is the action cog. Its embedded `@embedded:gitea-reset` block sources `.env.local` with `set -a` (to export bare `KEY=VALUE` lines) then `exec`s the script. `mx exec gitea-reset clear-all` is now the single command to reset the entire Gitea estate for a fresh test run.
+
+### 5. Mock-Server Unit Test Suite
+
+`tests/test-gitea-reset.js` provides 36 checks across 7 sections. The mock Gitea HTTP server runs in-process on a port-0 ephemeral port; the bash script runs as a subprocess via `spawn`. No real Gitea instance is needed. Coverage: list (with/without repos), clear-remote (normal, no-repos, delete failure with continued processing), clear-local (present/absent dir), clear-all, missing token, unreachable server, 55-repo pagination across two pages, unknown command. The test is wired into both `test:gitea-reset` (isolated run) and the main `npm test` chain.
+
+### 6. Unit-Test Guide Cog
+
+`scripts/cogs/how-to-write-unit-tests.cog.md` documents the testing conventions in this repository: the three file types (`.js`, `.sh`, `.test.mjs`), the `ok` helper pattern, sync vs async IIFE structure, temp-dir and in-process HTTP mocking, the `set -euo pipefail` + curl trap, the bash assert-helpers pattern, fixture placement, and the two-step `package.json` wiring. The "what NOT to do" section explicitly rules out Jest, Mocha, hardcoded ports, and skipped cleanup.
+
+---
+
+## Why It Matters
+
+The Gitea tooling converts a manual, ad-hoc reset operation into a deterministic, repeatable command. The test suite proves the script behaviour without a real Gitea instance, which means CI can run it safely. The unit-test guide gives future agents and developers a single authoritative reference so new tests match the existing conventions instead of introducing new patterns.
 
 ---
 
