@@ -19,7 +19,7 @@ seoScore: 77
 llmServedHtmlScore: 100
 agentReadabilityScore: 
 totalIssues: 0
-pagesAudited: 12
+htmlPagesAudited: 12
 version: "1.0"
 pipelineVersion: "1.1.0"
 confidential: true
@@ -120,7 +120,7 @@ Agent Readability was adjusted down by 10 points for site-wide gaps a machine ca
 
 Your site runs on **Next.js** (detected from multiple platform signals).
 
-Across the audited set, Dotfusion scores n/a/100 for accessibility and n/a/100 for SEO.
+Across the audited set, Dotfusion scores 100/100 for accessibility and 77/100 for SEO -  strong foundations. First-visit performance (35/100) is the primary engineering priority: returning visitors with a warm cache see healthy load times, but first-time visitors and cold-cache agents pay the full origin cost.
 
 The headline opportunity we want to draw attention to is the governance layer that will lift the site from Discoverable to Governed. Across the audited set, machines can parse the served HTML with a perfect AI Suitability score, yet no MX-namespaced governance metadata appears on any page. Adding mx:status, mx:contentType, mx:audience, canonicalUri and provenance markers will give agents the structured context they need for accurate comprehension and move the site into Level 2.
 
@@ -132,7 +132,7 @@ Because the audited pages are built with Next.js, they already deliver fully par
 
 ### Human Experience
 
-We find that across the audited set, the site delivers a strong experience for human visitors, though page load times suggest room for improvement.
+Across the audited set, the site delivers a strong experience for human visitors, though page load times suggest room for improvement.
 
 **Table 2**
 
@@ -149,7 +149,7 @@ We find that across the audited set, the site delivers a strong experience for h
 
 ### Machine Experience
 
-Across the audited set, machines can discover and parse content with a Discovery Readiness score of 20/100, Structured Data Quality of 44/100, and MX Stack Completeness of 43/100, yet they lack governance context as reflected by an MX Readiness Level of 1 (Discoverable) while Pipeline Survivability remains high at 95/100.
+Across the audited set, machines can discover and parse content with a Discovery Readiness score of 20/100, Structured Data Quality of 44/100, and MX Stack Completeness of 43/100, yet they lack governance context as reflected by an MX Readiness Level of 1 (Discoverable) while Pipeline Survivability remains high at 95/100.
 
 **Table 3**
 
@@ -205,7 +205,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-We’ve identified a strong foundations across the audited set, with perfect accessibility scores and robust SEO performance that lay the groundwork for further optimisation. The presence of key security headers and consistent structured-data implementation also reinforce this base.
+We find accessibility scores, SEO performance, and security transport across the audited set, giving a clear starting point for the improvements ahead.
 
 **Table 5**
 
@@ -259,7 +259,7 @@ We identified 8 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **What to change and why:**
 
-- Add descriptive alt text to the informative images that lack it and empty alt to the decorative ones. 99 of 125 images already contain alt text, so adding missing alt will bring coverage to 100 %. This satisfies WCAG 1.1.1 across the image set.
+- Add descriptive alt text to the informative images that lack it and empty alt to the decorative ones. This satisfies WCAG 1.1.1 across the image set.
 - Generating alt text at upload time, or from the CMS media library, keeps coverage high as new images are added.
 
 **Effort:** Low
@@ -270,11 +270,11 @@ We identified 8 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **Bucket:** Compliance Risk
 
-**Finding:** Heading levels skip on `/services/headless-cms-agency` (for example an h2 followed by an h4), so the document outline a machine or screen reader builds does not match the visible structure.
+**Finding:** Heading levels skip on `/services/headless-cms-agency` (an h2 followed by an h4), so the document outline a machine or screen reader builds does not match the visible structure.
 
 **What to change and why:**
 
-- Order headings without skipping levels (an h2 followed by an h4 forces assistive technology and machines to guess the structure). Use heading level for hierarchy and CSS for visual size; fixing this will raise the Heading Quality score from 94/100 to 100/100.
+- Order headings without skipping levels (an h2 followed by an h4 forces assistive technology and machines to guess the structure); this issue was observed on one audited page, which accounts for 8% of the sample. Use heading level for hierarchy and CSS for visual size.
 - A clean heading outline is the spine an agent uses to summarise the page; fixing it improves both accessibility and machine comprehension.
 
 **Effort:** Low
@@ -304,9 +304,9 @@ We identified 8 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **What to change and why:**
 
-- The slow response is at the origin (first-byte time), not the CDN: returning visitors with a warm cache see normal load times, but first-time visitors and agents fetching on a cold cache pay the full origin cost. Profile the cold-cache waterfall in your server logs or APM tool and look for a single blocking operation - a database query, a synchronous API call, or unoptimised server-side rendering - that takes more than 5 seconds.
+- The slow response is at the origin (first-byte time), not the CDN: returning visitors with a warm cache see normal load times, but first-time visitors and agents fetching on a cold cache pay the full origin cost. Profile the cold-cache waterfall in your server logs or APM tool and look for a single blocking operation -  a database query, a synchronous API call, or unoptimised server-side rendering -  that takes more than 5 seconds.
 - Once the bottleneck is identified, cache or precompute that path so cold-cache visitors do not trigger the full origin cost on every first visit.
-- If you are on a managed hosting platform (Vercel, Netlify, and similar), check whether the origin function is in the same region as your primary audience - a geo-mismatch adds 200-500 ms of fixed latency before any code runs.
+- If you are on a managed hosting platform (Vercel, Netlify, and similar), check whether the origin function is in the same region as your primary audience -  a geo-mismatch adds 200-500 ms of fixed latency before any code runs.
 
 **Effort:** High
 
@@ -530,7 +530,7 @@ The llms.txt carries a site description, but lacks a page inventory and a conten
 
 ### agent-card.json (A2A)
 
-No agent-card.json found at `/.well-known/agent-card.json` - the URL returned HTTP 200 but the body is the site's standard error page (soft-404), not a valid agent card. The A2A (Agent2Agent) protocol defines this location as the standard way to make services findable in agentic workflows. If this site offers transactional or service capabilities, publishing an agent card here is the most important gap to close for Stage 5 (Confidence).
+No agent-card.json found at `/.well-known/agent-card.json` -  the URL returned HTTP 200 but the body is the site's standard error page (soft-404), not a valid agent card. The A2A (Agent2Agent) protocol defines this location as the standard way to make services findable in agentic workflows. If this site offers transactional or service capabilities, publishing an agent card here is the most important gap to close for Stage 5 (Confidence).
 
 ### Other discovery files detected
 
@@ -542,7 +542,7 @@ No agent-card.json found at `/.well-known/agent-card.json` - the URL returned HT
 |------|---------|---------|
 | *(38 paths  -  see sidecar)* | Various | Soft 404  -  same error page template as /zebedee.html (URL slug differs in embedded JS) |
 
-**Soft 404s detected (41 paths):** The server returns a custom error page with HTTP 200 for these paths. AI agents and crawlers rely on HTTP status codes - a 200 response signals success, so agents treat the error page body as if it were a real discovery file. The server should return HTTP 404 (or 301 to a canonical URL) for paths it does not implement. This is a web server configuration change, not a content change.
+**Soft 404s detected (41 paths):** The server returns a custom error page with HTTP 200 for these paths. AI agents and crawlers rely on HTTP status codes -  a 200 response signals success, so agents treat the error page body as if it were a real discovery file. The server should return HTTP 404 (or 301 to a canonical URL) for paths it does not implement. This is a web server configuration change, not a content change.
 
 *Reference: the [IANA Well-Known URIs registry](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) lists the full set of registered `/.well-known/` paths and their RFCs. If a path on that registry would be useful here, consider implementing it.*
 
@@ -589,7 +589,7 @@ A boundary this section keeps honest: a machine-authorship declaration (MX `prov
 <!-- SECTION:SOFT_404 -->
 ## Soft 404s
 
-The audited pages return HTTP 200 for addresses that do not exist. A control address that cannot be real still returned a 200 with a normal-looking page. This is a soft 404, and on this site it is the default for missing addresses, not an isolated case. For a person it is invisible. For a machine it is corrosive: a 200 is the signal that a resource is present, so every check of the form "does this exist?" now returns yes. An agent confirming a price, a product, a policy, or a declaration cannot tell a real answer from a placeholder. A crawler building a training set ingests the catch-all page under thousands of distinct addresses as if each were real content. A validator probing for a well-known file records it as published when nothing is there. The correct behaviour is to return 404 (or 410) for an address that does not resolve, and to reserve 200 for addresses that do. Until that holds, no presence claim derived from a fetch of this site can be trusted, including some made elsewhere in this report where the underlying probe was misled.
+This site answers HTTP 200 for addresses that do not exist. A control address that cannot be real still returned a 200 with a normal-looking page. This is a soft 404, and on this site it is the default for missing addresses, not an isolated case. For a person it is invisible. For a machine it is corrosive: a 200 is the signal that a resource is present, so every check of the form "does this exist?" now returns yes. An agent confirming a price, a product, a policy, or a declaration cannot tell a real answer from a placeholder. A crawler building a training set ingests the catch-all page under thousands of distinct addresses as if each were real content. A validator probing for a well-known file records it as published when nothing is there. The correct behaviour is to return 404 (or 410) for an address that does not resolve, and to reserve 200 for addresses that do. Until that holds, no presence claim derived from a fetch of this site can be trusted, including some made elsewhere in this report where the underlying probe was misled.
 
 We probed 51 addresses that should answer 404 when they are absent; 49 returned a soft 404 instead. Among the well-known discovery paths, 41 of 43 were soft 404s. Severity: pervasive.
 <!-- END:SOFT_404 -->
@@ -1013,7 +1013,7 @@ The full per-page breakdown (12 pages) is in `prose-repetition.json` in the resu
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: improve Discovery Readiness from 20/100 by adding missing llms.txt and agent-card.json, which will raise the discovery score.
+1. **Address Priority 1 findings**: resolve Discovery Readiness findings (currently 20/100)
 2. **Review Priority 2-3 findings**: Semantic Structure improvements and metadata tuning that compound over time
 3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search
 
@@ -1122,7 +1122,7 @@ We reviewed 125 images across the audited set: 3 WebP, 60 SVG, 38 PNG and 24 in 
 
 On loading strategy, 24 images are marked `loading="lazy"` and 0 `loading="eager"`, while 101 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
-> **Double-lazy loading pattern not detected** - no image in the audited set carries both native `loading="lazy"` and a JavaScript lazyload placeholder at the same time.
+> **Double-lazy loading pattern not detected** -  no image in the audited set carries both native `loading="lazy"` and a JavaScript lazyload placeholder at the same time.
 
 ---
 
@@ -1134,9 +1134,9 @@ Pa11y is an open-source automated accessibility testing tool that checks web pag
 
 **MX-specific metrics:** MX Stack Completeness measures all 7 metadata layers. Structured Data Quality (SDQ) scores JSON-LD entity richness. Discovery Readiness scores the robots.txt + sitemap + llms.txt + agent-card.json quartet. Cross-Page Consistency flags pages that deviate from site-wide patterns. Site Profile JSON enables cross-audit comparison. **Pipeline Survivability** runs eleven reading-resilience checks: truncation resilience, SPA shell resilience, soft-404 signalling, boilerplate balance, tabbed-disclosure avoidance, code-fence integrity, single-content-type negotiation, same-host redirects, heading specificity, early content start, and inline-tag bloat control. See **[MX: The Protocols Appendix S](https://mx.allabout.network/books/appendices/appendix-s.html)** for the full taxonomy and **[Appendix R](https://mx.allabout.network/books/appendices/appendix-r.html)** for the testing methodology.
 
-**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Next.js** (high confidence - multiple fingerprint signals). The main audit uses Next.js-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
+**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Next.js** (high confidence -  multiple fingerprint signals). The main audit uses Next.js-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
 
-**Frameworks detected:** **Next.js** - JS framework; **Tailwind CSS** - CSS framework; **Bootstrap** (low confidence) - CSS framework. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
+**Frameworks detected:** **Next.js** -  JS framework; **Tailwind CSS** -  CSS framework; **Bootstrap** (low confidence) -  CSS framework. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
 
 **Link inventory:** We record every internal link found on every audited page with its URL, anchor text, and link type. We do not probe link status: a dedicated, rate-limited broken-link crawler handles that separately and avoids hammering the origin. Appendix B is a link inventory, not a broken-link list.
 

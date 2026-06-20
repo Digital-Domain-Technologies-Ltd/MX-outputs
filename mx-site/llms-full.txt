@@ -2445,13 +2445,13 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             5 min read
 
-An MX audit is rendered through a pipeline that places every fact into a skeleton, rewrites it into prose, gates that output against a battery of deterministic checks, and ships a tagged PDF along with a provenance sidecar pair. We walk through the artefact from an engineer's perspective: the scorecard, the page composition, the sidecar layout, the regression tests, and the contract that makes the PDF MX Compatible.
+An MX audit is rendered through a pipeline that places every fact into a skeleton, rewrites the skeleton into prose, gates the prose against a battery of deterministic checks, and ships a tagged PDF along with a provenance sidecar pair. We walk through the artefact from an engineer's perspective: the scorecard, the page composition, the sidecar layout, the regression tests, and the contract that makes the PDF MX Compatible.
 
 One vocabulary in the Balanced Scorecard
 
 The Balanced Scorecard at the top of every audit report grades each dimension on a four-band scale (Excellent, Good, Could Be Better, Needs Improvement) with a letter grade alongside (A through D). The vs Peers column speaks the same vocabulary, never raw numbers. Each cell reads as A (median), B (median), C (median), or D (median).
 
-The helper that maps a raw score to a band is scoreBandFromValue() in mx-reginald/audit/bin/infill-report.js. The peer-comparison formatter (formatPeerComparison()) routes the median through the same helper before emitting the cell, so the row's own grade and its comparison column can never speak different languages. The boundaries (76, 51, 26) and band names also live as a single source of truth in mx-reginald/audit/lib/scoring-methodology.json for any tooling that wants to read the same enum.
+The helper that maps a raw score to a band lives in scoreBandFromValue() at mx-reginald/audit/bin/infill-report.js. The peer-comparison formatter (formatPeerComparison()) routes the peer median through the same helper before emitting the cell, so the row's own grade and its peer comparison can never speak different languages. The boundaries (76, 51, 26) and band names also live as a single source of truth in mx-reginald/audit/lib/scoring-methodology.json for any tooling that wants to read the same enum.
 
 Contents lands on its own page
 
@@ -2468,7 +2468,7 @@ Both the modern (break-*) and legacy (page-break-*) properties are set because t
 
 Findings ride in a sibling sidecar
 
-Every audit goes through deterministic gates that catch scope mis-statements, exaggeration in prose, unverified numeric claims, voice drift, and similar reviewer-only signals. The gates record every finding to audit_errors.json and the pipeline continues; nothing fails the run. This is the always-produce-PDF contract: a failing gate becomes a recorded warning, not an exit code.
+Every audit goes through deterministic gates that catch scope mis-statements, exaggeration in prose, unverified numeric claims, voice drift, and internal score contradictions. One gate catches the specific failure mode where a rewrite step substitutes n/a/100 for a dimension that the Balanced Scorecard table shows as a real number: the gate parses the scorecard, extracts each dimension's numeric score, and blocks the PDF if n/a/100 appears in prose for a dimension where the scorecard has digits. The gates record every finding to a sidecar JSON file and the pipeline continues; nothing fails the run. This is the always-produce-PDF contract: a failing gate becomes a recorded warning, not an exit code.
 
 The findings travel with the report as a sibling sidecar named after it:
 
@@ -2479,13 +2479,13 @@ mx-outputs/audit/<date>/<host>/
 ├── <basename>-report-fierce-critic.json
 └── <basename>-report.provenance.ai.json
 
-The findings sidecar is a complete markdown document with its own MX frontmatter (contentType: audit-findings, companion: <report>.md). It records the gate name, the category, the timestamp, and the supporting evidence for every finding, by severity. The reviewer reads the sidecar before sign-off; the client reads the report.
+The findings sidecar is a complete markdown document with its own MX frontmatter (contentType: audit-findings, companion: <report>.md). It carries the gate name, the category, the timestamp, and the supporting evidence for every finding, by severity. The reviewer reads the sidecar before sign-off; the client reads the report.
 
 The renderer at mx-reginald/audit/lib/render-error-section.js exposes renderFindingsMarkdownDoc() for the sidecar; a legacy renderErrorReportSection() survives as an empty no-op so older skeletons that still carry [ERROR_REPORT_SECTION] resolve to invisible sentinels. The post-gates regenerator script writes the sidecar and strips any residual block out of the report markdown. Templates and contracts no longer reference the placeholder.
 
 Tests that hold the contract
 
-Two regression tests are in mx-reginald/audit/test/ and exercise the path from canned fixtures to a rendered skeleton. infill-golden.test.js renders the canonical web-audit-suite template against a synthetic example.com fixture and asserts byte-identical output against golden-skeleton.md; that file writes through a stable host-slug subfolder so the rendered mx.generate.output line is deterministic. audit-gates.test.js covers every gate's exit-code contract, including the deterministic verifier's always-continue pattern: on the unsupported-numeric fixture the verifier exits zero and stdout names unverified claim(s) - logged as warnings, so the test asserts both the exit code and the message.
+Two regression tests live under mx-reginald/audit/test/ and exercise the path from canned fixtures to a rendered skeleton. infill-golden.test.js renders the canonical web-audit-suite template against a synthetic example.com fixture and asserts byte-identical output against golden-skeleton.md; the fixture writes through a stable host-slug subfolder so the rendered mx.generate.output line is deterministic. audit-gates.test.js covers every gate's exit-code contract, including the deterministic verifier's always-continue behaviour: on the unsupported-numeric fixture the verifier exits zero and stdout names unverified claim(s) - logged as warnings, so the test asserts both the exit code and the message.
 
 An MX Compatible regression test
 
@@ -2493,23 +2493,23 @@ The phrase "MX Compatible" names a specific set of signals an inspector can veri
 
 tests/test-pdf-mx-compatible.js at the hub root writes a fixture markdown to a tmp dir with the full mx frontmatter and a declared x-mx-provenance block, renders it through scripts/bin/mx.pdf.sh, then makes eleven assertions: the two sidecars on disk, the PDF/UA declaration, five identity fields, two pointer fields, and one byte-for-byte match between the embedded XMP payload and the adjacent .ai.json after JSON normalisation. The test is wired into npm test and exposed as npm run test:pdf-mx-compatible.
 
-An engineer who wants to sanity-check the contract from outside the repository can run the same probes by hand. The interactive inspector accepts any MX PDF and walks the chain in the browser. The MX for PDFs explainer maps each signal to the standard it cites.
+An engineer who wants to sanity-check the contract from outside the repository can run the same probes by hand. The interactive inspector at /tools/pdf-inspector.html accepts any MX PDF and walks the chain in the browser; the explainer at /learn/mx-for-pdfs.html maps each signal to the standard it cites.
 
 How the pieces fit
 
-One scoring vocabulary across every row of the scorecard. One contents page isolated on its own break. One sibling sidecar carrying every reviewer signal so the report markdown stays client-facing. A regression-tested PDF contract that an inspector can verify in a browser or from the command line.
+One scoring vocabulary across every row of the scorecard. One contents page on its own page. One sibling sidecar carrying every reviewer signal so the report markdown stays client-facing. A regression-tested PDF contract that an inspector can verify in a browser or from the command line.
 
-The shared property across all of those is the same: each component of the deliverable does one job, and it's the one the reader expects to find. The report holds the argument. The sidecar holds the reviewer's working. The XMP packet embeds the evidence chain. The tests catch when any of them stops doing its job.
+The shared property across all of those is the same: each part of the deliverable does one job, and the part that does it is the part the reader expects to look at. The report carries the argument. The sidecar carries the reviewer's working. The XMP packet carries the evidence chain. The tests catch when any of them stops doing its job.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through where your team is on the agent-readiness curve?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
 
@@ -7321,6 +7321,24 @@ Blog
         Blockchain
         Announcements
 
+            Why an MX Audit Pays for Itself
+
+            Machines now read most published content before humans do. An MX audit tells you precisely where your site fails the machines that decide whether to cite you, summarize you, recommend you, or ignore you. The work pays for itself the first time an agent reads correctly what it would have guessed.
+
+            30 April 2026
+            - Provenance
+
+- Business case
+
+            An MX Audit, Read by an Engineer
+
+            A walk through an MX audit deliverable from an engineer's perspective: scorecard vocabulary, page composition, findings sidecar, regression tests, and the contract that makes the PDF MX Compatible.
+
+            28 May 2026
+            - Provenance
+
+- Practitioner
+
             The Letter the Law Says You Have to Send
 
             Employment agencies in New York must notify candidates when an automated tool influenced a hiring decision. Most of those letters are inaccessible PDFs with no provenance record. MX closes both gaps in one artefact.
@@ -7429,15 +7447,6 @@ Blog
 
             2 June 2026
             - MX foundations
-
-- COGs
-
-            An MX Audit, Read by an Engineer
-
-            A walk through an MX audit deliverable from an engineer's perspective: scorecard vocabulary, page composition, findings sidecar, regression tests, and the contract that makes the PDF MX Compatible.
-
-            28 May 2026
-            - Practitioner
 
 - COGs
 
@@ -7849,17 +7858,6 @@ Blog
             - COGs
 
 - AI agents
-
-            Why an MX Audit Pays for Itself
-
-            Machines now read most published content before humans do. Three ways an MX audit returns its cost: reduced inference cost across every reader, fewer hallucinated citations, and lower regulatory exposure under the European Accessibility Act.
-
-            30 April 2026
-            - Business case
-
-- Accessibility
-
-- Practitioner
 
             Tagged PDFs Are MX
 
@@ -17148,121 +17146,123 @@ If you take one thing from this: the real question is what am I handing the AI, 
 
 **Description:** Machines now read most published content before humans do. An MX audit tells you precisely where your site fails the machines that decide whether to cite you, summarize you, recommend you, or ignore you. The work pays for itself the first time an agent reads correctly what it would have guessed.
 
-Machines now read most published content before humans do. An MX audit tells you exactly where your site fails them, in specific terms an engineer can act on directly.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - Machines already arrived
+        - Machines already arrived
 
-            - What the audit actually checks
+        - What the audit actually checks
 
-            - Three failure modes I find on every site
+        - Three failure modes I find on every site
 
-            - EAA multiplier
+        - Accessibility compliance multiplier
 
-            - What you get
+        - What you get
 
-            - Where the audit pays for itself
+        - Where the audit pays for itself
 
-            - Why MX rather than ad-hoc fixes
+        - Why MX rather than ad-hoc fixes
 
-            - Next step
+        - Next step
 
           Why an MX Audit Pays for Itself
 
             30 April 2026
             ·
-            9 min read
+            Tom Cranstoun
+            ·
+            11 min read
 
-        Machines already arrived
+Machines already arrived
 
-        Adobe paid $1.9bn this month for Semrush, a customer-experience analytics company whose dashboard tracks how AI agents read your brand. Cloudflare started blocking unrecognised AI crawlers at the edge by default. ChatGPT and Perplexity now answer the queries that used to land users on your homepage; the user never arrives, and what was said about you stays invisible. Anthropic's Claude can browse the web and quote your pricing in support conversations with prospects who have never heard of you.
+Adobe paid $1.9bn this month for Semrush, a customer-experience analytics company whose dashboard tracks how AI agents read your brand. Cloudflare started blocking unrecognised AI crawlers at the edge by default. ChatGPT and Perplexity now answer the queries that used to land users on your homepage; the user never arrives, and you never know what was said about you. Anthropic's Claude can browse the web and quote your pricing in support conversations with prospects you have never heard of.
 
-        Most published websites weren't built with this in mind. They were built for human visitors. The structure that helps a human skim, the visual hierarchy that signals importance, the carousel that catches the eye, the on-hover detail that opens to reveal the meaning: none of this is visible to a machine. The machine reads the HTML source. If the meaning is in the picture and not the markup, the machine guesses. If the price is in three places and they disagree, the machine picks one and moves on. If the policy is in a PDF without a structure tree, the machine reconstructs the table by vision and quotes whatever its reconstruction produced.
+Most published websites were not built with this in mind. They were built for human visitors. The structure that helps a human skim, the visual hierarchy that signals importance, the carousel that catches the eye, the on-hover detail that opens to reveal the meaning: none of this is visible to a machine. The machine reads the HTML source. If the meaning is in the picture and not the markup, the machine guesses. If the price is in three places and they disagree, the machine picks one and moves on. If the policy is in a PDF without a structure tree, the machine reconstructs the table by vision and quotes whatever its reconstruction produced.
 
-        The cost is invisible at first. A search summary you can't see attributes a competitor's pricing to your brand. A booking agent you have never met tells a customer your office is closed when it's open. A research assistant cites a year-old PDF as your current position because the live PDF carries no canonical-URL declaration that would let it follow the version chain. None of these failures show up in your analytics. None of them generate a support ticket. They surface in conversations the publisher doesn't see. That's the bit that bothers me most: you can't fix what you can't see.
+The cost is invisible at first. A search summary you cannot see attributes a competitor's pricing to your brand. A booking agent you have never met tells a customer your office is closed when it is open. A research assistant cites a year-old PDF as your current position because the current PDF carries no canonical-URL declaration that would let it follow the version chain. None of these failures show up in your analytics. None of them generate a support ticket. They surface in conversations the publisher does not see. That is the bit that bothers me most: you cannot fix what you cannot see.
 
-        What the audit actually checks
+What the audit actually checks
 
-        An MX audit reads a published site the way an AI agent reads it: through the served HTML, the structured data, the discovery files, and the metadata that travels with the document. The audit reports specifically where the machine-reader signal is missing or contradicted, page by page. Each finding is a specific defect with a severity an engineering team can prioritise, rather than a generic accessibility checklist or a list of SEO best practices.
+An MX audit reads a published site the way an AI agent reads it: through the served HTML, the structured data, the discovery files, and the metadata that travels with the document. The audit reports specifically where the machine-reader signal is missing or contradicted, page by page. Each finding is a specific defect with a severity an engineering team can prioritise, rather than a generic accessibility checklist or a list of SEO best practices.
 
-        The full check covers the three perspectives a publisher needs to satisfy at once: the human-experience layer (UX, accessibility, performance), the structural layer (the HTML the agent actually reads), and the MX appropriateness layer (the governance metadata that tells the agent what it may do with the content). Each perspective scores the page on dimensions that compose into an overall agent-readiness score, and each finding has a verification command and a captured output so the dev team can reproduce the failure on demand.
+The full check covers the three perspectives a publisher needs to satisfy at once: the human-experience layer (UX, accessibility, performance), the structural layer (the HTML the agent actually reads), and the MX appropriateness layer (the governance metadata that tells the agent what it may do with the content). Each perspective scores the page on dimensions that compose into an overall agent-readiness score, and each finding carries a verification command and a captured output so the engineering team can reproduce the failure on demand.
 
-        What the audit reports on, in detail: served HTML quality and the gap between served and rendered DOM (what an agent without a JavaScript runtime sees versus what a browser sees); structured-data coverage and consistency (Schema.org JSON-LD presence, contradictions between Schema and on-page text); MX governance fields (status, audience, content-policy, license, and content-state, plus the lifecycle fields covered in the recent core proposal); discovery files (sitemap.xml, robots.txt, llms.txt, agent-card.json) and whether the URLs they declare actually return 200 from the live host; agent access by user-agent (which AI clients are blocked at the edge and what they receive instead); content consistency across pages (entity-level cross-references where the same product, person, or policy appears at multiple URLs); PDF accessibility under ISO 14289-1, the EAA baseline; and the "Div Soup" signal, which detects pages where the visible structure is a flat sequence of unlabelled containers that no agent can navigate semantically.
+What the audit reports on, in detail: served HTML quality and the gap between served and rendered DOM (what an agent without a JavaScript runtime sees versus what a browser sees); structured-data coverage and consistency (Schema.org JSON-LD presence, contradictions between Schema and on-page text); MX governance fields (status, audience, content-policy, license, content-state, and the discovery and lifecycle fields covered in the recent core proposal); discovery files (sitemap.xml, robots.txt, llms.txt, agent-card.json) and whether the URLs they declare actually return 200 from the live host; agent access by user-agent (which AI clients are blocked at the edge and what they receive instead); content consistency across pages (entity-level cross-references where the same product, person, or policy appears on multiple URLs); PDF accessibility under ISO 14289-1, the EAA baseline; and the "Div Soup" signal, which detects pages where the visible structure is a flat sequence of unlabelled containers that no agent can navigate semantically.
 
-        The output is a single PDF report with the prioritised defects, plus the raw machine-readable data (CSVs and JSONs) so an engineering team can ingest the findings into its own tooling.
+The output is a single PDF report with the prioritised defects, plus the raw machine-readable data (CSVs and JSONs) so an engineering team can ingest the findings into its own tooling.
 
-        Three failure modes I find on every site
+Three failure modes I find on every site
 
-        Every audit I run surfaces variants of the same three patterns. I have never run a clean one.
+Every audit I run surfaces variants of the same three patterns. I have never run a clean one.
 
-        The first is visible-but-invisible content. Information that's present on the rendered page but absent from the served HTML. Pricing tables drawn with CSS Grid where each cell is a styled <div> with no semantic role. Product specifications inside accordion components that load on click via JavaScript. Hero images carrying critical text in pixels rather than markup. Each of these renders correctly to a human but is invisible to an agent without a full browser runtime, which most agents don't run because the cost-per-read is prohibitive at scale. The agent reads what your engineers shipped, not what your designers see.
+The first is visible-but-invisible content. Information that is present on the rendered page but absent from the served HTML. Pricing tables drawn with CSS Grid where each cell is a styled <div> with no semantic role. Product specifications inside accordion components that load on click via JavaScript. Hero images carrying critical text in pixels rather than markup. Each of these renders correctly to a human but is invisible to an agent without a full browser runtime, which most agents do not run because the cost-per-read is prohibitive at scale. The agent reads what your engineers shipped, not what your designers see.
 
-        The second is contradictory truth. Structured data that disagrees with on-page text. JSON-LD declares the product is in stock; the visible body says "temporarily unavailable". Schema.org reviews show 4.8 stars; the visible page lists 3.2. The price field has £19.99; the cart shows £24.99 plus VAT. An agent reading both layers picks one (usually the structured data, because it's easier to parse) and acts on it. The publisher then has a customer who was promised something the publisher's own visible content contradicts. The fix is mechanical: match the two layers. The audit finds where they disagree.
+The second is contradictory truth. Structured data that disagrees with on-page text. JSON-LD declares the product is in stock; the visible body says "temporarily unavailable". Schema.org reviews show 4.8 stars; the visible reviews show 3.2. The price field has £19.99; the cart shows £24.99 plus VAT. An agent reading both layers picks one (usually the structured data, because it is easier to parse) and acts on it. The publisher then has a customer who was promised something the publisher's own visible content contradicts. The fix is mechanical: match the two layers. The audit finds where they disagree.
 
-        The third is missing governance. The page carries content but no machine-readable instructions about what may be done with it. No license declaration, so an agent assumes the most permissive interpretation. No canonical-URL claim, so an outdated copy that has reached the agent's cache is quoted as if it were current. No content-policy declaration, so the agent extracts and summarizes freely. No training-data policy, so the artefact ends up in the next training corpus despite the publisher's preference. None of these are visible failures; all of them are leakage points where the publisher's terms are silently overridden by the consumer's defaults.
+The third is missing governance. The page carries content but no machine-readable instructions about what may be done with it. No license declaration, so an agent assumes the most permissive interpretation. No canonical-URL claim, so an outdated copy that has reached the agent's cache is quoted as if it were current. No content-policy declaration, so the agent extracts and summarizes freely. No training-data policy, so the artefact ends up in the next training corpus despite the publisher's preference. None of these are visible failures; all of them are leakage points where the publisher's terms are silently overridden by the consumer's defaults.
 
-        Accessibility compliance multiplier
+Accessibility compliance multiplier
 
-        There's a regulatory layer on top, and it applies more broadly than many teams realise. The European Accessibility Act (Directive 2019/882, in force across the EU since 28 June 2025) covers public-facing PDFs, e-books, banking applications, ticket machines, and digital content from in-scope businesses. Equivalent obligations flow from Section 508 of the US Rehabilitation Act (covering federal agencies and recipients of government funding), the UK Public Sector Bodies Accessibility Regulations 2018, and disability discrimination legislation in Australia and Canada. Every one of these instruments resolves to the same technical standard: ISO 14289-1 (PDF/UA), which mandates a structure tree, marked content, declared reading order, alternative text, and a conformance claim.
+There is a regulatory layer on top, and it applies more broadly than many organisations realise. The European Accessibility Act (Directive 2019/882, in force across the EU since 28 June 2025) covers public-facing PDFs, e-books, banking applications, ticket machines, and digital content from in-scope businesses. Equivalent obligations flow from Section 508 of the US Rehabilitation Act (federal agencies and recipients of federal funding), the UK Public Sector Bodies Accessibility Regulations 2018, and disability discrimination legislation in Australia and Canada. Every one of these instruments resolves to the same technical standard: ISO 14289-1 (PDF/UA), which mandates a structure tree, marked content, declared reading order, alternative text, and a conformance claim.
 
-        The tagging that satisfies the law is the same structure that lets an AI agent read the document without falling back to vision-based reconstruction. The disability argument justifies the work; the machine case multiplies the return. Wherever the legal obligation originates, meeting the law's standard is meeting the machine experience standard too. What satisfies the human auditor satisfies the agent reading the document next year.
+The structure that satisfies the law is the same structure that lets an AI agent read the document without falling back to vision-based reconstruction. The disability case justifies the work; the machine case multiplies the return. Wherever the legal obligation originates, compliance with the law is compliance with the machine experience. The work to satisfy the human auditor is the same work that satisfies the agent reading the document next year.
 
-        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, entity type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
-        The audit's PDF accessibility check reports per-document conformance against the ISO baseline: which PDFs are tagged, which carry the ISO 14289-1 (PDF/UA-1) XMP declaration, which would fail an enforcement audit if it landed tomorrow. The fix path is clear: regenerate the PDF through a pipeline that produces a tagged output, decline the version that fails the gate from being deployed.
+The audit's PDF accessibility check reports per-document conformance against the ISO baseline: which PDFs are tagged, which carry the ISO 14289-1 (PDF/UA-1) XMP declaration, which would fail an enforcement audit if it landed tomorrow. The fix path is clear: regenerate the PDF through a pipeline that produces a tagged output, decline the version that fails the gate from being deployed.
 
-        What you get
+What you get
 
-        Each audit delivers four artefacts:
+Each audit delivers four artefacts:
 
-          - A client-facing PDF report with prioritised findings, severity ratings, and specific page-level fixes. The report is itself a tagged PDF conformant with ISO 14289-1 (PDF/UA), so the artefact you receive is an example of the standard the audit recommends.
+- A client-facing PDF report with prioritised findings, severity ratings, and specific page-level fixes. The report is itself a tagged PDF conformant with ISO 14289-1 (PDF/UA), so the artefact you receive is an example of the standard the audit recommends.
 
-          - The raw machine-readable data: CSV files for every dimension (accessibility issues, image quality, link analysis, marker reachability, Pa11y findings, pages audited, structured-data findings) plus JSON sidecars for the verification trail and the LLM-judgment output. You can ingest these into your own tooling without re-parsing the PDF.
+- The raw machine-readable data: CSV files for every dimension (accessibility issues, image optimisation, link analysis, marker reachability, Pa11y findings, pages audited, structured-data findings) plus JSON sidecars for the verification trail and the LLM-judgment output. You can ingest these into your own tooling without re-parsing the PDF.
 
-          - A verification report listing every claim in the human-readable text alongside its source data. Every numeric or observed claim in the audit is traceable to a CSV row, JSON field, or cached HTML extract. No hand-waving; no "the audit found" without a citation.
+- A verification report listing every claim in the human-readable text alongside the source it was derived from. Every numeric or behavioural claim in the audit is traceable to a specific CSV row, JSON field, or audited page. No hand-waving; no "the audit found" without a citation.
 
-          - A two-pass quality gate, mechanical and editorial. The mechanical gate verifies every fact in the report against the underlying data. The editorial gate, called the "fierce critic" pass, looks for the kinds of failure mode that defeat the value of the audit even when the facts are right: leaked boilerplate, uncited industry claims, internal contradictions, scope overreach. Both gates must pass before the report ships.
+- A two-pass quality gate, mechanical and editorial. The mechanical gate verifies every fact in the report against the underlying data. The editorial gate, called the "fierce critic" pass, looks for the kinds of failure mode that defeat the value of the audit even when the facts are right: leaked boilerplate, uncited industry claims, internal contradictions, scope overreach. Both gates must pass before the report ships.
 
-        Where the audit pays for itself
+Where the audit pays for itself
 
-        The audit's value isn't the report. The report is the proof. The value is the work the audit makes legible: which changes, in which files, will cause your content to be read correctly by the next agent that lands on it. Three vectors return the cost of the audit.
+The audit's value is not the report. The report is the proof. The value is the work the audit makes legible: which specific changes, in which specific files, will cause your content to be read correctly by the next agent that lands on it. Three vectors return the cost of the audit.
 
-        The first is reduced inference cost across every reader. An agent that can navigate a tagged PDF by structure does an order of magnitude less compute than one reconstructing the document by vision. An agent that reads structured data does no work to extract the price. The compute differential compounds across every machine read of the document for the rest of its life. Publishers don't pay this compute bill directly, but they pay the consequence: agents that can read your content cheaply read it more often, cite it more often, and recommend it more often than agents that find it expensive to read. The publishers whose content is cheap to read win the citation lottery. I'm not certain anyone has measured this in pounds yet, but the direction is unambiguous.
+The first is reduced inference cost across every reader. An agent that can navigate a tagged PDF by structure does an order of magnitude less compute than one reconstructing the document by vision. An agent that reads structured data does no work to extract the price. The compute differential compounds across every machine read of the document for the rest of its life. Publishers do not pay this compute bill directly, but they pay the consequence: agents that can read your content cheaply read it more often, cite it more often, and recommend it more often than agents that find it expensive to read. The publishers whose content is cheap to read win the citation lottery. I am not certain anyone has measured this in pounds yet, but the direction is unambiguous.
 
-        The second is reduced hallucination, which is reduced loss. Agents that can't reach the truth don't say "I don't know". They guess. The guesses become citations in research summaries, clauses in generated contracts, answers in customer support conversations the publisher doesn't witness. Each of those errors is a small loss the publisher absorbs without ever seeing it. Each fix to a structure-tree or schema contradiction removes a whole category of errors from conversations the publisher will never witness.
+The second is reduced hallucination, which is reduced loss. Agents that cannot reach the truth do not say "I don't know". They guess. The guesses become citations in research summaries, clauses in generated contracts, answers in customer support conversations the publisher does not witness. Each of those errors is a small loss the publisher absorbs without ever seeing it. Each fix to a structure-tree or schema contradiction removes a class of error from a class of conversations the publisher will never witness.
 
-        The third is reduced regulatory exposure. Accessibility enforcement windows are open across multiple jurisdictions, the EAA in the EU, Section 508 and ADA Title III in the US, PSBAR in the UK. The fines are non-trivial. The audit's PDF accessibility section identifies which documents would fail an enforcement check today, which is more useful than discovering it from a regulator's letter, regardless of which regulator that turns out to be.
+The third is reduced regulatory exposure. Accessibility enforcement windows are open across multiple jurisdictions, the EAA in the EU, Section 508 and ADA Title III in the US, PSBAR in the UK. The fines are non-trivial. The audit's PDF accessibility section identifies which documents would fail an enforcement check today, which is more useful than discovering it from a regulator's letter, regardless of which regulator that turns out to be.
 
-        Why MX rather than ad-hoc fixes
+Why MX rather than ad-hoc fixes
 
-        One reasonable question is why this kind of work needs a framework at all. Could a publisher not just fix the headings, the schema, the PDF tags, the agent-blocking, item by item, as they come up?
+One reasonable question is why this kind of work needs a framework at all. Could a publisher not just fix the headings, the schema, the PDF tags, the agent-blocking, item by item, as they come up?
 
-        They could, and many do. The cost is paid in the discipline gap that follows: every team that touches the site adds new content, new components, new pages, new pipelines. Without a documented standard for what a machine-readable page or PDF looks like in this business, every new addition becomes a fresh decision. Some additions get the structure right, others don't, and over time the corpus drifts back into the same condition that triggered the first audit. The audit becomes a recurring quarterly cost rather than a one-shot fix.
+They could, and many do. The cost is paid in the discipline gap that follows: every team that touches the site adds new content, new components, new pages, new pipelines. Without a documented standard for what a machine-readable page or PDF looks like in this organisation, every new addition becomes a fresh decision. Some additions get the structure right, others do not, and over time the corpus drifts back into the same condition that triggered the first audit. The audit becomes a recurring quarterly cost rather than a one-shot fix.
 
-        MX is the discipline layer that prevents the drift. It's a shared vocabulary (the field dictionary), a shared profile (what fields are required at which conformance level), a shared check (the audit and its compliance gates), and a shared reference (the books, the appendices, the cookbook recipes). Once the team has the discipline, every new page, every new PDF, every new feature is built MX-aware on the first commit, not after the next audit catches it.
+MX is the discipline layer that prevents the drift. It is a shared vocabulary (the field dictionary), a shared profile (what fields are required at which conformance level), a shared check (the audit and its compliance gates), and a shared reference (the books, the appendices, the cookbook recipes). Once the team has the discipline, every new page, every new PDF, every new feature is built MX-aware on the first commit, not after the next audit catches it.
 
-        The framework is open. The standard is published. The dictionary, the audit tool, the cookbook, the books are all in the open. The audit is the entry point. The discipline is what keeps the gain.
+The framework is open. The standard is published. The dictionary, the audit tool, the cookbook, the books are all in the open. The audit is the entry point. The discipline is what keeps the gain.
 
-        Next step
+Next step
 
-        If your business publishes content that machines now read at scale (and almost all do in 2026), the audit is the cheapest way to find out where you stand. It costs less than a single integration project and produces a fix list your engineering team can act on directly, in specific files, against named issues. No vague quarter-long program of work; no consultants returning every month with new framing. The fixes are specific or they aren't fixes.
+If your organisation publishes content that machines now read at scale (and effectively all organisations are in this category in 2026), the audit is the cheapest way to find out where you stand. It costs less than a single integration project and produces a fix list your engineering team can act on directly, in specific files, against named issues. No vague quarter-long program of work; no consultants returning every month with new framing. The fixes are specific or they are not fixes.
 
-        The result is a published corpus that machines can read correctly, a PDF estate conformant with ISO 14289-1 that survives a regulatory review wherever it originates, and a discipline layer that prevents the next drift. The audit is the entry point. The work is upstream.
+The result is a published corpus that machines can read correctly, a PDF estate conformant with ISO 14289-1 that survives a regulatory check wherever that check originates, and a discipline layer that prevents the next drift. The audit is the entry point. The work is upstream.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the MX community and author of the MX book series. Building content systems since 1977. Focus areas: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory, through Digital Domain Technologies Ltd, trading as CogNovaMX.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to know where your published content ranks on the agent-readiness curve?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
-            - Get in touch about an audit
+            - Get in touch
 
             - Explore the books
 
