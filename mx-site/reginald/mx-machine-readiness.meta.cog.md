@@ -67,6 +67,7 @@ metadataFields:
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
 mx:
   x-mx-category: mx-content
+  x-mx-cogRole: example
   status: published
   contentType: meta-cog
   audience: [humans, machines]
