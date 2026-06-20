@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - MX Graph NLQ, Namespace Policy Resolved, What Comes Next Refreshed"
-description: "Extended MX graph natural language query coverage with aliases and cogRole fulltext; closed four open namespace policy decisions; rewrote what-comes-next to current state."
+title: "Co-Directors Report - MX Graph NLQ, Namespace Policy Resolved, What Comes Next Refreshed, field-merge Cog Added"
+description: "Extended MX graph NLQ; closed four open namespace policy decisions; rewrote what-comes-next; added field-merge action-cog for repeatable alias migration."
 author: "Tom Cranstoun"
 created: 2026-06-20
 modified: 2026-06-20
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -80,9 +80,16 @@ The namespace decisions unblock field additions that have been queuing for weeks
 
 ---
 
+### 4. field-merge Action-Cog
+
+A repeatable process for field alias migrations was missing. Every time a namespace policy ruling decides "X is a deprecated alias for Y", the migration had to be improvised. The `field-merge.cog.md` action-cog now captures the five-step SOP: scan, find, rewrite, update dictionary, verify. It includes a pending migrations table pre-loaded with the first job from today's ruling: `x-mx-contentPolicy` → bare `contentPolicy`. Future rulings get a row in the table; running the cog clears it.
+
+---
+
 ## Next Steps
 
 - Run the 31-domain batch audit (pipeline verified on dotfusion; ready now)
 - Re-engage Chris Bryce (Dotfusion) with the completed audit report — warmest current lead
+- Run `mx exec field-merge merge` to migrate `x-mx-contentPolicy` → `contentPolicy` (2 files)
 - Resolve the PHR_ dead code in `infill-report.js` (two formula functions set but tokens absent from template)
 - Fix 161 MX field validation files from upstream concurrent session commits
