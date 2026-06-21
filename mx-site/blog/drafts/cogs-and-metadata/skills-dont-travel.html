@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Skills Don't Travel"
+description: "Runtime-specific instruction files lock your AI workflow to one tool. One afternoon spent on this problem is why MX standards exist."
+author: "Tom Cranstoun"
+created: 2026-06-18
+modified: 2026-06-18
+version: "1.1"
+
+type: blog-post
+tags: [cogs, skills, portability, runtime, action-docs, mx-standards, mx-os]
+mx:
+  status: active
+  audience: [humans, agents]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/cogs-and-metadata/skills-dont-travel.md
+  servedAt: https://mx.allabout.network/blog/cogs-and-metadata/skills-dont-travel.html
+  stability: draft
+  runbook: "Draft blog post. When ready to publish run npm run promote -- --slug skills-dont-travel."
+  purpose: "Explain the runtime-portability problem with AI skill files, using a real example of the hub-and-spoke COG pattern that solves it."
+  x-mx-contextProvides:
+    - "Runtime-specific skills (Claude Code, Cursor, Copilot, Windsurf, Continue, Gemini, OpenAI) are locked to their tool"
+    - "COGs are runtime-agnostic — any capable agent reads the same document"
+    - "Hub-and-spoke pattern: one mx-agent-rules COG, thin adapters per tool"
+    - "x-mx-runtimeProbe: self-identification without the document needing to know which tool will read it"
+  relatedTo:
+    - datalake/draft-site/blog/cogs-and-metadata/the-layer-beneath-the-system-prompt.md
+    - datalake/draft-site/blog/cogs-and-metadata/fable5-system-prompt-is-a-cog.md
+    - scripts/cogs/mx-agent-rules.cog.md
+    - scripts/cogs/generate-agent-rules.cog.md
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Runtime-specific instruction files lock your AI workflow to one tool. One afternoon spent on this problem is why MX standards exist.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://mx.allabout.network/blog/cogs-and-metadata/skills-dont-travel.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/cogs-and-metadata/skills-dont-travel.html">
+  <meta property="og:title" content="Skills Don't Travel | CogNovaMX">
+  <meta property="og:description" content="Runtime-specific instruction files lock your AI workflow to one tool. One afternoon spent on this problem is why MX standards exist.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-18">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Skills Don't Travel | CogNovaMX">
+  <meta name="twitter:description" content="Runtime-specific instruction files lock your AI workflow to one tool. One afternoon spent on this problem is why MX standards exist.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="published">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Skills Don't Travel">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.1">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/cogs-and-metadata/skills-dont-travel.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Skills Don't Travel | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Skills Don't Travel",
+        "headline": "Skills Don't Travel",
+        "description": "Runtime-specific instruction files lock your AI workflow to one tool. One afternoon spent on this problem is why MX standards exist.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-18",
+        "dateModified": "2026-06-18",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/cogs-and-metadata/skills-dont-travel.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1280,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/cogs-and-metadata/skills-dont-travel.html",
+        "name": "Skills Don't Travel",
+        "url": "https://mx.allabout.network/blog/cogs-and-metadata/skills-dont-travel.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#seven-formats-in-one-repository">Seven formats in one repository</a></li>
+        <li><a href="#what-you-are-actually-trying-to-do">What you are actually trying to do</a></li>
+        <li><a href="#the-solution-is-not-to-write-seven-files">The solution is not to write seven files</a></li>
+        <li><a href="#the-document-does-not-need-to-know-which-tool-will-read-it">The document does not need to know which tool will read it</a></li>
+        <li><a href="#why-the-pre-web-analogy-is-exact">Why the pre-web analogy is exact</a></li>
+        <li><a href="#the-cost-is-hidden-until-it-isnt">The cost is hidden until it isn't</a></li>
+        <li><a href="#the-instruction-should-outlast-the-tool">The instruction should outlast the tool</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1280">
+        <header class="article-header">
+          <h1>Skills Don't Travel</h1>
+          <div class="article-meta"
+               data-published="2026-06-18"
+               data-modified="2026-06-18"
+               data-reading-time="7 min">
+            <time datetime="2026-06-18">18 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>7 min read</span>
+          </div>
+        </header>
+
+
+<p>There is an old story type -- the monkey's paw, the genie's three wishes -- where a request is granted exactly as worded and catastrophically against intent. You wish for a million pounds and it arrives as a life-insurance payout. You ask for eternal life and get it without eternal youth. The instruction was followed precisely. The outcome was not what you wanted.</p>
+<p>AI agents do this too. Not maliciously. They follow the instruction they were given, in the context they were given it, as literally as they can. The problem is almost never the agent. It is the instruction.</p>
+<p>But there is a second problem that gets less attention. Even when you write a good instruction -- clear, bounded, safe -- it only works for the tool you wrote it for.</p>
+<p>I hit both problems in the same afternoon. That afternoon is the reason this standard exists.</p>
+<h2 id="seven-formats-in-one-repository" tabindex="-1">Seven formats in one repository</h2>
+<p>I was setting up operating rules for AI agents working in this repository. Rules like: always compute link depth correctly before writing a markdown file. Never hardcode credentials. Never edit outside your declared output boundary. The rules themselves are simple. Enforcing them across tools is not.</p>
+<p>Here is what the tool landscape looks like in a single repository in 2026:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Boot file</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>CLAUDE.md</code></td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/rules</code></td>
+</tr>
+<tr>
+<td>GitHub Copilot</td>
+<td><code>.github/copilot-instructions.md</code></td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>.windsurfrules</code></td>
+</tr>
+<tr>
+<td>Continue</td>
+<td><code>.continue/config.md</code></td>
+</tr>
+<tr>
+<td>Gemini CLI</td>
+<td><code>GEMINI.md</code></td>
+</tr>
+<tr>
+<td>OpenAI Agents</td>
+<td><code>AGENTS.md</code></td>
+</tr>
+</tbody>
+</table>
+<p>Seven formats. None compatible. A rule written for Claude Code does nothing in Cursor. A <code>.windsurfrules</code> file is invisible to Gemini CLI. If I want the same link-depth rule enforced across all seven tools, the naive approach is: write it seven times. Then remember to update it in seven places every time it changes.</p>
+<p>That is not a workflow. That is a maintenance burden that will quietly become seven drifting versions of the same rule, and the agent that happens to be running the day a rule has drifted will do the wrong thing -- precisely, faithfully, as instructed.</p>
+<h2 id="what-you-are-actually-trying-to-do" tabindex="-1">What you are actually trying to do</h2>
+<p>When you write a rule for an AI agent in a repository, you are doing one of two things.</p>
+<p><strong>Describing a process</strong> -- &quot;here is how to check link depth, fix wrong links, and stage the result.&quot; That is information. It should be readable by any agent, not just the one that happened to be running today.</p>
+<p><strong>Constraining behaviour</strong> -- &quot;do not write files outside <code>datalake/</code>. Do not run this on a partial checkout. Always confirm before committing.&quot; That is policy. It should be enforceable by any capable agent, because policy that only applies to one tool is not really policy -- it is a suggestion to your current vendor.</p>
+<p>Both are documentation problems, not tool problems. The information and the constraints belong in the repository, in a format any capable reader can understand.</p>
+<h2 id="the-solution-is-not-to-write-seven-files" tabindex="-1">The solution is not to write seven files</h2>
+<p>The solution I built is a single COG -- <code>scripts/cogs/mx-agent-rules.cog.md</code> -- that contains every invariant operating rule for any agent working in this repository. The seven tool-specific files each contain exactly one instruction: read the COG first, and apply what it says.</p>
+<pre><code>CLAUDE.md  ──────────────────────────────┐
+GEMINI.md  ──────────────────────────────┤
+AGENTS.md  ──────────────────────────────┤
+.windsurfrules  ─────────────────────────├──► scripts/cogs/mx-agent-rules.cog.md
+.cursor/rules  ──────────────────────────┤        (the only place rules live)
+.github/copilot-instructions.md  ────────┤
+.continue/config.md  ────────────────────┘
+</code></pre>
+<p>Each adapter is ten to fifteen lines: what the repository is, where the rules live, which document wins on conflict. No rules are duplicated. When the link-depth formula changes, I update the COG once. Every tool that boots into this repository next picks up the change.</p>
+<h2 id="the-document-does-not-need-to-know-which-tool-will-read-it" tabindex="-1">The document does not need to know which tool will read it</h2>
+<p>There is one more problem to solve. If the rule document names Claude Code or Cursor specifically, it is no longer runtime-agnostic -- it has just hidden the coupling in a different place.</p>
+<p>The solution is a <code>x-mx-runtimeProbe</code> block in the COG's frontmatter. It lists the environment signals that identify each known runtime, in priority order:</p>
+<pre><code class="language-yaml">x-mx-runtimeProbe:
+  instruction: &quot;Work through these signals in order. First match is your identity.&quot;
+  signals:
+    - env: CLAUDE_CODE_VERSION
+      identity: claude-code
+    - env: CURSOR_SESSION_ID
+      identity: cursor
+    - env: COPILOT_AGENT
+      identity: github-copilot
+    - env: WINDSURF_SESSION
+      identity: windsurf
+    - env: CONTINUE_SESSION_ID
+      identity: continue
+    - env: GEMINI_CLI_VERSION
+      identity: gemini-cli
+    - fallback:
+      identity: unknown-agent
+      action: flag-and-continue
+</code></pre>
+<p>The COG never names a tool in its rules. Instead, it says: probe your environment, identify yourself, then look up the notes column of the rules table for anything that applies to your identity specifically. The universal rules apply regardless.</p>
+<p>This is runtime-agnostic in the strongest sense. The document does not assume which tool will read it. The tool identifies itself by reading the document.</p>
+<h2 id="why-the-pre-web-analogy-is-exact" tabindex="-1">Why the pre-web analogy is exact</h2>
+<p>Before HTML, your Word document could not be opened in WordPerfect. Your Lotus 1-2-3 spreadsheet was stranded when you moved to Excel. Content and tool were fused. HTML broke that coupling. The document declared what it was. Any browser could render it.</p>
+<p>AI tooling is at exactly the pre-HTML moment. Every tool has invented its own skill file format. None are compatible. The content -- your hard-won instructions, the constraints you refined over months, the process knowledge encoded in a good skill -- is stranded on the tool you happened to be using when you wrote it.</p>
+<p>COGs are the HTML moment for agent instructions. A COG declares what it is and what an agent should do with it. Any capable agent can act on it. The format wins when it is portable, not when any one tool is better.</p>
+<h2 id="the-cost-is-hidden-until-it-isnt" tabindex="-1">The cost is hidden until it isn't</h2>
+<p>With one AI tool and one workflow, runtime-specific skills look fine. The cost is invisible.</p>
+<p>The cost appears when:</p>
+<ul>
+<li><strong>You switch tools.</strong> Migration cost: rewrite all your skills from scratch.</li>
+<li><strong>You use multiple tools in the same repository.</strong> Coordination cost: keep N formats in sync indefinitely.</li>
+<li><strong>A tool is acquired or deprecated.</strong> Stranded cost: all your skills are worthless.</li>
+<li><strong>You need an audit trail of what an agent was authorised to do.</strong> Compliance cost: the authorisation lived in a vendor config, not in the repository. It is not version-controlled, not reviewable, not verifiable.</li>
+<li><strong>A colleague uses a different tool.</strong> Collaboration cost: you cannot share the skill set.</li>
+</ul>
+<p>None of these are edge cases. They are the normal trajectory of any team that uses AI tooling over a multi-year horizon.</p>
+<h2 id="the-instruction-should-outlast-the-tool" tabindex="-1">The instruction should outlast the tool</h2>
+<p>A good rule file is valuable. It encodes judgment -- when to run a check, what to verify first, where the boundaries are, what constitutes done. That judgment is hard-won. It should not be stranded when your tooling changes.</p>
+<p>The seven-format problem in this repository took one afternoon to solve. The adapter files took minutes to write. The COG -- the actual rules -- took longer, because writing rules that are correct takes time and thought. That is as it should be. The thinking belongs in the document. The document belongs in the repository. The repository belongs to no vendor.</p>
+<p>Write your rules as COGs. Let the document travel with the repository, not with the tool.</p>
+<p>This is also why we need MX as a machine understanding standard, not just as a practice. A standard gives the <code>x-mx-runtimeProbe</code> block a stable meaning that every tool can implement without central coordination. Without the standard, every tool has to agree bilaterally on every convention. With the standard, the document declares itself and any conformant reader knows what to do.</p>
+<p>That is the lesson seven boot files taught in one afternoon.</p>
+<hr>
+<p><em>MX COGs are documented at <a href="https://tg.community">tg.community</a>. The action-doc specification is part of the MX Cogs draft note. The <code>mx-agent-rules.cog.md</code> and adapter files described in this post are in the MX-hub repository.</em></p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
