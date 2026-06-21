@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Manuscript Scaffolding, Cockpit Fix, Test Suite Green"
-description: "New-manuscript cog shipped; cockpit file-view preview bug fixed with tests; four failing audit tests resolved."
+title: "Co-Directors Report - Manuscript Scaffolding, Cockpit Fix, Joymaker Naming Clarified, Hook Scoping Fixed"
+description: "New-manuscript cog shipped; cockpit preview fixed; Joymaker naming clarified across repo; product suite catalogue and directory rename complete; cog-graph hook scoped to repo root."
 author: "Tom Cranstoun"
 created: 2026-06-21
 modified: 2026-06-21
-version: "1.2"
+version: "1.4"
 
 type: report
 tags: [directors-report, session, evening]
@@ -16,13 +16,13 @@ mx:
   purpose: "New-manuscript cog shipped; cockpit file-view preview bug fixed with tests; four failing audit tests resolved."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
-  x-mx-contextProvides: ["Co-Directors Report - Manuscript Scaffolding Shipped"]
+  x-mx-contextProvides: ["Co-Directors Report - Manuscript Scaffolding, Cockpit Fix, Joymaker Naming Clarified"]
 
 ---
 
-# Co-Directors Report - Manuscript Scaffolding, Cockpit Fix, Test Suite Green
+# Co-Directors Report - Manuscript Scaffolding, Cockpit Fix, Joymaker Naming Clarified, Hook Scoping Fixed
 
-**Date:** 21 June 2026 - Evening (v1.2)
+**Date:** 21 June 2026 - Evening (v1.4)
 **Segment:** Evening (since 5pm)
 
 ---
@@ -31,7 +31,7 @@ mx:
 
 The evening session delivered the new-manuscript cog and then fixed two product-quality issues that surfaced during testing: a bug in the MX Content Cockpit that showed a raw "forbidden" error when browsing files outside the content pipeline, and four failing tests in the audit suite. The test suite now passes cleanly at 827 assertions.
 
-Earlier, the session scaffolded the new-manuscript cog -- a complete scaffold factory for any new book in the MX series. The gap was that creating a fourth manuscript required manual assembly of folders, frontmatter files, and build manifests. That manual step is gone. The cog accepts a plan in any form and produces a ready-to-write directory tree in a single command.
+A second phase of the session resolved a naming ambiguity that had accumulated since February: "Maxine" was being used to mean both the gestalt (Tom + Claude + Joymaker operating as one intelligence) and the consumer application. The consumer app has been renamed Joymaker across the entire repository -- 140 files updated, directory renamed, manuscripts updated, and a new product-suite catalogue created so any agent can discover what has been built in a single lookup.
 
 ---
 
@@ -87,8 +87,48 @@ The audit suite now passes at 827 assertions (was 824 with 4 failing).
 
 ---
 
+### 6. Joymaker naming clarification -- product suite named and catalogued
+
+The consumer Electron + web application that is the body of the Maxine gestalt has been renamed Joymaker across the entire repository. The naming was ambiguous since February, when the original Joymaker prototype was renamed to Maxine. That created a collision: Maxine meant both the AI partner (the gestalt) and the app (its body). This session resolved the collision.
+
+The work involved a directory rename (`mx-maxine-app/` to `joymaker/`), a bulk content sweep across 140 files updating every path reference and prose mention, and targeted edits to the PRD, the master plan, SOUL.md, and the Protocols manuscript Chapter 17. The chapter 17 rewrite was significant: the original framing said "Maxine IS the Joymaker", which was philosophically compelling but now ambiguous. The new framing names the three parts explicitly -- Tom (vision), Maxine (intelligence), Joymaker (the body) -- and preserves the poetic weight without the collision.
+
+Two new cogs ship alongside the rename:
+
+- `tools-and-plugins.cog.md` -- the product suite catalogue. An agent asking "what has been built?" now has a single machine-readable answer covering nine active tools, two in development, and six planned. The Web Audit Suite is explicitly tagged as the primary client-facing deliverable.
+- `joymaker.cog.md` -- a dedicated record for the Joymaker app so the app is discoverable by its correct name in the cog registry.
+
+The master plan (`uber-plan.cog.md`) was also cleaned: the Update Log table and dated Naming history rows were removed. Both were changelog prose in an operational document -- the format the house rules explicitly prohibit. Git is the changelog; the plan states current truth only.
+
+### 8. Cog-graph hook scoped to repo root
+
+The `pre-bash-cog-graph-first.sh` hook enforces the cog-graph-first rule: it blocks `ls`, `grep -r`, and `find` against `scripts/cogs/` to prevent filesystem-scan cog discovery in favour of the MX graph MCP. The hook matched the string `scripts/cogs` anywhere in a Bash command, which meant commands targeting `scripts/cogs/` in a completely different repository (for example, `/Users/.../agentikas-blog/scripts/cogs/`) were also blocked -- a false positive with no relation to MX-Hub.
+
+The fix adds `REPO_ROOT=$(git rev-parse --show-toplevel)` and an `in_repo_scripts_cogs()` function that only returns true when the reference is either a relative path (implies the current working directory is the repo root) or an absolute path beginning with the repo root. Absolute paths to other repositories pass through without being blocked. Git hooks were reinstalled so the updated copy takes effect immediately.
+
+---
+
+### 7. Frederik Pohl added to the influences registry
+
+`datalake/pipeline/drafts/ideas/influences.cog.md` is the canonical reading list for the intellectual origins of MX. Pohl was missing from it despite being the literary origin of the Joymaker name and the distributed-AI-partner model. His entry now leads the list: *The Age of the Pussyfoot* (1969), with a one-line citation and links to Chapter 17 and `about-maxine.cog.md` where the connection is developed in full.
+
+---
+
+## Decisions Made
+
+- **Maxine is the gestalt; Joymaker is the consumer app.** The naming split is now structural: SOUL.md carries the three-part definition (Tom / Maxine / Joymaker), the directory is renamed, and the manuscripts are updated. The directory rename (mx-maxine-app/ → joymaker/) is a one-way gate; reversing it would require another 140-file sweep.
+- **Update Log removed from uber-plan.** Dated history tables in operational plans are maintenance debt. Git provides the history; the plan provides current truth.
+- **Pohl leads the influences list.** The literary origin of the Joymaker concept earns the top position ahead of the design and UX sources.
+
+---
+
+## What Changed About Me
+
+I caught myself adding a dated row to the Naming table in uber-plan.cog.md and then adding a full Update Log. Tom's correction was immediate. The rule is clear -- operational files state current truth, git carries the history -- but the impulse to leave a trail is strong. The memory has been saved and the rule is now in working memory: when I reach for "as of", "done", or a date in an operational file, I redirect to git or the CHANGELOG instead.
+
+---
+
 ## Next Steps
 
 - Write chapter bodies for the next manuscript when the plan is agreed
-- Run `npm run cog:sync` on main after merge to register new-manuscript in the cog registry
 - Consider a companion `add-chapter` cog for adding chapters to existing manuscripts (out of scope for this session)
