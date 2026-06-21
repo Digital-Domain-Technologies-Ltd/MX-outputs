@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Graph Query-Complete: Find Every Related Surface in One Pass"
-description: "The MX graph can now find all surfaces related to any feature change in a single query pass, making the update-cogs-and-docs workflow graph-driven rather than manual."
+title: "Co-Directors Report - Morning: Graph Query + Build Infrastructure Documentation"
+description: "Two sessions: graph query completeness landed in the first; a definitive build infrastructure guide and dev blog enrichment landed in the second."
 author: "Tom Cranstoun"
 created: 2026-06-21
 modified: 2026-06-21
-version: "1.0"
+version: "1.1"
 
 mx:
   status: active
@@ -16,10 +16,10 @@ mx:
   purpose: "The MX graph can now find all surfaces related to any feature change in a single query pass, making the update-cogs-and-docs workflow graph-driven rather than manual."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
-  x-mx-contextProvides: ["Co-Directors Report - Graph Query-Complete: Find Every Related Surface in One Pass"]
+  x-mx-contextProvides: ["Co-Directors Report - Morning: Graph Query + Build Infrastructure Documentation"]
 ---
 
-# Co-Directors Report - Graph Query-Complete: Find Every Related Surface in One Pass
+# Co-Directors Report - Morning: Graph Query + Build Infrastructure Documentation
 
 **Date:** 21 June 2026 - Morning
 **Segment:** Morning (since midnight)
@@ -27,6 +27,26 @@ mx:
 ---
 
 ## Summary
+
+Two sessions ran this morning. The first made the MX graph answer "what do I need to update when this feature changes?" in a single query pass rather than by manual prose search. The second produced a definitive reference for how to extend the repository's own infrastructure - the single-contract pattern, the four foundation modules, the enforcement layers, and the generated index rules - and put a readable summary of that reference directly into the developer blog.
+
+---
+
+## Session 2 - Build Infrastructure Documentation
+
+### What Was Done
+
+A new cog, `how-to-build-for-the-repo`, documents the non-optional architectural patterns every contributor must follow when adding a script, validator, hook, or index to the repository. It covers the single-contract pattern (one module owns a rule; all consumers import from it), the four foundation modules that underpin the metadata infrastructure, the two-layer enforcement system (write-boundary hooks and pre-push gates), the three preconditions for generated index regeneration (main branch, fat clone, installed dependencies), and a condensed pre-ship checklist.
+
+The UBERCOG, README.md, and `manual-repository-architecture.cog.md` all received a reference to the new cog so any agent or developer entering the repository via those surfaces is routed to it before building anything. The developer blog index was updated with a full inline summary of the principles in chatty prose, removing the need for a separate link - readers get the substance directly on the page.
+
+### Why It Matters
+
+The repository self-enforces its structural rules mechanically, but until now the underlying design rationale was distributed across CLAUDE.md, the architecture cog, and individual gate comments. A new contributor or a fresh AI session had no single place to read "here is how this infrastructure is designed, and here is why". That gap is the difference between a contributor who understands the system and one who violates a pattern without knowing it exists. The new cog closes that gap. The dev blog enrichment ensures the principle is accessible to developers who would not naturally open a cog file.
+
+---
+
+## Session 1 - Graph Query Completeness
 
 The MX graph can now answer the question "what do I need to update when this feature changes?" in a single query pass rather than by manual prose search. Three new capabilities landed: a backlinks tool that finds every surface referencing a given cog, a `covers` field that lets blog posts declare what features they document, and automatic synonym expansion so a search for "validation" also finds "audit", "verification", and related terms. Blog drafts and manuscript chapters are now first-class graph nodes, which means 331 previously invisible surfaces are now queryable and can be discovered when running an update sweep.
 
