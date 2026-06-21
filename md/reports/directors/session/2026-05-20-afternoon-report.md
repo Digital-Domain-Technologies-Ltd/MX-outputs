@@ -6,17 +6,18 @@ created: 2026-05-20
 modified: 2026-05-20
 version: "1.1"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-20-afternoon-report.md
   purpose: "Afternoon session: third-party-iframe detection extended into a class-of-finding vendor-DOM detector. New curated registry, sidecar inventory builder, regression suite, plus a real-data bug caught and closed during smoke-test."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Vendor-DOM Detection Generalised Across the Audit Stack"]
+
 ---
 
 # Co-Directors Report — Vendor-DOM Detection Generalised Across the Audit Stack

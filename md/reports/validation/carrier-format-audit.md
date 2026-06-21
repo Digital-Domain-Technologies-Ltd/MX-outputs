@@ -6,11 +6,12 @@ created: 2026-06-09
 modified: 2026-06-09
 version: "1.0"
 
+type: report
+tags: [carrier-format, compliance, metadata, audit]
 mx:
   status: active
-  contentType: report
   reportType: audit
-  tags: [carrier-format, compliance, metadata, audit]
+
 ---
 
 # Carrier Format Compliance Audit

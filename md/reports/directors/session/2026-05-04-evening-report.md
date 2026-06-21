@@ -6,17 +6,18 @@ created: 2026-05-04
 modified: 2026-05-04
 version: "1.1"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-04-evening-report.md
   purpose: "Evening segment: shipped a site-wide HTML hygiene gate, completed the semantic-HTML div-soup remediation, published the new The Gathering community section, iterated audit-PDF margins and wrapping policy, and shipped an opt-in LLM Attribution Sample feature with collector + judge."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - HTML hygiene gate, div soup sweep, the-gathering section, audit-PDF margins, LLM attribution"]
+
 ---
 
 # Co-Directors Report — HTML hygiene gate, div soup sweep, the-gathering section, audit-PDF polish, LLM attribution

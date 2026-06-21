@@ -16,6 +16,7 @@ cogHeader:
   runtime: https://mx.allabout.network/drafts/cog-runtime.md
   runtimeDoc: https://mx.allabout.network/drafts/cog-runtime.md
 
+type: info-doc
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/drafts/cog-spec.v1.md
   purpose: "The cog file format, artefact model, and verification algorithm."
@@ -23,6 +24,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Cog Specification"]
+
 ---
 
 # Cog Specification
@@ -902,4 +904,4 @@ YAML 1.2 Specification, <https://yaml.org/spec/1.2.2/>.
 
 CommonMark Specification (for fenced code block syntax), <https://commonmark.org/>.
 
-<!-- cog-spec-sync: 2026-06-07-a -->
+<!-- cog-spec-sync: 2026-06-21-a -->

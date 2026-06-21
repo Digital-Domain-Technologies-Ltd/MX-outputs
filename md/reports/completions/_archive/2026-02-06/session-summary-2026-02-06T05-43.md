@@ -7,8 +7,8 @@ sessionEnd: "2026-02-06T05:43:49Z"
 duration: "~7 minutes"
 author: Tom Cranstoun
 
+type: "configuration"
 mx:
-  contentType: "configuration"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-06/session-summary-2026-02-06T05-43.md
   purpose: "Manual installation of playground-sync MCP server and skill"
@@ -16,6 +16,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Manual installation of playground-sync MCP server and skill"]
+
 ---
 
 

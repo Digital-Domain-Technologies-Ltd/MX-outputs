@@ -5,6 +5,7 @@ description: "Morning session report. Completed Phase B of the MX Journey Stage 
 created: "2026-03-06"
 version: "1.0"
 author: "Tom Cranstoun"
+type: info-doc
 mx:
   x-mx-segment: "morning"
   audience: "business"
@@ -14,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - Journey Stage Documentation, Configurable Thresholds, and Executive Summary Fix"]
+
 ---
 
 

@@ -5,6 +5,7 @@ created: "2026-02-10"
 version: "1.0"
 author: Tom Cranstoun
 
+type: info-doc
 mx:
   audience: business
   confidential: true
@@ -14,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - 10 February 2026 (Session 4: MX Vision 2026)"]
+
 ---
 
 

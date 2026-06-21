@@ -6,9 +6,11 @@ created: 2026-01-15
 modified: 2026-02-09
 version: "1.0"
 
+type: info-doc
 mx:
   status: draft
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/books/appendices/code-examples/README.md
+
 ---
 
 # AI-Native Website Code Examples

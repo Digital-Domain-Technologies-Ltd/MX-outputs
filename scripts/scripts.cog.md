@@ -17,12 +17,12 @@ cogHeader:
   spec: https://mx.allabout.network/cog.html
   runtime: https://mx.allabout.network/cog-runtime.html
 
+type: info-doc
+tags: [scripts, tooling, manuscript, uniqueness, index, determinism, cog]
 mx:
   status: active
-  contentType: info-doc
   x-mx-category: output-scripts
   audience: [humans, machines, agents]
-  tags: [scripts, tooling, manuscript, uniqueness, index, determinism, cog]
   license: proprietary
   maintainer: "info@cognovamx.com"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/scripts/scripts.cog.md
@@ -39,6 +39,7 @@ mx:
     - "Why the manuscript index is deterministic and safe to commit"
   x-mx-prov-authored-by: human
   x-mx-prov-ai-assistance: editorial-and-implementation
+
 ---
 
 # MX Output Scripts

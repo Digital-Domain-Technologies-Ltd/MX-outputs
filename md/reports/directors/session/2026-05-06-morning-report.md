@@ -6,17 +6,18 @@ created: 2026-05-06
 modified: 2026-05-06
 version: "1.0"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-06-morning-report.md
   purpose: "Morning session completing the MX positioning sweep: protocols manuscript, gathering drafts, audit templates, and site HTML all now reflect machines-not-AI-agents framing"
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Corrected Core Thesis Sweep Complete"]
+
 ---
 
 # Co-Directors Report — Corrected Core Thesis Sweep Complete

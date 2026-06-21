@@ -6,17 +6,18 @@ created: 2026-06-18
 modified: 2026-06-18
 version: "1.0"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-18-afternoon-report.md
   purpose: "Added full-LLM mode to the batch audit orchestrator and launched all 31 known prospect domains for overnight auditing."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Batch Audit Launch and Pipeline Upgrade"]
+
 ---
 
 # Co-Directors Report - Batch Audit Launch and Pipeline Upgrade

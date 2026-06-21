@@ -6,17 +6,18 @@ created: 2026-06-12
 modified: 2026-06-12
 version: "1.0"
 
+type: report
+tags: [session-summary, completions, bizdev, crm, pitches]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [session-summary, completions, bizdev, crm, pitches]
   purpose: "Close-out record for the 12 June 2026 evening business-development session: what shipped, what is open, what the next session needs to know."
   stability: stable
   runbook: "Session record. Read for context on what this session shipped; do not edit after close."
   x-mx-contextProvides: ["Session Summary - Six-Week Capability Story and IDHL CRM Enrichment"]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-06-12/session-summary-evening-bizdev.md
+
 ---
 
 # Session Summary - Six-Week Capability Story and IDHL CRM Enrichment

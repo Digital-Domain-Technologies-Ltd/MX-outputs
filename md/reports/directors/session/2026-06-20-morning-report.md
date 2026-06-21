@@ -6,17 +6,18 @@ created: 2026-06-20
 modified: 2026-06-20
 version: "1.0"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-20-morning-report.md
   purpose: "Introduced PHR_ token namespace for deterministic phrase generation in audit reports; fixed n/a score bug in Executive Summary; found and fixed construction leaks across three published blog posts."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - PHR_ deterministic phrase tokens, score bug fix, blog construction leaks"]
+
 ---
 
 # Co-Directors Report - Deterministic Phrase Tokens, Score Bug Fix, and Blog Construction Leaks

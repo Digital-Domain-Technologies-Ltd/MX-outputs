@@ -6,17 +6,18 @@ created: 2026-05-06
 modified: 2026-05-06
 version: "1.0"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-06-afternoon-report.md
   purpose: "New WhatsApp cover image shipped to all three free-book PDF formats; full-bleed CSS bug fixed; pypdf 6.x merge regression resolved."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report -- Free-Book Cover and PDF Pipeline Fix"]
+
 ---
 
 # Co-Directors Report -- Free-Book Cover and PDF Pipeline Fix

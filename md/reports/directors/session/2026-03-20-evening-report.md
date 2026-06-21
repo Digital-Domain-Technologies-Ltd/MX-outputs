@@ -3,6 +3,7 @@ title: "Co-Directors Report — Field Dictionary Housekeeping"
 created: "2026-03-20"
 version: "1.0"
 author: Tom Cranstoun
+type: info-doc
 mx:
   x-mx-segment: "evening"
   audience: business
@@ -12,6 +13,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - Field Dictionary Housekeeping"]
+
 ---
 
 # Co-Directors Report — Field Dictionary Housekeeping

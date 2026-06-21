@@ -6,17 +6,18 @@ created: 2026-06-11
 modified: 2026-06-11
 version: "0.1"
 
+type: blog-post
+tags: [language, ser-estar, copula, aspect, form-and-meaning, permanence, inference, linguistics, mx, machine-experience]
 mx:
   status: draft
-  contentType: blog-post
   audience: [business, humans, machines]
   targetReaders: "Readers of the language series who want the single sharpest example in full, plus anyone who has watched a machine state a passing fact about them as though it were a permanent one. Writers, brand owners, and the engineers responsible for how a system describes the world."
-  tags: [language, ser-estar, copula, aspect, form-and-meaning, permanence, inference, linguistics, mx, machine-experience]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/blog/2026-06-11-two-ways-to-be.md
   purpose: "Take the ser/estar distinction the previous post set aside and give it a full treatment: show that the permanent-versus-temporary fork English collapsed into a single 'is' is exactly the fork machines fall into hardest, reading a temporary state as a permanent fact, and that MX's job is to put the fork back as form."
   stability: draft
   runbook: "Published article. Read as narrative; the argument is the content."
   x-mx-contextProvides: ["Two Ways to Be: What Spanish Knows That English Forgot"]
+
 ---
 
 # Two Ways to Be: What Spanish Knows That English Forgot

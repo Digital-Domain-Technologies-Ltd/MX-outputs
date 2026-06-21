@@ -3,11 +3,11 @@ title: "Book Consolidation — All Publications Moved to Datalake"
 created: "2026-02-13"
 
 author: Tom Cranstoun
+type: "refactoring"
 mx:
   sessionStart: "2026-02-13T14:00:00Z"
   sessionEnd: "2026-02-13T15:57:00Z"
   duration: "~2 hours"
-  contentType: "refactoring"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-13/session-summary-2026-02-13T15-57.md
   purpose: "Book Consolidation - All Publications Moved to Datalake"
@@ -15,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Book Consolidation - All Publications Moved to Datalake"]
+
 ---
 
 # Session Summary: Book Consolidation — All Publications Moved to Datalake

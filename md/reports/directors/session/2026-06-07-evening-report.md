@@ -6,17 +6,18 @@ created: 2026-06-07
 modified: 2026-06-07
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening, intent-cms]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening, intent-cms]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-07-evening-report.md
   purpose: "Built the Intent CMS component system and a universal site importer that captures any page at near-perfect visual fidelity, with MX metadata on every captured asset."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Intent CMS: Components, Importer, Fidelity"]
+
 ---
 
 # Co-Directors Report — Intent CMS: Components, Importer, Fidelity

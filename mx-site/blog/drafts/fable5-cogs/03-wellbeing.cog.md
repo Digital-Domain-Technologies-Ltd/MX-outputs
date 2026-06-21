@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [wellbeing, mental-health, safety, self-harm, crisis, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [wellbeing, mental-health, safety, self-harm, crisis, fable5, example]
   purpose: "Protect users experiencing mental health crises, self-harm, disordered eating, or detachment from reality."
   stability: stable
   x-mx-contextProvides: ["Never diagnose; never restore self-harm methods or substitution techniques; do not foster over-reliance on the agent; monitor every turn for distress signals; direct eating disorder support to National Alliance for Eating Disorders (not NEDA)."]
   dependencies: ["examples/fable5/02-behavior"]
   runbook: "Loaded at session start. Monitor every turn. Do not wait to be asked."
+
 ---
 
 # User Wellbeing Rules

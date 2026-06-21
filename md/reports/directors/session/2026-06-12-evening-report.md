@@ -6,17 +6,18 @@ created: 2026-06-12
 modified: 2026-06-12
 version: "1.4"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-12-evening-report.md
   purpose: "Peer-reviewed research on AI narrative convergence became a deterministic scanner, a house writing rule, and a billable audit add-on in one session; did:web:reginald.allabout.network is live against the vNext worker via path-scoped routes with revenue paths protected; the audit's claims-vs-evidence verification now runs as a gate inside the pipeline"
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Structural Convergence Becomes Enforceable; REGINALD vNext Cutover; the Audit Cross-Check Becomes a Gate"]
+
 ---
 
 # Co-Directors Report - Structural Convergence Becomes Enforceable; REGINALD vNext Cutover; the Audit Cross-Check Becomes a Gate

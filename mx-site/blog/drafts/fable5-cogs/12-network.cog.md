@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [network, configuration, access, restrictions, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [network, configuration, access, restrictions, fable5, example]
   purpose: "Describe network access rules and restrictions."
   stability: stable
   x-mx-contextProvides: ["Agent has internet access for web search, web fetch, and API calls. If a network operation fails due to a blocked host, report clearly — do not retry silently or substitute fabricated results. Anthropic API available to Artifacts at https://api.anthropic.com/v1/messages — never pass API keys in Artifact code."]
   dependencies: []
   runbook: "Read at session start. Report blocked-host errors clearly rather than substituting fabricated results."
+
 ---
 
 # Network Configuration

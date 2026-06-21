@@ -14,12 +14,12 @@ cogHeader:
   spec: https://mx.allabout.network/drafts/cog-spec.v1.md
   runtime: https://mx.allabout.network/drafts/cog-runtime.md
   runtimeDoc: https://mx.allabout.network/drafts/cog-runtime.md
+type: specification
+tags: [cog, runtime, specification, agents]
 mx:
   status: active
-  contentType: specification
   partOf: mx-the-gathering
   buildsOn: [cog-spec.v1]
-  tags: [cog, runtime, specification, agents]
   audience: [humans, machines, agents]
   cacheability: permanent
   runbook: "Read after cog-spec.v1.md. This document explains what a cog runtime does at runtime — parsing, validation, contract fingerprinting, witness signing, witness verification, and procedure execution — and how an agent or implementer obtains a working runtime. The reference implementations are catalogued in section 4."
@@ -27,6 +27,7 @@ mx:
   purpose: "What a cog runtime is, what it does, and how to obtain one. Companion to cog-spec.v1."
   stability: stable
   x-mx-contextProvides: ["Cog Runtime"]
+
 ---
 
 # Cog Runtime

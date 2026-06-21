@@ -6,17 +6,18 @@ created: 2026-05-05
 modified: 2026-05-05
 version: "1.4"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-05-afternoon-report.md
   purpose: "Hardened cog enforcement, shipped end-to-end audit pipeline, defaulted PDF engine to Chrome for EAA compliance, generated visa reference letter for Yunus Doğu, refreshed the free-book introduction, consolidated the MX field vocabulary, and overhauled the free-book PDF with TOC dot leaders, section page breaks, and table layout fixes."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Cog enforcement, audit pipeline, PDF engine, visa letter, free-book refresh, field consolidation, free-book PDF overhaul"]
+
 ---
 
 # Co-Directors Report — Cog enforcement, audit pipeline, PDF engine, visa letter

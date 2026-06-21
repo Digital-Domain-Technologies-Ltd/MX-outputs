@@ -6,17 +6,18 @@ created: 2026-06-20
 modified: 2026-06-20
 version: "3.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-20-evening-report.md
   purpose: "Evening session: batch audit hardening, Machine Processing Speed metric, unit tests, dream system protection and repair"
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Batch Audit Infrastructure and Machine Parsability Metric"]
+
 ---
 
 # Co-Directors Report - Batch Audit Infrastructure, Machine Parsability Metric, Dream System Hardening, and PRD Estate Audit

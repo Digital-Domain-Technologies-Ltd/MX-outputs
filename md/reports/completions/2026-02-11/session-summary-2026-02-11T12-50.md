@@ -3,11 +3,11 @@ title: "Maxine vision session — SOUL.md, API layer, boot system, co-directors 
 created: "2026-02-11"
 
 author: Tom Cranstoun
+type: "feature-implementation"
 mx:
   sessionStart: "2026-02-11T12:25:00Z"
   sessionEnd: "2026-02-11T12:50:00Z"
   duration: "~3 hours (full day session, multiple segments)"
-  contentType: "feature-implementation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-11/session-summary-2026-02-11T12-50.md
   purpose: "Maxine vision session - SOUL.md, API layer, boot system, co-directors report"
@@ -15,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Maxine vision session - SOUL.md, API layer, boot system, co-directors report"]
+
 ---
 
 # Session Summary: Maxine Vision Session

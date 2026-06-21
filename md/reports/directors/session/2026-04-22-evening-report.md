@@ -6,17 +6,18 @@ created: 2026-04-22
 modified: 2026-04-22
 version: "7.0"
 
+type: report
+tags: [directors-report, session, evening, security, upgraded-reginald, podcast, dita]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening, security, upgraded-reginald, podcast, dita]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-22-evening-report.md
   purpose: "Built the Boye CMS Experts snapshot; fixed three silent pdf:doc pipeline failures; deepened the mx-audit pipeline with post-consent dialog capture, JSON-LD fact-stability drift detection, and a string of report-polish fixes; added a pre-flight egress probe so audits run behind a VPN/tracker-blocker no longer publish misleading 'site has 62 errors' findings; hardened the submodule reattach script to distinguish safe-discard from true orphan and to reconcile stale local clones; cleaned up 22 superseded outreach and demo artefacts left over from prior sessions. Later in the evening: detected and cleaned a persistent Node.js backdoor that had been resident for six weeks; created the Upgraded-Reginald private repo from the April bundle and mounted it read-only into MX-Hub with a new enforcement hook. Late evening: reframed the DITA+MX podcast deck from 'versus' to 'closing the gaps at the publish transform' in response to the host's brief, adding a reltable-as-graph SVG to both the deck and the companion blog, and fixing a broken `mx marp-regen` dispatcher route while doing it."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Boye Profile, pdf:doc Hardened, Audit Pipeline Deepened, Egress Pre-Flight, Reattach Hardened, Malware Incident, Upgraded-Reginald Launch, DITA Podcast Deck Reframed"]
+
 ---
 
 # Co-Directors Report, Boye CMS Experts Profile, pdf:doc Pipeline Hardened, Egress Pre-Flight

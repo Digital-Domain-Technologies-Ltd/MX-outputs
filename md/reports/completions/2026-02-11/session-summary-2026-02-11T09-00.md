@@ -3,11 +3,11 @@ title: "SOP Reframing, Registry Snapshot, and Universal Cog Executor"
 created: "2026-02-11"
 
 author: Tom Cranstoun
+type: "feature-implementation"
 mx:
   sessionStart: "2026-02-11T07:00:00Z"
   sessionEnd: "2026-02-11T09:00:00Z"
   duration: "~2 hours"
-  contentType: "feature-implementation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-11/session-summary-2026-02-11T09-00.md
   purpose: "SOP Reframing, Registry Snapshot, and Universal Cog Executor"
@@ -15,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["SOP Reframing, Registry Snapshot, and Universal Cog Executor"]
+
 ---
 
 # Session Summary: SOP Reframing, Registry Snapshot, and Universal Cog Executor

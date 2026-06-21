@@ -5,17 +5,18 @@ author: "Tom Cranstoun"
 created: 2026-04-24
 modified: 2026-04-24
 version: "3.0"
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-24-afternoon-report.md
   purpose: "Afternoon session: Leica Microsystems audit completed end-to-end; Frankfurt CMS Summit slides and helper guide updated; audit pipeline hardened; mx-crm contacts unified to one-folder-per-person shape; contractor agreement updated."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report -- Leica Audit, Frankfurt Materials, Contacts Reshape"]
+
 ---
 
 # Co-Directors Report -- Leica Audit, Frankfurt Materials, Contacts Reshape

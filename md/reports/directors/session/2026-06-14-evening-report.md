@@ -6,17 +6,18 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.4"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-14-evening-report.md
   purpose: "Evening covered Gate 25 data-loss fix, prose engine centralisation, Fable 5 blog post published to Zone 2 with WCAG overlay, frontmatter humanizer cog, JS/CSS carrier guides, and Gitea audit delivery infrastructure."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Gate Hardening, Prose Engine, Fable 5 Blog Draft, and Gitea Audit Infrastructure"]
+
 ---
 
 # Co-Directors Report - Gate Hardening, Prose Engine, Fable 5 Publication, and JS/CSS Carrier Guides

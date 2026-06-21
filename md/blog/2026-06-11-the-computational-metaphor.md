@@ -6,17 +6,18 @@ created: 2026-06-11
 modified: 2026-06-11
 version: "0.1"
 
+type: blog-post
+tags: [anthropomorphism, computational-metaphor, form-and-meaning, system-prompts, rlhf, guardrails, ai-literacy, language, trust, mx, machine-experience]
 mx:
   status: draft
-  contentType: blog-post
   audience: [business, humans, machines]
   targetReaders: "Executives and product teams buying or deploying AI, plus the writers and engineers who describe these systems to customers and to each other. Anyone who has nodded along to the sentence 'the AI understands your customers'."
-  tags: [anthropomorphism, computational-metaphor, form-and-meaning, system-prompts, rlhf, guardrails, ai-literacy, language, trust, mx, machine-experience]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/blog/2026-06-11-the-computational-metaphor.md
   purpose: "Argue that anthropomorphic language about AI is not loose talk but a persuasion mechanism that manufactures unearned trust, ground the argument in Baria and Cross (2021) on the Computational Metaphor, and show that MX's insistence on the word 'machine' is the corrective."
   stability: draft
   runbook: "Published article. Read as narrative; the argument is the content."
   x-mx-contextProvides: ["The Word Does the Lying: The Computational Metaphor and the Machines That Don't Think"]
+
 ---
 
 # The Word Does the Lying: The Computational Metaphor and the Machines That Don't Think

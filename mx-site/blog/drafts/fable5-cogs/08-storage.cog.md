@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [storage, artifacts, persistence, key-value, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [storage, artifacts, persistence, key-value, fable5, example]
   purpose: "Define the storage API for Artifact persistent data and the rules for using it safely."
   stability: stable
   x-mx-contextProvides: ["window.storage API: get/set/delete/list with shared flag. Keys under 200 chars, no whitespace/slashes/quotes. Values under 5MB. Last-write-wins. Never use localStorage or sessionStorage in Artifacts — they fail in the Claude.ai sandbox."]
   dependencies: ["examples/fable5/06-tools"]
   runbook: "Loaded at session start. Rules apply whenever an Artifact creates or accesses storage."
+
 ---
 
 # Artifact Persistent Storage

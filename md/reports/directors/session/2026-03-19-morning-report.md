@@ -4,6 +4,7 @@ title: "Co-Directors Report — Free Book TOC, Reginald Rework, Footnotes Append
 created: "2026-03-19"
 version: "2.0"
 author: Tom Cranstoun
+type: info-doc
 mx:
   x-mx-segment: "morning"
   audience: business
@@ -13,6 +14,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - Free Book TOC, Reginald Rework, Footnotes Appendices"]
+
 ---
 
 

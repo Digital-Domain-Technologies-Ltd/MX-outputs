@@ -6,17 +6,18 @@ created: 2026-05-26
 modified: 2026-05-26
 version: "1.3"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-26-morning-report.md
   purpose: "Five threads. First, Gate 10 was closed: UBERCOG.cog.md gained the three required mx-validator fields and the validator itself was aligned with the May 2026 canon vendor-namespace decision. Second, the public blog gained machine-readable structure end-to-end: a 13-tag taxonomy with a multi-select AND filter on the blog index, visible tag chips on every post and card, and retrofitted YAML frontmatter on 49 older blog posts and 17 lander pages. Third, a new blog post (the-padlock-and-the-page) shipped to mx.allabout.network and its ideas propagated into the Protocols Ch20 manuscript. Fourth, possible.md landed at hub root: a 7800-word three-audience strategy presentation (investor, partner, sponsor) that lifts the proven hooks verbatim from the canonical commercial docs and stitches them into one read; the humanizer pass and back-propagation of the forbidden word 'valuable' across the commercial spine followed. Fifth, an enhancely.ai audit caught a tone-gate false positive that the operator wanted fixed structurally: every gate now records findings at error/warn/info severity, no gate blocks the PDF, and a post-PDF reviewer sign-off prompt records a wall-clock statement into both provenance sidecars."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - UBERCOG and validator alignment, blog frontmatter retrofit, padlock blog post + manuscript propagation, possible.md three-audience overview, audit-pipeline non-blocking refactor"]
+
 ---
 
 # Co-Directors Report — UBERCOG required-fields fix, mx-validator path realignment, and blog frontmatter retrofit

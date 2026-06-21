@@ -7,6 +7,7 @@ author: Tom Cranstoun
 audience: business
 confidential: true
 
+type: info-doc
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-23-afternoon-report.md
   purpose: "Co-Directors Report - Handbook Rebrand, Repetition Fixes, and Paprika Studios Audit"
@@ -14,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - Handbook Rebrand, Repetition Fixes, and Paprika Studios Audit"]
+
 ---
 
 # Co-Directors Report — Handbook Rebrand, Repetition Fixes, and Paprika Studios Audit

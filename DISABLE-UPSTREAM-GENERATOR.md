@@ -4,14 +4,15 @@ description: "Runbook for turning off the pandoc pipeline that used to generate 
 author: Tom Cranstoun
 created: 2026-06-11
 modified: 2026-06-11
+type: runbook
 mx:
   status: active
-  contentType: runbook
   audience: [humans]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/DISABLE-UPSTREAM-GENERATOR.md
   purpose: "Give whoever owns the generator repo the exact steps to stop it overwriting the canonical book HTML."
   stability: active
   runbook: "Follow once in the generator/source repo, then enable branch protection here."
+
 ---
 
 # Disable the Upstream Book Generator

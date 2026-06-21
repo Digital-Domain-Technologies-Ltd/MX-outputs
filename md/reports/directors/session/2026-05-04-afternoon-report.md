@@ -6,17 +6,18 @@ created: 2026-05-04
 modified: 2026-05-04
 version: "1.1"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-04-afternoon-report.md
   purpose: "Repo-wide rename of book references (Bible / MX-Bible to MX: The Protocols), removal of dead GitHub URLs the rename would have left behind, a runbook integrity audit that fixed seven broken script claims, and a full 66-page MX Audit Suite run against mx.allabout.network producing a tagged EAA Level 2 PDF."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Bible to Protocols sweep, runbook integrity gate, mx.allabout.network audit"]
+
 ---
 
 # Co-Directors Report — Bible to Protocols sweep, runbook integrity gate, mx.allabout.network audit

@@ -6,17 +6,18 @@ created: 2026-06-09
 modified: 2026-06-09
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-09-evening-report.md
   purpose: "Connected every internal document into one navigable graph, removed two stale files, and added a push-blocking gate so it can never silently fragment again."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - documentation graph 100% connected with an enforcing gate"]
+
 ---
 
 # Co-Directors Report - The documentation graph reaches 100% connected, with a gate to keep it there

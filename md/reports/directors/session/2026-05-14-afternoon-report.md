@@ -6,17 +6,18 @@ created: 2026-05-14
 modified: 2026-05-14
 version: "1.1"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-14-afternoon-report.md
   purpose: "Three afternoon streams: shipped the provenance-gap detector into the audit pipeline; ran it against neomwellbeing.com (first paid-pipeline customer dry-run); froze the first-edition handbook PDF and re-uploaded it to Cloudflare R2 via a corrected wrangler script."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Provenance-gap detector + first neomwellbeing run + handbook first-edition freeze"]
+
 ---
 
 # Co-Directors Report — Provenance-gap detector: deterministic + LLM in the audit pipeline

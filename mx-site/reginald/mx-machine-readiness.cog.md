@@ -101,27 +101,19 @@ metadataFields:
 
 
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
+type: position-paper
+tags: [machine-experience, mx, reginald, the-gathering, cog, machine-readiness, provenance, eu-ai-act]
 mx:
   x-mx-category: mx-content
   # Lifecycle (§6.1)
   status: published
 
   # Classification (§6.9, free-form)
-  contentType: position-paper
 
   # Audience (§6.3, controlled enum)
   audience: [humans, machines]
 
   # Discovery (§6.2)
-  tags:
-    - machine-experience
-    - mx
-    - reginald
-    - the-gathering
-    - cog
-    - machine-readiness
-    - provenance
-    - eu-ai-act
 
   # D5 · Why this document exists. Duple form: a controlled
   # high-level kind, plus a free-form sub-purpose that names
@@ -375,6 +367,7 @@ mx:
   x-mx-prov-ai-assistance: editorial-and-design
   x-mx-prov-confidence-level: argued-position
   x-mx-prov-review-status: pre-review
+
 ---
 
 # Everyone is looking inward.

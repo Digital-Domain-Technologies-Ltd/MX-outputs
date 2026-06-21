@@ -6,16 +6,17 @@ created: 2026-06-11
 modified: 2026-06-11
 version: "1.0"
 
+type: report
+tags: [session-summary, completion, lifecycle, metadata]
 mx:
   status: active
-  contentType: report
   audience: [tech, business]
-  tags: [session-summary, completion, lifecycle, metadata]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-06-11/session-summary-evening-artefact-lifecycle.md
   purpose: "Operational close-out for the evening session: what shipped, what is committed, what is deferred, and what the next session needs to pick up."
   stability: stable
   runbook: "Session close-out. Read for what shipped and what the next session inherits."
   x-mx-contextProvides: ["evening session accomplishments", "deferred work", "next-session handover"]
+
 ---
 
 # Session Summary - Artefact Lifecycle, Drift Fixes, Index Friability

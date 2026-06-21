@@ -6,17 +6,18 @@ created: 2026-06-16
 modified: 2026-06-16
 version: "1.2"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-16-evening-report.md
   purpose: "Evening session building the x-mx- vendor extension namespace PRD, deterministic field scanner, and x-mx-govRef field for code-to-spec traceability."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["x-mx namespace governance session: PRD, scanner, govRef field, four open overlap rulings needed from Tom"]
+
 ---
 
 # Co-Directors Report - x-mx Namespace Governance and Field Scanner

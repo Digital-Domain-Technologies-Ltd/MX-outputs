@@ -5,6 +5,7 @@ description: "Evening session report. PDF pipeline completed, tg.community audit
 created: "2026-03-05"
 version: "3.0"
 author: "Tom Cranstoun"
+type: info-doc
 mx:
   x-mx-segment: "evening"
   audience: "business"
@@ -14,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - PDF Pipeline, tg.community Re-Audit, Tooling Fixes, and MX Journey Stage Assessment"]
+
 ---
 
 

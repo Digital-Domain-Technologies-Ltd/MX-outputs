@@ -6,17 +6,18 @@ created: 2026-05-28
 modified: 2026-05-28
 version: "1.3"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-28-morning-report.md
   purpose: "Morning segment had four strands. (1) Four-site audit rerun validates evening fixes end-to-end. (2) Provenance JSON restructured from activity-first v1 to regime-first v2. (3) Public lead-capture endpoints shipped on mx.allabout.network for the free PDF check and the Certified Operator waitlist; MX Compatible badge tied to Certified Operator status in canon §3.1; alpha REGINALD declared live in canon §10.1; pre-push Gate 7-11 grace period removed (hard from now on); 909 .mx.yaml.md skeletons backfilled to pass the now-hard validator. (4) Audit deliverable polish: one scoring vocabulary across the Balanced Scorecard, TOC forced onto its own page, reviewer findings moved to a sibling sidecar, two pre-existing test failures fixed, a new MX Compatible regression test, and three blog posts on mx-site for engineers, clients, and auditors."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Four-Site Audit Rerun + Provenance v2 + Lead-Capture Endpoints + Hard Gates + Audit Deliverable Polish"]
+
 ---
 
 # Co-Directors Report — Four-Site Audit Rerun Validates Evening Fixes

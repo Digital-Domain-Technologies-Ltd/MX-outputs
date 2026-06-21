@@ -6,17 +6,18 @@ created: 2026-06-11
 modified: 2026-06-11
 version: "0.1"
 
+type: blog-post
+tags: [ai-search, personalization, generative-search, geo, seo, entity, inference, form-and-meaning, mx, machine-experience]
 mx:
   status: draft
-  contentType: blog-post
   audience: [business, humans, machines]
   targetReaders: "Marketers and brand owners watching AI search replace the keyword query, and anyone who has had a machine recommend something to them on the strength of context they never knowingly handed over. Writers responsible for the page about a company; the engineers who decide what that page makes explicit."
-  tags: [ai-search, personalization, generative-search, geo, seo, entity, inference, form-and-meaning, mx, machine-experience]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/blog/2026-06-11-the-desk-in-the-photo.md
   purpose: "Use the Google AI Mode desk-accessories episode to show the series' core failure mode in its newest, most ordinary form: as we give AI search less explicit context, it fills the gap from stale implicit context it already holds, and reports a past state as a present fact. Turn that into the practical instruction — make what is current legible as form, on the page about you, because the machine will otherwise infer it from whatever it has."
   stability: draft
   runbook: "Published article. Read as narrative; the argument is the content."
   x-mx-contextProvides: ["The Desk in the Photo: What the Machine Fills In When You Stop Telling It"]
+
 ---
 
 # The Desk in the Photo: What the Machine Fills In When You Stop Telling It

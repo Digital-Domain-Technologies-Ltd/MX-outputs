@@ -6,17 +6,18 @@ created: 2026-06-05
 modified: 2026-06-05
 version: "1.0"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-05-afternoon-report.md
   purpose: "A site-wide social card, a GEO blog post arguing the tactics backfire, and an audit-report reframe of listicles."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Social Card System and the GEO Self-Defeat Argument"]
+
 ---
 
 # Co-Directors Report - Social Card System and the GEO Self-Defeat Argument

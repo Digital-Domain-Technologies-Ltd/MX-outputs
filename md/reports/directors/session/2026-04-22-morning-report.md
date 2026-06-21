@@ -6,17 +6,18 @@ created: 2026-04-22
 modified: 2026-04-22
 version: "1.1"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-22-morning-report.md
   purpose: "Published a press-release blog post announcing MX: The Handbook and added a robots-disallowed drafts folder under /blog/ to support unlisted work-in-progress."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - MX Handbook Press Release and Private Drafts Area"]
+
 ---
 
 # Co-Directors Report — MX Handbook Press Release and Private Drafts Area

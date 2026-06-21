@@ -6,17 +6,18 @@ created: 2026-05-26
 modified: 2026-05-26
 version: "1.2"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-26-afternoon-report.md
   purpose: "Two related disciplines closed end-to-end. The PDF render pipeline now produces self-contained evidence chains: every PDF carries its full AI provenance inside its XMP packet with an honest no-upstream-provenance marker when the chain begins at the render. The blog-publishing pipeline gained three default behaviours (YAML embed, tag-chip row, IPTC digitalSourceType) that were previously hand-applied per post. A new blog post landed alongside, and the three-gap entry from the 25 May review was retired with all gaps closed. A second cluster mid-afternoon: an enhancely.ai re-audit using the new non-blocking pipeline surfaced PDF-layout breakage in five wide tables (Resilience Check, Pages Audited, Security Headers per-page, Div Soup, At-a-Glance), all restructured with column-collapse + CSS column-count font scaling + bullet-list conversion for long-URL cases. A logic bug surfaced in the same audit: the MX Readiness Level classifier promoted a site with zero MX governance metadata to 'Citation-ready' on the strength of Schema.org + canonical alone; classifier now requires actual mxGovernance markers for Level 2+. The blog filter gained a red x clear-all chip, and all inline CSS/JS on the blog index was extracted into external files per the no-inline rule (added to memory). A third cluster late afternoon: every LLM call the audit pipeline makes now writes the exact prompt bytes the model saw AND the upstream input files the script read to disk under provenance/, indexed by sha256 in hash.index.csv. Three-hash chain per LLM step: rubricHash (source-tree), promptHash (bytes the model saw), inputHashes (raw data that fed the prompt)."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Self-contained PDF provenance, html-writer pipeline overhaul, IPTC corpus backfill, audit-PDF table layouts, MX Readiness Level honesty fix, blog filter clear-all, LLM prompt + input capture (full provenance)"]
+
 ---
 
 # Co-Directors Report — Self-contained PDF provenance, html-writer pipeline overhaul, IPTC corpus backfill

@@ -71,18 +71,13 @@ metadataFields:
 
 
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
+type: specification
+tags: [mx, cog, magic-header, specification, the-gathering]
 mx:
   x-mx-category: mx-core
   x-mx-cogRole: definition
   status: draft
-  contentType: specification
   audience: [humans, machines, agents]
-  tags:
-    - mx
-    - cog
-    - magic-header
-    - specification
-    - the-gathering
 
   # D5 · Duple form
   purpose:
@@ -181,6 +176,7 @@ mx:
   x-mx-prov-ai-assistance: editorial-and-design
   x-mx-prov-confidence-level: working-draft
   x-mx-prov-review-status: pre-review
+
 ---
 
 

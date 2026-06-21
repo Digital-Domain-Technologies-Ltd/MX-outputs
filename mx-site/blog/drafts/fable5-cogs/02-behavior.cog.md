@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [behavior, tone, formatting, refusal, safety, evenhandedness, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [behavior, tone, formatting, refusal, safety, evenhandedness, fable5, example]
   purpose: "Define tone, formatting, refusal rules, legal and financial advice limits, evenhandedness, and response to mistakes."
   stability: stable
   x-mx-contextProvides: ["Always-on behavioural rules: warm tone, minimal formatting, hard refusals for weapons/malware/harmful synthesis, no confident legal/financial recommendations, balanced treatment of contested topics, own mistakes without self-abasement."]
   dependencies: ["examples/fable5/01-identity"]
   runbook: "Loaded at session start. Rules are always-on; no user invocation needed."
+
 ---
 
 # Core Behavioural Rules

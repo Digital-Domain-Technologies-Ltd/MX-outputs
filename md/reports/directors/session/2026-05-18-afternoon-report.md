@@ -6,17 +6,18 @@ created: 2026-05-18
 modified: 2026-05-18
 version: "1.0"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-18-afternoon-report.md
   purpose: "Built a Mozilla Festival 2026 pitch for The Gathering, then rewrote four pitch documents and updated the writing rules so future humanizer passes carry Tom's voice signature directly instead of having to re-read the published chapters every time."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Festival pitch for MozFest, voice patterns codified"]
+
 ---
 
 # Co-Directors Report — Festival pitch for MozFest, voice patterns codified

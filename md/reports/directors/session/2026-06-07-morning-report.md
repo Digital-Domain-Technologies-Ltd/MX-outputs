@@ -6,17 +6,18 @@ created: 2026-06-07
 modified: 2026-06-07
 version: "1.0"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-07-morning-report.md
   purpose: "Turned the content-expiry idea into a deterministic web-audit check and proved it end-to-end against the live mx.allabout.network estate."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Content-Freshness Check, Built and Live"]
+
 ---
 
 # Co-Directors Report — Content-Freshness Check, Built and Live

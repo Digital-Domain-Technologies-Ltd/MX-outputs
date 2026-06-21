@@ -6,17 +6,18 @@ created: 2026-04-28
 modified: 2026-04-28
 version: "2.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-28-evening-report.md
   purpose: "Adobe acquired Semrush for $1.9bn. Two artefacts shipped (vendor-neutral blog and Reginald-named investor note); blog deployed and live; discovery surfaces (llms.txt, llms-full.txt, blog index, sitemap) updated; new llms-understanding.txt corpus added at hub root for AI-agent and reviewer consumption."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Adobe-Semrush response, deploy, and llms-understanding bundle"]
+
 ---
 
 # Co-Directors Report — Adobe-Semrush response, deploy, and llms-understanding bundle

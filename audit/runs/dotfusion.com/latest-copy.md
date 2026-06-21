@@ -23,9 +23,9 @@ htmlPagesAudited: 12
 version: "1.0"
 pipelineVersion: "1.1.0"
 confidential: true
+type: audit-report
 mx:
   status: active
-  contentType: audit-report
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-06-19/dotfusion.com/dotfusion-com-report.md
   maintainer: info@cognovamx.com
@@ -62,6 +62,7 @@ mx:
     frameworks: [EU-AI-Act, UK-ICO-AI-guidance, NIST-AI-RMF, Colorado-AI-Act]
     companion: "dotfusion-com-report.provenance.deterministic.json"
     note: "AI evidence chain (LLM-driven, multi-agent, and human-committed steps). The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPayload; the adjacent .ai.json file is a copy of the same JSON for tooling that prefers file access. The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directive 2019/882 accessibility-conformance evidence; it stays adjacent on disk only (its pointer is in xmp:ProvenanceCompanion)."
+
 ---
 
 **Prepared by:** Tom Cranstoun | CogNovaMX Ltd\

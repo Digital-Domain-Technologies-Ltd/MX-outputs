@@ -6,17 +6,18 @@ created: 2026-06-15
 modified: 2026-06-15
 version: "1.2"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-15-evening-report.md
   purpose: "Adversarial and machine-readability probes wired into audit pipeline; AI-tells probe gains a deterministic English-language guard; three blog posts published to the live site."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline Hardened: Language Guard, Three Posts Published, Probes Wired"]
+
 ---
 
 # Co-Directors Report - Audit Pipeline Hardened: Language Guard, Three Posts Published, Probes Wired

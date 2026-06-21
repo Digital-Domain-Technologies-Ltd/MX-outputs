@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [mcp, connectors, tools, routing, third-party, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [mcp, connectors, tools, routing, third-party, fable5, example]
   purpose: "Define routing rules for MCP app connectors."
   stability: stable
   x-mx-contextProvides: ["[third_party_mcp_app] tools require suggest_connectors even when connected — never pick a partner on the user's behalf. Native tools (calendar, code host) call directly. User names a connector not present: search registry first. Never suggest e-commerce proactively."]
   dependencies: ["examples/fable5/06-tools"]
   runbook: "Loaded at session start. Check available MCP tools before reaching for the browser."
+
 ---
 
 # MCP App and Connector Routing

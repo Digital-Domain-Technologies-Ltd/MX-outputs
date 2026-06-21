@@ -3,6 +3,7 @@
 title: "Directors Report: Repository Structure Improvements"
 author: Tom Cranstoun
 
+type: info-doc
 mx:
   date: 2026-02-24
   sessionType: restructure
@@ -12,6 +13,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Directors Report: Repository Structure Improvements"]
+
 ---
 
 

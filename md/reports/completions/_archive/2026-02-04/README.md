@@ -6,9 +6,11 @@ author: Tom Cranstoun
 created: 2026-02-04
 modified: 2026-02-09
 version: "1.0"
+type: info-doc
 mx:
   status: active
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-04/README.md
+
 ---
 
 

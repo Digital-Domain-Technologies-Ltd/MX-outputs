@@ -6,12 +6,12 @@ created: 2026-04-15
 modified: 2026-04-15
 version: "2.0"
 
+type: report
+tags: [directors-report, session, morning, governance, ssot, field-dictionary, compliance, drift-prevention]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning, governance, ssot, field-dictionary, compliance, drift-prevention]
   isAiGenerated: true
   generatedBy: "claude-opus-4-6"
   reviewedBy: "Tom Cranstoun"
@@ -20,6 +20,7 @@ mx:
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - MX Field Discipline End to End"]
+
 ---
 
 # Co-Directors Report — MX Field Discipline End to End

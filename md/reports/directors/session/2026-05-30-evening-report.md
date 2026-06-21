@@ -6,17 +6,18 @@ created: 2026-05-30
 modified: 2026-05-30
 version: "1.3"
 
+type: report
+tags: [directors-report, session, evening, md-writer, blog-post-cog, watching-the-machines]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening, md-writer, blog-post-cog, watching-the-machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-30-evening-report.md
   purpose: "Four pieces of evening work in sequence. /md-writer landed as the markdown-grade sibling of /html-writer. The watching-the-machines cluster got an end-to-end review and rewrite pass. The series-and-cluster authoring rules then landed as a new section in blog-post.cog.md with both writer skills routing to it. A four-fix compliance cleanup drove the corpus-wide compliance numbers to zero across all five categories."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - /md-writer skill, cluster rewrite, series-and-cluster rules codified, compliance gate cleared to zero"]
+
 ---
 
 # Co-Directors Report — /md-writer Skill Landed; Watching-the-Machines Cluster Reviewed and Rewritten Against Its Own Pattern

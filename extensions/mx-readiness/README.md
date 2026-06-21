@@ -6,14 +6,15 @@ created: 2026-05-31
 modified: 2026-06-03
 version: "0.2.0"
 
+type: info-doc
+tags: [browser-extension, chrome-extension, edge-extension, mx-audit, gemini-nano, ollama, on-device, mx-readiness]
 mx:
   status: active
-  contentType: info-doc
   audience: [humans]
   x-mx-category: mx-tools
-  tags: [browser-extension, chrome-extension, edge-extension, mx-audit, gemini-nano, ollama, on-device, mx-readiness]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/extensions/mx-readiness/README.md
   runbook: "Load the unpacked extension at chrome://extensions or edge://extensions and click the action button on any web page to see the MX-readiness signals and a model summary."
+
 ---
 
 # MX Readiness Inspector

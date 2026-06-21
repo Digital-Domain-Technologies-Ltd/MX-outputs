@@ -11,16 +11,17 @@ description: "Index of all committed audit run outputs under mx-outputs/audit/ru
 created: 2026-06-18
 modified: 2026-06-19
 author: Tom Cranstoun
+type: info-doc
+tags: [audit, index, runs, latest-copy]
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/mx-outputs/main/audit/runs/index.cog.md
   status: published
-  contentType: info-doc
   partOf: audit-runs
   x-mx-category: mx-tool
-  tags: [audit, index, runs, latest-copy]
   audience: [humans, machines]
   stability: stable
   runbook: "Read this cog to discover all audited domains and locate their latest-copy.pdf and latest-copy.md."
+
 ---
 
 # Audit Runs Index

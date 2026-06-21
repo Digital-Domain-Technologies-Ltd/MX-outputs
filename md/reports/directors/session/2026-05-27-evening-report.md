@@ -6,17 +6,18 @@ created: 2026-05-27
 modified: 2026-05-27
 version: "1.1"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-27-evening-report.md
   purpose: "Evening segment hardens the audit deliverable end-to-end (WAF fingerprint, Responsible Person Identifier, full-URL badge), then canonises the responsiblePerson field in the MX dictionary and propagates the recent two-week blog cohort into the free book, handbook v2, Protocols ch07/ch20, and Appendix J."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline Matures, responsiblePerson Canonised, Manuscripts Caught Up"]
+
 ---
 
 # Co-Directors Report — Audit Pipeline Matures: WAF, RPI, Badge

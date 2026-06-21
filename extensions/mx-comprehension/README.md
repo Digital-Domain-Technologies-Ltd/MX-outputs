@@ -6,14 +6,15 @@ created: 2026-05-31
 modified: 2026-06-01
 version: "0.2.0"
 
+type: info-doc
+tags: [chrome-extension, on-device, comprehension, mozfest, demo, gemini-nano]
 mx:
   status: active
-  contentType: info-doc
   audience: [humans]
   x-mx-category: mx-tools
-  tags: [chrome-extension, on-device, comprehension, mozfest, demo, gemini-nano]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/extensions/mx-comprehension/README.md
   runbook: "Load the unpacked extension at chrome://extensions, open a page, type a question, and the on-device model answers from the page content alone. Pair it with the demo pages in ./demo to show a structured page answering with facts where a stripped page can only guess."
+
 ---
 
 # MX Comprehension Probe

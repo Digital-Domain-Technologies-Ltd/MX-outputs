@@ -4,14 +4,15 @@ description: "Working notes for decisions taken and deferred. Currently: the pla
 author: Tom Cranstoun
 created: 2026-06-11
 modified: 2026-06-11
+type: planning-notes
 mx:
   status: active
-  contentType: planning-notes
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/reminders.md
   purpose: "Hold open decisions and migration plans so they are not lost between sessions."
   stability: working
   runbook: "Read for outstanding decisions. Each entry is dated; resolve and strike through when done."
+
 ---
 
 # Reminders & Open Plans

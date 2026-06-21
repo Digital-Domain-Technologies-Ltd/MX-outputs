@@ -7,6 +7,7 @@ author: Tom Cranstoun
 audience: business
 confidential: true
 
+type: info-doc
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-02-afternoon-report.md
   purpose: "Co-Directors Report - PDF Orphan/Widow Heading Fix"
@@ -14,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - PDF Orphan/Widow Heading Fix"]
+
 ---
 
 # PDF Orphan/Widow Heading Fix

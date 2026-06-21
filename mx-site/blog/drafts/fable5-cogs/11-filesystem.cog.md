@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [filesystem, configuration, permissions, mounts, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [filesystem, configuration, permissions, mounts, fable5, example]
   purpose: "Describe mounted directories and access permissions."
   stability: stable
   x-mx-contextProvides: ["Read-only mounts: /mnt/user-data/uploads, /mnt/transcripts, /mnt/skills/public, /mnt/skills/private, /mnt/skills/examples. Writable: /mnt/user-data/outputs. To modify read-only files, copy to working directory first."]
   dependencies: []
   runbook: "Read at session start. Update the state block when the filesystem configuration changes."
+
 ---
 
 # Filesystem Configuration

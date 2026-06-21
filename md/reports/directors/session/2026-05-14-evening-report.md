@@ -6,17 +6,18 @@ created: 2026-05-14
 modified: 2026-05-14
 version: "1.1"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-14-evening-report.md
   purpose: "Evening session hardened the audit pipeline at source (operator-dialogue refusals, banned-verdict words, two-view performance verdict, PDF page numbers, sidecar names). Late evening landed the annotated Salva partnership meeting record into mx-crm with explainer blocks decorating each topic, published a new mx-site blog post on the GA4 'AI Assistant' traffic channel, and produced a tagged PDF of the meeting notes."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit pipeline upstream fixes + late-evening partnership notes + blog publish"]
+
 ---
 
 # Co-Directors Report — Audit pipeline upstream fixes: source-side guards, two-view performance, readability refactors

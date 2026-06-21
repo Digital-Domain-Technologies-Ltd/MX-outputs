@@ -6,17 +6,18 @@ created: 2026-06-06
 modified: 2026-06-06
 version: "1.0"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-06-morning-report.md
   purpose: "Morning session: the web-audit deliverable made self-consistent and self-improving, and the source-frontmatter contract put in lockstep so a fixer and its gate can never drift."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - The Audit Report That Agrees With Itself"]
+
 ---
 
 # Co-Directors Report - The Audit Report That Agrees With Itself

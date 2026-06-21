@@ -6,17 +6,18 @@ created: 2026-04-16
 modified: 2026-04-16
 version: "2.0"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-16-morning-report.md
   purpose: "Morning segment -- TG-Community submodule integration, then wired the 9-marker served-vs-rendered reachability matrix into the full audit pipeline, and optimised performance achieving a 93% speedup on warm-cache reruns."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report -- Morning: TG-Community integration, marker reachability pipeline, audit performance"]
+
 ---
 
 # Co-Directors Report -- Morning: TG-Community, Marker Reachability, Performance

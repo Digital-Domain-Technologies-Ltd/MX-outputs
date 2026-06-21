@@ -6,17 +6,18 @@ created: 2026-06-18
 modified: 2026-06-18
 version: "2.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-18-evening-report.md
   purpose: "Fixed a Gitea path bug that broke overnight batch audits, added unit tests, and captured the link-depth rule as a permanent cog."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Bug Fix, Tests, and Link-Depth Reference"]
+
 ---
 
 # Co-Directors Report - Bug Fix, Tests, Link-Depth Reference, and Vivid-Planet Dream

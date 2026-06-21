@@ -6,17 +6,18 @@ created: 2026-06-19
 modified: 2026-06-19
 version: "1.2"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-19-evening-report.md
   purpose: "Extended graph to index SOUL.md files and enriched 1015 folder metadata files; added deterministic enrichment, validation, and heal pipeline; fixed Gate 18 for metadata-only changes."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Graph Infrastructure: SOUL Indexing, Folder Enrichment, and CRM Intelligence"]
+
 ---
 
 # Co-Directors Report - Graph Infrastructure, CRM Intelligence, and Canonical MX Positioning

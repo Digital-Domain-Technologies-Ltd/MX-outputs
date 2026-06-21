@@ -6,17 +6,18 @@ created: 2026-06-11
 modified: 2026-06-11
 version: "0.1"
 
+type: blog-post
+tags: [language, evidentiality, grammar, form-and-meaning, provenance, inference, linguistics, mx, machine-experience]
 mx:
   status: draft
-  contentType: blog-post
   audience: [business, humans, machines]
   targetReaders: "Anyone who found the form-versus-meaning argument convincing and wants to see it outside the machine: writers, linguists by curiosity, and the engineers who mark up the web. Also anyone who has enjoyed a fact about a language they will never speak."
-  tags: [language, evidentiality, grammar, form-and-meaning, provenance, inference, linguistics, mx, machine-experience]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/blog/2026-06-11-the-languages-that-wont-let-you-leave-it-implicit.md
   purpose: "Show that the form-versus-meaning distinction at the heart of MX is not a peculiarity of machines but a deep fact about human language: many grammars make obligatory exactly the things English leaves to inference, and the discipline MX asks of a web page is one human languages have practised for thousands of years."
   stability: draft
   runbook: "Published article. Read as narrative; the argument is the content."
   x-mx-contextProvides: ["The Languages That Won't Let You Leave It Implicit"]
+
 ---
 
 # The Languages That Won't Let You Leave It Implicit

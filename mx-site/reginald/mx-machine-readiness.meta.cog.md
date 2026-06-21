@@ -65,19 +65,13 @@ metadataFields:
 
 
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
+type: meta-cog
+tags: [meta-cog, cog-construction, the-gathering, mx-core-metadata, mx-cogs, worked-example]
 mx:
   x-mx-category: mx-content
   x-mx-cogRole: example
   status: published
-  contentType: meta-cog
   audience: [humans, machines]
-  tags:
-    - meta-cog
-    - cog-construction
-    - the-gathering
-    - mx-core-metadata
-    - mx-cogs
-    - worked-example
 
   # D5 · Why this document exists. Duple form.
   purpose:
@@ -188,6 +182,7 @@ mx:
   x-mx-prov-confidence-level: explanatory-companion
   x-mx-prov-review-status: pre-review
   x-mx-prov-version-documented: "2.1"
+
 ---
 
 # Reading the position-paper cog.

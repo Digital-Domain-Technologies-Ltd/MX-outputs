@@ -4,6 +4,7 @@ description: "Morning session: partnership outreach tooling, operational maturit
 author: Tom Cranstoun
 
 created: '2026-03-01'
+type: info-doc
 mx:
   date: 2026-02-14
   x-mx-segment: morning
@@ -14,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - 14 February 2026 (Morning)"]
+
 ---
 
 # Morning Session — 14 February 2026

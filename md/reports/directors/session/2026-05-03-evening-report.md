@@ -6,17 +6,18 @@ created: 2026-05-03
 modified: 2026-05-03
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-03-evening-report.md
   purpose: "The four-cog define-and-document pipeline is complete and the public surface for the audit service has been corrected. The MX framework now has a single normative path at every authoring step, hook-level routing enforcement, and a clean public face."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - MX Coherent End-to-End"]
+
 ---
 
 # Co-Directors Report — MX Coherent End-to-End

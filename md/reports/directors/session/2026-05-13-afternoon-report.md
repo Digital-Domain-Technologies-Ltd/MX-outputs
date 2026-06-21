@@ -6,17 +6,18 @@ created: 2026-05-13
 modified: 2026-05-13
 version: "1.1"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-13-afternoon-report.md
   purpose: "Cleared cog:validate backlog, pruned ten REMINDERS items, shipped a slowest-page re-probe into the audit pipeline, and published the CMS Summit 26 Frankfurt write-up to the blog."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Cog hygiene, slowest-page probe, and CMS Summit write-up"]
+
 ---
 
 # Co-Directors Report — Cog hygiene, slowest-page probe, and CMS Summit write-up

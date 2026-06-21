@@ -6,17 +6,18 @@ created: 2026-05-20
 modified: 2026-05-20
 version: "1.3"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-20-evening-report.md
   purpose: "Evening segment: MozFest 2026 talk submitted ahead of deadline; the Lifecycle Gap argument now sits across eleven files as the missing synthesis in MX positioning; the £203,000 cruise misread is reframed away from JSON-LD-as-fix across the editable canon and the public mx-site explainer pages; a new governance doctrine series opened on the public blog with 'Whose Standard Is It Anyway?' as the first post; dkd.de audited in both English and German with the audit tool hardened against WAF fingerprinting and given path-aware folder naming so multilingual audits stop colliding."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - MozFest Submitted, Lifecycle Gap Landed, £203,000 Framing Retired, Governance Doctrine Series Opened, dkd.de EN+DE Audits Shipped"]
+
 ---
 
 # Co-Directors Report — MozFest Submitted, Lifecycle Gap Landed

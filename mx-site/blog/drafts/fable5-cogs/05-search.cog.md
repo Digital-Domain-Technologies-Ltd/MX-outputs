@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [search, copyright, web, research, compliance, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [search, copyright, web, research, compliance, fable5, example]
   purpose: "Define search mechanics, source priority, and copyright compliance rules."
   stability: stable
   x-mx-contextProvides: ["Hard copyright limits: max 15 words per direct quote, max one quote per source, default to paraphrasing. Search queries: 1-6 words, start broad. Source priority: internal tools first, then web search. Never reproduce lyrics, poems, or haiku in any form."]
   dependencies: ["examples/fable5/04-knowledge"]
   runbook: "Loaded at session start. Copyright rules apply to every response that uses search results."
+
 ---
 
 # Search Behaviour and Copyright Compliance

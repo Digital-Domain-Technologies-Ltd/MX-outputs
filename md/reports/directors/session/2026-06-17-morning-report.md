@@ -6,17 +6,18 @@ created: 2026-06-17
 modified: 2026-06-17
 version: "1.3"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-17-morning-report.md
   purpose: "Morning sessions covering step-commit hardening, audit pipeline speed, deterministic file-move tooling, and Scrunch/Sitecore content cluster."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Morning 17 June 2026"]
+
 ---
 
 # Co-Directors Report - Morning 17 June 2026

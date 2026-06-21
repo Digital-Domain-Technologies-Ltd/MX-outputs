@@ -6,17 +6,18 @@ created: 2026-05-29
 modified: 2026-05-29
 version: "1.3"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-29-afternoon-report.md
   purpose: "Landed the founding-sponsor recognition framing across canon and outreach, productised the Private REGINALD platform as DDT business-plan line 7, formalised a three-layer governance model (Gathering owns standards; CogNovaMX owns franchise rules; founding sponsors choose), confirmed the pragmatic legal-first franchise launch model with the first-operator agreement skeleton drafted, swept the audit pipeline to prefer 'machines'/'SOPs' over 'AI' with selective preservation of 'AI agents' / 'AI assistant' as terms of art, fixed two PDF rendering defects (duplicate title H1; TOC not starting on a new page), then in late-afternoon built three new deterministic AI-tell scanners (copula-avoidance, AI-vocabulary, prose-patterns) wired into the humanizer skill as PRIORITY-1 SCANs D / E / F, extended writing-style.cog.md §5 with a 40-entry web-sourced AI vocabulary table and §6 with an AI-register openers ban list, expanded Pattern 7 and Pattern 8 catalogue entries to match, and timeless-cleaned the Scott opportunities brief with five rounds of humanizer."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Founding-Sponsor Recognition + Three-Layer Franchise Model + Private REGINALD Platform + Audit Pipeline Terminology + Humanizer Toolchain Expansion"]
+
 ---
 
 # Co-Directors Report — Founding-Sponsor Recognition, Three-Layer Franchise Model, Private REGINALD Platform, Audit Pipeline Terminology

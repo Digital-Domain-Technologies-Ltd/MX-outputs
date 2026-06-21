@@ -6,17 +6,18 @@ created: 2026-05-25
 modified: 2026-05-25
 version: "1.1"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-25-morning-report.md
   purpose: "Morning across two halves. First half: audit pipeline gate hardened and every LLM prompt extracted to editable markdown. Second half: PlanB conversation outputs reconciled into canon, Certificate of Genuineness retired across 55 files, Universal Cart blog post written and promoted to published, and the post's ideas propagated through Protocols ch1, ch20, Appendix J, and Appendix M with canonicalUrn ratified in the field dictionary."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit pipeline gate hardened; PlanB conversation outputs landed; Universal Cart blog post published; manuscripts propagated"]
+
 ---
 
 # Co-Directors Report — Audit pipeline hardened; PlanB landed; Universal Cart blog published

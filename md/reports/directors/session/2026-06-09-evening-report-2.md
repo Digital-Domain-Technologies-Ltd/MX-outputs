@@ -6,17 +6,18 @@ created: 2026-06-09
 modified: 2026-06-09
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-09-evening-report-2.md
   purpose: "Fixed a bug that let truncated text reach a finished audit report and added a hard gate so it cannot recur; made the audit recommend declaring a child or adult audience and downscore machine-readability when it has to infer one."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - audit truncation guard and inferred-audience scoring"]
+
 ---
 
 # Co-Directors Report - The audit stops shipping cut-off paragraphs, and starts scoring undeclared audiences

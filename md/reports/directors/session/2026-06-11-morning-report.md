@@ -6,17 +6,18 @@ created: 2026-06-11
 modified: 2026-06-11
 version: "1.0"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-11-morning-report.md
   purpose: "Authored and published a cross-linked three-part blog series on how AI systems read the web, wired into the site's machine-readable index as a lead-gen funnel to the Web Audit Suite."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Three-Part AI-Readability Blog Series Published"]
+
 ---
 
 # Co-Directors Report - Three-Part AI-Readability Blog Series Published

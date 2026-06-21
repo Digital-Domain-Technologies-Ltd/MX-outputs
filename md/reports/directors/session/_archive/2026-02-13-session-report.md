@@ -4,6 +4,7 @@ title: "Co-Directors Report — Block Architecture, Messaging, Field Standardisa
 created: "2026-02-13"
 version: "2.0"
 author: Tom Cranstoun
+type: info-doc
 mx:
   audience: business
   confidential: true
@@ -12,6 +13,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - Block Architecture, Messaging, Field Standardisation, Hook Enforcement"]
+
 ---
 
 

@@ -6,17 +6,18 @@ created: 2026-04-29
 modified: 2026-04-29
 version: "1.3"
 
+type: report
+tags: [directors-report, session, evening-late]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening-late]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-29-evening-late-report.md
   purpose: "Div Soup analyzer ships, fixes flow back into source; tagpdf 0.99y declared unworkable on TL2025 and the tagged-PDF pipeline pivots to headless Chrome with Level 2 XMP injection; corpus-wide tagging gate added (23/0/9)."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Div Soup check shipped; the-author.html and download-intro fixed at source"]
+
 ---
 
 # Co-Directors Report — Div Soup check shipped; the-author.html and download-intro fixed at source

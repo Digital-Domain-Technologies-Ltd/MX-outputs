@@ -6,17 +6,18 @@ created: 2026-05-30
 modified: 2026-05-30
 version: "1.2"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-30-morning-report.md
   purpose: "The morning session covered four pieces of work in sequence. First, the Watching the Machines editorial column landed as six nested draft files on mx-site, paired with a ten-fork mechanical humanizer sweep across every published mx-site HTML file. Second, the /humanizer skill was architecturally separated from mx-canon/ssot/writing-guides/writing-style.cog.md, removing 234 lines of duplicated rule prose and giving each rule a single source of truth. Third, writing-style.cog.md was calibrated against two of Tom's published pieces (CMS Critic and allabout.network); contradictions on em-dashes, sentence-initial conjunctions, and certain vocabulary were left as discipline (rules win); positive patterns surfaced as new Tom-voice Patterns 11 (problem-statement opener) and 12 (parallel demonstration through contrast). Fourth, the new toolchain was applied to a live internal document (the Scott opportunities brief), where the six deterministic scanners returned zero hits and the remaining thirteen fixes came from the rulebook applied by reference (em-dashes, three uses of `aligned`, one `optimise`, and two pre-announced counts)."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Watching the Machines + mechanical humanizer sweep + writing-style separation, calibration, and first applied run"]
+
 ---
 
 # Co-Directors Report — Watching the Machines + Mechanical Humanizer Sweep

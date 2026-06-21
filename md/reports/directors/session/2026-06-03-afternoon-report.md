@@ -6,17 +6,18 @@ created: 2026-06-03
 modified: 2026-06-03
 version: "4.0"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-03-afternoon-report.md
   purpose: "Deterministic infill; Complianz vendor detection; crowdfavorite fixes; framework detection; MX Comprehension Probe suggested questions fixed; Contentful audit delivered"
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report -- Audit Pipeline Quality Overhaul + MX Comprehension Probe Fix + Contentful Audit"]
+
 ---
 
 # Co-Directors Report -- Audit Pipeline Quality Overhaul: Deterministic Conditionals, Vendor Detection, Bug Fixes

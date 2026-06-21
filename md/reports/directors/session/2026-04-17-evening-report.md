@@ -6,17 +6,18 @@ created: 2026-04-17
 modified: 2026-04-17
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening, audit-pipeline, mx-audit, mx.allabout.network]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening, audit-pipeline, mx-audit, mx.allabout.network]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-17-evening-report.md
   purpose: "Evening segment: self-audit of mx.allabout.network ran, surfaced nine discrete tool-side issues plus two client-facing hallucinations. All nine fixed, nine improvements planned and executed, second self-audit validated every fix landed. Long findings tables now ship as sidecar CSV alongside the PDF. Schema vocabulary whitelist refreshed from 125 hand-curated types to the full 933-type schema.org catalogue."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit-pipeline post-mortem, sidecar design, and vocab-drift eliminated"]
+
 ---
 
 # Co-Directors Report — Audit-pipeline post-mortem, sidecar design, and vocab-drift eliminated

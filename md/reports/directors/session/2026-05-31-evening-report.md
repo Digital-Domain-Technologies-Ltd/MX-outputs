@@ -6,17 +6,18 @@ created: 2026-05-31
 modified: 2026-05-31
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-31-evening-report.md
   purpose: "Full-site audit of mx.allabout.network, repair of the broken links it surfaced, and deterministic enforcement so they cannot recur."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit, Link Repair, and Verifier Hardening"]
+
 ---
 
 # Co-Directors Report — Audit, Link Repair, and Verifier Hardening

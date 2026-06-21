@@ -4,6 +4,7 @@ title: "Co-Directors Report — Maxine Vision and Product Infrastructure Complet
 created: "2026-02-11"
 version: "1.0"
 author: Tom Cranstoun
+type: info-doc
 mx:
   audience: business
   confidential: true
@@ -12,6 +13,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - Maxine Vision and Product Infrastructure Complete"]
+
 ---
 
 

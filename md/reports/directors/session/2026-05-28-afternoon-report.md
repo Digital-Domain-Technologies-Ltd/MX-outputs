@@ -6,17 +6,18 @@ created: 2026-05-28
 modified: 2026-05-28
 version: "1.2"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-28-afternoon-report.md
   purpose: "Afternoon had three strands. (1) /audit/ lander added at mx-site root with KEY_PAGES_DIRS extension. (2) /manuscript-propagate skill authored and executed across three books, six appendices, and the DDT business plan. (3) End-to-end audit of our own audit pipeline: ran it against dkd.de/de and typo3.org, found five contradiction classes in the typo3 deliverable, fixed the underlying scripts and templates, added a deterministic cross-section consistency gate, re-ran typo3 and verified all five contradictions closed."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit Lander + Manuscript Propagation + Audit-Pipeline Self-Audit"]
+
 ---
 
 # Co-Directors Report — Audit Lander Adds Third Entry-Point on mx-site

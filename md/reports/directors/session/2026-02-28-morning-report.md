@@ -4,6 +4,7 @@ created: "2026-02-28"
 version: "1.0"
 author: Tom Cranstoun
 
+type: info-doc
 mx:
   x-mx-segment: "morning"
   audience: business
@@ -13,6 +14,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - mx-outputs Type-First Restructure"]
+
 ---
 
 # mx-outputs Type-First Restructure

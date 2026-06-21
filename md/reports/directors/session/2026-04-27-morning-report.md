@@ -6,17 +6,18 @@ created: 2026-04-27
 modified: 2026-04-27
 version: "1.0"
 
+type: report
+tags: [directors-report, session, morning, repo-hygiene, governance]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning, repo-hygiene, governance]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-27-morning-report.md
   purpose: "Morning session 2026-04-27: drained the dormant mx-collaboration submodule, rehomed forward-looking content into canon, retired the proposals pipeline."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - mx-collaboration drain and submodule retirement"]
+
 ---
 
 # Co-Directors Report — mx-collaboration drain and submodule retirement

@@ -6,17 +6,18 @@ created: 2026-04-21
 modified: 2026-04-21
 version: "1.1"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-21-evening-report.md
   purpose: "Added contentsignals.org recognition to the audit pipeline as a positive, informational, non-scoring signal, and reorganised mx-site blog into assets/ and profiles/ subfolders."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Content-Signal awareness + mx-site blog reorg"]
+
 ---
 
 # Co-Directors Report — Content-Signal awareness in audit

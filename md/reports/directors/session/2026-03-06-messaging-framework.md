@@ -5,6 +5,7 @@ description: "Session report. Major revision of the MX Messaging Framework — e
 created: "2026-03-06"
 version: "1.0"
 author: "Tom Cranstoun"
+type: info-doc
 mx:
   x-mx-segment: "late-evening"
   audience: "business"
@@ -14,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - Messaging Framework v2.0"]
+
 ---
 
 

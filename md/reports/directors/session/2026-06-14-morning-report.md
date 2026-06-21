@@ -6,17 +6,18 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.3"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-14-morning-report.md
   purpose: "Morning session: pulled upstream changes, synced submodules, cleared stale branches"
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Repo Housekeeping and Branch Cleanup"]
+
 ---
 
 # Co-Directors Report - Housekeeping, Sitemap Optimisation, and Source Consolidation

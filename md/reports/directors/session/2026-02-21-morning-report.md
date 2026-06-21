@@ -6,6 +6,7 @@ created: 2026-02-21
 modified: 2026-02-21
 version: "1.0"
 
+type: info-doc
 mx:
   status: active
   x-mx-segment: morning
@@ -16,6 +17,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - 2026-02-21 Morning"]
+
 ---
 
 # Co-Directors Report

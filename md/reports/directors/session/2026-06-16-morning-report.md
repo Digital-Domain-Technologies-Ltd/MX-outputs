@@ -6,17 +6,18 @@ created: 2026-06-16
 modified: 2026-06-16
 version: "1.2"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-16-morning-report.md
   purpose: "Empty-sitemap detection and automatic re-crawl shipped; audit index script PRD captured; three new audit deliverables committed."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Faulty-Sitemap Re-crawl and Audit Index PRD"]
+
 ---
 
 # Co-Directors Report - Faulty-Sitemap Re-crawl and Audit Index PRD

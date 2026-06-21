@@ -5,8 +5,10 @@ author: "Tom Cranstoun"
 created: "2026-04-16"
 modified: "2026-04-16"
 
+type: info-doc
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/canon/README.md
+
 ---
 
 # MX Canon — Public Mirror

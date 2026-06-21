@@ -6,17 +6,18 @@ created: 2026-05-01
 modified: 2026-05-01
 version: "1.0"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-01-afternoon-report.md
   purpose: "Completed the baremetal.vc v10 audit report through all gates and PDF; added a run-count limiter and warn-mode threshold to the fierce-critic; updated both audit templates with CogNovaMX's divergent llms.txt text/html recommendation."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Baremetal v10 audit delivered + fierce-critic run limiter"]
+
 ---
 
 # Co-Directors Report — Baremetal v10 audit delivered + fierce-critic run limiter

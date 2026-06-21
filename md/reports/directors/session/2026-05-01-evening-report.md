@@ -6,17 +6,18 @@ created: 2026-05-01
 modified: 2026-05-01
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-01-evening-report.md
   purpose: "Completed two further rounds of audit template guard improvements and ran baremetal VC v13/v14 and a self-audit of mx.allabout.network through the improved pipeline; updated the site llms.txt with six new featured articles."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit pipeline production-ready: v13/v14 runs and self-audit delivered"]
+
 ---
 
 # Co-Directors Report — Audit pipeline production-ready: v13/v14 runs and self-audit delivered

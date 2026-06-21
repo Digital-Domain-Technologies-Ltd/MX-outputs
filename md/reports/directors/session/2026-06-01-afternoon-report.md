@@ -6,17 +6,18 @@ created: 2026-06-01
 modified: 2026-06-01
 version: "1.1"
 
+type: report
+tags: [directors-report, session, afternoon, tool-enhancement, prose-tightening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon, tool-enhancement, prose-tightening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-01-afternoon-report.md
   runbook: "Board-level session summary for afternoon work on MX Comprehension Probe completion and .claude skills prose tightening. Scope: dynamic question generation and haiku-style documentation rewrite."
   purpose: "Completed MX Comprehension Probe dynamic question generation (MozFest demo ready) and rewrote all ~80 .claude skill definitions in austere haiku style (30% line reduction, improved scannability)."
   stability: stable
   x-mx-contextProvides: ["Co-Directors Report - MX Comprehension Probe + Haiku Prose Rewrite"]
+
 ---
 
 # Co-Directors Report — MX Comprehension Probe + Haiku Prose Rewrite

@@ -6,17 +6,18 @@ created: 2026-05-23
 modified: 2026-05-23
 version: "1.4"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-23-evening-report.md
   purpose: "Six streams: the audit-only provenance sidecar became a Reginald-level primitive every pipeline can adopt; five overlapping founder-bio files collapsed into one canonical pair (public + confidential) at repo root; a hub-wide staleness sweep refreshed canon REGINALD positioning, frontmatter dates, drafts terminology, and the tests/ README; a bounded trading-name follow-up sweep corrected 122 files across public HTML, canon, UBERCOG, and the Maxine splash; the audit PDF now ships self-contained with the full AI evidence chain embedded in its XMP metadata under xmp:ProvenanceAiPayload; and the manual Option B (four copy-paste skill commands between Phase 1 and Phase 3) became a single npm command, npm run audit:full, that drives the four LLM skills as sub-agents (three via thin SDK calls, audit-report via headless claude -p) with provenance logged at each step, plus a sibling npm run audit:provenance helper that wraps the correct exiftool -b extraction so the next operator does not trip the column-11 jq error."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Provenance Generalised, Bio Consolidated, Staleness Swept, Trading-Name Sweep Continued, Audit PDF Self-Contained, Audit Driver Automated"]
+
 ---
 
 # Co-Directors Report — Provenance Generalised, Bio Consolidated, Staleness Swept

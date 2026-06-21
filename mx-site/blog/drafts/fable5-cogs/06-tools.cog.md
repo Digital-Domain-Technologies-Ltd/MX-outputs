@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [tools, capabilities, definitions, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [tools, capabilities, definitions, fable5, example]
   purpose: "Enumerate available tools by name, purpose, and class. Read-only reference."
   stability: stable
   x-mx-contextProvides: ["Available tools: web_search, web_fetch, image_search, bash_tool, create_file, str_replace, view, weather_fetch, fetch_sports_data (core); ask_user_input_v0, message_compose_v1, present_files, recipe_display_v0, places_search, places_map_display_v0 (interface); search_mcp_registry, suggest_connectors, recommend_claude_apps (MCP)."]
   dependencies: ["examples/fable5/01-identity"]
   runbook: "Read this COG for context. Invocation rules for each tool class are defined in the action-docs that depend on this COG."
+
 ---
 
 # Available Tool Definitions

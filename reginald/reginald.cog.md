@@ -12,11 +12,11 @@ created: 2026-03-01
 modified: 2026-03-19
 version: "1.0"
 
+type: info-doc
+tags: [reginald, registry, cogs, trust, verification, ai-agents, dns, resolution, machine-experience]
 mx:
   status: active
-  contentType: info-doc
   x-mx-category: reginald
-  tags: [reginald, registry, cogs, trust, verification, ai-agents, dns, resolution, machine-experience]
   audience: [humans, machines]
   license: proprietary
   maintainer: "info@cognovamx.com"
@@ -27,6 +27,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["REGINALD - The Global COG Registry"]
+
 ---
 
 # REGINALD

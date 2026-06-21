@@ -6,17 +6,18 @@ created: 2026-06-08
 modified: 2026-06-08
 version: "1.1"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-08-evening-report.md
   purpose: "Closed the MX required-metadata gap across the published estate with a new deterministic tool, taught the validator the document types that legitimately differ, and removed AI co-authorship corpus-wide."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Machine-Readability Completeness and a Reusable Backfill Tool"]
+
 ---
 
 # Co-Directors Report — Machine-Readability Completeness and a Reusable Backfill Tool

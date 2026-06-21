@@ -3,11 +3,11 @@ title: "ai→sop field rename across entire MX ecosystem"
 created: "2026-02-11"
 
 author: Tom Cranstoun
+type: "refactoring"
 mx:
   sessionStart: "2026-02-11T10:00:00Z"
   sessionEnd: "2026-02-11T12:25:00Z"
   duration: "~2.5 hours"
-  contentType: "refactoring"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-11/session-summary-2026-02-11T12-25.md
   purpose: "ai→sop field rename across entire MX ecosystem"
@@ -15,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["ai→sop field rename across entire MX ecosystem"]
+
 ---
 
 # Session Summary: ai→sop Field Rename Across Entire MX Ecosystem

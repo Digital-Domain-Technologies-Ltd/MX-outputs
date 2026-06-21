@@ -5,6 +5,7 @@ author: "sliccy"
 created: 2026-03-19
 version: "1.0"
 
+type: info-doc
 mx:
   status: active
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-03-19/MX-AUDIT-V2-SUMMARY.md
@@ -13,6 +14,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["mx-audit v2.0 Template Integration Summary"]
+
 ---
 
 # mx-audit v2.0 Template Integration Summary

@@ -6,17 +6,18 @@ created: 2026-04-14
 modified: 2026-04-14
 version: "1.4"
 
+type: report
+tags: [directors-report, session, morning, stripe, webhook, fulfilment, audit, readability, rate-limiter, skills, route-sync]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning, stripe, webhook, fulfilment, audit, readability, rate-limiter, skills, route-sync]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-14-morning-report.md
   purpose: "Morning session: printer email fix with dual-secret verification, strategic blog launch, audit-report pipeline redesigned as two-pass infill-then-rewrite, NEOM Wellbeing audit shipped, blog post audit findings applied, header CTA buttons added, and the Claude Code skill system migrated from legacy JSON to modern folder format with route-sync repaired."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Printer Pipeline, Strategic Blog, Audit Pipeline, and Skill System Modernised"]
+
 ---
 
 # Co-Directors Report — Printer Email Pipeline Hardened and Verified

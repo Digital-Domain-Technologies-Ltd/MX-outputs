@@ -6,17 +6,18 @@ created: 2026-06-21
 modified: 2026-06-21
 version: "1.1"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-21-morning-report.md
   purpose: "The MX graph can now find all surfaces related to any feature change in a single query pass, making the update-cogs-and-docs workflow graph-driven rather than manual."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Morning: Graph Query + Build Infrastructure Documentation"]
+
 ---
 
 # Co-Directors Report - Morning: Graph Query + Build Infrastructure Documentation

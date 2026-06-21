@@ -11,13 +11,13 @@ author: "Tom Cranstoun"
 created: 2026-05-07
 modified: 2026-05-07
 version: "1.0"
+type: migration-note
+tags: [bmv, investor, deck, differentiation, frankfurt, briefing, phase-1]
 mx:
   x-mx-category: mx-content
   status: active
-  contentType: migration-note
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/migrations/2026-05-differentiation-briefing.cog.md
   audience: [humans, machines]
-  tags: [bmv, investor, deck, differentiation, frankfurt, briefing, phase-1]
   partOf: mx-maxine-lives
   buildsOn: []
   summary: "What the four Phase 1 sub-agents found, what they leave open, and the questions Phase 2 must close before the deck is rewritten."
@@ -32,6 +32,7 @@ mx:
   purpose: "Synthesis of the four Phase 1 staging notes for the May 2026 BMV investor-deck differentiation pass. Drives Phase 2 interview and Phase 3 deck update."
   stability: stable
   x-mx-contextProvides: ["BMV deck differentiation pass - Phase 1 briefing"]
+
 ---
 
 # BMV deck differentiation pass — Phase 1 briefing

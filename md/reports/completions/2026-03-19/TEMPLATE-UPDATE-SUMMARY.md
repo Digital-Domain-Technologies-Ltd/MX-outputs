@@ -5,9 +5,9 @@ author: "sliccy"
 created: 2026-03-19
 version: "2.0"
 
+type: release-notes
 mx:
   status: active
-  contentType: release-notes
   x-mx-category: audit-suite
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-03-19/TEMPLATE-UPDATE-SUMMARY.md
   purpose: "What changed, why, and how to use the improved templates"
@@ -15,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Audit Template Update Summary - v2.0 Release"]
+
 ---
 
 # Audit Template Update Summary — v2.0 Release

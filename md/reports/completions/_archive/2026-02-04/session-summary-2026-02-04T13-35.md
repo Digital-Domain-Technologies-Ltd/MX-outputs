@@ -7,8 +7,8 @@ sessionEnd: "2026-02-04T13:35:12Z"
 duration: "~90 minutes"
 author: Tom Cranstoun
 
+type: "feature-implementation"
 mx:
-  contentType: "feature-implementation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/_archive/2026-02-04/session-summary-2026-02-04T13-35.md
   purpose: "Homepage Authority Positioning and WCAG Compliance"
@@ -16,6 +16,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Homepage Authority Positioning and WCAG Compliance"]
+
 ---
 
 

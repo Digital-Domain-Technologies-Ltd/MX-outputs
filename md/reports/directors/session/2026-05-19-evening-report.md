@@ -6,17 +6,18 @@ created: 2026-05-19
 modified: 2026-05-19
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-19-evening-report.md
   purpose: "Evening segment: ran the cog audit across every mx.allabout.network page, debugged three audit-tooling false positives that the audit surfaced as gate failures, fixed all three Priority audit findings in source on mx-site, and patched an audit accounting bug that was double-counting non-HTML URLs."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - mx.allabout.network audit + source remediation"]
+
 ---
 
 # Co-Directors Report — mx.allabout.network audit + source remediation

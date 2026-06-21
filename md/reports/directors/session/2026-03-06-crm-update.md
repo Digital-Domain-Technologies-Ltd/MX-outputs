@@ -5,6 +5,7 @@ description: "Session report covering CRM maintenance: new contact Dogu Abaris, 
 created: "2026-03-06"
 version: "1.0"
 author: "Tom Cranstoun"
+type: info-doc
 mx:
   audience: "business"
   confidential: true
@@ -13,6 +14,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - CRM Update, Mar 6 2026"]
+
 ---
 
 

@@ -3,11 +3,11 @@ title: "MX Joymaker — Splash Screen, Co-Directors Report, Submodule Cleanup"
 created: "2026-02-10"
 
 author: Tom Cranstoun
+type: "feature-implementation"
 mx:
   sessionStart: "2026-02-10T15:00:00Z"
   sessionEnd: "2026-02-10T17:49:00Z"
   duration: "~3 hours"
-  contentType: "feature-implementation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-10/session-summary-2026-02-10T17-49.md
   purpose: "MX Joymaker - Splash Screen, Co-Directors Report, Submodule Cleanup"
@@ -15,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["MX Joymaker - Splash Screen, Co-Directors Report, Submodule Cleanup"]
+
 ---
 
 # Session Summary: MX Joymaker Splash Screen, Co-Directors Report, Submodule Cleanup

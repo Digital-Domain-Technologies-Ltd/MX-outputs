@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [manifest, boot, agent, claude, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [manifest, boot, agent, claude, fable5, example]
   purpose: "Bootstrap a Claude Fable 5 agent instance by loading all required COGs in sequence."
   stability: stable
   x-mx-contextProvides: ["Boot sequence for the Fable 5 MX COG decomposition. Lists all 13 COGs and their load order."]
   dependencies: []
   runbook: "Load this COG first. It defines the sequence. Load each listed COG before accepting any input."
+
 ---
 
 # Fable 5 Agent — Boot Manifest

@@ -4,6 +4,7 @@ created: "2026-02-24"
 version: "1.0"
 author: Tom Cranstoun
 
+type: info-doc
 mx:
   x-mx-segment: "afternoon"
   audience: business
@@ -13,6 +14,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - Repository Simplification"]
+
 ---
 
 # Co-Directors Report

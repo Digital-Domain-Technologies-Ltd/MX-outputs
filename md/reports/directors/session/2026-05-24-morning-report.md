@@ -6,17 +6,18 @@ created: 2026-05-24
 modified: 2026-05-24
 version: "1.0"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-24-morning-report.md
   purpose: "First wall-clock test of npm run audit:full against a real host (typo3.com, 5 pages) surfaced two production-blocking bugs the dispatcher-only verification could not catch. Both fixed in the same morning: the headless Claude Code session for /audit-report now terminates cleanly once the report markdown stabilises (was hanging 24+ minutes after completing its work), and the chained Phase 3 dispatcher now reads the actual report filename from a result-file sidecar rather than pre-computing a path the skill does not honour. The tool now runs end-to-end on a single npm command without operator intervention, with the bug-evidence partial deliverable preserved in mx-outputs as a reference artefact."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit Driver Hardened: Watch-and-Kill Pattern + Filename-Collision Fix After First Wall-Clock Test"]
+
 ---
 
 # Co-Directors Report — Audit Driver Hardened

@@ -6,17 +6,18 @@ created: 2026-05-17
 modified: 2026-05-18
 version: "1.4"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-17-evening-report.md
   purpose: "Day-long close-out of the MX-hub submodule layout. The morning shipped four blog posts on MX vs blockchain/NFTs/crypto plus a use-cases sub-folder; the early evening landed the publisher-level AI Usage Declaration suite (four carriers, Gathering draft, deterministic audit probe), cleared 22 audit-suite failures to zero, and added HTML hygiene Rule 3; the late evening collapsed three submodules into the hub (mx-crm and mx-reginald absorbed as plain folders, mx-plugin deleted entirely), archived all four upstream repos on GitHub (MX-CRM, mx-reginald, MX-Audit, mx-plugin), replaced .git/hooks symlinks with copies per Tom's preference, regenerated the github-repositories.md registry with archive state and lowercase-org coverage, and filed two new Gathering drafts (Decision Records, Policy Records)."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Use-cases series, AI Usage Declaration, audit-suite recovery, submodule consolidation"]
+
 ---
 
 # Co-Directors Report — Use-cases blog series and sub-folder discovery

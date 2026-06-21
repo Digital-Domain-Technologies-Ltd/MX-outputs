@@ -6,16 +6,17 @@ modified: 2026-03-23
 version: "1.0"
 
 title: Co-Directors Report — 23 March 2026 (Night Session)
+type: report
+tags: [session-report, security, agentlock, cog-specification, documentation]
 mx:
   status: published
-  contentType: report
-  tags: [session-report, security, agentlock, cog-specification, documentation]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-23-night-report.md
   purpose: "Session report - AgentLock-inspired security extensions: documentation propagation"
   audience: [humans, machines]
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - 23 March 2026 (Night Session)"]
+
 ---
 
 # Co-Directors Report — 23 March 2026 (Night Session)

@@ -6,17 +6,18 @@ created: 2026-05-15
 modified: 2026-05-15
 version: "1.0"
 
+type: report
+tags: [directors-report, session, afternoon, mx-audit, mx-reginald, merge, architecture]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon, mx-audit, mx-reginald, merge, architecture]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-15-afternoon-report.md
   purpose: "Afternoon session executed the approved plan to merge the public mx-audit submodule into the private mx-reginald repository as mx-reginald/audit/, with all hub references rewired in lockstep."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - mx-audit folded into mx-reginald"]
+
 ---
 
 # Co-Directors Report — mx-audit folded into mx-reginald

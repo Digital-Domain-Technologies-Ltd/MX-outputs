@@ -6,17 +6,18 @@ created: 2026-06-10
 modified: 2026-06-10
 version: "1.1"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-10-evening-report.md
   purpose: "Three correctness fixes to the web-audit generator, then a clean close that folded in settled prior-session work."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Web-Audit Report-Quality Fixes and Session Close"]
+
 ---
 
 # Co-Directors Report - Web-Audit Report-Quality Fixes and Session Close

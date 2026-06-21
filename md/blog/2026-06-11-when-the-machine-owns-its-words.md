@@ -6,17 +6,18 @@ created: 2026-06-11
 modified: 2026-06-11
 version: "0.1"
 
+type: blog-post
+tags: [ai-search, liability, provenance, attribution, brand-mention, governance, evidence-vehicle, mx]
 mx:
   status: draft
-  contentType: blog-post
   audience: [business, humans, machines]
   targetReaders: "Boards and executives deploying AI answer engines or worried about how those engines describe them, plus the technical teams responsible for grounding, attribution, and provenance."
-  tags: [ai-search, liability, provenance, attribution, brand-mention, governance, evidence-vehicle, mx]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/blog/2026-06-11-when-the-machine-owns-its-words.md
   purpose: "A German court has ruled that Google is the author of what its AI Overviews say, not a neutral index pointing at other people's pages. The reasoning turns on one sentence: nobody needs AI to search the internet. Once the AI layer is elective, the operator owns the sentences it generates — and so does everyone the machine describes. This is the legal moment MX has been built for."
   stability: draft
   runbook: "Published article. Read as narrative; the argument is the content."
   x-mx-contextProvides: ["When the Machine Owns Its Words"]
+
 ---
 
 # When the Machine Owns Its Words

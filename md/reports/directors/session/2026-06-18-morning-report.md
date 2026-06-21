@@ -6,17 +6,18 @@ created: 2026-06-18
 modified: 2026-06-18
 version: "1.6"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-18-morning-report.md
   purpose: "Four sessions: audit pipeline/storage overhaul, Puppeteer fix, pre-existing errors sweep, and cockpit extension filter with admin view."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline, Validator Sweep, Cockpit Extension Filter"]
+
 ---
 
 # Co-Directors Report - Batch Audit Run and Puppeteer Reliability Fix

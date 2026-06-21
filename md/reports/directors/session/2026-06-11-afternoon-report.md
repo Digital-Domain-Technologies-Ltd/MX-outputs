@@ -6,17 +6,18 @@ created: 2026-06-11
 modified: 2026-06-11
 version: "1.0"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-11-afternoon-report.md
   purpose: "Made 'lead with the outcome, never the hours or the deliverable' a canonical selling rule across CLAUDE.md, the audit report template, and the pitch family, alongside a parallel TrustClaw / Reginald-vnext engineering push."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Lead-With-the-Outcome Selling Rule"]
+
 ---
 
 # Co-Directors Report - Lead-With-the-Outcome Selling Rule

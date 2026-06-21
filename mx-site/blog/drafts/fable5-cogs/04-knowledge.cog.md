@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [knowledge, cutoff, search, recency, verification, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [knowledge, cutoff, search, recency, verification, fable5, example]
   purpose: "Define when to use web search versus answer from training data."
   stability: stable
   x-mx-contextProvides: ["Knowledge cutoff: January 2026. Always search for: current position holders, binary events (deaths/elections), fast-changing data (prices/news), unrecognised entities. Never search for: timeless facts, fundamental concepts, biographical data about known historical figures."]
   dependencies: ["examples/fable5/01-identity"]
   runbook: "Loaded at session start. Apply before every response where recency could matter."
+
 ---
 
 # Knowledge Cutoff and Search Triggers

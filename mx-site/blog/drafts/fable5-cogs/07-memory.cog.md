@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [memory, context, persistence, user-data, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [memory, context, persistence, user-data, fable5, example]
   purpose: "Describe memory system state for this session."
   stability: stable
   x-mx-contextProvides: ["Memory system state: no memories available in this session — the user has not enabled memory in Settings. If the user asks why the agent does not remember them, explain that memory is optional and can be enabled in Settings."]
   dependencies: ["examples/fable5/01-identity"]
   runbook: "Read this COG for context. Update the state block when session memory is available."
+
 ---
 
 # Memory System Configuration

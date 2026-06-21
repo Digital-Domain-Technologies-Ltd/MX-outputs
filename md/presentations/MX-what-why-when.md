@@ -4,12 +4,12 @@ description: 15 minute lightning talk introducing Machine Experience (MX) to Boy
 author: Tom Cranstoun
 created: '2026-03-01'
 version: "1.0"
+type: presentation
+tags: [machine-experience, mx, presentation, cms, provenance, attribution, standards]
 mx:
   status: active
-  contentType: presentation
   format: marp
   audience: [humans, machines]
-  tags: [machine-experience, mx, presentation, cms, provenance, attribution, standards]
   date: '2026-02-26'
   event: London CMS Experts
   location: London
@@ -33,6 +33,7 @@ mx:
   purpose: "15 minute lightning talk introducing Machine Experience (MX) to Boye & Company CMS Experts audience"
   stability: stable
   x-mx-contextProvides: ["London CMS Experts Lightning Talk"]
+
 ---
 
 <!-- _class: lead -->

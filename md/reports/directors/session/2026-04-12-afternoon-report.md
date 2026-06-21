@@ -7,6 +7,7 @@ author: Tom Cranstoun
 audience: business
 confidential: true
 
+type: info-doc
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-04-12-afternoon-report.md
   purpose: "Co-Directors Report - A2A Agent Cards, Full Audit, Wikidata Level 4"
@@ -14,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - A2A Agent Cards, Full Audit, Wikidata Level 4"]
+
 ---
 
 # Co-Directors Report — A2A Agent Cards, Full Audit, Wikidata Level 4

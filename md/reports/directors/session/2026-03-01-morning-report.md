@@ -4,6 +4,7 @@ created: "2026-03-01"
 version: "1.0"
 author: Tom Cranstoun
 
+type: info-doc
 mx:
   x-mx-segment: "morning"
   audience: business
@@ -13,6 +14,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - Clean Slate: History Reset and Infrastructure Hardening"]
+
 ---
 
 # Clean Slate: History Reset and Infrastructure Hardening

@@ -5,18 +5,19 @@ created: 2026-03-19
 version: "2.0"
 author: Tom Cranstoun
 
+type: report
+tags: [session-report, readiness-model, manuscripts, templates, cleanup]
 mx:
   x-mx-segment: afternoon
   audience: business
   confidential: true
   status: active
-  contentType: report
-  tags: [session-report, readiness-model, manuscripts, templates, cleanup]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-19-afternoon-report.md
   purpose: "Co-Directors Report - Unified Readiness Model and Root Cleanup"
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Unified Readiness Model and Root Cleanup"]
+
 ---
 
 

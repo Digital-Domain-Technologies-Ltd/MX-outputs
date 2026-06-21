@@ -4,16 +4,17 @@ description: "Inventory of every file in mx-outputs/pptx/presentations/ classifi
 author: "Tom Cranstoun"
 created: 2026-05-07
 modified: 2026-05-07
+type: migration-note
+tags: [bmv, investor, deck, differentiation, frankfurt, inventory, staging]
 mx:
-  contentType: migration-note
   audience: [humans]
   status: draft
-  tags: [bmv, investor, deck, differentiation, frankfurt, inventory, staging]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/migrations/staging/2026-05-deck-inventory.md
   purpose: "Inventory of every file in mx-outputs/pptx/presentations/ classified as derivative-of-canonical, stand-alone, or superseded, in support of the May 2026 BMV investor-deck differentiation pass."
   stability: draft
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["BMV Deck Differentiation Pass - Presentations Folder Inventory"]
+
 ---
 
 # BMV Deck Differentiation Pass — Presentations Folder Inventory

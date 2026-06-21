@@ -4,13 +4,12 @@ version: '1.0'
 created: 2026-03-01T00:00:00.000Z
 modified: '2026-06-19'
 author: Tom Cranstoun
+type: identity-documentation
+tags: [identity, outputs]
 mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/SOUL.md
-  contentType: identity-documentation
   status: active
-  tags:
-    - identity
-    - outputs
+
 ---
 
 # MX Outputs — SOUL

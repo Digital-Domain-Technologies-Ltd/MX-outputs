@@ -6,16 +6,17 @@ created: 2026-03-19
 modified: 2026-03-19
 version: "1.0"
 
+type: report
+tags: [session-report, reginald, cog-definition, csp, carrier-formats]
 mx:
   status: active
-  contentType: report
-  tags: [session-report, reginald, cog-definition, csp, carrier-formats]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-03-19-session-report.md
   purpose: "Reginald website: CSP fix, carrier format content, COG definition correction across entire codebase"
   audience: [humans, machines]
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Session Report - 19 Mar 2026 (Afternoon)"]
+
 ---
 
 # Co-Directors Session Report — 19 Mar 2026 (Afternoon)

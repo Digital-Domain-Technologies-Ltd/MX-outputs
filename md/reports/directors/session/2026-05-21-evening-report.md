@@ -6,17 +6,18 @@ created: 2026-05-21
 modified: 2026-05-21
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-21-evening-report.md
   purpose: "Six subtle audit-pipeline bugs traced and fixed; the deliverable is now an error PDF when gates fail, not a silent exit. dkd.de prospect audit is now self-consistent."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Audit Pipeline: Always-Produce-PDF + dkd.de Triage"]
+
 ---
 
 # Co-Directors Report — Audit Pipeline: Always-Produce-PDF + dkd.de Triage

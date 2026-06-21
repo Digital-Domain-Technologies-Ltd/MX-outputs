@@ -6,17 +6,18 @@ created: 2026-06-01
 modified: 2026-06-01
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-01-evening-report.md
   purpose: "Published comprehensive blog post on browser classification and declared signals. Added deterministic-patterns rule to CLAUDE.md for reproducible workflows."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Blog Publication + Process Documentation"]
+
 ---
 
 # Co-Directors Report — Blog Publication + Process Documentation

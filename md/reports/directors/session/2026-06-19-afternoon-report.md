@@ -6,17 +6,18 @@ created: 2026-06-19
 modified: 2026-06-19
 version: "1.3"
 
+type: report
+tags: [directors-report, session, afternoon]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, afternoon]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-19-afternoon-report.md
   purpose: "Extended the MX metadata graph with temporal query capability, 14 newly indexed fields including computed git-authoritative dates, and promoted the architecture doc to a first-class cog."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - MX Graph System: Temporal Queries and Field Expansion"]
+
 ---
 
 # Co-Directors Report - MX Graph, CRM Cross-linking, CMS Experts Intelligence, and Peer Consensus Principle

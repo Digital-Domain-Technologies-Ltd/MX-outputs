@@ -6,17 +6,18 @@ created: 2026-06-17
 modified: 2026-06-17
 version: "1.0"
 
+type: report
+tags: [directors-report, session, evening]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, evening]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-06-17-evening-report.md
   purpose: "Built a complete press-ready backgrounder, a general MX introduction document, a new services introduction page with card layout, and an agency white-label offering - all with PDFs and updated pitch collateral."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Press Backgrounder, Services Page, and Agency White-Label Pack"]
+
 ---
 
 # Co-Directors Report - Press Backgrounder, Services Page, and Agency White-Label Pack

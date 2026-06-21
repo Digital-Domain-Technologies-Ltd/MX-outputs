@@ -6,15 +6,16 @@ created: 2026-06-08
 modified: 2026-06-08
 version: "1.0"
 
+type: info-doc
 mx:
   status: active
-  contentType: info-doc
   purpose: "Files Away From Their Source - LinkedIn feed promo"
   audience: [humans, machines]
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Files Away From Their Source - LinkedIn feed promo"]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/blog/files-away-from-source.linkedin-promo.md
+
 ---
 
 # Files Away From Their Source - LinkedIn feed promo

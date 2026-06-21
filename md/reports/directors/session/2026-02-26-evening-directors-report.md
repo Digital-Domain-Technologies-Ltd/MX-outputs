@@ -3,6 +3,7 @@ title: "Co-Directors Report: Repository Reorganisation — Separation of Concern
 author: Tom Cranstoun
 
 created: '2026-03-01'
+type: info-doc
 mx:
   date: 2026-02-26
   x-mx-segment: evening
@@ -13,6 +14,7 @@ mx:
   stability: final
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report: Repository Reorganisation - Separation of Concerns"]
+
 ---
 
 # Co-Directors Report: Repository Reorganisation — Separation of Concerns

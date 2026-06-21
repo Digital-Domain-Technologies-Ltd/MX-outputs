@@ -5,6 +5,7 @@ version: "2.0"
 modified: "2026-02-18"
 author: Tom Cranstoun
 
+type: info-doc
 mx:
   x-mx-segment: "evening"
   audience: business
@@ -14,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report - PDF Image Quality Crisis Resolved"]
+
 ---
 
 # Co-Directors Report — PDF Image Quality Crisis Resolved

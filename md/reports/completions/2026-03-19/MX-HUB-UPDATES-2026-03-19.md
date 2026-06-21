@@ -6,9 +6,9 @@ created: 2026-03-19
 modified: 2026-03-19
 version: "1.0"
 
+type: release-notes
 mx:
   status: active
-  contentType: release-notes
   x-mx-category: audit-suite
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-03-19/MX-HUB-UPDATES-2026-03-19.md
   purpose: "Summary of all changes made on 2026-03-19"
@@ -16,6 +16,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["MX-Hub Updates: Templates v2.0 + mx-audit Integration"]
+
 ---
 
 # MX-Hub Updates: Templates v2.0 + mx-audit Integration

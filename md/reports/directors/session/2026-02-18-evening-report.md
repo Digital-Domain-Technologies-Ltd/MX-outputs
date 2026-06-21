@@ -4,6 +4,7 @@ author: Tom Cranstoun
 version: "1.0"
 
 created: '2026-03-01'
+type: info-doc
 mx:
   date: 2026-02-18
   x-mx-segment: evening
@@ -16,6 +17,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Co-Directors Report: 2026-02-18 Evening Session"]
+
 ---
 
 # Co-Directors Report

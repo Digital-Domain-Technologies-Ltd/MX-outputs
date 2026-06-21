@@ -5,9 +5,11 @@ created: "2026-06-19"
 modified: "2026-06-19"
 description: "Navigable index of all build artefacts, reports, and generated outputs"
 
+type: info-doc
 mx:
   isGenerated: true
   generatedBy: "mx-outputs/scripts/generate-index.sh"
+
 ---
 
 # MX Outputs

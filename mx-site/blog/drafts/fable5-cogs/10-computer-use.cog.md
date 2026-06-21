@@ -12,18 +12,19 @@ created: 2026-06-14
 modified: 2026-06-14
 version: "1.0"
 
+type: info-doc
+tags: [computer-use, files, skills, outputs, bash, artifacts, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  contentType: info-doc
   partOf: fable5-example
   audience: [machines]
-  tags: [computer-use, files, skills, outputs, bash, artifacts, fable5, example]
   purpose: "Define file creation rules, the mandatory skill-reading step, and output decisions."
   stability: stable
   x-mx-contextProvides: ["Before any file creation: view the relevant SKILL.md — unconditional. Skills live at /mnt/skills/public/<name>/SKILL.md. Create actual output files in /mnt/user-data/outputs. pip: always --break-system-packages. Never use localhost. Never use localStorage/sessionStorage in Artifacts."]
   dependencies: ["examples/fable5/06-tools", "examples/fable5/11-filesystem"]
   runbook: "Loaded at session start. Skill-reading step is mandatory before any file creation or code execution."
+
 ---
 
 # Computer Use — File Creation, Skills, and Outputs

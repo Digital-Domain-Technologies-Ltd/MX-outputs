@@ -5,16 +5,17 @@ author: Tom Cranstoun
 created: 2026-06-11
 modified: 2026-06-11
 version: "1.0"
+type: manual
+tags: [scripts, manual, manuscript, uniqueness, index, determinism, tooling]
 mx:
   status: active
-  contentType: manual
   audience: [humans, machines]
-  tags: [scripts, manual, manuscript, uniqueness, index, determinism, tooling]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/scripts/MANUAL.md
   purpose: "Tell an operator or agent how to run the output scripts, what they read, what they write, and how to read the results."
   stability: stable
   runbook: "Reference manual. Read before running anything in scripts/."
   x-mx-contextProvides: ["How to run the MX output scripts and interpret their output"]
+
 ---
 
 # MX Output Scripts — Manual

@@ -3,11 +3,11 @@ title: "About Maxine — Server-Client Architecture Deliverable"
 created: "2026-02-13"
 
 author: Tom Cranstoun
+type: "documentation"
 mx:
   sessionStart: "2026-02-13T12:15:00Z"
   sessionEnd: "2026-02-13T12:38:00Z"
   duration: "~25 minutes"
-  contentType: "documentation"
   status: "completed"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/completions/2026-02-13/session-summary-2026-02-13T12-38.md
   purpose: "About Maxine - Server-Client Architecture Deliverable"
@@ -15,6 +15,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["About Maxine - Server-Client Architecture Deliverable"]
+
 ---
 
 # Session Summary: About Maxine Architecture Deliverable

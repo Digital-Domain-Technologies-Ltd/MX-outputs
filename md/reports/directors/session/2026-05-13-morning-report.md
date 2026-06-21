@@ -6,17 +6,18 @@ created: 2026-05-13
 modified: 2026-05-13
 version: "1.1"
 
+type: report
+tags: [directors-report, session, morning]
 mx:
   status: active
-  contentType: report
   audience: [business]
   confidential: true
-  tags: [directors-report, session, morning]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/md/reports/directors/session/2026-05-13-morning-report.md
   purpose: "Published two mx-site blog posts: skills are static snapshots, and why LLMs do not execute JavaScript. Includes a corrected Common Crawl section."
   stability: stable
   runbook: "Generated report. Read the findings; regenerate via its pipeline rather than editing by hand."
   x-mx-contextProvides: ["Co-Directors Report - Two mx-site blog posts (skills snapshots, LLMs and JavaScript)"]
+
 ---
 
 # Co-Directors Report — Two mx-site blog posts (skills snapshots, LLMs and JavaScript)
