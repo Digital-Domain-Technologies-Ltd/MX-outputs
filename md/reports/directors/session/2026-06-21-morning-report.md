@@ -1,10 +1,10 @@
 ---
-title: "Co-Directors Report - Morning: Graph Query + Build Infrastructure Documentation"
-description: "Two sessions: graph query completeness landed in the first; a definitive build infrastructure guide and dev blog enrichment landed in the second."
+title: "Co-Directors Report - Morning: Graph Query, Build Infrastructure, and OKF Adoption"
+description: "Three sessions: graph query completeness; build infrastructure guide; estate-wide OKF dual-conformant frontmatter adoption with Gate 32 promoted to strict."
 author: "Tom Cranstoun"
 created: 2026-06-21
 modified: 2026-06-21
-version: "1.1"
+version: "1.2"
 
 type: report
 tags: [directors-report, session, morning]
@@ -29,7 +29,33 @@ mx:
 
 ## Summary
 
-Two sessions ran this morning. The first made the MX graph answer "what do I need to update when this feature changes?" in a single query pass rather than by manual prose search. The second produced a definitive reference for how to extend the repository's own infrastructure - the single-contract pattern, the four foundation modules, the enforcement layers, and the generated index rules - and put a readable summary of that reference directly into the developer blog.
+Three sessions ran this morning. The first made the MX graph answer "what do I need to update when this feature changes?" in a single query pass rather than by manual prose search. The second produced a definitive reference for how to extend the repository's own infrastructure. The third adopted the Open Knowledge Format (OKF) estate-wide, making every file in the repository simultaneously readable by both OKF consumers and MX consumers, with no fact carried twice and Gate 32 passing at 1,932 from 1,932.
+
+---
+
+## Session 3 - OKF Dual-Conformant Frontmatter
+
+### What Was Done
+
+Every markdown file in the MX estate - 2,892 of them - now carries a frontmatter block that satisfies both the Open Knowledge Format standard and the full MX model simultaneously. An OKF consumer reads the file and finds a valid OKF document. An MX consumer reads the same file and finds the full trust layer, typed relationship graph, and governance fields. No fact is written twice.
+
+The work ran in ten phases. The field dictionary grew a third zone (Zone 1b: OKF reserved surface) alongside the existing identity zone and the operational `mx:` block. The fields `type` and `tags` were promoted from under `mx:` to the top level; `resource` was added as a new optional field for documents that describe a specific external asset. A machine-readable field mapping document was created as the single source of truth for all OKF field adoptions - the migration codemod, the projection helper, and the conformance gate all read that one file.
+
+A deterministic migration codemod handled the estate sweep, using a hybrid approach: js-yaml for value extraction (preventing the date-coercion bug) and string manipulation for the actual text changes (preserving existing formatting). For 32 files with malformed YAML - a pre-existing indentation bug where a generated hash field was inserted between a parent key and its children - a second dedicated fixer was written that works line-by-line to handle literal blocks correctly. Both tools are now in the script library with npm run entries.
+
+Gate 32 was established, wired into both `npm test` and the pre-push hook, and promoted from warn-only to strict once the estate was clean. It now hard-blocks any push that introduces a retiring synonym or missing `type` field. The final gate reading: 1,932 scanned, 1,932 passed, 0 violations.
+
+An operator manual for the OKF integration was written as a cog (`scripts/cogs/okf-frontmatter.cog.md`), covering the three-zone model, field mapping tables, the `resource` vs `refersToExternal` distinction, gate usage, and common error patterns.
+
+### Why It Matters
+
+OKF compatibility is the commercial hook in the OKF positioning PRD: COG is OKF-compatible by design. A client running any OKF consumer tool - Google Cloud's knowledge catalog, any directory-of-knowledge tool built on the standard - reads our files without an adapter. MX adds everything OKF omits: the trust layer, the typed relationship graph, the provenance chain. We are not competing with OKF; we are the layer that completes it.
+
+The no-duplicates discipline enforced by Gate 32 is also a data quality guarantee. One fact, one field. An auditor querying the estate can trust they are not seeing the same value under two names. That matters for regulatory provenance walks and for any downstream tool that ingests MX metadata.
+
+### The Insight
+
+The hardest part of the migration was not the frontmatter changes themselves - the codemod handled 2,892 files deterministically. The hardest part was the 32 files with pre-existing YAML errors that the codemod could not parse. Those files had a generated hash field positioned incorrectly between a parent key and its children. The regex fix worked for simple blocks but failed on literal block scalars with blank lines inside them (e.g. `policy: |` containing blank lines). The line-by-line algorithm - with the critical insight that blank lines terminate a child block only when the next non-blank line has fewer than 4 spaces of indent - handled every case cleanly.
 
 ---
 
@@ -98,3 +124,4 @@ The backlinks infrastructure was already built into the graph builder (`x-mx-bac
 - Add `x-mx-covers` to the remaining blog posts that cover core MX features (mx-graph, reginald, the-gathering, cog-format)
 - Audit other computed graph fields not yet exposed as queryable in the MCP layer
 - Rebuild the graph on a fat clone to pick up the 331 new blog/manuscript nodes in the estate indexes
+- Add `actionType: sop` to the five action cogs that have `x-mx-execute` blocks but currently carry `type: info-doc` (mx-boot, mx-scaffold, registry-of-registries, what-is-this-chat-about, whats-changed)
