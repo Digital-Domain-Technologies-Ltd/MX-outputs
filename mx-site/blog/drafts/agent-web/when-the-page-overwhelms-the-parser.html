@@ -111,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1189,
+        "wordCount": 1343,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -191,18 +191,18 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1189">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1343">
         <header class="article-header">
           <h1>When the Page Overwhelms the Parser</h1>
           <div class="article-meta"
                data-published="2026-06-24"
                data-modified="2026-06-24"
-               data-reading-time="6 min">
+               data-reading-time="7 min">
             <time datetime="2026-06-24">24 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>6 min read</span>
+            <span>7 min read</span>
           </div>
         </header>
 
@@ -219,6 +219,7 @@ mx:
 <p><strong>Element count.</strong> Every element in the DOM — every <code>div</code>, <code>section</code>, <code>button</code>, <code>span</code> — must be parsed and held in memory. A page with thousands of elements requires proportionally more memory than one with hundreds. This is not usually a problem. It becomes one when the other signals are also elevated.</p>
 <p><strong>Nesting depth.</strong> A deeply nested tree requires the parser to maintain a stack of parent contexts as it descends. Template-driven layouts that wrap content in layer after layer — a wrapper inside a container inside a section inside a row — accumulate this cost invisibly. The content at the bottom of the tree costs more to reach than the content at the top.</p>
 <p><strong>Inline data.</strong> JSON embedded directly in <code>&lt;script&gt;</code> blocks is efficient for client-side rendering: no extra network round-trip, data available immediately. For large datasets — maps with hundreds of markers, product catalogues, configuration objects — the effect is that the machine must parse and hold a large data structure as part of reading the HTML. That data is not content the machine needs. It is a client-side application concern that the machine cannot skip.</p>
+<p>Here is where structured data becomes part of the same problem. A single <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> block with a well-chosen schema type is exactly right. The trap is over-decoration: a <code>Product</code> graph with nested <code>Offer</code> and <code>ShippingDetails</code> and <code>AggregateRating</code>, a <code>FAQPage</code> alongside it, a <code>BreadcrumbList</code>, a <code>WebPage</code> wrapper — each individually defensible, collectively a substantial inline payload that the machine must parse before it reaches the content the schema was meant to describe. The very markup added to help machines read the page makes the page harder for constrained machines to process. I think of this as the over-decoration trap: the act of speaking more clearly to machines creates conditions that make the message harder to receive. The judgment call is which schema types genuinely serve a reader arriving without context, and which ones are on the page because someone ran a structured-data checklist. That judgment is a machine-readability decision, not just an SEO one.</p>
 <p><strong>Shadow DOM and Web Components.</strong> A custom element hides its internal markup behind a boundary that a document-level parser does not cross. The machine sees the tag; it does not see the contents, because those contents only exist after the browser instantiates the component. For a machine reading the served HTML without executing scripts, content inside shadow roots is invisible. The more of a page's content lives behind that boundary, the less a non-browser machine can read — and the more memory the browser-attached machine uses to instantiate components before it can read the page.</p>
 <p><strong>Concurrent third-party initialisation.</strong> Loading multiple external scripts — analytics, consent management, mapping libraries, A/B testing — starts concurrent activity from the moment parsing begins. Each competes for processing time and memory with the page's content. In a capable browser on good hardware, invisible. In a constrained processing context, collectively destabilising.</p>
 <h2 id="why-it-is-additive-but-the-risk-is-multiplicative" tabindex="-1">Why it is additive but the risk is multiplicative</h2>
