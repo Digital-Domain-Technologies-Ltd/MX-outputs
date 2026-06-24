@@ -111,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1343,
+        "wordCount": 1705,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -183,6 +183,7 @@ mx:
           <ul>
         <li><a href="#the-thing-parsers-do-not-do">The thing parsers do not do</a></li>
         <li><a href="#five-things-that-add-up">Five things that add up</a></li>
+        <li><a href="#the-tool-that-makes-it-worse">The tool that makes it worse</a></li>
         <li><a href="#why-it-is-additive-but-the-risk-is-multiplicative">Why it is additive but the risk is multiplicative</a></li>
         <li><a href="#what-to-do-about-it">What to do about it</a></li>
         <li><a href="#the-machines-this-reaches">The machines this reaches</a></li>
@@ -191,18 +192,18 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1343">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1705">
         <header class="article-header">
           <h1>When the Page Overwhelms the Parser</h1>
           <div class="article-meta"
                data-published="2026-06-24"
                data-modified="2026-06-24"
-               data-reading-time="7 min">
+               data-reading-time="9 min">
             <time datetime="2026-06-24">24 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>7 min read</span>
+            <span>9 min read</span>
           </div>
         </header>
 
@@ -222,6 +223,12 @@ mx:
 <p>Here is where structured data becomes part of the same problem. A single <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> block with a well-chosen schema type is exactly right. The trap is over-decoration: a <code>Product</code> graph with nested <code>Offer</code> and <code>ShippingDetails</code> and <code>AggregateRating</code>, a <code>FAQPage</code> alongside it, a <code>BreadcrumbList</code>, a <code>WebPage</code> wrapper — each individually defensible, collectively a substantial inline payload that the machine must parse before it reaches the content the schema was meant to describe. The very markup added to help machines read the page makes the page harder for constrained machines to process. I think of this as the over-decoration trap: the act of speaking more clearly to machines creates conditions that make the message harder to receive. The judgment call is which schema types genuinely serve a reader arriving without context, and which ones are on the page because someone ran a structured-data checklist. That judgment is a machine-readability decision, not just an SEO one.</p>
 <p><strong>Shadow DOM and Web Components.</strong> A custom element hides its internal markup behind a boundary that a document-level parser does not cross. The machine sees the tag; it does not see the contents, because those contents only exist after the browser instantiates the component. For a machine reading the served HTML without executing scripts, content inside shadow roots is invisible. The more of a page's content lives behind that boundary, the less a non-browser machine can read — and the more memory the browser-attached machine uses to instantiate components before it can read the page.</p>
 <p><strong>Concurrent third-party initialisation.</strong> Loading multiple external scripts — analytics, consent management, mapping libraries, A/B testing — starts concurrent activity from the moment parsing begins. Each competes for processing time and memory with the page's content. In a capable browser on good hardware, invisible. In a constrained processing context, collectively destabilising.</p>
+<h2 id="the-tool-that-makes-it-worse" tabindex="-1">The tool that makes it worse</h2>
+<p>There is a category of product built specifically to address the problem of machine discoverability: automated GEO and LLM optimisation tools. They crawl your site, identify content, and inject structured data — JSON-LD, schema markup, entity annotations — on the theory that more machine-readable signals means better AI citation. The category includes tools like Enhancely, Adobe LLM Optimizer, SiteUp, and AthenaHQ, among others. They are marketed as the machine-readability answer.</p>
+<p>Here is the problem. Each JSON-LD block these tools inject is inline data — exactly the signal we just discussed. A tool that adds structured data to help machines read the page is adding to the inline data weight the same machines must parse before they reach the content the schema was meant to describe. The over-decoration trap applies to automated injection just as it applies to hand-crafted schema.</p>
+<p>The tools vary in how responsibly they operate. Adobe LLM Optimizer requires explicit human approval before any change reaches production and deploys at the CDN edge, so it leaves no injected script tags in the source HTML. Enhancely runs a factuality-validation pipeline before injecting — checking that extracted values actually match the page content — but injects automatically without per-page approval. Others operate at higher volume with less documented oversight, generating schema across hundreds of pages without a human in the loop.</p>
+<p>The provenance gap is the deeper problem. Most of these tools produce no record of what was injected, when, by which version, or who reviewed the output. An AI agent reading the page sees structured data but has no way to know whether it was written by the publisher, validated by a tool, or generated from a template and never reviewed. That ambiguity is exactly what MX was built to address — metadata that travels with the content and records who produced it, when, and under what authority. A tool that injects schema without a provenance record bypasses the practice MX is trying to establish.</p>
+<p>Knowing which tools are running on a site, what they inject, and whether their output has been validated is itself a machine-readability discipline. It is not an SEO configuration question.</p>
 <h2 id="why-it-is-additive-but-the-risk-is-multiplicative" tabindex="-1">Why it is additive but the risk is multiplicative</h2>
 <p>A page with one of these signals elevated is unlikely to cause failures. A page with all five elevated at once can push a constrained parser past its threshold before it has finished reading the content you actually want machines to find.</p>
 <p>The problem is invisible in a browser, which is why it escapes standard audits. Open the page in Chrome: it loads, perhaps slowly, but it loads. Check the structured data: it is there. The machine-readability checklist passes. The constrained parser, operating without a full browser context, running within a shared memory budget, hits the threshold and stops.</p>
