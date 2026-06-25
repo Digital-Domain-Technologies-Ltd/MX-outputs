@@ -9,7 +9,7 @@ title: "audit-runs-index"
 version: "1.0"
 description: "Index of all committed audit run outputs under mx-outputs/audit/runs/."
 created: 2026-06-18
-modified: 2026-06-19
+modified: 2026-06-24
 author: Tom Cranstoun
 type: info-doc
 tags: [audit, index, runs, latest-copy]
@@ -21,7 +21,6 @@ mx:
   audience: [humans, machines]
   stability: stable
   runbook: "Read this cog to discover all audited domains and locate their latest-copy.pdf and latest-copy.md."
-
 ---
 
 # Audit Runs Index
@@ -38,8 +37,9 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | dkd.de-de | - | pending | - | - |
 | dotfusion.com | 2026-06-19 | pass | [latest-copy.pdf](dotfusion.com/latest-copy.pdf) | [latest-copy.md](dotfusion.com/latest-copy.md) |
 | enhancely.ai | - | pending | - | - |
+| github.com-ai-ecoverse-slicc | - | pending | - | - |
 | leica-microsystems.com | - | pending | - | - |
-| mx.allabout.network | - | pending | - | - |
+| mx.allabout.network | 2026-06-24 | pass | [latest-copy.pdf](mx.allabout.network/latest-copy.pdf) | [latest-copy.md](mx.allabout.network/latest-copy.md) |
 | neomwellbeing.com | - | pending | - | - |
 | oxide.computer | - | pending | - | - |
 | pentatonic.com | - | pending | - | - |
