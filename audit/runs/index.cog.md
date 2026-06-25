@@ -9,7 +9,7 @@ title: "audit-runs-index"
 version: "1.0"
 description: "Index of all committed audit run outputs under mx-outputs/audit/runs/."
 created: 2026-06-18
-modified: 2026-06-24
+modified: 2026-06-25
 author: Tom Cranstoun
 type: info-doc
 tags: [audit, index, runs, latest-copy]
@@ -39,7 +39,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | enhancely.ai | - | pending | - | - |
 | github.com-ai-ecoverse-slicc | - | pending | - | - |
 | leica-microsystems.com | - | pending | - | - |
-| mx.allabout.network | 2026-06-24 | pass | [latest-copy.pdf](mx.allabout.network/latest-copy.pdf) | [latest-copy.md](mx.allabout.network/latest-copy.md) |
+| mx.allabout.network | 2026-06-25 | pass | [latest-copy.pdf](mx.allabout.network/latest-copy.pdf) | [latest-copy.md](mx.allabout.network/latest-copy.md) |
 | neomwellbeing.com | - | pending | - | - |
 | oxide.computer | - | pending | - | - |
 | pentatonic.com | - | pending | - | - |

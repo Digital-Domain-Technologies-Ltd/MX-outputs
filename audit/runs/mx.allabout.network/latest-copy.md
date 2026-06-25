@@ -79,7 +79,7 @@ We audited 12 pages across mx.allabout.network's site using the Web Audit Suite.
 
 We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
-We then review automated findings by hand before completing this report. The automated pass identifies what is present or absent; we read that against context, distinguishing platform constraints from implementation choices and findings worth acting on from those the platform makes unavoidable. Patterns we see repeatedly across sites on the same platform we note as platform characteristics rather than site-specific gaps. When new agent patterns emerge, we update what we look for.
+We verify each automated finding against the site's actual constraints before it enters this report. Patterns we see consistently across Netlify sites we classify as platform characteristics, not this site's gaps. When agent behaviour shifts, we update what we look for.
 
 **How we build it.** We use scripted SOPs running deterministic checks rather than inference. The crawl, the served-versus-rendered comparison, the structured-data extraction, the accessibility passes, the discovery-file probes, the platform fingerprinting and the per-section scoring all run as scripts producing byte-identical outputs on the same input. A small number of stages run a judgement pass over the resulting report; that is the only inference layer. Those judgement passes can run against a local model, so the whole audit runs inside the organisation's own network with nothing leaving it: relevant where content is regulated or privacy-sensitive.
 
@@ -118,9 +118,9 @@ Your site runs on **Netlify** (detected from multiple platform signals).
 
 Across the audited set, Mx Allabout scores 100/100 for accessibility and 93/100 for SEO, with solid page performance (85/100) - a strong baseline for both human visitors and machine readers.
 
-Across the audited set, commerce visibility sits at 20/100, the lowest machine-readiness score in this audit. The headline opportunity is to enrich product and price data so that agents can reliably identify purchase points. The site already has MX governance markers present, giving a strong foundation; adding detailed Product schema and PriceSpecification entries will lift this metric toward full transactable readiness and enable a third-party audit to guarantee accuracy at the purchase point.
+Across the audited set, commerce visibility is 20/100, the lowest machine-readiness score in this audit. The headline opportunity is to enrich product and price data so that agents can reliably identify purchase points. The site already has MX governance markers present, giving a strong foundation; adding detailed Product schema and PriceSpecification entries will lift this metric toward full transactable readiness and enable a third-party audit to guarantee accuracy at the purchase point.
 
-Because the site runs on Netlify, edge functions can inject dynamic product data in real time. Regardless of any served-versus-rendered differences, JSON-LD remains the highest-leverage asset that every agent can read, ensuring consistent machine comprehension across all pages.
+Because the site runs on Netlify, edge functions can inject dynamic product data in real time. Regardless of any served-versus-rendered differences, JSON-LD is the highest-leverage asset every agent can read, giving consistent machine comprehension across all pages.
 
 \clearpage
 
@@ -145,7 +145,7 @@ We last audited mx.allabout.network on 23 June 2026. The table compares that aud
 
 ### Human Experience
 
-We find a strong human experience across the audited set.
+Human experience is strong across the audited set.
 
 **Table 2**
 
@@ -188,7 +188,7 @@ The findings below are tagged with one of three buckets so different budget owne
 - **Cross-cutting Foundations**: performance and SEO. These affect both human visitors and AI agents; the budget owner is usually digital operations or a foundation engineering team.
 - **Machine Readability Opportunity**: discovery readiness, metadata stack, llms.txt, structured data, agent cards, and pipeline survivability. These determine whether the site lands in agent answers; the budget owner is typically the CMO or head of digital.
 
-Every priority block in the Findings section carries a **Bucket:** label matching one of the three above. The at-a-glance table sorts findings into bucket order so each budget owner can read straight to their own list.
+Every priority block in the Findings section has a **Bucket:** label matching one of the three above. The at-a-glance table sorts findings into bucket order so each budget owner can read straight to their own list.
 
 ---
 
@@ -219,7 +219,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## What's Working Well
 
-We find accessibility scores, SEO performance, and security transport across the audited set, giving a clear starting point for the improvements ahead.
+Accessibility, SEO performance, and security headers are strong across the audited set, giving a clear baseline for the improvements ahead.
 
 **Table 5**
 
@@ -271,7 +271,7 @@ We identified 1 finding(s) on the audited set, ordered by regulatory exposure fi
 
 **What to change and why:**
 
-- The audit identified 5 images absent alt text; add descriptive alt text to those informative images and empty alt to decorative ones. This satisfies WCAG 1.1.1 across the image set.
+- The audit identified 5 images absent alt text; add descriptive alt text to those informative images and empty alt to decorative ones. The audit identified 37 images across the audited set, with 32 carrying alt text and 5 lacking it; this satisfies WCAG 1.1.1 across the image set.
 - Generating alt text at upload time, or from the CMS media library, keeps coverage high as new images are added.
 
 **Effort:** Low
@@ -282,7 +282,7 @@ These are not issues but areas where additional metadata or patterns would stren
 
 - **sameAs**: link Person and Organisation entities to ORCID, Wikidata or LinkedIn profiles so machines can resolve authoritative identities across platforms.  
 - **potentialAction**: add a ContactAction on the Organisation entity to expose contact capabilities for machines seeking outreach options.  
-- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)): declare content-use policy in robots.txt to inform machines how they may reuse or transform the site’s content.
+- **Content-Signal directives** ([contentsignals.org](https://contentsignals.org)): declare content-use policy in robots.txt to inform machines how they may reuse or transform the site's content.
 
 ---
 
@@ -349,11 +349,9 @@ This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate
 
 ## The Accessibility Tree
 
-There is no single kind of machine visitor, and no single thing a machine reads. A small model on a phone works inside a tight context window. A foundation model arrives with browsing tools. A plain scraper never runs a model at all. A converter flattens each page to text before a model ever sees it, stripping layout and scripts on the way. A coding agent fetches a page once over HTTP and moves on. Some of these read raw markup, some read a text projection, some consult the accessibility tree, some parse structured metadata. None of them see the visual layout, and you cannot know which one will arrive next.
+Carry the same meaning in three channels: page semantics, accessibility tree, and structured metadata. When a visitor can only read one channel, the meaning still survives. Machine agents read the accessibility tree; screen readers do too, so every fix here serves both audiences.
 
-The design answer is redundancy: carry the same meaning in page semantics, in the accessibility tree, in metadata, and in plain text, so that whichever channel a visitor reads, the meaning survives. A page that depends on any single channel fails every visitor that lacks that channel. The accessibility tree is the channel this section checks, and it is shared by screen readers, so every fix here serves human visitors and machine visitors at once.
-
-The contrast with human visitors is worth holding onto. People cannot take in everything at once, so good pages guide them: a journey, step by step, page by page. Machines are the opposite. They hit one page, once, and leave; they follow no journey unless explicitly instructed to. A site that reveals its meaning only across a multi-page journey is invisible to a machine that lands on one page in the middle of it. Every page therefore has to stand alone for the machine while the journey still works for the human. These are complementary designs on the same pages, not a trade-off.
+Machines read one page once and leave; they follow no multi-page path. Every page must stand alone for a machine while the narrative still works for human visitors. These are complementary requirements on the same pages.
 
 This check reads each audited page the way a tree consumer does and flags the places where each page's behaviour, names, and structure fail to reach the tree. It deliberately covers what the WCAG scan in the Accessibility section does not: those results measure conformance per page; these findings are about meaning that exists in only one channel.
 
@@ -426,7 +424,7 @@ This was a full crawl: the audit reached every page it could discover, and 18 of
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
-The llms.txt carries a site description, a page inventory and a content-use policy, which is well-formed: a machine that queries the host for a structured content index receives all three. We also recommend serving llms.txt as an HTML page that wraps the plain-text content in a `<pre>` block, rather than the text/plain the llmstxt.org specification defines. Training crawlers such as Common Crawl archive only a small fraction of plain-text files but crawl HTML pages from the sitemap reliably, so the HTML wrapper gets the file into the corpus while the `<pre>` keeps it rendering as readable plain text. The technique, with the reasoning and working code, is at https://mx.allabout.network/blog/your-site-is-already-training-ai.html.
+The llms.txt has a site description, a page inventory, and a content-use policy, and is well-formed: a machine that queries the host for a structured content index receives all three. We also recommend serving llms.txt as an HTML page that wraps the plain-text content in a `<pre>` block, rather than the text/plain the llmstxt.org specification defines. Training crawlers such as Common Crawl archive only a small fraction of plain-text files but crawl HTML pages from the sitemap reliably, so the HTML wrapper gets the file into the corpus while the `<pre>` keeps it rendering as readable plain text. The technique, with the reasoning and working code, is at https://mx.allabout.network/blog/your-site-is-already-training-ai.html.
 
 ### [llms-full.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
@@ -453,7 +451,7 @@ The llms.txt carries a site description, a page inventory and a content-use poli
 
 ## AI Usage Declaration
 
-This site publishes a publisher-level AI Usage Declaration: a scope-bounded, machine-readable statement carrying what the work is, who is responsible for it, what machines did during its production, and what machines did not do. The probe verifies the declaration's presence across its four carrier forms, validates the JSON record's schema, checks the page-level integration on the homepage, and reports whether the declaration carries a signature.
+This site publishes a publisher-level AI Usage Declaration: a scope-bounded, machine-readable statement that describes what the work is, who is responsible for it, what machines did during its production, and what machines did not do. The probe verifies the declaration's presence across its four carrier forms, validates the JSON record's schema, checks the page-level integration on the homepage, and reports whether the declaration has a signature.
 
 **Table 13**
 
@@ -514,6 +512,8 @@ This site publishes a publisher-level AI Usage Declaration: a scope-bounded, mac
 
 ### Probe findings
 
+All eight structural checks passed.
+
 - [PASS] Machine-readable JSON record is served.
 - [PASS] Human-readable HTML rendering is served.
 - [PASS] Source markdown is served (transparency win: editable form is publicly fetchable).
@@ -558,10 +558,9 @@ This section reports whether Mx Allabout's site marks AI-generated or AI-manipul
 
 ### Probe findings
 
-- A generic AI-disclosure meta tag is present (`ai-disclosure` = ai-assisted). It is a non-standard signal; an IPTC Digital Source Type marker or MX provenanceOrigin is the machine-readable form a regulator's tooling looks for.
-- Marking readiness here is about whether content announces machine authorship in a machine-readable way. MX provenanceOrigin declares the authorship; a content-authenticity watermark (C2PA, SynthID) proves a file is synthetic. The two are complementary, and this probe reports readiness, not compliance with any regulation.
+- A generic AI-disclosure meta tag is present (`ai-disclosure` = ai-assisted). It is a non-standard signal; an IPTC Digital Source Type marker or MX provenanceOrigin is the machine-readable marker regulators expect.
 
-A boundary this section keeps honest: a machine-authorship declaration (MX `provenanceOrigin`) states who or what authored the content; a content-authenticity watermark (C2PA, SynthID) proves a file is synthetic. They are complementary, and marking readiness here is a structural signal, not a certification that this site meets any regulation.
+Two different signals: MX `provenanceOrigin` declares who authored the content; a C2PA or SynthID watermark proves the file is synthetic. This site has neither standard marker. That is a structural gap, not a regulatory violation.
 
 ---
 
@@ -641,7 +640,7 @@ The audit found no gaps in the Schema.org property coverage on the audited pages
 
 **What this section checks.** Each signal below is derived deterministically from served HTML and JSON-LD on disk: no inference, no model judgement. Five structural signals fire per page: (i) self-promotional listicle (a ranked list is advertised whose first entry resolves to the publisher's own host), (ii) year-swap refresh (the title year is two or more years ahead of `dateModified`), (iii) first-party superlative (claims like "best", "leading", "high-quality" without an external reference), (iv) third-party citation count (outbound links to hosts other than the audited site), and (v) provenance metadata presence (`author`, `dateModified`, `publisher`). Pages whose body content runs over 400 words while emitting zero third-party citations carry no verifiable references and contribute to the blocker list. When the audited set is clean we omit the per-page table altogether and let the verdict line below carry the result.
 
-**The list format is not the problem.** Ranked, comparative lists are among the most-cited content shapes in AI answers, so we never flag a page for being a list. What we flag is the self-ranking variant: a "best N" page that puts its own brand at position one. It repeats a familiar move - the FAQ markup Google deprecated for gaming while AI systems kept reading it. The gamed surface gets demoted; the format stays valuable; the gap between them is provenance. The demotion is not an SEO cost you can trade for AI reach: AI answer engines retrieve through search, Google's own among them, so a page the search engine demotes is a page the AI does not surface at the top. A self-ranking list reads as a rigged result to anything checking who made the ranking, and it forfeits the visibility it was trying to manufacture.
+**Self-ranking lists.** We flag one pattern: a "best N" list where position one resolves to the publisher's own site. Self-ranking lists reduce credibility with both search engines and AI systems. No self-ranking patterns appeared in the audited sample. Watch for this as new content is added.
 
 ### Per-page findings
 
@@ -753,7 +752,7 @@ The MX Journey maps the five stages a machine follows when interacting with a we
 
 *Each stage carries its own pass threshold, so Status and Score are not comparable across rows: a score that passes one stage can fall short on another with a stricter bar.*
 
-The pages we audited meet MX compatibility across all applicable stages of the agent journey. Machines have the structured context they need for accurate comprehension and attribution across the sampled content.
+The pages we audited meet MX compatibility across all applicable stages of the MX Journey. Machines have the structured context they need for accurate comprehension and attribution across the sampled content.
 
 ---
 
@@ -976,7 +975,7 @@ The audited set shows consistent metadata patterns across pages, with no brand-n
 
 ## PDF Documents: Accessibility and Machine Readability
 
-We observe that accessibility legislation across major markets converges on ISO 14289-1 (PDF/UA) as the technical baseline, with the EAA Directive serving as a precisely codified example of this global alignment.  
+Accessibility legislation across major markets converges on ISO 14289-1 (PDF/UA) as the technical baseline; the EAA Directive is a precisely codified example of this global alignment.  
 We also find that an untagged PDF is invisible to AI agents, search crawlers and automated pipelines because they cannot extract text or structure; tagging the PDF with a proper structure tree makes it machine-readable in the same way semantic HTML is.
 
 1 PDF document(s) were identified by the audit: those linked from the crawled pages combined with those declared in the sitemap. PDFs whose only source is the sitemap are marked as such in the inventory. The MX Document Accessibility note specifies a three-layer conformance contract: **Tagged** (Level 1, ISO 14289-1 PDF/UA), **Declared** (Level 2, XMP `pdfuaid:part`), **Verified** (Level 3, recorded check).
@@ -1101,15 +1100,15 @@ Accessibility scored a perfect 100/100, showing that machines can easily interpr
 
 ## Working With Us
 
-This is an automated audit. The deeper work is a paid consultancy engagement, and we offer it across every report type:
+We run the automated pass and surface findings to priority. The next step is remediation, and we offer it in several forms:
 
-- **Full-render, all-pages audience and age-awareness review.** Here we classify the entry page; in the consultancy version we render every page and read the age-assurance, consent, and age or date-of-birth data collection across the whole estate.
-- **Full-site qualitative review.** We read every audited page for the content-quality patterns the automated pass samples on the first few pages.
-- **PDF estate accessibility remediation.** We tag the structure, declare the conformance, and record an independent check across the document estate, aligned with Directive (EU) 2019/882.
+- **Full-render, all-pages audience and age-awareness review.** This audit classifies the entry page; the full-render version covers every page - age-assurance, consent, and date-of-birth data collection across the whole estate.
+- **Full-site qualitative review.** We read every audited page for content-quality patterns the automated pass samples only on the first few pages.
+- **PDF estate accessibility remediation.** We tag the structure, declare conformance, and record an independent check across the document estate, aligned with Directive (EU) 2019/882.
 - **On-premise, regulated-sector audit.** We run the whole pipeline against a local model on infrastructure you control, so no audited content leaves your network.
-- **Implementation and remediation.** We carry the technical context that produced these findings into the work that resolves them.
+- **Implementation and remediation.** We bring the technical context from these findings into the work that resolves them.
 
-To scope an engagement, speak to us about next steps.
+To set up a remediation plan, contact info@cognovamx.com.
 
 ---
 
@@ -1179,7 +1178,7 @@ Pa11y is an open-source automated accessibility testing tool that checks web pag
 
 **Scope:** 12 pages examined | Platform: Netlify | Analysis method: Hybrid (automated + manual verification) | robots.txt: Present (6 directives)
 
-**Measurement completeness:** Every probe completed during this audit, with no network errors or timeouts. The findings below rest on a full data collection.
+**Measurement completeness:** Every probe completed during this audit, with no network errors or timeouts. The findings below are based on a full data collection.
 
 **What comes next.** This report is the foundation, not the finish line. Implementing the recommendations requires the technical knowledge that produced them; we bring that forward. Our implementation engagements begin where this audit ends.
 
@@ -1224,7 +1223,7 @@ A standard is credible only when we run on it ourselves. We hold this audit deli
 
 The AI evidence chain records every non-deterministic step: the model identifier, the SHA-256 of the system prompt we ran (so an auditor can verify the rubric we used), the SHA-256 of the output it produced, a short excerpt of the model's reasoning, and the human-intervention state. This chain is designed as evidence for AI-governance regimes: EU AI Act, UK ICO AI guidance, US NIST AI RMF, and Colorado AI Act. The framework citations are claims of relevance, not compliance grants; conformance with each regulation remains a legal duty of the operator. This PDF carries the full AI evidence chain inside its XMP metadata under `xmp:ProvenanceAiPayload`. A regulator inspecting the PDF alone receives the entire chain; the adjacent `*.provenance.ai.json` is a copy of the same JSON for tooling that prefers file access.
 
-The deterministic evidence chain lives at `*.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
+The deterministic evidence chain is at `*.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
 
 To extract the chain from the PDF, run `exiftool -b -XMP-mx:ProvenanceAiPayload mx-allabout-network-report.pdf | jq .`. The `-b` flag is required so exiftool emits the raw payload; without it the output carries a label that breaks the JSON parse. The two chains share `auditId`, `startedAt`, `operator`, and a `provenance` header naming the exact git commit of the audit tooling that produced this run, so anyone can re-run it and verify byte-for-byte what we did. We prefer determinism to inference: explicit over inferred, recorded over remembered, a result you can reproduce over one we could only explain. Where a check can be made by a rule, a rule makes it, and the rule leaves a record rather than an opinion. That is why this chain shows what we did instead of asking you to trust a summary of it.
 
