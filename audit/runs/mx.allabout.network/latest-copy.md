@@ -26,7 +26,6 @@ pipelineVersion: "1.1.0"
 confidential: true
 mx:
   status: active
-  contentType: audit-report
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-06-25/mx.allabout.network/mx-allabout-network-report.md
   maintainer: info@cognovamx.com
