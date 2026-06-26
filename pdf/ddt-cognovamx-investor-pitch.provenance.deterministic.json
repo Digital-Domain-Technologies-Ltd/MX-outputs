@@ -1,0 +1,100 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-deterministic/v2",
+  "schemaVersion": "2.0",
+  "_description": "Deterministic evidence chain. One entry per rule-driven pipeline step (gate verdict, CSV check, regex match, render step, probe result). Designed as evidence for the deterministic-conformance regime (EAA Directive 2019/882); the Level 2 tagged PDF and per-page accessibility verdicts come from these steps. Adjacent on disk only; the artefact frontmatter does NOT embed a pointer to this file (the .ai.json companion is the regulator-facing one).",
+  "auditId": null,
+  "runRevision": 1,
+  "lastWriteAt": "2026-06-26T12:57:26.145Z",
+  "operator": "tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": null,
+  "startedAt": "2026-06-26T12:39:47.527Z",
+  "frameworks": [
+    {
+      "id": "EU-EAA-Directive-2019-882",
+      "title": "Directive (EU) 2019/882 — European Accessibility Act",
+      "version": "2019/882",
+      "jurisdiction": "EU",
+      "appliesTo": "accessibility-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-eaa": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-EAA-Directive-2019-882"
+  ],
+  "companion": "ddt-cognovamx-investor-pitch.provenance.ai.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "03bdc43ad4e0d345e377ecc6660a85fbc0202db9",
+      "shortSha": "03bdc43"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v25.9.0",
+    "host": "toms-MacBook-Pro-18478.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "defaults": {
+      "agent": "deterministic",
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-EAA-Directive-2019-882"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-06-26T12:39:48.411Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "investor-pitch.md",
+        "doctype": "letter",
+        "sourceSha": "b4609f57a37413ea91a5f1bb288ed91ac138571f"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-26T12:46:18.209Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "investor-pitch.md",
+        "doctype": "letter",
+        "sourceSha": "7f02e559655625fedf8ab48692f59639415a20ad"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-06-26T12:57:26.145Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "investor-pitch.md",
+        "doctype": "letter",
+        "sourceSha": "f59155485aa2348018e3fb96a1123b47bf65eb3f"
+      },
+      "outcome": "pass"
+    }
+  ]
+}
