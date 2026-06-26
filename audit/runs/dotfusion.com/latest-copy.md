@@ -23,9 +23,9 @@ htmlPagesAudited: 12
 version: "1.0"
 pipelineVersion: "1.1.0"
 confidential: true
+type: audit-report
 mx:
   status: active
-  contentType: audit-report
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-06-26/dotfusion.com/dotfusion-com-report.md
   maintainer: info@cognovamx.com
