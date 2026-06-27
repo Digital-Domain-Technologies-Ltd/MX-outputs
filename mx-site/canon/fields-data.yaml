@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '5.0'
+version: '5.2'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-04-15'
+modified: '2026-06-27'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -1212,6 +1212,34 @@ mx:
         runtime: node
         command: node scripts/validate.js
       notes: Its presence makes a cog an action-doc. Action cogs live in scripts/ folder.
+      status: canonical
+      profile: cog
+      required: false
+    - name: hasDeterministicScript
+      type: boolean
+      definition: True when the embedded or referenced script produces byte-identical output for the same inputs on every run; false when explicitly non-deterministic; absent means not applicable or not yet declared.
+      example: true
+      notes: >-
+        Tri-state semantics: true = deterministic (declared by author), false = non-deterministic (declared by author),
+        absent = not applicable or unknown. Applies to action-cogs with actionType scripted or hybrid. Machines enforcing
+        determinism guarantees before executing a cog should check this field before shelling out. A cog that calls an
+        LLM, reads system clock, or produces randomly-ordered output must declare false. A cog whose embedded script
+        produces the same bytes for the same inputs on any machine must declare true. The field is opt-in: omitting it
+        makes no claim either way.
+      status: canonical
+      profile: cog
+      required: false
+    - name: hasReasoning
+      type: boolean
+      definition: True when every step in the cog carries both a Reason annotation (why the step exists) and an Expected results annotation (what success looks like); false when explicitly declared absent; absent means not applicable or not yet assessed.
+      example: true
+      notes: >-
+        Tri-state semantics: true = both Reason and Expected results are present after every step (declared by author),
+        false = explicitly declared absent, absent = no claim. Applies to instruction manuals (info-docs with step sequences),
+        action-docs, and any cog whose body guides an operator through a procedure. The two annotations together make a cog
+        self-explanatory to a cold reader: Reason answers "why does this step exist?"; Expected results answers "how do I
+        know it succeeded?". A cog that carries only one of the two must declare false or omit the field. Complements
+        hasDeterministicScript (which applies to the embedded script); hasReasoning applies to the instructional prose.
       status: canonical
       profile: cog
       required: false
