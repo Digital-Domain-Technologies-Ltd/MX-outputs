@@ -12,6 +12,7 @@ auditTool: "web-audit-suite"
 auditDate: "2026-06-26"
 auditCommand: "node scripts/audit-pipeline.js https://dotfusion.com --pages 12"
 description: "Executive audit report reviewing accessibility, performance, SEO, structured data, and AI agent compatibility for Dotfusion"
+type: info-doc
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
 performanceScore: 85
 accessibilityScore: 76
@@ -25,7 +26,7 @@ pipelineVersion: "1.1.0"
 confidential: true
 mx:
   status: active
-  contentType: audit-report
+  x-mx-contentType: audit-report
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-06-26/dotfusion.com/dotfusion-com-report.md
   maintainer: info@cognovamx.com
