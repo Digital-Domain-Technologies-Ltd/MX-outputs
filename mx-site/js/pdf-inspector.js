@@ -169,6 +169,14 @@ async function inspectFile(file, resultsEl, busyEl) {
 
     busyEl.hidden = true;
     renderResults(file, classification, findings, resultsEl);
+
+    // Hand the parsed provenance object to the Explore tab (provenance-explorer.js
+    // listens for this event). Browser-only seam; the detection core is untouched.
+    if (findings.provenance?.parsed) {
+      document.dispatchEvent(new CustomEvent('mx:provenance', {
+        detail: { source: file.name, parsed: findings.provenance.parsed },
+      }));
+    }
   } catch (err) {
     busyEl.hidden = true;
     renderError(resultsEl, `Could not parse the PDF: ${err.message}`);

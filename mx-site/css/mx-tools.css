@@ -367,3 +367,316 @@
   color: var(--mx-text);
   margin: 1rem 0;
 }
+
+/* ── Inspector tabs (Inspect | Explore) ──────────────────── */
+
+.tool-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin: 2rem 0 0;
+  border-bottom: 1px solid var(--mx-border);
+}
+
+.tool-tab {
+  flex: 0 0 auto;
+  padding: 0.65rem 1.25rem;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--mx-text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.tool-tab:hover,
+.tool-tab:focus-visible {
+  color: var(--mx-text);
+}
+
+.tool-tab.is-active {
+  color: var(--mx-blue-light);
+  border-bottom-color: var(--mx-blue-light);
+}
+
+.tool-tabpanel[hidden] {
+  display: none;
+}
+
+/* ── Provenance explorer ─────────────────────────────────── */
+
+.prov-explorer {
+  margin-top: 1.5rem;
+}
+
+.prov-sourcebar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: var(--mx-tool-surface-strong);
+}
+
+.prov-source-name {
+  font-weight: 600;
+  color: var(--mx-text);
+  font-family: var(--mx-font-mono);
+  word-break: break-all;
+}
+
+.prov-source-meta {
+  color: var(--mx-text-muted);
+  font-size: 0.9rem;
+}
+
+.prov-dropzone {
+  padding: 1.25rem 1.5rem;
+  max-width: none;
+}
+
+.prov-message:empty {
+  display: none;
+}
+
+.prov-note {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  background-color: var(--mx-tool-surface-strong);
+  border-left: 4px solid var(--mx-tool-fail);
+  color: var(--mx-text);
+}
+
+.prov-empty-state {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background-color: var(--mx-tool-surface);
+  color: var(--mx-text-muted);
+  line-height: 1.65;
+}
+
+.prov-empty-state p {
+  margin: 0 0 0.75rem;
+}
+
+.prov-empty-state p:last-child {
+  margin-bottom: 0;
+}
+
+/* Legend */
+
+.prov-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  color: var(--mx-text-muted);
+}
+
+.prov-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.prov-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.prov-dot.is-pass    { background-color: var(--mx-tool-pass); }
+.prov-dot.is-warn    { background-color: var(--mx-tool-warn); }
+.prov-dot.is-fail    { background-color: var(--mx-tool-fail); }
+.prov-dot.is-skipped { background-color: var(--mx-text-muted); }
+.prov-dot.is-info    { background-color: var(--mx-blue-light); }
+
+/* Two-column body */
+
+.prov-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .prov-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.prov-nodelist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.prov-node {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border: 0;
+  border-left: 3px solid var(--mx-border-strong);
+  border-radius: 6px;
+  background-color: var(--mx-tool-surface);
+  color: var(--mx-text);
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.prov-node:hover,
+.prov-node:focus-visible {
+  background-color: var(--mx-tool-surface-strong);
+}
+
+.prov-node.is-selected {
+  background-color: var(--mx-tool-surface-strong);
+  outline: 1px solid var(--mx-blue-light);
+}
+
+.prov-node.is-pass    { border-left-color: var(--mx-tool-pass); }
+.prov-node.is-warn    { border-left-color: var(--mx-tool-warn); }
+.prov-node.is-fail    { border-left-color: var(--mx-tool-fail); }
+.prov-node.is-skipped { border-left-color: var(--mx-text-muted); }
+.prov-node.is-info    { border-left-color: var(--mx-blue-light); }
+
+.prov-node-status {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background-color: var(--mx-tool-surface-strong);
+}
+
+.prov-node-status.is-pass    { color: var(--mx-tool-pass); }
+.prov-node-status.is-warn    { color: var(--mx-tool-warn); }
+.prov-node-status.is-fail    { color: var(--mx-tool-fail); }
+.prov-node-status.is-skipped { color: var(--mx-text-muted); }
+.prov-node-status.is-info    { color: var(--mx-blue-light); }
+
+.prov-node-label {
+  font-weight: 600;
+  font-family: var(--mx-font-mono);
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+.prov-node-sub {
+  color: var(--mx-text-muted);
+  font-size: 0.8rem;
+  word-break: break-word;
+}
+
+/* Detail panel */
+
+.prov-detail {
+  padding: 1.25rem 1.5rem;
+  border-radius: 10px;
+  background-color: var(--mx-tool-surface);
+  min-height: 8rem;
+  overflow-x: auto;
+}
+
+.prov-detail-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--mx-border);
+}
+
+.prov-detail-title {
+  margin: 0;
+  font-family: var(--mx-font-mono);
+  font-size: 1.05rem;
+  color: var(--mx-white);
+  word-break: break-word;
+}
+
+.prov-dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(6rem, max-content) minmax(0, 1fr);
+  gap: 0.4rem 1rem;
+}
+
+.prov-dl dt {
+  font-weight: 600;
+  color: var(--mx-text-muted);
+  font-size: 0.85rem;
+  font-family: var(--mx-font-mono);
+}
+
+.prov-dl dd {
+  margin: 0;
+  min-width: 0;
+  color: var(--mx-text);
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.prov-scalar {
+  font-size: 0.92rem;
+}
+
+.prov-null,
+.prov-empty {
+  color: var(--mx-text-muted);
+  font-style: italic;
+}
+
+.prov-hash {
+  font-family: var(--mx-font-mono);
+  font-size: 0.82rem;
+  cursor: pointer;
+  border-bottom: 1px dotted var(--mx-border-strong);
+  word-break: break-all;
+}
+
+.prov-hash:hover,
+.prov-hash:focus-visible {
+  color: var(--mx-blue-light);
+}
+
+.prov-hash.is-copied {
+  color: var(--mx-tool-pass);
+}
+
+.prov-tree {
+  margin: 0.2rem 0;
+}
+
+.prov-tree > summary {
+  cursor: pointer;
+  color: var(--mx-text-muted);
+  font-size: 0.85rem;
+}
+
+.prov-tree-row {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 1px solid var(--mx-border);
+  margin-left: 0.3rem;
+}
+
+.prov-key {
+  color: var(--mx-text-muted);
+  font-family: var(--mx-font-mono);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}

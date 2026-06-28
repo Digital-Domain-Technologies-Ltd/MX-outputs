@@ -165,7 +165,20 @@ mx:
             <p class="tool-dropzone-busy" data-pdf-inspector-busy hidden></p>
           </label>
 
-          <div class="tool-results" data-pdf-inspector-results hidden aria-live="polite"></div>
+          <div class="tool-tabs" role="tablist" aria-label="Inspector views">
+            <button type="button" class="tool-tab is-active" role="tab" id="tab-inspect" data-tab="inspect" aria-selected="true" aria-controls="panel-inspect">Inspect</button>
+            <button type="button" class="tool-tab" role="tab" id="tab-explore" data-tab="explore" aria-selected="false" aria-controls="panel-explore" tabindex="-1">Explore</button>
+          </div>
+
+          <div class="tool-tabpanel" id="panel-inspect" role="tabpanel" aria-labelledby="tab-inspect" data-tabpanel="inspect">
+            <div class="tool-results" data-pdf-inspector-results hidden aria-live="polite"></div>
+          </div>
+
+          <div class="tool-tabpanel" id="panel-explore" role="tabpanel" aria-labelledby="tab-explore" data-tabpanel="explore" hidden>
+            <h2 id="explore-the-chain">Explore the evidence chain</h2>
+            <p>When a PDF carries an embedded provenance record, this view lets you walk it step by step: the build environment, the accountable parties, the regulatory frameworks the record cites, and every recorded action in the chain. Inspect a PDF on the Inspect tab and its provenance loads here automatically, or drop a <code>.provenance.ai.json</code> file below to explore one on its own. Nothing leaves your browser.</p>
+            <div class="prov-explorer" data-prov-explorer></div>
+          </div>
 
           <h2 id="what-the-inspector-checks">What the inspector checks</h2>
 
@@ -334,5 +347,6 @@ mx:
 
   <script src="../js/app.js"></script>
   <script type="module" src="../js/pdf-inspector.js"></script>
+  <script type="module" src="../js/provenance-explorer.js"></script>
 </body>
 </html>
