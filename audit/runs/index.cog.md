@@ -9,7 +9,7 @@ title: "audit-runs-index"
 version: "1.0"
 description: "Index of all committed audit run outputs under mx-outputs/audit/runs/."
 created: 2026-06-18
-modified: 2026-06-26
+modified: 2026-06-28
 author: Tom Cranstoun
 type: info-doc
 tags: [audit, index, runs, latest-copy]
@@ -35,7 +35,8 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | crowdfavorite.com | - | pending | - | - |
 | dangerdevices.com | - | pending | - | - |
 | dkd.de-de | - | pending | - | - |
-| dotfusion.com | 2026-06-26 | pass | [latest-copy.pdf](dotfusion.com/latest-copy.pdf) | [latest-copy.md](dotfusion.com/latest-copy.md) |
+| doftusion.com | - | pending | - | - |
+| dotfusion.com | 2026-06-28 | pass | [latest-copy.pdf](dotfusion.com/latest-copy.pdf) | [latest-copy.md](dotfusion.com/latest-copy.md) |
 | enhancely.ai | - | pending | - | - |
 | github.com-ai-ecoverse-slicc | - | pending | - | - |
 | leica-microsystems.com | - | pending | - | - |
