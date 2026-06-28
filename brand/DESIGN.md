@@ -3,8 +3,8 @@
 title: "DESIGN - MX Site (CogNovaMX bookshop dark)"
 description: "Machine-readable brand description for the MX Site (CogNovaMX bookshop dark) theme. One fetch gives any AI tool, developer, or design tool the complete system."
 author: "Tom Cranstoun"
-created: "2026-06-25"
-modified: "2026-06-25"
+created: "2026-06-28"
+modified: "2026-06-28"
 version: "1.0"
 type: info-doc
 tags: [brand, design-system, tokens, mx-site]
