@@ -6226,13 +6226,15 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
 
         Index
 
-        - What the Ban Revealed
+        - The Shift That Just Happened
 
-        - The Deeper Problem
+        - What It Looks Like When You Don't Have It
 
-        - What Verification Actually Requires
+        - What It Looks Like When You Do
 
-        - Why This Matters Now
+        - What Is in the Way
+
+        - The Evidence
 
           The Governance Gap Regulators Just Discovered
 
@@ -6242,70 +6244,65 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             5 min read
 
-On 26 June 2026, the Trump administration partially lifted its export ban on Anthropic's Fable 5 model - a move reported by NPR and confirmed in Anthropic's own statement. The story sounds like a routine regulatory reversal. Read carefully, and you see something deeper: the government discovered it cannot verify whether an AI model is safe to release - and there is no standardised framework to change that.
+On 26 June 2026, the Trump administration partially lifted its export ban on Anthropic's Fable 5 model - a move reported by NPR and confirmed in Anthropic's own statement. The story sounds like a routine regulatory reversal. Read carefully, and you see something deeper: the government discovered it cannot verify whether an AI model is safe to release. We built that framework. It's called REGINALD, and it has been running on our own infrastructure while governments negotiated in the dark.
 
-This is the hidden story in the reporting.
+The Shift That Just Happened
 
-What the Ban Revealed
+AI regulation stopped being theoretical. In the space of two weeks, a government imposed an export ban on a frontier model, discovered it had no objective way to evaluate the safety claims involved, and negotiated a partial exception based on commercial pressure rather than evidence.
 
-Commerce Secretary Howard Lutnick's letter to Anthropic said the company had "worked with the U.S. government to address risks associated with the Covered Models." The phrasing is diplomatic. What it actually describes is a negotiation in the dark: the government wanted proof Fable 5 was safe to export. Anthropic couldn't provide it in a form the government could verify. They reached a compromise - a partial exception for select partners while they figure out a framework.
+That pattern will repeat. Every jurisdiction drafting AI governance frameworks is about to discover the same gap: there is no standard format for an AI safety claim, no way to check who made it, no way to verify it hasn't been altered, and no way for a third party to confirm it without access to internal systems.
 
-Here's the sentence that matters:
+The companies that have already built their attestation infrastructure will navigate this cleanly. The ones that haven't will negotiate.
 
-"The conversations have also focused on determining a standardised framework to evaluate cases of suspected security bypasses in the future."
+What It Looks Like When You Don't Have It
 
-The government is asking: How do we know whether a model's security claims are true? Anthropic is asking: What evidence would you accept? And neither side had a clear answer.
+Anthropic is one of the most technically sophisticated AI companies in the world. They still spent two weeks under a partial export ban because the government had no standardised way to evaluate their safety claims. The result: a negotiated exception for select partners, ongoing uncertainty, and a framework-building process that will define the next round of restrictions.
 
-So they negotiated case-by-case. They'll negotiate again next time.
+That is what it looks like without verifiable attestation. A company that cannot prove its claims to an objective third party cannot get a clean answer from a regulator. It gets a negotiation, and negotiations are slow, political, and unpredictable.
 
-The Deeper Problem
+What It Looks Like When You Do
 
-This isn't a failure of good faith. It's a failure of infrastructure.
+A company operating with machine-readable attestation gives a regulator something different: a query. Instead of "can you prove your model is safe?" turning into weeks of back-and-forth, it turns into a lookup. The regulator queries the attestation registry, checks the cryptographic signature, walks the evidence chain, and decides - using their own tools, without needing access to the company's internal systems.
 
-There is no standard way for an AI company to prove it has built safety controls into a model. There is no standard way for a government to verify that those controls work. There is no agreed format for the evidence - no chain of custody, no signature binding the claim to the person who made it, no way to audit the audit.
+That is the promised land: export decisions made on evidence, not trust. Safety assessments completed in days, not months. Insurance priced on verifiable data, not guesswork. Enterprise buyers who can confirm your AI claims without demanding access to your systems.
 
-When you can't verify a claim, you make it a negotiation. When you make it a negotiation, trust becomes a matter of politics and relationship capital instead of evidence.
+What Is in the Way
 
-This problem will explode as AI regulation spreads.
+Five obstacles stand between any AI company and that outcome.
 
-The EU AI Act, now in force, requires companies to document "the development and use" of AI systems and maintain "traceability mechanisms" for high-risk ones. What does that mean? Companies are building bespoke documentation systems because there's no standard format. Regulators are reviewing prose because there's no machine-readable alternative. Insurance companies are pricing AI risk without the data they need to price it accurately.
+Obstacle 1: Safety reports are prose. A regulator cannot query a PDF. They can read it, but they cannot check it automatically against other claims, verify its integrity, or confirm it hasn't been changed since publication.
 
-Every regulator is about to discover what the Trump administration just did: we don't have a way to verify AI claims at scale.
+REGINALD registers machine-readable declarations - structured data that specifies capability matrix, known limits, failure modes, and risk tier. It is queryable, not just readable.
+
+Obstacle 2: There is no proof of authorship. A document can be altered. A signature cannot - not without breaking it.
+
+REGINALD uses RFC 9421 HTTP signatures over an operator-controlled DID-document key. If the attestation changes, the signature fails. The verifier knows immediately.
+
+Obstacle 3: There is no chain of custody. A single attested claim is a snapshot. A regulator needs to know how that claim was reached and what changed between training and deployment.
+
+REGINALD maintains an immutable audit trail. Every change is tracked, every review recorded, every test result stored.
+
+Obstacle 4: Third-party verification requires internal access. Asking a partner or auditor to verify AI claims today means giving them access to systems you may not want to share.
+
+REGINALD's attestations are public and verifiable by any third party using standard open-source tools - DID resolution, JCS, Ed25519. No internal access required.
+
+Obstacle 5: Every company invents its own format. A bespoke attestation document from one company cannot be compared against one from another. There is no common ground for a regulator, an insurer, or a buyer.
+
+REGINALD is built on open standards: OKF, Schema.org, DCAT, IETF RFC 9421, SPDX. The metadata layer (MX) is open and governed by The Gathering - a community standards body. Any company can implement the standard. REGINALD is the registry that makes it discoverable and trustworthy.
+
+The Evidence
+
+We built REGINALD to solve our own problem first. Our AI partner Maxine operates through it every day. Every audit she produces carries a REGINALD-registered evidence chain - not just a report, but an attested record any third party can verify. Her capability declarations are registered: what she can do, what she cannot, what she was trained to do.
+
+The infrastructure is not a prototype. It is production-ready, self-deployed, and running.
+
+The EU AI Act is in force. The US voluntary review framework will formalize. The UK, Canada, Australia, Singapore, and Japan are all moving. Each one of them will hit the same wall the Trump administration just hit: companies that can prove their claims will clear it. Companies that cannot will negotiate.
+
+The window to build attestation infrastructure before regulators mandate it is about 18 months.
+
+REGINALD is available now.
 
 Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
-
-What Verification Actually Requires
-
-Here's what solving it means. A verifiable claim about an AI model needs:
-
--
-Structured data. Not prose, not a PDF report - a machine-readable declaration of what the model is, how it was trained, what it can and cannot do, what the known failure modes are.
-
--
-Proof of authorship. A signature that proves who made the claim and when, cryptographically bound to the claim itself. If someone rewrites the claim, the signature breaks.
-
--
-An audit trail. Every change tracked. Every review recorded. Every test result stored. A complete chain of custody from raw data through training through deployment.
-
--
-Third-party verifiability. A regulator, an auditor, a business partner, or any other third party should be able to check the claim against the evidence without access to the company's internal systems. The evidence chain should be public (the claim) plus queryable (the supporting facts).
-
--
-Open standards. If each company invents its own format, you're back to custom negotiation. The format has to be published, standardised, governed by the community of people who use it.
-
-That's the infrastructure that doesn't exist yet. And once it does, the Anthropic negotiation won't need to happen. The government will query the attestation. They'll review the evidence. They'll check the signature. They'll decide.
-
-Why This Matters Now
-
-Regulation is coming. The EU AI Act is in force. The UK, Canada, Australia, Singapore, and Japan all have AI strategies in motion. The Trump administration just announced a voluntary review framework - which will formalize into a requirement once someone sues a company for harms from an unreviewed model.
-
-The companies that move first will build the infrastructure. The companies that move second will adopt it. The companies that don't move will find themselves unable to export, unable to insure, unable to defend themselves in court.
-
-Investors should watch this closely. The winners of the next 18 months are the ones shipping the infrastructure that turns "we have no way to verify this" into "here's the verifiable evidence, check it yourself."
-
-The framework the government needs already exists. The question is whether companies will adopt it before regulators mandate it.
-
-Learn more about CogNovaMX and REGINALD
 
             About the author
 
