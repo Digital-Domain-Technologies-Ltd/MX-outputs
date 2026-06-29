@@ -120,7 +120,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 896,
+        "wordCount": 901,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -200,7 +200,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="896">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="901">
         <header class="article-header">
           <h1>The Governance Gap Regulators Just Discovered</h1>
           <div class="article-meta"
@@ -228,17 +228,22 @@ mx:
 <p>A company operating with machine-readable attestation gives a regulator something different: a query. Instead of &quot;can you prove your model is safe?&quot; turning into weeks of back-and-forth, it turns into a lookup. The regulator queries the attestation registry, checks the cryptographic signature, walks the evidence chain, and decides - using their own tools, without needing access to the company's internal systems.</p>
 <p>That is the promised land: export decisions made on evidence, not trust. Safety assessments completed in days, not months. Insurance priced on verifiable data, not guesswork. Enterprise buyers who can confirm your AI claims without demanding access to your systems.</p>
 <h2 id="what-is-in-the-way" tabindex="-1">What Is in the Way</h2>
-<p>Five obstacles stand between any AI company and that outcome.</p>
-<p><strong>Obstacle 1: Safety reports are prose.</strong> A regulator cannot query a PDF. They can read it, but they cannot check it automatically against other claims, verify its integrity, or confirm it hasn't been changed since publication.</p>
-<p>REGINALD registers machine-readable declarations - structured data that specifies capability matrix, known limits, failure modes, and risk tier. It is queryable, not just readable.</p>
-<p><strong>Obstacle 2: There is no proof of authorship.</strong> A document can be altered. A signature cannot - not without breaking it.</p>
-<p>REGINALD uses RFC 9421 HTTP signatures over an operator-controlled DID-document key. If the attestation changes, the signature fails. The verifier knows immediately.</p>
-<p><strong>Obstacle 3: There is no chain of custody.</strong> A single attested claim is a snapshot. A regulator needs to know how that claim was reached and what changed between training and deployment.</p>
-<p>REGINALD maintains an immutable audit trail. Every change is tracked, every review recorded, every test result stored.</p>
-<p><strong>Obstacle 4: Third-party verification requires internal access.</strong> Asking a partner or auditor to verify AI claims today means giving them access to systems you may not want to share.</p>
-<p>REGINALD's attestations are public and verifiable by any third party using standard open-source tools - DID resolution, JCS, Ed25519. No internal access required.</p>
-<p><strong>Obstacle 5: Every company invents its own format.</strong> A bespoke attestation document from one company cannot be compared against one from another. There is no common ground for a regulator, an insurer, or a buyer.</p>
-<p>REGINALD is built on open standards: OKF, <a href="https://schema.org">Schema.org</a>, DCAT, IETF RFC 9421, SPDX. The metadata layer (MX) is open and governed by The Gathering - a community standards body. Any company can implement the standard. REGINALD is the registry that makes it discoverable and trustworthy.</p>
+<p>Five obstacles stand between any AI company and that outcome. REGINALD removes each one.</p>
+<h3 id="section-1-safety-reports-are-prose" tabindex="-1">1. Safety reports are prose</h3>
+<p>A regulator cannot query a PDF. They can read it, but they cannot check it automatically against other claims, verify its integrity, or confirm it has not been changed since publication.</p>
+<p><strong>What REGINALD does:</strong> Registers machine-readable declarations - structured data specifying capability matrix, known limits, failure modes, and risk tier. Queryable, not just readable.</p>
+<h3 id="section-2-there-is-no-proof-of-authorship" tabindex="-1">2. There is no proof of authorship</h3>
+<p>A document can be altered. A signature cannot - not without breaking it.</p>
+<p><strong>What REGINALD does:</strong> Uses RFC 9421 HTTP signatures over an operator-controlled DID-document key. If the attestation changes, the signature fails. The verifier knows immediately.</p>
+<h3 id="section-3-there-is-no-chain-of-custody" tabindex="-1">3. There is no chain of custody</h3>
+<p>A single attested claim is a snapshot. A regulator needs to know how that claim was reached and what changed between training and deployment.</p>
+<p><strong>What REGINALD does:</strong> Maintains an immutable audit trail. Every change tracked, every review recorded, every test result stored.</p>
+<h3 id="section-4-third-party-verification-requires-internal-access" tabindex="-1">4. Third-party verification requires internal access</h3>
+<p>Asking a partner or auditor to verify AI claims today means giving them access to systems you may not want to share.</p>
+<p><strong>What REGINALD does:</strong> Makes attestations public and verifiable by any third party using standard open-source tools - DID resolution, JCS, Ed25519. No internal access required.</p>
+<h3 id="section-5-every-company-invents-its-own-format" tabindex="-1">5. Every company invents its own format</h3>
+<p>A bespoke attestation document from one company cannot be compared against one from another. There is no common ground for a regulator, an insurer, or a buyer.</p>
+<p><strong>What REGINALD does:</strong> Built on open standards - OKF, <a href="https://schema.org">Schema.org</a>, DCAT, IETF RFC 9421, SPDX. The metadata layer (MX) is open and governed by The Gathering, a community standards body. Any company can implement the standard. REGINALD is the registry that makes it discoverable and trustworthy.</p>
 <h2 id="the-evidence" tabindex="-1">The Evidence</h2>
 <p>We built REGINALD to solve our own problem first. Our AI partner Maxine operates through it every day. Every audit she produces carries a REGINALD-registered evidence chain - not just a report, but an attested record any third party can verify. Her capability declarations are registered: what she can do, what she cannot, what she was trained to do.</p>
 <p>The infrastructure is not a prototype. It is production-ready, self-deployed, and running.</p>
