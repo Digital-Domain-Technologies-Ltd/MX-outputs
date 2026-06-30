@@ -6268,27 +6268,37 @@ That is the promised land: export decisions made on evidence, not trust. Safety 
 
 What Is in the Way
 
-Five obstacles stand between any AI company and that outcome.
+Five obstacles stand between any AI company and that outcome. REGINALD removes each one.
 
-Obstacle 1: Safety reports are prose. A regulator cannot query a PDF. They can read it, but they cannot check it automatically against other claims, verify its integrity, or confirm it hasn't been changed since publication.
+1. Safety reports are prose
 
-REGINALD registers machine-readable declarations - structured data that specifies capability matrix, known limits, failure modes, and risk tier. It is queryable, not just readable.
+A regulator cannot query a PDF. They can read it, but they cannot check it automatically against other claims, verify its integrity, or confirm it has not been changed since publication.
 
-Obstacle 2: There is no proof of authorship. A document can be altered. A signature cannot - not without breaking it.
+What REGINALD does: Registers machine-readable declarations - structured data specifying capability matrix, known limits, failure modes, and risk tier. Queryable, not just readable.
 
-REGINALD uses RFC 9421 HTTP signatures over an operator-controlled DID-document key. If the attestation changes, the signature fails. The verifier knows immediately.
+2. There is no proof of authorship
 
-Obstacle 3: There is no chain of custody. A single attested claim is a snapshot. A regulator needs to know how that claim was reached and what changed between training and deployment.
+A document can be altered. A signature cannot - not without breaking it.
 
-REGINALD maintains an immutable audit trail. Every change is tracked, every review recorded, every test result stored.
+What REGINALD does: Uses RFC 9421 HTTP signatures over an operator-controlled DID-document key. If the attestation changes, the signature fails. The verifier knows immediately.
 
-Obstacle 4: Third-party verification requires internal access. Asking a partner or auditor to verify AI claims today means giving them access to systems you may not want to share.
+3. There is no chain of custody
 
-REGINALD's attestations are public and verifiable by any third party using standard open-source tools - DID resolution, JCS, Ed25519. No internal access required.
+A single attested claim is a snapshot. A regulator needs to know how that claim was reached and what changed between training and deployment.
 
-Obstacle 5: Every company invents its own format. A bespoke attestation document from one company cannot be compared against one from another. There is no common ground for a regulator, an insurer, or a buyer.
+What REGINALD does: Maintains an immutable audit trail. Every change tracked, every review recorded, every test result stored.
 
-REGINALD is built on open standards: OKF, Schema.org, DCAT, IETF RFC 9421, SPDX. The metadata layer (MX) is open and governed by The Gathering - a community standards body. Any company can implement the standard. REGINALD is the registry that makes it discoverable and trustworthy.
+4. Third-party verification requires internal access
+
+Asking a partner or auditor to verify AI claims today means giving them access to systems you may not want to share.
+
+What REGINALD does: Makes attestations public and verifiable by any third party using standard open-source tools - DID resolution, JCS, Ed25519. No internal access required.
+
+5. Every company invents its own format
+
+A bespoke attestation document from one company cannot be compared against one from another. There is no common ground for a regulator, an insurer, or a buyer.
+
+What REGINALD does: Built on open standards - OKF, Schema.org, DCAT, IETF RFC 9421, SPDX. The metadata layer (MX) is open and governed by The Gathering, a community standards body. Any company can implement the standard. REGINALD is the registry that makes it discoverable and trustworthy.
 
 The Evidence
 
@@ -7518,6 +7528,17 @@ Blog
         Commentary
         Blockchain
         Announcements
+
+            When the timetable lies
+
+            Daniel Serrano applied the AI-and-transport argument to university admissions. The second half of the answer is in MX: The Protocols.
+
+            29 June 2026
+            - AI agents
+
+- CMS
+
+- MX foundations
 
             The Governance Gap Regulators Just Discovered
 
@@ -16985,6 +17006,152 @@ In 2024, a small article said AI's real impact on the web would be as a content 
             - Explore the books
 
             - Get in touch
+
+---
+
+## When the timetable lies | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/when-the-timetable-lies.html
+
+**Description:** Daniel Serrano applied the AI-and-transport argument to university admissions. The second half of the answer is in MX: The Protocols.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - The transport argument
+
+        - The second half of the answer
+
+        - Daniel's post, translated
+
+          When the timetable lies
+
+            29 June 2026
+            ·
+            Tom Cranstoun
+            ·
+            11 min read
+
+Thank you, Daniel Serrano.
+
+His post, translated below for English readers, starts with a student asking an AI assistant for help choosing a university in Madrid. The assistant returned cut-off grades, application dates, open-day times, and tips for the most competitive options. Every piece of information was plausible. Every date had already passed.
+
+Daniel's diagnosis is the same as the one I reached through a different route. He used university admissions. I used a transport example. The failure is identical.
+
+The transport argument
+
+I asked an AI assistant to plan a journey from Rovinj to Málaga. It returned a ferry that did not run that day, a bus to the wrong airport, and a flight departing from a third one. The connections overlapped. The itinerary looked credible. None of it would have got me to Spain.
+
+The information existed. Every timetable was published somewhere. The problem was not missing data. It was that the data carried no signal about whether it was still true: no expiry, no status, no indication that the ferry only ran in summer or that the airport had changed.
+
+A transport network is a system of constraints. So is a university admissions process. So is any customer journey that depends on time-sensitive facts.
+
+An agent reading a page that says "registration open" has no way to know whether that is true today, was true six months ago, or was never updated after the event passed. The page does not say. The content management system knows: review dates, expiry fields, and publication states are standard in modern platforms. That knowledge stays inside the tool.
+
+The second half of the answer
+
+Daniel identifies where the failure happens: upstream, in the editing environment, before any machine arrives to read the page. That observation is the starting point for a long chapter in MX: The Protocols.
+
+The chapter works through what it means to design a publishing environment so that a date enters the system as a piece of data with a declared status and a machine-readable expiry, not as free text embedded in a paragraph that contradicts the meta description and the sidebar simultaneously.
+
+When those constraints are declared, the agent's job changes. It reads what the institution published, checks whether that declaration is still current, and reasons from there. It moves from stitching together plausible fragments to reading a record that says what it means.
+
+MX: The Protocols is out soon. It covers the field-level specifications, the content lifecycle layer, and the governance patterns that make this work in practice, including how transport networks and AI agents operate on the same logic.
+
+Daniel's post, translated
+
+The following is a translation of Daniel Serrano's LinkedIn post, published 29 June 2026, reproduced with thanks.
+
+The plan to arrive late for everything
+
+I asked an AI assistant about a university, as any student might. The response looked like a solid plan. Every date was wrong.
+
+I asked an AI assistant what any secondary school student might ask: help me choose where to study Computer Engineering in Madrid, tell me what grade I need, when applications open, and when I can visit the campus.
+
+The response looked like a solid plan: it listed cut-off grades university by university, an application window with dates, open days, and tips for the most competitive options. Any student could have followed it step by step.
+
+That same student would have missed every deadline.
+
+The assistant recommended signing up for open days "in April or May" and gave a specific date for one computer science school, mid-March. I made the query on 19 June, so all those dates had passed weeks or months earlier. The actual open day at that school had been held in April, not March, so even the date the assistant offered was wrong. For the cut-off grade, the most important figure in the entire response, the assistant drew on a third-party aggregator rather than the universities themselves. And the application deadline varied depending on which page it had read: one source closed it on 26 June, another in the same sector extended it to 3 July. That difference decides whether a student gets in or is turned away.
+
+Each piece of information, taken on its own, was plausible. Together they described a customer journey no student could have completed that day.
+
+The model invented nothing. It simply stitched together the fragments it found.
+
+The same failure, told with a train
+
+Tom Cranstoun described this same pattern using a travel example, in a piece published by Boye & Company (The AI Isn't the Problem. The Web Is.). Cranstoun asked his assistant to take him from Rovinj to Málaga on a specific date. The assistant returned an itinerary featuring a ferry that did not run that day, a bus to the wrong airport, and a flight departing from a different one again. The connections overlapped, and the whole thing looked like a credible itinerary, but none of it would have got him to Spain.
+
+Cranstoun's diagnosis is the one I want to bring into the university context. The information existed: ferry times, flight times, and train times were all published. The problem was not missing information, but that the information was not available in a form a system could interpret, verify, and rely on when passing it on.
+
+A transport network is a system of constraints: timetables, seasonal services, last connections of the day, and transfer times all determine what a traveller can and cannot do. A person reads "operates Mondays, Wednesdays, and Fridays" and immediately understands the implication. A machine can read those same words without knowing with any certainty what to do with them.
+
+The student's journey towards enrolment works in exactly the same way, because it too is a system of constraints. Application deadlines, cut-off grades, language requirements, open-day dates, and available places all shape what a student can do and when. A student reads "deadline 15 July" and knows what to do and when. The agent assisting them reads the same phrase without knowing whether the student is still in time, whether that date is still current, or whether the page it found it on has ever been updated.
+
+That is why web access alone is not enough. Search retrieves fragments and browsing surfaces pages, but neither resolves the problem when meaning is implicit, incomplete, or buried in a calendar nobody marked as expired.
+
+The harder question
+
+I then raised the stakes, as Cranstoun did when he moved from the straightforward journey to one that crossed a border. I asked the assistant about a Colombian student who wants to take a master's degree in Spain: do I need to have my degree recognised, what documents and deadlines do I need, is a visa required, when should I start?
+
+The intersection of systems, qualifications, recognition, the consulate, the university, is the equivalent of the rail bottleneck between two countries, and there the assistant's response broke in a different way. The substance was broadly correct: accessing a master's degree usually does not require formal recognition of a foreign qualification; a university's own assessment of equivalence is normally enough. But everything the student could actually act on dissolved into generalities: "usually", "it depends on the university", "almost always", "they tend to ask for". The recommended lead time shifted from paragraph to paragraph: ten to twelve months in one place, eight to twelve in the summary. Costs appeared as fixed figures, with no validity date, when in practice they change every year.
+
+The assistant could not map out a customer journey that worked, because the specific constraints of each university and each programme were not declared anywhere it could read. So it filled that gap with the only thing it had: generalities that sound reasonable. The student still did not know what they personally needed to do.
+
+Why a more capable model will not fix the problem
+
+One thing is worth accepting before investing another euro in technology: scaling the model does not fix the web the models read.
+
+More parameters, better retrieval, and greater real-time access to pages all help, but none of that changes the content, which is the underlying problem. If facts are implicit, inconsistent, or were never declared, the system still has to infer too much, and it is in the inference that the customer journey breaks down. The model goes beyond what the evidence supports, connects incompatible facts, and fills the gaps with something that sounds right. The result is plausible nonsense, far more dangerous than random noise, because it looks like a complete and correct answer.
+
+The fault lies not so much in the model as in the publishing environment around it.
+
+The information exists, but it does not travel
+
+To see how far this pattern extended, I reviewed seven university websites in Spain and Latin America. Four of the seven showed the same failure.
+
+A large Spanish public university was advertising "the next" open day with April dates and registration still showing as open, and the page contradicted itself: the body gave one date, the meta description gave another, and the open days for one faculty gave a third. Three different April dates appeared on a single page, all past, all presented as current. Another university was still advertising a master's open day in the future tense, with a "register now" call to action, for an event whose registration had closed three months earlier. A third showed a March open day as the main feature of its microsite, mixed in with documents from courses four years old. A university on the other side of the Atlantic was publishing what it presented as current admissions information for a period that had closed in December 2024, on a page nobody had touched since.
+
+None of these institutions is being careless, and that is precisely the point. The information about the real status of each piece of content exists inside the organisation: the university knows perfectly well that the open day was in March, that the deadline has closed, and that the admissions period has ended. Modern content management systems store review dates, expiry dates, owners, and publication statuses, so that knowledge is already there.
+
+Too often, that knowledge stays inside the tool. It does not reach the published page in a form a machine can read, and it does not signal to an agent whether what it is looking at is still current, has been reviewed, or has been superseded. For a person, context makes it clear the event has passed. For an agent querying "is registration open?", the page states without qualification that it is, and no machine-readable signal exists to say otherwise.
+
+The cause is structural: the date appears as free text inside the content, with no associated status or expiry field, which is also why it fails to match between different parts of the same page. Whether a piece of content is machine-readable is one problem; whether a machine can trust it is a different one.
+
+What the editing environment determines
+
+Cranstoun uses "MX" to refer to a specific standard: metadata that records a file's origin, context, and intended use, and that travels with it, alongside a record that verifies whether that declaration can be trusted. That standard is the what: the information that accompanies the content and allows it to declare, wherever it ends up, what it is and how it should be used.
+
+I use "Machine Experience" to name the where: the place where that declaration is made or lost, the editing environment where someone creates the open-day page. Understood this way, MX means designing that environment so that a date enters the system as a piece of data with a status and a declared expiry, from the moment someone creates it, so that when the event passes, the page stops announcing that registration is open, without anyone needing to remember to go in and correct it.
+
+With constraints declared and verifiable, the assistant's job changes. The open day that has passed becomes a fact with an expiry date the assistant can read; the final deadline becomes a published constraint it can reason from. The assistant stops stitching together plausible fragments because it no longer needs to: it reads what the institution declared, checks whether that declaration is still current, and reasons from there. The assistant moves from guessing to reasoning.
+
+The means determine the end
+
+The plan that assistant gave me was not a failure of artificial intelligence: the model stitched together carefully what it found. What it found were pages that declared no expiry, a data point with no authoritative source, and a series of constraints nobody had made machine-readable. All of that was decided long before any machine came to read the web, upstream, in the editing environment of each university.
+
+MX is half of this story, the half that faces the machine. The other half, which faces the person who creates the content, is the next piece: who declares the meaning, and why that person's experience matters as much as, or more than, the agent's that will eventually read it.
+
+Original post by Daniel Serrano, published 29 June 2026. Translated from Spanish.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
 
 ---
 
