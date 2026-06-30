@@ -7,7 +7,7 @@ provenance record, and classifies it into one of three tiers: **MX Compatible**,
 readable markdown by default, machine-readable JSON on `--json`.
 
 This is the standalone distribution of the same detect-classify pipeline that
-runs the public inspector at <https://mx.allabout.network/tools/pdf-inspector.html>
+runs the public inspector at <https://mx.allabout.network/tools/mx-inspector.html>
 and the production gate inside CogNovaMX's own PDF publishing pipeline. The
 public inspector, the production gate, the regression test suite, and this CLI
 all import a single detection core. A regression in any surface fails all of
@@ -29,7 +29,7 @@ commercial use. Get in touch via `info@cognovamx.com` mentioning the CLI
 evaluation and your accreditation interest.
 
 For everyone else, the public inspector at
-<https://mx.allabout.network/tools/pdf-inspector.html> covers the single-file
+<https://mx.allabout.network/tools/mx-inspector.html> covers the single-file
 case for free.
 
 ## Install
@@ -46,38 +46,38 @@ npm install
 npm install -g .
 
 # Or run directly without global install:
-node bin/mx-pdf-inspect.js --help
+node bin/mx-inspect.js --help
 ```
 
 After global install:
 
 ```bash
-mx-pdf-inspect <path> [path ...] [options]
+mx-inspect <path> [path ...] [options]
 ```
 
 ## Usage
 
 ```bash
 # Single file
-mx-pdf-inspect ./report.pdf
+mx-inspect ./report.pdf
 
 # Directory, top-level only
-mx-pdf-inspect ./deliverables/
+mx-inspect ./deliverables/
 
 # Directory, recursive
-mx-pdf-inspect ./deliverables/ --recursive
+mx-inspect ./deliverables/ --recursive
 
 # CI mode — JSON to a log file, exit code drives the build
-mx-pdf-inspect ./build/*.pdf --json > inspection.json
+mx-inspect ./build/*.pdf --json > inspection.json
 
 # Looser bar — accept EAA-tagged files, not just full MX Compatible
-mx-pdf-inspect ./report.pdf --min-tier eaa-tagged
+mx-inspect ./report.pdf --min-tier eaa-tagged
 
 # Quiet mode — one line per file on pass, full table on fail
-mx-pdf-inspect ./report.pdf --quiet
+mx-inspect ./report.pdf --quiet
 ```
 
-Run `mx-pdf-inspect --help` for the full option list.
+Run `mx-inspect --help` for the full option list.
 
 ## What gets checked
 
@@ -188,12 +188,12 @@ the CLI in any commercial capacity.
 
 - Email: `info@cognovamx.com`
 - Services page: <https://mx.allabout.network/services/certified-operator.html>
-- Public inspector (for single-file ad-hoc checks): <https://mx.allabout.network/tools/pdf-inspector.html>
+- Public inspector (for single-file ad-hoc checks): <https://mx.allabout.network/tools/mx-inspector.html>
 - Background on the architecture: <https://mx.allabout.network/blog/the-inspector-you-can-audit-yourself.html>
 
 ## Version
 
-This distribution is `mx-pdf-inspector v1.0.0`. The detection core inside it
+This distribution is `mx-inspector v1.0.0`. The detection core inside it
 ships in lockstep with the version running in the public inspector at the
 time of distribution build. The CLI's own version reports via
-`mx-pdf-inspect --version`.
+`mx-inspect --version`.

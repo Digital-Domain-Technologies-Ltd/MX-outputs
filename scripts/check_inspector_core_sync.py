@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Drift guard: the PDF inspector core must be one source of truth.
+"""Drift guard: the MX inspector core must be one source of truth.
 
-The detect/classify core of the MX PDF inspector ships as two physical copies:
+The detect/classify core of the MX Inspector ships as two physical copies:
 
-* ``mx-site/js/pdf-inspector-core.js`` — the **canonical** copy, loaded by the
+* ``mx-site/js/mx-inspector-core.js`` — the **canonical** copy, loaded by the
   audit-site inspector page.
-* ``distributions/mx-pdf-inspector/v1.0.0/lib/pdf-inspector-core.js`` — the
+* ``distributions/mx-inspector/v1.0.0/lib/mx-inspector-core.js`` — the
   copy bundled into the self-contained CLI distribution.
 
 The audit-site and the CLI therefore run the *same* code only if these two
@@ -28,14 +28,14 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CANONICAL = REPO_ROOT / "mx-site" / "js" / "pdf-inspector-core.js"
+CANONICAL = REPO_ROOT / "mx-site" / "js" / "mx-inspector-core.js"
 MIRROR = (
     REPO_ROOT
     / "distributions"
-    / "mx-pdf-inspector"
+    / "mx-inspector"
     / "v1.0.0"
     / "lib"
-    / "pdf-inspector-core.js"
+    / "mx-inspector-core.js"
 )
 
 

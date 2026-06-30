@@ -16,7 +16,7 @@ What it does, in order
    re-parsing**. Only if a book changed does it run the full indexer (the
    CPU-intensive step), and then only to ``/tmp``.
 2b. **Inspector core drift** (cheap) — confirm the audit-site copy and the
-   shipped CLI copy of ``pdf-inspector-core.js`` are byte-identical, so both run
+   shipped CLI copy of ``mx-inspector-core.js`` are byte-identical, so both run
    the same detect/classify code.
 3. **Appendix sync** (cheap) — confirm the published per-appendix pages still
    match what the splitter would produce from the consolidated source.

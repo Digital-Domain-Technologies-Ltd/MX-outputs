@@ -1,7 +1,7 @@
-// MX Provenance Explorer - the "Explore" tab of the PDF Inspector.
+// MX Provenance Explorer - the "Explore" tab of the MX Inspector.
 //
 // Browser-only. This module never imports the detection core
-// (pdf-inspector-core.js) and never touches pdf.js. It renders a parsed
+// (mx-inspector-core.js) and never touches pdf.js. It renders a parsed
 // AI-governance provenance object (the same shape as a .provenance.ai.json
 // sidecar) as a browsable node list plus a detail panel, so a reader can walk
 // the evidence chain step by step without opening raw JSON.

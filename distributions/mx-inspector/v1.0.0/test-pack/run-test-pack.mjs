@@ -30,7 +30,7 @@ const execFileAsync = promisify(execFile);
 
 const TEST_PACK_DIR = path.dirname(fileURLToPath(import.meta.url));
 const DIST_ROOT = path.resolve(TEST_PACK_DIR, '..');
-const CLI = path.join(DIST_ROOT, 'bin', 'mx-pdf-inspect.js');
+const CLI = path.join(DIST_ROOT, 'bin', 'mx-inspect.js');
 const EXPECTED_JSON = path.join(TEST_PACK_DIR, 'expected-results.json');
 
 function die(code, msg) {
@@ -43,7 +43,7 @@ if (!fs.existsSync(EXPECTED_JSON)) die(2, `ERROR: expected-results.json not foun
 
 const expected = JSON.parse(fs.readFileSync(EXPECTED_JSON, 'utf-8'));
 
-console.log('MX PDF Inspector CLI — test pack runner (Node)');
+console.log('MX Inspector CLI — test pack runner (Node)');
 console.log(`  CLI:       ${CLI}`);
 console.log(`  Test pack: ${TEST_PACK_DIR}`);
 console.log('');

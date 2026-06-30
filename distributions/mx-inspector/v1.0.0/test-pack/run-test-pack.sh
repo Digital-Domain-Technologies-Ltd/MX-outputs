@@ -24,7 +24,7 @@ set -euo pipefail
 
 TEST_PACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DIST_ROOT="$(cd "$TEST_PACK_DIR/.." && pwd)"
-CLI="$DIST_ROOT/bin/mx-pdf-inspect.js"
+CLI="$DIST_ROOT/bin/mx-inspect.js"
 EXPECTED_JSON="$TEST_PACK_DIR/expected-results.json"
 
 # Required tools.
