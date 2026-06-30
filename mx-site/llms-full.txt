@@ -24480,9 +24480,31 @@ MX
 
           Current sponsors
 
-          Founding sponsor:
+            -
 
-            - Digital Domain Technologies Ltd, founding sponsor of the MX community.
+              Founding sponsor
+
+              Digital Domain Technologies Ltd
+
+              Founding sponsor of the MX community. Digital Domain Technologies, trading as CogNovaMX, operates the open MX standard and the REGINALD registry, and put the first funding and time behind The Gathering before there was an obvious return.
+
+              Declared focus: MX standard operator, REGINALD registry
+
+              Related: The MX Manifesto
+
+            -
+
+              In-kind sponsor
+
+              Boye & Company
+
+              Community: CMS Experts
+
+              Boye & Company, whose CMS Experts community brings together CMS vendors, agencies, and enterprise users across Europe and North America. Its founder, Janus Boye, wrote the foreword to MX: The Handbook and supports The Gathering in kind: a venue where the open drafts are read and tested by working practitioners, and an independent voice for the peer-consensus tradition that MX is built on.
+
+              Declared focus: CMS and digital-experience leadership community
+
+              Related: MX: The Handbook (foreword by Janus Boye)
 
           We are actively seeking additional sponsors to support the community's growth.
 
@@ -24498,32 +24520,32 @@ MX
 
 ---
 
-## PDF Inspector | CogNovaMX
+## MX Inspector | CogNovaMX
 
-**URL:** https://mx.allabout.network/tools/pdf-inspector.html
+**URL:** https://mx.allabout.network/tools/mx-inspector.html
 
-**Description:** Drop any PDF on this page and inspect what it carries. The browser parses the file locally, and bytes never leave your machine. The inspector reports tagged structure, MX metadata, AI-governance provenance, and the responsible-person identifier, then explains what the file lacks and how we close the gap.
+**Description:** Drop any file on this page and inspect the MX metadata it carries. The browser reads it locally and bytes never leave your machine. PDFs are classified for tagged structure, MX metadata, and AI-governance provenance; images, SVG, HTML, and other carriers report the MX fields they embed.
 
 MX
 
           Inspect
 
           Inspect any
-          PDF.
+          file.
 
-        Drop the file. Your browser reads it locally. The PDF never leaves your machine. The inspector reports what the file carries, what it lacks, and what a regulator or AI agent would find if they tried to verify it.
+        Drop the file. Your browser reads it locally. The file never leaves your machine. The inspector reports the MX metadata the file carries, what it lacks, and what a regulator or AI agent would find if they tried to verify it.
 
-          This inspector reads any PDF in your browser. There is no upload. We have no server-side record of which files you inspect. The parser itself ships from this site, with no third-party CDN call and no remote dependency at inspection time. The inspection is entirely a conversation between the file and your browser.
+          This inspector reads any file in your browser. There is no upload. We have no server-side record of which files you inspect. The parser itself ships from this site, with no third-party CDN call and no remote dependency at inspection time. The inspection is entirely a conversation between the file and your browser.
 
-          Drop a PDF below. The inspector will read its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded. It will then classify the file into one of three tiers (MX Compatible, EAA tagged only, or plain, and surface what each tier means in plain language. You can download the inspection results as a machine-readable JSON, a human-readable markdown report, or (when present) the embedded AI provenance record lifted out for offline analysis.
+          Drop a file below. The inspector reads the MX metadata the file carries and reports what a machine sees. A PDF is read for its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded, then classified MX Compatible, EAA tagged only, or plain. Any other carrier, a raster image, an SVG, an HTML page, a markdown file, or a .mx.yaml sidecar, is read for the MX metadata embedded in its own carrier and classified MX or plain, with every field it carries listed. You can download the inspection as machine-readable JSON, and for a PDF a markdown report and the extracted provenance record too.
 
-          For the conceptual background, what each of these artefacts is, why they matter under the European Accessibility Act and the EU AI Act, and how to verify any claim with three command-line tools, read the explainer: MX for PDFs. The inspector is the interactive companion; the explainer is the walk-through.
+          For the conceptual background on PDFs, what each artefact is, why it matters under the European Accessibility Act and the EU AI Act, and how to verify any claim with three command-line tools, read the explainer: MX for PDFs. The inspector is the interactive companion; the explainer is the walk-through.
 
           Drop the file
 
-            Drag a PDF here or click to choose a file
+            Drag a file here or click to choose one
 
-            PDF only. Up to several hundred megabytes. Your file stays in your browser.
+            PDF, image, SVG, HTML, markdown, or .mx.yaml. Up to several hundred megabytes. Your file stays in your browser.
 
             Inspect
             Explore
@@ -24621,15 +24643,15 @@ MX
 
           We run every PDF we ship through this tool
 
-          Every PDF we produce goes through this same inspector before it leaves our hands. The production pipeline calls the harness at tests/test-pdf-inspector.js against every artefact the renderer emits, audit reports, books, briefings, contracts. If the inspector does not certify the file as MX Compatible, the build fails and nothing ships. The browser inspector you see on this page and the production gate share one source of truth, the detection core at mx-outputs/mx-site/js/pdf-inspector-core.js, so a regression in either surface fails both.
+          Every PDF we produce goes through this same inspector before it leaves our hands. The production pipeline calls the harness at tests/test-mx-inspector.js against every artefact the renderer emits, audit reports, books, briefings, contracts. If the inspector does not certify the file as MX Compatible, the build fails and nothing ships. The browser inspector you see on this page and the production gate share one source of truth, the detection core at mx-outputs/mx-site/js/mx-inspector-core.js, so a regression in either surface fails both.
 
           The reports we send to clients and the books we publish are not asked to meet the MX Compatible bar by hand and by hope; they are blocked from shipping unless they meet it by machine. When you drop a PDF we produced into this inspector, you should see the same verdict the build saw before it released the file.
 
           Credibility by mechanism, not by claim
 
-          Three things have to line up before a PDF we send you carries a real MX Compatible verdict. The page you are looking at must say so. The production gate must enforce it. The test harness must prove it. All three live in the open. This page makes the claim. The gate at scripts/bin/mx.pdf.sh hard-fails the build when a PDF does not meet the bar. The harness at tests/test-pdf-inspector.js walks the same checks against the gold-standard fixture and exits non-zero on regression, every time npm test runs.
+          Three things have to line up before a PDF we send you carries a real MX Compatible verdict. The page you are looking at must say so. The production gate must enforce it. The test harness must prove it. All three live in the open. This page makes the claim. The gate at scripts/bin/mx.pdf.sh hard-fails the build when a PDF does not meet the bar. The harness at tests/test-mx-inspector.js walks the same checks against the gold-standard fixture and exits non-zero on regression, every time npm test runs.
 
-          Each layer reads from the same source. The detection core at mx-outputs/mx-site/js/pdf-inspector-core.js is shared by the inspector you are running and the gate that protects our outbound work. When the producer changes, when pdf.js changes, when the inspector changes, the same code path is exercised by both surfaces. A regression cannot quietly drift between them; if the harness fails, the gate fails, and the inspector fails for every visitor in the same way.
+          Each layer reads from the same source. The detection core at mx-outputs/mx-site/js/mx-inspector-core.js is shared by the inspector you are running and the gate that protects our outbound work. When the producer changes, when pdf.js changes, when the inspector changes, the same code path is exercised by both surfaces. A regression cannot quietly drift between them; if the harness fails, the gate fails, and the inspector fails for every visitor in the same way.
 
           This is the argument MX makes generally and that the inspector demonstrates specifically. Not "trust us, we did this carefully" but "here is the file, here is the rule, here is the check, run any of them yourself, decide for yourself." For the EU AI Act, the European Accessibility Act, and the AI-governance instruments emerging in adjacent jurisdictions, that distinction matters. An auditor holding the file can walk to the rule, walk to the check, and arrive at the same verdict the build saw. No proprietary intermediary, no closed-source verifier, no "ask the vendor."
 
