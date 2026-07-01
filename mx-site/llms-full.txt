@@ -781,35 +781,57 @@ Tom Cranstoun is CEO of Digital Domain Technologies Ltd and the founder of MX OS
 
 ---
 
-## A Standard That Knows What It Isn't | Tom Cranstoun
+## A Standard That Knows What It Isn't | Tom Cranstoun | CogNovaMX
 
 **URL:** https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html
 
 **Description:** A preview of Chapter 21 of MX: The Protocols, why the MX standard stays small, defers to DCAT, Schema.org, EXIF, and IETF, and why that restraint is the architecture, not a limitation.
 
-A Standard That Knows What It Isn't
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
-          19 April 2026
-          ·
-          10 min read
+            Author: Tom Cranstoun
 
-Most metadata standards tell you what they cover. They publish a vocabulary, define every field, claim a scope, and ask implementers to adopt the whole surface. MX is different. MX is an open standard for Machine Experience, and the thing it's most careful about is what it doesn't define.
+        Index
 
-This post previews Chapter 21 of MX: The Protocols, which publishes on 1 July 2026. The chapter names the field dictionary and the standards that govern it. This preview gives you the architecture in five minutes: why the standard is small, what it defers to, how it extends, and where the governance lives.
+        - The problem the architecture solves
+
+        - The four proposed standards
+
+        - The three-file canon
+
+        - What MX defers to
+
+        - Why this matters
+
+        - Where to look it up
+
+        - Chapter 21 goes further
+
+          A Standard That Knows What It Isn't | Tom Cranstoun
+
+            19 April 2026
+            ·
+            Tom Cranstoun
+            ·
+            10 min read
+
+Most metadata standards tell you what they cover. They publish a vocabulary, define every field, claim a scope, and ask implementers to adopt the whole surface. MX is different. MX is an open standard for Machine Experience, and the thing it is most careful about is what it does not define.
+
+This post previews Chapter 21 of MX: The Protocols, which publishes on 1 September 2026. The chapter names the field dictionary and the standards that govern it. This preview gives you the architecture in five minutes: why the standard is small, what it defers to, how it extends, and where the governance lives.
 
 The problem the architecture solves
 
 A machine-readable metadata standard has a failure mode. It grows to describe everything, collides with existing standards, and forces implementers to choose. Does this dataset use MX database vocabulary or DCAT? Does this image use MX media fields or Schema.org? Does this API use MX code fields or OpenAPI? Every collision is a fork. Every fork splits the community.
 
-MX refuses the collision. The principle is stated in Appendix M of The Protocols: reuse existing standards, don't duplicate them. When Schema.org defines ImageObject with width, height, encodingFormat, and creator, MX doesn't publish its own image vocabulary. When DCAT v3 defines Dataset, Distribution, and accessURL, MX doesn't invent a database profile. When IETF defines the RFC format for standards-document authoring, MX uses it for standards proposals instead of building its own.
+MX refuses the collision. The principle is stated in Appendix M of The Protocols: reuse existing standards, do not duplicate them. When Schema.org defines ImageObject with width, height, encodingFormat, and creator, MX does not publish its own image vocabulary. When DCAT v3 defines Dataset, Distribution, and accessURL, MX does not invent a database profile. When IETF defines the RFC format for standards-document authoring, MX uses it for standards proposals instead of building its own.
 
-MX is what's left after you subtract what the established standards already cover. What's left turns out to be a small, coherent vocabulary about governance: identity, provenance, machine-readable instructions, conformance, the rules for extending the standard without polluting it. That's the scope of the four proposed standards that went into public review in April 2026.
+MX is what is left after you subtract what the established standards already cover. What is left turns out to be a small, coherent vocabulary about governance: identity, provenance, machine-readable instructions, conformance, the rules for extending the standard without polluting it. That is the scope of the four proposed standards that went into public review in April 2026.
 
 The four proposed standards
 
 The Gathering, the independent, community-governed body behind MX, currently has four proposed standards awaiting community ratification via Stream. None is final. All are stable enough to build against, and all will evolve through public review.
 
-MXS-01 Core Metadata (proposed): the identity vocabulary every MX-aware document carries. Title, author, created, modified, version, description, tags, audience, status, license, maintainer. Plus the two-zone frontmatter model that keeps Zone 1 for document identity and Zone 2 (the mx: block) for operational metadata. Three conformance levels: Level 1 is the baseline every MX document must satisfy; Level 2 adds complete metadata; Level 3 adds AI-specific tuning.
+MXS-01 Core Metadata (proposed): the identity vocabulary every MX-aware document carries. Title, author, created, modified, version, description, tags, audience, status, license, maintainer. Plus the two-zone frontmatter model that keeps Zone 1 for document identity and Zone 2 (the mx: block) for operational metadata. Three conformance levels: Level 1 is the baseline every MX document must satisfy; Level 2 adds complete metadata; Level 3 adds AI-specific optimisation.
 
 MXS-02 Extensions (proposed): the namespace policy. Standard fields carry no prefix and belong to The Gathering. Vendor public extensions use x-vendor- (for CogNovaMX, x-mx-). Vendor private extensions add a -p- marker (for CogNovaMX, x-mx-p-). The prefix is the policy: every reader of a cog can tell at a glance whether a field belongs to the standard, to a named vendor, or to a vendor's operational private layer. The convention follows HTTP custom-header practice.
 
@@ -817,23 +839,23 @@ MXS-03 Provenance (proposed): attribution, trust, maintenance, and decision-reco
 
 MXS-04 Carrier Formats (proposed): code. Source files, JavaScript, TypeScript, Python, Go, shell, CSS, carry metadata through their native mechanisms (JSDoc, CSS comments, shell comment blocks, SQL comment blocks). MXS-04 specifies the field vocabulary for those carriers: function-level annotations, API surface metadata, test metadata, inline code annotations. Databases and media are explicitly not in scope.
 
-That's the entire active family. Two earlier drafts were deferred. An AI/Agent Policy draft was shelved because adjacent efforts at W3C, NIST, and IEEE are still converging, and standardizing an MX-specific AI vocabulary now would risk forking. A Profile-Specific Metadata draft was withdrawn after the canon split because the profiles it was going to cover had either moved to MXS-04 or to external standards.
+That is the entire active family. Two earlier drafts were deferred. An AI/Agent Policy draft was shelved because adjacent efforts at W3C, NIST, and IEEE are still converging, and standardizing an MX-specific AI vocabulary now would risk forking. A Profile-Specific Metadata draft was withdrawn after the canon split because the profiles it was going to cover had either moved to MXS-04 or to external standards.
 
 The three-file canon
 
-The proposed standards have a machine-readable form. It spans three sibling YAML files, published at stable URLs so any implementer can fetch them directly.
+The proposed standards have a machine-readable form. It lives in three sibling YAML files, published at stable URLs so any implementer can fetch them directly.
 
 fields-data.yaml is the core, 62 fields, each with a definitive one-sentence description. Identity, classification, relationships, lifecycle, folder metadata, Dublin Core and Schema.org pass-through fields, and the genuineness family (proofOfAuthorship, integritySignature, provenancePedigree) that anchors the trust lens. This is what MXS-01 specifies.
 
 fields-data-carriers.yaml is the carriers companion, 2 fields. Code-specific provenance only: sourceRepo and derivedFromCommit. What the code does (signatures, APIs, tests, type systems, inline annotations) is out of MX scope and defers to each language's own documentation convention (JSDoc, Python docstrings, Doxygen, rustdoc, godoc). This is what MXS-04 v1.1-proposed specifies.
 
-cognovamx-fields.yaml is a vendor extension example pack, 206 fields carrying CogNovaMX-specific workflow vocabulary, each with a definitive description. It isn't part of the standard. Other vendors author parallel files under the same three-tier pattern using their own x-vendor- prefix.
+cognovamx-fields.yaml is a vendor extension example pack, 206 fields carrying CogNovaMX-specific workflow vocabulary, each with a definitive description. It is not part of the standard. Other vendors author parallel files under the same three-tier pattern using their own x-vendor- prefix.
 
-Tooling loads all three and merges them into a unified view. A document that uses a standard field doesn't know which file it came from. That's the point.
+Tooling loads all three and merges them into a unified view. A document that uses a standard field does not know which file the field came from. That is the point.
 
 What MX defers to
 
-This is the table that defines the architecture. When the content on the left needs a vocabulary, MX points at the standard on the right and doesn't duplicate.
+This is the table that defines the architecture. When the content on the left needs a vocabulary, MX points at the standard on the right and does not duplicate.
 
 Content type
 Defer to
@@ -865,7 +887,7 @@ IETF RFC format
 Package manifests
 package.json, pyproject.toml, equivalents
 
-A cog describing a dataset declares its MX identity fields (title, author, created) and then includes a DCAT or CSVW block with the dataset-specific vocabulary. The MX identity comes from MXS-01. The dataset vocabulary comes from DCAT or CSVW. There's no conflict because there's no overlap.
+A cog describing a dataset declares its MX identity fields (title, author, created) and then includes a DCAT or CSVW block with the dataset-specific vocabulary. The MX identity comes from MXS-01. The dataset vocabulary comes from DCAT or CSVW. There is no conflict because there is no overlap.
 
 This is why the IETF RFC format is in the table. The Stream platform The Gathering uses for its own standards drafts adopts RFC frontmatter (title, abbrev, docname, normative, informative) and RFC body structure (--- abstract, --- middle, --- back). That choice is the same principle applied consistently rather than a contradiction of MX's own metadata standard. Standards-document authoring is the IETF's domain, and MX defers there too.
 
@@ -875,9 +897,9 @@ The discipline looks austere; a standard this small feels suspiciously incomplet
 
 Three things follow from the scoping.
 
-Standards compatibility follows directly. A cog that carries Schema.org for its media, DCAT for its datasets, and OpenAPI for its API surface is simultaneously a valid MX document, a valid Schema.org document, a valid DCAT document, and a valid OpenAPI document. No translation layer is needed. No converter has to run. The existing tool chains for each external standard work directly on MX content.
+Ecosystem compatibility follows directly. A cog that carries Schema.org for its media, DCAT for its datasets, and OpenAPI for its API surface is simultaneously a valid MX document, a valid Schema.org document, a valid DCAT document, and a valid OpenAPI document. No translation layer is needed. No converter has to run. The existing tool chains for each external standard work directly on MX content.
 
-Extensibility is explicit. When a vendor needs fields MX doesn't define, MXS-02 provides the mechanism. The x-vendor- prefix is a visible, auditable marker. A cog reader encountering an unfamiliar prefixed field knows immediately it's a vendor extension, not a claim on standard vocabulary, the namespace is the honest declaration: this is my extension, not The Gathering's standard, read at your discretion.
+Extensibility is explicit. When a vendor needs fields MX does not define, MXS-02 provides the mechanism. The x-vendor- prefix is a visible, auditable marker. A cog reader encountering an unfamiliar prefixed field knows immediately it is a vendor extension, not a claim on standard vocabulary, the namespace is the honest declaration: this is my extension, not The Gathering's standard, read at your discretion.
 
 The small core stays manageable. The community can read it. Conformance is achievable. Review cycles are bounded. The Gathering's governance model, open participation, consensus ratification, no membership, only works when the specification is small enough that the community can hold it in its collective head.
 
@@ -885,37 +907,37 @@ Where to look it up
 
 Four public artefacts carry the material. Each has a distinct job and a different shape, and together they let a reader pick up the standard in whichever form suits them.
 
-The source drafts: github.com/ddttom/mx-shared-gathering. This is the reading copy: the four .cog.md files that carry MXS-01...04 in their authored form, with YAML frontmatter, prose, and the cross-references Appendix U cites. Open the repo in a browser and you can read the four proposed standards end-to-end. If you want to cite a specific clause, link here. If you want to file an editorial issue against the source text, this is the tracker.
+The source drafts: github.com/ddttom/mx-shared-gathering. This is the reading copy: the four .cog.md files that carry MXS-01…04 in their authored form, with YAML frontmatter, prose, and the cross-references Appendix U points at. Open the repo in a browser and you can read the four proposed standards end-to-end. If you want to cite a specific clause, link here. If you want to file an editorial issue against the source text, this is the tracker.
 
 The machine-readable canon: /canon/. Three YAML files that are the actual source of truth behind the four drafts. fields-data.yaml carries the core vocabulary (MXS-01 + MXS-02 + MXS-03). fields-data-carriers.yaml carries the code-carrier vocabulary (MXS-04). cognovamx-fields.yaml is the CogNovaMX vendor extension example pack, not part of the standard, but useful as a reference for other vendors authoring their own x-vendor- files. Tooling that validates MX documents should fetch from here. When the YAML and the prose disagree, the YAML is authoritative by definition, a drift checker verifies alignment.
 
-The Stream RFC drafts: one repo per standard under TG-Community: draft-cranstoun-mx-core-metadata, draft-cranstoun-mx-extensions, draft-cranstoun-mx-provenance, draft-cranstoun-mx-carrier-formats. Same content as the source drafts, converted into IETF RFC format for Stream's review process, the frontmatter keys (title, abbrev, docname, normative, informative) and body delimiters (--- abstract, --- middle, --- back) that Stream expects. These are the versions the community reviews and ratifies through stream.tg.community. They carry the formal RFC 2119 language ("MUST", "SHOULD", "MAY") that the conformance levels require.
+The Stream RFC drafts: one repo per standard under TG-Community: draft-cranstoun-mx-core-metadata, draft-cranstoun-mx-extensions, draft-cranstoun-mx-provenance, draft-cranstoun-mx-carrier-formats. Same content as the source drafts, converted into IETF RFC format for Stream's review process, the frontmatter keys (title, abbrev, docname, normative, informative) and body delimiters (--- abstract, --- middle, --- back) that Stream expects. These are the versions the community reviews and ratifies through stream.tg.community. They carry the formal RFC 2119 language ("MUST", "SHOULD", "MAY") the conformance levels depend on.
 
 The book: Appendix M of MX: The Protocols is the complete prose reference for every field the drafts cite: definitions, types, validation values, profile membership, usage examples, cross-references. Sections 22 through 27 cover the field dictionary, folder metadata, the book-manuscript template, the carrier format map, the HTML carrier writing guide, and the canon-layout explanation with the external-standards deferral table. Appendix U is the short architecture companion to Chapter 21, the same "defer to existing standards" argument this blog previews, in a form the book can link to from any chapter that needs it.
 
-Four artefacts, one set of drafts. Source for reading, YAML for tooling, RFC for formal review, book for reference prose. Pick whichever entry point fits what you're trying to do, they all point at the same standard.
+Four artefacts, one set of drafts. Source for reading, YAML for tooling, RFC for formal review, book for reference prose. Pick whichever entry point fits what you are trying to do, they all point at the same standard.
 
 Chapter 21 goes further
 
 This preview hits the architecture and the rationale. Chapter 21 of MX: The Protocols goes further: it traces the full three-pass reading model a machine uses to comprehend a cog, walks through the economics of shared vocabulary, covers author-facing guidance (what to include at each conformance level), and explains how participation through The Gathering's Stream process actually works. The chapter reads as reference material, the authoritative place to send a reader who has understood the cog format from Chapter 20 and now needs to know what governs it.
 
-The book publishes on 1 July 2026. The standards described in Chapter 21 will, by then, have been through several weeks of Stream review. Where a field has changed, the chapter will track the change. Where a standard has been ratified, it'll say so.
+The book publishes on 1 July 2026. The standards described in Chapter 21 will, by then, have been through several weeks of Stream review. Where a field has changed, the chapter will track it. Where a standard has been ratified, it will say so.
 
-If you're building content for machine consumption, Chapter 21 is the architecture you need. You can start today. The drafts are stable. The deferrals are real. The extensibility mechanism is published. The standard stays small because the discipline is tight.
+If you are building content for machine consumption, the architecture in Chapter 21 is what you are building against. You can start today. The drafts are stable. The deferrals are real. The extensibility mechanism is published. The standard stays small because the discipline is tight.
 
 And because The Gathering's process is open and requires no membership, if you have a view on how MX should evolve, Stream is how you contribute. The cog format you use in a year will reflect whoever engages between now and then, including, potentially, you.
 
-MX: The Protocols publishes on 1 July 2026. Chapter 21 is "The Fields and the Standards." Source drafts: github.com/ddttom/mx-shared-gathering. Machine-readable canon: /canon/. Stream RFC drafts: github.com/TG-Community (the four draft-cranstoun-mx-* repos). Community review: tg.community · stream.tg.community. Book reference: Appendix M and Appendix U of The Protocols.
+MX: The Protocols publishes on 1 September 2026. Chapter 21 is "The Fields and the Standards." Source drafts: github.com/ddttom/mx-shared-gathering. Machine-readable canon: /canon/. Stream RFC drafts: github.com/TG-Community (the four draft-cranstoun-mx-* repos). Community review: tg.community · stream.tg.community. Book reference: Appendix M and Appendix U of The Protocols.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through where your team stands on the agent-readiness curve?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
 
@@ -10187,6 +10209,8 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
 
         - Why This Compounds Every Day
 
+        - Compression Is Not Neutral
+
         - The Machine Commons Already Being Built
 
         - Find Out Where You Stand
@@ -10197,7 +10221,11 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             Tom Cranstoun
             ·
-            9 min read
+            11 min read
+
+Click here to find out what AI provenance looks like
+
+This is a live demo. The author photo on this page is not a plain image: it carries its MX metadata and a full AI provenance trail embedded inside the file, and that trail names the machine that attached it and the human who checked it. Drop the photo into the inspector and see what a machine reads. Every company needs this in their CMS. Talk to CogNovaMX.
 
 Ask an AI for a strategic analysis. It'll produce one - thorough, well-structured, properly reasoned. Ask a second AI to build on it. It'll have no idea the first one exists.
 
@@ -10280,6 +10308,16 @@ Regulators have reached the same conclusion from a different direction. The EU A
 
 Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
+Compression Is Not Neutral
+
+There is a subtler failure underneath the mechanical one, and it is the one almost nobody designs against. Judging whether an answer actually rests on sound evidence is not a mechanical task; it is an act of interpretation. A machine can retrieve, rank, and summarise at a scale no human matches. What it cannot do, on its own, is weigh sources that disagree and decide which one should carry the day.
+
+So when a model has to produce a single answer, it does the statistically safe thing. It pulls toward whatever the training data repeats most often and smooths the rest away, folding genuine disagreement into one dominant narrative. The rare-but-well-argued objection, the minority reading, the source that sits outside the mainstream - all of it drifts toward the centre and disappears. The answer reads as confident and coherent precisely because the conflict has been averaged out of it.
+
+Older disciplines learned the opposite habit long ago. The work of history is not to crown a single true account but to hold rival interpretations together: to trace dissent, to keep the marginalised voice and the unresolved argument, to protect the small awkward details a tidy summary would throw away. What turns out to matter in a record is often not the agreement but the disagreement. Scale is no excuse to lose it; if anything, scale makes keeping it harder and more important.
+
+This is where the argument of this post meets a much older one. You cannot preserve competing perspectives if the outputs carry no record of who said what, on what evidence, and when. Flattening everything into one narrative is simply what happens when a claim arrives with no provenance and no way to trace it back. A governed artefact resists that by its structure: every claim it carries names its author, its version, and the source that backs it, so a downstream machine can keep two conflicting attributed claims distinct instead of blending them into a single average. Provenance is not only an audit convenience. It is what lets disagreement survive contact with scale.
+
 The Machine Commons Already Being Built
 
 Humans built institutions to solve exactly this problem for human knowledge. Libraries gave it a stable address. Registries gave records a provenance chain. Standards gave documents an interoperable structure. These aren't neutral technical choices - they're governance decisions about how knowledge compounds and stays trusted.
@@ -10323,6 +10361,8 @@ CogNovaMX works with organisations at every stage of that discovery:
 - Training. Practical workshops for content and product teams on machine-readable documents, governed metadata, and AI-ready architecture.
 
 - Consultancy. Hands-on advisory for organisations building AI pipelines, implementing MX standards, or preparing for regulatory content traceability requirements.
+
+Want a first look before you talk to us? Drop a file into the free MX Inspector and see exactly what a machine reads when it opens it.
 
 Get in touch with Tom at CogNovaMX.
 
@@ -24939,3 +24979,5 @@ MX
         We rebuild documents into MX Compatible PDFs. The same evidence chain you read about above ships on every artefact we deliver: tagged structure, signed provenance, and the responsible-person identifier that travels with the file.
 
         For commissioning AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
+
+<!-- x-mx-sourceHash: 261e0801860e0d553e5f7c6768df3e117570274939fd25f02d883750885c8bdc -->
