@@ -14,6 +14,14 @@
 //
 // Values come from arbitrary files, so every value is written with textContent
 // (never innerHTML). The DOM is built with the small `h` helper below.
+//
+// The step flow itself is rendered by the shared accessible chain component
+// (mx-prov-chain.js) - the exact same WAI-ARIA tabs the blog demo overlay shows,
+// so the tool and the overlay cannot drift. This module renders the chain at the
+// top (the human-readable walk) and the supporting governance metadata (run,
+// build environment, parties, responsible person, frameworks) in the grid below.
+
+import { buildChain } from './mx-prov-chain.js';
 
 // ── DOM helper ─────────────────────────────────────────────
 function h(tag, props, ...children) {
@@ -82,17 +90,9 @@ function buildNodes(parsed) {
     nodes.push({ id: 'frameworks', label: 'Frameworks', sublabel: `${frameworks.length}`, status: 'info', data: frameworks });
   }
 
-  const steps = Array.isArray(parsed.steps) ? parsed.steps : [];
-  steps.forEach((s, i) => {
-    nodes.push({
-      id: `step-${i}`,
-      label: s.stepId || `step ${i + 1}`,
-      sublabel: s.agent || '',
-      status: statusFor(s.outcome),
-      data: s,
-    });
-  });
-
+  // Steps are not listed here: the accessible chain above (buildChain) is the
+  // canonical, interactive view of the step flow. This grid holds the supporting
+  // governance metadata only, so a step never appears twice.
   return nodes;
 }
 
@@ -228,6 +228,11 @@ function render() {
     return;
   }
   container.appendChild(sourceBar());
+  const chain = buildChain(currentData);
+  if (chain) {
+    container.appendChild(h('p', { class: 'prov-chain-hint', text: 'Click a step to walk the flow: an agent attaches, a human checks.' }));
+    container.appendChild(chain);
+  }
   container.appendChild(explorerBody());
 }
 
