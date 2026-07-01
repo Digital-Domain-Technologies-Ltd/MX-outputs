@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Machines Cannot Build for Their Own Sessions"
+description: "AI systems are the most sophisticated information processors ever built. They can't remember what they said five minutes ago. That gap compounds with every pipeline you ship."
+author: Tom Cranstoun
+created: "2026-07-01"
+modified: "2026-07-01"
+version: "1.0"
+type: blog-post
+tags:
+  - machine-cognition
+  - sessions
+  - persistence
+  - mx
+  - laws-of-machine-thought
+mx:
+  x-mx-managedBy: blog-post.cog.md
+  status: draft
+  x-mx-contentState: published
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/foundations/machines-cannot-build-for-their-own-sessions.md
+  x-mx-contextProvides:
+    - "Why AI systems can't govern their own outputs, what that means for every pipeline that depends on machine-to-machine hand-offs, and how governed artifacts break the pattern."
+  stability: stable
+  purpose: "Why AI systems can't govern their own outputs, what that means for every pipeline that depends on machine-to-machine hand-offs, and how governed artifacts break the pattern."
+  servedAt: https://mx.allabout.network/blog/machines-cannot-build-for-their-own-sessions.html
+  blogUrl: https://mx.allabout.network/blog/machines-cannot-build-for-their-own-sessions.html
+  blogFilename: machines-cannot-build-for-their-own-sessions
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator."
+  x-mx-linkedIn: |
+    Ask an AI to produce a strategic analysis. It will. Ask a second AI to build on that analysis. It won't know the first one exists.
+
+    This isn't a configuration problem. It's an architectural condition that applies to almost every AI system in production today.
+
+    When an AI produces output, it produces text. No stable identifier. No declared structure. No provenance. No version. No verification path. The downstream machine can't find the output reliably, can't confirm it's the current version, and can't verify it came from a trustworthy source.
+
+    So humans step in. At every machine-to-machine hand-off. Doing manually what a governed output would have made automatic.
+
+    This is why enterprise AI pipelines require so much human glue. Not because the models aren't capable. Because the outputs aren't governed.
+
+    Before writing, human knowledge was oral. Rich in the moment, gone when the session ended. Can't be indexed, addressed, or built on systematically.
+
+    AI, despite everything it can do, is architecturally oral.
+
+    MX-hub, REGINALD, and Maxine are built to change that. Not by making AI smarter. By making its outputs governed - with identity, provenance, structure, and a verification path baked in from the first character.
+
+    One machine produces. Another machine governs. That gap is the whole problem.
+
+    Blog post on this today. [Link in comments]
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="AI systems are the most sophisticated information processors ever built. They can't remember what they said five minutes ago. That gap compounds with every pipeline you ship.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://mx.allabout.network/blog/machines-cannot-build-for-their-own-sessions.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/machines-cannot-build-for-their-own-sessions.html">
+  <meta property="og:title" content="Machines Cannot Build for Their Own Sessions | CogNovaMX">
+  <meta property="og:description" content="AI systems are the most sophisticated information processors ever built. They can't remember what they said five minutes ago. That gap compounds with every pipeline you ship.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-01">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Machines Cannot Build for Their Own Sessions | CogNovaMX">
+  <meta name="twitter:description" content="AI systems are the most sophisticated information processors ever built. They can't remember what they said five minutes ago. That gap compounds with every pipeline you ship.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="published">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Machines Cannot Build for Their Own Sessions">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/machines-cannot-build-for-their-own-sessions.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Machines Cannot Build for Their Own Sessions | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Machines Cannot Build for Their Own Sessions",
+        "headline": "Machines Cannot Build for Their Own Sessions",
+        "description": "AI systems are the most sophisticated information processors ever built. They can't remember what they said five minutes ago. That gap compounds with every pipeline you ship.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-07-01",
+        "dateModified": "2026-07-01",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/machines-cannot-build-for-their-own-sessions.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1721,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/machines-cannot-build-for-their-own-sessions.html",
+        "name": "Machines Cannot Build for Their Own Sessions",
+        "url": "https://mx.allabout.network/blog/machines-cannot-build-for-their-own-sessions.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#the-oral-culture-of-ai">The Oral Culture of AI</a></li>
+        <li><a href="#what-machines-cannot-do-with-their-own-outputs">What Machines Cannot Do With Their Own Outputs</a></li>
+        <li><a href="#the-contrast-that-clarifies-the-problem">The Contrast That Clarifies the Problem</a></li>
+        <li><a href="#why-this-is-structural-not-incidental">Why This Is Structural, Not Incidental</a></li>
+        <li><a href="#why-this-compounds-every-day">Why This Compounds Every Day</a></li>
+        <li><a href="#the-machine-commons-already-being-built">The Machine Commons Already Being Built</a></li>
+        <li><a href="#find-out-where-you-stand">Find Out Where You Stand</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1721">
+        <header class="article-header">
+          <h1>Machines Cannot Build for Their Own Sessions</h1>
+          <div class="article-meta"
+               data-published="2026-07-01"
+               data-modified="2026-07-01"
+               data-reading-time="9 min">
+            <time datetime="2026-07-01">1 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>9 min read</span>
+          </div>
+        </header>
+
+
+<p>Ask an AI for a strategic analysis. It'll produce one - thorough, well-structured, properly reasoned. Ask a second AI to build on it. It'll have no idea the first one exists.</p>
+<p>This isn't a configuration problem or a product limitation waiting for the next release. It's an architectural condition that applies to almost every AI system in production today, and it has consequences that compound with every AI workflow you ship.</p>
+<p>Machines can't build for their own sessions. One AI's output won't be reliably found, parsed, or verified by another without human mediation. The hand-off between machines is broken by design.</p>
+<h2 id="the-oral-culture-of-ai" tabindex="-1">The Oral Culture of AI</h2>
+<p>Before writing, human knowledge was oral. A speaker produced something rich and reasoned. When the session ended, it existed only in human memory. It couldn't be addressed, indexed, verified, or built on systematically. Every new conversation started close to zero.</p>
+<p>Writing changed that. A written record has properties that speech doesn't: a fixed location, a persistent form, an addressable identity. One person's work becomes another person's starting point. The discipline compounds.</p>
+<p>AI, despite its sophistication, is architecturally oral. An LLM session is rich in the moment and gone when it ends. The reasoning a model performs at 9am isn't available to the next one at 10am. The output from step one can't be verified by a downstream stage unless a human carries it across. Every agent in a multi-agent system is, by default, starting from the same cultural amnesia.</p>
+<p>The most capable information-processing machines in history are operating as an oral culture.</p>
+<h2 id="what-machines-cannot-do-with-their-own-outputs" tabindex="-1">What Machines Cannot Do With Their Own Outputs</h2>
+<p>When an AI system produces an output, the result isn't a governed artefact. It's text. That text typically has none of the six properties that make content machine-actionable.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>What is missing from a typical AI output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity</td>
+<td>No stable identifier. The output can't be reliably found or addressed by another machine.</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>No declared structure. The output can't be traversed or parsed without human interpretation.</td>
+</tr>
+<tr>
+<td>Semantics</td>
+<td>No fixed vocabulary. Two machines reading the same word may not agree on its meaning.</td>
+</tr>
+<tr>
+<td>Context</td>
+<td>No declared jurisdiction, language, or scope. No instructions for how the output should be interpreted.</td>
+</tr>
+<tr>
+<td>Provenance</td>
+<td>No author, timestamp, or version. The output can't be traced or compared to prior work.</td>
+</tr>
+<tr>
+<td>Trust</td>
+<td>No verification path. A downstream machine can't confirm the output is what it claims to be.</td>
+</tr>
+</tbody>
+</table>
+<p>The web is the most visible surface, but the same properties are missing from every file type an AI system touches. Every PDF passing through a retrieval pipeline has the same gap. Every image processed by a vision model. Every brand asset, technical document, contract, or report that enters an AI workflow arrives without a stable identifier, without provenance, without machine-readable permissions.</p>
+<p>This is concrete. It's the reason enterprise AI pipelines require so much human glue. A language model produces a report. A second system needs to act on it but can't reliably find it, determine whether it's the current version, parse its structure, or verify the source. Humans step in. The promise of autonomous AI workflows stalls at every hand-off.</p>
+<p>The systems are extraordinarily capable at producing. Governing what they generate isn't something the current architecture supports.</p>
+<h2 id="the-contrast-that-clarifies-the-problem" tabindex="-1">The Contrast That Clarifies the Problem</h2>
+<p>Consider what happens when a system does have persistence - a filesystem, memory across sessions, and the ability to write structured artefacts to stable paths.</p>
+<p>Such a system can read another machine's work, reconcile it, and save the result to a fixed path with a canonical identifier. It tags the record with session provenance. Future sessions can find it and build on it. The result is a governed artefact, not just content. It has identity. It has structure. Any system that knows where to look can address it.</p>
+<p>The contrast with a standard AI chat interface is total. One system produces content for a human reader. What the other system creates, machines can act on directly. Intelligence applied isn't the key difference - the system may be less clever in the narrow sense. The difference is in the properties of what it produces.</p>
+<p>One machine produces. Another machine governs.</p>
+<p>That gap is what MX is built to address.</p>
+<h2 id="why-this-is-structural-not-incidental" tabindex="-1">Why This Is Structural, Not Incidental</h2>
+<p>AI chat systems can't govern their own outputs not because their engineers forgot a save button but because the systems were designed around a different model of who the reader is.</p>
+<p>Chat interfaces assume a human at the end of the chain: a person who can read the output, judge its quality, copy the relevant parts, and carry the meaning forward. That assumption is reasonable for consumer applications. It's a structural liability for any organisation that needs machines to build on each other's work.</p>
+<p>A document designed for human consumption is linear, conversational, implicitly structured. The structure is legible to a reader who knows the conventions. A document designed for machine consumption is explicit, semantically declared, and addressable by a canonical identifier. These aren't the same document. They aren't interchangeable.</p>
+<p>Every enterprise deploying AI at scale is discovering this distinction the hard way. Their AI produces richly. Their pipelines fail quietly at every point where one machine's output needs to become the input for the next - without a human in the middle.</p>
+<h2 id="why-this-compounds-every-day" tabindex="-1">Why This Compounds Every Day</h2>
+<p>This is a production problem that grows with every agent deployed, every workflow extended, every model added to a chain.</p>
+<p>HuggingFace hosts millions of models. Every major cloud provider ships its own agent framework. Microsoft, Anthropic, Google, and OpenAI are all building infrastructure for chaining models together. Every one of those deployments creates new hand-off points - places where one machine's output must become another machine's input. Without structured artefacts, the chain depends on a human to carry meaning across.</p>
+<p>The scale isn't slowing. More agents are deployed every day. More pipelines are extended. More teams discover the same failure in production and solve it the same way: a human in the middle, doing manually what a governed output would have made automatic.</p>
+<p>Regulators have reached the same conclusion from a different direction. The EU AI Act, the UK ICO's forthcoming AI Code of Practice, and equivalent frameworks emerging across regulated markets all point to the same requirement: AI-generated content must be traceable. Not labelled for human readers. Verifiable by machine. Provenance is moving from a design preference to a legal baseline. Companies that have already solved the hand-off problem will satisfy that requirement as a by-product. Those that haven't will need to retrofit it into pipelines never designed to produce governed artefacts.</p>
+<blockquote>
+<p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
+</blockquote>
+<h2 id="the-machine-commons-already-being-built" tabindex="-1">The Machine Commons Already Being Built</h2>
+<p>Humans built institutions to solve exactly this problem for human knowledge. Libraries gave it a stable address. Registries gave records a provenance chain. Standards gave documents an interoperable structure. These aren't neutral technical choices - they're governance decisions about how knowledge compounds and stays trusted.</p>
+<p>MX-hub, Maxine, and REGINALD are built on exactly that logic, applied to machines.</p>
+<p>MX-hub is a governed repository. Every document in it has a canonical identity, a declared version, explicit metadata, and machine-readable permissions. Documents aren't files stored for retrieval - they're COGs: self-describing artefacts that tell any agent what they are, what they permit, and how they relate to everything else in the repository. A machine reading MX-hub doesn't encounter content. It encounters governed meaning.</p>
+<p>REGINALD, the public registry that holds and attests MX records, is that layer. It makes provenance verifiable rather than asserted. A COG in MX-hub can be signed and attested - so that when a downstream agent reads it, trust isn't a question of believing the source but of checking the cryptographic record. REGINALD changes &quot;I claim this is authoritative&quot; into something a machine can independently verify. That's the difference between an oral culture and a written one.</p>
+<p>Maxine is the agent that operates across this infrastructure. She reads COGs, acts on their instructions, writes back to the repository, and carries context forward across sessions. Maxine isn't a chat interface producing outputs for human readers. She's a machine building for continuity - because every session is governed.</p>
+<p>The critical difference is in what she produces. Every document Maxine writes has the metadata embedded from the moment it's created:</p>
+<ul>
+<li>a canonical identifier</li>
+<li>a declared author, version number, and timestamp</li>
+<li>a provenance chain linking it to the COG that authorised the work</li>
+<li>machine-readable permissions governing downstream use</li>
+</ul>
+<p>The output is a governed artefact from the first character. Any machine that reads it - now or in six months - starts from a complete, verifiable record of what the document is, where it came from, and what it's allowed to do.</p>
+<p>This is what breaks the pattern. Most AI systems produce text. Maxine produces provenance. The next agent in the pipeline inherits evidence, not ambiguity.</p>
+<p>Together, the three solve the structural problem that breaks every other AI pipeline. MX-hub is the written record. REGINALD is the institution that validates it. Maxine is the agent that can finally build on what came before - and leave something equally solid for what comes next.</p>
+<p>Without that infrastructure, AI is the most powerful oral culture in history.</p>
+<p>MX-hub, REGINALD, and Maxine are the writing system.</p>
+<h2 id="find-out-where-you-stand" tabindex="-1">Find Out Where You Stand</h2>
+<p>Most organisations don't know which of their content - web pages, PDFs, images, assets - is machine-readable and which is opaque. The gap only becomes visible when a pipeline fails or a regulator asks for provenance you can't provide.</p>
+<p>CogNovaMX works with organisations at every stage of that discovery:</p>
+<ul>
+<li><strong>Content Readiness Assessment.</strong> A structured audit of your full content estate: web, PDFs, images, and assets. Maps what machines can read, what they can't, and what closing the gap requires.</li>
+<li><strong>Training.</strong> Practical workshops for content and product teams on machine-readable documents, governed metadata, and AI-ready architecture.</li>
+<li><strong>Consultancy.</strong> Hands-on advisory for organisations building AI pipelines, implementing MX standards, or preparing for regulatory content traceability requirements.</li>
+</ul>
+<p><a href="https://mx.allabout.network/about/contact.html">Get in touch with Tom at CogNovaMX.</a></p>
+<p>Tom Cranstoun is the founder of CogNovaMX and the author of MX: The Handbook and MX: The Protocols. He writes about machine understanding, content governance, and the architecture of AI-readable systems.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
