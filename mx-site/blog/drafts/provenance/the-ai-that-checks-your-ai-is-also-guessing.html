@@ -11,23 +11,17 @@ author: Tom Cranstoun
 created: "2026-06-15"
 modified: "2026-06-15"
 version: "1.0"
+type: blog-post
+tags: [ai-agents, determinism, verification, mx, governance]
 mx:
   x-mx-managedBy: blog-post.cog.md
   refersTo:
     - second-opinion
     - how-to-build-an-audit
-  status: draft
   x-mx-contentState: draft
-  contentType: blog-post
   audience:
     - humans
     - machines
-  tags:
-    - ai-agents
-    - determinism
-    - verification
-    - mx
-    - governance
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/provenance/the-ai-that-checks-your-ai-is-also-guessing.md
   x-mx-contextProvides:
     - "An engineering manager brought in a second AI agent to review the first. The reviewer was confidently wrong too. The fix is not a better agent, it is a check a script can run."
@@ -37,6 +31,7 @@ mx:
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator."
   blogUrl: https://mx.allabout.network/blog/drafts/provenance/the-ai-that-checks-your-ai-is-also-guessing.html
   blogFilename: the-ai-that-checks-your-ai-is-also-guessing
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -111,7 +106,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -125,7 +120,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 968,
+        "wordCount": 1069,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -179,7 +174,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="../../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -204,18 +199,18 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="968">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1069">
         <header class="article-header">
           <h1>The AI That Checks Your AI Is Also Guessing</h1>
           <div class="article-meta"
                data-published="2026-06-15"
                data-modified="2026-06-15"
-               data-reading-time="5 min">
+               data-reading-time="6 min">
             <time datetime="2026-06-15">15 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>5 min read</span>
+            <span>6 min read</span>
           </div>
         </header>
 
@@ -235,6 +230,7 @@ mx:
 <p>This is the rule we build the whole repository on, and I will say it plainly: a check a script can do, a script does. If a claim can be verified mechanically, you do not ask an agent to assert it. You write the scanner, you wire it into the gate, and the gate refuses the push when the claim is false.</p>
 <p>The difference is not pedantry. When an agent tells you &quot;every cited rule exists in the guidelines&quot;, that is an opinion, and you saw above what those are worth. When a script reads every link into your rulebook, resolves each one to a real entry, and exits non-zero on the first that points at nothing, that is a fact. The manager's hallucinated-rule problem, the one where the reviewer cited a guideline that did not exist, is not a hard thing to catch. It is a hard thing to catch by reading. It is a trivial thing to catch with twelve lines of code that run on every push and cannot be talked out of their verdict.</p>
 <p>That same principle answers the &quot;tests ran on a Docker host, but with sandbox limitations&quot; sign-off too. A claim that cannot both be true is a claim a machine should be deciding, not narrating. Either the gate ran and you have its exit code, or it did not run and there is no verdict to report. There is no eloquent middle.</p>
+<p>The same logic governs the record an agent leaves behind. When a machine produces an artefact, the temptation is to let another agent vouch for it. We do the opposite. The provenance trail that travels with the artefact is not trusted until a human has checked it, and a script enforces that a machine step never ships without a human beside it. The AI attaches the trail; a person reviews it and stands behind it; a gate refuses any trail that names a machine and no human. A second AI's blessing was never evidence. A named human who checked it is.</p>
 <h2 id="documented-rules-are-wishes" tabindex="-1">Documented rules are wishes</h2>
 <p>The manager's closing lesson was the one that hit hardest, and it is the same one written across the top of everything we do. Documented rules are wishes. A guideline that lives only in prose, that depends on a person or an agent remembering to apply it, is not enforcement. It rots, it gets skipped, and the rule it claims to hold quietly becomes a suggestion. He found the same bug class six times in one codebase precisely because the rule against it was written down and never made mechanical.</p>
 <p>So we count our wishes, and then we retire them into checks. The repository this post lives in refuses a push through more than twenty separate gates, and runs roughly ninety deterministic tests before any of that. Each one started life as a sentence someone could have chosen to ignore. Each one is now a script that does not care how confident anyone is.</p>
@@ -248,7 +244,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="../../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -299,5 +295,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>
