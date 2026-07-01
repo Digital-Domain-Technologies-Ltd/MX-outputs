@@ -1,6 +1,11 @@
 /* MX Tools — shared styles for /tools/* pages.
    Loaded after mx-unified.css + mx-hero.css. Reuses the brand tokens
-   defined in :root of mx-unified.css. */
+   defined in :root of mx-unified.css.
+
+   Imported partial (an @import must precede all style rules):
+     mx-prov-chain.css — the interactive AI-provenance chain, styled once and
+     shared with the blog demo overlay (mx-blog.css imports the same file). */
+@import url("mx-prov-chain.css");
 
 :root {
   --mx-tool-pass: var(--mx-green-free);
@@ -705,43 +710,7 @@
 }
 
 /* ════════════════════════════════════════════════════════════════
-   Accessible AI-provenance chain (shared with the blog demo overlay via
-   js/mx-prov-chain.js). WAI-ARIA tabs: step nodes -> detail panel.
+   Accessible AI-provenance chain: the .mx-prov-* rules are imported once from
+   mx-prov-chain.css (top of this file). Only the tool-specific hint lives here.
    ════════════════════════════════════════════════════════════════ */
 .prov-chain-hint { font-size: 0.9rem; color: var(--secondary-text); margin: 0.75rem 0 0.5rem; }
-.mx-prov-chain { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 0.25rem 0 1rem; }
-.mx-prov-node {
-  display: flex; flex-direction: column; gap: 0.15rem; align-items: flex-start;
-  background: var(--code-bg); color: var(--primary-text);
-  border: 1px solid var(--border-color); border-radius: 6px;
-  padding: 0.5rem 0.8rem; margin: 0.25rem 0.9rem 0.25rem 0; cursor: pointer;
-  font-family: var(--mx-font-body); text-align: left; position: relative;
-}
-.mx-prov-node:not(:last-child)::after {
-  content: ; position: absolute; right: -0.9rem; top: 50%;
-  width: 0.9rem; height: 2px; background: var(--border-color);
-}
-.mx-prov-node-agent { font-weight: 700; font-size: 0.95rem; }
-.mx-prov-node-role { font-size: 0.8rem; color: var(--secondary-text); }
-.mx-prov-node-ai { border-left: 3px solid var(--accent-color); }
-.mx-prov-node-human { border-left: 3px solid var(--heading-color); }
-.mx-prov-node[aria-selected="true"] {
-  outline: 2px solid var(--accent-color); outline-offset: 1px;
-  background: var(--primary-bg);
-}
-.mx-prov-node[aria-selected="true"] .mx-prov-node-role { color: var(--primary-text); }
-.mx-prov-node:focus-visible { outline: 3px solid var(--accent-color); outline-offset: 2px; }
-.mx-prov-detail {
-  background: var(--code-bg); border: 1px solid var(--border-color); border-radius: 6px;
-  padding: 0.9rem 1.1rem; margin-top: 0.25rem;
-}
-.mx-prov-detail-head { margin: 0 0 0.4rem; font-size: 1rem; }
-.mx-prov-detail-role { color: var(--accent-color); }
-.mx-prov-detail-intent { margin: 0.2rem 0; color: var(--primary-text); }
-.mx-prov-detail-meta { margin: 0.4rem 0 0; font-size: 0.82rem; color: var(--secondary-text); font-family: var(--mx-font-mono); }
-.mx-prov-step-hi { color: var(--accent-color); font-size: 0.85em; }
-@media (max-width: 640px) {
-  .mx-prov-chain { flex-direction: column; }
-  .mx-prov-node { margin-right: 0; }
-  .mx-prov-node:not(:last-child)::after { display: none; }
-}

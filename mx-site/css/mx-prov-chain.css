@@ -1,0 +1,51 @@
+/**
+ * MX provenance chain — the one source of truth for the interactive
+ * AI-provenance chain's styling.
+ *
+ * Imported by both mx-blog.css (the in-page blog demo overlay) and
+ * mx-tools.css (the standalone MX Inspector tool), so the chain looks the
+ * same wherever it appears and cannot drift - the CSS companion to the
+ * shared behaviour in js/mx-prov-chain.js.
+ *
+ * Colours come from theme variables defined by whichever stylesheet loads
+ * this one (mx-blog.css standalone, or mx-unified.css under the tool). Fonts
+ * differ between the two theme systems, so each font-family carries a
+ * fallback chain that resolves in either context.
+ */
+.mx-prov-chain { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 0.25rem 0 1rem; }
+.mx-prov-node {
+  display: flex; flex-direction: column; gap: 0.15rem; align-items: flex-start;
+  background: var(--code-bg); color: var(--primary-text);
+  border: 1px solid var(--border-color); border-radius: 6px;
+  padding: 0.5rem 0.8rem; margin: 0.25rem 0.9rem 0.25rem 0; cursor: pointer;
+  font-family: var(--font-body, var(--mx-font-body, sans-serif)); text-align: left; position: relative;
+}
+/* connector between nodes */
+.mx-prov-node:not(:last-child)::after {
+  content: ''; position: absolute; right: -0.9rem; top: 50%;
+  width: 0.9rem; height: 2px; background: var(--border-color);
+}
+.mx-prov-node-agent { font-weight: 700; font-size: 0.95rem; }
+.mx-prov-node-role { font-size: 0.8rem; color: var(--secondary-text); }
+.mx-prov-node-ai { border-left: 3px solid var(--accent-color); }
+.mx-prov-node-human { border-left: 3px solid var(--heading-color); }
+.mx-prov-node[aria-selected="true"] {
+  outline: 2px solid var(--accent-color); outline-offset: 1px;
+  background: var(--primary-bg);
+}
+.mx-prov-node[aria-selected="true"] .mx-prov-node-role { color: var(--primary-text); }
+.mx-prov-node:focus-visible { outline: 3px solid var(--accent-color); outline-offset: 2px; }
+.mx-prov-detail {
+  background: var(--code-bg); border: 1px solid var(--border-color); border-radius: 6px;
+  padding: 0.9rem 1.1rem; margin-top: 0.25rem;
+}
+.mx-prov-detail-head { margin: 0 0 0.4rem; font-size: 1rem; }
+.mx-prov-detail-role { color: var(--accent-color); }
+.mx-prov-detail-intent { margin: 0.2rem 0; color: var(--primary-text); }
+.mx-prov-detail-meta { margin: 0.4rem 0 0; font-size: 0.82rem; color: var(--secondary-text); font-family: var(--font-mono, var(--mx-font-mono, monospace)); }
+.mx-prov-step-hi { color: var(--accent-color); font-size: 0.85em; }
+@media (max-width: 640px) {
+  .mx-prov-chain { flex-direction: column; }
+  .mx-prov-node { margin-right: 0; }
+  .mx-prov-node:not(:last-child)::after { display: none; }
+}

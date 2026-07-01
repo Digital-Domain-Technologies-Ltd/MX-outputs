@@ -1,17 +1,26 @@
 /**
- * MX Blog Stylesheet — canonical, self-contained
+ * MX Blog Stylesheet — the main blog stylesheet.
  *
- * Single shared stylesheet for all posts in mx-outputs/mx-site/blog/.
+ * The canonical stylesheet for all posts in mx-outputs/mx-site/blog/, and the
+ * one that owns the blog palette and chrome. Shared partials are imported into
+ * it rather than duplicated: any styling used by both the blog and another
+ * surface lives in its own file and is pulled in here (an @import must precede
+ * all style rules, so the imports sit at the very top).
+ *
  * Light by default; dark on prefers-color-scheme: dark; high-contrast,
- * reduced-motion, print and responsive variants included. Self-contained:
- * does not depend on mx-unified.css being loaded (older posts may still
- * load it for site-wide chrome, but this file alone is sufficient for
- * blog content rendering).
+ * reduced-motion, print and responsive variants included. Does not depend on
+ * mx-unified.css being loaded (older posts may still load it for site-wide
+ * chrome, but this file plus its imports render blog content on their own).
  *
  * Two body wrappers are supported so both authoring patterns work:
  *   .blog-content  — used by html-writer-generated posts (max-width 800px)
  *   .blog-page     — used by older site-template posts (max-width 960px)
+ *
+ * Imported partials:
+ *   mx-prov-chain.css — the interactive AI-provenance chain, shared with the
+ *                       MX Inspector tool (js/mx-prov-chain.js is its behaviour).
  */
+@import url("mx-prov-chain.css");
 
 /* ════════════════════════════════════════════════════════════════
    Theme variables
@@ -1121,55 +1130,14 @@ footer,
 .mx-prov-ev-pass .mx-prov-ev-label::before { content: '✓ '; color: #2e7d32; }
 .mx-prov-ev-fail .mx-prov-ev-label::before { content: '✗ '; color: #c62828; }
 .mx-prov-ev-detail { color: var(--secondary-text); text-align: right; }
-.mx-prov-steps { margin: 0.5rem 0 0; padding-left: 1.25rem; }
-.mx-prov-step { padding: 0.35rem 0; font-size: 0.92rem; }
-.mx-prov-step-agent { color: var(--accent-color); }
-.mx-prov-step-outcome { color: var(--secondary-text); font-size: 0.85em; }
 .mx-prov-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-top: 1.5rem; }
 .mx-prov-contact { color: var(--accent-color); font-weight: 600; text-decoration: none; }
 .mx-prov-contact:hover { text-decoration: underline; }
 .mx-prov-error { color: #c62828; }
 .mx-prov-summary { font-size: 1rem; font-weight: 600; color: var(--heading-color); margin: 0.25rem 0 0.75rem; }
-.mx-prov-step-hi { color: var(--accent-color); font-size: 0.85em; }
-.mx-prov-step-human .mx-prov-step-agent { color: var(--heading-color); }
-.mx-prov-step-human { border-left: 2px solid var(--accent-color); padding-left: 0.5rem; }
-.mx-prov-step-hi { color: var(--accent-color); }
 
-/* Interactive provenance chain (WAI-ARIA tabs): nodes -> detail panel. */
+/* Interactive provenance chain (WAI-ARIA tabs): nodes -> detail panel.
+   The chain rules live once in mx-prov-chain.css (imported at the top of this
+   file) so the blog overlay and the MX Inspector tool share one source. Only
+   the overlay-specific hint stays here. */
 .mx-prov-hint { font-size: 0.9rem; color: var(--secondary-text); margin: 0 0 0.5rem; }
-.mx-prov-chain { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 0.25rem 0 1rem; }
-.mx-prov-node {
-  display: flex; flex-direction: column; gap: 0.15rem; align-items: flex-start;
-  background: var(--code-bg); color: var(--primary-text);
-  border: 1px solid var(--border-color); border-radius: 6px;
-  padding: 0.5rem 0.8rem; margin: 0.25rem 0.9rem 0.25rem 0; cursor: pointer;
-  font-family: var(--font-body); text-align: left; position: relative;
-}
-/* connector between nodes */
-.mx-prov-node:not(:last-child)::after {
-  content: ''; position: absolute; right: -0.9rem; top: 50%;
-  width: 0.9rem; height: 2px; background: var(--border-color);
-}
-.mx-prov-node-agent { font-weight: 700; font-size: 0.95rem; }
-.mx-prov-node-role { font-size: 0.8rem; color: var(--secondary-text); }
-.mx-prov-node-ai { border-left: 3px solid var(--accent-color); }
-.mx-prov-node-human { border-left: 3px solid var(--heading-color); }
-.mx-prov-node[aria-selected="true"] {
-  outline: 2px solid var(--accent-color); outline-offset: 1px;
-  background: var(--primary-bg);
-}
-.mx-prov-node[aria-selected="true"] .mx-prov-node-role { color: var(--primary-text); }
-.mx-prov-node:focus-visible { outline: 3px solid var(--accent-color); outline-offset: 2px; }
-.mx-prov-detail {
-  background: var(--code-bg); border: 1px solid var(--border-color); border-radius: 6px;
-  padding: 0.9rem 1.1rem; margin-top: 0.25rem;
-}
-.mx-prov-detail-head { margin: 0 0 0.4rem; font-size: 1rem; }
-.mx-prov-detail-role { color: var(--accent-color); }
-.mx-prov-detail-intent { margin: 0.2rem 0; color: var(--primary-text); }
-.mx-prov-detail-meta { margin: 0.4rem 0 0; font-size: 0.82rem; color: var(--secondary-text); font-family: var(--font-mono); }
-@media (max-width: 640px) {
-  .mx-prov-chain { flex-direction: column; }
-  .mx-prov-node { margin-right: 0; }
-  .mx-prov-node:not(:last-child)::after { display: none; }
-}
