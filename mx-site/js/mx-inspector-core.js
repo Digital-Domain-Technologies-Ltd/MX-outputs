@@ -582,6 +582,9 @@ export function inspectCarrier({ carrier, filename, bytes, text } = {}) {
 
   if (c === 'raster') {
     fields = extractRasterMx(bytes != null ? bytes : text);
+    // An image's embedded description is its alt-text-equivalent - the accessibility
+    // signal a carrier-level check can honestly report for a raster file.
+    if (fields.description) accessibility = 'Carries a description (alt-text) in metadata.';
   } else if (c === 'svg') {
     const t = asText();
     fields = extractSvgMx(t);

@@ -33,15 +33,49 @@ function el(tag, attrs = {}, ...kids) {
 
 let overlay = null;
 let lastFocused = null;
+let inerted = []; // background elements we made inert on open, to restore on close
+
+// Focusable elements inside the dialog panel, for the Tab-wrap fallback.
+function focusable(root) {
+  return [...root.querySelectorAll('a[href],button,input,select,textarea,[tabindex]')]
+    .filter((e) => !e.hasAttribute('disabled') && e.tabIndex !== -1 && e.offsetParent !== null);
+}
 
 function onKeydown(e) {
-  if (e.key === 'Escape') closeOverlay();
+  if (!overlay) return;
+  if (e.key === 'Escape') { closeOverlay(); return; }
+  if (e.key !== 'Tab') return;
+  // Focus-wrap fallback: keep Tab within the dialog even where `inert` is
+  // unsupported. `inert` on the background is the primary containment.
+  const panel = overlay.querySelector('.mx-prov-panel');
+  const items = focusable(panel);
+  if (!items.length) return;
+  const first = items[0];
+  const last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+}
+
+// Make everything behind the dialog inert (out of focus order AND the a11y tree),
+// so a screen-reader and keyboard focus stay confined to the modal. This is the
+// standard modal fix; without it the background remains reachable behind the overlay.
+function inertBackground() {
+  inerted = [];
+  for (const child of Array.from(document.body.children)) {
+    if (child === overlay) continue;
+    if (!child.hasAttribute('inert')) { child.setAttribute('inert', ''); child.setAttribute('aria-hidden', 'true'); inerted.push(child); }
+  }
+}
+function restoreBackground() {
+  for (const child of inerted) { child.removeAttribute('inert'); child.removeAttribute('aria-hidden'); }
+  inerted = [];
 }
 
 function closeOverlay() {
   if (!overlay) return;
   overlay.remove();
   overlay = null;
+  restoreBackground();
   document.removeEventListener('keydown', onKeydown);
   if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
 }
@@ -97,6 +131,7 @@ function openOverlay(title) {
   overlay = el('div', { class: 'mx-prov-overlay' }, panel);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeOverlay(); });
   document.body.appendChild(overlay);
+  inertBackground();
   document.addEventListener('keydown', onKeydown);
   close.focus();
   return body;
