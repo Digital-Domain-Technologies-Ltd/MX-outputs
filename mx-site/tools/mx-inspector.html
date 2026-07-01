@@ -132,7 +132,7 @@ mx:
 
   <main id="main">
 
-    <header class="hero hero--section">
+    <header class="hero hero--section hero--inspector">
       <div class="hero-inner">
         <div class="hero-brand">
           <div class="hero-logo" role="img" aria-label="CogNovaMX">MX</div>
@@ -142,7 +142,14 @@ mx:
           <span>Inspect any</span>
           <span class="accent">file.</span>
         </h1>
-        <p class="subtitle">Drop the file. Your browser reads it locally. The file never leaves your machine. The inspector reports the MX metadata the file carries, what it lacks, and what a regulator or AI agent would find if they tried to verify it.</p>
+        <p class="subtitle">Drop a file. Your browser reads it locally and it never leaves your machine. The inspector reports the MX metadata the file carries, and walks the provenance chain it holds.</p>
+
+        <label class="tool-dropzone" data-mx-inspector-dropzone>
+          <input type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,.avif,.svg,.html,.htm,.md,.markdown,.yaml,.yml,.json,application/pdf,application/json,image/*" data-mx-inspector-input aria-label="Choose a file to inspect">
+          <p class="tool-dropzone-prompt"><strong>Drop a file here</strong> or click to choose one</p>
+          <p class="tool-dropzone-hint">PDF, image, SVG, HTML, markdown, .mx.yaml, or a provenance .json. Your file stays in your browser.</p>
+          <p class="tool-dropzone-busy" data-mx-inspector-busy hidden></p>
+        </label>
       </div>
     </header>
 
@@ -150,35 +157,19 @@ mx:
       <div class="section-inner blog-page" role="presentation">
         <article data-agent-visible="true">
 
+          <div class="tool-results" data-mx-inspector-results hidden aria-live="polite"></div>
+
+          <section class="tool-chain" data-prov-explorer-section hidden>
+            <h2 id="explore-the-chain">Walk the evidence chain</h2>
+            <p>The file you dropped carries an embedded AI-governance provenance record. This view walks it step by step: the build environment, the accountable parties, the regulatory frameworks the record cites, and every recorded action in the chain. A PDF embeds it in its XMP packet; a decorated image, SVG, or HTML page embeds it in its own carrier; a <code>.provenance.ai.json</code> is the chain itself. Nothing leaves your browser.</p>
+            <div class="prov-explorer" data-prov-explorer></div>
+          </section>
+
           <p><strong>This inspector reads any file in your browser. There is no upload. We have no server-side record of which files you inspect. The parser itself ships from this site, with no third-party CDN call and no remote dependency at inspection time. The inspection is entirely a conversation between the file and your browser.</strong></p>
 
-          <p>Drop a file below. The inspector reads the MX metadata the file carries and reports what a machine sees. A PDF is read for its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded, then classified MX Compatible, EAA tagged only, or plain. Any other carrier, a raster image, an SVG, an HTML page, a markdown file, or a .mx.yaml sidecar, is read for the MX metadata embedded in its own carrier and classified MX or plain, with every field it carries listed. You can download the inspection as machine-readable JSON, and for a PDF a markdown report and the extracted provenance record too.</p>
+          <p>Drop a file above. The inspector reads the MX metadata the file carries and reports what a machine sees. A PDF is read for its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded, then classified MX Compatible, EAA tagged only, or plain. Any other carrier, a raster image, an SVG, an HTML page, a markdown file, or a .mx.yaml sidecar, is read for the MX metadata embedded in its own carrier and classified MX or plain, with every field it carries listed. When the file carries an embedded provenance chain, the evidence-chain view opens so you can walk it. You can download the inspection as machine-readable JSON, and for a PDF a markdown report and the extracted provenance record too.</p>
 
           <p>For the conceptual background on PDFs, what each artefact is, why it matters under the European Accessibility Act and the EU AI Act, and how to verify any claim with three command-line tools, read the explainer: <a href="/learn/mx-for-pdfs.html">MX for PDFs</a>. The inspector is the interactive companion; the explainer is the walk-through.</p>
-
-          <h2 id="drop-the-file">Drop the file</h2>
-
-          <label class="tool-dropzone" data-mx-inspector-dropzone>
-            <input type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,.avif,.svg,.html,.htm,.md,.markdown,.yaml,.yml,application/pdf,image/*" data-mx-inspector-input aria-label="Choose a file to inspect">
-            <p class="tool-dropzone-prompt"><strong>Drag a file here</strong> or click to choose one</p>
-            <p class="tool-dropzone-hint">PDF, image, SVG, HTML, markdown, or .mx.yaml. Up to several hundred megabytes. Your file stays in your browser.</p>
-            <p class="tool-dropzone-busy" data-mx-inspector-busy hidden></p>
-          </label>
-
-          <div class="tool-tabs" role="tablist" aria-label="Inspector views">
-            <button type="button" class="tool-tab is-active" role="tab" id="tab-inspect" data-tab="inspect" aria-selected="true" aria-controls="panel-inspect">Inspect</button>
-            <button type="button" class="tool-tab" role="tab" id="tab-explore" data-tab="explore" aria-selected="false" aria-controls="panel-explore" tabindex="-1">Explore</button>
-          </div>
-
-          <div class="tool-tabpanel" id="panel-inspect" role="tabpanel" aria-labelledby="tab-inspect" data-tabpanel="inspect">
-            <div class="tool-results" data-mx-inspector-results hidden aria-live="polite"></div>
-          </div>
-
-          <div class="tool-tabpanel" id="panel-explore" role="tabpanel" aria-labelledby="tab-explore" data-tabpanel="explore" hidden>
-            <h2 id="explore-the-chain">Explore the evidence chain</h2>
-            <p>When a PDF carries an embedded provenance record, this view lets you walk it step by step: the build environment, the accountable parties, the regulatory frameworks the record cites, and every recorded action in the chain. Inspect a PDF on the Inspect tab and its provenance loads here automatically, or drop a <code>.provenance.ai.json</code> file below to explore one on its own. Nothing leaves your browser.</p>
-            <div class="prov-explorer" data-prov-explorer></div>
-          </div>
 
           <h2 id="what-the-inspector-checks">What the inspector checks</h2>
 

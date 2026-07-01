@@ -6,11 +6,11 @@
 // sidecar) as a browsable node list plus a detail panel, so a reader can walk
 // the evidence chain step by step without opening raw JSON.
 //
-// Two ways the object arrives:
-//   1. The Inspect tab dispatches a `mx:provenance` CustomEvent after it parses
-//      a dropped PDF that carries an embedded provenance record.
-//   2. The visitor drops or chooses a standalone `.provenance.ai.json` on this
-//      tab. The file is read locally via FileReader; nothing leaves the browser.
+// The object arrives one way: the inspector shell (mx-inspector.js) dispatches a
+// `mx:provenance` CustomEvent after it finds a parseable provenance chain in the
+// dropped file, whatever the carrier (PDF XMP, a decorated raster/SVG/HTML page,
+// or a bare `.provenance.ai.json` which is the chain itself). Everything is read
+// locally in the browser; nothing leaves the machine.
 //
 // Values come from arbitrary files, so every value is written with textContent
 // (never innerHTML). The DOM is built with the small `h` helper below.
@@ -43,43 +43,9 @@ const HASH_KEY = /(sha|hash)/i;
 
 // ── State ──────────────────────────────────────────────────
 let container = null;
-let messageEl = null;
 let currentData = null;
 let currentSource = '';
 let selectedId = null;
-
-// ── Tab wiring (Inspect | Explore) ─────────────────────────
-function wireTabs() {
-  const tabs = Array.from(document.querySelectorAll('.tool-tab'));
-  if (!tabs.length) return;
-  const panels = new Map();
-  for (const t of tabs) {
-    panels.set(t.dataset.tab, document.querySelector(`[data-tabpanel="${t.dataset.tab}"]`));
-  }
-
-  function activate(tab) {
-    for (const t of tabs) {
-      const on = t === tab;
-      t.classList.toggle('is-active', on);
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.tabIndex = on ? 0 : -1;
-      const panel = panels.get(t.dataset.tab);
-      if (panel) panel.hidden = !on;
-    }
-  }
-
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => activate(t));
-    t.addEventListener('keydown', (e) => {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      e.preventDefault();
-      const dir = e.key === 'ArrowRight' ? 1 : -1;
-      const next = tabs[(i + dir + tabs.length) % tabs.length];
-      next.focus();
-      activate(next);
-    });
-  });
-}
 
 // ── Node model ─────────────────────────────────────────────
 function runInfo(parsed) {
@@ -185,63 +151,6 @@ function renderValue(value, keyHint) {
   return h('span', { class: 'prov-scalar', text: String(value) });
 }
 
-// ── Standalone JSON load ───────────────────────────────────
-function readJsonFile(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        resolve(JSON.parse(reader.result));
-      } catch (err) {
-        reject(err);
-      }
-    };
-    reader.onerror = () => reject(reader.error || new Error('read failed'));
-    reader.readAsText(file);
-  });
-}
-
-async function onDroppedFile(file) {
-  try {
-    const parsed = await readJsonFile(file);
-    if (!parsed || typeof parsed !== 'object' || (!('steps' in parsed) && !('schemaVersion' in parsed))) {
-      renderMessage('That JSON does not look like an MX provenance record (no steps or schemaVersion).', 'error');
-      return;
-    }
-    load(file.name, parsed);
-  } catch (err) {
-    renderMessage(`Could not read that file: ${err.message}`, 'error');
-  }
-}
-
-function makeDropzone() {
-  const input = h('input', { type: 'file', accept: 'application/json,.json', 'aria-label': 'Choose a provenance JSON file to explore' });
-  const label = h('label', { class: 'tool-dropzone prov-dropzone' },
-    input,
-    h('p', { class: 'tool-dropzone-prompt' }, h('strong', { text: 'Drop a .provenance.ai.json' }), ' or click to choose'),
-    h('p', { class: 'tool-dropzone-hint', text: 'JSON only. Your file stays in your browser.' }),
-  );
-  input.addEventListener('change', (e) => {
-    const f = e.target.files && e.target.files[0];
-    if (f) onDroppedFile(f);
-  });
-  ['dragenter', 'dragover'].forEach((ev) => label.addEventListener(ev, (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    label.classList.add('is-dragover');
-  }));
-  ['dragleave', 'drop'].forEach((ev) => label.addEventListener(ev, (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    label.classList.remove('is-dragover');
-  }));
-  label.addEventListener('drop', (e) => {
-    const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
-    if (f) onDroppedFile(f);
-  });
-  return label;
-}
-
 // ── Pieces ─────────────────────────────────────────────────
 function sourceBar() {
   const schema = currentData.schemaVersion || 'unknown';
@@ -267,7 +176,7 @@ function legend() {
 function emptyState() {
   return h('div', { class: 'prov-empty-state' },
     h('p', { text: 'No provenance loaded yet.' }),
-    h('p', { text: 'Inspect a PDF that carries an embedded AI provenance record on the Inspect tab and it appears here, or drop a .provenance.ai.json file above to explore one directly.' }),
+    h('p', { text: 'Drop an asset that carries an embedded provenance chain, or a .provenance.ai.json, and it appears here.' }),
   );
 }
 
@@ -314,19 +223,12 @@ function explorerBody() {
 // ── Render orchestration ───────────────────────────────────
 function render() {
   container.replaceChildren();
-  if (currentData) container.appendChild(sourceBar());
-  container.appendChild(makeDropzone());
-  messageEl = h('div', { class: 'prov-message', 'aria-live': 'polite' });
-  container.appendChild(messageEl);
   if (!currentData) {
     container.appendChild(emptyState());
     return;
   }
+  container.appendChild(sourceBar());
   container.appendChild(explorerBody());
-}
-
-function renderMessage(text, kind) {
-  if (messageEl) messageEl.replaceChildren(h('div', { class: `prov-note is-${kind}`, text }));
 }
 
 function load(source, parsed) {
@@ -340,7 +242,6 @@ function load(source, parsed) {
 function init() {
   container = document.querySelector('[data-prov-explorer]');
   if (!container) return;
-  wireTabs();
   render();
   document.addEventListener('mx:provenance', (e) => {
     if (e.detail && e.detail.parsed) {

@@ -50,6 +50,43 @@ const GENERIC_PIVOT = {
 
 let pdfjsLib = null;
 let pdfjsLoadPromise = null;
+let chainSectionEl = null;
+
+// Hand a parsed provenance record to the explorer and reveal the chain view.
+function revealChain(source, parsed) {
+  document.dispatchEvent(new CustomEvent('mx:provenance', { detail: { source, parsed } }));
+  if (chainSectionEl) chainSectionEl.hidden = false;
+}
+
+function hideChain() {
+  if (chainSectionEl) chainSectionEl.hidden = true;
+}
+
+function isHttpUrl(u) {
+  return typeof u === 'string' && /^https?:\/\//i.test(u.trim());
+}
+
+// Fetch the provenance cog a file names in its mx.provenanceUri and open the
+// chain view. This is a GET of a public URL the file itself declares; nothing
+// about the dropped file is ever sent, so the no-upload promise holds. Prompted,
+// never automatic, so the one network call the tool can make is the visitor's
+// explicit choice.
+async function fetchAndWalkProvenance(url, statusEl) {
+  if (statusEl) statusEl.textContent = 'Fetching provenance…';
+  try {
+    const res = await fetch(url, { credentials: 'omit', redirect: 'follow' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const parsed = await res.json();
+    if (!parsed || typeof parsed !== 'object' || (!('steps' in parsed) && !('schemaVersion' in parsed))) {
+      if (statusEl) statusEl.textContent = 'That URL did not return an MX provenance record (no steps or schemaVersion).';
+      return;
+    }
+    if (statusEl) statusEl.textContent = '';
+    revealChain(url, parsed);
+  } catch (err) {
+    if (statusEl) statusEl.textContent = `Could not fetch that provenance record: ${err.message}`;
+  }
+}
 
 async function loadPdfJs() {
   if (pdfjsLib) return pdfjsLib;
@@ -117,6 +154,24 @@ function renderResults(file, carrier, classification, findings, resultsEl) {
 
   const provDownload = isPdf && findings.provenance && findings.provenance.present && findings.provenance.parsed;
 
+  // A file may name its canonical provenance record by URL (mx.provenanceUri).
+  // Offer to fetch it: when a chain is already embedded, to check for a newer
+  // canonical version; otherwise, as the way to walk the chain at all.
+  const fields = findings.fields || {};
+  const provUrlRaw = fields.provenanceUri || fields.provenanceuri || '';
+  const provUrl = isHttpUrl(provUrlRaw) ? provUrlRaw.trim() : '';
+  const hasEmbedded = Boolean(findings.provenance && findings.provenance.parsed);
+  const provUrlPanel = provUrl ? `
+    <div class="tool-prov-url" data-prov-url>
+      <h3>Canonical provenance</h3>
+      <p>${hasEmbedded
+    ? 'This file also names a canonical provenance record. Fetch it to check for a newer version than the embedded copy:'
+    : 'This file names its provenance record at a URL. Fetching it reads that public URL only; your file is never sent.'}</p>
+      <p><code>${escapeHtml(provUrl)}</code></p>
+      <button type="button" class="tool-download" data-prov-fetch>${hasEmbedded ? 'Fetch canonical version' : 'Fetch and walk it'}</button>
+      <p class="tool-prov-url-status" data-prov-url-status aria-live="polite"></p>
+    </div>` : '';
+
   resultsEl.innerHTML = `
     <h2 id="results-heading">Inspection result</h2>
     <p>
@@ -126,6 +181,7 @@ function renderResults(file, carrier, classification, findings, resultsEl) {
 
     ${evidenceTable(classification)}
     ${isPdf ? '' : metadataTable(findings.fields)}
+    ${provUrlPanel}
 
     <h3>Downloads</h3>
     <div class="tool-downloads" id="tool-downloads">
@@ -172,6 +228,12 @@ function renderResults(file, carrier, classification, findings, resultsEl) {
       downloadBlob(`${baseStem}-provenance-ai-extracted.json`, 'application/json', JSON.stringify(findings.provenance.parsed, null, 2));
     });
   }
+
+  const fetchBtn = resultsEl.querySelector('[data-prov-fetch]');
+  if (fetchBtn) {
+    const st = resultsEl.querySelector('[data-prov-url-status]');
+    fetchBtn.addEventListener('click', () => fetchAndWalkProvenance(provUrl, st));
+  }
 }
 
 function renderError(resultsEl, message) {
@@ -180,9 +242,32 @@ function renderError(resultsEl, message) {
 }
 
 async function inspectFile(file, resultsEl, busyEl) {
+  hideChain();
+
+  // A bare provenance JSON is the evidence chain itself: parse it and open the
+  // chain view directly, with no inspection verdict.
+  if (/\.json$/i.test(file.name)) {
+    busyEl.textContent = 'Reading provenance…';
+    busyEl.hidden = false;
+    try {
+      const parsed = JSON.parse(await file.text());
+      busyEl.hidden = true;
+      if (!parsed || typeof parsed !== 'object' || (!('steps' in parsed) && !('schemaVersion' in parsed))) {
+        renderError(resultsEl, 'That JSON does not look like an MX provenance record (no steps or schemaVersion).');
+        return;
+      }
+      resultsEl.hidden = true;
+      revealChain(file.name, parsed);
+    } catch (err) {
+      busyEl.hidden = true;
+      renderError(resultsEl, `Could not read that provenance JSON: ${err.message}`);
+    }
+    return;
+  }
+
   const carrier = detectCarrierFromName(file.name);
   if (!carrier) {
-    renderError(resultsEl, 'Unsupported file type. Drop a PDF, image (PNG/JPG/WEBP/GIF/AVIF), SVG, HTML, markdown, or .mx.yaml sidecar.');
+    renderError(resultsEl, 'Unsupported file type. Drop a PDF, image (PNG/JPG/WEBP/GIF/AVIF), SVG, HTML, markdown, .mx.yaml sidecar, or a provenance .json.');
     return;
   }
 
@@ -210,10 +295,12 @@ async function inspectFile(file, resultsEl, busyEl) {
     busyEl.hidden = true;
     renderResults(file, carrier, classification, findings, resultsEl);
 
-    if (carrier === 'pdf' && findings.provenance && findings.provenance.parsed) {
-      document.dispatchEvent(new CustomEvent('mx:provenance', {
-        detail: { source: file.name, parsed: findings.provenance.parsed },
-      }));
+    // Any carrier that embeds a parseable provenance chain (PDF XMP, decorated
+    // raster/SVG, or an HTML page) opens the evidence-chain view.
+    if (findings.provenance && findings.provenance.parsed) {
+      revealChain(file.name, findings.provenance.parsed);
+    } else {
+      hideChain();
     }
   } catch (err) {
     busyEl.hidden = true;
@@ -226,6 +313,7 @@ function init() {
   const fileInput = document.querySelector('[data-mx-inspector-input]');
   const resultsEl = document.querySelector('[data-mx-inspector-results]');
   const busyEl = document.querySelector('[data-mx-inspector-busy]');
+  chainSectionEl = document.querySelector('[data-prov-explorer-section]');
 
   if (!dropzone || !fileInput || !resultsEl || !busyEl) return;
 

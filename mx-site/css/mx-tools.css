@@ -64,6 +64,70 @@
   font-size: 0.95rem;
 }
 
+/* ── Inspector hero (compact, dropzone above the fold) ───── */
+
+.hero--inspector {
+  padding: 4rem 0 2.5rem;
+}
+
+.hero--inspector h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+}
+
+.hero--inspector h1::before {
+  margin-bottom: 12px;
+}
+
+.hero--inspector h1::after {
+  margin-top: 12px;
+}
+
+.hero--inspector .subtitle {
+  max-width: 62ch;
+}
+
+.hero--inspector .tool-dropzone {
+  margin: 1rem 0 0;
+  max-width: 640px;
+  padding: 2rem;
+}
+
+/* ── Canonical-provenance URL panel ──────────────────────── */
+
+.tool-prov-url {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--mx-border);
+  background-color: var(--mx-tool-surface);
+}
+
+.tool-prov-url code {
+  word-break: break-all;
+}
+
+.tool-prov-url-status {
+  margin: 0.5rem 0 0;
+  color: var(--mx-blue-light);
+  font-size: 0.95rem;
+}
+
+/* ── Single-flow results + evidence chain ────────────────── */
+
+.tool-chain {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--mx-border);
+}
+
+.tool-chain[hidden] {
+  display: none;
+}
+
+.tool-results[hidden] {
+  display: none;
+}
+
 /* ── Verdict badge ───────────────────────────────────────── */
 
 .tool-verdict {
@@ -368,42 +432,6 @@
   margin: 1rem 0;
 }
 
-/* ── Inspector tabs (Inspect | Explore) ──────────────────── */
-
-.tool-tabs {
-  display: flex;
-  gap: 0.25rem;
-  margin: 2rem 0 0;
-  border-bottom: 1px solid var(--mx-border);
-}
-
-.tool-tab {
-  flex: 0 0 auto;
-  padding: 0.65rem 1.25rem;
-  background: none;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  color: var(--mx-text-muted);
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: color 200ms ease, border-color 200ms ease;
-}
-
-.tool-tab:hover,
-.tool-tab:focus-visible {
-  color: var(--mx-text);
-}
-
-.tool-tab.is-active {
-  color: var(--mx-blue-light);
-  border-bottom-color: var(--mx-blue-light);
-}
-
-.tool-tabpanel[hidden] {
-  display: none;
-}
-
 /* ── Provenance explorer ─────────────────────────────────── */
 
 .prov-explorer {
@@ -431,11 +459,6 @@
 .prov-source-meta {
   color: var(--mx-text-muted);
   font-size: 0.9rem;
-}
-
-.prov-dropzone {
-  padding: 1.25rem 1.5rem;
-  max-width: none;
 }
 
 .prov-message:empty {

@@ -476,6 +476,36 @@ export function extractSvgMx(text) {
   return parseYamlSubset(yamlFromCommentBlock(body) || body);
 }
 
+// Extract an embedded AI-governance provenance chain from a non-PDF carrier.
+// A decorated raster carries it in the XMP packet (mx:ProvenanceAiPayload); an
+// SVG in a <metadata id="mx-provenance"> CDATA element; an HTML page in a
+// <script type="application/json" id="mx-provenance"> block. Other carriers do
+// not embed one. Returns the same { present, parsed, parseError } shape the PDF
+// path (detectProvenanceAiPayload) produces, so the shell is carrier-agnostic.
+export function extractProvenanceFromCarrier({ carrier, bytes, text } = {}) {
+  const asText = () => (typeof text === 'string' ? text : bytesToLatin1(bytes));
+  let raw = null;
+  if (carrier === 'raster') {
+    const xmp = extractXmpPacket(bytesToLatin1(bytes != null ? bytes : text));
+    if (xmp) raw = parseXmpFields(xmp).provenanceAiPayload || null;
+  } else if (carrier === 'svg') {
+    const block = asText().match(/<metadata\b[^>]*id=["']mx-provenance["'][^>]*>([\s\S]*?)<\/metadata>/i);
+    if (block) {
+      const cdata = block[1].match(/<!\[CDATA\[([\s\S]*?)\]\]>/);
+      raw = (cdata ? cdata[1] : block[1]).trim();
+    }
+  } else if (carrier === 'html') {
+    const block = asText().match(/<script\b[^>]*id=["']mx-provenance["'][^>]*>([\s\S]*?)<\/script>/i);
+    if (block) raw = block[1].trim();
+  }
+  if (!raw) return { present: false };
+  try {
+    return { present: true, parsed: JSON.parse(raw), raw };
+  } catch (e) {
+    return { present: true, parsed: null, raw, parseError: e.message };
+  }
+}
+
 export function extractHtmlMx(text) {
   const fields = {};
   const blk = text.match(/MX-SOURCE-FRONTMATTER:START[\s\S]*?MX-SOURCE-FRONTMATTER:END/);
@@ -571,6 +601,7 @@ export function inspectCarrier({ carrier, filename, bytes, text } = {}) {
     };
   }
 
+  const provenance = extractProvenanceFromCarrier({ carrier: c, bytes, text });
   const classification = classifyGeneric(c, fields, { accessibility });
-  return { findings: { carrier: c, fields, accessibility }, classification };
+  return { findings: { carrier: c, fields, accessibility, provenance }, classification };
 }
