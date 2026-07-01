@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '5.2'
+version: '5.3'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-06-27'
+modified: '2026-07-01'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -1960,6 +1960,71 @@ mx:
         - schema:license
       status: canonical
       profile: core
+    - name: inLanguage
+      type: string
+      definition: >-
+        Primary language of the document content, as a BCP 47 language tag (en, es, en-GB). Aligns with Schema.org
+        inLanguage and Dublin Core dc:language.
+      example: es
+      alignsWith:
+        - schema:inLanguage
+        - dc:language
+      status: canonical
+      profile: core
+    - name: currency
+      type: string
+      definition: >-
+        The document's default currency for monetary references, as an ISO 4217 three-letter code (EUR, USD, GBP). The
+        same code Schema.org priceCurrency uses.
+      example: EUR
+      alignsWith:
+        - schema:priceCurrency
+      status: canonical
+      profile: extended
+    - name: dateFormat
+      type: string
+      definition: >-
+        Human display convention for dates in the document body. Machine-read dates in frontmatter are always ISO 8601
+        (YYYY-MM-DD); this field only declares how dates are shown to a reader.
+      example: iso-8601
+      validValues:
+        - iso-8601
+        - dmy
+        - mdy
+        - ymd
+      default: iso-8601
+      status: canonical
+      profile: extended
+    - name: translationOfWork
+      type: string
+      definition: >-
+        On a translated document, the canonicalUri of the source work it was translated from. Aligns with Schema.org
+        translationOfWork.
+      example: https://mx.allabout.network/letters/apology.md
+      alignsWith:
+        - schema:translationOfWork
+      status: canonical
+      profile: extended
+    - name: workTranslation
+      type: array
+      definition: >-
+        On a source document, the canonicalUris of works that are translations of it (the inverse of
+        translationOfWork). Aligns with Schema.org workTranslation.
+      example:
+        - https://mx.allabout.network/letters/apology-es.md
+      alignsWith:
+        - schema:workTranslation
+      status: canonical
+      profile: extended
+    - name: translator
+      type: string
+      definition: >-
+        Who or what performed a translation: a person's name or a model identifier. Aligns with Schema.org translator.
+      example: Maxine (claude-opus-4-8)
+      alignsWith:
+        - schema:translator
+      status: canonical
+      profile: extended
     - name: displayName
       type: string
       definition: Human-friendly name. Aligns with FOAF displayName and Schema.org alternateName.
