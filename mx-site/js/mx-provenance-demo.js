@@ -57,17 +57,32 @@ function buildEvidence(classification) {
   return list;
 }
 
+function isHumanStep(s) {
+  return !!(s && s.humanIntervention && s.humanIntervention !== 'none');
+}
+
 function buildSteps(parsed) {
   const steps = (parsed && parsed.steps) || [];
   if (!steps.length) return null;
   const list = el('ol', { class: 'mx-prov-steps' });
   for (const s of steps) {
-    list.appendChild(el('li', { class: 'mx-prov-step' },
+    const human = isHumanStep(s);
+    list.appendChild(el('li', { class: `mx-prov-step ${human ? 'mx-prov-step-human' : 'mx-prov-step-ai'}` },
       el('strong', { class: 'mx-prov-step-agent', text: s.agent || 'unknown agent' }),
       s.intent ? document.createTextNode(SEP + s.intent) : null,
+      human ? el('span', { class: 'mx-prov-step-hi', text: ` (human check: ${s.humanIntervention})` }) : null,
       s.outcome ? el('span', { class: 'mx-prov-step-outcome', text: ` [${s.outcome}]` }) : null));
   }
   return list;
+}
+
+// Two-party summary: which agent attached the trail, which human checked it.
+function twoPartySummary(parsed) {
+  const steps = (parsed && parsed.steps) || [];
+  const ai = steps.find((s) => s.agent && s.agent.toLowerCase() !== 'deterministic' && !isHumanStep(s));
+  const human = steps.find(isHumanStep);
+  if (ai && human) return `${ai.agent} attached this AI provenance trail. ${human.agent} reviewed and verified it.`;
+  return null;
 }
 
 function openOverlay(title) {
@@ -87,15 +102,18 @@ function openOverlay(title) {
   return body;
 }
 
-function renderResult(body, url, findings, classification) {
-  const parsed = findings && findings.provenance && findings.provenance.parsed;
+function renderResult(body, url, findings, classification, parsedOverride, source) {
+  const parsed = parsedOverride || (findings && findings.provenance && findings.provenance.parsed);
   const rp = parsed && (parsed.responsiblePerson || (parsed.parties && parsed.parties[0]));
   const tier = (classification && classification.tier) || 'unknown';
   body.textContent = '';
 
   body.appendChild(el('p', { class: 'mx-prov-lead' },
-    'Everything below was read from the file itself, live, in your browser. Nothing was uploaded. This is the author photo on this page (',
+    'Everything below was read live in your browser. Nothing was uploaded. This is the author photo on this page (',
     el('code', { text: url }), ').'));
+
+  const summary = twoPartySummary(parsed);
+  if (summary) body.appendChild(el('p', { class: 'mx-prov-summary', text: summary }));
 
   body.appendChild(el('p', { class: `mx-prov-tier mx-prov-tier-${tier}` },
     'Readiness tier: ', el('strong', { text: String(tier).toUpperCase() })));
@@ -105,7 +123,10 @@ function renderResult(body, url, findings, classification) {
 
   const steps = buildSteps(parsed);
   if (steps) {
-    body.appendChild(el('h3', { class: 'mx-prov-h', text: 'The AI provenance trail (embedded in the image)' }));
+    const heading = source === 'companion'
+      ? 'The AI provenance trail (this file’s companion record)'
+      : 'The AI provenance trail (embedded in the image)';
+    body.appendChild(el('h3', { class: 'mx-prov-h', text: heading }));
     body.appendChild(steps);
     if (rp && rp.name) {
       body.appendChild(el('p', { class: 'mx-prov-rp' },
@@ -113,7 +134,7 @@ function renderResult(body, url, findings, classification) {
         rp.organisation ? `, ${rp.organisation}` : ''));
     }
   } else {
-    body.appendChild(el('p', { class: 'mx-prov-note', text: 'No embedded provenance trail was found in this file.' }));
+    body.appendChild(el('p', { class: 'mx-prov-note', text: 'No provenance trail was found for this file.' }));
   }
 
   const actions = el('p', { class: 'mx-prov-actions' },
@@ -136,7 +157,28 @@ async function runDemo(url, title) {
       const text = await res.text();
       out = inspectCarrier({ carrier, filename: url.split('/').pop(), text });
     }
-    renderResult(body, url, out.findings, out.classification);
+    // Reliability: the trail is embedded in the image XMP, but a very large
+    // payload can defeat an in-browser parse. If no steps came back, fall back
+    // to the file's companion provenance record (served alongside the asset),
+    // which is always intact. Same evidence, guaranteed to render.
+    let parsedOverride = null;
+    let source = 'embedded';
+    const embeddedSteps = out.findings && out.findings.provenance
+      && out.findings.provenance.parsed && out.findings.provenance.parsed.steps;
+    if (!embeddedSteps || !embeddedSteps.length) {
+      const sidecarUrl = url.replace(/\.[^./]+$/, '') + '.provenance.ai.json';
+      try {
+        const sres = await fetch(sidecarUrl, { cache: 'no-store' });
+        if (sres.ok) {
+          const json = await sres.json();
+          if (json && Array.isArray(json.steps) && json.steps.length) {
+            parsedOverride = json;
+            source = 'companion';
+          }
+        }
+      } catch (_) { /* leave parsedOverride null; renderResult shows the no-trail note */ }
+    }
+    renderResult(body, url, out.findings, out.classification, parsedOverride, source);
   } catch (err) {
     body.textContent = '';
     body.appendChild(el('p', { class: 'mx-prov-error', role: 'alert' },
