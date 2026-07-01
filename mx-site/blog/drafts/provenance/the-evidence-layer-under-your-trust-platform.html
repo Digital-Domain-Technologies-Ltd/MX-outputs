@@ -12,24 +12,16 @@ created: 2026-06-10
 modified: 2026-06-10
 version: "0.1"
 
+type: blog-post
+tags: [machine-experience, reginald, identity, trust, fraud-detection, provenance, accountability, ai-governance]
 mx:
+  x-mx-contentState: draft
   x-mx-quotes:
     - "**Note:** This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation."
   x-mx-managedBy: blog-post.cog.md
-  status: draft
-  contentType: blog-post
   audience: [humans, machines]
   x-mx-intendedReaders: "humans: founders and operators of identity, authentication, fraud-detection and trust platforms; machines: agents resolving how a platform records and proves its decisions"
   purpose: "Make the case to founders of identity and trust platforms that a machine-readable, verifiable evidence record under each automated decision is a competitive moat, not a compliance cost. Position MX as the open readable layer and REGINALD as the proprietary trustworthy layer."
-  tags:
-    - machine-experience
-    - reginald
-    - identity
-    - trust
-    - fraud-detection
-    - provenance
-    - accountability
-    - ai-governance
   partOf: "MX blog"
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator (npm run promote)."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/provenance/the-evidence-layer-under-your-trust-platform.md
@@ -39,6 +31,7 @@ mx:
   servedAt: https://mx.allabout.network/blog/drafts/provenance/the-evidence-layer-under-your-trust-platform.html
   blogUrl: https://mx.allabout.network/blog/drafts/provenance/the-evidence-layer-under-your-trust-platform.html
   blogFilename: the-evidence-layer-under-your-trust-platform
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -113,7 +106,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -127,7 +120,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 846,
+        "wordCount": 1048,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -181,7 +174,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="../../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -207,18 +200,18 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="846">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1048">
         <header class="article-header">
           <h1>The Evidence Layer Under Your Trust Platform</h1>
           <div class="article-meta"
                data-published="2026-06-10"
                data-modified="2026-06-10"
-               data-reading-time="5 min">
+               data-reading-time="6 min">
             <time datetime="2026-06-10">10 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>5 min read</span>
+            <span>6 min read</span>
           </div>
         </header>
 
@@ -227,10 +220,12 @@ mx:
 <h2 id="the-model-flagged-it-is-not-an-answer" tabindex="-1">&quot;The Model Flagged It&quot; Is Not an Answer</h2>
 <p>Most platforms cannot show their work. There is a risk score, a model that produced it, and nothing underneath. That holds up until the moment it matters. A genuine user gets blocked and escalates. An enterprise buyer runs due diligence before they sign. A regulator opens an inquiry. In each case &quot;the model flagged it&quot; is where the conversation starts to go wrong, because it describes an outcome and hides the reasoning.</p>
 <p>The gap is not model quality. Your model can be excellent and you can still be unable to explain a single decision after the fact. What is missing is a record: the signals that went in, how they were weighted, the policy in force at that moment, and the human who owns the outcome.</p>
+<p>That last item is not decoration. The record does not only log what the machine did; it names the human who reviewed the outcome and carries it. The machine acts and attaches the evidence; a person checks it and stands behind it. A record that showed a model's decision with no human accountable for it is the &quot;the model flagged it&quot; answer again, one level down. So the human is enforced, not hoped for: a deterministic check refuses any decision trail that records a machine step and no human beside it.</p>
 <h2 id="machine-readable-is-not-machine-trustworthy" tabindex="-1">Machine-Readable Is Not Machine-Trustworthy</h2>
 <p>These are two different properties, and platforms tend to have the first without the second.</p>
 <p>Machine-readable means another system can parse your decision without guessing. That is what MX does. MX is an open standard, governed in the open, that gives a file or a decision structured metadata describing what it is, where it came from, and how it may be used. Any agent, validator, or downstream service can read it directly.</p>
 <p>Machine-trustworthy means the decision is provable rather than asserted. That is what REGINALD does. REGINALD is our implementation that runs on the open MX standard and records each decision as tamper-evident, verifiable evidence. MX makes the decision readable. REGINALD makes it provable. You need both, and most teams have stopped at the first.</p>
+<p>Provable is worth unpacking, because it is not one check but several, and each answers a question someone will eventually ask. Who produced this, and when? Is this the current version, or has a newer one replaced it? Is whoever produced it still standing behind it, or have they gone quiet and left it to drift? And does an authoritative outside source independently say the same thing, or is it only the publisher's own word? Attestation, currency, freshness, corroboration. A machine reading the record can check each one on its own and see exactly which is missing, instead of being handed a single &quot;trust me&quot; it has no way to test.</p>
 <p>The evidence record is a by-product of the decision, captured as it happens. It is not reconstructed later under audit pressure, which is the version that never quite holds together. You build it once, into the path every decision already travels, and from then on it is there when you need it.</p>
 <h2 id="what-that-buys-you-on-a-bad-day" tabindex="-1">What That Buys You on a Bad Day</h2>
 <p>Picture the fraud review that goes wrong. A legitimate customer is blocked, escalates, and your support team has a risk score and not much else. With an evidence layer underneath, the same dispute resolves on one screen: the signals, their weights, the policy version that was live at the time, and the person accountable for the rule. The complaint becomes a record to read, not a crisis to manage. The same screen answers the enterprise buyer's due-diligence question and the regulator's inquiry, because all three are asking the same thing in different words. Show me how you decided.</p>
@@ -251,7 +246,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="../../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -302,5 +297,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>
