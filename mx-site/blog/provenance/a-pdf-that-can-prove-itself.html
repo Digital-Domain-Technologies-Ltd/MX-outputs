@@ -11,6 +11,8 @@ author: Tom Cranstoun
 created: 2026-05-26
 modified: 2026-05-26
 version: "1.0"
+type: blog
+tags: [practitioner, provenance, mx-foundations]
 mx:
   x-mx-managedBy: blog-post.cog.md
   x-mx-contentState: published
@@ -18,14 +20,9 @@ mx:
   generate:
     script: scripts/generate-content-html.cjs
   status: published
-  contentType: blog
   audience:
   - humans
   - machines
-  tags:
-  - practitioner
-  - provenance
-  - mx-foundations
   x-mx-category: MX blog series
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/provenance/a-pdf-that-can-prove-itself.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator."
@@ -50,6 +47,7 @@ x-mx-ai:
   - reader-side verification on offline artefacts
   - mx.pdf.sh + inject-mx-xmp.sh pipeline
   - the honest absence matters as much as the present steps
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -124,7 +122,7 @@ x-mx-ai:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -138,7 +136,7 @@ x-mx-ai:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1883,
+        "wordCount": 1979,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -192,7 +190,7 @@ x-mx-ai:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -220,7 +218,7 @@ x-mx-ai:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1883">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1979">
         <header class="article-header">
           <h1>A PDF That Can Prove Itself</h1>
           <div class="article-meta"
@@ -265,6 +263,7 @@ x-mx-ai:
   }
 ]
 </code></pre>
+<p>Those two steps are the machine's own account of the render, written as the file is made. The chain does not end there. Before the file ships, a human-check step joins it: the record of a person who reviewed the output and stands behind it. The AI attaches the trail; a human checks it. A chain that carried only the machine's work, with no human in it, is treated as incomplete, and a deterministic gate in this repository refuses it. A shipped file names both the machine that produced it and the human accountable for it.</p>
 <p>Two things in that chain worth dwelling on, because they sit at the centre of the design.</p>
 <h2 id="the-honest-absence" tabindex="-1">The honest absence</h2>
 <p>The first step says, explicitly, that the chain begins at this render. The PDF is not claiming to know who wrote the source markdown, when it was last reviewed, whether anybody signed it, or which version of which review process passed it. The chain in the PDF only claims what the chain in the PDF can actually back up.</p>
@@ -309,7 +308,7 @@ x-mx-ai:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -360,5 +359,6 @@ x-mx-ai:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>
