@@ -13,20 +13,27 @@ modified: 2026-05-25
 version: "1.0"
 
 mx:
+  x-mx-managedBy: blog-post.cog.md
   status: published
   contentType: blog-post
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/blog/provenance-you-can-see.html
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/provenance-you-can-see.md
+  x-mx-contextProvides:
+    - "Trust on the web has always been a guess. This is how content can carry checkable evidence of where it came from - and why both readers and AI agents need it now."
+  stability: stable
+  purpose: "Trust on the web has always been a guess. This is how content can carry checkable evidence of where it came from - and why both readers and AI agents need it now."
+  x-mx-backport: clean
   servedAt: https://mx.allabout.network/blog/provenance-you-can-see.html
-  runbook: "Lander/page on mx-site. The HTML is the canonical source for this YAML frontmatter; no separate markdown source exists. Frontmatter was generated from existing page metadata in the 2026-05-31 retro-tagging pass."
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator."
+  blogUrl: https://mx.allabout.network/blog/provenance-you-can-see.html
+  blogFilename: provenance-you-can-see
 ---
 -->
-  <!-- MX-SOURCE-FRONTMATTER:END -->
+<!-- MX-SOURCE-FRONTMATTER:END -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
   <meta name="description" content="Trust on the web has always been a guess. This is how content can carry checkable evidence of where it came from - and why both readers and AI agents need it now.">
-  <meta name="keywords" content="machine-experience, ai-agents">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://mx.allabout.network/blog/provenance-you-can-see.html">
 
@@ -60,6 +67,11 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
   <meta name="mx:name" content="Provenance You Can See: Why Content Should Carry Its Own Evidence">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -103,7 +115,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1595,
+        "wordCount": 1629,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -137,13 +149,14 @@ mx:
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
         <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
-      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
         <a href="/">Home</a>
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
         <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
       </nav>
     </div>
@@ -172,9 +185,9 @@ mx:
         <summary>Index</summary>
         <nav aria-label="Table of contents">
           <ul>
-        <li><a href="#trust-by-inference-does-not-survive-contact-with-machines">Trust by inference doesn't survive contact with machines</a></li>
+        <li><a href="#trust-by-inference-does-not-survive-contact-with-machines">Trust by inference does not survive contact with machines</a></li>
         <li><a href="#what-provenance-you-can-see-actually-means">What "provenance you can see" actually means</a></li>
-        <li><a href="#the-part-that-matters-you-do-not-have-to-trust-the-messenger">The part that matters: you don't have to trust the messenger</a></li>
+        <li><a href="#the-part-that-matters-you-do-not-have-to-trust-the-messenger">The part that matters: you do not have to trust the messenger</a></li>
         <li><a href="#what-it-changes-for-a-human-reader">What it changes for a human reader</a></li>
         <li><a href="#what-it-changes-for-an-ai-agent">What it changes for an AI agent</a></li>
         <li><a href="#the-two-pillars">The two pillars</a></li>
@@ -185,63 +198,62 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1595">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1629">
         <header class="article-header">
           <h1>Provenance You Can See: Why Content Should Carry Its Own Evidence</h1>
           <div class="article-meta"
                data-published="2026-05-25"
                data-modified="2026-05-25"
-               data-reading-time="8 min">
+               data-reading-time="9 min">
             <time datetime="2026-05-25">25 May 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>8 min read</span>
+            <span>9 min read</span>
           </div>
-
         </header>
 
 
 <p><strong>Tom Cranstoun</strong> · The Machine Experience Authority · CogNovaMX Ltd</p>
 <hr>
-<p>There's a small padlock in your browser's address bar, and most people have spent twenty years misreading it. They take it to mean the page is safe, or true, or official. It means none of those things. It means the connection between your device and the server is encrypted. It attests the pipe, not the page. A fraudster's site can carry exactly the same padlock as your bank, because the padlock was never a statement about the content. It was a statement about the plumbing.</p>
-<p>That gap - between what we can verify and what we actually want to know - has shaped the web for its whole life. We can verify that bytes arrived unaltered from a server. We can't, from the padlock alone, verify who wrote them, when, on what authority, or whether they have been changed since. So we guess. We judge a page by how it looks, by whether the brand is familiar, by the confidence of the prose. Inference, dressed as knowledge.</p>
-<p>For human readers that has always been a quiet risk. For AI agents it's now an expensive one.</p>
-<h2 id="trust-by-inference-does-not-survive-contact-with-machines" tabindex="-1">Trust by inference doesn't survive contact with machines</h2>
-<p>When a person reads a page, they bring a lifetime of context to the guess. They notice a clumsy logo, an address that doesn't resolve, a tone that feels off. The inference is unreliable but it isn't naive.</p>
-<p>A machine summarising that same page brings far less. It reads the text and produces an answer, and it has no native way to tell a primary source from a confident copy, an official record from a forum post that paraphrased it three years ago. When it can't tell, it does what these systems do: it fills the gap with something plausible. We call the result a hallucination, but the deeper cause is structural. The machine was asked to know something the content never told it - where it came from and whether to believe it - so it inferred, and sometimes it inferred wrongly.</p>
-<p>You can't prompt your way out of this. No amount of cleverness lets a model verify a claim that arrives carrying no evidence. The fix has to travel with the content.</p>
-<h2 id="what-provenance-you-can-see-actually-means" tabindex="-1">What "provenance you can see" actually means</h2>
-<p>The idea is simple to state. A piece of content should be able to carry a checkable claim about itself: who published it, when, under what identity, and a fingerprint of the exact bytes so any later alteration shows. Not a logo. Not a brand promise. A signed statement that a machine can test and a reader can verify.</p>
+<p>There is a small padlock in your browser's address bar, and most people have spent twenty years misreading it. They take it to mean the page is safe, or true, or official. It means none of those things. It means the connection between your device and the server is encrypted. It attests the pipe, not the page. A fraudster's site can carry exactly the same padlock as your bank, because the padlock was never a statement about the content. It was a statement about the plumbing.</p>
+<p>That gap - between what we can verify and what we actually want to know - has shaped the web for its whole life. We can verify that bytes arrived unaltered from a server. We cannot, from the padlock alone, verify who wrote them, when, on what authority, or whether they have been changed since. So we guess. We judge a page by how it looks, by whether the brand is familiar, by the confidence of the prose. Inference, dressed as knowledge.</p>
+<p>For human readers that has always been a quiet risk. For AI agents it is now an expensive one.</p>
+<h2 id="trust-by-inference-does-not-survive-contact-with-machines" tabindex="-1">Trust by inference does not survive contact with machines</h2>
+<p>When a person reads a page, they bring a lifetime of context to the guess. They notice a clumsy logo, an address that does not resolve, a tone that feels off. The inference is unreliable but it is not naive.</p>
+<p>A machine summarising that same page brings far less. It reads the text and produces an answer, and it has no native way to tell a primary source from a confident copy, an official record from a forum post that paraphrased it three years ago. When it cannot tell, it does what these systems do: it fills the gap with something plausible. We call the result a hallucination, but the deeper cause is structural. The machine was asked to know something the content never told it - where it came from and whether to believe it - so it inferred, and sometimes it inferred wrongly.</p>
+<p>You cannot prompt your way out of this. No amount of cleverness lets a model verify a claim that arrives carrying no evidence. The fix has to travel with the content.</p>
+<h2 id="what-provenance-you-can-see-actually-means" tabindex="-1">What &quot;provenance you can see&quot; actually means</h2>
+<p>The idea is simple to state. A piece of content should be able to carry a checkable claim about itself: who published it, when, under what identity, and a fingerprint of the exact bytes so any later alteration shows. Not a logo. Not a brand promise. A signed statement that a machine can test and a reader can be shown the result of.</p>
 <p>Concretely, that means three things travelling alongside the content:</p>
 <ul>
-<li><strong>An identity.</strong> Who's making the claim, expressed as an identifier that can be resolved and checked rather than simply asserted. Decentralised identifiers (DIDs) are the open standard built for exactly this.</li>
-<li><strong>A signature.</strong> A cryptographic mark over a canonical form of the content, so that any change - one digit in an opening time, one altered figure - breaks it and is detectable.</li>
-<li><strong>A timestamp that can't be quietly backdated.</strong> Recording the claim in an append-only transparency log, the same mechanism that underpins Certificate Transparency, means "this existed on this date" is something others can audit, not something the publisher can rewrite later.</li>
+<li><strong>An identity.</strong> Who is making the claim, expressed as an identifier that can be resolved and checked rather than simply asserted. Decentralised identifiers (DIDs) are the open standard built for exactly this.</li>
+<li><strong>A signature.</strong> A cryptographic signature over a canonical form of the content, so that any change - one digit in an opening time, one altered figure - breaks the signature and is detectable.</li>
+<li><strong>A timestamp that cannot be quietly backdated.</strong> Recording the claim in an append-only transparency log, the same mechanism that underpins Certificate Transparency, means &quot;this existed on this date&quot; is something others can audit, not something the publisher can rewrite later.</li>
 </ul>
-<p>None of this is novel cryptography. It's the assembly of standards that already exist - DIDs, HTTP Message Signatures (RFC 9421), JSON canonicalisation, Merkle-tree transparency logs (RFC 6962) - into a claim that travels with the file instead of being locked inside one company's database.</p>
-<h2 id="the-part-that-matters-you-do-not-have-to-trust-the-messenger" tabindex="-1">The part that matters: you don't have to trust the messenger</h2>
-<p>Here's the property that makes this worth doing rather than just another badge. Verification happens on the reader's side.</p>
-<p>A registry can hold these signed claims, index them, and serve them, but it doesn't get to be the arbiter of truth. It produces an attestation record; it doesn't ask you to take its word for anything. The agent, or the browser, or the auditor checks the signature itself, against the publisher's resolvable identity, using open libraries anyone can run. If the registry lied or was compromised, the maths wouldn't check out, and the client would say so.</p>
-<p>This is the inversion that the padlock got right and that content trust has been missing. You don't trust a certificate authority because it's nice. You trust it because your browser can verify its chain independently, and would scream if it couldn't. Provenance you can see works the same way: the trust is in the verification, not in the vouching.</p>
+<p>None of this is novel cryptography. It is the assembly of standards that already exist - DIDs, HTTP Message Signatures (RFC 9421), JSON canonicalisation, Merkle-tree transparency logs (RFC 6962) - into a claim that travels with the file instead of being locked inside one company's database.</p>
+<h2 id="the-part-that-matters-you-do-not-have-to-trust-the-messenger" tabindex="-1">The part that matters: you do not have to trust the messenger</h2>
+<p>Here is the property that makes this worth doing rather than just another badge. Verification happens on the reader's side.</p>
+<p>A registry can hold these signed claims, index them, and serve them, but it does not get to be the arbiter of truth. It produces an attestation record; it does not ask you to take its word for anything. The agent, or the browser, or the auditor checks the signature itself, against the publisher's resolvable identity, using open libraries anyone can run. If the registry lied or was compromised, the maths would not check out, and the client would say so.</p>
+<p>This is the inversion that the padlock got right and that content trust has been missing. You do not trust a certificate authority because it is nice. You trust it because your browser can verify its chain independently, and would scream if it could not. Provenance you can see works the same way: the trust is in the verification, not in the vouching.</p>
 <h2 id="what-it-changes-for-a-human-reader" tabindex="-1">What it changes for a human reader</h2>
-<p>Not much that's visible, which is the point. The cryptography stays out of sight, the way TLS does. What surfaces is a small, honest distinction the reader learns to weight: this claim is attested - it came signed from a named source and the signature checks out - and this one is inferred, assembled by a machine from things it read. Both can appear on the same screen. The reader now knows which is which.</p>
-<p>That doesn't make the inferred fact wrong; it makes its status legible. An earlier generation learned to glance for the padlock before typing a card number. The same instinct, pointed at the content rather than the connection, is what changes.</p>
+<p>Not much that is visible, which is the point. The cryptography stays out of sight, the way TLS does. What surfaces is a small, honest distinction the reader learns to weight: this fact is attested - it came signed from a named source and the signature checks out - and this fact is inferred, assembled by a machine from things it read. Both can appear on the same screen. The reader now knows which is which.</p>
+<p>That does not make the inferred fact wrong; it makes its status legible. An earlier generation learned to glance for the padlock before typing a card number. The same instinct, pointed at the content rather than the connection, is what changes.</p>
 <h2 id="what-it-changes-for-an-ai-agent" tabindex="-1">What it changes for an AI agent</h2>
 <p>This is where the value compounds. An agent that can verify provenance can be built to prefer attested facts over inferred ones, and to say so. Asked for a surgery's opening hours, it can return the hours that arrived signed by the surgery last week, and mark them as attested, rather than averaging three contradictory mentions it found and presenting the average with false confidence.</p>
-<p>Two things follow. Hallucination drops, because the agent is leaning on facts that carry evidence instead of inventing the missing context. The agent's answer also becomes auditable - it can show which sources it relied on and which it discarded, with the verification to back the choice. For anyone deploying agents where accuracy isn't optional - healthcare, finance, legal, technical documentation - that's the difference between a tool you can stand behind and one you'd have to apologise for.</p>
+<p>Two things follow. Hallucination drops, because the agent is leaning on facts that carry evidence instead of inventing the missing context. The agent's answer also becomes auditable - it can show which sources it relied on and which it discarded, with the verification to back the choice. For anyone deploying agents where accuracy is not optional - healthcare, finance, legal, technical documentation - that is the difference between a tool you can stand behind and one you have to apologise for.</p>
 <h2 id="the-two-pillars" tabindex="-1">The two pillars</h2>
-<p>It helps to separate two jobs that are easy to blur. Making content machine-readable is one job: structure, semantics, explicit metadata, so a machine understands what it carries. Making content machine-trustworthy is a different job: signed, attested, verifiable, so a machine can tell whether to believe it.</p>
-<p>MX does the first. It's the metadata that records a file's provenance, context, and intended use, and travels with the file. Reginald does the second: it's the infrastructure that holds and serves the signed claims, and produces the attestation records a client verifies for itself. Readable without trustworthy is a tidy lie. Trustworthy without readable is a locked box. You want both, and they're deliberately built as separate layers on an open standard, so that the readability is everyone's and the verification is no one's monopoly.</p>
+<p>It helps to separate two jobs that are easy to blur. Making content machine-readable is one job: structure, semantics, explicit metadata, so a machine understands what the content is. Making content machine-trustworthy is a different job: signed, attested, verifiable, so a machine can tell whether to believe it.</p>
+<p>MX does the first. It is the metadata that records a file's provenance, context, and intended use, and travels with the file. Reginald does the second: it is the infrastructure that holds and serves the signed claims, and produces the attestation records a client verifies for itself. Readable without trustworthy is a tidy lie. Trustworthy without readable is a locked box. You want both, and they are deliberately built as separate layers on an open standard, so that the readability is everyone's and the verification is no one's monopoly.</p>
 <h2 id="the-honest-limits" tabindex="-1">The honest limits</h2>
-<p>I won't oversell this, because the failure mode of trust technology is to promise more than maths can deliver.</p>
-<p>Visible provenance doesn't make lying impossible. A publisher can sign a false statement, and the signature will verify perfectly - it proves who said it and that it hasn't changed, not that it's true. What it does is make lying legible and attributable. The claim is bound to an identity and a timestamp that can't be quietly retracted. You can no longer say a thing, profit, and pretend later you never said it.</p>
-<p><small><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, entity type, and use case. Consult qualified legal specialists for guidance specific to your situation.</small></p>
-<p>None of this grants compliance with any regulation, either. Provenance and attestation are an evidence vehicle for the governance regimes now arriving - the EU AI Act, the European Accessibility Act, emerging digital-records law - not a compliance grant. They make the documentation a business already owes structured, tamper-evident, and verifiable on request. The legal duty stays with that business. Sold as "queryable, verifiable evidence", this is genuinely useful. Sold as "compliance in a box", it collapses on the first inquiry.</p>
+<p>I will not oversell this, because the failure mode of trust technology is to promise more than maths can deliver.</p>
+<p>Visible provenance does not make lying impossible. A publisher can sign a false statement, and the signature will verify perfectly - it proves who said it and that it has not changed, not that it is true. What it does is make lying legible and attributable. The claim is bound to an identity and a timestamp that cannot be quietly retracted. You can no longer say a thing, profit, and pretend later you never said it.</p>
+<p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
+<p>None of this grants compliance with any regulation, either. Provenance and attestation are an evidence vehicle for the governance regimes now arriving - the EU AI Act, the European Accessibility Act, emerging digital-records law - not a compliance grant. They make the documentation an organisation already owes structured, tamper-evident, and verifiable on request. The legal duty stays with the organisation. Sold honestly as &quot;queryable, verifiable evidence&quot;, this is genuinely useful. Sold as &quot;compliance in a box&quot;, it collapses on the first inquiry.</p>
 <h2 id="how-to-start-without-waiting-for-the-world-to-catch-up" tabindex="-1">How to start, without waiting for the world to catch up</h2>
-<p>You don't need the full machinery to begin. The first move is to stop hiding what you already know about your own content. Publish, in a form a machine can read, who authored a page, when, and under what authority - the explicit metadata that good MX practice already requires. That alone moves a fact from inferred to stated.</p>
+<p>You do not need the full machinery to begin. The first move is to stop hiding what you already know about your own content. Publish, in a form a machine can read, who authored a page, when, and under what authority - the explicit metadata that good MX practice already asks for. That alone moves a fact from inferred to stated.</p>
 <p>The signing and the transparency log are the next layer, and they matter most where a wrong answer is costly: prices, clinical information, official records, anything an agent will quote back to someone who acts on it. Start there. Sign the content that, if misquoted, would cost you a customer or a court case.</p>
-<p>The web spent thirty years teaching machines to guess about content and then acting surprised when they guessed wrong. The work now is to give content the proof to stop the guessing - proof the reader can see and the agent can check. The padlock told us about the pipe for long enough. It's time the page could speak for itself.</p>
+<p>The web spent thirty years teaching machines to guess about content and then acting surprised when they guessed wrong. The work now is to give content the evidence to stop the guessing - evidence the reader can see and the agent can check. The padlock told us about the pipe for long enough. It is time the page could speak for itself.</p>
 <hr>
 <p><em>Tom Cranstoun is the Machine Experience Authority and founder of the MX community. He consults on MX strategy through CogNovaMX Ltd.</em></p>
 
@@ -256,12 +268,12 @@ mx:
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your team lands on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
