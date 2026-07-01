@@ -1,26 +1,26 @@
 ---
-title: "Dotfusion"
+title: "Cmscritic"
 subtitle: "Website Analysis & Machine Readiness"
 type: report
 author: "Tom Cranstoun"
 created: "2026-07-01"
 modified: "2026-07-01"
-client: "Dotfusion"
-clientSlug: "dotfusion-com"
-clientUrl: "https://dotfusion.com"
-reportId: "dotfusion-com-WEB-AUDIT-20260701"
+client: "Cmscritic"
+clientSlug: "cmscritic-com"
+clientUrl: "https://cmscritic.com"
+reportId: "cmscritic-com-WEB-AUDIT-20260701"
 reportType: "executive-sales-report"
 auditTool: "web-audit-suite"
 auditDate: "2026-07-01"
-auditCommand: "node scripts/audit-pipeline.js https://dotfusion.com --pages 10"
-description: "Executive audit report reviewing accessibility, performance, SEO, structured data, and AI agent compatibility for Dotfusion"
+auditCommand: "node scripts/audit-pipeline.js https://cmscritic.com --pages 10"
+description: "Executive audit report reviewing accessibility, performance, SEO, structured data, and AI agent compatibility for Cmscritic"
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
-performanceScore: 85
-accessibilityScore: 74
-seoScore: 82
-llmServedHtmlScore: 100
+performanceScore: 97
+accessibilityScore: 59
+seoScore: 80
+llmServedHtmlScore: 90
 agentReadabilityScore: 
-totalIssues: 98
+totalIssues: 523
 htmlPagesAudited: 10
 version: "1.0"
 pipelineVersion: "1.1.0"
@@ -29,24 +29,24 @@ mx:
   status: active
   contentType: audit-report
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-07-01/dotfusion.com/dotfusion-com-report.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-07-01/cmscritic.com/cmscritic-com-report.md
   maintainer: info@cognovamx.com
   stability: stable
   partOf: mx-audit
-  purpose: "Executive machine-readiness audit for Dotfusion covering accessibility, performance, SEO, structured data, and AI agent compatibility."
-  x-mx-contextProvides: ["web audit findings for Dotfusion", "WCAG accessibility assessment", "AI agent compatibility scores", "SEO and structured data analysis", "machine readiness recommendations"]
+  purpose: "Executive machine-readiness audit for Cmscritic covering accessibility, performance, SEO, structured data, and AI agent compatibility."
+  x-mx-contextProvides: ["web audit findings for Cmscritic", "WCAG accessibility assessment", "AI agent compatibility scores", "SEO and structured data analysis", "machine readiness recommendations"]
   # The single cog that manages this pipeline artefact, so a reader never
   # has to infer the steward (scripts/lib/managed-by.cjs is the resolver).
   x-mx-managedBy: mx-audit.cog.md
   x-mx-generatedBy: "mx-reginald/audit/bin/infill-report.js"
-  x-mx-canonicalSource: "Audit results for https://dotfusion.com on 2026-07-01 - fix via generator, not this file"
-  runbook: "Executive audit report for Dotfusion. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-crawl and re-analyse), use the command in the top-level auditCommand field. Regenerate the tagged PDF with 'node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-01/dotfusion.com/dotfusion-com-report.md', which validates the report then renders it through scripts/bin/mx.pdf.sh."
+  x-mx-canonicalSource: "Audit results for https://cmscritic.com on 2026-07-01 - fix via generator, not this file"
+  runbook: "Executive audit report for Cmscritic. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-crawl and re-analyse), use the command in the top-level auditCommand field. Regenerate the tagged PDF with 'node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-01/cmscritic.com/cmscritic-com-report.md', which validates the report then renders it through scripts/bin/mx.pdf.sh."
   generate:
-    command: "node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-01/dotfusion.com/dotfusion-com-report.md"
+    command: "node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-01/cmscritic.com/cmscritic-com-report.md"
     script: "scripts/bin/mx.pdf.sh"
     format: "pdf"
-    output: "mx-outputs/audit/runs/dotfusion.com/latest-copy.pdf"
-    description: "Generate PDF audit report for Dotfusion"
+    output: "mx-outputs/audit/runs/cmscritic.com/latest-copy.pdf"
+    description: "Generate PDF audit report for Cmscritic"
   # Provenance sidecar pair. The per-audit evidence chain is split
   # into two adjacent files: the AI stream (LLM-driven, multi-agent,
   # human-committed steps) cited below as the primary sidecar, and
@@ -62,16 +62,16 @@ mx:
   # when the canon ratifies a "provenance" field through The
   # Gathering, the prefix drops in one place.
   x-mx-provenance:
-    sidecar: "dotfusion-com-report.provenance.ai.json"
+    sidecar: "cmscritic-com-report.provenance.ai.json"
     frameworks: [EU-AI-Act, UK-ICO-AI-guidance, NIST-AI-RMF, Colorado-AI-Act]
-    companion: "dotfusion-com-report.provenance.deterministic.json"
+    companion: "cmscritic-com-report.provenance.deterministic.json"
     note: "AI evidence chain (LLM-driven, multi-agent, and human-committed steps). The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPayload; the adjacent .ai.json file is a copy of the same JSON for tooling that prefers file access. The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directive 2019/882 accessibility-conformance evidence; it stays adjacent on disk only (its pointer is in xmp:ProvenanceCompanion)."
 ---
 
 **Prepared by:** Tom Cranstoun | CogNovaMX Ltd\
 **Contact:** <info@cognovamx.com> | <https://allabout.network>\
 **Date:** 1 July 2026\
-**Report ID:** dotfusion-com-WEB-AUDIT-20260701
+**Report ID:** cmscritic-com-WEB-AUDIT-20260701
 
 ---
 
@@ -79,7 +79,7 @@ mx:
 
 ## About This Report
 
-We audited 10 pages across dotfusion.com's site using the Web Audit Suite. We also reviewed the site's discovery files (sitemap.xml, llms.txt). We review each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image efficiency, security headers, content consistency, discovery file coverage, and machine pipeline survivability.
+We audited 10 pages across cmscritic.com's site using the Web Audit Suite. We also reviewed the site's discovery files (sitemap.xml, llms.txt). We review each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image efficiency, security headers, content consistency, discovery file coverage, and machine pipeline survivability.
 
 We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
@@ -91,7 +91,7 @@ Our scoring criteria follow published MX standards and proposed specifications m
 
 **What we cover here, and what MX covers.** This report looks at the web estate: every page served over HTTP, examined for metadata, structured data, accessibility, and what machines can read. MX runs deeper, covering every document type a business publishes (PDFs, data feeds, API responses, structured documents) and the machines that read them. The web estate is the foundation; the rest builds on it.
 
-**Audit scope.** Findings throughout this report describe what we observed on the 10 HTML pages we examined in depth, drawn from a sitemap of 150 URLs. We also reviewed the site's discovery files (sitemap.xml, llms.txt). Structural findings - a missing header, a soft 404 pattern, a discovery file gap - hold across the full estate and are noted as such. Verdicts scoped to the sampled pages should not be extrapolated to the full estate without a wider audit.
+**Audit scope.** Findings throughout this report describe what we observed on the 10 HTML pages we examined in depth, drawn from a sitemap of 5968 URLs. We also reviewed the site's discovery files (sitemap.xml, llms.txt). Structural findings - a missing header, a soft 404 pattern, a discovery file gap - hold across the full estate and are noted as such. Verdicts scoped to the sampled pages should not be extrapolated to the full estate without a wider audit.
 
 ### A note on llms.txt
 
@@ -107,26 +107,26 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 
 | | Score | Verdict |
 |:---|---:|:---|
-| Performance | **85**/100 | `###############---` Excellent |
-| Accessibility | **74**/100 | `#############-----` Good |
-| SEO | **82**/100 | `###############---` Excellent |
-| Served-HTML Structure | **100**/100 | `##################` Excellent |
-| MX Stack Completeness | **43**/100 | `########----------` **(!)** Could Be Better |
-| Agent Readability | **71**/100 | `#############-----` Good |
-| Pipeline Survivability | **95**/100 | `#################-` Excellent |
-| Machine Processing Speed | **10860** ms/page | Machine-Dense |
+| Performance | **97**/100 | `#################-` Excellent |
+| Accessibility | **59**/100 | `###########-------` Good |
+| SEO | **80**/100 | `##############----` Excellent |
+| Served-HTML Structure | **90**/100 | `################--` Excellent |
+| MX Stack Completeness | **61**/100 | `###########-------` Good |
+| Agent Readability | **85**/100 | `###############---` Excellent |
+| Pipeline Survivability | **77**/100 | `##############----` Excellent |
+| Machine Processing Speed | **9038** ms/page | Machine-Dense |
 
 *The three machine metrics measure different things. **Served-HTML Structure** is the semantic markup an agent reads before JavaScript runs; **Agent Readability** is how easily the content can be quoted once reached; **Pipeline Survivability** is whether a page survives an agent's fetch and ingest. A site can score low on one and high on another.*
 
-Agent Readability was adjusted down by 8 points for site-wide gaps a machine cannot work around:
+Agent Readability may have been adjusted down by up to 8 points for site-wide gaps that a machine may not be able to work around.
 
-- **Bare-div nesting (div soup) across most pages** (-8): 5 of 12 pages are heavy with bare-div nesting
+- **Bare-div nesting (div soup) across most pages** (-8): 7 of 12 pages are heavy with bare-div nesting
 
-The site runs on **Shopify** (detected from multiple platform signals). The site appears to be a professional services or B2B agency.
+The site runs on **Shopify** (detected from multiple platform signals). We observed that the site appears to be an editorial or media publisher.
 
-Schema.org types indicate a professional services or agency context.
+Schema.org types indicate a content or editorial context.
 
-Across the audited set, Dotfusion scores 74/100 for accessibility and 82/100 for SEO.
+Across the audited set, Cmscritic scores 59/100 for accessibility and 80/100 for SEO.
 
 The audited set shows consistent metadata patterns across pages, with no brand-name, canonical-URL, meta-description, or entity divergence detected.
 
@@ -136,18 +136,18 @@ The audited set shows consistent metadata patterns across pages, with no brand-n
 
 | Check                            | Result | Notes                    |
 |----------------------------------|--------|--------------------------|
-| Brand-name parity | Pass | Brand name appears consistently across all 12 audited pages |
-| Canonical URL duplicates | Pass | No duplicate canonical URLs detected across the 12-page audited set |
+| Brand-name parity | Pass | Brand name appears consistently across all 11 audited pages |
+| Canonical URL duplicates | Pass | No duplicate canonical URLs detected across the 11-page audited set |
 | Meta description length | Pass | Meta descriptions present on all pages; none flagged for length violations |
 | Cross-page entity spread (same entity on multiple pages) | Pass | Schema.org entities reference consistent identifiers across the audited set |
 
-We identified inconsistencies in brand-name usage, duplicate canonical URLs and uneven distribution of structured data entities across the audited set; correcting these will enhance machine comprehension.
+We identified inconsistencies in brand-name usage, duplicate canonical URLs, and uneven distribution of structured data entities across pages; correcting these will align the content with best practices.
 
 ---
 
 ## Inline Code Duplicates
 
-We found 12 identical inline fragment(s) repeated across multiple pages, totalling 537 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
+We found 6 identical inline fragment(s) repeated across multiple pages, totalling 174 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
 
 **Table 3**
 
@@ -155,18 +155,12 @@ We found 12 identical inline fragment(s) repeated across multiple pages, totalli
 
 | Type | Bytes per fragment | Appears on N pages | Preview                                                          |
 |------|-------------------:|-------------------:|------------------------------------------------------------------|
-| js | 426 | 23 | (function(w,d,s,l,i){w[l]=w[l]\|\|[];         w[l].push({'gtm. |
-| css | 14154 | 12 | :root{--toastify-color-light: #fff;--toastify-color-dark: #1 |
-| css | 34504 | 11 | @charset "UTF-8";.rhap_container{box-sizing:border-box;displ |
-| js | 657 | 11 | setTimeout(function(){!function(e,f){try{if(e.vector)return  |
-| js | 634 | 11 | setTimeout(function(){!function(){var a=window.reb2b=window. |
-| css | 624 | 11 | .Menu_blobby__qf9bF{position:absolute;width:527.44px;height: |
-| js | 435 | 11 | setTimeout(function(){(function(a,e,f,g,b,h,d,c){a[b]\|\|(a.Gl |
-| js | 376 | 11 | setTimeout(function(){function b(){return"01f314ab-30b2-4266 |
-| js | 351 | 11 | setTimeout(function(){function b(){var c=Math.random().toStr |
-| js | 312 | 11 | setTimeout(function(){(function(){window.ldfdr=window.ldfdr\| |
-
-*Showing the top 10 of 12 duplicate fragments by occurrence count. The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `dotfusion-com-inline-code-duplicates.csv`.*
+| css | 10820 | 11 | @font-face{font-family:'Inter';font-style:normal;font-weight |
+| js | 590 | 11 | adroll_adv_id="RHA3WXTZ3VEVPOSXEQHLJS";adroll_pix_id="OH7AVS |
+| js | 427 | 11 | (function(w,d,s,l,i){w[l]=w[l]\|\|[];         w[l].push({'gtm. |
+| js | 299 | 11 | var _cio = _cio \|\| []; 								(function() { 									var a, |
+| css | 6644 | 9 | .adroll_consent_container{position:relative}.adroll_consent_ |
+| css | 581 | 8 | .css-4xx2wk{display:-webkit-inline-box;display:-webkit-inlin |
 
 **Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
@@ -185,21 +179,26 @@ PDFs are part of the machine-readable estate but sit outside this HTML audit's s
 
 ---
 
-## Content Uniqueness
+## Text Patterns
 
-11 of 12 pages carry distinctive content - machines reading each page get different information. 1 page has content that also appears on other pages, giving machines no unique information for that URL.
+Analysis of text patterns across audited pages found content reaching Probably AI on the AI-tells scale (1 of 11 pages scored). Machines do not consistently cite or label AI-generated content; this observation describes what the analysis found, not a conclusion about authorship.
 
 **Table 4**
 
-*Content Uniqueness*
+*Text Patterns*
 
-| Page | Unique content | Band |
-|------|---------------|------|
-| /contact-us | None | Low Machine Value |
+| Page | Band | Signals |
+|------|------|---------|
+| `/programs` | Probably AI | prose patterns, vocabulary |
+| `…/bland-brands-beware-optimizelys-new-identity-brings-human-creativity-to-its-agentic-ai-and-aeo-ambitions` | Occasional | prose patterns, vocabulary, copula density, verbal tics |
+| `…/ai-and-accessibility-incredible-potential-inconvenient-questions` | Occasional | prose patterns, vocabulary, verbal tics |
+| `…/kentico-opens-its-site-of-the-year-2026-awards-as-first-major-dxp-with-a-best-use-of-ai-category` | Occasional | prose patterns, vocabulary, copula density, verbal tics |
+| `…/how-to-thrive-at-25-as-sitecore-charts-an-ai-future-community-remains-its-greatest-asset` | Occasional | vocabulary, prose patterns, verbal tics, copula density |
+| `…/how-cms-and-dxp-teams-can-use-generative-engine-optimization-to-increase-visibility-in-ai-generated-answers` | Occasional | prose patterns, vocabulary, verbal tics |
 
-**Shared prose found on multiple pages:** An agent reading the pages below sees this content repeated.
-- "tell us what's on your mind name email your company about your dream project sen." - appears on 4 of 12 pages (33%)
-The remaining 11 pages all scored Distinctive or Expected Boilerplate.
+5 of 11 pages scored band 0 (no signals detected).
+
+The pages show a hybrid style that balances predictable, formulaic phrasing with occasional natural variations in sentence length and word choice, giving the text a professional yet approachable tone. This blend is typical for industry-focused blog posts and award announcements, where concise clarity is prized while editorial nuance keeps readers engaged.
 
 ---
 
@@ -207,8 +206,8 @@ The remaining 11 pages all scored Distinctive or Expected Boilerplate.
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: address the 98 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
-2. **Review Priority 2-3 findings**: Semantic Structure improvements and metadata tuning that compound over time, affecting all 10 audited pages.
+1. **Address Priority 1 findings**: address the 523 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
+2. **Review Priority 2-3 findings**: Semantic Structure improvements and metadata tuning that compound over time
 3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search
 
 ### What's Next
@@ -220,12 +219,12 @@ The remaining 11 pages all scored Distinctive or Expected Boilerplate.
 | Phase | Scope | Outcome |
 |-------|-------|---------|
 | Critical Fixes | WCAG 2.1 AA compliance | Priority 1 items resolved, compliance risk removed |
-| Full Implementation | Discovery Readiness, Semantic Structure, Commerce Visibility, MX Stack Completeness, Structured Data, Security headers, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Full Implementation | Commerce Visibility, Semantic Structure, Discovery Readiness, MX Stack Completeness, Structured Data, Security headers, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | durable visibility in agent-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | The full machine-readable estate, beyond the web pages |
 | Data-Sovereign Option | Regulated industries | Run the full audit pipeline on your own infrastructure - no client content leaves your network |
 
-We consider this audit a starting point. The outcome we work toward is a site any machine can read, trust, and act on, and a dated, attested record you can show to a regulator, a partner, or an acquirer on request. Reaching it (structured data, discovery files, accessibility, governance metadata, and re-audit on a schedule you set) is available as a managed service. We also run training sessions that give development teams the MX vocabulary and implementation patterns directly, so the gap between findings and fixes is weeks, not quarters. To take any of it further, contact CogNovaMX Ltd at <info@cognovamx.com>.
+This audit is a starting point. Our goal is a site any machine can read, trust, and act on, and a dated, attested record you can show to a regulator, a partner, or an acquirer on request. Reaching it (structured data, discovery files, accessibility, governance metadata, and re-audit on a schedule you set) is available as a managed service. We also run training sessions that give development teams the MX vocabulary and implementation patterns directly, so the gap between findings and fixes is weeks, not quarters. To take any of it further, contact CogNovaMX Ltd at <info@cognovamx.com>.
 
 ---
 
@@ -242,17 +241,17 @@ The site serves an empty HTML shell to server-side agents. The "Rendering" colum
 
 | Dimension | Score | Rendering | Notes |
 |-----------|-------|-----------|-------|
-| Served-HTML Structure | 100/100 | Served | Structural markup an agent parses before JS |
-| Accessibility | 74/100 | Rendered | Checked in a rendered browser environment |
-| SEO (all pages) | 82/100 | Rendered | Google renders JS; server-side agents do not |
-| SEO (content pages) | 81/100 | Rendered |  |
-| MX Stack Completeness | 43/100 | Rendered |  |
-| Structured Data Quality | 44/100 | Rendered | JSON-LD in served head  -  valid for all agents |
-| Discovery Readiness | 20/100 | Mixed | robots.txt/sitemap independent of rendering. Machines have almost no structured context about what the site covers or how to use it. |
-| Heading Quality | 94/100 | Rendered | Page structure is clear and consistent; agents can build an accurate content outline from headings alone. |
-| Agent Readability | 71/100 | Rendered | Most pages are well-structured for agents; a few have formatting or bloat issues that slow ingestion. |
-| Pipeline Survivability | 95/100 | Rendered | Pages reach agents intact with no observed survivability issues. |
-| Cross-Page Consistency | 44% | Rendered | Fewer than half the tracked metadata patterns apply across all pages; agents reading different pages get different signal quality. |
+| Served-HTML Structure | 90/100 | Served | Structural markup an agent parses before JS |
+| Accessibility | 59/100 | Rendered | Checked in a rendered browser environment |
+| SEO (all pages) | 80/100 | Rendered | Google renders JS; server-side agents do not |
+| SEO (content pages) | 79/100 | Rendered |  |
+| MX Stack Completeness | 61/100 | Rendered |  |
+| Structured Data Quality | 66/100 | Rendered | JSON-LD in served head  -  valid for all agents |
+| Discovery Readiness | 40/100 | Mixed | robots.txt/sitemap independent of rendering. Machines can find the site but lack structured signals about its purpose and content policy. |
+| Heading Quality | 88/100 | Rendered | Page structure is clear and consistent; agents can build an accurate content outline from headings alone. |
+| Agent Readability | 85/100 | Rendered | Content is structured so agents reach the main substance immediately on every page. |
+| Pipeline Survivability | 77/100 | Rendered | Pages reach agents intact with no observed survivability issues. |
+| Cross-Page Consistency | 66% | Rendered | Most metadata patterns are consistent; a few gaps mean some pages deliver weaker signals than others. |
 
 Server-side agents see only the served HTML. The Served-HTML Structure score reflects their experience. All other scores reflect what the site achieves after JavaScript renders.
 
@@ -275,33 +274,31 @@ To set up a remediation plan, contact info@cognovamx.com.
 ## Appendix A: Pages Audited
 
 - **/ (nav)**
-  SEO 90 · A11y 70 · Backend 85 · Served 100 · Rendered 100
-- **/services**
-  SEO 85 · A11y 75 · Backend 85 · Served 100 · Rendered 100
-- **/services/headless-cms-agency**
-  SEO 78 · A11y 75 · Backend 85 · Served 100 · Rendered 100
-- **/services/contentful-development-agency**
-  SEO 82 · A11y 70 · Backend 85 · Served 100 · Rendered 100
-- **/services/storyblok-development-agency**
-  SEO 86 · A11y 70 · Backend 85 · Served 100 · Rendered 100
-- **/services/agility-cms-development-agency**
-  SEO 87 · A11y 70 · Backend 85 · Served 100 · Rendered 100
-- **./services/answer-engine-optimisation-agency-dotfusion**
-  SEO 76 · A11y 75 · Backend 85 · Served 100 · Rendered 100
-- **/industries**
-  SEO 82 · A11y 75 · Backend 85 · Served 100 · Rendered 100
-- **/about**
-  SEO 87 · A11y 80 · Backend 55 · Served 100 · Rendered 100
-- **/contact-us**
-  SEO 67 · A11y 70 · Backend 55 · Served 100 · Rendered 100
-- **/privacy**
-  SEO 84 · A11y 80 · Backend 55 · Served 100 · Rendered 100
-- **/jedi**
-  SEO 81 · A11y 80 · Backend 55 · Served 100 · Rendered 100
+  SEO 91 · A11y 70 · Backend 70 · Served 94 · Rendered 77
+- **/signup**
+  SEO 82 · A11y 70 · Backend 70 · Served 98 · Rendered 52
+- **/signin**
+  SEO 83 · A11y 60 · Backend 70 · Served 98 · Rendered 52
+- **/forgot**
+  SEO 84 · A11y 65 · Backend 70 · Served 73 · Rendered 52
+- **/programs**
+  SEO 84 · A11y 65 · Backend 70 · Served 95 · Rendered 77
+- **./bland-brands-beware-optimizelys-new-identity-bring.**
+  SEO 75 · A11y 60 · Backend 70 · Served 82 · Rendered 65
+- **./ai-and-accessibility-incredible-potential-inconven.**
+  SEO 82 · A11y 45 · Backend 70 · Served 93 · Rendered 75
+- **./kentico-opens-its-site-of-the-year-2026-awards-as-.**
+  SEO 76 · A11y 45 · Backend 70 · Served 93 · Rendered 75
+- **./how-to-thrive-at-25-as-sitecore-charts-an-ai-futur.**
+  SEO 65 · A11y 60 · Backend 70 · Served 82 · Rendered 65
+- **./how-cms-and-dxp-teams-can-use-generative-engine-op.**
+  SEO 74 · A11y 45 · Backend 70 · Served 93 · Rendered 75
+- **/articles**
+  SEO 83 · A11y 60 · Backend 70 · Served 94 · Rendered 73
 
 *Backend: score for HTML served without JavaScript. Served: AI suitability from served HTML. Rendered: AI suitability after JavaScript.*
 
-The page marked (nav) is navigational: it routes visitors to content rather than containing it, and is excluded from the SEO content average. Content-pages SEO average: 81/100.
+The page marked (nav) is navigational: it routes visitors to content rather than containing it, and is excluded from the SEO content average. Content-pages SEO average: 79/100.
 
 ---
 
@@ -309,7 +306,7 @@ The page marked (nav) is navigational: it routes visitors to content rather than
 
 We recorded every same-host internal link found on each audited page. External links are not tracked; this inventory covers same-host `<a href>` links only. Link status was not probed; for a dedicated broken-link audit, run a rate-limited crawler on the link set at a time that suits the site.
 
-Per page, internal links range from 15 to 33, averaging 20 across 12 pages. That is typical (benchmark median 20 per page).
+Per page, internal links range from 4 to 83, averaging 37 across 12 pages. That is typical (benchmark median 20 per page).
 
 **Table 7**
 
@@ -317,22 +314,20 @@ Per page, internal links range from 15 to 33, averaging 20 across 12 pages. That
 
 | Link class | Count |
 | --- | ---: |
-| Same-host internal links (all pages) | 240 |
+| Same-host internal links (all pages) | 442 |
 | External links (not tracked) | -- |
 | Anchor-only (`#fragment`) links | 0 |
 | mailto / tel links | 0 |
 
-At 20 internal links per page on average, the internal navigation graph sits within the typical range for sites of this type (benchmark median 20). No hash-fragment links were found - the site navigates entirely by full-page URL, which is standard for content and service sites. No inline mailto or tel links appear in page content; direct contact routes through a form.
+At 37 internal links per page on average, the internal navigation graph sits within the typical range for sites of this type (benchmark median 20). No hash-fragment links were found - the site navigates entirely by full-page URL, which is standard for content and service sites. No inline mailto or tel links appear in page content; direct contact routes through a form.
 
 ---
 
 ## Appendix C: Image Efficiency
 
-We reviewed 127 images across the audited set: 3 WebP, 60 SVG, 38 PNG and 26 in other or unidentified formats. 99 of 127 (78.0%) carry alt text, leaving 28 without it. Each missing alt attribute is a place where a screen-reader user or a machine reading the page gets no description of what the image shows.
+We reviewed 346 images across the audited set: 31 SVG, 80 PNG, 228 JPEG and 7 in other or unidentified formats. 289 of 346 (83.5%) carry alt text, leaving 57 without it. Each missing alt attribute is a place where a screen-reader user or a machine reading the page gets no description of what the image shows.
 
-On loading strategy, 24 images are marked `loading="lazy"` and 0 `loading="eager"`, while 103 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
-
-The table below shows how image formats are distributed across the 127 images in the audited set. WebP adoption is low (2%). Converting PNG and JPEG files to WebP reduces their size by 25-0% with no visible quality loss. The "Other" category includes formats such as GIF, AVIF, BMP, and unidentifiable types.
+On loading strategy, 265 images are marked `loading="lazy"` and 0 `loading="eager"`, while 81 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
 **Table 8**
 
@@ -340,10 +335,10 @@ The table below shows how image formats are distributed across the 127 images in
 
 | Format | Count | Share |
 |--------|-------|-------|
-| WebP | 3 | 2% |
-| SVG | 60 | 47% |
-| PNG | 38 | 30% |
-| Other | 26 | 20% |
+| SVG | 31 | 9% |
+| PNG | 80 | 23% |
+| JPEG | 228 | 66% |
+| Other | 7 | 2% |
 
 ---
 
@@ -357,9 +352,9 @@ Pa11y is an open-source automated accessibility testing tool that checks web pag
 
 **Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Shopify** (high confidence -  multiple fingerprint signals). The main audit uses Shopify-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
 
-**Frameworks detected:** **Next.js** -  JS framework; **Tailwind CSS** -  CSS framework; **Bootstrap** (low confidence) -  CSS framework. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
+**Frameworks detected:** **Next.js** (medium confidence) -  JS framework; **Bootstrap** -  CSS framework. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
 
-Tailwind CSS generates utility-class div chains that appear as bare containers to machines - this is the primary driver of the div-soup score. Next.js provides server-side rendering, giving agents full HTML on first fetch with no JavaScript dependency.
+Next.js provides server-side rendering, giving agents full HTML on first fetch with no JavaScript dependency.
 
 **Link inventory:** We record every internal link found on every audited page with its URL, anchor text, and link type. We do not probe link status: a dedicated, rate-limited broken-link crawler handles that separately and avoids hammering the origin. Appendix B is a link inventory, not a broken-link list.
 
@@ -381,7 +376,7 @@ We work toward a site - and an estate of documents beyond it - that any machine 
 
 | Check | Result |
 |-------|--------|
-| URL probed | https://dotfusion.com |
+| URL probed | https://cmscritic.com |
 | HTTP status | 200 |
 | Content-Type returned | text/html; charset=utf-8 |
 | Markdown served | No  -  server returned HTML regardless of Accept header |
@@ -416,9 +411,9 @@ The reference material cited in this report. Click the link on screen or scan th
 
 ## This Report's Own Evidence Chain
 
-MX is to machines what UX is to users: it asks not whether a human can read us, but whether a machine can read us, verify us, and act on us. A standard is credible only when we run on it ourselves, so we built this report to the standard it measures.
+MX is to machines what UX is to users: it asks not whether a human can read this report, but whether a machine can read it, verify it, and act on it. A standard is credible only when we run on it ourselves, so we built this report to the standard it measures.
 
-This report carries its own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload dotfusion-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. What this audit measures on a client's behalf, this deliverable meets.
+We carry our own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. The audit measures what we cover on a client's behalf, and this deliverable meets those metrics.
 
 Machine-readable content is visible to agents and validators. Machine-trustworthy content adds a provenance layer - a dated, attested record that names who published it and under what rubric. Readable is what MX makes content; the provenance layer is what makes it trustworthy. The two do different jobs, and this report carries both. It is an example of what that looks like in practice.
 
@@ -426,19 +421,19 @@ Machine-readable content is visible to agents and validators. Machine-trustworth
 
 ## Practice What We Preach: This Audit's Own Evidence Chain
 
-A standard is credible only when we run on it ourselves. We hold our audit deliverable to the same MX standards we apply to the audited site; consider this working proof of the practice it recommends. Every consequential step that produced this report (LLM-driven prose passes, deterministic gate verdicts, multi-agent attribution probes, repair iterations) is recorded in two adjacent JSON sidecars next to this PDF.
+A standard is credible only when we run on it ourselves. We hold this audit deliverable to the same MX standards we apply, and consider this a working proof of the practice it recommends. Every consequential step that produced this report (LLM-driven prose passes, deterministic gate verdicts, multi-agent attribution probes, repair iterations) is recorded in two adjacent JSON sidecars next to this PDF.
 
 The AI evidence chain records every non-deterministic step: the model identifier, the SHA-256 of the system prompt we ran (so an auditor can verify the rubric we used), the SHA-256 of the output it produced, a short excerpt of the model's reasoning, and the human-intervention state. This chain is designed as evidence for AI-governance regimes: EU AI Act, UK ICO AI guidance, US NIST AI RMF, and Colorado AI Act. The framework citations are claims of relevance, not compliance grants; conformance with each regulation remains a legal duty of the operator. This PDF holds the full AI evidence chain inside its XMP metadata under `xmp:ProvenanceAiPayload`. A regulator inspecting the PDF alone receives the entire chain; the adjacent `*.provenance.ai.json` is a copy of the same JSON for tooling that prefers file access.
 
-The deterministic evidence chain is at `*.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
+Every rule-driven step is recorded by the deterministic evidence chain, which resides at `*.provenance.deterministic.json`. gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
 
-To extract the chain from the PDF, run `exiftool -b -XMP-mx:ProvenanceAiPayload dotfusion-com-report.pdf | jq .`. The `-b` flag is required so exiftool emits the raw payload; without it the output includes a label that breaks the JSON parse. The two chains share `auditId`, `startedAt`, `operator`, and a `provenance` header naming the exact git commit of the audit tooling that produced this run, so anyone can re-run it and verify byte-for-byte what we did. We prefer determinism to inference: explicit over inferred, recorded over remembered, a result you can reproduce over one we could only explain. Where a check can be made by a rule, a rule makes it, and the rule leaves a record rather than an opinion. That is why this chain shows what we did instead of asking you to trust a summary of it.
+To extract the chain from the PDF, run `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`. The `-b` flag is required so exiftool emits the raw payload; without it the output includes a label that breaks the JSON parse. The two chains share `auditId`, `startedAt`, `operator`, and a `provenance` header naming the exact git commit of the audit tooling that produced this run, so anyone can re-run it and verify byte-for-byte what we did. We prefer determinism to inference: explicit over inferred, recorded over remembered, a result you can reproduce over one we could only explain. Where a check can be made by a rule, a rule makes it, and the rule leaves a record rather than an opinion. That is why this chain shows what we did instead of asking you to trust a summary of it.
 
 **Verify this report yourself - no internal access required.** Three commands, open tools, no login:
 
-1. Extract the full AI evidence chain from the PDF: `exiftool -b -XMP-mx:ProvenanceAiPayload dotfusion-com-report.pdf | jq .`
+1. Extract the full AI evidence chain from the PDF: `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`
 2. Confirm the operator identity: the JSON contains `operator.name`, `operator.email`, and `operator.organisation` naming the accountable individual.
-3. Cross-reference the sidecar: `diff <(jq .auditId dotfusion-com-report.provenance.ai.json) <(exiftool -b -XMP-mx:ProvenanceAiPayload dotfusion-com-report.pdf | jq .auditId)`; both should return the same `auditId`.
+3. Cross-reference the sidecar: `diff <(jq .auditId cmscritic-com-report.provenance.ai.json) <(exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .auditId)`; both should return the same `auditId`.
 
 The evidence does not require trust. It requires tools. That is the difference between a governance claim and a governance record.
 

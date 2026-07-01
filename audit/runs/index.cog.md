@@ -9,7 +9,7 @@ title: "audit-runs-index"
 version: "1.0"
 description: "Index of all committed audit run outputs under mx-outputs/audit/runs/."
 created: 2026-06-18
-modified: 2026-06-28
+modified: 2026-07-01
 author: Tom Cranstoun
 type: info-doc
 tags: [audit, index, runs, latest-copy]
@@ -32,6 +32,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 |----------|------------|--------|-----|----|
 | atmors.netlify.app.d | - | pending | - | - |
 | axiompartners.vc | 2026-06-19 | pass | [latest-copy.pdf](axiompartners.vc/latest-copy.pdf) | [latest-copy.md](axiompartners.vc/latest-copy.md) |
+| cmscritic.com | 2026-07-01 | pass | [latest-copy.pdf](cmscritic.com/latest-copy.pdf) | [latest-copy.md](cmscritic.com/latest-copy.md) |
 | crowdfavorite.com | - | pending | - | - |
 | dangerdevices.com | - | pending | - | - |
 | dkd.de-de | - | pending | - | - |
@@ -40,10 +41,12 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | enhancely.ai | - | pending | - | - |
 | github.com-ai-ecoverse-slicc | - | pending | - | - |
 | leica-microsystems.com | - | pending | - | - |
+| mx-outputs | - | pending | - | - |
 | mx.allabout.network | 2026-06-25 | pass | [latest-copy.pdf](mx.allabout.network/latest-copy.pdf) | [latest-copy.md](mx.allabout.network/latest-copy.md) |
-| neomwellbeing.com | - | pending | - | - |
+| neomwellbeing.com | 2026-06-30 | pass | [latest-copy.pdf](neomwellbeing.com/latest-copy.pdf) | [latest-copy.md](neomwellbeing.com/latest-copy.md) |
 | oxide.computer | - | pending | - | - |
 | pentatonic.com | - | pending | - | - |
+| playboy.com | 2026-07-01 | pass | [latest-copy.pdf](playboy.com/latest-copy.pdf) | [latest-copy.md](playboy.com/latest-copy.md) |
 | rivan.com | - | pending | - | - |
 | sibotacademy.pl-en | - | pending | - | - |
 | specification.website | - | pending | - | - |
@@ -63,5 +66,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | www.marriott.com | - | pending | - | - |
 | www.meetkai.com | - | pending | - | - |
 | www.paribu.com | - | pending | - | - |
+| www.playboy.com | - | pending | - | - |
 | www.roamrobotics.com | - | pending | - | - |
 | www.steelatlas.vc | - | pending | - | - |
+| www.whiteroseclub.com | 2026-07-01 | pass | [latest-copy.pdf](www.whiteroseclub.com/latest-copy.pdf) | [latest-copy.md](www.whiteroseclub.com/latest-copy.md) |
