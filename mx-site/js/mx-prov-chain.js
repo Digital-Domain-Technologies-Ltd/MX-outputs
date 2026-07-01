@@ -52,6 +52,7 @@ function stepRole(s) {
   const byId = roleFromText(id, [
     [/caught|flaw/, 'caught a flaw'],
     [/correct|fixed|fix|repair/, 'fixed it'],
+    [/publish|released?/, 'published'],
     [/review|verif/, 'verified'],
     [/author|attach|creat|enrich/, 'attached'],
   ]);
@@ -59,6 +60,7 @@ function stepRole(s) {
   const byIntent = roleFromText((s.intent || '').toLowerCase(), [
     [/correct|fixed|fix\b|repair/, 'fixed it'],
     [/caught|flaw|found|mislocat/, 'caught a flaw'],
+    [/publish|released\b/, 'published'],
     [/review|verif/, 'verified'],
     [/attach|created|enrich|author/, 'attached'],
   ]);

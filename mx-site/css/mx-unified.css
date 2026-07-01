@@ -654,6 +654,16 @@ main {
   transform: translateY(-2px);
 }
 
+/* Hold the dark text colour in every interactive state. The base .cta-button
+   color is specificity (0,1,0); a bare `a:hover` / `a:visited` link rule is
+   (0,1,1) and would otherwise repaint the label a low-contrast tone on the gold. */
+.cta-button:hover,
+.cta-button:focus,
+.cta-button:active,
+.cta-button:visited {
+  color: var(--mx-blue-deep);
+}
+
 .cta-button.cta-secondary {
   background: transparent;
   color: var(--mx-gold);
