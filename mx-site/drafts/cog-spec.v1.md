@@ -904,4 +904,4 @@ YAML 1.2 Specification, <https://yaml.org/spec/1.2.2/>.
 
 CommonMark Specification (for fenced code block syntax), <https://commonmark.org/>.
 
-<!-- cog-spec-sync: 2026-06-21-a -->
+<!-- cog-spec-sync: 2026-07-01-a -->
