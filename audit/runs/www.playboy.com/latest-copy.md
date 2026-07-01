@@ -1,26 +1,26 @@
 ---
-title: "Neomwellbeing"
+title: "Playboy"
 subtitle: "Website Analysis & Machine Readiness"
 type: report
 author: "Tom Cranstoun"
 created: "2026-07-01"
 modified: "2026-07-01"
-client: "Neomwellbeing"
-clientSlug: "neomwellbeing-com"
-clientUrl: "https://neomwellbeing.com"
-reportId: "neomwellbeing-com-WEB-AUDIT-20260701"
+client: "Playboy"
+clientSlug: "www-playboy-com"
+clientUrl: "https://www.playboy.com"
+reportId: "www-playboy-com-WEB-AUDIT-20260701"
 reportType: "executive-sales-report"
 auditTool: "web-audit-suite"
 auditDate: "2026-07-01"
-auditCommand: "node scripts/audit-pipeline.js https://neomwellbeing.com --pages 10"
-description: "Executive audit report reviewing accessibility, performance, SEO, structured data, and AI agent compatibility for Neomwellbeing"
+auditCommand: "node scripts/audit-pipeline.js https://www.playboy.com --pages 10"
+description: "Executive audit report reviewing accessibility, performance, SEO, structured data, and AI agent compatibility for Playboy"
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
-performanceScore: 55
-accessibilityScore: 100
-seoScore: 84
-llmServedHtmlScore: 31
-agentReadabilityScore: 48
-a11yIssues: 0
+performanceScore: 70
+accessibilityScore: 80
+seoScore: 83
+llmServedHtmlScore: 70
+agentReadabilityScore: 44
+a11yIssues: 97
 htmlPagesAudited: 10
 version: "1.0"
 pipelineVersion: "1.1.0"
@@ -28,24 +28,24 @@ confidential: true
 mx:
   status: active
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-07-01/neomwellbeing.com/neomwellbeing-com-report.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-07-01/www.playboy.com/www-playboy-com-report.md
   maintainer: info@cognovamx.com
   stability: stable
   partOf: mx-audit
-  purpose: "Executive machine-readiness audit for Neomwellbeing covering accessibility, performance, SEO, structured data, and AI agent compatibility."
-  x-mx-contextProvides: ["web audit findings for Neomwellbeing", "WCAG accessibility assessment", "AI agent compatibility scores", "SEO and structured data analysis", "machine readiness recommendations"]
+  purpose: "Executive machine-readiness audit for Playboy covering accessibility, performance, SEO, structured data, and AI agent compatibility."
+  x-mx-contextProvides: ["web audit findings for Playboy", "WCAG accessibility assessment", "AI agent compatibility scores", "SEO and structured data analysis", "machine readiness recommendations"]
   # The single cog that manages this pipeline artefact, so a reader never
   # has to infer the steward (scripts/lib/managed-by.cjs is the resolver).
   x-mx-managedBy: mx-audit.cog.md
   x-mx-generatedBy: "mx-reginald/audit/bin/infill-report.js"
-  x-mx-canonicalSource: "Audit results for https://neomwellbeing.com on 2026-07-01 - fix via generator, not this file"
-  runbook: "Executive audit report for Neomwellbeing. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-crawl and re-analyse), use the command in the top-level auditCommand field. Regenerate the tagged PDF with 'node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-01/neomwellbeing.com/neomwellbeing-com-report.md', which validates the report then renders it through scripts/bin/mx.pdf.sh."
+  x-mx-canonicalSource: "Audit results for https://www.playboy.com on 2026-07-01 - fix via generator, not this file"
+  runbook: "Executive audit report for Playboy. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-crawl and re-analyse), use the command in the top-level auditCommand field. Regenerate the tagged PDF with 'node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-01/www.playboy.com/www-playboy-com-report.md', which validates the report then renders it through scripts/bin/mx.pdf.sh."
   generate:
-    command: "node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-01/neomwellbeing.com/neomwellbeing-com-report.md"
+    command: "node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-01/www.playboy.com/www-playboy-com-report.md"
     script: "scripts/bin/mx.pdf.sh"
     format: "pdf"
-    output: "mx-outputs/audit/runs/neomwellbeing.com/latest-copy.pdf"
-    description: "Generate PDF audit report for Neomwellbeing"
+    output: "mx-outputs/audit/runs/www.playboy.com/latest-copy.pdf"
+    description: "Generate PDF audit report for Playboy"
   # Provenance sidecar pair. The per-audit evidence chain is split
   # into two adjacent files: the AI stream (LLM-driven, multi-agent,
   # human-committed steps) cited below as the primary sidecar, and
@@ -61,16 +61,16 @@ mx:
   # when the canon ratifies a "provenance" field through The
   # Gathering, the prefix drops in one place.
   x-mx-provenance:
-    sidecar: "neomwellbeing-com-report.provenance.ai.json"
+    sidecar: "www-playboy-com-report.provenance.ai.json"
     frameworks: [EU-AI-Act, UK-ICO-AI-guidance, NIST-AI-RMF, Colorado-AI-Act]
-    companion: "neomwellbeing-com-report.provenance.deterministic.json"
+    companion: "www-playboy-com-report.provenance.deterministic.json"
     note: "AI evidence chain (LLM-driven, multi-agent, and human-committed steps). The full chain travels inside this PDF's XMP metadata under xmp:ProvenanceAiPayload; the adjacent .ai.json file is a copy of the same JSON for tooling that prefers file access. The companion .deterministic.json file carries the deterministic evidence chain (gate verdicts, CSV checks, render steps, probe results) and serves EAA Directive 2019/882 accessibility-conformance evidence; it stays adjacent on disk only (its pointer is in xmp:ProvenanceCompanion)."
 ---
 
 **Prepared by:** Tom Cranstoun | CogNovaMX Ltd\
 **Contact:** <info@cognovamx.com> | <https://allabout.network>\
 **Date:** 1 July 2026\
-**Report ID:** neomwellbeing-com-WEB-AUDIT-20260701
+**Report ID:** www-playboy-com-WEB-AUDIT-20260701
 
 ---
 
@@ -78,7 +78,7 @@ mx:
 
 ## About This Report
 
-We audited 10 pages across neomwellbeing.com's site using the Web Audit Suite. We also reviewed the site's discovery files (sitemap.xml, llms.txt). We review each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image efficiency, security headers, content consistency, discovery file coverage, and machine pipeline survivability.
+We audited 10 pages across www.playboy.com's site using the Web Audit Suite. We also reviewed the site's discovery files (sitemap.xml, llms.txt). We review each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image efficiency, security headers, content consistency, discovery file coverage, and machine pipeline survivability.
 
 We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
@@ -90,7 +90,7 @@ Our scoring criteria follow published MX standards and proposed specifications m
 
 **What we cover here, and what MX covers.** This report looks at the web estate: every page served over HTTP, examined for metadata, structured data, accessibility, and what machines can read. MX runs deeper, covering every document type a business publishes (PDFs, data feeds, API responses, structured documents) and the machines that read them. The web estate is the foundation; the rest builds on it.
 
-**Audit scope.** Findings throughout this report describe what we observed on the 10 HTML pages we examined in depth, drawn from a sitemap of 918 URLs. We also reviewed the site's discovery files (sitemap.xml, llms.txt). Structural findings - a missing header, a soft 404 pattern, a discovery file gap - hold across the full estate and are noted as such. Verdicts scoped to the sampled pages should not be extrapolated to the full estate without a wider audit.
+**Audit scope.** Findings throughout this report describe what we observed on the 10 HTML pages we examined in depth, drawn from a sitemap of 15452 URLs. We also reviewed the site's discovery files (sitemap.xml, llms.txt). Structural findings - a missing header, a soft 404 pattern, a discovery file gap - hold across the full estate and are noted as such. Verdicts scoped to the sampled pages should not be extrapolated to the full estate without a wider audit.
 
 ### A note on llms.txt
 
@@ -104,29 +104,33 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 
 *Executive Summary*
 
+The following table shows the overall score and verdict for each audit dimension:
+**Table 1**
+
+*Executive Summary*
+
 | | Score | Verdict |
 |:---|---:|:---|
-| Performance | **55**/100 | `##########--------` Good |
-| Accessibility | **100**/100 | `##################` Excellent |
-| SEO | **84**/100 | `###############---` Excellent |
-| Served-HTML Structure | **31**/100 | `######------------` **(!)** Could Be Better |
-| MX Stack Completeness | **60**/100 | `###########-------` Good |
-| Agent Readability | **48**/100 | `#########---------` **(!)** Could Be Better |
-| Pipeline Survivability | **71**/100 | `#############-----` Good |
-| Machine Processing Speed | **1192** ms/page | `###########-------` Machine-Heavy |
+| Performance | **70**/100 | `#############-----` Good |
+| Accessibility | **80**/100 | `##############----` Excellent |
+| SEO | **83**/100 | `###############---` Excellent |
+| Served-HTML Structure | **70**/100 | `#############-----` Good |
+| MX Stack Completeness | **68**/100 | `############------` Good |
+| Agent Readability | **44**/100 | `########----------` **(!)** Could Be Better |
+| Pipeline Survivability | **79**/100 | `##############----` Excellent |
+| Machine Processing Speed | **733** ms/page | `##############----` Machine-Workable |
 
 *The three machine metrics measure different things. **Served-HTML Structure** is the semantic markup an agent reads before JavaScript runs; **Agent Readability** is how easily the content can be quoted once reached; **Pipeline Survivability** is whether a page survives an agent's fetch and ingest. A site can score low on one and high on another.*
 
-Agent Readability was adjusted down by 13 points for site-wide gaps a machine cannot work around:
+Agent Readability was adjusted down by 15 points for site-wide gaps a machine cannot work around:
 
-- **Origin server is slow for an agent fetch** (-5): origin verdict slow, slowest median 1764ms
-- **Bare-div nesting (div soup) across most pages** (-8): 10 of 12 pages are heavy with bare-div nesting
+- **Audience had to be inferred (no machine-readable signal declared)** (-15): adult audience, basis inferred
 
-The site runs on **Shopify** (detected from multiple platform signals). The site appears to be a transactional retail or e-commerce operation.
+The site reads as aimed at a adult audience, but the structured data declares no age band, so an agent has to infer the audience; declaring `schema:typicalAgeRange` or `mx:intendedAgeRange` would make it explicit. The site runs on **Shopify** (detected from multiple platform signals). The site appears to be an editorial or media publisher.
 
-Schema.org types indicate an e-commerce or product-catalogue context.
+Schema.org types indicate a content or editorial context.
 
-Neomwellbeing runs on Shopify. Across the audited set, Neomwellbeing scores 100/100 for accessibility and 84/100 for SEO, with solid page performance (55/100) - a strong baseline for both human visitors and machine readers.
+Playboy runs on Shopify. Across the audited set, Playboy scores 80/100 for accessibility and 83/100 for SEO.
 
 The audited set shows consistent metadata patterns across pages, with no brand-name, canonical-URL, meta-description, or entity divergence detected.
 
@@ -136,18 +140,18 @@ The audited set shows consistent metadata patterns across pages, with no brand-n
 
 | Check                            | Result | Notes                    |
 |----------------------------------|--------|--------------------------|
-| Brand-name parity | Pass | Brand name appears consistently across all 10 audited pages |
-| Canonical URL duplicates | Pass | No duplicate canonical URLs detected across the 10-page audited set |
+| Brand-name parity | Pass | Brand name appears consistently across all 11 audited pages |
+| Canonical URL duplicates | Pass | No duplicate canonical URLs detected across the 11-page audited set |
 | Meta description length | Pass | Meta descriptions present on all pages; none flagged for length violations |
 | Cross-page entity spread (same entity on multiple pages) | Pass | Schema.org entities reference consistent identifiers across the audited set |
 
-Across the audited set, we found brand-name parity and canonical URL duplicate problems, which can be corrected by normalising the brand name on all pages and assigning a distinct canonical URL to each page.
+Across the audited set, we found canonical URL duplicates and meta descriptions exceeding recommended length; correcting these will bring the pages into alignment with best-practice consistency for machines.
 
 ---
 
 ## Inline Code Duplicates
 
-We found 171 identical inline fragment(s) repeated across multiple pages, totalling 768 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
+The audit identified 33 identical inline fragments repeated across multiple pages, totalling 940 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
 
 **Table 3**
 
@@ -155,41 +159,31 @@ We found 171 identical inline fragment(s) repeated across multiple pages, totall
 
 | Type | Bytes per fragment | Appears on N pages | Preview                                                          |
 |------|-------------------:|-------------------:|------------------------------------------------------------------|
-| css | 4683 | 10 | #NavImageimage_BaUPxm1 .nav-block-image {       aspect-ratio |
-| js | 4588 | 10 | {       "assets": {         "themeCssFile": null,         "l |
-| js | 3908 | 10 | class PredictiveSearchMobile extends HTMLElement {         c |
-| js | 3839 | 10 | class PredictiveSearch extends HTMLElement {         constru |
-| js | 3377 | 10 | !function(){'use strict';const t='contact',e='account',n='ne |
-| js | 2617 | 10 | const consentOutOfRegion = {         analytics: true,        |
-| js | 2151 | 10 | // This waits for all the external ressources (including ABT |
-| js | 1843 | 10 | if (typeof window.wunderkind.cart === 'undefined') {         |
-| js | 1733 | 10 | window.product = {         add: `Add`,         addToCart: `A |
-| js | 1703 | 10 | window.Shopify = window.Shopify \|\| {};   if (!window.Shopify |
+| js | 51222 | 11 | var wc_country_select_params = {"countries":"{\"AF\":[],\"AL |
+| js | 10736 | 11 | var wc_address_i18n_params = {"locale":"{\"AE\":{\"postcode\ |
+| css | 9181 | 11 | :root{--wp--preset--aspect-ratio--square: 1;--wp--preset--as |
+| css | 3646 | 11 | :root{--wp-block-synced-color:#7a00df;--wp-block-synced-colo |
+| js | 2966 | 11 | /*! This file is auto-generated */ const a=JSON.parse(docume |
+| js | 1542 | 11 | var sv_wc_payment_gateway_payment_form_params = {"order_butt |
+| js | 1479 | 11 | jQuery(function($){		function load_netbilling_credit_card_pa |
+| js | 1387 | 11 | jQuery(function($){		function load_netbilling_payment_form_h |
+| css | 1179 | 11 | .liveblog-entry img {     max-width: 100%;  /* Ensures the i |
+| js | 1101 | 11 | var wc_memberships_frontend = {"ajax_url":"https://www.playb |
 
-*Showing the top 10 of 169 duplicate fragments by occurrence count. The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `neomwellbeing-com-inline-code-duplicates.csv`.*
+*Showing the top 10 of 31 duplicate fragments by occurrence count. The full inventory (every fragment with its hash and the page URLs that carry it) is preserved alongside this report as `www-playboy-com-inline-code-duplicates.csv`.*
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
 ## Infrastructure and Hosting
 
-The site is served via **Cloudflare** (Cloudflare, Inc.). Platform: **Shopify**. The site loads third-party scripts from Klaviyo, all US-hosted. A privacy notice should name each processor and their data location.
-
-**Table 4**
-
-*Infrastructure and Hosting*
-
-| Category | What we found | Risk |
-|----------|---------------|------|
-| Third-party embed | Klaviyo (US) | email marketing - named in privacy notice |
-
-- **US-hosted third-party services** (Klaviyo): visitor data is processed by US companies. Confirm your privacy notice names each processor, their country, and the legal basis for transfer (adequacy decision, SCCs, or UK IDTA).
+Hosted directly with **Cloudflare, Inc.**. Platform: **Shopify**.
 
 ---
 
 
-We linked no PDFs from the 10-page sample we crawled, and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
+The audit found no PDFs linked in the 10-page sample., and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
 
 PDFs are part of the machine-readable estate but sit outside this HTML audit's scope. A dedicated PDF review checks each public document against the ISO 14289-1 (PDF/UA) baseline (Tagged, Declared, Verified) and returns a per-document verdict.
 
@@ -197,32 +191,46 @@ PDFs are part of the machine-readable estate but sit outside this HTML audit's s
 
 ## Text Patterns
 
-Analysis of text patterns across audited pages found content reaching Hints at AI on the AI-tells scale (1 of 10 pages scored). Machines do not consistently cite or label AI-generated content; this observation describes what the analysis found, not a conclusion about authorship.
+Analysis of text patterns across audited pages found content reaching Hints at AI on the AI-tells scale (5 of 11 pages scored). Machines do not consistently cite or label AI-generated content; this observation describes what the analysis found, not a conclusion about authorship.
 
-**/pages/postage** (Occasional) - prose patterns, vocabulary.
+**/read/drugs-and-leisure/the-playboy-interview-with-timothy-leary-2** (Hints at AI) - prose patterns, vocabulary, verbal tics, copula density.
 
-**/pages/privacy-policy** (Hints at AI) - prose patterns, vocabulary, verbal tics.
+**/read/society/the-playboy-interview-with-allen-ginsberg** (Hints at AI) - prose patterns, vocabulary, copula density, verbal tics.
 
-8 of 10 pages scored clean - no AI-pattern signals detected on those pages.
+**/read/black-history/the-playboy-interview-with-jesse-jackson-2** (Hints at AI) - prose patterns, vocabulary, verbal tics, copula density.
+
+**/read/black-history/the-playboy-interview-with-charles-evers-3** (Hints at AI) - prose patterns, copula density, vocabulary, verbal tics.
+
+**/read/television/inside-jimmi-simpson-s-wild-wild-westworld** (Occasional) - prose patterns, vocabulary, copula density, verbal tics.
+
+1 of 11 page scored clean - no AI-pattern signals detected on that page.
+
+The remaining 5 flagged pages are in `www-playboy-com-ai-tells.json` alongside this report.
 
 ---
 
 ## Content Uniqueness
 
-10 of 10 pages have significant shared content, giving machines redundant information per page and reducing the value of multi-page crawls. Every flagged page consumes crawl budget without adding distinct knowledge to an agent's model of the site.
+4 of 11 pages carry distinctive content. 7 pages have content that appears on multiple pages, giving machines redundant information per page. Pages with Significant Duplication give agents redundant signals with no additional information, reducing the effective page count a crawl budget can usefully read.
 
-**Table 5**
+**Table 4**
+
+*Content Uniqueness*
+
+The following table shows the uniqueness of content across audited pages:
+**Table 4**
 
 *Content Uniqueness*
 
 | Page | Unique content | Band |
 |------|---------------|------|
-| /collections/gift-with-purchase | 10% | Low Machine Value |
-| .../products/perfect-nights-sleep-standard-scente... | 33% | Significant Duplication |
-| /pages/leeds-store | 33% | Significant Duplication |
-| .../products/perfect-night-sleep-luxury-scented-c... | 36% | Significant Duplication |
-| .../products/complete-bliss-standard-scented-candle | 37% | Significant Duplication |
-*Showing the top 5 of 10 pages by duplication level. Full per-page scores are in `neomwellbeing-com-content-uniqueness.csv`.*
+| /read/heritage/birds-of-america | 23% | Low Machine Value |
+| .../read/drugs-and-leisure/the-magic-of-wine-infu... | 23% | Low Machine Value |
+| .../read/opinion/sean-hannity-has-something-to-hide | 32% | Significant Duplication |
+| .../read/mixology/mezcal-s-popularity-might-make-... | 41% | Significant Duplication |
+| .../read/sports-and-gaming/the-triumphant-return-... | 43% | Significant Duplication |
+*Showing the top 5 of 10 pages by duplication level. Full per-page scores are in `www-playboy-com-content-uniqueness.csv`.*
+The remaining 1 pages all scored Distinctive or Expected Boilerplate.
 
 ---
 
@@ -230,20 +238,25 @@ Analysis of text patterns across audited pages found content reaching Hints at A
 
 ### Recommended Actions
 
-1. **Address Priority 1 findings**: resolve Semantic Structure findings (currently 20/100)
-2. **Review Priority 2-3 findings**: Discovery Readiness improvements and metadata tuning that compound over time
+1. **Address Priority 1 findings**: address the 97 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
+2. **Review Priority 2-3 findings**: declaring the intended adult audience in machine-readable metadata (the audit had to infer it) and making any age-assurance and consent steps machine-detectable, alongside Discovery Readiness improvements and metadata tuning that compound over time
 3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search
 
 ### What's Next
 
-**Table 6**
+**Table 5**
+
+*What's Next*
+
+The following table outlines the phases, scope, and outcomes of our audit:
+**Table 5**
 
 *What's Next*
 
 | Phase | Scope | Outcome |
 |-------|-------|---------|
-| Critical Fixes | Priority 1 compliance items and Semantic Structure fixes | Priority 1 items resolved, compliance risk removed |
-| Full Implementation | Semantic Structure, Discovery Readiness, Commerce Visibility, MX Stack Completeness, Structured Data, Heading Quality, Performance, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
+| Critical Fixes | WCAG 2.1 AA compliance | Priority 1 items resolved, compliance risk removed |
+| Full Implementation | Commerce Visibility, Discovery Readiness, Semantic Structure, MX Stack Completeness, Security headers, and optional enhancements | Full machine readiness: every agent, search engine, and structured-data consumer can read, trust, and act on the site |
 | Ongoing Monitoring | Continuous monitoring and quarterly audits | durable visibility in agent-mediated discovery |
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | The full machine-readable estate, beyond the web pages |
 | Data-Sovereign Option | Regulated industries | Run the full audit pipeline on your own infrastructure - no client content leaves your network |
@@ -257,25 +270,30 @@ This audit is a starting point. The outcome we work toward is a site any machine
 
 Each dimension is measured independently. Served dimensions reflect the page before JavaScript runs; Rendered dimensions reflect what a browser produces after JavaScript executes. The Notes column explains the measurement method for each score.
 
-The site serves an empty HTML shell to server-side agents. The "Rendering" column shows whether each score was measured from the served HTML (what agents actually get) or the rendered HTML (what agents would get with SSR).
+We serve an empty HTML shell to server-side agents. The "Rendering" column shows whether each score was measured from the served HTML (what agents actually get) or the rendered HTML (what agents would get with SSR).
 
-**Table 7**
+**Table 6**
+
+*Audit Scores*
+
+The following table presents scores for each dimension along with rendering context:
+**Table 6**
 
 *Audit Scores*
 
 | Dimension | Score | Rendering | Notes |
 |-----------|-------|-----------|-------|
-| Served-HTML Structure | 31/100 | Served | Structural markup an agent parses before JS |
-| Accessibility | 100/100 | Rendered | Checked in a rendered browser environment |
-| SEO (all pages) | 84/100 | Rendered | Google renders JS; server-side agents do not |
-| SEO (content pages) | 84/100 | Rendered |  |
-| MX Stack Completeness | 60/100 | Rendered |  |
-| Structured Data Quality | 72/100 | Rendered | JSON-LD in served head  -  valid for all agents |
-| Discovery Readiness | 26/100 | Mixed | robots.txt/sitemap independent of rendering. Machines can find the site but lack structured signals about its purpose and content policy. |
-| Heading Quality | 58/100 | Rendered | Page structure is mostly navigable; some heading hierarchies need tightening. |
-| Agent Readability | 48/100 | Rendered | A noticeable share of pages have structure issues that make agent reading slower or less accurate. |
-| Pipeline Survivability | 71/100 | Rendered | Most pages reach agents intact; a small number have size or structure issues worth addressing. |
-| Cross-Page Consistency | 42% | Rendered | Fewer than half the tracked metadata patterns apply across all pages; agents reading different pages get different signal quality. |
+| Served-HTML Structure | 70/100 | Served | Structural markup an agent parses before JS |
+| Accessibility | 80/100 | Rendered | Checked in a rendered browser environment |
+| SEO (all pages) | 83/100 | Rendered | Google renders JS; server-side agents do not |
+| SEO (content pages) | 83/100 | Rendered |  |
+| MX Stack Completeness | 68/100 | Rendered |  |
+| Structured Data Quality | 92/100 | Rendered | JSON-LD in served head  -  valid for all agents |
+| Discovery Readiness | 40/100 | Mixed | robots.txt/sitemap independent of rendering. Machines can find the site but lack structured signals about its purpose and content policy. |
+| Heading Quality | 79/100 | Rendered | Page structure is clear and consistent; agents can build an accurate content outline from headings alone. |
+| Agent Readability | 44/100 | Rendered | A noticeable share of pages have structure issues that make agent reading slower or less accurate. |
+| Pipeline Survivability | 79/100 | Rendered | Pages reach agents intact with no observed survivability issues. |
+| Cross-Page Consistency | 71% | Rendered | Most metadata patterns are consistent; a few gaps mean some pages deliver weaker signals than others. |
 
 Server-side agents see only the served HTML. The Served-HTML Structure score reflects their experience. All other scores reflect what the site achieves after JavaScript renders.
 
@@ -297,30 +315,30 @@ To set up a remediation plan, contact info@cognovamx.com.
 
 ## Appendix A: Pages Audited
 
-- **/ (nav)**
-  SEO 83 · A11y 100 · Backend 100 · Served 30 · Rendered 40
-- **/products/complete-bliss-standard-scented-candle**
-  SEO 81 · A11y 100 · Backend 100 · Served 33 · Rendered 40
-- **/products/perfect-night-sleep-luxury-scented-candle**
-  SEO 88 · A11y 100 · Backend 100 · Served 30 · Rendered 30
-- **.../products/perfect-nights-sleep-standard-scented-candle**
-  SEO 88 · A11y 100 · Backend 100 · Served 33 · Rendered 30
-- **/products/feel-refreshed-luxury-scented-candle**
-  SEO 89 · A11y 100 · Backend 100 · Served 30 · Rendered 30
-- **/pages/about-us**
-  SEO 81 · A11y 100 · Backend 100 · Served 30 · Rendered 14
-- **/pages/postage**
-  SEO 89 · A11y 100 · Backend 100 · Served 30 · Rendered 30
-- **/pages/leeds-store**
-  SEO 78 · A11y 100 · Backend 100 · Served 30 · Rendered 30
-- **/pages/privacy-policy**
-  SEO 74 · A11y 100 · Backend 100 · Served 30 · Rendered 30
-- **/collections/gift-with-purchase**
-  SEO 88 · A11y 100 · Backend 100 · Served 30 · Rendered 30
+- **./read/drugs-and-leisure/the-playboy-interview-with-.**
+  SEO 83 · A11y 80 · Backend 70 · Served 68 · Rendered 68
+- **./read/society/the-playboy-interview-with-allen-gins.**
+  SEO 83 · A11y 80 · Backend 70 · Served 68 · Rendered 53
+- **/read/heritage/birds-of-america**
+  SEO 84 · A11y 75 · Backend 70 · Served 69 · Rendered 54
+- **./read/black-history/the-playboy-interview-with-jess.**
+  SEO 83 · A11y 80 · Backend 70 · Served 68 · Rendered 68
+- **./read/black-history/the-playboy-interview-with-char.**
+  SEO 83 · A11y 80 · Backend 70 · Served 68 · Rendered 68
+- **./read/television/inside-jimmi-simpson-s-wild-wild-w.**
+  SEO 84 · A11y 80 · Backend 70 · Served 69 · Rendered 54
+- **./read/mixology/mezcal-s-popularity-might-make-it-go.**
+  SEO 83 · A11y 80 · Backend 70 · Served 68 · Rendered 68
+- **/read/opinion/sean-hannity-has-something-to-hide**
+  SEO 83 · A11y 80 · Backend 70 · Served 68 · Rendered 68
+- **./read/sports-and-gaming/the-triumphant-return-of-kr.**
+  SEO 77 · A11y 80 · Backend 70 · Served 69 · Rendered 54
+- **./read/drugs-and-leisure/the-magic-of-wine-infused-c.**
+  SEO 83 · A11y 80 · Backend 70 · Served 68 · Rendered 53
+- **/privacy-policy**
+  SEO 86 · A11y 85 · Backend 70 · Served 100 · Rendered 74
 
 *Backend: score for HTML served without JavaScript. Served: AI suitability from served HTML. Rendered: AI suitability after JavaScript.*
-
-The page marked (nav) is navigational: it routes visitors to content rather than containing it, and is excluded from the SEO content average. Content-pages SEO average: 84/100.
 
 ---
 
@@ -328,69 +346,69 @@ The page marked (nav) is navigational: it routes visitors to content rather than
 
 We recorded every same-host internal link found on each audited page. External links are not tracked; this inventory covers same-host `<a href>` links only. Link status was not probed; for a dedicated broken-link audit, run a rate-limited crawler on the link set at a time that suits the site.
 
-Per page, internal links range from 1 to 128, averaging 24 across 53 pages. That is typical (benchmark median 20 per page).
+Per page, internal links range from 35 to 54, averaging 42 across 11 pages. That is typical (benchmark median 20 per page).
 
-**Table 8**
+**Table 7**
+
+*Appendix B: Link Inventory*
+
+The following table lists internal link classes and their counts:
+**Table 7**
 
 *Appendix B: Link Inventory*
 
 | Link class | Count |
 | --- | ---: |
-| Same-host internal links (all pages) | 1718 |
+| Same-host internal links (all pages) | 459 |
 | External links (not tracked) | -- |
 | Anchor-only (`#fragment`) links | 0 |
 | mailto / tel links | 0 |
 
-At 24 internal links per page on average, the internal navigation graph sits within the typical range for sites of this type (benchmark median 20). No hash-fragment links were found - the site navigates entirely by full-page URL, which is standard for content and service sites. No inline mailto or tel links appear in page content; direct contact routes through a form.
+At 42 internal links per page on average, the internal navigation graph sits within the typical range for sites of this type (benchmark median 20). No hash-fragment links were found - the site navigates entirely by full-page URL, which is standard for content and service sites. No inline mailto or tel links appear in page content; direct contact routes through a form.
 
 ---
 
 ## Appendix C: Image Efficiency
 
-We reviewed 1598 images across the audited set: 1 WebP, 226 SVG, 43 PNG, 764 JPEG and 564 in other or unidentified formats. 1174 of 1598 (73.5%) carry alt text, leaving 424 without it. Each missing alt attribute is a place where a screen-reader user or a machine reading the page gets no description of what the image shows.
+We reviewed 61 images across the audited set: 11 SVG, 10 PNG, 19 JPEG and 21 in other or unidentified formats. 19 of 61 (31.1%) carry alt text, leaving 42 without it. Each missing alt attribute is a place where a screen-reader user or a machine reading the page gets no description of what the image shows.
 
-On loading strategy, 742 images are marked `loading="lazy"` and 196 `loading="eager"`, while 660 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
+On loading strategy, 21 images are marked `loading="lazy"` and 0 `loading="eager"`, while 40 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
-JPEG and Other account for 83% of the 1598 images (764 and 564 files respectively). None use WebP, the modern format that typically reduces file size by 25-35% over PNG or JPEG with no visible quality loss.
+Other and JPEG account for 65% of the 61 images (21 and 19 files respectively). None use WebP, the modern format that typically reduces file size significantly over PNG or JPEG with no visible quality loss.s.
 
-**Table 9**
+**Table 8**
+
+*Appendix C: Image Efficiency*
+
+The following table shows image format distribution:
+**Table 8**
 
 *Appendix C: Image Efficiency*
 
 | Format | Count | Share |
 |--------|-------|-------|
-| WebP | 1 | 0% |
-| SVG | 226 | 14% |
-| PNG | 43 | 3% |
-| JPEG | 764 | 48% |
-| Other | 564 | 35% |
-
-> **Double-lazy loading pattern detected on 339 image(s).** These images carry BOTH the native HTML attribute `loading="lazy"` AND a JavaScript lazyload pattern (a placeholder `data:image/gif` in `src`, the real URL in `data-src`, and a `lazyload` class). The image cannot render until:
-> 1. The lazyload JavaScript library loads and parses.
-> 2. The script scans the DOM and swaps `data-src` → `src` on images entering the viewport.
-> 3. The browser then honours `loading="lazy"` on the newly-swapped `src`, which may defer the fetch further.
-> **Why this matters for above-the-fold imagery** (hero banners, logos, navigation thumbnails): the hero never renders during the initial HTML parse because the real URL is not in the document yet. Core Web Vitals (LCP) and human perception of speed both pay the cost. AI agents that fetch static HTML without running JavaScript see only the placeholder `data:image/gif` and miss the image entirely.
-> **Recommended remediation:** for above-the-fold images, put the real URL in `src`, use `loading="eager"` and `fetchpriority="high"`, and remove the lazyload class. For below-the-fold images, keep one strategy  -  either native `loading="lazy"` (simpler, widely supported) or the JavaScript lazyload library, not both.
+| SVG | 11 | 18% |
+| PNG | 10 | 16% |
+| JPEG | 19 | 31% |
+| Other | 21 | 34% |
 
 ---
 
 ## Appendix D: Audit Methodology
 
-**Tools:** Web Audit Suite v2.x (Pa11y WCAG 2.1 AA, performance metrics, SEO scoring, LLM suitability, MX Stack Completeness, Structured Data Quality, Discovery Readiness, Heading Quality, Cross-Page Consistency)
+**Tools:** Web Audit Suite v2.x (Checked in a rendered browser environment WCAG 2.1 AA, performance metrics, SEO scoring, LLM suitability, MX Stack Completeness, Structured Data Quality, Discovery Readiness, Heading Quality, Cross-Page Consistency)
 
-Pa11y is an open-source automated accessibility testing tool that checks web pages against the Web Content Accessibility Guidelines (WCAG 2.1 AA).
+We use a rendered browser environment to check web pages against the Web Content Accessibility Guidelines. Guidelines (WCAG 2.1 AA).
 
 **MX-specific metrics:** MX Stack Completeness measures all 7 metadata layers. Structured Data Quality (SDQ) scores JSON-LD entity richness. Discovery Readiness scores the robots.txt + sitemap + llms.txt + agent-card.json quartet. Cross-Page Consistency flags pages that deviate from site-wide patterns. Site Profile JSON enables cross-audit comparison. **Pipeline Survivability** runs eleven reading-resilience checks: truncation resilience, SPA shell resilience, soft-404 signalling, boilerplate balance, tabbed-disclosure avoidance, code-fence integrity, single-content-type negotiation, same-host redirects, heading specificity, early content start, and inline-tag bloat control. See **[MX: The Protocols Appendix S](https://mx.allabout.network/books/appendices/appendix-s.html)** for the full taxonomy and **[Appendix R](https://mx.allabout.network/books/appendices/appendix-r.html)** for the testing methodology.
 
-**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Shopify** (high confidence  -  multiple fingerprint signals). The main audit uses Shopify-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
+**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Shopify** (high confidence -  multiple fingerprint signals). The main audit uses Shopify-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
 
-**Frameworks detected:** **Tailwind CSS**  -  CSS framework; **Bootstrap**  -  CSS framework. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
-
-Tailwind CSS generates utility-class div chains that appear as bare containers to machines - this is the primary driver of the div-soup score.
+**Frameworks detected:** **WooCommerce** (medium confidence) -  CMS plugin; **Gutenberg (WordPress block editor)** (medium confidence) -  CMS plugin; **Yoast SEO** (low confidence) -  CMS plugin; **Cloudflare CDN** (low confidence) -  CDN / delivery. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
 
 **Link inventory:** We record every internal link found on every audited page with its URL, anchor text, and link type. We do not probe link status: a dedicated, rate-limited broken-link crawler handles that separately and avoids hammering the origin. Appendix B is a link inventory, not a broken-link list.
 
-**Scope:** 10 pages examined | Platform: Shopify | Analysis method: Hybrid (automated + manual verification) | robots.txt: Present (160 directives)
+**Scope:** 10 pages examined | Platform: Shopify | Analysis method: Hybrid (automated + manual verification) | robots.txt: Present (5 directives)
 
 **Measurement completeness:** Every probe completed during this audit, with no network errors or timeouts. The findings below rest on a full data collection.
 
@@ -402,16 +420,21 @@ We work toward a site - and an estate of documents beyond it - that any machine 
 
 ## Appendix E: Markdown Content Negotiation
 
-**Table 10**
+**Table 9**
+
+*Appendix E: Markdown Content Negotiation*
+
+The following table lists markdown content negotiation checks and results:
+**Table 9**
 
 *Appendix E: Markdown Content Negotiation*
 
 | Check | Result |
 |-------|--------|
-| URL probed | https://neomwellbeing.com |
-| HTTP status | 200 |
-| Content-Type returned | text/html; charset=utf-8 |
-| Markdown served | No  -  server returned HTML regardless of Accept header |
+| URL probed | https://www.playboy.com |
+| HTTP status | Unknown |
+| Content-Type returned | Unknown |
+| Markdown served | Unknown |
 
 The site returns standard HTML to all requests, including those carrying `Accept: text/markdown`. Markdown content negotiation is a feature that lets a server deliver a lighter, markup-free page to agents that request it - reducing the parsing load on the agent side. It is an optional enhancement with no compliance obligations attached. One consideration before enabling it: Markdown conversion strips `<head>` metadata, governance fields, and discovery signals, so any page carrying MX fields, canonical URIs, or structured data in the document head would lose those signals for agents that receive the Markdown version. Whether the reduction in parsing cost outweighs that loss is a publisher decision; this probe records the current state.
 
@@ -423,7 +446,12 @@ The site returns standard HTML to all requests, including those carrying `Accept
 
 The reference material cited in this report. Click the link on screen or scan the QR code on paper: both encode the same URL.
 
-**Table 11**
+**Table 10**
+
+*Further Reading*
+
+The following table records scans of link descriptions:
+**Table 10**
 
 *Further Reading*
 
@@ -446,7 +474,7 @@ The reference material cited in this report. Click the link on screen or scan th
 
 MX is to machines what UX is to users: it asks not whether a human can read this report, but whether a machine can read it, verify it, and act on it. A standard is credible only when we run on it ourselves, so we built this report to the standard it measures. You can inspect this PDF and read every claim it makes directly in your browser at the [MX Inspector](https://mx.allabout.network/tools/pdf-inspector.html) - no command-line tools, no login, no installation required. Drop the file, read the chain.
 
-This report carries its own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload neomwellbeing-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. What this audit measures on a client's behalf, this deliverable meets.
+We carry our own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload www-playboy-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. What this audit measures on a client's behalf, this deliverable meets.
 
 Machine-readable content is visible to agents and validators. Machine-trustworthy content adds a provenance layer - a dated, attested record that names who published it and under what rubric. Readable is what MX makes content; the provenance layer is what makes it trustworthy. The two do different jobs, and this report carries both. It is an example of what that looks like in practice.
 
@@ -458,15 +486,15 @@ A standard is credible only when we run on it ourselves. We hold this audit deli
 
 The AI evidence chain records every non-deterministic step: the model identifier, the SHA-256 of the system prompt we ran (so an auditor can verify the rubric we used), the SHA-256 of the output it produced, a short excerpt of the model's reasoning, and the human-intervention state. This chain is designed as evidence for AI-governance regimes: EU AI Act, UK ICO AI guidance, US NIST AI RMF, and Colorado AI Act. The framework citations are claims of relevance, not compliance grants; conformance with each regulation remains a legal duty of the operator. This PDF holds the full AI evidence chain inside its XMP metadata under `xmp:ProvenanceAiPayload`. A regulator inspecting the PDF alone receives the entire chain; the adjacent `*.provenance.ai.json` is a copy of the same JSON for tooling that prefers file access.
 
-The deterministic evidence chain is at `*.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
+We record the deterministic evidence chain in `*.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
 
-To extract the chain from the PDF, run `exiftool -b -XMP-mx:ProvenanceAiPayload neomwellbeing-com-report.pdf | jq .`. The `-b` flag is required so exiftool emits the raw payload; without it the output includes a label that breaks the JSON parse. The two chains share `auditId`, `startedAt`, `operator`, and a `provenance` header naming the exact git commit of the audit tooling that produced this run, so anyone can re-run it and verify byte-for-byte what we did. We prefer determinism to inference: explicit over inferred, recorded over remembered, a result you can reproduce over one we could only explain. Where a check can be made by a rule, a rule makes it, and the rule leaves a record rather than an opinion. That is why this chain shows what we did instead of asking you to trust a summary of it.
+To extract the chain from the PDF, run `exiftool -b -XMP-mx:ProvenanceAiPayload www-playboy-com-report.pdf | jq .`. The `-b` flag is required so exiftool emits the raw payload; without it the output includes a label that breaks the JSON parse. The two chains share `auditId`, `startedAt`, `operator`, and a `provenance` header naming the exact git commit of the audit tooling that produced this run, so anyone can re-run it and verify byte-for-byte what we did. We prefer determinism to inference: explicit over inferred, recorded over remembered, a result you can reproduce over one we could only explain. Where a check can be made by a rule, a rule makes it, and the rule leaves a record rather than an opinion. That is why this chain shows what we did instead of asking you to trust a summary of it.
 
 **Verify this report yourself - no tools, no login, no installation.** Drop this PDF into the [MX Inspector](https://mx.allabout.network/tools/pdf-inspector.html) to read the full provenance chain, operator identity, and attestation in your browser. Or run three commands directly against the file:
 
-1. Extract the full AI evidence chain from the PDF: `exiftool -b -XMP-mx:ProvenanceAiPayload neomwellbeing-com-report.pdf | jq .`
+1. Extract the full AI evidence chain from the PDF: `exiftool -b -XMP-mx:ProvenanceAiPayload www-playboy-com-report.pdf | jq .`
 2. Confirm the operator identity: the JSON contains `operator.name`, `operator.email`, and `operator.organisation` naming the accountable individual.
-3. Cross-reference the sidecar: `diff <(jq .auditId neomwellbeing-com-report.provenance.ai.json) <(exiftool -b -XMP-mx:ProvenanceAiPayload neomwellbeing-com-report.pdf | jq .auditId)`; both should return the same `auditId`.
+3. Cross-reference the sidecar: `diff <(jq .auditId www-playboy-com-report.provenance.ai.json) <(exiftool -b -XMP-mx:ProvenanceAiPayload www-playboy-com-report.pdf | jq .auditId)`; both should return the same `auditId`.
 
 The evidence does not require trust. It requires tools. That is the difference between a governance claim and a governance record.
 

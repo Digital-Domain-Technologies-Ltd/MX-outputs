@@ -66,7 +66,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | www.marriott.com | - | pending | - | - |
 | www.meetkai.com | - | pending | - | - |
 | www.paribu.com | - | pending | - | - |
-| www.playboy.com | - | pending | - | - |
+| www.playboy.com | 2026-07-01 | pass | [latest-copy.pdf](www.playboy.com/latest-copy.pdf) | [latest-copy.md](www.playboy.com/latest-copy.md) |
 | www.roamrobotics.com | - | pending | - | - |
 | www.steelatlas.vc | - | pending | - | - |
 | www.whiteroseclub.com | 2026-07-01 | pass | [latest-copy.pdf](www.whiteroseclub.com/latest-copy.pdf) | [latest-copy.md](www.whiteroseclub.com/latest-copy.md) |

@@ -90,7 +90,7 @@ Our scoring criteria follow published MX standards and proposed specifications m
 
 **What we cover here, and what MX covers.** This report looks at the web estate: every page served over HTTP, examined for metadata, structured data, accessibility, and what machines can read. MX runs deeper, covering every document type a business publishes (PDFs, data feeds, API responses, structured documents) and the machines that read them. The web estate is the foundation; the rest builds on it.
 
-**Audit scope.** Findings throughout this report describe what we observed on the 10 HTML pages we examined in depth, drawn from a sitemap of 5968 URLs. We also reviewed the site's discovery files (sitemap.xml, llms.txt). Structural findings - a missing header, a soft 404 pattern, a discovery file gap - hold across the full estate and are noted as such. Verdicts scoped to the sampled pages should not be extrapolated to the full estate without a wider audit.
+**Audit scope.** Findings throughout this report describe what we observed on the 10 HTML pages we examined in depth, drawn from a sitemap of 5969 URLs. We also reviewed the site's discovery files (sitemap.xml, llms.txt). Structural findings - a missing header, a soft 404 pattern, a discovery file gap - hold across the full estate and are noted as such. Verdicts scoped to the sampled pages should not be extrapolated to the full estate without a wider audit.
 
 ### A note on llms.txt
 
@@ -113,15 +113,15 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 | MX Stack Completeness | **61**/100 | `###########-------` Good |
 | Agent Readability | **85**/100 | `###############---` Excellent |
 | Pipeline Survivability | **77**/100 | `##############----` Excellent |
-| Machine Processing Speed | **9038** ms/page | Machine-Dense |
+| Machine Processing Speed | **854** ms/page | Machine-Heavy |
 
 *The three machine metrics measure different things. **Served-HTML Structure** is the semantic markup an agent reads before JavaScript runs; **Agent Readability** is how easily the content can be quoted once reached; **Pipeline Survivability** is whether a page survives an agent's fetch and ingest. A site can score low on one and high on another.*
 
-Agent Readability may have been adjusted down by up to 8 points for site-wide gaps that a machine may not be able to work around.
+Agent Readability was adjusted down by 8 points for site-wide gaps a machine cannot work around:
 
 - **Bare-div nesting (div soup) across most pages** (-8): 7 of 12 pages are heavy with bare-div nesting
 
-The site runs on **Shopify** (detected from multiple platform signals). We observed that the site appears to be an editorial or media publisher.
+The site runs on **Shopify** (detected from multiple platform signals). The site appears to be an editorial or media publisher.
 
 Schema.org types indicate a content or editorial context.
 
@@ -161,7 +161,7 @@ We found 6 identical inline fragment(s) repeated across multiple pages, totallin
 | css | 6644 | 9 | .adroll_consent_container{position:relative}.adroll_consent_ |
 | css | 581 | 8 | .css-4xx2wk{display:-webkit-inline-box;display:-webkit-inlin |
 
-**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src=".">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
+**Recommendation:** Move each duplicate fragment to a shared external file (`<link rel="stylesheet">` for CSS, `<script src="...">` for JS). The fragment hash in `consistency_analysis.json` identifies exactly which blocks are identical.
 
 ---
 
@@ -188,14 +188,11 @@ Analysis of text patterns across audited pages found content reaching Probably A
 
 | Page | Band | Signals |
 |------|------|---------|
-| `/programs` | Probably AI | prose patterns, vocabulary |
-| `…/bland-brands-beware-optimizelys-new-identity-brings-human-creativity-to-its-agentic-ai-and-aeo-ambitions` | Occasional | prose patterns, vocabulary, copula density, verbal tics |
-| `…/ai-and-accessibility-incredible-potential-inconvenient-questions` | Occasional | prose patterns, vocabulary, verbal tics |
-| `…/kentico-opens-its-site-of-the-year-2026-awards-as-first-major-dxp-with-a-best-use-of-ai-category` | Occasional | prose patterns, vocabulary, copula density, verbal tics |
-| `…/how-to-thrive-at-25-as-sitecore-charts-an-ai-future-community-remains-its-greatest-asset` | Occasional | vocabulary, prose patterns, verbal tics, copula density |
-| `…/how-cms-and-dxp-teams-can-use-generative-engine-optimization-to-increase-visibility-in-ai-generated-answers` | Occasional | prose patterns, vocabulary, verbal tics |
+| /programs | Probably AI | prose patterns, vocabulary |
 
-5 of 11 pages scored band 0 (no signals detected).
+5 of 11 pages scored clean - no AI-pattern signals detected on those pages.
+
+5 additional pages with long URLs are in `cmscritic-com-ai-tells.json` alongside this report.
 
 The pages show a hybrid style that balances predictable, formulaic phrasing with occasional natural variations in sentence length and word choice, giving the text a professional yet approachable tone. This blend is typical for industry-focused blog posts and award announcements, where concise clarity is prized while editorial nuance keeps readers engaged.
 
@@ -223,7 +220,7 @@ The pages show a hybrid style that balances predictable, formulaic phrasing with
 | Machine-Ready Estate | Web estate + PDFs + data feeds + APIs + documents | The full machine-readable estate, beyond the web pages |
 | Data-Sovereign Option | Regulated industries | Run the full audit pipeline on your own infrastructure - no client content leaves your network |
 
-This audit is a starting point. Our goal is a site any machine can read, trust, and act on, and a dated, attested record you can show to a regulator, a partner, or an acquirer on request. Reaching it (structured data, discovery files, accessibility, governance metadata, and re-audit on a schedule you set) is available as a managed service. We also run training sessions that give development teams the MX vocabulary and implementation patterns directly, so the gap between findings and fixes is weeks, not quarters. To take any of it further, contact CogNovaMX Ltd at <info@cognovamx.com>.
+This audit is a starting point. The outcome we work toward is a site any machine can read, trust, and act on, and a dated, attested record you can show to a regulator, a partner, or an acquirer on request. Reaching it (structured data, discovery files, accessibility, governance metadata, and re-audit on a schedule you set) is available as a managed service. We also run training sessions that give development teams the MX vocabulary and implementation patterns directly, so the gap between findings and fixes is weeks, not quarters. To take any of it further, contact CogNovaMX Ltd at <info@cognovamx.com>.
 
 ---
 
@@ -282,15 +279,15 @@ To set up a remediation plan, contact info@cognovamx.com.
   SEO 84 · A11y 65 · Backend 70 · Served 73 · Rendered 52
 - **/programs**
   SEO 84 · A11y 65 · Backend 70 · Served 95 · Rendered 77
-- **./bland-brands-beware-optimizelys-new-identity-bring.**
+- **.../bland-brands-beware-optimizelys-new-identity-bring...**
   SEO 75 · A11y 60 · Backend 70 · Served 82 · Rendered 65
-- **./ai-and-accessibility-incredible-potential-inconven.**
+- **.../ai-and-accessibility-incredible-potential-inconven...**
   SEO 82 · A11y 45 · Backend 70 · Served 93 · Rendered 75
-- **./kentico-opens-its-site-of-the-year-2026-awards-as-.**
+- **.../kentico-opens-its-site-of-the-year-2026-awards-as-...**
   SEO 76 · A11y 45 · Backend 70 · Served 93 · Rendered 75
-- **./how-to-thrive-at-25-as-sitecore-charts-an-ai-futur.**
+- **.../how-to-thrive-at-25-as-sitecore-charts-an-ai-futur...**
   SEO 65 · A11y 60 · Backend 70 · Served 82 · Rendered 65
-- **./how-cms-and-dxp-teams-can-use-generative-engine-op.**
+- **.../how-cms-and-dxp-teams-can-use-generative-engine-op...**
   SEO 74 · A11y 45 · Backend 70 · Served 93 · Rendered 75
 - **/articles**
   SEO 83 · A11y 60 · Backend 70 · Served 94 · Rendered 73
@@ -328,6 +325,8 @@ We reviewed 346 images across the audited set: 31 SVG, 80 PNG, 228 JPEG and 7 in
 
 On loading strategy, 265 images are marked `loading="lazy"` and 0 `loading="eager"`, while 81 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
+The table below shows how image formats are distributed across the 346 images in the audited set. None use WebP, the modern format that typically reduces file size by 25-35% over PNG or JPEG with no visible quality loss. The "Other" category includes formats such as GIF, AVIF, BMP, and unidentifiable types.
+
 **Table 8**
 
 *Appendix C: Image Efficiency*
@@ -349,9 +348,9 @@ Pa11y is an open-source automated accessibility testing tool that checks web pag
 
 **MX-specific metrics:** MX Stack Completeness measures all 7 metadata layers. Structured Data Quality (SDQ) scores JSON-LD entity richness. Discovery Readiness scores the robots.txt + sitemap + llms.txt + agent-card.json quartet. Cross-Page Consistency flags pages that deviate from site-wide patterns. Site Profile JSON enables cross-audit comparison. **Pipeline Survivability** runs eleven reading-resilience checks: truncation resilience, SPA shell resilience, soft-404 signalling, boilerplate balance, tabbed-disclosure avoidance, code-fence integrity, single-content-type negotiation, same-host redirects, heading specificity, early content start, and inline-tag bloat control. See **[MX: The Protocols Appendix S](https://mx.allabout.network/books/appendices/appendix-s.html)** for the full taxonomy and **[Appendix R](https://mx.allabout.network/books/appendices/appendix-r.html)** for the testing methodology.
 
-**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Shopify** (high confidence -  multiple fingerprint signals). The main audit uses Shopify-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
+**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Shopify** (high confidence  -  multiple fingerprint signals). The main audit uses Shopify-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
 
-**Frameworks detected:** **Next.js** (medium confidence) -  JS framework; **Bootstrap** -  CSS framework. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
+**Frameworks detected:** **Next.js** (medium confidence)  -  JS framework; **Bootstrap**  -  CSS framework. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
 
 Next.js provides server-side rendering, giving agents full HTML on first fetch with no JavaScript dependency.
 
@@ -412,7 +411,7 @@ The reference material cited in this report. Click the link on screen or scan th
 
 MX is to machines what UX is to users: it asks not whether a human can read this report, but whether a machine can read it, verify it, and act on it. A standard is credible only when we run on it ourselves, so we built this report to the standard it measures.
 
-We carry our own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. The audit measures what we cover on a client's behalf, and this deliverable meets those metrics.
+This report carries its own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. What this audit measures on a client's behalf, this deliverable meets.
 
 Machine-readable content is visible to agents and validators. Machine-trustworthy content adds a provenance layer - a dated, attested record that names who published it and under what rubric. Readable is what MX makes content; the provenance layer is what makes it trustworthy. The two do different jobs, and this report carries both. It is an example of what that looks like in practice.
 
@@ -420,11 +419,11 @@ Machine-readable content is visible to agents and validators. Machine-trustworth
 
 ## Practice What We Preach: This Audit's Own Evidence Chain
 
-A standard is credible only when we run on it ourselves. We hold this audit deliverable to the same MX standards we apply, and consider this a working proof of the practice it recommends. Every consequential step that produced this report (LLM-driven prose passes, deterministic gate verdicts, multi-agent attribution probes, repair iterations) is recorded in two adjacent JSON sidecars next to this PDF.
+A standard is credible only when we run on it ourselves. We hold this audit deliverable to the same MX standards we apply to the audited site; consider this working proof of the practice it recommends. Every consequential step that produced this report (LLM-driven prose passes, deterministic gate verdicts, multi-agent attribution probes, repair iterations) is recorded in two adjacent JSON sidecars next to this PDF.
 
 The AI evidence chain records every non-deterministic step: the model identifier, the SHA-256 of the system prompt we ran (so an auditor can verify the rubric we used), the SHA-256 of the output it produced, a short excerpt of the model's reasoning, and the human-intervention state. This chain is designed as evidence for AI-governance regimes: EU AI Act, UK ICO AI guidance, US NIST AI RMF, and Colorado AI Act. The framework citations are claims of relevance, not compliance grants; conformance with each regulation remains a legal duty of the operator. This PDF holds the full AI evidence chain inside its XMP metadata under `xmp:ProvenanceAiPayload`. A regulator inspecting the PDF alone receives the entire chain; the adjacent `*.provenance.ai.json` is a copy of the same JSON for tooling that prefers file access.
 
-Every rule-driven step is recorded by the deterministic evidence chain, which resides at `*.provenance.deterministic.json`. gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
+The deterministic evidence chain is at `*.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
 
 To extract the chain from the PDF, run `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`. The `-b` flag is required so exiftool emits the raw payload; without it the output includes a label that breaks the JSON parse. The two chains share `auditId`, `startedAt`, `operator`, and a `provenance` header naming the exact git commit of the audit tooling that produced this run, so anyone can re-run it and verify byte-for-byte what we did. We prefer determinism to inference: explicit over inferred, recorded over remembered, a result you can reproduce over one we could only explain. Where a check can be made by a rule, a rule makes it, and the rule leaves a record rather than an opinion. That is why this chain shows what we did instead of asking you to trust a summary of it.
 
