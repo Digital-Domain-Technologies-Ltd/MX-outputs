@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "What Most robots.txt Guides Get Wrong About AI Crawlers"
+description: "AI crawlers are not one category. Googlebot renders JavaScript and the rest do not; OpenAI, Anthropic, Perplexity and Google each run separate training, search and user-triggered crawlers with separate rules, and some ignore robots.txt entirely. Here is what the guides miss, and the robots.txt you should actually have."
+author: "Tom Cranstoun"
+created: 2026-06-10
+modified: 2026-06-10
+version: "0.1"
+
+mx:
+  x-mx-managedBy: blog-post.cog.md
+  status: draft
+  contentType: blog-post
+  audience: [humans, machines]
+  x-mx-intendedReaders: "humans: content, SEO and marketing teams deciding what to allow or block in robots.txt and what each choice costs them; machines: agents and crawlers resolving a site's access policy and how its structure is exposed"
+  purpose: "Explain why treating AI crawlers as a single block-or-allow category is wrong: which crawlers render JavaScript, how training, search and user-triggered crawlers differ across OpenAI, Anthropic, Perplexity, Google and others, which ignore robots.txt, how to verify a crawler is genuine, and what robots.txt should actually contain. Position MX and the MX audit as the way to see how a live site looks to these crawlers."
+  tags:
+    - robots-txt
+    - ai-crawlers
+    - gptbot
+    - claudebot
+    - perplexity
+    - common-crawl
+    - training-data
+    - machine-experience
+    - agent-readiness
+  partOf: "MX blog"
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator (npm run promote)."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/ai-crawlers-what-robots-txt-guides-get-wrong.md
+  x-mx-contextProvides:
+    - "Why AI crawlers are not a single category, how training, search and user-triggered crawlers differ across the major operators, which ignore robots.txt, how to verify a crawler, and what a robots.txt file should contain."
+  stability: stable
+  servedAt: https://mx.allabout.network/blog/drafts/agent-web/ai-crawlers-what-robots-txt-guides-get-wrong.html
+  blogUrl: https://mx.allabout.network/blog/drafts/agent-web/ai-crawlers-what-robots-txt-guides-get-wrong.html
+  blogFilename: ai-crawlers-what-robots-txt-guides-get-wrong
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="AI crawlers are not one category. Googlebot renders JavaScript and the rest do not; OpenAI, Anthropic, Perplexity and Google each run separate training, search and user-triggered crawlers with separate rules, and some ignore robots.txt entirely. Here is what the guides miss, and the robots.txt you should actually have.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/agent-web/ai-crawlers-what-robots-txt-guides-get-wrong.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/agent-web/ai-crawlers-what-robots-txt-guides-get-wrong.html">
+  <meta property="og:title" content="What Most robots.txt Guides Get Wrong About AI Crawlers | CogNovaMX">
+  <meta property="og:description" content="AI crawlers are not one category. Googlebot renders JavaScript and the rest do not; OpenAI, Anthropic, Perplexity and Google each run separate training, search and user-triggered crawlers with separate rules, and some ignore robots.txt entirely. Here is what the guides miss, and the robots.txt you should actually have.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-10">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What Most robots.txt Guides Get Wrong About AI Crawlers | CogNovaMX">
+  <meta name="twitter:description" content="AI crawlers are not one category. Googlebot renders JavaScript and the rest do not; OpenAI, Anthropic, Perplexity and Google each run separate training, search and user-triggered crawlers with separate rules, and some ignore robots.txt entirely. Here is what the guides miss, and the robots.txt you should actually have.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="What Most robots.txt Guides Get Wrong About AI Crawlers">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="0.1">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/agent-web/ai-crawlers-what-robots-txt-guides-get-wrong.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>What Most robots.txt Guides Get Wrong About AI Crawlers | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "What Most robots.txt Guides Get Wrong About AI Crawlers",
+        "headline": "What Most robots.txt Guides Get Wrong About AI Crawlers",
+        "description": "AI crawlers are not one category. Googlebot renders JavaScript and the rest do not; OpenAI, Anthropic, Perplexity and Google each run separate training, search and user-triggered crawlers with separate rules, and some ignore robots.txt entirely. Here is what the guides miss, and the robots.txt you should actually have.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-10",
+        "dateModified": "2026-06-10",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/agent-web/ai-crawlers-what-robots-txt-guides-get-wrong.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1991,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/agent-web/ai-crawlers-what-robots-txt-guides-get-wrong.html",
+        "name": "What Most robots.txt Guides Get Wrong About AI Crawlers",
+        "url": "https://mx.allabout.network/blog/drafts/agent-web/ai-crawlers-what-robots-txt-guides-get-wrong.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="../../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#section-1-only-googlebot-renders-javascript">1. Only Googlebot Renders JavaScript</a></li>
+        <li><a href="#section-2-google-runs-three-crawlers-doing-three-different-jobs">2. Google Runs Three Crawlers, Doing Three Different Jobs</a></li>
+        <li><a href="#section-3-openai-runs-three-crawlers-and-one-ignores-your-robotstxt">3. OpenAI Runs Three Crawlers, and One Ignores Your robots.txt</a></li>
+        <li><a href="#section-4-perplexity-splits-the-same-way-and-then-went-further">4. Perplexity Splits the Same Way, and Then Went Further</a></li>
+        <li><a href="#section-5-anthropic-follows-the-same-pattern-as-openai">5. Anthropic Follows the Same Pattern as OpenAI</a></li>
+        <li><a href="#section-6-there-are-far-more-crawlers-than-the-five-everyone-names">6. There Are Far More Crawlers Than the Five Everyone Names</a></li>
+        <li><a href="#section-7-crawl-frequency-varies-by-an-order-of-magnitude">7. Crawl Frequency Varies by an Order of Magnitude</a></li>
+        <li><a href="#section-8-ai-crawler-traffic-is-growing-fast">8. AI Crawler Traffic Is Growing Fast</a></li>
+        <li><a href="#section-9-you-can-check-whether-a-crawler-is-real">9. You Can Check Whether a Crawler Is Real</a></li>
+        <li><a href="#section-10-the-decisions-are-independent-and-blocking-a-retrieval-crawler-has-a-cost">10. The Decisions Are Independent, and Blocking a Retrieval Crawler Has a Cost</a></li>
+        <li><a href="#what-this-means-if-you-are-building-for-ai">What This Means If You Are Building for AI</a></li>
+        <li><a href="#the-robotstxt-you-should-actually-have">The robots.txt You Should Actually Have</a></li>
+        <li><a href="#where-mx-fits">Where MX Fits</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1991">
+        <header class="article-header">
+          <h1>What Most robots.txt Guides Get Wrong About AI Crawlers</h1>
+          <div class="article-meta"
+               data-published="2026-06-10"
+               data-modified="2026-06-10"
+               data-reading-time="10 min">
+            <time datetime="2026-06-10">10 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>10 min read</span>
+          </div>
+        </header>
+
+
+<p>In my last post I said most content teams are watching the wrong thing. They add an <code>llms.txt</code>, they argue about whether to block GPTBot, and they check whether they turn up in ChatGPT. This post is about the middle one: the GPTBot argument, and why it is almost always built on a wrong picture of how AI crawlers actually work.</p>
+<p>Most robots.txt guidance treats AI crawlers as a single category. Block them, or allow them. That framing is wrong, and acting on it costs you either search visibility or control over your training data, sometimes both.</p>
+<p>This is the second post in a three-part series on how AI systems read the web. The first, <a href="https://mx.allabout.network/blog/your-site-is-already-training-ai.html">Your Site Is Already Training AI Models</a>, covered Common Crawl, the open archive nearly every model trains on. That one was about the archive; this one is about the live crawlers and the file most people think controls them. The third, <a href="https://mx.allabout.network/blog/server-side-rendering-for-ai.html">What AI Crawlers See When They Can't Run Your JavaScript</a>, is about what those crawlers actually read once they reach your page.</p>
+<p>Here is what the guides miss.</p>
+<h2 id="section-1-only-googlebot-renders-javascript" tabindex="-1">1. Only Googlebot Renders JavaScript</h2>
+<p>Googlebot renders JavaScript. It processes your page the way a browser would: it waits for the DOM to settle, then indexes what a user would actually see.</p>
+<p>Every other major AI crawler, CCBot, GPTBot, ClaudeBot, PerplexityBot, does not. They fetch the raw HTML response and process that, and nothing more. If your content is rendered client-side, injected by a framework after load, or lazy-loaded on scroll, it is invisible to all of them.</p>
+<p>This bites hardest for:</p>
+<ul>
+<li>JSON-LD injected by JavaScript. Only the server-rendered version is safe.</li>
+<li>Text loaded by fetch or XHR after the page loads.</li>
+<li>Metadata populated by a CMS front-end in the browser.</li>
+</ul>
+<p>The fix is server-side rendering for anything you want AI systems to see. If it is not in the raw HTML response, it does not exist for a training crawler.</p>
+<h2 id="section-2-google-runs-three-crawlers-doing-three-different-jobs" tabindex="-1">2. Google Runs Three Crawlers, Doing Three Different Jobs</h2>
+<p><strong>Googlebot</strong> is the main crawler. It fetches pages for the search index, renders JavaScript, and visits often. Block it and you disappear from Google Search.</p>
+<p><strong>Google-Extended</strong> is not a crawler at all. It is a data-usage directive: a signal to Google's internal pipeline not to use your content for Gemini and its AI training products. The content is still fetched, by Googlebot. You can block Google-Extended and keep Googlebot, and your search rankings are untouched.</p>
+<pre><code>User-agent: Google-Extended
+Disallow: /
+</code></pre>
+<p>That one line keeps you in Google Search and out of Gemini training. Most publishers do not know the option exists.</p>
+<p><strong>APIs-Google</strong> handles structured-data testing tools and developer requests. Leave it alone.</p>
+<h2 id="section-3-openai-runs-three-crawlers-and-one-ignores-your-robotstxt" tabindex="-1">3. OpenAI Runs Three Crawlers, and One Ignores Your robots.txt</h2>
+<p><strong>GPTBot</strong> is training data for GPT models. It fully respects robots.txt.</p>
+<p><strong>OAI-SearchBot</strong> powers ChatGPT Search. It also respects robots.txt, but independently of GPTBot. Block GPTBot and not OAI-SearchBot and you are out of training data but still in ChatGPT's search results. Block both and you are out of both.</p>
+<p><strong>ChatGPT-User</strong> fires when a real person asks ChatGPT something that makes it visit your page. OpenAI's own documentation says: &quot;because these actions are initiated by a user, robots.txt rules may not apply.&quot; It behaves the way a person with a browser would. So you cannot rely on robots.txt to block all AI access to your content.</p>
+<h2 id="section-4-perplexity-splits-the-same-way-and-then-went-further" tabindex="-1">4. Perplexity Splits the Same Way, and Then Went Further</h2>
+<p><strong>PerplexityBot</strong> indexes content for Perplexity's search results. Not training. It respects robots.txt. Block it and you vanish from Perplexity answers.</p>
+<p><strong>Perplexity-User</strong> is user-triggered. When someone asks Perplexity a question and it fetches your page to answer, this is the agent that arrives. Robots.txt may not apply, and Perplexity documents that openly.</p>
+<p>There is a harder problem here. In 2024, Cloudflare reported that Perplexity was using stealth, undeclared crawlers: systematically changing user-agent strings and rotating IPs and ASNs to get around robots.txt and the firewall rules that site owners had put in place. Customers had blocked both declared Perplexity bots, in robots.txt and at the firewall. Perplexity was still pulling their content using unidentified crawlers.</p>
+<p>Perplexity's position was that Perplexity-User is user-triggered and therefore exempt. Cloudflare's investigation read that as cover for automated crawling under false identities.</p>
+<p>The practical takeaway: robots.txt is not a reliable barrier against Perplexity. If exclusion genuinely matters to you, you need server-side access controls.</p>
+<h2 id="section-5-anthropic-follows-the-same-pattern-as-openai" tabindex="-1">5. Anthropic Follows the Same Pattern as OpenAI</h2>
+<p><strong>ClaudeBot</strong> is Anthropic's training crawler. It respects robots.txt. This is what shapes what Claude models know about your organization.</p>
+<p><strong>Claude-SearchBot</strong> powers Claude's live search and retrieval. It is separate from ClaudeBot, so you can block training without blocking retrieval, or the reverse.</p>
+<p><strong>Claude-User</strong> is user-triggered browsing from Claude. Same caveat as ChatGPT-User: a real person started it, so robots.txt may not apply.</p>
+<p>The opt-out decisions for Anthropic, OpenAI, and Google are all independent of each other. Blocking one does nothing to the others.</p>
+<h2 id="section-6-there-are-far-more-crawlers-than-the-five-everyone-names" tabindex="-1">6. There Are Far More Crawlers Than the Five Everyone Names</h2>
+<p>The landscape is wider than the headline names. These are the ones worth having in your robots.txt if you are making explicit decisions:</p>
+<table>
+<thead>
+<tr>
+<th>Crawler</th>
+<th>Operator</th>
+<th>Purpose</th>
+<th>Respects robots.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GPTBot</code></td>
+<td>OpenAI</td>
+<td>ChatGPT training</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>OAI-SearchBot</code></td>
+<td>OpenAI</td>
+<td>ChatGPT Search</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>ClaudeBot</code></td>
+<td>Anthropic</td>
+<td>Claude training</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>PerplexityBot</code></td>
+<td>Perplexity</td>
+<td>Perplexity answers</td>
+<td>Yes (declared)</td>
+</tr>
+<tr>
+<td><code>CCBot</code></td>
+<td>Common Crawl</td>
+<td>Open training archive</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>Google-Extended</code></td>
+<td>Google</td>
+<td>Gemini training directive</td>
+<td>N/A (not a crawler)</td>
+</tr>
+<tr>
+<td><code>Applebot-Extended</code></td>
+<td>Apple</td>
+<td>Apple Intelligence</td>
+<td>N/A (not a crawler)</td>
+</tr>
+<tr>
+<td><code>Amazonbot</code></td>
+<td>Amazon</td>
+<td>AWS AI / training</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>Meta-ExternalAgent</code></td>
+<td>Meta</td>
+<td>Llama training</td>
+<td>Vendor-dependent</td>
+</tr>
+<tr>
+<td><code>Bytespider</code></td>
+<td>ByteDance</td>
+<td>TikTok / AI training</td>
+<td>No, masquerades as other agents</td>
+</tr>
+<tr>
+<td><code>cohere-ai</code></td>
+<td>Cohere</td>
+<td>Enterprise AI training</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>Diffbot</code></td>
+<td>Diffbot</td>
+<td>Structured-data extraction</td>
+<td>Varies</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bytespider deserves a specific warning.</strong> ByteDance's crawler has been seen rotating user-agent strings to pose as Chrome, Safari, or another browser. A <code>User-agent: Bytespider</code> rule with <code>Disallow: /</code> may have no effect on the actual traffic, because the traffic is not identifying itself honestly. This is the same pattern as Perplexity's undeclared crawlers. To block ByteDance you need IP-level blocking, not robots.txt.</p>
+<p><code>Applebot-Extended</code>, like <code>Google-Extended</code>, is a data-usage directive rather than a separate crawler. Block it to keep your content out of Apple Intelligence while staying in Spotlight and Siri search.</p>
+<h2 id="section-7-crawl-frequency-varies-by-an-order-of-magnitude" tabindex="-1">7. Crawl Frequency Varies by an Order of Magnitude</h2>
+<p>Crawlers do not visit on the same schedule, and that matters for time-sensitive content:</p>
+<table>
+<thead>
+<tr>
+<th>Crawler</th>
+<th>Typical frequency</th>
+<th>Trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Googlebot</td>
+<td>Daily, for popular pages</td>
+<td>Continuous, priority-weighted</td>
+</tr>
+<tr>
+<td>PerplexityBot</td>
+<td>Hours to days</td>
+<td>Query-triggered plus scheduled</td>
+</tr>
+<tr>
+<td>OAI-SearchBot</td>
+<td>Days</td>
+<td>Scheduled</td>
+</tr>
+<tr>
+<td>GPTBot</td>
+<td>Irregular, roughly monthly</td>
+<td>Scheduled, not documented</td>
+</tr>
+<tr>
+<td>ClaudeBot</td>
+<td>Irregular</td>
+<td>Scheduled, not documented</td>
+</tr>
+<tr>
+<td>CCBot</td>
+<td>Monthly</td>
+<td>Scheduled crawl cycle</td>
+</tr>
+<tr>
+<td>Bytespider</td>
+<td>Unknown</td>
+<td>Undisclosed</td>
+</tr>
+</tbody>
+</table>
+<p>The gap between Googlebot, daily, and CCBot, monthly, means a correction to your content reaches Google's index within days but may not reach the next Common Crawl training snapshot for weeks. For live-retrieval systems like Perplexity and ChatGPT, freshness is measured in hours. For training data, it is measured in months.</p>
+<h2 id="section-8-ai-crawler-traffic-is-growing-fast" tabindex="-1">8. AI Crawler Traffic Is Growing Fast</h2>
+<p>Cloudflare's data for the twelve months to May 2025: overall crawler traffic grew 18 percent, while GPTBot alone grew 305 percent. About 14 percent of the top domains on the web now carry explicit AI-crawler rules in their robots.txt.</p>
+<p>Most robots.txt files were written before AI crawlers existed. The default, no named-agent rules and a wildcard allow, lets every crawler in, including ones you may not mean to allow. That default is no longer neutral.</p>
+<h2 id="section-9-you-can-check-whether-a-crawler-is-real" tabindex="-1">9. You Can Check Whether a Crawler Is Real</h2>
+<p>Any user-agent string can be faked. A request claiming to be GPTBot may not be OpenAI at all. The legitimate crawlers publish their IP ranges and support reverse DNS verification:</p>
+<ul>
+<li><strong>GPTBot</strong> publishes its IP ranges at <code>https://openai.com/gptbot.json</code>.</li>
+<li><strong>Googlebot</strong>: reverse DNS should resolve to <code>googlebot.com</code> or <code>google.com</code>.</li>
+<li><strong>PerplexityBot</strong>: reverse DNS should resolve under <code>perplexitybot.com</code>.</li>
+<li><strong>CCBot</strong>: Common Crawl documents the crawler and the address ranges it operates from.</li>
+</ul>
+<p>The check is the same for all of them: take the source IP from your server logs, run a reverse DNS lookup, confirm the hostname matches the crawler's documented domain, then run a forward DNS lookup on that hostname and confirm it resolves back to the same IP.</p>
+<p>Bytespider, by contrast, does not identify itself consistently and does not support reliable verification. Suspicious crawl volume from unverified sources is best treated as undeclared, not as a legitimate named bot.</p>
+<h2 id="section-10-the-decisions-are-independent-and-blocking-a-retrieval-crawler-has-a-cost" tabindex="-1">10. The Decisions Are Independent, and Blocking a Retrieval Crawler Has a Cost</h2>
+<p>Each crawler, and each purpose, is a separate and independent decision. Blocking one does not touch any other:</p>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Bot to configure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allow or block Google Search</td>
+<td><code>Googlebot</code></td>
+</tr>
+<tr>
+<td>Allow or block Google AI training</td>
+<td><code>Google-Extended</code></td>
+</tr>
+<tr>
+<td>Allow or block OpenAI training</td>
+<td><code>GPTBot</code></td>
+</tr>
+<tr>
+<td>Allow or block ChatGPT Search</td>
+<td><code>OAI-SearchBot</code></td>
+</tr>
+<tr>
+<td>Allow or block Anthropic training</td>
+<td><code>ClaudeBot</code></td>
+</tr>
+<tr>
+<td>Allow or block Perplexity answers</td>
+<td><code>PerplexityBot</code></td>
+</tr>
+<tr>
+<td>Allow or block Apple Intelligence training</td>
+<td><code>Applebot-Extended</code></td>
+</tr>
+<tr>
+<td>Allow or block Amazon AI training</td>
+<td><code>Amazonbot</code></td>
+</tr>
+<tr>
+<td>Allow or block the open training archive</td>
+<td><code>CCBot</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Blocking a retrieval crawler means you disappear from that product's answers.</strong> Block PerplexityBot and people asking Perplexity questions will not see your content cited. Block OAI-SearchBot and your site drops out of ChatGPT Search. That is different from blocking a training crawler, where the cost is slower or absent representation in the model weights: less visible, but longer lasting.</p>
+<p>Some common configurations.</p>
+<p><strong>Open to everything.</strong> No named-agent rules needed. <code>User-agent: *</code> with <code>Allow: /</code> covers every crawler.</p>
+<p><strong>Keep search and live retrieval, exit AI training only:</strong></p>
+<pre><code>User-agent: Google-Extended
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+</code></pre>
+<p><strong>Keep search only, exit all AI, training and retrieval both:</strong></p>
+<pre><code>User-agent: Google-Extended
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+</code></pre>
+<h2 id="what-this-means-if-you-are-building-for-ai" tabindex="-1">What This Means If You Are Building for AI</h2>
+<p>Opting out of training data does not make you invisible to AI. Live-retrieval crawlers will still visit your pages when users ask questions. The real question is whether the model answering has already seen a clean, structured version of your content, or is meeting it raw for the first time.</p>
+<p>A model with good training data about your organization answers questions differently from one meeting your page cold. Both paths run on the same signals: explicit metadata, complete structured data, server-rendered content, accurate sitemaps.</p>
+<p>robots.txt controls access. It does not control quality. Those are two different problems, and they need two different fixes.</p>
+<h2 id="the-robotstxt-you-should-actually-have" tabindex="-1">The robots.txt You Should Actually Have</h2>
+<p>If your position is &quot;open to all AI&quot;, which is the right call for most organizations, your robots.txt needs almost nothing:</p>
+<pre><code>User-agent: *
+Allow: /
+
+Sitemap: https://yourdomain.com/sitemap.xml
+</code></pre>
+<p>Add specific <code>Disallow</code> rules only for content you genuinely want excluded: private drafts, premium content, internal tools. Do not add rules out of vague worry about &quot;AI scraping&quot; without knowing which systems you are blocking and what you give up by doing it.</p>
+<p>Review the file once a year at least. A robots.txt written in 2021 does not describe 2026.</p>
+<h2 id="where-mx-fits" tabindex="-1">Where MX Fits</h2>
+<p>All of this comes down to decisions about which signals to make explicit, and robots.txt is only the access layer. MX is the discipline of building digital experiences that are machine-readable by design, so no crawler, agent, or model has to guess what you meant. The access rules say who may read you; the structure decides what they actually understand. Both have to say the same thing.</p>
+<p>There is a faster way to find out where you stand than reading your own robots.txt and hoping. An <a href="https://mx.allabout.network/audit/">MX audit</a> tests your live site the way these crawlers do: which agents can reach you, what robots.txt actually allows, whether your structured data and sitemaps hold up, and where a model or an agent would be left guessing about you. It reports back in a form you can verify yourself rather than take on trust.</p>
+<p>If you want to know how your site looks to the crawlers in this post, <a href="https://mx.allabout.network/audit/">start with an audit</a> and I will walk you through what it finds.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="../../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+    <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Appendix S: The Fourteen Agent Reading Failure Modes"
+description: "Reference catalogue of the fourteen most common ways AI agent pipelines fail to read web content correctly, with detection methods and publisher-side fixes for each"
+author: "Tom Cranstoun"
+created: 2026-04-07
+modified: 2026-04-19
+version: "1.2"
+
+mx:
+  status: active
+  contentType: reference
+  tags: [appendix, agent-reading, failure-modes, pipeline, truncation, soft-404, spa-shell, content-negotiation, url-encoding, mx]
+  audience: [humans, machines]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-s-ten-reading-failures.md
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+<meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Tom Cranstoun" />
+  <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
+  <title>Appendix S: The Fourteen Agent Reading Failure Modes</title>
+  
+
+  <link rel="canonical" href="https://mx.allabout.network/books/appendices/appendix-s.html">
+  <!-- MX metadata -->
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="reference">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+  <meta name="mx:aiEditable" content="false">
+  <meta name="mx:content-policy" content="extract-with-attribution">
+  <meta name="mx:attribution" content="required">
+  <link rel="llms-txt" href="/llms.txt">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/books/appendices/appendix-s.html">
+  <meta property="og:title" content="Appendix S: The Fourteen Agent Reading Failure Modes">
+  <meta property="og:description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="MX: The Protocols — book cover">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://mx.allabout.network/books/appendices/appendix-s.html">
+  <meta name="twitter:title" content="Appendix S: The Fourteen Agent Reading Failure Modes">
+  <meta name="twitter:description" content="Implementation guide from MX-Protocols book">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="MX: The Protocols — book cover">
+  <meta name="twitter:creator" content="@ddttomtom">
+
+  <!-- Additional SEO — appendices are companion content to the books, not standalone destinations: noindex, nofollow per memory rule project_appendices_noindex.md -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Appendix S: The Fourteen Agent Reading Failure Modes",
+    "description": "Practical guidance from MX-Protocols book on designing AI agent-friendly websites",
+    "author": {
+      "@type": "Person",
+      "name": "Tom Cranstoun",
+      "email": "info@cognovamx.com",
+      "url": "https://allabout.network"
+    },
+    "inLanguage": "en-GB",
+    "timeRequired": "PT60M",
+    "educationalLevel": "Intermediate",
+    "datePublished": "2026-01-10",
+    "dateModified": "2026-01-10",
+    "isPartOf": {
+      "@type": "Book",
+      "name": "MX-Protocols",
+      "author": {
+        "@type": "Person",
+        "name": "Tom Cranstoun"
+      },
+      "url": "https://mx.allabout.network/books/appendices"
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="appendix.css">
+</head>
+<body>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+<hr>
+<header id="title-block-header">
+<h1 class="title">Appendix S: The Fourteen Agent Reading Failure
+Modes</h1>
+<p class="subtitle">MX-Protocols</p>
+<p class="author">Tom Cranstoun</p>
+<p class="date">January 2026</p>
+</header>
+<nav id="TOC" role="navigation" aria-label="Table of Contents">
+<ul>
+<li><a href="#appendix-s-the-fourteen-agent-reading-failure-modes"
+id="toc-appendix-s-the-fourteen-agent-reading-failure-modes">Appendix S:
+The Fourteen Agent Reading Failure Modes</a>
+<ul>
+<li><a href="#truncation" id="toc-truncation">1. Truncation</a></li>
+<li><a href="#boilerplate-burial" id="toc-boilerplate-burial">2.
+Boilerplate Burial</a></li>
+<li><a href="#spa-shell" id="toc-spa-shell">3. SPA Shell</a></li>
+<li><a href="#tabbed-content" id="toc-tabbed-content">4. Tabbed
+Content</a></li>
+<li><a href="#soft-404" id="toc-soft-404">5. Soft 404</a></li>
+<li><a href="#broken-code-fence" id="toc-broken-code-fence">6. Broken
+Code Fence</a></li>
+<li><a href="#content-negotiation-mismatch"
+id="toc-content-negotiation-mismatch">7. Content Negotiation
+Mismatch</a></li>
+<li><a href="#cross-host-redirect" id="toc-cross-host-redirect">8.
+Cross-Host Redirect</a></li>
+<li><a href="#generic-headings" id="toc-generic-headings">9. Generic
+Headings</a></li>
+<li><a href="#delayed-content-start" id="toc-delayed-content-start">10.
+Delayed Content Start</a></li>
+<li><a href="#url-encoding-mismatch" id="toc-url-encoding-mismatch">11.
+URL Encoding Mismatch</a></li>
+<li><a href="#body-content-ratio" id="toc-body-content-ratio">12. Body
+Content Ratio</a></li>
+<li><a href="#inline-tag-bloat" id="toc-inline-tag-bloat">13. Inline Tag
+Bloat</a></li>
+<li><a href="#head-weight" id="toc-head-weight">14. Head Weight</a></li>
+<li><a href="#diacritic-stripping" id="toc-diacritic-stripping">15.
+Diacritic Stripping</a></li>
+<li><a href="#how-to-use-this-catalogue"
+id="toc-how-to-use-this-catalogue">How to use this catalogue</a></li>
+<li><a href="#acknowledgements"
+id="toc-acknowledgements">Acknowledgements</a></li>
+</ul></li>
+</ul>
+</nav>
+<div data-content-type="appendix">
+<h2 id="appendix-s-the-fourteen-agent-reading-failure-modes">Appendix S:
+The Fourteen Agent Reading Failure Modes</h2>
+<p>This appendix is a reference catalogue. Each entry describes one way
+an AI agent's pipeline can silently fail to read web content correctly —
+that is, fail in a way that the publisher cannot see, the agent does not
+report, and the user discovers only when an answer turns out to be
+wrong. The catalogue is paired with <strong>Appendix N: Anti-Patterns
+Catalog</strong>, which describes failures originating on the publisher
+side. Where Appendix N asks "what does the publisher get wrong?",
+Appendix S asks "what does the agent's pipeline get wrong, even when the
+publisher is doing the right things?"</p>
+<p>The methodology for detecting these failure modes against a real
+agent — using canary tokens, two-phase scoring, and publisher-controlled
+fixtures — is set out in <strong>Appendix R: Testing Agent
+Comprehension</strong>. This appendix is the catalogue Appendix R refers
+to. Each entry follows the same template: the failure mode's name, the
+symptom an agent reports (or fails to report), why agents fail on it,
+how a publisher can detect it from served HTML or HTTP behaviour, and
+how to fix or mitigate it on the publisher side.</p>
+<p>The original catalogue described ten failure modes. The eleventh —
+URL Encoding Mismatch — was added after a production audit found that
+twelve URLs in a major brand's sitemap were silently unfetchable to
+every standards-compliant AI agent because the URL slugs contained raw
+non-ASCII characters that the JavaScript <code>URL</code> constructor
+(and equivalent libraries in every other language) reject as invalid
+before any HTTP request can be made. The pages existed and served
+correctly when fetched with a properly-encoded URL; the sitemap simply
+did not encode them. New failure modes will be added to this catalogue
+as they are validated against more than one publisher and more than one
+agent.</p>
+<p>The order of the catalogue runs from the most pipeline-destructive
+failures (truncation, SPA shell) to the more contained ones (generic
+headings, URL encoding). The order is not a priority ranking — every
+publisher should test against all of them — but it is a useful order to
+read in.</p>
+<h2 id="truncation">1. Truncation</h2>
+<p><strong>Symptom.</strong> The agent reports that the page does not
+document a feature that is in fact documented further down the page. The
+agent's answer is confident and reads as if the entire page were
+considered. There is no warning that the page was incomplete.</p>
+<p><strong>Why agents fail.</strong> Most fetch tools cap the content
+they return at a fixed byte count to protect the agent's context window.
+The cap is rarely advertised and rarely the same across agents. Common
+values cluster around 75 kilobytes, 100 kilobytes and 130 kilobytes. A
+page longer than the cap is silently truncated at the byte position the
+cap dictates, with no indication that anything was removed. The
+reasoning model sees a complete-looking partial page and assumes it has
+read the whole thing.</p>
+<p><strong>How to detect from served HTML.</strong> Measure the byte
+size of the page and the byte offset of the main content. Pages larger
+than 75 kilobytes are at risk; pages where the main content begins past
+the 50 kilobyte mark are at risk even if the total size is smaller. The
+MX Web Audit Suite reports both numbers and flags any page that combines
+a large total size with a late content-start position.</p>
+<p><strong>Publisher-side fix.</strong> Move critical content earlier in
+the document. Reduce non-content bytes — collapse inline style blocks,
+move scripts to the end, eliminate boilerplate. Where a long page is
+unavoidable, split it into shorter pages linked from a parent page, and
+make the parent page summarise the most important points so that an
+agent that fetches only the parent has the gist. For very long reference
+pages, publish a short companion summary at a separate URL and link to
+it from the long page; agents that hit the cap on the long page can be
+redirected to the summary by the agent's user, if not by the agent
+itself.</p>
+<h2 id="boilerplate-burial">2. Boilerplate Burial</h2>
+<p><strong>Symptom.</strong> The agent reports a generic answer drawn
+from the site's footer or navigation, even though the actual content the
+user asked about is on the page. Repeated questions produce different
+answers depending on which boilerplate the agent's relevance layer
+happened to forward.</p>
+<p><strong>Why agents fail.</strong> When the bytes that arrive at the
+relevance layer are dominated by inline CSS, navigation, footer text,
+advertising scripts, and tracking code, the actual content is a small
+fraction of the total. The relevance layer's filter is forced to choose
+between many candidate sections, and its choice is influenced more by
+position and density than by topical relevance. Boilerplate appears
+early and at high density on most pages, so it wins the relevance
+layer's attention more often than its content value justifies.</p>
+<p><strong>How to detect from served HTML.</strong> Measure the byte
+size of the inline <code>&lt;style&gt;</code> and
+<code>&lt;link rel="stylesheet"&gt;</code> content that appears in the
+<code>&lt;head&gt;</code> before any body content. Compare against the
+byte size of the actual main content. A page where pre-content
+boilerplate is more than ten times the size of the main content is at
+risk. Sites that inline large CSS frameworks for performance reasons are
+particularly affected.</p>
+<p><strong>Publisher-side fix.</strong> Move inline CSS to external
+stylesheets where the performance budget allows. Where inline CSS is
+required, use a critical-CSS approach that inlines only the minimal
+styles needed for above-the-fold rendering and defers the rest. Reduce
+the footprint of analytics and tracking scripts by loading them after
+content. The goal is not zero boilerplate — it is a ratio of content to
+boilerplate that gives the relevance layer something to find.</p>
+<h2 id="spa-shell">3. SPA Shell</h2>
+<p><strong>Symptom.</strong> The agent reports that the page is empty,
+that it shows a loading state, or that it contains only navigation. A
+user opening the same URL in a normal browser sees a fully populated
+page. The agent and the user disagree about the existence of
+content.</p>
+<p><strong>Why agents fail.</strong> Most agent fetch tools do not run
+JavaScript. They retrieve the served HTML — the bytes the server
+returned in the initial response — and pass it to the relevance layer. A
+single-page application that depends on client-side rendering returns an
+empty shell in the served HTML and assembles its content only after
+JavaScript has executed. Agents that do run JavaScript exist (Google's
+rendering pipeline is one) but they are the minority, and even they have
+execution timeouts and JavaScript-disabled fallbacks that produce
+inconsistent results.</p>
+<p><strong>How to detect from served HTML.</strong> Compare the served
+HTML against the rendered HTML. If the served HTML contains a small
+shell with hydration markers (<code>__NEXT_DATA__</code>,
+<code>data-reactroot</code>, <code>ng-version</code>) and the rendered
+HTML contains substantially more text, headings, and links, the page is
+an SPA shell. The MX Web Audit Suite reports a served-versus-rendered
+gap score that quantifies the divergence.</p>
+<p><strong>Publisher-side fix.</strong> Render content on the server.
+The mechanism does not matter — server-side rendering, static-site
+generation, incremental static regeneration, edge rendering all work —
+but the result must be that the served HTML contains the actual content,
+not an empty shell waiting for JavaScript. Where a fully server-rendered
+approach is not possible, render at least the primary content (headings,
+body text, structured data, key navigation) on the server and use
+JavaScript only for enhancements.</p>
+<h2 id="tabbed-content">4. Tabbed Content</h2>
+<p><strong>Symptom.</strong> The agent answers a question about one
+programming language, framework, or platform but cannot answer the same
+question about another one, even though both are documented on the same
+page. The agent appears to know the page exists but only sees a fraction
+of its content.</p>
+<p><strong>Why agents fail.</strong> Tabbed widgets — common in API
+documentation that shows the same example in multiple languages —
+typically render the first tab's content visible and the remaining tabs
+hidden via CSS. When the page is read by an agent that does not interact
+with the DOM, only the first tab's content reaches the relevance layer
+in a usable form. The other tabs are present in the HTML but the agent
+has no way to know which content belongs to which tab without parsing
+the widget's markup, and most fetch tools do not parse tab widgets.</p>
+<p><strong>How to detect from served HTML.</strong> Look for the
+standard tab patterns: elements with <code>role="tab"</code>,
+<code>role="tablist"</code>, <code>aria-selected</code>,
+<code>aria-controls</code>, and the framework-specific class names used
+by Bootstrap, Material UI, Tailwind UI, and similar libraries. Count the
+number of tabs detected and the number of tab panels whose content is
+present in the served HTML. A page with eight tabs but only the first
+tab's content rendered into a position the agent can read is at
+risk.</p>
+<p><strong>Publisher-side fix.</strong> Render every tab's content as
+visible body text in the served HTML, and use CSS or JavaScript only for
+the visual disclosure pattern. The tab labels can remain as headings;
+the content under each label should be present as flat content rather
+than wrapped in a hidden tab panel. Alternatively, publish each tab as a
+separate page and link them from a parent — a more agent-friendly
+pattern that also works better for direct linking from search
+results.</p>
+<h2 id="soft-404">5. Soft 404</h2>
+<p><strong>Symptom.</strong> The agent reports content from a page that
+does not exist. The page returns a custom error message but the HTTP
+status code is 200, so the agent treats the error message as valid
+content and may quote it as if it were authoritative. In the worst case
+the agent invents an answer based on the error page's boilerplate.</p>
+<p><strong>Why agents fail.</strong> Agent fetch tools rely on the HTTP
+status code to distinguish "this is a real page" from "this is a missing
+page". A response with status 200 is treated as a real page even when
+the body says "page not found". Custom 404 pages are a common cause: a
+content management system catches the missing-page condition, renders a
+styled 404 page with brand chrome and helpful navigation, and returns it
+with status 200 because the developer wanted the URL to remain in the
+address bar. The page looks like an error to a human visitor, but to the
+agent it looks like a normal page with the unfortunate property of being
+entirely about not finding anything.</p>
+<p><strong>How to detect from served HTML.</strong> Fetch a URL that
+should not exist and inspect the response. If the status code is 200 and
+the body contains "not found", "page does not exist", "page missing",
+"404", "error", or similar strings in the <code>&lt;h1&gt;</code> or
+<code>&lt;title&gt;</code>, the site is serving soft 404s. The fix is at
+the server, not in the page content.</p>
+<p><strong>Publisher-side fix.</strong> Configure the server to return
+HTTP status 404 for missing pages. The custom error page can still be
+served — the status code is independent of the body — but the status
+code must be 404 so that agents and search engines can distinguish
+missing pages from real ones. Where the CMS does not allow the status
+code to be changed easily, the same effect can be achieved at the edge:
+a Cloudflare Worker, an Nginx error page directive, or an Apache
+<code>ErrorDocument</code> line can rewrite the status code without
+touching the application.</p>
+<h2 id="broken-code-fence">6. Broken Code Fence</h2>
+<p><strong>Symptom.</strong> The agent reports a code example that
+appears to continue indefinitely, or an answer where prose and code have
+merged into a single block, or a missing code block where a code example
+was clearly intended. The agent's response sometimes contains structural
+artefacts from the page — closing tags, fragment markers, navigation
+labels — that indicate the agent's parser failed.</p>
+<p><strong>Why agents fail.</strong> When a documentation page is
+converted from HTML to markdown for agent consumption, fenced code
+blocks are demarcated by backtick fences. If a fence opens but does not
+close — because the source HTML had a malformed <code>&lt;pre&gt;</code>
+block, because a templating bug emitted unbalanced markup, or because
+the page was truncated mid-fence by a separate failure — the markdown
+parser treats everything from the unclosed fence to the end of the
+document as code. Prose, headings, navigation, and footer all become a
+single oversized code block. The agent then either reports the code
+block as a code example (wrong) or skips the page entirely (no
+information at all).</p>
+<p><strong>How to detect from served HTML.</strong> Parse the page's
+<code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> blocks and
+confirm that every opening tag has a matching closing tag. Pages that
+fail this check are at risk. The MX Web Audit Suite includes a
+fence-balance check as part of its content quality scoring.</p>
+<p><strong>Publisher-side fix.</strong> Validate the source markdown or
+HTML before publication. Use a linter that catches unbalanced
+<code>&lt;pre&gt;</code> blocks. For sites that author in markdown
+directly, use a markdown linter that catches unclosed fences. For sites
+that template HTML from a database, add a fence-balance assertion to the
+build pipeline.</p>
+<h2 id="content-negotiation-mismatch">7. Content Negotiation
+Mismatch</h2>
+<p><strong>Symptom.</strong> Two agents querying the same URL receive
+different content. The discrepancy is reproducible — one agent always
+gets the markdown version, the other always gets the HTML version, and
+the two versions disagree on a detail that the user is asking about. The
+publisher believes both versions are kept in sync but a recent edit
+landed in only one of them.</p>
+<p><strong>Why agents fail.</strong> HTTP content negotiation allows a
+server to return different representations of the same URL based on the
+client's <code>Accept</code> header. A site that serves
+<code>text/html</code> to browsers and <code>text/markdown</code> to
+agents that request it explicitly is using content negotiation
+correctly. The failure mode is not the mechanism; it is the assumption
+that the two representations remain consistent. When a content edit
+updates one representation but not the other, agents and humans see
+different facts. The agent has no way to know which is canonical.</p>
+<p><strong>How to detect from served HTML.</strong> Issue parallel
+requests with <code>Accept: text/html</code>,
+<code>Accept: text/markdown</code>, and
+<code>Accept: application/json</code> and compare the bodies. If the
+bodies differ in ways that change the meaning — different prices,
+different feature lists, different version numbers — the site has a
+content-negotiation drift problem. The MX Web Audit Suite issues
+parallel requests for any URL where it detects a
+<code>Vary: Accept</code> response header.</p>
+<p><strong>Publisher-side fix.</strong> Generate all representations
+from a single source. Markdown and HTML versions should be derived from
+the same canonical document at build time, so that an edit to the source
+updates both. Where content negotiation is not strictly necessary,
+prefer a single representation (HTML) and skip the alternate formats.
+Where multiple formats are required, automate the consistency check in
+the build pipeline rather than relying on editorial discipline.</p>
+<h2 id="cross-host-redirect">8. Cross-Host Redirect</h2>
+<p><strong>Symptom.</strong> The agent reports that it cannot reach the
+page, or reports content from a different page than the one the user
+asked about, or reports inconsistent content across re-runs. The
+redirect chain crosses a host boundary and the agent's fetch tool either
+refuses to follow it, follows it but loses the request context, or
+follows it inconsistently depending on the agent's version.</p>
+<p><strong>Why agents fail.</strong> Many agent fetch tools have
+policies about following redirects that cross host boundaries. The
+reasoning is sound — cross-host redirects are sometimes used in phishing
+and credential-harvesting attacks, so a defensive default is to refuse
+to follow them. The side effect is that legitimate cross-host redirects,
+common in hosting configurations where the canonical URL is on one
+subdomain and the served content is on another, are blocked. Different
+agents apply different policies. Some follow the redirect silently, some
+refuse silently, and some follow it but report the original URL as the
+source of the content, which causes attribution errors downstream.</p>
+<p><strong>How to detect from served HTML.</strong> Record the full
+redirect chain for every URL audited, including each intermediate hop
+and the host of each hop. Flag any chain that crosses a host boundary.
+The MX Web Audit Suite tracks redirect chains end to end rather than
+only the final destination.</p>
+<p><strong>Publisher-side fix.</strong> Avoid cross-host redirects where
+possible. Configure the canonical URL to be the same host that serves
+the content. Where a cross-host redirect is unavoidable — for example,
+when consolidating two acquired brands under a single domain — minimise
+the depth of the chain (one redirect, not three) and document the
+canonical URL clearly in the destination page's
+<code>&lt;link rel="canonical"&gt;</code> so that agents that do follow
+the redirect have a stable reference.</p>
+<h2 id="generic-headings">9. Generic Headings</h2>
+<p><strong>Symptom.</strong> The agent answers a question about one
+platform with information from a different platform. The page documents
+the same procedure for AWS, Google Cloud Platform, and Azure, with the
+AWS section first, but the agent quotes the AWS content for a question
+about Azure. The agent has read all three sections but cannot tell them
+apart.</p>
+<p><strong>Why agents fail.</strong> When sections share generic heading
+text — "Step 1", "Step 2", "Configuration", "Installation", "Overview" —
+the relevance layer cannot distinguish them. The summarisation pass
+strips away the surrounding context (the parent heading that said "AWS",
+"GCP", "Azure") and forwards the generic heading and its content. The
+reasoning model sees three "Step 1" sections and conflates them. Even
+when the parent heading is preserved, the agent's confidence in the
+association between parent and child is lower than its confidence in the
+child's content, so quotes tend to drift toward the most common
+interpretation rather than the qualified one.</p>
+<p><strong>How to detect from served HTML.</strong> Walk the heading
+tree and flag any heading whose text is entirely generic — "Step 1",
+"Step 2", "Step 3", "Overview", "Introduction", "Configuration",
+"Setup", "Installation" — without a qualifying word. Bonus marks for
+detecting siblings that share the same generic text under different
+parents, which is the strongest signal that conflation is likely.</p>
+<p><strong>Publisher-side fix.</strong> Make every heading
+self-qualifying. Instead of <code>Step 1</code> under
+<code>AWS Setup</code>, write
+<code>AWS Step 1: Create an S3 Bucket</code>. The repetition is not
+redundant — it survives the summarisation pass. Where the page documents
+the same procedure for multiple platforms, give each platform its own
+page rather than nesting them as siblings under a generic parent. The
+agent can then reach each platform's procedure through a clean,
+unambiguous URL.</p>
+<h2 id="delayed-content-start">10. Delayed Content Start</h2>
+<p><strong>Symptom.</strong> The agent's answer reads as if drawn
+entirely from the page's navigation, breadcrumbs, or boilerplate. The
+actual content of the page is technically present, but it begins so far
+into the document that agents working from the first chunk of the
+response never reach it.</p>
+<p><strong>Why agents fail.</strong> When a relevance layer summarises a
+page, it weights early content more heavily than late content. Pages
+that open with extensive navigation, breadcrumbs, taxonomy widgets,
+search bars, advertising slots, and category headers push the actual
+content past the position where the relevance layer is most attentive. A
+page where the main content does not begin until 50 per cent of the DOM
+has passed is treated by the relevance layer as a navigation page about
+something rather than as a content page about that thing.</p>
+<p><strong>How to detect from served HTML.</strong> Measure the byte
+offset and the DOM-element count from the start of the document to the
+first heading inside <code>&lt;main&gt;</code>, or to the first
+paragraph of body text inside <code>&lt;article&gt;</code>. Pages where
+the offset exceeds 50 per cent of the document, or where 200 DOM
+elements precede the first content element, are at risk. The MX Web
+Audit Suite reports both metrics and combines them into a
+content-position score.</p>
+<p><strong>Publisher-side fix.</strong> Move navigation and chrome out
+of the first half of the DOM. Use semantic landmarks
+(<code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>) to mark the
+content region clearly so that agents can locate it without having to
+parse the surrounding structure. For sites that need extensive
+navigation for human visitors, consider a sticky header pattern that
+uses CSS positioning rather than DOM order — the navigation can appear
+at the top of the rendered page while sitting at the bottom of the
+source document.</p>
+<h2 id="url-encoding-mismatch">11. URL Encoding Mismatch</h2>
+<p><strong>Symptom.</strong> A page exists, serves correctly to a human
+visitor, and is listed in the site's sitemap, yet AI agents and search
+engine crawlers report that the page cannot be found, returns an error,
+or simply does not exist. The publisher checks the page in a browser and
+the page loads. The publisher checks the sitemap and the URL is there.
+The publisher cannot understand why the agent reports a problem, because
+no part of the publisher's infrastructure is broken.</p>
+<p><strong>Why agents fail.</strong> The URL contains a non-ASCII
+character — a curly apostrophe, an en dash, an em dash, a euro sign, a
+pound sign, an acute accent, a Cyrillic letter, an emoji — that has not
+been percent-encoded according to RFC 3986. Browsers paper over the
+issue: when a human visitor clicks the link, the browser auto-encodes
+the character at request time. AI agent fetch tools do not. They consult
+the sitemap directly and pass each URL string to a strict URL parser —
+JavaScript's <code>URL</code> constructor, Python's
+<code>urllib.parse</code>, Go's <code>net/url</code>, Rust's
+<code>url</code> crate — and every modern parser rejects raw non-ASCII
+characters as malformed input. The rejection happens before any HTTP
+request is made, so the page is never even fetched. The publisher's logs
+show no visit. The agent's logs show "invalid URL". Neither side can
+explain the discrepancy without comparing notes.</p>
+<p>The same problem appears inside HTML pages whenever a relative or
+absolute <code>&lt;a href="..."&gt;</code> value contains a raw
+non-ASCII character. Agents that follow links from page to page hit the
+same parser rejection. The difference between the sitemap case and the
+in-page case is only that the sitemap exposes the full failure surface
+in one file — every malformed URL in one place — whereas the in-page
+case is scattered across the site and only surfaces when an agent
+actually tries to crawl.</p>
+<p><strong>How to detect from served HTML.</strong> Issue a HEAD request
+to every URL listed in the sitemap (or to every internal
+<code>&lt;a href&gt;</code> discovered on every audited page) and check
+whether the URL parses at all before the HTTP request is sent. URLs that
+fail parsing — that throw an exception in <code>new URL(href)</code> or
+its equivalent — are the ones at risk. Inspect the failed URLs for raw
+non-ASCII characters. The MX Web Audit Suite captures these as network
+errors with the message <code>Invalid URL</code> and lists them in
+<code>sitemap_health.csv</code> and <code>link_analysis.csv</code>.</p>
+<p><strong>Publisher-side fix.</strong> Pass every URL through
+<code>encodeURI()</code> (JavaScript),
+<code>urllib.parse.quote(url, safe=':/?&amp;=')</code> (Python),
+<code>url.QueryEscape()</code> for path segments (Go), or the equivalent
+in whichever language the CMS sitemap generator is written in, before
+emission. The sitemap output for an article whose slug is
+<code>bob-w-secures-€40-million-series-b-funding</code> should be
+<code>https://example.com/notebook/bob-w-secures-%E2%82%AC40-million-series-b-funding</code>,
+not the raw form. The page itself does not need to change — only the
+sitemap and the in-page link generation. As a longer-term improvement,
+the URL slug generator should convert non-ASCII characters at the
+slug-creation step: an apostrophe becomes <code>-</code> or is removed,
+an en dash becomes <code>-</code>, currency symbols are spelled out
+(<code>eur</code>, <code>gbp</code>), accented Latin characters are
+folded to their unaccented equivalents. ASCII-clean slugs need no
+encoding at all and are universally compatible.</p>
+<p><strong>Why this matters specifically for content-driven
+brands.</strong> The URLs most likely to contain non-ASCII characters
+are editorial URLs — press releases, blog posts, notebook articles,
+longform pieces written by humans for humans, where the title naturally
+contains apostrophes (<code>it's</code>, <code>we're</code>,
+<code>bob's</code>), en dashes (<code>–</code>), em dashes
+(<code>—</code>), and currency or other symbols. These are the URLs the
+brand most wants AI agents to surface, because they contain the brand's
+voice. They are also the URLs most likely to be silently invisible to
+agents through this failure mode. A brand whose homepage is fetchable
+but whose press releases are not is a brand whose AI-mediated
+descriptions will be flat and uncolourful.</p>
+<h2 id="body-content-ratio">12. Body Content Ratio</h2>
+<p><strong>Symptom.</strong> A page has rich visible prose, renders
+correctly for humans, and ranks well in search, yet AI agents return
+surface-level summaries that mention navigation and boilerplate while
+skipping the substance. The agent appears to have read the page but what
+it surfaces is chrome.</p>
+<p><strong>Why agents fail.</strong> The served HTML carries so much
+overhead — scripts, styles, images, SVG, meta blocks — that the
+prose-to-overhead ratio falls below 30%. Agents that summarise under
+context-window pressure weight all bytes equally; when 70% of the bytes
+are overhead, 70% of the summary becomes overhead. The page is not
+truncated, not SPA-shelled, not tab-hidden — it is simply byte-dominated
+by non-prose content.</p>
+<p><strong>How to detect from served HTML.</strong> Strip the HTML to
+body text only — remove <code>&lt;head&gt;</code>,
+<code>&lt;script&gt;</code>, <code>&lt;style&gt;</code>,
+<code>&lt;link&gt;</code>, <code>&lt;meta&gt;</code>,
+<code>&lt;img&gt;</code>, <code>&lt;picture&gt;</code>,
+<code>&lt;source&gt;</code>, <code>&lt;svg&gt;</code>, and all
+<code>style=""</code> attributes — and compute the remaining bytes as a
+ratio of the full served document. Pages where the ratio is below 30%
+are at risk. Threshold was chosen to match observed behaviour: below 30%
+the summary begins drifting toward chrome; above 30% the summary is
+reliably about the content.</p>
+<p><strong>Publisher-side fix.</strong> Externalise inline
+<code>&lt;style&gt;</code> blocks to linked stylesheets, externalise
+inline executable <code>&lt;script&gt;</code> blocks to linked JS files
+(JSON-LD and importmap blocks stay inline — they are data, not
+behaviour), trim redundant <code>&lt;meta&gt;</code> and
+<code>&lt;link&gt;</code> tags, and eliminate SVG sprites that duplicate
+rendered content. The goal is not aesthetic minification; it is giving
+the prose a fighting share of the byte budget.</p>
+<h2 id="inline-tag-bloat">13. Inline Tag Bloat</h2>
+<p><strong>Symptom.</strong> A page parses successfully, is in-head
+JSON-LD-clean, and passes every other failure mode, yet agents that
+fetch only the <code>&lt;head&gt;</code> (for cheap structured-data
+extraction) report that the page is oversized or that the head exceeds
+their per-fetch byte budget.</p>
+<p><strong>Why agents fail.</strong> Large inline
+<code>&lt;style&gt;</code> blocks or executable inline
+<code>&lt;script&gt;</code> blocks sit inside <code>&lt;head&gt;</code>,
+inflating the head-byte count. Agents with limited fetch windows (some
+server-side agents cap head reads around 8–12 KB on first fetch) reach
+the end of their budget before structured data later in the head is
+indexed. The per-element and per-page thresholds are 500 bytes each —
+above that, any single <code>&lt;style&gt;</code> or executable
+<code>&lt;script&gt;</code> body, or any single page's cumulative inline
+CSS or inline JS, is an externalisation candidate.</p>
+<p>The rule excludes
+<code>&lt;script type="application/ld+json"&gt;</code> (Schema.org data
+is supposed to be inline), <code>&lt;script type="importmap"&gt;</code>
+(must be inline by spec), and JSON data islands
+(<code>type="application/json"</code>,
+<code>type="text/template"</code>). Only executable inline JavaScript
+counts.</p>
+<p><strong>How to detect from served HTML.</strong> For each
+<code>&lt;style&gt;</code> or executable <code>&lt;script&gt;</code>
+block (no <code>src=</code>, non-data <code>type=</code>), measure the
+body bytes. Flag any element whose body exceeds 500 bytes, and flag the
+page if the per-category total (CSS or JS) exceeds 500 bytes.</p>
+<p><strong>Publisher-side fix.</strong> Move page-specific CSS into a
+linked stylesheet under <code>css/</code> and load with
+<code>&lt;link rel="stylesheet" href="..."&gt;</code>. Move
+page-specific executable JS into a linked file under <code>js/</code>
+and load with <code>&lt;script src="..." defer&gt;</code>. For shared
+patterns, consolidate into a site-wide CSS or JS bundle. Keep JSON-LD,
+importmap, and JSON data islands inline — they are not the target.</p>
+<h2 id="head-weight">14. Head Weight</h2>
+<p><strong>Symptom.</strong> A page's head carries useful data —
+consolidated JSON-LD, complete meta tags, rich Open Graph — and agents
+extract that data correctly. But the head is so large relative to the
+rest of the page that the byte ratio of <code>&lt;head&gt;</code> to
+total document exceeds 50%. Agents that budget for "read first N bytes"
+sometimes never reach the body at all.</p>
+<p><strong>Why agents fail.</strong> The head-to-page ratio measures how
+much of the served document is reachable before
+<code>&lt;body&gt;</code> opens. A page where <code>&lt;head&gt;</code>
+is 50% of the bytes means an agent truncating at half the file sees only
+metadata, no content. This composes with Boilerplate Burial (which
+measures chrome inside <code>&lt;body&gt;</code>): a page can pass
+Boilerplate Burial and fail Head Weight if the pre-body bytes are large
+with useful structured data rather than rendered navigation.</p>
+<p>Unlike Inline Tag Bloat, Head Weight does not blame specific block
+types. A page with 20 KB of consolidated JSON-LD, 2 KB of complete meta
+tags, and 500 bytes of inline CSS will fail Head Weight if the body is
+only 10 KB — even though every head byte is high-value. The remedy in
+that case is usually compressing the body (deleting boilerplate) rather
+than trimming the head.</p>
+<p><strong>How to detect from served HTML.</strong> Compute the byte
+offset of the first <code>&lt;body&gt;</code> tag and divide by total
+served bytes. Flag pages where the ratio exceeds 0.5.</p>
+<p><strong>Publisher-side fix.</strong> First check whether the head is
+bloated or the body is anaemic. If the head carries multiple separate
+JSON-LD blocks, consolidate into a single <code>@graph</code> (cuts
+redundant <code>@context</code> overhead). If the head has inline
+CSS/JS, externalise (fixes Inline Tag Bloat simultaneously). If the body
+is the problem — short article, heavy JSON-LD — either accept the head
+weight (legitimate trade-off for entity-rich content) or expand the body
+with actual content.</p>
+<h2 id="diacritic-stripping">15. Diacritic Stripping</h2>
+<p><strong>Symptom.</strong> A non-English page reads correctly to a
+human, yet an agent's answer renders names and terms as the wrong words,
+or collapses distinct words into one. The publisher sees clean prose on
+screen; the agent has read something the prose never said.</p>
+<p><strong>Why agents fail.</strong> The marks were stripped before the
+machine read the text. URL slugs flatten to ASCII, filenames drop the
+marks, older databases and search indexes normalise everything down to
+the nearest unmarked letter, and each step throws the marks away because
+nothing in its design told it they were load-bearing. In a language that
+carries meaning in its marks the loss is not cosmetic. Vietnamese is the
+clearest case: written without its tone marks, the syllable <em>ma</em>
+is no longer one word missing its decoration but a hole where
+<em>ma</em> (ghost), <em>má</em> (mother), <em>mà</em> (but),
+<em>mả</em> (tomb), <em>mã</em> (horse or code) and <em>mạ</em> (rice
+seedling) used to be. The model fills the gap with the most frequent
+reading it has seen, which is rarely the one the publisher meant.
+Because the loss happens upstream of the translator, human or machine,
+no amount of downstream context reliably puts the marks back.</p>
+<p><strong>How to detect from served HTML.</strong> Compare the
+fully-marked form the publisher intends against the bytes actually
+served in slugs, filenames, link text, and exported fields. The
+distinction to hold is between two operations the industry both calls
+"normalise". Encoding is standardised: Unicode normalisation (NFC and
+NFD, UAX #15) reconciles the two ways the same marked character can be
+stored and keeps every mark. Folding, the lossy step that strips marks
+so an unmarked form matches a marked one, is not standardised at all: it
+was drafted as UTR #30 and withdrawn in 2008, so every system folds its
+own way or not at all. Flag any pipeline stage that reduces a marked
+character to its unmarked base outside an explicit, language-aware
+fold.</p>
+<p><strong>Publisher-side fix.</strong> Treat the fully-marked form as
+the record, with the same seriousness given to a price or a date, and
+declare it as published in the place machines read first rather than the
+slug or the ASCII fallback a downstream system found convenient. Anyone
+signing the content must include an explicit Unicode normalisation step
+(UAX #15) in canonicalisation: a marked character stored as one
+precomposed code point and the same character stored as a base letter
+with combining marks look identical on screen but produce different
+bytes, and therefore a different signature. Normalise to reconcile the
+two encodings while keeping every mark; never fold the marks away to
+make the bytes tidy, or attestation will report a marked language as
+tampered with when nothing has changed, on exactly the languages that
+can least afford it.</p>
+<h2 id="how-to-use-this-catalogue">How to use this catalogue</h2>
+<p>A publisher can use this appendix in three ways. The first is as an
+audit checklist: walk through all fifteen failure modes when evaluating
+a site, either manually or by running the MX Web Audit Suite, and
+address any that fire. The second is as a debugging reference: when an
+AI agent reports incorrect or missing content, find the failure mode
+that matches the symptom and apply the fix. The third is as a design
+rubric for new content: review the catalogue before publishing a new
+page, and structure the page so that none of the failure modes
+apply.</p>
+<p>The catalogue is not exhaustive. Pipeline failures evolve as agent
+architectures change, and new failure modes will emerge as new fetch
+tools, summarisation techniques, and tool-calling protocols are
+deployed. The modes catalogued here are the ones currently observed
+across multiple agents and multiple sites; new entries will be added as
+they are validated against more than one agent and more than one
+publisher. The eleventh mode, URL Encoding Mismatch, was added to the
+catalogue after a production audit found twelve unfetchable sitemap URLs
+at a major brand and traced every one to the same root cause; the
+failure mode had been theoretically obvious but had not been observed at
+scale until the audit tooling started doing real HEAD requests rather
+than defaulting to "200 OK".</p>
+<p>For the testing methodology that puts these failure modes into a
+measurable form, see <strong>Appendix R: Testing Agent
+Comprehension</strong>. For the publisher-side anti-patterns that create
+similar failures upstream, see <strong>Appendix N: Anti-Patterns
+Catalog</strong>. For the validation layers an agent creator should
+build to defend against the failures catalogued here, see
+<strong>Chapter 13: What Agent Creators Must Build</strong>,
+particularly the section on testing and validation harnesses.</p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>The first ten failure modes in this appendix were crystallised by
+Dachary Carey's article "Designing an Agent Reading Test", published 6
+April 2026, which named the conditions and demonstrated each one against
+current agents using publisher-controlled test fixtures. The treatment
+here adapts Carey's catalogue into a publisher-side reference and
+connects each entry to a corresponding audit metric in the MX Web Audit
+Suite. The original observations of those ten modes are hers; the
+adaptation, the audit metrics, and the cross-references are mine.</p>
+<p>The eleventh failure mode, URL Encoding Mismatch, was added through
+production observation: the MX Web Audit Suite gained real HEAD-based
+link and sitemap health checking, ran against a major brand's marketing
+site, and found twelve URLs in the brand's sitemap that no
+standards-compliant AI agent could fetch. The root cause was the same in
+every case — raw non-ASCII characters in the URL slug — and the pattern
+was distinctive enough to warrant its own entry in the catalogue. The
+discovery confirmed something Carey's original article warns about
+explicitly: failure modes that are theoretically obvious can remain
+invisible until tooling stops defaulting to success.</p>
+<p>Modes twelve through fourteen — Body Content Ratio, Inline Tag Bloat,
+Head Weight — were added between 2026-04-17 and 2026-04-18 through
+production observation of the MX self-audits on mx.allabout.network.
+Body Content Ratio surfaced when pages with rich Schema.org entity
+graphs scored well on every other dimension yet produced summaries
+dominated by navigation. Inline Tag Bloat surfaced when the
+agent-reading failure-mode analyser initially counted JSON-LD blocks as
+executable JavaScript (50/50 pages flagged on mx.allabout.network before
+the regex was corrected to exclude <code>application/ld+json</code>);
+the fixed analyser then surfaced two genuine inline blocks that were
+externalised and pushed scores into the Excellent band. Head Weight
+pairs with Boilerplate Burial as a composable ratio — one measures
+chrome inside the body, the other measures pre-body byte weight — so a
+page can pass one and fail the other. All three were added to
+<code>pipeline_survivability.csv</code> with a per-failure-mode
+plain-language explanation in the "What It Means" column.</p>
+</div>
+<hr>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+
+  <!-- Floating home button (top-left) -->
+  <a href="index.html" class="floating-home-button" aria-label="Back to Home">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 0L0 8h3v8h10V8h3L8 0zm0 2.5L13.5 8H11v6H5V8H2.5L8 2.5z"/>
+    </svg>
+    Home
+  </a>
+  <!-- Floating back to top button (bottom-left) -->
+  <a href="#main" class="floating-top-button" aria-label="Back to Top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 3.5l-5.5 5.5L4 10.5l3-3v8.5h2V7.5l3 3L13.5 9z"/>
+    </svg>
+    Top
+  </a>
+
+  <script>
+    // Add copy buttons to all code blocks
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find both wrapped code blocks (div.sourceCode) and standalone pre blocks
+      const wrappedBlocks = document.querySelectorAll('div.sourceCode');
+      const standaloneBlocks = document.querySelectorAll('pre[data-role="code-block"]:not(.sourceCode)');
+
+      // Process wrapped code blocks (HTML, JavaScript, etc.)
+      wrappedBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          let text = '';
+          const spans = codeElement.querySelectorAll('span[id^="cb"]');
+          spans.forEach(function(span) {
+            const nodes = Array.from(span.childNodes);
+            nodes.forEach(function(node) {
+              if (node.nodeType === Node.TEXT_NODE) {
+                text += node.textContent;
+              } else if (node.nodeName !== 'A') {
+                text += node.textContent;
+              }
+            });
+          });
+          return text;
+        });
+      });
+
+      // Process standalone pre blocks (text, robots.txt, etc.)
+      standaloneBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          return codeElement ? codeElement.textContent : block.textContent;
+        });
+      });
+
+      // Helper function to add copy button to any block
+      function addCopyButton(block, extractTextFn) {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
+
+        button.addEventListener('click', function() {
+          const text = extractTextFn(block);
+
+          navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied';
+            button.classList.add('copied');
+            setTimeout(function() {
+              button.textContent = 'Copy';
+              button.classList.remove('copied');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Failed to copy:', err);
+            button.textContent = 'Failed';
+            setTimeout(function() {
+              button.textContent = 'Copy';
+            }, 2000);
+          });
+        });
+
+        block.insertBefore(button, block.firstChild);
+      }
+    });
+  </script>
+</body>
+</html>

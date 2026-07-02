@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Watching with the machines"
+description: "A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has."
+author: Tom Cranstoun
+created: 2026-05-31
+modified: 2026-05-31
+version: "1.0"
+
+mx:
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
+  servedAt: https://mx.allabout.network/blog/drafts/watching-with-the-machines.html
+  status: draft
+  contentType: blog-post
+  runbook: "Promote from drafts/ to blog/ when ready; update canonical, OG, robots, and add a card to blog/index.html."
+  audience:
+    - humans
+    - machines
+  tags:
+    - mx-readiness
+    - chrome-extension
+    - on-device-inference
+    - gemini-nano
+    - phi-silica
+    - ollama
+    - watching-the-machines
+  x-mx-category: Watching the Machines
+  x-mx-aiAssistance: welcome
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/watching-with-the-machines.md
+  x-mx-contextProvides:
+    - "A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has."
+  stability: stable
+  purpose: "A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has."
+  x-mx-backport: clean
+  productionCanonical: https://mx.allabout.network/blog/drafts/watching-with-the-machines.html
+x-mx-ai:
+  summary: "A blog post about the MX Readiness Inspector browser extension. The extension inspects any page for MX-readiness signals and uses the browser's on-device language model (Chrome's Gemini Nano, Edge's Phi-Silica, or local Ollama as a universal fallback) to summarise where the page stands. The post ties the extension to the Watching the Machines series' argument that the same model Chrome installed without asking can be used for the very work the series argues for: machine-side legibility, run locally, no data leaving the device."
+  key_concepts:
+    - on-device MX-readiness inspection
+    - the silent install used for legitimate work
+    - local-only inference (Chrome Gemini Nano + Edge Phi-Silica + local Ollama)
+    - eight inspection sections mirroring the audit pipeline
+    - the extension as the audit pipeline's lightweight cousin
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/watching-with-the-machines.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/watching-with-the-machines.html">
+  <meta property="og:title" content="Watching with the machines | CogNovaMX">
+  <meta property="og:description" content="A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-05-31">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Watching with the machines | CogNovaMX">
+  <meta name="twitter:description" content="A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Watching with the machines">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/watching-with-the-machines.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Watching with the machines | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Watching with the machines",
+        "headline": "Watching with the machines",
+        "description": "A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-05-31",
+        "dateModified": "2026-05-31",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/watching-with-the-machines.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1266,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/watching-with-the-machines.html",
+        "name": "Watching with the machines",
+        "url": "https://mx.allabout.network/blog/drafts/watching-with-the-machines.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-it-does">What it does</a></li>
+        <li><a href="#what-mx-ready-looks-like-in-a-panel">What MX-ready looks like, in a panel</a></li>
+        <li><a href="#three-places-the-summary-can-come-from">Three places the summary can come from</a></li>
+        <li><a href="#local-by-design-not-by-marketing">Local by design, not by marketing</a></li>
+        <li><a href="#where-this-fits">Where this fits</a></li>
+        <li><a href="#where-to-find-it">Where to find it</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1266">
+        <header class="article-header">
+          <h1>Watching with the machines</h1>
+          <div class="article-meta"
+               data-published="2026-05-31"
+               data-modified="2026-05-31"
+               data-reading-time="7 min">
+            <time datetime="2026-05-31">31 May 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>7 min read</span>
+          </div>
+
+        </header>
+
+
+<p>The <a href="https://mx.allabout.network/blog/drafts/watching-the-machines/google-nano-model/">Silent Install</a> series argued one thing across all of it. Trust has to run in both directions. If the web is going to make content legible to machines, the machines have to be legible back: who deployed them, what they may do, what they actually did. The exhibit was Chrome quietly writing a four-gigabyte AI model to people's disks. The fix the series pointed at was attestation and a record.</p>
+<p>This is the same model, used for the thing it should have been used for.</p>
+<h2 id="what-it-does" tabindex="-1">What it does</h2>
+<p>Click an icon in the browser toolbar on any web page. A small panel opens. It reads the page's HTML for the signals MX cares about, asks the page's own origin whether it serves the discovery files machines look for, and asks the on-device language model to write a brief summary of how MX-ready the page is.</p>
+<p>No part of the inspection sends the page anywhere. The model that writes the summary is whichever the browser brought along. Chrome ships <strong>Gemini Nano</strong>, Edge ships <strong>Phi-Silica</strong> on Copilot+ PCs, and the panel uses whichever one is enabled. On any browser without an in-built model, the panel reaches a local <strong>Ollama</strong> server if Ollama is installed, and uses whichever model the operator has pulled.</p>
+<p>The data does not leave the device. Not by accident, by design.</p>
+<h2 id="what-mx-ready-looks-like-in-a-panel" tabindex="-1">What MX-ready looks like, in a panel</h2>
+<p>The panel splits its findings into sections the same way the audit pipeline does, at a level a popup can run in under a second:</p>
+<ul>
+<li><strong>MX.</strong> The magic-header meta tag that says &quot;this page is MX-aware,&quot; the governance triplet of status, content-type, and audience, and the AI policy hints (welcome, editable, content-policy).</li>
+<li><strong>AI.</strong> The WICG <code>ai-disclosure</code> meta tag (with the right value for how the page was authored), and the matching IPTC <code>digitalSourceType</code> IRI inside the page's structured data.</li>
+<li><strong>Links.</strong> The discovery links in the page head: <code>llms-txt</code>, <code>ai-usage</code>, the canonical, the sitemap pointer.</li>
+<li><strong>Origin.</strong> The files the origin serves at the root: <code>/llms.txt</code>, <code>/AI-USAGE.json</code>, <code>/robots.txt</code> (with a check for whether it blocks AI agents), <code>/agent-card.json</code> for sites operating agents, <code>/sitemap.xml</code>.</li>
+<li><strong>Data.</strong> <a href="https://schema.org">Schema.org</a> JSON-LD presence and type coverage.</li>
+<li><strong>OG.</strong> Open Graph fields and Twitter Card fields.</li>
+<li><strong>A11y.</strong> The accessibility quick wins: the document's declared language, a skip-to-main link, image alt coverage, form-control labelling.</li>
+<li><strong>Prov.</strong> The provenance markers: the embedded source-YAML frontmatter in the page head, references to a provenance payload.</li>
+</ul>
+<p>Each item lands as a pass, a warn, a fail, or an info. The score is the equal-weight average across them. A page above 70 is doing the work. A page below 50 has the standard in front of it untouched, which is the more useful diagnosis because it names the gap.</p>
+<h2 id="three-places-the-summary-can-come-from" tabindex="-1">Three places the summary can come from</h2>
+<p>The summary panel writes the verdict. Where that prose comes from depends on what the browser exposes:</p>
+<p><strong>Chrome with the Prompt API flag.</strong> The on-device Gemini Nano model answers. Chrome installed the weights through its component-update system, which is also the subject of the series. On a machine where Nano has been installed, this is the lightest and fastest path because the model is already in memory.</p>
+<p><strong>Edge on a Copilot+ PC.</strong> Microsoft's Phi-Silica answers, also locally. The Edge surface (<code>self.ai.assistant</code>) has the same shape as Chrome's, so the panel does not care which one fires.</p>
+<p><strong>Local Ollama, anywhere.</strong> When neither browser exposes an in-built model, the panel reaches <code>http://localhost:11434</code> and asks whichever model the operator has pulled to write the summary. This is the same default the full MX audit pipeline uses in regulated-industry mode, where the policy is &quot;no client data crosses the browser sandbox into a vendor's cloud&quot; and the operator wants a model under their own administrative control answering the prompt instead of one shipped by the browser vendor.</p>
+<p>A single button in the panel forces the Ollama path even when the browser has its own model. Useful for comparing a small Nano against a larger Ollama model on the same page, or for committing to the regulated-industry path when an organisation's policy requires it.</p>
+<p>A second button copies the score, the summary, and every finding to the clipboard. Useful for pasting into a bug report, an outreach note, or a row in a CSV when sweeping across a sample of pages.</p>
+<h2 id="local-by-design-not-by-marketing" tabindex="-1">Local by design, not by marketing</h2>
+<p>The inspection stays on the machine for reasons of consent, correctness, and regulation.</p>
+<p>Consent: the page being inspected may not have given permission for its content to reach a remote endpoint. Sending the page somewhere for the inspection would put the inspector in the position of the very actors MX exists to hold to account.</p>
+<p>Correctness: the signals the panel reports are facts about the bytes the browser already loaded. They do not need a remote model to confirm. The model writes prose, not findings.</p>
+<p>Regulation: the MX audit pipeline already runs in a local-LLM-first configuration because regulated industries (financial, healthcare, public sector) cannot ship client data across vendor sandboxes for inference. The extension follows the same rule. The Ollama fallback is the same lever the audit pipeline pulls.</p>
+<h2 id="where-this-fits" tabindex="-1">Where this fits</h2>
+<p>The MX audit pipeline is the full system: dozens of inputs, weighted scoring, written reports, accessibility conformance, provenance sidecars, gates against drift. The panel is its lightweight cousin. The audit is for client engagements where you want the report. The panel is for ten seconds on the page in front of you when someone asks &quot;is this MX-ready?&quot;</p>
+<p>The signals the panel grades are the signals the series argued for. The magic-header meta tag and the governance triplet are the page's way of telling a machine what it is. The AI disclosure is the page's account of how it was authored. The discovery files at the origin are the publisher's offer to be machine-legible at the site level. The provenance markers are the chain a regulator or an inspector can walk back to the source. None of these are theoretical. They are the things a machine reading the web on someone's behalf either finds or has to guess about. Guessing, in MX terms, is the part the standard exists to remove.</p>
+<p>The Silent Install series pointed at a browser writing a model to a user's disk without asking. The lesson was not that on-device inference is wrong. The lesson was that the relationship between the person and the software acting on their behalf has to run in both directions. This extension is one small step at the page level: a local read of how legible a single page is, run on the same kind of on-device model that started the conversation. Installed carefully, with a button that names the boundary it runs inside, used to make a thing more legible rather than less.</p>
+<h2 id="where-to-find-it" tabindex="-1">Where to find it</h2>
+<p>The extension lives in the MX-Hub repository alongside the audit pipeline it cousins. It loads as an unpacked browser extension via the standard developer-mode flow in Chrome or Edge. The README walks through the install steps, the on-device model setup for Chrome and Edge, the Ollama fallback (including the one configuration step that catches everyone the first time around CORS), and how to read the panel.</p>
+<p>The extension is a sideloaded developer tool, not a public store listing. The intent is the same as the audit pipeline: an instrument for MX practitioners, demonstrably correct, with the source open to inspection. The first reader is an MX practitioner; the second reader is a regulator who wants to see how the inspection was conducted.</p>
+<hr>
+<p><em>Version 1.0 · 31 May 2026 · <a href="https://mx.allabout.network/blog/drafts/watching-the-machines/google-nano-model/">Part of the Watching the Machines column</a></em></p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+</body>
+</html>

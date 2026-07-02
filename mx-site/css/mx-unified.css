@@ -1,0 +1,1028 @@
+/**
+ * MX Unified Stylesheet — mx.allabout.network
+ * @description Foundation design system for the unified MX site.
+ *              Based on the bookshop dark theme — CogNovaMX Ltd.
+ * @version 1.0
+ * @author Tom Cranstoun
+ * @mx:status active
+ * @mx:contentType stylesheet
+ */
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Custom properties ── */
+:root {
+  /* Core palette (bookshop dark) */
+  --mx-blue-deep: #0a1628;
+  --mx-blue-dark: #0d2137;
+  --mx-blue-mid: #1a3a5c;
+  --mx-blue-accent: #2070c0;
+  --mx-blue-light: #5ba4e6;
+  --mx-gold: #d4a843;
+  --mx-white: #ffffff;
+  --mx-off-white: #f0f4f8;
+  --mx-text: #e8edf2;
+  --mx-text-muted: #b3c1d4;
+  --mx-green-free: #2ecc71;
+
+  /* Surfaces and borders */
+  --mx-surface: rgba(26, 58, 92, 0.3);
+  --mx-surface-strong: rgba(26, 58, 92, 0.5);
+  --mx-border: rgba(45, 125, 210, 0.15);
+  --mx-border-strong: rgba(45, 125, 210, 0.25);
+
+  /* Typography */
+  --mx-font-heading: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --mx-font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --mx-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  /* Layout */
+  --mx-max-width: min(92vw, 1600px);
+  --mx-content-width: min(92vw, 1600px);
+  --mx-section-padding: 5rem 2rem;
+
+  /* Overrides for the mx-blog.css variable palette so blog/learn pages
+     that load both stylesheets render with the dark site theme instead
+     of mx-blog's light-mode defaults. mx-blog.css now uses :where(:root)
+     for its own definitions, so these (specificity 0,1,0) win. */
+  --primary-bg: var(--mx-blue-deep);
+  --primary-text: var(--mx-text);
+  --secondary-text: var(--mx-text-muted);
+  --heading-color: var(--mx-white);
+  --accent-color: var(--mx-blue-light);
+  --accent-hover: var(--mx-gold);
+  --border-color: var(--mx-border);
+  --code-bg: rgba(26, 58, 92, 0.4);
+  --code-border: var(--mx-border);
+  --code-text: var(--mx-text);
+  --table-header-bg: var(--mx-surface-strong);
+  --intro-bg: var(--mx-surface);
+  --skip-link-bg: var(--mx-gold);
+  --skip-link-text: var(--mx-blue-deep);
+  --back-to-top-text: var(--mx-blue-deep);
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --shadow-color-strong: rgba(0, 0, 0, 0.6);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--mx-font-body);
+  color: var(--mx-text);
+  background-color: var(--mx-blue-deep);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-top: 64px; /* clear fixed .site-header */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Links ── */
+a {
+  color: var(--mx-blue-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--mx-gold);
+}
+
+/* WCAG 1.4.1: links inside prose must be distinguishable by more than colour.
+   Underline links inside paragraphs, list items, descriptions, table cells,
+   and blockquotes — but not navigation, buttons, hero/CTA, or footer brand. */
+main p a,
+main li a,
+main dd a,
+main blockquote a,
+main td a,
+main th a,
+.blog-page a:not(.btn):not([class*="cta"]),
+.section-inner p a,
+.section-inner li a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+main p a:hover,
+main li a:hover,
+main dd a:hover,
+main blockquote a:hover,
+main td a:hover,
+main th a:hover,
+.blog-page a:not(.btn):not([class*="cta"]):hover,
+.section-inner p a:hover,
+.section-inner li a:hover {
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--mx-gold);
+  outline-offset: 2px;
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--mx-gold);
+  color: var(--mx-blue-deep);
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 4px 4px;
+  z-index: 1000;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ── Header Buy CTA ── */
+.header-buy-cta {
+  background: #c95000;
+  color: #fff;
+  padding: 0.5rem 1.1rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+  margin-left: auto;
+  box-shadow: 0 2px 10px rgba(201, 80, 0, 0.45);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.header-buy-cta:hover,
+.header-buy-cta:focus {
+  background: #a84200;
+  box-shadow: 0 4px 16px rgba(168, 66, 0, 0.6);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .header-buy-cta {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* ── Header ── */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 22, 40, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--mx-border);
+  padding: 0.75rem 2rem;
+}
+
+.header-inner {
+  max-width: var(--mx-max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo img {
+  height: 36px;
+  width: auto;
+}
+
+.header-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.header-nav a {
+  color: var(--mx-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.header-nav a:hover,
+.header-nav a:focus-visible {
+  color: var(--mx-gold);
+  border-bottom-color: var(--mx-gold);
+}
+
+.header-nav a[aria-current="page"] {
+  color: var(--mx-gold);
+  border-bottom-color: var(--mx-gold);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--mx-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--mx-blue-accent);
+  color: var(--mx-white);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--mx-blue-light);
+  color: var(--mx-white);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(45, 125, 210, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--mx-text);
+  border: 2px solid var(--mx-blue-accent);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  background: var(--mx-blue-accent);
+  color: var(--mx-white);
+}
+
+.btn-free {
+  background: var(--mx-green-free);
+  color: var(--mx-blue-deep);
+}
+
+.btn-free:hover,
+.btn-free:focus-visible {
+  background: #27ae60;
+  color: var(--mx-blue-deep);
+  transform: translateY(-1px);
+}
+
+.btn-gold {
+  background: var(--mx-gold);
+  color: var(--mx-blue-deep);
+}
+
+.btn-gold:hover,
+.btn-gold:focus-visible {
+  background: #c49a3a;
+  color: var(--mx-blue-deep);
+  transform: translateY(-1px);
+}
+
+/* ── Sections ── */
+.section {
+  padding: var(--mx-section-padding);
+}
+
+.section-inner {
+  max-width: var(--mx-max-width);
+  margin: 0 auto;
+}
+
+.section-dark {
+  background: var(--mx-blue-dark);
+}
+
+.section-deep {
+  background: var(--mx-blue-deep);
+}
+
+.section-mid {
+  background: linear-gradient(180deg, var(--mx-blue-dark) 0%, var(--mx-blue-deep) 100%);
+}
+
+.section-title {
+  font-family: var(--mx-font-heading);
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--mx-white);
+}
+
+.section-subtitle {
+  text-align: center;
+  max-width: min(65vw, 900px);
+  margin: 0 auto 3rem;
+  font-size: 1.125rem;
+  color: var(--mx-text-muted);
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .section-subtitle {
+    max-width: 100%;
+  }
+}
+
+/* ── Prose columns ──
+ * Constrain text-only sections to a readable line length.
+ * Without this, paragraphs run the full 1600px max-width on wide screens
+ * and read as a wall.
+ */
+.section-inner.section-prose {
+  max-width: min(65vw, 780px);
+}
+
+@media (max-width: 768px) {
+  .section-inner.section-prose {
+    max-width: 100%;
+  }
+}
+
+.section-prose p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  color: var(--mx-text);
+}
+
+.section-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.section-prose .section-title {
+  text-align: left;
+  margin-bottom: 1.25rem;
+}
+
+/* Lead paragraph — opening statement of a prose section */
+.section-lead {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--mx-white);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .section-lead {
+    font-size: 1.25rem;
+  }
+}
+
+/* Framework list — visual cards for short labelled list items
+ * (e.g. the four-part MX / Gathering / REGINALD / CogNovaMX split).
+ */
+.framework-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.framework-list li {
+  background: var(--mx-surface);
+  border: 1px solid var(--mx-border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.0625rem;
+  color: var(--mx-text);
+  line-height: 1.5;
+}
+
+.framework-list li strong {
+  display: block;
+  color: var(--mx-white);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .framework-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Content container ── */
+main {
+  max-width: var(--mx-max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.container {
+  max-width: var(--mx-max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.content-narrow {
+  max-width: var(--mx-content-width);
+  margin: 0 auto;
+}
+
+/* ── Cards ── */
+.proposition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.proposition-card {
+  background: var(--mx-surface);
+  border: 1px solid var(--mx-border);
+  border-radius: 8px;
+  padding: 2rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.proposition-card:hover {
+  border-color: var(--mx-blue-accent);
+  transform: translateY(-2px);
+}
+
+.proposition-card h2,
+.proposition-card h3 {
+  font-size: 1.25rem;
+  color: var(--mx-white);
+  margin-bottom: 0.75rem;
+}
+
+.proposition-card p {
+  color: var(--mx-text);
+  font-size: 0.9375rem;
+}
+
+/* Buttons inside cards and sections — consistent top margin */
+.proposition-card .btn,
+.section .btn {
+  margin-top: 1rem;
+}
+
+/* About hero heading and CTA layout */
+.about-hero-heading {
+  color: var(--mx-white);
+  margin-bottom: 1rem;
+}
+
+.about-hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+/* Blog and learn page content padding */
+.section-inner.blog-page {
+  padding-top: 2rem;
+}
+
+.proposition-card time {
+  color: var(--mx-gold);
+  font-size: 0.85rem;
+}
+
+.section-title--spaced {
+  margin-top: 3rem;
+}
+
+/* ── Book cards ── */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.book-card {
+  background: rgba(26, 58, 92, 0.25);
+  border: 1px solid var(--mx-border);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-card:hover {
+  border-color: var(--mx-blue-accent);
+  transform: translateY(-4px);
+}
+
+.book-card-image {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.book-card-image img {
+  height: 280px;
+  width: auto;
+  border-radius: 4px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Idle float + shadow for book-series grid covers — motion-welcome only */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes bookCardFloat {
+    0%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    50% {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.5);
+    }
+  }
+  .book-card-image img {
+    animation: bookCardFloat 4s ease-in-out infinite;
+    will-change: transform, box-shadow;
+  }
+  .book-card:nth-child(2) .book-card-image img { animation-delay: 1.3s; }
+  .book-card:nth-child(3) .book-card-image img { animation-delay: 2.6s; }
+}
+
+.book-card h3 {
+  font-size: 1.5rem;
+  color: var(--mx-white);
+  margin-bottom: 0.5rem;
+}
+
+.book-card .book-tagline {
+  color: var(--mx-text-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 1rem;
+  min-height: 3rem;
+}
+
+.book-card .book-price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--mx-gold);
+  margin-bottom: 1.25rem;
+}
+
+.book-card .book-price.free {
+  color: var(--mx-green-free);
+}
+
+/* ── Book detail pages (signup, CTA) ── */
+.signup-section {
+  text-align: center;
+  padding-top: 3rem;
+}
+
+.signup-intro {
+  color: var(--mx-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.signup-secondary {
+  color: var(--mx-text-muted);
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background: var(--mx-gold);
+  color: var(--mx-blue-deep);
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  margin-top: 1rem;
+}
+
+.cta-button:hover {
+  background: #e0b84e;
+  transform: translateY(-2px);
+}
+
+/* Hold the dark text colour in every interactive state. The base .cta-button
+   color is specificity (0,1,0); a bare `a:hover` / `a:visited` link rule is
+   (0,1,1) and would otherwise repaint the label a low-contrast tone on the gold. */
+.cta-button:hover,
+.cta-button:focus,
+.cta-button:active,
+.cta-button:visited {
+  color: var(--mx-blue-deep);
+}
+
+.cta-button.cta-secondary {
+  background: transparent;
+  color: var(--mx-gold);
+  border: 2px solid var(--mx-gold);
+}
+
+.cta-button.cta-secondary:hover {
+  background: var(--mx-gold);
+  color: var(--mx-blue-deep);
+}
+
+.buy-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.buy-buttons .cta-button {
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.cta-button.cta-disabled,
+.cta-button.cta-disabled:hover {
+  background: #999;
+  color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Two-column explanation ── */
+.mx-explanation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.mx-explanation-text h3 {
+  font-size: 1.5rem;
+  color: var(--mx-white);
+  margin-bottom: 1rem;
+}
+
+.mx-explanation-text p {
+  color: var(--mx-text-muted);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.mx-explanation-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.mx-explanation-visual img {
+  max-height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Author section ── */
+.author-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.author-photo {
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  width: 100%;
+}
+
+.author-bio h3 {
+  font-size: 1.5rem;
+  color: var(--mx-white);
+  margin-bottom: 1rem;
+}
+
+.author-bio p {
+  color: var(--mx-text-muted);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+/* ── Footer ── */
+.site-footer {
+  background: var(--mx-blue-deep);
+  border-top: 1px solid var(--mx-border);
+  padding: 3rem 2rem 2rem;
+}
+
+.footer-inner {
+  max-width: var(--mx-max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer-brand p {
+  color: var(--mx-text-muted);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.footer-links h4,
+.footer-contact h4,
+.footer-heading {
+  color: var(--mx-white);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: var(--mx-text-muted);
+  font-size: 0.875rem;
+}
+
+.footer-links a:hover {
+  color: var(--mx-gold);
+}
+
+.footer-contact p,
+.footer-contact a {
+  color: var(--mx-text-muted);
+  font-size: 0.875rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.footer-bottom {
+  max-width: var(--mx-max-width);
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(45, 125, 210, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8125rem;
+  color: var(--mx-text-muted);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .mx-explanation {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .author-grid {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --mx-section-padding: 3rem 1.25rem;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  .header-nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(10, 22, 40, 0.98);
+    padding: 1rem 2rem;
+    gap: 0;
+    border-bottom: 1px solid var(--mx-border);
+  }
+
+  .header-nav.open a {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(45, 125, 210, 0.08);
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .books-grid {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    margin: 2rem auto 0;
+  }
+
+  .book-card-image img {
+    height: 220px;
+  }
+
+  .author-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .author-photo {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Print ── */
+@media print {
+  .site-header,
+  .skip-link,
+  .mobile-menu-btn {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: #1a1a1a;
+  }
+
+  a {
+    color: #1a1a1a;
+  }
+
+  a[href]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #666;
+  }
+}
+
+/* ── COG viewer overlay ──────────────────────────────────────────────── */
+.cog-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0,0,0,.6);
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+.cog-overlay__dialog {
+  background: #ffffff;
+  color: #111111;
+  border-radius: .5rem;
+  max-width: 64rem;
+  max-height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.cog-overlay__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.25rem;
+  border-bottom: 1px solid #d1d5db;
+  flex-shrink: 0;
+  background: #ffffff;
+  color: #111111;
+}
+.cog-overlay__title {
+  font-family: monospace;
+  font-size: .95rem;
+  color: #111111;
+}
+.cog-overlay__close {
+  background: none;
+  border: 1px solid #6b7280;
+  border-radius: .25rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: .2rem .5rem;
+  color: #111111;
+}
+.cog-overlay__close:hover {
+  background: #f3f4f6;
+}
+.cog-overlay__body {
+  margin: 0;
+  padding: 1.25rem;
+  overflow: auto;
+  font-family: monospace;
+  font-size: .8rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  flex: 1;
+  background: #f9fafb;
+  color: #111111;
+}
+.cog-overlay--open {
+  display: block;
+}
+ol li code[data-cog] {
+  cursor: pointer;
+  text-decoration: underline dotted;
+}
+body.cog-overlay-open {
+  overflow: hidden;
+}

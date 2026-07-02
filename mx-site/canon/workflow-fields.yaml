@@ -1,0 +1,146 @@
+title: MX Workflow Fields
+version: '1.0'
+created: '2026-05-08'
+modified: '2026-05-08'
+author: Tom Cranstoun
+description: 'Field dictionary for workflow and process metadata used by tooling artefacts that borrow markdown frontmatter syntax. These fields describe submission acts, build acts, audit acts, and similar process state. They are NOT part of the open MX standard and NOT vendor extensions to the content vocabulary; they are workflow vocabulary that lives in its own dictionary so the canon and the vendor-extensions file stay focused on document content.'
+mx:
+  status: active
+  category: workflow
+  partOf: mx-cognovamx-tooling
+  tags:
+  - fields
+  - workflow
+  - process
+  - metadata
+  audience:
+  - machines
+  - humans
+  contentType: field-dictionary
+  runbook: |
+    Workflow vocabulary for tooling artefacts. Each profile groups fields used by a specific workflow:
+      - submission-package: fields used by /mx-gathering-submit cover-note packages
+      - (future) audit-run, build-output, etc.
+    A file using workflow fields declares its workflow via its directory location plus a contentType
+    that matches the profile name. The validator loads this dictionary alongside fields-data.yaml and
+    cognovamx-fields.yaml so workflow fields count as known.
+
+  profiles:
+    - name: submission-package
+      description: Fields carried by the cover-note packages produced by /mx-gathering-submit when filing
+        a draft to The Gathering's Stream community-review process. The package is a transient artefact
+        that records which draft is being submitted, at which commit, on which date, via which path.
+        Stream itself does not mandate this packaging shape; it is a CogNovaMX tooling convention so
+        that the round-trip (prepare, file, feedback, incorporate, ratify) is auditable.
+
+  fields:
+  - name: package
+    type: string
+    definition: Stable identifier for a Stream-submission package. Conventionally the docname of the
+      draft being submitted concatenated with the prepared-at date. Used as the package's
+      machine-readable handle for tooling and in cross-references between the package and the
+      submissions registry.
+    example: draft-cranstoun-mx-cogs-2026-05-07
+    notes: One package file per submission attempt. A revision filed later carries a different package
+      identifier (different preparedAt date) so the historical record stays immutable.
+    status: canonical
+    profile: submission-package
+    required: required
+    context: Carried in the frontmatter of files at mx-outputs/submissions/<docname>-<date>.md.
+    description: Stable handle for a Stream-submission package, derived from docname + prepared-at date.
+
+  - name: versionSubmitted
+    type: string
+    definition: The version of the draft as it was filed in this package. Quoted so semantic-style
+      versions like "1.0" preserve the trailing zero through YAML parsers that would otherwise
+      coerce them to a number.
+    example: "1.0"
+    notes: When a draft is revised and refiled, the new package carries the new version. The previous
+      package's versionSubmitted stays as the historical record.
+    status: canonical
+    profile: submission-package
+    required: required
+    context: Tracks the submission lineage so reviewers can follow which version was discussed in a
+      given Stream thread.
+    description: Quoted version string of the draft at the moment of submission.
+
+  - name: preparedAt
+    type: date
+    definition: ISO 8601 date (YYYY-MM-DD) when the package was prepared. Distinct from the date the
+      package was filed to Stream (which lives in the submissions registry as submittedAt).
+    example: 2026-05-07
+    notes: Disambiguates packages prepared for the same draft on different dates.
+    status: canonical
+    profile: submission-package
+    required: required
+    context: Used together with docname to form the package's filename and the package field value.
+    description: ISO 8601 date when the package was prepared.
+
+  - name: draftPath
+    type: string
+    definition: Filesystem path to the source draft within the hub at the moment of preparation.
+      Relative to the hub repository root.
+    example: mx-shared-gathering/draft-cogs.md
+    notes: Source path is recorded so the package can be reproduced from the same hub state. Paths
+      survive even if the hub layout later changes; the draftCommit field anchors the path to a
+      specific tree.
+    status: canonical
+    profile: submission-package
+    required: required
+    context: Pairs with draftCommit to uniquely identify the bytes the package was prepared against.
+    description: Hub-relative filesystem path to the source draft at preparation time.
+
+  - name: draftCommit
+    type: string
+    definition: Short SHA (typically 7 characters) of the submodule commit at which the source draft
+      lived when the package was prepared. Anchors the package to a specific draft state.
+    example: b75cbc4
+    notes: Short SHA is permitted because the surrounding draftPath disambiguates. Full SHAs are
+      acceptable; the validator does not enforce length.
+    status: canonical
+    profile: submission-package
+    required: required
+    context: A reviewer reading the package can fetch the exact draft bytes via this commit + draftPath.
+    description: Submodule commit SHA at which the source draft was filed.
+
+  - name: hubCommit
+    type: string
+    definition: Short SHA of the hub commit at which the package was prepared. Provides a second
+      anchor (alongside draftCommit) so the package's full preparation context is reproducible.
+    example: cc969141
+    notes: The hub commit can be different from the submodule commit; recording both lets a reviewer
+      reconstruct the full hub-plus-submodule state at preparation.
+    status: canonical
+    profile: submission-package
+    required: required
+    context: Used when validating that the package's referenced state still exists.
+    description: Hub commit SHA at which the package was prepared.
+
+  - name: draftUrl
+    type: string
+    definition: Stable, deep-linked URL to the source draft at the cited draftCommit. Resolves to
+      the literal bytes the package was prepared against.
+    example: https://github.com/ddttom/mx-shared-gathering/blob/b75cbc4/draft-cogs.md
+    notes: GitHub blob URLs at a specific commit are immutable. A reviewer following the URL sees
+      exactly what was filed.
+    status: canonical
+    profile: submission-package
+    required: required
+    context: Quoted in the cover note posted to Stream so reviewers can read the draft without
+      cloning the repository.
+    description: Permalink to the draft at draftCommit.
+
+  - name: isNewNote
+    type: boolean
+    definition: True when the package is filing a draft for the first time; false when the package
+      is filing a revision of a previously filed draft. Default false when omitted.
+    example: true
+    notes: Useful for downstream tooling that distinguishes first-time submissions (which open a new
+      Stream thread) from revisions (which post into an existing thread).
+    status: canonical
+    profile: submission-package
+    required: optional
+    context: Carried only when meaningful; can be omitted for revisions where the default false applies.
+    description: Whether the package is filing a draft for the first time.
+
+  deprecations: []

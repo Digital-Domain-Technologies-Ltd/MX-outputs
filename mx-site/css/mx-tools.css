@@ -1,0 +1,716 @@
+/* MX Tools — shared styles for /tools/* pages.
+   Loaded after mx-unified.css + mx-hero.css. Reuses the brand tokens
+   defined in :root of mx-unified.css.
+
+   Imported partial (an @import must precede all style rules):
+     mx-prov-chain.css — the interactive AI-provenance chain, styled once and
+     shared with the blog demo overlay (mx-blog.css imports the same file). */
+@import url("mx-prov-chain.css");
+
+:root {
+  --mx-tool-pass: var(--mx-green-free);
+  --mx-tool-warn: var(--mx-gold);
+  --mx-tool-fail: #c95000;
+  --mx-tool-surface: rgba(26, 58, 92, 0.4);
+  --mx-tool-surface-strong: rgba(26, 58, 92, 0.6);
+}
+
+/* ── Drop zone ───────────────────────────────────────────── */
+
+.tool-dropzone {
+  display: block;
+  position: relative;
+  border: 2px dashed var(--mx-border-strong);
+  border-radius: 12px;
+  background-color: var(--mx-tool-surface);
+  padding: 3rem 2rem;
+  margin: 0 auto;
+  max-width: 720px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.tool-dropzone:hover,
+.tool-dropzone:focus-within {
+  border-color: var(--mx-blue-light);
+  background-color: var(--mx-tool-surface-strong);
+}
+
+.tool-dropzone.is-dragover {
+  border-color: var(--mx-gold);
+  background-color: var(--mx-tool-surface-strong);
+}
+
+.tool-dropzone-prompt {
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem;
+  color: var(--mx-text);
+}
+
+.tool-dropzone-hint {
+  color: var(--mx-text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.tool-dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.tool-dropzone-busy {
+  margin-top: 1rem;
+  color: var(--mx-blue-light);
+  font-size: 0.95rem;
+}
+
+/* ── Inspector hero (compact, dropzone above the fold) ───── */
+
+.hero--inspector {
+  padding: 4rem 0 2.5rem;
+}
+
+.hero--inspector h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+}
+
+.hero--inspector h1::before {
+  margin-bottom: 12px;
+}
+
+.hero--inspector h1::after {
+  margin-top: 12px;
+}
+
+.hero--inspector .subtitle {
+  max-width: 62ch;
+}
+
+.hero--inspector .tool-dropzone {
+  margin: 1rem 0 0;
+  max-width: 640px;
+  padding: 2rem;
+}
+
+/* ── Canonical-provenance URL panel ──────────────────────── */
+
+.tool-prov-url {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--mx-border);
+  background-color: var(--mx-tool-surface);
+}
+
+.tool-prov-url code {
+  word-break: break-all;
+}
+
+.tool-prov-url-status {
+  margin: 0.5rem 0 0;
+  color: var(--mx-blue-light);
+  font-size: 0.95rem;
+}
+
+/* ── Single-flow results + evidence chain ────────────────── */
+
+.tool-chain {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--mx-border);
+}
+
+.tool-chain[hidden] {
+  display: none;
+}
+
+.tool-results[hidden] {
+  display: none;
+}
+
+/* ── Verdict badge ───────────────────────────────────────── */
+
+.tool-verdict {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tool-verdict.is-mx {
+  background-color: var(--mx-tool-pass);
+  color: var(--mx-blue-deep);
+}
+
+.tool-verdict.is-eaa {
+  background-color: var(--mx-tool-warn);
+  color: var(--mx-blue-deep);
+}
+
+.tool-verdict.is-plain {
+  background-color: var(--mx-tool-fail);
+  color: var(--mx-white);
+}
+
+.tool-verdict-pdf-name {
+  margin-left: 0.75rem;
+  color: var(--mx-text-muted);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 0.95rem;
+}
+
+/* ── Evidence table ──────────────────────────────────────── */
+
+.tool-evidence {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background-color: var(--mx-tool-surface);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tool-evidence th,
+.tool-evidence td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--mx-border);
+  vertical-align: top;
+}
+
+.tool-evidence th {
+  background-color: var(--mx-tool-surface-strong);
+  font-weight: 600;
+  color: var(--mx-text);
+}
+
+.tool-evidence tr:last-child td {
+  border-bottom: 0;
+}
+
+.tool-evidence-status {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tool-evidence-status.is-pass {
+  color: var(--mx-tool-pass);
+}
+
+.tool-evidence-status.is-fail {
+  color: var(--mx-tool-fail);
+}
+
+.tool-evidence-status.is-na {
+  color: var(--mx-text-muted);
+}
+
+.tool-evidence-detail {
+  color: var(--mx-text-muted);
+  font-size: 0.9rem;
+  font-family: var(--mx-font-mono);
+  word-break: break-word;
+}
+
+/* ── Downloads panel ─────────────────────────────────────── */
+
+.tool-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.tool-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  background-color: var(--mx-blue-accent);
+  color: var(--mx-white);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 200ms ease;
+}
+
+.tool-download:hover,
+.tool-download:focus-visible {
+  background-color: var(--mx-blue-light);
+  color: var(--mx-blue-deep);
+}
+
+.tool-download::before {
+  content: "\2193";
+  font-weight: 700;
+}
+
+/* ── Pivot section ───────────────────────────────────────── */
+
+.tool-pivot {
+  margin-top: 2.5rem;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: var(--mx-tool-surface-strong);
+  border-left: 4px solid var(--mx-gold);
+}
+
+.tool-pivot h3 {
+  margin-top: 0;
+  color: var(--mx-white);
+}
+
+.tool-pivot-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  background-color: var(--mx-gold);
+  color: var(--mx-blue-deep);
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: background-color 200ms ease;
+}
+
+.tool-pivot-cta:hover,
+.tool-pivot-cta:focus-visible {
+  background-color: var(--mx-blue-light);
+  color: var(--mx-blue-deep);
+}
+
+/* ── Tier cards (MX Compatible / EAA tagged / Plain) ────── */
+
+.tool-tier-cards {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.tool-tier-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 10px;
+  background-color: var(--mx-tool-surface);
+  border-left: 4px solid var(--mx-border-strong);
+}
+
+.tool-tier-card.is-mx    { border-left-color: var(--mx-tool-pass); }
+.tool-tier-card.is-eaa   { border-left-color: var(--mx-tool-warn); }
+.tool-tier-card.is-plain { border-left-color: var(--mx-tool-fail); }
+
+.tool-tier-card-label {
+  min-width: 9rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-top: 0.2rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tool-tier-card.is-mx    .tool-tier-card-label { color: var(--mx-tool-pass); }
+.tool-tier-card.is-eaa   .tool-tier-card-label { color: var(--mx-tool-warn); }
+.tool-tier-card.is-plain .tool-tier-card-label { color: var(--mx-tool-fail); }
+
+.tool-tier-card-body {
+  color: var(--mx-text);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Reason list (Privacy / Verifiability / Cost honesty) ── */
+
+.tool-reason-list {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tool-reason-list li {
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  background-color: var(--mx-tool-surface);
+  border-left: 3px solid var(--mx-border-strong);
+  line-height: 1.65;
+}
+
+.tool-reason-list li strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--mx-white);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── Badge token table ───────────────────────────────────── */
+
+.tool-badge-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background-color: var(--mx-tool-surface);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tool-badge-table caption {
+  text-align: left;
+  font-weight: 600;
+  color: var(--mx-text-muted);
+  font-size: 0.88rem;
+  caption-side: top;
+  padding: 0.75rem 1rem 0.4rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tool-badge-table th,
+.tool-badge-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--mx-border);
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.tool-badge-table th {
+  background-color: var(--mx-tool-surface-strong);
+  font-weight: 600;
+  color: var(--mx-text);
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.tool-badge-table td:first-child {
+  white-space: nowrap;
+}
+
+.tool-badge-table td:first-child code {
+  font-size: 0.8rem;
+}
+
+.tool-badge-table td:last-child {
+  color: var(--mx-text-muted);
+  font-size: 0.88rem;
+}
+
+.tool-badge-table tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ── Results panel container ─────────────────────────────── */
+
+.tool-results {
+  margin-top: 2rem;
+}
+
+.tool-results[hidden] {
+  display: none;
+}
+
+.tool-error {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--mx-tool-surface-strong);
+  border-left: 4px solid var(--mx-tool-fail);
+  color: var(--mx-text);
+  margin: 1rem 0;
+}
+
+/* ── Provenance explorer ─────────────────────────────────── */
+
+.prov-explorer {
+  margin-top: 1.5rem;
+}
+
+.prov-sourcebar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: var(--mx-tool-surface-strong);
+}
+
+.prov-source-name {
+  font-weight: 600;
+  color: var(--mx-text);
+  font-family: var(--mx-font-mono);
+  word-break: break-all;
+}
+
+.prov-source-meta {
+  color: var(--mx-text-muted);
+  font-size: 0.9rem;
+}
+
+.prov-message:empty {
+  display: none;
+}
+
+.prov-note {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  background-color: var(--mx-tool-surface-strong);
+  border-left: 4px solid var(--mx-tool-fail);
+  color: var(--mx-text);
+}
+
+.prov-empty-state {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background-color: var(--mx-tool-surface);
+  color: var(--mx-text-muted);
+  line-height: 1.65;
+}
+
+.prov-empty-state p {
+  margin: 0 0 0.75rem;
+}
+
+.prov-empty-state p:last-child {
+  margin-bottom: 0;
+}
+
+/* Legend */
+
+.prov-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  color: var(--mx-text-muted);
+}
+
+.prov-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.prov-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.prov-dot.is-pass    { background-color: var(--mx-tool-pass); }
+.prov-dot.is-warn    { background-color: var(--mx-tool-warn); }
+.prov-dot.is-fail    { background-color: var(--mx-tool-fail); }
+.prov-dot.is-skipped { background-color: var(--mx-text-muted); }
+.prov-dot.is-info    { background-color: var(--mx-blue-light); }
+
+/* Two-column body */
+
+.prov-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .prov-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.prov-nodelist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.prov-node {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border: 0;
+  border-left: 3px solid var(--mx-border-strong);
+  border-radius: 6px;
+  background-color: var(--mx-tool-surface);
+  color: var(--mx-text);
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.prov-node:hover,
+.prov-node:focus-visible {
+  background-color: var(--mx-tool-surface-strong);
+}
+
+.prov-node.is-selected {
+  background-color: var(--mx-tool-surface-strong);
+  outline: 1px solid var(--mx-blue-light);
+}
+
+.prov-node.is-pass    { border-left-color: var(--mx-tool-pass); }
+.prov-node.is-warn    { border-left-color: var(--mx-tool-warn); }
+.prov-node.is-fail    { border-left-color: var(--mx-tool-fail); }
+.prov-node.is-skipped { border-left-color: var(--mx-text-muted); }
+.prov-node.is-info    { border-left-color: var(--mx-blue-light); }
+
+.prov-node-status {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background-color: var(--mx-tool-surface-strong);
+}
+
+.prov-node-status.is-pass    { color: var(--mx-tool-pass); }
+.prov-node-status.is-warn    { color: var(--mx-tool-warn); }
+.prov-node-status.is-fail    { color: var(--mx-tool-fail); }
+.prov-node-status.is-skipped { color: var(--mx-text-muted); }
+.prov-node-status.is-info    { color: var(--mx-blue-light); }
+
+.prov-node-label {
+  font-weight: 600;
+  font-family: var(--mx-font-mono);
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+.prov-node-sub {
+  color: var(--mx-text-muted);
+  font-size: 0.8rem;
+  word-break: break-word;
+}
+
+/* Detail panel */
+
+.prov-detail {
+  padding: 1.25rem 1.5rem;
+  border-radius: 10px;
+  background-color: var(--mx-tool-surface);
+  min-height: 8rem;
+  overflow-x: auto;
+}
+
+.prov-detail-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--mx-border);
+}
+
+.prov-detail-title {
+  margin: 0;
+  font-family: var(--mx-font-mono);
+  font-size: 1.05rem;
+  color: var(--mx-white);
+  word-break: break-word;
+}
+
+.prov-dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(6rem, max-content) minmax(0, 1fr);
+  gap: 0.4rem 1rem;
+}
+
+.prov-dl dt {
+  font-weight: 600;
+  color: var(--mx-text-muted);
+  font-size: 0.85rem;
+  font-family: var(--mx-font-mono);
+}
+
+.prov-dl dd {
+  margin: 0;
+  min-width: 0;
+  color: var(--mx-text);
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.prov-scalar {
+  font-size: 0.92rem;
+}
+
+.prov-null,
+.prov-empty {
+  color: var(--mx-text-muted);
+  font-style: italic;
+}
+
+.prov-hash {
+  font-family: var(--mx-font-mono);
+  font-size: 0.82rem;
+  cursor: pointer;
+  border-bottom: 1px dotted var(--mx-border-strong);
+  word-break: break-all;
+}
+
+.prov-hash:hover,
+.prov-hash:focus-visible {
+  color: var(--mx-blue-light);
+}
+
+.prov-hash.is-copied {
+  color: var(--mx-tool-pass);
+}
+
+.prov-tree {
+  margin: 0.2rem 0;
+}
+
+.prov-tree > summary {
+  cursor: pointer;
+  color: var(--mx-text-muted);
+  font-size: 0.85rem;
+}
+
+.prov-tree-row {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 1px solid var(--mx-border);
+  margin-left: 0.3rem;
+}
+
+.prov-key {
+  color: var(--mx-text-muted);
+  font-family: var(--mx-font-mono);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Accessible AI-provenance chain: the .mx-prov-* rules are imported once from
+   mx-prov-chain.css (top of this file). Only the tool-specific hint lives here.
+   ════════════════════════════════════════════════════════════════ */
+.prov-chain-hint { font-size: 0.9rem; color: var(--secondary-text); margin: 0.75rem 0 0.5rem; }

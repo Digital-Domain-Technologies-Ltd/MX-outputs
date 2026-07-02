@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "The Machine That Reviewed Itself"
+description: "We fed three days of Claude Code session transcripts back into Claude and asked it to find inefficiencies. It found them in two places: in how I work, and in the system itself. Here is what happened and what we fixed."
+author: "Tom Cranstoun"
+created: "2026-06-22"
+modified: "2026-06-22"
+version: "1.0"
+type: "blog-post"
+tags: [mx, machine-experience, self-improving-systems, ai-agents, claude-code, working-practice, automation]
+mx:
+  audience: [humans, machines]
+  status: "draft"
+  x-mx-contentState: draft
+  purpose: "Blog post showing MX OS self-auditing in practice: session JSONL data used to find both human and system inefficiencies. Chatty register, Tom voice, concrete details."
+  stability: draft
+  x-mx-contextProvides: ["MX OS self-auditing practice: session data used to improve both human working habits and system gate behaviour"]
+  x-mx-createdHash: a4f1b2c3
+  refersTo:
+    - CLAUDE.md
+    - datalake/draft-site/blog/what-is-machine-experience.md
+  runbook: "Blog post. Chatty register. Tom voice. Meta-story leads, then widens to architectural principle. No em-dashes. No numbered lists in prose."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/the-machine-that-reviewed-itself.md
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="We fed three days of Claude Code session transcripts back into Claude and asked it to find inefficiencies. It found them in two places: in how I work, and in the system itself. Here is what happened and what we fixed.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/the-machine-that-reviewed-itself.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/the-machine-that-reviewed-itself.html">
+  <meta property="og:title" content="The Machine That Reviewed Itself | CogNovaMX">
+  <meta property="og:description" content="We fed three days of Claude Code session transcripts back into Claude and asked it to find inefficiencies. It found them in two places: in how I work, and in the system itself. Here is what happened and what we fixed.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-22">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Machine That Reviewed Itself | CogNovaMX">
+  <meta name="twitter:description" content="We fed three days of Claude Code session transcripts back into Claude and asked it to find inefficiencies. It found them in two places: in how I work, and in the system itself. Here is what happened and what we fixed.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="The Machine That Reviewed Itself">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/the-machine-that-reviewed-itself.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The Machine That Reviewed Itself | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "The Machine That Reviewed Itself",
+        "headline": "The Machine That Reviewed Itself",
+        "description": "We fed three days of Claude Code session transcripts back into Claude and asked it to find inefficiencies. It found them in two places: in how I work, and in the system itself. Here is what happened and what we fixed.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-22",
+        "dateModified": "2026-06-22",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/the-machine-that-reviewed-itself.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1055,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/the-machine-that-reviewed-itself.html",
+        "name": "The Machine That Reviewed Itself",
+        "url": "https://mx.allabout.network/blog/drafts/the-machine-that-reviewed-itself.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#the-raw-material">The raw material</a></li>
+        <li><a href="#two-classes-of-inefficiency">Two classes of inefficiency</a></li>
+        <li><a href="#where-the-system-was-getting-in-its-own-way">Where the system was getting in its own way</a></li>
+        <li><a href="#what-we-fixed">What we fixed</a></li>
+        <li><a href="#why-this-is-the-point">Why this is the point</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1055">
+        <header class="article-header">
+          <h1>The Machine That Reviewed Itself</h1>
+          <div class="article-meta"
+               data-published="2026-06-22"
+               data-modified="2026-06-22"
+               data-reading-time="6 min">
+            <time datetime="2026-06-22">22 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>6 min read</span>
+          </div>
+        </header>
+
+<p>This morning I asked Claude to read three days of its own session transcripts and tell me where I was being inefficient. It found inefficiencies in two places: in how I work, and in the system itself. Both surprised me, in different ways.</p>
+<p>Here is what that looks like when you build on MX.</p>
+<h2 id="the-raw-material" tabindex="-1">The raw material</h2>
+<p>Claude Code saves every session as a JSONL file -- line-delimited JSON, one object per conversation event. Tool calls, user messages, assistant turns, hook outputs. Every session automatically produces one of these files, and they accumulate under <code>~/.claude/projects/</code>.</p>
+<p>Over three days (19-22 June) the MX-hub sessions generated 83 JSONL files totalling about 137MB. Five of those sessions were large enough to matter: 2-7MB each, covering a range of work from OKF field migrations to gate debugging to building new skills.</p>
+<p>I pointed Claude at them with a single question: what could be better?</p>
+<h2 id="two-classes-of-inefficiency" tabindex="-1">Two classes of inefficiency</h2>
+<p>Most AI-productivity writing assumes the human is the variable. Calibrate the prompts, add memory entries, adjust the workflow. The system is the system.</p>
+<p>What came back from the analysis was different. There were two distinct classes of problem.</p>
+<p>The first class was mine. I was re-teaching Claude the same rules across sessions. &quot;OKF is primary, MX is secondary&quot; -- Tom's verbatim correction from a 1,932-file codemod -- is not in <a href="http://CLAUDE.md">CLAUDE.md</a>. It should be. &quot;After every commit, state the SHA and file count&quot; -- said twice in the same session because the IDE shows stale state -- is not in <a href="http://CLAUDE.md">CLAUDE.md</a> either. Neither is &quot;Node.js, not shell, for new scripts.&quot; These are rules that belong in the permanent record, not in the conversation history.</p>
+<p>The second class was the system's. This one was more interesting.</p>
+<h2 id="where-the-system-was-getting-in-its-own-way" tabindex="-1">Where the system was getting in its own way</h2>
+<p>Gate 22 (<code>check-draft-site-fresh.cjs</code>) fires when a blog post source is edited without regenerating its served HTML. That is correct behaviour. But it was also firing when I updated only the frontmatter -- a <code>createdHash</code> field, a <code>modified</code> date -- without touching the body. The rendered HTML is unchanged. The gate was checking file modification time, not content. So it blocked a push that did not need to be blocked, and the escape hatch (<code>MX_SKIP_DRAFT_SITE_FRESH=1</code>) was used twice in one session.</p>
+<p>Gate 25 proves index generators are idempotent by running them and checking for drift. That is correct behaviour too. But when a new <code>.cog.md</code> file is committed, the generators legitimately produce new index output -- new registry entries -- that was never committed. Gate 25 then sees the tree as dirty. Not because a generator is non-deterministic, but because the regen step was missed. The fix required manual <code>npm run index:regen</code>, a new commit, and another push attempt. This happened across multiple sessions.</p>
+<p>And then there were the API keys sitting in <code>~/.claude/settings.json</code>. Two Anthropic API keys embedded verbatim in allowlist curl entries from an openclaw debugging session months ago. Not in git, not public, but in a file that should not carry live secrets regardless.</p>
+<p>Each of these is the same pattern underneath: something that could be caught or prevented by a script was instead being caught by a person, after the fact.</p>
+<h2 id="what-we-fixed" tabindex="-1">What we fixed</h2>
+<p>Three tracks of work came out of the analysis.</p>
+<p>The first track was the human rules. Four additions to <a href="http://CLAUDE.md">CLAUDE.md</a> -- the file that every Claude session in this repo reads at start. OKF priority. SHA reporting after commits. Search before writing new scripts. Node.js preference. Six new memory files covering Gate 22 bypass, Gate 25 regen, Appendix M editing, gathering sweep requirements, and the push-before-switching-sessions discipline. These are rules that should have been permanent. Now they are.</p>
+<p>The second track was the deterministic fixes. Gate 22 now reads the git diff for a source file and compares body content (everything after the closing frontmatter delimiter) between the base ref and HEAD. If the bodies are identical, the gate skips that file and logs &quot;frontmatter-only change, republish not required.&quot; Gate 25 now has a pre-check: if <code>.cog.md</code> files are in the push, it runs <code>npm run index:regen</code> before the idempotency check, and if the regen produces changes, it tells you exactly what to commit rather than failing with a drift error. The dream skill now auto-reruns after a fix rather than stopping and waiting for &quot;run again.&quot; And there is a new <code>/pre-push-sweep</code> skill that drains field-migration debt proactively before step-commit gates surface it one-by-one.</p>
+<p>The third track is this post.</p>
+<h2 id="why-this-is-the-point" tabindex="-1">Why this is the point</h2>
+<p>MX OS describes a repository that is self-describing, self-checking, and self-healing. The cog registry is its self-description. The pre-push gates are its self-checking. <code>mx:heal</code> is its self-healing.</p>
+<p>What happened this week is that the repository became self-auditing.</p>
+<p>The session JSONL files are machine-readable data. They carry timestamps, tool names, user messages, and correction signals. We ran them through the same kind of analysis we run on any other data source. The output was a structured finding set: corrections that should be permanent rules, gates that were firing on false positives, a missing pre-check that every cog-adding session was hitting.</p>
+<p>The improvements are now deterministic. Gate 22 does not rely on anyone remembering that metadata-only changes do not require republishing. Gate 25 does not rely on anyone remembering to run index:regen after adding a cog. The skill instructions tell Claude to re-run after a fix without being asked. Memory files carry the corrections forward into future sessions.</p>
+<p>This is what &quot;a check a script can do, a script does&quot; means in practice. The rule that lives in memory rots. The rule that lives in a gate holds.</p>
+<p>And the session data that revealed it -- the JSONL transcripts, the tool call sequences, the correction signals -- that is MX in the places you do not normally look. Provenance. Machine-readable context. The metadata that travels with the work.</p>
+<p>The machine did not just help with the work. It helped improve the conditions under which the work happens.</p>
+<hr>
+<p><em>If you are building with Claude Code and want to structure your sessions so the data stays readable and improvable, the MX OS model is a reasonable starting point. The session JSONL format is documented and stable. The analysis in this post took one session and five parallel fork agents to run. The improvements ship in the same session.</em></p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+</body>
+</html>
