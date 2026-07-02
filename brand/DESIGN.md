@@ -3,8 +3,8 @@
 title: "DESIGN - MX Site (CogNovaMX bookshop dark)"
 description: "Machine-readable brand description for the MX Site (CogNovaMX bookshop dark) theme. One fetch gives any AI tool, developer, or design tool the complete system."
 author: "Tom Cranstoun"
-created: "2026-06-28"
-modified: "2026-06-28"
+created: "2026-07-02"
+modified: "2026-07-02"
 version: "1.0"
 type: info-doc
 tags: [brand, design-system, tokens, mx-site]
@@ -121,8 +121,8 @@ PDF tokens use `--brand-*` prefix and pt units. Applied via `scripts/templates/p
 
 | Surface | File | How |
 |---------|------|-----|
-| mx-site web chrome | `mx-outputs/mx-site/css/themes/mx-site.css` | Generated `:root` block with `--mx-*` custom properties |
-| Blog post content | `mx-outputs/mx-site/css/mx-blog.css` | Legacy aliases resolve via `--primary-bg`, `--accent-color`, etc. |
+| mx-site web chrome | `mx-site/css/themes/mx-site.css` | Generated `:root` block with `--mx-*` custom properties |
+| Blog post content | `mx-site/css/mx-blog.css` | Legacy aliases resolve via `--primary-bg`, `--accent-color`, etc. |
 | PDF pipeline | `scripts/templates/pdf/_brand-tokens.css` | Generated `:root` block with `--brand-*` custom properties |
 | PDF base | `scripts/templates/pdf/_base.css` | Imports `_brand-tokens.css` |
 | Visual reference | `mx-outputs/brand/mx-brand-guide.html` | Hand-maintained; align with canonical values above |
@@ -134,6 +134,6 @@ npm run brand:gen
 ```
 
 This runs `compile-theme.cjs --template mx-site` and overwrites:
-- `mx-outputs/mx-site/css/themes/mx-site.css`
+- `mx-site/css/themes/mx-site.css`
 - `scripts/templates/pdf/_brand-tokens.css`
 - `mx-outputs/brand/DESIGN.md`
