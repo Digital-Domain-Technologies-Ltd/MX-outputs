@@ -9,7 +9,7 @@ title: "audit-runs-index"
 version: "1.0"
 description: "Index of all committed audit run outputs under mx-outputs/audit/runs/."
 created: 2026-06-18
-modified: 2026-07-01
+modified: 2026-07-02
 author: Tom Cranstoun
 type: info-doc
 tags: [audit, index, runs, latest-copy]
@@ -32,7 +32,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 |----------|------------|--------|-----|----|
 | atmors.netlify.app.d | - | pending | - | - |
 | axiompartners.vc | 2026-06-19 | pass | [latest-copy.pdf](axiompartners.vc/latest-copy.pdf) | [latest-copy.md](axiompartners.vc/latest-copy.md) |
-| cmscritic.com | 2026-07-01 | pass | [latest-copy.pdf](cmscritic.com/latest-copy.pdf) | [latest-copy.md](cmscritic.com/latest-copy.md) |
+| cmscritic.com | 2026-07-02 | pass | [latest-copy.pdf](cmscritic.com/latest-copy.pdf) | [latest-copy.md](cmscritic.com/latest-copy.md) |
 | crowdfavorite.com | - | pending | - | - |
 | dangerdevices.com | - | pending | - | - |
 | dkd.de-de | - | pending | - | - |
@@ -66,7 +66,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | www.marriott.com | - | pending | - | - |
 | www.meetkai.com | - | pending | - | - |
 | www.paribu.com | - | pending | - | - |
-| www.playboy.com | 2026-07-01 | pass | [latest-copy.pdf](www.playboy.com/latest-copy.pdf) | [latest-copy.md](www.playboy.com/latest-copy.md) |
+| www.playboy.com | 2026-07-02 | pass | [latest-copy.pdf](www.playboy.com/latest-copy.pdf) | [latest-copy.md](www.playboy.com/latest-copy.md) |
 | www.roamrobotics.com | - | pending | - | - |
 | www.steelatlas.vc | - | pending | - | - |
 | www.whiteroseclub.com | 2026-07-01 | pass | [latest-copy.pdf](www.whiteroseclub.com/latest-copy.pdf) | [latest-copy.md](www.whiteroseclub.com/latest-copy.md) |

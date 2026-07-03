@@ -19,8 +19,8 @@ performanceScore: 97
 accessibilityScore: 59
 seoScore: 80
 llmServedHtmlScore: 90
-agentReadabilityScore: 
-totalIssues: 523
+agentReadabilityScore: 85
+a11yIssues: 523
 htmlPagesAudited: 10
 version: "1.0"
 pipelineVersion: "1.1.0"
@@ -113,7 +113,7 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 | MX Stack Completeness | **61**/100 | `###########-------` Good |
 | Agent Readability | **85**/100 | `###############---` Excellent |
 | Pipeline Survivability | **77**/100 | `##############----` Excellent |
-| Machine Processing Speed | **854** ms/page | Machine-Heavy |
+| Machine Processing Speed | **854** ms/page | `##############----` Machine-Heavy |
 
 *The three machine metrics measure different things. **Served-HTML Structure** is the semantic markup an agent reads before JavaScript runs; **Agent Readability** is how easily the content can be quoted once reached; **Pipeline Survivability** is whether a page survives an agent's fetch and ingest. A site can score low on one and high on another.*
 
@@ -125,7 +125,7 @@ The site runs on **Shopify** (detected from multiple platform signals). The site
 
 Schema.org types indicate a content or editorial context.
 
-Across the audited set, Cmscritic scores 59/100 for accessibility and 80/100 for SEO.
+Cmscritic runs on Shopify. Across the audited set, Cmscritic scores 59/100 for accessibility and 80/100 for SEO.
 
 The audited set shows consistent metadata patterns across pages, with no brand-name, canonical-URL, meta-description, or entity divergence detected.
 
@@ -140,7 +140,7 @@ The audited set shows consistent metadata patterns across pages, with no brand-n
 | Meta description length | Pass | Meta descriptions present on all pages; none flagged for length violations |
 | Cross-page entity spread (same entity on multiple pages) | Pass | Schema.org entities reference consistent identifiers across the audited set |
 
-We identified inconsistencies in brand-name usage, duplicate canonical URLs, and uneven distribution of structured data entities across pages; correcting these will align the content with best practices.
+Across the audited set we found canonical URL duplication and inconsistent meta-description lengths; correcting each page’s canonical tag to its own URL and trimming or expanding descriptions to 150-160 characters will bring these checks into compliance.
 
 ---
 
@@ -167,7 +167,7 @@ We found 6 identical inline fragment(s) repeated across multiple pages, totallin
 
 ## Infrastructure and Hosting
 
-No mixed-hosting risks were identified. Assets appear to be served from a consistent infrastructure.
+The site is served via **AWS CloudFront** (Amazon.com, Inc.). Platform: **Shopify**.
 
 ---
 
@@ -182,19 +182,21 @@ PDFs are part of the machine-readable estate but sit outside this HTML audit's s
 
 Analysis of text patterns across audited pages found content reaching Probably AI on the AI-tells scale (1 of 11 pages scored). Machines do not consistently cite or label AI-generated content; this observation describes what the analysis found, not a conclusion about authorship.
 
-**Table 4**
+**/programs** (Probably AI) - prose patterns, vocabulary.
 
-*Text Patterns*
+**/bland-brands-beware-optimizelys-new-identity-brings-human-creativity-to-its-agentic-ai-and-aeo-ambitions** (Occasional) - prose patterns, vocabulary, copula density, verbal tics.
 
-| Page | Band | Signals |
-|------|------|---------|
-| /programs | Probably AI | prose patterns, vocabulary |
+**/ai-and-accessibility-incredible-potential-inconvenient-questions** (Occasional) - prose patterns, vocabulary, verbal tics.
 
-5 of 11 pages scored clean - no AI-pattern signals detected on those pages.
+**/kentico-opens-its-site-of-the-year-2026-awards-as-first-major-dxp-with-a-best-use-of-ai-category** (Occasional) - prose patterns, vocabulary, copula density, verbal tics.
 
-5 additional pages with long URLs are in `cmscritic-com-ai-tells.json` alongside this report.
+**/how-to-thrive-at-25-as-sitecore-charts-an-ai-future-community-remains-its-greatest-asset** (Occasional) - vocabulary, prose patterns, verbal tics, copula density.
 
-The pages show a hybrid style that balances predictable, formulaic phrasing with occasional natural variations in sentence length and word choice, giving the text a professional yet approachable tone. This blend is typical for industry-focused blog posts and award announcements, where concise clarity is prized while editorial nuance keeps readers engaged.
+6 of 11 audited pages show AI-writing patterns.
+
+The remaining 1 flagged page is in `cmscritic-com-ai-tells.json` alongside this report.
+
+Most of the audited set (6 of 11 pages) carries the sentence rhythms, vocabulary, and structural tells associated with machine-assisted drafting. For a publisher, a pattern this widespread is worth an editorial look at the drafting workflow. This describes what the text analysis measured, not a conclusion about who or what wrote each page.
 
 ---
 
@@ -208,7 +210,7 @@ The pages show a hybrid style that balances predictable, formulaic phrasing with
 
 ### What's Next
 
-**Table 5**
+**Table 4**
 
 *What's Next*
 
@@ -231,7 +233,7 @@ Each dimension is measured independently. Served dimensions reflect the page bef
 
 The site serves an empty HTML shell to server-side agents. The "Rendering" column shows whether each score was measured from the served HTML (what agents actually get) or the rendered HTML (what agents would get with SSR).
 
-**Table 6**
+**Table 5**
 
 *Audit Scores*
 
@@ -304,7 +306,7 @@ We recorded every same-host internal link found on each audited page. External l
 
 Per page, internal links range from 4 to 83, averaging 37 across 12 pages. That is typical (benchmark median 20 per page).
 
-**Table 7**
+**Table 6**
 
 *Appendix B: Link Inventory*
 
@@ -325,9 +327,9 @@ We reviewed 346 images across the audited set: 31 SVG, 80 PNG, 228 JPEG and 7 in
 
 On loading strategy, 265 images are marked `loading="lazy"` and 0 `loading="eager"`, while 81 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
-The table below shows how image formats are distributed across the 346 images in the audited set. None use WebP, the modern format that typically reduces file size by 25-35% over PNG or JPEG with no visible quality loss. The "Other" category includes formats such as GIF, AVIF, BMP, and unidentifiable types.
+JPEG and PNG account for 89% of the 346 images (228 and 80 files respectively). None use WebP, the modern format that typically reduces file size by 25-35% over PNG or JPEG with no visible quality loss.
 
-**Table 8**
+**Table 7**
 
 *Appendix C: Image Efficiency*
 
@@ -368,7 +370,7 @@ We work toward a site - and an estate of documents beyond it - that any machine 
 
 ## Appendix E: Markdown Content Negotiation
 
-**Table 9**
+**Table 8**
 
 *Appendix E: Markdown Content Negotiation*
 
@@ -389,7 +391,7 @@ The site returns standard HTML to all requests, including those carrying `Accept
 
 The reference material cited in this report. Click the link on screen or scan the QR code on paper: both encode the same URL.
 
-**Table 10**
+**Table 9**
 
 *Further Reading*
 
@@ -402,6 +404,7 @@ The reference material cited in this report. Click the link on screen or scan th
 | ![The Gathering QR](assets/qr/tg-community.png){ width=15mm } | **[The Gathering](https://tg.community)**: the community-led open-standards body that governs the MX metadata standard.\ <https://tg.community> |
 | ![MX Books QR](assets/qr/books-index.png){ width=15mm } | **[MX: The Protocols](https://mx.allabout.network/books/)**: the practitioner reference covering the scoring methodology and implementation patterns behind this report.\ <https://mx.allabout.network/books/> |
 | ![Provenance Gap QR](assets/qr/provenance-gap.png){ width=15mm } | **[The Provenance Gap](https://mx.allabout.network/blog/the-provenance-gap.html)**: the structural distinction between content that describes a claim and content that evidences it - and why machines treat unverified claims differently.\ <https://mx.allabout.network/blog/the-provenance-gap.html> |
+| ![MX Inspector QR](assets/qr/mx-inspector.png){ width=15mm } | **[MX Inspector](https://mx.allabout.network/tools/pdf-inspector.html)**: drop this PDF into the browser-based inspector to read the full provenance chain, attestation, and machine-readability score - no command-line tools required.\ <https://mx.allabout.network/tools/pdf-inspector.html> |
 
 ---
 
@@ -409,7 +412,7 @@ The reference material cited in this report. Click the link on screen or scan th
 
 ## This Report's Own Evidence Chain
 
-MX is to machines what UX is to users: it asks not whether a human can read this report, but whether a machine can read it, verify it, and act on it. A standard is credible only when we run on it ourselves, so we built this report to the standard it measures.
+MX is to machines what UX is to users: it asks not whether a human can read this report, but whether a machine can read it, verify it, and act on it. A standard is credible only when we run on it ourselves, so we built this report to the standard it measures. You can inspect this PDF and read every claim it makes directly in your browser at the [MX Inspector](https://mx.allabout.network/tools/pdf-inspector.html) - no command-line tools, no login, no installation required. Drop the file, read the chain.
 
 This report carries its own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. What this audit measures on a client's behalf, this deliverable meets.
 
@@ -427,7 +430,7 @@ The deterministic evidence chain is at `*.provenance.deterministic.json`. It rec
 
 To extract the chain from the PDF, run `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`. The `-b` flag is required so exiftool emits the raw payload; without it the output includes a label that breaks the JSON parse. The two chains share `auditId`, `startedAt`, `operator`, and a `provenance` header naming the exact git commit of the audit tooling that produced this run, so anyone can re-run it and verify byte-for-byte what we did. We prefer determinism to inference: explicit over inferred, recorded over remembered, a result you can reproduce over one we could only explain. Where a check can be made by a rule, a rule makes it, and the rule leaves a record rather than an opinion. That is why this chain shows what we did instead of asking you to trust a summary of it.
 
-**Verify this report yourself - no internal access required.** Three commands, open tools, no login:
+**Verify this report yourself - no tools, no login, no installation.** Drop this PDF into the [MX Inspector](https://mx.allabout.network/tools/pdf-inspector.html) to read the full provenance chain, operator identity, and attestation in your browser. Or run three commands directly against the file:
 
 1. Extract the full AI evidence chain from the PDF: `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`
 2. Confirm the operator identity: the JSON contains `operator.name`, `operator.email`, and `operator.organisation` naming the accountable individual.

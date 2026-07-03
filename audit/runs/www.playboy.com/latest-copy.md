@@ -78,7 +78,7 @@ mx:
 
 ## About This Report
 
-We audited 10 pages across www.playboy.com's site using the Web Audit Suite. We also reviewed the site's discovery files (sitemap.xml, llms.txt). We review each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image efficiency, security headers, content consistency, discovery file coverage, and machine pipeline survivability.
+We audited 10 pages across the site using the Web Audit Suite. We also reviewed the site's discovery files (sitemap.xml, llms.txt). We review each page across ten dimensions: performance (load time, Core Web Vitals), accessibility (WCAG 2.1 AA), SEO, semantic HTML structure, structured data quality, image efficiency, security headers, content consistency, discovery file coverage, and machine pipeline survivability.
 
 We fetch every page twice: as a server-side agent sees it (raw served HTML, no JavaScript) and after full browser rendering. The gap between those two results is the served-versus-rendered gap: the share of content invisible to agents that do not execute JavaScript. Server-side agents, including those behind ChatGPT, Claude, and Perplexity, parse served HTML only.
 
@@ -100,11 +100,6 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 
 ## Executive Summary
 
-**Table 1**
-
-*Executive Summary*
-
-The following table shows the overall score and verdict for each audit dimension:
 **Table 1**
 
 *Executive Summary*
@@ -145,13 +140,13 @@ The audited set shows consistent metadata patterns across pages, with no brand-n
 | Meta description length | Pass | Meta descriptions present on all pages; none flagged for length violations |
 | Cross-page entity spread (same entity on multiple pages) | Pass | Schema.org entities reference consistent identifiers across the audited set |
 
-Across the audited set, we found canonical URL duplicates and meta descriptions exceeding recommended length; correcting these will bring the pages into alignment with best-practice consistency for machines.
+Across the audited set, we found canonical URLs duplicated and meta descriptions exceeding recommended length; correcting these will align the content with best-practice guidelines for machine comprehension.
 
 ---
 
 ## Inline Code Duplicates
 
-The audit identified 33 identical inline fragments repeated across multiple pages, totalling 940 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
+We found 33 identical inline fragment(s) repeated across multiple pages, totalling 940 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
 
 **Table 3**
 
@@ -183,7 +178,7 @@ Hosted directly with **Cloudflare, Inc.**. Platform: **Shopify**.
 ---
 
 
-The audit found no PDFs linked in the 10-page sample., and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
+We linked no PDFs from the 10-page sample we crawled, and the sitemap declares no `.pdf` URLs either. This is a statement about what we sampled and what the sitemap reports, not a verdict about the wider document estate: PDFs do not appear in this count if they sit behind login forms, are linked only from uncrawled pages, are stored in unlinked directories, are kept out of the sitemap, or are hosted on third-party domains.
 
 PDFs are part of the machine-readable estate but sit outside this HTML audit's scope. A dedicated PDF review checks each public document against the ISO 14289-1 (PDF/UA) baseline (Tagged, Declared, Verified) and returns a per-document verdict.
 
@@ -203,9 +198,11 @@ Analysis of text patterns across audited pages found content reaching Hints at A
 
 **/read/television/inside-jimmi-simpson-s-wild-wild-westworld** (Occasional) - prose patterns, vocabulary, copula density, verbal tics.
 
-1 of 11 page scored clean - no AI-pattern signals detected on that page.
+10 of 11 audited pages show AI-writing patterns. The one page that read clean of AI-writing patterns is /read/heritage/birds-of-america.
 
 The remaining 5 flagged pages are in `www-playboy-com-ai-tells.json` alongside this report.
+
+Most of the audited set (10 of 11 pages) carries the sentence rhythms, vocabulary, and structural tells associated with machine-assisted drafting. For a publisher, a pattern this widespread is worth an editorial look at the drafting workflow. This describes what the text analysis measured, not a conclusion about who or what wrote each page.
 
 ---
 
@@ -213,11 +210,6 @@ The remaining 5 flagged pages are in `www-playboy-com-ai-tells.json` alongside t
 
 4 of 11 pages carry distinctive content. 7 pages have content that appears on multiple pages, giving machines redundant information per page. Pages with Significant Duplication give agents redundant signals with no additional information, reducing the effective page count a crawl budget can usefully read.
 
-**Table 4**
-
-*Content Uniqueness*
-
-The following table shows the uniqueness of content across audited pages:
 **Table 4**
 
 *Content Uniqueness*
@@ -248,11 +240,6 @@ The remaining 1 pages all scored Distinctive or Expected Boilerplate.
 
 *What's Next*
 
-The following table outlines the phases, scope, and outcomes of our audit:
-**Table 5**
-
-*What's Next*
-
 | Phase | Scope | Outcome |
 |-------|-------|---------|
 | Critical Fixes | WCAG 2.1 AA compliance | Priority 1 items resolved, compliance risk removed |
@@ -270,13 +257,8 @@ This audit is a starting point. The outcome we work toward is a site any machine
 
 Each dimension is measured independently. Served dimensions reflect the page before JavaScript runs; Rendered dimensions reflect what a browser produces after JavaScript executes. The Notes column explains the measurement method for each score.
 
-We serve an empty HTML shell to server-side agents. The "Rendering" column shows whether each score was measured from the served HTML (what agents actually get) or the rendered HTML (what agents would get with SSR).
+The site serves an empty HTML shell to server-side agents. The "Rendering" column shows whether each score was measured from the served HTML (what agents actually get) or the rendered HTML (what agents would get with SSR).
 
-**Table 6**
-
-*Audit Scores*
-
-The following table presents scores for each dimension along with rendering context:
 **Table 6**
 
 *Audit Scores*
@@ -352,11 +334,6 @@ Per page, internal links range from 35 to 54, averaging 42 across 11 pages. That
 
 *Appendix B: Link Inventory*
 
-The following table lists internal link classes and their counts:
-**Table 7**
-
-*Appendix B: Link Inventory*
-
 | Link class | Count |
 | --- | ---: |
 | Same-host internal links (all pages) | 459 |
@@ -374,13 +351,8 @@ We reviewed 61 images across the audited set: 11 SVG, 10 PNG, 19 JPEG and 21 in 
 
 On loading strategy, 21 images are marked `loading="lazy"` and 0 `loading="eager"`, while 40 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
-Other and JPEG account for 65% of the 61 images (21 and 19 files respectively). None use WebP, the modern format that typically reduces file size significantly over PNG or JPEG with no visible quality loss.s.
+Other and JPEG account for a majority of the 61 images (21 and 19 files respectively). None use WebP, the modern format that typically reduces file size noticeably compared to PNG or JPEG with no visible quality loss.s.
 
-**Table 8**
-
-*Appendix C: Image Efficiency*
-
-The following table shows image format distribution:
 **Table 8**
 
 *Appendix C: Image Efficiency*
@@ -396,9 +368,9 @@ The following table shows image format distribution:
 
 ## Appendix D: Audit Methodology
 
-**Tools:** Web Audit Suite v2.x (Checked in a rendered browser environment WCAG 2.1 AA, performance metrics, SEO scoring, LLM suitability, MX Stack Completeness, Structured Data Quality, Discovery Readiness, Heading Quality, Cross-Page Consistency)
+**Tools:** Web Audit Suite v2.x (Pa11y WCAG 2.1 AA, performance metrics, SEO scoring, LLM suitability, MX Stack Completeness, Structured Data Quality, Discovery Readiness, Heading Quality, Cross-Page Consistency)
 
-We use a rendered browser environment to check web pages against the Web Content Accessibility Guidelines. Guidelines (WCAG 2.1 AA).
+Pa11y is an open-source automated accessibility testing tool that checks web pages against the Web Content Accessibility Guidelines (WCAG 2.1 AA).
 
 **MX-specific metrics:** MX Stack Completeness measures all 7 metadata layers. Structured Data Quality (SDQ) scores JSON-LD entity richness. Discovery Readiness scores the robots.txt + sitemap + llms.txt + agent-card.json quartet. Cross-Page Consistency flags pages that deviate from site-wide patterns. Site Profile JSON enables cross-audit comparison. **Pipeline Survivability** runs eleven reading-resilience checks: truncation resilience, SPA shell resilience, soft-404 signalling, boilerplate balance, tabbed-disclosure avoidance, code-fence integrity, single-content-type negotiation, same-host redirects, heading specificity, early content start, and inline-tag bloat control. See **[MX: The Protocols Appendix S](https://mx.allabout.network/books/appendices/appendix-s.html)** for the full taxonomy and **[Appendix R](https://mx.allabout.network/books/appendices/appendix-r.html)** for the testing methodology.
 
@@ -424,17 +396,12 @@ We work toward a site - and an estate of documents beyond it - that any machine 
 
 *Appendix E: Markdown Content Negotiation*
 
-The following table lists markdown content negotiation checks and results:
-**Table 9**
-
-*Appendix E: Markdown Content Negotiation*
-
 | Check | Result |
 |-------|--------|
 | URL probed | https://www.playboy.com |
-| HTTP status | Unknown |
-| Content-Type returned | Unknown |
-| Markdown served | Unknown |
+| HTTP status | Not probed |
+| Content-Type returned | Not probed |
+| Markdown served | Not probed |
 
 The site returns standard HTML to all requests, including those carrying `Accept: text/markdown`. Markdown content negotiation is a feature that lets a server deliver a lighter, markup-free page to agents that request it - reducing the parsing load on the agent side. It is an optional enhancement with no compliance obligations attached. One consideration before enabling it: Markdown conversion strips `<head>` metadata, governance fields, and discovery signals, so any page carrying MX fields, canonical URIs, or structured data in the document head would lose those signals for agents that receive the Markdown version. Whether the reduction in parsing cost outweighs that loss is a publisher decision; this probe records the current state.
 
@@ -446,11 +413,6 @@ The site returns standard HTML to all requests, including those carrying `Accept
 
 The reference material cited in this report. Click the link on screen or scan the QR code on paper: both encode the same URL.
 
-**Table 10**
-
-*Further Reading*
-
-The following table records scans of link descriptions:
 **Table 10**
 
 *Further Reading*
@@ -474,7 +436,7 @@ The following table records scans of link descriptions:
 
 MX is to machines what UX is to users: it asks not whether a human can read this report, but whether a machine can read it, verify it, and act on it. A standard is credible only when we run on it ourselves, so we built this report to the standard it measures. You can inspect this PDF and read every claim it makes directly in your browser at the [MX Inspector](https://mx.allabout.network/tools/pdf-inspector.html) - no command-line tools, no login, no installation required. Drop the file, read the chain.
 
-We carry our own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload www-playboy-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. What this audit measures on a client's behalf, this deliverable meets.
+This report carries its own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload www-playboy-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. What this audit measures on a client's behalf, this deliverable meets.
 
 Machine-readable content is visible to agents and validators. Machine-trustworthy content adds a provenance layer - a dated, attested record that names who published it and under what rubric. Readable is what MX makes content; the provenance layer is what makes it trustworthy. The two do different jobs, and this report carries both. It is an example of what that looks like in practice.
 
@@ -486,7 +448,7 @@ A standard is credible only when we run on it ourselves. We hold this audit deli
 
 The AI evidence chain records every non-deterministic step: the model identifier, the SHA-256 of the system prompt we ran (so an auditor can verify the rubric we used), the SHA-256 of the output it produced, a short excerpt of the model's reasoning, and the human-intervention state. This chain is designed as evidence for AI-governance regimes: EU AI Act, UK ICO AI guidance, US NIST AI RMF, and Colorado AI Act. The framework citations are claims of relevance, not compliance grants; conformance with each regulation remains a legal duty of the operator. This PDF holds the full AI evidence chain inside its XMP metadata under `xmp:ProvenanceAiPayload`. A regulator inspecting the PDF alone receives the entire chain; the adjacent `*.provenance.ai.json` is a copy of the same JSON for tooling that prefers file access.
 
-We record the deterministic evidence chain in `*.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
+The deterministic evidence chain is at `*.provenance.deterministic.json`. It records every rule-driven step: gate verdicts, CSV checks, regex matches, render steps, probe results, and the closing PDF conformance verdict. This chain is designed as evidence for EAA Directive 2019/882 accessibility-conformance. The deterministic file is named in the PDF's XMP metadata under `xmp:ProvenanceCompanion` so an inspector who has the PDF alone can walk to it on disk.
 
 To extract the chain from the PDF, run `exiftool -b -XMP-mx:ProvenanceAiPayload www-playboy-com-report.pdf | jq .`. The `-b` flag is required so exiftool emits the raw payload; without it the output includes a label that breaks the JSON parse. The two chains share `auditId`, `startedAt`, `operator`, and a `provenance` header naming the exact git commit of the audit tooling that produced this run, so anyone can re-run it and verify byte-for-byte what we did. We prefer determinism to inference: explicit over inferred, recorded over remembered, a result you can reproduce over one we could only explain. Where a check can be made by a rule, a rule makes it, and the rule leaves a record rather than an opinion. That is why this chain shows what we did instead of asking you to trust a summary of it.
 
