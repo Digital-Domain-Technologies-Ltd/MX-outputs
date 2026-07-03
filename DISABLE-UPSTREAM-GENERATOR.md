@@ -10,7 +10,7 @@ mx:
   audience: [humans]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/DISABLE-UPSTREAM-GENERATOR.md
   purpose: "Give whoever owns the generator repo the exact steps to stop it overwriting the canonical book HTML."
-  stability: active
+  stability: stable
   runbook: "Follow once in the generator/source repo, then enable branch protection here."
 
 ---
