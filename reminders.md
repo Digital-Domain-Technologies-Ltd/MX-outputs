@@ -10,7 +10,7 @@ mx:
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/reminders.md
   purpose: "Hold open decisions and migration plans so they are not lost between sessions."
-  stability: working
+  stability: evolving
   runbook: "Read for outstanding decisions. Each entry is dated; resolve and strike through when done."
 
 ---
