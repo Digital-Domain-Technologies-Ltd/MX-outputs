@@ -66,7 +66,7 @@ If the site is structured for human readers and search-engine crawlers only, tho
 
 This is the gap. UCP closes it for the partner ring through negotiated protocol, on Google's surfaces. The rest of retail, and the rest of the agent population, needs an answer that does not depend on a bilateral integration with a single platform.
 
-## The cart is for the web. MX is for files.
+## The cart is for the web. MX is for files
 
 Before mapping the gap, it is worth naming a category error that is easy to make when reading announcements like this one.
 
@@ -255,4 +255,4 @@ Read the canonical version on mx.allabout.network: https://mx.allabout.network/b
 
 *Tom Cranstoun is the founder of the Machine Experience (MX) community and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.*
 
-#MachineExperience #AgenticCommerce #UniversalCart #AI #RetailTech #EAA #OpenStandards
+# MachineExperience #AgenticCommerce #UniversalCart #AI #RetailTech #EAA #OpenStandards

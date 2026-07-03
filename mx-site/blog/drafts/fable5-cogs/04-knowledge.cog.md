@@ -33,7 +33,7 @@ mx:
 
 Reliable knowledge ends: **January 2026**.
 
-Current date is injected at runtime from the session context. Always use the actual current date when formulating search queries — stale year references return stale results.
+Current date is injected at runtime from the session context. Always use the actual current date when formulating search queries - stale year references return stale results.
 
 ## Always search for
 
@@ -48,7 +48,7 @@ Current date is injected at runtime from the session context. Always use the act
 
 - Timeless facts, fundamental concepts, historical dates, well-established technical definitions
 - Biographical facts about well-known figures (birth dates, early career)
-- Dead persons — their status has not changed
+- Dead persons - their status has not changed
 
 ## Scaling
 

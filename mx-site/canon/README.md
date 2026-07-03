@@ -1,5 +1,5 @@
 ---
-title: "MX Canon — Public Mirror"
+title: "MX Canon - Public Mirror"
 description: "Public mirror of the three-file MX canon: standard fields, carrier vocabulary, and CogNovaMX vendor extensions. Canonical source for MX-aware tools."
 author: "Tom Cranstoun"
 created: "2026-04-16"
@@ -11,7 +11,7 @@ mx:
 
 ---
 
-# MX Canon — Public Mirror
+# MX Canon - Public Mirror
 
 This folder publishes the machine-readable MX canon at stable URLs.
 
@@ -23,7 +23,7 @@ This folder publishes the machine-readable MX canon at stable URLs.
 | [fields-data-carriers.yaml](fields-data-carriers.yaml) | Code-carrier vocabulary | MXS-04 |
 | [cognovamx-fields.yaml](cognovamx-fields.yaml) | Vendor extension pack | `x-mx-` / `x-mx-p-` namespaces |
 
-The first two files together form the proposed standard that The Gathering governs. The third is the CogNovaMX vendor extension example pack — not part of the standard, useful as a reference for other vendors authoring their own `x-vendor-` extension files.
+The first two files together form the proposed standard that The Gathering governs. The third is the CogNovaMX vendor extension example pack - not part of the standard, useful as a reference for other vendors authoring their own `x-vendor-` extension files.
 
 ## Status
 
@@ -35,4 +35,4 @@ MIT. The MX standard is free, open, and vendor-neutral.
 
 ## Authority
 
-The prose companion is Appendix M of *MX: The Protocols*. Where machine-readable YAML and prose disagree, the YAML is authoritative by definition — a drift checker verifies alignment.
+The prose companion is Appendix M of *MX: The Protocols*. Where machine-readable YAML and prose disagree, the YAML is authoritative by definition - a drift checker verifies alignment.

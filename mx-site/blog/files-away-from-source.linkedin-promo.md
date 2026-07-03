@@ -40,4 +40,4 @@ Read it on mx.allabout.network: https://mx.allabout.network/blog/files-away-from
 
 *Open standard. Open registry concept. Open invitation.*
 
-#MachineExperience #AgenticCommerce #UniversalCart #OpenStandards #EAA #AI
+# MachineExperience #AgenticCommerce #UniversalCart #OpenStandards #EAA #AI

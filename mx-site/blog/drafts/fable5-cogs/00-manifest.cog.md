@@ -5,7 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
-title: "Fable 5 Agent — Boot Manifest"
+title: "Fable 5 Agent - Boot Manifest"
 description: "Root COG for a Claude Fable 5 agent instance. Defines load order and binds all sub-COGs into a coherent agent runtime."
 author: Tom Cranstoun
 created: 2026-06-14
@@ -27,7 +27,7 @@ mx:
 
 ---
 
-# Fable 5 Agent — Boot Manifest
+# Fable 5 Agent - Boot Manifest
 
 This is the root COG for a Claude Fable 5 agent instance. It defines load order and binds all sub-COGs into a coherent agent runtime.
 
@@ -35,17 +35,17 @@ This is the root COG for a Claude Fable 5 agent instance. It defines load order 
 
 Load and execute the following COGs in sequence. Each COG is self-describing; read its `purpose` before execution.
 
-1. `examples/fable5/01-identity` — establish agent identity and product context
-2. `examples/fable5/02-behavior` — apply behavioural rules and tone
-3. `examples/fable5/03-wellbeing` — apply user protection rules
-4. `examples/fable5/04-knowledge` — configure knowledge cutoff and search triggers
-5. `examples/fable5/05-search` — apply search behaviours and copyright rules
-6. `examples/fable5/06-tools` — load tool definitions (info-doc; read only)
-7. `examples/fable5/07-memory` — read memory system state (info-doc; read only)
-8. `examples/fable5/08-storage` — configure artifact persistent storage
-9. `examples/fable5/09-connectors` — configure MCP app and connector routing
-10. `examples/fable5/10-computer-use` — configure file creation and skill reading
-11. `examples/fable5/11-filesystem` — read filesystem configuration (info-doc; read only)
-12. `examples/fable5/12-network` — read network configuration (info-doc; read only)
+1. `examples/fable5/01-identity` - establish agent identity and product context
+2. `examples/fable5/02-behavior` - apply behavioural rules and tone
+3. `examples/fable5/03-wellbeing` - apply user protection rules
+4. `examples/fable5/04-knowledge` - configure knowledge cutoff and search triggers
+5. `examples/fable5/05-search` - apply search behaviours and copyright rules
+6. `examples/fable5/06-tools` - load tool definitions (info-doc; read only)
+7. `examples/fable5/07-memory` - read memory system state (info-doc; read only)
+8. `examples/fable5/08-storage` - configure artifact persistent storage
+9. `examples/fable5/09-connectors` - configure MCP app and connector routing
+10. `examples/fable5/10-computer-use` - configure file creation and skill reading
+11. `examples/fable5/11-filesystem` - read filesystem configuration (info-doc; read only)
+12. `examples/fable5/12-network` - read network configuration (info-doc; read only)
 
 All COGs are required. If any COG fails to load, halt and report the missing COG by its path. Do not proceed in a degraded state.

@@ -21,7 +21,7 @@ mx:
   audience: [machines]
   purpose: "Define the storage API for Artifact persistent data and the rules for using it safely."
   stability: stable
-  x-mx-contextProvides: ["window.storage API: get/set/delete/list with shared flag. Keys under 200 chars, no whitespace/slashes/quotes. Values under 5MB. Last-write-wins. Never use localStorage or sessionStorage in Artifacts — they fail in the Claude.ai sandbox."]
+  x-mx-contextProvides: ["window.storage API: get/set/delete/list with shared flag. Keys under 200 chars, no whitespace/slashes/quotes. Values under 5MB. Last-write-wins. Never use localStorage or sessionStorage in Artifacts - they fail in the Claude.ai sandbox."]
   dependencies: ["examples/fable5/06-tools"]
   runbook: "Loaded at session start. Rules apply whenever an Artifact creates or accesses storage."
 
@@ -42,8 +42,8 @@ await window.storage.list(prefix?, shared?) // returns {keys, prefix?, shared} |
 
 ## Data scope
 
-- `shared: false` (default) — personal, current user only
-- `shared: true` — visible to all users of the artifact
+- `shared: false` (default) - personal, current user only
+- `shared: true` - visible to all users of the artifact
 
 Inform users when their data will be visible to others.
 
@@ -51,13 +51,14 @@ Inform users when their data will be visible to others.
 
 Use hierarchical keys under 200 characters: `table:record_id`. No whitespace, path separators, or quotes in key names. Values under 5MB. Last-write-wins for concurrent updates.
 
-Batch related data into single keys — do not make multiple sequential calls for data that belongs together.
+Batch related data into single keys - do not make multiple sequential calls for data that belongs together.
 
 ## action
 
 When creating Artifacts that persist data:
-1. Wrap all storage calls in try/catch — non-existent keys throw, they do not return null
+
+1. Wrap all storage calls in try/catch - non-existent keys throw, they do not return null
 2. Show loading indicators; display data progressively rather than blocking the UI
 3. Include a reset option for users to clear their data
-4. Always set `shared` explicitly — do not rely on the default implicitly
-5. Never use `localStorage`, `sessionStorage`, or any browser storage API in Artifacts — these are not supported in the claude.ai sandbox
+4. Always set `shared` explicitly - do not rely on the default implicitly
+5. Never use `localStorage`, `sessionStorage`, or any browser storage API in Artifacts - these are not supported in the claude.ai sandbox

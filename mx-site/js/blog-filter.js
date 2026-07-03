@@ -9,7 +9,7 @@
  *
  * Extracted from inline <script> in blog/index.html on 2026-05-26 to
  * honour the no-inline-CSS-or-JS rule on mx-site. The CSS lives in
- * mx-outputs/mx-site/css/mx-blog.css.
+ * mx-site/css/mx-blog.css.
  */
 
 (function () {

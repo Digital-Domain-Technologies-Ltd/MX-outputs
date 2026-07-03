@@ -13793,7 +13793,7 @@ The test harness at tests/test-pdf-inspector.js runs the harness against a gold-
 
 The operator CLI at scripts/bin/mx-pdf-inspect.js is the same code with a command-line UI, available to accredited operators for their own pipelines.
 
-All four import the detection core at mx-outputs/mx-site/js/pdf-inspector-core.js. One file. Browser and Node both load it the same way. A change to the core fails every surface in lockstep; a fix to the core repairs every surface in lockstep. No drift between the rule we publish and the rule we enforce.
+All four import the detection core at mx-site/js/pdf-inspector-core.js. One file. Browser and Node both load it the same way. A change to the core fails every surface in lockstep; a fix to the core repairs every surface in lockstep. No drift between the rule we publish and the rule we enforce.
 
 Why a CLI and not a hosted service
 
@@ -21872,7 +21872,9 @@ MX
 
           How to verify the claims
 
-          Everything in the file is open to inspection. Three commands cover most of the verification surface. Or drop the PDF on the interactive inspector and read every claim without the commands.
+          Everything in the file is open to inspection. The fastest path is the MX Inspector: drop the PDF into the browser tool and it reads the provenance chain, operator identity, attestation, and machine-readability score for you - no command-line tools, no login, no installation. Or run three commands directly against the file.
+
+          Open the MX Inspector &rarr;
 
           Check the structure tree
 
@@ -24960,7 +24962,7 @@ MX
 
           We run every PDF we ship through this tool
 
-          Every PDF we produce goes through this same inspector before it leaves our hands. The production pipeline calls the harness at tests/test-mx-inspector.js against every artefact the renderer emits, audit reports, books, briefings, contracts. If the inspector does not certify the file as MX Compatible, the build fails and nothing ships. The browser inspector you see on this page and the production gate share one source of truth, the detection core at mx-outputs/mx-site/js/mx-inspector-core.js, so a regression in either surface fails both.
+          Every PDF we produce goes through this same inspector before it leaves our hands. The production pipeline calls the harness at tests/test-mx-inspector.js against every artefact the renderer emits, audit reports, books, briefings, contracts. If the inspector does not certify the file as MX Compatible, the build fails and nothing ships. The browser inspector you see on this page and the production gate share one source of truth, the detection core at mx-site/js/mx-inspector-core.js, so a regression in either surface fails both.
 
           The reports we send to clients and the books we publish are not asked to meet the MX Compatible bar by hand and by hope; they are blocked from shipping unless they meet it by machine. When you drop a PDF we produced into this inspector, you should see the same verdict the build saw before it released the file.
 
@@ -24968,7 +24970,7 @@ MX
 
           Three things have to line up before a PDF we send you carries a real MX Compatible verdict. The page you are looking at must say so. The production gate must enforce it. The test harness must prove it. All three live in the open. This page makes the claim. The gate at scripts/bin/mx.pdf.sh hard-fails the build when a PDF does not meet the bar. The harness at tests/test-mx-inspector.js walks the same checks against the gold-standard fixture and exits non-zero on regression, every time npm test runs.
 
-          Each layer reads from the same source. The detection core at mx-outputs/mx-site/js/mx-inspector-core.js is shared by the inspector you are running and the gate that protects our outbound work. When the producer changes, when pdf.js changes, when the inspector changes, the same code path is exercised by both surfaces. A regression cannot quietly drift between them; if the harness fails, the gate fails, and the inspector fails for every visitor in the same way.
+          Each layer reads from the same source. The detection core at mx-site/js/mx-inspector-core.js is shared by the inspector you are running and the gate that protects our outbound work. When the producer changes, when pdf.js changes, when the inspector changes, the same code path is exercised by both surfaces. A regression cannot quietly drift between them; if the harness fails, the gate fails, and the inspector fails for every visitor in the same way.
 
           This is the argument MX makes generally and that the inspector demonstrates specifically. Not "trust us, we did this carefully" but "here is the file, here is the rule, here is the check, run any of them yourself, decide for yourself." For the EU AI Act, the European Accessibility Act, and the AI-governance instruments emerging in adjacent jurisdictions, that distinction matters. An auditor holding the file can walk to the rule, walk to the check, and arrive at the same verdict the build saw. No proprietary intermediary, no closed-source verifier, no "ask the vendor."
 
@@ -24980,4 +24982,4 @@ MX
 
         For commissioning AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
 
-<!-- x-mx-sourceHash: 261e0801860e0d553e5f7c6768df3e117570274939fd25f02d883750885c8bdc -->
+<!-- x-mx-sourceHash: 23b7699c4aa1bfced3cf5dfc842f6b55c31928b89f70db60c4ea1a204cc225be -->

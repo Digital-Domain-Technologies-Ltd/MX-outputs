@@ -9,9 +9,10 @@ created: "2026-01-22"
 description: "Real-world learnings from production implementations: mistakes to avoid and solutions that work."
 
 title: 'Appendix B: Proven Lessons'
+tags: [proven-lessons, production-learnings, progressive-enhancement, common-mistakes, proven-solutions]
+type: info-doc
 mx:
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
-  tags: [proven-lessons, production-learnings, progressive-enhancement, common-mistakes, proven-solutions]
   book: "Shared"
   appendix: "B"
   words: 2701
@@ -23,6 +24,7 @@ mx:
     Write definitive present tense. Historical context about subject matter
     (industry events, product launches) is allowed.
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-b-proven-lessons.md
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -191,6 +193,9 @@ id="toc-performance-optimisation-lessons">18. Performance Optimisation
 Lessons</a></li>
 <li><a href="#ethical-scraping-lessons"
 id="toc-ethical-scraping-lessons">19. Ethical Scraping Lessons</a></li>
+<li><a href="#architecture-of-participation"
+id="toc-architecture-of-participation">20. Architecture of
+Participation</a></li>
 <li><a href="#key-takeaways" id="toc-key-takeaways">Key
 Takeaways</a></li>
 </ul></li>
@@ -218,7 +223,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>script<span class="op">&gt;</span></span></code></pre></div>
 <p>Machines saw "Loading..." because JavaScript replaced the
 server-rendered content before fetching completed.</p>
-<p><strong>Solution:</strong> Never replace server-rendered content —
+<p><strong>Solution:</strong> Never replace server-rendered content -
 only enhance it:</p>
 <div class="sourceCode" id="cb2" data-role="code-container"><pre
 class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Server renders baseline</span></span>
@@ -445,7 +450,7 @@ but machines still didn't know how long to wait.</p>
 <p><strong>First attempt:</strong></p>
 <div class="sourceCode" id="cb16" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> data-state</span><span class="op">=</span><span class="st">&quot;loading&quot;</span><span class="dt">&gt;</span>Loading...<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
-<p>Better, but machines timeout randomly — some after 5 seconds, some
+<p>Better, but machines timeout randomly - some after 5 seconds, some
 after 30 seconds.</p>
 <p><strong>Solution:</strong> Provide expected duration:</p>
 <div class="sourceCode" id="cb17" data-role="code-container"><pre
@@ -456,7 +461,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>Machines can now make informed timeout decisions.</p>
 <p><strong>Lesson:</strong> Loading states should indicate expected
-duration. "Loading..." is insufficient — specify how long.</p>
+duration. "Loading..." is insufficient - specify how long.</p>
 <h2 id="inline-styles-bloat-html-for-machines">9. Inline Styles Bloat
 HTML for Machines</h2>
 <p><strong>The Problem:</strong> Used inline styles for convenience
@@ -494,12 +499,12 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 parse clean HTML without style noise.</p>
 <p><strong>Lesson:</strong> Separate presentation from content. Inline
 styles waste bandwidth for machines that don't render them and make HTML
-harder to parse. External CSS benefits everyone — machines get faster
+harder to parse. External CSS benefits everyone - machines get faster
 parsing, browsers get caching, developers get maintainability.</p>
 <h2 id="pre-converting-pages-to-markdown-stripped-metadata">10.
 Pre-Converting Pages to Markdown Stripped Metadata</h2>
 <p><strong>The Problem:</strong> Built a "chatbot-friendly" site by
-converting all pages to markdown. In 2023, this seemed smart — simpler
+converting all pages to markdown. In 2023, this seemed smart - simpler
 format, easier parsing, clean text. By 2025, machines struggled to cite
 us accurately. Prices were often wrong, publication dates got
 hallucinated, author attribution disappeared.</p>
@@ -542,7 +547,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>Citation accuracy improved dramatically. Machines now reference exact
 prices, correct dates, proper author attribution. If a platform needs
-markdown, they can extract it from our rich HTML — we don't pre-strip
+markdown, they can extract it from our rich HTML - we don't pre-strip
 the signals they need.</p>
 <p><strong>Lesson:</strong> Don't optimise for yesterday's paradigm.
 Machines in 2026 need structured metadata for accurate citation, not
@@ -802,6 +807,40 @@ machine guidance.</p>
 drive adoption better than binary pass/fail judgments.</p>
 <p><strong>Book reference:</strong> Chapter 10 covers robots.txt best
 practices for machines.</p>
+<h2 id="architecture-of-participation">20. Architecture of
+Participation</h2>
+<h3 id="standard-adoption-requires-self-interest-not-altruism">Standard
+adoption requires self-interest, not altruism</h3>
+<p><strong>Context:</strong> The MX standard and Reginald registry need
+adoption to be valuable, but asking organisations to contribute to a
+standard for the good of the ecosystem rarely works in practice.</p>
+<p><strong>Problem:</strong> Compliance-driven adoption atrophies.
+Organisations adopt a standard under external pressure, maintain it
+minimally, and stop maintaining it when the pressure lifts. The standard
+stalls at whatever adoption level initial enthusiasm produced.</p>
+<p><strong>Solution:</strong> Design the system so that using it and
+contributing to it are the same act. An organisation that writes a COG
+to make its own repository machine-readable for its own agents
+simultaneously creates a provenanced artefact the broader ecosystem can
+use. An organisation that registers with Reginald because it wants
+external discovery simultaneously compounds the registry's value for
+every other querying agent. The self-interest and the contribution are
+the same file, the same registration, the same act.</p>
+<p><strong>Impact:</strong> Adoption that is grounded in self-interest
+is durable because the incentive is intrinsic. Organisations maintain
+COGs for the same reason they maintain code: the COGs run their own
+machines.</p>
+<p><strong>Key insight:</strong> Ask whether your system asks users to
+do extra work for the good of the commons, or whether using the system
+and improving it are the same act. The first model atrophies. The second
+compounds. Tim O'Reilly named this principle "the architecture of
+participation" in 2004. It is the structural reason the open web grew
+while closed platforms hit ceilings. Design for it from the start; it
+cannot be bolted on later.</p>
+<p><strong>Book reference:</strong> Chapters 20 and 21 explore this
+principle in the context of COGs, Reginald, and The Gathering. Blog
+post:
+<code>datalake/draft-site/blog/foundations/architecture-of-participation.md</code>.</p>
 <h2 id="key-takeaways">Key Takeaways</h2>
 <ol type="1">
 <li><strong>Progressive enhancement requires discipline:</strong>

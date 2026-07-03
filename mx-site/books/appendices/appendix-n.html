@@ -9,9 +9,10 @@ created: "2026-01-24"
 description: "Complete reference of the most common mistakes that break AI agent compatibility, with detection methods and complete fixes for each pattern."
 
 title: 'Appendix N: Anti-Patterns Catalog'
+tags: [anti-patterns, common-mistakes, visual-only-state, client-rendering, broken-hierarchy, accessibility-failures, detection-methods, quick-wins, context-free-references]
+type: info-doc
 mx:
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
-  tags: [anti-patterns, common-mistakes, visual-only-state, client-rendering, broken-hierarchy, accessibility-failures, detection-methods, quick-wins, context-free-references]
   runbook: |
     This document is copyrighted material. No part may be reproduced without permission.
     This is a book appendix cataloging anti-patterns. Write as if it has always
@@ -20,6 +21,7 @@ mx:
     document's development. Write definitive present tense. Historical context
     about subject matter (industry practices, common failures) is allowed.
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-n-anti-patterns-catalog.md
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -176,6 +178,8 @@ Declared</a></li>
 <li><a href="#semantics-that-never-reach-the-tree"
 id="toc-semantics-that-never-reach-the-tree">Semantics That Never Reach
 the Tree</a></li>
+<li><a href="#machine-shaped-prose"
+id="toc-machine-shaped-prose">Machine-Shaped Prose</a></li>
 <li><a href="#quick-wins-summary" id="toc-quick-wins-summary">Quick Wins
 Summary</a></li>
 <li><a href="#validation-checklist"
@@ -4128,6 +4132,96 @@ primary action and its key facts in the tree. The MX Web Audit Suite
 detects the full defect family deterministically and groups repeated
 findings by structural signature, so a template defect reports as one
 fix rather than one finding per page.</p>
+<h2 id="machine-shaped-prose">Machine-Shaped Prose</h2>
+<p><strong>Pattern ID:</strong>
+<code>mx.anti-pattern.content.machine-shaped-prose</code>
+<strong>Status:</strong> active <strong>Intent:</strong> Avoid
+publishing content whose document structure carries the convergent shape
+of unedited language-model output, because the shape is detectable, it
+reads as no one's voice, and it erodes the trust the content exists to
+build</p>
+<h3 id="context-machine-shaped-prose">Context (Machine-Shaped
+Prose)</h3>
+<p>This appears wherever language models draft published content without
+a structural editorial pass:</p>
+<ul>
+<li>Blog posts and thought-leadership pieces generated at volume</li>
+<li>Product descriptions, knowledge-base articles, and help content
+drafted from templates plus a model</li>
+<li>Marketing pages where the model's first draft ships as the final
+draft</li>
+</ul>
+<p>It is typically introduced when publishing volume rises faster than
+editorial capacity, and the review pass checks facts and grammar but
+never the document's shape.</p>
+<h3 id="the-problem-machine-shaped-prose">The Problem (Machine-Shaped
+Prose)</h3>
+<p>Language models converge structurally. Research comparing 61,608
+stories from five different models against human writers on identical
+prompts (Russell et al., 2026, arXiv:2604.03136) found AI output
+clustering in one region of narrative space - tidy single-track
+structure, themes spelled out, a clean moral at the end - while human
+writing scattered. Document structure alone, with every word-level cue
+removed, identified the machine author at 93.2% macro-F1.</p>
+<p>The convergent shape decomposes into four recurring signals:</p>
+<ul>
+<li>A moral or takeaway spelled out in the closing paragraphs ("the
+lesson is", "what this means is", a closing "Ultimately")</li>
+<li>An ending that restates the opening's content words at full-document
+scale</li>
+<li>Sentence and paragraph lengths clustering tightly around their
+mean</li>
+<li>Every section opening on the same move or closing on the same
+summary line</li>
+</ul>
+<p><strong>Impact:</strong></p>
+<ul>
+<li>Readers discount the content: prose shaped like everyone's reads as
+no one's</li>
+<li>The brand voice the content was meant to carry dissolves into the
+model's average</li>
+<li>Detection is moving from research into platform policy and
+procurement, so the shape becomes a liability that compounds</li>
+<li>Word-level "humanising" passes do not fix it: a piece can pass every
+vocabulary check and keep the machine shape</li>
+</ul>
+<h3 id="real-example-machine-shaped-prose">Real Example (Machine-Shaped
+Prose)</h3>
+<p>A draft blog post about AI writing convergence closed with a tidy
+one-line moral about competence and moats. A structural check flagged
+the closing line as a moral closer; the line was cut, and the post ended
+on its last concrete point instead. The piece had made its argument;
+naming the argument again unmade it. The detection and the fix were both
+mechanical.</p>
+<h3 id="the-fix-solution-machine-shaped-prose">The Fix (Solution)
+(Machine-Shaped Prose)</h3>
+<p>Break the convergent shape in the editorial pass, not the drafting
+pass:</p>
+<ul>
+<li><strong>Cut the moral closer.</strong> End on the last concrete
+point or a forward-pointing action, never on a line that names what the
+reader was supposed to conclude</li>
+<li><strong>Stop the ending from restating the opening.</strong> If the
+closing paragraph re-uses the opening's content words, it is summary,
+not ending</li>
+<li><strong>Vary the rhythm deliberately.</strong> A short sentence
+beside a long one; a two-sentence paragraph beside a long run; one
+section three times its neighbour's length when the material earns
+it</li>
+<li><strong>Keep bold claims bold and open questions open.</strong> A
+rewrite that hedges a strong claim toward consensus, or resolves a
+question the author left open, makes the prose more machine-shaped, not
+less</li>
+</ul>
+<h3 id="detection-machine-shaped-prose">Detection (Machine-Shaped
+Prose)</h3>
+<p>Each signal is deterministic and position-aware: a phrase that is
+legitimate mid-document is the tell when it sits in the closing
+paragraphs, and a script can test closer phrases, opening-to-ending word
+overlap, length variance, and section-shape uniformity the same way on
+every run. Spot-check by hand: read only your last three pieces' final
+paragraphs and ask whether each ending earns its place or just hands the
+reader the moral.</p>
 <h2 id="quick-wins-summary">Quick Wins Summary</h2>
 <p>If you can only fix 5 things immediately, prioritise these for
 maximum impact:</p>

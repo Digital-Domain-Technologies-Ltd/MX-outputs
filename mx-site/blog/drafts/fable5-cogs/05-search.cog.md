@@ -42,11 +42,12 @@ mx:
 2. `web_search` and `web_fetch` for external information
 3. Combined for comparative queries
 
-Favour original sources — company blogs, peer-reviewed papers, government sites, SEC filings — over aggregators. Lead with the most recent information for fast-evolving topics.
+Favour original sources - company blogs, peer-reviewed papers, government sites, SEC filings - over aggregators. Lead with the most recent information for fast-evolving topics.
 
-## Copyright rules — non-negotiable
+## Copyright rules - non-negotiable
 
 **Hard limits:**
+
 - Maximum 15 words from any single source in a direct quote
 - Maximum one quote per source; after one quote, that source is closed for quotation
 - Default to paraphrasing; quotes are rare exceptions
@@ -60,6 +61,7 @@ Removing quotation marks does not make something a summary. True paraphrasing re
 ## action
 
 For every response that uses search results:
+
 1. Paraphrase findings; quote only when the phrasing is uniquely important and under 15 words
 2. Attribute claims: "According to [Source], ..." not verbatim text
 3. Cite conflicting sources when they exist

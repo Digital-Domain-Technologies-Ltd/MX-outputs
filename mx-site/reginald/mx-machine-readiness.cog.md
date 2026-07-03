@@ -42,7 +42,7 @@
 
 
 # ── ZONE 1 · Identity (Note 2 §5) ────────────────────────────
-title: "Everyone is looking inward — A position paper on MX & REGINALD"
+title: "Everyone is looking inward - A position paper on MX & REGINALD"
 description: "Argues the AI-readiness consensus is inward-facing and misses the outward question: how is our organisation being read by machines we will never meet?"
 
 # D6 · originator is the immutable Zone 1 creator. author is
@@ -245,7 +245,7 @@ mx:
 
   # ── Cog classification (Note 3 §6.5) ──
   # These fields live in vendor-extension space (x-mx-*) per
-  # Note 3 §6.5 — the bare names are reserved.
+  # Note 3 §6.5 - the bare names are reserved.
   x-mx-cog-id: mx-machine-readiness
   x-mx-cog-type: info
   x-mx-cog-category: mx-position-paper
@@ -370,15 +370,15 @@ mx:
 
 ---
 
-# Everyone is looking inward.
+# Everyone is looking inward
 
 A position paper on MX and REGINALD by Tom Cranstoun.
 
-Every framework being published across the industry — by the platform vendors, the consultancies, the standards bodies, the regulators — asks the same inward question. *How do we use AI safely?* MX asks the question almost nobody is asking: *how is our organisation being read, retrieved and represented by machines we will never meet, on behalf of buyers we will never see?*
+Every framework being published across the industry - by the platform vendors, the consultancies, the standards bodies, the regulators - asks the same inward question. *How do we use AI safely?* MX asks the question almost nobody is asking: *how is our organisation being read, retrieved and represented by machines we will never meet, on behalf of buyers we will never see?*
 
-## The whole industry is having the same conversation.
+## The whole industry is having the same conversation
 
-Pick any major framework on the table — from a software vendor, a Big Four advisory, a national standards body, a regulator. They differ in emphasis. They share a frame. The frame is the building.
+Pick any major framework on the table - from a software vendor, a Big Four advisory, a national standards body, a regulator. They differ in emphasis. They share a frame. The frame is the building.
 
 - **Platform vendors:** "Adopt our AI responsibly. Train your people. Govern your prompts. Evaluate your suppliers."
 - **Big Four advisory:** "Assess your readiness. Pilot use cases. Scale adoption. Measure ROI and risk together."
@@ -387,74 +387,79 @@ Pick any major framework on the table — from a software vendor, a Big Four adv
 
 All of it sound. All of it necessary. All of it inside the building. None of it answers the question that now matters as much: *what are machines saying about you out there?*
 
-## The two lenses.
+## The two lenses
 
-**The industry consensus — inward.** Inside the organisation: governance, training, vendor evaluation, monitoring, risk management. The boundary is the perimeter. The audience is your own staff. The question is: *Are our people, vendors and policies ready for the AI we are buying?*
+**The industry consensus - inward.** Inside the organisation: governance, training, vendor evaluation, monitoring, risk management. The boundary is the perimeter. The audience is your own staff. The question is: *Are our people, vendors and policies ready for the AI we are buying?*
 
-**The MX lens — outward.** Outside the organisation: the five reading contexts — training ingestion, RAG retrieval, search indexing, browser agents, voice and LLM assistants. They quote your prices, summarise your policies and recommend you to buyers you will never meet. The boundary is the open web. The question is: *When a machine quotes us, can we prove the words came from us — and have not been altered since?*
+**The MX lens - outward.** Outside the organisation: the five reading contexts - training ingestion, RAG retrieval, search indexing, browser agents, voice and LLM assistants. They quote your prices, summarise your policies and recommend you to buyers you will never meet. The boundary is the open web. The question is: *When a machine quotes us, can we prove the words came from us - and have not been altered since?*
 
-### MX is not GEO.
+### MX is not GEO
 
 A common misreading places MX in the same category as Generative Engine Optimisation (GEO) or AI Engine Optimisation (AEO). It is not. The questions are different, and so are the answers.
 
-GEO asks how to increase the probability that a specific class of LLM-powered system cites a specific web page. It is a marketing optimisation, focused on a single channel and a single moment of consumption. MX asks whether any machine can find any document in a corpus, verify it is genuine, and know whether it is current — regardless of which machine, which format, or which access pathway.
+GEO asks how to increase the probability that a specific class of LLM-powered system cites a specific web page. It is a marketing optimisation, focused on a single channel and a single moment of consumption. MX asks whether any machine can find any document in a corpus, verify it is genuine, and know whether it is current - regardless of which machine, which format, or which access pathway.
 
 The implication is structural. A document marked up for GEO has been tuned for one kind of reader. A document made MX-compliant is interpretable in isolation, by every kind of reader, with provenance and currency intact even when the document has been copied, summarised, or extracted from its original site.
 
-- **GEO scope.** One channel — LLM citation. One format — web pages. One outcome — probability of being cited.
-- **MX scope.** Any machine — training pipelines, RAG retrievers, search indexers, browser agents, voice assistants. Any format — markdown, HTML, PDF, XMP, code. Three outcomes — findability, genuineness, currency.
+- **GEO scope.** One channel - LLM citation. One format - web pages. One outcome - probability of being cited.
+- **MX scope.** Any machine - training pipelines, RAG retrievers, search indexers, browser agents, voice assistants. Any format - markdown, HTML, PDF, XMP, code. Three outcomes - findability, genuineness, currency.
 
-## Part one — the four phases of machine readiness.
+## Part one - the four phases of machine readiness
 
-### Phase 01 — Audit how machines see you.
+### Phase 01 - Audit how machines see you
 
-Inward frameworks audit governance, infrastructure and AI literacy. MX adds an outward audit: the surfaces — pages, feeds, schemas, robots files, documentation — that machines crawl, ingest and quote.
+Inward frameworks audit governance, infrastructure and AI literacy. MX adds an outward audit: the surfaces - pages, feeds, schemas, robots files, documentation - that machines crawl, ingest and quote.
 
 Most organisations have no inventory of how they appear to machines. They cannot answer simple questions: which pages are in Common Crawl? What does our `llms.txt` declare? Are our prices in JSON-LD? Does our schema match our HTML? Can a retrieval agent get an answer from our site without inventing one?
 
 Actions:
+
 - Map the five reading contexts.
 - Test the easy wins: `llms.txt` correct MIME type, sitemap inclusion.
-- Treat WCAG accessibility as foundation — it is, in practice, the same problem as machine readability.
+- Treat WCAG accessibility as foundation - it is, in practice, the same problem as machine readability.
 
-### Phase 02 — Publish a cog.
+### Phase 02 - Publish a cog
 
-Inward frameworks pilot use cases. MX pilots a cog — a Community Owned Governance System: a small set of declarations a document makes about itself, carried inside whatever file format the document already uses. Markdown, HTML, PDF, YAML.
+Inward frameworks pilot use cases. MX pilots a cog - a Community Owned Governance System: a small set of declarations a document makes about itself, carried inside whatever file format the document already uses. Markdown, HTML, PDF, YAML.
 
-One cog is enough to begin. Pick a high-stakes document — a price page, a product specification, a regulatory disclosure — and republish it as a cog.
+One cog is enough to begin. Pick a high-stakes document - a price page, a product specification, a regulatory disclosure - and republish it as a cog.
 
 Actions:
+
 - Choose one high-cost-of-error document.
 - Publish it as a cog with frontmatter declaring purpose, audience, stability, refers-to, update instructions.
 - Measure quotation fidelity before and after across the major LLMs and retrieval agents.
 
-### Phase 03 — Sign with REGINALD.
+### Phase 03 - Sign with REGINALD
 
-Inward frameworks rest on transparency. Transparency without verification is just a claim. The verification layer for MX is REGINALD — a proprietary shepherd from CogNovaMX that signs cogs using open authentication standards ratified by The Gathering, the independent standards body for Machine Experience.
+Inward frameworks rest on transparency. Transparency without verification is just a claim. The verification layer for MX is REGINALD - a proprietary shepherd from CogNovaMX that signs cogs using open authentication standards ratified by The Gathering, the independent standards body for Machine Experience.
 
-REGINALD does not invent the cryptography. It implements existing, well-understood standards — W3C Decentralised Identifiers, Verifiable Credentials, Ed25519 signatures — wrapped in a workflow tuned for cogs. The standards body defines. REGINALD shepherds.
+REGINALD does not invent the cryptography. It implements existing, well-understood standards - W3C Decentralised Identifiers, Verifiable Credentials, Ed25519 signatures - wrapped in a workflow tuned for cogs. The standards body defines. REGINALD shepherds.
 
 Actions:
+
 - Sign your high-stakes cogs first.
 - Make signatures discoverable from sitemaps, feeds and `llms.txt`.
 - Train teams to think in cogs.
 
-### Phase 04 — Watch the citations.
+### Phase 04 - Watch the citations
 
-Inward frameworks monitor AI system performance inside the enterprise. MX monitors machine output about the enterprise — what assistants quote, what retrieval agents return, what voice interfaces volunteer when nobody asked.
+Inward frameworks monitor AI system performance inside the enterprise. MX monitors machine output about the enterprise - what assistants quote, what retrieval agents return, what voice interfaces volunteer when nobody asked.
 
-The risk is no longer only that your AI behaves badly. The risk is that other people's AI describes you badly — and you do not find out until a customer arrives quoting something you never said.
+The risk is no longer only that your AI behaves badly. The risk is that other people's AI describes you badly - and you do not find out until a customer arrives quoting something you never said.
 
 Actions:
+
 - Track what assistants say about you across major LLMs, browser agents and voice interfaces.
 - Tie corrections to cogs. When a machine misquotes, the fix is rarely a takedown; it is publishing a signed cog the machine can find next time.
 - Choose what is better for the planet. Reduce inference. Build on what works.
 
-## Part two — the web is just the start.
+## Part two - the web is just the start
 
-The four phases above describe how to make your *web surfaces* machine-ready. But most enterprise content does not live on the web. It sits in document management systems, intranets, contract repositories and regulated archives — and AI agents are reading all of it.
+The four phases above describe how to make your *web surfaces* machine-ready. But most enterprise content does not live on the web. It sits in document management systems, intranets, contract repositories and regulated archives - and AI agents are reading all of it.
 
 Documents that need cogs include:
+
 - Contracts and agreements (.docx, .pdf)
 - Policy documents (.pdf, .md)
 - Product specifications (.pdf, .xlsx)
@@ -464,80 +469,81 @@ Documents that need cogs include:
 
 A cog sits inside whatever format the document already uses. It declares the document's identity, state, provenance, the standards it conforms to, and what readers (human or machine) are allowed to do with it. No new runtime. No proprietary tooling. The declarations travel with the file.
 
-### The cog metaphor.
+### The cog metaphor
 
-AI is not intelligent. It is a machine — and machines, since the first water mill, have always run on cogs that mesh. Your signed cog turns one cog of a system you do not operate. When the teeth fit, the work flows. When they do not, the whole machine grinds.
+AI is not intelligent. It is a machine - and machines, since the first water mill, have always run on cogs that mesh. Your signed cog turns one cog of a system you do not operate. When the teeth fit, the work flows. When they do not, the whole machine grinds.
 
-## REGINALD — the verification shepherd.
+## REGINALD - the verification shepherd
 
 REGINALD signs the truth of a document, not the truth of the world. A signed cog does not claim to be correct. It claims to be the document its author published, unaltered, at a stated moment.
 
-REGINALD is the shepherd that applies that signature, using open authentication standards ratified or passed through by The Gathering. The wheel is already round — REGINALD's job is to use it well.
+REGINALD is the shepherd that applies that signature, using open authentication standards ratified or passed through by The Gathering. The wheel is already round - REGINALD's job is to use it well.
 
 The three pillars:
-- **Registry** — a public record of what was published, by whom, and when. Queryable by humans, machines and auditors.
-- **Notarised** — each cog carries a cryptographic signature. Tampering is detectable. Authorship is not deniable. Time of publication is provable.
-- **Legitimate** — the signature is paired with discoverable metadata: purpose, audience, refers-to, update rules. A machine can decide whether to quote it without guessing.
 
-## The bar is now provenance, not paperwork.
+- **Registry** - a public record of what was published, by whom, and when. Queryable by humans, machines and auditors.
+- **Notarised** - each cog carries a cryptographic signature. Tampering is detectable. Authorship is not deniable. Time of publication is provable.
+- **Legitimate** - the signature is paired with discoverable metadata: purpose, audience, refers-to, update rules. A machine can decide whether to quote it without guessing.
 
-Article 50 of the EU AI Act, requiring that AI-generated content be identifiable, applies on 2 August 2026 — and the Brussels Effect means the geographic reach is wider than most boardrooms assume. A US-based SaaS handling a single inbound enquiry from Munich is, on the Commission's reading, within scope; if your AI outputs touch a European citizen, you are in the net regardless of where your engineers sleep. Static compliance — signed PDFs filed in a drawer — cannot answer the questions a regulator, a buyer or an auditor will ask in the moment of an AI-mediated decision. Governance has to execute at runtime, in the open, where any party can verify it.
+## The bar is now provenance, not paperwork
+
+Article 50 of the EU AI Act, requiring that AI-generated content be identifiable, applies on 2 August 2026 - and the Brussels Effect means the geographic reach is wider than most boardrooms assume. A US-based SaaS handling a single inbound enquiry from Munich is, on the Commission's reading, within scope; if your AI outputs touch a European citizen, you are in the net regardless of where your engineers sleep. Static compliance - signed PDFs filed in a drawer - cannot answer the questions a regulator, a buyer or an auditor will ask in the moment of an AI-mediated decision. Governance has to execute at runtime, in the open, where any party can verify it.
 
 Where the demands for proof are coming from:
 
-- **Reach — the Brussels Effect.** If your AI outputs touch an EU citizen, you are within scope, whether your servers, your team or your headquarters sit inside the EU or not. Treating the Act as a European problem is a strategic misread.
-- **Regulation — EU AI Act.** Article 50 transparency obligations, requiring identifiability of AI-generated content, apply on 2 August 2026 to providers and deployers alike. Where high-risk systems are involved, deployers also carry FRIA obligations — not only the providers who built the model.
-- **Convergence — the governance maze.** The AI Act overlaps with GDPR and the Cyber Resilience Act in ways most legal-and-engineering workflows are not yet integrated to handle. Running them as separate silos compounds cost and risk on every audit cycle.
-- **Standards — C2PA, Content Credentials.** Industry coalitions are converging on cryptographic provenance as the baseline for trustworthy media and documents. The technical primitives REGINALD uses are the ones the standards bodies have already settled on.
-- **Liability — misattribution exposure.** When an AI assistant misquotes your prices, terms or claims, the question of who said what (and when) becomes a legal one. Without signed provenance, you have no clean answer.
-- **Procurement — buyer-side scrutiny.** Major buyers are increasingly requiring auditable provenance chains for any content they rely on in regulated decisions. Your AI inventory and your content inventory now face the same scrutiny.
+- **Reach - the Brussels Effect.** If your AI outputs touch an EU citizen, you are within scope, whether your servers, your team or your headquarters sit inside the EU or not. Treating the Act as a European problem is a strategic misread.
+- **Regulation - EU AI Act.** Article 50 transparency obligations, requiring identifiability of AI-generated content, apply on 2 August 2026 to providers and deployers alike. Where high-risk systems are involved, deployers also carry FRIA obligations - not only the providers who built the model.
+- **Convergence - the governance maze.** The AI Act overlaps with GDPR and the Cyber Resilience Act in ways most legal-and-engineering workflows are not yet integrated to handle. Running them as separate silos compounds cost and risk on every audit cycle.
+- **Standards - C2PA, Content Credentials.** Industry coalitions are converging on cryptographic provenance as the baseline for trustworthy media and documents. The technical primitives REGINALD uses are the ones the standards bodies have already settled on.
+- **Liability - misattribution exposure.** When an AI assistant misquotes your prices, terms or claims, the question of who said what (and when) becomes a legal one. Without signed provenance, you have no clean answer.
+- **Procurement - buyer-side scrutiny.** Major buyers are increasingly requiring auditable provenance chains for any content they rely on in regulated decisions. Your AI inventory and your content inventory now face the same scrutiny.
 
-### Scale of penalties — Regulation (EU) 2024/1689.
+### Scale of penalties - Regulation (EU) 2024/1689
 
-- **Up to €35M or 7% of global turnover** — for prohibited AI practices, whichever is higher.
-- **Up to €15M or 3% of global turnover** — for high-risk system non-compliance, whichever is higher.
-- **Up to €7.5M or 1% of global turnover** — for supplying inaccurate information to authorities, whichever is higher.
+- **Up to €35M or 7% of global turnover** - for prohibited AI practices, whichever is higher.
+- **Up to €15M or 3% of global turnover** - for high-risk system non-compliance, whichever is higher.
+- **Up to €7.5M or 1% of global turnover** - for supplying inaccurate information to authorities, whichever is higher.
 
 SMEs receive proportionate enforcement under Article 62, but no full exemption.
 
-### A live demonstration — the Digital Omnibus.
+### A live demonstration - the Digital Omnibus
 
 On 19 November 2025, the European Commission published the Digital Omnibus, a proposal to defer the high-risk obligations of the AI Act from 2 August 2026 to 2 December 2027. Trilogue negotiations between the Parliament, Council and Commission have not concluded; the second trilogue ended without agreement. As of the latest publication of this paper, the legislative outcome is unresolved.
 
-Article 50 transparency obligations are not among the provisions the Omnibus would defer. But high-risk system requirements may move — and there is no certainty about when the answer will be known.
+Article 50 transparency obligations are not among the provisions the Omnibus would defer. But high-risk system requirements may move - and there is no certainty about when the answer will be known.
 
 This is the case for runtime governance, not against it. A static compliance posture pinned to "2 August 2026" needs rewriting if the Omnibus passes. A cog with declared `fixed_anchors` updates the date in one place, and every document that depends on it re-derives. The teeth still mesh.
 
-### Runtime governance, three ways to run REGINALD.
+### Runtime governance, three ways to run REGINALD
 
-A folder full of signed PDFs no longer counts. To prove provenance at the moment a machine reads, quotes or modifies your content, the verification has to be available at runtime — queryable by humans, machines and auditors alike. REGINALD is the same product in every deployment; what changes is the network posture.
+A folder full of signed PDFs no longer counts. To prove provenance at the moment a machine reads, quotes or modifies your content, the verification has to be available at runtime - queryable by humans, machines and auditors alike. REGINALD is the same product in every deployment; what changes is the network posture.
 
-- **Option A — Third party, managed.** CogNovaMX runs REGINALD as a managed service. Fastest path to live; no infrastructure to operate.
-- **Option B — Private deployment.** A REGINALD container running in your own cloud or data centre — reachable on the web but private to your enterprise. Your keys, your perimeter, your operations team.
-- **Option C — Air-gapped on-premises.** REGINALD inside a facility with no public network egress. Suits defence, regulated finance, healthcare and sovereign data environments where the web is not an option at all.
+- **Option A - Third party, managed.** CogNovaMX runs REGINALD as a managed service. Fastest path to live; no infrastructure to operate.
+- **Option B - Private deployment.** A REGINALD container running in your own cloud or data centre - reachable on the web but private to your enterprise. Your keys, your perimeter, your operations team.
+- **Option C - Air-gapped on-premises.** REGINALD inside a facility with no public network egress. Suits defence, regulated finance, healthcare and sovereign data environments where the web is not an option at all.
 
-This is not legal advice. The regulatory landscape is moving quickly and varies by jurisdiction. The dates above reflect the EU AI Act (Regulation 2024/1689) as currently in force; the Digital Omnibus proposal would adjust some — but not all — of them. Treat the items above as signals, not statutes, and consult counsel about your specific obligations. Provisions and dates should be verified against the current Official Journal text.
+This is not legal advice. The regulatory landscape is moving quickly and varies by jurisdiction. The dates above reflect the EU AI Act (Regulation 2024/1689) as currently in force; the Digital Omnibus proposal would adjust some - but not all - of them. Treat the items above as signals, not statutes, and consult counsel about your specific obligations. Provisions and dates should be verified against the current Official Journal text.
 
-## The three MX principles.
+## The three MX principles
 
 1. **Design for both humans and machines.** The human stays in the loop. Every output is readable and reviewable by both audiences. There is no machine-only artefact in MX, and no human-only artefact either.
 2. **Accessibility is a requirement.** WCAG conformance is not an optional adjacency. Content properly structured for assistive technology is, almost without exception, content machines can also parse cleanly.
 3. **Choose what is better for the planet.** Reduce compute, reduce inference, reduce energy. Build on what humans already know and use. Cleaner upstream content reduces downstream cost on every machine that touches it.
 
-## How the parts fit together.
+## How the parts fit together
 
 Four pieces, each with one job. Standards are defined in one place. Authentication is shepherded in another. Books and commercial work are published by a third. The framework ties them together.
 
-- **MX** — the framework. The discipline of preparing an organisation's content to be read, retrieved and represented by machines without guesswork. Custodian: The Gathering.
-- **The Gathering** (tg.community) — the independent standards body. Defines and ratifies standards, with pass-throughs to W3C, IETF and others. We do not reinvent wheels. Welcomes founding sponsors.
-- **REGINALD** — proprietary CogNovaMX product. The verification shepherd. Implements authentication standards; does not define them. Deploys as managed, private or air-gapped.
-- **CogNovaMX** — trading name of Digital Domain Technologies Ltd. Publishes the MX book series and offers commercial services: readiness assessment, strategic planning, signing, hosting, implementation, training. Web: <https://mx.allabout.network>. Contact: <info@CogNovaMX.com>.
+- **MX** - the framework. The discipline of preparing an organisation's content to be read, retrieved and represented by machines without guesswork. Custodian: The Gathering.
+- **The Gathering** (tg.community) - the independent standards body. Defines and ratifies standards, with pass-throughs to W3C, IETF and others. We do not reinvent wheels. Welcomes founding sponsors.
+- **REGINALD** - proprietary CogNovaMX product. The verification shepherd. Implements authentication standards; does not define them. Deploys as managed, private or air-gapped.
+- **CogNovaMX** - trading name of Digital Domain Technologies Ltd. Publishes the MX book series and offers commercial services: readiness assessment, strategic planning, signing, hosting, implementation, training. Web: <https://mx.allabout.network>. Contact: <info@CogNovaMX.com>.
 
-> Making the web — and everything you publish beyond it — work for everyone and everything that uses it.
+> Making the web - and everything you publish beyond it - work for everyone and everything that uses it.
 
-## Closing.
+## Closing
 
-The industry consensus prepares an organisation to *use AI well* inside its walls. MX prepares an organisation to *be read well* outside them — by AI it never met, on behalf of buyers it will never see.
+The industry consensus prepares an organisation to *use AI well* inside its walls. MX prepares an organisation to *be read well* outside them - by AI it never met, on behalf of buyers it will never see.
 
 ---
 

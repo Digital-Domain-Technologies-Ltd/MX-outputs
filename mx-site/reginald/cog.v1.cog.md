@@ -9,7 +9,7 @@
 # rule between the two.
 #
 # A spec cog rather than an info cog. Classified under
-# x-mx-cog-type: cogs per Note 3 §6.5.1 — a Community Owned
+# x-mx-cog-type: cogs per Note 3 §6.5.1 - a Community Owned
 # Governance Standard, owned by The Gathering, not by any
 # single vendor.
 # ─────────────────────────────────────────────────────────────
@@ -180,7 +180,7 @@ mx:
 ---
 
 
-# cog v1, the magic-header specification.
+# cog v1, the magic-header specification
 
 **Status:** Draft. Authored by Tom Cranstoun on behalf of The Gathering, offered for community review. Not yet ratified.
 
@@ -188,8 +188,7 @@ mx:
 
 ---
 
-
-## 1. Abstract.
+## 1. Abstract
 
 A cog file announces itself as a cog by carrying either a magic-header YAML comment line inside its frontmatter or a `cogHeader` frontmatter object, or both. This note specifies the grammar of both forms, the conventional keys each carries, and the rule that they must agree on every overlapping key when both are present.
 
@@ -197,15 +196,13 @@ This is the spec the magic-header line `# cog v1 spec=https://tg.community/spec/
 
 The magic-header line is preserved by YAML parsers as a comment token and is visible to consumers that scan raw text. The `cogHeader` field is the parsed-data equivalent for consumers that work on structured YAML output. Together they let any consumer recognise a cog with whatever parser it has to hand.
 
-
-## 2. Conformance.
+## 2. Conformance
 
 The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 This spec defines two equivalent identification mechanisms. A cog circulating outside a closed system MUST carry at least one of them; a cog SHOULD carry both.
 
-
-## 3. The magic-header line.
+## 3. The magic-header line
 
 A cog file SHOULD identify itself as a cog by carrying a magic-header line as a YAML comment inside its frontmatter, placed on the line immediately after the opening `---` delimiter:
 
@@ -215,7 +212,7 @@ A cog file SHOULD identify itself as a cog by carrying a magic-header line as a 
 title: ...
 ```
 
-Tokens after the leading `# `, in order:
+Tokens after the leading `#`, in order:
 
 1. The literal `cog` (case-sensitive).
 2. A version token of the form `v\d+(\.\d+)*`. Examples: `v1`, `v1.2`, `v2`. The version token names which spec version the cog claims.
@@ -241,8 +238,7 @@ A worked example, identical to the one carried by the position-paper cog:
 title: ...
 ```
 
-
-## 4. The cogHeader frontmatter equivalent.
+## 4. The cogHeader frontmatter equivalent
 
 A cog MAY declare a `cogHeader` object at the top level of its YAML frontmatter (Zone 1). The field carries the same information as the magic-header comment in a form addressable by YAML-only consumers.
 
@@ -269,8 +265,7 @@ cogHeader:
   runtimeDoc: https://tg.community/runtimes/cog.v1/docs
 ```
 
-
-## 5. The equivalence rule.
+## 5. The equivalence rule
 
 When a cog carries both a magic-header comment and a `cogHeader` field, the two forms MUST agree on every key they both declare:
 
@@ -281,8 +276,7 @@ When a cog carries both a magic-header comment and a `cogHeader` field, the two 
 
 A key present in only one form is permitted; a key present in both with mismatched values is a conformance failure. A verifier encountering a mismatch SHOULD treat it as a tampering signal: someone has edited one form without editing the other.
 
-
-## 6. Implementation guidance.
+## 6. Implementation guidance
 
 Implementations producing cogs intended for circulation SHOULD emit both forms, so that consumers of either kind can recognise the file without round-trip parsing. Specifically:
 
@@ -295,22 +289,19 @@ Implementations consuming cogs:
 - A runtime that auto-fetches the URL in `runtime` MUST validate it against an operator allowlist or trusted registry before fetching. The `runtime` URL is declared by the cog itself and is therefore untrusted input. Auto-fetching unrecognised runtimes is a phishing surface.
 - A signing tool reading `cogHeader` SHOULD exclude it from the fingerprint scope by listing it in `metadataFields`. The header identifies the spec the cog claims, not the contract the cog binds itself to.
 
-
-## 7. Security and privacy considerations.
+## 7. Security and privacy considerations
 
 - URLs declared in `cogHeader.runtime` may leak deployment topology. A cog declaring an internal runtime URL is exposing that URL to any reader of the cog. Operators concerned about topology privacy SHOULD either publish a public runtime URL or omit the field.
 - A `cogHeader.spec` URL pointing at an attacker-controlled host is a phishing vector for runtimes that auto-fetch the spec. Runtimes SHOULD validate the spec URL against a trusted registry or operator allowlist before fetching.
 - The magic-header comment and `cogHeader` field are NOT authenticated. Anyone who can write the cog can lie about which spec it claims to follow. Authentication, if required, is the responsibility of an external signing or witness mechanism (see The Gathering's Contract Fingerprinting and Signing note), not this spec.
 
-
-## 8. Versioning.
+## 8. Versioning
 
 The version token in both forms names a specific version of this specification. A consumer encountering `cog v2` is encountering a cog that claims to follow a future version of this document. Compatibility between versions is not guaranteed.
 
 The Gathering will publish a successor (`cog v2`) only when a backwards-incompatible change is needed. Backwards-compatible additions (new conventional keys, new optional sub-keys) are made within `v1` and announced at the canonical URI.
 
-
-## 9. References.
+## 9. References
 
 **Normative:**
 

@@ -7,11 +7,13 @@
 author: "Tom Cranstoun"
 created: "2026-04-16"
 modified: "2026-05-06"
-description: "A short companion appendix preview of Chapter 20 — the architecture of the proposed MX standards family, the principle of deferring to existing standards, and pointers to the public canon."
+description: "A short companion appendix preview of Chapter 20 - the architecture of the proposed MX standards family, the principle of deferring to existing standards, and pointers to the public canon."
 title: "Appendix U: A Standard That Knows What It Isn't"
+tags: [mx, standards, the-gathering, architecture, preview, protocols, cog, canon]
+type: info-doc
 mx:
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
-  tags: [mx, standards, the-gathering, architecture, preview, protocols, cog, canon]
+  x-mx-createdHash: df386baa
   runbook: |
     This document is copyrighted material. No part may be reproduced without permission.
     This is a book appendix that previews the architecture covered in depth in Chapter 20
@@ -20,6 +22,7 @@ mx:
     meta-commentary about the document's development. Write definitive present tense.
     Historical context about subject matter is allowed.
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-u-a-standard-that-knows-what-it-isnt.md
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -171,14 +174,14 @@ same ground in depth, with the full field dictionary in Appendix M and
 the formal drafts at <a
 href="https://tg.community">tg.community</a>.</p>
 <h2 id="a-light-touch-on-cogs">A light touch on cogs</h2>
-<p>The architecture assumes one artefact as its basic unit — the
+<p>The architecture assumes one artefact as its basic unit - the
 <strong>cog</strong>. A cog is a self-describing document with two-zone
 YAML frontmatter at the top: Zone 1 is the identity every MX-aware
 document carries (title, author, created, description), and Zone 2 (the
 <code>mx:</code> block) is the operational metadata a machine actually
 reads to decide what to do.</p>
 <p>That is all this appendix needs to say about cogs. Chapter 20 of
-<em>MX: The Protocols</em> — "Cogs and Reginald" — covers cogs in depth:
+<em>MX: The Protocols</em> - "Cogs and Reginald" - covers cogs in depth:
 the reader behaviour, the block structure, how Reginald registers them,
 how inheritance works, what the carrier formats look like. Read that
 chapter before implementing. Everything below assumes the cog shape is
@@ -207,7 +210,7 @@ about governance: identity, provenance, machine-readable instructions,
 conformance, the rules for extending the standard without polluting it.
 That is the scope of the draft notes that went into public review.</p>
 <h2 id="the-draft-notes">The draft notes</h2>
-<p>The Gathering — the independent, community-governed body behind MX —
+<p>The Gathering - the independent, community-governed body behind MX -
 has a set of draft notes authored by Tom Cranstoun and offered for
 community ratification via Stream. None is final. All are stable enough
 to build against, and all will evolve through public review. Each note
@@ -215,8 +218,8 @@ stands alone: it defines its own conformance level framework inline and
 refers only to actually-published external standards (RFC, ISO, W3C,
 Schema.org, Dublin Core, SPDX), not to its sibling drafts.</p>
 <p><strong>The MX Core Metadata note.</strong> The identity vocabulary
-every MX-aware document carries — title, author, created, modified,
-version, description, tags, audience, status, licence, maintainer —
+every MX-aware document carries - title, author, created, modified,
+version, description, tags, audience, status, licence, maintainer -
 together with the two-zone frontmatter model and a Pass-through fields
 section naming the keys MX borrows from established external
 vocabularies (Dublin Core's <code>date</code>, <code>format</code>,
@@ -228,7 +231,7 @@ optimisation.</p>
 <p><strong>The MX Cogs note.</strong> The <code>.cog.md</code> file
 format as an OPTIONAL layer on top of MX. A document does not need to be
 a cog to carry MX metadata. When a document is a cog, this note
-specifies the additional structural fields it declares —
+specifies the additional structural fields it declares -
 <code>partOf</code>, <code>buildsOn</code>, <code>requires</code>,
 <code>refersTo</code>, plus the cog identification mechanism (the
 magic-header YAML comment line carried inside the frontmatter and the
@@ -248,8 +251,8 @@ who created content, how it was derived, who maintains it, and what
 governance decisions shaped it. This is the layer that turns a cog from
 "some text claiming to be a guide" into "a guide with a traceable origin
 and a nominated maintainer."</p>
-<p><strong>The MX Carrier Formats note.</strong> Code. Source files —
-JavaScript, TypeScript, Python, Go, shell, CSS — carry metadata through
+<p><strong>The MX Carrier Formats note.</strong> Code. Source files -
+JavaScript, TypeScript, Python, Go, shell, CSS - carry metadata through
 their native mechanisms (JSDoc, CSS comments, shell comment blocks, SQL
 comment blocks). The Carrier Formats note specifies a tight code-only
 provenance vocabulary (<code>sourceRepo</code>,
@@ -260,9 +263,9 @@ explicitly not in scope.</p>
 <p><strong>The MX Contract Fingerprinting and Signing note.</strong>
 <strong>Signing is optional.</strong> Most cogs ship unsigned. When a
 cog is signed, this note specifies the canonical-JSON / SHA-256
-fingerprint algorithm and the two scope-declaration fields —
+fingerprint algorithm and the two scope-declaration fields -
 <code>contractFields</code> (keys covered by the signature) and
-<code>metadataFields</code> (keys explicitly excluded) — together with
+<code>metadataFields</code> (keys explicitly excluded) - together with
 the mandatory-when-signed fields (<code>title</code>,
 <code>validatesAgainst</code> with resolvable validators,
 <code>schema</code>). Compatible with W3C VC Data Integrity, JWS (RFC
@@ -282,7 +285,7 @@ three sibling YAML files, published at stable public URLs for any
 implementer to fetch.</p>
 <p><a
 href="https://mx.allabout.network/canon/fields-data.yaml"><code>fields-data.yaml</code></a>
-is the core — 62 fields, each with a definitive one-sentence
+is the core - 62 fields, each with a definitive one-sentence
 description. Identity, classification, relationships, lifecycle, folder
 metadata, Dublin Core and Schema.org pass-through fields, and the
 genuineness family (<code>proofOfAuthorship</code>,
@@ -291,7 +294,7 @@ anchors the trust lens. This is what the MX Core Metadata note
 specifies.</p>
 <p><a
 href="https://mx.allabout.network/canon/fields-data-carriers.yaml"><code>fields-data-carriers.yaml</code></a>
-is the carriers companion — 2 fields. Code-specific provenance only:
+is the carriers companion - 2 fields. Code-specific provenance only:
 <code>sourceRepo</code> and <code>derivedFromCommit</code>. What the
 code does (signatures, APIs, tests, type systems, inline annotations) is
 out of MX scope and defers to each language's own documentation
@@ -299,7 +302,7 @@ convention (JSDoc, Python docstrings, Doxygen, rustdoc, godoc). This is
 what the MX Carrier Formats note specifies.</p>
 <p><a
 href="https://mx.allabout.network/canon/cognovamx-fields.yaml"><code>cognovamx-fields.yaml</code></a>
-is a vendor extension example pack — 206 fields carrying
+is a vendor extension example pack - 206 fields carrying
 CogNovaMX-specific workflow vocabulary, each with a definitive
 description. It is not part of the standard. Other vendors author
 parallel files under the same three-tier pattern using their own
@@ -415,21 +418,21 @@ namespace is the honest declaration: <em>this is my extension, not The
 Gathering's standard, read at your discretion</em>.</p>
 <p><strong>Manageable standard growth.</strong> A small core stays
 maintainable. The community can read it. Conformance is achievable.
-Review cycles are bounded. The Gathering's governance model — open
-participation, consensus ratification, no membership — only works when
+Review cycles are bounded. The Gathering's governance model - open
+participation, consensus ratification, no membership - only works when
 the specification is small enough that the community can hold it in its
 collective head.</p>
 <p><strong>Narrow attestation, not editorial truth.</strong> When a cog
 is signed and Reginald attests it, the attestation answers four
 questions: who published this document, has it been modified since
-publication, when was the current version issued, and — where declared
-by the publisher — whether it was produced by a human, an AI, or an
+publication, when was the current version issued, and - where declared
+by the publisher - whether it was produced by a human, an AI, or an
 automated system. The attestation says one thing only: <em>this is the
 content the publisher signed; the cog genuinely came from that owner and
 has not been altered downstream</em>. It does not say the content is
 factually correct. MX deliberately confines the registry's job to a
-question it can actually answer — <em>is this what the owner
-published?</em> — and uses the word <em>attest</em> rather than
+question it can actually answer - <em>is this what the owner
+published?</em> - and uses the word <em>attest</em> rather than
 <em>verify</em> to make the smaller scope explicit. Chapter 21 of
 <em>MX: The Protocols</em> covers the contrast in detail.</p>
 <h2 id="what-cognovamx-does-not-own">What CogNovaMX does not own</h2>
@@ -438,11 +441,11 @@ another. Both lines matter for a buyer trying to work out what they are
 committing to when they adopt MX.</p>
 <p>The Gathering owns the open standard: the field shapes, the carrier
 conventions, the conformance levels, the proposed patterns awaiting
-ratification. The standard is MIT licensed and community-governed. No
-vendor can rescind the conformance rule a buyer's content was authored
-against. No vendor can charge for the right to use the vocabulary. The
-boundary holds because The Gathering is structurally independent of
-every operator running on top of the standard.</p>
+ratification. The standard is open and community-governed. No vendor can
+rescind the conformance rule a buyer's content was authored against. No
+vendor can charge for the right to use the vocabulary. The boundary
+holds because The Gathering is structurally independent of every
+operator running on top of the standard.</p>
 <p>CogNovaMX owns the rules around its own commercial offerings: the
 registry methodology, the accreditation programme, the audit
 methodology, the operator-network rulebook. The boundary between the
@@ -451,6 +454,27 @@ into a vendor product the day a vendor's commercial priorities shift.
 The signing primitive, the registry protocol, and the verification chain
 stay open. The methodology a particular operator runs against them is
 the operator's intellectual property.</p>
+<p>CogNovaMX is not a services business and does not compete with the
+agencies and practitioners who use its tools. The commercial model
+follows from this: the certification programme licenses the people who
+deliver MX work, and the tools are the deliverable. An organisation that
+certifies with CogNovaMX runs its own MX engagements without CogNovaMX
+in the delivery.</p>
+<p>Four delivery routes serve different buyer contexts. CogNovaMX runs
+the audit as a partner service, producing a signed report for a client
+directly. It licenses the tool to an agency or enterprise to run on
+their own infrastructure. It runs the audit white-label, under an
+agency's brand, for that agency's clients. And for organisations that
+cannot or do not want to manage their own infrastructure - regulated
+industries, local businesses requiring data sovereignty, or buyers who
+simply prefer not to - the tool runs on a CogNovaMX-hosted instance or
+on a NAS device on the buyer's own premises.</p>
+<p>The independence common to all four routes is itself the commercial
+argument. A platform vendor's diagnostics serve the platform. An
+independent assessment from a body that operates no platform has no
+algorithm to serve - which is what makes it useful as evidence when a
+buyer needs to demonstrate due diligence to a regulator, an auditor, or
+a procurement officer.</p>
 <p>Other operators can run on the same standard. Other registries can
 index the same signed cogs. Other audit methodologies can score against
 the same conformance levels. The standard's neutrality is preserved by
@@ -476,27 +500,27 @@ is not a cure for a model built English-first.</p>
 <p>Four public artefacts carry the material. Each has a distinct job and
 a different shape, and together they let a reader pick up the standard
 in whichever form suits them.</p>
-<p><strong>The source drafts</strong> — <a
+<p><strong>The source drafts</strong> - <a
 href="https://github.com/ddttom/mx-shared-gathering">github.com/ddttom/mx-shared-gathering</a>.
 This is the reading copy: the <code>.cog.md</code> files that carry the
 draft notes in their authored form, with YAML frontmatter and prose.
-Each draft is standalone — it stands on its own, citing only published
+Each draft is standalone - it stands on its own, citing only published
 external standards. Open the repo in a browser and you can read the
 notes end-to-end. If you want to cite a specific clause, link here. If
 you want to file an editorial issue against the source text, this is the
 tracker.</p>
-<p><strong>The machine-readable canon</strong> —
+<p><strong>The machine-readable canon</strong> -
 <code>mx.allabout.network/canon/</code>. Three YAML files that are the
 source of truth behind the drafts. <code>fields-data.yaml</code> carries
 the core vocabulary (Core Metadata + Extensions + Provenance).
 <code>fields-data-carriers.yaml</code> carries the code-carrier
 vocabulary (Carrier Formats). <code>cognovamx-fields.yaml</code> is the
-CogNovaMX vendor extension example pack — not part of the standard, but
+CogNovaMX vendor extension example pack - not part of the standard, but
 useful as a reference for other vendors authoring their own
 <code>x-vendor-</code> files. Tooling that validates MX documents should
 fetch from here. When the YAML and the prose disagree, the YAML is
-authoritative by definition — a drift checker verifies alignment.</p>
-<p><strong>The Stream RFC drafts</strong> — one repo per standard under
+authoritative by definition - a drift checker verifies alignment.</p>
+<p><strong>The Stream RFC drafts</strong> - one repo per standard under
 <a href="https://github.com/TG-Community">TG-Community</a>: <a
 href="https://github.com/TG-Community/draft-cranstoun-mx-core-metadata">draft-cranstoun-mx-core-metadata</a>,
 <a
@@ -506,7 +530,7 @@ href="https://github.com/TG-Community/draft-cranstoun-mx-provenance">draft-crans
 <a
 href="https://github.com/TG-Community/draft-cranstoun-mx-carrier-formats">draft-cranstoun-mx-carrier-formats</a>.
 Same content as the source drafts, converted into IETF RFC format for
-Stream's review process — the frontmatter keys (<code>title</code>,
+Stream's review process - the frontmatter keys (<code>title</code>,
 <code>abbrev</code>, <code>docname</code>, <code>normative</code>,
 <code>informative</code>) and body delimiters
 (<code>--- abstract</code>, <code>--- middle</code>,
@@ -515,22 +539,22 @@ community reviews and ratifies through <a
 href="https://stream.tg.community">stream.tg.community</a>. They carry
 the formal RFC 2119 language ("MUST", "SHOULD", "MAY") the conformance
 levels depend on.</p>
-<p><strong>The book</strong> — Appendix M of this book is the complete
+<p><strong>The book</strong> - Appendix M of this book is the complete
 prose reference for every field the drafts cite: definitions, types,
 validation values, profile membership, usage examples, cross-references.
 Sections 22 through 27 cover the field dictionary, folder metadata, the
 book-manuscript template, the carrier format map, the HTML carrier
 writing guide, and the canon-layout explanation with the
-external-standards deferral table. Chapter 21 — "The Fields and the
-Standards" — is the full narrative counterpart to this architecture
+external-standards deferral table. Chapter 21 - "The Fields and the
+Standards" - is the full narrative counterpart to this architecture
 summary.</p>
 <p>Four artefacts, one set of drafts. Source for reading, YAML for
 tooling, RFC for formal review, book for reference prose. Pick whichever
-entry point fits what you are trying to do — they all point at the same
+entry point fits what you are trying to do - they all point at the same
 standard.</p>
 <h2 id="chapter-20-goes-further">Chapter 20 goes further</h2>
 <p>This appendix hits the architecture and the rationale. Chapter 20 of
-<em>MX: The Protocols</em> — "The Fields and the Standards" — goes
+<em>MX: The Protocols</em> - "The Fields and the Standards" - goes
 further: it traces the full three-pass reading model a machine uses to
 comprehend a cog, walks through the economics of shared vocabulary,
 covers author-facing guidance (what to include at each conformance
@@ -544,7 +568,7 @@ is tight.</p>
 <p>And because The Gathering's process is open and requires no
 membership, if you have a view on how MX should evolve, Stream is how
 you contribute. The cog format you use in a year will reflect whoever
-engages between now and then — including, potentially, you.</p>
+engages between now and then - including, potentially, you.</p>
 </div>
 <hr>
 <nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">

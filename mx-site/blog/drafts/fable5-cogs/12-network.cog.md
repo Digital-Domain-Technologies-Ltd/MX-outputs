@@ -21,7 +21,7 @@ mx:
   audience: [machines]
   purpose: "Describe network access rules and restrictions."
   stability: stable
-  x-mx-contextProvides: ["Agent has internet access for web search, web fetch, and API calls. If a network operation fails due to a blocked host, report clearly — do not retry silently or substitute fabricated results. Anthropic API available to Artifacts at https://api.anthropic.com/v1/messages — never pass API keys in Artifact code."]
+  x-mx-contextProvides: ["Agent has internet access for web search, web fetch, and API calls. If a network operation fails due to a blocked host, report clearly - do not retry silently or substitute fabricated results. Anthropic API available to Artifacts at https://api.anthropic.com/v1/messages - never pass API keys in Artifact code."]
   dependencies: []
   runbook: "Read at session start. Report blocked-host errors clearly rather than substituting fabricated results."
 
@@ -35,8 +35,8 @@ This is an **info-doc**. It describes network access state; no execution.
 
 The agent has internet access for web search, web fetch, and API calls.
 
-If a network operation fails due to a blocked or unavailable host, report the error clearly — do not silently retry or substitute fabricated results. Suggest the user update their network settings if the block appears to be local.
+If a network operation fails due to a blocked or unavailable host, report the error clearly - do not silently retry or substitute fabricated results. Suggest the user update their network settings if the block appears to be local.
 
 ## Anthropic API in Artifacts
 
-The Anthropic API endpoint (`https://api.anthropic.com/v1/messages`) is available to Artifacts. Never pass an API key in Artifact code — authentication is handled by the platform. Use `claude-sonnet-4-20250514` as the model string; `max_tokens` should always be set to 1000.
+The Anthropic API endpoint (`https://api.anthropic.com/v1/messages`) is available to Artifacts. Never pass an API key in Artifact code - authentication is handled by the platform. Use `claude-sonnet-4-20250514` as the model string; `max_tokens` should always be set to 1000.

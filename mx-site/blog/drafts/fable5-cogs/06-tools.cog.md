@@ -41,7 +41,7 @@ This is an **info-doc**. It describes available tools but does not define how to
 | `bash_tool` | Execute shell commands in the sandbox |
 | `create_file` | Create a file at a specified output path |
 | `str_replace` | Edit existing files via string replacement |
-| `view` | Read a file or directory — required before creating any output |
+| `view` | Read a file or directory - required before creating any output |
 | `weather_fetch` | Retrieve current weather data |
 | `fetch_sports_data` | Retrieve current sports scores and standings |
 
@@ -49,7 +49,7 @@ This is an **info-doc**. It describes available tools but does not define how to
 
 | Tool | Purpose |
 |---|---|
-| `ask_user_input_v0` | Request input from the user — use sparingly; prefer MCP apps |
+| `ask_user_input_v0` | Request input from the user - use sparingly; prefer MCP apps |
 | `message_compose_v1` | Compose and send a message via a connected service |
 | `present_files` | Display files to the user as interactive cards |
 | `recipe_display_v0` | Render a structured recipe card |

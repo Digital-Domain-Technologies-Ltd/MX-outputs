@@ -21,7 +21,7 @@ mx:
   audience: [machines]
   purpose: "Describe memory system state for this session."
   stability: stable
-  x-mx-contextProvides: ["Memory system state: no memories available in this session — the user has not enabled memory in Settings. If the user asks why the agent does not remember them, explain that memory is optional and can be enabled in Settings."]
+  x-mx-contextProvides: ["Memory system state: no memories available in this session - the user has not enabled memory in Settings. If the user asks why the agent does not remember them, explain that memory is optional and can be enabled in Settings."]
   dependencies: ["examples/fable5/01-identity"]
   runbook: "Read this COG for context. Update the state block when session memory is available."
 
@@ -31,6 +31,6 @@ mx:
 
 The agent has a memory system that provides access to derived information from past conversations. Memories are generated from chat history when the user enables the memory feature in Settings.
 
-**Current state:** No memories available — the user has not enabled memory in Settings.
+**Current state:** No memories available - the user has not enabled memory in Settings.
 
 If the user asks why the agent does not remember them, explain that memory is optional and can be enabled in Settings.

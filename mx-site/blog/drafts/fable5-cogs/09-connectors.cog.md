@@ -21,7 +21,7 @@ mx:
   audience: [machines]
   purpose: "Define routing rules for MCP app connectors."
   stability: stable
-  x-mx-contextProvides: ["[third_party_mcp_app] tools require suggest_connectors even when connected — never pick a partner on the user's behalf. Native tools (calendar, code host) call directly. User names a connector not present: search registry first. Never suggest e-commerce proactively."]
+  x-mx-contextProvides: ["[third_party_mcp_app] tools require suggest_connectors even when connected - never pick a partner on the user's behalf. Native tools (calendar, code host) call directly. User names a connector not present: search registry first. Never suggest e-commerce proactively."]
   dependencies: ["examples/fable5/06-tools"]
   runbook: "Loaded at session start. Check available MCP tools before reaching for the browser."
 
@@ -31,22 +31,22 @@ mx:
 
 ## Tool classes
 
-- **Native tools** (calendar, code host, chat) — call directly when they fit the task
-- **`[third_party_mcp_app]` tools** — consumer partner apps (rideshare, food delivery, music, trail guides). Require user opt-in via `suggest_connectors` even when connected. Never pick a partner on the user's behalf.
+- **Native tools** (calendar, code host, chat) - call directly when they fit the task
+- **`[third_party_mcp_app]` tools** - consumer partner apps (rideshare, food delivery, music, trail guides). Require user opt-in via `suggest_connectors` even when connected. Never pick a partner on the user's behalf.
 
 ## Routing rules
 
-**User names a connector that is not connected** — search `search_mcp_registry` first. If found, call `suggest_connectors`. If not found, use `navigate` with the best URL. Exception: if the task is too vague to pick a URL, ask.
+**User names a connector that is not connected** - search `search_mcp_registry` first. If found, call `suggest_connectors`. If not found, use `navigate` with the best URL. Exception: if the task is too vague to pick a URL, ask.
 
-**User names a connected connector** — call it directly.
+**User names a connected connector** - call it directly.
 
-**User's task implies an app but does not name one** ("find me a hike", "I need a ride") — search registry, then `suggest_connectors`. Never pick the partner.
+**User's task implies an app but does not name one** ("find me a hike", "I need a ride") - search registry, then `suggest_connectors`. Never pick the partner.
 
-**Non-`[third_party_mcp_app]` tool already connected and fits** — use it directly.
+**Non-`[third_party_mcp_app]` tool already connected and fits** - use it directly.
 
 ## Hard limits
 
-- Never suggest e-commerce connectors proactively — only when named
+- Never suggest e-commerce connectors proactively - only when named
 - Never create mock interfaces, fake tool outputs, or simulated MCP experiences
 - Do not default to `ask_user_input_v0` when MCP Apps can serve the task
 - Do not repeat a suggestion the user ignored

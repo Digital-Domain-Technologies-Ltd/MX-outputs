@@ -35,7 +35,7 @@ mx:
   - machines
   x-mx-category: MX blog series
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/provenance/the-inspector-you-can-audit-yourself.md
-  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-outputs/mx-site/blog is generated from this file by the Intent CMS generator."
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   x-mx-contextProvides:
     - "The public PDF inspector at mx.allabout.network checks one file at a time for free. The same detection core is now available as a command-line tool for accredited operators, and as a hard gate in our own publishing pipeline. Four surfaces, one source of truth, all readable in the open."
   stability: stable
@@ -201,7 +201,7 @@ x-mx-ai:
       <!-- Blog Introduction -->
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
-          <a href="../profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
             <img src="../../images/avatars/tom-avatar.webp"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
@@ -272,7 +272,7 @@ npx mx-pdf-inspect report.pdf --min-tier eaa-tagged
 <p>The <strong>production gate</strong> at <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/scripts/bin/mx.pdf.sh">scripts/bin/mx.pdf.sh</a> calls the harness as a hard step after every canonical render in our own pipeline. If the inspector would not certify the freshly-rendered PDF as MX Compatible, the build fails non-zero and nothing ships. Our outbound work is gated by the same check we tell operators to run.</p>
 <p>The <strong>test harness</strong> at <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/tests/test-pdf-inspector.js">tests/test-pdf-inspector.js</a> runs the harness against a gold-standard fixture on every <code>npm test</code>. A regression in the detection core fails the test, fails the production gate, and fails the public inspector for every visitor, in the same way and on the same line.</p>
 <p>The <strong>operator CLI</strong> at <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/scripts/bin/mx-pdf-inspect.js">scripts/bin/mx-pdf-inspect.js</a> is the same code with a command-line UI, available to accredited operators for their own pipelines.</p>
-<p>All four import the detection core at <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-outputs/mx-site/js/pdf-inspector-core.js">mx-outputs/mx-site/js/pdf-inspector-core.js</a>. One file. Browser and Node both load it the same way. A change to the core fails every surface in lockstep; a fix to the core repairs every surface in lockstep. No drift between the rule we publish and the rule we enforce.</p>
+<p>All four import the detection core at <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-site/js/pdf-inspector-core.js">mx-site/js/pdf-inspector-core.js</a>. One file. Browser and Node both load it the same way. A change to the core fails every surface in lockstep; a fix to the core repairs every surface in lockstep. No drift between the rule we publish and the rule we enforce.</p>
 <h2 id="why-a-cli-and-not-a-hosted-service" tabindex="-1">Why a CLI and not a hosted service</h2>
 <p>Two reasons, both deliberate.</p>
 <p>The PDFs an operator wants to verify are usually confidential. Draft contracts. Unpublished audit reports. Regulatory submissions. Board papers. A hosted service requires uploading the file to a third party; a CLI runs locally, sees no network, and leaves no trace outside the operator's own environment. That matches the property the public inspector advertises (&quot;the file never leaves your machine&quot;) and extends it to the CLI surface.</p>
@@ -305,7 +305,7 @@ npx mx-pdf-inspect report.pdf --min-tier eaa-tagged
           <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
-            <p class="post-conclusion-author-name"><a href="../profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
             <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>

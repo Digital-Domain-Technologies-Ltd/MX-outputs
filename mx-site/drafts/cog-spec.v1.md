@@ -31,9 +31,9 @@ mx:
 
 Version 1.2 (draft, review-ready)
 
-> **v1.2 — `cogHeader` frontmatter field.** A new optional frontmatter field carries the same information as the magic-header line (version + spec + runtime + runtime-doc URLs) so consumers that work on parsed YAML can read the cog's spec/runtime conformance claim from a queryable nested object. Specified inline in section 2.5; a dedicated MX Cog Identification note (MXS-06) is planned but not yet published, and section 2.5 is the normative definition until it is. When both forms are present in the same cog they MUST agree on values (§2.5).
+> **v1.2 - `cogHeader` frontmatter field.** A new optional frontmatter field carries the same information as the magic-header line (version + spec + runtime + runtime-doc URLs) so consumers that work on parsed YAML can read the cog's spec/runtime conformance claim from a queryable nested object. Specified inline in section 2.5; a dedicated MX Cog Identification note (MXS-06) is planned but not yet published, and section 2.5 is the normative definition until it is. When both forms are present in the same cog they MUST agree on values (§2.5).
 >
-> **v1.1 — Naming convention change.** Frontmatter field names are now `camelCase` (aligned with MX [NDR-2026-02-16](https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md)). The `x-mx-` and `x-mx-p-` namespace prefixes themselves remain kebab; only the suffix is camelCase (e.g. `x-mx-contractFields`, not `xMxContractFields`). v1.0 cogs that used kebab-case field names should be migrated by converting all field names to camelCase. File and directory names retain kebab-case (e.g. `cog-spec.v1.md`, `cog-review-procedure.cog.md`).
+> **v1.1 - Naming convention change.** Frontmatter field names are now `camelCase` (aligned with MX [NDR-2026-02-16](https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md)). The `x-mx-` and `x-mx-p-` namespace prefixes themselves remain kebab; only the suffix is camelCase (e.g. `x-mx-contractFields`, not `xMxContractFields`). v1.0 cogs that used kebab-case field names should be migrated by converting all field names to camelCase. File and directory names retain kebab-case (e.g. `cog-spec.v1.md`, `cog-review-procedure.cog.md`).
 
 ## Status
 
@@ -41,11 +41,11 @@ This specification is a v1.2 draft, sufficient for independent implementation an
 
 ### What this draft is sufficient for
 
-An implementer in any language can read this specification and produce a working cog parser, validator, and witness-signing system. The previously-identified interoperability blockers — schema reference resolution, canonical JSON serialisation, identifier syntax, structural delimiters — are now specified to a level that supports implementation without guesswork. A draft conformance test suite (v0.1) accompanies the specification and provides the basis for confirming behavioural agreement between implementations.
+An implementer in any language can read this specification and produce a working cog parser, validator, and witness-signing system. The previously-identified interoperability blockers - schema reference resolution, canonical JSON serialisation, identifier syntax, structural delimiters - are now specified to a level that supports implementation without guesswork. A draft conformance test suite (v0.1) accompanies the specification and provides the basis for confirming behavioural agreement between implementations.
 
 ### What this draft is not yet sufficient for
 
-This draft is sufficient for *alignment* — implementations can run the conformance suite and report which cases pass — but not yet for *certified conformance*. The reasons:
+This draft is sufficient for *alignment* - implementations can run the conformance suite and report which cases pass - but not yet for *certified conformance*. The reasons:
 
 - **Conformance suite coverage.** The v0.1 suite covers 23 cases across parsing, annotations, fingerprints, witnesses, and validators. The specification contains substantially more MUST and SHOULD requirements than this suite exercises. An implementation that passes all 23 cases can still violate spec requirements that no case tests. Suite expansion is community work.
 
@@ -86,7 +86,7 @@ description: A minimal cog
 This is the body.
 ```
 
-A more representative cog declares a contract — a schema it claims to satisfy, the validators that confirm the claim, and structured fields the schema constrains. It also declares itself as a cog at the top of the file and includes a preamble for any agent reading it without context:
+A more representative cog declares a contract - a schema it claims to satisfy, the validators that confirm the claim, and structured fields the schema constrains. It also declares itself as a cog at the top of the file and includes a preamble for any agent reading it without context:
 
 ```markdown
 <!-- cog v1 spec=https://example.org/cog-spec.v1.md runtime=https://example.org/cog-runtime -->
@@ -129,9 +129,10 @@ small amount.
 ```bash @embedded:check-invoice
 node tools/validate-invoice.js "$1"
 ```
+
 ```
 
-The file as a whole is the cog. Inside it, four artefacts coexist: the frontmatter contract, the prose narrative (which begins with a preamble addressed to readers who do not know what a cog is), an embedded executable code block addressable by the id `check-invoice`, and a referenced external schema at the declared path. Each artefact type has its own purpose and its own treatment by the runtime — the rest of this specification is concerned with what those types are, how they are recognised, and what guarantees a system built on them can offer.
+The file as a whole is the cog. Inside it, four artefacts coexist: the frontmatter contract, the prose narrative (which begins with a preamble addressed to readers who do not know what a cog is), an embedded executable code block addressable by the id `check-invoice`, and a referenced external schema at the declared path. Each artefact type has its own purpose and its own treatment by the runtime - the rest of this specification is concerned with what those types are, how they are recognised, and what guarantees a system built on them can offer.
 
 The optional magic header line on the first line identifies the file as a cog and points at the specification it claims to follow. It is invisible in rendered Markdown but immediately visible to any agent reading the raw text. The preamble in the body addresses the same concern at a different layer: when an agent has read past the header into the prose, the preamble re-states the cog's nature in language a language model will understand.
 
@@ -164,7 +165,7 @@ Implementations MUST NOT rely on the filename to determine whether a file is a c
 A cog file consists of, in order:
 
 1. **Optionally**, a magic header line, defined in section 2.5.
-2. A frontmatter delimiter line — a line whose content, after stripping leading and trailing horizontal whitespace (spaces and tabs), is exactly the three characters `---`.
+2. A frontmatter delimiter line - a line whose content, after stripping leading and trailing horizontal whitespace (spaces and tabs), is exactly the three characters `---`.
 3. A frontmatter block containing valid YAML, with no occurrence of a delimiter line as defined in (2).
 4. A second frontmatter delimiter line of the same form.
 5. A body, consisting of zero or more lines of Markdown text.
@@ -193,9 +194,9 @@ The line is parsed by:
 - The literal token `cog` (case-insensitive).
 - A version token matching `v[0-9]+(\.[0-9]+)*` indicating the spec version the cog claims to conform to.
 - Zero or more whitespace-separated `key=value` pairs. Recognised keys:
-  - `spec` — a URL where the specification is published
-  - `runtime` — a URL where a runtime implementation can be found, downloaded, or invoked
-  - `runtime-doc` — a URL pointing to documentation explaining how to consume cogs
+  - `spec` - a URL where the specification is published
+  - `runtime` - a URL where a runtime implementation can be found, downloaded, or invoked
+  - `runtime-doc` - a URL pointing to documentation explaining how to consume cogs
 - The literal closing `-->`, with optional surrounding whitespace.
 
 The magic header line is invisible in rendered Markdown (it is a comment) and is ignored by Markdown parsers that do not know about cogs. Implementations that recognise the line MAY use it to:
@@ -204,7 +205,7 @@ The magic header line is invisible in rendered Markdown (it is a comment) and is
 - Direct an unfamiliar reader (a human or an unaware agent) to the spec URL.
 - Refuse to process the cog if the runtime URL is required but unreachable.
 
-The magic header line is OPTIONAL in the sense that its absence does not invalidate a cog — a file without one is still a valid cog if its structural shape and frontmatter satisfy this specification. It is RECOMMENDED for any cog that may be encountered outside a closed system where all consumers are known to be cog-aware. Cogs intended for circulation, public registries, or mixed audiences SHOULD include the magic header line; cogs operating only within a known runtime MAY omit it.
+The magic header line is OPTIONAL in the sense that its absence does not invalidate a cog - a file without one is still a valid cog if its structural shape and frontmatter satisfy this specification. It is RECOMMENDED for any cog that may be encountered outside a closed system where all consumers are known to be cog-aware. Cogs intended for circulation, public registries, or mixed audiences SHOULD include the magic header line; cogs operating only within a known runtime MAY omit it.
 
 The line exists primarily to help agents that encounter a cog without prior context. An agent reading a cog cold cannot reliably distinguish it from any other Markdown file with YAML frontmatter; the magic header line is the unambiguous self-identification that lets such agents recognise the file's nature and either invoke the appropriate runtime or refuse to interpret the cog as ordinary prose.
 
@@ -234,7 +235,7 @@ The narrative artefact MAY carry more than one named zone. A **sub-section** is 
 
 The narrative artefact remains a single artefact for fingerprinting and identity purposes. Sub-sections are an addressing convention within that artefact, not separate artefacts.
 
-A reader MAY include, exclude, or extract a named sub-section. The canonical motivating case is a renderer that produces two derived artefacts from one source cog — for example, a covering letter plus a formal briefing in one document, where one derived artefact strips the covering-letter sub-section and the other keeps it. Narrative outside any marker pair is the default zone and is always included.
+A reader MAY include, exclude, or extract a named sub-section. The canonical motivating case is a renderer that produces two derived artefacts from one source cog - for example, a covering letter plus a formal briefing in one document, where one derived artefact strips the covering-letter sub-section and the other keeps it. Narrative outside any marker pair is the default zone and is always included.
 
 Conformance requirements:
 
@@ -248,16 +249,18 @@ A cog MAY contain zero or more embedded executable artefacts. These are fenced c
 
 An embedded executable artefact is a fenced code block whose opening fence carries an annotation matching the regular expression `^```(\w+)[ \t]+@embedded:([a-z][a-z0-9_-]*)[ \t]*$` (where the leading backticks are literal and the closing newline is implied). The first capture group is the language identifier; the second capture group is the artefact id.
 
-The id format constraint — lowercase letters, digits, underscore and hyphen, starting with a letter — matches the validator name segment format defined in section 4.2. Both are lowercase to remove case-sensitivity ambiguity between filesystems and registries that handle case differently. Each id MUST be unique within a single cog.
+The id format constraint - lowercase letters, digits, underscore and hyphen, starting with a letter - matches the validator name segment format defined in section 4.2. Both are lowercase to remove case-sensitivity ambiguity between filesystems and registries that handle case differently. Each id MUST be unique within a single cog.
 
 The annotation requires at least one space or tab between the language identifier and the `@embedded:` token, and allows trailing whitespace. Tabs and spaces are equivalent in this position; mixing them is permitted but discouraged.
 
 Example:
 
 ```
+
 \`\`\`bash @embedded:setup-script
 echo "this is the setup script"
 \`\`\`
+
 ```
 
 Embedded executable artefacts are extractable from the cog by id. A runtime invoking an embedded artefact MUST extract it by id and execute its content directly; it MUST NOT pass the surrounding narrative or the code text to a language model for interpretation.
@@ -272,9 +275,9 @@ Embedded data artefacts SHOULD be annotated with `@embedded:<id>` if a runtime i
 
 The frontmatter MAY reference files outside the cog itself. References are paths in frontmatter fields. Common reference fields include:
 
-- `schema` — a JSON Schema (in YAML form) the frontmatter must satisfy
-- `styleRules` — a style or convention reference
-- Phase or step `source` fields — the location of an embedded source file
+- `schema` - a JSON Schema (in YAML form) the frontmatter must satisfy
+- `styleRules` - a style or convention reference
+- Phase or step `source` fields - the location of an embedded source file
 
 Referenced external artefacts are not part of the cog. Conforming implementations MUST validate that referenced files resolve at the time the cog is consumed. Conforming implementations SHOULD report unresolved references as validation failures.
 
@@ -296,8 +299,8 @@ The frontmatter is a YAML object. The following fields have defined meanings wit
 
 Every cog MUST declare:
 
-- `title` — a string. The string MUST contain at least one character that is not a Unicode whitespace character (categories Zs, Zl, Zp, plus tab, line feed, carriage return, vertical tab, form feed). Whitespace-only strings are not valid titles.
-- `description` — a string, with the same non-emptiness constraint as `title`.
+- `title` - a string. The string MUST contain at least one character that is not a Unicode whitespace character (categories Zs, Zl, Zp, plus tab, line feed, carriage return, vertical tab, form feed). Whitespace-only strings are not valid titles.
+- `description` - a string, with the same non-emptiness constraint as `title`.
 
 The non-emptiness check is applied to the string as written in the YAML, before any normalisation. Implementations MUST NOT trim leading or trailing whitespace before checking non-emptiness; a string consisting only of whitespace is rejected even if a trimmed version would be non-empty. This avoids cases where two implementations disagree about whether a title like `"   "` is valid because they apply different trimming rules.
 
@@ -305,28 +308,28 @@ The non-emptiness check is applied to the string as written in the YAML, before 
 
 A cog that participates in the contract model declares:
 
-- `schema` — a string referencing a JSON Schema in YAML form. Resolution rules are defined in section 4.4.
-- `validatesAgainst` — an array of validator names. Each name MUST match the regular expression `^[a-z][a-z0-9_-]*(\.[a-z][a-z0-9_-]*)+$` (anchored, lowercase only, at least two dot-separated segments). The names are looked up in the runtime registry; this specification does not constrain the runtime's choice of names beyond the syntax.
+- `schema` - a string referencing a JSON Schema in YAML form. Resolution rules are defined in section 4.4.
+- `validatesAgainst` - an array of validator names. Each name MUST match the regular expression `^[a-z][a-z0-9_-]*(\.[a-z][a-z0-9_-]*)+$` (anchored, lowercase only, at least two dot-separated segments). The names are looked up in the runtime registry; this specification does not constrain the runtime's choice of names beyond the syntax.
 
 A cog without these fields is a valid cog but cannot be notarised. Notarisation requires a declared schema and at least one declared validator.
 
 A cog MAY also declare:
 
-- `cogHeader` — an object carrying the spec version and the spec/runtime/runtimeDoc URLs. This is the frontmatter equivalent of the magic-header comment defined in section 2.5; the equivalence rule (mismatched values are a conformance failure) is specified in section 2.5. `cogHeader` SHOULD be a member of `metadataFields` (excluded from the contract fingerprint) — its values describe the cog's identity, not its contract.
-- `produces` — an object declaring the typed shape of a successful execution output. Sub-keys are `shape` (a schema reference resolved per section 4.4), `format` (a MIME type or named format identifier), and `example` (an illustrative value). `produces` is informational unless a runtime chooses to validate the output against `produces.shape` post-execution; runtimes that validate MUST treat a shape mismatch as an unmodelled failure (see section 4.6). A cog with no `execute` block and no procedure-declaring field SHOULD NOT declare `produces`. Distinct from `schema` (input contract for the document itself); `produces` is the contract for what comes out, not what goes in.
-- `actionType` — a string that names the cognitive class of an action cog. The cog specification draws a sharp axis through every action cog: it MAY be **deterministic**, **inference-driven**, or **both**. A deterministic action cog carries fixed instructions a runtime executes the same way every time; an inference-driven action cog carries instructions a language-model runtime reads and performs using its own reasoning; a both-form action cog carries each in the role each is fit for. The `actionType` field is how the cog declares which, so a consumer can choose to accept, reject, or sandbox the cog without inspecting the body. Valid values are `scripted`, `sop`, and `hybrid`. A `scripted` action cog carries an embedded executable artefact (an `@embedded:<id>` block per section 3.3); a runtime extracts the artefact by id and runs it directly; the same inputs produce the same outputs. An `sop` action cog has no embedded executable artefact; the `execute.actions[].usage` value is descriptive prose intended for a language-model runtime to read and perform the steps; the runtime is the language model itself. A `hybrid` action cog carries both an embedded executable artefact AND descriptive `usage` prose; the script handles the deterministic portion and the prose carries the part that needs reasoning. Cogs with an `execute` block SHOULD declare `actionType` so that consumers can determine the runtime requirement (interpreter vs. language model vs. both) without inspecting the body. Cogs without an `execute` block MUST NOT declare `actionType`.
+- `cogHeader` - an object carrying the spec version and the spec/runtime/runtimeDoc URLs. This is the frontmatter equivalent of the magic-header comment defined in section 2.5; the equivalence rule (mismatched values are a conformance failure) is specified in section 2.5. `cogHeader` SHOULD be a member of `metadataFields` (excluded from the contract fingerprint) - its values describe the cog's identity, not its contract.
+- `produces` - an object declaring the typed shape of a successful execution output. Sub-keys are `shape` (a schema reference resolved per section 4.4), `format` (a MIME type or named format identifier), and `example` (an illustrative value). `produces` is informational unless a runtime chooses to validate the output against `produces.shape` post-execution; runtimes that validate MUST treat a shape mismatch as an unmodelled failure (see section 4.6). A cog with no `execute` block and no procedure-declaring field SHOULD NOT declare `produces`. Distinct from `schema` (input contract for the document itself); `produces` is the contract for what comes out, not what goes in.
+- `actionType` - a string that names the cognitive class of an action cog. The cog specification draws a sharp axis through every action cog: it MAY be **deterministic**, **inference-driven**, or **both**. A deterministic action cog carries fixed instructions a runtime executes the same way every time; an inference-driven action cog carries instructions a language-model runtime reads and performs using its own reasoning; a both-form action cog carries each in the role each is fit for. The `actionType` field is how the cog declares which, so a consumer can choose to accept, reject, or sandbox the cog without inspecting the body. Valid values are `scripted`, `sop`, and `hybrid`. A `scripted` action cog carries an embedded executable artefact (an `@embedded:<id>` block per section 3.3); a runtime extracts the artefact by id and runs it directly; the same inputs produce the same outputs. An `sop` action cog has no embedded executable artefact; the `execute.actions[].usage` value is descriptive prose intended for a language-model runtime to read and perform the steps; the runtime is the language model itself. A `hybrid` action cog carries both an embedded executable artefact AND descriptive `usage` prose; the script handles the deterministic portion and the prose carries the part that needs reasoning. Cogs with an `execute` block SHOULD declare `actionType` so that consumers can determine the runtime requirement (interpreter vs. language model vs. both) without inspecting the body. Cogs without an `execute` block MUST NOT declare `actionType`.
 
 ### 4.3 Relationship-declaring fields
 
-A cog that stands on another cog — by being part of it, building on it, requiring it, inheriting from it, including it, or referring to it — MUST declare the relationship in the frontmatter using the appropriate relationship field. Inheritance and inclusion count as dependencies for this purpose: any field that names another cog the current cog stands on carries the rule.
+A cog that stands on another cog - by being part of it, building on it, requiring it, inheriting from it, including it, or referring to it - MUST declare the relationship in the frontmatter using the appropriate relationship field. Inheritance and inclusion count as dependencies for this purpose: any field that names another cog the current cog stands on carries the rule.
 
 The relationship fields a cog uses to make these declarations are:
 
-- `partOf` — string or array. The parent collection(s), suite(s), registry, or initiative(s) the cog belongs to. An array lets a cog belong to more than one set at once (a query for any one set still returns it); a bare string is read as a single-element array. MUST.
-- `buildsOn` — array of cog names. Cogs that provide context and that a reader is expected to have read first. SHOULD.
-- `dependencies` — array of dependency objects (each carrying `name`, `kind`, optional `version`, optional `reason`). The hard-dependency declaration; a runtime treats a missing or unresolvable entry as non-functional. MUST be declared as an array of objects when the cog has any such dependencies, or as `[]` when the cog is standalone. The empty array is the visible standalone marker. Omitting the field is the older form and is being retired.
-- `refersTo` — array of cog names. Informational cross-references. MAY.
-- `inherits` — string or array. Sibling or companion cogs the current cog extends. MAY (when present, see the umbrella rule).
+- `partOf` - string or array. The parent collection(s), suite(s), registry, or initiative(s) the cog belongs to. An array lets a cog belong to more than one set at once (a query for any one set still returns it); a bare string is read as a single-element array. MUST.
+- `buildsOn` - array of cog names. Cogs that provide context and that a reader is expected to have read first. SHOULD.
+- `dependencies` - array of dependency objects (each carrying `name`, `kind`, optional `version`, optional `reason`). The hard-dependency declaration; a runtime treats a missing or unresolvable entry as non-functional. MUST be declared as an array of objects when the cog has any such dependencies, or as `[]` when the cog is standalone. The empty array is the visible standalone marker. Omitting the field is the older form and is being retired.
+- `refersTo` - array of cog names. Informational cross-references. MAY.
+- `inherits` - string or array. Sibling or companion cogs the current cog extends. MAY (when present, see the umbrella rule).
 
 A **standalone cog** is one that names no other cog. It declares `dependencies: []` to make the absence explicit and carries no other relationship fields. The standalone case is the explicit converse of the MUST rule, not a separate category: every cog either lists what it depends on, or declares that it depends on nothing.
 
@@ -439,17 +442,17 @@ A validator is a callable registered in a runtime under a name matching the synt
 
 A validator callable MUST accept a single argument: the parsed cog. The parsed cog is a structure with at least the following members, addressable by the names given:
 
-- `frontmatter` — the frontmatter as a structured object (a map of string keys to YAML-typed values).
-- `body` — the body as a string (line-ending normalised per section 2.4).
-- `embedded` — a map from embedded artefact id to a structure containing at least `language` and `content`, both strings.
-- `magicHeader` — the parsed magic header structure (per section 2.5), or null.
+- `frontmatter` - the frontmatter as a structured object (a map of string keys to YAML-typed values).
+- `body` - the body as a string (line-ending normalised per section 2.4).
+- `embedded` - a map from embedded artefact id to a structure containing at least `language` and `content`, both strings.
+- `magicHeader` - the parsed magic header structure (per section 2.5), or null.
 
 The validator MAY accept a second argument carrying runtime context (for example, accumulated state from prior phases of a review pipeline). The shape of this argument is not standardised by this specification and MAY vary between runtime implementations; validators that require it SHOULD document the shape they expect.
 
 A validator callable MUST return a structure with at least the following members:
 
-- `pass` — a boolean. `true` indicates the cog satisfied the validator; `false` indicates it did not.
-- `reason` — a string, OPTIONAL when `pass` is `true`, REQUIRED when `pass` is `false`. The reason is human-readable and explains the failure sufficiently for an author to address it.
+- `pass` - a boolean. `true` indicates the cog satisfied the validator; `false` indicates it did not.
+- `reason` - a string, OPTIONAL when `pass` is `true`, REQUIRED when `pass` is `false`. The reason is human-readable and explains the failure sufficiently for an author to address it.
 
 The validator MAY include additional members in its return value (for example, structured details about which fields failed). Conforming runtimes MUST preserve `pass` and `reason` when they are present and MAY ignore additional members when constructing witnesses; only `pass` is recorded in the witness's validator results.
 
@@ -461,9 +464,9 @@ A validator MAY raise (throw, panic, return an error) instead of returning a str
 
 ### 4.9 Runtime registry
 
-The runtime registry is the namespace in which validator names, phase function names, and remedy function names are resolved to callable implementations. This specification does not mandate a registration mechanism — that is left to each runtime — but does constrain what consistency the registry provides.
+The runtime registry is the namespace in which validator names, phase function names, and remedy function names are resolved to callable implementations. This specification does not mandate a registration mechanism - that is left to each runtime - but does constrain what consistency the registry provides.
 
-A name is **registered** at a given moment if a callable is bound to it in the registry such that resolution would return the callable. A runtime MUST provide a synchronous query — typically a function like `isRegistered(name)` — that answers whether a given name is registered at the moment of the query.
+A name is **registered** at a given moment if a callable is bound to it in the registry such that resolution would return the callable. A runtime MUST provide a synchronous query - typically a function like `isRegistered(name)` - that answers whether a given name is registered at the moment of the query.
 
 The registry MUST be consistent within a single operation: a name that is registered at the start of a sign or verify operation MUST remain registered for the duration of that operation, and the resolved callable MUST be the same callable for the duration of that operation. A runtime that supports dynamic registration changes (loading or unloading validators at runtime) MUST snapshot the registry at the start of an operation rather than re-querying mid-operation.
 
@@ -551,7 +554,7 @@ The blockquote marker is recommended so the preamble renders prominently in conv
 
 The preamble is part of the narrative artefact and is therefore covered by the body fingerprint. Changing the preamble is a body change, not a contract change. A cog whose preamble is removed remains a valid cog; a verifier reports body drift, the warrant continues to hold.
 
-The preamble exists to address a real gap in agent behaviour: an agent reading a cog without prior context will, by default, produce a confident summary of what the cog appears to mean. This summary will look reasonable and be wrong in subtle ways — it will paraphrase the contract as prose and elide the validators, the schema, and the witness. The preamble is the cog telling the agent, in language the agent will understand, that this is not the right way to consume it.
+The preamble exists to address a real gap in agent behaviour: an agent reading a cog without prior context will, by default, produce a confident summary of what the cog appears to mean. This summary will look reasonable and be wrong in subtle ways - it will paraphrase the contract as prose and elide the validators, the schema, and the witness. The preamble is the cog telling the agent, in language the agent will understand, that this is not the right way to consume it.
 
 ## 6. Witness format and signing
 
@@ -590,8 +593,8 @@ The structural distinction between `claim` and `metadata` is normative. The `cla
 
 The `signatureAlgorithm` field is REQUIRED so that verifiers know how to interpret `signature`. Implementations MUST NOT assume a default. Defined values:
 
-- `SHA256` — `signature` is the hex-encoded SHA-256 digest of the canonicalised claim. Provides content-addressing without cryptographic provenance. The reference implementation in `mx-upgraded-reginald` uses this value.
-- `Ed25519` — `signature` is the base64-encoded Ed25519 signature over the canonicalised claim bytes. Provides cryptographic provenance; verification requires the corresponding public key. `mx-reginald` uses this value in production.
+- `SHA256` - `signature` is the hex-encoded SHA-256 digest of the canonicalised claim. Provides content-addressing without cryptographic provenance. The reference implementation in `mx-upgraded-reginald` uses this value.
+- `Ed25519` - `signature` is the base64-encoded Ed25519 signature over the canonicalised claim bytes. Provides cryptographic provenance; verification requires the corresponding public key. `mx-reginald` uses this value in production.
 
 When `signatureAlgorithm` is `Ed25519` (or any other public-key primitive), `publicKeyId` MUST be present and identify the signing key. When the algorithm has no key concept (e.g. `SHA256`), `publicKeyId` MAY be omitted.
 
@@ -621,17 +624,17 @@ The canonical JSON serialisation MUST follow RFC 8785, JSON Canonicalization Sch
 
 Implementations that cannot use a JCS library MAY implement canonicalisation directly, but doing so requires careful attention to:
 
-- **Number representation** — RFC 8785 mandates ECMAScript number formatting; `1.0` and `1` produce the same canonical form, large integers within safe range produce no exponent, and so on.
-- **String escaping** — only mandatory escapes are produced; characters that JSON parsers accept either escaped or literal are emitted literal.
-- **Property ordering** — keys sorted by UTF-16 code unit comparison, applied recursively.
-- **Unicode** — property names are normalised to NFC; string values are not normalised.
-- **Whitespace** — none between tokens.
+- **Number representation** - RFC 8785 mandates ECMAScript number formatting; `1.0` and `1` produce the same canonical form, large integers within safe range produce no exponent, and so on.
+- **String escaping** - only mandatory escapes are produced; characters that JSON parsers accept either escaped or literal are emitted literal.
+- **Property ordering** - keys sorted by UTF-16 code unit comparison, applied recursively.
+- **Unicode** - property names are normalised to NFC; string values are not normalised.
+- **Whitespace** - none between tokens.
 
 Implementations that diverge from RFC 8785 in any of these areas MUST document the divergence and accept that their fingerprints will not interoperate with conformant implementations.
 
 For values that JSON cannot represent unambiguously (integers larger than 2^53, special floating-point values, binary data), conforming implementations MUST reject the cog at canonicalisation time rather than producing an implementation-specific encoding. Cog authors who need such values SHOULD encode them as strings.
 
-Some YAML loaders auto-convert date-like scalars (e.g. `2026-04-21`) into language-native date objects (JavaScript `Date`, Python `datetime`, etc.). This auto-conversion is the source of cross-implementation divergence: two loaders looking at the same YAML source produce different in-memory values, and the canonicalisation that follows produces different bytes — even though both implementations follow the same spec.
+Some YAML loaders auto-convert date-like scalars (e.g. `2026-04-21`) into language-native date objects (JavaScript `Date`, Python `datetime`, etc.). This auto-conversion is the source of cross-implementation divergence: two loaders looking at the same YAML source produce different in-memory values, and the canonicalisation that follows produces different bytes - even though both implementations follow the same spec.
 
 To eliminate this class of divergence, conforming implementations MUST canonicalise frontmatter scalars **as written in the source YAML**, not as interpreted by a date-aware loader. Specifically:
 
@@ -656,18 +659,18 @@ The digest is computed over the resulting byte sequence using the hash function 
 
 The body for fingerprint purposes is the entire content of the file after the closing frontmatter delimiter, including:
 
-- Any HTML-comment annotations (`<!-- mx:... -->`) — they are part of the body text.
-- Any embedded executable artefacts (fenced code blocks with `@embedded:<id>`) — they live within the body.
+- Any HTML-comment annotations (`<!-- mx:... -->`) - they are part of the body text.
+- Any embedded executable artefacts (fenced code blocks with `@embedded:<id>`) - they live within the body.
 - Any embedded data artefacts (fenced code blocks without `@embedded:` annotations).
-- The agent preamble defined in section 5.5 — it is part of the narrative.
+- The agent preamble defined in section 5.5 - it is part of the narrative.
 - Trailing whitespace within lines and blank lines between content.
 
 The body for fingerprint purposes does NOT include:
 
-- The magic header line defined in section 2.5 — that line precedes the frontmatter and is part of the file structure.
-- The frontmatter delimiters or the frontmatter content — those are covered by the contract fingerprint, not the body fingerprint.
+- The magic header line defined in section 2.5 - that line precedes the frontmatter and is part of the file structure.
+- The frontmatter delimiters or the frontmatter content - those are covered by the contract fingerprint, not the body fingerprint.
 
-The body fingerprint is deliberately inclusive of all body content. Any body edit — adding prose, removing a section, fixing a typo, changing an annotation — produces a different body fingerprint. This is the correct behaviour: the body fingerprint exists to detect *that* the body changed, not to make judgements about *which* body changes are meaningful. The drift asymmetry (section 7.8) handles that question separately.
+The body fingerprint is deliberately inclusive of all body content. Any body edit - adding prose, removing a section, fixing a typo, changing an annotation - produces a different body fingerprint. This is the correct behaviour: the body fingerprint exists to detect *that* the body changed, not to make judgements about *which* body changes are meaningful. The drift asymmetry (section 7.8) handles that question separately.
 
 ### 6.5 Signing algorithm
 
@@ -694,8 +697,8 @@ To produce a witness for a cog and a set of validator results:
 
 This specification does not mandate a single signing primitive. Implementations declare their choice in the witness's `signatureAlgorithm` field (see section 6.2). Two values are defined here; others MAY be added by future revisions.
 
-- `SHA256` — the signature is the hex-encoded SHA-256 digest of the canonicalised claim. The witness is a content-addressed record without cryptographic provenance. Useful for cross-implementation conformance testing because two implementations with identical canonicalisation produce byte-identical signatures.
-- `Ed25519` — the signature is the base64-encoded Ed25519 signature over the canonicalised claim bytes, computed under [RFC 8032](https://datatracker.ietf.org/doc/html/rfc8032). The witness carries `publicKeyId` so verifiers can locate the corresponding public key. This is the production-grade option and the value used by `mx-reginald`.
+- `SHA256` - the signature is the hex-encoded SHA-256 digest of the canonicalised claim. The witness is a content-addressed record without cryptographic provenance. Useful for cross-implementation conformance testing because two implementations with identical canonicalisation produce byte-identical signatures.
+- `Ed25519` - the signature is the base64-encoded Ed25519 signature over the canonicalised claim bytes, computed under [RFC 8032](https://datatracker.ietf.org/doc/html/rfc8032). The witness carries `publicKeyId` so verifiers can locate the corresponding public key. This is the production-grade option and the value used by `mx-reginald`.
 
 Verifiers MUST inspect `signatureAlgorithm` and reject witnesses with unrecognised values. Verifiers MUST NOT default to a particular algorithm when the field is absent; the field is REQUIRED in every conforming witness.
 
@@ -711,7 +714,7 @@ Confirm the witness has the structure mandated in section 6.2. The witness MUST 
 
 Verifiers MUST also reject any witness whose `signatureAlgorithm` they do not implement, returning a structured invalid result identifying the unsupported algorithm.
 
-This step exists because a verifier that defensively reads `witness.metadata?.bodyFingerprint` (returning undefined for absent metadata) and proceeds with verification will accept a structurally-malformed witness as valid — the body drift check becomes a no-op on undefined and the rest of the algorithm continues. The structural validation MUST happen first, and MUST refuse to proceed.
+This step exists because a verifier that defensively reads `witness.metadata?.bodyFingerprint` (returning undefined for absent metadata) and proceeds with verification will accept a structurally-malformed witness as valid - the body drift check becomes a no-op on undefined and the rest of the algorithm continues. The structural validation MUST happen first, and MUST refuse to proceed.
 
 ### 7.1 Contract check
 
@@ -735,7 +738,7 @@ Construct a fresh claim from the candidate cog and current outcomes, omitting th
 
 If they differ, the witness is invalid; the reason is *re-signed claim does not match witness claim*.
 
-This step is defensive against canonicalisation divergence between the signer and the verifier. Steps 7.1 and 7.4 confirm that the *contract* and the *validator outcomes* are unchanged respectively, but they do not catch the case where the signer and verifier disagree about how to canonicalise the same logical input — different JCS implementations, different number representations, different escape rules. A divergence here means the two implementations cannot exchange witnesses reliably even when they agree on everything else; the witness is reported invalid so the underlying interoperability problem can be surfaced rather than masked.
+This step is defensive against canonicalisation divergence between the signer and the verifier. Steps 7.1 and 7.4 confirm that the *contract* and the *validator outcomes* are unchanged respectively, but they do not catch the case where the signer and verifier disagree about how to canonicalise the same logical input - different JCS implementations, different number representations, different escape rules. A divergence here means the two implementations cannot exchange witnesses reliably even when they agree on everything else; the witness is reported invalid so the underlying interoperability problem can be surfaced rather than masked.
 
 In a single-implementation deployment (signer and verifier run the same code), this check is effectively redundant with steps 7.1 and 7.4. It MUST still be performed: a future runtime upgrade that changes canonicalisation behaviour without changing other logic will produce signed witnesses that no longer verify, which is the correct outcome.
 
@@ -759,8 +762,8 @@ If all checks above pass, return a valid result with the witness ID, the origina
 
 The verification algorithm distinguishes two kinds of change to a cog:
 
-- **Contract change** — modifications to the schema reference, validator list, structural frontmatter fields, or any other field the contract fingerprint covers. Detected at step 7.1; invalidates the witness.
-- **Body change** — modifications to the narrative, including embedded artefacts. Detected at step 7.6; reported but does not invalidate.
+- **Contract change** - modifications to the schema reference, validator list, structural frontmatter fields, or any other field the contract fingerprint covers. Detected at step 7.1; invalidates the witness.
+- **Body change** - modifications to the narrative, including embedded artefacts. Detected at step 7.6; reported but does not invalidate.
 
 This asymmetry is the central design property of the witness scheme. Hash-of-bytes signatures invalidate on every cosmetic edit; the contract-satisfaction signature defined here invalidates only when the cog has changed in ways that would affect a consumer who relies on it.
 
@@ -777,7 +780,7 @@ A conforming implementation:
 7. SHOULD support the troubleshooting and updateInstructions conventions in section 4.
 8. MAY use any cryptographic primitive consistent with section 6.6.
 
-A draft conformance test suite (v0.1) is published alongside the reference implementation in `conformance/`. The suite consists of language-agnostic test cases — YAML files describing inputs and expected outcomes — covering parsing, annotations, fingerprints, witnesses, and validators.
+A draft conformance test suite (v0.1) is published alongside the reference implementation in `conformance/`. The suite consists of language-agnostic test cases - YAML files describing inputs and expected outcomes - covering parsing, annotations, fingerprints, witnesses, and validators.
 
 The v0.1 suite is the basis for **alignment**, not yet for **certified conformance**. An implementation that passes all cases in the suite has demonstrated behavioural agreement with the reference on the cases the suite tests; this is sufficient to detect most categories of inter-implementation disagreement and is the right test to run during implementation. It is not yet sufficient to certify that an implementation satisfies every MUST in this specification, because the suite has fewer cases than the specification has requirements.
 
@@ -799,11 +802,11 @@ These examples are illustrative. Implementations should test against the conform
 
 This section identifies threats against the cog and witness model and the mitigations that conforming implementations are expected to apply.
 
-The threat model is framed from the perspective of the **consuming party** — the recipient of a cog and (optionally) a witness, whose runtime performs the verification. The **producing party** is whoever generated the cog and its witness; the producing party may be benign, careless, or adversarial.
+The threat model is framed from the perspective of the **consuming party** - the recipient of a cog and (optionally) a witness, whose runtime performs the verification. The **producing party** is whoever generated the cog and its witness; the producing party may be benign, careless, or adversarial.
 
 The model assumes an adversary who can produce cogs and witnesses, who can present them to the consuming party through any channel, but who cannot compromise the consuming party's runtime, registry, or signing keys. Threats against the producing party's infrastructure (their key compromise, their registry compromise) are addressed only insofar as their consequences propagate to consumers.
 
-When a single party is both producer and consumer (a local development workflow, for example), the threat model still applies to the artefacts they create today and consume tomorrow — the consuming-party perspective is about temporal and operational separation, not necessarily about distinct organisations.
+When a single party is both producer and consumer (a local development workflow, for example), the threat model still applies to the artefacts they create today and consume tomorrow - the consuming-party perspective is about temporal and operational separation, not necessarily about distinct organisations.
 
 ### 10.1 Threat: cog with hollow contract
 
@@ -845,11 +848,11 @@ An adversary obtains a valid witness for a cog, then presents it as evidence tha
 
 ### 10.6 Threat: witness signature tampering
 
-An adversary obtains a valid witness, then alters the `signature` field — either to forge what appears to be a signature over a modified claim, or simply to corrupt the witness so it appears genuine but cannot be cryptographically verified. A verifier that re-derives the signature from the claim without comparing against the recorded signature will accept the tampered witness as valid.
+An adversary obtains a valid witness, then alters the `signature` field - either to forge what appears to be a signature over a modified claim, or simply to corrupt the witness so it appears genuine but cannot be cryptographically verified. A verifier that re-derives the signature from the claim without comparing against the recorded signature will accept the tampered witness as valid.
 
 **Mitigation:** Conforming verifiers MUST compare the recorded `witness.signature` against the canonical digest of `witness.claim` (per the signing algorithm in section 6.5). A tampered signature produces a digest that does not match the recorded value, and verification MUST fail with a reason that names the tampering. This is in addition to the claim re-derivation check in section 7.5; the two checks address different failure modes (claim drift vs signature corruption) and both are required.
 
-This mitigation depends on the verifier actually performing the comparison. An implementation that re-derives a fresh signature from a fresh claim and compares fresh-vs-fresh — without ever reading `witness.signature` — provides no integrity guarantee against signature tampering, even though the verifier's logic looks correct in isolation. Conformance test suites SHOULD include a tampered-signature case to detect this class of bug.
+This mitigation depends on the verifier actually performing the comparison. An implementation that re-derives a fresh signature from a fresh claim and compares fresh-vs-fresh - without ever reading `witness.signature` - provides no integrity guarantee against signature tampering, even though the verifier's logic looks correct in isolation. Conformance test suites SHOULD include a tampered-signature case to detect this class of bug.
 
 ### 10.7 Threat: signing key compromise
 
@@ -865,7 +868,7 @@ A consumer receives a cog from an untrusted party. The cog declares benign-sound
 
 ### 10.9 Threat: registry compromise
 
-A witness registry — local or hosted — is modified by an adversary. Witnesses are added, removed, or altered.
+A witness registry - local or hosted - is modified by an adversary. Witnesses are added, removed, or altered.
 
 **Mitigation:** This specification does not define registry integrity protections. A hosted registry SHOULD use append-only storage with content-addressed identifiers and SHOULD make its full history publicly auditable. A local registry inherits the integrity properties of its filesystem and should be protected accordingly. Implementations MAY mirror witnesses across multiple registries to detect divergence.
 
