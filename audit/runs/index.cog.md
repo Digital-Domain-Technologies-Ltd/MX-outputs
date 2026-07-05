@@ -9,7 +9,7 @@ title: "audit-runs-index"
 version: "1.0"
 description: "Index of all committed audit run outputs under mx-outputs/audit/runs/."
 created: 2026-06-18
-modified: 2026-07-02
+modified: 2026-07-05
 author: Tom Cranstoun
 type: info-doc
 tags: [audit, index, runs, latest-copy]
@@ -55,6 +55,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | typo3.org | - | pending | - | - |
 | www.bollants.de | - | pending | - | - |
 | www.bravecap.com | - | pending | - | - |
+| www.careington.com | 2026-07-05 | pass | [latest-copy.pdf](www.careington.com/latest-copy.pdf) | [latest-copy.md](www.careington.com/latest-copy.md) |
 | www.contentful.com | - | pending | - | - |
 | www.cruciblecap.xyz | - | pending | - | - |
 | www.dkd.de-de | - | pending | - | - |
