@@ -1,0 +1,126 @@
+/**
+ * MX provenance popper - the one source of truth for the interactive
+ * AI-provenance UI's styling.
+ *
+ * Imported by both mx-blog.css (the in-page blog demo overlay) and
+ * mx-tools.css (the standalone MX Inspector tool), so the popper looks the same
+ * wherever it appears and cannot drift - the CSS companion to the shared
+ * behaviour in js/mx-prov-chain.js (the popper) and js/mx-json-tree.js (the tree).
+ *
+ * Colours come from theme variables defined by whichever stylesheet loads this
+ * one (mx-blog.css standalone, or mx-unified.css under the tool). Fonts differ
+ * between the two theme systems, so each font-family carries a fallback chain
+ * that resolves in either context. Category labels carry the meaning in words, so
+ * the AI/human hues are always a redundant cue, never the only signal.
+ */
+
+/* Two panels: blob flow on the left, JSON tree on the right. Stacks to one
+   column below the breakpoint, so the blog modal and phones stack while the
+   full-width inspector tool shows side by side. */
+.mx-prov-popper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  margin: 0.5rem 0 1rem;
+}
+@media (max-width: 820px) {
+  .mx-prov-popper { grid-template-columns: 1fr; }
+}
+
+/* ---- Left: the blob flow (WAI-ARIA tablist) ---- */
+.mx-prov-blobs { display: flex; flex-direction: column; gap: 0.7rem; }
+.mx-prov-blob {
+  display: flex; gap: 0.6rem; align-items: flex-start; width: 100%;
+  text-align: left; position: relative; cursor: pointer;
+  background: var(--code-bg); color: var(--primary-text);
+  border: 1px solid var(--border-color); border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  font-family: var(--font-body, var(--mx-font-body, sans-serif));
+  transition: box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+.mx-prov-blob-ai { border-left: 4px solid var(--accent-color); }
+.mx-prov-blob-human { border-left: 4px solid var(--heading-color); }
+/* connector between stacked blobs */
+.mx-prov-blob:not(:last-child)::after {
+  content: ''; position: absolute; left: 1.15rem; bottom: -0.7rem;
+  width: 2px; height: 0.7rem; background: var(--border-color);
+}
+.mx-prov-blob-dot { font-size: 1rem; line-height: 1.4; flex-shrink: 0; }
+.mx-prov-blob-ai .mx-prov-blob-dot { color: var(--accent-color); }
+.mx-prov-blob-human .mx-prov-blob-dot { color: var(--heading-color); }
+.mx-prov-blob-body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.mx-prov-blob-agent { font-weight: 700; font-size: 0.95rem; }
+.mx-prov-blob-role { font-size: 0.8rem; color: var(--secondary-text); }
+.mx-prov-cat {
+  align-self: flex-start; font-size: 0.68rem; text-transform: uppercase;
+  letter-spacing: 0.04em; border: 1px solid; border-radius: 999px;
+  padding: 0.02rem 0.5rem; color: var(--primary-text);
+}
+.mx-prov-cat-ai { border-color: var(--accent-color); }
+.mx-prov-cat-human { border-color: var(--heading-color); }
+.mx-prov-cat-approval { border-color: var(--secondary-text); }
+
+/* the topic grows into view on hover / focus / selection - the "popper". The
+   reveal is height-only (overflow-clipped when collapsed, so it has zero height and
+   is not measured), never an opacity fade: fading light text through low opacity
+   would momentarily composite to a low-contrast colour against the panel. */
+.mx-prov-blob-topic {
+  font-size: 0.85rem; color: var(--primary-text);
+  max-height: 0; overflow: hidden;
+  transition: max-height 200ms ease, margin-top 200ms ease;
+}
+/* Grow the blob on hover/focus/selection with shadow + a stronger border. The
+   background is left as --code-bg: --primary-bg is not guaranteed to contrast with
+   --primary-text across both theme systems, so swapping it would break contrast in
+   one of them. */
+.mx-prov-blob:hover, .mx-prov-blob:focus-visible, .mx-prov-blob-selected {
+  border-color: var(--accent-color);
+  box-shadow: 0 6px 20px var(--shadow-color-strong, rgba(0, 0, 0, 0.18));
+}
+.mx-prov-blob:hover .mx-prov-blob-topic,
+.mx-prov-blob:focus-visible .mx-prov-blob-topic,
+.mx-prov-blob-selected .mx-prov-blob-topic {
+  max-height: 10rem; margin-top: 0.35rem;
+}
+.mx-prov-blob:focus-visible { outline: 3px solid var(--accent-color); outline-offset: 2px; }
+.mx-prov-blob-selected { outline: 2px solid var(--accent-color); outline-offset: 1px; }
+
+/* ---- Left: the detail tabpanel (accessible, no-hover baseline) ---- */
+.mx-prov-detail {
+  margin-top: 0.8rem;
+  background: var(--code-bg); border: 1px solid var(--border-color); border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+}
+.mx-prov-detail-head { margin: 0 0 0.4rem; font-size: 1rem; }
+.mx-prov-detail-role { color: var(--accent-color); }
+.mx-prov-detail-intent { margin: 0.2rem 0; color: var(--primary-text); }
+.mx-prov-detail-meta { margin: 0.4rem 0 0; font-size: 0.82rem; color: var(--secondary-text); font-family: var(--font-mono, var(--mx-font-mono, monospace)); }
+.mx-prov-step-hi { color: var(--accent-color); font-size: 0.85em; }
+
+/* ---- Right: the JSON tree (mx-json-tree.js) ---- */
+.mx-prov-json {
+  max-height: 24rem; overflow: auto;
+  background: var(--code-bg); border: 1px solid var(--border-color); border-radius: 8px;
+  padding: 0.8rem 0.9rem;
+  font-family: var(--font-mono, var(--mx-font-mono, monospace)); font-size: 0.8rem;
+}
+.mx-json-dl { margin: 0; }
+.mx-json-dl dt { margin-top: 0.35rem; }
+.mx-json-dl dd { margin: 0 0 0 1rem; }
+.mx-json-key { color: var(--accent-color); font-weight: 600; }
+.mx-json-scalar { color: var(--primary-text); word-break: break-word; }
+.mx-json-null, .mx-json-empty { color: var(--secondary-text); font-style: italic; }
+.mx-json-node > summary { cursor: pointer; color: var(--secondary-text); }
+.mx-json-row { margin: 0.1rem 0 0.1rem 0.8rem; }
+.mx-json-hash { cursor: pointer; color: var(--accent-color); text-decoration: underline dotted; word-break: break-all; }
+.mx-json-hash.is-copied { color: var(--heading-color); }
+.mx-json-step { border-radius: 6px; padding: 0.2rem 0.3rem; transition: background 300ms ease; }
+.mx-prov-json-hit {
+  outline: 2px solid var(--accent-color); outline-offset: 1px;
+}
+
+/* Motion is decorative here: hold still for readers who ask for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .mx-prov-blob, .mx-prov-blob-topic, .mx-json-step { transition: none; }
+}

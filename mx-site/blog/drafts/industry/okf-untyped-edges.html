@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "OKF's Edges Are Untyped. Here's How You Type Them."
+description: "A knowledge-graph consultant pointed out that Google's Open Knowledge Format is a web of documents, not a knowledge graph, because the meaning of every link is left to the surrounding prose. He is right, and Google's own spec says so. The fix is not the whole RDF stack. It is to put the type of the relationship in the file, where the machine can read it instead of guessing."
+author: Tom Cranstoun
+created: "2026-06-17"
+modified: "2026-06-17"
+version: "1.0"
+type: blog-post
+tags: [open-knowledge-format, okf, knowledge-graph, rdf, owl, typed-edges, semantic-web, mx, google]
+mx:
+  status: draft
+  audience: [humans, machines]
+  purpose: "Engage the untyped-edge critique of OKF directly. Concede it is correct, show that the answer is not the full RDF/OWL stack but typed relationships declared in the file, and position MX as the middle path between a bare markdown directory and a triplestore."
+  stability: stable
+  x-mx-contextProvides:
+    - "The untyped-edge critique of OKF is correct and the spec admits it. The answer is to declare the type of the relationship in the file's frontmatter so a machine reads it instead of inferring it from prose. MX does this with typed relationship fields, a validated graph, deterministic closure, and a contradiction gate, and defers to RDF/OWL where a formal ontology is the right tool."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/industry/okf-untyped-edges.md
+  servedAt: https://mx.allabout.network/blog/drafts/industry/okf-untyped-edges.html
+  blogUrl: https://mx.allabout.network/blog/drafts/industry/okf-untyped-edges.html
+  blogFilename: okf-untyped-edges
+  runbook: "Blog post. Companion to 'Google Shipped a Knowledge Format, and Left the Hard Half Open'. Read straight through."
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A knowledge-graph consultant pointed out that Google's Open Knowledge Format is a web of documents, not a knowledge graph, because the meaning of every link is left to the surrounding prose. He is right, and Google's own spec says so. The fix is not the whole RDF stack. It is to put the type of the relationship in the file, where the machine can read it instead of guessing.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/industry/okf-untyped-edges.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/industry/okf-untyped-edges.html">
+  <meta property="og:title" content="OKF's Edges Are Untyped. Here's How You Type Them. | CogNovaMX">
+  <meta property="og:description" content="A knowledge-graph consultant pointed out that Google's Open Knowledge Format is a web of documents, not a knowledge graph, because the meaning of every link is left to the surrounding prose. He is right, and Google's own spec says so. The fix is not the whole RDF stack. It is to put the type of the relationship in the file, where the machine can read it instead of guessing.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-17">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OKF's Edges Are Untyped. Here's How You Type Them. | CogNovaMX">
+  <meta name="twitter:description" content="A knowledge-graph consultant pointed out that Google's Open Knowledge Format is a web of documents, not a knowledge graph, because the meaning of every link is left to the surrounding prose. He is right, and Google's own spec says so. The fix is not the whole RDF stack. It is to put the type of the relationship in the file, where the machine can read it instead of guessing.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="OKF's Edges Are Untyped. Here's How You Type Them.">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/industry/okf-untyped-edges.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>OKF's Edges Are Untyped. Here's How You Type Them. | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "OKF's Edges Are Untyped. Here's How You Type Them.",
+        "headline": "OKF's Edges Are Untyped. Here's How You Type Them.",
+        "description": "A knowledge-graph consultant pointed out that Google's Open Knowledge Format is a web of documents, not a knowledge graph, because the meaning of every link is left to the surrounding prose. He is right, and Google's own spec says so. The fix is not the whole RDF stack. It is to put the type of the relationship in the file, where the machine can read it instead of guessing.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-17",
+        "dateModified": "2026-06-17",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/industry/okf-untyped-edges.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1251,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/industry/okf-untyped-edges.html",
+        "name": "OKF's Edges Are Untyped. Here's How You Type Them.",
+        "url": "https://mx.allabout.network/blog/drafts/industry/okf-untyped-edges.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#why-an-untyped-edge-costs-the-machine">Why an untyped edge costs the machine</a></li>
+        <li><a href="#put-the-type-in-the-file">Put the type in the file</a></li>
+        <li><a href="#the-edge-is-not-the-last-thing-the-machine-needs">The edge is not the last thing the machine needs</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1251">
+        <header class="article-header">
+          <h1>OKF's Edges Are Untyped. Here's How You Type Them.</h1>
+          <div class="article-meta"
+               data-published="2026-06-17"
+               data-modified="2026-06-17"
+               data-reading-time="7 min">
+            <time datetime="2026-06-17">17 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>7 min read</span>
+          </div>
+        </header>
+
+
+<p>A few days ago I wrote that Google's <a href="https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/">Open Knowledge Format</a> confirms the argument I have been making for two years, and leaves the hard half open. I pointed at trust and at governance. This week a knowledge-graph consultant, Francois Vanderseypen, pointed at something narrower and sharper, and he is right, so I want to take it seriously rather than wave it away.</p>
+<p>His objection, in plain terms: a directory of markdown files linking to other markdown files is a web of documents, not a knowledge graph. A knowledge graph is a graph of entities and typed relations. OKF guarantees one field, <code>type</code>, on each concept. What a link between two concepts actually means, whether it is &quot;depends on&quot;, &quot;is part of&quot;, or &quot;see also&quot;, is left to the producer. So an agent reading an OKF bundle has to infer the meaning of every link from the prose around it, every single time. Calling that a knowledge graph, he says, is misleading.</p>
+<p>I am not going to manufacture a disagreement, because there isn't one. He is correct, and the cleanest proof is OKF's own specification. The spec says it directly: &quot;Consumers that build a graph view typically treat all links as directed edges of an untyped relationship.&quot; And: &quot;The specific kind of relationship (parent/child, references, joins-with, depends-on, etc.) is conveyed by the surrounding prose, not by the link itself.&quot; That is the whole of the criticism, written by the format's authors. A bare markdown link carries a direction and nothing else. The meaning is in the paragraph, and the paragraph is for a person to read.</p>
+<h2 id="why-an-untyped-edge-costs-the-machine" tabindex="-1">Why an untyped edge costs the machine</h2>
+<p>Here is what that costs. An agent that wants to know whether one table depends on another, or whether one document supersedes another, cannot read the answer. It has to reconstruct the answer from the prose near the link, and it has to do that again on the next read, and the read after that. The relationship was never written down in a place the machine could trust. It was implied, and implication is work the machine repeats every time. That is inference dressed as structure. It is exactly the thing a knowledge graph is supposed to remove.</p>
+<p>The standard answer to this, the one Francois reaches for, is the Semantic Web: RDF and OWL. Put the relationship in the predicate of a triple, give the predicate a shared meaning, and a reasoner can read the edge, derive new facts from it, and catch the places where the graph contradicts itself. That works. It has worked for twenty-five years. The reason almost nobody ships it is that it asks a producer to model an ontology, serialise to triples, stand up a triplestore, and run a reasoner before any of it is legible. Google did not put the RDF stack in the hands of the people who write internal wikis, and they were right not to. A bare markdown directory is what you get when the formal stack is too heavy to adopt. So the field has been offering people two options: a graph with untyped edges, or a formal stack hardly anyone adopts.</p>
+<p>That is a false choice, and it has been a false choice the whole time.</p>
+<h2 id="put-the-type-in-the-file" tabindex="-1">Put the type in the file</h2>
+<p>The real question is not markdown versus RDF. It is: where does the type of the relationship live? RDF puts it in the predicate. A bare markdown link puts it nowhere. There is a third place, and it is the obvious one. Put it in the file.</p>
+<p>That is what MX does, and it is the only part of this I want you to take away. A cog is a markdown file with YAML frontmatter, the same shape as an OKF concept. The relationship is declared as a field in that frontmatter, not left to the prose. <code>buildsOn</code>. <code>refersTo</code>. <code>dependsOn</code>. <code>partOf</code>. <code>derivedFrom</code>. <code>publishedTo</code>. <code>supersedes</code>. Each one has a single fixed meaning, the same meaning in every file, written down where a machine reads it by name instead of guessing it from the sentence next to the link. The edge is typed. The agent does not infer it. It reads <code>buildsOn</code> and it knows.</p>
+<p>And because the type is written down, two things follow that an untyped directory cannot give you. A builder can compute the transitive closure over those edges, so &quot;what does this ultimately build on&quot; and &quot;where does this ultimately get published&quot; are answered deterministically, not re-derived by a model. A gate can check the graph for the contradictions you can enumerate: a document that claims to replace another while that other is still live, a cycle in a dependency chain, a supersession that loops. Those are the two practical wins people stand up OWL for, deriving facts and catching contradictions, and you can have both of them without a triplestore, because the edges are typed and the checks are scripts.</p>
+<p>I will be honest about the seam, because Francois will spot it anyway. A frontmatter field is a label, not a logic. RDF and OWL give you formal, open-world meaning that composes across datasets you did not author and entails facts nobody wrote down. A named field in a file does not do that. What it does is answer the question the agent in front of the file actually has, which is &quot;what is this relationship&quot;, with no stack to stand up and nothing to infer. For a machine holding one document that arrived from somewhere else, typed and validated beats formal and unadopted. Where you genuinely need a description logic, an ontology that federates, open-world reasoning, reach for RDF and OWL. MX defers to them there and says so. For the ordinary case, content that has to stay legible when it travels, the file is the right place to write the edge down.</p>
+<h2 id="the-edge-is-not-the-last-thing-the-machine-needs" tabindex="-1">The edge is not the last thing the machine needs</h2>
+<p>There is one more thing, and it is the half I wrote about last time. Type every edge perfectly, run the full reasoner, and the machine still cannot tell you whether to believe the document the edge came from. A relationship can be formally immaculate and the node asserting it can be stale, altered, or published by someone other than who it claims. RDF answers what an edge means. It does not answer whether the thing carrying it is genuine, current, or accountable to anyone. That is provenance and lifecycle, and it travels in the file too: who published it, when it stops being authoritative, where its durable home is, and whether a newer version has replaced it, with a signed attestation a machine can check for itself.</p>
+<p>So the layers stack cleanly, and they don't compete. RDF and OWL are for meaning, when you need the formal kind. MX is for typed, readable edges that travel, and for the trust the edge says nothing about. OKF gave us the carrier, and a good one. Francois is right that it left the edges untyped. The fix was never to choose between a folder and a triplestore. It was to write the type of the relationship into the file, where the machine can read it, and then sign the file so the machine can believe it.</p>
+<p>Type your edges. You do not need anyone's reasoner to do it, and the file carries it wherever it goes.</p>
+<hr>
+<p><em>Tom Cranstoun founded the MX community and wrote the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+    <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+author: "Tom Cranstoun"
+created: "2026-01-26"
+description: "Complete content generation workflow demonstrating Machine Experience principles through metadata-driven content management, state tracking, and WCAG 2.1 AA compliance."
+
+title: Appendix P — Content Generation Workflow
+tags: [content-workflow, metadata-schema, yaml-frontmatter, html-generation, wcag-compliance, state-tracking, content-management, MX-friendly-html]
+type: info-doc
+mx:
+  copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
+  book: "MX: The Protocols"
+  appendix: "P"
+  words: 5800
+  runbook: |
+    This is a book manuscript appendix. Write as if it has always existed.
+    NEVER include: publication dates, "we added", "new feature", "launching",
+    "this update", or any meta-commentary about the book's development.
+    Write definitive present tense. Historical context about subject matter
+    (industry events, product launches) is allowed.
+    This document is copyrighted material. No part may be reproduced without permission.
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-p-content-generation-workflow.md
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+<meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Tom Cranstoun" />
+  <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
+  <title>Appendix P: # Appendix P — Content Generation Workflow</title>
+  
+
+  <link rel="canonical" href="https://mx.allabout.network/books/appendices/appendix-p.html">
+  <!-- MX metadata -->
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="reference">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+  <meta name="mx:aiEditable" content="false">
+  <meta name="mx:content-policy" content="extract-with-attribution">
+  <meta name="mx:attribution" content="required">
+  <link rel="llms-txt" href="/llms.txt">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/books/appendices/appendix-p.html">
+  <meta property="og:title" content="Appendix P: # Appendix P — Content Generation Workflow">
+  <meta property="og:description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="MX: The Protocols — book cover">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://mx.allabout.network/books/appendices/appendix-p.html">
+  <meta name="twitter:title" content="Appendix P: # Appendix P — Content Generation Workflow">
+  <meta name="twitter:description" content="Implementation guide from MX-Protocols book">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="MX: The Protocols — book cover">
+  <meta name="twitter:creator" content="@ddttomtom">
+
+  <!-- Additional SEO — appendices are companion content to the books, not standalone destinations: noindex, nofollow per memory rule project_appendices_noindex.md -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Appendix P: # Appendix P — Content Generation Workflow",
+    "description": "Practical guidance from MX-Protocols book on designing AI agent-friendly websites",
+    "author": {
+      "@type": "Person",
+      "name": "Tom Cranstoun",
+      "email": "info@cognovamx.com",
+      "url": "https://allabout.network"
+    },
+    "inLanguage": "en-GB",
+    "timeRequired": "PT60M",
+    "educationalLevel": "Intermediate",
+    "datePublished": "2026-01-10",
+    "dateModified": "2026-01-10",
+    "isPartOf": {
+      "@type": "Book",
+      "name": "MX-Protocols",
+      "author": {
+        "@type": "Person",
+        "name": "Tom Cranstoun"
+      },
+      "url": "https://mx.allabout.network/books/appendices"
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="appendix.css">
+</head>
+<body>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+<hr>
+<header id="title-block-header">
+<h1 class="title">Appendix P: # Appendix P — Content Generation
+Workflow</h1>
+<p class="subtitle">MX-Protocols</p>
+<p class="author">Tom Cranstoun</p>
+<p class="date">January 2026</p>
+</header>
+<nav id="TOC" role="navigation" aria-label="Table of Contents">
+<ul>
+<li><a href="#appendix-p-content-generation-workflow"
+id="toc-appendix-p-content-generation-workflow">Appendix P — Content
+Generation Workflow</a>
+<ul>
+<li><a href="#overview" id="toc-overview">Overview</a></li>
+<li><a href="#metadata-schema-design"
+id="toc-metadata-schema-design">Metadata Schema Design</a></li>
+<li><a href="#state-tracking-system"
+id="toc-state-tracking-system">State Tracking System</a></li>
+<li><a href="#file-organisation" id="toc-file-organisation">File
+Organisation</a></li>
+<li><a href="#generation-workflow"
+id="toc-generation-workflow">Generation Workflow</a></li>
+<li><a href="#generation-instruction-provenance"
+id="toc-generation-instruction-provenance">Generation Instruction
+Provenance</a></li>
+<li><a href="#wcag-2.1-aa-compliance"
+id="toc-wcag-2.1-aa-compliance">WCAG 2.1 AA Compliance</a></li>
+<li><a href="#practical-implementation"
+id="toc-practical-implementation">Practical Implementation</a></li>
+<li><a href="#related-documentation"
+id="toc-related-documentation">Related Documentation</a></li>
+<li><a href="#key-takeaways-1" id="toc-key-takeaways-1">Key
+Takeaways</a></li>
+</ul></li>
+</ul>
+</nav>
+<div data-content-type="appendix">
+<h2 id="appendix-p-content-generation-workflow">Appendix P — Content
+Generation Workflow</h2>
+<p>A practical demonstration of Machine Experience principles through
+metadata-driven content management.</p>
+<h2 id="overview">Overview</h2>
+<p>This appendix documents a complete content generation workflow that
+embodies the Machine Experience principles discussed throughout this
+book. The workflow transforms markdown drafts into WCAG 2.1 AA compliant
+HTML with complete metadata, state tracking, and AI-friendly semantic
+structure.</p>
+<p><strong>Why this workflow matters:</strong> Most content management
+systems treat metadata as optional decorations added after content
+creation. This workflow inverts that relationship — metadata drives the
+process from draft to publication, ensuring both humans and AI agents
+can understand content state, relationships, and context at every
+stage.</p>
+<p><strong>What you'll learn:</strong></p>
+<ul>
+<li>Metadata schema design for both human and machine readability</li>
+<li>State tracking through the content lifecycle</li>
+<li>Automated HTML generation preserving semantic structure</li>
+<li>WCAG 2.1 AA compliance verification patterns</li>
+<li>File organisation strategies that work across tools</li>
+</ul>
+<p>This workflow runs in production for all Machine Experience content.
+Every pattern shown has been tested with real AI agents, screen readers,
+and human visitors.</p>
+<h2 id="metadata-schema-design">Metadata Schema Design</h2>
+<h3 id="core-principle-metadata-as-first-class-content">Core Principle:
+Metadata as First-Class Content</h3>
+<p>Traditional content platforms add metadata after writing. This
+workflow requires metadata before generation. The metadata schema serves
+three audiences:</p>
+<ol type="1">
+<li><strong>Content creators</strong> — Track draft state, target
+filenames, publication status</li>
+<li><strong>AI agents</strong> — Understand content purpose, keywords,
+parsing instructions</li>
+<li><strong>Build tools</strong> — Generate HTML, CSS, social cards with
+correct naming and structure</li>
+</ol>
+<h3 id="markdown-yaml-frontmatter">Markdown YAML Frontmatter</h3>
+<p>Every content markdown file must include YAML frontmatter with
+mandatory fields:</p>
+<div class="sourceCode" id="cb1" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Content Title&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Tom Cranstoun&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">created</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-01-26&quot;</span><span class="co">                      # Last modified date (ISO format)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">content-filename</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;url-friendly-name&quot;</span><span class="co">   # Target filename (no extension)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">content-url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;&quot;</span><span class="co">                         # Full URL (empty until published)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">publication-date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;&quot;</span><span class="co">                    # Publication date (empty until published)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Brief summary for meta description and social cards (1-2 sentences)&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tags</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">keyword1</span><span class="kw">,</span><span class="at"> keyword2</span><span class="kw">,</span><span class="at"> keyword3</span><span class="kw">]</span><span class="co">  # 3-5 relevant keywords</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">x-mx-contentState</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;draft&quot;</span><span class="co">            # Current state in workflow (CogNovaMX vendor extension per the MX Extensions note)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">runbook</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Read and follow when processing this content&quot;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<h3 id="field-descriptions-and-validation-rules">Field Descriptions and
+Validation Rules</h3>
+<p><strong>title</strong> (required, string)</p>
+<ul>
+<li>The content title as it appears in H1 and HTML
+<code>&lt;title&gt;</code></li>
+<li>Maximum recommended length: 60 characters (SEO best practice)</li>
+<li>Must not contain special characters that break URLs</li>
+</ul>
+<p><strong>author</strong> (required, string)</p>
+<ul>
+<li>Attribution for content authorship</li>
+<li>Used in Schema.org Person markup and meta tags</li>
+</ul>
+<p><strong>date</strong> (required, ISO date string YYYY-MM-DD)</p>
+<ul>
+<li>Last modification date</li>
+<li>Must be valid ISO 8601 date format</li>
+<li>Updates with every significant content revision</li>
+</ul>
+<p><strong>mx.x-mx-contentState</strong> (required, enum)</p>
+<ul>
+<li>Current position in content lifecycle</li>
+<li>Valid values: <code>draft</code>, <code>in-review</code>,
+<code>published</code>, <code>archived</code></li>
+<li>Drives file location and processing rules</li>
+</ul>
+<p><strong>content-filename</strong> (required, string)</p>
+<ul>
+<li>URL-friendly target filename without extension</li>
+<li>Pattern: lowercase, hyphens only, no special characters</li>
+<li>Example: "machine-experience-adding-metadata"</li>
+<li>Becomes base for HTML, CSS, and SVG filenames</li>
+</ul>
+<p><strong>content-url</strong> (optional, URL string)</p>
+<ul>
+<li>Full canonical URL after publication</li>
+<li>Empty string until content is live on web</li>
+<li>Format:
+<code>https://mx.allabout.network/blog/[filename].html</code></li>
+</ul>
+<p><strong>publication-date</strong> (optional, ISO date string)</p>
+<ul>
+<li>Date content went live on website</li>
+<li>Empty string until published state transition</li>
+<li>Used in Schema.org datePublished field</li>
+</ul>
+<p><strong>description</strong> (required, string)</p>
+<ul>
+<li>Brief summary (1-2 sentences) for meta description tag</li>
+<li>Maximum recommended length: 155 characters (SEO best practice)</li>
+<li>Appears in search results and social media cards</li>
+</ul>
+<p><strong>keywords</strong> (required, array of strings)</p>
+<ul>
+<li>3-5 relevant topic keywords</li>
+<li>Used in meta keywords tag and content categorisation</li>
+<li>Format: lowercase, no special characters</li>
+</ul>
+<p><strong>runbook</strong> (optional, string)</p>
+<ul>
+<li>Guidance for AI agents parsing the content</li>
+<li>Explains document purpose, special considerations</li>
+<li>Example: "This content compares two architectural approaches. Pay
+attention to the trade-offs section."</li>
+</ul>
+<h3 id="html-meta-tags">HTML Meta Tags</h3>
+<p>Generated HTML files include full meta tags in the
+<code>&lt;head&gt;</code> section. The generation script automatically
+creates these from markdown frontmatter:</p>
+<div class="sourceCode" id="cb2" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Content State Tracking (generated from frontmatter) --&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:x-mx-contentState&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;in-review&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;content-draft-date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2026-01-20&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;content-review-date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2026-01-25&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;content-publication-date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;content-last-modified&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2026-01-26&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;content-review-status&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;final-committee-review&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Standard SEO metadata --&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Content Title<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;description&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Brief summary from frontmatter&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;keywords&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;keyword1, keyword2, keyword3&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;author&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Tom Cranstoun&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Canonical URL (empty until published) --&gt;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;canonical&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Open Graph for social sharing --&gt;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:title&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Content Title&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:description&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Brief summary&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:type&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;article&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:url&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:image&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;/blogs/mx/[filename]-social.svg&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Schema.org JSON-LD --&gt;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">&quot;application/ld+json&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@context&quot;</span><span class="op">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="op">,</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;BlogPosting&quot;</span><span class="op">,</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;headline&quot;</span><span class="op">:</span> <span class="st">&quot;Content Title&quot;</span><span class="op">,</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;description&quot;</span><span class="op">:</span> <span class="st">&quot;Brief summary&quot;</span><span class="op">,</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;author&quot;</span><span class="op">:</span> {</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Person&quot;</span><span class="op">,</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Tom Cranstoun&quot;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;dateModified&quot;</span><span class="op">:</span> <span class="st">&quot;2026-01-26&quot;</span><span class="op">,</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;keywords&quot;</span><span class="op">:</span> <span class="st">&quot;keyword1, keyword2, keyword3&quot;</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
+<h3 id="css-comment-headers">CSS Comment Headers</h3>
+<p>CSS files include metadata as comment headers for human
+maintainability:</p>
+<div class="sourceCode" id="cb3" data-role="code-container"><pre
+class="sourceCode css"><code class="sourceCode css" data-role="code-content"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * Blog Post Styles</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * Title: Blog Post Title</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * Filename: blog-filename.css</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * Blog State: in-review</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"> * Last Modified: 2026-01-26</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * Author: Tom Cranstoun</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"> * WCAG 2.1 AA compliant styling scoped to this blog post.</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">/* Style rules follow... */</span></span></code></pre></div>
+<h2 id="state-tracking-system">State Tracking System</h2>
+<h3 id="four-states-in-the-content-lifecycle">Four States in the Content
+Lifecycle</h3>
+<p>The workflow defines four distinct states that content passes through
+from draft to publication. Each state determines file location, required
+metadata, and allowed operations.</p>
+<h4 id="draft-state">1. Draft State</h4>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>Work in progress, not ready for review</li>
+<li>Markdown files only (no HTML generated)</li>
+<li>May be incomplete, have TODOs, lack illustrations</li>
+</ul>
+<p><strong>File Location:</strong></p>
+<ul>
+<li><code>structure/</code> (top-level drafts)</li>
+<li><code>structure/blog-drafts/</code> (organised drafts)</li>
+</ul>
+<p><strong>Required Metadata:</strong></p>
+<div class="sourceCode" id="cb4" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">blog-state</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;draft&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># blog-url and publication-date must be empty</span></span></code></pre></div>
+<p><strong>Allowed Operations:</strong></p>
+<ul>
+<li>Edit markdown content freely</li>
+<li>Update frontmatter metadata</li>
+<li>Add/remove sections, illustrations, examples</li>
+</ul>
+<h4 id="in-review-state">2. In-Review State</h4>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>HTML generated and ready for technical/editorial review</li>
+<li>All assets extracted (CSS, SVG diagrams, social cards)</li>
+<li>Content frozen pending approval</li>
+</ul>
+<p><strong>File Location:</strong></p>
+<ul>
+<li><code>outputs/protocols/blogs/mx/[filename].html</code> (and
+associated assets)</li>
+</ul>
+<p><strong>Required Metadata (HTML):</strong></p>
+<div class="sourceCode" id="cb5" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-state&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;in-review&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-review-date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2026-01-26&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-review-status&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;final-committee-review&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Required Metadata (Markdown):</strong></p>
+<div class="sourceCode" id="cb6" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">blog-state</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;in-review&quot;</span></span></code></pre></div>
+<p><strong>Review Sub-States:</strong></p>
+<p>The <code>blog-review-status</code> meta tag tracks granular review
+progression:</p>
+<ul>
+<li><code>initial-review</code> — First technical and editorial
+pass</li>
+<li><code>technical-review</code> — Technical accuracy validation</li>
+<li><code>editorial-review</code> — Writing quality and style
+review</li>
+<li><code>final-committee-review</code> — Final approval before
+publication</li>
+<li><code>ready-for-publication</code> — Approved and cleared for
+deployment</li>
+</ul>
+<p><strong>Allowed Operations:</strong></p>
+<ul>
+<li>Review HTML in browser</li>
+<li>Validate WCAG 2.1 AA compliance</li>
+<li>Check HTML validation</li>
+<li>Verify all image/SVG paths exist</li>
+<li>Run accessibility checkers (Pa11y, WAVE, Lighthouse)</li>
+</ul>
+<h4 id="published-state">3. Published State</h4>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>Live on website and accessible to public</li>
+<li>Canonical URL assigned and active</li>
+<li>Schema.org datePublished set</li>
+</ul>
+<p><strong>File Location:</strong></p>
+<ul>
+<li><code>outputs/protocols/blogs/mx/[filename].html</code> (same as
+in-review)</li>
+<li>Also deployed to web server at
+<code>https://mx.allabout.network/blog/[filename].html</code></li>
+</ul>
+<p><strong>Required Metadata (HTML):</strong></p>
+<div class="sourceCode" id="cb7" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-state&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;published&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-publication-date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2026-01-26&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;canonical&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;https://mx.allabout.network/blog/[filename].html&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Required Metadata (Markdown):</strong></p>
+<div class="sourceCode" id="cb8" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">blog-state</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;published&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">blog-url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://mx.allabout.network/blog/[filename].html&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">publication-date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-01-26&quot;</span></span></code></pre></div>
+<p><strong>Allowed Operations:</strong></p>
+<ul>
+<li>Content is now immutable (corrections require versioning)</li>
+<li>Can transition to archived state</li>
+<li>Can update review dates for corrections</li>
+</ul>
+<h4 id="archived-state">4. Archived State</h4>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>No longer current but preserved for reference</li>
+<li>May have outdated information or superseded content</li>
+<li>Still accessible but marked as archived</li>
+</ul>
+<p><strong>File Location:</strong></p>
+<ul>
+<li><code>outputs/protocols/blogs/mx/[filename].html</code> (same
+location)</li>
+</ul>
+<p><strong>Required Metadata:</strong></p>
+<div class="sourceCode" id="cb9" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-state&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;archived&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Considerations:</strong></p>
+<ul>
+<li>Add visible archive notice to HTML</li>
+<li>Optionally add "This content is archived" banner</li>
+<li>Preserve original publication date</li>
+<li>Keep canonical URL active (no redirects)</li>
+</ul>
+<h3 id="state-transition-rules">State Transition Rules</h3>
+<p>State transitions must follow specific rules to maintain metadata
+consistency:</p>
+<h4 id="draft-in-review">Draft → In Review</h4>
+<p><strong>Trigger:</strong> Running the HTML generation script</p>
+<p><strong>Process:</strong></p>
+<ol type="1">
+<li><p>Verify markdown has <code>blog-state: "draft"</code></p></li>
+<li><p>Run generation script:
+<code>node scripts/generate-content-html.cjs [markdown-file]</code></p></li>
+<li><p>Script generates HTML, CSS, SVG files in
+<code>outputs/protocols/blogs/mx/</code></p></li>
+<li><p>Update markdown frontmatter:</p>
+<div class="sourceCode" id="cb10" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">blog-state</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;in-review&quot;</span></span></code></pre></div></li>
+<li><p>Add <code>blog-review-date</code> to HTML:</p>
+<div class="sourceCode" id="cb11" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-review-date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2026-01-26&quot;</span><span class="dt">&gt;</span></span></code></pre></div></li>
+</ol>
+<p><strong>Validation:</strong></p>
+<ul>
+<li>All HTML files must pass <code>npx html-validate</code></li>
+<li>All SVG files must pass <code>xmllint --noout</code></li>
+<li>Markdown must pass markdownlint</li>
+</ul>
+<h4 id="in-review-published">In Review → Published</h4>
+<p><strong>Trigger:</strong> Content approval and web deployment</p>
+<p><strong>Process:</strong></p>
+<ol type="1">
+<li><p>Verify HTML in <code>outputs/protocols/blogs/mx/</code> is
+approved</p></li>
+<li><p>Deploy HTML, CSS, SVG to web server</p></li>
+<li><p>Update markdown frontmatter:</p>
+<div class="sourceCode" id="cb12" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">blog-state</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;published&quot;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">blog-url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://mx.allabout.network/blog/[filename].html&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">publication-date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-01-26&quot;</span></span></code></pre></div></li>
+<li><p>Update HTML meta tags:</p>
+<div class="sourceCode" id="cb13" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-state&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;published&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-publication-date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2026-01-26&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;canonical&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;https://mx.allabout.network/blog/[filename].html&quot;</span><span class="dt">&gt;</span></span></code></pre></div></li>
+<li><p>Update Schema.org JSON-LD with
+<code>datePublished</code></p></li>
+</ol>
+<p><strong>Validation:</strong></p>
+<ul>
+<li>Verify live URL returns 200 status</li>
+<li>Check canonical URL is accessible</li>
+<li>Validate social media cards display correctly</li>
+</ul>
+<h4 id="published-archived">Published → Archived</h4>
+<p><strong>Trigger:</strong> Content becomes outdated or superseded</p>
+<p><strong>Process:</strong></p>
+<ol type="1">
+<li><p>Update markdown frontmatter:</p>
+<div class="sourceCode" id="cb14" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">blog-state</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;archived&quot;</span></span></code></pre></div></li>
+<li><p>Update HTML meta tag:</p>
+<div class="sourceCode" id="cb15" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;blog-state&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;archived&quot;</span><span class="dt">&gt;</span></span></code></pre></div></li>
+<li><p>Add visible archive notice to HTML:</p>
+<div class="sourceCode" id="cb16" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">aside</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;note&quot;</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;archive-notice&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>Archived Content:<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span> This blog post was published on [date] and may contain outdated information.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">aside</span><span class="dt">&gt;</span></span></code></pre></div></li>
+</ol>
+<p><strong>Considerations:</strong></p>
+<ul>
+<li>Keep canonical URL active</li>
+<li>Preserve all original metadata</li>
+<li>No redirects (content remains accessible)</li>
+</ul>
+<h2 id="file-organisation">File Organisation</h2>
+<p>The workflow separates draft content from generated HTML using clear
+directory boundaries:</p>
+<pre class="text" data-role="code-block" data-language="text"><code>structure/
+├── *.md                              # Top-level draft blogs (blog-state: &quot;draft&quot;)
+└── blog-drafts/                      # Organised draft workspace
+    ├── *.md                          # Draft markdown files
+    ├── contrasts/                    # Draft series: contrasts
+    └── joiners/                      # Draft series: joiners
+
+outputs/protocols/blogs/mx/              # Generated content (in-review or published)
+├── *.html                           # Blog post HTML
+├── *.css                            # Blog-specific styles (WCAG 2.1 AA)
+└── *.svg                            # Diagrams and social cards</code></pre>
+<h3 id="naming-conventions">Naming Conventions</h3>
+<p>All generated files use the <code>blog-filename</code> from markdown
+frontmatter as the base:</p>
+<p><strong>For blog post:</strong>
+<code>machine-experience-adding-metadata</code></p>
+<p><strong>Generated files:</strong></p>
+<pre class="text" data-role="code-block" data-language="text"><code>machine-experience-adding-metadata.html         # Main blog HTML
+machine-experience-adding-metadata.css          # Scoped styles
+machine-experience-adding-metadata-social.svg   # Social media card (1200x630px)
+machine-experience-adding-metadata-diagram-1.svg # Extracted diagrams (numbered)
+machine-experience-adding-metadata-diagram-2.svg</code></pre>
+<p><strong>Diagram naming:</strong> SVG diagrams extracted from markdown
+use descriptive suffixes:</p>
+<pre class="text" data-role="code-block" data-language="text"><code>machine-experience-adding-metadata-5-stage-agent-journey.svg
+machine-experience-adding-metadata-human-vs-agent-behavior.svg</code></pre>
+<h3 id="why-this-structure-works">Why This Structure Works</h3>
+<p><strong>Clear separation:</strong> Draft content (docs/structure/)
+never mixes with generated HTML (outputs/)</p>
+<p><strong>Flat hierarchy:</strong> All generated blogs live at the same
+level, no deep nesting</p>
+<p><strong>Predictable names:</strong> Given a blog filename, you know
+exactly what files exist</p>
+<p><strong>Symlink convenience:</strong> Root-level symlink
+<code>blogs/ → outputs/protocols/blogs/</code> provides shorter access
+path</p>
+<h2 id="generation-workflow">Generation Workflow</h2>
+<h3 id="script-generate-content-html.cjs">Script:
+generate-content-html.cjs</h3>
+<p>The generation script transforms markdown drafts into complete HTML
+packages with all required assets.</p>
+<p><strong>Command:</strong></p>
+<div class="sourceCode" id="cb20" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> scripts/generate-content-html.cjs <span class="op">&lt;</span>markdown-file<span class="op">&gt;</span> <span class="pp">[</span><span class="ss">custom</span><span class="pp">-</span><span class="ss">filename</span><span class="pp">]</span></span></code></pre></div>
+<p><strong>Input:</strong></p>
+<ul>
+<li>Markdown file with YAML frontmatter</li>
+<li>Optional custom filename override</li>
+</ul>
+<p><strong>Output:</strong></p>
+<ul>
+<li>HTML file with semantic structure</li>
+<li>CSS file with WCAG 2.1 AA compliant styles</li>
+<li>SVG social media card (1200×630px)</li>
+<li>Extracted SVG diagrams with semantic filenames</li>
+<li>All files placed in <code>outputs/protocols/blogs/mx/</code></li>
+</ul>
+<h3 id="generation-process-steps">Generation Process Steps</h3>
+<h4 id="parse-markdown-frontmatter">1. Parse Markdown Frontmatter</h4>
+<p>Extract and validate all required YAML fields:</p>
+<div class="sourceCode" id="cb21" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> matter <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;gray-matter&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> markdown <span class="op">=</span> fs<span class="op">.</span><span class="fu">readFileSync</span>(markdownFile<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { data<span class="op">,</span> content } <span class="op">=</span> <span class="fu">matter</span>(markdown)<span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Validate required fields</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> required <span class="op">=</span> [<span class="st">&#39;title&#39;</span><span class="op">,</span> <span class="st">&#39;author&#39;</span><span class="op">,</span> <span class="st">&#39;date&#39;</span><span class="op">,</span> <span class="st">&#39;blog-state&#39;</span><span class="op">,</span> <span class="st">&#39;blog-filename&#39;</span><span class="op">,</span> <span class="st">&#39;description&#39;</span><span class="op">,</span> <span class="st">&#39;keywords&#39;</span>]<span class="op">;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>required<span class="op">.</span><span class="fu">forEach</span>(field <span class="kw">=&gt;</span> {</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>data[field]) {</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="vs">`Missing required field: </span><span class="sc">${</span>field<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<h4 id="generate-html-structure">2. Generate HTML Structure</h4>
+<p>Create semantic HTML5 structure with ARIA landmarks:</p>
+<div class="sourceCode" id="cb22" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">&quot;en-GB&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Meta tags from frontmatter --&gt;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Schema.org JSON-LD --&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;[filename].css&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">header</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;banner&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;top&quot;</span><span class="dt">&gt;</span>[title]<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;meta&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>      By <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;author&quot;</span><span class="dt">&gt;</span>[author]<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> |</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">time</span><span class="ot"> datetime</span><span class="op">=</span><span class="st">&quot;[date]&quot;</span><span class="dt">&gt;</span>[formatted-date]<span class="dt">&lt;/</span><span class="kw">time</span><span class="dt">&gt;</span> |</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;reading-time&quot;</span><span class="dt">&gt;</span>[calculated] min read<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> |</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;word-count&quot;</span><span class="dt">&gt;</span>[calculated] words<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">nav</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;navigation&quot;</span><span class="ot"> aria-label</span><span class="op">=</span><span class="st">&quot;Table of Contents&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Contents<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">ol</span><span class="dt">&gt;</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>      <span class="co">&lt;!-- Generated from H2 headings --&gt;</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">ol</span><span class="dt">&gt;</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">main</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;main&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">article</span><span class="dt">&gt;</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>      <span class="co">&lt;!-- Converted markdown content --&gt;</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">footer</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;contentinfo&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>© 2026 Tom Cranstoun. All rights reserved.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<h4 id="convert-markdown-to-html">3. Convert Markdown to HTML</h4>
+<p>Use markdown-it with plugins for semantic conversion:</p>
+<div class="sourceCode" id="cb23" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> markdownIt <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;markdown-it&#39;</span>)<span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> markdownItAnchor <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;markdown-it-anchor&#39;</span>)<span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> markdownItAttrs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;markdown-it-attrs&#39;</span>)<span class="op">;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> md <span class="op">=</span> <span class="fu">markdownIt</span>({ <span class="dt">html</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">linkify</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">typographer</span><span class="op">:</span> <span class="kw">true</span> })</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">use</span>(markdownItAnchor<span class="op">,</span> {</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">permalink</span><span class="op">:</span> markdownItAnchor<span class="op">.</span><span class="at">permalink</span><span class="op">.</span><span class="fu">headerLink</span>()<span class="op">,</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">level</span><span class="op">:</span> [<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]  <span class="co">// Generate IDs for H2-H6</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">use</span>(markdownItAttrs)<span class="op">;</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> htmlContent <span class="op">=</span> md<span class="op">.</span><span class="fu">render</span>(content)<span class="op">;</span></span></code></pre></div>
+<h4 id="extract-and-process-svg-diagrams">4. Extract and Process SVG
+Diagrams</h4>
+<p>Find inline SVG elements and extract to separate files:</p>
+<div class="sourceCode" id="cb24" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> cheerio <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;cheerio&#39;</span>)<span class="op">;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">extractSVGs</span>(html<span class="op">,</span> baseFilename) {</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> $ <span class="op">=</span> cheerio<span class="op">.</span><span class="fu">load</span>(html)<span class="op">;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> svgs <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">$</span>(<span class="st">&#39;svg&#39;</span>)<span class="op">.</span><span class="fu">each</span>((i<span class="op">,</span> elem) <span class="kw">=&gt;</span> {</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> svgContent <span class="op">=</span> $<span class="op">.</span><span class="fu">html</span>(elem)<span class="op">;</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> svgFilename <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>baseFilename<span class="sc">}</span><span class="vs">-diagram-</span><span class="sc">${</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="vs">.svg`</span><span class="op">;</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Extract descriptive ID if present</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> svgId <span class="op">=</span> <span class="fu">$</span>(elem)<span class="op">.</span><span class="fu">attr</span>(<span class="st">&#39;id&#39;</span>)<span class="op">;</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (svgId) {</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>      svgFilename <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>baseFilename<span class="sc">}</span><span class="vs">-</span><span class="sc">${</span>svgId<span class="sc">}</span><span class="vs">.svg`</span><span class="op">;</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span><span class="fu">writeFileSync</span>(<span class="vs">`outputs/protocols/blogs/mx/</span><span class="sc">${</span>svgFilename<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> svgContent)<span class="op">;</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Replace inline SVG with img reference</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">$</span>(elem)<span class="op">.</span><span class="fu">replaceWith</span>(<span class="vs">`&lt;img src=&quot;</span><span class="sc">${</span>svgFilename<span class="sc">}</span><span class="vs">&quot; alt=&quot;[descriptive alt text]&quot;&gt;`</span>)<span class="op">;</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    svgs<span class="op">.</span><span class="fu">push</span>(svgFilename)<span class="op">;</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { <span class="dt">html</span><span class="op">:</span> $<span class="op">.</span><span class="fu">html</span>()<span class="op">,</span> svgs }<span class="op">;</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="generate-social-media-card">5. Generate Social Media Card</h4>
+<p>Create 1200×630px SVG social card:</p>
+<div class="sourceCode" id="cb25" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">generateSocialCard</span>(title<span class="op">,</span> description<span class="op">,</span> filename) {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> svg <span class="op">=</span> <span class="vs">`</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;svg viewBox=&quot;0 0 1200 630&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;rect width=&quot;1200&quot; height=&quot;630&quot; fill=&quot;#1a1a1a&quot;/&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;text x=&quot;600&quot; y=&quot;280&quot; text-anchor=&quot;middle&quot;</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="vs">        font-family=&quot;system-ui, sans-serif&quot; font-size=&quot;48&quot;</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="vs">        fill=&quot;#ffffff&quot; font-weight=&quot;bold&quot;&gt;</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>title<span class="sc">}</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/text&gt;</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;text x=&quot;600&quot; y=&quot;350&quot; text-anchor=&quot;middle&quot;</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="vs">        font-family=&quot;system-ui, sans-serif&quot; font-size=&quot;24&quot;</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="vs">        fill=&quot;#cccccc&quot;&gt;</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>description<span class="sc">}</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/text&gt;</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;text x=&quot;600&quot; y=&quot;550&quot; text-anchor=&quot;middle&quot;</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="vs">        font-family=&quot;system-ui, sans-serif&quot; font-size=&quot;20&quot;</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="vs">        fill=&quot;#888888&quot;&gt;</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="vs">    allabout.network</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/text&gt;</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/svg&gt;`</span><span class="op">;</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  fs<span class="op">.</span><span class="fu">writeFileSync</span>(<span class="vs">`outputs/protocols/blogs/mx/</span><span class="sc">${</span>filename<span class="sc">}</span><span class="vs">-social.svg`</span><span class="op">,</span> svg)<span class="op">;</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="generate-css-with-wcag-2.1-aa-compliance">6. Generate CSS with
+WCAG 2.1 AA Compliance</h4>
+<p>Create scoped styles meeting contrast requirements:</p>
+<div class="sourceCode" id="cb26" data-role="code-container"><pre
+class="sourceCode css"><code class="sourceCode css" data-role="code-content"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* WCAG 2.1 AA Contrast Requirements:</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * - Normal text (&lt; 18pt): 4.5:1 minimum</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * - Large text (≥ 18pt or ≥ 14pt bold): 3:1 minimum</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * - UI components: 3:1 minimum</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>body {</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="dv">system-ui</span><span class="op">,</span> <span class="dv">-apple-system</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">line-height</span><span class="ch">:</span> <span class="dv">1.6</span><span class="op">;</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#1a1a1a</span><span class="op">;</span>           <span class="co">/* 16.7:1 on white (exceeds 4.5:1) */</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background</span><span class="ch">:</span> <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">max-width</span><span class="ch">:</span> <span class="dv">800</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin</span><span class="ch">:</span> <span class="dv">0</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">2</span><span class="dt">rem</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>h1<span class="op">,</span> h2<span class="op">,</span> h3<span class="op">,</span> h4<span class="op">,</span> h5<span class="op">,</span> h6 {</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#000000</span><span class="op">;</span>           <span class="co">/* 21:1 on white (maximum contrast) */</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">line-height</span><span class="ch">:</span> <span class="dv">1.3</span><span class="op">;</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-top</span><span class="ch">:</span> <span class="dv">1.5</span><span class="dt">em</span><span class="op">;</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-bottom</span><span class="ch">:</span> <span class="dv">0.5</span><span class="dt">em</span><span class="op">;</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>a {</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#0066cc</span><span class="op">;</span>           <span class="co">/* 7.3:1 on white (exceeds 4.5:1) */</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">text-decoration</span><span class="ch">:</span> <span class="dv">underline</span><span class="op">;</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>a<span class="in">:hover</span> {</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#0052a3</span><span class="op">;</span>           <span class="co">/* 8.7:1 on white */</span></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">text-decoration</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>code {</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background</span><span class="ch">:</span> <span class="cn">#f5f5f5</span><span class="op">;</span>      <span class="co">/* Background for code blocks */</span></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#1a1a1a</span><span class="op">;</span>           <span class="co">/* 14.5:1 on #f5f5f5 */</span></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">0.2</span><span class="dt">em</span> <span class="dv">0.4</span><span class="dt">em</span><span class="op">;</span></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-radius</span><span class="ch">:</span> <span class="dv">3</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="st">&#39;Courier New&#39;</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>pre code {</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span><span class="ch">:</span> <span class="dv">block</span><span class="op">;</span></span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>  <span class="kw">overflow-x</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="calculate-reading-time-and-word-count">7. Calculate Reading Time
+and Word Count</h4>
+<p>Add metadata to HTML:</p>
+<div class="sourceCode" id="cb27" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculateReadingStats</span>(content) {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> plainText <span class="op">=</span> content<span class="op">.</span><span class="fu">replace</span>(<span class="ss">/&lt;</span><span class="sc">[^&gt;]+</span><span class="ss">&gt;/g</span><span class="op">,</span> <span class="st">&#39;&#39;</span>)<span class="op">;</span>  <span class="co">// Strip HTML</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> wordCount <span class="op">=</span> plainText<span class="op">.</span><span class="fu">split</span>(<span class="ss">/</span><span class="sc">\s+</span><span class="ss">/</span>)<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> readingTime <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">ceil</span>(wordCount <span class="op">/</span> <span class="dv">200</span>)<span class="op">;</span>  <span class="co">// 200 words per minute</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { wordCount<span class="op">,</span> readingTime }<span class="op">;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="generate-table-of-contents">8. Generate Table of Contents</h4>
+<p>Extract H2 headings and create navigation:</p>
+<div class="sourceCode" id="cb28" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">generateTOC</span>(html) {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> $ <span class="op">=</span> cheerio<span class="op">.</span><span class="fu">load</span>(html)<span class="op">;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> toc <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">$</span>(<span class="st">&#39;h2[id]&#39;</span>)<span class="op">.</span><span class="fu">each</span>((i<span class="op">,</span> elem) <span class="kw">=&gt;</span> {</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> id <span class="op">=</span> <span class="fu">$</span>(elem)<span class="op">.</span><span class="fu">attr</span>(<span class="st">&#39;id&#39;</span>)<span class="op">;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> text <span class="op">=</span> <span class="fu">$</span>(elem)<span class="op">.</span><span class="fu">text</span>()<span class="op">;</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    toc<span class="op">.</span><span class="fu">push</span>({ id<span class="op">,</span> text })<span class="op">;</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> tocHTML <span class="op">=</span> <span class="vs">`</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;nav role=&quot;navigation&quot; aria-label=&quot;Table of Contents&quot;&gt;</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;h2&gt;Contents&lt;/h2&gt;</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;ol&gt;</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>toc<span class="op">.</span><span class="fu">map</span>(item <span class="kw">=&gt;</span> <span class="vs">`&lt;li&gt;&lt;a href=&quot;#</span><span class="sc">${</span>item<span class="op">.</span><span class="at">id</span><span class="sc">}</span><span class="vs">&quot;&gt;</span><span class="sc">${</span>item<span class="op">.</span><span class="at">text</span><span class="sc">}</span><span class="vs">&lt;/a&gt;&lt;/li&gt;`</span>)<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">    &#39;</span>)<span class="sc">}</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/ol&gt;</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/nav&gt;`</span><span class="op">;</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> tocHTML<span class="op">;</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="complete-generation-example">Complete Generation Example</h3>
+<p><strong>Input markdown</strong>
+(<code>machine-experience-adding-metadata.md</code>):</p>
+<div class="sourceCode" id="cb29" data-role="code-container"><pre
+class="sourceCode markdown"><code class="sourceCode markdown" data-role="code-content"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Machine Experience: Adding Metadata&quot;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Tom Cranstoun&quot;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="an">created:</span><span class="co"> &quot;2026-01-20&quot;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="an">blog-state:</span><span class="co"> &quot;draft&quot;</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="an">blog-filename:</span><span class="co"> &quot;machine-experience-adding-metadata&quot;</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="an">blog-url:</span><span class="co"> &quot;&quot;</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="an">publication-date:</span><span class="co"> &quot;&quot;</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> &quot;How metadata transforms websites from opaque to transparent for AI agents&quot;</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="an">tags:</span><span class="co"> [metadata, schema-org, ai-agents, semantic-html]</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="an">mx:</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">  runbook: &quot;This post explains metadata&#39;s role in AI agent compatibility&quot;</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Machine Experience: Adding Metadata</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>Metadata isn&#39;t decoration. It&#39;s structure that lets AI agents understand your content.</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why Metadata Matters</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Content continues...</span><span class="co">]</span></span></code></pre></div>
+<p><strong>Generated files:</strong></p>
+<pre class="text" data-role="code-block" data-language="text"><code>outputs/protocols/blogs/mx/
+├── machine-experience-adding-metadata.html
+├── machine-experience-adding-metadata.css
+└── machine-experience-adding-metadata-social.svg</code></pre>
+<h2 id="generation-instruction-provenance">Generation Instruction
+Provenance</h2>
+<h3 id="the-transparency-problem">The Transparency Problem</h3>
+<p>Every content generation system faces the same challenge: how do you
+know how a file was generated? Traditional systems hide generation
+instructions in build scripts, makefiles, or tribal knowledge. When
+files are regenerated months later, the instructions are lost or
+outdated.</p>
+<p><strong>The cost of opacity:</strong></p>
+<ul>
+<li>Files accumulate without clear regeneration paths</li>
+<li>Manual edits to generated files get overwritten</li>
+<li>Team members don't know which files are source vs. generated</li>
+<li>Automated systems can't verify generation integrity</li>
+</ul>
+<h3 id="executable-documentation">Executable Documentation</h3>
+<p><strong>Core requirement:</strong> Documents must contain their own
+generation instructions.</p>
+<p>This workflow implements transparent generation provenance where:</p>
+<ol type="1">
+<li><strong>Source files declare</strong> how to generate outputs
+(<code>mx.generate</code>)</li>
+<li><strong>Generated files receive</strong> complete provenance
+tracking (<code>mx.provenance</code>)</li>
+<li><strong>Sidecar files preserve</strong> machine-readable provenance
+(<code>.mx.json</code>)</li>
+<li><strong>SHA-256 checksums</strong> verify source integrity across
+generations</li>
+</ol>
+<h3 id="mandatory-mx.generate-section">Mandatory mx.generate
+Section</h3>
+<p>All source markdown files must include <code>mx.generate</code> in
+YAML frontmatter:</p>
+<div class="sourceCode" id="cb31" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Document Title&quot;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Tom Cranstoun&quot;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">created</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-02-04&quot;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">generate</span><span class="kw">:</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;scripts/generate-content-html.cjs&quot;</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">format</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;html&quot;</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Generate HTML from markdown with WCAG compliance&quot;</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">arguments</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span><span class="co">  # Optional: command-line arguments</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span><span class="co"> # Optional: required environment variables</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p><strong>Validation:</strong> Generation scripts validate this section
+exists before proceeding. Missing <code>mx.generate</code> causes
+immediate failure with clear error messages.</p>
+<p><strong>Why mandatory:</strong> Without explicit generation
+instructions, files become opaque artifacts. Mandatory validation
+ensures every generated file can be traced and regenerated.</p>
+<h3 id="generated-file-provenance">Generated File Provenance</h3>
+<p>When generation completes, outputs receive complete provenance
+metadata:</p>
+<p><strong>For markdown outputs</strong> (e.g.,
+<code>document-print.md</code>):</p>
+<div class="sourceCode" id="cb32" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Document Title&quot;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Tom Cranstoun&quot;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">created</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-02-04&quot;</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">provenance</span><span class="kw">:</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">source</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;path/to/document.md&quot;</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sourceChecksum</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;sha256:abc123def456...&quot;</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">generatedDate</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-02-04T14:30:00Z&quot;</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">generatedBy</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;scripts/bin/mx.pdf.sh&quot;</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;1.0.0&quot;</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">transformations</span><span class="kw">:</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">process</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;emoji-cleaning&quot;</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">timestamp</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-02-04T14:30:00Z&quot;</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">outputFile</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;document-print.md&quot;</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">process</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;pdf-generation&quot;</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">timestamp</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2026-02-04T14:30:00Z&quot;</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">outputFile</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;document.pdf&quot;</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">generate</span><span class="kw">:</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;scripts/bin/mx.pdf.sh&quot;</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">format</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;pdf&quot;</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Generate PDF from markdown&quot;</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p><strong>For HTML outputs</strong> (meta tags in
+<code>&lt;head&gt;</code>):</p>
+<div class="sourceCode" id="cb33" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- MX Provenance (generation transparency) --&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:provenance:source&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;path/to/document.md&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:provenance:sourceChecksum&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;sha256:abc123...&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:provenance:generatedDate&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2026-02-04T14:30:00Z&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:provenance:generatedBy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;scripts/generate-content-html.cjs&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:provenance:version&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;1.0.0&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- MX Generation Instructions --&gt;</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:generate:script&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;scripts/generate-content-html.cjs&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:generate:format&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;html&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>For PDF outputs</strong> (<code>.mx.json</code> sidecar):</p>
+<div class="sourceCode" id="cb34" data-role="code-container"><pre
+class="sourceCode json"><code class="sourceCode json" data-role="code-content"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;provenance&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;source&quot;</span><span class="fu">:</span> <span class="st">&quot;path/to/document.md&quot;</span><span class="fu">,</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sourceChecksum&quot;</span><span class="fu">:</span> <span class="st">&quot;sha256:abc123def456...&quot;</span><span class="fu">,</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;generatedDate&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-02-04T14:30:00Z&quot;</span><span class="fu">,</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;generatedBy&quot;</span><span class="fu">:</span> <span class="st">&quot;scripts/bin/mx.pdf.sh&quot;</span><span class="fu">,</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;transformations&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;process&quot;</span><span class="fu">:</span> <span class="st">&quot;emoji-cleaning&quot;</span><span class="fu">,</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-02-04T14:30:00Z&quot;</span><span class="fu">,</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;outputFile&quot;</span><span class="fu">:</span> <span class="st">&quot;document-print.md&quot;</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;process&quot;</span><span class="fu">:</span> <span class="st">&quot;pdf-generation&quot;</span><span class="fu">,</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-02-04T14:30:00Z&quot;</span><span class="fu">,</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;outputFile&quot;</span><span class="fu">:</span> <span class="st">&quot;document.pdf&quot;</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;generate&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;script&quot;</span><span class="fu">:</span> <span class="st">&quot;scripts/bin/mx.pdf.sh&quot;</span><span class="fu">,</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;format&quot;</span><span class="fu">:</span> <span class="st">&quot;pdf&quot;</span><span class="fu">,</span></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Generate PDF from markdown with emoji cleaning&quot;</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h3 id="mx-sidecar-files-.mx.json">MX Sidecar Files (.mx.json)</h3>
+<p>Binary or structured outputs that can't embed metadata receive
+<code>.mx.json</code> sidecar files:</p>
+<p><strong>Naming convention:</strong>
+<code>{filename}.mx.json</code></p>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li>Preserve complete provenance when target format doesn't support
+metadata</li>
+<li>Provide machine-readable generation instructions for automation</li>
+<li>Enable checksum verification without parsing binary formats</li>
+</ul>
+<p><strong>Example:</strong> For <code>document.pdf</code>, create
+<code>document.mx.json</code> with:</p>
+<ul>
+<li>Source file path and SHA-256 checksum</li>
+<li>Generation timestamp and script version</li>
+<li>Complete transformation chain</li>
+<li>Original generation instructions</li>
+</ul>
+<h3 id="checksum-verification">Checksum Verification</h3>
+<p>SHA-256 checksums enable integrity verification:</p>
+<div class="sourceCode" id="cb35" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify source hasn&#39;t changed since generation</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sha256sum</span> document.md</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare to mx.provenance.sourceChecksum in document-print.md</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># or document.mx.json</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># If checksums match: safe to use generated files</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># If checksums differ: regenerate to ensure consistency</span></span></code></pre></div>
+<p><strong>Automated workflows:</strong></p>
+<div class="sourceCode" id="cb36" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Read sidecar file</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> provenance <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(fs<span class="op">.</span><span class="fu">readFileSync</span>(<span class="st">&#39;document.mx.json&#39;</span>))<span class="op">;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Calculate current checksum</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> currentChecksum <span class="op">=</span> <span class="fu">calculateSHA256</span>(<span class="st">&#39;document.md&#39;</span>)<span class="op">;</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Compare</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (provenance<span class="op">.</span><span class="at">provenance</span><span class="op">.</span><span class="at">sourceChecksum</span> <span class="op">!==</span> <span class="vs">`sha256:</span><span class="sc">${</span>currentChecksum<span class="sc">}</span><span class="vs">`</span>) {</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">warn</span>(<span class="st">&#39;Source file changed - regeneration recommended&#39;</span>)<span class="op">;</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Trigger regeneration pipeline</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="transformation-chains">Transformation Chains</h3>
+<p>Complex generation workflows involve multiple steps. The
+<code>transformations</code> array tracks each stage:</p>
+<p><strong>Example: PDF generation workflow</strong></p>
+<div class="sourceCode" id="cb37" data-role="code-container"><pre
+class="sourceCode json"><code class="sourceCode json" data-role="code-content"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;provenance&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;source&quot;</span><span class="fu">:</span> <span class="st">&quot;report.md&quot;</span><span class="fu">,</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sourceChecksum&quot;</span><span class="fu">:</span> <span class="st">&quot;sha256:abc123...&quot;</span><span class="fu">,</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;transformations&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;process&quot;</span><span class="fu">:</span> <span class="st">&quot;emoji-cleaning&quot;</span><span class="fu">,</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-02-04T14:30:00Z&quot;</span><span class="fu">,</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;outputFile&quot;</span><span class="fu">:</span> <span class="st">&quot;report-print.md&quot;</span><span class="fu">,</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Remove emoji characters for LaTeX compatibility&quot;</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;process&quot;</span><span class="fu">:</span> <span class="st">&quot;pdf-generation&quot;</span><span class="fu">,</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-02-04T14:30:01Z&quot;</span><span class="fu">,</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;outputFile&quot;</span><span class="fu">:</span> <span class="st">&quot;report.pdf&quot;</span><span class="fu">,</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;pandoc + xelatex&quot;</span><span class="fu">,</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Generate PDF with professional formatting&quot;</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p><strong>Why track transformations:</strong></p>
+<ul>
+<li><strong>Debugging:</strong> Identify which stage introduced
+issues</li>
+<li><strong>Optimisation:</strong> Measure time per transformation</li>
+<li><strong>Caching:</strong> Skip unchanged intermediate steps</li>
+<li><strong>Auditing:</strong> Verify complete generation history</li>
+</ul>
+<h3 id="pass-through-transparency">Pass-Through Transparency</h3>
+<p><strong>Critical requirement:</strong> Generation instructions pass
+through to all outputs.</p>
+<p>When <code>document.md</code> generates
+<code>document-print.md</code>, which generates
+<code>document.pdf</code>:</p>
+<ol type="1">
+<li><code>document.md</code> contains <code>mx.generate</code>
+(source)</li>
+<li><code>document-print.md</code> receives <code>mx.provenance</code> +
+preserves <code>mx.generate</code></li>
+<li><code>document.pdf</code> receives <code>document.mx.json</code>
+with both sections</li>
+</ol>
+<p><strong>Result:</strong> Every file in the generation chain can be
+independently regenerated.</p>
+<p><strong>Anti-pattern to avoid:</strong></p>
+<div class="sourceCode" id="cb38" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BAD: Generated file loses generation instructions</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">provenance</span><span class="kw">:</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">source</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;document.md&quot;</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">  # Missing: mx.generate section</span></span></code></pre></div>
+<p>This breaks the chain — <code>document-print.md</code> can't be
+regenerated without returning to original source.</p>
+<h3 id="implementation-in-generation-scripts">Implementation in
+Generation Scripts</h3>
+<p><strong>scripts/bin/mx.pdf.sh</strong> (Bash + Perl):</p>
+<div class="sourceCode" id="cb39" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Validate mx.generate exists (mandatory)</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">validate_mx_generate()</span> <span class="kw">{</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">input_file</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="ot">! </span><span class="fu">grep</span> <span class="at">-q</span> <span class="st">&quot;^mx:&quot;</span> <span class="st">&quot;</span><span class="va">$input_file</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;Error: Missing required &#39;mx:&#39; section&quot;</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 2</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check for generate: subsection using Perl</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">has_generate</span><span class="op">=</span><span class="va">$(</span><span class="fu">perl</span> <span class="at">-0777</span> <span class="at">-ne</span> <span class="st">&#39;if (/^mx:\n(.*?)(?=^\S|\z)/sm) {</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="st">        $mx=$1; print &quot;yes&quot; if $mx =~ /^\s+generate:/m }&#39;</span> <span class="st">&quot;</span><span class="va">$input_file</span><span class="st">&quot;</span><span class="va">)</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="st">&quot;</span><span class="va">$has_generate</span><span class="st">&quot;</span> <span class="ot">!=</span> <span class="st">&quot;yes&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;Error: Missing required &#39;mx.generate&#39;&quot;</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 2</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate SHA-256 checksum</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_checksum()</span> <span class="kw">{</span></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">file</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>    <span class="ex">shasum</span> <span class="at">-a</span> 256 <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $1}&#39;</span></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create MX sidecar JSON</span></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="fu">create_mx_sidecar()</span> <span class="kw">{</span></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">source_file</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">output_file</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$2</span><span class="st">&quot;</span></span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">checksum</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$3</span><span class="st">&quot;</span></span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">sidecar_file</span><span class="op">=</span><span class="st">&quot;</span><span class="va">${output_file</span><span class="op">%</span>.pdf<span class="va">}</span><span class="st">.mx.json&quot;</span></span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract mx.generate section from source</span></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Build JSON with provenance + generate</span></span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Write to sidecar file</span></span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<p><strong>scripts/generate-content-html.cjs</strong> (Node.js):</p>
+<div class="sourceCode" id="cb40" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. Validate mx.generate exists</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">validateMxGenerate</span>(metadata<span class="op">,</span> filePath) {</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>metadata<span class="op">.</span><span class="at">mx</span> <span class="op">||</span> <span class="kw">typeof</span> metadata<span class="op">.</span><span class="at">mx</span> <span class="op">!==</span> <span class="st">&#39;object&#39;</span>) {</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">&#39;ERROR: Missing required </span><span class="sc">\&#39;</span><span class="st">mx:</span><span class="sc">\&#39;</span><span class="st"> section&#39;</span>)<span class="op">;</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>metadata<span class="op">.</span><span class="at">mx</span><span class="op">.</span><span class="at">generate</span> <span class="op">||</span> <span class="kw">typeof</span> metadata<span class="op">.</span><span class="at">mx</span><span class="op">.</span><span class="at">generate</span> <span class="op">!==</span> <span class="st">&#39;object&#39;</span>) {</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">&#39;ERROR: Missing required </span><span class="sc">\&#39;</span><span class="st">mx.generate</span><span class="sc">\&#39;</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Calculate SHA-256 checksum</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculateChecksum</span>(filePath) {</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> crypto <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;crypto&#39;</span>)<span class="op">;</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fileBuffer <span class="op">=</span> fs<span class="op">.</span><span class="fu">readFileSync</span>(filePath)<span class="op">;</span></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> hashSum <span class="op">=</span> crypto<span class="op">.</span><span class="fu">createHash</span>(<span class="st">&#39;sha256&#39;</span>)<span class="op">;</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>  hashSum<span class="op">.</span><span class="fu">update</span>(fileBuffer)<span class="op">;</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> hashSum<span class="op">.</span><span class="fu">digest</span>(<span class="st">&#39;hex&#39;</span>)<span class="op">;</span></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. Create MX sidecar JSON</span></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">createMxSidecar</span>(sourceFile<span class="op">,</span> outputFile<span class="op">,</span> checksum<span class="op">,</span> metadata) {</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> sidecarPath <span class="op">=</span> outputFile<span class="op">.</span><span class="fu">replace</span>(<span class="st">&#39;.html&#39;</span><span class="op">,</span> <span class="st">&#39;.mx.json&#39;</span>)<span class="op">;</span></span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> sidecarData <span class="op">=</span> {</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">provenance</span><span class="op">:</span> {</span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>      <span class="dt">source</span><span class="op">:</span> path<span class="op">.</span><span class="fu">relative</span>(<span class="bu">process</span><span class="op">.</span><span class="fu">cwd</span>()<span class="op">,</span> sourceFile)<span class="op">,</span></span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>      <span class="dt">sourceChecksum</span><span class="op">:</span> <span class="vs">`sha256:</span><span class="sc">${</span>checksum<span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>      <span class="dt">generatedDate</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">.</span><span class="fu">toISOString</span>()<span class="op">,</span></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>      <span class="dt">generatedBy</span><span class="op">:</span> <span class="st">&#39;scripts/generate-content-html.cjs&#39;</span><span class="op">,</span></span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>      <span class="dt">version</span><span class="op">:</span> <span class="st">&#39;1.0.0&#39;</span><span class="op">,</span></span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>      <span class="dt">transformations</span><span class="op">:</span> [<span class="co">/* ... */</span>]</span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">generate</span><span class="op">:</span> metadata<span class="op">.</span><span class="at">mx</span><span class="op">.</span><span class="at">generate</span></span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a>  fs<span class="op">.</span><span class="fu">writeFileSync</span>(sidecarPath<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(sidecarData<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="benefits-for-ai-agents">Benefits for AI Agents</h3>
+<p><strong>Discovery:</strong> Agents can identify generated vs. source
+files</p>
+<div class="sourceCode" id="cb41" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Agent reads .mx.json sidecar</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (file<span class="op">.</span><span class="at">mx</span> <span class="op">&amp;&amp;</span> file<span class="op">.</span><span class="at">mx</span><span class="op">.</span><span class="at">provenance</span>) {</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// This is a generated file</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> sourceFile <span class="op">=</span> file<span class="op">.</span><span class="at">mx</span><span class="op">.</span><span class="at">provenance</span><span class="op">.</span><span class="at">source</span><span class="op">;</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Follow chain back to authoritative source</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Regeneration:</strong> Agents can regenerate outdated
+files</p>
+<div class="sourceCode" id="cb42" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Agent detects source changed</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">checksumsDiffer</span>(source<span class="op">,</span> generated<span class="op">.</span><span class="at">mx</span><span class="op">.</span><span class="at">provenance</span><span class="op">.</span><span class="at">sourceChecksum</span>)) {</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> script <span class="op">=</span> generated<span class="op">.</span><span class="at">mx</span><span class="op">.</span><span class="at">generate</span><span class="op">.</span><span class="at">script</span><span class="op">;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> format <span class="op">=</span> generated<span class="op">.</span><span class="at">mx</span><span class="op">.</span><span class="at">generate</span><span class="op">.</span><span class="at">format</span><span class="op">;</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Execute: node scripts/generate-content-html.cjs source.md</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Verification:</strong> Agents can audit generation
+history</p>
+<div class="sourceCode" id="cb43" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Agent validates transformation chain</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>generated<span class="op">.</span><span class="at">mx</span><span class="op">.</span><span class="at">provenance</span><span class="op">.</span><span class="at">transformations</span><span class="op">.</span><span class="fu">forEach</span>(transform <span class="kw">=&gt;</span> {</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`</span><span class="sc">${</span>transform<span class="op">.</span><span class="at">process</span><span class="sc">}</span><span class="vs"> at </span><span class="sc">${</span>transform<span class="op">.</span><span class="at">timestamp</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Verify each step produced expected output</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<h3 id="storage-patterns">Storage Patterns</h3>
+<p><strong>Hybrid approach:</strong></p>
+<ul>
+<li><strong>Source markdown:</strong> <code>mx.generate</code> in YAML
+frontmatter</li>
+<li><strong>Generated markdown:</strong> <code>mx.provenance</code> +
+<code>mx.generate</code> in YAML frontmatter</li>
+<li><strong>Generated HTML:</strong> <code>mx:*</code> meta tags in
+<code>&lt;head&gt;</code> + <code>.mx.json</code> sidecar</li>
+<li><strong>Generated PDF:</strong> <code>.mx.json</code> sidecar only
+(PDF doesn't support frontmatter)</li>
+</ul>
+<p><strong>Why hybrid:</strong> Different formats have different
+metadata capabilities. Use the most appropriate storage for each format
+while maintaining complete provenance.</p>
+<h3 id="common-patterns">Common Patterns</h3>
+<p><strong>Pattern 1: Single-stage generation</strong></p>
+<pre><code>document.md (source with mx.generate)
+  ↓
+document.html (with mx.provenance meta tags)
+document.mx.json (sidecar)</code></pre>
+<p><strong>Pattern 2: Multi-stage generation</strong></p>
+<pre><code>report.md (source with mx.generate)
+  ↓
+report-print.md (with mx.provenance + mx.generate)
+  ↓
+report.pdf (binary)
+report.mx.json (sidecar)</code></pre>
+<p><strong>Pattern 3: Multiple output formats</strong></p>
+<pre><code>content.md (source with mx.generate)
+  ↓
+content.html (with mx.provenance meta tags + .mx.json)
+content.pdf (with .mx.json)
+content.docx (with .mx.json)</code></pre>
+<h3 id="error-messages">Error Messages</h3>
+<p><strong>Missing mx.generate:</strong></p>
+<pre><code>❌ Error: Missing required &#39;mx.generate&#39; in YAML frontmatter
+
+The source markdown file must contain an &#39;mx:&#39; section with &#39;generate:&#39; instructions.
+
+Add this to your YAML frontmatter:
+
+mx:
+  generate:
+    script: &quot;scripts/generate-content-html.cjs&quot;
+    format: &quot;html&quot;
+    description: &quot;Generate HTML from markdown&quot;</code></pre>
+<p><strong>Checksum mismatch:</strong></p>
+<pre><code>⚠️  Warning: Source file has changed since generation
+
+Source: document.md
+Generated: document.html
+Expected checksum: sha256:abc123...
+Current checksum:  sha256:def456...
+
+Run generation script to update output files.</code></pre>
+<h3 id="key-takeaways">Key Takeaways</h3>
+<ol type="1">
+<li><strong>Mandatory mx.generate</strong> prevents opaque files from
+entering the system</li>
+<li><strong>SHA-256 checksums</strong> enable automated integrity
+verification</li>
+<li><strong>Transformation chains</strong> track multi-stage generation
+workflows</li>
+<li><strong>Pass-through transparency</strong> ensures every file can be
+independently regenerated</li>
+<li><strong>MX sidecar files</strong> preserve provenance for formats
+that don't support metadata</li>
+<li><strong>Hybrid storage</strong> uses appropriate metadata embedding
+for each format</li>
+</ol>
+<p>This system transforms generation from "hidden build script magic" to
+"explicit, verifiable, agent-friendly provenance."</p>
+<h2 id="wcag-2.1-aa-compliance">WCAG 2.1 AA Compliance</h2>
+<h3 id="contrast-requirements">Contrast Requirements</h3>
+<p>All blog styles must meet WCAG 2.1 AA contrast ratios:</p>
+<p><strong>Normal text (&lt; 18pt):</strong> 4.5:1 minimum</p>
+<ul>
+<li>Body text: #1a1a1a on #ffffff (16.7:1) ✓</li>
+<li>Link text: #0066cc on #ffffff (7.3:1) ✓</li>
+<li>Code text: #1a1a1a on #f5f5f5 (14.5:1) ✓</li>
+</ul>
+<p><strong>Large text (≥ 18pt or ≥ 14pt bold):</strong> 3:1 minimum</p>
+<ul>
+<li>Headings: #000000 on #ffffff (21:1) ✓</li>
+</ul>
+<p><strong>UI components and graphics:</strong> 3:1 minimum</p>
+<ul>
+<li>Navigation borders: #666666 on #ffffff (5.7:1) ✓</li>
+<li>Button backgrounds: #0066cc on #ffffff (7.3:1) ✓</li>
+</ul>
+<h3 id="semantic-html-requirements">Semantic HTML Requirements</h3>
+<h4 id="heading-hierarchy">Heading Hierarchy</h4>
+<p>Headings must follow logical order without skipping levels:</p>
+<div class="sourceCode" id="cb49" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ✓ CORRECT --&gt;</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Blog Post Title<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Major Section<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Subsection<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Another Subsection<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Another Major Section<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ✗ WRONG: Skips from H1 to H3 --&gt;</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Blog Post Title<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Subsection<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span></code></pre></div>
+<h4 id="aria-landmarks">ARIA Landmarks</h4>
+<p>Use semantic HTML5 elements and ARIA roles for navigation:</p>
+<div class="sourceCode" id="cb50" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">header</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;banner&quot;</span><span class="dt">&gt;</span>...<span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">nav</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;navigation&quot;</span><span class="ot"> aria-label</span><span class="op">=</span><span class="st">&quot;Table of Contents&quot;</span><span class="dt">&gt;</span>...<span class="dt">&lt;/</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">main</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;main&quot;</span><span class="dt">&gt;</span>...<span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">footer</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;contentinfo&quot;</span><span class="dt">&gt;</span>...<span class="dt">&lt;/</span><span class="kw">footer</span><span class="dt">&gt;</span></span></code></pre></div>
+<h4 id="link-purpose">Link Purpose</h4>
+<p>All links must have clear purpose from link text alone:</p>
+<div class="sourceCode" id="cb51" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ✓ CORRECT: Purpose clear from text --&gt;</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/appendix-d.html&quot;</span><span class="dt">&gt;</span>Appendix D: AI-Friendly HTML Guide<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ✗ WRONG: &quot;Click here&quot; is meaningless --&gt;</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/appendix-d.html&quot;</span><span class="dt">&gt;</span>Click here<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span> for the AI-Friendly HTML Guide</span></code></pre></div>
+<h4 id="image-alt-text">Image Alt Text</h4>
+<p>All images must have descriptive alt attributes:</p>
+<div class="sourceCode" id="cb52" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ✓ CORRECT: Describes diagram content --&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;workflow-diagram.svg&quot;</span><span class="ot"> alt</span><span class="op">=</span><span class="st">&quot;Five-stage workflow from draft to publication showing state transitions and validation checkpoints&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ✗ WRONG: Generic or missing alt text --&gt;</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;workflow-diagram.svg&quot;</span><span class="ot"> alt</span><span class="op">=</span><span class="st">&quot;diagram&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<h3 id="validation-process">Validation Process</h3>
+<p>After HTML generation, validate compliance:</p>
+<h4 id="html-validation">1. HTML Validation</h4>
+<div class="sourceCode" id="cb53" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> html-validate outputs/protocols/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>.html</span></code></pre></div>
+<p>Fix all errors before proceeding. Common issues:</p>
+<ul>
+<li>Unclosed tags</li>
+<li>Unencoded special characters (<code>&amp;</code> must be
+<code>&amp;amp;</code>)</li>
+<li>Invalid nesting (e.g., <code>&lt;p&gt;</code> inside
+<code>&lt;p&gt;</code>)</li>
+</ul>
+<h4 id="svgxml-validation">2. SVG/XML Validation</h4>
+<div class="sourceCode" id="cb54" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> svg <span class="kw">in</span> outputs/protocols/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>-<span class="pp">*</span>.svg<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">xmllint</span> <span class="at">--noout</span> <span class="st">&quot;</span><span class="va">$svg</span><span class="st">&quot;</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;✗ </span><span class="va">$svg</span><span class="st"> has XML errors&quot;</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>Fix XML entity errors:</p>
+<ul>
+<li>Unencoded <code>&amp;</code> → <code>&amp;amp;</code></li>
+<li>Unencoded <code>&lt;</code> → <code>&amp;lt;</code></li>
+<li>Unencoded <code>&gt;</code> → <code>&amp;gt;</code></li>
+</ul>
+<h4 id="accessibility-scanning">3. Accessibility Scanning</h4>
+<p>Use automated tools to catch common issues:</p>
+<div class="sourceCode" id="cb55" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pa11y scan</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> pa11y outputs/protocols/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>.html</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lighthouse accessibility audit</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> lighthouse outputs/protocols/blogs/mx/<span class="pp">[</span><span class="ss">filename</span><span class="pp">]</span>.html <span class="at">--only-categories</span><span class="op">=</span>accessibility</span></code></pre></div>
+<p>Address all errors and warnings. Common findings:</p>
+<ul>
+<li>Missing alt text on images</li>
+<li>Insufficient colour contrast</li>
+<li>Skipped heading levels</li>
+<li>Missing ARIA labels on custom controls</li>
+</ul>
+<h4 id="manual-screen-reader-testing">4. Manual Screen Reader
+Testing</h4>
+<p>Automated tools catch ~40% of accessibility issues. Manual testing
+with real screen readers is essential:</p>
+<p><strong>macOS:</strong> VoiceOver (Cmd+F5) <strong>Windows:</strong>
+NVDA (free) or JAWS <strong>Linux:</strong> Orca</p>
+<p>Test navigation:</p>
+<ul>
+<li>Can you navigate by headings?</li>
+<li>Do links announce clear purposes?</li>
+<li>Are images described sufficiently?</li>
+<li>Is the table of contents accessible?</li>
+</ul>
+<h2 id="practical-implementation">Practical Implementation</h2>
+<h3 id="integrating-with-existing-tools">Integrating with Existing
+Tools</h3>
+<p>The blog workflow integrates with standard publishing tools through
+file-based interfaces:</p>
+<p><strong>Static site generators (Hugo, Jekyll, Gatsby):</strong></p>
+<ul>
+<li>Place generated HTML in appropriate directory</li>
+<li>Use frontmatter metadata for site navigation</li>
+<li>Override default templates if needed</li>
+</ul>
+<p><strong>Content management systems (WordPress, Ghost):</strong></p>
+<ul>
+<li>Import HTML as custom post type</li>
+<li>Map frontmatter to post metadata fields</li>
+<li>Preserve canonical URLs and Schema.org markup</li>
+</ul>
+<p><strong>Custom publishing pipelines:</strong></p>
+<ul>
+<li>Read generated HTML from
+<code>outputs/protocols/blogs/mx/</code></li>
+<li>Parse meta tags for deployment routing</li>
+<li>Respect blog-state for workflow gates</li>
+</ul>
+<h3 id="extending-the-workflow">Extending the Workflow</h3>
+<p>Add custom generation steps by modifying
+<code>scripts/generate-content-html.cjs</code>:</p>
+<p><strong>Add custom metadata fields:</strong></p>
+<div class="sourceCode" id="cb56" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">// In frontmatter parsing section</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (data<span class="op">.</span><span class="at">seriesName</span>) {</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Add series navigation</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Link to other posts in series</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Generate additional assets:</strong></p>
+<div class="sourceCode" id="cb57" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">// After SVG social card generation</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">generateThumbnail</span>(filename)<span class="op">;</span>  <span class="co">// Create thumbnail image</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">generateAMP</span>(html<span class="op">,</span> filename)<span class="op">;</span>  <span class="co">// Create AMP version</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">generatePDF</span>(html<span class="op">,</span> filename)<span class="op">;</span>  <span class="co">// Create PDF version</span></span></code></pre></div>
+<p><strong>Integrate with deployment:</strong></p>
+<div class="sourceCode" id="cb58" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">// After file generation</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (data<span class="op">.</span><span class="at">blogState</span> <span class="op">===</span> <span class="st">&#39;ready-for-publication&#39;</span>) {</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">deployToProduction</span>(filename)<span class="op">;</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">notifyTeam</span>(data<span class="op">.</span><span class="at">title</span>)<span class="op">;</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="related-documentation">Related Documentation</h2>
+<p><strong>Complete Metadata Schema:</strong> Blog Metadata Schema and
+State Tracking</p>
+<p><strong>Repository Architecture:</strong> doc-architecture.md</p>
+<p><strong>AI-Friendly HTML Patterns:</strong> Appendix D — AI-Friendly
+HTML Guide</p>
+<p><strong>WCAG 2.1 Guidelines:</strong> <a
+href="https://www.w3.org/WAI/WCAG21/quickref/"
+class="uri">https://www.w3.org/WAI/WCAG21/quickref/</a></p>
+<p><strong>Schema.org Vocabulary:</strong> <a
+href="https://schema.org/BlogPosting"
+class="uri">https://schema.org/BlogPosting</a></p>
+<h2 id="key-takeaways-1">Key Takeaways</h2>
+<p>This blog workflow demonstrates Machine Experience principles in
+practice:</p>
+<ol type="1">
+<li><p><strong>Metadata-driven:</strong> Content state and structure
+encoded explicitly, readable by both humans and machines</p></li>
+<li><p><strong>State-explicit:</strong> Every file knows where it is in
+the lifecycle through machine-parseable fields</p></li>
+<li><p><strong>Semantically structured:</strong> HTML uses proper
+heading hierarchy, ARIA landmarks, and Schema.org markup</p></li>
+<li><p><strong>WCAG 2.1 AA compliant:</strong> All colour contrasts meet
+minimum ratios, semantic HTML aids screen readers</p></li>
+<li><p><strong>File organisation:</strong> Clear separation between
+draft (docs/) and generated (outputs/) content</p></li>
+<li><p><strong>Automated validation:</strong> HTML, XML, and
+accessibility checks prevent deployment of broken content</p></li>
+<li><p><strong>Human and machine readable:</strong> Same metadata serves
+content creators, build tools, search engines, and AI agents</p></li>
+</ol>
+<p>The workflow inverts the traditional "content first, metadata later"
+approach. By requiring metadata before generation, it ensures
+machine-readable structure from the start — not as an afterthought, but
+as a fundamental property of the content itself.</p>
+<p>This is Machine Experience: designing systems where explicit
+structure, semantic markup, and machine-parseable metadata enable both
+automated processing and human understanding.</p>
+</div>
+<hr>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+
+  <!-- Floating home button (top-left) -->
+  <a href="index.html" class="floating-home-button" aria-label="Back to Home">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 0L0 8h3v8h10V8h3L8 0zm0 2.5L13.5 8H11v6H5V8H2.5L8 2.5z"/>
+    </svg>
+    Home
+  </a>
+  <!-- Floating back to top button (bottom-left) -->
+  <a href="#main" class="floating-top-button" aria-label="Back to Top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 3.5l-5.5 5.5L4 10.5l3-3v8.5h2V7.5l3 3L13.5 9z"/>
+    </svg>
+    Top
+  </a>
+
+  <script>
+    // Add copy buttons to all code blocks
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find both wrapped code blocks (div.sourceCode) and standalone pre blocks
+      const wrappedBlocks = document.querySelectorAll('div.sourceCode');
+      const standaloneBlocks = document.querySelectorAll('pre[data-role="code-block"]:not(.sourceCode)');
+
+      // Process wrapped code blocks (HTML, JavaScript, etc.)
+      wrappedBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          let text = '';
+          const spans = codeElement.querySelectorAll('span[id^="cb"]');
+          spans.forEach(function(span) {
+            const nodes = Array.from(span.childNodes);
+            nodes.forEach(function(node) {
+              if (node.nodeType === Node.TEXT_NODE) {
+                text += node.textContent;
+              } else if (node.nodeName !== 'A') {
+                text += node.textContent;
+              }
+            });
+          });
+          return text;
+        });
+      });
+
+      // Process standalone pre blocks (text, robots.txt, etc.)
+      standaloneBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          return codeElement ? codeElement.textContent : block.textContent;
+        });
+      });
+
+      // Helper function to add copy button to any block
+      function addCopyButton(block, extractTextFn) {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
+
+        button.addEventListener('click', function() {
+          const text = extractTextFn(block);
+
+          navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied';
+            button.classList.add('copied');
+            setTimeout(function() {
+              button.textContent = 'Copy';
+              button.classList.remove('copied');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Failed to copy:', err);
+            button.textContent = 'Failed';
+            setTimeout(function() {
+              button.textContent = 'Copy';
+            }, 2000);
+          });
+        });
+
+        block.insertBefore(button, block.firstChild);
+      }
+    });
+  </script>
+</body>
+</html>

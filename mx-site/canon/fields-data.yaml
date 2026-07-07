@@ -1,0 +1,2203 @@
+title: MX Field Dictionary — Open Standard (Core)
+version: '5.4'
+created: 2026-02-13T00:00:00.000Z
+modified: '2026-07-01'
+author: The Gathering
+description: >-
+  Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
+  relationships, machine-readability infrastructure, folder metadata, cog contract, and non-YAML markup carriers. For
+  carrier-format schemas (code/database/media) see fields-data-carriers.yaml. For CogNovaMX vendor extensions see
+  cognovamx-fields.yaml.
+mx:
+  status: active
+  license: MIT
+  category: standard
+  partOf: mx-the-gathering
+  tags:
+    - fields
+    - metadata
+    - yaml
+    - frontmatter
+    - dictionary
+    - vocabulary
+    - standard
+    - open
+  audience:
+    - machines
+    - humans
+  contentType: field-dictionary
+  runbook: >-
+    This is the universal metadata registry. Parse the fields array for every canonical field with name, type,
+    definition, status, and profile. The blockTypes array defines block types and their fields. The carrierFormats array
+    maps metadata to file types. The overlap-resolution section declares which field wins when two seem similar. The
+    namespace-policy section defines three levels: standard (no prefix), MX-public (x-mx-), and MX-private (x-mx-p-).
+    The prefix IS the policy.
+  namespacePolicy:
+    description: >-
+      Three-level attribute namespace. Standard fields belong to The Gathering open standard. Extensions are namespaced
+      to prevent pollution.
+    adr: mx-canon/mx-maxine-lives/thinking/decisions/2026-02-14-attribute-namespace-policy.cog.md
+    levels:
+      - level: standard
+        prefix: ''
+        owner: The Gathering
+        visibility: Universal — all implementations use these fields
+        example: title, author, created, version, tags
+        rule: No prefix. Defined by the open standard. All implementations honour them.
+      - level: mx-public
+        prefix: x-mx-
+        owner: CogNovaMX
+        visibility: Visible in published cogs. Implementation extension, not the open standard.
+        example: x-mx-audience-segment, x-mx-pipeline-stage
+        rule: x- signals extension. mx- signals whose. Visible to anyone reading the cog.
+      - level: mx-private
+        prefix: x-mx-p-
+        owner: CogNovaMX
+        visibility: Obfuscated. Only $MX_HOME registry holders can decode the value.
+        example: x-mx-p-*
+        rule: >-
+          p- signals private. Values are hashed, encoded, or tokenised. The decode registry lives in $MX_HOME. Field
+          names and their meanings are not documented publicly.
+    convention: >-
+      x- follows HTTP extension header convention. mx- identifies CogNovaMX. p- identifies private/obfuscated. The
+      prefix is the policy — no additional visibility markers needed.
+    namingConvention:
+      rule: All field names use camelCase. Aligns with Schema.org and Dublin Core vocabulary conventions.
+      ndr: mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md
+      date: 2026-02-16T00:00:00.000Z
+      examples:
+        correct:
+          - readingLevel
+          - buildsOn
+          - blogState
+          - contentType
+          - partOf
+        banned-snake:
+          - reading_level
+          - builds_on
+          - blog_state
+        banned-kebab:
+          - reading-level
+          - builds-on
+          - blog-state
+        unchanged:
+          - title
+          - author
+          - created
+          - version
+          - tags
+          - name
+      enforcement:
+        audit: npm run audit:metadata — reports violations in Section 9
+        validator: node scripts/mx-validator.js — warns on new violations
+      rationale: >-
+        MX metadata is a vocabulary (like Schema.org), not markup (like HTML attributes). Vocabularies use camelCase.
+        YAML has no preference — the convention comes from the consuming ecosystem.
+    spelling-neutrality:
+      rule: >-
+        Prefer spelling-neutral field names. Where US/UK spelling differs, use an abbreviation or synonym that avoids
+        the conflict.
+      ndr: mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-spelling-neutrality.cog.md
+      date: 2026-02-16T00:00:00.000Z
+      strategy:
+        - 'Abbreviate: org (not organisation/organization). W3C Organization Ontology precedent.'
+        - 'Follow standards: license (SPDX universal). Not licence.'
+        - 'Use neutral synonyms: imagesAudited (not imagesAnalysed/imagesAnalyzed).'
+      exceptions:
+        - license — SPDX standard spelling. Universal across npm, GitHub, every package manager.
+      rationale: >-
+        MX is a global standard. Spelling-neutral names prevent regional debates and follow the Schema.org principle:
+        when a neutral term is available, use it.
+    context-specific-naming:
+      rule: >-
+        Context determines syntax. YAML frontmatter uses camelCase. HTML/JS/CSS contexts use kebab-case with mx: prefix.
+        Same field, different representation.
+      alignment: mx-canon/mx-maxine-lives/deliverables/mx-standards-alignment.cog.md
+      contexts:
+        yaml:
+          syntax: camelCase
+          example: 'buildsOn: [cog-unified-spec]'
+          rationale: Schema.org precedent. YAML is a data format — use the vocabulary's native naming.
+          enforcement: mandatory
+        html:
+          syntax: 'kebab-case with mx: prefix'
+          example: <meta name='mx:content-type' content='field-dictionary'>
+          rationale: HTML attribute convention. Follows data-* pattern (data-user-name in HTML, dataset.userName in JS).
+          enforcement: mandatory
+        jsdoc:
+          syntax: 'kebab-case with @mx: tag'
+          example: '@mx:runtime node'
+          rationale: 'JSDoc at-rule convention. @param, @returns, @mx: all follow same pattern.'
+          enforcement: flexible (kebab preferred, validated by linter not spec)
+        css:
+          syntax: 'kebab-case with @mx: comment'
+          example: /* @mx:type utility */
+          rationale: 'CSS at-rule convention. @media, @supports, @mx: all use hyphens.'
+          enforcement: flexible (kebab preferred, validated by linter not spec)
+        shell:
+          syntax: 'camelCase in # key: value lines'
+          example: '# buildsOn: [script-helper]'
+          rationale: 'Comment-block frontmatter strips # prefix to produce valid YAML. Same naming as YAML context.'
+          enforcement: mandatory
+        xmp:
+          syntax: 'mx: namespace prefix'
+          example: mx:contentType, mx:audience
+          rationale: XMP custom namespace convention. Registered namespace URI for MX metadata.
+          enforcement: mandatory
+        sidecar:
+          syntax: camelCase in YAML (same as yaml context)
+          example: '{ mx: { contentType: image, aiTraining: prohibited } }'
+          rationale: Sidecar files are standard YAML. Same naming rules as YAML frontmatter.
+          enforcement: mandatory
+        sql-comment:
+          syntax: camelCase in -- @mx comment blocks
+          example: |-
+            -- @mx
+            -- purpose: User account storage
+            -- @mx:end
+          rationale: SQL comment block stripped of -- prefix produces valid YAML.
+          enforcement: mandatory
+      namespace-equivalence:
+        description: >-
+          The mx: object in YAML is equivalent to mx:* prefix in HTML/JS/CSS. Both represent The Gathering's standard
+          namespace.
+        yaml-form: |
+          mx:
+            contentType: field-dictionary
+            runbook: "Parse the fields array"
+        html-form: |
+          <meta name="mx:content-type" content="field-dictionary">
+          <meta name="mx:runbook" content="Parse the fields array">
+        note: >-
+          The mx: namespace belongs to The Gathering (open standard), not CogNovaMX. See governance section in
+          mx-standards-alignment.cog.md.
+      precedents:
+        - standard: Schema.org
+          pattern: camelCase properties (datePublished, servesCuisine)
+          mx-applies: YAML frontmatter fields
+        - standard: Dublin Core
+          pattern: 'dc: object in YAML, <meta name=''dc:title''> in HTML'
+          mx-applies: 'mx: object in YAML, <meta name=''mx:name''> in HTML'
+        - standard: Open Graph
+          pattern: 'og: object in frontmatter, <meta property=''og:title''> in HTML'
+          mx-applies: Same pattern — context determines syntax
+        - standard: HTML dataset API
+          pattern: data-user-name (HTML) → dataset.userName (JS)
+          mx-applies: mx:content-type (HTML) → contentType (YAML under mx:)
+      enforcement-levels:
+        mandatory:
+          - 'YAML frontmatter: camelCase required'
+          - 'HTML meta tags: kebab-case required'
+        flexible:
+          - 'JSDoc comments: kebab-case preferred, enforce via ESLint'
+          - 'CSS comments: kebab-case preferred, enforce via stylelint'
+        rationale: Strict where machines parse (YAML, HTML). Flexible where humans read (code comments).
+  sources:
+    merged-from:
+      - path: datalake/knowledge/reference/mx-metadata-standards.md
+        contribution: Field definitions, validation rules, audience/purpose semantics
+        status: absorbed — file removed 2026-03-03
+      - path: datalake/knowledge/reference/frontmatter-field-audit.md
+        contribution: Usage counts across 1,065 files, naming inconsistencies, profile groupings
+        status: absorbed — file removed 2026-03-03
+      - path: datalake/knowledge/specifications/index-of-yaml-attributes-used.md
+        contribution: Auto-generated attribute index from .mx.yaml.md folder metadata files
+      - path: mx-canon/mx-the-gathering/field-dictionary-guide.cog.md
+        contribution: How to add new fields procedure, vendor extension guidance
+        date: 2026-03-01T00:00:00.000Z
+        status: absorbed — file removed 2026-03-03
+      - path: mx-canon/ssot/writing-guides/mx-yaml-md-guide.md
+        contribution: Folder metadata inheritance model, identity vs inheritable fields, allowed values
+        date: 2026-03-01T00:00:00.000Z
+      - path: explain.md
+        contribution: Metadata architecture overview — two-zone model, inheritance, profiles, namespace policy
+        date: 2026-03-03T00:00:00.000Z
+        status: absorbed — file removed 2026-03-03
+      - path: mx-canon/mx-the-gathering/specifications/mx-code-metadata-spec.md
+        contribution: >-
+          Code metadata — repository, file, function, class, inline annotations, dependency, environment, test, API
+          fields and carrier formats
+        date: 2026-03-03T00:00:00.000Z
+      - path: mx-canon/mx-the-gathering/specifications/mx-media-metadata-spec.md
+        contribution: >-
+          Media metadata — sidecar files, embedded metadata alignment, image, video, audio, document, rights,
+          collections fields and carrier formats
+        date: 2026-03-03T00:00:00.000Z
+      - path: mx-canon/mx-the-gathering/specifications/mx-database-metadata-spec.md
+        contribution: >-
+          Database metadata — database, schema, table, column, relationship, index, view, query, procedure, dictionary,
+          classification fields
+        date: 2026-03-03T00:00:00.000Z
+  defaultsPolicy:
+    description: >-
+      Two-zone frontmatter model. Zone 1 (top-level): title, description, author, created, modified, version — always
+      explicit, never inside mx: block. Zone 2 (mx: block): all other fields. Optional Zone 2 fields with defined
+      defaults may be omitted; tools treat absent optional fields as their documented default value.
+    rule: >-
+      Only optional fields may have defaults. If an optional field's value matches its default, the field may be omitted
+      to reduce frontmatter size. Tools must handle absent optional fields by applying the documented default.
+    zones:
+      top-level:
+        fields:
+          - title
+          - description
+          - author
+          - created
+          - modified
+          - version
+        rule: Always explicit. These are document identity fields and never move under mx:.
+      mx:
+        fields: >-
+          All other MX-operational fields (status, contentType, category, tags, audience, runbook, execute, ai* fields,
+          etc.)
+        rule: Optional fields with documented defaults may be omitted when matching their default value.
+    always-explicit:
+      - field: title
+        requirement: required
+        reason: Identity — every document needs a name
+      - field: description
+        requirement: required
+        reason: Discovery — search engines and AI agents need this
+      - field: author
+        requirement: required
+        reason: Attribution — immutable provenance
+      - field: created
+        requirement: required
+        reason: Timestamp — immutable creation date
+      - field: modified
+        requirement: required
+        reason: Timestamp — last modification date
+      - field: version
+        requirement: recommended
+        reason: Version tracking — explicit is safer than assumed
+      - field: status
+        requirement: recommended
+        reason: Lifecycle — always declare your document state
+    fields-with-defaults:
+      - field: confidential
+        default: false
+        absent-means: Document is public
+      - field: aiAssistance
+        default: welcome
+        absent-means: AI agents are welcome to assist
+      - field: aiEditable
+        default: false
+        absent-means: AI agents should not edit this content
+      - field: aiGenerationAllowed
+        default: true
+        absent-means: AI generation is permitted
+      - field: aiGenerationReviewRequired
+        default: true
+        absent-means: AI-generated content requires human review
+  contentTypeToProfile:
+    info-doc: core
+    field-dictionary: core
+    specification: core
+    briefing-doc: core
+    guide: core
+    action-doc: cog
+    cog: cog
+    eds-block: cog
+    certificate-of-genuineness: cog
+    book-chapter: book
+    book-appendix: book
+    blog-post: blog
+    blog: blog
+    contact: contact
+    direct-message: contact
+    personal-message: contact
+    folder-metadata: folder
+    report: report
+    session-report: report
+    audit: audit
+    event: event
+    migration: migration
+    script: script
+    error-page: core
+  validationPolicy:
+    descriptionMaxLength: 160
+    dateFields:
+      - created
+      - modified
+      - publicationDate
+      - lastContact
+      - movedDate
+      - expires
+      - maintainedDate
+    scoreFields:
+      - performanceScore
+      - llmSuitabilityScore
+      - seoScore
+    lenientEnums:
+      - field: blocks
+        reason: >-
+          Many cogs use `blocks:` as free-text prose description. The spec reserves it for block-type declarations.
+          Clean up cogs, then remove this lenient entry.
+    excludeFromTopLevel:
+      rule: 'Auto: any field whose name contains ''.'''
+  deprecations:
+    - old: name
+      replacement: title
+      notes: Use `title` for document identity; `name` is reserved for nested field definitions.
+    - old: confidentiality
+      replacement: confidential
+      notes: Noun form confused readers; boolean flag is clearer.
+    - old: inherit
+      replacement: inherits
+      notes: Plural form matches the shape (a list of inheritance sources).
+    - old: inheritFrom
+      replacement: inherits
+    - old: issued
+      replacement: publicationDate
+      notes: Explicit semantic name.
+    - old: venue
+      replacement: location
+      notes: Generic term covers more cases.
+    - old: prose-source
+      replacement: inherits
+    - old: proseSource
+      replacement: inherits
+    - old: lastVerified
+      replacement: maintainedDate
+    - old: verifiedBy
+      replacement: maintainedBy
+  blockTypes:
+    - name: prose
+      implicit: true
+      description: Human-readable narrative. The markdown body of every cog. Never declared in YAML — it is implicit.
+    - name: essence
+      implicit: false
+      description: Binary content (images, PDFs, audio, video, compiled assets). Encoded as base64 or a pointer.
+      sizeRule: 2kb or smaller = embedded base64. Over 2kb = pointer with checksum.
+      fields:
+        - name: type
+          type: string
+          required: true
+          description: MIME type (e.g., image/png, application/pdf, audio/mpeg)
+        - name: encoding
+          type: string
+          required: true
+          validValues:
+            - base64
+            - pointer
+          description: How binary content is stored
+        - name: size
+          type: number
+          required: true
+          description: Content size in bytes
+        - name: content
+          type: string
+          required: false
+          description: Base64-encoded content (when encoding is base64)
+        - name: location
+          type: string
+          required: false
+          description: File path to binary content (when encoding is pointer)
+        - name: checksum
+          type: string
+          required: false
+          description: SHA-256 checksum for verification (when encoding is pointer)
+    - name: definition
+      implicit: false
+      description: Standards conformance declarations. The cog's backward-compatibility statement and contract with readers.
+      hierarchical: true
+      hierarchyNote: Document-level definition applies to all blocks. Per-block definition overrides for that block only.
+      fields:
+        - name: standards
+          type: array
+          required: true
+          description: Array of conformance declarations
+        - name: standards[].name
+          type: string
+          required: true
+          description: Standard name (e.g., The Gathering, Schema.org, WebMCP)
+        - name: standards[].version
+          type: string
+          required: true
+          description: Standard version (semantic versioning)
+        - name: standards[].scope
+          type: string
+          required: true
+          description: What this standard applies to (e.g., cog metadata format, product metadata)
+    - name: action
+      implicit: false
+      description: >-
+        Executable instructions. Presence of an execute object makes a cog into an action-doc. See execute fields in the
+        fields array.
+      note: The action block IS the execute object in YAML frontmatter. Documented as execute.* fields in this dictionary.
+    - name: code
+      implicit: false
+      description: >-
+        Source code embedded in the cog. Machine-addressable — a reader can extract and execute it. Unlike fenced code
+        blocks in prose (display only).
+      fields:
+        - name: language
+          type: string
+          required: true
+          description: Programming language (e.g., javascript, python, bash)
+        - name: content
+          type: string
+          required: true
+          description: Source code content
+        - name: purpose
+          type: string
+          required: false
+          description: What this code does
+    - name: html
+      implicit: false
+      description: >-
+        HTML content. May reference WebMCP for embedded routines. Can carry interactive widgets, forms, or
+        visualisations.
+      interBlockAccess: >-
+        An HTML block using WebMCP can access all other blocks in the cog — reading essence content, querying code
+        blocks, rendering provenance. Governed by security block and SOP policy.
+      fields:
+        - name: content
+          type: string
+          required: true
+          description: HTML markup
+        - name: standards
+          type: array
+          required: false
+          description: Conformance declarations (e.g., WebMCP)
+    - name: security
+      implicit: false
+      description: >-
+        Trust and execution policy. Readers consult the security block to determine whether to execute action blocks or
+        render HTML blocks.
+      fields:
+        - name: attestation
+          type: string
+          required: false
+          validValues:
+            - required
+            - optional
+          description: Whether cryptographic attestation is required
+        - name: execution
+          type: string
+          required: false
+          validValues:
+            - sandboxed
+            - unrestricted
+          description: Execution environment constraint
+        - name: trustLevel
+          type: number
+          required: false
+          description: Numeric trust tier (1-3)
+        - name: policy
+          type: string
+          required: false
+          description: Free text policy statement
+        - name: riskLevel
+          type: string
+          required: false
+          validValues:
+            - low
+            - medium
+            - high
+            - critical
+          description: >-
+            Execution danger classification. Distinct from trustLevel (provenance quality). low = read-only, no side
+            effects. medium = writes files or calls APIs. high = modifies system state, handles credentials. critical =
+            destructive operations, financial transactions — SHOULD have a guardrail gate.
+        - name: scope
+          type: object
+          required: false
+          description: >-
+            Runtime scope constraints. Declares what the cog is permitted to touch when it executes. Omission means
+            unspecified (reader applies its own policy), not unrestricted.
+          fields:
+            - name: filesystem
+              type: array
+              required: false
+              description: Glob patterns of allowed filesystem paths (e.g. [scripts/**, mx-outputs/pdf/**])
+            - name: network
+              type: string
+              required: false
+              validValues:
+                - none
+                - local
+                - external
+              description: Network access permitted during execution
+            - name: dataBoundary
+              type: string
+              required: false
+              validValues:
+                - user
+                - team
+                - organisation
+              description: Whose data the cog may access
+            - name: maxRecords
+              type: number
+              required: false
+              description: Maximum records per operation — prevents bulk extraction
+            - name: allowedOperations
+              type: array
+              required: false
+              validValues:
+                - read
+                - write
+                - create
+                - delete
+                - execute
+              description: Permitted filesystem operations
+        - name: audit
+          type: object
+          required: false
+          description: Audit trail requirements. Declares what should be logged when the cog executes.
+          fields:
+            - name: logLevel
+              type: string
+              required: false
+              validValues:
+                - full
+                - standard
+                - minimal
+                - none
+              description: Granularity of audit logging
+            - name: retention
+              type: string
+              required: false
+              description: How long to retain audit records (e.g. 30d, 90d, 1y, permanent)
+            - name: includeInputs
+              type: boolean
+              required: false
+              description: Whether to log input parameters
+            - name: includeOutputs
+              type: boolean
+              required: false
+              description: Whether to log output results
+        - name: dataProtection
+          type: object
+          required: false
+          description: Data protection policy for cog outputs. Declares sensitivity classification and redaction rules.
+          fields:
+            - name: outputClassification
+              type: string
+              required: false
+              validValues:
+                - public
+                - internal
+                - confidential
+                - restricted
+              description: Sensitivity classification of the cog's outputs
+            - name: prohibitedFields
+              type: array
+              required: false
+              description: Field names that must never appear in outputs (e.g. [ssn, creditCard, apiKey, password])
+            - name: redaction
+              type: string
+              required: false
+              validValues:
+                - auto
+                - manual
+                - none
+              description: Redaction mode for sensitive content in outputs
+            - name: piiHandling
+              type: string
+              required: false
+              validValues:
+                - mask
+                - hash
+                - omit
+                - pass-through
+              description: How personally identifiable information is treated in outputs
+        - name: rateLimit
+          type: object
+          required: false
+          description: Rate limiting constraints. Prevents runaway execution and abuse.
+          fields:
+            - name: maxCalls
+              type: number
+              required: false
+              description: Maximum number of invocations within the time window
+            - name: window
+              type: string
+              required: false
+              description: Time window for rate limiting (e.g. 1h, 1d, 1w)
+            - name: cooldown
+              type: string
+              required: false
+              description: Minimum gap between consecutive calls (e.g. 5m, 1h)
+            - name: scope
+              type: string
+              required: false
+              validValues:
+                - perUser
+                - perAgent
+                - global
+              description: Scope of rate limit tracking
+        - name: allowedRoles
+          type: array
+          required: false
+          description: >-
+            Roles permitted to execute this cog. Bridges the guardrail pattern — declares which roles the gate should
+            verify.
+    - name: sop
+      implicit: false
+      virtual: true
+      description: >-
+        Standard Operating Procedures. Merged at read-time from the uber doc (UBER.cog.md). Does not exist in the cog
+        file on disk.
+      fields:
+        - name: scope
+          type: string
+          required: true
+          description: What this SOP applies to (all-cogs, html-blocks, domain-specific)
+        - name: instructions
+          type: string
+          required: true
+          description: Procedure instructions (multi-line text)
+    - name: provenance
+      implicit: false
+      description: Origin and lineage — where the content came from, how it was derived, what transformations were applied.
+      fields:
+        - name: origin
+          type: string
+          required: false
+          description: URL of original source
+        - name: derivedFrom
+          type: string
+          required: false
+          description: Source cog reference
+        - name: method
+          type: string
+          required: false
+          description: Transformation description
+        - name: date
+          type: string
+          required: false
+          description: Derivation date (ISO 8601)
+    - name: version
+      implicit: false
+      description: Version history and changelog within the cog. Complements the top-level version field with detailed history.
+      fields:
+        - name: history
+          type: array
+          required: true
+          description: Array of version entries
+        - name: history[].version
+          type: string
+          required: true
+          description: Version number (semver)
+        - name: history[].date
+          type: string
+          required: true
+          description: Release date (ISO 8601)
+        - name: history[].changes
+          type: string
+          required: true
+          description: Description of changes
+  carrierFormats:
+    - format: .cog.md
+      metadataLocation: YAML frontmatter between --- delimiters
+      mxIdentity: Standard cog fields in YAML
+      nativeBlocks: Markdown body = prose block
+      parsingRule: Standard YAML parser reads frontmatter
+      backwardCompatible: true
+      narrativeSection: 'Carrier: YAML Frontmatter'
+    - format: .cog.html
+      metadataLocation: <meta> tags in <head>
+      mxIdentity: <meta name="mx:*"> tags, data-mx-* attributes on elements
+      nativeBlocks: Schema.org JSON-LD = definition, <meta name='description'> = prose excerpt, <main> = essence
+      parsingRule: 'Parse <meta> tags; strip mx: prefix; apply kebab-to-camelCase conversion'
+      backwardCompatible: true
+      note: Browsers ignore unknown <meta> names. Can embed <style> and <script> with their own native metadata.
+      pointerPattern: <link rel="mx" href="page.cog.md">
+      narrativeSection: 'Carrier: HTML'
+    - format: .cog.js
+      metadataLocation: JSDoc comment block (/** ... */)
+      mxIdentity: '@mx: tags in JSDoc'
+      nativeBlocks: '@description = prose, @param/@returns = definition, function bodies = code (implicit)'
+      parsingRule: 'Parse JSDoc block; extract @mx: prefixed tags; value follows tag on same line'
+      backwardCompatible: true
+      note: JavaScript runtimes ignore JSDoc comments
+      narrativeSection: 'Carrier: JavaScript/TypeScript'
+    - format: .cog.css
+      metadataLocation: /* */ comment block at file top
+      mxIdentity: '@mx: tags in CSS comments'
+      nativeBlocks: File description = prose, :root custom properties = definition
+      parsingRule: 'Parse opening comment block; extract @mx: prefixed tags'
+      backwardCompatible: true
+      note: CSS processors ignore comment content
+      narrativeSection: 'Carrier: CSS'
+    - format: .cog.png/.cog.jpg
+      metadataLocation: EXIF/XMP metadata
+      mxIdentity: MX XMP fields in custom namespace
+      nativeBlocks: Existing EXIF = provenance
+      parsingRule: 'Read XMP; extract mx: namespace fields'
+      backwardCompatible: true
+      narrativeSection: 'Carrier: Images and Media'
+    - format: shell scripts
+      metadataLocation: '# --- comment block after shebang'
+      mxIdentity: 'Standard fields in # key: value lines'
+      nativeBlocks: Script body = code (implicit)
+      parsingRule: 'Strip leading # and one space from each line between # --- delimiters. Result is valid YAML.'
+      backwardCompatible: true
+      applicability: 'Any #-comment language: bash, python, ruby, perl, dockerfiles, YAML configs'
+      narrativeSection: 'Carrier: Shell Scripts'
+    - format: .mx.yaml (media sidecar)
+      metadataLocation: Standalone YAML sidecar file alongside media asset
+      mxIdentity: 'Standard YAML with mx: block'
+      nativeBlocks: Sidecar extends or overrides embedded metadata (EXIF/IPTC/XMP)
+      parsingRule: 'Standard YAML parser. File naming: {assetname}.mx.yaml for individual assets, _mx.yaml for directory defaults.'
+      backwardCompatible: true
+      narrativeSection: 'Carrier: Media Sidecar'
+    - format: mx.yaml (code repository)
+      metadataLocation: mx.yaml or .mx/config.yaml at repository root
+      mxIdentity: Standard YAML with project, context, stack, conventions, ai properties
+      nativeBlocks: Repository-level metadata inherited by all files
+      parsingRule: 'Standard YAML parser. Discovery order: mx.yaml, .mx/config.yaml, package.json[mx], pyproject.toml[tool.mx]'
+      backwardCompatible: true
+      narrativeSection: 'Carrier: Code Repository'
+    - format: database sidecars
+      metadataLocation: mx.database.yaml, {name}.schema.yaml, {name}.table.yaml, {name}.view.yaml, {name}.query.yaml
+      mxIdentity: Standard YAML describing database objects
+      nativeBlocks: Database hierarchy metadata
+      parsingRule: 'Standard YAML parser. Also supports inline SQL comments: -- @mx ... -- @mx:end'
+      backwardCompatible: true
+      narrativeSection: 'Carrier: Database Sidecar'
+  overlap-resolution:
+    - fields:
+        - tags
+        - keywords
+      winner: tags
+      reason: tags is canonical. Discovery keywords for AI and search.
+    - fields:
+        - words
+        - tags
+      overlap: false
+      reason: >-
+        Different concerns. words is a spell-checker dictionary list in ROUTING.cog.md concepts — it tells aspell which
+        terms are valid MX vocabulary. tags is for document discovery. A cog can have tags: [routing, agent] and the
+        routing concept can have words: [routing] — different purposes.
+    - fields:
+        - keyFields
+        - tags
+      overlap: false
+      reason: >-
+        Different concerns. keyFields is a ROUTING.cog.md route hint — it tells agents which YAML fields matter most
+        when reading files in that folder. tags is for discovery. keyFields says 'look at these fields', tags says 'find
+        me by these terms'.
+    - fields:
+        - audience
+        - audience.primary
+      winner: audience
+      reason: >-
+        audience is the canonical top-level field. audience.primary is a legacy namespace variant from folder metadata.
+        Use audience.
+    - fields:
+        - created
+        - date
+        - creation-date
+      winner: created
+      reason: created is canonical.
+    - fields:
+        - modified
+        - lastUpdated
+        - lastmod
+        - last-updated
+      winner: modified
+      reason: modified is canonical.
+    - fields:
+        - author
+        - createdBy
+      winner: author
+      reason: author is canonical.
+    - fields:
+        - refersTo
+        - related_files
+        - related-files
+        - related-documents
+        - relatedDocuments
+        - related-documentation
+      winner: refersTo
+      reason: refersTo is canonical.
+    - fields:
+        - partOf
+        - part-of
+      winner: partOf
+      reason: partOf is canonical (camelCase).
+    - fields:
+        - coOwnership
+        - co-ownership
+      winner: coOwnership
+      reason: coOwnership is canonical (camelCase).
+    - fields:
+        - org
+        - organisation
+        - organization
+      winner: org
+      reason: 'Neutral abbreviation. Avoids US/UK spelling entirely. W3C Organization Ontology uses org: prefix. NDR #3.'
+    - fields:
+        - version
+        - document-version
+      winner: version
+      reason: version is canonical.
+    - fields:
+        - mx:contextProvides
+        - mx:contextProvides
+        - mx-ai-contextProvides
+      winner: mx:contextProvides
+      reason: 'mx:contextProvides is canonical (kebab-case, mx: prefix).'
+    - fields:
+        - status
+        - blogState
+      overlap: false
+      reason: >-
+        Different scopes. status is the generic lifecycle field (core profile, 18 values). blogState is blog-specific
+        (draft, review, published). Use the profile-specific field when available.
+    - fields:
+        - inherits
+        - inheritable
+      winner: both
+      reason: >-
+        Different scopes. inherits (string, profile: any) declares which file this document extends. inheritable (array,
+        profile: folder) declares which fields child folders may inherit. Both are canonical — they solve different
+        problems.
+    - fields:
+        - contentType
+        - cogType
+      overlap: false
+      reason: >-
+        Different scopes. contentType classifies the document format (guide, specification, script). cogType classifies
+        the cog behaviour (info, action, routing, certificate-of-genuineness).
+    - fields:
+        - description
+        - purpose
+      overlap: false
+      reason: >-
+        Different concerns. description is a one-line summary of what the document is (max 160 chars, for search and
+        discovery). purpose is an enumerated classification of why it exists (specification, reference, guide, etc.).
+    - fields:
+        - author
+        - maintainer
+      overlap: false
+      reason: >-
+        Different roles. author is the original creator (immutable). maintainer is the person or team responsible for
+        ongoing updates (mutable). A document's author never changes; its maintainer may.
+  fields:
+    - name: title
+      type: string
+      definition: Human-readable document title. The canonical identity field for all documents including cog files.
+      example: MX Field Dictionary
+      notes: Required on every document. If both title in frontmatter and an H1 heading exist, avoid duplication.
+      status: canonical
+      profile: core
+      required: true
+    - name: description
+      type: string
+      definition: One-line summary. Max 160 characters. Used by search engines, AI agents, and registry listings.
+      example: Single source of truth for every YAML frontmatter field.
+      notes: Max 160 characters. Used by search engines, AI agents, and the cog registry.
+      status: canonical
+      profile: core
+      required: true
+    - name: author
+      type: string
+      definition: Creator of the document. Person name or collaborative attribution.
+      example: Tom Cranstoun and Maxine
+      notes: Immutable after creation. For collaborative work, list all contributors. Distinct from maintainer.
+      status: canonical
+      profile: core
+      required: true
+    - name: created
+      type: string
+      definition: Creation date. ISO 8601 format (YYYY-MM-DD).
+      example: 2026-03-01T00:00:00.000Z
+      notes: Immutable — set once, never updated. ISO 8601 (YYYY-MM-DD).
+      status: canonical
+      profile: core
+      required: true
+    - name: modified
+      type: string
+      definition: Last modification date. ISO 8601 format (YYYY-MM-DD).
+      example: 2026-03-02T00:00:00.000Z
+      notes: Update every time file content changes. ISO 8601 (YYYY-MM-DD).
+      status: canonical
+      profile: core
+      required: true
+    - name: version
+      type: string
+      definition: Semantic version string. Lives in frontmatter, never in filenames.
+      example: '2.0'
+      notes: Always quote in YAML (prevents 1.0 being parsed as number). Lives in frontmatter, never in filenames.
+      status: canonical
+      profile: core
+      required: recommended
+    - name: status
+      type: string
+      definition: >-
+        Lifecycle state. Standard values: draft, active, published, deprecated, archived, unknown. Decision records:
+        proposed, accepted, rejected, superseded. Workflow: pending, review, approved, planning, open, closed, sent.
+        Special: canonical.
+      example: active
+      validValues:
+        - draft
+        - active
+        - published
+        - deprecated
+        - archived
+        - unknown
+        - proposed
+        - accepted
+        - rejected
+        - superseded
+        - pending
+        - review
+        - approved
+        - planning
+        - open
+        - closed
+        - sent
+        - canonical
+        - completed
+        - proposal
+        - final
+        - current
+        - deferred
+      notes: Core recommended — always include. Different contexts use different subsets.
+      status: canonical
+      profile: core
+      required: recommended
+    - name: tags
+      type: array
+      definition: Discovery keywords. Array of strings for search, filtering, and agent matching.
+      example:
+        - metadata
+        - yaml
+        - frontmatter
+        - reference
+      notes: Array of lowercase strings for search, filtering, and agent matching.
+      status: canonical
+      profile: core
+      required: optional
+    - name: audience
+      type: string-or-array
+      definition: >-
+        Intended readership. Broad enum category only. For specific named people, organisations, or roles, use
+        `targetReaders` instead.
+      example:
+        - humans
+        - machines
+      validValues:
+        - tech
+        - business
+        - humans
+        - machines
+        - agents
+        - both
+        - developers
+        - contributors
+        - community
+        - stakeholders
+        - investors
+        - gestalt
+      notes: >-
+        Can be string or array. The list covers broad categories. For specific named readers (e.g. 'Janus Boye', 'CTOs
+        and product managers'), put that in `targetReaders` and keep `audience` limited to this enum.
+      status: canonical
+      profile: core
+      required: optional
+    - name: targetReaders
+      type: string-or-array
+      definition: >-
+        Specific named people, organisations, or roles this content addresses. Freetext companion to `audience` (which
+        is enum-only). Use when you need to record 'Janus Boye, Founder, Boye & Company' or 'Business leaders, CTOs,
+        product owners' — specificity that doesn't fit the audience enum.
+      example: Janus Boye, Founder, Boye & Company
+      notes: >-
+        Freetext string or array of strings. Complements `audience`; does not replace it. A document can have both:
+        `audience: [stakeholders]` and `targetReaders: 'Janus Boye'`.
+      status: canonical
+      profile: core
+      required: optional
+    - name: statusNote
+      type: string
+      definition: >-
+        Freetext detail accompanying `status`. Use when status has meaningful context beyond the enum value — e.g.
+        status: active with statusNote: 'Phase 1 Complete, Phase 2 in design'.
+      example: Patent files in separate repo
+      notes: Freetext. `status` stays constrained to its enum; nuance and workflow context go here.
+      status: canonical
+      profile: core
+      required: optional
+    - name: purpose
+      type: string
+      definition: Free-text statement of why this document exists. Single sentence.
+      example: Reference for any contributor adding metadata to non-markdown files.
+      notes: >-
+        Free-text. The previous enum constraint was retired in dictionary v4.4 because real usage was overwhelmingly
+        prose. Distinct from contentType (which classifies what the content is).
+      status: canonical
+      profile: core
+      required: optional
+    - name: license
+      type: string
+      definition: SPDX license identifier.
+      example: proprietary
+      notes: 'SPDX identifier. Common values: proprietary, MIT, Apache-2.0, CC-BY-4.0.'
+      status: canonical
+      profile: core
+      required: optional
+    - name: maintainer
+      type: string
+      definition: >-
+        Person or team responsible for maintaining this document. Distinct from author — maintainer handles ongoing
+        updates.
+      example: Maxine
+      notes: Mutable. Distinct from author (immutable creator). The person handling ongoing updates.
+      status: canonical
+      profile: core
+      required: optional
+    - name: ownership
+      type: string-or-object
+      definition: Ownership details. Can be a string (owner name) or object with owner, delegate, and contact.
+      example: Tom Cranstoun
+      notes: Can be a string or object with owner, delegate, and contact fields.
+      status: canonical
+      profile: core
+      required: optional
+    - name: domain
+      type: string
+      definition: >-
+        Business domain or subject area. In folder metadata, lives under the mx: object and is an identity field (never
+        inherited). Values are context-specific.
+      example: machine-experience
+      notes: Identity field in folder metadata — never inherited. Values are context-specific.
+      status: canonical
+      profile:
+        - core
+        - folder
+      required: optional
+    - name: segment
+      type: string
+      definition: >-
+        Segment classifier. Used in two contexts: (1) audience segment — developer, author, agent, business; (2) time
+        segment for session reports — morning, afternoon, evening.
+      example: afternoon
+      validValues:
+        - developer
+        - author
+        - agent
+        - business
+        - morning
+        - afternoon
+        - evening
+        - late-evening
+        - night
+        - full-day
+      notes: Context-dependent. Report profile uses time segments; other profiles use audience segments.
+      status: canonical
+      profile:
+        - core
+        - report
+      required: optional
+    - name: category
+      type: string
+      definition: 'Cog category. Values: mx-core, mx-tool, mx-contact, mx-ops, mx-content.'
+      example: standard
+      notes: Required for cog files. Determines registry grouping.
+      status: canonical
+      profile: cog
+      required: true
+    - name: partOf
+      type: string
+      definition: Parent collection, suite, or initiative.
+      example: mx-the-gathering
+      notes: Required for cog files. Names the parent collection or initiative.
+      status: canonical
+      profile: cog
+      required: true
+    - name: buildsOn
+      type: array
+      definition: >-
+        Context graph. Array of cog names this document builds upon. Soft dependency — provides context, not a hard
+        requirement.
+      example:
+        - what-is-a-cog
+        - cog-unified-spec
+      notes: Soft dependency for context. Builds the cog knowledge graph.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: requires
+      type: array
+      definition: Hard dependencies. Array of cog names that must exist for this cog to function.
+      example:
+        - node-runtime
+        - markdownlint-cli2
+      notes: Hard dependency. The cog cannot function without these.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: refersTo
+      type: array
+      definition: Related cogs or external resources. Informational links, not dependencies.
+      example:
+        - field-dictionary
+        - cog-unified-spec
+      notes: Informational links, not dependencies.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: derivedFrom
+      type: string
+      definition: >-
+        Upstream provenance — the source this content was derived from. A relative path within the repository pointing
+        to the originating directory or file. Used by the MX graph to build lineage edges tracing content from source to
+        destination.
+      example: mx-canon/mx-maxine-lives/communications/blogs/md/
+      notes: >-
+        Declared in the mx: block. Never inherited — always per-folder or per-cog. The MX graph resolves these into
+        derivedFrom edges for provenance tracing.
+      status: canonical
+      profile:
+        - folder
+        - cog
+      required: optional
+    - name: riskLevel
+      type: string
+      definition: >-
+        Execution danger classification for action documents declaring runnable behaviour. low = read-only, no side
+        effects. medium = writes files or calls APIs. high = modifies system state, handles credentials. critical =
+        destructive operations, financial transactions — SHOULD have a guardrail gate.
+      example: low
+      validValues:
+        - low
+        - medium
+        - high
+        - critical
+      notes: >-
+        Top-level convenience for the same value also accepted inside a security block. Distinct from trustLevel
+        (provenance quality). When both forms are present, the security block wins.
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: replacedBy
+      type: string-or-object
+      definition: >-
+        Pointer to the canonical document that supersedes this one. Either a path string or an object with named keys
+        (e.g. {prose: ..., data: ...}) when the replacement spans multiple documents.
+      example: datalake/manuscripts/mx-books/mx-appendices/appendix-m-index-of-metadata.md
+      notes: 'Used by stub documents to declare their successor. Pairs with status: superseded.'
+      status: canonical
+      profile:
+        - cog
+        - all
+      required: optional
+    - name: subtitle
+      type: string
+      definition: Secondary title displayed below the main title. Used by book chapters, presentations, and articles.
+      example: Why this metadata matters for AI agents
+      status: canonical
+      profile:
+        - book
+        - blog
+        - all
+      required: optional
+    - name: appendix
+      type: string
+      definition: Appendix label or letter. Identifies an appendix within a manuscript volume.
+      example: M
+      status: canonical
+      profile: book
+      required: optional
+    - name: execute
+      type: object
+      definition: Action block. Contains runtime, command, actions, and policy. Its presence makes a cog an action-doc.
+      example:
+        runtime: node
+        command: node scripts/validate.js
+      notes: Its presence makes a cog an action-doc. Action cogs live in scripts/ folder.
+      status: canonical
+      profile: cog
+      required: false
+    - name: hasDeterministicScript
+      type: boolean
+      definition: True when the embedded or referenced script produces byte-identical output for the same inputs on every run; false when explicitly non-deterministic; absent means not applicable or not yet declared.
+      example: true
+      notes: >-
+        Tri-state semantics: true = deterministic (declared by author), false = non-deterministic (declared by author),
+        absent = not applicable or unknown. Applies to action-cogs with actionType scripted or hybrid. Machines enforcing
+        determinism guarantees before executing a cog should check this field before shelling out. A cog that calls an
+        LLM, reads system clock, or produces randomly-ordered output must declare false. A cog whose embedded script
+        produces the same bytes for the same inputs on any machine must declare true. The field is opt-in: omitting it
+        makes no claim either way.
+      status: canonical
+      profile: cog
+      required: false
+    - name: hasReasoning
+      type: boolean
+      definition: True when every step in the cog carries both a Reason annotation (why the step exists) and an Expected results annotation (what success looks like); false when explicitly declared absent; absent means not applicable or not yet assessed.
+      example: true
+      notes: >-
+        Tri-state semantics: true = both Reason and Expected results are present after every step (declared by author),
+        false = explicitly declared absent, absent = no claim. Applies to instruction manuals (info-docs with step sequences),
+        action-docs, and any cog whose body guides an operator through a procedure. The two annotations together make a cog
+        self-explanatory to a cold reader: Reason answers "why does this step exist?"; Expected results answers "how do I
+        know it succeeded?". A cog that carries only one of the two must declare false or omit the field. Complements
+        hasDeterministicScript (which applies to the embedded script); hasReasoning applies to the instructional prose.
+      status: canonical
+      profile: cog
+      required: false
+    - name: blocks
+      type: array
+      definition: >-
+        Declares block types present in the document. Values: prose, action, definition, essence, provenance, version,
+        code, html, sop, security.
+      example:
+        - prose
+        - definition
+        - code
+      validValues:
+        - prose
+        - action
+        - definition
+        - essence
+        - provenance
+        - version
+        - code
+        - html
+        - sop
+        - security
+      notes: Declares block types present in the document body.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: policy
+      type: string-or-object
+      definition: Content handling rules for agents. Inherited from uber docs via effective doc resolution.
+      example: inherit from parent uber-doc
+      notes: Content handling rules for agents. Inherited via effective doc resolution.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: accessibility
+      type: string-or-object
+      definition: Accessibility compliance level or detailed accessibility metadata for a cog.
+      example: WCAG 2.1 AA
+      notes: >-
+        Declares the accessibility standard the cog content targets. Used alongside semantic and convergence for content
+        quality scoring.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: convergence
+      type: string-or-object
+      definition: Convergence score or metadata. Measures how well the cog aligns human and machine experiences.
+      example: high
+      notes: 'Part of the quality triad: accessibility, semantic, convergence. Core to MX''s dual-experience philosophy.'
+      status: canonical
+      profile: cog
+      required: optional
+    - name: publisher
+      type: string-or-object
+      definition: Entity that publishes and stands behind this cog. Can be a string (name) or object with name, url, and contact.
+      example: CogNovaMX Ltd
+      notes: >-
+        Distinct from provenancePublisher (flat provenance field). publisher can be a structured object with sub-fields.
+        Used in Certificate of Genuineness cogs.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: cacheability
+      type: string
+      definition: >-
+        How long an agent or resolver may cache this document's content before it must be re-fetched. Named tiers map to
+        durations. A custom duration string (e.g., '4h', '30d') is also accepted.
+      example: long-lived
+      validValues:
+        - ephemeral
+        - short-lived
+        - medium
+        - long-lived
+        - permanent
+      notes: >
+        Tiers:
+
+        - ephemeral: must not be cached; content changes on every request (e.g., real-time prices, live status)
+
+        - short-lived: cache for up to 1 hour (e.g., news feeds, dashboards)
+
+        - medium: cache for up to 1 day (e.g., blog posts, reports)
+
+        - long-lived: cache for up to 1 week (e.g., documentation, guides)
+
+        - permanent: cache indefinitely until the document changes (e.g., specifications, standards)
+
+        Custom durations use the format: number + unit (s, m, h, d, w). Examples: '30m', '4h', '30d'.
+
+        Distinct from stability (content reliability) and lifecycle (development phase). Cacheability is about temporal
+        validity — how quickly the content goes stale.
+
+        Default when omitted: medium (cache for up to 1 day).
+      status: canonical
+      profile: any
+    - name: ai
+      type: object
+      definition: AI-related metadata. Contains disclosure, attribution, freshness policies for AI-generated content.
+      example:
+        disclosure: true
+        attribution: Generated by Claude
+      notes: 'Container for AI-specific metadata: disclosure, attribution, freshness.'
+      status: canonical
+      profile: core
+      required: optional
+    - name: contextProvides
+      type: string-or-array
+      definition: What context this document provides to agents. Describes the knowledge or capability this document contributes.
+      example: Field definitions and naming conventions for the MX ecosystem
+      notes: Describes what knowledge this document contributes to an agent context window.
+      status: canonical
+      profile: core
+      required: optional
+    - name: aiAssistance
+      type: string-or-object
+      definition: 'AI assistance policy. Values: welcome, restricted, prohibited. Inheritable.'
+      default: welcome
+      example: restricted
+      validValues:
+        - welcome
+        - restricted
+        - prohibited
+      notes: Inheritable. Only declare when restricting or prohibiting.
+      status: canonical
+      profile:
+        - core
+        - folder
+      required: optional
+    - name: aiEditable
+      type: boolean
+      definition: Whether this content can be edited by AI agents. In folder metadata defaults to true. Inheritable.
+      default: false
+      example: true
+      notes: Inheritable. In folder metadata defaults to true. Only declare when granting edit permission on documents.
+      status: canonical
+      profile:
+        - core
+        - folder
+      required: optional
+    - name: mxSpecVersion
+      type: string
+      definition: MX specification version. Distinct from version (document version). Typically '1.0'.
+      example: '1.0'
+      notes: Distinct from version (document version). Tracks MX specification conformance.
+      status: canonical
+      profile: folder
+      required: optional
+    - name: conventions
+      type: object
+      definition: Code conventions object. Contains style, testing, documentation, markdown, commits.
+      example:
+        style: ESLint + Prettier
+        markdown: markdownlint-cli2
+      notes: Container for code and documentation conventions. Inheritable.
+      status: canonical
+      profile: folder
+      required: optional
+    - name: inheritable
+      type: array
+      definition: List of field paths that child folders inherit from this folder's metadata.
+      example:
+        - author
+        - audience
+        - stability
+        - aiAssistance
+        - aiEditable
+      notes: Parent declares which fields children may inherit. Identity fields should never be listed.
+      status: canonical
+      profile: folder
+      required: optional
+    - name: runbook
+      type: string
+      definition: Operational instructions for agents. Describes how to interpret and act on this document.
+      example: Parse the fields array. Each entry has name, type, definition, status, and profile.
+      notes: Instructions for AI agents. Write in imperative voice. Be specific.
+      status: canonical
+      profile: core
+    - name: contentType
+      type: string
+      definition: Machine-readable content type classification.
+      example: field-dictionary
+      notes: 'Free-form classification. Common: specification, guide, reference, info-doc, identity, report.'
+      status: canonical
+      profile: core
+    - name: words
+      type: array
+      definition: >-
+        Spell-checker dictionary entries. Declares which terms are valid vocabulary. Distinct from tags — words
+        validates spelling, tags enables discovery.
+      example:
+        - cog
+        - frontmatter
+        - metadata
+        - camelCase
+      notes: ROUTING.cog.md only. Validates spelling, not discovery. Distinct from tags.
+      status: canonical
+      profile: routing
+    - name: keyFields
+      type: array
+      definition: >-
+        Route hint. Tells agents which YAML fields matter most when reading files in a given folder. Distinct from tags
+        — keyFields directs attention, tags enables discovery.
+      example:
+        - title
+        - status
+        - contentType
+        - category
+      notes: ROUTING.cog.md only. Route hint for agents. Distinct from tags.
+      status: canonical
+      profile: routing
+    - name: book
+      type: string
+      definition: Which book this chapter belongs to.
+      example: 'MX: The Protocols'
+      notes: Identifies which book a chapter belongs to.
+      status: canonical
+      profile: book
+    - name: chapter
+      type: number
+      definition: Chapter number within the book.
+      example: 5
+      notes: Numeric chapter number for ordering and cross-referencing.
+      status: canonical
+      profile: book
+    - name: copyright
+      type: string
+      definition: Copyright notice.
+      example: © 2026 Tom Cranstoun. All rights reserved.
+      notes: Full copyright notice. Distinct from license (SPDX identifier).
+      status: canonical
+      profile: book
+    - name: publicationDate
+      type: string
+      definition: Publication or issuance date. ISO 8601 format (YYYY-MM-DD or full datetime). Used for blogs and cogs.
+      example: 2026-03-01T00:00:00.000Z
+      notes: ISO 8601. Distinct from created (file creation) and modified (last edit).
+      status: canonical
+      profile:
+        - blog
+        - cog
+    - name: slug
+      type: string
+      definition: >-
+        Stable kebab-case handle for identities, contacts, and entities. Used as a routing key in Reginald, a lookup key
+        in CRM, and the URL slug. NOT a document title; for that use `title`.
+      example: maxine
+      notes: Required on identity/contact records. Derived from or matching the filename. Lower-case, kebab-separated.
+      status: canonical
+      profile:
+        - identity
+        - contact
+    - name: confidential
+      type: boolean
+      definition: Whether this record must be excluded from public outputs.
+      default: false
+      example: true
+      notes: Only declare when marking content as confidential.
+      status: canonical
+      profile:
+        - core
+        - contact
+    - name: folderType
+      type: string
+      definition: Type of folder.
+      example: content
+      validValues:
+        - category
+        - content
+        - config
+        - build
+        - scripts
+        - submodule
+        - documentation
+        - assets
+        - tools
+        - source
+        - library
+        - cog-content
+        - crm
+        - eds-block
+        - styles
+        - output
+        - contact
+        - templates
+        - static
+        - data
+        - cogs
+        - testing
+        - services
+        - middleware
+        - eds
+        - components
+        - api
+        - plugins
+        - configuration
+      status: canonical
+      profile: folder
+    - name: stability
+      type: string
+      definition: 'Content stability. Values: stable, evolving, experimental, deprecated, archived, draft, final, friable. friable means machine-generated and regenerated from source; never hand-edit.'
+      example: stable
+      validValues:
+        - stable
+        - evolving
+        - experimental
+        - deprecated
+        - archived
+        - draft
+        - final
+        - friable
+      notes: Content stability. Helps agents assess information reliability. Use friable for generated indexes and outputs regenerated from source.
+      status: canonical
+      profile: folder
+    - name: lifecycle
+      type: string
+      definition: 'Folder lifecycle stage. Values: production, development, prototype, legacy, deprecated.'
+      example: production
+      validValues:
+        - production
+        - development
+        - prototype
+        - legacy
+        - deprecated
+      notes: Development phase. Distinct from stability (content reliability).
+      status: canonical
+      profile: folder
+    - name: hasSubfolders
+      type: boolean
+      definition: Whether the folder contains subfolders.
+      example: true
+      notes: Helps tools decide whether to recurse into subdirectories.
+      status: canonical
+      profile: folder
+    - name: inherits
+      type: string
+      definition: >-
+        Path to the file this document extends. The inheriting file adds MX metadata on top of the target's content. The
+        target can be any file type — .md, .cog.md, .html, .json, .yaml, or any other. Any MX-aware file (one carrying
+        MX metadata in its carrier format) can declare inherits. Path can be relative or absolute.
+      example:
+        - README.md
+        - ../shared/base-policy.cog.md
+        - /Users/tom/assets/config.yaml
+      notes: >-
+        File-type agnostic. The inheriting file extends the target — it does not replace it. For folder-level field
+        inheritance, use inheritable on the parent folder instead.
+      status: canonical
+      profile: any
+    - name: primaryLanguages
+      type: array
+      definition: Primary programming or content languages in the folder.
+      example:
+        - javascript
+        - markdown
+      notes: Helps agents select appropriate tools for the folder.
+      status: canonical
+      profile: folder
+    - name: priority
+      type: string
+      definition: 'Priority. Values: critical, high, medium, low.'
+      example: high
+      validValues:
+        - critical
+        - high
+        - medium
+        - low
+      notes: Determines outreach frequency and attention level.
+      status: canonical
+      profile: contact
+    - name: contentState
+      type: string
+      definition: >-
+        Content workflow position. Distinct from status — contentState tracks where content is in the editorial
+        pipeline. Values: raw, editing, review, approved, published.
+      example: editing
+      validValues:
+        - raw
+        - editing
+        - review
+        - approved
+        - published
+        - draft
+      notes: Editorial pipeline position. Distinct from status (generic lifecycle).
+      status: canonical
+      profile: core
+    - name: cogId
+      type: string
+      definition: Unique cog identifier within the registry.
+      example: field-dictionary
+      notes: Typically derived from filename without .cog.md extension.
+      status: canonical
+      profile: cog
+    - name: cogType
+      type: string
+      definition: 'Cog type classification. Values: info, action, routing, certificate-of-genuineness.'
+      example: info
+      validValues:
+        - info
+        - action
+        - routing
+        - certificate-of-genuineness
+      notes: >-
+        Info = reference, action = has execute block, routing = agent navigation, certificate-of-genuineness =
+        publisher-provenanced credential with publisher block.
+      status: canonical
+      profile: cog
+    - name: maintainedDate
+      type: string
+      definition: Date the cog was last confirmed accurate by its maintainer. ISO 8601 format (YYYY-MM-DD).
+      example: 2026-03-01T00:00:00.000Z
+      notes: ISO 8601. Helps agents assess content freshness.
+      status: canonical
+      profile: cog
+    - name: maintainedBy
+      type: string
+      definition: Person or team who last confirmed the cog content is accurate.
+      example: Tom Cranstoun
+      notes: Names the maintainer responsible for ongoing accuracy.
+      status: canonical
+      profile: cog
+    - name: provenanceAuthor
+      type: string
+      definition: Person or entity who originally authored the document content.
+      example: Tom Cranstoun
+      notes: Declares authorship origin. Part of the provenance group.
+      status: canonical
+      profile: core
+    - name: provenancePublisher
+      type: string
+      definition: Entity that published the document.
+      example: CogNovaMX Ltd
+      notes: Declares publishing entity. Part of the provenance group.
+      status: canonical
+      profile: core
+    - name: provenanceOrigin
+      type: string
+      definition: How the content was created.
+      example: human-directed
+      validValues:
+        - human-directed
+        - ai-assisted
+        - automated-fact-check
+      notes: Declares creation method. Part of the provenance group.
+      status: canonical
+      profile: core
+    - name: provenanceUri
+      type: string
+      definition: >-
+        Canonical URL of the file's AI-governance provenance cog, the hosted record that stands beside the file and
+        holds the parties, frameworks, and every recorded action. Lets a machine reach the live, authoritative
+        provenance chain without the chain embedded in the file itself.
+      example: https://mx.allabout.network/blog/governance-when-ai-acts.mxprov.json
+      notes: >-
+        Points to a hosted provenance cog (the .mxprov.json carrier). Complements an embedded chain rather than
+        replacing it: when both are present the embedded copy travels offline and this URL names the current canonical
+        record. Part of the provenance group.
+      status: canonical
+      profile: core
+    - name: adr
+      type: string-or-object
+      definition: Architecture Decision Record reference. Links to the ADR that governs this cog's architectural choices.
+      example: mx-canon/mx-maxine-lives/registers/ADR/2026-02-13-mx-web-architecture.cog.md
+      notes: Path to the ADR file. Can be a string (path) or object with path, date, and status.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: ndr
+      type: string-or-object
+      definition: Naming Decision Record reference. Links to the NDR that governs naming conventions.
+      example: mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md
+      notes: Path to the NDR file.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: bdr
+      type: string-or-object
+      definition: Business Decision Record reference. Links to the BDR that governs business decisions.
+      example: mx-canon/mx-maxine-lives/registers/BDR/2026-02-28-company-rename.cog.md
+      notes: Path to the BDR file.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: movedFrom
+      type: string
+      definition: Previous file path before content was relocated.
+      example: datalake/knowledge/reference/field-definitions.md
+      notes: Previous path. Used for redirect generation and link maintenance.
+      status: canonical
+      profile: migration
+    - name: ld
+      type: object
+      definition: Inline JSON-LD structured data (Schema.org). Embeds structured data directly in YAML frontmatter.
+      example:
+        '@type': TechArticle
+        name: MX Field Dictionary
+      notes: Inline JSON-LD (Schema.org) in YAML frontmatter.
+      status: canonical
+      profile: core
+    - name: readingLevel
+      type: string
+      definition: 'Content reading level. Values: beginner, intermediate, advanced, expert.'
+      example: intermediate
+      validValues:
+        - beginner
+        - intermediate
+        - advanced
+        - expert
+        - general
+        - technical
+      notes: Helps agents recommend content based on user expertise.
+      status: canonical
+      profile: core
+    - name: mx:name
+      type: string
+      definition: Cog name. Equivalent to name in YAML frontmatter.
+      example: <meta name="mx:name" content="field-dictionary">
+      notes: HTML equivalent of YAML title/name.
+      status: canonical
+      profile:
+        - html
+        - js
+        - css
+    - name: mx:version
+      type: string
+      definition: Version. Equivalent to version in YAML frontmatter.
+      example: <meta name="mx:version" content="2.0">
+      notes: HTML equivalent of YAML version.
+      status: canonical
+      profile:
+        - html
+        - js
+        - css
+    - name: mx:type
+      type: string
+      definition: Domain type classification.
+      example: <meta name="mx:type" content="specification">
+      status: canonical
+      profile: html
+    - name: mx:purpose
+      type: string
+      definition: Why this file exists.
+      example: '@mx:purpose utility'
+      notes: JSDoc and CSS comment contexts.
+      status: canonical
+      profile:
+        - js
+        - css
+    - name: mx:audience
+      type: string
+      definition: Intended readership.
+      example: '@mx:audience developer'
+      notes: JSDoc and CSS comment contexts.
+      status: canonical
+      profile:
+        - js
+        - css
+    - name: mx:stability
+      type: string
+      definition: 'Stability level. Values: stable, evolving, experimental, deprecated, archived.'
+      example: '@mx:stability stable'
+      validValues:
+        - stable
+        - evolving
+        - experimental
+        - deprecated
+        - archived
+      status: canonical
+      profile:
+        - js
+        - css
+    - name: mx:category
+      type: string
+      definition: Cog category.
+      example: <meta name="mx:category" content="standard">
+      status: canonical
+      profile:
+        - html
+        - js
+        - css
+    - name: mx:tags
+      type: string
+      definition: Discovery keywords as comma-separated string.
+      example: <meta name="mx:tags" content="metadata, yaml, frontmatter">
+      notes: Comma-separated string in non-YAML contexts.
+      status: canonical
+      profile:
+        - html
+        - js
+        - css
+    - name: mx:buildsOn
+      type: string
+      definition: Context dependencies as comma-separated cog names.
+      example: '@mx:buildsOn cog-unified-spec, field-dictionary'
+      status: canonical
+      profile:
+        - js
+        - css
+    - name: mx:documentedIn
+      type: string
+      definition: Path to companion documentation.
+      example: '@mx:documentedIn ../docs/field-dictionary.cog.md'
+      notes: Links code to its companion documentation.
+      status: canonical
+      profile:
+        - js
+        - css
+    - name: mx:contextProvides
+      type: string
+      definition: What context this file provides to agents.
+      example: '@mx:contextProvides "Validation utilities for frontmatter"'
+      status: canonical
+      profile:
+        - js
+        - css
+    - name: reviewers
+      type: array
+      definition: Required reviewers for changes to this file.
+      example:
+        - '@senior-dev'
+        - '@security-team'
+      status: canonical
+      profile: code-file
+      required: false
+    - name: mx:begin
+      type: string
+      definition: >-
+        Opens an annotated code block. Value is the block tag (security-critical, performance-critical, compatibility,
+        workaround, generated, legacy).
+      example: // @mx:begin security-critical
+      validValues:
+        - security-critical
+        - performance-critical
+        - compatibility
+        - workaround
+        - generated
+        - legacy
+      status: canonical
+      profile: code-inline
+    - name: mx:end
+      type: string
+      definition: Closes an annotated code block. Value matches the opening tag.
+      example: // @mx:end security-critical
+      status: canonical
+      profile: code-inline
+    - name: mx:sensitive
+      type: string
+      definition: 'Line annotation marking sensitive data. Flags: no-log, no-expose.'
+      example: const API_KEY = process.env.API_KEY; // @mx:sensitive no-log no-expose
+      status: canonical
+      profile: code-inline
+    - name: mx:intentional
+      type: string
+      definition: Line annotation marking deliberate unusual code.
+      example: await sleep(100); // @mx:intentional rate-limiting
+      status: canonical
+      profile: code-inline
+    - name: mx:todo
+      type: string
+      definition: Line annotation for tasks to complete.
+      example: // @mx:todo refactor Extract to separate function
+      status: canonical
+      profile: code-inline
+    - name: mx:ai
+      type: string
+      definition: >-
+        Line annotation with AI-specific instructions. Values: do-not-remove, do-not-modify, preserve-logic,
+        explain-before-changing, generated, reviewed.
+      example: '// @mx:ai do-not-remove This null check prevents crash in edge case #1234'
+      status: canonical
+      profile: code-inline
+    - name: pages
+      type: number
+      definition: Number of pages in a document, book, or PDF.
+      example: 42
+      status: canonical
+      profile: core
+      required: false
+    - name: cogs
+      type: string
+      definition: 'Canonical field: cogs.'
+      status: canonical
+      profile: cog
+    - name: replaces
+      type: string
+      definition: 'Canonical field: replaces.'
+      status: canonical
+      profile: cog
+    - name: machineOnly
+      type: boolean
+      definition: 'Canonical field: machineOnly.'
+      status: canonical
+      profile: extended
+    - name: supersededBy
+      type: string
+      definition: 'Canonical field: supersededBy.'
+      status: canonical
+      profile: cog
+    - name: date
+      type: string
+      definition: Publication or event date. ISO 8601. Aligns with Dublin Core dc:date and Schema.org Date.
+      alignsWith:
+        - dc:date
+        - schema:Date
+      status: canonical
+      profile: core
+    - name: duration
+      type: string
+      definition: Time length in ISO 8601 duration format (PT1H30M). Aligns with Schema.org duration.
+      alignsWith:
+        - schema:duration
+      status: canonical
+      profile: core
+    - name: format
+      type: string
+      definition: >-
+        Media type or file format. Aligns with Dublin Core dc:format and Schema.org encodingFormat. Prefer IANA media
+        types.
+      alignsWith:
+        - dc:format
+        - schema:encodingFormat
+      status: canonical
+      profile: core
+    - name: rights
+      type: string
+      definition: >-
+        Rights statement or licence reference. Aligns with Dublin Core dc:rights and Schema.org license. Prefer SPDX
+        identifiers.
+      alignsWith:
+        - dc:rights
+        - schema:license
+      status: canonical
+      profile: core
+    - name: inLanguage
+      type: string
+      definition: >-
+        Primary language of the document content, as a BCP 47 language tag (en, es, en-GB). Aligns with Schema.org
+        inLanguage and Dublin Core dc:language.
+      example: es
+      alignsWith:
+        - schema:inLanguage
+        - dc:language
+      status: canonical
+      profile: core
+    - name: currency
+      type: string
+      definition: >-
+        The document's default currency for monetary references, as an ISO 4217 three-letter code (EUR, USD, GBP). The
+        same code Schema.org priceCurrency uses.
+      example: EUR
+      alignsWith:
+        - schema:priceCurrency
+      status: canonical
+      profile: extended
+    - name: dateFormat
+      type: string
+      definition: >-
+        Human display convention for dates in the document body. Machine-read dates in frontmatter are always ISO 8601
+        (YYYY-MM-DD); this field only declares how dates are shown to a reader.
+      example: iso-8601
+      validValues:
+        - iso-8601
+        - dmy
+        - mdy
+        - ymd
+      default: iso-8601
+      status: canonical
+      profile: extended
+    - name: translationOfWork
+      type: string
+      definition: >-
+        On a translated document, the canonicalUri of the source work it was translated from. Aligns with Schema.org
+        translationOfWork.
+      example: https://mx.allabout.network/letters/apology.md
+      alignsWith:
+        - schema:translationOfWork
+      status: canonical
+      profile: extended
+    - name: workTranslation
+      type: array
+      definition: >-
+        On a source document, the canonicalUris of works that are translations of it (the inverse of
+        translationOfWork). Aligns with Schema.org workTranslation.
+      example:
+        - https://mx.allabout.network/letters/apology-es.md
+      alignsWith:
+        - schema:workTranslation
+      status: canonical
+      profile: extended
+    - name: translator
+      type: string
+      definition: >-
+        Who or what performed a translation: a person's name or a model identifier. Aligns with Schema.org translator.
+      example: Maxine (claude-opus-4-8)
+      alignsWith:
+        - schema:translator
+      status: canonical
+      profile: extended
+    - name: displayName
+      type: string
+      definition: Human-friendly name. Aligns with FOAF displayName and Schema.org alternateName.
+      alignsWith:
+        - foaf:displayName
+        - schema:alternateName
+      status: canonical
+      profile: core
+    - name: schema
+      type: string
+      definition: 'Schema reference identifier. Context-dependent: Schema.org type URL, JSON Schema $id, database schema name.'
+      status: canonical
+      profile: core
+    - name: usage
+      type: string
+      definition: Usage classification. Free-form; prefer existing vocabularies (Schema.org usageInfo, Dublin Core audience).
+      alignsWith:
+        - schema:usageInfo
+      status: canonical
+      profile: core
+    - name: classification
+      type: string
+      definition: Content classification identifier. Context-dependent; prefer existing taxonomies over local values.
+      status: canonical
+      profile: core
+  profiles:
+    - name: core
+      description: Fields that apply to all MX documents.
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+      recommended:
+        - version
+        - status
+      optional:
+        - tags
+        - audience
+        - purpose
+        - license
+        - maintainer
+        - confidential
+        - ownership
+        - domain
+        - segment
+        - ai
+        - contextProvides
+        - aiAssistance
+        - aiEditable
+        - ld
+        - readingLevel
+        - runbook
+        - contentType
+        - contentState
+        - name
+    - name: cog
+      description: Fields specific to .cog.md files. Machine identifier is derived from filename.
+      required:
+        - category
+        - partOf
+      recommended:
+        - buildsOn
+        - tags
+      optional:
+        - requires
+        - refersTo
+        - execute
+        - blocks
+        - policy
+        - cogId
+        - cogType
+        - publicationDate
+        - expires
+        - correctionSla
+        - maintainedDate
+        - maintainedBy
+        - provenanceAuthor
+        - provenancePublisher
+        - provenanceOrigin
+        - updateTriggers
+        - accessibility
+        - semantic
+        - convergence
+        - mxCompliance
+        - accuracyCommitment
+        - reviewCycle
+        - publisher
+        - generate
+        - source
+        - adr
+        - ndr
+        - bdr
+        - deliverable
+        - includes
+    - name: folder
+      description: Fields for .mx.yaml.md folder metadata. All fields are top-level in YAML frontmatter.
+      required:
+        - folderType
+        - stability
+        - lifecycle
+        - domain
+      recommended:
+        - primaryLanguages
+      optional:
+        - hasSubfolders
+        - relatedFolders
+        - version
+        - aiAssistance
+        - aiEditable
+        - aiGenerationAllowed
+        - aiGenerationReviewRequired
+        - aiTraining
+        - aiTrainingConditions
+        - aiSensitivePaths
+        - aiPermittedAreas
+        - aiProhibitedAreas
+        - mxSpecVersion
+        - project
+        - context
+        - stack
+        - conventions
+        - inheritable
+        - contentType
+        - mxWatchesFiles
+        - derivedFrom
+        - publishedTo
+    - name: migration
+      description: Fields for tracking content relocation.
+      optional:
+        - movedFrom
+        - movedDate
+    - name: routing
+      description: Fields used exclusively in ROUTING.cog.md. Not for general documents.
+      fields:
+        - words
+        - keyFields
+    - name: skill
+      description: Fields for .claude/skills/*/skill.md files. Three-layer contract (Anthropic runtime, OKF discoverability, MX estate integration).
+      required:
+        - name
+        - category
+        - description
+      recommended:
+        - version
+        - stability
+      optional:
+        - audience
+        - purpose
+        - canonicalUri
+        - dependencies
+    - name: html
+      description: 'Fields for .cog.html files. Convention: <meta name=''mx:field''>.'
+      required:
+        - mx:name
+      recommended:
+        - mx:version
+        - mx:type
+      optional:
+        - mx:category
+        - mx:audience
+        - mx:tags

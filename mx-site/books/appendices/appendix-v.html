@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+    <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+author: "Tom Cranstoun"
+created: "2026-05-16"
+modified: "2026-05-16"
+description: "A reference for the three record types the Reginald registry handles beyond the content cog: decision records, policy records, and attestation records. Each section gives the required field set, a worked sample, and the reasoning that links the record back to the registry's separated-layer architecture."
+title: "Appendix V: Reginald v-next Records Reference"
+tags: [mx, reginald, decision-cog, policy-cog, attestation, merkle-batch, appendix, reference]
+type: info-doc
+mx:
+  copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
+  runbook: |
+    This appendix is a reference for the three record types beyond the content cog: decision,
+    policy, and attestation. Field tables follow the v-next REGINALD PRD §4, §5, and §6.
+    Worked samples show only required fields. Reasoning paragraphs explain how each record
+    binds to the registry's separated-layer architecture (the cog is data; the attestation
+    is the trust wrapper; the registry produces but does not verify). Write as if it has
+    always existed. NEVER include: publication dates about the appendix itself, "we added",
+    "new section", "this update". Write definitive present tense.
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-v-reginald-vnext-records.md
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+<meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Tom Cranstoun" />
+  <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
+  <title>Appendix V: Reginald v-next Records Reference</title>
+  
+
+  <link rel="canonical" href="https://mx.allabout.network/books/appendices/appendix-v.html">
+  <!-- MX metadata -->
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="reference">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+  <meta name="mx:aiEditable" content="false">
+  <meta name="mx:content-policy" content="extract-with-attribution">
+  <meta name="mx:attribution" content="required">
+  <link rel="llms-txt" href="/llms.txt">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/books/appendices/appendix-v.html">
+  <meta property="og:title" content="Appendix V: Reginald v-next Records Reference">
+  <meta property="og:description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="MX: The Protocols — book cover">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://mx.allabout.network/books/appendices/appendix-v.html">
+  <meta name="twitter:title" content="Appendix V: Reginald v-next Records Reference">
+  <meta name="twitter:description" content="Implementation guide from MX-Protocols book">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="MX: The Protocols — book cover">
+  <meta name="twitter:creator" content="@ddttomtom">
+
+  <!-- Additional SEO — appendices are companion content to the books, not standalone destinations: noindex, nofollow per memory rule project_appendices_noindex.md -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Appendix V: Reginald v-next Records Reference",
+    "description": "Practical guidance from MX-Protocols book on designing AI agent-friendly websites",
+    "author": {
+      "@type": "Person",
+      "name": "Tom Cranstoun",
+      "email": "info@cognovamx.com",
+      "url": "https://allabout.network"
+    },
+    "inLanguage": "en-GB",
+    "timeRequired": "PT60M",
+    "educationalLevel": "Intermediate",
+    "datePublished": "2026-01-10",
+    "dateModified": "2026-01-10",
+    "isPartOf": {
+      "@type": "Book",
+      "name": "MX-Protocols",
+      "author": {
+        "@type": "Person",
+        "name": "Tom Cranstoun"
+      },
+      "url": "https://mx.allabout.network/books/appendices"
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="appendix.css">
+</head>
+<body>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+<hr>
+<header id="title-block-header">
+<h1 class="title">Appendix V: Reginald v-next Records Reference</h1>
+<p class="subtitle">MX-Protocols</p>
+<p class="author">Tom Cranstoun</p>
+<p class="date">January 2026</p>
+</header>
+<nav id="TOC" role="navigation" aria-label="Table of Contents">
+<ul>
+<li><a href="#appendix-v-reginald-v-next-records-reference"
+id="toc-appendix-v-reginald-v-next-records-reference">Appendix V:
+Reginald v-next Records Reference</a>
+<ul>
+<li><a href="#the-decision-record" id="toc-the-decision-record">1. The
+decision record</a></li>
+<li><a href="#the-policy-record" id="toc-the-policy-record">2. The
+policy record</a></li>
+<li><a href="#the-attestation-record" id="toc-the-attestation-record">3.
+The attestation record</a></li>
+<li><a href="#the-provenance-record" id="toc-the-provenance-record">4.
+The provenance record</a></li>
+<li><a href="#how-the-five-record-types-compose"
+id="toc-how-the-five-record-types-compose">5. How the five record types
+compose</a></li>
+<li><a href="#where-to-read-further" id="toc-where-to-read-further">6.
+Where to read further</a></li>
+</ul></li>
+</ul>
+</nav>
+<div data-content-type="appendix">
+<h2 id="appendix-v-reginald-v-next-records-reference">Appendix V:
+Reginald v-next Records Reference</h2>
+<p>The content cog is the first record type the Reginald registry
+handles. It is not the only one. Two more record types share the same
+schema rules, the same canonicalisation, the same signature primitives,
+and the same registry behaviour — <em>decision records</em>, which
+describe AI decisions in the form regulators and auditors need to
+consume, and <em>policy records</em>, which carry regulatory codes as
+addressable, versioned, signed artefacts rather than moving PDFs. A
+fourth record type wraps any of these — <em>attestation records</em>,
+the signed trust layer that lives outside the data record it covers.</p>
+<p>This appendix is a field-level reference for the three additional
+record types. Each section gives the required fields, one worked sample,
+and a short reasoning paragraph that ties the record back to the
+architectural rule it depends on: the cog is data; the attestation is
+the trust wrapper; the registry produces records and serves them;
+verification is a client-side operation against existing standards.</p>
+<p>The deep specification, including optional fields, error responses,
+query semantics, completeness mechanisms, and the build-sequence
+dependencies, lives in the v-next REGINALD PRD in canon. This appendix
+is the book's reference shape: enough to recognise each record, enough
+to verify a worked example, enough to reason about how the five record
+types fit together.</p>
+<h2 id="the-decision-record">1. The decision record</h2>
+<p>A decision record is what an operator publishes for each AI decision
+it makes. The record is the event; the input that led to the decision
+stays with the operator. A regulator opening an inquiry walks from the
+decision record to the input via the operator, not via the registry.</p>
+<h3 id="required-fields">1.1 Required fields</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>contentType</code></td>
+<td>Fixed string: <code>decision</code></td>
+</tr>
+<tr>
+<td><code>cogVersion</code></td>
+<td>Semver of the decision-cog schema this record conforms to</td>
+</tr>
+<tr>
+<td><code>decisionId</code></td>
+<td>Time-sortable unique identifier (ULID recommended)</td>
+</tr>
+<tr>
+<td><code>operator</code></td>
+<td>DID or resolvable identifier of the operator</td>
+</tr>
+<tr>
+<td><code>issued</code></td>
+<td>RFC 3339 timestamp of the decision</td>
+</tr>
+<tr>
+<td><code>policyRef</code></td>
+<td>Reference to the policy cog in force: registry URI, cog ID, version,
+optional clause fragment</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>Model identifier, version, and reference to the model card</td>
+</tr>
+<tr>
+<td><code>inputHash</code></td>
+<td>SHA-256 of the canonicalised input (the input itself stays with the
+operator)</td>
+</tr>
+<tr>
+<td><code>inputClass</code></td>
+<td>Operator-defined category of input</td>
+</tr>
+<tr>
+<td><code>outputSummary</code></td>
+<td>Short factual description of the output</td>
+</tr>
+<tr>
+<td><code>humanInLoop</code></td>
+<td>Whether human review was required, whether it fired, opaque reviewer
+reference</td>
+</tr>
+</tbody>
+</table>
+<p>Field names follow MX naming binding NDR-02 (camelCase). Signatures
+over the record live in an accompanying attestation record (§3 of this
+appendix), never in the decision record itself.</p>
+<h3 id="worked-sample">1.2 Worked sample</h3>
+<div class="sourceCode" id="cb1" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contentType</span><span class="kw">:</span><span class="at"> decision</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cogVersion</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.0</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">decisionId</span><span class="kw">:</span><span class="at"> 01JC8X7K2N4P5Q6R7S8T9V0W1Y</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">operator</span><span class="kw">:</span><span class="at"> did:web:example-insurance.com</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">issued</span><span class="kw">:</span><span class="at"> 2026-05-14T10:32:17Z</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">policyRef</span><span class="kw">:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">registry</span><span class="kw">:</span><span class="at"> https://reginald.tg.community</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cogId</span><span class="kw">:</span><span class="at"> eu-ai-act-art-12</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.0.0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">clause</span><span class="kw">:</span><span class="at"> para-1</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">model</span><span class="kw">:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">id</span><span class="kw">:</span><span class="at"> example-insurance/triage-classifier</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">2.3.1</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cardRef</span><span class="kw">:</span><span class="at"> cog:web:example-insurance.com:models-triage-v2-card</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">inputHash</span><span class="kw">:</span><span class="at"> sha256:8f3a...</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">inputClass</span><span class="kw">:</span><span class="at"> insurance-claim-routine</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">outputSummary</span><span class="kw">:</span><span class="at"> Routed to standard review queue</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">humanInLoop</span><span class="kw">:</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">fired</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<h3 id="reasoning">1.3 Reasoning</h3>
+<p>Every field shown is required; nothing optional appears in the
+sample, so what the reader sees is the minimum a valid decision record
+must carry. The <code>operator</code> field resolves to a DID document
+the publisher controls — the registry does not own the operator
+identity, only points at it. The <code>policyRef</code> block locates
+exactly which clause of which version of which policy was in force at
+decision time, by naming the registry that holds the policy cog. The
+<code>inputHash</code> is the only thing about the input that ever
+reaches the registry; the raw input stays with the operator and is
+recoverable only on the operator's own systems, on demand. The
+<code>outputSummary</code> is the human-readable verdict, deliberately
+short so the body of the record can be reviewed in seconds. The record
+carries no signature: trust apparatus is a separate record (§3 of this
+appendix). The decision record and its attestation are bound only by the
+record's ID and content digest, never by an embedded signature
+field.</p>
+<h2 id="the-policy-record">2. The policy record</h2>
+<p>A policy record is a regulatory code published as a cog: stable
+identity, semver versioning, addressable clauses, currency tracking
+through the same mechanism content cogs use. Decision records reference
+policy records by <code>policyRef</code>; that reference resolves to a
+fixed referent whatever happens to the regulator's website.</p>
+<h3 id="required-fields-1">2.1 Required fields</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>contentType</code></td>
+<td>Fixed string: <code>policy</code></td>
+</tr>
+<tr>
+<td><code>cogVersion</code></td>
+<td>Semver of the policy-cog schema this record conforms to</td>
+</tr>
+<tr>
+<td><code>policyId</code></td>
+<td>Stable identifier for the policy</td>
+</tr>
+<tr>
+<td><code>policyVersion</code></td>
+<td>Semver of this policy version</td>
+</tr>
+<tr>
+<td><code>issuingBody</code></td>
+<td>DID or organisation reference of the regulator</td>
+</tr>
+<tr>
+<td><code>jurisdiction</code></td>
+<td>ISO 3166-1 alpha-2 code, or <code>EU</code>, or
+<code>international</code></td>
+</tr>
+<tr>
+<td><code>effectiveFrom</code></td>
+<td>RFC 3339 date the policy version takes effect</td>
+</tr>
+<tr>
+<td><code>clauses</code></td>
+<td>Addressable fragments with fragment ID, title, and body anchor</td>
+</tr>
+</tbody>
+</table>
+<h3 id="worked-sample-1">2.2 Worked sample</h3>
+<div class="sourceCode" id="cb2" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contentType</span><span class="kw">:</span><span class="at"> policy</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cogVersion</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.0</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">policyId</span><span class="kw">:</span><span class="at"> eu-ai-act-art-12</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">policyVersion</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.0.0</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">issuingBody</span><span class="kw">:</span><span class="at"> did:web:digital-strategy.ec.europa.eu</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jurisdiction</span><span class="kw">:</span><span class="at"> EU</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveFrom</span><span class="kw">:</span><span class="at"> 2026-08-02T00:00:00Z</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">clauses</span><span class="kw">:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> para-1</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">title</span><span class="kw">:</span><span class="at"> Record-keeping requirement</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bodyAnchor</span><span class="kw">:</span><span class="at"> record-keeping-requirement</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> para-2</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">title</span><span class="kw">:</span><span class="at"> Automatic event recording</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bodyAnchor</span><span class="kw">:</span><span class="at"> automatic-event-recording</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<h3 id="reasoning-1">2.3 Reasoning</h3>
+<p>The policy record is the durable referent that every decision
+record's <code>policyRef</code> resolves against. <code>policyId</code>
+plus <code>policyVersion</code> form an identity that does not move when
+the URL of the regulator's publication changes.
+<code>effectiveFrom</code> lets a verifier reason about which policy
+version was in force at a given decision time, which matters whenever a
+decision is reviewed long after it was made. The <code>clauses</code>
+array makes individual fragments addressable so a decision record can
+reference "paragraph 1" by <code>clause: para-1</code> without
+ambiguity, and a regulator inquiry can ask "which decisions cited this
+specific clause" without parsing prose. <code>issuingBody</code> names
+the regulator's DID; whether that DID has actually signed the policy
+record, or whether a registry has third-party-published it on the
+regulator's behalf, is recorded in the accompanying attestation record
+(§3 of this appendix), not in the policy record itself. The policy
+record is data; the trust wrapper is separate.</p>
+<h2 id="the-attestation-record">3. The attestation record</h2>
+<p>An attestation record is produced by the trust layer — the registry —
+and wraps a cog with cryptographic apparatus. The cog itself is
+unchanged; the attestation references the cog by ID and digest. A cog
+can be unattested, attested by one registry, or attested by several
+different registries, without any change to the cog's schema or
+bytes.</p>
+<p>The attestation record is itself a cog: the first field declares
+<code>contentType: attestation</code>. The record format is recursive,
+which is the rule of separation made structural — trust wrappers are
+also data files conforming to a cog schema.</p>
+<h3 id="required-fields-2">3.1 Required fields</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>contentType</code></td>
+<td>Fixed string: <code>attestation</code></td>
+</tr>
+<tr>
+<td><code>cogVersion</code></td>
+<td>Semver of the attestation-cog schema</td>
+</tr>
+<tr>
+<td><code>attests</code></td>
+<td>Reference to the cog being attested: cog ID and SHA-256 digest of
+the JCS-canonicalised bytes</td>
+</tr>
+<tr>
+<td><code>issuedBy</code></td>
+<td>DID of the trust-layer operator (the registry instance)</td>
+</tr>
+<tr>
+<td><code>issuedAt</code></td>
+<td>RFC 3339 timestamp of attestation</td>
+</tr>
+<tr>
+<td><code>mechanism</code></td>
+<td>One of <code>individual</code> or <code>merkleBatch</code></td>
+</tr>
+<tr>
+<td><code>signature</code></td>
+<td>For <code>individual</code>: signature over the digest, algorithm
+identifier, key reference</td>
+</tr>
+<tr>
+<td><code>batch</code></td>
+<td>For <code>merkleBatch</code>: root hash, inclusion proof, batch-root
+attestation reference</td>
+</tr>
+</tbody>
+</table>
+<h3 id="worked-sample-individual-attestation">3.2 Worked sample —
+individual attestation</h3>
+<div class="sourceCode" id="cb3" data-role="code-container"><pre
+class="sourceCode json"><code class="sourceCode json" data-role="code-content"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;contentType&quot;</span><span class="fu">:</span> <span class="st">&quot;attestation&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cogVersion&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cogId&quot;</span><span class="fu">:</span> <span class="st">&quot;cog:web:reginald.tg.community:atst-01JD3K5N7P9Q1R3S5T7V9W2Y4Z&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;attests&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;cogId&quot;</span><span class="fu">:</span> <span class="st">&quot;cog:web:example-insurance.com:01JC8X7K2N4P5Q6R7S8T9V0W1Y&quot;</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;digest&quot;</span><span class="fu">:</span> <span class="st">&quot;sha256:7e4d8a3c91b25f6e0a4d2b8c7f3e1a9d6b4c2e8a0f9d7c3b1a5e8d4f2c6b9a3e&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;issuedBy&quot;</span><span class="fu">:</span> <span class="st">&quot;did:web:reginald.tg.community&quot;</span><span class="fu">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;issuedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-05-15T11:00:43Z&quot;</span><span class="fu">,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;mechanism&quot;</span><span class="fu">:</span> <span class="st">&quot;individual&quot;</span><span class="fu">,</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;signature&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;algorithm&quot;</span><span class="fu">:</span> <span class="st">&quot;ed25519&quot;</span><span class="fu">,</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;keyId&quot;</span><span class="fu">:</span> <span class="st">&quot;did:web:reginald.tg.community#sign-2026&quot;</span><span class="fu">,</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;z3MvkP9hQ7tR2nL5xK8wB4cF6jH1aD0eY3uT9sN2vM...&quot;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h3 id="reasoning-individual">3.3 Reasoning — individual</h3>
+<p>The record's own <code>cogId</code> lives in the registry's namespace
+because the registry produced it. The <code>attests</code> block is what
+binds the wrapper to its target: the target's <code>cogId</code> so the
+verifier can fetch the target, and the SHA-256 digest of the target's
+JCS-canonicalised bytes so the verifier can confirm the target has not
+changed since signing. <code>issuedBy</code> is the registry's DID;
+<code>signature.keyId</code> is the specific verification method inside
+that DID document holding the public key. To verify, the client resolves
+the DID, retrieves the key by <code>keyId</code>, and validates the
+Ed25519 signature over the digest using a standard library. The registry
+produced this record; the registry does not verify it. Verification is
+entirely client-side, against existing standards.</p>
+<h3 id="worked-sample-merkle-batch-attestation">3.4 Worked sample —
+merkle-batch attestation</h3>
+<p>The per-cog record carries an inclusion proof against a shared batch
+root:</p>
+<div class="sourceCode" id="cb4" data-role="code-container"><pre
+class="sourceCode json"><code class="sourceCode json" data-role="code-content"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;contentType&quot;</span><span class="fu">:</span> <span class="st">&quot;attestation&quot;</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cogVersion&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cogId&quot;</span><span class="fu">:</span> <span class="st">&quot;cog:web:reginald.tg.community:atst-01JD3K5N7P9Q1R3S5T7V9W2Y4Z&quot;</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;attests&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;cogId&quot;</span><span class="fu">:</span> <span class="st">&quot;cog:web:example-insurance.com:01JC8X7K2N4P5Q6R7S8T9V0W1Y&quot;</span><span class="fu">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;digest&quot;</span><span class="fu">:</span> <span class="st">&quot;sha256:7e4d8a3c91b25f6e0a4d2b8c7f3e1a9d6b4c2e8a0f9d7c3b1a5e8d4f2c6b9a3e&quot;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;issuedBy&quot;</span><span class="fu">:</span> <span class="st">&quot;did:web:reginald.tg.community&quot;</span><span class="fu">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;issuedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-05-15T11:00:43Z&quot;</span><span class="fu">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;mechanism&quot;</span><span class="fu">:</span> <span class="st">&quot;merkleBatch&quot;</span><span class="fu">,</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;batch&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;rootAttestation&quot;</span><span class="fu">:</span> <span class="st">&quot;cog:web:reginald.tg.community:batch-01JD3K5N6P8Q0R2S4T6V8W1Y3Z&quot;</span><span class="fu">,</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;leafIndex&quot;</span><span class="fu">:</span> <span class="dv">4271</span><span class="fu">,</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;proof&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;sha256:a1b2c3d4...&quot;</span><span class="ot">,</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;sha256:e5f6a7b8...&quot;</span><span class="ot">,</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;sha256:c9d0e1f2...&quot;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The corresponding batch-root attestation, signed once, covers the
+entire batch:</p>
+<div class="sourceCode" id="cb5" data-role="code-container"><pre
+class="sourceCode json"><code class="sourceCode json" data-role="code-content"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;contentType&quot;</span><span class="fu">:</span> <span class="st">&quot;attestation&quot;</span><span class="fu">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cogVersion&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cogId&quot;</span><span class="fu">:</span> <span class="st">&quot;cog:web:reginald.tg.community:batch-01JD3K5N6P8Q0R2S4T6V8W1Y3Z&quot;</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;attests&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;merkleRoot&quot;</span><span class="fu">:</span> <span class="st">&quot;sha256:9f8e7d6c5b4a3210fedcba9876543210abcdef0123456789fedcba0987654321&quot;</span><span class="fu">,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;leafCount&quot;</span><span class="fu">:</span> <span class="dv">8431</span><span class="fu">,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;hashFunction&quot;</span><span class="fu">:</span> <span class="st">&quot;sha256&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;issuedBy&quot;</span><span class="fu">:</span> <span class="st">&quot;did:web:reginald.tg.community&quot;</span><span class="fu">,</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;issuedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-05-15T11:00:43Z&quot;</span><span class="fu">,</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;mechanism&quot;</span><span class="fu">:</span> <span class="st">&quot;merkleBatch&quot;</span><span class="fu">,</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;signature&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;algorithm&quot;</span><span class="fu">:</span> <span class="st">&quot;ed25519&quot;</span><span class="fu">,</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;keyId&quot;</span><span class="fu">:</span> <span class="st">&quot;did:web:reginald.tg.community#sign-2026&quot;</span><span class="fu">,</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;z8RxKj3mQ1tP9wL4nB7cF2dH5jK6aE0bY3uT8sN1vM...&quot;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h3 id="reasoning-batch">3.5 Reasoning — batch</h3>
+<p>The per-cog record carries no signature of its own. Its
+<code>batch.rootAttestation</code> field names a sibling record — the
+batch root — that carries the single signature covering the whole batch.
+The <code>proof</code> array is the sequence of sibling hashes a
+verifier needs to walk from this leaf up to the root. The batch-root
+record is what the registry actually signed: one Ed25519 operation
+across thousands of records rather than one per record. The economics
+matter at scale; the security does not change, because changing any leaf
+changes its hash, propagates up, and breaks the root signature.</p>
+<p>A verifier validating an individual decision cog fetches three
+records — the decision cog itself, the per-cog attestation, and the
+batch-root attestation — and performs three checks: the cog's JCS digest
+matches <code>attests.digest</code>, the inclusion proof reconstructs
+the root in <code>batch.rootAttestation</code>, and the Ed25519
+signature on the root verifies against the registry's public key. All
+three checks are standard-library operations on existing primitives. The
+registry produced these records; the registry does not run any of the
+verification steps.</p>
+<h2 id="the-provenance-record">4. The provenance record</h2>
+<p>A provenance record is the chain of steps an audit, render, or
+pipeline went through to produce an artefact. The record is the event
+log; the artefact carries a pointer to its own provenance record in its
+metadata, so a reader holding the artefact alone can extract and walk
+the chain. The provenance record is structurally a sibling of decision,
+policy, and attestation records and uses the same canonicalisation,
+naming, and trust-layer separation.</p>
+<h3 id="required-fields-3">4.1 Required fields</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$schema</code></td>
+<td>URL of the published schema this record conforms to</td>
+</tr>
+<tr>
+<td><code>schemaVersion</code></td>
+<td>Machine-readable version string of the schema shape</td>
+</tr>
+<tr>
+<td><code>auditId</code></td>
+<td>Stable identifier of the audit or pipeline run the chain belongs
+to</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>Identifier of the artefact the chain is evidence for (URI, file
+path, or content hash)</td>
+</tr>
+<tr>
+<td><code>startedAt</code></td>
+<td>RFC 3339 timestamp of the first write to the chain. Never moves
+after the first write.</td>
+</tr>
+<tr>
+<td><code>lastWriteAt</code></td>
+<td>RFC 3339 timestamp of the most recent write, including every step
+append.</td>
+</tr>
+<tr>
+<td><code>runRevision</code></td>
+<td>Monotonic integer incremented on every re-initialisation of the
+chain against the same <code>auditId</code>. First write is
+<code>1</code>. Step appends do not touch this counter.</td>
+</tr>
+<tr>
+<td><code>parties</code></td>
+<td>Array of role-attributed identities accountable for the chain. Each
+entry carries <code>name</code>, <code>email</code>,
+<code>identifier</code>, <code>organisation</code>,
+<code>country</code>, and a controlled <code>role</code> value.</td>
+</tr>
+<tr>
+<td><code>frameworks</code></td>
+<td>Array of regulatory regimes the chain claims relevance to. Each
+entry carries <code>id</code>, <code>title</code>, <code>version</code>,
+<code>jurisdiction</code>, <code>appliesTo</code>, and a reserved
+<code>x-&lt;framework&gt;</code> extension namespace.</td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td>Ordered array of step records. Each step carries
+<code>stepId</code>, <code>timestamp</code>, <code>agent</code>,
+<code>outcome</code>, and optional <code>inputs</code>,
+<code>outputs</code>, <code>intent</code>,
+<code>humanIntervention</code>, <code>frameworks</code> (per-step), and
+<code>jurisdictionalEvidence</code> (per-step).</td>
+</tr>
+</tbody>
+</table>
+<p>Two flat surfaces sit alongside the structured fields so simple greps
+work: a single-block <code>responsiblePerson</code> at the top of the
+record mirrors the <code>auditOperator</code> entry from
+<code>parties[]</code>, and a <code>frameworksCited</code> array is a
+flat list of identifiers drawn from <code>frameworks[].id</code>.</p>
+<h3 id="worked-sample-2">4.2 Worked sample</h3>
+<div class="sourceCode" id="cb6" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$schema</span><span class="kw">:</span><span class="at"> https://mx.allabout.network/schemas/provenance-ai/v2</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">schemaVersion</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2.0&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">auditId</span><span class="kw">:</span><span class="at"> dkd.de-de-2026-05-28-01</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">target</span><span class="kw">:</span><span class="at"> mx-outputs/audit/2026-05-28/dkd.de-de/dkd-de-de-report.pdf</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">startedAt</span><span class="kw">:</span><span class="at"> 2026-05-28T08:14:02Z</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lastWriteAt</span><span class="kw">:</span><span class="at"> 2026-05-28T09:17:42Z</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">runRevision</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">parties</span><span class="kw">:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">role</span><span class="kw">:</span><span class="at"> auditOperator</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Tom Cranstoun</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">email</span><span class="kw">:</span><span class="at"> tom.cranstoun@gmail.com</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">identifier</span><span class="kw">:</span><span class="at"> https://allabout.network</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">organisation</span><span class="kw">:</span><span class="at"> Digital Domain Technologies Ltd (trading as CogNovaMX)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">country</span><span class="kw">:</span><span class="at"> GB</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">frameworks</span><span class="kw">:</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> EU-AI-Act</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;2024/1689&#39;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">jurisdiction</span><span class="kw">:</span><span class="at"> EU</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">appliesTo</span><span class="kw">:</span><span class="at"> all-steps</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> EU-EAA-Directive-2019-882</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;2019/882&#39;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">jurisdiction</span><span class="kw">:</span><span class="at"> EU</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">appliesTo</span><span class="kw">:</span><span class="at"> accessibility-steps</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> US-NIST-AI-RMF</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;1.0&#39;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">jurisdiction</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;US (voluntary federal framework)&#39;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">appliesTo</span><span class="kw">:</span><span class="at"> all-steps</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">stepId</span><span class="kw">:</span><span class="at"> no-upstream-provenance</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">timestamp</span><span class="kw">:</span><span class="at"> 2026-05-28T08:14:02Z</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">agent</span><span class="kw">:</span><span class="at"> mx.pdf.sh</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">outcome</span><span class="kw">:</span><span class="at"> skipped</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">intent</span><span class="kw">:</span><span class="at"> chain begins at this render; no signed record of the source pre-existed</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">stepId</span><span class="kw">:</span><span class="at"> pdf-render</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">timestamp</span><span class="kw">:</span><span class="at"> 2026-05-28T09:17:42Z</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">agent</span><span class="kw">:</span><span class="at"> mx.pdf.sh</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">outcome</span><span class="kw">:</span><span class="at"> pass</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">sourceMd</span><span class="kw">:</span><span class="at"> dkd-de-de-report.md</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">sourceSha</span><span class="kw">:</span><span class="at"> a1b2c3d4e5f6...</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">jurisdictionalEvidence</span><span class="kw">:</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">EU-AI-Act</span><span class="kw">:</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">article</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;12&#39;</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">claim</span><span class="kw">:</span><span class="at"> automated-log</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">US-NIST-AI-RMF</span><span class="kw">:</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">function</span><span class="kw">:</span><span class="at"> MEASURE</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">category</span><span class="kw">:</span><span class="at"> MEASURE 2.1</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="fu">responsiblePerson</span><span class="kw">:</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Tom Cranstoun</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">email</span><span class="kw">:</span><span class="at"> tom.cranstoun@gmail.com</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">identifier</span><span class="kw">:</span><span class="at"> https://allabout.network</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">role</span><span class="kw">:</span><span class="at"> auditOperator</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">organisation</span><span class="kw">:</span><span class="at"> Digital Domain Technologies Ltd (trading as CogNovaMX)</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">country</span><span class="kw">:</span><span class="at"> GB</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="fu">frameworksCited</span><span class="kw">:</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> EU-AI-Act</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> EU-EAA-Directive-2019-882</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> US-NIST-AI-RMF</span></span></code></pre></div>
+<h3 id="reasoning-2">4.3 Reasoning</h3>
+<p>The chain is honest by construction. The first step in a freshly
+initialised chain is <code>no-upstream-provenance</code> with outcome
+<code>skipped</code>, naming the absence rather than inventing prior
+history. Every subsequent step records what the pipeline actually did.
+<code>inputs.sourceSha</code> is the git-content hash of the source
+bytes, so a verifier with access to the source can compute the same hash
+with <code>git hash-object</code> and confirm the chain points at one
+byte-exact version forever. The <code>parties[]</code> array names every
+accountable role the audit names; the <code>frameworks[]</code> array
+names every regulatory regime the chain claims as relevant evidence; the
+per-step <code>jurisdictionalEvidence</code> lets a regulator walk
+straight from clause to step.</p>
+<p>The two streams — AI and deterministic — carry the same
+<code>parties[]</code>, <code>frameworks[]</code>,
+<code>runRevision</code>, and <code>lastWriteAt</code> shapes; they
+differ in which steps land where. The AI stream records
+non-deterministic events (LLM calls, multi-agent collectors,
+human-committed actions) for AI-governance regimes; the deterministic
+stream records rule-driven events (canonicalisation, render, gate
+verdicts) for accessibility-conformance regimes. A render step lands in
+the deterministic stream; the AI stream mirrors the event so an
+inspector reading the artefact sees the same render under both
+audiences.</p>
+<p>The provenance record is the evidence vehicle the canon paper at
+<code>mx-canon/ssot/papers/provenance-regime-compatibility.md</code>
+documents. It is not a compliance grant. Compliance with any specific
+regime remains a legal duty of the organisation; the record provides the
+queryable, tamper-evident audit trail every modern regulatory regime
+expects organisations to be able to produce on inspection.</p>
+<h2 id="how-the-five-record-types-compose">5. How the five record types
+compose</h2>
+<p>The five record types compose without any of them needing to know
+about the others' internals.</p>
+<p>A decision record references a policy record by
+<code>policyRef</code>. The reference is structural — registry URI, cog
+ID, version, optional clause — and resolves to whatever policy cog the
+registry holds under that identifier at that version. The decision
+record does not embed the policy; it points at it.</p>
+<p>A policy record is self-contained. It does not reference decision
+records. It exists to be referenced by them.</p>
+<p>A content cog (the format the chapter discusses at length) is
+structurally a sibling of the decision and policy records. All three use
+the same canonicalisation rules, the same field naming convention, the
+same trust-layer separation. The first field of every cog declares its
+<code>contentType</code>; everything downstream of that field reads the
+record against the schema for that type.</p>
+<p>An attestation record references whichever cog it attests — content,
+decision, policy, or another attestation. The attestation is opaque to
+the type of cog underneath; what it carries is a cog ID, a digest, and a
+signature, and those three are enough to verify the binding regardless
+of what kind of cog sits on the other end of the reference.</p>
+<p>A provenance record is structurally a sibling of content, decision,
+and policy records. It does not reference policy records by
+<code>policyRef</code>; the provenance record is the audit trail of how
+an artefact came to exist, not the decision-event log. A decision
+record's <code>inputHash</code> and a provenance record's per-step
+<code>inputs</code> are the two ways an inquiring regulator walks back
+to source: the decision record names what the model saw at decision
+time; the provenance record names what the pipeline did at every step.
+Both shapes are first-class records in the registry; both can carry
+attestations of their own through §3 of this appendix.</p>
+<p>The shape that falls out is a small graph: cogs of four kinds
+(content, decision, policy, provenance); attestation records wrapping
+any of them; an inclusion-proof structure linking batched attestations
+to a single signed root; and a registry whose only job is to serve the
+records it has been given. Nothing in that graph depends on the registry
+interpreting any of it. The trust property the system depends on is the
+standard cryptographic chain — DID resolution, JCS canonicalisation,
+Ed25519 verification, RFC 6962 inclusion-proof reconstruction — applied
+by the verifier, not the registry. The registry that produced the
+records is structurally interchangeable with any other registry that
+meets the conformance suite.</p>
+<p>A machine-to-machine procurement negotiation shows the composition
+under load. Software agrees a supply contract with other software, no
+human in the exchange. A human commands the mandate in advance and signs
+it: a policy record naming the issuer, the agent it commands, the spend
+ceiling, the terms that may never be conceded, and an expiry. The agent
+negotiates inside that mandate, and at the moment it agrees it emits a
+decision record that references the mandate by <code>policyRef</code>
+and carries the agreed position, the inputs it weighed, and the path to
+the number. An attestation record signs each. The four questions a
+finance team or the counterparty's machine would later ask, who approved
+the terms, who is accountable, whether the deal broke policy, how the
+position was reached, resolve by reading the decision against the policy
+it points at: the agreed price sits under the ceiling, no forbidden
+clause appears, and the author is named and signed. The human did not
+stand in the loop, because a machine-speed exchange has no point in it
+to stand at. They stayed in command, and the signed records carry that
+command forward through every deal struck under it.</p>
+<h2 id="where-to-read-further">6. Where to read further</h2>
+<p>The deep specification is the v-next REGINALD PRD in canon:
+identifier semantics, schema versioning, supersession, the submission
+API, the query model, the security threat model, the governance of the
+standards body, the bootstrap problem for first policy cogs, the
+compliance levels mapped onto the new record types. The PRD is normative
+for the standard; this appendix is the book's reference shape and stays
+at the level of <em>what each record is and how they fit
+together</em>.</p>
+<p>The chapter that frames the architecture this appendix references is
+Chapter 20 of <em>MX: The Protocols</em> — <em>Cogs and Reginald</em> —
+particularly the <em>Beyond the content cog</em> section. The companion
+<em>MX Attestation Records and Verification</em> draft note in The
+Gathering's stream is the corresponding open-standard document for the
+attestation record specifically.</p>
+</div>
+<hr>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+
+  <!-- Floating home button (top-left) -->
+  <a href="index.html" class="floating-home-button" aria-label="Back to Home">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 0L0 8h3v8h10V8h3L8 0zm0 2.5L13.5 8H11v6H5V8H2.5L8 2.5z"/>
+    </svg>
+    Home
+  </a>
+  <!-- Floating back to top button (bottom-left) -->
+  <a href="#main" class="floating-top-button" aria-label="Back to Top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 3.5l-5.5 5.5L4 10.5l3-3v8.5h2V7.5l3 3L13.5 9z"/>
+    </svg>
+    Top
+  </a>
+
+  <script>
+    // Add copy buttons to all code blocks
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find both wrapped code blocks (div.sourceCode) and standalone pre blocks
+      const wrappedBlocks = document.querySelectorAll('div.sourceCode');
+      const standaloneBlocks = document.querySelectorAll('pre[data-role="code-block"]:not(.sourceCode)');
+
+      // Process wrapped code blocks (HTML, JavaScript, etc.)
+      wrappedBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          let text = '';
+          const spans = codeElement.querySelectorAll('span[id^="cb"]');
+          spans.forEach(function(span) {
+            const nodes = Array.from(span.childNodes);
+            nodes.forEach(function(node) {
+              if (node.nodeType === Node.TEXT_NODE) {
+                text += node.textContent;
+              } else if (node.nodeName !== 'A') {
+                text += node.textContent;
+              }
+            });
+          });
+          return text;
+        });
+      });
+
+      // Process standalone pre blocks (text, robots.txt, etc.)
+      standaloneBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          return codeElement ? codeElement.textContent : block.textContent;
+        });
+      });
+
+      // Helper function to add copy button to any block
+      function addCopyButton(block, extractTextFn) {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
+
+        button.addEventListener('click', function() {
+          const text = extractTextFn(block);
+
+          navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied';
+            button.classList.add('copied');
+            setTimeout(function() {
+              button.textContent = 'Copy';
+              button.classList.remove('copied');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Failed to copy:', err);
+            button.textContent = 'Failed';
+            setTimeout(function() {
+              button.textContent = 'Copy';
+            }, 2000);
+          });
+        });
+
+        block.insertBefore(button, block.firstChild);
+      }
+    });
+  </script>
+</body>
+</html>

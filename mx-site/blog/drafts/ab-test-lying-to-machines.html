@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Your A/B Test Might Be Lying to Machines"
+description: "A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it."
+author: "Tom Cranstoun"
+created: 2026-06-02
+modified: 2026-06-02
+version: "1.0"
+
+mx:
+  x-mx-managedBy: blog-post.cog.md
+  status: draft
+  contentType: blog-post
+  audience: [humans, machines]
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/ab-test-lying-to-machines.md
+  x-mx-contextProvides:
+    - "A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it."
+  stability: stable
+  purpose: "A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it."
+  x-mx-backport: clean
+  servedAt: https://mx.allabout.network/blog/drafts/ab-test-lying-to-machines.html
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/ab-test-lying-to-machines.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/ab-test-lying-to-machines.html">
+  <meta property="og:title" content="Your A/B Test Might Be Lying to Machines | CogNovaMX">
+  <meta property="og:description" content="A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-02">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Your A/B Test Might Be Lying to Machines | CogNovaMX">
+  <meta name="twitter:description" content="A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Your A/B Test Might Be Lying to Machines">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/ab-test-lying-to-machines.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Your A/B Test Might Be Lying to Machines | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Your A/B Test Might Be Lying to Machines",
+        "headline": "Your A/B Test Might Be Lying to Machines",
+        "description": "A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-02",
+        "dateModified": "2026-06-02",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/ab-test-lying-to-machines.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1571,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/ab-test-lying-to-machines.html",
+        "name": "Your A/B Test Might Be Lying to Machines",
+        "url": "https://mx.allabout.network/blog/drafts/ab-test-lying-to-machines.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-we-found">What We Found</a></li>
+        <li><a href="#why-ab-tests-break-for-machines">Why A/B Tests Break for Machines</a></li>
+        <li><a href="#the-training-corpus-problem">The Training Corpus Problem</a></li>
+        <li><a href="#what-publishers-should-do">What Publishers Should Do</a></li>
+        <li><a href="#the-broader-shift">The Broader Shift</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1571">
+        <header class="article-header">
+          <h1>Your A/B Test Might Be Lying to Machines</h1>
+          <div class="article-meta"
+               data-published="2026-06-02"
+               data-modified="2026-06-02"
+               data-reading-time="8 min">
+            <time datetime="2026-06-02">2 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>8 min read</span>
+          </div>
+        </header>
+
+
+<p>During a recent MX audit, we fetched the homepage of a major SaaS platform three times in quick succession. Three different headlines came back. None of them was the production headline that appeared when we loaded the page in a browser. The site's personalisation layer was treating each cold HTTP request as a fresh visitor, randomly assigning it to an A/B test cohort, and serving a test variant as the headline.</p>
+<p>The vendor responsible was Ninetailed, a content personalisation platform. Our audit tool detected its script patterns in the served HTML and confirmed the variant inconsistency: three fetches, three H1 texts, zero session continuity.</p>
+<p>This is not a bug in the personalisation platform. It is a consequence of the web being built for human browsers, now encountering a growing class of visitors who are not human browsers.</p>
+<h2 id="what-we-found" tabindex="-1">What We Found</h2>
+<p>The MX Web Audit Suite probes the same URL three times during its server response stability check. The probes are cache-busted (each carries a unique query parameter) to bypass CDN edge caches and measure origin response time. This process also captures the H1 text from each response body.</p>
+<p>On the SaaS site in question, the three H1 results were:</p>
+<ul>
+<li>&quot;Sorry, content chaos -- your time's up&quot;</li>
+<li>&quot;Lorem ipsum dolor sit amet... whatever&quot;</li>
+<li>A third variant we cannot reproduce because cohort assignment was random</li>
+</ul>
+<p>The production headline -- the one that appears in a browser session where cookies are set and a cohort is assigned -- was none of these. The audit tool's SEO score of 94/100 was computed from the Puppeteer-rendered version, which loaded the real content after JavaScript executed. The raw HTTP fetches, the kind an AI inference agent or training corpus crawler makes, received test variants.</p>
+<p>We now detect this automatically. When a known personalisation or A/B test vendor is found in the served HTML, and when content variance is confirmed across multiple fetches of the same URL, the audit report surfaces a dedicated section explaining the machine visitor impact and recommending mitigations.</p>
+<h2 id="why-ab-tests-break-for-machines" tabindex="-1">Why A/B Tests Break for Machines</h2>
+<p>A/B testing frameworks are built on a contract: a visitor arrives, a cookie assigns them to a cohort, and that cohort follows them across every page they visit. The experiment holds together. Each visitor follows one consistent path, and the data means something because everyone saw a single version of the site, not a random mix.</p>
+<p>Machines don't honour this contract. They're not trying to break it; they were just never built into it in the first place.</p>
+<p>An AI inference agent fetching a page to answer a user's question issues a single, stateless HTTP GET. No prior cookies exist. No session has been established. The experiment layer assigns the request to a cohort based on whatever signals are available (timestamp, IP range, a random number) and serves a variant. The agent records the content it received, constructs its answer, and moves on.</p>
+<p>The next time a different agent fetches the same URL -- or the same agent fetches it an hour later -- the process repeats from the beginning. A different cohort, a different variant, a different headline, a different set of claims about what the product does and who it is for.</p>
+<p>An agent building an understanding of your site across multiple pages faces the same problem at scale. The homepage says one thing. The pricing page was fetched in a different cohort. The product page is different again. The machine assembles a picture from incoherent fragments. What it knows about your site isn't your site; it's a scattershot sample of your test variants.</p>
+<h2 id="the-training-corpus-problem" tabindex="-1">The Training Corpus Problem</h2>
+<p>The inference-time problem is real, but the training-time problem compounds it.</p>
+<p>Training corpus builders -- bots that sweep the full sitemap for ingestion -- do not fetch each URL once. They fetch it across multiple crawl passes, separated by days or weeks. Each pass is cold. Each URL may be assigned to a different cohort. The training data for a given URL contains multiple versions of that URL's content, with no signal indicating which version is canonical.</p>
+<p>If your homepage has been A/B tested over the past year, a model trained on a corpus that included your site may have ingested a dozen different versions of your headline, your value proposition, and your description of what you do. When a user asks the model about your company, the model's answer is drawn from all of those versions -- weighted by frequency, by recency of the training cut, and by the surrounding context -- not from the canonical version you intended to communicate.</p>
+<p>This is not a theoretical risk. It is the normal operating condition of any site running persistent experiments with a large corpus-building audience.</p>
+<p>Sitemap sweepers are a specific class of training corpus builder that is worth naming separately. A bot that reads your sitemap and fetches every URL it finds is not behaving maliciously. It is behaving exactly as the sitemap instructs it to. If your sitemap declares 3,000 URLs, the bot fetches 3,000 URLs. If each of those URLs is subject to A/B testing, the bot ingests a sample of your experiment space, not your canonical site.</p>
+<p><a href="https://mx.allabout.network/blog/llms-txt-guide.html">llms.txt</a> gives publishers a mechanism to curate what machines ingest. A well-structured llms.txt that points machines at canonical, non-personalised versions of key pages is a meaningful mitigation. We cover the practical details below.</p>
+<h2 id="what-publishers-should-do" tabindex="-1">What Publishers Should Do</h2>
+<p>The goal is not to disable personalisation or A/B testing. Those are legitimate tools for improving human experience. The goal is to ensure that machines -- which cannot participate in the session contract -- receive consistent, canonical content.</p>
+<h3 id="user-agent-bypass-rules" tabindex="-1">User-Agent Bypass Rules</h3>
+<p>Most personalisation platforms support configuration rules that bypass experiment assignment for specified User-Agents. ClaudeBot, GPTBot, ChatGPT-User, PerplexityBot, GoogleOther, CCBot, and Google-Extended are the most important to cover. When these agents show up, give them the control variant: the real page, the one you'd call canonical.</p>
+<p>This is the most reliable fix and the one we recommend first. It requires no changes to your sitemap, your llms.txt, or your content. It requires a configuration change in your personalisation platform and a verification step (fetch the page with each User-Agent string and confirm you receive the control).</p>
+<h3 id="llmstxt-declaration-for-variable-content-pages" tabindex="-1">llms.txt Declaration for Variable-Content Pages</h3>
+<p>For pages that are intentionally variable -- personalised landing pages, geo-targeted content, logged-in dashboards -- the User-Agent bypass may not be sufficient or appropriate. In those cases, use <a href="https://mx.allabout.network/blog/llms-txt-guide.html">llms.txt</a> to declare that the content varies by session.</p>
+<p>A simple convention: include the page in llms.txt with a note that the content is session-dependent. Machines that read llms.txt before crawling will understand that any single fetch of that page is not canonical, and should not be treated as a stable fact about the organisation.</p>
+<p>This also applies to the training corpus problem. A training corpus builder that honours llms.txt will know to either skip those pages or annotate their content as session-variable rather than canonical.</p>
+<h3 id="canonical-content-paths" tabindex="-1">Canonical Content Paths</h3>
+<p>For the most important pages on your site -- homepage, product overview, pricing -- consider maintaining a canonical, non-personalised version accessible at a stable URL. Reference this URL in llms.txt. Machines that need a reliable representation of what you do and what you charge can fetch the canonical URL with confidence.</p>
+<p>This is more work than a User-Agent bypass rule, but it produces a better result: a page that is explicitly designed to communicate your position to machines, rather than a page that happens to not be personalised.</p>
+<h2 id="the-broader-shift" tabindex="-1">The Broader Shift</h2>
+<p>The web was not designed for machines. It was designed for human browsers: stateful, interactive, session-bearing, capable of executing JavaScript and interpreting visual layout. Every optimisation layer we have added -- personalisation, A/B testing, geo-targeting, progressive disclosure, consent management -- assumes that contract.</p>
+<p>Machines do not carry that contract. They arrive cold. They read HTML. They leave. They do not click. They do not consent. They do not convert. They do not care about your A/B test result.</p>
+<p>It is time to change our perception of who the users are.</p>
+<p>A growing share of traffic to every public website is machine traffic: AI inference agents answering questions on behalf of users, training corpus builders ingesting content for future model runs, automated pipelines extracting structured data for downstream use. These visitors have different capabilities, different constraints, and different needs from human browser sessions.</p>
+<p>Designing for machines does not mean abandoning what you have built for humans. It means acknowledging that the same page serves two different audiences with two different contracts, and deciding consciously how to honour both.</p>
+<p>The A/B testing problem is one instance of a broader pattern we call the Stateless Machine Visitor. Sessions, cookies, consent flows, personalisation layers, geo-redirects -- all of these assume a visitor who maintains state across requests. Machines, as they currently exist, do not. Every web system that assumes session continuity is a system that, by design or by accident, tells machines something different from what it tells humans.</p>
+<p>The opportunity is to close that gap deliberately: to give machines a consistent, canonical, version of what you intend to say, while continuing to personalise the experience for humans who can benefit from it.</p>
+<p>Our audit now detects A/B test vendors in crawled HTML and confirms variant inconsistency by probing the same URL multiple times. When we find it, we say so, we show the evidence, and we recommend the mitigations. The question of whether to act is yours.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+</body>
+</html>

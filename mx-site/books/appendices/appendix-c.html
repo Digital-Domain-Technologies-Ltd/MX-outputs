@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+    <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+author: "Tom Cranstoun"
+created: "2026-01-22"
+modified: "2026-06-12"
+version: "2.1"
+description: "Web Audit Suite - the CogNovaMX commercial service that measures how well a site works for the machines reading it. Outcomes, deliverables, and how to engage."
+
+title: 'Appendix C: Web Audit Suite'
+tags: [web-audit-suite, machine-readiness, audit-service, cognovamx]
+type: info-doc
+mx:
+  status: published
+  copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
+  partOf: [mx-audit]
+  book: "Shared"
+  appendix: "C"
+  words: 980
+  runbook: |
+    This document is copyrighted material. No part may be reproduced without permission.
+    This is a book manuscript appendix. Write as if it has always existed.
+    NEVER include: publication dates, "we added", "new feature", "launching",
+    "this update", or any meta-commentary about the book's development.
+    Write definitive present tense. Historical context about subject matter
+    (industry events, product launches) is allowed.
+    This appendix is a service overview for clients and prospects.
+    It MUST NOT carry implementation internals - no CLI commands, no flag names,
+    no report file names, no scoring formulae, no detection patterns, no
+    configuration internals. Outcomes and deliverables only.
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-c-web-audit-suite-guide.md
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+<meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Tom Cranstoun" />
+  <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
+  <title>Appendix C: Web Audit Suite</title>
+  
+
+  <link rel="canonical" href="https://mx.allabout.network/books/appendices/appendix-c.html">
+  <!-- MX metadata -->
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="reference">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+  <meta name="mx:aiEditable" content="false">
+  <meta name="mx:content-policy" content="extract-with-attribution">
+  <meta name="mx:attribution" content="required">
+  <link rel="llms-txt" href="/llms.txt">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/books/appendices/appendix-c.html">
+  <meta property="og:title" content="Appendix C: Web Audit Suite">
+  <meta property="og:description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="MX: The Protocols — book cover">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://mx.allabout.network/books/appendices/appendix-c.html">
+  <meta name="twitter:title" content="Appendix C: Web Audit Suite">
+  <meta name="twitter:description" content="Implementation guide from MX-Protocols book">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="MX: The Protocols — book cover">
+  <meta name="twitter:creator" content="@ddttomtom">
+
+  <!-- Additional SEO — appendices are companion content to the books, not standalone destinations: noindex, nofollow per memory rule project_appendices_noindex.md -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Appendix C: Web Audit Suite",
+    "description": "Practical guidance from MX-Protocols book on designing AI agent-friendly websites",
+    "author": {
+      "@type": "Person",
+      "name": "Tom Cranstoun",
+      "email": "info@cognovamx.com",
+      "url": "https://allabout.network"
+    },
+    "inLanguage": "en-GB",
+    "timeRequired": "PT60M",
+    "educationalLevel": "Intermediate",
+    "datePublished": "2026-01-10",
+    "dateModified": "2026-01-10",
+    "isPartOf": {
+      "@type": "Book",
+      "name": "MX-Protocols",
+      "author": {
+        "@type": "Person",
+        "name": "Tom Cranstoun"
+      },
+      "url": "https://mx.allabout.network/books/appendices"
+    },
+    "position": "3"
+  }
+  </script>
+  <link rel="stylesheet" href="appendix.css">
+</head>
+<body>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+<hr>
+<header id="title-block-header">
+<h1 class="title">Appendix C: Web Audit Suite</h1>
+<p class="subtitle">MX-Protocols</p>
+<p class="author">Tom Cranstoun</p>
+<p class="date">January 2026</p>
+</header>
+<nav id="TOC" role="navigation" aria-label="Table of Contents">
+<ul>
+<li><a href="#appendix-c-web-audit-suite"
+id="toc-appendix-c-web-audit-suite">Appendix C: Web Audit Suite</a>
+<ul>
+<li><a href="#what-it-is" id="toc-what-it-is">What it is</a></li>
+<li><a href="#what-it-measures" id="toc-what-it-measures">What it
+measures</a></li>
+<li><a href="#running-the-audit-inside-your-network"
+id="toc-running-the-audit-inside-your-network">Running the audit inside
+your network</a></li>
+<li><a href="#what-you-receive" id="toc-what-you-receive">What you
+receive</a></li>
+<li><a href="#who-it-is-for" id="toc-who-it-is-for">Who it is
+for</a></li>
+<li><a href="#how-an-engagement-works"
+id="toc-how-an-engagement-works">How an engagement works</a></li>
+<li><a href="#what-changes-after-an-audit"
+id="toc-what-changes-after-an-audit">What changes after an
+audit</a></li>
+<li><a href="#how-the-suite-keeps-improving"
+id="toc-how-the-suite-keeps-improving">How the suite keeps
+improving</a></li>
+<li><a href="#how-to-engage" id="toc-how-to-engage">How to
+engage</a></li>
+</ul></li>
+</ul>
+</nav>
+<div data-content-type="appendix">
+<h2 id="appendix-c-web-audit-suite">Appendix C: Web Audit Suite</h2>
+<p>CogNovaMX's commercial service for measuring how well a website works
+for the machines reading it.</p>
+<h2 id="what-it-is">What it is</h2>
+<p>Web Audit Suite is a measurement service. It crawls a site the way
+the machines that matter actually crawl it - large language models,
+training pipelines, agents, Common Crawl, search indexers - and reports
+what those machines see, what they miss, and what changes most when
+fixed. The service is delivered by CogNovaMX as part of an engagement;
+it is not a self-serve tool.</p>
+<p>The output is a client-facing report and a prioritised action plan.
+The report names the highest-leverage changes for the site under review,
+page by page, ranked by what is blocking machine readers from doing the
+work the site exists to support.</p>
+<h2 id="what-it-measures">What it measures</h2>
+<p>Web Audit Suite covers the dimensions that determine whether a
+machine reader can extract the same value from a page that a human
+visitor can:</p>
+<ul>
+<li><strong>Served HTML versus rendered HTML.</strong> What machines see
+at fetch time, before any JavaScript runs. The single highest-impact
+dimension; most machine readers never execute JavaScript.</li>
+<li><strong>Structured data presence and correctness.</strong>
+Schema.org markup, JSON-LD blocks, type disambiguation - the standards
+that let machines know what a page is about without inferring it from
+prose.</li>
+<li><strong>Pricing, availability, and other commercial facts.</strong>
+Whether the numbers and states a buyer needs are present in the HTML or
+hidden behind a render step.</li>
+<li><strong>Document and page accessibility.</strong> WCAG conformance,
+semantic HTML, ARIA usage - what assistive technologies and machine
+readers both depend on.</li>
+<li><strong>Discovery surface.</strong> Sitemap completeness, robots.txt
+correctness, llms.txt presence, in-page link discoverability, canonical
+declarations. The probe extends beyond the well-known trio: every entry
+in the IANA Well-Known URIs registry that a machine reader might check
+is probed - agent-card.json (A2A protocol), did.json (W3C decentralised
+identity), oauth-authorization-server / oauth-protected-resource /
+jwks.json (identity and signing), caldav / carddav (calendar and contact
+discovery), mta-sts.txt (mail transport security), the IoT and
+device-provisioning family (brski / cmp / coap / core), and others.
+Where a JSON discovery file is present, the audit parses its body and
+reports the structured contents in the report tables rather than
+presenting an unhelpful "yes / unknown / unknown" row. Where a path is
+absent the report stays silent - only the IANA registry pointer is
+surfaced so the reader knows where to look up the full catalogue.</li>
+<li><strong>Provenance and trust signals.</strong> Whether the page
+declares who published it, when, under what licence, and how a reader
+can verify those claims.</li>
+<li><strong>Performance and pipeline survivability.</strong> Whether the
+page survives the truncation, byte caps, and timing constraints that
+real-world crawlers impose.</li>
+<li><strong>The accessibility tree.</strong> There is no single kind of
+machine visitor: an on-device model with a tight context window, a
+foundation model with browsing tools, a plain scraper, a converter that
+flattens the page to text, a one-shot fetcher. Each reads a different
+projection of the page, none sees the visual layout, and a page that
+carries its meaning in only one channel fails every visitor that lacks
+that channel. The suite reads each page the way a tree consumer does and
+flags where behaviour, names, and structure fail to reach the tree:
+clickable containers with no role, links named "read more", form fields
+labelled only by placeholder text, data locked inside images, landmark
+and role wiring that resolves to nothing. Findings that repeat across
+pages with the same structure are reported as one template-level fix,
+not page-by-page copies. Because screen readers consume the same tree,
+every fix serves human visitors and machine visitors at once.</li>
+</ul>
+<p>The dimensions are scored against thresholds CogNovaMX has calibrated
+against the behaviour of the major machine readers in production. The
+thresholds move when the readers move; the service tracks the drift.</p>
+<p>Beyond the per-dimension scores, the suite applies a
+machine-readability adjustment. Where a site carries gaps that a machine
+cannot work around across the whole estate - an audience the audit had
+to infer rather than read, a sitemap that is ambiguous to a parser,
+content that appears only once JavaScript has run, markup so deeply
+nested that the meaning is buried, an automated visitor that is blocked
+outright, or an origin too slow to finish a fetch - the overall
+machine-readability score is reduced to reflect that a real agent would
+struggle to use the site. Every reduction is named in the report, so the
+reader sees exactly what drove the number down rather than facing an
+unexplained drop. The reduction is bounded, so a site is never scored to
+nothing on these signals alone, and a gap that an individual dimension
+already accounts for is never counted twice.</p>
+<p>Occasionally a site refuses the interrogation altogether: every page
+request from every automated visitor is turned away. The audit still
+delivers, because the refusal is itself the finding. The report sets out
+what a refused machine can still observe - which visitors are turned
+away and how, what the error handling looks like from outside, which
+discovery files the site publishes - and names the consequence: every AI
+search surface, recommendation engine, and buying agent meets the same
+closed door. For some organisations that posture is deliberate and
+correct. Either way, the audit gives it a dated, evidenced record.</p>
+<h2 id="running-the-audit-inside-your-network">Running the audit inside
+your network</h2>
+<p>Some content cannot leave the customer's network. Regulated
+procurement teams at banks, hospitals, public-sector bodies, and
+pharmaceutical companies routinely ask, before agreeing to an audit,
+whether any of the audit data (the pages crawled, the metadata
+extracted, the findings produced) leaves their network at any point in
+the pipeline.</p>
+<p>The structural answer is yes by default. The pipeline runs as a
+deterministic core with one inference layer at the end. The
+deterministic core is scripted: every probe, every gate, every check is
+a small standard operating procedure the customer's security team can
+read, understand, and run in their own environment. The inference layer
+is small by design, a single judgement pass that turns a body of
+verified evidence into a readable report.</p>
+<p>The inference layer can run against a hosted model or a locally
+served one. Ollama, LM Studio, or an on-premise Llama deployment each
+give the same surface from the audit's point of view. When the customer
+specifies a local inference target at scoping, the audit runs end-to-end
+inside their network, no audit data leaves, and the resulting report is
+the same shape as the hosted-inference equivalent. The choice is theirs;
+the audit's output is identical.</p>
+<h2 id="what-you-receive">What you receive</h2>
+<p>Each engagement produces:</p>
+<ol type="1">
+<li><strong>An executive summary.</strong> One page, board-ready,
+framing the site's current state in plain language and naming the
+headline opportunities.</li>
+<li><strong>A page-by-page report.</strong> Every audited page with its
+score, its blockers, and a recommended fix per blocker. Sorted so the
+highest-impact pages appear first.</li>
+<li><strong>A prioritised action plan.</strong> What to fix this week,
+this month, this quarter. Each action carries an estimate of the score
+uplift it unlocks.</li>
+<li><strong>A regression baseline.</strong> A snapshot of the site's
+current state so the next audit can measure the delta. Engagements that
+span multiple cycles produce a trend report alongside the per-cycle
+deliverables.</li>
+<li><strong>Optional accessibility supplement.</strong> Detailed WCAG
+findings, severity-ranked, mapped to the relevant Web Content
+Accessibility Guidelines success criteria.</li>
+<li><strong>Optional document-accessibility supplement.</strong>
+Coverage of every PDF, DOCX, and EPUB the site links to, ranked against
+the European Accessibility Act's conformance bar.</li>
+</ol>
+<p>Reports are delivered in PDF for the executive audience, plus
+structured data for technical teams who want to feed findings into their
+own tooling.</p>
+<h2 id="who-it-is-for">Who it is for</h2>
+<ul>
+<li><strong>Publishers and marketers</strong> whose revenue depends on
+being found by AI search and recommendation surfaces.</li>
+<li><strong>E-commerce operations</strong> whose product information
+needs to reach the agents now placing transactions on behalf of
+buyers.</li>
+<li><strong>Government and public sector teams</strong> whose
+accessibility obligations under the European Accessibility Act and
+equivalent regulations have moved from policy to enforced.</li>
+<li><strong>Developers and architects</strong> building new sites who
+want to measure machine readiness before launch, not after.</li>
+<li><strong>Investors and acquirers</strong> running due diligence on a
+site whose discoverability and trust posture is part of the asset
+valuation.</li>
+</ul>
+<h2 id="how-an-engagement-works">How an engagement works</h2>
+<p>A typical engagement runs in four stages: scoping, baseline audit,
+action plan, and re-audit. Scoping confirms the site, the audience
+priorities, and the supplements that apply. The baseline audit produces
+the deliverables described above. The action plan is reviewed with the
+client's team. The re-audit, six to twelve weeks later, measures the
+delta.</p>
+<p>Engagements that need ongoing visibility move to a monthly cadence
+after the initial cycle. The dashboard surfaces score movement,
+regression detection, and progress against the action plan.</p>
+<h2 id="what-changes-after-an-audit">What changes after an audit</h2>
+<p>Sites that act on Web Audit Suite findings consistently report three
+outcomes within the first quarter:</p>
+<ul>
+<li>Pricing, availability, and product facts are reachable by AI search
+surfaces that previously returned "I don't have that information".</li>
+<li>Structured data coverage rises from partial to complete, lifting the
+site's eligibility for rich-result and answer-surface inclusion.</li>
+<li>Accessibility findings are quantified and triaged, moving the site
+from "we hope it's compliant" to "we can demonstrate compliance".</li>
+</ul>
+<p>The MX framework documented in this book provides the conceptual
+basis. Web Audit Suite is the measurement layer that turns the framework
+into a per-site, per-page, per-cycle reality.</p>
+<h2 id="how-the-suite-keeps-improving">How the suite keeps
+improving</h2>
+<p>Each audit teaches the suite. We record what we find as anonymised,
+platform-level patterns: the type of finding, the platform it appeared
+on, and how often it recurs. We never store your domain in that shared
+record, and we never store your content, your URLs, or the specific text
+we corrected. When a class of problem keeps appearing on a platform,
+that signal prompts us to sharpen the deterministic check that catches
+it, so every future audit of that platform is more thorough. The audits
+run on local models by default, so your content stays inside your
+infrastructure. The result is a measurement layer that gets sharper for
+every site on your platform, without any site's data being exposed to
+another.</p>
+<h2 id="how-to-engage">How to engage</h2>
+<p>CogNovaMX takes Web Audit Suite enquiries through one of two
+routes:</p>
+<ul>
+<li><strong>Email:</strong> <a href="mailto:info@cognovamx.com"
+class="email">info@cognovamx.com</a> - describe the site, the audience
+priorities, and any deadlines (regulatory compliance, launch dates,
+board reviews).</li>
+<li><strong>Web:</strong> <a href="https://allabout.network"
+class="uri">https://allabout.network</a> - request a scoping
+conversation.</li>
+</ul>
+<p>Engagements begin with a no-obligation scoping call. The first audit
+can usually be delivered within two weeks of scope agreement, depending
+on site size and the supplements requested.</p>
+<hr />
+<p>The Implementation Cookbook in Appendix A names the patterns that fix
+what Web Audit Suite measures. Together, the two appendices are the
+practitioner's path: measure, fix, re-measure.</p>
+<!-- audit-suite-sync: 2026-06-25-d -->
+</div>
+<hr>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+
+  <!-- Floating home button (top-left) -->
+  <a href="index.html" class="floating-home-button" aria-label="Back to Home">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 0L0 8h3v8h10V8h3L8 0zm0 2.5L13.5 8H11v6H5V8H2.5L8 2.5z"/>
+    </svg>
+    Home
+  </a>
+  <!-- Floating back to top button (bottom-left) -->
+  <a href="#main" class="floating-top-button" aria-label="Back to Top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 3.5l-5.5 5.5L4 10.5l3-3v8.5h2V7.5l3 3L13.5 9z"/>
+    </svg>
+    Top
+  </a>
+
+  <script>
+    // Add copy buttons to all code blocks
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find both wrapped code blocks (div.sourceCode) and standalone pre blocks
+      const wrappedBlocks = document.querySelectorAll('div.sourceCode');
+      const standaloneBlocks = document.querySelectorAll('pre[data-role="code-block"]:not(.sourceCode)');
+
+      // Process wrapped code blocks (HTML, JavaScript, etc.)
+      wrappedBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          let text = '';
+          const spans = codeElement.querySelectorAll('span[id^="cb"]');
+          spans.forEach(function(span) {
+            const nodes = Array.from(span.childNodes);
+            nodes.forEach(function(node) {
+              if (node.nodeType === Node.TEXT_NODE) {
+                text += node.textContent;
+              } else if (node.nodeName !== 'A') {
+                text += node.textContent;
+              }
+            });
+          });
+          return text;
+        });
+      });
+
+      // Process standalone pre blocks (text, robots.txt, etc.)
+      standaloneBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          return codeElement ? codeElement.textContent : block.textContent;
+        });
+      });
+
+      // Helper function to add copy button to any block
+      function addCopyButton(block, extractTextFn) {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
+
+        button.addEventListener('click', function() {
+          const text = extractTextFn(block);
+
+          navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied';
+            button.classList.add('copied');
+            setTimeout(function() {
+              button.textContent = 'Copy';
+              button.classList.remove('copied');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Failed to copy:', err);
+            button.textContent = 'Failed';
+            setTimeout(function() {
+              button.textContent = 'Copy';
+            }, 2000);
+          });
+        });
+
+        block.insertBefore(button, block.firstChild);
+      }
+    });
+  </script>
+</body>
+</html>

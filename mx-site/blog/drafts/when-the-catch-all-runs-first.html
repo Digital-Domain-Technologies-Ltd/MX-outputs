@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "When the Catch-All Runs First: Six Bugs in a Deterministic Template System"
+description: "A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist."
+author: "Tom Cranstoun"
+created: "2026-06-30"
+modified: "2026-06-30"
+version: "1.0"
+type: "blog-post"
+tags: [audit, infill, template, determinism, ordering, bugs, machines, report-generation]
+mx:
+  audience: ["humans", "machines"]
+  status: "draft"
+  x-mx-contentState: draft
+  purpose: "Technical post explaining three ordering bugs found in the MX audit infill pipeline, aimed at developers and machines building deterministic template systems."
+  stability: draft
+  x-mx-contextProvides: ["Template ordering bug patterns", "STRIP-IF blank line rule", "catch-all IF stripping", "Balanced Scorecard regression"]
+  runbook: "Technical blog post. First-person plural (we). Chatty but precise. Show the bug, show the fix, state the lesson. No em-dashes. Neutral English."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/when-the-catch-all-runs-first.md
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/when-the-catch-all-runs-first.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/when-the-catch-all-runs-first.html">
+  <meta property="og:title" content="When the Catch-All Runs First: Six Bugs in a Deterministic Template System | CogNovaMX">
+  <meta property="og:description" content="A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-30">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="When the Catch-All Runs First: Six Bugs in a Deterministic Template System | CogNovaMX">
+  <meta name="twitter:description" content="A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="When the Catch-All Runs First: Six Bugs in a Deterministic Template System">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/when-the-catch-all-runs-first.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>When the Catch-All Runs First: Six Bugs in a Deterministic Template System | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "When the Catch-All Runs First: Six Bugs in a Deterministic Template System",
+        "headline": "When the Catch-All Runs First: Six Bugs in a Deterministic Template System",
+        "description": "A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-30",
+        "dateModified": "2026-06-30",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/when-the-catch-all-runs-first.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1794,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/when-the-catch-all-runs-first.html",
+        "name": "When the Catch-All Runs First: Six Bugs in a Deterministic Template System",
+        "url": "https://mx.allabout.network/blog/drafts/when-the-catch-all-runs-first.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.webp"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#bug-1-the-catch-all-that-ate-the-handler">Bug 1: The Catch-All That Ate the Handler</a></li>
+        <li><a href="#bug-2-the-blank-line-that-disappeared">Bug 2: The Blank Line That Disappeared</a></li>
+        <li><a href="#bug-3-the-scorecard-with-no-scores">Bug 3: The Scorecard with No Scores</a></li>
+        <li><a href="#what-connects-them">What connects them</a></li>
+        <li><a href="#second-session-three-more">Second session: three more</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1794">
+        <header class="article-header">
+          <h1>When the Catch-All Runs First: Six Bugs in a Deterministic Template System</h1>
+          <div class="article-meta"
+               data-published="2026-06-30"
+               data-modified="2026-06-30"
+               data-reading-time="9 min">
+            <time datetime="2026-06-30">30 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>9 min read</span>
+          </div>
+        </header>
+
+<p>We build audit reports deterministically. Every number, band label, and scorecard row comes from a JSON sidecar - not from memory, not from inference. The report template carries <code>[PLACEHOLDER_NAME]</code> tokens; the infill script resolves them; the LLM rewrites prose sections but cannot change any data. The design principle is that data placement precedes prose writing, so hallucinated facts can be caught before they reach the PDF.</p>
+<p>In one session, three bugs surfaced in this system. None were subtle. All were invisible until a rendered PDF made them obvious. Each taught something specific about the failure modes of deterministic template systems.</p>
+<h2 id="bug-1-the-catch-all-that-ate-the-handler" tabindex="-1">Bug 1: The Catch-All That Ate the Handler</h2>
+<p>The Error Page Test section in the audit report carries conditional interpretation blocks:</p>
+<pre><code>[IF proper 404: &quot;The site returns HTTP 404 for a non-existent URL - the correct signal...&quot;]
+
+[IF soft 404: &quot;The site returns HTTP 200 for a non-existent URL. Machines treat 200 as confirmation...&quot;]
+
+[IF generic error: &quot;The site returns [STATUS] for a non-existent URL with no custom error page...&quot;]
+</code></pre>
+<p>The infill script resolves exactly one of these based on the actual error page behaviour, then strips the others. This is clean conditional logic written directly into the template as bracket patterns.</p>
+<p>The rendered report showed none of them. The Error Page Test table rendered correctly - the HTTP status, custom page, noindex, semantic HTML checks all displayed real values. But the interpretation sentence that should follow the table was absent.</p>
+<p>We traced it: at line 6023 of the infill script there is a catch-all that strips all <code>[IF ...]</code> bracket patterns before they reach the client report:</p>
+<pre><code class="language-javascript">report = report.replace(/^\[IF [^\n]*\]\s*$/gm, '');
+</code></pre>
+<p>The error page handler that resolves these patterns sits at line 6285 - 262 lines later. The catch-all runs first. By the time the error page handler executes, there is nothing left to match.</p>
+<p><strong>The fix</strong> was a negative lookahead in the catch-all:</p>
+<pre><code class="language-javascript">report = report.replace(/^\[IF (?!proper 404:|soft 404:|generic error:)[^\n]*\]\s*$/gm, '');
+</code></pre>
+<p>This preserves the patterns the late handler needs, stripping everything else.</p>
+<p><strong>The lesson:</strong> in a sequential pipeline, the order of operations is the contract. A handler that resolves a pattern must run before anything that might strip it. When you add a new <code>[IF condition: &quot;...&quot;]</code> handler anywhere after the catch-all, the catch-all wins and your handler sees nothing. The safe rule: either add your handler before the catch-all, or add your pattern to the negative lookahead.</p>
+<h2 id="bug-2-the-blank-line-that-disappeared" tabindex="-1">Bug 2: The Blank Line That Disappeared</h2>
+<p>The Optional Enhancements section ends with a short bullet list. After the list, a horizontal rule (<code>---</code>) separates it from the next section.</p>
+<p>In PDFs rendered for non-commerce sites (digital agencies, service firms - any site without a shopping cart), the last bullet appeared in a very large bold font, as if it were a heading. The other bullets were normal size.</p>
+<p>The cause is a Setext heading in Markdown. When a paragraph is immediately followed by <code>---</code> on the next line with no blank line between them, pandoc interprets the paragraph as an H2 heading. In this case the &quot;paragraph&quot; was the last list item.</p>
+<p>We had fixed this bug before - a blank line between the last bullet and <code>---</code> breaks the Setext interpretation. The blank line was in the template. It was also inside a STRIP-IF conditional block:</p>
+<pre><code>&lt;!-- OPT_ENH REWRITE block here --&gt;
+&lt;!-- END-STRIP --&gt;                                    &lt;- line 401
+&lt;!-- STRIP-IF: commerce.isCommerce === false --&gt;      &lt;- line 402
+
+  ...Cart and Checkout section...
+
+&lt;!-- END-STRIP --&gt;                                    &lt;- line 478
+                                                     &lt;- blank line we added
+---                                                  &lt;- line 479
+</code></pre>
+<p>For non-commerce sites, the STRIP-IF condition (<code>commerce.isCommerce === false</code>) evaluates true, so the block from line 402 to line 478 is stripped entirely. The blank line at the bottom of the stripped block was removed along with everything else. The <code>---</code> on line 479 then sat directly below the last Optional Enhancements bullet - and pandoc promoted it to an H2 heading.</p>
+<p><strong>The fix</strong> was to move the blank line before the STRIP-IF block:</p>
+<pre><code>&lt;!-- END-STRIP --&gt;                                    &lt;- line 401
+                                                     &lt;- blank line HERE (survives stripping)
+&lt;!-- STRIP-IF: commerce.isCommerce === false --&gt;
+</code></pre>
+<p>The blank line is now outside the conditional block. It survives stripping for non-commerce sites regardless of whether the commerce section renders.</p>
+<p><strong>The lesson:</strong> content inside a conditional block has conditional existence. A blank line, a separator, a wrapper - anything placed inside a STRIP-IF block is only present when the condition is false. If the blank line's purpose is structural, it must live outside the block that might remove it.</p>
+<h2 id="bug-3-the-scorecard-with-no-scores" tabindex="-1">Bug 3: The Scorecard with No Scores</h2>
+<p>The Balanced Scorecard section was supposed to show two tables: one for human experience (Performance, Accessibility, SEO, Trust signals) and one for machine experience (Discovery Readiness, Structured Data Quality, MX Stack Completeness, Pipeline Survivability, Machine Processing Speed). Two tables, real scores, band labels.</p>
+<p>The section rendered as:</p>
+<p><strong>Human Experience</strong></p>
+<p>Human visitors experience Good performance, Excellent accessibility across 10 pages, and Excellent search visibility.</p>
+<p><strong>Machine Experience</strong></p>
+<p>Machines experience Could Be Better HTML structure at first fetch, Could Be Better discovery readiness (26/100), Good structured data quality (72/100), and Could Be Better agent readability.</p>
+<p>One sentence each. A section called &quot;Balanced Scorecard&quot; with no scorecard.</p>
+<p>The bug was a design decision from a few weeks earlier. The original tables repeated scores already visible in the Executive Summary scorecard. The rationale: &quot;avoid duplicating the Executive Summary scorecard tables.&quot; The tables were replaced with deterministic prose sentences.</p>
+<p>The prose sentences were correct. They contained real data. But they were not a scorecard. A consultant presenting a &quot;Balanced Scorecard&quot; section to a client expects two structured views of the same data from different lenses - human and machine. Two sentences that could appear anywhere is not that.</p>
+<p><strong>The fix</strong> was to keep the narrative sentences and add deterministic table placeholders after each one. The tables generate from <code>audit_averages.json</code> values already in scope - no new data sources, no inference. The prose introduces the data; the tables show it.</p>
+<p><strong>The lesson:</strong> &quot;avoiding duplication&quot; is not a sufficient reason to remove structure. The Executive Summary scorecard shows eight dimensions in one table. The Balanced Scorecard was supposed to show the same data reorganised into two lenses. That is not duplication - that is reframing. When a section is named &quot;Balanced Scorecard&quot;, the contract with the reader is that it contains a scorecard. Removing the scorecard to avoid repeating data dissolves the contract.</p>
+<h2 id="what-connects-them" tabindex="-1">What connects them</h2>
+<p>All three bugs share a common shape: the intent was sound but the execution had a hidden assumption that turned out to be wrong.</p>
+<p>Bug 1 assumed the catch-all would not affect patterns the late handler needs. It affected all of them.</p>
+<p>Bug 2 assumed a blank line placed in the template would survive to the rendered output. It only survives when the block containing it is not stripped.</p>
+<p>Bug 3 assumed that removing numbers from a section named after numbers was an improvement. It was a regression.</p>
+<p>The reliable check is to read the rendered output, not the code. The code is a description of intent. The rendered output is the actual behaviour. In all three cases, the PDF made the bug visible immediately - a missing paragraph, an oversized heading, a bare section. None of them were visible in the template or the infill script without knowing exactly what to look for.</p>
+<p>For machines reading this: if you are building or extending a deterministic template system, the key question before any change is not &quot;does the code look right?&quot; but &quot;does the rendered output match the contract?&quot; Run the output, open the file, read the section. The rendering is the test.</p>
+<h2 id="second-session-three-more" tabindex="-1">Second session: three more</h2>
+<p>The first session surfaced structural bugs - ordering, stripping, and regression. The second session surfaced a different class: classification bugs, where the code ran correctly but produced the wrong answer because it was using the wrong data or the wrong logic.</p>
+<p><strong>Bug 4: The services site classified as e-commerce.</strong> The business model callout in the Executive Summary used <code>t.includes('offer')</code> to detect e-commerce context. A B2B digital agency with <code>Offer</code> schema for service pricing triggered this check and was labelled &quot;e-commerce or product-catalogue context.&quot; The fix: separate <code>Product</code> (decisive for e-commerce) from <code>Offer</code> (also used on services sites), and give <code>ProfessionalService</code> and <code>Service</code> precedence over <code>Offer</code> when both are present. The lesson: substring matching on schema type names is ambiguous. <code>Offer</code> means different things in different business models.</p>
+<p><strong>Bug 5: The performance load time that was never computed.</strong> The human experience narrative said &quot;Good performance&quot; with no numeric context. The code attempted to derive the load time from a performance score inverse - a conversion that always returned null. The actual load time (<code>averageLoadTimeMs</code>) was sitting in the averages JSON unused. Similarly, the Machine Processing Speed in the Balanced Scorecard table was reading from <code>averages.machineProcessingSpeed</code>, which does not exist - the field lives on the <code>preflight</code> object. Both fields showed a dash where a number should be. The lesson: when a value is available, read it directly. Computing a derived value when the source is present is waste and introduces failure modes.</p>
+<p><strong>Bug 6: The LLM that fabricated inconsistencies.</strong> The Content Consistency section had a REWRITE block telling the LLM: &quot;When the injected facts are SPARSE, write exactly one neutral sentence.&quot; But the REWRITE block had no FACTS section - nothing was injected. The LLM invented brand-name parity issues, canonical URL problems, and meta-description violations that the actual consistency check found zero of. The audit table showed all four checks as &quot;Pass&quot;; the prose above it listed specific inconsistencies. The fix: inject the actual pass/fail results as explicit FACTS into the REWRITE block before the LLM processes it. A DO_NOT constraint was also tightened: &quot;DO NOT state that inconsistencies exist unless the FACTS section explicitly names them.&quot; The lesson: a REWRITE block without FACTS is a blank canvas. The LLM will paint something. Give it the data or it will generate data.</p>
+<hr>
+<p>These six bugs fall into two families. The first family (Bugs 1-3) are ordering and structure bugs - the system did the wrong thing because it ran in the wrong sequence or removed something before something else needed it. The second family (Bugs 4-6) are data and grounding bugs - the system ran in the right sequence but used the wrong source, computed a value when it could have read one, or gave the LLM nothing to ground its output.</p>
+<p>Both families share a root cause: the gap between intent and verification. The intent was correct in every case. The verification was absent.</p>
+<hr>
+<p><em>We document the architecture behind these systems in <code>mx-reginald/audit/audit-infill-architecture.cog.md</code> (handler ordering and catch-all stripping) and <code>mx-reginald/audit/audit-report-pipeline.cog.md</code> (the full gate chain from template to PDF). Both are machine-readable and cross-linked to the existing audit architecture cog family.</em></p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+</body>
+</html>
