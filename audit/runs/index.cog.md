@@ -9,7 +9,7 @@ title: "audit-runs-index"
 version: "1.0"
 description: "Index of all committed audit run outputs under mx-outputs/audit/runs/."
 created: 2026-06-18
-modified: 2026-07-08
+modified: 2026-07-12
 author: Tom Cranstoun
 type: info-doc
 tags: [audit, index, runs, latest-copy]
@@ -32,7 +32,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 |----------|------------|--------|-----|----|
 | atmors.netlify.app.d | - | pending | - | - |
 | axiompartners.vc | 2026-06-19 | pass | [latest-copy.pdf](axiompartners.vc/latest-copy.pdf) | [latest-copy.md](axiompartners.vc/latest-copy.md) |
-| cmscritic.com | 2026-07-02 | pass | [latest-copy.pdf](cmscritic.com/latest-copy.pdf) | [latest-copy.md](cmscritic.com/latest-copy.md) |
+| cmscritic.com | 2026-07-12 | pass | [latest-copy.pdf](cmscritic.com/latest-copy.pdf) | [latest-copy.md](cmscritic.com/latest-copy.md) |
 | crowdfavorite.com | - | pending | - | - |
 | dangerdevices.com | - | pending | - | - |
 | dkd.de-de | - | pending | - | - |
@@ -53,7 +53,7 @@ Index of all domains with committed audit deliverables. Each row links to the st
 | stackoptic.com | - | pending | - | - |
 | typo3.com | - | pending | - | - |
 | typo3.org | - | pending | - | - |
-| www.bollants.de | 2026-07-08 | pass | [latest-copy.pdf](www.bollants.de/latest-copy.pdf) | [latest-copy.md](www.bollants.de/latest-copy.md) |
+| www.bollants.de | 2026-07-11 | pass | [latest-copy.pdf](www.bollants.de/latest-copy.pdf) | [latest-copy.md](www.bollants.de/latest-copy.md) |
 | www.bravecap.com | - | pending | - | - |
 | www.careington.com | 2026-07-05 | pass | [latest-copy.pdf](www.careington.com/latest-copy.pdf) | [latest-copy.md](www.careington.com/latest-copy.md) |
 | www.contentful.com | - | pending | - | - |

@@ -3,16 +3,16 @@ title: "Bollants"
 subtitle: "Website Analysis & Machine Readiness"
 type: report
 author: "Tom Cranstoun"
-created: "2026-07-08"
-modified: "2026-07-08"
+created: "2026-07-12"
+modified: "2026-07-12"
 client: "Bollants"
 clientSlug: "www-bollants-de"
 clientUrl: "https://www.bollants.de"
-reportId: "www-bollants-de-WEB-AUDIT-20260708"
+reportId: "www-bollants-de-WEB-AUDIT-20260712"
 reportType: "executive-sales-report"
 auditTool: "web-audit-suite"
-auditDate: "2026-07-08"
-auditCommand: "node scripts/audit-pipeline.js https://www.bollants.de/ --pages 10"
+auditDate: "2026-07-12"
+auditCommand: "node scripts/audit-pipeline.js https://www.bollants.de --pages 10"
 description: "Executive audit report reviewing accessibility, performance, SEO, structured data, and AI agent compatibility for Bollants"
 tags: [web-audit, accessibility, wcag-aa, ai-agents, seo, performance, mx, executive-report]
 performanceScore: 85
@@ -28,7 +28,7 @@ confidential: true
 mx:
   status: active
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-07-08/www.bollants.de/www-bollants-de-report.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/audit/2026-07-12/www.bollants.de/www-bollants-de-report.md
   maintainer: info@cognovamx.com
   stability: stable
   partOf: mx-audit
@@ -38,10 +38,10 @@ mx:
   # has to infer the steward (scripts/lib/managed-by.cjs is the resolver).
   x-mx-managedBy: mx-audit.cog.md
   x-mx-generatedBy: "mx-reginald/audit/bin/infill-report.js"
-  x-mx-canonicalSource: "Audit results for https://www.bollants.de on 2026-07-08 - fix via generator, not this file"
-  runbook: "Executive audit report for Bollants. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-crawl and re-analyse), use the command in the top-level auditCommand field. Regenerate the tagged PDF with 'node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-08/www.bollants.de/www-bollants-de-report.md', which validates the report then renders it through scripts/bin/mx.pdf.sh."
+  x-mx-canonicalSource: "Audit results for https://www.bollants.de on 2026-07-12 - fix via generator, not this file"
+  runbook: "Executive audit report for Bollants. Focus on the highest-leverage MX opportunities surfaced by the audit. To re-run the audit from scratch (re-crawl and re-analyse), use the command in the top-level auditCommand field. Regenerate the tagged PDF with 'node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-12/www.bollants.de/www-bollants-de-report.md', which validates the report then renders it through scripts/bin/mx.pdf.sh."
   generate:
-    command: "node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-08/www.bollants.de/www-bollants-de-report.md"
+    command: "node scripts/audit-pipeline.js --gates mx-outputs/audit/2026-07-12/www.bollants.de/www-bollants-de-report.md"
     script: "scripts/bin/mx.pdf.sh"
     format: "pdf"
     output: "mx-outputs/audit/runs/www.bollants.de/latest-copy.pdf"
@@ -69,8 +69,8 @@ mx:
 
 **Prepared by:** Tom Cranstoun | CogNovaMX Ltd\
 **Contact:** <info@cognovamx.com> | <https://allabout.network>\
-**Date:** 8 July 2026\
-**Report ID:** www-bollants-de-WEB-AUDIT-20260708
+**Date:** 12 July 2026\
+**Report ID:** www-bollants-de-WEB-AUDIT-20260712
 
 ---
 
@@ -78,7 +78,7 @@ mx:
 
 ## Executive Verdict
 
-> **Bottom line.** Bollants runs on Contao and scores 57/100 on automated accessibility checks and 91/100 for SEO. It sits at MX Readiness Level 1 (Discoverable). The single most important next step is to resolve the 14 distinct WCAG issue types flagged below (a Priority 1 compliance obligation).
+> **Bottom line.** Bollants runs on Unknown Platform and scores 57/100 on automated accessibility checks and 91/100 for SEO. It sits at MX Readiness Level 1 (Discoverable). The single most important next step is to resolve the 14 distinct WCAG issue types flagged below (a Priority 1 compliance obligation).
 
 **Top risks**
 
@@ -94,12 +94,6 @@ mx:
 
 *Executive Summary*
 
-The following table shows the overall score and verdict for each metric.
-
-**Table 1**
-
-*Executive Summary*
-
 | | Score | Verdict |
 |:---|---:|:---|
 | Performance | **85**/100 | `###############---` Excellent |
@@ -109,7 +103,7 @@ The following table shows the overall score and verdict for each metric.
 | MX Stack Completeness | **59**/100 | `###########-------` Good |
 | Agent Readability | **46**/100 | `########----------` **(!)** Could Be Better |
 | Pipeline Survivability | **91**/100 | `################--` Excellent |
-| Machine Processing Speed | **7833** ms/page | `###---------------` **(!)** Machine-Dense |
+| Machine Processing Speed | **154** ms/page | `#################-` Machine-Ready |
 
 *The three machine metrics measure different things. **Served-HTML Structure** is the semantic markup an agent reads before JavaScript runs; **Agent Readability** is how easily the content can be quoted once reached; **Pipeline Survivability** is whether a page survives an agent's fetch and ingest. A site can score low on one and high on another.*
 
@@ -119,33 +113,13 @@ Agent Readability was adjusted down by 26 points for site-wide gaps a machine ca
 - **Content appears only after JavaScript runs (site-wide)** (-8): 10 of 12 pages serve a JS shell or far less text than they render
 - **Generic containers without landmark roles on most pages** (-8): 11 of 12 pages rely on generic containers without landmark roles
 
-Your site runs on **Contao** (detected from multiple platform signals). The site appears to be a transactional retail or e-commerce operation.
+The site appears to be a transactional retail or e-commerce operation.
 
-Bollants runs on Contao. Across the audited set, Bollants scores 57/100 for accessibility and 91/100 for SEO.
+Bollants runs on Unknown Platform. Across the audited set, Bollants scores 57/100 for accessibility and 91/100 for SEO.
 
-The headline opportunity is to boost Commerce Visibility, which sits at 20/100 across the audited set and limits machine discovery of product content. A Priority 1 compliance item is the 14 distinct WCAG AA issue types that generate 290 raw accessibility issues; addressing one pattern per category will clear many instances.
+The headline opportunity is to elevate the site's commerce visibility, currently at 20/100, which limits machine discovery of product offerings. A Priority 1 compliance item is the 14 distinct WCAG AA issue types affecting 290 elements; addressing each pattern would remove most accessibility barriers.
 
-The Contao platform delivers a served-versus-rendered gap, reflected in the low AI suitability score of 59/100. To move from Level 1 to Governed MX readiness, the highest-leverage action is to add full MX governance fields-mx:status, mx:contentType, mx:audience, canonicalUri and provenance markers-to each page.
-
-\clearpage
-
-<!-- AUDIT-DELTA:START -->
-## Change Since Our 23 June 2026 Audit
-
-We last audited www.bollants.de on 23 June 2026. The table compares that audit with the current one across the headline measures. Some scores improved and others slipped since that audit; the table shows each change.
-
-**Table 2**
-
-*Change Since Our 23 June 2026 Audit*
-
-| Measure | 23 June 2026 | 8 July 2026 | Change |
-|---------|------:|------:|:-------|
-| Performance | 55 | 85 | +30 (improved) |
-| Accessibility | 100 | 57 | -43 (declined) |
-| SEO | 91 | 91 | No change |
-
-We include this comparison because it is what continuous monitoring delivers: each re-audit shows what moved and what held, so open items stay visible until they are closed.
-<!-- AUDIT-DELTA:END -->
+Because AI Suitability is only 59/100, there is a served-versus-rendered gap that hampers machine parsing. On the current platform, the highest-leverage action is to add full MX governance fields-mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers-to move from Level 1 Discoverable to Governed.
 
 \clearpage
 
@@ -155,7 +129,7 @@ We include this comparison because it is what continuous monitoring delivers: ea
 
 Human visitors experience Excellent performance (avg 579 ms load time), Good accessibility across 12 pages, and Excellent search visibility.
 
-**Table 3**
+**Table 2**
 
 *Human Experience*
 
@@ -169,7 +143,7 @@ Human visitors experience Excellent performance (avg 579 ms load time), Good acc
 
 Machines experience Good HTML structure at first fetch, Could Be Better discovery readiness (40/100), Good structured data quality (52/100), and Could Be Better agent readability.
 
-**Table 4**
+**Table 3**
 
 *Machine Experience*
 
@@ -181,7 +155,7 @@ Machines experience Good HTML structure at first fetch, Could Be Better discover
 | MX Stack Completeness | 59/100 | Good | B (median) |
 | Pipeline Survivability | 91/100 | Excellent | A (median) |
 | Security headers |  -  |  -  |  -  |
-| Machine Processing Speed | 7833 ms/page | Machine-Dense |  -  |
+| Machine Processing Speed | 154 ms/page | Machine-Ready |  -  |
 
 *Benchmark median drawn from a curated audit dataset.*
 
@@ -201,7 +175,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 ## MX Readiness Level
 
-**Table 5**
+**Table 4**
 
 *MX Readiness Level*
 
@@ -228,7 +202,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 We find SEO performance, security transport, and structured-data quality across the audited set, giving a clear starting point for the improvements ahead.
 
-**Table 6**
+**Table 5**
 
 *What's Working Well*
 
@@ -257,7 +231,7 @@ The table below is the prioritised action list for this audit. Each row names a 
 
 We identified 12 finding(s) on the audited set, ordered by regulatory exposure first and then by priority within each category.
 
-**Table 7**
+**Table 6**
 
 *At a Glance*
 
@@ -463,7 +437,7 @@ We identified 12 finding(s) on the audited set, ordered by regulatory exposure f
 
 This test fetches the homepage using the User-Agent strings of known AI agents to verify whether this site is accessible at inference time.
 
-**Table 8**
+**Table 7**
 
 *AI Agent Access Test*
 
@@ -490,7 +464,7 @@ No non-standard response headers detected. The site returns a clean, standard he
 
 This test fetches a deliberately non-existent page (`/zebedee.html`) to evaluate how this site handles errors for both human visitors and machines.
 
-**Table 9**
+**Table 8**
 
 *Error Page Test*
 
@@ -519,7 +493,7 @@ Human visitors follow a path - step by step, page by page. Machines do not. They
 
 This check reads each audited page as a tree consumer does and flags where behaviour, names, and structure fail to reach it. It covers what the WCAG scan does not: that section measures conformance per page; this one catches meaning that exists in only one channel.
 
-**Table 10**
+**Table 9**
 
 *The Accessibility Tree*
 
@@ -528,7 +502,7 @@ This check reads each audited page as a tree consumer does and flags where behav
 | Accessibility-tree score | Not measured |
 | Pages checked | 0 |
 
-Across the audited set, every page passes all tree-level checks; no structural gaps block complete traversal.
+Every page passes all tree-level checks; no structural gaps block complete traversal.
 
 No rendered pages were available to this check on this run, so the accessibility-tree channel was not measured. We report that as "not measured" rather than clean: a verdict needs at least one scanned page behind it. A wider crawl, or a re-run once rendered pages are cached, populates this section.
 
@@ -542,9 +516,9 @@ Single load-time measurements can mislead. A page that returns in a few hundred 
 
 **Method:** Each URL is re-measured across several fresh visits and scored on the median of those measurements. For each page we compare both the crawler's cold-cache baseline and the median of three fresh GETs: a response is treated as healthy at or below 1500ms, acceptable up to 3000ms, and slow above 3000ms. The overall verdict reflects the worse of the two views.
 
-**Slowest.** The slowest page is `https://www.bollants.de/en/gift-vouchers-extras`. A first-time visitor sees the cold-cache cost: the crawler recorded 1022 ms on its initial fetch. **First-visit verdict: Healthy**. Three fresh re-probes that followed returned 274ms, 284ms, 316ms, giving a returning-visitor median of **284 ms**. **Returning-visitor verdict: Healthy**.
+**Slowest.** The slowest page is `https://www.bollants.de/en/gift-vouchers-extras`. A first-time visitor sees the cold-cache cost: the crawler recorded 1022 ms on its initial fetch. **First-visit verdict: Healthy**. Three fresh re-probes that followed returned 354ms, 309ms, 263ms, giving a returning-visitor median of **309 ms**. **Returning-visitor verdict: Healthy**.
 
-**Median-load control.** The median-load control page is `https://www.bollants.de/en/before-you-arrive`. A first-time visitor sees the cold-cache cost: the crawler recorded 473 ms on its initial fetch. **First-visit verdict: Healthy**. Three fresh re-probes that followed returned 306ms, 284ms, 322ms, giving a returning-visitor median of **306 ms**. **Returning-visitor verdict: Healthy**.
+**Median-load control.** The median-load control page is `https://www.bollants.de/en/before-you-arrive`. A first-time visitor sees the cold-cache cost: the crawler recorded 473 ms on its initial fetch. **First-visit verdict: Healthy**. Three fresh re-probes that followed returned 389ms, 351ms, 316ms, giving a returning-visitor median of **351 ms**. **Returning-visitor verdict: Healthy**.
 
 **Verdict:** Server response time is within healthy bounds on the slowest page and a median-load page, for both first-visit and returning-visitor requests.
 
@@ -569,22 +543,22 @@ The robots.txt declares 2 disallow paths; all other paths are open to crawlers a
 
 ### sitemap.xml
 
-**Table 11**
+**Table 10**
 
 *sitemap.xml*
 
 | Attribute | Present | Assessment |
 |-----------|---------|------------|
-| `<loc>` URLs | 142 entries | Present |
+| `<loc>` URLs | 144 entries | Present |
 | `<lastmod>` | No | Absent |
 | `<changefreq>` | No | Missing (Google dropped this as a ranking signal in 2017; non-Google crawlers and AI agents still use it to gauge re-crawl cadence) |
 | `<priority>` | No | Absent (Google dropped this as a ranking signal in 2017; non-Google crawlers and AI agents can still use it as a relative-importance hint) |
 
 **Sitemap grade:** Minimal
 
-The sitemap declares 142 URLs and grades Minimal. Lastmod is absent, so machines have no per-URL change signal to schedule re-crawls against. The sitemap omits changefreq and priority. Google dropped both as ranking signals in 2017, but non-Google crawlers and AI agents still read changefreq as a re-crawl cadence hint and priority as a relative-importance signal, so adding them is a low-effort way to broaden machine compatibility.
+The sitemap declares 144 URLs and grades Minimal. Lastmod is absent, so machines have no per-URL change signal to schedule re-crawls against. The sitemap omits changefreq and priority. Google dropped both as ranking signals in 2017, but non-Google crawlers and AI agents still read changefreq as a re-crawl cadence hint and priority as a relative-importance signal, so adding them is a low-effort way to broaden machine compatibility.
 
-The sitemap lists 142 URLs; 187 of the pages this audit reached are not among them. The full set is recorded in the `www-bollants-de-pages-not-in-sitemap.csv` sidecar alongside this report. Adding them to the sitemap lets search engines and machines discover all content.
+The sitemap lists 144 URLs; 187 of the pages this audit reached are not among them. The full set is recorded in the `www-bollants-de-pages-not-in-sitemap.csv` sidecar alongside this report. Adding them to the sitemap lets search engines and machines discover all content.
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
@@ -606,7 +580,7 @@ This section reports whether Bollants's site marks AI-generated or AI-manipulate
 
 <p><small><strong>Note:</strong> This section describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</small></p>
 
-**Table 12**
+**Table 11**
 
 *AI-Content Marking Readiness*
 
@@ -620,7 +594,7 @@ This section reports whether Bollants's site marks AI-generated or AI-manipulate
 
 ### Markers
 
-**Table 13**
+**Table 12**
 
 *Markers*
 
@@ -654,7 +628,7 @@ We probed 53 addresses that should answer 404 when they are absent; 0 returned a
 
 ## Structured Data Inventory
 
-**Table 14**
+**Table 13**
 
 *Structured Data Inventory*
 
@@ -688,7 +662,7 @@ Across the 12 pages we audited, structured data is solid. Adding recommended pro
 
 The Structured Data Quality score is composed of seven measurable signals. This breakdown shows what Bollants earns in each.
 
-**Table 15**
+**Table 14**
 
 *SDQ Score Breakdown*
 
@@ -703,13 +677,14 @@ The Structured Data Quality score is composed of seven measurable signals. This 
 | Vocabulary validity | 9 | 10 | Every @type is a valid Schema.org type |
 | **Total** | **52** | **100** | |
 
-The lowest-scoring components are Required coverage and Linked-data signals. These gaps mean the site's structured data is narrow and poorly interconnected, keeping its schema maturity at Decoration.
+We found the lowest-scoring components are Required coverage and Linked-data signals.  
+These gaps mean the site's structured data is shallow and poorly connected, keeping its schema maturity at Decoration.
 
 ### Vocabulary Validity Issues
 
 We detected 12 @type values that are not part of the Schema.org vocabulary. Machines that strictly validate against Schema.org will skip these entities entirely.
 
-**Table 16**
+**Table 15**
 
 *Vocabulary Validity Issues*
 
@@ -736,7 +711,7 @@ We identified 29 specific Schema.org property gaps. Each row names a single miss
 
 The full per-entity list is delivered alongside this report as a sidecar CSV: [`www-bollants-de-structured-data-findings.csv`](www-bollants-de-structured-data-findings.csv). The 29 rows describe individual Schema.org property gaps on specific entities; most of them share a small number of underlying patterns, shown below ranked by instance count.
 
-**Table 17**
+**Table 16**
 
 *Structured Data Findings*
 
@@ -754,7 +729,7 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 **Severity legend** (the values in the *Severity* column above):
 
-**Table 18**
+**Table 17**
 
 *Structured Data Findings*
 
@@ -768,7 +743,7 @@ Each summary row covers multiple per-entity rows in the sidecar; the grouped vie
 
 ## Marker Reachability
 
-**Table 19**
+**Table 18**
 
 *Marker Reachability*
 
@@ -792,7 +767,7 @@ All detected markers are present in the served HTML on the pages we audited. Ser
 
 Schema.org implementations fall into five maturity tiers. The transitions are not continuous. Each level requires structurally different work. Maturity is a structural classification: it depends on what the markup carries (typed blocks, required properties, cross-references, external identifiers), not on the SDQ score the markup happens to earn. A page can sit at Level 1 with a high SDQ score and at Level 3 with a moderate one. Score and level are reported separately.
 
-**Table 20**
+**Table 19**
 
 *Schema Maturity Level*
 
@@ -817,7 +792,7 @@ The classification is conservative: every Schema.org block on every audited page
 
 The MX Journey maps the five stages a machine follows when interacting with a website. Each stage builds on the previous one. A break at any stage propagates to all subsequent stages.
 
-**Table 21**
+**Table 20**
 
 *5-Stage MX Journey*
 
@@ -864,7 +839,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 **Pipeline Survivability score:** 91/100
 Pages reach agents intact with no observed survivability issues.
 
-Inline Tag Bloat is flagged on all twelve audited pages; because the markup contains excessive inline elements, machines cannot reliably parse or render the content, leading to incomplete or incorrect rendering in search results and other automated services. Addressing this by moving inline styles and scripts into external files would reduce parsing overhead and improve machine comprehension, delivering the largest impact on resilience. Truncation Risk also appears on some pages; correcting it is an opportunity to further strengthen overall robustness.
+Across the audited set, every page shows Inline Tag Bloat, which can cause machines to truncate or misread content because the excessive tags overwhelm parsing logic. Truncation Risk also appears on some pages, potentially leading agents to miss parts of the text. Addressing the inline tag bloat-by reducing unnecessary markup-offers the greatest impact and provides an opportunity to strengthen the site's resilience for machine consumption.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check set, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -876,7 +851,7 @@ When a page's containers are generic `<div>` elements with no role, no ARIA land
 
 We measure semantic structure on both served and rendered HTML so we can tell whether the generic containers are in the source the publisher controls or something the JavaScript framework introduces at render time. Score 100 is a page whose regions carry landmark roles; score 0 is the worst case (every region is a generic nested container with no role).
 
-**Table 22**
+**Table 21**
 
 *Semantic Structure: landmark roles for machine navigation*
 
@@ -887,15 +862,15 @@ We measure semantic structure on both served and rendered HTML so we can tell wh
 
 **Worst page (both):** [/en/the-hotel/our-story](https://www.bollants.de/en/the-hotel/our-story)
 
-On the served surface of the worst-page (https://www.bollants.de/en/the-hotel/our-story), the generic-container ratio is highest at 66 %, forcing machines to lose structural context and rely on positional inference.  
-The pattern is structural, with a deepest bare chain of six levels; this indicates that the source pipeline likely uses drag-and-drop builders or late-stage JavaScript injection rather than component frameworks that would explain such density.  
-A low-cost first move is to wrap the main landmarks-header, nav, main, footer, aside-with semantic elements or landmark roles and give remaining containers meaningful class names, which will reduce the generic-container ratio without restructuring layout.
+On the rendered surface of the worst page (https://www.bollants.de/en/the-hotel/our-story), the generic-container ratio is highest, with 63 % of elements being bare divs; this forces machines to lose structural context and rely on positional inference.  
+The pattern is surface-wide rather than deeply nested, as the deepest bare chain is only six levels deep; without evidence of a component framework, it suggests late-stage JavaScript injection or drag-and-drop builders are adding generic containers.  
+A low-cost first step is to wrap key landmarks-header, nav, main, footer, aside-with their semantic elements or landmark roles and assign meaningful class names to the remaining content; this will reduce the generic-container ratio without altering layout.
 
 ---
 
 ## Security Headers
 
-**Table 23**
+**Table 22**
 
 *Security Headers*
 
@@ -932,7 +907,7 @@ HTTPS: 12/12 | HSTS: 12/12 | CSP: 0/12 | X-Frame-Options: 12/12 | X-Content-Type
 
 ### Cross-Page Consistency
 
-**Table 24**
+**Table 23**
 
 *Cross-Page Consistency*
 
@@ -960,7 +935,7 @@ Some pages in the 12-page sample are missing metadata patterns that others carry
 
 The audited set shows consistent metadata patterns across pages, with no brand-name, canonical-URL, meta-description, or entity divergence detected.
 
-**Table 25**
+**Table 24**
 
 *Content Consistency*
 
@@ -979,7 +954,7 @@ Every consistency check passes, so an agent reading any two audited pages receiv
 
 We found 9 identical inline fragment(s) repeated across multiple pages, totalling 1271 KB redundant bytes. Extracting these to external CSS or JS files would reduce page weight, improve cacheability, and simplify maintenance.
 
-**Table 26**
+**Table 25**
 
 *Inline Code Duplicates*
 
@@ -998,7 +973,7 @@ We found 9 identical inline fragment(s) repeated across multiple pages, totallin
 
 ## Infrastructure and Hosting
 
-Hosted directly with **Hetzner Online GmbH**. Platform: **Contao**.
+Hosted directly with **Hetzner Online GmbH**. Platform is estimated to be **Unknown Platform**, though signals are ambiguous.
 
 ---
 
@@ -1013,7 +988,7 @@ PDFs are part of the machine-readable estate but sit outside this HTML audit's s
 
 12 of 12 pages have significant shared content, giving machines redundant information per page and reducing the value of multi-page crawls. Every flagged page consumes crawl budget without adding distinct knowledge to an agent's model of the site.
 
-**Table 27**
+**Table 26**
 
 *Content Uniqueness*
 
@@ -1035,11 +1010,11 @@ The remaining 2 pages all scored Distinctive or Expected Boilerplate.
 
 1. **Address Priority 1 findings**: address the 290 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
 2. **Review Priority 2-3 findings**: Semantic Structure improvements and metadata tuning that compound over time
-3. **Consider optional enhancements**: optional patterns that give an early-mover opportunity in AI search
+3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search
 
 ### What's Next
 
-**Table 28**
+**Table 27**
 
 *What's Next*
 
@@ -1060,7 +1035,7 @@ This audit is a starting point. The outcome we work toward is a site any machine
 
 Each dimension is measured independently. Served dimensions reflect each page before JavaScript runs; Rendered dimensions reflect what a browser produces after JavaScript executes. The Notes column explains the measurement method for each score.
 
-**Table 29**
+**Table 28**
 
 *Audit Scores*
 
@@ -1131,7 +1106,7 @@ We recorded every same-host internal link found on each audited page. External l
 
 Per page, internal links range from 39 to 199, averaging 59 across 13 crawled pages. That is denser than typical (benchmark median 20 per page).
 
-**Table 30**
+**Table 29**
 
 *Appendix B: Link Inventory*
 
@@ -1152,9 +1127,9 @@ We reviewed 316 images across the audited set: 1 SVG, 36 PNG and 279 JPEG. 281 o
 
 On loading strategy, 166 images are marked `loading="lazy"` and 0 `loading="eager"`, while 150 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
-JPEG and PNG account for most of the 316 images (279 and 36 files respectively). None use WebP, the modern format that typically reduces file size compared to PNG or JPEG with no visible quality loss.s.
+JPEG and PNG account for 99% of the 316 images (279 and 36 files respectively). None use WebP, the modern format that typically reduces file size by 25-35% over PNG or JPEG with no visible quality loss.
 
-**Table 31**
+**Table 30**
 
 *Appendix C: Image Efficiency*
 
@@ -1176,13 +1151,13 @@ Accessibility testing here is automated only. Automated tools reliably detect ro
 
 **MX-specific metrics:** MX Stack Completeness measures all 7 metadata layers. Structured Data Quality (SDQ) scores JSON-LD entity richness. Discovery Readiness scores the robots.txt + sitemap + llms.txt + agent-card.json quartet. Cross-Page Consistency flags pages that deviate from site-wide patterns. Site Profile JSON enables cross-audit comparison. **Pipeline Survivability** runs eleven reading-resilience checks: truncation resilience, SPA shell resilience, soft-404 signalling, boilerplate balance, tabbed-disclosure avoidance, code-fence integrity, single-content-type negotiation, same-host redirects, heading specificity, early content start, and inline-tag bloat control. See **[MX: The Protocols Appendix S](https://mx.allabout.network/books/appendices/appendix-s.html)** for the full taxonomy and **[Appendix R](https://mx.allabout.network/books/appendices/appendix-r.html)** for the testing methodology.
 
-**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: **Contao** (high confidence -  multiple fingerprint signals). The main audit uses Contao-specific rate limits from our platform knowledge base. Requests are paced at that platform's known-safe speed, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
+**Platform detection:** We fingerprint the hosting platform from HTTP response headers, HTML signatures, asset paths, and class patterns. Platform identification is probabilistic -- a site can obscure or mimic platform signals. We report the result as: No platform detected. No platform-specific fingerprint was detected, so the audit used conservative default rate limits, paced slowly enough to stay below typical shared-host thresholds, with exponential backoff and retry (up to 4 attempts) on rate-limit responses.
 
 **Frameworks detected:** None detected. Framework detection scans JS component frameworks, CSS utility libraries, CMS plugins and page builders, and CDN/delivery layers from the audited pages. Confidence is high (3+ signals), medium (2 signals), or low (1 signal, treat as a hint). Low-confidence detections are noted but do not influence scoring.
 
 **Link inventory:** We record every internal link found on every audited page with its URL, anchor text, and link type. We do not probe link status: a dedicated, rate-limited broken-link crawler handles that separately and avoids hammering the origin. Appendix B is a link inventory, not a broken-link list.
 
-**Scope:** 12 pages examined | Platform: Contao | Analysis method: Automated checks with expert review | robots.txt: Present (4 directives)
+**Scope:** 12 pages examined | Platform: Unknown Platform | Analysis method: Automated checks with expert review | robots.txt: Present (4 directives)
 
 **Measurement completeness:** Every probe completed during this audit, with no network errors or timeouts. The findings below rest on a full data collection.
 
@@ -1204,7 +1179,7 @@ Our scoring criteria follow published MX standards and proposed specifications m
 
 **What we cover here, and what MX covers.** This report looks at the web estate: every page served over HTTP, examined for metadata, structured data, accessibility, and what machines can read. MX runs deeper, covering every document type a business publishes (PDFs, data feeds, API responses, structured documents) and the machines that read them. The web estate is the foundation; the rest builds on it.
 
-**Audit scope.** Findings throughout this report describe what we observed on the 12 HTML pages we examined in depth, drawn from a sitemap of 142 URLs. We also reviewed the site's discovery files (sitemap.xml). Structural findings - a missing header, a soft 404 pattern, a discovery file gap - hold across the full estate and are noted as such. Verdicts scoped to the sampled pages should not be extrapolated to the full estate without a wider audit.
+**Audit scope.** Findings throughout this report describe what we observed on the 12 HTML pages we examined in depth, drawn from a sitemap of 144 URLs. We also reviewed the site's discovery files (sitemap.xml). Structural findings - a missing header, a soft 404 pattern, a discovery file gap - hold across the full estate and are noted as such. Verdicts scoped to the sampled pages should not be extrapolated to the full estate without a wider audit.
 
 ### A note on llms.txt
 
@@ -1214,7 +1189,7 @@ The [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html) convention 
 
 ## Appendix E: Markdown Content Negotiation
 
-**Table 32**
+**Table 31**
 
 *Appendix E: Markdown Content Negotiation*
 
@@ -1235,7 +1210,7 @@ The site returns standard HTML to all requests, including those carrying `Accept
 
 The reference material cited in this report. Click the link on screen or scan the QR code on paper: both encode the same URL.
 
-**Table 33**
+**Table 32**
 
 *Further Reading*
 
@@ -1304,7 +1279,7 @@ All three audits run locally. No content leaves your infrastructure unless you a
 
 ---
 
-**Date:** 8 July 2026\
+**Date:** 12 July 2026\
 (c) 2026 CogNovaMX Ltd. All rights reserved.
 
 *This is a sample run over a subset of the site. CogNovaMX Ltd can scope a full-estate audit.*
