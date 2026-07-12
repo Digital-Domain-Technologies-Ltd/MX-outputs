@@ -111,15 +111,15 @@ Agent Readability was adjusted down by 4 points for site-wide gaps a machine can
 
 - **Generic containers without landmark roles on most pages** (-4): 8 of 12 pages rely on generic containers without landmark roles - expected from a component framework; adding landmark roles at the component level clears it
 
-The site appears to be an editorial or media publisher.
+Across the audited set, the site appears to be an editorial or media publisher.
 
-Schema.org types indicate a content or editorial context.
+Across the audited set, Schema.org types indicate a content or editorial context.
 
 Cmscritic runs on Unknown Platform. Across the audited set, Cmscritic scores 58/100 for accessibility and 80/100 for SEO.
 
-The headline opportunity is that the audited set contains 14 distinct WCAG AA issue types across 566 instances; addressing these template patterns will lift accessibility to a compliance baseline and improve machine readability. By adding MX governance fields-mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers-to at least one published page, machines gain the context needed for accurate comprehension, moving the set from Discoverable to Governed.
+The headline opportunity is addressing the 14 distinct WCAG AA issue types that generate 566 raw instances. One fix per category clears many instances, making remediation efficient. This compliance improvement also boosts machine comprehension by ensuring content is accessible to all users.
 
-The audited set runs on an unknown platform, so we recommend focusing on governance metadata rather than platform-specific optimisations. The highest-leverage single action is adding MX governance fields to a published page to unlock Governed level and provide machines with the necessary context for accurate attribution.
+The audited set runs on an unknown platform, which constrains the specificity of rendering recommendations. Score thresholds for Governed are met (MSC 61, SDQ 66, DR 40), but no MX-namespaced governance metadata was detected; adding mx:status, mx:contentType, mx:audience, canonicalUri and provenance markers to a published page unlocks the next MX Readiness Level.
 
 \clearpage
 
@@ -213,7 +213,7 @@ Every priority block in the Findings section carries a **Bucket:** label matchin
 
 **Evidence:** MX Stack Completeness 61/100 Core metadata layers are in place; governance fields and provenance declarations are missing. | Structured Data Quality 66/100 Schema.org data is present and valid; recommended properties and entity links are sparse. | Discovery Readiness 40/100 Machines can find the site but lack structured signals about its purpose and content policy. | Consistency 64% Most metadata patterns are consistent; a few gaps mean some pages deliver weaker signals than others.
 
-**To reach the next level:** Score thresholds for Governed are met (MSC 61, SDQ 66, DR 40), but no MX-namespaced governance metadata was detected on the audited pages. Add MX governance fields (mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers) to at least one published page to unlock Governed level. Without those fields a machine can discover the page but lacks the governance context for accurate comprehension.
+**To reach the next level:** Score thresholds for Governed are met, but no MX-namespaced governance metadata was detected.ected on the audited pages. Add MX governance fields (mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers) to at least one published page to unlock Governed level. Without those fields a machine can discover the page but lacks the governance context for accurate comprehension.
 
 ---
 
@@ -593,7 +593,7 @@ The sitemap declares 5983 URLs and grades Partial. Lastmod dates vary across ent
 
 The sitemap lists 5983 URLs; 11 of the pages this audit reached are not among them. The full set is recorded in the `cmscritic-com-pages-not-in-sitemap.csv` sidecar alongside this report. Adding them to the sitemap lets search engines and machines discover all content.
 
-We discovered that the sitemap lists several URL variants-trailing-slash and hash-fragment forms-for the same canonical resource, which means machines will treat each variant as a distinct page. To eliminate token waste and prevent contradictory or inflated findings, we recommend publishing one canonical URL per resource in sitemap.xml and adding a <link rel="canonical"> tag to each affected URL.
+We discovered that the sitemap lists multiple URL variants-trailing-slash and hash-fragment forms-for the same canonical resource, such as https://cmscritic.com/llms.txt appearing twice. Machines that skip URL normalisation will treat each variant as a distinct page, inflating token usage and risking contradictory or duplicated findings; we recommend publishing one canonical URL per resource in sitemap.xml and adding a <link rel="canonical"> tag to each affected URL.
 
 ### [llms.txt](https://mx.allabout.network/blog/llms-txt-guide.html)
 
@@ -719,7 +719,7 @@ The Structured Data Quality score is composed of seven measurable signals. This 
 | Vocabulary validity | 10 | 10 | Every @type is a valid Schema.org type |
 | **Total** | **66** | **100** | |
 
-The lowest-scoring components are linked-data signals and entity richness, showing limited inter-linking of structured data and a modest range of entities. This constrains the site's schema maturity to Decoration, meaning it only supplies basic markup without deeper governance or rich linking.
+We found Linked-data signals and Entity richness to be the lowest-scoring components, indicating sparse inter-entity connections and limited content detail in the schema markup. These gaps keep the site at a Decoration maturity level, where structured data is present but lacks depth and breadth for advanced machine comprehension.
 
 ---
 
@@ -859,7 +859,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 **Pipeline Survivability score:** 77/100
 Pages reach agents intact with no observed survivability issues.
 
-Inline Tag Bloat is present on all eleven audited pages, preventing machines from fully parsing the page content and hindering accurate extraction of information. Truncation Risk causes agents to miss portions of the page, while SPA Shell delays rendering for bots that rely on client-side execution. Refactoring the markup to reduce inline tags would give the largest improvement in machine comprehension.
+Across the audited set, every page suffers from Inline Tag Bloat, which forces machines to download and parse excessive markup; this can cause them to miss or misinterpret key information. Truncation Risk and SPA Shell also appear on some pages, meaning agents may receive incomplete content or only a shell that requires JavaScript execution. Addressing Inline Tag Bloat first offers the greatest improvement, while cleaning up truncation and converting shells into server-rendered markup will further strengthen machine comprehension.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check set, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -883,9 +883,9 @@ We measure semantic structure on both served and rendered HTML so we can tell wh
 **Worst page (served):** [/diving-deep-with-palmata-contentful-uplevels-aeo-to-help-brands-understand-and-influence-ai-discoverability](https://cmscritic.com/diving-deep-with-palmata-contentful-uplevels-aeo-to-help-brands-understand-and-influence-ai-discoverability)\
 **Worst page (rendered):** [/signup](https://cmscritic.com/signup)
 
-Rendered content on https://cmscritic.com/signup shows a 65 % generic-container ratio, meaning machines lose structural context and must rely on positional inference to determine meaning.  
-The pattern is structural, with a deepest bare chain of six elements, indicating that the source pipeline-such as a drag-and-drop builder or late-stage JavaScript injection-is producing excessive nested containers.  
-A cost-effective first move is to wrap the primary landmarks-header, navigation, main content, footer, and aside-with their semantic tags or ARIA landmark roles and give remaining elements meaningful class names; this lowers the generic-container ratio without changing layout.
+Rendered content on the worst page (https://cmscritic.com/signup) has the highest generic-container ratio, at 65 % of its elements being bare divs; this means machines lose structural context and must rely on positional inference to determine meaning.  
+The deep chain of six nested bare divs suggests a structural pattern resulting from a drag-and-drop builder or late-stage JavaScript injection.  
+The cheapest first move is to wrap the header, nav, main, footer, and aside landmarks in their semantic tags or assign appropriate ARIA landmark roles, and to replace generic divs with descriptive class names; this lowers the generic-container ratio without changing layout.
 
 ---
 
@@ -1033,7 +1033,7 @@ Most of the audited set (6 of 11 pages) carries the sentence rhythms, vocabulary
 
 1. **Address Priority 1 findings**: address the 566 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
 2. **Review Priority 2-3 findings**: Semantic Structure improvements and metadata tuning that compound over time
-3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search
+3. **Consider optional enhancements**: optional patterns that give an early-mover opportunity in AI search
 
 ### What's Next
 
@@ -1150,7 +1150,7 @@ We reviewed 340 images across the audited set: 31 SVG, 90 PNG, 216 JPEG and 3 in
 
 On loading strategy, 255 images are marked `loading="lazy"` and 0 `loading="eager"`, while 85 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
-JPEG and PNG account for 90% of the 340 images (216 and 90 files respectively). None use WebP, the modern format that typically reduces file size by 25-35% over PNG or JPEG with no visible quality loss.
+JPEG and PNG account for most of the images, but none use WebP, which typically reduces file size by 25-35 % over PNG or JPEG without visible quality loss.s.
 
 **Table 30**
 
@@ -1259,7 +1259,7 @@ The reference material cited in this report. Click the link on screen or scan th
 
 MX is to machines what UX is to users: it asks not whether a human can read this report, but whether a machine can read it, verify it, and act on it. A standard is credible only when we run on it ourselves, so we built this report to the standard it measures. You can inspect this PDF and read every claim it makes directly in your browser at the [MX Inspector](https://mx.allabout.network/tools/pdf-inspector.html) - no command-line tools, no login, no installation required. Drop the file, read the chain.
 
-This report carries its own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. What this audit measures on a client's behalf, this deliverable meets.
+We carry our own provenance. Every step that produced it is recorded in two adjacent JSON sidecars - one AI, one deterministic - and the full evidence chain travels inside the PDF's XMP metadata: extract it with `exiftool -b -XMP-mx:ProvenanceAiPayload cmscritic-com-report.pdf | jq .`. The PDF is a tagged ISO 14289-1 (PDF/UA-1) Level 2 document with a complete reading-order structure tree. What this audit measures on a client's behalf, this deliverable meets.
 
 Machine-readable content is visible to agents and validators. Machine-trustworthy content adds a provenance layer - a dated, attested record that names who published it and under what rubric. Readable is what MX makes content; the provenance layer is what makes it trustworthy. The two do different jobs, and this report carries both. It is an example of what that looks like in practice.
 

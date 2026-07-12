@@ -113,13 +113,13 @@ Agent Readability was adjusted down by 26 points for site-wide gaps a machine ca
 - **Content appears only after JavaScript runs (site-wide)** (-8): 10 of 12 pages serve a JS shell or far less text than they render
 - **Generic containers without landmark roles on most pages** (-8): 11 of 12 pages rely on generic containers without landmark roles
 
-The site appears to be a transactional retail or e-commerce operation.
+The site appears to be a hotel or hospitality operation.
 
 Bollants runs on Unknown Platform. Across the audited set, Bollants scores 57/100 for accessibility and 91/100 for SEO.
 
-The headline opportunity is to elevate the site's commerce visibility, currently at 20/100, which limits machine discovery of product offerings. A Priority 1 compliance item is the 14 distinct WCAG AA issue types affecting 290 elements; addressing each pattern would remove most accessibility barriers.
+The headline opportunity is to address the 14 distinct WCAG AA issue types that affect 290 elements across the audited set. Fixing these recurring template patterns will lift accessibility compliance and give machines clearer context for content interpretation. Adding MX governance fields is the next step toward machine-ready comprehension.
 
-Because AI Suitability is only 59/100, there is a served-versus-rendered gap that hampers machine parsing. On the current platform, the highest-leverage action is to add full MX governance fields-mx:status, mx:contentType, mx:audience, canonicalUri, and provenance markers-to move from Level 1 Discoverable to Governed.
+The platform remains unspecified, so implementation must rely on standard web formats that all browsers and crawlers understand. The highest-leverage action is to embed full MX metadata-mx:status, mx:contentType, mx:audience, canonicalUri, provenance markers-so machines have the structured context they need for accurate comprehension.
 
 \clearpage
 
@@ -489,7 +489,7 @@ Machine visitors vary more than human ones. A small model on a phone works insid
 
 Put the same meaning in every channel: page semantics, accessibility tree, metadata, and plain text. A page that stakes its meaning on one channel loses every visitor without it. The accessibility tree is the channel this section checks; it is shared by screen readers, so every fix here serves human and machine visitors alike.
 
-Human visitors follow a path - step by step, page by page. Machines do not. They hit one page, once, and leave; they follow no path unless that page sends them somewhere. A site that hides its meaning across multiple pages is invisible to a machine landing in the middle. Every page has to stand alone for the machine while the journey still works for the human. These are complementary designs on the same pages.
+Human visitors follow a path - step by step, page by page. Machines do not. They hit one page, once, and leave; they follow no path unless that page sends them somewhere. A site that hides its meaning across multiple pages is invisible to a machine landing in the middle. Across the audited set, every page has to stand alone for the machine while the journey still works for the human. These are complementary designs on the same pages.
 
 This check reads each audited page as a tree consumer does and flags where behaviour, names, and structure fail to reach it. It covers what the WCAG scan does not: that section measures conformance per page; this one catches meaning that exists in only one channel.
 
@@ -501,8 +501,6 @@ This check reads each audited page as a tree consumer does and flags where behav
 |---------|--------|
 | Accessibility-tree score | Not measured |
 | Pages checked | 0 |
-
-Every page passes all tree-level checks; no structural gaps block complete traversal.
 
 No rendered pages were available to this check on this run, so the accessibility-tree channel was not measured. We report that as "not measured" rather than clean: a verdict needs at least one scanned page behind it. A wider crawl, or a re-run once rendered pages are cached, populates this section.
 
@@ -839,7 +837,7 @@ Every check runs on every audited page. The aggregate score weights truncation r
 **Pipeline Survivability score:** 91/100
 Pages reach agents intact with no observed survivability issues.
 
-Across the audited set, every page shows Inline Tag Bloat, which can cause machines to truncate or misread content because the excessive tags overwhelm parsing logic. Truncation Risk also appears on some pages, potentially leading agents to miss parts of the text. Addressing the inline tag bloat-by reducing unnecessary markup-offers the greatest impact and provides an opportunity to strengthen the site's resilience for machine consumption.
+Across the audited set, every page shows Inline Tag Bloat, which can cause machines to truncate or misread content because the excessive tags overwhelm parsing logic. Truncation Risk also appears on some pages, potentially leading agents to miss parts of the text. Fixing the inline tag bloat-by reducing unnecessary markup-offers the greatest impact and strengthens the site's resilience for machine consumption.
 
 For the methodology behind this section, the relevance layer concept, and the canary-token method that informs the check set, see **[MX: The Protocols Appendix R: Testing Agent Comprehension](https://mx.allabout.network/books/appendices/appendix-r.html)** and **[Appendix S: The Eleven Agent Reading Resilience Checks](https://mx.allabout.network/books/appendices/appendix-s.html)**.
 
@@ -862,9 +860,9 @@ We measure semantic structure on both served and rendered HTML so we can tell wh
 
 **Worst page (both):** [/en/the-hotel/our-story](https://www.bollants.de/en/the-hotel/our-story)
 
-On the rendered surface of the worst page (https://www.bollants.de/en/the-hotel/our-story), the generic-container ratio is highest, with 63 % of elements being bare divs; this forces machines to lose structural context and rely on positional inference.  
-The pattern is surface-wide rather than deeply nested, as the deepest bare chain is only six levels deep; without evidence of a component framework, it suggests late-stage JavaScript injection or drag-and-drop builders are adding generic containers.  
-A low-cost first step is to wrap key landmarks-header, nav, main, footer, aside-with their semantic elements or landmark roles and assign meaningful class names to the remaining content; this will reduce the generic-container ratio without altering layout.
+On the rendered surface, the generic-container ratio is highest on the single worst page in the audited set (https://www.bollants.de/en/the-hotel/our-story), where 63 % of elements are bare divs; this causes machines to lose structural context and fall back on positional inference to determine meaning.  
+The pattern shows deep container chains, with a deepest bare chain length of six, indicating that the source pipeline likely injects many nested divs through a drag-and-drop builder rather than a component framework.  
+A cost-effective first step is to wrap key landmarks-header, nav, main, footer, aside-with their semantic elements or landmark roles and assign meaningful class names to the remaining divs; this reduces the generic-container ratio without altering layout.
 
 ---
 
@@ -1010,7 +1008,7 @@ The remaining 2 pages all scored Distinctive or Expected Boilerplate.
 
 1. **Address Priority 1 findings**: address the 290 WCAG 2.1 AA accessibility issues identified (regulatory exposure)
 2. **Review Priority 2-3 findings**: Semantic Structure improvements and metadata tuning that compound over time
-3. **Consider optional enhancements**: optional patterns that give a early-mover opportunity in AI search
+3. **Consider optional enhancements**: optional patterns that give an early-mover opportunity in AI search
 
 ### What's Next
 
@@ -1127,7 +1125,7 @@ We reviewed 316 images across the audited set: 1 SVG, 36 PNG and 279 JPEG. 281 o
 
 On loading strategy, 166 images are marked `loading="lazy"` and 0 `loading="eager"`, while 150 carry no loading attribute at all. No attribute is not the same as eager: the browser decides for itself when to fetch, which removes the explicit control that lazy and eager give you. Setting an explicit attribute on those images makes the fetch behaviour predictable for browsers and machines alike.
 
-JPEG and PNG account for 99% of the 316 images (279 and 36 files respectively). None use WebP, the modern format that typically reduces file size by 25-35% over PNG or JPEG with no visible quality loss.
+JPEG and PNG account for 99% of the 316 images (279 and 36 files respectively). None use WebP, the modern format that typically reduces file size by up to 35% compared to PNG or JPEG without visible quality loss.s.
 
 **Table 30**
 
