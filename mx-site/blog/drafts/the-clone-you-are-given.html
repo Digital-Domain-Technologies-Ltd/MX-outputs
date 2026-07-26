@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: The Clone You Are Given Is Not the Repository
+description: Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know.
+author: Tom Cranstoun
+created: "2026-07-06"
+modified: "2026-07-06"
+version: "1.0"
+type: blog-post
+tags:
+  - git
+  - clones
+  - vibe-coding
+  - machine-experience
+  - environments
+mx:
+  x-mx-managedBy: blog-post.cog.md
+  status: draft
+  x-mx-contentState: draft
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/the-clone-you-are-given.md
+  x-mx-contextProvides:
+    - "Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know."
+  stability: stable
+  purpose: "Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know."
+  servedAt: https://mx.allabout.network/blog/drafts/the-clone-you-are-given.html
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  blogUrl: https://mx.allabout.network/blog/drafts/the-clone-you-are-given.html
+  blogFilename: the-clone-you-are-given
+  x-mx-linkedIn: |
+    Here's a question for everyone building with AI assistants: when your coding
+    environment hands you a repository, what did it actually hand you?
+
+    Most people assume the answer is "the repository". It almost never is. Hosted
+    workspaces and IDE environments prepare a version of your project for you:
+    maybe without its history, maybe without its sibling repositories, maybe
+    without the safety hooks the team relies on. Each platform does it
+    differently, none of them publish how, and it changes without notice.
+
+    I watched this bite in the politest possible way recently. I asked an
+    assistant to mine a repository's commit log. It answered instantly and
+    confidently: almost nothing there. The repository had months of history. The
+    workspace had been given two days of it, and git never says "by the way,
+    I'm not showing you everything."
+
+    The fix took seconds. Knowing to look is the whole game.
+
+    That's why I think workspaces need what every other engineering surface
+    already has: tests, governance, and standards. Machines reading the ground
+    they stand on. It's the same discipline I apply to content, applied one
+    layer down.
+
+    I'm writing the book on this. [Link in comments]
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/the-clone-you-are-given.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/the-clone-you-are-given.html">
+  <meta property="og:title" content="The Clone You Are Given Is Not the Repository | CogNovaMX">
+  <meta property="og:description" content="Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-06">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Clone You Are Given Is Not the Repository | CogNovaMX">
+  <meta name="twitter:description" content="Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="The Clone You Are Given Is Not the Repository">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/the-clone-you-are-given.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The Clone You Are Given Is Not the Repository | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "The Clone You Are Given Is Not the Repository",
+        "headline": "The Clone You Are Given Is Not the Repository",
+        "description": "Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-07-06",
+        "dateModified": "2026-07-06",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/the-clone-you-are-given.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 789,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/the-clone-you-are-given.html",
+        "name": "The Clone You Are Given Is Not the Repository",
+        "url": "https://mx.allabout.network/blog/drafts/the-clone-you-are-given.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#thin-fat-and-the-myth-of-the-simple-label">Thin, fat, and the myth of the simple label</a></li>
+        <li><a href="#one-example">One example</a></li>
+        <li><a href="#this-is-a-standards-problem-and-thats-good-news">This is a standards problem, and that's good news</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="789">
+        <header class="article-header">
+          <h1>The Clone You Are Given Is Not the Repository</h1>
+          <div class="article-meta"
+               data-published="2026-07-06"
+               data-modified="2026-07-06"
+               data-reading-time="4 min">
+            <time datetime="2026-07-06">6 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>4 min read</span>
+          </div>
+        </header>
+
+
+<p>Ask your AI assistant to search your project's history and it'll answer in seconds, brimming with confidence. Here's the uncomfortable bit: the answer can be almost completely wrong, and neither you nor the assistant will get any warning. Not because the model hallucinated. Because the workspace it was standing in never contained the thing you asked about.</p>
+<h2 id="thin-fat-and-the-myth-of-the-simple-label" tabindex="-1">Thin, fat, and the myth of the simple label</h2>
+<p>If you've been around git people, you'll have heard the words &quot;thin clone&quot; and &quot;fat clone&quot;. A fat clone is the whole estate: full history, every sibling repository, dependencies installed, tools present. A thin clone is something less than that. The words suggest a tidy binary, and that's the first thing most people, and especially vibe coders, get wrong.</p>
+<p>There's no binary. Completeness is a spectrum across a dozen separate axes. A clone can have the files but not the history. The history but not the sibling repositories. The code but not the dependencies. The dependencies but not the document toolchain. Everything above but none of the safety hooks the team relies on, because git installs precisely none of them when you clone. Each axis fails differently: some things crash loudly, some degrade politely, and some answer your question with total confidence while quietly covering a fraction of what you believed they covered. Those last ones are the dangerous ones.</p>
+<p>Now add the part almost nobody checks. You didn't prepare that workspace. Your environment did: the IDE, the hosted agent platform, the CI container. Each one decides what your clone contains, each one decides differently, none of them publish the recipe, and the recipe changes without notice. Two workspaces that look identical in a file listing can hold different pasts and enforce different rules. If you build software by conversation, you'll never see the difference. You were never told there was one.</p>
+<h2 id="one-example" tabindex="-1">One example</h2>
+<p>Recently I asked an assistant, working in a hosted cloud workspace, to mine a repository's commit log for a phrase I knew had been used. The answer came back fast and clean: nothing there. Two matching commits in the entire project.</p>
+<p>The repository was months old, with thousands of commits. The workspace had been handed two days of history. Not through malice; the platform clones shallow so containers start fast, which is a perfectly sensible engineering choice. But git never volunteers that anything is missing. Ask a shallow clone for its log and it answers with the fraction it holds, confidently, like a witness who genuinely believes they saw the whole thing.</p>
+<p>The remedy took seconds: one command fetched the missing months, and the real answer turned out to be genuinely useful. But every history-shaped answer produced before that moment was quietly wrong, and nothing in the workspace would ever have said so. The lesson isn't &quot;shallow clones are bad&quot;. The lesson is: a confidently thin answer is a finding, not an answer. Probe the ground before you trust it.</p>
+<h2 id="this-is-a-standards-problem-and-thats-good-news" tabindex="-1">This is a standards problem, and that's good news</h2>
+<p>Here's where it stops being a war story and starts being a fixable problem. A field where every platform prepares your workspace differently, secretly, and changeably is simply a field that hasn't had its tests, governance, and standards moment yet. Tests: a probe suite anyone can run that answers &quot;what did this platform just hand me?&quot; as a conformance check rather than an archaeology dig. Governance: declared rules for what an environment may do to your files, with a human in command of every override. Standards: a machine-readable way for a workspace to declare what it holds, what it stripped, and what it does on its own, so that people and AI agents alike can read the ground instead of reverse-engineering it one surprise at a time.</p>
+<p>Readers who know my work will recognise the shape. This is Machine Experience, MX, the discipline I've been applying to content: explicit, machine-readable declarations instead of guessing. It turns out the workspace needs the same treatment as the web page. Machines can't act reliably on ground they can't read, and right now, nobody's ground is readable.</p>
+<p>I'm writing the book on this facet of MX. It's called <em>MX: The Repo</em>, and it covers how a repository can describe itself, check itself, heal itself, and be handed safely to anyone, including the contributor who's never learned git and the AI agent that never will. The newest chapters came directly from probing these environments and writing down what they confessed.</p>
+<p>Until then, one habit will carry you a long way: before you trust any answer that depends on what your workspace contains, ask the workspace what it actually contains. The clone you are given is not the repository. Knowing that is most of the battle.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

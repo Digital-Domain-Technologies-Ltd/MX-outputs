@@ -17,7 +17,7 @@ tags: [identity, product, self-description, claude, fable5, mythos, example]
 mx:
   x-mx-category: example
   status: active
-  partOf: fable5-example
+  partOf: site-domaincog
   audience: [machines]
   purpose: "Establish the agent's identity, product context, and self-description rules."
   stability: stable

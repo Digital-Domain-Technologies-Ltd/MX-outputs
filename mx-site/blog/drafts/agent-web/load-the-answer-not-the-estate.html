@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Load the Answer, Not the Estate"
+description: "An AI agent gets worse the longer it works, not because its context window is too small but because of what fills it. The fix is the ground MX already stands on: hand the agent a compressed file it can read instead of a system it must re-derive, let a script's verdict stand in for evidence the model would otherwise reason over, and let a self-describing repository serve the answer instead of making the agent crawl the estate to infer it."
+author: Tom Cranstoun
+created: "2026-06-22"
+modified: "2026-06-22"
+version: "1.0"
+type: blog-post
+tags: [agents, context-window, determinism, cogs, self-describing, machine-readability, compaction, mx]
+mx:
+  x-mx-neededFor: [publish]
+  x-mx-contentState: draft
+  audience: [humans, machines]
+  purpose: "Explain, without project specifics, why an agent's output degrades as its context window fills with the raw scrollback of its own work, and how MX answers it: a cog is a compressed artifact the next agent reads instead of re-deriving state, a deterministic check stands in for evidence the model would otherwise load and reason over, and a self-describing repository serves the answer in one fetch rather than forcing a crawl of the whole estate."
+  stability: stable
+  x-mx-contextProvides:
+    - "Why an AI agent degrades over a long job: the model is stateless between turns, so the context window is the entire vote on its next move, and filling it with search scrollback, build logs, and tool JSON pushes the real work into the noisy part of the window; a window that records a history of mistake-then-correction teaches the wrong reflex. MX's answer is three moves on one idea (keep the window small on purpose): a cog is a compressed, readable statement of what something is and what is safe to do with it, handed to a fresh agent instead of making it re-derive state; a deterministic check is a single pass/fail line that replaces the evidence a model would otherwise load and infer over, which two models cannot disagree about; and a self-describing repository (a registry, a graph, a one-fetch machine-readable index) serves the answer to 'what is here and how does it fit' instead of forcing a crawl, with heavy searches forked to a separate window that returns one sentence so the asking agent pays for the conclusion, not the scrollback."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/load-the-answer-not-the-estate.md
+  runbook: "Blog post. No project specifics; keep it that way. Read straight through."
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="An AI agent gets worse the longer it works, not because its context window is too small but because of what fills it. The fix is the ground MX already stands on: hand the agent a compressed file it can read instead of a system it must re-derive, let a script's verdict stand in for evidence the model would otherwise reason over, and let a self-describing repository serve the answer instead of making the agent crawl the estate to infer it.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/agent-web/load-the-answer-not-the-estate.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/agent-web/load-the-answer-not-the-estate.html">
+  <meta property="og:title" content="Load the Answer, Not the Estate | CogNovaMX">
+  <meta property="og:description" content="An AI agent gets worse the longer it works, not because its context window is too small but because of what fills it. The fix is the ground MX already stands on: hand the agent a compressed file it can read instead of a system it must re-derive, let a script's verdict stand in for evidence the model would otherwise reason over, and let a self-describing repository serve the answer instead of making the agent crawl the estate to infer it.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-22">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Load the Answer, Not the Estate | CogNovaMX">
+  <meta name="twitter:description" content="An AI agent gets worse the longer it works, not because its context window is too small but because of what fills it. The fix is the ground MX already stands on: hand the agent a compressed file it can read instead of a system it must re-derive, let a script's verdict stand in for evidence the model would otherwise reason over, and let a self-describing repository serve the answer instead of making the agent crawl the estate to infer it.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Load the Answer, Not the Estate">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/agent-web/load-the-answer-not-the-estate.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Load the Answer, Not the Estate | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Load the Answer, Not the Estate",
+        "headline": "Load the Answer, Not the Estate",
+        "description": "An AI agent gets worse the longer it works, not because its context window is too small but because of what fills it. The fix is the ground MX already stands on: hand the agent a compressed file it can read instead of a system it must re-derive, let a script's verdict stand in for evidence the model would otherwise reason over, and let a self-describing repository serve the answer instead of making the agent crawl the estate to infer it.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-22",
+        "dateModified": "2026-06-22",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/agent-web/load-the-answer-not-the-estate.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1012,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/agent-web/load-the-answer-not-the-estate.html",
+        "name": "Load the Answer, Not the Estate",
+        "url": "https://mx.allabout.network/blog/drafts/agent-web/load-the-answer-not-the-estate.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#the-window-is-the-whole-vote">The window is the whole vote</a></li>
+        <li><a href="#keep-the-window-small-on-purpose">Keep the window small on purpose</a></li>
+        <li><a href="#the-discipline-made-structural">The discipline, made structural</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1012">
+        <header class="article-header">
+          <h1>Load the Answer, Not the Estate</h1>
+          <div class="article-meta"
+               data-published="2026-06-22"
+               data-modified="2026-06-22"
+               data-reading-time="6 min">
+            <time datetime="2026-06-22">22 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>6 min read</span>
+          </div>
+        </header>
+
+
+<p>There is a moment, watching an AI agent work a long job, where it starts to get worse. Early on it is sharp. It reads a file, makes the right call, moves on. A while later it is re-reading things it already read, second-guessing a decision it got right, and reaching for a tool it used correctly twenty steps ago as though seeing it for the first time. Nothing crashed. It just went dull.</p>
+<p>The instinct is to give it a bigger window: more room to remember, more context to hold. And the window did get bigger. The agent did not get sharper, because the problem was never how much it could hold. It was what ended up in there.</p>
+<h2 id="the-window-is-the-whole-vote" tabindex="-1">The window is the whole vote</h2>
+<p>A model working inside a repository is stateless between turns. It does not carry a private memory of the job from one step to the next. The only thing steering its next move is what is in front of it right now: the conversation, the files it has opened, the output of every command it ran. That is the entire ballot. Every right next step and every wrong one is decided by what sits in the window at that instant.</p>
+<p>So the contents matter more than the size. Fill the window with the actual question and a clean, dense statement of what is true, and the next move is likely to be right. Fill it instead with the raw scrollback of a search, half a build log, a directory listing, and the JSON some chatty tool dumped on its way past, and the agent is now voting on clutter. It does the real work surrounded by noise, and the noise wins more often than you would like.</p>
+<p>There is a worse version. If the window is a history of the agent making a mistake, correcting it, making another, correcting that, then the most likely next move is one more mistake, because that is the pattern the history is teaching. A polluted window does not merely dilute the signal. It trains the wrong reflex.</p>
+<h2 id="keep-the-window-small-on-purpose" tabindex="-1">Keep the window small on purpose</h2>
+<p>Everything that actually helps here is a version of one idea: keep the window small on purpose, and make what is in it count. This is the ground MX has stood on from the beginning, so let me say it in those terms. Three moves.</p>
+<p><strong>A cog is compaction you can hand to the next agent.</strong> A cog is a plain file, readable by a person and a machine alike, that states what something is, how it relates to everything else, and what is safe to do with it. That is the compressed artifact, written down once. Instead of letting an agent reconstruct the state of a system by crawling it, and burning half its window doing so, you hand it the cog and it reads the conclusion. A well-kept repository greets a fresh session exactly this way: a short, generated brief that says, in effect, read this, do not re-derive the state from scratch. The agent begins in the clean part of the window with the answer already in hand, instead of grinding its way toward the answer through the dull part.</p>
+<p><strong>A script's verdict keeps the evidence out of the window.</strong> The most expensive thing an agent can do is reason its way to a fact a script already knows. If a rule can be checked mechanically, a check a script can do, a script does, and the agent reads one line, pass or fail, rather than loading the evidence and inferring the verdict for itself. The script votes; the window stays clean. Every deterministic check is a token cost you never pay and a divergence you never risk, because two different models cannot disagree about a number a script computed. Inference is the thing you are trying to keep out of the window. A check is how you keep it out.</p>
+<p><strong>A self-describing repository serves the answer, not the estate.</strong> A repository that describes itself, a registry of what every part is, a graph of how the parts connect, a single machine-readable index it can serve in one fetch, lets an agent load the answer to &quot;what is here and how does it fit&quot; instead of opening a thousand files to infer it. And when a sub-question genuinely needs a heavy search, that search can be sent to a separate, fresh window which does the digging and returns one sentence: the file you want is here. The agent that asked never pays the token cost of the search. It pays the cost of the answer. Fan the work out, keep the conclusion, throw the scrollback away.</p>
+<h2 id="the-discipline-made-structural" tabindex="-1">The discipline, made structural</h2>
+<p>None of this is a trick of phrasing. You cannot prompt your way out of a window full of noise, and a bigger window does not save you, it just lets you load more noise before it shows. A bad search becomes a bad plan becomes a long run of bad work, whatever the model, however large the window. The thinking still has to be good. What MX changes is what the agent has to read to do the thinking: the answer, stated plainly, instead of the whole estate, waiting to be inferred.</p>
+<p>That is the line worth holding onto. A bigger context window raised the ceiling on what you can load. It did nothing to change what you should. The cog is the answer written down. The check is the inference taken out. The self-describing repository is the estate that hands you its conclusion instead of making you crawl for it. Put those together and the agent spends its window on the job in front of it, not on rediscovering the ground it is already standing on.</p>
+<p>The cheapest token is the one the agent never has to read, because something already did the reading, and wrote down what it found.</p>
+<hr>
+<p><em>Tom Cranstoun founded the MX community and wrote the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

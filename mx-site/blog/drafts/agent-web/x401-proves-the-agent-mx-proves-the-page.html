@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "x401 Proves the Agent. MX Proves the Page."
+description: "A new protocol called x401 lets an agent prove who it acts for. It says nothing about whether the page it just read is genuine. Here is how the two halves of agent trust fit together, and the one small change that makes them verify with the same key."
+author: "Tom Cranstoun"
+created: "2026-06-26"
+modified: "2026-06-26"
+version: "0.1"
+
+type: blog-post
+tags: [agent-web, identity, provenance, x401, x402, verifiable-credentials, reginald, mx, trust]
+mx:
+  x-mx-neededFor: [publish]
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.md
+  x-mx-contextProvides:
+    - "How x401 (agent identity) and MX/Reginald (content provenance) compose into one agent-trust stack, the shared Ed25519 crypto under both, and the JCS canonicalisation change that makes them byte-compatible."
+  stability: draft
+  purpose: "Show why agent identity and content provenance are two different problems, how x401 and MX/Reginald solve one each, and where they snap together."
+  x-mx-corroboratedBy:
+    - https://www.prweb.com/releases/proof-launches-x401-the-open-protocol-for-verifying-the-authority-behind-ai-agents-302810968.html
+    - https://openid.net/specs/openid-4-verifiable-presentations-1_0.html
+    - https://www.coinbase.com/developer-platform/discover/launches/x402
+    - https://www.rfc-editor.org/rfc/rfc8785
+  servedAt: https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  blogUrl: https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html
+  blogFilename: x401-proves-the-agent-mx-proves-the-page
+  x-mx-linkedIn: |
+    An AI agent shows up at your site to act on someone's behalf. Two questions decide whether you let it.
+
+    Who is it, and what is it allowed to do? That one just got an answer. x401, launched by Proof with identity teams at Google, OpenAI, Okta, Circle, MATTR and Lightspark, lets an agent present a verifiable credential for the person or org behind it. It pairs with x402 the way payments pair with a wallet: x402 settles how an agent pays, x401 proves who it is.
+
+    But there's a second question, and x401 doesn't touch it: is the page the agent just read actually genuine? That's the artefact, not the actor. It's the half MX and Reginald have been building.
+
+    Here's the part I like. Both stacks already sign the same way, with the same kind of key, verified on the spot without calling home. They were built by different people for different reasons and they landed on the same crypto. One small alignment and a single verifier could check both: who the agent is, and whether the page is real.
+
+    I wrote up how the two halves fit, and the one change that makes them share a key.
+
+    [Link in comments]
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A new protocol called x401 lets an agent prove who it acts for. It says nothing about whether the page it just read is genuine. Here is how the two halves of agent trust fit together, and the one small change that makes them verify with the same key.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html">
+  <meta property="og:title" content="x401 Proves the Agent. MX Proves the Page. | CogNovaMX">
+  <meta property="og:description" content="A new protocol called x401 lets an agent prove who it acts for. It says nothing about whether the page it just read is genuine. Here is how the two halves of agent trust fit together, and the one small change that makes them verify with the same key.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-26">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="x401 Proves the Agent. MX Proves the Page. | CogNovaMX">
+  <meta name="twitter:description" content="A new protocol called x401 lets an agent prove who it acts for. It says nothing about whether the page it just read is genuine. Here is how the two halves of agent trust fit together, and the one small change that makes them verify with the same key.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="x401 Proves the Agent. MX Proves the Page.">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="0.1">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>x401 Proves the Agent. MX Proves the Page. | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "x401 Proves the Agent. MX Proves the Page.",
+        "headline": "x401 Proves the Agent. MX Proves the Page.",
+        "description": "A new protocol called x401 lets an agent prove who it acts for. It says nothing about whether the page it just read is genuine. Here is how the two halves of agent trust fit together, and the one small change that makes them verify with the same key.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-26",
+        "dateModified": "2026-06-26",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1271,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html",
+        "name": "x401 Proves the Agent. MX Proves the Page.",
+        "url": "https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#x402-pays-x401-proves">x402 Pays, x401 Proves</a></li>
+        <li><a href="#who-proves-the-page">Who Proves the Page?</a></li>
+        <li><a href="#they-already-sign-the-same-way">They Already Sign the Same Way</a></li>
+        <li><a href="#where-they-snap-together">Where They Snap Together</a></li>
+        <li><a href="#the-one-thing-that-has-to-change">The One Thing That Has to Change</a></li>
+        <li><a href="#the-stack-not-the-pieces">The Stack, Not the Pieces</a></li>
+        <li><a href="#read-the-primary-sources">Read the Primary Sources</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1271">
+        <header class="article-header">
+          <h1>x401 Proves the Agent. MX Proves the Page.</h1>
+          <div class="article-meta"
+               data-published="2026-06-26"
+               data-modified="2026-06-26"
+               data-reading-time="7 min">
+            <time datetime="2026-06-26">26 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>7 min read</span>
+          </div>
+        </header>
+
+
+<p>An AI agent lands on your site to do something on someone's behalf. Book a room, file a claim, sign a form, pull a quote into an answer. Before you let it act, you want two things settled.</p>
+<p>Two questions decide it. Who this agent is and what it's allowed to do. And whether the thing it just read is genuine.</p>
+<p>One question is about the visitor. The other is about your page. Until recently the web had no clean answer to either one for agents. Now it has the start of an answer to the first, and that's worth understanding, because it tells you exactly which half is still missing.</p>
+<h2 id="x402-pays-x401-proves" tabindex="-1">x402 Pays, x401 Proves</h2>
+<p>You may have seen x402 go by. It borrows the old HTTP &quot;402 Payment Required&quot; status code, dusts it off, and turns it into a way for an agent to pay for something inline, mid-request, without a human clicking through a checkout. It gave the agent web a payment layer.</p>
+<p>x401 is the sibling. The name nods to HTTP &quot;401 Unauthorized&quot;, and the job is identity. Launched by Proof with identity teams at Google, OpenAI, Okta, Circle, MATTR and Lightspark, and handed to the FIDO Alliance's agentic-authentication group, it lets a site ask an agent to prove who it represents and what it may do. The agent presents a credential, the site checks the issuer, the claim, the scope, and the action, and only then proceeds.</p>
+<p>Sensibly, x401 doesn't invent its own credential format. It builds on machinery the identity world already trusts: OpenID for Verifiable Presentations, the W3C Digital Credentials API, W3C Credential Management. Verifiable Credentials and passkeys travel inside it. That deference matters, and we'll come back to it.</p>
+<p>So x402 answers how an agent pays. x401 answers who an agent is and what it's permitted to do. Both are about the actor at the moment it knocks on your door.</p>
+<p>Neither one says a word about your page.</p>
+<h2 id="who-proves-the-page" tabindex="-1">Who Proves the Page?</h2>
+<p>Here is the gap. An agent can now prove it acts for a real, authorised person. It still has no way to know that the page it just read is the genuine thing the publisher stands behind, rather than a stale copy, a spoof, or a fabrication an earlier model hallucinated and a later one is now quoting as fact.</p>
+<p>That's the artefact, not the actor. And it's the half MX and Reginald exist to cover.</p>
+<p>The two-pillar way we say it: MX makes content machine-readable, so an agent can act on a page without guessing what it means. Reginald makes content machine-trustworthy, so the agent can check who published a claim, whether it's the current version, and that the publisher still stands behind it. Readable, then trustworthy. The actor proves itself with x401; the page proves itself with MX and Reginald.</p>
+<p>This is also the documentation regimes like the EU AI Act and the European Accessibility Act expect organisations to be able to produce on request: a structured, verifiable record of what was published and what an agent did with it.</p>
+<blockquote>
+<p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
+</blockquote>
+<p>MX and Reginald don't grant compliance with any of those. Compliance stays a legal duty of the organisation. What they do is make the evidence machine-readable and checkable, so producing it later is a lookup, not an archaeology dig.</p>
+<h2 id="they-already-sign-the-same-way" tabindex="-1">They Already Sign the Same Way</h2>
+<p>This is the part that surprised me when I lined them up.</p>
+<p>x401 and Reginald were built by separate teams, each chasing its own problem, and they reached for the same crypto. Reginald signs a cog's identity and body with Ed25519 over a content hash, and a verifier checks the signature on the spot, from a small sidecar that carries the public key, without calling any registry. x401's world verifies a credential client-side too, issuer-neutral, no central gatekeeper.</p>
+<p>Same primitive. Same posture. The only honest difference is what they point at: x401 signs a claim about an agent, Reginald signs one about a file.</p>
+<p>Because they verify the same way, a single piece of software walking up to a page could check both at once. Is the agent who it claims to be? Is the page what it claims to be? One mental model, one verification routine, two answers.</p>
+<h2 id="where-they-snap-together" tabindex="-1">Where They Snap Together</h2>
+<p>Once you see the shared crypto underneath, the integration points almost draw themselves.</p>
+<p>The first is an identity socket. Reginald's provenance record already has a slot for the identifier of each party that touched an artefact. Today that slot is filled by hand, a name typed into a field. An x401 presentation fills it with a credential the agent actually proved. The record stops saying &quot;the system claims this agent acted&quot; and starts saying &quot;this one proved who it was, and here's the receipt.&quot;</p>
+<p>The second is permission, recorded. x401's real trick is binding identity to authorisation: who the agent is, and what it may do. Reginald's provenance steps can carry that scope as a checked precondition. The trail then proves the whole sentence: this verified agent, allowed to do this, acted on this page, under this regime. That's a far stronger thing to hand a regulator than any of the three pieces alone.</p>
+<p>The third is the single verifier from a moment ago. One library, checking the actor and the artefact with the same key math.</p>
+<h2 id="the-one-thing-that-has-to-change" tabindex="-1">The One Thing That Has to Change</h2>
+<p>I'll be straight about the catch, because it's small and it's real.</p>
+<p>&quot;Same primitive&quot; isn't yet &quot;same bytes.&quot; The Verifiable Credentials world canonicalises its JSON with a standard called JCS before signing. Reginald currently uses a home-grown scheme for the same step. The signatures are the same kind of signature, but they're computed over differently-shaped input, so a standard Verifiable Credentials library can't verify a Reginald attestation as-is. The shared-verifier promise doesn't hold until that lines up.</p>
+<p>The fix is to adopt JCS for the signing step, version it so existing signatures keep verifying, and prove a new signature checks out under someone else's library and not only our own. It's a contained change, and it turns a deference we already claimed into one we actually keep. We have written the decision down and put the work on the list.</p>
+<h2 id="the-stack-not-the-pieces" tabindex="-1">The Stack, Not the Pieces</h2>
+<p>Step back, and the whole thing is simple. An agent transaction on the open web wants three things proven: who's acting, that the payment is good, and that the content is real. x401 takes the first. x402 takes the second. MX and Reginald take the third, the only one about the page rather than the visitor.</p>
+<p>You don't have to pick a side in this. The pieces were built by separate teams who mostly haven't met, and they fit anyway, because they all bet on the same open standards. The win for you is concrete: when an agent acts on your content, you can know who it was, that it was allowed, and that what it read was genuine, and you can show all three later without reconstructing them from memory.</p>
+<p>That's what an agent at your door is really asking for. Now both halves of the answer exist.</p>
+<h2 id="read-the-primary-sources" tabindex="-1">Read the Primary Sources</h2>
+<ul>
+<li><a href="https://www.prweb.com/releases/proof-launches-x401-the-open-protocol-for-verifying-the-authority-behind-ai-agents-302810968.html">Proof's x401 launch announcement</a> sets out the protocol and who's behind it.</li>
+<li><a href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">OpenID for Verifiable Presentations</a> is the presentation machinery x401 builds on.</li>
+<li><a href="https://www.coinbase.com/developer-platform/discover/launches/x402">Coinbase's x402 introduction</a> is the payment sibling x401 pairs with.</li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc8785">RFC 8785 (JCS)</a> is the JSON canonicalisation standard the signing-step alignment adopts.</li>
+</ul>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

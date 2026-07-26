@@ -1,5 +1,5 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '5.4'
+version: '5.5'
 created: 2026-02-13T00:00:00.000Z
 modified: '2026-07-01'
 author: The Gathering
@@ -972,6 +972,31 @@ mx:
       status: canonical
       profile: core
       required: optional
+    - name: type
+      type: string
+      definition: >-
+        Document kind. OKF reserved top-level field naming what the file is, so a machine selects the right handling
+        before reading the body. Common values include info-doc, action, blog-post, report, guide, skill, hook,
+        routing-doc, and cogs; the set is open because document kinds grow with the estate.
+      example: info-doc
+      notes: >-
+        OKF reserved field — lives at the top level, never under mx:. Not an enforced enum; each profile declares its
+        own kinds (blog sources use blog-post, action cogs use action).
+      status: canonical
+      profile: core
+      required: true
+    - name: canonicalUri
+      type: string
+      definition: >-
+        The permanent, globally unique URI where the authoritative copy of this document lives. A reader that meets a
+        copy anywhere can walk back to the source.
+      example: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/README.md
+      notes: >-
+        Declared under mx: on MX documents; top-level on gathering drafts. Required on every in-scope markdown file —
+        presence and exact match are enforced at the write boundary.
+      status: canonical
+      profile: core
+      required: true
     - name: audience
       type: string-or-array
       definition: >-
@@ -1138,6 +1163,19 @@ mx:
         - field-dictionary
         - cog-unified-spec
       notes: Informational links, not dependencies.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: relatedTo
+      type: array
+      definition: >-
+        Sibling documents and resources this one relates to without depending on or describing them. The loosest of the
+        relation fields: dependencies declares hard requirements, buildsOn declares conceptual ancestry, refersTo
+        declares informational citations, relatedTo declares adjacency.
+      example:
+        - scripts/bin/check-deps.sh
+        - scripts/cogs/mx-user-audit.cog.md
+      notes: Repo-root-relative paths or cog slugs. The MX graph resolves these into relatedTo edges. Aligns with Schema.org isRelatedTo.
       status: canonical
       profile: cog
       required: optional
@@ -1539,8 +1577,8 @@ mx:
       status: canonical
       profile: folder
     - name: stability
-      type: string
-      definition: 'Content stability. Values: stable, evolving, experimental, deprecated, archived, draft, final, friable. friable means machine-generated and regenerated from source; never hand-edit.'
+      type: string-or-array
+      definition: 'Content stability. Values: stable, evolving, experimental, deprecated, archived, draft, final, friable. friable means the file is regenerated from a source and must never be hand-edited; any given rendering is transient and is remade when its source changes. Use it for generated indexes and for generated outputs (such as published blog HTML) regenerated from source. A file may carry one value or several: the values combine, so an item that is both an unfinished draft and regenerated from source declares [draft, friable].'
       example: stable
       validValues:
         - stable
@@ -1551,7 +1589,7 @@ mx:
         - draft
         - final
         - friable
-      notes: Content stability. Helps agents assess information reliability. Use friable for generated indexes and outputs regenerated from source.
+      notes: 'Content stability. Helps agents assess information reliability. friable marks a machine-owned, regenerated-from-source file (generated indexes, generated blog HTML): never hand-edit it, and treat the current rendering as transient because it is remade whenever its source changes.'
       status: canonical
       profile: folder
     - name: lifecycle
@@ -1614,16 +1652,15 @@ mx:
       type: string
       definition: >-
         Content workflow position. Distinct from status — contentState tracks where content is in the editorial
-        pipeline. Values: raw, editing, review, approved, published.
-      example: editing
+        pipeline and drives publish routing (draft routes to the noindex draft tree, published to the live tree).
+        Values: draft, in-review, published, archived.
+      example: draft
       validValues:
-        - raw
-        - editing
-        - review
-        - approved
-        - published
         - draft
-      notes: Editorial pipeline position. Distinct from status (generic lifecycle).
+        - in-review
+        - published
+        - archived
+      notes: Editorial pipeline position. Distinct from status (generic lifecycle). The enum matches the routing generator, the single consumer.
       status: canonical
       profile: core
     - name: cogId
@@ -1799,7 +1836,7 @@ mx:
         - css
     - name: mx:stability
       type: string
-      definition: 'Stability level. Values: stable, evolving, experimental, deprecated, archived.'
+      definition: 'Stability level. Values: stable, evolving, experimental, deprecated, archived, friable. friable means the file is regenerated from a source and must never be hand-edited; any given rendering is transient and is remade when its source changes.'
       example: '@mx:stability stable'
       validValues:
         - stable
@@ -1807,6 +1844,7 @@ mx:
         - experimental
         - deprecated
         - archived
+        - friable
       status: canonical
       profile:
         - js

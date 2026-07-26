@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Can an Agent Actually Use Your Site?"
+description: "Reading your page is the easy half. The real test is whether an AI agent can act on it: find the button, work the menu, reach the step that matters. So I started driving a real browser the way an agent does, and watching where it gets stuck."
+author: Tom Cranstoun
+created: "2026-06-24"
+modified: "2026-06-24"
+version: "1.0"
+type: blog-post
+tags: [agent-web, machine-experience, ai-agents, agent-navigability, accessibility, web-audit]
+mx:
+  x-mx-neededFor: [publish]
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
+  audience:
+    - business
+    - humans
+    - machines
+  x-mx-category: agent web
+  x-mx-aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/can-an-agent-use-your-site.md
+  x-mx-contextProvides:
+    - "Why machine-readability is only half the test: an agent has to act, not just read, and the things that block it (overlays, unnamed controls, menus that never reach the accessibility tree) are invisible to the page owner. Describes driving a real browser the way an agent does to find where it gets stuck."
+  stability: stable
+  purpose: "Introduce agent-navigability as the next question after machine-readability, told for a content owner: the test is not what an agent can read but whether it can complete the task, and how we surface where it fails."
+  servedAt: https://mx.allabout.network/blog/drafts/agent-web/can-an-agent-use-your-site.html
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator. Run the humanizer scanners before promotion."
+  blogUrl: https://mx.allabout.network/blog/drafts/agent-web/can-an-agent-use-your-site.html
+  blogFilename: can-an-agent-use-your-site
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Reading your page is the easy half. The real test is whether an AI agent can act on it: find the button, work the menu, reach the step that matters. So I started driving a real browser the way an agent does, and watching where it gets stuck.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/agent-web/can-an-agent-use-your-site.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/agent-web/can-an-agent-use-your-site.html">
+  <meta property="og:title" content="Can an Agent Actually Use Your Site? | CogNovaMX">
+  <meta property="og:description" content="Reading your page is the easy half. The real test is whether an AI agent can act on it: find the button, work the menu, reach the step that matters. So I started driving a real browser the way an agent does, and watching where it gets stuck.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-24">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Can an Agent Actually Use Your Site? | CogNovaMX">
+  <meta name="twitter:description" content="Reading your page is the easy half. The real test is whether an AI agent can act on it: find the button, work the menu, reach the step that matters. So I started driving a real browser the way an agent does, and watching where it gets stuck.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Can an Agent Actually Use Your Site?">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/agent-web/can-an-agent-use-your-site.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Can an Agent Actually Use Your Site? | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Can an Agent Actually Use Your Site?",
+        "headline": "Can an Agent Actually Use Your Site?",
+        "description": "Reading your page is the easy half. The real test is whether an AI agent can act on it: find the button, work the menu, reach the step that matters. So I started driving a real browser the way an agent does, and watching where it gets stuck.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-24",
+        "dateModified": "2026-06-24",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/agent-web/can-an-agent-use-your-site.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 763,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/agent-web/can-an-agent-use-your-site.html",
+        "name": "Can an Agent Actually Use Your Site?",
+        "url": "https://mx.allabout.network/blog/drafts/agent-web/can-an-agent-use-your-site.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#an-agent-does-not-see-the-page-you-designed">An agent does not see the page you designed</a></li>
+        <li><a href="#where-it-gets-stuck-is-invisible-to-you">Where it gets stuck is invisible to you</a></li>
+        <li><a href="#so-i-send-something-that-does">So I send something that does</a></li>
+        <li><a href="#it-is-the-same-fix-that-helps-people">It is the same fix that helps people</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="763">
+        <header class="article-header">
+          <h1>Can an Agent Actually Use Your Site?</h1>
+          <div class="article-meta"
+               data-published="2026-06-24"
+               data-modified="2026-06-24"
+               data-reading-time="4 min">
+            <time datetime="2026-06-24">24 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>4 min read</span>
+          </div>
+        </header>
+
+
+<p>There is a question I have been asking sites for a while now: what does an agent see when it reads you? It is a good question, and the answer surprises most owners. But lately I have been asking the harder one. Reading is the easy half. The agents turning up now do not just read. They act. They are sent to find a price, fill a form, pick a plan, get to the thing you actually want a visitor to do. And reading the page tells you almost nothing about whether they can.</p>
+<p>So I stopped guessing and started watching. I drive a real browser the way an agent drives one, and I follow it through a simple task on the page. Not &quot;did it load&quot;. Did it get there.</p>
+<h2 id="an-agent-does-not-see-the-page-you-designed" tabindex="-1">An agent does not see the page you designed</h2>
+<p>When you look at your site, you see the design. The agent does not get the design. It gets the accessibility tree, the same underlying structure a screen reader works from: a list of things with names and roles. A button called &quot;Buy now&quot;. A link called &quot;Pricing&quot;. A field labelled &quot;Email&quot;. That tree is the page, as far as the machine is concerned. Anything that is only in the picture, only in the colour, only in the position, is not in the tree, and so it is not there.</p>
+<p>This is why an agent can fetch your page, report that it loaded fine, and still be completely stuck. It read something. It just could not find the part it needed in a form it could act on.</p>
+<h2 id="where-it-gets-stuck-is-invisible-to-you" tabindex="-1">Where it gets stuck is invisible to you</h2>
+<p>The frustrating thing is that the blockers are exactly the ones you never notice, because for you, with a mouse and a pair of eyes, they are not blockers at all.</p>
+<p>A button covered by a cookie banner. You dismiss the banner without thinking; the agent reaches for the button and gets told it is hidden behind an overlay. A control that is really a styled box with no name, so the tree shows &quot;clickable thing&quot; where it should show &quot;Add to basket&quot;. A menu that only opens on hover and never announces itself, so the agent simply cannot see that the rest of your site exists. A checkout step gated behind something that needs a real pointer. Each one is fine for a human and a dead end for the machine.</p>
+<p>You will not find these by looking at your site, because you do not experience them. You find them by sending something that does.</p>
+<h2 id="so-i-send-something-that-does" tabindex="-1">So I send something that does</h2>
+<p>The test is plain. Open the page the way an agent would. Take the accessibility tree, the machine's-eye view, and look at it honestly: how many things on this page can a machine actually name and reach? Then try the task. Find the navigation. Find the primary action. Get to it. And when it cannot, write down why, in the agent's own words: covered by this, named nothing, never reached the tree.</p>
+<p>The result is a verdict you can act on. Not a score for its own sake, but a short answer to a question you cannot answer from the design view: could an agent navigate this page and do the thing, or not, and where exactly did it fall over.</p>
+<h2 id="it-is-the-same-fix-that-helps-people" tabindex="-1">It is the same fix that helps people</h2>
+<p>Here is the part I like. None of this is a special agent project bolted on beside your accessibility work. It is the same work. The button with no name fails the agent and the screen-reader user in the same breath. The menu that never reaches the tree is lost to both. Fix it once and you serve the machine and the person at the same time, which is the quiet through-line of all of this: the page that is good for the machine was already the page that was good for the human you were leaving out.</p>
+<p>The agents are not waiting for permission. They are already turning up with a task and trying to complete it on your pages, and most of the time nobody on your side ever learns that they failed. The point of watching one do it is simple. You get to see the wall before your customer's agent does, while there is still time to take it down.</p>
+<p>If you want to know whether an agent can actually use your site, not just read it, send me your domain at <a href="mailto:info@cognovamx.com">info@cognovamx.com</a> and I will show you where it gets stuck.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

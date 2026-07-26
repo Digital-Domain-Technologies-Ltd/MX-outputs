@@ -17,7 +17,7 @@ tags: [behavior, tone, formatting, refusal, safety, evenhandedness, fable5, exam
 mx:
   x-mx-category: example
   status: active
-  partOf: fable5-example
+  partOf: site-domaincog
   audience: [machines]
   purpose: "Define tone, formatting, refusal rules, legal and financial advice limits, evenhandedness, and response to mistakes."
   stability: stable

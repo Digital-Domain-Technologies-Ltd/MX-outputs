@@ -1,5 +1,5 @@
 title: MX Field Dictionary — Cog Layer
-version: '1.5'
+version: '1.6'
 created: 2026-04-27
 modified: '2026-06-07'
 author: Tom Cranstoun
@@ -105,6 +105,21 @@ mx:
       profile: cog
       required: optional
       description: Related documents cited or cross-referenced. Lateral relationship; aligns with Schema.org isRelatedTo.
+
+    - name: triggers
+      type: array
+      definition: >-
+        Intent phrases that route a request to this cog. A router (a skill, the maxine dispatcher, the MX graph) matches
+        a user's words against these to select the cog without the user knowing its name.
+      example:
+        - software
+        - dependencies
+        - what do i need
+      notes: Top-level field on routing-capable cogs. Lowercase phrases; the graph indexes them for triggers queries.
+      status: canonical
+      profile: cog
+      required: optional
+      description: Intent-routing phrases a dispatcher matches to select this cog. Indexed by the MX graph.
 
     - name: cogHeader
       profile: cog

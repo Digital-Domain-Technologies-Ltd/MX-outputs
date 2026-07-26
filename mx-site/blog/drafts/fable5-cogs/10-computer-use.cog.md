@@ -17,7 +17,7 @@ tags: [computer-use, files, skills, outputs, bash, artifacts, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  partOf: fable5-example
+  partOf: site-domaincog
   audience: [machines]
   purpose: "Define file creation rules, the mandatory skill-reading step, and output decisions."
   stability: stable

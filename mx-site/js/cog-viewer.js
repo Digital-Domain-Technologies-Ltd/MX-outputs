@@ -7,7 +7,7 @@
  * @mx:status active
  * @mx:contentType script
  * @mx:audience humans, machines
- * @mx:canonicalUri https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/js/cog-viewer.js
+ * @mx:canonicalUri https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/js/cog-viewer.js
  * @mx:servedAt https://mx.allabout.network/js/cog-viewer.js
  */
 (function () {

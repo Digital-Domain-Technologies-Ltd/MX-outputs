@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "The Flag That Rewrote My Search"
+description: "A search tool did not crash on me. It quietly rewrote its own output, handed me a confident wrong answer, and said nothing. Here is how a single misread flag corrupts what a machine reads, and why the fix is a check a script does, not a rule a person remembers."
+author: Tom Cranstoun
+created: "2026-07-04"
+modified: "2026-07-04"
+version: "1.0"
+type: blog-post
+tags:
+  - determinism
+  - tooling
+  - machine-readability
+  - guardrails
+  - ripgrep
+  - mx
+mx:
+  x-mx-neededFor: [publish]
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
+  audience:
+    - humans
+    - machines
+  x-mx-category: MX blog series
+  x-mx-aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/the-flag-that-rewrote-my-search.md
+  x-mx-contextProvides:
+    - "A first-person account of ripgrep's -r being --replace (not recursive), which silently rewrites matched output, and the MX response: a deterministic guard that blocks the dangerous flag plus a safe search wrapper, rather than relying on a human to remember. Lands the determinism-over-inference principle on a real incident."
+  stability: friable
+  purpose: "Land the determinism-over-inference principle on a concrete incident: a misread search flag that rewrote its own output, and why the fix is a mechanical guard, not vigilance."
+  servedAt: https://mx.allabout.network/blog/drafts/the-flag-that-rewrote-my-search.html
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  blogUrl: https://mx.allabout.network/blog/drafts/the-flag-that-rewrote-my-search.html
+  blogFilename: the-flag-that-rewrote-my-search
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A search tool did not crash on me. It quietly rewrote its own output, handed me a confident wrong answer, and said nothing. Here is how a single misread flag corrupts what a machine reads, and why the fix is a check a script does, not a rule a person remembers.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/the-flag-that-rewrote-my-search.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/the-flag-that-rewrote-my-search.html">
+  <meta property="og:title" content="The Flag That Rewrote My Search | CogNovaMX">
+  <meta property="og:description" content="A search tool did not crash on me. It quietly rewrote its own output, handed me a confident wrong answer, and said nothing. Here is how a single misread flag corrupts what a machine reads, and why the fix is a check a script does, not a rule a person remembers.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-04">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Flag That Rewrote My Search | CogNovaMX">
+  <meta name="twitter:description" content="A search tool did not crash on me. It quietly rewrote its own output, handed me a confident wrong answer, and said nothing. Here is how a single misread flag corrupts what a machine reads, and why the fix is a check a script does, not a rule a person remembers.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="The Flag That Rewrote My Search">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/the-flag-that-rewrote-my-search.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The Flag That Rewrote My Search | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "The Flag That Rewrote My Search",
+        "headline": "The Flag That Rewrote My Search",
+        "description": "A search tool did not crash on me. It quietly rewrote its own output, handed me a confident wrong answer, and said nothing. Here is how a single misread flag corrupts what a machine reads, and why the fix is a check a script does, not a rule a person remembers.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-07-04",
+        "dateModified": "2026-07-04",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/the-flag-that-rewrote-my-search.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1006,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/the-flag-that-rewrote-my-search.html",
+        "name": "The Flag That Rewrote My Search",
+        "url": "https://mx.allabout.network/blog/drafts/the-flag-that-rewrote-my-search.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#one-letter-the-wrong-meaning">One letter, the wrong meaning</a></li>
+        <li><a href="#the-machine-has-no-squint">The machine has no squint</a></li>
+        <li><a href="#the-fix-everyone-reaches-for-is-the-wrong-one">The fix everyone reaches for is the wrong one</a></li>
+        <li><a href="#a-check-a-script-does">A check a script does</a></li>
+        <li><a href="#determinism-over-inference">Determinism over inference</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1006">
+        <header class="article-header">
+          <h1>The Flag That Rewrote My Search</h1>
+          <div class="article-meta"
+               data-published="2026-07-04"
+               data-modified="2026-07-04"
+               data-reading-time="6 min">
+            <time datetime="2026-07-04">4 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>6 min read</span>
+          </div>
+        </header>
+
+
+<p>I was searching my own repository the other day, and the tool lied to me. It did not crash, which is the part worth sitting with. A crash is honest. This was quiet.</p>
+<p>I ran a search for a field called <code>stability</code> in a config file, using ripgrep, the fast search tool a lot of us reach for without thinking. The results came back looking almost right, and then I noticed one line read <code>mx.n</code> where I knew the file said <code>mx.stability</code>. For a moment I thought the file was broken. I nearly opened it to fix a corruption that did not exist.</p>
+<p>The file was fine. The search had rewritten its own output.</p>
+<h2 id="one-letter-the-wrong-meaning" tabindex="-1">One letter, the wrong meaning</h2>
+<p>Here is what happened, and it is the kind of thing that catches everyone once. In <code>grep</code>, the old workhorse, <code>-r</code> means recursive: search down through folders. My fingers typed <code>rg -rn</code>, the way they have typed <code>grep -rn</code> a thousand times. But ripgrep is not grep. It recurses by default, so it never needed a recursive flag, and it gave <code>-r</code> a completely different job: <code>-r</code> is <code>--replace</code>. My <code>-rn</code> did not mean &quot;recursive, with line numbers&quot;. It meant &quot;replace every match with the letter n&quot;.</p>
+<p>So ripgrep did exactly what I told it. It found every <code>stability</code>, and in the output it printed, it swapped each one for <code>n</code>. The file on disk was never touched. Only the answer it handed back was quietly wrong.</p>
+<p>That is a benign version. I caught it because <code>mx.n</code> looked odd to a human who knew what the file should say. Change the search term to something I did not already know the answer to, and I would have had no tell at all. I would have read the rewritten output as the truth, because there was nothing to say it was not.</p>
+<h2 id="the-machine-has-no-squint" tabindex="-1">The machine has no squint</h2>
+<p>A person gets lucky here sometimes. You know roughly what you expect to see, so a mangled line snags your eye. You squint, you re-run it, you notice.</p>
+<p>A machine does not squint. Feed that same rewritten output to an agent, a script, a model deciding what to do next, and it takes the confident wrong answer and acts on it. There is no red mark, no exception, no &quot;are you sure&quot;. The tool reported success. The bytes were plausible. The next step inherits the lie as fact.</p>
+<p>If you have read the piece on <a href="https://mx.allabout.network/blog/fat-clones-thin-clones-and-the-strawberry-problem.html">fat clones, thin clones, and the strawberry problem</a>, this will feel familiar. There, the danger was never the loud failure; it was the quiet, confident damage that looks freshly generated and is silently gutted. This is the same shape, one layer down, in the tools themselves. The environment a machine reads through can misrepresent the thing it is reading, and the machine cannot tell.</p>
+<h2 id="the-fix-everyone-reaches-for-is-the-wrong-one" tabindex="-1">The fix everyone reaches for is the wrong one</h2>
+<p>The obvious lesson is &quot;be careful with your flags&quot;. Learn the difference, slow down, check twice.</p>
+<p>That is a rule that lives in a human head, and it fails the way all such rules fail. It works until you are tired, or moving fast, or it is a different person, or a different agent, or the same agent on a different day. A rule you have to remember is a rule that will eventually not be remembered. Worse, it does nothing at all for the machine, which was never going to read your careful mental note.</p>
+<p>So we did not write a reminder. We wrote a check.</p>
+<h2 id="a-check-a-script-does" tabindex="-1">A check a script does</h2>
+<p>Two small things now stand between that mistake and any harm.</p>
+<p>The first is a guard that refuses the dangerous shape before it runs. If a command tries to hand ripgrep a replace flag in a spot where a search was plainly meant, the guard stops it and says why, in plain words: this flag rewrites your output, here is the safe form, and here is how to override me if you truly mean it. It is not advice. It is a gate, and it fires every time, for every person and every agent, without anyone having to be careful.</p>
+<p>The second is a safe search tool that simply cannot produce the corrupted answer. It wraps the same fast engine, but it fixes the risky settings shut, passes your query where a query belongs and never where a flag could be mistaken for one, and always prints results the same honest way. You get the speed without the sharp edge.</p>
+<p>Neither of these is clever. That is the point. The whole idea is to take a rule that was floating in prose and human memory, where it rots, and turn it into something the environment enforces on its own.</p>
+<h2 id="determinism-over-inference" tabindex="-1">Determinism over inference</h2>
+<p>This is the operating principle underneath, and it is the one I would keep if I had to throw the rest away. If a rule can be checked by a machine, a machine should check it. A rule that only lives in a document, or a habit, or a hope that everyone stays sharp, is not really enforced. It is just described, and description is what you have right up until the moment it quietly fails.</p>
+<p>It is the same instinct as writing metadata for the machine in the first place: do not make the reader guess, and do not make them trust. Give them something they can check. We write the frontmatter so an agent never has to infer what a file is. We write the guard so a tool can never misreport what a search found. In both cases the machine is handed a fact, not asked for faith.</p>
+<p>The tool did not have to lie to me. It lied because nothing stopped it, and nothing told me. Now something does. The next person to type <code>-rn</code> out of habit will get a clear refusal instead of a quiet corruption, and the machine reading along will get the truth, because we stopped hoping and wrote the check.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

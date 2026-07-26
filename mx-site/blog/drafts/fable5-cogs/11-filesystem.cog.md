@@ -17,7 +17,7 @@ tags: [filesystem, configuration, permissions, mounts, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  partOf: fable5-example
+  partOf: site-domaincog
   audience: [machines]
   purpose: "Describe mounted directories and access permissions."
   stability: stable

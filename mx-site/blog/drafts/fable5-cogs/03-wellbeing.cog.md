@@ -17,7 +17,7 @@ tags: [wellbeing, mental-health, safety, self-harm, crisis, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  partOf: fable5-example
+  partOf: site-domaincog
   audience: [machines]
   purpose: "Protect users experiencing mental health crises, self-harm, disordered eating, or detachment from reality."
   stability: stable

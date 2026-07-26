@@ -17,7 +17,7 @@ tags: [manifest, boot, agent, claude, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  partOf: fable5-example
+  partOf: site-domaincog
   audience: [machines]
   purpose: "Bootstrap a Claude Fable 5 agent instance by loading all required COGs in sequence."
   stability: stable

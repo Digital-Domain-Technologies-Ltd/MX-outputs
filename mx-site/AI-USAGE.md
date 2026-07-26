@@ -11,7 +11,7 @@ tags: [authorship, ai-usage, declaration, mx-books, provenance]
 mx:
   status: active
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/AI-USAGE.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/AI-USAGE.md
   generate:
     output: mx-site/AI-USAGE.pdf
   runbook: "Source of truth for the publisher's AI Usage Declaration per draft-cranstoun-mx-ai-usage-declaration v1.0. The JSON serialisation at mx-site/AI-USAGE.json, the HTML rendering at mx-site/AI-USAGE.html, and the PDF at mx-site/AI-USAGE.pdf are all derived from this file. Edit here, then regenerate the derivations."

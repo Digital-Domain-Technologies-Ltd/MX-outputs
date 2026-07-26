@@ -18,7 +18,7 @@ cogHeader:
 
 type: info-doc
 mx:
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/drafts/cog-spec.v1.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/drafts/cog-spec.v1.md
   purpose: "The cog file format, artefact model, and verification algorithm."
   audience: [humans, machines]
   stability: stable
@@ -334,6 +334,8 @@ The relationship fields a cog uses to make these declarations are:
 A **standalone cog** is one that names no other cog. It declares `dependencies: []` to make the absence explicit and carries no other relationship fields. The standalone case is the explicit converse of the MUST rule, not a separate category: every cog either lists what it depends on, or declares that it depends on nothing.
 
 The rule applies to dependencies the cog itself relies on. Cogs the current cog publishes about, comments on, or supersedes are not dependencies and belong in their own fields (`supersedes`, `replaces`, vendor-namespaced extensions).
+
+**The ubercog convention.** An estate MAY designate consolidating briefings that sit above the ordinary cogs. An **ubercog** says what a body of cogs contains, which document wins when two disagree, and where the drift is, with detail staying in the source cogs it indexes. An ubercog is a role, not a type: any info or action cog can carry it, declared through a vendor-namespaced extension field (the reference implementation uses `x-mx-cogRole: ubercog`). An estate MAY structure its ubercogs as a two-level family: one **master** ubercog for the whole estate, and one **domaincog** (a child ubercog) per domain beneath it, each linking up to the master, so a reader landing on any one can reach the whole family without searching. An estate MAY further declare dependency-enforcing role cogs that bind a set of sources to a dependent which must be regenerated when a source changes (the reference implementation calls these **obsessions**, `x-mx-cogRole: obsession`), each grouped under its domaincog. Two rules give the convention its value: the master name is reserved for exactly one cog, and every ubercog links to every other through the relationship fields above.
 
 ### 4.4 Schema reference resolution
 
@@ -907,4 +909,4 @@ YAML 1.2 Specification, <https://yaml.org/spec/1.2.2/>.
 
 CommonMark Specification (for fenced code block syntax), <https://commonmark.org/>.
 
-<!-- cog-spec-sync: 2026-07-01-a -->
+<!-- cog-spec-sync: 2026-07-09-a -->

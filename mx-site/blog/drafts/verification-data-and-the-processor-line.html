@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Verification Data and the Processor Line"
+description: "Anthropic's updated consumer privacy policy adds a Verification Data category: a government ID, a face scan, a facial geometry template, collected by a vendor called Persona acting as a processor rather than a controller. That processor line is a governance claim you currently have to take on trust by reading a policy page. The durable fix is a record a machine can check."
+author: Tom Cranstoun
+created: 2026-06-25
+modified: 2026-06-25
+version: "1.0"
+type: blog-post
+tags: [privacy, biometrics, provenance, attestation, governance]
+mx:
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
+  servedAt: https://mx.allabout.network/blog/drafts/verification-data-and-the-processor-line.html
+  generate:
+    script: scripts/generate-content-html.cjs
+  audience:
+    - humans
+    - machines
+  x-mx-category: MX blog series
+  x-mx-aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/verification-data-and-the-processor-line.md
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  x-mx-contextProvides:
+    - "Reads Anthropic's new Verification Data privacy category and its use of Persona as a processor through the MX + REGINALD lens: the processor-not-controller relationship, the purpose limitation, and the retention are governance claims a reader has to trust on a policy page, and the durable fix is a machine-checkable record of who held what, on whose behalf, and for what."
+  stability: stable
+  purpose: "Use Anthropic's Verification Data category and the Persona processor arrangement to make the MX + REGINALD case: the accountability facts around high-stakes data should travel as a machine-checkable record, not live only in prose a machine never reads."
+  blogUrl: https://mx.allabout.network/blog/drafts/verification-data-and-the-processor-line.html
+  blogFilename: verification-data-and-the-processor-line
+  x-mx-linkedIn: |
+    Anthropic's updated consumer privacy policy adds a category it calls Verification Data: an image of your government ID, the data printed on it, a photo or video of your face, and a facial geometry template. It covers Claude Free, Pro, and Max, not the API, and only a flagged subset of users ever sees the prompt. A vendor called Persona collects the documents and selfies as a processor, acting on Anthropic's behalf rather than as an independent controller.
+
+    That processor line is the interesting part. It is a governance claim. It says Persona holds your face but does not own the decision, that the data is used only to verify you, and that it does not stick around. Right now you take all of that on trust by reading a policy page that can change without telling you, and that no machine ever reads.
+
+    This is the gap MX and REGINALD exist to close. The accountability facts around high-stakes data, who held it, on whose behalf, for what purpose, for how long, should travel as a record a machine can check, not sit in prose. I wrote about why.
+
+    [Link in comments]
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Anthropic's updated consumer privacy policy adds a Verification Data category: a government ID, a face scan, a facial geometry template, collected by a vendor called Persona acting as a processor rather than a controller. That processor line is a governance claim you currently have to take on trust by reading a policy page. The durable fix is a record a machine can check.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/verification-data-and-the-processor-line.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/verification-data-and-the-processor-line.html">
+  <meta property="og:title" content="Verification Data and the Processor Line | CogNovaMX">
+  <meta property="og:description" content="Anthropic's updated consumer privacy policy adds a Verification Data category: a government ID, a face scan, a facial geometry template, collected by a vendor called Persona acting as a processor rather than a controller. That processor line is a governance claim you currently have to take on trust by reading a policy page. The durable fix is a record a machine can check.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-25">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Verification Data and the Processor Line | CogNovaMX">
+  <meta name="twitter:description" content="Anthropic's updated consumer privacy policy adds a Verification Data category: a government ID, a face scan, a facial geometry template, collected by a vendor called Persona acting as a processor rather than a controller. That processor line is a governance claim you currently have to take on trust by reading a policy page. The durable fix is a record a machine can check.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Verification Data and the Processor Line">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/verification-data-and-the-processor-line.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Verification Data and the Processor Line | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Verification Data and the Processor Line",
+        "headline": "Verification Data and the Processor Line",
+        "description": "Anthropic's updated consumer privacy policy adds a Verification Data category: a government ID, a face scan, a facial geometry template, collected by a vendor called Persona acting as a processor rather than a controller. That processor line is a governance claim you currently have to take on trust by reading a policy page. The durable fix is a record a machine can check.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-25",
+        "dateModified": "2026-06-25",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/verification-data-and-the-processor-line.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 974,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/verification-data-and-the-processor-line.html",
+        "name": "Verification Data and the Processor Line",
+        "url": "https://mx.allabout.network/blog/drafts/verification-data-and-the-processor-line.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-the-processor-line-is-actually-claiming">What the processor line is actually claiming</a></li>
+        <li><a href="#a-claim-a-machine-can-check-beats-a-claim-you-read">A claim a machine can check beats a claim you read</a></li>
+        <li><a href="#what-mx-does-not-claim">What MX does not claim</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="974">
+        <header class="article-header">
+          <h1>Verification Data and the Processor Line</h1>
+          <div class="article-meta"
+               data-published="2026-06-25"
+               data-modified="2026-06-25"
+               data-reading-time="5 min">
+            <time datetime="2026-06-25">25 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>5 min read</span>
+          </div>
+        </header>
+
+
+<p>Anthropic updated its consumer privacy policy, and the change worth reading twice is a new category of data it calls Verification Data. The contents are blunt: an image of your government ID, the information printed on it, a photo or video of your face, and a facial geometry template. It applies to Claude Free, Pro, and Max. It does not touch the API. A vendor named Persona collects the documents and the selfies, and the company says only a flagged subset of users will ever see the prompt.</p>
+<p>The detail I keep circling is not the face scan itself but one line about who holds it. Persona processes the documents on Anthropic's behalf as a service provider, not as an independent controller. That sentence is doing an enormous amount of work, and it is exactly what MX has been arguing about for a while.</p>
+<h2 id="what-the-processor-line-is-actually-claiming" tabindex="-1">What the processor line is actually claiming</h2>
+<blockquote>
+<p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
+</blockquote>
+<p>&quot;Processor, not controller&quot; is not a description. It is a claim with legal weight. Under regimes like the GDPR, a controller decides why and how data is used and carries the accountability; a processor acts only on the controller's documented instructions. The distinction decides who answers to a regulator, what a vendor is allowed to do with what it holds, and how long it may keep it. When what is collected is a facial geometry template, the stakes climb again. That template is a biometric identifier, the sort of thing statutes like Illinois's Biometric Information Privacy Act treat as a category of its own, because you cannot reissue your face the way you would reset a password.</p>
+<p>So the policy is making several claims at once. Persona holds your ID and your face but does not own the decision. The data is used only to verify you, not to train anything or to enrich a profile. It is bounded in time. Each of those is a governance fact, and each one matters to you specifically.</p>
+<p>Here is the part that should bother a careful reader. You verify every one of those claims the same way: by reading a policy page. A page that can be revised without anyone telling you, that links to a second vendor's policy you also have to read, and that no machine on your side ever checks. You hand over a face template against words on a policy page, and prose is the weakest carrier a promise can travel in.</p>
+<h2 id="a-claim-a-machine-can-check-beats-a-claim-you-read" tabindex="-1">A claim a machine can check beats a claim you read</h2>
+<p>This is the whole reason MX exists, and it is why we pair it with REGINALD. MX makes a thing machine-readable: it carries metadata describing what it is, where it came from, who is accountable for it, and how it may be used, and it travels with the thing rather than living on a page someone has to be trusted to keep accurate. REGINALD makes it machine-trustworthy: a signed, tamper-evident attestation of who published a claim and when, verifiable by anyone with standard libraries, no trust in the registry required.</p>
+<p>Apply that to a verification event. The honest version of &quot;Persona is a processor acting on our behalf&quot; is not a sentence on a policy page. It is a record attached to the event: the controller named, the processor named, the purpose stated as a value a machine can read rather than infer, the retention window stated as a date instead of a paragraph, and the accountable human identified so a regulator walking the chain lands on a person in one step, not on a support inbox. Signed, so it cannot be quietly rewritten after the fact. That record is the difference between trust me and check for yourself.</p>
+<p>We build exactly this inside our own estate, which is why the gap is so visible to me. Every artefact this repository produces ships with a provenance record and a responsible-person block, precisely so an auditor can walk from a finding to the accountable human without anyone curating the answer for them. The Anthropic and Persona arrangement is the same problem at consumer scale, where the person being asked to trust the claim is the one with the least ability to check it.</p>
+<h2 id="what-mx-does-not-claim" tabindex="-1">What MX does not claim</h2>
+<p>To be straight about scope, because the distinction is the entire point of the practice. MX does not make a face scan safe, and it does not make a verification programme lawful. Attestation proves who made a claim and that it has not been tampered with since. It does not prove the claim is wise, and an attested over-collection of biometric data is still an over-collection. Compliance stays a legal duty of the organisation, not something a metadata record grants.</p>
+<p>What the record removes is the specific doubt you are currently asked to swallow: that the processor line, the purpose limitation, and the retention promise are current and unchanged since you read them. Today you resolve that doubt by trusting a page. With a machine-checkable record you resolve it by checking. The verification still happens; it just stops having to happen on faith.</p>
+<p>The pattern is bigger than one company asking for one ID. Every service that collects sensitive data through a third party makes the same processor-not-controller claim, and almost all of them make it in prose. Anthropic is the example in front of us this week because it is the platform many of us use to read policies like this one. The lesson travels. When the thing being collected is your face, the promise about who holds it and why should be something a machine can verify, not something you have to take on trust.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

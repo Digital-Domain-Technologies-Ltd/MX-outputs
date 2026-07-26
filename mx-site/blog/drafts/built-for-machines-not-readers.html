@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-  DRAFT blog-post scaffold for mx-site (mx.allabout.network).
-  Output goes to mx-site/blog/drafts/<slug>.html (noindex, ../../ asset paths).
-  Calibration anchor: blog/drafts/what-machines-see-that-humans-dont.html.
--->
 <html lang="en-GB">
 <head>
   <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
@@ -17,18 +12,25 @@ created: 2026-06-04
 modified: 2026-06-04
 version: "1.0"
 
+type: blog-post
 mx:
-  status: draft
-  contentType: blog-post
+  x-mx-neededFor: [publish]
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/blog/drafts/built-for-machines-not-readers.html
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/built-for-machines-not-readers.md
+  x-mx-contextProvides:
+    - "An audit that would not finish led to a sitemap with a quarter of a million pages, almost none of them meant for a person to read. A field note on the web being rebuilt for machine ingestion: content walled off from humans and opened only to AI crawlers."
+  stability: stable
+  purpose: "An audit that would not finish led to a sitemap with a quarter of a million pages, almost none of them meant for a person to read. A field note on the web being rebuilt for machine ingestion: content walled off from humans and opened only to AI crawlers."
+  x-mx-backport: clean
+  x-mx-createdHash: 5aada6cc
   servedAt: https://mx.allabout.network/blog/drafts/built-for-machines-not-readers.html
-  runbook: "Blog post on mx-site. The HTML is the canonical source for this YAML frontmatter; no separate markdown source exists. Anonymised field note; names no audited domain. Draft pending Tom review before promotion."
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+
 ---
 -->
-  <!-- MX-SOURCE-FRONTMATTER:END -->
-  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
-  <meta name="ai-disclosure" content="ai-generated">
+<!-- MX-SOURCE-FRONTMATTER:END -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
@@ -40,7 +42,7 @@ mx:
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://mx.allabout.network/blog/drafts/built-for-machines-not-readers.html">
   <meta property="og:title" content="Built for Machines, Not Readers | CogNovaMX">
-  <meta property="og:description" content="An audit that would not finish led to a sitemap with a quarter of a million pages, almost none of them meant for a person to read. A field note on the web being rebuilt for machine ingestion.">
+  <meta property="og:description" content="An audit that would not finish led to a sitemap with a quarter of a million pages, almost none of them meant for a person to read. A field note on the web being rebuilt for machine ingestion: content walled off from humans and opened only to AI crawlers.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta property="og:image:width" content="1200">
@@ -53,25 +55,33 @@ mx:
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Built for Machines, Not Readers | CogNovaMX">
-  <meta name="twitter:description" content="An audit that would not finish led to a sitemap with a quarter of a million pages, almost none of them meant for a person to read.">
+  <meta name="twitter:description" content="An audit that would not finish led to a sitemap with a quarter of a million pages, almost none of them meant for a person to read. A field note on the web being rebuilt for machine ingestion: content walled off from humans and opened only to AI crawlers.">
   <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta name="twitter:site" content="@ddttomtom">
 
   <!-- Discovery -->
   <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
 
   <!-- MX Carrier -->
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
   <meta name="mx:name" content="Built for Machines, Not Readers">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
   <meta name="mx:author" content="Tom Cranstoun">
   <meta name="x-mx-managedBy" content="blog-post.cog.md">
   <link rel="mx" href="https://mx.allabout.network/blog/drafts/built-for-machines-not-readers.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
   <title>Built for Machines, Not Readers | CogNovaMX</title>
 
   <!-- Schema.org JSON-LD -->
@@ -84,7 +94,7 @@ mx:
         "name": "Built for Machines, Not Readers",
         "headline": "Built for Machines, Not Readers",
         "description": "An audit that would not finish led to a sitemap with a quarter of a million pages, almost none of them meant for a person to read. A field note on the web being rebuilt for machine ingestion: content walled off from humans and opened only to AI crawlers.",
-        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
         "datePublished": "2026-06-04",
         "dateModified": "2026-06-04",
         "author": {
@@ -92,7 +102,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -105,8 +115,8 @@ mx:
           "@id": "https://mx.allabout.network/blog/drafts/built-for-machines-not-readers.html"
         },
         "articleSection": "Machine Experience",
-        "keywords": ["machine experience", "MX", "programmatic SEO", "AI crawlers", "robots.txt", "sitemap", "web audit", "provenance", "pre-machine web", "content strategy"],
-        "wordCount": 840,
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 784,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -131,6 +141,7 @@ mx:
   <link rel="stylesheet" href="../../css/mx-blog.css">
 </head>
 <body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
   <!-- Site Header -->
@@ -159,34 +170,34 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
           <div class="introduction-text" role="presentation">
-            <p class="introduction-message">A field note from the audit bench: what the machine-readable web looks like when you read it the way a crawler does.</p>
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
             <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
           </div>
         </div>
       </aside>
 
-      <!-- Collapsible Index -->
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
       <details id="index" class="table-of-contents" data-state="initially-collapsed">
         <summary>Index</summary>
         <nav aria-label="Table of contents">
           <ul>
-            <li><a href="#the-sitemap-that-would-not-end">The Sitemap That Would Not End</a></li>
-            <li><a href="#pages-no-human-can-see">Pages No Human Can See</a></li>
-            <li><a href="#the-inversion">The Inversion</a></li>
-            <li><a href="#built-for-machines">Built for Machines, Not Readers</a></li>
-            <li><a href="#what-the-audits-find">What the Audits Keep Finding</a></li>
-            <li><a href="#the-part-that-matters">The Part That Matters</a></li>
+        <li><a href="#the-sitemap-that-would-not-end">The Sitemap That Would Not End</a></li>
+        <li><a href="#pages-no-human-can-see">Pages No Human Can See</a></li>
+        <li><a href="#the-inversion">The Inversion</a></li>
+        <li><a href="#built-for-machines-not-readers">Built for Machines, Not Readers</a></li>
+        <li><a href="#what-the-audits-keep-finding">What the Audits Keep Finding</a></li>
+        <li><a href="#the-part-that-matters">The Part That Matters</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="840">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="784">
         <header class="article-header">
           <h1>Built for Machines, Not Readers</h1>
           <div class="article-meta"
@@ -194,78 +205,75 @@ mx:
                data-modified="2026-06-04"
                data-reading-time="4 min">
             <time datetime="2026-06-04">4 June 2026</time>
-            <span>&#183;</span>
+            <span>·</span>
             <span>Tom Cranstoun</span>
-            <span>&#183;</span>
+            <span>·</span>
             <span>4 min read</span>
           </div>
         </header>
 
-        <section id="intro">
-          <p>An audit I ran recently would not finish. The crawler started, fetched a few pages, then sat there. Not blocked, not throttled. Reading. The site's sitemap was feeding it more URLs than it could swallow, and it kept asking for more.</p>
-          <p>I have anonymised the site. The pattern is the point, and the pattern is not rare.</p>
-        </section>
 
-        <section id="the-sitemap-that-would-not-end">
-          <h2>The Sitemap That Would Not End</h2>
-          <p>When I looked at what it was reading, the shape was clear. The sitemap was not a list of pages. It was an index of other sitemaps, two dozen of them, most a fixed block of exactly ten thousand URLs. Add them up and the site declared close to a quarter of a million pages.</p>
-          <p>Four of those sub-sitemaps held the site's own material: a homepage, an about page, a contact page, a set of technology pages, a set of comparison pages, a few blog categories. The rest held profiles. One page per external domain. Hundreds of thousands of small, templated pages, each describing somebody else's website.</p>
-          <p>Fetch the index twice and the count moves. It is generated on request, and the number of shards drifts between requests. Nothing here is a static file a person edits. It is output.</p>
-        </section>
+<div id="intro" class="section">
+<p>An audit I ran recently would not finish. The crawler started, fetched a few pages, then sat there. Not blocked, not throttled. Reading. The site's sitemap was feeding it more URLs than it could swallow, and it kept asking for more.</p>
+<p>I have anonymised the site. The pattern is the point, and the pattern is not rare.</p>
+</div>
+<div id="the-sitemap-that-would-not-end" class="section">
+<h2 id="the-sitemap-that-would-not-end" tabindex="-1">The Sitemap That Would Not End</h2>
+<p>When I looked at what it was reading, the shape was clear. The sitemap was not a list of pages. It was an index of other sitemaps, two dozen of them, most a fixed block of exactly ten thousand URLs. Add them up and the site declared close to a quarter of a million pages.</p>
+<p>Four of those sub-sitemaps held the site's own material: a homepage, an about page, a contact page, a set of technology pages, a set of comparison pages, a few blog categories. The rest held profiles. One page per external domain. Hundreds of thousands of small, templated pages, each describing somebody else's website.</p>
+<p>Fetch the index twice and the count moves. It is generated on request, and the number of shards drifts between requests. Nothing here is a static file a person edits. It is output.</p>
+</div>
+<div id="pages-no-human-can-see" class="section">
+<h2 id="pages-no-human-can-see" tabindex="-1">Pages No Human Can See</h2>
+<p>I tried to open one. A bot-protection challenge answered: a holding page, no content, a refusal to anything that was not a full browser running scripts. I tried again with headless Chrome. It passed the check and still could not reach the page in any reasonable time.</p>
+<p>So the quarter-million pages in the sitemap are not served to a reader who clicks a link. They are gated.</p>
+<p>Then I read the robots.txt. It named GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, Google-Extended, PerplexityBot, and several more, and it allowed every one of them into the gated path. The wall is for people. The door is for machines.</p>
+</div>
+<div id="the-inversion" class="section">
+<h2 id="the-inversion" tabindex="-1">The Inversion</h2>
+<p>robots.txt was built to keep crawlers out. A publisher listed the paths a bot should not touch, and well-behaved bots obeyed. The file was a fence.</p>
+<p>This file is the opposite. It is a fence against humans with an invitation pinned to it for the AI crawlers. The pages exist so that a model will ingest them and, later, cite them. They do not exist so that a person will read them. A human who finds one gets a security check. A language model gets the full text.</p>
+<p>That is not an accident of configuration. It is the design.</p>
+</div>
+<div id="built-for-machines" class="section">
+<h2 id="built-for-machines-not-readers" tabindex="-1">Built for Machines, Not Readers</h2>
+<p>This is programmatic SEO pointed at language models. Generate one page per entity, a quarter of a million of them, each a thin template with the data swapped in. Keep humans out, so the pages never have to survive a real reader. Let the crawlers in, so the volume lands in training data and retrieval indexes.</p>
+<p>The technology and comparison sections were the same move at a smaller scale: thousands of pages, one per tool, one per pairing, all generated from a single source list.</p>
+<p>None of it is illegal. Most of it breaks no platform's rules. But it is a bet about what the web is now for. The bet is that breadth wins: that a model asked about a domain reaches for the page that exists rather than the page that is good, and that existing in volume beats being worth reading.</p>
+</div>
+<div id="what-the-audits-find" class="section">
+<h2 id="what-the-audits-keep-finding" tabindex="-1">What the Audits Keep Finding</h2>
+<p>I have started keeping a record of these. Not the scores, the oddities: the sites whose machine-readable surface is built for ingestion rather than for reading. A picture is forming, and it is not the web most people think they are using.</p>
+<p>There is a name worth giving the shift. The old web was written for human eyes, and search indexed it as a byproduct. Now a second web is going up over it, written for machines to ingest, with humans as the byproduct this time. An audit is one of the few places you can stand on the seam and see both at once.</p>
+</div>
+<div id="the-part-that-matters" class="section">
+<h2 id="the-part-that-matters" tabindex="-1">The Part That Matters</h2>
+<p>If you build for machines, and increasingly everyone does, the question is not whether to. It is what you put behind the door.</p>
+<p>A quarter of a million templated profiles is breadth without depth. An agent that reads them learns that a page exists, not that what it says is true. The answer is not less machine-readable content. It is machine-readable content worth citing: claims that carry their provenance, entities that resolve to real identifiers, statements an outside party can verify without having to trust the publisher.</p>
+<p>That is the whole of MX in one line. Build for the machine. Then build something the machine can stand behind.</p>
+</div>
 
-        <section id="pages-no-human-can-see">
-          <h2>Pages No Human Can See</h2>
-          <p>I tried to open one. A bot-protection challenge answered: a holding page, no content, a refusal to anything that was not a full browser running scripts. I tried again with headless Chrome. It passed the check and still could not reach the page in any reasonable time.</p>
-          <p>So the quarter-million pages in the sitemap are not served to a reader who clicks a link. They are gated.</p>
-          <p>Then I read the robots.txt. It named GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, Google-Extended, PerplexityBot, and several more, and it allowed every one of them into the gated path. The wall is for people. The door is for machines.</p>
-        </section>
-
-        <section id="the-inversion">
-          <h2>The Inversion</h2>
-          <p>robots.txt was built to keep crawlers out. A publisher listed the paths a bot should not touch, and well-behaved bots obeyed. The file was a fence.</p>
-          <p>This file is the opposite. It is a fence against humans with an invitation pinned to it for the AI crawlers. The pages exist so that a model will ingest them and, later, cite them. They do not exist so that a person will read them. A human who finds one gets a security check. A language model gets the full text.</p>
-          <p>That is not an accident of configuration. It is the design.</p>
-        </section>
-
-        <section id="built-for-machines">
-          <h2>Built for Machines, Not Readers</h2>
-          <p>This is programmatic SEO pointed at language models. Generate one page per entity, a quarter of a million of them, each a thin template with the data swapped in. Keep humans out, so the pages never have to survive a real reader. Let the crawlers in, so the volume lands in training data and retrieval indexes.</p>
-          <p>The technology and comparison sections were the same move at a smaller scale: thousands of pages, one per tool, one per pairing, all generated from a single source list.</p>
-          <p>None of it is illegal. Most of it breaks no platform's rules. But it is a bet about what the web is now for. The bet is that breadth wins: that a model asked about a domain reaches for the page that exists rather than the page that is good, and that existing in volume beats being worth reading.</p>
-        </section>
-
-        <section id="what-the-audits-find">
-          <h2>What the Audits Keep Finding</h2>
-          <p>I have started keeping a record of these. Not the scores, the oddities: the sites whose machine-readable surface is built for ingestion rather than for reading. A picture is forming, and it is not the web most people think they are using.</p>
-          <p>There is a name worth giving the shift. The web authored for human eyes, indexed by search engines as a side effect, is being overlaid by a second web authored for machine ingestion, with humans as the side effect. An audit is one of the few places you can stand on the seam and see both at once.</p>
-        </section>
-
-        <section id="the-part-that-matters">
-          <h2>The Part That Matters</h2>
-          <p>If you build for machines, and increasingly everyone does, the question is not whether to. It is what you put behind the door.</p>
-          <p>A quarter of a million templated profiles is breadth without depth. An agent that reads them learns that a page exists, not that what it says is true. The answer is not less machine-readable content. It is machine-readable content worth citing: claims that carry their provenance, entities that resolve to real identifiers, statements an outside party can verify without having to trust the publisher.</p>
-          <p>That is the whole of MX in one line. Build for the machine. Then build something the machine can stand behind.</p>
-        </section>
 
       </article>
 
-      <!-- Post Conclusion -->
+
+      <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series. Consults on MX strategy through Digital Domain Technologies Ltd, trading as CogNovaMX.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
-          <p class="post-conclusion-eyebrow">Curious what your own sitemap tells a machine?</p>
-          <p class="post-conclusion-prompt">An MX audit reads your site the way a crawler does: what the sitemap declares, what the discovery files allow, and whether the machine-readable surface is worth citing or just large.</p>
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
-            <li><a class="post-conclusion-link" href="/services/">CogNovaMX services</a></li>
-            <li><a class="post-conclusion-link" href="/learn/">Learn MX</a></li>
-            <li><a class="post-conclusion-link" href="mailto:info@cognovamx.com">info@cognovamx.com</a></li>
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
           </ul>
         </div>
       </aside>
@@ -287,7 +295,6 @@ mx:
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
           <li><a href="/blog/">Blog</a></li>
-          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -304,5 +311,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

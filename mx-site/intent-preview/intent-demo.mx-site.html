@@ -7,31 +7,41 @@
 <!--
 ---
 title: "Intent CMS demo"
-description: "A Phase 1 dogfood page: hero, cards, and columns blocks authored in markdown, decorated at build time, rendered as static HTML under a chosen theme."
+description: "A Phase 1 dogfood page: hero, cards, and columns chunks authored in markdown, composed at build time, rendered as static HTML under a chosen theme."
 author: "Tom Cranstoun"
 created: 2026-06-06
 modified: 2026-06-06
 version: "1.0"
 
 type: info-doc
-tags: [intent-cms, demo, blocks, themes]
+tags: [intent-cms, demo, chunks, themes]
 mx:
+  x-mx-neededFor: [publish]
   status: draft
   audience: [humans, machines]
   x-mx-theme: mx-site
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/pages/intent-demo.md
-  purpose: "Phase 1 dogfood page exercising the hero, cards, and columns blocks across the seed themes."
+  purpose: "Dogfood page exercising the hero auto-chunk and the cards and columns marker chunks across the seed themes."
   stability: experimental
   runbook: "Render with scripts/intent-generate.cjs --all-themes and inspect the static output under each theme. Demo only; not for publication."
   x-mx-contextProvides:
-    - "Worked example of Intent CMS block authoring (hero auto-block, cards table, columns table)."
+    - "Worked example of Intent CMS chunk authoring (hero auto-chunk, cards marker, columns region marker)."
   x-mx-createdHash: 30f5bca0
 
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
+<!-- mx-built:log
+  source: datalake/draft-site/pages/intent-demo.md
+  source-sha256: 2748ea1a0b89d3f52b7a624a37d8d356c4f9fbf95340bfd217228e7f52991536
+  assembler: intent-cms registry=v1 theme=mx-site
+  stage: staging
+  chunks: hero(auto) cards columns reproduced-post
+  images: 4 linked, 0 inline
+  notes: 0
+-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A Phase 1 dogfood page: hero, cards, and columns blocks authored in markdown, decorated at build time, rendered as static HTML under a chosen theme.">
+  <meta name="description" content="A Phase 1 dogfood page: hero, cards, and columns chunks authored in markdown, composed at build time, rendered as static HTML under a chosen theme.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="page">
@@ -43,7 +53,7 @@ mx:
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Intent CMS demo",
-  "description": "A Phase 1 dogfood page: hero, cards, and columns blocks authored in markdown, decorated at build time, rendered as static HTML under a chosen theme.",
+  "description": "A Phase 1 dogfood page: hero, cards, and columns chunks authored in markdown, composed at build time, rendered as static HTML under a chosen theme.",
   "url": "https://mx.allabout.network/intent-preview/intent-demo.mx-site.html",
   "inLanguage": "en-GB"
 }
@@ -61,20 +71,26 @@ mx:
       <a href="/blog/">Blog</a>
       <a href="/the-gathering/">The Gathering</a>
       <a href="/about/">About</a></div></header>
-  <main id="main"><div class="section hero-container" data-section-status="loaded"><div class="hero-wrapper"><div class="hero block" data-block-name="hero" data-block-status="loaded"><div><div class="hero-bg"><picture><img src="https://allabout.network/media_188fa5bcd003e5a2d56e7ad3ca233300c9e52f1e5.png" alt="MX backdrop"></picture></div><div class="hero-content"><h1>Machine Experience</h1></div></div></div></div></div><div class="section" data-section-status="loaded">
+  <main id="main"><div class="section hero-container" data-section-status="loaded"><div class="hero-wrapper"><!-- mx-built:begin chunk=hero tier=automatic --><div class="hero block" data-block-name="hero" data-block-status="loaded"><div><div class="hero-bg"><picture><img src="https://allabout.network/media_188fa5bcd003e5a2d56e7ad3ca233300c9e52f1e5.png" alt="MX backdrop"></picture></div><div class="hero-content"><h1>Machine Experience</h1></div></div></div><!-- mx-built:end chunk=hero --></div></div><div class="section" data-section-status="loaded">
 
 
 <div class="default-content-wrapper"><p></p><p>Make the web, and everything you publish beyond it, work for everyone and everything that uses it.</p></div></div><div class="section cards-container" data-section-status="loaded">
 
 
-<div class="default-content-wrapper"><h2 id="what-mx-gives-you" tabindex="-1">What MX gives you</h2></div><div class="cards-wrapper"><div class="cards block" data-block-name="cards" data-block-status="loaded"><ul><li><div class="cards-card-image"><picture><img loading="lazy" alt="readable" src="https://allabout.network/media_14e918fa88c2a9a810fd454fa04f0bd152c01fed2.jpeg"></picture></div><div class="cards-card-body"><p><strong>Machine-readable.</strong> Structured metadata in every file, so agents find and use content without guessing.</p></div></li><li><div class="cards-card-image"><picture><img loading="lazy" alt="trustworthy" src="https://allabout.network/media_1d92670adcfb7a18a062e49fd7967f4e9f76d8a52.jpeg"></picture></div><div class="cards-card-body"><p><strong>Machine-trustworthy.</strong> Attestation so agents cite verified facts, not inferences.</p></div></li><li><div class="cards-card-image"><picture><img loading="lazy" alt="portable" src="https://allabout.network/media_1e744525e97292dcd074e9b1c7ab2cf47a048f292.jpeg"></picture></div><div class="cards-card-body"><p><strong>Portable.</strong> The same source renders to any carrier: HTML, PDF, a database row.</p></div></li></ul></div></div></div><div class="section columns-container" data-section-status="loaded">
+
+<div class="default-content-wrapper"><h2 id="what-mx-gives-you" tabindex="-1">What MX gives you</h2></div><div class="cards-wrapper"><!-- mx-built:begin chunk=cards tier=structural --><div class="cards block" data-block-name="cards" data-block-status="loaded"><ul><li><div class="cards-card-image"><picture><img loading="lazy" alt="readable" src="https://allabout.network/media_14e918fa88c2a9a810fd454fa04f0bd152c01fed2.jpeg"></picture></div><div class="cards-card-body"><p><strong>Machine-readable.</strong> Structured metadata in every file, so agents find and use content without guessing.</p></div></li><li><div class="cards-card-image"><picture><img loading="lazy" alt="trustworthy" src="https://allabout.network/media_1d92670adcfb7a18a062e49fd7967f4e9f76d8a52.jpeg"></picture></div><div class="cards-card-body"><p><strong>Machine-trustworthy.</strong> Attestation so agents cite verified facts, not inferences.</p></div></li><li><div class="cards-card-image"><picture><img loading="lazy" alt="portable" src="https://allabout.network/media_1e744525e97292dcd074e9b1c7ab2cf47a048f292.jpeg"></picture></div><div class="cards-card-body"><p><strong>Portable.</strong> The same source renders to any carrier: HTML, PDF, a database row.</p></div></li></ul></div><!-- mx-built:end chunk=cards --></div></div><div class="section columns-container" data-section-status="loaded">
 
 
 
-<div class="default-content-wrapper"><h2 id="one-source%2C-many-looks" tabindex="-1">One source, many looks</h2></div><div class="columns-wrapper"><div class="columns block columns-2-cols" data-block-name="columns" data-block-status="loaded"><div><div><p><strong>Author once.</strong> Write markdown with block tables and frontmatter; the generator assembles the page.</p></div><div><p><strong>Theme anywhere.</strong> Pick a theme and the same content renders under any look in the style library.</p></div></div></div></div><div class="default-content-wrapper"><p>The page you are reading was generated from markdown by the Intent CMS, decorated at build time, and styled by a chosen theme. No JavaScript runs to lay it out.</p></div></div><div class="section reproduced-post-container" data-section-status="loaded">
 
 
-<div class="default-content-wrapper"><h2 id="a-reproduced-post" tabindex="-1">A reproduced post</h2></div><div class="reproduced-post-wrapper"><div class="reproduced-post block" data-block-name="reproduced-post" data-block-status="loaded"><blockquote cite="https://www.linkedin.com/posts/danielserrano"><p><em>The following is a translation of a post by another author, reproduced with thanks.</em></p><p>The plan looked solid, and every date was wrong. An assistant returned cut-off grades, application windows, and open-day times, and every one had already passed.</p><p>The model invented nothing. It simply stitched together the fragments it found.</p><footer class="reproduced-post-source"><cite><a href="https://www.linkedin.com/posts/danielserrano" title="Original post by Daniel Serrano" class="">Original post by Daniel Serrano</a></cite></footer></blockquote></div></div></div></main>
+
+
+<div class="default-content-wrapper"><h2 id="one-source%2C-many-looks" tabindex="-1">One source, many looks</h2></div><div class="columns-wrapper"><!-- mx-built:begin chunk=columns tier=structural --><div class="columns block columns-2-cols" data-block-name="columns" data-block-status="loaded"><div><div><p><strong>Author once.</strong> Write markdown with chunk markers and frontmatter; the assembler composes the page.</p></div><div><p><strong>Theme anywhere.</strong> Pick a theme and the same content renders under any look in the style library.</p></div></div></div><!-- mx-built:end chunk=columns --></div><div class="default-content-wrapper"><p>The page you are reading was generated from markdown by the Intent CMS, decorated at build time, and styled by a chosen theme. No JavaScript runs to lay it out.</p></div></div><div class="section reproduced-post-container" data-section-status="loaded">
+
+
+
+<div class="default-content-wrapper"><h2 id="a-reproduced-post" tabindex="-1">A reproduced post</h2></div><div class="reproduced-post-wrapper"><!-- mx-built:begin chunk=reproduced-post tier=structural --><div class="reproduced-post block" data-block-name="reproduced-post" data-block-status="loaded"><blockquote cite="https://www.linkedin.com/posts/danielserrano"><p><em>The following is a translation of a post by another author, reproduced with thanks.</em></p><p>The plan looked solid, and every date was wrong. An assistant returned cut-off grades, application windows, and open-day times, and every one had already passed.</p><p>The model invented nothing. It simply stitched together the fragments it found.</p><footer class="reproduced-post-source"><cite><a href="https://www.linkedin.com/posts/danielserrano" title="Original post by Daniel Serrano" class="">Original post by Daniel Serrano</a></cite></footer></blockquote></div><!-- mx-built:end chunk=reproduced-post --></div></div></main>
   <footer class="mx-footer"><div class="mx-footer-inner"><p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p><p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX.</p></div></footer>
 </body>
 </html>

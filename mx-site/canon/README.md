@@ -7,7 +7,7 @@ modified: "2026-04-16"
 
 type: info-doc
 mx:
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/canon/README.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/canon/README.md
 
 ---
 

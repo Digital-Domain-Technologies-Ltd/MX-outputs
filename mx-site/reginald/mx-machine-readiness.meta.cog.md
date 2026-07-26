@@ -465,7 +465,7 @@ Every field used in the position-paper cog, by zone and conformance ladder. Two 
 | **Zone 2 · Standard** | Level 2 (MUST) | `mx:canonicalUri`, `mx:summary`, `mx:conformsTo`, `mx:trainingDataPolicy` |
 | **Zone 2 · Standard** | Level 2 (SHOULD) | `mx:status`, `mx:contentType`, `mx:runbook` |
 | **Zone 2 · Standard** | Level 3 (MAY) | `mx:audience`, `mx:tags`, `mx:purpose` (duple), `mx:license`, `mx:stewardship`, `mx:domain`, `mx:readingLevel`, `mx:supersedes`, `mx:topic`, `mx:speakable`, `mx:doNotIndex`, `mx:reviewBy`, `mx:relatedDocs`, `mx:supportContact` |
-| **Zone 2 · Standard (cog layer)** | Tier A–C | `mx:partOf` (Tier A), `mx:buildsOn` (Tier B), `mx:dependencies` (Tier C), `mx:refersTo` (Tier C) |
+| **Zone 2 · Standard (cog layer)** | Tier A-C | `mx:partOf` (Tier A), `mx:buildsOn` (Tier B), `mx:dependencies` (Tier C), `mx:refersTo` (Tier C) |
 | **Zone 2 · Public extension** | n/a | `mx:x-mx-cog-id`, `mx:x-mx-cog-type`, `mx:x-mx-cog-category`, `mx:x-mx-reginald-*` (4 fields), `mx:x-mx-temporal-*` (4 fields, pending temporal-stance note), `mx:x-mx-prov-*` (7 fields, pending Provenance note migration) |
 | **Zone 2 · Private extension** | n/a | None used. Reserved for organisation-internal fields under the `x-mx-p-` prefix. |
 

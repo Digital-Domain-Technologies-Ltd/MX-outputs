@@ -17,7 +17,7 @@ tags: [knowledge, cutoff, search, recency, verification, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  partOf: fable5-example
+  partOf: site-domaincog
   audience: [machines]
   purpose: "Define when to use web search versus answer from training data."
   stability: stable

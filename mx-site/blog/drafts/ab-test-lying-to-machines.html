@@ -12,10 +12,11 @@ created: 2026-06-02
 modified: 2026-06-02
 version: "1.0"
 
+type: blog-post
 mx:
+  x-mx-neededFor: [publish]
   x-mx-managedBy: blog-post.cog.md
-  status: draft
-  contentType: blog-post
+  x-mx-contentState: draft
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/ab-test-lying-to-machines.md
   x-mx-contextProvides:
@@ -23,8 +24,10 @@ mx:
   stability: stable
   purpose: "A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it."
   x-mx-backport: clean
+  x-mx-createdHash: 5aada6cc
   servedAt: https://mx.allabout.network/blog/drafts/ab-test-lying-to-machines.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -99,7 +102,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -113,7 +116,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1571,
+        "wordCount": 1563,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -167,7 +170,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -193,7 +196,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1571">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1563">
         <header class="article-header">
           <h1>Your A/B Test Might Be Lying to Machines</h1>
           <div class="article-meta"
@@ -213,7 +216,7 @@ mx:
 <p>The vendor responsible was Ninetailed, a content personalisation platform. Our audit tool detected its script patterns in the served HTML and confirmed the variant inconsistency: three fetches, three H1 texts, zero session continuity.</p>
 <p>This is not a bug in the personalisation platform. It is a consequence of the web being built for human browsers, now encountering a growing class of visitors who are not human browsers.</p>
 <h2 id="what-we-found" tabindex="-1">What We Found</h2>
-<p>The MX Web Audit Suite probes the same URL three times during its server response stability check. The probes are cache-busted (each carries a unique query parameter) to bypass CDN edge caches and measure origin response time. This process also captures the H1 text from each response body.</p>
+<p>The MX Web Audit Suite probes the same URL three times during its server response stability check. Each probe bypasses CDN edge caches to measure origin response time directly. This process also captures the H1 text from each response body.</p>
 <p>On the SaaS site in question, the three H1 results were:</p>
 <ul>
 <li>&quot;Sorry, content chaos -- your time's up&quot;</li>
@@ -264,7 +267,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -315,5 +318,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

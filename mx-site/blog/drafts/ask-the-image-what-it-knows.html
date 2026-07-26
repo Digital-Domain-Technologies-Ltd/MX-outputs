@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Ask the Image What It Knows"
+description: "Our new logo landed as a PNG, and like most images on the web it arrived knowing nothing about itself. We fixed that: who designed it, who approved it, who published it, all recorded inside the file. Then we wrote a small script that asks any image what it declares. Copy it, run it on your own images, and see what they remember. Most remember nothing. Yours could."
+author: Tom Cranstoun
+created: 2026-07-03
+modified: 2026-07-03
+version: "1.0"
+type: blog-post
+tags: [provenance, metadata, mx-foundations, content-ops, tools]
+mx:
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
+  servedAt: https://mx.allabout.network/blog/drafts/ask-the-image-what-it-knows.html
+  generate:
+    script: scripts/generate-content-html.cjs
+  audience:
+    - humans
+    - machines
+  x-mx-category: MX blog series
+  x-mx-aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/ask-the-image-what-it-knows.md
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  x-mx-corroboratedBy:
+    - https://exiftool.org/
+    - https://developer.adobe.com/xmp/docs/
+  x-mx-contextProvides:
+    - "Uses the Digital Domain Technologies logo as a worked example of an asset that carries its own record: the full metadata dump, an MX block, and a provenance chain naming who designed, approved, and published it. Ships a paste-and-run Node script that reads all of it back from any image and points readers at the MX books whether the metadata is present or not."
+  stability: stable
+  purpose: "Show, with our own logo as the example, that an image can carry its whole story inside the file, and give readers a copy-paste script that asks any image on their machine what it declares."
+  blogUrl: https://mx.allabout.network/blog/drafts/ask-the-image-what-it-knows.html
+  blogFilename: ask-the-image-what-it-knows
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Our new logo landed as a PNG, and like most images on the web it arrived knowing nothing about itself. We fixed that: who designed it, who approved it, who published it, all recorded inside the file. Then we wrote a small script that asks any image what it declares. Copy it, run it on your own images, and see what they remember. Most remember nothing. Yours could.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/ask-the-image-what-it-knows.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/ask-the-image-what-it-knows.html">
+  <meta property="og:title" content="Ask the Image What It Knows | CogNovaMX">
+  <meta property="og:description" content="Our new logo landed as a PNG, and like most images on the web it arrived knowing nothing about itself. We fixed that: who designed it, who approved it, who published it, all recorded inside the file. Then we wrote a small script that asks any image what it declares. Copy it, run it on your own images, and see what they remember. Most remember nothing. Yours could.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-03">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ask the Image What It Knows | CogNovaMX">
+  <meta name="twitter:description" content="Our new logo landed as a PNG, and like most images on the web it arrived knowing nothing about itself. We fixed that: who designed it, who approved it, who published it, all recorded inside the file. Then we wrote a small script that asks any image what it declares. Copy it, run it on your own images, and see what they remember. Most remember nothing. Yours could.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Ask the Image What It Knows">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/ask-the-image-what-it-knows.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Ask the Image What It Knows | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Ask the Image What It Knows",
+        "headline": "Ask the Image What It Knows",
+        "description": "Our new logo landed as a PNG, and like most images on the web it arrived knowing nothing about itself. We fixed that: who designed it, who approved it, who published it, all recorded inside the file. Then we wrote a small script that asks any image what it declares. Copy it, run it on your own images, and see what they remember. Most remember nothing. Yours could.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-07-03",
+        "dateModified": "2026-07-03",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/ask-the-image-what-it-knows.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1228,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/ask-the-image-what-it-knows.html",
+        "name": "Ask the Image What It Knows",
+        "url": "https://mx.allabout.network/blog/drafts/ask-the-image-what-it-knows.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#the-script-that-asks">The script that asks</a></li>
+        <li><a href="#copy-save-run">Copy, save, run</a></li>
+        <li><a href="#what-our-logo-says">What our logo says</a></li>
+        <li><a href="#try-it-on-your-own-images">Try it on your own images</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1228">
+        <header class="article-header">
+          <h1>Ask the Image What It Knows</h1>
+          <div class="article-meta"
+               data-published="2026-07-03"
+               data-modified="2026-07-03"
+               data-reading-time="7 min">
+            <time datetime="2026-07-03">3 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>7 min read</span>
+          </div>
+        </header>
+
+
+<p>This is our logo. It is also, unashamedly, an advert for us.</p>
+<p><img src="https://mx.allabout.network/blog/assets/ddt-logo.png" alt="Digital Domain Technologies logo"></p>
+<p>Doğu Abaris designed it. I approved his design. Maxine, my AI partner, published it into the site's assets and embedded its metadata. I approved the published result. Four steps, two humans, one machine, and every one of them is recorded inside the file itself. Not in a spreadsheet somewhere, not in an email thread nobody will find in a year. In the PNG.</p>
+<p>Most images cannot do this. A picture lands in an assets folder, looks lovely on the page, and knows nothing. Who made it? Who said it could be published? Was a machine involved? The file has no answer, so every system that meets it later has to guess or ask around. We think the file should just say.</p>
+<h2 id="the-script-that-asks" tabindex="-1">The script that asks</h2>
+<p>So here is the tool we use to ask. It is a single Node script, and it works on any image on your machine, not only ours. It needs two things installed: <a href="https://nodejs.org/">Node.js</a> and <a href="https://exiftool.org/">ExifTool</a>, Phil Harvey's veteran metadata reader that almost every serious imaging pipeline already leans on.</p>
+<p>Run it and you get one JSON document with everything the file declares:</p>
+<ul>
+<li><strong>allMetadata</strong> - the complete dump: every EXIF, XMP, and file-level field ExifTool can find. Not a curated selection. All of it.</li>
+<li><strong>mx</strong> - the MX block, if the image carries one: title, author, reuse policy, how the content was created, where the canonical copy lives. This travels in the image's XMP packet, the metadata carrier <a href="https://developer.adobe.com/xmp/docs/">Adobe designed for exactly this job</a> and later became an ISO standard.</li>
+<li><strong>provenance</strong> - the chain of who did what: the embedded record plus the sidecar files, when they exist.</li>
+</ul>
+<p>And it never scolds you. If the MX block is missing, the script does not error; it reports &quot;Not Present - read <a href="https://mx.allabout.network/books/">https://mx.allabout.network/books/</a>&quot;. If it is there, you get &quot;Read the books <a href="https://mx.allabout.network/books/">https://mx.allabout.network/books/</a>&quot; instead. Either way you know where the story continues.</p>
+<h2 id="copy-save-run" tabindex="-1">Copy, save, run</h2>
+<p>Copy the whole block below into a file called <code>export-asset-metadata.cjs</code> (the Copy button on the block puts it on your clipboard in one click), then run:</p>
+<pre><code class="language-bash">node export-asset-metadata.cjs your-image.png
+</code></pre>
+<pre><code class="language-javascript">#!/usr/bin/env node
+/**
+ * export-asset-metadata.cjs
+ * Export everything an asset declares about itself as one JSON document:
+ * the full metadata dump (every EXIF, XMP, and file field exiftool can
+ * read), the MX block, the embedded AI provenance payload, and the
+ * adjacent sidecar pair.
+ *
+ * Needs Node.js and exiftool (https://exiftool.org/).
+ * Usage: node export-asset-metadata.cjs &lt;image&gt; [--compact]
+ */
+
+'use strict';
+
+const fs = require('node:fs');
+const path = require('node:path');
+const { execFileSync } = require('node:child_process');
+const { pathToFileURL } = require('node:url');
+
+const BOOKS_URL = 'https://mx.allabout.network/books/';
+const NOT_PRESENT = `Not Present - read ${BOOKS_URL}`;
+const PRESENT = `Read the books ${BOOKS_URL}`;
+
+// Inside MX-hub the shared library is the authority; when the script has been
+// pasted elsewhere the require fails and every read falls back to exiftool.
+let lib = null;
+try { lib = require('./lib/asset-metadata.cjs'); } catch (_) { /* standalone mode */ }
+
+function readAllMetadata(absPath) {
+  try {
+    const out = execFileSync('exiftool', ['-j', '-a', '-G1', absPath], { encoding: 'utf8' });
+    const parsed = JSON.parse(out);
+    return parsed &amp;&amp; parsed[0] ? parsed[0] : null;
+  } catch (_) {
+    return null; // exiftool absent or unreadable file - reported, never fatal
+  }
+}
+
+function mxFromDump(dump) {
+  const mx = {};
+  for (const [key, value] of Object.entries(dump || {})) {
+    if (key.startsWith('XMP-mx:')) {
+      const name = key.slice('XMP-mx:'.length);
+      mx[name.charAt(0).toLowerCase() + name.slice(1)] = value;
+    }
+  }
+  return mx;
+}
+
+function parseJsonOrNull(raw) {
+  try { return JSON.parse(raw); } catch (_) { return null; }
+}
+
+// The sidecar naming convention: strip the asset's extension, add the pair.
+function readSidecarsByConvention(absPath) {
+  const base = absPath.replace(/\.[^.]+$/, '');
+  const read = (p) =&gt; (fs.existsSync(p) ? parseJsonOrNull(fs.readFileSync(p, 'utf8')) : null);
+  return {
+    ai: read(`${base}.provenance.ai.json`),
+    deterministic: read(`${base}.provenance.deterministic.json`),
+  };
+}
+
+async function exportAsset(absPath) {
+  const allMetadata = readAllMetadata(absPath);
+
+  let mx; let verdict; let embedded; let sidecars;
+  if (lib) {
+    mx = await lib.readAssetMx(absPath);
+    verdict = await lib.classify(absPath);
+    embedded = await lib.readAssetProvenance(absPath);
+    const provModulePath = path.join(lib.REPO_ROOT, 'mx-reginald', 'lib', 'provenance.js');
+    const { readProvenance } = await import(pathToFileURL(provModulePath).href);
+    sidecars = readProvenance(absPath) || { ai: null, deterministic: null };
+  } else {
+    mx = mxFromDump(allMetadata);
+    verdict = Object.keys(mx).length ? 'present' : 'missing';
+    embedded = mx.provenanceAiPayload ? parseJsonOrNull(mx.provenanceAiPayload) : null;
+    sidecars = readSidecarsByConvention(absPath);
+  }
+
+  const mxPresent = mx &amp;&amp; Object.keys(mx).length &gt; 0;
+  return {
+    asset: lib ? lib.relFromRepo(absPath) : absPath,
+    verdict,
+    books: mxPresent ? PRESENT : NOT_PRESENT,
+    mx: mxPresent ? mx : NOT_PRESENT,
+    allMetadata: allMetadata ||
+      'exiftool not found - install it from https://exiftool.org/ to read the full metadata dump',
+    provenance: {
+      embedded: embedded || NOT_PRESENT,
+      sidecars: {
+        ai: sidecars.ai || NOT_PRESENT,
+        deterministic: sidecars.deterministic || NOT_PRESENT,
+      },
+    },
+  };
+}
+
+async function main(argv) {
+  const args = argv.slice(2);
+  if (args.includes('-h') || args.includes('--help') || args.length === 0) {
+    process.stdout.write('usage: export-asset-metadata.cjs &lt;asset-path&gt; [--compact]\n');
+    return args.length === 0 ? 2 : 0;
+  }
+  const compact = args.includes('--compact');
+  const file = args.find((a) =&gt; !a.startsWith('--'));
+  if (!file) {
+    process.stderr.write('export-asset-metadata: pass an asset path\n');
+    return 2;
+  }
+  const abs = path.resolve(process.cwd(), file);
+  if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) {
+    process.stderr.write(`export-asset-metadata: no such file: ${file}\n`);
+    return 2;
+  }
+
+  const doc = await exportAsset(abs);
+  process.stdout.write(JSON.stringify(doc, null, compact ? 0 : 2) + '\n');
+  return 0;
+}
+
+if (require.main === module) main(process.argv).then((code) =&gt; process.exit(code));
+module.exports = { exportAsset, main };
+</code></pre>
+<p>One design note, because it matters for trust: the script never invents anything. It reads what the file carries and reports absence as absence. A reader running it on our logo gets the same answer we do, with no privileged access and none of our tooling installed.</p>
+<h2 id="what-our-logo-says" tabindex="-1">What our logo says</h2>
+<p>Here is a trimmed version of what comes back when we point the script at the logo above:</p>
+<pre><code class="language-json">{
+  &quot;asset&quot;: &quot;mx-site/blog/assets/ddt-logo.png&quot;,
+  &quot;verdict&quot;: &quot;clean&quot;,
+  &quot;books&quot;: &quot;Read the books https://mx.allabout.network/books/&quot;,
+  &quot;mx&quot;: {
+    &quot;title&quot;: &quot;Digital Domain Technologies logo&quot;,
+    &quot;author&quot;: &quot;Doğu Abaris&quot;,
+    &quot;provenanceOrigin&quot;: &quot;human-directed&quot;,
+    &quot;contentPolicy&quot;: &quot;Brand asset. Reuse only with permission from Digital Domain Technologies Ltd; do not alter the mark.&quot;
+  },
+  &quot;provenance&quot;: {
+    &quot;embedded&quot;: {
+      &quot;steps&quot;: [
+        { &quot;stepId&quot;: &quot;asset.created&quot;,        &quot;agent&quot;: &quot;Doğu Abaris&quot; },
+        { &quot;stepId&quot;: &quot;asset.approved&quot;,       &quot;agent&quot;: &quot;Tom Cranstoun&quot; },
+        { &quot;stepId&quot;: &quot;asset.published&quot;,      &quot;agent&quot;: &quot;Maxine&quot; },
+        { &quot;stepId&quot;: &quot;asset.final-approval&quot;, &quot;agent&quot;: &quot;Tom Cranstoun&quot; }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>Read that chain again. A designer created the work. A human approved it. A machine published it. A human approved the published result. When an AI acts in your pipeline, the honest record is not &quot;an AI did this&quot; and it is not silence either. It is the whole sequence, with the humans in it, in a form the next machine can read without asking anyone.</p>
+<h2 id="try-it-on-your-own-images" tabindex="-1">Try it on your own images</h2>
+<p>Point the script at your company logo. Your product photography. The hero image on your homepage. My bet: <code>&quot;Not Present - read https://mx.allabout.network/books/&quot;</code>, over and over. That is not a criticism of you; it is the default state of nearly every image on the web. The file does its visual job perfectly and carries no memory at all.</p>
+<p>The fix is cheaper than it looks, and the moment to apply it is when an asset is born, not three years later when someone asks which of nine hundred images you actually have the rights to. That practice, making files that explain themselves to machines, is what the <a href="https://mx.allabout.network/books/">MX books</a> teach. Start with the logo you already have. Ask it what it knows, and then teach it to answer.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

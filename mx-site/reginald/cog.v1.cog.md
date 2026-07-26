@@ -144,7 +144,7 @@ mx:
   supportContact: "info@tg.community"
 
   # ── Cog structural fields (Note 3 §6) ──
-  partOf: tg-mx-specifications
+  partOf: site-domaincog
   buildsOn: []
   dependencies:
     - name: tg-note-1-field-pattern

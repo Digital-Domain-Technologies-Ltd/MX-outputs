@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Lesson 3: Explicit over implicit"
+description: "Guided interactive lesson on the foundational MX principle: machines do not infer, so state must be declared in markup. Hands-on before/after code for disabled elements, loading states, required fields, current-page navigation, and error states, plus why each agent category depends on explicit declarations."
+author: "Tom Cranstoun"
+created: 2026-07-14
+modified: 2026-07-14
+version: "1.0"
+
+mx:
+  status: active
+  contentType: article
+  audience: [humans, machines]
+  aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/learn/lessons/lesson-3-explicit-over-implicit.html
+  servedAt: https://mx.allabout.network/learn/lessons/lesson-3-explicit-over-implicit.html
+  runbook: "Interactive lesson on mx-site. The HTML is the canonical source for this YAML frontmatter; no separate markdown source exists. All lesson content is present in the served HTML in document order; mx-lesson.js adds the guided step sequence as a progressive enhancement. Companion article: /learn/explicit-over-implicit.html."
+---
+-->
+  <!-- MX-SOURCE-FRONTMATTER:END -->
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+  <meta name="ai-disclosure" content="ai-assisted">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 3: Explicit over implicit | MX Learn | CogNovaMX</title>
+  <meta name="description" content="Guided interactive lesson on the foundational MX principle: machines do not infer, so state must be declared in markup. Hands-on before/after code for disabled elements, loading states, required fields, current-page navigation, and error states.">
+  <meta name="author" content="Tom Cranstoun">
+  <link rel="canonical" href="https://mx.allabout.network/learn/lessons/lesson-3-explicit-over-implicit.html">
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="ai-txt" href="/ai.txt">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lesson 3: Explicit over implicit">
+  <meta property="og:description" content="Guided interactive lesson on the foundational MX principle: machines do not infer, so state must be declared in markup. Hands-on before/after code for disabled, required, aria-current, and error states.">
+  <meta property="og:url" content="https://mx.allabout.network/learn/lessons/lesson-3-explicit-over-implicit.html">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="Lesson 3: Explicit over implicit">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ddttomtom">
+  <meta name="twitter:title" content="Lesson 3: Explicit over implicit">
+  <meta name="twitter:description" content="Guided interactive lesson on the foundational MX principle: machines do not infer, so state must be declared explicitly in markup.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="MX | Machine Experience">
+
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="article">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a1628">
+
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-hero.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+  <link rel="stylesheet" href="../../css/mx-lessons.css">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["WebPage", "LearningResource"],
+      "@id": "https://mx.allabout.network/learn/lessons/lesson-3-explicit-over-implicit.html#webpage",
+      "name": "Lesson 3: Explicit over implicit | MX Learn | CogNovaMX",
+      "description": "Guided interactive lesson on the foundational MX principle: machines do not infer, so state must be declared in markup. Hands-on before/after code for disabled elements, loading states, required fields, current-page navigation, and error states.",
+      "url": "https://mx.allabout.network/learn/lessons/lesson-3-explicit-over-implicit.html",
+      "dateModified": "2026-07-14",
+      "inLanguage": "en-GB",
+      "timeRequired": "PT6M",
+      "educationalLevel": "Beginner",
+      "learningResourceType": "Interactive lesson",
+      "teaches": "The foundational MX principle of explicit over implicit: machines cannot infer state from visual styling, so disabled, loading, required, current-page, and error states must be declared in markup with native HTML attributes and ARIA.",
+      "position": 3,
+      "publisher": {
+        "@id": "https://mx.allabout.network/about/about.html#organization"
+      },
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/learn/lessons/lesson-3-explicit-over-implicit.html"
+      },
+      "isPartOf": [
+        {
+          "@id": "https://mx.allabout.network/#website"
+        },
+        {
+          "@id": "https://mx.allabout.network/learn/lessons/#series"
+        }
+      ],
+      "image": "https://mx.allabout.network/images/book-cover-3d.png",
+      "keywords": "machine experience, MX, AI agents, explicit over implicit, ARIA, semantic HTML, interactive lesson, guided learning"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://mx.allabout.network/learn/lessons/#series",
+      "name": "MX Learn: the guided lesson track",
+      "description": "Six guided interactive lessons taking a novice from first principles of Machine Experience to the business case, the techniques, and the common mistakes.",
+      "provider": {
+        "@id": "https://mx.allabout.network/about/about.html#organization"
+      },
+      "url": "https://mx.allabout.network/learn/lessons/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://mx.allabout.network/learn/lessons/lesson-3-explicit-over-implicit.html#breadcrumbs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mx.allabout.network/" },
+        { "@type": "ListItem", "position": 2, "name": "Learn", "item": "https://mx.allabout.network/learn/" },
+        { "@type": "ListItem", "position": 3, "name": "Lessons", "item": "https://mx.allabout.network/learn/lessons/" },
+        { "@type": "ListItem", "position": 4, "name": "Explicit over implicit", "item": "https://mx.allabout.network/learn/lessons/lesson-3-explicit-over-implicit.html" }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX | Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/" aria-current="page">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="lesson-wrap" id="lesson">
+      <p class="lesson-eyebrow">MX Learn · Lesson 3 of 6</p>
+      <h1>Explicit over implicit</h1>
+      <p class="lesson-lede">The hands-on lesson: real before/after markup for every state a machine needs declared. Reading time about six minutes; the full lesson text is on this page even with scripting off.</p>
+
+      <div class="lesson-progress" aria-hidden="true"></div>
+
+      <section class="lesson-step">
+        <h2>Humans excel at inference. Machines do not.</h2>
+        <p>A greyed-out button signals "unavailable" to a human. An AI agent sees a fully clickable button unless you explicitly mark it <code>disabled</code>.</p>
+        <p>A red asterisk next to a form field means "required" to a human. An agent sees decoration unless you add the <code>required</code> attribute.</p>
+        <p><strong>The MX principle: if something matters, declare it explicitly in markup.</strong> Every pattern in this lesson answers one question: if you removed all CSS from the page, could a machine still understand what each element does?</p>
+      </section>
+
+      <section class="lesson-step">
+        <h2>State must be declared</h2>
+        <p>Visual styling encodes state for eyes only. Open each pattern to compare the visual-only markup with its explicit replacement:</p>
+        <div class="lesson-card" data-gate>
+          <div class="card-head">Disabled elements <span class="card-cta">open</span></div>
+          <div class="card-body">
+            <p class="code-label bad">Visual only</p>
+            <pre>&lt;button class="btn-disabled" style="opacity: 0.5"&gt;Submit&lt;/button&gt;</pre>
+            <p class="code-label good">Explicit</p>
+            <pre>&lt;button disabled aria-disabled="true"&gt;Submit&lt;/button&gt;</pre>
+            <p>The opacity and the class name are invisible to an agent that never renders CSS. The <code>disabled</code> attribute is a declaration every parser reads.</p>
+          </div>
+        </div>
+        <div class="lesson-card" data-gate>
+          <div class="card-head">Loading states <span class="card-cta">open</span></div>
+          <div class="card-body">
+            <p class="code-label bad">Visual only</p>
+            <pre>&lt;div class="spinner"&gt;&lt;/div&gt;</pre>
+            <p class="code-label good">Explicit</p>
+            <pre>&lt;div role="status" aria-busy="true" aria-live="polite"&gt;
+  &lt;span aria-hidden="true" class="spinner"&gt;&lt;/span&gt;
+  &lt;span class="sr-only"&gt;Loading, please wait&lt;/span&gt;
+&lt;/div&gt;</pre>
+            <p>An empty div with a class name means nothing. <code>role="status"</code> and <code>aria-busy="true"</code> tell every machine the content is on its way.</p>
+          </div>
+        </div>
+        <p class="lesson-hint" data-counts data-done-text="Both states declared - no machine has to guess.">Open both patterns to continue.</p>
+      </section>
+
+      <section class="lesson-step">
+        <h2>Required fields and the current page</h2>
+        <p>The same rule holds for forms and navigation. Open both patterns:</p>
+        <div class="lesson-card" data-gate>
+          <div class="card-head">Required form fields <span class="card-cta">open</span></div>
+          <div class="card-body">
+            <p class="code-label bad">Visual only</p>
+            <pre>&lt;label&gt;Email &lt;span class="red"&gt;*&lt;/span&gt;&lt;/label&gt;
+&lt;input type="email" name="email"&gt;</pre>
+            <p class="code-label good">Explicit</p>
+            <pre>&lt;label for="email"&gt;Email &lt;abbr title="required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+&lt;input type="email" id="email" required aria-required="true"&gt;</pre>
+            <p>The red asterisk is decoration to a machine. The <code>required</code> attribute, backed by <code>aria-required</code> and a proper <code>for</code>/<code>id</code> label association, is a contract.</p>
+          </div>
+        </div>
+        <div class="lesson-card" data-gate>
+          <div class="card-head">Current page in navigation <span class="card-cta">open</span></div>
+          <div class="card-body">
+            <p class="code-label bad">Ambiguous</p>
+            <pre>&lt;a href="/" class="active"&gt;Home&lt;/a&gt;</pre>
+            <p class="code-label good">Explicit</p>
+            <pre>&lt;a href="/" aria-current="page"&gt;Home&lt;/a&gt;</pre>
+            <p>A class named "active" is a private convention your CSS understands. <code>aria-current="page"</code> is a standard every agent and screen reader understands.</p>
+          </div>
+        </div>
+        <p class="lesson-hint" data-counts data-done-text="Required means required; current means current - in the markup, not the stylesheet.">Open both patterns to continue.</p>
+      </section>
+
+      <section class="lesson-step">
+        <h2>Error states</h2>
+        <p>Validation feedback is the state that costs users most when a machine misses it. Open the pattern:</p>
+        <div class="lesson-card" data-gate>
+          <div class="card-head">Validation feedback <span class="card-cta">open</span></div>
+          <div class="card-body">
+            <p class="code-label bad">Visual only</p>
+            <pre>&lt;input type="email" class="error"&gt;
+&lt;span class="error-text"&gt;Invalid email&lt;/span&gt;</pre>
+            <p class="code-label good">Explicit</p>
+            <pre>&lt;input type="email" aria-invalid="true" aria-describedby="email-error"&gt;
+&lt;span id="email-error" role="alert"&gt;Please enter a valid email address&lt;/span&gt;</pre>
+            <p>Three declarations do the work: <code>aria-invalid="true"</code> marks the field as failed, <code>aria-describedby</code> binds the message to the field it describes, and <code>role="alert"</code> announces the message to every consumer.</p>
+          </div>
+        </div>
+        <p class="lesson-hint" data-counts data-done-text="The error is now bound to its field and announced - not just painted red.">Open the pattern to continue.</p>
+      </section>
+
+      <section class="lesson-step">
+        <h2>Why this matters for agents</h2>
+        <p>AI agents fall into five categories, each with different capabilities, and none of them reads your CSS the way a human eye does. When state is encoded visually, through colour, opacity, position, or animation, it is invisible to every agent that does not render the page. View each group:</p>
+        <div class="lesson-tabs" role="tablist" aria-label="The agent categories">
+          <button type="button" data-panel="agents-server">Server-side</button>
+          <button type="button" data-panel="agents-browser">Browser automation</button>
+          <button type="button" data-panel="agents-local">Local on-device</button>
+        </div>
+        <div class="lesson-tabpanel" id="agents-server" data-gate>
+          <div class="panel-title">Server-side agents fetch raw HTML</div>
+          <p>Agents like ChatGPT and Claude fetch raw HTML without executing JavaScript or rendering CSS. They see the DOM as plain text. A greyed-out button looks disabled to a human eye; to these agents it is an active, clickable button unless the <code>disabled</code> attribute is present.</p>
+        </div>
+        <div class="lesson-tabpanel" id="agents-browser" data-gate>
+          <div class="panel-title">Browser automation agents still read attributes</div>
+          <p>Agents like Perplexity use headless Chrome, so they do render the page - but they still rely on semantic attributes to determine state. Rendering pixels does not tell an automation script whether a button may be pressed; <code>disabled</code> and <code>aria-invalid</code> do.</p>
+        </div>
+        <div class="lesson-tabpanel" id="agents-local" data-gate>
+          <div class="panel-title">Local on-device agents count every byte</div>
+          <p>Local agents running on device have limited context windows and need every byte to count. An agent that meets ambiguous state makes one of two choices: it guesses (and sometimes guesses wrong, triggering unintended actions) or it skips the element entirely (and the user loses functionality). Neither outcome is acceptable.</p>
+        </div>
+        <p class="lesson-hint" data-counts data-done-text="Different capabilities, same dependency: every category needs the declaration in the markup.">View all three groups to continue.</p>
+      </section>
+
+      <section class="lesson-step">
+        <h2>Quick check</h2>
+        <div class="lesson-quiz" data-gate>
+          <p>A button is styled with opacity 0.5 and a class of "btn-disabled" but has no disabled attribute. What does a server-side AI agent conclude?</p>
+          <button type="button" class="quiz-option">The button is disabled - the styling makes that clear</button>
+          <button type="button" class="quiz-option" data-correct>The button is active and clickable - no explicit declaration says otherwise</button>
+          <button type="button" class="quiz-option">It asks the user whether the button works</button>
+          <div class="quiz-answer">Right: a server-side agent never renders CSS, so the opacity and the class name are invisible to it. With no <code>disabled</code> attribute in the markup, the button reads as active and clickable.</div>
+          <div class="quiz-retry">Not quite. Remember: a server-side agent fetches raw HTML and never renders CSS, so styling carries no meaning for it. Try again.</div>
+        </div>
+        <p class="lesson-hint" data-counts data-done-text="Correct - no declaration, no disabled state.">Answer the question to finish the lesson.</p>
+        <h2>What you now know</h2>
+        <ul class="lesson-recap">
+          <li>Machines do not infer. Humans read a greyed-out button as unavailable; an agent reads only what the markup declares.</li>
+          <li>State must be declared in markup: disabled, loading, required, current page, and error states all have explicit attributes.</li>
+          <li>Native HTML beats ARIA retrofits: <code>required</code>, <code>disabled</code>, and semantic elements first, ARIA where HTML has no native attribute.</li>
+          <li>If something matters, declare it explicitly. The test: remove all CSS - could a machine still understand what each element does?</li>
+        </ul>
+        <div class="lesson-aside">
+          <strong>Next:</strong> <a href="https://mx.allabout.network/learn/lessons/lesson-4-key-principles.html">Lesson 4: Key principles</a> - the full principle set that explicit-over-implicit belongs to. Prefer the article form? The companion page is <a href="https://mx.allabout.network/learn/explicit-over-implicit.html">Explicit over implicit</a>.
+        </div>
+      </section>
+
+      <div class="lesson-nav"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX | Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script src="../../js/mx-lesson.js"></script>
+</body>
+</html>

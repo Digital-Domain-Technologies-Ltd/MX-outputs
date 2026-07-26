@@ -32,7 +32,7 @@ The recommended order is the order of sections below.
 
 ## Provenance of this bundle
 
-**Generated:** 2026-05-25
+**Generated:** 2026-07-03
 **Source repository:** https://github.com/ddttom/mx-shared-gathering
 **Canonical home for each draft:** https://github.com/ddttom/mx-shared-gathering/blob/main/<filename>
 **Licence:** MIT. The MX vocabulary is free, open, and vendor-neutral.
@@ -295,7 +295,7 @@ A second-order consideration: a uniform field-definition pattern makes automated
 
 This note defines the core machine-readable document-metadata vocabulary for the Machine Experience (MX) framework. It specifies the foundational fields that every MX-aware document — whether a markdown file, an HTML page, a YAML sidecar, or any other text-bearing artefact — must, should, or may declare.
 
-The core vocabulary is organised into three groups: **Zone 1 identity fields** (top-level document identity), **Zone 2 operational fields** (governance, classification, and distribution metadata under the `mx:` namespace), and **externally-aligned fields** (YAML keys whose semantics are owned by, or modelled after, established external vocabularies — Dublin Core, Schema.org, BCP 47, SPDX, RFC 3986). The relationship between MX and each external standard is recorded explicitly per field; see §7.
+The core vocabulary is organised into three zones and one supplementary group. **Zone 1a identity fields** (top-level document identity: title, description, author, dates, version) are required on every MX document. **Zone 1b OKF-reserved surface fields** (top-level: type, tags, and resource when applicable) are required on every MX document. MX is an OKF implementation; Zone 1b fields are present unconditionally so that any OKF-compliant tool reads an MX document without adaptation. **Zone 2 operational fields** (governance, classification, and distribution metadata under the `mx:` namespace) carry everything OKF does not define; an OKF consumer preserves the entire `mx:` block as one unknown key. **Externally-aligned fields** are YAML keys whose semantics are owned by, or modelled after, established external vocabularies — Dublin Core, Schema.org, BCP 47, SPDX, RFC 3986. The relationship between MX and each external standard is recorded explicitly per field; see §7.
 
 The cog file format is **not** described here. Cogs are an optional layer on top of MX, covered by the MX Cogs note in the same draft set. A document can carry MX metadata without ever being a cog.
 
@@ -331,7 +331,8 @@ This note is a draft authored by Tom Cranstoun and offered to The Gathering for 
 
 ### 3.1 In scope
 
-- **Zone 1 identity fields** — top-level document identity (title, description, author, dates, version)
+- **Zone 1a identity fields** — top-level document identity (title, description, author, dates, version)
+- **Zone 1b OKF-reserved surface fields** — top-level fields present on every MX document. MX is an OKF implementation; these fields are required unconditionally so any OKF-compliant tool reads MX files without adaptation: `type` (MUST, carries MX content-type vocabulary), `tags` (MUST, for discovery), `resource` (MUST when the document describes a specific external asset; absent for abstract concepts)
 - **Zone 2 core operational fields** — classification, governance, and distribution metadata
 - **Externally-aligned fields** — fields where MX provides a YAML key whose value semantics are owned by, or modelled after, an established external vocabulary (§7)
 - **The conformance level framework** — Level 1/2/3 definitions
@@ -353,47 +354,51 @@ All field names in this note use camelCase, follow spelling-neutral forms (e.g. 
 
 ---
 
-## 4. The two-zone frontmatter model
+## 4. The three-zone frontmatter model
 
-MX metadata in YAML frontmatter is organised into two zones. **Zone 1** (top-level) carries document identity fields. **Zone 2** (under the `mx:` object) carries MX-operational fields. **Externally-aligned fields** are YAML keys whose value semantics are owned by, or modelled after, an established external vocabulary; the inventory and the alignment relationships are in §7, and the fields otherwise behave as Zone 1 or Zone 2 depending on which zone the field declaration places them in.
+MX metadata in YAML frontmatter is organised into three zones.
 
-**Zone 1 example:**
+**Zone 1a** (top-level) carries document identity fields: `title`, `description`, `author`, `created`, `modified`, `version`. These are required on every MX document.
+
+**Zone 1b** (top-level) carries the OKF-reserved surface: `type` (required), `tags` (required), and `resource` (required when the document describes a specific external asset; absent for abstract concepts). MX is an OKF implementation. These fields are present unconditionally so that any external tooling built to read OKF files reads an MX document without adaptation. `type` carries the content-type vocabulary. `tags` carries discovery keywords. `resource` carries the singular URI of the external asset the document describes — distinct from `mx.refersToExternal` (plural citations). An OKF consumer reading an MX file treats the entire `mx:` block as one unknown preserved key, which is OKF-conformant. One field, one zone, no duplicate. The OKF `timestamp` field is satisfied by `modified` and derived at export time; it is never stored in source frontmatter.
+
+**Zone 2** (under the `mx:` object) carries everything OKF does not define: lifecycle fields (`status`, `stability`), governance fields (`canonicalUri`, `license`, `audience`), the typed relation graph (`buildsOn`, `refersTo`, `relatedTo`, `refersToExternal`), and all MX extensions. An OKF consumer preserves the entire `mx:` object as one unknown key; it neither reads nor rejects it.
+
+**Externally-aligned fields** are YAML keys whose value semantics are owned by, or modelled after, an established external vocabulary; the inventory and the alignment relationships are in §7, and the fields otherwise behave as Zone 1a, Zone 1b, or Zone 2 depending on which zone the field declaration places them in.
+
+**Three-zone example:**
 
 ```yaml
 ---
+# Zone 1a — identity
 title: "Document Title"
 description: "Brief summary for search engines and machines"
 author: "Author Name"
 created: 2026-04-02
 modified: 2026-04-16
 version: "1.0"
----
-```
 
-**Zone 2 example:**
+# Zone 1b — OKF reserved surface
+type: guide
+tags: [metadata, example]
 
-```yaml
----
-title: "Document Title"
-description: "Brief summary"
-author: "Author Name"
-created: 2026-04-02
-modified: 2026-04-16
-version: "1.0"
-
+# Zone 2 — MX operational
 mx:
   status: active
-  contentType: guide
-  tags: [metadata, example]
   audience: [humans]
+  canonicalUri: https://example.com/docs/title
 ---
 ```
 
-Implementations MUST NOT place Zone 1 fields inside the `mx:` object. Implementations MUST NOT place Zone 2 fields at the top level.
+**Dual-conformance:** the same frontmatter block is simultaneously valid OKF (because `type`, `title`, `description`, `tags` are at the top level where OKF looks for them) and full MX (because the `mx:` block carries everything OKF does not define, and OKF preserves it as one unknown key).
+
+Implementations MUST NOT place Zone 1a or Zone 1b fields inside the `mx:` object. Implementations MUST NOT place Zone 2 fields at the top level. No fact may be carried under two field names.
+
+**OKF field alignment reference:** Open Knowledge Format v0.1, [GoogleCloudPlatform/knowledge-catalog](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md). The load-bearing rule: `Producers MAY include any additional keys. Consumers SHOULD preserve unknown keys when round-tripping and SHOULD NOT reject documents with unrecognized fields.`
 
 ---
 
-## 5. Zone 1 identity fields
+## 5. Zone 1a identity fields
 
 ### 5.1 `title`
 
@@ -541,6 +546,79 @@ validatesAgainst:
 
 ---
 
+## 5b. Zone 1b OKF-reserved surface fields
+
+The three fields in this section sit at the top level of the YAML frontmatter block (Zone 1b). They are defined by the Open Knowledge Format (OKF) as the six reserved fields OKF consumers read first. MX adopts five of them directly and satisfies the sixth (`timestamp`) by derivation from `modified` at export time. The adopt-don't-reinvent rule applies: these are OKF fields MX carries, not MX synonyms. No equivalent field exists under the `mx:` namespace; placing them there is a conformance failure.
+
+### 5b.1 `type`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 1b (top-level, OKF-reserved) |
+| **Conformance** | MUST (Level 1) |
+| **OKF field** | `type` (required in OKF) |
+| **Replaces** | `mx.contentType` (retiring synonym; see note) |
+
+The kind of concept this document represents. Carries the MX content-type vocabulary at the top level so OKF consumers can route, filter, and present the document without reading the `mx:` block. Common values: `info-doc`, `action-doc`, `blog-post`, `specification`, `guide`, `report`, `field-dictionary`, `contact`, `direct-message`, `folder-metadata`.
+
+```yaml
+type: info-doc
+```
+
+**Retiring synonym:** `mx.contentType` is the pre-OKF location for this field. It is accepted during a migration window but MUST be promoted to top-level `type` for OKF conformance. After migration, `mx.contentType` is absent from conformant documents.
+
+---
+
+### 5b.2 `tags`
+
+| Property | Value |
+|----------|-------|
+| **Type** | array of strings |
+| **Zone** | 1b (top-level, OKF-reserved) |
+| **Conformance** | MUST (Level 1) |
+| **OKF field** | `tags` (optional in OKF) |
+| **Replaces** | `mx.tags` (retiring synonym) |
+
+Discovery keywords. Array of lowercase strings for search, filtering, and agent matching. Aligns with Schema.org `keywords`.
+
+```yaml
+tags: [metadata, yaml, frontmatter]
+```
+
+**Retiring synonym:** `mx.tags` is the pre-OKF location. Promote to top-level `tags` for conformance.
+
+---
+
+### 5b.3 `resource`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string (URI) |
+| **Zone** | 1b (top-level, OKF-reserved) |
+| **Conformance** | MUST when the document describes a specific external asset; absent for abstract concepts |
+| **OKF field** | `resource` (optional in OKF) |
+
+A URI that uniquely identifies the underlying external asset this document describes. Present only when the document describes a specific external object (a table, a dataset, an API endpoint). Absent for abstract concepts (playbooks, runbooks, policies). **Semantically distinct from `mx.refersToExternal`**: `resource` names the one thing this document is *about*; `refersToExternal` is the set of external sources the document *cites*.
+
+```yaml
+resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/ga4_obfuscated
+```
+
+---
+
+### 5b.4 `timestamp` (derived on export; not stored in source)
+
+| Property | Value |
+|----------|-------|
+| **OKF field** | `timestamp` (optional in OKF) |
+| **MX equivalent** | `modified` (Zone 1a) |
+| **Storage rule** | MUST NOT be stored in source frontmatter |
+
+OKF's optional `timestamp` field (ISO 8601 datetime of last meaningful change) is satisfied by `modified`. MX keeps the two-date model (`created` + `modified`) which is richer; `timestamp` is derived from `modified` at the export boundary when a pure-OKF view is needed. Storing both `modified` and a `timestamp` with the same value in source frontmatter violates the no-duplicates rule.
+
+---
+
 ## 6. Zone 2 core operational fields
 
 ### 6.1 `status`
@@ -552,18 +630,18 @@ validatesAgainst:
 | **Conformance** | SHOULD (Level 2) |
 | **Valid values** | draft, active, published, deprecated, archived, unknown, proposed, accepted, rejected, superseded, pending, review, approved, planning, open, closed, sent, canonical |
 
-Lifecycle state. The valid values span three lifecycles — document, decision-record, and workflow — and the value's meaning depends on the document's `contentType` (§6.8). The matrix in §6.1.1 governs which values are valid for which content types; an out-of-matrix value is a conformance failure.
+Lifecycle state. The valid values span three lifecycles — document, decision-record, and workflow — and the value's meaning depends on the document's `type` (Zone 1b, §5b.1) or, during the migration window, `mx.contentType` (§6.8 retiring synonym). The matrix in §6.1.1 governs which values are valid for which content types; an out-of-matrix value is a conformance failure.
 
 ```yaml
 mx:
   status: active
 ```
 
-#### 6.1.1 Valid `status` by `contentType` (Normative)
+#### 6.1.1 Valid `status` by `type` (Normative)
 
-A document MUST declare a `status` value drawn from the row matching its `contentType`. The matrix below is normative; a `status` value that does not appear in the row for the document's declared `contentType` is a conformance failure.
+A document MUST declare a `status` value drawn from the row matching its `type` (or `mx.contentType` during the migration window). The matrix below is normative; a `status` value that does not appear in the row for the document's declared type is a conformance failure.
 
-| `contentType`            | Valid `status` values                                                |
+| `type`            | Valid `status` values                                                |
 |--------------------------|----------------------------------------------------------------------|
 | `info-doc`, `manuscript`, `guide`, `reference`, `report`, `field-dictionary`, `standards-alignment` | draft, active, published, archived, canonical, unknown |
 | `specification`, `cog`, `cogs`              | draft, active, canonical, deprecated, archived, unknown              |
@@ -573,10 +651,10 @@ A document MUST declare a `status` value drawn from the row matching its `conten
 
 Notes on the matrix:
 
-- A document whose `contentType` does not appear in the matrix MAY use any value in the document lifecycle row (`draft`, `active`, `published`, `archived`, `canonical`, `unknown`) as a default; sister notes adding new content types SHOULD extend the matrix in lockstep.
+- A document whose `type` does not appear in the matrix MAY use any value in the document lifecycle row (`draft`, `active`, `published`, `archived`, `canonical`, `unknown`) as a default; sister notes adding new content types SHOULD extend the matrix in lockstep.
 - `unknown` is a conformance-safe placeholder for documents whose lifecycle is genuinely undetermined; tools SHOULD warn when it persists past initial authorship.
 - `canonical` denotes an authoritative reference document — the present-tense source of truth for its subject. Distinct from `published` (a release point) and `active` (currently maintained).
-- A document that legitimately spans lifecycles (rare — for example, a decision-record blog post) MUST pick a single `contentType` and draw its `status` from that lifecycle's row.
+- A document that legitimately spans lifecycles (rare — for example, a decision-record blog post) MUST pick a single `type` value and draw its `status` from that lifecycle's row.
 
 ---
 
@@ -623,7 +701,7 @@ mx:
 | **Zone** | 2 (mx:) |
 | **Conformance** | MAY (Level 3) |
 
-Why this document exists. Distinct from `contentType` (§6.8), which classifies what a document is, not why it exists. The field accepts two shapes:
+Why this document exists. Distinct from `type` (§5b.1), which classifies what a document is, not why it exists. The field accepts two shapes:
 
 - **String form** — a single value drawn from the controlled high-level vocabulary below. Sufficient for most documents.
 - **Object form** — `{ kind: <controlled value>, subPurpose: "<free-form>" }` — for documents whose purpose has a recognisable major axis but a specific genre that the controlled vocabulary does not name (a position paper, a press release, a regulatory filing, a contract, a case study).
@@ -750,20 +828,26 @@ mx:
 
 ---
 
-### 6.8 `contentType`
+### 6.8 `contentType` *(retiring synonym — use top-level `type`)*
 
 | Property | Value |
 |----------|-------|
 | **Type** | string |
-| **Zone** | 2 (mx:) |
-| **Conformance** | SHOULD (Level 2) |
+| **Zone** | 2 (mx:) — retiring; canonical home is Zone 1b top-level `type` |
+| **Conformance** | Accepted during migration window; promote to `type` for OKF conformance |
 
-Machine-readable content type classification. Free-form (not constrained to an enumeration) to allow domain-specific content types. Common values: `specification`, `guide`, `reference`, `info-doc`, `identity`, `report`, `field-dictionary`, `standards-alignment`.
+Machine-readable content type classification. This field is the pre-OKF location for content-type information. **New documents SHOULD declare `type:` at the top level (Zone 1b, §5b.1) instead.** The vocabulary and valid values are the same.
 
 ```yaml
+# Pre-OKF (retiring synonym — still accepted during migration window):
 mx:
   contentType: field-dictionary
+
+# OKF-conformant (canonical):
+type: field-dictionary
 ```
+
+During the adoption window, implementations SHOULD accept `mx.contentType` and report it as a retiring synonym. After migration, `mx.contentType` is absent from conformant documents and the conformance gate rejects it.
 
 ---
 
@@ -1065,10 +1149,12 @@ For carriers that support XMP metadata (PDFs, audio, video), the same fields sho
 | `version` | 1 | — | SHOULD | — |
 | `schema` | 1 | — | — | MAY |
 | `validatesAgainst` | 1 | — | — | MAY |
+| `type` | 1b | — | SHOULD | — |
+| `tags` | 1b | — | SHOULD | — |
+| `resource` | 1b | — | — | MAY |
 | `status` | 2 | — | SHOULD | — |
-| `contentType` | 2 | — | SHOULD | — |
+| `contentType` | 2 (retiring) | — | — | — |
 | `runbook` | 2 | — | SHOULD | — |
-| `tags` | 2 | — | — | MAY |
 | `audience` | 2 | — | — | MAY |
 | `purpose` | 2 | — | — | MAY |
 | `license` | 2 | — | — | MAY |
@@ -1143,9 +1229,9 @@ originator: "Tom Cranstoun"
 created: 2026-04-15
 modified: 2026-05-07
 version: "1.0"
+type: info-doc
 mx:
   status: published
-  contentType: info-doc
   runbook: "Read top to bottom; the table in section 3 carries the punch list."
   canonicalUri: https://mx.allabout.network/blog/level-2-in-a-fortnight
   summary: "A retrofit playbook from a real adoption: which fields landed first, which failed, and why."
@@ -1170,15 +1256,15 @@ created: 2026-05-07
 modified: 2026-05-07
 version: "1.0"
 schema: ./schemas/mx-field-entry.v1.yaml
+type: field-dictionary
+tags: [mx-core, field, identity]
 mx:
   status: canonical
-  contentType: field-dictionary
   runbook: "The field-dictionary entry for originator. See §5.3 of the MX Core Metadata note for the full definition."
   canonicalUri: https://mx.allabout.network/fields/originator
   summary: "Immutable Zone 1 field naming the document's original creator."
   conformsTo: [https://mx.allabout.network/cog.html]
   trainingDataPolicy: "Permitted with attribution."
-  tags: [mx-core, field, identity]
   audience: [humans, machines]
   purpose:
     kind: reference
@@ -1231,8 +1317,8 @@ mx:
 
 ```yaml
 # WRONG — `closed` is not a valid status for a blog post
+type: info-doc
 mx:
-  contentType: info-doc
   status: closed
 ```
 
@@ -1252,9 +1338,9 @@ Externally-aligned fields with `Owns semantics: external` (§7.1) defer entirely
 
 ```yaml
 # WRONG — Level 2 requires canonicalUri, summary, conformsTo, trainingDataPolicy
+type: info-doc
 mx:
   status: published
-  contentType: info-doc
   runbook: "..."
 ```
 
@@ -1302,7 +1388,7 @@ This note specifies:
 - **Document identity field semantics.** What `title`, `description`, `author`, `created`, `modified`, and `version` mean is governed by the MX Core Metadata note. Cogs inherit these definitions; this note does not redefine them.
 - **Namespace policy.** The `x-mx-` and `x-mx-p-` prefix conventions used by some cog fields are governed by the MX Extensions note.
 
-The two-zone YAML frontmatter model is carried over from MX Core: Zone 1 (top-level) holds document identity fields; Zone 2 (under the `mx:` object) holds operational fields. Cog structural fields live in Zone 2 unless explicitly noted as top-level (`cogHeader`, `contractFields`, `metadataFields`).
+The three-zone YAML frontmatter model is carried over from MX Core: Zone 1a (top-level) holds document identity fields; Zone 1b (top-level) holds OKF-reserved surface fields (`type`, `tags`, `resource`); Zone 2 (under the `mx:` object) holds MX-operational fields. Cog structural fields live in Zone 2 unless explicitly noted as top-level (`cogHeader`, `contractFields`, `metadataFields`). An OKF consumer reading a cog file treats the entire `mx:` block as one unknown preserved key — this is the dual-conformance property that makes a cog simultaneously valid OKF and full MX.
 
 ---
 
@@ -1398,8 +1484,8 @@ An HTML carrier MAY include the source markdown's YAML frontmatter verbatim as a
   author: "..."
   created: 2026-01-01
   modified: 2026-01-01
+  type: info-doc
   mx:
-    contentType: info-doc
     cogUrn: cog:web:example.com:01JC8X7K2N4P5Q6R7S8T9V0W1Y
     partOf: example-collection
   ---
@@ -1490,22 +1576,32 @@ Implementations SHOULD:
 
 The following fields define a cog's place in a registry, its dependencies, and its operational contract. All cog structural fields reside in Zone 2 (the `mx:` object) unless explicitly noted as top-level.
 
+### Declaring dependencies — explicit when applicable, standalone otherwise
+
+A cog that stands on another cog — by being part of it, building on it, requiring it, inheriting from it, including it, or referring to it — MUST declare the relationship in the frontmatter using the appropriate relationship field (`partOf`, `buildsOn`, `dependencies`, `refersTo`, `inherits`, plus any include-style field a profile declares). Inheritance and inclusion count as dependencies for this purpose: any field that names another cog the current cog stands on carries the rule.
+
+A **standalone cog** is one that names no other cog. It declares `dependencies: []` to make the absence explicit (the visible standalone marker) and carries no other relationship fields. The standalone case is the explicit converse of the MUST rule, not a separate category: every cog either lists what it depends on, or declares that it depends on nothing.
+
+The rule applies to dependencies the cog itself relies on. Cogs the current cog publishes about, comments on, or supersedes are not dependencies and belong in their own fields (`supersedes`, `replaces`, vendor-namespaced extensions). The relationship fields named above are the canonical declarations a runtime, a registry, or a reader reads to know what context the cog needs to make sense.
+
 ### 6.1 `partOf`
 
 | Property | Value |
 |----------|-------|
-| **Type** | string |
+| **Type** | array of strings (a bare string is accepted as a single-element array) |
 | **Zone** | 2 (mx:) |
 | **Conformance** | MUST (Tier A) for cogs |
 
-**Definition:** Parent collection, suite, or initiative the cog belongs to. Names a registry namespace, a series, or a parent artefact.
+**Definition:** Parent collection(s), suite(s), or initiative(s) the cog belongs to. Each value names a registry namespace, a series, or a parent artefact. Because it is an array, a cog can belong to more than one set at once - so a query for the members of any one set returns every cog that declares it, even when the cog also belongs to others.
 
 **Example:**
 
 ```yaml
 mx:
-  partOf: mx-the-gathering
+  partOf: [mx-the-gathering, mx-audit]
 ```
+
+A single membership may be written as a bare string (`partOf: mx-the-gathering`); a conforming reader treats it as a one-element array.
 
 ### 6.2 `buildsOn`
 
@@ -1554,7 +1650,7 @@ mx:
 
 - A cog MUST NOT be considered functional if any of its `dependencies` entries are missing or unresolvable for their declared `kind`.
 - The recommended `kind` is `cog`. Runtime, package, and external deps SHOULD usually live in their proper carrier (`package.json`, the cog's runbook, an external manifest); the non-cog kinds in this field are escape hatches for cases where inline declaration is genuinely the right home.
-- A cog declaring no dependencies MAY omit this field or declare an empty array (`dependencies: []`); both are conformant.
+- A cog with no dependencies MUST declare `dependencies: []` to make the standalone state visible — see the *Declaring dependencies* rule at the head of §6. Omitting the field is the older form and is being retired.
 - Distinct from `buildsOn` (soft context) and `refersTo` (informational link).
 
 ### 6.4 `refersTo`
@@ -1593,6 +1689,8 @@ A cog declaring `cogType: cogs` MUST also identify the community that governs it
 The `cogs` classification is intended for cogs that act as community-ratified reference definitions — field dictionaries, terminology registers, governance policies, conformance rubrics — where vendor capture would defeat the purpose. A `cogs` cog has no implied license; the cog's own `license` field still applies.
 
 #### 6.5.2 Action cog discriminator (`cogType: action.<kind>` and `actionType`)
+
+The cog specification draws a sharp axis through every action cog: it MAY be **deterministic**, **inference-driven**, or **both**. The discriminator named in this subsection is how the cog declares which. A deterministic cog carries fixed instructions a runtime executes the same way every time; an inference-driven cog carries instructions a language-model runtime reads and performs using its own reasoning; a both-form cog carries each in the role each is fit for. A consumer that knows this axis up front can choose to accept, reject, or sandbox the cog without inspecting the body. A consumer that does not know it has no way to tell whether the cog will run a shell command or invite a language model to act on its behalf — two operationally very different requests.
 
 An action cog MUST declare its cognitive class so a consumer (human or agent) knows what kind of execution is involved without inspecting the body. Two forms are permitted, both expressing the same meaning:
 
@@ -1966,6 +2064,8 @@ All cog structural fields live in Zone 2 (§6) unless explicitly noted as top-le
 
 *End of MX Cogs note draft.*
 
+<!-- cog-spec-sync: 2026-07-01-a -->
+
 ---
 
 ## MX Extensions note
@@ -2084,9 +2184,9 @@ Implementations MUST NOT add a prefix to standard fields. A field that is part o
 **Example (correct):**
 
 ```yaml
+type: guide
 mx:
   status: active
-  contentType: guide
 ```
 
 **Example (incorrect — prefix pollution):**
@@ -2094,7 +2194,7 @@ mx:
 ```yaml
 mx:
   x-mx-status: active     # WRONG — status is a standard field
-  mx-contentType: guide    # WRONG — contentType is a standard field
+  mx-type: guide           # WRONG — type is a Zone 1b field; no prefix, no mx: block
 ```
 
 ### 6.3 Public extension fields (`x-mx-`)
@@ -2156,13 +2256,14 @@ The table below summarises the per-carrier conventions. The **normative form** o
 | Context | Convention | Conversion from YAML camelCase | Example field | Example syntax |
 |---------|-----------|--------------------------------|---------------|----------------|
 | YAML | camelCase | *(canonical)* | `buildsOn` | `buildsOn: [cog-unified-spec]` |
-| HTML | kebab-case with `mx:` prefix | camelCase → kebab-case, prepend `mx:` | `mx:content-type` | `<meta name="mx:content-type" content="guide">` |
+| YAML (Zone 1b) | camelCase, top-level, no prefix | OKF-reserved field at top level | `type` | `type: guide` |
+| HTML | Zone 1b: bare kebab-case; Zone 2: kebab-case with `mx:` prefix | OKF fields: no prefix; operational: prepend `mx:` | `type` / `mx:status` | `<meta name="type" content="guide">` / `<meta name="mx:status" content="active">` |
 | JSDoc | kebab-case with `@mx:` tag | camelCase → kebab-case, prepend `@mx:` | `@mx:runtime` | `@mx:runtime node` |
 | CSS | kebab-case with `@mx:` comment | camelCase → kebab-case, prepend `@mx:` | `@mx:type` | `/* @mx:type utility */` |
-| Shell | camelCase in `# key: value` | none — preserve camelCase | `contentType` | `# contentType: guide` |
-| XMP | `mx:` namespace prefix, case preserved | prepend `mx:` | `mx:status` | `<mx:status>active</mx:status>` |
-| Sidecar | camelCase in YAML | none — preserve camelCase | `contentType` | `contentType: guide` |
-| SQL | camelCase in `-- @mx` block | none — preserve camelCase | `contentType` | `-- @mx contentType: guide` |
+| Shell | camelCase in `# key: value` | none — preserve camelCase | `type` | `# type: guide` |
+| XMP | `mx:` namespace prefix, case preserved | prepend `mx:` | `mx:type` | `<mx:type>guide</mx:type>` |
+| Sidecar | camelCase in YAML (three-zone) | Zone 1b fields at top level | `type` | `type: guide` |
+| SQL | camelCase in `-- @mx` block | none — preserve camelCase | `type` | `-- @mx type: guide` |
 
 For HTML in particular: the four MUST-at-Level-2 fields from MX Core Metadata §7a (`canonicalUri`, `summary`, `conformsTo`, `trainingDataPolicy`) MUST be present in HTML carriers as the kebab-case `mx:` `<meta>` tags `mx:canonical-uri`, `mx:summary`, `mx:conforms-to`, `mx:training-data-policy`. The carrier-formats note defines the binding form and worked examples.
 
@@ -2172,9 +2273,9 @@ Extension fields (`x-mx-` and `x-mx-p-`) already use kebab-case. In non-YAML con
 
 | Context | Standard field example | Extension field example |
 |---------|----------------------|------------------------|
-| YAML | `contentType: guide` | `x-mx-mount-type: personal` |
-| HTML | `<meta name="mx:content-type">` | `<meta name="mx:x-mx-mount-type">` |
-| JSDoc | `@mx:content-type guide` | `@mx:x-mx-mount-type personal` |
+| YAML | `type: guide` (Zone 1b) | `x-mx-mount-type: personal` |
+| HTML | `<meta name="type" content="guide">` | `<meta name="mx:x-mx-mount-type">` |
+| JSDoc | `@okf-type guide` | `@mx:x-mx-mount-type personal` |
 
 ---
 
@@ -2683,6 +2784,41 @@ mx:
 
 - The `prompt` sub-field SHOULD contain instructions specific enough to produce a faithful reconstruction.
 - The `source` sub-field identifies the input data required for regeneration.
+
+---
+
+### 5.7 `provenanceUri`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string (URL) |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Canonical URL of the document's AI-governance provenance record: the hosted account of the parties, the regulatory frameworks the record cites, and every recorded action in the chain. A consumer reads `provenanceUri`, fetches the named record, and walks the evidence without the chain embedded in the document itself.
+
+```yaml
+mx:
+  provenanceOrigin: ai-assisted
+  provenanceUri: "https://example.org/reports/q3.mxprov.json"
+```
+
+`provenanceUri` complements an embedded chain rather than replacing it. A carrier that can embed its provenance (a PDF XMP packet, a raster or SVG metadata block, an HTML script block) MAY carry a snapshot so the chain travels offline, AND declare `provenanceUri` so a consumer can reach the current, canonical record. When both are present, the embedded copy is authoritative offline and the URL names the version to check against. This mirrors `canonicalUri`: the file carries what it can and names where the canonical form lives.
+
+---
+
+### 5.8 The hosted provenance record (`.mxprov.json`)
+
+An implementation MAY publish a document's provenance chain as a standalone record served beside the document and addressed by `provenanceUri`. This note RECOMMENDS the file-name suffix `.mxprov.json` for such a record, so a consumer can recognise it by extension and a server can assign it a stable content type.
+
+The record is JSON. Its body is the provenance chain: a `schemaVersion`, the accountable `parties`, the `frameworks` the record attests to, a `responsiblePerson`, and an ordered list of `steps`, each recording one action (agent, outcome, inputs). The shape is the same one an embedded chain carries; the `.mxprov.json` record is that chain lifted out of the file and hosted on its own.
+
+```
+example.org/reports/q3.html          the document
+example.org/reports/q3.mxprov.json   its provenance record, named by q3.html's provenanceUri
+```
+
+A consumer that trusts the origin MAY fetch the `.mxprov.json` record named by `provenanceUri` to obtain the current chain. Fetching the record is a read of a public URL the document itself names; it discloses nothing about the consumer's copy of the document.
 
 ---
 
@@ -3328,9 +3464,9 @@ originator: "Tom Cranstoun"
 created: 2026-05-07
 modified: 2026-05-07
 version: "1.0"
+type: info-doc
 mx:
   status: published
-  contentType: info-doc
   canonicalUri: https://example.org/blog/eu-ai-act-day-one
   summary: "What the EU AI Act changes on day one for general-purpose AI providers and users."
   conformsTo: [https://mx.allabout.network/cog.html]
@@ -3449,7 +3585,7 @@ This note defines three conformance levels (modelled on the [WCAG 2.1](https://w
 | Level | Name | Requirement |
 |-------|------|-------------|
 | Level 1 | **MX Core** | Universal identity fields present (`title`, `author`, `created`, `description`); the carrier syntax for the file's format is used correctly. |
-| Level 2 | **MX Standard** | Adds Level 1 plus the operational fields applicable to the format (`status`, `contentType`, `license`); for non-YAML carriers, the `mx:*` identity fields in §4 are used where applicable. |
+| Level 1 / Level 2 | Zone 1b OKF surface MUST be present at all levels: `type`, `tags`, and `resource` (when applicable) are required unconditionally. MX is an OKF implementation; these fields are not optional extras — they are the OKF layer every external tool reads. Zone 2 operational fields (`status`, `license`, etc.) are added per the MX conformance ladder. |
 | Level 3 | **MX Complete** | Adds Level 2 plus the code-specific provenance fields in §5 where they apply, and any `MAY`-level identity fields. |
 
 A document claiming conformance at a given level MUST satisfy all requirements at that level and all lower levels.
@@ -3492,7 +3628,7 @@ This section defines how each supported file format carries MX metadata.
 | **Field naming** | camelCase (operational fields under `mx:` object) |
 | **Conformance** | MUST (Level 1) for all markdown-based MX documents |
 
-The primary carrier format. All MX-aware markdown documents carry metadata in YAML frontmatter using a two-zone model: top-level fields for document identity (title, description, author, dates, version) and the `mx:` object for MX-operational fields. Implementations MUST NOT place identity fields inside the `mx:` object, and MUST NOT place operational fields at the top level.
+The primary carrier format. All MX-aware markdown documents carry metadata in YAML frontmatter using a three-zone model. MX is an OKF implementation; Zone 1b fields are required unconditionally so any OKF tool reads MX files without adaptation: Zone 1a (top-level) for document identity (`title`, `description`, `author`, `created`, `modified`, `version`); Zone 1b (top-level) for the OKF-reserved surface (`type` MUST, `tags` MUST, `resource` MUST when describing an external asset); Zone 2 (under the `mx:` object) for MX-operational fields. Implementations MUST NOT place Zone 1a or Zone 1b fields inside the `mx:` object, and MUST NOT place Zone 2 fields at the top level.
 
 **Example:**
 
@@ -3504,15 +3640,16 @@ author: "Author Name"
 created: 2026-04-02
 modified: 2026-04-16
 version: "1.0"
+type: guide
+tags: [metadata, example]
 
 mx:
   status: active
-  contentType: guide
-  tags: [metadata, example]
+  canonicalUri: https://example.com/docs/title
 ---
 ```
 
-Extension fields appear inside the `mx:` object alongside standard operational fields.
+Extension fields appear inside the `mx:` object alongside standard operational fields. OKF-reserved fields (`type`, `tags`, `resource`) remain at the top level.
 
 ---
 
@@ -3658,8 +3795,8 @@ Image files carry MX identity metadata in EXIF/XMP metadata blocks using the `mx
 
 ```xml
 <rdf:Description xmlns:mx="https://allabout.network/ns/mx/1.0">
+  <mx:type>illustration</mx:type>
   <mx:status>active</mx:status>
-  <mx:contentType>illustration</mx:contentType>
 </rdf:Description>
 ```
 
@@ -3687,8 +3824,8 @@ Shell scripts carry MX metadata in a comment block using `# ---` delimiters, wit
 # title: "Build and deploy"
 # description: "Builds site artefacts and deploys to Cloudflare"
 # author: "Tom Cranstoun"
+# type: script
 # status: active
-# contentType: script
 # ---
 ```
 
@@ -3719,14 +3856,14 @@ description: "Full-width hero image for the landing page"
 author: "Tom Cranstoun"
 created: 2026-04-02
 modified: 2026-04-16
+type: image
+tags: [hero, banner, landing]
 
 mx:
   status: active
-  contentType: image
-  tags: [hero, banner, landing]
 ```
 
-The sidecar file MUST use the two-zone model and the file name MUST match the asset file name with `.mx.yaml` appended.
+The sidecar file MUST use the three-zone model and the file name MUST match the asset file name with `.mx.yaml` appended.
 
 ---
 
@@ -3749,12 +3886,12 @@ description: "Central hub for Machine Experience development"
 author: "Tom Cranstoun"
 created: 2026-01-15
 modified: 2026-04-16
+type: repository
+tags: [hub, mx, repository]
 
 mx:
   status: active
-  contentType: repository
   domain: machine-experience
-  tags: [hub, mx, repository]
 ```
 
 ---
@@ -3779,9 +3916,9 @@ title: "Customer database schema"
 description: "Schema metadata for the customer CRM database"
 author: "Tom Cranstoun"
 
+type: database-schema
 mx:
   status: active
-  contentType: database-schema
   domain: crm
 ```
 
@@ -3791,8 +3928,8 @@ mx:
 -- @mx
 -- title: Customer contacts table
 -- description: Primary contact records for CRM
+-- type: database-table
 -- status: active
--- contentType: database-table
 -- @mx:end
 CREATE TABLE contacts (
     id INTEGER PRIMARY KEY,
@@ -3829,7 +3966,7 @@ When a field is declared in two or more forms on the same artefact, the values M
 
 The following fields provide MX identity and classification metadata in carrier formats that do not use YAML frontmatter (HTML, JavaScript, CSS, image XMP). All fields use the `mx:` namespace prefix in their respective carrier contexts.
 
-When a field has a YAML equivalent (e.g. `title`, `contentType`), the YAML form is used in YAML-bearing carriers and the `mx:*` form is used elsewhere. The two are aliases for the same semantic field.
+When a field has a YAML equivalent (e.g. `title`, `type`, `tags`), the YAML form is used in YAML-bearing carriers and the `mx:*` form is used elsewhere. The two are aliases for the same semantic field. OKF-reserved Zone 1b fields (`type`, `tags`, `resource`) use no `mx:` prefix in non-YAML carriers — they are expressed as bare attributes following their OKF names.
 
 ### 4.1 `mx:name`
 
@@ -3875,10 +4012,10 @@ Version string, equivalent to `version` in YAML.
 | **Profile** | html |
 | **Conformance** | SHOULD (Level 2) |
 
-Domain type classification, equivalent to `contentType` in YAML. The shorter name `type` is used in HTML to follow web conventions.
+Document type classification. Carries the same vocabulary as the Zone 1b `type` field in YAML frontmatter. In HTML, OKF-reserved Zone 1b fields use no `mx:` prefix — the bare `type` name is used directly, matching their top-level YAML position.
 
 ```html
-<meta name="mx:type" content="guide">
+<meta name="type" content="guide">
 ```
 
 ### 4.4 `mx:purpose`
@@ -5207,9 +5344,9 @@ thresholds:
 approvers:
   - finance-lead
   - cfo
+type: cog
 mx:
   status: published
-  contentType: cog
   canonicalUri: https://example.org/cogs/approve-invoices.v1
   summary: "Approve invoices under 1000 automatically; escalate above."
   conformsTo: [https://mx.allabout.network/cog.html]
@@ -5908,7 +6045,7 @@ A trust layer does not verify attestations. It produces them on submission and s
 
 ### 4.2 Attestation record fields
 
-An attestation record is itself a cog. It declares `contentType: attestation` in its `mx:` frontmatter (per the **MX Core Metadata note**). It carries `cogUrn` (the universal identifier of the attestation record itself, in the trust layer's namespace) and `schemaVersion` per the **MX Cogs note** §6.5.3 and §6.5.4. This note specifies the attestation-specific top-level fields below.
+An attestation record is itself a cog. It declares `type: attestation` at the top level (Zone 1b, per the **MX Core Metadata note**). It carries `cogUrn` (the universal identifier of the attestation record itself, in the trust layer's namespace) and `schemaVersion` per the **MX Cogs note** §6.5.3 and §6.5.4. This note specifies the attestation-specific top-level fields below.
 
 | Field | Semantics |
 |-------|-----------|
@@ -6110,11 +6247,11 @@ The record is carrier-neutral. The fields and their semantics are what constitut
 
 ### 4.2 Required fields
 
-A decision record declares `contentType: decision` in its `mx:` frontmatter. The following fields are REQUIRED for a valid decision record regardless of carrier. Field names follow `camelCase`.
+A decision record declares `type: decision` at the top level (Zone 1b). The following fields are REQUIRED for a valid decision record regardless of carrier. Field names follow `camelCase`.
 
 | Field | Type | Semantics |
 |-------|------|-----------|
-| `contentType` | string | Fixed value: `decision`. |
+| `type` | string | Fixed value: `decision`. Top-level (Zone 1b). |
 | `schemaVersion` | string | Semver of the decision-record schema this record conforms to (per **MX Cogs note** §6.5.4). |
 | `cogUrn` | string | Universal identifier in the form `cog:<operator-namespace>:<local-id>` (per **MX Cogs note** §6.5.3). |
 | `decisionId` | string | Operator's internal reference to the decision event; time-sortable. ULIDs are RECOMMENDED. Usually equals the `<local-id>` portion of `cogUrn`. |
@@ -6192,8 +6329,8 @@ author: did:web:example-insurance.com
 created: 2026-05-15T10:32:17Z
 modified: 2026-05-15T10:32:17Z
 
+type: decision
 mx:
-  contentType: decision
   schemaVersion: 1.0
   cogUrn: cog:web:example-insurance.com:01JC8X7K2N4P5Q6R7S8T9V0W1Y
   decisionId: claim-2026-05-15-184729
@@ -6413,11 +6550,11 @@ A policy record records the **text** and **structure** of a policy. It does not 
 
 ### 4.2 Required fields
 
-A policy record declares `contentType: policy` in its `mx:` frontmatter. The following fields are REQUIRED for a valid policy record regardless of carrier. Field names follow `camelCase`.
+A policy record declares `type: policy` at the top level (Zone 1b). The following fields are REQUIRED for a valid policy record regardless of carrier. Field names follow `camelCase`.
 
 | Field | Type | Semantics |
 |-------|------|-----------|
-| `contentType` | string | Fixed value: `policy`. |
+| `type` | string | Fixed value: `policy`. Top-level (Zone 1b). |
 | `schemaVersion` | string | Semver of the policy-record schema this record conforms to (per **MX Cogs note** §6.5.4). |
 | `cogUrn` | string | Universal identifier in the form `cog:<publisher-namespace>:<local-id>` (per **MX Cogs note** §6.5.3). For third-party renderings by The Gathering, the publisher namespace is typically `web:tg.community`. |
 | `policyId` | string | Publisher's internal reference to the policy; typically the `<local-id>` portion of `cogUrn`. Provides a short stable handle for human reference. |
@@ -6468,8 +6605,8 @@ author: did:web:digital-strategy.ec.europa.eu
 created: 2026-08-02
 modified: 2026-08-02
 
+type: policy
 mx:
-  contentType: policy
   schemaVersion: 1.0
   cogUrn: cog:web:tg.community:eu-ai-act-art-12
   policyId: eu-ai-act-art-12
@@ -6850,7 +6987,7 @@ A host MUST NOT serve different declarations at the root-level and well-known lo
 - The source markdown SHOULD be served with `Content-Type: text/markdown; charset=utf-8` per [RFC 7763](https://datatracker.ietf.org/doc/html/rfc7763).
 - The JSON record SHOULD be served with `Content-Type: application/json; charset=utf-8`. The media type `application/ai-usage-declaration+json` is reserved for a future revision once implementation experience justifies registration.
 - The human-readable HTML rendering SHOULD be served with `Content-Type: text/html; charset=utf-8`.
-- A PDF rendering SHOULD be served with `Content-Type: application/pdf` and SHOULD be tagged per [ISO 14289-1](https://www.iso.org/standard/64599.html) Level 2 (`pdfuaid:Part=1`) for accessibility.
+- A PDF rendering SHOULD be served with `Content-Type: application/pdf` and SHOULD be tagged per [ISO 14289-1](https://www.iso.org/standard/64599.html) (PDF/UA-1, `pdfuaid:part=1`) for accessibility.
 
 ### 5.3 In-page discovery
 

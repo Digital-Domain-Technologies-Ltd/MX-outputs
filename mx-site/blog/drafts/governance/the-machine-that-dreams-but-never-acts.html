@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: The Machine That Dreams But Never Acts
+description: "A self-improving AI system sounds like the thing everyone fears. Ours improves by dreaming over its own work logs, and the safety is structural. It mines its own mistakes but cannot change a single rule. A human reads the findings and decides what becomes permanent. Self-improvement without autonomy, and why never acting is the feature."
+author: Tom Cranstoun
+created: "2026-06-23"
+modified: "2026-06-23"
+version: "1.0"
+type: blog-post
+tags: [governance, ai-governance, human-in-command, dream, local-llm, determinism, self-improvement, autonomy]
+mx:
+  x-mx-neededFor: [publish]
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/governance/the-machine-that-dreams-but-never-acts.md
+  servedAt: https://mx.allabout.network/blog/drafts/governance/the-machine-that-dreams-but-never-acts.html
+  x-mx-category: MX blog series
+  x-mx-covers: [dream]
+  runbook: "Blog post draft. Edit source in datalake/draft-site/blog/; promote to HTML with npm run promote."
+  x-mx-corroboratedBy:
+    - https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai
+    - https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+    - https://arxiv.org/abs/2303.11366
+    - https://arxiv.org/abs/2301.04104
+  x-mx-contextProvides:
+    - "A governance argument for self-improvement without autonomy: a system that mines its own mistakes but cannot change any rule, with a human deciding what becomes permanent. Frames the Dream tool through Human-in-Command and determinism-not-inference."
+  stability: stable
+  purpose: "Make the governance case that a self-improving AI system is safe when its improvement loop is structurally separated from its authority to act, illustrated by a tool that learns from its own work logs but writes only recommendations."
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A self-improving AI system sounds like the thing everyone fears. Ours improves by dreaming over its own work logs, and the safety is structural. It mines its own mistakes but cannot change a single rule. A human reads the findings and decides what becomes permanent. Self-improvement without autonomy, and why never acting is the feature.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/governance/the-machine-that-dreams-but-never-acts.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/governance/the-machine-that-dreams-but-never-acts.html">
+  <meta property="og:title" content="The Machine That Dreams But Never Acts | CogNovaMX">
+  <meta property="og:description" content="A self-improving AI system sounds like the thing everyone fears. Ours improves by dreaming over its own work logs, and the safety is structural. It mines its own mistakes but cannot change a single rule. A human reads the findings and decides what becomes permanent. Self-improvement without autonomy, and why never acting is the feature.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-23">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Machine That Dreams But Never Acts | CogNovaMX">
+  <meta name="twitter:description" content="A self-improving AI system sounds like the thing everyone fears. Ours improves by dreaming over its own work logs, and the safety is structural. It mines its own mistakes but cannot change a single rule. A human reads the findings and decides what becomes permanent. Self-improvement without autonomy, and why never acting is the feature.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="The Machine That Dreams But Never Acts">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/governance/the-machine-that-dreams-but-never-acts.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The Machine That Dreams But Never Acts | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "The Machine That Dreams But Never Acts",
+        "headline": "The Machine That Dreams But Never Acts",
+        "description": "A self-improving AI system sounds like the thing everyone fears. Ours improves by dreaming over its own work logs, and the safety is structural. It mines its own mistakes but cannot change a single rule. A human reads the findings and decides what becomes permanent. Self-improvement without autonomy, and why never acting is the feature.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-23",
+        "dateModified": "2026-06-23",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/governance/the-machine-that-dreams-but-never-acts.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 915,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/governance/the-machine-that-dreams-but-never-acts.html",
+        "name": "The Machine That Dreams But Never Acts",
+        "url": "https://mx.allabout.network/blog/drafts/governance/the-machine-that-dreams-but-never-acts.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-the-machine-is-allowed-to-do">What the machine is allowed to do</a></li>
+        <li><a href="#why-never-acts-is-the-design-not-a-limitation">Why "never acts" is the design, not a limitation</a></li>
+        <li><a href="#determinism-carries-the-load-inference-is-kept-small">Determinism carries the load; inference is kept small</a></li>
+        <li><a href="#the-shape-of-trustworthy-self-improvement">The shape of trustworthy self-improvement</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="915">
+        <header class="article-header">
+          <h1>The Machine That Dreams But Never Acts</h1>
+          <div class="article-meta"
+               data-published="2026-06-23"
+               data-modified="2026-06-23"
+               data-reading-time="5 min">
+            <time datetime="2026-06-23">23 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>5 min read</span>
+          </div>
+        </header>
+
+
+<p>A system that improves itself is the thing most people are right to be nervous about. The fear is not that the machine gets better. The fear is that it gets better at its own initiative, in a direction nobody chose, and that each improvement widens the set of things it is willing to do next. Self-improvement and autonomy creep feel like the same story told twice.</p>
+<p>I want to describe a system we run that improves itself every day, and explain why it is not that story at all. It improves by dreaming, and the reason it is safe is that it never acts on what it learns. A person does.</p>
+<h2 id="what-the-machine-is-allowed-to-do" tabindex="-1">What the machine is allowed to do</h2>
+<p>The tool is called Dream. Its job is to look back over its own work and find the mistakes it keeps repeating. It reads the logs of past working sessions, the way you might reread your own notes from a hard week, and it looks for patterns: the same wrong turn taken twice, the same correction applied again, a habit that keeps costing time. It picks those patterns out of a great deal of noise, classifies them, and writes them down.</p>
+<p>That is the entire job. It finds recurring mistakes and it records them. It does not fix them. It does not change how the system behaves tomorrow. It cannot edit a single rule, a single setting, or a single line of the standards it works under. The one thing it is permitted to write to is a single quarantined place that holds nothing but its own findings.</p>
+<p>Everything else is read-only to it.</p>
+<h2 id="why-never-acts-is-the-design-not-a-limitation" tabindex="-1">Why &quot;never acts&quot; is the design, not a limitation</h2>
+<p>The instinct, when you build something that can spot its own mistakes, is to let it close the loop: spot the mistake, fix the rule, done. That instinct is exactly what we removed.</p>
+<p>The separation is the safety mechanism. A system that can both decide what its mistakes are and rewrite its own rules has, between those two powers, no human and no brake. Pull them apart and the danger goes with them. Dream holds the first power and is denied the second. It can propose; it cannot promote. A person reads the findings and decides which ones become a permanent rule, which are noise, and which are wrong. The machine mines the ore. A human decides what gets forged into a tool.</p>
+<p>This is a recognised governance model, and it has a name. The European Commission's High-Level Expert Group on AI draws a line between <em>human-in-the-loop</em>, where a person sits inside every decision, and <em>human-in-command</em>, where a person holds authority over when and how the system is used at all (see the <a href="https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai">Ethics Guidelines for Trustworthy AI</a>). Human oversight in this stronger sense also runs through the <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai">EU's regulatory framework for AI</a>. Dream is built on the command version. The human is not present in every cycle of the mining, which is the whole point of automating it. The human is in command of the only step that changes anything: what enters the permanent rulebook.</p>
+<blockquote>
+<p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
+</blockquote>
+<h2 id="determinism-carries-the-load-inference-is-kept-small" tabindex="-1">Determinism carries the load; inference is kept small</h2>
+<p>There is a second reason this is safe, and it is the principle the whole estate runs on: prefer determinism to inference, and keep the inference small and fenced.</p>
+<p>The mining is mechanical. Which logs to read, which fragments count as candidates, which repeats to ignore because they have been seen before: all of that is fixed and repeatable. Run it twice and you get the same result. The only place a language model is involved is the narrow act of judging whether a given candidate really is a recurring mistake worth surfacing, and even that runs on a local model on our own hardware, so no working log leaves the building. The model never decides what to do about anything. It labels. The human acts.</p>
+<p>So the autonomy people fear never appears, because it was never granted. The deterministic part does the heavy lifting; the inference is one small, fenced judgement; and the authority to change the system sits with a person who reads a report.</p>
+<h2 id="the-shape-of-trustworthy-self-improvement" tabindex="-1">The shape of trustworthy self-improvement</h2>
+<p>I did not name the tool with the research in mind, but the name fits better than I expected. The closest prior art is the <a href="https://arxiv.org/abs/2303.11366">Reflexion</a> line of work, where an agent writes itself a critique and stores it to do better next time, and the model-based <a href="https://arxiv.org/abs/2301.04104">Dreamer</a> family, which learns from remembered experience without re-running the world. Both improve from stored experience rather than from acting again.</p>
+<p>The biological metaphor is the honest one. Sleep does not retry the day. It takes finished experience and settles it into durable memory, ready for tomorrow. It consolidates; it does not re-live and it does not act. That is what Dream does with a record of completed work: it processes what already happened into lessons, and then it stops.</p>
+<p>This is what trustworthy self-improvement actually looks like. Not a system that learns and then quietly changes itself, but a system that learns about itself and hands you the lesson. The learning is automatic. The decision stays human. A machine can dream all it likes, as long as waking up, and acting, belongs to a person.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

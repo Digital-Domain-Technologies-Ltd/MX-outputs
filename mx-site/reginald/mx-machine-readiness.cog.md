@@ -214,7 +214,7 @@ mx:
   supportContact: "info@cognovamx.com"
 
   # ── Cog structural fields (Note 3 §6) ──
-  partOf: mx-position-papers
+  partOf: site-domaincog
   buildsOn: []
   dependencies:
     - name: tg-note-1-field-pattern
@@ -508,11 +508,11 @@ SMEs receive proportionate enforcement under Article 62, but no full exemption.
 
 ### A live demonstration - the Digital Omnibus
 
-On 19 November 2025, the European Commission published the Digital Omnibus, a proposal to defer the high-risk obligations of the AI Act from 2 August 2026 to 2 December 2027. Trilogue negotiations between the Parliament, Council and Commission have not concluded; the second trilogue ended without agreement. As of the latest publication of this paper, the legislative outcome is unresolved.
+On 19 November 2025, the European Commission published the Digital Omnibus, a proposal to defer the high-risk obligations of the AI Act from 2 August 2026 to 2 December 2027. It carried. The European Parliament adopted the text on 16 June 2026 and the Council gave its final approval on 29 June 2026, deferring the stand-alone high-risk obligations (Annex III) to 2 December 2027 and the embedded-product ones (Annex I) to 2 August 2028.
 
-Article 50 transparency obligations are not among the provisions the Omnibus would defer. But high-risk system requirements may move - and there is no certainty about when the answer will be known.
+Article 50 transparency obligations were not among the provisions deferred. They apply from 2 August 2026, unchanged.
 
-This is the case for runtime governance, not against it. A static compliance posture pinned to "2 August 2026" needs rewriting if the Omnibus passes. A cog with declared `fixed_anchors` updates the date in one place, and every document that depends on it re-derives. The teeth still mesh.
+This is the case for runtime governance, and it just proved itself. A static compliance posture pinned to "2 August 2026" needed rewriting the moment the Omnibus carried, and across the industry a great deal of it now says something untrue. This page did not. The date lives in a declared anchor, it was corrected in one place, and every document that depends on it re-derived. The teeth still mesh.
 
 ### Runtime governance, three ways to run REGINALD
 

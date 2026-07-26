@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+title: "Your Agent Can Draw Now. The Picture Should Say So."
+description: "A newsletter tip is doing the rounds: let your coding agent generate images and your web UIs stop looking bland. True, and worth doing. But a generated image is an AI action, and most pipelines forget that the second the file lands. I built image generation that runs on local hardware, logs the call, and marks every output as AI-generated in a way a machine can read. The pretty page is the easy part. The honest file is the point."
+author: Tom Cranstoun
+created: 2026-06-25
+modified: 2026-06-25
+version: "1.0"
+type: blog-post
+tags: [provenance, ai-marking, mx-foundations, content-ops]
+mx:
+  x-mx-neededFor: [publish]
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
+  servedAt: https://mx.allabout.network/blog/drafts/agent-generated-images-should-mark-themselves.html
+  generate:
+    script: scripts/generate-content-html.cjs
+  audience:
+    - humans
+    - machines
+  x-mx-category: MX blog series
+  x-mx-aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-generated-images-should-mark-themselves.md
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  x-mx-corroboratedBy:
+    - https://artificialintelligenceact.eu/article/50/
+    - https://c2pa.org/
+  x-mx-contextProvides:
+    - "Takes the practitioner tip that agent-generated images make web UIs less bland and turns it into the MX + REGINALD point: a generated image is an AI action, so it should travel with a machine-readable mark of its AI origin, a logged call, and provenance metadata. Describes a local-only image generator that does exactly that, and ties the marking to the direction of EU AI Act Article 50 and the C2PA content-provenance standard."
+  stability: stable
+  purpose: "Use the agent-generated-images trend to make the case that AI-generated assets should carry a machine-readable origin mark, a logged call, and provenance metadata, and to show a local-only pipeline that does it."
+  x-mx-backport: clean
+  blogUrl: https://mx.allabout.network/blog/drafts/agent-generated-images-should-mark-themselves.html
+  blogFilename: agent-generated-images-should-mark-themselves
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A newsletter tip is doing the rounds: let your coding agent generate images and your web UIs stop looking bland. True, and worth doing. But a generated image is an AI action, and most pipelines forget that the second the file lands. I built image generation that runs on local hardware, logs the call, and marks every output as AI-generated in a way a machine can read. The pretty page is the easy part. The honest file is the point.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/agent-generated-images-should-mark-themselves.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/agent-generated-images-should-mark-themselves.html">
+  <meta property="og:title" content="Your Agent Can Draw Now. The Picture Should Say So. | CogNovaMX">
+  <meta property="og:description" content="A newsletter tip is doing the rounds: let your coding agent generate images and your web UIs stop looking bland. True, and worth doing. But a generated image is an AI action, and most pipelines forget that the second the file lands. I built image generation that runs on local hardware, logs the call, and marks every output as AI-generated in a way a machine can read. The pretty page is the easy part. The honest file is the point.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-25">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Your Agent Can Draw Now. The Picture Should Say So. | CogNovaMX">
+  <meta name="twitter:description" content="A newsletter tip is doing the rounds: let your coding agent generate images and your web UIs stop looking bland. True, and worth doing. But a generated image is an AI action, and most pipelines forget that the second the file lands. I built image generation that runs on local hardware, logs the call, and marks every output as AI-generated in a way a machine can read. The pretty page is the easy part. The honest file is the point.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <meta name="mx:name" content="Your Agent Can Draw Now. The Picture Should Say So.">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <meta name="x-mx-managedBy" content="blog-post.cog.md">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/agent-generated-images-should-mark-themselves.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Your Agent Can Draw Now. The Picture Should Say So. | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Your Agent Can Draw Now. The Picture Should Say So.",
+        "headline": "Your Agent Can Draw Now. The Picture Should Say So.",
+        "description": "A newsletter tip is doing the rounds: let your coding agent generate images and your web UIs stop looking bland. True, and worth doing. But a generated image is an AI action, and most pipelines forget that the second the file lands. I built image generation that runs on local hardware, logs the call, and marks every output as AI-generated in a way a machine can read. The pretty page is the easy part. The honest file is the point.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-06-25",
+        "dateModified": "2026-06-25",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/agent-generated-images-should-mark-themselves.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 880,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/agent-generated-images-should-mark-themselves.html",
+        "name": "Your Agent Can Draw Now. The Picture Should Say So.",
+        "url": "https://mx.allabout.network/blog/drafts/agent-generated-images-should-mark-themselves.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#the-file-that-cannot-say-what-it-is">The file that cannot say what it is</a></li>
+        <li><a href="#what-i-built-instead">What I built instead</a></li>
+        <li><a href="#why-the-mark-matters-beyond-good-manners">Why the mark matters beyond good manners</a></li>
+        <li><a href="#what-this-does-not-claim">What this does not claim</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="880">
+        <header class="article-header">
+          <h1>Your Agent Can Draw Now. The Picture Should Say So.</h1>
+          <div class="article-meta"
+               data-published="2026-06-25"
+               data-modified="2026-06-25"
+               data-reading-time="5 min">
+            <time datetime="2026-06-25">25 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>5 min read</span>
+          </div>
+        </header>
+
+
+<p>A tip is doing the rounds this week, and it is a good one. If you let your coding agent generate images while it builds a web UI, and use those images as real assets rather than reaching for stock, the pages stop looking bland. The writer's reasoning was sharp: a chat-only coding assistant cannot draw, so its output tends towards the same flat, text-heavy look everyone now recognises as AI-built. Hand it the ability to make pictures and the work feels different.</p>
+<p>I agree, and I wired it into my own toolchain the same day. But the moment I did, a different question took over, and it is the one this whole project exists to ask. A generated image is an AI action. Where does that action get recorded?</p>
+<h2 id="the-file-that-cannot-say-what-it-is" tabindex="-1">The file that cannot say what it is</h2>
+<p>Think about what actually lands on disk. An agent reads your prompt, calls a model, and writes a PNG into your assets folder. To the page, it is just an image. To the next system that meets it, a content management import, an accessibility checker, a partner ingesting your media library, a regulator asking how a published asset was produced, it is also just an image. Nothing on the file says a machine made it. Nothing says which prompt, which model, or when. The picture looks great and remembers nothing.</p>
+<p>That is the same gap I keep writing about from different angles. A delay is what you build when you cannot verify provenance on the spot. A bland page is what you ship when your agent cannot draw. And an anonymous PNG is what you get when image generation treats &quot;make it look good&quot; as the whole job and &quot;record what just happened&quot; as nobody's job. The prettier the output, the easier it is to forget that an AI produced it.</p>
+<h2 id="what-i-built-instead" tabindex="-1">What I built instead</h2>
+<p>So the image generator I added to the MX toolchain does the pretty part and the honest part in one pass. It runs against a Stable Diffusion server on local hardware, over localhost, with no hosted API in the path at all. That is a deliberate choice and not only a privacy one: for the regulated clients we work with, an image pipeline that sends prompts to someone else's cloud is a non-starter, and an air-gapped one can run where the data has to stay.</p>
+<p>When it writes the file, three things happen that a bare generator skips. The call tees to a local AI-action log, so there is a dated record of the prompt, the model, and the parameters that produced this asset. The image is decorated with MX metadata in its own carrier, travelling with the file rather than sitting in a database someone has to be trusted to query. And the metadata carries an explicit mark: this asset was AI-generated. A machine that opens the file later can read that in the time it takes to parse a header. It does not have to guess, and it does not have to ask us.</p>
+<h2 id="why-the-mark-matters-beyond-good-manners" tabindex="-1">Why the mark matters beyond good manners</h2>
+<p>Marking AI-generated content is not a courtesy that will stay optional. The European Union's AI Act, in <a href="https://artificialintelligenceact.eu/article/50/">Article 50</a>, sets transparency obligations that point squarely at this: systems generating synthetic image, audio, video, or text are expected to mark their outputs as artificially generated or manipulated, in a form a machine can detect. The industry is building shared plumbing for the same idea; the <a href="https://c2pa.org/">Coalition for Content Provenance and Authenticity</a> has a standard for exactly this kind of travelling provenance. The direction of travel is clear, whichever instrument reaches you first.</p>
+<blockquote>
+<p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
+</blockquote>
+<p>The point is not that one library makes you compliant. It is that the cheapest moment to record an asset's AI origin is the instant the asset is born. Backfilling that mark across a media library nobody labelled is the expensive, lossy job you do later under deadline. Mark it at birth and the record is just there.</p>
+<h2 id="what-this-does-not-claim" tabindex="-1">What this does not claim</h2>
+<p>Let me be straight about scope, because overclaiming is how this whole field loses trust. A machine-readable mark does not prove the image is accurate, safe, or rights-cleared. It proves one specific thing: that the asset declares its own AI origin, honestly, in a form a machine can check without taking our word for it. That is a small claim, and it is exactly the claim the metadata is entitled to make. The judgement about whether the image is fit to publish still belongs to a person.</p>
+<p>The lesson is the same one that runs through everything we build. Making content readable to machines is the floor, not the ceiling. The trend that started this, agents drawing pictures so pages look less generic, is real and worth adopting. Just remember that the file your agent drew is doing two jobs now. It is decorating your page, and it is a record of an AI action. Build the pipeline that lets it tell the truth about the second job, and the first one costs you nothing extra.</p>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

@@ -9,8 +9,8 @@ title: "Machines Cannot Build for Their Own Sessions"
 description: "AI systems are the most sophisticated information processors ever built. They can't remember what they said five minutes ago. That gap compounds with every pipeline you ship."
 author: Tom Cranstoun
 created: "2026-07-01"
-modified: "2026-07-01"
-version: "1.2"
+modified: "2026-07-06"
+version: "1.3"
 type: blog-post
 tags:
   - machine-cognition
@@ -19,6 +19,7 @@ tags:
   - mx
   - laws-of-machine-thought
 mx:
+  x-mx-neededFor: [publish]
   x-mx-managedBy: blog-post.cog.md
   x-mx-contentState: published
   audience:
@@ -100,7 +101,7 @@ mx:
        single source of truth and check-managed-by.cjs asserts they agree. -->
   <meta name="mx:name" content="Machines Cannot Build for Their Own Sessions">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.2">
+  <meta name="mx:version" content="1.3">
   <meta name="mx:author" content="Tom Cranstoun">
   <meta name="x-mx-managedBy" content="blog-post.cog.md">
   <link rel="mx" href="https://mx.allabout.network/blog/machines-cannot-build-for-their-own-sessions.html">
@@ -141,7 +142,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 2177,
+        "wordCount": 2470,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -214,6 +215,7 @@ mx:
         <li><a href="#the-oral-culture-of-ai">The Oral Culture of AI</a></li>
         <li><a href="#what-machines-cannot-do-with-their-own-outputs">What Machines Cannot Do With Their Own Outputs</a></li>
         <li><a href="#the-contrast-that-clarifies-the-problem">The Contrast That Clarifies the Problem</a></li>
+        <li><a href="#the-agent-that-scheduled-a-message-to-nobody">The Agent That Scheduled a Message to Nobody</a></li>
         <li><a href="#why-this-is-structural-not-incidental">Why This Is Structural, Not Incidental</a></li>
         <li><a href="#why-this-compounds-every-day">Why This Compounds Every Day</a></li>
         <li><a href="#compression-is-not-neutral">Compression Is Not Neutral</a></li>
@@ -224,18 +226,18 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="2177">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="2470">
         <header class="article-header">
           <h1>Machines Cannot Build for Their Own Sessions</h1>
           <div class="article-meta"
                data-published="2026-07-01"
                data-modified="2026-07-01"
-               data-reading-time="11 min">
+               data-reading-time="13 min">
             <time datetime="2026-07-01">1 July 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>11 min read</span>
+            <span>13 min read</span>
           </div>
         </header>
 
@@ -295,6 +297,10 @@ mx:
 <p>The contrast with a standard AI chat interface is total. One system produces content for a human reader. What the other system creates, machines can act on directly. Intelligence applied isn't the key difference - the system may be less clever in the narrow sense. The difference is in the properties of what it produces.</p>
 <p>One machine produces. Another machine governs.</p>
 <p>That gap is what MX is built to address.</p>
+<h2 id="the-agent-that-scheduled-a-message-to-nobody" tabindex="-1">The Agent That Scheduled a Message to Nobody</h2>
+<p>We have a standing ban in the MX-hub repository on one particular tool: the one that lets an agent schedule a message to its own future session. &quot;Remind me in an hour to check the pull request.&quot; It reads like diligence. It is this post's thesis, acted out. The reminder assumes the future session will exist, will remember why it set the alarm, and will still hold the context that made the check worth doing. In an ephemeral cloud container, none of that holds. The message fires into a session that has forgotten, or into no session at all. So we banned it, and I wrote this post.</p>
+<p>Then an agent proved the point twice in one afternoon. A fresh session shipped a new workflow, opened its pull request, and promptly scheduled itself a one-hour check-in with the banned tool (send_later, for those keeping score). In this repository. Asked to find the blog post explaining the ban, it searched the estate for the tool's name, opened this very post, read it end to end, and carried on looking. The reason was sitting in its context window; the string it was matching was not on the page. That is the oral culture in a single anecdote: the knowledge existed, written down and addressable, and the machine still could not build on it, because it was reading for tokens rather than meaning.</p>
+<p>The fix is the same one this post argues for everywhere else: put the intent in the written record. A pull-request subscription that fires on events. An action record in the repository's store that any future session reads at start. Both survive the death of the session that wrote them. The alarm clock does not.</p>
 <h2 id="why-this-is-structural-not-incidental" tabindex="-1">Why This Is Structural, Not Incidental</h2>
 <p>AI chat systems can't govern their own outputs not because their engineers forgot a save button but because the systems were designed around a different model of who the reader is.</p>
 <p>Chat interfaces assume a human at the end of the chain: a person who can read the output, judge its quality, copy the relevant parts, and carry the meaning forward. That assumption is reasonable for consumer applications. It's a structural liability for any organisation that needs machines to build on each other's work.</p>

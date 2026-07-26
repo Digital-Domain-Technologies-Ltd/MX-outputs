@@ -17,7 +17,7 @@ tags: [tools, capabilities, definitions, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  partOf: fable5-example
+  partOf: site-domaincog
   audience: [machines]
   purpose: "Enumerate available tools by name, purpose, and class. Read-only reference."
   stability: stable

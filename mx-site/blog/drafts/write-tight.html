@@ -12,18 +12,28 @@ created: 2026-05-31
 modified: 2026-05-31
 version: "1.0"
 
+type: blog-post
 mx:
-  status: draft
-  contentType: blog-post
+  x-mx-neededFor: [publish]
+  x-mx-quotes:
+    - "When a team publishes a page, it is important to make sure the content is structured in a way that automated systems can parse without difficulty, because a failure to do this can cause the system to misread what the page actually means."
+    - "Structure the page so machines can parse it. Then they will not misread it."
+  x-mx-managedBy: blog-post.cog.md
+  x-mx-contentState: draft
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/blog/drafts/write-tight.html
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/write-tight.md
+  x-mx-contextProvides:
+    - "Tight prose is machine-readable-web hygiene. The same cut that lands for a human reader cuts the tokens and ambiguity a machine pays for."
+  stability: stable
+  purpose: "Tight prose is machine-readable-web hygiene. The same cut that lands for a human reader cuts the tokens and ambiguity a machine pays for."
+  x-mx-backport: clean
+  x-mx-createdHash: 5aada6cc
   servedAt: https://mx.allabout.network/blog/drafts/write-tight.html
-  runbook: "Blog post on mx-site. The HTML is the canonical source for this YAML frontmatter; no separate markdown source exists. Public-facing distillation of the tight-prose (Haiku) writing discipline."
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+
 ---
 -->
-  <!-- MX-SOURCE-FRONTMATTER:END -->
-  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
-  <meta name="ai-disclosure" content="ai-generated">
+<!-- MX-SOURCE-FRONTMATTER:END -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
@@ -55,18 +65,26 @@ mx:
 
   <!-- Discovery -->
   <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
 
   <!-- MX Carrier -->
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
   <meta name="mx:name" content="Write Tight: Prose for Humans and Machines">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
   <meta name="mx:author" content="Tom Cranstoun">
   <meta name="x-mx-managedBy" content="blog-post.cog.md">
   <link rel="mx" href="https://mx.allabout.network/blog/drafts/write-tight.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
   <title>Write Tight: Prose for Humans and Machines | CogNovaMX</title>
 
   <!-- Schema.org JSON-LD -->
@@ -79,7 +97,7 @@ mx:
         "name": "Write Tight: Prose for Humans and Machines",
         "headline": "Write Tight: Prose for Humans and Machines",
         "description": "Tight prose is machine-readable-web hygiene. The same cut that lands for a human reader cuts the tokens and ambiguity a machine pays for.",
-        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
         "datePublished": "2026-05-31",
         "dateModified": "2026-05-31",
         "author": {
@@ -87,7 +105,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -100,8 +118,8 @@ mx:
           "@id": "https://mx.allabout.network/blog/drafts/write-tight.html"
         },
         "articleSection": "Machine Experience",
-        "keywords": ["machine-experience", "tight-prose", "writing", "machine-readability", "content-strategy", "convergence-principle"],
-        "wordCount": 593,
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 580,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -126,6 +144,7 @@ mx:
   <link rel="stylesheet" href="../../css/mx-blog.css">
 </head>
 <body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
   <!-- Site Header -->
@@ -154,34 +173,34 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
           <div class="introduction-text" role="presentation">
-            <p class="introduction-message">Machine Experience (MX) is the practice of making anything you publish readable by every machine that consumes it, so no machine has to guess.</p>
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
             <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
           </div>
         </div>
       </aside>
 
-      <!-- Collapsible Index -->
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
       <details id="index" class="table-of-contents" data-state="initially-collapsed">
         <summary>Index</summary>
         <nav aria-label="Table of contents">
           <ul>
-            <li><a href="#machine-cost">What Tight Prose Costs a Machine</a></li>
-            <li><a href="#convergence">The Same Cut Serves the Reader</a></li>
-            <li><a href="#before-after">Watch It Happen</a></li>
-            <li><a href="#how-to-cut">How to Cut</a></li>
-            <li><a href="#mx-fit">Where This Fits MX</a></li>
-            <li><a href="#start">Start</a></li>
+        <li><a href="#what-tight-prose-costs-a-machine">What Tight Prose Costs a Machine</a></li>
+        <li><a href="#the-same-cut-serves-the-reader">The Same Cut Serves the Reader</a></li>
+        <li><a href="#watch-it-happen">Watch It Happen</a></li>
+        <li><a href="#how-to-cut">How to Cut</a></li>
+        <li><a href="#where-this-fits-mx">Where This Fits MX</a></li>
+        <li><a href="#start">Start</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="593">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="580">
         <header class="article-header">
           <h1>Write Tight: Prose for Humans and Machines</h1>
           <div class="article-meta"
@@ -196,90 +215,68 @@ mx:
           </div>
         </header>
 
-        <p>Tight prose is machine-readable-web hygiene, not a matter of taste.</p>
 
-        <p>Cut a sentence to its core and two readers benefit at once. The human gets the point in one pass. The machine spends fewer tokens, meets less ambiguity, and is far less likely to misread you.</p>
+<p>Tight prose is machine-readable-web hygiene, not a matter of taste.</p>
+<p>Cut a sentence to its core and two readers benefit at once. The human gets the point in one pass. The machine spends fewer tokens, meets less ambiguity, and is far less likely to misread you.</p>
+<p>That is the Convergence Principle, applied to words. Write tight and you serve the reader and the agent with the same edit.</p>
+<h2 id="what-tight-prose-costs-a-machine" tabindex="-1">What Tight Prose Costs a Machine</h2>
+<p>An AI agent reads your page token by token. Padding is not free. Every filler clause is tokens it pays for, and tokens cost money, time, and energy.</p>
+<p>Ambiguity costs more. A long sentence with three nested clauses hides the claim. The agent guesses at what you meant. A wrong guess becomes a wrong answer, attributed to you.</p>
+<p>Tight prose removes the guesswork. One idea per sentence. Subject, verb, object. The claim's right there in the text, so a machine reads it straight off. No inference, no guessing.</p>
+<h2 id="the-same-cut-serves-the-reader" tabindex="-1">The Same Cut Serves the Reader</h2>
+<p>None of this trades away the human reader. The opposite happens.</p>
+<p>Short sentences are easier to follow. Cut the hedging and the position lands. Cut the adverbs and the verb does the work. A reader who skims still gets the point, because the argument sits in the first clause, not buried after a long run-up.</p>
+<p>What helps the machine helps the person. That is the whole MX thesis, worked down to one habit.</p>
+<h2 id="watch-it-happen" tabindex="-1">Watch It Happen</h2>
+<p>Here is one claim, written twice.</p>
+<p>Before, at 43 words:</p>
+<blockquote>
+<p>When a team publishes a page, it is important to make sure the content is structured in a way that automated systems can parse without difficulty, because a failure to do this can cause the system to misread what the page actually means.</p>
+</blockquote>
+<p>After, at 14 words:</p>
+<blockquote>
+<p>Structure the page so machines can parse it. Then they will not misread it.</p>
+</blockquote>
+<p>Same claim. From 43 words to 14. A reader gets it faster, and an agent reaches it for far fewer tokens. Nothing of value was lost in the cut.</p>
+<h2 id="how-to-cut" tabindex="-1">How to Cut</h2>
+<p>The method is simple to state and harder to do. Write the draft naturally. Then revise by cutting. If the meaning survives the cut, the cut was right.</p>
+<p>Four moves do most of the work:</p>
+<ul>
+<li>One idea per sentence. Break a compound thought into separate sentences.</li>
+<li>Drop the subordinate clause. Make it its own sentence, or delete it.</li>
+<li>Cut hedging and adverbs. &quot;Somewhat&quot;, &quot;arguably&quot;, and &quot;quite&quot; all soften the line.</li>
+<li>Name the thing. Concrete nouns beat abstract ones. Write &quot;build records&quot;, not &quot;record-building capabilities&quot;.</li>
+</ul>
+<p>Then read it aloud. If you stumble, the sentence is still too long.</p>
+<h2 id="where-this-fits-mx" tabindex="-1">Where This Fits MX</h2>
+<p>MX makes content readable to machines. Tight prose does that work at the level of the sentence.</p>
+<p>We write our audit reports this way. Findings in short declarative lines. Recommendations a client can act on without decoding a paragraph. The habit that helps an agent parse a page helps a busy reader act on a report.</p>
+<p>It lowers cost too. Fewer tokens per page means cheaper inference and less energy. Less ambiguity means fewer machine guesses, and a guess that misfires becomes a confident, wrong answer about your business.</p>
+<h2 id="start" tabindex="-1">Start</h2>
+<p>Pick one page. Read it aloud. Cut every sentence that makes you stumble.</p>
+<p>If your team wants help, that is the work we do. We tighten content so machines and people both read it cleanly. Read our services, or write to us.</p>
 
-        <p>That is the Convergence Principle, applied to words. Write tight and you serve the reader and the agent with the same edit.</p>
-
-        <h2 id="machine-cost">What Tight Prose Costs a Machine</h2>
-
-        <p>An AI agent reads your page token by token. Padding is not free. Every filler clause is tokens it pays for, and tokens cost money, time, and energy.</p>
-
-        <p>Ambiguity costs more. A long sentence with three nested clauses hides the claim. The agent guesses at what you meant. A wrong guess becomes a wrong answer, attributed to you.</p>
-
-        <p>Tight prose removes the guesswork. One idea per sentence. Subject, verb, object. The claim sits on the surface, where a machine reads it without inference.</p>
-
-        <h2 id="convergence">The Same Cut Serves the Reader</h2>
-
-        <p>None of this trades away the human reader. The opposite happens.</p>
-
-        <p>Short sentences are easier to follow. Cut the hedging and the position lands. Cut the adverbs and the verb does the work. A reader who skims still gets the point, because the argument sits in the first clause, not buried after a long run-up.</p>
-
-        <p>What helps the machine helps the person. That is the whole MX thesis, worked down to one habit.</p>
-
-        <h2 id="before-after">Watch It Happen</h2>
-
-        <p>Here is one claim, written twice.</p>
-
-        <p>Before, at 43 words:</p>
-
-        <blockquote>When a team publishes a page, it is important to make sure the content is structured in a way that automated systems can parse without difficulty, because a failure to do this can cause the system to misread what the page actually means.</blockquote>
-
-        <p>After, at 14 words:</p>
-
-        <blockquote>Structure the page so machines can parse it. Then they will not misread it.</blockquote>
-
-        <p>Same claim. From 43 words to 14. A reader gets it faster, and an agent reaches it for far fewer tokens. Nothing of value was lost in the cut.</p>
-
-        <h2 id="how-to-cut">How to Cut</h2>
-
-        <p>The method is simple to state and harder to do. Write the draft naturally. Then revise by cutting. If the meaning survives the cut, the cut was right.</p>
-
-        <p>Four moves do most of the work:</p>
-
-        <ul>
-          <li>One idea per sentence. Break a compound thought into separate sentences.</li>
-          <li>Drop the subordinate clause. Make it its own sentence, or delete it.</li>
-          <li>Cut hedging and adverbs. "Somewhat", "arguably", and "quite" all soften the line.</li>
-          <li>Name the thing. Concrete nouns beat abstract ones. Write "build records", not "record-building capabilities".</li>
-        </ul>
-
-        <p>Then read it aloud. If you stumble, the sentence is still too long.</p>
-
-        <h2 id="mx-fit">Where This Fits MX</h2>
-
-        <p>MX makes content readable to machines. Tight prose does that work at the level of the sentence.</p>
-
-        <p>We write our audit reports this way. Findings in short declarative lines. Recommendations a client can act on without decoding a paragraph. The habit that helps an agent parse a page helps a busy reader act on a report.</p>
-
-        <p>It lowers cost too. Fewer tokens per page means cheaper inference and less energy. Less ambiguity means fewer machine guesses, and a guess that misfires becomes a confident, wrong answer about your business.</p>
-
-        <h2 id="start">Start</h2>
-
-        <p>Pick one page. Read it aloud. Cut every sentence that makes you stumble.</p>
-
-        <p>If your team wants help, that is the work we do. We tighten content so machines and people both read it cleanly. Read our services, or write to us.</p>
 
       </article>
 
-      <!-- Post Conclusion -->
+
+      <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the MX book series, including <em>MX: The Handbook</em> (published 2 April 2026). Consults on MX strategy through Digital Domain Technologies Ltd, trading as CogNovaMX.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
-          <p class="post-conclusion-eyebrow">Tighten your content</p>
-          <p class="post-conclusion-prompt">We write audit reports and content in this discipline, and we help teams do the same. Start with our services, or get in touch.</p>
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
-            <li><a class="post-conclusion-link" href="/services/">CogNovaMX services</a></li>
-            <li><a class="post-conclusion-link" href="/learn/">Learn MX</a></li>
-            <li><a class="post-conclusion-link" href="mailto:info@cognovamx.com">info@cognovamx.com</a></li>
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
           </ul>
         </div>
       </aside>
@@ -301,7 +298,6 @@ mx:
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
           <li><a href="/blog/">Blog</a></li>
-          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -318,5 +314,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

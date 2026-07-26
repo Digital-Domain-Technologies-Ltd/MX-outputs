@@ -17,7 +17,7 @@ tags: [memory, context, persistence, user-data, fable5, example]
 mx:
   x-mx-category: example
   status: active
-  partOf: fable5-example
+  partOf: site-domaincog
   audience: [machines]
   purpose: "Describe memory system state for this session."
   stability: stable

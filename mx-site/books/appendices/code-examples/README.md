@@ -9,7 +9,7 @@ version: "1.0"
 type: info-doc
 mx:
   status: draft
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/books/appendices/code-examples/README.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/books/appendices/code-examples/README.md
 
 ---
 

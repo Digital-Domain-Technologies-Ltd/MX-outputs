@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initMobileMenu();
   initSmoothScroll();
   initHeaderScroll();
+  initCodeCopy();
 });
 
 /** Mobile navigation toggle */
@@ -44,6 +45,50 @@ function initSmoothScroll() {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
+  });
+}
+
+/**
+ * Copy-to-clipboard button on every fenced code block.
+ * Progressive enhancement: no clipboard API (or an insecure context) means no
+ * button, and the content is unaffected. Persistent state over transient
+ * signals: the label changes to "Copied" and stays - nothing flashes and
+ * vanishes. Styles are injected here so the enhancement travels complete in
+ * this one file, on every page that loads it, whichever stylesheet the page
+ * uses.
+ */
+function initCodeCopy() {
+  if (!navigator.clipboard || !window.isSecureContext) return;
+  var blocks = document.querySelectorAll('pre > code');
+  if (!blocks.length) return;
+
+  var style = document.createElement('style');
+  style.textContent =
+    'pre { position: relative; }' +
+    '.code-copy-btn { position: absolute; top: .5rem; right: .5rem;' +
+    ' padding: .25rem .6rem; font: inherit; font-size: .8em; line-height: 1;' +
+    ' color: inherit; background: rgba(127, 127, 127, .15);' +
+    ' border: 1px solid rgba(127, 127, 127, .45); border-radius: 4px; cursor: pointer; }' +
+    '.code-copy-btn:hover { background: rgba(127, 127, 127, .3); }' +
+    '.code-copy-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }';
+  document.head.appendChild(style);
+
+  blocks.forEach(function (code) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'code-copy-btn';
+    btn.textContent = 'Copy';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.setAttribute('aria-live', 'polite');
+    btn.addEventListener('click', function () {
+      navigator.clipboard.writeText(code.textContent).then(function () {
+        btn.textContent = 'Copied';
+        btn.setAttribute('aria-label', 'Code copied to clipboard');
+      }, function () {
+        btn.textContent = 'Copy failed';
+      });
+    });
+    code.parentElement.appendChild(btn);
   });
 }
 

@@ -14,7 +14,7 @@ mx:
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
   x-mx-contextProvides: ["Files Away From Their Source - LinkedIn feed promo"]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-outputs/main/mx-site/blog/files-away-from-source.linkedin-promo.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/files-away-from-source.linkedin-promo.md
 
 ---
 

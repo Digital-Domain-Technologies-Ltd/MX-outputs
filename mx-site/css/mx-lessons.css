@@ -1,0 +1,326 @@
+/* mx-lessons.css - shared styles for the MX Learn interactive lesson track.
+   Sits on top of mx-unified.css and uses its design tokens only.
+   Progressive enhancement contract: without JavaScript every lesson step is
+   visible in document order; with mx-lesson.js the steps become a gated,
+   one-at-a-time guided walkthrough. Nothing here hides content from a
+   non-JS reader. */
+
+.lesson-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+
+.lesson-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mx-gold);
+  margin-bottom: 0.5rem;
+}
+
+.lesson-wrap h1 {
+  color: var(--mx-white);
+  font-size: 1.8rem;
+  line-height: 1.2;
+  margin: 0 0 0.4rem;
+}
+
+.lesson-lede {
+  color: var(--mx-text-muted);
+  margin: 0 0 1.8rem;
+}
+
+/* Progress bar: built by mx-lesson.js, invisible without it */
+.lesson-progress {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.8rem;
+}
+.lesson-enhanced .lesson-progress { display: flex; }
+.lesson-progress .seg {
+  height: 6px;
+  flex: 1;
+  border-radius: 3px;
+  background: var(--mx-surface-strong);
+  transition: background 0.3s;
+}
+.lesson-progress .seg.done { background: var(--mx-gold); }
+.lesson-progress .count {
+  font-size: 0.8rem;
+  color: var(--mx-text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Steps: all visible without JS; the engine shows one at a time */
+.lesson-step {
+  border-top: 1px solid var(--mx-border);
+  padding-top: 1.6rem;
+  margin-top: 1.6rem;
+}
+.lesson-step:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+.lesson-enhanced .lesson-step { display: none; border-top: none; padding-top: 0; margin-top: 0; }
+.lesson-enhanced .lesson-step.active { display: block; animation: lesson-rise 0.35s ease; }
+@keyframes lesson-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lesson-enhanced .lesson-step.active { animation: none; }
+}
+
+.lesson-step h2 {
+  color: var(--mx-white);
+  font-size: 1.3rem;
+  margin: 0 0 0.75rem;
+}
+.lesson-step p { margin: 0 0 0.9rem; }
+
+.lesson-hint {
+  font-size: 0.85rem;
+  color: var(--mx-text-muted);
+}
+
+/* Interactive cards: open on click when enhanced; always open without JS */
+.lesson-card {
+  background: var(--mx-surface);
+  border: 1px solid var(--mx-border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+}
+.lesson-enhanced .lesson-card[data-gate] { cursor: pointer; }
+.lesson-enhanced .lesson-card[data-gate]:hover { border-color: var(--mx-blue-light); }
+.lesson-enhanced .lesson-card[data-gate].is-done { border-color: var(--mx-border-strong); cursor: default; }
+.lesson-card .card-head {
+  font-weight: 600;
+  color: var(--mx-white);
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.lesson-card .card-head .card-cta {
+  margin-left: auto;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--mx-text-muted);
+  display: none;
+}
+.lesson-enhanced .lesson-card[data-gate]:not(.is-done) .card-head .card-cta { display: inline; }
+.lesson-card .card-body {
+  margin-top: 0.9rem;
+  border-top: 1px dashed var(--mx-border);
+  padding-top: 0.9rem;
+  font-size: 0.95rem;
+}
+.lesson-enhanced .lesson-card[data-gate]:not(.is-done) .card-body { display: none; }
+.lesson-card .card-body p { margin: 0 0 0.6rem; }
+.lesson-card .card-body p:last-child { margin-bottom: 0; }
+.lesson-card .card-body ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+
+/* Flip pairs: traditional habit -> MX replacement */
+.lesson-pair {
+  background: var(--mx-surface);
+  border: 1px solid var(--mx-border);
+  border-radius: 10px;
+  padding: 0.8rem 1.1rem;
+  margin: 0.55rem 0;
+  font-size: 0.98rem;
+}
+.lesson-enhanced .lesson-pair { cursor: pointer; }
+.lesson-enhanced .lesson-pair:hover { border-color: var(--mx-blue-light); }
+.lesson-enhanced .lesson-pair.is-done { border-color: var(--mx-gold); cursor: default; }
+.lesson-pair .pair-old::before { content: "Traditional: "; font-weight: 600; color: var(--mx-white); }
+.lesson-pair .pair-new::before { content: "MX: "; font-weight: 600; color: var(--mx-gold); }
+.lesson-pair .pair-new { display: block; margin-top: 0.3rem; }
+.lesson-enhanced .lesson-pair:not(.is-done) .pair-new { display: none; }
+.lesson-enhanced .lesson-pair.is-done .pair-old { color: var(--mx-text-muted); }
+
+/* Tab groups: without JS all panels render stacked with their labels */
+.lesson-tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 0.6rem;
+}
+.lesson-tabs button {
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--mx-border);
+  background: var(--mx-surface);
+  color: var(--mx-text-muted);
+  cursor: pointer;
+  display: none;
+}
+.lesson-enhanced .lesson-tabs button { display: inline-block; }
+.lesson-tabs button.on {
+  background: var(--mx-gold);
+  color: var(--mx-blue-deep);
+  border-color: var(--mx-gold);
+}
+.lesson-tabpanel {
+  background: var(--mx-surface);
+  border: 1px solid var(--mx-border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin: 0.6rem 0;
+  font-size: 0.98rem;
+}
+.lesson-enhanced .lesson-tabpanel:not(.on) { display: none; }
+.lesson-tabpanel .panel-title {
+  font-weight: 600;
+  color: var(--mx-white);
+  margin-bottom: 0.3rem;
+}
+.lesson-tabpanel p { margin: 0; color: var(--mx-text-muted); }
+
+/* Code comparisons */
+.lesson-step pre {
+  background: var(--code-bg);
+  border: 1px solid var(--mx-border);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  overflow-x: auto;
+  font-family: var(--mx-font-mono);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  margin: 0.6rem 0;
+}
+.code-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0.9rem 0 0;
+}
+.code-label.bad { color: #e08b84; }
+.code-label.good { color: var(--mx-green-free); }
+
+/* Quiz */
+.lesson-quiz { margin: 1rem 0; }
+.lesson-quiz .quiz-option {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: 0.98rem;
+  text-align: left;
+  padding: 0.8rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--mx-border);
+  background: var(--mx-surface);
+  color: var(--mx-text);
+  cursor: pointer;
+  margin: 0.45rem 0;
+}
+.lesson-quiz .quiz-option:hover:not(:disabled) { border-color: var(--mx-blue-light); }
+.lesson-quiz .quiz-option.correct { border-color: var(--mx-green-free); background: rgba(46, 204, 113, 0.12); }
+.lesson-quiz .quiz-option.wrong { border-color: #e08b84; background: rgba(224, 139, 132, 0.12); }
+/* Without JS the quiz reads as a question plus the answer paragraph */
+.quiz-answer {
+  border-left: 3px solid var(--mx-green-free);
+  background: var(--mx-surface);
+  border-radius: 0 8px 8px 0;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.95rem;
+  margin: 0.8rem 0;
+}
+.lesson-enhanced .quiz-answer { display: none; }
+.lesson-enhanced .quiz-answer.revealed { display: block; }
+.quiz-retry {
+  display: none;
+  border-left: 3px solid #e08b84;
+  background: var(--mx-surface);
+  border-radius: 0 8px 8px 0;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.95rem;
+  margin: 0.8rem 0;
+}
+.lesson-enhanced .quiz-retry.revealed { display: block; }
+
+/* Recap */
+.lesson-recap { margin: 1rem 0; padding: 0; list-style: none; }
+.lesson-recap li {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 0.6rem;
+  background: var(--mx-surface);
+  border: 1px solid var(--mx-border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin: 0.55rem 0;
+  font-size: 0.98rem;
+}
+.lesson-recap li::before {
+  content: "\2713";
+  color: var(--mx-green-free);
+  font-weight: 700;
+}
+
+.lesson-aside {
+  background: var(--mx-surface-strong);
+  border-radius: 10px;
+  padding: 0.9rem 1.2rem;
+  font-size: 0.95rem;
+  margin-top: 1.1rem;
+}
+.lesson-aside strong { color: var(--mx-white); }
+
+/* Prev / Next: only exist when enhanced */
+.lesson-nav {
+  display: none;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+.lesson-enhanced .lesson-nav { display: flex; }
+.lesson-nav button {
+  font: inherit;
+  font-size: 0.98rem;
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid var(--mx-border);
+  background: var(--mx-surface);
+  color: var(--mx-text);
+}
+.lesson-nav button.primary {
+  background: var(--mx-gold);
+  color: var(--mx-blue-deep);
+  border-color: var(--mx-gold);
+}
+.lesson-nav button:disabled { opacity: 0.4; cursor: default; }
+
+/* Series index cards */
+.lesson-series { list-style: none; padding: 0; margin: 1.5rem 0; }
+.lesson-series li {
+  background: var(--mx-surface);
+  border: 1px solid var(--mx-border);
+  border-radius: 10px;
+  margin: 0.7rem 0;
+}
+.lesson-series a {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0.9rem;
+  padding: 1rem 1.2rem;
+  text-decoration: none;
+  color: var(--mx-text);
+}
+.lesson-series a:hover { color: var(--mx-white); }
+.lesson-series .series-num {
+  font-family: var(--mx-font-mono);
+  font-weight: 700;
+  color: var(--mx-gold);
+  font-size: 1.1rem;
+}
+.lesson-series .series-title { font-weight: 600; color: var(--mx-white); }
+.lesson-series .series-desc { font-size: 0.9rem; color: var(--mx-text-muted); margin-top: 0.15rem; }
+
+.lesson-wrap :focus-visible { outline: 2px solid var(--mx-gold); outline-offset: 2px; }
