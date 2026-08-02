@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '1.5'
+version: '1.6'
 created: '2026-04-15'
-modified: '2026-07-19'
+modified: '2026-07-30'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard. Contains both x-mx- public extensions (openly published) and
@@ -1969,6 +1969,60 @@ mx:
       definition: Agent readability score (0-100). Numeric form of agentReadability assessment.
       status: canonical
       profile: report
+    - name: htmlPagesAudited
+      type: number
+      definition: >-
+        Count of HTML pages the audit run actually reached and analysed. The report's canonical page denominator:
+        every page-relative figure in the deliverable reconciles to it.
+      example: 12
+      notes: >-
+        Distinct from pagesAudited, which counts every crawled URL including non-HTML resources. The two diverge when
+        an extensionless non-HTML URL enters the crawl, and the report always uses this field.
+      status: canonical
+      profile:
+        - audit
+        - report
+      required: optional
+    - name: llmServedHtmlScore
+      type: number
+      definition: >-
+        AI-suitability score (0-100) computed on the served HTML, the bytes an agent receives before any client-side
+        JavaScript runs.
+      example: 64
+      notes: >-
+        Averaged across the audited pages. Scored on served HTML rather than the rendered DOM because an agent that
+        does not execute JavaScript sees only the served bytes.
+      status: canonical
+      profile:
+        - audit
+        - report
+      required: optional
+    - name: auditCommand
+      type: string
+      definition: >-
+        The one-line command that re-runs the audit which produced this report, captured at collect time so an
+        operator never has to reconstruct the entry URL and flags.
+      example: node scripts/audit-pipeline.js https://example.com --pages 12
+      notes: >-
+        Written from the run's own invocation record. When that record is absent (a report regenerated from older
+        results) a host-level fallback command is written, which loses any entry-path or scope flags.
+      status: canonical
+      profile:
+        - audit
+        - report
+      required: optional
+    - name: pipelineVersion
+      type: string
+      definition: Version of the audit pipeline that produced the report, read from the audit package version.
+      example: '2.4.0'
+      notes: >-
+        Lets a cross-run comparison tell a genuine change in the audited site from a change in how the pipeline
+        measures it.
+      status: canonical
+      profile:
+        - audit
+        - report
+      required: optional
     - name: mxStackCompleteness
       type: string
       definition: MX stack completeness percentage. Ratio of present-to-expected MX metadata fields.
