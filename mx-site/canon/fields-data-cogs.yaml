@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Cog Layer
-version: '1.6'
+version: '1.8'
 created: 2026-04-27
-modified: '2026-06-07'
+modified: '2026-08-06'
 author: Tom Cranstoun
 description: >-
   Cog-specific structural vocabulary. Cogs are an OPTIONAL layer on top of MX,
@@ -14,7 +14,7 @@ description: >-
 mx:
   status: active
   license: MIT
-  category: standard
+  x-mx-category: standard
   partOf: mx-the-gathering
   tags:
     - fields
@@ -106,6 +106,21 @@ mx:
       required: optional
       description: Related documents cited or cross-referenced. Lateral relationship; aligns with Schema.org isRelatedTo.
 
+    - name: relatedDocs
+      type: array
+      definition: >-
+        Prose citations to related documents - a title, a URL, or a free-text description of a source or companion
+        reference. Not validated as a resolvable repo-root-relative path or a known cog slug (unlike refersTo).
+      example:
+        - "MX: The Handbook"
+        - https://tg.community
+      notes: >-
+        Use refersTo when the target is a resolvable cog or repo path; use relatedDocs for a citation that is a
+        title, external URL, or prose mention with no repo-path form.
+      status: canonical
+      profile: cog
+      required: optional
+
     - name: triggers
       type: array
       definition: >-
@@ -120,6 +135,21 @@ mx:
       profile: cog
       required: optional
       description: Intent-routing phrases a dispatcher matches to select this cog. Indexed by the MX graph.
+
+    - name: routes
+      type: array
+      definition: >-
+        The routing table for a routing-cog: an array of {intent, destination, description} objects mapping a user
+        intent phrase to the destination cog it dispatches to.
+      example:
+        - intent: "what should I work on"
+          destination: what-comes-next
+          description: "Route here for session-priority questions."
+      notes: Declared on routing-cog type files. The routing-cog template teaches this shape.
+      status: canonical
+      profile: cog
+      required: optional
+      description: The intent-to-destination dispatch table for a routing-cog.
 
     - name: cogHeader
       profile: cog
@@ -308,50 +338,11 @@ mx:
       description: Execution route for scripted cog blocks. bash (default), ollama, or agent.
 
   profiles:
-    - name: cog
-      description: Fields specific to .cog.md files. Cogs are an optional layer on top of MX; the machine identifier is derived from the filename.
-      required:
-        - x-mx-category
-        - partOf
-      recommended:
-        - buildsOn
-        - tags
-      optional:
-        - dependencies
-        - refersTo
-        - x-mx-execute
-        - x-mx-blocks
-        - x-mx-policy
-        - x-mx-cogId
-        - cogType
-        - publicationDate
-        - expires
-        - correctionSla
-        - maintainedDate
-        - maintainedBy
-        - provenanceAuthor
-        - provenancePublisher
-        - provenanceOrigin
-        - updateTriggers
-        - accessibility
-        - semantic
-        - convergence
-        - mxCompliance
-        - accuracyCommitment
-        - reviewCycle
-        - publisher
-        - generate
-        - source
-        - adr
-        - ndr
-        - bdr
-        - deliverable
-        - includes
-        - cogHeader
-        - targetsSpecVersion
-        - readiness
-        - operatesOn
-        - troubleshooting
-        - produces
-        - actionType
-        - defaultRemedy
+    # `cog` profile intentionally not declared here. scripts/cog-field-rules.js
+    # (the engine behind frontmatter-validator.js / cog-tools.js) reads ONLY
+    # fields-data.yaml directly for profiles - it never merges this file's
+    # `profiles:` block - so fields-data.yaml's `cog` profile entry is the sole
+    # authoritative source of required/recommended cog fields. This file's
+    # `fields:` array above remains the field-DEFINITION home for cog-layer
+    # fields (partOf, buildsOn, dependencies, refersTo, cogHeader); the
+    # requirement grouping lives with the engine that reads it.

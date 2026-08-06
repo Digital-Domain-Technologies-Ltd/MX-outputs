@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Carrier Formats Companion
-version: '5.0'
+version: '5.1'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-04-15'
+modified: '2026-08-06'
 author: The Gathering
 description: >-
   Open standard carrier-format metadata schemas for code (function/class/API/test/inline/dependency/repository).
@@ -10,7 +10,7 @@ description: >-
 mx:
   status: active
   license: MIT
-  category: standard
+  x-mx-category: standard
   partOf: mx-the-gathering
   tags:
     - fields
@@ -373,12 +373,11 @@ mx:
       profile: code-api
       required: false
   profiles:
-    - name: script
-      description: Fields for executable scripts and cog.js files.
-      required:
-        - runtime
-      optional:
-        - dependencies
+    # `script` profile intentionally not declared here. fields-data.yaml carries
+    # the evidence-grounded version. scripts/cog-field-rules.js (the engine
+    # behind frontmatter-validator.js / cog-tools.js) reads ONLY fields-data.yaml
+    # directly for profiles - it does not merge this file's `profiles:` block at
+    # all - so fields-data.yaml is the sole load-bearing source.
     - name: code-repository
       description: Repository-level metadata. Lives in mx.yaml, .mx/config.yaml, or package.json[mx].
       required:

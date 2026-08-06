@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '5.5'
+version: '5.9'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-07-01'
+modified: '2026-08-06'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -11,7 +11,7 @@ description: >-
 mx:
   status: active
   license: MIT
-  category: standard
+  x-mx-category: standard
   partOf: mx-the-gathering
   tags:
     - fields
@@ -248,7 +248,7 @@ mx:
         rule: Always explicit. These are document identity fields and never move under mx:.
       mx:
         fields: >-
-          All other MX-operational fields (status, contentType, category, tags, audience, runbook, execute, ai* fields,
+          All other MX-operational fields (status, contentType, x-mx-category, tags, audience, runbook, execute, ai* fields,
           etc.)
         rule: Optional fields with documented defaults may be omitted when matching their default value.
     always-explicit:
@@ -361,6 +361,24 @@ mx:
       replacement: maintainedDate
     - old: verifiedBy
       replacement: maintainedBy
+    - old: category
+      replacement: x-mx-category
+      notes: CogNovaMX cog-taxonomy classifier, not a Gathering open-standard field. Moved to cognovamx-fields.yaml under the x-mx-public profile.
+    - old: riskLevel
+      replacement: x-mx-riskLevel
+      notes: CogNovaMX execution-danger classification for action-doc cogs; vendor-specific governance concept.
+    - old: contentState
+      replacement: x-mx-contentState
+      notes: CogNovaMX editorial-workflow enum, distinct from the standard status field; vendor-specific.
+    - old: adr
+      replacement: x-mx-adr
+      notes: CogNovaMX Architecture Decision Record registry pointer; vendor-specific.
+    - old: ndr
+      replacement: x-mx-ndr
+      notes: CogNovaMX Naming Decision Record registry pointer; vendor-specific.
+    - old: bdr
+      replacement: x-mx-bdr
+      notes: CogNovaMX Business Decision Record registry pointer; vendor-specific.
   blockTypes:
     - name: prose
       implicit: true
@@ -901,6 +919,20 @@ mx:
       status: canonical
       profile: core
       required: true
+    - name: originator
+      type: string
+      definition: >-
+        The identity that originated this document or specification. Zone 1 (immutable, alongside author), distinct
+        from the mutable Zone 2 stewardship object (steward, accountableContact, legalEntity, brand).
+      example: Tom Cranstoun
+      notes: >-
+        Authorship decision D6 (mx-canon/mx-the-gathering/architecture-decisions/2026-05-07-review-fix-design-rationale.cog.md):
+        originator stays top-level because it is identity, not stewardship. Distinct from author, which remains the
+        general-purpose creator-attribution field; a spec cog may declare both when it imports originator from an
+        external spec's vocabulary.
+      status: canonical
+      profile: core
+      required: optional
     - name: created
       type: string
       definition: Creation date. ISO 8601 format (YYYY-MM-DD).
@@ -917,6 +949,25 @@ mx:
       status: canonical
       profile: core
       required: true
+    - name: reviewDate
+      type: string
+      definition: >-
+        The date by which this document's content must next be reviewed for accuracy, declared at Zone 1 (top
+        level). ISO 8601 (YYYY-MM-DD).
+      example: '2026-09-01'
+      notes: Zone 1 sibling of expires. Pairs with the mx.reviewBy field used on cog-profile documents; both express the same concept at different zones.
+      status: canonical
+      profile: core
+      required: optional
+    - name: contributors
+      type: array
+      definition: Additional collaborators beyond the primary author.
+      example:
+        - Tom Cranstoun
+      notes: Distinct from author (the primary/immutable creator attribution).
+      status: canonical
+      profile: core
+      required: optional
     - name: version
       type: string
       definition: Semantic version string. Lives in frontmatter, never in filenames.
@@ -1057,6 +1108,18 @@ mx:
       status: canonical
       profile: core
       required: optional
+    - name: summary
+      type: string
+      definition: >-
+        A longer prose overview of what this document does, in paragraph form. Distinct from description (short,
+        SEO-scoped, top-level) and purpose (single-sentence why, and on cog-spec documents a structured
+        {kind, subPurpose} taxonomy object rather than prose).
+      example: >-
+        Normative specification for the cog v1 magic-header HTML comment and its cogHeader frontmatter equivalent.
+        Defines the grammar, the conventional keys, and the equivalence rule.
+      status: canonical
+      profile: core
+      required: optional
     - name: license
       type: string
       definition: SPDX license identifier.
@@ -1080,6 +1143,23 @@ mx:
       definition: Ownership details. Can be a string (owner name) or object with owner, delegate, and contact.
       example: Tom Cranstoun
       notes: Can be a string or object with owner, delegate, and contact fields.
+      status: canonical
+      profile: core
+      required: optional
+    - name: stewardship
+      type: object
+      definition: >-
+        Zone 2 (mutable) authorship object grouping the four roles distinct from the immutable Zone 1 originator/author:
+        steward, accountableContact, legalEntity, brand.
+      example:
+        steward: Tom Cranstoun
+        accountableContact: info@cognovamx.com
+        legalEntity: Digital Domain Technologies Ltd
+        brand: CogNovaMX
+      notes: >-
+        Authorship decision D6 (mx-canon/mx-the-gathering/architecture-decisions/2026-05-07-review-fix-design-rationale.cog.md):
+        a single nested object rather than four parallel top-level fields, because the four roles belong together.
+        Sub-keys are free-form strings, not separately registered.
       status: canonical
       profile: core
       required: optional
@@ -1118,14 +1198,6 @@ mx:
         - core
         - report
       required: optional
-    - name: category
-      type: string
-      definition: 'Cog category. Values: mx-core, mx-tool, mx-contact, mx-ops, mx-content.'
-      example: standard
-      notes: Required for cog files. Determines registry grouping.
-      status: canonical
-      profile: cog
-      required: true
     - name: partOf
       type: string
       definition: Parent collection, suite, or initiative.
@@ -1193,26 +1265,6 @@ mx:
       profile:
         - folder
         - cog
-      required: optional
-    - name: riskLevel
-      type: string
-      definition: >-
-        Execution danger classification for action documents declaring runnable behaviour. low = read-only, no side
-        effects. medium = writes files or calls APIs. high = modifies system state, handles credentials. critical =
-        destructive operations, financial transactions — SHOULD have a guardrail gate.
-      example: low
-      validValues:
-        - low
-        - medium
-        - high
-        - critical
-      notes: >-
-        Top-level convenience for the same value also accepted inside a security block. Distinct from trustLevel
-        (provenance quality). When both forms are present, the security block wins.
-      status: canonical
-      profile:
-        - cog
-        - all
       required: optional
     - name: replacedBy
       type: string-or-object
@@ -1337,7 +1389,22 @@ mx:
       example: CogNovaMX Ltd
       notes: >-
         Distinct from provenancePublisher (flat provenance field). publisher can be a structured object with sub-fields.
-        Used in Certificate of Genuineness cogs.
+        Used in Community Owned Governance Standard cogs.
+      status: canonical
+      profile: cog
+      required: optional
+    - name: url
+      type: string
+      definition: >-
+        The canonical external URL of the entity this record represents, per the Schema.org `url` property for the
+        declared `schema` type (Person, Organization, BlogPosting). Distinct from `canonicalUri`, which is the
+        GitHub-hosted source-of-truth location of this markdown file itself.
+      example: https://allabout.network
+      alignsWith:
+        - schema:url
+      notes: >-
+        Used alongside schema and publisher on identity/profile cogs (a Person's homepage or LinkedIn) and on
+        published-content records (a BlogPosting's rendered page).
       status: canonical
       profile: cog
       required: optional
@@ -1485,7 +1552,7 @@ mx:
         - title
         - status
         - contentType
-        - category
+        - x-mx-category
       notes: ROUTING.cog.md only. Route hint for agents. Distinct from tags.
       status: canonical
       profile: routing
@@ -1648,21 +1715,6 @@ mx:
       notes: Determines outreach frequency and attention level.
       status: canonical
       profile: contact
-    - name: contentState
-      type: string
-      definition: >-
-        Content workflow position. Distinct from status — contentState tracks where content is in the editorial
-        pipeline and drives publish routing (draft routes to the noindex draft tree, published to the live tree).
-        Values: draft, in-review, published, archived.
-      example: draft
-      validValues:
-        - draft
-        - in-review
-        - published
-        - archived
-      notes: Editorial pipeline position. Distinct from status (generic lifecycle). The enum matches the routing generator, the single consumer.
-      status: canonical
-      profile: core
     - name: cogId
       type: string
       definition: Unique cog identifier within the registry.
@@ -1736,30 +1788,6 @@ mx:
         record. Part of the provenance group.
       status: canonical
       profile: core
-    - name: adr
-      type: string-or-object
-      definition: Architecture Decision Record reference. Links to the ADR that governs this cog's architectural choices.
-      example: mx-canon/mx-maxine-lives/registers/ADR/2026-02-13-mx-web-architecture.cog.md
-      notes: Path to the ADR file. Can be a string (path) or object with path, date, and status.
-      status: canonical
-      profile: cog
-      required: optional
-    - name: ndr
-      type: string-or-object
-      definition: Naming Decision Record reference. Links to the NDR that governs naming conventions.
-      example: mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md
-      notes: Path to the NDR file.
-      status: canonical
-      profile: cog
-      required: optional
-    - name: bdr
-      type: string-or-object
-      definition: Business Decision Record reference. Links to the BDR that governs business decisions.
-      example: mx-canon/mx-maxine-lives/registers/BDR/2026-02-28-company-rename.cog.md
-      notes: Path to the BDR file.
-      status: canonical
-      profile: cog
-      required: optional
     - name: movedFrom
       type: string
       definition: Previous file path before content was relocated.
@@ -2011,6 +2039,28 @@ mx:
         - schema:license
       status: canonical
       profile: core
+    - name: conformsTo
+      type: array
+      definition: >-
+        The specification(s) this document claims structural or format conformance against - a Schema.org type, a
+        Dublin Core term set, an MX spec level. Aligns with Dublin Core dcterms:conformsTo.
+      example:
+        - https://schema.org/PresentationDigitalDocument
+        - https://mx.allabout.network/specs/mx-core-level-1
+      alignsWith:
+        - dcterms:conformsTo
+      status: canonical
+      profile: core
+      required: optional
+    - name: trainingDataPolicy
+      type: string
+      definition: >-
+        Whether and how this document's content may be used in AI training corpora - permitted, restricted, or
+        conditional on attribution. Trust lens: states the terms under which the content may be reused for training.
+      example: permitted-with-attribution
+      status: canonical
+      profile: core
+      required: optional
     - name: inLanguage
       type: string
       definition: >-
@@ -2089,6 +2139,49 @@ mx:
       definition: 'Schema reference identifier. Context-dependent: Schema.org type URL, JSON Schema $id, database schema name.'
       status: canonical
       profile: core
+    - name: validatesAgainst
+      type: array
+      definition: >-
+        The schema(s) or spec(s) this document claims conformance against. Describes the document's claimed
+        conformance (trust lens).
+      example:
+        - cog.meta.v1
+        - mx.spec.v1
+      notes: >-
+        Imported from cog-spec v1.0; canon adopts camelCase per NDR-2026-02-16 (see field-triage-rubric.cog.md Section
+        5 worked examples). Universal, not cog-specific - ruled IN - standard on the rubric's own table.
+      status: canonical
+      profile: core
+      required: optional
+    - name: contractFields
+      type: array
+      definition: >-
+        The frontmatter fields that are contract-bearing - covered by this document's signature or attestation. A
+        change to any listed field invalidates the signature; a change elsewhere does not.
+      example:
+        - title
+        - description
+        - version
+      notes: >-
+        Imported from cog-spec v1.0 (there as x-mx-contract-fields); promoted to first-class per field-triage-rubric.cog.md
+        Section 5 - signing is a universal concern, not vendor-specific. Sibling of metadataFields.
+      status: canonical
+      profile: core
+      required: optional
+    - name: metadataFields
+      type: array
+      definition: >-
+        The frontmatter fields that are mutable without invalidating the document's signature or attestation -
+        editorial metadata such as created/modified dates, not normative content.
+      example:
+        - created
+        - modified
+      notes: >-
+        Imported from cog-spec v1.0 (there as x-mx-metadata-fields); promoted to first-class per field-triage-rubric.cog.md
+        Section 5. Sibling of contractFields.
+      status: canonical
+      profile: core
+      required: optional
     - name: usage
       type: string
       definition: Usage classification. Free-form; prefer existing vocabularies (Schema.org usageInfo, Dublin Core audience).
@@ -2101,6 +2194,68 @@ mx:
       definition: Content classification identifier. Context-dependent; prefer existing taxonomies over local values.
       status: canonical
       profile: core
+    - name: topic
+      type: array
+      definition: >-
+        The specific subject-area classification of this document, distinct from the general-discovery tags array.
+        Aligns with Schema.org about.
+      example:
+        - cog-format
+        - mx-specification
+      alignsWith:
+        - schema:about
+      status: canonical
+      profile: core
+      required: optional
+    - name: speakable
+      type: string
+      definition: >-
+        A voice-assistant-readable summary of this document, matching Schema.org's SpeakableSpecification intent -
+        the passage a text-to-speech agent should read aloud.
+      alignsWith:
+        - schema:speakable
+      status: canonical
+      profile: core
+      required: optional
+    - name: doNotIndex
+      type: boolean
+      definition: Whether this document should be excluded from search-engine and agent indexing. A robots-noindex-style directive.
+      example: false
+      status: canonical
+      profile: core
+      required: optional
+    - name: reviewBy
+      type: string
+      definition: >-
+        The date by which this document's content must next be reviewed for accuracy. Distinct from reviewCycle
+        (the review cadence) - reviewBy is the specific next deadline.
+      example: 2026-11-07
+      status: canonical
+      profile: core
+      required: optional
+    - name: supportContact
+      type: string
+      definition: Contact address (email, URL) for questions about this document's content. Operational-governance lens.
+      example: info@cognovamx.com
+      status: canonical
+      profile: core
+      required: optional
+    - name: aiUsageDeclaration
+      type: object
+      definition: >-
+        A structured AI-usage declaration conforming to the draft-cranstoun-mx-ai-usage-declaration Gathering draft
+        spec - conformance level, review schedule, subject, and publisher. Trust lens.
+      example:
+        conformance:
+          draft: draft-cranstoun-mx-ai-usage-declaration
+          draftVersion: "1.0"
+          level: 1
+        reviewSchedule: P1Y
+      notes: >-
+        Top-level object; sub-keys follow the draft spec, not separately registered here. Used on AI-USAGE.md pages.
+      status: canonical
+      profile: core
+      required: optional
   profiles:
     - name: core
       description: Fields that apply to all MX documents.
@@ -2131,23 +2286,32 @@ mx:
         - readingLevel
         - runbook
         - contentType
-        - contentState
         - name
     - name: cog
-      description: Fields specific to .cog.md files. Machine identifier is derived from filename.
+      description: >-
+        Fields specific to .cog.md files. Cogs are an optional layer on top of MX; the machine identifier is derived
+        from the filename. This is the sole `cog` profile: scripts/cog-field-rules.js (the engine behind
+        frontmatter-validator.js and cog-tools.js) reads ONLY this file directly for profiles, bypassing
+        load-canon.js's multi-file merge - fields-data-cogs.yaml carries the cog-layer field DEFINITIONS
+        (partOf, buildsOn, dependencies, refersTo, cogHeader) but declares no profile of its own.
       required:
-        - category
+        - x-mx-category
         - partOf
+        - purpose
+        - audience
+        - stability
+        - runbook
+        - x-mx-contextProvides
       recommended:
         - buildsOn
         - tags
       optional:
-        - requires
+        - dependencies
         - refersTo
-        - execute
-        - blocks
-        - policy
-        - cogId
+        - x-mx-execute
+        - x-mx-blocks
+        - x-mx-policy
+        - x-mx-cogId
         - cogType
         - publicationDate
         - expires
@@ -2167,11 +2331,19 @@ mx:
         - publisher
         - generate
         - source
-        - adr
-        - ndr
-        - bdr
+        - x-mx-adr
+        - x-mx-ndr
+        - x-mx-bdr
         - deliverable
         - includes
+        - cogHeader
+        - targetsSpecVersion
+        - readiness
+        - operatesOn
+        - troubleshooting
+        - produces
+        - actionType
+        - defaultRemedy
     - name: folder
       description: Fields for .mx.yaml.md folder metadata. All fields are top-level in YAML frontmatter.
       required:
@@ -2239,3 +2411,156 @@ mx:
         - mx:category
         - mx:audience
         - mx:tags
+    - name: book
+      description: >-
+        Fields for book-manuscript chapters and appendices under datalake/manuscripts/mx-books/. Deliberately leaner
+        than other profiles: manuscripts do not carry purpose, audience, stability, runbook, or x-mx-contextProvides -
+        Appendix M §24 is their own frontmatter contract, distinct from the general operational field set.
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+      recommended:
+        - version
+        - tags
+        - status
+        - book
+        - chapter
+        - canonicalUri
+      optional:
+        - x-mx-quotes
+        - x-mx-createdHash
+        - copyright
+        - x-mx-wordCount
+    - name: blog
+      description: Fields for mx-site blog posts authored as markdown in datalake/draft-site/blog/.
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - purpose
+        - audience
+        - stability
+        - runbook
+        - x-mx-contextProvides
+      recommended:
+        - version
+        - tags
+        - canonicalUri
+        - x-mx-contentState
+      optional:
+        - x-mx-neededFor
+        - x-mx-managedBy
+        - servedAt
+        - generate
+        - x-mx-category
+        - x-mx-aiAssistance
+        - blogUrl
+        - blogFilename
+    - name: contact
+      description: Fields for CRM contact/person records under mx-crm/contacts/.
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - purpose
+        - audience
+        - stability
+        - runbook
+        - x-mx-contextProvides
+      recommended:
+        - version
+        - slug
+        - displayName
+        - status
+        - canonicalUri
+      optional:
+        - x-mx-contactKind
+        - x-mx-category
+        - agentType
+        - partOf
+        - schema
+        - publisher
+        - url
+        - image
+        - dependencies
+        - refersTo
+        - x-mx-pdfDoctype
+        - x-mx-createdHash
+        - generate
+        - x-mx-quotes
+    - name: report
+      description: Fields for session reports, completion reports, and generated audit reports.
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - purpose
+        - audience
+        - stability
+        - runbook
+        - x-mx-contextProvides
+      recommended:
+        - version
+        - status
+        - canonicalUri
+      optional:
+        - x-mx-createdHash
+        - partOf
+        - refersTo
+        - relatedTo
+        - generate
+        - confidential
+    - name: audit
+      description: Fields for the MX web-audit pipeline's report/scoring outputs (mx-reginald/audit/).
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - purpose
+        - audience
+        - stability
+        - runbook
+        - x-mx-contextProvides
+      recommended:
+        - version
+        - status
+        - canonicalUri
+        - generate
+      optional:
+        - x-mx-createdHash
+        - partOf
+        - refersTo
+        - relatedTo
+    - name: event
+      description: >-
+        Fields for event, conference, and presentation records. Thin category; too few real examples in the estate
+        to justify anything beyond the core required set (field-triage-rubric.cog.md Rule 2 - do not invent fields
+        without evidence).
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+    - name: script
+      description: >-
+        Fields for contentType: script documents (not code-carrier files, which are covered separately by
+        fields-data-carriers.yaml). Thin category; minimal evidence of real usage in the estate - conservative
+        required set only, matching core.
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
