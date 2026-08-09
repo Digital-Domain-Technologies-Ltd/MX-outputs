@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '1.8'
+version: '1.11'
 created: '2026-04-15'
-modified: '2026-08-06'
+modified: '2026-08-07'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard. Contains both x-mx- public extensions (openly published) and
@@ -736,70 +736,6 @@ mx:
       status: canonical
       profile: folder
       required: optional
-    - name: aiTraining
-      type: string
-      definition: 'AI training policy. Values: conditional, allowed, prohibited. Inheritable.'
-      example: conditional
-      validValues:
-        - conditional
-        - allowed
-        - prohibited
-      notes: Inheritable. When conditional, check aiTrainingConditions.
-      status: canonical
-      profile: folder
-    - name: aiTrainingConditions
-      type: array
-      definition: Conditions under which AI training is permitted. Array of strings describing exclusions or requirements.
-      example:
-        - exclude credentials
-        - exclude personal data
-      notes: Only relevant when aiTraining is conditional.
-      status: canonical
-      profile: folder
-    - name: aiSensitivePaths
-      type: array
-      definition: Glob patterns for paths that AI agents must not read or train on.
-      example:
-        - secrets/**
-        - .env
-        - credentials.*
-      notes: Glob patterns. Applied recursively within the folder.
-      status: canonical
-      profile: folder
-    - name: aiPermittedAreas
-      type: array
-      definition: Glob patterns for paths where AI generation is allowed.
-      example:
-        - docs/**
-        - src/public/**
-      notes: Glob patterns for explicitly allowed AI generation.
-      status: canonical
-      profile: folder
-    - name: aiProhibitedAreas
-      type: array
-      definition: Glob patterns for paths where AI generation is prohibited.
-      example:
-        - legal/**
-        - contracts/**
-      notes: Glob patterns for explicitly forbidden AI generation.
-      status: canonical
-      profile: folder
-    - name: aiGenerationAllowed
-      type: boolean
-      definition: Whether AI agents may generate new content. Inheritable.
-      default: true
-      example: false
-      notes: Inheritable. Only declare when prohibiting generation.
-      status: canonical
-      profile: folder
-    - name: aiGenerationReviewRequired
-      type: boolean
-      definition: Whether AI-generated content requires human review. Inheritable.
-      default: true
-      example: false
-      notes: Inheritable. Only declare when waiving the review requirement.
-      status: canonical
-      profile: folder
     - name: wordCount
       type: number
       definition: Word count of the document content.
@@ -2387,18 +2323,85 @@ mx:
       context: 'Declared under the mx block on action cogs so every friction has a machine-readable, owner-routed resolution.'
     - name: x-mx-category
       type: string
-      definition: 'Cog category, CogNovaMX taxonomy. Values: mx-core, mx-tool, mx-contact, mx-ops, mx-content.'
+      definition: 'Cog category for registry grouping (CogNovaMX taxonomy). Controlled vocabulary; see validValues. Synonym and variant spellings are normalised to one canonical value (for example mx-tools to mx-tool, contact to mx-contact, adr to decision-record).'
       example: mx-core
       validValues:
-        - mx-core
-        - mx-tool
+        - architecture
+        - audit-suite
+        - brand
+        - business
+        - cockpit
+        - collaborate
+        - contributor-profile
+        - convention
+        - crm
+        - crm-material
+        - decision-record
+        - deliverable
+        - director-briefing
+        - draft
+        - event
+        - example
+        - founder-profile
+        - governance
+        - infrastructure
+        - learning
+        - manual
+        - marketing
+        - messaging
+        - methodology
+        - mx-app
+        - mx-architecture
+        - mx-audit
+        - mx-canon
         - mx-contact
-        - mx-ops
         - mx-content
+        - mx-core
+        - mx-dev
+        - mx-maxine-core
+        - mx-ops
+        - mx-os
+        - mx-research
+        - mx-sales
+        - mx-the-gathering
+        - mx-tool
+        - naming
+        - onboarding
+        - outreach
+        - output-scripts
+        - partner-profile
+        - pipeline
+        - plan
+        - prd
+        - principle
+        - product
+        - prospect
+        - provenance
+        - reference
+        - reference-implementation
+        - reginald
+        - registry
+        - reminders
+        - restaurant
+        - risk
+        - security
+        - specification
+        - standard
+        - strategy
+        - system
+        - technical-notes
+        - template
+        - understand
+        - validation
+        - vendor-extensions
+        - venue
+        - vision
+        - workflow
       notes: >-
         Vendor-tier cog taxonomy, distinct from the standard contentType field (which types the document
-        universally). The bare `category` name is a deprecated synonym; see fields-data.yaml's deprecations table
-        and mx-canon/ssot/field-cull-log.md.
+        universally). The controlled vocabulary is broadened to the categories the estate actually uses, with
+        synonym spellings collapsed to one canonical value. The bare `category` name is a deprecated synonym; see
+        fields-data.yaml's deprecations table and mx-canon/ssot/field-cull-log.md.
       status: canonical
       profile: x-mx-public
       required: true

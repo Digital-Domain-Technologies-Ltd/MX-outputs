@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '5.9'
+version: '6.0'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-08-06'
+modified: '2026-08-07'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -1485,6 +1485,85 @@ mx:
         - core
         - folder
       required: optional
+    - name: aiTraining
+      type: string
+      definition: 'Training-data policy for this document or folder: whether its content may be used in AI training corpora. Values: allowed, prohibited, conditional. Inheritable. Trust lens.'
+      example: conditional
+      validValues:
+        - allowed
+        - prohibited
+        - conditional
+      notes: Inheritable. When conditional, check aiTrainingConditions. The enumerated per-object form of the document-level trainingDataPolicy narrative field.
+      status: canonical
+      profile:
+        - core
+        - folder
+      required: optional
+    - name: aiTrainingConditions
+      type: array
+      definition: Conditions under which AI training is permitted, as an array of strings describing exclusions or requirements.
+      example:
+        - exclude credentials
+        - exclude personal data
+      notes: Only relevant when aiTraining is conditional.
+      status: canonical
+      profile:
+        - core
+        - folder
+      required: optional
+    - name: aiSensitivePaths
+      type: array
+      definition: Glob patterns for paths that AI agents must not read or train on.
+      example:
+        - secrets/**
+        - .env
+        - credentials.*
+      notes: Glob patterns, applied recursively within the folder. Folder metadata only.
+      status: canonical
+      profile: folder
+      required: optional
+    - name: aiPermittedAreas
+      type: array
+      definition: Glob patterns for paths where AI generation is allowed.
+      example:
+        - docs/**
+        - src/public/**
+      notes: Glob patterns for explicitly allowed AI generation. Folder metadata only.
+      status: canonical
+      profile: folder
+      required: optional
+    - name: aiProhibitedAreas
+      type: array
+      definition: Glob patterns for paths where AI generation is prohibited.
+      example:
+        - legal/**
+        - contracts/**
+      notes: Glob patterns for explicitly forbidden AI generation. Folder metadata only.
+      status: canonical
+      profile: folder
+      required: optional
+    - name: aiGenerationAllowed
+      type: boolean
+      definition: Whether AI agents may generate new content for this document or folder. Inheritable.
+      default: true
+      example: false
+      notes: Inheritable. Only declare when prohibiting generation.
+      status: canonical
+      profile:
+        - core
+        - folder
+      required: optional
+    - name: aiGenerationReviewRequired
+      type: boolean
+      definition: Whether AI-generated content requires human review before it is trusted. Inheritable.
+      default: true
+      example: false
+      notes: Inheritable. Only declare when waiving the review requirement. Operational-governance lens.
+      status: canonical
+      profile:
+        - core
+        - folder
+      required: optional
     - name: mxSpecVersion
       type: string
       definition: MX specification version. Distinct from version (document version). Typically '1.0'.
@@ -2058,6 +2137,7 @@ mx:
         Whether and how this document's content may be used in AI training corpora - permitted, restricted, or
         conditional on attribution. Trust lens: states the terms under which the content may be reused for training.
       example: permitted-with-attribution
+      notes: The narrative document-level form of the reuse-for-training policy. For the enumerated allowed/prohibited/conditional form and the folder-level and path-glob controls, see aiTraining, aiTrainingConditions, aiSensitivePaths, aiPermittedAreas, and aiProhibitedAreas.
       status: canonical
       profile: core
       required: optional

@@ -3626,17 +3626,22 @@ fields (stripped if identical to parent)</h4>
 <li><code>folderType</code>, <code>primaryLanguages</code>,
 <code>hasSubfolders</code></li>
 <li><code>version</code>, <code>contentType</code></li>
+<li><code>aiAssistance</code>, <code>aiEditable</code>,
+<code>aiTraining</code>, <code>aiTrainingConditions</code>,
+<code>aiGenerationAllowed</code>,
+<code>aiGenerationReviewRequired</code></li>
 </ul>
-<p>Vendor AI-policy fields (<code>aiAssistance</code>,
-<code>aiEditable</code>, <code>aiGenerationAllowed</code>,
-<code>aiGenerationReviewRequired</code>, <code>aiTraining</code>,
-<code>aiTrainingConditions</code>) were part of the inheritable set
-before the 2026-04-17 triage. The <code>ai.*</code> namespace is now
-parked pending W3C/NIST/IEEE convergence; those fields are removed from
-the standard. Implementations that still need folder-level AI-policy
-governance carry it through their vendor extension
-(<code>x-mx-*</code>), which is never inherited - per-folder per the
-Extensions note's namespace policy.</p>
+<p>The AI-policy fields are standard folder-metadata fields: a folder
+declares them once and its subtree inherits them. <code>aiTraining</code>
+and <code>aiTrainingConditions</code> state whether and on what terms the
+subtree's content may enter an AI training corpus;
+<code>aiGenerationAllowed</code> and
+<code>aiGenerationReviewRequired</code> govern whether an agent may
+generate content there and whether that output needs human review. The
+glob-scoped controls <code>aiSensitivePaths</code>,
+<code>aiPermittedAreas</code>, and <code>aiProhibitedAreas</code> are
+declared per folder rather than inherited. Vendor extensions
+(<code>x-mx-*</code>) are never inherited.</p>
 <h4 id="vendor-extension-fields-never-inherited">Vendor extension fields
 (never inherited)</h4>
 <p>Fields prefixed with <code>x-mx-</code> are per-folder and never
@@ -3785,16 +3790,23 @@ state)</td>
 <td><code>actionType</code></td>
 <td>scripted, sop, hybrid (action-doc cogs only)</td>
 </tr>
+<tr>
+<td><code>aiTraining</code></td>
+<td>allowed, prohibited, conditional (document- or folder-level
+training-data policy; when conditional, see
+<code>aiTrainingConditions</code>)</td>
+</tr>
+<tr>
+<td><code>aiAssistance</code></td>
+<td>welcome, restricted, prohibited (AI-assistance policy;
+inheritable)</td>
+</tr>
 </tbody>
 </table>
-<p><code>blogState</code>, <code>aiAssistance</code>,
-<code>aiEditable</code>, <code>aiTraining</code>, <code>priority</code>,
-<code>reportType</code> - previously listed as standard enums - were
-moved to the vendor tier in the 2026-04-17 triage. See <a
-href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-canon/ssot/field-cull-log.md"><code>field-cull-log.md</code></a>
-for the migration map. Callers that used the bare names still work via
-the deprecations table; they emit migration warnings pointing at the
-<code>x-mx-*</code> replacements.</p>
+<p><code>blogState</code>, <code>priority</code>, and
+<code>reportType</code> are CogNovaMX vendor workflow enums, carried as
+<code>x-mx-</code> extensions rather than standard fields; their allowed
+values are governed by CogNovaMX, not The Gathering.</p>
 <hr />
 <h3 id="block-types">11. Block types</h3>
 <p>A cog is composed of blocks. Each block has a type that declares what

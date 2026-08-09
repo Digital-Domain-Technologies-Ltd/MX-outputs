@@ -1015,7 +1015,7 @@ content a section carries:</p>
 <td>string</td>
 <td><code>"welcome"</code></td>
 <td>Whether AI agents are welcome. Values: <code>welcome</code>,
-<code>by-request-only</code>, <code>not-accepted</code>.</td>
+<code>restricted</code>, <code>prohibited</code>.</td>
 </tr>
 <tr>
 <td><code>aiEditable</code></td>
@@ -1039,32 +1039,34 @@ content a section carries:</p>
 <td><code>aiTraining</code></td>
 <td>string</td>
 <td>—</td>
-<td>Training data policy. Values: <code>permitted</code>,
+<td>Training-data policy. Values: <code>allowed</code>,
 <code>prohibited</code>, <code>conditional</code>.</td>
 </tr>
 <tr>
 <td><code>aiTrainingConditions</code></td>
-<td>string</td>
+<td>array</td>
 <td>—</td>
-<td>Conditions under which training is permitted.</td>
+<td>Conditions under which training is permitted, when
+<code>aiTraining</code> is <code>conditional</code>.</td>
 </tr>
 <tr>
 <td><code>aiSensitivePaths</code></td>
 <td>array</td>
 <td>—</td>
-<td>File paths containing sensitive content.</td>
+<td>Glob patterns for paths that AI agents must not read or train
+on.</td>
 </tr>
 <tr>
 <td><code>aiPermittedAreas</code></td>
 <td>array</td>
 <td>—</td>
-<td>Paths where AI agents may operate freely.</td>
+<td>Glob patterns for paths where AI generation is allowed.</td>
 </tr>
 <tr>
 <td><code>aiProhibitedAreas</code></td>
 <td>array</td>
 <td>—</td>
-<td>Paths where AI agents must not operate.</td>
+<td>Glob patterns for paths where AI generation is prohibited.</td>
 </tr>
 </tbody>
 </table>
