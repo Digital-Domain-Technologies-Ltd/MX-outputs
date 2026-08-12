@@ -9,7 +9,7 @@ title: "MX Inspector"
 description: "Drop any file on this page and inspect the MX metadata it carries. The browser reads it locally and bytes never leave your machine. PDFs are classified for tagged structure, MX metadata, and AI-governance provenance; images, SVG, HTML, and other carriers report the MX fields they embed."
 author: "Tom Cranstoun"
 created: 2026-05-31
-modified: 2026-06-30
+modified: 2026-08-12
 version: "1.1"
 
 mx:
@@ -167,7 +167,7 @@ mx:
 
           <p><strong>This inspector reads any file in your browser. There is no upload. We have no server-side record of which files you inspect. The parser itself ships from this site, with no third-party CDN call and no remote dependency at inspection time. The inspection is entirely a conversation between the file and your browser.</strong></p>
 
-          <p>Drop a file above. The inspector reads the MX metadata the file carries and reports what a machine sees. A PDF is read for its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded, then classified MX Compatible, EAA tagged only, or plain. Any other carrier, a raster image, an SVG, an HTML page, a markdown file, or a .mx.yaml sidecar, is read for the MX metadata embedded in its own carrier and classified MX or plain, with every field it carries listed. When the file carries an embedded provenance chain, the evidence-chain view opens so you can walk it. You can download the inspection as machine-readable JSON, and for a PDF a markdown report and the extracted provenance record too.</p>
+          <p>Drop a file above. The inspector reads the MX metadata the file carries and reports what a machine sees. A PDF is read for its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded, then classified MX Compatible, EAA tagged only, or plain, with every MX field in the packet listed in a table: status, audience, canonical URL, the source file and its content hash, licence, lifecycle dates, and the rest. Any other carrier, a raster image, an SVG, an HTML page, a markdown file, or a .mx.yaml sidecar, is read for the MX metadata embedded in its own carrier and classified MX or plain, with every field it carries listed the same way. When the file carries an embedded provenance chain, the evidence-chain view opens so you can walk it. You can download the inspection as machine-readable JSON, and for a PDF a markdown report and the extracted provenance record too.</p>
 
           <p>For the conceptual background on PDFs, what each artefact is, why it matters under the European Accessibility Act and the EU AI Act, and how to verify any claim with three command-line tools, read the explainer: <a href="/learn/mx-for-pdfs.html">MX for PDFs</a>. The inspector is the interactive companion; the explainer is the walk-through.</p>
 
@@ -182,7 +182,7 @@ mx:
 
           <h3 id="check-mx-namespace">MX XMP namespace</h3>
 
-          <p>An MX Compatible PDF carries a packet of MX-namespaced metadata in its XMP stream: status, content type, canonical URL, source repository, audience, conformance claims, and several other fields. The inspector probes for these fields and reports the first one found, plus its value, as evidence that the MX packet is present. The namespace URI is <code>https://mx.allabout.network/ns/1.0</code>.</p>
+          <p>An MX Compatible PDF carries a packet of MX-namespaced metadata in its XMP stream: status, content type, canonical URL, source repository, audience, conformance claims, and several other fields. The inspector reads the whole packet and lists every MX field it finds, name and value, in the MX metadata table under the evidence findings, so what the file declares about itself is on screen rather than summarised. The same table travels into the downloadable JSON and markdown reports. The namespace URI is <code>https://mx.allabout.network/ns/1.0</code>.</p>
 
           <h3 id="check-provenance">Provenance AI payload</h3>
 

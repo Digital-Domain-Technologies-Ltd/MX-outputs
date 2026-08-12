@@ -156,6 +156,28 @@ export function detectMxMetadata(metadata) {
   return { present: false };
 }
 
+// Every mx:* field the XMP packet carries, as a name -> value map for the
+// field table, so the PDF path lists the full normal MX metadata the same
+// way every other carrier does. The provenance payload is excluded here:
+// it is a whole JSON document, and the evidence-chain explorer renders it.
+export function readMxFieldTable(metadata) {
+  const md = metadata && metadata.metadata;
+  const out = {};
+  if (!md || typeof md.getAll !== 'function') return out;
+  const all = md.getAll() || {};
+  for (const key of Object.keys(all)) {
+    const m = key.match(/^mx:(.+)$/i);
+    if (!m) continue;
+    const name = m[1];
+    if (/^provenanceaipayload$/i.test(name)) continue;
+    const value = all[key];
+    if (value === null || value === undefined || value === '') continue;
+    const label = name.charAt(0).toUpperCase() + name.slice(1);
+    out[label] = Array.isArray(value) ? value.join(', ') : String(value);
+  }
+  return out;
+}
+
 export function detectProvenanceAiPayload(metadata) {
   const payload = readXmpField(metadata.metadata, 'mx:ProvenanceAiPayload') ||
     readXmpField(metadata.metadata, 'ProvenanceAiPayload');
@@ -196,6 +218,21 @@ export function detectProvenanceSchemaVersion(parsed) {
   return null;
 }
 
+// Detail-line builders for classify()'s evidence rows, extracted so the
+// row assembly stays a flat list rather than a nest of ternaries.
+function mxNamespaceDetail(findings) {
+  if (!findings.mxMeta.present) return 'No mx:* fields detected in the XMP packet.';
+  const count = findings.fields ? Object.keys(findings.fields).length : 0;
+  if (count) return `${count} mx:* field(s) in the packet - listed in the MX metadata table below.`;
+  return `${findings.mxMeta.sampleField} = ${String(findings.mxMeta.sampleValue).slice(0, 80)}`;
+}
+
+function provenanceDetail(findings) {
+  if (!findings.provenance.present) return 'mx:ProvenanceAiPayload field absent.';
+  if (!findings.provenance.parsed) return `Payload present but does not parse as JSON: ${findings.provenance.parseError}`;
+  return `${findings.provenance.parsed.steps?.length || 0} step(s) recorded; operator: ${findings.provenance.parsed.operator || 'unknown'}`;
+}
+
 export function classify(findings) {
   const evidence = [
     {
@@ -210,9 +247,7 @@ export function classify(findings) {
       key: 'mx-namespace',
       label: 'MX XMP namespace present',
       status: findings.mxMeta.present ? 'pass' : 'fail',
-      detail: findings.mxMeta.present
-        ? `${findings.mxMeta.sampleField} = ${String(findings.mxMeta.sampleValue).slice(0, 80)}`
-        : 'No mx:* fields detected in the XMP packet.',
+      detail: mxNamespaceDetail(findings),
     },
     {
       key: 'provenance-ai',
@@ -220,11 +255,7 @@ export function classify(findings) {
       status: findings.provenance.present
         ? (findings.provenance.parsed ? 'pass' : 'fail')
         : 'fail',
-      detail: findings.provenance.present
-        ? (findings.provenance.parsed
-          ? `${findings.provenance.parsed.steps?.length || 0} step(s) recorded; operator: ${findings.provenance.parsed.operator || 'unknown'}`
-          : `Payload present but does not parse as JSON: ${findings.provenance.parseError}`)
-        : 'mx:ProvenanceAiPayload field absent.',
+      detail: provenanceDetail(findings),
     },
     {
       key: 'responsible-person',
@@ -297,6 +328,16 @@ export function makeReportMarkdown(file, classification, findings) {
     lines.push(`| ${row.label} | ${row.status} | ${row.detail} |`);
   }
   lines.push('');
+  if (findings.fields && Object.keys(findings.fields).length) {
+    lines.push('## MX metadata');
+    lines.push('');
+    lines.push('| Field | Value |');
+    lines.push('|-------|-------|');
+    for (const [k, v] of Object.entries(findings.fields)) {
+      lines.push(`| ${k} | ${String(v).replace(/\|/g, '\\|').slice(0, 200)} |`);
+    }
+    lines.push('');
+  }
   if (findings.responsiblePerson) {
     lines.push('## Responsible Person');
     lines.push('');
@@ -327,6 +368,7 @@ export async function inspectPdfDoc(pdfDoc) {
   const meta = await readPdfMetadata(pdfDoc);
   const tagged = detectTaggedTree(meta);
   const mxMeta = detectMxMetadata(meta);
+  const fields = readMxFieldTable(meta);
   const provenance = detectProvenanceAiPayload(meta);
   const provenanceSchemaVersion = detectProvenanceSchemaVersion(provenance.parsed);
   const parties = readPartiesFromPayload(provenance.parsed);
@@ -335,7 +377,7 @@ export async function inspectPdfDoc(pdfDoc) {
     || provenance.parsed?.responsiblePerson
     || null;
 
-  const findings = { info: meta.info, tagged, mxMeta, provenance, provenanceSchemaVersion, parties, responsiblePerson, carrier: 'pdf' };
+  const findings = { info: meta.info, tagged, mxMeta, fields, provenance, provenanceSchemaVersion, parties, responsiblePerson, carrier: 'pdf' };
   const classification = classify(findings);
   return { findings, classification };
 }

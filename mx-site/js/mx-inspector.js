@@ -180,7 +180,7 @@ function renderResults(file, carrier, classification, findings, resultsEl) {
     </p>
 
     ${evidenceTable(classification)}
-    ${isPdf ? '' : metadataTable(findings.fields)}
+    ${metadataTable(findings.fields)}
     ${provUrlPanel}
 
     <h3>Downloads</h3>
