@@ -144,34 +144,20 @@ mx:
         </h1>
         <p class="subtitle">Drop a file. Your browser reads it locally and it never leaves your machine. The inspector reports the MX metadata the file carries, and walks the provenance chain it holds.</p>
 
-        <nav class="tool-toc" aria-label="On this page">
-          <ul>
-            <li><a class="is-primary" href="#inspect">Inspect a file - the interactive inspector</a></li>
-            <li><a href="#what-the-inspector-checks">What the inspector checks</a></li>
-            <li><a href="#what-the-three-tiers-mean">What the three tiers mean</a></li>
-            <li><a href="#the-mx-compatible-badge">The MX Compatible badge</a></li>
-            <li><a href="#why-this-is-not-server-side">Why this is not server-side</a></li>
-            <li><a href="#we-run-every-pdf-through-this-tool">We run every PDF we ship through this tool</a></li>
-            <li><a href="#credibility-by-mechanism">Credibility by mechanism, not by claim</a></li>
-          </ul>
-        </nav>
+        <label class="tool-dropzone" data-mx-inspector-dropzone>
+          <input type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,.avif,.svg,.html,.htm,.md,.markdown,.yaml,.yml,.json,application/pdf,application/json,image/*" data-mx-inspector-input aria-label="Choose a file to inspect">
+          <p class="tool-dropzone-prompt"><strong>Drop a file here</strong> or click to choose one</p>
+          <p class="tool-dropzone-hint">PDF, image, SVG, HTML, markdown, .mx.yaml, or a provenance .json. Your file stays in your browser.</p>
+          <p class="tool-dropzone-busy" data-mx-inspector-busy hidden></p>
+        </label>
+
+        <div class="tool-results" data-mx-inspector-results hidden aria-live="polite"></div>
       </div>
     </header>
 
     <section class="section section-deep" data-agent-visible="true">
       <div class="section-inner blog-page" role="presentation">
         <article data-agent-visible="true">
-
-          <h2 id="inspect">Inspect a file</h2>
-
-          <label class="tool-dropzone" data-mx-inspector-dropzone>
-            <input type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,.avif,.svg,.html,.htm,.md,.markdown,.yaml,.yml,.json,application/pdf,application/json,image/*" data-mx-inspector-input aria-label="Choose a file to inspect">
-            <p class="tool-dropzone-prompt"><strong>Drop a file here</strong> or click to choose one</p>
-            <p class="tool-dropzone-hint">PDF, image, SVG, HTML, markdown, .mx.yaml, or a provenance .json. Your file stays in your browser.</p>
-            <p class="tool-dropzone-busy" data-mx-inspector-busy hidden></p>
-          </label>
-
-          <div class="tool-results" data-mx-inspector-results hidden aria-live="polite"></div>
 
           <section class="tool-chain" data-prov-explorer-section hidden>
             <h2 id="explore-the-chain">Walk the evidence chain</h2>

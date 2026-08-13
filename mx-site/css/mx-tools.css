@@ -716,54 +716,44 @@
 .prov-chain-hint { font-size: 0.9rem; color: var(--secondary-text); margin: 0.75rem 0 0.5rem; }
 
 /* ════════════════════════════════════════════════════════════════
-   Hero section directory (.tool-toc): the anchor-link box that stands where
-   the dropzone used to sit in the hero. One link per page section; the
-   interactive inspector section carries .is-primary and is visually lifted,
-   because it is the link a visitor came for.
+   Results-replace-dropzone flow. After an inspection the results box stands
+   where the dropzone stood in the hero; the inspect-another control restores
+   the dropzone. When the file embeds a provenance chain, the evidence-chain
+   section is the headline find: its box carries the highlight, and the
+   results box carries a matching jump link pointing down at it.
    ════════════════════════════════════════════════════════════════ */
-.tool-toc {
+.tool-results {
   margin: 2rem auto 0;
-  max-width: 640px;
-  padding: 1.25rem 1.5rem;
-  border: 1px solid var(--mx-border-strong);
-  border-radius: 12px;
-  background-color: var(--mx-tool-surface);
   text-align: left;
 }
 
-.tool-toc ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.tool-inspect-another {
+  margin-left: 1rem;
+  vertical-align: middle;
 }
 
-.tool-toc a {
-  display: block;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  color: var(--mx-text);
-  text-decoration: none;
-  transition: background-color 200ms ease, color 200ms ease;
-}
-
-.tool-toc a:hover,
-.tool-toc a:focus-visible {
-  background-color: var(--mx-tool-surface-strong);
-  color: var(--mx-blue-light);
-}
-
-.tool-toc a.is-primary {
+.tool-chain-jump {
+  display: inline-block;
+  padding: 0.5rem 1rem;
   border: 2px dashed var(--mx-gold);
+  border-radius: 8px;
   background-color: var(--mx-tool-surface-strong);
-  font-weight: 700;
   color: var(--mx-gold);
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-style 200ms ease;
 }
 
-.tool-toc a.is-primary:hover,
-.tool-toc a.is-primary:focus-visible {
+.tool-chain-jump:hover,
+.tool-chain-jump:focus-visible {
   border-style: solid;
   color: var(--mx-gold);
+}
+
+.tool-chain:not([hidden]) {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  border: 2px dashed var(--mx-gold);
+  border-radius: 12px;
+  background-color: var(--mx-tool-surface);
 }

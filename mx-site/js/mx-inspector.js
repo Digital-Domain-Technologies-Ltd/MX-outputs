@@ -172,12 +172,22 @@ function renderResults(file, carrier, classification, findings, resultsEl) {
       <p class="tool-prov-url-status" data-prov-url-status aria-live="polite"></p>
     </div>` : '';
 
+  // The results REPLACE the dropzone in the hero: the dropzone hides, this box
+  // renders in its place, and the "Inspect another file" control brings the
+  // dropzone back. When the file embeds a provenance chain, a highlighted jump
+  // link points at the evidence-chain walk that has opened further down.
+  const chainJump = hasEmbedded
+    ? '<p><a class="tool-chain-jump" href="#explore-the-chain">Walk the evidence chain &darr;</a></p>'
+    : '';
+
   resultsEl.innerHTML = `
     <h2 id="results-heading">Inspection result</h2>
     <p>
       <span class="${verdictClass}">${TIER_LABELS[tier] || tier}</span>
       <span class="tool-verdict-pdf-name">${escapeHtml(file.name)} <small>(${escapeHtml(carrier)})</small></span>
+      <button type="button" class="tool-download tool-inspect-another" data-inspect-another>Inspect another file</button>
     </p>
+    ${chainJump}
 
     ${evidenceTable(classification)}
     ${metadataTable(findings.fields)}
@@ -200,6 +210,24 @@ function renderResults(file, carrier, classification, findings, resultsEl) {
     </div>
   `;
   resultsEl.hidden = false;
+
+  // The swap: results stand where the dropzone stood; the control restores it.
+  const dropzoneEl = document.querySelector('[data-mx-inspector-dropzone]');
+  if (dropzoneEl) dropzoneEl.hidden = true;
+  const anotherBtn = resultsEl.querySelector('[data-inspect-another]');
+  if (anotherBtn) {
+    anotherBtn.addEventListener('click', () => {
+      resultsEl.hidden = true;
+      resultsEl.innerHTML = '';
+      hideChain();
+      const input = document.querySelector('[data-mx-inspector-input]');
+      if (input) input.value = '';
+      if (dropzoneEl) {
+        dropzoneEl.hidden = false;
+        dropzoneEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  }
 
   const inspectionJson = {
     inspectedAt: new Date().toISOString(),
