@@ -47,6 +47,35 @@ function prefersReducedMotion() {
   return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 }
 
+// Fill the detail tabpanel with the RECORD's own identity - the root walk
+// point that precedes the steps: what this evidence chain is, whose it is,
+// which schema governs it, and where it was built.
+function fillRootDetail(panel, parsed, labelId) {
+  panel.setAttribute('aria-labelledby', labelId);
+  panel.textContent = '';
+  panel.appendChild(el('p', { class: 'mx-prov-detail-head' },
+    el('strong', { text: 'The record' }),
+    el('span', { class: 'mx-prov-detail-role', text: ' · root · what this evidence chain is' })));
+  const lines = [];
+  if (parsed.$schema) lines.push(`schema: ${parsed.$schema}`);
+  if (parsed.schemaVersion) lines.push(`schema version: ${parsed.schemaVersion}`);
+  if (parsed.auditId) lines.push(`audit: ${parsed.auditId}`);
+  if (parsed.target) lines.push(`target: ${parsed.target}`);
+  const op = parsed.operator || (parsed.responsiblePerson && parsed.responsiblePerson.name) || '';
+  if (op) lines.push(`operator: ${op}`);
+  if (parsed.startedAt) { const d = new Date(parsed.startedAt); if (!isNaN(d)) lines.push(`started: ${d.toLocaleString()}`); }
+  if (Number.isInteger(parsed.runRevision)) lines.push(`run revision: ${parsed.runRevision}`);
+  if (Array.isArray(parsed.parties) && parsed.parties.length) {
+    lines.push(`parties: ${parsed.parties.map((p) => p.name || p.role || 'unnamed').join(', ')}`);
+  }
+  if (Array.isArray(parsed.frameworks) && parsed.frameworks.length) lines.push(`frameworks catalogued: ${parsed.frameworks.length}`);
+  const commit = parsed.provenance && parsed.provenance.commit
+    && (parsed.provenance.commit.shortSha || parsed.provenance.commit.sha);
+  if (commit) lines.push(`built at commit: ${commit}`);
+  if (parsed.companion) lines.push(`deterministic companion: ${parsed.companion}`);
+  for (const t of lines) panel.appendChild(el('p', { class: 'mx-prov-detail-meta', text: t }));
+}
+
 // The provenance trail as an accessible two-panel popper. Left: blob flow (tablist)
 // plus a detail tabpanel. Right: the JSON tree. Click / Enter / Space / tap / arrow
 // keys operate the blobs; selecting one fills the detail and scrolls the JSON tree
@@ -63,7 +92,26 @@ export function buildChain(parsed) {
   const { root: jsonRoot, stepAnchors } = buildJsonTree(parsed);
   jsonRoot.classList.add('mx-prov-json');
 
-  const nodes = steps.map((s, i) => {
+  // The ROOT walk point: the record itself - its schema, audit identity,
+  // operator, and build origin - stands first in the flow, before any step.
+  // A chain read from the root reads the way a regulator reads it: what IS
+  // this record, then what happened under it.
+  const rootBlob = el('button', {
+    class: 'mx-prov-blob mx-prov-blob-root',
+    type: 'button', role: 'tab', id: 'mx-prov-node-root',
+    'aria-selected': 'false', 'aria-controls': 'mx-prov-detail', tabindex: '-1',
+  },
+    el('span', { class: 'mx-prov-blob-dot', 'aria-hidden': 'true', text: '▣' }),
+    el('span', { class: 'mx-prov-blob-body' },
+      el('span', { class: 'mx-prov-blob-agent', text: 'The record' }),
+      el('span', { class: 'mx-prov-cat mx-prov-cat-root', text: 'Root' }),
+      el('span', { class: 'mx-prov-blob-role', text: `schema ${parsed.schemaVersion || 'unknown'}` }),
+      (parsed.auditId || parsed.target)
+        ? el('span', { class: 'mx-prov-blob-topic', text: parsed.auditId || parsed.target })
+        : null));
+  tablist.appendChild(rootBlob);
+
+  const stepNodes = steps.map((s, i) => {
     const human = isHumanAuthored(s);
     const cat = stepCategory(s);
     const blob = el('button', {
@@ -81,6 +129,7 @@ export function buildChain(parsed) {
     tablist.appendChild(blob);
     return blob;
   });
+  const nodes = [rootBlob, ...stepNodes];
 
   const select = (idx, moveFocus) => {
     nodes.forEach((n, i) => {
@@ -89,11 +138,22 @@ export function buildChain(parsed) {
       n.tabIndex = sel ? 0 : -1;
       n.classList.toggle('mx-prov-blob-selected', sel);
     });
-    fillDetail(panel, nodes[idx]._step, nodes[idx].id);
-    stepAnchors.forEach((a, i) => { if (a) a.classList.toggle('mx-prov-json-hit', i === idx); });
-    const anchor = stepAnchors[idx];
-    if (anchor && anchor.scrollIntoView) {
-      anchor.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'nearest' });
+    const stepIdx = idx - 1; // nodes[0] is the root; steps and anchors are 0-based
+    if (idx === 0) {
+      fillRootDetail(panel, parsed, rootBlob.id);
+    } else {
+      fillDetail(panel, nodes[idx]._step, nodes[idx].id);
+    }
+    stepAnchors.forEach((a, i) => { if (a) a.classList.toggle('mx-prov-json-hit', i === stepIdx); });
+    const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+    if (idx === 0) {
+      // The root's home in the JSON tree is the top of the record.
+      if (jsonRoot.scrollTo) jsonRoot.scrollTo({ top: 0, behavior });
+    } else {
+      const anchor = stepAnchors[stepIdx];
+      if (anchor && anchor.scrollIntoView) {
+        anchor.scrollIntoView({ behavior, block: 'nearest' });
+      }
     }
     if (moveFocus) nodes[idx].focus();
   };
@@ -111,11 +171,9 @@ export function buildChain(parsed) {
   });
   nodes.forEach((n, i) => n.addEventListener('click', () => select(i, true)));
 
-  // Default to the human-caught-flaw step so the aha lands: the file's own record
-  // shows a human catching an AI error and it being fixed.
-  let def = steps.findIndex((s) => /caught|flaw|mislocat/.test(`${s.intent || ''} ${s.stepId || ''}`.toLowerCase()));
-  if (def < 0) def = 0;
-  select(def, false);
+  // The walk starts at the root: what this record IS comes before what
+  // happened under it. The human-caught-flaw aha is one arrow-key away.
+  select(0, false);
 
   flow.appendChild(tablist);
   flow.appendChild(panel);
