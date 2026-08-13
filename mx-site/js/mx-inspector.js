@@ -336,7 +336,39 @@ async function inspectFile(file, resultsEl, busyEl) {
   }
 }
 
-// The URL mode: mx-inspector.html?prov=<https-url-of-provenance-record>
+// The FULL-EXPERIENCE URL mode: mx-inspector.html?inspect=<https-url-of-file>
+// fetches the named public file and runs the exact pipeline a drop runs -
+// verdict tier, evidence table, the MX metadata field table, downloads, and
+// the evidence-chain walk - so a link inside a PDF delivers the whole
+// inspection in one click in any viewer. The visitor's click IS the explicit
+// choice; the URL is echoed while it fetches, and nothing else is sent.
+async function inspectFromQueryParam(resultsEl, busyEl) {
+  let url = '';
+  try {
+    url = new URLSearchParams(window.location.search).get('inspect') || '';
+  } catch { return false; }
+  if (!isHttpUrl(url)) return false;
+  const clean = url.trim();
+  const name = (() => {
+    try { return decodeURIComponent(new URL(clean).pathname.split('/').pop() || 'file'); } catch { return 'file'; }
+  })();
+  busyEl.textContent = `Fetching ${name} for inspection…`;
+  busyEl.hidden = false;
+  try {
+    const res = await fetch(clean, { credentials: 'omit', redirect: 'follow' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const blob = await res.blob();
+    busyEl.hidden = true;
+    const file = new File([blob], name, { type: blob.type });
+    await inspectFile(file, resultsEl, busyEl);
+  } catch (err) {
+    busyEl.hidden = true;
+    renderError(resultsEl, `Could not fetch ${escapeHtml(clean)} for inspection: ${err.message}`);
+  }
+  return true;
+}
+
+// The record-only URL mode: mx-inspector.html?prov=<https-url-of-provenance-record>
 // fetches the named record and opens the chain walk directly, so a link
 // inside a PDF (or anywhere else) reaches the walk in one click in any
 // viewer - no embedded PDF JavaScript, no upload, the same fetch the
@@ -387,7 +419,10 @@ function init() {
 
   if (!dropzone || !fileInput || !resultsEl || !busyEl) return;
 
-  walkFromQueryParam(resultsEl);
+  // ?inspect= (the whole experience) wins over ?prov= (the chain only).
+  inspectFromQueryParam(resultsEl, busyEl).then((handled) => {
+    if (!handled) walkFromQueryParam(resultsEl);
+  });
 
   fileInput.addEventListener('change', (e) => {
     const file = e.target.files && e.target.files[0];
