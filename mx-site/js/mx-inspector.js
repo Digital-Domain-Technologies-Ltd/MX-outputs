@@ -336,6 +336,29 @@ async function inspectFile(file, resultsEl, busyEl) {
   }
 }
 
+// The URL mode: mx-inspector.html?prov=<https-url-of-provenance-record>
+// fetches the named record and opens the chain walk directly, so a link
+// inside a PDF (or anywhere else) reaches the walk in one click in any
+// viewer - no embedded PDF JavaScript, no upload, the same fetch the
+// "Fetch and walk" button makes. The visitor's click on that link IS the
+// explicit choice, so the no-surprise-network-call promise holds; the URL
+// is echoed in the results box before anything is fetched.
+function walkFromQueryParam(resultsEl) {
+  let url = '';
+  try {
+    url = new URLSearchParams(window.location.search).get('prov') || '';
+  } catch { return false; }
+  if (!isHttpUrl(url)) return false;
+  resultsEl.innerHTML = `
+    <h2 id="results-heading">Walking a linked evidence chain</h2>
+    <p>This page was opened with a provenance-record link. Fetching the record the link names - your browser reads the public URL directly; nothing else is sent anywhere.</p>
+    <p><code>${escapeHtml(url)}</code></p>
+    <p class="tool-prov-url-status" data-prov-param-status aria-live="polite"></p>`;
+  resultsEl.hidden = false;
+  fetchAndWalkProvenance(url.trim(), resultsEl.querySelector('[data-prov-param-status]'));
+  return true;
+}
+
 function init() {
   const dropzone = document.querySelector('[data-mx-inspector-dropzone]');
   const fileInput = document.querySelector('[data-mx-inspector-input]');
@@ -344,6 +367,8 @@ function init() {
   chainSectionEl = document.querySelector('[data-prov-explorer-section]');
 
   if (!dropzone || !fileInput || !resultsEl || !busyEl) return;
+
+  walkFromQueryParam(resultsEl);
 
   fileInput.addEventListener('change', (e) => {
     const file = e.target.files && e.target.files[0];
