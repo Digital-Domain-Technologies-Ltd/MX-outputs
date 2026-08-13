@@ -353,8 +353,27 @@ function walkFromQueryParam(resultsEl) {
     <h2 id="results-heading">Walking a linked evidence chain</h2>
     <p>This page was opened with a provenance-record link. Fetching the record the link names - your browser reads the public URL directly; nothing else is sent anywhere.</p>
     <p><code>${escapeHtml(url)}</code></p>
-    <p class="tool-prov-url-status" data-prov-param-status aria-live="polite"></p>`;
+    <p class="tool-prov-url-status" data-prov-param-status aria-live="polite"></p>
+    <p><a class="tool-chain-jump" href="#explore-the-chain">Walk the evidence chain &darr;</a>
+    <button type="button" class="tool-download tool-inspect-another" data-inspect-another>Inspect a file instead</button></p>`;
   resultsEl.hidden = false;
+
+  // The same swap rule as a dropped file: the walk banner REPLACES the
+  // dropzone box; the control brings the dropzone back (and drops the ?prov
+  // parameter from the address bar so a reload shows the plain inspector).
+  const dropzoneEl = document.querySelector('[data-mx-inspector-dropzone]');
+  if (dropzoneEl) dropzoneEl.hidden = true;
+  const anotherBtn = resultsEl.querySelector('[data-inspect-another]');
+  if (anotherBtn) {
+    anotherBtn.addEventListener('click', () => {
+      resultsEl.hidden = true;
+      resultsEl.innerHTML = '';
+      hideChain();
+      try { window.history.replaceState(null, '', window.location.pathname); } catch { /* address bar keeps the param */ }
+      if (dropzoneEl) dropzoneEl.hidden = false;
+    });
+  }
+
   fetchAndWalkProvenance(url.trim(), resultsEl.querySelector('[data-prov-param-status]'));
   return true;
 }
