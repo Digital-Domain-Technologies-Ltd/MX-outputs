@@ -1,0 +1,659 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-ai/v2",
+  "schemaVersion": "2.0",
+  "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
+  "auditId": "cmscritic.com-2026-08-12",
+  "runRevision": 2,
+  "lastWriteAt": "2026-08-12T17:26:02.960Z",
+  "operator": "Tom.cranstoun@gmail.com",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "tom.cranstoun@gmail.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "tom.cranstoun@gmail.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": "https://cmscritic.com",
+  "startedAt": "2026-08-12T17:15:28.827Z",
+  "frameworks": [
+    {
+      "id": "EU-AI-Act",
+      "title": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+      "version": "2024/1689",
+      "jurisdiction": "EU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-ai-act": {}
+    },
+    {
+      "id": "EU-GDPR",
+      "title": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+      "version": "2016/679",
+      "jurisdiction": "EU",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-gdpr": {}
+    },
+    {
+      "id": "Council-of-Europe-AI-Convention",
+      "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+      "version": "2024-05",
+      "jurisdiction": "Council of Europe (open for ratification)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-coe-ai": {}
+    },
+    {
+      "id": "UK-ICO-AI-guidance",
+      "title": "UK ICO Guidance on AI and Data Protection",
+      "version": "2024-09",
+      "jurisdiction": "UK",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-ico": {}
+    },
+    {
+      "id": "UK-Data-Protection-Act-2018",
+      "title": "Data Protection Act 2018",
+      "version": "2018",
+      "jurisdiction": "UK",
+      "appliesTo": "data-handling-steps",
+      "claim": "evidence-vehicle",
+      "x-uk-dpa": {}
+    },
+    {
+      "id": "US-NIST-AI-RMF",
+      "title": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "jurisdiction": "US (voluntary federal framework)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nist-ai-rmf": {}
+    },
+    {
+      "id": "US-Colorado-AI-Act",
+      "title": "Colorado SB 26-189 — Consumer Protections in Interactions with Artificial Intelligence Systems (repeals and replaces SB 24-205)",
+      "version": "SB-26-189",
+      "jurisdiction": "US-CO",
+      "appliesTo": "consequential-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-colorado-ai-act": {}
+    },
+    {
+      "id": "US-Texas-TRAIGA",
+      "title": "Texas Responsible AI Governance Act (HB 149)",
+      "version": "2025-HB-149",
+      "jurisdiction": "US-TX",
+      "appliesTo": "high-risk-steps",
+      "claim": "evidence-vehicle",
+      "x-us-texas-traiga": {}
+    },
+    {
+      "id": "US-California-AB-2013",
+      "title": "California AB 2013 — Generative AI Training Data Transparency",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "training-data-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2013": {}
+    },
+    {
+      "id": "US-California-AB-2655",
+      "title": "California AB 2655 — Election Deepfake Disclosure",
+      "version": "2024",
+      "jurisdiction": "US-CA",
+      "appliesTo": "election-content-steps",
+      "claim": "evidence-vehicle",
+      "x-us-ca-ab-2655": {}
+    },
+    {
+      "id": "US-Utah-AI-Policy-Act",
+      "title": "Utah AI Policy Act (SB 149)",
+      "version": "2024-SB-149",
+      "jurisdiction": "US-UT",
+      "appliesTo": "consumer-facing-steps",
+      "claim": "evidence-vehicle",
+      "x-us-utah-ai": {}
+    },
+    {
+      "id": "US-NYC-Local-Law-144",
+      "title": "NYC Local Law 144 of 2021 — Automated Employment Decision Tools",
+      "version": "2023-07-effective",
+      "jurisdiction": "US-NY-NYC",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-nyc-ll144": {}
+    },
+    {
+      "id": "US-Illinois-HB-3773",
+      "title": "Illinois HB 3773 — Artificial Intelligence in Employment Decisions",
+      "version": "2024",
+      "jurisdiction": "US-IL",
+      "appliesTo": "employment-decision-steps",
+      "claim": "evidence-vehicle",
+      "x-us-illinois-hb-3773": {}
+    },
+    {
+      "id": "China-Generative-AI-Interim-Measures",
+      "title": "Interim Measures for the Administration of Generative AI Services",
+      "version": "2023-08",
+      "jurisdiction": "CN",
+      "appliesTo": "generative-output-steps",
+      "claim": "evidence-vehicle",
+      "x-china-generative-ai": {}
+    },
+    {
+      "id": "China-Algorithmic-Recommendation",
+      "title": "Provisions on the Administration of Algorithmic Recommendations",
+      "version": "2022-03",
+      "jurisdiction": "CN",
+      "appliesTo": "recommender-steps",
+      "claim": "evidence-vehicle",
+      "x-china-algo-rec": {}
+    },
+    {
+      "id": "China-Deep-Synthesis",
+      "title": "Provisions on the Administration of Deep Synthesis Internet Information Services",
+      "version": "2023-01",
+      "jurisdiction": "CN",
+      "appliesTo": "synthetic-media-steps",
+      "claim": "evidence-vehicle",
+      "x-china-deep-synthesis": {}
+    },
+    {
+      "id": "South-Korea-AI-Basic-Act",
+      "title": "Act on the Development of Artificial Intelligence and Establishment of Trust",
+      "version": "2025-01",
+      "jurisdiction": "KR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-kr-ai-basic": {}
+    },
+    {
+      "id": "Brazil-PL-2338",
+      "title": "Marco Legal da Inteligência Artificial (PL 2338/2023)",
+      "version": "2023",
+      "jurisdiction": "BR",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-br-pl-2338": {}
+    },
+    {
+      "id": "Canada-AIDA",
+      "title": "Artificial Intelligence and Data Act (Bill C-27 part)",
+      "version": "2022-Bill-C-27",
+      "jurisdiction": "CA",
+      "appliesTo": "high-impact-steps",
+      "claim": "evidence-vehicle",
+      "x-ca-aida": {}
+    },
+    {
+      "id": "Japan-METI-AI-Guidelines",
+      "title": "AI Guidelines for Business (METI / MIC)",
+      "version": "2024",
+      "jurisdiction": "JP",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-jp-meti-ai": {}
+    },
+    {
+      "id": "Singapore-Model-AI-Governance",
+      "title": "Model AI Governance Framework",
+      "version": "2024",
+      "jurisdiction": "SG",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-sg-model-ai": {}
+    },
+    {
+      "id": "Australia-AI-Ethics",
+      "title": "AI Ethics Framework",
+      "version": "2019",
+      "jurisdiction": "AU",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-au-ai-ethics": {}
+    },
+    {
+      "id": "India-Digital-India-Act-draft",
+      "title": "Digital India Act (draft)",
+      "version": "2024-draft",
+      "jurisdiction": "IN",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-in-digital-india": {}
+    },
+    {
+      "id": "OECD-AI-Principles",
+      "title": "OECD AI Principles",
+      "version": "2019-rev-2024",
+      "jurisdiction": "OECD (multilateral baseline)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-oecd-ai": {}
+    },
+    {
+      "id": "G7-Hiroshima-AI-Code",
+      "title": "G7 Hiroshima AI Process Code of Conduct",
+      "version": "2023",
+      "jurisdiction": "G7 (voluntary)",
+      "appliesTo": "all-steps",
+      "claim": "evidence-vehicle",
+      "x-g7-hiroshima": {}
+    },
+    {
+      "id": "ISO-42001",
+      "title": "ISO/IEC 42001 — Artificial Intelligence Management Systems",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-iso-42001": {}
+    },
+    {
+      "id": "ISO-23894",
+      "title": "ISO/IEC 23894 — Artificial Intelligence Risk Management",
+      "version": "2023",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "risk-management",
+      "claim": "evidence-vehicle",
+      "x-iso-23894": {}
+    },
+    {
+      "id": "ISO-42005",
+      "title": "ISO/IEC 42005 — AI System Impact Assessment",
+      "version": "2025",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "impact-assessment",
+      "claim": "evidence-vehicle",
+      "x-iso-42005": {}
+    },
+    {
+      "id": "prEN-18286",
+      "title": "prEN 18286 — AI Management System (candidate harmonised European standard, CEN-CENELEC JTC 21)",
+      "version": "draft",
+      "jurisdiction": "EU (CEN-CENELEC, in development)",
+      "appliesTo": "management-system",
+      "claim": "evidence-vehicle",
+      "x-pren-18286": {}
+    },
+    {
+      "id": "ISO-IEC-27001",
+      "title": "ISO/IEC 27001 — Information Security Management Systems",
+      "version": "2022",
+      "jurisdiction": "ISO (international standard)",
+      "appliesTo": "information-security",
+      "claim": "evidence-vehicle",
+      "x-iso-27001": {}
+    },
+    {
+      "id": "EU-DSA",
+      "title": "Regulation (EU) 2022/2065 — Digital Services Act",
+      "version": "2022/2065",
+      "jurisdiction": "EU",
+      "appliesTo": "recommender-platform-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dsa": {}
+    },
+    {
+      "id": "EU-DORA",
+      "title": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+      "version": "2022/2554",
+      "jurisdiction": "EU",
+      "appliesTo": "operational-resilience-steps",
+      "claim": "evidence-vehicle",
+      "x-eu-dora": {}
+    }
+  ],
+  "frameworksCited": [
+    "EU-AI-Act",
+    "UK-ICO-AI-guidance",
+    "NIST-AI-RMF",
+    "Colorado-AI-Act"
+  ],
+  "companion": "cmscritic-com-report.provenance.deterministic.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "74d35794ec8bc3bc2551423fa390609b98bd4859",
+      "shortSha": "74d3579"
+    },
+    "branch": "main",
+    "dirty": true,
+    "nodeVersion": "v26.7.0",
+    "host": "toms-MacBook-Pro-748.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.6.0",
+    "defaults": {
+      "humanIntervention": "none",
+      "frameworks": [
+        "EU-AI-Act",
+        "UK-ICO-AI-guidance",
+        "NIST-AI-RMF",
+        "Colorado-AI-Act"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-08-12T17:15:28.972Z",
+      "stepId": "report.rewrite-1",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 1/5 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 1,
+        "blockCount": 5,
+        "skeletonPath": "/Users/tomcranstoun/.gitea-audit-repos/audit-cmscritic.com/2026-08-12/cmscritic.com/.infilled/cmscritic-com.md"
+      },
+      "outputs": {
+        "file": "cmscritic-com-report.md",
+        "sha256": "b5f2063ad0d4d1f9bd7073834f60ebc0e68d8762cb1ade22c609f65be89ab332"
+      },
+      "rubricHash": "21c9fbbae2ae99bb935794556ea20a61627389f8d1bcfb51b196d9a8e0d30ab0",
+      "promptHash": "d025ee5109893354256aab57d7934c642c7f22d6e31839c90024a903bca10bc6",
+      "inputHashes": [
+        {
+          "hash": "b13eb0d0aa538aa670b4e1c04b999ced43e55f817cee527c9e735070b06f5bfb",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "The headline opportunity is to raise Commerce Visibility, which sits at 10/100 and would lift overall machine readiness. Accessibility presents a Priority 1 compliance gap: 13 distinct WCAG AA issue types across 333 raw instances are tied to 23 recurring template patterns; fixing those patterns removes many violations.\n\nPlatform constraints do not limit the addition of MX governance metadata, which is required to move from Discoverable to Governed. Adding mx:status, mx:contentType, mx:audience, ",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-08-12T17:15:29.091Z",
+      "stepId": "report.rewrite-2",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 2/5 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 2,
+        "blockCount": 5,
+        "skeletonPath": "/Users/tomcranstoun/.gitea-audit-repos/audit-cmscritic.com/2026-08-12/cmscritic.com/.infilled/cmscritic-com.md"
+      },
+      "outputs": {
+        "file": "cmscritic-com-report.md",
+        "sha256": "26004d1dc6579e5ab885c9e711a38a2435c1a6b1b21277f0dc8a688ad82b640d"
+      },
+      "rubricHash": "21c9fbbae2ae99bb935794556ea20a61627389f8d1bcfb51b196d9a8e0d30ab0",
+      "promptHash": "4746cf999429d3235362909a54dadd55e606f93b1659f7170cdd18157bb0d571",
+      "inputHashes": [
+        {
+          "hash": "b13eb0d0aa538aa670b4e1c04b999ced43e55f817cee527c9e735070b06f5bfb",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "| Enhancement | What it adds for machines | Effort |\n|-------------|--------------------------|--------|\n| **sameAs links** (ORCID / Wikidata / LinkedIn) on Organization and Person entities | Provides authoritative external identifiers that help machines disambiguate and enrich entity profiles | Low |\n| **SpeakableSpecification** CSS selectors on Article pages | Enables voice assistants to surface article content directly, improving accessibility for spoken interfaces | Low |\n| **Content‑Signal ",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-08-12T17:15:29.209Z",
+      "stepId": "report.rewrite-3",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 3/5 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 3,
+        "blockCount": 5,
+        "skeletonPath": "/Users/tomcranstoun/.gitea-audit-repos/audit-cmscritic.com/2026-08-12/cmscritic.com/.infilled/cmscritic-com.md"
+      },
+      "outputs": {
+        "file": "cmscritic-com-report.md",
+        "sha256": "ffee0597cbce76459bbec7990f84db189dae88448a73f6488b98675a4be3cada"
+      },
+      "rubricHash": "21c9fbbae2ae99bb935794556ea20a61627389f8d1bcfb51b196d9a8e0d30ab0",
+      "promptHash": "01f3eb98da8aa6ab37e1eb2eb6ca6dafa66624795b6763357b2356d1ef7bf13b",
+      "inputHashes": [
+        {
+          "hash": "b13eb0d0aa538aa670b4e1c04b999ced43e55f817cee527c9e735070b06f5bfb",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "The lowest-scoring components are Cross‑entity references and Linked‑data signals, each scoring only six points. This limited interconnectivity keeps the site’s schema maturity at Decoration.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-08-12T17:15:29.336Z",
+      "stepId": "report.rewrite-4",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 4/5 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 4,
+        "blockCount": 5,
+        "skeletonPath": "/Users/tomcranstoun/.gitea-audit-repos/audit-cmscritic.com/2026-08-12/cmscritic.com/.infilled/cmscritic-com.md"
+      },
+      "outputs": {
+        "file": "cmscritic-com-report.md",
+        "sha256": "b7319694122ac070e27c942e28e4c3441a4e2b95bfad9df6d00c5deb9f43d953"
+      },
+      "rubricHash": "21c9fbbae2ae99bb935794556ea20a61627389f8d1bcfb51b196d9a8e0d30ab0",
+      "promptHash": "c9271bc6a7add0f34579d86e6dc32b0aa5dee4d57e2c870eac84ce2c3eeec03f",
+      "inputHashes": [
+        {
+          "hash": "b13eb0d0aa538aa670b4e1c04b999ced43e55f817cee527c9e735070b06f5bfb",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "Inline Tag Bloat is present on all nine audited pages, causing machines to expend extra effort parsing the DOM and potentially missing key content. Truncation Risk and SPA Shell also appear, which can lead agents to receive incomplete page data or delayed rendering of main content. Addressing Inline Tag Bloat first will give machines a clearer, faster view of each page, making it the most impactful improvement.",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-08-12T17:15:29.457Z",
+      "stepId": "report.rewrite-5",
+      "agent": "gpt-oss:20b",
+      "intent": "REWRITE block 5/5 replaced via API",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 2000
+      },
+      "inputs": {
+        "blockIndex": 5,
+        "blockCount": 5,
+        "skeletonPath": "/Users/tomcranstoun/.gitea-audit-repos/audit-cmscritic.com/2026-08-12/cmscritic.com/.infilled/cmscritic-com.md"
+      },
+      "outputs": {
+        "file": "cmscritic-com-report.md",
+        "sha256": "5308fa05a9a1bfbba4716df9140f7b4a6b06b3ba52dbcd75dced45db51ea2e5c"
+      },
+      "rubricHash": "21c9fbbae2ae99bb935794556ea20a61627389f8d1bcfb51b196d9a8e0d30ab0",
+      "promptHash": "abb7099045737aca8c1e9b9a122dd2c4cb318bb92ea32569b07c237c02b93f7f",
+      "inputHashes": [
+        {
+          "hash": "b13eb0d0aa538aa670b4e1c04b999ced43e55f817cee527c9e735070b06f5bfb",
+          "label": "skeleton"
+        }
+      ],
+      "reasoningTrace": "We observed that rendered content on the worst‑page URL https://cmscritic.com/signup shows the highest generic‑container ratio, with 65 % of elements being bare divs; this forces machines to lose structural context and rely on positional inference.  \nThe pattern is structural, with a deepest bare chain of six levels; the high density of generic containers aligns with a component framework such as Bootstrap, indicating a component‑level issue rather than a fault in the content pipeline.  \nThe sim",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-08-12T17:17:13.303Z",
+      "stepId": "audit.fierce-critic",
+      "agent": "gpt-oss:20b",
+      "intent": "Fierce-critic LLM pass: catch report drift the regex layer missed",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_llm_findings"
+      },
+      "inputs": {
+        "reportPath": "cmscritic-com-report.md",
+        "regexCategoriesFlagged": [
+          "absence-as-positive",
+          "bare-table",
+          "copy-edit",
+          "internal-language",
+          "marketing-inflation",
+          "negative-percentage",
+          "oversized-table",
+          "unverified-percentage"
+        ]
+      },
+      "outputs": {
+        "file": "cmscritic-com-report-fierce-critic.json",
+        "sha256": "7b09278daa0829b06dc4d0b1ca13835553a1034ba80f96ac75b64b8428d32f20"
+      },
+      "rubricHash": "a03bb585b33dbd2ff981a911535c41f4fb19d632f2733df523db0133f7637b02",
+      "promptHash": "00cff67a9069b218a219d38badf72aa216ce68c107cfff359028960fa92dd6e9",
+      "inputHashes": [
+        {
+          "hash": "9402da79f7d25219836e0b0dc92fde9248afb05f49f7fd29c5a2f54a13302210",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Recommendation \\\"Address Priority 1 findings: address the 333 WCAG 2.1 AA accessibility issues identified (regulatory exposure)\\\" is a generic, copy‑pasteable recommendation that names only a compliance category and a count but provides no specific element, page or actionable change tied to audit data.\"\n    },\n    {\n      \"category\": \"hollow-recommendation\",\n      \"description\": \"Recommendation \\\"Review Prio",
+      "outcome": "warn",
+      "notes": "runCount=1 regexFindings=65 llmFindings=3"
+    },
+    {
+      "timestamp": "2026-08-12T17:20:17.825Z",
+      "stepId": "audit.llm-judgment",
+      "agent": "gpt-oss:20b",
+      "intent": "LLM-judgment pass: catch tone, sample-vs-total, hedged-vs-asserted inconsistencies",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "cmscritic-com-report.md"
+      },
+      "outputs": {
+        "file": "cmscritic-com-report-llm-judgment.json",
+        "sha256": "0acbe28bea9cd992ab9ce926dd4249a6d4fc56dc8d3f85a2eb9136cd264f0c7e"
+      },
+      "rubricHash": "3b4c1fb0ae96e421b65c1cb8cd4e217d4bd55de4e18e56689bbc97250a962424",
+      "promptHash": "e2069c94416b75323a78b9c1b91c94a35417dfb07a6f6c85e74e62d9d6d0bd44",
+      "inputHashes": [
+        {
+          "hash": "9402da79f7d25219836e0b0dc92fde9248afb05f49f7fd29c5a2f54a13302210",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"category\": \"sample-vs-total-overreach\",\n      \"context\": \"The site appears to be an editorial or media publisher.\",\n      \"message\": \"Sample‑vs‑total overreach in the Executive Summary where it states ‘The site appears to be an editorial or media publisher’ implying full‑site inference from a 9‑page sample.\",\n      \"severity\": \"block\"\n    }\n  ]\n}",
+      "outcome": "warn",
+      "notes": "findings=1 withdrawn=0 inputTok=25112 outputTok=2901"
+    },
+    {
+      "timestamp": "2026-08-12T17:22:10.813Z",
+      "stepId": "audit.repair-unified",
+      "agent": "gpt-oss:20b",
+      "intent": "Unified repair: Layer 1 applied 0 mechanical patch(es); Layer 2 applied 0/0 LLM patch(es) for 65 finding(s)",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 8000,
+        "toolUse": true
+      },
+      "inputs": {
+        "reportPath": "cmscritic-com-report.md",
+        "findingCount": 65,
+        "layer1Patches": 0,
+        "layer1Resolved": 1
+      },
+      "outputs": {
+        "file": "cmscritic-com-report.md",
+        "sha256": "8572702702c852fc7353f7fa436b3700e0b8d945afe5851d9960101e1a0285b4",
+        "patchesApplied": 0,
+        "patchesSkipped": 0,
+        "unfixableCount": 4
+      },
+      "rubricHash": "a54996e5f2d0f7d2cf9af053de96a459fe4506949cbea8e550492e5062e602a4",
+      "promptHash": "443c04ec0c3f606f307a592a7446008c7cd6231639e5b0e834ab34f3e7e7eac6",
+      "inputHashes": [
+        {
+          "hash": "cbe3ccafb12af1a75b531e8395e5374bd98784c7cc4c8cb256c7b920f711d2b0",
+          "label": "report"
+        }
+      ],
+      "reasoningTrace": "{\n  \"patches\": [],\n  \"unfixable\": [\n    {\n      \"findingIndex\": 1,\n      \"justification\": \"Voice mix in Next Steps section cannot be fixed without restructuring the entire paragraph.\"\n    },\n    {\n      \"findingIndex\": 2,\n      \"justification\": \"Absence-as-positive requires naming a specific page path, which is not present in the report data.\"\n    },\n    {\n      \"findingIndex\": 3,\n      \"justification\": \"Unverified percentage changes factual numeric values; cannot be altered without source evidence.\"\n    },\n    {\n      \"findingIndex\": 4,\n      \"justification\": \"Negative percentage requires clamping to zero, which would alter the reported metric.\"\n    }\n  ]\n}",
+      "outcome": "warn",
+      "notes": "inputTok=30397 outputTok=1791 layer1=0 layer2applied=0 layer2skipped=0 unfixable=4 hygiene=9 sizeRatio=0.99"
+    },
+    {
+      "timestamp": "2026-08-12T17:25:45.535Z",
+      "stepId": "audit.cross-check-claims",
+      "agent": "gpt-oss:20b",
+      "intent": "Pre-PDF cross-check: verify the report’s substantive claims against the collected evidence",
+      "parameters": {
+        "model": "gpt-oss:20b",
+        "maxTokens": 4096,
+        "toolName": "report_findings"
+      },
+      "inputs": {
+        "reportPath": "cmscritic-com-report.md",
+        "evidenceFiles": [
+          "audit_averages.json",
+          "site_profile.json",
+          "discovery.json",
+          "platform.json",
+          "error_page_test.json",
+          "agent-access.json",
+          "a11y-tree.json",
+          "security_report.csv",
+          "marker_reachability.csv"
+        ]
+      },
+      "outputs": {
+        "file": "cmscritic-com-report-cross-check.json",
+        "sha256": "bd342c7bc1e148ccc4cbc8b470dac30ddc4cbdc15bc26e5a72d554d67f262d58"
+      },
+      "rubricHash": "fc01c012ab12126330462596fd45c94fe9fbde37663bc8cac87a4c97a08233bc",
+      "promptHash": "529ed172581091c7aba39ba68aed1ba7258fe6fe6433d343e1339ebe27c3a8b1",
+      "inputHashes": [
+        {
+          "hash": "78f3e70d33db5595b82fd7dde29a5c4d8a2f6083c6158e717a9b86343841fc19",
+          "label": "report"
+        },
+        {
+          "hash": "46f6b697e46c546b4a9a93057b78c017a72e71966feb721776b711dada6adde1",
+          "label": "evidence-bundle"
+        }
+      ],
+      "reasoningTrace": "{\n  \"findings\": [\n    {\n      \"claim\": \"The single most important next step is to resolve the 13 distinct WCAG issue types flagged below.\",\n      \"evidence\": {\n        \"field\": \"accessibility.distinctIssues\",\n        \"file\": \"audit_averages.json\"\n      },\n      \"suggestion\": \"Correct the number to 12 (the report lists 12 distinct WCAG findings) or adjust the claim to reflect the actual count.\",\n      \"category\": \"unverifiable\"\n    },\n    {\n      \"claim\": \"Commerce Visibility (10/100) - Needs Imp",
+      "outcome": "warn",
+      "notes": "findings=5 refused=0 inputTok=36592 outputTok=4687"
+    },
+    {
+      "timestamp": "2026-08-12T17:26:02.960Z",
+      "stepId": "review-and-action-findings",
+      "agent": "action-findings.js",
+      "intent": "Record platform wrinkles into the anonymised trail; action the deterministic report-fix subset, escalate the rest",
+      "outputs": {
+        "triaged": 10,
+        "autoFixApplied": 0,
+        "escalated": 10,
+        "trailRecorded": 0,
+        "trailRemoved": 2,
+        "trailUnchanged": 3,
+        "roundCounter": 0
+      },
+      "outcome": "pass"
+    }
+  ]
+}
