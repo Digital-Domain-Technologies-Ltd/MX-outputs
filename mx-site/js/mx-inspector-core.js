@@ -156,15 +156,36 @@ export function detectMxMetadata(metadata) {
   return { present: false };
 }
 
+// The items of an XMP rdf:Bag / rdf:Seq for one mx:* field, read from the RAW
+// XMP packet. pdf.js's metadata parser flattens a Bag's child text nodes into
+// one string with no separator ("humans, machines" arrives as
+// "humansmachines"), so a list-typed field must be re-read from the raw XML
+// to display truthfully. Pure, exported for the test.
+export function bagItemsFromRawXmp(rawXmp, fieldName) {
+  if (!rawXmp) return null;
+  const field = new RegExp(`<mx:${fieldName}[^>]*>([\\s\\S]*?)</mx:${fieldName}>`, 'i').exec(rawXmp);
+  if (!field) return null;
+  const items = [...field[1].matchAll(/<rdf:li[^>]*>([\s\S]*?)<\/rdf:li>/gi)]
+    .map((m) => m[1].trim())
+    .filter(Boolean);
+  return items.length ? items : null;
+}
+
 // Every mx:* field the XMP packet carries, as a name -> value map for the
 // field table, so the PDF path lists the full normal MX metadata the same
 // way every other carrier does. The provenance payload is excluded here:
 // it is a whole JSON document, and the evidence-chain explorer renders it.
+// List-typed fields (rdf:Bag) are re-read from the raw XMP so their items
+// stay separated - see bagItemsFromRawXmp.
 export function readMxFieldTable(metadata) {
   const md = metadata && metadata.metadata;
   const out = {};
   if (!md || typeof md.getAll !== 'function') return out;
   const all = md.getAll() || {};
+  let rawXmp = null;
+  try {
+    if (typeof md.getRaw === 'function') rawXmp = md.getRaw();
+  } catch { /* raw packet unavailable - fall back to the parsed values */ }
   for (const key of Object.keys(all)) {
     const m = key.match(/^mx:(.+)$/i);
     if (!m) continue;
@@ -173,7 +194,12 @@ export function readMxFieldTable(metadata) {
     const value = all[key];
     if (value === null || value === undefined || value === '') continue;
     const label = name.charAt(0).toUpperCase() + name.slice(1);
-    out[label] = Array.isArray(value) ? value.join(', ') : String(value);
+    const bagItems = bagItemsFromRawXmp(rawXmp, name);
+    if (bagItems) {
+      out[label] = bagItems.join(', ');
+    } else {
+      out[label] = Array.isArray(value) ? value.join(', ') : String(value);
+    }
   }
   return out;
 }
