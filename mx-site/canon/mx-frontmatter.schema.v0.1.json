@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mx.allabout.network/canon/mx-frontmatter.schema.v0.1.json",
+  "title": "MX Frontmatter",
+  "description": "Validates the presence and format of MX three-zone document frontmatter: Zone 1a identity fields, the Zone 1b OKF reserved surface, and the Zone 2 mx block. Composes with the OKF v0.1 schema (both allow additional properties). Presence and format only: this schema proves a document is machine-readable MX; attestation, currency, and corroboration are separate trust signals answered by a registry, not by a schema.",
+  "$comment": "Draft v0.1 of the proposed MX standard's frontmatter contract. Sources of truth: the zone model in mx-canon/ssot/registries/mx-okf-field-map.yaml and the field dictionaries served beside this file (fields-data.yaml, fields-data-carriers.yaml). Ids are stable: a future revision arrives as a new versioned $id, never a change to this one. Usable with any JSON Schema Draft 2020-12 validator, including docmeta (reference this file by URL or path, or declare it in-file via $schema).",
+  "x-mx": {
+    "author": "Tom Cranstoun",
+    "created": "2026-08-14",
+    "license": "MIT",
+    "status": "draft",
+    "canonicalUri": "https://mx.allabout.network/canon/mx-frontmatter.schema.v0.1.json",
+    "note": "The MX standard is free, open, and vendor-neutral. Stream review at https://stream.tg.community"
+  },
+  "type": "object",
+  "required": ["title", "author", "created", "modified", "type", "mx"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Zone 1a identity. Concise document title; for markdown, matches the H1. Shared verbatim with OKF."
+    },
+    "description": {
+      "type": "string",
+      "description": "Zone 1a identity. One-sentence description of the document. Shared verbatim with OKF."
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Zone 1a identity. The accountable human who stands behind this document. MX-specific; OKF consumers preserve it as an unknown key."
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Zone 1a identity. Original authoring date, ISO 8601 (YYYY-MM-DD)."
+    },
+    "modified": {
+      "type": "string",
+      "format": "date",
+      "description": "Zone 1a identity. Date of the last substantive edit, ISO 8601 (YYYY-MM-DD). OKF's timestamp is derived from this field at export time."
+    },
+    "version": {
+      "type": "string",
+      "description": "Zone 1a identity. Document version, quoted so YAML parses it as a string (unquoted 1.0 becomes a number)."
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Zone 1b OKF reserved surface. The document's content type (info-doc, action-doc, report, spec, blog-post, ...). The one field OKF v0.1 requires. Never placed inside the mx block."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Zone 1b OKF reserved surface. Plain array of string tags, kebab-case, no leading #. OKF allows strings only. Never placed inside the mx block."
+    },
+    "resource": {
+      "type": "string",
+      "format": "uri",
+      "description": "Zone 1b OKF reserved surface. The singular URI of the one external asset this document describes. Absent when the document describes an abstract concept. Distinct from mx.refersToExternal (the plural array of cited sources); the two must never carry the same value."
+    },
+    "okf_version": {
+      "type": "string",
+      "description": "Zone 1b OKF reserved surface. The OKF version string a bundle-root index may declare. Passed through verbatim when present."
+    },
+    "timestamp": {
+      "not": {},
+      "description": "Never stored in MX source frontmatter. OKF's timestamp is derived from modified at export time, so a stored copy could only drift from the truth it duplicates."
+    },
+    "name": {
+      "not": {},
+      "description": "Deprecated. Use title."
+    },
+    "mx": {
+      "type": "object",
+      "required": ["canonicalUri"],
+      "description": "Zone 2, the MX operational block. Every MX field the identity and OKF surfaces do not cover. An OKF consumer preserves this entire block as one unknown top-level key.",
+      "properties": {
+        "canonicalUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The document's stable identity: the URI at which the canonical copy of this exact file is served. The MX trust anchor; the one Zone 2 field every MX document declares."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "draft", "proposal", "superseded", "archived"],
+          "description": "Lifecycle state. Drives downstream filters; superseded and archived tell a machine to follow replacedBy rather than trust this copy."
+        },
+        "statusNote": {
+          "type": "string",
+          "description": "One-line clarifier when status alone is ambiguous."
+        },
+        "audience": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Who this document serves (machines, humans, business, ...). The machine is always a legitimate audience member."
+        },
+        "purpose": {
+          "type": "string",
+          "description": "What this document is for, stated for the next reader, human or machine."
+        },
+        "runbook": {
+          "type": "string",
+          "description": "One-sentence execution hint for AI agents: how to act on this document safely."
+        },
+        "stability": {
+          "type": "string",
+          "description": "How settled the content is (stable, evolving, experimental)."
+        },
+        "license": {
+          "type": "string",
+          "description": "Rights statement, preferably an SPDX identifier."
+        },
+        "maintainer": {
+          "type": "string",
+          "description": "Contact for the party maintaining this document."
+        },
+        "confidential": {
+          "type": "boolean",
+          "description": "Whether the document is confidential. Defaults to false when absent."
+        },
+        "source": {
+          "type": "string",
+          "description": "Provenance: where this content came from (a prior path, an ingestion origin)."
+        },
+        "inherits": {
+          "type": "string",
+          "description": "A sibling or companion document whose conventions this one inherits."
+        },
+        "buildsOn": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Typed edge: predecessor documents this one builds on."
+        },
+        "refersTo": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Typed edge: in-estate documents this one refers to, as repo-root-relative paths."
+        },
+        "refersToExternal": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Typed edge: the plural array of external sources cited as evidence. Distinct from the singular Zone 1b resource field."
+        },
+        "relatedTo": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Typed edge: related documents, in-estate paths or URIs."
+        },
+        "replacedBy": {
+          "type": "object",
+          "description": "Where a superseded document's replacement lives, keyed by representation (prose, data, ...)."
+        },
+        "contentType": {
+          "not": {},
+          "description": "Retiring synonym of the top-level Zone 1b type field. Declare type at the top level instead."
+        },
+        "tags": {
+          "not": {},
+          "description": "Retiring synonym of the top-level Zone 1b tags field. Declare tags at the top level instead."
+        }
+      },
+      "patternProperties": {
+        "^x-": true
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
