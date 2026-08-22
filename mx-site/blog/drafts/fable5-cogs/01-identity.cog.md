@@ -15,6 +15,7 @@ version: "1.0"
 type: info-doc
 tags: [identity, product, self-description, claude, fable5, mythos, example]
 mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/drafts/fable5-cogs/01-identity.cog.md
   x-mx-category: example
   status: active
   partOf: site-domaincog

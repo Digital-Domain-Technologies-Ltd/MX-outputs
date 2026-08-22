@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.0'
+version: '6.1'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-08-07'
+modified: '2026-08-21'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -805,6 +805,45 @@ mx:
         audience is the canonical top-level field. audience.primary is a legacy namespace variant from folder metadata.
         Use audience.
     - fields:
+        - audience
+        - applicability
+      overlap: false
+      reason: >-
+        Different questions. audience says who the content is written for; applicability says under what conditions the
+        content is in force. A document can be written for developers and apply only in the EU on releases 3 and above.
+        A reader filtering a corpus for itself evaluates applicability; a reader choosing a register reads audience.
+    - fields:
+        - applicability.jurisdiction
+        - inLanguage
+      overlap: false
+      reason: >-
+        Different concerns. inLanguage declares the language of the prose body (BCP 47) and never a place.
+        applicability.jurisdiction declares the legal or regulatory regime the content is in force in. German prose can
+        be in force in Austria, and EU-wide content can be published in English.
+    - fields:
+        - applicability.jurisdiction
+        - spatialCoverage
+      overlap: false
+      reason: >-
+        Different questions, and MX defers on the second. Schema.org spatialCoverage says what place the content is
+        about; applicability.jurisdiction says where the content is in force. A UK-authored guide about Japanese
+        planning law has spatialCoverage Japan and jurisdiction GB. Use the Schema.org field for subject matter.
+    - fields:
+        - applicability.effectiveUntil
+        - expires
+      overlap: false
+      reason: >-
+        Different consequences. applicability.effectiveUntil is a hard boundary - past it the content does not apply.
+        expires is a review-or-archive prompt and leaves the content applicable until someone acts on it. A document
+        can carry both, and effectiveUntil is the one a reader enforces.
+    - fields:
+        - applicability.productVersion
+        - version
+      overlap: false
+      reason: >-
+        Different subjects. version is the revision of this document. applicability.productVersion is the range of
+        releases of the thing the document describes. A version 4 document can describe product releases 2 and 3.
+    - fields:
         - created
         - date
         - creation-date
@@ -1085,6 +1124,102 @@ mx:
       notes: >-
         Freetext string or array of strings. Complements `audience`; does not replace it. A document can have both:
         `audience: [stakeholders]` and `targetReaders: 'Janus Boye'`.
+      status: canonical
+      profile: core
+      required: optional
+    - name: applicability
+      type: object
+      definition: >-
+        The conditions under which this document's content is in force. A reader that does not match a declared
+        condition treats the document as not applicable to it.
+      example:
+        jurisdiction:
+          - EU
+        product: mx-registry
+        productVersion: '>=3.0 <5.0'
+      notes: >-
+        Zone 2 object. Every sub-field is optional, and an omitted sub-field means unconstrained on that axis rather
+        than excluded, so a document with no applicability block applies everywhere. Conditions combine with AND across
+        axes and OR within an axis, so jurisdiction [EU, GB] matches a reader in either. Applicability governs whether
+        content applies; `audience` governs who it is written for. Where the concern is what place the content is about
+        rather than where it is in force, defer to Schema.org spatialCoverage.
+      status: canonical
+      profile: core
+      required: optional
+    - name: applicability.jurisdiction
+      type: array
+      definition: The legal or regulatory regimes in which this document's content is in force.
+      example:
+        - EU
+        - GB
+        - US-CO
+      notes: >-
+        ISO 3166-1 alpha-2 country codes and ISO 3166-2 subdivision codes, or a named regime no ISO code expresses (EU,
+        EEA). Distinct from `inLanguage`, which declares the language of the prose body and never a place. Distinct
+        from Schema.org legislationJurisdiction, which states where a named law has effect; this field states where
+        this document applies.
+      status: canonical
+      profile: core
+      required: optional
+    - name: applicability.product
+      type: string-or-array
+      definition: The product or products this document's content applies to.
+      example: mx-registry
+      notes: >-
+        Publisher-defined product identifiers. Pairs with `applicability.productVersion`, which narrows the same
+        declaration to a range of releases.
+      status: canonical
+      profile: core
+      required: optional
+    - name: applicability.productVersion
+      type: string
+      definition: >-
+        The range of product releases this document's content applies to, written as a semantic-version range
+        expression.
+      example: '>=3.0 <5.0'
+      notes: >-
+        Semver range syntax. Distinct from the document's own `version`, which records the revision of this file rather
+        than the releases of the thing it describes.
+      status: canonical
+      profile: core
+      required: optional
+    - name: applicability.role
+      type: array
+      definition: The reader roles this document's content applies to.
+      example:
+        - administrator
+      notes: >-
+        Freetext role names drawn from the publisher's own access model. Distinct from `audience`, which is a broad
+        enum for who the content is written for; role narrows to whom it is operative for.
+      status: canonical
+      profile: core
+      required: optional
+    - name: applicability.platform
+      type: array
+      definition: The platforms or runtime environments this document's content applies to.
+      example:
+        - linux
+        - macos
+      status: canonical
+      profile: core
+      required: optional
+    - name: applicability.effectiveFrom
+      type: string
+      definition: The date from which this document's content is in force. ISO 8601 date.
+      example: '2026-09-01'
+      notes: >-
+        Distinct from `created` and `publicationDate`, which record when the document was written and published. A
+        document can be published ahead of the date its content takes effect.
+      status: canonical
+      profile: core
+      required: optional
+    - name: applicability.effectiveUntil
+      type: string
+      definition: The date after which this document's content is no longer in force. ISO 8601 date.
+      example: '2027-06-30'
+      notes: >-
+        A hard applicability boundary: past this date the content does not apply. Distinct from `expires`, which is a
+        review-or-archive prompt and leaves the content applicable until someone acts on it.
       status: canonical
       profile: core
       required: optional

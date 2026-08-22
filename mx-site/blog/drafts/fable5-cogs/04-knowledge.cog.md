@@ -15,6 +15,7 @@ version: "1.0"
 type: info-doc
 tags: [knowledge, cutoff, search, recency, verification, fable5, example]
 mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/drafts/fable5-cogs/04-knowledge.cog.md
   x-mx-category: example
   status: active
   partOf: site-domaincog

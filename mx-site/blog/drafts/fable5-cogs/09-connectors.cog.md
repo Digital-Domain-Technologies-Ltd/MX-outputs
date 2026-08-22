@@ -15,6 +15,7 @@ version: "1.0"
 type: info-doc
 tags: [mcp, connectors, tools, routing, third-party, fable5, example]
 mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/drafts/fable5-cogs/09-connectors.cog.md
   x-mx-category: example
   status: active
   partOf: site-domaincog

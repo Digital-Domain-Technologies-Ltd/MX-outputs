@@ -15,6 +15,7 @@ version: "1.0"
 type: info-doc
 tags: [wellbeing, mental-health, safety, self-harm, crisis, fable5, example]
 mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/drafts/fable5-cogs/03-wellbeing.cog.md
   x-mx-category: example
   status: active
   partOf: site-domaincog

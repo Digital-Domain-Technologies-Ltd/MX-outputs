@@ -15,6 +15,7 @@ version: "1.0"
 type: info-doc
 tags: [tools, capabilities, definitions, fable5, example]
 mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/drafts/fable5-cogs/06-tools.cog.md
   x-mx-category: example
   status: active
   partOf: site-domaincog

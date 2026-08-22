@@ -15,6 +15,7 @@ version: "1.0"
 type: info-doc
 tags: [memory, context, persistence, user-data, fable5, example]
 mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/drafts/fable5-cogs/07-memory.cog.md
   x-mx-category: example
   status: active
   partOf: site-domaincog

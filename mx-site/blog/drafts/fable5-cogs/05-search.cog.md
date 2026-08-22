@@ -15,6 +15,7 @@ version: "1.0"
 type: info-doc
 tags: [search, copyright, web, research, compliance, fable5, example]
 mx:
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/drafts/fable5-cogs/05-search.cog.md
   x-mx-category: example
   status: active
   partOf: site-domaincog
