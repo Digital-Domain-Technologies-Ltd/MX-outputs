@@ -11,20 +11,22 @@ author: "Tom Cranstoun"
 created: "2026-06-19"
 modified: "2026-06-19"
 version: "1.0"
+type: blog-post
+tags: [cogs, carriers, metadata, html, shell, pdf, images, xmp, mx]
 mx:
-  status: draft
-  contentType: blog-post
+  x-mx-neededFor: [publish]
+  x-mx-contentState: draft
   audience: [humans, machines]
-  tags: [cogs, carriers, metadata, html, shell, pdf, images, xmp, mx]
   purpose: "Explain that a cog is any file carrying structured metadata in its native carrier - HTML head, shell comment header, PDF XMP, image XMP or sidecar - and that the value (identity, provenance, usage) is the same across carriers because the metadata travels with the file."
   stability: stable
   x-mx-contextProvides:
     - "A cog is defined by carrying structured metadata, not by a file extension. Every carrier has a native place for it: HTML <meta> tags or an MX-SOURCE-FRONTMATTER comment, a shell # --- header, a PDF XMP packet, an image's XMP / SVG <metadata> / .mx.yaml sidecar. The non-prose body (page, script, pages, pixels) is the equivalent of a markdown body. A machine meeting any of these reads the same declarations the same way."
   x-mx-corroboratedBy:
     - https://developer.adobe.com/xmp/docs/XMPSpecifications/
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/cogs-and-metadata/a-cog-in-every-carrier.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/cogs-and-metadata/a-cog-in-every-carrier.md
   servedAt: https://mx.allabout.network/blog/drafts/cogs-and-metadata/a-cog-in-every-carrier.html
   runbook: "Blog post. Conversational register, no project specifics about internal tooling. Read straight through."
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -99,7 +101,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -113,7 +115,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 730,
+        "wordCount": 1115,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -167,7 +169,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -185,24 +187,25 @@ mx:
           <ul>
         <li><a href="#every-format-already-has-a-place-for-it">Every format already has a place for it</a></li>
         <li><a href="#why-this-matters-the-moment-the-file-travels">Why this matters the moment the file travels</a></li>
+        <li><a href="#the-objection-borrowed-vocabulary-awkward-carrier">The objection: borrowed vocabulary, awkward carrier</a></li>
         <li><a href="#the-principle-underneath">The principle underneath</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="730">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1115">
         <header class="article-header">
           <h1>A Cog in Every Carrier: Your Scripts, PDFs, and Images Carry MX Too</h1>
           <div class="article-meta"
                data-published="2026-06-19"
                data-modified="2026-06-19"
-               data-reading-time="4 min">
+               data-reading-time="6 min">
             <time datetime="2026-06-19">19 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>4 min read</span>
+            <span>6 min read</span>
           </div>
         </header>
 
@@ -220,6 +223,14 @@ mx:
 <p>A file rarely stays where it was made. It gets fetched, attached, downloaded, passed to an agent, dropped into a folder far from the page or pipeline that produced it. When it lands somewhere new, the surrounding context is gone. All that is left is the file.</p>
 <p>If the file carries its own declarations, the machine that meets it is not guessing. It reads what the file is, who it is for, where it lives, and what it is safe to do with it - and it reads that the same way whether it opened a markdown file, a PDF, or a script. The declarations do not depend on the format. They depend on the file having brought them along.</p>
 <p>That is the whole point of putting metadata in the native carrier rather than in a separate database or a companion web page. The database is somewhere else. The web page is somewhere else. The file is here, in the machine's hands, and the answer travels inside it.</p>
+<h2 id="the-objection-borrowed-vocabulary-awkward-carrier" tabindex="-1">The objection: borrowed vocabulary, awkward carrier</h2>
+<p>There's a fair objection buried in all this, and it's worth answering rather than stepping around.</p>
+<p>Good metadata practice says borrow rather than invent. If an established vocabulary already names the author of a thing, use it, don't coin your own. But the best-known of those vocabularies is usually met as a block of JSON-LD inside a web page, and a shell script has no head section to put it in. A log line has nowhere for a script block. So the advice appears to hold only for the carrier the vocabulary grew up in, and to abandon you everywhere else.</p>
+<p>The objection dissolves once you separate what's easy to conflate. <strong>A vocabulary is a set of terms and their meanings. A syntax is one way of writing them down.</strong> JSON-LD is a way of writing; it isn't the meaning. Nothing about the term for authorship requires angle brackets.</p>
+<p>A shared context moves the meaning across formats: one published mapping from the names a file uses to the addresses those names mean. Declare the mapping once, and every carrier only has to hold plain key-and-value text.</p>
+<p>That turns out to be something every format can already do. YAML front matter has a linked-data form on the standards track, so the block at the top of a markdown file can be both a human-readable header and a machine-readable island of meaning. A web page keeps its familiar script block. Strip the comment marks from a shell header and the same YAML sits underneath. And the metadata packet inside a PDF or an image was linked data from the beginning: an address drops straight in, with no adapter and no translation.</p>
+<p>Where a format has room for structure, it holds meaning. Where only a line of text fits, an address goes in instead and resolves to the rest. That floor never fails, because a link is only a short string of characters, and no format struggles with one of those.</p>
+<p>The trade is honest and worth naming. Borrowing someone else's vocabulary means inheriting their release schedule: when they change a definition, you absorb it. Keeping your own names avoids that and costs you the shared meaning. It's a real decision, not a free lunch, and it isn't one to make casually.</p>
 <h2 id="the-principle-underneath" tabindex="-1">The principle underneath</h2>
 <p>This is Metadata Everywhere, applied without an exception for binaries. The visible artefact is for eyes - the rendered page, the printed PDF, the picture. The metadata behind it is for the machine - the agent, the validator, the screen reader, the parser. Both say the same thing about the file; they just speak to different readers.</p>
 <p>Once you hold that, a useful property falls out. A system that keeps its metadata in every carrier can see every file it owns, whatever the format, and it can check and repair those declarations file by file. Nothing is invisible to it just because it is a PDF instead of a paragraph. The markdown cog is the richest form and the easiest to teach, but it was never the only one. The same identity, provenance, and usage belong on whatever file you are about to publish - in the language that file already speaks.</p>
@@ -233,7 +244,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -284,5 +295,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

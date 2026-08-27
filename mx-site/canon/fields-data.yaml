@@ -1,5 +1,5 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.1'
+version: '6.2'
 created: 2026-02-13T00:00:00.000Z
 modified: '2026-08-21'
 author: The Gathering
@@ -336,6 +336,12 @@ mx:
     excludeFromTopLevel:
       rule: 'Auto: any field whose name contains ''.'''
   deprecations:
+    - old: provenanceAuthor
+      replacement: author
+      notes: MX defers to Schema.org; the Zone 1 author field already carries this meaning.
+    - old: provenancePublisher
+      replacement: publisher
+      notes: MX defers to Schema.org; the publisher field already carries this meaning.
     - old: name
       replacement: title
       notes: Use `title` for document identity; `name` is reserved for nested field definitions.
@@ -1966,20 +1972,6 @@ mx:
       notes: Names the maintainer responsible for ongoing accuracy.
       status: canonical
       profile: cog
-    - name: provenanceAuthor
-      type: string
-      definition: Person or entity who originally authored the document content.
-      example: Tom Cranstoun
-      notes: Declares authorship origin. Part of the provenance group.
-      status: canonical
-      profile: core
-    - name: provenancePublisher
-      type: string
-      definition: Entity that published the document.
-      example: CogNovaMX Ltd
-      notes: Declares publishing entity. Part of the provenance group.
-      status: canonical
-      profile: core
     - name: provenanceOrigin
       type: string
       definition: How the content was created.
