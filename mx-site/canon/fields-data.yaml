@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.2'
+version: '6.3'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-08-21'
+modified: '2026-08-30'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -944,6 +944,8 @@ mx:
       type: string
       definition: Human-readable document title. The canonical identity field for all documents including cog files.
       example: MX Field Dictionary
+      alignsWith:
+        - dc:title
       notes: Required on every document. If both title in frontmatter and an H1 heading exist, avoid duplication.
       status: canonical
       profile: core
@@ -952,6 +954,9 @@ mx:
       type: string
       definition: One-line summary. Max 160 characters. Used by search engines, AI agents, and registry listings.
       example: Single source of truth for every YAML frontmatter field.
+      alignsWith:
+        - dc:description
+        - schema:description
       notes: Max 160 characters. Used by search engines, AI agents, and the cog registry.
       status: canonical
       profile: core
@@ -960,6 +965,9 @@ mx:
       type: string
       definition: Creator of the document. Person name or collaborative attribution.
       example: Tom Cranstoun and Maxine
+      alignsWith:
+        - dc:creator
+        - schema:author
       notes: Immutable after creation. For collaborative work, list all contributors. Distinct from maintainer.
       status: canonical
       profile: core
@@ -982,6 +990,9 @@ mx:
       type: string
       definition: Creation date. ISO 8601 format (YYYY-MM-DD).
       example: 2026-03-01T00:00:00.000Z
+      alignsWith:
+        - dcterms:created
+        - schema:dateCreated
       notes: Immutable — set once, never updated. ISO 8601 (YYYY-MM-DD).
       status: canonical
       profile: core
@@ -990,6 +1001,9 @@ mx:
       type: string
       definition: Last modification date. ISO 8601 format (YYYY-MM-DD).
       example: 2026-03-02T00:00:00.000Z
+      alignsWith:
+        - dcterms:modified
+        - schema:dateModified
       notes: Update every time file content changes. ISO 8601 (YYYY-MM-DD).
       status: canonical
       profile: core
@@ -1017,6 +1031,8 @@ mx:
       type: string
       definition: Semantic version string. Lives in frontmatter, never in filenames.
       example: '2.0'
+      alignsWith:
+        - schema:version
       notes: Always quote in YAML (prevents 1.0 being parsed as number). Lives in frontmatter, never in filenames.
       status: canonical
       profile: core
@@ -1064,6 +1080,9 @@ mx:
         - yaml
         - frontmatter
         - reference
+      alignsWith:
+        - dc:subject
+        - schema:keywords
       notes: Array of lowercase strings for search, filtering, and agent matching.
       status: canonical
       profile: core
@@ -1075,6 +1094,8 @@ mx:
         before reading the body. Common values include info-doc, action, blog-post, report, guide, skill, hook,
         routing-doc, and cogs; the set is open because document kinds grow with the estate.
       example: info-doc
+      alignsWith:
+        - dc:type
       notes: >-
         OKF reserved field — lives at the top level, never under mx:. Not an enforced enum; each profile declares its
         own kinds (blog sources use blog-post, action cogs use action).
@@ -1087,6 +1108,8 @@ mx:
         The permanent, globally unique URI where the authoritative copy of this document lives. A reader that meets a
         copy anywhere can walk back to the source.
       example: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/README.md
+      alignsWith:
+        - schema:url
       notes: >-
         Declared under mx: on MX documents; top-level on gathering drafts. Required on every in-scope markdown file —
         presence and exact match are enforced at the write boundary.
@@ -1101,6 +1124,9 @@ mx:
       example:
         - humans
         - machines
+      alignsWith:
+        - dcterms:audience
+        - schema:audience
       validValues:
         - tech
         - business
@@ -1243,6 +1269,8 @@ mx:
       type: string
       definition: Free-text statement of why this document exists. Single sentence.
       example: Reference for any contributor adding metadata to non-markdown files.
+      alignsWith:
+        - schema:abstract
       notes: >-
         Free-text. The previous enum constraint was retired in dictionary v4.4 because real usage was overwhelmingly
         prose. Distinct from contentType (which classifies what the content is).
@@ -1265,6 +1293,8 @@ mx:
       type: string
       definition: SPDX license identifier.
       example: proprietary
+      alignsWith:
+        - schema:license
       notes: 'SPDX identifier. Common values: proprietary, MIT, Apache-2.0, CC-BY-4.0.'
       status: canonical
       profile: core
@@ -1275,6 +1305,8 @@ mx:
         Person or team responsible for maintaining this document. Distinct from author — maintainer handles ongoing
         updates.
       example: Maxine
+      alignsWith:
+        - schema:maintainer
       notes: Mutable. Distinct from author (immutable creator). The person handling ongoing updates.
       status: canonical
       profile: core
