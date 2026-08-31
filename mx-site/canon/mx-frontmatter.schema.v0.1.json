@@ -13,8 +13,20 @@
     "note": "The MX standard is free, open, and vendor-neutral. Stream review at https://stream.tg.community"
   },
   "type": "object",
-  "required": ["title", "author", "created", "modified", "type", "mx"],
+  "required": [
+    "title",
+    "author",
+    "created",
+    "modified",
+    "type",
+    "mx"
+  ],
   "properties": {
+    "@context": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional linked-data keyword (JSON-LD 1.1 / YAML-LD). When present it is the first key of the block and its value is the single IRI of the served MX context (https://mx.allabout.network/canon/context.json), never an inline object. Written quoted in YAML because YAML 1.2 reserves @ as an indicator. A keyword, not a field: it belongs to no zone."
+    },
     "title": {
       "type": "string",
       "minLength": 1,
@@ -50,7 +62,9 @@
     },
     "tags": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Zone 1b OKF reserved surface. Plain array of string tags, kebab-case, no leading #. OKF allows strings only. Never placed inside the mx block."
     },
     "resource": {
@@ -72,7 +86,9 @@
     },
     "mx": {
       "type": "object",
-      "required": ["canonicalUri"],
+      "required": [
+        "canonicalUri"
+      ],
       "description": "Zone 2, the MX operational block. Every MX field the identity and OKF surfaces do not cover. An OKF consumer preserves this entire block as one unknown top-level key.",
       "properties": {
         "canonicalUri": {
@@ -82,7 +98,13 @@
         },
         "status": {
           "type": "string",
-          "enum": ["active", "draft", "proposal", "superseded", "archived"],
+          "enum": [
+            "active",
+            "draft",
+            "proposal",
+            "superseded",
+            "archived"
+          ],
           "description": "Lifecycle state. Drives downstream filters; superseded and archived tell a machine to follow replacedBy rather than trust this copy."
         },
         "statusNote": {
@@ -91,7 +113,9 @@
         },
         "audience": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Who this document serves (machines, humans, business, ...). The machine is always a legitimate audience member."
         },
         "purpose": {
@@ -128,22 +152,30 @@
         },
         "buildsOn": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Typed edge: predecessor documents this one builds on."
         },
         "refersTo": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Typed edge: in-estate documents this one refers to, as repo-root-relative paths."
         },
         "refersToExternal": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Typed edge: the plural array of external sources cited as evidence. Distinct from the singular Zone 1b resource field."
         },
         "relatedTo": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Typed edge: related documents, in-estate paths or URIs."
         },
         "replacedBy": {
