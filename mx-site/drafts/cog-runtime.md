@@ -1,4 +1,5 @@
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Cog Runtime"
 description: "What a cog runtime is, what it does, and how to obtain one. Companion to cog-spec.v1."
 author: Tom Cranstoun

@@ -18,6 +18,7 @@
 
 
 # ── ZONE 1 · Identity (Note 2 §5) ────────────────────────────
+"@context": https://mx.allabout.network/canon/context.json
 title: "Reading the position-paper cog - a worked example of MX cog construction"
 description: "Worked example explaining the cog-construction choices in mx-machine-readiness.cog.md, mapped to The Gathering draft notes."
 

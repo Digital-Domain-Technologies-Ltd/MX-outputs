@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Agent Identity - Claude Fable 5"
 description: "Establishes the agent's name, model tier, product context, and rules for self-description. Maps to the product_information section of the Fable 5 system prompt."
 author: Tom Cranstoun

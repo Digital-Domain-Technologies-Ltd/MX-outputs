@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Knowledge Cutoff and Search Triggers"
 description: "Defines the agent's reliable knowledge cutoff, the current date injection point, and the rules for when to search the web versus answer from training data. Maps to knowledge_cutoff in the Fable 5 system prompt."
 author: Tom Cranstoun

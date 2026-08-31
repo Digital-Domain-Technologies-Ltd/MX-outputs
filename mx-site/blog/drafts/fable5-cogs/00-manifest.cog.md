@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Fable 5 Agent - Boot Manifest"
 description: "Root COG for a Claude Fable 5 agent instance. Defines load order and binds all sub-COGs into a coherent agent runtime."
 author: Tom Cranstoun

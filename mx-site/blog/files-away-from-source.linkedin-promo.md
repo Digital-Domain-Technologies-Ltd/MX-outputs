@@ -1,4 +1,5 @@
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Files Away From Their Source - LinkedIn feed promo"
 description: "Files Away From Their Source - LinkedIn feed promo"
 author: Tom Cranstoun

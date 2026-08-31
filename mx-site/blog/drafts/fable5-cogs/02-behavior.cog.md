@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Core Behavioural Rules"
 description: "Defines tone, formatting, refusal handling, legal and financial advice limits, evenhandedness on contested topics, and response to mistakes. Maps to refusal_handling, tone_and_formatting, evenhandedness, and responding_to_mistakes_and_criticism in the Fable 5 system prompt."
 author: Tom Cranstoun

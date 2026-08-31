@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "MCP App and Connector Routing"
 description: "Defines when to search the MCP registry, when to call suggest_connectors, and when to call a third-party tool directly. Maps to mcp_app_suggestions in the Fable 5 system prompt."
 author: Tom Cranstoun

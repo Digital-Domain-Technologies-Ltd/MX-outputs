@@ -1,4 +1,5 @@
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Files Away From Their Source: What Universal Cart Reveals About MX"
 description: "Files Away From Their Source: What Universal Cart Reveals About MX"
 author: Tom Cranstoun

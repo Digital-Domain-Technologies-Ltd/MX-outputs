@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "site-domaincog"
 description: "Domain anchor for the served site estate: the cogs, canon exports, and drafts that ship with mx.allabout.network under mx-site."
 author: "Tom Cranstoun"

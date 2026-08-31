@@ -1,4 +1,5 @@
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "MX is good for AI, and for the planet"
 description: "Why machine-readable content cuts hallucinations, cuts wasted inference, and cuts the energy behind it, plus a free audit of what an AI agent really sees when it reads your site."
 author: Tom Cranstoun

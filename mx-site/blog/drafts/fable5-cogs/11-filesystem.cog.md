@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Filesystem Configuration"
 description: "Describes the mounted directories and their access permissions. Info-doc: no executable rules. Maps to filesystem_configuration in the Fable 5 system prompt."
 author: Tom Cranstoun

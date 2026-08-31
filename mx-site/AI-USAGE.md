@@ -1,4 +1,5 @@
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "AI Usage Declaration"
 description: "How AI was used in the writing of the MX book series. Author's declaration on authorship, machine assistance, and the relationship between the two."
 author: Tom Cranstoun

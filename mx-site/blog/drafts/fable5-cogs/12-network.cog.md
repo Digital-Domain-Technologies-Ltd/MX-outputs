@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Network Configuration"
 description: "Describes network access rules and restrictions for this agent instance. Info-doc: no executable rules. Maps to network_configuration in the Fable 5 system prompt."
 author: Tom Cranstoun

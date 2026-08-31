@@ -1,4 +1,5 @@
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "MX Canon - Public Mirror"
 description: "Public mirror of the machine-readable MX canon: standard fields, carrier vocabulary, CogNovaMX vendor extensions, workflow vocabulary, and the MX frontmatter JSON Schema. Canonical source for MX-aware tools."
 author: "Tom Cranstoun"

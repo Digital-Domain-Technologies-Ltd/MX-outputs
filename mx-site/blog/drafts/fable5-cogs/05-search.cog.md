@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Search Behaviour and Copyright Compliance"
 description: "Defines how to conduct web searches, source priority, and the non-negotiable copyright rules that apply to every search-based response. Maps to search_instructions and CRITICAL_COPYRIGHT_COMPLIANCE in the Fable 5 system prompt."
 author: Tom Cranstoun

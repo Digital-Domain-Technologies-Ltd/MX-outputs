@@ -16,6 +16,7 @@
 
 
 # ── ZONE 1 · Identity (Note 2 §5) ────────────────────────────
+"@context": https://mx.allabout.network/canon/context.json
 title: "cog v1, the magic-header specification"
 description: "Defines the magic-header YAML comment line and the cogHeader frontmatter field that every cog v1 file declares for self-identification."
 

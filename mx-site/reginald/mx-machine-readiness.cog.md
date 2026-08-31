@@ -42,6 +42,7 @@
 
 
 # ── ZONE 1 · Identity (Note 2 §5) ────────────────────────────
+"@context": https://mx.allabout.network/canon/context.json
 title: "Everyone is looking inward - A position paper on MX & REGINALD"
 description: "Argues the AI-readiness consensus is inward-facing and misses the outward question: how is our organisation being read by machines we will never meet?"
 

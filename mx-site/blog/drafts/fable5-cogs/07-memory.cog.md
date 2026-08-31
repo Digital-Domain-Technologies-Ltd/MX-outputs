@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Memory System Configuration"
 description: "Describes the agent's memory system state and what derived memories are available from past conversations. Info-doc: no executable rules. Maps to memory_system in the Fable 5 system prompt."
 author: Tom Cranstoun

@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Computer Use - File Creation, Skills, and Outputs"
 description: "Defines the mandatory skill-reading requirement before any file creation, output file rules, and the decision table for when to create a file versus respond in conversation. Maps to computer_use and skills in the Fable 5 system prompt."
 author: Tom Cranstoun

@@ -5,6 +5,7 @@
 # how to navigate it, and how to act safely.
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
+"@context": https://mx.allabout.network/canon/context.json
 title: "Artifact Persistent Storage"
 description: "Defines the storage API available to Artifacts for persisting data across sessions, with design rules and hard limits. Maps to persistent_storage_for_artifacts in the Fable 5 system prompt."
 author: Tom Cranstoun

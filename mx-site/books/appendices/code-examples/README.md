@@ -1,4 +1,5 @@
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "AI-Native Website Code Examples"
 description: "Platform-specific code examples for implementing AI-native web patterns"
 author: Tom Cranstoun
