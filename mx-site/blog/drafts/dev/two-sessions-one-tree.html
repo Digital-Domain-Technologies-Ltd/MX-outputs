@@ -21,40 +21,16 @@ tags:
   - developer-workflow
   - determinism
 mx:
-  x-mx-managedBy: blog-post.cog.md
-  x-mx-contentState: draft
   audience:
     - humans
     - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/dev/two-sessions-one-tree.md
-  x-mx-contextProvides:
-    - "Two Claude Code sessions collided in one working tree. The fix: worktree isolation, one primary session, and hooks that warn when a tree is shared."
   stability: stable
   purpose: "Two Claude Code sessions collided in one working tree. The fix: worktree isolation, one primary session, and hooks that warn when a tree is shared."
   servedAt: https://mx.allabout.network/blog/drafts/dev/two-sessions-one-tree.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   blogUrl: https://mx.allabout.network/blog/drafts/dev/two-sessions-one-tree.html
   blogFilename: two-sessions-one-tree
-  x-mx-linkedIn: |
-    I run several Claude Code sessions at once. This week, two of them met in the middle of the same file.
-
-    One session was repairing metadata across ninety-one blog sources. Another was renaming a path inside the frontmatter of the same files. Both were doing exactly what I'd asked. Neither knew the other existed. Untangling the overlap took the rest of the afternoon.
-
-    None of the fix is "be more careful":
-
-    1. Start every extra session with `claude -w`. Each one gets its own git worktree and its own branch. Collisions become impossible, not unlikely.
-
-    2. Keep one primary session that owns the real checkout: publishing, pushing, anything that touches shared state. Everything else works isolated.
-
-    3. Accept that you'll forget, and make the machine notice. I added three small hooks: a warning banner when a session opens in a tree another live session is using, a once-per-prompt check for co-tenants that arrive later, and a nudge to the model the first time it writes into a shared tree.
-
-    The warnings go to the model's context AND to my screen as an OS notification. Both parties in the partnership know the tree is shared, at the moment it matters. The first version only told the model; I never saw a thing. Each audience needs its own channel.
-
-    The system caught its first real clash while I was writing the post about it.
-
-    An afternoon of archaeology, traded for one command-line flag. I've written up the whole pattern, including how the clash-detection hooks work and what their first live test taught me.
-
-    [Link in comments]
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -104,7 +80,6 @@ mx:
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
   <meta name="mx:author" content="Tom Cranstoun">
-  <meta name="x-mx-managedBy" content="blog-post.cog.md">
   <link rel="mx" href="https://mx.allabout.network/blog/drafts/dev/two-sessions-one-tree.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
   <meta name="ai-disclosure" content="ai-assisted">

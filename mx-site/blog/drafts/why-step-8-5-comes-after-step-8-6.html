@@ -19,36 +19,16 @@ tags:
   - cogs
   - workflow
 mx:
-  x-mx-managedBy: blog-post.cog.md
   status: draft
-  x-mx-contentState: draft
   audience:
     - humans
     - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/why-step-8-5-comes-after-step-8-6.md
-  x-mx-contextProvides:
-    - "How decimal step numbering in Claude Code skills creates maintenance drift, and how thin skills plus action-doc cogs solve it."
   stability: stable
   purpose: "How decimal step numbering in Claude Code skills creates maintenance drift, and how thin skills plus action-doc cogs solve it."
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   blogUrl: https://mx.allabout.network/blog/drafts/why-step-8-5-comes-after-step-8-6.html
   blogFilename: why-step-8-5-comes-after-step-8-6
-  x-mx-linkedIn: |
-    Step 8.5 comes after step 8.6. That's not a typo.
-
-    It's the end state of a numbering scheme that started sensibly, then accumulated sub-steps until the ordering became genuinely confusing.
-
-    I've been building a systematic session-close workflow for Claude Code (step-commit) and it grew to 22 step identifiers: 0, 0a, 1, 2, 3, 3a, 3b, 3c, 4, 5, 6, 6b, 7, 8, 8.5, 8.6, 9, 9a, 9b, 9b-ii, 9c, 9d.
-
-    Three places in the file listed these steps: a table, a TodoWrite checklist, and the section headings. They drifted. The table had 8.6 before 8.5 in the wrong order. The checklist was missing nine of the twenty-two steps.
-
-    The fix wasn't to renumber. It was to recognise that a 700-line procedure doesn't belong in a skill file at all.
-
-    Skills route. Cogs do. Moving the SOP to an action-doc cog gave us named phases (Submodule sync, Main commit, Documentation, Compliance, WIP squash, Remote sync, Push) with one source of truth. Adding a new phase means adding a section. No table to update. No checklist to sync.
-
-    And there's a gate for this. Gate 40b in the repo enforces that skill files can't use ## Step N headings, precisely because numbered cross-references go stale when steps are renumbered. The exception was step-commit and step-document, which lived on an explicit allowlist. Once the SOP moved to a cog, both skills came off the allowlist.
-
-    Full write-up on the blog - link in comments.
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -98,7 +78,6 @@ mx:
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
   <meta name="mx:author" content="Tom Cranstoun">
-  <meta name="x-mx-managedBy" content="blog-post.cog.md">
   <link rel="mx" href="https://mx.allabout.network/blog/drafts/why-step-8-5-comes-after-step-8-6.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
   <meta name="ai-disclosure" content="ai-assisted">

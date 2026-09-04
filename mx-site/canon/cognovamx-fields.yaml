@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '1.11'
+version: '1.13'
 created: '2026-04-15'
-modified: '2026-08-07'
+modified: '2026-09-03'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard. Contains both x-mx- public extensions (openly published) and
@@ -586,62 +586,6 @@ mx:
       status: canonical
       profile: cog
       required: optional
-    - name: semantic
-      type: string-or-object
-      definition: >-
-        Semantic quality level or detailed semantic metadata. Declares how well the cog uses semantic HTML and
-        structured data.
-      example: Schema.org JSON-LD
-      notes: 'Part of the quality triad: accessibility, semantic, convergence.'
-      status: canonical
-      profile: cog
-      required: optional
-    - name: mxCompliance
-      type: string-or-object
-      definition: MX compliance level or detailed compliance metadata for a published cog.
-      example: level-3
-      notes: Declares MX compliance tier. Used with publisher, accuracyCommitment, and reviewCycle.
-      status: canonical
-      profile: cog
-      required: optional
-    - name: accuracyCommitment
-      type: string
-      definition: Publisher's commitment to content accuracy.
-      example: All factual claims verified against source documentation
-      notes: >-
-        Publisher-facing field. Part of the trust metadata group: mxCompliance, publisher, accuracyCommitment,
-        correctionSla, reviewCycle.
-      status: canonical
-      profile: cog
-      required: optional
-    - name: reviewCycle
-      type: string
-      definition: How often this cog's content is reviewed for accuracy.
-      example: quarterly
-      notes: Part of the trust metadata group. Helps agents assess content freshness expectations.
-      status: canonical
-      profile: cog
-      required: optional
-    - name: generate
-      type: object
-      definition: Generation instructions for AI agents. Describes how to regenerate this content if lost or outdated.
-      example:
-        prompt: Regenerate from source data
-        source: quarterly-report.csv
-      notes: Part of MX OS metadata. Enables content regeneration from metadata alone.
-      status: canonical
-      profile: cog
-      required: optional
-    - name: source
-      type: string-or-array
-      definition: Origin source material or input files. References where the content was derived from.
-      example: brainstorm.md
-      notes: Content provenance. Distinct from provenance block type (which tracks lineage chain).
-      status: canonical
-      profile:
-        - cog
-        - report
-      required: optional
     - name: recordedFrom
       type: string
       definition: Who this meeting-note or call-recap account was recorded from, and the context of the recording.
@@ -1031,36 +975,6 @@ mx:
       notes: MX OS monitors these and triggers re-evaluation when they change.
       status: canonical
       profile: folder
-    - name: expires
-      type: string
-      definition: Expiry date for time-sensitive cogs. ISO 8601 format (YYYY-MM-DD).
-      example: 2026-12-31T00:00:00.000Z
-      notes: ISO 8601. For time-sensitive content. Review or archive after this date.
-      status: canonical
-      profile: cog
-    - name: correctionSla
-      type: string
-      definition: SLA for correcting errors in the cog content.
-      example: 24 hours
-      notes: Sets expectations for error correction urgency.
-      status: canonical
-      profile: cog
-    - name: updateTriggers
-      type: array
-      definition: Conditions that trigger a cog update. Array of trigger descriptions.
-      example:
-        - specification-change
-        - new-field-added
-      notes: Events that should prompt a cog update.
-      status: canonical
-      profile: cog
-    - name: movedDate
-      type: string
-      definition: Date content was relocated. ISO 8601 format (YYYY-MM-DD).
-      example: 2026-02-28T00:00:00.000Z
-      notes: ISO 8601. When the content was relocated.
-      status: canonical
-      profile: migration
     - name: event
       type: string-or-object
       definition: Event name or event details object.
@@ -2481,6 +2395,46 @@ mx:
       profile: x-mx-public
       required: false
       context: 'Declared on cog files whose scope is governed by a recorded Business Decision Record.'
+    - name: x-mx-corroboratedBy
+      type: array
+      definition: >-
+        The external authoritative sources that independently state this document's load-bearing claims. A flat list
+        of http(s) URLs, each of which must also appear as a citation in the body.
+      example:
+        - https://arxiv.org/abs/2005.11401
+      notes: >-
+        Attestation proves who published a claim, never that anyone authoritative agrees, so corroboration is the
+        separate signal a machine weights at the decision turn. A URL on a CogNovaMX host is self-reference, not
+        corroboration. Enforced by scripts/check-blog-corroboration.cjs (Gate 27). Governing principle:
+        Corroboration over Assertion.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on any document whose claims are load-bearing; enforced today on mx-site blog sources.'
+    - name: x-mx-contestedBy
+      type: array
+      definition: >-
+        The recorded disagreements behind this document's load-bearing claims. An array of objects, each naming the
+        disputed claim, the contesting sources and what each actually states, whether the disagreement is resolved,
+        and the basis on which this document states the claim as it does.
+      example:
+        - claim: The high-risk obligations apply from 2 August 2026.
+          sources:
+            - uri: https://data.consilium.europa.eu/doc/document/x/en/pdf
+              states: deferred to 2 December 2027 by the Digital Omnibus
+          status: resolved
+          basis: The Council's own adopted record supersedes the third-party tracker.
+      notes: >-
+        The other half of x-mx-corroboratedBy. Corroboration records that authoritative sources agree; this records
+        that they do not, and preserves the disagreement instead of flattening it, so a machine sees each source, what
+        it states, and how the publisher resolved it rather than inheriting one side as settled. status is resolved or
+        unresolved; unresolved is a signal to down-weight the claim, not a defect. Every source uri must be external
+        authoritative and cited in the body, the same orphan rule corroboration carries. Enforced by
+        scripts/check-blog-corroboration.cjs (Gate 27). Governing principle: Corroboration over Assertion.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on any document that states a claim authoritative sources disagree about.'
   profiles:
     # book/blog/contact/report/audit/event profiles intentionally not declared
     # here. fields-data.yaml carries the evidence-grounded versions.
@@ -2538,6 +2492,8 @@ mx:
         - x-mx-adr
         - x-mx-ndr
         - x-mx-bdr
+        - x-mx-corroboratedBy
+        - x-mx-contestedBy
     - name: x-mx-private
       description: 'MX-private extension fields. Obfuscated. Prefix: x-mx-p-. Field names are not listed publicly.'
       fields: []
