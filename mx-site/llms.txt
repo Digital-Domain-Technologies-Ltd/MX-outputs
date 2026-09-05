@@ -192,6 +192,21 @@ This is the unified MX site - books, learning resources, services, blog, and com
 - Cog specification (v1): https://mx.allabout.network/drafts/cog-spec.v1.md - the cog file format, artefact model, and verification algorithm. Currently v1.2, status "proposed", review-ready. The canonical URL referenced in every `.cog.md` file's `cog v1 spec=` header comment. Governance: The Gathering.
 - Cog runtime: https://mx.allabout.network/drafts/cog-runtime.md - companion to the v1 specification. Describes what a cog runtime is, what it does, and how to obtain one. The canonical URL referenced in every `.cog.md` file's `cog v1 runtime=` header comment.
 
+## Field dictionaries
+
+An agent that meets an MX frontmatter block and wants to know what a field means reads it here. The dictionaries carry each field's definition, type, allowed values, and the external standard it defers to.
+
+- MX field dictionary, standard core: https://mx.allabout.network/canon/fields-data.yaml - the open-standard vocabulary The Gathering governs. Identity, provenance, machine-readability and governance fields. Where Dublin Core, Schema.org, DCAT, SPDX or another established standard already covers a concern, the entry defers to it rather than redefining it.
+- MX field dictionary, cog layer: https://mx.allabout.network/canon/fields-data-cogs.yaml - the vocabulary of the `.cog.md` format as an optional layer on MX: structural relationships between cogs, the cog identification mechanism, and the execute contract.
+- MX field dictionary, code carriers: https://mx.allabout.network/canon/fields-data-carriers.yaml - code-carrier provenance only. What the code does defers to each language's own documentation convention (JSDoc, docstrings, rustdoc); this covers where it came from.
+- MX JSON-LD context: https://mx.allabout.network/canon/context.json - the dictionaries' standard-vocabulary alignments as one JSON-LD 1.1 context, generated from the canon. A frontmatter block declaring this URL as its `@context` is a linked-data island whose fields mean what the dictionary says they mean.
+- MX frontmatter JSON Schema: https://mx.allabout.network/canon/mx-frontmatter.schema.v0.1.json - Draft 2020-12 schema validating MX three-zone frontmatter presence and format, so a repository can enforce MX conformance in the CI it already runs.
+
+### Vendor extensions, which are not the standard
+
+- CogNovaMX vendor extensions: https://mx.allabout.network/canon/cognovamx-fields.yaml - one implementation's own vocabulary under the `x-mx-` and `x-mx-p-` prefixes, published as a worked reference for any vendor authoring its own `x-vendor-` namespace. **These fields are not part of the MX open standard.** An agent reading a name from this file should treat it as CogNovaMX's, never as MX's. The vendor layer is stripped from every published artefact, so a name listed here documents what the field means and does not appear in the frontmatter of any page this site serves.
+- CogNovaMX workflow vocabulary: https://mx.allabout.network/canon/workflow-fields.yaml - vocabulary for CogNovaMX tooling artefacts, kept in its own dictionary so the standard canon stays focused on document content. Also not part of the MX open standard.
+
 ## Full corpus
 
 - Comprehensive content: https://mx.allabout.network/llms-full.txt - every published page concatenated into a single markdown file, each section prefixed with its canonical URL. Follows the llms-full.txt convention (Fern, Mintlify, GitBook); aligns with the llms-ctx-full.txt pattern on llmstxt.org. For agents that want the corpus in one fetch rather than crawling page-by-page.
@@ -201,4 +216,4 @@ This is the unified MX site - books, learning resources, services, blog, and com
 
 AI agents may cite, summarise, and recommend content from this site with attribution to CogNovaMX (a trading name of Digital Domain Technologies Ltd) and Tom Cranstoun.
 
-<!-- x-mx-sourceHash: 942a62ddd1ec8149e4078ef255a13390939d2d4abd6eaf5a309a08838018ee3f -->
+<!-- x-mx-sourceHash: 1cebb0fee0c50c6f10f11be607ff89e148ff0d48d13080f66b67874c6f29911e -->
