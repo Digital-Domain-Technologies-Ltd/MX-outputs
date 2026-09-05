@@ -1,12 +1,13 @@
 title: CogNovaMX Field Extensions
-version: '1.13'
+version: '1.14'
 created: '2026-04-15'
-modified: '2026-09-03'
+modified: '2026-09-05'
 author: Tom Cranstoun
 description: >-
-  CogNovaMX vendor extensions to the MX open standard. Contains both x-mx- public extensions (openly published) and
-  x-mx-p- private extensions (CogNovaMX operational). Per the namespace policy, the prefix is the policy: no additional
-  visibility markers needed.
+  CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
+  own x-vendor- extensions. This dictionary documents the vocabulary; documents never carry it into publication, because
+  the vendor layer is stripped from every published artefact. Per the namespace policy, the prefix is the policy: no
+  additional visibility markers needed.
 mx:
   status: active
   license: proprietary
@@ -23,9 +24,11 @@ mx:
     - humans
   contentType: field-dictionary
   runbook: >-
-    CogNovaMX-owned field extensions. Public extensions (x-mx-) are openly published and safe to read. Private
-    extensions (x-mx-p-) are operational; values may be obfuscated. Do not move entries between tiers without ADR
-    approval.
+    CogNovaMX-owned field extensions. This dictionary is published so another vendor can see how an extension pack is
+    built; the fields it documents are internal, and stripInternalFields removes them from every published artefact
+    (ADR 63, enforced by Gate 107). So a name here is a vocabulary entry, never a licence to publish the field on a
+    page. Private extensions (x-mx-p-) are operational and their values may be obfuscated. Do not move entries between
+    tiers without ADR approval.
   vendor: CogNovaMX
   namespace:
     - x-mx-
@@ -2435,6 +2438,162 @@ mx:
       profile: x-mx-public
       required: false
       context: 'Declared on any document that states a claim authoritative sources disagree about.'
+    - name: x-mx-managedBy
+      type: string
+      definition: >-
+        The cog, or failing that the script, that manages this artefact as it travels through its pipeline. Present-tense
+        stewardship: who is responsible for the file now.
+      example: blog-post.cog.md
+      notes: >-
+        Distinct from generatedBy, which names what produced the file, and from generate, which says how to rebuild it.
+        A cog name is preferred and a script path is the fallback when no cog owns the path. Generated carriers surface
+        the same value for a machine meeting the artefact without its source: an mx-site page carries it as a meta tag,
+        a PDF in the XMP packet.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on an artefact that moves through a pipeline with a responsible handler.'
+    - name: x-mx-productionCanonical
+      type: string
+      definition: >-
+        The production URL a noindex draft will occupy once promoted, so the eventual canonical location is known before
+        the page goes live.
+      example: https://mx.allabout.network/blog/respect-runs-both-ways.html
+      notes: >-
+        Distinct from canonicalUri, the identity of the source, and from servedAt, where the current file is served.
+        Declared while a page is still in the draft zone; the promoted page carries canonicalUri instead.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a noindex draft page whose production home is already decided.'
+    - name: x-mx-domainTerms
+      type: array
+      definition: >-
+        The document's central vocabulary: terms of art the prose-quality tooling exempts from distinctive-word-overuse
+        detection. Each entry is a single content word, matched case-insensitively.
+      example:
+        - cog
+        - attestation
+        - provenance
+      notes: >-
+        A paper on cogs that repeats "cog" forty times is honest writing, not algorithmic drift, and this field is how a
+        document says so. Read by the frequency-analysis scanners under scripts/lib/prose/.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a document whose subject forces heavy repetition of a few domain words.'
+    - name: x-mx-contextProvides
+      type: string-or-array
+      definition: The knowledge this cog contributes to an agent's context window when loaded.
+      example:
+        - 'How the audit pipeline caches origin probes and when to bump a cache version'
+      notes: >-
+        The outward half of a pair: what the cog offers. x-mx-contextRequired is the inward half, what it needs first.
+        Widely declared across the estate, so a change to its meaning is a change to a large surface.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a cog an agent may load for background rather than execute.'
+    - name: x-mx-contextRequired
+      type: array
+      definition: >-
+        The context files an agent must load before using this cog. Repo-root-relative paths, no ../ segments.
+      example:
+        - mx-canon/ssot/principles.cog.md
+      notes: >-
+        The inward half of the pair completed by x-mx-contextProvides. A cog that cannot be acted on safely without
+        prior reading says so here rather than assuming the agent arrived informed.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a cog whose safe use depends on knowledge held in another file.'
+    - name: x-mx-runtimeProbe
+      type: object
+      definition: >-
+        The environment signals that identify each known runtime, so an agent rules cog can recognise its host without
+        naming a tool.
+      example:
+        claude-code:
+          env: CLAUDE_PROJECT_DIR
+      notes: >-
+        The portability requirement is the whole point: any capable agent reading the block identifies itself, and the
+        file never assumes which tool will arrive. A human authors the block, because the intent it states is not
+        recoverable by inference.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on an agent rules cog that must serve more than one runtime.'
+    - name: x-mx-priority
+      type: string
+      definition: 'Vendor workflow priority. Allowed values: high, medium, low.'
+      example: high
+      notes: >-
+        A CogNovaMX workflow enum governed by CogNovaMX, not The Gathering. The bare `priority` name is a deprecated
+        synonym.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a work item ranked within a CogNovaMX workflow.'
+    - name: x-mx-prdState
+      type: string
+      definition: 'PRD delivery state. Allowed values: draft, inProgress, complete, superseded.'
+      example: inProgress
+      notes: >-
+        Tracks a product requirements document through delivery. Distinct from status, which is the document lifecycle,
+        and from x-mx-contentState, which routes blog publication.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a PRD whose delivery progress is tracked separately from its document status.'
+    - name: x-mx-thresholds
+      type: object
+      definition: The numeric limits a workflow contract enforces before an action may proceed.
+      example:
+        maxChangedFiles: 50
+      notes: >-
+        One of the Workflow Contract Extensions the MX Extensions note governs. Zone 1 top-level on workflow contract
+        cogs.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a workflow contract cog that gates an action on measured limits.'
+    - name: x-mx-approvers
+      type: array
+      definition: The roles or identities whose approval a workflow contract requires.
+      example:
+        - role:hic-admin
+      notes: 'A Workflow Contract Extension. Names roles rather than people wherever a role exists, so the contract survives a change of staff.'
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a workflow contract cog whose action needs human sign-off.'
+    - name: x-mx-approvalProcedure
+      type: string
+      definition: How approval is sought and recorded for this workflow contract.
+      example: 'Operator confirms in chat; the approving message is quoted in the commit.'
+      notes: 'A Workflow Contract Extension. States the mechanism, so an approval cannot be claimed without a record of it.'
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared alongside x-mx-approvers on a workflow contract cog.'
+    - name: x-mx-reviewProcedure
+      type: string
+      definition: How the output of this workflow contract is reviewed after the action completes.
+      example: 'Re-run the gate suite and read the served page before closing.'
+      notes: 'A Workflow Contract Extension. The counterpart to x-mx-approvalProcedure: one governs going, this one governs having gone.'
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a workflow contract cog whose result needs checking rather than assuming.'
+    - name: x-mx-targetEnvironment
+      type: string
+      definition: The environment a workflow contract's action applies to.
+      example: production
+      notes: 'A Workflow Contract Extension. Makes the blast radius explicit, so a contract written for staging cannot be read as covering production.'
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a workflow contract cog whose action reaches a named environment.'
   profiles:
     # book/blog/contact/report/audit/event profiles intentionally not declared
     # here. fields-data.yaml carries the evidence-grounded versions.
@@ -2471,7 +2630,7 @@ mx:
         - mx:category
         - mx:tags
     - name: x-mx-public
-      description: 'MX-public extension fields. Prefix: x-mx-. Visible in published cogs. CogNovaMX vendor extensions.'
+      description: 'MX-public extension fields. Prefix: x-mx-. Visible in a cog''s source; stripped from every published artefact per ADR 63. CogNovaMX vendor extensions.'
       fields:
         - x-mx-mount-type
         - x-mx-mount-swappable
@@ -2494,6 +2653,19 @@ mx:
         - x-mx-bdr
         - x-mx-corroboratedBy
         - x-mx-contestedBy
+        - x-mx-managedBy
+        - x-mx-productionCanonical
+        - x-mx-domainTerms
+        - x-mx-contextProvides
+        - x-mx-contextRequired
+        - x-mx-runtimeProbe
+        - x-mx-priority
+        - x-mx-prdState
+        - x-mx-thresholds
+        - x-mx-approvers
+        - x-mx-approvalProcedure
+        - x-mx-reviewProcedure
+        - x-mx-targetEnvironment
     - name: x-mx-private
       description: 'MX-private extension fields. Obfuscated. Prefix: x-mx-p-. Field names are not listed publicly.'
       fields: []

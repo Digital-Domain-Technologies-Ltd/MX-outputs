@@ -4,7 +4,7 @@ title: "MX Canon - Public Mirror"
 description: "Public mirror of the machine-readable MX canon: standard fields, carrier vocabulary, CogNovaMX vendor extensions, workflow vocabulary, and the MX frontmatter JSON Schema. Canonical source for MX-aware tools."
 author: "Tom Cranstoun"
 created: "2026-04-16"
-modified: "2026-08-14"
+modified: 2026-09-05
 
 type: info-doc
 mx:
@@ -28,6 +28,8 @@ This folder publishes the machine-readable MX canon at stable URLs.
 | [context.json](context.json) | The served MX context: the field dictionary's standard-vocabulary alignments as one JSON-LD 1.1 context, generated from the dictionary, never hand-edited. A frontmatter block that declares this file's URL as its `"@context"` is a linked-data island whose fields mean what the dictionary says they mean | JSON-LD / YAML-LD consumers |
 
 The two field-dictionary files together form the proposed standard that The Gathering governs. The vendor extension pack is not part of the standard - it is a reference for other vendors authoring their own `x-vendor-` extension files - and the workflow vocabulary is CogNovaMX tooling vocabulary kept in its own dictionary so the canon stays focused on document content.
+
+Publishing the vendor pack documents the vocabulary; it does not put those fields on the web. The vendor layer is stripped from every published artefact, so a `x-mx-` name listed here will not appear in the frontmatter of any page mx.allabout.network serves. The pack answers what an extension namespace looks like, not what CogNovaMX declared on any particular document.
 
 ## Validate with the schema
 
