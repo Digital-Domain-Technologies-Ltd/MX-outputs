@@ -1,5 +1,5 @@
 title: CogNovaMX Field Extensions
-version: '1.14'
+version: '1.15'
 created: '2026-04-15'
 modified: '2026-09-05'
 author: Tom Cranstoun
@@ -2364,6 +2364,96 @@ mx:
       profile: x-mx-public
       required: false
       context: 'Declared on blog posts and other Intent-CMS-managed content to drive draft-vs-published routing.'
+    - name: x-mx-sessionState
+      type: string
+      definition: >-
+        Lifecycle position of a worktree session record. open means a session holds the worktree now; paused means the
+        worktree still exists with no session in it; closed means the work is finished and the worktree may be removed.
+        Distinct from status, which describes the record as a document rather than the session it tracks.
+      example: open
+      validValues:
+        - open
+        - paused
+        - closed
+      notes: >-
+        Read by the worktree-remove guard, which refuses to remove a worktree whose record still says open. The fleet
+        hooks own the value; a human sets closed through npm run fleet:session:close.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a worktree session record (handover/sessions/<name>.cog.md) so any machine can tell a live worktree from a spent one.'
+    - name: x-mx-sessionId
+      type: string
+      definition: The assistant session identifier that last wrote this session record, so a record can be traced to the conversation that produced it.
+      example: 1100e8d9
+      notes: Written by the fleet session hooks from the harness payload; unknown when the harness supplies none.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a worktree session record to bind it to one session rather than one machine.'
+    - name: x-mx-operator
+      type: string
+      definition: The operator slug that opened a worktree session, resolved from the git email through the operator register.
+      example: tom
+      notes: >-
+        The slug, never a display name or an email address. Resolved by scripts/lib/operator-config.cjs; unknown when
+        no register entry matches, which is a gap to fix rather than a value to invent.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a worktree session record so a collision names who holds the worktree.'
+    - name: x-mx-machineId
+      type: string
+      definition: The host-<platform uuid> machine slug that opened a worktree session, the same enduring identity the machine identity cogs key on.
+      example: host-ad4c56ff-6136-52f3-986d-7093105c90c9
+      notes: >-
+        Derived from the platform's own machine UUID (macOS IOPlatformUUID, Linux /etc/machine-id), so it survives a
+        hostname change, an adapter swap, and a privacy MAC rotation. A legacy host-<12 hex> value is a MAC-derived slug
+        from a machine that has not yet re-keyed. Distinct from the x-mx-machine block on a machine identity cog, which
+        holds that machine's observed facts rather than a reference to it.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a worktree session record so the fleet index can group worktrees by machine.'
+    - name: x-mx-worktree
+      type: string
+      definition: Absolute path of the worktree a session record belongs to, as git reports it on the machine that wrote the record.
+      example: /Users/tom/GitHub/MX-hub/.claude/worktrees/fleet-sessions
+      notes: Machine-specific by nature; a reader on another machine treats it as a label, never a path to open.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a worktree session record so an index entry and its record can be matched without re-deriving the path.'
+    - name: x-mx-branch
+      type: string
+      definition: The git branch checked out in the worktree a session record belongs to.
+      example: worktree-fleet-sessions
+      notes: Recorded at creation; the fleet index carries the live value, which the branch may outgrow if the worktree switches.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a worktree session record so the fleet index reads as branches rather than paths.'
+    - name: x-mx-artefact
+      type: string
+      definition: >-
+        What the worktree exists to produce, in the operator's own words - a pull request, a report, a feature.
+      example: PR 482
+      notes: Defaults to the worktree name; an operator replaces it with the real artefact so the fleet index reads as work rather than slugs.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a worktree session record so another machine can tell what a worktree is for without opening it.'
+    - name: x-mx-lastActive
+      type: string
+      definition: ISO 8601 instant when a worktree session was last active, refreshed on every save and close.
+      example: '2026-09-05T20:00:00Z'
+      notes: >-
+        A machine-set field: the fleet hooks write it from the clock, never a human by hand. Staleness is judged against
+        it, so a hand-typed value would launder an abandoned worktree into a live one.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a worktree session record so the fleet index can sort and age its entries.'
     - name: x-mx-adr
       type: string-or-object
       definition: Architecture Decision Record reference. Links to the ADR that governs this cog's architectural choices.
