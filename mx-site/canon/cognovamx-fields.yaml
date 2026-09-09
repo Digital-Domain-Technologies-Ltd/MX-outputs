@@ -2404,13 +2404,14 @@ mx:
       context: 'Declared on a worktree session record so a collision names who holds the worktree.'
     - name: x-mx-machineId
       type: string
-      definition: The host-<platform uuid> machine slug that opened a worktree session, the same enduring identity the machine identity cogs key on.
+      definition: The pinned machine slug that opened a worktree session, the same enduring identity the machine identity cogs key on.
       example: host-ad4c56ff-6136-52f3-986d-7093105c90c9
       notes: >-
-        Derived from the platform's own machine UUID (macOS IOPlatformUUID, Linux /etc/machine-id), so it survives a
-        hostname change, an adapter swap, and a privacy MAC rotation. A legacy host-<12 hex> value is a MAC-derived slug
-        from a machine that has not yet re-keyed. Distinct from the x-mx-machine block on a machine identity cog, which
-        holds that machine's observed facts rather than a reference to it.
+        Pinned in the machine's own device store and read thereafter, never recomputed, so it survives a hostname
+        change and an adapter swap. Treat the value as an opaque identifier: the host-<hex> shape is historical, from
+        when the slug was derived from a MAC. A machine identified today proposes host-<platform uuid> (macOS
+        IOPlatformUUID, Linux /etc/machine-id) and pins that. Distinct from the x-mx-machine block on a machine
+        identity cog, which holds that machine's observed facts rather than a reference to it.
       status: canonical
       profile: x-mx-public
       required: false

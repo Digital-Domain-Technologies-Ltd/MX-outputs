@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.7'
+version: '6.8'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-09-02'
+modified: '2026-09-09'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -1628,6 +1628,60 @@ mx:
         Default when omitted: medium (cache for up to 1 day).
       status: canonical
       profile: any
+    - name: volatileValues
+      type: array
+      definition: >-
+        Declares that one or more values stated in the body (a price, an exchange rate, an interest rate, a stock
+        level, an availability figure) are snapshots of a value that moves, records when each was observed and until
+        when it may be quoted, and points at the mechanism a machine calls for the current value.
+      example:
+        - kind: price
+          subject: Standard room, one night
+          statedAt: '2026-09-09T10:00:00Z'
+          validUntil: '2026-09-10T10:00:00Z'
+          currency: GBP
+          resolveVia:
+            url: https://example.com/api/rates?room=standard
+            method: get
+            format: application/json
+            cadence: PT1H
+            access: public
+          onStale: resolve
+      alignsWith:
+        - schema:priceValidUntil
+        - schema:priceCurrency
+        - schema:EntryPoint
+      notes: >
+        One entry per volatile value or group of values. Sub-keys per entry:
+
+        - kind: price | exchange-rate | interest-rate | availability | stock-level | capacity | other
+
+        - subject: what the value describes, in plain words
+
+        - appliesTo: optional URL fragment or selector naming where the value sits in the body
+
+        - statedAt: ISO 8601 date-time at which the stated value was observed
+
+        - validUntil: ISO 8601 date-time after which the stated value must not be quoted as current
+
+        - currency: ISO 4217 code for a monetary value; defaults to the document currency
+
+        - resolveVia: the mechanism that returns the current value. url (the endpoint, feed, or page), optional
+        cogUrn (a registered mechanism record a registry has attested), method (get | post | feed | page | contact),
+        format (a media type), cadence (ISO 8601 duration between refreshes), access (public | key | partner)
+
+        - onStale: what an agent does after validUntil. resolve (call the mechanism, never quote the stated value),
+        quote-dated (quote the stated value with its statedAt date), omit (leave the value out)
+
+        Distinct from cacheability (how long the whole document may be cached), expires (the date the whole file
+        stops being authoritative), and temporalAnchors (dates the prose depends on). A volatile value is a figure
+        inside the body that changes on a cadence while the document around it stays valid. Schema.org Offer carries
+        the value and its validity window on a product; volatileValues is the document-level declaration that the
+        stated figure is a snapshot and where the live figure is resolved. A registry attests the document, and with
+        it the pointer, never the live value.
+      status: canonical
+      profile: any
+      required: optional
     - name: ai
       type: object
       definition: AI-related metadata. Contains disclosure, attribution, freshness policies for AI-generated content.
