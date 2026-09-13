@@ -53,8 +53,8 @@ originator: "Tom Cranstoun"
 author: "Tom Cranstoun"
 
 created: 2026-05-07
-modified: 2026-05-07
-version: "2.2"
+modified: 2026-09-09
+version: "2.4"
 
 # Mandatory when signed (Note 8 §4.3). Names the schema this cog
 # claims contract conformance against, and the validators it
@@ -305,13 +305,13 @@ mx:
         interest) must be clearly and visibly labelled. Deployers
         of chatbots must inform users they are interacting with AI.
       omnibus-status: >
-        Article 50 transparency obligations are NOT among the
-        provisions the Digital Omnibus proposal would defer.
-        Plan to this date as fixed.
+        Article 50 transparency obligations were NOT among the
+        provisions the AI Omnibus deferred. The Omnibus is in
+        force and this date did not move. Plan to it as fixed.
 
     - id: eu-ai-act-broad-enforcement
-      label: "EU AI Act, broad enforcement of high-risk obligations"
-      date: 2026-08-02
+      label: "EU AI Act, high-risk obligations for stand-alone systems (Annex III)"
+      date: 2027-12-02
       jurisdiction: EU
       regulation: Regulation (EU) 2024/1689
       affects: >
@@ -319,15 +319,13 @@ mx:
         logging, transparency, human oversight, accuracy and
         robustness obligations. Penalties become enforceable.
       omnibus-status: >
-        The Digital Omnibus (Commission proposal, 19 November 2025)
-        would defer this to 2 December 2027. As of the latest
-        publication of this cog, trilogue negotiations had not
-        concluded. Plan to the original date until the Omnibus
-        is formally adopted.
+        Deferred from 2 August 2026 to this date by the AI Omnibus,
+        which entered into force on 27 July 2026. The deferral is
+        settled law, not a proposal. Plan to 2 December 2027.
 
     - id: eu-ai-act-high-risk-product-embedded
-      label: "EU AI Act, high-risk AI in regulated products"
-      date: 2027-08-02
+      label: "EU AI Act, high-risk AI in regulated products (Annex I)"
+      date: 2028-08-02
       jurisdiction: EU
       regulation: Regulation (EU) 2024/1689
       affects: >
@@ -335,7 +333,8 @@ mx:
         regulated under EU sectoral law (medical devices,
         machinery, toys etc.). Extended transition.
       omnibus-status: >
-        The Digital Omnibus would defer this to 2 August 2028.
+        Deferred from 2 August 2027 to this date by the same
+        AI Omnibus, in force since 27 July 2026.
 
   x-mx-temporal-computed-fields:
     - field: time-remaining-to-article-50
@@ -509,7 +508,7 @@ SMEs receive proportionate enforcement under Article 62, but no full exemption.
 
 ### A live demonstration - the Digital Omnibus
 
-On 19 November 2025, the European Commission published the Digital Omnibus, a proposal to defer the high-risk obligations of the AI Act from 2 August 2026 to 2 December 2027. It carried. The European Parliament adopted the text on 16 June 2026 and the Council gave its final approval on 29 June 2026, deferring the stand-alone high-risk obligations (Annex III) to 2 December 2027 and the embedded-product ones (Annex I) to 2 August 2028.
+On 19 November 2025, the European Commission published the Digital Omnibus, a proposal to defer the high-risk obligations of the AI Act from 2 August 2026 to 2 December 2027. It carried. The European Parliament adopted the text on 16 June 2026, the Council gave its final approval on 29 June 2026, and it entered into force on 27 July 2026, deferring the stand-alone high-risk obligations (Annex III) to 2 December 2027 and the embedded-product ones (Annex I) to 2 August 2028.
 
 Article 50 transparency obligations were not among the provisions deferred. They apply from 2 August 2026, unchanged.
 
@@ -523,7 +522,7 @@ A folder full of signed PDFs no longer counts. To prove provenance at the moment
 - **Option B - Private deployment.** A REGINALD container running in your own cloud or data centre - reachable on the web but private to your enterprise. Your keys, your perimeter, your operations team.
 - **Option C - Air-gapped on-premises.** REGINALD inside a facility with no public network egress. Suits defence, regulated finance, healthcare and sovereign data environments where the web is not an option at all.
 
-This is not legal advice. The regulatory landscape is moving quickly and varies by jurisdiction. The dates above reflect the EU AI Act (Regulation 2024/1689) as currently in force; the Digital Omnibus proposal would adjust some - but not all - of them. Treat the items above as signals, not statutes, and consult counsel about your specific obligations. Provisions and dates should be verified against the current Official Journal text.
+This is not legal advice. The regulatory landscape is moving quickly and varies by jurisdiction. The dates above reflect the EU AI Act (Regulation 2024/1689) as amended by the AI Omnibus, in force since 27 July 2026, which moved some - but not all - of them. Treat the items above as signals, not statutes, and consult counsel about your specific obligations. Provisions and dates should be verified against the current Official Journal text.
 
 ## The three MX principles
 

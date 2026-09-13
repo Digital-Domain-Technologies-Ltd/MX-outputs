@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.8'
+version: '6.9'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-09-09'
+modified: '2026-09-10'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -1679,6 +1679,94 @@ mx:
         the value and its validity window on a product; volatileValues is the document-level declaration that the
         stated figure is a snapshot and where the live figure is resolved. A registry attests the document, and with
         it the pointer, never the live value.
+      status: canonical
+      profile: any
+      required: optional
+    - name: temporalStance
+      type: string
+      definition: >-
+        Declares the document's relationship between its prose and the dates the prose describes: frozen (the prose
+        records state at publication and its dates do not move), living (the prose reflects state at fetch time and
+        date-derived values are recomputed against the reader's clock), or anchored (the prose contains values computed
+        from declared anchors and moves with them).
+      example: anchored
+      validValues:
+        - frozen
+        - living
+        - anchored
+      notes: >
+        A document declaring anchored SHOULD declare temporalAnchors. A living document MAY omit anchors; the reader's
+        clock is the implicit anchor. A frozen document MUST NOT declare anchors that move. Defined by the Gathering's
+        MX Temporal Stance note; distinct from expires (a lifecycle endpoint) and from volatileValues (a figure that
+        moves, not a date).
+      status: canonical
+      profile: any
+      required: optional
+    - name: temporalAnchors
+      type: object
+      definition: >-
+        Named date anchors the document's prose depends on. Each key is a stable kebab-case identifier; each value
+        pairs the anchor's current date with a description and, where the authoritative value is published elsewhere,
+        its source.
+      example:
+        eu-ai-act-application:
+          date: '2026-08-02'
+          description: EU AI Act provisions for general-purpose AI become applicable.
+          source: https://eur-lex.europa.eu/eli/reg/2024/1689
+        contract-renewal:
+          date: '2027-04-30'
+          description: Master service agreement renewal date.
+      notes: >
+        Sub-keys per anchor: date (ISO 8601, required), description (what the anchor is, naming the external source
+        where there is one), source (optional canonical URL of the authoritative value). An anchor whose date changes
+        is a substantive edit: bump modified and review the prose against temporalProseGuidance. Identifiers are the
+        keys temporalComputedFields and temporalProseGuidance reference. Defined by the Gathering's MX Temporal Stance
+        note.
+      status: canonical
+      profile: any
+      required: optional
+    - name: temporalComputedFields
+      type: object
+      definition: >-
+        Fields whose values are computed from anchors at render time. Each key names a computed field; each value
+        names the anchor it is computed from and the computation to apply. A render-time agent never caches the
+        result beyond a single render.
+      example:
+        daysUntilApplication:
+          from: eu-ai-act-application
+          compute: daysUntil
+          format: integer
+        contractMonthsRemaining:
+          from: contract-renewal
+          compute: monthsUntil
+          format: integer
+      notes: >
+        Sub-keys per computed field: from (an anchor identifier in temporalAnchors, or the literal now), compute
+        (daysUntil, daysSince, monthsUntil, monthsSince, quartersUntil, quartersSince, or dateValue for the anchor
+        date verbatim), format (an optional presentation hint such as integer, iso-date, or human-readable, which an
+        implementation may ignore). An unknown anchor identifier is a render failure, never a default. A computed
+        value is excluded from any signature scope, because it changes on every render. Defined by the Gathering's MX
+        Temporal Stance note.
+      status: canonical
+      profile: any
+      required: optional
+    - name: temporalProseGuidance
+      type: object
+      definition: >-
+        Author-supplied instructions telling a future steward, human or machine, what to review or rewrite in the
+        prose when a named anchor moves. Each key is an anchor identifier from temporalAnchors.
+      example:
+        eu-ai-act-application:
+          onMove: Re-read the day-one section. If the anchor moves more than 30 days, rewrite the run-up timetable.
+          affectedSections:
+            - '#what-changes-on-day-one'
+            - '#run-up-timetable'
+          softCutoff: true
+      notes: >
+        Sub-keys per anchor: onMove (what to review or rewrite), affectedSections (optional URL fragments of the
+        sections that depend on the anchor), softCutoff (true when a small move within tolerance needs no prose
+        update; onMove then says what counts as material). An anchored document SHOULD list every anchor whose
+        movement could leave the prose wrong. Defined by the Gathering's MX Temporal Stance note.
       status: canonical
       profile: any
       required: optional

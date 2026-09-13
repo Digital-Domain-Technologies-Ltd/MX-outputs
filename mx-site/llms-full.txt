@@ -6964,7 +6964,7 @@ Standards governance
 
             8. Two Implementations or It Isn't a Standard
 
-            A specification with one implementation is not a standard; it is that program's documentation, and whoever owns the program owns the rule. The COG specification has a JavaScript reference and an independent Rust implementation that interoperate.
+            A specification with one implementation is not a standard; it is that program's documentation, and whoever owns the program owns the rule. The COG specification has a JavaScript reference and a Rust implementation that genuinely interoperate, and both were built in-house, so MX clears the interoperability bar and does not yet clear the independence one.
 
             3 June 2026
 
@@ -7448,7 +7448,7 @@ Tom Cranstoun is the founder of the Machine Experience (MX) community and author
 
 **URL:** https://mx.allabout.network/blog/governance/two-implementations-or-it-isnt-a-standard.html
 
-**Description:** The eighth post in the standards-governance series. A specification with one implementation is not a standard - it is that program's documentation, and whoever owns the program owns the rule. The IETF has required two independent, interoperable implementations from different code bases since 1996. MX meets the test: the COG specification has a JavaScript reference and an independent Rust implementation that interoperate, which is what makes COG a standard rather than a single codebase's behaviour.
+**Description:** The eighth post in the standards-governance series. A specification with one implementation is not a standard - it is that program's documentation, and whoever owns the program owns the rule. The IETF has required two independent, interoperable implementations from different code bases since 1996. COG has two implementations that genuinely interoperate, and both were built in-house, so MX clears the interoperability bar and does not yet clear the independence one.
 
 Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
@@ -7462,7 +7462,7 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
 
         - What the second implementation finds
 
-        - What COG can show
+        - What COG can show, and what it cannot yet
 
         - A floor, not a finish
 
@@ -7476,7 +7476,7 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             Tom Cranstoun
             ·
-            5 min read
+            6 min read
 
 This is the eighth post in the standards-governance series. The last one ended on change control - who owns the next version. There is a plainer version of the same worry that applies on day one, before any version has had a successor. If a specification has exactly one implementation, it is not really a standard. It is the documentation of that one program, and whoever owns the program owns the rule, no matter how open the document looks.
 
@@ -7494,9 +7494,19 @@ The reason is practical, not ceremonial. A second team building from the text al
 
 There is a failure mode on the other side worth naming. When an ecosystem leans on a single implementation even though the standard is open - the long dominance of one cryptography library, and the day a bug in it exposed much of the web at once - the monoculture becomes a single point of failure for everyone downstream. A standard with one implementation carries that fragility by design.
 
-What COG can show
+What COG can show, and what it cannot yet
 
-This is a test MX can pass rather than merely invoke. The COG specification has a reference implementation in JavaScript and an independent implementation in Rust, and the two interoperate: a record signed and canonicalised by one is read and checked by the other. That interoperability is what makes COG a standard instead of the behaviour of a single codebase. It demonstrates that the specification can be built from its text, by someone working in a different language with different libraries, and arrive at the same bytes - which means no participant depends on the reference code, or on whoever maintains it. It also connects to the point this series made about hubs: if there were one true implementation, its owner would be a chokepoint, whatever the licence said. Two independent ones remove the chokepoint at the level of code, the same way did:web removes it at the level of identity.
+MX is part way through this test, and the part it hasn't passed is the part that counts for most.
+
+The COG specification has two implementations, a JavaScript reference and a second in Rust. They interoperate in the strict sense: a record signed and canonicalised by one is read and checked by the other. Cross-implementation tests confirm both produce byte-identical canonical bytes across the conformance corpus, so a test carries that claim rather than trust.
+
+The second build has already earned its keep. The two disagreed about how a bare date canonicalises, because one language's YAML library returned an object where the other returned a string. The specification gained a rule that makes both emit the same bytes. Catching that is exactly what a second implementation is for, and one alone never would have.
+
+What they aren't is independent. Both were built by us, inside the same organisation, from the same reading of the same text. Different code and different libraries, yes. Different people at different organisations, no.
+
+The specification says as much about itself. Among the reasons it lists for not yet being ready for certified conformance: no independent third-party implementation, and portability claims that stay theoretical until somebody working from the text alone, with no access to its authors, builds one.
+
+So by the standard this post argues for, COG clears the interoperability bar and doesn't clear the independence bar. Redundancy against a single codebase, we have: if the JavaScript implementation vanished tomorrow the specification would survive it, which is the chokepoint argument this series made about hubs. Independence is still outstanding, and I'd rather treat that as an open invitation than a detail to finesse. The conformance suite is the test target, and what this specification still needs is an implementation from outside that passes it.
 
 A floor, not a finish
 
@@ -26953,4 +26963,4 @@ MX
 
         For commissioning AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
 
-<!-- x-mx-sourceHash: 9c3c0000b3cb267a654695756182c34794bba78e034f9c75c24464b6dcea8410 -->
+<!-- x-mx-sourceHash: 263a55d362cf28d79073284ae5f2515af0620c6e699288bb8e4fc158d8928ef4 -->
