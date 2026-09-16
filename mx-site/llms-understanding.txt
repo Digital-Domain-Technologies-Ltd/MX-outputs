@@ -32,7 +32,7 @@ The recommended order is the order of sections below.
 
 ## Provenance of this bundle
 
-**Generated:** 2026-07-03
+**Generated:** 2026-09-16
 **Source repository:** https://github.com/ddttom/mx-shared-gathering
 **Canonical home for each draft:** https://github.com/ddttom/mx-shared-gathering/blob/main/<filename>
 **Licence:** MIT. The MX vocabulary is free, open, and vendor-neutral.
@@ -47,9 +47,9 @@ The recommended order is the order of sections below.
 
 # MX Field Definition Pattern note
 
-**Version:** 1.0
+**Version:** 1.1
 **Status:** Draft by Tom Cranstoun, offered to The Gathering for review — **primary note of the MX draft set**
-**Date:** 27 April 2026
+**Date:** 16 September 2026
 **Author:** Tom Cranstoun
 **License:** MIT
 
@@ -225,7 +225,7 @@ These rules are normative for any field defined under this pattern.
 
 ### 7.1 Naming
 
-Field names use camelCase in YAML contexts (matching the [Schema.org Style Guide](https://schema.org/docs/styleguide.html)). Vendor-extension fields use kebab-case after their prefix (`x-mx-deploy-target`, not `x-mx-deployTarget`). Field names MUST NOT use snake_case or PascalCase in YAML contexts.
+Field names use camelCase in YAML contexts (matching the [Schema.org Style Guide](https://schema.org/docs/styleguide.html)). Vendor-extension fields keep their hyphenated prefix and use camelCase after it (`x-mx-deployTarget`, never a hyphenated `deploy-target` after the prefix). Field names MUST NOT use snake_case or PascalCase in YAML contexts.
 
 ### 7.2 Conformance keywords
 
@@ -283,9 +283,9 @@ A second-order consideration: a uniform field-definition pattern makes automated
 
 # MX Core Metadata note
 
-**Version:** 1.0
+**Version:** 1.1
 **Status:** Draft by Tom Cranstoun, offered to The Gathering for review
-**Date:** 27 April 2026
+**Date:** 16 September 2026
 **Author:** Tom Cranstoun
 **License:** MIT
 
@@ -1087,7 +1087,7 @@ This section covers document discovery, version chains, lifecycle dates, machine
 
 `canonicalUri` carries the carrier's authoritative location at every tier; the URI scheme tells the receiver how to interpret it. A cog that lives only on disk SHOULD use a `file://` URI naming the carrier. A cog served from a network volume or internal corporate application SHOULD use the URI reachable inside the relevant network (`smb://`, `nfs://`, or an internal `https://`). When a cog is hosted in a publicly reachable source repository or website, the value MUST be that public URI: without it, an agent holding a copy cannot find the authoritative version.
 
-**Agreement with HTML's `<link rel="canonical">` (Normative).** For HTML carriers, the URL declared by the page's `<link rel="canonical">` element and the value of the `mx:canonical-uri` `<meta>` tag (the kebab-case HTML rendering of `mx.canonicalUri` per the MX Carrier Formats note) MUST agree. Verifiers MAY treat either form as authoritative. A page that declares both with disagreeing URLs is a conformance failure: tools cannot reconcile two contradictory canonical claims and SHOULD flag the page as ambiguous rather than guess. When only one form is present, that form is authoritative.
+**Agreement with HTML's `<link rel="canonical">` (Normative).** For HTML carriers, the URL declared by the page's `<link rel="canonical">` element and the value of the `mx:canonicalUri` `<meta>` tag (the HTML rendering of `mx.canonicalUri`, the same camelCase name after the `mx:` prefix, per the MX Carrier Formats note) MUST agree. Verifiers MAY treat either form as authoritative. A page that declares both with disagreeing URLs is a conformance failure: tools cannot reconcile two contradictory canonical claims and SHOULD flag the page as ambiguous rather than guess. When only one form is present, that form is authoritative.
 
 ### 7a.2 Lifecycle dates
 
@@ -2075,9 +2075,9 @@ All cog structural fields live in Zone 2 (§6) unless explicitly noted as top-le
 
 # MX Extensions note
 
-**Version:** 1.0
+**Version:** 1.1
 **Status:** Draft by Tom Cranstoun, offered to The Gathering for review
-**Date:** 27 April 2026
+**Date:** 16 September 2026
 **Author:** Tom Cranstoun
 **License:** MIT
 
@@ -2199,24 +2199,24 @@ mx:
 
 ### 6.3 Public extension fields (`x-mx-`)
 
-Public extension fields use the `x-mx-` prefix. The namespace is the public extension space for the MX vocabulary; CogNovaMX operates it during the seed phase. Vendor sub-namespaces of the form `x-mx-{vendor}-*` are reserved for individual vendors and allocated on request — for example, a vendor named "Acme" would publish fields as `x-mx-acme-deploy-target`. Within a vendor sub-namespace the vendor governs the field set.
+Public extension fields use the `x-mx-` prefix. The namespace is the public extension space for the MX vocabulary; CogNovaMX operates it during the seed phase. Vendor sub-namespaces of the form `x-mx-{vendor}-*` are reserved for individual vendors and allocated on request — for example, a vendor named "Acme" would publish fields as `x-mx-acme-deployTarget`. Within a vendor sub-namespace the vendor governs the field set.
 
-Public extension fields MUST use the `x-mx-` prefix. They MUST use kebab-case for the field name portion (unlike standard fields which use camelCase in YAML). They are visible in published cogs and public outputs; they are implementation-specific features, not part of the open standard.
+Public extension fields MUST use the `x-mx-` prefix. The prefix (and a vendor sub-namespace prefix) keeps its hyphens; the field name portion after it MUST be camelCase, the same spelling rule as standard fields (`x-mx-mountType`, `x-mx-acme-deployTarget`). They are visible in published cogs and public outputs; they are implementation-specific features, not part of the open standard.
 
 **Example (CogNovaMX, the seed-phase operator):**
 
 ```yaml
 mx:
-  x-mx-mount-type: personal
-  x-mx-mount-swappable: true
+  x-mx-mountType: personal
+  x-mx-mountSwappable: true
 ```
 
 **Example (vendor sub-namespace):**
 
 ```yaml
 mx:
-  x-mx-acme-deploy-target: production
-  x-mx-acme-cluster-id: cluster-east-1
+  x-mx-acme-deployTarget: production
+  x-mx-acme-clusterId: cluster-east-1
 ```
 
 ### 6.4 Private extension fields (`x-mx-p-`)
@@ -2230,7 +2230,7 @@ Private extension fields use the `x-mx-p-` prefix. They are owned by CogNovaMX a
 
 ```yaml
 mx:
-  x-mx-p-client-tier: "a3f2c8"
+  x-mx-p-clientTier: "a3f2c8"
 ```
 
 ### 6.5 Prefix parsing rule
@@ -2257,25 +2257,25 @@ The table below summarises the per-carrier conventions. The **normative form** o
 |---------|-----------|--------------------------------|---------------|----------------|
 | YAML | camelCase | *(canonical)* | `buildsOn` | `buildsOn: [cog-unified-spec]` |
 | YAML (Zone 1b) | camelCase, top-level, no prefix | OKF-reserved field at top level | `type` | `type: guide` |
-| HTML | Zone 1b: bare kebab-case; Zone 2: kebab-case with `mx:` prefix | OKF fields: no prefix; operational: prepend `mx:` | `type` / `mx:status` | `<meta name="type" content="guide">` / `<meta name="mx:status" content="active">` |
-| JSDoc | kebab-case with `@mx:` tag | camelCase → kebab-case, prepend `@mx:` | `@mx:runtime` | `@mx:runtime node` |
-| CSS | kebab-case with `@mx:` comment | camelCase → kebab-case, prepend `@mx:` | `@mx:type` | `/* @mx:type utility */` |
+| HTML | Zone 1b: bare name; Zone 2: camelCase with `mx:` prefix | OKF fields: no prefix; operational: prepend `mx:`, case preserved | `type` / `mx:status` | `<meta name="type" content="guide">` / `<meta name="mx:status" content="active">` |
+| JSDoc | camelCase with `@mx:` tag | prepend `@mx:`, case preserved | `@mx:contentType` | `@mx:contentType script` |
+| CSS | camelCase with `@mx:` comment | prepend `@mx:`, case preserved | `@mx:contentType` | `/* @mx:contentType theme */` |
 | Shell | camelCase in `# key: value` | none — preserve camelCase | `type` | `# type: guide` |
 | XMP | `mx:` namespace prefix, case preserved | prepend `mx:` | `mx:type` | `<mx:type>guide</mx:type>` |
 | Sidecar | camelCase in YAML (three-zone) | Zone 1b fields at top level | `type` | `type: guide` |
 | SQL | camelCase in `-- @mx` block | none — preserve camelCase | `type` | `-- @mx type: guide` |
 
-For HTML in particular: the four MUST-at-Level-2 fields from MX Core Metadata §7a (`canonicalUri`, `summary`, `conformsTo`, `trainingDataPolicy`) MUST be present in HTML carriers as the kebab-case `mx:` `<meta>` tags `mx:canonical-uri`, `mx:summary`, `mx:conforms-to`, `mx:training-data-policy`. The carrier-formats note defines the binding form and worked examples.
+For HTML in particular: the four MUST-at-Level-2 fields from MX Core Metadata §7a (`canonicalUri`, `summary`, `conformsTo`, `trainingDataPolicy`) MUST be present in HTML carriers as the `mx:` `<meta>` tags `mx:canonicalUri`, `mx:summary`, `mx:conformsTo`, `mx:trainingDataPolicy`, the same camelCase names after the prefix. The carrier-formats note defines the binding form and worked examples.
 
 ### 7.2 Extension field naming in non-YAML contexts
 
-Extension fields (`x-mx-` and `x-mx-p-`) already use kebab-case. In non-YAML contexts, the prefix is preserved as-is:
+Extension fields (`x-mx-` and `x-mx-p-`) carry a hyphenated prefix and a camelCase name. In non-YAML contexts the whole name is preserved as-is:
 
 | Context | Standard field example | Extension field example |
 |---------|----------------------|------------------------|
-| YAML | `type: guide` (Zone 1b) | `x-mx-mount-type: personal` |
-| HTML | `<meta name="type" content="guide">` | `<meta name="mx:x-mx-mount-type">` |
-| JSDoc | `@okf-type guide` | `@mx:x-mx-mount-type personal` |
+| YAML | `type: guide` (Zone 1b) | `x-mx-mountType: personal` |
+| HTML | `<meta name="type" content="guide">` | `<meta name="mx:x-mx-mountType">` |
+| JSDoc | `@okf-type guide` | `@mx:x-mx-mountType personal` |
 
 ---
 
@@ -2283,7 +2283,7 @@ Extension fields (`x-mx-` and `x-mx-p-`) already use kebab-case. In non-YAML con
 
 The following fields use the `x-mx-` prefix and are owned by CogNovaMX. They are visible in published cogs and provide implementation-specific features that are not part of the open standard.
 
-### 8.1 `x-mx-mount-type`
+### 8.1 `x-mx-mountType`
 
 | Property | Value |
 |----------|-------|
@@ -2304,10 +2304,10 @@ This field is REQUIRED for all `.mx.yaml.md` folder metadata files that describe
 
 ```yaml
 mx:
-  x-mx-mount-type: personal
+  x-mx-mountType: personal
 ```
 
-### 8.2 `x-mx-mount-swappable`
+### 8.2 `x-mx-mountSwappable`
 
 | Property | Value |
 |----------|-------|
@@ -2325,10 +2325,10 @@ Whether this mount can be swapped for a different implementation.
 
 ```yaml
 mx:
-  x-mx-mount-swappable: true
+  x-mx-mountSwappable: true
 ```
 
-### 8.3 `x-mx-mount-upstream`
+### 8.3 `x-mx-mountUpstream`
 
 | Property | Value |
 |----------|-------|
@@ -2337,11 +2337,11 @@ mx:
 | **Profile** | x-mx-public |
 | **Conformance** | MAY (Level 2) |
 
-Upstream source for standard-type mounts. Identifies the canonical source repository for a forked or derived mount. Only meaningful when `x-mx-mount-type` is `standard`. The value SHOULD be a URL pointing to the upstream repository.
+Upstream source for standard-type mounts. Identifies the canonical source repository for a forked or derived mount. Only meaningful when `x-mx-mountType` is `standard`. The value SHOULD be a URL pointing to the upstream repository.
 
 ```yaml
 mx:
-  x-mx-mount-upstream: "https://github.com/example/upstream-repo"
+  x-mx-mountUpstream: "https://github.com/example/upstream-repo"
 ```
 
 ---
@@ -2383,7 +2383,7 @@ New extension fields are registered by CogNovaMX. The Gathering does not govern 
 ### 10.2 Registration steps
 
 1. **Choose the prefix.** Use `x-mx-` for public extensions, `x-mx-p-` for private extensions.
-2. **Use kebab-case.** Extension field names MUST use kebab-case (unlike standard fields which use camelCase in YAML). Example: `x-mx-deploy-target`, not `x-mx-deployTarget`.
+2. **Use camelCase after the prefix.** The prefix keeps its hyphens; the name after it MUST be camelCase, the same rule as standard fields. Example: `x-mx-deployTarget`, not a hyphenated `deploy-target` after the prefix.
 3. **Document the context.** Describe the field's purpose, type, valid values, and which carrier formats it applies to.
 4. **No Gathering approval needed.** Extension fields follow vendor governance, not community governance.
 
@@ -2438,9 +2438,9 @@ A field MUST remain in the deprecated state for at least one major version cycle
 | Extension fields use `x-mx-` or `x-mx-p-` | MUST | — |
 | No prefix pollution | MUST | — |
 | Correct context-specific naming for non-YAML carriers | — | SHOULD |
-| `x-mx-mount-type` (when x-mx-public profile applies) | MUST | — |
-| `x-mx-mount-swappable` (when x-mx-public profile applies) | MUST | — |
-| `x-mx-mount-upstream` | — | MAY |
+| `x-mx-mountType` (when x-mx-public profile applies) | MUST | — |
+| `x-mx-mountSwappable` (when x-mx-public profile applies) | MUST | — |
+| `x-mx-mountUpstream` | — | MAY |
 
 ---
 
@@ -2491,17 +2491,17 @@ mx:
 **Mistake 2: camelCase on an extension field.**
 
 ```yaml
-# WRONG — extension fields use kebab-case in YAML, not camelCase
+# WRONG — the name after the prefix is camelCase, not kebab-case
 mx:
-  x-mx-deployTarget: production
+  x-mx-deploy-target: production
 ```
 
-Extension fields (§6.3, §10.2) use kebab-case for the suffix:
+Extension fields (§6.3, §10.2) keep the hyphenated prefix and use camelCase for the suffix:
 
 ```yaml
 # RIGHT
 mx:
-  x-mx-deploy-target: production
+  x-mx-deployTarget: production
 ```
 
 **Mistake 3: claiming a vendor sub-namespace without permission.**
@@ -2509,7 +2509,7 @@ mx:
 ```yaml
 # WRONG — `acme` sub-namespace not allocated to this author
 mx:
-  x-mx-acme-cluster-id: "prod-1"
+  x-mx-acme-clusterId: "prod-1"
 ```
 
 The vendor sub-namespace pattern `x-mx-{vendor}-*` (§6.3) is reserved. Only use a vendor's sub-namespace if the namespace has been allocated to that vendor. For one-off fields outside an allocated sub-namespace, the seed-phase `x-mx-` namespace operated by CogNovaMX is the default until a sub-namespace is allocated.
@@ -2519,7 +2519,7 @@ The vendor sub-namespace pattern `x-mx-{vendor}-*` (§6.3) is reserved. Only use
 ```yaml
 # WRONG — implementations without the registry MUST NOT attempt to interpret
 mx:
-  x-mx-p-client-tier: "a3f2c8"
+  x-mx-p-clientTier: "a3f2c8"
   # ... and downstream code does:
   # if (clientTier === "a3f2c8") { ... }
 ```
@@ -2531,7 +2531,7 @@ Private extension values (§9) are opaque. Implementations without access to the
 ```yaml
 # WRONG — modified is already a standard field
 mx:
-  x-mx-last-changed: 2026-05-07
+  x-mx-lastChanged: 2026-05-07
 ```
 
 Before declaring an `x-mx-` extension, check the standard vocabulary in MX Core Metadata §5–6. The intent here is captured by `modified` (Zone 1, §5.5). Use the standard field; the extension namespace is for genuinely new vocabulary, not synonyms of existing fields.
@@ -3545,9 +3545,9 @@ contractFields:
 
 # MX Carrier Formats note
 
-**Version:** 1.0
+**Version:** 1.1
 **Status:** Draft by Tom Cranstoun, offered to The Gathering for review
-**Date:** 27 April 2026
+**Date:** 16 September 2026
 **Author:** Tom Cranstoun
 **License:** MIT
 
@@ -3659,7 +3659,7 @@ Extension fields appear inside the `mx:` object alongside standard operational f
 |----------|-------|
 | **File types** | `.html` |
 | **Carrier mechanism** | `<meta name="mx:*">` tags in `<head>`, `data-mx-*` attributes on elements |
-| **Field naming** | kebab-case with `mx:` prefix |
+| **Field naming** | camelCase with `mx:` prefix (the field's own name) |
 | **Conformance** | MUST (Level 2) for HTML documents claiming MX conformance |
 | **Required fields** | `description` (standard HTML meta) + `author` (standard HTML meta) + the four MUST-at-Level-2 mx: meta tags listed below |
 
@@ -3669,11 +3669,11 @@ HTML documents carry MX metadata using `<meta>` tags in the document `<head>`. T
 
 The conversion from a YAML field name to its HTML carrier form is binding:
 
-1. Convert the camelCase YAML name to kebab-case.
-2. Prepend `mx:` to the kebab-case form.
+1. Keep the camelCase YAML name unchanged; the name is the field.
+2. Prepend `mx:`.
 3. Place the value in a `<meta name="…" content="…">` tag inside the document's `<head>`.
 
-For example, `mx.canonicalUri: https://example.org/x` becomes `<meta name="mx:canonical-uri" content="https://example.org/x">`. This conversion is the same in both directions: a verifier reading an HTML carrier converts `mx:canonical-uri` back to `canonicalUri` to compare with frontmatter equivalents.
+For example, `mx.canonicalUri: https://example.org/x` becomes `<meta name="mx:canonicalUri" content="https://example.org/x">`. The mapping is the same in both directions: a verifier reading an HTML carrier strips the `mx:` prefix from `mx:canonicalUri` to get `canonicalUri` and compares strings with the frontmatter; no case conversion is performed in either direction.
 
 The MX Extensions note §7.1 provides the same table as an informative summary; this subsection is the binding form. If a row in that summary disagrees with this subsection, this subsection wins.
 
@@ -3683,10 +3683,10 @@ An HTML document claiming MX Standard (Level 2) MUST declare the four MUST-at-Le
 
 | YAML field | HTML meta tag | Value semantics (cross-reference) |
 |------------|---------------|-------------------------------------|
-| `mx.canonicalUri` | `<meta name="mx:canonical-uri" content="…">` | URI of the canonical version of this document. MUST agree with `<link rel="canonical">` if both are present (MX Core Metadata §7a.1). |
+| `mx.canonicalUri` | `<meta name="mx:canonicalUri" content="…">` | URI of the canonical version of this document. MUST agree with `<link rel="canonical">` if both are present (MX Core Metadata §7a.1). |
 | `mx.summary` | `<meta name="mx:summary" content="…">` | One-to-two-sentence machine-summary; lets agents decide relevance without reading the body. |
-| `mx.conformsTo` | `<meta name="mx:conforms-to" content="…">` | Comma-separated list of standards URIs the document conforms to (`mx.conformsTo` is an array; serialise as comma-separated string). |
-| `mx.trainingDataPolicy` | `<meta name="mx:training-data-policy" content="…">` | Whether the document may be included in AI training corpora. |
+| `mx.conformsTo` | `<meta name="mx:conformsTo" content="…">` | Comma-separated list of standards URIs the document conforms to (`mx.conformsTo` is an array; serialise as comma-separated string). |
+| `mx.trainingDataPolicy` | `<meta name="mx:trainingDataPolicy" content="…">` | Whether the document may be included in AI training corpora. |
 
 **Worked example (Normative):**
 
@@ -3698,14 +3698,14 @@ An HTML document claiming MX Standard (Level 2) MUST declare the four MUST-at-Le
   <meta name="author" content="Tom Cranstoun">
 
   <!-- The four MUST-at-Level-2 mx: tags -->
-  <meta name="mx:canonical-uri" content="https://example.org/blog/auth-design">
+  <meta name="mx:canonicalUri" content="https://example.org/blog/auth-design">
   <meta name="mx:summary" content="Working notes on the authentication redesign — what we kept, what we replaced, why.">
-  <meta name="mx:conforms-to" content="https://mx.allabout.network/cog.html">
-  <meta name="mx:training-data-policy" content="Permitted with attribution.">
+  <meta name="mx:conformsTo" content="https://mx.allabout.network/cog.html">
+  <meta name="mx:trainingDataPolicy" content="Permitted with attribution.">
 
   <!-- Other operational fields -->
   <meta name="mx:status" content="published">
-  <meta name="mx:content-type" content="info-doc">
+  <meta name="mx:contentType" content="info-doc">
 </head>
 ```
 
@@ -3715,7 +3715,7 @@ An HTML document claiming MX Standard (Level 2) MUST declare the four MUST-at-Le
 - MX-specific fields MUST use the `mx:` prefix in the `name` attribute.
 - Array values MUST be serialised as comma-separated strings.
 - `data-mx-*` attributes MAY be used on body elements for element-level MX metadata.
-- The values of `<link rel="canonical">` and `<meta name="mx:canonical-uri">` MUST agree when both are present, per MX Core Metadata §7a.1; verifiers MAY treat either as authoritative.
+- The values of `<link rel="canonical">` and `<meta name="mx:canonicalUri">` MUST agree when both are present, per MX Core Metadata §7a.1; verifiers MAY treat either as authoritative.
 
 ---
 
@@ -3725,7 +3725,7 @@ An HTML document claiming MX Standard (Level 2) MUST declare the four MUST-at-Le
 |----------|-------|
 | **File types** | `.js`, `.mjs`, `.ts` |
 | **Carrier mechanism** | JSDoc `/** */` block with `@mx:` tags |
-| **Field naming** | kebab-case with `@mx:` tag prefix |
+| **Field naming** | camelCase with `@mx:` tag prefix (the field's own name) |
 | **Conformance** | MUST (Level 2) for JavaScript documents claiming MX conformance |
 | **Required fields** | `@description` + `@version`/`@author` + at least one `@mx:*` tag |
 
@@ -3739,7 +3739,7 @@ JavaScript files carry MX metadata in a JSDoc comment block at the top of the fi
  * @version 1.0
  * @author Tom Cranstoun
  * @mx:status active
- * @mx:content-type utility
+ * @mx:contentType utility
  * @mx:runtime node
  * @mx:tags validation, metadata
  */
@@ -3757,7 +3757,7 @@ JavaScript files carry MX metadata in a JSDoc comment block at the top of the fi
 |----------|-------|
 | **File types** | `.css` |
 | **Carrier mechanism** | CSS comment `/* */` block with `@mx:` tags |
-| **Field naming** | kebab-case with `@mx:` tag prefix |
+| **Field naming** | camelCase with `@mx:` tag prefix (the field's own name) |
 | **Conformance** | MUST (Level 2) for CSS documents claiming MX conformance |
 | **Required fields** | `@description` + `@version`/`@author` + at least one `@mx:*` tag |
 
@@ -3952,7 +3952,7 @@ A single MX field can appear in more than one form on the same artefact: a markd
 3. **HTML `<meta>` tags** and equivalent declarative tags (JSDoc `@mx:`, CSS `@mx:` comment, SQL `-- @mx`) are next. Their values are authoritative when no higher form declares the same field on the same artefact.
 4. **Inferred values** (defaulted by the validator, computed from other fields, derived from external context) are lowest. A higher form always wins over an inferred value.
 
-When a field is declared in two or more forms on the same artefact, the values MUST agree. Disagreement is a conformance failure: tools cannot reconcile two contradictory authoritative declarations and SHOULD surface the conflict rather than silently picking one. The most common collision in practice is `<link rel="canonical">` versus `<meta name="mx:canonical-uri">` on the same HTML page (see §3.2.2 and MX Core Metadata §7a.1) — those two MUST agree.
+When a field is declared in two or more forms on the same artefact, the values MUST agree. Disagreement is a conformance failure: tools cannot reconcile two contradictory authoritative declarations and SHOULD surface the conflict rather than silently picking one. The most common collision in practice is `<link rel="canonical">` versus `<meta name="mx:canonicalUri">` on the same HTML page (see §3.2.2 and MX Core Metadata §7a.1) — those two MUST agree.
 
 **Author's checklist when more than one form is in play:**
 
