@@ -17,7 +17,7 @@ mx:
   x-mx-quotes:
     - "Choose what is better for the planet. Reduce compute, reduce inference, reduce energy."
     - "This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation."
-  x-mx-contextProvides: ["LinkedIn article on MX reducing hallucinations, inference cost, and energy, with a free-audit CTA."]
+  contextProvides: ["LinkedIn article on MX reducing hallucinations, inference cost, and energy, with a free-audit CTA."]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/mx-good-for-ai-and-the-planet.linkedin.md
 
 ---

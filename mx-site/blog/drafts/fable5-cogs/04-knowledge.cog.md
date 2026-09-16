@@ -23,7 +23,7 @@ mx:
   audience: [machines]
   purpose: "Define when to use web search versus answer from training data."
   stability: stable
-  x-mx-contextProvides: ["Knowledge cutoff: January 2026. Always search for: current position holders, binary events (deaths/elections), fast-changing data (prices/news), unrecognised entities. Never search for: timeless facts, fundamental concepts, biographical data about known historical figures."]
+  contextProvides: ["Knowledge cutoff: January 2026. Always search for: current position holders, binary events (deaths/elections), fast-changing data (prices/news), unrecognised entities. Never search for: timeless facts, fundamental concepts, biographical data about known historical figures."]
   dependencies: ["examples/fable5/01-identity"]
   runbook: "Loaded at session start. Apply before every response where recency could matter."
 

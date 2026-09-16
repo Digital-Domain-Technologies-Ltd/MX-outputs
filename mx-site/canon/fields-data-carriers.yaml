@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Carrier Formats Companion
-version: '5.1'
+version: '5.2'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-08-06'
+modified: '2026-09-14'
 author: The Gathering
 description: >-
   Open standard carrier-format metadata schemas for code (function/class/API/test/inline/dependency/repository).
@@ -154,12 +154,10 @@ mx:
       type: string
       definition: Team or person responsible for this file or resource.
       example: platform-team
-      notes: Used at file and directory level in code metadata. Also applies to media rights and database tables.
+      notes: Used at file and directory level in code metadata. Media rights and database tables defer to their own standards (Schema.org, DCAT, CSVW).
       status: canonical
       profile:
         - code-file
-        - media-rights
-        - database-table
       required: false
     - name: pure
       type: boolean
@@ -380,6 +378,18 @@ mx:
     # all - so fields-data.yaml is the sole load-bearing source.
     - name: code-repository
       description: Repository-level metadata. Lives in mx.yaml, .mx/config.yaml, or package.json[mx].
+      header: |
+        ---
+        # Carrier: mx.yaml, .mx/config.yaml, or package.json[mx]
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: code-repository
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        project:
+          name: mx-hub
+          description: "MX standards hub and tooling."
+        ---
       required:
         - project.name
         - project.description
@@ -396,8 +406,21 @@ mx:
         - conventions.style
         - conventions.testing
         - conventions.documentation
+        - type
+        - tags
+        - resource
     - name: code-file
       description: File-level metadata. Appears in @mx comment blocks at the top of source files.
+      header: |
+        ---
+        # Carrier: @mx comment block at the top of a source file
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: code-file
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        owner: platform-team
+        ---
       optional:
         - owner
         - reviewers
@@ -405,8 +428,21 @@ mx:
         - ai.contextProvides
         - ai.generationNotes
         - ai.reason
+        - type
+        - tags
+        - resource
     - name: code-function
       description: Function-level metadata. Appears in @mx blocks within JSDoc or docstrings.
+      header: |
+        ---
+        # Carrier: @mx block inside a JSDoc comment or docstring
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: code-function
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        pure: true
+        ---
       optional:
         - pure
         - idempotent
@@ -420,8 +456,21 @@ mx:
         - ai.refactorNotes
         - ai.doNotModify
         - ai.reason
+        - type
+        - tags
+        - resource
     - name: code-class
       description: Class-level metadata. Appears in @mx blocks within class JSDoc or docstrings.
+      header: |
+        ---
+        # Carrier: @mx block inside a class JSDoc comment or docstring
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: code-class
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        pattern: singleton
+        ---
       optional:
         - pattern
         - threadSafe
@@ -432,8 +481,22 @@ mx:
         - ai.doNotModify
         - ai.contextRequired
         - ai.reason
+        - type
+        - tags
+        - resource
     - name: code-inline
       description: Inline code annotations. @mx:begin/@mx:end for blocks, @mx:tag for lines.
+      header: |
+        ---
+        # Carrier: inline @mx:begin / @mx:end markers and @mx:tag lines
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: code-inline
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        mx:begin: sensitive-block
+        mx:end: sensitive-block
+        ---
       fields:
         - mx:begin
         - mx:end
@@ -441,8 +504,24 @@ mx:
         - mx:intentional
         - mx:todo
         - mx:ai
+      optional:
+        - type
+        - tags
+        - resource
     - name: code-dependency
       description: Dependency metadata. Extends package.json or pyproject.toml with MX properties.
+      header: |
+        ---
+        # Carrier: mx block in package.json or pyproject.toml
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: code-dependency
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        dependency:
+          purpose: "YAML parsing"
+          critical: true
+        ---
       optional:
         - dependency.purpose
         - dependency.critical
@@ -450,8 +529,22 @@ mx:
         - dependency.alternativesConsidered
         - ai.replacementPermitted
         - ai.upgradePermitted
+        - type
+        - tags
+        - resource
     - name: code-test
       description: Test file metadata.
+      header: |
+        ---
+        # Carrier: @mx block at the top of a test file
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: code-test
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        testType: unit
+        subject: parseFrontmatter
+        ---
       required:
         - testType
         - subject
@@ -462,8 +555,22 @@ mx:
         - ai.mustCover
         - ai.edgeCases
         - ai.doNotMock
+        - type
+        - tags
+        - resource
     - name: code-api
       description: API endpoint metadata. OpenAPI extensions or route annotations.
+      header: |
+        ---
+        # Carrier: OpenAPI extension or route annotation
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: code-api
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        method: GET
+        path: /v1/cog/{id}
+        ---
       required:
         - method
         - path
@@ -479,3 +586,6 @@ mx:
         - ai.sensitiveRequestFields
         - ai.sensitiveResponseFields
         - ai.sideEffects
+        - type
+        - tags
+        - resource

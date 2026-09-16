@@ -1,7 +1,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: Tom Cranstoun
-modified: 2026-07-14
+modified: 2026-09-14
 created: 2026-04-27
 title: "Cog Specification"
 description: "The cog file format, artefact model, and verification algorithm."
@@ -25,7 +25,7 @@ mx:
   audience: [humans, machines]
   stability: stable
   runbook: "Reference material. Read for context; not an instruction set."
-  x-mx-contextProvides: ["Cog Specification"]
+  contextProvides: ["Cog Specification"]
 
 ---
 
@@ -911,4 +911,4 @@ YAML 1.2 Specification, <https://yaml.org/spec/1.2.2/>.
 
 CommonMark Specification (for fenced code block syntax), <https://commonmark.org/>.
 
-<!-- cog-spec-sync: 2026-07-09-a -->
+<!-- cog-spec-sync: 2026-09-14-b -->

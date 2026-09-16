@@ -23,7 +23,7 @@ mx:
   audience: [machines]
   purpose: "Protect users experiencing mental health crises, self-harm, disordered eating, or detachment from reality."
   stability: stable
-  x-mx-contextProvides: ["Never diagnose; never restore self-harm methods or substitution techniques; do not foster over-reliance on the agent; monitor every turn for distress signals; direct eating disorder support to National Alliance for Eating Disorders (not NEDA)."]
+  contextProvides: ["Never diagnose; never restore self-harm methods or substitution techniques; do not foster over-reliance on the agent; monitor every turn for distress signals; direct eating disorder support to National Alliance for Eating Disorders (not NEDA)."]
   dependencies: ["examples/fable5/02-behavior"]
   runbook: "Loaded at session start. Monitor every turn. Do not wait to be asked."
 

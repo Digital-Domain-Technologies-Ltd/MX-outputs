@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '1.15'
+version: '1.22'
 created: '2026-04-15'
-modified: '2026-09-05'
+modified: '2026-09-16'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -34,7 +34,7 @@ mx:
     - x-mx-
     - x-mx-p-
   fields:
-    - name: x-mx-mount-type
+    - name: x-mx-mountType
       type: string
       definition: 'Mount type for submodule repositories. Values: personal, team, product, standard.'
       example: personal
@@ -48,7 +48,7 @@ mx:
       profile: x-mx-public
       required: true
       context: Used in .mx.yaml.md folder metadata for git submodules to categorise them in the hub mount table.
-    - name: x-mx-mount-swappable
+    - name: x-mx-mountSwappable
       type: string-or-boolean
       definition: 'Whether this mount can be swapped for a different repository. Values: true, false, fork.'
       example: true
@@ -63,7 +63,7 @@ mx:
       context: >-
         Personal mounts are swappable (each business mounts their own). Product mounts are not. Standard mounts are
         forkable.
-    - name: x-mx-mount-upstream
+    - name: x-mx-mountUpstream
       type: string
       definition: Upstream source for standard-type mounts. URL or description of where to pull updates from.
       example: https://github.com/Digital-Domain-Technologies-Ltd/MX-Gathering
@@ -149,19 +149,6 @@ mx:
       status: canonical
       profile: cog
       required: optional
-    - name: contentPolicy
-      type: string
-      definition: >-
-        Plain-language statement of how the file may be reused - whether agents may cite, summarise, quote, or link
-        to it. Aligns with W3C ODRL (Open Digital Rights Language) rather than the x-mx- vendor namespace, per the
-        2026-06-20 namespace policy ruling (see scripts/cogs/field-merge.cog.md).
-      example: "AI agents may cite, summarize, link to, and quote."
-      notes: >-
-        The asset decorator writes it into an asset's own carrier so the reuse policy travels with the binary. Two
-        legacy x-mx-contentPolicy occurrences are a pending migration to this canonical bare form, tracked separately.
-      status: canonical
-      profile: cog
-      required: optional
     - name: blogUrl
       type: string
       definition: The canonical public URL of the published blog post generated from this source.
@@ -196,7 +183,7 @@ mx:
       profile:
         - folder
         - cog
-        - all
+        - any
       required: optional
       default: false
     - name: isAiGenerated
@@ -214,7 +201,7 @@ mx:
       profile:
         - folder
         - cog
-        - all
+        - any
       required: optional
       default: false
     - name: generatedBy
@@ -229,7 +216,7 @@ mx:
       profile:
         - folder
         - cog
-        - all
+        - any
       required: optional
     - name: image
       type: string
@@ -241,7 +228,7 @@ mx:
       profile:
         - book
         - blog
-        - all
+        - any
       required: optional
     - name: contentFilename
       type: string
@@ -252,7 +239,7 @@ mx:
       status: canonical
       profile:
         - cog
-        - all
+        - any
       required: optional
     - name: lastUpdated
       type: string
@@ -262,7 +249,7 @@ mx:
       example: '2026-04-15'
       status: canonical
       profile:
-        - all
+        - any
       required: optional
     - name: fullName
       type: string
@@ -271,7 +258,7 @@ mx:
       status: canonical
       profile:
         - contact
-        - all
+        - any
       required: optional
     - name: organisation
       type: string
@@ -281,7 +268,7 @@ mx:
       status: canonical
       profile:
         - contact
-        - all
+        - any
       required: optional
     - name: website
       type: string
@@ -290,7 +277,7 @@ mx:
       status: canonical
       profile:
         - contact
-        - all
+        - any
       required: optional
     - name: theme
       type: string
@@ -298,7 +285,7 @@ mx:
       example: mx-light
       status: canonical
       profile:
-        - all
+        - any
       required: optional
     - name: slides
       type: array
@@ -310,7 +297,7 @@ mx:
         - next-steps
       status: canonical
       profile:
-        - all
+        - any
       required: optional
     - name: agentAction
       type: string
@@ -320,7 +307,7 @@ mx:
       status: canonical
       profile:
         - cog
-        - all
+        - any
       required: optional
     - name: whenToRead
       type: string
@@ -331,7 +318,7 @@ mx:
       status: canonical
       profile:
         - cog
-        - all
+        - any
       required: optional
     - name: updateInstructions
       type: string
@@ -339,7 +326,7 @@ mx:
       example: Regenerate via npm run cog:sync after any cog frontmatter change.
       status: canonical
       profile:
-        - all
+        - any
       required: optional
     - name: clientUrl
       type: string
@@ -349,7 +336,7 @@ mx:
       profile:
         - audit
         - contact
-        - all
+        - any
       required: optional
     - name: clientSlug
       type: string
@@ -359,7 +346,7 @@ mx:
       profile:
         - audit
         - contact
-        - all
+        - any
       required: optional
     - name: auditTool
       type: string
@@ -425,7 +412,7 @@ mx:
       profile:
         - contact
         - audit
-        - all
+        - any
       required: optional
     - name: engagementOptions
       type: array
@@ -444,7 +431,7 @@ mx:
       status: canonical
       profile:
         - cog
-        - all
+        - any
       required: optional
     - name: security
       type: object-or-string
@@ -478,7 +465,7 @@ mx:
       status: canonical
       profile:
         - cog
-        - all
+        - any
       required: optional
     - name: definition
       type: string
@@ -489,7 +476,7 @@ mx:
       status: canonical
       profile:
         - cog
-        - all
+        - any
       required: optional
     - name: affects
       type: array
@@ -500,7 +487,7 @@ mx:
       status: canonical
       profile:
         - cog
-        - all
+        - any
       required: optional
     - name: action
       type: string
@@ -511,7 +498,7 @@ mx:
       status: canonical
       profile:
         - cog
-        - all
+        - any
       required: optional
     - name: note
       type: string
@@ -519,7 +506,7 @@ mx:
       example: Scheduled for review next week.
       status: canonical
       profile:
-        - all
+        - any
       required: optional
     - name: thread
       type: string
@@ -528,7 +515,7 @@ mx:
       status: canonical
       profile:
         - contact
-        - all
+        - any
       required: optional
     - name: related
       type: array
@@ -539,7 +526,7 @@ mx:
       notes: When the relationship is structural (parent/child, builds-on), use the dedicated field instead.
       status: canonical
       profile:
-        - all
+        - any
       required: optional
     - name: recipient
       type: string-or-array
@@ -548,7 +535,7 @@ mx:
       status: canonical
       profile:
         - contact
-        - all
+        - any
       required: optional
     - name: links
       type: array
@@ -558,7 +545,7 @@ mx:
         - ./related.md
       status: canonical
       profile:
-        - all
+        - any
       required: optional
     - name: includes
       type: array
@@ -717,7 +704,6 @@ mx:
         attribution.
       status: canonical
       profile:
-        - identity
         - contact
     - name: relationship
       type: string
@@ -1040,7 +1026,6 @@ mx:
         - code-file
         - code-function
         - code-class
-        - database
       required: false
     - name: ai.confidence
       type: number
@@ -1150,7 +1135,6 @@ mx:
       status: canonical
       profile:
         - code-api
-        - database-query
       required: false
     - name: ai.testMode
       type: string
@@ -1187,7 +1171,6 @@ mx:
       status: canonical
       profile:
         - code-api
-        - database-procedure
       required: false
     - name: documentType
       type: string
@@ -1195,7 +1178,7 @@ mx:
         Document classification within MX. Distinct from contentType (which is the cog/folder format). Values describe
         the document role: proposal, specification, manual, report, pitch, letter, interview, etc.
       status: canonical
-      profile: extended
+      profile: any
     - name: structure
       type: string
       definition: Structural description of this cog. Enumerates the major sections or blocks the reader should expect.
@@ -1335,142 +1318,137 @@ mx:
       type: string
       definition: 'Extended metadata field: mx agent action.'
       status: canonical
-      profile: extended
+      profile: any
     - name: mxContext
       type: string
       definition: 'Extended metadata field: mx context.'
       status: canonical
-      profile: extended
+      profile: any
     - name: mxPriority
       type: string
       definition: 'Extended metadata field: mx priority.'
       status: canonical
-      profile: extended
+      profile: any
     - name: mxWhenToRead
       type: string
       definition: 'Extended metadata field: mx when to read.'
       status: canonical
-      profile: extended
+      profile: any
     - name: mxKeySections
       type: string-or-array
       definition: mx key sections. String or array of values.
       status: canonical
-      profile: extended
+      profile: any
     - name: lastModified
       type: string
       definition: 'Extended metadata field: last modified.'
       status: canonical
-      profile: extended
+      profile: any
     - name: relatedCommands
       type: string-or-array
       definition: related commands. String or array of values.
       status: canonical
-      profile: extended
+      profile: any
     - name: watchRegistry
       type: string
       definition: 'Extended metadata field: watch registry.'
       status: canonical
-      profile: extended
+      profile: any
     - name: keySections
       type: string-or-array
       definition: key sections. String or array of values.
       status: canonical
-      profile: extended
+      profile: any
     - name: watchesFiles
       type: string-or-array
       definition: watches files. String or array of values.
       status: canonical
-      profile: extended
+      profile: any
     - name: sections
       type: string
       definition: 'Extended metadata field: sections.'
       status: canonical
-      profile: extended
+      profile: any
     - name: trigger
       type: string
       definition: 'Extended metadata field: trigger.'
       status: canonical
-      profile: extended
+      profile: any
     - name: lastSync
       type: string
       definition: 'Extended metadata field: last sync.'
       status: canonical
-      profile: extended
+      profile: any
     - name: mxWatchRegistry
       type: string
       definition: 'Extended metadata field: mx watch registry.'
       status: canonical
-      profile: extended
+      profile: any
     - name: skillName
       type: string
       definition: 'Extended metadata field: skill name.'
       status: canonical
-      profile: extended
+      profile: any
     - name: skillVersion
       type: string
       definition: 'Extended metadata field: skill version.'
       status: canonical
-      profile: extended
+      profile: any
     - name: relatedSkills
       type: string
       definition: 'Extended metadata field: related skills.'
       status: canonical
-      profile: extended
+      profile: any
     - name: relatedDocuments
       type: string
       definition: 'Extended metadata field: related documents.'
       status: canonical
-      profile: extended
+      profile: any
     - name: seeAlso
       type: string
       definition: 'Extended metadata field: see also.'
       status: canonical
-      profile: extended
+      profile: any
     - name: companion
       type: string
       definition: Reference to a companion document or resource that should be read alongside this one.
       status: canonical
-      profile: extended
+      profile: any
     - name: longdescription
       type: string
       definition: 'Extended metadata field: longdescription.'
       status: canonical
-      profile: extended
-    - name: refersToExternal
-      type: string
-      definition: 'Extended metadata field: refers to external.'
-      status: canonical
-      profile: extended
+      profile: any
     - name: editor
       type: string
       definition: Editor name or identifier. Person responsible for editorial review.
       status: canonical
-      profile: extended
+      profile: any
     - name: readingTime
       type: string
       definition: 'Extended metadata field: reading time.'
       status: canonical
-      profile: extended
+      profile: any
     - name: coOwnership
       type: string
       definition: 'Extended metadata field: co ownership.'
       status: canonical
-      profile: extended
+      profile: any
     - name: state
       type: string
       definition: 'Extended metadata field: state.'
       status: canonical
-      profile: extended
+      profile: any
     - name: insight
       type: string
       definition: 'Extended metadata field: insight.'
       status: canonical
-      profile: extended
+      profile: any
     - name: template
       type: string
       definition: 'Extended metadata field: template.'
       status: canonical
-      profile: extended
+      profile: any
     - name: deliverables
       type: string
       definition: List of deliverable outputs from this work item or project.
@@ -1500,57 +1478,57 @@ mx:
       type: string
       definition: 'Extended metadata field: lastmod.'
       status: canonical
-      profile: extended
+      profile: any
     - name: keywords
       type: string
       definition: 'Extended metadata field: keywords.'
       status: canonical
-      profile: extended
+      profile: any
     - name: canonical
       type: string
       definition: 'Extended metadata field: canonical.'
       status: canonical
-      profile: extended
+      profile: any
     - name: aiContentPolicy
       type: string
       definition: 'Extended metadata field: ai content policy.'
       status: canonical
-      profile: extended
+      profile: any
     - name: aiFreshness
       type: string
       definition: 'Extended metadata field: ai freshness.'
       status: canonical
-      profile: extended
+      profile: any
     - name: aiAttribution
       type: string
       definition: 'Extended metadata field: ai attribution.'
       status: canonical
-      profile: extended
+      profile: any
     - name: co
       type: string
       definition: 'Extended metadata field: co.'
       status: canonical
-      profile: extended
+      profile: any
     - name: goal
       type: string
       definition: 'Extended metadata field: goal.'
       status: canonical
-      profile: extended
+      profile: any
     - name: demo
       type: string
       definition: Demo or showcase reference. URL, path, or description of a demonstration for this content.
       status: canonical
-      profile: extended
+      profile: any
     - name: archivedBy
       type: string
       definition: 'Extended metadata field: archived by.'
       status: canonical
-      profile: extended
+      profile: any
     - name: weekBoundary
       type: string
       definition: 'Extended metadata field: week boundary.'
       status: canonical
-      profile: extended
+      profile: any
     - name: styleRules
       type: string
       definition: 'Cog operational metadata: style rules.'
@@ -1570,22 +1548,22 @@ mx:
       type: string
       definition: 'Standard operating procedure: content policy. Defines the SOP aspect for this document or cog.'
       status: canonical
-      profile: extended
+      profile: any
     - name: sopPreferredAccess
       type: string
       definition: 'Standard operating procedure: preferred access. Defines the SOP aspect for this document or cog.'
       status: canonical
-      profile: extended
+      profile: any
     - name: sopStructuredData
       type: string
       definition: 'Standard operating procedure: structured data. Defines the SOP aspect for this document or cog.'
       status: canonical
-      profile: extended
+      profile: any
     - name: siteName
       type: string
       definition: 'Extended metadata field: site name.'
       status: canonical
-      profile: extended
+      profile: any
     - name: decisionStatus
       type: string
       definition: 'Cog operational metadata: decision status.'
@@ -1595,62 +1573,62 @@ mx:
       type: string
       definition: 'Extended metadata field: difficulty.'
       status: canonical
-      profile: extended
+      profile: any
     - name: entityType
       type: string
       definition: 'Extended metadata field: entity type.'
       status: canonical
-      profile: extended
+      profile: any
     - name: capabilities
       type: string
       definition: 'Extended metadata field: capabilities.'
       status: canonical
-      profile: extended
+      profile: any
     - name: communityAuthors
       type: string-or-array
       definition: Array of community contributors to this document.
       status: canonical
-      profile: extended
+      profile: any
     - name: contributions
       type: string
       definition: Array of contribution descriptions for this document.
       status: canonical
-      profile: extended
+      profile: any
     - name: contributionProcess
       type: string
       definition: Description of the process for contributing to this document or project.
       status: canonical
-      profile: extended
+      profile: any
     - name: openSource
       type: string
       definition: 'Extended metadata field: open source.'
       status: canonical
-      profile: extended
+      profile: any
     - name: evolvingDocument
       type: boolean
       definition: Boolean. Whether this document is expected to change frequently.
       status: canonical
-      profile: extended
+      profile: any
     - name: versionControlled
       type: string
       definition: 'Extended metadata field: version controlled.'
       status: canonical
-      profile: extended
+      profile: any
     - name: principles
       type: string
       definition: 'Extended metadata field: principles.'
       status: canonical
-      profile: extended
+      profile: any
     - name: canonicalUrl
       type: string
       definition: 'Extended metadata field: canonical url.'
       status: canonical
-      profile: extended
+      profile: any
     - name: metadataPhilosophy
       type: string
       definition: 'Extended metadata field: metadata philosophy.'
       status: canonical
-      profile: extended
+      profile: any
     - name: imagesAudited
       type: number
       definition: Count of images analysed during the audit.
@@ -1662,22 +1640,22 @@ mx:
         GEO (Generative Engine Optimisation) visibility score (0-100). Measures likelihood of content appearing in
         AI-generated search results.
       status: canonical
-      profile: extended
+      profile: any
     - name: geoCategoryMentions
       type: string
       definition: Count of category-level mentions in GEO analysis. How often the content is referenced by topic.
       status: canonical
-      profile: extended
+      profile: any
     - name: geoCitationAccuracy
       type: string
       definition: GEO citation accuracy score (0-100). Whether AI-generated citations of this content are factually correct.
       status: canonical
-      profile: extended
+      profile: any
     - name: geoCompetitorGap
       type: string
       definition: GEO competitor gap score. Measures the visibility difference between this content and competing sources.
       status: canonical
-      profile: extended
+      profile: any
     - name: governedBy
       type: string
       definition: 'Cog operational metadata: governed by.'
@@ -1692,37 +1670,37 @@ mx:
       type: string
       definition: 'Classification of the pitch approach. Values: investor, partner, client, advisory.'
       status: canonical
-      profile: business
+      profile: pitch
     - name: presentationFor
       type: string
       definition: Target audience for a presentation or talk. Freetext.
       status: canonical
-      profile: business
+      profile: pitch
     - name: pitchAsk
       type: string
       definition: The specific ask or call-to-action in a pitch deck or proposal.
       status: canonical
-      profile: business
+      profile: pitch
     - name: valuation
       type: string
       definition: Company or product valuation figure. Used in investor pitch metadata.
       status: canonical
-      profile: business
+      profile: pitch
     - name: marketSize
       type: number
       definition: Total addressable market size. Used in pitch/investor context.
       status: canonical
-      profile: business
+      profile: pitch
     - name: arrProjection
       type: string
       definition: Annual Recurring Revenue projection. Financial metric for investor materials.
       status: canonical
-      profile: business
+      profile: pitch
     - name: logo
       type: string
       definition: Logo URL or file path for an organisation or product.
       status: canonical
-      profile: extended
+      profile: any
     - name: partnershipValue
       type: string
       definition: Estimated value of a partnership. Financial or strategic metric.
@@ -2323,27 +2301,6 @@ mx:
       profile: x-mx-public
       required: true
       context: 'Required on cog files (.cog.md) to group them for registry purposes.'
-    - name: x-mx-riskLevel
-      type: string
-      definition: >-
-        Execution danger classification for action-doc cogs declaring runnable behaviour. low = read-only, no side
-        effects. medium = writes files or calls APIs. high = modifies system state, handles credentials. critical =
-        destructive operations, financial transactions - SHOULD have a guardrail gate.
-      example: low
-      validValues:
-        - low
-        - medium
-        - high
-        - critical
-      notes: >-
-        CogNovaMX governance concept, not a Gathering open-standard field. Distinct from trustLevel (provenance
-        quality, standard tier). Top-level convenience for the value also accepted inside a security block; when both
-        forms are present the security block wins. The bare `riskLevel` name is a deprecated synonym; see
-        fields-data.yaml's deprecations table.
-      status: canonical
-      profile: x-mx-public
-      required: false
-      context: 'Declared on action-doc cogs that execute code or call external systems, to signal the blast radius of a failure.'
     - name: x-mx-contentState
       type: string
       definition: >-
@@ -2573,31 +2530,6 @@ mx:
       profile: x-mx-public
       required: false
       context: 'Declared on a document whose subject forces heavy repetition of a few domain words.'
-    - name: x-mx-contextProvides
-      type: string-or-array
-      definition: The knowledge this cog contributes to an agent's context window when loaded.
-      example:
-        - 'How the audit pipeline caches origin probes and when to bump a cache version'
-      notes: >-
-        The outward half of a pair: what the cog offers. x-mx-contextRequired is the inward half, what it needs first.
-        Widely declared across the estate, so a change to its meaning is a change to a large surface.
-      status: canonical
-      profile: x-mx-public
-      required: false
-      context: 'Declared on a cog an agent may load for background rather than execute.'
-    - name: x-mx-contextRequired
-      type: array
-      definition: >-
-        The context files an agent must load before using this cog. Repo-root-relative paths, no ../ segments.
-      example:
-        - mx-canon/ssot/principles.cog.md
-      notes: >-
-        The inward half of the pair completed by x-mx-contextProvides. A cog that cannot be acted on safely without
-        prior reading says so here rather than assuming the agent arrived informed.
-      status: canonical
-      profile: x-mx-public
-      required: false
-      context: 'Declared on a cog whose safe use depends on knowledge held in another file.'
     - name: x-mx-runtimeProbe
       type: object
       definition: >-
@@ -2695,6 +2627,18 @@ mx:
     # mislead a reader, never actually apply.
     - name: js
       description: 'Fields for .cog.js files. Convention: @mx:field in JSDoc blocks.'
+      header: |
+        ---
+        # Carrier: .cog.js file; native form is @mx:field in the JSDoc block
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: cog-js
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        mx:name: mx-badge
+        mx:version: "1.0"
+        mx:purpose: "Render the MX Compatible badge."
+        ---
       required:
         - mx:name
       recommended:
@@ -2708,8 +2652,23 @@ mx:
         - mx:buildsOn
         - mx:documentedIn
         - mx:contextProvides
+        - type
+        - tags
+        - resource
     - name: css
       description: 'Fields for .cog.css files. Convention: @mx:field in comment blocks.'
+      header: |
+        ---
+        # Carrier: .cog.css file; native form is @mx:field in the leading comment block
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: cog-css
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        mx:name: mx-badge
+        mx:version: "1.0"
+        mx:purpose: "Render the MX Compatible badge."
+        ---
       required:
         - mx:name
       recommended:
@@ -2720,12 +2679,70 @@ mx:
         - mx:stability
         - mx:category
         - mx:tags
+        - type
+        - tags
+        - resource
+    - name: pitch
+      description: >-
+        Fields for pitch decks, proposals, and investor materials authored as markdown. A CogNovaMX vendor profile,
+        not part of the open standard; the fields describe the pitch document itself (its type, audience, ask, and
+        the figures it states), never the business it pitches.
+      header: |
+        ---
+        # Carrier: pitch deck or proposal source, markdown frontmatter
+        # --- Zone 1a: Identity ---
+        title: "CogNovaMX seed round"
+        description: "Investor pitch for the REGINALD registry and the MX practice."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: pitch
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          pitchType: investor
+          presentationFor: "Seed-stage investors"
+          pitchAsk: "Lead a seed round"
+        ---
+      required:
+        - pitchType
+      recommended:
+        - presentationFor
+        - pitchAsk
+      optional:
+        - valuation
+        - marketSize
+        - arrProjection
+        - type
+        - tags
+        - resource
     - name: x-mx-public
       description: 'MX-public extension fields. Prefix: x-mx-. Visible in a cog''s source; stripped from every published artefact per ADR 63. CogNovaMX vendor extensions.'
+      header: |
+        ---
+        # Carrier: x-mx- fields sit inside the mx: block of any document
+        # --- Zone 1a: Identity ---
+        title: "Hub mount table"
+        description: "How the hub mounts each submodule and what may be swapped."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: info-doc
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          x-mx-mountType: standard
+          x-mx-mountSwappable: fork
+          x-mx-mountUpstream: "The Gathering open standard"
+        ---
       fields:
-        - x-mx-mount-type
-        - x-mx-mount-swappable
-        - x-mx-mount-upstream
+        - x-mx-mountType
+        - x-mx-mountSwappable
+        - x-mx-mountUpstream
         - x-mx-frictionLog
         - x-mx-resolver
         - x-mx-metaTitle
@@ -2737,7 +2754,6 @@ mx:
         - x-mx-productionUrl
         - x-mx-sourceFile
         - x-mx-category
-        - x-mx-riskLevel
         - x-mx-contentState
         - x-mx-adr
         - x-mx-ndr
@@ -2747,8 +2763,6 @@ mx:
         - x-mx-managedBy
         - x-mx-productionCanonical
         - x-mx-domainTerms
-        - x-mx-contextProvides
-        - x-mx-contextRequired
         - x-mx-runtimeProbe
         - x-mx-priority
         - x-mx-prdState
@@ -2757,6 +2771,31 @@ mx:
         - x-mx-approvalProcedure
         - x-mx-reviewProcedure
         - x-mx-targetEnvironment
+      optional:
+        - type
+        - tags
+        - resource
     - name: x-mx-private
       description: 'MX-private extension fields. Obfuscated. Prefix: x-mx-p-. Field names are not listed publicly.'
+      header: |
+        ---
+        # Carrier: x-mx-p- fields sit inside the mx: block; values are tokenised
+        # --- Zone 1a: Identity ---
+        title: "Pipeline stage record"
+        description: "Operational record with obfuscated private fields."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: info-doc
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          x-mx-p-stage: "tok_9f3a1c"
+        ---
       fields: []
+      optional:
+        - type
+        - tags
+        - resource

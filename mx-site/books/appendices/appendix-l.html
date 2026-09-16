@@ -44,7 +44,7 @@ mx:
   <meta name="mx:audience" content="humans, machines">
   <meta name="mx:aiAssistance" content="welcome">
   <meta name="mx:aiEditable" content="false">
-  <meta name="mx:content-policy" content="extract-with-attribution">
+  <meta name="mx:contentPolicy" content="extract-with-attribution">
   <meta name="mx:attribution" content="required">
   <link rel="llms-txt" href="/llms.txt">
   <!-- Open Graph / Facebook -->
@@ -219,7 +219,7 @@ the training and generation fields (<code>aiTraining</code>,
 <code>aiGenerationReviewRequired</code>) are core dictionary fields,
 defined in Appendix M and Appendix T. A publisher who wants a
 machine-checkable training-data policy today declares it in frontmatter;
-the <code>mx:content-policy</code> and <code>mx:attribution</code> meta
+the <code>mx:contentPolicy</code> and <code>mx:attribution</code> meta
 tags below are the forward-compatible way to carry the same intent on a
 rendered HTML page while their token vocabulary settles.</p>
 <h2 id="relationship-to-established-standards">Relationship to
@@ -354,7 +354,7 @@ Prefix Pattern</h3>
 <p><strong>In HTML, we use the <code>mx:</code> colon prefix</strong>
 (matching established conventions):</p>
 <div class="sourceCode" id="cb2" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Why colon prefix?</strong></p>
 <p>HTML meta tags use colon-delimited namespaces as an established
@@ -609,7 +609,7 @@ summary-only</li>
 policies</li>
 </ol>
 <h3 id="proposed-meta-tags">Proposed Meta Tags</h3>
-<h4 id="mxpreferred-access">mx:preferred-access</h4>
+<h4 id="mxpreferred-access">mx:preferredAccess</h4>
 <p><strong>Deprecated.</strong> Do not implement this tag.</p>
 <p>Previously proposed to indicate how machines should access
 content.</p>
@@ -623,7 +623,7 @@ confirming that they serve HTML.</p>
 <code>&lt;link rel="api" href="/api/v1/products"&gt;</code> instead.
 Link elements are the standard mechanism for declaring related
 resources.</p>
-<h4 id="mxcontent-policy">mx:content-policy</h4>
+<h4 id="mxcontent-policy">mx:contentPolicy</h4>
 <p><strong>Active.</strong> What machines are permitted to do with
 content.</p>
 <p><strong>Values:</strong></p>
@@ -637,7 +637,7 @@ required</li>
 </ul>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb4" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Rationale:</strong> More granular than robots.txt
 <code>noindex</code>. Allows summaries whilst restricting full
 extraction.</p>
@@ -651,7 +651,7 @@ when content last changed. Adding a meta tag that restates this
 information creates a maintenance burden - when the HTTP headers say one
 thing and the meta tag says another, they must decide which to trust.
 The HTTP header is the canonical source. Use it.</p>
-<h4 id="mxstructured-data">mx:structured-data</h4>
+<h4 id="mxstructured-data">mx:structuredData</h4>
 <p><strong>Deprecated.</strong> Do not implement this tag.</p>
 <p>Previously proposed to indicate where to find structured data.</p>
 <p><strong>Why deprecated:</strong> The JSON-LD
@@ -672,7 +672,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <p><strong>Rationale:</strong> Explicit statement of attribution
 expectations, ensuring consistent attribution across all AI-generated
 content that references this material.</p>
-<h4 id="mxjurisdiction-restriction">mx:jurisdiction-restriction</h4>
+<h4 id="mxjurisdiction-restriction">mx:jurisdictionRestriction</h4>
 <p>Indicates content was created, published, or ingested from a
 jurisdiction with content restrictions, allowing machines to understand
 potential legal and content limitations.</p>
@@ -693,13 +693,13 @@ but recommended)</li>
 </ul>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb6" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdiction-restriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;CN&quot;</span><span class="ot"> reason</span><span class="op">=</span><span class="st">&quot;Content sourced from jurisdiction with government content controls&quot;</span><span class="dt">&gt;</span></span>
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdictionRestriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;CN&quot;</span><span class="ot"> reason</span><span class="op">=</span><span class="st">&quot;Content sourced from jurisdiction with government content controls&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdiction-restriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;EU&quot;</span><span class="ot"> reason</span><span class="op">=</span><span class="st">&quot;GDPR right-to-be-forgotten applies to training data&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdictionRestriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;EU&quot;</span><span class="ot"> reason</span><span class="op">=</span><span class="st">&quot;GDPR right-to-be-forgotten applies to training data&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdiction-restriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;RU&quot;</span><span class="ot"> reason</span><span class="op">=</span><span class="st">&quot;Content subject to Russian information restrictions&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdictionRestriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;RU&quot;</span><span class="ot"> reason</span><span class="op">=</span><span class="st">&quot;Content subject to Russian information restrictions&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdiction-restriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;none&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdictionRestriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;none&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Rationale:</strong> When LLMs ingest training data from
 restricted jurisdictions, this meta tag signals potential legal
 constraints that may persist when the model operates in unrestricted
@@ -758,9 +758,9 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Wireless Headphones - £149.99<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX meta tags (only non-duplicative tags) --&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summaries-allowed, full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summaries-allowed, full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="ot"> text</span><span class="op">=</span><span class="st">&quot;Source: Example Store, https://example.com&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdiction-restriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;none&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:jurisdictionRestriction&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;none&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;llms-txt&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/llms.txt&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Established standards --&gt;</span></span>
@@ -1848,7 +1848,7 @@ problem:</p>
 <div class="sourceCode" id="cb21" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX: Understanding layer (passive metadata) --&gt;</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -2122,7 +2122,7 @@ existing infrastructure.</p>
 <div class="sourceCode" id="cb22" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX meta tags for agent behaviour --&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Schema.org for structured data --&gt;</span></span>
@@ -2158,7 +2158,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;twitter:title&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Understanding MX Patterns&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX for AI agent behaviour --&gt;</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Why all three?</strong></p>
@@ -2182,7 +2182,7 @@ Disallow: /private/</code></pre>
 <div class="sourceCode" id="cb25" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Page-level override with MX meta tags --&gt;</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;robots&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;index, follow&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summaries-allowed&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summaries-allowed&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="ot"> text</span><span class="op">=</span><span class="st">&quot;Source: Example.com&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Hierarchy of control:</strong></p>
 <ol type="1">
@@ -2200,7 +2200,7 @@ page overrides:</strong></p>
 &gt; Attribution: required</code></pre>
 <div class="sourceCode" id="cb27" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Page overrides site-wide defaults --&gt;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;not-required&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;llms-txt&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/llms.txt&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Pattern:</strong> Site-wide defaults in llms.txt,
@@ -2241,7 +2241,7 @@ Existing CMS Platforms</h4>
 class="sourceCode php"><code class="sourceCode php" data-role="code-content"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Add MX meta tags to WordPress head</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>add_action(<span class="st">&#39;wp_head&#39;</span><span class="ot">,</span> <span class="kw">function</span>() {</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (is_single()) {</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&#39;&lt;meta name=&quot;mx:content-policy&quot; content=&quot;extract-with-attribution&quot;&gt;&#39;</span> <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&#39;&lt;meta name=&quot;mx:contentPolicy&quot; content=&quot;extract-with-attribution&quot;&gt;&#39;</span> <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&#39;&lt;meta name=&quot;mx:attribution&quot; content=&quot;required&quot;&gt;&#39;</span> <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>})<span class="ot">;</span></span></code></pre></div>
@@ -2251,7 +2251,7 @@ class="sourceCode jsx"><code class="sourceCode javascriptreact" data-role="code-
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;&gt;</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">&lt;Head&gt;</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;meta</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span> <span class="ot">content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;meta</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span> <span class="ot">content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span> <span class="kw">/&gt;</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;meta</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span> <span class="ot">content</span><span class="op">=</span><span class="st">&quot;required&quot;</span> <span class="kw">/&gt;</span></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">&lt;/Head&gt;</span></span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;article&gt;</span><span class="va">{</span>post<span class="op">.</span><span class="at">content</span><span class="va">}</span><span class="kw">&lt;/article&gt;</span></span>
@@ -2268,7 +2268,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- NEW (mx: namespace) --&gt;</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Deprecated tags (do not migrate - remove
 entirely):</strong></p>
@@ -2282,7 +2282,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <li>Remove <code>ai-preferred-access</code>, <code>ai-freshness</code>,
 and <code>ai-structured-data</code> - they are deprecated</li>
 <li>Rename <code>ai-content-policy</code> to
-<code>mx:content-policy</code></li>
+<code>mx:contentPolicy</code></li>
 <li>Rename <code>ai-attribution</code> to
 <code>mx:attribution</code></li>
 <li>Use <code>&lt;link rel="llms-txt" href="/llms.txt"&gt;</code>

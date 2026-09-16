@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.9'
+version: '6.16'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-09-10'
+modified: '2026-09-16'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -48,7 +48,7 @@ mx:
         prefix: x-mx-
         owner: CogNovaMX
         visibility: Visible in published cogs. Implementation extension, not the open standard.
-        example: x-mx-audience-segment, x-mx-pipeline-stage
+        example: x-mx-audienceSegment, x-mx-pipelineStage
         rule: x- signals extension. mx- signals whose. Visible to anyone reading the cog.
       - level: mx-private
         prefix: x-mx-p-
@@ -110,9 +110,10 @@ mx:
         when a neutral term is available, use it.
     context-specific-naming:
       rule: >-
-        Context determines syntax. YAML frontmatter uses camelCase. HTML/JS/CSS contexts use kebab-case with mx: prefix.
-        Same field, different representation.
+        The name is the field in every carrier. YAML frontmatter uses camelCase; HTML, JSDoc, and CSS carry the same
+        camelCase name after the mx: or @mx: prefix. Same field, same spelling; only the container changes (NDR-14).
       alignment: mx-canon/mx-maxine-lives/deliverables/mx-standards-alignment.cog.md
+      ndr: mx-canon/mx-the-gathering/naming-decisions/ndr-14-camelcase-in-every-carrier.cog.md
       contexts:
         yaml:
           syntax: camelCase
@@ -120,20 +121,20 @@ mx:
           rationale: Schema.org precedent. YAML is a data format — use the vocabulary's native naming.
           enforcement: mandatory
         html:
-          syntax: 'kebab-case with mx: prefix'
-          example: <meta name='mx:content-type' content='field-dictionary'>
-          rationale: HTML attribute convention. Follows data-* pattern (data-user-name in HTML, dataset.userName in JS).
-          enforcement: mandatory
+          syntax: 'camelCase with mx: prefix'
+          example: <meta name='mx:contentType' content='field-dictionary'>
+          rationale: The meta tag carries the field's own name; a reader compares strings and converts nothing.
+          enforcement: mandatory (Gate 117, scripts/check-mx-carrier-names.cjs)
         jsdoc:
-          syntax: 'kebab-case with @mx: tag'
-          example: '@mx:runtime node'
-          rationale: 'JSDoc at-rule convention. @param, @returns, @mx: all follow same pattern.'
-          enforcement: flexible (kebab preferred, validated by linter not spec)
+          syntax: 'camelCase with @mx: tag'
+          example: '@mx:contentType script'
+          rationale: 'The tag carries the field name; @mx: is the namespace, not a reason to respell.'
+          enforcement: mandatory (Gate 117)
         css:
-          syntax: 'kebab-case with @mx: comment'
-          example: /* @mx:type utility */
-          rationale: 'CSS at-rule convention. @media, @supports, @mx: all use hyphens.'
-          enforcement: flexible (kebab preferred, validated by linter not spec)
+          syntax: 'camelCase with @mx: comment'
+          example: /* @mx:contentType theme */
+          rationale: 'Same as JSDoc: the comment carries the field name after the namespace prefix.'
+          enforcement: mandatory (Gate 117)
         shell:
           syntax: 'camelCase in # key: value lines'
           example: '# buildsOn: [script-helper]'
@@ -166,7 +167,7 @@ mx:
             contentType: field-dictionary
             runbook: "Parse the fields array"
         html-form: |
-          <meta name="mx:content-type" content="field-dictionary">
+          <meta name="mx:contentType" content="field-dictionary">
           <meta name="mx:runbook" content="Parse the fields array">
         note: >-
           The mx: namespace belongs to The Gathering (open standard), not CogNovaMX. See governance section in
@@ -183,15 +184,13 @@ mx:
           mx-applies: Same pattern — context determines syntax
         - standard: HTML dataset API
           pattern: data-user-name (HTML) → dataset.userName (JS)
-          mx-applies: mx:content-type (HTML) → contentType (YAML under mx:)
+          mx-applies: mx:contentType (HTML) is contentType (YAML under mx:) - the same name, no conversion
       enforcement-levels:
         mandatory:
           - 'YAML frontmatter: camelCase required'
-          - 'HTML meta tags: kebab-case required'
-        flexible:
-          - 'JSDoc comments: kebab-case preferred, enforce via ESLint'
-          - 'CSS comments: kebab-case preferred, enforce via stylelint'
-        rationale: Strict where machines parse (YAML, HTML). Flexible where humans read (code comments).
+          - 'HTML meta tags: camelCase required (Gate 117)'
+          - 'JSDoc and CSS comments: camelCase required (Gate 117)'
+        rationale: One spelling in every carrier, so the served page and the source agree by construction.
   sources:
     merged-from:
       - path: datalake/knowledge/reference/mx-metadata-standards.md
@@ -373,8 +372,46 @@ mx:
       replacement: x-mx-category
       notes: CogNovaMX cog-taxonomy classifier, not a Gathering open-standard field. Moved to cognovamx-fields.yaml under the x-mx-public profile.
     - old: riskLevel
-      replacement: x-mx-riskLevel
-      notes: CogNovaMX execution-danger classification for action-doc cogs; vendor-specific governance concept.
+      replacement: security.riskLevel
+      notes: >-
+        The execution-danger classification lives inside the open security block, where a reader deciding whether to
+        execute already looks; the bare top-level convenience is retired.
+    - old: x-mx-mount-type
+      replacement: x-mx-mountType
+      notes: >-
+        NDR-14: the vendor prefix keeps its hyphens and the name after it is camelCase, in a frontmatter key, a
+        script that reads it, and a carrier form alike. Same meaning, one spelling.
+    - old: x-mx-mount-swappable
+      replacement: x-mx-mountSwappable
+      notes: Renamed with x-mx-mount-type under NDR-14.
+    - old: x-mx-mount-upstream
+      replacement: x-mx-mountUpstream
+      notes: Renamed with x-mx-mount-type under NDR-14.
+    - old: x-mx-riskLevel
+      replacement: security.riskLevel
+      notes: >-
+        Promoted from the vendor layer into the open security block by Gathering decision, reversing the earlier
+        vendor move: a machine that ingests a runnable cog needs the blast radius before it runs it, so the
+        declaration travels with the artefact rather than staying internal. Narrative in field-cull-log.md.
+    - old: x-mx-reversibility
+      replacement: security.reversibility
+      notes: >-
+        Promoted with x-mx-riskLevel; the three task properties that place the human-agent boundary sit together in
+        the open security block.
+    - old: x-mx-verifiability
+      replacement: security.verifiability
+      notes: Promoted with x-mx-riskLevel; see security.reversibility.
+    - old: x-mx-contextRequired
+      replacement: contextRequired
+      notes: >-
+        Promoted into the open standard by Gathering decision as the inward half of the Context Declaration pair:
+        what a machine must read before it can use this document. contextProvides is the outward half.
+    - old: x-mx-contextProvides
+      replacement: contextProvides
+      notes: >-
+        The open standard's own contextProvides is the field the Context Declaration principle names; the vendor form
+        was the earlier cull's move of the same field out of the standard, reversed by Gathering decision. No
+        Gathering profile requires a vendor name once this rename completes. Narrative in field-cull-log.md.
     - old: contentState
       replacement: x-mx-contentState
       notes: CogNovaMX editorial-workflow enum, distinct from the standard status field; vendor-specific.
@@ -535,7 +572,55 @@ mx:
           description: >-
             Execution danger classification. Distinct from trustLevel (provenance quality). low = read-only, no side
             effects. medium = writes files or calls APIs. high = modifies system state, handles credentials. critical =
-            destructive operations, financial transactions — SHOULD have a guardrail gate.
+            destructive operations, financial transactions — SHOULD have a guardrail gate. With reversibility and
+            verifiability, one of the three task properties a reader weighs before deciding whether to execute; riskLevel
+            carries the stakes.
+        - name: reversibility
+          type: string
+          required: false
+          validValues:
+            - reversible
+            - correctable
+            - irreversible
+          description: >-
+            Whether an error in the action, or the action itself, can be undone before serious harm. reversible = undone
+            by a deterministic step with no lasting effect (a dry run, a read, an edit under version control).
+            correctable = corrected before harm at a cost, through a stated recovery procedure (a re-run, a manual
+            re-code, a revert with side effects). irreversible = the effect stands (a send, a payment, a deletion outside
+            version control, a publish to a cache). An irreversible action at riskLevel high or critical SHOULD sit
+            behind a guardrail gate and name it in security.guardrail, the check the riskLevel definition asks for and
+            cannot itself express.
+        - name: verifiability
+          type: string
+          required: false
+          validValues:
+            - inspectable
+            - sampled
+            - opaque
+          description: >-
+            Whether a qualified person can inspect the action's output and identify failure. inspectable = the output
+            can be read in full and a failure recognised by a competent reviewer. sampled = the output is too large or
+            too numerous to read in full, so failure is found by sampling or by a test. opaque = the output cannot be
+            judged by inspection; failure is found only from its consequences. Human approval offers weak protection
+            when the reviewer cannot identify failure, so an opaque output is a reason to keep authority with the human
+            rather than a reason to add a sign-off. Delegation can rise when outputs are inspectable, errors are
+            recoverable, and stakes are bounded.
+        - name: guardrail
+          type: string
+          required: false
+          validValues:
+            - human-approval
+            - dry-run-first
+            - allowed-roles
+            - sandboxed
+          description: >-
+            The check that stands between a reader and execution of this action. human-approval = a named person
+            gives an explicit go-ahead before the effect lands (the Human-in-Command gate). dry-run-first = the action
+            is rehearsed with no effect and the rehearsal reviewed before the real run. allowed-roles = only the roles
+            listed in allowedRoles may execute, and the executing surface verifies the role. sandboxed = the action
+            runs under execution: sandboxed, so its effect is confined. An action declaring reversibility irreversible
+            at riskLevel high or critical names its guardrail here; a reader that finds none declared treats the action
+            as one it may not run unattended. The free text of policy carries any detail the enum cannot.
         - name: scope
           type: object
           required: false
@@ -736,7 +821,7 @@ mx:
       metadataLocation: <meta> tags in <head>
       mxIdentity: <meta name="mx:*"> tags, data-mx-* attributes on elements
       nativeBlocks: Schema.org JSON-LD = definition, <meta name='description'> = prose excerpt, <main> = essence
-      parsingRule: 'Parse <meta> tags; strip mx: prefix; apply kebab-to-camelCase conversion'
+      parsingRule: 'Parse <meta> tags; strip the mx: prefix; the remainder is the camelCase field name (no conversion)'
       backwardCompatible: true
       note: Browsers ignore unknown <meta> names. Can embed <style> and <script> with their own native metadata.
       pointerPattern: <link rel="mx" href="page.cog.md">
@@ -914,7 +999,7 @@ mx:
         - mx:contextProvides
         - mx-ai-contextProvides
       winner: mx:contextProvides
-      reason: 'mx:contextProvides is canonical (kebab-case, mx: prefix).'
+      reason: 'mx:contextProvides is canonical (camelCase, mx: prefix).'
     - fields:
         - status
         - blogState
@@ -1114,6 +1199,19 @@ mx:
       status: canonical
       profile: core
       required: true
+    - name: resource
+      type: string
+      definition: >-
+        The URI of the one external asset this document describes. OKF reserved top-level field; absent on an
+        abstract document (a playbook, a runbook, an info-doc) that describes no single asset.
+      example: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/ga4_obfuscated_sample_ecommerce
+      notes: >-
+        OKF reserved field - lives at the top level, never under mx:. Distinct from refersToExternal, the plural array
+        of cited sources: the two are never merged, and a value equal to any refersToExternal entry is an error. Should
+        be a valid URI; consumers are permissive.
+      status: canonical
+      profile: core
+      required: optional
     - name: canonicalUri
       type: string
       definition: >-
@@ -1128,6 +1226,59 @@ mx:
       status: canonical
       profile: core
       required: true
+    - name: citeAs
+      type: string
+      definition: >-
+        The persistent identifier a reader uses when citing this document - a DOI, an ARK, a URN, or a stable URL -
+        as a URI. canonicalUri says where the current copy lives; citeAs says what to write in a reference list, and
+        the two may differ.
+      example: https://doi.org/10.5281/zenodo.1234567
+      alignsWith:
+        - schema:identifier
+        - dcterms:identifier
+      notes: >-
+        Mirrors the cite-as link relation (RFC 8574); the HTML carrier form is <link rel="cite-as" href="...">. An
+        agent that cites sources copies this value rather than the URL it fetched, so a citation survives a move of the
+        served page. When absent, canonicalUri is the citation target.
+      status: canonical
+      profile: core
+      required: optional
+    - name: alternateFormats
+      type: array
+      definition: >-
+        The other renderings of this same document a reader may fetch instead - the markdown behind an HTML page, the
+        PDF beside a report, the JSON record beside a human-readable declaration - each an object naming the
+        rendering's uri and its format as an IANA media type. Aligns with Schema.org encoding; the HTML carrier form
+        is the native <link rel="alternate" type="..." href="..."> element.
+      example:
+        - uri: https://mx.allabout.network/blog/example.md
+          format: text/markdown
+        - uri: https://mx.allabout.network/blog/example.pdf
+          format: application/pdf
+      alignsWith:
+        - schema:encoding
+      notes: >-
+        Same content, different encoding. A translation is not an alternate format: it is declared with
+        workTranslation and carried in HTML as rel="alternate" with hreflang. A machine-readable API twin of a page
+        (application/json) belongs here. Each entry's format uses the same IANA media-type convention as the format
+        field.
+      status: canonical
+      profile: core
+      required: optional
+    - name: alternateFormats.uri
+      type: string
+      definition: The URI of one alternate rendering of this document.
+      example: https://mx.allabout.network/blog/example.pdf
+      status: canonical
+      profile: core
+      required: optional
+    - name: alternateFormats.format
+      type: string
+      definition: The IANA media type of one alternate rendering of this document.
+      example: application/pdf
+      status: canonical
+      profile: core
+      required: optional
     - name: audience
       type: string-or-array
       definition: >-
@@ -1425,6 +1576,27 @@ mx:
       status: canonical
       profile: cog
       required: optional
+    - name: refersToExternal
+      type: array
+      definition: >-
+        The external works this document draws on or cites, one entry per work, each a citation string a reader can
+        resolve without the repository: author, title, venue or publisher, date, and an identifier such as an arXiv
+        number or a URL. The outward counterpart of refersTo, which carries repository-relative paths. Aligns with
+        Schema.org citation; the HTML carrier emits it as the JSON-LD citation property, the element form of
+        <cite> and <blockquote cite>.
+      example:
+        - "Jiaying Wu, Caleb Ziems et al., \"When Does AI Augment Work?\" (arXiv:2609.12482, 11 September 2026)"
+      alignsWith:
+        - schema:citation
+      notes: >-
+        A citation is a claim of relevance, never corroboration: a source listed here says the document read it, not
+        that it agrees. A source that independently states a load-bearing claim belongs in the corroboration field as
+        well. Kept free-text so a reader outside the repository gets a complete reference rather than a bare URL.
+        Distinct from resource, the one asset a document describes; a value equal to any resource is an error.
+      status: canonical
+      profile: core
+      required: optional
+      context: 'Declared on any document whose argument rests on named external works: papers, standards, essays, reports.'
     - name: relatedTo
       type: array
       definition: >-
@@ -1463,7 +1635,7 @@ mx:
       status: canonical
       profile:
         - cog
-        - all
+        - any
       required: optional
     - name: subtitle
       type: string
@@ -1473,7 +1645,7 @@ mx:
       profile:
         - book
         - blog
-        - all
+        - any
       required: optional
     - name: appendix
       type: string
@@ -1784,7 +1956,25 @@ mx:
       type: string-or-array
       definition: What context this document provides to agents. Describes the knowledge or capability this document contributes.
       example: Field definitions and naming conventions for the MX ecosystem
-      notes: Describes what knowledge this document contributes to an agent context window.
+      notes: >-
+        The outward half of the Context Declaration pair: what this document offers an agent's context window.
+        contextRequired is the inward half. Distinct from the ai block's code-carrier notation (ai.contextProvides on a
+        code file), which describes what a source file contributes and stays with the carrier dictionary.
+      status: canonical
+      profile: core
+      required: optional
+    - name: contextRequired
+      type: array
+      definition: >-
+        The files an agent must read before it can use this document safely. Repo-root-relative paths, no ../ segments,
+        in reading order.
+      example:
+        - mx-canon/ssot/principles.cog.md
+      notes: >-
+        The inward half of the Context Declaration pair completed by contextProvides. A document that cannot be acted on
+        safely without prior reading says so here rather than assuming the reader arrived informed; the two fields
+        together give a machine a self-documenting dependency graph, so it knows what to read first without asking. An
+        empty list is a statement that nothing is prerequisite, not an omission.
       status: canonical
       profile: core
       required: optional
@@ -2003,7 +2193,6 @@ mx:
       notes: Required on identity/contact records. Derived from or matching the filename. Lower-case, kebab-separated.
       status: canonical
       profile:
-        - identity
         - contact
     - name: confidential
       type: boolean
@@ -2187,6 +2376,76 @@ mx:
         record. Part of the provenance group.
       status: canonical
       profile: core
+    - name: aiUsageDeclarationUri
+      type: string
+      definition: >-
+        The URL of the publisher's AI Usage Declaration that covers this document - the signed, scope-bounded record
+        of what machines did and did not do in producing the work, per the Gathering's MX AI Usage Declaration note.
+        The HTML carrier form is <link rel="ai-usage" href="..." type="application/json">.
+      example: https://mx.allabout.network/AI-USAGE.json
+      notes: >-
+        The pointer, not the record: aiUsageDeclaration is the object a declaration page itself carries, and this
+        field is how any other document names the declaration that governs it. A document-specific declaration takes
+        precedence over the host-level one, so a page that has its own points here to the narrower record. Sibling of
+        provenanceUri, which names the per-file provenance chain rather than the publisher-level disclosure.
+      status: canonical
+      profile: core
+      required: optional
+    - name: proofOfAuthorship
+      type: object
+      definition: >-
+        A verifiable link between the named author and the artefact: a cryptographic signature, a trust-chain
+        identifier such as a DID, or a published-by-known-entity assertion. Answers "I made this, and I can prove it."
+      example:
+        method: did
+        identifier: did:web:allabout.network
+        signature: z3FXQ...
+      notes: >-
+        Genuineness family (proofOfAuthorship, integritySignature, provenancePedigree). Any subset may be claimed;
+        all three give the strongest trust signal. Aligns with W3C Verifiable Credentials and Signed Exchanges rather
+        than inventing a proof format; the object's sub-keys follow the method named. Anchors the attestation signal
+        in the artefact itself so it survives detachment from the registry.
+      status: canonical
+      profile: core
+      required: optional
+    - name: integritySignature
+      type: object
+      definition: >-
+        A hash or cryptographic signature over the artefact's content that lets a reader detect tampering since
+        publication. Answers "what you read is what was written."
+      example:
+        algorithm: sha-256
+        covers: body
+        value: 3b7e1f0c9a2d4e6f8b1c3d5e7f9a0b2c4d6e8f0a1b3c5d7e9f1a3b5c7d9e1f3a
+      notes: >-
+        Genuineness family. covers names what the digest was taken over: body (the prose body only, so metadata
+        churn never invalidates it), file (the whole carrier), or a named range. A reader recomputes the digest and
+        compares; a mismatch is evidence the copy was altered after publication. Aligns with RFC 9421 HTTP Message
+        Signatures and Subresource Integrity for the algorithm and encoding vocabulary.
+      status: canonical
+      profile: core
+      required: optional
+    - name: provenancePedigree
+      type: object
+      definition: >-
+        The traceable chain from this artefact back to its source, including every transformation along the way,
+        with the authority at each step. Answers "where did this come from, and through whom?"
+      example:
+        derivedFrom: https://mx.allabout.network/blog/source-post
+        steps:
+          - agent: human
+            action: authored
+            by: Tom Cranstoun
+          - agent: ai-assisted
+            action: edited
+            by: Maxine
+      notes: >-
+        Genuineness family. The embedded, travelling form of the chain; provenanceUri names the hosted canonical
+        record and the two complement each other. Aligns with W3C PROV-O for the agent-activity-entity shape and with
+        C2PA Content Credentials for media carriers rather than defining a new derivation vocabulary.
+      status: canonical
+      profile: core
+      required: optional
     - name: movedFrom
       type: string
       definition: Previous file path before content was relocated.
@@ -2397,7 +2656,7 @@ mx:
       type: boolean
       definition: 'Canonical field: machineOnly.'
       status: canonical
-      profile: extended
+      profile: any
     - name: supersededBy
       type: string
       definition: 'Canonical field: supersededBy.'
@@ -2481,7 +2740,7 @@ mx:
       alignsWith:
         - schema:priceCurrency
       status: canonical
-      profile: extended
+      profile: any
     - name: dateFormat
       type: string
       definition: >-
@@ -2495,7 +2754,7 @@ mx:
         - ymd
       default: iso-8601
       status: canonical
-      profile: extended
+      profile: any
     - name: translationOfWork
       type: string
       definition: >-
@@ -2505,7 +2764,7 @@ mx:
       alignsWith:
         - schema:translationOfWork
       status: canonical
-      profile: extended
+      profile: any
     - name: workTranslation
       type: array
       definition: >-
@@ -2516,7 +2775,7 @@ mx:
       alignsWith:
         - schema:workTranslation
       status: canonical
-      profile: extended
+      profile: any
     - name: translator
       type: string
       definition: >-
@@ -2525,7 +2784,7 @@ mx:
       alignsWith:
         - schema:translator
       status: canonical
-      profile: extended
+      profile: any
     - name: displayName
       type: string
       definition: Human-friendly name. Aligns with FOAF displayName and Schema.org alternateName.
@@ -2617,10 +2876,81 @@ mx:
       status: canonical
       profile: core
       required: optional
+    - name: entities
+      type: array
+      definition: >-
+        The named things this document is about - people, organisations, products, places - each given as a stable
+        identifier a machine can resolve (a Wikidata QID, an ORCID iD, an organisation's domain name) rather than a
+        bare name. Aligns with Schema.org mentions; the HTML carrier form is the JSON-LD mentions property or an
+        itemprop="mentions" microdata annotation.
+      example:
+        - https://www.wikidata.org/wiki/Q95
+        - https://orcid.org/0000-0002-1825-0097
+      alignsWith:
+        - schema:mentions
+      notes: >-
+        Distinct from topic (subject areas) and tags (discovery keywords): entities are the specific named things, and
+        the identifier is what makes the declaration checkable. A bare name is accepted but resolves to nothing.
+        Defined in the Gathering's MX Core Metadata note section 7a.4 and read by the MX graph builder.
+      status: canonical
+      profile: core
+      required: optional
     - name: doNotIndex
       type: boolean
       definition: Whether this document should be excluded from search-engine and agent indexing. A robots-noindex-style directive.
       example: false
+      status: canonical
+      profile: core
+      required: optional
+    - name: contentPolicy
+      type: string
+      definition: >-
+        What a machine may do with this document's content at the point of reading it: a recognised token
+        (summaries-allowed, full-extraction-allowed, extract-with-attribution, no-extraction, restricted) or a
+        plain-language statement when no token fits. The inference-time half of the consumption policy;
+        trainingDataPolicy and aiTraining govern the training half.
+      example: extract-with-attribution
+      notes: >-
+        Carried in HTML as <meta name="mx:contentPolicy">, the per-page form of what the robots nosnippet and
+        max-snippet directives express for search engines. A plain-language value is legitimate on an asset whose
+        terms do not reduce to a token; the asset decorator writes the field into the binary's own carrier so the
+        policy travels with it. Pairs with attribution, which states whether reuse must credit the source. Aligns
+        with W3C ODRL in intent; no ODRL prefix is declared because the value is a token or prose, not an ODRL policy
+        document.
+      status: canonical
+      profile: core
+      required: optional
+    - name: attribution
+      type: string
+      definition: >-
+        Whether reuse of this document's content must credit its source. required means a citation or credit is a
+        condition of reuse; requested means the publisher asks for one without making it a condition; not-required
+        means none is expected.
+      example: required
+      validValues:
+        - required
+        - requested
+        - not-required
+      notes: >-
+        Carried in HTML as <meta name="mx:attribution">. The credit itself comes from author and citeAs (or
+        canonicalUri when no citeAs is declared); this field only states whether the credit is owed. Distinct from
+        ai.attribution, which records the attribution of AI involvement in producing the content.
+      status: canonical
+      profile: core
+      required: optional
+    - name: contentRating
+      type: string
+      definition: >-
+        The audience-suitability rating of this document's content, as a rating-scheme value a machine can act on
+        before surfacing the content (general, mature, adult, or a named scheme's value such as PEGI 12). Aligns with
+        Schema.org contentRating; the HTML carrier form is the native <meta name="rating"> tag.
+      example: general
+      alignsWith:
+        - schema:contentRating
+      notes: >-
+        Absent means no rating is claimed, not that the content is suitable for everyone. Distinct from readingLevel
+        (how hard the prose is to read) and audience (who the document is written for): a rating says whether the
+        content may be shown to a given reader at all.
       status: canonical
       profile: core
       required: optional
@@ -2745,6 +3075,23 @@ mx:
   profiles:
     - name: core
       description: Fields that apply to all MX documents.
+      header: |
+        ---
+        # --- Zone 1a: Identity ---
+        title: "MX field dictionary"
+        description: "Every canonical MX field with its definition, status, and profile."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: info-doc
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+        ---
       required:
         - title
         - description
@@ -2773,6 +3120,8 @@ mx:
         - runbook
         - contentType
         - name
+        - type
+        - resource
     - name: cog
       description: >-
         Fields specific to .cog.md files. Cogs are an optional layer on top of MX; the machine identifier is derived
@@ -2780,15 +3129,39 @@ mx:
         frontmatter-validator.js and cog-tools.js) reads ONLY this file directly for profiles, bypassing
         load-canon.js's multi-file merge - fields-data-cogs.yaml carries the cog-layer field DEFINITIONS
         (partOf, buildsOn, dependencies, refersTo, cogHeader) but declares no profile of its own.
+      header: |
+        ---
+        # Carrier: .cog.md file
+        # --- Zone 1a: Identity ---
+        title: "Publish a blog post"
+        description: "Action-cog that promotes a draft-site markdown source to the served site."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: action-doc
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          x-mx-category: mx-core
+          partOf: mx-os
+          purpose: "One sentence on what this document is for."
+          audience: [humans, machines]
+          stability: stable
+          runbook: "Read the description first, then follow the sections in order."
+          contextProvides: [profile-example]
+          buildsOn: [fields]
+        ---
       required:
-        - x-mx-category
         - partOf
         - purpose
         - audience
         - stability
         - runbook
-        - x-mx-contextProvides
+        - contextProvides
       recommended:
+        - x-mx-category
         - buildsOn
         - tags
       optional:
@@ -2828,8 +3201,31 @@ mx:
         - produces
         - actionType
         - defaultRemedy
+        - type
+        - resource
     - name: folder
-      description: Fields for .mx.yaml.md folder metadata. All fields are top-level in YAML frontmatter.
+      description: Fields for .mx.yaml.md folder metadata. Identity and OKF fields sit at the top level; the folder fields sit under mx:.
+      header: |
+        ---
+        # Carrier: .mx.yaml.md file beside the folder it describes
+        # --- Zone 1a: Identity ---
+        title: "MX Canon"
+        description: "Single source of truth for the MX standard and its business-specific cogs."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: folder-metadata
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          folderType: content
+          stability: stable
+          lifecycle: production
+          domain: mx-core
+          primaryLanguages: [markdown]
+        ---
       required:
         - folderType
         - stability
@@ -2860,18 +3256,81 @@ mx:
         - mxWatchesFiles
         - derivedFrom
         - publishedTo
+        - type
+        - tags
+        - resource
     - name: migration
       description: Fields for tracking content relocation.
+      header: |
+        ---
+        # --- Zone 1a: Identity ---
+        title: "Audit architecture reference"
+        description: "Reference for the web-audit pipeline, relocated from the audit tree."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: info-doc
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+        ---
       optional:
         - movedFrom
         - movedDate
+        - type
+        - tags
+        - resource
     - name: routing
       description: Fields used exclusively in ROUTING.cog.md. Not for general documents.
+      header: |
+        ---
+        # Carrier: ROUTING.cog.md only
+        # --- Zone 1a: Identity ---
+        title: "ROUTING"
+        description: "Route hints and spell-check words for the canon folder."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: routing-doc
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          words: [cognovamx, reginald]
+          keyFields: [title, tags]
+        ---
       fields:
         - words
         - keyFields
+      optional:
+        - type
+        - tags
+        - resource
     - name: skill
       description: Fields for .claude/skills/*/skill.md files. Three-layer contract (Anthropic runtime, OKF discoverability, MX estate integration).
+      header: |
+        ---
+        # Carrier: .claude/skills/<name>/skill.md
+        # --- Zone 1a: Identity ---
+        title: "MX Add Field"
+        description: "One-command flow for adding a new MX field to the canon."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        version: "1.0"
+        name: mx-add-field
+        category: mx-os
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: skill
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          stability: stable
+        ---
       required:
         - name
         - category
@@ -2884,8 +3343,23 @@ mx:
         - purpose
         - canonicalUri
         - dependencies
+        - type
+        - tags
+        - resource
     - name: html
       description: 'Fields for .cog.html files. Convention: <meta name=''mx:field''>.'
+      header: |
+        ---
+        # Carrier: .cog.html file; native form is <meta name="mx:field" content="...">
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: cog-html
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        mx:name: mx-badge
+        mx:version: "1.0"
+        mx:type: component
+        ---
       required:
         - mx:name
       recommended:
@@ -2895,11 +3369,35 @@ mx:
         - mx:category
         - mx:audience
         - mx:tags
+        - type
+        - tags
+        - resource
     - name: book
       description: >-
         Fields for book-manuscript chapters and appendices under datalake/manuscripts/mx-books/. Deliberately leaner
-        than other profiles: manuscripts do not carry purpose, audience, stability, runbook, or x-mx-contextProvides -
+        than other profiles: manuscripts do not carry purpose, audience, stability, runbook, or contextProvides -
         Appendix M §24 is their own frontmatter contract, distinct from the general operational field set.
+      header: |
+        ---
+        # Carrier: manuscript chapter under datalake/manuscripts/mx-books/
+        # --- Zone 1a: Identity ---
+        title: "Chapter 3: Provenance"
+        description: "How a document declares where it came from and who stands behind it."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: book-chapter
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+          book: mx-protocols
+          chapter: 3
+          canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/path/to/file.md
+        ---
       required:
         - title
         - description
@@ -2918,8 +3416,34 @@ mx:
         - x-mx-createdHash
         - copyright
         - x-mx-wordCount
+        - type
+        - resource
     - name: blog
       description: Fields for mx-site blog posts authored as markdown in datalake/draft-site/blog/.
+      header: |
+        ---
+        # Carrier: markdown source under datalake/draft-site/blog/
+        # --- Zone 1a: Identity ---
+        title: "A memory is not a setting"
+        description: "Why an agent memory needs provenance before it can be trusted."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: blog-post
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          purpose: "One sentence on what this document is for."
+          audience: [humans, machines]
+          stability: stable
+          runbook: "Read the description first, then follow the sections in order."
+          contextProvides: [profile-example]
+          canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/path/to/file.md
+          x-mx-contentState: draft
+        ---
       required:
         - title
         - description
@@ -2930,7 +3454,7 @@ mx:
         - audience
         - stability
         - runbook
-        - x-mx-contextProvides
+        - contextProvides
       recommended:
         - version
         - tags
@@ -2945,8 +3469,36 @@ mx:
         - aiAssistance
         - blogUrl
         - blogFilename
+        - type
+        - resource
     - name: contact
       description: Fields for CRM contact/person records under mx-crm/contacts/.
+      header: |
+        ---
+        # Carrier: person record under mx-crm/contacts/
+        # --- Zone 1a: Identity ---
+        title: "Jane Doe"
+        description: "Contact record for a partner-agency lead."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: contact
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          purpose: "One sentence on what this document is for."
+          audience: [humans, machines]
+          stability: stable
+          runbook: "Read the description first, then follow the sections in order."
+          contextProvides: [profile-example]
+          slug: jane-doe
+          displayName: Jane Doe
+          status: active
+          canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/path/to/file.md
+        ---
       required:
         - title
         - description
@@ -2957,7 +3509,7 @@ mx:
         - audience
         - stability
         - runbook
-        - x-mx-contextProvides
+        - contextProvides
       recommended:
         - version
         - slug
@@ -2979,8 +3531,34 @@ mx:
         - x-mx-createdHash
         - generate
         - x-mx-quotes
+        - type
+        - tags
+        - resource
     - name: report
       description: Fields for session reports, completion reports, and generated audit reports.
+      header: |
+        ---
+        # --- Zone 1a: Identity ---
+        title: "Session report 2026-09-14"
+        description: "Completion report for the profile-alignment session."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: report
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          purpose: "One sentence on what this document is for."
+          audience: [humans, machines]
+          stability: stable
+          runbook: "Read the description first, then follow the sections in order."
+          contextProvides: [profile-example]
+          status: active
+          canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/path/to/file.md
+        ---
       required:
         - title
         - description
@@ -2991,7 +3569,7 @@ mx:
         - audience
         - stability
         - runbook
-        - x-mx-contextProvides
+        - contextProvides
       recommended:
         - version
         - status
@@ -3003,8 +3581,36 @@ mx:
         - relatedTo
         - generate
         - confidential
+        - type
+        - tags
+        - resource
     - name: audit
       description: Fields for the MX web-audit pipeline's report/scoring outputs (mx-reginald/audit/).
+      header: |
+        ---
+        # Carrier: audit output under mx-reginald/audit/
+        # --- Zone 1a: Identity ---
+        title: "Web audit: example.com"
+        description: "Machine-readability audit report for example.com."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: audit
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          purpose: "One sentence on what this document is for."
+          audience: [humans, machines]
+          stability: stable
+          runbook: "Read the description first, then follow the sections in order."
+          contextProvides: [profile-example]
+          status: active
+          canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/path/to/file.md
+          generate: false
+        ---
       required:
         - title
         - description
@@ -3015,7 +3621,7 @@ mx:
         - audience
         - stability
         - runbook
-        - x-mx-contextProvides
+        - contextProvides
       recommended:
         - version
         - status
@@ -3026,25 +3632,120 @@ mx:
         - partOf
         - refersTo
         - relatedTo
+        - type
+        - tags
+        - resource
     - name: event
       description: >-
         Fields for event, conference, and presentation records. Thin category; too few real examples in the estate
         to justify anything beyond the core required set (field-triage-rubric.cog.md Rule 2 - do not invent fields
         without evidence).
+      header: |
+        ---
+        # --- Zone 1a: Identity ---
+        title: "MX Gathering community call"
+        description: "Monthly review call for open MX drafts."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: event
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+        ---
       required:
         - title
         - description
         - author
         - created
         - modified
+      optional:
+        - type
+        - tags
+        - resource
     - name: script
       description: >-
         Fields for contentType: script documents (not code-carrier files, which are covered separately by
         fields-data-carriers.yaml). Thin category; minimal evidence of real usage in the estate - conservative
         required set only, matching core.
+      header: |
+        ---
+        # --- Zone 1a: Identity ---
+        title: "Regenerate the field indexes"
+        description: "Runbook for the index regeneration script."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: script
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+        ---
       required:
         - title
         - description
         - author
         - created
         - modified
+      optional:
+        - type
+        - tags
+        - resource
+    - name: portable
+      description: >-
+        A conformance level, not a document type: the fields a document must carry to remain interpretable by a
+        machine that meets it away from its source, with no access to the originating site. It is the Documents Are
+        Self-Sufficient test made checkable. A document opts in by listing this profile's address in conformsTo
+        (https://mx.allabout.network/canon/fields-data.yaml#portable), and scripts/check-portable-conformance.cjs
+        then holds it to the set below. Identity says what it is and who wrote it; canonicalUri says where the
+        master lives, which with version is the currency signal; license says what a reader may do with it; and
+        one of integritySignature or provenanceUri gives the reader a trust check it can run without the source.
+        The profile is additive: a document that does not claim it is unaffected.
+      header: |
+        ---
+        # Carrier: any document that claims the profile through conformsTo
+        # --- Zone 1a: Identity ---
+        title: "Provenance and the regulator"
+        description: "Position paper on evidence a regulator can verify without the publisher's site."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        version: "1.2"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: paper
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          canonicalUri: https://example.com/papers/provenance-and-the-regulator.md
+          license: CC-BY-4.0
+          conformsTo: [https://mx.allabout.network/canon/fields-data.yaml#portable]
+          provenanceUri: https://example.com/papers/provenance-and-the-regulator.provenance.json
+          inLanguage: en
+        ---
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - version
+        - canonicalUri
+        - license
+      requiredAnyOf:
+        - integritySignature
+        - provenanceUri
+      recommended:
+        - conformsTo
+        - proofOfAuthorship
+        - provenancePedigree
+        - expires
+        - inLanguage
+      optional:
+        - type
+        - tags
+        - resource

@@ -56,7 +56,7 @@ mx:
   <meta name="mx:audience" content="humans, machines">
   <meta name="mx:aiAssistance" content="welcome">
   <meta name="mx:aiEditable" content="false">
-  <meta name="mx:content-policy" content="extract-with-attribution">
+  <meta name="mx:contentPolicy" content="extract-with-attribution">
   <meta name="mx:attribution" content="required">
   <link rel="llms-txt" href="/llms.txt">
   <!-- Open Graph / Facebook -->
@@ -1415,7 +1415,7 @@ Chapter 12 - not yet standardized but forward-compatible.</p>
 <td>This page's API equivalent path</td>
 </tr>
 <tr>
-<td>mx:content-policy</td>
+<td>mx:contentPolicy</td>
 <td>PROP</td>
 <td>REC</td>
 <td>Permitted use cases (e.g., "summaries-allowed, prices-allowed")</td>
@@ -3492,19 +3492,19 @@ carrier:</p>
 <tr>
 <td><strong>HTML</strong> (<code>.cog.html</code>)</td>
 <td><code>&lt;meta name="description"&gt;</code></td>
-<td><code>&lt;meta name="mx:content-type"&gt;</code></td>
+<td><code>&lt;meta name="mx:contentType"&gt;</code></td>
 <td><code>&lt;meta name="x-mx:deployment"&gt;</code></td>
 </tr>
 <tr>
 <td><strong>JavaScript</strong> (<code>.cog.js</code>)</td>
 <td><code>@description ...</code></td>
-<td><code>@mx:content-type guide</code></td>
+<td><code>@mx:contentType guide</code></td>
 <td><code>@x-mx:pipeline-stage report</code></td>
 </tr>
 <tr>
 <td><strong>CSS</strong> (<code>.cog.css</code>)</td>
 <td><code>@description ...</code></td>
-<td><code>@mx:content-type theme</code></td>
+<td><code>@mx:contentType theme</code></td>
 <td><code>@x-mx:design-system core</code></td>
 </tr>
 <tr>
@@ -3589,8 +3589,8 @@ require understanding of the MX ecosystem to interpret correctly.
 Separating them makes the frontmatter self-describing at a glance.</p>
 <p>In non-YAML contexts (HTML, JS, CSS), the <code>mx:</code> prefix
 marks the same boundary:
-<code>&lt;meta name="mx:content-type"&gt;</code> in HTML,
-<code>@mx:content-type</code> in JSDoc. The pattern is consistent -
+<code>&lt;meta name="mx:contentType"&gt;</code> in HTML,
+<code>@mx:contentType</code> in JSDoc. The pattern is consistent -
 <code>mx:</code> signals MX-operational metadata whether in a YAML block
 or an HTML attribute.</p>
 <p>The <code>mx:</code> namespace belongs to <strong>The
@@ -4241,7 +4241,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">&quot;utf-8&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;description&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Product pricing validation tool&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;author&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Tom Cranstoun&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:content-type&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;tool&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentType&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;tool&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:status&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;active&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:audience&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;machines&quot;</span><span class="dt">&gt;</span></span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;mx&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;pricing.cog.md&quot;</span><span class="dt">&gt;</span></span>
@@ -4294,7 +4294,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@description</span><span class="co"> Validates pricing data to catch range errors</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@version</span><span class="co"> </span><span class="cv">1.0.0</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@author</span><span class="co"> Tom Cranstoun</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@mx:content-type</span><span class="co"> validator</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@mx:contentType</span><span class="co"> validator</span></span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@mx:status</span><span class="co"> active</span></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@mx:audience</span><span class="co"> machines</span></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@mx:tags</span><span class="co"> pricing, validation, commerce</span></span>
@@ -4328,7 +4328,7 @@ class="sourceCode css"><code class="sourceCode css" data-role="code-content"><sp
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * @description Core design tokens for MX branding</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * @version 2.0.0</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * @author Tom Cranstoun</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * @mx:content-type theme</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * @mx:contentType theme</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"> * @mx:status active</span></span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * @mx:audience machines</span></span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
@@ -7799,7 +7799,7 @@ well-documented, and understood by the broadest range of agents and
 tools.</li>
 <li><strong>MX adds value where standards leave gaps.</strong> MX
 carrier tags (<code>mx:status</code>, <code>mx:contentType</code>,
-<code>mx:content-policy</code>) provide governance and lifecycle
+<code>mx:contentPolicy</code>) provide governance and lifecycle
 metadata that no existing standard covers. This is where MX earns its
 place.</li>
 <li><strong>MX never duplicates or replaces established
@@ -7999,7 +7999,7 @@ for this specific page):</strong></p>
 <td>Target reader</td>
 </tr>
 <tr>
-<td><code>mx:content-policy</code></td>
+<td><code>mx:contentPolicy</code></td>
 <td><code>extract-with-attribution</code>,
 <code>summaries-allowed</code>, <code>no-extraction</code></td>
 <td>Per-page content usage rules for AI agents</td>
@@ -8433,7 +8433,7 @@ present on the page.</td>
 <tr>
 <td><code>ai-content-policy</code> (with <code>ai-</code> prefix)</td>
 <td>Belongs in <code>mx:</code> namespace.</td>
-<td>Use <code>mx:content-policy</code> if per-page policy is
+<td>Use <code>mx:contentPolicy</code> if per-page policy is
 needed.</td>
 </tr>
 <tr>
@@ -8471,7 +8471,7 @@ pages:</strong></p>
 <ol type="1">
 <li>Remove <code>ai-preferred-access</code>, <code>ai-freshness</code>,
 <code>ai-structured-data</code> - they are unnecessary.</li>
-<li>Use <code>mx:content-policy</code> with the same value (the
+<li>Use <code>mx:contentPolicy</code> with the same value (the
 <code>ai-content-policy</code> form is deprecated).</li>
 <li>Use <code>mx:attribution="required"</code>. The
 <code>text="..."</code> attribute is unnecessary - the Schema.org author

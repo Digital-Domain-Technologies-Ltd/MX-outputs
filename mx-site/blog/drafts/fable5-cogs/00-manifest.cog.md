@@ -23,7 +23,7 @@ mx:
   audience: [machines]
   purpose: "Bootstrap a Claude Fable 5 agent instance by loading all required COGs in sequence."
   stability: stable
-  x-mx-contextProvides: ["Boot sequence for the Fable 5 MX COG decomposition. Lists all 13 COGs and their load order."]
+  contextProvides: ["Boot sequence for the Fable 5 MX COG decomposition. Lists all 13 COGs and their load order."]
   dependencies: []
   runbook: "Load this COG first. It defines the sequence. Load each listed COG before accepting any input."
 

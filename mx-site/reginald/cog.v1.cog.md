@@ -9,7 +9,7 @@
 # rule between the two.
 #
 # A spec cog rather than an info cog. Classified under
-# x-mx-cog-type: cogs per Note 3 §6.5.1 - a Community Owned
+# x-mx-cogType: cogs per Note 3 §6.5.1 - a Community Owned
 # Governance Standard, owned by The Gathering, not by any
 # single vendor.
 # ─────────────────────────────────────────────────────────────
@@ -25,7 +25,7 @@ originator: "Tom Cranstoun"
 author: "Tom Cranstoun"
 
 created: 2026-05-07
-modified: 2026-05-07
+modified: 2026-09-16
 version: "1.1"
 
 schema: ./schemas/mx-spec.v1.yaml
@@ -165,18 +165,18 @@ mx:
   # cogType: cogs is the Community Owned Governance Standard
   # classification per Note 3 §6.5.1. Governance lives at
   # The Gathering, not at a single vendor.
-  x-mx-cog-id: cog-v1-spec
-  x-mx-cog-type: cogs
-  x-mx-cog-category: tg-mx-specification
-  x-mx-cogs-governance-body: tg.community
+  x-mx-cogId: cog-v1-spec
+  x-mx-cogType: cogs
+  x-mx-cogCategory: tg-mx-specification
+  x-mx-cogsGovernanceBody: tg.community
 
   # ── Provenance (vendor extension pending Note 5) ──
-  x-mx-prov-publisher: "The Gathering"
-  x-mx-prov-publisher-jurisdiction: international
-  x-mx-prov-authored-by: human
-  x-mx-prov-ai-assistance: editorial-and-design
-  x-mx-prov-confidence-level: working-draft
-  x-mx-prov-review-status: pre-review
+  x-mx-provPublisher: "The Gathering"
+  x-mx-provPublisherJurisdiction: international
+  x-mx-provAuthoredBy: human
+  x-mx-provAiAssistance: editorial-and-design
+  x-mx-provConfidenceLevel: working-draft
+  x-mx-provReviewStatus: pre-review
 
 ---
 

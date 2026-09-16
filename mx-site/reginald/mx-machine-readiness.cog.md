@@ -53,7 +53,7 @@ originator: "Tom Cranstoun"
 author: "Tom Cranstoun"
 
 created: 2026-05-07
-modified: 2026-09-09
+modified: 2026-09-16
 version: "2.4"
 
 # Mandatory when signed (Note 8 §4.3). Names the schema this cog
@@ -247,27 +247,26 @@ mx:
   # ── Cog classification (Note 3 §6.5) ──
   # These fields live in vendor-extension space (x-mx-*) per
   # Note 3 §6.5 - the bare names are reserved.
-  x-mx-cog-id: mx-machine-readiness
-  x-mx-cog-type: info
-  x-mx-cog-category: mx-position-paper
+  x-mx-cogId: mx-machine-readiness
+  x-mx-cogType: info
+  x-mx-cogCategory: mx-position-paper
 
   # ── REGINALD signing service (vendor extension, Note 4 §6.3) ──
-  # Public extension fields are flat, kebab-case, at Zone 2.
-  # See Note 4 §10.2: "Use kebab-case. Extension field names MUST
-  # use kebab-case (unlike standard fields which use camelCase
-  # in YAML)."
-  x-mx-reginald-service: REGINALD
-  x-mx-reginald-operator: CogNovaMX
-  x-mx-reginald-registry-record: https://reginald.allabout.com/r/ddt/papers/mx-machine-readiness
-  x-mx-reginald-deployment: third-party-managed
+  # Public extension fields are flat, at Zone 2: the x-mx- prefix
+  # keeps its hyphens and the name after it is camelCase, the same
+  # spelling rule as standard fields (Note 4 §10.2, NDR-14).
+  x-mx-reginaldService: REGINALD
+  x-mx-reginaldOperator: CogNovaMX
+  x-mx-reginaldRegistryRecord: https://reginald.allabout.com/r/ddt/papers/mx-machine-readiness
+  x-mx-reginaldDeployment: third-party-managed
   # deployment values: third-party-managed | private | air-gapped
 
   # ── Temporal stance (vendor extension) ──
   # Not yet a standard field. Carried under x-mx-temporal-* until
   # it is either ratified by The Gathering or formalised in the
   # Provenance note (Note 5). Each entry uses kebab-case per Note 4.
-  x-mx-temporal-stance: evergreen
-  x-mx-temporal-anchors:
+  x-mx-temporalStance: evergreen
+  x-mx-temporalAnchors:
     - id: eu-ai-act-entered-force
       label: "EU AI Act entered into force"
       date: 2024-08-01
@@ -336,7 +335,7 @@ mx:
         Deferred from 2 August 2027 to this date by the same
         AI Omnibus, in force since 27 July 2026.
 
-  x-mx-temporal-computed-fields:
+  x-mx-temporalComputedFields:
     - field: time-remaining-to-article-50
       derived-from: eu-ai-act-article-50-transparency
       compute: anchor.date minus reader.now, in days
@@ -346,7 +345,7 @@ mx:
         after:  "in force since {n} days ago"
       rendered-in: HTML alternate, .countdown[data-target] panel
 
-  x-mx-temporal-prose-guidance:
+  x-mx-temporalProseGuidance:
     - Do not write "today", "this year", "this week", "currently",
       "right now" or other present-moment deictics into the prose.
     - Refer to fixed anchors by their date, not by their distance
@@ -360,13 +359,13 @@ mx:
   # ── Provenance disclosure (vendor extension pending Note 5) ──
   # Until the Provenance note is ratified, attribution beyond
   # author is carried under x-mx-prov-* extension fields.
-  x-mx-prov-publisher: CogNovaMX
-  x-mx-prov-publisher-legal-name: Digital Domain Technologies Ltd
-  x-mx-prov-publisher-jurisdiction: United Kingdom
-  x-mx-prov-authored-by: human
-  x-mx-prov-ai-assistance: editorial-and-design
-  x-mx-prov-confidence-level: argued-position
-  x-mx-prov-review-status: pre-review
+  x-mx-provPublisher: CogNovaMX
+  x-mx-provPublisherLegalName: Digital Domain Technologies Ltd
+  x-mx-provPublisherJurisdiction: United Kingdom
+  x-mx-provAuthoredBy: human
+  x-mx-provAiAssistance: editorial-and-design
+  x-mx-provConfidenceLevel: argued-position
+  x-mx-provReviewStatus: pre-review
 
 ---
 

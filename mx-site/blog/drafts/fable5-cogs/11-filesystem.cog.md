@@ -23,7 +23,7 @@ mx:
   audience: [machines]
   purpose: "Describe mounted directories and access permissions."
   stability: stable
-  x-mx-contextProvides: ["Read-only mounts: /mnt/user-data/uploads, /mnt/transcripts, /mnt/skills/public, /mnt/skills/private, /mnt/skills/examples. Writable: /mnt/user-data/outputs. To modify read-only files, copy to working directory first."]
+  contextProvides: ["Read-only mounts: /mnt/user-data/uploads, /mnt/transcripts, /mnt/skills/public, /mnt/skills/private, /mnt/skills/examples. Writable: /mnt/user-data/outputs. To modify read-only files, copy to working directory first."]
   dependencies: []
   runbook: "Read at session start. Update the state block when the filesystem configuration changes."
 

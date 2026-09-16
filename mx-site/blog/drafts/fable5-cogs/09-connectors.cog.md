@@ -23,7 +23,7 @@ mx:
   audience: [machines]
   purpose: "Define routing rules for MCP app connectors."
   stability: stable
-  x-mx-contextProvides: ["[third_party_mcp_app] tools require suggest_connectors even when connected - never pick a partner on the user's behalf. Native tools (calendar, code host) call directly. User names a connector not present: search registry first. Never suggest e-commerce proactively."]
+  contextProvides: ["[third_party_mcp_app] tools require suggest_connectors even when connected - never pick a partner on the user's behalf. Native tools (calendar, code host) call directly. User names a connector not present: search registry first. Never suggest e-commerce proactively."]
   dependencies: ["examples/fable5/06-tools"]
   runbook: "Loaded at session start. Check available MCP tools before reaching for the browser."
 

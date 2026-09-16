@@ -19,7 +19,7 @@ mx:
 
   purpose: "How AI was used in the writing of the MX book series. Author's declaration on authorship, machine assistance, and the relationship between the two."
   stability: stable
-  x-mx-contextProvides: ["AI Usage Declaration"]
+  contextProvides: ["AI Usage Declaration"]
 aiUsageDeclaration:
   id: https://mx.allabout.network/AI-USAGE.json
   conformance:

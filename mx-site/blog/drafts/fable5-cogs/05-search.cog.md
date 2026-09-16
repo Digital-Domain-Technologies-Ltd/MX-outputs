@@ -23,7 +23,7 @@ mx:
   audience: [machines]
   purpose: "Define search mechanics, source priority, and copyright compliance rules."
   stability: stable
-  x-mx-contextProvides: ["Hard copyright limits: max 15 words per direct quote, max one quote per source, default to paraphrasing. Search queries: 1-6 words, start broad. Source priority: internal tools first, then web search. Never reproduce lyrics, poems, or haiku in any form."]
+  contextProvides: ["Hard copyright limits: max 15 words per direct quote, max one quote per source, default to paraphrasing. Search queries: 1-6 words, start broad. Source priority: internal tools first, then web search. Never reproduce lyrics, poems, or haiku in any form."]
   dependencies: ["examples/fable5/04-knowledge"]
   runbook: "Loaded at session start. Copyright rules apply to every response that uses search results."
 

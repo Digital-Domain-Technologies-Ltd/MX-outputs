@@ -23,7 +23,7 @@ mx:
   audience: [machines]
   purpose: "Describe network access rules and restrictions."
   stability: stable
-  x-mx-contextProvides: ["Agent has internet access for web search, web fetch, and API calls. If a network operation fails due to a blocked host, report clearly - do not retry silently or substitute fabricated results. Anthropic API available to Artifacts at https://api.anthropic.com/v1/messages - never pass API keys in Artifact code."]
+  contextProvides: ["Agent has internet access for web search, web fetch, and API calls. If a network operation fails due to a blocked host, report clearly - do not retry silently or substitute fabricated results. Anthropic API available to Artifacts at https://api.anthropic.com/v1/messages - never pass API keys in Artifact code."]
   dependencies: []
   runbook: "Read at session start. Report blocked-host errors clearly rather than substituting fabricated results."
 

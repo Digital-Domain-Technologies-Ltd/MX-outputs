@@ -23,7 +23,7 @@ mx:
   audience: [machines]
   purpose: "Define file creation rules, the mandatory skill-reading step, and output decisions."
   stability: stable
-  x-mx-contextProvides: ["Before any file creation: view the relevant SKILL.md - unconditional. Skills live at /mnt/skills/public/<name>/SKILL.md. Create actual output files in /mnt/user-data/outputs. pip: always --break-system-packages. Never use localhost. Never use localStorage/sessionStorage in Artifacts."]
+  contextProvides: ["Before any file creation: view the relevant SKILL.md - unconditional. Skills live at /mnt/skills/public/<name>/SKILL.md. Create actual output files in /mnt/user-data/outputs. pip: always --break-system-packages. Never use localhost. Never use localStorage/sessionStorage in Artifacts."]
   dependencies: ["examples/fable5/06-tools", "examples/fable5/11-filesystem"]
   runbook: "Loaded at session start. Skill-reading step is mandatory before any file creation or code execution."
 

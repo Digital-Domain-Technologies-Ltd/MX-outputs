@@ -1,7 +1,7 @@
 title: MX Workflow Fields
-version: '1.0'
+version: '1.1'
 created: '2026-05-08'
-modified: '2026-05-08'
+modified: '2026-09-14'
 author: Tom Cranstoun
 description: 'Field dictionary for workflow and process metadata used by tooling artefacts that borrow markdown frontmatter syntax. These fields describe submission acts, build acts, audit acts, and similar process state. They are NOT part of the open MX standard and NOT vendor extensions to the content vocabulary; they are workflow vocabulary that lives in its own dictionary so the canon and the vendor-extensions file stay focused on document content.'
 mx:
@@ -20,6 +20,8 @@ mx:
   runbook: |
     Workflow vocabulary for tooling artefacts. Each profile groups fields used by a specific workflow:
       - submission-package: fields used by /mx-gathering-submit cover-note packages
+      - workflow-record: fields carried by a record of one AI-augmented workflow, the shared
+        evidence shape for the six augmentation conditions
       - (future) audit-run, build-output, etc.
     A file using workflow fields declares its workflow via its directory location plus a contentType
     that matches the profile name. The validator loads this dictionary alongside fields-data.yaml and
@@ -32,6 +34,79 @@ mx:
         that records which draft is being submitted, at which commit, on which date, via which path.
         Stream itself does not mandate this packaging shape; it is a CogNovaMX tooling convention so
         that the round-trip (prepare, file, feedback, incorporate, ratify) is auditable.
+      header: |
+        ---
+        # Carrier: cover-note package written by /mx-gathering-submit
+        # --- Zone 1a: Identity ---
+        title: "Submission package: draft-cranstoun-mx-cogs"
+        description: "Cover note for filing the cogs draft to the Stream review."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: submission-package
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          package: draft-cranstoun-mx-cogs-2026-09-14
+          versionSubmitted: "02"
+          preparedAt: 2026-09-14
+          draftPath: draft-cranstoun-mx-cogs.md
+          draftCommit: abc1234
+          hubCommit: def5678
+          draftUrl: https://github.com/ddttom/mx-shared-gathering/blob/main/draft-cranstoun-mx-cogs.md
+          isNewNote: false
+        ---
+      optional:
+        - type
+        - tags
+        - resource
+    - name: workflow-record
+      description: Fields carried by the record of one workflow that has an AI agent in it. The record
+        documents the baseline process and its objective, the tasks and authority given to the agent,
+        the points where humans review, override, authorise, and escalate, the fallback and recovery
+        procedures, the errors and unintended agent actions that occurred, the human effort spent on
+        verification and repair, and where the evidence on human capability lives. The shape follows
+        the workflow record proposed in "When Does AI Augment Work? A Workflow-Level Framework for
+        Human-Agent Collaboration" (Wu, Ziems et al., arXiv:2609.12482, section 7), which is the
+        evidence a claim of genuine augmentation needs under that paper's six conditions. It is a
+        CogNovaMX tooling convention; the paper proposes the checklist and no vocabulary, so the field
+        names here are ours. One record per workflow; a periodic operational review updates the same
+        record and stamps reviewedAt.
+      header: |
+        ---
+        # Carrier: workflow record kept beside the process it documents
+        # --- Zone 1a: Identity ---
+        title: "Workflow record: draft triage"
+        description: "One AI-augmented workflow, its agent authority, review points and recovery path."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-14
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: workflow-record
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          workflowId: draft-triage-2026-09
+          baselineProcess: "An editor reads each incoming draft and files it to a queue."
+          objective: "Every draft reaches the right queue within one working day."
+          agentTasks: [classify-draft, suggest-queue]
+          agentAuthority: recommend
+          reviewPoints: ["editor confirms the suggested queue before filing"]
+          escalationPath: "A draft the agent cannot classify goes to the editor unfiled."
+          fallbackProcedure: "The editor files by hand when the agent is unavailable."
+          recoveryProcedure: "A misfiled draft is moved back and the classification logged."
+          verificationEffort: "About two minutes per draft to confirm the queue."
+          unintendedActions: []
+          capabilityEvidence: "reports/triage/2026-q3-review.md"
+          reviewedAt: 2026-09-14
+        ---
+      optional:
+        - type
+        - tags
+        - resource
 
   fields:
   - name: package
@@ -142,5 +217,214 @@ mx:
     required: optional
     context: Carried only when meaningful; can be omitted for revisions where the default false applies.
     description: Whether the package is filing a draft for the first time.
+
+  - name: workflowId
+    type: string
+    definition: Stable identifier for the workflow the record describes. Conventionally a slug naming
+      the team and the process, so the same record can be re-read at each periodic review and compared
+      across sectors without imposing one operating model.
+    example: survey-team-adaptive-interviewing
+    notes: One record per workflow. A redesign of the same workflow updates the record; a different
+      workflow gets a different identifier.
+    status: canonical
+    profile: workflow-record
+    required: required
+    context: The record's machine-readable handle, used in cross-references from provenance sidecars
+      and audit findings.
+    description: Stable handle for the workflow the record describes.
+
+  - name: baselineProcess
+    type: string
+    definition: The process as it ran before the agent was introduced, in enough detail that the
+      redesign can be compared with it. Names the steps, who performed them, and the hand-offs.
+    example: Two researchers wrote the instrument, a fieldwork team ran fixed-form interviews, a junior
+      researcher coded every response, a senior researcher resolved coding conflicts.
+    notes: The baseline is what a durable-net-value claim is measured against. Without it, reported
+      gains cannot be separated from work that moved elsewhere in the workflow.
+    status: canonical
+    profile: workflow-record
+    required: required
+    context: Written once at design time and left unchanged; later reviews compare against it.
+    description: The process before the agent, as the comparison point for every later claim.
+
+  - name: objective
+    type: string
+    definition: The intended outcome of the redesign, stated so a later review can judge whether it was
+      met. Names the stakeholders whose gain is expected, not only the headline metric.
+    example: Reduce respondent burden and coding turnaround while keeping construct validity and the
+      junior researchers' coding practice intact.
+    notes: A multi-stakeholder objective is what the durable-net-value condition asks for. An objective
+      stated as a single productivity figure invites the failure mode the condition names.
+    status: canonical
+    profile: workflow-record
+    required: required
+    context: Read at every periodic review alongside baselineProcess.
+    description: The intended outcome of the redesign, stated for later judgement.
+
+  - name: agentTasks
+    type: array
+    definition: The tasks assigned to the agent, one entry per task, each naming what the agent does and
+      the bound it works within. A task the agent may not perform is listed under reviewPoints as a
+      human responsibility, not here.
+    example:
+      - Rephrase approved seed questions and ask follow-ups within the approved protocol
+      - Conduct an initial coding pass and flag outliers and coding conflicts
+    notes: Pairs with agentAuthority, which states the highest level of authority any of these tasks
+      carries.
+    status: canonical
+    profile: workflow-record
+    required: required
+    context: The declared scope the agent may not act outside without human direction.
+    description: The tasks assigned to the agent and the bound each works within.
+
+  - name: agentAuthority
+    type: string
+    definition: The highest level of authority the agent holds anywhere in the workflow. generate = it
+      produces material a human then uses. recommend = it proposes an action or a decision a human
+      takes. decide = it makes a decision that stands unless a human overrides it. execute = it carries
+      out an action with effect outside the workflow.
+    example: recommend
+    validValues:
+      - generate
+      - recommend
+      - decide
+      - execute
+    notes: The value a machine reads to know what the agent may do. Delegation can rise when outputs are
+      inspectable, errors are recoverable, and stakes are bounded; human authority stays stronger where
+      a task sets goals, interprets ambiguous evidence, establishes validity, or shapes consequential
+      use. The same triple (security.verifiability, security.reversibility, security.riskLevel) on an action cog
+      declares the properties this value should be read against.
+    status: canonical
+    profile: workflow-record
+    required: required
+    context: Compared across records so workflows in different sectors can be placed on one scale.
+    description: The highest authority level the agent holds, from generate to execute.
+
+  - name: reviewPoints
+    type: array
+    definition: Where human workers review, interpret, authorise, override, or intervene, one entry per
+      point, each naming the stage, the human role, and the act. This is the human side of the division
+      of labour that agentTasks states for the agent.
+    example:
+      - stage: data collection
+        role: principal researcher
+        act: approve the protocol and inspect the question paths taken
+      - stage: processing and coding
+        role: senior researcher
+        act: resolve coding conflicts and approve the final coding
+    notes: A review point is meaningful only when the reviewer has the competence, time, information,
+      and authority to challenge and override the agent. A point that exists on paper without those
+      four is the ceremonial-approval failure mode.
+    status: canonical
+    profile: workflow-record
+    required: required
+    context: Where a provenance sidecar's human-check step should be found when the workflow runs.
+    description: The stages, roles, and acts at which humans review, authorise, override, or intervene.
+
+  - name: escalationPath
+    type: string
+    definition: Who is reached, and how, when an output is unreliable, a case is unfamiliar, or the
+      agent acts outside its scope. Names the human role that holds decision authority at each rung.
+    example: Interviewer flags to the fieldwork lead; the lead halts the agent and refers to the
+      principal researcher, who decides whether the affected interviews are re-run.
+    notes: Assigning the path to a named role is what gives an error an owner. An escalation that ends
+      at "the system" has no owner.
+    status: canonical
+    profile: workflow-record
+    required: required
+    context: Read by the person who meets an exception, and by an auditor asking who was accountable.
+    description: The human route an unreliable output or an out-of-scope action is escalated along.
+
+  - name: fallbackProcedure
+    type: string
+    definition: How the work continues when the agent is unavailable, degraded, or withdrawn. States the
+      manual or alternative process and who performs it.
+    example: Fieldwork reverts to the fixed-form instrument; coding reverts to the two-researcher manual
+      pass; both are rehearsed at each periodic review.
+    notes: Continuity during unavailability is part of meaningful human control. A workflow that cannot
+      run without the agent has handed the agent authority nobody declared.
+    status: canonical
+    profile: workflow-record
+    required: required
+    context: Read when the agent stops, and at each review to confirm the fallback is still viable.
+    description: How the work continues without the agent.
+
+  - name: recoveryProcedure
+    type: string
+    definition: How an error or an unintended agent action is detected, corrected, and its effects
+      undone or contained before serious harm. Names the step, the human who performs it, and the
+      record it leaves.
+    example: Interview paths are stored; a divergence from the approved instrument is found by weekly
+      inspection, the affected responses are re-coded by hand, and the divergence is logged under
+      unintendedActions.
+    notes: Recovery is what makes an agent task reversible in practice. The procedure is the evidence
+      behind a security.reversibility value of correctable.
+    status: canonical
+    profile: workflow-record
+    required: required
+    context: Read alongside escalationPath when an error is found, and by an auditor reconstructing one.
+    description: How an error is detected, corrected, and contained.
+
+  - name: verificationEffort
+    type: string
+    definition: The human effort spent on verifying the agent's outputs, handling exceptions, reworking,
+      and recovering, over a stated period, in the unit the organisation measures effort in. The
+      hidden work a headline productivity figure omits.
+    example: 6 researcher-hours per week on path inspection and re-coding, measured over the first
+      quarter
+    notes: A durable-net-value claim survives only when this effort is counted against the gain. Record
+      the period and the unit with the figure; a bare number cannot be reconciled later.
+    status: canonical
+    profile: workflow-record
+    required: optional
+    context: Filled at each periodic review from the effort the review points and recovery procedure
+      consumed.
+    description: The human effort spent verifying, handling exceptions, and recovering, with its period.
+
+  - name: unintendedActions
+    type: array
+    definition: Significant errors, unapproved actions, and unintended actions by the agent, one entry
+      per event, each with the date, what happened, how it was found, and how it was recovered.
+    example:
+      - date: 2026-08-12
+        event: Follow-up question introduced a construct not in the approved instrument
+        found: weekly path inspection
+        recovered: affected responses re-coded by hand; instrument bound tightened
+    notes: An empty list is a claim and should be stated as one. The entries are what an auditor walks
+      to confirm failures were traceable and recoverable.
+    status: canonical
+    profile: workflow-record
+    required: optional
+    context: Appended as events occur, never rewritten; the list is the record.
+    description: The agent's significant errors and unintended actions, with detection and recovery.
+
+  - name: capabilityEvidence
+    type: string
+    definition: Where the longitudinal evidence on the human side lives - the skills, AI literacy,
+      learning opportunities, progression, agency, and satisfaction of the workers in the workflow. A
+      path or a URL to the survey, the training record, or the study, not the evidence itself.
+    example: mx-outputs/workforce/survey-team-capability-2026-q3.md
+    notes: The record points at the evidence rather than carrying it, because a file cannot hold a
+      career pathway. The three longitudinal conditions (deepening learning, career pathways, job
+      purpose) are judged from what this points at, over repeated reviews.
+    status: canonical
+    profile: workflow-record
+    required: optional
+    context: Read at each periodic review; a record with no pointer here cannot support a claim on the
+      longitudinal conditions.
+    description: Pointer to the longitudinal evidence on worker capability, progression, and purpose.
+
+  - name: reviewedAt
+    type: date
+    definition: ISO 8601 date (YYYY-MM-DD) of the most recent periodic operational review of the
+      workflow against the record. Distinct from the record's own modified date, which moves on any edit.
+    example: 2026-09-14
+    notes: The snapshot conditions are assessed at design, deployment, and periodic review; the date
+      makes the age of the last assessment legible rather than assumed.
+    status: canonical
+    profile: workflow-record
+    required: optional
+    context: Stamped by the review, not by an editing pass.
+    description: Date of the most recent periodic review of the workflow against this record.
 
   deprecations: []

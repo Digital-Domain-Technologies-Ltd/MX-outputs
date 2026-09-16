@@ -29,7 +29,7 @@ originator: "Tom Cranstoun"
 author: "Tom Cranstoun"
 
 created: 2026-05-07
-modified: 2026-05-07
+modified: 2026-09-16
 version: "2.2"
 
 schema: ./schemas/mx-meta-cog.v1.yaml
@@ -164,25 +164,25 @@ mx:
     - https://tg.community
 
   # ── Cog classification (Note 3 §6.5) ──
-  x-mx-cog-id: mx-machine-readiness-meta
-  x-mx-cog-type: info
-  x-mx-cog-category: mx-meta-cog
+  x-mx-cogId: mx-machine-readiness-meta
+  x-mx-cogType: info
+  x-mx-cogCategory: mx-meta-cog
 
   # ── REGINALD signing service (Note 4 §6.3) ──
-  x-mx-reginald-service: REGINALD
-  x-mx-reginald-operator: CogNovaMX
-  x-mx-reginald-registry-record: https://reginald.allabout.com/r/ddt/papers/mx-machine-readiness-meta
-  x-mx-reginald-deployment: third-party-managed
+  x-mx-reginaldService: REGINALD
+  x-mx-reginaldOperator: CogNovaMX
+  x-mx-reginaldRegistryRecord: https://reginald.allabout.com/r/ddt/papers/mx-machine-readiness-meta
+  x-mx-reginaldDeployment: third-party-managed
 
   # ── Provenance disclosure (vendor extension) ──
-  x-mx-prov-publisher: CogNovaMX
-  x-mx-prov-publisher-legal-name: Digital Domain Technologies Ltd
-  x-mx-prov-publisher-jurisdiction: United Kingdom
-  x-mx-prov-authored-by: human
-  x-mx-prov-ai-assistance: editorial-and-design
-  x-mx-prov-confidence-level: explanatory-companion
-  x-mx-prov-review-status: pre-review
-  x-mx-prov-version-documented: "2.1"
+  x-mx-provPublisher: CogNovaMX
+  x-mx-provPublisherLegalName: Digital Domain Technologies Ltd
+  x-mx-provPublisherJurisdiction: United Kingdom
+  x-mx-provAuthoredBy: human
+  x-mx-provAiAssistance: editorial-and-design
+  x-mx-provConfidenceLevel: explanatory-companion
+  x-mx-provReviewStatus: pre-review
+  x-mx-provVersionDocumented: "2.1"
 
 ---
 
@@ -242,7 +242,7 @@ Note 4 §6 defines the namespace policy with three tiers, distinguished by who o
 
 **Standard fields** carry no prefix. They are owned by The Gathering community and ratified through the notes process. `title`, `author`, `mx:status`, `mx:partOf`, `mx:dependencies` - all standard.
 
-**Public extensions** carry the `x-mx-` prefix. They are owned by CogNovaMX and may be promoted into Standard fields if The Gathering accepts them, or retired if they fail to find adoption. Crucially, public extension field names use **kebab-case**, not camelCase (Note 4 §6.3, §10.2). REGINALD-specific fields appear as flat keys: `x-mx-reginald-service`, `x-mx-reginald-operator`, `x-mx-reginald-registry-record`, `x-mx-reginald-deployment` - each one a top-level key inside `mx:`.
+**Public extensions** carry the `x-mx-` prefix. They are owned by CogNovaMX and may be promoted into Standard fields if The Gathering accepts them, or retired if they fail to find adoption. Crucially, public extension field names use **kebab-case**, not camelCase (Note 4 §6.3, §10.2). REGINALD-specific fields appear as flat keys: `x-mx-reginaldService`, `x-mx-reginaldOperator`, `x-mx-reginaldRegistryRecord`, `x-mx-reginaldDeployment` - each one a top-level key inside `mx:`.
 
 **Private extensions** carry the `x-mx-p-` prefix. They are owned by CogNovaMX with values opaque to anyone without the decode registry at `$MX_HOME`. Used for organisation-internal data - workflow identifiers, internal cost codes, deployment-tier markers. Implementations encountering `x-mx-p-` values MUST pass them through unchanged.
 
@@ -288,7 +288,7 @@ REGINALD is one signing service among several possible kinds:
 - A **community-run signer**, where a not-for-profit or industry consortium provides signing as a public good.
 - A **bare cryptographic signature**, applied directly by the author with their own key, no service involved.
 
-All four operate on the same fingerprint computed from the same `contractFields`. What differs is the trust model around the key and where the signature itself is published. Service-specific implementation details - registry URL, deployment posture, operator branding - live as flat extension fields under the appropriate prefix. REGINALD's go under `x-mx-reginald-service`, `x-mx-reginald-operator`, `x-mx-reginald-registry-record`, `x-mx-reginald-deployment`. A tool that does not understand the prefix MUST ignore those fields; the fingerprint mechanism still works.
+All four operate on the same fingerprint computed from the same `contractFields`. What differs is the trust model around the key and where the signature itself is published. Service-specific implementation details - registry URL, deployment posture, operator branding - live as flat extension fields under the appropriate prefix. REGINALD's go under `x-mx-reginaldService`, `x-mx-reginaldOperator`, `x-mx-reginaldRegistryRecord`, `x-mx-reginaldDeployment`. A tool that does not understand the prefix MUST ignore those fields; the fingerprint mechanism still works.
 
 The signature attests **provenance and integrity, not truth** (Note 8 §9). A verified signature confirms that the cog's contract surface came from the named signer and has not been altered since signing. It says nothing about whether the contract values are factually correct. User-facing language SHOULD say *attested*, not *verified*, to avoid implying a truth claim no signer makes.
 
@@ -467,7 +467,7 @@ Every field used in the position-paper cog, by zone and conformance ladder. Two 
 | **Zone 2 · Standard** | Level 2 (SHOULD) | `mx:status`, `mx:contentType`, `mx:runbook` |
 | **Zone 2 · Standard** | Level 3 (MAY) | `mx:audience`, `mx:tags`, `mx:purpose` (duple), `mx:license`, `mx:stewardship`, `mx:domain`, `mx:readingLevel`, `mx:supersedes`, `mx:topic`, `mx:speakable`, `mx:doNotIndex`, `mx:reviewBy`, `mx:relatedDocs`, `mx:supportContact` |
 | **Zone 2 · Standard (cog layer)** | Tier A-C | `mx:partOf` (Tier A), `mx:buildsOn` (Tier B), `mx:dependencies` (Tier C), `mx:refersTo` (Tier C) |
-| **Zone 2 · Public extension** | n/a | `mx:x-mx-cog-id`, `mx:x-mx-cog-type`, `mx:x-mx-cog-category`, `mx:x-mx-reginald-*` (4 fields), `mx:x-mx-temporal-*` (4 fields, pending temporal-stance note), `mx:x-mx-prov-*` (7 fields, pending Provenance note migration) |
+| **Zone 2 · Public extension** | n/a | `mx:x-mx-cogId`, `mx:x-mx-cogType`, `mx:x-mx-cogCategory`, `mx:x-mx-reginald-*` (4 fields), `mx:x-mx-temporal-*` (4 fields, pending temporal-stance note), `mx:x-mx-prov-*` (7 fields, pending Provenance note migration) |
 | **Zone 2 · Private extension** | n/a | None used. Reserved for organisation-internal fields under the `x-mx-p-` prefix. |
 
 A tool building a cog validator can use this table directly. Validate at the position on each ladder the cog claims by field presence (Note 2 §2.1: a cog claims a level/tier by carrying all the fields required at that position). Public extensions MUST be ignored when not understood, never reported as errors.
@@ -478,7 +478,7 @@ A short list, drawn from the rules the position-paper cog encodes for itself:
 
 - **Mixing zones.** Putting operational metadata in Zone 1 (without the `mx:` prefix) collides with Schema.org and Dublin Core; putting identity metadata in Zone 2 (under `mx:`) hides it from every existing ecosystem. Note 2 §4 forbids both.
 - **Using `canonical` instead of `mx:canonicalUri`.** The Zone 1 `canonical` from earlier MX iterations does not exist in Note 2. The canonical location lives at Zone 2 as `mx:canonicalUri`, with a URI scheme that tells the receiver what kind of location it is.
-- **Camel-casing extension fields.** Standard fields use camelCase (`buildsOn`, `dependencies`). Extension fields use kebab-case after the prefix (`x-mx-deploy-target`, NOT `x-mx-deployTarget`). Note 4 §10.2 makes this normative.
+- **Hyphenating the name after the prefix.** Standard fields use camelCase (`buildsOn`, `dependencies`), and so does the name after an extension prefix: `x-mx-deployTarget`, never a hyphenated `deploy-target` after `x-mx-`. Note 4 §10.2 and NDR-14 make this normative.
 - **Nesting extensions under a parent key.** `extensions.reginald.service` is wrong. Per Note 4, extensions are flat top-level keys at Zone 2 (`mx.x-mx-reginald-service`, `mx.x-mx-reginald-operator`).
 - **Using `requires` instead of `mx:dependencies`.** Note 3 §6.3 names the field `dependencies`, type array of objects with `name` plus optional `version`/`reason`/`kind`.
 - **Trying to put the signature inside the cog.** Note 8 §3.2 places the signature itself out of scope. The cog declares only the *fingerprint scope* (`contractFields` and `metadataFields`); the signature lives in an external envelope.
@@ -499,7 +499,7 @@ A cog-aware tool encountering this file should:
 1. Read the frontmatter, recognising the `cogHeader` field and confirming this is a cog with a known spec version (`v1`). Optionally cross-check against the magic-header line in the frontmatter, requiring the keys to agree.
 2. Read `mx:partOf` to see this is a meta-cog whose subject is the cog at `mx-machine-readiness`. Fetch the documented cog if context is needed.
 3. Read `mx:dependencies` and verify each `kind: external` entry resolves. The position-paper cog and meta-cog both depend on Notes 1, 2, 3, plus 4 and 8 for the position paper. Refuse to consider the meta-cog functional if any dependency is missing.
-4. If signed (an external envelope referencing this cog by `mx:canonicalUri` exists), compute the canonical JSON projection of the fields in `contractFields`, hash with SHA-256, and verify the resulting fingerprint against the signature in the envelope. If `mx:x-mx-reginald-registry-record` is present and the tool understands REGINALD, additionally check the registry record. Tools that do not understand the extension MUST ignore the `x-mx-reginald-*` fields and rely on the standard fingerprint check alone.
+4. If signed (an external envelope referencing this cog by `mx:canonicalUri` exists), compute the canonical JSON projection of the fields in `contractFields`, hash with SHA-256, and verify the resulting fingerprint against the signature in the envelope. If `mx:x-mx-reginaldRegistryRecord` is present and the tool understands REGINALD, additionally check the registry record. Tools that do not understand the extension MUST ignore the `x-mx-reginald-*` fields and rely on the standard fingerprint check alone.
 5. If no signature envelope exists, process the meta-cog as an unsigned but valid cog - absence of signature is not an error.
 6. Treat the body as documentation of the cog named in `mx:partOf`, not as a substantive position paper in its own right.
 

@@ -27,7 +27,7 @@ mx:
   license: proprietary
   purpose: "The domain anchor every mx-site cog chains to through partOf. Owns the cogs, canon exports, and drafts shipped with the served site; chains up to the master UBERCOG; holds the pointer to the cog factory."
   stability: stable
-  x-mx-contextProvides:
+  contextProvides:
     - "Ownership anchor for cogs under mx-site/"
     - "One hop below the master on the ubercog chain"
   refersTo: [UBERCOG, how-to-write-a-cog]

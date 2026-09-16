@@ -58,7 +58,7 @@ mx:
   <!-- MX Carrier -->
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
-  <meta name="mx:content-policy" content="extract-with-attribution">
+  <meta name="mx:contentPolicy" content="extract-with-attribution">
   <meta name="mx:attribution" content="required">
 
   <!-- Robots -->
@@ -214,7 +214,7 @@ mx:
 
 <p>The bytes weren't padding. They weren't boilerplate navigation a human might safely skip. They were almost entirely structured metadata.</p>
 
-<p>The governance layer: the HTML page carries MX carrier tags in its <code>&lt;head&gt;</code>: <code>mx:content-policy: extract-with-attribution</code>, <code>mx:attribution: required</code>, <code>mx:status: active</code>, <code>mx:contentType: landing-page</code>. These are the machine-readable declaration of what an agent may do with this material. An agent receiving the Markdown version never sees these fields. It reads the text, believes it has read the page, and proceeds without knowing it was required to attribute. The governance layer has been silently removed.</p>
+<p>The governance layer: the HTML page carries MX carrier tags in its <code>&lt;head&gt;</code>: <code>mx:contentPolicy: extract-with-attribution</code>, <code>mx:attribution: required</code>, <code>mx:status: active</code>, <code>mx:contentType: landing-page</code>. These are the machine-readable declaration of what an agent may do with this material. An agent receiving the Markdown version never sees these fields. It reads the text, believes it has read the page, and proceeds without knowing it was required to attribute. The governance layer has been silently removed.</p>
 
 <p>Open Graph metadata: <code>og:type: book</code> tells an agent this resource describes a Book. <code>og:locale: en_GB</code> establishes locale. Image dimensions are declared. All of this disappears in the Markdown conversion. The type declaration matters: an agent that knows it's reading a Book resource can query Schema.org for the <code>Book</code> vocabulary and process the content accordingly. An agent reading plain text has no such signal.</p>
 
@@ -262,7 +262,7 @@ mx:
 
 <h2 id="what-publishers-and-agent-developers-should-do" tabindex="-1">What publishers and agent developers should do</h2>
 
-<p>Publishers running MX-governed pages should configure their CDN to serve HTML for those pages regardless of the <code>Accept</code> header. Cloudflare's configuration supports URL pattern rules. A publisher can write a rule that excludes specific URL patterns from Markdown conversion, book pages, product pages, pages carrying <code>mx:content-policy</code> headers. The rule is narrow. The service continues to operate for pages where it adds genuine value. The governed pages are served as HTML and their metadata reaches the agent intact.</p>
+<p>Publishers running MX-governed pages should configure their CDN to serve HTML for those pages regardless of the <code>Accept</code> header. Cloudflare's configuration supports URL pattern rules. A publisher can write a rule that excludes specific URL patterns from Markdown conversion, book pages, product pages, pages carrying <code>mx:contentPolicy</code> headers. The rule is narrow. The service continues to operate for pages where it adds genuine value. The governed pages are served as HTML and their metadata reaches the agent intact.</p>
 
 <p>Agent developers should treat <code>Accept: text/markdown</code> as a task-scoped decision, not a default. The right default for any request where governance metadata, discovery links, or structured data might be present is <code>Accept: text/html</code>. The agent can then parse the HTML, extract the JSON-LD, read the <code>&lt;meta&gt;</code> tags, follow the discovery links, and process the governance signals. Markdown can be requested explicitly when the task context makes clear that prose alone is sufficient.</p>
 

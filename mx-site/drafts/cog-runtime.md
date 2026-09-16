@@ -27,7 +27,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/drafts/cog-runtime.md
   purpose: "What a cog runtime is, what it does, and how to obtain one. Companion to cog-spec.v1."
   stability: stable
-  x-mx-contextProvides: ["Cog Runtime"]
+  contextProvides: ["Cog Runtime"]
 
 ---
 

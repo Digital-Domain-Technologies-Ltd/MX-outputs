@@ -23,7 +23,7 @@ mx:
   audience: [machines]
   purpose: "Describe memory system state for this session."
   stability: stable
-  x-mx-contextProvides: ["Memory system state: no memories available in this session - the user has not enabled memory in Settings. If the user asks why the agent does not remember them, explain that memory is optional and can be enabled in Settings."]
+  contextProvides: ["Memory system state: no memories available in this session - the user has not enabled memory in Settings. If the user asks why the agent does not remember them, explain that memory is optional and can be enabled in Settings."]
   dependencies: ["examples/fable5/01-identity"]
   runbook: "Read this COG for context. Update the state block when session memory is available."
 
